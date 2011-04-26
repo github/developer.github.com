@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Issues API v3 | dev.github.com</title>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="/css/pygments.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="header-wrapper">
+  <div class="container_12" id="header">
+    <div class="grid_12">
+      <div id="header-logo" class="logo">
+        <a href="/"><img src="/images/logo.png" /></a>
+      </div>
+      <ul id="header-nav" class="nav">
+        <li><a href="/v3">API v3</a></li>
+        <li><a href="http://develop.github.com">API v2</a></li>
+        <li><a
+          href="http://support.github.com/discussions/api">Support</a></li>
+      </ul>
+    </div><!-- .grid_12 -->
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+<div class="container_12" id="wrapper">
+  <div class="grid_9 suffix_1" id="content">
+<h1 id="api-v3">API v3</h1>
+
+<p>This describes the Resources that make up the official GitHub API v3.
+You can look at the <a href="http://develop.github.com/">API v2</a> to access
+resources that have not yet been added to v3.</p>
+
+<p>Visit <a href="http://support.github.com/discussions/api">GitHub API
+Support</a> if you
+have any problems or requests.</p>
+
+<p><strong>Note:</strong> This API is in a beta state.  Breaking changes may occur.</p>
+
+<h2 id="schema">Schema</h2>
+
+<p>All API access is over HTTPS, and accessed from the <code>api.github.com</code>
+domain.  All data is sent and received as JSON.</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+Content-Length: 2
+
+{}
+</pre>
+
+<p>Blank fields are included as <code>null</code> instead of being omitted.</p>
+
+<p>All timestamps are returned in ISO 8601 format:</p>
+
+<pre><code>YYYY-MM-DDTHH:MM:SSZ
+</code></pre>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>There are two ways to authenticate through GitHub API v3:</p>
+
+<p>Basic Authentication:</p>
+
+<pre class="terminal">
+$ curl -u "username:PASSWORD" https://api.github.com
+</pre>
+
+<p>OAuth2 Token (sent in a header):</p>
+
+<pre class="terminal">
+$ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com
+</pre>
+
+<p>OAuth2 Token (sent as a parameter):</p>
+
+<pre class="terminal">
+$ curl https://api.github.com?access_token=OAUTH-TOKEN
+</pre>
+
+<p>Read <a href="http://develop.github.com">more about OAuth2</a>.</p>
+
+<h2 id="pagination">Pagination</h2>
+
+<p>Requests that return multiple items will be paginated to 30 items by
+default.  You can specify further pages with the <code>?page</code> parameter.  You
+can also set a custom page size up to 100 with the <code>?per_page</code> parameter.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/repos.json?page=2&amp;per_page=100
+</pre>
+
+<h2 id="rate-limiting">Rate Limiting</h2>
+
+<p>We limit requests to API v3 to 5000 per day.  This is keyed off either your
+login, or your request IP.  You can check the returned HTTP headers to see your
+current status:</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com
+
+HTTP/1.1 200 OK
+Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4966
+</pre>
+
+<p>You can file a <a href="http://support.github.com/dashboard/queues/2386-api">support issue</a>
+to request white listed access for your application.  We prefer sites that
+setup OAuth applications for their users.</p>
+
+<h2 id="json-p-callbacks">JSON-P Callbacks</h2>
+
+<p>You can send a <code>?callback</code> parameter to any GET call to have the results
+wrapped in a JSON function.  This is typically used when browsers want
+to embed GitHub content in web pages by getting around cross domain
+issues.  The responses always return 200, and are wrapped in meta
+objects containing the actual meta information:</p>
+
+<pre class="terminal">
+$ curl https://api.github.com?callback=foo
+
+foo({
+  "data": {},
+  "meta": {
+    "status": 200,
+    "pagination": {"page": 1, "per_page": 30},
+    "rate": {"key": "IP ADDRESS", "remaining": 4999, "limit": 5000}
+  }
+})
+</pre>
+
+<h2 id="versions">Versions</h2>
+
+<p>Api V3 uses content negotiation to specify the expected output format.
+V3 is specified with this mime type:</p>
+
+<pre><code>application/vnd.github.v3+json
+</code></pre>
+
+<p>This allows us to upgrade the API if needed, and support multiple versions of
+the API in a transition period.  If you want to ensure your API usage works
+uninterrupted, you will want to specify this mime type in an Accept header:</p>
+
+<pre class="terminal">
+$ curl -H "Accept: application/vnd.github.v3+json" https://api.github.com
+</pre>
+
+<p>Specifying <code>application/json</code> will assume the latest version of the API.
+Specifying an unknown version will result in a <code>406 Not Acceptable</code> error.</p>
+
+<p>We don’t plan to bump the API version unless absolutely necessary.  Things
+like removing end points, renaming or removing object attributes, or removing
+resources completely will result in a new version.  This should be extremely
+rare, however.</p>
+
+<p>If you depend on the stability of the GitHub API, you should watch
+<a href="http://support.github.com/discussions/api">GitHub API
+Support</a>.  We’ll be
+posting updates to the API there.  Any major changes will be sent to
+users that have an active GitHub OAuth Application setup.</p>
+  </div>
+
+  <div class="grid_2" id="sidebar">
+
+<ul>
+  <li><a href="/v3">Summary</a></li>
+  <li>
+    <a href="/v3/issues">Issues</a>
+    <ul>
+      <li><a href="/v3/issues/comments">Comments</a></li>
+      <li><a href="/v3/issues/labels">Labels</a></li>
+      <li><a href="/v3/issues/milestones">Milestones</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="/v3/gists">Gists</a>
+    <ul>
+      <li><a href="/v3/gists/comments">Comments</a></li>
+    </ul>
+  </li>
+</ul>
+
+  </div><!-- #sidebar -->
+</div><!-- #wrapper -->
+
+</body>
+</html>

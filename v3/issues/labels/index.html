@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Issue Labels API v3 | dev.github.com</title>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="/css/pygments.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="header-wrapper">
+  <div class="container_12" id="header">
+    <div class="grid_12">
+      <div id="header-logo" class="logo">
+        <a href="/"><img src="/images/logo.png" /></a>
+      </div>
+      <ul id="header-nav" class="nav">
+        <li><a href="/v3">API v3</a></li>
+        <li><a href="http://develop.github.com">API v2</a></li>
+        <li><a
+          href="http://support.github.com/discussions/api">Support</a></li>
+      </ul>
+    </div><!-- .grid_12 -->
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+<div class="container_12" id="wrapper">
+  <div class="grid_9 suffix_1" id="content">
+<h1 id="labels-api">Labels API</h1>
+
+<h2 id="list-all-labels-for-this-repository">List all Labels for this Repository</h2>
+
+<pre><code>GET /repos/:user/:repo/labels.json
+</code></pre>
+
+<h2 id="create-a-label">Create a Label</h2>
+
+<pre><code>POST /repos/:user/:repo/labels.json
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">color</span><span class="o">:</span> <span class="s2">"String"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="get-a-single-label">Get a single Label</h2>
+
+<pre><code>GET /repos/:user/:repo/labels/:id.json
+</code></pre>
+
+<h2 id="update-a-label">Update a Label</h2>
+
+<pre><code>PUT /repos/:user/:repo/labels/:id.json
+</code></pre>
+
+<h3 id="input-1">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">color</span><span class="o">:</span> <span class="s2">"String"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="delete-a-label">Delete a label</h2>
+
+<pre><code>DELETE /repos/:user/:repo/labels/:id.json
+</code></pre>
+
+<h2 id="list-labels-on-the-issue">List labels on the Issue</h2>
+
+<pre><code>GET /repos/:user/:repo/issues/:id/labels.json
+</code></pre>
+
+<h2 id="add-a-label-to-an-issue">Add a Label to an Issue</h2>
+
+<pre><code>POST /repos/:user/:repo/issues/:id/labels.json
+</code></pre>
+
+<h3 id="input-2">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s2">"String"</span>
+ <span class="p">},</span> <span class="p">...]</span>
+</code></pre>
+
+<h2 id="remove-a-label-from-an-issue">Remove a Label from an Issue</h2>
+
+<pre><code>DELETE /repos/:user/:repo/issues/:id/labels/:id.json
+</code></pre>
+
+<h2 id="replace-all-labels-for-an-issue">Replace all Labels for an Issue</h2>
+
+<pre><code>PUT /repos/:user/:repo/issues/:id/labels.json
+</code></pre>
+
+<h3 id="input-3">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s2">"String"</span>
+ <span class="p">},</span> <span class="p">...]</span>
+</code></pre>
+
+<h2 id="remove-all-labels-from-an-issue">Remove all Labels from an Issue</h2>
+
+<pre><code>DELETE /repos/:user/:repo/issues/:id/labels.json
+</code></pre>
+
+<h2 id="get-labels-for-every-issue-in-a-milestone">Get Labels for every Issue in a Milestone</h2>
+
+<pre><code>GET /repos/:user/:repo/milestones/:id/labels.json
+</code></pre>
+  </div>
+
+  <div class="grid_2" id="sidebar">
+
+<ul>
+  <li><a href="/v3">Summary</a></li>
+  <li>
+    <a href="/v3/issues">Issues</a>
+    <ul>
+      <li><a href="/v3/issues/comments">Comments</a></li>
+      <li><a href="/v3/issues/labels">Labels</a></li>
+      <li><a href="/v3/issues/milestones">Milestones</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="/v3/gists">Gists</a>
+    <ul>
+      <li><a href="/v3/gists/comments">Comments</a></li>
+    </ul>
+  </li>
+</ul>
+
+  </div><!-- #sidebar -->
+</div><!-- #wrapper -->
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Issues API v3 | dev.github.com</title>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="/css/pygments.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="header-wrapper">
+  <div class="container_12" id="header">
+    <div class="grid_12">
+      <div id="header-logo" class="logo">
+        <a href="/"><img src="/images/logo.png" /></a>
+      </div>
+      <ul id="header-nav" class="nav">
+        <li><a href="/v3">API v3</a></li>
+        <li><a href="http://develop.github.com">API v2</a></li>
+        <li><a
+          href="http://support.github.com/discussions/api">Support</a></li>
+      </ul>
+    </div><!-- .grid_12 -->
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+<div class="container_12" id="wrapper">
+  <div class="grid_9 suffix_1" id="content">
+<h1 id="issues-api">Issues API</h1>
+
+<h2 id="list-issues-for-this-repository">List issues for this Repository</h2>
+
+<pre><code>GET /repos/:user/:repo/issues.json
+</code></pre>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>milestone</dt>
+  <dd><em>Fixnum</em></dd>
+  <dt>sort</dt>
+  <dd><em>String</em></dd>
+  <dt>direction</dt>
+  <dd><em>String</em></dd>
+  <dt>state</dt>
+  <dd>open, closed, default: open</dd>
+  <dt>assignee</dt>
+  <dd><em>String</em></dd>
+  <dt>mentioned</dt>
+  <dd><em>String</em></dd>
+  <dt>labels</dt>
+  <dd><em>String</em></dd>
+</dl><h2 id="create-an-issue">Create an Issue</h2>
+
+<pre><code>POST /repos/:user/:repo/issues.json
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="nx">title</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">body</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">assignee</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">milestone</span><span class="o">:</span> <span class="s2">"Fixnum"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="get-a-single-issue">Get a single Issue</h2>
+
+<pre><code>GET /repos/:user/:repo/issues/:id.json
+</code></pre>
+
+<h2 id="edit-an-issue">Edit an Issue</h2>
+
+<pre><code>PUT /repos/:user/:repo/issues/:id.json
+</code></pre>
+
+<h3 id="input-1">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="nx">title</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">body</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">assignee</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">milestone</span><span class="o">:</span> <span class="s2">"Fixnum"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="delete-an-issue">Delete an Issue</h2>
+
+<pre><code>DELETE /repos/:user/:repo/issues/:id.json
+</code></pre>
+  </div>
+
+  <div class="grid_2" id="sidebar">
+
+<ul>
+  <li><a href="/v3">Summary</a></li>
+  <li>
+    <a href="/v3/issues">Issues</a>
+    <ul>
+      <li><a href="/v3/issues/comments">Comments</a></li>
+      <li><a href="/v3/issues/labels">Labels</a></li>
+      <li><a href="/v3/issues/milestones">Milestones</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="/v3/gists">Gists</a>
+    <ul>
+      <li><a href="/v3/gists/comments">Comments</a></li>
+    </ul>
+  </li>
+</ul>
+
+  </div><!-- #sidebar -->
+</div><!-- #wrapper -->
+
+</body>
+</html>

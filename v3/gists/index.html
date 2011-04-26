@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Gists API v3 | dev.github.com</title>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="/css/pygments.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="header-wrapper">
+  <div class="container_12" id="header">
+    <div class="grid_12">
+      <div id="header-logo" class="logo">
+        <a href="/"><img src="/images/logo.png" /></a>
+      </div>
+      <ul id="header-nav" class="nav">
+        <li><a href="/v3">API v3</a></li>
+        <li><a href="http://develop.github.com">API v2</a></li>
+        <li><a
+          href="http://support.github.com/discussions/api">Support</a></li>
+      </ul>
+    </div><!-- .grid_12 -->
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+<div class="container_12" id="wrapper">
+  <div class="grid_9 suffix_1" id="content">
+<h1 id="gists-api">Gists API</h1>
+
+<p>The Gist API v3 has been unified into the core GitHub API and can be
+accessed via the domain api.github.com. SSL is required so the base url
+for all API calls should be: <code>https://api.github.com</code>.
+Please see the [[overview|v3]] for a complete description of the API
+including information about data format and authentication.</p>
+
+<h2 id="list-a-users-gists">List a user’s gists</h2>
+
+<pre><code>GET /users/:user/gists.json
+</code></pre>
+
+<h3 id="request">Request</h3>
+
+<pre class="terminal">
+$ curl https://api.github.com/users/tclem/gists.json
+</pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/890753.json"</span><span class="p">,</span>
+    <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"repo"</span><span class="o">:</span> <span class="s2">"890753"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"API design thoughts for libgit2sharp"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-03-28T16:18:16Z"</span><span class="p">,</span>
+    <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"files"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"libgit2sharp.cs"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"raw_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/raw/890753/013ef351a2bb25462ad50f82ee410f5786033341/libgit2sharp.cs"</span><span class="p">,</span>
+        <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1696</span><span class="p">,</span>
+        <span class="s2">"filename"</span><span class="o">:</span> <span class="s2">"libgit2sharp.cs"</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/890753.git"</span><span class="p">,</span>
+    <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:890753.git"</span><span class="p">,</span>
+    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+      <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+      <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+      <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+    <span class="p">},</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"890753"</span>
+  <span class="p">},</span> <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+
+<h2 id="get-a-single-gist">Get a single gist</h2>
+
+<p>GET /gists/:id.json</p>
+
+<h3 id="request-1">Request</h3>
+
+<pre class="terminal">
+$ curl https://api.github.com/gists/365370.json
+</pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/365370.json"</span><span class="p">,</span>
+  <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"repo"</span><span class="o">:</span> <span class="s2">"365370"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2010-04-14T02:15:15Z"</span><span class="p">,</span>
+  <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/365370.git"</span><span class="p">,</span>
+  <span class="s2">"history"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/365370/57a7f021a713b1c5a6a199b54cc514735d2d462f.json"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="o">:</span> <span class="s2">"57a7f021a713b1c5a6a199b54cc514735d2d462f"</span><span class="p">,</span>
+      <span class="s2">"committed_at"</span><span class="o">:</span> <span class="s2">"2010-04-14T02:15:15Z"</span><span class="p">,</span>
+      <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+        <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+        <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+        <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+        <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+      <span class="p">},</span>
+      <span class="s2">"change_status"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"deletions"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"additions"</span><span class="o">:</span> <span class="mi">180</span><span class="p">,</span>
+        <span class="s2">"total"</span><span class="o">:</span> <span class="mi">180</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">"files"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"ring.erl"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"&lt;details ommitted for clarity&gt;"</span><span class="p">,</span>
+      <span class="s2">"size"</span><span class="o">:</span> <span class="mi">932</span><span class="p">,</span>
+      <span class="s2">"filename"</span><span class="o">:</span> <span class="s2">"ring.erl"</span><span class="p">,</span>
+      <span class="s2">"raw_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"</span>
+    <span class="p">},</span>
+    <span class="s2">"ring.cs"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"&lt;details ommitted for clarity&gt;"</span><span class="p">,</span>
+      <span class="s2">"size"</span><span class="o">:</span> <span class="mi">3153</span><span class="p">,</span>
+      <span class="s2">"filename"</span><span class="o">:</span> <span class="s2">"ring.cs"</span><span class="p">,</span>
+      <span class="s2">"raw_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/raw/365370/163b3e49f9959154722c1973155bd8042abd1802/ring.cs"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:365370.git"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+    <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+    <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+    <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+  <span class="p">},</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"365370"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="create-a-new-gist">Create a new gist</h2>
+
+<pre><code>POST /users/:user/gists.json
+</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"the description for this gist"</span><span class="p">,</span>
+  <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="o">|</span><span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"files"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"file1.txt"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"file content goes here"</span>
+    <span class="p">}</span>
+    <span class="p">...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="request-2">Request</h3>
+
+<pre class="terminal">
+$ curl -u "username:password" \
+  -d '{"description":"new gist", "public":true, "files":{"file1.txt":{"content":"this is a file"}}}' \
+  https://api.github.com/users/tclem/gists.json
+</pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/922168.json"</span><span class="p">,</span>
+  <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"repo"</span><span class="o">:</span> <span class="s2">"922168"</span><span class="p">,</span>
+  <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/922168.git"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"new gist"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-15T18:12:02Z"</span><span class="p">,</span>
+  <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:922168.git"</span><span class="p">,</span>
+  <span class="s2">"history"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/922168/a67e6a66274f335c45f65fd0023eee3668b51dce.json"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="o">:</span> <span class="s2">"a67e6a66274f335c45f65fd0023eee3668b51dce"</span><span class="p">,</span>
+      <span class="s2">"change_status"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"deletions"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"additions"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"total"</span><span class="o">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+        <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+        <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+        <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+        <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+      <span class="p">},</span>
+      <span class="s2">"committed_at"</span><span class="o">:</span> <span class="s2">"2011-04-15T18:12:02Z"</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">"files"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"file1.txt"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"this is a file"</span><span class="p">,</span>
+      <span class="s2">"size"</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
+      <span class="s2">"filename"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+      <span class="s2">"raw_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/raw/922168/21e64d50b2aa18cc1a62ba1be2d568f85f053903/file1.txt"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+    <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+    <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+    <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+  <span class="p">},</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"922168"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="edit-a-gist">Edit a gist</h2>
+
+<pre><code>PUT /gists/:id.json
+</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"update description for this gist"</span><span class="p">,</span>
+  <span class="s2">"files"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"file2.txt"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"file content goes here"</span>
+    <span class="p">}</span>
+    <span class="p">...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="request-3">Request</h3>
+
+<pre class="terminal">
+$ curl -X PUT \
+  -d '{"description":"add a file", "files":{"file2.txt":{"content":"this is a new file for my gist"}}}' \
+  https://api.github.com/gists/922168.json
+</pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/922688.json"</span><span class="p">,</span>
+  <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"repo"</span><span class="o">:</span> <span class="s2">"922688"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"add a file"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-16T00:17:52Z"</span><span class="p">,</span>
+  <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"files"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"file1.txt"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"size"</span><span class="o">:</span> <span class="mi">14</span><span class="p">,</span>
+      <span class="s2">"filename"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+      <span class="s2">"raw_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/raw/922688/21e64d50b2aa18cc1a62ba1be2d568f85f053903/file1.txt"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/922688.git"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+    <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+    <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+    <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+  <span class="p">},</span>
+  <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:922688.git"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"922688"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="delete-a-gist">Delete a gist</h2>
+
+<p>DELETE /gists/:id.json</p>
+
+<h3 id="request-4">Request</h3>
+
+<pre class="terminal">
+$ curl -X DELETE https://api.github.com/gists/922168.json
+</pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
+</code></pre>
+  </div>
+
+  <div class="grid_2" id="sidebar">
+
+<ul>
+  <li><a href="/v3">Summary</a></li>
+  <li>
+    <a href="/v3/issues">Issues</a>
+    <ul>
+      <li><a href="/v3/issues/comments">Comments</a></li>
+      <li><a href="/v3/issues/labels">Labels</a></li>
+      <li><a href="/v3/issues/milestones">Milestones</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="/v3/gists">Gists</a>
+    <ul>
+      <li><a href="/v3/gists/comments">Comments</a></li>
+    </ul>
+  </li>
+</ul>
+
+  </div><!-- #sidebar -->
+</div><!-- #wrapper -->
+
+</body>
+</html>

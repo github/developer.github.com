@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Gist Comments API v3 | dev.github.com</title>
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="/css/pygments.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="header-wrapper">
+  <div class="container_12" id="header">
+    <div class="grid_12">
+      <div id="header-logo" class="logo">
+        <a href="/"><img src="/images/logo.png" /></a>
+      </div>
+      <ul id="header-nav" class="nav">
+        <li><a href="/v3">API v3</a></li>
+        <li><a href="http://develop.github.com">API v2</a></li>
+        <li><a
+          href="http://support.github.com/discussions/api">Support</a></li>
+      </ul>
+    </div><!-- .grid_12 -->
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+<div class="container_12" id="wrapper">
+  <div class="grid_9 suffix_1" id="content">
+<h1 id="gist-comments-api">Gist Comments API</h1>
+
+<h2 id="list">List</h2>
+
+<pre><code>GET https://api.github.com/gists/:id/comments.json
+</code></pre>
+
+<h3 id="request">Request</h3>
+
+<pre class="terminal">
+$ curl https://api.github.com/gists/365370/comments.json
+</pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/27658.json"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:10Z"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Love this gist thing."</span><span class="p">,</span>
+    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+      <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+      <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+      <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+    <span class="p">},</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">27658</span>
+  <span class="p">},</span> <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+
+<h2 id="get">Get</h2>
+
+<pre><code>GET /gists/comments/:id.json
+</code></pre>
+
+<h3 id="request-1">Request</h3>
+
+<pre class="terminal">
+$ curl https://api.github.com/gists/comments/27660.json
+</pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/27660.json"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+    <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+    <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+    <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+  <span class="p">},</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">27660</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="create">Create</h2>
+
+<pre><code>POST /gists/365370/comments.json
+</code></pre>
+
+<h3 id="request-2">Request</h3>
+
+<pre class="terminal">
+$ curl -u "username:password" \
+  -d '{"body":"a new comment"}' \
+  https://api.github.com/gists/365370/comments.json
+</pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="highlight"><code class="language-javascript">    <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/27669.json"</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:44:35Z"</span><span class="p">,</span>
+      <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"a new comment"</span><span class="p">,</span>
+      <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+        <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+        <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+        <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+        <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+        <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+      <span class="p">},</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">27669</span>
+    <span class="p">}</span>
+</code></pre>
+
+<h2 id="edit">Edit</h2>
+
+<pre><code>PUT /gists/comments/:id.json
+</code></pre>
+
+<h3 id="request-3">Request</h3>
+
+<pre class="terminal">
+$ curl -u "username:password" -X PUT \
+  -d '{"body":"updated comment text"} \
+  https://api.github.com/gists/comments/27669.json
+</pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/27669.json"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:44:35Z"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"update comment text"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"timothy.clem@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/tclem.json"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2009-10-07T20:26:53Z"</span><span class="p">,</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"tclem"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Tim Clem"</span><span class="p">,</span>
+    <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+    <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"http://timclem.wordpress.com"</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=30&amp;d=https://d3nwyuy0nl342s.cloudfront.net%2Fimages%2Fgravatars%2Fgravatar-140.png"</span><span class="p">,</span>
+    <span class="s2">"location"</span><span class="o">:</span> <span class="s2">"San Francisco, CA"</span>
+  <span class="p">},</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">27669</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="delete">Delete</h2>
+
+<pre><code>DELETE /gists/comments/:id.json
+</code></pre>
+
+<h3 id="request-4">Request</h3>
+
+<pre class="terminal">
+$ curl -u "username:password" -X DELETE \
+  https://api.github.com/gists/comments/27669.json
+</pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
+</code></pre>
+  </div>
+
+  <div class="grid_2" id="sidebar">
+
+<ul>
+  <li><a href="/v3">Summary</a></li>
+  <li>
+    <a href="/v3/issues">Issues</a>
+    <ul>
+      <li><a href="/v3/issues/comments">Comments</a></li>
+      <li><a href="/v3/issues/labels">Labels</a></li>
+      <li><a href="/v3/issues/milestones">Milestones</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="/v3/gists">Gists</a>
+    <ul>
+      <li><a href="/v3/gists/comments">Comments</a></li>
+    </ul>
+  </li>
+</ul>
+
+  </div><!-- #sidebar -->
+</div><!-- #wrapper -->
+
+</body>
+</html>

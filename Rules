@@ -14,6 +14,9 @@ compile '/css/*/' do
   # don’t filter or layout
 end
 
+compile '/images/*' do
+end
+
 compile '*' do
   filter :erb
   filter :kramdown
@@ -24,6 +27,10 @@ end
 
 route '/css/*/' do
   item.identifier.chomp('/') << '.css'
+end
+
+route '/images/*/' do
+  item.identifier.chomp('/') << '.png'
 end
 
 route '*' do

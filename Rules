@@ -10,17 +10,20 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
-compile '/stylesheet/' do
+compile '/css/*/' do
   # don’t filter or layout
 end
 
 compile '*' do
   filter :erb
+  filter :kramdown
+  filter :colorize_syntax,
+    :colorizers => {:javascript => :pygmentize}
   layout 'default'
 end
 
-route '/stylesheet/' do
-  '/style.css'
+route '/css/*/' do
+  item.identifier.chomp('/') << '.css'
 end
 
 route '*' do

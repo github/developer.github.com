@@ -34,11 +34,7 @@ API docs should look like:
 
     ### Input (request json body)
 
-    <pre class="highlight"><code class="language-javascript">
-    {
-      "field": "sample value"
-    }
-    </code></pre>
+    <%= json :field => "sample value" %>
 
     ### Response
 

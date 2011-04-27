@@ -5,7 +5,14 @@ module GitHub
   module Resources
     module Helpers
       def json(key)
-        hash = Resources.const_get(key.to_s.upcase)
+        hash = case key
+          when Hash
+            h = {}
+            key.each { |k, v| h[k.to_s] = v }
+            h
+          else Resources.const_get(key.to_s.upcase)
+        end
+
         hash = yield hash if block_given?
 
         io   = StringIO.new

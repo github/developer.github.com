@@ -18,12 +18,9 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-{
-  name: "String",
-  color: "hex" // "ffffff" (6 characters, no '#')
-}
-</code></pre>
+<%= json :name => "String", :color => "hex" %>
+
+*Note*: `color` takes a 6 character hex code, without a leading `#`.
 
 ### Response
 
@@ -43,12 +40,9 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-{
-  name: "String",
-  color: "hex" // "ffffff" (6 characters, no '#')
-}
-</code></pre>
+<%= json :name => "String", :color => "hex" %>
+
+*Note*: `color` takes a 6 character hex code, without a leading `#`.
 
 ### Response
 
@@ -70,17 +64,13 @@ title: Issue Labels API v3 | dev.github.com
 
 <%= json(:label) { |h| [h] } %>
 
-## Add a Label to an Issue
+## Add Labels to an Issue
 
     POST /repos/:user/:repo/issues/:id/labels.json
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-[{
-  name: "String"
- }, ...]
-</code></pre>
+<%= json({name: "String"}) { |h| [h] } %>
 
 ### Response
 
@@ -100,11 +90,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-[{
-  name: "String"
- }, ...]
-</code></pre>
+<%= json({name: "String"}) { |h| [h] } %>
 
 ### Response
 

@@ -18,11 +18,7 @@ title: Issue Comments API v3 | dev.github.com
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-{
-  body: "String",
-}
-</code></pre>
+<%= json :body => "String" %>
 
 ### Response
 
@@ -42,11 +38,7 @@ title: Issue Comments API v3 | dev.github.com
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-{
-  body: "String",
-}
-</code></pre>
+<%= json :body => "String" %>
 
 ### Response
 

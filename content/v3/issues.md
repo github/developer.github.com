@@ -42,14 +42,12 @@ direction
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-{
-  title: "String",
-  body: "String",
-  assignee: "String User login",
-  milestone: "Integer Milestone number"
-}
-</code></pre>
+<%= json \
+  :title     => "String",
+  :body      => "String",
+  :assignee  => "String User login",
+  :milestone => "Integer Milestone number"
+%>
 
 ### Response
 
@@ -69,14 +67,12 @@ direction
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-{
-  title: "String",
-  body: "String",
-  assignee: "String",
-  milestone: "Integer"
-}
-</code></pre>
+<%= json \
+  :title => "String",
+  :body => "String",
+  :assignee => "String",
+  :milestone => "Integer"
+%>
 
 ### Response
 

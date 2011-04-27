@@ -27,14 +27,12 @@ direction
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-{
-  title: "String",
-  state: "String", // "open" or "closed"
-  description: "String",
-  due_on: "Time"
-}
-</code></pre>
+<%= json \
+  :title => "String",
+  :state => "open or closed",
+  :description => "String",
+  :due_on => "Time"
+%>
 
 ### Response
 
@@ -54,14 +52,12 @@ direction
 
 ### Input
 
-<pre class="highlight"><code class="language-javascript">
-{
-  title: "String",
-  state: "String", // "open" or "closed"
-  description: "String",
-  due_on: "Time"
-}
-</code></pre>
+<%= json \
+  :title => "String",
+  :state => "open or closed",
+  :description => "String",
+  :due_on => "Time"
+%>
 
 ### Response
 

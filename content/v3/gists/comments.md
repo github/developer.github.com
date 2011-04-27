@@ -10,7 +10,7 @@ title: Gist Comments API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json(:gist_comment) { |h| [h] } %>
 
 ## Get
@@ -19,7 +19,7 @@ title: Gist Comments API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json :gist_comment %>
 
 ## Create
@@ -28,7 +28,7 @@ title: Gist Comments API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 201,
+<%= headers 201,
       :Location => "https://api.github.com/gists/comments/1.json" %>
 <%= json :gist_comment %>
 
@@ -38,7 +38,7 @@ title: Gist Comments API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json :gist_comment %>
 
 ## Delete
@@ -47,6 +47,6 @@ title: Gist Comments API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 204 %>
+<%= headers 204 %>
 <%= json({}) %>
 

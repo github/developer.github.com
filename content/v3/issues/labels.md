@@ -10,7 +10,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
 ## Create a Label
@@ -25,7 +25,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 201,
+<%= headers 201,
       :Location =>
 "https://api.github.com/repos/user/repo/labels/foo.json" %>
 <%= json :label %>
@@ -36,7 +36,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json :label %>
 
 ## Update a Label
@@ -51,7 +51,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json :label %>
 
 ## Delete a label
@@ -60,8 +60,8 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 204 %>
-    {}
+<%= headers 204 %>
+<%= json({}) %>
 
 ## List labels on the Issue
 
@@ -69,7 +69,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
 ## Add Labels to an Issue
@@ -82,7 +82,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
 ## Remove a Label from an Issue
@@ -91,7 +91,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
 ## Replace all Labels for an Issue
@@ -104,7 +104,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
 ## Remove all Labels from an Issue
@@ -113,7 +113,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 204 %>
+<%= headers 204 %>
 <%= json({}) %>
 
 ## Get Labels for every Issue in a Milestone
@@ -122,5 +122,5 @@ title: Issue Labels API v3 | dev.github.com
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json(:label) { |h| [h] } %>

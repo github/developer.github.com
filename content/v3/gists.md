@@ -16,7 +16,7 @@ including information about data format and authentication.
 
 ### Response
 
-<%= headers :status => 200, :pagination => true %>
+<%= headers 200, :pagination => true %>
 <%= json(:gist) { |h| [h] } %>
 
 ## Get a single gist
@@ -25,7 +25,7 @@ including information about data format and authentication.
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json :full_gist %>
 
 ## Create a new gist
@@ -43,7 +43,7 @@ including information about data format and authentication.
 
 ### Response
 
-<%= headers :status => 201,
+<%= headers 201,
       :Location => "https://api.github.com/users/:user/gists/1.json" %>
 <%= json :full_gist %>
 
@@ -59,7 +59,7 @@ including information about data format and authentication.
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json :full_gist %>
 
 ## Delete a gist
@@ -68,5 +68,5 @@ including information about data format and authentication.
 
 ### Response
 
-<%= headers :status => 204 %>
+<%= headers 204 %>
 <%= json({}) %>

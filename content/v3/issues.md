@@ -34,7 +34,7 @@ direction
 
 ### Response
 
-<%= headers :status => 200, :pagination => true %>
+<%= headers 200, :pagination => true %>
 <%= json(:issue) { |h| [h] } %>
 
 ## Create an Issue
@@ -52,7 +52,7 @@ direction
 
 ### Response
 
-<%= headers :status => 201,
+<%= headers 201,
       :Location =>
 'https://api.github.com/repos/user/repo/issues/1.json' %>
 <%= json :issue %>
@@ -63,7 +63,7 @@ direction
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json :issue %>
 
 ## Edit an Issue
@@ -81,7 +81,7 @@ direction
 
 ### Response
 
-<%= headers :status => 200 %>
+<%= headers 200 %>
 <%= json :issue %>
 
 ## Delete an Issue
@@ -90,5 +90,5 @@ direction
 
 ### Response
 
-<%= headers :status => 204 %>
+<%= headers 204 %>
 <%= json({}) %>

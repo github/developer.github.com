@@ -18,14 +18,13 @@ module GitHub
         500 => '500 Server Error'
       }
 
-      def headers(head)
-        lines = []
+      def headers(status, head = {})
+        lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
             when :pagination
               lines << "X-Next: https://api.github.com/resource?page=2"
               lines << "X-Last: https://api.github.com/resource?page=5"
-            when :status     then lines << "Status: #{STATUSES[value]}"
             else lines << "#{key}: #{value}"
           end
         end
@@ -130,7 +129,6 @@ module GitHub
       "color" => "f29513"
     }
 
-
     ISSUE = {
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1.json",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1",
@@ -184,9 +182,8 @@ module GitHub
 
     GIST = {
       "url"          => "https://api.github.com/gists/1.json",
-      "id"           => "365370",
-      "repo"         => "365370",
-      "description"  => "",
+      "id"           => "1",
+      "description"  => "description of gist",
       "public"       => true,
       "user"         => USER,
       "files"        => GIST_FILES,

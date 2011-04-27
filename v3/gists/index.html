@@ -37,19 +37,13 @@
 <p>The Gist API v3 has been unified into the core GitHub API and can be
 accessed via the domain api.github.com. SSL is required so the base url
 for all API calls should be: <code>https://api.github.com</code>.
-Please see the [[overview|v3]] for a complete description of the API
+Please see the <a href="/v3">overview</a> for a complete description of the API
 including information about data format and authentication.</p>
 
 <h2 id="list-a-users-gists">List a user’s gists</h2>
 
 <pre><code>GET /users/:user/gists.json
 </code></pre>
-
-<h3 id="request">Request</h3>
-
-<pre class="terminal">
-$ curl https://api.github.com/users/tclem/gists.json
-</pre>
 
 <h3 id="response">Response</h3>
 
@@ -90,12 +84,6 @@ $ curl https://api.github.com/users/tclem/gists.json
 <h2 id="get-a-single-gist">Get a single gist</h2>
 
 <p>GET /gists/:id.json</p>
-
-<h3 id="request-1">Request</h3>
-
-<pre class="terminal">
-$ curl https://api.github.com/gists/365370.json
-</pre>
 
 <h3 id="response-1">Response</h3>
 
@@ -179,14 +167,6 @@ $ curl https://api.github.com/gists/365370.json
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="request-2">Request</h3>
-
-<pre class="terminal">
-$ curl -u "username:password" \
-  -d '{"description":"new gist", "public":true, "files":{"file1.txt":{"content":"this is a file"}}}' \
-  https://api.github.com/users/tclem/gists.json
-</pre>
-
 <h3 id="response-2">Response</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
@@ -262,14 +242,6 @@ $ curl -u "username:password" \
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="request-3">Request</h3>
-
-<pre class="terminal">
-$ curl -X PUT \
-  -d '{"description":"add a file", "files":{"file2.txt":{"content":"this is a new file for my gist"}}}' \
-  https://api.github.com/gists/922168.json
-</pre>
-
 <h3 id="response-3">Response</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
@@ -307,12 +279,6 @@ $ curl -X PUT \
 <h2 id="delete-a-gist">Delete a gist</h2>
 
 <p>DELETE /gists/:id.json</p>
-
-<h3 id="request-4">Request</h3>
-
-<pre class="terminal">
-$ curl -X DELETE https://api.github.com/gists/922168.json
-</pre>
 
 <h3 id="response-4">Response</h3>
 

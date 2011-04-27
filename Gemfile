@@ -1,3 +1,5 @@
+source "http://rubygems.org"
+
 gem 'nanoc', '~> 3.1.6'
 
 group :development do

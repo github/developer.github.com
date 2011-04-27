@@ -7,18 +7,12 @@ title: Gists API v3 | dev.github.com
 The Gist API v3 has been unified into the core GitHub API and can be
 accessed via the domain api.github.com. SSL is required so the base url
 for all API calls should be: `https://api.github.com`.
-Please see the [[overview|v3]] for a complete description of the API
+Please see the [overview](/v3) for a complete description of the API
 including information about data format and authentication.
 
 ## List a user's gists
 
     GET /users/:user/gists.json
-
-### Request
-
-<pre class="terminal">
-$ curl https://api.github.com/users/tclem/gists.json
-</pre>
 
 ### Response
 
@@ -60,12 +54,6 @@ $ curl https://api.github.com/users/tclem/gists.json
 ## Get a single gist
 
    GET /gists/:id.json
-
-### Request
-
-<pre class="terminal">
-$ curl https://api.github.com/gists/365370.json
-</pre>
 
 ### Response
 
@@ -150,14 +138,6 @@ $ curl https://api.github.com/gists/365370.json
 }
 </code></pre>
 
-### Request
-
-<pre class="terminal">
-$ curl -u "username:password" \
-  -d '{"description":"new gist", "public":true, "files":{"file1.txt":{"content":"this is a file"}}}' \
-  https://api.github.com/users/tclem/gists.json
-</pre>
-
 ### Response
 
 <pre class="highlight"><code class="language-javascript">
@@ -234,14 +214,6 @@ $ curl -u "username:password" \
 }
 </code></pre>
 
-### Request
-
-<pre class="terminal">
-$ curl -X PUT \
-  -d '{"description":"add a file", "files":{"file2.txt":{"content":"this is a new file for my gist"}}}' \
-  https://api.github.com/gists/922168.json
-</pre>
-
 ### Response
 
 <pre class="highlight"><code class="language-javascript">
@@ -280,12 +252,6 @@ $ curl -X PUT \
 ## Delete a gist
 
    DELETE /gists/:id.json
-
-### Request
-
-<pre class="terminal">
-$ curl -X DELETE https://api.github.com/gists/922168.json
-</pre>
 
 ### Response
 

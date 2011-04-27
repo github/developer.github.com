@@ -8,12 +8,6 @@ title: Gist Comments API v3 | dev.github.com
 
     GET https://api.github.com/gists/:id/comments.json
 
-### Request
-
-<pre class="terminal">
-$ curl https://api.github.com/gists/365370/comments.json
-</pre>
-
 ### Response
 
 <pre class="highlight"><code class="language-javascript">
@@ -43,12 +37,6 @@ $ curl https://api.github.com/gists/365370/comments.json
 
     GET /gists/comments/:id.json
 
-### Request
-
-<pre class="terminal">
-$ curl https://api.github.com/gists/comments/27660.json
-</pre>
-
 ### Response
 
 <pre class="highlight"><code class="language-javascript">
@@ -75,14 +63,6 @@ $ curl https://api.github.com/gists/comments/27660.json
 ## Create
 
     POST /gists/365370/comments.json
-
-### Request
-
-<pre class="terminal">
-$ curl -u "username:password" \
-  -d '{"body":"a new comment"}' \
-  https://api.github.com/gists/365370/comments.json
-</pre>
 
 ### Response
 
@@ -111,14 +91,6 @@ $ curl -u "username:password" \
 
     PUT /gists/comments/:id.json
 
-### Request
-
-<pre class="terminal">
-$ curl -u "username:password" -X PUT \
-  -d '{"body":"updated comment text"} \
-  https://api.github.com/gists/comments/27669.json
-</pre>
-
 ### Response
 
 <pre class="highlight"><code class="language-javascript">
@@ -145,13 +117,6 @@ $ curl -u "username:password" -X PUT \
 ## Delete
 
     DELETE /gists/comments/:id.json
-
-### Request
-
-<pre class="terminal">
-$ curl -u "username:password" -X DELETE \
-  https://api.github.com/gists/comments/27669.json
-</pre>
 
 ### Response
 

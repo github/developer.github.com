@@ -95,6 +95,13 @@ gem, however (I hope so, it was in the Gemfile), you can start Webrick:
     $ nanoc view
     $ open http://localhost:3000
 
+Compilation times got you down?  Use `autocompile`!
+
+    $ nanoc autocompile
+
+This starts a web server too, so there's no need to run `nanoc view`.
+One thing: remember to add trailing slashes to all nanoc links!
+
 ## TODO
 
 * Need some way to deploy?  Look into GitHub pages to start, until we

@@ -38,7 +38,7 @@ state
 
 ## Update a Milestone
 
-    PUT /repos/:user/:repo/milestones/:id.json
+    PATCH /repos/:user/:repo/milestones/:id.json
 
 ### Input
 

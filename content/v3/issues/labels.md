@@ -27,7 +27,7 @@ title: Issue Labels API v3 | dev.github.com
 
 ## Update a Label
 
-    PUT /repos/:user/:repo/labels/:id.json
+    PATCH /repos/:user/:repo/labels/:id.json
 
 ### Input
 

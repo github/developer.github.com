@@ -200,7 +200,7 @@ including information about data format and authentication.
 
 ## Edit a gist
 
-    PUT /gists/:id.json
+    PATCH /gists/:id.json
 
 <pre class="highlight"><code class="language-javascript">
 {

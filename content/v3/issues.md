@@ -53,7 +53,7 @@ labels
 
 ## Edit an Issue
 
-    PUT /repos/:user/:repo/issues/:id.json
+    PATCH /repos/:user/:repo/issues/:id.json
 
 ### Input
 

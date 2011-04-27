@@ -89,7 +89,7 @@ title: Gist Comments API v3 | dev.github.com
 
 ## Edit
 
-    PUT /gists/comments/:id.json
+    PATCH /gists/comments/:id.json
 
 ### Response
 

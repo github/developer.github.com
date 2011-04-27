@@ -155,6 +155,57 @@ module GitHub
       "created_at" => "2011-04-14T16:00:49Z",
       "updated_at" => "2011-04-14T16:00:49Z"
     }
+
+    GIST_HISTORY = {
+      "history" => [
+        {
+          "url"     => "https://api.github.com/gists/1/57a7f021a713b1c5a6a199b54cc514735d2d462f.json",
+          "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
+          "user"    => USER,
+          "change_status" => {
+            "deletions" => 0,
+            "additions" => 180,
+            "total"     => 180
+          },
+          "committed_at" => "2010-04-14T02:15:15Z"
+        }
+      ]
+    }
+
+    GIST_FILES = {
+      "files" => {
+        "ring.erl"   => {
+          "size"     => 932,
+          "filename" => "ring.erl",
+          "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
+        }
+      }
+    }
+
+    GIST = {
+      "url"          => "https://api.github.com/gists/1.json",
+      "id"           => "365370",
+      "repo"         => "365370",
+      "description"  => "",
+      "public"       => true,
+      "user"         => USER,
+      "files"        => GIST_FILES,
+      "comments"     => 0,
+      "git_pull_url" => "git://gist.github.com/1.git",
+      "git_push_url" => "git@gist.github.com:1.git",
+      "created_at"   => "2010-04-14T02:15:15Z"
+    }.update(GIST_FILES)
+
+    FULL_GIST = GIST.merge(GIST_HISTORY)
+    FULL_GIST['files']['ring.erl']['content'] = 'contents of gist'
+
+    GIST_COMMENT = {
+      "id"         => 1,
+      "url"        => "https://api.github.com/gists/comments/1.json",
+      "body"       => "Just commenting for the sake of commenting",
+      "user"       => USER,
+      "created_at" => "2011-04-18T23:23:56Z"
+    }
   end
 end
 

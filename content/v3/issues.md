@@ -47,6 +47,13 @@ labels
 }
 </code></pre>
 
+### Response
+
+
+<pre class="highlight"><code class="language-javascript">
+<%= json :issue %>
+</code></pre>
+
 ## Get a single Issue
 
     GET /repos/:user/:repo/issues/:id.json

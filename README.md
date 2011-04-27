@@ -16,6 +16,53 @@ Nanoc has [some nice documentation](http://nanoc.stoneship.org/docs/3-getting-st
 
 [nanoc]: http://nanoc.stoneship.org/
 
+## Styleguide
+
+Not sure how to structure the docs?  Here's what the structure of the
+API docs should look like:
+
+    # API title
+
+    ## API endpoint title
+
+        [VERB] /path/to/endpoint.json
+
+    ### Parameters
+
+    name
+    : description
+
+    ### Input (request json body)
+
+    <pre class="highlight"><code class="language-javascript">
+    {
+      "field": "sample value"
+    }
+    </code></pre>
+
+    ### Response
+
+    <pre class="highlight"><code class="language-javascript">
+    [
+      {
+        ...
+      }
+    }
+    </code></pre>
+
+### Terminal blocks
+
+You can specify terminal blocks with `pre.terminal` elements.  It'd be
+nice if Markdown could do this more cleanly...
+
+    <pre class="terminal">
+    $ curl foobar
+    ....
+    </pre>
+
+This isn't a `curl` tutorial though, I'm not sure every API call needs
+to show how to access it with `curl`.
+
 ## Development
 
 Nanoc compiles the site into static files living in `./output`.  It's

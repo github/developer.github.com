@@ -8,14 +8,14 @@ title: Issue Milestones API v3 | dev.github.com
 
     GET /repos/:user/:repo/milestones.json
 
-sort:
+sort
 : _String_
 
 direction
 : _String_
 
 state
-: open, closed, default: open
+: `open`, `closed`, default: `open`
 
 ## Create a Milestone
 

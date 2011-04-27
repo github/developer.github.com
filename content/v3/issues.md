@@ -11,7 +11,7 @@ title: Issues API v3 | dev.github.com
 ### Parameters
 
 milestone
-: _Fixnum_
+: _Integer_
 
 sort
 : _String_
@@ -20,7 +20,7 @@ direction
 : _String_
 
 state
-: open, closed, default: open
+: `open`, `closed`, default: `open`
 
 assignee
 : _String_
@@ -42,7 +42,7 @@ labels
   title: "String",
   body: "String",
   assignee: "String",
-  milestone: "Fixnum"
+  milestone: "Integer"
 }
 </code></pre>
 
@@ -61,7 +61,7 @@ labels
   title: "String",
   body: "String",
   assignee: "String",
-  milestone: "Fixnum"
+  milestone: "Integer"
 }
 </code></pre>
 

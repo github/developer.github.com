@@ -9,10 +9,10 @@ title: Issue Milestones API v3 | dev.github.com
     GET /repos/:user/:repo/milestones.json
 
 sort
-: _String_
+: `created`, `updated`, `comments`, default: `created`
 
 direction
-: _String_
+: `asc` or `desc`, default: `desc`.
 
 state
 : `open`, `closed`, default: `open`

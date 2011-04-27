@@ -11,25 +11,26 @@ title: Issues API v3 | dev.github.com
 ### Parameters
 
 milestone
-: _Integer_
+: Optional _Integer_ ID of the milestone.
 
 sort
-: _String_
+: `created`, `updated`, `comments`, default: `created`
 
 direction
-: _String_
+: `asc` or `desc`, default: `desc`.
 
 state
 : `open`, `closed`, default: `open`
 
 assignee
-: _String_
+: _String_ User login.
 
 mentioned
-: _String_
+: _String_ User login.
 
 labels
-: _String_
+: _String_ list of comma separated Label names.  Example:
+`bug,ui,@high`
 
 ## Create an Issue
 

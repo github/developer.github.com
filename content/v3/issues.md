@@ -11,13 +11,7 @@ title: Issues API v3 | dev.github.com
 ### Parameters
 
 milestone
-: Optional _Integer_ ID of the milestone.
-
-sort
-: `created`, `updated`, `comments`, default: `created`
-
-direction
-: `asc` or `desc`, default: `desc`.
+: Optional _Integer_ Milestone number.
 
 state
 : `open`, `closed`, default: `open`
@@ -32,6 +26,16 @@ labels
 : _String_ list of comma separated Label names.  Example:
 `bug,ui,@high`
 
+sort
+: `created`, `updated`, `comments`, default: `created`
+
+direction
+: `asc` or `desc`, default: `desc`.
+
+### Response
+
+<%= json(:issue) { |h| [h] } %>
+
 ## Create an Issue
 
     POST /repos/:user/:repo/issues.json
@@ -42,21 +46,22 @@ labels
 {
   title: "String",
   body: "String",
-  assignee: "String",
-  milestone: "Integer"
+  assignee: "String User login",
+  milestone: "Integer Milestone number"
 }
 </code></pre>
 
 ### Response
 
-
-<pre class="highlight"><code class="language-javascript">
 <%= json :issue %>
-</code></pre>
 
 ## Get a single Issue
 
     GET /repos/:user/:repo/issues/:id.json
+
+### Response
+
+<%= json :issue %>
 
 ## Edit an Issue
 
@@ -73,7 +78,14 @@ labels
 }
 </code></pre>
 
+### Response
+
+<%= json :issue %>
+
 ## Delete an Issue
 
     DELETE /repos/:user/:repo/issues/:id.json
 
+### Response
+
+    {}

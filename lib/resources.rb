@@ -12,7 +12,8 @@ module GitHub
         pp   = PP.new(io, 79)
         pp.guard_inspect_key { pp.pp(hash) }
         pp.flush
-        io.string
+        %(<pre class="highlight"><code class="language-javascript">) +
+          io.string + "</code></pre>"
       end
     end
 
@@ -71,8 +72,25 @@ module GitHub
       "has_downloads"    => true
     })
 
-    MILESTONE = {}
-    LABEL = {}
+    MILESTONE = {
+      "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1.json",
+      "number"        => 1,
+      "state"         => "open",
+      "title"         => "v1.0",
+      "description"   => "",
+      "creator"       => USER,
+      "open_issues"   => 4,
+      "closed_issues" => 8,
+      "created_at"    => "2011-04-10T20:09:31Z",
+      "due_on"        => nil
+    }
+
+    LABEL = {
+      "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug.json",
+      "name"  => "bug",
+      "color" => "f29513"
+    }
+
 
     ISSUE = {
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1.json",
@@ -89,6 +107,14 @@ module GitHub
       "closed_at"  => nil,
       "created_at" => "2011-04-22T13:33:48Z",
       "updated_at" => "2011-04-22T13:33:48Z"
+    }
+
+    ISSUE_COMMENT = {
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1001987.json",
+      "body"       => "Me too",
+      "user"       => USER,
+      "created_at" => "2011-04-14T16:00:49Z",
+      "updated_at" => "2011-04-14T16:00:49Z"
     }
   end
 end

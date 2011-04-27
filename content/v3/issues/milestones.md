@@ -8,14 +8,18 @@ title: Issue Milestones API v3 | dev.github.com
 
     GET /repos/:user/:repo/milestones.json
 
+state
+: `open`, `closed`, default: `open`
+
 sort
 : `created`, `updated`, `comments`, default: `created`
 
 direction
 : `asc` or `desc`, default: `desc`.
 
-state
-: `open`, `closed`, default: `open`
+### Response
+
+<%= json(:milestone) { |h| [h] } %>
 
 ## Create a Milestone
 
@@ -26,15 +30,23 @@ state
 <pre class="highlight"><code class="language-javascript">
 {
   title: "String",
-  state: "String",
+  state: "String", // "open" or "closed"
   description: "String",
   due_on: "Time"
 }
 </code></pre>
 
+### Response
+
+<%= json :milestone %>
+
 ## Get a single Milestone
 
     GET /repos/:user/:repo/milestones/:id.json
+
+### Response
+
+<%= json :milestone %>
 
 ## Update a Milestone
 
@@ -45,13 +57,20 @@ state
 <pre class="highlight"><code class="language-javascript">
 {
   title: "String",
-  state: "String",
+  state: "String", // "open" or "closed"
   description: "String",
   due_on: "Time"
 }
 </code></pre>
 
+### Response
+
+<%= json :milestone %>
+
 ## Delete a Milestone
 
     DELETE /repos/:user/:repo/milestones/:id.json
 
+### Response
+
+    {}

@@ -43,21 +43,29 @@
 
 <dl>
 <dt>milestone</dt>
-  <dd><em>Integer</em></dd>
+  <dd>Optional <em>Integer</em> ID of the milestone.</dd>
   <dt>sort</dt>
-  <dd><em>String</em></dd>
+  <dd>
+<code>created</code>, <code>updated</code>, <code>comments</code>, default: <code>created</code>
+</dd>
   <dt>direction</dt>
-  <dd><em>String</em></dd>
+  <dd>
+<code>asc</code> or <code>desc</code>, default: <code>desc</code>.</dd>
   <dt>state</dt>
   <dd>
 <code>open</code>, <code>closed</code>, default: <code>open</code>
 </dd>
   <dt>assignee</dt>
-  <dd><em>String</em></dd>
+  <dd>
+<em>String</em> User login.</dd>
   <dt>mentioned</dt>
-  <dd><em>String</em></dd>
+  <dd>
+<em>String</em> User login.</dd>
   <dt>labels</dt>
-  <dd><em>String</em></dd>
+  <dd>
+<em>String</em> list of comma separated Label names.  Example:
+<code>bug,ui,@high</code>
+</dd>
 </dl><h2 id="create-an-issue">Create an Issue</h2>
 
 <pre><code>POST /repos/:user/:repo/issues.json
@@ -80,7 +88,7 @@
 
 <h2 id="edit-an-issue">Edit an Issue</h2>
 
-<pre><code>PUT /repos/:user/:repo/issues/:id.json
+<pre><code>PATCH /repos/:user/:repo/issues/:id.json
 </code></pre>
 
 <h3 id="input-1">Input</h3>

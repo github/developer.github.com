@@ -69,7 +69,30 @@ Content-Length: 2
 <pre><code>YYYY-MM-DDTHH:MM:SSZ
 </code></pre>
 
-<h2 id="authentication">Authentication</h2>
+<h2 id="http-verbs">HTTP Verbs</h2>
+
+<p>Where possible, API v3 strives to use appropriate HTTP verbs for each
+action.</p>
+
+<dl>
+<dt>HEAD</dt>
+  <dd>Can be issued against any resource to get just the HTTP header info.</dd>
+  <dt>GET</dt>
+  <dd>Used for retrieving resources.</dd>
+  <dt>POST</dt>
+  <dd>Used for creating resources, or performing custom actions (such as
+merging a pull request).</dd>
+  <dt>PATCH</dt>
+  <dd>Used for updating resources with partial JSON data.  For instance, an
+Issue resource has <code>title</code> and <code>body</code> attributes.  A PATCH request will
+accept just one of the attributes to update the resource.  PATCH is a
+relatively new and uncommon HTTP verb, so resource endpoints also accept
+POST requests.</dd>
+  <dt>PUT</dt>
+  <dd>Used for replacing resources or collections.</dd>
+  <dt>DELETE</dt>
+  <dd>Used for deleting resources.</dd>
+</dl><h2 id="authentication">Authentication</h2>
 
 <p>There are two ways to authenticate through GitHub API v3:</p>
 

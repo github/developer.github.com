@@ -50,6 +50,8 @@ API docs should look like:
     }
     </code></pre>
 
+**Note**: We're using [Kramdown Markdown extensions](http://kramdown.rubyforge.org/syntax.html), such as definition lists.
+
 ### Terminal blocks
 
 You can specify terminal blocks with `pre.terminal` elements.  It'd be

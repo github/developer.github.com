@@ -19,6 +19,7 @@ direction
 
 ### Response
 
+<%= headers :status => 200, :pagination => true %>
 <%= json(:milestone) { |h| [h] } %>
 
 ## Create a Milestone
@@ -36,6 +37,9 @@ direction
 
 ### Response
 
+<%= headers :status => 201,
+      :Location =>
+"https://api.github.com/repos/user/repo/milestones/1.json" %>
 <%= json :milestone %>
 
 ## Get a single Milestone
@@ -44,6 +48,7 @@ direction
 
 ### Response
 
+<%= headers :status => 200 %>
 <%= json :milestone %>
 
 ## Update a Milestone
@@ -61,6 +66,7 @@ direction
 
 ### Response
 
+<%= headers :status => 200 %>
 <%= json :milestone %>
 
 ## Delete a Milestone
@@ -69,4 +75,5 @@ direction
 
 ### Response
 
-    {}
+<%= headers :status => 204 %>
+<%= json({}) %>

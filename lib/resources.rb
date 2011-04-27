@@ -4,6 +4,38 @@ require 'stringio'
 module GitHub
   module Resources
     module Helpers
+      STATUSES = {
+        200 => '200 OK',
+        201 => '201 Created',
+        204 => '204 No Content',
+        301 => '301 Moved Permanently',
+        304 => '304 Not Modified',
+        401 => '401 Unauthorized',
+        403 => '403 Forbidden',
+        404 => '404 Not Found',
+        409 => '409 Conflict',
+        422 => '422 Unprocessable Entity',
+        500 => '500 Server Error'
+      }
+
+      def headers(head)
+        lines = []
+        head.each do |key, value|
+          case key
+            when :pagination
+              lines << "X-Next: https://api.github.com/resource?page=2"
+              lines << "X-Last: https://api.github.com/resource?page=5"
+            when :status     then lines << "Status: #{STATUSES[value]}"
+            else lines << "#{key}: #{value}"
+          end
+        end
+
+        lines << "X-RateLimit-Limit: 5000"
+        lines << "X-RateLimit-Remaining: 4999"
+
+        %(<pre class="headers"><code>#{lines * "\n"}</code></pre>\n)
+      end
+
       def json(key)
         hash = case key
           when Hash

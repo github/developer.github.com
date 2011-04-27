@@ -42,15 +42,23 @@ API docs should look like:
 
     ### Response
 
-    <pre class="highlight"><code class="language-javascript">
-    [
-      {
-        ...
-      }
-    }
-    </code></pre>
+    <%= json :resource_name %>
 
 **Note**: We're using [Kramdown Markdown extensions](http://kramdown.rubyforge.org/syntax.html), such as definition lists.
+
+### JSON Responses
+
+We specify the JSON responses in ruby so that we don't have to write
+them by hand all over the docs.  You can render the JSON for a resource
+like this:
+
+    <%= json :issue %>
+
+This looks up `GitHub::Resources::ISSUE` in `lib/resources.rb`.
+
+Some actions return arrays.  You can modify the JSON by passing a block:
+
+    <%= json(:issue) { |hash| [hash] } %>
 
 ### Terminal blocks
 
@@ -106,5 +114,6 @@ One thing: remember to add trailing slashes to all nanoc links!
 
 * Need some way to deploy?  Look into GitHub pages to start, until we
   can integrate through a simple hurl.it app for live API calls.
-* Flesh out the missing components of the requests.
 * Maybe add a nice TOC at the top of each page.
+* Write a task for verifying JSON Resource examples against the actual
+  API.

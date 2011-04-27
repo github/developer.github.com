@@ -39,6 +39,13 @@
 <pre><code>GET /repos/:user/:repo/labels.json
 </code></pre>
 
+<h3 id="response">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
+</code></pre>
+
 <h2 id="create-a-label">Create a Label</h2>
 
 <pre><code>POST /repos/:user/:repo/labels.json
@@ -48,13 +55,27 @@
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="nx">name</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="nx">color</span><span class="o">:</span> <span class="s2">"String"</span>
+  <span class="nx">color</span><span class="o">:</span> <span class="s2">"hex"</span> <span class="c1">// "ffffff" (6 characters, no '#')</span>
 <span class="p">}</span>
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+ <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+ <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}</span>
 </code></pre>
 
 <h2 id="get-a-single-label">Get a single Label</h2>
 
 <pre><code>GET /repos/:user/:repo/labels/:id.json
+</code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+ <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+ <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}</span>
 </code></pre>
 
 <h2 id="update-a-label">Update a Label</h2>
@@ -66,8 +87,15 @@
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="nx">name</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="nx">color</span><span class="o">:</span> <span class="s2">"String"</span>
+  <span class="nx">color</span><span class="o">:</span> <span class="s2">"hex"</span> <span class="c1">// "ffffff" (6 characters, no '#')</span>
 <span class="p">}</span>
+</code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+ <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+ <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}</span>
 </code></pre>
 
 <h2 id="delete-a-label">Delete a label</h2>
@@ -75,9 +103,21 @@
 <pre><code>DELETE /repos/:user/:repo/labels/:id.json
 </code></pre>
 
+<h3 id="response-4">Response</h3>
+
+<pre><code>{}
+</code></pre>
+
 <h2 id="list-labels-on-the-issue">List labels on the Issue</h2>
 
 <pre><code>GET /repos/:user/:repo/issues/:id/labels.json
+</code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>
 
 <h2 id="add-a-label-to-an-issue">Add a Label to an Issue</h2>
@@ -92,9 +132,23 @@
  <span class="p">},</span> <span class="p">...]</span>
 </code></pre>
 
+<h3 id="response-6">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
+</code></pre>
+
 <h2 id="remove-a-label-from-an-issue">Remove a Label from an Issue</h2>
 
 <pre><code>DELETE /repos/:user/:repo/issues/:id/labels/:id.json
+</code></pre>
+
+<h3 id="response-7">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>
 
 <h2 id="replace-all-labels-for-an-issue">Replace all Labels for an Issue</h2>
@@ -109,14 +163,33 @@
  <span class="p">},</span> <span class="p">...]</span>
 </code></pre>
 
+<h3 id="response-8">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
+</code></pre>
+
 <h2 id="remove-all-labels-from-an-issue">Remove all Labels from an Issue</h2>
 
 <pre><code>DELETE /repos/:user/:repo/issues/:id/labels.json
 </code></pre>
 
+<h3 id="response-9">Response</h3>
+
+<pre><code>{}
+</code></pre>
+
 <h2 id="get-labels-for-every-issue-in-a-milestone">Get Labels for every Issue in a Milestone</h2>
 
 <pre><code>GET /repos/:user/:repo/milestones/:id/labels.json
+</code></pre>
+
+<h3 id="response-10">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>
   </div>
 

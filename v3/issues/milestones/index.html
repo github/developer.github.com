@@ -40,18 +40,43 @@
 </code></pre>
 
 <dl>
-<dt>sort</dt>
+<dt>state</dt>
+  <dd>
+<code>open</code>, <code>closed</code>, default: <code>open</code>
+</dd>
+  <dt>sort</dt>
   <dd>
 <code>created</code>, <code>updated</code>, <code>comments</code>, default: <code>created</code>
 </dd>
   <dt>direction</dt>
   <dd>
 <code>asc</code> or <code>desc</code>, default: <code>desc</code>.</dd>
-  <dt>state</dt>
-  <dd>
-<code>open</code>, <code>closed</code>, default: <code>open</code>
-</dd>
-</dl><h2 id="create-a-milestone">Create a Milestone</h2>
+</dl><h3 id="response">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1.json"</span><span class="p">,</span>
+  <span class="s2">"number"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="o">=&gt;</span><span class="s2">"open"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="o">=&gt;</span><span class="s2">"v1.0"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"creator"</span><span class="o">=&gt;</span>
+   <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
+    <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
+    <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
+  <span class="s2">"open_issues"</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span>
+  <span class="s2">"closed_issues"</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+  <span class="s2">"due_on"</span><span class="o">=&gt;</span><span class="nx">nil</span><span class="p">}]</span>
+</code></pre>
+
+<h2 id="create-a-milestone">Create a Milestone</h2>
 
 <pre><code>POST /repos/:user/:repo/milestones.json
 </code></pre>
@@ -60,15 +85,65 @@
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="nx">title</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="nx">state</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">state</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span> <span class="c1">// "open" or "closed"</span>
   <span class="nx">description</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
   <span class="nx">due_on</span><span class="o">:</span> <span class="s2">"Time"</span>
 <span class="p">}</span>
 </code></pre>
 
+<h3 id="response-1">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1.json"</span><span class="p">,</span>
+ <span class="s2">"number"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
+ <span class="s2">"state"</span><span class="o">=&gt;</span><span class="s2">"open"</span><span class="p">,</span>
+ <span class="s2">"title"</span><span class="o">=&gt;</span><span class="s2">"v1.0"</span><span class="p">,</span>
+ <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
+ <span class="s2">"creator"</span><span class="o">=&gt;</span>
+  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+   <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+   <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
+   <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
+   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
+   <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
+   <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
+   <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
+   <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+   <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
+   <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
+ <span class="s2">"open_issues"</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span>
+ <span class="s2">"closed_issues"</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">,</span>
+ <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+ <span class="s2">"due_on"</span><span class="o">=&gt;</span><span class="nx">nil</span><span class="p">}</span>
+</code></pre>
+
 <h2 id="get-a-single-milestone">Get a single Milestone</h2>
 
 <pre><code>GET /repos/:user/:repo/milestones/:id.json
+</code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1.json"</span><span class="p">,</span>
+ <span class="s2">"number"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
+ <span class="s2">"state"</span><span class="o">=&gt;</span><span class="s2">"open"</span><span class="p">,</span>
+ <span class="s2">"title"</span><span class="o">=&gt;</span><span class="s2">"v1.0"</span><span class="p">,</span>
+ <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
+ <span class="s2">"creator"</span><span class="o">=&gt;</span>
+  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+   <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+   <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
+   <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
+   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
+   <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
+   <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
+   <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
+   <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+   <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
+   <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
+ <span class="s2">"open_issues"</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span>
+ <span class="s2">"closed_issues"</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">,</span>
+ <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+ <span class="s2">"due_on"</span><span class="o">=&gt;</span><span class="nx">nil</span><span class="p">}</span>
 </code></pre>
 
 <h2 id="update-a-milestone">Update a Milestone</h2>
@@ -80,15 +155,45 @@
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="nx">title</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="nx">state</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
+  <span class="nx">state</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span> <span class="c1">// "open" or "closed"</span>
   <span class="nx">description</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
   <span class="nx">due_on</span><span class="o">:</span> <span class="s2">"Time"</span>
 <span class="p">}</span>
 </code></pre>
 
+<h3 id="response-3">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1.json"</span><span class="p">,</span>
+ <span class="s2">"number"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
+ <span class="s2">"state"</span><span class="o">=&gt;</span><span class="s2">"open"</span><span class="p">,</span>
+ <span class="s2">"title"</span><span class="o">=&gt;</span><span class="s2">"v1.0"</span><span class="p">,</span>
+ <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
+ <span class="s2">"creator"</span><span class="o">=&gt;</span>
+  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+   <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+   <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
+   <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
+   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
+   <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
+   <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
+   <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
+   <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+   <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
+   <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
+ <span class="s2">"open_issues"</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span>
+ <span class="s2">"closed_issues"</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">,</span>
+ <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+ <span class="s2">"due_on"</span><span class="o">=&gt;</span><span class="nx">nil</span><span class="p">}</span>
+</code></pre>
+
 <h2 id="delete-a-milestone">Delete a Milestone</h2>
 
 <pre><code>DELETE /repos/:user/:repo/milestones/:id.json
+</code></pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre><code>{}
 </code></pre>
   </div>
 

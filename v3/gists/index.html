@@ -37,7 +37,7 @@
 <p>The Gist API v3 has been unified into the core GitHub API and can be
 accessed via the domain api.github.com. SSL is required so the base url
 for all API calls should be: <code>https://api.github.com</code>.
-Please see the <a href="/v3/">overview</a> for a complete description of the API
+Please see the <a href="/v3/">summary</a> for a complete description of the API
 including information about data format and authentication.</p>
 
 <h2 id="list-a-users-gists">List a user’s gists</h2>
@@ -267,11 +267,102 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"committed_at"</span><span class="o">=&gt;</span><span class="s2">"2010-04-14T02:15:15Z"</span><span class="p">}]}</span>
 </code></pre>
 
+<h2 id="star-a-gist">Star a gist</h2>
+
+<pre><code>POST /gists/:id/star
+</code></pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
+</code></pre>
+
+<h2 id="unstar-a-gist">Unstar a gist</h2>
+
+<pre><code>DELETE /gists/:id/star
+</code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
+</code></pre>
+
+<h2 id="check-if-a-gist-is-starred">Check if a gist is starred</h2>
+
+<pre><code>GET /gists/:id/star
+</code></pre>
+
+<h3 id="response-if-gist-is-starred">Response if gist is starred</h3>
+
+<pre class="headers"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
+</code></pre>
+
+<h3 id="response-if-gist-is-not-starred">Response if gist is not starred</h3>
+
+<pre class="headers"><code>Status: 404 Not Found
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
+</code></pre>
+
+<h2 id="fork-a-gist">Fork a gist</h2>
+
+<pre><code>POST /gists/:id/fork.json
+</code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/gists/1.json"</span><span class="p">,</span>
+ <span class="s2">"id"</span><span class="o">=&gt;</span><span class="s2">"1"</span><span class="p">,</span>
+ <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">"description of gist"</span><span class="p">,</span>
+ <span class="s2">"public"</span><span class="o">=&gt;</span><span class="kc">true</span><span class="p">,</span>
+ <span class="s2">"user"</span><span class="o">=&gt;</span>
+  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+   <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+   <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
+   <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
+   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
+   <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
+   <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
+   <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
+   <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+   <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
+   <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
+ <span class="s2">"files"</span><span class="o">=&gt;</span>
+  <span class="p">{</span><span class="s2">"ring.erl"</span><span class="o">=&gt;</span>
+    <span class="p">{</span><span class="s2">"size"</span><span class="o">=&gt;</span><span class="mi">932</span><span class="p">,</span>
+     <span class="s2">"filename"</span><span class="o">=&gt;</span><span class="s2">"ring.erl"</span><span class="p">,</span>
+     <span class="s2">"raw_url"</span><span class="o">=&gt;</span>
+      <span class="s2">"https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"</span><span class="p">,</span>
+     <span class="s2">"content"</span><span class="o">=&gt;</span><span class="s2">"contents of gist"</span><span class="p">}},</span>
+ <span class="s2">"comments"</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span>
+ <span class="s2">"git_pull_url"</span><span class="o">=&gt;</span><span class="s2">"git://gist.github.com/1.git"</span><span class="p">,</span>
+ <span class="s2">"git_push_url"</span><span class="o">=&gt;</span><span class="s2">"git@gist.github.com:1.git"</span><span class="p">,</span>
+ <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2010-04-14T02:15:15Z"</span><span class="p">}</span>
+</code></pre>
+
 <h2 id="delete-a-gist">Delete a gist</h2>
 
 <p>DELETE /gists/:id.json</p>
 
-<h3 id="response-4">Response</h3>
+<h3 id="response-7">Response</h3>
 
 <pre class="headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

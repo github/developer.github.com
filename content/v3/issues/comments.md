@@ -1,5 +1,5 @@
 ---
-title: Issue Comments API v3 | dev.github.com
+title: Issue Comments API v3 | developer.github.com
 ---
 
 # Issue Comments API

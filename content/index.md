@@ -1,8 +1,8 @@
 ---
-title: dev.github.com
+title: developer.github.com
 ---
 
-# dev.github.com
+# developer.github.com
 
 This describes the Resources that make up the official GitHub API v3.
 You can look at the [API v2](http://develop.github.com/) to access

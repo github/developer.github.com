@@ -1,5 +1,5 @@
 ---
-title: Issue Milestones API v3 | dev.github.com
+title: Issue Milestones API v3 | developer.github.com
 ---
 
 # Milestones API

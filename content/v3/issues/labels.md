@@ -1,5 +1,5 @@
 ---
-title: Issue Labels API v3 | dev.github.com
+title: Issue Labels API v3 | developer.github.com
 ---
 
 # Labels API

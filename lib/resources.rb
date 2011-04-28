@@ -141,6 +141,11 @@ module GitHub
       "assignee"   => USER,
       "milestone"  => MILESTONE,
       "comments"   => 0,
+      "pull_request" => {
+        "html_url"  => "https://github.com/octocat/Hello-World/issues/1",
+        "diff_url"  => "https://github.com/octocat/Hello-World/issues/1.diff",
+        "patch_url" => "https://github.com/octocat/Hello-World/issues/1.patch"
+      },
       "closed_at"  => nil,
       "created_at" => "2011-04-22T13:33:48Z",
       "updated_at" => "2011-04-22T13:33:48Z"

@@ -48,5 +48,3 @@ title: Gist Comments API v3 | developer.github.com
 ### Response
 
 <%= headers 204 %>
-<%= json({}) %>
-

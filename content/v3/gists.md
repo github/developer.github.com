@@ -87,7 +87,6 @@ including information about data format and authentication.
 ### Response if gist is starred
 
 <%= headers 204 %>
-<%= json({}) %>
 
 ### Response if gist is not starred
 
@@ -110,4 +109,3 @@ including information about data format and authentication.
 ### Response
 
 <%= headers 204 %>
-<%= json({}) %>

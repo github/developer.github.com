@@ -91,4 +91,3 @@ direction
 ### Response
 
 <%= headers 204 %>
-<%= json({}) %>

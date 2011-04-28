@@ -61,7 +61,6 @@ title: Issue Labels API v3 | developer.github.com
 ### Response
 
 <%= headers 204 %>
-<%= json({}) %>
 
 ## List labels on the Issue
 
@@ -114,7 +113,6 @@ title: Issue Labels API v3 | developer.github.com
 ### Response
 
 <%= headers 204 %>
-<%= json({}) %>
 
 ## Get Labels for every Issue in a Milestone
 

@@ -6,7 +6,7 @@ title: Issues API v3 | developer.github.com
 
 ## List issues for this Repository
 
-    GET /repos/:user/:repo/issues.json
+    GET /repos/:user/:repo/issues
 
 ### Parameters
 
@@ -39,7 +39,7 @@ direction
 
 ## Create an Issue
 
-    POST /repos/:user/:repo/issues.json
+    POST /repos/:user/:repo/issues
 
 ### Input
 
@@ -54,12 +54,12 @@ direction
 
 <%= headers 201,
       :Location =>
-'https://api.github.com/repos/user/repo/issues/1.json' %>
+'https://api.github.com/repos/user/repo/issues/1' %>
 <%= json :issue %>
 
 ## Get a single Issue
 
-    GET /repos/:user/:repo/issues/:id.json
+    GET /repos/:user/:repo/issues/:id
 
 ### Response
 
@@ -68,7 +68,7 @@ direction
 
 ## Edit an Issue
 
-    PATCH /repos/:user/:repo/issues/:id.json
+    PATCH /repos/:user/:repo/issues/:id
 
 ### Input
 
@@ -86,7 +86,7 @@ direction
 
 ## Delete an Issue
 
-    DELETE /repos/:user/:repo/issues/:id.json
+    DELETE /repos/:user/:repo/issues/:id
 
 ### Response
 

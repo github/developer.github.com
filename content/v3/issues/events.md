@@ -48,7 +48,7 @@ assigned
 
 ## Get Events for an Issue
 
-    GET /repos/:user/:repo/issues/:issue_id/events.json
+    GET /repos/:user/:repo/issues/:issue_id/events
 
 ### Response
 
@@ -57,7 +57,7 @@ assigned
 
 ## Get Events for a Repository
 
-    GET /repos/:user/:repo/issues/events.json
+    GET /repos/:user/:repo/issues/events
 
 ### Response
 
@@ -66,7 +66,7 @@ assigned
 
 ## Get a single Issue Event
 
-    GET /repos/:user/:repo/issues/events/:id.json
+    GET /repos/:user/:repo/issues/events/:id
 
 ### Response
 

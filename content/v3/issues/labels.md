@@ -6,7 +6,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## List all Labels for this Repository
 
-    GET /repos/:user/:repo/labels.json
+    GET /repos/:user/:repo/labels
 
 ### Response
 
@@ -15,7 +15,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## Create a Label
 
-    POST /repos/:user/:repo/labels.json
+    POST /repos/:user/:repo/labels
 
 ### Input
 
@@ -27,12 +27,12 @@ title: Issue Labels API v3 | developer.github.com
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/user/repo/labels/foo.json" %>
+"https://api.github.com/repos/user/repo/labels/foo" %>
 <%= json :label %>
 
 ## Get a single Label
 
-    GET /repos/:user/:repo/labels/:id.json
+    GET /repos/:user/:repo/labels/:id
 
 ### Response
 
@@ -41,7 +41,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## Update a Label
 
-    PATCH /repos/:user/:repo/labels/:id.json
+    PATCH /repos/:user/:repo/labels/:id
 
 ### Input
 
@@ -56,7 +56,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## Delete a label
 
-    DELETE /repos/:user/:repo/labels/:id.json
+    DELETE /repos/:user/:repo/labels/:id
 
 ### Response
 
@@ -64,7 +64,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## List labels on the Issue
 
-    GET /repos/:user/:repo/issues/:id/labels.json
+    GET /repos/:user/:repo/issues/:id/labels
 
 ### Response
 
@@ -73,7 +73,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## Add Labels to an Issue
 
-    POST /repos/:user/:repo/issues/:id/labels.json
+    POST /repos/:user/:repo/issues/:id/labels
 
 ### Input
 
@@ -86,7 +86,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## Remove a Label from an Issue
 
-    DELETE /repos/:user/:repo/issues/:id/labels/:id.json
+    DELETE /repos/:user/:repo/issues/:id/labels/:id
 
 ### Response
 
@@ -95,7 +95,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## Replace all Labels for an Issue
 
-    PUT /repos/:user/:repo/issues/:id/labels.json
+    PUT /repos/:user/:repo/issues/:id/labels
 
 ### Input
 
@@ -108,7 +108,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## Remove all Labels from an Issue
 
-    DELETE /repos/:user/:repo/issues/:id/labels.json
+    DELETE /repos/:user/:repo/issues/:id/labels
 
 ### Response
 
@@ -116,7 +116,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ## Get Labels for every Issue in a Milestone
 
-    GET /repos/:user/:repo/milestones/:id/labels.json
+    GET /repos/:user/:repo/milestones/:id/labels
 
 ### Response
 

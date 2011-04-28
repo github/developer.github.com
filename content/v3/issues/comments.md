@@ -6,7 +6,7 @@ title: Issue Comments API v3 | developer.github.com
 
 ## Get Comments for an Issue
 
-    GET /repos/:user/:repo/issues/:id/comments.json
+    GET /repos/:user/:repo/issues/:id/comments
 
 ### Response
 
@@ -15,7 +15,7 @@ title: Issue Comments API v3 | developer.github.com
 
 ## Create a Comment for an Issue
 
-    POST /repos/:user/:repo/issues/:id/comments.json
+    POST /repos/:user/:repo/issues/:id/comments
 
 ### Input
 
@@ -25,12 +25,12 @@ title: Issue Comments API v3 | developer.github.com
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/user/repo/issues/comments/:id.json" %>
+"https://api.github.com/repos/user/repo/issues/comments/:id" %>
 <%= json :issue_comment %>
 
 ## View a single Issue Comment
 
-    GET /repos/:user/:repo/issues/comments/:id.json
+    GET /repos/:user/:repo/issues/comments/:id
 
 ### Response
 
@@ -39,7 +39,7 @@ title: Issue Comments API v3 | developer.github.com
 
 ## Edit an Issue Comment
 
-    PATCH /repos/:user/:repo/issues/comments/:id.json
+    PATCH /repos/:user/:repo/issues/comments/:id
 
 ### Input
 
@@ -52,7 +52,7 @@ title: Issue Comments API v3 | developer.github.com
 
 ## Delete an Issue Comment
 
-    DELETE /repos/:user/:repo/issues/comments/:id.json
+    DELETE /repos/:user/:repo/issues/comments/:id
 
 ### Response
 

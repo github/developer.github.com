@@ -6,7 +6,7 @@ title: Gist Comments API v3 | developer.github.com
 
 ## List
 
-    GET /gists/:gist_id/comments.json
+    GET /gists/:gist_id/comments
 
 ### Response
 
@@ -15,7 +15,7 @@ title: Gist Comments API v3 | developer.github.com
 
 ## Get
 
-    GET /gists/comments/:id.json
+    GET /gists/comments/:id
 
 ### Response
 
@@ -24,17 +24,17 @@ title: Gist Comments API v3 | developer.github.com
 
 ## Create
 
-    POST /gists/:gist_id/comments.json
+    POST /gists/:gist_id/comments
 
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/gists/comments/1.json" %>
+      :Location => "https://api.github.com/gists/comments/1" %>
 <%= json :gist_comment %>
 
 ## Edit
 
-    PATCH /gists/comments/:id.json
+    PATCH /gists/comments/:id
 
 ### Response
 
@@ -43,7 +43,7 @@ title: Gist Comments API v3 | developer.github.com
 
 ## Delete
 
-    DELETE /gists/comments/:id.json
+    DELETE /gists/comments/:id
 
 ### Response
 

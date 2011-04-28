@@ -31,8 +31,9 @@ module GitHub
 
         lines << "X-RateLimit-Limit: 5000"
         lines << "X-RateLimit-Remaining: 4999"
+        css    = status == 204 ? nil : 'headers'
 
-        %(<pre class="headers"><code>#{lines * "\n"}</code></pre>\n)
+        %(<pre class="#{css}"><code>#{lines * "\n"}</code></pre>\n)
       end
 
       def json(key)
@@ -56,7 +57,7 @@ module GitHub
     end
 
     USER = {
-      "url"          => "https://api.github.com/users/octocat.json",
+      "url"          => "https://api.github.com/users/octocat",
       "html_url"     => "https://github.com/octocat",
       "type"         => "User",
       "login"        => "octocat",
@@ -82,7 +83,7 @@ module GitHub
     })
 
     REPO = {
-      "url"              => "https://api.github.com/repos/octocat/Hello-World.json",
+      "url"              => "https://api.github.com/repos/octocat/Hello-World",
       "html_url"         => "https://github.com/octocat/Hello-World",
       "owner"            => USER,
       "name"             => "Hello-World",
@@ -111,7 +112,7 @@ module GitHub
     })
 
     MILESTONE = {
-      "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1.json",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1",
       "number"        => 1,
       "state"         => "open",
       "title"         => "v1.0",
@@ -124,13 +125,13 @@ module GitHub
     }
 
     LABEL = {
-      "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug.json",
+      "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
       "name"  => "bug",
       "color" => "f29513"
     }
 
     ISSUE = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1.json",
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1",
       "number"     => 1347,
       "state"      => "open",
@@ -152,7 +153,7 @@ module GitHub
     }
 
     ISSUE_COMMENT = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1.json",
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1",
       "body"       => "Me too",
       "user"       => USER,
       "created_at" => "2011-04-14T16:00:49Z",
@@ -160,7 +161,7 @@ module GitHub
     }
 
     ISSUE_EVENT = {
-      "url" => "https://api.github.com/repos/octocat/Hello-World/issues/events/1.json",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/issues/events/1",
       "actor"      => USER,
       "event"      => "closed",
       "commit_id"  => "SHA",
@@ -170,7 +171,7 @@ module GitHub
     GIST_HISTORY = {
       "history" => [
         {
-          "url"     => "https://api.github.com/gists/1/57a7f021a713b1c5a6a199b54cc514735d2d462f.json",
+          "url"     => "https://api.github.com/gists/1/57a7f021a713b1c5a6a199b54cc514735d2d462f",
           "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
           "user"    => USER,
           "change_status" => {
@@ -194,7 +195,7 @@ module GitHub
     }
 
     GIST = {
-      "url"          => "https://api.github.com/gists/1.json",
+      "url"          => "https://api.github.com/gists/1",
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
@@ -211,7 +212,7 @@ module GitHub
 
     GIST_COMMENT = {
       "id"         => 1,
-      "url"        => "https://api.github.com/gists/comments/1.json",
+      "url"        => "https://api.github.com/gists/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
       "created_at" => "2011-04-18T23:23:56Z"

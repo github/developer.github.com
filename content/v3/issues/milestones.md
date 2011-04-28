@@ -6,7 +6,7 @@ title: Issue Milestones API v3 | developer.github.com
 
 ## List Milestones for an Issue
 
-    GET /repos/:user/:repo/milestones.json
+    GET /repos/:user/:repo/milestones
 
 state
 : `open`, `closed`, default: `open`
@@ -24,7 +24,7 @@ direction
 
 ## Create a Milestone
 
-    POST /repos/:user/:repo/milestones.json
+    POST /repos/:user/:repo/milestones
 
 ### Input
 
@@ -39,12 +39,12 @@ direction
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/user/repo/milestones/1.json" %>
+"https://api.github.com/repos/user/repo/milestones/1" %>
 <%= json :milestone %>
 
 ## Get a single Milestone
 
-    GET /repos/:user/:repo/milestones/:id.json
+    GET /repos/:user/:repo/milestones/:id
 
 ### Response
 
@@ -53,7 +53,7 @@ direction
 
 ## Update a Milestone
 
-    PATCH /repos/:user/:repo/milestones/:id.json
+    PATCH /repos/:user/:repo/milestones/:id
 
 ### Input
 
@@ -71,7 +71,7 @@ direction
 
 ## Delete a Milestone
 
-    DELETE /repos/:user/:repo/milestones/:id.json
+    DELETE /repos/:user/:repo/milestones/:id
 
 ### Response
 

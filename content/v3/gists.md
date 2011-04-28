@@ -12,7 +12,7 @@ including information about data format and authentication.
 
 ## List a user's gists
 
-    GET /users/:user/gists.json
+    GET /users/:user/gists
 
 ### Response
 
@@ -21,7 +21,7 @@ including information about data format and authentication.
 
 ## Get a single gist
 
-   GET /gists/:id.json
+   GET /gists/:id
 
 ### Response
 
@@ -30,7 +30,7 @@ including information about data format and authentication.
 
 ## Create a new gist
 
-    POST /users/:user/gists.json
+    POST /users/:user/gists
 
 ### Input
 
@@ -44,12 +44,12 @@ including information about data format and authentication.
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/users/:user/gists/1.json" %>
+      :Location => "https://api.github.com/users/:user/gists/1" %>
 <%= json :full_gist %>
 
 ## Edit a gist
 
-    PATCH /gists/:id.json
+    PATCH /gists/:id
 
 <%= json \
   :description => "the description for this gist",
@@ -68,7 +68,8 @@ including information about data format and authentication.
 
 ### Response
 
-<%= headers 201 %>
+<%= headers 201,
+      :Location => "https://api.github.com/users/user/gists/1" %>
 <%= json({}) %>
 
 ## Unstar a gist
@@ -77,8 +78,7 @@ including information about data format and authentication.
 
 ### Response
 
-<%= headers 200 %>
-<%= json({}) %>
+<%= headers 204 %>
 
 ## Check if a gist is starred
 
@@ -95,16 +95,17 @@ including information about data format and authentication.
 
 ## Fork a gist
 
-    POST /gists/:id/fork.json
+    POST /gists/:id/fork
 
 ### Response
 
-<%= headers 201 %>
+<%= headers 201,
+      :Location => "https://api.github.com/users/user/gists/1" %>
 <%= json(:gist) %>
 
 ## Delete a gist
 
-   DELETE /gists/:id.json
+   DELETE /gists/:id
 
 ### Response
 

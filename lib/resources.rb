@@ -152,11 +152,19 @@ module GitHub
     }
 
     ISSUE_COMMENT = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1001987.json",
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1.json",
       "body"       => "Me too",
       "user"       => USER,
       "created_at" => "2011-04-14T16:00:49Z",
       "updated_at" => "2011-04-14T16:00:49Z"
+    }
+
+    ISSUE_EVENT = {
+      "url" => "https://api.github.com/repos/octocat/Hello-World/issues/events/1.json",
+      "actor"      => USER,
+      "event"      => "closed",
+      "commit_id"  => "SHA",
+      "created_at" => "2011-04-14T16:00:49Z"
     }
 
     GIST_HISTORY = {

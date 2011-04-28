@@ -36,7 +36,7 @@
 
 <h2 id="list-all-labels-for-this-repository">List all Labels for this Repository</h2>
 
-<pre><code>GET /repos/:user/:repo/labels.json
+<pre><code>GET /repos/:user/:repo/labels
 </code></pre>
 
 <h3 id="response">Response</h3>
@@ -45,14 +45,14 @@
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
   <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>
 
 <h2 id="create-a-label">Create a Label</h2>
 
-<pre><code>POST /repos/:user/:repo/labels.json
+<pre><code>POST /repos/:user/:repo/labels
 </code></pre>
 
 <h3 id="input">Input</h3>
@@ -65,18 +65,18 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/repos/user/repo/labels/foo.json
+Location: https://api.github.com/repos/user/repo/labels/foo
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}</span>
 </code></pre>
 
 <h2 id="get-a-single-label">Get a single Label</h2>
 
-<pre><code>GET /repos/:user/:repo/labels/:id.json
+<pre><code>GET /repos/:user/:repo/labels/:id
 </code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -85,14 +85,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}</span>
 </code></pre>
 
 <h2 id="update-a-label">Update a Label</h2>
 
-<pre><code>PATCH /repos/:user/:repo/labels/:id.json
+<pre><code>PATCH /repos/:user/:repo/labels/:id
 </code></pre>
 
 <h3 id="input-1">Input</h3>
@@ -108,28 +108,25 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
  <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}</span>
 </code></pre>
 
 <h2 id="delete-a-label">Delete a label</h2>
 
-<pre><code>DELETE /repos/:user/:repo/labels/:id.json
+<pre><code>DELETE /repos/:user/:repo/labels/:id
 </code></pre>
 
 <h3 id="response-4">Response</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class=""><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
-</code></pre>
-
 <h2 id="list-labels-on-the-issue">List labels on the Issue</h2>
 
-<pre><code>GET /repos/:user/:repo/issues/:id/labels.json
+<pre><code>GET /repos/:user/:repo/issues/:id/labels
 </code></pre>
 
 <h3 id="response-5">Response</h3>
@@ -138,14 +135,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
   <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>
 
 <h2 id="add-labels-to-an-issue">Add Labels to an Issue</h2>
 
-<pre><code>POST /repos/:user/:repo/issues/:id/labels.json
+<pre><code>POST /repos/:user/:repo/issues/:id/labels
 </code></pre>
 
 <h3 id="input-2">Input</h3>
@@ -159,14 +156,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
   <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>
 
 <h2 id="remove-a-label-from-an-issue">Remove a Label from an Issue</h2>
 
-<pre><code>DELETE /repos/:user/:repo/issues/:id/labels/:id.json
+<pre><code>DELETE /repos/:user/:repo/issues/:id/labels/:id
 </code></pre>
 
 <h3 id="response-7">Response</h3>
@@ -175,14 +172,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
   <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>
 
 <h2 id="replace-all-labels-for-an-issue">Replace all Labels for an Issue</h2>
 
-<pre><code>PUT /repos/:user/:repo/issues/:id/labels.json
+<pre><code>PUT /repos/:user/:repo/issues/:id/labels
 </code></pre>
 
 <h3 id="input-3">Input</h3>
@@ -196,28 +193,25 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
   <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>
 
 <h2 id="remove-all-labels-from-an-issue">Remove all Labels from an Issue</h2>
 
-<pre><code>DELETE /repos/:user/:repo/issues/:id/labels.json
+<pre><code>DELETE /repos/:user/:repo/issues/:id/labels
 </code></pre>
 
 <h3 id="response-9">Response</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class=""><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
-</code></pre>
-
 <h2 id="get-labels-for-every-issue-in-a-milestone">Get Labels for every Issue in a Milestone</h2>
 
-<pre><code>GET /repos/:user/:repo/milestones/:id/labels.json
+<pre><code>GET /repos/:user/:repo/milestones/:id/labels
 </code></pre>
 
 <h3 id="response-10">Response</h3>
@@ -226,7 +220,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"bug"</span><span class="p">,</span>
   <span class="s2">"color"</span><span class="o">=&gt;</span><span class="s2">"f29513"</span><span class="p">}]</span>
 </code></pre>

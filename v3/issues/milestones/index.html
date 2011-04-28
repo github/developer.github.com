@@ -36,7 +36,7 @@
 
 <h2 id="list-milestones-for-an-issue">List Milestones for an Issue</h2>
 
-<pre><code>GET /repos/:user/:repo/milestones.json
+<pre><code>GET /repos/:user/:repo/milestones
 </code></pre>
 
 <dl>
@@ -59,13 +59,13 @@ X-Last: https://api.github.com/resource?page=5
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
   <span class="s2">"number"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">=&gt;</span><span class="s2">"open"</span><span class="p">,</span>
   <span class="s2">"title"</span><span class="o">=&gt;</span><span class="s2">"v1.0"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
   <span class="s2">"creator"</span><span class="o">=&gt;</span>
-   <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+   <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
     <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
     <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
     <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
@@ -84,7 +84,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create-a-milestone">Create a Milestone</h2>
 
-<pre><code>POST /repos/:user/:repo/milestones.json
+<pre><code>POST /repos/:user/:repo/milestones
 </code></pre>
 
 <h3 id="input">Input</h3>
@@ -98,17 +98,17 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/repos/user/repo/milestones/1.json
+Location: https://api.github.com/repos/user/repo/milestones/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
  <span class="s2">"number"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
  <span class="s2">"state"</span><span class="o">=&gt;</span><span class="s2">"open"</span><span class="p">,</span>
  <span class="s2">"title"</span><span class="o">=&gt;</span><span class="s2">"v1.0"</span><span class="p">,</span>
  <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
  <span class="s2">"creator"</span><span class="o">=&gt;</span>
-  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
    <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
    <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
    <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
@@ -127,7 +127,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-a-single-milestone">Get a single Milestone</h2>
 
-<pre><code>GET /repos/:user/:repo/milestones/:id.json
+<pre><code>GET /repos/:user/:repo/milestones/:id
 </code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -136,13 +136,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
  <span class="s2">"number"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
  <span class="s2">"state"</span><span class="o">=&gt;</span><span class="s2">"open"</span><span class="p">,</span>
  <span class="s2">"title"</span><span class="o">=&gt;</span><span class="s2">"v1.0"</span><span class="p">,</span>
  <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
  <span class="s2">"creator"</span><span class="o">=&gt;</span>
-  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
    <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
    <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
    <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
@@ -161,7 +161,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="update-a-milestone">Update a Milestone</h2>
 
-<pre><code>PATCH /repos/:user/:repo/milestones/:id.json
+<pre><code>PATCH /repos/:user/:repo/milestones/:id
 </code></pre>
 
 <h3 id="input-1">Input</h3>
@@ -178,13 +178,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
  <span class="s2">"number"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
  <span class="s2">"state"</span><span class="o">=&gt;</span><span class="s2">"open"</span><span class="p">,</span>
  <span class="s2">"title"</span><span class="o">=&gt;</span><span class="s2">"v1.0"</span><span class="p">,</span>
  <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
  <span class="s2">"creator"</span><span class="o">=&gt;</span>
-  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
    <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
    <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
    <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
@@ -203,17 +203,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="delete-a-milestone">Delete a Milestone</h2>
 
-<pre><code>DELETE /repos/:user/:repo/milestones/:id.json
+<pre><code>DELETE /repos/:user/:repo/milestones/:id
 </code></pre>
 
 <h3 id="response-4">Response</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class=""><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{}</span>
-</code></pre>
   </div>
 
   <div class="grid_2" id="sidebar">

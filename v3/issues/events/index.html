@@ -70,7 +70,7 @@ the commit SHA1 of where that happened.</dd>
   <dd>The issue was assigned to the actor.</dd>
 </dl><h2 id="get-events-for-an-issue">Get Events for an Issue</h2>
 
-<pre><code>GET /repos/:user/:repo/issues/:issue_id/events.json
+<pre><code>GET /repos/:user/:repo/issues/:issue_id/events
 </code></pre>
 
 <h3 id="response">Response</h3>
@@ -81,10 +81,9 @@ X-Last: https://api.github.com/resource?page=5
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span>
-   <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/events/1.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/events/1"</span><span class="p">,</span>
   <span class="s2">"actor"</span><span class="o">=&gt;</span>
-   <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+   <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
     <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
     <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
     <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
@@ -102,7 +101,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-events-for-a-repository">Get Events for a Repository</h2>
 
-<pre><code>GET /repos/:user/:repo/issues/events.json
+<pre><code>GET /repos/:user/:repo/issues/events
 </code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -113,10 +112,9 @@ X-Last: https://api.github.com/resource?page=5
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span>
-   <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/events/1.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/events/1"</span><span class="p">,</span>
   <span class="s2">"actor"</span><span class="o">=&gt;</span>
-   <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+   <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
     <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
     <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
     <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
@@ -134,7 +132,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-a-single-issue-event">Get a single Issue Event</h2>
 
-<pre><code>GET /repos/:user/:repo/issues/events/:id.json
+<pre><code>GET /repos/:user/:repo/issues/events/:id
 </code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -143,10 +141,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span>
-  <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/events/1.json"</span><span class="p">,</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/events/1"</span><span class="p">,</span>
  <span class="s2">"actor"</span><span class="o">=&gt;</span>
-  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat.json"</span><span class="p">,</span>
+  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
    <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
    <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
    <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>

@@ -76,8 +76,7 @@ title: Issue Labels API v3 | developer.github.com
     POST /repos/:user/:repo/issues/:id/labels
 
 ### Input
-
-<%= json({name: "String"}) { |h| [h] } %>
+<%= json({:array => %w(Label1 Label2)}) { |h| h['array'] } %>
 
 ### Response
 
@@ -98,8 +97,9 @@ title: Issue Labels API v3 | developer.github.com
     PUT /repos/:user/:repo/issues/:id/labels
 
 ### Input
+<%= json(:array => %w(Label1 Label2)) { |h| h['array'] } %>
 
-<%= json({name: "String"}) { |h| [h] } %>
+Sending an empty array (`[]`) will remove all Labels from the Issue.
 
 ### Response
 

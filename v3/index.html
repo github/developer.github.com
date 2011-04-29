@@ -46,6 +46,7 @@ have any problems or requests.</p>
 
 <ul>
 <li><a href="#schema">Schema</a></li>
+  <li><a href="#client-errors">Client Errors</a></li>
   <li><a href="#http-verbs">HTTP Verbs</a></li>
   <li><a href="#authentication">Authentication</a></li>
   <li><a href="#pagination">Pagination</a></li>
@@ -76,7 +77,68 @@ Content-Length: 2
 <pre><code>YYYY-MM-DDTHH:MM:SSZ
 </code></pre>
 
-<h2 id="http-verbs">HTTP Verbs</h2>
+<h2 id="client-errors">Client Errors</h2>
+
+<p>There are three possible types of client errors on API calls that
+receive request bodies:</p>
+
+<ol>
+<li>
+    <p>Sending invalid JSON will result in a <code>400 Bad Request</code> response.</p>
+
+    <pre><code> HTTP/1.1 400 Bad Request
+ Content-Length: 35
+
+ {"message":"Problems parsing JSON"}
+</code></pre>
+  </li>
+  <li>
+    <p>Sending the wrong type of JSON values will result in a <code>400 Bad
+Request</code> response.</p>
+
+    <pre><code> HTTP/1.1 400 Bad Request
+ Content-Length: 40
+
+ {"message":"Body should be a JSON Hash"}
+</code></pre>
+  </li>
+  <li>
+    <p>Sending invalid files will result in a 422 Unprocessable Entity
+response.</p>
+
+    <pre><code> HTTP/1.1 422 Unprocessable Entity
+ Content-Length: 149
+
+ {
+   "message": "Validation Failed",
+   "errors": [
+     {
+       "resource": "Issue",
+       "field": "title",
+       "code": "missing_field"
+     }
+   ]
+ }
+</code></pre>
+  </li>
+</ol><p>All error objects have resource and field properties so that your client
+can tell what the problem is.  There’s also an error code to let you
+know what is wrong with the field.  These are the possible validation error 
+codes:</p>
+
+<dl>
+<dt>missing</dt>
+  <dd>This means a resource does not exist.</dd>
+  <dt>missing_field</dt>
+  <dd>This means a required field on a resource has not been set.</dd>
+  <dt>invalid</dt>
+  <dd>This means the formatting of a field is invalid.  The documentation
+for that resource should be able to give you more specific information.</dd>
+  <dt>already_exists</dt>
+  <dd>This means another resource has the same value as this field.  This
+can happen in resources that must have some unique key (such as Label
+names).</dd>
+</dl><h2 id="http-verbs">HTTP Verbs</h2>
 
 <p>Where possible, API v3 strives to use appropriate HTTP verbs for each
 action.</p>

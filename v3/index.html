@@ -195,6 +195,14 @@ can also set a custom page size up to 100 with the <code>?per_page</code> parame
 $ curl https://api.github.com/repos?page=2&amp;per_page=100
 </pre>
 
+<p>The pagination info is included in the Link header:</p>
+
+<pre><code>Link: &lt;https://api.github.com/repos?page=3&amp;per_page=100&gt;; rel="next",
+  &lt;https://api.github.com/repos?page=50&amp;per_page=100&gt;; rel="last"
+</code></pre>
+
+<p><em>Linebreak is included for readability.</em></p>
+
 <h2 id="rate-limiting">Rate Limiting</h2>
 
 <p>We limit requests to API v3 to 5000 per day.  This is keyed off either your
@@ -219,21 +227,45 @@ setup OAuth applications for their users.</p>
 <p>You can send a <code>?callback</code> parameter to any GET call to have the results
 wrapped in a JSON function.  This is typically used when browsers want
 to embed GitHub content in web pages by getting around cross domain
-issues.  The responses always return 200, and are wrapped in meta
-objects containing the actual meta information:</p>
+issues.  The response includes the same data output as the regular API,
+plus the relevant HTTP Header information.</p>
 
 <pre class="terminal">
 $ curl https://api.github.com?callback=foo
 
-foo({
-  "data": {},
-  "meta": {
-    "status": 200,
-    "pagination": {"page": 1, "per_page": 30},
-    "rate": {"key": "IP ADDRESS", "remaining": 4999, "limit": 5000}
-  }
-})
+foo(200,{
+  "X-RateLimit-Limit": "5000",
+  "X-RateLimit-Remaining": "4966",
+  "Link": [ // pagination headers and other links
+    ["https://api.github.com?page=2", {"rel": "next"}]
+  ]
+},{
+  // the data
+}
 </pre>
+
+<p>You can write a javascript handler to process the callback like this:</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">code</span><span class="p">,</span> <span class="nx">headers</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">code</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">headers</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>All of the headers are the same String value as the HTTP Headers with one
+notable exception: Link.  Link headers are pre-parsed for you and come
+through as an array of <code>[url, options]</code> tuples.</p>
+
+<p>A link that looks like this:</p>
+
+<pre><code>Link: &lt;url1&gt;; rel="next", &lt;url2&gt;; rel="foo"; bar="baz"
+</code></pre>
+
+<p>… will look like this in the Callback output:</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"Link"</span><span class="o">=&gt;</span><span class="p">[[</span><span class="s2">"url1"</span><span class="p">,</span> <span class="p">{</span><span class="o">:</span><span class="nx">rel</span><span class="o">=&gt;</span><span class="s2">"next"</span><span class="p">}],</span> <span class="p">[</span><span class="s2">"url2"</span><span class="p">,</span> <span class="p">{</span><span class="o">:</span><span class="nx">rel</span><span class="o">=&gt;</span><span class="s2">"foo"</span><span class="p">,</span> <span class="o">:</span><span class="nx">bar</span><span class="o">=&gt;</span><span class="s2">"baz"</span><span class="p">}]]}</span>
+</code></pre>
   </div>
 
   <div class="grid_2" id="sidebar">

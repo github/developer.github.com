@@ -78,6 +78,7 @@ direction
   :body      => "String",
   :assignee  => "String User login",
   :milestone => "Integer Milestone number",
+  :state     => "open or closed",
   :labels    => %w(Label1 Label2)
 %>
 

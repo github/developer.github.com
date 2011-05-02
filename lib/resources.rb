@@ -184,6 +184,16 @@ module GitHub
       ]
     }
 
+    GIST_FORKS = {
+      "forks" => [
+        {
+          "user" => USER,
+          "url" => "https://api.github.com/gists/5",
+          "created_at" => "2011-04-14T16:00:49Z"
+        }
+      ]
+    }
+
     GIST_FILES = {
       "files" => {
         "ring.erl"   => {
@@ -207,7 +217,7 @@ module GitHub
       "created_at"   => "2010-04-14T02:15:15Z"
     }.update(GIST_FILES)
 
-    FULL_GIST = GIST.merge(GIST_HISTORY)
+    FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
     FULL_GIST['files']['ring.erl']['content'] = 'contents of gist'
 
     GIST_COMMENT = {

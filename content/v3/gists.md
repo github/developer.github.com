@@ -19,6 +19,31 @@ including information about data format and authentication.
 <%= headers 200, :pagination => true %>
 <%= json(:gist) { |h| [h] } %>
 
+## List your gists
+This will return a list of your gists, or if called anonymously it will
+return a list of all public gists.
+
+    GET /gists
+
+### Response
+The response is identical to [listing a user's gists](#list-a-users-gists).
+
+## List public gists
+This will return a list of all public gists.
+
+    GET /gists/public
+
+### Response
+The response is identical to [listing a user's gists](#list-a-users-gists).
+
+## List your starred gists
+This will return a list of your starred gists.
+
+    GET /gists/starred
+
+### Response
+The response is identical to [listing a user's gists](#list-a-users-gists).
+
 ## Get a single gist
 
    GET /gists/:id

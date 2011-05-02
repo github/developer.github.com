@@ -233,14 +233,18 @@ plus the relevant HTTP Header information.</p>
 <pre class="terminal">
 $ curl https://api.github.com?callback=foo
 
-foo(200,{
-  "X-RateLimit-Limit": "5000",
-  "X-RateLimit-Remaining": "4966",
-  "Link": [ // pagination headers and other links
-    ["https://api.github.com?page=2", {"rel": "next"}]
-  ]
-},{
-  // the data
+foo({
+  "meta": {
+    "status": 200,
+    "X-RateLimit-Limit": "5000",
+    "X-RateLimit-Remaining": "4966",
+    "Link": [ // pagination headers and other links
+      ["https://api.github.com?page=2", {"rel": "next"}]
+    ]
+  },
+  "data": {
+    // the data
+  }
 }
 </pre>
 

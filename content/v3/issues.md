@@ -89,11 +89,3 @@ Send an empty array (`[]`) to clear all Labels from the Issue.
 
 <%= headers 200 %>
 <%= json :issue %>
-
-## Delete an Issue
-
-    DELETE /repos/:user/:repo/issues/:id
-
-### Response
-
-<%= headers 204 %>

@@ -114,6 +114,7 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 ### Response if gist is starred
 
 <%= headers 204 %>
+<%= json({}) %>
 
 ### Response if gist is not starred
 

@@ -76,6 +76,8 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
     PATCH /gists/:id
 
+### Input
+
 <%= json \
   :description => "the description for this gist",
   :files => {

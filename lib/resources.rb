@@ -42,6 +42,8 @@ module GitHub
             h = {}
             key.each { |k, v| h[k.to_s] = v }
             h
+          when Array
+            key
           else Resources.const_get(key.to_s.upcase)
         end
 
@@ -82,6 +84,13 @@ module GitHub
       "disk_usage"          => 10000
     })
 
+    PUBLIC_KEY = {
+      "url"   => "https://api.github.com/user/keys/1",
+      "id"    => "1",
+      "title" => "octocat@octomac",
+      "key"   => "<public ssh key>",
+    }
+
     REPO = {
       "url"              => "https://api.github.com/repos/octocat/Hello-World",
       "html_url"         => "https://github.com/octocat/Hello-World",
@@ -110,6 +119,10 @@ module GitHub
       "has_wiki"         => true,
       "has_downloads"    => true
     })
+
+    ORG = {
+      "url" => "https://apit.github.com/orgs/1"
+    }
 
     MILESTONE = {
       "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1",

@@ -37,7 +37,7 @@ user (and you must pass authentication information with your request).
 ### Response
 
 <%= headers 200, :pagination => true %>
-<%= json :full_user %>
+<%= json :private_user %>
 
 ## List a user's repositories
 

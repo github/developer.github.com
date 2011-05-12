@@ -9,7 +9,7 @@ lightweight tags.
 
 ## Get a Tag
 
-    GET /git/:user/:repo/tag/:sha
+    GET /repos/:user/:repo/tags/:sha
 
 ### Response
 
@@ -18,7 +18,7 @@ lightweight tags.
 
 ## Create a Tag Object
 
-    POST /git/:user/:repo/tag
+    POST /repos/:user/:repo/tags
 
 ### Parameters
 
@@ -47,6 +47,6 @@ tagger.date
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/git/:user/:repo/tag/:sha" %>
+      :Location => "https://api.github.com/repos/:user/:repo/tags/:sha" %>
 <%= json :sha => "3241bfae562975622c208335e306efd9aa706687", :size => 30 %>
 

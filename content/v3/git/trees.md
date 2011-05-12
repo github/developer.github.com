@@ -6,7 +6,7 @@ title: Git DB Trees API v3 | developer.github.com
 
 ## Get a Tree
 
-    GET /repos/:user/:repo/trees/:sha
+    GET /repos/:user/:repo/git/trees/:sha
 
 ### Response
 
@@ -15,7 +15,7 @@ title: Git DB Trees API v3 | developer.github.com
 
 ## Get a Tree Recursively
 
-    GET /repos/:user/:repo/trees/:sha?recursive=1
+    GET /repos/:user/:repo/git/trees/:sha?recursive=1
 
 ### Response
 
@@ -29,7 +29,7 @@ tree and a nested path modifying that tree are specified, it will
 overwrite the contents of that tree with the new path contents and write
 a new tree out.
 
-    POST /repos/:user/:repo/trees
+    POST /repos/:user/:repo/git/trees
 
 ### Parameters
 
@@ -59,7 +59,7 @@ tree.sha
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/git/:user/:repo/tree/:sha" %>
+      :Location => "https://api.github.com/repos/:user/:repo/git/trees/:sha" %>
 <%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15", :size =>
 30 %>
 

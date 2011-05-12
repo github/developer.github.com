@@ -22,7 +22,7 @@ authenticated.
 
 ### Input
 
-You can post a single emails address or an array of addresses:
+You can post a single email address or an array of addresses:
 
 <%= json ["octocat@github.com", "support@github.com"] %>
 
@@ -37,12 +37,11 @@ You can post a single emails address or an array of addresses:
 
 ### Input
 
-You can include a single emails address or an array of addresses:
+You can include a single email address or an array of addresses:
 
 <%= json ["octocat@github.com", "support@github.com"] %>
 
 ### Response
 
-<%= headers 200 %>
-<%= json({}) %>
+<%= headers 204 %>
 

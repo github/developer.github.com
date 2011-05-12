@@ -114,12 +114,10 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 ### Response if gist is starred
 
 <%= headers 204 %>
-<%= json({}) %>
 
 ### Response if gist is not starred
 
 <%= headers 404 %>
-<%= json({}) %>
 
 ## Fork a gist
 
@@ -133,8 +131,9 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ## Delete a gist
 
-   DELETE /gists/:id
+    DELETE /gists/:id
 
 ### Response
 
 <%= headers 204 %>
+

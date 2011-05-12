@@ -31,9 +31,8 @@ module GitHub
 
         lines << "X-RateLimit-Limit: 5000"
         lines << "X-RateLimit-Remaining: 4999"
-        css    = status == 204 ? nil : 'headers'
 
-        %(<pre class="#{css}"><code>#{lines * "\n"}</code></pre>\n)
+        %(<pre class="headers"><code>#{lines * "\n"}</code></pre>\n)
       end
 
       def json(key)

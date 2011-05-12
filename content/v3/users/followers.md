@@ -39,8 +39,7 @@ title: User Followers API v3 | developer.github.com
 
 ### Response
 
-<%= headers 200 %>
-<%= json({}) %>
+<%= headers 204 %>
 
 ## Check if you are following a user
 
@@ -49,10 +48,8 @@ title: User Followers API v3 | developer.github.com
 ### Response if you are following this user
 
 <%= headers 204 %>
-<%= json({}) %>
 
 ### Response if you are not following this user
 
 <%= headers 404 %>
-<%= json({}) %>
 

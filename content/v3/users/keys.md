@@ -56,6 +56,5 @@ authenticated.
 
 ### Response
 
-<%= headers 200 %>
-<%= json({}) %>
+<%= headers 204 %>
 

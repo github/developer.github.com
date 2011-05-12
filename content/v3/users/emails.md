@@ -43,6 +43,5 @@ You can include a single email address or an array of addresses:
 
 ### Response
 
-<%= headers 200 %>
-<%= json({}) %>
+<%= headers 204 %>
 

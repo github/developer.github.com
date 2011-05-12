@@ -11,7 +11,7 @@ you can base64 encode it.
 
 ## Get a Blob
 
-    GET /git/:user/:repo/blob/:sha
+    GET /repos/:user/:repo/git/blobs/:sha
 
 ### Response
 
@@ -20,7 +20,7 @@ you can base64 encode it.
 
 ## Create a Blob
 
-    POST /git/:user/:repo/blob
+    POST /repos/:user/:repo/git/blobs
 
 ### Input
 

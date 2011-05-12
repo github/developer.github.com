@@ -217,6 +217,59 @@ module GitHub
       "user"       => USER,
       "created_at" => "2011-04-18T23:23:56Z"
     }
+
+    TREE = {
+      "count"  => 3,
+      "sha"  => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
+      "tree"  => [
+        { "path" => "file.rb",
+          "mode" => "100644",
+          "type" => "blob",
+          "sha"  => "44b4fc6d56897b048c772eb4087f854f46256132"
+        },
+        { "path" => "subdir",
+          "mode" => "040000",
+          "type" => "tree",
+          "sha"  => "f484d249c660418515fb01c2b9662073663c242e"
+        },
+        { "path" => "exec_file",
+          "mode" => "100755",
+          "type" => "blob",
+          "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057"
+        }
+      ]
+    }
+    TREE_EXTRA = {
+      "count" => 4,
+      "tree" => {
+          "path" => "subdir/file.txt",
+          "mode" => "100644",
+          "type" => "blob",
+          "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
+      }
+    }
+    FULL_TREE = TREE.merge(TREE_EXTRA) do |k, o, n|
+      k == 'tree' ? o << n : n
+    end
+
+    COMMIT = {
+      "sha" => "cd52fced9c728f3a37578620e9d6135a55eb2ef2",
+      "author" => {
+        "name"  => "Scott Chacon",
+        "email" => "scott@github.com",
+        "date"  => "2008-07-09T16:13:30+12:00"
+      },
+      "committer" => {
+        "name"  => "Scott Chacon",
+        "email" => "scott@github.com",
+        "date"  => "2008-07-09T16:13:30+12:00"
+      },
+      "message"  => "my commit message",
+      "tree"     => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
+      "parents"  => ["7d1b31e74ee336d15cbd21741bc88a537ed063a0"],
+      "encoding" => "utf-8"
+    }
+
   end
 end
 

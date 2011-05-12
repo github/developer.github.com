@@ -40,7 +40,7 @@ For a full refs listing, you'll get something that looks like:
 
 ## Update a Reference
 
-    POST /git/:user/:repo/refs/:ref
+    PUT /git/:user/:repo/refs/:ref
 
 ### Paramaters
 

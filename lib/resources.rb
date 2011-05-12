@@ -349,6 +349,21 @@ module GitHub
       "type"    => "commit"
     }
 
+    REFS = [
+      { "ref" => "refs/heads/master",
+        "sha" => "75e41c7ddf122d799730c39d2295ee840d9b7b08",
+        "type" => "commit" },
+      { "ref" => "refs/heads/gh-page",
+        "sha" => "1bb58aecaf6bbcf9f7e39dff2e42e0291f42d235",
+        "type" => "commit" },
+      { "ref" => "refs/tags/v0.1",
+        "sha" => "be87be3a49e75474e438a9a9f44b3deafb0af01c",
+        "type" => "tag" },
+      { "ref" => "refs/notes/commits",
+        "sha" => "1bb58aecaf6bbcf9f7e39dff2e42e0291f42d235",
+        "type" => "commit" },
+    ]
+
   end
 end
 

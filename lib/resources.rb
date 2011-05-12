@@ -333,8 +333,20 @@ module GitHub
       },
       "message"  => "my commit message",
       "tree"     => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
-      "parents"  => ["7d1b31e74ee336d15cbd21741bc88a537ed063a0"],
-      "encoding" => "utf-8"
+      "parents"  => ["7d1b31e74ee336d15cbd21741bc88a537ed063a0"]
+    }
+
+    TAG = {
+      "sha" => "b8d04eddde9f53f3bc76dd048f3477062a27c91a",
+      "tag" => "v1.0",
+      "tagger" => {
+        "name"  => "Scott Chacon",
+        "email" => "scott@github.com",
+        "date"  => "2008-07-09T16:13:30+12:00"
+      },
+      "message" => "my tag message",
+      "object"  => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
+      "type"    => "commit"
     }
 
   end

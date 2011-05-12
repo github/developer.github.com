@@ -60,5 +60,6 @@ tree.sha
 
 <%= headers 201,
       :Location => "https://api.github.com/git/:user/:repo/tree/:sha" %>
-<%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15" %>
+<%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15", :size =>
+30 %>
 

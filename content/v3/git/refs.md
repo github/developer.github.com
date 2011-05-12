@@ -6,11 +6,11 @@ title: Git DB Refs API v3 | developer.github.com
 
 ## Get a Reference
 
-    GET /repos/:user/:repo/refs/:ref
+    GET /repos/:user/:repo/git/refs/:ref
 
 The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For example, the call to get the data for a branch named `sc/featureA` would be:
 
-    GET /repos/:user/:repo/refs/heads/sc/featureA
+    GET /repos/:user/:repo/git/refs/heads/sc/featureA
 
 ### Response
 
@@ -20,7 +20,7 @@ The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For
 
 ## Get all References
 
-    GET /repos/:user/:repo/refs
+    GET /repos/:user/:repo/git/refs
 
 This will return an array of all the references on the system, including
 things like notes and stashes if they exist on the server.  Anything in
@@ -30,7 +30,7 @@ most common.
 You can also request a sub-namespace. For example, to get all the tag
 references, you can call:
 
-    GET /repos/:user/:repo/refs/tags
+    GET /repos/:user/:repo/git/refs/tags
 
 For a full refs listing, you'll get something that looks like:
 
@@ -40,7 +40,7 @@ For a full refs listing, you'll get something that looks like:
 
 ## Update a Reference
 
-    PUT /repos/:user/:repo/refs/:ref
+    PUT /repos/:user/:repo/git/refs/:ref
 
 ### Paramaters
 
@@ -60,7 +60,7 @@ out or setting it to `false` will make sure you're not overwriting work.
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/repos/:user/:repo/ref/:ref" %>
+      :Location => "https://api.github.com/repos/:user/:repo/git/ref/:ref" %>
 <%= json :ref => "refs/heads/master", "type" => "commit", \
          "sha"=>"827efc6d56897b048c772eb4087f854f46256132" %>
 

@@ -30,7 +30,7 @@ authenticated.
 
 ### Input
 
-<%= json :title => "octocat@octomac", :key => "a public ssh key" %>
+<%= json :title => "octocat@octomac", :key => "ssh-rsa AAA..." %>
 
 ### Response
 
@@ -43,7 +43,7 @@ authenticated.
 
 ### Input
 
-<%= json :title => "octocat@octomac", :key => "a public ssh key" %>
+<%= json :title => "octocat@octomac", :key => "ssh-rsa AAA..." %>
 
 ### Response
 

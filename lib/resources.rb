@@ -100,7 +100,7 @@ module GitHub
       "url"   => "https://api.github.com/user/keys/1",
       "id"    => "1",
       "title" => "octocat@octomac",
-      "key"   => "<public ssh key>",
+      "key"   => "ssh-rsa AAA...",
     }
 
     REPO = {

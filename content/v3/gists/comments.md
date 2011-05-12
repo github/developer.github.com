@@ -26,6 +26,10 @@ title: Gist Comments API v3 | developer.github.com
 
     POST /gists/:gist_id/comments
 
+### Input
+
+<%= json :body => 'Just commenting for the sake of commenting' %>
+
 ### Response
 
 <%= headers 201,
@@ -35,6 +39,10 @@ title: Gist Comments API v3 | developer.github.com
 ## Edit
 
     PATCH /gists/comments/:id
+
+### Input
+
+<%= json :body => 'Just commenting for the sake of commenting' %>
 
 ### Response
 

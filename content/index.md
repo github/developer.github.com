@@ -25,3 +25,6 @@ sure to update your app in time.
   be used.
 * All URLs had a `.json` extension.  They don't anymore (but old
   requests work still).
+* Pagination info is returned in the Link header.  Stop using the X-Next
+  or X-Last headers.
+* JSON-P response has completely changed to a more consistent format.

@@ -42,6 +42,8 @@ module GitHub
             h = {}
             key.each { |k, v| h[k.to_s] = v }
             h
+          when Array
+            key
           else Resources.const_get(key.to_s.upcase)
         end
 
@@ -57,30 +59,49 @@ module GitHub
     end
 
     USER = {
-      "url"          => "https://api.github.com/users/octocat",
-      "html_url"     => "https://github.com/octocat",
-      "type"         => "User",
       "login"        => "octocat",
-      "name"         => "monalisa octocat",
-      "company"      => "GitHub",
-      "email"        => "octocat@github.com",
-      "blog"         => "https://github.com/blog",
+      "id"           => 1,
       "gravatar_url" => "https://github.com/images/error/octocat_happy.gif",
-      "location"     => "San Francisco",
-      "created_at"   => "2008-01-14T04:33:35Z"
+      "url"          => "https://api.github.com/users/octocat"
     }
 
     FULL_USER = USER.merge({
-      "public_gists"        => 1,
-      "public_repos"        => 2,
-      "followers"           => 20,
-      "following"           => 0,
-      "collaborators"       => 8,
-      "private_gists"       => 81,
+      "name"         => "monalisa octocat",
+      "company"      => "GitHub",
+      "blog"         => "https://github.com/blog",
+      "location"     => "San Francisco",
+      "email"        => "octocat@github.com",
+      "hireable"     => false,
+      "bio"          => "There once was...",
+      "public_repos" => 2,
+      "public_gists" => 1,
+      "followers"    => 20,
+      "following"    => 0,
+      "html_url"     => "https://github.com/octocat",
+      "created_at"   => "2008-01-14T04:33:35Z",
+      "type"         => "User"
+    })
+
+    PRIVATE_USER = FULL_USER.merge({
       "total_private_repos" => 100,
       "owned_private_repos" => 100,
-      "disk_usage"          => 10000
+      "private_gists"       => 81,
+      "disk_usage"          => 10000,
+      "collaborators"       => 8,
+      "plan"                => {
+        "name"          => "Medium",
+        "space"         => 400,
+        "collaborators" => 10,
+        "private_repos" => 20
+      }
     })
+
+    PUBLIC_KEY = {
+      "url"   => "https://api.github.com/user/keys/1",
+      "id"    => "1",
+      "title" => "octocat@octomac",
+      "key"   => "<public ssh key>",
+    }
 
     REPO = {
       "url"              => "https://api.github.com/repos/octocat/Hello-World",
@@ -109,6 +130,42 @@ module GitHub
       "has_issues"       => true,
       "has_wiki"         => true,
       "has_downloads"    => true
+    })
+
+    ORG = {
+      "id"           => 1,
+      "url"          => "https://apit.github.com/orgs/1",
+      "gravatar_url" => "https://github.com/images/error/octocat_happy.gif"
+    }
+
+    FULL_ORG = ORG.merge({
+      "name"         => "github",
+      "company"      => "GitHub",
+      "blog"         => "https://github.com/blog",
+      "location"     => "San Francisco",
+      "email"        => "octocat@github.com",
+      "public_repos" => 2,
+      "public_gists" => 1,
+      "followers"    => 20,
+      "following"    => 0,
+      "html_url"     => "https://github.com/octocat",
+      "created_at"   => "2008-01-14T04:33:35Z",
+      "type"         => "Organization"
+    })
+
+    PRIVATE_ORG = FULL_ORG.merge({
+      "total_private_repos" => 100,
+      "owned_private_repos" => 100,
+      "private_gists"       => 81,
+      "disk_usage"          => 10000,
+      "collaborators"       => 8,
+      "billing_email"       => "support@github.com",
+      "plan"                => {
+        "name"          => "Medium",
+        "space"         => 400,
+        "collaborators" => 10,
+        "private_repos" => 20
+      }
     })
 
     MILESTONE = {
@@ -184,6 +241,16 @@ module GitHub
       ]
     }
 
+    GIST_FORKS = {
+      "forks" => [
+        {
+          "user" => USER,
+          "url" => "https://api.github.com/gists/5",
+          "created_at" => "2011-04-14T16:00:49Z"
+        }
+      ]
+    }
+
     GIST_FILES = {
       "files" => {
         "ring.erl"   => {
@@ -207,7 +274,7 @@ module GitHub
       "created_at"   => "2010-04-14T02:15:15Z"
     }.update(GIST_FILES)
 
-    FULL_GIST = GIST.merge(GIST_HISTORY)
+    FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
     FULL_GIST['files']['ring.erl']['content'] = 'contents of gist'
 
     GIST_COMMENT = {

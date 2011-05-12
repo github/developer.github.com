@@ -47,7 +47,8 @@ direction
   :title     => "String",
   :body      => "String",
   :assignee  => "String User login",
-  :milestone => "Integer Milestone number"
+  :milestone => "Integer Milestone number",
+  :labels    => %w(Label1 Label2)
 %>
 
 ### Response
@@ -73,21 +74,18 @@ direction
 ### Input
 
 <%= json \
-  :title => "String",
-  :body => "String",
-  :assignee => "String",
-  :milestone => "Integer"
+  :title     => "String",
+  :body      => "String",
+  :assignee  => "String User login",
+  :milestone => "Integer Milestone number",
+  :state     => "open or closed",
+  :labels    => %w(Label1 Label2)
 %>
+
+Pass one or more Labels to _replace_ the set of Labels on this Issue.
+Send an empty array (`[]`) to clear all Labels from the Issue.
 
 ### Response
 
 <%= headers 200 %>
 <%= json :issue %>
-
-## Delete an Issue
-
-    DELETE /repos/:user/:repo/issues/:id
-
-### Response
-
-<%= headers 204 %>

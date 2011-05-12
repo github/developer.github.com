@@ -4,9 +4,13 @@ title: Git DB Commits API v3 | developer.github.com
 
 # Commits API
 
+## List commits
+
+    GET /repos/:user/:repo/git/commits?start=:ref&max=:max
+
 ## Get a Commit
 
-    GET /git/:user/:repo/commit/:sha
+    GET /repos/:user/:repo/git/commits/:sha
 
 ### Response
 
@@ -15,7 +19,7 @@ title: Git DB Commits API v3 | developer.github.com
 
 ## Create a Commit
 
-    POST /git/:user/:repo/commit
+    POST /repos/:user/:repo/git/commits
 
 ### Parameters
 

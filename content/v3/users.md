@@ -47,6 +47,8 @@ user (and you must pass authentication information with your request).
 <%= headers 200 %>
 <%= json :private_user %>
 
+
+<!--
 ## List a user's repositories
 
 Calling this for the authenticated user returns public and private
@@ -74,4 +76,4 @@ user are returned.
 
 <%= headers 200, :pagination => true %>
 <%= json(:org) { |h| [h] } %>
-
+-->

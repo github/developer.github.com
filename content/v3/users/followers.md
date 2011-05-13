@@ -26,12 +26,11 @@ title: User Followers API v3 | developer.github.com
 
 ## Follow a user
 
-    POST /user/following/:user
+    PUT /user/following/:user
 
 ### Response
 
-<%= headers 201 %>
-<%= json({}) %>
+<%= headers 204 %>
 
 ## Unfollow a user
 

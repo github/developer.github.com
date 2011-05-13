@@ -28,3 +28,4 @@ sure to update your app in time.
 * Pagination info is returned in the Link header.  Stop using the X-Next
   or X-Last headers.
 * JSON-P response has completely changed to a more consistent format.
+* Starring gists now uses PUT verb (instead of POST) and returns 204.

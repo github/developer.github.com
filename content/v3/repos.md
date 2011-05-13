@@ -100,7 +100,7 @@ Get if authenticated user is watching a repo
 
 Watch a repo
 
-		POST /user/watching/:repo
+		PUT /user/watching/:repo
 
 Stop wathing a repo
 

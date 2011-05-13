@@ -18,7 +18,7 @@ title: Repo Deploy Keys API v3 | developer.github.com
 
 ## Edit
 
-		POST /repos/:repo/keys/:key
+		PATCH /repos/:repo/keys/:key
 
 ## Delete
 

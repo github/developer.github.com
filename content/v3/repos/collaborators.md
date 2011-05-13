@@ -22,7 +22,7 @@ title: Repo Collaboratos API v3 | developer.github.com
 
 ## Add collaborator
 
-		POST /repos/:repo/collaborators/:user
+		PUT /repos/:repo/collaborators/:user
 
 ## Remove collaborator
 

@@ -5,7 +5,7 @@ title: Org Teams API v3 | developer.github.com
 # Org Teams API
 
 All actions against teams require an authenticated user who is a member
-of the `:org` being managed.
+of the owner's team in the `:org` being managed.
 
 ## List teams
 
@@ -17,23 +17,23 @@ of the `:org` being managed.
 
 ## Get team
 
-		GET /orgs/:org/teams/:team
+		GET /teams/:id
 
 ## Edit team
 
-		PATCH /orgs/:org/teams/:team
+		PATCH /teams/:id
 
 ## Delete team
 
-		DELETE /orgs/:org/teams/:team
+		DELETE /teams/:id
 
 ## List team members
 
-		GET /orgs/:org/teams/:team/members
+		GET /teams/:id/members
 
 ## Get team member
 
-		GET /orgs/:org/teams/:team/members/:user
+		GET /teams/:id/members/:user
 
 ### Reponse if user is a member
 
@@ -45,21 +45,21 @@ of the `:org` being managed.
 
 ## Add team member
 
-		POST /orgs/:org/teams/:team/members/:user
+		PUT /teams/:id/members/:user
 
 ## Remove team member
 
 This does not delete the user, it just remove them from the team.
 
-		DELETE /orgs/:org/teams/:team/members/:user
+		DELETE /teams/:id/members/:user
 
 ## List team repos
 
-		GET /orgs/:org/teams/:team/repos
+		GET /teams/:id/repos
 
 ## Get team repo
 
-		GET /orgs/:org/teams/:team/repos/:repo
+		GET /teams/:id/repos/:repo
 
 ### Reponse if repo is managed by this team
 
@@ -71,11 +71,11 @@ This does not delete the user, it just remove them from the team.
 
 ## Add team repo
 
-		POST /orgs/:org/teams/:team/repos/:repo
+		PUT /teams/:id/repos/:repo
 
 ## Remove team repo
 
 This does not delete the repo, it just removes it from the team.
 
-		DELETE/orgs/:org/teams/:team/repos/:repo
+		DELETE /teams/:id/repos/:repo
 

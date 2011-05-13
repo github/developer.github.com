@@ -27,7 +27,7 @@ members will be returned. Otherwise only public members are returned.
 
 ## Add a member
 
-		POST /orgs/:org/members/:user
+		PUT /orgs/:org/members/:user
 
 ## Remove a member
 

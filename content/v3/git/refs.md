@@ -64,3 +64,8 @@ out or setting it to `false` will make sure you're not overwriting work.
 <%= json :ref => "refs/heads/master", "type" => "commit", \
          "sha"=>"827efc6d56897b048c772eb4087f854f46256132" %>
 
+## Get the Reference History
+
+    GET /repos/:user/:repo/git/reflogs
+
+

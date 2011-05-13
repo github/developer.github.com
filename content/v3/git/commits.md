@@ -6,7 +6,42 @@ title: Git DB Commits API v3 | developer.github.com
 
 ## List commits
 
-    GET /repos/:user/:repo/git/commits?start=:ref&max=:max
+    GET /repos/:user/:repo/git/commits
+
+### Parameters
+
+start
+: _String_ of the reference or SHA to start at, or an _Array_ of them if
+you want multiple starting points. Defaults to the default branch on the
+server.
+
+not
+: _String_ of the reference or SHA to end at, or an _Array_ of them if
+you want multiple ending points
+
+after
+: _Timestamp_ to return commits only authored after the specified date
+
+before
+: _Timestamp_ to return commits only authored before the specified date
+
+grep
+: _String_ of regex to match against the commit messages
+
+author
+: _String_ of regex to match against the author names and email addresses
+
+max
+: _Integer_ of maximum number of results to return
+
+path
+: _String_ of path limiter - only return commits that modified the given
+path
+
+### Response
+
+<%= headers 200, :pagination => true %>
+<%= json :commits %>
 
 ## Get a Commit
 

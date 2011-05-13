@@ -335,6 +335,41 @@ module GitHub
       "parents"  => ["7d1b31e74ee336d15cbd21741bc88a537ed063a0"]
     }
 
+    COMMITS_REST = [
+      { "sha" => "7d1b31e74ee336d15cbd21741bc88a537ed063a0",
+        "author" => {
+          "name"  => "Scott Chacon",
+          "email" => "scott@github.com",
+          "date"  => "2008-07-08T16:13:30+12:00"
+        },
+        "committer" => {
+          "name"  => "Scott Chacon",
+          "email" => "scott@github.com",
+          "date"  => "2008-07-08T16:13:30+12:00"
+        },
+        "message"  => "my older commit message",
+        "tree"     => "392662aae29f314a428bfc6b619d97bd4ad4a727",
+        "parents"  => ["afc99de753646e2c438203430e97671971740d35"]
+      },
+      { "sha" => "afc99de753646e2c438203430e97671971740d35",
+        "author" => {
+          "name"  => "Scott Chacon",
+          "email" => "scott@github.com",
+          "date"  => "2008-07-07T16:13:30+12:00"
+        },
+        "committer" => {
+          "name"  => "Scott Chacon",
+          "email" => "scott@github.com",
+          "date"  => "2008-07-07T16:13:30+12:00"
+        },
+        "message"  => "my first commit message",
+        "tree"     => "8bcac778496eb77c1928aa9778f5112c6a822a19",
+        "parents"  => []
+      }
+    ]
+
+    COMMITS = [COMMIT] + COMMITS_REST
+
     TAG = {
       "sha" => "b8d04eddde9f53f3bc76dd048f3477062a27c91a",
       "tag" => "v1.0",

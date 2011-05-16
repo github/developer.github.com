@@ -80,9 +80,14 @@ be a member of `:org`.
 
 ## Create a fork
 
-This creates a fork for the authenicated user.
+Create a fork for the authenicated user.
 
     POST /repos/:repo/forks
+
+Create a fork in an organization. The authenticated user must be a
+member of the specified org.
+
+    POST /repos/:repo/forks?context=:org
 
 ## Watching * -> This should go into the user api
 

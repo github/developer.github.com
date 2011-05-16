@@ -56,4 +56,4 @@ title: Issue Comments API v3 | developer.github.com
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>

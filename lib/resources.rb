@@ -19,12 +19,15 @@ module GitHub
       }
 
       def headers(status, head = {})
+        css_class = 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
             when :pagination
               lines << "X-Next: https://api.github.com/resource?page=2"
               lines << "X-Last: https://api.github.com/resource?page=5"
+            when :no_response
+              css_class = "#{css_class} no-response"
             else lines << "#{key}: #{value}"
           end
         end
@@ -32,7 +35,7 @@ module GitHub
         lines << "X-RateLimit-Limit: 5000"
         lines << "X-RateLimit-Remaining: 4999"
 
-        %(<pre class="headers"><code>#{lines * "\n"}</code></pre>\n)
+        %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
       end
 
       def json(key)

@@ -105,7 +105,7 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>
 
 ## Check if a gist is starred
 
@@ -113,11 +113,11 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Response if gist is starred
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>
 
 ### Response if gist is not starred
 
-<%= headers 404 %>
+<%= headers 404, :no_response => true %>
 
 ## Fork a gist
 
@@ -135,5 +135,5 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>
 

@@ -60,7 +60,7 @@ title: Issue Labels API v3 | developer.github.com
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>
 
 ## List labels on the Issue
 
@@ -112,7 +112,7 @@ Sending an empty array (`[]`) will remove all Labels from the Issue.
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>
 
 ## Get Labels for every Issue in a Milestone
 

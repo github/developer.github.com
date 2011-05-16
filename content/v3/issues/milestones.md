@@ -75,4 +75,4 @@ direction
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>

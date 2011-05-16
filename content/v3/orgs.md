@@ -35,10 +35,4 @@ List all public organizations.
 
 		DELETE /orgs/:org
 
-## Create a repository
-
-Create a new repository in this organization.
-
-		POST /orgs/:org/repos
-
 † not sure if we want to do this or not.

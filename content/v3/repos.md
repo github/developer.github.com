@@ -35,12 +35,12 @@ reponse is identical to `GET /repos/public`.
 
 Create a new repository for the authenicated user.
 
-		POST /user/repos
+    POST /user/repos
 
 Create a new repository in this organization. The authenicated user must
 be a member of `:org`.
 
-		POST /users/:org/repos
+    POST /orgs/:org/repos
 
 ## Get
 
@@ -82,7 +82,7 @@ be a member of `:org`.
 
 This creates a fork for the authenicated user.
 
-		POST /repos/:repo/forks
+    POST /repos/:repo/forks
 
 ## Watching * -> This should go into the user api
 

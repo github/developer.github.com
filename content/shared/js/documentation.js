@@ -1,12 +1,15 @@
 // Init sidebar
 $(function() {
   var activeItem,
-      helpList = $('#js-help-sidebar .js-topic')
-
+      helpList = $('#js-help-sidebar .js-topic'),
+      firstOccurance = true
   $('#js-help-sidebar .js-guides').each(function(){
-    //if($(this).find('.disable').length == 0){
+    if($(this).find('.disable').length == 0 || firstOccurance == false){
       $(this).children().hide()
-    //}
+    } else {
+      activeItem = $(this).index()
+      firstOccurance = false
+    }
   })
 
   $('#js-help-sidebar .js-topic h3 a').click(function(){

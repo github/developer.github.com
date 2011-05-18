@@ -294,6 +294,7 @@ module GitHub
         { "path" => "file.rb",
           "mode" => "100644",
           "type" => "blob",
+          "size" => 30,
           "sha"  => "44b4fc6d56897b048c772eb4087f854f46256132"
         },
         { "path" => "subdir",
@@ -304,6 +305,7 @@ module GitHub
         { "path" => "exec_file",
           "mode" => "100755",
           "type" => "blob",
+          "size" => 75,
           "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057"
         }
       ]
@@ -314,6 +316,7 @@ module GitHub
           "path" => "subdir/file.txt",
           "mode" => "100644",
           "type" => "blob",
+          "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
       }
     }

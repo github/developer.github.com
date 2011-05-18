@@ -55,7 +55,7 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ## Create a new gist
 
-    POST /users/:user/gists
+    POST /gists
 
 ### Input
 

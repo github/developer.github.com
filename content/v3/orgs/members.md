@@ -13,6 +13,11 @@ members will be returned. Otherwise only public members are returned.
 
     GET /orgs/:org/members
 
+### Response
+
+<%= headers 200 %>
+<%= json(:user) { |h| [h] } %>
+
 ## Get member
 
     GET /orgs/:org/members/:user
@@ -27,7 +32,8 @@ members will be returned. Otherwise only public members are returned.
 
 ## Add a member
 
-To add someone as a member to an org, you must add them to a team.
+To add someone as a member to an org, you must add them to a
+[team](/v3/orgs/teams/#add-team-member).
 
 ## Remove a member
 
@@ -36,12 +42,21 @@ they will no longer have any access to the organization's repositories.
 
     DELETE /orgs/:org/members/:user
 
+### Response
+
+<%= headers 204 %>
+
 ## List public members
 
 Members of an organization can choose to have their membership
 publicized or not.
 
     GET /orgs/:org/public_members
+
+### Response
+
+<%= headers 200 %>
+<%= json(:user) { |h| [h] } %>
 
 ## Get if a user is a public member
 
@@ -58,6 +73,10 @@ publicized or not.
 ## Publicize a user's membership
 
     PUT /orgs/:org/public_members/:user
+
+### Response
+
+<%= headers 204 %>
 
 ## Conceal a user's membership
 

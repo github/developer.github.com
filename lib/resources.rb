@@ -19,16 +19,17 @@ module GitHub
       }
 
       def headers(status, head = {})
-        css_class = 'headers'
         lines = ["Status: #{STATUSES[status]}"]
+        css_class = (status == 204 || status == 404) ? 'headers no-response' : 'headers'
         head.each do |key, value|
           case key
             when :pagination
               lines << "X-Next: https://api.github.com/resource?page=2"
               lines << "X-Last: https://api.github.com/resource?page=5"
             when :no_response
-              css_class = "#{css_class} no-response"
-            else lines << "#{key}: #{value}"
+              css_class = "headers no-response"
+            else
+              lines << "#{key}: #{value}"
           end
         end
 
@@ -136,7 +137,7 @@ module GitHub
 
     ORG = {
       "id"           => 1,
-      "url"          => "https://apit.github.com/orgs/1",
+      "url"          => "https://api.github.com/orgs/1",
       "gravatar_url" => "https://github.com/images/error/octocat_happy.gif"
     }
 
@@ -169,6 +170,11 @@ module GitHub
         "private_repos" => 20
       }
     })
+
+    TEAM = {
+      "id" => 1,
+      "url" => "https://api.github.com/teams/1"
+    }
 
     MILESTONE = {
       "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1",

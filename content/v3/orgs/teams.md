@@ -4,36 +4,103 @@ title: Org Teams API v3 | developer.github.com
 
 # Org Teams API
 
-All actions against teams require an authenticated user who is a member
-of the owner's team in the `:org` being managed.
+All actions against teams require at a minimum an authenticated user who
+is a member of the owner's team in the `:org` being managed. Api calls
+that require explicit permissions are noted.
 
 ## List teams
 
-		GET /orgs/:org/teams
+    GET /orgs/:org/teams
 
-## Create team
+### Response
 
-		POST /orgs/:org/teams
+<%= headers 200 %>
+<%= json(:team) { |h| [h] } %>
 
 ## Get team
 
-		GET /teams/:id
+    GET /teams/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json(:team) %>
+
+## Create team
+
+In order to create a team, the authenticated user must be an owner of
+`:org`.
+
+    POST /orgs/:org/teams
+
+### Input
+
+<%= json \
+	:name => 'new team',
+	:permission => 'push',
+	:repo_names => ['github/dotfiles'] %>
+
+Valid permissions:
+
+* **pull** - team members can pull, but not push or administor this
+	repositories.
+* **push** - team members can pull and push, but not administor this
+	repositores.
+* **admin** - team members can pull, push and administor these
+	repositories.
+
+### Response
+
+<%= headers 201 %>
+<%= json(:team) %>
 
 ## Edit team
 
-		PATCH /teams/:id
+In order to edit a team, the authenticated user must be an owner of
+the org that the team is associated with.
+
+    PATCH /teams/:id
+
+### Input
+
+<%= json \
+	:name => 'new team name',
+	:permission => 'push' %>
+
+### Response
+
+<%= headers 201 %>
+<%= json(:team) %>
 
 ## Delete team
 
-		DELETE /teams/:id
+In order to delete a team, the authenticated user must be an owner of
+the org that the team is associated with.
+
+    DELETE /teams/:id
+
+### Response
+
+<%= headers 204 %>
 
 ## List team members
 
-		GET /teams/:id/members
+In order to list members in a team, the authenticated user must be a
+member of the team.
+
+    GET /teams/:id/members
+
+### Response
+
+<%= headers 200 %>
+<%= json(:user) { |h| [h] } %>
 
 ## Get team member
 
-		GET /teams/:id/members/:user
+In order to get if a user is a member of a team, the authenticated user
+must be a member of the team.
+
+    GET /teams/:id/members/:user
 
 ### Reponse if user is a member
 
@@ -45,21 +112,46 @@ of the owner's team in the `:org` being managed.
 
 ## Add team member
 
-		PUT /teams/:id/members/:user
+In order to add a user to a team, the authenticated user must have
+'admin' permissions to the team or be an owner of the org that the team
+is associated with.
+
+    PUT /teams/:id/members/:user
+
+### Reponse
+
+<%= headers 204 %>
 
 ## Remove team member
 
-This does not delete the user, it just remove them from the team.
+In order to remove a user from a team, the authenticated user must have
+'admin' permissions to the team or be an owner of the org that the team
+is associated with.
+NOTE: This does not delete the user, it just remove them from the team.
 
-		DELETE /teams/:id/members/:user
+    DELETE /teams/:id/members/:user
+
+### Reponse
+
+<%= headers 204 %>
 
 ## List team repos
 
-		GET /teams/:id/repos
+    GET /teams/:id/repos
+
+### Response
+
+<%= headers 200 %>
+<%= json(:repo) { |h| [h] } %>
 
 ## Get team repo
 
-		GET /teams/:id/repos/:repo
+    GET /teams/:id/repos/:repo
+
+### Response
+
+<%= headers 200 %>
+<%= json(:repo) %>
 
 ### Reponse if repo is managed by this team
 
@@ -71,11 +163,24 @@ This does not delete the user, it just remove them from the team.
 
 ## Add team repo
 
-		PUT /teams/:id/repos/:repo
+In order to add a repo to a team, the authenticated user must be an
+owner of the org that the team is associated with.
+
+    PUT /teams/:id/repos/:repo
+
+### Reponse
+
+<%= headers 204 %>
 
 ## Remove team repo
 
-This does not delete the repo, it just removes it from the team.
+In order to add a repo to a team, the authenticated user must be an
+owner of the org that the team is associated with.
+NOTE: This does not delete the repo, it just removes it from the team.
 
-		DELETE /teams/:id/repos/:repo
+    DELETE /teams/:id/repos/:repo
+
+### Reponse
+
+<%= headers 204 %>
 

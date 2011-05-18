@@ -8,31 +8,48 @@ title: Orgs API v3 | developer.github.com
 
 List all public organizations for a user.
 
-		GET /users/:user/orgs
+    GET /users/:user/orgs
 
 List public and private organizations for the authenticated user.
-		
-		GET /user/orgs	
+
+    GET /user/orgs	
 
 List all public and private organization if called by an authenicated
 user. Otherwise return all public organizations.
 
-		GET /orgs
+    GET /orgs
 
 List all public organizations.
 
-		GET /orgs/public
+    GET /orgs/public
+
+### Response
+
+<%= headers 200, :pagination => true %>
+<%= json(:org) { |h| [h] } %>
 
 ## Get
 
-		GET /orgs/:org
+    GET /orgs/:org
+
+### Response
+
+<%= headers 200 %>
+<%= json(:org) %>
 
 ## Edit
 
-		PATCH /orgs/:org
+    PATCH /orgs/:org
+
+### Response
+
+<%= headers 200 %>
+<%= json(:org) %>
 
 ## Delete †
 
-		DELETE /orgs/:org
+    DELETE /orgs/:org
+
+<%= headers 204 %>
 
 † not sure if we want to do this or not.

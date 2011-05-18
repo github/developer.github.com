@@ -14,7 +14,17 @@ compile '/css/*/' do
   # don’t filter or layout
 end
 
+compile '/shared/css/*/' do
+  # don’t filter or layout
+end
+
 compile '/images/*' do
+end
+
+compile '/shared/images/*' do
+end
+
+compile '/shared/js/*' do
 end
 
 compile '*' do
@@ -29,8 +39,20 @@ route '/css/*/' do
   item.identifier.chomp('/') << '.css'
 end
 
+route '/shared/css/*/' do
+  item.identifier.chomp('/') << '.css'
+end
+
 route '/images/*/' do
   item.identifier.chomp('/') << '.png'
+end
+
+route '/shared/images/*/' do
+  item.identifier.chomp('/') << '.png'
+end
+
+route '/shared/js/*/' do
+  item.identifier.chomp('/') << '.js'
 end
 
 route '*' do

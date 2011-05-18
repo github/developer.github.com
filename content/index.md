@@ -18,8 +18,10 @@ have any problems or requests.
 ## Breaking BETA Changes
 
 We're making some small tweaks to the API during the BETA phase.  Old
-behavior is still supported, but due to be removed by June 1.  Please be
-sure to update your app in time.
+behavior will be supported until the dates listed below. Please be sure
+to update your app in time.
+
+### Behavior due to be remove by June 1st:
 
 * Update requests used to accept the PUT verb.  Now POST or PATCH should
   be used.
@@ -28,3 +30,10 @@ sure to update your app in time.
 * Pagination info is returned in the Link header.  Stop using the X-Next
   or X-Last headers.
 * JSON-P response has completely changed to a more consistent format.
+* Starring gists now uses PUT verb (instead of POST) and returns 204.
+
+### Behavior due to be removed by June 15th:
+
+* gravatar_url is being deprecated in favor of avatar_url for all
+  responses that include users or orgs. A default size is no longer
+  included in the url.

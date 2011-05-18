@@ -26,12 +26,11 @@ title: User Followers API v3 | developer.github.com
 
 ## Follow a user
 
-    POST /user/following/:user
+    PUT /user/following/:user
 
 ### Response
 
-<%= headers 201 %>
-<%= json({}) %>
+<%= headers 204, :no_response => true %>
 
 ## Unfollow a user
 
@@ -39,7 +38,7 @@ title: User Followers API v3 | developer.github.com
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>
 
 ## Check if you are following a user
 
@@ -47,9 +46,9 @@ title: User Followers API v3 | developer.github.com
 
 ### Response if you are following this user
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>
 
 ### Response if you are not following this user
 
-<%= headers 404 %>
+<%= headers 404, :no_response => true %>
 

@@ -43,5 +43,5 @@ You can include a single email address or an array of addresses:
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 204, :no_response => true %>
 

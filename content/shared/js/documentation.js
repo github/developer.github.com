@@ -3,6 +3,7 @@ $(function() {
   var activeItem,
       helpList = $('#js-help-sidebar .js-topic'),
       firstOccurance = true
+
   $('#js-help-sidebar .js-guides').each(function(){
     if($(this).find('.disable').length == 0 || firstOccurance == false){
       $(this).children().hide()
@@ -33,6 +34,7 @@ $(function() {
   $('.help-search .search-box').focus(function(){
     $(this).css('background-position','0px -25px')
   })
+
   $('.help-search .search-box').focusout(function(){
     if($(this).val() == ''){
       $(this).css('background-position','0px 0px')

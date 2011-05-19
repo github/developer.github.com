@@ -7,7 +7,7 @@ title: User Emails API v3 | developer.github.com
 Mangement of email addresses via the API requires that you are
 authenticated.
 
-## Get email addresses for a user
+## List email addresses for a user
 
     GET /user/emails
 

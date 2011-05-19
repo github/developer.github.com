@@ -4,7 +4,7 @@ title: Issue Milestones API v3 | developer.github.com
 
 # Milestones API
 
-## List Milestones for an Issue
+## List milestones for an issue
 
     GET /repos/:user/:repo/milestones
 
@@ -22,7 +22,16 @@ direction
 <%= headers 200, :pagination => true %>
 <%= json(:milestone) { |h| [h] } %>
 
-## Create a Milestone
+## Get a single milestone
+
+    GET /repos/:user/:repo/milestones/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json :milestone %>
+
+## Create a milestone
 
     POST /repos/:user/:repo/milestones
 
@@ -42,16 +51,7 @@ direction
 "https://api.github.com/repos/user/repo/milestones/1" %>
 <%= json :milestone %>
 
-## Get a single Milestone
-
-    GET /repos/:user/:repo/milestones/:id
-
-### Response
-
-<%= headers 200 %>
-<%= json :milestone %>
-
-## Update a Milestone
+## Update a milestone
 
     PATCH /repos/:user/:repo/milestones/:id
 
@@ -69,10 +69,11 @@ direction
 <%= headers 200 %>
 <%= json :milestone %>
 
-## Delete a Milestone
+## Delete a milestone
 
     DELETE /repos/:user/:repo/milestones/:id
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
+

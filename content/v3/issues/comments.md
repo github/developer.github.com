@@ -4,7 +4,7 @@ title: Issue Comments API v3 | developer.github.com
 
 # Issue Comments API
 
-## Get Comments for an Issue
+## List comments on an issue
 
     GET /repos/:user/:repo/issues/:id/comments
 
@@ -13,7 +13,16 @@ title: Issue Comments API v3 | developer.github.com
 <%= headers 200, :pagination => true %>
 <%= json(:issue_comment) { |h| [h] } %>
 
-## Create a Comment for an Issue
+## Get a single comment
+
+    GET /repos/:user/:repo/issues/comments/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json :issue_comment %>
+
+## Create a comment
 
     POST /repos/:user/:repo/issues/:id/comments
 
@@ -25,19 +34,10 @@ title: Issue Comments API v3 | developer.github.com
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/user/repo/issues/comments/:id" %>
+"https://api.github.com/repos/user/repo/issues/comments/1" %>
 <%= json :issue_comment %>
 
-## View a single Issue Comment
-
-    GET /repos/:user/:repo/issues/comments/:id
-
-### Response
-
-<%= headers 200 %>
-<%= json :issue_comment %>
-
-## Edit an Issue Comment
+## Edit a comment
 
     PATCH /repos/:user/:repo/issues/comments/:id
 
@@ -50,10 +50,10 @@ title: Issue Comments API v3 | developer.github.com
 <%= headers 200 %>
 <%= json :issue_comment %>
 
-## Delete an Issue Comment
+## Delete a comment
 
     DELETE /repos/:user/:repo/issues/comments/:id
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>

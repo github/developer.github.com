@@ -46,7 +46,7 @@ mentioned
 assigned
 : The issue was assigned to the actor.
 
-## Get Events for an Issue
+## List events for an issue
 
     GET /repos/:user/:repo/issues/:issue_id/events
 
@@ -55,7 +55,7 @@ assigned
 <%= headers 200, :pagination => true %>
 <%= json(:issue_event) { |h| [h] } %>
 
-## Get Events for a Repository
+## List events for a repository
 
     GET /repos/:user/:repo/issues/events
 
@@ -64,7 +64,7 @@ assigned
 <%= headers 200, :pagination => true %>
 <%= json(:issue_event) { |h| [h] } %>
 
-## Get a single Issue Event
+## Get a single event
 
     GET /repos/:user/:repo/issues/events/:id
 

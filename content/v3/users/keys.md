@@ -3,10 +3,11 @@ title: User Public Keys API v3 | developer.github.com
 ---
 
 # User Public Keys API
+
 Management of public keys via the API requires that you are
 authenticated.
 
-## List public keys
+## List public keys for a user
 
     GET /user/keys
 
@@ -15,7 +16,7 @@ authenticated.
 <%= headers 200 %>
 <%= json(:public_key) { |h| [h] } %>
 
-## Get a public key
+## Get a single public key
 
     GET /user/keys/:id
 
@@ -34,7 +35,7 @@ authenticated.
 
 ### Response
 
-<%= headers 201 %>
+<%= headers 201, :Location => "https://api.github.com/user/keys/1" %>
 <%= json :public_key %>
 
 ## Update a public key
@@ -56,5 +57,5 @@ authenticated.
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 

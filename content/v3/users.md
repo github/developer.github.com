@@ -3,12 +3,14 @@ title: Users API v3 | developer.github.com
 ---
 
 # Users API
-Many of the resources on the users API provide a shortcut for getting
-information about the currently authenticated user. If a request URL does not
-include a `:user` parameter than the response will be for the logged in
-user (and you must pass authentication information with your request).
 
-## Get a user
+Many of the resources on the users API provide a shortcut for getting
+information about the currently authenticated user. If a request URL
+does not include a `:user` parameter than the response will be for the
+logged in user (and you must pass [authentication
+information](/v3/#authentication) with your request).
+
+## Get a single user
 
     GET /users/:user
 
@@ -17,7 +19,7 @@ user (and you must pass authentication information with your request).
 <%= headers 200 %>
 <%= json :full_user %>
 
-## Get the authenicated user
+## Get the authenticated user
 
     GET /user
 

@@ -4,9 +4,14 @@ title: User Followers API v3 | developer.github.com
 
 # User Followers API
 
-## List a user's followers
+## List followers of a user
+
+List a user's followers:
 
     GET /users/:user/followers
+
+List the authenticated user's followers:
+
     GET /user/followers
 
 ### Response
@@ -14,9 +19,14 @@ title: User Followers API v3 | developer.github.com
 <%= headers 200, :pagination => true %>
 <%= json(:user) { |h| [h] } %>
 
-## List who a user is following
+## List users following another user
+
+List who a user is following:
 
     GET /users/:user/following
+
+List who the authenicated user is following:
+
     GET /user/following
 
 ### Response
@@ -30,7 +40,7 @@ title: User Followers API v3 | developer.github.com
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 
 ## Unfollow a user
 
@@ -38,7 +48,7 @@ title: User Followers API v3 | developer.github.com
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 
 ## Check if you are following a user
 
@@ -46,9 +56,9 @@ title: User Followers API v3 | developer.github.com
 
 ### Response if you are following this user
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 
 ### Response if you are not following this user
 
-<%= headers 404, :no_response => true %>
+<%= headers 404 %>
 

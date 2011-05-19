@@ -1,4 +1,5 @@
 require 'pp'
+require 'yajl/json_gem'
 require 'stringio'
 
 module GitHub
@@ -19,15 +20,13 @@ module GitHub
       }
 
       def headers(status, head = {})
-        css_class = 'headers'
+        css_class = (status == 204 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
             when :pagination
               lines << "X-Next: https://api.github.com/resource?page=2"
               lines << "X-Last: https://api.github.com/resource?page=5"
-            when :no_response
-              css_class = "#{css_class} no-response"
             else lines << "#{key}: #{value}"
           end
         end
@@ -51,12 +50,8 @@ module GitHub
 
         hash = yield hash if block_given?
 
-        io   = StringIO.new
-        pp   = PP.new(io, 79)
-        pp.guard_inspect_key { pp.pp(hash) }
-        pp.flush
         %(<pre class="highlight"><code class="language-javascript">) +
-          io.string + "</code></pre>"
+          JSON.pretty_generate(hash) + "</code></pre>"
       end
     end
 

@@ -8,33 +8,34 @@
   <title>Issue Comments API v3 | developer.github.com</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
-  <link href="/css/styles.css" rel="stylesheet" type="text/css" />
-  <link href="/css/pygments.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
 </head>
 <body>
+  <div id="not-footer">
 
-<div id="header-wrapper">
-  <div class="container_12" id="header">
-    <div class="grid_12">
-      <div class="logo">
-        <a href="/"><img src="/images/logo.png" /></a>
-      </div>
-      <ul class="nav">
-        <li><a href="/v3/">API v3</a></li>
-        <li><a href="http://develop.github.com">API v2</a></li>
-        <li><a
-          href="http://support.github.com/discussions/api">Support</a></li>
-      </ul>
-    </div><!-- .grid_12 -->
-  </div><!-- #header -->
-</div><!-- #header-wrapper -->
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="/"><img src="/images/logo.png" /></a>
+          <ul class="nav">
+            <li><a href="/v3/">API v3</a></li>
+            <li><a href="http://develop.github.com">API v2</a></li>
+            <li><a
+              href="http://support.github.com/discussions/api">Support</a></li>
+          </ul>
+        </div>
+      </div><!-- #header -->
+    </div><!-- #header-wrapper -->
 
-<div class="container_12" id="wrapper">
-  <div class="grid_9 suffix_1" id="content">
-<h1 id="issue-comments-api">Issue Comments API</h1>
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="issue-comments-api">Issue Comments API</h1>
 
-<h2 id="get-comments-for-an-issue">Get Comments for an Issue</h2>
+<h2 id="list-comments-on-an-issue">List comments on an issue</h2>
 
 <pre><code>GET /repos/:user/:repo/issues/:id/comments
 </code></pre>
@@ -47,96 +48,90 @@ X-Last: https://api.github.com/resource?page=5
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">=&gt;</span><span class="s2">"Me too"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">=&gt;</span>
-   <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
-    <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
-    <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-    <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">}]</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/comments/1"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Me too"</span><span class="p">,</span>
+    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 
-<h2 id="create-a-comment-for-an-issue">Create a Comment for an Issue</h2>
+<h2 id="get-a-single-comment">Get a single comment</h2>
+
+<pre><code>GET /repos/:user/:repo/issues/comments/:id
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/comments/1"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Me too"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">},</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="create-a-comment">Create a comment</h2>
 
 <pre><code>POST /repos/:user/:repo/issues/:id/comments
 </code></pre>
 
 <h3 id="input">Input</h3>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"body"</span><span class="o">=&gt;</span><span class="s2">"String"</span><span class="p">}</span>
-</code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/repos/user/repo/issues/comments/:id
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/comments/1"</span><span class="p">,</span>
- <span class="s2">"body"</span><span class="o">=&gt;</span><span class="s2">"Me too"</span><span class="p">,</span>
- <span class="s2">"user"</span><span class="o">=&gt;</span>
-  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-   <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-   <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
-   <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
-   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
-   <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
-   <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
-   <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-   <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-   <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
-   <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
- <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
- <span class="s2">"updated_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">}</span>
-</code></pre>
-
-<h2 id="view-a-single-issue-comment">View a single Issue Comment</h2>
-
-<pre><code>GET /repos/:user/:repo/issues/comments/:id
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"String"</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="response-2">Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/repos/user/repo/issues/comments/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/comments/1"</span><span class="p">,</span>
- <span class="s2">"body"</span><span class="o">=&gt;</span><span class="s2">"Me too"</span><span class="p">,</span>
- <span class="s2">"user"</span><span class="o">=&gt;</span>
-  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-   <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-   <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
-   <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
-   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
-   <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
-   <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
-   <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-   <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-   <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
-   <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
- <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
- <span class="s2">"updated_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">}</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/comments/1"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Me too"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">},</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
+<span class="p">}</span>
 </code></pre>
 
-<h2 id="edit-an-issue-comment">Edit an Issue Comment</h2>
+<h2 id="edit-a-comment">Edit a comment</h2>
 
 <pre><code>PATCH /repos/:user/:repo/issues/comments/:id
 </code></pre>
 
 <h3 id="input-1">Input</h3>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"body"</span><span class="o">=&gt;</span><span class="s2">"String"</span><span class="p">}</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"String"</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -145,63 +140,76 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/comments/1"</span><span class="p">,</span>
- <span class="s2">"body"</span><span class="o">=&gt;</span><span class="s2">"Me too"</span><span class="p">,</span>
- <span class="s2">"user"</span><span class="o">=&gt;</span>
-  <span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-   <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-   <span class="s2">"type"</span><span class="o">=&gt;</span><span class="s2">"User"</span><span class="p">,</span>
-   <span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
-   <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"monalisa octocat"</span><span class="p">,</span>
-   <span class="s2">"company"</span><span class="o">=&gt;</span><span class="s2">"GitHub"</span><span class="p">,</span>
-   <span class="s2">"email"</span><span class="o">=&gt;</span><span class="s2">"octocat@github.com"</span><span class="p">,</span>
-   <span class="s2">"blog"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-   <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-   <span class="s2">"location"</span><span class="o">=&gt;</span><span class="s2">"San Francisco"</span><span class="p">,</span>
-   <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">},</span>
- <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
- <span class="s2">"updated_at"</span><span class="o">=&gt;</span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">}</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/comments/1"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Me too"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">},</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
+<span class="p">}</span>
 </code></pre>
 
-<h2 id="delete-an-issue-comment">Delete an Issue Comment</h2>
+<h2 id="delete-a-comment">Delete a comment</h2>
 
 <pre><code>DELETE /repos/:user/:repo/issues/comments/:id
 </code></pre>
 
 <h3 id="response-4">Response</h3>
 
-<pre class=""><code>Status: 204 No Content
+<pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
-  </div>
+      </div>
 
-  <div class="grid_2" id="sidebar">
+    <div class="sidebar-shell">
+      <div class="sidebar-module">
+        <ul>
+          <li>
+            <h3><a href="/v3/">Summary</a></h3>
+            <span class="spacer"></span>
+          </li>
+          <li>
+            <h3><a href="/v3/issues/">Issues</a></h3>
+            <ul>
+              <li><a href="/v3/issues/comments/">Comments</a></li>
+              <li><a href="/v3/issues/events/">Events</a></li>
+              <li><a href="/v3/issues/labels/">Labels</a></li>
+              <li><a href="/v3/issues/milestones/">Milestones</a></li>
+            </ul>
+          </li>
+          <li>
+            <h3><a href="/v3/gists/">Gists</a></h3>
+            <ul>
+              <li><a href="/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li>
+            <h3><a href="/v3/users/">Users</a></h3>
+            <ul>
+              <li><a href="/v3/users/emails/">Emails</a></li>
+              <li><a href="/v3/users/followers/">Followers</a></li>
+              <li><a href="/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div> <!-- /sidebar-module -->
+      <div class="sidebar-module">
+        <p>This website is <a href="http://github.com/github/developer.github.com" target="_blank">open source</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+    </div><!-- /sidebar-shell -->
 
-<ul>
-  <li><a href="/v3/">Summary</a></li>
-  <li>
-    <a href="/v3/issues/">Issues</a>
-    <ul>
-      <li><a href="/v3/issues/comments/">Comments</a></li>
-      <li><a href="/v3/issues/labels/">Labels</a></li>
-      <li><a href="/v3/issues/milestones/">Milestones</a></li>
-      <li><a href="/v3/issues/events/">Events</a></li>
-    </ul>
-  </li>
-  <li>
-    <a href="/v3/gists/">Gists</a>
-    <ul>
-      <li><a href="/v3/gists/comments/">Comments</a></li>
-    </ul>
-  </li>
-</ul>
+    </div><!-- #wrapper -->
 
-  </div><!-- #sidebar -->
-</div><!-- #wrapper -->
+  </div><!-- /not-footer -->
 
 <div id="footer-wrapper">
   <div id="footer" class="container_12">
-    <div class="grid_6 suffix_1" id="bottom-nav">
+    <div id="bottom-nav">
       <ul class="nav">
         <li><a href="https://github.com/blog">Blog</a></li>
         <li><a href="http://support.github.com">Support</a></li>
@@ -217,7 +225,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         <li><a href="http://help.github.com/privacy/">Privacy Policy</a></li>
       </ul>
     </div>
-    <div class="grid_5" id="bottom-notice">
+    <div id="bottom-notice">
       <p class="rackspace">Powered by the <a href="http://rackspace.com" target="_blank">Dedicated Servers</a> and <a href="http://rackspacecloud.com" target="_blank">Cloud Computing</a> of Rackspace Hosting&reg;</p> 
     </div>
   </div><!-- #footer -->

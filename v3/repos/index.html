@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>developer.github.com</title>
+  <title>Repos API v3 | developer.github.com</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -33,46 +33,137 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="developergithubcom">developer.github.com</h1>
+    <h1 id="repos-api">Repos API</h1>
 
-<p>This describes the Resources that make up the official GitHub API v3.
-You can look at the <a href="http://develop.github.com/">API v2</a> to access
-resources that have not yet been added to v3.</p>
+<h2 id="list">List</h2>
 
-<p>For the new API v3, start browsing the implemented resources on the
-right »</p>
+<p>List all public and private repositories for the authenicated user.</p>
 
-<p>Visit <a href="http://support.github.com/discussions/api">GitHub API
-Support</a> if you
-have any problems or requests.</p>
+<pre><code>	GET /user/repos
+</code></pre>
 
-<h2 id="breaking-beta-changes">Breaking BETA Changes</h2>
+<p>List all public repositories for the specified user. Returns identical
+response as <code>GET /user/repos</code> if <code>:user</code> is the authenicated user.</p>
 
-<p>We’re making some small tweaks to the API during the BETA phase.  Old
-behavior will be supported until the dates listed below. Please be sure
-to update your app in time.</p>
+<pre><code>	GET /users/:user/repos
+</code></pre>
 
-<h3 id="behavior-due-to-be-remove-by-june-1st">Behavior due to be remove by June 1st:</h3>
+<p>List all public and private repositories in the organization if the
+authenticated user is a member of <code>:org</code>. Otherwise, list all public
+repositories in the organization.</p>
 
-<ul>
-<li>Update requests used to accept the PUT verb.  Now POST or PATCH should
-be used.</li>
-  <li>All URLs had a <code>.json</code> extension.  They don’t anymore (but old
-requests work still).</li>
-  <li>Pagination info is returned in the Link header.  Stop using the X-Next
-or X-Last headers.</li>
-  <li>JSON-P response has completely changed to a more consistent format.</li>
-  <li>Starring gists now uses PUT verb (instead of POST) and returns 204.</li>
-</ul><h3 id="behavior-due-to-be-removed-by-june-15th">Behavior due to be removed by June 15th:</h3>
+<pre><code>	GET /orgs/:org/repos
+</code></pre>
 
-<ul>
-<li>gravatar_url is being deprecated in favor of avatar_url for all
-responses that include users or orgs. A default size is no longer
-included in the url.</li>
-  <li>creating new gists (both anonymously and with an authenticated user)
-should use <code>POST /gists</code> from now on. <code>POST /users/:user/gists</code> will
-be deprecated.</li>
-</ul>
+<p>List all public repositories</p>
+
+<pre><code>	GET /repos/public
+</code></pre>
+
+<p>List all public and private repositories for the authenticated user.
+Return all public repositories if not authenicated in which case the
+reponse is identical to <code>GET /repos/public</code>.</p>
+
+<pre><code>	GET /repos
+</code></pre>
+
+<h2 id="create">Create</h2>
+
+<p>Create a new repository for the authenicated user.</p>
+
+<pre><code>POST /user/repos
+</code></pre>
+
+<p>Create a new repository in this organization. The authenicated user must
+be a member of <code>:org</code>.</p>
+
+<pre><code>POST /orgs/:org/repos
+</code></pre>
+
+<h2 id="get">Get</h2>
+
+<pre><code>	GET /repos/:repo
+</code></pre>
+
+<h2 id="edit">Edit</h2>
+
+<pre><code>	PATCH /repos/:repo
+</code></pre>
+
+<h2 id="delete">Delete</h2>
+
+<pre><code>	DELETE /repos/:repo
+</code></pre>
+
+<h2 id="list-watchers">List watchers</h2>
+
+<pre><code>	GET /repos/:repo/watchers
+</code></pre>
+
+<h2 id="list-contributors">List contributors</h2>
+
+<pre><code>	GET /repos/:repo/contributors
+</code></pre>
+
+<h2 id="list-languages">List languages</h2>
+
+<pre><code>	GET /repos/:repo/languages
+</code></pre>
+
+<h2 id="list-tags">List Tags</h2>
+
+<pre><code>	GET /repos/:repo/tags
+</code></pre>
+
+<h2 id="list-branches">List Branches</h2>
+
+<pre><code>	GET /repos/:repo/branches
+</code></pre>
+
+<h2 id="list-forks">List forks</h2>
+
+<pre><code>	GET /repos/:repo/forks
+</code></pre>
+
+<h2 id="create-a-fork">Create a fork</h2>
+
+<p>Create a fork for the authenicated user.</p>
+
+<pre><code>POST /repos/:repo/forks
+</code></pre>
+
+<p>Create a fork in an organization. The authenticated user must be a
+member of the specified org.</p>
+
+<pre><code>POST /repos/:repo/forks?context=:org
+</code></pre>
+
+<h2 id="watching----this-should-go-into-the-user-api">Watching * -&gt; This should go into the user api</h2>
+
+<p>List repos that a user is watching</p>
+
+<pre><code>	GET /users/:user/watching
+</code></pre>
+
+<p>List repos that the authenticated user is watching</p>
+
+<pre><code>	GET /user/watching
+</code></pre>
+
+<p>Get if authenticated user is watching a repo</p>
+
+<pre><code>	GET /user/watching/:repo
+</code></pre>
+
+<p>Watch a repo</p>
+
+<pre><code>	PUT /user/watching/:repo
+</code></pre>
+
+<p>Stop wathing a repo</p>
+
+<pre><code>	DELETE /user/watching/:repo
+</code></pre>
       </div>
 
     <div class="sidebar-shell">
@@ -85,16 +176,29 @@ be deprecated.</li>
           <li>
             <h3><a href="/v3/issues/">Issues</a></h3>
             <ul>
-              <li><a href="/v3/issues/comments/">Comments</a></li>
-              <li><a href="/v3/issues/events/">Events</a></li>
               <li><a href="/v3/issues/labels/">Labels</a></li>
               <li><a href="/v3/issues/milestones/">Milestones</a></li>
+              <li><a href="/v3/issues/events/">Events</a></li>
             </ul>
           </li>
           <li>
             <h3><a href="/v3/gists/">Gists</a></h3>
             <ul>
               <li><a href="/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li>
+            <h3><a href="/v3/orgs/">Orgs</a></h3>
+            <ul>
+              <li><a href="/v3/orgs/members/">Members</a></li>
+              <li><a href="/v3/orgs/teams/">Teams</a></li>
+            </ul>
+          </li>
+          <li>
+            <h3><a href="/v3/repos/">Repos</a></h3>
+            <ul>
+              <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/v3/repos/keys/">Keys</a></li>
             </ul>
           </li>
           <li>

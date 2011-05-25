@@ -4,72 +4,55 @@ title: Gists API v3 | developer.github.com
 
 # Gists API
 
-The Gist API v3 has been unified into the core GitHub API and can be
-accessed via the domain api.github.com. SSL is required so the base url
-for all API calls should be: `https://api.github.com`.
-Please see the [summary](/v3/) for a complete description of the API
-including information about data format and authentication.
+## List gists
 
-## List a user's gists
+List a user's gists:
 
     GET /users/:user/gists
+
+List the authenticated user's gists or if called anonymously, this will
+returns all public gists:
+
+    GET /gists
+
+List all public gists:
+
+    GET /gists/public
+
+List the authenticated user's starred gists:
+
+    GET /gists/starred
 
 ### Response
 
 <%= headers 200, :pagination => true %>
 <%= json(:gist) { |h| [h] } %>
 
-## List your gists
-This will return a list of your gists, or if called anonymously it will
-return a list of all public gists.
-
-    GET /gists
-
-### Response
-The response is identical to [listing a user's gists](#list-a-users-gists).
-
-## List public gists
-This will return a list of all public gists.
-
-    GET /gists/public
-
-### Response
-The response is identical to [listing a user's gists](#list-a-users-gists).
-
-## List your starred gists
-This will return a list of your starred gists.
-
-    GET /gists/starred
-
-### Response
-The response is identical to [listing a user's gists](#list-a-users-gists).
-
 ## Get a single gist
 
-   GET /gists/:id
+    GET /gists/:id
 
 ### Response
 
 <%= headers 200 %>
 <%= json :full_gist %>
 
-## Create a new gist
+## Create a gist
 
-    POST /users/:user/gists
+    POST /gists
 
 ### Input
 
 <%= json \
   :description => "the description for this gist",
   :public      => true,
-  :files => {
+  :files       => {
     "file1.txt" => {"content" => "String file contents"}
   } %>
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/users/:user/gists/1" %>
+<%= headers 201, :Location => "https://api.github.com/gists/1" %>
 <%= json :full_gist %>
 
 ## Edit a gist
@@ -78,10 +61,16 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Input
 
+All files from the previous version of the gist are carried over by
+default.
+
 <%= json \
   :description => "the description for this gist",
   :files => {
-    "file1.txt" => {"content" => "String file contents"}
+    "file1.txt"    => {"content"  => "updated file contents"},
+    "old_name.txt" => {"filename" => "new_name.txt", "content" => "modified contents"},
+    "new_file.txt" => {"content"  => "a new file"},
+    "delete_this_file.txt" => nil,
   } %>
 
 ### Response
@@ -95,9 +84,7 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/users/user/gists/1" %>
-<%= json({}) %>
+<%= headers 204 %>
 
 ## Unstar a gist
 
@@ -105,7 +92,7 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 
 ## Check if a gist is starred
 
@@ -113,11 +100,11 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Response if gist is starred
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 
 ### Response if gist is not starred
 
-<%= headers 404, :no_response => true %>
+<%= headers 404 %>
 
 ## Fork a gist
 
@@ -125,8 +112,7 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/users/user/gists/1" %>
+<%= headers 201, :Location => "https://api.github.com/gists/2" %>
 <%= json(:gist) %>
 
 ## Delete a gist
@@ -135,5 +121,5 @@ The response is identical to [listing a user's gists](#list-a-users-gists).
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 

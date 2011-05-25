@@ -4,7 +4,7 @@ title: Gist Comments API v3 | developer.github.com
 
 # Gist Comments API
 
-## List
+## List comments on a gist
 
     GET /gists/:gist_id/comments
 
@@ -13,7 +13,7 @@ title: Gist Comments API v3 | developer.github.com
 <%= headers 200 %>
 <%= json(:gist_comment) { |h| [h] } %>
 
-## Get
+## Get a single comment
 
     GET /gists/comments/:id
 
@@ -22,7 +22,7 @@ title: Gist Comments API v3 | developer.github.com
 <%= headers 200 %>
 <%= json :gist_comment %>
 
-## Create
+## Create a comment
 
     POST /gists/:gist_id/comments
 
@@ -36,7 +36,7 @@ title: Gist Comments API v3 | developer.github.com
       :Location => "https://api.github.com/gists/comments/1" %>
 <%= json :gist_comment %>
 
-## Edit
+## Edit a comment
 
     PATCH /gists/comments/:id
 
@@ -49,11 +49,11 @@ title: Gist Comments API v3 | developer.github.com
 <%= headers 200 %>
 <%= json :gist_comment %>
 
-## Delete
+## Delete a comment
 
     DELETE /gists/comments/:id
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 

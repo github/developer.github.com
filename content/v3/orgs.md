@@ -14,7 +14,7 @@ List public and private organizations for the authenticated user.
 
     GET /user/orgs	
 
-List all public and private organization if called by an authenicated
+List all public and private organizations if called by an authenicated
 user. Otherwise return all public organizations.
 
     GET /orgs

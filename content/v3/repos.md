@@ -6,12 +6,14 @@ title: Repos API v3 | developer.github.com
 
 ## List
 
-List all public and private repositories for the authenicated user.
+List all public and private repositories for the authenicated user
+including repositories that the user is a collaborator on.
 
 		GET /user/repos
 
-List all public repositories for the specified user. Returns identical
-response as `GET /user/repos` if `:user` is the authenicated user.
+List all public repositories for the specified user. Returns the same
+response as `GET /user/repos` if `:user` is the authenicated user except
+collaborated repositories are not included in the response.
 
 		GET /users/:user/repos
 
@@ -20,16 +22,6 @@ authenticated user is a member of `:org`. Otherwise, list all public
 repositories in the organization.
 
 		GET /orgs/:org/repos
-
-List all public repositories
-
-		GET /repos/public
-
-List all public and private repositories for the authenticated user.
-Return all public repositories if not authenicated in which case the
-reponse is identical to `GET /repos/public`.
-
-		GET /repos
 
 ## Create
 

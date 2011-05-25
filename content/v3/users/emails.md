@@ -7,7 +7,7 @@ title: User Emails API v3 | developer.github.com
 Mangement of email addresses via the API requires that you are
 authenticated.
 
-## Get email addresses
+## List email addresses for a user
 
     GET /user/emails
 
@@ -43,5 +43,5 @@ You can include a single email address or an array of addresses:
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 

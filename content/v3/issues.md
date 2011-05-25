@@ -4,7 +4,7 @@ title: Issues API v3 | developer.github.com
 
 # Issues API
 
-## List issues for this Repository
+## List issues for a repository
 
     GET /repos/:user/:repo/issues
 
@@ -37,7 +37,16 @@ direction
 <%= headers 200, :pagination => true %>
 <%= json(:issue) { |h| [h] } %>
 
-## Create an Issue
+## Get a single issue
+
+    GET /repos/:user/:repo/issues/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json :issue %>
+
+## Create an issue
 
     POST /repos/:user/:repo/issues
 
@@ -58,16 +67,7 @@ direction
 'https://api.github.com/repos/user/repo/issues/1' %>
 <%= json :issue %>
 
-## Get a single Issue
-
-    GET /repos/:user/:repo/issues/:id
-
-### Response
-
-<%= headers 200 %>
-<%= json :issue %>
-
-## Edit an Issue
+## Edit an issue
 
     PATCH /repos/:user/:repo/issues/:id
 
@@ -89,3 +89,4 @@ Send an empty array (`[]`) to clear all Labels from the Issue.
 
 <%= headers 200 %>
 <%= json :issue %>
+

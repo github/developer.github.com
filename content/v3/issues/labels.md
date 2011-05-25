@@ -4,7 +4,7 @@ title: Issue Labels API v3 | developer.github.com
 
 # Labels API
 
-## List all Labels for this Repository
+## List all labels for this repository
 
     GET /repos/:user/:repo/labels
 
@@ -13,7 +13,16 @@ title: Issue Labels API v3 | developer.github.com
 <%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
-## Create a Label
+## Get a single label
+
+    GET /repos/:user/:repo/labels/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json :label %>
+
+## Create a label
 
     POST /repos/:user/:repo/labels
 
@@ -30,16 +39,7 @@ title: Issue Labels API v3 | developer.github.com
 "https://api.github.com/repos/user/repo/labels/foo" %>
 <%= json :label %>
 
-## Get a single Label
-
-    GET /repos/:user/:repo/labels/:id
-
-### Response
-
-<%= headers 200 %>
-<%= json :label %>
-
-## Update a Label
+## Update a label
 
     PATCH /repos/:user/:repo/labels/:id
 
@@ -60,9 +60,9 @@ title: Issue Labels API v3 | developer.github.com
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 
-## List labels on the Issue
+## List labels on an issue
 
     GET /repos/:user/:repo/issues/:id/labels
 
@@ -71,7 +71,7 @@ title: Issue Labels API v3 | developer.github.com
 <%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
-## Add Labels to an Issue
+## Add labels to an issue
 
     POST /repos/:user/:repo/issues/:id/labels
 
@@ -83,7 +83,7 @@ title: Issue Labels API v3 | developer.github.com
 <%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
-## Remove a Label from an Issue
+## Remove a label from an issue
 
     DELETE /repos/:user/:repo/issues/:id/labels/:id
 
@@ -92,7 +92,7 @@ title: Issue Labels API v3 | developer.github.com
 <%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
-## Replace all Labels for an Issue
+## Replace all labels for an issue
 
     PUT /repos/:user/:repo/issues/:id/labels
 
@@ -106,15 +106,15 @@ Sending an empty array (`[]`) will remove all Labels from the Issue.
 <%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
 
-## Remove all Labels from an Issue
+## Remove all labels from an issue
 
     DELETE /repos/:user/:repo/issues/:id/labels
 
 ### Response
 
-<%= headers 204, :no_response => true %>
+<%= headers 204 %>
 
-## Get Labels for every Issue in a Milestone
+## Get labels for every issue in a milestone
 
     GET /repos/:user/:repo/milestones/:id/labels
 
@@ -122,3 +122,4 @@ Sending an empty array (`[]`) will remove all Labels from the Issue.
 
 <%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
+

@@ -33,6 +33,9 @@ a new tree out.
 
 ### Parameters
 
+base_tree
+: optional _String_ of the SHA1 of the tree you want to update with new data
+
 tree
 : _Array_ of _Hash_ objects (of `path`, `mode`, `type` and `sha`) specifying a tree structure
 
@@ -47,6 +50,9 @@ tree.type
 
 tree.sha
 : _String_ of SHA1 checksum ID of the object in the tree
+
+tree.content
+: _String_ of content you want this file to have - GitHub will write this blob out and use that SHA for this entry.  Use either this or `tree.sha`
 
 ### Input
 

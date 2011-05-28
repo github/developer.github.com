@@ -31,8 +31,14 @@ grep
 author
 : _String_ of regex to match against the author names and email addresses
 
+committer
+: _String_ of regex to match against the committer names and email addresses
+
 max
 : _Integer_ of maximum number of results to return
+
+skip
+: _Integer_ of number of results to skip (for paging)
 
 path
 : _String_ of path limiter - only return commits that modified the given
@@ -40,7 +46,7 @@ path
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200 %>
 <%= json :commits %>
 
 ## Get a Commit

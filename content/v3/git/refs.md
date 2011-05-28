@@ -15,7 +15,7 @@ The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For
 ### Response
 
 <%= headers 200 %>
-<%= json :ref => "refs/heads/master", "type" => "commit", \
+<%= json :ref => "refs/heads/sc/featureA", "type" => "commit", \
          :sha => "bca1e965df1235af5190b0e7760a456ef9602e9a" %>
 
 ## Get all References
@@ -38,9 +38,27 @@ For a full refs listing, you'll get something that looks like:
 <%= json :refs %>
 
 
+## Create a Reference
+
+    POST /repos/:user/:repo/git/refs
+
+### Paramaters
+
+ref
+: _String_ of the name of the fully qualified reference (ie: `refs/heads/master`).
+  If it doesn't start with 'refs' and have at least two slashes, it will be rejected.
+
+sha
+: _String_ of the SHA1 value to set this reference to
+
+### Input
+
+<%= json "ref"=>"refs/heads/master",\
+         "sha"=>"827efc6d56897b048c772eb4087f854f46256132" %>
+
 ## Update a Reference
 
-    PUT /repos/:user/:repo/git/refs/:ref
+    PATCH /repos/:user/:repo/git/refs/:ref
 
 ### Paramaters
 
@@ -54,18 +72,13 @@ out or setting it to `false` will make sure you're not overwriting work.
 
 ### Input
 
-<%= json "sha"=>"827efc6d56897b048c772eb4087f854f46256132", \
-         "force"=>false %>
+<%= json "sha"=>"827efc6d56897b048c772eb4087f854f46256132",\
+         "force"=>true %>
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/repos/:user/:repo/git/ref/:ref" %>
+<%= headers 200 %>
 <%= json :ref => "refs/heads/master", "type" => "commit", \
          "sha"=>"827efc6d56897b048c772eb4087f854f46256132" %>
-
-## Get the Reference History
-
-    GET /repos/:user/:repo/git/reflogs
 
 

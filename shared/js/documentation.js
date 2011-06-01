@@ -4,9 +4,9 @@ $(function() {
       helpList = $('#js-help-sidebar .js-topic'),
       firstOccurance = true
 
-  $('#js-help-sidebar .js-guides').each(function(){
+  $('#js-help-sidebar .js-topic').each(function(){
     if($(this).find('.disable').length == 0 || firstOccurance == false){
-      $(this).children().hide()
+      $(this).find('.js-guides').children().hide()
     } else {
       activeItem = $(this).index()
       firstOccurance = false

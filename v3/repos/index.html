@@ -37,13 +37,15 @@
 
 <h2 id="list">List</h2>
 
-<p>List all public and private repositories for the authenicated user.</p>
+<p>List all public and private repositories for the authenicated user
+including repositories that the user is a collaborator on.</p>
 
 <pre><code>	GET /user/repos
 </code></pre>
 
-<p>List all public repositories for the specified user. Returns identical
-response as <code>GET /user/repos</code> if <code>:user</code> is the authenicated user.</p>
+<p>List all public repositories for the specified user. Returns the same
+response as <code>GET /user/repos</code> if <code>:user</code> is the authenicated user except
+collaborated repositories are not included in the response.</p>
 
 <pre><code>	GET /users/:user/repos
 </code></pre>
@@ -53,18 +55,6 @@ authenticated user is a member of <code>:org</code>. Otherwise, list all public
 repositories in the organization.</p>
 
 <pre><code>	GET /orgs/:org/repos
-</code></pre>
-
-<p>List all public repositories</p>
-
-<pre><code>	GET /repos/public
-</code></pre>
-
-<p>List all public and private repositories for the authenticated user.
-Return all public repositories if not authenicated in which case the
-reponse is identical to <code>GET /repos/public</code>.</p>
-
-<pre><code>	GET /repos
 </code></pre>
 
 <h2 id="create">Create</h2>
@@ -176,9 +166,10 @@ member of the specified org.</p>
           <li>
             <h3><a href="/v3/issues/">Issues</a></h3>
             <ul>
+              <li><a href="/v3/issues/comments/">Comments</a></li>
+              <li><a href="/v3/issues/events/">Events</a></li>
               <li><a href="/v3/issues/labels/">Labels</a></li>
               <li><a href="/v3/issues/milestones/">Milestones</a></li>
-              <li><a href="/v3/issues/events/">Events</a></li>
             </ul>
           </li>
           <li>

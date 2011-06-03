@@ -130,9 +130,10 @@ module GitHub
     })
 
     ORG = {
-      "id"           => 1,
-      "url"          => "https://apit.github.com/orgs/1",
-      "gravatar_url" => "https://github.com/images/error/octocat_happy.gif"
+      "login"      => "github",
+      "id"         => 1,
+      "url"        => "https://apit.github.com/orgs/1",
+      "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
     }
 
     FULL_ORG = ORG.merge({
@@ -163,6 +164,18 @@ module GitHub
         "collaborators" => 10,
         "private_repos" => 20
       }
+    })
+
+    TEAM = {
+      "url" => "https://api.github.com/teams/1",
+      "name" => "Owners",
+      "id" => 1
+    }
+
+    FULL_TEAM = TEAM.merge({
+      "permission" => "admin",
+      "members_count" => 3,
+      "repos_count" => 10
     })
 
     MILESTONE = {

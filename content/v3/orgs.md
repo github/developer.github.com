@@ -12,16 +12,7 @@ List all public organizations for a user.
 
 List public and private organizations for the authenticated user.
 
-    GET /user/orgs	
-
-List all public and private organizations if called by an authenicated
-user. Otherwise return all public organizations.
-
-    GET /orgs
-
-List all public organizations.
-
-    GET /orgs/public
+    GET /user/orgs
 
 ### Response
 
@@ -35,21 +26,24 @@ List all public organizations.
 ### Response
 
 <%= headers 200 %>
-<%= json(:org) %>
+<%= json(:full_org) %>
 
 ## Edit
 
     PATCH /orgs/:org
 
+### Input
+
+<%= json \
+    :name     => "github",
+    :email    => "support@github.com",
+    :blog     => "https://github.com/blog",
+    :company  => "GitHub",
+    :location => "San Francisco",
+    :billing_email => "support@github.com"
+    %>
+
 ### Response
 
 <%= headers 200 %>
-<%= json(:org) %>
-
-## Delete †
-
-    DELETE /orgs/:org
-
-<%= headers 204 %>
-
-† not sure if we want to do this or not.
+<%= json(:private_org) %>

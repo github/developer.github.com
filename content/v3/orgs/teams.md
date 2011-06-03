@@ -24,7 +24,7 @@ that require explicit permissions are noted.
 ### Response
 
 <%= headers 200 %>
-<%= json(:team) %>
+<%= json(:full_team) %>
 
 ## Create team
 
@@ -52,7 +52,7 @@ Valid permissions:
 ### Response
 
 <%= headers 201 %>
-<%= json(:team) %>
+<%= json(:full_team) %>
 
 ## Edit team
 
@@ -70,7 +70,7 @@ the org that the team is associated with.
 ### Response
 
 <%= headers 201 %>
-<%= json(:team) %>
+<%= json(:full_team) %>
 
 ## Delete team
 
@@ -147,11 +147,6 @@ NOTE: This does not delete the user, it just remove them from the team.
 ## Get team repo
 
     GET /teams/:id/repos/:repo
-
-### Response
-
-<%= headers 200 %>
-<%= json(:repo) %>
 
 ### Reponse if repo is managed by this team
 

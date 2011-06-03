@@ -9,19 +9,19 @@ title: Repos API v3 | developer.github.com
 List all public and private repositories for the authenicated user
 including repositories that the user is a collaborator on.
 
-		GET /user/repos
+    GET /user/repos
 
 List all public repositories for the specified user. Returns the same
 response as `GET /user/repos` if `:user` is the authenicated user except
 collaborated repositories are not included in the response.
 
-		GET /users/:user/repos
+    GET /users/:user/repos
 
 List all public and private repositories in the organization if the
 authenticated user is a member of `:org`. Otherwise, list all public
 repositories in the organization.
 
-		GET /orgs/:org/repos
+    GET /orgs/:org/repos
 
 ## Create
 
@@ -36,39 +36,39 @@ be a member of `:org`.
 
 ## Get
 
-		GET /repos/:repo
+    GET /repos/:repo
 
 ## Edit
 
-		PATCH /repos/:repo
+    PATCH /repos/:repo
 
 ## Delete
 
-		DELETE /repos/:repo
+    DELETE /repos/:repo
 
 ## List watchers
 
-		GET /repos/:repo/watchers
+    GET /repos/:repo/watchers
 
 ## List contributors
 
-		GET /repos/:repo/contributors
+    GET /repos/:repo/contributors
 
 ## List languages
 
-		GET /repos/:repo/languages
+    GET /repos/:repo/languages
 
 ## List Tags
 
-		GET /repos/:repo/tags
+    GET /repos/:repo/tags
 
 ## List Branches
 
-		GET /repos/:repo/branches
+    GET /repos/:repo/branches
 
 ## List forks
 
-		GET /repos/:repo/forks
+    GET /repos/:repo/forks
 
 ## Create a fork
 
@@ -85,21 +85,21 @@ member of the specified org.
 
 List repos that a user is watching
 
-		GET /users/:user/watching
+    GET /users/:user/watching
 
 List repos that the authenticated user is watching
 
-		GET /user/watching
+    GET /user/watching
 
 Get if authenticated user is watching a repo
 
-		GET /user/watching/:repo
+    GET /user/watching/:repo
 
 Watch a repo
 
-		PUT /user/watching/:repo
+    PUT /user/watching/:repo
 
 Stop wathing a repo
 
-		DELETE /user/watching/:repo
+    DELETE /user/watching/:repo
 

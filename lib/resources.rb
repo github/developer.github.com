@@ -106,7 +106,7 @@ module GitHub
       "owner"            => USER,
       "name"             => "Hello-World",
       "description"      => "This your first repo!",
-      "homepage"         => "",
+      "homepage"         => "https://github.com",
       "language"         => nil,
       "private"          => false,
       "fork"             => false,

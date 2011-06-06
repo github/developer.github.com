@@ -23,6 +23,11 @@ repositories in the organization.
 
     GET /orgs/:org/repos
 
+### Response
+
+<%= headers 200, :pagination => true %>
+<%= json(:repo) { |h| [h] } %>
+
 ## Create
 
 Create a new repository for the authenicated user.
@@ -34,9 +39,33 @@ be a member of `:org`.
 
     POST /orgs/:org/repos
 
+### Input
+
+<%= json \
+  :name          => "Hello-World",
+  :description   => "This is your first repo",
+  :homepage      => "https://github.com",
+  :public        => true,
+  :has_issues    => true,
+  :has_wiki      => true,
+  :has_downloads => true,
+%>
+
+### Response
+
+<%= headers 201,
+      :Location =>
+'https://api.github.com/repos/octocat/Hello-World' %>
+<%= json :repo %>
+
 ## Get
 
     GET /repos/:repo
+
+### Response
+
+<%= headers 200 %>
+<%= json :full_repo %>
 
 ## Edit
 
@@ -45,10 +74,6 @@ be a member of `:org`.
 ## Delete
 
     DELETE /repos/:repo
-
-## List watchers
-
-    GET /repos/:repo/watchers
 
 ## List contributors
 
@@ -81,25 +106,54 @@ member of the specified org.
 
     POST /repos/:repo/forks?context=:org
 
-## Watching * -> This should go into the user api
+## List watchers
 
-List repos that a user is watching
+    GET /repos/:user/:repo/watchers
 
-    GET /users/:user/watching
+### Response
 
-List repos that the authenticated user is watching
+<%= headers 200 %>
+<%= json(:user) { |h| [h] } %>
 
-    GET /user/watching
+## List repos being watched
 
-Get if authenticated user is watching a repo
+List repos being watched by a user
 
-    GET /user/watching/:repo
+    GET /users/:user/watched
 
-Watch a repo
+List repos being watched by the authenticated user
 
-    PUT /user/watching/:repo
+    GET /user/watched
 
-Stop wathing a repo
+### Response
 
-    DELETE /user/watching/:repo
+<%= headers 200 %>
+<%= json(:repo) { |h| [h] } %>
 
+## Check if you are watching a repo
+
+    GET /user/watched/:user/:repo
+
+### Response if this repo is watched by you
+
+<%= headers 204 %>
+
+### Response if this repo is not watched by you
+
+<%= headers 404 %>
+
+## Watch a repo
+
+    PUT /user/watched/:user/:repo
+
+### Response
+
+<%= headers 204 %>
+
+## Stop watching a repo
+
+    DELETE /user/watched/:user/:repo
+
+### Response
+
+<%= headers 204 %>

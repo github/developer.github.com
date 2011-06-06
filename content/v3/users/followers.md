@@ -34,6 +34,18 @@ List who the authenicated user is following:
 <%= headers 200, :pagination => true %>
 <%= json(:user) { |h| [h] } %>
 
+## Check if you are following a user
+
+    GET /user/following/:user
+
+### Response if you are following this user
+
+<%= headers 204 %>
+
+### Response if you are not following this user
+
+<%= headers 404 %>
+
 ## Follow a user
 
     PUT /user/following/:user
@@ -49,16 +61,3 @@ List who the authenicated user is following:
 ### Response
 
 <%= headers 204 %>
-
-## Check if you are following a user
-
-    GET /user/following/:user
-
-### Response if you are following this user
-
-<%= headers 204 %>
-
-### Response if you are not following this user
-
-<%= headers 404 %>
-

@@ -80,7 +80,7 @@ default.
 
 ## Star a gist
 
-    POST /gists/:id/star
+    PUT /gists/:id/star
 
 ### Response
 

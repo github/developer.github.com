@@ -25,8 +25,8 @@ module GitHub
         head.each do |key, value|
           case key
             when :pagination
-              lines << "X-Next: https://api.github.com/resource?page=2"
-              lines << "X-Last: https://api.github.com/resource?page=5"
+              lines << 'Link: <https://api.github.com/resource?page=2>; rel="next",'
+              lines << '      <https://api.github.com/resource?page=5>; rel="last"'
             else lines << "#{key}: #{value}"
           end
         end

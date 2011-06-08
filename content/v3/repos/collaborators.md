@@ -1,16 +1,21 @@
 ---
-title: Repo Collaboratos API v3 | developer.github.com
+title: Repo Collaborators API v3 | developer.github.com
 ---
 
-# Repo Collaboratos API
+# Repo Collaborators API
 
 ## List
 
-		GET /repos/:repo/collaborators
+    GET /repos/:user/:repo/collaborators
+
+### Response
+
+<%= headers 200 %>
+<%= json(:user) { |h| [h] } %>
 
 ## Get
 
-		GET /repos/:repo/collaborators/:user
+    GET /repos/:user/:repo/collaborators/:user
 
 ### Reponse if user is a collaborator
 
@@ -22,9 +27,16 @@ title: Repo Collaboratos API v3 | developer.github.com
 
 ## Add collaborator
 
-		PUT /repos/:repo/collaborators/:user
+    PUT /repos/:user/:repo/collaborators/:user
+
+### Response
+
+<%= headers 204 %>
 
 ## Remove collaborator
 
-		DELETE /repos/:repo/collaborators/:user
+    DELETE /repos/:user/:repo/collaborators/:user
 
+### Response
+
+<%= headers 204 %>

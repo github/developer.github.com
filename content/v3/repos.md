@@ -6,22 +6,27 @@ title: Repos API v3 | developer.github.com
 
 ## List
 
-List all public and private repositories for the authenicated user
-including repositories that the user is a collaborator on.
+List repositories for the authenicated user.
 
     GET /user/repos
 
-List all public repositories for the specified user. Returns the same
-response as `GET /user/repos` if `:user` is the authenicated user except
-collaborated repositories are not included in the response.
+### Parameters
+
+type
+: `all`, `public`, `private`, `member`. Default: `all`.
+
+List public repositories for the specified user.
 
     GET /users/:user/repos
 
-List all public and private repositories in the organization if the
-authenticated user is a member of `:org`. Otherwise, list all public
-repositories in the organization.
+List repositories for the specified org.
 
     GET /orgs/:org/repos
+
+### Parameters
+
+type
+: `all`, `public`, `private`. Default: `all`.
 
 ### Response
 
@@ -60,7 +65,7 @@ be a member of `:org`.
 
 ## Get
 
-    GET /repos/:repo
+    GET /repos/:user/:repo
 
 ### Response
 
@@ -69,91 +74,95 @@ be a member of `:org`.
 
 ## Edit
 
-    PATCH /repos/:repo
+    PATCH /repos/:user/:repo
 
-## Delete
+### Response
 
-    DELETE /repos/:repo
+<%= headers 200 %>
+<%= json :full_repo %>
+
+<!-- ## Delete-->
+
+<!--     DELETE /repos/:user/:repo-->
 
 ## List contributors
 
-    GET /repos/:repo/contributors
-
-## List languages
-
-    GET /repos/:repo/languages
-
-## List Tags
-
-    GET /repos/:repo/tags
-
-## List Branches
-
-    GET /repos/:repo/branches
-
-## List forks
-
-    GET /repos/:repo/forks
-
-## Create a fork
-
-Create a fork for the authenicated user.
-
-    POST /repos/:repo/forks
-
-Create a fork in an organization. The authenticated user must be a
-member of the specified org.
-
-    POST /repos/:repo/forks?context=:org
-
-## List watchers
-
-    GET /repos/:user/:repo/watchers
+    GET /repos/:user/:repo/contributors
 
 ### Response
 
 <%= headers 200 %>
 <%= json(:user) { |h| [h] } %>
 
-## List repos being watched
+## List collaborators
 
-List repos being watched by a user
+    GET /repos/:user/:repo/collaborators
 
-    GET /users/:user/watched
+### Response
 
-List repos being watched by the authenticated user
+<%= headers 200 %>
+<%= json(:user) { |h| [h] } %>
 
-    GET /user/watched
+## List languages
+
+    GET /repos/:user/:repo/languages
+
+### Response
+
+<%= headers 200 %>
+<%= json \
+  "C"      => "78769",
+  "Python" => "7769",
+%>
+
+## List Tags
+
+    GET /repos/:user/:repo/tags
+
+### Response
+
+<%= headers 200 %>
+<%= json \
+  "v0.1" => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+  "v0.2" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+%>
+
+## List Branches
+
+    GET /repos/:user/:repo/branches
+
+### Response
+
+<%= headers 200 %>
+<%= json \
+  "gh-pages"    => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+  "master"      => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+  "development" => "1071c56519866afd41db2f30705eba8406b6a4a1",
+%>
+
+## List forks
+
+    GET /repos/:user/:repo/forks
 
 ### Response
 
 <%= headers 200 %>
 <%= json(:repo) { |h| [h] } %>
 
-## Check if you are watching a repo
+## Create a fork
 
-    GET /user/watched/:user/:repo
+Create a fork for the authenicated user.
 
-### Response if this repo is watched by you
+    POST /repos/:user/:repo/forks
 
-<%= headers 204 %>
+### Parameters
 
-### Response if this repo is not watched by you
-
-<%= headers 404 %>
-
-## Watch a repo
-
-    PUT /user/watched/:user/:repo
+org
+: Optional _String_ Organization login. The repository will be forked
+into this organization.
 
 ### Response
 
-<%= headers 204 %>
+<%= headers 201 %>
+<%= json :repo %>
 
-## Stop watching a repo
-
-    DELETE /user/watched/:user/:repo
-
-### Response
-
-<%= headers 204 %>

@@ -115,6 +115,15 @@ be a member of `:org`.
   "Python" => "7769",
 %>
 
+## List Teams
+
+    GET /repos/:user/:repo/teams
+
+### Response
+
+<%= headers 200 %>
+<%= json(:team) { |h| [h] } %>
+
 ## List Tags
 
     GET /repos/:user/:repo/tags

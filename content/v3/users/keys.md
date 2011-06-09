@@ -58,4 +58,3 @@ authenticated.
 ### Response
 
 <%= headers 204 %>
-

@@ -50,7 +50,13 @@ that require explicit permissions are noted.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"id"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">}]</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 
 <h2 id="get-team">Get team</h2>
@@ -64,7 +70,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"id"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">}</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">}</span>
 </code></pre>
 
 <h2 id="create-team">Create team</h2>
@@ -77,7 +90,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input">Input</h3>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"new team"</span><span class="p">,</span> <span class="s2">"permission"</span><span class="o">=&gt;</span><span class="s2">"push"</span><span class="p">,</span> <span class="s2">"repo_names"</span><span class="o">=&gt;</span><span class="p">[</span><span class="s2">"github/dotfiles"</span><span class="p">]}</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new team"</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"push"</span><span class="p">,</span>
+  <span class="s2">"repo_names"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"github/dotfiles"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
 </code></pre>
 
 <p>Valid permissions:</p>
@@ -98,7 +117,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"id"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">}</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">}</span>
 </code></pre>
 
 <h2 id="edit-team">Edit team</h2>
@@ -111,7 +137,10 @@ the org that the team is associated with.</p>
 
 <h3 id="input-1">Input</h3>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"new team name"</span><span class="p">,</span> <span class="s2">"permission"</span><span class="o">=&gt;</span><span class="s2">"push"</span><span class="p">}</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new team name"</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"push"</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -120,7 +149,14 @@ the org that the team is associated with.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"id"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/teams/1"</span><span class="p">}</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">}</span>
 </code></pre>
 
 <h2 id="delete-team">Delete team</h2>
@@ -151,10 +187,14 @@ member of the team.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">}]</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 
 <h2 id="get-team-member">Get team member</h2>
@@ -219,57 +259,35 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
-  <span class="s2">"owner"</span><span class="o">=&gt;</span>
-   <span class="p">{</span><span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">},</span>
-  <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"Hello-World"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">"This your first repo!"</span><span class="p">,</span>
-  <span class="s2">"homepage"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
-  <span class="s2">"language"</span><span class="o">=&gt;</span><span class="nx">nil</span><span class="p">,</span>
-  <span class="s2">"private"</span><span class="o">=&gt;</span><span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"fork"</span><span class="o">=&gt;</span><span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"forks"</span><span class="o">=&gt;</span><span class="mi">9</span><span class="p">,</span>
-  <span class="s2">"watchers"</span><span class="o">=&gt;</span><span class="mi">80</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">=&gt;</span><span class="mi">108</span><span class="p">,</span>
-  <span class="s2">"open_issues"</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"pushed_at"</span><span class="o">=&gt;</span><span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">}]</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 
 <h2 id="get-team-repo">Get team repo</h2>
 
 <pre><code>GET /teams/:id/repos/:repo
-</code></pre>
-
-<h3 id="response-7">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span><span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
- <span class="s2">"html_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
- <span class="s2">"owner"</span><span class="o">=&gt;</span>
-  <span class="p">{</span><span class="s2">"login"</span><span class="o">=&gt;</span><span class="s2">"octocat"</span><span class="p">,</span>
-   <span class="s2">"id"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
-   <span class="s2">"gravatar_url"</span><span class="o">=&gt;</span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-   <span class="s2">"url"</span><span class="o">=&gt;</span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">},</span>
- <span class="s2">"name"</span><span class="o">=&gt;</span><span class="s2">"Hello-World"</span><span class="p">,</span>
- <span class="s2">"description"</span><span class="o">=&gt;</span><span class="s2">"This your first repo!"</span><span class="p">,</span>
- <span class="s2">"homepage"</span><span class="o">=&gt;</span><span class="s2">""</span><span class="p">,</span>
- <span class="s2">"language"</span><span class="o">=&gt;</span><span class="nx">nil</span><span class="p">,</span>
- <span class="s2">"private"</span><span class="o">=&gt;</span><span class="kc">false</span><span class="p">,</span>
- <span class="s2">"fork"</span><span class="o">=&gt;</span><span class="kc">false</span><span class="p">,</span>
- <span class="s2">"forks"</span><span class="o">=&gt;</span><span class="mi">9</span><span class="p">,</span>
- <span class="s2">"watchers"</span><span class="o">=&gt;</span><span class="mi">80</span><span class="p">,</span>
- <span class="s2">"size"</span><span class="o">=&gt;</span><span class="mi">108</span><span class="p">,</span>
- <span class="s2">"open_issues"</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span>
- <span class="s2">"pushed_at"</span><span class="o">=&gt;</span><span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
- <span class="s2">"created_at"</span><span class="o">=&gt;</span><span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">}</span>
 </code></pre>
 
 <h3 id="reponse-if-repo-is-managed-by-this-team">Reponse if repo is managed by this team</h3>
@@ -324,9 +342,10 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li>
             <h3><a href="/v3/issues/">Issues</a></h3>
             <ul>
+              <li><a href="/v3/issues/comments/">Comments</a></li>
+              <li><a href="/v3/issues/events/">Events</a></li>
               <li><a href="/v3/issues/labels/">Labels</a></li>
               <li><a href="/v3/issues/milestones/">Milestones</a></li>
-              <li><a href="/v3/issues/events/">Events</a></li>
             </ul>
           </li>
           <li>
@@ -347,6 +366,7 @@ X-RateLimit-Remaining: 4999</code></pre>
             <ul>
               <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
               <li><a href="/v3/repos/keys/">Keys</a></li>
+              <li><a href="/v3/repos/watching/">Watching</a></li>
             </ul>
           </li>
           <li>
@@ -368,29 +388,23 @@ X-RateLimit-Remaining: 4999</code></pre>
 
   </div><!-- /not-footer -->
 
-<div id="footer-wrapper">
-  <div id="footer" class="container_12">
-    <div id="bottom-nav">
-      <ul class="nav">
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="http://support.github.com">Support</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-        <li><a href="https://twitter.com/github">Twitter</a></li>
-        <li><a href="http://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/github/developer.github.com">Source</a></li>
-      </ul>
-      <ul class="nav">
-        <li>&copy; 2011 GitHub Inc. All rights
-          reserved.</li>
-        <li><a href="http://help.github.com/terms/">Terms of Service</a></li>
-        <li><a href="http://help.github.com/privacy/">Privacy Policy</a></li>
-      </ul>
-    </div>
-    <div id="bottom-notice">
-      <p class="rackspace">Powered by the <a href="http://rackspace.com" target="_blank">Dedicated Servers</a> and <a href="http://rackspacecloud.com" target="_blank">Cloud Computing</a> of Rackspace Hosting&reg;</p> 
-    </div>
-  </div><!-- #footer -->
-</div><!-- #footer-wrapper -->
+  <div id="footer-wrapper">
+    <div id="footer">
+      <div class="left-col">
+        <h2 class="logo"><a href="http://github.com">Brought to you by GitHub</a></h2>
+        <ul class="github-nav">
+          <li><a href="http://github.com/blog" class="blog">The GitHub Blog</a></li>
+          <li><a href="http://support.github.com">Support</a></li>
+          <li><a href="http://github.com/contact">Contact</a></li>
+          <li><a href="http://developer.github.com">API</a></li>
+        </ul>
+        <p class="copyline">&copy; 2011 GitHub Inc. All rights reserved</p>
+      </div>
+      <div class="right-col">
+        <p class="rackspace">Powered by the <a href="http://rackspace.com" target="_blank">Dedicated Servers</a> and <a href="http://rackspacecloud.com" target="_blank">Cloud Computing</a> of Rackspace Hosting&reg;</p>
+      </div>
+    </div><!-- #footer -->
+  </div><!-- #footer-wrapper -->
 
 </body>
 </html>

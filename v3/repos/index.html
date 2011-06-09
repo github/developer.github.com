@@ -37,24 +37,65 @@
 
 <h2 id="list">List</h2>
 
-<p>List all public and private repositories for the authenicated user
-including repositories that the user is a collaborator on.</p>
+<p>List repositories for the authenicated user.</p>
 
-<pre><code>	GET /user/repos
+<pre><code>GET /user/repos
 </code></pre>
 
-<p>List all public repositories for the specified user. Returns the same
-response as <code>GET /user/repos</code> if <code>:user</code> is the authenicated user except
-collaborated repositories are not included in the response.</p>
+<h3 id="parameters">Parameters</h3>
 
-<pre><code>	GET /users/:user/repos
+<dl>
+<dt>type</dt>
+  <dd>
+<code>all</code>, <code>public</code>, <code>private</code>, <code>member</code>. Default: <code>all</code>.</dd>
+</dl><p>List public repositories for the specified user.</p>
+
+<pre><code>GET /users/:user/repos
 </code></pre>
 
-<p>List all public and private repositories in the organization if the
-authenticated user is a member of <code>:org</code>. Otherwise, list all public
-repositories in the organization.</p>
+<p>List repositories for the specified org.</p>
 
-<pre><code>	GET /orgs/:org/repos
+<pre><code>GET /orgs/:org/repos
+</code></pre>
+
+<h3 id="parameters-1">Parameters</h3>
+
+<dl>
+<dt>type</dt>
+  <dd>
+<code>all</code>, <code>public</code>, <code>private</code>. Default: <code>all</code>.</dd>
+</dl><h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 
 <h2 id="create">Create</h2>
@@ -70,89 +111,428 @@ be a member of <code>:org</code>.</p>
 <pre><code>POST /orgs/:org/repos
 </code></pre>
 
+<h3 id="input">Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This is your first repo"</span><span class="p">,</span>
+  <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+  <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_issues"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_wiki"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_downloads"</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/repos/octocat/Hello-World
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">},</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+  <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+  <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+  <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+<span class="p">}</span>
+</code></pre>
+
 <h2 id="get">Get</h2>
 
-<pre><code>	GET /repos/:repo
+<pre><code>GET /repos/:user/:repo
+</code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">},</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+  <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+  <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+  <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Organization"</span>
+  <span class="p">},</span>
+  <span class="s2">"parent"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+  <span class="p">},</span>
+  <span class="s2">"source"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+  <span class="p">},</span>
+  <span class="s2">"integrate_branch"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"master_branch"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"has_issues"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_wiki"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_downloads"</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
 </code></pre>
 
 <h2 id="edit">Edit</h2>
 
-<pre><code>	PATCH /repos/:repo
+<pre><code>PATCH /repos/:user/:repo
 </code></pre>
 
-<h2 id="delete">Delete</h2>
+<h3 id="response-3">Response</h3>
 
-<pre><code>	DELETE /repos/:repo
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">},</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+  <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+  <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+  <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Organization"</span>
+  <span class="p">},</span>
+  <span class="s2">"parent"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+  <span class="p">},</span>
+  <span class="s2">"source"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+  <span class="p">},</span>
+  <span class="s2">"integrate_branch"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"master_branch"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"has_issues"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_wiki"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_downloads"</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
 </code></pre>
 
-<h2 id="list-watchers">List watchers</h2>
+<!-- ## Delete-->
 
-<pre><code>	GET /repos/:repo/watchers
-</code></pre>
+<!--     DELETE /repos/:user/:repo-->
 
 <h2 id="list-contributors">List contributors</h2>
 
-<pre><code>	GET /repos/:repo/contributors
+<pre><code>GET /repos/:user/:repo/contributors
+</code></pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre>
+
+<h2 id="list-collaborators">List collaborators</h2>
+
+<pre><code>GET /repos/:user/:repo/collaborators
+</code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 
 <h2 id="list-languages">List languages</h2>
 
-<pre><code>	GET /repos/:repo/languages
+<pre><code>GET /repos/:user/:repo/languages
+</code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"C"</span><span class="o">:</span> <span class="s2">"78769"</span><span class="p">,</span>
+  <span class="s2">"Python"</span><span class="o">:</span> <span class="s2">"7769"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="list-teams">List Teams</h2>
+
+<pre><code>GET /repos/:user/:repo/teams
+</code></pre>
+
+<h3 id="response-7">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 
 <h2 id="list-tags">List Tags</h2>
 
-<pre><code>	GET /repos/:repo/tags
+<pre><code>GET /repos/:user/:repo/tags
+</code></pre>
+
+<h3 id="response-8">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"v0.1"</span><span class="o">:</span> <span class="s2">"c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"</span><span class="p">,</span>
+  <span class="s2">"v0.2"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>
+<span class="p">}</span>
 </code></pre>
 
 <h2 id="list-branches">List Branches</h2>
 
-<pre><code>	GET /repos/:repo/branches
+<pre><code>GET /repos/:user/:repo/branches
+</code></pre>
+
+<h3 id="response-9">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"gh-pages"</span><span class="o">:</span> <span class="s2">"c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"</span><span class="p">,</span>
+  <span class="s2">"master"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+  <span class="s2">"development"</span><span class="o">:</span> <span class="s2">"1071c56519866afd41db2f30705eba8406b6a4a1"</span>
+<span class="p">}</span>
 </code></pre>
 
 <h2 id="list-forks">List forks</h2>
 
-<pre><code>	GET /repos/:repo/forks
+<pre><code>GET /repos/:user/:repo/forks
+</code></pre>
+
+<h3 id="response-10">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
 </code></pre>
 
 <h2 id="create-a-fork">Create a fork</h2>
 
 <p>Create a fork for the authenicated user.</p>
 
-<pre><code>POST /repos/:repo/forks
+<pre><code>POST /repos/:user/:repo/forks
 </code></pre>
 
-<p>Create a fork in an organization. The authenticated user must be a
-member of the specified org.</p>
+<h3 id="parameters-2">Parameters</h3>
 
-<pre><code>POST /repos/:repo/forks?context=:org
-</code></pre>
+<dl>
+<dt>org</dt>
+  <dd>Optional <em>String</em> Organization login. The repository will be forked
+into this organization.</dd>
+</dl><h3 id="response-11">Response</h3>
 
-<h2 id="watching----this-should-go-into-the-user-api">Watching * -&gt; This should go into the user api</h2>
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<p>List repos that a user is watching</p>
-
-<pre><code>	GET /users/:user/watching
-</code></pre>
-
-<p>List repos that the authenticated user is watching</p>
-
-<pre><code>	GET /user/watching
-</code></pre>
-
-<p>Get if authenticated user is watching a repo</p>
-
-<pre><code>	GET /user/watching/:repo
-</code></pre>
-
-<p>Watch a repo</p>
-
-<pre><code>	PUT /user/watching/:repo
-</code></pre>
-
-<p>Stop wathing a repo</p>
-
-<pre><code>	DELETE /user/watching/:repo
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">},</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+  <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+  <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+  <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+<span class="p">}</span>
 </code></pre>
       </div>
 
@@ -190,6 +570,7 @@ member of the specified org.</p>
             <ul>
               <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
               <li><a href="/v3/repos/keys/">Keys</a></li>
+              <li><a href="/v3/repos/watching/">Watching</a></li>
             </ul>
           </li>
           <li>
@@ -211,29 +592,23 @@ member of the specified org.</p>
 
   </div><!-- /not-footer -->
 
-<div id="footer-wrapper">
-  <div id="footer" class="container_12">
-    <div id="bottom-nav">
-      <ul class="nav">
-        <li><a href="https://github.com/blog">Blog</a></li>
-        <li><a href="http://support.github.com">Support</a></li>
-        <li><a href="https://github.com/contact">Contact</a></li>
-        <li><a href="https://twitter.com/github">Twitter</a></li>
-        <li><a href="http://help.github.com/security/">Security</a></li>
-        <li><a href="https://github.com/github/developer.github.com">Source</a></li>
-      </ul>
-      <ul class="nav">
-        <li>&copy; 2011 GitHub Inc. All rights
-          reserved.</li>
-        <li><a href="http://help.github.com/terms/">Terms of Service</a></li>
-        <li><a href="http://help.github.com/privacy/">Privacy Policy</a></li>
-      </ul>
-    </div>
-    <div id="bottom-notice">
-      <p class="rackspace">Powered by the <a href="http://rackspace.com" target="_blank">Dedicated Servers</a> and <a href="http://rackspacecloud.com" target="_blank">Cloud Computing</a> of Rackspace Hosting&reg;</p> 
-    </div>
-  </div><!-- #footer -->
-</div><!-- #footer-wrapper -->
+  <div id="footer-wrapper">
+    <div id="footer">
+      <div class="left-col">
+        <h2 class="logo"><a href="http://github.com">Brought to you by GitHub</a></h2>
+        <ul class="github-nav">
+          <li><a href="http://github.com/blog" class="blog">The GitHub Blog</a></li>
+          <li><a href="http://support.github.com">Support</a></li>
+          <li><a href="http://github.com/contact">Contact</a></li>
+          <li><a href="http://developer.github.com">API</a></li>
+        </ul>
+        <p class="copyline">&copy; 2011 GitHub Inc. All rights reserved</p>
+      </div>
+      <div class="right-col">
+        <p class="rackspace">Powered by the <a href="http://rackspace.com" target="_blank">Dedicated Servers</a> and <a href="http://rackspacecloud.com" target="_blank">Cloud Computing</a> of Rackspace Hosting&reg;</p>
+      </div>
+    </div><!-- #footer -->
+  </div><!-- #footer-wrapper -->
 
 </body>
 </html>

@@ -161,7 +161,6 @@ module GitHub
       "plan"                => {
         "name"          => "Medium",
         "space"         => 400,
-        "collaborators" => 10,
         "private_repos" => 20
       }
     })

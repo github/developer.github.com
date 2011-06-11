@@ -87,7 +87,14 @@ be a member of `:org`.
 
 ## List contributors
 
+
     GET /repos/:user/:repo/contributors
+
+### Parameters
+
+anon
+: Optional flag. Set to `1` or `true` to include anonymous contributors
+in results.
 
 ### Response
 

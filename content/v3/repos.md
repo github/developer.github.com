@@ -8,7 +8,7 @@ title: Repos API v3 | developer.github.com
 
 List repositories for the authenticated user.
 
-    GET /user/repos
+    GET /:user/repos
 
 ### Parameters
 

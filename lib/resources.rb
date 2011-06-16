@@ -130,17 +130,74 @@ module GitHub
     })
 
     TAG = {
-      :commit_url => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
-      :name => "v0.1",
-      :sha => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
-      :zipball_url => 'https://github.com/octocat/Hello-World/zipball/v0.1',
-      :tarball_url => 'https://github.com/octocat/Hello-World/tarball/v0.1',
+      "commit_url"  => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+      "name"        => "v0.1",
+      "sha"         => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+      "zipball_url" => "https://github.com/octocat/Hello-World/zipball/v0.1",
+      "tarball_url" => "https://github.com/octocat/Hello-World/tarball/v0.1",
     }
 
     BRANCH = {
-      :commit_url => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
-      :name => 'master',
-      :sha => '6dcb09b5b57875f334f61aebed695e2e4193db5e'
+      "commit_url" => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+      "name"       => "master",
+      "sha"        => "6dcb09b5b57875f334f61aebed695e2e4193db5e"
+    }
+
+
+    PULL = {
+      "url"        => "https://api.github.com/octocat/Hello-World/pulls/1",
+      "html_url"   => "https://github.com/octocat/Hello-World/pulls/1",
+      "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
+      "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
+      "issue_url"  => "https://github.com/octocat/Hello-World/issue/1",
+      "number"     => 1,
+      "state"      => "open",
+      "title"      => "new-feature",
+      "body"       => "Please pull these awesome changes",
+      "created_at" => "2011-01-26T19:01:12Z",
+      "updated_at" => "2011-01-26T19:01:12Z",
+      "closed_at"  => "2011-01-26T19:01:12Z",
+      "merged_at"  => "2011-01-26T19:01:12Z",
+    }
+
+    FULL_PULL = PULL.merge({
+      "merged"        => false,
+      "mergeable"     => true,
+      "merged_by"     => USER,
+      "comments"      => 10,
+      "commits"       => 3,
+      "additions"     => 100,
+      "deletions"     => 3,
+      "changed_files" => 5,
+      "head"          => {
+        "label" => "new-topic",
+        "ref"   => "new-topic",
+        "sha"   => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "user"  => USER,
+        "repo"  => REPO,
+      },
+      "base"          => {
+        "label" => "master",
+        "ref"   => "master",
+        "sha"   => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "user"  => USER,
+        "repo"  => REPO,
+      }
+    })
+
+    COMMIT = {
+    }
+
+    FILE = {
+      "sha"       => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "filename"  => "file1.txt",
+      "status"    => "added",
+      "additions" => 103,
+      "deletions" => 21,
+      "changes"   => 124,
+      "blob_url"  => "https://github.com/octocate/Hello-World/blob/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt",
+      "raw_url"   => "https://github.com/octocate/Hello-World/raw/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt",
+      "patch"     => "@@ -132,7 +132,7 @@ module Test @@ -1000,7 +1000,7 @@ module Test"
     }
 
     ORG = {

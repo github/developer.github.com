@@ -129,10 +129,24 @@ module GitHub
       "has_downloads"    => true
     })
 
+    TAG = {
+      :commit_url => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+      :name => "v0.1",
+      :sha => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+      :zipball_url => 'https://github.com/octocat/Hello-World/zipball/v0.1',
+      :tarball_url => 'https://github.com/octocat/Hello-World/tarball/v0.1',
+    }
+
+    BRANCH = {
+      :commit_url => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+      :name => 'master',
+      :sha => '6dcb09b5b57875f334f61aebed695e2e4193db5e'
+    }
+
     ORG = {
       "login"      => "github",
       "id"         => 1,
-      "url"        => "https://apit.github.com/orgs/1",
+      "url"        => "https://api.github.com/orgs/1",
       "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
     }
 

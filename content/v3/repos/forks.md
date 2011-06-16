@@ -1,0 +1,31 @@
+---
+title: Repo Forks API v3 | developer.github.com
+---
+
+# Repo Forks API
+
+## List forks
+
+    GET /repos/:user/:repo/forks
+
+### Response
+
+<%= headers 200 %>
+<%= json(:repo) { |h| [h] } %>
+
+## Create a fork
+
+Create a fork for the authenicated user.
+
+    POST /repos/:user/:repo/forks
+
+### Parameters
+
+org
+: Optional _String_ Organization login. The repository will be forked
+into this organization.
+
+### Response
+
+<%= headers 201 %>
+<%= json :repo %>

@@ -101,15 +101,6 @@ in results.
 <%= headers 200 %>
 <%= json(:user) { |h| [h] } %>
 
-## List collaborators
-
-    GET /repos/:user/:repo/collaborators
-
-### Response
-
-<%= headers 200 %>
-<%= json(:user) { |h| [h] } %>
-
 ## List languages
 
     GET /repos/:user/:repo/languages
@@ -138,10 +129,7 @@ in results.
 ### Response
 
 <%= headers 200 %>
-<%= json \
-  "v0.1" => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
-  "v0.2" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
-%>
+<%= json(:tag) { |h| [h] } %>
 
 ## List Branches
 
@@ -150,35 +138,4 @@ in results.
 ### Response
 
 <%= headers 200 %>
-<%= json \
-  "gh-pages"    => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
-  "master"      => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
-  "development" => "1071c56519866afd41db2f30705eba8406b6a4a1",
-%>
-
-## List forks
-
-    GET /repos/:user/:repo/forks
-
-### Response
-
-<%= headers 200 %>
-<%= json(:repo) { |h| [h] } %>
-
-## Create a fork
-
-Create a fork for the authenicated user.
-
-    POST /repos/:user/:repo/forks
-
-### Parameters
-
-org
-: Optional _String_ Organization login. The repository will be forked
-into this organization.
-
-### Response
-
-<%= headers 201 %>
-<%= json :repo %>
-
+<%= json(:branch) { |h| [h] }%>

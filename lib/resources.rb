@@ -122,8 +122,8 @@ module GitHub
       "organization"     => USER.merge('type' => 'Organization'),
       "parent"           => REPO,
       "source"           => REPO,
-      "integrate_branch" => nil,
-      "master_branch"    => nil,
+      "default_branch"   => 'master',
+      "master_branch"    => 'master',
       "has_issues"       => true,
       "has_wiki"         => true,
       "has_downloads"    => true

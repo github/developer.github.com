@@ -224,6 +224,28 @@ module GitHub
       "updated_at" => "2011-04-14T16:00:49Z"
     }
 
+    DOWNLOAD = {
+      "url"            => "https://api.github.com/repos/octocat/Hello-World/downloads/1",
+      "html_url"       => "https://github.com/repos/octocat/Hello-World/downloads/filename",
+      "id"             => 1,
+      "name"           => "file.zip",
+      "description"    => "The latest release",
+      "size"           => 1024,
+      "download_count" => 40
+    }
+
+    CREATE_DOWNLOAD = DOWNLOAD.merge({
+      "policy"         => "hash",
+      "signature"      => "hash",
+      "bucket"         => "hash",
+      "accesskeyid"    => "hash",
+      "path"           => "file.zip",
+      "acl"            => "public-read",
+      "expirationdate" => "2011-04-14T16:00:49Z",
+      "prefix"         => "downloads/octocat/Hello-World/",
+      "mime_type"      => "application/octet-stream",
+      "redirect"       => false
+    })
 
     ORG = {
       "login"      => "github",

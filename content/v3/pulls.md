@@ -106,9 +106,9 @@ values are `open` and `closed`.
 <%= headers 200 %>
 <%= json :pull %>
 
-## List pull requests commits
+## List commits on a pull request
 
-    GET /repo/:user/:repo/pulls/:id/commits
+    GET /repos/:user/:repo/pulls/:id/commits
 
 ### Response
 

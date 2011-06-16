@@ -40,7 +40,8 @@ path
 being commented on.
 
 position
-: _Required_ **number** of the line this comment is anchored to.
+: _Required_ **number** of the line index into the diff where this
+comment is being made.
 
 #### Example
 

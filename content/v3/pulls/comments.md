@@ -6,55 +6,100 @@ title: Pull Request Comments API v3 | developer.github.com
 
 ## List comments on a pull request
 
-    GET /repos/:user/:repo/pulls/:pull_id/comments
+    GET /repos/:user/:repo/pulls/:id/comments
 
 ### Response
 
 <%= headers 200 %>
-<!-- <%= json(:gist_comment) { |h| [h] } %>-->
+<%= json(:pull_comment) { |h| [h] } %>
 
 ## Get a single comment
 
-    GET /repos/:user/:repo/pulls/:pull_id/comments/:id
+    GET /repos/:user/:repo/pulls/comments/:id
 
 ### Response
 
 <%= headers 200 %>
-<!-- <%= json :gist_comment %>-->
+<%= json :pull_comment %>
 
 ## Create a comment
 
-    POST /repos/:user/:repo/pulls/:pull_id/comments
+    POST /repos/:user/:repo/pulls/:id/comments
 
 ### Input
 
-<!-- <%= json :body => 'Just commenting for the sake of commenting' %>-->
+body
+: _Required_ **string** for the body of the comment.
+
+commit_id
+: _Required_ **string** specifying the commit sha this comment was made
+against.
+
+path
+: _Required_ **string** specifying the relative path of the file that is
+being commented on.
+
+position
+: _Required_ **number** of the line this comment is anchored to.
+
+#### Example
+
+<%= json \
+  :body      => 'Nice change',
+  :commit_id => '6dcb09b5b57875f334f61aebed695e2e4193db5e',
+  :path      => 'file1.txt',
+  :position  => 4,
+%>
+
+### Alternative Input
+
+Instead of passing `commit_id`, `path`, and `position` you can reply to
+an existing Pull Request Comment like this:
+
+body
+: _Required_ **string** for the body of the comment.
+
+in_reply_to
+: _Required_ **number** specifying the id of the comment to reply to.
+
+#### Example
+
+<%= json \
+  :body        => 'Nice change',
+  :in_reply_to => 4,
+%>
 
 ### Response
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/:user/:repo/pulls/:pull_id/comments/1" %>
-<!-- <%= json :gist_comment %>-->
+"https://api.github.com/repos/:user/:repo/pulls/comments/1" %>
+<%= json :pull_comment %>
 
 ## Edit a comment
 
-    PATCH /repos/:user/:repo/pulls/:pull_id/comments/:id
+    PATCH /repos/:user/:repo/pulls/comments/:id
 
 ### Input
 
-<!-- <%= json :body => 'Just commenting for the sake of commenting' %>-->
+body
+: _Required_ **string** for the body of the comment.
+
+#### Example
+
+<%= json \
+  :body => 'Nice change'
+%>
 
 ### Response
 
 <%= headers 200 %>
-<!-- <%= json :gist_comment %>-->
+<%= json :pull_comment %>
 
 ## Delete a comment
 
-    DELETE /repos/:user/:repo/pulls/:pull_id/comments/:id
+    DELETE /repos/:user/:repo/pulls/comments/:id
 
 ### Response
 
 <%= headers 204 %>
-

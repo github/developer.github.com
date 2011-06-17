@@ -14,7 +14,7 @@ lightweight tags.
 ### Response
 
 <%= headers 200 %>
-<%= json :tag %>
+<%= json :gittag %>
 
 ## Create a Tag Object
 
@@ -55,5 +55,5 @@ tagger.date
 
 <%= headers 201,
       :Location => "https://api.github.com/repos/:user/:repo/git/tags/:sha" %>
-<%= json :tag %>
+<%= json :gittag %>
 

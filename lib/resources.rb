@@ -129,17 +129,21 @@ module GitHub
     })
 
     TAG = {
-      "commit_url"  => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
       "name"        => "v0.1",
-      "sha"         => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+      "commit"      => {
+          "sha"     => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
+          "url"  => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"
+      },
       "zipball_url" => "https://github.com/octocat/Hello-World/zipball/v0.1",
       "tarball_url" => "https://github.com/octocat/Hello-World/tarball/v0.1",
     }
 
     BRANCH = {
-      "commit_url" => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
       "name"       => "master",
-      "sha"        => "6dcb09b5b57875f334f61aebed695e2e4193db5e"
+      "commit" => {
+          "sha"   => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+          "url"   => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"
+      }
     }
 
 
@@ -555,7 +559,7 @@ module GitHub
       ]
     }
     
-    TAG = {
+    GITTAG = {
       "tag" => "v0.0.1",
       "sha" => "940bd336248efae0f9ee5bc7b2d5c985887b16ac",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac",

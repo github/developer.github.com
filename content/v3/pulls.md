@@ -45,8 +45,6 @@ head
 NOTE: `head` and `base` can be either a sha or a branch name. Typically you
 would namespace `head` with a user like this: `username:branch`.
 
-#### Example
-
 <%= json \
   :title     => "Amazing new feature",
   :body      => "Please pull this in!",
@@ -62,8 +60,6 @@ Issue number instead of `title` and `body`.
 issue
 : _Required_ **number** of an issue in this repository to turn into a
 Pull Request.
-
-#### Example
 
 <%= json \
   :issue => "5",
@@ -92,8 +88,6 @@ body
 state
 : _Optional_ **string** to update the state of this Pull Request. Valid
 values are `open` and `closed`.
-
-#### Example
 
 <%= json \
   :title     => "new title",

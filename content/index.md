@@ -4,16 +4,12 @@ title: developer.github.com
 
 # developer.github.com
 
-This describes the Resources that make up the official GitHub API v3.
-You can look at the [API v2](http://develop.github.com/) to access
-resources that have not yet been added to v3.
+This describes the Resources that make up the official GitHub API v3. If
+you have any problems or requests please contact
+[support](mailto:support@github.com?subject=APIv3).
 
 For the new API v3, start browsing the implemented resources on the
 right >>
-
-Visit [GitHub API
-Support](http://support.github.com/discussions/api) if you
-have any problems or requests.
 
 ## Breaking BETA Changes
 
@@ -23,8 +19,8 @@ to update your app in time.
 
 ### Behavior due to be removed by July 20th:
 
-* `integrate_branch` renamed to `default_branch` on the [repo
-  API](/v3/repos/#get). `integrate_branch` will no longer be returned.
+* `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
+  returned.
 
 ### Changelog for breaking changes
 

@@ -46,6 +46,32 @@ be a member of `:org`.
 
 ### Input
 
+name
+: _Required_ **string**
+
+description
+: _Optional_ **string**
+
+homepage
+: _Optional_ **string**
+
+public
+: _Optional_ **boolean** - `true` to create a public repository, `false`
+to create a private one. Creating private repositories requires a paid
+GitHub account.
+
+has\_issues
+: _Optional_ **boolean** - `true` to enable issues for this repository,
+`false` to disable them. Default is `true`.
+
+has\_wiki
+: _Optional_ **boolean** - `true` to enable the wiki for this
+repository, `false` to disable it. Default is `true`.
+
+has\_downloads
+: _Optional_ **boolean** - `true` to enable downloads for this
+repository, `false` to disable them. Default is `true`.
+
 <%= json \
   :name          => "Hello-World",
   :description   => "This is your first repo",
@@ -76,14 +102,48 @@ be a member of `:org`.
 
     PATCH /repos/:user/:repo
 
+### Input
+
+name
+: _Required_ **string**
+
+description
+: _Optional_ **string**
+
+homepage
+: _Optional_ **string**
+
+public
+: _Optional_ **boolean** - `true` to create a public repository, `false`
+to create a private one. Creating private repositories requires a paid
+GitHub account.
+
+has\_issues
+: _Optional_ **boolean** - `true` to enable issues for this repository,
+`false` to disable them. Default is `true`.
+
+has\_wiki
+: _Optional_ **boolean** - `true` to enable the wiki for this
+repository, `false` to disable it. Default is `true`.
+
+has\_downloads
+: _Optional_ **boolean** - `true` to enable downloads for this
+repository, `false` to disable them. Default is `true`.
+
+<%= json \
+  :name          => "Hello-World",
+  :description   => "This is your first repo",
+  :homepage      => "https://github.com",
+  :public        => true,
+  :has_issues    => true,
+  :has_wiki      => true,
+  :has_downloads => true,
+%>
+
 ### Response
 
 <%= headers 200 %>
 <%= json :full_repo %>
-
-<!-- ## Delete-->
-
-<!--     DELETE /repos/:user/:repo-->
 
 ## List contributors
 

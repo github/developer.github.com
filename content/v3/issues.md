@@ -59,14 +59,14 @@ body
 : _Optional_ **string**
 
 assignee
-: _Optional_ **string** - login for the user that this issue should be
+: _Optional_ **string** - Login for the user that this issue should be
 assigned to.
 
 milestone
-: _Optional_ **number** - milestone to associate this issue with.
+: _Optional_ **number** - Milestone to associate this issue with.
 
-lables
-: _Optional_ **array** of **strings** - labels to associate with this
+labels
+: _Optional_ **array** of **strings** - Labels to associate with this
 issue.
 
 <%= json \
@@ -97,18 +97,17 @@ body
 : _Optional_ **string**
 
 assignee
-: _Optional_ **string** - login for the user that this issue should be
+: _Optional_ **string** - Login for the user that this issue should be
 assigned to.
 
 state
-: _Optional_ **string** - change the state of the issue to `open` or
-`closed`.
+: _Optional_ **string** - State of the issue: `open` or `closed`.
 
 milestone
-: _Optional_ **number** - milestone to associate this issue with.
+: _Optional_ **number** - Milestone to associate this issue with.
 
-lables
-: _Optional_ **array** of **strings** - labels to associate with this
+labels
+: _Optional_ **array** of **strings** - Labels to associate with this
 issue. Pass one or more Labels to _replace_ the set of Labels on this
 Issue. Send an empty array (`[]`) to clear all Labels from the Issue.
 
@@ -125,4 +124,3 @@ Issue. Send an empty array (`[]`) to clear all Labels from the Issue.
 
 <%= headers 200 %>
 <%= json :issue %>
-

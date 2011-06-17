@@ -29,19 +29,16 @@ title: Pull Request Comments API v3 | developer.github.com
 ### Input
 
 body
-: _Required_ **string** for the body of the comment.
+: _Required_ **string**
 
 commit_id
-: _Required_ **string** specifying the commit sha this comment was made
-against.
+: _Required_ **string** - Sha of the commit to comment on.
 
 path
-: _Required_ **string** specifying the relative path of the file that is
-being commented on.
+: _Required_ **string** - Relative path of the file to comment on.
 
 position
-: _Required_ **number** of the line index into the diff where this
-comment is being made.
+: _Required_ **number** - Line index in the diff to comment on.
 
 #### Example
 
@@ -58,10 +55,10 @@ Instead of passing `commit_id`, `path`, and `position` you can reply to
 an existing Pull Request Comment like this:
 
 body
-: _Required_ **string** for the body of the comment.
+: _Required_ **string**
 
 in_reply_to
-: _Required_ **number** specifying the id of the comment to reply to.
+: _Required_ **number** - Comment id to reply to.
 
 #### Example
 
@@ -84,7 +81,7 @@ in_reply_to
 ### Input
 
 body
-: _Required_ **string** for the body of the comment.
+: _Required_ **string**
 
 #### Example
 

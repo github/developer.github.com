@@ -28,6 +28,9 @@ title: Gist Comments API v3 | developer.github.com
 
 ### Input
 
+body
+: _Required_ **string**
+
 <%= json :body => 'Just commenting for the sake of commenting' %>
 
 ### Response
@@ -41,6 +44,9 @@ title: Gist Comments API v3 | developer.github.com
     PATCH /gists/comments/:id
 
 ### Input
+
+body
+: _Required_ **string**
 
 <%= json :body => 'Just commenting for the sake of commenting' %>
 

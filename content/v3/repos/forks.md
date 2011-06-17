@@ -22,8 +22,8 @@ Create a fork for the authenicated user.
 ### Parameters
 
 org
-: Optional _String_ Organization login. The repository will be forked
-into this organization.
+: _Optional_ **String** - Organization login. The repository will be
+forked into this organization.
 
 ### Response
 

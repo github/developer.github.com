@@ -147,7 +147,6 @@ repository, `false` to disable them. Default is `true`.
 
 ## List contributors
 
-
     GET /repos/:user/:repo/contributors
 
 ### Parameters

@@ -11,11 +11,10 @@ title: Repo Commits API v3 | developer.github.com
 ### Parameters
 
 sha
-: _Optional_ **string** specifying the sha or branch to start listing commits
-from.
+: _Optional_ **string** - Sha or branch to start listing commits from.
 
 path
-: _Optional_ **string** file path. Only commits containing this file
+: _Optional_ **string** - Only commits containing this file path
 will be returned.
 
 ### Response
@@ -30,7 +29,7 @@ will be returned.
 ### Response
 
 <%= headers 200 %>
-<%= json(:commit) %>
+<%= json(:full_commit) %>
 
 ## List commit comments for a repository
 
@@ -57,23 +56,19 @@ will be returned.
 ### Input
 
 body
-: _Required_ **string** for the body of the comment.
+: _Required_ **string**
 
 commit_id
-: _Required_ **string** specifying the commit sha this comment was made
-against.
+: _Required_ **string** - Sha of the commit to comment on.
 
 line
-: _Required_ **number** of the line in the file where this comment is
-being made.
+: _Required_ **number** - Line number in the file to comment on.
 
 path
-: _Required_ **string** specifying the relative path of the file that is
-being commented on.
+: _Required_ **string** - Relative path of the file to comment on.
 
 position
-: _Required_ **number** of the line index into the diff where this
-comment is being made.
+: _Required_ **number** - Line index in the diff to comment on.
 
 #### Example
 
@@ -106,7 +101,7 @@ comment is being made.
 ### Input
 
 body
-: _Required_ **string** for the body of the comment.
+: _Required_ **string**
 
 #### Example
 

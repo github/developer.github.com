@@ -28,9 +28,13 @@ title: Issue Labels API v3 | developer.github.com
 
 ### Input
 
-<%= json :name => "String", :color => "hex" %>
+name
+: _Required_ **string**
 
-*Note*: `color` takes a 6 character hex code, without a leading `#`.
+color
+: _Required_ **string** - 6 character hex code, without a leading `#`.
+
+<%= json :name => "API", :color => "FFFFFF" %>
 
 ### Response
 
@@ -45,9 +49,13 @@ title: Issue Labels API v3 | developer.github.com
 
 ### Input
 
-<%= json :name => "String", :color => "hex" %>
+name
+: _Required_ **string**
 
-*Note*: `color` takes a 6 character hex code, without a leading `#`.
+color
+: _Required_ **string** - 6 character hex code, without a leading `#`.
+
+<%= json :name => "API", :color => "FFFFFF" %>
 
 ### Response
 
@@ -76,6 +84,7 @@ title: Issue Labels API v3 | developer.github.com
     POST /repos/:user/:repo/issues/:id/labels
 
 ### Input
+
 <%= json({:array => %w(Label1 Label2)}) { |h| h['array'] } %>
 
 ### Response
@@ -97,6 +106,7 @@ title: Issue Labels API v3 | developer.github.com
     PUT /repos/:user/:repo/issues/:id/labels
 
 ### Input
+
 <%= json(:array => %w(Label1 Label2)) { |h| h['array'] } %>
 
 Sending an empty array (`[]`) will remove all Labels from the Issue.
@@ -122,4 +132,3 @@ Sending an empty array (`[]`) will remove all Labels from the Issue.
 
 <%= headers 200 %>
 <%= json(:label) { |h| [h] } %>
-

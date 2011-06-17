@@ -185,7 +185,48 @@ module GitHub
     })
 
     COMMIT = {
+      "url" => "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "commit" => {
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "author" => {
+           "name"  => "Monalisa Octocat",
+           "email" => "support@github.com",
+           "date"  => "2011-04-14T16:00:49Z",
+        },
+        "committer" => {
+           "name"  => "Monalisa Octocat",
+           "email" => "support@github.com",
+           "date"  => "2011-04-14T16:00:49Z",
+        },
+        "message" => "Fix all the bugs",
+        "tree" => {
+          "url" => "https://api.github.com/repos/octocat/Hello-World/tree/6dcb09b5b57875f334f61aebed695e2e4193db5e",
+          "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        },
+      },
+      "author" => USER,
+      "committer" => USER,
+      "parents" => [{
+        "url" => "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      }]
     }
+
+    FULL_COMMIT = COMMIT.merge({
+      "stats" => {
+        "additions" => 104,
+        "deletions" => 4,
+        "total"     => 108,
+      },
+      "files" => [{
+        "filename"  => "file1.txt",
+        "additions" => 10,
+        "deletions" => 2,
+        "total"     => 12,
+      }]
+    })
 
     COMMIT_COMMENT = {
       "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",

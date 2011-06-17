@@ -37,6 +37,18 @@ direction
 
 ### Input
 
+title
+: _Required_ **string**
+
+state
+: _Optional_ **string** - `open` or `closed`. Default is `open`.
+
+description
+: _Optional_ **string**
+
+due\_on
+: _Optional_ **string** - ISO 8601 time.
+
 <%= json \
   :title => "String",
   :state => "open or closed",
@@ -56,6 +68,18 @@ direction
     PATCH /repos/:user/:repo/milestones/:id
 
 ### Input
+
+title
+: _Required_ **string**
+
+state
+: _Optional_ **string** - `open` or `closed`. Default is `open`.
+
+description
+: _Optional_ **string**
+
+due\_on
+: _Optional_ **string** - ISO 8601 time.
 
 <%= json \
   :title => "String",

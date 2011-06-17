@@ -8,6 +8,12 @@ title: Pull Request API v3 | developer.github.com
 
     GET /repo/:user/:repo/pulls
 
+### Parameters
+
+state
+: _Optional_ **string** - `open` or `closed` to filter by state. Default
+is `open`.
+
 ### Response
 
 <%= headers 200 %>
@@ -29,18 +35,16 @@ title: Pull Request API v3 | developer.github.com
 ### Input
 
 title
-: _Optional_ **string** title for this Pull Request. This will default
-to the branch name if no value is specified.
+: _Required_ **string**
 
 body
-: _Optional_ **string** describing this Pull Request.
+: _Optional_ **string**
 
 base
-: _Required_ **string** specifying the branch you want your changes
-pulled into.
+: _Required_ **string** - The branch you want your changes pulled into.
 
 head
-: _Required_ **string** specifying the branch where your changes are implemented.
+: _Required_ **string** - The branch where your changes are implemented.
 
 NOTE: `head` and `base` can be either a sha or a branch name. Typically you
 would namespace `head` with a user like this: `username:branch`.
@@ -58,7 +62,7 @@ You can also create a Pull Request from an existing Issue by passing an
 Issue number instead of `title` and `body`.
 
 issue
-: _Required_ **number** of an issue in this repository to turn into a
+: _Required_ **number** - Issue number in this repository to turn into a
 Pull Request.
 
 <%= json \
@@ -79,15 +83,14 @@ Pull Request.
 ### Input
 
 title
-: _Optional_ **string** title for this Pull Request. This will default
-to the branch name if no value is specified.
+: _Optional_ **string**
 
 body
-: _Optional_ **string** describing this Pull Request.
+: _Optional_ **string**
 
 state
-: _Optional_ **string** to update the state of this Pull Request. Valid
-values are `open` and `closed`.
+: _Optional_ **string** - State of this Pull Request. Valid values are
+`open` and `closed`.
 
 <%= json \
   :title     => "new title",

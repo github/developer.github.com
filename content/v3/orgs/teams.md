@@ -35,19 +35,28 @@ In order to create a team, the authenticated user must be an owner of
 
 ### Input
 
+name
+: _Required_ **string**
+
+repo\_names
+: _Optional_ **array** of **strings**
+
+permission
+: _Optional_ **string**
+
+  `pull` - team members can pull, but not push or administor this
+  repositories. **Default**
+
+  `push` - team members can pull and push, but not administor this
+  repositores.
+
+  `admin` - team members can pull, push and administor these
+  repositories.
+
 <%= json \
-	:name => 'new team',
-	:permission => 'push',
-	:repo_names => ['github/dotfiles'] %>
-
-Valid permissions:
-
-* **pull** - team members can pull, but not push or administor this
-	repositories.
-* **push** - team members can pull and push, but not administor this
-	repositores.
-* **admin** - team members can pull, push and administor these
-	repositories.
+  :name => 'new team',
+  :permission => 'push',
+  :repo_names => ['github/dotfiles'] %>
 
 ### Response
 
@@ -63,9 +72,15 @@ the org that the team is associated with.
 
 ### Input
 
+name
+: _Required_ **string**
+
+permission
+: _Optional_ **string**
+
 <%= json \
-	:name => 'new team name',
-	:permission => 'push' %>
+  :name => 'new team name',
+  :permission => 'push' %>
 
 ### Response
 

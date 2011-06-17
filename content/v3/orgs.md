@@ -11,7 +11,6 @@ List all public organizations for a user.
     GET /users/:user/orgs
 
 List public and private organizations for the authenticated user.
-(_Login required_)
 
     GET /user/orgs
 
@@ -29,27 +28,27 @@ List public and private organizations for the authenticated user.
 <%= headers 200 %>
 <%= json(:full_org) %>
 
-## Edit [A,R,PR]
+## Edit
 
     PATCH /orgs/:org
 
 ### Input
 
 billing_email
-: _Optional_ **string** for a billing email address. This address is not
+: _Optional_ **string** - Billing email address. This address is not
 publicized.
 
 company
-: _Optional_ **string** company this organization belongs to.
+: _Optional_ **string**
 
 email
-: _Optional_ **string** for a publically visible email address.
+: _Optional_ **string** - Publically visible email address.
 
 location
-: _Optional_ **string** where this organization is located.
+: _Optional_ **string**
 
 name
-: _Optional_ **string** name of this organization.
+: _Optional_ **string**
 
 <%= json \
     :billing_email => "support@github.com",

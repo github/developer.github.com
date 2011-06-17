@@ -30,5 +30,5 @@ you can base64 encode it.
 
 <%= headers 201,
       :Location => "https://api.github.com/git/:user/:repo/blob/:sha" %>
-<%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15", :size => 10 %>
+<%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15" %>
 

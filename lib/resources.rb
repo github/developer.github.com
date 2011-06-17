@@ -283,121 +283,166 @@ module GitHub
     }
 
     TREE = {
-      "count"  => 3,
       "sha"  => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
+      "url"  => "https://api.github.com/repo/octocat/Hello-World/trees/9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
       "tree"  => [
         { "path" => "file.rb",
           "mode" => "100644",
           "type" => "blob",
           "size" => 30,
-          "sha"  => "44b4fc6d56897b048c772eb4087f854f46256132"
+          "sha"  => "44b4fc6d56897b048c772eb4087f854f46256132",
+          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/44b4fc6d56897b048c772eb4087f854f46256132",
         },
         { "path" => "subdir",
           "mode" => "040000",
           "type" => "tree",
-          "sha"  => "f484d249c660418515fb01c2b9662073663c242e"
+          "sha"  => "f484d249c660418515fb01c2b9662073663c242e",
+          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/f484d249c660418515fb01c2b9662073663c242e"
         },
         { "path" => "exec_file",
           "mode" => "100755",
           "type" => "blob",
           "size" => 75,
-          "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057"
+          "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
+          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
         }
       ]
     }
     TREE_EXTRA = {
-      "count" => 4,
-      "tree" => {
+      "sha"  => "fc6274d15fa3ae2ab983129fb037999f264ba9a7",
+      "url"  => "https://api.github.com/repo/octocat/Hello-World/trees/fc6274d15fa3ae2ab983129fb037999f264ba9a7",
+      "tree" => [ {
           "path" => "subdir/file.txt",
           "mode" => "100644",
           "type" => "blob",
           "size" => 132,
-          "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
-      }
+          "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
+          "url"  => "https://api.github.com/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
+      } ]
     }
-    FULL_TREE = TREE.merge(TREE_EXTRA) do |k, o, n|
-      k == 'tree' ? o << n : n
-    end
+    TREE_NEW = {
+      "sha"  => "cd8274d15fa3ae2ab983129fb037999f264ba9a7",
+      "url"  => "https://api.github.com/repo/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7",
+      "tree" => [ {
+          "path" => "file.rb",
+          "mode" => "100644",
+          "type" => "blob",
+          "size" => 132,
+          "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
+          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
+      } ]
+    }
 
     COMMIT = {
-      "sha" => "cd52fced9c728f3a37578620e9d6135a55eb2ef2",
+      "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
       "author" => {
-        "name"  => "Scott Chacon",
-        "email" => "scott@github.com",
-        "date"  => "2008-07-09T16:13:30+12:00"
+        "date" => "2010-04-10T14:10:01-07:00",
+        "name" => "Scott Chacon",
+        "email" => "schacon@gmail.com"
       },
       "committer" => {
-        "name"  => "Scott Chacon",
-        "email" => "scott@github.com",
-        "date"  => "2008-07-09T16:13:30+12:00"
+        "date" => "2010-04-10T14:10:01-07:00",
+        "name" => "Scott Chacon",
+        "email" => "schacon@gmail.com"
       },
-      "message"  => "my commit message",
-      "tree"     => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
-      "parents"  => ["7d1b31e74ee336d15cbd21741bc88a537ed063a0"]
+      "message" => "added readme, because im a good github citizen\n",
+      "tree" => {
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb",
+        "sha" => "691272480426f78a0138979dd3ce63b77f706feb"
+      },
+      "parents" => [
+        {
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5",
+          "sha" => "1acc419d4d6a9ce985db7be48c6349a0475975b5"
+        }
+      ]
     }
 
-    COMMITS_REST = [
-      { "sha" => "7d1b31e74ee336d15cbd21741bc88a537ed063a0",
-        "author" => {
-          "name"  => "Scott Chacon",
-          "email" => "scott@github.com",
-          "date"  => "2008-07-08T16:13:30+12:00"
-        },
-        "committer" => {
-          "name"  => "Scott Chacon",
-          "email" => "scott@github.com",
-          "date"  => "2008-07-08T16:13:30+12:00"
-        },
-        "message"  => "my older commit message",
-        "tree"     => "392662aae29f314a428bfc6b619d97bd4ad4a727",
-        "parents"  => ["afc99de753646e2c438203430e97671971740d35"]
+    NEW_COMMIT = {
+      "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
+      "author" => {
+        "date" => "2008-07-09T16:13:30+12:00",
+        "name" => "Scott Chacon",
+        "email" => "schacon@gmail.com"
       },
-      { "sha" => "afc99de753646e2c438203430e97671971740d35",
-        "author" => {
-          "name"  => "Scott Chacon",
-          "email" => "scott@github.com",
-          "date"  => "2008-07-07T16:13:30+12:00"
-        },
-        "committer" => {
-          "name"  => "Scott Chacon",
-          "email" => "scott@github.com",
-          "date"  => "2008-07-07T16:13:30+12:00"
-        },
-        "message"  => "my first commit message",
-        "tree"     => "8bcac778496eb77c1928aa9778f5112c6a822a19",
-        "parents"  => []
+      "committer" => {
+        "date" => "2008-07-09T16:13:30+12:00",
+        "name" => "Scott Chacon",
+        "email" => "schacon@gmail.com"
+      },
+      "message" => "my commit message",
+      "tree" => {
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/trees/827efc6d56897b048c772eb4087f854f46256132",
+        "sha" => "827efc6d56897b048c772eb4087f854f46256132"
+      },
+      "parents" => [
+        {
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7d1b31e74ee336d15cbd21741bc88a537ed063a0",
+          "sha" => "7d1b31e74ee336d15cbd21741bc88a537ed063a0"
+        }
+      ]
+    }
+    
+    TAG = {
+      "tag" => "v0.0.1",
+      "sha" => "940bd336248efae0f9ee5bc7b2d5c985887b16ac",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac",
+      "message" => "initial version\n",
+      "tagger" => {
+        "name" => "Scott Chacon",
+        "email" => "schacon@gmail.com",
+        "date" => "2011-06-17T14:53:35-07:00"
+      },
+      "object" => {
+        "type" => "commit",
+        "sha" => "c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c",
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"
+      }
+    }
+
+    REF = [
+      {
+        "ref" => "refs/heads/sc/featureA",
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/sc/featureA",
+        "object" => {
+          "type" => "commit",
+          "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd",
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"
+        }
       }
     ]
 
-    COMMITS = [COMMIT] + COMMITS_REST
-
-    TAG = {
-      "sha" => "b8d04eddde9f53f3bc76dd048f3477062a27c91a",
-      "tag" => "v1.0",
-      "tagger" => {
-        "name"  => "Scott Chacon",
-        "email" => "scott@github.com",
-        "date"  => "2008-07-09T16:13:30+12:00"
-      },
-      "message" => "my tag message",
-      "object"  => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
-      "type"    => "commit"
-    }
-
     REFS = [
-      { "ref" => "refs/heads/master",
-        "sha" => "75e41c7ddf122d799730c39d2295ee840d9b7b08",
-        "type" => "commit" },
-      { "ref" => "refs/heads/gh-page",
-        "sha" => "1bb58aecaf6bbcf9f7e39dff2e42e0291f42d235",
-        "type" => "commit" },
-      { "ref" => "refs/tags/v0.1",
-        "sha" => "be87be3a49e75474e438a9a9f44b3deafb0af01c",
-        "type" => "tag" },
-      { "ref" => "refs/notes/commits",
-        "sha" => "1bb58aecaf6bbcf9f7e39dff2e42e0291f42d235",
-        "type" => "commit" },
-    ]
+      {
+        "ref" => "refs/heads/master",
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/master",
+        "object" => {
+          "type" => "commit",
+          "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd",
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"
+        }
+      },
+      {
+        "ref" => "refs/heads/gh-pages",
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/gh-pages",
+        "object" => {
+          "type" => "commit",
+          "sha" => "612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac",
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"
+        }
+      },
+      {
+        "ref" => "refs/tags/v0.0.1",
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/tags/v0.0.1",
+        "object" => {
+          "type" => "tag",
+          "sha" => "940bd336248efae0f9ee5bc7b2d5c985887b16ac",
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"
+        }
+      }
+    ] 
 
   end
 end

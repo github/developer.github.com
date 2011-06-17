@@ -4,51 +4,6 @@ title: Git DB Commits API v3 | developer.github.com
 
 # Commits API
 
-## List commits
-
-    GET /repos/:user/:repo/git/commits
-
-### Parameters
-
-start
-: _String_ of the reference or SHA to start at, or an _Array_ of them if
-you want multiple starting points. Defaults to the default branch on the
-server.
-
-not
-: _String_ of the reference or SHA to end at, or an _Array_ of them if
-you want multiple ending points
-
-after
-: _Timestamp_ to return commits only authored after the specified date
-
-before
-: _Timestamp_ to return commits only authored before the specified date
-
-grep
-: _String_ of regex to match against the commit messages
-
-author
-: _String_ of regex to match against the author names and email addresses
-
-committer
-: _String_ of regex to match against the committer names and email addresses
-
-max
-: _Integer_ of maximum number of results to return
-
-skip
-: _Integer_ of number of results to skip (for paging)
-
-path
-: _String_ of path limiter - only return commits that modified the given
-path
-
-### Response
-
-<%= headers 200 %>
-<%= json :commits %>
-
 ## Get a Commit
 
     GET /repos/:user/:repo/git/commits/:sha
@@ -105,7 +60,7 @@ committer.date
 
 <%= json "message"=> "my commit message", \
     "author"=> \
-    {"name" => "file.rb", "email" => "scott@github.com", \
+    {"name" => "Scott Chacon", "email" => "schacon@gmail.com", \
     "date" => "2008-07-09T16:13:30+12:00"}, \
     "parents"=>["7d1b31e74ee336d15cbd21741bc88a537ed063a0"], \
     "tree"=>"827efc6d56897b048c772eb4087f854f46256132" %>
@@ -114,5 +69,5 @@ committer.date
 
 <%= headers 201,
       :Location => "https://api.github.com/git/:user/:repo/commit/:sha" %>
-<%= json :sha => "771696840881ef6119cd74e9eb06305dddca8632", :size => 40 %>
+<%= json :new_commit %>
 

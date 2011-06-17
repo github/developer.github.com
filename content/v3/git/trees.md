@@ -20,7 +20,7 @@ title: Git DB Trees API v3 | developer.github.com
 ### Response
 
 <%= headers 200 %>
-<%= json :full_tree %>
+<%= json :tree_extra %>
 
 ## Create a Tree
 
@@ -66,6 +66,5 @@ tree.content
 
 <%= headers 201,
       :Location => "https://api.github.com/repos/:user/:repo/git/trees/:sha" %>
-<%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15", :size =>
-30 %>
+<%= json :tree_new %>
 

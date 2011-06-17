@@ -15,8 +15,7 @@ The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For
 ### Response
 
 <%= headers 200 %>
-<%= json :ref => "refs/heads/sc/featureA", "type" => "commit", \
-         :sha => "bca1e965df1235af5190b0e7760a456ef9602e9a" %>
+<%= json :ref %>
 
 ## Get all References
 
@@ -72,13 +71,13 @@ out or setting it to `false` will make sure you're not overwriting work.
 
 ### Input
 
-<%= json "sha"=>"827efc6d56897b048c772eb4087f854f46256132",\
+<%= json "sha"=>"aa218f56b14c9653891f9e74264a383fa43fefbd",\
          "force"=>true %>
 
 ### Response
 
-<%= headers 200 %>
-<%= json :ref => "refs/heads/master", "type" => "commit", \
-         "sha"=>"827efc6d56897b048c772eb4087f854f46256132" %>
+<%= headers 200, \
+      :Location => "https://api.github.com/git/:user/:repo/commit/:sha" %>
+<%= json :ref %>
 
 

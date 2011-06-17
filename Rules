@@ -27,6 +27,9 @@ end
 compile '/shared/js/*' do
 end
 
+compile '/assets/*' do
+end
+
 compile '*' do
   filter :erb
   filter :kramdown
@@ -53,6 +56,10 @@ end
 
 route '/shared/js/*/' do
   item.identifier.chomp('/') << '.js'
+end
+
+route '/assets/favicon/' do
+  '/favicon.ico'
 end
 
 route '*' do

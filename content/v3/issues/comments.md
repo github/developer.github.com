@@ -28,7 +28,10 @@ title: Issue Comments API v3 | developer.github.com
 
 ### Input
 
-<%= json :body => "String" %>
+body
+: _Required_ **string**
+
+<%= json :body => "a new comment" %>
 
 ### Response
 
@@ -42,6 +45,9 @@ title: Issue Comments API v3 | developer.github.com
     PATCH /repos/:user/:repo/issues/comments/:id
 
 ### Input
+
+body
+: _Required_ **string**
 
 <%= json :body => "String" %>
 

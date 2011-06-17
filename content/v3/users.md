@@ -34,6 +34,27 @@ information](/v3/#authentication) with your request).
 
 ### Input
 
+name
+: _Optional_ **string**
+
+email
+: _Optional_ **string** - Publically visible email address.
+
+blog
+: _Optional_ **string**
+
+company
+: _Optional_ **string**
+
+location
+: _Optional_ **string**
+
+hireable
+: _Optional_ **boolean**
+
+bio
+: _Optional_ **string**
+
 <%= json \
     :name     => "monalisa octocat",
     :email    => "octocat@github.com",
@@ -42,7 +63,7 @@ information](/v3/#authentication) with your request).
     :location => "San Francisco",
     :hireable => true,
     :bio      => "There once..."
-    %>
+%>
 
 ### Response
 

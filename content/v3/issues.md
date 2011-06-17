@@ -52,11 +52,28 @@ direction
 
 ### Input
 
+title
+: _Required_ **string**
+
+body
+: _Optional_ **string**
+
+assignee
+: _Optional_ **string** - Login for the user that this issue should be
+assigned to.
+
+milestone
+: _Optional_ **number** - Milestone to associate this issue with.
+
+labels
+: _Optional_ **array** of **strings** - Labels to associate with this
+issue.
+
 <%= json \
-  :title     => "String",
-  :body      => "String",
-  :assignee  => "String User login",
-  :milestone => "Integer Milestone number",
+  :title     => "Found a bug",
+  :body      => "I'm having a problem with this.",
+  :assignee  => "octocat",
+  :milestone => 1,
   :labels    => %w(Label1 Label2)
 %>
 
@@ -73,20 +90,37 @@ direction
 
 ### Input
 
+title
+: _Required_ **string**
+
+body
+: _Optional_ **string**
+
+assignee
+: _Optional_ **string** - Login for the user that this issue should be
+assigned to.
+
+state
+: _Optional_ **string** - State of the issue: `open` or `closed`.
+
+milestone
+: _Optional_ **number** - Milestone to associate this issue with.
+
+labels
+: _Optional_ **array** of **strings** - Labels to associate with this
+issue. Pass one or more Labels to _replace_ the set of Labels on this
+Issue. Send an empty array (`[]`) to clear all Labels from the Issue.
+
 <%= json \
-  :title     => "String",
-  :body      => "String",
-  :assignee  => "String User login",
-  :milestone => "Integer Milestone number",
-  :state     => "open or closed",
+  :title     => "Found a bug",
+  :body      => "I'm having a problem with this.",
+  :assignee  => "octocat",
+  :milestone => 1,
+  :state     => "open",
   :labels    => %w(Label1 Label2)
 %>
-
-Pass one or more Labels to _replace_ the set of Labels on this Issue.
-Send an empty array (`[]`) to clear all Labels from the Issue.
 
 ### Response
 
 <%= headers 200 %>
 <%= json :issue %>
-

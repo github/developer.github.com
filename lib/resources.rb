@@ -58,7 +58,7 @@ module GitHub
     USER = {
       "login"        => "octocat",
       "id"           => 1,
-      "gravatar_url" => "https://github.com/images/error/octocat_happy.gif",
+      "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
       "url"          => "https://api.github.com/users/octocat"
     }
 

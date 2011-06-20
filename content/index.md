@@ -4,12 +4,11 @@ title: developer.github.com
 
 # developer.github.com
 
-This describes the Resources that make up the official GitHub API v3. If
+This describes the resources that make up the official GitHub API v3. If
 you have any problems or requests please contact
 [support](mailto:support@github.com?subject=APIv3).
 
-For the new API v3, start browsing the implemented resources on the
-right >>
+For the new API v3, start browsing the resources on the right >>
 
 ## Breaking BETA Changes
 

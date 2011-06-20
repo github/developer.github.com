@@ -1,6 +1,8 @@
 require 'nanoc3/tasks'
 
 task :publish => [:clean] do
+  FileUtils.rm_r('output')
+
   sh "nanoc compile"
 
   # this should not be necessary, but I can't figure out how to

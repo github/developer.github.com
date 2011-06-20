@@ -113,7 +113,37 @@ be a member of <code>:org</code>.</p>
 
 <h3 id="input">Input</h3>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<dl>
+<dt>name</dt>
+  <dd>
+<em>Required</em> <strong>string</strong>
+</dd>
+  <dt>description</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>homepage</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>public</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to create a public repository, <code>false</code>
+to create a private one. Creating private repositories requires a paid
+GitHub account.</dd>
+  <dt>has_issues</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to enable issues for this repository,
+<code>false</code> to disable them. Default is <code>true</code>.</dd>
+  <dt>has_wiki</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to enable the wiki for this
+repository, <code>false</code> to disable it. Default is <code>true</code>.</dd>
+  <dt>has_downloads</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to enable downloads for this
+repository, <code>false</code> to disable them. Default is <code>true</code>.</dd>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This is your first repo"</span><span class="p">,</span>
   <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
@@ -238,8 +268,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
     <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
   <span class="p">},</span>
-  <span class="s2">"integrate_branch"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="s2">"master_branch"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"master_branch"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
   <span class="s2">"has_issues"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"has_wiki"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"has_downloads"</span><span class="o">:</span> <span class="kc">true</span>
@@ -249,6 +278,49 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h2 id="edit">Edit</h2>
 
 <pre><code>PATCH /repos/:user/:repo
+</code></pre>
+
+<h3 id="input-1">Input</h3>
+
+<dl>
+<dt>name</dt>
+  <dd>
+<em>Required</em> <strong>string</strong>
+</dd>
+  <dt>description</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>homepage</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>public</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to create a public repository, <code>false</code>
+to create a private one. Creating private repositories requires a paid
+GitHub account.</dd>
+  <dt>has_issues</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to enable issues for this repository,
+<code>false</code> to disable them. Default is <code>true</code>.</dd>
+  <dt>has_wiki</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to enable the wiki for this
+repository, <code>false</code> to disable it. Default is <code>true</code>.</dd>
+  <dt>has_downloads</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to enable downloads for this
+repository, <code>false</code> to disable them. Default is <code>true</code>.</dd>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This is your first repo"</span><span class="p">,</span>
+  <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+  <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_issues"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_wiki"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_downloads"</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
 </code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -329,17 +401,12 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
     <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
   <span class="p">},</span>
-  <span class="s2">"integrate_branch"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="s2">"master_branch"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"master_branch"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
   <span class="s2">"has_issues"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"has_wiki"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"has_downloads"</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">}</span>
 </code></pre>
-
-<!-- ## Delete-->
-
-<!--     DELETE /repos/:user/:repo-->
 
 <h2 id="list-contributors">List contributors</h2>
 
@@ -458,6 +525,25 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li>
             <h3><a href="/v3/">Summary</a></h3>
             <span class="spacer"></span>
+            <ul>
+              <li><a href="/v3/oauth/">OAuth</a></li>
+            </ul>
+          </li>
+          <li>
+            <h3><a href="/v3/gists/">Gists</a></h3>
+            <ul>
+              <li><a href="/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li>
+            <h3><a href="/v3/git/">Git Data</a></h3>
+            <ul>
+              <li><a href="/v3/git/blobs/">Blobs</a></li>
+              <li><a href="/v3/git/commits/">Commits</a></li>
+              <li><a href="/v3/git/refs/">References</a></li>
+              <li><a href="/v3/git/tags/">Tags</a></li>
+              <li><a href="/v3/git/trees/">Trees</a></li>
+            </ul>
           </li>
           <li>
             <h3><a href="/v3/issues/">Issues</a></h3>
@@ -469,12 +555,6 @@ X-RateLimit-Remaining: 4999</code></pre>
             </ul>
           </li>
           <li>
-            <h3><a href="/v3/gists/">Gists</a></h3>
-            <ul>
-              <li><a href="/v3/gists/comments/">Comments</a></li>
-            </ul>
-          </li>
-          <li>
             <h3><a href="/v3/orgs/">Orgs</a></h3>
             <ul>
               <li><a href="/v3/orgs/members/">Members</a></li>
@@ -482,9 +562,16 @@ X-RateLimit-Remaining: 4999</code></pre>
             </ul>
           </li>
           <li>
+            <h3><a href="/v3/pulls/">Pull Requests</a></h3>
+            <ul>
+              <li><a href="/v3/pulls/comments/">Comments</a></li>
+          </li>
+          <li>
             <h3><a href="/v3/repos/">Repos</a></h3>
             <ul>
               <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/v3/repos/commits/">Commits</a></li>
+              <li><a href="/v3/repos/downloads/">Downloads</a></li>
               <li><a href="/v3/repos/forks/">Forks</a></li>
               <li><a href="/v3/repos/keys/">Keys</a></li>
               <li><a href="/v3/repos/watching/">Watching</a></li>

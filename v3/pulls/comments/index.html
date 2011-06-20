@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gist Comments API v3 | developer.github.com</title>
+  <title>Pull Request Comments API v3 | developer.github.com</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -33,11 +33,11 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="gist-comments-api">Gist Comments API</h1>
+    <h1 id="pull-request-comments-api">Pull Request Comments API</h1>
 
-<h2 id="list-comments-on-a-gist">List comments on a gist</h2>
+<h2 id="list-comments-on-a-pull-request">List comments on a pull request</h2>
 
-<pre><code>GET /gists/:gist_id/comments
+<pre><code>GET /repos/:user/:repo/pulls/:id/comments
 </code></pre>
 
 <h3 id="response">Response</h3>
@@ -48,23 +48,27 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/1"</span><span class="p">,</span>
-    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Great stuff"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+    <span class="s2">"position"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"commit_id"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
     <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
       <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
       <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
       <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
     <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre>
 
 <h2 id="get-a-single-comment">Get a single comment</h2>
 
-<pre><code>GET /gists/comments/:id
+<pre><code>GET /repos/:user/:repo/pulls/comments/:id
 </code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -74,22 +78,26 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Great stuff"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+  <span class="s2">"position"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">"commit_id"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
   <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
   <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
 <span class="p">}</span>
 </code></pre>
 
 <h2 id="create-a-comment">Create a comment</h2>
 
-<pre><code>POST /gists/:gist_id/comments
+<pre><code>POST /repos/:user/:repo/pulls/:id/comments
 </code></pre>
 
 <h3 id="input">Input</h3>
@@ -99,35 +107,74 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dd>
 <em>Required</em> <strong>string</strong>
 </dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
+  <dt>commit_id</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - Sha of the commit to comment on.</dd>
+  <dt>path</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - Relative path of the file to comment on.</dd>
+  <dt>position</dt>
+  <dd>
+<em>Required</em> <strong>number</strong> - Line index in the diff to comment on.</dd>
+</dl><h4 id="example">Example</h4>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Nice change"</span><span class="p">,</span>
+  <span class="s2">"commit_id"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+  <span class="s2">"position"</span><span class="o">:</span> <span class="mi">4</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="alternative-input">Alternative Input</h3>
+
+<p>Instead of passing <code>commit_id</code>, <code>path</code>, and <code>position</code> you can reply to
+an existing Pull Request Comment like this:</p>
+
+<dl>
+<dt>body</dt>
+  <dd>
+<em>Required</em> <strong>string</strong>
+</dd>
+  <dt>in_reply_to</dt>
+  <dd>
+<em>Required</em> <strong>number</strong> - Comment id to reply to.</dd>
+</dl><h4 id="example-1">Example</h4>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Nice change"</span><span class="p">,</span>
+  <span class="s2">"in_reply_to"</span><span class="o">:</span> <span class="mi">4</span>
 <span class="p">}</span>
 </code></pre>
 
 <h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/gists/comments/1
+Location: https://api.github.com/repos/:user/:repo/pulls/comments/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Great stuff"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+  <span class="s2">"position"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">"commit_id"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
   <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
   <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
 <span class="p">}</span>
 </code></pre>
 
 <h2 id="edit-a-comment">Edit a comment</h2>
 
-<pre><code>PATCH /gists/comments/:id
+<pre><code>PATCH /repos/:user/:repo/pulls/comments/:id
 </code></pre>
 
 <h3 id="input-1">Input</h3>
@@ -137,8 +184,10 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dd>
 <em>Required</em> <strong>string</strong>
 </dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
+</dl><h4 id="example-2">Example</h4>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Nice change"</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -149,22 +198,26 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Great stuff"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+  <span class="s2">"position"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">"commit_id"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
   <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
   <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
 <span class="p">}</span>
 </code></pre>
 
 <h2 id="delete-a-comment">Delete a comment</h2>
 
-<pre><code>DELETE /gists/comments/:id
+<pre><code>DELETE /repos/:user/:repo/pulls/comments/:id
 </code></pre>
 
 <h3 id="response-4">Response</h3>

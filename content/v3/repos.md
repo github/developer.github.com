@@ -6,7 +6,7 @@ title: Repos API v3 | developer.github.com
 
 ## List
 
-List repositories for the authenicated user.
+List repositories for the authenticated user.
 
     GET /user/repos
 
@@ -35,11 +35,11 @@ type
 
 ## Create
 
-Create a new repository for the authenicated user.
+Create a new repository for the authenticated user.
 
     POST /user/repos
 
-Create a new repository in this organization. The authenicated user must
+Create a new repository in this organization. The authenticated user must
 be a member of `:org`.
 
     POST /orgs/:org/repos

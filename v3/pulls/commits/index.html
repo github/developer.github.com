@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Git API v3 | developer.github.com</title>
+  <title>Pull Request Commits API v3 | developer.github.com</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -33,36 +33,33 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="git-db-api">Git DB API</h1>
+    <h1 id="pull-request-commits-api">Pull Request Commits API</h1>
 
-<p>The Git Database API gives you access to read and write raw Git objects
-to your Git database on GitHub and to list and update your references
-(branch heads and tags).</p>
+<h2 id="list-commits-on-a-pull-request">List commits on a pull request</h2>
 
-<p>This basically allows you to reimplement a lot of Git functionality over
-our API - by creating raw objects directly into the database and updating
-branch references you could technically do just about anything that Git
-can do without having Git installed.</p>
+<pre><code>GET /repos/:user/:repo/pulls/:pull_id/commits
+</code></pre>
 
-<p><img src="http://progit.org/figures/ch9/18333fig0904-tn.png" alt="git db"></p>
+<h3 id="response">Response</h3>
 
-<p>For more information on the Git object database, please read the 
-<a href="http://progit.org/book/ch9-0.html">Git Internals</a> chapter of
-the Pro Git book.</p>
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<p>As an example, if you wanted to commit a change to a file in your
-repository, you would:</p>
-
-<ul>
-<li>get the current commit object</li>
-  <li>retrieve the tree it points to</li>
-  <li>retrieve the content of the blob object that tree has for that particular file path</li>
-  <li>change the content somehow and post a new blob object with that new content, getting a blob SHA back</li>
-  <li>post a new tree object with that file path pointer replaced with your new blob SHA getting a tree SHA back</li>
-  <li>create a new commit object with the current commit SHA as the parent and the new tree SHA, getting a commit SHA back</li>
-  <li>update the reference of your branch to point to the new commit SHA</li>
-</ul><p>It might seem complex, but it’s actually pretty simple when you understand
-the model and it opens up a ton of things you could potentially do with the API.</p>
+<!-- <pre class="highlight"><code class="language-javascript">[
+  {
+    "id": 1,
+    "url": "https://api.github.com/gists/comments/1",
+    "body": "Just commenting for the sake of commenting",
+    "user": {
+      "login": "octocat",
+      "id": 1,
+      "gravatar_url": "https://github.com/images/error/octocat_happy.gif",
+      "url": "https://api.github.com/users/octocat"
+    },
+    "created_at": "2011-04-18T23:23:56Z"
+  }
+]</code></pre>-->
       </div>
 
     <div class="sidebar-shell">
@@ -71,25 +68,6 @@ the model and it opens up a ton of things you could potentially do with the API.
           <li>
             <h3><a href="/v3/">Summary</a></h3>
             <span class="spacer"></span>
-            <ul>
-              <li><a href="/v3/oauth/">OAuth</a></li>
-            </ul>
-          </li>
-          <li>
-            <h3><a href="/v3/gists/">Gists</a></h3>
-            <ul>
-              <li><a href="/v3/gists/comments/">Comments</a></li>
-            </ul>
-          </li>
-          <li>
-            <h3><a href="/v3/git/">Git Data</a></h3>
-            <ul>
-              <li><a href="/v3/git/blobs/">Blobs</a></li>
-              <li><a href="/v3/git/commits/">Commits</a></li>
-              <li><a href="/v3/git/refs/">References</a></li>
-              <li><a href="/v3/git/tags/">Tags</a></li>
-              <li><a href="/v3/git/trees/">Trees</a></li>
-            </ul>
           </li>
           <li>
             <h3><a href="/v3/issues/">Issues</a></h3>
@@ -101,6 +79,12 @@ the model and it opens up a ton of things you could potentially do with the API.
             </ul>
           </li>
           <li>
+            <h3><a href="/v3/gists/">Gists</a></h3>
+            <ul>
+              <li><a href="/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li>
             <h3><a href="/v3/orgs/">Orgs</a></h3>
             <ul>
               <li><a href="/v3/orgs/members/">Members</a></li>
@@ -108,20 +92,19 @@ the model and it opens up a ton of things you could potentially do with the API.
             </ul>
           </li>
           <li>
-            <h3><a href="/v3/pulls/">Pull Requests</a></h3>
-            <ul>
-              <li><a href="/v3/pulls/comments/">Comments</a></li>
-          </li>
-          <li>
             <h3><a href="/v3/repos/">Repos</a></h3>
             <ul>
               <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
-              <li><a href="/v3/repos/commits/">Commits</a></li>
-              <li><a href="/v3/repos/downloads/">Downloads</a></li>
               <li><a href="/v3/repos/forks/">Forks</a></li>
               <li><a href="/v3/repos/keys/">Keys</a></li>
               <li><a href="/v3/repos/watching/">Watching</a></li>
             </ul>
+          </li>
+          <li>
+            <h3><a href="/v3/pulls/">Pull Requests</a></h3>
+            <ul>
+              <li><a href="/v3/pulls/comments/">Comments</a></li>
+              <li><a href="/v3/pulls/commits/">Commits</a></li>
           </li>
           <li>
             <h3><a href="/v3/users/">Users</a></h3>

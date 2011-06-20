@@ -558,7 +558,7 @@ module GitHub
         }
       ]
     }
-    
+
     GITTAG = {
       "tag" => "v0.0.1",
       "sha" => "940bd336248efae0f9ee5bc7b2d5c985887b16ac",
@@ -616,7 +616,7 @@ module GitHub
           "url" => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"
         }
       }
-    ] 
+    ]
 
   end
 end

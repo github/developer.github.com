@@ -32,6 +32,9 @@ sort
 direction
 : `asc` or `desc`, default: `desc`.
 
+since
+: _Optional_ **string** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+
 ### Response
 
 <%= headers 200, :pagination => true %>

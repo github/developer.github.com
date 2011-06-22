@@ -33,6 +33,9 @@ will be returned.
 
 ## List commit comments for a repository
 
+Commit Comments leverage [these](#custom-mime-types) custom mime types. You can
+read more about the use of mimes types in the API [here](/v3/mimes/).
+
     GET /repos/:user/:repo/comments
 
 ### Response
@@ -122,3 +125,12 @@ body
 
 <%= headers 204 %>
 
+## Custom Mime Types
+
+These are the support mime types for commit comments. You can read more
+about the use of mimes types in the API [here](/v3/mimes/).
+
+    application/vnd.github-commitcomment.raw+json
+    application/vnd.github-commitcomment.text+json
+    application/vnd.github-commitcomment.html+json
+    application/vnd.github-commitcomment.full+json

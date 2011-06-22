@@ -9,6 +9,9 @@ for the blob api takes an encoding parameter that can be either `utf-8`
 or `base64`.  If your data cannot be losslessly sent as a UTF-8 string,
 you can base64 encode it.
 
+Blobs leverage [these](#custom-mime-types) custom mime types. You can
+read more about the use of mimes types in the API [here](/v3/mimes/).
+
 ## Get a Blob
 
     GET /repos/:user/:repo/git/blobs/:sha
@@ -32,3 +35,10 @@ you can base64 encode it.
       :Location => "https://api.github.com/git/:user/:repo/blob/:sha" %>
 <%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15" %>
 
+## Custom Mime Types
+
+These are the support mime types for blobs. You can read more about the
+use of mimes types in the API [here](/v3/mimes/).
+
+    application/json
+    application/vnd.github-blob.raw

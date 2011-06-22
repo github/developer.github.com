@@ -4,6 +4,9 @@ title: Issues API v3 | developer.github.com
 
 # Issues API
 
+Issues leverage [these](#custom-mime-types) custom mime types. You can
+read more about the use of mimes types in the API [here](/v3/mimes/).
+
 ## List issues for a repository
 
     GET /repos/:user/:repo/issues
@@ -127,3 +130,13 @@ Issue. Send an empty array (`[]`) to clear all Labels from the Issue.
 
 <%= headers 200 %>
 <%= json :issue %>
+
+## Custom Mime Types
+
+These are the support mime types for issues. You can read more about the
+use of mimes types in the API [here](/v3/mimes/).
+
+    application/vnd.github-issue.raw+json
+    application/vnd.github-issue.text+json
+    application/vnd.github-issue.html+json
+    application/vnd.github-issue.full+json

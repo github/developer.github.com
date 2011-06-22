@@ -4,6 +4,10 @@ title: Pull Request Comments API v3 | developer.github.com
 
 # Pull Request Comments API
 
+Pull Request Comments leverage [these](#custom-mime-types) custom mime
+types. You can read more about the use of mimes types in the API
+[here](/v3/mimes/).
+
 ## List comments on a pull request
 
     GET /repos/:user/:repo/pulls/:id/comments
@@ -101,3 +105,13 @@ body
 ### Response
 
 <%= headers 204 %>
+
+## Custom Mime Types
+
+These are the support mime types for pull request comments. You can read
+more about the use of mimes types in the API [here](/v3/mimes/).
+
+    application/vnd.github-pullcomment.raw+json
+    application/vnd.github-pullcomment.text+json
+    application/vnd.github-pullcomment.html+json
+    application/vnd.github-pullcomment.full+json

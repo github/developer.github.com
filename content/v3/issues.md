@@ -14,13 +14,14 @@ read more about the use of mimes types in the API [here](/v3/mimes/).
 ### Parameters
 
 milestone
-: Optional _Integer_ Milestone number.
+: Optional _Integer_ Milestone number or "none" for Issues with no
+Milestone.
 
 state
 : `open`, `closed`, default: `open`
 
 assignee
-: _String_ User login.
+: _String_ User login or "none" for Issues with no assigned User.
 
 mentioned
 : _String_ User login.

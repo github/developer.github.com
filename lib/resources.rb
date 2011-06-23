@@ -292,7 +292,8 @@ module GitHub
       "expirationdate" => "2011-04-14T16:00:49Z",
       "prefix"         => "downloads/octocat/Hello-World/",
       "mime_type"      => "application/octet-stream",
-      "redirect"       => false
+      "redirect"       => false,
+      "s3_url"         => "https://bucket.s3.amazonaws.com/"
     })
 
     ORG = {

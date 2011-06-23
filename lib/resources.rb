@@ -103,6 +103,10 @@ module GitHub
     REPO = {
       "url"              => "https://api.github.com/repos/octocat/Hello-World",
       "html_url"         => "https://github.com/octocat/Hello-World",
+      "clone_url"        => "https://github.com/octocat/Hello-World.git",
+      "git_url"          => "git://github.com/octocat/Hello-World.git",
+      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
+      "svn_url"          => "http://svn.github.com/octocat/Hello-World",
       "owner"            => USER,
       "name"             => "Hello-World",
       "description"      => "This your first repo!",

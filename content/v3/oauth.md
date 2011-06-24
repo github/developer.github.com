@@ -132,4 +132,3 @@ links that might be of help:
 * [Ruby OmniAuth example](http://github.com/intridea/omniauth)
 * [Ruby Sinatra extension](http://github.com/atmos/sinatra_auth_github)
 * [Ruby Warden strategy](http://github.com/atmos/warden-github)
-* [Node.js demo using Nozzle](http://github.com/fictorial/nozzle/blob/master/demo/08-github-oauth2.js)

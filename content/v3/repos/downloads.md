@@ -26,10 +26,10 @@ instead.
 <%= headers 200 %>
 <%= json :download %>
 
-## Create a new download Part 1
+## Create a new download (Part 1: Create the resource)
 
-Creating a new download is a two step process. You must first create the
-download record:
+Creating a new download is a two step process. You must first create a
+new download resource.
 
     POST /repos/:user/:repo/downloads
 
@@ -55,19 +55,62 @@ content\_type
 <%= headers 201, :Location => "https://api.github.com/user/repo/downloads/1" %>
 <%= json :create_download %>
 
-## Create a new download Part 2
+## Create a new download (Part 2: Upload file to s3)
 
-The response from part one returns information that allows you to upload
-your file to s3. Once you have successfully uploaded to s3, you must
-make one more call which will validate that the file is on s3 and enable
-your download:
+Now that you have created the download resource, you can use the
+information in the response to upload your file to s3. This can be done
+with a `POST` to the `s3_url` you got in the create response. Here is a
+brief example using curl:
 
-    PATCH /repos/:user/:repo/downloads/:id
+    curl \
+    -F "key=downloads/octocat/Hello-World/new_file.jpg" \
+    -F "acl=public-read" \
+    -F "success_action_redirect=https://github.com/ocotocat/Hello-World/downloads/refresh" \
+    -F "Filename=new_file.jpg" \
+    -F "AWSAccessKeyId=1ABCDEF..." \
+    -F "Policy=ewogIC..." \
+    -F "Signature=mwnF..." \
+    -F "Content-Type=image/jpeg" \
+    -F "file=@new_file.jpg" \
+    https://github.s3.amazonaws.com/
 
-### Response
+NOTES
 
-<%= headers 200 %>
-<%= json :download %>
+The order in which you pass these fields matters! Follow the order shown
+above exactly. All parameters shown are required and if you excluded or
+modify them your upload will fail because the values are hashed and signed
+by the policy.
+
+key
+: Value of `path` field in the response.
+
+acl
+: Value of `acl` field in the response.
+
+success_action_redirect
+: Value of `redirect` field in the response.
+
+Filename
+: Value of `name` field in the response.
+
+AWSAccessKeyId
+: Value of `accesskeyid` field in the response.
+
+Policy
+: Value of `policy` field in the response.
+
+Signature
+: Value of `signature` field in the response.
+
+Content-Type
+: Value of `mime_type` field in the response.
+
+file
+: Local file. Example assumes the file existing in the directory where
+you are running the curl command. Yes, the `@` matters.
+
+More information about using the REST API to interact with s3 can
+be found [here](http://docs.amazonwebservices.com/AmazonS3/latest/API/).
 
 ## Delete a download
 

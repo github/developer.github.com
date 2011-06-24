@@ -274,26 +274,26 @@ module GitHub
 
     DOWNLOAD = {
       "url"            => "https://api.github.com/repos/octocat/Hello-World/downloads/1",
-      "html_url"       => "https://github.com/repos/octocat/Hello-World/downloads/filename",
+      "html_url"       => "https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg",
       "id"             => 1,
-      "name"           => "file.zip",
-      "description"    => "The latest release",
+      "name"           => "new_file.jpg",
+      "description"    => "Description of your download",
       "size"           => 1024,
       "download_count" => 40
     }
 
     CREATE_DOWNLOAD = DOWNLOAD.merge({
-      "policy"         => "hash",
-      "signature"      => "hash",
-      "bucket"         => "hash",
-      "accesskeyid"    => "hash",
-      "path"           => "file.zip",
+      "policy"         => "ewogICAg...",
+      "signature"      => "mwnFDC...",
+      "bucket"         => "github",
+      "accesskeyid"    => "1ABCDEFG...",
+      "path"           => "downloads/ocotocat/Hello-World/new_file.jpg",
       "acl"            => "public-read",
       "expirationdate" => "2011-04-14T16:00:49Z",
       "prefix"         => "downloads/octocat/Hello-World/",
-      "mime_type"      => "application/octet-stream",
-      "redirect"       => false,
-      "s3_url"         => "https://bucket.s3.amazonaws.com/"
+      "mime_type"      => "image/jpeg",
+      "redirect"       => "https://github.com/octocat/Hello-World/downloads/refresh",
+      "s3_url"         => "https://github.s3.amazonaws.com/"
     })
 
     ORG = {

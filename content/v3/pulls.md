@@ -10,7 +10,7 @@ can read more about the use of mimes types in the API
 
 ## List pull requests
 
-    GET /repo/:user/:repo/pulls
+    GET /repos/:user/:repo/pulls
 
 ### Parameters
 
@@ -25,7 +25,7 @@ is `open`.
 
 ## Get a single pull request
 
-    GET /repo/:user/:repo/pulls/:id
+    GET /repos/:user/:repo/pulls/:number
 
 ### Response
 

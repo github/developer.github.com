@@ -100,6 +100,9 @@ new download resource.</p>
   <dd>
 <em>Required</em> <strong>string</strong>
 </dd>
+  <dt>size</dt>
+  <dd>
+<em>Required</em> <strong>number</strong> - Size of file in bytes.</dd>
   <dt>description</dt>
   <dd>
 <em>Optional</em> <strong>string</strong>
@@ -109,7 +112,8 @@ new download resource.</p>
 <em>Optional</em> <strong>string</strong>
 </dd>
 </dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new_file.jpg"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">114034</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Latest release"</span><span class="p">,</span>
   <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"text/plain"</span>
 <span class="p">}</span>
@@ -139,7 +143,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"expirationdate"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
   <span class="s2">"prefix"</span><span class="o">:</span> <span class="s2">"downloads/octocat/Hello-World/"</span><span class="p">,</span>
   <span class="s2">"mime_type"</span><span class="o">:</span> <span class="s2">"image/jpeg"</span><span class="p">,</span>
-  <span class="s2">"redirect"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/downloads/refresh"</span><span class="p">,</span>
+  <span class="s2">"redirect"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"s3_url"</span><span class="o">:</span> <span class="s2">"https://github.s3.amazonaws.com/"</span>
 <span class="p">}</span>
 </code></pre>
@@ -154,7 +158,7 @@ brief example using curl:</p>
 <pre><code>curl \
 -F "key=downloads/octocat/Hello-World/new_file.jpg" \
 -F "acl=public-read" \
--F "success_action_redirect=https://github.com/ocotocat/Hello-World/downloads/refresh" \
+-F "success_action_status=201" \
 -F "Filename=new_file.jpg" \
 -F "AWSAccessKeyId=1ABCDEF..." \
 -F "Policy=ewogIC..." \
@@ -176,8 +180,8 @@ by the policy.</p>
   <dd>Value of <code>path</code> field in the response.</dd>
   <dt>acl</dt>
   <dd>Value of <code>acl</code> field in the response.</dd>
-  <dt>success_action_redirect</dt>
-  <dd>Value of <code>redirect</code> field in the response.</dd>
+  <dt>success_action_status</dt>
+  <dd>201, or whatever you want to get back.</dd>
   <dt>Filename</dt>
   <dd>Value of <code>name</code> field in the response.</dd>
   <dt>AWSAccessKeyId</dt>

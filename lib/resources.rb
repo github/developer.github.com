@@ -292,7 +292,7 @@ module GitHub
       "expirationdate" => "2011-04-14T16:00:49Z",
       "prefix"         => "downloads/octocat/Hello-World/",
       "mime_type"      => "image/jpeg",
-      "redirect"       => "https://github.com/octocat/Hello-World/downloads/refresh",
+      "redirect"       => false,
       "s3_url"         => "https://github.s3.amazonaws.com/"
     })
 

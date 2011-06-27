@@ -38,6 +38,9 @@ new download resource.
 name
 : _Required_ **string**
 
+size
+: _Required_ **number** - Size of file in bytes.
+
 description
 : _Optional_ **string**
 
@@ -45,7 +48,8 @@ content\_type
 : _Optional_ **string**
 
 <%= json \
-  :name => "file1.txt",
+  :name => "new_file.jpg",
+  :size => 114034,
   :description => "Latest release",
   :content_type => "text/plain",
 %>
@@ -65,7 +69,7 @@ brief example using curl:
     curl \
     -F "key=downloads/octocat/Hello-World/new_file.jpg" \
     -F "acl=public-read" \
-    -F "success_action_redirect=https://github.com/ocotocat/Hello-World/downloads/refresh" \
+    -F "success_action_status=201" \
     -F "Filename=new_file.jpg" \
     -F "AWSAccessKeyId=1ABCDEF..." \
     -F "Policy=ewogIC..." \
@@ -87,8 +91,8 @@ key
 acl
 : Value of `acl` field in the response.
 
-success_action_redirect
-: Value of `redirect` field in the response.
+success_action_status
+: 201, or whatever you want to get back.
 
 Filename
 : Value of `name` field in the response.

@@ -117,6 +117,7 @@ module GitHub
       "forks"            => 9,
       "watchers"         => 80,
       "size"             => 108,
+      "master_branch"    => 'master',
       "open_issues"      => 0,
       "pushed_at"        => "2011-01-26T19:06:43Z",
       "created_at"       =>"2011-01-26T19:01:12Z"
@@ -126,7 +127,6 @@ module GitHub
       "organization"     => USER.merge('type' => 'Organization'),
       "parent"           => REPO,
       "source"           => REPO,
-      "master_branch"    => 'master',
       "has_issues"       => true,
       "has_wiki"         => true,
       "has_downloads"    => true

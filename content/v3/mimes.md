@@ -96,7 +96,7 @@ resource described above. These mime types are allowed:
     application/vnd.github-gistcomment.raw+json
     application/vnd.github-gistcomment.text+json
     application/vnd.github-gistcomment.html+json
-    application/vnd.github-pullcomment.full+json
+    application/vnd.github-gistcomment.full+json
 
 ## Git Blob
 

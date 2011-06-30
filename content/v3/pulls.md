@@ -10,7 +10,7 @@ can read more about the use of mimes types in the API
 
 ## List pull requests
 
-    GET /repo/:user/:repo/pulls
+    GET /repos/:user/:repo/pulls
 
 ### Parameters
 
@@ -25,7 +25,7 @@ is `open`.
 
 ## Get a single pull request
 
-    GET /repo/:user/:repo/pulls/:id
+    GET /repos/:user/:repo/pulls/:id
 
 ### Response
 
@@ -34,7 +34,7 @@ is `open`.
 
 ## Create a pull request
 
-    POST /repo/:user/:repo/pulls
+    POST /repos/:user/:repo/pulls
 
 ### Input
 
@@ -82,7 +82,7 @@ Pull Request.
 
 ## Update a pull request
 
-    PATCH /repo/:user/:repo/pulls/:id
+    PATCH /repos/:user/:repo/pulls/:id
 
 ### Input
 
@@ -118,7 +118,7 @@ state
 
 ## List pull requests files
 
-    GET /repo/:user/:repo/pulls/:id/files
+    GET /repos/:user/:repo/pulls/:id/files
 
 ### Response
 
@@ -127,7 +127,7 @@ state
 
 ## Get if a pull request has been merged
 
-    GET /repo/:user/:repo/pulls/:id/merge
+    GET /repos/:user/:repo/pulls/:id/merge
 
 ### Response if pull request has been merged
 
@@ -139,7 +139,7 @@ state
 
 ## Merge a pull request (Merge Button™)
 
-    PUT /repo/:user/:repo/pulls/:id/merge
+    PUT /repos/:user/:repo/pulls/:id/merge
 
 ### Response if merge was successful
 

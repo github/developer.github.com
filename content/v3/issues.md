@@ -9,7 +9,7 @@ read more about the use of mimes types in the API [here](/v3/mimes/).
 
 ## List your issues
 
-   GET /issues
+    GET /issues
 
 ### Parameters
 

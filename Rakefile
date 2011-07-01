@@ -1,5 +1,6 @@
 require 'nanoc3/tasks'
 
+desc "Publish to http://developer.github.com"
 task :publish => [:clean] do
   FileUtils.rm_r('output') if File.exist?('output')
 

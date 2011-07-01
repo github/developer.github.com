@@ -38,12 +38,97 @@
 <p>Issues leverage <a href="#custom-mime-types">these</a> custom mime types. You can
 read more about the use of mimes types in the API <a href="/v3/mimes/">here</a>.</p>
 
+<h2 id="list-your-issues">List your issues</h2>
+
+<p>GET /issues</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>filter</dt>
+  <dd>
+    <ul>
+<li>
+<code>assigned</code>: Issues assigned to you (default)</li>
+      <li>
+<code>created</code>: Issues created by you</li>
+      <li>
+<code>mentioned</code>: Issues mentioning you</li>
+      <li>
+<code>subscribed</code>: Issues you’re subscribed to updates for</li>
+    </ul>
+</dd>
+</dl><h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/issues/1"</span><span class="p">,</span>
+    <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1347</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
+    <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Found a bug"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"I'm having a problem with this."</span><span class="p">,</span>
+    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"labels"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+        <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"assignee"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"milestone"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="o">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"gravatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+      <span class="p">},</span>
+      <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">"closed_issues"</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+      <span class="s2">"due_on"</span><span class="o">:</span> <span class="kc">null</span>
+    <span class="p">},</span>
+    <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pull_request"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/issues/1"</span><span class="p">,</span>
+      <span class="s2">"diff_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/issues/1.diff"</span><span class="p">,</span>
+      <span class="s2">"patch_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/issues/1.patch"</span>
+    <span class="p">},</span>
+    <span class="s2">"closed_at"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-22T13:33:48Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-22T13:33:48Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre>
+
 <h2 id="list-issues-for-a-repository">List issues for a repository</h2>
 
 <pre><code>GET /repos/:user/:repo/issues
 </code></pre>
 
-<h3 id="parameters">Parameters</h3>
+<h3 id="parameters-1">Parameters</h3>
 
 <dl>
 <dt>milestone</dt>
@@ -90,7 +175,7 @@ read more about the use of mimes types in the API <a href="/v3/mimes/">here</a>.
   <dt>since</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ</dd>
-</dl><h3 id="response">Response</h3>
+</dl><h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -160,7 +245,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /repos/:user/:repo/issues/:id
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -260,7 +345,7 @@ issue.</dd>
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="response-2">Response</h3>
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/user/repo/issues/1
@@ -366,7 +451,7 @@ Issue. Send an empty array (<code>[]</code>) to clear all Labels from the Issue.
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="response-3">Response</h3>
+<h3 id="response-4">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000

@@ -107,10 +107,13 @@ Compilation times got you down?  Use `autocompile`!
 This starts a web server too, so there's no need to run `nanoc view`.
 One thing: remember to add trailing slashes to all nanoc links!
 
+## Deploy
+
+    $ rake publish
+
 ## TODO
 
-* Need some way to deploy?  Look into GitHub pages to start, until we
-  can integrate through a simple hurl.it app for live API calls.
+* Integrate through a simple hurl.it app for live API calls.
 * Maybe add a nice TOC at the top of each page.
 * Write a task for verifying JSON Resource examples against the actual
   API.

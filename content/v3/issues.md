@@ -7,6 +7,23 @@ title: Issues API v3 | developer.github.com
 Issues leverage [these](#custom-mime-types) custom mime types. You can
 read more about the use of mimes types in the API [here](/v3/mimes/).
 
+## List your issues
+
+   GET /issues
+
+### Parameters
+
+filter
+: * `assigned`: Issues assigned to you (default)
+  * `created`: Issues created by you
+  * `mentioned`: Issues mentioning you
+  * `subscribed`: Issues you're subscribed to updates for
+
+### Response
+
+<%= headers 200, :pagination => true %>
+<%= json(:issue) { |h| [h] } %>
+
 ## List issues for a repository
 
     GET /repos/:user/:repo/issues

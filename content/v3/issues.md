@@ -19,6 +19,22 @@ filter
   * `mentioned`: Issues mentioning you
   * `subscribed`: Issues you're subscribed to updates for
 
+state
+: `open`, `closed`, default: `open`
+
+labels
+: _String_ list of comma separated Label names.  Example:
+`bug,ui,@high`
+
+sort
+: `created`, `updated`, `comments`, default: `created`
+
+direction
+: `asc` or `desc`, default: `desc`.
+
+since
+: _Optional_ **string** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+
 ### Response
 
 <%= headers 200, :pagination => true %>

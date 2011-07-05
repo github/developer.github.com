@@ -1,7 +1,7 @@
 // Init sidebar
 $(function() {
   var activeItem,
-      helpList = $('#js-help-sidebar .js-topic'),
+      helpList = $('#js-sidebar .js-topic'),
       firstOccurance = true
 
   // hide list items at startup

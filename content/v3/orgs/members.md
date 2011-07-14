@@ -22,11 +22,11 @@ members will be returned. Otherwise only public members are returned.
 
     GET /orgs/:org/members/:user
 
-### Reponse if user is a member
+### Response if user is a member
 
 <%= headers 204 %>
 
-### Reponse if user is not a member
+### Response if user is not a member
 
 <%= headers 404 %>
 
@@ -62,11 +62,11 @@ publicized or not.
 
     GET /orgs/:org/public_members/:user
 
-### Reponse if user is a public member
+### Response if user is a public member
 
 <%= headers 204 %>
 
-### Reponse if user is not a public member
+### Response if user is not a public member
 
 <%= headers 404 %>
 

@@ -134,7 +134,7 @@ issue.
 ### Input
 
 title
-: _Required_ **string**
+: _Optional_ **string**
 
 body
 : _Optional_ **string**

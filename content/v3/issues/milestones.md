@@ -12,7 +12,7 @@ state
 : `open`, `closed`, default: `open`
 
 sort
-: `created`, `updated`, `comments`, default: `created`
+: `due_date`, `completeness`, default: `due_date`
 
 direction
 : `asc` or `desc`, default: `desc`.

@@ -4,7 +4,7 @@ title: Issue Milestones API v3 | developer.github.com
 
 # Milestones API
 
-## List milestones for an issue
+## List milestones for a repository
 
     GET /repos/:user/:repo/milestones
 

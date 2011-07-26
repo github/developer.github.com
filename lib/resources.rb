@@ -445,6 +445,7 @@ module GitHub
       "user"         => USER,
       "files"        => GIST_FILES,
       "comments"     => 0,
+      "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
       "created_at"   => "2010-04-14T02:15:15Z"

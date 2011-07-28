@@ -161,7 +161,7 @@ NOTE: This does not delete the user, it just remove them from the team.
 
 ## Get team repo
 
-    GET /teams/:id/repos/:repo
+    GET /teams/:id/repos/:user/:repo
 
 ### Reponse if repo is managed by this team
 
@@ -176,7 +176,7 @@ NOTE: This does not delete the user, it just remove them from the team.
 In order to add a repo to a team, the authenticated user must be an
 owner of the org that the team is associated with.
 
-    PUT /teams/:id/repos/:repo
+    PUT /teams/:id/repos/:user/:repo
 
 ### Reponse
 
@@ -188,7 +188,7 @@ In order to add a repo to a team, the authenticated user must be an
 owner of the org that the team is associated with.
 NOTE: This does not delete the repo, it just removes it from the team.
 
-    DELETE /teams/:id/repos/:repo
+    DELETE /teams/:id/repos/:user/:repo
 
 ### Reponse
 

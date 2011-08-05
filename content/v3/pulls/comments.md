@@ -5,7 +5,7 @@ title: Pull Request Comments API v3 | developer.github.com
 # Pull Request Comments API
 
 Pull Request Comments leverage [these](#custom-mime-types) custom mime
-types. You can read more about the use of mimes types in the API
+types. You can read more about the use of mime types in the API
 [here](/v3/mimes/).
 
 ## List comments on a pull request

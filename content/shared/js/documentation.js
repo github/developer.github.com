@@ -70,4 +70,9 @@ $(function() {
       $(this).css('background-position','0px 0px')
     }
   })
+
+  // Dynamic year for footer copyright
+  var currentYear = (new Date).getFullYear();
+  $("#year").text( (new Date).getFullYear() );
+
 });

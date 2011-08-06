@@ -10,24 +10,7 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
-compile '/css/*/' do
-  # don’t filter or layout
-end
-
-compile '/shared/css/*/' do
-  # don’t filter or layout
-end
-
-compile '/images/*' do
-end
-
-compile '/shared/images/*' do
-end
-
-compile '/shared/js/*' do
-end
-
-compile '/assets/*' do
+compile '/static/*' do
 end
 
 compile '*' do
@@ -38,28 +21,8 @@ compile '*' do
   layout 'default'
 end
 
-route '/css/*/' do
-  item.identifier.chomp('/') << '.css'
-end
-
-route '/shared/css/*/' do
-  item.identifier.chomp('/') << '.css'
-end
-
-route '/images/*/' do
-  item.identifier.chomp('/') << '.png'
-end
-
-route '/shared/images/*/' do
-  item.identifier.chomp('/') << '.png'
-end
-
-route '/shared/js/*/' do
-  item.identifier.chomp('/') << '.js'
-end
-
-route '/assets/favicon/' do
-  '/favicon.ico'
+route '/static/*' do
+  item.identifier[7..-2]
 end
 
 route '*' do

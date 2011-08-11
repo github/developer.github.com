@@ -4,7 +4,7 @@ title: Pull Request API v3 | developer.github.com
 
 # Pull Request API
 
-Pull Requets leverage [these](#custom-mime-types) custom mime types. You
+Pull Requests leverage [these](#custom-mime-types) custom mime types. You
 can read more about the use of mimes types in the API
 [here](/v3/mimes/).
 

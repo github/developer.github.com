@@ -10,7 +10,7 @@ title: Repo Watching API v3 | developer.github.com
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => true %>
 <%= json(:user) { |h| [h] } %>
 
 ## List repos being watched
@@ -25,7 +25,7 @@ List repos being watched by the authenticated user
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => true %>
 <%= json(:repo) { |h| [h] } %>
 
 ## Check if you are watching a repo

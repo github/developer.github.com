@@ -95,6 +95,17 @@ host.
 Scopes let you specify exactly what type of access you need. This will
 be displayed to the user on the authorize form.
 
+Check headers to see what OAuth scopes you have, and what the API action
+accept.
+
+    $ curl -H "Authorization: bearer TOKEN" https://api.github.com/users/technoweenie -I
+    HTTP/1.1 200 OK
+    X-OAuth-Scopes: repo, user
+    X-Accepted-OAuth-Scopes: user
+
+`X-OAuth-Scopes` lists the scopes your token has authorized.
+`X-Accepted-OAuth-Scopes` lists the scopes that the action checks for.
+
 (no scope)
 : public read-only access (includes public user profile info, public
 repo info, and gists).

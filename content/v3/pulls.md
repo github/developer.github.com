@@ -140,6 +140,11 @@ state
 ## Merge a pull request (Merge Button™)
 
     PUT /repos/:user/:repo/pulls/:id/merge
+    
+### Input
+
+commit_message
+: _Required_ **string**
 
 ### Response if merge was successful
 

@@ -143,7 +143,7 @@ state
     
 ### Input
 
-commit_message
+commit\_message
 : _Required_ **string**
 
 ### Response if merge was successful

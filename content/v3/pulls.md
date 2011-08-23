@@ -144,7 +144,7 @@ state
 ### Input
 
 commit\_message
-: _Required_ **string**  - The message that will used for the merge commit
+: _Optional_ **string**  - The message that will be used for the merge commit
 
 ### Response if merge was successful
 

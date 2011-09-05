@@ -117,6 +117,14 @@ body
 <%= headers 200 %>
 <%= json :commit_comment %>
 
+## Compare two commits
+
+    GET /repos/:user/:repo/compare/:base...:head
+
+### Response
+
+<%= json :commit_comparison %>
+
 ## Delete a commit comment
 
     DELETE /repos/:user/:repo/comments/:id

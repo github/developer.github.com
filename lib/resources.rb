@@ -260,6 +260,21 @@ module GitHub
       "patch"     => "@@ -132,7 +132,7 @@ module Test @@ -1000,7 +1000,7 @@ module Test"
     }
 
+    COMMIT_COMPARISON = {
+      "url" => "https://api.github.com/repos/octocat/Hello-World/compare/master...topic",
+      "html_url" => "https://github.com/octocat/Hello-World/compare/master...topic",
+      "permalink_url" => "https://github.com/octocat/Hello-World/compare/octocat:bbcd538c8e72b8c175046e27cc8f907076331401...octocat:0328041d1152db8ae77652d1618a02e57f745f17",
+      "diff_url" => "https://github.com/octocat/Hello-World/compare/master...topic.diff",
+      "patch_url" => "https://github.com/octocat/Hello-World/compare/master...topic.patch",
+      "base_commit" => COMMIT,
+      "status" => "behind",
+      "ahead_by" => 1,
+      "behind_by" => 2,
+      "total_commits" => 1,
+      "commits" => [COMMIT],
+      "files" => [FILE],
+    }
+
     PULL_COMMENT = {
       "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
       "id"         => 1,

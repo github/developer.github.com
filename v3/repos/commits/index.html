@@ -346,12 +346,129 @@ X-RateLimit-Remaining: 4999</code></pre>
 <span class="p">}</span>
 </code></pre>
 
+<h2 id="compare-two-commits">Compare two commits</h2>
+
+<pre><code>GET /repos/:user/:repo/compare/:base...:head
+</code></pre>
+
+<h3 id="response-7">Response</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/compare/master...topic"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/compare/master...topic"</span><span class="p">,</span>
+  <span class="s2">"permalink_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/compare/octocat:bbcd538c8e72b8c175046e27cc8f907076331401...octocat:0328041d1152db8ae77652d1618a02e57f745f17"</span><span class="p">,</span>
+  <span class="s2">"diff_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/compare/master...topic.diff"</span><span class="p">,</span>
+  <span class="s2">"patch_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/compare/master...topic.patch"</span><span class="p">,</span>
+  <span class="s2">"base_commit"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+    <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+      <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Monalisa Octocat"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
+        <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
+      <span class="p">},</span>
+      <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Monalisa Octocat"</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
+        <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
+      <span class="p">},</span>
+      <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"Fix all the bugs"</span><span class="p">,</span>
+      <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tree/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">"status"</span><span class="o">:</span> <span class="s2">"behind"</span><span class="p">,</span>
+  <span class="s2">"ahead_by"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"behind_by"</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">"total_commits"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"commits"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+      <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+        <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Monalisa Octocat"</span><span class="p">,</span>
+          <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
+          <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
+        <span class="p">},</span>
+        <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Monalisa Octocat"</span><span class="p">,</span>
+          <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
+          <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
+        <span class="p">},</span>
+        <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"Fix all the bugs"</span><span class="p">,</span>
+        <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tree/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+          <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+      <span class="p">},</span>
+      <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+      <span class="p">},</span>
+      <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+          <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">"files"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+      <span class="s2">"filename"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="o">:</span> <span class="s2">"added"</span><span class="p">,</span>
+      <span class="s2">"additions"</span><span class="o">:</span> <span class="mi">103</span><span class="p">,</span>
+      <span class="s2">"deletions"</span><span class="o">:</span> <span class="mi">21</span><span class="p">,</span>
+      <span class="s2">"changes"</span><span class="o">:</span> <span class="mi">124</span><span class="p">,</span>
+      <span class="s2">"blob_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocate/Hello-World/blob/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt"</span><span class="p">,</span>
+      <span class="s2">"raw_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocate/Hello-World/raw/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt"</span><span class="p">,</span>
+      <span class="s2">"patch"</span><span class="o">:</span> <span class="s2">"@@ -132,7 +132,7 @@ module Test @@ -1000,7 +1000,7 @@ module Test"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+
 <h2 id="delete-a-commit-comment">Delete a commit comment</h2>
 
 <pre><code>DELETE /repos/:user/:repo/comments/:id
 </code></pre>
 
-<h3 id="response-7">Response</h3>
+<h3 id="response-8">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

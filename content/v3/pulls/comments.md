@@ -109,7 +109,7 @@ body
 ## Custom Mime Types
 
 These are the support mime types for pull request comments. You can read
-more about the use of mimes types in the API [here](/v3/mimes/).
+more about the use of mime types in the API [here](/v3/mimes/).
 
     application/vnd.github-pullcomment.raw+json
     application/vnd.github-pullcomment.text+json

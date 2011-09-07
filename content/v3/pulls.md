@@ -5,8 +5,8 @@ title: Pull Request API v3 | developer.github.com
 # Pull Request API
 
 Pull Requests leverage [these](#custom-mime-types) custom mime types. You
-can read more about the use of mimes types in the API
-[here](/v3/mimes/).
+can read more about the use of mime types in the API
+[here](/v3/mime/).
 
 ## List pull requests
 
@@ -166,8 +166,8 @@ commit\_message
 
 ## Custom Mime Types
 
-These are the support mime types for pull requests. You can read more about the
-use of mimes types in the API [here](/v3/mimes/).
+These are the supported mime types for pull requests. You can read more about the
+use of mime types in the API [here](/v3/mime/).
 
     application/vnd.github-pull.raw+json
     application/vnd.github-pull.text+json

@@ -5,8 +5,8 @@ title: Issue Comments API v3 | developer.github.com
 # Issue Comments API
 
 Issue Comments leverage [these](#custom-mime-types) custom mime types.
-You can read more about the use of mimes types in the API
-[here](/v3/mimes/).
+You can read more about the use of mime types in the API
+[here](/v3/mime/).
 
 ## List comments on an issue
 
@@ -70,8 +70,8 @@ body
 
 ## Custom Mime Types
 
-These are the support mime types for issue comments. You can read more
-about the use of mimes types in the API [here](/v3/mimes/).
+These are the supported mime types for issue comments. You can read more
+about the use of mime types in the API [here](/v3/mime/).
 
     application/vnd.github-issuecomment.raw+json
     application/vnd.github-issuecomment.text+json

@@ -1,8 +1,8 @@
 ---
-title: API Libraries | developer.github.com
+title: Libraries | developer.github.com
 ---
 
-# API Libraries
+# Libraries
 
 Libraries for accessing the GitHub API from your favorite language.
 

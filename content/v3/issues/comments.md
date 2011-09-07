@@ -70,7 +70,7 @@ body
 
 ## Custom Mime Types
 
-These are the support mime types for isissue comments. You can read more
+These are the support mime types for issue comments. You can read more
 about the use of mimes types in the API [here](/v3/mimes/).
 
     application/vnd.github-issuecomment.raw+json

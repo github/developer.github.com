@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gist Comments API v3 | developer.github.com</title>
+  <title>Repo Hooks API v3 | developer.github.com</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -32,42 +32,40 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="gist-comments-api">Gist Comments API</h1>
+    <h1 id="repo-hooks-api">Repo Hooks API</h1>
 
-<p>Gist Comments leverage <a href="#custom-mime-types">these</a> custom mime types.
-You can read more about the use of mime types in the API
-<a href="/v3/mime/">here</a>.</p>
+<p>The Repository Hooks API manages the post-receive web and service hooks
+for a repository.  There are two main APIs to manage these hooks: a JSON
+HTTP API, and <a href="#pubsubhubbub">PubSubHubbub</a>.</p>
 
-<h2 id="list-comments-on-a-gist">List comments on a gist</h2>
+<h2 id="list">List</h2>
 
-<pre><code>GET /gists/:gist_id/comments
+<pre><code>GET /repos/:user/:repo/hooks
 </code></pre>
 
 <h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/1"</span><span class="p">,</span>
-    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-    <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/hooks/1"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
+    <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre>
 
-<h2 id="get-a-single-comment">Get a single comment</h2>
+<h2 id="get-single-hook">Get single hook</h2>
 
-<pre><code>GET /gists/comments/:id
+<pre><code>GET /repos/:user/:repo/hooks/:id
 </code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -77,71 +75,103 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/hooks/1"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
+  <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
+  <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://example.com"</span><span class="p">,</span>
+    <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"json"</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
-<h2 id="create-a-comment">Create a comment</h2>
+<h2 id="create-a-hook">Create a hook</h2>
 
-<pre><code>POST /gists/:gist_id/comments
+<pre><code>POST /repos/:user/:repo/hooks
 </code></pre>
 
 <h3 id="input">Input</h3>
 
 <dl>
-<dt>body</dt>
+<dt>name</dt>
   <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
+<em>Required</em> <strong>string</strong> - The name of the service that is being called.
+See <a href="https://api.github.com/hooks">/hooks</a> for the possible names.</dd>
+  <dt>config</dt>
+  <dd>
+<em>Required</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
+settings for this hook.  These settings vary between the services and
+are defined in the
+<a href="https://github.com/github/github-services">github-services</a> repo.</dd>
+  <dt>active</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
+triggered on pushes.</dd>
 </dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"campfire"</span><span class="p">,</span>
+  <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"subdomain"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"room"</span><span class="o">:</span> <span class="s2">"Commits"</span><span class="p">,</span>
+    <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
 <h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/gists/comments/1
+Location: https://api.github.com/repos/user/repo/hooks/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/hooks/1"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
+  <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
+  <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://example.com"</span><span class="p">,</span>
+    <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"json"</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
-<h2 id="edit-a-comment">Edit a comment</h2>
+<h3 id="edit-a-hook">Edit a hook</h3>
 
-<pre><code>PATCH /gists/comments/:id
+<pre><code>PATCH /repos/:user/:repo/hooks/:id
 </code></pre>
 
 <h3 id="input-1">Input</h3>
 
 <dl>
-<dt>body</dt>
+<dt>name</dt>
   <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
+<em>Required</em> <strong>string</strong> - The name of the service that is being called.
+See <a href="https://api.github.com/hooks">/hooks</a> for the possible names.</dd>
+  <dt>config</dt>
+  <dd>
+<em>Required</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
+settings for this hook.  These settings vary between the services and
+are defined in the
+<a href="https://github.com/github/github-services">github-services</a> repo.</dd>
+  <dt>active</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
+triggered on pushes.</dd>
 </dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"campfire"</span><span class="p">,</span>
+  <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"subdomain"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"room"</span><span class="o">:</span> <span class="s2">"Commits"</span><span class="p">,</span>
+    <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -152,22 +182,25 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/hooks/1"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
+  <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
+  <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://example.com"</span><span class="p">,</span>
+    <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"json"</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
-<h2 id="delete-a-comment">Delete a comment</h2>
+<h2 id="test-a-hook">Test a hook</h2>
 
-<pre><code>DELETE /gists/comments/:id
+<p>This will trigger the hook with the latest push to the current
+repository.</p>
+
+<pre><code>POST /repos/:user/:repo/hooks/:id/test
 </code></pre>
 
 <h3 id="response-4">Response</h3>
@@ -176,16 +209,76 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<h2 id="custom-mime-types">Custom Mime Types</h2>
+<h2 id="delete-a-hook">Delete a hook</h2>
 
-<p>These are the supported mime types for gist comments. You can read more about the
-use of mime types in the API <a href="/v3/mime/">here</a>.</p>
-
-<pre><code>application/vnd.github-gistcomment.raw+json
-application/vnd.github-gistcomment.text+json
-application/vnd.github-gistcomment.html+json
-application/vnd.github-gistcomment.full+json
+<pre><code>DELETE /repos/:user/:repo/hooks/:id
 </code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="pubsubhubbub">PubSubHubbub</h2>
+
+<p>GitHub can also serve as a <a href="http://code.google.com/p/pubsubhubbub/">PubSubHubbub</a> hub for all repositories.  PSHB is a simple publish/subscribe protocol that lets servers register to receive updates when a topic is updated.  The updates are sent with an HTTP POST request to a callback URL.  Topic URLs for a GitHub repository’s pushes are in this format:</p>
+
+<pre><code>https://github.com/:user/:repo/events/push 
+</code></pre>
+
+<p>The default format is what <a href="http://help.github.com/post-receive-hooks/">existing post-receive hooks should
+expect</a>: A JSON body sent as the <code>payload</code> parameter in a
+POST.  You can also specify to receive the raw JSON body with either an
+<code>Accept</code> header, or a <code>.json</code> extension.</p>
+
+<pre><code>Accept: application/json
+https://github.com/:user/:repo/events/push.json
+</code></pre>
+
+<p>Callback URLs can use either the <code>http://</code> protocol, or <code>github://</code>.
+<code>github://</code> callbacks specify a GitHub service.</p>
+
+<pre><code># Send updates to postbin.org
+http://postbin.org/123
+
+# Send updates to Campfire
+github://campfire?subdomain=github&amp;room=Commits&amp;token=abc123
+</code></pre>
+
+<p>The GitHub PubSubHubbub endpoint is: https://api.github.com/hub.  A
+successful request with curl looks like:</p>
+
+<pre><code>curl -u "user:password" -i \
+  https://api.github.com/hub \
+  -F "hub.mode=subscribe" \
+  -F "hub.topic=https://github.com/:user/:repo/events/push" \
+  -F "hub.callback=http://postbin.org/123"
+</code></pre>
+
+<p>PubSubHubbub requests can be sent multiple times.  If the hook already
+exists, it will be modified according to the request.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>hub.mode</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - Either <code>subscribe</code> or <code>unsubscribe</code>.</dd>
+  <dt>hub.topic</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The URI of the GitHub repository to subscribe
+to.  The path must be in the format of <code>/:user/:repo/events/push</code>.</dd>
+  <dt>hub.callback</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The URI to receive the updates to the topic.</dd>
+  <dt>hub.secret</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - A shared secret key that generates a SHA1 HMAC
+of the payload content.  You can verify a push came from GitHub by
+comparing the received body with the contents of the <code>X-Hub-Signature</code>
+header.</dd>
+</dl>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

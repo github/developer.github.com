@@ -47,6 +47,7 @@ you have any problems or requests please contact
   <li><a href="#authentication">Authentication</a></li>
   <li><a href="#pagination">Pagination</a></li>
   <li><a href="#rate-limiting">Rate Limiting</a></li>
+  <li><a href="#cross-origin-resource-sharing">Cross Origin Resource Sharing</a></li>
   <li><a href="#json-p-callbacks">JSON-P Callbacks</a></li>
 </ul><h2 id="schema">Schema</h2>
 
@@ -228,6 +229,42 @@ X-RateLimit-Remaining: 4966
 <p>You can file a <a href="http://support.github.com/dashboard/queues/2386-api">support issue</a>
 to request white listed access for your application.  We prefer sites that
 setup OAuth applications for their users.</p>
+
+<h2 id="cross-origin-resource-sharing">Cross Origin Resource Sharing</h2>
+
+<p>The API supports Cross Origin Resource Sharing (CORS) for AJAX requests.
+you can read the <a href="http://www.w3.org/TR/cors">CORS W3C working draft</a>, or
+<a href="http://code.google.com/p/html5security/wiki/CrossOriginRequestSecurity">this intro</a> from the
+HTML 5 Security Guide.</p>
+
+<p>Here’s a sample request sent from a browser hitting
+<code>http://some-site.com</code>:</p>
+
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://some-site.com" 
+HTTP/1.1 302 Found
+</code></pre>
+
+<p>Any domain that is registered as an OAuth Application is accepted.
+Here’s a sample request for a browser hitting <a href="http://calendaraboutnothing.com/">Calendar About Nothing</a>:</p>
+
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" 
+HTTP/1.1 302 Found
+Access-Control-Allow-Origin: http://calendaraboutnothing.com
+Access-Control-Expose-Headers: Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+Access-Control-Allow-Credentials: true
+</code></pre>
+
+<p>This is what the CORS preflight request looks like:</p>
+
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" -X OPTIONS    
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: http://calendaraboutnothing.com
+Access-Control-Allow-Headers: Authorization, X-Requested-With
+Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE
+Access-Control-Expose-Headers: Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+Access-Control-Max-Age: 86400
+Access-Control-Allow-Credentials: true
+</code></pre>
 
 <h2 id="json-p-callbacks">JSON-P Callbacks</h2>
 

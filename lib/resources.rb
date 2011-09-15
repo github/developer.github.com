@@ -639,6 +639,18 @@ module GitHub
       }
     ]
 
+    HOOK = {
+      "url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1",
+      "updated_at" => "2011-09-06T20:39:23Z",
+      "created_at" => "2011-09-06T17:26:27Z",
+      "name" => "web",
+      "active" => true,
+      "id" => 1
+    }
+
+    FULL_HOOK = HOOK.merge 'config' =>
+      {'url' => 'http://example.com', 'content_type' => 'json'}
+
   end
 end
 

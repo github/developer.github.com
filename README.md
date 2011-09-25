@@ -4,6 +4,8 @@ This is a GitHub API resource built with [nanoc][nanoc].
 
 ## Setup
 
+Ruby 1.9 is required to build the site.
+
 Get the nanoc gem, plus kramdown for markdown parsing:
 
     bundle install

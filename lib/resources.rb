@@ -294,7 +294,8 @@ module GitHub
       "name"           => "new_file.jpg",
       "description"    => "Description of your download",
       "size"           => 1024,
-      "download_count" => 40
+      "download_count" => 40,
+      "content_type"   => ".jpg"
     }
 
     CREATE_DOWNLOAD = DOWNLOAD.merge({

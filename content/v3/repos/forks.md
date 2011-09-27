@@ -15,7 +15,7 @@ title: Repo Forks API v3 | developer.github.com
 
 ## Create a fork
 
-Create a fork for the authenicated user.
+Create a fork for the authenticated user.
 
     POST /repos/:user/:repo/forks
 

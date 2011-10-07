@@ -1,5 +1,5 @@
 ---
-title: Git DB Trees API v3 | developer.github.com
+title: Git Trees | GitHub API
 ---
 
 # Trees API

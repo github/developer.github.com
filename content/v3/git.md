@@ -1,5 +1,5 @@
 ---
-title: Git API v3 | developer.github.com
+title: Git | GitHub API
 ---
 
 # Git DB API

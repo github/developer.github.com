@@ -1,5 +1,5 @@
 ---
-title: Repo Downloads API v3 | developer.github.com
+title: Repo Downloads | GitHub API
 ---
 
 # Repo Downloads API

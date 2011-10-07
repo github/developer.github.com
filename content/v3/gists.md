@@ -1,5 +1,5 @@
 ---
-title: Gists API v3 | developer.github.com
+title: Gists | GitHub API
 ---
 
 # Gists API

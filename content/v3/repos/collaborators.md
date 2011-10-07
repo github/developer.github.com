@@ -1,5 +1,5 @@
 ---
-title: Repo Collaborators API v3 | developer.github.com
+title: Repo Collaborators | GitHub API
 ---
 
 # Repo Collaborators API

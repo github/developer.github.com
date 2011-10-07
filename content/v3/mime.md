@@ -1,5 +1,5 @@
 ---
-title: Custom Mime Types | developer.github.com
+title: Custom Mime Types | GitHub API
 ---
 
 # Custom Mime Types

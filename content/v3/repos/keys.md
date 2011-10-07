@@ -1,5 +1,5 @@
 ---
-title: Repo Deploy Keys API v3 | developer.github.com
+title: Repo Deploy Keys | GitHub API
 ---
 
 # Repo Deploy Keys API

@@ -1,5 +1,5 @@
 ---
-title: Gist Comments API v3 | developer.github.com
+title: Gist Comments | GitHub API
 ---
 
 # Gist Comments API

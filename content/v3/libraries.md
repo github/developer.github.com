@@ -1,5 +1,5 @@
 ---
-title: Libraries | developer.github.com
+title: Libraries | GitHub API
 ---
 
 # Libraries

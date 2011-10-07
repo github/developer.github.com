@@ -1,5 +1,5 @@
 ---
-title: Pull Request Comments API v3 | developer.github.com
+title: Pull Request Comments | GitHub API
 ---
 
 # Pull Request Comments API

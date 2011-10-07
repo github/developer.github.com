@@ -1,5 +1,5 @@
 ---
-title: Git DB Blobs API v3 | developer.github.com
+title: Git Blobs | GitHub API
 ---
 
 # Blobs API

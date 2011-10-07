@@ -1,5 +1,5 @@
 ---
-title: Issues API v3 | developer.github.com
+title: Issues | GitHub API
 ---
 
 # Issues API

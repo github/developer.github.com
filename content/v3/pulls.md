@@ -1,5 +1,5 @@
 ---
-title: Pull Request API v3 | developer.github.com
+title: Pull Requests | GitHub API
 ---
 
 # Pull Request API

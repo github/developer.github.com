@@ -1,5 +1,5 @@
 ---
-title: Git DB Tags API v3 | developer.github.com
+title: Git Tags | GitHub API
 ---
 
 # Tags API

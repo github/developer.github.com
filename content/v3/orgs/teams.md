@@ -1,5 +1,5 @@
 ---
-title: Org Teams API v3 | developer.github.com
+title: Organization Teams | GitHub API
 ---
 
 # Org Teams API

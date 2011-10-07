@@ -1,5 +1,5 @@
 ---
-title: Git DB Import API v3 | developer.github.com
+title: Git Import | GitHub API
 ---
 
 # Import API

@@ -1,5 +1,5 @@
 ---
-title: Repos API v3 | developer.github.com
+title: Repos | GitHub API
 ---
 
 # Repos API

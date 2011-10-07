@@ -1,5 +1,5 @@
 ---
-title: Issue Events API v3 | developer.github.com
+title: Issue Events | GitHub API
 ---
 
 # Issue Events API

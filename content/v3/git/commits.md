@@ -1,5 +1,5 @@
 ---
-title: Git DB Commits API v3 | developer.github.com
+title: Git Commits | GitHub API
 ---
 
 # Commits API

@@ -1,5 +1,5 @@
 ---
-title: Repo Watching API v3 | developer.github.com
+title: Repo Watching | GitHub API
 ---
 
 # Repo Watching API

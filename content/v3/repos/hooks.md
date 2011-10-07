@@ -1,5 +1,5 @@
 ---
-title: Repo Hooks API v3 | developer.github.com
+title: Repo Hooks | GitHub API
 ---
 
 # Repo Hooks API

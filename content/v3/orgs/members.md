@@ -1,5 +1,5 @@
 ---
-title: Org Members API v3 | developer.github.com
+title: Organization Members | GitHub API
 ---
 
 # Org Members API

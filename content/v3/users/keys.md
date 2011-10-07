@@ -1,5 +1,5 @@
 ---
-title: User Public Keys API v3 | developer.github.com
+title: User Public Keys | GitHub API
 ---
 
 # User Public Keys API

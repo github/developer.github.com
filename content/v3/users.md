@@ -1,5 +1,5 @@
 ---
-title: Users API v3 | developer.github.com
+title: Users | GitHub API
 ---
 
 # Users API

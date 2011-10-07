@@ -1,5 +1,5 @@
 ---
-title: Orgs API v3 | developer.github.com
+title: Organizations | GitHub API
 ---
 
 # Orgs API

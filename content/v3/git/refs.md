@@ -1,5 +1,5 @@
 ---
-title: Git DB Refs API v3 | developer.github.com
+title: Git Refs | GitHub API
 ---
 
 # References API

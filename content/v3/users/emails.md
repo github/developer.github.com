@@ -1,5 +1,5 @@
 ---
-title: User Emails API v3 | developer.github.com
+title: User Emails | GitHub API
 ---
 
 # User Emails API

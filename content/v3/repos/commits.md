@@ -1,5 +1,5 @@
 ---
-title: Repo Commits API v3 | developer.github.com
+title: Repo Commits | GitHub API
 ---
 
 # Repo Commits API

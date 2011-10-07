@@ -1,5 +1,5 @@
 ---
-title: User Followers API v3 | developer.github.com
+title: User Followers | GitHub API
 ---
 
 # User Followers API

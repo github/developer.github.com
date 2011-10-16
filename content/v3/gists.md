@@ -11,7 +11,7 @@ List a user's gists:
     GET /users/:user/gists
 
 List the authenticated user's gists or if called anonymously, this will
-returns all public gists:
+return all public gists:
 
     GET /gists
 

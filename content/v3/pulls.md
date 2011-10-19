@@ -45,10 +45,13 @@ body
 : _Optional_ **string**
 
 base
-: _Required_ **string** - The branch you want your changes pulled into.
+: _Required_ **string** - The branch (or git ref) you want your changes pulled into.
+This should be an existing branch on the current repository.  You cannot
+submit a pull request to one repo that requests a merge to a base of
+another repo.
 
 head
-: _Required_ **string** - The branch where your changes are implemented.
+: _Required_ **string** - The branch (or git ref) where your changes are implemented.
 
 NOTE: `head` and `base` can be either a sha or a branch name. Typically you
 would namespace `head` with a user like this: `username:branch`.

@@ -30,6 +30,8 @@ List repos being watched by the authenticated user
 
 ## Check if you are watching a repo
 
+Requires for the user to be authenticated
+
     GET /user/watched/:user/:repo
 
 ### Response if this repo is watched by you
@@ -42,6 +44,8 @@ List repos being watched by the authenticated user
 
 ## Watch a repo
 
+Requires for the user to be authenticated
+
     PUT /user/watched/:user/:repo
 
 ### Response
@@ -49,6 +53,8 @@ List repos being watched by the authenticated user
 <%= headers 204 %>
 
 ## Stop watching a repo
+
+Requires for the user to be authenticated
 
     DELETE /user/watched/:user/:repo
 

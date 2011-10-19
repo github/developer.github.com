@@ -72,8 +72,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"closed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
     <span class="s2">"merged_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
   <span class="p">}</span>
-<span class="p">]</span>
-</code></pre>
+<span class="p">]</span></code></pre>
 
 <h2 id="get-a-single-pull-request">Get a single pull request</h2>
 
@@ -189,8 +188,7 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
     <span class="p">}</span>
   <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
+<span class="p">}</span></code></pre>
 
 <h2 id="create-a-pull-request">Create a pull request</h2>
 
@@ -210,10 +208,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 </dd>
   <dt>base</dt>
   <dd>
-<em>Required</em> <strong>string</strong> - The branch you want your changes pulled into.</dd>
+<em>Required</em> <strong>string</strong> - The branch (or git ref) you want your changes pulled into.
+This should be an existing branch on the current repository.  You cannot
+submit a pull request to one repo that requests a merge to a base of
+another repo.</dd>
   <dt>head</dt>
   <dd>
-<em>Required</em> <strong>string</strong> - The branch where your changes are implemented.</dd>
+<em>Required</em> <strong>string</strong> - The branch (or git ref) where your changes are implemented.</dd>
 </dl><p>NOTE: <code>head</code> and <code>base</code> can be either a sha or a branch name. Typically you
 would namespace <code>head</code> with a user like this: <code>username:branch</code>.</p>
 
@@ -222,8 +223,7 @@ would namespace <code>head</code> with a user like this: <code>username:branch</
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Please pull this in!"</span><span class="p">,</span>
   <span class="s2">"head"</span><span class="o">:</span> <span class="s2">"octocat:new-feature"</span><span class="p">,</span>
   <span class="s2">"base"</span><span class="o">:</span> <span class="s2">"master"</span>
-<span class="p">}</span>
-</code></pre>
+<span class="p">}</span></code></pre>
 
 <h3 id="alternative-input">Alternative Input</h3>
 
@@ -239,8 +239,7 @@ Pull Request.</dd>
   <span class="s2">"issue"</span><span class="o">:</span> <span class="s2">"5"</span><span class="p">,</span>
   <span class="s2">"head"</span><span class="o">:</span> <span class="s2">"ocotocat:new-feature"</span><span class="p">,</span>
   <span class="s2">"base"</span><span class="o">:</span> <span class="s2">"master"</span>
-<span class="p">}</span>
-</code></pre>
+<span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
 
@@ -263,8 +262,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
   <span class="s2">"closed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
   <span class="s2">"merged_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
-<span class="p">}</span>
-</code></pre>
+<span class="p">}</span></code></pre>
 
 <h2 id="update-a-pull-request">Update a pull request</h2>
 
@@ -290,8 +288,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"new title"</span><span class="p">,</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"updated body"</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span>
-<span class="p">}</span>
-</code></pre>
+<span class="p">}</span></code></pre>
 
 <h3 id="response-3">Response</h3>
 
@@ -313,8 +310,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
   <span class="s2">"closed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
   <span class="s2">"merged_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
-<span class="p">}</span>
-</code></pre>
+<span class="p">}</span></code></pre>
 
 <h2 id="list-commits-on-a-pull-request">List commits on a pull request</h2>
 
@@ -353,8 +349,7 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">}</span>
-<span class="p">]</span>
-</code></pre>
+<span class="p">]</span></code></pre>
 
 <h2 id="list-pull-requests-files">List pull requests files</h2>
 
@@ -379,8 +374,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"raw_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocate/Hello-World/raw/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt"</span><span class="p">,</span>
     <span class="s2">"patch"</span><span class="o">:</span> <span class="s2">"@@ -132,7 +132,7 @@ module Test @@ -1000,7 +1000,7 @@ module Test"</span>
   <span class="p">}</span>
-<span class="p">]</span>
-</code></pre>
+<span class="p">]</span></code></pre>
 
 <h2 id="get-if-a-pull-request-has-been-merged">Get if a pull request has been merged</h2>
 
@@ -420,8 +414,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
   <span class="s2">"merged"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"Pull Request successfully merged"</span>
-<span class="p">}</span>
-</code></pre>
+<span class="p">}</span></code></pre>
 
 <h3 id="response-if-merge-cannot-be-performed">Response if merge cannot be performed</h3>
 
@@ -433,8 +426,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"sha"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="s2">"merged"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"Failure reason"</span>
-<span class="p">}</span>
-</code></pre>
+<span class="p">}</span></code></pre>
 
 <h2 id="custom-mime-types">Custom Mime Types</h2>
 

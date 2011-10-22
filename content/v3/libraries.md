@@ -20,3 +20,11 @@ it is also available on the [CPAN][pithub-cpan].
 
 [pithub-github]: https://github.com/plu/Pithub
 [pithub-cpan]: http://metacpan.org/module/Pithub
+
+## Ruby
+
+The [github_api][github_api-github] library is a Ruby implementation of the entire GitHub API v3.
+It aims to have full test coverage and is available on [RubyGems.org][github_api-rubygems].
+
+[github_api-github]: https://github.com/peter-murach/github
+[github_api-rubygems]: https://rubygems.org/gems/github_api

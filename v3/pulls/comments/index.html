@@ -32,9 +32,14 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="pull-request-comments-api">Pull Request Comments API</h1>
+    <h1 id="pull-request-review-comments-api">Pull Request Review Comments API</h1>
 
-<p>Pull Request Comments leverage <a href="#custom-mime-types">these</a> custom mime
+<p>Pull Request Review Comments are comments on a portion of the unified
+diff.  These are separate from Commit Comments (which are applied
+directly to a commit, outside of the Pull Request view), and Issue
+Comments (which do not reference a portion of the unified diff).  </p>
+
+<p>Pull Request Review Comments leverage <a href="#custom-mime-types">these</a> custom mime
 types. You can read more about the use of mime types in the API
 <a href="/v3/mime/">here</a>.</p>
 
@@ -66,7 +71,8 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
     <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
   <span class="p">}</span>
-<span class="p">]</span></code></pre>
+<span class="p">]</span>
+</code></pre>
 
 <h2 id="get-a-single-comment">Get a single comment</h2>
 
@@ -94,7 +100,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">},</span>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span>
+</code></pre>
 
 <h2 id="create-a-comment">Create a comment</h2>
 
@@ -124,7 +131,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"commit_id"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
   <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
   <span class="s2">"position"</span><span class="o">:</span> <span class="mi">4</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span>
+</code></pre>
 
 <h3 id="alternative-input">Alternative Input</h3>
 
@@ -144,7 +152,8 @@ an existing Pull Request Comment like this:</p>
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Nice change"</span><span class="p">,</span>
   <span class="s2">"in_reply_to"</span><span class="o">:</span> <span class="mi">4</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span>
+</code></pre>
 
 <h3 id="response-2">Response</h3>
 
@@ -168,7 +177,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">},</span>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span>
+</code></pre>
 
 <h2 id="edit-a-comment">Edit a comment</h2>
 
@@ -186,7 +196,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Nice change"</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span>
+</code></pre>
 
 <h3 id="response-3">Response</h3>
 
@@ -209,7 +220,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">},</span>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
-<span class="p">}</span></code></pre>
+<span class="p">}</span>
+</code></pre>
 
 <h2 id="delete-a-comment">Delete a comment</h2>
 

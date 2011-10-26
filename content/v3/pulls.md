@@ -8,6 +8,22 @@ Pull Requests leverage [these](#custom-mime-types) custom mime types. You
 can read more about the use of mime types in the API
 [here](/v3/mime/).
 
+## Link Relations
+
+Pull Requests have these possible link relations:
+
+`self`
+: The API location of this Pull Request.
+
+`html`
+: The HTML location of this Pull Request.
+
+`comments`
+: The API location of this Pull Request's Issue comments.
+
+`review_comments`
+: The API location of this Pull Request's Review comments.
+
 ## List pull requests
 
     GET /repos/:user/:repo/pulls

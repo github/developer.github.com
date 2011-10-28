@@ -674,6 +674,19 @@ module GitHub
       "created_at" => "2011-09-06T17:26:27Z"
     }
 
+    EVENT = {
+      :type   => "Event",
+      :public => true,
+      :payload => {},
+      :repo => {
+        :id => 3,
+        :name => "octocat/Hello-World",
+        :url => "https://api.github.com/repos/octocat/Hello-World"
+      },
+      :actor => USER,
+      :org => USER,
+      :created_at => "2011-09-06T17:26:27Z",
+    }
   end
 end
 

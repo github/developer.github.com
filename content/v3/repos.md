@@ -168,8 +168,8 @@ in results.
 
 <%= headers 200 %>
 <%= json \
-  "C"      => "78769",
-  "Python" => "7769",
+  "C"      => 78769,
+  "Python" => 7769,
 %>
 
 ## List Teams

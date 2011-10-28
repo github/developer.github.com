@@ -150,7 +150,6 @@ module GitHub
       }
     }
 
-
     PULL = {
       "url"        => "https://api.github.com/octocat/Hello-World/pulls/1",
       "html_url"   => "https://github.com/octocat/Hello-World/pulls/1",
@@ -165,6 +164,16 @@ module GitHub
       "updated_at" => "2011-01-26T19:01:12Z",
       "closed_at"  => "2011-01-26T19:01:12Z",
       "merged_at"  => "2011-01-26T19:01:12Z",
+      "_links" => {
+        "self" => {'_href' =>
+          "https://api.github.com/octocat/Hello-World/pulls/1"},
+        "html" => {'_href' =>
+          "https://github.com/octocat/Hello-World/pull/1"},
+        "comments" => {'_href' =>
+          "https://api.github.com/octocat/Hello-World/issues/1/comments"},
+        "review_comments" => {'_href' =>
+          "https://api.github.com/octocat/Hello-World/pulls/1/comments"}
+      }
     }
 
     FULL_PULL = PULL.merge({
@@ -645,12 +654,12 @@ module GitHub
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z",
       "name" => "web",
+      "events" => ["push"],
       "active" => true,
+      "config" =>
+        {'url' => 'http://example.com', 'content_type' => 'json'},
       "id" => 1
     }
-
-    FULL_HOOK = HOOK.merge 'config' =>
-      {'url' => 'http://example.com', 'content_type' => 'json'}
 
   end
 end

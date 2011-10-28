@@ -137,6 +137,17 @@ is associated with.
 
 <%= headers 204 %>
 
+If you attempt to add an organization to a team, you will get this:
+
+<%= headers 422 %>
+<%= 
+  json :message => "Validation Failed",
+    :errors => [{
+      :code     => "org",
+      :field    => :user,
+      :resource => :TeamMember}]
+%>
+
 ## Remove team member
 
 In order to remove a user from a team, the authenticated user must have
@@ -183,6 +194,18 @@ organization.
 ### Reponse
 
 <%= headers 204 %>
+
+If you attempt to add a repo to a team that is not owned by the
+organization, you get:
+
+<%= headers 422 %>
+<%= 
+  json :message => "Validation Failed",
+    :errors => [{
+      :code     => "not_owned",
+      :field    => :repository,
+      :resource => :TeamMember}]
+%>
 
 ## Remove team repo
 

@@ -129,6 +129,81 @@ can specify multiple scopes by separating them by a comma.
       client_id=...&
       scope=user,public_repo
 
+## OAuth Authorizations API
+
+There is an API for users to manage their own tokens.  You can only
+access your own tokens, and only through Basic Authentication.
+
+## List your authorizations
+
+    GET /authorizations
+
+### Response
+
+<%= headers 200, :pagination => true %>
+<%= json(:oauth_access) { |h| [h] } %>
+
+## Get a single authorization
+
+    GET /authorizations/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json :oauth_access %>
+
+## Create a new authorization
+
+Note: Authorizations created from the API will show up in the GitHub API
+app.
+
+    POST /authorizations
+
+### Input
+
+scopes
+: _Optional_ **array** - A list of scopes that this authorization is in.
+
+<%= json :scopes => ["public_repo"] %>
+
+### Response
+
+<%= headers 201, :Location => "https://api.github.com/authorizations/1"
+%>
+<%= json :oauth_access %>
+
+## Update an existing authorization
+
+    PATCH /authorizations/1
+
+### Input
+
+scopes
+: _Optional_ **array** - Replaces the authorization' scopes with these.
+
+add_scopes
+: _Optional_ **array** - A list of scopes to add to this authorization.
+
+remove_scopes
+: _Optional_ **array** - A list of scopes to remove from this
+authorizatin.
+
+You can only send one of these scope keys at a time.
+
+<%= json :add_scopes => ['repo'] %>
+
+### Response
+
+<%= headers 200 %>
+<%= json :oauth_access %>
+
+## Delete an authorization
+
+    DELETE /authorizations/1
+
+### Response
+
+<%= headers 204 %> 
 
 ## More Information
 

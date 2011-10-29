@@ -172,7 +172,8 @@ Hook name: `member`
 member
 : **object** - The [user](/v3/users/) that was added.
 
-a
+action
+: **string** - The action that was performed: "added".
 
 ## PublicEvent
 

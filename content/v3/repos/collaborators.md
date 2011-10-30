@@ -17,11 +17,11 @@ title: Repo Collaborators | GitHub API
 
     GET /repos/:user/:repo/collaborators/:user
 
-### Reponse if user is a collaborator
+### Response if user is a collaborator
 
 <%= headers 204 %>
 
-### Reponse if user is not a collaborator
+### Response if user is not a collaborator
 
 <%= headers 404 %>
 

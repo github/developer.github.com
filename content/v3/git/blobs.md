@@ -41,4 +41,4 @@ These are the supported mime types for blobs. You can read more about the
 use of mime types in the API [here](/v3/mime/).
 
     application/json
-    application/vnd.github-blob.raw
+    application/vnd.github.VERSION.raw

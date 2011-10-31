@@ -72,7 +72,7 @@ body
 These are the supported mime types for gist comments. You can read more about the
 use of mime types in the API [here](/v3/mime/).
 
-    application/vnd.github-gistcomment.raw+json
-    application/vnd.github-gistcomment.text+json
-    application/vnd.github-gistcomment.html+json
-    application/vnd.github-gistcomment.full+json
+    application/vnd.github.VERSION.raw+json
+    application/vnd.github.VERSION.text+json
+    application/vnd.github.VERSION.html+json
+    application/vnd.github.VERSION.full+json

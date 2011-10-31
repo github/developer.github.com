@@ -116,7 +116,7 @@ body
 These are the supported mime types for pull request comments. You can read
 more about the use of mime types in the API [here](/v3/mime/).
 
-    application/vnd.github-pullcomment.raw+json
-    application/vnd.github-pullcomment.text+json
-    application/vnd.github-pullcomment.html+json
-    application/vnd.github-pullcomment.full+json
+    application/vnd.github.VERSION.raw+json
+    application/vnd.github.VERSION.text+json
+    application/vnd.github.VERSION.html+json
+    application/vnd.github.VERSION.full+json

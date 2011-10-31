@@ -173,7 +173,7 @@ Issue. Send an empty array (`[]`) to clear all Labels from the Issue.
 These are the supported mime types for issues. You can read more about the
 use of mime types in the API [here](/v3/mime/).
 
-    application/vnd.github-issue.raw+json
-    application/vnd.github-issue.text+json
-    application/vnd.github-issue.html+json
-    application/vnd.github-issue.full+json
+    application/vnd.github.VERSION.raw+json
+    application/vnd.github.VERSION.text+json
+    application/vnd.github.VERSION.html+json
+    application/vnd.github.VERSION.full+json

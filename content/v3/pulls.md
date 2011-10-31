@@ -188,7 +188,7 @@ commit\_message
 These are the supported mime types for pull requests. You can read more about the
 use of mime types in the API [here](/v3/mime/).
 
-    application/vnd.github-pull.raw+json
-    application/vnd.github-pull.text+json
-    application/vnd.github-pull.html+json
-    application/vnd.github-pull.full+json
+    application/vnd.github.VERSION.raw+json
+    application/vnd.github.VERSION.text+json
+    application/vnd.github.VERSION.html+json
+    application/vnd.github.VERSION.full+json

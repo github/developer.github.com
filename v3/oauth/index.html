@@ -165,6 +165,173 @@ can specify multiple scopes by separating them by a comma.</p>
   scope=user,public_repo
 </code></pre>
 
+<h2 id="oauth-authorizations-api">OAuth Authorizations API</h2>
+
+<p>There is an API for users to manage their own tokens.  You can only
+access your own tokens, and only through Basic Authentication.</p>
+
+<h2 id="list-your-authorizations">List your authorizations</h2>
+
+<pre><code>GET /authorizations
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+    <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="s2">"public_repo"</span>
+    <span class="p">],</span>
+    <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+    <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span>
+    <span class="p">},</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre>
+
+<h2 id="get-a-single-authorization">Get a single authorization</h2>
+
+<pre><code>GET /authorizations/:id
+</code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span>
+  <span class="p">},</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="create-a-new-authorization">Create a new authorization</h2>
+
+<p>Note: Authorizations created from the API will show up in the GitHub API
+app.</p>
+
+<pre><code>POST /authorizations
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<dl>
+<dt>scopes</dt>
+  <dd>
+<em>Optional</em> <strong>array</strong> - A list of scopes that this authorization is in.</dd>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/authorizations/1
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span>
+  <span class="p">},</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="update-an-existing-authorization">Update an existing authorization</h2>
+
+<pre><code>PATCH /authorizations/1
+</code></pre>
+
+<h3 id="input-1">Input</h3>
+
+<dl>
+<dt>scopes</dt>
+  <dd>
+<em>Optional</em> <strong>array</strong> - Replaces the authorization’ scopes with these.</dd>
+  <dt>add_scopes</dt>
+  <dd>
+<em>Optional</em> <strong>array</strong> - A list of scopes to add to this authorization.</dd>
+  <dt>remove_scopes</dt>
+  <dd>
+<em>Optional</em> <strong>array</strong> - A list of scopes to remove from this
+authorizatin.</dd>
+</dl><p>You can only send one of these scope keys at a time.</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"add_scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"repo"</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span>
+  <span class="p">},</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+<span class="p">}</span>
+</code></pre>
+
+<h2 id="delete-an-authorization">Delete an authorization</h2>
+
+<pre><code>DELETE /authorizations/1
+</code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
 <h2 id="more-information">More Information</h2>
 
 <p>It can be a little tricky to get started with OAuth. Here are a few
@@ -192,6 +359,7 @@ links that might be of help:</p>
             <ul class="js-guides">
               <li><a href="/v3/oauth/">OAuth</a></li>
               <li><a href="/v3/mime/">Mime Types</a></li>
+              <li><a href="/v3/changelog/">Changelog</a></li>
               <li><a href="/v3/libraries/">Libraries</a></li>
             </ul>
           </li>
@@ -251,6 +419,12 @@ links that might be of help:</p>
               <li><a href="/v3/users/emails/">Emails</a></li>
               <li><a href="/v3/users/followers/">Followers</a></li>
               <li><a href="/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/events/">Events</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/events/types/">Types</a></li>
             </ul>
           </li>
         </ul>

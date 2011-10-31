@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Organization Members | GitHub API</title>
+  <title>Event types | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -32,132 +32,278 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="org-members-api">Org Members API</h1>
+    <h1 id="event-types">Event Types</h1>
 
-<h2 id="list-members">List members</h2>
+<p>Each event has a similar JSON schema, but a unique <code>payload</code> object that is
+determined by its event type.  <a href="http://developer.github.com/v3/repos/hooks/">Repository hook</a> names relate to event types, and will have the exact same payload.  The only exception to this is the <code>push</code> hook, which has a larger, more detailed payload.</p>
 
-<p>List all users who are members of an organization. A member is a user
-that belongs to at least 1 team in the organization. If the authenticated user is
-also a member of this organization then both concealed and public
-members will be returned. Otherwise only public members are returned.</p>
+<p>This describes just the payload of an event.  A full event will also
+show the user that performed the event (actor), the repository, and the
+organization (if applicable).</p>
 
-<pre><code>GET /orgs/:org/members
-</code></pre>
+<p>Note that some of these events may not be rendered in timelines.
+They’re only created for various internal and repository hooks.</p>
 
-<h3 id="response">Response</h3>
+<ul>
+<li><a href="#commitcommentevent">CommitComment</a></li>
+  <li><a href="#createevent">CreateEvent</a></li>
+  <li><a href="#deleteevent">DeleteEvent</a></li>
+  <li><a href="#downloadevent">DownloadEvent</a></li>
+  <li><a href="#followevent">FollowEvent</a></li>
+  <li><a href="#forkevent">ForkEvent</a></li>
+  <li><a href="#forkapplyevent">ForkApplyEvent</a></li>
+  <li><a href="#gistevent">GistEvent</a></li>
+  <li><a href="#gollumevent">GollumEvent</a></li>
+  <li><a href="#issuecommentevent">IssueCommentEvent</a></li>
+  <li><a href="#issuesevent">IssuesEvent</a></li>
+  <li><a href="#memberevent">MemberEvent</a></li>
+  <li><a href="#publicevent">PublicEvent</a></li>
+  <li><a href="#pullrequestevent">PullRequestEvent</a></li>
+  <li><a href="#pushevent">PushEvent</a></li>
+  <li><a href="#teamaddevent">TeamAddEvent</a></li>
+  <li><a href="#watchevent">WatchEvent</a></li>
+</ul><h2 id="commitcomment">CommitComment</h2>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Hook name: <code>commit_comment</code></p>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">}</span>
-<span class="p">]</span>
-</code></pre>
+<dl>
+<dt>comment</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/repos/commits/#list-commit-comments-for-a-repository">comment</a> itself.</dd>
+</dl><h2 id="createevent">CreateEvent</h2>
 
-<h2 id="get-member">Get member</h2>
+<p>Represents a created repository, branch, or tag.</p>
 
-<pre><code>GET /orgs/:org/members/:user
-</code></pre>
+<p>Hook name: <code>create</code></p>
 
-<h3 id="response-if-user-is-a-member">Response if user is a member</h3>
+<dl>
+<dt>ref_type</dt>
+  <dd>
+<strong>string</strong> - The object that was created: “repository”, “branch”, or
+“tag”</dd>
+  <dt>ref</dt>
+  <dd>
+<strong>string</strong> - The git ref (or <code>null</code> if only a repository was created).</dd>
+  <dt>master_branch</dt>
+  <dd>
+<strong>string</strong> - The name of the repository’s master branch.</dd>
+  <dt>description</dt>
+  <dd>
+<strong>string</strong> - The repository’s current description.</dd>
+</dl><h2 id="deleteevent">DeleteEvent</h2>
 
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Represents a deleted branch or tag.</p>
 
-<h3 id="response-if-user-is-not-a-member">Response if user is not a member</h3>
+<p>Hook name: <code>delete</code></p>
 
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<dl>
+<dt>ref_type</dt>
+  <dd>
+<strong>string</strong> - The object that was deleted: “branch” or “tag”.</dd>
+  <dt>ref</dt>
+  <dd>
+<strong>string</strong> - The full git ref.</dd>
+</dl><h2 id="downloadevent">DownloadEvent</h2>
 
-<h2 id="add-a-member">Add a member</h2>
+<p>Hook name: <code>download</code></p>
 
-<p>To add someone as a member to an org, you must add them to a
-<a href="/v3/orgs/teams/#add-team-member">team</a>.</p>
+<dl>
+<dt>download</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/repos/downloads/">download</a> that was just
+created.</dd>
+</dl><h2 id="followevent">FollowEvent</h2>
 
-<h2 id="remove-a-member">Remove a member</h2>
+<p>Hook name: <code>follow</code></p>
 
-<p>Removing a user from this list will remove them from all teams and
-they will no longer have any access to the organization’s repositories.</p>
+<dl>
+<dt>target</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/users">user</a> that was just followed.</dd>
+</dl><h2 id="forkevent">ForkEvent</h2>
 
-<pre><code>DELETE /orgs/:org/members/:user
-</code></pre>
+<p>Hook name: <code>fork</code></p>
 
-<h3 id="response-1">Response</h3>
+<dl>
+<dt>forkee</dt>
+  <dd>
+<strong>object</strong> - The created <a href="/v3/repos/">repository</a>.</dd>
+</dl><h2 id="forkapplyevent">ForkApplyEvent</h2>
 
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Triggered when a patch is applied in the Fork Queue.</p>
 
-<h2 id="list-public-members">List public members</h2>
+<p>Hook name: <code>fork_apply</code></p>
 
-<p>Members of an organization can choose to have their membership
-publicized or not.</p>
+<dl>
+<dt>head</dt>
+  <dd>
+<strong>string</strong> - The branch name the patch is applied to.</dd>
+  <dt>before</dt>
+  <dd>
+<strong>string</strong> - SHA of the repo state before the patch.</dd>
+  <dt>after</dt>
+  <dd>
+<strong>string</strong> - SHA of the repo state after the patch.</dd>
+</dl><h2 id="gistevent">GistEvent</h2>
 
-<pre><code>GET /orgs/:org/public_members
-</code></pre>
+<p>Hook name: <code>gist</code></p>
 
-<h3 id="response-2">Response</h3>
+<dl>
+<dt>action</dt>
+  <dd>
+<strong>string</strong> - The action that was performed: “create” or “update”</dd>
+  <dt>gist</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/gists/">gist</a> itself.</dd>
+</dl><h2 id="gollumevent">GollumEvent</h2>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Hook name: <code>gollum</code></p>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">}</span>
-<span class="p">]</span>
-</code></pre>
+<dl>
+<dt>pages</dt>
+  <dd>
+<strong>array</strong> - The pages that were updated.</dd>
+  <dt>pages[][page_name]</dt>
+  <dd>
+<strong>string</strong> - The name of the page.</dd>
+  <dt>pages[][title]</dt>
+  <dd>
+<strong>string</strong> - The current page title.</dd>
+  <dt>pages[][action]</dt>
+  <dd>
+<strong>string</strong> - The action that was performed on the page.</dd>
+  <dt>pages[][sha]</dt>
+  <dd>
+<strong>string</strong> - The latest commit SHA of the page.</dd>
+  <dt>pages[][html_url]</dt>
+  <dd>
+<strong>string</strong> - Points to the HTML wiki page.</dd>
+</dl><h2 id="issuecommentevent">IssueCommentEvent</h2>
 
-<h2 id="get-if-a-user-is-a-public-member">Get if a user is a public member</h2>
+<p>Hook name: <code>issue_comment</code></p>
 
-<pre><code>GET /orgs/:org/public_members/:user
-</code></pre>
+<dl>
+<dt>action</dt>
+  <dd>
+<strong>string</strong> - The action that was performed on the comment.</dd>
+  <dt>issue</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/issues/">issue</a> the comment belongs to.</dd>
+  <dt>comment</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/issues/comments/">comment</a> itself.</dd>
+</dl><h2 id="issuesevent">IssuesEvent</h2>
 
-<h3 id="response-if-user-is-a-public-member">Response if user is a public member</h3>
+<p>Hook name: <code>issues</code></p>
 
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<dl>
+<dt>action</dt>
+  <dd>
+<strong>string</strong> - The action that was performed: “opened”, “closed”, or
+“reopened”.</dd>
+  <dt>issue</dt>
+  <dd>
+<strong>string</strong> - The <a href="/v3/issues">issue</a> itself.</dd>
+</dl><h2 id="memberevent">MemberEvent</h2>
 
-<h3 id="response-if-user-is-not-a-public-member">Response if user is not a public member</h3>
+<p>Triggered when a user is added as a collaborator to a repository.</p>
 
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Hook name: <code>member</code></p>
 
-<h2 id="publicize-a-users-membership">Publicize a user’s membership</h2>
+<dl>
+<dt>member</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/users/">user</a> that was added.</dd>
+  <dt>action</dt>
+  <dd>
+<strong>string</strong> - The action that was performed: “added”.</dd>
+</dl><h2 id="publicevent">PublicEvent</h2>
 
-<pre><code>PUT /orgs/:org/public_members/:user
-</code></pre>
+<p>This is triggered when a private repo is open sourced.  Without a doubt: the
+best GitHub event.</p>
 
-<h3 id="response-3">Response</h3>
+<p>Hook name: <code>public</code></p>
 
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>(empty payload)</p>
 
-<h2 id="conceal-a-users-membership">Conceal a user’s membership</h2>
+<h2 id="pullrequestevent">PullRequestEvent</h2>
 
-<pre><code>DELETE /orgs/:org/public_members/:user
-</code></pre>
+<p>Hook name: <code>pull_request</code></p>
 
-<h2 id="response-4">Response</h2>
+<dl>
+<dt>action</dt>
+  <dd>
+<strong>string</strong> - The action that was performed: “opened”, “closed”,
+“synchronize”, or “reopened”.</dd>
+  <dt>number</dt>
+  <dd>
+<strong>integer</strong> - The pull request number.</dd>
+  <dt>pull_request</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/pulls">pull request</a> itself.</dd>
+</dl><h2 id="pushevent">PushEvent</h2>
 
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Hook name: <code>push</code></p>
+
+<dl>
+<dt>head</dt>
+  <dd>
+<strong>string</strong> - The SHA of the HEAD commit on the repository.</dd>
+  <dt>ref</dt>
+  <dd>
+<strong>string</strong> - The full Git ref that was pushed.  Example:
+“refs/heads/master”</dd>
+  <dt>size</dt>
+  <dd>
+<strong>integer</strong> - The number of commits in the push.</dd>
+  <dt>commits</dt>
+  <dd>
+<strong>array</strong> - The list of pushed commits.</dd>
+  <dt>commits[][sha]</dt>
+  <dd>
+<strong>string</strong> - The SHA of the commit.</dd>
+  <dt>commits[][message]</dt>
+  <dd>
+<strong>message</strong> - The commit message.</dd>
+  <dt>commits[][author]</dt>
+  <dd>
+<strong>object</strong> - The git author of the commit.</dd>
+  <dt>commits[][author][name]</dt>
+  <dd>
+<strong>string</strong> - The git author’s name.</dd>
+  <dt>commits[][author][email]</dt>
+  <dd>
+<strong>string</strong> - The git author’s email address.</dd>
+  <dt>commits[][url]</dt>
+  <dd>
+<strong>url</strong> - Points to the commit API resource.</dd>
+</dl><h2 id="teamaddevent">TeamAddEvent</h2>
+
+<p>Hook name: <code>team_add</code></p>
+
+<dl>
+<dt>team</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/orgs/teams/">team</a> that was modified.  Note:
+older events may not include this in the payload.</dd>
+  <dt>user</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/users/">user</a> that was added to this team.</dd>
+  <dt>repo</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/repos/">repository</a> that was added to this team.</dd>
+</dl><h2 id="watchevent">WatchEvent</h2>
+
+<p>The event’s actor is the watcher, and the event’s repo is the watched
+repository.</p>
+
+<p>Hook name: <code>watch</code></p>
+
+<dl>
+<dt>action</dt>
+  <dd>
+<strong>string</strong> - The action that was performed.</dd>
+</dl>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

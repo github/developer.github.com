@@ -165,13 +165,13 @@ module GitHub
       "closed_at"  => "2011-01-26T19:01:12Z",
       "merged_at"  => "2011-01-26T19:01:12Z",
       "_links" => {
-        "self" => {'_href' =>
+        "self" => {'href' =>
           "https://api.github.com/octocat/Hello-World/pulls/1"},
-        "html" => {'_href' =>
+        "html" => {'href' =>
           "https://github.com/octocat/Hello-World/pull/1"},
-        "comments" => {'_href' =>
+        "comments" => {'href' =>
           "https://api.github.com/octocat/Hello-World/issues/1/comments"},
-        "review_comments" => {'_href' =>
+        "review_comments" => {'href' =>
           "https://api.github.com/octocat/Hello-World/pulls/1/comments"}
       }
     }

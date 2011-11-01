@@ -82,7 +82,7 @@ since
 
 ## Get a single issue
 
-    GET /repos/:user/:repo/issues/:id
+    GET /repos/:user/:repo/issues/:number
 
 ### Response
 

@@ -42,7 +42,7 @@ company
 : _Optional_ **string**
 
 email
-: _Optional_ **string** - Publically visible email address.
+: _Optional_ **string** - Publicly visible email address.
 
 location
 : _Optional_ **string**

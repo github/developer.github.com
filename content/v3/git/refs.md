@@ -41,7 +41,7 @@ For a full refs listing, you'll get something that looks like:
 
     POST /repos/:user/:repo/git/refs
 
-### Paramaters
+### Parameters
 
 ref
 : _String_ of the name of the fully qualified reference (ie: `refs/heads/master`).
@@ -59,7 +59,7 @@ sha
 
     PATCH /repos/:user/:repo/git/refs/:ref
 
-### Paramaters
+### Parameters
 
 sha
 : _String_ of the SHA1 value to set this reference to

@@ -4,7 +4,7 @@ title: Git Tags | GitHub API
 
 # Tags API
 
-This tags api only deals with tag objects - so only annotated tags, not
+This tags API only deals with tag objects - so only annotated tags, not
 lightweight tags.
 
 ## Get a Tag

@@ -179,14 +179,14 @@ scopes
 ### Input
 
 scopes
-: _Optional_ **array** - Replaces the authorization' scopes with these.
+: _Optional_ **array** - Replaces the authorization scopes with these.
 
 add_scopes
 : _Optional_ **array** - A list of scopes to add to this authorization.
 
 remove_scopes
 : _Optional_ **array** - A list of scopes to remove from this
-authorizatin.
+authorization.
 
 You can only send one of these scope keys at a time.
 

@@ -5,7 +5,7 @@ title: Organization Teams | GitHub API
 # Org Teams API
 
 All actions against teams require at a minimum an authenticated user who
-is a member of the owner's team in the `:org` being managed. Api calls
+is a member of the owner's team in the `:org` being managed. API calls
 that require explicit permissions are noted.
 
 ## List teams
@@ -44,13 +44,13 @@ repo\_names
 permission
 : _Optional_ **string**
 
-  `pull` - team members can pull, but not push or administor this
+  `pull` - team members can pull, but not push or administer this
   repositories. **Default**
 
-  `push` - team members can pull and push, but not administor this
+  `push` - team members can pull and push, but not administer this
   repositores.
 
-  `admin` - team members can pull, push and administor these
+  `admin` - team members can pull, push and administer these
   repositories.
 
 <%= json \

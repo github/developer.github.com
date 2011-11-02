@@ -4,7 +4,7 @@ title: User Emails | GitHub API
 
 # User Emails API
 
-Mangement of email addresses via the API requires that you are
+Management of email addresses via the API requires that you are
 authenticated.
 
 ## List email addresses for a user

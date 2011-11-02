@@ -15,7 +15,7 @@ The default event is `push`.  The available events are:
 * `issues` - Any time an Issue is opened or closed.
 * `issue_comment` - Any time an Issue is commented on.
 * `commit_comment` - Any time a Commit is commented on.
-* `pull_request` - Any time a Pull Request is opend, closed, or
+* `pull_request` - Any time a Pull Request is opened, closed, or
   synchronized (updated due to a new push in the branch that the pull
 request is tracking).
 * `gollum` - Any time a Wiki page is updated.

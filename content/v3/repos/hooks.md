@@ -60,21 +60,23 @@ part of the open source [github-services](https://github.com/github/github-servi
 
 ### Input
 
-name
+`name`
 : _Required_ **string** - The name of the service that is being called.
 See [/hooks](https://api.github.com/hooks) for the possible names.
 
-config
+`config`
 : _Required_ **hash** - A Hash containing key/value pairs to provide
 settings for this hook.  These settings vary between the services and
 are defined in the
 [github-services](https://github.com/github/github-services) repo.
+Booleans are stored internally as "1" for true, and "0" for false.  Any
+JSON true/false values will be converted automatically.
 
-events
+`events`
 : _Optional_ **array** - Determines what events the hook is triggered
 for.  Default: `["push"]`.
 
-active
+`active`
 : _Optional_ **boolean** - Determines whether the hook is actually
 triggered on pushes.
 
@@ -97,30 +99,33 @@ triggered on pushes.
 
 ### Input
 
-name
+`name`
 : _Required_ **string** - The name of the service that is being called.
 See [/hooks](https://api.github.com/hooks) for the possible names.
 
-config
+`config`
 : _Required_ **hash** - A Hash containing key/value pairs to provide
 settings for this hook.  Modifying this will replace the entire config
 object.  These settings vary between the services and
 are defined in the
 [github-services](https://github.com/github/github-services) repo.
+Booleans are stored internally as "1" for true, and "0" for false.  Any
+JSON true/false values will be converted automatically.
 
-events
+
+`events`
 : _Optional_ **array** - Determines what events the hook is triggered
 for.  This replaces the entire array of events.  Default: `["push"]`.
 
-add_events
+`add_events`
 : _Optional_ **array** - Determines a list of events to be added to the
 list of events that the Hook triggers for. 
 
-remove_events
+`remove_events`
 : _Optional_ **array** - Determines a list of events to be removed from the
 list of events that the Hook triggers for. 
 
-active
+`active`
 : _Optional_ **boolean** - Determines whether the hook is actually
 triggered on pushes.
 
@@ -197,17 +202,17 @@ exists, it will be modified according to the request.
 
 ### Parameters
 
-hub.mode
+`hub.mode`
 : _Required_ **string** - Either `subscribe` or `unsubscribe`.
 
-hub.topic
+`hub.topic`
 : _Required_ **string** - The URI of the GitHub repository to subscribe
 to.  The path must be in the format of `/:user/:repo/events/:event`.
 
-hub.callback
+`hub.callback`
 : _Required_ **string** - The URI to receive the updates to the topic.
 
-hub.secret
+`hub.secret`
 : _Optional_ **string** - A shared secret key that generates a SHA1 HMAC
 of the payload content.  You can verify a push came from GitHub by
 comparing the received body with the contents of the `X-Hub-Signature`

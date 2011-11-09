@@ -51,7 +51,7 @@ The default event is <code>push</code>.  The available events are:</p>
   <li>
 <code>commit_comment</code> - Any time a Commit is commented on.</li>
   <li>
-<code>pull_request</code> - Any time a Pull Request is opend, closed, or
+<code>pull_request</code> - Any time a Pull Request is opened, closed, or
 synchronized (updated due to a new push in the branch that the pull
 request is tracking).</li>
   <li>
@@ -146,21 +146,23 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input">Input</h3>
 
 <dl>
-<dt>name</dt>
+<dt><code>name</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The name of the service that is being called.
 See <a href="https://api.github.com/hooks">/hooks</a> for the possible names.</dd>
-  <dt>config</dt>
+  <dt><code>config</code></dt>
   <dd>
 <em>Required</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
 settings for this hook.  These settings vary between the services and
 are defined in the
-<a href="https://github.com/github/github-services">github-services</a> repo.</dd>
-  <dt>events</dt>
+<a href="https://github.com/github/github-services">github-services</a> repo.
+Booleans are stored internally as “1” for true, and “0” for false.  Any
+JSON true/false values will be converted automatically.</dd>
+  <dt><code>events</code></dt>
   <dd>
 <em>Optional</em> <strong>array</strong> - Determines what events the hook is triggered
 for.  Default: <code>["push"]</code>.</dd>
-  <dt>active</dt>
+  <dt><code>active</code></dt>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
@@ -205,30 +207,32 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <dl>
-<dt>name</dt>
+<dt><code>name</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The name of the service that is being called.
 See <a href="https://api.github.com/hooks">/hooks</a> for the possible names.</dd>
-  <dt>config</dt>
+  <dt><code>config</code></dt>
   <dd>
 <em>Required</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
 settings for this hook.  Modifying this will replace the entire config
 object.  These settings vary between the services and
 are defined in the
-<a href="https://github.com/github/github-services">github-services</a> repo.</dd>
-  <dt>events</dt>
+<a href="https://github.com/github/github-services">github-services</a> repo.
+Booleans are stored internally as “1” for true, and “0” for false.  Any
+JSON true/false values will be converted automatically.</dd>
+  <dt><code>events</code></dt>
   <dd>
 <em>Optional</em> <strong>array</strong> - Determines what events the hook is triggered
 for.  This replaces the entire array of events.  Default: <code>["push"]</code>.</dd>
-  <dt>add_events</dt>
+  <dt><code>add_events</code></dt>
   <dd>
 <em>Optional</em> <strong>array</strong> - Determines a list of events to be added to the
 list of events that the Hook triggers for. </dd>
-  <dt>remove_events</dt>
+  <dt><code>remove_events</code></dt>
   <dd>
 <em>Optional</em> <strong>array</strong> - Determines a list of events to be removed from the
 list of events that the Hook triggers for. </dd>
-  <dt>active</dt>
+  <dt><code>active</code></dt>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
@@ -336,17 +340,17 @@ exists, it will be modified according to the request.</p>
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt>hub.mode</dt>
+<dt><code>hub.mode</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - Either <code>subscribe</code> or <code>unsubscribe</code>.</dd>
-  <dt>hub.topic</dt>
+  <dt><code>hub.topic</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The URI of the GitHub repository to subscribe
 to.  The path must be in the format of <code>/:user/:repo/events/:event</code>.</dd>
-  <dt>hub.callback</dt>
+  <dt><code>hub.callback</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The URI to receive the updates to the topic.</dd>
-  <dt>hub.secret</dt>
+  <dt><code>hub.secret</code></dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - A shared secret key that generates a SHA1 HMAC
 of the payload content.  You can verify a push came from GitHub by

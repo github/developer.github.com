@@ -72,6 +72,11 @@ has\_downloads
 : _Optional_ **boolean** - `true` to enable downloads for this
 repository, `false` to disable them. Default is `true`.
 
+team\_id
+: _Optional_ **number** - The id of the team that will be granted access
+to this repository. This is only valid when creating a repo in an
+organization.
+
 <%= json \
   :name          => "Hello-World",
   :description   => "This is your first repo",

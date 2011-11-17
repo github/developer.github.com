@@ -4,8 +4,9 @@ title: GitHub API Changelog
 
 # Current Version
 
-The GitHub API version is currently in beta.  The Accept mime type is
-`application/vnd.github.beta+json`.  The `beta` mime type property will
+    Accept: application/vnd.github.beta+json
+
+The GitHub API version is currently in beta.  The `beta` mime type property will
 be valid until sometime in 2012.  A notice will be given closer to the
 actual date.
 
@@ -14,10 +15,21 @@ issue](https://github.com/contact) if you have problems.
 
 ## Upcoming Version
 
+    Accept: application/vnd.github.v3+json
+
 The API is expected to be finalized in late 2011.
 
 ### Expected Changes
 
+* All `*_url` attributes move to a `_links` object.  See [Pull
+  Requests](http://developer.github.com/v3/pulls/#get-a-single-pull-request) for an example.
+* The `/repos/:user/:repo/hooks/:id/test` action becomes
+  `/repos/:user/:repo/hooks/:id/tests`.
+* The `/gists/:id/fork` action becomes `/gists/:id/forks`.
+* Gist forks/history objects become separate API calls.
+* Gist files object is not returned on Gist listings.
+* Commit schema will change to be more consistent.
+* `master_branch` becomes `default_branch`.
 * `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
   returned.
 

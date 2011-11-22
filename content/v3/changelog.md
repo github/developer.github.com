@@ -28,7 +28,7 @@ The API is expected to be finalized in late 2011.
 * The `/gists/:id/fork` action becomes `/gists/:id/forks`.
 * Gist forks/history objects become separate API calls.
 * Gist files object is not returned on Gist listings.
-* Commit schema will change to be more consistent.
+* Commit schema will change to be [more consistent](https://gist.github.com/3a2e5779588e21b0c0f3).
 * `master_branch` becomes `default_branch`.
 * `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
   returned.

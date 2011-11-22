@@ -34,8 +34,10 @@
       <div class="content">
     <h1 id="current-version">Current Version</h1>
 
-<p>The GitHub API version is currently in beta.  The Accept mime type is
-<code>application/vnd.github.beta+json</code>.  The <code>beta</code> mime type property will
+<pre><code>Accept: application/vnd.github.beta+json
+</code></pre>
+
+<p>The GitHub API version is currently in beta.  The <code>beta</code> mime type property will
 be valid until sometime in 2012.  A notice will be given closer to the
 actual date.</p>
 
@@ -44,12 +46,25 @@ issue</a> if you have problems.</p>
 
 <h2 id="upcoming-version">Upcoming Version</h2>
 
+<pre><code>Accept: application/vnd.github.v3+json
+</code></pre>
+
 <p>The API is expected to be finalized in late 2011.</p>
 
 <h3 id="expected-changes">Expected Changes</h3>
 
 <ul>
-<li>
+<li>All <code>*_url</code> attributes move to a <code>_links</code> object.  See <a href="http://developer.github.com/v3/pulls/#get-a-single-pull-request">Pull
+Requests</a> for an example.</li>
+  <li>The <code>/repos/:user/:repo/hooks/:id/test</code> action becomes
+<code>/repos/:user/:repo/hooks/:id/tests</code>.</li>
+  <li>The <code>/gists/:id/fork</code> action becomes <code>/gists/:id/forks</code>.</li>
+  <li>Gist forks/history objects become separate API calls.</li>
+  <li>Gist files object is not returned on Gist listings.</li>
+  <li>Commit schema will change to be more consistent.</li>
+  <li>
+<code>master_branch</code> becomes <code>default_branch</code>.</li>
+  <li>
 <code>integrate_branch</code> on the <a href="/v3/repos/#get">repo API</a> will no longer be
 returned.</li>
 </ul><h2 id="breaking-beta-changes">Breaking Beta Changes</h2>

@@ -32,6 +32,8 @@ The API is expected to be finalized in late 2011.
 * `master_branch` becomes `default_branch`.
 * `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
   returned.
+* Use the `private` attribute when creating a private repository,
+  instead of setting `public` to false.
 
 ## Breaking Beta Changes
 

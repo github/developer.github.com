@@ -55,10 +55,10 @@ description
 homepage
 : _Optional_ **string**
 
-public
-: _Optional_ **boolean** - `true` to create a public repository, `false`
-to create a private one. Creating private repositories requires a paid
-GitHub account.
+private
+: _Optional_ **boolean** - `true` to create a private repository, `false`
+to create a public one. Creating private repositories requires a paid
+GitHub account.  Default is `false`.
 
 has\_issues
 : _Optional_ **boolean** - `true` to enable issues for this repository,
@@ -81,7 +81,7 @@ organization.
   :name          => "Hello-World",
   :description   => "This is your first repo",
   :homepage      => "https://github.com",
-  :public        => true,
+  :private       => false,
   :has_issues    => true,
   :has_wiki      => true,
   :has_downloads => true,

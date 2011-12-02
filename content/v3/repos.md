@@ -13,7 +13,7 @@ List repositories for the authenticated user.
 ### Parameters
 
 type
-: `all`, `public`, `private`, `member`. Default: `all`.
+: `all`, `owner`, `public`, `private`, `member`. Default: `all`.
 
 List public repositories for the specified user.
 

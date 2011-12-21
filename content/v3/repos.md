@@ -118,10 +118,9 @@ description
 homepage
 : _Optional_ **string**
 
-public
-: _Optional_ **boolean** - `true` to create a public repository, `false`
-to create a private one. Creating private repositories requires a paid
-GitHub account.
+private
+: _Optional_ **boolean** - `true` makes the repository private, and
+`false` makes it public.
 
 has\_issues
 : _Optional_ **boolean** - `true` to enable issues for this repository,

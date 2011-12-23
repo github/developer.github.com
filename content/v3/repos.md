@@ -4,7 +4,7 @@ title: Repos | GitHub API
 
 # Repos API
 
-## List
+## List your repositories
 
 List repositories for the authenticated user.
 
@@ -15,13 +15,27 @@ List repositories for the authenticated user.
 type
 : `all`, `owner`, `public`, `private`, `member`. Default: `all`.
 
+## List user repositories
+
 List public repositories for the specified user.
 
     GET /users/:user/repos
 
+### Parameters
+
+type
+: `all`, `owner`, `public`, `member`. Default: `public`.
+
+## List organization repositories.
+
 List repositories for the specified org.
 
     GET /orgs/:org/repos
+
+### Parameters
+
+type
+: `all`, `public`, `member`. Default: `all`.
 
 ### Parameters
 

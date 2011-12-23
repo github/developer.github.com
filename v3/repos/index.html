@@ -34,7 +34,7 @@
       <div class="content">
     <h1 id="repos-api">Repos API</h1>
 
-<h2 id="list">List</h2>
+<h2 id="list-your-repositories">List your repositories</h2>
 
 <p>List repositories for the authenticated user.</p>
 
@@ -47,17 +47,33 @@
 <dt>type</dt>
   <dd>
 <code>all</code>, <code>owner</code>, <code>public</code>, <code>private</code>, <code>member</code>. Default: <code>all</code>.</dd>
-</dl><p>List public repositories for the specified user.</p>
+</dl><h2 id="list-user-repositories">List user repositories</h2>
+
+<p>List public repositories for the specified user.</p>
 
 <pre><code>GET /users/:user/repos
 </code></pre>
+
+<h3 id="parameters-1">Parameters</h3>
+
+<dl>
+<dt>type</dt>
+  <dd>
+<code>all</code>, <code>owner</code>, <code>public</code>, <code>member</code>. Default: <code>public</code>.</dd>
+</dl><h2 id="list-organization-repositories">List organization repositories.</h2>
 
 <p>List repositories for the specified org.</p>
 
 <pre><code>GET /orgs/:org/repos
 </code></pre>
 
-<h3 id="parameters-1">Parameters</h3>
+<h3 id="parameters-2">Parameters</h3>
+
+<dl>
+<dt>type</dt>
+  <dd>
+<code>all</code>, <code>public</code>, <code>member</code>. Default: <code>all</code>.</dd>
+</dl><h3 id="parameters-3">Parameters</h3>
 
 <dl>
 <dt>type</dt>
@@ -464,7 +480,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /repos/:user/:repo/contributors
 </code></pre>
 
-<h3 id="parameters-2">Parameters</h3>
+<h3 id="parameters-4">Parameters</h3>
 
 <dl>
 <dt>anon</dt>

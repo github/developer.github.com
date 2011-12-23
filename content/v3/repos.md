@@ -24,7 +24,7 @@ List public repositories for the specified user.
 ### Parameters
 
 type
-: `all`, `owner`, `public`, `member`. Default: `public`.
+: `all`, `owner`, `member`. Default: `public`.
 
 ## List organization repositories.
 

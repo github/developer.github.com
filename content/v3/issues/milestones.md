@@ -24,7 +24,7 @@ direction
 
 ## Get a single milestone
 
-    GET /repos/:user/:repo/milestones/:id
+    GET /repos/:user/:repo/milestones/:number
 
 ### Response
 
@@ -65,7 +65,7 @@ due\_on
 
 ## Update a milestone
 
-    PATCH /repos/:user/:repo/milestones/:id
+    PATCH /repos/:user/:repo/milestones/:number
 
 ### Input
 
@@ -95,7 +95,7 @@ due\_on
 
 ## Delete a milestone
 
-    DELETE /repos/:user/:repo/milestones/:id
+    DELETE /repos/:user/:repo/milestones/:number
 
 ### Response
 

@@ -42,7 +42,6 @@ it is also available on the [CPAN][pithub-cpan].
 * [GitHub Kohana Module][kohana]
 
 [github-api]: https://github.com/yiiext/github-api
-[php-github-api]: https://github.com/ornicar/php-github-api
 [kohana]: https://github.com/acoulton/github_v3_api
 
 ## CSharp

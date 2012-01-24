@@ -176,7 +176,7 @@ in results.
 ### Response
 
 <%= headers 200 %>
-<%= json(:user) { |h| [h] } %>
+<%= json(:contributor) { |h| [h] } %>
 
 ## List languages
 

@@ -114,10 +114,10 @@ user
 : DB read/write access to profile info only.
 
 public\_repo
-: DB read/write access, and Git read access to public repos.
+: DB read/write access, and Git read access to public repos and organizations.
 
 repo
-: DB read/write access, and Git read access to public and private repos.
+: DB read/write access, and Git read access to public and private repos and organizations.
 
 gist
 : write access to gists.

@@ -124,7 +124,7 @@ organization.
 ### Input
 
 name
-: _Required_ **string**
+: _Optional_ **string** - if given, the repository will be renamed to this name
 
 description
 : _Optional_ **string**

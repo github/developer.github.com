@@ -152,7 +152,7 @@ repository, `false` to disable them. Default is `true`.
   :name          => "Hello-World",
   :description   => "This is your first repo",
   :homepage      => "https://github.com",
-  :public        => true,
+  :private       => false,
   :has_issues    => true,
   :has_wiki      => true,
   :has_downloads => true,

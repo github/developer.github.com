@@ -671,6 +671,7 @@ module GitHub
         "url" => "http://my-github-app.com",
         "name" => "my github app"
       },
+      "note" => "optional note",
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z"
     }

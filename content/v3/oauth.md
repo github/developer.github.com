@@ -164,7 +164,10 @@ app.
 scopes
 : _Optional_ **array** - A list of scopes that this authorization is in.
 
-<%= json :scopes => ["public_repo"] %>
+note
+: _Optional_ **string** - A note to remind you what the OAuth token is for.
+
+<%= json :scopes => ["public_repo"], :note => 'admin script' %>
 
 ### Response
 
@@ -188,9 +191,12 @@ remove_scopes
 : _Optional_ **array** - A list of scopes to remove from this
 authorization.
 
+note
+: _Optional_ **string** - A note to remind you what the OAuth token is for.
+
 You can only send one of these scope keys at a time.
 
-<%= json :add_scopes => ['repo'] %>
+<%= json :add_scopes => ['repo'], :note => 'admin script' %>
 
 ### Response
 

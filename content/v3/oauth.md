@@ -167,6 +167,9 @@ scopes
 note
 : _Optional_ **string** - A note to remind you what the OAuth token is for.
 
+note_url
+: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
+
 <%= json :scopes => ["public_repo"], :note => 'admin script' %>
 
 ### Response
@@ -193,6 +196,9 @@ authorization.
 
 note
 : _Optional_ **string** - A note to remind you what the OAuth token is for.
+
+note_url
+: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
 
 You can only send one of these scope keys at a time.
 

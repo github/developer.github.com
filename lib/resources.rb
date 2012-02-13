@@ -108,6 +108,8 @@ module GitHub
       "git_url"          => "git://github.com/octocat/Hello-World.git",
       "ssh_url"          => "git@github.com:octocat/Hello-World.git",
       "svn_url"          => "https://svn.github.com/octocat/Hello-World",
+      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
+      "id"               => 1296269,
       "owner"            => USER,
       "name"             => "Hello-World",
       "description"      => "This your first repo!",

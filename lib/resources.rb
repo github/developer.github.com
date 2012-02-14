@@ -123,7 +123,8 @@ module GitHub
       "master_branch"    => 'master',
       "open_issues"      => 0,
       "pushed_at"        => "2011-01-26T19:06:43Z",
-      "created_at"       =>"2011-01-26T19:01:12Z"
+      "created_at"       => "2011-01-26T19:01:12Z",
+      "updated_at"       => "2011-01-26T19:14:43Z"
     }
 
     FULL_REPO = REPO.merge({

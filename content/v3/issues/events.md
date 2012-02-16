@@ -62,7 +62,7 @@ assigned
 ### Response
 
 <%= headers 200, :pagination => true %>
-<%= json(:issue_event) { |h| [h] } %>
+<%= json(:full_issue_event) { |h| [h] } %>
 
 ## Get a single event
 
@@ -71,5 +71,5 @@ assigned
 ### Response
 
 <%= headers 200 %>
-<%= json :issue_event %>
+<%= json :full_issue_event %>
 

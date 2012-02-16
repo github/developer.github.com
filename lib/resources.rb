@@ -427,6 +427,8 @@ module GitHub
       "created_at" => "2011-04-14T16:00:49Z"
     }
 
+    FULL_ISSUE_EVENT = ISSUE_EVENT.merge('issue' => ISSUE)
+
     GIST_HISTORY = {
       "history" => [
         {

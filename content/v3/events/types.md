@@ -14,7 +14,7 @@ organization (if applicable).
 Note that some of these events may not be rendered in timelines.
 They're only created for various internal and repository hooks.
 
-* <a href="#commitcommentevent">CommitComment</a>
+* <a href="#commitcomment">CommitComment</a>
 * <a href="#createevent">CreateEvent</a>
 * <a href="#deleteevent">DeleteEvent</a>
 * <a href="#downloadevent">DownloadEvent</a>

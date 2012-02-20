@@ -69,9 +69,6 @@ code
 &lt;/OAuth&gt;
 </code></pre>
 
-access\_token
-: _Required_ **string** - OAuth access token.
-
 ### 3. Use the access token to access the API
 
 The access token allows you to make requests to the API on a behalf of a user.

@@ -8,6 +8,11 @@ title: Repo Forks | GitHub API
 
     GET /repos/:user/:repo/forks
 
+### Parameters
+
+sort
+: `newest`, `oldest`, `watchers`, default: `newest`.
+
 ### Response
 
 <%= headers 200 %>

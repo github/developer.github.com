@@ -27,7 +27,7 @@ labels
 `bug,ui,@high`
 
 sort
-: `created`, `updated`, `comments`, default: `created`
+: `created`, `updated`, `comments`, default: `created`.
 
 direction
 : `asc` or `desc`, default: `desc`.

@@ -4,6 +4,14 @@ title: Gists | GitHub API
 
 # Gists API
 
+## Authentication
+
+You can read public gists and create them for anonymous users without a token; however, to read or write gists on a user's behalf the **gists** [oAuth scope][1] is required.
+
+<!-- When an oAuth client does not have the gists scope, the API will return a 404 "Not Found" response regardless of the validity of the credentials. 
+
+The API will return a 401 "Bad credentials" response if the gists scope was given to the application but the credentials are invalid. -->
+
 ## List gists
 
 List a user's gists:
@@ -152,3 +160,5 @@ including the filename with a null hash.
 ### Response
 
 <%= headers 204 %>
+
+[1] http://developer.github.com/v3/oauth/#scopes

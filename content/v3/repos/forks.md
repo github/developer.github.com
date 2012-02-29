@@ -32,5 +32,9 @@ forked into this organization.
 
 ### Response
 
-<%= headers 201 %>
+Forking a Repository happens asynchronously.  Therefore, you may have to wait
+a short period before accessing the git objects.  If this takes longer than 
+5 minutes, be sure to [contact Support](https://github.com/contact).
+
+<%= headers 202 %>
 <%= json :repo %>

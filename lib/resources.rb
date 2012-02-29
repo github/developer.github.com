@@ -8,6 +8,7 @@ module GitHub
       STATUSES = {
         200 => '200 OK',
         201 => '201 Created',
+        202 => '202 Accepted',
         204 => '204 No Content',
         301 => '301 Moved Permanently',
         304 => '304 Not Modified',

@@ -13,6 +13,10 @@ our API - by creating raw objects directly into the database and updating
 branch references you could technically do just about anything that Git
 can do without having Git installed.
 
+Git DB API functions will return a 409 if the git repo for a Repository is empty
+or unavailable.  This typically means it is being created still.  [Contact
+Support](https://github.com/contact) if this response status persists.
+
 ![git db](http://progit.org/figures/ch9/18333fig0904-tn.png)
 
 For more information on the Git object database, please read the 

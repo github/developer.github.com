@@ -129,7 +129,7 @@ issue.
 
 ## Edit an issue
 
-    PATCH /repos/:user/:repo/issues/:id
+    PATCH /repos/:user/:repo/issues/:number
 
 ### Input
 

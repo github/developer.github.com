@@ -10,7 +10,7 @@ You can read more about the use of mime types in the API
 
 ## List comments on an issue
 
-    GET /repos/:user/:repo/issues/:id/comments
+    GET /repos/:user/:repo/issues/:number/comments
 
 ### Response
 
@@ -28,7 +28,7 @@ You can read more about the use of mime types in the API
 
 ## Create a comment
 
-    POST /repos/:user/:repo/issues/:id/comments
+    POST /repos/:user/:repo/issues/:number/comments
 
 ### Input
 

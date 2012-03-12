@@ -48,7 +48,7 @@ assigned
 
 ## List events for an issue
 
-    GET /repos/:user/:repo/issues/:issue_id/events
+    GET /repos/:user/:repo/issues/:issue_number/events
 
 ### Response
 

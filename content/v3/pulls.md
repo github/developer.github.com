@@ -41,7 +41,7 @@ is `open`.
 
 ## Get a single pull request
 
-    GET /repos/:user/:repo/pulls/:id
+    GET /repos/:user/:repo/pulls/:number
 
 ### Response
 
@@ -101,7 +101,7 @@ Pull Request.
 
 ## Update a pull request
 
-    PATCH /repos/:user/:repo/pulls/:id
+    PATCH /repos/:user/:repo/pulls/:number
 
 ### Input
 
@@ -128,7 +128,7 @@ state
 
 ## List commits on a pull request
 
-    GET /repos/:user/:repo/pulls/:id/commits
+    GET /repos/:user/:repo/pulls/:number/commits
 
 ### Response
 
@@ -137,7 +137,7 @@ state
 
 ## List pull requests files
 
-    GET /repos/:user/:repo/pulls/:id/files
+    GET /repos/:user/:repo/pulls/:number/files
 
 ### Response
 
@@ -146,7 +146,7 @@ state
 
 ## Get if a pull request has been merged
 
-    GET /repos/:user/:repo/pulls/:id/merge
+    GET /repos/:user/:repo/pulls/:number/merge
 
 ### Response if pull request has been merged
 
@@ -158,7 +158,7 @@ state
 
 ## Merge a pull request (Merge Button™)
 
-    PUT /repos/:user/:repo/pulls/:id/merge
+    PUT /repos/:user/:repo/pulls/:number/merge
     
 ### Input
 

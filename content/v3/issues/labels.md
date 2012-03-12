@@ -15,7 +15,7 @@ title: Issue Labels | GitHub API
 
 ## Get a single label
 
-    GET /repos/:user/:repo/labels/:id
+    GET /repos/:user/:repo/labels/:name
 
 ### Response
 
@@ -45,7 +45,7 @@ color
 
 ## Update a label
 
-    PATCH /repos/:user/:repo/labels/:id
+    PATCH /repos/:user/:repo/labels/:name
 
 ### Input
 
@@ -64,7 +64,7 @@ color
 
 ## Delete a label
 
-    DELETE /repos/:user/:repo/labels/:id
+    DELETE /repos/:user/:repo/labels/:name
 
 ### Response
 
@@ -72,7 +72,7 @@ color
 
 ## List labels on an issue
 
-    GET /repos/:user/:repo/issues/:id/labels
+    GET /repos/:user/:repo/issues/:number/labels
 
 ### Response
 
@@ -81,7 +81,7 @@ color
 
 ## Add labels to an issue
 
-    POST /repos/:user/:repo/issues/:id/labels
+    POST /repos/:user/:repo/issues/:number/labels
 
 ### Input
 
@@ -94,7 +94,7 @@ color
 
 ## Remove a label from an issue
 
-    DELETE /repos/:user/:repo/issues/:id/labels/:id
+    DELETE /repos/:user/:repo/issues/:number/labels/:name
 
 ### Response
 
@@ -103,7 +103,7 @@ color
 
 ## Replace all labels for an issue
 
-    PUT /repos/:user/:repo/issues/:id/labels
+    PUT /repos/:user/:repo/issues/:number/labels
 
 ### Input
 
@@ -118,7 +118,7 @@ Sending an empty array (`[]`) will remove all Labels from the Issue.
 
 ## Remove all labels from an issue
 
-    DELETE /repos/:user/:repo/issues/:id/labels
+    DELETE /repos/:user/:repo/issues/:number/labels
 
 ### Response
 
@@ -126,7 +126,7 @@ Sending an empty array (`[]`) will remove all Labels from the Issue.
 
 ## Get labels for every issue in a milestone
 
-    GET /repos/:user/:repo/milestones/:id/labels
+    GET /repos/:user/:repo/milestones/:number/labels
 
 ### Response
 

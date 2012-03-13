@@ -31,6 +31,8 @@ will be returned.
 <%= headers 200 %>
 <%= json(:full_commit) %>
 
+Note: Diffs with binary data will have no 'patch' property.
+
 ## List commit comments for a repository
 
 Commit Comments leverage [these](#custom-mime-types) custom mime types. You can

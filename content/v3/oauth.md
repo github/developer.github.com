@@ -87,7 +87,8 @@ host.
 
     GOOD: https://foo.com
     GOOD: http://foo.com/bar
-    BAD:  http://foo:com:8080
+    BAD:  http://foo.com:8080
+    BAD:  http://oauth.foo.com:8080
     BAD:  http://bar.com
 
 ## Scopes

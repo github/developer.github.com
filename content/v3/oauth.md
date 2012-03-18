@@ -11,7 +11,7 @@ be limited to specific types of data, and can be revoked by users at any
 time.
 
 All developers need to [register their
-application](https://github.com/account/applications/new) before getting
+application](https://github.com/settings/applications/new) before getting
 started. A registered OAuth application is assigned a unique Client ID
 and Client Secret. The Client Secret should not be shared.
 

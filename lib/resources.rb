@@ -64,6 +64,10 @@ module GitHub
       "url"          => "https://api.github.com/users/octocat"
     }
 
+    CONTRIBUTOR = USER.merge({
+      "contributions" => 32
+    })
+
     FULL_USER = USER.merge({
       "name"         => "monalisa octocat",
       "company"      => "GitHub",

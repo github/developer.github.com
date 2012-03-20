@@ -51,6 +51,12 @@ it is also available on the [CPAN][pithub-cpan].
 
 [csharp]: https://github.com/sgrassie/csharp-github-api
 
+## Scala
+
+* [Dsipatch GitHuh][scala]
+
+[scala]: https://github.com/andreazevedo/dispatch-github
+
 ## Erlang
 
 * [Erlang GitHub API][erlang]

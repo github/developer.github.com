@@ -53,7 +53,7 @@ it is also available on the [CPAN][pithub-cpan].
 
 ## Scala
 
-* [Dsipatch GitHub][scala]
+* [Dispatch GitHub][scala]
 
 [scala]: https://github.com/andreazevedo/dispatch-github
 

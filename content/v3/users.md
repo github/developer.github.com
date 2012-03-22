@@ -6,7 +6,7 @@ title: Users | GitHub API
 
 Many of the resources on the users API provide a shortcut for getting
 information about the currently authenticated user. If a request URL
-does not include a `:user` parameter than the response will be for the
+does not include a `:user` parameter then the response will be for the
 logged in user (and you must pass [authentication
 information](/v3/#authentication) with your request).
 

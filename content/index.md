@@ -13,3 +13,6 @@ For the new API v3, start browsing the resources on the right >>
 View the [API Changelog](/v3/changelog) for information on existing and
 planned changes to the API.
 
+# Useful links
+
+[Register an application](https://github.com/account/applications/new)

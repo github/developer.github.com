@@ -86,6 +86,8 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"git://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
     <span class="s2">"ssh_url"</span><span class="o">:</span> <span class="s2">"git@github.com:octocat/Hello-World.git"</span><span class="p">,</span>
     <span class="s2">"svn_url"</span><span class="o">:</span> <span class="s2">"https://svn.github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"mirror_url"</span><span class="o">:</span> <span class="s2">"git://git.example.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
     <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
       <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -105,12 +107,15 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"master_branch"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
     <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:14:43Z"</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </code></pre>
 
 <h2 id="check-if-you-are-watching-a-repo">Check if you are watching a repo</h2>
+
+<p>Requires for the user to be authenticated</p>
 
 <pre><code>GET /user/watched/:user/:repo
 </code></pre>
@@ -129,6 +134,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="watch-a-repo">Watch a repo</h2>
 
+<p>Requires for the user to be authenticated</p>
+
 <pre><code>PUT /user/watched/:user/:repo
 </code></pre>
 
@@ -139,6 +146,8 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="stop-watching-a-repo">Stop watching a repo</h2>
+
+<p>Requires for the user to be authenticated</p>
 
 <pre><code>DELETE /user/watched/:user/:repo
 </code></pre>

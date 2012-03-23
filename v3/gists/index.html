@@ -34,6 +34,14 @@
       <div class="content">
     <h1 id="gists-api">Gists API</h1>
 
+<h2 id="authentication">Authentication</h2>
+
+<p>You can read public gists and create them for anonymous users without a token; however, to read or write gists on a user’s behalf the <strong>gists</strong> [oAuth scope][1] is required.</p>
+
+<!-- When an oAuth client does not have the gists scope, the API will return a 404 "Not Found" response regardless of the validity of the credentials. 
+
+The API will return a 401 "Bad credentials" response if the gists scope was given to the application but the credentials are invalid. -->
+
 <h2 id="list-gists">List gists</h2>
 
 <p>List a user’s gists:</p>
@@ -42,7 +50,7 @@
 </code></pre>
 
 <p>List the authenticated user’s gists or if called anonymously, this will
-returns all public gists:</p>
+return all public gists:</p>
 
 <pre><code>GET /gists
 </code></pre>
@@ -476,6 +484,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
+<p>[1] http://developer.github.com/v3/oauth/#scopes</p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

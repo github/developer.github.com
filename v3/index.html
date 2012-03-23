@@ -57,14 +57,18 @@ domain.  All data is sent and received as JSON.</p>
 <pre class="terminal">
 $ curl -i https://api.github.com
 
-HTTP/1.1 200 OK
-Content-Type: application/json
-Status: 200 OK
+HTTP/1.1 302 Found
+Server: nginx/1.0.12
+Date: Mon, 20 Feb 2012 11:15:49 GMT
+Content-Type: text/html;charset=utf-8
+Connection: keep-alive
+Status: 302 Found
 X-RateLimit-Limit: 5000
+ETag: "d41d8cd98f00b204e9800998ecf8427e"
+Location: http://developer.github.com
 X-RateLimit-Remaining: 4999
-Content-Length: 2
+Content-Length: 0
 
-{}
 </pre>
 
 <p>Blank fields are included as <code>null</code> instead of being omitted.</p>
@@ -158,7 +162,8 @@ accept one or more of the attributes to update the resource.  PATCH is a
 relatively new and uncommon HTTP verb, so resource endpoints also accept
 POST requests.</dd>
   <dt>PUT</dt>
-  <dd>Used for replacing resources or collections.</dd>
+  <dd>Used for replacing resources or collections. For PUT requests
+with no <code>body</code> attribute, be sure to set the <code>Content-Length</code> header to zero. </dd>
   <dt>DELETE</dt>
   <dd>Used for deleting resources.</dd>
 </dl><h2 id="authentication">Authentication</h2>
@@ -183,7 +188,9 @@ $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com
 $ curl https://api.github.com?access_token=OAUTH-TOKEN
 </pre>
 
-<p>Read <a href="/v3/oauth/">more about OAuth2</a>.</p>
+<p>Read <a href="/v3/oauth/">more about OAuth2</a>.  Note that OAuth2 tokens can be <a href="/v3/oauth/#create-a-new-authorization">acquired
+programmatically</a>, for applications that
+are not websites.</p>
 
 <h2 id="pagination">Pagination</h2>
 
@@ -229,8 +236,7 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4966
 </pre>
 
-<p>You can file a <a href="http://support.github.com/dashboard/queues/2386-api">support issue</a>
-to request white listed access for your application.  We prefer sites that
+<p>You can <a href="https://github.com/contact">contact us</a> to request white listed access for your application.  We prefer sites that
 setup OAuth applications for their users.</p>
 
 <h2 id="cross-origin-resource-sharing">Cross Origin Resource Sharing</h2>

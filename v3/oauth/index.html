@@ -98,20 +98,25 @@ when you <a href="https://github.com/account/applications/new">registered</a>.</
 <em>Required</em> <strong>string</strong> - The code you received as a response to <a href="#redirect-users-to-request-github-access">Step 1</a>.</dd>
 </dl><h3 id="response">Response</h3>
 
-<dl>
-<dt>access_token</dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - OAuth access token.</dd>
-</dl><h3 id="use-the-access-token-to-access-the-api">3. Use the access token to access the API</h3>
+<pre class="highlight"><code class="language-xml"><span class="tag">&lt;OAuth&gt;</span>
+  <span class="tag">&lt;token_type&gt;</span>bearer<span class="tag">&lt;/token_type&gt;</span>
+  <span class="tag">&lt;access_token&gt;</span>e72e16c7e42f292c6912e7710c838347ae178b4a<span class="tag">&lt;/access_token&gt;</span>
+<span class="tag">&lt;/OAuth&gt;</span>
+</code></pre>
+
+<h3 id="use-the-access-token-to-access-the-api">3. Use the access token to access the API</h3>
 
 <p>The access token allows you to make requests to the API on a behalf of a user.</p>
 
 <pre><code>GET https://api.github.com/user?access_token=...
 </code></pre>
 
-<h2 id="desktop-application-flow">Desktop Application Flow</h2>
+<h2 id="non-web-application-flow">Non-Web Application Flow</h2>
 
-<p>Use basic authentication for now…</p>
+<p>Use basic authentication to create an OAuth2 token using the <a href="/v3/oauth#creating-a-new-authorization">interface
+below</a>.  With this tecnique, a username
+and password need not be stored permanently, and the user can revoke access at
+any time.</p>
 
 <h2 id="redirect-urls">Redirect URLs</h2>
 
@@ -151,11 +156,11 @@ X-Accepted-OAuth-Scopes: user
   <dd>public read-only access (includes public user profile info, public
 repo info, and gists).</dd>
   <dt>user</dt>
-  <dd>DB read/write access to profile info only.</dd>
+  <dd>Read/write access to profile info only.</dd>
   <dt>public_repo</dt>
-  <dd>DB read/write access, and Git read access to public repos and organizations.</dd>
+  <dd>Read/write access to public repos and organizations.</dd>
   <dt>repo</dt>
-  <dd>DB read/write access, and Git read access to public and private repos and organizations.</dd>
+  <dd>Read/write access to public and private repos and organizations.</dd>
   <dt>gist</dt>
   <dd>write access to gists.</dd>
 </dl><p>NOTE: Your application can request the scopes in the initial redirection. You
@@ -288,7 +293,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="update-an-existing-authorization">Update an existing authorization</h2>
 
-<pre><code>PATCH /authorizations/1
+<pre><code>PATCH /authorizations/:id
 </code></pre>
 
 <h3 id="input-1">Input</h3>
@@ -346,7 +351,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="delete-an-authorization">Delete an authorization</h2>
 
-<pre><code>DELETE /authorizations/1
+<pre><code>DELETE /authorizations/:id
 </code></pre>
 
 <h3 id="response-5">Response</h3>

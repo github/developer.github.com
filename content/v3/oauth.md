@@ -118,13 +118,13 @@ accept.
 repo info, and gists).
 
 user
-: DB read/write access to profile info only.
+: Read/write access to profile info only.
 
 public\_repo
-: DB read/write access, and Git read access to public repos and organizations.
+: Read/write access to public repos and organizations.
 
 repo
-: DB read/write access, and Git read access to public and private repos and organizations.
+: Read/write access to public and private repos and organizations.
 
 gist
 : write access to gists.

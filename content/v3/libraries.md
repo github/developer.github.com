@@ -28,10 +28,11 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Perl
 
-The [Pithub][pithub-github] library for Perl provides an interface
-to the entire GitHub v3 API. There are a lot of tests included and
-it is also available on the [CPAN][pithub-cpan].
+* [Pithub][pithub-github] ([CPAN][pithub-cpan])
+* [Net::Github][net-github-github] ([CPAN][net-github-cpan])
 
+[net-github-github]: https://github.com/fayland/perl-net-github
+[net-github-cpan]: http://search.cpan.org/~fayland/Net-GitHub-0.30/lib/Net/GitHub.pm
 [pithub-github]: https://github.com/plu/Pithub
 [pithub-cpan]: http://metacpan.org/module/Pithub
 

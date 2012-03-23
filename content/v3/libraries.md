@@ -6,25 +6,41 @@ title: Libraries | GitHub API
 
 Libraries for accessing the GitHub API from your favorite language.
 
+## ActionScript
+
+* [ActionScript GitHub API][as3]
+
+[as3]: https://github.com/cbrammer/api-github-as3
+
+## CSharp
+
+* [CSharp GitHub API][csharp]
+
+[csharp]: https://github.com/sgrassie/csharp-github-api
+
+## Erlang
+
+* [Erlang GitHub API][erlang]
+
+[erlang]: https://github.com/onlyshk/erlang-github-api
+
+## Haskell
+
+* [Haskell GitHub API][haskell]
+
+[haskell]: https://github.com/dmnpignaud/haskell-github-api
+
 ## Java
 
 The [GitHub Java API](https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core) library
 is part of the [GitHub Mylyn Connector](https://github.com/eclipse/egit-github) and aims to support the entire
 GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22org.eclipse.egit.github.core%22).
 
-## Ruby
+## Javascript
 
-* [Octokit][octokit]
-* [GitHub API Gem][ghapi]
-* [Octocat Herder][herder]
-* [GitHub v3 API][ruby1]
-* [GitHub API Client][ruby2]
+* [NodeJS GitHub library][octonode]
 
-[octokit]: https://github.com/pengwynn/octokit
-[herder]: https://github.com/jhelwig/octocat_herder
-[ghapi]: https://github.com/peter-murach/github
-[ruby1]: https://github.com/jwilger/github-v3-api
-[ruby2]: https://github.com/okonski/github-api-client
+[octonode]: https://github.com/pksunkara/octonode
 
 ## Perl
 
@@ -51,39 +67,23 @@ it is also available on the [CPAN][pithub-cpan].
 
 [pygithub3-api]: https://github.com/copitux/python-github3
 
-## CSharp
+## Ruby
 
-* [CSharp GitHub API][csharp]
+* [Octokit][octokit]
+* [GitHub API Gem][ghapi]
+* [Octocat Herder][herder]
+* [GitHub v3 API][ruby1]
+* [GitHub API Client][ruby2]
 
-[csharp]: https://github.com/sgrassie/csharp-github-api
+[octokit]: https://github.com/pengwynn/octokit
+[herder]: https://github.com/jhelwig/octocat_herder
+[ghapi]: https://github.com/peter-murach/github
+[ruby1]: https://github.com/jwilger/github-v3-api
+[ruby2]: https://github.com/okonski/github-api-client
 
 ## Scala
 
 * [Dispatch GitHub][scala]
 
 [scala]: https://github.com/andreazevedo/dispatch-github
-
-## Erlang
-
-* [Erlang GitHub API][erlang]
-
-[erlang]: https://github.com/onlyshk/erlang-github-api
-
-## ActionScript
-
-* [ActionScript GitHub API][as3]
-
-[as3]: https://github.com/cbrammer/api-github-as3
-
-## Haskell
-
-* [Haskell GitHub API][haskell]
-
-[haskell]: https://github.com/dmnpignaud/haskell-github-api
-
-## Javascript
-
-* [NodeJS GitHub library][octonode]
-
-[octonode]: https://github.com/pksunkara/octonode
 

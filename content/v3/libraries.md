@@ -45,6 +45,12 @@ it is also available on the [CPAN][pithub-cpan].
 [php-github-api]: https://github.com/ornicar/php-github-api
 [kohana]: https://github.com/acoulton/github_v3_api
 
+## Python
+
+* [Pygithub3][pygithub3-api]
+
+[pygithub3-api]: https://github.com/copitux/python-github3
+
 ## CSharp
 
 * [CSharp GitHub API][csharp]

@@ -81,3 +81,9 @@ it is also available on the [CPAN][pithub-cpan].
 
 [haskell]: https://github.com/dmnpignaud/haskell-github-api
 
+## Javascript
+
+* [NodeJS GitHub library][octonode]
+
+[octonode]: https://github.com/pksunkara/octonode
+

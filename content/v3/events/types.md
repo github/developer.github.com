@@ -28,6 +28,7 @@ They're only created for various internal and repository hooks.
 * <a href="#memberevent">MemberEvent</a>
 * <a href="#publicevent">PublicEvent</a>
 * <a href="#pullrequestevent">PullRequestEvent</a>
+* <a href="#pullrequestreviewcommentevent">PullRequestReviewCommentEvent</a>
 * <a href="#pushevent">PushEvent</a>
 * <a href="#teamaddevent">TeamAddEvent</a>
 * <a href="#watchevent">WatchEvent</a>
@@ -197,6 +198,13 @@ number
 
 pull\_request
 : **object** - The [pull request](/v3/pulls) itself.
+
+## PullRequestReviewCommentEvent
+
+Hook name: `pull_request_review_comment`
+
+comment
+: **object** - The [comment](/v3/repos/commits/#list-commit-comments-for-a-repository) itself.
 
 ## PushEvent
 

@@ -187,7 +187,7 @@ note_url
 
 ## Update an existing authorization
 
-    PATCH /authorizations/1
+    PATCH /authorizations/:id
 
 ### Input
 
@@ -218,7 +218,7 @@ You can only send one of these scope keys at a time.
 
 ## Delete an authorization
 
-    DELETE /authorizations/1
+    DELETE /authorizations/:id
 
 ### Response
 

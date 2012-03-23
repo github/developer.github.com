@@ -37,11 +37,6 @@ List repositories for the specified org.
 type
 : `all`, `public`, `member`. Default: `all`.
 
-### Parameters
-
-type
-: `all`, `public`, `private`. Default: `all`.
-
 ### Response
 
 <%= headers 200, :pagination => true %>

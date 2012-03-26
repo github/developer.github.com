@@ -93,7 +93,7 @@ organization.
   :private       => false,
   :has_issues    => true,
   :has_wiki      => true,
-  :has_downloads => true,
+  :has_downloads => true
 %>
 
 ### Response
@@ -150,7 +150,7 @@ repository, `false` to disable them. Default is `true`.
   :public        => true,
   :has_issues    => true,
   :has_wiki      => true,
-  :has_downloads => true,
+  :has_downloads => true
 %>
 
 ### Response
@@ -182,7 +182,7 @@ in results.
 <%= headers 200 %>
 <%= json \
   "C"      => 78769,
-  "Python" => 7769,
+  "Python" => 7769
 %>
 
 ## List Teams

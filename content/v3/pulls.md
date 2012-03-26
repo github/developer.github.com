@@ -76,7 +76,7 @@ would namespace `head` with a user like this: `username:branch`.
   :title     => "Amazing new feature",
   :body      => "Please pull this in!",
   :head      => "octocat:new-feature",
-  :base      => "master",
+  :base      => "master"
 %>
 
 ### Alternative Input
@@ -91,7 +91,7 @@ Pull Request.
 <%= json \
   :issue => "5",
   :head  => "ocotocat:new-feature",
-  :base  => "master",
+  :base  => "master"
 %>
 
 ### Response
@@ -118,7 +118,7 @@ state
 <%= json \
   :title     => "new title",
   :body      => "updated body",
-  :state     => "open",
+  :state     => "open"
 %>
 
 ### Response
@@ -180,7 +180,7 @@ commit\_message
 <%= json \
   :sha     => nil,
   :merged  => false,
-  :message => 'Failure reason',
+  :message => 'Failure reason'
 %>
 
 ## Custom Mime Types

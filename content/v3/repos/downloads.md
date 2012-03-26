@@ -51,7 +51,7 @@ content\_type
   :name => "new_file.jpg",
   :size => 114034,
   :description => "Latest release",
-  :content_type => "text/plain",
+  :content_type => "text/plain"
 %>
 
 ### Response

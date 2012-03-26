@@ -55,7 +55,7 @@ position
   :body      => 'Nice change',
   :commit_id => '6dcb09b5b57875f334f61aebed695e2e4193db5e',
   :path      => 'file1.txt',
-  :position  => 4,
+  :position  => 4
 %>
 
 ### Alternative Input
@@ -73,7 +73,7 @@ in_reply_to
 
 <%= json \
   :body        => 'Nice change',
-  :in_reply_to => 4,
+  :in_reply_to => 4
 %>
 
 ### Response

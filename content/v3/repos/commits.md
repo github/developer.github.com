@@ -82,7 +82,7 @@ position
   :commit_id => '6dcb09b5b57875f334f61aebed695e2e4193db5e',
   :line      => 1,
   :path      => 'file1.txt',
-  :position  => 4,
+  :position  => 4
 %>
 
 ### Response

@@ -222,7 +222,7 @@ You can only send one of these scope keys at a time.
 
 ### Response
 
-<%= headers 204 %> 
+<%= headers 204 %>
 
 ## More Information
 

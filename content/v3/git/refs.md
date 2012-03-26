@@ -80,4 +80,19 @@ out or setting it to `false` will make sure you're not overwriting work.
       :Location => "https://api.github.com/git/:user/:repo/commit/:sha" %>
 <%= json :ref %>
 
+## Delete a Reference
+
+    DELETE /repos/:user/:repo/git/refs/:ref
+
+Example: Deleting a branch:
+
+    DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a
+
+Example: Deleting a tag:
+
+    DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
+
+### Response
+
+<%= headers 204 %>
 

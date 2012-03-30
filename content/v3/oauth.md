@@ -27,7 +27,7 @@ This is a description of the OAuth flow from 3rd party web sites.
 
 client\_id
 : _Required_ **string** - The client ID you received from GitHub when
-you [registered](https://github.com/account/applications/new).
+you [registered](https://github.com/settings/applications/new).
 
 redirect\_uri
 : _Optional_ **string** - URL in your app where user's will be sent
@@ -49,14 +49,14 @@ token:
 
 client\_id
 : _Required_ **string** - The client ID you received from GitHub when
-you [registered](https://github.com/account/applications/new).
+you [registered](https://github.com/settings/applications/new).
 
 redirect\_uri
 : _Optional_ **string**
 
 client\_secret
 : _Required_ **string** - The client secret you received from GitHub
-when you [registered](https://github.com/account/applications/new).
+when you [registered](https://github.com/settings/applications/new).
 
 code
 : _Required_ **string** - The code you received as a response to [Step 1](#redirect-users-to-request-github-access).

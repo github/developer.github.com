@@ -34,7 +34,7 @@ For specifics on versions, check the [API changelog](/v3/changelog).
 
 ## Comment Body Properties
 
-The body of a comments can be written in [GitHub Flavored Markdown][gfm].
+The body of a comment can be written in [GitHub Flavored Markdown][gfm].
 Issues, Issue Comments, Pull Request Comments, and Gist Comments all
 accept these same mime types:
 

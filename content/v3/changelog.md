@@ -17,7 +17,7 @@ issue](https://github.com/contact) if you have problems.
 
     Accept: application/vnd.github.v3+json
 
-The API is expected to be finalized in late 2011.
+The API is expected to be finalized Real Soon Now.
 
 ### Expected Changes
 

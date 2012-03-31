@@ -78,7 +78,7 @@ The access token allows you to make requests to the API on a behalf of a user.
 ## Non-Web Application Flow
 
 Use basic authentication to create an OAuth2 token using the [interface
-below](/v3/oauth#creating-a-new-authorization).  With this tecnique, a username
+below](/v3/oauth#creating-a-new-authorization).  With this technique, a username
 and password need not be stored permanently, and the user can revoke access at
 any time.
 

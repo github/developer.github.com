@@ -156,7 +156,7 @@ state
 
 <%= headers 404 %>
 
-## Merge a pull request (Merge Button™)
+## Merge a pull request (Merge Button&trade;)
 
     PUT /repos/:user/:repo/pulls/:number/merge
     

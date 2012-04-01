@@ -209,7 +209,7 @@ organization, you get:
 
 ## Remove team repo
 
-In order to add a repo to a team, the authenticated user must be an
+In order to remove a repo from a team, the authenticated user must be an
 owner of the org that the team is associated with.
 NOTE: This does not delete the repo, it just removes it from the team.
 

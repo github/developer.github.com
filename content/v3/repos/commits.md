@@ -38,6 +38,8 @@ Note: Diffs with binary data will have no 'patch' property.
 Commit Comments leverage [these](#custom-mime-types) custom mime types. You can
 read more about the use of mime types in the API [here](/v3/mime/).
 
+Comments are ordered by ascending ID.
+
     GET /repos/:user/:repo/comments
 
 ### Response

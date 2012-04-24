@@ -15,6 +15,12 @@ List repositories for the authenticated user.
 type
 : `all`, `owner`, `public`, `private`, `member`. Default: `all`.
 
+sort
+: `created`, `updated`, `pushed`, `full_name`, default: `created`.
+
+direction
+: `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
+
 ## List user repositories
 
 List public repositories for the specified user.

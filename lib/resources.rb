@@ -173,6 +173,20 @@ module GitHub
       "updated_at" => "2011-01-26T19:01:12Z",
       "closed_at"  => "2011-01-26T19:01:12Z",
       "merged_at"  => "2011-01-26T19:01:12Z",
+      "head"          => {
+        "label" => "new-topic",
+        "ref"   => "new-topic",
+        "sha"   => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "user"  => USER,
+        "repo"  => REPO,
+      },
+      "base"          => {
+        "label" => "master",
+        "ref"   => "master",
+        "sha"   => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "user"  => USER,
+        "repo"  => REPO,
+      },
       "_links" => {
         "self" => {'href' =>
           "https://api.github.com/octocat/Hello-World/pulls/1"},
@@ -193,21 +207,7 @@ module GitHub
       "commits"       => 3,
       "additions"     => 100,
       "deletions"     => 3,
-      "changed_files" => 5,
-      "head"          => {
-        "label" => "new-topic",
-        "ref"   => "new-topic",
-        "sha"   => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
-        "user"  => USER,
-        "repo"  => REPO,
-      },
-      "base"          => {
-        "label" => "master",
-        "ref"   => "master",
-        "sha"   => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
-        "user"  => USER,
-        "repo"  => REPO,
-      }
+      "changed_files" => 5
     })
 
     COMMIT = {
@@ -306,7 +306,15 @@ module GitHub
       "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "user"       => USER,
       "created_at" => "2011-04-14T16:00:49Z",
-      "updated_at" => "2011-04-14T16:00:49Z"
+      "updated_at" => "2011-04-14T16:00:49Z",
+      "_links" => {
+        "self" => {'href' =>
+          "https://api.github.com/octocat/Hello-World/pulls/comments/1"},
+        "html" => {'href' =>
+          "https://github.com/octocat/Hello-World/pull/1#discussion-diff-1"},
+        "pull_request" => {'href' =>
+          "https://api.github.com/octocat/Hello-World/pulls/1"}
+      }
     }
 
     DOWNLOAD = {

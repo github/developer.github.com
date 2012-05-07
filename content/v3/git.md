@@ -17,10 +17,10 @@ Git DB API functions will return a 409 if the git repo for a Repository is empty
 or unavailable.  This typically means it is being created still.  [Contact
 Support](https://github.com/contact) if this response status persists.
 
-![git db](http://progit.org/figures/ch9/18333fig0904-tn.png)
+![git db](http://git-scm.com/figures/18333fig0904-tn.png)
 
 For more information on the Git object database, please read the 
-<a href="http://progit.org/book/ch9-0.html">Git Internals</a> chapter of
+<a href="http://git-scm.com/book/ch9-0.html">Git Internals</a> chapter of
 the Pro Git book.
 
 As an example, if you wanted to commit a change to a file in your

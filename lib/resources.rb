@@ -117,6 +117,7 @@ module GitHub
       "id"               => 1296269,
       "owner"            => USER,
       "name"             => "Hello-World",
+      "full_name"        => "octocat/Hello-World",
       "description"      => "This your first repo!",
       "homepage"         => "https://github.com",
       "language"         => nil,

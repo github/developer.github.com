@@ -8,7 +8,7 @@ title: Git Import | GitHub API
 
 Would this be cool?
 
-See the [Pro Git book](http://progit.org/book/ch8-2.html#a_custom_importer) or the
+See the [Pro Git book](http://git-scm.com/book/ch8-2.html#a_custom_importer) or the
 [fast-import man page](http://www.kernel.org/pub/software/scm/git/docs/git-fast-import.html)
 for more information about the fast-import syntax.
 

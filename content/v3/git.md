@@ -20,7 +20,7 @@ Support](https://github.com/contact) if this response status persists.
 ![git db](http://git-scm.com/figures/18333fig0904-tn.png)
 
 For more information on the Git object database, please read the 
-<a href="http://progit.org/book/ch9-0.html">Git Internals</a> chapter of
+<a href="http://git-scm.com/book/ch9-0.html">Git Internals</a> chapter of
 the Pro Git book.
 
 As an example, if you wanted to commit a change to a file in your

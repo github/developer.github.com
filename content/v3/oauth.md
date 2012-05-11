@@ -30,7 +30,7 @@ client\_id
 you [registered](https://github.com/settings/applications/new).
 
 redirect\_uri
-: _Optional_ **string** - URL in your app where user's will be sent
+: _Optional_ **string** - URL in your app where users will be sent
 after authorization. See details below about [redirect
 urls](#redirect-urls).
 

@@ -41,7 +41,7 @@ List repositories for the specified org.
 ### Parameters
 
 type
-: `all`, `public`, `member`. Default: `all`.
+: `all`, `public`, `member`, `private`. Default: `all`.
 
 ### Response
 

@@ -44,8 +44,10 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Javascript
 
+* [JavaScript GitHub API for Node.JS][github] (`npm install github`)
 * [NodeJS GitHub library][octonode]
 
+[github]: https://github.com/ajaxorg/node-github
 [octonode]: https://github.com/pksunkara/octonode
 
 ## Perl

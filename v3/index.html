@@ -104,7 +104,7 @@ Request</code> response.</p>
 </code></pre>
   </li>
   <li>
-    <p>Sending invalid files will result in a 422 Unprocessable Entity
+    <p>Sending invalid files will result in a <code>422 Unprocessable Entity</code>
 response.</p>
 
     <pre><code> HTTP/1.1 422 Unprocessable Entity
@@ -124,7 +124,7 @@ response.</p>
   </li>
 </ol><p>All error objects have resource and field properties so that your client
 can tell what the problem is.  There’s also an error code to let you
-know what is wrong with the field.  These are the possible validation error 
+know what is wrong with the field.  These are the possible validation error
 codes:</p>
 
 <dl>
@@ -163,7 +163,7 @@ relatively new and uncommon HTTP verb, so resource endpoints also accept
 POST requests.</dd>
   <dt>PUT</dt>
   <dd>Used for replacing resources or collections. For PUT requests
-with no <code>body</code> attribute, be sure to set the <code>Content-Length</code> header to zero. </dd>
+with no <code>body</code> attribute, be sure to set the <code>Content-Length</code> header to zero.</dd>
   <dt>DELETE</dt>
   <dd>Used for deleting resources.</dd>
 </dl><h2 id="authentication">Authentication</h2>
@@ -194,7 +194,7 @@ are not websites.</p>
 
 <p>Requests that require authentication will return 404, instead of 403, in some places.
 This is to prevent the accidental leakage of private repositories to unauthorized
-users. </p>
+users.</p>
 
 <h2 id="pagination">Pagination</h2>
 
@@ -240,7 +240,26 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4966
 </pre>
 
-<p>You can <a href="https://github.com/contact">contact us</a> to request white listed access for your application.  We prefer sites that
+<p>You can also check your rate limit status without incurring an API hit.</p>
+
+<pre><code>GET /rate_limit
+</code></pre>
+
+<h3 id="rate-limit">Rate limit</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"rate"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"remaining"</span><span class="o">:</span> <span class="mi">4999</span><span class="p">,</span>
+    <span class="s2">"limit"</span><span class="o">:</span> <span class="mi">5000</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Please <a href="https://github.com/contact">contact us</a> to request white listed access for your application.  We prefer sites that
 setup OAuth applications for their users.</p>
 
 <h2 id="cross-origin-resource-sharing">Cross Origin Resource Sharing</h2>
@@ -253,14 +272,14 @@ HTML 5 Security Guide.</p>
 <p>Here’s a sample request sent from a browser hitting
 <code>http://some-site.com</code>:</p>
 
-<pre><code>$ curl -i https://api.github.com -H "Origin: http://some-site.com" 
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://some-site.com"
 HTTP/1.1 302 Found
 </code></pre>
 
 <p>Any domain that is registered as an OAuth Application is accepted.
 Here’s a sample request for a browser hitting <a href="http://calendaraboutnothing.com/">Calendar About Nothing</a>:</p>
 
-<pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" 
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com"
 HTTP/1.1 302 Found
 Access-Control-Allow-Origin: http://calendaraboutnothing.com
 Access-Control-Expose-Headers: Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
@@ -269,7 +288,7 @@ Access-Control-Allow-Credentials: true
 
 <p>This is what the CORS preflight request looks like:</p>
 
-<pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" -X OPTIONS    
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" -X OPTIONS
 HTTP/1.1 204 No Content
 Access-Control-Allow-Origin: http://calendaraboutnothing.com
 Access-Control-Allow-Headers: Authorization, X-Requested-With

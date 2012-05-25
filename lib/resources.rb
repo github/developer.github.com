@@ -260,11 +260,13 @@ module GitHub
     })
 
     COMMIT_COMMENT = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
+      "html_url"   => "https://github.com/octocat/Hello-World/commit/6dcb09b5b57875f334f61aebed695e2e4193db5e#commitcomment-1",
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/comments/1",
       "id"         => 1,
       "body"       => "Great stuff",
       "path"       => "file1.txt",
       "position"   => 4,
+      "line"       => 14,
       "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "user"       => USER,
       "created_at" => "2011-04-14T16:00:49Z",
@@ -278,8 +280,8 @@ module GitHub
       "additions" => 103,
       "deletions" => 21,
       "changes"   => 124,
-      "blob_url"  => "https://github.com/octocate/Hello-World/blob/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt",
-      "raw_url"   => "https://github.com/octocate/Hello-World/raw/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt",
+      "blob_url"  => "https://github.com/octocat/Hello-World/blob/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt",
+      "raw_url"   => "https://github.com/octocat/Hello-World/raw/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt",
       "patch"     => "@@ -132,7 +132,7 @@ module Test @@ -1000,7 +1000,7 @@ module Test"
     }
 

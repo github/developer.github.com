@@ -44,8 +44,10 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Javascript
 
+* [Node-GitHub][ajaxorg-node-github]
 * [NodeJS GitHub library][octonode]
 
+[ajaxorg-node-github]: https://github.com/ajaxorg/node-github
 [octonode]: https://github.com/pksunkara/octonode
 
 ## Perl
@@ -80,12 +82,14 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [Octocat Herder][herder]
 * [GitHub v3 API][ruby1]
 * [GitHub API Client][ruby2]
+* [Ghee][ghee]
 
 [octokit]: https://github.com/pengwynn/octokit
 [herder]: https://github.com/jhelwig/octocat_herder
 [ghapi]: https://github.com/peter-murach/github
 [ruby1]: https://github.com/jwilger/github-v3-api
 [ruby2]: https://github.com/okonski/github-api-client
+[ghee]: https://github.com/rauhryan/ghee
 
 ## Scala
 

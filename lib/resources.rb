@@ -197,7 +197,8 @@ module GitHub
           "https://api.github.com/octocat/Hello-World/issues/1/comments"},
         "review_comments" => {'href' =>
           "https://api.github.com/octocat/Hello-World/pulls/1/comments"}
-      }
+      },
+      "user" => USER
     }
 
     FULL_PULL = PULL.merge({

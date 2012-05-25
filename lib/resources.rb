@@ -261,6 +261,7 @@ module GitHub
 
     COMMIT_COMMENT = {
       "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
+      "html_url"   => "https://github.com/repos/octocat/commit/6dcb09b5b57875f334f61aebed695e2e4193db5e#commitcomment-1",
       "id"         => 1,
       "body"       => "Great stuff",
       "path"       => "file1.txt",

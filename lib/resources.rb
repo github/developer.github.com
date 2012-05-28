@@ -349,7 +349,7 @@ module GitHub
     ORG = {
       "login"      => "github",
       "id"         => 1,
-      "url"        => "https://api.github.com/orgs/1",
+      "url"        => "https://api.github.com/orgs/github",
       "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
     }
 

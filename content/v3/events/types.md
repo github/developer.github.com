@@ -38,7 +38,7 @@ They're only created for various internal and repository hooks.
 Hook name: `commit_comment`
 
 comment
-: **object** - The [comment](/v3/repos/commits/#list-commit-comments-for-a-repository) itself.
+: **object** - The [comment](/v3/repos/comments/#list-commit-comments-for-a-repository) itself.
 
 ## CreateEvent
 

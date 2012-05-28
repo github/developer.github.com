@@ -84,7 +84,7 @@ permission
 
 ### Response
 
-<%= headers 201 %>
+<%= headers 200 %>
 <%= json(:full_team) %>
 
 ## Delete team

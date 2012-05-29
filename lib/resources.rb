@@ -568,16 +568,8 @@ module GitHub
     COMMIT = {
       "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
-      "author" => {
-        "date" => "2010-04-10T14:10:01-07:00",
-        "name" => "Scott Chacon",
-        "email" => "schacon@gmail.com"
-      },
-      "committer" => {
-        "date" => "2010-04-10T14:10:01-07:00",
-        "name" => "Scott Chacon",
-        "email" => "schacon@gmail.com"
-      },
+      "author" => USER,
+      "committer" => USER,
       "message" => "added readme, because im a good github citizen\n",
       "tree" => {
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb",

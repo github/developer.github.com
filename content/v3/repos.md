@@ -30,7 +30,7 @@ List public repositories for the specified user.
 ### Parameters
 
 type
-: `all`, `owner`, `member`. Default: `public`.
+: `all`, `owner`, `member`. Default: `all`.
 
 ## List organization repositories.
 

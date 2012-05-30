@@ -139,6 +139,43 @@ If it doesn’t start with ‘refs’ and have at least two slashes, it will be 
 <span class="p">}</span>
 </code></pre>
 
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/master"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/master"</span><span class="p">,</span>
+    <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/gh-pages"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/gh-pages"</span><span class="p">,</span>
+    <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/tags/v0.0.1"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/tags/v0.0.1"</span><span class="p">,</span>
+    <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"tag"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre>
+
 <h2 id="update-a-reference">Update a Reference</h2>
 
 <pre><code>PATCH /repos/:user/:repo/git/refs/:ref
@@ -163,7 +200,7 @@ out or setting it to <code>false</code> will make sure you’re not overwriting 
 <span class="p">}</span>
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Location: https://api.github.com/git/:user/:repo/commit/:sha
@@ -198,7 +235,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
 </code></pre>
 
-<h3 id="response-2">Response</h3>
+<h3 id="response-3">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

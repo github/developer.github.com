@@ -349,7 +349,7 @@ module GitHub
     ORG = {
       "login"      => "github",
       "id"         => 1,
-      "url"        => "https://api.github.com/orgs/1",
+      "url"        => "https://api.github.com/orgs/github",
       "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
     }
 
@@ -565,7 +565,7 @@ module GitHub
       } ]
     }
 
-    COMMIT = {
+    GIT_COMMIT = {
       "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
       "author" => {

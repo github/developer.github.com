@@ -55,6 +55,11 @@ sha
 <%= json "ref"=>"refs/heads/master",\
          "sha"=>"827efc6d56897b048c772eb4087f854f46256132" %>
 
+### Response
+
+<%= headers 201 %>
+<%= json :refs %>
+
 ## Update a Reference
 
     PATCH /repos/:user/:repo/git/refs/:ref

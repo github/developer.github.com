@@ -11,7 +11,7 @@ title: Git Commits | GitHub API
 ### Response
 
 <%= headers 200 %>
-<%= json :commit %>
+<%= json :git_commit %>
 
 ## Create a Commit
 

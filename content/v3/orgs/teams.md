@@ -44,10 +44,10 @@ repo\_names
 permission
 : _Optional_ **string**
 
-  `pull` - team members can pull, but not push or administer this
+  `pull` - team members can pull, but not push or administer these
   repositories. **Default**
 
-  `push` - team members can pull and push, but not administer this
+  `push` - team members can pull and push, but not administer these
   repositores.
 
   `admin` - team members can pull, push and administer these
@@ -84,7 +84,7 @@ permission
 
 ### Response
 
-<%= headers 201 %>
+<%= headers 200 %>
 <%= json(:full_team) %>
 
 ## Delete team

@@ -453,6 +453,85 @@ module GitHub
 
     FULL_ISSUE_EVENT = ISSUE_EVENT.merge('issue' => ISSUE)
 
+    ISSUE_SEARCH_ITEM = {
+      "gravatar_id" =>  "4c3d600867886124a73f14a907b1a955",
+      "position" =>  10,
+      "number" =>  10,
+      "votes" =>  2,
+      "created_at" =>  "2010-06-04T23:20:33-07:00",
+      "comments" =>  5,
+      "body" =>  "Issue body goes here",
+      "title" =>  "This is is the issue title",
+      "updated_at" =>  "2010-06-04T23:20:33-07:00",
+      "html_url" =>  "https => //github.com/pengwynn/linkedin/issues/10",
+      "user" =>  "ckarbass",
+      "labels" =>  [
+        "api",
+        "feature request",
+        "investigation"
+      ],
+      "state" =>  "open"
+    }
+
+    ISSUE_SEARCH_RESULTS = {
+      "issues" => [ISSUE_SEARCH_ITEM]
+    }
+
+    REPO_SEARCH_ITEM = {
+      "type" => "repo",
+      "created" => "2011-09-05T11:07:54-07:00",
+      "watchers" => 2913,
+      "has_downloads" => true,
+      "username" => "mathiasbynens",
+      "homepage" => "http://mths.be/dotfiles",
+      "url" => "https://github.com/mathiasbynens/dotfiles",
+      "fork" => false,
+      "has_issues" => true,
+      "has_wiki" => false,
+      "forks" => 520,
+      "size" => 192,
+      "private" => false,
+      "followers" => 2913,
+      "name" => "dotfiles",
+      "owner" => "mathiasbynens",
+      "open_issues" => 12,
+      "pushed_at" => "2012-06-05T03:37:13-07:00",
+      "score" => 3.289718,
+      "pushed" => "2012-06-05T03:37:13-07:00",
+      "description" => "sensible hacker defaults for OS X",
+      "language" => "VimL",
+      "created_at" => "2011-09-05T11:07:54-07:00"
+    }
+
+    REPO_SEARCH_RESULTS = {
+      "repositories" => [REPO_SEARCH_ITEM]
+    }
+
+    USER_SEARCH_ITEM = {
+      "gravatar_id" => "70889091349f7598bce9afa588034310",
+      "name" => "Hirotaka Kawata",
+      "created_at" => "2009-10-05T01:32:06Z",
+      "location" => "Tsukuba, Ibaraki, Japan",
+      "public_repo_count" => 8,
+      "followers" => 10,
+      "language" => "Python",
+      "fullname" => "Hirotaka Kawata",
+      "username" => "techno",
+      "id" => "user-135050",
+      "repos" => 8,
+      "type" => "user",
+      "followers_count" => 10,
+      "pushed" => "2012-04-18T02:15:17.511Z",
+      "login" => "techno",
+      "score" => 4.2559967,
+      "record" => nil,
+      "created" => "2009-10-05T01:32:06Z"
+    }
+
+    USER_SEARCH_RESULTS = {
+      "users" => [USER_SEARCH_ITEM]
+    }
+
     GIST_HISTORY = {
       "history" => [
         {

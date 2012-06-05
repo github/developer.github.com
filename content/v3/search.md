@@ -9,6 +9,8 @@ v3. There should be no changes, other than the new URL and JSON output format.
 
 ## Search issues
 
+Find issues by state and keyword.
+
     GET /legacy/issues/search/:owner/:repository/:state/:keyword
 
 ### Parameters
@@ -24,6 +26,8 @@ keyword
 
 ## Search repositories
 
+Find repositories by keyword.
+
     GET /legacy/repos/search/:keyword
 
 ### Parameters
@@ -36,6 +40,8 @@ keyword
 
 ## Search users
 
+Find users by keyword.
+
     GET /legacy/user/search/:keyword
 
 ### Parameters
@@ -46,4 +52,13 @@ keyword
 <%= headers 200 %>
 <%= json(:user_search_results) %>
 
+## Email search
 
+This API call is added for compatibility reasons only. There's no guarantee
+that full email searches will always be available.
+
+email
+: Email address
+
+<%= headers 200 %>
+<%= json(:email_search_results) %>

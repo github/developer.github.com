@@ -532,6 +532,10 @@ module GitHub
       "users" => [USER_SEARCH_ITEM]
     }
 
+    EMAIL_SEARCH_RESULTS = {
+      "user" => USER_SEARCH_ITEM
+    }
+
     GIST_HISTORY = {
       "history" => [
         {

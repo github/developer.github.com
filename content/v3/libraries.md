@@ -71,8 +71,10 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Python
 
+* [PyGithub][jacquev6_pygithub]
 * [Pygithub3][pygithub3-api]
 
+[jacquev6_pygithub]: https://github.com/jacquev6/PyGithub
 [pygithub3-api]: https://github.com/copitux/python-github3
 
 ## Ruby

@@ -25,7 +25,7 @@ Comments are ordered by ascending ID.
 ### Response
 
 <%= headers 200 %>
-<%= json(:commit_comment) %>
+<%= json(:commit_comment) { |h| [h] } %>
 
 ## Create a commit comment
 

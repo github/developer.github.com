@@ -57,6 +57,10 @@ keyword
 This API call is added for compatibility reasons only. There's no guarantee
 that full email searches will always be available.
 
+    GET /legacy/user/email/:email
+
+### Parameters
+
 email
 : Email address
 

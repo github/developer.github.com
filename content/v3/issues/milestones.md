@@ -8,6 +8,8 @@ title: Issue Milestones | GitHub API
 
     GET /repos/:user/:repo/milestones
 
+### Parameters
+
 state
 : `open`, `closed`, default: `open`
 
@@ -69,8 +71,11 @@ due\_on
 
 ### Input
 
+number
+: _Required_ **integer**
+
 title
-: _Required_ **string**
+: _Optional_ **string**
 
 state
 : _Optional_ **string** - `open` or `closed`. Default is `open`.

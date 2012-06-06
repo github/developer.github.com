@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Custom Mime Types | GitHub API</title>
+  <title>Repo Contents | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -32,97 +32,107 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="github-mime-types">GitHub Mime Types</h1>
+    <h1 id="repo-contents-api">Repo Contents API</h1>
 
-<p>Custom mime types are used in the API to let consumers choose the format
-of the data they wish to receive. This is done by adding one or more of
-the following types to the <code>Accept</code> header when you make a request. Mime
-types are specific to resources, allowing them to change independently
-and support formats that other resources don’t.</p>
+<p>These API methods let you retrieve the contents of files within a repository as
+Base64 encoded content. See <a href="http://localhost:3002/v3/mime/">Mime types</a> for requesting raw or other formats.</p>
 
-<p>All GitHub mime types look like this:</p>
+<h2 id="get-the-readme">Get the README</h2>
 
-<pre><code>application/vnd.github[.version].param[+json]
+<p>This method returns the preferred README for a repository.</p>
+
+<pre><code>GET /repos/:user/:repo/readme
 </code></pre>
 
-<p>The most basic mime types the API supports are:</p>
+<h3 id="response">Response</h3>
 
-<pre><code>application/json
-application/vnd.github+json
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"base64"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
+  <span class="p">},</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">5362</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span>
+<span class="p">}</span>
 </code></pre>
 
-<p>Neither of these specify a version, so you will always get the latest
-JSON representation of resources.  If you’re building an application and
-care about the stability of the API, specify a version like so:</p>
+<h2 id="get-contents">Get contents</h2>
 
-<pre><code>application/vnd.github.beta+json
+<p>This method returns the contents of any file or directory in a repository.</p>
+
+<pre><code>GET /repos/:user/:repo/contents/:path
 </code></pre>
 
-<p>If you’re specifying a property (such as full/raw/etc defined below),
-put the version before the property:</p>
+<h3 id="response-1">Response</h3>
 
-<pre><code>application/vnd.github.beta.raw+json
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"base64"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
+  <span class="p">},</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">5362</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span>
+<span class="p">}</span>
 </code></pre>
 
-<p>For specifics on versions, check the <a href="/v3/changelog">API changelog</a>.</p>
+<h2 id="get-archive-link">Get archive link</h2>
 
-<h2 id="comment-body-properties">Comment Body Properties</h2>
+<p>This method will return a <code>302</code> to a URL to download a tarball
+or zipball archive for a repository. Please make sure your HTTP framework
+is configured to follow redirects or you will need to use the <code>Location</code> header
+to make a second <code>GET</code> request.</p>
 
-<p>The body of a comment can be written in <a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a>.
-Issues, Issue Comments, Pull Request Comments, and Gist Comments all
-accept these same mime types:</p>
+<p><em>Note</em>: For private repositories, these links are temporary and expire quickly.</p>
 
-<h3 id="raw">Raw</h3>
-
-<pre><code>application/vnd.github.VERSION.raw+json
+<pre><code>GET /repos/:user/:repo/:archive_format/:ref
 </code></pre>
 
-<p>Return the raw markdown body. Response will include <code>body</code>. This is the
-default if you do not pass any specific mime type.</p>
+<h3 id="parameters">Parameters</h3>
 
-<h3 id="text">Text</h3>
+<dl>
+<dt>archive_format</dt>
+  <dd>Either <code>tarball</code> or <code>zipball</code>
+</dd>
+  <dt>ref (optional)</dt>
+  <dd>
+<em>Optional</em> valid Git reference, defaults to <code>master</code>
+</dd>
+</dl><h3 id="response-2">Response</h3>
 
-<pre><code>application/vnd.github.VERSION.text+json
-</code></pre>
+<pre class="headers"><code>Status: 
+Location: http://github.com/me/myprivate/tarball/master?SSO=thistokenexpires
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<p>Return a text only representation of the markdown body. Response will
-include <code>body_text</code>.</p>
+<p>To follow redirects with curl, use the <code>-L</code> switch:</p>
 
-<h3 id="html">Html</h3>
+<pre class="terminal">
+curl -L https://api.github.com/repos/pengwynn/octokit/tarball &gt; octokit.tar.gz
 
-<pre><code>application/vnd.github.VERSION.html+json
-</code></pre>
-
-<p>Return html rendered from the body’s markdown. Response will include
-<code>body_html</code>.</p>
-
-<h3 id="full">Full</h3>
-
-<pre><code>application/vnd.github.VERSION.full+json
-</code></pre>
-
-<p>Return raw, text and html representations. Response will include <code>body</code>,
-<code>body_text</code>, and <code>body_html</code>:</p>
-
-<h2 id="git-blob-properties">Git Blob Properties</h2>
-
-<p>The following mime types are allowed when getting a blob:</p>
-
-<h3 id="json">JSON</h3>
-
-<pre><code>application/vnd.github.VERSION+json
-application/json
-</code></pre>
-
-<p>Return JSON representation of the blob with <code>content</code> as a base64
-encoded string. This is the default if nothing is passed.</p>
-
-<h3 id="raw-1">Raw</h3>
-
-<pre><code>application/vnd.github.VERSION.raw
-</code></pre>
-
-<p>Return the raw blob data.</p>
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
+</pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

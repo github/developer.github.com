@@ -7,6 +7,9 @@ title: Events | GitHub API
 This is a read-only API to the GitHub events.  These events power the
 various activity streams on the site.
 
+Events support [pagination](/v3/#pagination),
+however the `per_page` option is unsupported. The fixed page size is 30 items.
+
 All Events have the same response format:
 
 <%= headers 200, :pagination => true %>

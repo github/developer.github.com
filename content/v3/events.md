@@ -9,7 +9,7 @@ various activity streams on the site.
 
 Events support [pagination](/v3/#pagination),
 however the `per_page` option is unsupported. The fixed page size is 30 items.
-Fetching up to ten pages is supported, for a total of 3000 events.
+Fetching up to ten pages is supported, for a total of 300 events.
 
 All Events have the same response format:
 

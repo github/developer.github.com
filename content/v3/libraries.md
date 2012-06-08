@@ -67,6 +67,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [GitHub Kohana Module][kohana]
 
 [github-api]: https://github.com/yiiext/github-api
+[php-github-api]: https://github.com/ornicar/php-github-api
 [kohana]: https://github.com/acoulton/github_v3_api
 
 ## Python

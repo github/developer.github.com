@@ -50,6 +50,12 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 [ajaxorg-node-github]: https://github.com/ajaxorg/node-github
 [octonode]: https://github.com/pksunkara/octonode
 
+## Objective-C
+
+* [UAGithubEngine][uagithubengine]
+
+[uagithubengine]: http://github.com/owainhunt/uagithubengine
+
 ## Perl
 
 * [Pithub][pithub-github] ([CPAN][pithub-cpan])

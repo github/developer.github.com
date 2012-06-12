@@ -8,9 +8,9 @@ title: Git Refs | GitHub API
 
     GET /repos/:user/:repo/git/refs/:ref
 
-The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For example, the call to get the data for a branch named `sc/featureA` would be:
+The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For example, the call to get the data for a branch named `skunkworkz/featureA` would be:
 
-    GET /repos/:user/:repo/git/refs/heads/sc/featureA
+    GET /repos/:user/:repo/git/refs/heads/skunkworkz/featureA
 
 ### Response
 

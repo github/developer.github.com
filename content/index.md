@@ -48,7 +48,11 @@ The API is expected to be finalized Real Soon Now.
 
 ### Breaking Beta Changes
 
-##### Removed on June 15th:
+##### Removed on June 12, 2012:
+* API v1 support
+* API v2 support
+
+##### Removed on June 15th, 2011:
 
 * `gravatar_url` is being deprecated in favor of `avatar_url` for all
   responses that include users or orgs. A default size is no longer
@@ -57,7 +61,7 @@ The API is expected to be finalized Real Soon Now.
   should use `POST /gists` from now on. `POST /users/:user/gists` is no
   longer supported.
 
-##### Removed on June 1st:
+##### Removed on June 1st, 2011:
 
 * Removed support for PUT verb on update requests. Use POST or PATCH
   instead.

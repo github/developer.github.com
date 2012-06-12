@@ -41,6 +41,71 @@ you have any problems or requests please contact
 
 <p>View the <a href="/v3/changelog">API Changelog</a> for information on existing and
 planned changes to the API.</p>
+
+<h2 id="current-version">Current Version</h2>
+
+<pre><code>Accept: application/vnd.github.beta+json
+</code></pre>
+
+<p>The GitHub API version is currently in beta.  <a href="/v3/mime/">The <code>beta</code> mime type</a> property will
+be valid until sometime in 2012.  A notice will be given closer to the
+actual date.</p>
+
+<p>We consider the beta API unbreakable, so please <a href="https://github.com/contact">file a support
+issue</a> if you have problems.</p>
+
+<h3 id="upcoming-version">Upcoming Version</h3>
+
+<pre><code>Accept: application/vnd.github.v3+json
+</code></pre>
+
+<p>The API is expected to be finalized Real Soon Now.</p>
+
+<h4 id="expected-changes">Expected Changes</h4>
+
+<ul>
+<li>All <code>*_url</code> attributes move to a <code>_links</code> object.  See <a href="http://developer.github.com/v3/pulls/#get-a-single-pull-request">Pull
+Requests</a> for an example.</li>
+  <li>The <code>/repos/:user/:repo/hooks/:id/test</code> action becomes
+<code>/repos/:user/:repo/hooks/:id/tests</code>.</li>
+  <li>The <code>/gists/:id/fork</code> action becomes <code>/gists/:id/forks</code>.</li>
+  <li>Gist forks/history objects become separate API calls.</li>
+  <li>Gist files object is not returned on Gist listings.</li>
+  <li>Commit schema will change to be <a href="https://gist.github.com/3a2e5779588e21b0c0f3">more consistent</a>.</li>
+  <li>
+<code>master_branch</code> becomes <code>default_branch</code>.</li>
+  <li>
+<code>integrate_branch</code> on the <a href="/v3/repos/#get">repo API</a> will no longer be
+returned.</li>
+  <li>Use the <code>private</code> attribute when creating a private repository,
+instead of setting <code>public</code> to false.</li>
+</ul><h3 id="breaking-beta-changes">Breaking Beta Changes</h3>
+
+<h5 id="june-12-2012">June 12, 2012:</h5>
+<ul>
+<li>Removed API v1 support</li>
+  <li>Removed API v2 support</li>
+</ul><h5 id="june-15th-2011">June 15th, 2011:</h5>
+
+<ul>
+<li>
+<code>gravatar_url</code> is being deprecated in favor of <code>avatar_url</code> for all
+responses that include users or orgs. A default size is no longer
+included in the url.</li>
+  <li>Creating new gists (both anonymously and with an authenticated user)
+should use <code>POST /gists</code> from now on. <code>POST /users/:user/gists</code> is no
+longer supported.</li>
+</ul><h5 id="june-1st-2011">June 1st, 2011:</h5>
+
+<ul>
+<li>Removed support for PUT verb on update requests. Use POST or PATCH
+instead.</li>
+  <li>Removed <code>.json</code> extension from all URLs.</li>
+  <li>No longer using the X-Next or X-Last headers. Pagination info is
+returned in the Link header instead.</li>
+  <li>JSON-P response has completely changed to a more consistent format.</li>
+  <li>Starring gists now uses PUT verb (instead of POST) and returns 204.</li>
+</ul>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -51,7 +116,6 @@ planned changes to the API.</p>
             <ul class="js-guides">
               <li><a href="/v3/oauth/">OAuth</a></li>
               <li><a href="/v3/mime/">Mime Types</a></li>
-              <li><a href="/v3/changelog/">Changelog</a></li>
               <li><a href="/v3/libraries/">Libraries</a></li>
             </ul>
           </li>

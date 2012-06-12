@@ -17,7 +17,7 @@ planned changes to the API.
 
     Accept: application/vnd.github.beta+json
 
-The GitHub API version is currently in beta.  The `beta` mime type property will
+The GitHub API version is currently in beta.  [The `beta` mime type](/v3/mime/) property will
 be valid until sometime in 2012.  A notice will be given closer to the
 actual date.
 

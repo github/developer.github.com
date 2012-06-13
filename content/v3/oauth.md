@@ -126,6 +126,9 @@ public\_repo
 repo
 : Read/write access to public and private repos and organizations.
 
+delete\_repo
+: Delete access to adminable repositories.
+
 gist
 : write access to gists.
 

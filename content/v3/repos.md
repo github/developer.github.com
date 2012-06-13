@@ -217,3 +217,15 @@ in results.
 
 <%= headers 200 %>
 <%= json(:branch) { |h| [h] }%>
+
+## Delete a Repository
+
+Deleting a repository requires admin access.  If OAuth is used, the
+`delete_repo` scope is required.
+
+    DELETE /repos/:user/:repo
+
+### Response
+
+<%= headers 204 %>
+

@@ -117,11 +117,11 @@ must be a member of the team.
 
     GET /teams/:id/members/:user
 
-### Reponse if user is a member
+### Response if user is a member
 
 <%= headers 204 %>
 
-### Reponse if user is not a member
+### Response if user is not a member
 
 <%= headers 404 %>
 
@@ -133,7 +133,7 @@ is associated with.
 
     PUT /teams/:id/members/:user
 
-### Reponse
+### Response
 
 <%= headers 204 %>
 
@@ -157,7 +157,7 @@ NOTE: This does not delete the user, it just remove them from the team.
 
     DELETE /teams/:id/members/:user
 
-### Reponse
+### Response
 
 <%= headers 204 %>
 
@@ -174,11 +174,11 @@ NOTE: This does not delete the user, it just remove them from the team.
 
     GET /teams/:id/repos/:user/:repo
 
-### Reponse if repo is managed by this team
+### Response if repo is managed by this team
 
 <%= headers 204 %>
 
-### Reponse if repo is not managed by this team
+### Response if repo is not managed by this team
 
 <%= headers 404 %>
 
@@ -191,7 +191,7 @@ organization.
 
     PUT /teams/:id/repos/:user/:repo
 
-### Reponse
+### Response
 
 <%= headers 204 %>
 
@@ -215,7 +215,7 @@ NOTE: This does not delete the repo, it just removes it from the team.
 
     DELETE /teams/:id/repos/:user/:repo
 
-### Reponse
+### Response
 
 <%= headers 204 %>
 

@@ -13,6 +13,11 @@ This method returns the preferred README for a repository.
 
     GET /repos/:user/:repo/readme
 
+### Parameters
+
+ref
+: The String name of the Commit/Branch/Tag.  Defaults to "master".
+
 ### Response
 
 <%= headers 200 %>
@@ -23,6 +28,11 @@ This method returns the preferred README for a repository.
 This method returns the contents of any file or directory in a repository.
 
     GET /repos/:user/:repo/contents/:path
+
+### Parameters
+
+ref
+: The String name of the Commit/Branch/Tag.  Defaults to "master".
 
 ### Response
 

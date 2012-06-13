@@ -188,7 +188,9 @@ Callback URLs can use either the `http://` protocol, or `github://`.
     # Send updates to Campfire
     github://campfire?subdomain=github&room=Commits&token=abc123
 
-The GitHub PubSubHubbub endpoint is: https://api.github.com/hub.  A
+The GitHub PubSubHubbub endpoint is: https://api.github.com/hub.
+(GitHub Enterprise users should use http://yourhost/api/v3/hub as the
+PubSubHubbub endpoint, but not change the `hub.topic` URI format.) A
 successful request with curl looks like:
 
     curl -u "user:password" -i \

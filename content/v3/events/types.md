@@ -162,7 +162,7 @@ action
 "reopened".
 
 issue
-: **string** - The [issue](/v3/issues) itself.
+: **object** - The [issue](/v3/issues) itself.
 
 ## MemberEvent
 

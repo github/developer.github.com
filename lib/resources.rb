@@ -436,6 +436,7 @@ module GitHub
     }
 
     ISSUE_COMMENT = {
+      "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1",
       "body"       => "Me too",
       "user"       => USER,

@@ -227,7 +227,7 @@ commits[][sha]
 : **string** - The SHA of the commit.
 
 commits[][message]
-: **message** - The commit message.
+: **string** - The commit message.
 
 commits[][author]
 : **object** - The git author of the commit.

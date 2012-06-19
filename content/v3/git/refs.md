@@ -58,7 +58,7 @@ sha
 ### Response
 
 <%= headers 201 %>
-<%= json :refs %>
+<%= json :ref %>
 
 ## Update a Reference
 

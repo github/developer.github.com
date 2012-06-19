@@ -5,7 +5,7 @@ title: Repo Contents | GitHub API
 # Repo Contents API
 
 These API methods let you retrieve the contents of files within a repository as
-Base64 encoded content. See [Mime types](http://localhost:3002/v3/mime/) for requesting raw or other formats.
+Base64 encoded content. See [Mime types](http://developer.github.com/v3/mime) for requesting raw or other formats.
 
 ## Get the README
 

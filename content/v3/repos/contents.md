@@ -16,7 +16,7 @@ This method returns the preferred README for a repository.
 ### Parameters
 
 ref
-: The String name of the Commit/Branch/Tag.  Defaults to "master".
+: _Optional_ **string** - The String name of the Commit/Branch/Tag.  Defaults to `master`.
 
 ### Response
 
@@ -32,7 +32,7 @@ This method returns the contents of any file or directory in a repository.
 ### Parameters
 
 ref
-: The String name of the Commit/Branch/Tag.  Defaults to "master".
+: _Optional_ **string** - The String name of the Commit/Branch/Tag.  Defaults to `master`.
 
 ### Response
 
@@ -55,8 +55,8 @@ to make a second `GET` request.
 archive_format
 : Either `tarball` or `zipball`
 
-ref (optional)
-: _Optional_ valid Git reference, defaults to `master`
+ref 
+: _Optional_  **string** - valid Git reference, defaults to `master`
 
 ### Response
 

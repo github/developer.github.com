@@ -15,7 +15,7 @@ title: Git Commits | GitHub API
 
 ## Create a Commit
 
-    POST /repos/:user/:repo/commits
+    POST /repos/:user/:repo/git/commits
 
 ### Parameters
 

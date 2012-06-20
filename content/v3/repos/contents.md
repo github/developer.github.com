@@ -31,6 +31,8 @@ This method returns the contents of any file or directory in a repository.
 
 ### Parameters
 
+path
+: _Optional_ **string** - The content path.
 ref
 : _Optional_ **string** - The String name of the Commit/Branch/Tag.  Defaults to `master`.
 
@@ -55,7 +57,7 @@ to make a second `GET` request.
 archive_format
 : Either `tarball` or `zipball`
 
-ref 
+ref
 : _Optional_  **string** - valid Git reference, defaults to `master`
 
 ### Response

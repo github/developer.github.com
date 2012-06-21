@@ -16,7 +16,7 @@ type
 : `all`, `owner`, `public`, `private`, `member`. Default: `all`.
 
 sort
-: `created`, `updated`, `pushed`, `full_name`, default: `created`.
+: `created`, `updated`, `pushed`, `full_name`, default: `full_name`.
 
 direction
 : `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
@@ -31,6 +31,12 @@ List public repositories for the specified user.
 
 type
 : `all`, `owner`, `member`. Default: `all`.
+
+sort
+: `created`, `updated`, `pushed`, `full_name`, default: `full_name`.
+
+direction
+: `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
 
 ## List organization repositories.
 

@@ -33,6 +33,7 @@ This method returns the contents of any file or directory in a repository.
 
 path
 : _Optional_ **string** - The content path.
+
 ref
 : _Optional_ **string** - The String name of the Commit/Branch/Tag.  Defaults to `master`.
 

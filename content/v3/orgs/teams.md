@@ -48,7 +48,7 @@ permission
   repositories. **Default**
 
   `push` - team members can pull and push, but not administer these
-  repositores.
+  repositories.
 
   `admin` - team members can pull, push and administer these
   repositories.

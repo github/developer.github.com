@@ -44,11 +44,11 @@ repo\_names
 permission
 : _Optional_ **string**
 
-  `pull` - team members can pull, but not push or administer these
+  `pull` - team members can pull, but not push to or administer these
   repositories. **Default**
 
   `push` - team members can pull and push, but not administer these
-  repositores.
+  repositories.
 
   `admin` - team members can pull, push and administer these
   repositories.

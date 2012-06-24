@@ -13,6 +13,9 @@
 compile '/static/*' do
 end
 
+compile '/CNAME/' do
+end
+
 compile '*' do
   filter :erb
   filter :kramdown
@@ -23,6 +26,10 @@ end
 
 route '/static/*' do
   item.identifier[7..-2]
+end
+
+route '/CNAME/' do
+  '/CNAME'
 end
 
 route '*' do

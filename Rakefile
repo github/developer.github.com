@@ -11,12 +11,6 @@ task :publish => [:clean] do
 
   sh "nanoc compile"
 
-  # this should not be necessary, but I can't figure out how to
-  # just keep a goddamn static file in the root with nanoc
-  File.open("output/CNAME", 'w+') do |f|
-    f.puts("developer.github.com")
-  end
-
   ENV['GIT_DIR'] = File.expand_path(`git rev-parse --git-dir`.chomp)
   old_sha = `git rev-parse refs/remotes/origin/gh-pages`.chomp
   Dir.chdir('output') do

@@ -26,7 +26,9 @@ keyword
 
 ## Search repositories
 
-Find repositories by keyword.
+Find repositories by keyword. Note, this legacy method does not follow the
+v3 pagination pattern. This method returns up to 100 results per page and
+pages can be fetched using the `start_page` parameter.
 
     GET /legacy/repos/search/:keyword
 
@@ -37,6 +39,9 @@ keyword
 
 language
 : _Optional_ Filter results by [language](https://github.com/languages)
+
+start_page
+: _Optional_ Page number to fetch
 
 <%= headers 200 %>
 <%= json(:repo_search_results) %>

@@ -82,7 +82,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="search-repositories">Search repositories</h2>
 
-<p>Find repositories by keyword.</p>
+<p>Find repositories by keyword. Note, this legacy method does not follow the
+v3 pagination pattern. This method returns up to 100 results per page and
+pages can be fetched using the <code>start_page</code> parameter.</p>
 
 <pre><code>GET /legacy/repos/search/:keyword
 </code></pre>
@@ -96,6 +98,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dd>
 <em>Optional</em> Filter results by <a href="https://github.com/languages">language</a>
 </dd>
+  <dt>start_page</dt>
+  <dd>
+<em>Optional</em> Page number to fetch</dd>
 </dl><pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>

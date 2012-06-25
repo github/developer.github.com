@@ -1,6 +1,7 @@
 require 'pp'
 require 'yajl/json_gem'
 require 'stringio'
+require 'cgi'
 
 module GitHub
   module Resources
@@ -53,6 +54,12 @@ module GitHub
 
         %(<pre class="highlight"><code class="language-javascript">) +
           JSON.pretty_generate(hash) + "</code></pre>"
+      end
+
+      def text_html(response, status, head = {})
+        hs = headers(status, head.merge('Content-Type' => 'text/html'))
+        res = CGI.escapeHTML(response)
+        hs + %(<pre class="highlight"><code>) + res + "</code></pre>"
       end
     end
 

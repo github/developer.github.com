@@ -161,4 +161,4 @@ including the filename with a null hash.
 
 <%= headers 204 %>
 
-[1]: http://developer.github.com/v3/oauth/#scopes
+[1]: /v3/oauth/#scopes

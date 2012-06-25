@@ -33,7 +33,7 @@ The API is expected to be finalized Real Soon Now.
 #### Expected Changes
 
 * All `*_url` attributes move to a `_links` object.  See [Pull
-  Requests](http://developer.github.com/v3/pulls/#get-a-single-pull-request) for an example.
+  Requests](/v3/pulls/#get-a-single-pull-request) for an example.
 * The `/repos/:user/:repo/hooks/:id/test` action becomes
   `/repos/:user/:repo/hooks/:id/tests`.
 * The `/gists/:id/fork` action becomes `/gists/:id/forks`.

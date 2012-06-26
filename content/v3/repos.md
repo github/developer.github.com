@@ -222,7 +222,16 @@ in results.
 ### Response
 
 <%= headers 200 %>
-<%= json(:branch) { |h| [h] }%>
+<%= json(:branches) %>
+
+## Get Branch
+
+    GET /repos/:user/:repo/branches/:branch
+
+### Response
+
+<%= headers 200 %>
+<%= json(:branch) %>
 
 ## Delete a Repository
 

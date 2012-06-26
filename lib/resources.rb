@@ -167,6 +167,20 @@ module GitHub
       }
     }
 
+    MILESTONE = {
+      "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1",
+      "number"        => 1,
+      "state"         => "open",
+      "title"         => "v1.0",
+      "description"   => "",
+      "creator"       => USER,
+      "open_issues"   => 4,
+      "closed_issues" => 8,
+      "created_at"    => "2011-04-10T20:09:31Z",
+      "due_on"        => nil
+    }
+
+
     PULL = {
       "url"        => "https://api.github.com/octocat/Hello-World/pulls/1",
       "html_url"   => "https://github.com/octocat/Hello-World/pulls/1",
@@ -175,8 +189,6 @@ module GitHub
       "issue_url"  => "https://github.com/octocat/Hello-World/issue/1",
       "number"     => 1,
       "state"      => "open",
-      "assignee"   => USER,
-      "milestone"  => MILESTONE,
       "title"      => "new-feature",
       "body"       => "Please pull these awesome changes",
       "created_at" => "2011-01-26T19:01:12Z",
@@ -402,19 +414,6 @@ module GitHub
       "members_count" => 3,
       "repos_count" => 10
     })
-
-    MILESTONE = {
-      "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1",
-      "number"        => 1,
-      "state"         => "open",
-      "title"         => "v1.0",
-      "description"   => "",
-      "creator"       => USER,
-      "open_issues"   => 4,
-      "closed_issues" => 8,
-      "created_at"    => "2011-04-10T20:09:31Z",
-      "due_on"        => nil
-    }
 
     LABEL = {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",

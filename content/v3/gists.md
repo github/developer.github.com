@@ -6,7 +6,7 @@ title: Gists | GitHub API
 
 ## Authentication
 
-You can read public gists and create them for anonymous users without a token; however, to read or write gists on a user's behalf the **gists** [oAuth scope][1] is required.
+You can read public gists and create them for anonymous users without a token; however, to read or write gists on a user's behalf the **gist** [oAuth scope][1] is required.
 
 <!-- When an oAuth client does not have the gists scope, the API will return a 404 "Not Found" response regardless of the validity of the credentials. 
 

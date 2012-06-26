@@ -175,6 +175,8 @@ module GitHub
       "issue_url"  => "https://github.com/octocat/Hello-World/issue/1",
       "number"     => 1,
       "state"      => "open",
+      "assignee"   => USER,
+      "milestone"  => MILESTONE,
       "title"      => "new-feature",
       "body"       => "Please pull these awesome changes",
       "created_at" => "2011-01-26T19:01:12Z",

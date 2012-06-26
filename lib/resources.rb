@@ -471,7 +471,7 @@ module GitHub
       "body" =>  "Issue body goes here",
       "title" =>  "This is is the issue title",
       "updated_at" =>  "2010-06-04T23:20:33-07:00",
-      "html_url" =>  "https => //github.com/pengwynn/linkedin/issues/10",
+      "html_url" =>  "https://github.com/pengwynn/linkedin/issues/10",
       "user" =>  "ckarbass",
       "labels" =>  [
         "api",

@@ -8,7 +8,7 @@ title: Gists | GitHub API
 
 You can read public gists and create them for anonymous users without a token; however, to read or write gists on a user's behalf the **gist** [oAuth scope][1] is required.
 
-<!-- When an oAuth client does not have the gists scope, the API will return a 404 "Not Found" response regardless of the validity of the credentials. 
+<!-- When an oAuth client does not have the gists scope, the API will return a 404 "Not Found" response regardless of the validity of the credentials.
 
 The API will return a 401 "Bad credentials" response if the gists scope was given to the application but the credentials are invalid. -->
 
@@ -62,8 +62,8 @@ files
 should be a _required_ **string** filename and the value another
 _required_ **hash** with parameters:
 
-  content
-  : _Required_ **string** - File contents.
+content
+: _Required_ **string** - File contents.
 
 <%= json \
   :description => "the description for this gist",

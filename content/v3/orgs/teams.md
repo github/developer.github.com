@@ -5,8 +5,8 @@ title: Organization Teams | GitHub API
 # Org Teams API
 
 All actions against teams require at a minimum an authenticated user who
-is a member of the owner's team in the `:org` being managed. API calls
-that require explicit permissions are noted.
+is a member of the owner's team in the `:org` being managed. Additionally,
+OAuth users require "user" [scope](/v3/oauth/#scopes).
 
 ## List teams
 
@@ -140,12 +140,13 @@ is associated with.
 If you attempt to add an organization to a team, you will get this:
 
 <%= headers 422 %>
-<%= 
+<%=
   json :message => "Validation Failed",
     :errors => [{
       :code     => "org",
       :field    => :user,
-      :resource => :TeamMember}]
+      :resource => :TeamMember
+    }]
 %>
 
 ## Remove team member
@@ -199,7 +200,7 @@ If you attempt to add a repo to a team that is not owned by the
 organization, you get:
 
 <%= headers 422 %>
-<%= 
+<%=
   json :message => "Validation Failed",
     :errors => [{
       :code     => "not_owned",

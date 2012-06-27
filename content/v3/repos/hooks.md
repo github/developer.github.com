@@ -25,7 +25,7 @@ request is tracking).
 * `fork_apply` - Any time a patch is applied to the Repository from the
   Fork Queue.
 * `member` - Any time a User is added as a collaborator to a
-  non-Organization Repository. 
+  non-Organization Repository.
 * `public` - Any time a Repository changes from private to public.
 
 The payloads for all of the hooks mirror [the payloads for the Event
@@ -34,7 +34,7 @@ event](http://help.github.com/post-receive-hooks/).
 
 For a Hook to go through, the Hook needs to be configured to trigger for
 an event, and the Service has to listen to it.  The Services are all
-part of the open source [github-services](https://github.com/github/github-services) project. Most of the Services only listen for `push` events.  However, the generic [Web Service](https://github.com/github/github-services/blob/master/services/web.rb) listens for all events.  Other services like the [IRC Service](https://github.com/github/github-services/blob/master/services/irc.rb) may only listen for `push`, `issues`, and `pull_request` events.  
+part of the open source [github-services](https://github.com/github/github-services) project. Most of the Services only listen for `push` events.  However, the generic [Web Service](https://github.com/github/github-services/blob/master/services/web.rb) listens for all events.  Other services like the [IRC Service](https://github.com/github/github-services/blob/master/services/irc.rb) may only listen for `push`, `issues`, and `pull_request` events.
 
 ## List
 
@@ -119,11 +119,11 @@ for.  This replaces the entire array of events.  Default: `["push"]`.
 
 `add_events`
 : _Optional_ **array** - Determines a list of events to be added to the
-list of events that the Hook triggers for. 
+list of events that the Hook triggers for.
 
 `remove_events`
 : _Optional_ **array** - Determines a list of events to be removed from the
-list of events that the Hook triggers for. 
+list of events that the Hook triggers for.
 
 `active`
 : _Optional_ **boolean** - Determines whether the hook is actually
@@ -166,7 +166,7 @@ repository.
 
 GitHub can also serve as a [PubSubHubbub][pubsub] hub for all repositories.  PSHB is a simple publish/subscribe protocol that lets servers register to receive updates when a topic is updated.  The updates are sent with an HTTP POST request to a callback URL.  Topic URLs for a GitHub repository's pushes are in this format:
 
-    https://github.com/:user/:repo/events/:event 
+    https://github.com/:user/:repo/events/:event
 
 The event can be any Event string that is listed at the top of this
 document.

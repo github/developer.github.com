@@ -7,7 +7,7 @@ title: Pull Request Comments | GitHub API
 Pull Request Review Comments are comments on a portion of the unified
 diff.  These are separate from Commit Comments (which are applied
 directly to a commit, outside of the Pull Request view), and Issue
-Comments (which do not reference a portion of the unified diff).  
+Comments (which do not reference a portion of the unified diff).
 
 Pull Request Review Comments leverage [these](#custom-mime-types) custom mime
 types. You can read more about the use of mime types in the API

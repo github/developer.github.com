@@ -237,7 +237,7 @@ commits[][author][name]
 
 commits[][author][email]
 : **string** - The git author's email address.
-  
+
 commits[][url]
 : **url** - Points to the commit API resource.
 

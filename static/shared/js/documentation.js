@@ -46,7 +46,7 @@ $(function() {
   $('#js-sidebar .js-accordion-list .js-topic h3 a').click(function(){
     var clickedTopic = $(this).parents('.js-topic'),
         topicGuides = clickedTopic.find('.js-guides li')
-    
+
     if(activeItem != clickedTopic.index()){
       if(helpList.eq(activeItem)){
         helpList.eq(activeItem).find('.js-guides li').toggle(100)

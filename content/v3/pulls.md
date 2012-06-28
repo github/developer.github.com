@@ -159,7 +159,7 @@ state
 ## Merge a pull request (Merge Button&trade;)
 
     PUT /repos/:user/:repo/pulls/:number/merge
-    
+
 ### Input
 
 commit\_message

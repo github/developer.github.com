@@ -97,6 +97,18 @@ when you <a href="https://github.com/settings/applications/new">registered</a>.<
 <em>Required</em> <strong>string</strong> - The code you received as a response to <a href="#redirect-users-to-request-github-access">Step 1</a>.</dd>
 </dl><h3 id="response">Response</h3>
 
+<p>By default, the response will take the following form:</p>
+
+<pre><code>access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&amp;token_type=bearer
+</code></pre>
+
+<p>However, if you set the Accept Header like so:</p>
+
+<pre><code>Accept: application/xml
+</code></pre>
+
+<p>You will get back a response formatted as an XML fragment:</p>
+
 <pre class="highlight"><code class="language-xml"><span class="tag">&lt;OAuth&gt;</span>
   <span class="tag">&lt;token_type&gt;</span>bearer<span class="tag">&lt;/token_type&gt;</span>
   <span class="tag">&lt;access_token&gt;</span>e72e16c7e42f292c6912e7710c838347ae178b4a<span class="tag">&lt;/access_token&gt;</span>

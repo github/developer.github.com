@@ -63,6 +63,16 @@ code
 
 ### Response
 
+By default, the response will take the following form:
+
+    access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&token_type=bearer
+    
+However, if you set the Accept Header like so:
+
+    Accept: application/xml
+
+You will get back a response formatted as an XML fragment:
+
 <pre class="highlight"><code class="language-xml">&lt;OAuth&gt;
   &lt;token_type&gt;bearer&lt;/token_type&gt;
   &lt;access_token&gt;e72e16c7e42f292c6912e7710c838347ae178b4a&lt;/access_token&gt;

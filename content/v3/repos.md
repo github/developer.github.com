@@ -56,7 +56,7 @@ type
 
 ## Create
 
-Create a new repository for the authenticated user. OAuth users muse supply `repo` scope.
+Create a new repository for the authenticated user. OAuth users must supply `repo` scope.
 
     POST /user/repos
 

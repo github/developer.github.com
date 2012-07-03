@@ -56,12 +56,12 @@ type
 
 ## Create
 
-Create a new repository for the authenticated user.
+Create a new repository for the authenticated user. OAuth users muse supply `repo` scope.
 
     POST /user/repos
 
 Create a new repository in this organization. The authenticated user must
-be a member of `:org`.
+be a member of the specified organization.
 
     POST /orgs/:org/repos
 

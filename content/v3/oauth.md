@@ -61,23 +61,28 @@ when you [registered](https://github.com/settings/applications/new).
 code
 : _Required_ **string** - The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
 
+state
+: _Required_ **string** - This is the same state value you also received as a
+response to Step 1.  Use this to protect against cross-site request forgery
+attacks.
+
 ### Response
 
 By default, the response will take the following form:
 
     access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&token_type=bearer
-    
-However, if you set the Accept Header like so:
+
+You can also receive the content in different formats depending on the Accept
+header:
+
+    Accept: application/json
+    {"access_token":"e72e16c7e42f292c6912e7710c838347ae178b4a","token_type":"bearer"}
 
     Accept: application/xml
-
-You will get back a response formatted as an XML fragment:
-
-<pre class="highlight"><code class="language-xml">&lt;OAuth&gt;
-  &lt;token_type&gt;bearer&lt;/token_type&gt;
-  &lt;access_token&gt;e72e16c7e42f292c6912e7710c838347ae178b4a&lt;/access_token&gt;
-&lt;/OAuth&gt;
-</code></pre>
+    <OAuth>
+      <token_type>bearer</token_type>
+      <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
+    </OAuth>
 
 ### 3. Use the access token to access the API
 

@@ -95,6 +95,11 @@ when you <a href="https://github.com/settings/applications/new">registered</a>.<
   <dt>code</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The code you received as a response to <a href="#redirect-users-to-request-github-access">Step 1</a>.</dd>
+  <dt>state</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - This is the same state value you also received as a
+response to Step 1.  Use this to protect against cross-site request forgery
+attacks.</dd>
 </dl><h3 id="response">Response</h3>
 
 <p>By default, the response will take the following form:</p>
@@ -102,17 +107,18 @@ when you <a href="https://github.com/settings/applications/new">registered</a>.<
 <pre><code>access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&amp;token_type=bearer
 </code></pre>
 
-<p>However, if you set the Accept Header like so:</p>
+<p>You can also receive the content in different formats depending on the Accept
+header:</p>
 
-<pre><code>Accept: application/xml
+<pre><code>Accept: application/json
+{"access_token":"e72e16c7e42f292c6912e7710c838347ae178b4a","token_type":"bearer"}
+
+Accept: application/xml
+&lt;OAuth&gt;
+  &lt;token_type&gt;bearer&lt;/token_type&gt;
+  &lt;access_token&gt;e72e16c7e42f292c6912e7710c838347ae178b4a&lt;/access_token&gt;
+&lt;/OAuth&gt;
 </code></pre>
-
-<p>You will get back a response formatted as an XML fragment:</p>
-
-<pre class="highlight"><code class="language-xml"><span class="tag">&lt;OAuth&gt;</span>
-  <span class="tag">&lt;token_type&gt;</span>bearer<span class="tag">&lt;/token_type&gt;</span>
-  <span class="tag">&lt;access_token&gt;</span>e72e16c7e42f292c6912e7710c838347ae178b4a<span class="tag">&lt;/access_token&gt;</span>
-<span class="tag">&lt;/OAuth&gt;</span></code></pre>
 
 <h3 id="use-the-access-token-to-access-the-api">3. Use the access token to access the API</h3>
 

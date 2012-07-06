@@ -82,11 +82,13 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [Pygithub3][pygithub3-api]
 * [libsaas][libsaas]
 * [github3.py][github3py]
+* [sanction][sanction]
 
 [jacquev6_pygithub]: https://github.com/jacquev6/PyGithub
 [pygithub3-api]: https://github.com/copitux/python-github3
 [libsaas]: https://github.com/ducksboard/libsaas
 [github3py]: https://github.com/sigmavirus24/github3.py
+[sanction]: https://github.com/demianbrecht/sanction
 
 ## Ruby
 

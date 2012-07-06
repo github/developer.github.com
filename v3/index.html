@@ -44,6 +44,7 @@ you have any problems or requests please contact
   <li><a href="#authentication">Authentication</a></li>
   <li><a href="#pagination">Pagination</a></li>
   <li><a href="#rate-limiting">Rate Limiting</a></li>
+  <li><a href="#conditional-requests">Conditional Requests</a></li>
   <li><a href="#cross-origin-resource-sharing">Cross Origin Resource Sharing</a></li>
   <li><a href="#json-p-callbacks">JSON-P Callbacks</a></li>
 </ul><h2 id="schema">Schema</h2>
@@ -258,6 +259,46 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>Please <a href="https://github.com/contact">contact us</a> to request white listed access for your application.  We prefer sites that
 setup OAuth applications for their users.</p>
+
+<h2 id="conditional-requests">Conditional Requests</h2>
+
+<p>Most responses return <code>Last-Modified</code> and <code>Etag</code> headers. You can use the values
+of these headers to make subsequent requests to those resources using the
+<code>If-Modified-Since</code> and <code>If-None-Match</code> headers, respectively. If the resource
+has not changed, the server will return a <code>304 Not Modified</code>. Also note: making
+a conditional request and receiving a 304 response does not count against your
+<a href="#rate-limiting">Rate Limit</a>, so we encourage you to use it whenever possible.</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com/user
+HTTP/1.1 200 OK
+Cache-Control: private, max-age=60
+ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"
+Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT
+Status: 200 OK
+Vary: Accept, Authorization, Cookie
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4996
+
+$ curl -i https://api.github.com/user -H "If-Modified-Since: Thu, 05 Jul 2012 15:31:30 GMT"
+HTTP/1.1 304 Not Modified
+Cache-Control: private, max-age=60
+Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT
+Status: 304 Not Modified
+Vary: Accept, Authorization, Cookie
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4996
+
+$ curl -i https://api.github.com/user -H 'If-None-Match: "644b5b0155e6404a9cc4bd9d8b1ae730"'
+HTTP/1.1 304 Not Modified
+Cache-Control: private, max-age=60
+ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"
+Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT
+Status: 304 Not Modified
+Vary: Accept, Authorization, Cookie
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4996
+</pre>
 
 <h2 id="cross-origin-resource-sharing">Cross Origin Resource Sharing</h2>
 

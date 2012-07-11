@@ -83,12 +83,14 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [libsaas][libsaas]
 * [github3.py][github3py]
 * [sanction][sanction]
+* [agithub][agithub]
 
 [jacquev6_pygithub]: https://github.com/jacquev6/PyGithub
 [pygithub3-api]: https://github.com/copitux/python-github3
 [libsaas]: https://github.com/ducksboard/libsaas
 [github3py]: https://github.com/sigmavirus24/github3.py
 [sanction]: https://github.com/demianbrecht/sanction
+[agithub]: https://github.com/jpaugh64/agithub "Agnostic Github"
 
 ## Ruby
 

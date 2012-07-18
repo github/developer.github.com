@@ -40,7 +40,7 @@ context
 
 ### Input
 
-The raw API it not JSON-based. It takes a Markdown document as plaintext (`text/plain` or `text/x-markdown`) and renders it as plain Markdown without a repository context (just like a README.md file is rendered -- this is the simplest way to preview a readme online).
+The raw API is not JSON-based. It takes a Markdown document as plaintext (`text/plain` or `text/x-markdown`) and renders it as plain Markdown without a repository context (just like a README.md file is rendered -- this is the simplest way to preview a readme online).
 
 ### Response
 

@@ -5,7 +5,7 @@ title: Repo Downloads | GitHub API
 # Repo Downloads API
 
 The downloads API is for package downloads only. If you want to get
-source tarballs for tags you should use [this](/v3/repos/#list-tags)
+source tarballs you should use [this](/repos/contents/#get-archive-link)
 instead.
 
 ## List downloads for a repository

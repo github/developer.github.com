@@ -871,6 +871,9 @@ module GitHub
       "content" =>  "encoded content ...",
       "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1"
     }
+
+     STATUS = {}
+
   end
 end
 

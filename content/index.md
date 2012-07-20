@@ -48,6 +48,10 @@ The API is expected to be finalized Real Soon Now.
 
 ### Breaking Beta Changes
 
+##### XXXX 2012
+
+* Added Status API
+
 ##### June 12, 2012:
 * Removed API v1 support
 * Removed API v2 support

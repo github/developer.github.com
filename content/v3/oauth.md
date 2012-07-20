@@ -38,7 +38,7 @@ scope
 : _Optional_ **string** - Comma separated list of [scopes](#scopes).
 
 state
-: _Optional_ **string** - An ungessable random string. It is used to protect
+: _Optional_ **string** - An unguessable random string. It is used to protect
 against cross-site request forgery attacks.
 
 ### 2. GitHub redirects back to your site

@@ -11,4 +11,5 @@ gem 'coderay'
 
 group :development do
   gem 'adsf'
+  gem 'fssm'
 end

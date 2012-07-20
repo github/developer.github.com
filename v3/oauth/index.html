@@ -68,11 +68,18 @@ urls</a>.</dd>
   <dt>scope</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - Comma separated list of <a href="#scopes">scopes</a>.</dd>
+  <dt>state</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - An unguessable random string. It is used to protect
+against cross-site request forgery attacks.</dd>
 </dl><h3 id="github-redirects-back-to-your-site">2. GitHub redirects back to your site</h3>
 
 <p>If the user accepts your request, GitHub redirects back to your site
-with a temporary code in a code parameter. Exchange this for an access
-token:</p>
+with a temporary code in a code parameter as well as the state you provided in
+the previous step in a state parameter. If the states don’t match, the request
+has been created by a third party and the process should be aborted.</p>
+
+<p>Exchange this for an access token:</p>
 
 <pre><code>POST https://github.com/login/oauth/access_token
 </code></pre>
@@ -97,9 +104,7 @@ when you <a href="https://github.com/settings/applications/new">registered</a>.<
 <em>Required</em> <strong>string</strong> - The code you received as a response to <a href="#redirect-users-to-request-github-access">Step 1</a>.</dd>
   <dt>state</dt>
   <dd>
-<em>Required</em> <strong>string</strong> - This is the same state value you also received as a
-response to Step 1.  Use this to protect against cross-site request forgery
-attacks.</dd>
+<em>Required</em> <strong>string</strong> - The state value you provided in Step 1.</dd>
 </dl><h3 id="response">Response</h3>
 
 <p>By default, the response will take the following form:</p>

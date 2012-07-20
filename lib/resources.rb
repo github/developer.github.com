@@ -876,10 +876,10 @@ module GitHub
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "state" => "success",
-      "target_url" => "https://janky.ci.example.com/67717/output",
+      "target_url" => "https://ci.example.com/1000/output",
       "description" => "Build has completed successfully",
-      "id" => 10569,
-      "url" => "https://api.github.com/repos/github/github/statuses/10569",
+      "id" => 1,
+      "url" => "https://api.github.com/repos/octocat/example/statuses/1",
       "creator" => USER
       }
 

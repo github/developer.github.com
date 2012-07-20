@@ -37,11 +37,18 @@ urls](#redirect-urls).
 scope
 : _Optional_ **string** - Comma separated list of [scopes](#scopes).
 
+state
+: _Optional_ **string** - An ungessable random string. It is used to protect
+against cross-site request forgery attacks.
+
 ### 2. GitHub redirects back to your site
 
 If the user accepts your request, GitHub redirects back to your site
-with a temporary code in a code parameter. Exchange this for an access
-token:
+with a temporary code in a code parameter as well as the state you provided in
+the previous step in a state parameter. If the states don't match, the request
+has been created by a third party and the process should be aborted.
+
+Exchange this for an access token:
 
     POST https://github.com/login/oauth/access_token
 
@@ -62,9 +69,7 @@ code
 : _Required_ **string** - The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
 
 state
-: _Required_ **string** - This is the same state value you also received as a
-response to Step 1.  Use this to protect against cross-site request forgery
-attacks.
+: _Required_ **string** - The state value you provided in Step 1.
 
 ### Response
 

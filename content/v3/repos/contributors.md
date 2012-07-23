@@ -11,7 +11,7 @@ title: Repo Contributors | GitHub API
 ### Parameters
 
 anonymous
-: _Optional_ **Boolean** Include anymous contributors
+: _Optional_ **Boolean** Include anonymous contributors
 
 ### Response
 

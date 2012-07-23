@@ -8,6 +8,11 @@ title: Repo Contributors | GitHub API
 
     GET /repos/:user/:repo/contributors
 
+### Parameters
+
+anonymous
+: _Optional_ **Boolean** Include anymous contributors
+
 ### Response
 
 <%= headers 200 %>

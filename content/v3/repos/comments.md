@@ -39,14 +39,15 @@ body
 commit_id
 : _Required_ **string** - Sha of the commit to comment on.
 
-line
-: _Required_ **number** - Line number in the file to comment on.
-
 path
 : _Required_ **string** - Relative path of the file to comment on.
 
 position
 : _Required_ **number** - Line index in the diff to comment on.
+
+line
+: _Optional_ **number** - Line number in the file to comment on. Defaults to 1.
+
 
 #### Example
 

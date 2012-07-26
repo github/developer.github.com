@@ -187,6 +187,8 @@ in results.
 
 ## List languages
 
+List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language.
+
     GET /repos/:user/:repo/languages
 
 ### Response

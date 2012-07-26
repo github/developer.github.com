@@ -36,9 +36,6 @@ Comments are ordered by ascending ID.
 body
 : _Required_ **string**
 
-commit_id
-: _Required_ **string** - Sha of the commit to comment on.
-
 path
 : _Required_ **string** - Relative path of the file to comment on.
 

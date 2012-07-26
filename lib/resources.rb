@@ -871,6 +871,13 @@ module GitHub
       "content" =>  "encoded content ...",
       "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1"
     }
+
+    BLOB = {
+      :content => "Content of the blob",
+      :encoding => "utf-8",
+      :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+      :size => 100
+    }
   end
 end
 

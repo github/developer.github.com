@@ -46,9 +46,11 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 * [Node-GitHub][ajaxorg-node-github]
 * [NodeJS GitHub library][octonode]
+* [gh3 client-side API v3 wrapper][gh3]
 
 [ajaxorg-node-github]: https://github.com/ajaxorg/node-github
 [octonode]: https://github.com/pksunkara/octonode
+[gh3]: https://github.com/k33g/gh3
 
 ## Objective-C
 

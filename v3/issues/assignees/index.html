@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Git Trees | GitHub API</title>
+  <title>Issue Assignees | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -31,11 +31,14 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="trees-api">Trees API</h1>
+    <h1 id="assignees-api">Assignees API</h1>
 
-<h2 id="get-a-tree">Get a Tree</h2>
+<h2 id="list-assignees">List assignees</h2>
 
-<pre><code>GET /repos/:user/:repo/git/trees/:sha
+<p>This call lists all the available assignees (owner + collaborators) to which
+issues may be assigned.</p>
+
+<pre><code>GET /repos/:user/:repo/assignees
 </code></pre>
 
 <h3 id="response">Response</h3>
@@ -44,131 +47,37 @@
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"9fb037999f264ba9a7fc6274d15fa3ae2ab98312"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repo/octocat/Hello-World/trees/9fb037999f264ba9a7fc6274d15fa3ae2ab98312"</span><span class="p">,</span>
-  <span class="s2">"tree"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file.rb"</span><span class="p">,</span>
-      <span class="s2">"mode"</span><span class="o">:</span> <span class="s2">"100644"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"blob"</span><span class="p">,</span>
-      <span class="s2">"size"</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"44b4fc6d56897b048c772eb4087f854f46256132"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/octocat/Hello-World/git/blobs/44b4fc6d56897b048c772eb4087f854f46256132"</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"subdir"</span><span class="p">,</span>
-      <span class="s2">"mode"</span><span class="o">:</span> <span class="s2">"040000"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"tree"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"f484d249c660418515fb01c2b9662073663c242e"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/octocat/Hello-World/git/blobs/f484d249c660418515fb01c2b9662073663c242e"</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"exec_file"</span><span class="p">,</span>
-      <span class="s2">"mode"</span><span class="o">:</span> <span class="s2">"100755"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"blob"</span><span class="p">,</span>
-      <span class="s2">"size"</span><span class="o">:</span> <span class="mi">75</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"45b983be36b73c0788dc9cbcb76cbb80fc7bb057"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057"</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
 
-<h2 id="get-a-tree-recursively">Get a Tree Recursively</h2>
+<h2 id="check-assignee">Check assignee</h2>
 
-<pre><code>GET /repos/:user/:repo/git/trees/:sha?recursive=1
+<p>You may also check to see if a particular user is an assignee for a repository.</p>
+
+<pre><code>GET /repos/:user/:repo/assignees/:assignee
 </code></pre>
 
 <h3 id="response-1">Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<p>If the given <code>assignee</code> login belongs to an assignee for the repository, a
+<code>204</code> header with no content is returned.</p>
+
+<pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"fc6274d15fa3ae2ab983129fb037999f264ba9a7"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repo/octocat/Hello-World/trees/fc6274d15fa3ae2ab983129fb037999f264ba9a7"</span><span class="p">,</span>
-  <span class="s2">"tree"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"subdir/file.txt"</span><span class="p">,</span>
-      <span class="s2">"mode"</span><span class="o">:</span> <span class="s2">"100644"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"blob"</span><span class="p">,</span>
-      <span class="s2">"size"</span><span class="o">:</span> <span class="mi">132</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
+<p>Otherwise a <code>404</code> status code is returned.</p>
 
-<h2 id="create-a-tree">Create a Tree</h2>
-
-<p>The tree creation API will take nested entries as well. If both a
-tree and a nested path modifying that tree are specified, it will
-overwrite the contents of that tree with the new path contents and write
-a new tree out.</p>
-
-<pre><code>POST /repos/:user/:repo/git/trees
-</code></pre>
-
-<h3 id="parameters">Parameters</h3>
-
-<dl>
-<dt>base_tree</dt>
-  <dd>optional <em>String</em> of the SHA1 of the tree you want to update with new data</dd>
-  <dt>tree</dt>
-  <dd>
-<em>Array</em> of <em>Hash</em> objects (of <code>path</code>, <code>mode</code>, <code>type</code> and <code>sha</code>) specifying a tree structure</dd>
-  <dt>tree.path</dt>
-  <dd>
-<em>String</em> of the file referenced in the tree</dd>
-  <dt>tree.mode</dt>
-  <dd>
-<em>String</em> of the file mode - one of <code>100644</code> for file (blob), <code>100755</code> for executable (blob), <code>040000</code> for subdirectory (tree), <code>160000</code> for submodule (commit) or <code>120000</code> for a blob that specifies the path of a symlink</dd>
-  <dt>tree.type</dt>
-  <dd>
-<em>String</em> of <code>blob</code>, <code>tree</code>, <code>commit</code>
-</dd>
-  <dt>tree.sha</dt>
-  <dd>
-<em>String</em> of SHA1 checksum ID of the object in the tree</dd>
-  <dt>tree.content</dt>
-  <dd>
-<em>String</em> of content you want this file to have - GitHub will write this blob out and use that SHA for this entry.  Use either this or <code>tree.sha</code>
-</dd>
-</dl><h3 id="input">Input</h3>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"tree"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file.rb"</span><span class="p">,</span>
-      <span class="s2">"mode"</span><span class="o">:</span> <span class="s2">"100644"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"blob"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"44b4fc6d56897b048c772eb4087f854f46256132"</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/repos/:user/:repo/git/trees/:sha
+<pre class="headers no-response"><code>Status: 404 Not Found
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"cd8274d15fa3ae2ab983129fb037999f264ba9a7"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repo/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7"</span><span class="p">,</span>
-  <span class="s2">"tree"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file.rb"</span><span class="p">,</span>
-      <span class="s2">"mode"</span><span class="o">:</span> <span class="s2">"100644"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"blob"</span><span class="p">,</span>
-      <span class="s2">"size"</span><span class="o">:</span> <span class="mi">132</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/octocat/Hello-World/git/blobs/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

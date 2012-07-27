@@ -33,10 +33,17 @@
       <div class="content">
     <h1 id="repo-commits-api">Repo Commits API</h1>
 
+<p>The Repo Commits API supports listing, viewing, and comparing commits in a repository.</p>
+
 <h2 id="list-commits-on-a-repository">List commits on a repository</h2>
 
 <pre><code>GET /repos/:user/:repo/commits
 </code></pre>
+
+<p><em>A special note on pagination:</em> Due to the way Git works, commits are paginated
+based on SHA instead of page number. Please follow the link headers as outlined
+in the <a href="http://developer.github.com/v3/#pagination">pagination overview</a>
+instead of constructing page links yourself.</p>
 
 <h3 id="parameters">Parameters</h3>
 

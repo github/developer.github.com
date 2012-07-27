@@ -205,7 +205,12 @@ resources, you can also set a custom page size up to 100 with the <code>?per_pag
 $ curl https://api.github.com/user/repos?page=2&amp;per_page=100
 </pre>
 
-<p>The pagination info is included in <a href="http://www.w3.org/Protocols/9707-link-header.html">the Link header</a>:</p>
+<p>The pagination info is included in <a href="http://www.w3.org/Protocols/9707-link-header.html">the Link
+header</a>. It is important to
+follow these Link header values instead of constructing your own URLs. In some
+instances, such as in the <a href="/v3/repos/commits/">Commits
+API</a>, pagination is based on
+SHA1 and not on page number.</p>
 
 <pre><code>Link: &lt;https://api.github.com/user/repos?page=3&amp;per_page=100&gt;; rel="next",
   &lt;https://api.github.com/user/repos?page=50&amp;per_page=100&gt;; rel="last"

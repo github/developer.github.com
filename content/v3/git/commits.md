@@ -6,7 +6,7 @@ title: Git Commits | GitHub API
 
 ## Get a Commit
 
-    GET /repos/:user/:repo/commits/:sha
+    GET /repos/:user/:repo/git/commits/:sha
 
 ### Response
 

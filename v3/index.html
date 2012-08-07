@@ -262,8 +262,27 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
-<p>Please <a href="https://github.com/contact">contact us</a> to request white listed access for your application.  We prefer sites that
-setup OAuth applications for their users.</p>
+<h4 id="unauthenticated-rate-limited-requests">Unauthenticated rate limited requests</h4>
+
+<p>If you need to make unauthenticated calls but need to use a higher rate limit
+associated with your OAuth application, you can send over your client ID and
+secret in the query string.</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com/users/whatever?client_id=xxxxxxxxxxxxxx&amp;client_secret=yyyyyyyyyyyyyyyyyyyyy
+
+HTTP/1.1 200 OK
+Status: 200 OK
+X-RateLimit-Limit: 12500
+X-RateLimit-Remaining: 11966
+</pre>
+
+<p>This method should only used for server-to-server calls. You should never share
+your client secret with anyone or include it in client-side browser code.</p>
+
+<p>Please <a href="https://github.com/contact">contact us</a> to request white listed access
+for your application.  We prefer sites that setup OAuth applications for their
+  users.</p>
 
 <h2 id="conditional-requests">Conditional Requests</h2>
 
@@ -560,15 +579,6 @@ through as an array of <code>[url, options]</code> tuples.</p>
 
               <p>&copy; <span id="year">year</span> GitHub Inc. All rights reserved.</p>
             </div><!-- /#legal or /#legal_ie-->
-
-            <div class="sponsor">
-              <a href="http://www.rackspace.com" class="logo">
-                <img src="/shared/images/rackspace_logo.png" alt="Dedicated Server" width="38" height="36">
-              </a>
-              Powered by the <a href="http://www.rackspace.com ">Dedicated
-              Servers</a> and<br/> <a href="http://www.rackspacecloud.com">Cloud
-              Computing</a> of Rackspace Hosting<span>&reg;</span>
-          </div>
         </div><!-- /.site -->
       </div><!-- /.lower_footer -->
     </div><!-- /#footer -->

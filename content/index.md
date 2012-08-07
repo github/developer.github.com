@@ -48,6 +48,9 @@ The API is expected to be finalized Real Soon Now.
 
 ### Breaking Beta Changes
 
+##### August 7, 2012
+* Clarified watching/stargazing
+
 ##### June 12, 2012:
 * Removed API v1 support
 * Removed API v2 support

@@ -4,6 +4,13 @@ title: Repo Watching | GitHub API
 
 # Repo Watching API
 
+We recently [changed the way watching
+works](https://github.com/blog/1204-notifications-stars) on GitHub. We hope to
+roll out many of these features in the API soon. Until then, the [Watchers
+method](#list-watchers) below will return "stargazers", and the [Watched
+methods](#list-repos-being-watched) return repositories that have been
+"starred."
+
 ## List watchers
 
     GET /repos/:user/:repo/watchers

@@ -187,7 +187,7 @@ NOTE: This does not delete the user, it just remove them from the team.
 
 In order to add a repo to a team, the authenticated user must be an
 owner of the org that the team is associated with.  Also, the repo must
-be owned by the organization, or a direct for of a repo owned by the
+be owned by the organization, or a direct form of a repo owned by the
 organization.
 
     PUT /teams/:id/repos/:user/:repo

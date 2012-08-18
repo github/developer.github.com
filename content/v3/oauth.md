@@ -44,7 +44,7 @@ against cross-site request forgery attacks.
 ### 2. GitHub redirects back to your site
 
 If the user accepts your request, GitHub redirects back to your site
-with a temporary code in a code parameter as well as the state you provided in
+with a temporary code in a `code` parameter as well as the state you provided in
 the previous step in a state parameter. If the states don't match, the request
 has been created by a third party and the process should be aborted.
 

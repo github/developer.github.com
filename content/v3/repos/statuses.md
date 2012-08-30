@@ -4,9 +4,9 @@ title: Statuses | GitHub API
 
 # Repo Statuses API
 
-The status API allows external services to mark commits with a success,
-failure, error, or pending `state`, which is then reflected in pull requests involving 
-those commits.
+The Status API allows external services to mark commits with a success,
+failure, error, or pending `state`, which is then reflected in pull requests
+involving those commits.
 
 Statuses can also include an optional `description` and `url`, and
 we highly recommend providing them as they make statuses much more
@@ -18,9 +18,9 @@ services to mark commits as passing or failing builds using Status.  The
 description would be the high level summary of what happened with the
 build.
 
-Note that the `repo:status` [OAuth](/v3/oauth) scope grants targeted access to
-Statuses **without** also granting access to repo code, while the `repo`
-scope grants permission to code as well as statuses.
+Note that the `repo:status` [OAuth scope](/v3/oauth/#scopes) grants targeted
+access to Statuses **without** also granting access to repo code, while the
+`repo` scope grants permission to code as well as statuses.
 
 ## List Statuses for a specific SHA
 
@@ -49,7 +49,7 @@ state
 target_url
 : _Optional_ **string** Target url to associate with this status.  This
 URL will be linked from the GitHub UI to allow users to easily see the
-'source' of the Status.  
+'source' of the Status.
 
 : For example, if your Continuous Integration system is posting build
 status, you would want to provide the deep link for the build output for

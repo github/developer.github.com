@@ -18,6 +18,10 @@ services to mark commits as passing or failing builds using Status.  The
 description would be the high level summary of what happened with the
 build.
 
+Note that the `repo:status` [OAuth](/v3/oauth) scope grants targeted access to
+Statuses **without** also granting access to repo code, while the `repo`
+scope grants permission to code as well as statuses.
+
 ## List Statuses for a specific SHA
 
     GET /repos/:user/:repo/statuses/:sha

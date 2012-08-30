@@ -4,6 +4,11 @@ title: Statuses | GitHub API
 
 # Repo Statuses API
 
+The status API allows external services to mark commits as success,
+failure, error, or pending, depending on whatever criteria that service
+dictactes.  For example, one common use is for continuous integration
+services to mark commits as passing or failing builds using Status.
+
 ## List Statuses for a specific SHA
 
     GET /repos/:user/:repo/statuses/:sha

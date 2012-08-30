@@ -19,7 +19,7 @@ read more about the use of mime types in the API [here](/v3/mime/).
 ### Response
 
 <%= headers 200 %>
-<%= json :content => "Content of the blob", :encoding => "utf-8" %>
+<%= json(:blob) %>
 
 ## Create a Blob
 

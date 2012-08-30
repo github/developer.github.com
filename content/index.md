@@ -10,7 +10,7 @@ you have any problems or requests please contact
 
 For the new API v3, start browsing the resources on the right >>
 
-View the [API Changelog](/v3/changelog) for information on existing and
+View the [API Changelog](#changes) for information on existing and
 planned changes to the API.
 
 ## Current Version
@@ -30,7 +30,7 @@ issue](https://github.com/contact) if you have problems.
 
 The API is expected to be finalized Real Soon Now.
 
-#### Expected Changes
+#### Expected Changes <a name="changes"></a>
 
 * All `*_url` attributes move to a `_links` object.  See [Pull
   Requests](/v3/pulls/#get-a-single-pull-request) for an example.
@@ -48,9 +48,11 @@ The API is expected to be finalized Real Soon Now.
 
 ### Breaking Beta Changes
 
-##### XXXX 2012
-
+##### August 30, 2012
 * Added Status API
+
+##### August 7, 2012
+* Clarified watching/stargazing
 
 ##### June 12, 2012:
 * Removed API v1 support

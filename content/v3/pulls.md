@@ -4,6 +4,10 @@ title: Pull Requests | GitHub API
 
 # Pull Request API
 
+The Pull Request API allows you to list, view, edit, create, and even merge
+pull requests. Comments on pull requests can be managed via the [Issue
+Comments API](/v3/issues/comments/).
+
 Pull Requests leverage [these](#custom-mime-types) custom mime types. You
 can read more about the use of mime types in the API
 [here](/v3/mime/).

@@ -46,9 +46,11 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 * [Node-GitHub][ajaxorg-node-github]
 * [NodeJS GitHub library][octonode]
+* [gh3 client-side API v3 wrapper][gh3]
 
 [ajaxorg-node-github]: https://github.com/ajaxorg/node-github
 [octonode]: https://github.com/pksunkara/octonode
+[gh3]: https://github.com/k33g/gh3
 
 ## Objective-C
 
@@ -68,12 +70,12 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## PHP
 
-* [GitHub API][github-api]
 * [PHP GitHub API][php-github-api]
+* [GitHub API][github-api]
 * [GitHub Kohana Module][kohana]
 
+[php-github-api]: https://github.com/KnpLabs/php-github-api
 [github-api]: https://github.com/yiiext/github-api
-[php-github-api]: https://github.com/ornicar/php-github-api
 [kohana]: https://github.com/acoulton/github_v3_api
 
 ## Python

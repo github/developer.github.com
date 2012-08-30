@@ -4,6 +4,9 @@ title: Issue Comments | GitHub API
 
 # Issue Comments API
 
+The Issue Comments API supports listing, viewing, editing, and creating
+comments on issues and pull requests.
+
 Issue Comments leverage [these](#custom-mime-types) custom mime types.
 You can read more about the use of mime types in the API
 [here](/v3/mime/).

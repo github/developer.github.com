@@ -26,11 +26,8 @@ module GitHub
       }
 
       def post_date(item)
-        pub = item[:published]
-        if !pub.respond_to?(:strftime)
-          pub = Time.parse(pub)
-        end
-        pub.strftime("%B %-d, %Y")
+        pub = item[:created_at]
+        attribute_to_time(pub).strftime("%B %-d, %Y")
       end
 
       def gravatar_for(login)

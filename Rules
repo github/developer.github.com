@@ -16,6 +16,15 @@ end
 compile '/CNAME/' do
 end
 
+compile '/changes/*/' do
+  filter :erb
+  filter :kramdown
+  filter :colorize_syntax,
+    :colorizers => {:javascript => :pygmentsrb}
+  layout 'changes'
+  layout 'default'
+end
+
 compile '*' do
   filter :erb
   filter :kramdown

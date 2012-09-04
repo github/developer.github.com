@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><id>http://developer.github.com/</id><title>GitHub API Changes</title>
+<updated>2012-09-05T06:00:00Z</updated><link rel="alternate" href="http://developer.github.com/">
+<link rel="self" href="http://developer.github.com/changes.atom">
+<author><name>technoweenie</name><uri>https://github.com/technoweenie</uri></author><entry><id>tag:developer.github.com,2012-09-05:/changes/2012-9-5-watcher-api/</id><title type="html">Upcoming Changes to Watcher and Star APIs</title>
+<published>2012-09-05T06:00:00Z</published><updated>2012-09-05T06:00:00Z</updated><author><name>technoweenie</name><uri>https://github.com/technoweenie</uri></author><link rel="alternate" href="http://developer.github.com/changes/2012-9-5-watcher-api/">
+<content type="html">&lt;p&gt;We recently &lt;a href="https://github.com/blog/1204-notifications-stars"&gt;changed the Watcher behavior&lt;/a&gt; on GitHub.  What
+used to be known as “Watching”, is now “Starring”.  Starring is basically
+a way to bookmark interesting repositories.  Watching is a way to indicate that
+you want to receive email or web notifications on a Repository.&lt;/p&gt;
+
+&lt;p&gt;This works well on GitHub.com, but poses a problem for the GitHub API.  How do
+we change this in a way that developers can gracefully upgrade their
+applications?  We’re currently looking at rolling out the changes in three
+phases over an extended period of time.&lt;/p&gt;
+
+&lt;h2 id="current-status"&gt;Current Status&lt;/h2&gt;
+
+&lt;p&gt;The current &lt;a href="http://developer.github.com/v3/repos/watching/"&gt;Repository Starring&lt;/a&gt; methods look like this:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;/repos/:owner/:repo/watchers&lt;/code&gt; - A list of users starring the repository.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/users/:user/watched&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/user/watched&lt;/code&gt; - A list of repositories the current user has starred.&lt;/li&gt;
+&lt;/ul&gt;&lt;h2 id="phase-1-add-watchers-as-subscriptions"&gt;Phase 1: Add Watchers as Subscriptions&lt;/h2&gt;
+
+&lt;p&gt;In addition to this, we’ll expose Watchers as “Subscriptions”.  This is to
+keep from clashing with the legacy endpoint.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;/repos/:owner/:repo/subscribers&lt;/code&gt; - A list of users watching the repository.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/users/:user/subscribed&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/user/subscriptions&lt;/code&gt; - A list of repositories the current user is watching.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We’ll also add a copy of the legacy Watchers API in the new endpoint:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;/repos/:owner/:repo/stargazers&lt;/code&gt; - A list of users starring the repository.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/users/:user/starred&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/user/starred&lt;/code&gt; - A list of repositories the current user has starred.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;This will be done with the current mime type for the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.beta+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you care about your application not breaking, make sure all outgoing API
+requests pass that value for the “Accept” header.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Accesses a user's starred repositories.
+curl https://api.github.com/user/watched \
+  -H "Accept: application/vnd.github.beta+json"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="phase-2-switch-watchers-api-endpoint"&gt;Phase 2: Switch &lt;code&gt;/watchers&lt;/code&gt; API Endpoint&lt;/h2&gt;
+
+&lt;p&gt;The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
+will have to use &lt;code&gt;/user/starred&lt;/code&gt; to get a user’s starred repositories, not
+&lt;code&gt;/user/watched&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This requires a new mime type value:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We will release this change in an experimental mode first, letting developers
+gracefully upgrade their applications by specifying the new mime value for the
+Accept header.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Accesses a user's watched repositories.
+curl https://api.github.com/user/watched \
+  -H "Accept: application/vnd.github.v3+json"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="phase-3-remove-subscribers-api-endpoint"&gt;Phase 3: Remove &lt;code&gt;/subscribers&lt;/code&gt; API Endpoint.&lt;/h2&gt;
+
+&lt;p&gt;This phase involves disabling the subscription endpoints completely.  At this
+point, you should be using the starring endpoints for starred repositories, and
+the watch endpoints for watched repositories.&lt;/p&gt;</content></entry></feed>

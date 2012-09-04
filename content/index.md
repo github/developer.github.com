@@ -48,6 +48,10 @@ The API is expected to be finalized Real Soon Now.
 
 ### Breaking Beta Changes
 
+##### August 30, 2012
+* Added `repo:status` scope
+* Added Status API
+
 ##### August 7, 2012
 * Clarified watching/stargazing
 

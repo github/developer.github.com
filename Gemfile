@@ -12,4 +12,5 @@ gem 'builder'
 
 group :development do
   gem 'adsf'
+  gem 'fssm'
 end

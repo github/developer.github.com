@@ -146,6 +146,10 @@ public\_repo
 repo
 : Read/write access to public and private repos and organizations.
 
+repo:status
+: Read/write access to public and private repo statuses.  Does **not**
+include access to code - use `repo` for that.
+
 delete\_repo
 : Delete access to adminable repositories.
 

@@ -4,7 +4,7 @@ title: Markdown Rendering | GitHub API
 
 # Markdown Rendering API
 
-## Render an arbritrary Markdown document
+## Render an arbitrary Markdown document
 
 	POST /markdown
 

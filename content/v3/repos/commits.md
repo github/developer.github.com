@@ -24,6 +24,10 @@ path
 : _Optional_ **string** - Only commits containing this file path
 will be returned.
 
+author
+: _Optional_ **string** - GitHub login, name, or email by which to filter by
+commit author
+
 ### Response
 
 <%= headers 200 %>

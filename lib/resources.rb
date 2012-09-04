@@ -935,6 +935,17 @@ module GitHub
       "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1"
     }
 
+    STATUS = {
+      "created_at" => "2012-07-20T01:19:13Z",
+      "updated_at" => "2012-07-20T01:19:13Z",
+      "state" => "success",
+      "target_url" => "https://ci.example.com/1000/output",
+      "description" => "Build has completed successfully",
+      "id" => 1,
+      "url" => "https://api.github.com/repos/octocat/example/statuses/1",
+      "creator" => USER
+    }
+
     BLOB = {
       :content => "Content of the blob",
       :encoding => "utf-8",

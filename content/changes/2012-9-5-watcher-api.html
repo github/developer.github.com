@@ -33,7 +33,7 @@ In addition to this, we'll expose Watchers as "Subscriptions".  This is to
 keep from clashing with the legacy endpoint.
 
 * `/repos/:owner/:repo/subscribers` - A list of users watching the repository.
-* `/users/:user/subscribed` - A list of repositories that a user has starred.
+* `/users/:user/subscribed` - A list of repositories that a user is watching.
 * `/user/subscriptions` - A list of repositories the current user is watching.
 
 We'll also add a copy of the legacy Watchers API in the new endpoint:
@@ -76,4 +76,7 @@ Accept header.
 This phase involves disabling the subscription endpoints completely.  At this
 point, you should be using the starring endpoints for starred repositories, and
 the watch endpoints for watched repositories.
+
+At this point, keep on passing the "v3" mimetype in your application, until the
+API has another breaking change to make.
 

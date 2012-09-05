@@ -23,13 +23,15 @@ compile '/feed/' do
     :colorizers => {:javascript => :pygmentsrb}
 end
 
-compile '/changes/*/' do
-  filter :erb
-  filter :kramdown
-  filter :colorize_syntax,
-    :colorizers => {:javascript => :pygmentsrb}
-  layout 'changes'
-  layout 'default'
+%w(v3 */).each do |version|
+  compile "/changes/#{version}" do
+    filter :erb
+    filter :kramdown
+    filter :colorize_syntax,
+      :colorizers => {:javascript => :pygmentsrb}
+    layout 'changes' if version[0] == '*'
+    layout 'default'
+  end
 end
 
 compile '*' do

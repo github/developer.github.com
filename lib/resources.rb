@@ -25,9 +25,14 @@ module GitHub
         :technoweenie => '821395fe70906c8290df7f18ac4ac6cf'
       }
 
+      DefaultTimeFormat = "%B %-d, %Y".freeze
+
       def post_date(item)
-        pub = item[:created_at]
-        attribute_to_time(pub).strftime("%B %-d, %Y")
+        strftime item[:created_at]
+      end
+
+      def strftime(time, format = DefaultTimeFormat)
+        attribute_to_time(time).strftime(format)
       end
 
       def gravatar_for(login)

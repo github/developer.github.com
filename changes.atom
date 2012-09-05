@@ -33,7 +33,7 @@ keep from clashing with the legacy endpoint.&lt;/p&gt;
 &lt;li&gt;
 &lt;code&gt;/repos/:owner/:repo/subscribers&lt;/code&gt; - A list of users watching the repository.&lt;/li&gt;
   &lt;li&gt;
-&lt;code&gt;/users/:user/subscribed&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
+&lt;code&gt;/users/:user/subscribed&lt;/code&gt; - A list of repositories that a user is watching.&lt;/li&gt;
   &lt;li&gt;
 &lt;code&gt;/user/subscriptions&lt;/code&gt; - A list of repositories the current user is watching.&lt;/li&gt;
 &lt;/ul&gt;&lt;p&gt;We’ll also add a copy of the legacy Watchers API in the new endpoint:&lt;/p&gt;
@@ -82,4 +82,7 @@ curl https://api.github.com/user/watched \
 
 &lt;p&gt;This phase involves disabling the subscription endpoints completely.  At this
 point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.&lt;/p&gt;</content></entry></feed>
+the watch endpoints for watched repositories.&lt;/p&gt;
+
+&lt;p&gt;At this point, keep on passing the “v3” mimetype in your application, until the
+API has another breaking change to make.&lt;/p&gt;</content></entry></feed>

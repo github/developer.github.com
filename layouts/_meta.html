@@ -9,8 +9,10 @@
       <a href="https://github.com/<%= @item[:author_name] %>"><%= @item[:author_name] %></a>
     </span>
     <span class="published">
-      <%= post_date @item %>,
-      Version: <a href="/changes/<%= @item[:api_version] %>"><%= @item[:api_version] %></a>
+      <%= post_date @item %>
+    <% if version = @item[:api_version] %>
+      / Version: <a href="/changes/<%= version %>"><%= version %></a>
+    <% end %>
     </span>
   </div>
 </div>

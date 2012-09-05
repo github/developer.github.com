@@ -29,8 +29,9 @@ The current [Repository Starring][starring-api] methods look like this:
 
 ## Phase 1: Add Watchers as Subscriptions
 
-In addition to this, we'll expose Watchers as "Subscriptions".  This is to
-keep from clashing with the legacy endpoint.
+This phase exposes Watchers as "Subscriptions".  This is to
+keep from clashing with the legacy endpoint.  This phase will happen
+automatically and will not break your application until Phase 2 starts.
 
 * `/repos/:owner/:repo/subscribers` - A list of users watching the repository.
 * `/users/:user/subscriptions` - A list of repositories that a user is watching.
@@ -47,11 +48,16 @@ This will be done with the current mime type for the API:
     application/vnd.github.beta+json
 
 If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the "Accept" header.
+requests pass that value for the "Accept" header.  You should do this now, even
+before Phase 1 starts.
 
     # Accesses a user's starred repositories.
     curl https://api.github.com/user/watched \
       -H "Accept: application/vnd.github.beta+json"
+
+This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
+the "beta" mime type, and makes the "v3" mime type the implicit default
+for API requests.
 
 ## Phase 2: Switch `/watchers` API Endpoint
 
@@ -63,9 +69,9 @@ This requires a new mime type value:
 
     application/vnd.github.v3+json
 
-We will release this change in an experimental mode first, letting developers
-gracefully upgrade their applications by specifying the new mime value for the
-Accept header.
+This is a breaking change from Phase 1.  We will release this change in an
+experimental mode first, letting developers gracefully upgrade their
+applications by specifying the new mime value for the Accept header.
 
     # Accesses a user's watched repositories.
     curl https://api.github.com/user/watched \
@@ -77,6 +83,6 @@ This phase involves disabling the subscription endpoints completely.  At this
 point, you should be using the starring endpoints for starred repositories, and
 the watch endpoints for watched repositories.
 
-At this point, keep on passing the "v3" mimetype in your application, until the
-API has another breaking change to make.
+Keep on passing the "v3" mimetype in your application, until the API has
+another breaking change to make.
 

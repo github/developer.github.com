@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Changes to Watcher and Star APIs</title>
+  <title>Events | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -31,106 +31,113 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-9-5-watcher-api/">
-<h2 class="title">
-  <a href="/changes/2012-9-5-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
-</h2>
+    <h1 id="events">Events</h1>
 
-<div class="meta">
-  <div class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-    <span class="author vcard fn">
-      <a href="https://github.com/technoweenie">technoweenie</a>
-    </span>
-    <span class="published">
-      September 5, 2012
-    </span>
-  </div>
-</div>
+<p>This is a read-only API to the GitHub events.  These events power the
+various activity streams on the site.</p>
 
+<p>Events support <a href="/v3/#pagination">pagination</a>,
+however the <code>per_page</code> option is unsupported. The fixed page size is 30 items.
+Fetching up to ten pages is supported, for a total of 300 events.</p>
 
-<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as “Watching”, is now “Starring”.  Starring is basically
-a way to bookmark interesting repositories.  Watching is a way to indicate that
-you want to receive email or web notifications on a Repository.</p>
+<p>All Events have the same response format:</p>
 
-<p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
-we change this in a way that developers can gracefully upgrade their
-applications?  We’re currently looking at rolling out the changes in three
-phases over an extended period of time.</p>
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<h2 id="current-status">Current Status</h2>
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Event"</span><span class="p">,</span>
+    <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
 
-<p>The current <a href="http://developer.github.com/v3/repos/watching/">Repository Starring</a> methods look like this:</p>
+    <span class="p">},</span>
+    <span class="s2">"repo"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span>
+    <span class="p">},</span>
+    <span class="s2">"actor"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"org"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"12345"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
 
-<ul>
-<li>
-<code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/watched</code> - A list of repositories the current user has starred.</li>
-</ul><h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
+<h2 id="list-public-events">List public events</h2>
 
-<p>In addition to this, we’ll expose Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
-  <li>
-<code>/users/:user/subscribed</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
-</ul><p>We’ll also add a copy of the legacy Watchers API in the new endpoint:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/starred</code> - A list of repositories the current user has starred.</li>
-</ul><p>This will be done with the current mime type for the API:</p>
-
-<pre><code>application/vnd.github.beta+json
+<pre><code>GET /events
 </code></pre>
 
-<p>If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.</p>
+<h2 id="list-repository-events">List repository events</h2>
 
-<pre><code># Accesses a user's starred repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.beta+json"
+<pre><code>GET /repos/:user/:repo/events
 </code></pre>
 
-<h2 id="phase-2-switch-watchers-api-endpoint">Phase 2: Switch <code>/watchers</code> API Endpoint</h2>
+<h2 id="list-issue-events-for-a-repository">List issue events for a repository</h2>
 
-<p>The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
-will have to use <code>/user/starred</code> to get a user’s starred repositories, not
-<code>/user/watched</code>.</p>
-
-<p>This requires a new mime type value:</p>
-
-<pre><code>application/vnd.github.v3+json
+<pre><code>GET /repos/:user/:repo/issues/events
 </code></pre>
 
-<p>We will release this change in an experimental mode first, letting developers
-gracefully upgrade their applications by specifying the new mime value for the
-Accept header.</p>
+<h2 id="list-public-events-for-a-network-of-repositories">List public events for a network of repositories</h2>
 
-<pre><code># Accesses a user's watched repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.v3+json"
+<pre><code>GET /networks/:user/:repo/events
 </code></pre>
 
-<h2 id="phase-3-remove-subscribers-api-endpoint">Phase 3: Remove <code>/subscribers</code> API Endpoint.</h2>
+<h2 id="list-public-events-for-an-organization">List public events for an organization</h2>
 
-<p>This phase involves disabling the subscription endpoints completely.  At this
-point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.</p>
-</div>
+<pre><code>GET /orgs/:org/events
+</code></pre>
 
+<h2 id="list-events-that-a-user-has-received">List events that a user has received</h2>
+
+<p>These are events that you’ve received by watching repos and following
+users.  If you are authenticated as the given user, you will see private
+events.  Otherwise, you’ll only see public events.</p>
+
+<pre><code>GET /users/:user/received_events
+</code></pre>
+
+<h2 id="list-public-events-that-a-user-has-received">List public events that a user has received</h2>
+
+<pre><code>GET /users/:user/received_events/public
+</code></pre>
+
+<h2 id="list-events-performed-by-a-user">List events performed by a user</h2>
+
+<p>If you are authenticated as the given user, you will see your private
+events.  Otherwise, you’ll only see public events.</p>
+
+<pre><code>GET /users/:user/events
+</code></pre>
+
+<h2 id="list-public-events-performed-by-a-user">List public events performed by a user</h2>
+
+<pre><code>GET /users/:user/events/public
+</code></pre>
+
+<h2 id="list-events-for-an-organization">List events for an organization</h2>
+
+<p>This is the user’s organization dashboard.  You must be authenticated as
+the user to view this.</p>
+
+<pre><code>GET /users/:user/events/orgs/:org
+</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

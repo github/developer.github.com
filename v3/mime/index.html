@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Changes to Watcher and Star APIs</title>
+  <title>Custom Mime Types | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -31,106 +31,97 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-9-5-watcher-api/">
-<h2 class="title">
-  <a href="/changes/2012-9-5-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
-</h2>
+    <h1 id="github-mime-types">GitHub Mime Types</h1>
 
-<div class="meta">
-  <div class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-    <span class="author vcard fn">
-      <a href="https://github.com/technoweenie">technoweenie</a>
-    </span>
-    <span class="published">
-      September 5, 2012
-    </span>
-  </div>
-</div>
+<p>Custom mime types are used in the API to let consumers choose the format
+of the data they wish to receive. This is done by adding one or more of
+the following types to the <code>Accept</code> header when you make a request. Mime
+types are specific to resources, allowing them to change independently
+and support formats that other resources don’t.</p>
 
+<p>All GitHub mime types look like this:</p>
 
-<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as “Watching”, is now “Starring”.  Starring is basically
-a way to bookmark interesting repositories.  Watching is a way to indicate that
-you want to receive email or web notifications on a Repository.</p>
+<pre><code>application/vnd.github[.version].param[+json]
+</code></pre>
 
-<p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
-we change this in a way that developers can gracefully upgrade their
-applications?  We’re currently looking at rolling out the changes in three
-phases over an extended period of time.</p>
+<p>The most basic mime types the API supports are:</p>
 
-<h2 id="current-status">Current Status</h2>
+<pre><code>application/json
+application/vnd.github+json
+</code></pre>
 
-<p>The current <a href="http://developer.github.com/v3/repos/watching/">Repository Starring</a> methods look like this:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/watched</code> - A list of repositories the current user has starred.</li>
-</ul><h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
-
-<p>In addition to this, we’ll expose Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
-  <li>
-<code>/users/:user/subscribed</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
-</ul><p>We’ll also add a copy of the legacy Watchers API in the new endpoint:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/starred</code> - A list of repositories the current user has starred.</li>
-</ul><p>This will be done with the current mime type for the API:</p>
+<p>Neither of these specify a version, so you will always get the latest
+JSON representation of resources.  If you’re building an application and
+care about the stability of the API, specify a version like so:</p>
 
 <pre><code>application/vnd.github.beta+json
 </code></pre>
 
-<p>If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.</p>
+<p>If you’re specifying a property (such as full/raw/etc defined below),
+put the version before the property:</p>
 
-<pre><code># Accesses a user's starred repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.beta+json"
+<pre><code>application/vnd.github.beta.raw+json
 </code></pre>
 
-<h2 id="phase-2-switch-watchers-api-endpoint">Phase 2: Switch <code>/watchers</code> API Endpoint</h2>
+<p>For specifics on versions, check the <a href="/v3/changelog">API changelog</a>.</p>
 
-<p>The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
-will have to use <code>/user/starred</code> to get a user’s starred repositories, not
-<code>/user/watched</code>.</p>
+<h2 id="comment-body-properties">Comment Body Properties</h2>
 
-<p>This requires a new mime type value:</p>
+<p>The body of a comment can be written in <a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a>.
+Issues, Issue Comments, Pull Request Comments, and Gist Comments all
+accept these same mime types:</p>
 
-<pre><code>application/vnd.github.v3+json
+<h3 id="raw">Raw</h3>
+
+<pre><code>application/vnd.github.VERSION.raw+json
 </code></pre>
 
-<p>We will release this change in an experimental mode first, letting developers
-gracefully upgrade their applications by specifying the new mime value for the
-Accept header.</p>
+<p>Return the raw markdown body. Response will include <code>body</code>. This is the
+default if you do not pass any specific mime type.</p>
 
-<pre><code># Accesses a user's watched repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.v3+json"
+<h3 id="text">Text</h3>
+
+<pre><code>application/vnd.github.VERSION.text+json
 </code></pre>
 
-<h2 id="phase-3-remove-subscribers-api-endpoint">Phase 3: Remove <code>/subscribers</code> API Endpoint.</h2>
+<p>Return a text only representation of the markdown body. Response will
+include <code>body_text</code>.</p>
 
-<p>This phase involves disabling the subscription endpoints completely.  At this
-point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.</p>
-</div>
+<h3 id="html">Html</h3>
 
+<pre><code>application/vnd.github.VERSION.html+json
+</code></pre>
+
+<p>Return html rendered from the body’s markdown. Response will include
+<code>body_html</code>.</p>
+
+<h3 id="full">Full</h3>
+
+<pre><code>application/vnd.github.VERSION.full+json
+</code></pre>
+
+<p>Return raw, text and html representations. Response will include <code>body</code>,
+<code>body_text</code>, and <code>body_html</code>:</p>
+
+<h2 id="git-blob-properties">Git Blob Properties</h2>
+
+<p>The following mime types are allowed when getting a blob:</p>
+
+<h3 id="json">JSON</h3>
+
+<pre><code>application/vnd.github.VERSION+json
+application/json
+</code></pre>
+
+<p>Return JSON representation of the blob with <code>content</code> as a base64
+encoded string. This is the default if nothing is passed.</p>
+
+<h3 id="raw-1">Raw</h3>
+
+<pre><code>application/vnd.github.VERSION.raw
+</code></pre>
+
+<p>Return the raw blob data.</p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

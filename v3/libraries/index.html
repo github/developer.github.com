@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Changes to Watcher and Star APIs</title>
+  <title>Libraries | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -31,106 +31,82 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-9-5-watcher-api/">
-<h2 class="title">
-  <a href="/changes/2012-9-5-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
-</h2>
+    <h1 id="libraries">Libraries</h1>
 
-<div class="meta">
-  <div class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-    <span class="author vcard fn">
-      <a href="https://github.com/technoweenie">technoweenie</a>
-    </span>
-    <span class="published">
-      September 5, 2012
-    </span>
-  </div>
-</div>
+<p>Libraries for accessing the GitHub API from your favorite language.</p>
 
+<h2 id="actionscript">ActionScript</h2>
 
-<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as “Watching”, is now “Starring”.  Starring is basically
-a way to bookmark interesting repositories.  Watching is a way to indicate that
-you want to receive email or web notifications on a Repository.</p>
+<ul>
+<li><a href="https://github.com/cbrammer/api-github-as3">ActionScript GitHub API</a></li>
+</ul><h2 id="clojure">Clojure</h2>
 
-<p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
-we change this in a way that developers can gracefully upgrade their
-applications?  We’re currently looking at rolling out the changes in three
-phases over an extended period of time.</p>
+<ul>
+<li><a href="https://github.com/Raynes/tentacles">Tentacles</a></li>
+</ul><h2 id="csharp">CSharp</h2>
 
-<h2 id="current-status">Current Status</h2>
+<ul>
+<li><a href="https://github.com/sgrassie/csharp-github-api">CSharp GitHub API</a></li>
+</ul><h2 id="erlang">Erlang</h2>
 
-<p>The current <a href="http://developer.github.com/v3/repos/watching/">Repository Starring</a> methods look like this:</p>
+<ul>
+<li><a href="https://github.com/onlyshk/erlang-github-api">Erlang GitHub API</a></li>
+</ul><h2 id="haskell">Haskell</h2>
+
+<ul>
+<li><a href="https://github.com/dmnpignaud/haskell-github-api">Haskell GitHub API</a></li>
+</ul><h2 id="java">Java</h2>
+
+<p>The <a href="https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core">GitHub Java API</a> library
+is part of the <a href="https://github.com/eclipse/egit-github">GitHub Mylyn Connector</a> and aims to support the entire
+GitHub v3 API.  Builds are available in <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22org.eclipse.egit.github.core%22">Maven Central</a>.</p>
+
+<h2 id="javascript">Javascript</h2>
+
+<ul>
+<li><a href="https://github.com/ajaxorg/node-github">Node-GitHub</a></li>
+  <li><a href="https://github.com/pksunkara/octonode">NodeJS GitHub library</a></li>
+  <li><a href="https://github.com/k33g/gh3">gh3 client-side API v3 wrapper</a></li>
+</ul><h2 id="objective-c">Objective-C</h2>
+
+<ul>
+<li><a href="http://github.com/owainhunt/uagithubengine">UAGithubEngine</a></li>
+</ul><h2 id="perl">Perl</h2>
 
 <ul>
 <li>
-<code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
+<a href="https://github.com/plu/Pithub">Pithub</a> (<a href="http://metacpan.org/module/Pithub">CPAN</a>)</li>
   <li>
-<code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/watched</code> - A list of repositories the current user has starred.</li>
-</ul><h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
-
-<p>In addition to this, we’ll expose Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.</p>
+<a href="https://github.com/fayland/perl-net-github">Net::Github</a> (<a href="http://search.cpan.org/~fayland/Net-GitHub-0.30/lib/Net/GitHub.pm">CPAN</a>)</li>
+</ul><h2 id="php">PHP</h2>
 
 <ul>
-<li>
-<code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
-  <li>
-<code>/users/:user/subscribed</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
-</ul><p>We’ll also add a copy of the legacy Watchers API in the new endpoint:</p>
+<li><a href="https://github.com/KnpLabs/php-github-api">PHP GitHub API</a></li>
+  <li><a href="https://github.com/yiiext/github-api">GitHub API</a></li>
+  <li><a href="https://github.com/acoulton/github_v3_api">GitHub Kohana Module</a></li>
+</ul><h2 id="python">Python</h2>
 
 <ul>
-<li>
-<code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/starred</code> - A list of repositories the current user has starred.</li>
-</ul><p>This will be done with the current mime type for the API:</p>
+<li><a href="https://github.com/jacquev6/PyGithub">PyGithub</a></li>
+  <li><a href="https://github.com/copitux/python-github3">Pygithub3</a></li>
+  <li><a href="https://github.com/ducksboard/libsaas">libsaas</a></li>
+  <li><a href="https://github.com/sigmavirus24/github3.py">github3.py</a></li>
+  <li><a href="https://github.com/demianbrecht/sanction">sanction</a></li>
+  <li><a href="https://github.com/jpaugh64/agithub" title="Agnostic Github">agithub</a></li>
+</ul><h2 id="ruby">Ruby</h2>
 
-<pre><code>application/vnd.github.beta+json
-</code></pre>
+<ul>
+<li><a href="https://github.com/pengwynn/octokit">Octokit</a></li>
+  <li><a href="https://github.com/peter-murach/github">GitHub API Gem</a></li>
+  <li><a href="https://github.com/jhelwig/octocat_herder">Octocat Herder</a></li>
+  <li><a href="https://github.com/jwilger/github-v3-api">GitHub v3 API</a></li>
+  <li><a href="https://github.com/okonski/github-api-client">GitHub API Client</a></li>
+  <li><a href="https://github.com/rauhryan/ghee">Ghee</a></li>
+</ul><h2 id="scala">Scala</h2>
 
-<p>If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.</p>
-
-<pre><code># Accesses a user's starred repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.beta+json"
-</code></pre>
-
-<h2 id="phase-2-switch-watchers-api-endpoint">Phase 2: Switch <code>/watchers</code> API Endpoint</h2>
-
-<p>The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
-will have to use <code>/user/starred</code> to get a user’s starred repositories, not
-<code>/user/watched</code>.</p>
-
-<p>This requires a new mime type value:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<p>We will release this change in an experimental mode first, letting developers
-gracefully upgrade their applications by specifying the new mime value for the
-Accept header.</p>
-
-<pre><code># Accesses a user's watched repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.v3+json"
-</code></pre>
-
-<h2 id="phase-3-remove-subscribers-api-endpoint">Phase 3: Remove <code>/subscribers</code> API Endpoint.</h2>
-
-<p>This phase involves disabling the subscription endpoints completely.  At this
-point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.</p>
-</div>
-
+<ul>
+<li><a href="https://github.com/andreazevedo/dispatch-github">Dispatch GitHub</a></li>
+</ul>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

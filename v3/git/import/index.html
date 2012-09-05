@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Changes to Watcher and Star APIs</title>
+  <title>Git Import | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -31,106 +31,30 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-9-5-watcher-api/">
-<h2 class="title">
-  <a href="/changes/2012-9-5-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
-</h2>
+    <h1 id="import-api">Import API</h1>
 
-<div class="meta">
-  <div class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-    <span class="author vcard fn">
-      <a href="https://github.com/technoweenie">technoweenie</a>
-    </span>
-    <span class="published">
-      September 5, 2012
-    </span>
-  </div>
-</div>
+<p><code>git fast-import</code> input parser</p>
 
+<p>Would this be cool?</p>
 
-<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as “Watching”, is now “Starring”.  Starring is basically
-a way to bookmark interesting repositories.  Watching is a way to indicate that
-you want to receive email or web notifications on a Repository.</p>
+<p>See the <a href="http://git-scm.com/book/ch8-2.html#a_custom_importer">Pro Git book</a> or the
+<a href="http://www.kernel.org/pub/software/scm/git/docs/git-fast-import.html">fast-import man page</a>
+for more information about the fast-import syntax.</p>
 
-<p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
-we change this in a way that developers can gracefully upgrade their
-applications?  We’re currently looking at rolling out the changes in three
-phases over an extended period of time.</p>
-
-<h2 id="current-status">Current Status</h2>
-
-<p>The current <a href="http://developer.github.com/v3/repos/watching/">Repository Starring</a> methods look like this:</p>
+<p>It would be awesome if there was some way to open up a streaming
+listener and just stream this data to it in order to:</p>
 
 <ul>
 <li>
-<code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
+    <p>import directly into github from the fast-export scripts that exist
+for multiple VCS systems</p>
+  </li>
   <li>
-<code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/watched</code> - A list of repositories the current user has starred.</li>
-</ul><h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
-
-<p>In addition to this, we’ll expose Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
-  <li>
-<code>/users/:user/subscribed</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
-</ul><p>We’ll also add a copy of the legacy Watchers API in the new endpoint:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/starred</code> - A list of repositories the current user has starred.</li>
-</ul><p>This will be done with the current mime type for the API:</p>
-
-<pre><code>application/vnd.github.beta+json
-</code></pre>
-
-<p>If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.</p>
-
-<pre><code># Accesses a user's starred repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.beta+json"
-</code></pre>
-
-<h2 id="phase-2-switch-watchers-api-endpoint">Phase 2: Switch <code>/watchers</code> API Endpoint</h2>
-
-<p>The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
-will have to use <code>/user/starred</code> to get a user’s starred repositories, not
-<code>/user/watched</code>.</p>
-
-<p>This requires a new mime type value:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<p>We will release this change in an experimental mode first, letting developers
-gracefully upgrade their applications by specifying the new mime value for the
-Accept header.</p>
-
-<pre><code># Accesses a user's watched repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.v3+json"
-</code></pre>
-
-<h2 id="phase-3-remove-subscribers-api-endpoint">Phase 3: Remove <code>/subscribers</code> API Endpoint.</h2>
-
-<p>This phase involves disabling the subscription endpoints completely.  At this
-point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.</p>
-</div>
-
+    <p>be able to easily import multiple objects - for instance a series of
+commits without having to make multiple git calls</p>
+  </li>
+</ul><p>even without streaming capability, this might be pretty interesting
+functionality.</p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

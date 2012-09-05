@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Changes to Watcher and Star APIs</title>
+  <title>Git Tags | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -31,106 +31,99 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-9-5-watcher-api/">
-<h2 class="title">
-  <a href="/changes/2012-9-5-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
-</h2>
+    <h1 id="tags-api">Tags API</h1>
 
-<div class="meta">
-  <div class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-    <span class="author vcard fn">
-      <a href="https://github.com/technoweenie">technoweenie</a>
-    </span>
-    <span class="published">
-      September 5, 2012
-    </span>
-  </div>
-</div>
+<p>This tags API only deals with tag objects - so only annotated tags, not
+lightweight tags.</p>
 
+<h2 id="get-a-tag">Get a Tag</h2>
 
-<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as “Watching”, is now “Starring”.  Starring is basically
-a way to bookmark interesting repositories.  Watching is a way to indicate that
-you want to receive email or web notifications on a Repository.</p>
-
-<p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
-we change this in a way that developers can gracefully upgrade their
-applications?  We’re currently looking at rolling out the changes in three
-phases over an extended period of time.</p>
-
-<h2 id="current-status">Current Status</h2>
-
-<p>The current <a href="http://developer.github.com/v3/repos/watching/">Repository Starring</a> methods look like this:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/watched</code> - A list of repositories the current user has starred.</li>
-</ul><h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
-
-<p>In addition to this, we’ll expose Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
-  <li>
-<code>/users/:user/subscribed</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
-</ul><p>We’ll also add a copy of the legacy Watchers API in the new endpoint:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/starred</code> - A list of repositories the current user has starred.</li>
-</ul><p>This will be done with the current mime type for the API:</p>
-
-<pre><code>application/vnd.github.beta+json
+<pre><code>GET /repos/:user/:repo/git/tags/:sha
 </code></pre>
 
-<p>If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.</p>
+<h3 id="response">Response</h3>
 
-<pre><code># Accesses a user's starred repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.beta+json"
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"tag"</span><span class="o">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
+  <span class="s2">"tagger"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2011-06-17T14:53:35-07:00"</span>
+  <span class="p">},</span>
+  <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="create-a-tag-object">Create a Tag Object</h2>
+
+<p>Note that creating a tag object does not create the reference that
+makes a tag in Git.  If you want to create an annotated tag in Git,
+you have to do this call to create the tag object, and then create
+the <code>refs/tags/[tag]</code> reference.  If you want to create a lightweight
+tag, you simply have to create the reference - this call would be
+unnecessary.</p>
+
+<pre><code>POST /repos/:user/:repo/git/tags
 </code></pre>
 
-<h2 id="phase-2-switch-watchers-api-endpoint">Phase 2: Switch <code>/watchers</code> API Endpoint</h2>
+<h3 id="parameters">Parameters</h3>
 
-<p>The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
-will have to use <code>/user/starred</code> to get a user’s starred repositories, not
-<code>/user/watched</code>.</p>
+<dl>
+<dt>tag</dt>
+  <dd>
+<em>String</em> of the tag</dd>
+  <dt>message</dt>
+  <dd>
+<em>String</em> of the tag message</dd>
+  <dt>object</dt>
+  <dd>
+<em>String</em> of the SHA of the git object this is tagging</dd>
+  <dt>type</dt>
+  <dd>
+<em>String</em> of the type of the object we’re tagging. Normally this is a
+<code>commit</code> but it can also be a <code>tree</code> or a <code>blob</code>.</dd>
+  <dt>tagger.name</dt>
+  <dd>
+<em>String</em> of the name of the author of the tag</dd>
+  <dt>tagger.email</dt>
+  <dd>
+<em>String</em> of the email of the author of the tag</dd>
+  <dt>tagger.date</dt>
+  <dd>
+<em>Timestamp</em> of when this object was tagged</dd>
+</dl><h3 id="response-1">Response</h3>
 
-<p>This requires a new mime type value:</p>
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/repos/:user/:repo/git/tags/:sha
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<p>We will release this change in an experimental mode first, letting developers
-gracefully upgrade their applications by specifying the new mime value for the
-Accept header.</p>
-
-<pre><code># Accesses a user's watched repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.v3+json"
-</code></pre>
-
-<h2 id="phase-3-remove-subscribers-api-endpoint">Phase 3: Remove <code>/subscribers</code> API Endpoint.</h2>
-
-<p>This phase involves disabling the subscription endpoints completely.  At this
-point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.</p>
-</div>
-
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"tag"</span><span class="o">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
+  <span class="s2">"tagger"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2011-06-17T14:53:35-07:00"</span>
+  <span class="p">},</span>
+  <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

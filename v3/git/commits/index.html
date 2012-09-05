@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Changes to Watcher and Star APIs</title>
+  <title>Git Commits | GitHub API</title>
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
   <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
@@ -31,106 +31,137 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-9-5-watcher-api/">
-<h2 class="title">
-  <a href="/changes/2012-9-5-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
-</h2>
+    <h1 id="commits-api">Commits API</h1>
 
-<div class="meta">
-  <div class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-    <span class="author vcard fn">
-      <a href="https://github.com/technoweenie">technoweenie</a>
-    </span>
-    <span class="published">
-      September 5, 2012
-    </span>
-  </div>
-</div>
+<h2 id="get-a-commit">Get a Commit</h2>
 
-
-<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as “Watching”, is now “Starring”.  Starring is basically
-a way to bookmark interesting repositories.  Watching is a way to indicate that
-you want to receive email or web notifications on a Repository.</p>
-
-<p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
-we change this in a way that developers can gracefully upgrade their
-applications?  We’re currently looking at rolling out the changes in three
-phases over an extended period of time.</p>
-
-<h2 id="current-status">Current Status</h2>
-
-<p>The current <a href="http://developer.github.com/v3/repos/watching/">Repository Starring</a> methods look like this:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/watched</code> - A list of repositories the current user has starred.</li>
-</ul><h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
-
-<p>In addition to this, we’ll expose Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
-  <li>
-<code>/users/:user/subscribed</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
-</ul><p>We’ll also add a copy of the legacy Watchers API in the new endpoint:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
-  <li>
-<code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
-  <li>
-<code>/user/starred</code> - A list of repositories the current user has starred.</li>
-</ul><p>This will be done with the current mime type for the API:</p>
-
-<pre><code>application/vnd.github.beta+json
+<pre><code>GET /repos/:user/:repo/git/commits/:sha
 </code></pre>
 
-<p>If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.</p>
+<h3 id="response">Response</h3>
 
-<pre><code># Accesses a user's starred repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.beta+json"
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"added readme, because im a good github citizen\n"</span><span class="p">,</span>
+  <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+  <span class="p">},</span>
+  <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="create-a-commit">Create a Commit</h2>
+
+<pre><code>POST /repos/:user/:repo/git/commits
 </code></pre>
 
-<h2 id="phase-2-switch-watchers-api-endpoint">Phase 2: Switch <code>/watchers</code> API Endpoint</h2>
+<h3 id="parameters">Parameters</h3>
 
-<p>The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
-will have to use <code>/user/starred</code> to get a user’s starred repositories, not
-<code>/user/watched</code>.</p>
+<dl>
+<dt>message</dt>
+  <dd>
+<em>String</em> of the commit message</dd>
+  <dt>tree</dt>
+  <dd>
+<em>String</em> of the SHA of the tree object this commit points to</dd>
+  <dt>parents</dt>
+  <dd>
+<em>Array</em> of the SHAs of the commits that were the parents of this
+commit.  If omitted or empty, the commit will be written as a root
+commit.  For a single parent, an array of one SHA should be provided,
+for a merge commit, an array of more than one should be provided.</dd>
+</dl><h3 id="optional-parameters">Optional Parameters</h3>
 
-<p>This requires a new mime type value:</p>
+<p>The <code>committer</code> section is optional and will be filled with the <code>author</code>
+data if omitted. If the <code>author</code> section is omitted, it will be filled
+in with the authenticated users information and the current date.</p>
 
-<pre><code>application/vnd.github.v3+json
-</code></pre>
+<dl>
+<dt>author.name</dt>
+  <dd>
+<em>String</em> of the name of the author of the commit</dd>
+  <dt>author.email</dt>
+  <dd>
+<em>String</em> of the email of the author of the commit</dd>
+  <dt>author.date</dt>
+  <dd>
+<em>Timestamp</em> of when this commit was authored</dd>
+  <dt>committer.name</dt>
+  <dd>
+<em>String</em> of the name of the committer of the commit</dd>
+  <dt>committer.email</dt>
+  <dd>
+<em>String</em> of the email of the committer of the commit</dd>
+  <dt>committer.date</dt>
+  <dd>
+<em>Timestamp</em> of when this commit was committed</dd>
+</dl><h3 id="example-input">Example Input</h3>
 
-<p>We will release this change in an experimental mode first, letting developers
-gracefully upgrade their applications by specifying the new mime value for the
-Accept header.</p>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2008-07-09T16:13:30+12:00"</span>
+  <span class="p">},</span>
+  <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span>
+  <span class="p">],</span>
+  <span class="s2">"tree"</span><span class="o">:</span> <span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span>
+<span class="p">}</span></code></pre>
 
-<pre><code># Accesses a user's watched repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.v3+json"
-</code></pre>
+<h3 id="response-1">Response</h3>
 
-<h2 id="phase-3-remove-subscribers-api-endpoint">Phase 3: Remove <code>/subscribers</code> API Endpoint.</h2>
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/git/:user/:repo/commit/:sha
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<p>This phase involves disabling the subscription endpoints completely.  At this
-point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.</p>
-</div>
-
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2008-07-09T16:13:30+12:00"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2008-07-09T16:13:30+12:00"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/827efc6d56897b048c772eb4087f854f46256132"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span>
+  <span class="p">},</span>
+  <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

@@ -15,7 +15,7 @@ phases over an extended period of time.&lt;/p&gt;
 
 &lt;h2 id="current-status"&gt;Current Status&lt;/h2&gt;
 
-&lt;p&gt;The current &lt;a href="http://developer.github.com/v3/repos/watching/"&gt;Repository Starring&lt;/a&gt; methods look like this:&lt;/p&gt;
+&lt;p&gt;The current &lt;a href="http://developer.github.com/v3/repos/starring/"&gt;Repository Starring&lt;/a&gt; methods look like this:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;
@@ -26,8 +26,9 @@ phases over an extended period of time.&lt;/p&gt;
 &lt;code&gt;/user/watched&lt;/code&gt; - A list of repositories the current user has starred.&lt;/li&gt;
 &lt;/ul&gt;&lt;h2 id="phase-1-add-watchers-as-subscriptions"&gt;Phase 1: Add Watchers as Subscriptions&lt;/h2&gt;
 
-&lt;p&gt;In addition to this, we’ll expose Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.&lt;/p&gt;
+&lt;p&gt;This phase exposes Watchers as “Subscriptions”.  This is to
+keep from clashing with the legacy endpoint.  This phase will happen
+automatically and will not break your application until Phase 3 starts.&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;
@@ -45,18 +46,24 @@ keep from clashing with the legacy endpoint.&lt;/p&gt;
 &lt;code&gt;/users/:user/starred&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
   &lt;li&gt;
 &lt;code&gt;/user/starred&lt;/code&gt; - A list of repositories the current user has starred.&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;This will be done with the current mime type for the API:&lt;/p&gt;
+&lt;/ul&gt;&lt;p&gt;This is in place &lt;em&gt;now&lt;/em&gt; with the current media type for the API:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;application/vnd.github.beta+json
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.&lt;/p&gt;
+requests pass that value for the “Accept” header.  You should do this now.  This
+can be verified by checking the &lt;code&gt;X-GitHub-Media-Type&lt;/code&gt; header on all API
+responses.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;# Accesses a user's starred repositories.
 curl https://api.github.com/user/watched \
   -H "Accept: application/vnd.github.beta+json"
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
+the “beta” media type, and makes the “v3” media type the implicit default
+for API requests.&lt;/p&gt;
 
 &lt;h2 id="phase-2-switch-watchers-api-endpoint"&gt;Phase 2: Switch &lt;code&gt;/watchers&lt;/code&gt; API Endpoint&lt;/h2&gt;
 
@@ -64,14 +71,14 @@ curl https://api.github.com/user/watched \
 will have to use &lt;code&gt;/user/starred&lt;/code&gt; to get a user’s starred repositories, not
 &lt;code&gt;/user/watched&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;This requires a new mime type value:&lt;/p&gt;
+&lt;p&gt;This requires a new media type value:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;We will release this change in an experimental mode first, letting developers
-gracefully upgrade their applications by specifying the new mime value for the
-Accept header.&lt;/p&gt;
+&lt;p&gt;This is a breaking change from Phase 1.  We will release this change in an
+experimental mode first, letting developers gracefully upgrade their
+applications by specifying the new media value for the Accept header.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;# Accesses a user's watched repositories.
 curl https://api.github.com/user/watched \
@@ -84,5 +91,5 @@ curl https://api.github.com/user/watched \
 point, you should be using the starring endpoints for starred repositories, and
 the watch endpoints for watched repositories.&lt;/p&gt;
 
-&lt;p&gt;At this point, keep on passing the “v3” mimetype in your application, until the
-API has another breaking change to make.&lt;/p&gt;</content></entry></feed>
+&lt;p&gt;Keep on passing the “v3” media type in your application, until the API has
+another breaking change to make.&lt;/p&gt;</content></entry></feed>

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Statuses | GitHub API</title>
+  <title>Repository Starring | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -35,113 +35,172 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="repo-statuses-api">Repo Statuses API</h1>
+    <h1 id="repository-starring-api">Repository Starring API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-statuses-for-a-specific-sha">List Statuses for a specific SHA</a></li>
-  <li><a href="#create-a-status">Create a Status</a></li>
-</ul><p>The Status API allows external services to mark commits with a success,
-failure, error, or pending <code>state</code>, which is then reflected in pull requests
-involving those commits.</p>
+<li><a href="#list-stargazers">List Stargazers</a></li>
+  <li><a href="#list-repositories-being-starred">List repositories being starred</a></li>
+  <li><a href="#check-if-you-are-starring-a-repository">Check if you are starring a repository</a></li>
+  <li><a href="#star-a-repository">Star a repository</a></li>
+  <li><a href="#unstar-a-repository">Unstar a repository</a></li>
+</ul><p>Repository Starring is a feature that lets users bookmark repositories.  Stars
+are shown next to repositories to show an approximate level of interest.  Stars
+have no effect on notifications or the activity feed.  For that, see <a href="/v3/repos/watching">Repository
+Watching</a>.</p>
 
-<p>Statuses can also include an optional <code>description</code> and <code>url</code>, and
-we highly recommend providing them as they make statuses much more
-useful in the GitHub UI.</p>
+<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the way watching
+works</a> on GitHub.  Many 3rd
+party applications may be using the “watcher” endpoints for accessing these.
+Starting today, you can start changing these to the new “star” endpoints.  See
+below.  Check the <a href="/changes/2012-9-5-watcher-api/">Watcher API Change post</a> for
+more.</p>
 
-<p>As an example, one common use is for continuous integration
-services to mark commits as passing or failing builds using Status.  The
-<code>target_url</code> would be the full url to the build output, and the
-description would be the high level summary of what happened with the
-build.</p>
+<h2 id="list-stargazers">List Stargazers</h2>
 
-<p>Note that the <code>repo:status</code> <a href="/v3/oauth/#scopes">OAuth scope</a> grants targeted
-access to Statuses <strong>without</strong> also granting access to repo code, while the
-<code>repo</code> scope grants permission to code as well as statuses.</p>
+<pre><code># Using github.v3 media type.
+GET /repos/:user/:repo/stargazers
 
-<h2 id="list-statuses-for-a-specific-sha">List Statuses for a specific SHA</h2>
-
-<pre><code>GET /repos/:user/:repo/statuses/:sha
+# Legacy, using github.beta media type..
+GET /repos/:user/:repo/watchers
 </code></pre>
 
-<h3 id="parameters">Parameters</h3>
-
-<dl>
-<dt>sha</dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - Sha to list the statuses from</dd>
-</dl><h3 id="response">Response</h3>
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-    <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
-    <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
-    <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h2 id="create-a-status">Create a Status</h2>
-
-<pre><code>POST /repos/:user/:repo/statuses/:sha
-</code></pre>
-
-<h3 id="parameters-1">Parameters</h3>
-
-<dl>
-<dt>state</dt>
-  <dd>
-<em>Required</em> <strong>string</strong> State of the status - can be one of <code>pending</code>,
-<code>success</code>, <code>error</code>, or <code>failure</code>.</dd>
-  <dt>target_url</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> Target url to associate with this status.  This
-URL will be linked from the GitHub UI to allow users to easily see the
-‘source’ of the Status.</dd>
-  <dd>
-    <p>For example, if your Continuous Integration system is posting build
-status, you would want to provide the deep link for the build output for
-this specific sha - <code>http://ci.example.com/johndoe/my-repo/builds/sha</code>.</p>
-  </dd>
-  <dt>description</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> Short description of the status</dd>
-</dl><h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/repos/octocat/example/statuses/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
-  <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
-  <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
     <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<span class="p">]</span></code></pre>
+
+<h2 id="list-repositories-being-starred">List repositories being starred</h2>
+
+<p>List repositories being starred by a user.</p>
+
+<pre><code># Using github.v3 media type.
+GET /users/:user/starred
+
+# Legacy, using github.beta media type.
+GET /users/:user/watched
+</code></pre>
+
+<p>List repositories being watched by the authenticated user.</p>
+
+<pre><code># Using github.v3 media type.
+GET /user/starred
+
+# Legacy, using github.beta media type.
+GET /user/watched
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"clone_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"git://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"ssh_url"</span><span class="o">:</span> <span class="s2">"git@github.com:octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"svn_url"</span><span class="o">:</span> <span class="s2">"https://svn.github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"mirror_url"</span><span class="o">:</span> <span class="s2">"git://git.example.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"master_branch"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:14:43Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="check-if-you-are-starring-a-repository">Check if you are starring a repository</h2>
+
+<p>Requires for the user to be authenticated.</p>
+
+<pre><code># Using github.v3 media type.
+GET /user/starred/:user/:repo
+
+# Legacy, using github.beta media type.
+GET /user/watched/:user/:repo
+</code></pre>
+
+<h3 id="response-if-this-repository-is-watched-by-you">Response if this repository is watched by you</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h3 id="response-if-this-repository-is-not-watched-by-you">Response if this repository is not watched by you</h3>
+
+<pre class="headers no-response"><code>Status: 404 Not Found
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="star-a-repository">Star a repository</h2>
+
+<p>Requires for the user to be authenticated.</p>
+
+<pre><code># Using github.v3 media type.
+PUT /user/starred/:user/:repo
+
+# Legacy, using github.beta media type.
+PUT /user/watched/:user/:repo
+</code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="unstar-a-repository">Unstar a repository</h2>
+
+<p>Requires for the user to be authenticated.</p>
+
+<pre><code># Using github.v3 media type.
+DELETE /user/starred/:user/:repo
+
+# Legacy, using github.beta media type.
+DELETE /user/watched/:user/:repo
+</code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

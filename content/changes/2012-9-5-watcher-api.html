@@ -25,7 +25,7 @@ The current [Repository Starring][starring-api] methods look like this:
 * `/users/:user/watched` - A list of repositories that a user has starred.
 * `/user/watched` - A list of repositories the current user has starred.
 
-[starring-api]: http://developer.github.com/v3/repos/watching/
+[starring-api]: http://developer.github.com/v3/repos/starring/
 
 ## Phase 1: Add Watchers as Subscriptions
 
@@ -43,20 +43,21 @@ We'll also add a copy of the legacy Watchers API in the new endpoint:
 * `/users/:user/starred` - A list of repositories that a user has starred.
 * `/user/starred` - A list of repositories the current user has starred.
 
-This will be done with the current mime type for the API:
+This is in place _now_ with the current media type for the API:
 
     application/vnd.github.beta+json
 
 If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the "Accept" header.  You should do this now, even
-before Phase 1 starts.
+requests pass that value for the "Accept" header.  You should do this now.  This
+can be verified by checking the `X-GitHub-Media-Type` header on all API
+responses.
 
     # Accesses a user's starred repositories.
     curl https://api.github.com/user/watched \
       -H "Accept: application/vnd.github.beta+json"
 
 This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
-the "beta" mime type, and makes the "v3" mime type the implicit default
+the "beta" media type, and makes the "v3" media type the implicit default
 for API requests.
 
 ## Phase 2: Switch `/watchers` API Endpoint
@@ -65,13 +66,13 @@ The "watch" endpoints will now be a copy of the "subscription" endpoints.  You
 will have to use `/user/starred` to get a user's starred repositories, not
 `/user/watched`.
 
-This requires a new mime type value:
+This requires a new media type value:
 
     application/vnd.github.v3+json
 
 This is a breaking change from Phase 1.  We will release this change in an
 experimental mode first, letting developers gracefully upgrade their
-applications by specifying the new mime value for the Accept header.
+applications by specifying the new media value for the Accept header.
 
     # Accesses a user's watched repositories.
     curl https://api.github.com/user/watched \
@@ -83,6 +84,6 @@ This phase involves disabling the subscription endpoints completely.  At this
 point, you should be using the starring endpoints for starred repositories, and
 the watch endpoints for watched repositories.
 
-Keep on passing the "v3" mimetype in your application, until the API has
+Keep on passing the "v3" media type in your application, until the API has
 another breaking change to make.
 

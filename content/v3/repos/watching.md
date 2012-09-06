@@ -14,7 +14,8 @@ Starring](/v3/repos/starring) for simple repository bookmarks.
 We recently [changed the way watching
 works](https://github.com/blog/1204-notifications-stars) on GitHub.  Until 3rd
 party applications stop using the "watcher" endpoints for the current Starring
-API, the Watching API will use the below "subscription" endpoints.
+API, the Watching API will use the below "subscription" endpoints.  Check the
+[Watcher API Change post](/changes/2012-9-5-watcher-api/) for more.
 
 ## List watchers
 

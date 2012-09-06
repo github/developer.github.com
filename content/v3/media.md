@@ -1,20 +1,20 @@
 ---
-title: Custom Mime Types | GitHub API
+title: Custom Media Types | GitHub API
 ---
 
-# GitHub Mime Types
+# GitHub Media Types
 
-Custom mime types are used in the API to let consumers choose the format
+Custom media types are used in the API to let consumers choose the format
 of the data they wish to receive. This is done by adding one or more of
-the following types to the `Accept` header when you make a request. Mime
-types are specific to resources, allowing them to change independently
-and support formats that other resources don't.
+the following types to the `Accept` header when you make a request. Media types
+are specific to resources, allowing them to change independently and support
+formats that other resources don't.
 
-All GitHub mime types look like this:
+All GitHub media types look like this:
 
     application/vnd.github[.version].param[+json]
 
-The most basic mime types the API supports are:
+The most basic media types the API supports are:
 
     application/json
     application/vnd.github+json
@@ -53,14 +53,14 @@ For specifics on versions, check the [API changelog](/v3/changelog).
 
 The body of a comment can be written in [GitHub Flavored Markdown][gfm].
 Issues, Issue Comments, Pull Request Comments, and Gist Comments all
-accept these same mime types:
+accept these same media types:
 
 ### Raw
 
     application/vnd.github.VERSION.raw+json
 
 Return the raw markdown body. Response will include `body`. This is the
-default if you do not pass any specific mime type.
+default if you do not pass any specific media type.
 
 ### Text
 
@@ -85,7 +85,7 @@ Return raw, text and html representations. Response will include `body`,
 
 ## Git Blob Properties
 
-The following mime types are allowed when getting a blob:
+The following media types are allowed when getting a blob:
 
 ### JSON
 

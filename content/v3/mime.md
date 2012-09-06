@@ -30,6 +30,23 @@ put the version before the property:
 
     application/vnd.github.beta.raw+json
 
+You can check the current version through every response's headers.  Look
+for the `X-GitHub-Media-Type` header:
+
+    $ curl https://api.github.com/users/technoweenie -I
+    HTTP/1.1 200 OK
+    X-GitHub-Media-Type: github.beta
+
+    $ curl https://api.github.com/users/technoweenie -I \
+      -H "Accept: application/vnd.github.full+json"
+    HTTP/1.1 200 OK
+    X-GitHub-Media-Type: github.beta; param=full; format=json
+
+    $ curl https://api.github.com/users/technoweenie -I \
+      -H "Accept: application/vnd.github.v3.full+json"
+    HTTP/1.1 200 OK
+    X-GitHub-Media-Type: github.v3; param=full; format=json
+
 For specifics on versions, check the [API changelog](/v3/changelog).
 
 ## Comment Body Properties

@@ -4,6 +4,9 @@ title: Repository Starring | GitHub API
 
 # Repository Starring API
 
+* TOC
+{:toc}
+
 Repository Starring is a feature that lets users bookmark repositories.  Stars
 are shown next to repositories to show an approximate level of interest.  Stars
 have no effect on notifications or the activity feed.  For that, see [Repository

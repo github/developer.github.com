@@ -4,12 +4,12 @@ title: Repository Watching | GitHub API
 
 # Repository Watching API
 
+* TOC
+{:toc}
+
 Watching a Repository registers the user to receive notificactions on new
 discussions, as well as events in the user's activity feed.  See [Repository
 Starring](/v3/repos/starring) for simple repository bookmarks.
-
-* TOC
-{:toc}
 
 We recently [changed the way watching
 works](https://github.com/blog/1204-notifications-stars) on GitHub.  Until 3rd

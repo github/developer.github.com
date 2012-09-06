@@ -4,6 +4,9 @@ title: Organization Members | GitHub API
 
 # Org Members API
 
+* TOC
+{:toc}
+
 ## List members
 
 List all users who are members of an organization. A member is a user

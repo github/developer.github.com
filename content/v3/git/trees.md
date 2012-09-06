@@ -4,6 +4,9 @@ title: Git Trees | GitHub API
 
 # Trees API
 
+* TOC
+{:toc}
+
 ## Get a Tree
 
     GET /repos/:user/:repo/git/trees/:sha

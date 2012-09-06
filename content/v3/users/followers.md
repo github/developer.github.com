@@ -4,6 +4,9 @@ title: User Followers | GitHub API
 
 # User Followers API
 
+* TOC
+{:toc}
+
 ## List followers of a user
 
 List a user's followers:

@@ -4,6 +4,9 @@ title: Repo Forks | GitHub API
 
 # Repo Forks API
 
+* TOC
+{:toc}
+
 ## List forks
 
     GET /repos/:user/:repo/forks

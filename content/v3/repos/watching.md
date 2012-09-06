@@ -4,6 +4,9 @@ title: Repo Watching | GitHub API
 
 # Repo Watching API
 
+* TOC
+{:toc}
+
 We recently [changed the way watching
 works](https://github.com/blog/1204-notifications-stars) on GitHub. We hope to
 roll out many of these features in the API soon. Until then, the [Watchers

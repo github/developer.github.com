@@ -4,6 +4,9 @@ title: Gist Comments | GitHub API
 
 # Gist Comments API
 
+* TOC
+{:toc}
+
 Gist Comments leverage [these](#custom-mime-types) custom mime types.
 You can read more about the use of mime types in the API
 [here](/v3/mime/).

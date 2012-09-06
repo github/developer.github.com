@@ -4,6 +4,9 @@ title: Git Refs | GitHub API
 
 # References API
 
+* TOC
+{:toc}
+
 ## Get a Reference
 
     GET /repos/:user/:repo/git/refs/:ref

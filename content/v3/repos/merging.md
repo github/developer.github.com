@@ -4,6 +4,9 @@ title: Repo Merging | GitHub API
 
 # Repo Merging API
 
+* TOC
+{:toc}
+
 The Repo Merging API supports merging branches in a repository. This accomplishes
 essentially the same thing as merging one branch into another in a local repository
 and then pushing to GitHub. The benefit is that the merge is done on the server side

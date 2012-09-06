@@ -22,7 +22,6 @@ more.
 
 ## List Stargazers
 
-    # Using github.v3 media type.
     GET /repos/:user/:repo/stargazers
 
     # Legacy, using github.beta media type.
@@ -37,7 +36,6 @@ more.
 
 List repositories being starred by a user.
 
-    # Using github.v3 media type.
     GET /users/:user/starred
 
     # Legacy, using github.beta media type.
@@ -45,7 +43,6 @@ List repositories being starred by a user.
 
 List repositories being watched by the authenticated user.
 
-    # Using github.v3 media type.
     GET /user/starred
 
     # Legacy, using github.beta media type.
@@ -60,7 +57,6 @@ List repositories being watched by the authenticated user.
 
 Requires for the user to be authenticated.
 
-    # Using github.v3 media type.
     GET /user/starred/:user/:repo
 
     # Legacy, using github.beta media type.
@@ -78,7 +74,6 @@ Requires for the user to be authenticated.
 
 Requires for the user to be authenticated.
 
-    # Using github.v3 media type.
     PUT /user/starred/:user/:repo
 
     # Legacy, using github.beta media type.
@@ -92,7 +87,6 @@ Requires for the user to be authenticated.
 
 Requires for the user to be authenticated.
 
-    # Using github.v3 media type.
     DELETE /user/starred/:user/:repo
 
     # Legacy, using github.beta media type.

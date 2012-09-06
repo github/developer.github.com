@@ -25,7 +25,7 @@ more.
     # Using github.v3 media type.
     GET /repos/:user/:repo/stargazers
 
-    # Legacy, using github.beta media type..
+    # Legacy, using github.beta media type.
     GET /repos/:user/:repo/watchers
 
 ### Response

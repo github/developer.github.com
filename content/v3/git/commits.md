@@ -4,6 +4,9 @@ title: Git Commits | GitHub API
 
 # Commits API
 
+* TOC
+{:toc}
+
 ## Get a Commit
 
     GET /repos/:user/:repo/git/commits/:sha

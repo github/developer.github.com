@@ -4,6 +4,9 @@ title: Git Blobs | GitHub API
 
 # Blobs API
 
+* TOC
+{:toc}
+
 Since blobs can be any arbitrary binary data, the input and responses
 for the blob API takes an encoding parameter that can be either `utf-8`
 or `base64`.  If your data cannot be losslessly sent as a UTF-8 string,

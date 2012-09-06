@@ -4,6 +4,9 @@ title: Statuses | GitHub API
 
 # Repo Statuses API
 
+* TOC
+{:toc}
+
 The Status API allows external services to mark commits with a success,
 failure, error, or pending `state`, which is then reflected in pull requests
 involving those commits.

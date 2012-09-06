@@ -14,24 +14,8 @@ organization (if applicable).
 Note that some of these events may not be rendered in timelines.
 They're only created for various internal and repository hooks.
 
-* <a href="#commitcommentevent">CommitCommentEvent</a>
-* <a href="#createevent">CreateEvent</a>
-* <a href="#deleteevent">DeleteEvent</a>
-* <a href="#downloadevent">DownloadEvent</a>
-* <a href="#followevent">FollowEvent</a>
-* <a href="#forkevent">ForkEvent</a>
-* <a href="#forkapplyevent">ForkApplyEvent</a>
-* <a href="#gistevent">GistEvent</a>
-* <a href="#gollumevent">GollumEvent</a>
-* <a href="#issuecommentevent">IssueCommentEvent</a>
-* <a href="#issuesevent">IssuesEvent</a>
-* <a href="#memberevent">MemberEvent</a>
-* <a href="#publicevent">PublicEvent</a>
-* <a href="#pullrequestevent">PullRequestEvent</a>
-* <a href="#pullrequestreviewcommentevent">PullRequestReviewCommentEvent</a>
-* <a href="#pushevent">PushEvent</a>
-* <a href="#teamaddevent">TeamAddEvent</a>
-* <a href="#watchevent">WatchEvent</a>
+* TOC
+{:toc}
 
 ## CommitCommentEvent
 

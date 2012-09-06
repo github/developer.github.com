@@ -4,6 +4,9 @@ title: OAuth | GitHub API
 
 # OAuth
 
+* TOC
+{:toc}
+
 OAuth2 is a protocol that lets external apps request authorization to
 private details in a user's GitHub account without getting their
 password. This is preferred over Basic Authentication because tokens can

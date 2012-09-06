@@ -4,6 +4,9 @@ title: Issue Assignees | GitHub API
 
 # Assignees API
 
+* TOC
+{:toc}
+
 ## List assignees
 
 This call lists all the available assignees (owner + collaborators) to which

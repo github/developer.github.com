@@ -4,6 +4,9 @@ title: Markdown Rendering | GitHub API
 
 # Markdown Rendering API
 
+* TOC
+{:toc}
+
 ## Render an arbitrary Markdown document
 
 	POST /markdown
@@ -34,7 +37,7 @@ context
 	%(<p>Hello world <a href="http://github.com/github/linguist/issues/1" class="issue-link" title="This is a simple issue">github/linguist#1</a> <strong>cool</strong>, and <a href="http://github.com/github/gollum/issues/1" class="issue-link" title="This is another issue">#1</a>!</p>), 200
 %>
 
-# Render a Markdown document in raw mode
+## Render a Markdown document in raw mode
 
 	POST /markdown/raw
 

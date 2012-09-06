@@ -4,6 +4,9 @@ title: Issue Events | GitHub API
 
 # Issue Events API
 
+* TOC
+{:toc}
+
 Records various events that occur around an Issue or Pull Request. This is
 useful both for display on issue/pull request information pages and also to
 determine who should be notified of comments.

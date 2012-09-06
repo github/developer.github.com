@@ -4,7 +4,10 @@ title: Organizations | GitHub API
 
 # Orgs API
 
-## List
+* TOC
+{:toc}
+
+## List User Organizations
 
 List all public organizations for a user.
 
@@ -19,7 +22,7 @@ List public and private organizations for the authenticated user.
 <%= headers 200, :pagination => true %>
 <%= json(:org) { |h| [h] } %>
 
-## Get
+## Get an Organizations
 
     GET /orgs/:org
 
@@ -28,7 +31,7 @@ List public and private organizations for the authenticated user.
 <%= headers 200 %>
 <%= json(:full_org) %>
 
-## Edit
+## Edit an Organization
 
     PATCH /orgs/:org
 

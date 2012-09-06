@@ -4,6 +4,9 @@ title: Issue Comments | GitHub API
 
 # Issue Comments API
 
+* TOC
+{:toc}
+
 The Issue Comments API supports listing, viewing, editing, and creating
 comments on issues and pull requests.
 

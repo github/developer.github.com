@@ -4,6 +4,9 @@ title: User Emails | GitHub API
 
 # User Emails API
 
+* TOC
+{:toc}
+
 Management of email addresses via the API requires that you are
 authenticated.
 

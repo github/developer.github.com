@@ -4,6 +4,9 @@ title: Pull Request Comments | GitHub API
 
 # Pull Request Review Comments API
 
+* TOC
+{:toc}
+
 Pull Request Review Comments are comments on a portion of the unified
 diff.  These are separate from Commit Comments (which are applied
 directly to a commit, outside of the Pull Request view), and Issue

@@ -4,6 +4,9 @@ title: Repo Hooks | GitHub API
 
 # Repo Hooks API
 
+* TOC
+{:toc}
+
 The Repository Hooks API manages the post-receive web and service hooks
 for a repository.  There are two main APIs to manage these hooks: a JSON
 HTTP API, and [PubSubHubbub](#pubsubhubbub).

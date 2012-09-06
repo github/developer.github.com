@@ -4,6 +4,9 @@ title: Issues | GitHub API
 
 # Issues API
 
+* TOC
+{:toc}
+
 Issues leverage [these](#custom-mime-types) custom mime types. You can
 read more about the use of mime types in the API [here](/v3/mime/).
 

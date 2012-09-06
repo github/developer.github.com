@@ -4,6 +4,9 @@ title: User Public Keys | GitHub API
 
 # User Public Keys API
 
+* TOC
+{:toc}
+
 Management of public keys via the API requires that you are
 authenticated.
 

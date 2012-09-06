@@ -18,7 +18,7 @@ end
 
 compile '/feed/' do
   filter :erb
-  filter :kramdown
+  filter :kramdown, :toc_levels => [2]
   filter :colorize_syntax,
     :colorizers => {:javascript => :pygmentsrb}
 end
@@ -26,7 +26,7 @@ end
 %w(v3 */).each do |version|
   compile "/changes/#{version}" do
     filter :erb
-    filter :kramdown
+    filter :kramdown, :toc_levels => [2]
     filter :colorize_syntax,
       :colorizers => {:javascript => :pygmentsrb}
     layout 'changes' if version[0] == '*'
@@ -36,7 +36,7 @@ end
 
 compile '*' do
   filter :erb
-  filter :kramdown
+  filter :kramdown, :toc_levels => [2]
   filter :colorize_syntax,
     :colorizers => {:javascript => :pygmentsrb}
   layout 'default'

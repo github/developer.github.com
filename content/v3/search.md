@@ -4,6 +4,9 @@ title: Search | GitHub API
 
 # Search
 
+* TOC
+{:toc}
+
 This is a listing of the Search API features from API v2 that have been ported to API
 v3. There should be no changes, other than the new URL and JSON output format.
 

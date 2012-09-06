@@ -4,6 +4,9 @@ title: Repo Comments | GitHub API
 
 # Repo Comments API
 
+* TOC
+{:toc}
+
 ## List commit comments for a repository
 
 Commit Comments leverage [these](#custom-mime-types) custom mime types. You can

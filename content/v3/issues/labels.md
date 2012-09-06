@@ -4,6 +4,9 @@ title: Issue Labels | GitHub API
 
 # Labels API
 
+* TOC
+{:toc}
+
 ## List all labels for this repository
 
     GET /repos/:user/:repo/labels

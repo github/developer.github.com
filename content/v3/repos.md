@@ -4,6 +4,9 @@ title: Repos | GitHub API
 
 # Repos API
 
+* TOC
+{:toc}
+
 ## List your repositories
 
 List repositories for the authenticated user.

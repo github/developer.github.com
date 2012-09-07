@@ -17,12 +17,12 @@ planned changes to the API.
 
     Accept: application/vnd.github.beta+json
 
-The GitHub API version is currently in beta.  [The `beta` mime type](/v3/mime/) property will
-be valid until sometime in 2012.  A notice will be given closer to the
-actual date.
+The GitHub API version is currently in beta.  [The `beta` media type](/v3/media/)
+property will be valid until sometime in 2013.  A notice will be given closer
+to the actual date.
 
-We consider the beta API unbreakable, so please [file a support
-issue](https://github.com/contact) if you have problems.
+We consider the "beta" API unchangeable.  [File a support issue](https://github.com/contact)
+if you have problems.
 
 ### Upcoming Version
 

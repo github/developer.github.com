@@ -43,6 +43,7 @@ you have any problems or requests please contact
 
 <ul id="markdown-toc">
 <li><a href="#schema">Schema</a></li>
+  <li><a href="#parameters">Parameters</a></li>
   <li><a href="#client-errors">Client Errors</a></li>
   <li><a href="#http-verbs">HTTP Verbs</a></li>
   <li><a href="#authentication">Authentication</a></li>
@@ -80,6 +81,27 @@ Content-Length: 0
 
 <pre><code>YYYY-MM-DDTHH:MM:SSZ
 </code></pre>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>Many API methods take optional parameters. For GET requests, any parameters not
+specified as a segment in the path can be passed as an HTTP query string
+parameter:</p>
+
+<pre class="terminal">
+$ curl -i "https://api.github.com/repos/mojombo/jekyll/issues?state=closed"
+</pre>
+
+<p>In this example, the ‘mojombo’ and ‘jekyll’ values are provided for the <code>:user</code>
+and <code>:repo</code> parameters in the path while <code>:state</code> is passed in the query
+string.</p>
+
+<p>For POST requests, parameters not included in the URL should be encoded as JSON
+with a Content-Type of ‘application/x-www-form-urlencoded’:</p>
+
+<pre class="terminal">
+$ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/authorizations
+</pre>
 
 <h2 id="client-errors">Client Errors</h2>
 

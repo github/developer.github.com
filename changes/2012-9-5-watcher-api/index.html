@@ -55,9 +55,9 @@
 
 
 <p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as “Watching”, is now “Starring”.  Starring is basically
-a way to bookmark interesting repositories.  Watching is a way to indicate that
-you want to receive email or web notifications on a Repository.</p>
+used to be known as “Watching” is now “Starring”.  Starring is basically a way
+to bookmark interesting repositories.  Watching is a way to indicate that you
+want to receive email or web notifications on a Repository.</p>
 
 <p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
 we change this in a way that developers can gracefully upgrade their
@@ -78,7 +78,7 @@ phases over an extended period of time.</p>
 </ul><h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
 
 <p>This phase exposes Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.  This phase will happen
+keep from clashing with the legacy endpoints.  This phase will happen
 automatically and will not break your application until Phase 3 starts.</p>
 
 <ul>
@@ -142,8 +142,8 @@ curl https://api.github.com/user/watched \
 point, you should be using the starring endpoints for starred repositories, and
 the watch endpoints for watched repositories.  No date has been set yet, but we
 expect this to be <em>3-6 months</em> after Phase 2 is in place.  This should give
-developers enough time to push changes out carefully.  If they use popular
-API wrappers, the work will likely mostly be done for them.</p>
+developers enough time for a smooth upgrade path.  If they use popular API
+wrappers, the work will likely mostly be done for them.</p>
 
 <p>Keep on passing the “v3” media type in your application, until the API has
 another breaking change to make.  If you can’t make the deadline for Phase 3,

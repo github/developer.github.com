@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><id>http://developer.github.com/</id><title>GitHub API Changes</title>
-<updated>2012-09-05T05:00:00Z</updated><link rel="alternate" href="http://developer.github.com/">
+<updated>2012-09-05T06:00:00Z</updated><link rel="alternate" href="http://developer.github.com/">
 <link rel="self" href="http://developer.github.com/changes.atom">
 <author><name>technoweenie</name><uri>https://github.com/technoweenie</uri></author><entry><id>tag:developer.github.com,2012-09-05:/changes/2012-9-5-watcher-api/</id><title type="html">Upcoming Changes to Watcher and Star APIs</title>
-<published>2012-09-05T05:00:00Z</published><updated>2012-09-05T05:00:00Z</updated><author><name>technoweenie</name><uri>https://github.com/technoweenie</uri></author><link rel="alternate" href="http://developer.github.com/changes/2012-9-5-watcher-api/">
+<published>2012-09-05T06:00:00Z</published><updated>2012-09-05T06:00:00Z</updated><author><name>technoweenie</name><uri>https://github.com/technoweenie</uri></author><link rel="alternate" href="http://developer.github.com/changes/2012-9-5-watcher-api/">
 <content type="html">&lt;p&gt;We recently &lt;a href="https://github.com/blog/1204-notifications-stars"&gt;changed the Watcher behavior&lt;/a&gt; on GitHub.  What
-used to be known as “Watching”, is now “Starring”.  Starring is basically
-a way to bookmark interesting repositories.  Watching is a way to indicate that
-you want to receive email or web notifications on a Repository.&lt;/p&gt;
+used to be known as “Watching” is now “Starring”.  Starring is basically a way
+to bookmark interesting repositories.  Watching is a way to indicate that you
+want to receive email or web notifications on a Repository.&lt;/p&gt;
 
 &lt;p&gt;This works well on GitHub.com, but poses a problem for the GitHub API.  How do
 we change this in a way that developers can gracefully upgrade their
@@ -27,7 +27,7 @@ phases over an extended period of time.&lt;/p&gt;
 &lt;/ul&gt;&lt;h2 id="phase-1-add-watchers-as-subscriptions"&gt;Phase 1: Add Watchers as Subscriptions&lt;/h2&gt;
 
 &lt;p&gt;This phase exposes Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoint.  This phase will happen
+keep from clashing with the legacy endpoints.  This phase will happen
 automatically and will not break your application until Phase 3 starts.&lt;/p&gt;
 
 &lt;ul&gt;
@@ -91,8 +91,8 @@ curl https://api.github.com/user/watched \
 point, you should be using the starring endpoints for starred repositories, and
 the watch endpoints for watched repositories.  No date has been set yet, but we
 expect this to be &lt;em&gt;3-6 months&lt;/em&gt; after Phase 2 is in place.  This should give
-developers enough time to push changes out carefully.  If they use popular
-API wrappers, the work will likely mostly be done for them.&lt;/p&gt;
+developers enough time for a smooth upgrade path.  If they use popular API
+wrappers, the work will likely mostly be done for them.&lt;/p&gt;
 
 &lt;p&gt;Keep on passing the “v3” media type in your application, until the API has
 another breaking change to make.  If you can’t make the deadline for Phase 3,

@@ -22,7 +22,7 @@ List public and private organizations for the authenticated user.
 <%= headers 200, :pagination => true %>
 <%= json(:org) { |h| [h] } %>
 
-## Get an Organizations
+## Get an Organization
 
     GET /orgs/:org
 

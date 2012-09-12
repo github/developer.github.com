@@ -14,7 +14,7 @@ Comments (which do not reference a portion of the unified diff).
 
 Pull Request Review Comments leverage [these](#custom-mime-types) custom mime
 types. You can read more about the use of mime types in the API
-[here](/v3/mime/).
+[here](/v3/media/).
 
 ## List comments on a pull request
 
@@ -117,7 +117,7 @@ body
 ## Custom Mime Types
 
 These are the supported mime types for pull request comments. You can read
-more about the use of mime types in the API [here](/v3/mime/).
+more about the use of mime types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

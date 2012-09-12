@@ -12,7 +12,7 @@ comments on issues and pull requests.
 
 Issue Comments leverage [these](#custom-mime-types) custom mime types.
 You can read more about the use of mime types in the API
-[here](/v3/mime/).
+[here](/v3/media/).
 
 ## List comments on an issue
 
@@ -77,7 +77,7 @@ body
 ## Custom Mime Types
 
 These are the supported mime types for issue comments. You can read more
-about the use of mime types in the API [here](/v3/mime/).
+about the use of mime types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

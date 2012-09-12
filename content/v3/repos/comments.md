@@ -10,7 +10,7 @@ title: Repo Comments | GitHub API
 ## List commit comments for a repository
 
 Commit Comments leverage [these](#custom-mime-types) custom mime types. You can
-read more about the use of mime types in the API [here](/v3/mime/).
+read more about the use of mime types in the API [here](/v3/media/).
 
 Comments are ordered by ascending ID.
 
@@ -104,7 +104,7 @@ body
 ## Custom Mime Types
 
 These are the supported mime types for commit comments. You can read more
-about the use of mime types in the API [here](/v3/mime/).
+about the use of mime types in the API [here](/v3/media/).
 
     application/vnd.github-commitcomment.raw+json
     application/vnd.github-commitcomment.text+json

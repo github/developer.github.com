@@ -13,7 +13,7 @@ or `base64`.  If your data cannot be losslessly sent as a UTF-8 string,
 you can base64 encode it.
 
 Blobs leverage [these](#custom-mime-types) custom mime types. You can
-read more about the use of mime types in the API [here](/v3/mime/).
+read more about the use of mime types in the API [here](/v3/media/).
 
 ## Get a Blob
 
@@ -41,7 +41,7 @@ read more about the use of mime types in the API [here](/v3/mime/).
 ## Custom Mime Types
 
 These are the supported mime types for blobs. You can read more about the
-use of mime types in the API [here](/v3/mime/).
+use of mime types in the API [here](/v3/media/).
 
     application/json
     application/vnd.github.VERSION.raw

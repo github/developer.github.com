@@ -31,6 +31,12 @@ author
 : _Optional_ **string** - GitHub login, name, or email by which to filter by
 commit author
 
+since
+: _Optional_ **ISO 8601 Date** - Only commits after this date will be returned
+
+until
+: _Optional_ **ISO 8601 Date** - Only commits before this date will be returned
+
 ### Response
 
 <%= headers 200 %>

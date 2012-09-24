@@ -33,7 +33,7 @@ Pull Requests have these possible link relations:
 
 ## List pull requests
 
-    GET /repos/:user/:repo/pulls
+    GET /repos/:owner/:repo/pulls
 
 ### Parameters
 
@@ -48,7 +48,7 @@ is `open`.
 
 ## Get a single pull request
 
-    GET /repos/:user/:repo/pulls/:number
+    GET /repos/:owner/:repo/pulls/:number
 
 ### Response
 
@@ -57,7 +57,7 @@ is `open`.
 
 ## Create a pull request
 
-    POST /repos/:user/:repo/pulls
+    POST /repos/:owner/:repo/pulls
 
 ### Input
 
@@ -108,7 +108,7 @@ Pull Request.
 
 ## Update a pull request
 
-    PATCH /repos/:user/:repo/pulls/:number
+    PATCH /repos/:owner/:repo/pulls/:number
 
 ### Input
 
@@ -135,7 +135,7 @@ state
 
 ## List commits on a pull request
 
-    GET /repos/:user/:repo/pulls/:number/commits
+    GET /repos/:owner/:repo/pulls/:number/commits
 
 ### Response
 
@@ -144,7 +144,7 @@ state
 
 ## List pull requests files
 
-    GET /repos/:user/:repo/pulls/:number/files
+    GET /repos/:owner/:repo/pulls/:number/files
 
 ### Response
 
@@ -153,7 +153,7 @@ state
 
 ## Get if a pull request has been merged
 
-    GET /repos/:user/:repo/pulls/:number/merge
+    GET /repos/:owner/:repo/pulls/:number/merge
 
 ### Response if pull request has been merged
 
@@ -165,7 +165,7 @@ state
 
 ## Merge a pull request (Merge Button&trade;)
 
-    PUT /repos/:user/:repo/pulls/:number/merge
+    PUT /repos/:owner/:repo/pulls/:number/merge
 
 ### Input
 

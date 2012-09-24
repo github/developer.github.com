@@ -12,7 +12,7 @@ lightweight tags.
 
 ## Get a Tag
 
-    GET /repos/:user/:repo/git/tags/:sha
+    GET /repos/:owner/:repo/git/tags/:sha
 
 ### Response
 
@@ -28,7 +28,7 @@ the `refs/tags/[tag]` reference.  If you want to create a lightweight
 tag, you simply have to create the reference - this call would be
 unnecessary.
 
-    POST /repos/:user/:repo/git/tags
+    POST /repos/:owner/:repo/git/tags
 
 ### Parameters
 
@@ -57,6 +57,6 @@ tagger.date
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/repos/:user/:repo/git/tags/:sha" %>
+      :Location => "https://api.github.com/repos/:owner/:repo/git/tags/:sha" %>
 <%= json :gittag %>
 

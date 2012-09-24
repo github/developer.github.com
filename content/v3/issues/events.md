@@ -51,7 +51,7 @@ assigned
 
 ## List events for an issue
 
-    GET /repos/:user/:repo/issues/:issue_number/events
+    GET /repos/:owner/:repo/issues/:issue_number/events
 
 ### Response
 
@@ -60,7 +60,7 @@ assigned
 
 ## List events for a repository
 
-    GET /repos/:user/:repo/issues/events
+    GET /repos/:owner/:repo/issues/events
 
 ### Response
 
@@ -69,7 +69,7 @@ assigned
 
 ## Get a single event
 
-    GET /repos/:user/:repo/issues/events/:id
+    GET /repos/:owner/:repo/issues/events/:id
 
 ### Response
 

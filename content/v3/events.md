@@ -25,15 +25,15 @@ All Events have the same response format:
 
 ## List repository events
 
-    GET /repos/:user/:repo/events
+    GET /repos/:owner/:repo/events
 
 ## List issue events for a repository
 
-    GET /repos/:user/:repo/issues/events
+    GET /repos/:owner/:repo/issues/events
 
 ## List public events for a network of repositories
 
-    GET /networks/:user/:repo/events
+    GET /networks/:owner/:repo/events
 
 ## List public events for an organization
 

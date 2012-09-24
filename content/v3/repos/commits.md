@@ -11,7 +11,7 @@ The Repo Commits API supports listing, viewing, and comparing commits in a repos
 
 ## List commits on a repository
 
-    GET /repos/:user/:repo/commits
+    GET /repos/:owner/:repo/commits
 
 _A special note on pagination:_ Due to the way Git works, commits are paginated
 based on SHA instead of page number. Please follow the link headers as outlined
@@ -44,7 +44,7 @@ until
 
 ## Get a single commit
 
-    GET /repos/:user/:repo/commits/:sha
+    GET /repos/:owner/:repo/commits/:sha
 
 ### Response
 
@@ -55,7 +55,7 @@ Note: Diffs with binary data will have no 'patch' property.
 
 ## Compare two commits
 
-    GET /repos/:user/:repo/compare/:base...:head
+    GET /repos/:owner/:repo/compare/:base...:head
 
 ### Response
 

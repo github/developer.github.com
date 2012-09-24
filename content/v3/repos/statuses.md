@@ -27,7 +27,7 @@ access to Statuses **without** also granting access to repo code, while the
 
 ## List Statuses for a specific SHA
 
-    GET /repos/:user/:repo/statuses/:sha
+    GET /repos/:owner/:repo/statuses/:sha
 
 ### Parameters
 
@@ -41,7 +41,7 @@ sha
 
 ## Create a Status
 
-    POST /repos/:user/:repo/statuses/:sha
+    POST /repos/:owner/:repo/statuses/:sha
 
 ### Parameters
 

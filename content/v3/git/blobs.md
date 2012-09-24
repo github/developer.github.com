@@ -17,7 +17,7 @@ read more about the use of mime types in the API [here](/v3/media/).
 
 ## Get a Blob
 
-    GET /repos/:user/:repo/git/blobs/:sha
+    GET /repos/:owner/:repo/git/blobs/:sha
 
 ### Response
 
@@ -26,7 +26,7 @@ read more about the use of mime types in the API [here](/v3/media/).
 
 ## Create a Blob
 
-    POST /repos/:user/:repo/git/blobs
+    POST /repos/:owner/:repo/git/blobs
 
 ### Input
 
@@ -35,7 +35,7 @@ read more about the use of mime types in the API [here](/v3/media/).
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/git/:user/:repo/blob/:sha" %>
+      :Location => "https://api.github.com/git/:owner/:repo/blob/:sha" %>
 <%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15" %>
 
 ## Custom Mime Types

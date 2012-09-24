@@ -22,10 +22,10 @@ more.
 
 ## List Stargazers
 
-    GET /repos/:user/:repo/stargazers
+    GET /repos/:owner/:repo/stargazers
 
     # Legacy, using github.beta media type.
-    GET /repos/:user/:repo/watchers
+    GET /repos/:owner/:repo/watchers
 
 ### Response
 
@@ -57,10 +57,10 @@ List repositories being watched by the authenticated user.
 
 Requires for the user to be authenticated.
 
-    GET /user/starred/:user/:repo
+    GET /user/starred/:owner/:repo
 
     # Legacy, using github.beta media type.
-    GET /user/watched/:user/:repo
+    GET /user/watched/:owner/:repo
 
 ### Response if this repository is watched by you
 
@@ -74,10 +74,10 @@ Requires for the user to be authenticated.
 
 Requires for the user to be authenticated.
 
-    PUT /user/starred/:user/:repo
+    PUT /user/starred/:owner/:repo
 
     # Legacy, using github.beta media type.
-    PUT /user/watched/:user/:repo
+    PUT /user/watched/:owner/:repo
 
 ### Response
 
@@ -87,10 +87,10 @@ Requires for the user to be authenticated.
 
 Requires for the user to be authenticated.
 
-    DELETE /user/starred/:user/:repo
+    DELETE /user/starred/:owner/:repo
 
     # Legacy, using github.beta media type.
-    DELETE /user/watched/:user/:repo
+    DELETE /user/watched/:owner/:repo
 
 ### Response
 

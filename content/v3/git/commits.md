@@ -9,7 +9,7 @@ title: Git Commits | GitHub API
 
 ## Get a Commit
 
-    GET /repos/:user/:repo/git/commits/:sha
+    GET /repos/:owner/:repo/git/commits/:sha
 
 ### Response
 
@@ -18,7 +18,7 @@ title: Git Commits | GitHub API
 
 ## Create a Commit
 
-    POST /repos/:user/:repo/git/commits
+    POST /repos/:owner/:repo/git/commits
 
 ### Parameters
 
@@ -71,6 +71,6 @@ committer.date
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/git/:user/:repo/commit/:sha" %>
+      :Location => "https://api.github.com/git/:owner/:repo/commit/:sha" %>
 <%= json :new_commit %>
 

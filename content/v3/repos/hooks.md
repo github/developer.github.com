@@ -42,7 +42,7 @@ part of the open source [github-services](https://github.com/github/github-servi
 
 ## List
 
-    GET /repos/:user/:repo/hooks
+    GET /repos/:owner/:repo/hooks
 
 ### Response
 
@@ -51,7 +51,7 @@ part of the open source [github-services](https://github.com/github/github-servi
 
 ## Get single hook
 
-    GET /repos/:user/:repo/hooks/:id
+    GET /repos/:owner/:repo/hooks/:id
 
 ### Response
 
@@ -60,7 +60,7 @@ part of the open source [github-services](https://github.com/github/github-servi
 
 ## Create a hook
 
-    POST /repos/:user/:repo/hooks
+    POST /repos/:owner/:repo/hooks
 
 ### Input
 
@@ -99,7 +99,7 @@ triggered on pushes.
 
 ### Edit a hook
 
-    PATCH /repos/:user/:repo/hooks/:id
+    PATCH /repos/:owner/:repo/hooks/:id
 
 ### Input
 
@@ -152,7 +152,7 @@ triggered on pushes.
 This will trigger the hook with the latest push to the current
 repository.
 
-    POST /repos/:user/:repo/hooks/:id/test
+    POST /repos/:owner/:repo/hooks/:id/test
 
 ### Response
 
@@ -160,7 +160,7 @@ repository.
 
 ## Delete a hook
 
-    DELETE /repos/:user/:repo/hooks/:id
+    DELETE /repos/:owner/:repo/hooks/:id
 
 ### Response
 
@@ -170,7 +170,7 @@ repository.
 
 GitHub can also serve as a [PubSubHubbub][pubsub] hub for all repositories.  PSHB is a simple publish/subscribe protocol that lets servers register to receive updates when a topic is updated.  The updates are sent with an HTTP POST request to a callback URL.  Topic URLs for a GitHub repository's pushes are in this format:
 
-    https://github.com/:user/:repo/events/:event
+    https://github.com/:owner/:repo/events/:event
 
 The event can be any Event string that is listed at the top of this
 document.
@@ -181,7 +181,7 @@ POST.  You can also specify to receive the raw JSON body with either an
 `Accept` header, or a `.json` extension.
 
     Accept: application/json
-    https://github.com/:user/:repo/events/push.json
+    https://github.com/:owner/:repo/events/push.json
 
 Callback URLs can use either the `http://` protocol, or `github://`.
 `github://` callbacks specify a GitHub service.
@@ -200,7 +200,7 @@ successful request with curl looks like:
     curl -u "user" -i \
       https://api.github.com/hub \
       -F "hub.mode=subscribe" \
-      -F "hub.topic=https://github.com/:user/:repo/events/push" \
+      -F "hub.topic=https://github.com/:owner/:repo/events/push" \
       -F "hub.callback=http://postbin.org/123"
 
 PubSubHubbub requests can be sent multiple times.  If the hook already
@@ -213,7 +213,7 @@ exists, it will be modified according to the request.
 
 `hub.topic`
 : _Required_ **string** - The URI of the GitHub repository to subscribe
-to.  The path must be in the format of `/:user/:repo/events/:event`.
+to.  The path must be in the format of `/:owner/:repo/events/:event`.
 
 `hub.callback`
 : _Required_ **string** - The URI to receive the updates to the topic.

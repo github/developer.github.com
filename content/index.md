@@ -34,8 +34,8 @@ The API is expected to be finalized Real Soon Now.
 
 * All `*_url` attributes move to a `_links` object.  See [Pull
   Requests](/v3/pulls/#get-a-single-pull-request) for an example.
-* The `/repos/:user/:repo/hooks/:id/test` action becomes
-  `/repos/:user/:repo/hooks/:id/tests`.
+* The `/repos/:owner/:repo/hooks/:id/test` action becomes
+  `/repos/:owner/:repo/hooks/:id/tests`.
 * The `/gists/:id/fork` action becomes `/gists/:id/forks`.
 * Gist forks/history objects become separate API calls.
 * Gist files object is not returned on Gist listings.

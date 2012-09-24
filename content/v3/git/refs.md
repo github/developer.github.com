@@ -9,11 +9,11 @@ title: Git Refs | GitHub API
 
 ## Get a Reference
 
-    GET /repos/:user/:repo/git/refs/:ref
+    GET /repos/:owner/:repo/git/refs/:ref
 
 The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For example, the call to get the data for a branch named `skunkworkz/featureA` would be:
 
-    GET /repos/:user/:repo/git/refs/heads/skunkworkz/featureA
+    GET /repos/:owner/:repo/git/refs/heads/skunkworkz/featureA
 
 ### Response
 
@@ -22,7 +22,7 @@ The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For
 
 ## Get all References
 
-    GET /repos/:user/:repo/git/refs
+    GET /repos/:owner/:repo/git/refs
 
 This will return an array of all the references on the system, including
 things like notes and stashes if they exist on the server.  Anything in
@@ -32,7 +32,7 @@ most common.
 You can also request a sub-namespace. For example, to get all the tag
 references, you can call:
 
-    GET /repos/:user/:repo/git/refs/tags
+    GET /repos/:owner/:repo/git/refs/tags
 
 For a full refs listing, you'll get something that looks like:
 
@@ -42,7 +42,7 @@ For a full refs listing, you'll get something that looks like:
 
 ## Create a Reference
 
-    POST /repos/:user/:repo/git/refs
+    POST /repos/:owner/:repo/git/refs
 
 ### Parameters
 
@@ -65,7 +65,7 @@ sha
 
 ## Update a Reference
 
-    PATCH /repos/:user/:repo/git/refs/:ref
+    PATCH /repos/:owner/:repo/git/refs/:ref
 
 ### Parameters
 
@@ -85,12 +85,12 @@ out or setting it to `false` will make sure you're not overwriting work.
 ### Response
 
 <%= headers 200, \
-      :Location => "https://api.github.com/git/:user/:repo/commit/:sha" %>
+      :Location => "https://api.github.com/git/:owner/:repo/commit/:sha" %>
 <%= json :ref %>
 
 ## Delete a Reference
 
-    DELETE /repos/:user/:repo/git/refs/:ref
+    DELETE /repos/:owner/:repo/git/refs/:ref
 
 Example: Deleting a branch:
 

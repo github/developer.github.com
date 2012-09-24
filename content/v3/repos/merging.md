@@ -17,7 +17,7 @@ The authenticated user will be the author of any merges done through this endpoi
 
 ## Perform a merge
 
-    POST /repos/:user/:repo/merges
+    POST /repos/:owner/:repo/merges
 
 ### Input
 

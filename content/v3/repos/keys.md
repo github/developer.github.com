@@ -9,7 +9,7 @@ title: Repo Deploy Keys | GitHub API
 
 ## List
 
-    GET /repos/:user/:repo/keys
+    GET /repos/:owner/:repo/keys
 
 ### Response
 
@@ -18,7 +18,7 @@ title: Repo Deploy Keys | GitHub API
 
 ## Get
 
-    GET /repos/:user/:repo/keys/:id
+    GET /repos/:owner/:repo/keys/:id
 
 ### Response
 
@@ -27,7 +27,7 @@ title: Repo Deploy Keys | GitHub API
 
 ## Create
 
-    POST /repos/:user/:repo/keys
+    POST /repos/:owner/:repo/keys
 
 ### Input
 
@@ -40,7 +40,7 @@ title: Repo Deploy Keys | GitHub API
 
 ## Edit
 
-    PATCH /repos/:user/:repo/keys/:id
+    PATCH /repos/:owner/:repo/keys/:id
 
 ### Input
 
@@ -53,7 +53,7 @@ title: Repo Deploy Keys | GitHub API
 
 ## Delete
 
-    DELETE /repos/:user/:repo/keys/:id
+    DELETE /repos/:owner/:repo/keys/:id
 
 ### Response
 

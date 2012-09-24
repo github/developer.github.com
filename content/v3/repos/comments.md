@@ -14,7 +14,7 @@ read more about the use of mime types in the API [here](/v3/media/).
 
 Comments are ordered by ascending ID.
 
-    GET /repos/:user/:repo/comments
+    GET /repos/:owner/:repo/comments
 
 ### Response
 
@@ -23,7 +23,7 @@ Comments are ordered by ascending ID.
 
 ## List comments for a single commit
 
-    GET /repos/:user/:repo/commits/:sha/comments
+    GET /repos/:owner/:repo/commits/:sha/comments
 
 ### Response
 
@@ -32,7 +32,7 @@ Comments are ordered by ascending ID.
 
 ## Create a commit comment
 
-    POST /repos/:user/:repo/commits/:sha/comments
+    POST /repos/:owner/:repo/commits/:sha/comments
 
 ### Input
 
@@ -66,7 +66,7 @@ line
 
 ## Get a single commit comment
 
-    GET /repos/:user/:repo/comments/:id
+    GET /repos/:owner/:repo/comments/:id
 
 ### Response
 
@@ -75,7 +75,7 @@ line
 
 ## Update a commit comment
 
-    PATCH /repos/:user/:repo/comments/:id
+    PATCH /repos/:owner/:repo/comments/:id
 
 ### Input
 
@@ -95,7 +95,7 @@ body
 
 ## Delete a commit comment
 
-    DELETE /repos/:user/:repo/comments/:id
+    DELETE /repos/:owner/:repo/comments/:id
 
 ### Response
 

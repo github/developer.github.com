@@ -9,7 +9,7 @@ title: Repo Collaborators | GitHub API
 
 ## List
 
-    GET /repos/:user/:repo/collaborators
+    GET /repos/:owner/:repo/collaborators
 
 ### Response
 
@@ -18,7 +18,7 @@ title: Repo Collaborators | GitHub API
 
 ## Get
 
-    GET /repos/:user/:repo/collaborators/:user
+    GET /repos/:owner/:repo/collaborators/:user
 
 ### Response if user is a collaborator
 
@@ -30,7 +30,7 @@ title: Repo Collaborators | GitHub API
 
 ## Add collaborator
 
-    PUT /repos/:user/:repo/collaborators/:user
+    PUT /repos/:owner/:repo/collaborators/:user
 
 ### Response
 
@@ -38,7 +38,7 @@ title: Repo Collaborators | GitHub API
 
 ## Remove collaborator
 
-    DELETE /repos/:user/:repo/collaborators/:user
+    DELETE /repos/:owner/:repo/collaborators/:user
 
 ### Response
 

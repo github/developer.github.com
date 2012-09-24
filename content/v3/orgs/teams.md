@@ -176,7 +176,7 @@ NOTE: This does not delete the user, it just remove them from the team.
 
 ## Get team repo
 
-    GET /teams/:id/repos/:user/:repo
+    GET /teams/:id/repos/:owner/:repo
 
 ### Response if repo is managed by this team
 
@@ -193,7 +193,7 @@ owner of the org that the team is associated with.  Also, the repo must
 be owned by the organization, or a direct form of a repo owned by the
 organization.
 
-    PUT /teams/:id/repos/:user/:repo
+    PUT /teams/:id/repos/:owner/:repo
 
 ### Response
 
@@ -217,7 +217,7 @@ In order to remove a repo from a team, the authenticated user must be an
 owner of the org that the team is associated with.
 NOTE: This does not delete the repo, it just removes it from the team.
 
-    DELETE /teams/:id/repos/:user/:repo
+    DELETE /teams/:id/repos/:owner/:repo
 
 ### Response
 

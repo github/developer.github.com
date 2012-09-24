@@ -19,7 +19,7 @@ API, the Watching API will use the below "subscription" endpoints.  Check the
 
 ## List watchers
 
-    GET /repos/:user/:repo/subscribers
+    GET /repos/:owner/:repo/subscribers
 
 ### Response
 
@@ -45,7 +45,7 @@ List repositories being watched by the authenticated user.
 
 Requires for the user to be authenticated.
 
-    GET /user/subscriptions/:user/:repo
+    GET /user/subscriptions/:owner/:repo
 
 ### Response if this repository is watched by you
 
@@ -59,7 +59,7 @@ Requires for the user to be authenticated.
 
 Requires for the user to be authenticated.
 
-    PUT /user/subscriptions/:user/:repo
+    PUT /user/subscriptions/:owner/:repo
 
 ### Response
 
@@ -69,7 +69,7 @@ Requires for the user to be authenticated.
 
 Requires for the user to be authenticated.
 
-    DELETE /user/subscriptions/:user/:repo
+    DELETE /user/subscriptions/:owner/:repo
 
 ### Response
 

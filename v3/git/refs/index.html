@@ -45,12 +45,12 @@
   <li><a href="#delete-a-reference">Delete a Reference</a></li>
 </ul><h2 id="get-a-reference">Get a Reference</h2>
 
-<pre><code>GET /repos/:user/:repo/git/refs/:ref
+<pre><code>GET /repos/:owner/:repo/git/refs/:ref
 </code></pre>
 
 <p>The <code>ref</code> in the URL must be formatted as <code>heads/branch</code>, not just <code>branch</code>. For example, the call to get the data for a branch named <code>skunkworkz/featureA</code> would be:</p>
 
-<pre><code>GET /repos/:user/:repo/git/refs/heads/skunkworkz/featureA
+<pre><code>GET /repos/:owner/:repo/git/refs/heads/skunkworkz/featureA
 </code></pre>
 
 <h3 id="response">Response</h3>
@@ -71,7 +71,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-all-references">Get all References</h2>
 
-<pre><code>GET /repos/:user/:repo/git/refs
+<pre><code>GET /repos/:owner/:repo/git/refs
 </code></pre>
 
 <p>This will return an array of all the references on the system, including
@@ -82,7 +82,7 @@ most common.</p>
 <p>You can also request a sub-namespace. For example, to get all the tag
 references, you can call:</p>
 
-<pre><code>GET /repos/:user/:repo/git/refs/tags
+<pre><code>GET /repos/:owner/:repo/git/refs/tags
 </code></pre>
 
 <p>For a full refs listing, you’ll get something that looks like:</p>
@@ -123,7 +123,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create-a-reference">Create a Reference</h2>
 
-<pre><code>POST /repos/:user/:repo/git/refs
+<pre><code>POST /repos/:owner/:repo/git/refs
 </code></pre>
 
 <h3 id="parameters">Parameters</h3>
@@ -161,7 +161,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="update-a-reference">Update a Reference</h2>
 
-<pre><code>PATCH /repos/:user/:repo/git/refs/:ref
+<pre><code>PATCH /repos/:owner/:repo/git/refs/:ref
 </code></pre>
 
 <h3 id="parameters-1">Parameters</h3>
@@ -185,7 +185,7 @@ out or setting it to <code>false</code> will make sure you’re not overwriting 
 <h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
-Location: https://api.github.com/git/:user/:repo/commit/:sha
+Location: https://api.github.com/git/:owner/:repo/commit/:sha
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
@@ -201,7 +201,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="delete-a-reference">Delete a Reference</h2>
 
-<pre><code>DELETE /repos/:user/:repo/git/refs/:ref
+<pre><code>DELETE /repos/:owner/:repo/git/refs/:ref
 </code></pre>
 
 <p>Example: Deleting a branch:</p>

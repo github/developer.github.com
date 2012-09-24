@@ -92,7 +92,7 @@ part of the open source <a href="https://github.com/github/github-services">gith
 
 <h2 id="list">List</h2>
 
-<pre><code>GET /repos/:user/:repo/hooks
+<pre><code>GET /repos/:owner/:repo/hooks
 </code></pre>
 
 <h3 id="response">Response</h3>
@@ -123,7 +123,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-single-hook">Get single hook</h2>
 
-<pre><code>GET /repos/:user/:repo/hooks/:id
+<pre><code>GET /repos/:owner/:repo/hooks/:id
 </code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -150,7 +150,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create-a-hook">Create a hook</h2>
 
-<pre><code>POST /repos/:user/:repo/hooks
+<pre><code>POST /repos/:owner/:repo/hooks
 </code></pre>
 
 <h3 id="input">Input</h3>
@@ -209,7 +209,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="edit-a-hook">Edit a hook</h3>
 
-<pre><code>PATCH /repos/:user/:repo/hooks/:id
+<pre><code>PATCH /repos/:owner/:repo/hooks/:id
 </code></pre>
 
 <h3 id="input-1">Input</h3>
@@ -281,7 +281,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>This will trigger the hook with the latest push to the current
 repository.</p>
 
-<pre><code>POST /repos/:user/:repo/hooks/:id/test
+<pre><code>POST /repos/:owner/:repo/hooks/:id/test
 </code></pre>
 
 <h3 id="response-4">Response</h3>
@@ -292,7 +292,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="delete-a-hook">Delete a hook</h2>
 
-<pre><code>DELETE /repos/:user/:repo/hooks/:id
+<pre><code>DELETE /repos/:owner/:repo/hooks/:id
 </code></pre>
 
 <h3 id="response-5">Response</h3>
@@ -305,7 +305,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>GitHub can also serve as a <a href="http://code.google.com/p/pubsubhubbub/">PubSubHubbub</a> hub for all repositories.  PSHB is a simple publish/subscribe protocol that lets servers register to receive updates when a topic is updated.  The updates are sent with an HTTP POST request to a callback URL.  Topic URLs for a GitHub repository’s pushes are in this format:</p>
 
-<pre><code>https://github.com/:user/:repo/events/:event
+<pre><code>https://github.com/:owner/:repo/events/:event
 </code></pre>
 
 <p>The event can be any Event string that is listed at the top of this
@@ -317,7 +317,7 @@ POST.  You can also specify to receive the raw JSON body with either an
 <code>Accept</code> header, or a <code>.json</code> extension.</p>
 
 <pre><code>Accept: application/json
-https://github.com/:user/:repo/events/push.json
+https://github.com/:owner/:repo/events/push.json
 </code></pre>
 
 <p>Callback URLs can use either the <code>http://</code> protocol, or <code>github://</code>.
@@ -338,7 +338,7 @@ successful request with curl looks like:</p>
 <pre><code>curl -u "user" -i \
   https://api.github.com/hub \
   -F "hub.mode=subscribe" \
-  -F "hub.topic=https://github.com/:user/:repo/events/push" \
+  -F "hub.topic=https://github.com/:owner/:repo/events/push" \
   -F "hub.callback=http://postbin.org/123"
 </code></pre>
 
@@ -354,7 +354,7 @@ exists, it will be modified according to the request.</p>
   <dt><code>hub.topic</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The URI of the GitHub repository to subscribe
-to.  The path must be in the format of <code>/:user/:repo/events/:event</code>.</dd>
+to.  The path must be in the format of <code>/:owner/:repo/events/:event</code>.</dd>
   <dt><code>hub.callback</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The URI to receive the updates to the topic.</dd>

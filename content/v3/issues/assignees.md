@@ -12,7 +12,7 @@ title: Issue Assignees | GitHub API
 This call lists all the available assignees (owner + collaborators) to which
 issues may be assigned.
 
-    GET /repos/:user/:repo/assignees
+    GET /repos/:owner/:repo/assignees
 
 ### Response
 
@@ -23,7 +23,7 @@ issues may be assigned.
 
 You may also check to see if a particular user is an assignee for a repository.
 
-    GET /repos/:user/:repo/assignees/:assignee
+    GET /repos/:owner/:repo/assignees/:assignee
 
 ### Response
 

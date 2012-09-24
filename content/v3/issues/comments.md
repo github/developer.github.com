@@ -16,7 +16,7 @@ You can read more about the use of mime types in the API
 
 ## List comments on an issue
 
-    GET /repos/:user/:repo/issues/:number/comments
+    GET /repos/:owner/:repo/issues/:number/comments
 
 ### Response
 
@@ -25,7 +25,7 @@ You can read more about the use of mime types in the API
 
 ## Get a single comment
 
-    GET /repos/:user/:repo/issues/comments/:id
+    GET /repos/:owner/:repo/issues/comments/:id
 
 ### Response
 
@@ -34,7 +34,7 @@ You can read more about the use of mime types in the API
 
 ## Create a comment
 
-    POST /repos/:user/:repo/issues/:number/comments
+    POST /repos/:owner/:repo/issues/:number/comments
 
 ### Input
 
@@ -52,7 +52,7 @@ body
 
 ## Edit a comment
 
-    PATCH /repos/:user/:repo/issues/comments/:id
+    PATCH /repos/:owner/:repo/issues/comments/:id
 
 ### Input
 
@@ -68,7 +68,7 @@ body
 
 ## Delete a comment
 
-    DELETE /repos/:user/:repo/issues/comments/:id
+    DELETE /repos/:owner/:repo/issues/comments/:id
 
 ### Response
 

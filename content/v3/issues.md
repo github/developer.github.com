@@ -45,7 +45,7 @@ since
 
 ## List issues for a repository
 
-    GET /repos/:user/:repo/issues
+    GET /repos/:owner/:repo/issues
 
 ### Parameters
 
@@ -85,7 +85,7 @@ since
 
 ## Get a single issue
 
-    GET /repos/:user/:repo/issues/:number
+    GET /repos/:owner/:repo/issues/:number
 
 ### Response
 
@@ -94,7 +94,7 @@ since
 
 ## Create an issue
 
-    POST /repos/:user/:repo/issues
+    POST /repos/:owner/:repo/issues
 
 ### Input
 
@@ -132,7 +132,7 @@ issue.
 
 ## Edit an issue
 
-    PATCH /repos/:user/:repo/issues/:number
+    PATCH /repos/:owner/:repo/issues/:number
 
 ### Input
 

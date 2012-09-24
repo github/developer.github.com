@@ -120,7 +120,7 @@ organization.
 
 ## Get
 
-    GET /repos/:user/:repo
+    GET /repos/:owner/:repo
 
 ### Response
 
@@ -129,7 +129,7 @@ organization.
 
 ## Edit
 
-    PATCH /repos/:user/:repo
+    PATCH /repos/:owner/:repo
 
 ### Input
 
@@ -175,7 +175,7 @@ repository, `false` to disable them. Default is `true`.
 
 ## List contributors
 
-    GET /repos/:user/:repo/contributors
+    GET /repos/:owner/:repo/contributors
 
 ### Parameters
 
@@ -192,7 +192,7 @@ in results.
 
 List languages for the specified repository. The value on the right of a language is the number of bytes of code written in that language.
 
-    GET /repos/:user/:repo/languages
+    GET /repos/:owner/:repo/languages
 
 ### Response
 
@@ -204,7 +204,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ## List Teams
 
-    GET /repos/:user/:repo/teams
+    GET /repos/:owner/:repo/teams
 
 ### Response
 
@@ -213,7 +213,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ## List Tags
 
-    GET /repos/:user/:repo/tags
+    GET /repos/:owner/:repo/tags
 
 ### Response
 
@@ -222,7 +222,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ## List Branches
 
-    GET /repos/:user/:repo/branches
+    GET /repos/:owner/:repo/branches
 
 ### Response
 
@@ -231,7 +231,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ## Get Branch
 
-    GET /repos/:user/:repo/branches/:branch
+    GET /repos/:owner/:repo/branches/:branch
 
 ### Response
 
@@ -243,7 +243,7 @@ List languages for the specified repository. The value on the right of a languag
 Deleting a repository requires admin access.  If OAuth is used, the
 `delete_repo` scope is required.
 
-    DELETE /repos/:user/:repo
+    DELETE /repos/:owner/:repo
 
 ### Response
 

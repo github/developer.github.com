@@ -13,7 +13,7 @@ instead.
 
 ## List downloads for a repository
 
-    GET /repos/:user/:repo/downloads
+    GET /repos/:owner/:repo/downloads
 
 ### Response
 
@@ -22,7 +22,7 @@ instead.
 
 ## Get a single download
 
-    GET /repos/:user/:repo/downloads/:id
+    GET /repos/:owner/:repo/downloads/:id
 
 ### Response
 
@@ -34,7 +34,7 @@ instead.
 Creating a new download is a two step process. You must first create a
 new download resource.
 
-    POST /repos/:user/:repo/downloads
+    POST /repos/:owner/:repo/downloads
 
 ### Input
 
@@ -121,7 +121,7 @@ be found [here](http://docs.amazonwebservices.com/AmazonS3/latest/API/).
 
 ## Delete a download
 
-    DELETE /repos/:user/:repo/downloads/:id
+    DELETE /repos/:owner/:repo/downloads/:id
 
 ### Response
 

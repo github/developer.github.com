@@ -9,7 +9,7 @@ title: Repo Forks | GitHub API
 
 ## List forks
 
-    GET /repos/:user/:repo/forks
+    GET /repos/:owner/:repo/forks
 
 ### Parameters
 
@@ -25,7 +25,7 @@ sort
 
 Create a fork for the authenticated user.
 
-    POST /repos/:user/:repo/forks
+    POST /repos/:owner/:repo/forks
 
 ### Parameters
 

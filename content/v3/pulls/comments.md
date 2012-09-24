@@ -18,7 +18,7 @@ types. You can read more about the use of mime types in the API
 
 ## List comments on a pull request
 
-    GET /repos/:user/:repo/pulls/:number/comments
+    GET /repos/:owner/:repo/pulls/:number/comments
 
 ### Response
 
@@ -27,7 +27,7 @@ types. You can read more about the use of mime types in the API
 
 ## Get a single comment
 
-    GET /repos/:user/:repo/pulls/comments/:number
+    GET /repos/:owner/:repo/pulls/comments/:number
 
 ### Response
 
@@ -36,7 +36,7 @@ types. You can read more about the use of mime types in the API
 
 ## Create a comment
 
-    POST /repos/:user/:repo/pulls/:number/comments
+    POST /repos/:owner/:repo/pulls/:number/comments
 
 ### Input
 
@@ -83,12 +83,12 @@ in_reply_to
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/:user/:repo/pulls/comments/1" %>
+"https://api.github.com/repos/:owner/:repo/pulls/comments/1" %>
 <%= json :pull_comment %>
 
 ## Edit a comment
 
-    PATCH /repos/:user/:repo/pulls/comments/:number
+    PATCH /repos/:owner/:repo/pulls/comments/:number
 
 ### Input
 
@@ -108,7 +108,7 @@ body
 
 ## Delete a comment
 
-    DELETE /repos/:user/:repo/pulls/comments/:number
+    DELETE /repos/:owner/:repo/pulls/comments/:number
 
 ### Response
 

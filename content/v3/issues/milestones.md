@@ -9,7 +9,7 @@ title: Issue Milestones | GitHub API
 
 ## List milestones for a repository
 
-    GET /repos/:user/:repo/milestones
+    GET /repos/:owner/:repo/milestones
 
 ### Parameters
 
@@ -29,7 +29,7 @@ direction
 
 ## Get a single milestone
 
-    GET /repos/:user/:repo/milestones/:number
+    GET /repos/:owner/:repo/milestones/:number
 
 ### Response
 
@@ -38,7 +38,7 @@ direction
 
 ## Create a milestone
 
-    POST /repos/:user/:repo/milestones
+    POST /repos/:owner/:repo/milestones
 
 ### Input
 
@@ -70,7 +70,7 @@ due\_on
 
 ## Update a milestone
 
-    PATCH /repos/:user/:repo/milestones/:number
+    PATCH /repos/:owner/:repo/milestones/:number
 
 ### Input
 
@@ -103,7 +103,7 @@ due\_on
 
 ## Delete a milestone
 
-    DELETE /repos/:user/:repo/milestones/:number
+    DELETE /repos/:owner/:repo/milestones/:number
 
 ### Response
 

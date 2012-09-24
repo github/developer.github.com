@@ -14,7 +14,7 @@ Base64 encoded content. See [Mime types](/v3/media/) for requesting raw or other
 
 This method returns the preferred README for a repository.
 
-    GET /repos/:user/:repo/readme
+    GET /repos/:owner/:repo/readme
 
 ### Parameters
 
@@ -30,7 +30,7 @@ ref
 
 This method returns the contents of any file or directory in a repository.
 
-    GET /repos/:user/:repo/contents/:path
+    GET /repos/:owner/:repo/contents/:path
 
 ### Parameters
 
@@ -54,7 +54,7 @@ to make a second `GET` request.
 
 *Note*: For private repositories, these links are temporary and expire quickly.
 
-    GET /repos/:user/:repo/:archive_format/:ref
+    GET /repos/:owner/:repo/:archive_format/:ref
 
 ### Parameters
 

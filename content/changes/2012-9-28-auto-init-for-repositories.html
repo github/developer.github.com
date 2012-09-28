@@ -1,0 +1,50 @@
+---
+kind: change
+title: Initialize a repository when creating
+created_at: 2012-9-28
+author_name: pengwynn
+---
+
+Today we've made it easier to add commits to a repository via the GitHub API.
+Until now, you could [create a repository](/v3/repos/#create), but you would
+need to initialize it locally via your Git client before adding any commits via
+the API.
+
+Now you can optionally init a repository when it's created by sending `true`
+for the `auto_init` parameter:
+
+<pre class="terminal">
+curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true}' \
+     https://api.github.com/user/repos
+</pre>
+
+The resulting repository will have a README stub and an initial commit.
+
+![create repo screenshot](/images/posts/create-repo-init.png)
+
+### .gitignore templates
+
+Along with this change, you can set up your `.gitignore` template by passing
+the basename of any template in the [GitHub gitignore templates
+project](https://github.com/github/gitignore).
+
+<pre class="terminal">
+curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true, \
+          "gitignore_template": "Haskell"}' \
+     https://api.github.com/user/repos
+</pre>
+
+
+As the [docs point out](/v3/repos/#create), the `gitignore_template` parameter
+is ignored if `auto_init` is not present and `true`.
+
+If you have any questions or feedback, drop us a line at
+[https://github.com/contact][c], [support@github.com][email], or
+[@GitHubAPI][twitter].
+
+[twitter]: https://twitter.com/githubapi
+[email]: mailto:support@github.com
+[c]: https://github.com/c
+

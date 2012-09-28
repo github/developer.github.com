@@ -22,7 +22,8 @@ module GitHub
       }
 
       AUTHORS = {
-        :technoweenie => '821395fe70906c8290df7f18ac4ac6cf'
+        :technoweenie => '821395fe70906c8290df7f18ac4ac6cf',
+        :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

@@ -2,13 +2,61 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2012-09-05T05:00:00Z</updated>
+  <updated>2012-09-28T05:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2012-09-28:/changes/2012-9-28-auto-init-for-repositories/</id>
+    <title type="html">Initialize a repository when creating</title>
+    <published>2012-09-28T05:00:00Z</published>
+    <updated>2012-09-28T05:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-9-28-auto-init-for-repositories/" />
+    <content type="html">&lt;p&gt;Today we’ve made it easier to add commits to a repository via the GitHub API.
+Until now, you could &lt;a href="/v3/repos/#create"&gt;create a repository&lt;/a&gt;, but you would
+need to initialize it locally via your Git client before adding any commits via
+the API.&lt;/p&gt;
+
+&lt;p&gt;Now you can optionally init a repository when it’s created by sending &lt;code&gt;true&lt;/code&gt;
+for the &lt;code&gt;auto_init&lt;/code&gt; parameter:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true}' \
+     https://api.github.com/user/repos
+&lt;/pre&gt;
+
+&lt;p&gt;The resulting repository will have a README stub and an initial commit.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/posts/create-repo-init.png" alt="create repo screenshot"&gt;&lt;/p&gt;
+
+&lt;h3 id="gitignore-templates"&gt;.gitignore templates&lt;/h3&gt;
+
+&lt;p&gt;Along with this change, you can set up your &lt;code&gt;.gitignore&lt;/code&gt; template by passing
+the basename of any template in the &lt;a href="https://github.com/github/gitignore"&gt;GitHub gitignore templates
+project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true, \
+          "gitignore_template": "Haskell"}' \
+     https://api.github.com/user/repos
+&lt;/pre&gt;
+
+&lt;p&gt;As the &lt;a href="/v3/repos/#create"&gt;docs point out&lt;/a&gt;, the &lt;code&gt;gitignore_template&lt;/code&gt; parameter
+is ignored if &lt;code&gt;auto_init&lt;/code&gt; is not present and &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, drop us a line at
+&lt;a href="https://github.com/c"&gt;https://github.com/contact&lt;/a&gt;, &lt;a href="mailto:support@github.com"&gt;support@github.com&lt;/a&gt;, or
+&lt;a href="https://twitter.com/githubapi"&gt;@GitHubAPI&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2012-09-05:/changes/2012-9-5-watcher-api/</id>
     <title type="html">Upcoming Changes to Watcher and Star APIs</title>

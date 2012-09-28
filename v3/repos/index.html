@@ -147,7 +147,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create">Create</h2>
 
-<p>Create a new repository for the authenticated user. OAuth users must supply <code>repo</code> scope.</p>
+<p>Create a new repository for the authenticated user. OAuth users must supply
+<code>repo</code> scope.</p>
 
 <pre><code>POST /user/repos
 </code></pre>
@@ -195,6 +196,16 @@ repository, <code>false</code> to disable them. Default is <code>true</code>.</d
 <em>Optional</em> <strong>number</strong> - The id of the team that will be granted access
 to this repository. This is only valid when creating a repo in an
 organization.</dd>
+  <dt>auto_init</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to create an initial commit with empty
+README. Default is <code>false</code>.</dd>
+  <dt>gitignore_template</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - Desired language or platform <a href="https://github.com/github/gitignore">.gitignore
+template</a> to
+apply. <em>Ignored if <code>auto_init</code> parameter is not provided.</em>
+</dd>
 </dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This is your first repo"</span><span class="p">,</span>

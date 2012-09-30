@@ -62,6 +62,9 @@ assignee
   * `none` for Issues with no assigned User.
   * `*` for Issues with any assigned User.
 
+creator
+: _String_ User login.
+
 mentioned
 : _String_ User login.
 

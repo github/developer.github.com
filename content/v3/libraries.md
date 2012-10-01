@@ -24,6 +24,12 @@ Libraries for accessing the GitHub API from your favorite language.
 
 [csharp]: https://github.com/sgrassie/csharp-github-api
 
+## Emacs Lisp
+
+* [gh.el][gh.el]
+
+[gh.el]: https://github.com/sigma/gh.el
+
 ## Erlang
 
 * [Erlang GitHub API][erlang]

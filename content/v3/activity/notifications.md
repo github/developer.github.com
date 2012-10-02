@@ -60,36 +60,42 @@ directly participating or mentioned.
 Marking a notification as "read" archives it removes it from the [default view
 on GitHub.com](https://github.com/notifications).
 
-    POST /notifications/mark_as_read
-
-### Parameters
-
-ids
-: _Optional_ **Array(Number)** IDs of notifications to mark as read. If this
-parameter is omitted, all notifications will be marked as read.
+    POST /notifications/mark
 
 ## Mark notifications as read in a repository
 
 Marking all notification in a repository as "read" archives them removes them
 from the [default view on GitHub.com](https://github.com/notifications).
 
-    POST /repos/:owner/:repo/notifications/mark_as_read
+    POST /repos/:owner/:repo/notifications/mark
 
-## Mute a thread
+## View a single summary
+
+    GET /notifications/summaries/:id
+
+## Mark a summary as read
+
+    POST /notifications/summaries/:id/mark
+
+## Mute a summary
 
 Muting a thread prevents future notifications from being sent for a discussion
-thread.
+summary.
 
-    POST /notifications/threads/:id/mute
+    POST /notifications/summaries/:id/mute
 
-## Unmute a thread
+## Unmute a summary
 
 Muting a thread enables future notifications from being sent for a discussion
-thread.
+summary.
 
-    POST /notifications/threads/:id/unmute
+    POST /notifications/summaries/:id/unmute
 
-## Settings
+## View Settings
+
+    GET /notifications/settings
+
+## Update Settings
 
 Update the notification settings for the authenticated user.
 
@@ -117,11 +123,37 @@ web.
   :participating => {:email => true, :web => false},
   :watching => {:email => true, :web => false} %>
 
-## Organization email address settings
+## Get notification email settings
+
+    GET /notifications/emails
+
+## Get the global email settings
+
+    GET /notifications/global/emails
+
+## Get notification email settings for an organization
+
+    GET /notifications/organization/:org/emails
+
+## Update email settings
+
+    PATCH /notifications/emails
+
+## Update global email settings
+
+    PUT /notifications/global/emails
+
+### Parameters
+
+email
+: _Required_ **string** Email address to which to send notifications to the
+authenticated user for discussions related to projects for this organization.
+
+## Update Organization email settings
 
 Update the notification settings for the authenticated user.
 
-    PATCH /orgs/:org/notifications/settings
+    PUT /notifications/organization/:org/emails
 
 ### Parameters
 

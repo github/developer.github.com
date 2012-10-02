@@ -19,7 +19,7 @@ Notifications are also sent for discussions in unwatched repositories when the
 user is involved including:
 
 * **@mentions**
-* Assignments
+* Issue assignments
 * Commits the user authors or commits
 * Any discussion in which the user actively participates
 
@@ -113,6 +113,9 @@ watching.web
 : _Optional_ **boolean** `true` to receive watching notificationsn via
 web.
 
+<%= json \
+  :participating => {:email => true, :web => false},
+  :watching => {:email => true, :web => false} %>
 
 ## Organization email address settings
 

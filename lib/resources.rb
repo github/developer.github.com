@@ -343,6 +343,7 @@ module GitHub
     }
 
     FULL_PULL = PULL.merge({
+      "merge_commit_sha" =>  "e5bd3914e2e596debea16f433f57875b5b90bcd6",
       "merged"        => false,
       "mergeable"     => true,
       "merged_by"     => USER,

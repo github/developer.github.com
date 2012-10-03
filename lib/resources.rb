@@ -714,9 +714,9 @@ module GitHub
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
       "created_at"   => "2010-04-14T02:15:15Z"
-    }.update(GIST_FILES)
+    }
 
-    FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
+    FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY).merge(GIST_FILES)
     FULL_GIST['files']['ring.erl']['content'] = 'contents of gist'
 
     GIST_COMMENT = {

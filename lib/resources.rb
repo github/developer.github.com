@@ -139,23 +139,26 @@ module GitHub
       "key"   => "ssh-rsa AAA...",
     }
 
-    REPO = {
-      "url"              => "https://api.github.com/repos/octocat/Hello-World",
-      "html_url"         => "https://github.com/octocat/Hello-World",
-      "clone_url"        => "https://github.com/octocat/Hello-World.git",
-      "git_url"          => "git://github.com/octocat/Hello-World.git",
-      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
-      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
-      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
+    SIMPLE_REPO = {
       "id"               => 1296269,
       "owner"            => USER,
       "name"             => "Hello-World",
       "full_name"        => "octocat/Hello-World",
       "description"      => "This your first repo!",
-      "homepage"         => "https://github.com",
-      "language"         => nil,
       "private"          => false,
       "fork"             => false,
+      "url"              => "https://api.github.com/repos/octocat/Hello-World",
+      "html_url"         => "https://github.com/octocat/Hello-World"
+    }
+
+    REPO = SIMPLE_REPO.merge({
+      "clone_url"        => "https://github.com/octocat/Hello-World.git",
+      "git_url"          => "git://github.com/octocat/Hello-World.git",
+      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
+      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
+      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
+      "homepage"         => "https://github.com",
+      "language"         => nil,
       "forks"            => 9,
       "forks_count"      => 9,
       "watchers"         => 80,
@@ -166,7 +169,7 @@ module GitHub
       "pushed_at"        => "2011-01-26T19:06:43Z",
       "created_at"       => "2011-01-26T19:01:12Z",
       "updated_at"       => "2011-01-26T19:14:43Z"
-    }
+    })
 
     FULL_REPO = REPO.merge({
       "organization"     => USER.merge('type' => 'Organization'),
@@ -956,6 +959,36 @@ module GitHub
       :encoding => "utf-8",
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :size => 100
+    }
+
+    SUMMARY = {
+      :id => 1,
+      :repository => SIMPLE_REPO,
+      :thread => {
+        :type => "Issue",
+        :id => 123,
+        :title => "Greetings",
+        :state => 'open',
+        :number => 123
+      },
+      :comment => {
+        :type => "IssueComment",
+        :id => 123,
+        :body => "Hello",
+        :user => USER,
+        :created_at => '2012-09-25T07:54:41-07:00',
+      },
+      :reason => 'subscribed',
+      :unread => true,
+      :updated_at => '2012-09-25T07:54:41-07:00',
+      :last_read_at => '2012-09-25T07:54:41-07:00'
+    }
+
+    SUBSCRIPTION = {
+      :subscribed => true,
+      :ignored => false,
+      :reason => nil,
+      :created_at => "2012-10-06T21:34:12Z"
     }
   end
 end

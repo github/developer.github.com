@@ -23,6 +23,8 @@ user is involved including:
 * Commits the user authors or commits
 * Any discussion in which the user actively participates
 
+Notifications come back as Summary objects.  A Summary contains information
+about the current discussion of an Issue/PullRequest/Commit.
 
 ## List your notifications
 
@@ -39,6 +41,10 @@ participating
 : _Optional_ **boolean** `true` to show only notifications in which the user is
 directly participating or mentioned.
 
+### Response
+
+<%= headers 200 %>
+<%= json(:summary) { |h| [h] } %>
 
 ## List your notifications in a repository
 
@@ -55,12 +61,21 @@ participating
 : _Optional_ **boolean** `true` to show only notifications in which the user is
 directly participating or mentioned.
 
+### Response
+
+<%= headers 200 %>
+<%= json(:summary) { |h| [h] } %>
+
 ## Mark as read
 
 Marking a notification as "read" archives it removes it from the [default view
 on GitHub.com](https://github.com/notifications).
 
     POST /notifications/mark
+
+### Response
+
+<%= headers 205 %>
 
 ## Mark notifications as read in a repository
 
@@ -69,25 +84,67 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
     POST /repos/:owner/:repo/notifications/mark
 
+### Response
+
+<%= headers 205 %>
+
 ## View a single summary
 
     GET /notifications/summaries/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json(:summary) { |h| [h] } %>
 
 ## Mark a summary as read
 
     POST /notifications/summaries/:id/mark
 
-## Mute a summary
+### Response
 
-Muting a thread prevents future notifications from being sent for a discussion
-summary.
+<%= headers 205 %>
 
-    POST /notifications/summaries/:id/mute
+## Get a Summary Subscription
 
-## Unmute a summary
+This checks to see if the current user is subscribed to a summary.  You can also
+[get a Repository subscription](http://localhost:3000/v3/activity/watching/#get-a-repository-subscription).
 
-Muting a thread enables future notifications from being sent for a discussion
-summary.
+    GET /notifications/summary/1/subscription
 
-    POST /notifications/summaries/:id/unmute
+### Response
 
+<%= headers 200 %>
+<%= json :subscription %>
+
+## Set a Summary Subscription
+
+This lets you subscribe to a summary, or ignore it.  Subscribing to a summary
+is unnecessary if the user is already subscribed to the repository.  Ignoring
+a summary will mute all future notifications (until you comment or get
+@mentioned).
+
+    PUT /notifications/summary/1/subscription
+
+### Input
+
+subscribed
+: **boolean** Determines if notifications should be received from this
+repository.
+
+ignored
+: **boolean** Deterimines if all notifications should be blocked from this
+repository.
+
+### Response
+
+<%= headers 200 %>
+<%= json :subscription %>
+
+## Delete a Summary Subscription
+
+    DELETE /notifications/summary/1/subscription
+
+### Response
+
+<%= headers 204 %>

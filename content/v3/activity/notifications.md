@@ -41,6 +41,11 @@ participating
 : _Optional_ **boolean** `true` to show only notifications in which the user is
 directly participating or mentioned.
 
+since
+: _Optional_ **time** filters out any notifications updated before the given
+time.  The time should be passed in as UTC in the ISO 8601 format:
+`YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
+
 ### Response
 
 <%= headers 200 %>

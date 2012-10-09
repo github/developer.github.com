@@ -38,7 +38,7 @@
     <h1 id="issues-api">Issues API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-your-issues">List your issues</a></li>
+<li><a href="#list-issues">List issues</a></li>
   <li><a href="#list-issues-for-a-repository">List issues for a repository</a></li>
   <li><a href="#get-a-single-issue">Get a single issue</a></li>
   <li><a href="#create-an-issue">Create an issue</a></li>
@@ -47,9 +47,23 @@
 </ul><p>Issues leverage <a href="#custom-mime-types">these</a> custom mime types. You can
 read more about the use of mime types in the API <a href="/v3/media/">here</a>.</p>
 
-<h2 id="list-your-issues">List your issues</h2>
+<h2 id="list-issues">List issues</h2>
+
+<p>List all issues across all the authenticated user’s visible repositories
+including owned repositories, member repositories, and organization
+repositories:</p>
 
 <pre><code>GET /issues
+</code></pre>
+
+<p>List all issues across owned and member repositories for the authenticated user:</p>
+
+<pre><code>GET /user/issues
+</code></pre>
+
+<p>List all issues for a given organization for the authenticated user:</p>
+
+<pre><code>GET /orgs/:org/issues
 </code></pre>
 
 <h3 id="parameters">Parameters</h3>

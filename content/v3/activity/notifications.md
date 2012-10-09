@@ -73,7 +73,7 @@ directly participating or mentioned.
 
 ## Mark as read
 
-Marking a notification as "read" archives it removes it from the [default view
+Marking a notification as "read" removes it from the [default view
 on GitHub.com](https://github.com/notifications).
 
     POST /notifications/mark
@@ -84,7 +84,7 @@ on GitHub.com](https://github.com/notifications).
 
 ## Mark notifications as read in a repository
 
-Marking all notification in a repository as "read" archives them removes them
+Marking all notifications in a repository as "read" removes them
 from the [default view on GitHub.com](https://github.com/notifications).
 
     POST /repos/:owner/:repo/notifications/mark

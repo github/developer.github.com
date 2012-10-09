@@ -41,6 +41,7 @@
 <li><a href="#list">List</a></li>
   <li><a href="#get-single-hook">Get single hook</a></li>
   <li><a href="#create-a-hook">Create a hook</a></li>
+  <li><a href="#edit-a-hook">Edit a hook</a></li>
   <li><a href="#test-a-hook">Test a hook</a></li>
   <li><a href="#delete-a-hook">Delete a hook</a></li>
   <li><a href="#pubsubhubbub">PubSubHubbub</a></li>
@@ -110,7 +111,8 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
     <span class="s2">"events"</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">"push"</span>
+      <span class="s2">"push"</span><span class="p">,</span>
+      <span class="s2">"pull_request"</span>
     <span class="p">],</span>
     <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
@@ -138,7 +140,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
   <span class="s2">"events"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"push"</span>
+    <span class="s2">"push"</span><span class="p">,</span>
+    <span class="s2">"pull_request"</span>
   <span class="p">],</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
@@ -176,11 +179,26 @@ for.  Default: <code>["push"]</code>.</dd>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl><p>Example:  The <a href="https://github.com/github/github-services/blob/master/services/web.rb#L4-11">“web” service hook</a>
+takes these fields:</p>
+
+<ul>
+<li><code>url</code></li>
+  <li><code>content_type</code></li>
+  <li><code>secret</code></li>
+</ul><p>Here’s how you can setup a hook that posts raw JSON (instead of the default
+legacy format):</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"events"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"push"</span><span class="p">,</span>
+    <span class="s2">"pull_request"</span>
+  <span class="p">],</span>
   <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://something.com/webhook"</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://something.com/webhook"</span><span class="p">,</span>
+    <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"json"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -197,7 +215,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
   <span class="s2">"events"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"push"</span>
+    <span class="s2">"push"</span><span class="p">,</span>
+    <span class="s2">"pull_request"</span>
   <span class="p">],</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
@@ -207,7 +226,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="edit-a-hook">Edit a hook</h3>
+<h2 id="edit-a-hook">Edit a hook</h2>
 
 <pre><code>PATCH /repos/:owner/:repo/hooks/:id
 </code></pre>
@@ -228,7 +247,10 @@ are defined in the
 <a href="https://github.com/github/github-services">github-services</a> repo.
 Booleans are stored internally as “1” for true, and “0” for false.  Any
 JSON true/false values will be converted automatically.</dd>
-  <dt><code>events</code></dt>
+</dl><p>You can change a hook to send straight JSON by </p>
+
+<dl>
+<dt><code>events</code></dt>
   <dd>
 <em>Optional</em> <strong>array</strong> - Determines what events the hook is triggered
 for.  This replaces the entire array of events.  Default: <code>["push"]</code>.</dd>
@@ -244,13 +266,25 @@ list of events that the Hook triggers for.</dd>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"campfire"</span><span class="p">,</span>
+</dl><p>Example:  The <a href="https://github.com/github/github-services/blob/master/services/web.rb#L4-11">“web” service hook</a>
+takes these fields:</p>
+
+<ul>
+<li><code>url</code></li>
+  <li><code>content_type</code></li>
+  <li><code>secret</code></li>
+</ul><p>Here’s how you can setup a hook that posts raw JSON (instead of the default
+legacy format):</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"add_events"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"pull_request"</span>
+  <span class="p">],</span>
   <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"subdomain"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
-    <span class="s2">"room"</span><span class="o">:</span> <span class="s2">"Commits"</span><span class="p">,</span>
-    <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://requestb.in"</span><span class="p">,</span>
+    <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"json"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -266,7 +300,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
   <span class="s2">"events"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"push"</span>
+    <span class="s2">"push"</span><span class="p">,</span>
+    <span class="s2">"pull_request"</span>
   <span class="p">],</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>

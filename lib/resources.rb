@@ -888,7 +888,7 @@ module GitHub
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z",
       "name" => "web",
-      "events" => ["push"],
+      "events" => ["push", "pull_request"],
       "active" => true,
       "config" =>
         {'url' => 'http://example.com', 'content_type' => 'json'},

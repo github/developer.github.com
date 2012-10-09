@@ -84,11 +84,23 @@ for.  Default: `["push"]`.
 : _Optional_ **boolean** - Determines whether the hook is actually
 triggered on pushes.
 
+Example:  The ["web" service hook](https://github.com/github/github-services/blob/master/services/web.rb#L4-11)
+takes these fields:
+
+* `url`
+* `content_type`
+* `secret`
+
+Here's how you can setup a hook that posts raw JSON (instead of the default
+legacy format):
+
 <%= json \
       :name => "web",
       :active => true,
+      :events => ['push', 'pull_request'],
       :config => {
-        :url => 'http://something.com/webhook'}
+        :url => 'http://something.com/webhook',
+        :content_type => 'json'}
 %>
 
 ### Response
@@ -97,7 +109,7 @@ triggered on pushes.
       :Location => 'https://api.github.com/repos/user/repo/hooks/1' %>
 <%= json :hook %>
 
-### Edit a hook
+## Edit a hook
 
     PATCH /repos/:owner/:repo/hooks/:id
 
@@ -117,6 +129,9 @@ Booleans are stored internally as "1" for true, and "0" for false.  Any
 JSON true/false values will be converted automatically.
 
 
+
+You can change a hook to send straight JSON by 
+
 `events`
 : _Optional_ **array** - Determines what events the hook is triggered
 for.  This replaces the entire array of events.  Default: `["push"]`.
@@ -133,13 +148,23 @@ list of events that the Hook triggers for.
 : _Optional_ **boolean** - Determines whether the hook is actually
 triggered on pushes.
 
+Example:  The ["web" service hook](https://github.com/github/github-services/blob/master/services/web.rb#L4-11)
+takes these fields:
+
+* `url`
+* `content_type`
+* `secret`
+
+Here's how you can setup a hook that posts raw JSON (instead of the default
+legacy format):
+
 <%= json \
-      :name => "campfire",
+      :name => "web",
       :active => true,
+      :add_events => ['pull_request'],
       :config => {
-        :subdomain => 'github',
-        :room => 'Commits',
-        :token => 'abc123'}
+        :url => "http://requestb.in",
+        :content_type => "json"}
 %>
 
 ### Response

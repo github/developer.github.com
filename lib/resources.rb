@@ -343,6 +343,7 @@ module GitHub
     }
 
     FULL_PULL = PULL.merge({
+      "merge_commit_sha" =>  "e5bd3914e2e596debea16f433f57875b5b90bcd6",
       "merged"        => false,
       "mergeable"     => true,
       "merged_by"     => USER,
@@ -691,14 +692,10 @@ module GitHub
       ]
     }
 
-    GIST_FILES = {
-      "files" => {
-        "ring.erl"   => {
-          "size"     => 932,
-          "filename" => "ring.erl",
-          "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
-        }
-      }
+    GIST_FILE = {
+      "size"     => 932,
+      "filename" => "ring.erl",
+      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
     }
 
     GIST = {
@@ -707,16 +704,16 @@ module GitHub
       "description"  => "description of gist",
       "public"       => true,
       "user"         => USER,
-      "files"        => GIST_FILES,
+      "files"        => { "ring.erl" => GIST_FILE },
       "comments"     => 0,
       "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
       "created_at"   => "2010-04-14T02:15:15Z"
-    }.update(GIST_FILES)
+    }
 
     FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
-    FULL_GIST['files']['ring.erl']['content'] = 'contents of gist'
+    FULL_GIST['files'].merge('ring.erl' => GIST_FILE.merge('content' => 'contents of gist'))
 
     GIST_COMMENT = {
       "id"         => 1,
@@ -891,7 +888,7 @@ module GitHub
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z",
       "name" => "web",
-      "events" => ["push"],
+      "events" => ["push", "pull_request"],
       "active" => true,
       "config" =>
         {'url' => 'http://example.com', 'content_type' => 'json'},

@@ -10,9 +10,21 @@ title: Issues | GitHub API
 Issues leverage [these](#custom-mime-types) custom mime types. You can
 read more about the use of mime types in the API [here](/v3/media/).
 
-## List your issues
+## List issues
+
+List all issues across all the authenticated user's visible repositories
+including owned repositories, member repositories, and organization
+repositories:
 
     GET /issues
+
+List all issues across owned and member repositories for the authenticated user:
+
+    GET /user/issues
+
+List all issues for a given organization for the authenticated user:
+
+    GET /orgs/:org/issues
 
 ### Parameters
 
@@ -61,6 +73,9 @@ assignee
 : * _String_ User login
   * `none` for Issues with no assigned User.
   * `*` for Issues with any assigned User.
+
+creator
+: _String_ User login.
 
 mentioned
 : _String_ User login.

@@ -61,6 +61,12 @@ this specific sha - `http://ci.example.com/johndoe/my-repo/builds/sha`.
 description
 : _Optional_ **string** Short description of the status
 
+<%= json \
+  :state         => "success",
+  :description   => "The build succeeded!",
+  :homepage      => "https://example.com/build/status"
+%>
+
 ### Response
 
 <%= headers 201,

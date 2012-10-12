@@ -12,6 +12,8 @@ module GitHub
         202 => '202 Accepted',
         204 => '204 No Content',
         301 => '301 Moved Permanently',
+        302 => '302 Found',
+        307 => '307 Temporary Redirect',
         304 => '304 Not Modified',
         401 => '401 Unauthorized',
         403 => '403 Forbidden',

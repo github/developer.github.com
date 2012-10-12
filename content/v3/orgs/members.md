@@ -21,7 +21,13 @@ members will be returned. Otherwise only public members are returned.
 <%= headers 200 %>
 <%= json(:user) { |h| [h] } %>
 
+### Response if requester is not a organization member
+
+<%= headers 302, "Location" => "https://api.github.com/orgs/github/public_members" %>
+
 ## Get member
+
+Check if a user is, publicly or privately, a member of the organization.
 
     GET /orgs/:org/members/:user
 
@@ -32,6 +38,10 @@ members will be returned. Otherwise only public members are returned.
 ### Response if user is not a member
 
 <%= headers 404 %>
+
+### Response if requester is not a organization member
+
+<%= headers 302, :Location => "https://api.github.com/orgs/github/public_members/pezra" %>
 
 ## Add a member
 

@@ -59,20 +59,23 @@ domain (or through <code>yourdomain.com/api/v3/</code> for enterprise).  All dat
 sent and received as JSON.</p>
 
 <pre class="terminal">
-$ curl -i https://api.github.com
+$ curl -i https://api.github.com/users/octocat/orgs
 
-HTTP/1.1 302 Found
-Server: nginx/1.0.12
-Date: Mon, 20 Feb 2012 11:15:49 GMT
-Content-Type: text/html;charset=utf-8
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 12 Oct 2012 23:33:14 GMT
+Content-Type: application/json; charset=utf-8
 Connection: keep-alive
-Status: 302 Found
+Status: 200 OK
+ETag: "a00049ba79152d03380c34652f2cb612"
 X-RateLimit-Limit: 5000
-ETag: "d41d8cd98f00b204e9800998ecf8427e"
-Location: http://developer.github.com
-X-RateLimit-Remaining: 4999
-Content-Length: 0
+X-GitHub-Media-Type: github.beta
+X-RateLimit-Remaining: 4987
+Content-Length: 5
+Cache-Control: max-age=0, private, must-revalidate
+X-Content-Type-Options: nosniff
 
+[]
 </pre>
 
 <p>Blank fields are included as <code>null</code> instead of being omitted.</p>
@@ -259,9 +262,10 @@ SHA1 and not on page number.</p>
   <dd>Shows the URL of the immediate previous page of results.</dd>
 </dl><h2 id="rate-limiting">Rate Limiting</h2>
 
-<p>We limit requests to API v3 to 5000 per hour.  This is keyed off either your
-login, your OAuth token, or request IP.  You can check the returned HTTP
-headers of any API request to see your current status:</p>
+<p>We limit requests to 60 per hour for unauthenticated requests. For requests
+using Basic Authentication or OAuth, we limit requests to 5,000
+per hour.  You can check the returned HTTP headers of any API request to see
+your current status:</p>
 
 <pre class="terminal">
 $ curl -i https://api.github.com/users/whatever

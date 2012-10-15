@@ -63,8 +63,8 @@ description
 
 <%= json \
   :state         => "success",
-  :description   => "The build succeeded!",
-  :homepage      => "https://example.com/build/status"
+  :target_url      => "https://example.com/build/status",
+  :description   => "The build succeeded!"
 %>
 
 ### Response

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Organization Members | GitHub API</title>
+  <title>Organization Members Resource Changes</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -35,162 +35,33 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="org-members-api">Org Members API</h1>
+    <div class="change" id="/changes/2012-10-17-org-members-redirection/">
+<h2 class="title">
+  <a href="/changes/2012-10-17-org-members-redirection/">Organization Members Resource Changes</a>
+</h2>
 
-<ul id="markdown-toc">
-<li><a href="#members-list">Members list</a></li>
-  <li><a href="#check-membership">Check membership</a></li>
-  <li><a href="#add-a-member">Add a member</a></li>
-  <li><a href="#remove-a-member">Remove a member</a></li>
-  <li><a href="#public-members-list">Public members list</a></li>
-  <li><a href="#check-public-membership">Check public membership</a></li>
-  <li><a href="#publicize-a-users-membership">Publicize a user’s membership</a></li>
-  <li><a href="#conceal-a-users-membership">Conceal a user’s membership</a></li>
-  <li><a href="#response-4">Response</a></li>
-</ul><h2 id="members-list">Members list</h2>
+<div class="meta">
+  <div class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/f38112009dc16547051c8ac246cee443?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+    <span class="author vcard fn">
+      <a href="https://github.com/pezra">pezra</a>
+    </span>
+    <span class="published">
+      October 17, 2012
+    
+    </span>
+  </div>
+</div>
 
-<p>List all users who are members of an organization. A member is a user
-that belongs to at least 1 team in the organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned. If the reqeuster is not a member of the organization the query will be redirected to the <a href="#public-members-list">public members list</a>.</p>
 
-<pre><code>GET /orgs/:org/members
-</code></pre>
+<p>Requesting the <a href="/v3/orgs/members/index.html#members-list">member list</a> of an organization of which you are not a member now redirects to the <a href="v3/orgs/members/index.html#public-members-list">public members list</a>. Similarly, requests to <a href="/v3/orgs/members/index.html#check-membership">membership check</a> resources of an organization of which you are not a member are redirected to the equivalent <a href="/v3/orgs/members/index.html#check-public-membership">public membership check</a>. One exception to the latter case is that if you are checking about your own membership the request is not redirected. You are always allowed to know what organizations you belong to.</p>
 
-<h3 id="response">Response</h3>
+<p>The changes where made to clarify the purpose of these various resources. The <code>/orgs/{org}/members</code> resources are intended for use by members of the organization in question. The <code>/orgs/{org}/public_members</code> resources are for acquiring information about the public membership of organizations. If you are not a member you are not allowed to see private membership information so you should be using the public membership resources.</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=Org%20members%20API">support@github.com</a>.</p>
+</div>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h3 id="response-if-requester-is-not-an-organization-member">Response if requester is not an organization member</h3>
-
-<pre class="headers"><code>Status: 302 Found
-Location: https://api.github.com/orgs/github/public_members
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="check-membership">Check membership</h2>
-
-<p>Check if a user is, publicly or privately, a member of the organization.</p>
-
-<pre><code>GET /orgs/:org/members/:user
-</code></pre>
-
-<h3 id="response-if-requester-is-an-organization-member-and-user-is-a-member">Response if requester is an organization member and user is a member</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h3 id="response-if-requester-is-an-organization-member-and-user-is-not-a-member">Response if requester is an organization member and user is not a member</h3>
-
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h3 id="response-if-requester-is-not-an-organization-member-and-is-inquiring-about-themselves">Response if requester is not an organization member and is inquiring about themselves</h3>
-
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h3 id="response-if-requester-is-not-an-organization-member-1">Response if requester is not an organization member</h3>
-
-<pre class="headers"><code>Status: 302 Found
-Location: https://api.github.com/orgs/github/public_members/pezra
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="add-a-member">Add a member</h2>
-
-<p>To add someone as a member to an org, you must add them to a
-<a href="/v3/orgs/teams/#add-team-member">team</a>.</p>
-
-<h2 id="remove-a-member">Remove a member</h2>
-
-<p>Removing a user from this list will remove them from all teams and
-they will no longer have any access to the organization’s repositories.</p>
-
-<pre><code>DELETE /orgs/:org/members/:user
-</code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="public-members-list">Public members list</h2>
-
-<p>Members of an organization can choose to have their membership
-publicized or not.</p>
-
-<pre><code>GET /orgs/:org/public_members
-</code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h2 id="check-public-membership">Check public membership</h2>
-
-<pre><code>GET /orgs/:org/public_members/:user
-</code></pre>
-
-<h3 id="response-if-user-is-a-public-member">Response if user is a public member</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h3 id="response-if-user-is-not-a-public-member">Response if user is not a public member</h3>
-
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="publicize-a-users-membership">Publicize a user’s membership</h2>
-
-<pre><code>PUT /orgs/:org/public_members/:user
-</code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="conceal-a-users-membership">Conceal a user’s membership</h2>
-
-<pre><code>DELETE /orgs/:org/public_members/:user
-</code></pre>
-
-<h2 id="response-4">Response</h2>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

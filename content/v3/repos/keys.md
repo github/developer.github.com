@@ -7,6 +7,8 @@ title: Repo Deploy Keys | GitHub API
 * TOC
 {:toc}
 
+The authorization used must have repo:keys scope added to it
+
 ## List
 
     GET /repos/:owner/:repo/keys

@@ -7,6 +7,8 @@ title: Repo Deploy Keys | GitHub API
 * TOC
 {:toc}
 
+Permissions required: repo:keys
+
 ## List
 
     GET /repos/:owner/:repo/keys

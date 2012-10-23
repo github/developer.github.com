@@ -169,6 +169,9 @@ has\_downloads
 : _Optional_ **boolean** - `true` to enable downloads for this
 repository, `false` to disable them. Default is `true`.
 
+default\_branch
+: _Optional_ **String** - Update the default branch for this repository.
+
 <%= json \
   :name          => "Hello-World",
   :description   => "This is your first repo",

@@ -49,7 +49,7 @@ time.  The time should be passed in as UTC in the ISO 8601 format:
 ### Response
 
 <%= headers 200 %>
-<%= json(:summary) { |h| [h] } %>
+<%= json(:summaries) %>
 
 ## List your notifications in a repository
 
@@ -69,7 +69,7 @@ directly participating or mentioned.
 ### Response
 
 <%= headers 200 %>
-<%= json(:summary) { |h| [h] } %>
+<%= json(:summaries) %>
 
 ## Mark as read
 
@@ -97,10 +97,15 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
     GET /notifications/summaries/:id
 
-### Response
+### Issue Summary Response
 
 <%= headers 200 %>
-<%= json(:summary) { |h| [h] } %>
+<%= json(:issue_summary) { |h| [h] } %>
+
+### Commit Summary Response
+
+<%= headers 200 %>
+<%= json(:commit_summary) { |h| [h] } %>
 
 ## Mark a summary as read
 

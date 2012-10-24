@@ -109,7 +109,8 @@ README. Default is `false`.
 gitignore\_template
 : _Optional_ **string** - Desired language or platform [.gitignore
 template](https://github.com/github/gitignore) to
-apply. _Ignored if `auto_init` parameter is not provided._
+apply. Use the name of the template without the extension. For example, "Haskell"
+_Ignored if `auto_init` parameter is not provided._
 
 <%= json \
   :name          => "Hello-World",
@@ -167,6 +168,9 @@ repository, `false` to disable it. Default is `true`.
 has\_downloads
 : _Optional_ **boolean** - `true` to enable downloads for this
 repository, `false` to disable them. Default is `true`.
+
+default\_branch
+: _Optional_ **String** - Update the default branch for this repository.
 
 <%= json \
   :name          => "Hello-World",

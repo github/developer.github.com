@@ -12,6 +12,8 @@ module GitHub
         202 => '202 Accepted',
         204 => '204 No Content',
         301 => '301 Moved Permanently',
+        302 => '302 Found',
+        307 => '307 Temporary Redirect',
         304 => '304 Not Modified',
         401 => '401 Unauthorized',
         403 => '403 Forbidden',
@@ -23,7 +25,8 @@ module GitHub
 
       AUTHORS = {
         :technoweenie => '821395fe70906c8290df7f18ac4ac6cf',
-        :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0'
+        :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0',
+        :pezra        => 'f38112009dc16547051c8ac246cee443'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

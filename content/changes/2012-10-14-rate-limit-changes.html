@@ -1,0 +1,24 @@
+---
+kind: change
+title: Rate limit changes for unauthenticated requests
+created_at: 2012-10-14
+author_name: pengwynn
+---
+
+To ensure a high quality of service for all API consumers, we've reduced the
+default rate limit for unauthenticated requests. To enjoy the default rate
+limit of 5,000 requests per hour, you'll need to
+[authenticate](http://developer.github.com/v3/#authentication) via Basic Auth
+or OAuth. Unauthenticated requests will be limited to 60 per hour unless you
+[include your OAuth client and
+secret](http://developer.github.com/v3/#unauthenticated-rate-limited-requests).
+
+We'll soon require all requests to include a valid [User Agent
+header](http://en.wikipedia.org/wiki/User_agent). Setting a
+unique value for this header helps us identify requests and get in touch with
+developers who are abusing the API. Most HTTP libraries, wrapper libraries, and
+even cURL provide a valid header for you already and allow you to change it to
+something unique to your application.
+
+If you have any questions or feedback, please drop us a line at
+[support@github.com](mailto:support@github.com?subject=API Rate limit).

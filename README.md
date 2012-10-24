@@ -53,13 +53,17 @@ We specify the JSON responses in ruby so that we don't have to write
 them by hand all over the docs.  You can render the JSON for a resource
 like this:
 
-    <%= json :issue %>
+```erb
+<%= json :issue %>
+```
 
 This looks up `GitHub::Resources::ISSUE` in `lib/resources.rb`.
 
 Some actions return arrays.  You can modify the JSON by passing a block:
 
-    <%= json(:issue) { |hash| [hash] } %>
+```erb
+<%= json(:issue) { |hash| [hash] } %>
+```
 
 ### Terminal blocks
 

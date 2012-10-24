@@ -1,0 +1,22 @@
+---
+kind: change
+title: Set the default branch for a repository
+created_at: 2012-10-24
+author_name: pengwynn
+---
+
+You can set the default branch for a repository to something other than 'master' from the GitHub repository admin screen:
+
+![repo admin](/images/posts/default-branch.png)
+
+Now, you can update this setting via the API. We've added a `default_branch` parameter to the [Edit Repository method][edit-repo]:
+
+<pre class="terminal">
+curl -u pengwynn \
+     -d '{"name": "octokit", "default_branch":"development"}' \
+     https://api.github.com/repos/pengwynn/octokit
+</pre>
+
+If you provide a branch name that hasn't been pushed to GitHub, we'll gracefully fall back to `'master'` or the first branch.
+
+[edit-repo]: /v3/repos/#edit

@@ -969,12 +969,15 @@ module GitHub
       :repository => SIMPLE_REPO,
       :subject => {
         :title => "Greetings",
-        :url => "https://api.github.com/repos/pengwynn/octokit/issues/123"
+        :url => "https://api.github.com/repos/pengwynn/octokit/issues/123",
+        :latest_comment_url => "https://api.github.com/repos/pengwynn/octokit/issues/comments/123"
       },
       :reason => 'subscribed',
       :unread => true,
       :updated_at => '2012-09-25T07:54:41-07:00',
-      :last_read_at => '2012-09-25T07:54:41-07:00'
+      :last_read_at => '2012-09-25T07:54:41-07:00',
+      :url => "https://api.github.com/notifications/summaries/1",
+      :mark_url => "https://api.github.com/notifications/summaries/1/mark",
     }
 
     SUBSCRIPTION = {

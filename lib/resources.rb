@@ -986,3 +986,4 @@ module GitHub
   end
 end
 
+include GitHub::Resources::Helpers

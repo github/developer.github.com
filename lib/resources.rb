@@ -964,48 +964,18 @@ module GitHub
       :size => 100
     }
 
-    ISSUE_SUMMARY = {
+    SUMMARY = {
       :id => 1,
       :repository => SIMPLE_REPO,
-      :thread => {
-        :type => "Issue",
-        :id => 123,
+      :subject => {
         :title => "Greetings",
-        :state => 'open',
-        :number => 123,
         :url => "https://api.github.com/repos/pengwynn/octokit/issues/123"
-      },
-      :comment => {
-        :type => "IssueComment",
-        :id => 456,
-        :body => "Hello",
-        :author => USER,
-        :created_at => '2012-09-25T07:54:41-07:00',
-        :url => "https://api.github.com/repos/pengwynn/octokit/issues/comments/456"
       },
       :reason => 'subscribed',
       :unread => true,
       :updated_at => '2012-09-25T07:54:41-07:00',
       :last_read_at => '2012-09-25T07:54:41-07:00'
     }
-
-    COMMIT_SUMMARY = ISSUE_SUMMARY.merge \
-      :thread => {
-        :type => "Commit",
-        :title => "added readme, because im a good github citizen",
-        :id => "7638417db6d59f3c431d3e1f261cc637155684cd",
-        :url => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"
-      },
-      :comment => {
-        :type => "CommitComment",
-        :id => 1,
-        :author => USER,
-        :body => "Great stuff",
-        :created_at => '2012-09-25T07:54:41-07:00',
-        :url => "https://api.github.com/repos/octocat/Hello-World/comments/1"
-      }
-
-    SUMMARIES = [ISSUE_SUMMARY, COMMIT_SUMMARY]
 
     SUBSCRIPTION = {
       :subscribed => true,

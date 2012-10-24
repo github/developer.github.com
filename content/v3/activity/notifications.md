@@ -69,7 +69,7 @@ directly participating or mentioned.
 ### Response
 
 <%= headers 200 %>
-<%= json(:summaries) %>
+<%= json(:summary) { |h| [h] } %>
 
 ## Mark as read
 
@@ -97,15 +97,10 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
     GET /notifications/summaries/:id
 
-### Issue Summary Response
+### Response
 
 <%= headers 200 %>
-<%= json(:issue_summary) { |h| [h] } %>
-
-### Commit Summary Response
-
-<%= headers 200 %>
-<%= json(:commit_summary) { |h| [h] } %>
+<%= json(:summary) { |h| [h] } %>
 
 ## Mark a summary as read
 

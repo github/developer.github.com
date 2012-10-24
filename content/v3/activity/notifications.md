@@ -49,7 +49,7 @@ time.  The time should be passed in as UTC in the ISO 8601 format:
 ### Response
 
 <%= headers 200 %>
-<%= json(:summaries) %>
+<%= json(:summary) { |h| [h] } %>
 
 ## List your notifications in a repository
 

@@ -2,13 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2012-10-17T05:00:00Z</updated>
+  <updated>2012-10-24T05:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2012-10-24:/changes/2012-10-24-set-default-branch/</id>
+    <title type="html">Set the default branch for a repository</title>
+    <published>2012-10-24T05:00:00Z</published>
+    <updated>2012-10-24T05:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-10-24-set-default-branch/" />
+    <content type="html">&lt;p&gt;You can set the default branch for a repository to something other than ‘master’ from the GitHub repository admin screen:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/posts/default-branch.png" alt="repo admin"&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, you can update this setting via the API. We’ve added a &lt;code&gt;default_branch&lt;/code&gt; parameter to the &lt;a href="/v3/repos/#edit"&gt;Edit Repository method&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl -u pengwynn \
+     -d '{"name": "octokit", "default_branch":"development"}' \
+     https://api.github.com/repos/pengwynn/octokit
+&lt;/pre&gt;
+
+&lt;p&gt;If you provide a branch name that hasn’t been pushed to GitHub, we’ll gracefully fall back to &lt;code&gt;'master'&lt;/code&gt; or the first branch.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2012-10-17:/changes/2012-10-17-org-members-redirection/</id>
     <title type="html">Organization Members Resource Changes</title>

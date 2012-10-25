@@ -2,6 +2,9 @@
 title: Activity | GitHub API
 ---
 
+Serving up the 'social' in Social Coding™, the Activity APIs provide access to
+notifications, subscriptions, and timelines.
+
 ## Notifications
 
 Notifications of new comments are delivered to users.  The Notifications API

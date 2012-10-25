@@ -11,6 +11,7 @@ module GitHub
         201 => '201 Created',
         202 => '202 Accepted',
         204 => '204 No Content',
+        205 => '205 Reset Content',
         301 => '301 Moved Permanently',
         302 => '302 Found',
         307 => '307 Temporary Redirect',
@@ -143,23 +144,26 @@ module GitHub
       "key"   => "ssh-rsa AAA...",
     }
 
-    REPO = {
-      "url"              => "https://api.github.com/repos/octocat/Hello-World",
-      "html_url"         => "https://github.com/octocat/Hello-World",
-      "clone_url"        => "https://github.com/octocat/Hello-World.git",
-      "git_url"          => "git://github.com/octocat/Hello-World.git",
-      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
-      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
-      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
+    SIMPLE_REPO = {
       "id"               => 1296269,
       "owner"            => USER,
       "name"             => "Hello-World",
       "full_name"        => "octocat/Hello-World",
       "description"      => "This your first repo!",
-      "homepage"         => "https://github.com",
-      "language"         => nil,
       "private"          => false,
       "fork"             => false,
+      "url"              => "https://api.github.com/repos/octocat/Hello-World",
+      "html_url"         => "https://github.com/octocat/Hello-World"
+    }
+
+    REPO = SIMPLE_REPO.merge({
+      "clone_url"        => "https://github.com/octocat/Hello-World.git",
+      "git_url"          => "git://github.com/octocat/Hello-World.git",
+      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
+      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
+      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
+      "homepage"         => "https://github.com",
+      "language"         => nil,
       "forks"            => 9,
       "forks_count"      => 9,
       "watchers"         => 80,
@@ -170,7 +174,7 @@ module GitHub
       "pushed_at"        => "2011-01-26T19:06:43Z",
       "created_at"       => "2011-01-26T19:01:12Z",
       "updated_at"       => "2011-01-26T19:14:43Z"
-    }
+    })
 
     FULL_REPO = REPO.merge({
       "organization"     => USER.merge('type' => 'Organization'),
@@ -961,6 +965,35 @@ module GitHub
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :size => 100
     }
+
+    THREAD = {
+      :id => 1,
+      :repository => SIMPLE_REPO,
+      :subject => {
+        :title => "Greetings",
+        :url => "https://api.github.com/repos/pengwynn/octokit/issues/123",
+        :latest_comment_url => "https://api.github.com/repos/pengwynn/octokit/issues/comments/123"
+      },
+      :reason => 'subscribed',
+      :unread => true,
+      :updated_at => '2012-09-25T07:54:41-07:00',
+      :last_read_at => '2012-09-25T07:54:41-07:00',
+      :url => "https://api.github.com/notifications/threads/1"
+    }
+
+    SUBSCRIPTION = {
+      :subscribed => true,
+      :ignored => false,
+      :reason => nil,
+      :created_at => "2012-10-06T21:34:12Z",
+      :url => "https://api.github.com/notifications/threads/1/subscription",
+      :thread_url => "https://api.github.com/notifications/threads/1"
+    }
+
+    REPO_SUBSCRIPTION = SUBSCRIPTION.merge \
+      :url => "https://api.github.com/repos/octocat/example/subscription",
+      :repository_url => "https://api.github.com/repos/octocat/example"
+    REPO_SUBSCRIPTION.delete :thread_url
   end
 end
 

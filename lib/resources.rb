@@ -18,6 +18,7 @@ module GitHub
         401 => '401 Unauthorized',
         403 => '403 Forbidden',
         404 => '404 Not Found',
+        405 => '405 Method not allowed',
         409 => '409 Conflict',
         422 => '422 Unprocessable Entity',
         500 => '500 Server Error'

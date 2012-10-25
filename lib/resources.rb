@@ -11,6 +11,7 @@ module GitHub
         201 => '201 Created',
         202 => '202 Accepted',
         204 => '204 No Content',
+        205 => '205 Reset Content',
         301 => '301 Moved Permanently',
         302 => '302 Found',
         307 => '307 Temporary Redirect',

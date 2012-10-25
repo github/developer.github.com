@@ -156,6 +156,9 @@ include access to code - use `repo` for that.
 delete\_repo
 : Delete access to adminable repositories.
 
+notifications
+: Read access to a user's notifications.
+
 gist
 : write access to gists.
 

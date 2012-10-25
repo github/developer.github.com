@@ -984,8 +984,15 @@ module GitHub
       :subscribed => true,
       :ignored => false,
       :reason => nil,
-      :created_at => "2012-10-06T21:34:12Z"
+      :created_at => "2012-10-06T21:34:12Z",
+      :url => "https://api.github.com/notifications/summaries/1/subscription",
+      :summary_url => "https://api.github.com/notifications/summaries/1"
     }
+
+    REPO_SUBSCRIPTION = SUBSCRIPTION.merge \
+      :url => "https://api.github.com/repos/octocat/example/subscription",
+      :repository_url => "https://api.github.com/repos/octocat/example"
+    REPO_SUBSCRIPTION.delete :summary_url
   end
 end
 

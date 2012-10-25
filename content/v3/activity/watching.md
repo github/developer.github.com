@@ -48,7 +48,7 @@ List repositories being watched by the authenticated user.
 ### Response
 
 <%= headers 200 %>
-<%= json :subscription %>
+<%= json :repo_subscription %>
 
 ## Set a Repository Subscription
 
@@ -67,7 +67,7 @@ repository.
 ### Response
 
 <%= headers 200 %>
-<%= json :subscription %>
+<%= json :repo_subscription %>
 
 ## Delete a Repository Subscription
 

@@ -23,8 +23,8 @@ user is involved including:
 * Commits the user authors or commits
 * Any discussion in which the user actively participates
 
-Notifications come back as Summary objects.  A Summary contains information
-about the current discussion of an Issue/PullRequest/Commit.
+Notifications come back as "threads".  A Thread contains information about the
+current discussion of an Issue/PullRequest/Commit.
 
 Notifications are optimized for polling with the "Last-Modified" header.  If
 there are no new notifications, you will see a "304 Not Modified" response,
@@ -67,7 +67,7 @@ time.  The time should be passed in as UTC in the ISO 8601 format:
 ### Response
 
 <%= headers 200 %>
-<%= json(:summary) { |h| [h] } %>
+<%= json(:thread) { |h| [h] } %>
 
 ## List your notifications in a repository
 
@@ -84,17 +84,35 @@ participating
 : _Optional_ **boolean** `true` to show only notifications in which the user is
 directly participating or mentioned.
 
+since
+: _Optional_ **time** filters out any notifications updated before the given
+time.  The time should be passed in as UTC in the ISO 8601 format:
+`YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
+
 ### Response
 
 <%= headers 200 %>
-<%= json(:summary) { |h| [h] } %>
+<%= json(:thread) { |h| [h] } %>
 
 ## Mark as read
 
 Marking a notification as "read" removes it from the [default view
 on GitHub.com](https://github.com/notifications).
 
-    POST /notifications/mark
+    PUT /notifications
+
+### Input
+
+unread
+: **Boolean** Changes the unread status of the threads.
+
+read
+: **Boolean** Inverse of "unread".
+
+last_read_at
+: _Optional_ **Time** Describes the last point that notifications were checked.  Anything
+updated since this time will not be updated.  Default: Now.  Expected in ISO
+8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
 
 ### Response
 
@@ -105,49 +123,70 @@ on GitHub.com](https://github.com/notifications).
 Marking all notifications in a repository as "read" removes them
 from the [default view on GitHub.com](https://github.com/notifications).
 
-    POST /repos/:owner/:repo/notifications/mark
+    PUT /repos/:owner/:repo/notifications
+
+### Input
+
+unread
+: **Boolean** Changes the unread status of the threads.
+
+read
+: **Boolean** Inverse of "unread".
+
+last_read_at
+: _Optional_ **Time** Describes the last point that notifications were checked.  Anything
+updated since this time will not be updated.  Default: Now.  Expected in ISO
+8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
 
 ### Response
 
 <%= headers 205 %>
 
-## View a single summary
+## View a single thread
 
-    GET /notifications/summaries/:id
+    GET /notifications/threads/:id
 
 ### Response
 
 <%= headers 200 %>
-<%= json(:summary) { |h| [h] } %>
+<%= json(:thread) { |h| [h] } %>
 
-## Mark a summary as read
+## Mark a thread as read
 
-    POST /notifications/summaries/:id/mark
+    PATCH /notifications/threads/:id
+
+### Input
+
+unread
+: **Boolean** Changes the unread status of the threads.
+
+read
+: **Boolean** Inverse of "unread".
 
 ### Response
 
 <%= headers 205 %>
 
-## Get a Summary Subscription
+## Get a Thread Subscription
 
-This checks to see if the current user is subscribed to a summary.  You can also
+This checks to see if the current user is subscribed to a thread.  You can also
 [get a Repository subscription](http://localhost:3000/v3/activity/watching/#get-a-repository-subscription).
 
-    GET /notifications/summary/1/subscription
+    GET /notifications/threads/1/subscription
 
 ### Response
 
 <%= headers 200 %>
 <%= json :subscription %>
 
-## Set a Summary Subscription
+## Set a Thread Subscription
 
-This lets you subscribe to a summary, or ignore it.  Subscribing to a summary
+This lets you subscribe to a thread, or ignore it.  Subscribing to a thread
 is unnecessary if the user is already subscribed to the repository.  Ignoring
-a summary will mute all future notifications (until you comment or get
+a thread will mute all future notifications (until you comment or get
 @mentioned).
 
-    PUT /notifications/summary/1/subscription
+    PUT /notifications/threads/1/subscription
 
 ### Input
 
@@ -164,9 +203,9 @@ repository.
 <%= headers 200 %>
 <%= json :subscription %>
 
-## Delete a Summary Subscription
+## Delete a Thread Subscription
 
-    DELETE /notifications/summary/1/subscription
+    DELETE /notifications/threads/1/subscription
 
 ### Response
 

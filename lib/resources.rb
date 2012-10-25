@@ -965,7 +965,7 @@ module GitHub
       :size => 100
     }
 
-    SUMMARY = {
+    THREAD = {
       :id => 1,
       :repository => SIMPLE_REPO,
       :subject => {
@@ -977,8 +977,7 @@ module GitHub
       :unread => true,
       :updated_at => '2012-09-25T07:54:41-07:00',
       :last_read_at => '2012-09-25T07:54:41-07:00',
-      :url => "https://api.github.com/notifications/summaries/1",
-      :mark_url => "https://api.github.com/notifications/summaries/1/mark",
+      :url => "https://api.github.com/notifications/threads/1"
     }
 
     SUBSCRIPTION = {
@@ -986,14 +985,14 @@ module GitHub
       :ignored => false,
       :reason => nil,
       :created_at => "2012-10-06T21:34:12Z",
-      :url => "https://api.github.com/notifications/summaries/1/subscription",
-      :summary_url => "https://api.github.com/notifications/summaries/1"
+      :url => "https://api.github.com/notifications/threads/1/subscription",
+      :thread_url => "https://api.github.com/notifications/threads/1"
     }
 
     REPO_SUBSCRIPTION = SUBSCRIPTION.merge \
       :url => "https://api.github.com/repos/octocat/example/subscription",
       :repository_url => "https://api.github.com/repos/octocat/example"
-    REPO_SUBSCRIPTION.delete :summary_url
+    REPO_SUBSCRIPTION.delete :thread_url
   end
 end
 

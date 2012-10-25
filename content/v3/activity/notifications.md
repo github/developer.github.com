@@ -23,6 +23,11 @@ user is involved including:
 * Commits the user authors or commits
 * Any discussion in which the user actively participates
 
+All Notification API calls require the <strong>"notifications"</strong> API
+scope.  Doing this will give read-only access to some Issue/Commit content.
+You will still need the "repo" scope to access Issues and Commits from their
+respective endpoints.
+
 Notifications come back as "threads".  A Thread contains information about the
 current discussion of an Issue/PullRequest/Commit.
 

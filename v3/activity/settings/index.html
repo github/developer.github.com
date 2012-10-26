@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Event types | GitHub API</title>
+  <title>Notification Settings | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -35,286 +35,99 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="event-types">Event Types</h1>
+    <h1 id="notification-settings-api">Notification Settings API</h1>
 
-<p>Each event has a similar JSON schema, but a unique <code>payload</code> object that is
-determined by its event type.  <a href="/v3/repos/hooks/">Repository hook</a> names relate to event types, and will have the exact same payload.  The only exception to this is the <code>push</code> hook, which has a larger, more detailed payload.</p>
+<p>This API is not implemented.  This documentation is a placeholder for when it
+is ready for public consumption.</p>
 
-<p>This describes just the payload of an event.  A full event will also
-show the user that performed the event (actor), the repository, and the
-organization (if applicable).</p>
+<h2 id="view-settings">View Settings</h2>
 
-<p>Note that some of these events may not be rendered in timelines.
-They’re only created for various internal and repository hooks.</p>
+<pre><code>GET /notifications/settings
+</code></pre>
 
-<ul id="markdown-toc">
-<li><a href="#commitcommentevent">CommitCommentEvent</a></li>
-  <li><a href="#createevent">CreateEvent</a></li>
-  <li><a href="#deleteevent">DeleteEvent</a></li>
-  <li><a href="#downloadevent">DownloadEvent</a></li>
-  <li><a href="#followevent">FollowEvent</a></li>
-  <li><a href="#forkevent">ForkEvent</a></li>
-  <li><a href="#forkapplyevent">ForkApplyEvent</a></li>
-  <li><a href="#gistevent">GistEvent</a></li>
-  <li><a href="#gollumevent">GollumEvent</a></li>
-  <li><a href="#issuecommentevent">IssueCommentEvent</a></li>
-  <li><a href="#issuesevent">IssuesEvent</a></li>
-  <li><a href="#memberevent">MemberEvent</a></li>
-  <li><a href="#publicevent">PublicEvent</a></li>
-  <li><a href="#pullrequestevent">PullRequestEvent</a></li>
-  <li><a href="#pullrequestreviewcommentevent">PullRequestReviewCommentEvent</a></li>
-  <li><a href="#pushevent">PushEvent</a></li>
-  <li><a href="#teamaddevent">TeamAddEvent</a></li>
-  <li><a href="#watchevent">WatchEvent</a></li>
-</ul><h2 id="commitcommentevent">CommitCommentEvent</h2>
+<h2 id="update-settings">Update Settings</h2>
 
-<p>Hook name: <code>commit_comment</code></p>
+<p>Update the notification settings for the authenticated user.</p>
+
+<pre><code>PATCH /notifications/settings
+</code></pre>
+
+<h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt>comment</dt>
+<dt>participating.email</dt>
   <dd>
-<strong>object</strong> - The <a href="/v3/repos/comments/#list-commit-comments-for-a-repository">comment</a> itself.</dd>
-</dl><h2 id="createevent">CreateEvent</h2>
-
-<p>Represents a created repository, branch, or tag.</p>
-
-<p>Hook name: <code>create</code></p>
-
-<dl>
-<dt>ref_type</dt>
+<em>Optional</em> <strong>boolean</strong> <code>true</code> to receive participating notificationsn via
+email.</dd>
+  <dt>participating.web</dt>
   <dd>
-<strong>string</strong> - The object that was created: “repository”, “branch”, or
-“tag”</dd>
-  <dt>ref</dt>
+<em>Optional</em> <strong>boolean</strong> <code>true</code> to receive participating notificationsn via
+web.</dd>
+  <dt>watching.email</dt>
   <dd>
-<strong>string</strong> - The git ref (or <code>null</code> if only a repository was created).</dd>
-  <dt>master_branch</dt>
+<em>Optional</em> <strong>boolean</strong> <code>true</code> to receive watching notificationsn via
+email.</dd>
+  <dt>watching.web</dt>
   <dd>
-<strong>string</strong> - The name of the repository’s master branch.</dd>
-  <dt>description</dt>
-  <dd>
-<strong>string</strong> - The repository’s current description.</dd>
-</dl><h2 id="deleteevent">DeleteEvent</h2>
+<em>Optional</em> <strong>boolean</strong> <code>true</code> to receive watching notificationsn via
+web.</dd>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"participating"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"web"</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">},</span>
+  <span class="s2">"watching"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"web"</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
 
-<p>Represents a deleted branch or tag.</p>
+<h2 id="get-notification-email-settings">Get notification email settings</h2>
 
-<p>Hook name: <code>delete</code></p>
+<pre><code>GET /notifications/emails
+</code></pre>
 
-<dl>
-<dt>ref_type</dt>
-  <dd>
-<strong>string</strong> - The object that was deleted: “branch” or “tag”.</dd>
-  <dt>ref</dt>
-  <dd>
-<strong>string</strong> - The full git ref.</dd>
-</dl><h2 id="downloadevent">DownloadEvent</h2>
+<h2 id="get-the-global-email-settings">Get the global email settings</h2>
 
-<p>Hook name: <code>download</code></p>
+<pre><code>GET /notifications/global/emails
+</code></pre>
 
-<dl>
-<dt>download</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/repos/downloads/">download</a> that was just
-created.</dd>
-</dl><h2 id="followevent">FollowEvent</h2>
+<h2 id="get-notification-email-settings-for-an-organization">Get notification email settings for an organization</h2>
 
-<p>Hook name: <code>follow</code></p>
+<pre><code>GET /notifications/organization/:org/emails
+</code></pre>
 
-<dl>
-<dt>target</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/users">user</a> that was just followed.</dd>
-</dl><h2 id="forkevent">ForkEvent</h2>
+<h2 id="update-email-settings">Update email settings</h2>
 
-<p>Hook name: <code>fork</code></p>
+<pre><code>PATCH /notifications/emails
+</code></pre>
+
+<h2 id="update-global-email-settings">Update global email settings</h2>
+
+<pre><code>PUT /notifications/global/emails
+</code></pre>
+
+<h3 id="parameters-1">Parameters</h3>
 
 <dl>
-<dt>forkee</dt>
+<dt>email</dt>
   <dd>
-<strong>object</strong> - The created <a href="/v3/repos/">repository</a>.</dd>
-</dl><h2 id="forkapplyevent">ForkApplyEvent</h2>
+<em>Required</em> <strong>string</strong> Email address to which to send notifications to the
+authenticated user for discussions related to projects for this organization.</dd>
+</dl><h2 id="update-organization-email-settings">Update Organization email settings</h2>
 
-<p>Triggered when a patch is applied in the Fork Queue.</p>
+<p>Update the notification settings for the authenticated user.</p>
 
-<p>Hook name: <code>fork_apply</code></p>
+<pre><code>PUT /notifications/organization/:org/emails
+</code></pre>
 
-<dl>
-<dt>head</dt>
-  <dd>
-<strong>string</strong> - The branch name the patch is applied to.</dd>
-  <dt>before</dt>
-  <dd>
-<strong>string</strong> - SHA of the repo state before the patch.</dd>
-  <dt>after</dt>
-  <dd>
-<strong>string</strong> - SHA of the repo state after the patch.</dd>
-</dl><h2 id="gistevent">GistEvent</h2>
-
-<p>Hook name: <code>gist</code></p>
+<h3 id="parameters-2">Parameters</h3>
 
 <dl>
-<dt>action</dt>
+<dt>email</dt>
   <dd>
-<strong>string</strong> - The action that was performed: “create” or “update”</dd>
-  <dt>gist</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/gists/">gist</a> itself.</dd>
-</dl><h2 id="gollumevent">GollumEvent</h2>
-
-<p>Hook name: <code>gollum</code></p>
-
-<dl>
-<dt>pages</dt>
-  <dd>
-<strong>array</strong> - The pages that were updated.</dd>
-  <dt>pages[][page_name]</dt>
-  <dd>
-<strong>string</strong> - The name of the page.</dd>
-  <dt>pages[][title]</dt>
-  <dd>
-<strong>string</strong> - The current page title.</dd>
-  <dt>pages[][action]</dt>
-  <dd>
-<strong>string</strong> - The action that was performed on the page.</dd>
-  <dt>pages[][sha]</dt>
-  <dd>
-<strong>string</strong> - The latest commit SHA of the page.</dd>
-  <dt>pages[][html_url]</dt>
-  <dd>
-<strong>string</strong> - Points to the HTML wiki page.</dd>
-</dl><h2 id="issuecommentevent">IssueCommentEvent</h2>
-
-<p>Hook name: <code>issue_comment</code></p>
-
-<dl>
-<dt>action</dt>
-  <dd>
-<strong>string</strong> - The action that was performed on the comment.</dd>
-  <dt>issue</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/issues/">issue</a> the comment belongs to.</dd>
-  <dt>comment</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/issues/comments/">comment</a> itself.</dd>
-</dl><h2 id="issuesevent">IssuesEvent</h2>
-
-<p>Hook name: <code>issues</code></p>
-
-<dl>
-<dt>action</dt>
-  <dd>
-<strong>string</strong> - The action that was performed: “opened”, “closed”, or
-“reopened”.</dd>
-  <dt>issue</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/issues">issue</a> itself.</dd>
-</dl><h2 id="memberevent">MemberEvent</h2>
-
-<p>Triggered when a user is added as a collaborator to a repository.</p>
-
-<p>Hook name: <code>member</code></p>
-
-<dl>
-<dt>member</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/users/">user</a> that was added.</dd>
-  <dt>action</dt>
-  <dd>
-<strong>string</strong> - The action that was performed: “added”.</dd>
-</dl><h2 id="publicevent">PublicEvent</h2>
-
-<p>This is triggered when a private repo is open sourced.  Without a doubt: the
-best GitHub event.</p>
-
-<p>Hook name: <code>public</code></p>
-
-<p>(empty payload)</p>
-
-<h2 id="pullrequestevent">PullRequestEvent</h2>
-
-<p>Hook name: <code>pull_request</code></p>
-
-<dl>
-<dt>action</dt>
-  <dd>
-<strong>string</strong> - The action that was performed: “opened”, “closed”,
-“synchronize”, or “reopened”.</dd>
-  <dt>number</dt>
-  <dd>
-<strong>integer</strong> - The pull request number.</dd>
-  <dt>pull_request</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/pulls">pull request</a> itself.</dd>
-</dl><h2 id="pullrequestreviewcommentevent">PullRequestReviewCommentEvent</h2>
-
-<p>Hook name: <code>pull_request_review_comment</code></p>
-
-<dl>
-<dt>comment</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/repos/commits/#list-commit-comments-for-a-repository">comment</a> itself.</dd>
-</dl><h2 id="pushevent">PushEvent</h2>
-
-<p>Hook name: <code>push</code></p>
-
-<dl>
-<dt>head</dt>
-  <dd>
-<strong>string</strong> - The SHA of the HEAD commit on the repository.</dd>
-  <dt>ref</dt>
-  <dd>
-<strong>string</strong> - The full Git ref that was pushed.  Example:
-“refs/heads/master”</dd>
-  <dt>size</dt>
-  <dd>
-<strong>integer</strong> - The number of commits in the push.</dd>
-  <dt>commits</dt>
-  <dd>
-<strong>array</strong> - The list of pushed commits.</dd>
-  <dt>commits[][sha]</dt>
-  <dd>
-<strong>string</strong> - The SHA of the commit.</dd>
-  <dt>commits[][message]</dt>
-  <dd>
-<strong>string</strong> - The commit message.</dd>
-  <dt>commits[][author]</dt>
-  <dd>
-<strong>object</strong> - The git author of the commit.</dd>
-  <dt>commits[][author][name]</dt>
-  <dd>
-<strong>string</strong> - The git author’s name.</dd>
-  <dt>commits[][author][email]</dt>
-  <dd>
-<strong>string</strong> - The git author’s email address.</dd>
-  <dt>commits[][url]</dt>
-  <dd>
-<strong>url</strong> - Points to the commit API resource.</dd>
-</dl><h2 id="teamaddevent">TeamAddEvent</h2>
-
-<p>Hook name: <code>team_add</code></p>
-
-<dl>
-<dt>team</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/orgs/teams/">team</a> that was modified.  Note:
-older events may not include this in the payload.</dd>
-  <dt>user</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/users/">user</a> that was added to this team.</dd>
-  <dt>repo</dt>
-  <dd>
-<strong>object</strong> - The <a href="/v3/repos/">repository</a> that was added to this team.</dd>
-</dl><h2 id="watchevent">WatchEvent</h2>
-
-<p>The event’s actor is the watcher, and the event’s repo is the watched
-repository.</p>
-
-<p>Hook name: <code>watch</code></p>
-
-<dl>
-<dt>action</dt>
-  <dd>
-<strong>string</strong> - The action that was performed.</dd>
+<em>Required</em> <strong>string</strong> Email address to which to send notifications to the
+authenticated user for discussions related to projects for this organization.</dd>
 </dl>
       </div>
 
@@ -322,11 +135,21 @@ repository.</p>
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
           <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/">Summary</a></h3>
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/">Overview</a></h3>
             <ul class="js-guides">
               <li><a href="/v3/oauth/">OAuth</a></li>
               <li><a href="/v3/media/">Media Types</a></li>
               <li><a href="/v3/libraries/">Libraries</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/activity/">Activity</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/activity/events/">Events</a></li>
+              <li><a href="/v3/activity/events/types/">Event Types</a></li>
+              <li><a href="/v3/activity/notifications/">Notifications</a></li>
+              <li><a href="/v3/activity/starring/">Starring</a></li>
+              <li><a href="/v3/activity/watching/">Watching</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -380,9 +203,7 @@ repository.</p>
               <li><a href="/v3/repos/keys/">Keys</a></li>
               <li><a href="/v3/repos/hooks/">Hooks</a></li>
               <li><a href="/v3/repos/merging/">Merging</a></li>
-              <li><a href="/v3/repos/starring/">Starring</a></li>
               <li><a href="/v3/repos/statuses/">Statuses</a></li>
-              <li><a href="/v3/repos/watching/">Watching</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -391,12 +212,6 @@ repository.</p>
               <li><a href="/v3/users/emails/">Emails</a></li>
               <li><a href="/v3/users/followers/">Followers</a></li>
               <li><a href="/v3/users/keys/">Keys</a></li>
-            </ul>
-          </li>
-          <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/events/">Events</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/events/types/">Types</a></li>
             </ul>
           </li>
           <li class="js-topic">

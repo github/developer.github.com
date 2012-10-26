@@ -51,7 +51,25 @@ various activity streams on the site.</p>
   <li><a href="#list-events-performed-by-a-user">List events performed by a user</a></li>
   <li><a href="#list-public-events-performed-by-a-user">List public events performed by a user</a></li>
   <li><a href="#list-events-for-an-organization">List events for an organization</a></li>
-</ul><p>Events support <a href="/v3/#pagination">pagination</a>,
+</ul><p>Events are optimized for polling with the “ETag” header.  If no new events have
+been triggered, you will see a “304 Not Modified” response, and your current
+rate limit will be untouched.  There is also an “X-Poll-Interval” header that
+specifies how often (in seconds) you are allowed to poll.  In times of high
+server load, the time may increase.  Please obey the header.</p>
+
+<pre><code>$ curl -I https://api.github.com/users/tater/events
+HTTP/1.1 200 OK
+X-Poll-Interval: 60
+ETag: "a18c3bded88eb5dbb5c849a489412bf3"
+
+# The quotes around the ETag value are important
+$ curl -I https://api.github.com/users/tater/events \
+    -H 'If-None-Match: "a18c3bded88eb5dbb5c849a489412bf3"'
+HTTP/1.1 304 Not Modified
+X-Poll-Interval: 60
+</code></pre>
+
+<p>Events support <a href="/v3/#pagination">pagination</a>,
 however the <code>per_page</code> option is unsupported. The fixed page size is 30 items.
 Fetching up to ten pages is supported, for a total of 300 events.</p>
 
@@ -159,11 +177,21 @@ the user to view this.</p>
       <div class="js-toggle-list sidebar-module expandable">
         <ul>
           <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/">Summary</a></h3>
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/">Overview</a></h3>
             <ul class="js-guides">
               <li><a href="/v3/oauth/">OAuth</a></li>
               <li><a href="/v3/media/">Media Types</a></li>
               <li><a href="/v3/libraries/">Libraries</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/activity/">Activity</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/activity/events/">Events</a></li>
+              <li><a href="/v3/activity/events/types/">Event Types</a></li>
+              <li><a href="/v3/activity/notifications/">Notifications</a></li>
+              <li><a href="/v3/activity/starring/">Starring</a></li>
+              <li><a href="/v3/activity/watching/">Watching</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -217,9 +245,7 @@ the user to view this.</p>
               <li><a href="/v3/repos/keys/">Keys</a></li>
               <li><a href="/v3/repos/hooks/">Hooks</a></li>
               <li><a href="/v3/repos/merging/">Merging</a></li>
-              <li><a href="/v3/repos/starring/">Starring</a></li>
               <li><a href="/v3/repos/statuses/">Statuses</a></li>
-              <li><a href="/v3/repos/watching/">Watching</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -228,12 +254,6 @@ the user to view this.</p>
               <li><a href="/v3/users/emails/">Emails</a></li>
               <li><a href="/v3/users/followers/">Followers</a></li>
               <li><a href="/v3/users/keys/">Keys</a></li>
-            </ul>
-          </li>
-          <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/events/">Events</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/events/types/">Types</a></li>
             </ul>
           </li>
           <li class="js-topic">

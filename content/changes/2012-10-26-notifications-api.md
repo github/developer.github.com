@@ -32,11 +32,11 @@ You can mark them as read:
 <pre class="terminal">
 # all notifications
 $ curl https://api.github.com/notifications \
-    -X PATCH -d '{"read": true}'
+    -X PUT -d '{"read": true}'
 
 # notifications for a single repository
 $ curl https://api.github.com/repos/technoweenie/faraday/notifications \
-    -X PATCH -d '{"read": true}'
+    -X PUT -d '{"read": true}'
 </pre>
 
 You can also modify subscriptions for a Repository or a single thread.

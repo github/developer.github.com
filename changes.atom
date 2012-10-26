@@ -28,39 +28,44 @@ view and mark notifications as read.&lt;/p&gt;
 &lt;p&gt;The core notifications functionality is under the &lt;code&gt;/notifications&lt;/code&gt; endpoint.
 You can look for unread notifications:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ curl https://api.github.com/notifications
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/notifications
+&lt;/pre&gt;
 
 &lt;p&gt;You can filter these notifications to a single Repository:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;$ curl https://api.github.com/repos/technoweenie/faraday/notifications
-&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/repos/technoweenie/faraday/notifications
+&lt;/pre&gt;
 
 &lt;p&gt;You can mark them as read:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;# all notifications
+&lt;pre class="terminal"&gt;
+# all notifications
 $ curl https://api.github.com/notifications \
     -X PATCH -d '{"read": true}'
 
 # notifications for a single repository
 $ curl https://api.github.com/repos/technoweenie/faraday/notifications \
     -X PATCH -d '{"read": true}'
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 &lt;p&gt;You can also modify subscriptions for a Repository or a single thread.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;# subscription details for the thread (either an Issue or Commit)
+&lt;pre class="terminal"&gt;
+# subscription details for the thread (either an Issue or Commit)
 $ curl https://api.github.com/notifications/threads/1/subscription
 
 # subscription details for a whole Repository.
 $ curl https://api.github.com/repos/technoweenie/faraday/subscription
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 &lt;h2 id="polling"&gt;Polling&lt;/h2&gt;
 
 &lt;p&gt;The Notifications API is optimized for polling by the last modified time:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;# Add authentication to your requests
+&lt;pre class="terminal"&gt;
+# Add authentication to your requests
 $ curl -I https://api.github.com/notifications
 HTTP/1.1 200 OK
 Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
@@ -71,7 +76,7 @@ $ curl -I https://api.github.com/notifications
     -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
 HTTP/1.1 304 Not Modified
 X-Poll-Interval: 60
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 &lt;p&gt;You can read about the API details in depth in the &lt;a href="http://developer.github.com/v3/activity/notifications/"&gt;Notifications documentation&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>

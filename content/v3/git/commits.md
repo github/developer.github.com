@@ -38,7 +38,7 @@ for a merge commit, an array of more than one should be provided.
 
 The `committer` section is optional and will be filled with the `author`
 data if omitted. If the `author` section is omitted, it will be filled
-in with the authenticated users information and the current date.
+in with the authenticated user's information and the current date.
 
 
 author.name

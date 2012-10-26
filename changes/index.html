@@ -37,6 +37,80 @@
       <div class="content">
     <h1 id="api-changes">API Changes</h1>
 
+<div class="change" id="/changes/2012-10-26-notifications-api/">
+  <h2 class="title">
+  <a href="/changes/2012-10-26-notifications-api/">Notifications API</a>
+</h2>
+
+<div class="meta">
+  <div class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><span class="author vcard fn">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+    </span>
+    <span class="published">
+      October 26, 2012
+    
+    </span>
+  </div>
+</div>
+
+  <p>Now that the dust has settled around <a href="https://github.com/blog/1204-notifications-stars">Notifications and Stars</a>,
+we’ve unleashed all that :sparkles: in a <a href="http://developer.github.com/v3/activity/notifications/">brand new API</a>.  You can now
+view and mark notifications as read.</p>
+
+<h2 id="endpoint">Endpoint</h2>
+
+<p>The core notifications functionality is under the <code>/notifications</code> endpoint.
+You can look for unread notifications:</p>
+
+<pre><code>$ curl https://api.github.com/notifications
+</code></pre>
+
+<p>You can filter these notifications to a single Repository:</p>
+
+<pre><code>$ curl https://api.github.com/repos/technoweenie/faraday/notifications
+</code></pre>
+
+<p>You can mark them as read:</p>
+
+<pre><code># all notifications
+$ curl https://api.github.com/notifications \
+    -X PATCH -d '{"read": true}'
+
+# notifications for a single repository
+$ curl https://api.github.com/repos/technoweenie/faraday/notifications \
+    -X PATCH -d '{"read": true}'
+</code></pre>
+
+<p>You can also modify subscriptions for a Repository or a single thread.</p>
+
+<pre><code># subscription details for the thread (either an Issue or Commit)
+$ curl https://api.github.com/notifications/threads/1/subscription
+
+# subscription details for a whole Repository.
+$ curl https://api.github.com/repos/technoweenie/faraday/subscription
+</code></pre>
+
+<h2 id="polling">Polling</h2>
+
+<p>The Notifications API is optimized for polling by the last modified time:</p>
+
+<pre><code># Add authentication to your requests
+$ curl -I https://api.github.com/notifications
+HTTP/1.1 200 OK
+Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
+X-Poll-Interval: 60
+
+# Pass the Last-Modified header exactly
+$ curl -I https://api.github.com/notifications
+    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
+HTTP/1.1 304 Not Modified
+X-Poll-Interval: 60
+</code></pre>
+
+<p>You can read about the API details in depth in the <a href="http://developer.github.com/v3/activity/notifications/">Notifications documentation</a>.</p>
+</div>
+
 <div class="change" id="/changes/2012-10-24-set-default-branch/">
   <h2 class="title">
   <a href="/changes/2012-10-24-set-default-branch/">Set the default branch for a repository</a>

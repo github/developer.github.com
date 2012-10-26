@@ -24,16 +24,12 @@ to the actual date.
 We consider the "beta" API unchangeable.  [File a support issue](https://github.com/contact)
 if you have problems.
 
-### Upcoming Version
-
-    Accept: application/vnd.github.v3+json
-
-The API is expected to be finalized Real Soon Now.
-
 #### Expected Changes <a name="changes"></a>
 
-* All `*_url` attributes move to a `_links` object.  See [Pull
-  Requests](/v3/pulls/#get-a-single-pull-request) for an example.
+These changes are _not_ implemented, just planned for the next major API version.
+
+* Standardize on existing `*_url` attributes for hypermedia.  Remove all `_links`
+objects.
 * The `/repos/:owner/:repo/hooks/:id/test` action becomes
   `/repos/:owner/:repo/hooks/:id/tests`.
 * The `/gists/:id/fork` action becomes `/gists/:id/forks`.

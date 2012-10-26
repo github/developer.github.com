@@ -10,6 +10,23 @@ various activity streams on the site.
 * TOC
 {:toc}
 
+Events are optimized for polling with the "ETag" header.  If no new events have
+been triggered, you will see a "304 Not Modified" response, and your current
+rate limit will be untouched.  There is also an "X-Poll-Interval" header that
+specifies how often (in seconds) you are allowed to poll.  In times of high
+server load, the time may increase.  Please obey the header.
+
+    $ curl -I https://api.github.com/users/tater/events
+    HTTP/1.1 200 OK
+    X-Poll-Interval: 60
+    ETag: "a18c3bded88eb5dbb5c849a489412bf3"
+
+    # The quotes around the ETag value are important
+    $ curl -I https://api.github.com/users/tater/events \
+        -H 'If-None-Match: "a18c3bded88eb5dbb5c849a489412bf3"'
+    HTTP/1.1 304 Not Modified
+    X-Poll-Interval: 60
+
 Events support [pagination](/v3/#pagination),
 however the `per_page` option is unsupported. The fixed page size is 30 items.
 Fetching up to ten pages is supported, for a total of 300 events.

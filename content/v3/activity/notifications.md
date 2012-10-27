@@ -197,11 +197,11 @@ a thread will mute all future notifications (until you comment or get
 
 subscribed
 : **boolean** Determines if notifications should be received from this
-repository.
+thread.
 
 ignored
 : **boolean** Deterimines if all notifications should be blocked from this
-repository.
+thread.
 
 ### Response
 

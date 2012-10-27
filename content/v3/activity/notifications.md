@@ -175,7 +175,7 @@ read
 ## Get a Thread Subscription
 
 This checks to see if the current user is subscribed to a thread.  You can also
-[get a Repository subscription](http://localhost:3000/v3/activity/watching/#get-a-repository-subscription).
+[get a Repository subscription](/v3/activity/watching/#get-a-repository-subscription).
 
     GET /notifications/threads/1/subscription
 
@@ -197,11 +197,11 @@ a thread will mute all future notifications (until you comment or get
 
 subscribed
 : **boolean** Determines if notifications should be received from this
-repository.
+thread.
 
 ignored
 : **boolean** Deterimines if all notifications should be blocked from this
-repository.
+thread.
 
 ### Response
 

@@ -157,7 +157,7 @@ delete\_repo
 : Delete access to adminable repositories.
 
 notifications
-: Read access to a user's notifications.
+: Read access to a user's notifications.  `repo` is accepted too.
 
 gist
 : write access to gists.

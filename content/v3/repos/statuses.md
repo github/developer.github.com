@@ -11,14 +11,14 @@ The Status API allows external services to mark commits with a success,
 failure, error, or pending `state`, which is then reflected in pull requests
 involving those commits.
 
-Statuses can also include an optional `description` and `url`, and
+Statuses can also include an optional `description` and `target_url`, and
 we highly recommend providing them as they make statuses much more
 useful in the GitHub UI.
 
 As an example, one common use is for continuous integration
 services to mark commits as passing or failing builds using Status.  The
 `target_url` would be the full url to the build output, and the
-description would be the high level summary of what happened with the
+`description` would be the high level summary of what happened with the
 build.
 
 Note that the `repo:status` [OAuth scope](/v3/oauth/#scopes) grants targeted

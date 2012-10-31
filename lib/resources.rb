@@ -2,6 +2,7 @@ require 'pp'
 require 'yajl/json_gem'
 require 'stringio'
 require 'cgi'
+require 'securerandom'
 
 module GitHub
   module Resources
@@ -677,7 +678,7 @@ module GitHub
     GIST_HISTORY = {
       "history" => [
         {
-          "url"     => "https://api.github.com/gists/1/57a7f021a713b1c5a6a199b54cc514735d2d462f",
+          "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
           "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
           "user"    => USER,
           "change_status" => {
@@ -690,11 +691,12 @@ module GitHub
       ]
     }
 
+
     GIST_FORKS = {
       "forks" => [
         {
           "user" => USER,
-          "url" => "https://api.github.com/gists/5",
+          "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
           "created_at" => "2011-04-14T16:00:49Z"
         }
       ]
@@ -707,7 +709,7 @@ module GitHub
     }
 
     GIST = {
-      "url"          => "https://api.github.com/gists/1",
+      "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
@@ -725,7 +727,7 @@ module GitHub
 
     GIST_COMMENT = {
       "id"         => 1,
-      "url"        => "https://api.github.com/gists/123/comments/1",
+      "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
       "created_at" => "2011-04-18T23:23:56Z"

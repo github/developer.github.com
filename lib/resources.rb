@@ -725,7 +725,7 @@ module GitHub
 
     GIST_COMMENT = {
       "id"         => 1,
-      "url"        => "https://api.github.com/gists/comments/1",
+      "url"        => "https://api.github.com/gists/123/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
       "created_at" => "2011-04-18T23:23:56Z"

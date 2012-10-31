@@ -716,6 +716,7 @@ module GitHub
       "user"         => USER,
       "files"        => { "ring.erl" => GIST_FILE },
       "comments"     => 0,
+      "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
       "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",

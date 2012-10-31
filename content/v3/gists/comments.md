@@ -22,7 +22,7 @@ You can read more about the use of mime types in the API
 
 ## Get a single comment
 
-    GET /gists/comments/:id
+    GET /gists/:gist_id/comments/:id
 
 ### Response
 
@@ -48,7 +48,7 @@ body
 
 ## Edit a comment
 
-    PATCH /gists/comments/:id
+    PATCH /gists/:gist_id/comments/:id
 
 ### Input
 
@@ -64,7 +64,7 @@ body
 
 ## Delete a comment
 
-    DELETE /gists/comments/:id
+    DELETE /gists/:gist_id/comments/:id
 
 ### Response
 

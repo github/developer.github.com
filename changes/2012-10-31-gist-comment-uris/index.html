@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gist Comments | GitHub API</title>
+  <title>Gist comment URIs</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -35,165 +35,30 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="gist-comments-api">Gist Comments API</h1>
+    <div class="change" id="/changes/2012-10-31-gist-comment-uris/">
+<h2 class="title">
+  <a href="/changes/2012-10-31-gist-comment-uris/">Gist comment URIs</a>
+</h2>
 
-<ul id="markdown-toc">
-<li><a href="#list-comments-on-a-gist">List comments on a gist</a></li>
-  <li><a href="#get-a-single-comment">Get a single comment</a></li>
-  <li><a href="#create-a-comment">Create a comment</a></li>
-  <li><a href="#edit-a-comment">Edit a comment</a></li>
-  <li><a href="#delete-a-comment">Delete a comment</a></li>
-  <li><a href="#custom-mime-types">Custom Mime Types</a></li>
-</ul><p>Gist Comments leverage <a href="#custom-mime-types">these</a> custom mime types.
-You can read more about the use of mime types in the API
-<a href="/v3/media/">here</a>.</p>
+<div class="meta">
+  <div class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/f38112009dc16547051c8ac246cee443?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+    <span class="author vcard fn">
+      <a href="https://github.com/pezra">pezra</a>
+    </span>
+    <span class="published">
+      October 31, 2012
+    
+    </span>
+  </div>
+</div>
 
-<h2 id="list-comments-on-a-gist">List comments on a gist</h2>
 
-<pre><code>GET /gists/:gist_id/comments
-</code></pre>
+<p>The URIs of all gist comments are changing immediately. The new URI pattern for gist comments is <code>/gists/{gist-id}/comments/{id}</code>. (See <a href="/v3/gists/comments/">gist comments section of the docs</a> for more details.) This change is necessary because the auto-incremented id of gist comments is easy to guess. This predictability allows anyone to view comments on private Gists with relative ease. Obviously, comments on private gists should be just as private as the gist itself.</p>
 
-<h3 id="response">Response</h3>
+<p>Adding the id of the gist id to the URI makes it impossible, in practical terms, because that id is a very large random number. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
+</div>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/ecbd0590b773f689aeba/comments/1"</span><span class="p">,</span>
-    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-    <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h2 id="get-a-single-comment">Get a single comment</h2>
-
-<pre><code>GET /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/ecbd0590b773f689aeba/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="create-a-comment">Create a comment</h2>
-
-<pre><code>POST /gists/:gist_id/comments
-</code></pre>
-
-<h3 id="input">Input</h3>
-
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/gists/comments/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/ecbd0590b773f689aeba/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="edit-a-comment">Edit a comment</h2>
-
-<pre><code>PATCH /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="input-1">Input</h3>
-
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/ecbd0590b773f689aeba/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="delete-a-comment">Delete a comment</h2>
-
-<pre><code>DELETE /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="custom-mime-types">Custom Mime Types</h2>
-
-<p>These are the supported mime types for gist comments. You can read more about the
-use of mime types in the API <a href="/v3/media/">here</a>.</p>
-
-<pre><code>application/vnd.github.VERSION.raw+json
-application/vnd.github.VERSION.text+json
-application/vnd.github.VERSION.html+json
-application/vnd.github.VERSION.full+json
-</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

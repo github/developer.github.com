@@ -33,7 +33,7 @@ request is tracking).
 * `status` - Any time a Repository has a status update from the API
 
 The payloads for all of the hooks mirror [the payloads for the Event
-types](/v3/events/types/), with the exception of [the original `push`
+types](/v3/activity/events/types/), with the exception of [the original `push`
 event](http://help.github.com/post-receive-hooks/).
 
 For a Hook to go through, the Hook needs to be configured to trigger for

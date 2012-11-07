@@ -97,6 +97,6 @@ publicized or not.
 
     DELETE /orgs/:org/public_members/:user
 
-## Response
+### Response
 
 <%= headers 204 %>

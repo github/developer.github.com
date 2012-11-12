@@ -150,7 +150,7 @@ Accept: application/xml
 
 <h2 id="non-web-application-flow">Non-Web Application Flow</h2>
 
-<p>Use basic authentication to create an OAuth2 token using the <a href="/v3/oauth#create-a-new-authorization">interface
+<p>Use basic authentication to create an OAuth2 token using the <a href="/v3/oauth/#create-a-new-authorization">interface
 below</a>.  With this technique, a username
 and password need not be stored permanently, and the user can revoke access at
 any time.</p>
@@ -173,11 +173,15 @@ BAD:  http://bar.com
 
 <h2 id="scopes">Scopes</h2>
 
-<p>Scopes let you specify exactly what type of access you need. This will
-be displayed to the user on the authorize form.</p>
+<p>Scopes let you specify exactly what type of access you need. Scopes <em>limit</em>
+access for OAuth tokens. They do not grant any additional permission beyond
+that which the user already has.</p>
+
+<p>For the web flow, requested scopes be displayed to the user on the authorize
+form.</p>
 
 <p>Check headers to see what OAuth scopes you have, and what the API action
-accept.</p>
+accepts.</p>
 
 <pre><code>$ curl -H "Authorization: bearer TOKEN" https://api.github.com/users/technoweenie -I
 HTTP/1.1 200 OK

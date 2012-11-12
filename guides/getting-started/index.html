@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gist Comments | GitHub API</title>
+  <title></title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -35,165 +35,152 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="gist-comments-api">Gist Comments API</h1>
+    <h1 id="getting-started">Getting Started</h1>
 
-<ul id="markdown-toc">
-<li><a href="#list-comments-on-a-gist">List comments on a gist</a></li>
-  <li><a href="#get-a-single-comment">Get a single comment</a></li>
-  <li><a href="#create-a-comment">Create a comment</a></li>
-  <li><a href="#edit-a-comment">Edit a comment</a></li>
-  <li><a href="#delete-a-comment">Delete a comment</a></li>
-  <li><a href="#custom-mime-types">Custom Mime Types</a></li>
-</ul><p>Gist Comments leverage <a href="#custom-mime-types">these</a> custom mime types.
-You can read more about the use of mime types in the API
-<a href="/v3/media/">here</a>.</p>
+<p>Let’s walk through core API concepts as we tackle some everyday use
+cases.</p>
 
-<h2 id="list-comments-on-a-gist">List comments on a gist</h2>
+<h2 id="overview">Overview</h2>
 
-<pre><code>GET /gists/:gist_id/comments
+<p>Most applications will use a <a href="http://developer.github.com/v3/libraries/">wrapper library</a>, but it’s important to
+get familiar with the underlying API HTTP methods. There’s no easier way to
+kick the tires than <a href="http://curl.haxx.se/">cURL</a>.</p>
+
+<h3 id="hello-world">Hello World</h3>
+
+<p>Let start by <code>GET</code>ting Chris Wanstrath’s GitHub profile:</p>
+
+<pre><code># GET /users/defunkt
+curl https://api.github.com/users/defunkt
 </code></pre>
 
-<h3 id="response">Response</h3>
+<p>Mmmmm tastes like JSON. Let’s include the <code>-i</code> flag to include headers:</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<pre><code>curl -i https://api.github.com/users/defunkt
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/57c09a0df109f7125fb2/comments/1"</span><span class="p">,</span>
-    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-    <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h2 id="get-a-single-comment">Get a single comment</h2>
-
-<pre><code>GET /gists/:gist_id/comments/:id
+HTTP/1.1 200 OK
+Server: nginx
+Date: Sun, 11 Nov 2012 18:43:28 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
+X-RateLimit-Remaining: 57
+X-GitHub-Media-Type: github.beta
+Vary: Accept
+X-RateLimit-Limit: 60
+Cache-Control: public, max-age=60, s-maxage=60
+X-Content-Type-Options: nosniff
+Content-Length: 692
+Last-Modified: Tue, 30 Oct 2012 18:58:42 GMT
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<p>There’s a few interesting bits in the response headers. As we expected, the
+<code>Content-Type</code> is <code>application/json</code>. Note the <code>X-GitHub-Media-Type</code> value of
+<code>github.beta</code>. This lets us know the <a href="http://developer.github.com/v3/media/">media type</a> for the
+response. Media types have helped us version our output in API v3. More on that
+later.</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Take note of the <code>X-RateLimit-Limit</code> and <code>X-RateLimit-Remaining</code> headers. (Any
+headers beginning with <code>X-</code> are custom headers and are not included in the HTTP
+spec). This pair of headers indicate how many requests a client can make in a
+rolling hour and how many of those requests it has already spent.</p>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/57c09a0df109f7125fb2/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
+<h2 id="authentication">Authentication</h2>
 
-<h2 id="create-a-comment">Create a comment</h2>
+<p>Unauthenticated clients can make 60 calls per hour. To get more, we need to
+<em>authenticate</em>.</p>
 
-<pre><code>POST /gists/:gist_id/comments
+<h3 id="basic">Basic</h3>
+
+<p>The easiest way to authenticate with the GitHub API is using your GitHub
+username and password via Basic Authentication.</p>
+
+<pre><code>curl -i -u tlberglund https://api.github.com/users/defunkt
+Enter host password for user 'tlberglund':
 </code></pre>
 
-<h3 id="input">Input</h3>
+<p>The <code>-u</code> flag sets the username and cURL will prompt us for the password. You
+can use <code>-u "username:password"</code> to avoid the prompt, but this leaves your
+password in shell history and isn’t recommended. When authenticating, you
+should see your rate limit bumped to 5000 requests an hour as indicated in the
+<code>X-RateLimit-Limit</code> header.</p>
 
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
+<p>In addition to just getting more calls per hour, authentication is the key to
+reading and writing private information via the API.</p>
 
-<h3 id="response-2">Response</h3>
+<h3 id="get-your-own-user-profile">Get your own user profile</h3>
 
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/gists/comments/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>When properly authenticated, you can grab your own user profile:</p>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/57c09a0df109f7125fb2/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="edit-a-comment">Edit a comment</h2>
-
-<pre><code>PATCH /gists/:gist_id/comments/:id
+<pre><code>curl -i -u pengwynn https://api.github.com/user
 </code></pre>
 
-<h3 id="input-1">Input</h3>
+<p>This time, in addition to the same set of information we retrieved for @defunkt
+earlier, you should see a <code>plan</code> object on the response:</p>
 
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/57c09a0df109f7125fb2/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="delete-a-comment">Delete a comment</h2>
-
-<pre><code>DELETE /gists/:gist_id/comments/:id
+<pre><code>...
+"plan": {
+  "space": 2516582,
+  "collaborators": 10,
+  "private_repos": 20,
+  "name": "medium"
+},
+"login": "pengwynn"
+...
 </code></pre>
 
-<h3 id="response-4">Response</h3>
+<h3 id="oauth">OAuth</h3>
 
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>While convenient, Basic Auth isn’t ideal because you shouldn’t give your GitHub
+username and password to anyone. Applications that need to read or write
+private information using the API on behalf of another user should use <a href="http://developer.github.com/v3/oauth/">OAuth</a>. </p>
 
-<h2 id="custom-mime-types">Custom Mime Types</h2>
+<p>Instead of usernames and passwords, OAuth uses <em>tokens</em>. Tokens provide two big
+features:</p>
 
-<p>These are the supported mime types for gist comments. You can read more about the
-use of mime types in the API <a href="/v3/media/">here</a>.</p>
+<ul>
+<li>
+<strong>Revokable access</strong>. Users can revoke authorization to third party apps.</li>
+  <li>
+<strong>Limited access</strong>. Users can specify what access a token provides when they
+authorize a third party app.</li>
+</ul><p>Normally, tokens are created via a <a href="http://developer.github.com/v3/oauth/#web-application-flow">web flow</a>, where third party
+applications send users to GitHub to log in and authorize their application and
+GitHub redirects the user back to the third party application. You don’t need
+to set up the entire web flow to begin working with OAuth tokens. The <a href="http://developer.github.com/v3/oauth/#oauth-authorizations-api">Authorizations API</a> 
+makes it simple to use Basic Auth to create an OAuth token.</p>
 
-<pre><code>application/vnd.github.VERSION.raw+json
-application/vnd.github.VERSION.text+json
-application/vnd.github.VERSION.html+json
-application/vnd.github.VERSION.full+json
+<pre><code>curl -i -u pengwynn \
+        -d '{"scopes": ["repo"]}' \
+        https://api.github.com/authorizations
 </code></pre>
+
+<p>There’s a lot going on in this one little call, so let’s break it down. First,
+the <code>-d</code> flag indicates we’re doing a <code>POST</code>, using the
+<code>application/x-www-form-urlencoded</code> content type. All <code>POST</code> requests to the
+GitHub API should be JSON, as we’re sending in this case.</p>
+
+<p>Next, let’s look at the <code>scopes</code> we’re sending over in this call. When creating
+a new token, we include an optional array of <a href="http://developer.github.com/v3/oauth/#scopes"><em>scopes</em></a>, or access
+levels, that indicate what information this token can access. In this case,
+we’re setting up the token with <em>repo</em> access, the most permissive scope in the
+GitHub API, allowing access to read and write to private repositories. See <a href="http://developer.github.com/v3/oauth/#scopes">the
+docs</a> for a full list of scopes.</p>
+
+<h2 id="repositories">Repositories</h2>
+
+<h2 id="commits">Commits</h2>
+
+<h3 id="paginate">Paginate</h3>
+
+<h2 id="star-a-repo">Star a repo</h2>
+
+<h2 id="follow-a-user">Follow a user</h2>
+
+<h2 id="conditional-requests">Conditional requests</h2>
+
+<h2 id="json-p">JSON-P</h2>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

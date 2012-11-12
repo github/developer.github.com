@@ -22,7 +22,7 @@ List the authenticated user's followers:
 <%= headers 200, :pagination => true %>
 <%= json(:user) { |h| [h] } %>
 
-## List users following another user
+## List users followed by another user
 
 List who a user is following:
 

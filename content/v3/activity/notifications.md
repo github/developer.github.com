@@ -154,7 +154,7 @@ updated since this time will not be updated.  Default: Now.  Expected in ISO
 ### Response
 
 <%= headers 200 %>
-<%= json(:thread) { |h| [h] } %>
+<%= json(:thread) %>
 
 ## Mark a thread as read
 

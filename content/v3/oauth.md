@@ -122,11 +122,15 @@ host.
 
 ## Scopes
 
-Scopes let you specify exactly what type of access you need. This will
-be displayed to the user on the authorize form.
+Scopes let you specify exactly what type of access you need. Scopes _limit_
+access for OAuth tokens. They do not grant any additional permission beyond
+that which the user already has.
+
+For the web flow, requested scopes be displayed to the user on the authorize
+form.
 
 Check headers to see what OAuth scopes you have, and what the API action
-accept.
+accepts.
 
     $ curl -H "Authorization: bearer TOKEN" https://api.github.com/users/technoweenie -I
     HTTP/1.1 200 OK

@@ -13,6 +13,8 @@ For the new API v3, start browsing the resources on the right >>
 View the [API Changelog](#changes) for information on existing and
 planned changes to the API.
 
+To get started, [create an API key](https://github.com/settings/applications/new) or [manage your existing API keys](https://github.com/settings/applications).
+
 ## Current Version
 
     Accept: application/vnd.github.beta+json

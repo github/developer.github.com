@@ -34,6 +34,12 @@ List the authenticated user's starred gists:
 
     GET /gists/starred
 
+### Parameters
+
+since
+: _Optional_ **string** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+Only gists updated at or after this time are returned.
+
 ### Response
 
 <%= headers 200, :pagination => true %>
@@ -75,6 +81,9 @@ content
     "file1.txt" => {"content" => "String file contents"}
   }
 %>
+
+_Note:_ Don't name your files "gistfile" with a numerical suffix.  This is the
+format of the automatic naming scheme that Gist uses internally.
 
 ### Response
 

@@ -40,10 +40,10 @@ body
 : _Required_ **string**
 
 path
-: _Required_ **string** - Relative path of the file to comment on.
+: _Optional_ **string** - Relative path of the file to comment on.
 
 position
-: _Required_ **number** - Line index in the diff to comment on.
+: _Optional_ **number** - Line index in the diff to comment on.
 
 line
 : _Optional_ **number** - Line number in the file to comment on. Defaults to 1.

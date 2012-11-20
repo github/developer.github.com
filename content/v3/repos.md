@@ -59,7 +59,8 @@ type
 
 ## Create
 
-Create a new repository for the authenticated user. OAuth users must supply `repo` scope.
+Create a new repository for the authenticated user. OAuth users must supply
+`repo` scope.
 
     POST /user/repos
 
@@ -100,6 +101,16 @@ team\_id
 : _Optional_ **number** - The id of the team that will be granted access
 to this repository. This is only valid when creating a repo in an
 organization.
+
+auto\_init
+: _Optional_ **boolean** - `true` to create an initial commit with empty
+README. Default is `false`.
+
+gitignore\_template
+: _Optional_ **string** - Desired language or platform [.gitignore
+template](https://github.com/github/gitignore) to
+apply. Use the name of the template without the extension. For example, "Haskell"
+_Ignored if `auto_init` parameter is not provided._
 
 <%= json \
   :name          => "Hello-World",
@@ -157,6 +168,9 @@ repository, `false` to disable it. Default is `true`.
 has\_downloads
 : _Optional_ **boolean** - `true` to enable downloads for this
 repository, `false` to disable them. Default is `true`.
+
+default\_branch
+: _Optional_ **String** - Update the default branch for this repository.
 
 <%= json \
   :name          => "Hello-World",

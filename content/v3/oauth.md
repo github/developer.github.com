@@ -101,7 +101,7 @@ The access token allows you to make requests to the API on a behalf of a user.
 ## Non-Web Application Flow
 
 Use basic authentication to create an OAuth2 token using the [interface
-below](/v3/oauth#create-a-new-authorization).  With this technique, a username
+below](/v3/oauth/#create-a-new-authorization).  With this technique, a username
 and password need not be stored permanently, and the user can revoke access at
 any time.
 
@@ -122,11 +122,15 @@ host.
 
 ## Scopes
 
-Scopes let you specify exactly what type of access you need. This will
-be displayed to the user on the authorize form.
+Scopes let you specify exactly what type of access you need. Scopes _limit_
+access for OAuth tokens. They do not grant any additional permission beyond
+that which the user already has.
+
+For the web flow, requested scopes be displayed to the user on the authorize
+form.
 
 Check headers to see what OAuth scopes you have, and what the API action
-accept.
+accepts.
 
     $ curl -H "Authorization: bearer TOKEN" https://api.github.com/users/technoweenie -I
     HTTP/1.1 200 OK
@@ -155,6 +159,9 @@ include access to code - use `repo` for that.
 
 delete\_repo
 : Delete access to adminable repositories.
+
+notifications
+: Read access to a user's notifications.  `repo` is accepted too.
 
 gist
 : write access to gists.

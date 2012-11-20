@@ -24,6 +24,12 @@ Libraries for accessing the GitHub API from your favorite language.
 
 [csharp]: https://github.com/sgrassie/csharp-github-api
 
+## Emacs Lisp
+
+* [gh.el][gh.el]
+
+[gh.el]: https://github.com/sigma/gh.el
+
 ## Erlang
 
 * [Erlang GitHub API][erlang]
@@ -47,11 +53,12 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [Node-GitHub][ajaxorg-node-github]
 * [NodeJS GitHub library][octonode]
 * [gh3 client-side API v3 wrapper][gh3]
+* [GitHub.js wrapper around the Github API][github]
 
 [ajaxorg-node-github]: https://github.com/ajaxorg/node-github
 [octonode]: https://github.com/pksunkara/octonode
 [gh3]: https://github.com/k33g/gh3
-
+[github]: https://github.com/michael/github
 ## Objective-C
 
 * [UAGithubEngine][uagithubengine]
@@ -86,6 +93,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [github3.py][github3py]
 * [sanction][sanction]
 * [agithub][agithub]
+* [githubpy][githubpy]
 
 [jacquev6_pygithub]: https://github.com/jacquev6/PyGithub
 [pygithub3-api]: https://github.com/copitux/python-github3
@@ -93,6 +101,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 [github3py]: https://github.com/sigmavirus24/github3.py
 [sanction]: https://github.com/demianbrecht/sanction
 [agithub]: https://github.com/jpaugh64/agithub "Agnostic Github"
+[githubpy]: https://github.com/michaelliao/githubpy
 
 ## Ruby
 

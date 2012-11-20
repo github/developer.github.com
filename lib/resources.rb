@@ -2,6 +2,7 @@ require 'pp'
 require 'yajl/json_gem'
 require 'stringio'
 require 'cgi'
+require 'securerandom'
 
 module GitHub
   module Resources
@@ -11,18 +12,24 @@ module GitHub
         201 => '201 Created',
         202 => '202 Accepted',
         204 => '204 No Content',
+        205 => '205 Reset Content',
         301 => '301 Moved Permanently',
+        302 => '302 Found',
+        307 => '307 Temporary Redirect',
         304 => '304 Not Modified',
         401 => '401 Unauthorized',
         403 => '403 Forbidden',
         404 => '404 Not Found',
+        405 => '405 Method not allowed',
         409 => '409 Conflict',
         422 => '422 Unprocessable Entity',
         500 => '500 Server Error'
       }
 
       AUTHORS = {
-        :technoweenie => '821395fe70906c8290df7f18ac4ac6cf'
+        :technoweenie => '821395fe70906c8290df7f18ac4ac6cf',
+        :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0',
+        :pezra        => 'f38112009dc16547051c8ac246cee443'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -138,32 +145,37 @@ module GitHub
       "key"   => "ssh-rsa AAA...",
     }
 
-    REPO = {
-      "url"              => "https://api.github.com/repos/octocat/Hello-World",
-      "html_url"         => "https://github.com/octocat/Hello-World",
-      "clone_url"        => "https://github.com/octocat/Hello-World.git",
-      "git_url"          => "git://github.com/octocat/Hello-World.git",
-      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
-      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
-      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
+    SIMPLE_REPO = {
       "id"               => 1296269,
       "owner"            => USER,
       "name"             => "Hello-World",
       "full_name"        => "octocat/Hello-World",
       "description"      => "This your first repo!",
-      "homepage"         => "https://github.com",
-      "language"         => nil,
       "private"          => false,
       "fork"             => false,
+      "url"              => "https://api.github.com/repos/octocat/Hello-World",
+      "html_url"         => "https://github.com/octocat/Hello-World"
+    }
+
+    REPO = SIMPLE_REPO.merge({
+      "clone_url"        => "https://github.com/octocat/Hello-World.git",
+      "git_url"          => "git://github.com/octocat/Hello-World.git",
+      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
+      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
+      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
+      "homepage"         => "https://github.com",
+      "language"         => nil,
       "forks"            => 9,
+      "forks_count"      => 9,
       "watchers"         => 80,
+      "watchers_count"   => 80,
       "size"             => 108,
       "master_branch"    => 'master',
       "open_issues"      => 0,
       "pushed_at"        => "2011-01-26T19:06:43Z",
       "created_at"       => "2011-01-26T19:01:12Z",
       "updated_at"       => "2011-01-26T19:14:43Z"
-    }
+    })
 
     FULL_REPO = REPO.merge({
       "organization"     => USER.merge('type' => 'Organization'),
@@ -340,6 +352,7 @@ module GitHub
     }
 
     FULL_PULL = PULL.merge({
+      "merge_commit_sha" =>  "e5bd3914e2e596debea16f433f57875b5b90bcd6",
       "merged"        => false,
       "mergeable"     => true,
       "merged_by"     => USER,
@@ -665,7 +678,7 @@ module GitHub
     GIST_HISTORY = {
       "history" => [
         {
-          "url"     => "https://api.github.com/gists/1/57a7f021a713b1c5a6a199b54cc514735d2d462f",
+          "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
           "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
           "user"    => USER,
           "change_status" => {
@@ -678,46 +691,44 @@ module GitHub
       ]
     }
 
+
     GIST_FORKS = {
       "forks" => [
         {
           "user" => USER,
-          "url" => "https://api.github.com/gists/5",
+          "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
           "created_at" => "2011-04-14T16:00:49Z"
         }
       ]
     }
 
-    GIST_FILES = {
-      "files" => {
-        "ring.erl"   => {
-          "size"     => 932,
-          "filename" => "ring.erl",
-          "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
-        }
-      }
+    GIST_FILE = {
+      "size"     => 932,
+      "filename" => "ring.erl",
+      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
     }
 
     GIST = {
-      "url"          => "https://api.github.com/gists/1",
+      "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
       "user"         => USER,
-      "files"        => GIST_FILES,
+      "files"        => { "ring.erl" => GIST_FILE },
       "comments"     => 0,
+      "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
       "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
       "created_at"   => "2010-04-14T02:15:15Z"
-    }.update(GIST_FILES)
+    }
 
     FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
-    FULL_GIST['files']['ring.erl']['content'] = 'contents of gist'
+    FULL_GIST['files'].merge('ring.erl' => GIST_FILE.merge('content' => 'contents of gist'))
 
     GIST_COMMENT = {
       "id"         => 1,
-      "url"        => "https://api.github.com/gists/comments/1",
+      "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
       "created_at" => "2011-04-18T23:23:56Z"
@@ -888,7 +899,7 @@ module GitHub
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z",
       "name" => "web",
-      "events" => ["push"],
+      "events" => ["push", "pull_request"],
       "active" => true,
       "config" =>
         {'url' => 'http://example.com', 'content_type' => 'json'},
@@ -957,6 +968,35 @@ module GitHub
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :size => 100
     }
+
+    THREAD = {
+      :id => 1,
+      :repository => SIMPLE_REPO,
+      :subject => {
+        :title => "Greetings",
+        :url => "https://api.github.com/repos/pengwynn/octokit/issues/123",
+        :latest_comment_url => "https://api.github.com/repos/pengwynn/octokit/issues/comments/123"
+      },
+      :reason => 'subscribed',
+      :unread => true,
+      :updated_at => '2012-09-25T07:54:41-07:00',
+      :last_read_at => '2012-09-25T07:54:41-07:00',
+      :url => "https://api.github.com/notifications/threads/1"
+    }
+
+    SUBSCRIPTION = {
+      :subscribed => true,
+      :ignored => false,
+      :reason => nil,
+      :created_at => "2012-10-06T21:34:12Z",
+      :url => "https://api.github.com/notifications/threads/1/subscription",
+      :thread_url => "https://api.github.com/notifications/threads/1"
+    }
+
+    REPO_SUBSCRIPTION = SUBSCRIPTION.merge \
+      :url => "https://api.github.com/repos/octocat/example/subscription",
+      :repository_url => "https://api.github.com/repos/octocat/example"
+    REPO_SUBSCRIPTION.delete :thread_url
   end
 end
 

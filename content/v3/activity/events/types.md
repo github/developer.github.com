@@ -225,6 +225,10 @@ commits[][author][email]
 commits[][url]
 : **url** - Points to the commit API resource.
 
+commits[][distinct]
+: **boolean** - Whether this commit is distinct from any that have been pushed
+before.
+
 ## TeamAddEvent
 
 Hook name: `team_add`

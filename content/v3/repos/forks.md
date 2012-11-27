@@ -30,7 +30,7 @@ Create a fork for the authenticated user.
 One can either use the `organization` parameter or POST a JSON document with
 the field `organization`
 
-### Input/Parameters
+### Parameters
 
 organization
 : _Optional_ **String** - Organization login. The repository will be

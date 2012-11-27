@@ -41,6 +41,7 @@ objects.
   returned.
 * Use the `private` attribute when creating a private repository,
   instead of setting `public` to false.
+* Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.
 * User Emails come back as a hash instead of a string.
 
         {"email": "email@whatev.com", "state": "verified"}

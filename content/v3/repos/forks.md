@@ -29,7 +29,7 @@ Create a fork for the authenticated user.
 
 ### Parameters
 
-org
+organization
 : _Optional_ **String** - Organization login. The repository will be
 forked into this organization.
 

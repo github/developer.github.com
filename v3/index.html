@@ -51,6 +51,7 @@ you have any problems or requests please contact
   <li><a href="#hypermedia">Hypermedia</a></li>
   <li><a href="#pagination">Pagination</a></li>
   <li><a href="#rate-limiting">Rate Limiting</a></li>
+  <li><a href="#conditional-requests">Conditional requests</a></li>
   <li><a href="#cross-origin-resource-sharing">Cross Origin Resource Sharing</a></li>
   <li><a href="#json-p-callbacks">JSON-P Callbacks</a></li>
 </ul><h2 id="schema">Schema</h2>
@@ -207,21 +208,24 @@ with no <code>body</code> attribute, be sure to set the <code>Content-Length</co
   <dd>Used for deleting resources.</dd>
 </dl><h2 id="authentication">Authentication</h2>
 
-<p>There are two ways to authenticate through GitHub API v3:</p>
+<p>There are three ways to authenticate through GitHub API v3.  Requests that
+require authentication will return 404, instead of 403, in some places.  This
+is to prevent the accidental leakage of private repositories to unauthorized
+users.</p>
 
-<p>Basic Authentication:</p>
+<h3 id="basic-authentication">Basic Authentication</h3>
 
 <pre class="terminal">
 $ curl -u "username" https://api.github.com
 </pre>
 
-<p>OAuth2 Token (sent in a header):</p>
+<h3 id="oauth2-token-sent-in-a-header">OAuth2 Token (sent in a header)</h3>
 
 <pre class="terminal">
 $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com
 </pre>
 
-<p>OAuth2 Token (sent as a parameter):</p>
+<h3 id="oauth2-token-sent-as-a-parameter">OAuth2 Token (sent as a parameter)</h3>
 
 <pre class="terminal">
 $ curl https://api.github.com/?access_token=OAUTH-TOKEN
@@ -231,9 +235,15 @@ $ curl https://api.github.com/?access_token=OAUTH-TOKEN
 programmatically</a>, for applications that
 are not websites.</p>
 
-<p>Requests that require authentication will return 404, instead of 403, in some places.
-This is to prevent the accidental leakage of private repositories to unauthorized
-users.</p>
+<h3 id="oauth2-keysecret">OAuth2 Key/Secret</h3>
+
+<pre class="terminal">
+$ curl https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy
+</pre>
+
+<p>This should only be used in server to server scenarios.  Don’t leak your
+OAuth application’s client secret to your users.  Read <a href="#unauthenticated-rate-limited-requests">more about
+unauthenticated rate limiting</a>.</p>
 
 <h2 id="hypermedia">Hypermedia</h2>
 
@@ -349,6 +359,8 @@ share your client secret with anyone or include it in client-side browser code.<
 
 <p>Please <a href="https://github.com/contact">contact us</a> to request a higher rate limit
 for your OAuth application.</p>
+
+<h2 id="conditional-requests">Conditional requests</h2>
 
 <p>Most responses return <code>Last-Modified</code> and <code>Etag</code> headers. You can use the values
 of these headers to make subsequent requests to those resources using the

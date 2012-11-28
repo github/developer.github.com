@@ -2,13 +2,48 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2012-10-31T05:00:00Z</updated>
+  <updated>2012-11-27T06:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2012-11-27:/changes/2012-11-27-forking-to-organizations/</id>
+    <title type="html">Forking to Organizations</title>
+    <published>2012-11-27T06:00:00Z</published>
+    <updated>2012-11-27T06:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-11-27-forking-to-organizations/" />
+    <content type="html">&lt;p&gt;We made a slight change to the way you fork a repository.  By default, you
+can fork my repository through an HTTP POST to the repository’s fork resource.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -X POST https://api.github.com/repos/technoweenie/faraday/forks
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This repository forks to your personal account.  However, there are cases when
+you want to fork to one of your organizations instead.  The previous method
+required a &lt;code&gt;?org&lt;/code&gt; query parameter:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl -X POST /repos/technoweenie/faraday/forks?org=mycompany
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Query parameters on POST requests are unusual in APIs, and definitely
+inconsistent with the rest of the GitHub API.  You should be able to post a
+JSON body like every other POST endpoint.  Now, you can!  Only, now we’re
+calling the field &lt;code&gt;organization&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ curl /repos/technoweenie/faraday/forks?org=mycompany \
+  -d '{"organization": "mycompany"}'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Don’t worry, we are committed to maintaining the legacy behavior until the next
+major change of the GitHub API.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2012-10-31:/changes/2012-10-31-gist-comment-uris/</id>
     <title type="html">Gist comment URIs</title>

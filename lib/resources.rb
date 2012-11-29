@@ -93,6 +93,7 @@ module GitHub
         res = CGI.escapeHTML(response)
         hs + %(<pre class="highlight"><code>) + res + "</code></pre>"
       end
+
     end
 
     USER = {
@@ -997,6 +998,21 @@ module GitHub
       :url => "https://api.github.com/repos/octocat/example/subscription",
       :repository_url => "https://api.github.com/repos/octocat/example"
     REPO_SUBSCRIPTION.delete :thread_url
+
+    TEMPLATE = {
+      :name => "C",
+      :source => "# Object files\n*.o\n\n# Libraries\n*.lib\n*.a\n\n# Shared objects (inc. Windows DLLs)\n*.dll\n*.so\n*.so.*\n*.dylib\n\n# Executables\n*.exe\n*.out\n*.app\n"
+    }
+
+    TEMPLATES = [
+      "Actionscript",
+      "Android",
+      "AppceleratorTitanium",
+      "Autotools",
+      "Bancha",
+      "C",
+      "C++"
+    ]
   end
 end
 

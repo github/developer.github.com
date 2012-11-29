@@ -1,0 +1,58 @@
+---
+kind: change
+title: Gitignore Templates API
+created_at: 2012-11-29
+author_name: pengwynn
+---
+
+We recently [made it easy][init-post] to initialize a repository when you create
+it [via the API][repo-create]. One of the options you can pass when creating a
+repository is `gitignore_template`. This value is the name of one of the
+templates from the the public [GitHub .gitignore repository][templates-repo].
+
+The [Gitignore Templates API][new-api] makes it easy to list those templates:
+
+    curl https://api.github.com/gitignore/templates
+
+    HTTP/1.1 200 OK
+
+    [
+      "Actionscript",
+      "Android",
+      "AppceleratorTitanium",
+      "Autotools",
+      "Bancha",
+      "C",
+      "C++",
+      ...
+
+If you'd like to view the source, you can also fetch a single template.
+
+    curl -H 'Accept: application/vnd.github.raw' \
+         https://api.github.com/gitignore/templates/Objective-C
+
+    HTTP/1.1 200 OK
+
+    # Xcode
+    .DS_Store
+    build/
+    *.pbxuser
+    !default.pbxuser
+    *.mode1v3
+    !default.mode1v3
+    *.mode2v3
+    !default.mode2v3
+    *.perspectivev3
+    !default.perspectivev3
+    *.xcworkspace
+    !default.xcworkspace
+    xcuserdata
+    profile
+    *.moved-aside
+    DerivedData
+    .idea/
+
+[init-post]: /changes/2012-9-28-auto-init-for-repositories/
+[repo-create]: /v3/repos/#create
+[templates-repo]: https://github.com/github/gitignore
+[new-api]: /v3/gitignore/

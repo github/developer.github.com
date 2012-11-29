@@ -73,3 +73,20 @@ bio
 <%= headers 200 %>
 <%= json :private_user %>
 
+## Get all users
+
+This provides a dump of every user, in the order that they signed up for
+GitHub.
+
+    GET /users
+
+### Parameters
+
+since
+: The integer ID of the last User that you've seen.
+
+### Response
+
+<%= headers 200 %>
+<%= json(:user) { |h| [h] } %>
+

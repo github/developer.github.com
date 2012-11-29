@@ -57,6 +57,22 @@ type
 <%= headers 200, :pagination => true %>
 <%= json(:repo) { |h| [h] } %>
 
+## List all repositories
+
+This provides a dump of every repository, in the order that they were created.
+
+    GET /repositories
+
+### Parameters
+
+since
+: The integer ID of the last Repository that you've seen.
+
+### Response
+
+<%= headers 200 %>
+<%= json(:repo) { |h| [h] } %>
+
 ## Create
 
 Create a new repository for the authenticated user. OAuth users must supply

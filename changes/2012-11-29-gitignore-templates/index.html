@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Repo Downloads | GitHub API</title>
+  <title>Gitignore Templates API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -35,186 +35,75 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="repo-downloads-api">Repo Downloads API</h1>
+    <div class="change" id="/changes/2012-11-29-gitignore-templates/">
+<h2 class="title">
+  <a href="/changes/2012-11-29-gitignore-templates/">Gitignore Templates API</a>
+</h2>
 
-<ul id="markdown-toc">
-<li><a href="#list-downloads-for-a-repository">List downloads for a repository</a></li>
-  <li><a href="#get-a-single-download">Get a single download</a></li>
-  <li><a href="#create-a-new-download-part-1-create-the-resource">Create a new download (Part 1: Create the resource)</a></li>
-  <li><a href="#create-a-new-download-part-2-upload-file-to-s3">Create a new download (Part 2: Upload file to s3)</a></li>
-  <li><a href="#delete-a-download">Delete a download</a></li>
-</ul><p>The downloads API is for package downloads only. If you want to get
-source tarballs you should use <a href="/v3/repos/contents/#get-archive-link">this</a>
-instead.</p>
+<div class="meta">
+  <div class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+    <span class="author vcard fn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+    </span>
+    <span class="published">
+      November 29, 2012
+    
+    </span>
+  </div>
+</div>
 
-<h2 id="list-downloads-for-a-repository">List downloads for a repository</h2>
 
-<pre><code>GET /repos/:owner/:repo/downloads
+<p>We recently <a href="/changes/2012-9-28-auto-init-for-repositories/">made it easy</a> to initialize a repository when you create
+it <a href="/v3/repos/#create">via the API</a>. One of the options you can pass when creating a
+repository is <code>gitignore_template</code>. This value is the name of one of the
+templates from the the public <a href="https://github.com/github/gitignore">GitHub .gitignore repository</a>.</p>
+
+<p>The <a href="/v3/gitignore/">Gitignore Templates API</a> makes it easy to list those templates:</p>
+
+<pre><code>curl https://api.github.com/gitignore/templates
+
+HTTP/1.1 200 OK
+
+[
+  "Actionscript",
+  "Android",
+  "AppceleratorTitanium",
+  "Autotools",
+  "Bancha",
+  "C",
+  "C++",
+  ...
 </code></pre>
 
-<h3 id="response">Response</h3>
+<p>If you’d like to view the source, you can also fetch a single template.</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<pre><code>curl -H 'Accept: application/vnd.github.raw' \
+     https://api.github.com/gitignore/templates/Objective-C
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/downloads/1"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new_file.jpg"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Description of your download"</span><span class="p">,</span>
-    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
-    <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
-    <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">".jpg"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
+HTTP/1.1 200 OK
 
-<h2 id="get-a-single-download">Get a single download</h2>
-
-<pre><code>GET /repos/:owner/:repo/downloads/:id
+# Xcode
+.DS_Store
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
 </code></pre>
+</div>
 
-<h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/downloads/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new_file.jpg"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Description of your download"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
-  <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">".jpg"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="create-a-new-download-part-1-create-the-resource">Create a new download (Part 1: Create the resource)</h2>
-
-<p>Creating a new download is a two step process. You must first create a
-new download resource.</p>
-
-<pre><code>POST /repos/:owner/:repo/downloads
-</code></pre>
-
-<h3 id="input">Input</h3>
-
-<dl>
-<dt>name</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-  <dt>size</dt>
-  <dd>
-<em>Required</em> <strong>number</strong> - Size of file in bytes.</dd>
-  <dt>description</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>content_type</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new_file.jpg"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">114034</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Latest release"</span><span class="p">,</span>
-  <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"text/plain"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/user/repo/downloads/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/downloads/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new_file.jpg"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Description of your download"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
-  <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">".jpg"</span><span class="p">,</span>
-  <span class="s2">"policy"</span><span class="o">:</span> <span class="s2">"ewogICAg..."</span><span class="p">,</span>
-  <span class="s2">"signature"</span><span class="o">:</span> <span class="s2">"mwnFDC..."</span><span class="p">,</span>
-  <span class="s2">"bucket"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
-  <span class="s2">"accesskeyid"</span><span class="o">:</span> <span class="s2">"1ABCDEFG..."</span><span class="p">,</span>
-  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"downloads/ocotocat/Hello-World/new_file.jpg"</span><span class="p">,</span>
-  <span class="s2">"acl"</span><span class="o">:</span> <span class="s2">"public-read"</span><span class="p">,</span>
-  <span class="s2">"expirationdate"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
-  <span class="s2">"prefix"</span><span class="o">:</span> <span class="s2">"downloads/octocat/Hello-World/"</span><span class="p">,</span>
-  <span class="s2">"mime_type"</span><span class="o">:</span> <span class="s2">"image/jpeg"</span><span class="p">,</span>
-  <span class="s2">"redirect"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"s3_url"</span><span class="o">:</span> <span class="s2">"https://github.s3.amazonaws.com/"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="create-a-new-download-part-2-upload-file-to-s3">Create a new download (Part 2: Upload file to s3)</h2>
-
-<p>Now that you have created the download resource, you can use the
-information in the response to upload your file to s3. This can be done
-with a <code>POST</code> to the <code>s3_url</code> you got in the create response. Here is a
-brief example using curl:</p>
-
-<pre><code>curl \
--F "key=downloads/octocat/Hello-World/new_file.jpg" \
--F "acl=public-read" \
--F "success_action_status=201" \
--F "Filename=new_file.jpg" \
--F "AWSAccessKeyId=1ABCDEF..." \
--F "Policy=ewogIC..." \
--F "Signature=mwnF..." \
--F "Content-Type=image/jpeg" \
--F "file=@new_file.jpg" \
-https://github.s3.amazonaws.com/
-</code></pre>
-
-<p>NOTES</p>
-
-<p>The order in which you pass these fields matters! Follow the order shown
-above exactly. All parameters shown are required and if you excluded or
-modify them your upload will fail because the values are hashed and signed
-by the policy.</p>
-
-<dl>
-<dt>key</dt>
-  <dd>Value of <code>path</code> field in the response.</dd>
-  <dt>acl</dt>
-  <dd>Value of <code>acl</code> field in the response.</dd>
-  <dt>success_action_status</dt>
-  <dd>201, or whatever you want to get back.</dd>
-  <dt>Filename</dt>
-  <dd>Value of <code>name</code> field in the response.</dd>
-  <dt>AWSAccessKeyId</dt>
-  <dd>Value of <code>accesskeyid</code> field in the response.</dd>
-  <dt>Policy</dt>
-  <dd>Value of <code>policy</code> field in the response.</dd>
-  <dt>Signature</dt>
-  <dd>Value of <code>signature</code> field in the response.</dd>
-  <dt>Content-Type</dt>
-  <dd>Value of <code>mime_type</code> field in the response.</dd>
-  <dt>file</dt>
-  <dd>Local file. Example assumes the file existing in the directory where
-you are running the curl command. Yes, the <code>@</code> matters.</dd>
-</dl><p>More information about using the REST API to interact with s3 can
-be found <a href="http://docs.amazonwebservices.com/AmazonS3/latest/API/">here</a>.</p>
-
-<h2 id="delete-a-download">Delete a download</h2>
-
-<pre><code>DELETE /repos/:owner/:repo/downloads/:id
-</code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

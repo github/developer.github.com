@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>OAuth | GitHub API</title>
+  <title></title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -286,8 +286,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create-a-new-authorization">Create a new authorization</h2>
 
-<p>Note: Authorizations created from the API will show up in the GitHub API
-app.</p>
+<p>If you need a small number of tokens, implementing the <a href="#web-application-flow">web flow</a>
+can be cumbersome. Instead, tokens can be created using the Authorizations API using
+Basic Authentication. To create tokens for a particular OAuth application, you
+must provide its client ID and secret, found on the OAuth application settings
+page, linked from your <a href="app-listing">OAuth applications listing on GitHub</a>.</p>
 
 <pre><code>POST /authorizations
 </code></pre>
@@ -304,6 +307,14 @@ app.</p>
   <dt>note_url</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - A URL to remind you what app the OAuth token is for.</dd>
+  <dt>client_id</dt>
+  <dd>
+<em>Optional</em> <strong>String</strong> - The 20 character OAuth app client key for which to create the
+token.</dd>
+  <dt>client_secret</dt>
+  <dd>
+<em>Optional</em> <strong>String</strong> - The 40 character OAuth app client secret for which to create the
+token.</dd>
 </dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>

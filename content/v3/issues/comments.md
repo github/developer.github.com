@@ -23,6 +23,28 @@ You can read more about the use of mime types in the API
 <%= headers 200, :pagination => true %>
 <%= json(:issue_comment) { |h| [h] } %>
 
+## List comments in a repository
+
+    GET /repos/:owner/:repo/issues/comments
+
+By default, Issue Comments are ordered by ascending ID.
+
+### Parameters
+
+sort
+: _Optional_ **String** `created` or `updated`
+
+direction
+: _Optional_ **String** `asc` or `desc`. Ignored without `sort` parameter.
+
+since
+: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+
+### Response
+
+<%= headers 200 %>
+<%= json(:pull_comment) { |h| [h] } %>
+
 ## Get a single comment
 
     GET /repos/:owner/:repo/issues/comments/:id

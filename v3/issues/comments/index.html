@@ -39,6 +39,7 @@
 
 <ul id="markdown-toc">
 <li><a href="#list-comments-on-an-issue">List comments on an issue</a></li>
+  <li><a href="#list-comments-in-a-repository">List comments in a repository</a></li>
   <li><a href="#get-a-single-comment">Get a single comment</a></li>
   <li><a href="#create-a-comment">Create a comment</a></li>
   <li><a href="#edit-a-comment">Edit a comment</a></li>
@@ -81,12 +82,69 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
+<h2 id="list-comments-in-a-repository">List comments in a repository</h2>
+
+<pre><code>GET /repos/:owner/:repo/issues/comments
+</code></pre>
+
+<p>By default, Issue Comments are ordered by ascending ID.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>sort</dt>
+  <dd>
+<em>Optional</em> <strong>String</strong> <code>created</code> or <code>updated</code>
+</dd>
+  <dt>direction</dt>
+  <dd>
+<em>Optional</em> <strong>String</strong> <code>asc</code> or <code>desc</code>. Ignored without <code>sort</code> parameter.</dd>
+  <dt>since</dt>
+  <dd>
+<em>Optional</em> <strong>String</strong> of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ</dd>
+</dl><h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Great stuff"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"file1.txt"</span><span class="p">,</span>
+    <span class="s2">"position"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"commit_id"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/octocat/Hello-World/pulls/comments/1"</span>
+      <span class="p">},</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1#discussion-diff-1"</span>
+      <span class="p">},</span>
+      <span class="s2">"pull_request"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/octocat/Hello-World/pulls/1"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
 <h2 id="get-a-single-comment">Get a single comment</h2>
 
 <pre><code>GET /repos/:owner/:repo/issues/comments/:id
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -123,7 +181,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"a new comment"</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-2">Response</h3>
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/user/repo/issues/comments/1
@@ -161,7 +219,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"String"</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-3">Response</h3>
+<h3 id="response-4">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -187,7 +245,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>DELETE /repos/:owner/:repo/issues/comments/:id
 </code></pre>
 
-<h3 id="response-4">Response</h3>
+<h3 id="response-5">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

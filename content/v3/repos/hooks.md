@@ -177,7 +177,9 @@ legacy format):
 This will trigger the hook with the latest push to the current
 repository.
 
-    POST /repos/:owner/:repo/hooks/:id/test
+    POST /repos/:owner/:repo/hooks/:id/tests
+
+**Note**: Previously `/repos/:owner/:repo/hooks/:id/test`
 
 ### Response
 

@@ -158,7 +158,9 @@ including the filename with a null hash.
 
 ## Fork a gist
 
-    POST /gists/:id/fork
+    POST /gists/:id/forks
+
+**Note**: Previously `/gists/:id/fork`
 
 ### Response
 

@@ -28,21 +28,21 @@ if you have problems.
 
 These changes are _not_ implemented, just planned for the next major API version.
 
-* Standardize on existing `*_url` attributes for hypermedia.  Remove all `_links`
+* `[ ]` Standardize on existing `*_url` attributes for hypermedia.  Remove all `_links`
 objects.
-* The `/repos/:owner/:repo/hooks/:id/test` action becomes
-  `/repos/:owner/:repo/hooks/:id/tests`.
-* The `/gists/:id/fork` action becomes `/gists/:id/forks`.
-* Gist forks/history objects become separate API calls.
-* Gist files object is not returned on Gist listings.
-* Commit schema will change to be [more consistent](https://gist.github.com/3a2e5779588e21b0c0f3).
-* `master_branch` becomes `default_branch`.
-* `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
+* `[✓]` <del>The '/repos/:owner/:repo/hooks/:id/test' action becomes
+  '/repos/:owner/:repo/hooks/:id/tests'.</del>
+* `[✓]` <del>The '/gists/:id/fork' action becomes '/gists/:id/forks'.</del> 
+* `[ ]` Gist forks/history objects become separate API calls.
+* `[ ]` Gist files object is not returned on Gist listings.
+* `[ ]` Commit schema will change to be [more consistent](https://gist.github.com/3a2e5779588e21b0c0f3).
+* `[ ]` `master_branch` becomes `default_branch`.
+* `[ ]` `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
   returned.
-* Use the `private` attribute when creating a private repository,
+* `[ ]` Use the `private` attribute when creating a private repository,
   instead of setting `public` to false.
-* Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.
-* User Emails come back as a hash instead of a string.
+* `[ ]` Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.
+* `[ ]` User Emails come back as a hash instead of a string.
 
         {"email": "email@whatev.com", "state": "verified"}
 

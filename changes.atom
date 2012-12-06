@@ -2,13 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2012-12-04T06:00:00Z</updated>
+  <updated>2012-12-06T06:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2012-12-06:/changes/2012-12-06-create-authorization-for-app/</id>
+    <title type="html">Create an OAuth authorization for an app</title>
+    <published>2012-12-06T06:00:00Z</published>
+    <updated>2012-12-06T06:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-12-06-create-authorization-for-app/" />
+    <content type="html">&lt;p&gt;The &lt;a href="/v3/oauth/#oauth-authorizations-api"&gt;Authorizations API&lt;/a&gt; is an easy way to create an OAuth
+authorization using Basic Auth. Just POST your desired scopes and optional
+note and you get a token back:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+    curl -u pengwynn -d '{"scopes": ["user", "gist"]}' \
+         https://api.github.com/authorizations
+&lt;/pre&gt;
+
+&lt;p&gt;This call creates a token for the authenticating user tied to a special “API”
+OAuth application.&lt;/p&gt;
+
+&lt;p&gt;We now support creating tokens for &lt;em&gt;your own OAuth application&lt;/em&gt; by passing your
+twenty character &lt;code&gt;client_id&lt;/code&gt; and forty character &lt;code&gt;client_secret&lt;/code&gt; as found in
+the settings page for your OAuth application.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+    curl -u pengwynn -d '{ \
+                          "scopes": ["user", "gist"], \
+                          "client_id": "abcdeabcdeabcdeabcdeabcde" \
+                          "client_secret": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde" \
+                         }' \ '
+            https://api.github.com/authorizations
+&lt;/pre&gt;
+
+&lt;p&gt;No more implementing the &lt;a href="/v3/oauth/#web-application-flow"&gt;web flow&lt;/a&gt; just to get a token tied to your
+app’s rate limit.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2012-12-04:/changes/2012-12-04-List-comments-for-repo/</id>
     <title type="html">Per-repository Review and Issue Comment&amp;nbsp;listing</title>

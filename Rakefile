@@ -10,7 +10,7 @@ def commit_message
   last_commit = `git log -1 --pretty=format:"%s"`.chomp.strip
   last_commit = 'Publishing developer content to GitHub pages.' if last_commit == ''
 
-  print "Enter a commit message (default: '#{last_commit}): "
+  print "Enter a commit message (default: '#{last_commit}'): "
   STDOUT.flush
   mesg = STDIN.gets.chomp.strip
 

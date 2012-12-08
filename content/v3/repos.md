@@ -50,7 +50,7 @@ List repositories for the specified org.
 ### Parameters
 
 type
-: `all`, `public`, `member`, `private`. Default: `all`.
+: `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`.
 
 ### Response
 

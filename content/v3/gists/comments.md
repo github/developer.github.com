@@ -7,8 +7,8 @@ title: Gist Comments | GitHub API
 * TOC
 {:toc}
 
-Gist Comments leverage [these](#custom-mime-types) custom MIME types.
-You can read more about the use of MIME types in the API
+Gist Comments leverage [these custom media types](#custom-media-types).
+You can read more about the use of media types in the API
 [here](/v3/media/).
 
 ## List comments on a gist
@@ -70,10 +70,10 @@ body
 
 <%= headers 204 %>
 
-## Custom MIME Types
+## Custom media types
 
-These are the supported MIME types for gist comments. You can read more about the
-use of MIME types in the API [here](/v3/media/).
+These are the supported media types for gist comments. You can read more about the
+use of media types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

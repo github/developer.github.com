@@ -12,8 +12,8 @@ diff.  These are separate from Commit Comments (which are applied
 directly to a commit, outside of the Pull Request view), and Issue
 Comments (which do not reference a portion of the unified diff).
 
-Pull Request Review Comments leverage [these](#custom-mime-types) custom MIME
-types. You can read more about the use of MIME types in the API
+Pull Request Review Comments leverage [these custom media
+types](#custom-media-types). You can read more about the use of media types in the API
 [here](/v3/media/).
 
 ## List comments on a pull request
@@ -136,10 +136,10 @@ body
 
 <%= headers 204 %>
 
-## Custom MIME Types
+## Custom media types
 
-These are the supported MIME types for pull request comments. You can read
-more about the use of MIME types in the API [here](/v3/media/).
+These are the supported media types for pull request comments. You can read
+more about the use of media types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

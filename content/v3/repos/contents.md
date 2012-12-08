@@ -8,7 +8,7 @@ title: Repo Contents | GitHub API
 {:toc}
 
 These API methods let you retrieve the contents of files within a repository as
-Base64 encoded content. See [MIME types](/v3/media/) for requesting raw or other formats.
+Base64 encoded content. See [media types](/v3/media/) for requesting raw or other formats.
 
 ## Get the README
 

@@ -29,7 +29,8 @@ module GitHub
       AUTHORS = {
         :technoweenie => '821395fe70906c8290df7f18ac4ac6cf',
         :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0',
-        :pezra        => 'f38112009dc16547051c8ac246cee443'
+        :pezra        => 'f38112009dc16547051c8ac246cee443',
+        :rick         => 'a44d5abad6e86cff4e34d9f0839535c9'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

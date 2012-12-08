@@ -10,8 +10,8 @@ title: Issue Comments | GitHub API
 The Issue Comments API supports listing, viewing, editing, and creating
 comments on issues and pull requests.
 
-Issue Comments leverage [these](#custom-mime-types) custom mime types.
-You can read more about the use of mime types in the API
+Issue Comments leverage [these](#custom-mime-types) custom MIME types.
+You can read more about the use of MIME types in the API
 [here](/v3/media/).
 
 ## List comments on an issue
@@ -96,10 +96,10 @@ body
 
 <%= headers 204 %>
 
-## Custom Mime Types
+## Custom MIME Types
 
-These are the supported mime types for issue comments. You can read more
-about the use of mime types in the API [here](/v3/media/).
+These are the supported MIME types for issue comments. You can read more
+about the use of MIME types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

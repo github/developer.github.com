@@ -11,8 +11,8 @@ The Pull Request API allows you to list, view, edit, create, and even merge
 pull requests. Comments on pull requests can be managed via the [Issue
 Comments API](/v3/issues/comments/).
 
-Pull Requests leverage [these](#custom-mime-types) custom mime types. You
-can read more about the use of mime types in the API
+Pull Requests leverage [these](#custom-mime-types) custom MIME types. You
+can read more about the use of MIME types in the API
 [here](/v3/media/).
 
 ## Link Relations
@@ -190,10 +190,10 @@ commit\_message
   :message => 'Failure reason'
 %>
 
-## Custom Mime Types
+## Custom MIME Types
 
-These are the supported mime types for pull requests. You can read more about the
-use of mime types in the API [here](/v3/media/).
+These are the supported MIME types for pull requests. You can read more about the
+use of MIME types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

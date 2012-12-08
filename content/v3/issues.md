@@ -7,8 +7,8 @@ title: Issues | GitHub API
 * TOC
 {:toc}
 
-Issues leverage [these](#custom-mime-types) custom mime types. You can
-read more about the use of mime types in the API [here](/v3/media/).
+Issues leverage [these](#custom-mime-types) custom MIME types. You can
+read more about the use of MIME types in the API [here](/v3/media/).
 
 ## List issues
 
@@ -187,10 +187,10 @@ Issue. Send an empty array (`[]`) to clear all Labels from the Issue.
 <%= headers 200 %>
 <%= json :issue %>
 
-## Custom Mime Types
+## Custom MIME Types
 
-These are the supported mime types for issues. You can read more about the
-use of mime types in the API [here](/v3/media/).
+These are the supported MIME types for issues. You can read more about the
+use of MIME types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

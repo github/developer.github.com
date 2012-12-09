@@ -10,7 +10,7 @@ title: Repository Starring | GitHub API
 Repository Starring is a feature that lets users bookmark repositories.  Stars
 are shown next to repositories to show an approximate level of interest.  Stars
 have no effect on notifications or the activity feed.  For that, see [Repository
-Watching](/v3/repos/watching).
+Watching](/v3/activity/watching).
 
 We recently [changed the way watching
 works](https://github.com/blog/1204-notifications-stars) on GitHub.  Many 3rd

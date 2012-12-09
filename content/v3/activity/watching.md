@@ -9,7 +9,7 @@ title: Repository Watching | GitHub API
 
 Watching a Repository registers the user to receive notificactions on new
 discussions, as well as events in the user's activity feed.  See [Repository
-Starring](/v3/repos/starring) for simple repository bookmarks.
+Starring](/v3/activity/starring) for simple repository bookmarks.
 
 We recently [changed the way watching
 works](https://github.com/blog/1204-notifications-stars) on GitHub.  Until 3rd

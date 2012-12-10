@@ -1,0 +1,34 @@
+---
+kind: change
+title: Diff and patch media types
+created_at: 2012-12-10
+author_name: pengwynn
+---
+
+Starting today, you can get `.diff` and `.patch` content directly from the API for the following resources:
+
+* [Commits][commits-get]
+* [Commit comparisons][commits-compare]
+* [Pull request][pulls]
+
+Simply use the same resource URL and send either `application/vnd.github.diff` or `application/vnd.github.patch` in the `Accept` header:
+
+    curl -H "Accept: application/vnd.github.diff" https://api.github.com/repos/pengwynn/dotfiles/commits/aee60a4cd56fb4c6a50e60f17096fc40c0d4d72c
+
+    diff --git a/tmux/tmux.conf.symlink b/tmux/tmux.conf.symlink
+    index 1f599cb..abaf625 100755
+    --- a/tmux/tmux.conf.symlink
+    +++ b/tmux/tmux.conf.symlink
+    @@ -111,6 +111,7 @@ set-option -g base-index 1
+     ## enable mouse
+     set-option -g mouse-select-pane on
+     set-option -g mouse-select-window on
+    +set-option -g mouse-resize-pane on
+     set-window-option -g mode-keys vi
+     set-window-option -g mode-mouse on
+     # set-window-option -g monitor-activity off
+
+[commits-get]: /v3/repos/commits/#get-a-single-commit
+[commits-compare]: /v3/repos/commits/#compare-two-commits
+[pulls]: /v3/pulls/#get-a-single-pull-request
+

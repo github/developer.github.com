@@ -2,13 +2,47 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2012-12-09T06:00:00Z</updated>
+  <updated>2012-12-10T06:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2012-12-10:/changes/2012-12-10-Diff-and-patch-media-types/</id>
+    <title type="html">Diff and patch media types</title>
+    <published>2012-12-10T06:00:00Z</published>
+    <updated>2012-12-10T06:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-12-10-Diff-and-patch-media-types/" />
+    <content type="html">&lt;p&gt;Starting today, you can get &lt;code&gt;.diff&lt;/code&gt; and &lt;code&gt;.patch&lt;/code&gt; content directly from the API for the following resources:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/repos/commits/#get-a-single-commit"&gt;Commits&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/v3/repos/commits/#compare-two-commits"&gt;Commit comparisons&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/v3/pulls/#get-a-single-pull-request"&gt;Pull request&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Simply use the same resource URL and send either &lt;code&gt;application/vnd.github.diff&lt;/code&gt; or &lt;code&gt;application/vnd.github.patch&lt;/code&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H "Accept: application/vnd.github.diff" https://api.github.com/repos/pengwynn/dotfiles/commits/aee60a4cd56fb4c6a50e60f17096fc40c0d4d72c
+
+diff --git a/tmux/tmux.conf.symlink b/tmux/tmux.conf.symlink
+index 1f599cb..abaf625 100755
+--- a/tmux/tmux.conf.symlink
++++ b/tmux/tmux.conf.symlink
+@@ -111,6 +111,7 @@ set-option -g base-index 1
+ ## enable mouse
+ set-option -g mouse-select-pane on
+ set-option -g mouse-select-window on
++set-option -g mouse-resize-pane on
+ set-window-option -g mode-keys vi
+ set-window-option -g mode-mouse on
+ # set-window-option -g monitor-activity off
+&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2012-12-09:/changes/2012-12-09-organization-repositories-results-now-paginate/</id>
     <title type="html">Pagination for Organization Repository lists now paginates properly</title>

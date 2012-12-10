@@ -198,7 +198,7 @@ If you need a small number of tokens, implementing the [web flow](#web-applicati
 can be cumbersome. Instead, tokens can be created using the Authorizations API using
 Basic Authentication. To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
-page, linked from your [OAuth applications listing on GitHub](app-listing).
+page, linked from your [OAuth applications listing on GitHub][app-listing].
 
     POST /authorizations
 

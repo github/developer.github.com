@@ -20,19 +20,19 @@ Update the notification settings for the authenticated user.
 ### Parameters
 
 participating.email
-: _Optional_ **boolean** `true` to receive participating notificationsn via
+: _Optional_ **boolean** `true` to receive participating notifications via
 email.
 
 participating.web
-: _Optional_ **boolean** `true` to receive participating notificationsn via
+: _Optional_ **boolean** `true` to receive participating notifications via
 web.
 
 watching.email
-: _Optional_ **boolean** `true` to receive watching notificationsn via
+: _Optional_ **boolean** `true` to receive watching notifications via
 email.
 
 watching.web
-: _Optional_ **boolean** `true` to receive watching notificationsn via
+: _Optional_ **boolean** `true` to receive watching notifications via
 web.
 
 <%= json \

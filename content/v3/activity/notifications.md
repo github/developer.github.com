@@ -200,7 +200,7 @@ subscribed
 thread.
 
 ignored
-: **boolean** Deterimines if all notifications should be blocked from this
+: **boolean** Determines if all notifications should be blocked from this
 thread.
 
 ### Response

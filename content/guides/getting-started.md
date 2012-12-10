@@ -303,7 +303,7 @@ find the next page and the last page of results.
 
 ### Creating an issue
 
-Now that we've seen how to paginate lsits of issues, let's create an issue from
+Now that we've seen how to paginate lists of issues, let's create an issue from
 the API.
 
     curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \

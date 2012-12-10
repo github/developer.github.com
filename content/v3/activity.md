@@ -18,7 +18,7 @@ have no effect on notifications or the activity feed.
 
 ## Watching
 
-Watching a Repository registers the user to receive notificactions on new
+Watching a Repository registers the user to receive notifications on new
 discussions, as well as events in the user's activity feed.
 
 ## Events

@@ -60,6 +60,9 @@ Find users by keyword.
 keyword
 : Keyword search parameters
 
+start_page
+: _Optional_ Page number to fetch
+
 <%= headers 200 %>
 <%= json(:user_search_results) %>
 

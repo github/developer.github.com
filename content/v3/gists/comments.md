@@ -7,8 +7,8 @@ title: Gist Comments | GitHub API
 * TOC
 {:toc}
 
-Gist Comments leverage [these](#custom-mime-types) custom mime types.
-You can read more about the use of mime types in the API
+Gist Comments leverage [these custom media types](#custom-media-types).
+You can read more about the use of media types in the API
 [here](/v3/media/).
 
 ## List comments on a gist
@@ -22,7 +22,7 @@ You can read more about the use of mime types in the API
 
 ## Get a single comment
 
-    GET /gists/comments/:id
+    GET /gists/:gist_id/comments/:id
 
 ### Response
 
@@ -48,7 +48,7 @@ body
 
 ## Edit a comment
 
-    PATCH /gists/comments/:id
+    PATCH /gists/:gist_id/comments/:id
 
 ### Input
 
@@ -64,16 +64,16 @@ body
 
 ## Delete a comment
 
-    DELETE /gists/comments/:id
+    DELETE /gists/:gist_id/comments/:id
 
 ### Response
 
 <%= headers 204 %>
 
-## Custom Mime Types
+## Custom media types
 
-These are the supported mime types for gist comments. You can read more about the
-use of mime types in the API [here](/v3/media/).
+These are the supported media types for gist comments. You can read more about the
+use of media types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

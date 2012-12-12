@@ -7,8 +7,8 @@ title: Issues | GitHub API
 * TOC
 {:toc}
 
-Issues leverage [these](#custom-mime-types) custom mime types. You can
-read more about the use of mime types in the API [here](/v3/media/).
+Issues leverage [these custom media types](#custom-media-types). You can
+read more about the use of media types in the API [here](/v3/media/).
 
 ## List issues
 
@@ -92,7 +92,7 @@ direction
 : `asc` or `desc`, default: `desc`.
 
 since
-: _Optional_ **string** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 
 ### Response
 
@@ -187,10 +187,10 @@ Issue. Send an empty array (`[]`) to clear all Labels from the Issue.
 <%= headers 200 %>
 <%= json :issue %>
 
-## Custom Mime Types
+## Custom media types
 
-These are the supported mime types for issues. You can read more about the
-use of mime types in the API [here](/v3/media/).
+These are the supported media types for issues. You can read more about the
+use of media types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json

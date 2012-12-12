@@ -7,9 +7,9 @@ title: Repository Watching | GitHub API
 * TOC
 {:toc}
 
-Watching a Repository registers the user to receive notificactions on new
+Watching a Repository registers the user to receive notifications on new
 discussions, as well as events in the user's activity feed.  See [Repository
-Starring](/v3/repos/starring) for simple repository bookmarks.
+Starring](/v3/activity/starring) for simple repository bookmarks.
 
 We recently [changed the way watching
 works](https://github.com/blog/1204-notifications-stars) on GitHub.  Until 3rd
@@ -41,7 +41,43 @@ List repositories being watched by the authenticated user.
 <%= headers 200, :pagination => true %>
 <%= json(:repo) { |h| [h] } %>
 
-## Check if you are watching a repository
+## Get a Repository Subscription
+
+    GET /repos/:owner/:repo/subscription
+
+### Response
+
+<%= headers 200 %>
+<%= json :repo_subscription %>
+
+## Set a Repository Subscription
+
+    PUT /repos/:owner/:repo/subscription
+
+### Input
+
+subscribed
+: **boolean** Determines if notifications should be received from this
+repository.
+
+ignored
+: **boolean** Determines if all notifications should be blocked from this
+repository.
+
+### Response
+
+<%= headers 200 %>
+<%= json :repo_subscription %>
+
+## Delete a Repository Subscription
+
+    DELETE /repos/:owner/:repo/subscription
+
+### Response
+
+<%= headers 204 %>
+
+## Check if you are watching a repository (LEGACY)
 
 Requires for the user to be authenticated.
 
@@ -55,7 +91,7 @@ Requires for the user to be authenticated.
 
 <%= headers 404 %>
 
-## Watch a repository
+## Watch a repository (LEGACY)
 
 Requires for the user to be authenticated.
 
@@ -65,7 +101,7 @@ Requires for the user to be authenticated.
 
 <%= headers 204 %>
 
-## Stop watching a repository
+## Stop watching a repository (LEGACY)
 
 Requires for the user to be authenticated.
 

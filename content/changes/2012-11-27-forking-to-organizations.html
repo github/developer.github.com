@@ -1,0 +1,29 @@
+---
+kind: change
+title: Forking to Organizations
+created_at: 2012-11-27
+author_name: technoweenie
+---
+
+We made a slight change to the way you fork a repository.  By default, you
+can fork my repository through an HTTP POST to the repository's fork resource.
+
+    $ curl -X POST https://api.github.com/repos/technoweenie/faraday/forks
+
+This repository forks to your personal account.  However, there are cases when
+you want to fork to one of your organizations instead.  The previous method
+required a `?org` query parameter:
+
+    $ curl -X POST /repos/technoweenie/faraday/forks?org=mycompany
+
+Query parameters on POST requests are unusual in APIs, and definitely
+inconsistent with the rest of the GitHub API.  You should be able to post a
+JSON body like every other POST endpoint.  Now, you can!  Only, now we're
+calling the field `organization`.
+
+    $ curl /repos/technoweenie/faraday/forks?org=mycompany \
+      -d '{"organization": "mycompany"}'
+
+Don't worry, we are committed to maintaining the legacy behavior until the next
+major change of the GitHub API.
+

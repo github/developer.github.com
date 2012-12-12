@@ -1,7 +1,3 @@
----
-title: OAuth | GitHub API
----
-
 # OAuth
 
 * TOC
@@ -101,7 +97,7 @@ The access token allows you to make requests to the API on a behalf of a user.
 ## Non-Web Application Flow
 
 Use basic authentication to create an OAuth2 token using the [interface
-below](/v3/oauth#create-a-new-authorization).  With this technique, a username
+below](/v3/oauth/#create-a-new-authorization).  With this technique, a username
 and password need not be stored permanently, and the user can revoke access at
 any time.
 
@@ -122,11 +118,15 @@ host.
 
 ## Scopes
 
-Scopes let you specify exactly what type of access you need. This will
-be displayed to the user on the authorize form.
+Scopes let you specify exactly what type of access you need. Scopes _limit_
+access for OAuth tokens. They do not grant any additional permission beyond
+that which the user already has.
+
+For the web flow, requested scopes be displayed to the user on the authorize
+form.
 
 Check headers to see what OAuth scopes you have, and what the API action
-accept.
+accepts.
 
     $ curl -H "Authorization: bearer TOKEN" https://api.github.com/users/technoweenie -I
     HTTP/1.1 200 OK
@@ -155,6 +155,9 @@ include access to code - use `repo` for that.
 
 delete\_repo
 : Delete access to adminable repositories.
+
+notifications
+: Read access to a user's notifications.  `repo` is accepted too.
 
 gist
 : write access to gists.
@@ -191,8 +194,11 @@ access your own tokens, and only through Basic Authentication.
 
 ## Create a new authorization
 
-Note: Authorizations created from the API will show up in the GitHub API
-app.
+If you need a small number of tokens, implementing the [web flow](#web-application-flow)
+can be cumbersome. Instead, tokens can be created using the Authorizations API using
+Basic Authentication. To create tokens for a particular OAuth application, you
+must provide its client ID and secret, found on the OAuth application settings
+page, linked from your [OAuth applications listing on GitHub][app-listing].
 
     POST /authorizations
 
@@ -206,6 +212,14 @@ note
 
 note_url
 : _Optional_ **string** - A URL to remind you what app the OAuth token is for.
+
+client_id
+: _Optional_ **String** - The 20 character OAuth app client key for which to create the
+token.
+
+client_secret
+: _Optional_ **String** - The 40 character OAuth app client secret for which to create the
+token.
 
 <%= json :scopes => ["public_repo"], :note => 'admin script' %>
 
@@ -256,6 +270,7 @@ You can only send one of these scope keys at a time.
 
 ## More Information
 
+
 It can be a little tricky to get started with OAuth. Here are a few
 links that might be of help:
 
@@ -267,3 +282,5 @@ links that might be of help:
 * [Ruby OmniAuth example](http://github.com/intridea/omniauth)
 * [Ruby Sinatra extension](http://github.com/atmos/sinatra_auth_github)
 * [Ruby Warden strategy](http://github.com/atmos/warden-github)
+
+[app-listing]: https://github.com/settings/applications

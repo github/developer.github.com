@@ -12,13 +12,35 @@ diff.  These are separate from Commit Comments (which are applied
 directly to a commit, outside of the Pull Request view), and Issue
 Comments (which do not reference a portion of the unified diff).
 
-Pull Request Review Comments leverage [these](#custom-mime-types) custom mime
-types. You can read more about the use of mime types in the API
+Pull Request Review Comments leverage [these custom media
+types](#custom-media-types). You can read more about the use of media types in the API
 [here](/v3/media/).
 
 ## List comments on a pull request
 
     GET /repos/:owner/:repo/pulls/:number/comments
+
+### Response
+
+<%= headers 200 %>
+<%= json(:pull_comment) { |h| [h] } %>
+
+## List comments in a repository
+
+    GET /repos/:owner/:repo/pulls/comments
+
+By default, Review Comments are ordered by ascending ID.
+
+### Parameters
+
+sort
+: _Optional_ **String** `created` or `updated`
+
+direction
+: _Optional_ **String** `asc` or `desc`. Ignored without `sort` parameter.
+
+since
+: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 
 ### Response
 
@@ -114,12 +136,13 @@ body
 
 <%= headers 204 %>
 
-## Custom Mime Types
+## Custom media types
 
-These are the supported mime types for pull request comments. You can read
-more about the use of mime types in the API [here](/v3/media/).
+These are the supported media types for pull request comments. You can read
+more about the use of media types in the API [here](/v3/media/).
 
     application/vnd.github.VERSION.raw+json
     application/vnd.github.VERSION.text+json
     application/vnd.github.VERSION.html+json
     application/vnd.github.VERSION.full+json
+

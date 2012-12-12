@@ -101,4 +101,20 @@ encoded string. This is the default if nothing is passed.
 
 Return the raw blob data.
 
+## Commits, Commit comparison, and Pull Requests
+
+The Commit, Commit Comparison, and Pull Request resources support
+[diff][git-diff] and [patch][git-patch] formats:
+
+### diff
+
+    application/vnd.github.VERSION.diff
+
+### patch
+
+    application/vnd.github.VERSION.patch
+
+
 [gfm]:http://github.github.com/github-flavored-markdown/
+[git-diff]: http://git-scm.com/docs/git-diff
+[git-patch]: http://git-scm.com/docs/git-format-patch

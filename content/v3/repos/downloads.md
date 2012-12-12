@@ -8,7 +8,7 @@ title: Repo Downloads | GitHub API
 {:toc}
 
 The downloads API is for package downloads only. If you want to get
-source tarballs you should use [this](/repos/contents/#get-archive-link)
+source tarballs you should use [this](/v3/repos/contents/#get-archive-link)
 instead.
 
 ## List downloads for a repository

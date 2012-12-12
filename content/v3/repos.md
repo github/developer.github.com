@@ -50,11 +50,27 @@ List repositories for the specified org.
 ### Parameters
 
 type
-: `all`, `public`, `member`, `private`. Default: `all`.
+: `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`.
 
 ### Response
 
 <%= headers 200, :pagination => true %>
+<%= json(:repo) { |h| [h] } %>
+
+## List all repositories
+
+This provides a dump of every repository, in the order that they were created.
+
+    GET /repositories
+
+### Parameters
+
+since
+: The integer ID of the last Repository that you've seen.
+
+### Response
+
+<%= headers 200 %>
 <%= json(:repo) { |h| [h] } %>
 
 ## Create
@@ -109,7 +125,8 @@ README. Default is `false`.
 gitignore\_template
 : _Optional_ **string** - Desired language or platform [.gitignore
 template](https://github.com/github/gitignore) to
-apply. _Ignored if `auto_init` parameter is not provided._
+apply. Use the name of the template without the extension. For example, "Haskell"
+_Ignored if `auto_init` parameter is not provided._
 
 <%= json \
   :name          => "Hello-World",
@@ -167,6 +184,9 @@ repository, `false` to disable it. Default is `true`.
 has\_downloads
 : _Optional_ **boolean** - `true` to enable downloads for this
 repository, `false` to disable them. Default is `true`.
+
+default\_branch
+: _Optional_ **String** - Update the default branch for this repository.
 
 <%= json \
   :name          => "Hello-World",

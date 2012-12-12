@@ -5,8 +5,23 @@ task :compile do
   `nanoc compile`
 end
 
+# prompt user for a commit message; default: HEAD commit 1-liner
+def commit_message
+  last_commit = `git log -1 --pretty=format:"%s"`.chomp.strip
+  last_commit = 'Publishing developer content to GitHub pages.' if last_commit == ''
+
+  print "Enter a commit message (default: '#{last_commit}'): "
+  STDOUT.flush
+  mesg = STDIN.gets.chomp.strip
+
+  mesg = last_commit if mesg == ''
+  mesg.gsub(/'/, '') # to allow this to be handed off via -m '#{message}'
+end
+
 desc "Publish to http://developer.github.com"
 task :publish => [:clean] do
+  mesg = commit_message
+
   FileUtils.rm_r('output') if File.exist?('output')
 
   sh "nanoc compile"
@@ -21,9 +36,9 @@ task :publish => [:clean] do
     tsha = `git write-tree`.strip
     puts "Created tree   #{tsha}"
     if old_sha.size == 40
-      csha = `echo 'boom' | git commit-tree #{tsha} -p #{old_sha}`.strip
+      csha = `git commit-tree #{tsha} -p #{old_sha} -m '#{mesg}'`.strip
     else
-      csha = `echo 'boom' | git commit-tree #{tsha}`.strip
+      csha = `git commit-tree #{tsha} -m '#{mesg}'`.strip
     end
     puts "Created commit #{csha}"
     puts `git show #{csha} --stat`

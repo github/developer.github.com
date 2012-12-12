@@ -51,7 +51,9 @@ until
 <%= headers 200 %>
 <%= json(:full_commit) %>
 
-Note: Diffs with binary data will have no 'patch' property.
+Note: Diffs with binary data will have no 'patch' property. Pass the
+appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and
+patch formats.
 
 ## Compare two commits
 
@@ -60,3 +62,5 @@ Note: Diffs with binary data will have no 'patch' property.
 ### Response
 
 <%= json :commit_comparison %>
+
+Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.

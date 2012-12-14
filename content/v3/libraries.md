@@ -48,12 +48,12 @@ The [GitHub Java API](https://github.com/eclipse/egit-github/tree/master/org.ecl
 is part of the [GitHub Mylyn Connector](https://github.com/eclipse/egit-github) and aims to support the entire
 GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22org.eclipse.egit.github.core%22).
 
-## Javascript
+## JavaScript
 
 * [Node-GitHub][ajaxorg-node-github]
 * [NodeJS GitHub library][octonode]
 * [gh3 client-side API v3 wrapper][gh3]
-* [GitHub.js wrapper around the Github API][github]
+* [GitHub.js wrapper around the GitHub API][github]
 
 [ajaxorg-node-github]: https://github.com/ajaxorg/node-github
 [octonode]: https://github.com/pksunkara/octonode
@@ -69,10 +69,10 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 ## Perl
 
 * [Pithub][pithub-github] ([CPAN][pithub-cpan])
-* [Net::Github][net-github-github] ([CPAN][net-github-cpan])
+* [Net::GitHub][net-github-github] ([CPAN][net-github-cpan])
 
 [net-github-github]: https://github.com/fayland/perl-net-github
-[net-github-cpan]: http://search.cpan.org/~fayland/Net-GitHub-0.30/lib/Net/GitHub.pm
+[net-github-cpan]: http://search.cpan.org/dist/Net-GitHub/
 [pithub-github]: https://github.com/plu/Pithub
 [pithub-cpan]: http://metacpan.org/module/Pithub
 
@@ -101,7 +101,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 [libsaas]: https://github.com/ducksboard/libsaas
 [github3py]: https://github.com/sigmavirus24/github3.py
 [sanction]: https://github.com/demianbrecht/sanction
-[agithub]: https://github.com/jpaugh64/agithub "Agnostic Github"
+[agithub]: https://github.com/jpaugh64/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
 
 ## Ruby

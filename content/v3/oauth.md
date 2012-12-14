@@ -275,12 +275,12 @@ It can be a little tricky to get started with OAuth. Here are a few
 links that might be of help:
 
 * [OAuth 2 spec](http://tools.ietf.org/html/draft-ietf-oauth-v2-07)
-* [Facebook API](http://developers.facebook.com/docs/authentication/)
+* [Facebook Login API](http://developers.facebook.com/docs/technical-guides/login/)
 * [Ruby OAuth2 lib](https://github.com/intridea/oauth2)
-* [simple ruby/sinatra example](https://gist.github.com/9fd1a6199da0465ec87c)
-* [simple python example](https://gist.github.com/e3fbd47fbb7ee3c626bb) using [python-oauth2](http://github.com/dgouldin/python-oauth2)
-* [Ruby OmniAuth example](http://github.com/intridea/omniauth)
-* [Ruby Sinatra extension](http://github.com/atmos/sinatra_auth_github)
-* [Ruby Warden strategy](http://github.com/atmos/warden-github)
+* [Simple Ruby/Sinatra example](https://gist.github.com/9fd1a6199da0465ec87c)
+* [Simple Python example](https://gist.github.com/e3fbd47fbb7ee3c626bb) using [python-oauth2](https://github.com/dgouldin/python-oauth2)
+* [Ruby OmniAuth example](https://github.com/intridea/omniauth)
+* [Ruby Sinatra extension](https://github.com/atmos/sinatra_auth_github)
+* [Ruby Warden strategy](https://github.com/atmos/warden-github)
 
 [app-listing]: https://github.com/settings/applications

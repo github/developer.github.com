@@ -18,6 +18,19 @@ authenticated.
 
 <%= headers 200 %>
 <%= json ["octocat@github.com", "support@github.com"] %>
+<br>
+
+#### Future response
+
+In the final version of the API, this method will return an array of hashes
+with extended information for each email address indicating if the address has
+been verified and if it's the user's primary email address for GitHub.
+
+Until API v3 is finalized, use the `application/vnd.github.v3`
+[mediatype][media-types] to get this response format.
+
+<%= headers 200 %>
+<%= json(:user_email) {|e| [e]} %>
 
 ## Add email address(es)
 
@@ -48,3 +61,5 @@ You can include a single email address or an array of addresses:
 
 <%= headers 204 %>
 
+
+[media-types]: /v3/media

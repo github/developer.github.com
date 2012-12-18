@@ -27,7 +27,7 @@ with extended information for each email address indicating if the address has
 been verified and if it's the user's primary email address for GitHub.
 
 Until API v3 is finalized, use the `application/vnd.github.v3`
-[mediatype][media-types] to get this response format.
+[media type][media-types] to get this response format.
 
 <%= headers 200 %>
 <%= json(:user_email) {|e| [e]} %>

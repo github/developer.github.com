@@ -24,7 +24,7 @@ to the actual date.
 We consider the "beta" API unchangeable.  [File a support issue](https://github.com/contact)
 if you have problems.
 
-#### Expected Changes <a name="changes"></a>
+#### Expected Changes
 
 These changes are _not_ implemented, just planned for the next major API version.
 
@@ -42,18 +42,9 @@ objects.
 * `[ ]` Use the `private` attribute when creating a private repository,
   instead of setting `public` to false.
 * `[ ]` Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.
-* `[ ]` User Emails come back as a hash instead of a string.
-
-        {"email": "email@whatev.com", "state": "verified"}
+* `[✓]` <del>User Emails come back [as a hash][v3-email] instead of a string.</del>
 
 ### Breaking Beta Changes
-
-##### August 30, 2012
-* Added `repo:status` scope
-* Added Status API
-
-##### August 7, 2012
-* Clarified watching/stargazing
 
 ##### June 12, 2012:
 * Removed API v1 support
@@ -77,3 +68,5 @@ objects.
   returned in the Link header instead.
 * JSON-P response has completely changed to a more consistent format.
 * Starring gists now uses PUT verb (instead of POST) and returns 204.
+
+[v3-email]: /v3/users/emails/#future-response

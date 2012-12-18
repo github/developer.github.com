@@ -1014,6 +1014,12 @@ module GitHub
       "C",
       "C++"
     ]
+
+    USER_EMAIL = {
+      :email    => "octocat@github.com",
+      :verified => true,
+      :primary  => true
+    }
   end
 end
 

@@ -47,7 +47,19 @@ for the `X-GitHub-Media-Type` header:
     HTTP/1.1 200 OK
     X-GitHub-Media-Type: github.v3; param=full; format=json
 
-For specifics on versions, check the [API changelog](/v3/changelog).
+
+## API v3 media type and the future
+
+Ultimately, we aim for a version-less, [Hypermedia][hypermedia]-driven API.
+Before we get there, we [expect a few changes][expected-changes]. As we roll
+out these changes, certain methods will support the API v3 media type:
+
+    application/vnd.github.v3
+
+We'll clearly mark those methods that publicly support the v3 media type. 
+
+**NOTE:** _Using the v3 media type for methods other than those marked may yield 
+unexpected results._
 
 ## Comment Body Properties
 
@@ -118,3 +130,5 @@ The Commit, Commit Comparison, and Pull Request resources support
 [gfm]:http://github.github.com/github-flavored-markdown/
 [git-diff]: http://git-scm.com/docs/git-diff
 [git-patch]: http://git-scm.com/docs/git-format-patch
+[hypermedia]: /v3/#hypermedia
+[expected-changes]: /#expected-changes

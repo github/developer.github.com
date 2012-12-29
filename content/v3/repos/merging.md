@@ -51,8 +51,12 @@ If omitted, a default message will be used.
 <%= headers 409 %>
 <%= json({ :message => "Merge Conflict" }) %>
 
-### Missing base or head response
+### Missing base response
 
 <%= headers 404 %>
 <%= json(:message => "Base does not exist") %>
+
+### Missing head response
+
+<%= headers 404 %>
 <%= json(:message => "Head does not exist") %>

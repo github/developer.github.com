@@ -100,7 +100,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 [pygithub3-api]: https://github.com/copitux/python-github3
 [libsaas]: https://github.com/ducksboard/libsaas
 [github3py]: https://github.com/sigmavirus24/github3.py
-[sanction]: https://github.com/demianbrecht/sanction
+[sanction]: https://github.com/snuts/sanction
 [agithub]: https://github.com/jpaugh64/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
 

@@ -11,7 +11,8 @@ $(function() {
     if(docUrl){
       $('#js-sidebar .js-topic a').each(function(){
         var url = $(this).attr('href').toString()
-        if(url.indexOf(docUrl[1]) >= 0 && url.length == docUrl[1].length){
+        var cleanDocUrl = docUrl[1].split('#')[0]
+        if(url.indexOf(cleanDocUrl) >= 0 && url.length == cleanDocUrl.length){
           $(this).parent('li').addClass('disable')
           var parentTopic = $(this).parentsUntil('div.sidebar-module > ul').last()
           parentTopic.addClass('js-current')
@@ -74,5 +75,21 @@ $(function() {
   // Dynamic year for footer copyright
   var currentYear = (new Date).getFullYear();
   $("#year").text( (new Date).getFullYear() );
+
+  // Grab API status
+  $.getJSON('https://status.github.com/api/status.json?callback=?', function(data) {
+    if(data) {
+      var link = $("<a>")
+        .attr("href", "https://status.github.com")
+        .addClass(data.status)
+        .attr("title", "API Status: " + data.status + ". Click for details.");
+      var img = $("<img>")
+        .attr("src", "/images/status-icon-" + data.status + ".png")
+        .height(16)
+        .width(16);
+      link.append(img);
+      $('.api-status').html(link);
+    }
+  });
 
 });

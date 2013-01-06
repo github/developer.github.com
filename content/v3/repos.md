@@ -71,7 +71,7 @@ since
 ### Response
 
 <%= headers 200 %>
-<%= json(:repo) { |h| [h] } %>
+<%= json(:simple_repo) { |h| [h] } %>
 
 ## Create
 

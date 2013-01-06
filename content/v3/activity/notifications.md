@@ -7,7 +7,7 @@ title: Notifications | GitHub API
 * TOC
 {:toc}
 
-GitHub Notifications are powered by [watched repositories](/v3/repos/watching/).
+GitHub Notifications are powered by [watched repositories](/v3/activity/watching/).
 Users receive notifications for discussions in repositories they watch
 including:
 

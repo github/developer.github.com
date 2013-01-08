@@ -40,17 +40,17 @@
 
 <ul id="markdown-toc">
 <li><a href="#list-public-keys-for-a-user">List public keys for a user</a></li>
+  <li><a href="#list-your-public-keys">List your public keys</a></li>
   <li><a href="#get-a-single-public-key">Get a single public key</a></li>
   <li><a href="#create-a-public-key">Create a public key</a></li>
   <li><a href="#update-a-public-key">Update a public key</a></li>
   <li><a href="#delete-a-public-key">Delete a public key</a></li>
-</ul><p>Management of public keys via the API requires that you are
-authenticated.</p>
+</ul><h2 id="list-public-keys-for-a-user">List public keys for a user</h2>
 
-<h2 id="list-public-keys-for-a-user">List public keys for a user</h2>
-
-<pre><code>GET /user/keys
+<pre><code>GET /users/:user/keys
 </code></pre>
+
+<p>Lists the <em>verified</em> public keys for a user.  This is accessible by anyone.</p>
 
 <h3 id="response">Response</h3>
 
@@ -60,10 +60,31 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
     <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="list-your-public-keys">List your public keys</h2>
+
+<pre><code>GET /user/keys
+</code></pre>
+
+<p>Lists the current user’s keys.  Management of public keys via the API requires
+that you are authenticated through basic auth, or OAuth with the ‘user’ scope.</p>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
+    <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -72,17 +93,17 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /user/keys/:id
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
+  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-public-key">Create a public key</h2>
@@ -97,7 +118,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-2">Response</h3>
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
 Location: https://api.github.com/user/keys/1
@@ -105,10 +126,10 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
+  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="update-a-public-key">Update a public key</h2>
@@ -123,17 +144,17 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-3">Response</h3>
+<h3 id="response-4">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
+  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="delete-a-public-key">Delete a public key</h2>
@@ -141,7 +162,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>DELETE /user/keys/:id
 </code></pre>
 
-<h3 id="response-4">Response</h3>
+<h3 id="response-5">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

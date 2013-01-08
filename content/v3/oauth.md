@@ -141,7 +141,14 @@ accepts.
 repo info, and gists).
 
 user
-: Read/write access to profile info only.
+: Read/write access to profile info only.  Note: this scope includes user:email
+and user:follow.
+
+user:email
+: Read access to a user's email addresses.
+
+user:follow
+: Access to follow or unfollow other users.
 
 public\_repo
 : Read/write access to public repos and organizations.
@@ -160,7 +167,7 @@ notifications
 : Read access to a user's notifications.  `repo` is accepted too.
 
 gist
-: write access to gists.
+: Write access to gists.
 
 NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them by a comma.

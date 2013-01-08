@@ -8,11 +8,13 @@ title: User Emails | GitHub API
 {:toc}
 
 Management of email addresses via the API requires that you are
-authenticated.
+authenticated through basic auth or OAuth with the user scope.
 
 ## List email addresses for a user
 
     GET /user/emails
+
+This endpoint is accessible with the user:email scope.
 
 ### Response
 

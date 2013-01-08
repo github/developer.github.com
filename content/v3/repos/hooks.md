@@ -36,9 +36,13 @@ The payloads for all of the hooks mirror [the payloads for the Event
 types](/v3/activity/events/types/), with the exception of [the original `push`
 event](http://help.github.com/post-receive-hooks/).
 
+A number of external services have already been integrated through the open source 
+[github-services](https://github.com/github/github-services) project, including the generic 
+[Web Service](https://github.com/github/github-services/blob/master/services/web.rb) service which can be used to 
+define your own custom hooks. All possible names for hooks, the events they support, and their configuration can be seen at  [/hooks](https://api.github.com/hooks).
+
 For a Hook to go through, the Hook needs to be configured to trigger for
-an event, and the Service has to listen to it.  The Services are all
-part of the open source [github-services](https://github.com/github/github-services) project. Most of the Services only listen for `push` events.  However, the generic [Web Service](https://github.com/github/github-services/blob/master/services/web.rb) listens for all events.  Other services like the [IRC Service](https://github.com/github/github-services/blob/master/services/irc.rb) may only listen for `push`, `issues`, and `pull_request` events.
+an event, and the Service has to listen to it.   Most of the Services only listen for `push` events.  However, the generic [Web Service](https://github.com/github/github-services/blob/master/services/web.rb) listens for all events.  Other services like the [IRC Service](https://github.com/github/github-services/blob/master/services/irc.rb) may only listen for `push`, `issues`, and `pull_request` events.
 
 ## List
 

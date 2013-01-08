@@ -140,12 +140,14 @@ module GitHub
       }
     })
 
-    PUBLIC_KEY = {
-      "url"   => "https://api.github.com/user/keys/1",
+    SIMPLE_PUBLIC_KEY = {
       "id"    => 1,
-      "title" => "octocat@octomac",
-      "key"   => "ssh-rsa AAA...",
+      "key"   => "ssh-rsa AAA..."
     }
+
+    PUBLIC_KEY = SIMPLE_PUBLIC_KEY.merge \
+      "url"   => "https://api.github.com/user/keys/1",
+      "title" => "octocat@octomac"
 
     SIMPLE_REPO = {
       "id"               => 1296269,

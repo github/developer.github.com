@@ -72,7 +72,7 @@ module GitHub
         %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
       end
 
-      def json(key)
+      def json(key, bare = false)
         hash = case key
           when Hash
             h = {}
@@ -85,6 +85,10 @@ module GitHub
 
         hash = yield hash if block_given?
 
+        if bare
+          return JSON.pretty_generate(hash)
+        end
+        
         %(<pre class="highlight"><code class="language-javascript">) +
           JSON.pretty_generate(hash) + "</code></pre>"
       end

@@ -9,7 +9,9 @@ gem 'nokogiri', '~> 1.4.4'
 gem 'pygments.rb'
 gem 'rake', '~> 0.9.2'
 gem 'thin'
-gem 'yajl-ruby', '~> 0.8.2'
+gem 'yajl-ruby', '~> 1.1.0'
+gem 'curb', '~> 0.8.3'
+gem 'hashdiff', '~> 0.0.5'
 
 group :development do
   gem 'adsf'

@@ -1,5 +1,11 @@
 require 'nanoc3/tasks'
 
+require './lib/resources'
+require 'curb'
+require 'yajl'
+require 'json-compare'
+require 'hashdiff'
+
 desc "Compile the site"
 task :compile do
   `nanoc compile`
@@ -45,5 +51,65 @@ task :publish => [:clean] do
     puts "Updating gh-pages from #{old_sha}"
     `git update-ref refs/heads/gh-pages #{csha}`
     `git push origin gh-pages`
+  end
+end
+
+task :api_test do
+  API_URL = "https://api.github.com"
+
+  # missing tag, team ?
+  public_api = { 
+        "FULL_USER" => "/users/octocat",
+        "GIST"      => "/users/octocat/gists",
+        "TEMPLATES" => "/gitignore/template",
+        "TEMPLATE"  => "/gitignore/templates/C",
+        "ORG"       => "/users/gjtorikian/orgs",
+        "FULL_ORG"  => "/orgs/github",
+        "PULL"      => "/repos/octocat/Hello-World/pulls/1",
+        "COMMIT"    => "/repos/octocat/Hello-World/pulls/1/commits",
+        "FILE"      => "/repos/octocat/Hello-World/pulls/1/files",
+        "FULL_REPO" => "/users/octocat/repos",
+        "CONTRIBUTOR" => "/repos/octocat/Hello-World/contributors",
+        "BRANCHES"   => "/repos/octocat/Hello-World/branches",
+        "BRANCH"   => "/repos/octocat/Hello-World/branches/master"
+  }
+
+  auth_api = {
+    "ISSUE" => "",
+    "OAUTH_ACCESS" => ""
+  }
+
+  public_api.each do |type, url|
+    parser = Yajl::Parser.new
+
+    doc_type = JSON.parse(GitHub::Resources::json(type, true))
+    api_hash = parser.parse(Curl.get(API_URL + url).body_str)
+
+    puts "\n#{type}\n"
+    
+    if api_hash.kind_of?(Array)
+      if api_hash.length != doc_type.length
+        #puts "WTF, API has #{api_hash.length} entries, while Doc has #{doc_type.length} (#{api_hash.length - doc_type.length})"
+      
+        #puts "API: #{api_hash} #{doc_type}"
+
+        diff = []
+      else
+        api_hash.each do |elem, i|
+          #puts i
+        end
+      end
+    else
+      pp api_hash
+      #diff = api_hash.keys - doc_type.keys
+    end
+
+    #if diff.length
+      #puts "DANGER, DANGER, WILL ROBINSON! The following #{type} values are NOT documented: \n\n"
+
+     # diff.each do |id|
+        #puts "#{id} is new!"
+     # end
+    #end
   end
 end

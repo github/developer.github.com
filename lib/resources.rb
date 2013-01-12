@@ -556,8 +556,8 @@ module GitHub
     }
 
     ISSUE = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1",
-      "html_url"   => "https://github.com/octocat/Hello-World/issues/1",
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+      "html_url"   => "https://github.com/octocat/Hello-World/issues/1347",
       "number"     => 1347,
       "state"      => "open",
       "title"      => "Found a bug",
@@ -568,9 +568,9 @@ module GitHub
       "milestone"  => MILESTONE,
       "comments"   => 0,
       "pull_request" => {
-        "html_url"  => "https://github.com/octocat/Hello-World/issues/1",
-        "diff_url"  => "https://github.com/octocat/Hello-World/issues/1.diff",
-        "patch_url" => "https://github.com/octocat/Hello-World/issues/1.patch"
+        "html_url"  => "https://github.com/octocat/Hello-World/issues/1347",
+        "diff_url"  => "https://github.com/octocat/Hello-World/issues/1347.diff",
+        "patch_url" => "https://github.com/octocat/Hello-World/issues/1347.patch"
       },
       "closed_at"  => nil,
       "created_at" => "2011-04-22T13:33:48Z",

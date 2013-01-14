@@ -11,6 +11,11 @@ title: Repo Collaborators | GitHub API
 
     GET /repos/:owner/:repo/collaborators
 
+When authenticating as an organization owner of an organization-owned
+repository, all organization owners are included in the list of collaborators.
+Otherwise, only users with access to the repository are returned in the
+collaborators list.
+
 ### Response
 
 <%= headers 200 %>

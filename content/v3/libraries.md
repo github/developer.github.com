@@ -24,6 +24,12 @@ Libraries for accessing the GitHub API from your favorite language.
 
 [csharp]: https://github.com/sgrassie/csharp-github-api
 
+## FSharp
+
+* [FSharp.GitHubApi][fsharp]
+
+[fsharp]: https://github.com/saxonmatt/FSharp.GitHubApi
+
 ## Emacs Lisp
 
 * [gh.el][gh.el]

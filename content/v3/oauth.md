@@ -157,8 +157,11 @@ repo
 : Read/write access to public and private repos and organizations.
 
 repo:status
-: Read/write access to public and private repo statuses.  Does **not**
-include access to code - use `repo` for that.
+: Read/write access to public and private repository commit statuses. This
+scope is only necessary to grant other users or services access to private
+repository commit statuses without granting access to the code. The `repo` and
+`public_repo` scopes already include access to commit status for private and
+public repositories respectively.
 
 delete\_repo
 : Delete access to adminable repositories.

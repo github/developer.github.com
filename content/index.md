@@ -43,6 +43,7 @@ objects.
   instead of setting `public` to false.
 * `[ ]` Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.
 * `[✓]` <del>User Emails come back [as a hash][v3-email] instead of a string.</del>
+* `[ ]` Remove the unused "bio" field for Users.
 
 ### Breaking Beta Changes
 

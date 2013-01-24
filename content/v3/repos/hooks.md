@@ -21,6 +21,8 @@ The default event is `push`.  The available events are:
 * `pull_request` - Any time a Pull Request is opened, closed, or
   synchronized (updated due to a new push in the branch that the pull
 request is tracking).
+* `pull_request_review_comment` - Any time a Commit is commented on
+  while inside a Pull Request review (the Files Changed tab).
 * `gollum` - Any time a Wiki page is updated.
 * `watch` - Any time a User watches the Repository.
 * `download` - Any time a Download is added to the Repository.

@@ -32,6 +32,7 @@ request is tracking).
 * `member` - Any time a User is added as a collaborator to a
   non-Organization Repository.
 * `public` - Any time a Repository changes from private to public.
+* `team_add` - Any time a team is added or modified on a Repository.
 * `status` - Any time a Repository has a status update from the API
 
 The payloads for all of the hooks mirror [the payloads for the Event

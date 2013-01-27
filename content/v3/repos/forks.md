@@ -7,6 +7,8 @@ title: Repo Forks | GitHub API
 * TOC
 {:toc}
 
+The same method is used for listing and creating forks. The only difference is to list is sent as GET and to create is sent as POST. 
+
 ## List forks
 
     GET /repos/:owner/:repo/forks

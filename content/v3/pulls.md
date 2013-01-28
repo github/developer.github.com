@@ -11,7 +11,7 @@ The Pull Request API allows you to list, view, edit, create, and even merge
 pull requests. Comments on pull requests can be managed via the [Issue
 Comments API](/v3/issues/comments/).
 
-Pull Requests leverage [these custom media types](#custom-media-types). You
+Pull Requests use [these custom media types](#custom-media-types). You
 can read more about the use of media types in the API
 [here](/v3/media/).
 

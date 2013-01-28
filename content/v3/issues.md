@@ -7,7 +7,7 @@ title: Issues | GitHub API
 * TOC
 {:toc}
 
-Issues leverage [these custom media types](#custom-media-types). You can
+Issues use [these custom media types](#custom-media-types). You can
 read more about the use of media types in the API [here](/v3/media/).
 
 ## List issues

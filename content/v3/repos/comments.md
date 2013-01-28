@@ -9,7 +9,7 @@ title: Repo Comments | GitHub API
 
 ## List commit comments for a repository
 
-Commit Comments leverage [these custom media types](#custom-media-types). You can
+Commit Comments use [these custom media types](#custom-media-types). You can
 read more about the use of media types in the API [here](/v3/media/).
 
 Comments are ordered by ascending ID.

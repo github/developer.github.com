@@ -7,7 +7,7 @@ title: Gist Comments | GitHub API
 * TOC
 {:toc}
 
-Gist Comments leverage [these custom media types](#custom-media-types).
+Gist Comments use [these custom media types](#custom-media-types).
 You can read more about the use of media types in the API
 [here](/v3/media/).
 

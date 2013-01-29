@@ -175,13 +175,21 @@ names).</dd>
 
 <h2 id="http-redirects">HTTP Redirects</h2>
 
-<p>API v3 uses HTTP redirection where appropriate. Clients should assume that any request may result in a redirection. Receiving an HTTP redirection is <em>not</em> an error and clients should follow that redirect. Redirect responses will have a <code>Location</code> header field which contains the URI of the resource to which the client should repeat the requests.</p>
+<p>API v3 uses HTTP redirection where appropriate. Clients should assume that any
+request may result in a redirection. Receiving an HTTP redirection is <em>not</em> an
+error and clients should follow that redirect. Redirect responses will have a
+<code>Location</code> header field which contains the URI of the resource to which the
+client should repeat the requests.</p>
 
 <dl>
 <dt>301</dt>
-  <dd>Permanent redirection. The URI you used to make the request has be superseded by the one specified in the <code>Location</code> header field. This and all future requests to this resource should be directed the new URI.</dd>
+  <dd>Permanent redirection. The URI you used to make the request has been
+superseded by the one specified in the <code>Location</code> header field. This and all
+future requests to this resource should be directed to the new URI.</dd>
   <dt>302, 307</dt>
-  <dd>Temporary redirection. The request should be repeated verbatim to the URI specified in the <code>Location</code> header field but clients should continue to use the original URI for future requests.</dd>
+  <dd>Temporary redirection. The request should be repeated verbatim to the URI
+specified in the <code>Location</code> header field but clients should continue to use the
+original URI for future requests.</dd>
 </dl><p>Other redirection status codes may be used in accordance with the HTTP 1.1 spec.</p>
 
 <h2 id="http-verbs">HTTP Verbs</h2>

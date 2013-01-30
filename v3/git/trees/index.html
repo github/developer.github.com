@@ -123,16 +123,22 @@ a new tree out.</p>
 
 <dl>
 <dt>base_tree</dt>
-  <dd>optional <em>String</em> of the SHA1 of the tree you want to update with new data</dd>
+  <dd>optional <em>String</em> of the SHA1 of the tree you want to update with new data.
+If you don’t set this, the commit will be created on top of everything,
+however, it will only contain your change, the rest of your files will show up
+as deleted.</dd>
   <dt>tree</dt>
   <dd>
-<em>Array</em> of <em>Hash</em> objects (of <code>path</code>, <code>mode</code>, <code>type</code> and <code>sha</code>) specifying a tree structure</dd>
+<em>Array</em> of <em>Hash</em> objects (of <code>path</code>, <code>mode</code>, <code>type</code> and <code>sha</code>) specifying a
+tree structure</dd>
   <dt>tree.path</dt>
   <dd>
 <em>String</em> of the file referenced in the tree</dd>
   <dt>tree.mode</dt>
   <dd>
-<em>String</em> of the file mode - one of <code>100644</code> for file (blob), <code>100755</code> for executable (blob), <code>040000</code> for subdirectory (tree), <code>160000</code> for submodule (commit) or <code>120000</code> for a blob that specifies the path of a symlink</dd>
+<em>String</em> of the file mode - one of <code>100644</code> for file (blob), <code>100755</code> for
+executable (blob), <code>040000</code> for subdirectory (tree), <code>160000</code> for submodule
+(commit) or <code>120000</code> for a blob that specifies the path of a symlink</dd>
   <dt>tree.type</dt>
   <dd>
 <em>String</em> of <code>blob</code>, <code>tree</code>, <code>commit</code>
@@ -142,7 +148,8 @@ a new tree out.</p>
 <em>String</em> of SHA1 checksum ID of the object in the tree</dd>
   <dt>tree.content</dt>
   <dd>
-<em>String</em> of content you want this file to have - GitHub will write this blob out and use that SHA for this entry.  Use either this or <code>tree.sha</code>
+<em>String</em> of content you want this file to have - GitHub will write this blob
+out and use that SHA for this entry.  Use either this or <code>tree.sha</code>
 </dd>
 </dl><h3 id="input">Input</h3>
 

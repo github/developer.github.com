@@ -37,7 +37,7 @@ a new tree out.
 ### Parameters
 
 base_tree
-: optional _String_ of the SHA1 of the tree you want to update with new data
+: optional _String_ of the SHA1 of the tree you want to update with new data. If you don't set this it the commit will be created on top of everything, however, it will only contain your change, the rest of your files will show up as deleted.
 
 tree
 : _Array_ of _Hash_ objects (of `path`, `mode`, `type` and `sha`) specifying a tree structure

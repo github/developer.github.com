@@ -66,7 +66,9 @@ out and use that SHA for this entry.  Use either this or `tree.sha`
 
 ### Input
 
-<%= json "tree"=> \
+<%= json 
+   "base_tree" => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312", \
+   "tree"=> \
   [{"path"=>"file.rb", \
     "mode"=>"100644", \
     "type"=>"blob", \

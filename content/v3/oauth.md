@@ -67,9 +67,6 @@ when you [registered](https://github.com/settings/applications/new).
 code
 : _Required_ **string** - The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
 
-state
-: _Required if submitted in step 1_ **string** - The state value you provided in Step 1.
-
 ### Response
 
 By default, the response will take the following form:

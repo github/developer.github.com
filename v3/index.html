@@ -379,7 +379,7 @@ you if there are problems.</p>
 
 <h2 id="conditional-requests">Conditional requests</h2>
 
-<p>Most responses return <code>Last-Modified</code> and <code>Etag</code> headers. You can use the values
+<p>Most responses return <code>Last-Modified</code> and <code>ETag</code> headers. You can use the values
 of these headers to make subsequent requests to those resources using the
 <code>If-Modified-Since</code> and <code>If-None-Match</code> headers, respectively. If the resource
 has not changed, the server will return a <code>304 Not Modified</code>. Also note: making
@@ -425,9 +425,9 @@ you can read the <a href="http://www.w3.org/TR/cors">CORS W3C working draft</a>,
 HTML 5 Security Guide.</p>
 
 <p>Here’s a sample request sent from a browser hitting
-<code>http://some-site.com</code>:</p>
+<code>http://example.com</code>:</p>
 
-<pre><code>$ curl -i https://api.github.com -H "Origin: http://some-site.com"
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://example.com"
 HTTP/1.1 302 Found
 </code></pre>
 
@@ -479,7 +479,7 @@ foo({
 })
 </pre>
 
-<p>You can write a javascript handler to process the callback like this:</p>
+<p>You can write a JavaScript handler to process the callback like this:</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">meta</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span>

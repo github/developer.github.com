@@ -105,13 +105,13 @@ redirect users to the callback URL configured in the OAuth Application
 settings. If provided, the redirect URL must match the callback URL's
 host.
 
-    CALLBACK: http://foo.com
+    CALLBACK: http://example.com
 
-    GOOD: https://foo.com
-    GOOD: http://foo.com/bar
-    BAD:  http://foo.com:8080
-    BAD:  http://oauth.foo.com:8080
-    BAD:  http://bar.com
+    GOOD: https://example.com
+    GOOD: http://example.com/bar
+    BAD:  http://example.com:8080
+    BAD:  http://oauth.example.com:8080
+    BAD:  http://example.org
 
 ## Scopes
 

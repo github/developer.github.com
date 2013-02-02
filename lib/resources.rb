@@ -718,7 +718,7 @@ module GitHub
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
-      "user"         => USER,
+      "owner"        => USER,
       "files"        => { "ring.erl" => GIST_FILE },
       "comments"     => 0,
       "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",

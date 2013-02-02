@@ -53,7 +53,7 @@ List who the authenticated user is following:
 
     PUT /user/following/:user
 
-Following a user requres the user to be logged in and authenticated with basic
+Following a user requires the user to be logged in and authenticated with basic
 auth or OAuth with the `user:follow` scope.
 
 ### Response

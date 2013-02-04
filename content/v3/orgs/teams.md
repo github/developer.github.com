@@ -8,7 +8,7 @@ title: Organization Teams | GitHub API
 {:toc}
 
 All actions against teams require at a minimum an authenticated user who
-is a member of the owner's team in the `:org` being managed. Additionally,
+is a member of the Owners team in the `:org` being managed. Additionally,
 OAuth users require "user" [scope](/v3/oauth/#scopes).
 
 ## List teams

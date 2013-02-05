@@ -2,13 +2,52 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2013-01-31T07:00:00Z</updated>
+  <updated>2013-02-05T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2013-02-05:/changes/2013-2-5-changes-to-services/</id>
+    <title type="html">Upcoming Changes to GitHub Services</title>
+    <published>2013-02-05T07:00:00Z</published>
+    <updated>2013-02-05T07:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-2-5-changes-to-services/" />
+    <content type="html">&lt;p&gt;We are finishing up a new GitHub Services backend, dubbed “Hookshot”, to
+increase the speed and reliability of our delivered payloads.  We are doing
+what we can to make this a seamless transition for everyone.  However, there
+are a few notable changes.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+    &lt;p&gt;There is a new &lt;a href="http://developer.github.com/v3/meta/"&gt;Meta API endpoint&lt;/a&gt;
+listing the current public IPs that hooks originate from.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We’re removing the AMQP service from GitHub. It hasn’t worked in quite some
+time, and the code it uses doesn’t work in our background workers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We’re also instituting a new guideline to improve the reliability and
+maintainability of services in the future. As of today, all new services must
+accept an unmodified payload over HTTP. Any service that does not will be
+rejected. To see an example of an acceptable service, check out &lt;a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb"&gt;Code Climate&lt;/a&gt;.
+Notice their service simply acccepts HTTP POST from GitHub unmodified. For an
+example of a service that won’t be accepted after today, check out &lt;a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb"&gt;Campfire&lt;/a&gt;. It
+uses other Ruby gems and contains custom logic to transform the GitHub payload
+to Campfire messages.  Existing hooks will keep working (don’t worry 37signals, we
+:heart: Campfire).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We’re making these changes because we want to focus on the reliability of the
+core Services backend for everyone.  Maintaining custom logic and libraries for
+over 100 services is taking too much of this focus away.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2013-01-31:/changes/2013-01-31-user-agent-will-soon-be-mandatory/</id>
     <title type="html">User Agent mandatory from March 4th 2013</title>

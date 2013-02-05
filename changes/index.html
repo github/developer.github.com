@@ -38,6 +38,54 @@
       <div class="content">
     <h1 id="api-changes">API Changes</h1>
 
+<div class="change" id="/changes/2013-2-5-changes-to-services/">
+  <h2 class="title">
+  <a href="/changes/2013-2-5-changes-to-services/">Upcoming Changes to GitHub Services</a>
+</h2>
+
+<div class="meta">
+  <div class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><span class="author vcard fn">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+    </span>
+    <span class="published">
+      February 5, 2013
+    
+    </span>
+  </div>
+</div>
+
+  <p>We are finishing up a new GitHub Services backend, dubbed “Hookshot”, to
+increase the speed and reliability of our delivered payloads.  We are doing
+what we can to make this a seamless transition for everyone.  However, there
+are a few notable changes.</p>
+
+<ul>
+<li>
+    <p>There is a new <a href="http://developer.github.com/v3/meta/">Meta API endpoint</a>
+listing the current public IPs that hooks originate from.</p>
+  </li>
+  <li>
+    <p>We’re removing the AMQP service from GitHub. It hasn’t worked in quite some
+time, and the code it uses doesn’t work in our background workers.</p>
+  </li>
+  <li>
+    <p>We’re also instituting a new guideline to improve the reliability and
+maintainability of services in the future. As of today, all new services must
+accept an unmodified payload over HTTP. Any service that does not will be
+rejected. To see an example of an acceptable service, check out <a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb">Code Climate</a>.
+Notice their service simply acccepts HTTP POST from GitHub unmodified. For an
+example of a service that won’t be accepted after today, check out <a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb">Campfire</a>. It
+uses other Ruby gems and contains custom logic to transform the GitHub payload
+to Campfire messages.  Existing hooks will keep working (don’t worry 37signals, we
+:heart: Campfire).</p>
+  </li>
+</ul>
+<p>We’re making these changes because we want to focus on the reliability of the
+core Services backend for everyone.  Maintaining custom logic and libraries for
+over 100 services is taking too much of this focus away.</p>
+</div>
+
 <div class="change" id="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">
   <h2 class="title">
   <a href="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">User Agent mandatory from March 4th 2013</a>

@@ -967,6 +967,10 @@ module GitHub
       "creator" => USER
     }
 
+    META = {
+      :hooks => ['127.0.0.1/32']
+    }
+
     BLOB = {
       :content => "Content of the blob",
       :encoding => "utf-8",

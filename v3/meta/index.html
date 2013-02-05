@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Repo Collaborators | GitHub API</title>
+  <title>GitHub Meta API | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,22 +36,12 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="repo-collaborators-api">Repo Collaborators API</h1>
+    <h1 id="github-meta-api">GitHub Meta API</h1>
 
-<ul id="markdown-toc">
-<li><a href="#list">List</a></li>
-  <li><a href="#get">Get</a></li>
-  <li><a href="#add-collaborator">Add collaborator</a></li>
-  <li><a href="#remove-collaborator">Remove collaborator</a></li>
-</ul><h2 id="list">List</h2>
+<p>This gives some information about GitHub.com, the service.</p>
 
-<pre><code>GET /repos/:owner/:repo/collaborators
+<pre><code>GET /meta
 </code></pre>
-
-<p>When authenticating as an organization owner of an organization-owned
-repository, all organization owners are included in the list of collaborators.
-Otherwise, only users with access to the repository are returned in the
-collaborators list.</p>
 
 <h3 id="response">Response</h3>
 
@@ -59,54 +49,20 @@ collaborators list.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"hooks"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"127.0.0.1/32"</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
 
-<h2 id="get">Get</h2>
+<h3 id="body">Body</h3>
 
-<pre><code>GET /repos/:owner/:repo/collaborators/:user
-</code></pre>
-
-<h3 id="response-if-user-is-a-collaborator">Response if user is a collaborator</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h3 id="response-if-user-is-not-a-collaborator">Response if user is not a collaborator</h3>
-
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="add-collaborator">Add collaborator</h2>
-
-<pre><code>PUT /repos/:owner/:repo/collaborators/:user
-</code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="remove-collaborator">Remove collaborator</h2>
-
-<pre><code>DELETE /repos/:owner/:repo/collaborators/:user
-</code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<dl>
+<dt>hooks</dt>
+  <dd>An Array of IP addresses in CIDR format specifying the addresses that incoming
+service hooks will originate from.  Subscribe to the <a href="http://developer.github.com/changes/">API Changes blog</a>
+to get updated when this list changes.</dd>
+</dl>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

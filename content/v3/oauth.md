@@ -1,3 +1,7 @@
+---
+title: OAuth | GitHub API
+---
+
 # OAuth
 
 * TOC

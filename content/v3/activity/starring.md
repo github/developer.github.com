@@ -48,6 +48,16 @@ List repositories being watched by the authenticated user.
     # Legacy, using github.beta media type.
     GET /user/watched
 
+### Parameters
+
+sort
+: _Optional_ **String** One of `created` (when the repository was starred) or
+`updated` (when it was last pushed to). Default: `created`.
+
+direction
+: _Optional_ **String** One of `asc` or `desc`. Default: `desc`.
+
+
 ### Response
 
 <%= headers 200, :pagination => true %>

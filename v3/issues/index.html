@@ -362,6 +362,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create-an-issue">Create an issue</h2>
 
+<p>Any user with pull access to a repository can create an issue.</p>
+
 <pre><code>POST /repos/:owner/:repo/issues
 </code></pre>
 
@@ -379,14 +381,21 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dt>assignee</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - Login for the user that this issue should be
-assigned to.</dd>
+assigned to. <em>NOTE: Only users with push access can set the assignee for new
+issues. The assignee is silently dropped otherwise.</em>
+</dd>
   <dt>milestone</dt>
   <dd>
-<em>Optional</em> <strong>number</strong> - Milestone to associate this issue with.</dd>
+<em>Optional</em> <strong>number</strong> - Milestone to associate this issue with. <em>NOTE: Only
+users with push access can set the milestone for new issues. The milestone is
+silently dropped otherwise.</em>
+</dd>
   <dt>labels</dt>
   <dd>
 <em>Optional</em> <strong>array</strong> of <strong>strings</strong> - Labels to associate with this
-issue.</dd>
+issue. <em>NOTE: Only users with push access can set labels for new issues. Labels are
+silently dropped otherwise.</em>
+</dd>
 </dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Found a bug"</span><span class="p">,</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"I'm having a problem with this."</span><span class="p">,</span>

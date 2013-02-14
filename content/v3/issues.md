@@ -110,6 +110,8 @@ since
 
 ## Create an issue
 
+Any user with pull access to a repository can create an issue.
+
     POST /repos/:owner/:repo/issues
 
 ### Input
@@ -122,14 +124,20 @@ body
 
 assignee
 : _Optional_ **string** - Login for the user that this issue should be
-assigned to.
+assigned to. _NOTE: Only users with push access can set the assignee for new
+issues. The assignee is silently dropped otherwise._
+
 
 milestone
-: _Optional_ **number** - Milestone to associate this issue with.
+: _Optional_ **number** - Milestone to associate this issue with. _NOTE: Only
+users with push access can set the milestone for new issues. The milestone is
+silently dropped otherwise._
+
 
 labels
 : _Optional_ **array** of **strings** - Labels to associate with this
-issue.
+issue. _NOTE: Only users with push access can set labels for new issues. Labels are
+silently dropped otherwise._
 
 <%= json \
   :title     => "Found a bug",

@@ -49,6 +49,8 @@ Only gists updated at or after this time are returned.
 
     GET /gists/:id
 
+_Note_: When using the [v3 media type][2] the "user" field will become "owner"
+
 ### Response
 
 <%= headers 200 %>
@@ -176,3 +178,4 @@ including the filename with a null hash.
 <%= headers 204 %>
 
 [1]: /v3/oauth/#scopes
+[2]: /v3/media

@@ -101,8 +101,7 @@ color
 
 ### Response
 
-<%= headers 200 %>
-<%= json(:label) { |h| [h] } %>
+<%= headers 204 %>
 
 ## Replace all labels for an issue
 

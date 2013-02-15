@@ -2,6 +2,9 @@
 title: Custom Media Types | GitHub API
 ---
 
+* TOC
+{:toc}
+
 # GitHub Media Types
 
 Custom media types are used in the API to let consumers choose the format

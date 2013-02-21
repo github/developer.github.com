@@ -156,6 +156,8 @@ silently dropped otherwise._
 
 ## Edit an issue
 
+Issue owners and users with push access can edit an issue.
+
     PATCH /repos/:owner/:repo/issues/:number
 
 ### Input

@@ -373,7 +373,6 @@ module GitHub
       "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "commit" => {
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
-        "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
         "author" => {
            "name"  => "Monalisa Octocat",
            "email" => "support@github.com",

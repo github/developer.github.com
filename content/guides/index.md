@@ -1,3 +1,7 @@
+---
+title: Development Guides | GitHub API
+---
+
 # Development Guides
 
 This section of the documentation is intended to get you up-and-running with

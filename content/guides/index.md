@@ -5,7 +5,7 @@ real-world GitHub API applications. We'll cover everything you need to know, fro
 authentication, to manipulating results, to combining results with other services.
 
 Every tutorial here will have a project, and every project will be stored and
-documented in our public `samples` repo:
+documented in our public `platform-samples` repo:
 
     https://github.com/github/platform-samples
 

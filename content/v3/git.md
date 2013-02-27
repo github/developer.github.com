@@ -13,14 +13,14 @@ our API - by creating raw objects directly into the database and updating
 branch references you could technically do just about anything that Git
 can do without having Git installed.
 
-Git DB API functions will return a 409 if the git repo for a Repository is empty
+Git DB API functions will return a `409 Conflict` if the git repo for a Repository is empty
 or unavailable.  This typically means it is being created still.  [Contact
 Support](https://github.com/contact) if this response status persists.
 
 ![git db](http://git-scm.com/figures/18333fig0904-tn.png)
 
 For more information on the Git object database, please read the
-<a href="http://git-scm.com/book/en/Git-Internals">Git Internals</a> chapter of
+[Git Internals](http://git-scm.com/book/en/Git-Internals) chapter of
 the Pro Git book.
 
 As an example, if you wanted to commit a change to a file in your
@@ -36,3 +36,6 @@ repository, you would:
 
 It might seem complex, but it's actually pretty simple when you understand
 the model and it opens up a ton of things you could potentially do with the API.
+
+You can view a project that runs through this example at the [Modifying Repositories](/guides/modifying-repositories/)
+section of the documentation.

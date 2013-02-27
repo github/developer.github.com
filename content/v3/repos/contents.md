@@ -68,7 +68,7 @@ ref
 
 <%= headers 302, :Location => 'http://github.com/me/myprivate/tarball/master?SSO=thistokenexpires' %>
 
-To follow redirects with curl, use the `-L` switch:
+To follow redirects with curl, use the `-L` switch (see note below):
 
 <pre class="terminal">
 curl -L https://api.github.com/repos/pengwynn/octokit/tarball > octokit.tar.gz
@@ -77,3 +77,9 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball > octokit.tar.gz
                                  Dload  Upload   Total   Spent    Left  Speed
 100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
 </pre>
+
+**NOTE**: Since some archives are hosted on external content delivery
+networks, you'll want to take care not to send your GitHub API OAuth token to a
+third party. For private repositories, it's best to _not_ use the `-L` flag for
+curl (or *not* have your chosen API wrapper follow redirects). Instead **grab the
+value of the `Link` response header manually and make a second call.**

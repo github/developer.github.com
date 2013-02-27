@@ -5,9 +5,11 @@ cases.
 
 ## Overview
 
-Most applications will use a [wrapper library][wrappers], but it's important to
-get familiar with the underlying API HTTP methods. There's no easier way to
-kick the tires than [cURL][curl].
+Most applications will use an existing [wrapper library][wrappers] in the language 
+of your choice, but it's important to familiarize yourself with the underlying API 
+HTTP methods first. 
+
+There's no easier way to kick the tires than through [cURL][curl].
 
 ### Hello World
 

@@ -476,6 +476,16 @@ module GitHub
       }
     }
 
+    RELEASE = {
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/releases/1",
+      "id"         => 1,
+      "name"       => "v1.0.0",
+      "body"       => "Description of the release",
+      "draft"      => false,
+      "prerelease" => false,
+      "created_at" => "2013-02-27T19:35:32Z",
+    }
+
     DOWNLOAD = {
       "url"            => "https://api.github.com/repos/octocat/Hello-World/downloads/1",
       "html_url"       => "https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg",

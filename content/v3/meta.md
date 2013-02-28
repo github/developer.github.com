@@ -18,4 +18,5 @@ This gives some information about GitHub.com, the service.
 hooks
 : An Array of IP addresses in CIDR format specifying the addresses that incoming
 service hooks will originate from.  Subscribe to the [API Changes blog](http://developer.github.com/changes/)
-or follow @GitHubAPI on Twitter to get updated when this list changes.
+or follow [@GitHubAPI](https://twitter.com/GitHubAPI) on Twitter to get
+updated when this list changes.

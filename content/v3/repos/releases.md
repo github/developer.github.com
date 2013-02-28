@@ -97,3 +97,11 @@ prerelase. `false` to identify the release as a full release.
 
 <%= headers 200 %>
 <%= json :release %>
+
+## Delete a release
+
+    DELETE /repos/:owner/:repo/releases/:id
+
+### Response
+
+<%= headers 204 %>

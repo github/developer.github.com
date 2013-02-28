@@ -16,3 +16,11 @@ title: Releases | GitHub API
 <%= headers 200 %>
 <%= json(:release) { |h| [h] } %>
 
+## Get a single release
+
+    GET /repos/:owner/:repo/releases/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json :release %>

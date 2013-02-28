@@ -44,14 +44,16 @@ draft
 : _Optional_ **boolean** - `true` to create a draft (unpublished)
 release, `false` to create a published one. Default is `false`.
 
-prerelease
 : _Optional_ **boolean** - `true` to identify the release as a
-prerelase. Default is `false`.
+prerelase. `false` to identify the release as a full release. Default is
+`false`.
 
 <%= json \
   :tag_name    => "v1.0.0",
   :name        => "v1.0.0",
-  :description => "Description of the release"
+  :description => "Description of the release",
+  :draft       => false,
+  :prerelease  => false
 %>
 
 ### Response

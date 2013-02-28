@@ -24,3 +24,38 @@ title: Releases | GitHub API
 
 <%= headers 200 %>
 <%= json :release %>
+
+## Create a release
+
+    POST /repos/:owner/:repo/releases
+
+### Input
+
+tag_name
+: _Required_ **string**
+
+name
+: _Optional_ **string**
+
+body
+: _Optional_ **string**
+
+draft
+: _Optional_ **boolean** - `true` to create a draft (unpublished)
+release, `false` to create a published one. Default is `false`.
+
+prerelease
+: _Optional_ **boolean** - `true` to identify the release as a
+prerelase. Default is `false`.
+
+<%= json \
+  :tag_name    => "v1.0.0",
+  :name        => "v1.0.0",
+  :description => "Description of the release"
+%>
+
+### Response
+
+<%= headers 201,
+  :Location => 'https://api.github.com/repos/octocat/Hello-World/releases/1' %>
+<%= json(:release) %>

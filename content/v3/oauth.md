@@ -123,8 +123,8 @@ Scopes let you specify exactly what type of access you need. Scopes _limit_
 access for OAuth tokens. They do not grant any additional permission beyond
 that which the user already has.
 
-For the web flow, requested scopes be displayed to the user on the authorize
-form.
+For the web flow, requested scopes will be displayed to the user on the
+authorize form.
 
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.

@@ -27,6 +27,8 @@ title: Releases | GitHub API
 
 ## Create a release
 
+Users with push access to the repository can create a release.
+
     POST /repos/:owner/:repo/releases
 
 ### Input
@@ -64,6 +66,8 @@ prerelase. `false` to identify the release as a full release. Default is
 
 ## Edit a release
 
+Users with push access to the repository can edit a release.
+
     PATCH /repos/:owner/:repo/releases/:id
 
 ### Input
@@ -99,6 +103,8 @@ prerelase. `false` to identify the release as a full release.
 <%= json :release %>
 
 ## Delete a release
+
+Users with push access to the repository can delete a release.
 
     DELETE /repos/:owner/:repo/releases/:id
 

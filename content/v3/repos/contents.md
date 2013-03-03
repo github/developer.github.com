@@ -45,6 +45,9 @@ ref
 <%= headers 200 %>
 <%= json :readme_content %>
 
+### Notes
+To get a repository's contents recursively, you can [recursively get the tree](../git/trees)
+
 ## Get archive link
 
 This method will return a `302` to a URL to download a tarball

@@ -33,7 +33,7 @@ filter
   * `created`: Issues created by you
   * `mentioned`: Issues mentioning you
   * `subscribed`: Issues you're subscribed to updates for
-  * `all`: All issues the authenticated user can see, regardless of particpation or creation
+  * `all`: All issues the authenticated user can see, regardless of participation or creation
 
 state
 : `open`, `closed`, default: `open`

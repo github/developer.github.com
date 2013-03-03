@@ -520,7 +520,7 @@ module GitHub
       "signature"      => "mwnFDC...",
       "bucket"         => "github",
       "accesskeyid"    => "1ABCDEFG...",
-      "path"           => "downloads/ocotocat/Hello-World/new_file.jpg",
+      "path"           => "downloads/octocat/Hello-World/new_file.jpg",
       "acl"            => "public-read",
       "expirationdate" => "2011-04-14T16:00:49Z",
       "prefix"         => "downloads/octocat/Hello-World/",

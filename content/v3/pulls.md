@@ -99,7 +99,7 @@ Pull Request.
 
 <%= json \
   :issue => "5",
-  :head  => "ocotocat:new-feature",
+  :head  => "octocat:new-feature",
   :base  => "master"
 %>
 

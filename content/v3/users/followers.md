@@ -64,7 +64,7 @@ auth or OAuth with the `user:follow` scope.
 
     DELETE /user/following/:user
 
-Unfollowing a user requres the user to be logged in and authenticated with basic
+Unfollowing a user requires the user to be logged in and authenticated with basic
 auth or OAuth with the `user:follow` scope.
 
 ### Response

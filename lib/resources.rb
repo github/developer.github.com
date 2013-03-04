@@ -608,6 +608,7 @@ module GitHub
     ISSUE_COMMENT = {
       "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1",
+      "html_url"   => "https://github.com/octocat/Hello-World/issues/1347#issuecomment-1"
       "body"       => "Me too",
       "user"       => USER,
       "created_at" => "2011-04-14T16:00:49Z",

@@ -1012,7 +1012,8 @@ module GitHub
       :subject => {
         :title => "Greetings",
         :url => "https://api.github.com/repos/pengwynn/octokit/issues/123",
-        :latest_comment_url => "https://api.github.com/repos/pengwynn/octokit/issues/comments/123"
+        :latest_comment_url => "https://api.github.com/repos/pengwynn/octokit/issues/comments/123",
+        :type => "Issue"
       },
       :reason => 'subscribed',
       :unread => true,

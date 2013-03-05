@@ -115,3 +115,21 @@ Users with push access to the repository can delete a release.
 ### Response
 
 <%= headers 204 %>
+
+## List assets for a release
+
+    GET /repos/:owner/:repo/releases/:id/assets
+
+### Response
+
+<%= headers 200 %>
+<%= json(:release_asset) { |h| [h] } %>
+
+## Get a single release asset
+
+    GET /repos/:owner/:repo/releases/assets/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json :release_asset %>

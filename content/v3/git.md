@@ -36,6 +36,3 @@ repository, you would:
 
 It might seem complex, but it's actually pretty simple when you understand
 the model and it opens up a ton of things you could potentially do with the API.
-
-You can view a project that runs through this example at the [Modifying Repositories](/guides/modifying-repositories/)
-section of the documentation.

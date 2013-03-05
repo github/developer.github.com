@@ -478,7 +478,9 @@ module GitHub
 
     RELEASE = {
       "url"        => "https://api.github.com/repos/octocat/Hello-World/releases/1",
+      "html_url"   => "https://github.com/octocat/Hello-World/releases/v1.0.0",
       "id"         => 1,
+      "tag_name"   => "v1.0.0",
       "name"       => "v1.0.0",
       "body"       => "Description of the release",
       "draft"      => false,

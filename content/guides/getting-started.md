@@ -4,6 +4,9 @@ title: Getting Started | GitHub API
 
 # Getting Started
 
+* TOC
+{:toc}
+
 Let's walk through core API concepts as we tackle some everyday use
 cases.
 

@@ -4,6 +4,9 @@ title: Basics of Authentication | GitHub API
 
 # Basics of Authentication
 
+* TOC
+{:toc}
+
 In this section, we're going to focus on the basics of authentication. Specifically, 
 we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements the [web flow][webflow] of an application in several different ways.
 
@@ -49,7 +52,7 @@ Next, in _views/index.erb_, paste this content:
       </head>
       <body>
         <p>Well, hello there!</p>
-        <p>We're going to now talk to the GitHub API. Ready? <a href="https://github.com/login/oauth/authorize?client_id=&lt;%= client_id %>">Click here</a> to begin!</a></p>
+        <p>We're going to now talk to the GitHub API. Ready? <a href="https://github.com/login/oauth/authorize?client_id=<%= client_id %>">Click here</a> to begin!</a></p>
         <p>If that link doesn't work, remember to provide your own <a href="http://developer.github.com/v3/oauth/#web-application-flow">Client ID</a>!</p>
       </body>
     </html>
@@ -100,10 +103,10 @@ We can do whatever we want with our results. In this case, we'll just dump them 
 
     <p>Okay, here's a JSON dump:</p>
     <p>
-      <p>Hello, &lt;%= login %>! It looks like you're &lt;%= hire_status %>.</p>
+      <p>Hello, <%= login %>! It looks like you're <%= hire_status %>.</p>
     </p>
 
-## Adding permanent authentication
+## Implementing "persistent" authentication
 
 It'd be a pretty bad model if we required users to log into the app every single
 time they needed to access the web page. For example, try navigating directly to 
@@ -194,7 +197,7 @@ Now, create a file in _views_ called _advanced.erb_, and paste this markup into 
       <head>
       </head>
       <body>
-        <p>Well, well, well, &lt;%= login %>! It looks like you're <em>still</em> &lt;%= hire_status %>!</p>
+        <p>Well, well, well, <%= login %>! It looks like you're <em>still</em> <%= hire_status %>!</p>
       </body>
     </html>
 

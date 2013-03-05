@@ -32,6 +32,12 @@ end
   end
 end
 
+compile '/guides/*' do
+  filter :kramdown, :toc_levels => [2]
+  filter :erb
+  layout 'default'
+end
+
 compile '*' do
   filter :erb
   filter :kramdown, :toc_levels => [2]

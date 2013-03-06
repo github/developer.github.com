@@ -325,8 +325,8 @@ $ curl -i https://api.github.com/users/whatever
 
 HTTP/1.1 200 OK
 Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4966
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 56
 </pre>
 
 <p>You can also check your rate limit status without incurring an API hit.</p>
@@ -349,7 +349,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p><br></p>
 
-<h4 id="unauthenticated-rate-limited-requests">Unauthenticated rate limited requests</h4>
+<h3 id="unauthenticated-rate-limited-requests">Unauthenticated rate limited requests</h3>
 
 <p>If you need to make unauthenticated calls but need to use a higher rate limit
 associated with your OAuth application, you can send over your client ID and
@@ -360,15 +360,22 @@ $ curl -i https://api.github.com/users/whatever?client_id=xxxxxxxxxxxxxx&amp;cli
 
 HTTP/1.1 200 OK
 Status: 200 OK
-X-RateLimit-Limit: 12500
-X-RateLimit-Remaining: 11966
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4966
 </pre>
 
 <p>This method should only be used for server-to-server calls. You should never
 share your client secret with anyone or include it in client-side browser code.</p>
 
-<p>Please <a href="https://github.com/contact">contact us</a> to request a higher rate limit
-for your OAuth application.</p>
+<h3 id="staying-within-the-rate-limit">Staying within the rate limit</h3>
+
+<p>If you are using Basic Authentication or OAuth, and you are exceeding
+your rate limit, you can likely fix the issue by caching API responses
+and using <a href="#conditional-requests">conditional requests</a>.</p>
+
+<p>If you’re using conditional requests and still exceeding your rate
+limit, please <a href="https://github.com/contact">contact us</a> to request a
+higher rate limit for your OAuth application.</p>
 
 <h2 id="user-agent-required">User Agent Required</h2>
 

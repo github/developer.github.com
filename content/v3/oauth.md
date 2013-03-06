@@ -106,15 +106,18 @@ any time.
 
 The `redirect_uri` parameter is optional. If left out, GitHub will
 redirect users to the callback URL configured in the OAuth Application
-settings. If provided, the redirect URL must match the callback URL's
-host.
+settings. If provided, the redirect URL's host and port must exactly
+match the callback URL. The redirect URL's path must reference a
+subdirectory of the callback URL.
 
-    CALLBACK: http://example.com
+    CALLBACK: http://example.com/path
 
-    GOOD: https://example.com
-    GOOD: http://example.com/bar
-    BAD:  http://example.com:8080
-    BAD:  http://oauth.example.com:8080
+    GOOD: https://example.com/path
+    GOOD: http://example.com/path/subdir/other
+    BAD:  http://example.com/bar
+    BAD:  http://example.com/
+    BAD:  http://example.com:8080/path
+    BAD:  http://oauth.example.com:8080/path
     BAD:  http://example.org
 
 ## Scopes

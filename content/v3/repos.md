@@ -151,11 +151,9 @@ _Ignored if `auto_init` parameter is not provided._
 
 ### Response
 
-parent
-: _Present when forked_ **object** - The direct parent, the repo this repo was forked from.
-
-source
-: _Present when forked_ **object** - The ultimate source for the network.
+The `parent` and `source` objects are present when the repo is a fork.
+`parent` is the repo this repo was forked from,
+`source` is the ultimate source for the network.
 
 <%= headers 200 %>
 <%= json :full_repo %>

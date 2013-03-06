@@ -41,7 +41,7 @@ sort
 direction
 : `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
 
-## List organization repositories.
+## List organization repositories
 
 List repositories for the specified org.
 

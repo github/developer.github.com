@@ -8,7 +8,8 @@ title: Basics of Authentication | GitHub API
 {:toc}
 
 In this section, we're going to focus on the basics of authentication. Specifically, 
-we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements the [web flow][webflow] of an application in several different ways.
+we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements 
+the [web flow][webflow] of an application in several different ways.
 
 ## Registering your app
 
@@ -91,6 +92,8 @@ In _server.rb_, add a route to specify what the callback should do:
 After a successful app authentication, GitHub provides a temporary `code` value.
 You'll need to `POST` this code back to GitHub in exchange for an `access_token`. 
 To simplify our GET and POST HTTP requests, we're using the [rest-client][REST Client].
+Note that you'll probably never access the API through REST. For a more serious 
+application, you should probably use [a library written in the language of your choice][libraries].
 
 At last, with this access token, you'll be able to make authenticated requests as
 the logged in user:
@@ -191,7 +194,18 @@ we're establishing them through the `:github_options` symbol. Passing your clien
 and client secret, and calling `register Sinatra::Auth::Github`, is everything you need
 to simplify your authentication.
 
-Now, create a file in _views_ called _advanced.erb_, and paste this markup into it:
+We must also create a _config.ru_ config file, which Rack will use for its configuration
+options:
+
+    ENV['RACK_ENV'] ||= 'development'
+    require "rubygems"
+    require "bundler/setup"
+
+    require File.expand_path(File.join(File.dirname(__FILE__), 'advanced_server'))
+
+    run Example::MyBasicApp
+
+Next, create a file in _views_ called _advanced.erb_, and paste this markup into it:
 
     <html>
       <head>
@@ -201,7 +215,7 @@ Now, create a file in _views_ called _advanced.erb_, and paste this markup into 
       </body>
     </html>
 
-From the command line, call `bundle exec rackup -p4567`, which starts up your
+From the command line, call `rackup -p 4567`, which starts up your
 Rack server on port `4567`--the same port we used when we had a simple Sinatra app.
 When you navigate to `http://localhost/:4567`, the app calls `authenticate!`--another
 internal `sinatra-auth-github` method--which redirects you to `/callback`. `/callback`
@@ -219,6 +233,7 @@ we would've seen the same confirmation dialog from earlier pop-up and warn us.
 [about env vars]: http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables
 [Sinatra guide]: http://sinatra-book.gittr.com/#hello_world_application
 [REST Client]: https://github.com/archiloque/rest-client
+[libraries]: http://developer.github.com/v3/libraries/
 [rack guide]: http://en.wikipedia.org/wiki/Rack_(web_server_interface)
 [sinatra auth github]: https://github.com/atmos/sinatra_auth_github
 [sinatra extension]: http://www.sinatrarb.com/extensions.html

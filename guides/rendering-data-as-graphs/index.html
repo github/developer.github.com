@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Rendering Data as Graphs | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="/"><img src="/images/logo_developer.png" width="255" height="45" alt="GitHub:Developer" /></a>
+          <ul class="nav">
+            <li class="api-status"></li>
+            <li><a href="/v3/">API v3</a></li>
+            <li><a href="/changes/">Changes</a></li>
+            <li><a
+              href="https://github.com/contact">Support</a></li>
+            <li><a href="/changes.atom">
+              <img src="/images/feed-icon-28x28.png" width="16" height="16" alt="GitHub API Changes Feed" />
+            </a></li>
+          </ul>
+        </div>
+      </div><!-- #header -->
+    </div><!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="rendering-data-as-graphs">Rendering Data as Graphs</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#fetching-repository-information">Fetching repository information</a></li>
+  <li><a href="#combining-different-api-calls">Combining different API calls</a></li>
+</ul>
+
+<p>In this guide, we’re going to poll repositories that we own, and render the
+information there with graphs, using the <a href="http://d3js.org/">d3.js</a> library. We’ll also
+be using Octokit, a Ruby library designed to interact with the GitHub API.</p>
+
+<p>We’re going to jump right in and assume you’ve already read the <a href="../basics-of-authentication/">“Basics of Authentication”</a> 
+guide.</p>
+
+<p>Note: you can download the complete source code for this project <a href="https://github.com/github/platform-samples/tree/master/api/ruby/rendering-data-as-graphs">from the platform-samples repo</a>.</p>
+
+<p>Go ahead and register an application through GitHub. Set the main URL and callback
+URL to <code>http://localhost:4567/</code>. As before, we’re going to be implementing a Rack middleware
+using <a href="https://github.com/atmos/sinatra_auth_github">sinatra-auth-github</a>:</p>
+
+<pre><code>require 'sinatra/auth/github'
+
+module Example
+  class MyGraphApp &lt; Sinatra::Base
+    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+    # Instead, set and test environment variables, like below
+    # if ENV['GITHUB_CLIENT_ID'] &amp;&amp; ENV['GITHUB_CLIENT_SECRET']
+    #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
+    #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
+    # end
+
+    CLIENT_ID = ENV['GH_GRAPH_CLIENT_ID']
+    CLIENT_SECRET = ENV['GH_GRAPH_SECRET_ID']
+
+    enable :sessions
+
+    set :github_options, {
+      :scopes    =&gt; "repo",
+      :secret    =&gt; CLIENT_SECRET,
+      :client_id =&gt; CLIENT_ID,
+      :callback_url =&gt; "/"
+    }
+
+    register Sinatra::Auth::Github
+
+    get '/' do
+      if !authenticated?
+        authenticate!
+      else
+        access_token = github_user["token"]
+        
+      end
+    end
+  end
+end
+</code></pre>
+
+<p>Set up a similar <em>config.ru</em> file as in the previous example:</p>
+
+<pre><code>ENV['RACK_ENV'] ||= 'development'
+require "rubygems"
+require "bundler/setup"
+
+require File.expand_path(File.join(File.dirname(__FILE__), 'server'))
+
+run Example::MyGraphApp
+</code></pre>
+
+<h2 id="fetching-repository-information">Fetching repository information</h2>
+
+<p>This time, in order to talk to the GitHub API, we’re going to use the <a href="https://github.com/pengwynn/octokit">Octokit
+Ruby library</a>. This is supremly better than directly making a bunch of
+REST calls. Plus, Octokit was developed by a GitHubber, so you know it’ll work.</p>
+
+<p>Establishing an Octokit instance is extremly easy; just pass your login
+and token to the <code>Octokit::Client</code> constructor:</p>
+
+<pre><code>if !authenticated?
+  authenticate!
+else
+  octokit_client = Octokit::Client.new(:login =&gt; github_user.login, :oauth_token =&gt; github_user.token)
+end
+</code></pre>
+
+<p>Let’s do something interesting with our repository information; let’s list the count
+of each language found in our repositories. To do that, we’ll first have to grab 
+a list of repositories we own. With Octokit, that looks like this:</p>
+
+<pre><code>repos = client.repositories
+</code></pre>
+
+<p>Next, we’ll want to iterate each repository, and count the language that GitHub
+identifies:</p>
+
+<pre><code>language_obj = {}
+repos.each do |repo|
+  # sometimes language can be nil 
+  if repo.language
+    if !language_obj[repo.language]
+      language_obj[repo.language] = 1
+    else
+      language_obj[repo.language] += 1
+    end
+  end
+end
+
+languages.to_s
+</code></pre>
+
+<p>When you restart your server, your web page should display some information 
+that looks like this:</p>
+
+<pre><code>{"JavaScript"=&gt;13, "PHP"=&gt;1, "Perl"=&gt;1, "CoffeeScript"=&gt;2, nil=&gt;4, "Python"=&gt;1, "Java"=&gt;3, "Ruby"=&gt;3, "Go"=&gt;1, "C++"=&gt;1}
+</code></pre>
+
+<p>So far, so good! Now, let’s represent this information in a human-friendly format
+(no offense to JSON). We’ll feed this information into d3.js to get a neat bar
+graph representing the popularity of the languages we use.</p>
+
+<p>d3.js likes working with arrays of JSON, so let’s convert our Ruby hash into one:</p>
+
+<pre><code>languages = []
+language_obj.each do |lang, count|
+  languages.push :language =&gt; lang, :count =&gt; count
+end
+
+erb :lang_freq, :locals =&gt; { :languages =&gt; languages.to_json}
+</code></pre>
+
+<p>We’re iterating over each key-value pair in our object, and just pushing them into
+a new array. The reason we didn’t do this earlier is because we didn’t want to iterate 
+over our <code>language_obj</code> object whilst we were creating it.</p>
+
+<p>Now, <em>lang_freq.erb</em> is going to need a bunch of code to support rendering a bar graph.
+For a really good tutorial on the basics of d3, check out <a href="http://www.recursion.org/d3-for-mere-mortals/">this article called
+ “D3 for Mortals”</a>. For now, you can just use the code provided here:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;meta charset="utf-8"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"&gt;&lt;/script&gt;
+    &lt;style&gt;
+    svg {
+      padding: 20px;
+    }
+    rect {
+      fill: #2d578b
+    }
+    text {
+      fill: white;
+    }
+    text.yAxis {
+      font-size: 12px; 
+      font-family: Helvetica, sans-serif;
+      fill: black;
+    }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Check this sweet data out:&lt;/p&gt;
+    &lt;div id="lang_freq"&gt;&lt;/div&gt;
+
+  &lt;/body&gt;
+  &lt;script&gt;
+    var data = &lt;%= languages %&gt;;
+
+    var barWidth = 40;
+    var width = (barWidth + 10) * data.length;
+    var height = 300;
+
+    var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
+    var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum.count; })]).
+      rangeRound([0, height]);
+
+    // add the canvas to the DOM
+    var languageBars = d3.select("#lang_freq").
+      append("svg:svg").
+      attr("width", width).
+      attr("height", height);
+
+    languageBars.selectAll("rect").
+      data(data).
+      enter().
+      append("svg:rect").
+      attr("x", function(datum, index) { return x(index); }).
+      attr("y", function(datum) { return height - y(datum.count); }).
+      attr("height", function(datum) { return y(datum.count); }).
+      attr("width", barWidth);
+
+    languageBars.selectAll("text").
+      data(data).
+      enter().
+      append("svg:text").
+      attr("x", function(datum, index) { return x(index) + barWidth; }).
+      attr("y", function(datum) { return height - y(datum.count); }).
+      attr("dx", -barWidth/2).
+      attr("dy", "1.2em").
+      attr("text-anchor", "middle").
+      text(function(datum) { return datum.count;});
+
+    languageBars.selectAll("text.yAxis").
+      data(data).
+      enter().append("svg:text").
+      attr("x", function(datum, index) { return x(index) + barWidth; }).
+      attr("y", height).
+      attr("dx", -barWidth/2).
+      attr("text-anchor", "middle").
+      text(function(datum) { return datum.language;}).
+      attr("transform", "translate(0, 18)").
+      attr("class", "yAxis");
+  &lt;/script&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>Phew! Again, don’t worry about what most of this code is doing. The relevant part
+here is a line way at the top–<code>var data = &lt;%= languages %&gt;;</code>–which indicates 
+that we’re passing our previously created <code>languages</code> array into ERB for manipulation.</p>
+
+<p>As the “D3 for Mortals” guide suggests, this isn’t necessarily the best use of
+d3. But it does serve to illustrate how you can use the library, along with Octokit,
+to make some really amazing things.</p>
+
+<h2 id="combining-different-api-calls">Combining different API calls</h2>
+
+<p>Now it’s time for a confession: the <code>language</code> attribute within repositories
+only identifies the “primary” language defined. That means that if you have 
+a repository that combines several languages, the one with the most bytes of code
+is considered to be the primary language.</p>
+
+<p>Let’s combine a few API calls to get a <em>true</em> representation of which language 
+has the greatest number of bytes written across all our code. A <a href="http://bl.ocks.org/mbostock/4063582">treemap</a>
+should be a great way to visualize the sizes of our coding languages used, rather 
+than simply the count. We’ll need to construct an array of objects that looks 
+something like this:</p>
+
+<pre><code>[ { "name": "language1", "size": 100},
+  { "name": "language2", "size": 23}
+  ...
+]
+</code></pre>
+
+<p>Since we already have a list of repositories above, let’s inspect each one, and 
+call <a href="http://developer.github.com/v3/repos/#list-languages">the language listing API method</a>:</p>
+
+<pre><code>repos.each do |repo|
+  repo_name = repo.name
+  repo_langs = octokit_client.languages("#{github_user.login}/#{repo_name}")
+end
+</code></pre>
+
+<p>From there, we’ll cumulatively add each language found to a “master list”:</p>
+
+<pre><code>repo_langs.each do |lang, count|
+  if !language_obj[lang]
+    language_obj[lang] = count
+  else
+    language_obj[lang] += count
+  end
+end
+</code></pre>
+
+<p>After that, we’ll format the contents into a structure that d3 understands:</p>
+
+<pre><code>language_obj.each do |lang, count|
+  language_byte_count.push :name =&gt; "#{lang} (#{count})", :count =&gt; count
+end
+
+# some mandatory formatting for d3
+language_bytes = [ :name =&gt; "language_bytes", :elements =&gt; language_byte_count]
+</code></pre>
+
+<p>(For more information on d3 tree map magic, check out <a href="http://developer.github.com/v3/repos/#list-languages">this simple tutorial</a>.)</p>
+
+<p>To wrap up, we’ll want to just pass this JSON information over to the same ERB file:</p>
+
+<p>erb :lang_freq, :locals =&gt; { :languages =&gt; languages.to_json, :language_byte_count =&gt; language_bytes.to_json}</p>
+
+<p>Just like we did before, here’s a bunch of d3 Javascript code that you can just drop
+directly into your template: </p>
+
+<pre><code>&lt;div id="byte_freq"&gt;&lt;/div&gt;
+&lt;script&gt;
+  var language_bytes = &lt;%= language_byte_count %&gt;
+
+  var childrenFunction = function(d){return d.elements};
+  var sizeFunction = function(d){return d.count;};
+  var colorFunction = function(d){return Math.floor(Math.random()*20)};
+  var nameFunction = function(d){return d.name;};
+   
+  var color = d3.scale.linear()
+              .domain([0,10,15,20])
+              .range(["grey","green","yellow","red"]);
+   
+  drawTreemap(5000, 2000, '#byte_freq', language_bytes, childrenFunction, nameFunction, sizeFunction, colorFunction, color);
+
+  function drawTreemap(height,width,elementSelector,language_bytes,childrenFunction,nameFunction,sizeFunction,colorFunction,colorScale){
+   
+      var treemap = d3.layout.treemap()
+          .children(childrenFunction)
+          .size([width,height])
+          .value(sizeFunction);
+   
+      var div = d3.select(elementSelector)
+          .append("div")
+          .style("position","relative")
+          .style("width",width + "px")
+          .style("height",height + "px");
+   
+      div.data(language_bytes).selectAll("div")
+          .data(function(d){return treemap.nodes(d);})
+          .enter()
+          .append("div")
+          .attr("class","cell")
+          .style("background",function(d){ return colorScale(colorFunction(d));})
+          .call(cell)
+          .text(nameFunction);
+  }
+   
+  function cell(){
+      this
+          .style("left",function(d){return d.x + "px";})
+          .style("top",function(d){return d.y + "px";})
+          .style("width",function(d){return d.dx - 1 + "px";})
+          .style("height",function(d){return d.dy - 1 + "px";});
+  }
+&lt;/script&gt;
+</code></pre>
+
+<p>And voila! Beautiful rectangles containing your repo languages. You might need to
+tweak the width and height to get all the information to show up properly.</p>
+
+
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/">Overview</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/oauth/">OAuth</a></li>
+              <li><a href="/v3/meta/">Meta</a></li>
+              <li><a href="/v3/media/">Media Types</a></li>
+              <li><a href="/v3/libraries/">Libraries</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/guides/">Guides</a></h3>
+            <ul class="js-guides">
+              <li><a href="/guides/getting-started/">Getting Started</a></li>
+              <li><a href="/guides/basics-of-authentication/">Basics of Authentication</a></li>
+              <li><a href="/guides/rendering-data-as-graphs/">Rendering Data as Graphs</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/activity/">Activity</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/activity/events/">Events</a></li>
+              <li><a href="/v3/activity/events/types/">Event Types</a></li>
+              <li><a href="/v3/activity/notifications/">Notifications</a></li>
+              <li><a href="/v3/activity/starring/">Starring</a></li>
+              <li><a href="/v3/activity/watching/">Watching</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/gists/">Gists</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/git/">Git Data</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/git/blobs/">Blobs</a></li>
+              <li><a href="/v3/git/commits/">Commits</a></li>
+              <li><a href="/v3/git/refs/">References</a></li>
+              <li><a href="/v3/git/tags/">Tags</a></li>
+              <li><a href="/v3/git/trees/">Trees</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/issues/">Issues</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/issues/assignees/">Assignees</a></li>
+              <li><a href="/v3/issues/comments/">Comments</a></li>
+              <li><a href="/v3/issues/events/">Events</a></li>
+              <li><a href="/v3/issues/labels/">Labels</a></li>
+              <li><a href="/v3/issues/milestones/">Milestones</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/orgs/">Orgs</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/orgs/members/">Members</a></li>
+              <li><a href="/v3/orgs/teams/">Teams</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/pulls/">Pull Requests</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/pulls/comments/">Review Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/repos/">Repositories</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/v3/repos/comments/">Comments</a></li>
+              <li><a href="/v3/repos/commits/">Commits</a></li>
+              <li><a href="/v3/repos/contents/">Contents</a></li>
+              <li><a href="/v3/repos/downloads/">Downloads</a></li>
+              <li><a href="/v3/repos/forks/">Forks</a></li>
+              <li><a href="/v3/repos/keys/">Keys</a></li>
+              <li><a href="/v3/repos/hooks/">Hooks</a></li>
+              <li><a href="/v3/repos/merging/">Merging</a></li>
+              <li><a href="/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/users/emails/">Emails</a></li>
+              <li><a href="/v3/users/followers/">Followers</a></li>
+              <li><a href="/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/search/">Search</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/search/#search-issues">Issues</a></li>
+              <li><a href="/v3/search/#search-repositories">Repositories</a></li>
+              <li><a href="/v3/search/#search-users">Users</a></li>
+              <li><a href="/v3/search/#email-search">Email</a></li>
+            </ul>
+          </li>
+          <li class="js-guides"><h3><a href="/v3/gitignore/">Gitignore</a></h3></li>
+          <li class="js-guides"><h3><a href="/v3/markdown/">Markdown</a></h3></li>
+        </ul>
+      </div> <!-- /sidebar-module -->
+      <div class="sidebar-module">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+    </div><!-- /sidebar-shell -->
+
+    </div><!-- #wrapper -->
+
+    <div id="footer" >
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <![if !IE]><h4 id="blacktocat">GitHub Links</h4><![endif]>
+
+        <ul class="footer_nav">
+          <h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+
+        </div><!-- /.site -->
+      </div><!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <![if !IE]><a class="home" href="http://github.com">Home</a><![endif]>
+
+              <ul id="legal_links">
+                <li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+
+              <p>&copy; <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div><!-- /#legal or /#legal_ie-->
+        </div><!-- /.site -->
+      </div><!-- /.lower_footer -->
+    </div><!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>

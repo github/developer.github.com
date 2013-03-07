@@ -64,7 +64,7 @@ for the response. Media types have helped us version our output in API v3. We'll
 talk more about that later.
 * Take note of the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers. This 
 pair of headers indicate how many requests a client can make in a rolling hour 
-and how many of those requests it has already spent.
+and how many of those requests the client has already spent.
 
 ## Authentication
 

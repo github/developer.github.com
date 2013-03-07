@@ -83,6 +83,7 @@ Requires for the user to be authenticated.
 ## Star a repository
 
 Requires for the user to be authenticated.
+Requires the `public_repo` scope.
 
     PUT /user/starred/:owner/:repo
 
@@ -92,6 +93,12 @@ Requires for the user to be authenticated.
 ### Response
 
 <%= headers 204 %>
+
+### Example
+
+<pre class="terminal">
+$ curl -D- -XPUT -H "Authorization: token OAUTH-TOKEN" -H "Content-length: 0" https://api.github.com/user/starred/:owner/:repo
+</pre>
 
 ## Unstar a repository
 

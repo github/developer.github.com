@@ -224,8 +224,10 @@ Or, we can list repositories for an organization:
 
 The information returned from these calls will depend on how we authenticate:
 
-* Using Basic Authentication, everything the user has access to see on github.com
-* Using OAuth, private repositories are only returned if the OAuth token contains 'repo' scope.
+* Using Basic Authentication, the response includes all repositories the
+  the user has access to see on github.com.
+* Using OAuth, private repositories are only returned if the OAuth token
+  contains 'repo' scope.
 
 As the [docs][repos-api] indicate, these methods take a `type` parameter that
 can filter the repositories returned based on what type of access the user has
@@ -234,7 +236,7 @@ organization repositories, or repositories the user collaborates on via a team.
 
     curl -i "https://api.github.com/users/technoweenie/repos?type=owner"
 
-In this example, we can grab only those repositories that technoweenie owns, not the
+In this example, we grab only those repositories that technoweenie owns, not the
 ones on which he collaborates. Note the quoted URL above. Depending on your
 shell setup, cURL sometimes requires a quoted URL or else it ignores the
 querystring.

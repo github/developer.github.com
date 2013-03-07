@@ -134,11 +134,13 @@ access, GitHub redirects the user back to the application:
 
 You don't need to set up the entire web flow to begin working with OAuth tokens. 
 The [Authorizations API][authorizations api] makes it simple to use Basic Authentication
-to create an OAuth token. Try pasting and running 
+to create an OAuth token. Try pasting and running the following command:
 
     curl -i -u <your_username> \
          -d '{"scopes": ["repo"]}' \
          https://api.github.com/authorizations
+
+You should see output similar to this:
 
     HTTP/1.1 201 Created
     Server: nginx/1.0.14

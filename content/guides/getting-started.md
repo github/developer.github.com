@@ -91,12 +91,16 @@ reading and writing private information via the API.
 
 ### Get your own user profile
 
-When properly authenticated, you can grab your own user profile:
+When properly authenticated, you can take advantage of the permissions
+associated with your GitHub account. For example, try getting your own
+user profile.
 
     curl -i -u <your_username> https://api.github.com/user
 
-This time, in addition to the same set of information we retrieved for defunkt
-earlier, you should see a `plan` object on the response:
+This time, in addition to the same set of public information we
+retrieved for defunkt earlier, you should also see the non-public
+information for your user profile. For example, you see a `plan` object
+on the response:
 
     ...
     "plan": {

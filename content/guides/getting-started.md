@@ -53,7 +53,7 @@ Mmmmm, tastes like JSON. Let's include the `-i` flag to include headers:
     Content-Length: 692
     Last-Modified: Tue, 30 Oct 2012 18:58:42 GMT
 
-There's a few interesting bits in the response headers. As expected, the
+There are a few interesting bits in the response headers. As expected, the
 `Content-Type` is `application/json`. 
 
 Any headers beginning with `X-` are custom headers, and are not included in the 

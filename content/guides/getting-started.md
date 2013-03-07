@@ -122,8 +122,8 @@ Instead of usernames and passwords, OAuth uses _tokens_. Tokens provide two big
 features:
 
 * **Revokable access**: users can revoke authorization to third party apps at any time
-* **Limited access**: users can specify what access a token provides when they
-authorize a third party app
+* **Limited access**: users can review the specific access that a token
+  will provide before authorizing a third party app
 
 Normally, tokens are created via a [web flow][webflow]. An application will send
 users to GitHub to log in. GitHub will present a dialog indicating the name of the

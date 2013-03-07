@@ -83,7 +83,7 @@ username and password via Basic Authentication.
 The `-u` flag sets the username, and cURL will prompt you for the password. You
 can use `-u "username:password"` to avoid the prompt, but this leaves your
 password in shell history and isn't recommended. When authenticating, you
-should see your rate limit bumped to 5000 requests an hour, as indicated in the
+should see your rate limit bumped to 5,000 requests an hour, as indicated in the
 `X-RateLimit-Limit` header.
 
 In addition to just getting more calls per hour, authentication is the key to
@@ -110,7 +110,7 @@ earlier, you should see a `plan` object on the response:
 
 ### OAuth
 
-While convenient, Basic Auth isn't ideal because you shouldn't give your GitHub
+While convenient, Basic Authentication isn't ideal because you shouldn't give your GitHub
 username and password to anyone. Applications that need to read or write
 private information using the API on behalf of another user should use [OAuth][oauth].
 
@@ -128,7 +128,7 @@ GitHub redirects the user back to the application:
 ![](/images/oauth_prompt.png)
 
 You don't need to set up the entire web flow to begin working with OAuth tokens. 
-The [Authorizations API][authorizations api] makes it simple to use Basic Auth 
+The [Authorizations API][authorizations api] makes it simple to use Basic Authentication
 to create an OAuth token. Try pasting and running 
 
     curl -i -u <your_username> \
@@ -217,7 +217,7 @@ Or, we can list repositories for an organization:
 
 The information returned from these calls will depend on how we authenticate:
 
-* Using Basic Auth, everything the user has access to see on github.com
+* Using Basic Authentication, everything the user has access to see on github.com
 * Using OAuth, private repositories are only returned if the OAuth token contains 'repo' scope.
 
 As the [docs][repos-api] indicate, these methods take a `type` parameter that

@@ -68,7 +68,7 @@ and how many of those requests the client has already spent.
 
 ## Authentication
 
-Unauthenticated clients can make 60 calls per hour. To get more, we'll need to
+Unauthenticated clients can make 60 requests per hour. To get more, we'll need to
 _authenticate_. In fact, doing anything interesting with the GitHub API requires
 authentication.
 

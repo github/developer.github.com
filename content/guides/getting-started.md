@@ -125,10 +125,11 @@ features:
 * **Limited access**: users can review the specific access that a token
   will provide before authorizing a third party app
 
-Normally, tokens are created via a [web flow][webflow]. An application will send
-users to GitHub to log in. GitHub will present a dialog indicating the name of the
-app, as well as what information it has access to. After a user authorizes access, 
-GitHub redirects the user back to the application:  
+Normally, tokens are created via a [web flow][webflow]. An application
+will send users to GitHub to log in. GitHub will present a dialog
+indicating the name of the app, as well as the level of access the app
+will have once the user authorizes it. After a user authorizes
+access, GitHub redirects the user back to the application:
 ![](/images/oauth_prompt.png)
 
 You don't need to set up the entire web flow to begin working with OAuth tokens. 

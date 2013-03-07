@@ -14,6 +14,8 @@ be using Octokit, a Ruby library designed to interact with the GitHub API.
 We're going to jump right in and assume you've already read the ["Basics of Authentication"][basics-of-authentication] 
 guide.
 
+Note: you can download the complete source code for this project [from the platform-samples repo](https://github.com/github/platform-samples/tree/master/api/ruby/rendering-data-as-graphs).
+
 Go ahead and register an application through GitHub. Set the main URL and callback
 URL to `http://localhost:4567/`. As before, we're going to be implementing a Rack middleware
 using [sinatra-auth-github][sinatra auth github]:

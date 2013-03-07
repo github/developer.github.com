@@ -11,6 +11,8 @@ In this section, we're going to focus on the basics of authentication. Specifica
 we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements 
 the [web flow][webflow] of an application in several different ways.
 
+Note: you can download the complete source code for this project [from the platform-samples repo](https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication).
+
 ## Registering your app
 
 First, you'll need to [register your
@@ -25,7 +27,7 @@ up your application. It's the callback URL that GitHub returns the user to after
 successful authentication.
 
 Since we're running a regular Sinatra server, the location of the local instance 
-is set to `http://localhost/:4567`. Let's fill in the callback URL as `http://localhost/:4567/callback`.
+is set to `http://localhost:4567`. Let's fill in the callback URL as `http://localhost:4567/callback`.
 
 ## Accepting user authorization
 
@@ -62,7 +64,7 @@ Next, in _views/index.erb_, paste this content:
 
 Obviously, you'll want to change `<your_client_id>` to match your actual Client ID. 
 
-Navigate your browser to `http://localhost/:4567`. After clicking on the link, you 
+Navigate your browser to `http://localhost:4567`. After clicking on the link, you 
 should be taken to GitHub, and presented with a dialog that looks something like this:  
 ![](/images/oauth_prompt.png)
 
@@ -70,8 +72,8 @@ If you trust yourself, click **Authorize App**. Wuh-oh! Sinatra spits out a
 `404` error. What gives?!
 
 Well, remember when we specified a Callback URL to be `callback`? We didn't provide
-a route for it, so GitHub doesn't know where to drop the user after they authorize the app.
-Let's fix that now!
+a route for it, so GitHub doesn't know where to drop the user after they authorize 
+the app. Let's fix that now!
 
 ### Providing a callback
 
@@ -113,7 +115,7 @@ We can do whatever we want with our results. In this case, we'll just dump them 
 
 It'd be a pretty bad model if we required users to log into the app every single
 time they needed to access the web page. For example, try navigating directly to 
-`http://localhost/:4567/basic`. You'll get an error.
+`http://localhost:4567/basic`. You'll get an error.
 
 What if we could circumvent the entire
 "click here" process, and just _remember_ that, as log as the user's logged into
@@ -217,7 +219,7 @@ Next, create a file in _views_ called _advanced.erb_, and paste this markup into
 
 From the command line, call `rackup -p 4567`, which starts up your
 Rack server on port `4567`--the same port we used when we had a simple Sinatra app.
-When you navigate to `http://localhost/:4567`, the app calls `authenticate!`--another
+When you navigate to `http://localhost:4567`, the app calls `authenticate!`--another
 internal `sinatra-auth-github` method--which redirects you to `/callback`. `/callback`
 then sends us back to `/`, and since we've been authenticated, renders _advanced.erb_.
 
@@ -228,6 +230,9 @@ the same callback URL, we've got to do a little bit of wonkiness to make it work
 Also, if we had never authorized this Rack application to access our GitHub data,
 we would've seen the same confirmation dialog from earlier pop-up and warn us.
 
+If you'd like, you can play around with [yet another Sinatra-GitHub auth example][sinatra auth github test]
+available as a seperate project.
+
 [webflow]: http://developer.github.com/v3/oauth/#web-application-flow
 [Sinatra]: http://www.sinatrarb.com/
 [about env vars]: http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables
@@ -237,3 +242,4 @@ we would've seen the same confirmation dialog from earlier pop-up and warn us.
 [rack guide]: http://en.wikipedia.org/wiki/Rack_(web_server_interface)
 [sinatra auth github]: https://github.com/atmos/sinatra_auth_github
 [sinatra extension]: http://www.sinatrarb.com/extensions.html
+[sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test

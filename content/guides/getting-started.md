@@ -93,7 +93,7 @@ reading and writing private information via the API.
 
 When properly authenticated, you can take advantage of the permissions
 associated with your GitHub account. For example, try getting your own
-user profile.
+user profile:
 
     curl -i -u <your_username> https://api.github.com/user
 
@@ -280,7 +280,7 @@ Next, let's fetch our newly created repository:
 Oh noes! Where did it go? Since we created the repository as _private_, we need
 to authenticate in order to see it. If you're a grizzled HTTP user, you might
 expect a `403` instead. Since we don't want to leak information about private
-repositories, the GitHub API returns a `404` instead, as if to say "we can
+repositories, the GitHub API returns a `404` in this case, as if to say "we can
 neither confirm nor deny the existence of this repository."
 
 ## Issues
@@ -405,8 +405,8 @@ from the issue we provide.
 
 ## Conditional requests
 
-A big part of being a good API citizen is respecting rate limits and caching
-information that does not change. The API supports [conditional
+A big part of being a good API citizen is respecting rate limits by
+caching information that hasn't changed. The API supports [conditional
 requests][conditional-requests] and helps you do the right thing. Consider the
 first call we made to get defunkt's profile:
 

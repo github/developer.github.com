@@ -126,10 +126,10 @@ features:
   will provide before authorizing a third party app
 
 Normally, tokens are created via a [web flow][webflow]. An application
-will send users to GitHub to log in. GitHub will present a dialog
+sends users to GitHub to log in. GitHub then presents a dialog
 indicating the name of the app, as well as the level of access the app
-will have once the user authorizes it. After a user authorizes
-access, GitHub redirects the user back to the application:
+has once it's authorized by the user. After a user authorizes access, GitHub
+redirects the user back to the application:
 ![](/images/oauth_prompt.png)
 
 You don't need to set up the entire web flow to begin working with OAuth tokens. 
@@ -227,7 +227,7 @@ The information returned from these calls will depend on how we authenticate:
 * Using Basic Authentication, the response includes all repositories the
   the user has access to see on github.com.
 * Using OAuth, private repositories are only returned if the OAuth token
-  contains 'repo' scope.
+  contains the `repo` [scope][scopes].
 
 As the [docs][repos-api] indicate, these methods take a `type` parameter that
 can filter the repositories returned based on what type of access the user has

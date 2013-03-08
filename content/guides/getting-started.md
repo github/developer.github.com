@@ -264,8 +264,8 @@ templates].
 
 The resulting repository will be found at `https://github.com/<your
 username>/blog`. To create a repository under an organization for which you're
-an owner, just change the API method from `/user/repos` to `/orgs/{org
-name}/repos`.
+an owner, just change the API method from `/user/repos` to `/orgs/<org
+name>/repos`.
 
 Next, let's fetch our newly created repository:
 
@@ -297,7 +297,7 @@ authenticated user. To see all your issues, call `GET /issues`:
          https://api.github.com/issues
 
 To get only the issues under one of your GitHub organizations, call `GET
-/orgs/{org}/issues`:
+/orgs/<org>/issues`:
 
     curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
          https://api.github.com/orgs/rails/issues

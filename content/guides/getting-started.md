@@ -385,7 +385,7 @@ turn an issue into a Pull Request.
 But at this point, if you want to run this example to convert your issue to a
 pull request, you'll need to create a branch called new-feature with at least
 one commit so it's ahead of the master branch. Otherwise, if we try and convert
-the issue to a pull request now, we'll receive `422` error telling us that
+the issue to a pull request now, we'll receive a `422` error telling us that
 there's no commits between master and new-feature.
 
 If you've created the new-feature branch and made a commit to it, let's convert

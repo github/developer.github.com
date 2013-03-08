@@ -53,7 +53,7 @@ Mmmmm, tastes like JSON. Let's include the `-i` flag to include headers:
     Content-Length: 692
     Last-Modified: Tue, 30 Oct 2012 18:58:42 GMT
 
-There's a few interesting bits in the response headers. As expected, the
+There are a few interesting bits in the response headers. As expected, the
 `Content-Type` is `application/json`. 
 
 Any headers beginning with `X-` are custom headers, and are not included in the 
@@ -64,11 +64,11 @@ for the response. Media types have helped us version our output in API v3. We'll
 talk more about that later.
 * Take note of the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers. This 
 pair of headers indicate how many requests a client can make in a rolling hour 
-and how many of those requests it has already spent.
+and how many of those requests the client has already spent.
 
 ## Authentication
 
-Unauthenticated clients can make 60 calls per hour. To get more, we'll need to
+Unauthenticated clients can make 60 requests per hour. To get more, we'll need to
 _authenticate_. In fact, doing anything interesting with the GitHub API requires
 authentication.
 
@@ -83,7 +83,7 @@ username and password via Basic Authentication.
 The `-u` flag sets the username, and cURL will prompt you for the password. You
 can use `-u "username:password"` to avoid the prompt, but this leaves your
 password in shell history and isn't recommended. When authenticating, you
-should see your rate limit bumped to 5000 requests an hour, as indicated in the
+should see your rate limit bumped to 5,000 requests an hour, as indicated in the
 `X-RateLimit-Limit` header.
 
 In addition to just getting more calls per hour, authentication is the key to
@@ -91,12 +91,16 @@ reading and writing private information via the API.
 
 ### Get your own user profile
 
-When properly authenticated, you can grab your own user profile:
+When properly authenticated, you can take advantage of the permissions
+associated with your GitHub account. For example, try getting your own
+user profile:
 
     curl -i -u <your_username> https://api.github.com/user
 
-This time, in addition to the same set of information we retrieved for defunkt
-earlier, you should see a `plan` object on the response:
+This time, in addition to the same set of public information we
+retrieved for defunkt earlier, you should also see the non-public
+information for your user profile. For example, you see a `plan` object
+on the response:
 
     ...
     "plan": {
@@ -110,7 +114,7 @@ earlier, you should see a `plan` object on the response:
 
 ### OAuth
 
-While convenient, Basic Auth isn't ideal because you shouldn't give your GitHub
+While convenient, Basic Authentication isn't ideal because you shouldn't give your GitHub
 username and password to anyone. Applications that need to read or write
 private information using the API on behalf of another user should use [OAuth][oauth].
 
@@ -118,22 +122,25 @@ Instead of usernames and passwords, OAuth uses _tokens_. Tokens provide two big
 features:
 
 * **Revokable access**: users can revoke authorization to third party apps at any time
-* **Limited access**: users can specify what access a token provides when they
-authorize a third party app
+* **Limited access**: users can review the specific access that a token
+  will provide before authorizing a third party app
 
-Normally, tokens are created via a [web flow][webflow]. An application will send
-users to GitHub to log in. GitHub will present a dialog indicating the name of the
-app, as well as what information it has access to. After a user authorizes access, 
-GitHub redirects the user back to the application:  
+Normally, tokens are created via a [web flow][webflow]. An application
+sends users to GitHub to log in. GitHub then presents a dialog
+indicating the name of the app, as well as the level of access the app
+has once it's authorized by the user. After a user authorizes access, GitHub
+redirects the user back to the application:
 ![](/images/oauth_prompt.png)
 
 You don't need to set up the entire web flow to begin working with OAuth tokens. 
-The [Authorizations API][authorizations api] makes it simple to use Basic Auth 
-to create an OAuth token. Try pasting and running 
+The [Authorizations API][authorizations api] makes it simple to use Basic Authentication
+to create an OAuth token. Try pasting and running the following command:
 
     curl -i -u <your_username> \
          -d '{"scopes": ["repo"]}' \
          https://api.github.com/authorizations
+
+You should see output similar to this:
 
     HTTP/1.1 201 Created
     Server: nginx/1.0.14
@@ -217,8 +224,10 @@ Or, we can list repositories for an organization:
 
 The information returned from these calls will depend on how we authenticate:
 
-* Using Basic Auth, everything the user has access to see on github.com
-* Using OAuth, private repositories are only returned if the OAuth token contains 'repo' scope.
+* Using Basic Authentication, the response includes all repositories the
+  the user has access to see on github.com.
+* Using OAuth, private repositories are only returned if the OAuth token
+  contains the `repo` [scope][scopes].
 
 As the [docs][repos-api] indicate, these methods take a `type` parameter that
 can filter the repositories returned based on what type of access the user has
@@ -227,7 +236,7 @@ organization repositories, or repositories the user collaborates on via a team.
 
     curl -i "https://api.github.com/users/technoweenie/repos?type=owner"
 
-In this example, we can grab only those repositories that technoweenie owns, not the
+In this example, we grab only those repositories that technoweenie owns, not the
 ones on which he collaborates. Note the quoted URL above. Depending on your
 shell setup, cURL sometimes requires a quoted URL or else it ignores the
 querystring.
@@ -255,8 +264,8 @@ templates].
 
 The resulting repository will be found at `https://github.com/<your
 username>/blog`. To create a repository under an organization for which you're
-an owner, just change the API method from `/user/repos` to `/orgs/{org
-name}/repos`.
+an owner, just change the API method from `/user/repos` to `/orgs/<org
+name>/repos`.
 
 Next, let's fetch our newly created repository:
 
@@ -271,7 +280,7 @@ Next, let's fetch our newly created repository:
 Oh noes! Where did it go? Since we created the repository as _private_, we need
 to authenticate in order to see it. If you're a grizzled HTTP user, you might
 expect a `403` instead. Since we don't want to leak information about private
-repositories, the GitHub API returns a `404` instead, as if to say "we can
+repositories, the GitHub API returns a `404` in this case, as if to say "we can
 neither confirm nor deny the existence of this repository."
 
 ## Issues
@@ -288,7 +297,7 @@ authenticated user. To see all your issues, call `GET /issues`:
          https://api.github.com/issues
 
 To get only the issues under one of your GitHub organizations, call `GET
-/orgs/{org}/issues`:
+/orgs/<org>/issues`:
 
     curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
          https://api.github.com/orgs/rails/issues
@@ -396,8 +405,8 @@ from the issue we provide.
 
 ## Conditional requests
 
-A big part of being a good API citizen is respecting rate limits and caching
-information that does not change. The API supports [conditional
+A big part of being a good API citizen is respecting rate limits by
+caching information that hasn't changed. The API supports [conditional
 requests][conditional-requests] and helps you do the right thing. Consider the
 first call we made to get defunkt's profile:
 

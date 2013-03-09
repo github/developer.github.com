@@ -382,14 +382,17 @@ GitHub moves fast and the API tries to keep pace, but there are some things you
 can do with the API that you can't do on github.com. Using the API, you can
 turn an issue into a Pull Request.
 
-But at this point, if you want to run this example to convert your issue to a
-pull request, you'll need to create a branch called `new-feature` with at least
-one commit so it's ahead of the `master` branch. Otherwise, if we try and
-convert the issue to a pull request now, we'll receive a `422` error telling us
-that there's no commits between `master` and `new-feature`.
+But at this point, we'll need to create a branch called `new-feature`
+with at least one commit so it's ahead of the `master` branch:
 
-If you've created the `new-feature` branch and made a commit to it, let's
-convert the issue we created in the previous section:
+    git clone https://github.com/repos/github/platform-sandbox
+    git checkout -b new-feature
+    touch cool-feature.rb
+    git add cool-feature.rb
+    git commit -m "Add new feature."
+    git push origin new-feature
+
+Now let's convert the issue we created in the previous section:
 
     curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
          -d '{ \

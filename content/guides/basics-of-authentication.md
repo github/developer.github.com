@@ -61,8 +61,7 @@ Next, in _views/index.erb_, paste this content:
     </html>
 
 (If you're unfamiliar with how Sinatra works, we recommend [reading the
-Sinatra guide][Sinatra guide]. Also make certain that the rest-client gem
-is installed via `gem install rest-client`.)
+Sinatra guide][Sinatra guide].)
 
 Obviously, you'll want to change `<your_client_id>` to match your actual Client ID. 
 
@@ -134,7 +133,7 @@ After you run `gem install sinatra_auth_github`, create a file called _advanced_
 and paste these lines into it:
 
     require 'sinatra/auth/github'
-    require 'rest_client'
+    require 'rest-client'
 
     module Example
       class MyBasicApp < Sinatra::Base

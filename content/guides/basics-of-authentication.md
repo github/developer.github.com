@@ -34,7 +34,7 @@ is set to `http://localhost:4567`. Let's fill in the callback URL as `http://loc
 Now, let's start filling out our simple server. Create a file called _server.rb_ and paste this into it:
 
     require 'sinatra'
-    require 'rest_client'
+    require 'rest-client'
 
     CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
     CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
@@ -60,7 +60,9 @@ Next, in _views/index.erb_, paste this content:
       </body>
     </html>
 
-(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra guide].)
+(If you're unfamiliar with how Sinatra works, we recommend [reading the
+Sinatra guide][Sinatra guide]. Also make certain that the rest-client gem
+is installed via `gem install rest-client`.)
 
 Obviously, you'll want to change `<your_client_id>` to match your actual Client ID. 
 

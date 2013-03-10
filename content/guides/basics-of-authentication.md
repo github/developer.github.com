@@ -34,7 +34,7 @@ is set to `http://localhost:4567`. Let's fill in the callback URL as `http://loc
 Now, let's start filling out our simple server. Create a file called _server.rb_ and paste this into it:
 
     require 'sinatra'
-    require 'rest_client'
+    require 'rest-client'
 
     CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
     CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
@@ -132,7 +132,7 @@ After you run `gem install sinatra_auth_github`, create a file called _advanced_
 and paste these lines into it:
 
     require 'sinatra/auth/github'
-    require 'rest_client'
+    require 'rest-client'
 
     module Example
       class MyBasicApp < Sinatra::Base

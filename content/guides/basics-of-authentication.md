@@ -60,8 +60,7 @@ Next, in _views/index.erb_, paste this content:
       </body>
     </html>
 
-(If you're unfamiliar with how Sinatra works, we recommend [reading the
-Sinatra guide][Sinatra guide].)
+(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra guide].)
 
 Obviously, you'll want to change `<your_client_id>` to match your actual Client ID. 
 

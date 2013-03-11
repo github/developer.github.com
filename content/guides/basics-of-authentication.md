@@ -231,7 +231,7 @@ Also, if we had never authorized this Rack application to access our GitHub data
 we would've seen the same confirmation dialog from earlier pop-up and warn us.
 
 If you'd like, you can play around with [yet another Sinatra-GitHub auth example][sinatra auth github test]
-available as a seperate project.
+available as a separate project.
 
 [webflow]: http://developer.github.com/v3/oauth/#web-application-flow
 [Sinatra]: http://www.sinatrarb.com/

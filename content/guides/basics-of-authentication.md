@@ -31,7 +31,7 @@ is set to `http://localhost:4567`. Let's fill in the callback URL as `http://loc
 
 ## Accepting user authorization
 
-Now, let's start filling out our simple server. Create a file called _server.rb_ and paste this into it:
+Now, let's start filling out our simple server. Create a file called `server.rb` and paste this into it:
 
     require 'sinatra'
     require 'rest-client'
@@ -47,7 +47,7 @@ Your client ID and client secret keys come from [your application's configuratio
 GitHub--or any other public place, for that matter. We recommend storing them as
 [environment variables][about env vars]--which is exactly what we've done here.
 
-Next, in _views/index.erb_, paste this content:
+Next, in `views/index.erb`, paste this content:
 
 
     <html>
@@ -77,7 +77,7 @@ the app. Let's fix that now!
 
 ### Providing a callback
 
-In _server.rb_, add a route to specify what the callback should do:
+In `server.rb`, add a route to specify what the callback should do:
 
     get '/callback' do
       # get temporary GitHub code...
@@ -104,7 +104,7 @@ the logged in user:
 
     erb :basic, :locals => {:auth_result => auth_result}
 
-We can do whatever we want with our results. In this case, we'll just dump them straight into _basic.erb_:
+We can do whatever we want with our results. In this case, we'll just dump them straight into `basic.erb`:
 
     <p>Okay, here's a JSON dump:</p>
     <p>
@@ -128,7 +128,7 @@ into our Sinatra app. On top of that, we're going to be using a middleware calle
 [sinatra-auth-github][sinatra auth github] (which was written by a GitHubber).
 This will make authentication transparent to the user.
 
-After you run `gem install sinatra_auth_github`, create a file called _advanced_server.rb_, 
+After you run `gem install sinatra_auth_github`, create a file called `advanced_server.rb`,
 and paste these lines into it:
 
     require 'sinatra/auth/github'
@@ -196,7 +196,7 @@ we're establishing them through the `:github_options` symbol. Passing your clien
 and client secret, and calling `register Sinatra::Auth::Github`, is everything you need
 to simplify your authentication.
 
-We must also create a _config.ru_ config file, which Rack will use for its configuration
+We must also create a `config.ru` config file, which Rack will use for its configuration
 options:
 
     ENV['RACK_ENV'] ||= 'development'
@@ -207,7 +207,7 @@ options:
 
     run Example::MyBasicApp
 
-Next, create a file in _views_ called _advanced.erb_, and paste this markup into it:
+Next, create a file in `views` called `advanced.erb`, and paste this markup into it:
 
     <html>
       <head>
@@ -221,10 +221,10 @@ From the command line, call `rackup -p 4567`, which starts up your
 Rack server on port `4567`--the same port we used when we had a simple Sinatra app.
 When you navigate to `http://localhost:4567`, the app calls `authenticate!`--another
 internal `sinatra-auth-github` method--which redirects you to `/callback`. `/callback`
-then sends us back to `/`, and since we've been authenticated, renders _advanced.erb_.
+then sends us back to `/`, and since we've been authenticated, renders `advanced.erb`.
 
 We could completely simplify this roundtrip routing by simply changing our callback
-URL in GitHub to `/`. But, since both _server.rb_ and _advanced.rb_ are relying on
+URL in GitHub to `/`. But, since both `server.rb` and `advanced.rb` are relying on
 the same callback URL, we've got to do a little bit of wonkiness to make it work.
 
 Also, if we had never authorized this Rack application to access our GitHub data,

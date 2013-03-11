@@ -128,7 +128,7 @@ into our Sinatra app. On top of that, we're going to be using a middleware calle
 [sinatra-auth-github][sinatra auth github] (which was written by a GitHubber).
 This will make authentication transparent to the user.
 
-After you run `gem install sinatra_auth_github`, create a file called _advanced_server.rb_, 
+After you run `gem install sinatra_auth_github`, create a file called _advanced_server.rb_,
 and paste these lines into it:
 
     require 'sinatra/auth/github'
@@ -184,9 +184,9 @@ and paste these lines into it:
 
 Much of the code should look familiar. For example, we're still using `RestClient.get` 
 to call out to the GitHub API, and we're still passing our results to be renderend
-in an ERB template (this time, it's called `advanced`). Some of the other details--
-like turning our app into a class that inherits from `Sinatra::Base`, are a result
-of inheriting from `sinatra/auth/github`, which written as [a Sinatra extension][sinatra extension].
+in an ERB template (this time, it's called `advanced.erb`). Some of the other
+details--like turning our app into a class that inherits from `Sinatra::Base`--are a result
+of inheriting from `sinatra/auth/github`, which is written as [a Sinatra extension][sinatra extension].
 
 Also, we now have a `github_user` object, which comes from `sinatra-auth-github`. The
 `token` key represents the same `access_token` we used during our simple server. 
@@ -231,7 +231,7 @@ Also, if we had never authorized this Rack application to access our GitHub data
 we would've seen the same confirmation dialog from earlier pop-up and warn us.
 
 If you'd like, you can play around with [yet another Sinatra-GitHub auth example][sinatra auth github test]
-available as a seperate project.
+available as a separate project.
 
 [webflow]: http://developer.github.com/v3/oauth/#web-application-flow
 [Sinatra]: http://www.sinatrarb.com/

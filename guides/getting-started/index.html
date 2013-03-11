@@ -455,7 +455,20 @@ the <code>Location</code> response header and the <code>url</code> field of the 
 
 <p>GitHub moves fast and the API tries to keep pace, but there are some things you
 can do with the API that you can’t do on github.com. Using the API, you can
-turn an issue into a Pull Request. Let’s convert the issue we just created</p>
+turn an issue into a Pull Request.</p>
+
+<p>But at this point, we’ll need to create a branch called <code>new-feature</code>
+with at least one commit so it’s ahead of the <code>master</code> branch:</p>
+
+<pre><code>git clone https://github.com/repos/github/platform-sandbox
+git checkout -b new-feature
+touch cool-feature.rb
+git add cool-feature.rb
+git commit -m "Add new feature."
+git push origin new-feature
+</code></pre>
+
+<p>Now let’s convert the issue we created in the previous section:</p>
 
 <pre><code>curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
      -d '{ \

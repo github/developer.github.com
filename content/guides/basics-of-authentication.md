@@ -128,7 +128,7 @@ into our Sinatra app. On top of that, we're going to be using a middleware calle
 [sinatra-auth-github][sinatra auth github] (which was written by a GitHubber).
 This will make authentication transparent to the user.
 
-After you run `gem install sinatra_auth_github`, create a file called _advanced_server.rb_, 
+After you run `gem install sinatra_auth_github`, create a file called _advanced_server.rb_,
 and paste these lines into it:
 
     require 'sinatra/auth/github'

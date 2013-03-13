@@ -693,7 +693,6 @@ module GitHub
       "repos" => 8,
       "type" => "user",
       "followers_count" => 10,
-      "pushed" => "2012-04-18T02:15:17.511Z",
       "login" => "techno",
       "score" => 4.2559967,
       "record" => nil,

@@ -630,11 +630,11 @@ module GitHub
       "position" =>  10,
       "number" =>  10,
       "votes" =>  2,
-      "created_at" =>  "2010-06-04T23:20:33-07:00",
+      "created_at" =>  "2010-06-04T23:20:33Z",
       "comments" =>  5,
       "body" =>  "Issue body goes here",
       "title" =>  "This is is the issue title",
-      "updated_at" =>  "2010-06-04T23:20:33-07:00",
+      "updated_at" =>  "2010-06-04T23:20:33Z",
       "html_url" =>  "https://github.com/pengwynn/linkedin/issues/10",
       "user" =>  "ckarbass",
       "labels" =>  [
@@ -651,7 +651,7 @@ module GitHub
 
     REPO_SEARCH_ITEM = {
       "type" => "repo",
-      "created" => "2011-09-05T11:07:54-07:00",
+      "created" => "2011-09-05T11:07:54Z",
       "watchers" => 2913,
       "has_downloads" => true,
       "username" => "mathiasbynens",
@@ -667,12 +667,12 @@ module GitHub
       "name" => "dotfiles",
       "owner" => "mathiasbynens",
       "open_issues" => 12,
-      "pushed_at" => "2012-06-05T03:37:13-07:00",
+      "pushed_at" => "2012-06-05T03:37:13Z",
       "score" => 3.289718,
-      "pushed" => "2012-06-05T03:37:13-07:00",
+      "pushed" => "2012-06-05T03:37:13Z",
       "description" => "sensible hacker defaults for OS X",
       "language" => "VimL",
-      "created_at" => "2011-09-05T11:07:54-07:00"
+      "created_at" => "2011-09-05T11:07:54Z"
     }
 
     REPO_SEARCH_RESULTS = {

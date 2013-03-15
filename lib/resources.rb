@@ -704,7 +704,23 @@ module GitHub
     }
 
     EMAIL_SEARCH_RESULTS = {
-      "user" => USER_SEARCH_ITEM
+      "user" => {
+        "public_repo_count" => 2,
+        "public_gist_count" => 1,
+        "followers_count"   => 20,
+        "following_count"   => 0,
+        "created"           => "2009-10-05T01:32:06Z",
+        "created_at"        => "2009-10-05T01:32:06Z",
+        "name"              => "monalisa octocat",
+        "company"           => "GitHub",
+        "blog"              => "https://github.com/blog",
+        "location"          => "San Francisco",
+        "email"             => "octocat@github.com",
+        "id"                => 2,
+        "login"             => "octocat",
+        "type"              => "User",
+        "gravatar_id"       => "70889091349f7598bce9afa588034310",
+      }
     }
 
     GIST_HISTORY = {

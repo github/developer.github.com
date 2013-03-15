@@ -695,7 +695,6 @@ module GitHub
       "followers_count" => 10,
       "login" => "techno",
       "score" => 4.2559967,
-      "record" => nil,
       "created" => "2009-10-05T01:32:06Z"
     }
 

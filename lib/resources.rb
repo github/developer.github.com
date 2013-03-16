@@ -630,11 +630,11 @@ module GitHub
       "position" =>  10,
       "number" =>  10,
       "votes" =>  2,
-      "created_at" =>  "2010-06-04T23:20:33-07:00",
+      "created_at" =>  "2010-06-04T23:20:33Z",
       "comments" =>  5,
       "body" =>  "Issue body goes here",
       "title" =>  "This is is the issue title",
-      "updated_at" =>  "2010-06-04T23:20:33-07:00",
+      "updated_at" =>  "2010-06-04T23:20:33Z",
       "html_url" =>  "https://github.com/pengwynn/linkedin/issues/10",
       "user" =>  "ckarbass",
       "labels" =>  [
@@ -651,7 +651,7 @@ module GitHub
 
     REPO_SEARCH_ITEM = {
       "type" => "repo",
-      "created" => "2011-09-05T11:07:54-07:00",
+      "created" => "2011-09-05T11:07:54Z",
       "watchers" => 2913,
       "has_downloads" => true,
       "username" => "mathiasbynens",
@@ -667,12 +667,12 @@ module GitHub
       "name" => "dotfiles",
       "owner" => "mathiasbynens",
       "open_issues" => 12,
-      "pushed_at" => "2012-06-05T03:37:13-07:00",
+      "pushed_at" => "2012-06-05T03:37:13Z",
       "score" => 3.289718,
-      "pushed" => "2012-06-05T03:37:13-07:00",
+      "pushed" => "2012-06-05T03:37:13Z",
       "description" => "sensible hacker defaults for OS X",
       "language" => "VimL",
-      "created_at" => "2011-09-05T11:07:54-07:00"
+      "created_at" => "2011-09-05T11:07:54Z"
     }
 
     REPO_SEARCH_RESULTS = {
@@ -693,10 +693,8 @@ module GitHub
       "repos" => 8,
       "type" => "user",
       "followers_count" => 10,
-      "pushed" => "2012-04-18T02:15:17.511Z",
       "login" => "techno",
       "score" => 4.2559967,
-      "record" => nil,
       "created" => "2009-10-05T01:32:06Z"
     }
 
@@ -705,7 +703,23 @@ module GitHub
     }
 
     EMAIL_SEARCH_RESULTS = {
-      "user" => USER_SEARCH_ITEM
+      "user" => {
+        "public_repo_count" => 2,
+        "public_gist_count" => 1,
+        "followers_count"   => 20,
+        "following_count"   => 0,
+        "created"           => "2009-10-05T01:32:06Z",
+        "created_at"        => "2009-10-05T01:32:06Z",
+        "name"              => "monalisa octocat",
+        "company"           => "GitHub",
+        "blog"              => "https://github.com/blog",
+        "location"          => "San Francisco",
+        "email"             => "octocat@github.com",
+        "id"                => 2,
+        "login"             => "octocat",
+        "type"              => "User",
+        "gravatar_id"       => "70889091349f7598bce9afa588034310",
+      }
     }
 
     GIST_HISTORY = {

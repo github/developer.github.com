@@ -50,7 +50,6 @@ using [sinatra-auth-github][sinatra auth github]:
 	        authenticate!
 	      else
 	        access_token = github_user["token"]
-	        
 	      end
 	    end
 	  end

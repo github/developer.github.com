@@ -86,7 +86,6 @@ module Example
         authenticate!
       else
         access_token = github_user["token"]
-        
       end
     end
   end
@@ -312,9 +311,10 @@ language_bytes = [ :name =&gt; "language_bytes", :elements =&gt; language_byte_c
 
 <p>To wrap up, we’ll want to just pass this JSON information over to the same ERB file:</p>
 
-<p>erb :lang_freq, :locals =&gt; { :languages =&gt; languages.to_json, :language_byte_count =&gt; language_bytes.to_json}</p>
+<pre><code>erb :lang_freq, :locals =&gt; { :languages =&gt; languages.to_json, :language_byte_count =&gt; language_bytes.to_json}
+</code></pre>
 
-<p>Just like we did before, here’s a bunch of d3 Javascript code that you can just drop
+<p>Just like we did before, here’s a bunch of d3 JavaScript code that you can just drop
 directly into your template: </p>
 
 <pre><code>&lt;div id="byte_freq"&gt;&lt;/div&gt;

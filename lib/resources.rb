@@ -536,6 +536,24 @@ module GitHub
       "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
     }
 
+    ORG_STATUS = {
+      "id" => 1,
+      "url" => "https://api.github.com/orgs/github/statuses/1",
+      "body" => "Hey guys!",
+      "user" => USER,
+      "created_at" => "2008-01-14T04:33:35Z",
+      "updated_at" => "2008-01-14T04:33:35Z",
+    }
+
+    ORG_STATUS_COMMENT = {
+      "id" => 1,
+      "url" => "https://api.github.com/orgs/github/statuses/1/comments/1",
+      "body" => "Hey guys!",
+      "user" => USER,
+      "created_at" => "2008-01-14T04:33:35Z",
+      "updated_at" => "2008-01-14T04:33:35Z",
+    }
+
     FULL_ORG = ORG.merge({
       "name"         => "github",
       "company"      => "GitHub",

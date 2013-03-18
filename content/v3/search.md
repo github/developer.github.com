@@ -46,12 +46,12 @@ language
 start_page
 : _Optional_ Page number to fetch
 
-s
+sort
 : _Optional_ Sort field. One of `stars`, `forks`, or `updated`. If not
 provided, results are sorted by best match.
 
-o
-: _Optional_ Sort order if `s` param is provided. One of `asc` or `desc`.
+order
+: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
 
 <%= headers 200 %>
 <%= json(:repo_search_results) %>
@@ -69,6 +69,13 @@ keyword
 
 start_page
 : _Optional_ Page number to fetch
+
+sort
+: _Optional_ Sort field. One of `followers`, `joined`, or `repositories`. If not
+provided, results are sorted by best match.
+
+order
+: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
 
 <%= headers 200 %>
 <%= json(:user_search_results) %>

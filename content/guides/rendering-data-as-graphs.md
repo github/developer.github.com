@@ -268,7 +268,7 @@ To wrap up, we'll want to just pass this JSON information over to the same ERB f
     erb :lang_freq, :locals => { :languages => languages.to_json, :language_byte_count => language_bytes.to_json}
 
 
-Just like we did before, here's a bunch of d3 Javascript code that you can just drop
+Just like we did before, here's a bunch of d3 JavaScript code that you can just drop
 directly into your template: 
 
     <div id="byte_freq"></div>

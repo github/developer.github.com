@@ -254,10 +254,13 @@ to.  The path must be in the format of `/:owner/:repo/events/:event`.
 
 `hub.secret`
 : _Optional_ **string** - A shared secret key that generates a SHA1 HMAC
-of the payload content.  You can verify a push came from GitHub by
-comparing the received body with the contents of the `X-Hub-Signature`
-header.
+of the outgoing body content.  You can verify a push came from GitHub by
+comparing the raw request body with the contents of the `X-Hub-Signature`
+header.  You can see [our Ruby implementation][ruby-secret], or [the
+PubSubHubbub documentation][pshb-secret] for more details.
 
 [pubsub]: http://code.google.com/p/pubsubhubbub/
 [post-receive]: http://help.github.com/post-receive-hooks/
+[ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
+[pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify
 

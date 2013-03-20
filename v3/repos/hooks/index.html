@@ -408,9 +408,10 @@ to.  The path must be in the format of <code>/:owner/:repo/events/:event</code>.
   <dt><code>hub.secret</code></dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - A shared secret key that generates a SHA1 HMAC
-of the payload content.  You can verify a push came from GitHub by
-comparing the received body with the contents of the <code>X-Hub-Signature</code>
-header.</dd>
+of the outgoing body content.  You can verify a push came from GitHub by
+comparing the raw request body with the contents of the <code>X-Hub-Signature</code>
+header.  You can see <a href="https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50">our Ruby implementation</a>, or <a href="http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify">the
+PubSubHubbub documentation</a> for more details.</dd>
 </dl>
       </div>
 

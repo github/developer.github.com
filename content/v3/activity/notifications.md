@@ -108,12 +108,6 @@ on GitHub.com](https://github.com/notifications).
 
 ### Input
 
-unread
-: **Boolean** Changes the unread status of the threads.
-
-read
-: **Boolean** Inverse of "unread".
-
 last_read_at
 : _Optional_ **Time** Describes the last point that notifications were checked.  Anything
 updated since this time will not be updated.  Default: Now.  Expected in ISO
@@ -131,12 +125,6 @@ from the [default view on GitHub.com](https://github.com/notifications).
     PUT /repos/:owner/:repo/notifications
 
 ### Input
-
-unread
-: **Boolean** Changes the unread status of the threads.
-
-read
-: **Boolean** Inverse of "unread".
 
 last_read_at
 : _Optional_ **Time** Describes the last point that notifications were checked.  Anything
@@ -159,14 +147,6 @@ updated since this time will not be updated.  Default: Now.  Expected in ISO
 ## Mark a thread as read
 
     PATCH /notifications/threads/:id
-
-### Input
-
-unread
-: **Boolean** Changes the unread status of the threads.
-
-read
-: **Boolean** Inverse of "unread".
 
 ### Response
 

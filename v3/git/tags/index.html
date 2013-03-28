@@ -76,10 +76,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>Note that creating a tag object does not create the reference that
 makes a tag in Git.  If you want to create an annotated tag in Git,
-you have to do this call to create the tag object, and then create
-the <code>refs/tags/[tag]</code> reference.  If you want to create a lightweight
-tag, you simply have to create the reference - this call would be
-unnecessary.</p>
+you have to do this call to create the tag object, and then
+<a href="/v3/git/refs/#create-a-reference">create</a> the <code>refs/tags/[tag]</code> reference.
+If you want to create a lightweight tag, you only have to
+<a href="/v3/git/refs/#create-a-reference">create</a> the tag reference - this call
+would be unnecessary.</p>
 
 <pre><code>POST /repos/:owner/:repo/git/tags
 </code></pre>
@@ -109,7 +110,21 @@ unnecessary.</p>
   <dt>tagger.date</dt>
   <dd>
 <em>Timestamp</em> of when this object was tagged</dd>
-</dl><h3 id="response-1">Response</h3>
+</dl><h3 id="example-input">Example Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"tag"</span><span class="o">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
+  <span class="s2">"object"</span><span class="o">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+  <span class="s2">"tagger"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2011-06-17T14:53:35-07:00"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/:owner/:repo/git/tags/:sha

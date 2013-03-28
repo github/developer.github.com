@@ -23,10 +23,11 @@ lightweight tags.
 
 Note that creating a tag object does not create the reference that
 makes a tag in Git.  If you want to create an annotated tag in Git,
-you have to do this call to create the tag object, and then create
-the `refs/tags/[tag]` reference.  If you want to create a lightweight
-tag, you simply have to create the reference - this call would be
-unnecessary.
+you have to do this call to create the tag object, and then
+[create](/v3/git/refs/#create-a-reference) the `refs/tags/[tag]` reference.
+If you want to create a lightweight tag, you only have to
+[create](/v3/git/refs/#create-a-reference) the tag reference - this call
+would be unnecessary.
 
     POST /repos/:owner/:repo/git/tags
 

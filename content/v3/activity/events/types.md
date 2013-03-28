@@ -229,6 +229,16 @@ commits[][distinct]
 : **boolean** - Whether this commit is distinct from any that have been pushed
 before.
 
+## ReleaseEvent
+
+Hook name: `release`
+
+action
+: **string** - The action that was performed: "published".
+
+release
+: **object** - The [release](/v3/repos/releases/#get-a-single-release) itself.
+
 ## TeamAddEvent
 
 Hook name: `team_add`

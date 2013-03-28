@@ -26,6 +26,7 @@ request is tracking).
 * `gollum` - Any time a Wiki page is updated.
 * `watch` - Any time a User watches the Repository.
 * `download` - Any time a Download is added to the Repository.
+* `release` - Any time a Release is published in the Repository.
 * `fork` - Any time a Repository is forked.
 * `fork_apply` - Any time a patch is applied to the Repository from the
   Fork Queue.

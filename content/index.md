@@ -10,7 +10,7 @@ you have any problems or requests please contact
 
 For the new API v3, start browsing the resources on the right >>
 
-View the [API Changelog](#changes) for information on existing and
+View the [API Changelog](/changes) for information on existing and
 planned changes to the API.
 
 ## Current Version

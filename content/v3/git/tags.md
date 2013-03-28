@@ -23,10 +23,11 @@ lightweight tags.
 
 Note that creating a tag object does not create the reference that
 makes a tag in Git.  If you want to create an annotated tag in Git,
-you have to do this call to create the tag object, and then create
-the `refs/tags/[tag]` reference.  If you want to create a lightweight
-tag, you simply have to create the reference - this call would be
-unnecessary.
+you have to do this call to create the tag object, and then
+[create](/v3/git/refs/#create-a-reference) the `refs/tags/[tag]` reference.
+If you want to create a lightweight tag, you only have to
+[create](/v3/git/refs/#create-a-reference) the tag reference - this call
+would be unnecessary.
 
     POST /repos/:owner/:repo/git/tags
 
@@ -53,6 +54,16 @@ tagger.email
 
 tagger.date
 : _Timestamp_ of when this object was tagged
+
+### Example Input
+
+<%= json "tag"=> "v0.0.1", \
+    "message" => "initial version\n", \
+    "object" => "c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c", \
+    "type" => "commit", \
+    "tagger"=> \
+    {"name" => "Scott Chacon", "email" => "schacon@gmail.com", \
+    "date" => "2011-06-17T14:53:35-07:00"} %>
 
 ### Response
 

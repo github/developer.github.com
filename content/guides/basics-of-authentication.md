@@ -86,8 +86,10 @@ In _server.rb_, add a route to specify what the callback should do:
       result = RestClient.post("https://github.com/login/oauth/access_token",
                               {:client_id => CLIENT_ID,
                                :client_secret => CLIENT_SECRET,
-                               :code => session_code},
-                               :accept => :json)
+                               :code => session_code
+                              },{
+                               :accept => :json
+                              })
       access_token = JSON.parse(result)["access_token"]
     end
 

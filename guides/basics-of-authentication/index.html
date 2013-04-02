@@ -124,8 +124,10 @@ the app. Let’s fix that now!</p>
   result = RestClient.post("https://github.com/login/oauth/access_token",
                           {:client_id =&gt; CLIENT_ID,
                            :client_secret =&gt; CLIENT_SECRET,
-                           :code =&gt; session_code},
-                           :accept =&gt; :json)
+                           :code =&gt; session_code
+                          },{
+                           :accept =&gt; :json
+                          })
   access_token = JSON.parse(result)["access_token"]
 end
 </code></pre>

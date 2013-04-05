@@ -55,6 +55,8 @@ is `open`.
 <%= headers 200 %>
 <%= json :full_pull %>
 
+### Alternative Response Formats
+
 Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
 
 ## Create a pull request

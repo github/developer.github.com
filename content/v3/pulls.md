@@ -55,6 +55,15 @@ is `open`.
 <%= headers 200 %>
 <%= json :full_pull %>
 
+### Mergability
+
+Each time the pull request receives new commits, GitHub creates a merge commit
+to _test_ whether the pull request can be automatically merged into the base
+branch. (This _test_ commit is not added to the base branch or the head branch.)
+The Boolean `mergable` attribute indicates whether the pull request can be
+automatically merged. The `merge_commit_sha` attribute holds the SHA of the
+_test_ merge commit.
+
 ### Alternative Response Formats
 
 Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.

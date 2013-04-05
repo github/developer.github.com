@@ -39,6 +39,8 @@ objects.
 * `[ ]` `master_branch` becomes `default_branch`.
 * `[ ]` `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
   returned.
+* `[ ]` `merge_commit_sha` on the [pull request API](/v3/pulls/#get-a-single-pull-request)
+  will no longer be returned.
 * `[ ]` Use the `private` attribute when creating a private repository,
   instead of setting `public` to false.
 * `[ ]` Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.

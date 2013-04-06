@@ -60,11 +60,10 @@ is `open`.
 Each time the pull request receives new commits, GitHub creates a merge commit
 to _test_ whether the pull request can be automatically merged into the base
 branch. (This _test_ commit is not added to the base branch or the head branch.)
-The Boolean `mergable` attribute indicates whether the pull request can be
-automatically merged. The `merge_commit_sha` attribute holds the SHA of the
-_test_ merge commit. (The `merge_commit_sha` attribute is
-[deprecated](/#expected-changes) and is scheduled for removal in the next
-version of the API.)
+The `merge_commit_sha` attribute holds the SHA of the _test_ merge commit;
+however, this attribute is [deprecated](/#expected-changes) and is scheduled for
+removal in the next version of the API. The Boolean `mergable` attribute will
+remain to indicate whether the pull request can be automatically merged.
 
 ### Alternative Response Formats
 

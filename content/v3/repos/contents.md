@@ -140,6 +140,50 @@ committer.email
 <%= headers 200 %>
 <%= json :git_commit %>
 
+## Delete a file
+
+This method allows you to delete a file in a repository
+
+    DELETE /repos/:owner/:repo/contents/:path
+
+### Parameters
+
+path
+: _Required_ **string** - The content path.
+
+message
+: _Required_ **string** - The commit message.
+
+sha
+: _Required_ **string** - The blob SHA of the content being removed.
+
+branch
+: _Optional_ **string** - The branch name.  Defaults to `master`.
+
+author.name
+: _Optional_ **string** - The name of the author of the commit.
+
+author.email
+: _Optional_ **string** - The email of the author of the commit.
+
+committer.name
+: _Optional_ **string** - The name of the committer of the commit.
+
+committer.email
+: _Optional_ **string** - The email of the committer of the commit.
+
+### Example Input
+
+<%= json "message" => "my commit message", \
+    "author" => \
+    {"name" => "Scott Chacon", "email" => "schacon@gmail.com" }, \
+    "sha" => "329688480d39049927147c162b9d2deaf885005f" %>
+
+### Response
+
+<%= headers 200 %>
+<%= json :git_commit %>
+
 ## Get archive link
 
 This method will return a `302` to a URL to download a tarball

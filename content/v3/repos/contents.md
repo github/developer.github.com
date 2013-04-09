@@ -48,6 +48,50 @@ ref
 *Note*: To get a repository's contents recursively, you can [recursively get
 the tree](/v3/git/trees/).
 
+## Create a file
+
+This method allows you to create a new file in a repository
+
+    PUT /repos/:owner/:repo/contents/:path
+
+### Parameters
+
+path
+: _Required_ **string** - The content path.
+
+message
+: _Required_ **string** - The commit message.
+
+content
+: _Required_ **string** - The new file content.
+
+branch
+: _Optional_ **string** - The branch name.  Defaults to `master`.
+
+author.name
+: _Optional_ **string** - The name of the author of the commit.
+
+author.email
+: _Optional_ **string** - The email of the author of the commit.
+
+committer.name
+: _Optional_ **string** - The name of the committer of the commit.
+
+committer.email
+: _Optional_ **string** - The email of the committer of the commit.
+
+### Example Input
+
+<%= json "message" => "my commit message", \
+    "author" => \
+    {"name" => "Scott Chacon", "email" => "schacon@gmail.com" }, \
+    "content" => "my new file contents" %>
+
+### Response
+
+<%= headers 201 %>
+<%= json :git_commit %>
+
 ## Get archive link
 
 This method will return a `302` to a URL to download a tarball

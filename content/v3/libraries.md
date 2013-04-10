@@ -72,6 +72,12 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 [uagithubengine]: http://github.com/owainhunt/uagithubengine
 
+## OCaml
+
+* [ocaml-github][ocaml-github]
+
+[ocaml-github]: https://github.com/avsm/ocaml-github
+
 ## Perl
 
 * [Pithub][pithub-github] ([CPAN][pithub-cpan])

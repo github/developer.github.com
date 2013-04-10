@@ -29,11 +29,6 @@ access to Statuses **without** also granting access to repo code, while the
 
     GET /repos/:owner/:repo/statuses/:sha
 
-### Parameters
-
-sha
-: _Required_ **string** - Sha to list the statuses from
-
 ### Response
 
 <%= headers 200 %>

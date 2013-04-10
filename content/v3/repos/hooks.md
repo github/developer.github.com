@@ -7,9 +7,9 @@ title: Repo Hooks | GitHub API
 * TOC
 {:toc}
 
-The Repository Hooks API manages the post-receive web and service hooks
-for a repository.  There are two main APIs to manage these hooks: a JSON
-HTTP API, and [PubSubHubbub](#pubsubhubbub).
+The Repository Hooks API allows repository admins to manage the post-receive
+web and service hooks for a repository.  There are two main APIs to manage
+these hooks: a JSON HTTP API, and [PubSubHubbub](#pubsubhubbub).
 
 Active hooks can be configured to trigger for one or more events.
 The default event is `push`.  The available events are:

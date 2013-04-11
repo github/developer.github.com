@@ -53,6 +53,15 @@ ref
 <%= headers 200 %>
 <%= json :directory_content %>
 
+### Response if content is a symlink
+
+If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the API responds with the content of the file (in the [format shown above](#response-if-content-is-a-file)).
+
+Otherwise, the API responds with a hash describing the symlink itself:
+
+<%= headers 200 %>
+<%= json :symlink_content %>
+
 ## Get archive link
 
 This method will return a `302` to a URL to download a tarball

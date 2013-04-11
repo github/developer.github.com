@@ -1003,6 +1003,23 @@ module GitHub
       },
     }
 
+    SYMLINK_CONTENT = {
+      "type" => "symlink",
+      "target" => "/path/to/symlink/target",
+      "size" => 23,
+      "name" => "some-symlink",
+      "path" => "bin/some-symlink",
+      "sha" => "452a98979c88e093d682cab404a3ec82babebb48",
+      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
+      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+      "html_url" => "http://github.dev/pengwynn/octokit/blob/master/bin/some-symlink",
+      "_links" => {
+        "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+        "self" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
+        "html" => "http://github.dev/pengwynn/octokit/blob/master/bin/some-symlink"
+      },
+    }
+
     DIRECTORY_CONTENT = [
       {
         "type" => "file",

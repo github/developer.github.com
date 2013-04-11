@@ -49,6 +49,7 @@
   <li><a href="#create-a-new-authorization">Create a new authorization</a></li>
   <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   <li><a href="#delete-an-authorization">Delete an authorization</a></li>
+  <li><a href="#check-an-authorization">Check an authorization</a></li>
   <li><a href="#more-information">More Information</a></li>
 </ul><p>OAuth2 is a protocol that lets external apps request authorization to
 private details in a user’s GitHub account without getting their
@@ -421,6 +422,46 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="check-an-authorization">Check an authorization</h2>
+
+<p>OAuth applications can use a special API method for checking OAuth token
+validity without running afoul of normal rate limits for failed login attempts.
+This method uses <strong>OAuth application client_id and secret</strong> using <strong>Basic
+Authentication.</strong> Invalid tokens will return <code>404 NOT FOUND</code>.</p>
+
+<pre><code>GET /applications/:client_id/tokens/:access_token
+</code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span>
+  <span class="p">},</span>
+  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
 
 <h2 id="more-information">More Information</h2>
 

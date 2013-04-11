@@ -968,6 +968,8 @@ module GitHub
       "created_at" => "2011-09-06T17:26:27Z"
     }
 
+    OAUTH_ACCESS_WITH_USER = OAUTH_ACCESS.merge(:user => USER)
+
     EVENT = {
       :type   => "Event",
       :public => true,

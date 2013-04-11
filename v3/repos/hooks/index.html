@@ -244,23 +244,16 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <dl>
-<dt><code>name</code></dt>
+<dt><code>config</code></dt>
   <dd>
-<em>Required</em> <strong>string</strong> - The name of the service that is being called.
-See <a href="https://api.github.com/hooks">/hooks</a> for the possible names.</dd>
-  <dt><code>config</code></dt>
-  <dd>
-<em>Required</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
+<em>Optional</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
 settings for this hook.  Modifying this will replace the entire config
 object.  These settings vary between the services and
 are defined in the
 <a href="https://github.com/github/github-services">github-services</a> repo.
 Booleans are stored internally as “1” for true, and “0” for false.  Any
 JSON true/false values will be converted automatically.</dd>
-</dl><p>You can change a hook to send straight JSON by</p>
-
-<dl>
-<dt><code>events</code></dt>
+  <dt><code>events</code></dt>
   <dd>
 <em>Optional</em> <strong>array</strong> - Determines what events the hook is triggered
 for.  This replaces the entire array of events.  Default: <code>["push"]</code>.</dd>
@@ -276,26 +269,13 @@ list of events that the Hook triggers for.</dd>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
-</dl><p>Example:  The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
-takes these fields:</p>
-
-<ul>
-<li><code>url</code></li>
-  <li><code>content_type</code></li>
-  <li><code>secret</code></li>
-</ul><p>Here’s how you can setup a hook that posts raw JSON (instead of the default
-legacy format):</p>
+</dl><h4 id="example">Example</h4>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"add_events"</span><span class="o">:</span> <span class="p">[</span>
     <span class="s2">"pull_request"</span>
-  <span class="p">],</span>
-  <span class="s2">"config"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://requestb.in"</span><span class="p">,</span>
-    <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"json"</span>
-  <span class="p">}</span>
+  <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-3">Response</h3>

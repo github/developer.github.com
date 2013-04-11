@@ -183,7 +183,7 @@ levels, that indicate what information this token can access. In this case,
 we're setting up the token with _repo_ access, the most permissive scope in the
 GitHub API, allowing access to read and write to private repositories. See [the
 scopes docs][scopes] for a full list of scopes. You should **only** request
-scopes that your application actually needs, in order to not freighten users with
+scopes that your application actually needs, in order to not frighten users with
 potentially invasive actions.
 
 The `201` status code tells us that the call was successful, and the JSON returned

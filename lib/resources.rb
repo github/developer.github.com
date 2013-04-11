@@ -1003,6 +1003,39 @@ module GitHub
       },
     }
 
+    DIRECTORY_CONTENT = [
+      {
+        "type" => "file",
+        "size" => 625,
+        "name" => "octokit.rb",
+        "path" => "lib/octokit.rb",
+        "sha" => "fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
+        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+        "html_url" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+        "_links" => {
+          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
+          "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+          "html" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+        },
+      },
+      {
+        "type" => "dir",
+        "size" => 0,
+        "name" => "octokit",
+        "path" => "lib/octokit",
+        "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
+        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+        "html_url" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit",
+        "_links" => {
+          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
+          "git" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+          "html" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit"
+        },
+      },
+    ]
+
     STATUS = {
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",

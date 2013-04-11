@@ -122,22 +122,14 @@ legacy format):
 
 ### Input
 
-`name`
-: _Required_ **string** - The name of the service that is being called.
-See [/hooks](https://api.github.com/hooks) for the possible names.
-
 `config`
-: _Required_ **hash** - A Hash containing key/value pairs to provide
+: _Optional_ **hash** - A Hash containing key/value pairs to provide
 settings for this hook.  Modifying this will replace the entire config
 object.  These settings vary between the services and
 are defined in the
 [github-services](https://github.com/github/github-services) repo.
 Booleans are stored internally as "1" for true, and "0" for false.  Any
 JSON true/false values will be converted automatically.
-
-
-
-You can change a hook to send straight JSON by
 
 `events`
 : _Optional_ **array** - Determines what events the hook is triggered
@@ -155,23 +147,11 @@ list of events that the Hook triggers for.
 : _Optional_ **boolean** - Determines whether the hook is actually
 triggered on pushes.
 
-Example:  The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
-takes these fields:
-
-* `url`
-* `content_type`
-* `secret`
-
-Here's how you can setup a hook that posts raw JSON (instead of the default
-legacy format):
+#### Example
 
 <%= json \
-      :name => "web",
       :active => true,
-      :add_events => ['pull_request'],
-      :config => {
-        :url => "http://requestb.in",
-        :content_type => "json"}
+      :add_events => ['pull_request']
 %>
 
 ### Response

@@ -67,16 +67,19 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
   <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"base64"</span><span class="p">,</span>
-  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
-    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
-    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
-  <span class="p">},</span>
   <span class="s2">"size"</span><span class="o">:</span> <span class="mi">5362</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
   <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
   <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
+  <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="get-contents">Get contents</h2>
@@ -85,6 +88,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code>GET /repos/:owner/:repo/contents/:path
 </code></pre>
+
+<p><em>Note</em>: To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get
+the tree</a>.</p>
 
 <h3 id="parameters-1">Parameters</h3>
 
@@ -95,7 +101,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dt>ref</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag.  Defaults to <code>master</code>.</dd>
-</dl><h3 id="response-1">Response</h3>
+</dl><h3 id="response-if-content-is-a-file">Response if content is a file</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -104,20 +110,86 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
   <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"base64"</span><span class="p">,</span>
-  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
-    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
-    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
-  <span class="p">},</span>
   <span class="s2">"size"</span><span class="o">:</span> <span class="mi">5362</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
   <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
   <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
+  <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
-<p><em>Note</em>: To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get
-the tree</a>.</p>
+<h3 id="response-if-content-is-a-directory">Response if content is a directory</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">625</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"dir"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octokit"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/tree/master/lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/tree/master/lib/octokit"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="response-if-content-is-a-symlink">Response if content is a symlink</h3>
+
+<p>If the requested <code>:path</code> points to a symlink, and the symlink’s target is a normal file in the repository, then the API responds with the content of the file (in the <a href="#response-if-content-is-a-file">format shown above</a>).</p>
+
+<p>Otherwise, the API responds with a hash describing the symlink itself:</p>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"symlink"</span><span class="p">,</span>
+  <span class="s2">"target"</span><span class="o">:</span> <span class="s2">"/path/to/symlink/target"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">23</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"some-symlink"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"http://github.dev/pengwynn/octokit/blob/master/bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"http://github.dev/pengwynn/octokit/blob/master/bin/some-symlink"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
 
 <h2 id="get-archive-link">Get archive link</h2>
 
@@ -141,7 +213,7 @@ to make a second <code>GET</code> request.</p>
   <dd>
 <em>Optional</em>  <strong>string</strong> - valid Git reference, defaults to <code>master</code>
 </dd>
-</dl><h3 id="response-2">Response</h3>
+</dl><h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 302 Found
 Location: http://github.com/me/myprivate/tarball/master?SSO=thistokenexpires

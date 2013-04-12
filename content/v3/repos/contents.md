@@ -32,6 +32,9 @@ This method returns the contents of any file or directory in a repository.
 
     GET /repos/:owner/:repo/contents/:path
 
+*Note*: To get a repository's contents recursively, you can [recursively get
+the tree](/v3/git/trees/).
+
 ### Parameters
 
 path
@@ -40,13 +43,24 @@ path
 ref
 : _Optional_ **string** - The String name of the Commit/Branch/Tag.  Defaults to `master`.
 
-### Response
+### Response if content is a file
 
 <%= headers 200 %>
 <%= json :readme_content %>
 
-*Note*: To get a repository's contents recursively, you can [recursively get
-the tree](/v3/git/trees/).
+### Response if content is a directory
+
+<%= headers 200 %>
+<%= json :directory_content %>
+
+### Response if content is a symlink
+
+If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the API responds with the content of the file (in the [format shown above](#response-if-content-is-a-file)).
+
+Otherwise, the API responds with a hash describing the symlink itself:
+
+<%= headers 200 %>
+<%= json :symlink_content %>
 
 ## Get archive link
 

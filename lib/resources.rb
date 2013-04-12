@@ -1006,17 +1006,70 @@ module GitHub
     README_CONTENT = {
       "type" =>  "file",
       "encoding" =>  "base64",
+      "size" =>  5362,
+      "name" =>  "README.md",
+      "path" =>  "README.md",
+      "content" =>  "encoded content ...",
+      "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1",
+      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
+      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+      "html_url" => "https://github.com/pengwynn/octokit/blob/master/README.md",
       "_links" =>  {
         "git" =>  "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
         "self" =>  "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
         "html" =>  "https://github.com/pengwynn/octokit/blob/master/README.md"
       },
-      "size" =>  5362,
-      "name" =>  "README.md",
-      "path" =>  "README.md",
-      "content" =>  "encoded content ...",
-      "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1"
     }
+
+    SYMLINK_CONTENT = {
+      "type" => "symlink",
+      "target" => "/path/to/symlink/target",
+      "size" => 23,
+      "name" => "some-symlink",
+      "path" => "bin/some-symlink",
+      "sha" => "452a98979c88e093d682cab404a3ec82babebb48",
+      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
+      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+      "html_url" => "http://github.dev/pengwynn/octokit/blob/master/bin/some-symlink",
+      "_links" => {
+        "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+        "self" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
+        "html" => "http://github.dev/pengwynn/octokit/blob/master/bin/some-symlink"
+      },
+    }
+
+    DIRECTORY_CONTENT = [
+      {
+        "type" => "file",
+        "size" => 625,
+        "name" => "octokit.rb",
+        "path" => "lib/octokit.rb",
+        "sha" => "fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
+        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+        "html_url" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+        "_links" => {
+          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
+          "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+          "html" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+        },
+      },
+      {
+        "type" => "dir",
+        "size" => 0,
+        "name" => "octokit",
+        "path" => "lib/octokit",
+        "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
+        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+        "html_url" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit",
+        "_links" => {
+          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
+          "git" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+          "html" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit"
+        },
+      },
+    ]
 
     STATUS = {
       "created_at" => "2012-07-20T01:19:13Z",

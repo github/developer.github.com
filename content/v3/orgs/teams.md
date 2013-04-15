@@ -193,7 +193,7 @@ owner of the org that the team is associated with.  Also, the repo must
 be owned by the organization, or a direct fork of a repo owned by the
 organization.
 
-    PUT /teams/:id/repos/:owner/:repo
+    PUT /teams/:id/repos/:org/:repo
 
 ### Response
 

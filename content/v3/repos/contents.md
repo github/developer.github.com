@@ -66,7 +66,7 @@ content
 : _Required_ **string** - The new file content.
 
 branch
-: _Optional_ **string** - The branch name.  Defaults to `master`.
+: _Optional_ **string** - The branch name. If not provided, uses the repository's default branch (usually `master`)
 
 author.name
 : _Optional_ **string** - The name of the author of the commit.
@@ -113,7 +113,7 @@ sha
 : _Required_ **string** - The blob SHA of the content being replaced.
 
 branch
-: _Optional_ **string** - The branch name.  Defaults to `master`.
+: _Optional_ **string** - The branch name. If not provided, uses the repository's default branch (usually `master`)
 
 author.name
 : _Optional_ **string** - The name of the author of the commit.
@@ -158,7 +158,7 @@ sha
 : _Required_ **string** - The blob SHA of the content being removed.
 
 branch
-: _Optional_ **string** - The branch name.  Defaults to `master`.
+: _Optional_ **string** - The branch name. If not provided, uses the repository's default branch (usually `master`)
 
 author.name
 : _Optional_ **string** - The name of the author of the commit.

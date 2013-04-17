@@ -8,10 +8,10 @@ title: File Manipulation | GitHub API
 {:toc}
 
 With the GitHub API, you can create, modify, and delete files that are stored
-in repositories you can have access to. You have two ways to accomplish your goals:
+in repositories you have access to. There are two ways to accomplish your goals:
 
-* Using [the Repo Contents API](http://developer.github.com/v3/repos/contents/)
-* Using [the low-level Git API](http://developer.github.com/v3/git/)
+* Using [the Repo Contents API](/v3/repos/contents/)
+* Using [the low-level Git API](/v3/git/)
 
 Your choice of which to use depends on what you're trying to accomplish.
 The Repo Contents API is far easier to use, while the low-level API enables you to
@@ -22,8 +22,8 @@ gists (with comments) for the low-level git work.
 
 ## Creating files
 
-To create a file, you'll perform an HTTP `PUT` request at the repository
-and path you're interested in creating a file at. The path is relative to the top-level
+To create a file, you'll perform an HTTP `PUT` request. The URL is the repository
+and path where you want to create the file. The path is relative to the top-level
 directory.
 
 For example, to create a new file on the `master` branch, called _test.txt_ in 
@@ -52,7 +52,7 @@ Now, here's the same action using the low-level git API:
 ## Updating Files
 
 In order to update a file in a repository, you'll need to know both the file's 
-path, as well as it's SHA code. Retrieving the SHA is as simpe as querying the
+path, as well as its SHA code. Retrieving the SHA is as simple as querying the
 file contents; the SHA comes back as part of the resulting hash:
 
 ```ruby

@@ -73,28 +73,33 @@ You can see how much more verbose this option is.
 ## Updating Files
 
 In order to update a file in a repository, you'll need to know both the file's 
-path, as well as its SHA hash. In order to determine the SHA, you'll need to calculate
-it [the same way that git does][git-sha-calc]. In Ruby, updating a file with the
-API might look like this:
+path, as well as its SHA hash. In order to determine the SHA, you'll can calculate
+it [the same way that git does][git-sha-calc], or retrieve the contents via the API.
+In Ruby, updating a file with might look like this:
 
     require 'octokit'
-    require 'digest/sha1'
-    
+
     # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
     login = ENV['GH_LOGIN']
     password = ENV['GH_LOGIN_PASSWORD']
     repo = "gjtorikian/crud-test"
-    
-    client = Octokit::Client.new(:login => login, :password => password)
-    contents = "I changed the contents"
 
+    client = Octokit::Client.new(:login => login, :password => password)
+    # you can be more efficient here by calculating the SHA yourself
+    content_sha = client.contents(repo, :path => 'test/text.txt').sha
+
+    client.update_contents(repo, 'test/test.txt', :content => contents,
+                                                  :sha => content_sha,
+                                                  :message => "My next :cool: commit message")
+
+
+To calculate the SHA, you can use the following Ruby code:
+
+    require 'digest/sha1'
+ 
+    contents = "Here's some new content"
     header = "blob #{contents.size}\0#{contents}"
     sha1 = Digest::SHA1.hexdigest(header)
-    
-    client.update_contents(repo, 'test/test.txt', :content => contents,
-                                              :sha => sha1,
-                                              :message => "My next :cool: commit message")
-
 
 For the low-level git API, you don't need to provide the SHA; in fact, you can use
 the same code as creating a file. Just provide some new content and you're good to go.
@@ -114,7 +119,8 @@ look in Ruby:
     repo = "gjtorikian/crud-test"
 
     client = Octokit::Client.new(:login => login, :password => password)
-    contents = "I changed the contents"
+    # again, you can be more efficient here by calculating the SHA yourself
+    content_sha = client.contents(repo, :path => 'test/text.txt').sha
 
     header = "blob #{contents.size}\0#{contents}"
     sha1 = Digest::SHA1.hexdigest(header)

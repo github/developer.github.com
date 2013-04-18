@@ -111,7 +111,7 @@ content
 : _Required_ **string** - The updated file content.
 
 sha
-: _Required_ **string** - The blob SHA of the content being replaced.
+: _Required_ **string** - The blob SHA of the file being replaced.
 
 branch
 : _Optional_ **string** - The branch name. If not provided, uses the repository's 
@@ -157,7 +157,7 @@ message
 : _Required_ **string** - The commit message.
 
 sha
-: _Required_ **string** - The blob SHA of the content being removed.
+: _Required_ **string** - The blob SHA of the file being removed.
 
 branch
 : _Optional_ **string** - The branch name. If not provided, uses the repository's 

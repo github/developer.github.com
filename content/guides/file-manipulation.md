@@ -77,21 +77,21 @@ path, as well as its SHA hash. In order to determine the SHA, you'll need to cal
 it [the same way that git does][git-sha-calc]. In Ruby, updating a file with the
 API might look like this:
 
-require 'octokit'
-require 'digest/sha1'
+    require 'octokit'
+    require 'digest/sha1'
+    
+    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+    login = ENV['GH_LOGIN']
+    password = ENV['GH_LOGIN_PASSWORD']
+    repo = "gjtorikian/crud-test"
+    
+    client = Octokit::Client.new(:login => login, :password => password)
+    contents = "I changed the contents"
 
-# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-login = ENV['GH_LOGIN']
-password = ENV['GH_LOGIN_PASSWORD']
-repo = "gjtorikian/crud-test"
-
-client = Octokit::Client.new(:login => login, :password => password)
-contents = "I changed the contents"
-
-header = "blob #{contents.size}\0#{contents}"
-sha1 = Digest::SHA1.hexdigest(header)
-
-client.update_contents(repo, 'test/test.txt', :content => contents,
+    header = "blob #{contents.size}\0#{contents}"
+    sha1 = Digest::SHA1.hexdigest(header)
+    
+    client.update_contents(repo, 'test/test.txt', :content => contents,
                                               :sha => sha1,
                                               :message => "My next :cool: commit message")
 

@@ -83,12 +83,7 @@ $(function() {
         .attr("href", "https://status.github.com")
         .addClass(data.status)
         .attr("title", "API Status: " + data.status + ". Click for details.")
-        .text("Status: " + data.status);
-      var img = $("<img>")
-        .attr("src", "/images/status-icon-" + data.status + ".png")
-        .height(16)
-        .width(16);
-      link.append(img);
+        .append('<span class="icon mega-icon status-icon mega-icon-invertocat"></span>');
       $('.api-status').html(link);
     }
   });

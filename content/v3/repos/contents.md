@@ -8,13 +8,15 @@ title: Repo Contents | GitHub API
 {:toc}
 
 These API methods let you retrieve the contents of files within a repository as
-Base64 encoded content. See [media types](/v3/media/) for requesting raw or other formats.
+Base64 encoded content. See [media types](#custom-media-types) for requesting raw format.
 
 ## Get the README
 
 This method returns the preferred README for a repository.
 
     GET /repos/:owner/:repo/readme
+
+READMEs support [a custom media type](#custom-media-types) for getting the raw content.
 
 ### Parameters
 
@@ -31,6 +33,9 @@ ref
 This method returns the contents of any file or directory in a repository.
 
     GET /repos/:owner/:repo/contents/:path
+
+Files and symlinks support [a custom media type](#custom-media-types) for getting the raw content.
+Directories do _not_ support custom media types.
 
 *Note*: To get a repository's contents recursively, you can [recursively get
 the tree](/v3/git/trees/).
@@ -94,3 +99,11 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball > octokit.tar.gz
                                  Dload  Upload   Total   Spent    Left  Speed
 100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
 </pre>
+
+## Custom media types
+
+[READMEs](#get-the-readme), [files](#get-contents), and [symlinks](#get-contents) support the following custom media type.
+
+    application/vnd.github.VERSION.raw
+
+You can read more about the use of media types in the API [here](/v3/media/).

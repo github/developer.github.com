@@ -42,8 +42,9 @@
 <li><a href="#get-the-readme">Get the README</a></li>
   <li><a href="#get-contents">Get contents</a></li>
   <li><a href="#get-archive-link">Get archive link</a></li>
+  <li><a href="#custom-media-types">Custom media types</a></li>
 </ul><p>These API methods let you retrieve the contents of files within a repository as
-Base64 encoded content. See <a href="/v3/media/">media types</a> for requesting raw or other formats.</p>
+Base64 encoded content. See <a href="#custom-media-types">media types</a> for requesting raw format.</p>
 
 <h2 id="get-the-readme">Get the README</h2>
 
@@ -51,6 +52,8 @@ Base64 encoded content. See <a href="/v3/media/">media types</a> for requesting 
 
 <pre><code>GET /repos/:owner/:repo/readme
 </code></pre>
+
+<p>READMEs support <a href="#custom-media-types">a custom media type</a> for getting the raw content.</p>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -88,6 +91,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code>GET /repos/:owner/:repo/contents/:path
 </code></pre>
+
+<p>Files and symlinks support <a href="#custom-media-types">a custom media type</a> for getting the raw content.
+Directories do <em>not</em> support custom media types.</p>
 
 <p><em>Note</em>: To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get
 the tree</a>.</p>
@@ -229,6 +235,15 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball &gt; octokit.tar.g
                                  Dload  Upload   Total   Spent    Left  Speed
 100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
 </pre>
+
+<h2 id="custom-media-types">Custom media types</h2>
+
+<p><a href="#get-the-readme">READMEs</a>, <a href="#get-contents">files</a>, and <a href="#get-contents">symlinks</a> support the following custom media type.</p>
+
+<pre><code>application/vnd.github.VERSION.raw
+</code></pre>
+
+<p>You can read more about the use of media types in the API <a href="/v3/media/">here</a>.</p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

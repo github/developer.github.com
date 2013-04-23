@@ -41,6 +41,14 @@ state
 : _Optional_ **string** - `open` or `closed` to filter by state. Default
 is `open`.
 
+head
+: _Optional_ **string** - Filter pulls by head user and branch name in the format
+of: `user:ref-name`. Example: `github:new-script-format`.
+
+base
+: _Optional_ **string** - Filter pulls by base branch name. Example:
+`gh-pages`.
+
 ### Response
 
 <%= headers 200 %>

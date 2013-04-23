@@ -69,20 +69,23 @@ branch
 : _Optional_ **string** - The branch name. If not provided, uses the repository's 
 default branch (usually `master`).
 
-committer.name
-: _Optional_ **string** - The name of the committer of the commit.
+### Optional Parameters
 
-committer.email
-: _Optional_ **string** - The email of the committer of the commit.
+The `committer` section is optional and is filled in with the `author`
+information if omitted. If the `author` information is omitted, the authenticated 
+user's information is used.
 
 author.name
-: _Optional_ **string** - The name of the author of the commit.
+: **String** - The name of the author of the commit
 
 author.email
-: _Optional_ **string** - The email of the author of the commit.
+: **String** - The email of the author of the commit
 
-_Note_: The `author` information, if omitted, will be taken from the committer information.
-The `committer` information, if omitted, will be taken from the authenticated user.
+committer.name
+: **String** - The name of the committer of the commit
+
+committer.email
+: **String** - The email of the committer of the commit
 
 ### Example Input
 
@@ -120,20 +123,23 @@ branch
 : _Optional_ **string** - The branch name. If not provided, uses the repository's 
 default branch (usually `master`).
 
-committer.name
-: _Optional_ **string** - The name of the committer of the commit.
+### Optional Parameters
 
-committer.email
-: _Optional_ **string** - The email of the committer of the commit.
+The `committer` section is optional and is filled in with the `author`
+information if omitted. If the `author` information is omitted, the authenticated 
+user's information is used.
 
 author.name
-: _Optional_ **string** - The name of the author of the commit.
+: **String** - The name of the author of the commit
 
 author.email
-: _Optional_ **string** - The email of the author of the commit.
+: **String** - The email of the author of the commit
 
-_Note_: The `author` information, if omitted, will be taken from the committer information.
-The `committer` information, if omitted, will be taken from the authenticated user.
+committer.name
+: **String** - The name of the committer of the commit
+
+committer.email
+: **String** - The email of the committer of the commit
 
 ### Example Input
 
@@ -169,20 +175,23 @@ branch
 : _Optional_ **string** - The branch name. If not provided, uses the repository's 
 default branch (usually `master`).
 
-committer.name
-: _Optional_ **string** - The name of the committer of the commit.
+### Optional Parameters
 
-committer.email
-: _Optional_ **string** - The email of the committer of the commit.
+The `committer` section is optional and is filled in with the `author`
+information if omitted. If the `author` information is omitted, the authenticated 
+user's information is used.
 
 author.name
-: _Optional_ **string** - The name of the author of the commit.
+: **String** - The name of the author of the commit
 
 author.email
-: _Optional_ **string** - The email of the author of the commit.
+: **String** - The email of the author of the commit
 
-_Note_: The `author` information, if omitted, will be taken from the committer information.
-The `committer` information, if omitted, will be taken from the authenticated user.
+committer.name
+: **String** - The name of the committer of the commit
+
+committer.email
+: **String** - The email of the committer of the commit
 
 ### Example Input
 

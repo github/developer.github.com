@@ -159,10 +159,12 @@ triggered on pushes.
 <%= headers 200 %>
 <%= json :hook %>
 
-## Test a hook
+## Test a `push` hook
 
 This will trigger the hook with the latest push to the current
-repository.
+repository if the hook is subscribed to `push` events. If the
+hook is not subscribed to `push` events, the server will respond
+with 204 but no test POST will be generated.
 
     POST /repos/:owner/:repo/hooks/:id/tests
 

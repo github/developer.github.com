@@ -43,7 +43,7 @@
   <li><a href="#get-single-hook">Get single hook</a></li>
   <li><a href="#create-a-hook">Create a hook</a></li>
   <li><a href="#edit-a-hook">Edit a hook</a></li>
-  <li><a href="#test-a-hook">Test a hook</a></li>
+  <li><a href="#test-a-push-hook">Test a <code>push</code> hook</a></li>
   <li><a href="#delete-a-hook">Delete a hook</a></li>
   <li><a href="#pubsubhubbub">PubSubHubbub</a></li>
 </ul><p>The Repository Hooks API allows repository admins to manage the post-receive
@@ -301,10 +301,12 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="test-a-hook">Test a hook</h2>
+<h2 id="test-a-push-hook">Test a <code>push</code> hook</h2>
 
 <p>This will trigger the hook with the latest push to the current
-repository.</p>
+repository if the hook is subscribed to <code>push</code> events. If the
+hook is not subscribed to <code>push</code> events, the server will respond
+with 204 but no test POST will be generated.</p>
 
 <pre><code>POST /repos/:owner/:repo/hooks/:id/tests
 </code></pre>

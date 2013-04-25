@@ -382,6 +382,18 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"changed_files"</span><span class="o">:</span> <span class="mi">5</span>
 <span class="p">}</span></code></pre>
 
+<h3 id="mergability">Mergability</h3>
+
+<p>Each time the pull request receives new commits, GitHub creates a merge commit
+to <em>test</em> whether the pull request can be automatically merged into the base
+branch. (This <em>test</em> commit is not added to the base branch or the head branch.)
+The <code>merge_commit_sha</code> attribute holds the SHA of the <em>test</em> merge commit;
+however, this attribute is <a href="/#expected-changes">deprecated</a> and is scheduled for
+removal in the next version of the API. The Boolean <code>mergable</code> attribute will
+remain to indicate whether the pull request can be automatically merged.</p>
+
+<h3 id="alternative-response-formats">Alternative Response Formats</h3>
+
 <p>Pass the appropriate <a href="/v3/media/#commits-commit-comparison-and-pull-requests">media type</a> to fetch diff and patch formats.</p>
 
 <h2 id="create-a-pull-request">Create a pull request</h2>

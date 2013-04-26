@@ -30,15 +30,17 @@ ref
 
 ## Get contents
 
-This method returns the contents of any file or directory in a repository.
+This method returns the contents of a file or directory in a repository.
 
     GET /repos/:owner/:repo/contents/:path
 
 Files and symlinks support [a custom media type](#custom-media-types) for getting the raw content.
 Directories do _not_ support custom media types.
 
-*Note*: To get a repository's contents recursively, you can [recursively get
-the tree](/v3/git/trees/).
+*Notes*:
+
+- To get a repository's contents recursively, you can [recursively get the tree](/v3/git/trees/).
+- This API supports files up to 1 megabyte in size.
 
 ### Parameters
 

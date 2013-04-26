@@ -39,6 +39,20 @@ sha
 <%= headers 200 %>
 <%= json(:status) { |h| [h] } %>
 
+## Get the Status of a branch
+
+    GET /repos/:owner/:repo/statuses/branch/:name
+
+### Parameters
+
+name
+: _Required_ **string** - Name of the branch to get the status for
+
+### Response
+
+<%= headers 200 %>
+<%= json(:status) { |h| h } %>
+
 ## Create a Status
 
     POST /repos/:owner/:repo/statuses/:sha

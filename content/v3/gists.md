@@ -86,6 +86,7 @@ content
 
 _Note:_ Don't name your files "gistfile" with a numerical suffix.  This is the
 format of the automatic naming scheme that Gist uses internally.
+File content must be properly escaped.
 
 ### Response
 

@@ -87,7 +87,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-contents">Get contents</h2>
 
-<p>This method returns the contents of any file or directory in a repository.</p>
+<p>This method returns the contents of a file or directory in a repository.</p>
 
 <pre><code>GET /repos/:owner/:repo/contents/:path
 </code></pre>
@@ -95,10 +95,12 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>Files and symlinks support <a href="#custom-media-types">a custom media type</a> for getting the raw content.
 Directories do <em>not</em> support custom media types.</p>
 
-<p><em>Note</em>: To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get
-the tree</a>.</p>
+<p><em>Notes</em>:</p>
 
-<h3 id="parameters-1">Parameters</h3>
+<ul>
+<li>To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get the tree</a>.</li>
+  <li>This API supports files up to 1 megabyte in size.</li>
+</ul><h3 id="parameters-1">Parameters</h3>
 
 <dl>
 <dt>path</dt>

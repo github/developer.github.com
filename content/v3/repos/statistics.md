@@ -7,9 +7,20 @@ title: Repo Stats | GitHub API
 * TOC
 {:toc}
 
-These API methods allow you to get the data that powers the graphs on GitHub.  All
-methods, excluding `punch_card`, will return a `202` if the data isn't yet available
-and cached.  Subsequent request should return the data.
+The repository stats API allows you to fetch the data that GitHub uses for visualizing different
+types of repository activity.
+
+### A word about caching
+
+Computing repository statistics is an expensive operation, so we try to return cached
+data whenever possible.  When you ask for a repositories statistics, and the data hasn't
+been cached, you'll receive a `202` response and a background job will get kicked off that
+starts compiling these statistics.  Subsequent requests should return the data.
+
+Reposotiry statistics are cached by the master sha.  Pushing to a repository will
+bust its stats cache.
+
+***NOTE:** `202` responses do *not* count towards API rate limits.
 
 ## Get contributors list with additions, deletions and commit counts
 

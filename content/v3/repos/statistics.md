@@ -61,11 +61,15 @@ is a group of commits per day, starting on `Sunday`.
 <%= headers 200 %>
 <%= json(:repo_stats_code_frequency) %>
 
-## Get the weekly commit count for the repo owner and others
+## Get the weekly commit count for the repo owner and everyone else
 
     GET /repos/:owner/:repo/stats/code_frequency
 
 ### Response
+
+Returns the total commit counts for the `owner` and total commit counts in `all`.
+`all` is everyone combined, including the `owner`.  If you'd like to get the commit
+counts for non-owners, you can subtraced `all` from `owner`.
 
 <%= headers 200 %>
 <%= json(:repo_stats_participation) %>

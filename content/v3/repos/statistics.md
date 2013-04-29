@@ -13,12 +13,12 @@ types of repository activity.
 ### A word about caching
 
 Computing repository statistics is an expensive operation, so we try to return cached
-data whenever possible.  When you ask for a repositories statistics, and the data hasn't
-been cached, you'll receive a `202` response and a background job will get kicked off that
-starts compiling these statistics.  Subsequent requests should return the data.
+data whenever possible.  If the data hasn't been cached when you query a repository's 
+stats, you'll receive a `202` response; a background job is also fired to
+start compiling these statistics.  Subsequent requests should return the data.
 
-Reposotiry statistics are cached by the master sha.  Pushing to a repository will
-bust its stats cache.
+Repository statistics are cached by the master sha.; pushing to a repository resets
+its stats cache.
 
 ***NOTE:** `202` responses do *not* count towards API rate limits.
 
@@ -72,7 +72,7 @@ to a repository.
 
 Returns the total commit counts for the `owner` and total commit counts in `all`.
 `all` is everyone combined, including the `owner`.  If you'd like to get the commit
-counts for non-owners, you can subtraced `all` from `owner`.
+counts for non-owners, you can subtract `all` from `owner`.
 
 <%= headers 200 %>
 <%= json(:repo_stats_participation) %>
@@ -83,13 +83,14 @@ counts for non-owners, you can subtraced `all` from `owner`.
 
 ### Response
 
-Each array contains the day number, hour number and number of commits:
+Each array contains the day number, hour number, and number of commits:
 
-* `0-6` = Sunday - Saturday
-* `0-23` = Hour of day
+* `0-6`: Sunday - Saturday
+* `0-23`: Hour of day
 * Number of commits
 
-For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays.
+For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 
+2:00pm hour on Tuesdays.
 
 <%= headers 200 %>
 <%= json(:repo_stats_punch_card) %>

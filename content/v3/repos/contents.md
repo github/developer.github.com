@@ -76,16 +76,16 @@ information if omitted. If the `committer` information is omitted, the authentic
 user's information is used.
 
 author.name
-: **String** - The name of the author of the commit
+: **string** - The name of the author of the commit
 
 author.email
-: **String** - The email of the author of the commit
+: **string** - The email of the author of the commit
 
 committer.name
-: **String** - The name of the committer of the commit
+: **string** - The name of the committer of the commit
 
 committer.email
-: **String** - The email of the committer of the commit
+: **string** - The email of the committer of the commit
 
 ### Example Input
 
@@ -130,16 +130,16 @@ information if omitted. If the `committer` information is omitted, the authentic
 user's information is used.
 
 author.name
-: **String** - The name of the author of the commit
+: **string** - The name of the author of the commit
 
 author.email
-: **String** - The email of the author of the commit
+: **string** - The email of the author of the commit
 
 committer.name
-: **String** - The name of the committer of the commit
+: **string** - The name of the committer of the commit
 
 committer.email
-: **String** - The email of the committer of the commit
+: **string** - The email of the committer of the commit
 
 ### Example Input
 
@@ -182,16 +182,16 @@ information if omitted. If the `committer` information is omitted, the authentic
 user's information is used.
 
 author.name
-: **String** - The name of the author of the commit
+: **string** - The name of the author of the commit
 
 author.email
-: **String** - The email of the author of the commit
+: **string** - The email of the author of the commit
 
 committer.name
-: **String** - The name of the committer of the commit
+: **string** - The name of the committer of the commit
 
 committer.email
-: **String** - The email of the committer of the commit
+: **string** - The email of the committer of the commit
 
 ### Example Input
 

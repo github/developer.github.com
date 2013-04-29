@@ -63,7 +63,7 @@ is a group of commits per day, starting on `Sunday`.
 
 ## Get the weekly commit count for the repo owner and everyone else
 
-    GET /repos/:owner/:repo/stats/code_frequency
+    GET /repos/:owner/:repo/stats/participation
 
 ### Response
 

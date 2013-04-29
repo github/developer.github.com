@@ -48,6 +48,7 @@ is a group of commits per day, starting on `Sunday`.
 ### Response
 
 <%= headers 200 %>
+<%= json(:repo_stats_code_frequency) %>
 
 ## Get the weekly commit count for the repo owner and others
 
@@ -56,6 +57,7 @@ is a group of commits per day, starting on `Sunday`.
 ### Response
 
 <%= headers 200 %>
+<%= json(:repo_stats_participation) %>
 
 ## Get the number of commits per hour in day
 
@@ -63,4 +65,13 @@ is a group of commits per day, starting on `Sunday`.
 
 ### Response
 
+Each array contains the day number, hour number and number of commits:
+
+* `0-6` = Sunday - Saturday
+* `0-23` = Hour of day
+* Number of commits
+
+For example, `[2, 14, 25]` would indicate that there were 25 total commits, during the 2:00pm hour on Tuesdays.
+
 <%= headers 200 %>
+<%= json(:repo_stats_punch_card) %>

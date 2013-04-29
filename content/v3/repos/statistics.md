@@ -70,7 +70,7 @@ is a group of commits per day, starting on `Sunday`.
 <%= headers 200 %>
 <%= json(:repo_stats_participation) %>
 
-## Get the number of commits per hour in day
+## Get the number of commits per hour in each day
 
     GET /repos/:owner/:repo/stats/punch_card
 

@@ -8,17 +8,18 @@ title: File Manipulation | GitHub API
 {:toc}
 
 With the GitHub API, you can create, modify, and delete files that are stored
-in repositories you have access to. There are two ways to accomplish your goals:
+in repositories you have access to. There are two ways to do this:
 
-* Using [the Repo Contents API](/v3/repos/contents/)
-* Using [the low-level Git API](/v3/git/)
+* [the Repository Contents API](/v3/repos/contents/)
+* [the low-level git API](/v3/git/)
 
 Your choice of which to use depends on what you're trying to accomplish.
 The Repo Contents API is far easier to use, while the low-level API enables you to
 have more precise control over your updates. 
 
 This guide will focus almost entirely on the Repo Contents API. We'll provide corresponding
-gists (with comments) for the low-level git work.
+code (with comments) for the low-level git work, but we won't go into much length
+describing them. The git API is better suited for other tasks.
 
 ## Creating files
 
@@ -70,7 +71,7 @@ Now, here's the same action using the low-level git API:
 
 You can see how much more verbose this option is.
 
-## Updating Files
+## Updating files
 
 In order to update a file in a repository, you'll need to know both the file's 
 path, as well as its SHA hash. In order to determine the SHA, you'll can calculate
@@ -102,9 +103,9 @@ To calculate the SHA, you can use the following Ruby code:
     sha1 = Digest::SHA1.hexdigest(header)
 
 For the low-level git API, you don't need to provide the SHA; in fact, you can use
-the same code as creating a file. Just provide some new content and you're good to go.
+the same code as creating a file. Just provide some new `content` and you're good to go.
 
-## Deleting Files
+## Deleting files
 
 Deleting a file is just as easy. We're going to call the `DELETE` method on a file
 path. Once again, you need to provide the SHA of the file you want deleted. Here's how it'd 

@@ -18,6 +18,16 @@ and cached.  Subsequent request should return the data.
 ### Response
 
 <%= headers 200 %>
+<%= json(:repo_stats_contributors) %>
+
+
+**Weekly Hash**
+
+* `w` - Start of the week
+* `a` - Number of additions
+* `d` - Number of deletions
+* `c` - Number of commits
+
 
 ## Get the last year of commit activity data
 

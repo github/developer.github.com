@@ -1126,6 +1126,19 @@ module GitHub
       :verified => true,
       :primary  => true
     }
+
+    REPO_STATS_CONTRIBUTORS = [{
+      :author => USER,
+      :total => 135,
+      :weeks => [
+        {
+          :w => "2013-04-01",
+          :a => 6898,
+          :d => 77,
+          :c  => 10
+        }
+      ]
+    }]
   end
 end
 

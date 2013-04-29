@@ -58,6 +58,9 @@ is a group of commits per day, starting on `Sunday`.
 
 ### Response
 
+Returns a weekly aggregate of the number of additions and deletions pushed
+to a repository.
+
 <%= headers 200 %>
 <%= json(:repo_stats_code_frequency) %>
 

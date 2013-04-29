@@ -50,7 +50,7 @@ the tree](/v3/git/trees/).
 
 ## Create a file
 
-This method allows you to create a new file in a repository
+This method creates a new file in a repository
 
     PUT /repos/:owner/:repo/contents/:path
 
@@ -101,7 +101,7 @@ committer.email
 
 ## Update a file
 
-This method allows you to update a file in a repository
+This method updates a file in a repository
 
     PUT /repos/:owner/:repo/contents/:path
 
@@ -156,7 +156,7 @@ committer.email
 
 ## Delete a file
 
-This method allows you to delete a file in a repository
+This method deletes a file in a repository
 
     DELETE /repos/:owner/:repo/contents/:path
 

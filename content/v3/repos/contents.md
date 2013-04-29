@@ -71,8 +71,8 @@ default branch (usually `master`).
 
 ### Optional Parameters
 
-The `committer` section is optional and is filled in with the `author`
-information if omitted. If the `author` information is omitted, the authenticated 
+The `author` section is optional and is filled in with the `committer`
+information if omitted. If the `committer` information is omitted, the authenticated 
 user's information is used.
 
 author.name
@@ -125,8 +125,8 @@ default branch (usually `master`).
 
 ### Optional Parameters
 
-The `committer` section is optional and is filled in with the `author`
-information if omitted. If the `author` information is omitted, the authenticated 
+The `author` section is optional and is filled in with the `committer`
+information if omitted. If the `committer` information is omitted, the authenticated 
 user's information is used.
 
 author.name
@@ -177,8 +177,8 @@ default branch (usually `master`).
 
 ### Optional Parameters
 
-The `committer` section is optional and is filled in with the `author`
-information if omitted. If the `author` information is omitted, the authenticated 
+The `author` section is optional and is filled in with the `committer`
+information if omitted. If the `committer` information is omitted, the authenticated 
 user's information is used.
 
 author.name

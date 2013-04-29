@@ -82,7 +82,7 @@ Each array contains the day number, hour number and number of commits:
 * `0-23` = Hour of day
 * Number of commits
 
-For example, `[2, 14, 25]` would indicate that there were 25 total commits, during the 2:00pm hour on Tuesdays.
+For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 2:00pm hour on Tuesdays.
 
 <%= headers 200 %>
 <%= json(:repo_stats_punch_card) %>

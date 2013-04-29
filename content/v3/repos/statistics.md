@@ -31,11 +31,15 @@ and cached.  Subsequent request should return the data.
 
 ## Get the last year of commit activity data
 
+Returns the last year of commit activity grouped by week.  The `days` array
+is a group of commits per day, starting on `Sunday`.
+
     GET /repos/:owner/:repo/stats/commit_activity
 
 ### Response
 
 <%= headers 200 %>
+<%= json(:repo_stats_commit_activity) %>
 
 ## Get the number of additions and deletions per week
 

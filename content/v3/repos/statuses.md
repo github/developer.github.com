@@ -25,33 +25,19 @@ Note that the `repo:status` [OAuth scope](/v3/oauth/#scopes) grants targeted
 access to Statuses **without** also granting access to repo code, while the
 `repo` scope grants permission to code as well as statuses.
 
-## List Statuses for a specific SHA
+## List Statuses for a specific Ref
 
-    GET /repos/:owner/:repo/statuses/:sha
+    GET /repos/:owner/:repo/statuses/:ref
 
 ### Parameters
 
-sha
-: _Required_ **string** - Sha to list the statuses from
+ref
+: _Required_ **string** - Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.
 
 ### Response
 
 <%= headers 200 %>
 <%= json(:status) { |h| [h] } %>
-
-## Get the Status of a branch
-
-    GET /repos/:owner/:repo/statuses/branch/:name
-
-### Parameters
-
-name
-: _Required_ **string** - Name of the branch to get the status for
-
-### Response
-
-<%= headers 200 %>
-<%= json(:status) { |h| h } %>
 
 ## Create a Status
 

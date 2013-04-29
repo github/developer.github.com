@@ -132,6 +132,9 @@ The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated 
 user's information is used.
 
+You must provide values for both `name` and `email`, whether you choose to use
+`author` or `committer`. Otherwise, you'll receive a `500` status code.
+
 author.name
 : **string** - The name of the author of the commit
 

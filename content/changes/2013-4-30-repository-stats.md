@@ -2,24 +2,21 @@
 kind: change
 title: Repository Statistics
 created_at: 2013-4-30
-author_name: caged
+author_name: Caged
 ---
 
-We are experimenting with changes to the "Hookshot" backend that powers service
-hooks.  There were some significant networking changes with the new cluster,
-so there are some new IP whitelist rules for hooks:
+Today we're happy to open our [repository statistics api](/v3/repos/statistics) to everyone.  We're using
+repository statistics to power [our graphs](https://github.com/github/linguist/graphs),
+but we can't wait to see what others can do with this information.
 
-* 204.232.175.64/27
-* 192.30.252.0/22
+Starting today, these resources are available to you:
 
-These are in CIDR notation.  They represent a significant range of GitHub
-addresses, meaning this should be the last IP change for a while.  Once this
-cluster is activated and we shut the other cluster down, we will be removing
-the other entries.
+* **[Contributors](/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts)**
+* **[Commit Activity](/v3/repos/statistics/#get-the-last-year-of-commit-activity-data)**
+* **[Code Frequency](/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week)**
+* **[Participation](/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repo-owner-and-everyone-else)**
+* **[Punch Card](/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day)**
 
-We are currently testing the new backend with all repositories in the GitHub
-organization only, and expect to start testing it with user data next week.
+Enjoy!
 
-This also means we should be able to start accepting [GitHub Services pull
-requests](https://github.com/github/github-services/pulls) very soon :)
 

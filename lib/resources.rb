@@ -31,7 +31,8 @@ module GitHub
         :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0',
         :pezra        => 'f38112009dc16547051c8ac246cee443',
         :rick         => 'a44d5abad6e86cff4e34d9f0839535c9',
-        :agh          => '6af915d3c6aa4ad30bbad43d8035fe10'
+        :agh          => '6af915d3c6aa4ad30bbad43d8035fe10',
+        :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

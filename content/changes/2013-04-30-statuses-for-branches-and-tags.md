@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Commit statuses now work for branches and tags
+title: Commit Statuses Now Available for Branches and Tags
 created_at: 2013-04-30
 author_name: foca
 ---

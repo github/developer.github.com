@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>GitHub API</title>
+  <title>Improved Support for Submodules in the Repository Contents API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,96 +36,56 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="the-github-api">The GitHub API</h1>
+    <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
+<h2 class="title">
+  <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
+</h2>
 
-<p>This describes the resources that make up the official GitHub API v3. If
-you have any problems or requests please contact
-<a href="mailto:support@github.com?subject=APIv3">support</a>.</p>
+<div class="meta">
+  <div class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/592e1e6f041f9a4ec51846fd82013aea?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+    <span class="author vcard fn">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+    </span>
+    <span class="published">
+      April 30, 2013
+    
+    </span>
+  </div>
+</div>
 
-<p>For the new API v3, start browsing the resources on the right »</p>
 
-<p>View the <a href="/changes">API Changelog</a> for information on existing and
-planned changes to the API.</p>
+<p>When you view a repository with a submodule on github.com, you get useful links and information for the submodule.</p>
 
-<h2 id="current-version">Current Version</h2>
+<p><a href="/images/posts/submodule-links.png"><img src="/images/posts/submodule-links.png" alt="Repository Contents with Submodule"></a></p>
 
-<pre><code>Accept: application/vnd.github.beta+json
-</code></pre>
+<p>Today we’re making that data available in the <a href="/v3/repos/contents/#get-contents">Repository Contents API</a>.</p>
 
-<p>The GitHub API version is currently in beta.  <a href="/v3/media/">The <code>beta</code> media type</a>
-property will be valid until sometime in 2013.  A notice will be given closer
-to the actual date.</p>
+<pre class="terminal">
+curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
-<p>We consider the “beta” API unchangeable.  <a href="https://github.com/contact">File a support issue</a>
-if you have problems.</p>
+{
+  "name": "qunit",
+  "path": "test/qunit",
+  "type": "submodule",
+  "submodule_git_url": "git://github.com/jquery/qunit.git",
+  "sha": "6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "size": 0,
+  "url": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+  "git_url": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "html_url": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "_links": {
+    "self": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+    "git": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+    "html": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"
+  }
+}
+</pre>
 
-<h4 id="expected-changes">Expected Changes</h4>
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+</div>
 
-<p>These changes are <em>not</em> implemented, just planned for the next major API version.</p>
-
-<ul>
-<li>
-<code>[ ]</code> Standardize on existing <code>*_url</code> attributes for hypermedia.  Remove all <code>_links</code>
-objects.</li>
-  <li>
-<code>[✓]</code> <del>The ‘/repos/:owner/:repo/hooks/:id/test’ action becomes
-‘/repos/:owner/:repo/hooks/:id/tests’.</del>
-</li>
-  <li>
-<code>[✓]</code> <del>The ‘/gists/:id/fork’ action becomes ‘/gists/:id/forks’.</del> </li>
-  <li>
-<code>[ ]</code> Gist forks/history objects become separate API calls.</li>
-  <li>
-<code>[ ]</code> Gist files object is not returned on Gist listings.</li>
-  <li>
-<code>[ ]</code> Commit schema will change to be <a href="https://gist.github.com/3a2e5779588e21b0c0f3">more consistent</a>.</li>
-  <li>
-<code>[ ]</code> <code>master_branch</code> becomes <code>default_branch</code>.</li>
-  <li>
-<code>[ ]</code> <code>integrate_branch</code> on the <a href="/v3/repos/#get">repo API</a> will no longer be
-returned.</li>
-  <li>
-<code>[ ]</code> <code>merge_commit_sha</code> on the <a href="/v3/pulls/#get-a-single-pull-request">pull request API</a>
-will no longer be returned.</li>
-  <li>
-<code>[ ]</code> Use the <code>private</code> attribute when creating a private repository,
-instead of setting <code>public</code> to false.</li>
-  <li>
-<code>[ ]</code> Use JSON to POST to the “repos/:owner/:repo/forks” endpoint, instead of a query string.</li>
-  <li>
-<code>[✓]</code> <del>User Emails come back <a href="/v3/users/emails/#future-response">as a hash</a> instead of a string.</del>
-</li>
-  <li>
-<code>[ ]</code> Remove the unused “bio” field for Users.</li>
-  <li>
-<code>[ ]</code> When listing the contents of a directory in the <a href="/v3/repos/contents/#get-contents">Repository Contents API</a>, fix the <code>type</code> value returned for submodules: change the value to <code>"submodule"</code> (instead of <code>"file"</code>).</li>
-</ul><h3 id="breaking-beta-changes">Breaking Beta Changes</h3>
-
-<h5 id="june-12-2012">June 12, 2012:</h5>
-<ul>
-<li>Removed API v1 support</li>
-  <li>Removed API v2 support</li>
-</ul><h5 id="june-15th-2011">June 15th, 2011:</h5>
-
-<ul>
-<li>
-<code>gravatar_url</code> is being deprecated in favor of <code>avatar_url</code> for all
-responses that include users or orgs. A default size is no longer
-included in the url.</li>
-  <li>Creating new gists (both anonymously and with an authenticated user)
-should use <code>POST /gists</code> from now on. <code>POST /users/:user/gists</code> is no
-longer supported.</li>
-</ul><h5 id="june-1st-2011">June 1st, 2011:</h5>
-
-<ul>
-<li>Removed support for PUT verb on update requests. Use POST or PATCH
-instead.</li>
-  <li>Removed <code>.json</code> extension from all URLs.</li>
-  <li>No longer using the X-Next or X-Last headers. Pagination info is
-returned in the Link header instead.</li>
-  <li>JSON-P response has completely changed to a more consistent format.</li>
-  <li>Starring gists now uses PUT verb (instead of POST) and returns 204.</li>
-</ul>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

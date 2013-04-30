@@ -38,6 +38,54 @@
       <div class="content">
     <h1 id="api-changes">API Changes</h1>
 
+<div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
+</h2>
+
+<div class="meta">
+  <div class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/592e1e6f041f9a4ec51846fd82013aea?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><span class="author vcard fn">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+    </span>
+    <span class="published">
+      April 30, 2013
+    
+    </span>
+  </div>
+</div>
+
+  <p>When you view a repository with a submodule on github.com, you get useful links and information for the submodule.</p>
+
+<p><a href="/images/posts/submodule-links.png"><img src="/images/posts/submodule-links.png" alt="Repository Contents with Submodule"></a></p>
+
+<p>Today we’re making that data available in the <a href="/v3/repos/contents/#get-contents">Repository Contents API</a>.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
+
+{
+  "name": "qunit",
+  "path": "test/qunit",
+  "type": "submodule",
+  "submodule_git_url": "git://github.com/jquery/qunit.git",
+  "sha": "6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "size": 0,
+  "url": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+  "git_url": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "html_url": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "_links": {
+    "self": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+    "git": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+    "html": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"
+  }
+}
+</pre>
+
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+</div>
+
 <div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
   <h2 class="title">
   <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Deprecating a Confusing Attribute in the Pull Request API</a>

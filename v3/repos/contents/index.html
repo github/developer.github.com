@@ -93,7 +93,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 </code></pre>
 
 <p>Files and symlinks support <a href="#custom-media-types">a custom media type</a> for getting the raw content.
-Directories do <em>not</em> support custom media types.</p>
+Directories and submodules do <em>not</em> support custom media types.</p>
 
 <p><em>Notes</em>:</p>
 
@@ -198,6 +198,34 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
+
+<h3 id="response-if-content-is-a-submodule">Response if content is a submodule</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"submodule"</span><span class="p">,</span>
+  <span class="s2">"submodule_git_url"</span><span class="o">:</span> <span class="s2">"git://github.com/jquery/qunit.git"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"qunit"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"test/qunit"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<p>The <code>submodule_git_url</code> identifies the location of the submodule repository, and the <code>sha</code> identifies a specific commit within the submodule repository.
+Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.</p>
+
+<p>If the submodule repository is not hosted on github.com, the Git URLs (<code>git_url</code> and <code>_links["git"]</code>) and the github.com URLs (<code>html_url</code> and <code>_links["html"]</code>) will have null values.</p>
 
 <h2 id="get-archive-link">Get archive link</h2>
 

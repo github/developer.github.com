@@ -6,8 +6,8 @@ author_name: foca
 ---
 
 Last week we announced [support for build statuses in the branches page][blog].
-Now we are extending this to the API. The API endpoint for commit statuses has
-been extended to allow branch and tag names, as well as commit SHAs.
+Now we are extending this to the API. The [API endpoint for commit statuses][doc]
+has been extended to allow branch and tag names, as well as commit SHAs.
 
 <pre class="terminal">
 curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
@@ -16,3 +16,4 @@ curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
 Enjoy.
 
 [blog]: https://github.com/blog/1484-check-the-status-of-your-branches
+[doc]: http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref

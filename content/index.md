@@ -46,6 +46,7 @@ objects.
 * `[ ]` Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.
 * `[✓]` <del>User Emails come back [as a hash][v3-email] instead of a string.</del>
 * `[ ]` Remove the unused "bio" field for Users.
+* `[ ]` When listing the contents of a directory in the [Repository Contents API](/v3/repos/contents/#get-contents), fix the `type` value returned for submodules: change the value to `"submodule"` (instead of `"file"`).
 
 ### Breaking Beta Changes
 

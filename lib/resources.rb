@@ -1021,6 +1021,23 @@ module GitHub
       },
     }
 
+    SUBMODULE_CONTENT = {
+      "type" => "submodule",
+      "submodule_git_url" => "git://github.com/jquery/qunit.git",
+      "size" => 0,
+      "name" => "qunit",
+      "path" => "test/qunit",
+      "sha" => "6ca3721222109997540bd6d9ccd396902e0ad2f9",
+      "url" => "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+      "git_url" => "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+      "html_url" => "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+      "_links" => {
+        "git" => "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+        "self" => "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+        "html" => "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"
+      }
+    }
+
     DIRECTORY_CONTENT = [
       {
         "type" => "file",

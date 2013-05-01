@@ -5,7 +5,7 @@ created_at: 2013-04-30
 author_name: Caged
 ---
 
-Today we're happy to open our [repository statistics api](/v3/repos/statistics) to everyone.  We're using
+Today we're happy to open our [Repository Statistics API](/v3/repos/statistics) to everyone.  We're using
 repository statistics to power [our graphs](https://github.com/github/linguist/graphs),
 but we can't wait to see what others can do with this information.
 
@@ -18,5 +18,3 @@ Starting today, these resources are available to you:
 * **[Punch Card](/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day)**
 
 Enjoy!
-
-

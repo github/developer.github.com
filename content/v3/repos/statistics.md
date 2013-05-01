@@ -22,7 +22,7 @@ which is usually master; pushing to the default branch resets the statistics cac
 
 ***NOTE:** `202` responses do *not* count towards API rate limits.
 
-## Get contributors list with additions, deletions and commit counts
+## Get contributors list with additions, deletions, and commit counts
 
     GET /repos/:owner/:repo/stats/contributors
 

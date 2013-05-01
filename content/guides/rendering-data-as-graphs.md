@@ -333,7 +333,7 @@ tweak the height and width of your treemap, passed as the first two
 arguments to `drawTreemap` above, to get all the information to show up properly.
 
 
-[D3.js]: http://D3js.org/
+[D3.js]: http://d3js.org/
 [basics-of-authentication]: ../basics-of-authentication/
 [sinatra auth github]: https://github.com/atmos/sinatra_auth_github
 [Octokit]: https://github.com/pengwynn/octokit

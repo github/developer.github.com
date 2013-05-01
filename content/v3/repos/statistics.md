@@ -1,24 +1,24 @@
 ---
-title: Repo Stats | GitHub API
+title: Repo Statistics | GitHub API
 ---
 
-# Repo Stats API
+# Repo Statistics API
 
 * TOC
 {:toc}
 
-The repository stats API allows you to fetch the data that GitHub uses for visualizing different
+The Repository Statistics API allows you to fetch the data that GitHub uses for visualizing different
 types of repository activity.
 
 ### A word about caching
 
 Computing repository statistics is an expensive operation, so we try to return cached
-data whenever possible.  If the data hasn't been cached when you query a repository's 
-stats, you'll receive a `202` response; a background job is also fired to
+data whenever possible.  If the data hasn't been cached when you query a repository's
+statistics, you'll receive a `202` response; a background job is also fired to
 start compiling these statistics.  Subsequent requests should return the data.
 
-Repository statistics are cached by the sha of the repository's default branch, 
-which is usually master; pushing to the default branch resets the stats cache.
+Repository statistics are cached by the sha of the repository's default branch,
+which is usually master; pushing to the default branch resets the statistics cache.
 
 ***NOTE:** `202` responses do *not* count towards API rate limits.
 
@@ -89,7 +89,7 @@ Each array contains the day number, hour number, and number of commits:
 * `0-23`: Hour of day
 * Number of commits
 
-For example, `[2, 14, 25]` indicates that there were 25 total commits, during the 
+For example, `[2, 14, 25]` indicates that there were 25 total commits, during the
 2:00pm hour on Tuesdays.
 
 <%= headers 200 %>

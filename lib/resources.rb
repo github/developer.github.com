@@ -962,7 +962,8 @@ module GitHub
       "token" => "abc123",
       "app" => {
         "url" => "http://my-github-app.com",
-        "name" => "my github app"
+        "name" => "my github app",
+        "client_id" => "abcde12345fghij67890"
       },
       "note" => "optional note",
       "note_url" => "http://optional/note/url",

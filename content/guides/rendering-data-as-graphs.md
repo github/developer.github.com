@@ -85,13 +85,13 @@ and token to the `Octokit::Client` constructor:
     end
 
 Let's do something interesting with data about our own repositories, like see the different
-programming languages they use, and which ones are used most often. To do that, we first grab
+programming languages they use, and which ones are used most often. To do that, we first need
 a list of our repositories from the API. With Octokit, that looks like this:
 
     repos = client.repositories
 
-Next, we iterate over each repository, and count the language that GitHub
-identifies:
+Next, we'll iterate over each repository, and count the language that GitHub
+associates with it:
 
     language_obj = {}
     repos.each do |repo|
@@ -114,7 +114,7 @@ that looks like this:
 
 So far, so good, but not very human-friendly. A visualization
 would be great in helping us understand how these language counts are distributed. Let's feed
-this information into D3 to get a neat bar graph representing the popularity of the languages we use.
+our counts into D3 to get a neat bar graph representing the popularity of the languages we use.
 
 ## Visualizing language counts
 
@@ -123,7 +123,7 @@ Using D3 in detail is beyond the scope of this guide, but for a good introductor
 check out ["D3 for Mortals"][D3 mortals].
 
 D3 is a JavaScript library, and likes working with data as arrays. So, let's convert our Ruby hash into
-an array, and convert it to JSON for use in JavaScript in the browser.
+a JSON array for use by JavaScript in the browser.
 
     languages = []
     language_obj.each do |lang, count|
@@ -132,11 +132,11 @@ an array, and convert it to JSON for use in JavaScript in the browser.
 
     erb :lang_freq, :locals => { :languages => languages.to_json}
 
-We're iterating over each key-value pair in our object, and just pushing them into
+We're simply iterating over each key-value pair in our object and pushing them into
 a new array. The reason we didn't do this earlier is because we didn't want to iterate
 over our `language_obj` object while we were creating it.
 
-Now, _lang_freq.erb_ is going to need some JavaScript code to support rendering a bar graph.
+Now, _lang_freq.erb_ is going to need some JavaScript to support rendering a bar graph.
 For now, you can just use the code provided here, and refer to the resources linked above
 if you want to learn more about how D3 works:
 
@@ -272,12 +272,12 @@ After that, we'll format the contents into a structure that D3 understands:
 
 (For more information on D3 tree map magic, check out [this simple tutorial][language API].)
 
-To wrap up, we'll want to just pass this JSON information over to the same ERB file:
+To wrap up, we pass this JSON information over to the same ERB template:
 
     erb :lang_freq, :locals => { :languages => languages.to_json, :language_byte_count => language_bytes.to_json}
 
 
-Just like we did before, here's a bunch of JavaScript code that you can drop
+Like before, here's a bunch of JavaScript that you can drop
 directly into your template:
 
     <div id="byte_freq"></div>

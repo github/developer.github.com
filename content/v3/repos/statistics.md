@@ -20,7 +20,7 @@ start compiling these statistics.  Subsequent requests should return the data.
 Repository statistics are cached by the SHA of the repository's default branch,
 which is usually master; pushing to the default branch resets the statistics cache.
 
-***NOTE:** `202` responses do *not* count towards API rate limits.
+**NOTE:** `202` responses do *not* count towards API rate limits.
 
 ## Get contributors list with additions, deletions, and commit counts
 

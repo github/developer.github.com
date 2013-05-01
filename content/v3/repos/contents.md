@@ -30,15 +30,17 @@ ref
 
 ## Get contents
 
-This method returns the contents of any file or directory in a repository.
+This method returns the contents of a file or directory in a repository.
 
     GET /repos/:owner/:repo/contents/:path
 
 Files and symlinks support [a custom media type](#custom-media-types) for getting the raw content.
-Directories do _not_ support custom media types.
+Directories and submodules do _not_ support custom media types.
 
-*Note*: To get a repository's contents recursively, you can [recursively get
-the tree](/v3/git/trees/).
+*Notes*:
+
+- To get a repository's contents recursively, you can [recursively get the tree](/v3/git/trees/).
+- This API supports files up to 1 megabyte in size.
 
 ### Parameters
 
@@ -66,6 +68,16 @@ Otherwise, the API responds with a hash describing the symlink itself:
 
 <%= headers 200 %>
 <%= json :symlink_content %>
+
+### Response if content is a submodule
+
+<%= headers 200 %>
+<%= json :submodule_content %>
+
+The `submodule_git_url` identifies the location of the submodule repository, and the `sha` identifies a specific commit within the submodule repository.
+Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.
+
+If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the github.com URLs (`html_url` and `_links["html"]`) will have null values.
 
 ## Get archive link
 

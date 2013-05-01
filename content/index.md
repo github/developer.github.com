@@ -39,11 +39,14 @@ objects.
 * `[ ]` `master_branch` becomes `default_branch`.
 * `[ ]` `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
   returned.
+* `[ ]` `merge_commit_sha` on the [pull request API](/v3/pulls/#get-a-single-pull-request)
+  will no longer be returned.
 * `[ ]` Use the `private` attribute when creating a private repository,
   instead of setting `public` to false.
 * `[ ]` Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.
 * `[✓]` <del>User Emails come back [as a hash][v3-email] instead of a string.</del>
 * `[ ]` Remove the unused "bio" field for Users.
+* `[ ]` When listing the contents of a directory in the [Repository Contents API](/v3/repos/contents/#get-contents), fix the `type` value returned for submodules: change the value to `"submodule"` (instead of `"file"`).
 
 ### Breaking Beta Changes
 

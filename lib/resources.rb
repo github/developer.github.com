@@ -1048,10 +1048,16 @@ module GitHub
         "html_url" => "http://github.com/octocat/Hello-World/blob/master/hellothere",
         "git_url" => "http://api.github.dev/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
         "type" => "file"
+        "_links" => {
+          "self" => "https://api.github.com/repos/octocat/Hello-World/contents/hellothere",
+          "git" => "http://api.github.dev/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
+          "html" => "http://github.com/octocat/Hello-World/blob/master/hellothere"
+        }
       },
       "commit" => {
         "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
+        "html_url" => "https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd",
         "author" => {
           "date" => "2010-04-10T14:10:01-07:00",
           "name" => "Scott Chacon",
@@ -1070,6 +1076,7 @@ module GitHub
         "parents" => [
           {
             "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5",
+            "html_url" => "https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5",
             "sha" => "1acc419d4d6a9ce985db7be48c6349a0475975b5"
           }
         ]

@@ -1076,6 +1076,9 @@ module GitHub
       }
     }
 
+    CONTENT_CRUD_DELETE = CONTENT_CRUD.dup
+    CONTENT_CRUD_DELETE['content'] = nil
+
     THREAD = {
       :id => 1,
       :repository => SIMPLE_REPO,

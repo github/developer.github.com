@@ -205,14 +205,14 @@ committer.email
 ### Example Input
 
 <%= json "message" => "my commit message", \
-    "author" => \
+    "committer" => \
     {"name" => "Scott Chacon", "email" => "schacon@gmail.com" }, \
     "sha" => "329688480d39049927147c162b9d2deaf885005f" %>
 
 ### Response
 
 <%= headers 200 %>
-<%= json :git_commit %>
+<%= json :content_crud_delete %>
 
 ## Get archive link
 

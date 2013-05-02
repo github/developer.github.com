@@ -1045,13 +1045,13 @@ module GitHub
         "sha" => "95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
         "size" => 9,
         "url" => "https://api.github.com/repos/octocat/Hello-World/contents/hellothere",
-        "html_url" => "http://github.com/octocat/Hello-World/blob/master/hellothere",
-        "git_url" => "http://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
+        "html_url" => "https://github.com/octocat/Hello-World/blob/master/hellothere",
+        "git_url" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
         "type" => "file"
         "_links" => {
           "self" => "https://api.github.com/repos/octocat/Hello-World/contents/hellothere",
-          "git" => "http://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
-          "html" => "http://github.com/octocat/Hello-World/blob/master/hellothere"
+          "git" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
+          "html" => "https://github.com/octocat/Hello-World/blob/master/hellothere"
         }
       },
       "commit" => {

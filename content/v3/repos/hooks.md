@@ -7,9 +7,9 @@ title: Repo Hooks | GitHub API
 * TOC
 {:toc}
 
-The Repository Hooks API manages the post-receive web and service hooks
-for a repository.  There are two main APIs to manage these hooks: a JSON
-HTTP API, and [PubSubHubbub](#pubsubhubbub).
+The Repository Hooks API allows repository admins to manage the post-receive
+web and service hooks for a repository.  There are two main APIs to manage
+these hooks: a JSON HTTP API, and [PubSubHubbub](#pubsubhubbub).
 
 Active hooks can be configured to trigger for one or more events.
 The default event is `push`.  The available events are:
@@ -122,22 +122,14 @@ legacy format):
 
 ### Input
 
-`name`
-: _Required_ **string** - The name of the service that is being called.
-See [/hooks](https://api.github.com/hooks) for the possible names.
-
 `config`
-: _Required_ **hash** - A Hash containing key/value pairs to provide
+: _Optional_ **hash** - A Hash containing key/value pairs to provide
 settings for this hook.  Modifying this will replace the entire config
 object.  These settings vary between the services and
 are defined in the
 [github-services](https://github.com/github/github-services) repo.
 Booleans are stored internally as "1" for true, and "0" for false.  Any
 JSON true/false values will be converted automatically.
-
-
-
-You can change a hook to send straight JSON by
 
 `events`
 : _Optional_ **array** - Determines what events the hook is triggered
@@ -155,23 +147,11 @@ list of events that the Hook triggers for.
 : _Optional_ **boolean** - Determines whether the hook is actually
 triggered on pushes.
 
-Example:  The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
-takes these fields:
-
-* `url`
-* `content_type`
-* `secret`
-
-Here's how you can setup a hook that posts raw JSON (instead of the default
-legacy format):
+#### Example
 
 <%= json \
-      :name => "web",
       :active => true,
-      :add_events => ['pull_request'],
-      :config => {
-        :url => "http://requestb.in",
-        :content_type => "json"}
+      :add_events => ['pull_request']
 %>
 
 ### Response
@@ -179,10 +159,12 @@ legacy format):
 <%= headers 200 %>
 <%= json :hook %>
 
-## Test a hook
+## Test a `push` hook
 
 This will trigger the hook with the latest push to the current
-repository.
+repository if the hook is subscribed to `push` events. If the
+hook is not subscribed to `push` events, the server will respond
+with 204 but no test POST will be generated.
 
     POST /repos/:owner/:repo/hooks/:id/tests
 
@@ -254,10 +236,13 @@ to.  The path must be in the format of `/:owner/:repo/events/:event`.
 
 `hub.secret`
 : _Optional_ **string** - A shared secret key that generates a SHA1 HMAC
-of the payload content.  You can verify a push came from GitHub by
-comparing the received body with the contents of the `X-Hub-Signature`
-header.
+of the outgoing body content.  You can verify a push came from GitHub by
+comparing the raw request body with the contents of the `X-Hub-Signature`
+header.  You can see [our Ruby implementation][ruby-secret], or [the
+PubSubHubbub documentation][pshb-secret] for more details.
 
 [pubsub]: http://code.google.com/p/pubsubhubbub/
 [post-receive]: http://help.github.com/post-receive-hooks/
+[ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
+[pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify
 

@@ -31,7 +31,9 @@ module GitHub
         :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0',
         :pezra        => 'f38112009dc16547051c8ac246cee443',
         :rick         => 'a44d5abad6e86cff4e34d9f0839535c9',
-        :agh          => '6af915d3c6aa4ad30bbad43d8035fe10'
+        :agh          => '6af915d3c6aa4ad30bbad43d8035fe10',
+        :jasonrudolph => '592e1e6f041f9a4ec51846fd82013aea',
+        :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -536,24 +538,6 @@ module GitHub
       "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
     }
 
-    ORG_STATUS = {
-      "id" => 1,
-      "url" => "https://api.github.com/orgs/github/statuses/1",
-      "body" => "Hey guys!",
-      "user" => USER,
-      "created_at" => "2008-01-14T04:33:35Z",
-      "updated_at" => "2008-01-14T04:33:35Z",
-    }
-
-    ORG_STATUS_COMMENT = {
-      "id" => 1,
-      "url" => "https://api.github.com/orgs/github/statuses/1/comments/1",
-      "body" => "Hey guys!",
-      "user" => USER,
-      "created_at" => "2008-01-14T04:33:35Z",
-      "updated_at" => "2008-01-14T04:33:35Z",
-    }
-
     FULL_ORG = ORG.merge({
       "name"         => "github",
       "company"      => "GitHub",
@@ -801,27 +785,27 @@ module GitHub
 
     TREE = {
       "sha"  => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
-      "url"  => "https://api.github.com/repo/octocat/Hello-World/trees/9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
+      "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
       "tree"  => [
         { "path" => "file.rb",
           "mode" => "100644",
           "type" => "blob",
           "size" => 30,
           "sha"  => "44b4fc6d56897b048c772eb4087f854f46256132",
-          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/44b4fc6d56897b048c772eb4087f854f46256132",
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/44b4fc6d56897b048c772eb4087f854f46256132",
         },
         { "path" => "subdir",
           "mode" => "040000",
           "type" => "tree",
           "sha"  => "f484d249c660418515fb01c2b9662073663c242e",
-          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/f484d249c660418515fb01c2b9662073663c242e"
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/f484d249c660418515fb01c2b9662073663c242e"
         },
         { "path" => "exec_file",
           "mode" => "100755",
           "type" => "blob",
           "size" => 75,
           "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
-          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
         }
       ]
     }
@@ -986,6 +970,8 @@ module GitHub
       "created_at" => "2011-09-06T17:26:27Z"
     }
 
+    OAUTH_ACCESS_WITH_USER = OAUTH_ACCESS.merge(:user => USER)
+
     EVENT = {
       :type   => "Event",
       :public => true,
@@ -1004,17 +990,87 @@ module GitHub
     README_CONTENT = {
       "type" =>  "file",
       "encoding" =>  "base64",
+      "size" =>  5362,
+      "name" =>  "README.md",
+      "path" =>  "README.md",
+      "content" =>  "encoded content ...",
+      "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1",
+      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
+      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+      "html_url" => "https://github.com/pengwynn/octokit/blob/master/README.md",
       "_links" =>  {
         "git" =>  "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
         "self" =>  "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
         "html" =>  "https://github.com/pengwynn/octokit/blob/master/README.md"
       },
-      "size" =>  5362,
-      "name" =>  "README.md",
-      "path" =>  "README.md",
-      "content" =>  "encoded content ...",
-      "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1"
     }
+
+    SYMLINK_CONTENT = {
+      "type" => "symlink",
+      "target" => "/path/to/symlink/target",
+      "size" => 23,
+      "name" => "some-symlink",
+      "path" => "bin/some-symlink",
+      "sha" => "452a98979c88e093d682cab404a3ec82babebb48",
+      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
+      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+      "html_url" => "https://github.com/pengwynn/octokit/blob/master/bin/some-symlink",
+      "_links" => {
+        "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+        "self" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
+        "html" => "https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"
+      },
+    }
+
+    SUBMODULE_CONTENT = {
+      "type" => "submodule",
+      "submodule_git_url" => "git://github.com/jquery/qunit.git",
+      "size" => 0,
+      "name" => "qunit",
+      "path" => "test/qunit",
+      "sha" => "6ca3721222109997540bd6d9ccd396902e0ad2f9",
+      "url" => "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+      "git_url" => "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+      "html_url" => "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+      "_links" => {
+        "git" => "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+        "self" => "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+        "html" => "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"
+      }
+    }
+
+    DIRECTORY_CONTENT = [
+      {
+        "type" => "file",
+        "size" => 625,
+        "name" => "octokit.rb",
+        "path" => "lib/octokit.rb",
+        "sha" => "fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
+        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+        "html_url" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+        "_links" => {
+          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
+          "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+          "html" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+        },
+      },
+      {
+        "type" => "dir",
+        "size" => 0,
+        "name" => "octokit",
+        "path" => "lib/octokit",
+        "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
+        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+        "html_url" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit",
+        "_links" => {
+          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
+          "git" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+          "html" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit"
+        },
+      },
+    ]
 
     STATUS = {
       "created_at" => "2012-07-20T01:19:13Z",
@@ -1028,7 +1084,8 @@ module GitHub
     }
 
     META = {
-      :hooks => ['127.0.0.1/32']
+      :hooks => ['127.0.0.1/32'],
+      :git => ['127.0.0.1/32']
     }
 
     BLOB = {

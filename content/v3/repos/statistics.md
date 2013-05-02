@@ -31,6 +31,7 @@ which is usually master; pushing to the default branch resets the statistics cac
 <%= headers 200 %>
 <%= json(:repo_stats_contributors) %>
 
+* `total` - The Total number of commits authored by the contributor.
 
 **Weekly Hash**
 
@@ -71,8 +72,10 @@ to a repository.
 ### Response
 
 Returns the total commit counts for the `owner` and total commit counts in `all`.
-`all` is everyone combined, including the `owner`.  If you'd like to get the commit
+`all` is everyone combined, including the `owner` in the last 52 weeks.  If you'd like to get the commit
 counts for non-owners, you can subtract `all` from `owner`.
+
+The array order is oldest week (index 0) to most recent week.
 
 <%= headers 200 %>
 <%= json(:repo_stats_participation) %>
@@ -90,7 +93,7 @@ Each array contains the day number, hour number, and number of commits:
 * Number of commits
 
 For example, `[2, 14, 25]` indicates that there were 25 total commits, during the
-2:00pm hour on Tuesdays.
+2:00pm hour on Tuesdays.  All times are based on the time zone of individual commits.
 
 <%= headers 200 %>
 <%= json(:repo_stats_punch_card) %>

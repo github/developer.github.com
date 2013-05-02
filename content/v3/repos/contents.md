@@ -63,7 +63,7 @@ message
 : _Required_ **string** - The commit message.
 
 content
-: _Required_ **string** - The new file content.
+: _Required_ **string** - The new file content, Base64 encoded.
 
 branch
 : _Optional_ **string** - The branch name. If not provided, uses the repository's 
@@ -93,14 +93,14 @@ committer.email
 ### Example Input
 
 <%= json "message" => "my commit message", \
-    "author" => \
+    "committer" => \
     {"name" => "Scott Chacon", "email" => "schacon@gmail.com" }, \
-    "content" => "my new file contents" %>
+    "content" => "bXkgbmV3IGZpbGUgY29udGVudHM=" %>
 
 ### Response
 
 <%= headers 201 %>
-<%= json :git_commit %>
+<%= json :content_crud %>
 
 ## Update a file
 
@@ -117,7 +117,7 @@ message
 : _Required_ **string** - The commit message.
 
 content
-: _Required_ **string** - The updated file content.
+: _Required_ **string** - The updated file content, Base64 encoded.
 
 sha
 : _Required_ **string** - The blob SHA of the file being replaced.
@@ -150,15 +150,15 @@ committer.email
 ### Example Input
 
 <%= json "message" => "my commit message", \
-    "author" => \
+    "committer" => \
     {"name" => "Scott Chacon", "email" => "schacon@gmail.com" }, \
-    "content" => "my updated file contents", \
+    "content" => "bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz", \
     "sha" => "329688480d39049927147c162b9d2deaf885005f" %>
 
 ### Response
 
 <%= headers 200 %>
-<%= json :git_commit %>
+<%= json :content_crud %>
 
 ## Delete a file
 

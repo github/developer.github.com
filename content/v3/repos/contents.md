@@ -212,7 +212,12 @@ committer.email
 ### Response
 
 <%= headers 200 %>
-<%= json :content_crud_delete %>
+<%=
+  json :content_crud do |response|
+    response['content'] = nil
+    response
+  end
+%>
 
 ## Get archive link
 

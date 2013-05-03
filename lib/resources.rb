@@ -33,7 +33,8 @@ module GitHub
         :rick         => 'a44d5abad6e86cff4e34d9f0839535c9',
         :agh          => '6af915d3c6aa4ad30bbad43d8035fe10',
         :jasonrudolph => '592e1e6f041f9a4ec51846fd82013aea',
-        :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d'
+        :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
+        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

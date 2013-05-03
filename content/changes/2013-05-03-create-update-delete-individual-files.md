@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Content CRUD
+title: Create, update, and delete individual files
 created_at: 2013-05-03
 author_name: ymendel
 ---

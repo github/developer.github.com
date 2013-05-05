@@ -5,12 +5,18 @@ created_at: 2013-05-03
 author_name: ymendel
 ---
 
-Starting today you can easily [create][], [update][], and [delete][] individual files
-through the [Repository Contents API][docs].
+We're following in the footsteps of GitHub.com's ability to [edit][web_edit] and
+[create][web_create] files in your web browser. Starting today, the
+[Repository Contents API][docs] will let you easily [create][], [update][], and even
+[delete][] individual files.
 
 Happy editing!
 
+
+[web_edit]:   https://github.com/blog/143-inline-file-editing
+[web_create]: https://github.com/blog/1327-creating-files-on-github
+
+[docs]:   http://developer.github.com/v3/repos/contents/
 [create]: http://developer.github.com/v3/repos/contents/#create-a-file
 [update]: http://developer.github.com/v3/repos/contents/#update-a-file
 [delete]: http://developer.github.com/v3/repos/contents/#delete-a-file
-[docs]: http://developer.github.com/v3/repos/contents/

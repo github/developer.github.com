@@ -1105,7 +1105,7 @@ module GitHub
         "url" => "https://api.github.com/repos/octocat/Hello-World/contents/hellothere",
         "html_url" => "https://github.com/octocat/Hello-World/blob/master/hellothere",
         "git_url" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
-        "type" => "file"
+        "type" => "file",
         "_links" => {
           "self" => "https://api.github.com/repos/octocat/Hello-World/contents/hellothere",
           "git" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",

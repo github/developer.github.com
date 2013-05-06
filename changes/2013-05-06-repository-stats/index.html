@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Repo Deploy Keys | GitHub API</title>
+  <title>Repository Statistics</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,113 +36,40 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="repo-deploy-keys-api">Repo Deploy Keys API</h1>
+    <div class="change" id="/changes/2013-05-06-repository-stats/">
+<h2 class="title">
+  <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
+</h2>
 
-<ul id="markdown-toc">
-<li><a href="#list">List</a></li>
-  <li><a href="#get">Get</a></li>
-  <li><a href="#create">Create</a></li>
-  <li><a href="#edit">Edit</a></li>
-  <li><a href="#delete">Delete</a></li>
-</ul><h2 id="list">List</h2>
+<div class="meta">
+  <div class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/97c3a8eea9b7eaa9e1e93ea3cd47399f?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+    <span class="author vcard fn">
+      <a href="https://github.com/Caged">Caged</a>
+    </span>
+    <span class="published">
+      May 6, 2013
+    
+    </span>
+  </div>
+</div>
 
-<pre><code>GET /repos/:owner/:repo/keys
-</code></pre>
 
-<h3 id="response">Response</h3>
+<p>Today we’re happy to open our <a href="/v3/repos/statistics">Repository Statistics API</a> to everyone.  We’re using
+repository statistics to power <a href="https://github.com/github/linguist/graphs">our graphs</a>,
+but we can’t wait to see what others can do with this information.</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Starting today, these resources are available to you:</p>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-    <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
+<ul>
+<li><strong><a href="/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts">Contributors</a></strong></li>
+  <li><strong><a href="/v3/repos/statistics/#get-the-last-year-of-commit-activity-data">Commit Activity</a></strong></li>
+  <li><strong><a href="/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week">Code Frequency</a></strong></li>
+  <li><strong><a href="/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repo-owner-and-everyone-else">Participation</a></strong></li>
+  <li><strong><a href="/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day">Punch Card</a></strong></li>
+</ul><p>Enjoy!</p>
+</div>
 
-<h2 id="get">Get</h2>
-
-<pre><code>GET /repos/:owner/:repo/keys/:id
-</code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="create">Create</h2>
-
-<pre><code>POST /repos/:owner/:repo/keys
-</code></pre>
-
-<h3 id="input">Input</h3>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/user/repo/keys/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="edit">Edit</h2>
-
-<pre><code>PATCH /repos/:owner/:repo/keys/:id
-</code></pre>
-
-<h3 id="input-1">Input</h3>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="delete">Delete</h2>
-
-<pre><code>DELETE /repos/:owner/:repo/keys/:id
-</code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

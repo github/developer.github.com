@@ -41,6 +41,9 @@
 <ul id="markdown-toc">
 <li><a href="#get-the-readme">Get the README</a></li>
   <li><a href="#get-contents">Get contents</a></li>
+  <li><a href="#create-a-file">Create a file</a></li>
+  <li><a href="#update-a-file">Update a file</a></li>
+  <li><a href="#delete-a-file">Delete a file</a></li>
   <li><a href="#get-archive-link">Get archive link</a></li>
   <li><a href="#custom-media-types">Custom media types</a></li>
 </ul><p>These API methods let you retrieve the contents of files within a repository as
@@ -227,6 +230,317 @@ Git uses the given URL when cloning the submodule repository, and checks out the
 
 <p>If the submodule repository is not hosted on github.com, the Git URLs (<code>git_url</code> and <code>_links["git"]</code>) and the github.com URLs (<code>html_url</code> and <code>_links["html"]</code>) will have null values.</p>
 
+<h2 id="create-a-file">Create a file</h2>
+
+<p>This method creates a new file in a repository</p>
+
+<pre><code>PUT /repos/:owner/:repo/contents/:path
+</code></pre>
+
+<h3 id="parameters-2">Parameters</h3>
+
+<dl>
+<dt>path</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The content path.</dd>
+  <dt>message</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The commit message.</dd>
+  <dt>content</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The new file content, Base64 encoded.</dd>
+  <dt>branch</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+default branch (usually <code>master</code>).</dd>
+</dl><h3 id="optional-parameters">Optional Parameters</h3>
+
+<p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
+information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+user’s information is used.</p>
+
+<p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use
+<code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
+
+<dl>
+<dt>author.name</dt>
+  <dd>
+<strong>string</strong> - The name of the author of the commit</dd>
+  <dt>author.email</dt>
+  <dd>
+<strong>string</strong> - The email of the author of the commit</dd>
+  <dt>committer.name</dt>
+  <dd>
+<strong>string</strong> - The name of the committer of the commit</dd>
+  <dt>committer.email</dt>
+  <dd>
+<strong>string</strong> - The email of the committer of the commit</dd>
+</dl><h3 id="example-input">Example Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"bXkgbmV3IGZpbGUgY29udGVudHM="</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"hellothere"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"hellothere"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/hellothere"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/hellothere"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/hellothere"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/hellothere"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="p">},</span>
+    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="update-a-file">Update a file</h2>
+
+<p>This method updates a file in a repository</p>
+
+<pre><code>PUT /repos/:owner/:repo/contents/:path
+</code></pre>
+
+<h3 id="parameters-3">Parameters</h3>
+
+<dl>
+<dt>path</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The content path.</dd>
+  <dt>message</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The commit message.</dd>
+  <dt>content</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The updated file content, Base64 encoded.</dd>
+  <dt>sha</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The blob SHA of the file being replaced.</dd>
+  <dt>branch</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+default branch (usually <code>master</code>).</dd>
+</dl><h3 id="optional-parameters-1">Optional Parameters</h3>
+
+<p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
+information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+user’s information is used.</p>
+
+<p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use
+<code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
+
+<dl>
+<dt>author.name</dt>
+  <dd>
+<strong>string</strong> - The name of the author of the commit</dd>
+  <dt>author.email</dt>
+  <dd>
+<strong>string</strong> - The email of the author of the commit</dd>
+  <dt>committer.name</dt>
+  <dd>
+<strong>string</strong> - The name of the committer of the commit</dd>
+  <dt>committer.email</dt>
+  <dd>
+<strong>string</strong> - The email of the committer of the commit</dd>
+</dl><h3 id="example-input-1">Example Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"329688480d39049927147c162b9d2deaf885005f"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"hellothere"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"hellothere"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/hellothere"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/hellothere"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/hellothere"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/hellothere"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="p">},</span>
+    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="delete-a-file">Delete a file</h2>
+
+<p>This method deletes a file in a repository</p>
+
+<pre><code>DELETE /repos/:owner/:repo/contents/:path
+</code></pre>
+
+<h3 id="parameters-4">Parameters</h3>
+
+<dl>
+<dt>path</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The content path.</dd>
+  <dt>message</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The commit message.</dd>
+  <dt>sha</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The blob SHA of the file being removed.</dd>
+  <dt>branch</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+default branch (usually <code>master</code>).</dd>
+</dl><h3 id="optional-parameters-2">Optional Parameters</h3>
+
+<p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
+information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+user’s information is used.</p>
+
+<p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use
+<code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
+
+<dl>
+<dt>author.name</dt>
+  <dd>
+<strong>string</strong> - The name of the author of the commit</dd>
+  <dt>author.email</dt>
+  <dd>
+<strong>string</strong> - The email of the author of the commit</dd>
+  <dt>committer.name</dt>
+  <dd>
+<strong>string</strong> - The name of the committer of the commit</dd>
+  <dt>committer.email</dt>
+  <dd>
+<strong>string</strong> - The email of the committer of the commit</dd>
+</dl><h3 id="example-input-2">Example Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"329688480d39049927147c162b9d2deaf885005f"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="p">},</span>
+    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
 <h2 id="get-archive-link">Get archive link</h2>
 
 <p>This method will return a <code>302</code> to a URL to download a tarball
@@ -239,7 +553,7 @@ to make a second <code>GET</code> request.</p>
 <pre><code>GET /repos/:owner/:repo/:archive_format/:ref
 </code></pre>
 
-<h3 id="parameters-2">Parameters</h3>
+<h3 id="parameters-5">Parameters</h3>
 
 <dl>
 <dt>archive_format</dt>
@@ -249,7 +563,7 @@ to make a second <code>GET</code> request.</p>
   <dd>
 <em>Optional</em>  <strong>string</strong> - valid Git reference, defaults to <code>master</code>
 </dd>
-</dl><h3 id="response-1">Response</h3>
+</dl><h3 id="response-4">Response</h3>
 
 <pre class="headers"><code>Status: 302 Found
 Location: http://github.com/me/myprivate/tarball/master?SSO=thistokenexpires

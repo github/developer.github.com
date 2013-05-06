@@ -16,8 +16,8 @@ Happy editing!
 [web_edit]:   https://github.com/blog/143-inline-file-editing
 [web_create]: https://github.com/blog/1327-creating-files-on-github
 
-[docs]:   ../v3/repos/contents/
-[create]: ../v3/repos/contents/#create-a-file
-[update]: ../v3/repos/contents/#update-a-file
-[delete]: ../v3/repos/contents/#delete-a-file
+[docs]:   /v3/repos/contents/
+[create]: /v3/repos/contents/#create-a-file
+[update]: /v3/repos/contents/#update-a-file
+[delete]: /v3/repos/contents/#delete-a-file
 

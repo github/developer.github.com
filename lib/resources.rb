@@ -34,8 +34,8 @@ module GitHub
         :agh          => '6af915d3c6aa4ad30bbad43d8035fe10',
         :jasonrudolph => '592e1e6f041f9a4ec51846fd82013aea',
         :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f',
-        :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d'
-        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
+        :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
+        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

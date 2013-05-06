@@ -79,6 +79,177 @@ Git uses the given URL when cloning the submodule repository, and checks out the
 
 If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the github.com URLs (`html_url` and `_links["html"]`) will have null values.
 
+## Create a file
+
+This method creates a new file in a repository
+
+    PUT /repos/:owner/:repo/contents/:path
+
+### Parameters
+
+path
+: _Required_ **string** - The content path.
+
+message
+: _Required_ **string** - The commit message.
+
+content
+: _Required_ **string** - The new file content, Base64 encoded.
+
+branch
+: _Optional_ **string** - The branch name. If not provided, uses the repository's 
+default branch (usually `master`).
+
+### Optional Parameters
+
+The `author` section is optional and is filled in with the `committer`
+information if omitted. If the `committer` information is omitted, the authenticated 
+user's information is used.
+
+You must provide values for both `name` and `email`, whether you choose to use
+`author` or `committer`. Otherwise, you'll receive a `500` status code.
+
+author.name
+: **string** - The name of the author of the commit
+
+author.email
+: **string** - The email of the author of the commit
+
+committer.name
+: **string** - The name of the committer of the commit
+
+committer.email
+: **string** - The email of the committer of the commit
+
+### Example Input
+
+<%= json "message" => "my commit message", \
+    "committer" => \
+    {"name" => "Scott Chacon", "email" => "schacon@gmail.com" }, \
+    "content" => "bXkgbmV3IGZpbGUgY29udGVudHM=" %>
+
+### Response
+
+<%= headers 201 %>
+<%= json :content_crud %>
+
+## Update a file
+
+This method updates a file in a repository
+
+    PUT /repos/:owner/:repo/contents/:path
+
+### Parameters
+
+path
+: _Required_ **string** - The content path.
+
+message
+: _Required_ **string** - The commit message.
+
+content
+: _Required_ **string** - The updated file content, Base64 encoded.
+
+sha
+: _Required_ **string** - The blob SHA of the file being replaced.
+
+branch
+: _Optional_ **string** - The branch name. If not provided, uses the repository's 
+default branch (usually `master`).
+
+### Optional Parameters
+
+The `author` section is optional and is filled in with the `committer`
+information if omitted. If the `committer` information is omitted, the authenticated 
+user's information is used.
+
+You must provide values for both `name` and `email`, whether you choose to use
+`author` or `committer`. Otherwise, you'll receive a `500` status code.
+
+author.name
+: **string** - The name of the author of the commit
+
+author.email
+: **string** - The email of the author of the commit
+
+committer.name
+: **string** - The name of the committer of the commit
+
+committer.email
+: **string** - The email of the committer of the commit
+
+### Example Input
+
+<%= json "message" => "my commit message", \
+    "committer" => \
+    {"name" => "Scott Chacon", "email" => "schacon@gmail.com" }, \
+    "content" => "bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz", \
+    "sha" => "329688480d39049927147c162b9d2deaf885005f" %>
+
+### Response
+
+<%= headers 200 %>
+<%= json :content_crud %>
+
+## Delete a file
+
+This method deletes a file in a repository
+
+    DELETE /repos/:owner/:repo/contents/:path
+
+### Parameters
+
+path
+: _Required_ **string** - The content path.
+
+message
+: _Required_ **string** - The commit message.
+
+sha
+: _Required_ **string** - The blob SHA of the file being removed.
+
+branch
+: _Optional_ **string** - The branch name. If not provided, uses the repository's 
+default branch (usually `master`).
+
+### Optional Parameters
+
+The `author` section is optional and is filled in with the `committer`
+information if omitted. If the `committer` information is omitted, the authenticated 
+user's information is used.
+
+You must provide values for both `name` and `email`, whether you choose to use
+`author` or `committer`. Otherwise, you'll receive a `500` status code.
+
+author.name
+: **string** - The name of the author of the commit
+
+author.email
+: **string** - The email of the author of the commit
+
+committer.name
+: **string** - The name of the committer of the commit
+
+committer.email
+: **string** - The email of the committer of the commit
+
+### Example Input
+
+<%= json "message" => "my commit message", \
+    "committer" => \
+    {"name" => "Scott Chacon", "email" => "schacon@gmail.com" }, \
+    "sha" => "329688480d39049927147c162b9d2deaf885005f" %>
+
+### Response
+
+<%= headers 200 %>
+<%=
+  json :content_crud do |response|
+    response['content'] = nil
+    response
+  end
+%>
+
 ## Get archive link
 
 This method will return a `302` to a URL to download a tarball

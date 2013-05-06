@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Create, update, and delete individual files
-created_at: 2013-05-03
+created_at: 2013-05-06
 author_name: ymendel
 ---
 
@@ -20,3 +20,4 @@ Happy editing!
 [create]: ../v3/repos/contents/#create-a-file
 [update]: ../v3/repos/contents/#update-a-file
 [delete]: ../v3/repos/contents/#delete-a-file
+

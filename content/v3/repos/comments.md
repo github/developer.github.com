@@ -36,6 +36,9 @@ Comments are ordered by ascending ID.
 
 ### Input
 
+sha
+: _Required_ **string** - SHA of the commit to comment on.
+
 body
 : _Required_ **string**
 

@@ -52,12 +52,12 @@ types of repository activity.</p>
 <p>Computing repository statistics is an expensive operation, so we try to return cached
 data whenever possible.  If the data hasn’t been cached when you query a repository’s
 statistics, you’ll receive a <code>202</code> response; a background job is also fired to
-start compiling these statistics.  Subsequent requests should return the data.</p>
+start compiling these statistics. Give the job a few moments to complete, and
+then submit the request again. If the job has completed, that request will receive a
+<code>200</code> response with the statistics in the response body.</p>
 
 <p>Repository statistics are cached by the SHA of the repository’s default branch,
 which is usually master; pushing to the default branch resets the statistics cache.</p>
-
-<p><strong>NOTE:</strong> <code>202</code> responses do <em>not</em> count towards API rate limits.</p>
 
 <h2 id="get-contributors-list-with-additions-deletions-and-commit-counts">Get contributors list with additions, deletions, and commit counts</h2>
 

@@ -13,11 +13,18 @@ does not include a `:user` parameter then the response will be for the
 logged in user (and you must pass [authentication
 information](/v3/#authentication) with your request).
 
-Note that `:user` can be either the string username, or the numeric user id.
-
-## Get a single user
+## Get a single user by their username
 
     GET /users/:user
+
+### Response
+
+<%= headers 200 %>
+<%= json :full_user %>
+
+## Get a single user by their numeric user ID
+
+    GET /user/:user
 
 ### Response
 

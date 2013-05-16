@@ -13,6 +13,8 @@ does not include a `:user` parameter then the response will be for the
 logged in user (and you must pass [authentication
 information](/v3/#authentication) with your request).
 
+Note that `:user` can be either the string username, or the numeric user id.
+
 ## Get a single user
 
     GET /users/:user

@@ -1210,7 +1210,7 @@ module GitHub
     REPO_STATS_COMMIT_ACTIVITY = [{
       :days => [0, 3, 26, 20, 39, 1, 0],
       :total => 89,
-      :week => "2012-05-06"
+      :week => 1336280400
     }]
 
     REPO_STATS_CODE_FREQUENCY = [[

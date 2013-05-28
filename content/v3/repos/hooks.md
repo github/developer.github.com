@@ -73,7 +73,7 @@ an event, and the Service has to listen to it.   Most of the Services only liste
 
 `name`
 : _Required_ **string** - The name of the service that is being called.
-See [/hooks](https://api.github.com/hooks) for the possible names.
+See [/hooks](https://api.github.com/hooks) for the allowed list possible names.
 
 `config`
 : _Required_ **hash** - A Hash containing key/value pairs to provide

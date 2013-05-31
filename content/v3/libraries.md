@@ -68,8 +68,10 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Objective-C
 
+* **[Octokit][octokit.objc]** (officially maintained by GitHub)
 * [UAGithubEngine][uagithubengine]
 
+[octokit.objc]: https://github.com/octokit/octokit.objc
 [uagithubengine]: http://github.com/owainhunt/uagithubengine
 
 ## OCaml

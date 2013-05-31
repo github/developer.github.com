@@ -42,6 +42,12 @@ Libraries for accessing the GitHub API from your favorite language.
 
 [erlang]: https://github.com/onlyshk/erlang-github-api
 
+## Go
+
+* [go-github][]
+
+[go-github]: https://github.com/google/go-github
+
 ## Haskell
 
 * [Haskell GitHub API][haskell]

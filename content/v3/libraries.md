@@ -68,8 +68,10 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Objective-C
 
+* **[OctoKit][octokit.objc]** (officially maintained by GitHub)
 * [UAGithubEngine][uagithubengine]
 
+[octokit.objc]: https://github.com/octokit/octokit.objc
 [uagithubengine]: http://github.com/owainhunt/uagithubengine
 
 ## OCaml
@@ -118,14 +120,14 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Ruby
 
-* [Octokit][octokit]
+* **[Octokit][octokit.rb]** (officially maintained by GitHub)
 * [GitHub API Gem][ghapi]
 * [Octocat Herder][herder]
 * [GitHub v3 API][ruby1]
 * [GitHub API Client][ruby2]
 * [Ghee][ghee]
 
-[octokit]: https://github.com/pengwynn/octokit
+[octokit.rb]: https://github.com/octokit/octokit.rb
 [herder]: https://github.com/jhelwig/octocat_herder
 [ghapi]: https://github.com/peter-murach/github
 [ruby1]: https://github.com/jwilger/github-v3-api

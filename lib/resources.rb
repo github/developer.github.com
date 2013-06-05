@@ -651,6 +651,46 @@ module GitHub
       "issues" => [ISSUE_SEARCH_ITEM]
     }
 
+    ISSUE_SEARCH_V3_RESULTS = {
+      "total_count" => 10,
+      "items" => [
+        {
+          "url" => "https://api.github.com/repos/maplesyrup/maple/issues/424",
+          "labels_url" => "https://api.github.com/repos/maplesyrup/maple/issues/424/labels{/name}",
+          "comments_url" => "https://api.github.com/repos/maplesyrup/maple/issues/424/comments",
+          "events_url" => "https://api.github.com/repos/maplesyrup/maple/issues/424/events",
+          "html_url" => "https://github.com/maplesyrup/maple/issues/424",
+          "id" => 15092879,
+          "number" => 424,
+          "title" => "Upvotes needed to win a reward can be negative",
+          "user" => {
+            "login" => "elihart",
+            "id" => 2739242,
+            "avatar_url" => "https://secure.gravatar.com/avatar/125d06cb4905d7288e0c5b058d31f438?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+            "gravatar_id" => "125d06cb4905d7288e0c5b058d31f438",
+            "url" => "https://api.github.com/users/elihart",
+            "type" => "User"
+          },
+          "labels" => [
+            {
+              "url" => "https://api.github.com/repos/maplesyrup/maple/labels/bug",
+              "name" => "bug",
+              "color" => "e102d8"
+            }
+          ],
+          "state" => "open",
+          "assignee" => nil,
+          "milestone" => nil,
+          "comments" => 2,
+          "created_at" => "2013-06-03T22:23:37Z",
+          "updated_at" => "2013-06-04T00:46:24Z",
+          "closed_at" => nil,
+          "body" => "",
+          "score" => 13.020545
+        }
+      ]
+    }
+
     REPO_SEARCH_ITEM = {
       "type" => "repo",
       "created" => "2011-09-05T11:07:54Z",
@@ -681,6 +721,46 @@ module GitHub
       "repositories" => [REPO_SEARCH_ITEM]
     }
 
+    REPO_SEARCH_V3_RESULTS = {
+      "total_count" => 40,
+      "items" => [
+        {
+          "id" => 3081286,
+          "name" => "Tetris",
+          "full_name" => "dtrupenn/Tetris",
+          "owner" => {
+            "login" => "dtrupenn",
+            "id" => 872147,
+            "avatar_url" => "https://secure.gravatar.com/avatar/e7956084e75f239de85d3a31bc172ace?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+            "gravatar_id" => "e7956084e75f239de85d3a31bc172ace",
+            "url" => "https://api.github.com/users/dtrupenn",
+            "received_events_url" => "https://api.github.com/users/dtrupenn/received_events",
+            "type" => "User"
+          },
+          "private" => false,
+          "html_url" => "https://github.com/dtrupenn/Tetris",
+          "description" => "A C implementation of Tetris using Pennsim through LC4",
+          "fork" => false,
+          "url" => "https://api.github.com/repos/dtrupenn/Tetris",
+          "created_at" => "2012-01-01T00:31:50Z",
+          "updated_at" => "2013-01-05T17:58:47Z",
+          "pushed_at" => "2012-01-01T00:37:02Z",
+          "homepage" => "",
+          "size" => 524,
+          "watchers_count" => 1,
+          "language" => "Assembly",
+          "forks_count" => 0,
+          "open_issues_count" => 0,
+          "forks" => 0,
+          "open_issues" => 0,
+          "watchers" => 1,
+          "master_branch" => "master",
+          "default_branch" => "master",
+          "score" => 10.309712
+        }
+      ]
+    }
+
     USER_SEARCH_ITEM = {
       "gravatar_id" => "70889091349f7598bce9afa588034310",
       "name" => "Hirotaka Kawata",
@@ -702,6 +782,27 @@ module GitHub
 
     USER_SEARCH_RESULTS = {
       "users" => [USER_SEARCH_ITEM]
+    }
+
+    USER_SEARCH_V3_RESULTS = {
+      "total_count" => 12,
+      "items" => [
+        {
+          "login" => "rtomayko",
+          "id" => 404,
+          "avatar_url" => "https://secure.gravatar.com/avatar/abfc88b96ae18c85ba7aac3bded2ec5e?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+          "gravatar_id" => "abfc88b96ae18c85ba7aac3bded2ec5e",
+          "url" => "https://api.github.com/users/rtomayko",
+          "html_url" => "https://github.com/rtomayko",
+          "followers_url" => "https://api.github.com/users/rtomayko/followers",
+          "subscriptions_url" => "https://api.github.com/users/rtomayko/subscriptions",
+          "organizations_url" => "https://api.github.com/users/rtomayko/orgs",
+          "repos_url" => "https://api.github.com/users/rtomayko/repos",
+          "received_events_url" => "https://api.github.com/users/rtomayko/received_events",
+          "type" => "User",
+          "score" => 1.0
+        }
+      ]
     }
 
     EMAIL_SEARCH_RESULTS = {

@@ -9,7 +9,7 @@ title: Search | GitHub API
 
 This is a listing of the Search API features for API v3.
 
-Note: You can only fetch up to 1,000 items with this API.
+Note: You can fetch up to 1,000 items with this API.
 
 ## Search repositories
 

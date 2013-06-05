@@ -20,7 +20,7 @@ pages can be fetched using the `page` parameter.
 
 ### Parameters
 
-query
+q
 : The search terms. This can be any one of the existing repository search parameters:
  
    * [Search In](https://help.github.com/articles/searching-repositories#search-in)
@@ -61,7 +61,7 @@ Find issues by state and keyword.
 
 ### Parameters
 
-query
+q
 : The search terms. This can be any one of the existing issue search parameters:
  
    * [Search In](https://help.github.com/articles/searching-issues#search-in)
@@ -98,7 +98,7 @@ Find users by keywords.
 
 ### Parameters
 
-query
+q
 : The search terms. This can be any one of the existing issue search parameters:
  
    * [Search In](https://help.github.com/articles/searching-users#search-in)

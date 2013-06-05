@@ -16,7 +16,7 @@ Note: You can only fetch up to 1,000 items with this API.
 Find repositories by keywords. This method returns up to 100 results per page and
 pages can be fetched using the `page` parameter.
 
-    GET /search/repositories/:query
+    GET /search/repositories
 
 ### Parameters
 
@@ -51,13 +51,13 @@ per_page
 
 Find code by 
 
-    GET /search/code/:query
+    GET /search/code
 
 ## Search issues
 
 Find issues by state and keyword.
 
-    GET /search/issues/:query
+    GET /search/issues
 
 ### Parameters
 
@@ -94,7 +94,7 @@ per_page
 
 Find users by keywords.
 
-    GET /search/users/:query
+    GET /search/users
 
 ### Parameters
 

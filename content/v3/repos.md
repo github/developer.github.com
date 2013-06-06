@@ -57,9 +57,9 @@ type
 <%= headers 200, :pagination => true %>
 <%= json(:repo) { |h| [h] } %>
 
-## List all repositories
+## List all public repositories
 
-This provides a dump of every repository, in the order that they were created.
+This provides a dump of every public repository, in the order that they were created.
 
     GET /repositories
 

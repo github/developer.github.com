@@ -76,7 +76,8 @@ bio
 ## Get all users
 
 This provides a dump of every user, in the order that they signed up for
-GitHub.
+GitHub. Note that the `since` parameter is required in addition to the
+`page` parameter when using pagination.
 
     GET /users
 

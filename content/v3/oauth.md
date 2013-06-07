@@ -286,8 +286,10 @@ You can only send one of these scope keys at a time.
 
 OAuth applications can use a special API method for checking OAuth token
 validity without running afoul of normal rate limits for failed login attempts.
-This method uses **OAuth application client_id and secret** using **Basic
-Authentication.** Invalid tokens will return `404 NOT FOUND`.
+Authentication works differently with this particular endpoint. You must use
+Basic Authentication when accessing it, where the username is the OAuth
+application `client_id` and the password is its `client_secret`. Invalid tokens
+will return `404 NOT FOUND`.
 
     GET /applications/:client_id/tokens/:access_token
 

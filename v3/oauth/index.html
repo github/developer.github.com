@@ -431,8 +431,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>OAuth applications can use a special API method for checking OAuth token
 validity without running afoul of normal rate limits for failed login attempts.
-This method uses <strong>OAuth application client_id and secret</strong> using <strong>Basic
-Authentication.</strong> Invalid tokens will return <code>404 NOT FOUND</code>.</p>
+Authentication works differently with this particular endpoint. You must use
+Basic Authentication when accessing it, where the username is the OAuth
+application <code>client_id</code> and the password is its <code>client_secret</code>. Invalid tokens
+will return <code>404 NOT FOUND</code>.</p>
 
 <pre><code>GET /applications/:client_id/tokens/:access_token
 </code></pre>

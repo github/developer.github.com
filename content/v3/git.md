@@ -15,7 +15,7 @@ can do without having Git installed.
 
 Git DB API functions will return a `409 Conflict` if the git repo for a Repository is empty
 or unavailable.  This typically means it is being created still.  [Contact
-Support](https://github.com/contact) if this response status persists.
+Support](https://github.com/contact?form[subject]=Commits API) if this response status persists.
 
 ![git db](http://git-scm.com/figures/18333fig0904-tn.png)
 

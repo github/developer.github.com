@@ -61,6 +61,10 @@ type
 
 This provides a dump of every public repository, in the order that they were created.
 
+Note: Pagination is powered exclusively by the `since` parameter.
+Use the [Link header](/v3/#link-header) to get the URL for the next page of
+repositories.
+
     GET /repositories
 
 ### Parameters

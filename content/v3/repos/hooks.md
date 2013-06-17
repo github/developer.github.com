@@ -43,8 +43,11 @@ A number of external services have already been integrated through the open sour
 [github-services](https://github.com/github/github-services) project, including the generic
 [Web Service](https://github.com/github/github-services/blob/master/lib/services/web.rb) service
 which can be used to define your own custom hooks.
-All possible names for hooks, the events they support, and their configuration
-can be seen at [/hooks](https://api.github.com/hooks).
+Documentation for all available hooks can be found in the
+[docs directory](https://github.com/github/github-services/tree/master/docs)
+of the github-services repository, and a JSON representation of their names,
+the events they support, and their configuration can be seen at
+[api.github.com/hooks](https://api.github.com/hooks).
 
 For a Hook to go through, the Hook needs to be configured to trigger for an event,
 and the Service has to listen to it.

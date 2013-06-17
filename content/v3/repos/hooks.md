@@ -41,11 +41,18 @@ event](http://help.github.com/post-receive-hooks/).
 
 A number of external services have already been integrated through the open source
 [github-services](https://github.com/github/github-services) project, including the generic
-[Web Service](https://github.com/github/github-services/blob/master/lib/services/web.rb) service which can be used to
-define your own custom hooks. All possible names for hooks, the events they support, and their configuration can be seen at [/hooks](https://api.github.com/hooks).
+[Web Service](https://github.com/github/github-services/blob/master/lib/services/web.rb) service
+which can be used to define your own custom hooks.
+All possible names for hooks, the events they support, and their configuration
+can be seen at [/hooks](https://api.github.com/hooks).
 
-For a Hook to go through, the Hook needs to be configured to trigger for
-an event, and the Service has to listen to it.   Most of the Services only listen for `push` events.  However, the generic [Web Service](https://github.com/github/github-services/blob/master/lib/services/web.rb) listens for all events.  Other services like the [IRC Service](https://github.com/github/github-services/blob/master/lib/services/irc.rb) may only listen for `push`, `issues`, and `pull_request` events.
+For a Hook to go through, the Hook needs to be configured to trigger for an event,
+and the Service has to listen to it.
+Most of the Services only listen for `push` events.  However, the generic
+[Web Service](https://github.com/github/github-services/blob/master/lib/services/web.rb)
+listens for all events.  Other services like the
+[IRC Service](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
+may only listen for `push`, `issues`, and `pull_request` events.
 
 ## List
 
@@ -98,8 +105,8 @@ takes these fields:
 * `content_type`
 * `secret`
 
-Here's how you can setup a hook that posts raw JSON (instead of the default
-legacy format):
+Here's how you can setup a hook that posts raw JSON
+(instead of the default legacy format):
 
 <%= json \
       :name => "web",
@@ -184,7 +191,11 @@ with 204 but no test POST will be generated.
 
 ## PubSubHubbub
 
-GitHub can also serve as a [PubSubHubbub][pubsub] hub for all repositories.  PSHB is a simple publish/subscribe protocol that lets servers register to receive updates when a topic is updated.  The updates are sent with an HTTP POST request to a callback URL.  Topic URLs for a GitHub repository's pushes are in this format:
+GitHub can also serve as a [PubSubHubbub][pubsub] hub for all repositories.
+PSHB is a simple publish/subscribe protocol
+that lets servers register to receive updates when a topic is updated.
+The updates are sent with an HTTP POST request to a callback URL.
+Topic URLs for a GitHub repository's pushes are in this format:
 
     https://github.com/:owner/:repo/events/:event
 

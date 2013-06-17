@@ -4,7 +4,12 @@ title: Libraries | GitHub API
 
 # Libraries
 
-Libraries for accessing the GitHub API from your favorite language.
+Here's a list of libraries for accessing the GitHub API from your favorite language.
+
+<div class="alert note">
+	<p>GitHub maintains its own set of open-source clients for Ruby and Objective-C!
+	Check out our <a href="http://octokit.github.io/">Octokit</a>.</p>
+</div>
 
 ## ActionScript
 

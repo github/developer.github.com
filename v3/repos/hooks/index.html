@@ -95,11 +95,21 @@ event</a>.</p>
 
 <p>A number of external services have already been integrated through the open source
 <a href="https://github.com/github/github-services">github-services</a> project, including the generic
-<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web Service</a> service which can be used to
-define your own custom hooks. All possible names for hooks, the events they support, and their configuration can be seen at <a href="https://api.github.com/hooks">/hooks</a>.</p>
+<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web Service</a> service
+which can be used to define your own custom hooks.
+Documentation for all available hooks can be found in the
+<a href="https://github.com/github/github-services/tree/master/docs">docs directory</a>
+of the github-services repository, and a JSON representation of their names,
+the events they support, and their configuration can be seen at
+<a href="https://api.github.com/hooks">api.github.com/hooks</a>.</p>
 
-<p>For a Hook to go through, the Hook needs to be configured to trigger for
-an event, and the Service has to listen to it.   Most of the Services only listen for <code>push</code> events.  However, the generic <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web Service</a> listens for all events.  Other services like the <a href="https://github.com/github/github-services/blob/master/lib/services/irc.rb">IRC Service</a> may only listen for <code>push</code>, <code>issues</code>, and <code>pull_request</code> events.</p>
+<p>For a Hook to go through, the Hook needs to be configured to trigger for an event,
+and the Service has to listen to it.
+Most of the Services only listen for <code>push</code> events.  However, the generic
+<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web Service</a>
+listens for all events.  Other services like the
+<a href="https://github.com/github/github-services/blob/master/lib/services/irc.rb">IRC Service</a>
+may only listen for <code>push</code>, <code>issues</code>, and <code>pull_request</code> events.</p>
 
 <h2 id="list">List</h2>
 
@@ -196,8 +206,8 @@ takes these fields:</p>
 <li><code>url</code></li>
   <li><code>content_type</code></li>
   <li><code>secret</code></li>
-</ul><p>Here’s how you can setup a hook that posts raw JSON (instead of the default
-legacy format):</p>
+</ul><p>Here’s how you can setup a hook that posts raw JSON
+(instead of the default legacy format):</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
@@ -332,7 +342,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="pubsubhubbub">PubSubHubbub</h2>
 
-<p>GitHub can also serve as a <a href="http://code.google.com/p/pubsubhubbub/">PubSubHubbub</a> hub for all repositories.  PSHB is a simple publish/subscribe protocol that lets servers register to receive updates when a topic is updated.  The updates are sent with an HTTP POST request to a callback URL.  Topic URLs for a GitHub repository’s pushes are in this format:</p>
+<p>GitHub can also serve as a <a href="http://code.google.com/p/pubsubhubbub/">PubSubHubbub</a> hub for all repositories.
+PSHB is a simple publish/subscribe protocol
+that lets servers register to receive updates when a topic is updated.
+The updates are sent with an HTTP POST request to a callback URL.
+Topic URLs for a GitHub repository’s pushes are in this format:</p>
 
 <pre><code>https://github.com/:owner/:repo/events/:event
 </code></pre>

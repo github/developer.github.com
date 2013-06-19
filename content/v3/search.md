@@ -28,7 +28,7 @@ q
      search to just the repository name, description, readme, or
      any combination of these.
    * [Size](https://help.github.com/articles/searching-repositories#size)  
-      Finds repository's that match a certain size (in kilobytes)
+      Finds repositories that match a certain size (in kilobytes)
    * [Forks](https://help.github.com/articles/searching-repositories#forks)  
       Specifies the number of forks a repository could have
    * [Created and Last Updated](https://help.github.com/articles/searching-repositories#created-and-last-updated) dates  
@@ -64,9 +64,52 @@ https://api.github.com/search/repositories?q=tetris%20language:assembly&sort=sta
 
 ## Search code
 
-Find code by 
+Find file contents by keywords.
 
     GET /search/code
+
+### Parameters
+
+q
+: The search terms. This can be any one of the existing code search parameters:
+ 
+   * [Search In](https://help.github.com/articles/searching-code#search-in)  
+     Qualifies which fields are searched. With this qualifier you can restrict the 
+     search to just the file contents, the file path, or both.
+   * [Languages](https://help.github.com/articles/searching-code#language)  
+      Searches code based on what language it's written in.
+   * [Forks](https://help.github.com/articles/searching-code#forks)  
+      Specifies the number of forks a hosting repository could have
+   * [Size](https://help.github.com/articles/searching-code#size)  
+      Finds files that match a certain size (in kilobytes)
+   * [Path](https://help.github.com/articles/searching-code#path)  
+      Specifies the path that the resulting code must be at
+   * [Extension](https://help.github.com/articles/searching-code#extension)  
+      Matches code files with a certain extension
+   * [Users or Repositories](https://help.github.com/articles/searching-code#users-organizations-and-repositories)  
+      Limits searches to a specific user or repository
+
+sort
+: _Optional_ Sort field. Can only be  of `indexed`, which indicates how recently 
+a file has been indexed.
+
+order
+: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
+
+page
+: _Optional_ Page number to fetch; defaults to 1
+
+per_page
+: _Optional_ Number of results per page; defaults to 30. The maximum is 100.
+
+#### Example
+
+```
+https://api.github.com/search/code?q=octokit%20extension:gemspec%20-repo:octokit/octokit.rb&sort=stars&order=desc
+```
+
+<%= headers 200 %>
+<%= json(:code_search_v3_results) %>
 
 ## Search issues
 

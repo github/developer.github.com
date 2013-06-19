@@ -761,6 +761,57 @@ module GitHub
       ]
     }
 
+    CODE_SEARCH_V3_RESULTS = {
+      "total_count" => 43,
+      "items" => [
+        {
+          "name" => "octokit.gemspec",
+          "path" => ".bundle/ruby/1.8/gems/octokit-1.23.0/octokit.gemspec",
+          "sha" => "3ffa999b4342d120d5cc67fed6ad7dc1b03d2cb3",
+          "url" => "https://api.github.com/repositories/8460725/contents/.bundle/ruby/1.8/gems/octokit-1.23.0/octokit.gemspec?ref=9c580b22493df1b3044c321729278c4e79302b7f",
+          "git_url" => "https://api.github.com/repositories/8460725/git/blobs/3ffa999b4342d120d5cc67fed6ad7dc1b03d2cb3",
+          "html_url" => "https://github.com/clervens/puppet-xampp/blob/9c580b22493df1b3044c321729278c4e79302b7f/.bundle/ruby/1.8/gems/octokit-1.23.0/octokit.gemspec",
+          "repository" => {
+            "id" => 8460725,
+            "name" => "puppet-xampp",
+            "full_name" => "clervens/puppet-xampp",
+            "owner" => {
+              "login" => "clervens",
+              "id" => 3706253,
+              "avatar_url" => "https://secure.gravatar.com/avatar/db8055d387c3fc35cb6f51dba9f8ec4a?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+              "gravatar_id" => "db8055d387c3fc35cb6f51dba9f8ec4a",
+              "url" => "https://api.github.com/users/clervens",
+              "html_url" => "https://github.com/clervens",
+              "followers_url" => "https://api.github.com/users/clervens/followers",
+              "subscriptions_url" => "https://api.github.com/users/clervens/subscriptions",
+              "organizations_url" => "https://api.github.com/users/clervens/orgs",
+              "repos_url" => "https://api.github.com/users/clervens/repos",
+              "received_events_url" => "https://api.github.com/users/clervens/received_events",
+              "type" => "User"
+            },
+            "private" => false,
+            "html_url" => "https://github.com/clervens/puppet-xampp",
+            "description" => "xampp puppet module for boxen",
+            "fork" => false,
+            "url" => "https://api.github.com/repos/clervens/puppet-xampp",
+            "forks_url" => "https://api.github.com/repos/clervens/puppet-xampp/forks",
+            "teams_url" => "https://api.github.com/repos/clervens/puppet-xampp/teams",
+            "hooks_url" => "https://api.github.com/repos/clervens/puppet-xampp/hooks",
+            "events_url" => "https://api.github.com/repos/clervens/puppet-xampp/events",
+            "tags_url" => "https://api.github.com/repos/clervens/puppet-xampp/tags",
+            "languages_url" => "https://api.github.com/repos/clervens/puppet-xampp/languages",
+            "stargazers_url" => "https://api.github.com/repos/clervens/puppet-xampp/stargazers",
+            "contributors_url" => "https://api.github.com/repos/clervens/puppet-xampp/contributors",
+            "subscribers_url" => "https://api.github.com/repos/clervens/puppet-xampp/subscribers",
+            "subscription_url" => "https://api.github.com/repos/clervens/puppet-xampp/subscription",
+            "merges_url" => "https://api.github.com/repos/clervens/puppet-xampp/merges",
+            "downloads_url" => "https://api.github.com/repos/clervens/puppet-xampp/downloads"
+          },
+          "score" => 1.4771212
+        }
+      ]
+    }
+    
     USER_SEARCH_ITEM = {
       "gravatar_id" => "70889091349f7598bce9afa588034310",
       "name" => "Hirotaka Kawata",

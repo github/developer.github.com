@@ -13,7 +13,7 @@ Note: You can fetch up to 1,000 items with this API.
 
 ## Search repositories
 
-Find repositories by keywords. This method returns up to 100 results per page and
+Find repositories via various criteria. This method returns up to 100 results per page and
 pages can be fetched using the `page` parameter.
 
     GET /search/repositories
@@ -64,7 +64,7 @@ https://api.github.com/search/repositories?q=tetris%20language:assembly&sort=sta
 
 ## Search code
 
-Find file contents by keywords.
+Find file contents via various criteria.
 
     GET /search/code
 
@@ -167,7 +167,7 @@ https://api.github.com/search/issues?q=win%20label:bug%20language:ruby%20state:o
 
 ## Search users
 
-Find users by keywords.
+Find users via various criteria.
 
     GET /search/users
 

@@ -55,9 +55,18 @@ per_page
 
 #### Example
 
+Suppose you want to search for popular Tetris repositories written in Assembly.
+Your query might look like this. 
+
 ```
 https://api.github.com/search/repositories?q=tetris%20language:assembly&sort=stars&order=desc
 ```
+
+In this request, we're searching for repositories with the word `tetris` in the 
+name, the description, or the README. We're limiting the results to only find 
+repositories where the primary language is Assembly. We're sorting by stars in
+descending order, so that the most popular repositories appear first in the
+search results.
 
 <%= headers 200 %>
 <%= json(:repo_search_v3_results) %>
@@ -105,9 +114,16 @@ per_page
 
 #### Example
 
+Suppose you want to find Ruby gems that are using the `octokit` library. Your 
+query might look like this:
+
 ```
-https://api.github.com/search/code?q=octokit%20extension:gemspec%20-repo:octokit/octokit.rb
+https://api.github.com/search/code?q=octokit%20in:file%20extension:gemspec%20-repo:octokit/octokit.rb
 ```
+
+Here, we're searching for the keyword `octokit` within a file's contents. We're
+making sure that we're only looking in files that end in _.gemspec_. The `-repo`
+notation ensures that we're also excluding [the Octokit.rb repo](https://github.com/octokit/octokit.rb).
 
 <%= headers 200 %>
 <%= json(:code_search_v3_results) %>
@@ -158,9 +174,14 @@ per_page
 
 #### Example
 
+Let's say you want to know if there are any Ruby bugs on Windows.
+
 ```
 https://api.github.com/search/issues?q=win%20label:bug%20language:ruby%20state:open
 ```
+
+In this query, we're searching for the keyword `win`, within any open issue that's 
+labelled as `bug`. The search runs across repositories whose primary language is Ruby.
 
 <%= headers 200 %>
 <%= json(:issue_search_v3_results) %>
@@ -206,9 +227,16 @@ per_page
 
 #### Example
 
+Imagine you're looking for a list of popular users that live within San Francisco.
+You might try out this query:
+
 ```
-https://api.github.com/search/users?q=location:%22San%20Francisco%22%20repos:%3E42%20followers:%3E1000
+https://api.github.com/search/users?q=location:%22San%20Francisco%22%20repos:>42%20followers:%3E1000
 ```
+
+Here, we're looking at users that specified San Francisco as their location. We're 
+only interested in users with more than 42 repositories, and only if they have
+over 1,000 followers.
 
 <%= headers 200 %>
 <%= json(:user_search_v3_results) %>

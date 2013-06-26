@@ -83,9 +83,9 @@ q
    * [Size](https://help.github.com/articles/searching-code#size)  
       Finds files that match a certain size (in kilobytes)
    * [Path](https://help.github.com/articles/searching-code#path)  
-      Specifies the path that the resulting code must be at
+      Specifies the path that the resulting file must be at
    * [Extension](https://help.github.com/articles/searching-code#extension)  
-      Matches code files with a certain extension
+      Matches files with a certain extension
    * [Users or Repositories](https://help.github.com/articles/searching-code#users-organizations-and-repositories)  
       Limits searches to a specific user or repository
 

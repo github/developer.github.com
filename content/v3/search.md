@@ -59,7 +59,7 @@ Suppose you want to search for popular Tetris repositories written in Assembly.
 Your query might look like this. 
 
 ```
-https://api.github.com/search/repositories?q=tetris%20language:assembly&sort=stars&order=desc
+https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 ```
 
 In this request, we're searching for repositories with the word `tetris` in the 
@@ -79,7 +79,7 @@ type in your Accept header. For example, via curl, the above query would look li
 
     curl -H 'Accept: application/vnd.github.text-match+json' \
          -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
-         https://api.github.com/search/repositories?q=tetris%20language:assembly&sort=stars&order=desc
+         https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 
 
 This produces the same JSON payload as above, with an extra key called `text_matches`.
@@ -135,7 +135,7 @@ Suppose you want to find Ruby gems that are using the `octokit` library. Your
 query might look like this:
 
 ```
-https://api.github.com/search/code?q=octokit%20in:file%20extension:gemspec%20-repo:octokit/octokit.rb
+https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb
 ```
 
 Here, we're searching for the keyword `octokit` within a file's contents. We're
@@ -153,7 +153,7 @@ type in your Accept header. For example, via curl, the above query would look li
 
     curl -H 'Accept: application/vnd.github.text-match+json' \
          -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
-         https://api.github.com/search/code?q=octokit%20in:file%20extension:gemspec%20-repo:octokit/octokit.rb
+         https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb
 
 
 This produces the same JSON payload as above, with an extra key called `text_matches`.
@@ -211,7 +211,7 @@ per_page
 Let's say you want to know if there are any Ruby bugs on Windows.
 
 ```
-https://api.github.com/search/issues?q=win%20label:bug%20language:ruby%20state:open
+https://api.github.com/search/issues?q=win+label:bug+language:ruby+state:open
 ```
 
 In this query, we're searching for the keyword `win`, within any open issue that's 
@@ -228,7 +228,7 @@ type in your Accept header. For example, via curl, the above query would look li
 
     curl -H 'Accept: application/vnd.github.text-match+json' \
          -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
-         https://api.github.com/search/issues?q=win%20label:bug%20language:ruby%20state:open
+         https://api.github.com/search/issues?q=win+label:bug+language:ruby+state:open
 
 
 This produces the same JSON payload as above, with an extra key called `text_matches`.
@@ -282,7 +282,7 @@ Imagine you're looking for a list of popular users that live within San Francisc
 You might try out this query:
 
 ```
-https://api.github.com/search/users?q=location:%22San%20Francisco%22%20repos:>42%20followers:%3E1000
+https://api.github.com/search/users?q=location:%22San+Francisco%22+repos:>42+followers:%3E1000
 ```
 
 Here, we're looking at users that specified San Francisco as their location. We're 
@@ -300,7 +300,7 @@ type in your Accept header. For example, via curl, the above query would look li
 
     curl -H 'Accept: application/vnd.github.text-match+json' \
          -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
-         https://api.github.com/search/users?q=location:%22San%20Francisco%22%20repos:>42%20followers:%3E1000
+         https://api.github.com/search/users?q=location:%22San+Francisco%22+repos:>42+followers:%3E1000
 
 
 This produces the same JSON payload as above, with an extra key called `text_matches`.

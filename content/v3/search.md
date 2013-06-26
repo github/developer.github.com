@@ -127,11 +127,11 @@ q
      Qualifies which fields are searched. With this qualifier you can restrict the 
      search to just the title, body, comments, or any combination of these.
    * [Author](https://help.github.com/articles/searching-issues#author)  
-     Finds issues created by a certain user or team
+     Finds issues created by a certain user 
    * [Assignee](https://help.github.com/articles/searching-issues#assignee)  
-     Finds issues that are assigned to a certain user or team
+     Finds issues that are assigned to a certain user 
    * [Mentions](https://help.github.com/articles/searching-issues#mentions)  
-     Finds issues that mention a certain user or team
+     Finds issues that mention a certain user 
    * [State](https://help.github.com/articles/searching-issues#state)  
      Filter issues based on whether they're open or closed
    * [Labels](https://help.github.com/articles/searching-issues#labels)  

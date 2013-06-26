@@ -77,7 +77,7 @@ q
      Qualifies which fields are searched. With this qualifier you can restrict the 
      search to just the file contents, the file path, or both.
    * [Languages](https://help.github.com/articles/searching-code#language)  
-      Searches code based on what language it's written in.
+      Searches code based on what language it's written in
    * [Forks](https://help.github.com/articles/searching-code#forks)  
       Specifies the number of forks a hosting repository could have
    * [Size](https://help.github.com/articles/searching-code#size)  
@@ -90,8 +90,9 @@ q
       Limits searches to a specific user or repository
 
 sort
-: _Optional_ Sort field. Can only be  of `indexed`, which indicates how recently 
-a file has been indexed.
+: _Optional_ Sort field. Can only be `indexed`, which indicates how recently
+a file has been indexed by the GitHub search infrastructure. If not
+provided, results are sorted by best match.
 
 order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.

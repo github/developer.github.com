@@ -48,10 +48,10 @@ order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
 
 page
-: _Optional_ Page number to fetch; defaults to 1.
+: _Optional_ Page number to fetch; defaults to `1`.
 
 per_page
-: _Optional_ Number of results per page; defaults to 30. The maximum is 100.
+: _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
 #### Example
 
@@ -97,10 +97,10 @@ order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
 
 page
-: _Optional_ Page number to fetch; defaults to 1.
+: _Optional_ Page number to fetch; defaults to `1`.
 
 per_page
-: _Optional_ Number of results per page; defaults to 30. The maximum is 100.
+: _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
 #### Example
 
@@ -150,10 +150,10 @@ order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
 
 page
-: _Optional_ Page number to fetch; defaults to 1.
+: _Optional_ Page number to fetch; defaults to `1`.
 
 per_page
-: _Optional_ Number of results per page; defaults to 30. The maximum is 100.
+: _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
 #### Example
 
@@ -198,10 +198,10 @@ order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
 
 page
-: _Optional_ Page number to fetch; defaults to 1.
+: _Optional_ Page number to fetch; defaults to `1`.
 
 per_page
-: _Optional_ Number of results per page; defaults to 30. The maximum is 100.
+: _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
 #### Example
 

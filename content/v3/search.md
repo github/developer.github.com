@@ -21,7 +21,7 @@ pages can be fetched using the `page` parameter.
 ### Parameters
 
 q
-: The search terms. This can be any one of the existing repository search parameters:
+: The search terms. This can be any combination of the existing repository search parameters:
  
    * [Search In](https://help.github.com/articles/searching-repositories#search-in)  
      Qualifies which fields are searched. With this qualifier you can restrict the 
@@ -71,7 +71,7 @@ Find file contents via various criteria.
 ### Parameters
 
 q
-: The search terms. This can be any one of the existing code search parameters:
+: The search terms. This can be any combination of the existing code search parameters:
  
    * [Search In](https://help.github.com/articles/searching-code#search-in)  
      Qualifies which fields are searched. With this qualifier you can restrict the 
@@ -121,7 +121,7 @@ Find issues by state and keyword.
 ### Parameters
 
 q
-: The search terms. This can be any one of the existing issue search parameters:
+: The search terms. This can be any combination of the existing issue search parameters:
  
    * [Search In](https://help.github.com/articles/searching-issues#search-in)  
      Qualifies which fields are searched. With this qualifier you can restrict the 
@@ -174,7 +174,7 @@ Find users via various criteria.
 ### Parameters
 
 q
-: The search terms. This can be any one of the existing issue search parameters:
+: The search terms. This can be any combination of the existing issue search parameters:
  
    * [Search In](https://help.github.com/articles/searching-users#search-in)  
      Qualifies which fields are searched. With this qualifier you can restrict 

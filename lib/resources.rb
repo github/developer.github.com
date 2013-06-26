@@ -691,6 +691,26 @@ module GitHub
       ]
     }
 
+    ISSUE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/8422309/issues/424",
+          "object_type" => "Issue",
+          "property" => "title",
+          "fragment" => "Upvotes needed to win a reward can be negative",
+          "matches" => [
+            {
+              "text" => "win",
+              "indices" => [
+                18,
+                21
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
     REPO_SEARCH_ITEM = {
       "type" => "repo",
       "created" => "2011-09-05T11:07:54Z",
@@ -761,6 +781,41 @@ module GitHub
       ]
     }
 
+    REPO_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/3081286",
+          "object_type" => "Repository",
+          "property" => "name",
+          "fragment" => "Tetris",
+          "matches" => [
+            {
+              "text" => "Tetris",
+              "indices" => [
+                0,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/3081286",
+          "object_type" => "Repository",
+          "property" => "description",
+          "fragment" => "A C implementation of Tetris using Pennsim through LC4",
+          "matches" => [
+            {
+              "text" => "Tetris",
+              "indices" => [
+                22,
+                28
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
     CODE_SEARCH_V3_RESULTS = {
       "total_count" => 43,
       "items" => [
@@ -811,7 +866,56 @@ module GitHub
         }
       ]
     }
-    
+
+    CODE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/8460725/contents/.bundle/ruby/1.8/specifications/octokit-1.23.0.gemspec?ref=9c580b22493df1b3044c321729278c4e79302b7f",
+          "object_type" => "FileContent",
+          "property" => "content",
+          "fragment" => "name = %q{octokit}\n  s.version = \"1.23.0\"\n\n  s.required_rubygems_version = Gem::Requirement.new(\">= 1.3.6\")",
+          "matches" => [
+            {
+              "text" => "octokit",
+              "indices" => [
+                10,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/8460725/contents/.bundle/ruby/1.8/specifications/octokit-1.23.0.gemspec?ref=9c580b22493df1b3044c321729278c4e79302b7f",
+          "object_type" => "FileContent",
+          "property" => "content",
+          "fragment" => "\"Rakefile\", \"octokit.gemspec\", \"lib/faraday/response/raise_octokit_error.rb\", \"lib/octokit/authentication.rb\"",
+          "matches" => [
+            {
+              "text" => "octokit",
+              "indices" => [
+                13,
+                20
+              ]
+            },
+            {
+              "text" => "octokit",
+              "indices" => [
+                59,
+                66
+              ]
+            },
+            {
+              "text" => "octokit",
+              "indices" => [
+                83,
+                90
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
     USER_SEARCH_ITEM = {
       "gravatar_id" => "70889091349f7598bce9afa588034310",
       "name" => "Hirotaka Kawata",
@@ -836,6 +940,28 @@ module GitHub
     }
 
     USER_SEARCH_V3_RESULTS = {
+      "total_count" => 12,
+      "items" => [
+        {
+          "login" => "rtomayko",
+          "id" => 404,
+          "avatar_url" => "https://secure.gravatar.com/avatar/abfc88b96ae18c85ba7aac3bded2ec5e?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+          "gravatar_id" => "abfc88b96ae18c85ba7aac3bded2ec5e",
+          "url" => "https://api.github.com/users/rtomayko",
+          "html_url" => "https://github.com/rtomayko",
+          "followers_url" => "https://api.github.com/users/rtomayko/followers",
+          "subscriptions_url" => "https://api.github.com/users/rtomayko/subscriptions",
+          "organizations_url" => "https://api.github.com/users/rtomayko/orgs",
+          "repos_url" => "https://api.github.com/users/rtomayko/repos",
+          "received_events_url" => "https://api.github.com/users/rtomayko/received_events",
+          "type" => "User",
+          "score" => 1.0
+        }
+      ]
+    }
+
+
+    USER_SEARCH_V3_RESULTS_HIGHLIGHTING = {
       "total_count" => 12,
       "items" => [
         {

@@ -71,6 +71,23 @@ search results.
 <%= headers 200 %>
 <%= json(:repo_search_v3_results) %>
 
+### Highlighting Repository Searches
+
+You can enable highlighting in your results by specifying the `text-match` media
+type in your Accept header. For example, via curl, the above query would look like this:
+
+
+    curl -H 'Accept: application/vnd.github.text-match+json' \
+         -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
+         https://api.github.com/search/repositories?q=tetris%20language:assembly&sort=stars&order=desc
+
+
+This produces the same JSON payload as above, with an extra key called `text_matches`.
+`text_matches` is an array of objects indicating, among other things, the indicies 
+of your search terms.
+
+<%= json(:repo_search_v3_results_highlighting) %>
+
 ## Search code
 
 Find file contents via various criteria.
@@ -127,6 +144,23 @@ notation ensures that we're also excluding [the Octokit.rb repo](https://github.
 
 <%= headers 200 %>
 <%= json(:code_search_v3_results) %>
+
+### Highlighting Code Searches
+
+You can enable highlighting in your results by specifying the `text-match` media
+type in your Accept header. For example, via curl, the above query would look like this:
+
+
+    curl -H 'Accept: application/vnd.github.text-match+json' \
+         -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
+         https://api.github.com/search/code?q=octokit%20in:file%20extension:gemspec%20-repo:octokit/octokit.rb
+
+
+This produces the same JSON payload as above, with an extra key called `text_matches`.
+`text_matches` is an array of objects indicating, among other things, the indicies 
+of your search terms.
+
+<%= json(:code_search_v3_results_highlighting) %>
 
 ## Search issues
 
@@ -186,6 +220,23 @@ labelled as `bug`. The search runs across repositories whose primary language is
 <%= headers 200 %>
 <%= json(:issue_search_v3_results) %>
 
+### Highlighting Issue Searches
+
+You can enable highlighting in your results by specifying the `text-match` media
+type in your Accept header. For example, via curl, the above query would look like this:
+
+
+    curl -H 'Accept: application/vnd.github.text-match+json' \
+         -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
+         https://api.github.com/search/issues?q=win%20label:bug%20language:ruby%20state:open
+
+
+This produces the same JSON payload as above, with an extra key called `text_matches`.
+`text_matches` is an array of objects indicating, among other things, the indicies 
+of your search terms.
+
+<%= json(:issue_search_v3_results_highlighting) %>
+
 ## Search users
 
 Find users via various criteria.
@@ -240,3 +291,20 @@ over 1,000 followers.
 
 <%= headers 200 %>
 <%= json(:user_search_v3_results) %>
+
+### Highlighting Code Searches
+
+You can enable highlighting in your results by specifying the `text-match` media
+type in your Accept header. For example, via curl, the above query would look like this:
+
+
+    curl -H 'Accept: application/vnd.github.text-match+json' \
+         -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
+         https://api.github.com/search/users?q=location:%22San%20Francisco%22%20repos:>42%20followers:%3E1000
+
+
+This produces the same JSON payload as above, with an extra key called `text_matches`.
+`text_matches` is an array of objects indicating, among other things, the indicies 
+of your search terms.
+
+<%= json(:user_search_v3_results_highlighting) %>

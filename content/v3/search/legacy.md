@@ -11,7 +11,7 @@ This is a listing of the Legacy Search API features from API v2 that have been p
 v3. There should be no changes, other than the new URL and JSON output format.
 
 Please note that [the Search API](/v3/search/) contains new endpoints and much 
-more funcitonality.
+more functionality.
 
 ## Search issues
 

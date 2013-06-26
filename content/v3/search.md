@@ -45,7 +45,7 @@ sort
 provided, results are sorted by best match.
 
 order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
+: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
 
 page
 : _Optional_ Page number to fetch; defaults to `1`.
@@ -95,7 +95,7 @@ a file has been indexed by the GitHub search infrastructure. If not
 provided, results are sorted by best match.
 
 order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
+: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
 
 page
 : _Optional_ Page number to fetch; defaults to `1`.
@@ -148,7 +148,7 @@ sort
 provided, results are sorted by best match.
 
 order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
+: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
 
 page
 : _Optional_ Page number to fetch; defaults to `1`.
@@ -196,7 +196,7 @@ sort
 provided, results are sorted by best match.
 
 order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
+: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
 
 page
 : _Optional_ Page number to fetch; defaults to `1`.

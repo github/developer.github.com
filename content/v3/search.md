@@ -106,7 +106,7 @@ per_page
 #### Example
 
 ```
-https://api.github.com/search/code?q=octokit%20extension:gemspec%20-repo:octokit/octokit.rb&sort=stars&order=desc
+https://api.github.com/search/code?q=octokit%20extension:gemspec%20-repo:octokit/octokit.rb
 ```
 
 <%= headers 200 %>

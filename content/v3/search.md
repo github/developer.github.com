@@ -78,7 +78,6 @@ type in your Accept header. For example, via curl, the above query would look li
 
 
     curl -H 'Accept: application/vnd.github.text-match+json' \
-         -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
          https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 
 
@@ -152,7 +151,6 @@ type in your Accept header. For example, via curl, the above query would look li
 
 
     curl -H 'Accept: application/vnd.github.text-match+json' \
-         -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
          https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb
 
 
@@ -227,7 +225,6 @@ type in your Accept header. For example, via curl, the above query would look li
 
 
     curl -H 'Accept: application/vnd.github.text-match+json' \
-         -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
          https://api.github.com/search/issues?q=win+label:bug+language:ruby+state:open
 
 
@@ -278,16 +275,14 @@ per_page
 
 #### Example
 
-Imagine you're looking for a list of popular users that live within San Francisco.
-You might try out this query:
+Imagine you're looking for a list of popular users. You might try out this query:
 
 ```
-https://api.github.com/search/users?q=location:%22San+Francisco%22+repos:>42+followers:%3E1000
+https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
 ```
 
-Here, we're looking at users that specified San Francisco as their location. We're
-only interested in users with more than 42 repositories, and only if they have
-over 1,000 followers.
+Here, we're looking at users with the name Tom. We're only interested in those 
+with more than 42 repositories, and only if they have over 1,000 followers.
 
 <%= headers 200 %>
 <%= json(:user_search_v3_results) %>
@@ -299,8 +294,7 @@ type in your Accept header. For example, via curl, the above query would look li
 
 
     curl -H 'Accept: application/vnd.github.text-match+json' \
-         -H "Authorization: bearer YOUR_ACCESS_TOKEN" \
-         https://api.github.com/search/users?q=location:%22San+Francisco%22+repos:>42+followers:%3E1000
+         https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
 
 
 This produces the same JSON payload as above, with an extra key called `text_matches`.
@@ -308,3 +302,5 @@ This produces the same JSON payload as above, with an extra key called `text_mat
 of your search terms.
 
 <%= json(:user_search_v3_results_highlighting) %>
+
+Note that you can't find highlighted matches on location at this time.

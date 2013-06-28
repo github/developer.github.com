@@ -943,41 +943,55 @@ module GitHub
       "total_count" => 12,
       "items" => [
         {
-          "login" => "rtomayko",
-          "id" => 404,
-          "avatar_url" => "https://secure.gravatar.com/avatar/abfc88b96ae18c85ba7aac3bded2ec5e?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-          "gravatar_id" => "abfc88b96ae18c85ba7aac3bded2ec5e",
-          "url" => "https://api.github.com/users/rtomayko",
-          "html_url" => "https://github.com/rtomayko",
-          "followers_url" => "https://api.github.com/users/rtomayko/followers",
-          "subscriptions_url" => "https://api.github.com/users/rtomayko/subscriptions",
-          "organizations_url" => "https://api.github.com/users/rtomayko/orgs",
-          "repos_url" => "https://api.github.com/users/rtomayko/repos",
-          "received_events_url" => "https://api.github.com/users/rtomayko/received_events",
+          "login" => "mojombo",
+          "id" => 1,
+          "avatar_url" => "https://secure.gravatar.com/avatar/25c7c18223fb42a4c6ae1c8db6f50f9b?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+          "gravatar_id" => "25c7c18223fb42a4c6ae1c8db6f50f9b",
+          "url" => "https://api.github.com/users/mojombo",
+          "html_url" => "https://github.com/mojombo",
+          "followers_url" => "https://api.github.com/users/mojombo/followers",
+          "subscriptions_url" => "https://api.github.com/users/mojombo/subscriptions",
+          "organizations_url" => "https://api.github.com/users/mojombo/orgs",
+          "repos_url" => "https://api.github.com/users/mojombo/repos",
+          "received_events_url" => "https://api.github.com/users/mojombo/received_events",
           "type" => "User",
-          "score" => 1.0
+          "score" => 105.47857
         }
       ]
     }
 
 
     USER_SEARCH_V3_RESULTS_HIGHLIGHTING = {
-      "total_count" => 12,
-      "items" => [
+     "text_matches" => [
         {
-          "login" => "rtomayko",
-          "id" => 404,
-          "avatar_url" => "https://secure.gravatar.com/avatar/abfc88b96ae18c85ba7aac3bded2ec5e?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-          "gravatar_id" => "abfc88b96ae18c85ba7aac3bded2ec5e",
-          "url" => "https://api.github.com/users/rtomayko",
-          "html_url" => "https://github.com/rtomayko",
-          "followers_url" => "https://api.github.com/users/rtomayko/followers",
-          "subscriptions_url" => "https://api.github.com/users/rtomayko/subscriptions",
-          "organizations_url" => "https://api.github.com/users/rtomayko/orgs",
-          "repos_url" => "https://api.github.com/users/rtomayko/repos",
-          "received_events_url" => "https://api.github.com/users/rtomayko/received_events",
-          "type" => "User",
-          "score" => 1.0
+          "object_url" => "https://api.github.com/users/mojombo",
+          "object_type" => "User",
+          "property" => "email",
+          "fragment" => "tom@github.com",
+          "matches" => [
+            {
+              "text" => "tom",
+              "indices" => [
+                0,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/users/mojombo",
+          "object_type" => "User",
+          "property" => "name",
+          "fragment" => "Tom Preston-Werner",
+          "matches" => [
+            {
+              "text" => "Tom",
+              "indices" => [
+                0,
+                3
+              ]
+            }
+          ]
         }
       ]
     }

@@ -81,9 +81,9 @@ type in your Accept header. For example, via curl, the above query would look li
          https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 
 
-This produces the same JSON payload as above, with an extra key called `text_matches`.
-`text_matches` is an array of objects indicating, among other things, the indicies
-of your search terms.
+This produces the same JSON payload as above, with an extra key called `text_matches`,
+an array of objects. These objects provide information such as the position of your
+search terms within the text, as well as the property that it was matched against.  
 
 <%= json(:repo_search_v3_results_highlighting) %>
 
@@ -154,9 +154,9 @@ type in your Accept header. For example, via curl, the above query would look li
          https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb
 
 
-This produces the same JSON payload as above, with an extra key called `text_matches`.
-`text_matches` is an array of objects indicating, among other things, the indicies
-of your search terms.
+This produces the same JSON payload as above, with an extra key called `text_matches`,
+an array of objects. These objects provide information such as the position of your
+search terms within the text, as well as the property that it was matched against.  
 
 <%= json(:code_search_v3_results_highlighting) %>
 
@@ -228,9 +228,9 @@ type in your Accept header. For example, via curl, the above query would look li
          https://api.github.com/search/issues?q=win+label:bug+language:ruby+state:open
 
 
-This produces the same JSON payload as above, with an extra key called `text_matches`.
-`text_matches` is an array of objects indicating, among other things, the indicies
-of your search terms.
+This produces the same JSON payload as above, with an extra key called `text_matches`,
+an array of objects. These objects provide information such as the position of your
+search terms within the text, as well as the property that it was matched against.  
 
 <%= json(:issue_search_v3_results_highlighting) %>
 
@@ -297,9 +297,9 @@ type in your Accept header. For example, via curl, the above query would look li
          https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
 
 
-This produces the same JSON payload as above, with an extra key called `text_matches`.
-`text_matches` is an array of objects indicating, among other things, the indicies
-of your search terms.
+This produces the same JSON payload as above, with an extra key called `text_matches`,
+an array of objects. These objects provide information such as the position of your
+search terms within the text, as well as the property that it was matched against.  
 
 <%= json(:user_search_v3_results_highlighting) %>
 

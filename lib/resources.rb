@@ -1232,28 +1232,33 @@ module GitHub
 
     FEEDS = {
       :timeline_url => "https://github.com/timeline",
-      :public_user_url => "https://github.com/defunkt",
-      :user_url => "https://github.com/defunkt.private?token=abc123",
-      :actor_url => "https://github.com/defunkt.private.actor?token=abc123",
-      :organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      :user_url => "https://github.com/{user}",
+      :current_user_public => "https://github.com/defunkt",
+      :current_user_url => "https://github.com/defunkt.private?token=abc123",
+      :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
+      :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
       :_links => {
         :timeline => {
           :href => "https://github.com/timeline",
           :type => "application/atom+xml"
         },
-        :public_user => {
+        :user => {
+          :href => "https://github.com/{user}",
+          :type => "application/atom+xml"
+        },
+        :current_user_public => {
           :href => "https://github.com/defunkt",
           :type => "application/atom+xml"
         },
-        :user => {
+        :current_user => {
           :href => "https://github.com/defunkt.private?token=abc123",
           :type => "application/atom+xml"
         },
-        :actor => {
+        :current_user_actor => {
           :href => "https://github.com/defunkt.private.actor?token=abc123",
           :type => "application/atom+xml"
         },
-        :organization => {
+        :current_user_organization => {
           :href => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
           :type => "application/atom+xml"
         }

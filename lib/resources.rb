@@ -71,8 +71,8 @@ module GitHub
           end
         end
 
-        lines << "X-RateLimit-Limit: 5000"
-        lines << "X-RateLimit-Remaining: 4999"
+        lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
+        lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
         %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
       end

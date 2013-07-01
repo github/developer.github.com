@@ -1243,7 +1243,7 @@ module GitHub
         },
         :public_user => {
           :href => "http://github.dev/defunkt",
-          :accept => "application/atom+xml"
+          :type => "application/atom+xml"
         },
         :user => {
           :href => "http://github.dev/defunkt.private?token=abc123",

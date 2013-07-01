@@ -23,5 +23,5 @@ tokens.
 <%= headers 200 %>
 <%= json :feeds %>
 
-[Atom]: https://en.wikipedia.org/wiki/Atom
+[Atom]: http://en.wikipedia.org/wiki/Atom_(standard)
 [authenticating]: /v3/#basic-authentication

@@ -85,6 +85,9 @@ This produces the same JSON payload as above, with an extra key called `text_mat
 an array of objects. These objects provide information such as the position of your
 search terms within the text, as well as the property that it was matched against.  
 
+You can highlight the **name** and **description** fields in your results. Here's 
+an example response:
+
 <%= json(:repo_search_v3_results_highlighting) %>
 
 ## Search code
@@ -153,10 +156,12 @@ type in your Accept header. For example, via curl, the above query would look li
     curl -H 'Accept: application/vnd.github.text-match+json' \
          https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb
 
-
 This produces the same JSON payload as above, with an extra key called `text_matches`,
 an array of objects. These objects provide information such as the position of your
 search terms within the text, as well as the property that it was matched against.  
+
+You can highlight the **file contents** in your results. Here's 
+an example response:
 
 <%= json(:code_search_v3_results_highlighting) %>
 
@@ -232,6 +237,9 @@ This produces the same JSON payload as above, with an extra key called `text_mat
 an array of objects. These objects provide information such as the position of your
 search terms within the text, as well as the property that it was matched against.  
 
+You can highlight the **title**, **body**, and **comment body** in your results. Here's 
+an example response:
+
 <%= json(:issue_search_v3_results_highlighting) %>
 
 ## Search users
@@ -301,6 +309,7 @@ This produces the same JSON payload as above, with an extra key called `text_mat
 an array of objects. These objects provide information such as the position of your
 search terms within the text, as well as the property that it was matched against.  
 
-<%= json(:user_search_v3_results_highlighting) %>
+You can highlight the **login**, **email**, and **name** in your results. Here's 
+an example response:
 
-Note that you can't find highlighted matches on location at this time.
+<%= json(:user_search_v3_results_highlighting) %>

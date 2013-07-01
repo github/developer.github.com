@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Per-repository Review and Issue Comment&nbsp;listing</title>
+  <title>Feeds API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,16 +36,16 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-12-04-List-comments-for-repo/">
+    <div class="change" id="/changes/2013-07-01-feeds-api/">
 <h2 class="title">
-  <a href="/changes/2012-12-04-List-comments-for-repo/">Per-repository Review and Issue Comment&nbsp;listing</a>
+  <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 4, 2012
+    July 1, 2013
     
   </li>
   <li class="who_when">
@@ -56,26 +56,51 @@
 </div>
 
 
-<p>You’ve always been able to grab all the commit comments for an entire
-repository via the API, but to get Issue comments and Pull Request Review
-Comments, you could only fetch the comments for a single Issue or Pull Request.</p>
+<p>Today we’re releasing a new <a href="/v3/activity/feeds/">Feeds API</a>, an easy way to list all the Atom
+resources available to the authenticated user.</p>
 
-<p>Today, we’re introducing two new methods to grab all Issue Comments and Review
-Comments for a repository.</p>
+<pre class="terminal">
 
-<pre><code># Grab all Issue Comments
-curl https://api.github.com/repos/mathiasbynens/dotfiles/issues/comments
+curl -u defunkt https://api.github.com/feeds
 
-# Grab all Review Comments
-curl https://api.github.com/repos/mathiasbynens/dotfiles/pulls/comments
-</code></pre>
+{
+  "timeline_url": "https://github.com/timeline",
+  "user_url": "https://github.com/{user}",
+  "current_user_public_url": "https://github.com/defunkt",
+  "current_user_url": "https://github.com/defunkt.private?token=abc123",
+  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",
+  "current_user_organization_url": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+  "_links": {
+    "timeline": {
+      "href": "https://github.com/timeline",
+      "type": "application/atom+xml"
+    },
+    "user": {
+      "href": "https://github.com/{user}",
+      "type": "application/atom+xml"
+    },
+    "current_user_public": {
+      "href": "https://github.com/defunkt",
+      "type": "application/atom+xml"
+    },
+    "current_user": {
+      "href": "https://github.com/defunkt.private?token=abc123",
+      "type": "application/atom+xml"
+    },
+    "current_user_actor": {
+      "href": "https://github.com/defunkt.private.actor?token=abc123",
+      "type": "application/atom+xml"
+    },
+    "current_user_organization": {
+      "href": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      "type": "application/atom+xml"
+    }
+  }
+}
 
-<p>Check out the docs for sorting and filtering options:</p>
+</pre>
 
-<ul>
-<li><a href="/v3/issues/comments/#list-comments-in-a-repository">Issue comments</a></li>
-  <li><a href="/v3/pulls/comments/#list-comments-in-a-repository">Review comments</a></li>
-</ul>
+<p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
 </div>
 
       </div>

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Per-repository Review and Issue Comment&nbsp;listing</title>
+  <title>Feeds | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,48 +36,77 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-12-04-List-comments-for-repo/">
-<h2 class="title">
-  <a href="/changes/2012-12-04-List-comments-for-repo/">Per-repository Review and Issue Comment&nbsp;listing</a>
-</h2>
+    <h1 id="feeds">Feeds</h1>
 
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    December 4, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-      <a href="https://github.com/pengwynn">pengwynn</a>
-  </li>
-</ul>
-</div>
+<ul id="markdown-toc">
+<li><a href="#list-feeds">List Feeds</a></li>
+</ul><h2 id="list-feeds">List Feeds</h2>
 
-
-<p>You’ve always been able to grab all the commit comments for an entire
-repository via the API, but to get Issue comments and Pull Request Review
-Comments, you could only fetch the comments for a single Issue or Pull Request.</p>
-
-<p>Today, we’re introducing two new methods to grab all Issue Comments and Review
-Comments for a repository.</p>
-
-<pre><code># Grab all Issue Comments
-curl https://api.github.com/repos/mathiasbynens/dotfiles/issues/comments
-
-# Grab all Review Comments
-curl https://api.github.com/repos/mathiasbynens/dotfiles/pulls/comments
-</code></pre>
-
-<p>Check out the docs for sorting and filtering options:</p>
+<p>GitHub provides several timeline resources in <a href="http://en.wikipedia.org/wiki/Atom_(standard)">Atom</a> format. The Feeds API
+lists all the feeds available to the authenticating user:</p>
 
 <ul>
-<li><a href="/v3/issues/comments/#list-comments-in-a-repository">Issue comments</a></li>
-  <li><a href="/v3/pulls/comments/#list-comments-in-a-repository">Review comments</a></li>
-</ul>
-</div>
+<li>
+<strong>Timeline</strong>: The GitHub global public timeline</li>
+  <li>
+<strong>User</strong>: The public timeline for any user, using <a href="http://developer.github.com/v3/#hypermedia">URI template</a>
+</li>
+  <li>
+<strong>Current user public</strong>: The public timeline for the authenticated user</li>
+  <li>
+<strong>Current user</strong>: The private timeline for the authenticated user</li>
+  <li>
+<strong>Current user actor</strong>: The private timeline for activity created by the authenticated user</li>
+  <li>
+<strong>Current user organization</strong>: The private timeline for the authenticated user for a given organization, using <a href="http://developer.github.com/v3/#hypermedia">URI template</a>
+</li>
+</ul><p><strong>Note</strong>: Private feeds are only returned when <a href="/v3/#basic-authentication">authenticating via Basic
+Auth</a> since current feed URIs use the older, non revokable auth
+tokens.</p>
 
+<pre><code>GET /feeds
+</code></pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"timeline_url"</span><span class="o">:</span> <span class="s2">"https://github.com/timeline"</span><span class="p">,</span>
+  <span class="s2">"user_url"</span><span class="o">:</span> <span class="s2">"https://github.com/{user}"</span><span class="p">,</span>
+  <span class="s2">"current_user_public"</span><span class="o">:</span> <span class="s2">"https://github.com/defunkt"</span><span class="p">,</span>
+  <span class="s2">"current_user_url"</span><span class="o">:</span> <span class="s2">"https://github.com/defunkt.private?token=abc123"</span><span class="p">,</span>
+  <span class="s2">"current_user_actor_url"</span><span class="o">:</span> <span class="s2">"https://github.com/defunkt.private.actor?token=abc123"</span><span class="p">,</span>
+  <span class="s2">"current_user_organization_url"</span><span class="o">:</span> <span class="s2">"https://github.com/organizations/{org}/defunkt.private.atom?token=abc123"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"timeline"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/timeline"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"application/atom+xml"</span>
+    <span class="p">},</span>
+    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/{user}"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"application/atom+xml"</span>
+    <span class="p">},</span>
+    <span class="s2">"current_user_public"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/defunkt"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"application/atom+xml"</span>
+    <span class="p">},</span>
+    <span class="s2">"current_user"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/defunkt.private?token=abc123"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"application/atom+xml"</span>
+    <span class="p">},</span>
+    <span class="s2">"current_user_actor"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/defunkt.private.actor?token=abc123"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"application/atom+xml"</span>
+    <span class="p">},</span>
+    <span class="s2">"current_user_organization"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/organizations/{org}/defunkt.private.atom?token=abc123"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"application/atom+xml"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

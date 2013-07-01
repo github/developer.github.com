@@ -26,3 +26,7 @@ discussions, as well as events in the user's activity feed.
 This is a read-only API of the events that power the various activity streams
 on GitHub.
 
+## Feeds
+
+List of Atom feeds available for the authenticating user.
+

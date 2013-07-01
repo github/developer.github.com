@@ -1229,6 +1229,36 @@ module GitHub
       [0,1,43],
       [0,2,21]
     ]
+
+    FEEDS = {
+      :timeline_url => "http://github.dev/timeline",
+      :public_user_url => "http://github.dev/defunkt",
+      :user_url => "http://github.dev/defunkt.private?token=abc123",
+      :actor_url => "http://github.dev/defunkt.private.actor?token=abc123",
+      :organization_url => "http://github.dev/organizations/{org}/defunkt.private.atom?token=abc123",
+      :_links => {
+        :timeline => {
+          :href => "http://github.dev/timeline",
+          :type => "application/atom+xml"
+        },
+        :public_user => {
+          :href => "http://github.dev/defunkt",
+          :accept => "application/atom+xml"
+        },
+        :user => {
+          :href => "http://github.dev/defunkt.private?token=abc123",
+          :type => "application/atom+xml"
+        },
+        :actor => {
+          :href => "http://github.dev/defunkt.private.actor?token=abc123",
+          :type => "application/atom+xml"
+        },
+        :organization => {
+          :href => "http://github.dev/organizations/{org}/defunkt.private.atom?token=abc123",
+          :type => "application/atom+xml"
+        }
+      }
+    }
   end
 end
 

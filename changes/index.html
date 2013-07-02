@@ -38,6 +38,59 @@
       <div class="content">
     <h1 id="api-changes">API Changes</h1>
 
+<div class="change" id="/changes/2013-07-02-rate-limit-reset/">
+  <h2 class="title">
+  <a href="/changes/2013-07-02-rate-limit-reset/">When Does My Rate Limit Reset?</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    July 2, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/592e1e6f041f9a4ec51846fd82013aea?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>Have you ever wondered when your <a href="/v3/#rate-limiting">rate limit</a> will reset back to its maximum value?
+That information is now available in the new <code>X-RateLimit-Reset</code> response header.</p>
+
+<pre class="terminal">
+$ curl -I https://api.github.com/orgs/octokit
+
+HTTP/1.1 200 OK
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 42
+X-RateLimit-Reset: 1372700873
+...
+</pre>
+
+<p>The <code>X-RateLimit-Reset</code> header provides a <a href="http://en.wikipedia.org/wiki/Unix_time">Unix UTC timestamp</a>, letting you know the exact time that your fresh new rate limit kicks in.</p>
+
+<p>The reset timestamp is also available as part of the <code>/rate_limit</code> resource.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/rate_limit
+
+{
+  "rate": {
+    "limit": 60,
+    "remaining": 42,
+    "reset": 1372700873
+  }
+}
+</pre>
+
+<p>For more information on rate limits, be sure to check out the <a href="/v3/#rate-limiting">docs</a>.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=X-RateLimit-Reset">drop us a line</a>.</p>
+</div>
+
 <div class="change" id="/changes/2013-07-01-feeds-api/">
   <h2 class="title">
   <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>

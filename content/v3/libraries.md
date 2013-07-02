@@ -117,6 +117,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [sanction][sanction]
 * [agithub][agithub]
 * [githubpy][githubpy]
+* [octohub][octohub]
 
 [jacquev6_pygithub]: https://github.com/jacquev6/PyGithub
 [pygithub3-api]: https://github.com/copitux/python-github3
@@ -125,6 +126,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 [sanction]: https://github.com/demianbrecht/sanction
 [agithub]: https://github.com/jpaugh64/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
+[octohub]: https://github.com/turnkeylinux/octohub
 
 ## Ruby
 

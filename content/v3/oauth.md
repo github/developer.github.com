@@ -305,11 +305,22 @@ will return `404 NOT FOUND`.
 
 ## Working with two factor authentication
 
-With two factor authentication enabled on a user's account, they can no longer authenticate with only username and password. Instead, two alternate authentication flows have been provided. 
+With two factor authentication enabled on a user's account, they can no longer
+authenticate with only username and password. Instead, two alternate
+authentication flows have been provided. 
 
-If Basic Authentication is attempted, using the username and password, a `401` response will be returned with an error message indicating that a one time password (OTP) is required. This means that in additon to the Basic Authentication credentials, you must set a `X-GitHub-OTP` header including the user's current OTP. Because the OTP will only be valid for a short amount of time, it should be used for requesting an access token that can be used more permanantly.
+If Basic Authentication is attempted, using the username and password, a `401`
+response will be returned with an error message indicating that a one time
+password (OTP) is required. This means that in additon to the Basic
+Authentication credentials, you must set a `X-GitHub-OTP` header including the
+user's current OTP. Because the OTP will only be valid for a short amount of
+time, it should be used for requesting an access token that can be used more
+permanantly.
 
-If you don't want to ask your users for their OTPs, you can also do Basic Authentication using a Personal Access Token. Users can generate these by going to their [application settings page](https://github.com/settings/application) and they can be used like passwords to login to applications. 
+If you don't want to ask your users for their OTPs, you can also do Basic
+Authentication using a Personal Access Token. Users can generate these by going
+to their [application settings page](https://github.com/settings/application)
+and they can be used like passwords to login to applications. 
 
 ## More Information
 

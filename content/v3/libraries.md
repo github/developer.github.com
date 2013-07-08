@@ -146,7 +146,8 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Scala
 
-* [Dispatch GitHub][scala]
+* [Dispatch GitHub][dispatchgithub]
+* [Hubcat][hubcat]
 
-[scala]: https://github.com/andreazevedo/dispatch-github
-
+[dispatchgithub]: https://github.com/andreazevedo/dispatch-github
+[hubcat]: https://github.com/softprops/hubcat

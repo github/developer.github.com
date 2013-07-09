@@ -9,7 +9,7 @@ title: OAuth | GitHub API
 
 OAuth2 is a protocol that lets external apps request authorization to
 private details in a user's GitHub account without getting their
-password. This is preferred over Basic Authentication because tokens can
+password. This is preferred over [Basic Authentication](/v3/auth#basic-authentication) because tokens can
 be limited to specific types of data, and can be revoked by users at any
 time.
 
@@ -97,11 +97,11 @@ The access token allows you to make requests to the API on a behalf of a user.
 
 ## Non-Web Application Flow
 
-Use Basic Authentication to create an OAuth2 token using the [interface
+Use [Basic Authentication](/v3/auth#basic-authentication) to create an OAuth2 token using the [interface
 below](/v3/oauth/#create-a-new-authorization).  With this technique, a username
 and password need not be stored permanently, and the user can revoke access at
 any time. Make sure to understand the section on [working with two factor
-authentication](/v3/oauth/#working-with-two-factor-authentication) if you or
+authentication](/v3/auth/#working-with-two-factor-authentication) if you or
 your users have this feature enabled.
 
 ## Redirect URLs
@@ -188,9 +188,9 @@ can specify multiple scopes by separating them by a comma.
 ## OAuth Authorizations API
 
 There is an API for users to manage their own tokens.  You can only
-access your own tokens, and only through Basic Authentication. Make sure to 
+access your own tokens, and only through [Basic Authentication](/v3/auth#basic-authentication). Make sure to 
 understand the section on [working with two factor authentication]
-(/v3/oauth/#working-with-two-factor-authentication) if you or your users have
+(/v3/auth/#working-with-two-factor-authentication) if you or your users have
 this feature enabled.
 
 ## List your authorizations
@@ -215,7 +215,7 @@ this feature enabled.
 
 If you need a small number of tokens, implementing the [web flow](#web-application-flow)
 can be cumbersome. Instead, tokens can be created using the Authorizations API using
-Basic Authentication. To create tokens for a particular OAuth application, you
+[Basic Authentication](/v3/auth#basic-authentication). To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
 page, linked from your [OAuth applications listing on GitHub][app-listing].
 
@@ -292,7 +292,7 @@ You can only send one of these scope keys at a time.
 OAuth applications can use a special API method for checking OAuth token
 validity without running afoul of normal rate limits for failed login attempts.
 Authentication works differently with this particular endpoint. You must use
-Basic Authentication when accessing it, where the username is the OAuth
+[Basic Authentication](/v3/auth#basic-authentication) when accessing it, where the username is the OAuth
 application `client_id` and the password is its `client_secret`. Invalid tokens
 will return `404 NOT FOUND`.
 
@@ -302,25 +302,6 @@ will return `404 NOT FOUND`.
 
 <%= headers 200 %>
 <%= json(:oauth_access_with_user) %>
-
-## Working with two factor authentication
-
-With two factor authentication enabled on a user's account, they can no longer
-authenticate with only username and password. Instead, two alternate
-authentication flows have been provided. 
-
-If Basic Authentication is attempted, using the username and password, a `401`
-response will be returned with an error message indicating that a one time
-password (OTP) is required. This means that in additon to the Basic
-Authentication credentials, you must set a `X-GitHub-OTP` header including the
-user's current OTP. Because the OTP will only be valid for a short amount of
-time, it should be used for requesting an access token that can be used more
-permanantly.
-
-If you don't want to ask your users for their OTPs, you can also do Basic
-Authentication using a Personal Access Token. Users can generate these by going
-to their [application settings page](https://github.com/settings/application)
-and they can be used like passwords to login to applications. 
 
 ## More Information
 

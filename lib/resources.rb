@@ -35,7 +35,8 @@ module GitHub
         :jasonrudolph => '592e1e6f041f9a4ec51846fd82013aea',
         :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f',
         :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
-        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0'
+        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
+        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

@@ -21,8 +21,10 @@ Libraries for accessing the GitHub API from your favorite language.
 ## CSharp
 
 * [CSharp GitHub API][csharp]
+* [IronGithub][irongithub]
 
 [csharp]: https://github.com/sgrassie/csharp-github-api
+[irongithub]: https://github.com/in2bits/IronGitHub
 
 ## FSharp
 

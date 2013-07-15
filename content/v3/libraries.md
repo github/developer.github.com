@@ -121,6 +121,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [agithub][agithub]
 * [githubpy][githubpy]
 * [octohub][octohub]
+* [Github-Flask][github-flask]
 
 [jacquev6_pygithub]: https://github.com/jacquev6/PyGithub
 [pygithub3-api]: https://github.com/copitux/python-github3
@@ -130,6 +131,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 [agithub]: https://github.com/jpaugh64/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
 [octohub]: https://github.com/turnkeylinux/octohub
+[github-flask]: https://github-flask.readthedocs.org
 
 ## Ruby
 

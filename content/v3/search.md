@@ -21,6 +21,9 @@ title: Search | GitHub API
   </p>
 </div>
 
+If you have any questions or feedback about this new API, please [get in
+touch](https://github.com/contact?form[subject]=New+Search+API).
+
 ### About the Search API
 
 The Search API is optimized to help you find the specific item you're looking

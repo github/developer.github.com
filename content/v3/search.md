@@ -18,6 +18,17 @@ search results so that you can find the item that best meets your needs. To
 satisfy that need, the GitHub Search API provides **up to 1,000 results for each
 search**.
 
+### Rate Limit
+
+The Search API has a custom rate limit. For requests using [Basic
+Authentication](/v3/#authentication), [OAuth](/v3/#authentication), or [client
+ID and secret](/v3/#unauthenticated-rate-limited-requests), you can make up to
+20 requests per minute. For unauthenticated requests, the rate limit allows you
+to make up to 5 requests per minute.
+
+See the [rate limit documentation](/v3/#rate-limiting) for details on
+determining your current rate limit status.
+
 ## Search repositories
 
 Find repositories via various criteria. This method returns up to 100 results per page and

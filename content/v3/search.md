@@ -30,21 +30,21 @@ pages can be fetched using the `page` parameter.
 q
 : The search terms. This can be any combination of the existing repository search parameters:
 
-   * [Search In](https://help.github.com/articles/searching-repositories#search-in)  
+   * [Search In](https://help.github.com/articles/searching-repositories#search-in)
      Qualifies which fields are searched. With this qualifier you can restrict the
      search to just the repository name, description, readme, or
      any combination of these.
-   * [Size](https://help.github.com/articles/searching-repositories#size)  
+   * [Size](https://help.github.com/articles/searching-repositories#size)
       Finds repositories that match a certain size (in kilobytes)
-   * [Forks](https://help.github.com/articles/searching-repositories#forks)  
+   * [Forks](https://help.github.com/articles/searching-repositories#forks)
       Specifies the number of forks a repository could have
-   * [Created and Last Updated](https://help.github.com/articles/searching-repositories#created-and-last-updated) dates  
-      Filters repositories based on times of creation, or when they were last updated  
-   * [Users or Repositories](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)  
+   * [Created and Last Updated](https://help.github.com/articles/searching-repositories#created-and-last-updated) dates
+      Filters repositories based on times of creation, or when they were last updated
+   * [Users or Repositories](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)
       Limits searches to a specific user or repository
-   * [Languages](https://help.github.com/articles/searching-repositories#languages)  
+   * [Languages](https://help.github.com/articles/searching-repositories#languages)
       Searches repositories based on what language they're written in.
-   * [Stars](https://help.github.com/articles/searching-repositories#stars)  
+   * [Stars](https://help.github.com/articles/searching-repositories#stars)
       Searches repositories based on the number of stars
 
 sort
@@ -90,9 +90,9 @@ type in your Accept header. For example, via curl, the above query would look li
 
 This produces the same JSON payload as above, with an extra key called `text_matches`,
 an array of objects. These objects provide information such as the position of your
-search terms within the text, as well as the property that it was matched against.  
+search terms within the text, as well as the property that it was matched against.
 
-You can highlight the **name** and **description** fields in your results. Here's 
+You can highlight the **name** and **description** fields in your results. Here's
 an example response:
 
 <%= json(:repo_search_v3_results_highlighting) %>
@@ -108,20 +108,20 @@ Find file contents via various criteria.
 q
 : The search terms. This can be any combination of the existing code search parameters:
 
-   * [Search In](https://help.github.com/articles/searching-code#search-in)  
+   * [Search In](https://help.github.com/articles/searching-code#search-in)
      Qualifies which fields are searched. With this qualifier you can restrict the
      search to just the file contents, the file path, or both.
-   * [Languages](https://help.github.com/articles/searching-code#language)  
+   * [Languages](https://help.github.com/articles/searching-code#language)
       Searches code based on what language it's written in
-   * [Forks](https://help.github.com/articles/searching-code#forks)  
+   * [Forks](https://help.github.com/articles/searching-code#forks)
       Specifies the number of forks a hosting repository could have
-   * [Size](https://help.github.com/articles/searching-code#size)  
+   * [Size](https://help.github.com/articles/searching-code#size)
       Finds files that match a certain size (in kilobytes)
-   * [Path](https://help.github.com/articles/searching-code#path)  
+   * [Path](https://help.github.com/articles/searching-code#path)
       Specifies the path that the resulting file must be at
-   * [Extension](https://help.github.com/articles/searching-code#extension)  
+   * [Extension](https://help.github.com/articles/searching-code#extension)
       Matches files with a certain extension
-   * [Users or Repositories](https://help.github.com/articles/searching-code#users-organizations-and-repositories)  
+   * [Users or Repositories](https://help.github.com/articles/searching-code#users-organizations-and-repositories)
       Limits searches to a specific user or repository
 
 sort
@@ -165,9 +165,9 @@ type in your Accept header. For example, via curl, the above query would look li
 
 This produces the same JSON payload as above, with an extra key called `text_matches`,
 an array of objects. These objects provide information such as the position of your
-search terms within the text, as well as the property that it was matched against.  
+search terms within the text, as well as the property that it was matched against.
 
-You can highlight the **file contents** in your results. Here's 
+You can highlight the **file contents** in your results. Here's
 an example response:
 
 <%= json(:code_search_v3_results_highlighting) %>
@@ -183,24 +183,24 @@ Find issues by state and keyword.
 q
 : The search terms. This can be any combination of the existing issue search parameters:
 
-   * [Search In](https://help.github.com/articles/searching-issues#search-in)  
+   * [Search In](https://help.github.com/articles/searching-issues#search-in)
      Qualifies which fields are searched. With this qualifier you can restrict the
      search to just the title, body, comments, or any combination of these.
-   * [Author](https://help.github.com/articles/searching-issues#author)  
+   * [Author](https://help.github.com/articles/searching-issues#author)
      Finds issues created by a certain user
-   * [Assignee](https://help.github.com/articles/searching-issues#assignee)  
+   * [Assignee](https://help.github.com/articles/searching-issues#assignee)
      Finds issues that are assigned to a certain user
-   * [Mentions](https://help.github.com/articles/searching-issues#mentions)  
+   * [Mentions](https://help.github.com/articles/searching-issues#mentions)
      Finds issues that mention a certain user
-   * [State](https://help.github.com/articles/searching-issues#state)  
+   * [State](https://help.github.com/articles/searching-issues#state)
      Filter issues based on whether they're open or closed
-   * [Labels](https://help.github.com/articles/searching-issues#labels)  
+   * [Labels](https://help.github.com/articles/searching-issues#labels)
      Filters issues based on their labels
-   * [Language](https://help.github.com/articles/searching-issues#language)  
+   * [Language](https://help.github.com/articles/searching-issues#language)
      Searches for issues within repositories that match a certain language
-   * [Created and Last Updated](https://help.github.com/articles/searching-issues#created-and-last-updated) times  
-      Filters issues based on times of creation, or when they were last updated  
-   * [Comments](https://help.github.com/articles/searching-issues#comments)  
+   * [Created and Last Updated](https://help.github.com/articles/searching-issues#created-and-last-updated) times
+      Filters issues based on times of creation, or when they were last updated
+   * [Comments](https://help.github.com/articles/searching-issues#comments)
       Filters issues based on the quantity of comments
 
 sort
@@ -242,9 +242,9 @@ type in your Accept header. For example, via curl, the above query would look li
 
 This produces the same JSON payload as above, with an extra key called `text_matches`,
 an array of objects. These objects provide information such as the position of your
-search terms within the text, as well as the property that it was matched against.  
+search terms within the text, as well as the property that it was matched against.
 
-You can highlight the **title**, **body**, and **comment body** in your results. Here's 
+You can highlight the **title**, **body**, and **comment body** in your results. Here's
 an example response:
 
 <%= json(:issue_search_v3_results_highlighting) %>
@@ -260,19 +260,19 @@ Find users via various criteria.
 q
 : The search terms. This can be any combination of the existing issue search parameters:
 
-   * [Search In](https://help.github.com/articles/searching-users#search-in)  
+   * [Search In](https://help.github.com/articles/searching-users#search-in)
      Qualifies which fields are searched. With this qualifier you can restrict
      the search to just the username, public email, full name, location, or any
      combination of these.
-   * [Repository count](https://help.github.com/articles/searching-users#repository-count)  
+   * [Repository count](https://help.github.com/articles/searching-users#repository-count)
      Filters users based on the number of repositories they have
-   * [Location](https://help.github.com/articles/searching-users#location)  
+   * [Location](https://help.github.com/articles/searching-users#location)
      Filter users by the location indicated in their profile
-   * [Language](https://help.github.com/articles/searching-users#language)  
+   * [Language](https://help.github.com/articles/searching-users#language)
      Search for users that have repositories that match a certain language
-   * [Created](https://help.github.com/articles/searching-users#created)  
+   * [Created](https://help.github.com/articles/searching-users#created)
      Filter users based on when they joined
-   * [Followers](https://help.github.com/articles/searching-users#followers)  
+   * [Followers](https://help.github.com/articles/searching-users#followers)
      Filter users based on the number of followers they have
 
 sort
@@ -296,7 +296,7 @@ Imagine you're looking for a list of popular users. You might try out this query
 https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
 ```
 
-Here, we're looking at users with the name Tom. We're only interested in those 
+Here, we're looking at users with the name Tom. We're only interested in those
 with more than 42 repositories, and only if they have over 1,000 followers.
 
 <%= headers 200 %>
@@ -314,9 +314,9 @@ type in your Accept header. For example, via curl, the above query would look li
 
 This produces the same JSON payload as above, with an extra key called `text_matches`,
 an array of objects. These objects provide information such as the position of your
-search terms within the text, as well as the property that it was matched against.  
+search terms within the text, as well as the property that it was matched against.
 
-You can highlight the **login**, **email**, and **name** in your results. Here's 
+You can highlight the **login**, **email**, and **name** in your results. Here's
 an example response:
 
 <%= json(:user_search_v3_results_highlighting) %>

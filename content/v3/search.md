@@ -7,9 +7,16 @@ title: Search | GitHub API
 * TOC
 {:toc}
 
-This is a listing of the Search API features for API v3.
+## About
 
-Note: You can fetch up to 1,000 items with this API.
+The Search API is optimized to help you find the specific item you're looking
+for (e.g., a specific user, a specific file in a repository, etc.). Think of it
+the way you think of performing a search on Google. It's designed to help you
+find the one result you're looking for (or maybe the few results you're looking
+for). Just like searching on Google, you sometimes want to see a few pages of
+search results so that you can find the item that best meets your needs. To
+satisfy that need, the GitHub Search API provides **up to 1,000 results for each
+search**.
 
 ## Search repositories
 

@@ -35,7 +35,7 @@ search results so that you can find the item that best meets your needs. To
 satisfy that need, the GitHub Search API provides **up to 1,000 results for each
 search**.
 
-### Rate Limit
+### Rate limit
 
 The Search API has a custom rate limit. For requests using [Basic
 Authentication](/v3/#authentication), [OAuth](/v3/#authentication), or [client

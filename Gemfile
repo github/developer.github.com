@@ -1,5 +1,7 @@
 source "http://rubygems.org"
 
+ruby '1.9.3'
+
 gem 'builder'
 gem 'coderay'
 gem 'kramdown', '~> 0.13.2'

@@ -33,7 +33,9 @@ module GitHub
         :rick         => 'a44d5abad6e86cff4e34d9f0839535c9',
         :agh          => '6af915d3c6aa4ad30bbad43d8035fe10',
         :jasonrudolph => '592e1e6f041f9a4ec51846fd82013aea',
-        :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d'
+        :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f',
+        :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
+        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -69,8 +71,8 @@ module GitHub
           end
         end
 
-        lines << "X-RateLimit-Limit: 5000"
-        lines << "X-RateLimit-Remaining: 4999"
+        lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
+        lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
         %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
       end
@@ -165,23 +167,24 @@ module GitHub
     }
 
     REPO = SIMPLE_REPO.merge({
-      "clone_url"        => "https://github.com/octocat/Hello-World.git",
-      "git_url"          => "git://github.com/octocat/Hello-World.git",
-      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
-      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
-      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
-      "homepage"         => "https://github.com",
-      "language"         => nil,
-      "forks"            => 9,
-      "forks_count"      => 9,
-      "watchers"         => 80,
-      "watchers_count"   => 80,
-      "size"             => 108,
-      "master_branch"    => 'master',
-      "open_issues"      => 0,
-      "pushed_at"        => "2011-01-26T19:06:43Z",
-      "created_at"       => "2011-01-26T19:01:12Z",
-      "updated_at"       => "2011-01-26T19:14:43Z"
+      "clone_url"         => "https://github.com/octocat/Hello-World.git",
+      "git_url"           => "git://github.com/octocat/Hello-World.git",
+      "ssh_url"           => "git@github.com:octocat/Hello-World.git",
+      "svn_url"           => "https://svn.github.com/octocat/Hello-World",
+      "mirror_url"        => "git://git.example.com/octocat/Hello-World",
+      "homepage"          => "https://github.com",
+      "language"          => nil,
+      "forks"             => 9,
+      "forks_count"       => 9,
+      "watchers"          => 80,
+      "watchers_count"    => 80,
+      "size"              => 108,
+      "master_branch"     => 'master',
+      "open_issues"       => 0,
+      "open_issues_count" => 0,
+      "pushed_at"         => "2011-01-26T19:06:43Z",
+      "created_at"        => "2011-01-26T19:01:12Z",
+      "updated_at"        => "2011-01-26T19:14:43Z"
     })
 
     FULL_REPO = REPO.merge({
@@ -1254,7 +1257,8 @@ module GitHub
       "token" => "abc123",
       "app" => {
         "url" => "http://my-github-app.com",
-        "name" => "my github app"
+        "name" => "my github app",
+        "client_id" => "abcde12345fghij67890"
       },
       "note" => "optional note",
       "note_url" => "http://optional/note/url",
@@ -1387,6 +1391,51 @@ module GitHub
       :size => 100
     }
 
+    CONTENT_CRUD = {
+      "content" => {
+        "name" => "hello.txt",
+        "path" => "notes/hello.txt",
+        "sha" => "95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
+        "size" => 9,
+        "url" => "https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt",
+        "html_url" => "https://github.com/octocat/Hello-World/blob/master/notes/hello.txt",
+        "git_url" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
+        "type" => "file",
+        "_links" => {
+          "self" => "https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt",
+          "git" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
+          "html" => "https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"
+        }
+      },
+      "commit" => {
+        "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
+        "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
+        "html_url" => "https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd",
+        "author" => {
+          "date" => "2010-04-10T14:10:01-07:00",
+          "name" => "Scott Chacon",
+          "email" => "schacon@gmail.com"
+        },
+        "committer" => {
+          "date" => "2010-04-10T14:10:01-07:00",
+          "name" => "Scott Chacon",
+          "email" => "schacon@gmail.com"
+        },
+        "message" => "my commit message",
+        "tree" => {
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb",
+          "sha" => "691272480426f78a0138979dd3ce63b77f706feb"
+        },
+        "parents" => [
+          {
+            "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5",
+            "html_url" => "https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5",
+            "sha" => "1acc419d4d6a9ce985db7be48c6349a0475975b5"
+          }
+        ]
+      }
+    }
+
     THREAD = {
       :id => 1,
       :repository => SIMPLE_REPO,
@@ -1436,6 +1485,77 @@ module GitHub
       :email    => "octocat@github.com",
       :verified => true,
       :primary  => true
+    }
+
+    REPO_STATS_CONTRIBUTORS = [{
+      :author => USER,
+      :total => 135,
+      :weeks => [
+        {
+          :w => "1367712000",
+          :a => 6898,
+          :d => 77,
+          :c  => 10
+        }
+      ]
+    }]
+
+    REPO_STATS_COMMIT_ACTIVITY = [{
+      :days => [0, 3, 26, 20, 39, 1, 0],
+      :total => 89,
+      :week => 1336280400
+    }]
+
+    REPO_STATS_CODE_FREQUENCY = [[
+      1302998400,
+      1124,
+      -435
+    ]]
+
+    REPO_STATS_PARTICIPATION = {
+      :all => [11,21,15,2,8,1,8,23,17,21,11,10,33,91,38,34,22,23,32,3,43,87,71,18,13,5,13,16,66,27,12,45,110,117,13,8,18,9,19,26,39,12,20,31,46,91,45,10,24,9,29,7],
+      :owner => [3,2,3,0,2,0,5,14,7,9,1,5,0,48,19,2,0,1,10,2,23,40,35,8,8,2,10,6,30,0,2,9,53,104,3,3,10,4,7,11,21,4,4,22,26,63,11,2,14,1,10,3]
+    }
+
+    REPO_STATS_PUNCH_CARD = [
+      [0,0,5],
+      [0,1,43],
+      [0,2,21]
+    ]
+
+    FEEDS = {
+      :timeline_url => "https://github.com/timeline",
+      :user_url => "https://github.com/{user}",
+      :current_user_public => "https://github.com/defunkt",
+      :current_user_url => "https://github.com/defunkt.private?token=abc123",
+      :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
+      :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      :_links => {
+        :timeline => {
+          :href => "https://github.com/timeline",
+          :type => "application/atom+xml"
+        },
+        :user => {
+          :href => "https://github.com/{user}",
+          :type => "application/atom+xml"
+        },
+        :current_user_public => {
+          :href => "https://github.com/defunkt",
+          :type => "application/atom+xml"
+        },
+        :current_user => {
+          :href => "https://github.com/defunkt.private?token=abc123",
+          :type => "application/atom+xml"
+        },
+        :current_user_actor => {
+          :href => "https://github.com/defunkt.private.actor?token=abc123",
+          :type => "application/atom+xml"
+        },
+        :current_user_organization => {
+          :href => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+          :type => "application/atom+xml"
+        }
+      }
     }
   end
 end

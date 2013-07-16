@@ -78,6 +78,10 @@ bio
 This provides a dump of every user, in the order that they signed up for
 GitHub.
 
+Note: Pagination is powered exclusively by the `since` parameter.
+Use the [Link header](/v3/#link-header) to get the URL for the next page of
+users.
+
     GET /users
 
 ### Parameters

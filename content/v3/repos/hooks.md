@@ -83,7 +83,7 @@ may only listen for `push`, `issues`, and `pull_request` events.
 
 `name`
 : _Required_ **string** - The name of the service that is being called.
-See [/hooks](https://api.github.com/hooks) for the possible names.
+(See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)
 
 `config`
 : _Required_ **hash** - A Hash containing key/value pairs to provide

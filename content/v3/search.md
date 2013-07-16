@@ -7,6 +7,20 @@ title: Search | GitHub API
 * TOC
 {:toc}
 
+### Preview mode
+
+<div class="alert">
+  <p>
+    The Search API is currently available for developers to preview.
+    During the preview period, the API may change without advance notice.
+    Please see the <a href="/changes/2013-07-19-preview-the-new-search-api">blog post</a> for full details.
+  </p>
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.preview</pre>
+  </p>
+</div>
+
 ### About the Search API
 
 The Search API is optimized to help you find the specific item you're looking

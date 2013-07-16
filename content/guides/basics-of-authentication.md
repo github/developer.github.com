@@ -120,7 +120,7 @@ time they needed to access the web page. For example, try navigating directly to
 `http://localhost:4567/basic`. You'll get an error.
 
 What if we could circumvent the entire
-"click here" process, and just _remember_ that, as log as the user's logged into
+"click here" process, and just _remember_ that, as long as the user's logged into
 GitHub, they should be able to access this application? Hold on to your hat, 
 because _that's exactly what we're going to do_.
 

@@ -7,7 +7,7 @@ title: Search | GitHub API
 * TOC
 {:toc}
 
-## About
+### About the Search API
 
 The Search API is optimized to help you find the specific item you're looking
 for (e.g., a specific user, a specific file in a repository, etc.). Think of it

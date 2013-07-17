@@ -16,7 +16,7 @@ Note: you can download the complete source code for this project [from the platf
 ## Registering your app
 
 First, you'll need to [register your
-application](https://github.com/settings/applications/new) application. Every 
+application](https://github.com/settings/applications/new). Every 
 registered OAuth application is assigned a unique Client ID and Client Secret. 
 The Client Secret should not be shared! That includes checking the string
 into your repository.

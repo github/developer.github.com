@@ -88,7 +88,7 @@ page
 per_page
 : _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
-#### Example
+<h4 id="repository-search-example">Example</h4>
 
 Suppose you want to search for popular Tetris repositories written in Assembly.
 Your query might look like this.
@@ -166,7 +166,7 @@ page
 per_page
 : _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
-#### Example
+<h4 id="code-search-example">Example</h4>
 
 Suppose you want to find Ruby gems that are using the `octokit` library. Your
 query might look like this:
@@ -244,7 +244,7 @@ page
 per_page
 : _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
-#### Example
+<h4 id="issue-search-example">Example</h4>
 
 Let's say you want to know if there are any Ruby bugs on Windows.
 
@@ -316,7 +316,7 @@ page
 per_page
 : _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
-#### Example
+<h4 id="user-search-example">Example</h4>
 
 Imagine you're looking for a list of popular users. You might try out this query:
 

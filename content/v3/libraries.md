@@ -101,6 +101,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## PHP
 
+* [GitHub PHP Client][github-php-client]
 * [PHP GitHub API][php-github-api]
 * [GitHub API][github-api]
 * [GitHub Kohana Module][kohana]

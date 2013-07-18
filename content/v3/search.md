@@ -48,8 +48,7 @@ determining your current rate limit status.
 
 ## Search repositories
 
-Find repositories via various criteria. This method returns up to 100 results per page and
-pages can be fetched using the `page` parameter.
+Find repositories via various criteria. (This method returns up to 100 results [per page](/v3/#pagination).)
 
     GET /search/repositories
 
@@ -81,12 +80,6 @@ provided, results are sorted by best match.
 
 order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
-
-page
-: _Optional_ Page number to fetch; defaults to `1`.
-
-per_page
-: _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
 <h4 id="repository-search-example">Example</h4>
 
@@ -127,7 +120,7 @@ an example response:
 
 ## Search code
 
-Find file contents via various criteria.
+Find file contents via various criteria. (This method returns up to 100 results [per page](/v3/#pagination).)
 
     GET /search/code
 
@@ -159,12 +152,6 @@ provided, results are sorted by best match.
 
 order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
-
-page
-: _Optional_ Page number to fetch; defaults to `1`.
-
-per_page
-: _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
 <h4 id="code-search-example">Example</h4>
 
@@ -202,7 +189,7 @@ an example response:
 
 ## Search issues
 
-Find issues by state and keyword.
+Find issues by state and keyword. (This method returns up to 100 results [per page](/v3/#pagination).)
 
     GET /search/issues
 
@@ -237,12 +224,6 @@ provided, results are sorted by best match.
 
 order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
-
-page
-: _Optional_ Page number to fetch; defaults to `1`.
-
-per_page
-: _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
 <h4 id="issue-search-example">Example</h4>
 
@@ -279,7 +260,7 @@ an example response:
 
 ## Search users
 
-Find users via various criteria.
+Find users via various criteria. (This method returns up to 100 results [per page](/v3/#pagination).)
 
     GET /search/users
 
@@ -309,12 +290,6 @@ provided, results are sorted by best match.
 
 order
 : _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
-
-page
-: _Optional_ Page number to fetch; defaults to `1`.
-
-per_page
-: _Optional_ Number of results per page; defaults to `30`. The maximum is `100`.
 
 <h4 id="user-search-example">Example</h4>
 

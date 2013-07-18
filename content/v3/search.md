@@ -105,7 +105,7 @@ You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:
 
 
-    curl -H 'Accept: application/vnd.github.text-match+json' \
+    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
          https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 
 
@@ -177,7 +177,7 @@ You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:
 
 
-    curl -H 'Accept: application/vnd.github.text-match+json' \
+    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
          https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb
 
 This produces the same JSON payload as above, with an extra key called `text_matches`,
@@ -250,7 +250,7 @@ You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:
 
 
-    curl -H. application/vnd.github.preview.text-match+json' \
+    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
          https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
 
 
@@ -316,7 +316,7 @@ You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:
 
 
-    curl -H 'Accept: application/vnd.github.text-match+json' \
+    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
          https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
 
 

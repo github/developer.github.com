@@ -19,7 +19,7 @@ using Octokit.rb. [No problem][octokit-gemspecs]. The possibilites are endless.
 On github.com, we enjoy the context provided by code snippets and highlights in
 search results.
 
-[![code-snippet-highlighting](https://f.cloud.github.com/assets/2988/811920/3c01eab0-eee5-11e2-82a7-dc0785392eaa.png)][example-web-search]
+[![code-snippet-highlighting](https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png)][example-web-search]
 
 We want API consumers to have access to that information as well. So, API
 requests can opt to recieve those text fragments in the response. Each fragment
@@ -50,7 +50,7 @@ We hope you'll kick the tires and [send us your feedback][contact]. Happy
 [code-docs]: http://localhost:3000/v3/search/#search-code
 [contact]: https://github.com/contact?form[subject]=New+Search+API
 [docs]: http://localhost:3000/v3/search/
-[example-web-search]: https://github.com/search?q=faraday+builder+repo%3Aoctokit%2Foctokit.rb&type=Code&ref=searchresults
+[example-web-search]: https://github.com/search?q=faraday+builder+repo%3Aoctokit%2Foctokit.rb&type=Code
 [issue-docs]: http://localhost:3000/v3/search/#search-issues
 [octokit-gemspecs]: http://localhost:3000/v3/search/#code-search-example
 [preview-mode]: http://localhost:3000/v3/search/#preview-mode

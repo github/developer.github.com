@@ -282,7 +282,7 @@ Find users via various criteria. (This method returns up to 100 results [per pag
 ### Parameters
 
 q
-: The search terms. This can be any combination of the supported issue search parameters:
+: The search terms. This can be any combination of the supported user search parameters:
 
    * [Search In](https://help.github.com/articles/searching-users#search-in)
      Qualifies which fields are searched. With this qualifier you can restrict

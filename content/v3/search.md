@@ -373,7 +373,7 @@ object_type
 
 property
 : The name of a property of the resource that exists at `object_url`.
-  That property is a string whose text matches one of the search terms.
+  That property is a string that matches one of the search terms.
   (In the JSON returned from `object_url`, the full content for the `fragment` will be found in the property with this name.)
 
 fragment

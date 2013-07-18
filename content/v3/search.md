@@ -97,7 +97,7 @@ search results.
 <%= headers 200 %>
 <%= json(:repo_search_v3_results) %>
 
-### Highlighting Repository Searches
+### Highlighting Repository Search Results
 
 You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:
@@ -167,7 +167,7 @@ appear first in the search results.
 <%= headers 200 %>
 <%= json(:code_search_v3_results) %>
 
-### Highlighting Code Searches
+### Highlighting Code Search Results
 
 You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:
@@ -238,7 +238,7 @@ the oldest issues appear first in the search results.
 <%= headers 200 %>
 <%= json(:issue_search_v3_results) %>
 
-### Highlighting Issue Searches
+### Highlighting Issue Search Results
 
 You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:
@@ -302,7 +302,7 @@ with more than 42 repositories, and only if they have over 1,000 followers.
 <%= headers 200 %>
 <%= json(:user_search_v3_results) %>
 
-### Highlighting Code Searches
+### Highlighting User Search Results
 
 You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:

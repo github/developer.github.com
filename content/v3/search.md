@@ -242,7 +242,7 @@ query might look something like this.
     https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
 
 In this query, we're searching for the keyword `win32`, within any open issue
-that's labelled as `bug`. The search runs across repositories whose primary
+that's labeled as `bug`. The search runs across repositories whose primary
 language is Ruby. We’re sorting by creation date in ascending order, so that
 the oldest issues appear first in the search results.
 
@@ -348,7 +348,7 @@ search results.
 [![code-snippet-highlighting](https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png)](https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png)
 
 API consumers have access to that information as well. Requests can opt to
-recieve those text fragments in the response, and every fragment is accompanied
+receive those text fragments in the response, and every fragment is accompanied
 by numeric offsets identifying the exact location of each matching search term.
 
 To get this metadata in your search results, specify the `text-match` media type

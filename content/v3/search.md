@@ -86,9 +86,7 @@ order
 Suppose you want to search for popular Tetris repositories written in Assembly.
 Your query might look like this.
 
-```
-https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
-```
+    https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 
 In this request, we're searching for repositories with the word `tetris` in the
 name, the description, or the README. We're limiting the results to only find
@@ -158,9 +156,7 @@ order
 Suppose you want to find recently-updated Ruby gems that are using the `octokit`
 library. Your query might look like this:
 
-```
-https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb&sort=indexed
-```
+    https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb&sort=indexed
 
 Here, we're searching for the keyword `octokit` within a file's contents. We're
 making sure that we're only looking in files that end in _.gemspec_. The `-repo`
@@ -232,9 +228,7 @@ order
 Let's say you want to find the oldest unresolved Ruby bugs on Windows. Your
 query might look something like this.
 
-```
-https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
-```
+    https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
 
 In this query, we're searching for the keyword `win32`, within any open issue
 that's labelled as `bug`. The search runs across repositories whose primary
@@ -300,9 +294,7 @@ order
 
 Imagine you're looking for a list of popular users. You might try out this query:
 
-```
-https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
-```
+    https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
 
 Here, we're looking at users with the name Tom. We're only interested in those
 with more than 42 repositories, and only if they have over 1,000 followers.

@@ -99,20 +99,25 @@ search results.
 
 ### Highlighting Repository Search Results
 
-You can enable highlighting in your results by specifying the `text-match` media
-type in your Accept header. For example, via curl, the above query would look like this:
-
+Some API consumers will want to highlight the matching search terms when
+displaying search results. The API offers additional metadata to support this
+use case. To get this metadata in your search results, specify the `text-match`
+media type in your Accept header. For example, via curl, the above query would
+look like this:
 
     curl -H 'Accept: application/vnd.github.preview.text-match+json' \
-         https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
+      https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 
+This produces the same JSON payload as above, with an extra key called
+`text_matches`, an array of objects. These objects provide information such as
+the position of your search terms within the text, as well as the property that
+included the search term.
 
-This produces the same JSON payload as above, with an extra key called `text_matches`,
-an array of objects. These objects provide information such as the position of your
-search terms within the text, as well as the property that it was matched against.
+When searching for repositories, you can get text match metadata for the
+**name** and **description** fields. (See the section on [text match metadata
+](#text-match-metadata) for full details.)
 
-You can highlight the **name** and **description** fields in your results. Here's
-an example response:
+Here's an example response:
 
 <%= json(:repo_search_v3_results_highlighting) %>
 
@@ -131,7 +136,7 @@ q
      Qualifies which fields are searched. With this qualifier you can restrict the
      search to just the file contents, the file path, or both.
    * [Languages](https://help.github.com/articles/searching-code#language)
-      Searches code based on what language it's written in.
+      Searches code based on the language it's written in.
    * [Forks](https://help.github.com/articles/searching-code#forks)
       Specifies the number of forks a hosting repository could have.
    * [Size](https://help.github.com/articles/searching-code#size)
@@ -169,19 +174,25 @@ appear first in the search results.
 
 ### Highlighting Code Search Results
 
-You can enable highlighting in your results by specifying the `text-match` media
-type in your Accept header. For example, via curl, the above query would look like this:
-
+Some API consumers will want to highlight the matching search terms when
+displaying search results. The API offers additional metadata to support this
+use case. To get this metadata in your search results, specify the `text-match`
+media type in your Accept header. For example, via curl, the above query would
+look like this:
 
     curl -H 'Accept: application/vnd.github.preview.text-match+json' \
-         https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb
+      https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb&sort=indexed
 
-This produces the same JSON payload as above, with an extra key called `text_matches`,
-an array of objects. These objects provide information such as the position of your
-search terms within the text, as well as the property that it was matched against.
+This produces the same JSON payload as above, with an extra key called
+`text_matches`, an array of objects. These objects provide information such as
+the position of your search terms within the text, as well as the property that
+included the search term.
 
-You can highlight the **file contents** in your results. Here's
-an example response:
+When searching for code, you can get text match metadata for the **file
+contents**. (See the section on [text match metadata ](#text-match-metadata) for
+full details.)
+
+Here's an example response:
 
 <%= json(:code_search_v3_results_highlighting) %>
 
@@ -240,20 +251,25 @@ the oldest issues appear first in the search results.
 
 ### Highlighting Issue Search Results
 
-You can enable highlighting in your results by specifying the `text-match` media
-type in your Accept header. For example, via curl, the above query would look like this:
-
+Some API consumers will want to highlight the matching search terms when
+displaying search results. The API offers additional metadata to support this
+use case. To get this metadata in your search results, specify the `text-match`
+media type in your Accept header. For example, via curl, the above query would
+look like this:
 
     curl -H 'Accept: application/vnd.github.preview.text-match+json' \
-         https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
+      https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
 
+This produces the same JSON payload as above, with an extra key called
+`text_matches`, an array of objects. These objects provide information such as
+the position of your search terms within the text, as well as the property that
+included the search term.
 
-This produces the same JSON payload as above, with an extra key called `text_matches`,
-an array of objects. These objects provide information such as the position of your
-search terms within the text, as well as the property that it was matched against.
+When searching for issues, you can get text match metadata for the issue
+**title**, issue **body**, and issue **comment body** fields. (See the section
+on [text match metadata ](#text-match-metadata) for full details.)
 
-You can highlight the **title**, **body**, and **comment body** in your results. Here's
-an example response:
+Here's an example response:
 
 <%= json(:issue_search_v3_results_highlighting) %>
 
@@ -304,19 +320,26 @@ with more than 42 repositories, and only if they have over 1,000 followers.
 
 ### Highlighting User Search Results
 
-You can enable highlighting in your results by specifying the `text-match` media
-type in your Accept header. For example, via curl, the above query would look like this:
-
+Some API consumers will want to highlight the matching search terms when
+displaying search results. The API offers additional metadata to support this
+use case. To get this metadata in your search results, specify the `text-match`
+media type in your Accept header. For example, via curl, the above query would
+look like this:
 
     curl -H 'Accept: application/vnd.github.preview.text-match+json' \
-         https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
+      https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
 
+This produces the same JSON payload as above, with an extra key called
+`text_matches`, an array of objects. These objects provide information such as
+the position of your search terms within the text, as well as the property that
+included the search term.
 
-This produces the same JSON payload as above, with an extra key called `text_matches`,
-an array of objects. These objects provide information such as the position of your
-search terms within the text, as well as the property that it was matched against.
-
-You can highlight the **login**, **email**, and **name** in your results. Here's
-an example response:
+When searching for users, you can get text match metadata for the issue
+**login**, **email**, and **name** fields. (See the section on [text match
+metadata ](#text-match-metadata) for full details.)
 
 <%= json(:user_search_v3_results_highlighting) %>
+
+## Text match metadata
+
+TODO

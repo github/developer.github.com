@@ -155,16 +155,18 @@ order
 
 <h4 id="code-search-example">Example</h4>
 
-Suppose you want to find Ruby gems that are using the `octokit` library. Your
-query might look like this:
+Suppose you want to find recently-updated Ruby gems that are using the `octokit`
+library. Your query might look like this:
 
 ```
-https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb
+https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb&sort=indexed
 ```
 
 Here, we're searching for the keyword `octokit` within a file's contents. We're
 making sure that we're only looking in files that end in _.gemspec_. The `-repo`
 notation ensures that we're also excluding [the Octokit.rb repo](https://github.com/octokit/octokit.rb).
+We’re sorting by `indexed`, so that the most recently-indexed repositories
+appear first in the search results.
 
 <%= headers 200 %>
 <%= json(:code_search_v3_results) %>

@@ -62,17 +62,17 @@ q
      search to just the repository name, description, readme, or
      any combination of these.
    * [Size](https://help.github.com/articles/searching-repositories#size)
-      Finds repositories that match a certain size (in kilobytes)
+      Finds repositories that match a certain size (in kilobytes).
    * [Forks](https://help.github.com/articles/searching-repositories#forks)
-      Specifies the number of forks a repository could have
-   * [Created and Last Updated](https://help.github.com/articles/searching-repositories#created-and-last-updated) dates
-      Filters repositories based on times of creation, or when they were last updated
+      Specifies the number of forks a repository could have.
+   * [Created and Last Updated](https://help.github.com/articles/searching-repositories#created-and-last-updated)
+      Filters repositories based on times of creation, or when they were last updated.
    * [Users or Repositories](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)
-      Limits searches to a specific user or repository
+      Limits searches to a specific user or repository.
    * [Languages](https://help.github.com/articles/searching-repositories#languages)
-      Searches repositories based on what language they're written in.
+      Searches repositories based on the language they're written in.
    * [Stars](https://help.github.com/articles/searching-repositories#stars)
-      Searches repositories based on the number of stars
+      Searches repositories based on the number of stars.
 
 sort
 : _Optional_ Sort field. One of `stars`, `forks`, or `updated`. If not
@@ -131,17 +131,17 @@ q
      Qualifies which fields are searched. With this qualifier you can restrict the
      search to just the file contents, the file path, or both.
    * [Languages](https://help.github.com/articles/searching-code#language)
-      Searches code based on what language it's written in
+      Searches code based on what language it's written in.
    * [Forks](https://help.github.com/articles/searching-code#forks)
-      Specifies the number of forks a hosting repository could have
+      Specifies the number of forks a hosting repository could have.
    * [Size](https://help.github.com/articles/searching-code#size)
-      Finds files that match a certain size (in kilobytes)
+      Finds files that match a certain size (in kilobytes).
    * [Path](https://help.github.com/articles/searching-code#path)
-      Specifies the path that the resulting file must be at
+      Specifies the path that the resulting file must be at.
    * [Extension](https://help.github.com/articles/searching-code#extension)
-      Matches files with a certain extension
+      Matches files with a certain extension.
    * [Users or Repositories](https://help.github.com/articles/searching-code#users-organizations-and-repositories)
-      Limits searches to a specific user or repository
+      Limits searches to a specific user or repository.
 
 sort
 : _Optional_ Sort field. Can only be `indexed`, which indicates how recently
@@ -200,21 +200,21 @@ q
      Qualifies which fields are searched. With this qualifier you can restrict the
      search to just the title, body, comments, or any combination of these.
    * [Author](https://help.github.com/articles/searching-issues#author)
-     Finds issues created by a certain user
+     Finds issues created by a certain user.
    * [Assignee](https://help.github.com/articles/searching-issues#assignee)
-     Finds issues that are assigned to a certain user
+     Finds issues that are assigned to a certain user.
    * [Mentions](https://help.github.com/articles/searching-issues#mentions)
-     Finds issues that mention a certain user
+     Finds issues that mention a certain user.
    * [State](https://help.github.com/articles/searching-issues#state)
-     Filter issues based on whether they're open or closed
+     Filter issues based on whether they're open or closed.
    * [Labels](https://help.github.com/articles/searching-issues#labels)
-     Filters issues based on their labels
+     Filters issues based on their labels.
    * [Language](https://help.github.com/articles/searching-issues#language)
-     Searches for issues within repositories that match a certain language
-   * [Created and Last Updated](https://help.github.com/articles/searching-issues#created-and-last-updated) times
-      Filters issues based on times of creation, or when they were last updated
+     Searches for issues within repositories that match a certain language.
+   * [Created and Last Updated](https://help.github.com/articles/searching-issues#created-and-last-updated)
+      Filters issues based on times of creation, or when they were last updated.
    * [Comments](https://help.github.com/articles/searching-issues#comments)
-      Filters issues based on the quantity of comments
+      Filters issues based on the quantity of comments.
 
 sort
 : _Optional_ Sort field. One of `comments`, `created`, or `updated`. If not
@@ -273,15 +273,15 @@ q
      the search to just the username, public email, full name, location, or any
      combination of these.
    * [Repository count](https://help.github.com/articles/searching-users#repository-count)
-     Filters users based on the number of repositories they have
+     Filters users based on the number of repositories they have.
    * [Location](https://help.github.com/articles/searching-users#location)
-     Filter users by the location indicated in their profile
+     Filter users by the location indicated in their profile.
    * [Language](https://help.github.com/articles/searching-users#language)
-     Search for users that have repositories that match a certain language
+     Search for users that have repositories that match a certain language.
    * [Created](https://help.github.com/articles/searching-users#created)
-     Filter users based on when they joined
+     Filter users based on when they joined.
    * [Followers](https://help.github.com/articles/searching-users#followers)
-     Filter users based on the number of followers they have
+     Filter users based on the number of followers they have.
 
 sort
 : _Optional_ Sort field. One of `followers`, `repositories`, or `joined`. If not

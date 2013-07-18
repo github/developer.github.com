@@ -336,10 +336,49 @@ included the search term.
 
 When searching for users, you can get text match metadata for the issue
 **login**, **email**, and **name** fields. (See the section on [text match
-metadata ](#text-match-metadata) for full details.)
+metadata](#text-match-metadata) for full details.)
 
 <%= json(:user_search_v3_results_highlighting) %>
 
 ## Text match metadata
 
-TODO
+On github.com, we enjoy the context provided by code snippets and highlights in
+search results.
+
+[![code-snippet-highlighting](https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png)](https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png)
+
+API consumers have access to that information as well. Requests can opt to
+recieve those text fragments in the response, and every fragment is accompanied
+by numeric offsets identifying the exact location of each matching search term.
+
+To get this metadata in your search results, specify the `text-match` media type
+in your Accept header. Using the [example issue search](#issue-search-example)
+above, the curl command would look like this:
+
+    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
+      https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
+
+The results provide the same JSON payloads as shown above, with an extra key
+called `text_matches`:
+
+<%= json(:issue_search_v3_results_highlighting) %>
+
+Inside the `text_matches` array, each hash includes the following attributes:
+
+object_url
+: The URL for the resource that contains a string property matching one of the search terms.
+
+object_type
+: The name for the type of resource that exists at the given `object_url`.
+
+property
+: The name of a property of the resource that exists at `object_url`.
+  That property is a string whose text matches one of the search terms.
+  (In the JSON returned from `object_url`, the full content for the `fragment` will be found in the property with this name.)
+
+fragment
+: A subset of the value of `property`. This is the text fragment that matches one or more of the search terms.
+
+matches
+: An array of one or more search terms that are present in `fragment`. The indices (i.e., "offsets") are relative to the fragment. (They are not relative to the _full_ content of `property`.)
+

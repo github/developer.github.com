@@ -79,7 +79,7 @@ sort
 provided, results are sorted by best match.
 
 order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
+: _Optional_ Sort order if `sort` parameter is provided. One of `asc` or `desc`; the default is `desc`.
 
 <h4 id="repository-search-example">Example</h4>
 
@@ -149,7 +149,7 @@ a file has been indexed by the GitHub search infrastructure. If not
 provided, results are sorted by best match.
 
 order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
+: _Optional_ Sort order if `sort` parameter is provided. One of `asc` or `desc`; the default is `desc`.
 
 <h4 id="code-search-example">Example</h4>
 
@@ -221,7 +221,7 @@ sort
 provided, results are sorted by best match.
 
 order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
+: _Optional_ Sort order if `sort` parameter is provided. One of `asc` or `desc`; the default is `desc`.
 
 <h4 id="issue-search-example">Example</h4>
 
@@ -288,7 +288,7 @@ sort
 provided, results are sorted by best match.
 
 order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`; the default is `desc`.
+: _Optional_ Sort order if `sort` parameter is provided. One of `asc` or `desc`; the default is `desc`.
 
 <h4 id="user-search-example">Example</h4>
 

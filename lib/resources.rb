@@ -655,41 +655,61 @@ module GitHub
     }
 
     ISSUE_SEARCH_V3_RESULTS = {
-      "total_count" => 10,
+      "total_count" => 8,
       "items" => [
         {
-          "url" => "https://api.github.com/repos/maplesyrup/maple/issues/424",
-          "labels_url" => "https://api.github.com/repos/maplesyrup/maple/issues/424/labels{/name}",
-          "comments_url" => "https://api.github.com/repos/maplesyrup/maple/issues/424/comments",
-          "events_url" => "https://api.github.com/repos/maplesyrup/maple/issues/424/events",
-          "html_url" => "https://github.com/maplesyrup/maple/issues/424",
-          "id" => 15092879,
-          "number" => 424,
-          "title" => "Upvotes needed to win a reward can be negative",
+          "url" => "https://api.github.com/repos/luislavena/win32console/issues/7",
+          "labels_url" => "https://api.github.com/repos/luislavena/win32console/issues/7/labels{/name}",
+          "comments_url" => "https://api.github.com/repos/luislavena/win32console/issues/7/comments",
+          "events_url" => "https://api.github.com/repos/luislavena/win32console/issues/7/events",
+          "html_url" => "https://github.com/luislavena/win32console/issues/7",
+          "id" => 289990,
+          "number" => 7,
+          "title" => "Strange issue with irb and Exception name",
           "user" => {
-            "login" => "elihart",
-            "id" => 2739242,
-            "avatar_url" => "https://secure.gravatar.com/avatar/125d06cb4905d7288e0c5b058d31f438?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-            "gravatar_id" => "125d06cb4905d7288e0c5b058d31f438",
-            "url" => "https://api.github.com/users/elihart",
+            "login" => "lboulard",
+            "id" => 110612,
+            "avatar_url" => "https://secure.gravatar.com/avatar/4026979aa4561a0a4e771c813d210a60?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+            "gravatar_id" => "4026979aa4561a0a4e771c813d210a60",
+            "url" => "https://api.github.com/users/lboulard",
+            "html_url" => "https://github.com/lboulard",
+            "followers_url" => "https://api.github.com/users/lboulard/followers",
+            "following_url" => "https://api.github.com/users/lboulard/following{/other_user}",
+            "gists_url" => "https://api.github.com/users/lboulard/gists{/gist_id}",
+            "starred_url" => "https://api.github.com/users/lboulard/starred{/owner}{/repo}",
+            "subscriptions_url" => "https://api.github.com/users/lboulard/subscriptions",
+            "organizations_url" => "https://api.github.com/users/lboulard/orgs",
+            "repos_url" => "https://api.github.com/users/lboulard/repos",
+            "events_url" => "https://api.github.com/users/lboulard/events{/privacy}",
+            "received_events_url" => "https://api.github.com/users/lboulard/received_events",
             "type" => "User"
           },
           "labels" => [
             {
-              "url" => "https://api.github.com/repos/maplesyrup/maple/labels/bug",
+              "url" => "https://api.github.com/repos/luislavena/win32console/labels/bug",
               "name" => "bug",
-              "color" => "e102d8"
+              "color" => "bd2c2c"
+            },
+            {
+              "url" => "https://api.github.com/repos/luislavena/win32console/labels/patch",
+              "name" => "patch",
+              "color" => "57ebd2"
             }
           ],
           "state" => "open",
           "assignee" => nil,
           "milestone" => nil,
-          "comments" => 2,
-          "created_at" => "2013-06-03T22:23:37Z",
-          "updated_at" => "2013-06-04T00:46:24Z",
+          "comments" => 12,
+          "created_at" => "2010-08-25T17:48:33Z",
+          "updated_at" => "2010-08-26T13:33:33Z",
           "closed_at" => nil,
-          "body" => "",
-          "score" => 13.020545
+          "pull_request" => {
+            "html_url" => nil,
+            "diff_url" => nil,
+            "patch_url" => nil
+          },
+          "body" => "...",
+          "score" => 1.4186493
         }
       ]
     }
@@ -697,16 +717,16 @@ module GitHub
     ISSUE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
       "text_matches" => [
         {
-          "object_url" => "https://api.github.com/repositories/8422309/issues/424",
-          "object_type" => "Issue",
-          "property" => "title",
-          "fragment" => "Upvotes needed to win a reward can be negative",
+          "object_url" => "https://api.github.com/repositories/18749/issues/comments/",
+          "object_type" => "IssueComment",
+          "property" => "body",
+          "fragment" => "&gt;'\nirb(main):003:0&gt; require 'win32console'\n=&gt; true\nirb(main):004:0&gt; include Win32::Console::ANSI\n=&gt; Object\nirb(main):005:0&gt; foo\n#&lt;Class:0xf59940&gt;: undefined local variable or method `foo' for main:Object\n    from (irb):5\n    from D:/Ruby192/bin/irb:12:in `&lt;main&gt;'\n\n",
           "matches" => [
             {
-              "text" => "win",
+              "text" => "Win32",
               "indices" => [
-                18,
-                21
+                88,
+                93
               ]
             }
           ]

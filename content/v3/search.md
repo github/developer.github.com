@@ -229,14 +229,17 @@ order
 
 <h4 id="issue-search-example">Example</h4>
 
-Let's say you want to know if there are any Ruby bugs on Windows.
+Let's say you want to find the oldest unresolved Ruby bugs on Windows. Your
+query might look something like this.
 
 ```
-https://api.github.com/search/issues?q=win+label:bug+language:ruby+state:open
+https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
 ```
 
-In this query, we're searching for the keyword `win`, within any open issue that's
-labelled as `bug`. The search runs across repositories whose primary language is Ruby.
+In this query, we're searching for the keyword `win32`, within any open issue
+that's labelled as `bug`. The search runs across repositories whose primary
+language is Ruby. We’re sorting by creation date in ascending order, so that
+the oldest issues appear first in the search results.
 
 <%= headers 200 %>
 <%= json(:issue_search_v3_results) %>
@@ -247,8 +250,8 @@ You can enable highlighting in your results by specifying the `text-match` media
 type in your Accept header. For example, via curl, the above query would look like this:
 
 
-    curl -H 'Accept: application/vnd.github.text-match+json' \
-         https://api.github.com/search/issues?q=win+label:bug+language:ruby+state:open
+    curl -H. application/vnd.github.preview.text-match+json' \
+         https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
 
 
 This produces the same JSON payload as above, with an extra key called `text_matches`,

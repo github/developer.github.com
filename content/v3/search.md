@@ -352,18 +352,13 @@ receive those text fragments in the response, and every fragment is accompanied
 by numeric offsets identifying the exact location of each matching search term.
 
 To get this metadata in your search results, specify the `text-match` media type
-in your Accept header. Using the [example issue search](#issue-search-example)
-above, the curl command would look like this:
+in your Accept header.
 
-    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
-      https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
+    application/vnd.github.preview.text-match+json
 
-The results provide the same JSON payloads as shown above, with an extra key
-called `text_matches`:
-
-<%= json(:issue_search_v3_results_highlighting) %>
-
-Inside the `text_matches` array, each hash includes the following attributes:
+The results will provide the same JSON payloads as shown above, with an extra
+key called `text_matches`. Inside the `text_matches` array, each hash includes
+the following attributes:
 
 object_url
 : The URL for the resource that contains a string property matching one of the search terms.
@@ -382,3 +377,24 @@ fragment
 matches
 : An array of one or more search terms that are present in `fragment`. The indices (i.e., "offsets") are relative to the fragment. (They are not relative to the _full_ content of `property`.)
 
+### Example
+
+Using curl, and the [example issue search](#issue-search-example) above, our API
+request would look like this:
+
+    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
+      https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
+
+The response will include a `text_matches` array for each search result. In the
+JSON below, we have two objects in the `text_matches` array.
+
+The first text match occurred in the `body` property of the issue. We see a
+fragment of text from the issue body. The search term (`windows`) appears twice
+within that fragment, and we have the indices for each occurrence.
+
+The second text match occurred in the `body` property of one of the issue's
+comments. We have the URL for the issue comment. And of course, we see a
+fragment of text from the comment body. The search term (`windows`) appears once
+within that fragment.
+
+<%= json(:issue_search_v3_results_highlighting) %>

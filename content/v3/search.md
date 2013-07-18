@@ -236,10 +236,10 @@ order
 
 <h4 id="issue-search-example">Example</h4>
 
-Let's say you want to find the oldest unresolved Ruby bugs on Windows. Your
+Let's say you want to find the oldest unresolved Python bugs on Windows. Your
 query might look something like this.
 
-    https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
+    https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
 
 In this query, we're searching for the keyword `win32`, within any open issue
 that's labelled as `bug`. The search runs across repositories whose primary
@@ -258,7 +258,7 @@ media type in your Accept header. For example, via curl, the above query would
 look like this:
 
     curl -H 'Accept: application/vnd.github.preview.text-match+json' \
-      https://api.github.com/search/issues?q=win32+label:bug+language:ruby+state:open&sort=created&order=asc
+      https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as

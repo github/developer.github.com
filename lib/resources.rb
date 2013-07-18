@@ -655,53 +655,48 @@ module GitHub
     }
 
     ISSUE_SEARCH_V3_RESULTS = {
-      "total_count" => 8,
+      "total_count" => 280,
       "items" => [
         {
-          "url" => "https://api.github.com/repos/luislavena/win32console/issues/7",
-          "labels_url" => "https://api.github.com/repos/luislavena/win32console/issues/7/labels{/name}",
-          "comments_url" => "https://api.github.com/repos/luislavena/win32console/issues/7/comments",
-          "events_url" => "https://api.github.com/repos/luislavena/win32console/issues/7/events",
-          "html_url" => "https://github.com/luislavena/win32console/issues/7",
-          "id" => 289990,
-          "number" => 7,
-          "title" => "Strange issue with irb and Exception name",
+          "url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132",
+          "labels_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/labels{/name}",
+          "comments_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/comments",
+          "events_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/events",
+          "html_url" => "https://github.com/batterseapower/pinyin-toolkit/issues/132",
+          "id" => 35802,
+          "number" => 132,
+          "title" => "Line Number Indexes Beyond 20 Not Displayed",
           "user" => {
-            "login" => "lboulard",
-            "id" => 110612,
-            "avatar_url" => "https://secure.gravatar.com/avatar/4026979aa4561a0a4e771c813d210a60?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-            "gravatar_id" => "4026979aa4561a0a4e771c813d210a60",
-            "url" => "https://api.github.com/users/lboulard",
-            "html_url" => "https://github.com/lboulard",
-            "followers_url" => "https://api.github.com/users/lboulard/followers",
-            "following_url" => "https://api.github.com/users/lboulard/following{/other_user}",
-            "gists_url" => "https://api.github.com/users/lboulard/gists{/gist_id}",
-            "starred_url" => "https://api.github.com/users/lboulard/starred{/owner}{/repo}",
-            "subscriptions_url" => "https://api.github.com/users/lboulard/subscriptions",
-            "organizations_url" => "https://api.github.com/users/lboulard/orgs",
-            "repos_url" => "https://api.github.com/users/lboulard/repos",
-            "events_url" => "https://api.github.com/users/lboulard/events{/privacy}",
-            "received_events_url" => "https://api.github.com/users/lboulard/received_events",
+            "login" => "Nick3C",
+            "id" => 90254,
+            "avatar_url" => "https://secure.gravatar.com/avatar/934442aadfe3b2f4630510de416c5718?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+            "gravatar_id" => "934442aadfe3b2f4630510de416c5718",
+            "url" => "https://api.github.com/users/Nick3C",
+            "html_url" => "https://github.com/Nick3C",
+            "followers_url" => "https://api.github.com/users/Nick3C/followers",
+            "following_url" => "https://api.github.com/users/Nick3C/following{/other_user}",
+            "gists_url" => "https://api.github.com/users/Nick3C/gists{/gist_id}",
+            "starred_url" => "https://api.github.com/users/Nick3C/starred{/owner}{/repo}",
+            "subscriptions_url" => "https://api.github.com/users/Nick3C/subscriptions",
+            "organizations_url" => "https://api.github.com/users/Nick3C/orgs",
+            "repos_url" => "https://api.github.com/users/Nick3C/repos",
+            "events_url" => "https://api.github.com/users/Nick3C/events{/privacy}",
+            "received_events_url" => "https://api.github.com/users/Nick3C/received_events",
             "type" => "User"
           },
           "labels" => [
             {
-              "url" => "https://api.github.com/repos/luislavena/win32console/labels/bug",
+              "url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/labels/bug",
               "name" => "bug",
-              "color" => "bd2c2c"
-            },
-            {
-              "url" => "https://api.github.com/repos/luislavena/win32console/labels/patch",
-              "name" => "patch",
-              "color" => "57ebd2"
+              "color" => "ff0000"
             }
           ],
           "state" => "open",
           "assignee" => nil,
           "milestone" => nil,
-          "comments" => 12,
-          "created_at" => "2010-08-25T17:48:33Z",
-          "updated_at" => "2010-08-26T13:33:33Z",
+          "comments" => 15,
+          "created_at" => "2009-07-12T20:10:41Z",
+          "updated_at" => "2009-07-19T09:23:43Z",
           "closed_at" => nil,
           "pull_request" => {
             "html_url" => nil,
@@ -709,7 +704,7 @@ module GitHub
             "patch_url" => nil
           },
           "body" => "...",
-          "score" => 1.4186493
+          "score" => 1.3859273
         }
       ]
     }
@@ -717,16 +712,38 @@ module GitHub
     ISSUE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
       "text_matches" => [
         {
-          "object_url" => "https://api.github.com/repositories/18749/issues/comments/",
-          "object_type" => "IssueComment",
+          "object_url" => "https://api.github.com/repositories/215335/issues/132",
+          "object_type" => "Issue",
           "property" => "body",
-          "fragment" => "&gt;'\nirb(main):003:0&gt; require 'win32console'\n=&gt; true\nirb(main):004:0&gt; include Win32::Console::ANSI\n=&gt; Object\nirb(main):005:0&gt; foo\n#&lt;Class:0xf59940&gt;: undefined local variable or method `foo' for main:Object\n    from (irb):5\n    from D:/Ruby192/bin/irb:12:in `&lt;main&gt;'\n\n",
+          "fragment" => "comprehensive windows font I know of).\n\nIf we can find a commonly distributed windows font that supports them then no problem (we can use html font tags) but otherwise the '(21)' style is probably better.\n",
           "matches" => [
             {
-              "text" => "Win32",
+              "text" => "windows",
               "indices" => [
-                88,
-                93
+                14,
+                21
+              ]
+            },
+            {
+              "text" => "windows",
+              "indices" => [
+                78,
+                85
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/215335/issues/comments/25688",
+          "object_type" => "IssueComment",
+          "property" => "body",
+          "fragment" => " right after that are a bit broken IMHO :). I suppose we could have some hack that maxes out at whatever the font does...\n\nI'll check what the state of play is on Windows.\n",
+          "matches" => [
+            {
+              "text" => "Windows",
+              "indices" => [
+                163,
+                170
               ]
             }
           ]

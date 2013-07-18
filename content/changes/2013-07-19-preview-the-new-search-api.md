@@ -22,9 +22,9 @@ search results.
 [![code-snippet-highlighting](https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png)][example-web-search]
 
 We want API consumers to have access to that information as well. So, API
-requests can opt to recieve those text fragments in the response. Each fragment
-is accompanied by numeric offsets identifying the exact location of each
-matching search term. (TODO: Add a link.)
+requests can opt to recieve those
+[text fragments in the response][text-matches]. Each fragment is accompanied by
+numeric offsets identifying the exact location of each matching search term.
 
 ## Preview period
 
@@ -47,14 +47,15 @@ for production use.
 We hope you'll kick the tires and [send us your feedback][contact]. Happy
 <del>searching</del> finding!
 
-[code-docs]: http://localhost:3000/v3/search/#search-code
+[code-docs]: /v3/search/#search-code
 [contact]: https://github.com/contact?form[subject]=New+Search+API
-[docs]: http://localhost:3000/v3/search/
+[docs]: /v3/search/
 [example-web-search]: https://github.com/search?q=faraday+builder+repo%3Aoctokit%2Foctokit.rb&type=Code
-[issue-docs]: http://localhost:3000/v3/search/#search-issues
-[octokit-gemspecs]: http://localhost:3000/v3/search/#code-search-example
-[preview-mode]: http://localhost:3000/v3/search/#preview-mode
-[repo-docs]: http://localhost:3000/v3/search/#search-repositories
-[tetris-repos]: http://localhost:3000/v3/search/#repository-search-example
-[user-docs]: http://localhost:3000/v3/search/#search-users
+[issue-docs]: /v3/search/#search-issues
+[octokit-gemspecs]: /v3/search/#code-search-example
+[preview-mode]: /v3/search/#preview-mode
+[repo-docs]: /v3/search/#search-repositories
+[tetris-repos]: /v3/search/#repository-search-example
+[text-matches]: /v3/search#text-match-metadata
+[user-docs]: /v3/search/#search-users
 

@@ -10,9 +10,11 @@ searching for [code][code-docs], [repositories][repo-docs],
 [issues][issue-docs], or [users][user-docs], all the query abilities of
 github.com are now available via the API as well.
 
-Maybe you want to find popular Tetris implementations written in Assembly. We've
-[got you covered][tetris-repos]. Or perhaps you're looking for new gems that are
-using Octokit.rb. [No problem][octokit-gemspecs]. The possibilites are endless.
+Maybe you want to find [popular Tetris implementations written in Assembly][tetris-repos].
+We've got you covered.
+Or perhaps you're looking for [new gems that are using Octokit.rb][octokit-gemspecs].
+No problem.
+The possibilites are endless.
 
 ## Highlights
 

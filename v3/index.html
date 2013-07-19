@@ -290,7 +290,7 @@ see <a href="http://developer.github.com/v3/activity/events/">events</a> for exa
 $ curl https://api.github.com/user/repos?page=2&amp;per_page=100
 </pre>
 
-<p>Note that page numbering is 1-based and that ommiting the <code>?page</code> 
+<p>Note that page numbering is 1-based and that ommiting the <code>?page</code>
 parameter will return the first page.</p>
 
 <h3 id="link-header">Link Header</h3>
@@ -321,12 +321,13 @@ SHA1 and not on page number.</p>
   <dd>Shows the URL of the immediate previous page of results.</dd>
 </dl><h2 id="rate-limiting">Rate Limiting</h2>
 
-<p>We limit requests to 60 per hour for unauthenticated requests. For requests
-using Basic Authentication or OAuth, we limit requests to 5,000
-per hour.</p>
+<p>For requests using Basic Authentication or OAuth, you can make up to 5,000
+requests per hour. For unauthenticated requests, the rate limit allows you to
+make up to 60 requests per hour. (The Search API has <a href="/v3/search/#rate-limit">custom rate limit
+rules</a>.)</p>
 
 <p>You can check the returned HTTP headers of any API request to see your current
-status:</p>
+rate limit status:</p>
 
 <pre class="terminal">
 $ curl -i https://api.github.com/users/whatever
@@ -353,27 +354,9 @@ X-RateLimit-Reset: 1372700873
 <pre class="highlight"><code class="language-javascript"><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1372700873</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="c1">// =&gt; Mon Jul 01 2013 13:47:53 GMT-0400 (EDT)</span></code></pre>
 
-<p>You can also check your rate limit status without incurring an API hit.</p>
-
-<pre><code>GET /rate_limit
-</code></pre>
-
-<h3 id="rate-limit">Rate limit</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-X-RateLimit-Reset: 1372700873</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"rate"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"limit"</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
-    <span class="s2">"remaining"</span><span class="o">:</span> <span class="mi">4999</span><span class="p">,</span>
-    <span class="s2">"reset"</span><span class="o">:</span> <span class="mi">1372700873</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
-
-<p><br></p>
+<p>You can also <a href="/v3/rate_limit">check your rate limit status</a> without incurring an
+API hit.
+<br></p>
 
 <h3 id="unauthenticated-rate-limited-requests">Unauthenticated rate limited requests</h3>
 
@@ -408,7 +391,7 @@ higher rate limit for your OAuth application.</p>
 <h2 id="user-agent-required">User Agent Required</h2>
 
 <p>All API requests MUST include a valid <code>User-Agent</code> header. Requests with no <code>User-Agent</code>
-header will be rejected. We request that you use your GitHub username, or the name of your 
+header will be rejected. We request that you use your GitHub username, or the name of your
 application, for the <code>User-Agent</code> header value. This allows us to contact you if there are problems.</p>
 
 <p>Here’s an example:</p>
@@ -568,10 +551,11 @@ through as an array of <code>[url, options]</code> tuples.</p>
           <li class="js-topic">
             <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/">Overview</a></h3>
             <ul class="js-guides">
-              <li><a href="/v3/oauth/">OAuth</a></li>
-              <li><a href="/v3/meta/">Meta</a></li>
-              <li><a href="/v3/media/">Media Types</a></li>
               <li><a href="/v3/libraries/">Libraries</a></li>
+              <li><a href="/v3/media/">Media Types</a></li>
+              <li><a href="/v3/meta/">Meta</a></li>
+              <li><a href="/v3/oauth/">OAuth</a></li>
+              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -659,10 +643,11 @@ through as an array of <code>[url, options]</code> tuples.</p>
           <li class="js-topic">
             <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/search/">Search</a></h3>
             <ul class="js-guides">
-              <li><a href="/v3/search/#search-issues">Issues</a></li>
               <li><a href="/v3/search/#search-repositories">Repositories</a></li>
+              <li><a href="/v3/search/#search-code">Code</a></li>
+              <li><a href="/v3/search/#search-issues">Issues</a></li>
               <li><a href="/v3/search/#search-users">Users</a></li>
-              <li><a href="/v3/search/#email-search">Email</a></li>
+              <li><a href="/v3/search/legacy/">Legacy Search</a></li>
             </ul>
           </li>
           <li class="js-guides"><h3><a href="/v3/gitignore/">Gitignore</a></h3></li>

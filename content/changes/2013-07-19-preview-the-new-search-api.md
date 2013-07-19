@@ -44,6 +44,13 @@ At the end of preview period, the Search API will become an official component
 of GitHub API v3. At that point, the new Search API will be stable and suitable
 for production use.
 
+## What about the old search API?
+
+The [legacy search API][legacy-search] is still available. Many existing clients
+depend on it, and it is not changing in any way. While the new API offers much
+more functionality, the legacy search endpoints remain an official part of
+GitHub API v3.
+
 ## Take it for a spin
 
 We hope you'll kick the tires and [send us your feedback][contact]. Happy
@@ -54,10 +61,10 @@ We hope you'll kick the tires and [send us your feedback][contact]. Happy
 [docs]: /v3/search/
 [example-web-search]: https://github.com/search?q=faraday+builder+repo%3Aoctokit%2Foctokit.rb&type=Code
 [issue-docs]: /v3/search/#search-issues
+[legacy-search]: /v3/search/legacy/
 [octokit-gemspecs]: /v3/search/#code-search-example
 [preview-mode]: /v3/search/#preview-mode
 [repo-docs]: /v3/search/#search-repositories
 [tetris-repos]: /v3/search/#repository-search-example
 [text-matches]: /v3/search#text-match-metadata
 [user-docs]: /v3/search/#search-users
-

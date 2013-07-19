@@ -24,7 +24,7 @@ search results.
 [![code-snippet-highlighting](https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png)][example-web-search]
 
 We want API consumers to have access to that information as well. So, API
-requests can opt to recieve those
+requests can opt to receive those
 [text fragments in the response][text-matches]. Each fragment is accompanied by
 numeric offsets identifying the exact location of each matching search term.
 

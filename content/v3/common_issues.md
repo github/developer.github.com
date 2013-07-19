@@ -30,3 +30,14 @@ API call uses the same structure. Instead, extract the pagination information fr
 [the Link Header](/v3/#pagination) sent with every request.
   
 ## Can I get my rate limits bumped?
+
+The GitHub API has a pretty lenient quota for rate limits, for your enjoyment and
+our safety. You can read more about it [here](/v3/#rate-limiting).
+
+If you're using OAuth or Basic Authentication and are hitting your rate limits,
+you might be able to fix the issue by either caching our results, or [using conditional requests](/v3/#conditional-requests).
+
+In certainly exceptional cases, we may temporary bump your rate limit higher. Be
+expected to answer technical questions about your goal. We may choose not to bump
+your limit if we feel that you can achieve your wildest dreams with the current
+rate limit.

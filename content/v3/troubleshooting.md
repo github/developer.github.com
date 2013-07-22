@@ -29,7 +29,7 @@ in order to get more results.
 
 It's important to *not* try and guess the format of the pagination URL. Not every
 API call uses the same structure. Instead, extract the pagination information from
-[the Link Header](/v3/#pagination), which sent with every request.
+[the Link Header](/v3/#pagination), which is sent with every request.
   
 ## Can I get my rate limits bumped?
 

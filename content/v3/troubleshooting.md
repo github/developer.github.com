@@ -22,12 +22,14 @@ or [make sure that your scopes are valid](/v3/oauth/#scopes).
 
 ## Why am I not seeing all my results?
 
-Most API calls support pagination, so you'll need to walk through all of the results
-in your request to make sure you can find what you expect.
+Most API calls accessing a list of resources (_e.g._, users, issues, _e.t.c._) support 
+pagination. If you're making requests and receiving an incomplete set of results, you're 
+probably only seeing the first page. You'll need to request the remaining pages 
+in order to get more results.
 
 It's important to *not* try and guess the format of the pagination URL. Not every
 API call uses the same structure. Instead, extract the pagination information from
-[the Link Header](/v3/#pagination) sent with every request.
+[the Link Header](/v3/#pagination), which sent with every request.
   
 ## Can I get my rate limits bumped?
 

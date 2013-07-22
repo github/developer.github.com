@@ -64,7 +64,7 @@ q
    * [Size](https://help.github.com/articles/searching-repositories#size)
       Finds repositories that match a certain size (in kilobytes).
    * [Forks](https://help.github.com/articles/searching-repositories#forks)
-      Specifies the number of forks a repository should have and/or whether forked repositories should be included in the results at all.
+      Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.
    * [Created and Last Updated](https://help.github.com/articles/searching-repositories#created-and-last-updated)
       Filters repositories based on times of creation, or when they were last updated.
    * [Users or Repositories](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)
@@ -138,7 +138,7 @@ q
    * [Languages](https://help.github.com/articles/searching-code#language)
       Searches code based on the language it's written in.
    * [Forks](https://help.github.com/articles/searching-code#forks)
-      Specifies the number of forks a repository should have and/or whether forked repositories should be included in the results at all.
+      Filters repositories based on the number of forks, and/or whether code from forked repositories should be included in the results at all.
    * [Size](https://help.github.com/articles/searching-code#size)
       Finds files that match a certain size (in kilobytes).
    * [Path](https://help.github.com/articles/searching-code#path)

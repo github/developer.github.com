@@ -1,8 +1,8 @@
 ---
-title: Common Issues | GitHub API
+title: Troubleshooting | GitHub API
 ---
 
-# Common Issues
+# Troubleshooting
 
 * TOC
 {:toc}

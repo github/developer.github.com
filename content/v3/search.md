@@ -140,7 +140,7 @@ q
    * [Forks](https://help.github.com/articles/searching-code#forks)
       Filters repositories based on the number of forks, and/or whether code from forked repositories should be included in the results at all.
    * [Size](https://help.github.com/articles/searching-code#size)
-      Finds files that match a certain size (in kilobytes).
+      Finds files that match a certain size (in bytes).
    * [Path](https://help.github.com/articles/searching-code#path)
       Specifies the path that the resulting file must be at.
    * [Extension](https://help.github.com/articles/searching-code#extension)

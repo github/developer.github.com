@@ -27,7 +27,7 @@ access to Statuses **without** also granting access to repo code, while the
 
 ## List Statuses for a specific Ref
 
-Users with pull access, can view commit statuses for a given ref:
+Users with pull access can view commit statuses for a given ref:
 
     GET /repos/:owner/:repo/statuses/:ref
 

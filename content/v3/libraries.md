@@ -132,7 +132,6 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 [libsaas]: https://github.com/ducksboard/libsaas
 [github3py]: https://github.com/sigmavirus24/github3.py
 [sanction]: https://github.com/demianbrecht/sanction
-[agithub]: https://github.com/jpaugh64/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
 [octohub]: https://github.com/turnkeylinux/octohub
 [github-flask]: https://github-flask.readthedocs.org

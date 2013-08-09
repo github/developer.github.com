@@ -15,14 +15,14 @@ information](/v3/#authentication) with your request).
 
 ## Get a single user
 
-Note: The returned email is the user's publicly visible email address.
-
     GET /users/:user
 
 ### Response
 
 <%= headers 200 %>
 <%= json :full_user %>
+
+Note: The returned email is the user's publicly visible email address.
 
 ## Get the authenticated user
 
@@ -95,4 +95,3 @@ since
 
 <%= headers 200 %>
 <%= json(:user) { |h| [h] } %>
-

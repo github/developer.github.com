@@ -15,6 +15,8 @@ information](/v3/#authentication) with your request).
 
 ## Get a single user
 
+Note: The returned email is the user's publicly visible email address.
+
     GET /users/:user
 
 ### Response

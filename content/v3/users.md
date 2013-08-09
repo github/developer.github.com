@@ -22,7 +22,8 @@ information](/v3/#authentication) with your request).
 <%= headers 200 %>
 <%= json :full_user %>
 
-Note: The returned email is the user's publicly visible email address.
+Note: The returned email is the user's publicly visible email address
+(or `null` if the user has not [specified a public email address in their profile](https://github.com/settings/profile)).
 
 ## Get the authenticated user
 

@@ -27,6 +27,8 @@ access to Statuses **without** also granting access to repo code, while the
 
 ## List Statuses for a specific Ref
 
+Users with pull access can view commit statuses for a given ref:
+
     GET /repos/:owner/:repo/statuses/:ref
 
 ### Parameters
@@ -40,6 +42,8 @@ ref
 <%= json(:status) { |h| [h] } %>
 
 ## Create a Status
+
+Users with push access can create commit statuses for a given ref:
 
     POST /repos/:owner/:repo/statuses/:sha
 

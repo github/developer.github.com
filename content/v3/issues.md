@@ -49,7 +49,7 @@ direction
 : `asc` or `desc`, default: `desc`.
 
 since
-: _Optional_ **string** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+: _Optional_ **string** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.
 
 ### Response
 
@@ -92,7 +92,7 @@ direction
 : `asc` or `desc`, default: `desc`.
 
 since
-: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
+: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.
 
 ### Response
 

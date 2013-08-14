@@ -49,16 +49,16 @@ position
 : _Optional_ **number** - Line index in the diff to comment on.
 
 line
-: _Optional_ **number** - Line number in the file to comment on. Defaults to 1.
-
+: _Deprecated_ - Use **position** parameter instead.
+: _Optional_ **number** - Line number in the file to comment on. Defaults to `null`.
 
 #### Example
 
 <%= json \
   :body      => 'Nice change',
-  :line      => 1,
   :path      => 'file1.txt',
-  :position  => 4
+  :position  => 4,
+  :line      => nil
 %>
 
 ### Response

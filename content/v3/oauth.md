@@ -248,6 +248,44 @@ token.
 %>
 <%= json :oauth_access %>
 
+## Create new, or return existing authorization
+
+To create a new authorization for an OAuth application, only if an
+authorization for that application doesn't already exist for the user, you can
+use the `PUT` method. This will return the token for this application if it
+exists, or create one if it doesn't.
+
+    PUT /authorizations/:client_id
+
+### Input
+
+client_secret
+: **String** - The 40 character OAuth app client secret for which to create the
+token.
+
+scopes
+: _Optional_ **array** - A list of scopes that this authorization is in.
+
+note
+: _Optional_ **string** - A note to remind you what the OAuth token is for.
+
+note_url
+: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
+
+<%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
+
+### Response if returning a new token
+
+<%= headers 201, :Location => "https://api.github.com/authorizations/1"
+%>
+<%= json :oauth_access %>
+
+### Response if returning an existing token
+
+<%= headers 200, :Location => "https://api.github.com/authorizations/1"
+%>
+<%= json :oauth_access %>
+
 ## Update an existing authorization
 
     PATCH /authorizations/:id

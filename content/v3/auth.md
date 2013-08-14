@@ -59,4 +59,3 @@ section of your [application settings page](https://github.com/settings/applicat
 
 [create-access]: /v3/oauth/#create-a-new-authorization
 [oauth-auth]: /v3/#authentication
-

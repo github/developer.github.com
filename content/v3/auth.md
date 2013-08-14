@@ -44,12 +44,15 @@ curl -u 3816d821c80a6847ca84550052c1ff6246e8169b:x-oauth-basic https://api.githu
 
 For users with two factor authentication enabled, Basic Authentication requires
 an extra step. When Basic Authentication is attempted, the server will respond
-with a `401` and an error message indicating that a one time
-password (OTP) is required. In additon to the Basic
-Authentication credentials, you must send the users OTP in the `X-GitHub-OTP` header.
-Because the these one time passwords expire quickly, we recommend using the
-Authorizations API to [create an access token][create-access] and using that to
-[authenticate via OAuth][oauth-auth] for most API access.
+with a `401` and an `X-GitHub-OTP: required;:2fa-type` header, indicating that a 
+two-factor authentication code is needed in addition to the username and password.
+The `:2fa-type` in this header indicates if the account is configured using SMS
+or app-based two-factor authentication.
+
+In additon to the Basic Authentication credentials, you must send the user's OTP
+in the `X-GitHub-OTP` header. Because the these one time passwords expire quickly,
+we recommend using the Authorizations API to [create an access token][create-access]
+and using that to [authenticate via OAuth][oauth-auth] for most API access.
 
 Alternately, you can create access tokens from the Personal Access Token
 section of your [application settings page](https://github.com/settings/application).

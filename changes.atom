@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2013-07-18T22:00:00Z</updated>
+  <updated>2013-08-20T04:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
@@ -10,10 +10,83 @@
     <uri>https://github.com/technoweenie</uri>
   </author>
   <entry>
+    <id>tag:developer.github.com,2013-08-20:/changes/2013-08-20-search-api-improvements/</id>
+    <title type="html">Improvements to the Search API</title>
+    <published>2013-08-20T04:00:00Z</published>
+    <updated>2013-08-20T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-08-20-search-api-improvements/" />
+    <content type="html">&lt;p&gt;Today we’re shipping two improvements to the &lt;a href="/changes/2013-07-19-preview-the-new-search-api/"&gt;new Search API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id="more-text-match-metadata"&gt;More Text Match Metadata&lt;/h2&gt;
+
+&lt;p&gt;When searching for code, the API previously provided &lt;a href="/v3/search/#text-match-metadata"&gt;text match metadata&lt;/a&gt; (i.e., “highlights”) for file content.
+Now, you can also &lt;a href="/v3/search/#highlighting-code-search-results"&gt;get this metadata&lt;/a&gt; for matches that occur within the file path.&lt;/p&gt;
+
+&lt;p&gt;For example, when &lt;a href="https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&amp;amp;type=Code"&gt;searching for files that have “client” in their path&lt;/a&gt;, the results include this match for &lt;code&gt;lib/octokit/client/commits.rb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre class="json"&gt;
+{
+  "name": "commits.rb",
+  "path": "lib/octokit/client/commits.rb",
+  "text_matches": [
+    {
+      "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
+      "object_type": "FileContent",
+      "property": "path",
+      "fragment": "lib/octokit/client/commits.rb",
+      "matches": [
+        {
+          "text": "client",
+          "indices": [ 12, 18 ]
+        }
+      ]
+    }
+  ]
+  // ...
+}
+&lt;/pre&gt;
+
+&lt;h2 id="better-text-match-metadata"&gt;Better Text Match Metadata&lt;/h2&gt;
+
+&lt;p&gt;Before today, the API applied HTML entity encoding to all &lt;code&gt;fragment&lt;/code&gt; data.
+For example, imagine your search returns an issue like &lt;a href="https://github.com/rails/rails/issues/11889"&gt;rails/rails#11889&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://f.cloud.github.com/assets/2988/994632/a84f2888-09af-11e3-9417-4bd92f1f1ed6.png" alt="Example Issue Title"&gt;&lt;/p&gt;
+
+&lt;p&gt;The response would include a &lt;code&gt;text_matches&lt;/code&gt; array with the following object:&lt;/p&gt;
+
+&lt;pre class="json"&gt;
+{
+  "fragment": "undefined method `except' for #&amp;amp;lt;Array:XXX&amp;amp;gt;",
+  // ...
+}
+&lt;/pre&gt;
+
+&lt;p&gt;Inside the &lt;code&gt;fragment&lt;/code&gt; value, we see HTML-encoded entities (e.g., &lt;code&gt;&amp;amp;lt;&lt;/code&gt;).
+Since we’re returning JSON (not HTML), API clients might not expect any HTML-encoded text.
+As of today, the API returns these fragments &lt;em&gt;without&lt;/em&gt; this extraneous encoding.&lt;/p&gt;
+
+&lt;pre class="json"&gt;
+{
+  "fragment": "undefined method `except' for #&amp;lt;Array:XXX&amp;gt;",
+  // ...
+}
+&lt;/pre&gt;
+
+&lt;h2 id="preview-period"&gt;Preview Period&lt;/h2&gt;
+
+&lt;p&gt;We’re about halfway through the &lt;a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period"&gt;preview period&lt;/a&gt; for the new Search API.
+We appreciate everyone that has provided feedback so far. Please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API"&gt;keep it coming&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2013-07-19:/changes/2013-07-19-preview-the-new-search-api/</id>
     <title type="html">Preview the New Search API</title>
-    <published>2013-07-18T22:00:00Z</published>
-    <updated>2013-07-18T22:00:00Z</updated>
+    <published>2013-07-19T04:00:00Z</published>
+    <updated>2013-07-19T04:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -73,8 +146,8 @@ GitHub API v3.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-07-02:/changes/2013-07-02-rate-limit-reset/</id>
     <title type="html">When Does My Rate Limit Reset?</title>
-    <published>2013-07-01T22:00:00Z</published>
-    <updated>2013-07-01T22:00:00Z</updated>
+    <published>2013-07-02T04:00:00Z</published>
+    <updated>2013-07-02T04:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -117,8 +190,8 @@ $ curl https://api.github.com/rate_limit
   <entry>
     <id>tag:developer.github.com,2013-07-01:/changes/2013-07-01-feeds-api/</id>
     <title type="html">Feeds API</title>
-    <published>2013-06-30T22:00:00Z</published>
-    <updated>2013-06-30T22:00:00Z</updated>
+    <published>2013-07-01T04:00:00Z</published>
+    <updated>2013-07-01T04:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -173,8 +246,8 @@ curl -u defunkt https://api.github.com/feeds
   <entry>
     <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-create-update-delete-individual-files/</id>
     <title type="html">Create, update, and delete individual files</title>
-    <published>2013-05-05T22:00:00Z</published>
-    <updated>2013-05-05T22:00:00Z</updated>
+    <published>2013-05-06T04:00:00Z</published>
+    <updated>2013-05-06T04:00:00Z</updated>
     <author>
       <name>ymendel</name>
       <uri>https://github.com/technoweenie</uri>
@@ -190,8 +263,8 @@ curl -u defunkt https://api.github.com/feeds
   <entry>
     <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-repository-stats/</id>
     <title type="html">Repository Statistics</title>
-    <published>2013-05-05T22:00:00Z</published>
-    <updated>2013-05-05T22:00:00Z</updated>
+    <published>2013-05-06T04:00:00Z</published>
+    <updated>2013-05-06T04:00:00Z</updated>
     <author>
       <name>Caged</name>
       <uri>https://github.com/technoweenie</uri>
@@ -212,10 +285,30 @@ but we can’t wait to see what others can do with this information.&lt;/p&gt;
 &lt;/ul&gt;&lt;p&gt;Enjoy!&lt;/p&gt;</content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
+    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
+    <published>2013-04-30T04:00:00Z</published>
+    <updated>2013-04-30T04:00:00Z</updated>
+    <author>
+      <name>foca</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
+    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
+Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
+has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+&lt;/pre&gt;
+
+&lt;p&gt;Enjoy.&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/</id>
     <title type="html">Improved Support for Submodules in the Repository Contents API</title>
-    <published>2013-04-29T22:00:00Z</published>
-    <updated>2013-04-29T22:00:00Z</updated>
+    <published>2013-04-30T04:00:00Z</published>
+    <updated>2013-04-30T04:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -252,30 +345,10 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 &lt;a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
-    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
-    <published>2013-04-29T22:00:00Z</published>
-    <updated>2013-04-29T22:00:00Z</updated>
-    <author>
-      <name>foca</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
-    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
-Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
-has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-&lt;/pre&gt;
-
-&lt;p&gt;Enjoy.&lt;/p&gt;</content>
-  </entry>
-  <entry>
     <id>tag:developer.github.com,2013-04-25:/changes/2013-04-25-deprecating-merge-commit-sha/</id>
     <title type="html">Deprecating a Confusing Attribute in the Pull Request API</title>
-    <published>2013-04-24T22:00:00Z</published>
-    <updated>2013-04-24T22:00:00Z</updated>
+    <published>2013-04-25T04:00:00Z</published>
+    <updated>2013-04-25T04:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -301,8 +374,8 @@ remove it in the next major version of the API.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-04-24:/changes/2013-04-24-user-agent-required/</id>
     <title type="html">User Agent now mandatory</title>
-    <published>2013-04-23T22:00:00Z</published>
-    <updated>2013-04-23T22:00:00Z</updated>
+    <published>2013-04-24T04:00:00Z</published>
+    <updated>2013-04-24T04:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -319,8 +392,8 @@ responses, be sure and check your code.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-03-01:/changes/2013-3-1-new-hookshot-coming/</id>
     <title type="html">New Hookshot Changes</title>
-    <published>2013-02-28T23:00:00Z</published>
-    <updated>2013-02-28T23:00:00Z</updated>
+    <published>2013-03-01T05:00:00Z</published>
+    <updated>2013-03-01T05:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -347,8 +420,8 @@ requests&lt;/a&gt; very soon :)&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2013-02-14:/changes/2013-2-13-sortable-stars/</id>
     <title type="html">Sortable Stars in Repository Starring API</title>
-    <published>2013-02-13T23:00:00Z</published>
-    <updated>2013-02-13T23:00:00Z</updated>
+    <published>2013-02-14T05:00:00Z</published>
+    <updated>2013-02-14T05:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -407,8 +480,8 @@ if you have any questions.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2013-02-05:/changes/2013-2-5-changes-to-services/</id>
     <title type="html">Upcoming Changes to GitHub Services</title>
-    <published>2013-02-04T23:00:00Z</published>
-    <updated>2013-02-04T23:00:00Z</updated>
+    <published>2013-02-05T05:00:00Z</published>
+    <updated>2013-02-05T05:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -446,8 +519,8 @@ over 100 services is taking too much of this focus away.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2013-01-31:/changes/2013-01-31-user-agent-will-soon-be-mandatory/</id>
     <title type="html">User Agent mandatory from March 4th 2013</title>
-    <published>2013-01-30T23:00:00Z</published>
-    <updated>2013-01-30T23:00:00Z</updated>
+    <published>2013-01-31T05:00:00Z</published>
+    <updated>2013-01-31T05:00:00Z</updated>
     <author>
       <name>agh</name>
       <uri>https://github.com/technoweenie</uri>
@@ -471,8 +544,8 @@ many of our users to make any changes whatsoever.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-01-08:/changes/2013-01-08-new-user-scopes/</id>
     <title type="html">New User scopes</title>
-    <published>2013-01-07T23:00:00Z</published>
-    <updated>2013-01-07T23:00:00Z</updated>
+    <published>2013-01-08T05:00:00Z</published>
+    <updated>2013-01-08T05:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -494,8 +567,8 @@ can be potentially dangerous.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2012-12-10:/changes/2012-12-10-Diff-and-patch-media-types/</id>
     <title type="html">Diff and patch media types</title>
-    <published>2012-12-09T23:00:00Z</published>
-    <updated>2012-12-09T23:00:00Z</updated>
+    <published>2012-12-10T05:00:00Z</published>
+    <updated>2012-12-10T05:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -528,8 +601,8 @@ index 1f599cb..abaf625 100755
   <entry>
     <id>tag:developer.github.com,2012-12-09:/changes/2012-12-09-organization-repositories-results-now-paginate/</id>
     <title type="html">Pagination for Organization Repository lists now paginates properly</title>
-    <published>2012-12-08T23:00:00Z</published>
-    <updated>2012-12-08T23:00:00Z</updated>
+    <published>2012-12-09T05:00:00Z</published>
+    <updated>2012-12-09T05:00:00Z</updated>
     <author>
       <name>rick</name>
       <uri>https://github.com/technoweenie</uri>
@@ -551,8 +624,8 @@ regardless of what you send in the &lt;code&gt;type&lt;/code&gt; parameter.&lt;/
   <entry>
     <id>tag:developer.github.com,2012-12-08:/changes/2012-12-08-finding-source-and-fork-repos-for-organizations/</id>
     <title type="html">Finding sources and fork repositories for organizations</title>
-    <published>2012-12-07T23:00:00Z</published>
-    <updated>2012-12-07T23:00:00Z</updated>
+    <published>2012-12-08T05:00:00Z</published>
+    <updated>2012-12-08T05:00:00Z</updated>
     <author>
       <name>rick</name>
       <uri>https://github.com/technoweenie</uri>
@@ -580,8 +653,8 @@ curl "https://api.github.com/orgs/:org/repos?type=sources"
   <entry>
     <id>tag:developer.github.com,2012-12-06:/changes/2012-12-06-create-authorization-for-app/</id>
     <title type="html">Create an OAuth authorization for an app</title>
-    <published>2012-12-05T23:00:00Z</published>
-    <updated>2012-12-05T23:00:00Z</updated>
+    <published>2012-12-06T05:00:00Z</published>
+    <updated>2012-12-06T05:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -618,8 +691,8 @@ app’s rate limit.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2012-12-04:/changes/2012-12-04-List-comments-for-repo/</id>
     <title type="html">Per-repository Review and Issue Comment&amp;nbsp;listing</title>
-    <published>2012-12-03T23:00:00Z</published>
-    <updated>2012-12-03T23:00:00Z</updated>
+    <published>2012-12-04T05:00:00Z</published>
+    <updated>2012-12-04T05:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -649,8 +722,8 @@ curl https://api.github.com/repos/mathiasbynens/dotfiles/pulls/comments
   <entry>
     <id>tag:developer.github.com,2012-11-29:/changes/2012-11-29-gitignore-templates/</id>
     <title type="html">Gitignore Templates API</title>
-    <published>2012-11-28T23:00:00Z</published>
-    <updated>2012-11-28T23:00:00Z</updated>
+    <published>2012-11-29T05:00:00Z</published>
+    <updated>2012-11-29T05:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -708,8 +781,8 @@ DerivedData
   <entry>
     <id>tag:developer.github.com,2012-11-27:/changes/2012-11-27-forking-to-organizations/</id>
     <title type="html">Forking to Organizations</title>
-    <published>2012-11-26T23:00:00Z</published>
-    <updated>2012-11-26T23:00:00Z</updated>
+    <published>2012-11-27T05:00:00Z</published>
+    <updated>2012-11-27T05:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -743,8 +816,8 @@ major change of the GitHub API.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2012-10-31:/changes/2012-10-31-gist-comment-uris/</id>
     <title type="html">Gist comment URIs</title>
-    <published>2012-10-30T23:00:00Z</published>
-    <updated>2012-10-30T23:00:00Z</updated>
+    <published>2012-10-31T04:00:00Z</published>
+    <updated>2012-10-31T04:00:00Z</updated>
     <author>
       <name>pezra</name>
       <uri>https://github.com/technoweenie</uri>
@@ -759,8 +832,8 @@ major change of the GitHub API.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2012-10-26:/changes/2012-10-26-notifications-api/</id>
     <title type="html">Notifications API</title>
-    <published>2012-10-25T22:00:00Z</published>
-    <updated>2012-10-25T22:00:00Z</updated>
+    <published>2012-10-26T04:00:00Z</published>
+    <updated>2012-10-26T04:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -830,8 +903,8 @@ X-Poll-Interval: 60
   <entry>
     <id>tag:developer.github.com,2012-10-24:/changes/2012-10-24-set-default-branch/</id>
     <title type="html">Set the default branch for a repository</title>
-    <published>2012-10-23T22:00:00Z</published>
-    <updated>2012-10-23T22:00:00Z</updated>
+    <published>2012-10-24T04:00:00Z</published>
+    <updated>2012-10-24T04:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -854,8 +927,8 @@ curl -u pengwynn \
   <entry>
     <id>tag:developer.github.com,2012-10-17:/changes/2012-10-17-org-members-redirection/</id>
     <title type="html">Organization Members Resource Changes</title>
-    <published>2012-10-16T22:00:00Z</published>
-    <updated>2012-10-16T22:00:00Z</updated>
+    <published>2012-10-17T04:00:00Z</published>
+    <updated>2012-10-17T04:00:00Z</updated>
     <author>
       <name>pezra</name>
       <uri>https://github.com/technoweenie</uri>
@@ -884,8 +957,8 @@ should be using the public membership resources.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2012-10-14:/changes/2012-10-14-rate-limit-changes/</id>
     <title type="html">Rate limit changes for unauthenticated requests</title>
-    <published>2012-10-13T22:00:00Z</published>
-    <updated>2012-10-13T22:00:00Z</updated>
+    <published>2012-10-14T04:00:00Z</published>
+    <updated>2012-10-14T04:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -912,8 +985,8 @@ something unique to your application.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2012-09-28:/changes/2012-9-28-auto-init-for-repositories/</id>
     <title type="html">Initialize a repository when creating</title>
-    <published>2012-09-27T22:00:00Z</published>
-    <updated>2012-09-27T22:00:00Z</updated>
+    <published>2012-09-28T04:00:00Z</published>
+    <updated>2012-09-28T04:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -954,118 +1027,6 @@ curl -i -u pengwynn \
 is ignored if &lt;code&gt;auto_init&lt;/code&gt; is not present and &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, drop us a line at
-&lt;a href="https://github.com/c"&gt;https://github.com/contact&lt;/a&gt;, &lt;a href="mailto:support@github.com"&gt;support@github.com&lt;/a&gt;, or
-&lt;a href="https://twitter.com/githubapi"&gt;@GitHubAPI&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2012-09-05:/changes/2012-9-5-watcher-api/</id>
-    <title type="html">Upcoming Changes to Watcher and Star APIs</title>
-    <published>2012-09-04T22:00:00Z</published>
-    <updated>2012-09-04T22:00:00Z</updated>
-    <author>
-      <name>technoweenie</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2012-9-5-watcher-api/" />
-    <content type="html">&lt;p&gt;We recently &lt;a href="https://github.com/blog/1204-notifications-stars"&gt;changed the Watcher behavior&lt;/a&gt; on GitHub.  What
-used to be known as “Watching” is now “Starring”.  Starring is basically a way
-to bookmark interesting repositories.  Watching is a way to indicate that you
-want to receive email or web notifications on a Repository.&lt;/p&gt;
-
-&lt;p&gt;This works well on GitHub.com, but poses a problem for the GitHub API.  How do
-we change this in a way that developers can gracefully upgrade their
-applications?  We’re currently looking at rolling out the changes in three
-phases over an extended period of time.&lt;/p&gt;
-
-&lt;h2 id="current-status"&gt;Current Status&lt;/h2&gt;
-
-&lt;p&gt;The current &lt;a href="http://developer.github.com/v3/repos/starring/"&gt;Repository Starring&lt;/a&gt; methods look like this:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-&lt;code&gt;/repos/:owner/:repo/watchers&lt;/code&gt; - A list of users starring the repository.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;/users/:user/watched&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;/user/watched&lt;/code&gt; - A list of repositories the current user has starred.&lt;/li&gt;
-&lt;/ul&gt;&lt;h2 id="phase-1-add-watchers-as-subscriptions"&gt;Phase 1: Add Watchers as Subscriptions&lt;/h2&gt;
-
-&lt;p&gt;This phase exposes Watchers as “Subscriptions”.  This is to
-keep from clashing with the legacy endpoints.  This phase will happen
-automatically and will not break your application until Phase 3 starts.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-&lt;code&gt;/repos/:owner/:repo/subscribers&lt;/code&gt; - A list of users watching the repository.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;/users/:user/subscriptions&lt;/code&gt; - A list of repositories that a user is watching.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;/user/subscriptions&lt;/code&gt; - A list of repositories the current user is watching.&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;We’ll also add a copy of the legacy Watchers API in the new endpoint:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-&lt;code&gt;/repos/:owner/:repo/stargazers&lt;/code&gt; - A list of users starring the repository.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;/users/:user/starred&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;/user/starred&lt;/code&gt; - A list of repositories the current user has starred.&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;This is in place &lt;em&gt;now&lt;/em&gt; with the current media type for the API:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.beta+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.  You should do this now.  This
-can be verified by checking the &lt;code&gt;X-GitHub-Media-Type&lt;/code&gt; header on all API
-responses.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Accesses a user's starred repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.beta+json"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
-the “beta” media type, and makes the “v3” media type the implicit default
-for API requests.&lt;/p&gt;
-
-&lt;h2 id="phase-2-switch-watchers-api-endpoint"&gt;Phase 2: Switch &lt;code&gt;/watchers&lt;/code&gt; API Endpoint&lt;/h2&gt;
-
-&lt;p&gt;The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
-will have to use &lt;code&gt;/user/starred&lt;/code&gt; to get a user’s starred repositories, not
-&lt;code&gt;/user/watched&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;This requires a new media type value:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is a breaking change from Phase 1.  We will release this change in an
-experimental mode first, letting developers gracefully upgrade their
-applications by specifying the new media value for the Accept header.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Accesses a user's watched repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.v3+json"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="phase-3-remove-subscribers-api-endpoint"&gt;Phase 3: Remove &lt;code&gt;/subscribers&lt;/code&gt; API Endpoint.&lt;/h2&gt;
-
-&lt;p&gt;This phase involves disabling the subscription endpoints completely.  At this
-point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.  No date has been set yet, but we
-expect this to be &lt;em&gt;3-6 months&lt;/em&gt; after Phase 2 is in place.  This should give
-developers enough time for a smooth upgrade path.  If they use popular API
-wrappers, the work will likely mostly be done for them.&lt;/p&gt;
-
-&lt;p&gt;Keep on passing the “v3” media type in your application, until the API has
-another breaking change to make.  If you can’t make the deadline for Phase 3,
-just set the “beta” media type until we shut that down completely.  It’s likely
-that we will keep the old “beta” media type active for another month, like
-the &lt;a href="https://github.com/blog/1090-github-api-moving-on"&gt;last time&lt;/a&gt; we terminated
-old API functionality.&lt;/p&gt;
-
-&lt;p&gt;We look forward to assisting you through this transition.  Hit us up at
 &lt;a href="https://github.com/c"&gt;https://github.com/contact&lt;/a&gt;, &lt;a href="mailto:support@github.com"&gt;support@github.com&lt;/a&gt;, or
 &lt;a href="https://twitter.com/githubapi"&gt;@GitHubAPI&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>

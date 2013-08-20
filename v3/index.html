@@ -354,6 +354,21 @@ X-RateLimit-Reset: 1372700873
 <pre class="highlight"><code class="language-javascript"><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1372700873</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="c1">// =&gt; Mon Jul 01 2013 13:47:53 GMT-0400 (EDT)</span></code></pre>
 
+<p>Once you go over the rate limit you will receive an error response:</p>
+
+<pre class="terminal">
+HTTP/1.1 403 Forbidden
+Date: Tue, 20 Aug 2013 14:50:41 GMT
+Status: 403 Forbidden
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1377013266
+
+{
+    "message": "API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details."
+}
+</pre>
+
 <p>You can also <a href="/v3/rate_limit">check your rate limit status</a> without incurring an
 API hit.
 <br></p>

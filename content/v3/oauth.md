@@ -97,12 +97,12 @@ The access token allows you to make requests to the API on a behalf of a user.
 
 ## Non-Web Application Flow
 
-Use [Basic Authentication](/v3/auth#basic-authentication) to create an OAuth2 token using the [interface
-below](/v3/oauth/#create-a-new-authorization).  With this technique, a username
-and password need not be stored permanently, and the user can revoke access at
-any time. Make sure to understand the section on [working with two-factor
-authentication](/v3/auth/#working-with-two-factor-authentication) if you or
-your users have this feature enabled.
+Use [Basic Authentication](/v3/auth#basic-authentication) to create an OAuth2
+token using the [interface below](/v3/oauth/#create-a-new-authorization).  With
+this technique, a username and password need not be stored permanently, and the
+user can revoke access at any time. (Make sure to understand how to [work with
+two-factor authentication](/v3/auth/#working-with-two-factor-authentication) if
+you or your users have two-factor authentication enabled.)
 
 ## Redirect URLs
 
@@ -187,11 +187,11 @@ can specify multiple scopes by separating them by a comma.
 
 ## OAuth Authorizations API
 
-There is an API for users to manage their own tokens.  You can only
-access your own tokens, and only through [Basic Authentication](/v3/auth#basic-authentication). Make sure to
-understand the section on [working with two-factor authentication]
-(/v3/auth/#working-with-two-factor-authentication) if you or your users have
-this feature enabled.
+There is an API for users to manage their own tokens.  You can only access your
+own tokens, and only via [Basic Authentication](/v3/auth#basic-authentication).
+(Make sure to understand how to [work with two-factor
+authentication](/v3/auth/#working-with-two-factor-authentication) if you or your
+users have two-factor authentication enabled.)
 
 ## List your authorizations
 
@@ -250,16 +250,20 @@ token.
 %>
 <%= json :oauth_access %>
 
-## Create new, or return existing authorization
+## Get-or-create an authorization for a specific app
 
-To create a new authorization for an OAuth application, only if an
-authorization for that application doesn't already exist for the user, you can
-use the `PUT` method. This will return the token for this application if it
-exists, or create one if it doesn't.
+This method will create a new authorization for the specified OAuth application,
+only if an authorization for that application doesn't already exist for the
+user. It returns the user's token for the application if one exists. Otherwise,
+it creates one.
 
     PUT /authorizations/:client_id
 
 ### Input
+
+client_id
+: **String** - The 20 character OAuth app client key for the app that is
+requesting the token.
 
 client_secret
 : **String** - The 40 character OAuth app client secret for which to create the

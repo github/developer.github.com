@@ -15,7 +15,7 @@ Now, you can also [get this metadata][code-text-matches] for matches that occur 
 ## Better Text Match Metadata
 
 Before today, the API applied HTML entity encoding to all `fragment` data.
-For example, imagine your search returns an issue like [rails/rails#11889][example-issue].
+For example, imagine your search returns an issue like [rails/rails#11889][example-issue]:
 
 ![screen shot 2013-08-19 at 4 16 01 pm](https://f.cloud.github.com/assets/2988/988956/8e50a87e-090c-11e3-8807-c31d5ada4ea4.png)
 

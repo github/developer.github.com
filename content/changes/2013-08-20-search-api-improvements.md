@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Improvements to the Search API
-created_at: 2013-08-21
+created_at: 2013-08-20
 author_name: jasonrudolph
 ---
 

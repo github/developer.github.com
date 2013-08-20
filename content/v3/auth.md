@@ -9,10 +9,10 @@ title: Authentication | GitHub API
 
 While the API provides multiple methods for authentication, we strongly
 recommend using [OAuth](/v3/oauth/) for production applications. The other
-methods provided are intended to be used for scripts or testing where full
-OAuth is excessive. Third party applications that rely on GitHub for
-authentication should not ask for or collect GitHub credentials and should use
-the [OAuth web flow](/v3/oauth).
+methods provided are intended to be used for scripts or testing (i.e., cases
+where full OAuth would be overkill). Third party applications that rely on
+GitHub for authentication should not ask for or collect GitHub credentials.
+Instead, they should use the [OAuth web flow](/v3/oauth).
 
 ## Basic Authentication
 
@@ -24,38 +24,53 @@ the existence of user data. Instead, the GitHub API responds with `404 Not Found
 This may cause problems for HTTP libraries that assume a `401 Unauthorized`
 response. The solution is to manually craft the `Authorization` header.
 
-To use Basic Authentication with the GitHub API, simply send
-the username and password associated with the account. 
+### Via Username and Password
+
+To use Basic Authentication with the GitHub API, simply send the username and
+password associated with the account.
+
+For example, if you're accessing the API via [cURL][curl], the following command
+would authenticate with `mojombo` as the username. (cURL will prompt you to
+enter the password.)
 
 <pre class='terminal'>
-curl -u mojomob https://api.github.com/user
+curl -u mojombo https://api.github.com/user
 </pre>
 
-Another way to use OAuth tokens with the API is to provide the token as the
-username and provide a blank password or a password of `x-oauth-basic`. This
-approach is useful if your tools only support Basic Authentication but you want
-to take advantage of OAuth access token security features.
+### Via OAuth Tokens
+
+Alternatively, you can authenticate using [personal access
+tokens][personal-access-tokens] or OAuth tokens. To do so, provide the token as
+the username and provide a blank password or a password of `x-oauth-basic`. For
+example:
 
 <pre class='terminal'>
 curl -u 3816d821c80a6847ca84550052c1ff6246e8169b:x-oauth-basic https://api.github.com/user
 </pre>
 
+This approach is useful if your tools only support Basic Authentication but you
+want to take advantage of OAuth access token security features.
+
 ## Working with two-factor authentication
 
 For users with two-factor authentication enabled, Basic Authentication requires
-an extra step. When Basic Authentication is attempted, the server will respond
-with a `401` and an `X-GitHub-OTP: required;:2fa-type` header, indicating that a 
-two-factor authentication code is needed in addition to the username and password.
-The `:2fa-type` in this header indicates if the account is configured using SMS
-or app-based two-factor authentication.
+an extra step. When you attempt to authenticate with Basic Authentication, the
+server will respond with a `401` and an `X-GitHub-OTP: required;:2fa-type`
+header. This indicates that a two-factor authentication code is needed (in
+addition to the username and password). The `:2fa-type` in this header indicates
+whether the account receives its two-factor authentication codes via SMS or via
+an application.
 
-In additon to the Basic Authentication credentials, you must send the user's OTP
-in the `X-GitHub-OTP` header. Because the these one time passwords expire quickly,
-we recommend using the Authorizations API to [create an access token][create-access]
-and using that to [authenticate via OAuth][oauth-auth] for most API access.
+In additon to the Basic Authentication credentials, you must send the user's
+authentication code (i.e., one-time password) in the `X-GitHub-OTP` header.
+Because these authentication codes expire quickly, we recommend using the
+Authorizations API to [create an access token][create-access] and using that
+token to [authenticate via OAuth][oauth-auth] for most API access.
 
 Alternately, you can create access tokens from the Personal Access Token
 section of your [application settings page](https://github.com/settings/application).
 
 [create-access]: /v3/oauth/#create-a-new-authorization
+[curl]: http://curl.haxx.se/
 [oauth-auth]: /v3/#authentication
+[personal-access-tokens]: https://github.com/blog/1509-personal-api-tokens

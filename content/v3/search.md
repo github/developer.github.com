@@ -188,9 +188,9 @@ This produces the same JSON payload as above, with an extra key called
 the position of your search terms within the text, as well as the property that
 included the search term.
 
-When searching for code, you can get text match metadata for the **file
-contents**. (See the section on [text match metadata ](#text-match-metadata) for
-full details.)
+When searching for code, you can get text match metadata for the file
+**content** and file **path** fields. (See the section on
+[text match metadata](#text-match-metadata) for full details.)
 
 Here's an example response:
 

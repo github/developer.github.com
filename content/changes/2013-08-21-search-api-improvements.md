@@ -42,7 +42,7 @@ As of today, the API returns these fragments _without_ this extraneous encoding.
 ## Preview Period
 
 We're about halfway through the [preview period][preview-period] for the new Search API.
-We appreciate everyone that has provided feedback so far. Please [keep it coming][contact].
+We appreciate everyone that has provided feedback so far. Please [keep it coming][contact]!
 
 [contact]: https://github.com/contact?form[subject]=New+Search+API
 [code-text-matches]: /v3/search/#highlighting-code-search-results

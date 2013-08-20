@@ -12,6 +12,30 @@ Today we're shipping two improvements to the [new Search API][original-search-ap
 When searching for code, the API previously provided [text match metadata][text-matches] (i.e., "highlights") for file content.
 Now, you can also [get this metadata][code-text-matches] for matches that occur within the file path.
 
+For example, when [searching for files that have "client" in their path][example-path-search], the results include this match for `lib/octokit/client/commits.rb`:
+
+<pre class="json">
+{
+  "name": "commits.rb",
+  "path": "lib/octokit/client/commits.rb",
+  "text_matches": [
+    {
+      "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
+      "object_type": "FileContent",
+      "property": "path",
+      "fragment": "lib/octokit/client/commits.rb",
+      "matches": [
+        {
+          "text": "client",
+          "indices": [ 12, 18 ]
+        }
+      ]
+    }
+  ]
+  // ...
+}
+</pre>
+
 ## Better Text Match Metadata
 
 Before today, the API applied HTML entity encoding to all `fragment` data.
@@ -47,6 +71,7 @@ We appreciate everyone that has provided feedback so far. Please [keep it coming
 [contact]: https://github.com/contact?form[subject]=New+Search+API
 [code-text-matches]: /v3/search/#highlighting-code-search-results
 [example-issue]: https://github.com/rails/rails/issues/11889
+[example-path-search]: https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&type=Code
 [original-search-api-announcement]: /changes/2013-07-19-preview-the-new-search-api/
 [preview-period]: /changes/2013-07-19-preview-the-new-search-api/#preview-period
 [text-matches]: /v3/search/#text-match-metadata

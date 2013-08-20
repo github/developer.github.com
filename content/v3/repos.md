@@ -9,7 +9,11 @@ title: Repos | GitHub API
 
 ## List your repositories
 
-List repositories for the authenticated user.
+List repositories for the authenticated user. Note that this does not include
+repositories owned by organizations which the user can access. You can
+[list user organizations](/v3/orgs/#list-user-organizations) and
+[list organization repositories](/v3/repos/#list-organization-repositories)
+separately.
 
     GET /user/repos
 
@@ -286,4 +290,3 @@ Deleting a repository requires admin access.  If OAuth is used, the
 ### Response
 
 <%= headers 204 %>
-

@@ -16,7 +16,7 @@ Note: you can download the complete source code for this project [from the platf
 ## Registering your app
 
 First, you'll need to [register your
-application](https://github.com/settings/applications/new) application. Every 
+application](https://github.com/settings/applications/new). Every 
 registered OAuth application is assigned a unique Client ID and Client Secret. 
 The Client Secret should not be shared! That includes checking the string
 into your repository.
@@ -120,7 +120,7 @@ time they needed to access the web page. For example, try navigating directly to
 `http://localhost:4567/basic`. You'll get an error.
 
 What if we could circumvent the entire
-"click here" process, and just _remember_ that, as log as the user's logged into
+"click here" process, and just _remember_ that, as long as the user's logged into
 GitHub, they should be able to access this application? Hold on to your hat, 
 because _that's exactly what we're going to do_.
 

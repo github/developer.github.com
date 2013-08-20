@@ -168,23 +168,24 @@ module GitHub
     }
 
     REPO = SIMPLE_REPO.merge({
-      "clone_url"        => "https://github.com/octocat/Hello-World.git",
-      "git_url"          => "git://github.com/octocat/Hello-World.git",
-      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
-      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
-      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
-      "homepage"         => "https://github.com",
-      "language"         => nil,
-      "forks"            => 9,
-      "forks_count"      => 9,
-      "watchers"         => 80,
-      "watchers_count"   => 80,
-      "size"             => 108,
-      "master_branch"    => 'master',
-      "open_issues"      => 0,
-      "pushed_at"        => "2011-01-26T19:06:43Z",
-      "created_at"       => "2011-01-26T19:01:12Z",
-      "updated_at"       => "2011-01-26T19:14:43Z"
+      "clone_url"         => "https://github.com/octocat/Hello-World.git",
+      "git_url"           => "git://github.com/octocat/Hello-World.git",
+      "ssh_url"           => "git@github.com:octocat/Hello-World.git",
+      "svn_url"           => "https://svn.github.com/octocat/Hello-World",
+      "mirror_url"        => "git://git.example.com/octocat/Hello-World",
+      "homepage"          => "https://github.com",
+      "language"          => nil,
+      "forks"             => 9,
+      "forks_count"       => 9,
+      "watchers"          => 80,
+      "watchers_count"    => 80,
+      "size"              => 108,
+      "master_branch"     => 'master',
+      "open_issues"       => 0,
+      "open_issues_count" => 0,
+      "pushed_at"         => "2011-01-26T19:06:43Z",
+      "created_at"        => "2011-01-26T19:01:12Z",
+      "updated_at"        => "2011-01-26T19:14:43Z"
     })
 
     FULL_REPO = REPO.merge({
@@ -654,6 +655,103 @@ module GitHub
       "issues" => [ISSUE_SEARCH_ITEM]
     }
 
+    ISSUE_SEARCH_V3_RESULTS = {
+      "total_count" => 280,
+      "items" => [
+        {
+          "url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132",
+          "labels_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/labels{/name}",
+          "comments_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/comments",
+          "events_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/events",
+          "html_url" => "https://github.com/batterseapower/pinyin-toolkit/issues/132",
+          "id" => 35802,
+          "number" => 132,
+          "title" => "Line Number Indexes Beyond 20 Not Displayed",
+          "user" => {
+            "login" => "Nick3C",
+            "id" => 90254,
+            "avatar_url" => "https://secure.gravatar.com/avatar/934442aadfe3b2f4630510de416c5718?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+            "gravatar_id" => "934442aadfe3b2f4630510de416c5718",
+            "url" => "https://api.github.com/users/Nick3C",
+            "html_url" => "https://github.com/Nick3C",
+            "followers_url" => "https://api.github.com/users/Nick3C/followers",
+            "following_url" => "https://api.github.com/users/Nick3C/following{/other_user}",
+            "gists_url" => "https://api.github.com/users/Nick3C/gists{/gist_id}",
+            "starred_url" => "https://api.github.com/users/Nick3C/starred{/owner}{/repo}",
+            "subscriptions_url" => "https://api.github.com/users/Nick3C/subscriptions",
+            "organizations_url" => "https://api.github.com/users/Nick3C/orgs",
+            "repos_url" => "https://api.github.com/users/Nick3C/repos",
+            "events_url" => "https://api.github.com/users/Nick3C/events{/privacy}",
+            "received_events_url" => "https://api.github.com/users/Nick3C/received_events",
+            "type" => "User"
+          },
+          "labels" => [
+            {
+              "url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/labels/bug",
+              "name" => "bug",
+              "color" => "ff0000"
+            }
+          ],
+          "state" => "open",
+          "assignee" => nil,
+          "milestone" => nil,
+          "comments" => 15,
+          "created_at" => "2009-07-12T20:10:41Z",
+          "updated_at" => "2009-07-19T09:23:43Z",
+          "closed_at" => nil,
+          "pull_request" => {
+            "html_url" => nil,
+            "diff_url" => nil,
+            "patch_url" => nil
+          },
+          "body" => "...",
+          "score" => 1.3859273
+        }
+      ]
+    }
+
+    ISSUE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/215335/issues/132",
+          "object_type" => "Issue",
+          "property" => "body",
+          "fragment" => "comprehensive windows font I know of).\n\nIf we can find a commonly distributed windows font that supports them then no problem (we can use html font tags) but otherwise the '(21)' style is probably better.\n",
+          "matches" => [
+            {
+              "text" => "windows",
+              "indices" => [
+                14,
+                21
+              ]
+            },
+            {
+              "text" => "windows",
+              "indices" => [
+                78,
+                85
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/215335/issues/comments/25688",
+          "object_type" => "IssueComment",
+          "property" => "body",
+          "fragment" => " right after that are a bit broken IMHO :). I suppose we could have some hack that maxes out at whatever the font does...\n\nI'll check what the state of play is on Windows.\n",
+          "matches" => [
+            {
+              "text" => "Windows",
+              "indices" => [
+                163,
+                170
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
     REPO_SEARCH_ITEM = {
       "type" => "repo",
       "created" => "2011-09-05T11:07:54Z",
@@ -684,6 +782,207 @@ module GitHub
       "repositories" => [REPO_SEARCH_ITEM]
     }
 
+    REPO_SEARCH_V3_RESULTS = {
+      "total_count" => 40,
+      "items" => [
+        {
+          "id" => 3081286,
+          "name" => "Tetris",
+          "full_name" => "dtrupenn/Tetris",
+          "owner" => {
+            "login" => "dtrupenn",
+            "id" => 872147,
+            "avatar_url" => "https://secure.gravatar.com/avatar/e7956084e75f239de85d3a31bc172ace?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+            "gravatar_id" => "e7956084e75f239de85d3a31bc172ace",
+            "url" => "https://api.github.com/users/dtrupenn",
+            "received_events_url" => "https://api.github.com/users/dtrupenn/received_events",
+            "type" => "User"
+          },
+          "private" => false,
+          "html_url" => "https://github.com/dtrupenn/Tetris",
+          "description" => "A C implementation of Tetris using Pennsim through LC4",
+          "fork" => false,
+          "url" => "https://api.github.com/repos/dtrupenn/Tetris",
+          "created_at" => "2012-01-01T00:31:50Z",
+          "updated_at" => "2013-01-05T17:58:47Z",
+          "pushed_at" => "2012-01-01T00:37:02Z",
+          "homepage" => "",
+          "size" => 524,
+          "watchers_count" => 1,
+          "language" => "Assembly",
+          "forks_count" => 0,
+          "open_issues_count" => 0,
+          "forks" => 0,
+          "open_issues" => 0,
+          "watchers" => 1,
+          "master_branch" => "master",
+          "default_branch" => "master",
+          "score" => 10.309712
+        }
+      ]
+    }
+
+    REPO_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/3081286",
+          "object_type" => "Repository",
+          "property" => "name",
+          "fragment" => "Tetris",
+          "matches" => [
+            {
+              "text" => "Tetris",
+              "indices" => [
+                0,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/3081286",
+          "object_type" => "Repository",
+          "property" => "description",
+          "fragment" => "A C implementation of Tetris using Pennsim through LC4",
+          "matches" => [
+            {
+              "text" => "Tetris",
+              "indices" => [
+                22,
+                28
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+    CODE_SEARCH_V3_RESULTS = {
+      "total_count" => 104,
+      "items" => [
+        {
+          "name" => "github-issue-importer.gemspec",
+          "path" => "github-issue-importer.gemspec",
+          "sha" => "394508202991504d8a0771ae027454facaaa045a",
+          "url" => "https://api.github.com/repositories/1586630/contents/github-issue-importer.gemspec?ref=aa22a4be513163c73531e96bd99f4b49d6ded8a6",
+          "git_url" => "https://api.github.com/repositories/1586630/git/blobs/394508202991504d8a0771ae027454facaaa045a",
+          "html_url" => "https://github.com/johnf/github-issue-importer/blob/aa22a4be513163c73531e96bd99f4b49d6ded8a6/github-issue-importer.gemspec",
+          "repository" => {
+            "id" => 1586630,
+            "name" => "github-issue-importer",
+            "full_name" => "johnf/github-issue-importer",
+            "owner" => {
+              "login" => "johnf",
+              "id" => 42590,
+              "avatar_url" => "https://secure.gravatar.com/avatar/ab4d879ba3233a270aa14f447c795505?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+              "gravatar_id" => "ab4d879ba3233a270aa14f447c795505",
+              "url" => "https://api.github.com/users/johnf",
+              "html_url" => "https://github.com/johnf",
+              "followers_url" => "https://api.github.com/users/johnf/followers",
+              "following_url" => "https://api.github.com/users/johnf/following{/other_user}",
+              "gists_url" => "https://api.github.com/users/johnf/gists{/gist_id}",
+              "starred_url" => "https://api.github.com/users/johnf/starred{/owner}{/repo}",
+              "subscriptions_url" => "https://api.github.com/users/johnf/subscriptions",
+              "organizations_url" => "https://api.github.com/users/johnf/orgs",
+              "repos_url" => "https://api.github.com/users/johnf/repos",
+              "events_url" => "https://api.github.com/users/johnf/events{/privacy}",
+              "received_events_url" => "https://api.github.com/users/johnf/received_events",
+              "type" => "User"
+            },
+            "private" => false,
+            "html_url" => "https://github.com/johnf/github-issue-importer",
+            "description" => "Import Issues from Launchpad (for now) into github",
+            "fork" => false,
+            "url" => "https://api.github.com/repos/johnf/github-issue-importer",
+            "forks_url" => "https://api.github.com/repos/johnf/github-issue-importer/forks",
+            "keys_url" => "https://api.github.com/repos/johnf/github-issue-importer/keys{/key_id}",
+            "collaborators_url" => "https://api.github.com/repos/johnf/github-issue-importer/collaborators{/collaborator}",
+            "teams_url" => "https://api.github.com/repos/johnf/github-issue-importer/teams",
+            "hooks_url" => "https://api.github.com/repos/johnf/github-issue-importer/hooks",
+            "issue_events_url" => "https://api.github.com/repos/johnf/github-issue-importer/issues/events{/number}",
+            "events_url" => "https://api.github.com/repos/johnf/github-issue-importer/events",
+            "assignees_url" => "https://api.github.com/repos/johnf/github-issue-importer/assignees{/user}",
+            "branches_url" => "https://api.github.com/repos/johnf/github-issue-importer/branches{/branch}",
+            "tags_url" => "https://api.github.com/repos/johnf/github-issue-importer/tags",
+            "blobs_url" => "https://api.github.com/repos/johnf/github-issue-importer/git/blobs{/sha}",
+            "git_tags_url" => "https://api.github.com/repos/johnf/github-issue-importer/git/tags{/sha}",
+            "git_refs_url" => "https://api.github.com/repos/johnf/github-issue-importer/git/refs{/sha}",
+            "trees_url" => "https://api.github.com/repos/johnf/github-issue-importer/git/trees{/sha}",
+            "statuses_url" => "https://api.github.com/repos/johnf/github-issue-importer/statuses/{sha}",
+            "languages_url" => "https://api.github.com/repos/johnf/github-issue-importer/languages",
+            "stargazers_url" => "https://api.github.com/repos/johnf/github-issue-importer/stargazers",
+            "contributors_url" => "https://api.github.com/repos/johnf/github-issue-importer/contributors",
+            "subscribers_url" => "https://api.github.com/repos/johnf/github-issue-importer/subscribers",
+            "subscription_url" => "https://api.github.com/repos/johnf/github-issue-importer/subscription",
+            "commits_url" => "https://api.github.com/repos/johnf/github-issue-importer/commits{/sha}",
+            "git_commits_url" => "https://api.github.com/repos/johnf/github-issue-importer/git/commits{/sha}",
+            "comments_url" => "https://api.github.com/repos/johnf/github-issue-importer/comments{/number}",
+            "issue_comment_url" => "https://api.github.com/repos/johnf/github-issue-importer/issues/comments/{number}",
+            "contents_url" => "https://api.github.com/repos/johnf/github-issue-importer/contents/{+path}",
+            "compare_url" => "https://api.github.com/repos/johnf/github-issue-importer/compare/{base}...{head}",
+            "merges_url" => "https://api.github.com/repos/johnf/github-issue-importer/merges",
+            "archive_url" => "https://api.github.com/repos/johnf/github-issue-importer/{archive_format}{/ref}",
+            "downloads_url" => "https://api.github.com/repos/johnf/github-issue-importer/downloads",
+            "issues_url" => "https://api.github.com/repos/johnf/github-issue-importer/issues{/number}",
+            "pulls_url" => "https://api.github.com/repos/johnf/github-issue-importer/pulls{/number}",
+            "milestones_url" => "https://api.github.com/repos/johnf/github-issue-importer/milestones{/number}",
+            "notifications_url" => "https://api.github.com/repos/johnf/github-issue-importer/notifications{?since,all,participating}",
+            "labels_url" => "https://api.github.com/repos/johnf/github-issue-importer/labels{/name}"
+          },
+          "score" => 0.96691436
+        }
+      ]
+    }
+
+    CODE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/8460725/contents/.bundle/ruby/1.8/specifications/octokit-1.23.0.gemspec?ref=9c580b22493df1b3044c321729278c4e79302b7f",
+          "object_type" => "FileContent",
+          "property" => "content",
+          "fragment" => "name = %q{octokit}\n  s.version = \"1.23.0\"\n\n  s.required_rubygems_version = Gem::Requirement.new(\">= 1.3.6\")",
+          "matches" => [
+            {
+              "text" => "octokit",
+              "indices" => [
+                10,
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/8460725/contents/.bundle/ruby/1.8/specifications/octokit-1.23.0.gemspec?ref=9c580b22493df1b3044c321729278c4e79302b7f",
+          "object_type" => "FileContent",
+          "property" => "content",
+          "fragment" => "\"Rakefile\", \"octokit.gemspec\", \"lib/faraday/response/raise_octokit_error.rb\", \"lib/octokit/authentication.rb\"",
+          "matches" => [
+            {
+              "text" => "octokit",
+              "indices" => [
+                13,
+                20
+              ]
+            },
+            {
+              "text" => "octokit",
+              "indices" => [
+                59,
+                66
+              ]
+            },
+            {
+              "text" => "octokit",
+              "indices" => [
+                83,
+                90
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
     USER_SEARCH_ITEM = {
       "gravatar_id" => "70889091349f7598bce9afa588034310",
       "name" => "Hirotaka Kawata",
@@ -705,6 +1004,63 @@ module GitHub
 
     USER_SEARCH_RESULTS = {
       "users" => [USER_SEARCH_ITEM]
+    }
+
+    USER_SEARCH_V3_RESULTS = {
+      "total_count" => 12,
+      "items" => [
+        {
+          "login" => "mojombo",
+          "id" => 1,
+          "avatar_url" => "https://secure.gravatar.com/avatar/25c7c18223fb42a4c6ae1c8db6f50f9b?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+          "gravatar_id" => "25c7c18223fb42a4c6ae1c8db6f50f9b",
+          "url" => "https://api.github.com/users/mojombo",
+          "html_url" => "https://github.com/mojombo",
+          "followers_url" => "https://api.github.com/users/mojombo/followers",
+          "subscriptions_url" => "https://api.github.com/users/mojombo/subscriptions",
+          "organizations_url" => "https://api.github.com/users/mojombo/orgs",
+          "repos_url" => "https://api.github.com/users/mojombo/repos",
+          "received_events_url" => "https://api.github.com/users/mojombo/received_events",
+          "type" => "User",
+          "score" => 105.47857
+        }
+      ]
+    }
+
+
+    USER_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+     "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/users/mojombo",
+          "object_type" => "User",
+          "property" => "email",
+          "fragment" => "tom@github.com",
+          "matches" => [
+            {
+              "text" => "tom",
+              "indices" => [
+                0,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/users/mojombo",
+          "object_type" => "User",
+          "property" => "name",
+          "fragment" => "Tom Preston-Werner",
+          "matches" => [
+            {
+              "text" => "Tom",
+              "indices" => [
+                0,
+                3
+              ]
+            }
+          ]
+        }
+      ]
     }
 
     EMAIL_SEARCH_RESULTS = {

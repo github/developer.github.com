@@ -41,7 +41,7 @@ List repositories being starred by a user.
     # Legacy, using github.beta media type.
     GET /users/:user/watched
 
-List repositories being watched by the authenticated user.
+List repositories being starred by the authenticated user.
 
     GET /user/starred
 
@@ -72,11 +72,11 @@ Requires for the user to be authenticated.
     # Legacy, using github.beta media type.
     GET /user/watched/:owner/:repo
 
-### Response if this repository is watched by you
+### Response if this repository is starred by you
 
 <%= headers 204 %>
 
-### Response if this repository is not watched by you
+### Response if this repository is not starred by you
 
 <%= headers 404 %>
 

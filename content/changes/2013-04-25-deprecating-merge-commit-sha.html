@@ -1,0 +1,23 @@
+---
+kind: change
+title: Deprecating a Confusing Attribute in the Pull Request API
+created_at: 2013-04-25
+author_name: jasonrudolph
+---
+
+When you get the details for a Pull Request from the API, the
+[response](/v3/pulls/#get-a-single-pull-request) provides everything there is to
+know about that Pull Request. In addition to the useful information provided in
+the API response, the JSON also includes the `merge_commit_sha` attribute. This
+attribute is a frequent source of misunderstanding, and we aim to remove the
+confusion.
+
+To help current API consumers, we've [documented the
+attribute](/v3/pulls/#mergability) for improved understanding.
+
+To protect future API consumers from this confusion, we have
+[deprecated](/#expected-changes) the `merge_commit_sha` attribute, and we will
+remove it in the next major version of the API.
+
+As always, if you have any questions or feedback, please drop us a line at
+[support@github.com](mailto:support@github.com?subject=Deprecating merge_commit_sha).

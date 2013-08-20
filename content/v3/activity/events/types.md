@@ -188,7 +188,7 @@ pull\_request
 Hook name: `pull_request_review_comment`
 
 comment
-: **object** - The [comment](/v3/repos/commits/#list-commit-comments-for-a-repository) itself.
+: **object** - The [comment](/v3/pulls/comments) itself.
 
 ## PushEvent
 

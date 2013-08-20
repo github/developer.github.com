@@ -21,8 +21,10 @@ Libraries for accessing the GitHub API from your favorite language.
 ## CSharp
 
 * [CSharp GitHub API][csharp]
+* [IronGithub][irongithub]
 
 [csharp]: https://github.com/sgrassie/csharp-github-api
+[irongithub]: https://github.com/in2bits/IronGitHub
 
 ## FSharp
 
@@ -42,6 +44,12 @@ Libraries for accessing the GitHub API from your favorite language.
 
 [erlang]: https://github.com/onlyshk/erlang-github-api
 
+## Go
+
+* [go-github][]
+
+[go-github]: https://github.com/google/go-github
+
 ## Haskell
 
 * [Haskell GitHub API][haskell]
@@ -50,9 +58,10 @@ Libraries for accessing the GitHub API from your favorite language.
 
 ## Java
 
-The [GitHub Java API](https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core) library
+* The [GitHub Java API (org.eclipse.egit.github.core)](https://github.com/eclipse/egit-github/tree/master/org.eclipse.egit.github.core) library
 is part of the [GitHub Mylyn Connector](https://github.com/eclipse/egit-github) and aims to support the entire
 GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22org.eclipse.egit.github.core%22).
+* [GitHub API for Java (org.kohsuke.github)](http://github-api.kohsuke.org/) defines an object oriented representation of the GitHub API.
 
 ## JavaScript
 
@@ -60,17 +69,27 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [NodeJS GitHub library][octonode]
 * [gh3 client-side API v3 wrapper][gh3]
 * [GitHub.js wrapper around the GitHub API][github]
+* [Promise-Based CoffeeScript library for the browser or NodeJS][github-client]
 
 [ajaxorg-node-github]: https://github.com/ajaxorg/node-github
 [octonode]: https://github.com/pksunkara/octonode
 [gh3]: https://github.com/k33g/gh3
 [github]: https://github.com/michael/github
+[github-client]: https://github.com/philschatz/github-client
 
 ## Objective-C
 
+* **[OctoKit][octokit.objc]** (officially maintained by GitHub)
 * [UAGithubEngine][uagithubengine]
 
+[octokit.objc]: https://github.com/octokit/octokit.objc
 [uagithubengine]: http://github.com/owainhunt/uagithubengine
+
+## OCaml
+
+* [ocaml-github][ocaml-github]
+
+[ocaml-github]: https://github.com/avsm/ocaml-github
 
 ## Perl
 
@@ -84,13 +103,17 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## PHP
 
+* [GitHub PHP Client][github-php-client]
 * [PHP GitHub API][php-github-api]
 * [GitHub API][github-api]
 * [GitHub Kohana Module][kohana]
+* [GitHub Joomla! Package][joomla]
 
+[github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
 [github-api]: https://github.com/yiiext/github-api
 [kohana]: https://github.com/acoulton/github_v3_api
+[joomla]: https://github.com/joomla/joomla-framework
 
 ## Python
 
@@ -101,25 +124,29 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [sanction][sanction]
 * [agithub][agithub]
 * [githubpy][githubpy]
+* [octohub][octohub]
+* [Github-Flask][github-flask]
 
 [jacquev6_pygithub]: https://github.com/jacquev6/PyGithub
 [pygithub3-api]: https://github.com/copitux/python-github3
 [libsaas]: https://github.com/ducksboard/libsaas
 [github3py]: https://github.com/sigmavirus24/github3.py
 [sanction]: https://github.com/demianbrecht/sanction
-[agithub]: https://github.com/jpaugh64/agithub "Agnostic GitHub"
+[agithub]: https://github.com/jpaugh/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
+[octohub]: https://github.com/turnkeylinux/octohub
+[github-flask]: https://github-flask.readthedocs.org
 
 ## Ruby
 
-* [Octokit][octokit]
+* **[Octokit][octokit.rb]** (officially maintained by GitHub)
 * [GitHub API Gem][ghapi]
 * [Octocat Herder][herder]
 * [GitHub v3 API][ruby1]
 * [GitHub API Client][ruby2]
 * [Ghee][ghee]
 
-[octokit]: https://github.com/pengwynn/octokit
+[octokit.rb]: https://github.com/octokit/octokit.rb
 [herder]: https://github.com/jhelwig/octocat_herder
 [ghapi]: https://github.com/peter-murach/github
 [ruby1]: https://github.com/jwilger/github-v3-api
@@ -128,7 +155,8 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Scala
 
-* [Dispatch GitHub][scala]
+* [Dispatch GitHub][dispatchgithub]
+* [Hubcat][hubcat]
 
-[scala]: https://github.com/andreazevedo/dispatch-github
-
+[dispatchgithub]: https://github.com/andreazevedo/dispatch-github
+[hubcat]: https://github.com/softprops/hubcat

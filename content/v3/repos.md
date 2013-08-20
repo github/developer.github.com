@@ -9,7 +9,11 @@ title: Repos | GitHub API
 
 ## List your repositories
 
-List repositories for the authenticated user.
+List repositories for the authenticated user. Note that this does not include
+repositories owned by organizations which the user can access. You can
+[list user organizations](/v3/orgs/#list-user-organizations) and
+[list organization repositories](/v3/repos/#list-organization-repositories)
+separately.
 
     GET /user/repos
 
@@ -41,7 +45,7 @@ sort
 direction
 : `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
 
-## List organization repositories.
+## List organization repositories
 
 List repositories for the specified org.
 
@@ -57,9 +61,13 @@ type
 <%= headers 200, :pagination => true %>
 <%= json(:repo) { |h| [h] } %>
 
-## List all repositories
+## List all public repositories
 
-This provides a dump of every repository, in the order that they were created.
+This provides a dump of every public repository, in the order that they were created.
+
+Note: Pagination is powered exclusively by the `since` parameter.
+Use the [Link header](/v3/#link-header) to get the URL for the next page of
+repositories.
 
     GET /repositories
 
@@ -150,6 +158,10 @@ _Ignored if `auto_init` parameter is not provided._
     GET /repos/:owner/:repo
 
 ### Response
+
+The `parent` and `source` objects are present when the repo is a fork.
+`parent` is the repo this repo was forked from,
+`source` is the ultimate source for the network.
 
 <%= headers 200 %>
 <%= json :full_repo %>
@@ -278,4 +290,3 @@ Deleting a repository requires admin access.  If OAuth is used, the
 ### Response
 
 <%= headers 204 %>
-

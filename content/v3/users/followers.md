@@ -49,6 +49,18 @@ List who the authenticated user is following:
 
 <%= headers 404 %>
 
+## Check if one user follows another
+
+    GET /users/:user/following/:target_user
+
+### Response if user follows target user
+
+<%= headers 204 %>
+
+### Response if user does not follow target user
+
+<%= headers 404 %>
+
 ## Follow a user
 
     PUT /user/following/:user
@@ -64,7 +76,7 @@ auth or OAuth with the `user:follow` scope.
 
     DELETE /user/following/:user
 
-Unfollowing a user requres the user to be logged in and authenticated with basic
+Unfollowing a user requires the user to be logged in and authenticated with basic
 auth or OAuth with the `user:follow` scope.
 
 ### Response

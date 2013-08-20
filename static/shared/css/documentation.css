@@ -1,3 +1,48 @@
+@font-face {
+  font-family: 'octiconsregular';
+  src: url('octicons-regular-webfont.eot');
+  src: url('octicons-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('octicons-regular-webfont.woff') format('woff'),
+       url('octicons-regular-webfont.svg#octiconsregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*------------------------------------------------------------------------------
+     Icon Styles
+------------------------------------------------------------------------------*/
+
+.mega-icon {
+  font-family: 'octiconsregular';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.mega-icon-invertocat:before {
+  content: "\f00a";
+}
+
+.octicon-calendar:before {
+  content: "\f068";
+}
+
+.octicon {
+  font: normal normal 16px "octiconsregular";
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* end */
+
 /*------------------------------------------------------------------------------
      Global Documentation Styles
 ------------------------------------------------------------------------------*/
@@ -47,7 +92,7 @@ h2 {
   body.api .change h2.title {
     background: none;
     line-height: 1.2em;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     padding-left: 0;
     font-size:24px;
   }
@@ -332,7 +377,8 @@ div.sidebar-module ul ul li span {
   bottom:0;
   font-size:13px;
   color: #636363;
-  margin: 45px 0 0 0;
+  margin: 0 auto;
+  width: 920px;
 }
 
 #footer a:hover {
@@ -343,121 +389,56 @@ div.sidebar-module ul ul li span {
   list-style: none;
 }
 
-.footer_inner {
-  width:960px;
-  position: relative;
-  margin: 0 auto;
-}
-
 #footer .upper_footer {
+  border-top: 1px solid #ddd;
   min-height: 160px;
   overflow: hidden;
-  background: url(../images/bg_footer_top.png) #f8f8f8 repeat-x;
-}
-
-#footer #blacktocat {
-  height:130px;
-  width:164px;
-  float:left;
-  background: url(../images/blacktocat.png) top left no-repeat;
-  text-indent: -5000px;
-  margin: 15px 20px 0 0;
-}
-
-#footer #blacktocat_ie {
-  height:130px;
-  width:164px;
-  float:left;
-  background: url(../images/blacktocat.png) no-repeat;
-  text-indent: -5000px;
-  margin: 15px 20px 0 0;
+  font-size: 12px;
 }
 
 #footer .upper_footer ul.footer_nav {
   position: relative;
   float: left;
-  width: 164px;
+  width: 210px;
   margin: 20px 10px;
 }
 
-#footer .upper_footer ul.footer_nav h4 {
-  margin: 0 0 5px 0;
-  padding-bottom: 5px;
-  border-bottom: thin solid #e1e1e1;
+#footer .mega-icon {
+  color: #ccc;
 }
 
-#footer .lower_footer {
-  position: relative;
-  background:url(../images/bg_footer_bottom.png) #fff repeat-x;
-  overflow: hidden;
-  clear:both;
+#footer .mega-icon:hover {
+  color: #bbb;
+  text-decoration: none;
 }
 
-#footer .lower_footer .home {
-  display: block;
-  position: absolute;
-  background: url(../images/footer-logo.png) top left no-repeat;
-  width: 100px;
-  height: 50px;
-  text-indent: -5000px;
+.lower_footer {
+  border-top: 1px solid #ddd;
+  display: table;
+  width: 100%;
+  padding: 15px 0 20px;
 }
 
-#footer .lower_footer .home_ie {
-  display: block;
-  position: absolute;
-  background: url(../images/footer-logo.png) top left no-repeat;
-  width: 100px;
-  height: 50px;
-  text-indent: -5000px;
+.footer-cell {
+  display: table-cell;
+  text-align: center;
+  width: 10%;
+  vertical-align: middle;
+  font-size: 12px;
+  padding: 0 10px;
 }
 
-#footer .lower_footer #legal {
-  float: left;
-  width: 500px;
-  height: 50px;
-  line-height: 8px;
-  margin: 25px 0 0 17px;
+.footer-cell:first-child {
+  text-align: left;
 }
 
-#footer .lower_footer #legal #legal_links {
-  margin-left: 177px;
+.footer-cell:last-child {
+  text-align: right;
 }
 
-#footer .lower_footer div ul {
-  float: left;
-  text-indent: none;
-  display:inline;
-  margin-top: 15px;
-
-}
-
-#footer .lower_footer div ul li {
-  display:inline;
-  float: left;
-  margin:  0 10px 0 0;
-}
-
-#footer .lower_footer div p {
-  display:inline;
-  float:left;
-  clear: both;
-  margin: 10px 0 0 177px;
-}
-
-#footer .lower_footer .sponsor {
-  width: 295px;
-  float: right;
-  margin-top: 35px;
-  padding-bottom: 25px;
-}
-
-#footer .lower_footer .sponsor .logo {
- float:left;
- margin: 0 10px 0 0;
-}
-
-#footer .lower_footer .sponsor a {
-  color: #000;
+.footer-cell > li {
+  display: inline;
+  margin-right: 20px;
 }
 
 /* end */
@@ -495,8 +476,8 @@ div.sidebar-module ul ul li span {
 }
 
 .content ul {
+  margin: 1.5em;
   list-style-type: disc;
-  margin: 1.5em
 }
 
 .content dd ul {
@@ -556,13 +537,22 @@ p code {
   color: #868686;
 }
 
+.article-content ul {
+  margin: 1.5em;
+}
+
 .change {
   padding-bottom: 1em;
 }
 
+
   .change .meta {
-    font-size: 16px;
-    padding-bottom: 1em;
+    font-size: 14px;
+  }
+
+  .who_when a {
+    padding-left: 6px;
+    color: #999;
   }
 
     .change .who_when .author {
@@ -572,6 +562,24 @@ p code {
     .change .who_when .published {
       color: #ccc;
     }
+
+  .meta {
+    margin-left: -19px;
+    margin-top: -15px;
+  }
+
+  .meta li {
+    color: #999;
+    padding-right: 20px;
+    list-style: none;
+    display: inline;
+  }
+
+  .published span {
+    color: #999;
+    vertical-align: middle;
+    padding-bottom: 3px;
+  }
 
 /* @end */
 
@@ -938,6 +946,23 @@ div.expandable > ul h3 > a.expanded:hover {
   background-position: -38px -43px;
 }
 
+.alert {
+  position:relative;
+  margin:0 auto;
+  padding:5px;
+  font-size:12px;
+  color:#264c72;
+  border: 1px solid #97c1da;
+  border-radius: 3px;
+  background-color: #d8ebf8;
+  background: -moz-linear-gradient(#d8ebf8, #d0e3ef);
+  background: -webkit-linear-gradient(#d8ebf8, #d0e3ef);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#d8ebf8', endColorstr='#d0e3ef')"; /* IE8+ */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.alert:first-child { margin-top: 0 }
+.alert:last-child { margin-bottom: 0 }
 
 li.api-status a.good {
   color: #227b41;

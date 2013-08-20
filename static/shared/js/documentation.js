@@ -2,24 +2,36 @@
 $(function() {
   var activeItem,
       helpList = $('#js-sidebar .js-topic'),
-      firstOccurance = true
+      firstOccurance = true,
+      styleTOC = function() {
+        var pathRegEx = /\/\/[^\/]+(\/.+)/g,
+            docUrl = pathRegEx.exec(window.location.toString())
+        if (docUrl){
+          $('#js-sidebar .js-topic a').each(function(){
+            if ($(this).parent('li').hasClass('disable'))
+              $(this).parent('li').removeClass('disable')
+            
+            var url = $(this).attr('href').toString()
+            var cleanDocUrl = docUrl[1]
+            if(url.indexOf(cleanDocUrl) >= 0 && url.length == cleanDocUrl.length){
+              $(this).parent('li').addClass('disable')
+              var parentTopic = $(this).parentsUntil('div.sidebar-module > ul').last()
+              parentTopic.addClass('js-current')
+              parentTopic.find('.js-expand-btn').toggleClass('collapsed expanded')
+            }
+          });
+        }
+      }
+
+  // bind every href with a hash; take a look at v3/search/ for example
+  $('#js-sidebar .js-topic a[href*=#]').bind("click", function(e) {
+    if (window.location.toString().indexOf($(e.target).attr('href')) == -1)
+      setTimeout(styleTOC, 0); // trigger the window.location change, then stylize
+  });
 
   // hide list items at startup
   if($('body.api') && window.location){
-    var reg = /\/\/[^\/]+(\/.+)/g,
-        docUrl = reg.exec(window.location.toString())
-    if(docUrl){
-      $('#js-sidebar .js-topic a').each(function(){
-        var url = $(this).attr('href').toString()
-        var cleanDocUrl = docUrl[1].split('#')[0]
-        if(url.indexOf(cleanDocUrl) >= 0 && url.length == cleanDocUrl.length){
-          $(this).parent('li').addClass('disable')
-          var parentTopic = $(this).parentsUntil('div.sidebar-module > ul').last()
-          parentTopic.addClass('js-current')
-          parentTopic.find('.js-expand-btn').toggleClass('collapsed expanded')
-        }
-      })
-    }
+    styleTOC();
   }
 
   $('#js-sidebar .js-topic').each(function(){

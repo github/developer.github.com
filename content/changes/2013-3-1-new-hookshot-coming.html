@@ -1,0 +1,25 @@
+---
+kind: change
+title: New Hookshot Changes
+created_at: 2013-3-1
+author_name: technoweenie
+---
+
+We are experimenting with changes to the "Hookshot" backend that powers service
+hooks.  There were some significant networking changes with the new cluster,
+so there are some new IP whitelist rules for hooks:
+
+* 204.232.175.64/27
+* 192.30.252.0/22
+
+These are in CIDR notation.  They represent a significant range of GitHub
+addresses, meaning this should be the last IP change for a while.  Once this
+cluster is activated and we shut the other cluster down, we will be removing
+the other entries.
+
+We are currently testing the new backend with all repositories in the GitHub
+organization only, and expect to start testing it with user data next week.
+
+This also means we should be able to start accepting [GitHub Services pull
+requests](https://github.com/github/github-services/pulls) very soon :)
+

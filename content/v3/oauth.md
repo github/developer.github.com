@@ -106,15 +106,18 @@ any time.
 
 The `redirect_uri` parameter is optional. If left out, GitHub will
 redirect users to the callback URL configured in the OAuth Application
-settings. If provided, the redirect URL must match the callback URL's
-host.
+settings. If provided, the redirect URL's host and port must exactly
+match the callback URL. The redirect URL's path must reference a
+subdirectory of the callback URL.
 
-    CALLBACK: http://example.com
+    CALLBACK: http://example.com/path
 
-    GOOD: https://example.com
-    GOOD: http://example.com/bar
-    BAD:  http://example.com:8080
-    BAD:  http://oauth.example.com:8080
+    GOOD: https://example.com/path
+    GOOD: http://example.com/path/subdir/other
+    BAD:  http://example.com/bar
+    BAD:  http://example.com/
+    BAD:  http://example.com:8080/path
+    BAD:  http://oauth.example.com:8080/path
     BAD:  http://example.org
 
 ## Scopes
@@ -129,7 +132,7 @@ authorize form.
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.
 
-    $ curl -H "Authorization: bearer TOKEN" https://api.github.com/users/technoweenie -I
+    $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
     HTTP/1.1 200 OK
     X-OAuth-Scopes: repo, user
     X-Accepted-OAuth-Scopes: user
@@ -209,7 +212,9 @@ If you need a small number of tokens, implementing the [web flow](#web-applicati
 can be cumbersome. Instead, tokens can be created using the Authorizations API using
 Basic Authentication. To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
-page, linked from your [OAuth applications listing on GitHub][app-listing].
+page, linked from your [OAuth applications listing on GitHub][app-listing]. OAuth tokens
+can also be created through the web UI via the [Application settings page](https://github.com/settings/applications).
+Read more about these tokens on the [GitHub Help page](https://help.github.com/articles/creating-an-access-token-for-command-line-use).
 
     POST /authorizations
 
@@ -278,6 +283,23 @@ You can only send one of these scope keys at a time.
 ### Response
 
 <%= headers 204 %>
+
+## Check an authorization
+
+OAuth applications can use a special API method for checking OAuth token
+validity without running afoul of normal rate limits for failed login attempts.
+Authentication works differently with this particular endpoint. You must use
+Basic Authentication when accessing it, where the username is the OAuth
+application `client_id` and the password is its `client_secret`. Invalid tokens
+will return `404 NOT FOUND`.
+
+    GET /applications/:client_id/tokens/:access_token
+
+### Response
+
+<%= headers 200 %>
+<%= json(:oauth_access_with_user) %>
+
 
 ## More Information
 

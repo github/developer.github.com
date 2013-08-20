@@ -40,9 +40,9 @@ to take advantage of OAuth access token security features.
 curl -u 3816d821c80a6847ca84550052c1ff6246e8169b:x-oauth-basic https://api.github.com/user
 </pre>
 
-## Working with two factor authentication
+## Working with two-factor authentication
 
-For users with two factor authentication enabled, Basic Authentication requires
+For users with two-factor authentication enabled, Basic Authentication requires
 an extra step. When Basic Authentication is attempted, the server will respond
 with a `401` and an `X-GitHub-OTP: required;:2fa-type` header, indicating that a 
 two-factor authentication code is needed in addition to the username and password.

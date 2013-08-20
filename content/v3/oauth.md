@@ -100,7 +100,7 @@ The access token allows you to make requests to the API on a behalf of a user.
 Use [Basic Authentication](/v3/auth#basic-authentication) to create an OAuth2 token using the [interface
 below](/v3/oauth/#create-a-new-authorization).  With this technique, a username
 and password need not be stored permanently, and the user can revoke access at
-any time. Make sure to understand the section on [working with two factor
+any time. Make sure to understand the section on [working with two-factor
 authentication](/v3/auth/#working-with-two-factor-authentication) if you or
 your users have this feature enabled.
 
@@ -188,8 +188,8 @@ can specify multiple scopes by separating them by a comma.
 ## OAuth Authorizations API
 
 There is an API for users to manage their own tokens.  You can only
-access your own tokens, and only through [Basic Authentication](/v3/auth#basic-authentication). Make sure to 
-understand the section on [working with two factor authentication]
+access your own tokens, and only through [Basic Authentication](/v3/auth#basic-authentication). Make sure to
+understand the section on [working with two-factor authentication]
 (/v3/auth/#working-with-two-factor-authentication) if you or your users have
 this feature enabled.
 

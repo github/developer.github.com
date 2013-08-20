@@ -29,8 +29,7 @@ The response would include a `text_matches` array with the following object:
 </pre>
 
 Inside the `fragment` value, we see HTML-encoded entities (e.g., `&lt;`).
-Since we're returning JSON (not HTML), API clients do not expect HTML-encoded text.
-
+Since we're returning JSON (not HTML), API clients might not expect any HTML-encoded text.
 As of today, the API returns these fragments _without_ this extraneous encoding.
 
 <pre class="json">

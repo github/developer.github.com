@@ -254,20 +254,17 @@ token.
 
 This method will create a new authorization for the specified OAuth application,
 only if an authorization for that application doesn't already exist for the
-user. It returns the user's token for the application if one exists. Otherwise,
-it creates one.
+user. (The URL includes the 20 character client ID for the OAuth app that is
+requesting the token.) It returns the user's token for the application if one
+exists. Otherwise, it creates one.
 
     PUT /authorizations/:client_id
 
 ### Input
 
-client_id
-: **String** - The 20 character OAuth app client key for the app that is
-requesting the token.
-
 client_secret
-: **String** - The 40 character OAuth app client secret for which to create the
-token.
+: **String** - The 40 character OAuth app client secret associated with the
+client ID specified in the URL.
 
 scopes
 : _Optional_ **array** - A list of scopes that this authorization is in.

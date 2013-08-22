@@ -185,7 +185,7 @@ and paste these lines into it:
     end
 
 Much of the code should look familiar. For example, we're still using `RestClient.get` 
-to call out to the GitHub API, and we're still passing our results to be renderend
+to call out to the GitHub API, and we're still passing our results to be rendered
 in an ERB template (this time, it's called `advanced.erb`). Some of the other
 details--like turning our app into a class that inherits from `Sinatra::Base`--are a result
 of inheriting from `sinatra/auth/github`, which is written as [a Sinatra extension][sinatra extension].

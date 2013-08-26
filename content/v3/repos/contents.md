@@ -271,7 +271,7 @@ ref
 
 ### Response
 
-<%= headers 302, :Location => 'http://github.com/me/myprivate/tarball/master?SSO=thistokenexpires' %>
+<%= headers 302, :Location => 'https://codeload.github.com/me/myprivate/legacy.zip/master?login=me&token=thistokenexpires' %>
 
 To follow redirects with curl, use the `-L` switch:
 

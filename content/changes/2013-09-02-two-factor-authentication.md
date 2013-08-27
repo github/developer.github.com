@@ -5,26 +5,46 @@ created_at: 2013-09-02
 author_name: mastahyeti
 ---
 
-To improve user security, GitHub has added the option for two-factor
-authentication. Users with the feature enabled with be asked to provide a
-two-factor authentication code in addition to their username and password when
-authenticating to GitHub. For users with this feature enabled, some
-improvements have been made to ensure that two-factor authentication
-requirements in the API are consistent with GitHub.com.
+As [announced earlier today][dotcom-blog-post], GitHub.com now supports two-factor
+authentication (2FA) for increased security. For users with this feature
+enabled, GitHub.com will prompt for a 2FA code in addition to a username and
+password during authentication. We've also rolled out some improvements to the
+API to ensure that 2FA requirements in the API are consistent with GitHub.com.
 
-Nothing will change for users without the feature enabled or for applications
-using the [OAuth web flow](http://developer.github.com/v3/oauth/#web-application-flow) for authentication. For those who wish to enable
-two-factor authentication and use Basic Authentication, we have provided a few
-options to make the flow simple and easy.
+## Authenticating with the API
 
-The simplest option for scripts using Basic Authentication is to send a
-personal access token instead of a password. These tokens are similar to OAuth
-access tokens, but can be created through GitHub.com via the
-[application settings page](https://github.com/settings/applications). More information about authenticating to the API
-using personal access tokens can be found in [this](https://help.github.com/articles/creating-an-access-token-for-command-line-use) help article.
+For users without 2FA enabled, and for applications using the [OAuth web
+flow](/v3/oauth/#web-application-flow) for authentication, everything is
+business as usual. You'll continue to authenticate with the API just as you
+always have. (That was easy.)
 
-For those wishing to integrate GitHub two-factor authentication into their
-application, some updates have been made to Basic Authentication to allow
-sending the user's two-factor authentication code in addition to username and
-password. Information about this approach can be found in the
-[API documentation](http://developer.github.com/v3/auth/#working-with-two-factor-authentication).
+If you enable 2FA _and_ use Basic Authentication to access the API, we're
+providing multiple options to make the flow simple and easy.
+
+## Basic Authentication and 2FA
+
+### Personal Access Tokens
+
+Personal access tokens provide the simplest option for using 2FA with Basic
+Authentication. You can create these tokens via the [application settings page
+on GitHub.com](https://github.com/settings/applications), and you can revoke
+them at any time. For more information about authenticating to the API with
+personal access tokens, be sure to check out our [help article on the
+topic][personal-access-tokens].
+
+### Tightly-integrated 2FA
+
+For developers wishing to integrate GitHub 2FA directly into their application,
+the API's Basic Authentication now supports the [ability to send the user's 2FA
+code][basic-auth-2fa], in addition to the username and password.
+
+## We're here to help
+
+We think GitHub users are going to love the additional security provided by
+two-factor authentication. As always, if you have any questions or feedback,
+[let us know][contact]. We're here to help!
+
+[basic-auth-2fa]: /v3/auth/#working-with-two-factor-authentication
+[contact]: https://github.com/contact?form[subject]=2FA+and+the+API
+[dotcom-blog-post]: #
+[personal-access-tokens]: https://help.github.com/articles/creating-an-access-token-for-command-line-use

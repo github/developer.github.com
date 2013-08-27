@@ -19,7 +19,7 @@ options to make the flow simple and easy.
 
 The simplest option for scripts using Basic Authentication is to send a
 personal access token instead of a password. These tokens are similar to OAuth
-access tokens, but can be created through GitHub.com via the 
+access tokens, but can be created through GitHub.com via the
 [application settings page](https://github.com/settings/applications). More information about authenticating to the API
 using personal access tokens can be found in [this](https://help.github.com/articles/creating-an-access-token-for-command-line-use) help article.
 

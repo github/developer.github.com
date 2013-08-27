@@ -13,7 +13,7 @@ improvements have been made to ensure that two-factor authentication
 requirements in the API are consistent with GitHub.com.
 
 Nothing will change for users without the feature enabled or for applications
-using the [OAuth web flow](http://developer.github.com/v3/oauth/#web-application-flow) for authentication. For those who wish to enabled
+using the [OAuth web flow](http://developer.github.com/v3/oauth/#web-application-flow) for authentication. For those who wish to enable
 two-factor authentication and use Basic Authentication, we have provided a few
 options to make the flow simple and easy.
 
@@ -27,4 +27,4 @@ For those wishing to integrate GitHub two-factor authentication into their
 application, some updates have been made to Basic Authentication to allow
 sending the user's two-factor authentication code in addition to username and
 password. Information about this approach can be found in the
-[API doccumentation](http://developer.github.com/v3/auth/#working-with-two-factor-authentication).
+[API documentation](http://developer.github.com/v3/auth/#working-with-two-factor-authentication).

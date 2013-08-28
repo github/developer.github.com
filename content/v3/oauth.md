@@ -258,7 +258,7 @@ user. (The URL includes the 20 character client ID for the OAuth app that is
 requesting the token.) It returns the user's token for the application if one
 exists. Otherwise, it creates one.
 
-    PUT /authorizations/:client_id
+    PUT /authorizations/clients/:client_id
 
 ### Input
 

@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Two-Factor Authentication and the API
-created_at: 2013-09-02
+created_at: 2013-09-03
 author_name: mastahyeti
 ---
 

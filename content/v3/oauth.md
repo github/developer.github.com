@@ -9,7 +9,7 @@ title: OAuth | GitHub API
 
 OAuth2 is a protocol that lets external apps request authorization to
 private details in a user's GitHub account without getting their
-password. This is preferred over Basic Authentication because tokens can
+password. This is preferred over [Basic Authentication](/v3/auth#basic-authentication) because tokens can
 be limited to specific types of data, and can be revoked by users at any
 time.
 
@@ -97,10 +97,12 @@ The access token allows you to make requests to the API on a behalf of a user.
 
 ## Non-Web Application Flow
 
-Use basic authentication to create an OAuth2 token using the [interface
-below](/v3/oauth/#create-a-new-authorization).  With this technique, a username
-and password need not be stored permanently, and the user can revoke access at
-any time.
+Use [Basic Authentication](/v3/auth#basic-authentication) to create an OAuth2
+token using the [interface below](/v3/oauth/#create-a-new-authorization).  With
+this technique, a username and password need not be stored permanently, and the
+user can revoke access at any time. (Make sure to understand how to [work with
+two-factor authentication](/v3/auth/#working-with-two-factor-authentication) if
+you or your users have two-factor authentication enabled.)
 
 ## Redirect URLs
 
@@ -185,8 +187,11 @@ can specify multiple scopes by separating them by a comma.
 
 ## OAuth Authorizations API
 
-There is an API for users to manage their own tokens.  You can only
-access your own tokens, and only through Basic Authentication.
+There is an API for users to manage their own tokens.  You can only access your
+own tokens, and only via [Basic Authentication](/v3/auth#basic-authentication).
+(Make sure to understand how to [work with two-factor
+authentication](/v3/auth/#working-with-two-factor-authentication) if you or your
+users have two-factor authentication enabled.)
 
 ## List your authorizations
 
@@ -210,7 +215,7 @@ access your own tokens, and only through Basic Authentication.
 
 If you need a small number of tokens, implementing the [web flow](#web-application-flow)
 can be cumbersome. Instead, tokens can be created using the Authorizations API using
-Basic Authentication. To create tokens for a particular OAuth application, you
+[Basic Authentication](/v3/auth#basic-authentication). To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
 page, linked from your [OAuth applications listing on GitHub][app-listing]. OAuth tokens
 can also be created through the web UI via the [Application settings page](https://github.com/settings/applications).
@@ -242,6 +247,45 @@ token.
 ### Response
 
 <%= headers 201, :Location => "https://api.github.com/authorizations/1"
+%>
+<%= json :oauth_access %>
+
+## Get-or-create an authorization for a specific app
+
+This method will create a new authorization for the specified OAuth application,
+only if an authorization for that application doesn't already exist for the
+user. (The URL includes the 20 character client ID for the OAuth app that is
+requesting the token.) It returns the user's token for the application if one
+exists. Otherwise, it creates one.
+
+    PUT /authorizations/clients/:client_id
+
+### Input
+
+client_secret
+: **String** - The 40 character OAuth app client secret associated with the
+client ID specified in the URL.
+
+scopes
+: _Optional_ **array** - A list of scopes that this authorization is in.
+
+note
+: _Optional_ **string** - A note to remind you what the OAuth token is for.
+
+note_url
+: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
+
+<%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
+
+### Response if returning a new token
+
+<%= headers 201, :Location => "https://api.github.com/authorizations/1"
+%>
+<%= json :oauth_access %>
+
+### Response if returning an existing token
+
+<%= headers 200, :Location => "https://api.github.com/authorizations/1"
 %>
 <%= json :oauth_access %>
 
@@ -289,7 +333,7 @@ You can only send one of these scope keys at a time.
 OAuth applications can use a special API method for checking OAuth token
 validity without running afoul of normal rate limits for failed login attempts.
 Authentication works differently with this particular endpoint. You must use
-Basic Authentication when accessing it, where the username is the OAuth
+[Basic Authentication](/v3/auth#basic-authentication) when accessing it, where the username is the OAuth
 application `client_id` and the password is its `client_secret`. Invalid tokens
 will return `404 NOT FOUND`.
 
@@ -299,7 +343,6 @@ will return `404 NOT FOUND`.
 
 <%= headers 200 %>
 <%= json(:oauth_access_with_user) %>
-
 
 ## More Information
 

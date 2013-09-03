@@ -2,13 +2,62 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2013-08-20T04:00:00Z</updated>
+  <updated>2013-09-03T04:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2013-09-03:/changes/2013-09-03-two-factor-authentication/</id>
+    <title type="html">Two-Factor Authentication and the API</title>
+    <published>2013-09-03T04:00:00Z</published>
+    <updated>2013-09-03T04:00:00Z</updated>
+    <author>
+      <name>mastahyeti</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-09-03-two-factor-authentication/" />
+    <content type="html">&lt;p&gt;As &lt;a href="https://github.com/blog/1614-two-factor-authentication"&gt;announced earlier today&lt;/a&gt;, GitHub.com now supports two-factor
+authentication (2FA) for increased security. For users with this feature
+enabled, GitHub.com will prompt for a 2FA code in addition to a username and
+password during authentication. We’ve also rolled out some improvements to the
+API to ensure that 2FA requirements in the API are consistent with GitHub.com.&lt;/p&gt;
+
+&lt;h2 id="authenticating-with-the-api"&gt;Authenticating with the API&lt;/h2&gt;
+
+&lt;p&gt;For users without 2FA enabled, and for applications using the &lt;a href="/v3/oauth/#web-application-flow"&gt;OAuth web
+flow&lt;/a&gt; for authentication, everything is
+business as usual. You’ll continue to authenticate with the API just as you
+always have. (That was easy.)&lt;/p&gt;
+
+&lt;p&gt;If you enable 2FA &lt;em&gt;and&lt;/em&gt; use Basic Authentication to access the API, we’re
+providing multiple options to make the flow simple and easy.&lt;/p&gt;
+
+&lt;h2 id="basic-authentication-and-2fa"&gt;Basic Authentication and 2FA&lt;/h2&gt;
+
+&lt;h3 id="personal-access-tokens"&gt;Personal Access Tokens&lt;/h3&gt;
+
+&lt;p&gt;Personal access tokens provide the simplest option for using 2FA with Basic
+Authentication. You can create these tokens via the &lt;a href="https://github.com/settings/applications"&gt;application settings page
+on GitHub.com&lt;/a&gt;, and you can revoke
+them at any time. For more information about authenticating to the API with
+personal access tokens, be sure to check out our &lt;a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use"&gt;help article on the
+topic&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="tightly-integrated-2fa"&gt;Tightly-integrated 2FA&lt;/h3&gt;
+
+&lt;p&gt;For developers wishing to integrate GitHub 2FA directly into their application,
+the API’s Basic Authentication now supports the &lt;a href="/v3/auth/#working-with-two-factor-authentication"&gt;ability to send the user’s 2FA
+code&lt;/a&gt;, in addition to the username and password.&lt;/p&gt;
+
+&lt;h2 id="were-here-to-help"&gt;We’re here to help&lt;/h2&gt;
+
+&lt;p&gt;We think GitHub users are going to love the additional security provided by
+two-factor authentication. As always, if you have any questions or feedback,
+&lt;a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API"&gt;let us know&lt;/a&gt;. We’re here to help!&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2013-08-20:/changes/2013-08-20-search-api-improvements/</id>
     <title type="html">Improvements to the Search API</title>
@@ -285,26 +334,6 @@ but we can’t wait to see what others can do with this information.&lt;/p&gt;
 &lt;/ul&gt;&lt;p&gt;Enjoy!&lt;/p&gt;</content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
-    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
-    <published>2013-04-30T04:00:00Z</published>
-    <updated>2013-04-30T04:00:00Z</updated>
-    <author>
-      <name>foca</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
-    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
-Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
-has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-&lt;/pre&gt;
-
-&lt;p&gt;Enjoy.&lt;/p&gt;</content>
-  </entry>
-  <entry>
     <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/</id>
     <title type="html">Improved Support for Submodules in the Repository Contents API</title>
     <published>2013-04-30T04:00:00Z</published>
@@ -343,6 +372,26 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 &lt;p&gt;If you have any questions or feedback, please drop us a line at
 &lt;a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
+    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
+    <published>2013-04-30T04:00:00Z</published>
+    <updated>2013-04-30T04:00:00Z</updated>
+    <author>
+      <name>foca</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
+    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
+Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
+has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+&lt;/pre&gt;
+
+&lt;p&gt;Enjoy.&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2013-04-25:/changes/2013-04-25-deprecating-merge-commit-sha/</id>
@@ -981,53 +1030,5 @@ something unique to your application.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please drop us a line at
 &lt;a href="mailto:support@github.com?subject=API%20Rate%20limit"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2012-09-28:/changes/2012-9-28-auto-init-for-repositories/</id>
-    <title type="html">Initialize a repository when creating</title>
-    <published>2012-09-28T04:00:00Z</published>
-    <updated>2012-09-28T04:00:00Z</updated>
-    <author>
-      <name>pengwynn</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2012-9-28-auto-init-for-repositories/" />
-    <content type="html">&lt;p&gt;Today we’ve made it easier to add commits to a repository via the GitHub API.
-Until now, you could &lt;a href="/v3/repos/#create"&gt;create a repository&lt;/a&gt;, but you would
-need to initialize it locally via your Git client before adding any commits via
-the API.&lt;/p&gt;
-
-&lt;p&gt;Now you can optionally init a repository when it’s created by sending &lt;code&gt;true&lt;/code&gt;
-for the &lt;code&gt;auto_init&lt;/code&gt; parameter:&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-curl -i -u pengwynn \
-     -d '{"name": "create-repo-test", "auto_init": true}' \
-     https://api.github.com/user/repos
-&lt;/pre&gt;
-
-&lt;p&gt;The resulting repository will have a README stub and an initial commit.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="/images/posts/create-repo-init.png" alt="create repo screenshot"&gt;&lt;/p&gt;
-
-&lt;h3 id="gitignore-templates"&gt;.gitignore templates&lt;/h3&gt;
-
-&lt;p&gt;Along with this change, you can set up your &lt;code&gt;.gitignore&lt;/code&gt; template by passing
-the basename of any template in the &lt;a href="https://github.com/github/gitignore"&gt;GitHub gitignore templates
-project&lt;/a&gt;.&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-curl -i -u pengwynn \
-     -d '{"name": "create-repo-test", "auto_init": true, \
-          "gitignore_template": "Haskell"}' \
-     https://api.github.com/user/repos
-&lt;/pre&gt;
-
-&lt;p&gt;As the &lt;a href="/v3/repos/#create"&gt;docs point out&lt;/a&gt;, the &lt;code&gt;gitignore_template&lt;/code&gt; parameter
-is ignored if &lt;code&gt;auto_init&lt;/code&gt; is not present and &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, drop us a line at
-&lt;a href="https://github.com/c"&gt;https://github.com/contact&lt;/a&gt;, &lt;a href="mailto:support@github.com"&gt;support@github.com&lt;/a&gt;, or
-&lt;a href="https://twitter.com/githubapi"&gt;@GitHubAPI&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>

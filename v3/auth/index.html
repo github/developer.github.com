@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gitignore templates | GitHub API</title>
+  <title>Authentication | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,81 +36,73 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="gitignore-templates-api">Gitignore Templates API</h1>
+    <h1 id="authentication">Authentication</h1>
 
 <ul id="markdown-toc">
-<li><a href="#listing-available-templates">Listing available templates</a></li>
-  <li><a href="#get-a-single-template">Get a single template</a></li>
-</ul><p>When you create a new GitHub repository via the API, you can specify a
-<a href="https://help.github.com/articles/ignoring-files">.gitignore template</a> to apply to the repository upon creation. The
-.gitignore Templates API lists and fetches templates from the <a href="https://github.com/github/gitignore">GitHub .gitignore repository</a>.</p>
+<li><a href="#basic-authentication">Basic Authentication</a></li>
+  <li><a href="#working-with-two-factor-authentication">Working with two-factor authentication</a></li>
+</ul><p>While the API provides multiple methods for authentication, we strongly
+recommend using <a href="/v3/oauth/">OAuth</a> for production applications. The other
+methods provided are intended to be used for scripts or testing (i.e., cases
+where full OAuth would be overkill). Third party applications that rely on
+GitHub for authentication should not ask for or collect GitHub credentials.
+Instead, they should use the <a href="/v3/oauth">OAuth web flow</a>.</p>
 
-<h2 id="listing-available-templates">Listing available templates</h2>
+<h2 id="basic-authentication">Basic Authentication</h2>
 
-<p>List all templates available to pass as an option when <a href="/v3/repos/#create">creating a repository</a>.</p>
+<p>The API supports Basic Authentication as defined in
+<a href="http://www.ietf.org/rfc/rfc2617.txt">RFC2617</a> with a few slight differences.
+The main difference is that the RFC requires unauthenticated requests to be
+answered with <code>401 Unauthorized</code> responses. In many places, this would disclose
+the existence of user data. Instead, the GitHub API responds with <code>404 Not Found</code>.
+This may cause problems for HTTP libraries that assume a <code>401 Unauthorized</code>
+response. The solution is to manually craft the <code>Authorization</code> header.</p>
 
-<pre><code>GET /gitignore/templates
-</code></pre>
+<h3 id="via-username-and-password">Via Username and Password</h3>
 
-<h3 id="response">Response</h3>
+<p>To use Basic Authentication with the GitHub API, simply send the username and
+password associated with the account.</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>For example, if you’re accessing the API via <a href="http://curl.haxx.se/">cURL</a>, the following command
+would authenticate with <code>mojombo</code> as the username. (cURL will prompt you to
+enter the password.)</p>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="s2">"Actionscript"</span><span class="p">,</span>
-  <span class="s2">"Android"</span><span class="p">,</span>
-  <span class="s2">"AppceleratorTitanium"</span><span class="p">,</span>
-  <span class="s2">"Autotools"</span><span class="p">,</span>
-  <span class="s2">"Bancha"</span><span class="p">,</span>
-  <span class="s2">"C"</span><span class="p">,</span>
-  <span class="s2">"C++"</span>
-<span class="p">]</span></code></pre>
-
-<h2 id="get-a-single-template">Get a single template</h2>
-
-<p>The API also allows fetching the source of a single template.</p>
-
-<pre><code>GET /gitignore/templates/C
-</code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"C"</span><span class="p">,</span>
-  <span class="s2">"source"</span><span class="o">:</span> <span class="s2">"# Object files\n*.o\n\n# Libraries\n*.lib\n*.a\n\n# Shared objects (inc. Windows DLLs)\n*.dll\n*.so\n*.so.*\n*.dylib\n\n# Executables\n*.exe\n*.out\n*.app\n"</span>
-<span class="p">}</span></code></pre>
-
-<p>Use the raw <a href="/v3/media/">media type</a> to get the raw contents.</p>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre>
-# Object files
-*.o
-
-# Libraries
-*.lib
-*.a
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
+<pre class="terminal">
+curl -u mojombo https://api.github.com/user
 </pre>
+
+<h3 id="via-oauth-tokens">Via OAuth Tokens</h3>
+
+<p>Alternatively, you can authenticate using <a href="https://github.com/blog/1509-personal-api-tokens">personal access
+tokens</a> or OAuth tokens. To do so, provide the token as
+the username and provide a blank password or a password of <code>x-oauth-basic</code>. For
+example:</p>
+
+<pre class="terminal">
+curl -u 3816d821c80a6847ca84550052c1ff6246e8169b:x-oauth-basic https://api.github.com/user
+</pre>
+
+<p>This approach is useful if your tools only support Basic Authentication but you
+want to take advantage of OAuth access token security features.</p>
+
+<h2 id="working-with-two-factor-authentication">Working with two-factor authentication</h2>
+
+<p>For users with two-factor authentication enabled, Basic Authentication requires
+an extra step. When you attempt to authenticate with Basic Authentication, the
+server will respond with a <code>401</code> and an <code>X-GitHub-OTP: required;:2fa-type</code>
+header. This indicates that a two-factor authentication code is needed (in
+addition to the username and password). The <code>:2fa-type</code> in this header indicates
+whether the account receives its two-factor authentication codes via SMS or via
+an application.</p>
+
+<p>In additon to the Basic Authentication credentials, you must send the user’s
+authentication code (i.e., one-time password) in the <code>X-GitHub-OTP</code> header.
+Because these authentication codes expire quickly, we recommend using the
+Authorizations API to <a href="/v3/oauth/#create-a-new-authorization">create an access token</a> and using that
+token to <a href="/v3/#authentication">authenticate via OAuth</a> for most API access.</p>
+
+<p>Alternately, you can create access tokens from the Personal Access Token
+section of your <a href="https://github.com/settings/application">application settings page</a>.</p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

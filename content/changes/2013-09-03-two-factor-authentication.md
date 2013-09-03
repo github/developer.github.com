@@ -46,5 +46,5 @@ two-factor authentication. As always, if you have any questions or feedback,
 
 [basic-auth-2fa]: /v3/auth/#working-with-two-factor-authentication
 [contact]: https://github.com/contact?form[subject]=2FA+and+the+API
-[dotcom-blog-post]: #
+[dotcom-blog-post]: https://github.com/blog/1614-two-factor-authentication
 [personal-access-tokens]: https://help.github.com/articles/creating-an-access-token-for-command-line-use

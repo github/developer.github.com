@@ -68,7 +68,7 @@ Authorizations API to [create an access token][create-access] and using that
 token to [authenticate via OAuth][oauth-auth] for most API access.
 
 Alternately, you can create access tokens from the Personal Access Token
-section of your [application settings page](https://github.com/settings/application).
+section of your [application settings page](https://github.com/settings/applications).
 
 [create-access]: /v3/oauth/#create-a-new-authorization
 [curl]: http://curl.haxx.se/

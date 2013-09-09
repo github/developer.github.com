@@ -190,7 +190,7 @@ place of the filename.
 
 <%= json \
   :name  => "foo-1.0.0-osx.zip",
-  :label => "Mac binary",
+  :label => "Mac binary"
 %>
 
 ### Response

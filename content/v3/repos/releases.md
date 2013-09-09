@@ -40,6 +40,11 @@ Users with push access to the repository can create a release.
 tag_name
 : _Required_ **string**
 
+tag_commitish
+: _Optional_ **string** - Specifies the commitish value that determines where
+the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
+"master".  Unused if the Git tag already exists.
+
 name
 : _Optional_ **string**
 
@@ -55,11 +60,12 @@ prerelase. `false` to identify the release as a full release. Default is
 `false`.
 
 <%= json \
-  :tag_name    => "v1.0.0",
-  :name        => "v1.0.0",
-  :description => "Description of the release",
-  :draft       => false,
-  :prerelease  => false
+  :tag_name         => "v1.0.0",
+  :target_commitish => "master",
+  :name             => "v1.0.0",
+  :description      => "Description of the release",
+  :draft            => false,
+  :prerelease       => false
 %>
 
 ### Response
@@ -79,6 +85,11 @@ Users with push access to the repository can edit a release.
 tag_name
 : _Optional_ **string**
 
+tag_commitish
+: _Optional_ **string** - Specifies the commitish value that determines where
+the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
+"master".  Unused if the Git tag already exists.
+
 name
 : _Optional_ **string**
 
@@ -94,11 +105,12 @@ prerelease
 prerelase. `false` to identify the release as a full release.
 
 <%= json \
-  :tag_name    => "v1.0.0",
-  :name        => "v1.0.0",
-  :description => "Description of the release",
-  :draft       => false,
-  :prerelease  => false
+  :tag_name         => "v1.0.0",
+  :target_commitish => "master",
+  :name             => "v1.0.0",
+  :description      => "Description of the release",
+  :draft            => false,
+  :prerelease       => false
 %>
 
 ### Response
@@ -133,3 +145,11 @@ Users with push access to the repository can delete a release.
 
 <%= headers 200 %>
 <%= json :release_asset %>
+
+## Delete a release asset
+
+    DELETE /repos/:owner/:repo/releases/assets/:id
+
+### Response
+
+<%= headers 204 %>

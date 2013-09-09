@@ -137,9 +137,61 @@ Users with push access to the repository can delete a release.
 <%= headers 200 %>
 <%= json(:release_asset) { |h| [h] } %>
 
+## Upload a release asset
+
+This is a unique endpoint.  The domain of the request changes from "api.github.com"
+to "uploads.github.com".  The asset data is expected in its raw binary form,
+instead of JSON.  Everything else about the endpoint is the same.  Pass your
+authentication exactly the same as the rest of the API.
+
+    POST https://uploads.github.com/repos/:owner/:repo/releases/assets
+
+### Input
+
+The raw file is uploaded to GitHub.  Set the content type appropriately, and the
+asset's name in a URI query parameter.
+
+Content-Type (Header)
+: _Required_ **string** - The content type of the asset.
+
+name (URI query parameter)
+: _Required_ **string** - The file name of the asset.
+
+Send the raw binary content of the asset as the request body.
+
+### Response
+
+<%= headers 201 %>
+<%= json :release_asset %>
+
 ## Get a single release asset
 
     GET /repos/:owner/:repo/releases/assets/:id
+
+### Response
+
+<%= headers 200 %>
+<%= json :release_asset %>
+
+## Edit a release asset
+
+Users with push access to the repository can edit a release asset.
+
+    PATCH /repos/:owner/:repo/releases/assets/:id
+
+### Input
+
+name
+: _Required_ **string** - The file name of the asset.
+
+label
+: _Optional_ **string** - An alternate short description of the asset.  Used in
+place of the filename.
+
+<%= json \
+  :name  => "foo-1.0.0-osx.zip",
+  :label => "Mac binary",
+%>
 
 ### Response
 

@@ -477,7 +477,7 @@ Here’s a sample request for a browser hitting <a href="http://calendaraboutnot
 
 <pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com"
 HTTP/1.1 302 Found
-Access-Control-Allow-Origin: http://calendaraboutnothing.com
+Access-Control-Allow-Origin: *
 Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
 Access-Control-Allow-Credentials: true
 </code></pre>
@@ -486,8 +486,8 @@ Access-Control-Allow-Credentials: true
 
 <pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" -X OPTIONS
 HTTP/1.1 204 No Content
-Access-Control-Allow-Origin: http://calendaraboutnothing.com
-Access-Control-Allow-Headers: Authorization, X-Requested-With
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With
 Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE
 Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
 Access-Control-Max-Age: 86400

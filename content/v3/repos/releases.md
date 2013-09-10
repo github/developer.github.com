@@ -56,7 +56,7 @@ draft
 release, `false` to create a published one. Default is `false`.
 
 : _Optional_ **boolean** - `true` to identify the release as a
-prerelase. `false` to identify the release as a full release. Default is
+prerelease. `false` to identify the release as a full release. Default is
 `false`.
 
 <%= json \
@@ -88,7 +88,8 @@ tag_name
 tag_commitish
 : _Optional_ **string** - Specifies the commitish value that determines where
 the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
-"master".  Unused if the Git tag already exists.
+to the repository's default branch (usually "master").  Unused if the Git tag
+already exists.
 
 name
 : _Optional_ **string**
@@ -102,7 +103,7 @@ publishes the release.
 
 prerelease
 : _Optional_ **boolean** - `true` to identify the release as a
-prerelase. `false` to identify the release as a full release.
+prerelease. `false` to identify the release as a full release.
 
 <%= json \
   :tag_name         => "v1.0.0",
@@ -140,7 +141,7 @@ Users with push access to the repository can delete a release.
 ## Upload a release asset
 
 This is a unique endpoint.  The domain of the request changes from "api.github.com"
-to "uploads.github.com".  The asset data is expected in its raw binary form,
+to **"uploads.github.com"**.  The asset data is expected in its raw binary form,
 instead of JSON.  Everything else about the endpoint is the same.  Pass your
 authentication exactly the same as the rest of the API.
 
@@ -152,7 +153,8 @@ The raw file is uploaded to GitHub.  Set the content type appropriately, and the
 asset's name in a URI query parameter.
 
 Content-Type (Header)
-: _Required_ **string** - The content type of the asset.
+: _Required_ **string** - The content type of the asset.  Example:
+"application/zip".  See this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
 
 name (URI query parameter)
 : _Required_ **string** - The file name of the asset.

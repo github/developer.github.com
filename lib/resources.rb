@@ -530,7 +530,7 @@ module GitHub
       "id"             => 1,
       "name"           => "example.zip",
       "label"          => "short description",
-      "state"          => "new, uploaded, or deleted",
+      "state"          => "uploaded",
       "content_type"   => "application/zip",
       "size"           => 1024,
       "download_count" => 42,

@@ -9,7 +9,7 @@ title: Working with Comments | GitHub API
 
 For any Pull Request, GitHub provides three different kinds of comment views:
 [comments on the Pull Request][PR comment], [comments on an entire commit][entire commit comment],
-and [comments on a specific line in a commited file][single comment]
+and [comments on a specific line in a committed file][single comment].
 
 Each of these types of comments goes through a different portion of the GitHub API.
 In this guide, we'll explore how you can access and manipulate each one. For every

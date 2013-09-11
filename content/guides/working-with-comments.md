@@ -74,16 +74,16 @@ The following code fetches all the Pull Request Review comments made, given a si
 You'll notice that it's incredibly similar to the example above. The difference
 between this view and the Pull Request comment is the focus of the conversation.
 A comment made on a Pull Request should be reserved for discussion or ideas on
-the direction of the code. A comment made as part of a Pull Request review should
+the overall direction of the code. A comment made as part of a Pull Request review should
 deal specifically with the way a particular change was implemented.
 
 ## Commenting on commits
 
-The last type of comments occur specifically on single commits. For this reason,
+The last type of comments occur specifically on individual commits. For this reason,
 they make use of [the commit comment API][commit comment API].
 
-To retrieve the comments on a commit, you'd want to use the SHA1 of the commit,
-as opposed to any identifier related to the Pull Request. Here's an example:
+To retrieve the comments on a commit, you'll want to use the SHA1 of the commit.
+(You won't use any identifier related to the Pull Request.) Here's an example:
 
     require 'octokit'
 

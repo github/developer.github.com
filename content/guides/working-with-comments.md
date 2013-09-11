@@ -13,7 +13,7 @@ For any Pull Request, GitHub provides three different kinds of comment views:
 * [Comments on an entire diff][entire diff comment]
 * [Comments on a file commit][single comment]
 
-Each of these types of commits goes through a different portion of the GitHub API.
+Each of these types of comments goes through a different portion of the GitHub API.
 In this guide, we'll explore how you can access and manipulate each one. For every
 example, we'll be using [this sample pull request made][sample PR] on the "octocat"
 repository. As always, samples can be found in [our platform-samples repository][platform-samples].

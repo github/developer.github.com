@@ -8,19 +8,17 @@ title: Working with Comments | GitHub API
 {:toc}
 
 For any Pull Request, GitHub provides three different kinds of comment views:
-
-* [Comments on the pull request][PR comment]
-* [Comments on an entire diff][entire diff comment]
-* [Comments on a file commit][single comment]
+[comments on the Pull Request][PR comment], [comments on an entire commit][entire commit comment],
+and [comments on a specific line in a commited file][single comment]
 
 Each of these types of comments goes through a different portion of the GitHub API.
 In this guide, we'll explore how you can access and manipulate each one. For every
-example, we'll be using [this sample pull request made][sample PR] on the "octocat"
+example, we'll be using [this sample Pull Request made][sample PR] on the "octocat"
 repository. As always, samples can be found in [our platform-samples repository][platform-samples].
 
 ## Pull Request Comments
 
-To access comments on a pull request, you'll go through [the Issues API][issues].
+To access comments on a Pull Request, you'll go through [the Issues API][issues].
 While this may seem misleading, the relationship between Issues and Pull Requests
 are such that a Pull Request is just an Issue with code.
 
@@ -104,7 +102,7 @@ Note that this API call will retrieve single line comments, as well as comments 
 on the entire commit.
 
 [PR comment]: https://github.com/octocat/Spoon-Knife/pull/1176#issuecomment-24114792
-[entire diff comment]: https://github.com/octocat/Spoon-Knife/pull/1176#discussion_r6252889
+[entire commit comment]: https://github.com/octocat/Spoon-Knife/pull/1176#discussion_r6252889
 [single comment]: https://github.com/octocat/Spoon-Knife/commit/cbc28e7c8caee26febc8c013b0adfb97a4edd96e#commitcomment-4049848
 [sample PR]: https://github.com/octocat/Spoon-Knife/pull/1176
 [platform-samples]: https://github.com/github/platform-samples/tree/master/api/ruby/working-with-comments

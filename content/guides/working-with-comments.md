@@ -74,8 +74,8 @@ The following code fetches all the Pull Review comments made, givn a single Pull
 You'll notice that it's incredibly similar to the example above. The difference
 between this view and the Pull Request comment is the focus of the conversation.
 A comment made on a Pull Request should be reserved for discussion or ideas on
-the direction of the code. A comment made as pat of a Pull Request review should
-deal specifically with he way a particular change was implemented.
+the direction of the code. A comment made as part of a Pull Request review should
+deal specifically with the way a particular change was implemented.
 
 ## Commenting on commits
 

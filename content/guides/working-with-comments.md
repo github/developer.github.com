@@ -19,8 +19,9 @@ repository. As always, samples can be found in [our platform-samples repository]
 ## Pull Request Comments
 
 To access comments on a Pull Request, you'll go through [the Issues API][issues].
-While this may seem misleading, the relationship between Issues and Pull Requests
-are such that a Pull Request is just an Issue with code.
+This may seem counterintuitive at first. But once you understand that a Pull
+Request is just an Issue with code, it makes sense to use the Issues API to
+create comments on a Pull Request.
 
 We'll demonstrate fetching Pull Request comments by creating a Ruby script using
 [Octokit.rb][octokit.rb]. You'll also want to create a [personal access token][personal token].

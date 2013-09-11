@@ -48,7 +48,7 @@ providing both the repository's name (`octocat/Spoon-Knife`), and the Pull Reque
 we're interested in (`1176`). After that, it's simply a matter of iterating through
 the comments to fetch information about each one.
 
-## Comments on a diff
+## Pull Request Line Comments
 
 Within the diff view, you can start a discussion on a particular aspect of a singular
 change made within the Pull Request. This is vastly different than commenting on a
@@ -77,7 +77,7 @@ A comment made on a Pull Request should be reserved for discussion or ideas on
 the overall direction of the code. A comment made as part of a Pull Request review should
 deal specifically with the way a particular change was implemented.
 
-## Commenting on commits
+## Commit Comments
 
 The last type of comments occur specifically on individual commits. For this reason,
 they make use of [the commit comment API][commit comment API].

@@ -55,7 +55,7 @@ change made within the Pull Request. This is vastly different than commenting on
 single line in a commit, because it deals with the entirety of the Pull Request.
 For that reason, the endpoint URL for this discussion comes from [the Pull Request Review API][PR Review API].
 
-The following code fetches all the Pull Review comments made, givn a single Pull Request number:
+The following code fetches all the Pull Request Review comments made, given a single Pull Request number:
 
     require 'octokit'
 

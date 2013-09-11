@@ -21,3 +21,7 @@ The Gitignore API gives you access to the available gitignore templates.
 ## Markdown
 
 The Markdown API lets you render Markdown documents.
+
+## Emojis
+
+The Emojis API lets you list all the emojis available to use on GitHub.

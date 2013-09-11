@@ -7,7 +7,7 @@ title: Working with Comments | GitHub API
 * TOC
 {:toc}
 
-For any Pull Request, GitHub provides three different kinds of comment views:
+For any Pull Request, GitHub provides three kinds of comment views:
 [comments on the Pull Request][PR comment], [comments on an entire commit][entire commit comment],
 and [comments on a specific line in a committed file][single comment].
 

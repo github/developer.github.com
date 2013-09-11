@@ -1621,6 +1621,17 @@ module GitHub
         }
       }
     }
+
+    EMOJIS = {
+      "+1" => "https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5",
+      "-1" => "https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5",
+      "100" => "https://github.global.ssl.fastly.net/images/icons/emoji/100.png?v5",
+      "1234" => "https://github.global.ssl.fastly.net/images/icons/emoji/1234.png?v5",
+      "8ball" => "https://github.global.ssl.fastly.net/images/icons/emoji/8ball.png?v5",
+      "a" => "https://github.global.ssl.fastly.net/images/icons/emoji/a.png?v5",
+      "ab" => "https://github.global.ssl.fastly.net/images/icons/emoji/ab.png?v5"
+    }
+
   end
 end
 

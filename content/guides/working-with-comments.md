@@ -8,8 +8,8 @@ title: Working with Comments | GitHub API
 {:toc}
 
 For any Pull Request, GitHub provides three kinds of comment views:
-[comments on the Pull Request][PR comment], [comments on an entire commit][entire commit comment],
-and [comments on a specific line in a committed file][single comment].
+[comments on the Pull Request][PR comment] as a whole, [comments on a specific line][PR line comment] within the Pull Request,
+and [comments on a specific commit][commit comment] within the Pull Request.
 
 Each of these types of comments goes through a different portion of the GitHub API.
 In this guide, we'll explore how you can access and manipulate each one. For every
@@ -103,8 +103,8 @@ Note that this API call will retrieve single line comments, as well as comments 
 on the entire commit.
 
 [PR comment]: https://github.com/octocat/Spoon-Knife/pull/1176#issuecomment-24114792
-[entire commit comment]: https://github.com/octocat/Spoon-Knife/pull/1176#discussion_r6252889
-[single comment]: https://github.com/octocat/Spoon-Knife/commit/cbc28e7c8caee26febc8c013b0adfb97a4edd96e#commitcomment-4049848
+[PR line comment]: https://github.com/octocat/Spoon-Knife/pull/1176#discussion_r6252889
+[commit comment]: https://github.com/octocat/Spoon-Knife/commit/cbc28e7c8caee26febc8c013b0adfb97a4edd96e#commitcomment-4049848
 [sample PR]: https://github.com/octocat/Spoon-Knife/pull/1176
 [platform-samples]: https://github.com/github/platform-samples/tree/master/api/ruby/working-with-comments
 [issues]: http://developer.github.com/v3/issues/comments/

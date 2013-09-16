@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Organization Members | GitHub API</title>
+  <title>Working with Comments | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,164 +36,114 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="org-members-api">Org Members API</h1>
+    <h1 id="working-with-comments">Working with Comments</h1>
 
 <ul id="markdown-toc">
-<li><a href="#members-list">Members list</a></li>
-  <li><a href="#check-membership">Check membership</a></li>
-  <li><a href="#add-a-member">Add a member</a></li>
-  <li><a href="#remove-a-member">Remove a member</a></li>
-  <li><a href="#public-members-list">Public members list</a></li>
-  <li><a href="#check-public-membership">Check public membership</a></li>
-  <li><a href="#publicize-a-users-membership">Publicize a user’s membership</a></li>
-  <li><a href="#conceal-a-users-membership">Conceal a user’s membership</a></li>
-</ul><h2 id="members-list">Members list</h2>
+  <li><a href="#pull-request-comments">Pull Request Comments</a></li>
+  <li><a href="#pull-request-comments-on-a-line">Pull Request Comments on a Line</a></li>
+  <li><a href="#commit-comments">Commit Comments</a></li>
+</ul>
 
-<p>List all users who are members of an organization. A member is a user that
-belongs to at least 1 team in the organization. If the authenticated user is
-also an owner of this organization then both concealed and public members will
-be returned. If the requester is not an owner of the organization the query
-will be redirected to the <a href="#public-members-list">public members list</a>.</p>
+<p>For any Pull Request, GitHub provides three kinds of comment views:
+<a href="https://github.com/octocat/Spoon-Knife/pull/1176#issuecomment-24114792">comments on the Pull Request</a> as a whole, <a href="https://github.com/octocat/Spoon-Knife/pull/1176#discussion_r6252889">comments on a specific line</a> within the Pull Request,
+and <a href="https://github.com/octocat/Spoon-Knife/commit/cbc28e7c8caee26febc8c013b0adfb97a4edd96e#commitcomment-4049848">comments on a specific commit</a> within the Pull Request.</p>
 
-<pre><code>GET /orgs/:org/members
+<p>Each of these types of comments goes through a different portion of the GitHub API.
+In this guide, we’ll explore how you can access and manipulate each one. For every
+example, we’ll be using <a href="https://github.com/octocat/Spoon-Knife/pull/1176">this sample Pull Request made</a> on the “octocat”
+repository. As always, samples can be found in <a href="https://github.com/github/platform-samples/tree/master/api/ruby/working-with-comments">our platform-samples repository</a>.</p>
+
+<h2 id="pull-request-comments">Pull Request Comments</h2>
+
+<p>To access comments on a Pull Request, you’ll go through <a href="http://developer.github.com/v3/issues/comments/">the Issues API</a>.
+This may seem counterintuitive at first. But once you understand that a Pull
+Request is just an Issue with code, it makes sense to use the Issues API to
+create comments on a Pull Request.</p>
+
+<p>We’ll demonstrate fetching Pull Request comments by creating a Ruby script using
+<a href="https://github.com/octokit/octokit.rb">Octokit.rb</a>. You’ll also want to create a <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">personal access token</a>.</p>
+
+<p>The following code should help you get started accessing comments from a Pull Request
+using Octokit.rb:</p>
+
+<pre><code>require 'octokit'
+
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token =&gt; ENV['MY_PERSONAL_TOKEN']
+
+client.issue_comments("octocat/Spoon-Knife", 1176).each do |comment|
+  username = comment[:user][:login]
+  post_date = comment[:created_at]
+  content = comment[:body]
+
+  puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
+end
 </code></pre>
 
-<h3 id="response">Response</h3>
+<p>Here, we’re specifically calling out to the Issues API to get the comments (<code>issue_comments</code>),
+providing both the repository’s name (<code>octocat/Spoon-Knife</code>), and the Pull Request ID
+we’re interested in (<code>1176</code>). After that, it’s simply a matter of iterating through
+the comments to fetch information about each one.</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<h2 id="pull-request-comments-on-a-line">Pull Request Comments on a Line</h2>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
+<p>Within the diff view, you can start a discussion on a particular aspect of a singular
+change made within the Pull Request. These comments occur on the individual lines 
+within a changed file. The endpoint URL for this discussion comes from <a href="http://developer.github.com/v3/pulls/comments/">the Pull Request Review API</a>.</p>
 
-<h3 id="response-if-requester-is-not-an-organization-member">Response if requester is not an organization member</h3>
+<p>The following code fetches all the Pull Request comments made on files, given a single Pull Request number:</p>
 
-<pre class="headers"><code>Status: 302 Found
-Location: https://api.github.com/orgs/github/public_members
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<pre><code>require 'octokit'
 
-<h2 id="check-membership">Check membership</h2>
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token =&gt; ENV['MY_PERSONAL_TOKEN']
 
-<p>Check if a user is, publicly or privately, a member of the organization.</p>
+client.pull_request_comments("octocat/Spoon-Knife", 1176).each do |comment|
+  username = comment[:user][:login]
+  post_date = comment[:created_at]
+  content = comment[:body]
+  path = comment[:path]
+  position = comment[:position]
 
-<pre><code>GET /orgs/:org/members/:user
+  puts "#{username} made a comment on #{post_date} for the file called #{path}, on line #{position}. It says:\n'#{content}'\n"
+end
 </code></pre>
 
-<h3 id="response-if-requester-is-an-organization-member-and-user-is-a-member">Response if requester is an organization member and user is a member</h3>
+<p>You’ll notice that it’s incredibly similar to the example above. The difference
+between this view and the Pull Request comment is the focus of the conversation.
+A comment made on a Pull Request should be reserved for discussion or ideas on
+the overall direction of the code. A comment made as part of a Pull Request review should
+deal specifically with the way a particular change was implemented within a file.</p>
 
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<h2 id="commit-comments">Commit Comments</h2>
 
-<h3 id="response-if-requester-is-an-organization-member-and-user-is-not-a-member">Response if requester is an organization member and user is not a member</h3>
+<p>The last type of comments occur specifically on individual commits. For this reason,
+they make use of <a href="http://developer.github.com/v3/repos/comments/#get-a-single-commit-comment">the commit comment API</a>.</p>
 
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>To retrieve the comments on a commit, you’ll want to use the SHA1 of the commit.
+In other words, you won’t use any identifier related to the Pull Request. Here’s an example:</p>
 
-<h3 id="response-if-requester-is-not-an-organization-member-and-is-inquiring-about-themselves">Response if requester is not an organization member and is inquiring about themselves</h3>
+<pre><code>require 'octokit'
 
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token =&gt; ENV['MY_PERSONAL_TOKEN']
 
-<h3 id="response-if-requester-is-not-an-organization-member-1">Response if requester is not an organization member</h3>
+client.commit_comments("octocat/Spoon-Knife", "cbc28e7c8caee26febc8c013b0adfb97a4edd96e").each do |comment|
+  username = comment[:user][:login]
+  post_date = comment[:created_at]
+  content = comment[:body]
 
-<pre class="headers"><code>Status: 302 Found
-Location: https://api.github.com/orgs/github/public_members/pezra
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="add-a-member">Add a member</h2>
-
-<p>To add someone as a member to an org, you must add them to a
-<a href="/v3/orgs/teams/#add-team-member">team</a>.</p>
-
-<h2 id="remove-a-member">Remove a member</h2>
-
-<p>Removing a user from this list will remove them from all teams and
-they will no longer have any access to the organization’s repositories.</p>
-
-<pre><code>DELETE /orgs/:org/members/:user
+  puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
+end
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<p>Note that this API call will retrieve single line comments, as well as comments made
+on the entire commit.</p>
 
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
 
-<h2 id="public-members-list">Public members list</h2>
-
-<p>Members of an organization can choose to have their membership
-publicized or not.</p>
-
-<pre><code>GET /orgs/:org/public_members
-</code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h2 id="check-public-membership">Check public membership</h2>
-
-<pre><code>GET /orgs/:org/public_members/:user
-</code></pre>
-
-<h3 id="response-if-user-is-a-public-member">Response if user is a public member</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h3 id="response-if-user-is-not-a-public-member">Response if user is not a public member</h3>
-
-<pre class="headers no-response"><code>Status: 404 Not Found
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="publicize-a-users-membership">Publicize a user’s membership</h2>
-
-<pre><code>PUT /orgs/:org/public_members/:user
-</code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="conceal-a-users-membership">Conceal a user’s membership</h2>
-
-<pre><code>DELETE /orgs/:org/public_members/:user
-</code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

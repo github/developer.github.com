@@ -48,14 +48,13 @@ providing both the repository's name (`octocat/Spoon-Knife`), and the Pull Reque
 we're interested in (`1176`). After that, it's simply a matter of iterating through
 the comments to fetch information about each one.
 
-## Pull Request Line Comments
+## Pull Request Comments on a Line
 
 Within the diff view, you can start a discussion on a particular aspect of a singular
-change made within the Pull Request. This is vastly different than commenting on a
-single line in a commit, because it deals with the entirety of the Pull Request.
-For that reason, the endpoint URL for this discussion comes from [the Pull Request Review API][PR Review API].
+change made within the Pull Request. These comments occur on the individual lines 
+within a changed file. The endpoint URL for this discussion comes from [the Pull Request Review API][PR Review API].
 
-The following code fetches all the Pull Request Review comments made, given a single Pull Request number:
+The following code fetches all the Pull Request comments made on files, given a single Pull Request number:
 
     require 'octokit'
 
@@ -67,15 +66,17 @@ The following code fetches all the Pull Request Review comments made, given a si
       username = comment[:user][:login]
       post_date = comment[:created_at]
       content = comment[:body]
+      path = comment[:path]
+      position = comment[:position]
 
-      puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
+      puts "#{username} made a comment on #{post_date} for the file called #{path}, on line #{position}. It says:\n'#{content}'\n"
     end
 
 You'll notice that it's incredibly similar to the example above. The difference
 between this view and the Pull Request comment is the focus of the conversation.
 A comment made on a Pull Request should be reserved for discussion or ideas on
 the overall direction of the code. A comment made as part of a Pull Request review should
-deal specifically with the way a particular change was implemented.
+deal specifically with the way a particular change was implemented within a file.
 
 ## Commit Comments
 
@@ -83,7 +84,7 @@ The last type of comments occur specifically on individual commits. For this rea
 they make use of [the commit comment API][commit comment API].
 
 To retrieve the comments on a commit, you'll want to use the SHA1 of the commit.
-(You won't use any identifier related to the Pull Request.) Here's an example:
+In other words, you won't use any identifier related to the Pull Request. Here's an example:
 
     require 'octokit'
 

@@ -350,10 +350,11 @@ will return `404 NOT FOUND`.
 It can be a little tricky to get started with OAuth. Here are a few
 links that might be of help:
 
-* [OAuth 2 spec](http://tools.ietf.org/html/draft-ietf-oauth-v2-07)
+* [OAuth 2 spec](http://tools.ietf.org/html/rfc6749)
 * [Facebook Login API](http://developers.facebook.com/docs/technical-guides/login/)
 * [Ruby OAuth2 lib](https://github.com/intridea/oauth2)
 * [Simple Ruby/Sinatra example](https://gist.github.com/9fd1a6199da0465ec87c)
+* [Python Flask example](https://gist.github.com/ib-lundgren/6507798) using [requests-oauthlib](https://github.com/requests/requests-oauthlib)
 * [Simple Python example](https://gist.github.com/e3fbd47fbb7ee3c626bb) using [python-oauth2](https://github.com/dgouldin/python-oauth2)
 * [Ruby OmniAuth example](https://github.com/intridea/omniauth)
 * [Ruby Sinatra extension](https://github.com/atmos/sinatra_auth_github)

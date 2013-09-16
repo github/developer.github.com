@@ -351,7 +351,7 @@ module GitHub
 
     PULL = {
       "url"        => "https://api.github.com/octocat/Hello-World/pulls/1",
-      "html_url"   => "https://github.com/octocat/Hello-World/pulls/1",
+      "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
       "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
       "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
       "issue_url"  => "https://github.com/octocat/Hello-World/issue/1",
@@ -602,9 +602,9 @@ module GitHub
       "milestone"  => MILESTONE,
       "comments"   => 0,
       "pull_request" => {
-        "html_url"  => "https://github.com/octocat/Hello-World/issues/1347",
-        "diff_url"  => "https://github.com/octocat/Hello-World/issues/1347.diff",
-        "patch_url" => "https://github.com/octocat/Hello-World/issues/1347.patch"
+        "html_url"  => "https://github.com/octocat/Hello-World/pull/1347",
+        "diff_url"  => "https://github.com/octocat/Hello-World/pull/1347.diff",
+        "patch_url" => "https://github.com/octocat/Hello-World/pull/1347.patch"
       },
       "closed_at"  => nil,
       "created_at" => "2011-04-22T13:33:48Z",
@@ -1621,6 +1621,17 @@ module GitHub
         }
       }
     }
+
+    EMOJIS = {
+      "+1" => "https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5",
+      "-1" => "https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5",
+      "100" => "https://github.global.ssl.fastly.net/images/icons/emoji/100.png?v5",
+      "1234" => "https://github.global.ssl.fastly.net/images/icons/emoji/1234.png?v5",
+      "8ball" => "https://github.global.ssl.fastly.net/images/icons/emoji/8ball.png?v5",
+      "a" => "https://github.global.ssl.fastly.net/images/icons/emoji/a.png?v5",
+      "ab" => "https://github.global.ssl.fastly.net/images/icons/emoji/ab.png?v5"
+    }
+
   end
 end
 

@@ -245,11 +245,14 @@ repo
 
 ## WatchEvent
 
-The event's actor is the watcher, and the event's repo is the watched
-repository.
+The WatchEvent is related to starring a repository, not watching.
+See [this API blog post](http://developer.github.com/changes/2012-9-5-watcher-api/)
+for an explanation.
+
+The event’s actor is the user who starred a repository, and the event’s repo is
+the repository that was starred.
 
 Hook name: `watch`
 
 action
-: **string** - The action that was performed.
-
+: **string** - The action that was performed: "started".

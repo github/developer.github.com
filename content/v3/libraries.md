@@ -126,6 +126,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [githubpy][githubpy]
 * [octohub][octohub]
 * [Github-Flask][github-flask]
+* [torngithub][torngithub]
 
 [jacquev6_pygithub]: https://github.com/jacquev6/PyGithub
 [pygithub3-api]: https://github.com/copitux/python-github3
@@ -136,6 +137,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 [githubpy]: https://github.com/michaelliao/githubpy
 [octohub]: https://github.com/turnkeylinux/octohub
 [github-flask]: https://github-flask.readthedocs.org
+[torngithub]: https://github.com/jkeylu/torngithub
 
 ## Ruby
 

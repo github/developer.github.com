@@ -35,7 +35,7 @@ which is usually master; pushing to the default branch resets the statistics cac
 
 **Weekly Hash**
 
-* `w` - Start of the week
+* `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).
 * `a` - Number of additions
 * `d` - Number of deletions
 * `c` - Number of commits

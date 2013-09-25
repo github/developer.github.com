@@ -6,7 +6,7 @@ author_name: technoweenie
 ---
 
 This summer we made it easier to [release your software][blawg].  Today, you can fully automate those releases via the
-[Releases API Preview][api].  :sparkles::zap::rocket:
+[Releases API Preview][api].
 
 This API is a little different due to the binary assets.  We use the `Accept` header for content negotation when requesting
 a release asset.  Pass a standard API media type to get the API representation:

@@ -60,10 +60,11 @@ Users with push access to the repository can create a release.
 tag_name
 : _Required_ **string**
 
-tag_commitish
+target_commitish
 : _Optional_ **string** - Specifies the commitish value that determines where
 the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
-"master".  Unused if the Git tag already exists.
+the repository's default branch (usually "master").  Unused if the Git tag
+already exists.
 
 name
 : _Optional_ **string**
@@ -105,10 +106,10 @@ Users with push access to the repository can edit a release.
 tag_name
 : _Optional_ **string**
 
-tag_commitish
+target_commitish
 : _Optional_ **string** - Specifies the commitish value that determines where
 the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
-to the repository's default branch (usually "master").  Unused if the Git tag
+the repository's default branch (usually "master").  Unused if the Git tag
 already exists.
 
 name

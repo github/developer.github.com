@@ -11,8 +11,8 @@ This summer we made it easier to [release your software][blawg].  Today, you can
 This API is a little different due to the binary assets.  We use the `Accept` header for content negotation when requesting
 a release asset.  Pass a standard API media type to get the API representation:
 
-```
-$ curl -i -H "Authorization: token <yours>" \
+<pre class="terminal">
+$ curl -i -H "Authorization: token TOKEN" \
      -H "Accept: application/vnd.github.manifold-preview" \
      "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
 
@@ -22,27 +22,27 @@ HTTP/1.1 200 OK
   "id": 123,
 ...
 }
-```
+</pre>
 
 Pass "application/octet-stream" to download the binary content.
 
-```
-$ curl -i -H "Authorization: token <yours>" \
+<pre class="terminal">
+$ curl -i -H "Authorization: token TOKEN" \
      -H "Accept: application/octet-stream" \
      "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
 
 HTTP/1.1 302 Found
-```
+</pre>
 
 Uploads are handled by a single request to a companion "uploads.github.com" service.
 
-```
-curl -H "Authorization: token <yours>" \
+<pre class="terminal">
+$ curl -H "Authorization: token TOKEN" \
      -H "Accept: application/vnd.github.manifold-preview" \
      -H "Content-Type: application/zip" \
      --data-binary @build/mac/package.zip \
      "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
-```
+</pre>
 
 ## Preview mode
 

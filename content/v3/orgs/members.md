@@ -90,6 +90,8 @@ publicized or not.
 
 ## Publicize a user's membership
 
+Only the user themselves is allowed to publicize their membership. Org owners attempting to publicize another user's membership will receive a `403` response.
+
     PUT /orgs/:org/public_members/:user
 
 ### Response

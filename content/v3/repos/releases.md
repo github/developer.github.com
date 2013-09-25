@@ -76,6 +76,7 @@ draft
 : _Optional_ **boolean** - `true` to create a draft (unpublished)
 release, `false` to create a published one. Default is `false`.
 
+prerelease
 : _Optional_ **boolean** - `true` to identify the release as a
 prerelease. `false` to identify the release as a full release. Default is
 `false`.

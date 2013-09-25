@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Rate limit changes for unauthenticated requests</title>
+  <title>GitHub Emojis API | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,45 +36,28 @@
 
     <div id="wrapper">
       <div class="content">
-    <div class="change" id="/changes/2012-10-14-rate-limit-changes/">
-<h2 class="title">
-  <a href="/changes/2012-10-14-rate-limit-changes/">Rate limit changes for unauthenticated requests</a>
-</h2>
+    <h1 id="github-emojis-api">GitHub Emojis API</h1>
 
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    October 14, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-      <a href="https://github.com/pengwynn">pengwynn</a>
-  </li>
-</ul>
-</div>
+<p>Lists all the emojis available to use on GitHub.</p>
 
+<pre><code>GET /emojis
+</code></pre>
 
-<p>To ensure a high quality of service for all API consumers, we’ve reduced the
-default rate limit for unauthenticated requests. To enjoy the default rate
-limit of 5,000 requests per hour, you’ll need to
-<a href="http://developer.github.com/v3/#authentication">authenticate</a> via Basic Auth
-or OAuth. Unauthenticated requests will be limited to 60 per hour unless you
-<a href="http://developer.github.com/v3/#unauthenticated-rate-limited-requests">include your OAuth client and
-secret</a>.</p>
+<h3 id="response">Response</h3>
 
-<p>We’ll soon require all requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent
-header</a>. Setting a
-unique value for this header helps us identify requests and get in touch with
-developers who are abusing the API. Most HTTP libraries, wrapper libraries, and
-even cURL provide a valid header for you already and allow you to change it to
-something unique to your application.</p>
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<p>If you have any questions or feedback, please drop us a line at
-<a href="mailto:support@github.com?subject=API%20Rate%20limit">support@github.com</a>.</p>
-</div>
-
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"+1"</span><span class="o">:</span> <span class="s2">"https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5"</span><span class="p">,</span>
+  <span class="s2">"-1"</span><span class="o">:</span> <span class="s2">"https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5"</span><span class="p">,</span>
+  <span class="s2">"100"</span><span class="o">:</span> <span class="s2">"https://github.global.ssl.fastly.net/images/icons/emoji/100.png?v5"</span><span class="p">,</span>
+  <span class="s2">"1234"</span><span class="o">:</span> <span class="s2">"https://github.global.ssl.fastly.net/images/icons/emoji/1234.png?v5"</span><span class="p">,</span>
+  <span class="s2">"8ball"</span><span class="o">:</span> <span class="s2">"https://github.global.ssl.fastly.net/images/icons/emoji/8ball.png?v5"</span><span class="p">,</span>
+  <span class="s2">"a"</span><span class="o">:</span> <span class="s2">"https://github.global.ssl.fastly.net/images/icons/emoji/a.png?v5"</span><span class="p">,</span>
+  <span class="s2">"ab"</span><span class="o">:</span> <span class="s2">"https://github.global.ssl.fastly.net/images/icons/emoji/ab.png?v5"</span>
+<span class="p">}</span></code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

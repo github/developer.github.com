@@ -110,6 +110,64 @@ a member of the Avengers, with the ability to teleport through time and space.  
 <p><img src="https://f.cloud.github.com/assets/21/1210628/ae8556fa-25fc-11e3-986d-0ab522271d43.png" alt="Manifold teleporting the Avengers to a terraformed Mars surface"></p>
 </div>
 
+<div class="change" id="/changes/2013-09-03-two-factor-authentication/">
+  <h2 class="title">
+  <a href="/changes/2013-09-03-two-factor-authentication/">Two-Factor Authentication and the API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 3, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/8caa0afdae1a934c30a1998472c63134?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><a href="https://github.com/mastahyeti">mastahyeti</a>
+  </li>
+</ul>
+</div>
+
+    <p>As <a href="https://github.com/blog/1614-two-factor-authentication">announced earlier today</a>, GitHub.com now supports two-factor
+authentication (2FA) for increased security. For users with this feature
+enabled, GitHub.com will prompt for a 2FA code in addition to a username and
+password during authentication. We’ve also rolled out some improvements to the
+API to ensure that 2FA requirements in the API are consistent with GitHub.com.</p>
+
+<h2 id="authenticating-with-the-api">Authenticating with the API</h2>
+
+<p>For users without 2FA enabled, and for applications using the <a href="/v3/oauth/#web-application-flow">OAuth web
+flow</a> for authentication, everything is
+business as usual. You’ll continue to authenticate with the API just as you
+always have. (That was easy.)</p>
+
+<p>If you enable 2FA <em>and</em> use Basic Authentication to access the API, we’re
+providing multiple options to make the flow simple and easy.</p>
+
+<h2 id="basic-authentication-and-2fa">Basic Authentication and 2FA</h2>
+
+<h3 id="personal-access-tokens">Personal Access Tokens</h3>
+
+<p>Personal access tokens provide the simplest option for using 2FA with Basic
+Authentication. You can create these tokens via the <a href="https://github.com/settings/applications">application settings page
+on GitHub.com</a>, and you can revoke
+them at any time. For more information about authenticating to the API with
+personal access tokens, be sure to check out our <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">help article on the
+topic</a>.</p>
+
+<h3 id="tightly-integrated-2fa">Tightly-integrated 2FA</h3>
+
+<p>For developers wishing to integrate GitHub 2FA directly into their application,
+the API’s Basic Authentication now supports the <a href="/v3/auth/#working-with-two-factor-authentication">ability to send the user’s 2FA
+code</a>, in addition to the username and password.</p>
+
+<h2 id="were-here-to-help">We’re here to help</h2>
+
+<p>We think GitHub users are going to love the additional security provided by
+two-factor authentication. As always, if you have any questions or feedback,
+<a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API">let us know</a>. We’re here to help!</p>
+</div>
+
 <div class="change" id="/changes/2013-08-20-search-api-improvements/">
   <h2 class="title">
   <a href="/changes/2013-08-20-search-api-improvements/">Improvements to the Search API</a>
@@ -1312,43 +1370,6 @@ should be using the public membership resources.</p>
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Org%20members%20API">support@github.com</a>.</p>
 </div>
-
-<div class="change" id="/changes/2012-10-14-rate-limit-changes/">
-  <h2 class="title">
-  <a href="/changes/2012-10-14-rate-limit-changes/">Rate limit changes for unauthenticated requests</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    October 14, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><a href="https://github.com/pengwynn">pengwynn</a>
-  </li>
-</ul>
-</div>
-
-    <p>To ensure a high quality of service for all API consumers, we’ve reduced the
-default rate limit for unauthenticated requests. To enjoy the default rate
-limit of 5,000 requests per hour, you’ll need to
-<a href="http://developer.github.com/v3/#authentication">authenticate</a> via Basic Auth
-or OAuth. Unauthenticated requests will be limited to 60 per hour unless you
-<a href="http://developer.github.com/v3/#unauthenticated-rate-limited-requests">include your OAuth client and
-secret</a>.</p>
-
-<p>We’ll soon require all requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent
-header</a>. Setting a
-unique value for this header helps us identify requests and get in touch with
-developers who are abusing the API. Most HTTP libraries, wrapper libraries, and
-even cURL provide a valid header for you already and allow you to change it to
-something unique to your application.</p>
-
-<p>If you have any questions or feedback, please drop us a line at
-<a href="mailto:support@github.com?subject=API%20Rate%20limit">support@github.com</a>.</p>
-</div>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -1359,9 +1380,8 @@ something unique to your application.</p>
             <ul class="js-guides">
               <li><a href="/v3/libraries/">Libraries</a></li>
               <li><a href="/v3/media/">Media Types</a></li>
-              <li><a href="/v3/meta/">Meta</a></li>
               <li><a href="/v3/oauth/">OAuth</a></li>
-              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
+              <li><a href="/v3/auth/">Other Authentication Methods</a></li>
               <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
             </ul>
           </li>
@@ -1371,6 +1391,7 @@ something unique to your application.</p>
               <li><a href="/guides/getting-started/">Getting Started</a></li>
               <li><a href="/guides/basics-of-authentication/">Basics of Authentication</a></li>
               <li><a href="/guides/rendering-data-as-graphs/">Rendering Data as Graphs</a></li>
+              <li><a href="/guides/working-with-comments/">Working with Comments</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -1411,6 +1432,16 @@ something unique to your application.</p>
             </ul>
           </li>
           <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/misc/">Miscellaneous</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/emojis/">Emojis</a></li>
+              <li><a href="/v3/gitignore/">Gitignore</a></li>
+              <li><a href="/v3/markdown/">Markdown</a></li>
+              <li><a href="/v3/meta/">Meta</a></li>
+              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
             <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/orgs/">Orgs</a></h3>
             <ul class="js-guides">
               <li><a href="/v3/orgs/members/">Members</a></li>
@@ -1441,14 +1472,6 @@ something unique to your application.</p>
             </ul>
           </li>
           <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/users/emails/">Emails</a></li>
-              <li><a href="/v3/users/followers/">Followers</a></li>
-              <li><a href="/v3/users/keys/">Keys</a></li>
-            </ul>
-          </li>
-          <li class="js-topic">
             <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/search/">Search</a></h3>
             <ul class="js-guides">
               <li><a href="/v3/search/#search-repositories">Repositories</a></li>
@@ -1458,8 +1481,14 @@ something unique to your application.</p>
               <li><a href="/v3/search/legacy/">Legacy Search</a></li>
             </ul>
           </li>
-          <li class="js-guides"><h3><a href="/v3/gitignore/">Gitignore</a></h3></li>
-          <li class="js-guides"><h3><a href="/v3/markdown/">Markdown</a></h3></li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/users/emails/">Emails</a></li>
+              <li><a href="/v3/users/followers/">Followers</a></li>
+              <li><a href="/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
         </ul>
       </div> <!-- /sidebar-module -->
       <div class="sidebar-module">

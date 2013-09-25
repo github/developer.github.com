@@ -192,6 +192,13 @@ Send the raw binary content of the asset as the request body.
 <%= headers 200 %>
 <%= json :release_asset %>
 
+If you want to download the asset's binary content, pass a media type of
+"application/octet-stream".  The API will either redirect the client to the
+location, or stream it directly if possible.  API clients should handle both a
+200 or 302 response.
+
+<%= headers 302 %>
+
 ## Edit a release asset
 
 Users with push access to the repository can edit a release asset.

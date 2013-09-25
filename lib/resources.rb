@@ -513,7 +513,7 @@ module GitHub
       "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
       "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
       "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
-      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets",
+      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
       "id"               => 1,
       "tag_name"         => "v1.0.0",
       "target_commitish" => "master",

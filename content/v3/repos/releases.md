@@ -46,6 +46,9 @@ will receive published releases only.
 <%= headers 200 %>
 <%= json :release %>
 
+Note: This returns an "upload_url" hypermedia relation that provides the [endpoint
+that creates release assets](#upload-a-release-asset).
+
 ## Create a release
 
 Users with push access to the repository can create a release.
@@ -162,7 +165,9 @@ to **"uploads.github.com"**.  The asset data is expected in its raw binary form,
 instead of JSON.  Everything else about the endpoint is the same.  Pass your
 authentication exactly the same as the rest of the API.
 
-    POST https://uploads.github.com/repos/:owner/:repo/releases/assets
+    POST https://uploads.github.com/repos/:owner/:repo/releases/assets?name=foo.zip
+
+This endpoint is provided by a URI template in [the release's API response](#get-a-single-release).
 
 ### Input
 

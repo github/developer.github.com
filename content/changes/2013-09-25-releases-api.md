@@ -46,7 +46,7 @@ $ curl -H "Authorization: token TOKEN" \
 
 ## Preview mode
 
-The new API is available as a [preview][preview].  This gives developers a chance to provide feedback on the direction of
+The new API is available as a [preview][preview].  This gives developers a chance to [provide feedback][contact] on the direction of
 the API before we freeze changes.  We expect to lift the preview status in 30 days.
 
 As with [the Search API][searchapi], we'll take this opportunity to iterate quickly.  Breaking changes will be announced
@@ -62,3 +62,4 @@ a member of the Avengers, with the ability to teleport through time and space.  
 [api]: http://developer.github.com/v3/repos/releases/
 [preview]: http://developer.github.com/v3/repos/releases/#preview-mode
 [searchapi]: http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/
+[contact]: https://github.com/contact?form[subject]=New+Releases+API

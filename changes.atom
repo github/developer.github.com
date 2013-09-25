@@ -25,38 +25,38 @@
 &lt;p&gt;This API is a little different due to the binary assets.  We use the &lt;code&gt;Accept&lt;/code&gt; header for content negotation when requesting
 a release asset.  Pass a standard API media type to get the API representation:&lt;/p&gt;
 
-&lt;p&gt;```
-$ curl -i -H “Authorization: token &lt;yours&gt;" \
+&lt;pre class="terminal"&gt;
+$ curl -i -H "Authorization: token TOKEN" \
      -H "Accept: application/vnd.github.manifold-preview" \
-     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"&lt;/yours&gt;&lt;/p&gt;
+     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
 
-&lt;p&gt;HTTP/1.1 200 OK&lt;/p&gt;
+HTTP/1.1 200 OK
 
-&lt;p&gt;{
-  “id”: 123,
-…
+{
+  "id": 123,
+...
 }
-```&lt;/p&gt;
+&lt;/pre&gt;
 
 &lt;p&gt;Pass “application/octet-stream” to download the binary content.&lt;/p&gt;
 
-&lt;p&gt;```
-$ curl -i -H “Authorization: token &lt;yours&gt;" \
+&lt;pre class="terminal"&gt;
+$ curl -i -H "Authorization: token TOKEN" \
      -H "Accept: application/octet-stream" \
-     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"&lt;/yours&gt;&lt;/p&gt;
+     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
 
-&lt;p&gt;HTTP/1.1 302 Found
-```&lt;/p&gt;
+HTTP/1.1 302 Found
+&lt;/pre&gt;
 
 &lt;p&gt;Uploads are handled by a single request to a companion “uploads.github.com” service.&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-curl -H "Authorization: token &amp;lt;yours&amp;gt;" \
+&lt;pre class="terminal"&gt;
+$ curl -H "Authorization: token TOKEN" \
      -H "Accept: application/vnd.github.manifold-preview" \
      -H "Content-Type: application/zip" \
      --data-binary @build/mac/package.zip \
      "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
-&lt;/code&gt;&lt;/p&gt;
+&lt;/pre&gt;
 
 &lt;h2 id="preview-mode"&gt;Preview mode&lt;/h2&gt;
 

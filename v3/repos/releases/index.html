@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Releases | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="/"><img src="/images/logo_developer.png" height="45" alt="GitHub:Developer" /></a>
+          <ul class="nav">
+            <li class="api-status"></li>
+            <li><a href="/v3/">API v3</a></li>
+            <li><a href="/changes/">Changes</a></li>
+            <li><a
+              href="https://github.com/contact">Support</a></li>
+            <li><a href="/changes.atom">
+              <img src="/images/feed-icon-28x28.png" width="16" height="16" alt="GitHub API Changes Feed" />
+            </a></li>
+          </ul>
+        </div>
+      </div><!-- #header -->
+    </div><!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="releases-api">Releases API</h1>
+
+<ul id="markdown-toc">
+<li><a href="#list-releases-for-a-repository">List releases for a repository</a></li>
+  <li><a href="#get-a-single-release">Get a single release</a></li>
+  <li><a href="#create-a-release">Create a release</a></li>
+  <li><a href="#edit-a-release">Edit a release</a></li>
+  <li><a href="#delete-a-release">Delete a release</a></li>
+  <li><a href="#list-assets-for-a-release">List assets for a release</a></li>
+  <li><a href="#upload-a-release-asset">Upload a release asset</a></li>
+  <li><a href="#get-a-single-release-asset">Get a single release asset</a></li>
+  <li><a href="#edit-a-release-asset">Edit a release asset</a></li>
+  <li><a href="#delete-a-release-asset">Delete a release asset</a></li>
+</ul><h3 id="preview-mode">Preview mode</h3>
+
+<div class="alert">
+  <p>
+    The Releases API is currently available for developers to preview.
+    During the preview period, the API may change without advance notice.
+    Please see the <a href="/changes/2013-09-25-releases-api">blog post</a> for full details.
+  </p>
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.manifold-preview</pre>
+  
+</div>
+
+<p>If you have any questions or feedback about this new API, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API">get in
+touch</a>.</p>
+
+<h2 id="list-releases-for-a-repository">List releases for a repository</h2>
+
+<p>Users with push access to the repository will receive all releases
+(i.e., published releases and draft releases). Users with pull access
+will receive published releases only.</p>
+
+<pre><code>GET /repos/:owner/:repo/releases
+</code></pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+    <span class="s2">"assets_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+    <span class="s2">"upload_url"</span><span class="o">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+    <span class="s2">"target_commitish"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+    <span class="s2">"draft"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"prerelease"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+    <span class="s2">"published_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="get-a-single-release">Get a single release</h2>
+
+<pre><code>GET /repos/:owner/:repo/releases/:id
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"assets_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+  <span class="s2">"upload_url"</span><span class="o">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"published_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+<span class="p">}</span></code></pre>
+
+<p>Note: This returns an “upload_url” hypermedia relation that provides the <a href="#upload-a-release-asset">endpoint
+that creates release assets</a>.</p>
+
+<h2 id="create-a-release">Create a release</h2>
+
+<p>Users with push access to the repository can create a release.</p>
+
+<pre><code>POST /repos/:owner/:repo/releases
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<dl>
+<dt>tag_name</dt>
+  <dd>
+<em>Required</em> <strong>string</strong>
+</dd>
+  <dt>target_commitish</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - Specifies the commitish value that determines where
+the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
+the repository’s default branch (usually “master”).  Unused if the Git tag
+already exists.</dd>
+  <dt>name</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>body</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>draft</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to create a draft (unpublished)
+release, <code>false</code> to create a published one. Default is <code>false</code>.</dd>
+  <dd>
+    <p><em>Optional</em> <strong>boolean</strong> - <code>true</code> to identify the release as a
+prerelease. <code>false</code> to identify the release as a full release. Default is
+<code>false</code>.</p>
+  </dd>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/repos/octocat/Hello-World/releases/1
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"assets_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+  <span class="s2">"upload_url"</span><span class="o">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"published_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="edit-a-release">Edit a release</h2>
+
+<p>Users with push access to the repository can edit a release.</p>
+
+<pre><code>PATCH /repos/:owner/:repo/releases/:id
+</code></pre>
+
+<h3 id="input-1">Input</h3>
+
+<dl>
+<dt>tag_name</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>target_commitish</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - Specifies the commitish value that determines where
+the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
+the repository’s default branch (usually “master”).  Unused if the Git tag
+already exists.</dd>
+  <dt>name</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>body</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+  <dt>draft</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> makes the release a draft, and <code>false</code>
+publishes the release.</dd>
+  <dt>prerelease</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> - <code>true</code> to identify the release as a
+prerelease. <code>false</code> to identify the release as a full release.</dd>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"assets_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+  <span class="s2">"upload_url"</span><span class="o">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"published_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="delete-a-release">Delete a release</h2>
+
+<p>Users with push access to the repository can delete a release.</p>
+
+<pre><code>DELETE /repos/:owner/:repo/releases/:id
+</code></pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="list-assets-for-a-release">List assets for a release</h2>
+
+<pre><code>GET /repos/:owner/:repo/releases/:id/assets
+</code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
+    <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"short description"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
+    <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">42</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="upload-a-release-asset">Upload a release asset</h2>
+
+<p>This is a unique endpoint.  The domain of the request changes from “api.github.com”
+to <strong>“uploads.github.com”</strong>.  The asset data is expected in its raw binary form,
+instead of JSON.  Everything else about the endpoint is the same.  Pass your
+authentication exactly the same as the rest of the API.</p>
+
+<pre><code>POST https://uploads.github.com/repos/:owner/:repo/releases/assets?name=foo.zip
+</code></pre>
+
+<p>This endpoint is provided by a URI template in <a href="#get-a-single-release">the release’s API response</a>.</p>
+
+<h3 id="input-2">Input</h3>
+
+<p>The raw file is uploaded to GitHub.  Set the content type appropriately, and the
+asset’s name in a URI query parameter.</p>
+
+<dl>
+<dt>Content-Type (Header)</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The content type of the asset.  Example:
+“application/zip”.  See this list of <a href="http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types">common media types</a>.</dd>
+  <dt>name (URI query parameter)</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The file name of the asset.</dd>
+</dl><p>Send the raw binary content of the asset as the request body.</p>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"short description"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
+  <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="get-a-single-release-asset">Get a single release asset</h2>
+
+<pre><code>GET /repos/:owner/:repo/releases/assets/:id
+</code></pre>
+
+<h3 id="response-7">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"short description"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
+  <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+<span class="p">}</span></code></pre>
+
+<p>If you want to download the asset’s binary content, pass a media type of
+“application/octet-stream”.  The API will either redirect the client to the
+location, or stream it directly if possible.  API clients should handle both a
+200 or 302 response.</p>
+
+<pre class="headers"><code>Status: 302 Found
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="edit-a-release-asset">Edit a release asset</h2>
+
+<p>Users with push access to the repository can edit a release asset.</p>
+
+<pre><code>PATCH /repos/:owner/:repo/releases/assets/:id
+</code></pre>
+
+<h3 id="input-3">Input</h3>
+
+<dl>
+<dt>name</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The file name of the asset.</dd>
+  <dt>label</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - An alternate short description of the asset.  Used in
+place of the filename.</dd>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"foo-1.0.0-osx.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"Mac binary"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-8">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"short description"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
+  <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="delete-a-release-asset">Delete a release asset</h2>
+
+<pre><code>DELETE /repos/:owner/:repo/releases/assets/:id
+</code></pre>
+
+<h3 id="response-9">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/">Overview</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/libraries/">Libraries</a></li>
+              <li><a href="/v3/media/">Media Types</a></li>
+              <li><a href="/v3/meta/">Meta</a></li>
+              <li><a href="/v3/oauth/">OAuth</a></li>
+              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
+              <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/guides/">Guides</a></h3>
+            <ul class="js-guides">
+              <li><a href="/guides/getting-started/">Getting Started</a></li>
+              <li><a href="/guides/basics-of-authentication/">Basics of Authentication</a></li>
+              <li><a href="/guides/rendering-data-as-graphs/">Rendering Data as Graphs</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/activity/">Activity</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/activity/events/">Events</a></li>
+              <li><a href="/v3/activity/events/types/">Event Types</a></li>
+              <li><a href="/v3/activity/feeds/">Feeds</a></li>
+              <li><a href="/v3/activity/notifications/">Notifications</a></li>
+              <li><a href="/v3/activity/starring/">Starring</a></li>
+              <li><a href="/v3/activity/watching/">Watching</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/gists/">Gists</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/git/">Git Data</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/git/blobs/">Blobs</a></li>
+              <li><a href="/v3/git/commits/">Commits</a></li>
+              <li><a href="/v3/git/refs/">References</a></li>
+              <li><a href="/v3/git/tags/">Tags</a></li>
+              <li><a href="/v3/git/trees/">Trees</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/issues/">Issues</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/issues/assignees/">Assignees</a></li>
+              <li><a href="/v3/issues/comments/">Comments</a></li>
+              <li><a href="/v3/issues/events/">Events</a></li>
+              <li><a href="/v3/issues/labels/">Labels</a></li>
+              <li><a href="/v3/issues/milestones/">Milestones</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/orgs/">Orgs</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/orgs/members/">Members</a></li>
+              <li><a href="/v3/orgs/teams/">Teams</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/pulls/">Pull Requests</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/pulls/comments/">Review Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/repos/">Repositories</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/v3/repos/comments/">Comments</a></li>
+              <li><a href="/v3/repos/commits/">Commits</a></li>
+              <li><a href="/v3/repos/contents/">Contents</a></li>
+              <li><a href="/v3/repos/downloads/">Downloads</a></li>
+              <li><a href="/v3/repos/forks/">Forks</a></li>
+              <li><a href="/v3/repos/keys/">Keys</a></li>
+              <li><a href="/v3/repos/hooks/">Hooks</a></li>
+              <li><a href="/v3/repos/merging/">Merging</a></li>
+              <li><a href="/v3/repos/releases/">Releases</a></li>
+              <li><a href="/v3/repos/statistics/">Statistics</a></li>
+              <li><a href="/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/users/emails/">Emails</a></li>
+              <li><a href="/v3/users/followers/">Followers</a></li>
+              <li><a href="/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/search/">Search</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/search/#search-repositories">Repositories</a></li>
+              <li><a href="/v3/search/#search-code">Code</a></li>
+              <li><a href="/v3/search/#search-issues">Issues</a></li>
+              <li><a href="/v3/search/#search-users">Users</a></li>
+              <li><a href="/v3/search/legacy/">Legacy Search</a></li>
+            </ul>
+          </li>
+          <li class="js-guides"><h3><a href="/v3/gitignore/">Gitignore</a></h3></li>
+          <li class="js-guides"><h3><a href="/v3/markdown/">Markdown</a></h3></li>
+        </ul>
+      </div> <!-- /sidebar-module -->
+      <div class="sidebar-module">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+    </div><!-- /sidebar-shell -->
+
+    </div><!-- #wrapper -->
+
+    <div id="footer" >
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <ul class="footer_nav">
+          <h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+
+        </div><!-- /.site -->
+      </div><!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <ul class="footer-cell">
+          <li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+          <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+          <li><a href="http://help.github.com/security/">Security</a></li>
+        </ul>
+
+        <span class="footer-cell">
+          <a href="https://github.com" class="mega-icon mega-icon-invertocat"></a>
+        </span>
+
+        <span class="footer-cell">
+          Design &copy; <span class="js-year">2013</span> GitHub, Inc. All rights reserved.
+          <p>
+            Except where otherwise noted, content on this site is licensed under a
+            <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.
+          </p>
+        </span>
+      </div>
+
+    </div><!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>

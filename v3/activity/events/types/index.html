@@ -65,6 +65,7 @@ They’re only created for various internal and repository hooks.</p>
   <li><a href="#pullrequestevent">PullRequestEvent</a></li>
   <li><a href="#pullrequestreviewcommentevent">PullRequestReviewCommentEvent</a></li>
   <li><a href="#pushevent">PushEvent</a></li>
+  <li><a href="#releaseevent">ReleaseEvent</a></li>
   <li><a href="#teamaddevent">TeamAddEvent</a></li>
   <li><a href="#watchevent">WatchEvent</a></li>
 </ul><h2 id="commitcommentevent">CommitCommentEvent</h2>
@@ -84,7 +85,7 @@ They’re only created for various internal and repository hooks.</p>
 <dl>
 <dt>ref_type</dt>
   <dd>
-<strong>string</strong> - The object that was created: “repository”, “branch”, or
+<strong>string</strong> - The object that was created. Can be one of “repository”, “branch”, or
 “tag”</dd>
   <dt>ref</dt>
   <dd>
@@ -104,7 +105,7 @@ They’re only created for various internal and repository hooks.</p>
 <dl>
 <dt>ref_type</dt>
   <dd>
-<strong>string</strong> - The object that was deleted: “branch” or “tag”.</dd>
+<strong>string</strong> - The object that was deleted. Can be “branch” or “tag”.</dd>
   <dt>ref</dt>
   <dd>
 <strong>string</strong> - The full git ref.</dd>
@@ -156,7 +157,7 @@ created.</dd>
 <dl>
 <dt>action</dt>
   <dd>
-<strong>string</strong> - The action that was performed: “create” or “update”</dd>
+<strong>string</strong> - The action that was performed. Can be “create” or “update”</dd>
   <dt>gist</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/gists/">gist</a> itself.</dd>
@@ -204,7 +205,7 @@ created.</dd>
 <dl>
 <dt>action</dt>
   <dd>
-<strong>string</strong> - The action that was performed: “opened”, “closed”, or
+<strong>string</strong> - The action that was performed. Can be one of “opened”, “closed”, or
 “reopened”.</dd>
   <dt>issue</dt>
   <dd>
@@ -238,7 +239,7 @@ best GitHub event.</p>
 <dl>
 <dt>action</dt>
   <dd>
-<strong>string</strong> - The action that was performed: “opened”, “closed”,
+<strong>string</strong> - The action that was performed. Can be one of “opened”, “closed”,
 “synchronize”, or “reopened”.</dd>
   <dt>number</dt>
   <dd>
@@ -294,6 +295,17 @@ best GitHub event.</p>
   <dd>
 <strong>boolean</strong> - Whether this commit is distinct from any that have been pushed
 before.</dd>
+</dl><h2 id="releaseevent">ReleaseEvent</h2>
+
+<p>Hook name: <code>release</code></p>
+
+<dl>
+<dt>action</dt>
+  <dd>
+<strong>string</strong> - The action that was performed. Currently, can only be “published”.</dd>
+  <dt>release</dt>
+  <dd>
+<strong>object</strong> - The <a href="/v3/repos/releases/#get-a-single-release">release</a> itself.</dd>
 </dl><h2 id="teamaddevent">TeamAddEvent</h2>
 
 <p>Hook name: <code>team_add</code></p>
@@ -331,8 +343,9 @@ repository.</p>
             <ul class="js-guides">
               <li><a href="/v3/libraries/">Libraries</a></li>
               <li><a href="/v3/media/">Media Types</a></li>
+              <li><a href="/v3/meta/">Meta</a></li>
               <li><a href="/v3/oauth/">OAuth</a></li>
-              <li><a href="/v3/auth/">Other Authentication Methods</a></li>
+              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
               <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
             </ul>
           </li>
@@ -342,7 +355,6 @@ repository.</p>
               <li><a href="/guides/getting-started/">Getting Started</a></li>
               <li><a href="/guides/basics-of-authentication/">Basics of Authentication</a></li>
               <li><a href="/guides/rendering-data-as-graphs/">Rendering Data as Graphs</a></li>
-              <li><a href="/guides/working-with-comments/">Working with Comments</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -383,16 +395,6 @@ repository.</p>
             </ul>
           </li>
           <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/misc/">Miscellaneous</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/emojis/">Emojis</a></li>
-              <li><a href="/v3/gitignore/">Gitignore</a></li>
-              <li><a href="/v3/markdown/">Markdown</a></li>
-              <li><a href="/v3/meta/">Meta</a></li>
-              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
-            </ul>
-          </li>
-          <li class="js-topic">
             <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/orgs/">Orgs</a></h3>
             <ul class="js-guides">
               <li><a href="/v3/orgs/members/">Members</a></li>
@@ -417,8 +419,17 @@ repository.</p>
               <li><a href="/v3/repos/keys/">Keys</a></li>
               <li><a href="/v3/repos/hooks/">Hooks</a></li>
               <li><a href="/v3/repos/merging/">Merging</a></li>
+              <li><a href="/v3/repos/releases/">Releases</a></li>
               <li><a href="/v3/repos/statistics/">Statistics</a></li>
               <li><a href="/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/users/emails/">Emails</a></li>
+              <li><a href="/v3/users/followers/">Followers</a></li>
+              <li><a href="/v3/users/keys/">Keys</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -431,14 +442,8 @@ repository.</p>
               <li><a href="/v3/search/legacy/">Legacy Search</a></li>
             </ul>
           </li>
-          <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/users/emails/">Emails</a></li>
-              <li><a href="/v3/users/followers/">Followers</a></li>
-              <li><a href="/v3/users/keys/">Keys</a></li>
-            </ul>
-          </li>
+          <li class="js-guides"><h3><a href="/v3/gitignore/">Gitignore</a></h3></li>
+          <li class="js-guides"><h3><a href="/v3/markdown/">Markdown</a></h3></li>
         </ul>
       </div> <!-- /sidebar-module -->
       <div class="sidebar-module">

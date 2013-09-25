@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2013-09-03T07:00:00Z</updated>
+  <updated>2013-09-25T06:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
@@ -10,59 +10,73 @@
     <uri>https://github.com/technoweenie</uri>
   </author>
   <entry>
-    <id>tag:developer.github.com,2013-09-03:/changes/2013-09-03-two-factor-authentication/</id>
-    <title type="html">Two-Factor Authentication and the API</title>
-    <published>2013-09-03T07:00:00Z</published>
-    <updated>2013-09-03T07:00:00Z</updated>
+    <id>tag:developer.github.com,2013-09-25:/changes/2013-09-25-releases-api/</id>
+    <title type="html">Releases API</title>
+    <published>2013-09-25T06:00:00Z</published>
+    <updated>2013-09-25T06:00:00Z</updated>
     <author>
-      <name>mastahyeti</name>
+      <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
     </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-09-03-two-factor-authentication/" />
-    <content type="html">&lt;p&gt;As &lt;a href="https://github.com/blog/1614-two-factor-authentication"&gt;announced earlier today&lt;/a&gt;, GitHub.com now supports two-factor
-authentication (2FA) for increased security. For users with this feature
-enabled, GitHub.com will prompt for a 2FA code in addition to a username and
-password during authentication. We’ve also rolled out some improvements to the
-API to ensure that 2FA requirements in the API are consistent with GitHub.com.&lt;/p&gt;
+    <link rel="alternate" href="http://developer.github.com/changes/2013-09-25-releases-api/" />
+    <content type="html">&lt;p&gt;This summer we made it easier to &lt;a href="https://github.com/blog/1547-release-your-software"&gt;release your software&lt;/a&gt;.  Today, you can fully automate those releases via the
+&lt;a href="http://developer.github.com/v3/repos/releases/"&gt;Releases API Preview&lt;/a&gt;.  :sparkles::zap::rocket:&lt;/p&gt;
 
-&lt;h2 id="authenticating-with-the-api"&gt;Authenticating with the API&lt;/h2&gt;
+&lt;p&gt;This API is a little different due to the binary assets.  We use the &lt;code&gt;Accept&lt;/code&gt; header for content negotation when requesting
+a release asset.  Pass a standard API media type to get the API representation:&lt;/p&gt;
 
-&lt;p&gt;For users without 2FA enabled, and for applications using the &lt;a href="/v3/oauth/#web-application-flow"&gt;OAuth web
-flow&lt;/a&gt; for authentication, everything is
-business as usual. You’ll continue to authenticate with the API just as you
-always have. (That was easy.)&lt;/p&gt;
+&lt;p&gt;```
+$ curl -i -H “Authorization: token &lt;yours&gt;" \
+     -H "Accept: application/vnd.github.manifold-preview" \
+     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"&lt;/yours&gt;&lt;/p&gt;
 
-&lt;p&gt;If you enable 2FA &lt;em&gt;and&lt;/em&gt; use Basic Authentication to access the API, we’re
-providing multiple options to make the flow simple and easy.&lt;/p&gt;
+&lt;p&gt;HTTP/1.1 200 OK&lt;/p&gt;
 
-&lt;h2 id="basic-authentication-and-2fa"&gt;Basic Authentication and 2FA&lt;/h2&gt;
+&lt;p&gt;{
+  “id”: 123,
+…
+}
+```&lt;/p&gt;
 
-&lt;h3 id="personal-access-tokens"&gt;Personal Access Tokens&lt;/h3&gt;
+&lt;p&gt;Pass “application/octet-stream” to download the binary content.&lt;/p&gt;
 
-&lt;p&gt;Personal access tokens provide the simplest option for using 2FA with Basic
-Authentication. You can create these tokens via the &lt;a href="https://github.com/settings/applications"&gt;application settings page
-on GitHub.com&lt;/a&gt;, and you can revoke
-them at any time. For more information about authenticating to the API with
-personal access tokens, be sure to check out our &lt;a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use"&gt;help article on the
-topic&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;```
+$ curl -i -H “Authorization: token &lt;yours&gt;" \
+     -H "Accept: application/octet-stream" \
+     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"&lt;/yours&gt;&lt;/p&gt;
 
-&lt;h3 id="tightly-integrated-2fa"&gt;Tightly-integrated 2FA&lt;/h3&gt;
+&lt;p&gt;HTTP/1.1 302 Found
+```&lt;/p&gt;
 
-&lt;p&gt;For developers wishing to integrate GitHub 2FA directly into their application,
-the API’s Basic Authentication now supports the &lt;a href="/v3/auth/#working-with-two-factor-authentication"&gt;ability to send the user’s 2FA
-code&lt;/a&gt;, in addition to the username and password.&lt;/p&gt;
+&lt;p&gt;Uploads are handled by a single request to a companion “uploads.github.com” service.&lt;/p&gt;
 
-&lt;h2 id="were-here-to-help"&gt;We’re here to help&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;
+curl -H "Authorization: token &amp;lt;yours&amp;gt;" \
+     -H "Accept: application/vnd.github.manifold-preview" \
+     -H "Content-Type: application/zip" \
+     --data-binary @build/mac/package.zip \
+     "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
+&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;We think GitHub users are going to love the additional security provided by
-two-factor authentication. As always, if you have any questions or feedback,
-&lt;a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API"&gt;let us know&lt;/a&gt;. We’re here to help!&lt;/p&gt;</content>
+&lt;h2 id="preview-mode"&gt;Preview mode&lt;/h2&gt;
+
+&lt;p&gt;The new API is available as a &lt;a href="http://developer.github.com/v3/repos/releases/#preview-mode"&gt;preview&lt;/a&gt;.  This gives developers a chance to provide feedback on the direction of
+the API before we freeze changes.  We expect to lift the preview status in 30 days.&lt;/p&gt;
+
+&lt;p&gt;As with &lt;a href="http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/"&gt;the Search API&lt;/a&gt;, we’ll take this opportunity to iterate quickly.  Breaking changes will be announced
+on this developer blog without any advance warning.  Once the preview is period, we’ll consider the Releases API unchangeable
+stable for production use.&lt;/p&gt;
+
+&lt;p&gt;The preview media type is “application/vnd.github.manifold-preview”.  &lt;a href="http://en.wikipedia.org/wiki/Eden_Fesi"&gt;Manifold&lt;/a&gt; is
+a member of the Avengers, with the ability to teleport through time and space.  He’s the one in the middle holding the spear.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://f.cloud.github.com/assets/21/1210628/ae8556fa-25fc-11e3-986d-0ab522271d43.png" alt="Manifold teleporting the Avengers to a terraformed Mars surface"&gt;&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2013-08-20:/changes/2013-08-20-search-api-improvements/</id>
     <title type="html">Improvements to the Search API</title>
-    <published>2013-08-20T07:00:00Z</published>
-    <updated>2013-08-20T07:00:00Z</updated>
+    <published>2013-08-20T06:00:00Z</published>
+    <updated>2013-08-20T06:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -134,8 +148,8 @@ We appreciate everyone that has provided feedback so far. Please &lt;a href="htt
   <entry>
     <id>tag:developer.github.com,2013-07-19:/changes/2013-07-19-preview-the-new-search-api/</id>
     <title type="html">Preview the New Search API</title>
-    <published>2013-07-19T07:00:00Z</published>
-    <updated>2013-07-19T07:00:00Z</updated>
+    <published>2013-07-19T06:00:00Z</published>
+    <updated>2013-07-19T06:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -195,8 +209,8 @@ GitHub API v3.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-07-02:/changes/2013-07-02-rate-limit-reset/</id>
     <title type="html">When Does My Rate Limit Reset?</title>
-    <published>2013-07-02T07:00:00Z</published>
-    <updated>2013-07-02T07:00:00Z</updated>
+    <published>2013-07-02T06:00:00Z</published>
+    <updated>2013-07-02T06:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -239,8 +253,8 @@ $ curl https://api.github.com/rate_limit
   <entry>
     <id>tag:developer.github.com,2013-07-01:/changes/2013-07-01-feeds-api/</id>
     <title type="html">Feeds API</title>
-    <published>2013-07-01T07:00:00Z</published>
-    <updated>2013-07-01T07:00:00Z</updated>
+    <published>2013-07-01T06:00:00Z</published>
+    <updated>2013-07-01T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -295,8 +309,8 @@ curl -u defunkt https://api.github.com/feeds
   <entry>
     <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-create-update-delete-individual-files/</id>
     <title type="html">Create, update, and delete individual files</title>
-    <published>2013-05-06T07:00:00Z</published>
-    <updated>2013-05-06T07:00:00Z</updated>
+    <published>2013-05-06T06:00:00Z</published>
+    <updated>2013-05-06T06:00:00Z</updated>
     <author>
       <name>ymendel</name>
       <uri>https://github.com/technoweenie</uri>
@@ -312,8 +326,8 @@ curl -u defunkt https://api.github.com/feeds
   <entry>
     <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-repository-stats/</id>
     <title type="html">Repository Statistics</title>
-    <published>2013-05-06T07:00:00Z</published>
-    <updated>2013-05-06T07:00:00Z</updated>
+    <published>2013-05-06T06:00:00Z</published>
+    <updated>2013-05-06T06:00:00Z</updated>
     <author>
       <name>Caged</name>
       <uri>https://github.com/technoweenie</uri>
@@ -336,8 +350,8 @@ but we can’t wait to see what others can do with this information.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/</id>
     <title type="html">Improved Support for Submodules in the Repository Contents API</title>
-    <published>2013-04-30T07:00:00Z</published>
-    <updated>2013-04-30T07:00:00Z</updated>
+    <published>2013-04-30T06:00:00Z</published>
+    <updated>2013-04-30T06:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -376,8 +390,8 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
   <entry>
     <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
     <title type="html">Commit Statuses Now Available for Branches and Tags</title>
-    <published>2013-04-30T07:00:00Z</published>
-    <updated>2013-04-30T07:00:00Z</updated>
+    <published>2013-04-30T06:00:00Z</published>
+    <updated>2013-04-30T06:00:00Z</updated>
     <author>
       <name>foca</name>
       <uri>https://github.com/technoweenie</uri>
@@ -396,8 +410,8 @@ curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
   <entry>
     <id>tag:developer.github.com,2013-04-25:/changes/2013-04-25-deprecating-merge-commit-sha/</id>
     <title type="html">Deprecating a Confusing Attribute in the Pull Request API</title>
-    <published>2013-04-25T07:00:00Z</published>
-    <updated>2013-04-25T07:00:00Z</updated>
+    <published>2013-04-25T06:00:00Z</published>
+    <updated>2013-04-25T06:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -423,8 +437,8 @@ remove it in the next major version of the API.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-04-24:/changes/2013-04-24-user-agent-required/</id>
     <title type="html">User Agent now mandatory</title>
-    <published>2013-04-24T07:00:00Z</published>
-    <updated>2013-04-24T07:00:00Z</updated>
+    <published>2013-04-24T06:00:00Z</published>
+    <updated>2013-04-24T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -441,8 +455,8 @@ responses, be sure and check your code.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-03-01:/changes/2013-3-1-new-hookshot-coming/</id>
     <title type="html">New Hookshot Changes</title>
-    <published>2013-03-01T08:00:00Z</published>
-    <updated>2013-03-01T08:00:00Z</updated>
+    <published>2013-03-01T07:00:00Z</published>
+    <updated>2013-03-01T07:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -469,8 +483,8 @@ requests&lt;/a&gt; very soon :)&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2013-02-14:/changes/2013-2-13-sortable-stars/</id>
     <title type="html">Sortable Stars in Repository Starring API</title>
-    <published>2013-02-14T08:00:00Z</published>
-    <updated>2013-02-14T08:00:00Z</updated>
+    <published>2013-02-14T07:00:00Z</published>
+    <updated>2013-02-14T07:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -529,8 +543,8 @@ if you have any questions.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2013-02-05:/changes/2013-2-5-changes-to-services/</id>
     <title type="html">Upcoming Changes to GitHub Services</title>
-    <published>2013-02-05T08:00:00Z</published>
-    <updated>2013-02-05T08:00:00Z</updated>
+    <published>2013-02-05T07:00:00Z</published>
+    <updated>2013-02-05T07:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -568,8 +582,8 @@ over 100 services is taking too much of this focus away.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2013-01-31:/changes/2013-01-31-user-agent-will-soon-be-mandatory/</id>
     <title type="html">User Agent mandatory from March 4th 2013</title>
-    <published>2013-01-31T08:00:00Z</published>
-    <updated>2013-01-31T08:00:00Z</updated>
+    <published>2013-01-31T07:00:00Z</published>
+    <updated>2013-01-31T07:00:00Z</updated>
     <author>
       <name>agh</name>
       <uri>https://github.com/technoweenie</uri>
@@ -593,8 +607,8 @@ many of our users to make any changes whatsoever.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-01-08:/changes/2013-01-08-new-user-scopes/</id>
     <title type="html">New User scopes</title>
-    <published>2013-01-08T08:00:00Z</published>
-    <updated>2013-01-08T08:00:00Z</updated>
+    <published>2013-01-08T07:00:00Z</published>
+    <updated>2013-01-08T07:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -616,8 +630,8 @@ can be potentially dangerous.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2012-12-10:/changes/2012-12-10-Diff-and-patch-media-types/</id>
     <title type="html">Diff and patch media types</title>
-    <published>2012-12-10T08:00:00Z</published>
-    <updated>2012-12-10T08:00:00Z</updated>
+    <published>2012-12-10T07:00:00Z</published>
+    <updated>2012-12-10T07:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -650,8 +664,8 @@ index 1f599cb..abaf625 100755
   <entry>
     <id>tag:developer.github.com,2012-12-09:/changes/2012-12-09-organization-repositories-results-now-paginate/</id>
     <title type="html">Pagination for Organization Repository lists now paginates properly</title>
-    <published>2012-12-09T08:00:00Z</published>
-    <updated>2012-12-09T08:00:00Z</updated>
+    <published>2012-12-09T07:00:00Z</published>
+    <updated>2012-12-09T07:00:00Z</updated>
     <author>
       <name>rick</name>
       <uri>https://github.com/technoweenie</uri>
@@ -673,8 +687,8 @@ regardless of what you send in the &lt;code&gt;type&lt;/code&gt; parameter.&lt;/
   <entry>
     <id>tag:developer.github.com,2012-12-08:/changes/2012-12-08-finding-source-and-fork-repos-for-organizations/</id>
     <title type="html">Finding sources and fork repositories for organizations</title>
-    <published>2012-12-08T08:00:00Z</published>
-    <updated>2012-12-08T08:00:00Z</updated>
+    <published>2012-12-08T07:00:00Z</published>
+    <updated>2012-12-08T07:00:00Z</updated>
     <author>
       <name>rick</name>
       <uri>https://github.com/technoweenie</uri>
@@ -702,8 +716,8 @@ curl "https://api.github.com/orgs/:org/repos?type=sources"
   <entry>
     <id>tag:developer.github.com,2012-12-06:/changes/2012-12-06-create-authorization-for-app/</id>
     <title type="html">Create an OAuth authorization for an app</title>
-    <published>2012-12-06T08:00:00Z</published>
-    <updated>2012-12-06T08:00:00Z</updated>
+    <published>2012-12-06T07:00:00Z</published>
+    <updated>2012-12-06T07:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -740,8 +754,8 @@ app’s rate limit.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2012-12-04:/changes/2012-12-04-List-comments-for-repo/</id>
     <title type="html">Per-repository Review and Issue Comment&amp;nbsp;listing</title>
-    <published>2012-12-04T08:00:00Z</published>
-    <updated>2012-12-04T08:00:00Z</updated>
+    <published>2012-12-04T07:00:00Z</published>
+    <updated>2012-12-04T07:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -771,8 +785,8 @@ curl https://api.github.com/repos/mathiasbynens/dotfiles/pulls/comments
   <entry>
     <id>tag:developer.github.com,2012-11-29:/changes/2012-11-29-gitignore-templates/</id>
     <title type="html">Gitignore Templates API</title>
-    <published>2012-11-29T08:00:00Z</published>
-    <updated>2012-11-29T08:00:00Z</updated>
+    <published>2012-11-29T07:00:00Z</published>
+    <updated>2012-11-29T07:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -830,8 +844,8 @@ DerivedData
   <entry>
     <id>tag:developer.github.com,2012-11-27:/changes/2012-11-27-forking-to-organizations/</id>
     <title type="html">Forking to Organizations</title>
-    <published>2012-11-27T08:00:00Z</published>
-    <updated>2012-11-27T08:00:00Z</updated>
+    <published>2012-11-27T07:00:00Z</published>
+    <updated>2012-11-27T07:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -865,8 +879,8 @@ major change of the GitHub API.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2012-10-31:/changes/2012-10-31-gist-comment-uris/</id>
     <title type="html">Gist comment URIs</title>
-    <published>2012-10-31T07:00:00Z</published>
-    <updated>2012-10-31T07:00:00Z</updated>
+    <published>2012-10-31T06:00:00Z</published>
+    <updated>2012-10-31T06:00:00Z</updated>
     <author>
       <name>pezra</name>
       <uri>https://github.com/technoweenie</uri>
@@ -881,8 +895,8 @@ major change of the GitHub API.&lt;/p&gt;</content>
   <entry>
     <id>tag:developer.github.com,2012-10-26:/changes/2012-10-26-notifications-api/</id>
     <title type="html">Notifications API</title>
-    <published>2012-10-26T07:00:00Z</published>
-    <updated>2012-10-26T07:00:00Z</updated>
+    <published>2012-10-26T06:00:00Z</published>
+    <updated>2012-10-26T06:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -952,8 +966,8 @@ X-Poll-Interval: 60
   <entry>
     <id>tag:developer.github.com,2012-10-24:/changes/2012-10-24-set-default-branch/</id>
     <title type="html">Set the default branch for a repository</title>
-    <published>2012-10-24T07:00:00Z</published>
-    <updated>2012-10-24T07:00:00Z</updated>
+    <published>2012-10-24T06:00:00Z</published>
+    <updated>2012-10-24T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -976,8 +990,8 @@ curl -u pengwynn \
   <entry>
     <id>tag:developer.github.com,2012-10-17:/changes/2012-10-17-org-members-redirection/</id>
     <title type="html">Organization Members Resource Changes</title>
-    <published>2012-10-17T07:00:00Z</published>
-    <updated>2012-10-17T07:00:00Z</updated>
+    <published>2012-10-17T06:00:00Z</published>
+    <updated>2012-10-17T06:00:00Z</updated>
     <author>
       <name>pezra</name>
       <uri>https://github.com/technoweenie</uri>
@@ -1006,8 +1020,8 @@ should be using the public membership resources.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2012-10-14:/changes/2012-10-14-rate-limit-changes/</id>
     <title type="html">Rate limit changes for unauthenticated requests</title>
-    <published>2012-10-14T07:00:00Z</published>
-    <updated>2012-10-14T07:00:00Z</updated>
+    <published>2012-10-14T06:00:00Z</published>
+    <updated>2012-10-14T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>

@@ -47,14 +47,13 @@
   <li><a href="#list-your-authorizations">List your authorizations</a></li>
   <li><a href="#get-a-single-authorization">Get a single authorization</a></li>
   <li><a href="#create-a-new-authorization">Create a new authorization</a></li>
-  <li><a href="#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a></li>
   <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   <li><a href="#delete-an-authorization">Delete an authorization</a></li>
   <li><a href="#check-an-authorization">Check an authorization</a></li>
   <li><a href="#more-information">More Information</a></li>
 </ul><p>OAuth2 is a protocol that lets external apps request authorization to
 private details in a user’s GitHub account without getting their
-password. This is preferred over <a href="/v3/auth#basic-authentication">Basic Authentication</a> because tokens can
+password. This is preferred over Basic Authentication because tokens can
 be limited to specific types of data, and can be revoked by users at any
 time.</p>
 
@@ -150,12 +149,10 @@ Accept: application/xml
 
 <h2 id="non-web-application-flow">Non-Web Application Flow</h2>
 
-<p>Use <a href="/v3/auth#basic-authentication">Basic Authentication</a> to create an OAuth2
-token using the <a href="/v3/oauth/#create-a-new-authorization">interface below</a>.  With
-this technique, a username and password need not be stored permanently, and the
-user can revoke access at any time. (Make sure to understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with
-two-factor authentication</a> if
-you or your users have two-factor authentication enabled.)</p>
+<p>Use basic authentication to create an OAuth2 token using the <a href="/v3/oauth/#create-a-new-authorization">interface
+below</a>.  With this technique, a username
+and password need not be stored permanently, and the user can revoke access at
+any time.</p>
 
 <h2 id="redirect-urls">Redirect URLs</h2>
 
@@ -234,11 +231,8 @@ can specify multiple scopes by separating them by a comma.</p>
 
 <h2 id="oauth-authorizations-api">OAuth Authorizations API</h2>
 
-<p>There is an API for users to manage their own tokens.  You can only access your
-own tokens, and only via <a href="/v3/auth#basic-authentication">Basic Authentication</a>.
-(Make sure to understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with two-factor
-authentication</a> if you or your
-users have two-factor authentication enabled.)</p>
+<p>There is an API for users to manage their own tokens.  You can only
+access your own tokens, and only through Basic Authentication.</p>
 
 <h2 id="list-your-authorizations">List your authorizations</h2>
 
@@ -306,7 +300,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>If you need a small number of tokens, implementing the <a href="#web-application-flow">web flow</a>
 can be cumbersome. Instead, tokens can be created using the Authorizations API using
-<a href="/v3/auth#basic-authentication">Basic Authentication</a>. To create tokens for a particular OAuth application, you
+Basic Authentication. To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
 page, linked from your <a href="https://github.com/settings/applications">OAuth applications listing on GitHub</a>. OAuth tokens
 can also be created through the web UI via the <a href="https://github.com/settings/applications">Application settings page</a>.
@@ -367,97 +361,12 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</h2>
-
-<p>This method will create a new authorization for the specified OAuth application,
-only if an authorization for that application doesn’t already exist for the
-user. (The URL includes the 20 character client ID for the OAuth app that is
-requesting the token.) It returns the user’s token for the application if one
-exists. Otherwise, it creates one.</p>
-
-<pre><code>PUT /authorizations/clients/:client_id
-</code></pre>
-
-<h3 id="input-1">Input</h3>
-
-<dl>
-<dt>client_secret</dt>
-  <dd>
-<strong>String</strong> - The 40 character OAuth app client secret associated with the
-client ID specified in the URL.</dd>
-  <dt>scopes</dt>
-  <dd>
-<em>Optional</em> <strong>array</strong> - A list of scopes that this authorization is in.</dd>
-  <dt>note</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - A note to remind you what the OAuth token is for.</dd>
-  <dt>note_url</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - A URL to remind you what app the OAuth token is for.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"client_secret"</span><span class="o">:</span> <span class="s2">"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-if-returning-a-new-token">Response if returning a new token</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/authorizations/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-  <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-if-returning-an-existing-token">Response if returning an existing token</h3>
-
-<pre class="headers"><code>Status: 200 OK
-Location: https://api.github.com/authorizations/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-  <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
-<span class="p">}</span></code></pre>
-
 <h2 id="update-an-existing-authorization">Update an existing authorization</h2>
 
 <pre><code>PATCH /authorizations/:id
 </code></pre>
 
-<h3 id="input-2">Input</h3>
+<h3 id="input-1">Input</h3>
 
 <dl>
 <dt>scopes</dt>
@@ -525,7 +434,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>OAuth applications can use a special API method for checking OAuth token
 validity without running afoul of normal rate limits for failed login attempts.
 Authentication works differently with this particular endpoint. You must use
-<a href="/v3/auth#basic-authentication">Basic Authentication</a> when accessing it, where the username is the OAuth
+Basic Authentication when accessing it, where the username is the OAuth
 application <code>client_id</code> and the password is its <code>client_secret</code>. Invalid tokens
 will return <code>404 NOT FOUND</code>.</p>
 
@@ -569,13 +478,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 links that might be of help:</p>
 
 <ul>
-<li><a href="http://tools.ietf.org/html/rfc6749">OAuth 2 spec</a></li>
+<li><a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-07">OAuth 2 spec</a></li>
   <li><a href="http://developers.facebook.com/docs/technical-guides/login/">Facebook Login API</a></li>
   <li><a href="https://github.com/intridea/oauth2">Ruby OAuth2 lib</a></li>
   <li><a href="https://gist.github.com/9fd1a6199da0465ec87c">Simple Ruby/Sinatra example</a></li>
-  <li>
-<a href="https://gist.github.com/ib-lundgren/6507798">Python Flask example</a> using <a href="https://github.com/requests/requests-oauthlib">requests-oauthlib</a>
-</li>
   <li>
 <a href="https://gist.github.com/e3fbd47fbb7ee3c626bb">Simple Python example</a> using <a href="https://github.com/dgouldin/python-oauth2">python-oauth2</a>
 </li>
@@ -593,8 +499,9 @@ links that might be of help:</p>
             <ul class="js-guides">
               <li><a href="/v3/libraries/">Libraries</a></li>
               <li><a href="/v3/media/">Media Types</a></li>
+              <li><a href="/v3/meta/">Meta</a></li>
               <li><a href="/v3/oauth/">OAuth</a></li>
-              <li><a href="/v3/auth/">Other Authentication Methods</a></li>
+              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
               <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
             </ul>
           </li>
@@ -604,7 +511,6 @@ links that might be of help:</p>
               <li><a href="/guides/getting-started/">Getting Started</a></li>
               <li><a href="/guides/basics-of-authentication/">Basics of Authentication</a></li>
               <li><a href="/guides/rendering-data-as-graphs/">Rendering Data as Graphs</a></li>
-              <li><a href="/guides/working-with-comments/">Working with Comments</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -645,16 +551,6 @@ links that might be of help:</p>
             </ul>
           </li>
           <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/misc/">Miscellaneous</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/emojis/">Emojis</a></li>
-              <li><a href="/v3/gitignore/">Gitignore</a></li>
-              <li><a href="/v3/markdown/">Markdown</a></li>
-              <li><a href="/v3/meta/">Meta</a></li>
-              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
-            </ul>
-          </li>
-          <li class="js-topic">
             <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/orgs/">Orgs</a></h3>
             <ul class="js-guides">
               <li><a href="/v3/orgs/members/">Members</a></li>
@@ -679,8 +575,17 @@ links that might be of help:</p>
               <li><a href="/v3/repos/keys/">Keys</a></li>
               <li><a href="/v3/repos/hooks/">Hooks</a></li>
               <li><a href="/v3/repos/merging/">Merging</a></li>
+              <li><a href="/v3/repos/releases/">Releases</a></li>
               <li><a href="/v3/repos/statistics/">Statistics</a></li>
               <li><a href="/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/users/emails/">Emails</a></li>
+              <li><a href="/v3/users/followers/">Followers</a></li>
+              <li><a href="/v3/users/keys/">Keys</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -693,14 +598,8 @@ links that might be of help:</p>
               <li><a href="/v3/search/legacy/">Legacy Search</a></li>
             </ul>
           </li>
-          <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/users/emails/">Emails</a></li>
-              <li><a href="/v3/users/followers/">Followers</a></li>
-              <li><a href="/v3/users/keys/">Keys</a></li>
-            </ul>
-          </li>
+          <li class="js-guides"><h3><a href="/v3/gitignore/">Gitignore</a></h3></li>
+          <li class="js-guides"><h3><a href="/v3/markdown/">Markdown</a></h3></li>
         </ul>
       </div> <!-- /sidebar-module -->
       <div class="sidebar-module">

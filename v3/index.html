@@ -264,7 +264,7 @@ don’t need to construct URLs on their own.  It is highly recommended that API
 clients use these.  Doing so will make future upgrades of the API easier for
 developers.  All URLs are expected to be proper <a href="http://tools.ietf.org/html/rfc6570">RFC 6570</a> URI templates.</p>
 
-<p>You can then expand these templates using something like the <a href="https://github.com/hannesg/uri_template">uri_template</a>
+<p>You can then expand these templates using something like the <a href="https://github.com/hannesg/uri_template"><code>uri_template</code></a>
 gem:</p>
 
 <pre><code>&gt;&gt; tmpl = URITemplate.new('/notifications{?since,all,participating}')
@@ -477,7 +477,7 @@ Here’s a sample request for a browser hitting <a href="http://calendaraboutnot
 
 <pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com"
 HTTP/1.1 302 Found
-Access-Control-Allow-Origin: *
+Access-Control-Allow-Origin: http://calendaraboutnothing.com
 Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
 Access-Control-Allow-Credentials: true
 </code></pre>
@@ -486,8 +486,8 @@ Access-Control-Allow-Credentials: true
 
 <pre><code>$ curl -i https://api.github.com -H "Origin: http://calendaraboutnothing.com" -X OPTIONS
 HTTP/1.1 204 No Content
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With
+Access-Control-Allow-Origin: http://calendaraboutnothing.com
+Access-Control-Allow-Headers: Authorization, X-Requested-With
 Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE
 Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
 Access-Control-Max-Age: 86400
@@ -568,8 +568,9 @@ through as an array of <code>[url, options]</code> tuples.</p>
             <ul class="js-guides">
               <li><a href="/v3/libraries/">Libraries</a></li>
               <li><a href="/v3/media/">Media Types</a></li>
+              <li><a href="/v3/meta/">Meta</a></li>
               <li><a href="/v3/oauth/">OAuth</a></li>
-              <li><a href="/v3/auth/">Other Authentication Methods</a></li>
+              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
               <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
             </ul>
           </li>
@@ -579,7 +580,6 @@ through as an array of <code>[url, options]</code> tuples.</p>
               <li><a href="/guides/getting-started/">Getting Started</a></li>
               <li><a href="/guides/basics-of-authentication/">Basics of Authentication</a></li>
               <li><a href="/guides/rendering-data-as-graphs/">Rendering Data as Graphs</a></li>
-              <li><a href="/guides/working-with-comments/">Working with Comments</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -620,16 +620,6 @@ through as an array of <code>[url, options]</code> tuples.</p>
             </ul>
           </li>
           <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/misc/">Miscellaneous</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/emojis/">Emojis</a></li>
-              <li><a href="/v3/gitignore/">Gitignore</a></li>
-              <li><a href="/v3/markdown/">Markdown</a></li>
-              <li><a href="/v3/meta/">Meta</a></li>
-              <li><a href="/v3/rate_limit/">Rate Limit</a></li>
-            </ul>
-          </li>
-          <li class="js-topic">
             <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/orgs/">Orgs</a></h3>
             <ul class="js-guides">
               <li><a href="/v3/orgs/members/">Members</a></li>
@@ -654,8 +644,17 @@ through as an array of <code>[url, options]</code> tuples.</p>
               <li><a href="/v3/repos/keys/">Keys</a></li>
               <li><a href="/v3/repos/hooks/">Hooks</a></li>
               <li><a href="/v3/repos/merging/">Merging</a></li>
+              <li><a href="/v3/repos/releases/">Releases</a></li>
               <li><a href="/v3/repos/statistics/">Statistics</a></li>
               <li><a href="/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
+            <ul class="js-guides">
+              <li><a href="/v3/users/emails/">Emails</a></li>
+              <li><a href="/v3/users/followers/">Followers</a></li>
+              <li><a href="/v3/users/keys/">Keys</a></li>
             </ul>
           </li>
           <li class="js-topic">
@@ -668,14 +667,8 @@ through as an array of <code>[url, options]</code> tuples.</p>
               <li><a href="/v3/search/legacy/">Legacy Search</a></li>
             </ul>
           </li>
-          <li class="js-topic">
-            <h3><a href="#" class="js-expand-btn collapsed">&nbsp;</a><a href="/v3/users/">Users</a></h3>
-            <ul class="js-guides">
-              <li><a href="/v3/users/emails/">Emails</a></li>
-              <li><a href="/v3/users/followers/">Followers</a></li>
-              <li><a href="/v3/users/keys/">Keys</a></li>
-            </ul>
-          </li>
+          <li class="js-guides"><h3><a href="/v3/gitignore/">Gitignore</a></h3></li>
+          <li class="js-guides"><h3><a href="/v3/markdown/">Markdown</a></h3></li>
         </ul>
       </div> <!-- /sidebar-module -->
       <div class="sidebar-module">

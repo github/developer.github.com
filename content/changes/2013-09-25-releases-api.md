@@ -50,8 +50,8 @@ The new API is available as a [preview][preview].  This gives developers a chanc
 the API before we freeze changes.  We expect to lift the preview status in 30 days.
 
 As with [the Search API][searchapi], we'll take this opportunity to iterate quickly.  Breaking changes will be announced
-on this developer blog without any advance warning.  Once the preview is period, we'll consider the Releases API unchangeable
-stable for production use.
+on this developer blog without any advance warning.  Once the preview period is over, we'll consider the Releases API unchangeable.
+At that point, it will be stable and suitable for production use.
 
 The preview media type is "application/vnd.github.manifold-preview".  [Manifold](http://en.wikipedia.org/wiki/Eden_Fesi) is
 a member of the Avengers, with the ability to teleport through time and space.  He's the one in the middle holding the spear.

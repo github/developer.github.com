@@ -90,8 +90,8 @@ publicized or not.
 
 ## Publicize a user's membership
 
-The user can publicize their own membership (a user cannot publicize the
-membership for another user).
+The user can publicize their own membership.
+(A user cannot publicize the membership for another user.)
 
     PUT /orgs/:org/public_members/:user
 

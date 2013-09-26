@@ -25,11 +25,8 @@ request is tracking).
   while inside a Pull Request review (the Files Changed tab).
 * `gollum` - Any time a Wiki page is updated.
 * `watch` - Any time a User watches the Repository.
-* `download` - Any time a Download is added to the Repository.
 * `release` - Any time a Release is published in the Repository.
 * `fork` - Any time a Repository is forked.
-* `fork_apply` - Any time a patch is applied to the Repository from the
-  Fork Queue.
 * `member` - Any time a User is added as a collaborator to a
   non-Organization Repository.
 * `public` - Any time a Repository changes from private to public.
@@ -260,4 +257,3 @@ PubSubHubbub documentation][pshb-secret] for more details.
 [post-receive]: http://help.github.com/post-receive-hooks/
 [ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
 [pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify
-

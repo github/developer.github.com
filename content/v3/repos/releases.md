@@ -167,7 +167,7 @@ to **"uploads.github.com"**.  The asset data is expected in its raw binary form,
 instead of JSON.  Everything else about the endpoint is the same.  Pass your
 authentication exactly the same as the rest of the API.
 
-    POST https://uploads.github.com/repos/:owner/:repo/releases/assets?name=foo.zip
+    POST https://uploads.github.com/repos/:owner/:repo/releases/:id/assets?name=foo.zip
 
 This endpoint is provided by a URI template in [the release's API response](#get-a-single-release).
 

@@ -31,7 +31,7 @@ Represents a created repository, branch, or tag.
 Hook name: `create`
 
 ref\_type
-: **string** - The object that was created: "repository", "branch", or
+: **string** - The object that was created. Can be one of "repository", "branch", or
 "tag"
 
 ref
@@ -50,7 +50,7 @@ Represents a deleted branch or tag.
 Hook name: `delete`
 
 ref\_type
-: **string** - The object that was deleted: "branch" or "tag".
+: **string** - The object that was deleted. Can be "branch" or "tag".
 
 ref
 : **string** - The full git ref.
@@ -97,7 +97,7 @@ after
 Hook name: `gist`
 
 action
-: **string** - The action that was performed: "create" or "update"
+: **string** - The action that was performed. Can be "create" or "update"
 
 gist
 : **object** - The [gist](/v3/gists/) itself.
@@ -142,7 +142,7 @@ comment
 Hook name: `issues`
 
 action
-: **string** - The action that was performed: "opened", "closed", or
+: **string** - The action that was performed. Can be one of "opened", "closed", or
 "reopened".
 
 issue
@@ -174,7 +174,7 @@ Hook name: `public`
 Hook name: `pull_request`
 
 action
-: **string** - The action that was performed: "opened", "closed",
+: **string** - The action that was performed. Can be one of "opened", "closed",
 "synchronize", or "reopened".
 
 number
@@ -229,6 +229,16 @@ commits[][distinct]
 : **boolean** - Whether this commit is distinct from any that have been pushed
 before.
 
+## ReleaseEvent
+
+Hook name: `release`
+
+action
+: **string** - The action that was performed. Currently, can only be "published".
+
+release
+: **object** - The [release](/v3/repos/releases/#get-a-single-release) itself.
+
 ## TeamAddEvent
 
 Hook name: `team_add`
@@ -245,11 +255,14 @@ repo
 
 ## WatchEvent
 
-The event's actor is the watcher, and the event's repo is the watched
-repository.
+The WatchEvent is related to starring a repository, not watching.
+See [this API blog post](http://developer.github.com/changes/2012-9-5-watcher-api/)
+for an explanation.
+
+The event’s actor is the user who starred a repository, and the event’s repo is
+the repository that was starred.
 
 Hook name: `watch`
 
 action
-: **string** - The action that was performed.
-
+: **string** - The action that was performed: "started".

@@ -122,7 +122,7 @@ pages[][title]
 : **string** - The current page title.
 
 pages[][action]
-: **string** - The action that was performed on the page.
+: **string** - The action that was performed on the page. Can be "created" or "edited".
 
 pages[][sha]
 : **string** - The latest commit SHA of the page.
@@ -135,7 +135,7 @@ pages[][html_url]
 Hook name: `issue_comment`
 
 action
-: **string** - The action that was performed on the comment.
+: **string** - The action that was performed on the comment. Currently, can only be "created".
 
 issue
 : **object** - The [issue](/v3/issues/) the comment belongs to.
@@ -164,7 +164,7 @@ member
 : **object** - The [user](/v3/users/) that was added.
 
 action
-: **string** - The action that was performed: "added".
+: **string** - The action that was performed. Currently, can only be "added".
 
 ## PublicEvent
 
@@ -271,4 +271,4 @@ the repository that was starred.
 Hook name: `watch`
 
 action
-: **string** - The action that was performed: "started".
+: **string** - The action that was performed. Currently, can only be "started".

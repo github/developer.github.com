@@ -59,6 +59,8 @@ ref
 
 Hook name: `download`
 
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
+
 download
 : **object** - The [download](/v3/repos/downloads/) that was just
 created.
@@ -81,6 +83,8 @@ forkee
 
 Triggered when a patch is applied in the Fork Queue.
 
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
+
 Hook name: `fork_apply`
 
 head
@@ -95,6 +99,8 @@ after
 ## GistEvent
 
 Hook name: `gist`
+
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 action
 : **string** - The action that was performed. Can be "create" or "update"

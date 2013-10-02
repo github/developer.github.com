@@ -239,6 +239,21 @@ action
 release
 : **object** - The [release](/v3/repos/releases/#get-a-single-release) itself.
 
+## StatusEvent
+
+Triggered when a new state is added to a ref.
+
+Hook name: `status`
+
+state
+: **string** - The new state. Can be `pending`, `success`, `failure`, or `error`.
+
+description
+: **string** - The optional human-readable description added to the state.
+
+target_url
+: **string** - The optional link added to the state.
+
 ## TeamAddEvent
 
 Hook name: `team_add`

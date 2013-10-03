@@ -268,6 +268,24 @@ action
 release
 : **object** - The [release](/v3/repos/releases/#get-a-single-release) itself.
 
+## StatusEvent
+
+Triggered when the status of a Git commit changes.
+
+Hook name: `status`
+
+sha
+: **string** - The Commit SHA.
+
+state
+: **string** - The new state. Can be `pending`, `success`, `failure`, or `error`.
+
+description
+: **string** - The optional human-readable description added to the status.
+
+target_url
+: **string** - The optional link added to the status.
+
 ## TeamAddEvent
 
 Triggered when a [user is added to a team](/v3/orgs/teams/#add-team-member) or when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).

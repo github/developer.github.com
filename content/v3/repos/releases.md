@@ -185,10 +185,23 @@ name (URI query parameter)
 
 Send the raw binary content of the asset as the request body.
 
-### Response
+### Response for successful upload
 
 <%= headers 201 %>
 <%= json :release_asset %>
+
+### Response for accepted upload
+
+The upload did not complete, but we will keep trying.
+
+<%= headers 202 %>
+<%= json :release_asset %>
+
+### Response for upstream failure
+
+This may leave an empty asset with a state of "new".  It can be safely deleted.
+
+<%= headers 502 %>
 
 ## Get a single release asset
 

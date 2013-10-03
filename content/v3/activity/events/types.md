@@ -270,18 +270,21 @@ release
 
 ## StatusEvent
 
-Triggered when a new state is added to a ref.
+Triggered when the status of a Git commit changes.
 
 Hook name: `status`
+
+sha
+: **string** - The Commit SHA.
 
 state
 : **string** - The new state. Can be `pending`, `success`, `failure`, or `error`.
 
 description
-: **string** - The optional human-readable description added to the state.
+: **string** - The optional human-readable description added to the status.
 
 target_url
-: **string** - The optional link added to the state.
+: **string** - The optional link added to the status.
 
 ## TeamAddEvent
 

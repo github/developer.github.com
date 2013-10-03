@@ -19,6 +19,8 @@ They're only created for various internal and repository hooks.
 
 ## CommitCommentEvent
 
+Triggered when a [commit comment](/v3/repos/comments/#list-commit-comments-for-a-repository) is created.
+
 Hook name: `commit_comment`
 
 comment
@@ -45,7 +47,7 @@ description
 
 ## DeleteEvent
 
-Represents a deleted branch or tag.
+Represents a [deleted branch or tag](/v3/git/refs/#delete-a-reference).
 
 Hook name: `delete`
 
@@ -57,7 +59,11 @@ ref
 
 ## DownloadEvent
 
+Triggered when a new [download](/v3/repos/downloads/) is created.
+
 Hook name: `download`
+
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 download
 : **object** - The [download](/v3/repos/downloads/) that was just
@@ -65,12 +71,16 @@ created.
 
 ## FollowEvent
 
+Triggered when a user [follows another user](/v3/users/followers/#follow-a-user).
+
 Hook name: `follow`
 
 target
 : **object** - The [user](/v3/users) that was just followed.
 
 ## ForkEvent
+
+Triggered when a user [forks a repository](/v3/repos/forks/#create-a-fork).
 
 Hook name: `fork`
 
@@ -80,6 +90,8 @@ forkee
 ## ForkApplyEvent
 
 Triggered when a patch is applied in the Fork Queue.
+
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 Hook name: `fork_apply`
 
@@ -94,7 +106,11 @@ after
 
 ## GistEvent
 
+Triggered when a [Gist](/v3/gists/) is created or updated.
+
 Hook name: `gist`
+
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 action
 : **string** - The action that was performed. Can be "create" or "update"
@@ -103,6 +119,8 @@ gist
 : **object** - The [gist](/v3/gists/) itself.
 
 ## GollumEvent
+
+Triggered when a Wiki page is created or updated.
 
 Hook name: `gollum`
 
@@ -116,7 +134,7 @@ pages[][title]
 : **string** - The current page title.
 
 pages[][action]
-: **string** - The action that was performed on the page.
+: **string** - The action that was performed on the page. Can be "created" or "edited".
 
 pages[][sha]
 : **string** - The latest commit SHA of the page.
@@ -126,10 +144,12 @@ pages[][html_url]
 
 ## IssueCommentEvent
 
+Triggered when an [issue comment](/v3/issues/comments/) is created.
+
 Hook name: `issue_comment`
 
 action
-: **string** - The action that was performed on the comment.
+: **string** - The action that was performed on the comment. Currently, can only be "created".
 
 issue
 : **object** - The [issue](/v3/issues/) the comment belongs to.
@@ -138,6 +158,8 @@ comment
 : **object** - The [comment](/v3/issues/comments/) itself.
 
 ## IssuesEvent
+
+Triggered when an [issue](/v3/issues) is created, closed or reopened.
 
 Hook name: `issues`
 
@@ -150,7 +172,7 @@ issue
 
 ## MemberEvent
 
-Triggered when a user is added as a collaborator to a repository.
+Triggered when a user is [added as a collaborator](/v3/repos/collaborators/#add-collaborator) to a repository.
 
 Hook name: `member`
 
@@ -158,18 +180,19 @@ member
 : **object** - The [user](/v3/users/) that was added.
 
 action
-: **string** - The action that was performed: "added".
+: **string** - The action that was performed. Currently, can only be "added".
 
 ## PublicEvent
 
-This is triggered when a private repo is open sourced.  Without a doubt: the
-best GitHub event.
+Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without a doubt: the best GitHub event.
 
 Hook name: `public`
 
 (empty payload)
 
 ## PullRequestEvent
+
+Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synchronized.
 
 Hook name: `pull_request`
 
@@ -185,12 +208,16 @@ pull\_request
 
 ## PullRequestReviewCommentEvent
 
+Triggered when a [comment is created on a portion of the unified diff](/v3/pulls/comments) of a pull request.
+
 Hook name: `pull_request_review_comment`
 
 comment
 : **object** - The [comment](/v3/pulls/comments) itself.
 
 ## PushEvent
+
+Triggered when a repository branch is pushed to.
 
 Hook name: `push`
 
@@ -231,6 +258,8 @@ before.
 
 ## ReleaseEvent
 
+Triggered when a [release](/v3/repos/releases/#get-a-single-release) is published.
+
 Hook name: `release`
 
 action
@@ -256,6 +285,10 @@ target_url
 
 ## TeamAddEvent
 
+Triggered when a [user is added to a team](/v3/orgs/teams/#add-team-member) or when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).
+
+Note: this event is created in [users' organization timelines](/v3/activity/events/#list-events-for-an-organization).
+
 Hook name: `team_add`
 
 team
@@ -270,14 +303,13 @@ repo
 
 ## WatchEvent
 
-The WatchEvent is related to starring a repository, not watching.
-See [this API blog post](http://developer.github.com/changes/2012-9-5-watcher-api/)
-for an explanation.
+The WatchEvent is related to [starring a repository](/v3/activity/starring/#star-a-repository), not [watching](/v3/activity/watching/).
+See [this API blog post](/changes/2012-9-5-watcher-api/) for an explanation.
 
-The event’s actor is the user who starred a repository, and the event’s repo is
-the repository that was starred.
+The event’s actor is the [user](/v3/users/) who starred a repository, and the
+event’s repo is the [repository](/v3/repos/) that was starred.
 
 Hook name: `watch`
 
 action
-: **string** - The action that was performed: "started".
+: **string** - The action that was performed. Currently, can only be "started".

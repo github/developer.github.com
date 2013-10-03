@@ -258,7 +258,7 @@ before.
 
 ## ReleaseEvent
 
-Triggered when a [release](/v3/repos/releases/#get-a-single-release) is created.
+Triggered when a [release](/v3/repos/releases/#get-a-single-release) is published.
 
 Hook name: `release`
 

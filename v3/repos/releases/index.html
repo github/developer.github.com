@@ -332,7 +332,7 @@ asset’s name in a URI query parameter.</p>
 <em>Required</em> <strong>string</strong> - The file name of the asset.</dd>
 </dl><p>Send the raw binary content of the asset as the request body.</p>
 
-<h3 id="response-6">Response</h3>
+<h3 id="response-for-successful-upload">Response for successful upload</h3>
 
 <pre class="headers"><code>Status: 201 Created
 X-RateLimit-Limit: 5000
@@ -351,12 +351,41 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
 <span class="p">}</span></code></pre>
 
+<h3 id="response-for-accepted-upload">Response for accepted upload</h3>
+
+<p>The upload did not complete, but we will keep trying.</p>
+
+<pre class="headers"><code>Status: 202 Accepted
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"short description"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
+  <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-for-upstream-failure">Response for upstream failure</h3>
+
+<p>This may leave an empty asset with a state of “new”.  It can be safely deleted.</p>
+
+<pre class="headers"><code>Status: 
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
 <h2 id="get-a-single-release-asset">Get a single release asset</h2>
 
 <pre><code>GET /repos/:owner/:repo/releases/assets/:id
 </code></pre>
 
-<h3 id="response-7">Response</h3>
+<h3 id="response-6">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -406,7 +435,7 @@ place of the filename.</dd>
   <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"Mac binary"</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-8">Response</h3>
+<h3 id="response-7">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -430,7 +459,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>DELETE /repos/:owner/:repo/releases/assets/:id
 </code></pre>
 
-<h3 id="response-9">Response</h3>
+<h3 id="response-8">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

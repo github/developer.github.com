@@ -66,9 +66,12 @@ They’re only created for various internal and repository hooks.</p>
   <li><a href="#pullrequestreviewcommentevent">PullRequestReviewCommentEvent</a></li>
   <li><a href="#pushevent">PushEvent</a></li>
   <li><a href="#releaseevent">ReleaseEvent</a></li>
+  <li><a href="#statusevent">StatusEvent</a></li>
   <li><a href="#teamaddevent">TeamAddEvent</a></li>
   <li><a href="#watchevent">WatchEvent</a></li>
 </ul><h2 id="commitcommentevent">CommitCommentEvent</h2>
+
+<p>Triggered when a <a href="/v3/repos/comments/#list-commit-comments-for-a-repository">commit comment</a> is created.</p>
 
 <p>Hook name: <code>commit_comment</code></p>
 
@@ -98,7 +101,7 @@ They’re only created for various internal and repository hooks.</p>
 <strong>string</strong> - The repository’s current description.</dd>
 </dl><h2 id="deleteevent">DeleteEvent</h2>
 
-<p>Represents a deleted branch or tag.</p>
+<p>Represents a <a href="/v3/git/refs/#delete-a-reference">deleted branch or tag</a>.</p>
 
 <p>Hook name: <code>delete</code></p>
 
@@ -111,7 +114,11 @@ They’re only created for various internal and repository hooks.</p>
 <strong>string</strong> - The full git ref.</dd>
 </dl><h2 id="downloadevent">DownloadEvent</h2>
 
+<p>Triggered when a new <a href="/v3/repos/downloads/">download</a> is created.</p>
+
 <p>Hook name: <code>download</code></p>
+
+<p>Events of this type are <strong>no longer created</strong>, but it’s possible that they exist in timelines of some users.</p>
 
 <dl>
 <dt>download</dt>
@@ -120,6 +127,8 @@ They’re only created for various internal and repository hooks.</p>
 created.</dd>
 </dl><h2 id="followevent">FollowEvent</h2>
 
+<p>Triggered when a user <a href="/v3/users/followers/#follow-a-user">follows another user</a>.</p>
+
 <p>Hook name: <code>follow</code></p>
 
 <dl>
@@ -127,6 +136,8 @@ created.</dd>
   <dd>
 <strong>object</strong> - The <a href="/v3/users">user</a> that was just followed.</dd>
 </dl><h2 id="forkevent">ForkEvent</h2>
+
+<p>Triggered when a user <a href="/v3/repos/forks/#create-a-fork">forks a repository</a>.</p>
 
 <p>Hook name: <code>fork</code></p>
 
@@ -137,6 +148,8 @@ created.</dd>
 </dl><h2 id="forkapplyevent">ForkApplyEvent</h2>
 
 <p>Triggered when a patch is applied in the Fork Queue.</p>
+
+<p>Events of this type are <strong>no longer created</strong>, but it’s possible that they exist in timelines of some users.</p>
 
 <p>Hook name: <code>fork_apply</code></p>
 
@@ -152,7 +165,11 @@ created.</dd>
 <strong>string</strong> - SHA of the repo state after the patch.</dd>
 </dl><h2 id="gistevent">GistEvent</h2>
 
+<p>Triggered when a <a href="/v3/gists/">Gist</a> is created or updated.</p>
+
 <p>Hook name: <code>gist</code></p>
+
+<p>Events of this type are <strong>no longer created</strong>, but it’s possible that they exist in timelines of some users.</p>
 
 <dl>
 <dt>action</dt>
@@ -162,6 +179,8 @@ created.</dd>
   <dd>
 <strong>object</strong> - The <a href="/v3/gists/">gist</a> itself.</dd>
 </dl><h2 id="gollumevent">GollumEvent</h2>
+
+<p>Triggered when a Wiki page is created or updated.</p>
 
 <p>Hook name: <code>gollum</code></p>
 
@@ -177,7 +196,7 @@ created.</dd>
 <strong>string</strong> - The current page title.</dd>
   <dt>pages[][action]</dt>
   <dd>
-<strong>string</strong> - The action that was performed on the page.</dd>
+<strong>string</strong> - The action that was performed on the page. Can be “created” or “edited”.</dd>
   <dt>pages[][sha]</dt>
   <dd>
 <strong>string</strong> - The latest commit SHA of the page.</dd>
@@ -186,12 +205,14 @@ created.</dd>
 <strong>string</strong> - Points to the HTML wiki page.</dd>
 </dl><h2 id="issuecommentevent">IssueCommentEvent</h2>
 
+<p>Triggered when an <a href="/v3/issues/comments/">issue comment</a> is created.</p>
+
 <p>Hook name: <code>issue_comment</code></p>
 
 <dl>
 <dt>action</dt>
   <dd>
-<strong>string</strong> - The action that was performed on the comment.</dd>
+<strong>string</strong> - The action that was performed on the comment. Currently, can only be “created”.</dd>
   <dt>issue</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/issues/">issue</a> the comment belongs to.</dd>
@@ -199,6 +220,8 @@ created.</dd>
   <dd>
 <strong>object</strong> - The <a href="/v3/issues/comments/">comment</a> itself.</dd>
 </dl><h2 id="issuesevent">IssuesEvent</h2>
+
+<p>Triggered when an <a href="/v3/issues">issue</a> is created, closed or reopened.</p>
 
 <p>Hook name: <code>issues</code></p>
 
@@ -212,7 +235,7 @@ created.</dd>
 <strong>object</strong> - The <a href="/v3/issues">issue</a> itself.</dd>
 </dl><h2 id="memberevent">MemberEvent</h2>
 
-<p>Triggered when a user is added as a collaborator to a repository.</p>
+<p>Triggered when a user is <a href="/v3/repos/collaborators/#add-collaborator">added as a collaborator</a> to a repository.</p>
 
 <p>Hook name: <code>member</code></p>
 
@@ -222,17 +245,18 @@ created.</dd>
 <strong>object</strong> - The <a href="/v3/users/">user</a> that was added.</dd>
   <dt>action</dt>
   <dd>
-<strong>string</strong> - The action that was performed: “added”.</dd>
+<strong>string</strong> - The action that was performed. Currently, can only be “added”.</dd>
 </dl><h2 id="publicevent">PublicEvent</h2>
 
-<p>This is triggered when a private repo is open sourced.  Without a doubt: the
-best GitHub event.</p>
+<p>Triggered when a private repository is <a href="/v3/repos/#edit">open sourced</a>.  Without a doubt: the best GitHub event.</p>
 
 <p>Hook name: <code>public</code></p>
 
 <p>(empty payload)</p>
 
 <h2 id="pullrequestevent">PullRequestEvent</h2>
+
+<p>Triggered when a <a href="/v3/pulls">pull request</a> is created, closed, reopened or synchronized.</p>
 
 <p>Hook name: <code>pull_request</code></p>
 
@@ -249,6 +273,8 @@ best GitHub event.</p>
 <strong>object</strong> - The <a href="/v3/pulls">pull request</a> itself.</dd>
 </dl><h2 id="pullrequestreviewcommentevent">PullRequestReviewCommentEvent</h2>
 
+<p>Triggered when a <a href="/v3/pulls/comments">comment is created on a portion of the unified diff</a> of a pull request.</p>
+
 <p>Hook name: <code>pull_request_review_comment</code></p>
 
 <dl>
@@ -256,6 +282,8 @@ best GitHub event.</p>
   <dd>
 <strong>object</strong> - The <a href="/v3/pulls/comments">comment</a> itself.</dd>
 </dl><h2 id="pushevent">PushEvent</h2>
+
+<p>Triggered when a repository branch is pushed to.</p>
 
 <p>Hook name: <code>push</code></p>
 
@@ -297,6 +325,8 @@ best GitHub event.</p>
 before.</dd>
 </dl><h2 id="releaseevent">ReleaseEvent</h2>
 
+<p>Triggered when a <a href="/v3/repos/releases/#get-a-single-release">release</a> is published.</p>
+
 <p>Hook name: <code>release</code></p>
 
 <dl>
@@ -306,7 +336,30 @@ before.</dd>
   <dt>release</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/repos/releases/#get-a-single-release">release</a> itself.</dd>
+</dl><h2 id="statusevent">StatusEvent</h2>
+
+<p>Triggered when the status of a Git commit changes.</p>
+
+<p>Hook name: <code>status</code></p>
+
+<dl>
+<dt>sha</dt>
+  <dd>
+<strong>string</strong> - The Commit SHA.</dd>
+  <dt>state</dt>
+  <dd>
+<strong>string</strong> - The new state. Can be <code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>.</dd>
+  <dt>description</dt>
+  <dd>
+<strong>string</strong> - The optional human-readable description added to the status.</dd>
+  <dt>target_url</dt>
+  <dd>
+<strong>string</strong> - The optional link added to the status.</dd>
 </dl><h2 id="teamaddevent">TeamAddEvent</h2>
+
+<p>Triggered when a <a href="/v3/orgs/teams/#add-team-member">user is added to a team</a> or when a <a href="/v3/orgs/teams/#add-team-repo">repository is added to a team</a>.</p>
+
+<p>Note: this event is created in <a href="/v3/activity/events/#list-events-for-an-organization">users’ organization timelines</a>.</p>
 
 <p>Hook name: <code>team_add</code></p>
 
@@ -323,19 +376,18 @@ older events may not include this in the payload.</dd>
 <strong>object</strong> - The <a href="/v3/repos/">repository</a> that was added to this team.</dd>
 </dl><h2 id="watchevent">WatchEvent</h2>
 
-<p>The WatchEvent is related to starring a repository, not watching.
-See <a href="http://developer.github.com/changes/2012-9-5-watcher-api/">this API blog post</a>
-for an explanation.</p>
+<p>The WatchEvent is related to <a href="/v3/activity/starring/#star-a-repository">starring a repository</a>, not <a href="/v3/activity/watching/">watching</a>.
+See <a href="/changes/2012-9-5-watcher-api/">this API blog post</a> for an explanation.</p>
 
-<p>The event’s actor is the user who starred a repository, and the event’s repo is
-the repository that was starred.</p>
+<p>The event’s actor is the <a href="/v3/users/">user</a> who starred a repository, and the
+event’s repo is the <a href="/v3/repos/">repository</a> that was starred.</p>
 
 <p>Hook name: <code>watch</code></p>
 
 <dl>
 <dt>action</dt>
   <dd>
-<strong>string</strong> - The action that was performed: “started”.</dd>
+<strong>string</strong> - The action that was performed. Currently, can only be “started”.</dd>
 </dl>
       </div>
 

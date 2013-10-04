@@ -75,17 +75,18 @@ code
 
 By default, the response will take the following form:
 
-    access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&token_type=bearer
+    access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&scope=user%2Cgist&token_type=bearer
 
 You can also receive the content in different formats depending on the Accept
 header:
 
     Accept: application/json
-    {"access_token":"e72e16c7e42f292c6912e7710c838347ae178b4a","token_type":"bearer"}
+    {"access_token":"e72e16c7e42f292c6912e7710c838347ae178b4a", "scope":"repo,gist", "token_type":"bearer"}
 
     Accept: application/xml
     <OAuth>
       <token_type>bearer</token_type>
+      <scope>repo,gist</scope>
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
 

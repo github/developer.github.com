@@ -136,3 +136,12 @@ body
 
 <%= headers 204 %>
 
+## Custom media types
+
+These are the supported media types for pull request review comments. You can
+read more about the use of media types in the API [here](/v3/media/).
+
+    application/vnd.github.VERSION.raw+json
+    application/vnd.github.VERSION.text+json
+    application/vnd.github.VERSION.html+json
+    application/vnd.github.VERSION.full+json

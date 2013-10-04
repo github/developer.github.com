@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gist Comments | GitHub API</title>
+  <title>OAuth changes coming</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,165 +36,68 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="gist-comments-api">Gist Comments API</h1>
+    <div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
+<h2 class="title">
+  <a href="/changes/2013-10-04-oauth-changes-coming/">OAuth changes coming</a>
+</h2>
 
-<ul id="markdown-toc">
-<li><a href="#list-comments-on-a-gist">List comments on a gist</a></li>
-  <li><a href="#get-a-single-comment">Get a single comment</a></li>
-  <li><a href="#create-a-comment">Create a comment</a></li>
-  <li><a href="#edit-a-comment">Edit a comment</a></li>
-  <li><a href="#delete-a-comment">Delete a comment</a></li>
-  <li><a href="#custom-media-types">Custom media types</a></li>
-</ul><p>Gist Comments use <a href="#custom-media-types">these custom media types</a>.
-You can read more about the use of media types in the API
-<a href="/v3/media/">here</a>.</p>
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 4, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/2f4861b27dc35663ed271d39f5358261?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+      <a href="https://github.com/tclem">tclem</a>
+  </li>
+</ul>
+</div>
 
-<h2 id="list-comments-on-a-gist">List comments on a gist</h2>
 
-<pre><code>GET /gists/:gist_id/comments
-</code></pre>
+<p>Starting today, we are returning granted scopes as part of the
+<a href="/v3/oauth/#github-redirects-back-to-your-site">access_token response</a>.
+For example, if you are making a POST with the <code>application/json</code>
+mime-type you’ll see an additional field for the granted scopes.</p>
 
-<h3 id="response">Response</h3>
+<pre class="highlight">
+  <code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"access_token"</span><span class="o">:</span><span class="s2">"e72e16c7e42f292c6912e7710c838347ae178b4a"</span><span class="p">,</span>
+  <span class="s2">"scope"</span><span class="o">:</span><span class="s2">"repo,gist"</span><span class="p">,</span>
+  <span class="s2">"token_type"</span><span class="o">:</span><span class="s2">"bearer"</span>
+  <span class="p">}</span></code>
+</pre>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>Right now, these scopes will be identical to what you requested, but we
+are moving towards a feature set that will allow GitHub users to edit
+their scopes, effectively granting your application less access than you
+originally requested. You should be aware of this possibility and adjust
+your application behavior accordingly.</p>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/4d9c63c3a84e77f91de5/comments/1"</span><span class="p">,</span>
-    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-    <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
+<p>Some things to watch out for and keep in mind:</p>
 
-<h2 id="get-a-single-comment">Get a single comment</h2>
+<ul>
+<li>
+    <p>Most third party applications using GitHub OAuth to identify users have
+the best success in adoption by starting out with a request for the
+minimum access that the application can possibly get away with.
+Something like no scopes or just <code>user:email</code> is very sane.</p>
+  </li>
+  <li>
+    <p>It is important to handle the error cases where a users chooses to
+grant you less access than you originally requested. Now that we are
+surfacing the granted scopes on the access_token response, applications
+can warn or otherwise communicate with their users that they will see
+reduced functionality or be unable to perform some actions.</p>
+  </li>
+  <li>
+    <p>Applications can always send users back through the flow again to get
+additional permission, but don’t forget that users can always say no.</p>
+  </li>
+</ul>
+</div>
 
-<pre><code>GET /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/4d9c63c3a84e77f91de5/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="create-a-comment">Create a comment</h2>
-
-<pre><code>POST /gists/:gist_id/comments
-</code></pre>
-
-<h3 id="input">Input</h3>
-
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/gists/comments/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/4d9c63c3a84e77f91de5/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="edit-a-comment">Edit a comment</h2>
-
-<pre><code>PATCH /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="input-1">Input</h3>
-
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/4d9c63c3a84e77f91de5/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="delete-a-comment">Delete a comment</h2>
-
-<pre><code>DELETE /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="custom-media-types">Custom media types</h2>
-
-<p>These are the supported media types for gist comments. You can read more about the
-use of media types in the API <a href="/v3/media/">here</a>.</p>
-
-<pre><code>application/vnd.github.VERSION.raw+json
-application/vnd.github.VERSION.text+json
-application/vnd.github.VERSION.html+json
-application/vnd.github.VERSION.full+json
-</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

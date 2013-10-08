@@ -22,9 +22,9 @@ or [make sure that your scopes are valid](/v3/oauth/#scopes).
 
 ## Why am I not seeing all my results?
 
-Most API calls accessing a list of resources (_e.g._, users, issues, _e.t.c._) support 
-pagination. If you're making requests and receiving an incomplete set of results, you're 
-probably only seeing the first page. You'll need to request the remaining pages 
+Most API calls accessing a list of resources (_e.g._, users, issues, _e.t.c._) support
+pagination. If you're making requests and receiving an incomplete set of results, you're
+probably only seeing the first page. You'll need to request the remaining pages
 in order to get more results.
 
 It's important to *not* try and guess the format of the pagination URL. Not every
@@ -39,6 +39,15 @@ our safety. You can read more about it [here](/v3/#rate-limiting).
 If you're using OAuth or Basic Authentication and are hitting your rate limits,
 you might be able to fix the issue by either caching our results, or [using conditional requests](/v3/#conditional-requests).
 
-In certainly exceptional cases, we may temporarily bump your rate limit higher. You 
-should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest 
+In certain exceptional cases, we may temporarily bump your rate limit higher. You
+should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest
 dreams with the current rate limit (but don't worry, we'll help you out).
+
+## Why can't my server with SSL receive WebHooks?
+
+When we send events to your server, we attempt to negotiate either SSL version 2 or 3.
+If your server requires a specific SSL version and does not support SSL negotiation,
+you can specify a specific version within the [WebHook's config block](http://developer.github.com/v3/repos/hooks/#edit-a-hook).
+
+`ssl`
+  : *Optional* **integer** - Supports either the 2 or 3. It defaults to SSL negotiation.

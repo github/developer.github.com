@@ -226,7 +226,8 @@ NOTE: This does not delete the repo, it just removes it from the team.
 ## List user teams
 
 List all of the teams across all of the organizations to which the
-authenticated user belongs.
+authenticated user belongs. This method requires `user` or `repo`
+[scope][] when authenticating via [OAuth][].
 
     GET /user/teams
 
@@ -234,3 +235,6 @@ authenticated user belongs.
 
 <%= headers 200 %>
 <%= json(:full_team) { |h| [h] } %>
+
+[OAuth]: /v3/oauth/
+[scope]: /v3/oauth/#scopes

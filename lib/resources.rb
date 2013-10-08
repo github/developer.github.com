@@ -613,7 +613,8 @@ module GitHub
     FULL_TEAM = TEAM.merge({
       "permission" => "admin",
       "members_count" => 3,
-      "repos_count" => 10
+      "repos_count" => 10,
+      "organization" =>  ORG
     })
 
     LABEL = {

@@ -286,6 +286,12 @@ description
 target_url
 : **string** - The optional link added to the status.
 
+branches
+: **array** - An array of branch objects containing the status' SHA.
+These branches definitely contain the given SHA, but it may or may not be
+the head of any of them. A maximum of 10 branches will be attached to the
+event.
+
 ## TeamAddEvent
 
 Triggered when a [user is added to a team](/v3/orgs/teams/#add-team-member) or when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).

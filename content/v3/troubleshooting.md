@@ -49,5 +49,5 @@ When we send events to your server, we attempt to negotiate either SSL version 2
 If your server requires a specific SSL version and does not support SSL negotiation,
 you can specify a specific version within the [WebHook's config block](http://developer.github.com/v3/repos/hooks/#edit-a-hook).
 
-ssl
+`ssl`
   : *Optional* **integer** - Supports either the 2 or 3. It defaults to SSL negotiation.

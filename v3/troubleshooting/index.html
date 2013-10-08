@@ -42,6 +42,7 @@
 <li><a href="#why-am-i-getting-a-404-error-on-a-repository-that-exists">Why am I getting a <code>404</code> error on a repository that exists?</a></li>
   <li><a href="#why-am-i-not-seeing-all-my-results">Why am I not seeing all my results?</a></li>
   <li><a href="#can-i-get-my-rate-limits-bumped">Can I get my rate limits bumped?</a></li>
+  <li><a href="#why-cant-my-server-with-ssl-receive-webhooks">Why can’t my server with SSL receive WebHooks?</a></li>
 </ul><p>If you’re encountering some oddities in the API, here’s a list of resolutions to
 some of the problems you may be experiencing.</p>
 
@@ -57,9 +58,9 @@ or <a href="/v3/oauth/#scopes">make sure that your scopes are valid</a>.</p>
 
 <h2 id="why-am-i-not-seeing-all-my-results">Why am I not seeing all my results?</h2>
 
-<p>Most API calls accessing a list of resources (<em>e.g.</em>, users, issues, <em>e.t.c.</em>) support 
-pagination. If you’re making requests and receiving an incomplete set of results, you’re 
-probably only seeing the first page. You’ll need to request the remaining pages 
+<p>Most API calls accessing a list of resources (<em>e.g.</em>, users, issues, <em>e.t.c.</em>) support
+pagination. If you’re making requests and receiving an incomplete set of results, you’re
+probably only seeing the first page. You’ll need to request the remaining pages
 in order to get more results.</p>
 
 <p>It’s important to <em>not</em> try and guess the format of the pagination URL. Not every
@@ -74,9 +75,21 @@ our safety. You can read more about it <a href="/v3/#rate-limiting">here</a>.</p
 <p>If you’re using OAuth or Basic Authentication and are hitting your rate limits,
 you might be able to fix the issue by either caching our results, or <a href="/v3/#conditional-requests">using conditional requests</a>.</p>
 
-<p>In certainly exceptional cases, we may temporarily bump your rate limit higher. You 
-should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest 
+<p>In certain exceptional cases, we may temporarily bump your rate limit higher. You
+should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest
 dreams with the current rate limit (but don’t worry, we’ll help you out).</p>
+
+<h2 id="why-cant-my-server-with-ssl-receive-webhooks">Why can’t my server with SSL receive WebHooks?</h2>
+
+<p>When we send events to your server, we attempt to negotiate either SSL version 2 or 3.
+If your server requires a specific SSL version and does not support SSL negotiation,
+you can specify a specific version within the <a href="http://developer.github.com/v3/repos/hooks/#edit-a-hook">WebHook’s config block</a>.</p>
+
+<dl>
+<dt><code>ssl</code></dt>
+  <dd>
+<em>Optional</em> <strong>integer</strong> - Supports either the 2 or 3. It defaults to SSL negotiation.</dd>
+</dl>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

@@ -52,6 +52,7 @@
   <li><a href="#get-team-repo">Get team repo</a></li>
   <li><a href="#add-team-repo">Add team repo</a></li>
   <li><a href="#remove-team-repo">Remove team repo</a></li>
+  <li><a href="#list-user-teams">List user teams</a></li>
 </ul><p>All actions against teams require at a minimum an authenticated user who
 is a member of the Owners team in the <code>:org</code> being managed. Additionally,
 OAuth users require “user” <a href="/v3/oauth/#scopes">scope</a>.</p>
@@ -92,7 +93,13 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
   <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
+  <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-team">Create team</h2>
@@ -147,7 +154,13 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
   <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
+  <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="edit-team">Edit team</h2>
@@ -186,7 +199,13 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
   <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
+  <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="delete-team">Delete team</h2>
@@ -409,6 +428,38 @@ NOTE: This does not delete the repo, it just removes it from the team.</p>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="list-user-teams">List user teams</h2>
+
+<p>List all of the teams across all of the organizations to which the
+authenticated user belongs. This method requires <code>user</code> or <code>repo</code>
+<a href="/v3/oauth/#scopes">scope</a> when authenticating via <a href="/v3/oauth/">OAuth</a>.</p>
+
+<pre><code>GET /user/teams
+</code></pre>
+
+<h3 id="response-11">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+    <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"organization"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

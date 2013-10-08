@@ -2,13 +2,59 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2013-10-04T04:00:00Z</updated>
+  <updated>2013-10-08T04:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2013-10-08:/changes/2013-10-08-list-all-user-teams/</id>
+    <title type="html">List all teams for the authenticated user</title>
+    <published>2013-10-08T04:00:00Z</published>
+    <updated>2013-10-08T04:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-10-08-list-all-user-teams/" />
+    <content type="html">&lt;p&gt;We just added a &lt;a href="/v3/orgs/teams/#list-user-teams"&gt;new API method&lt;/a&gt; to list all
+the teams for the authenticated user across all organizations:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
+
+[
+  {
+    "name": "Testing",
+    "id": 396018,
+    "slug": "testing",
+    "permission": "pull",
+    "url": "https://api.github.com/teams/396018",
+    "members_url": "https://api.github.com/teams/396018/members{/member}",
+    "repositories_url": "https://api.github.com/teams/396018/repos",
+    "members_count": 1,
+    "repos_count": 0,
+    "organization": {
+      "login": "dotfiles",
+      "id": 1593590,
+      "url": "https://api.github.com/orgs/dotfiles",
+      "repos_url": "https://api.github.com/orgs/dotfiles/repos",
+      "events_url": "https://api.github.com/orgs/dotfiles/events",
+      "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",
+      "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"
+    }
+  },
+  ...
+]
+
+As always, if you have any questions or feedback, please [drop us a line][contact].
+
+[contact]: https://github.com/contact?form[subject]=API+-+Listing+Teams+for+User
+&lt;/pre&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2013-10-04:/changes/2013-10-04-oauth-changes-coming/</id>
     <title type="html">OAuth changes coming</title>
@@ -429,6 +475,23 @@ curl -u defunkt https://api.github.com/feeds
 &lt;p&gt;If you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API"&gt;please drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-create-update-delete-individual-files/</id>
+    <title type="html">Create, update, and delete individual files</title>
+    <published>2013-05-06T04:00:00Z</published>
+    <updated>2013-05-06T04:00:00Z</updated>
+    <author>
+      <name>ymendel</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-05-06-create-update-delete-individual-files/" />
+    <content type="html">&lt;p&gt;We’re following in the footsteps of GitHub.com’s ability to &lt;a href="https://github.com/blog/143-inline-file-editing"&gt;edit&lt;/a&gt; and
+&lt;a href="https://github.com/blog/1327-creating-files-on-github"&gt;create&lt;/a&gt; files in your web browser. Starting today, the
+&lt;a href="/v3/repos/contents/"&gt;Repository Contents API&lt;/a&gt; will let you easily &lt;a href="/v3/repos/contents/#create-a-file"&gt;create&lt;/a&gt;, &lt;a href="/v3/repos/contents/#update-a-file"&gt;update&lt;/a&gt;, and even
+&lt;a href="/v3/repos/contents/#delete-a-file"&gt;delete&lt;/a&gt; individual files.&lt;/p&gt;
+
+&lt;p&gt;Happy editing!&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-repository-stats/</id>
     <title type="html">Repository Statistics</title>
     <published>2013-05-06T04:00:00Z</published>
@@ -451,43 +514,6 @@ but we can’t wait to see what others can do with this information.&lt;/p&gt;
   &lt;li&gt;&lt;strong&gt;&lt;a href="/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repo-owner-and-everyone-else"&gt;Participation&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;&lt;a href="/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day"&gt;Punch Card&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;p&gt;Enjoy!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-create-update-delete-individual-files/</id>
-    <title type="html">Create, update, and delete individual files</title>
-    <published>2013-05-06T04:00:00Z</published>
-    <updated>2013-05-06T04:00:00Z</updated>
-    <author>
-      <name>ymendel</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-05-06-create-update-delete-individual-files/" />
-    <content type="html">&lt;p&gt;We’re following in the footsteps of GitHub.com’s ability to &lt;a href="https://github.com/blog/143-inline-file-editing"&gt;edit&lt;/a&gt; and
-&lt;a href="https://github.com/blog/1327-creating-files-on-github"&gt;create&lt;/a&gt; files in your web browser. Starting today, the
-&lt;a href="/v3/repos/contents/"&gt;Repository Contents API&lt;/a&gt; will let you easily &lt;a href="/v3/repos/contents/#create-a-file"&gt;create&lt;/a&gt;, &lt;a href="/v3/repos/contents/#update-a-file"&gt;update&lt;/a&gt;, and even
-&lt;a href="/v3/repos/contents/#delete-a-file"&gt;delete&lt;/a&gt; individual files.&lt;/p&gt;
-
-&lt;p&gt;Happy editing!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
-    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
-    <published>2013-04-30T04:00:00Z</published>
-    <updated>2013-04-30T04:00:00Z</updated>
-    <author>
-      <name>foca</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
-    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
-Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
-has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-&lt;/pre&gt;
-
-&lt;p&gt;Enjoy.&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/</id>
@@ -528,6 +554,26 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 &lt;p&gt;If you have any questions or feedback, please drop us a line at
 &lt;a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
+    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
+    <published>2013-04-30T04:00:00Z</published>
+    <updated>2013-04-30T04:00:00Z</updated>
+    <author>
+      <name>foca</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
+    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
+Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
+has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+&lt;/pre&gt;
+
+&lt;p&gt;Enjoy.&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2013-04-25:/changes/2013-04-25-deprecating-merge-commit-sha/</id>
@@ -1013,76 +1059,5 @@ major change of the GitHub API.&lt;/p&gt;</content>
 &lt;p&gt;Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.&lt;/p&gt;
 
 &lt;p&gt;We have also added a &lt;code&gt;comments_url&lt;/code&gt; member to the Gist documents. The &lt;code&gt;comments_url&lt;/code&gt; link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using &lt;code&gt;url&lt;/code&gt; and &lt;code&gt;*_url&lt;/code&gt; properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2012-10-26:/changes/2012-10-26-notifications-api/</id>
-    <title type="html">Notifications API</title>
-    <published>2012-10-26T04:00:00Z</published>
-    <updated>2012-10-26T04:00:00Z</updated>
-    <author>
-      <name>technoweenie</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2012-10-26-notifications-api/" />
-    <content type="html">&lt;p&gt;Now that the dust has settled around &lt;a href="https://github.com/blog/1204-notifications-stars"&gt;Notifications and Stars&lt;/a&gt;,
-we’ve unleashed all that :sparkles: in a &lt;a href="http://developer.github.com/v3/activity/notifications/"&gt;brand new API&lt;/a&gt;.  You can now
-view and mark notifications as read.&lt;/p&gt;
-
-&lt;h2 id="endpoint"&gt;Endpoint&lt;/h2&gt;
-
-&lt;p&gt;The core notifications functionality is under the &lt;code&gt;/notifications&lt;/code&gt; endpoint.
-You can look for unread notifications:&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-$ curl https://api.github.com/notifications
-&lt;/pre&gt;
-
-&lt;p&gt;You can filter these notifications to a single Repository:&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-$ curl https://api.github.com/repos/technoweenie/faraday/notifications
-&lt;/pre&gt;
-
-&lt;p&gt;You can mark them as read:&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-# all notifications
-$ curl https://api.github.com/notifications \
-    -X PUT -d '{"read": true}'
-
-# notifications for a single repository
-$ curl https://api.github.com/repos/technoweenie/faraday/notifications \
-    -X PUT -d '{"read": true}'
-&lt;/pre&gt;
-
-&lt;p&gt;You can also modify subscriptions for a Repository or a single thread.&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-# subscription details for the thread (either an Issue or Commit)
-$ curl https://api.github.com/notifications/threads/1/subscription
-
-# subscription details for a whole Repository.
-$ curl https://api.github.com/repos/technoweenie/faraday/subscription
-&lt;/pre&gt;
-
-&lt;h2 id="polling"&gt;Polling&lt;/h2&gt;
-
-&lt;p&gt;The Notifications API is optimized for polling by the last modified time:&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-# Add authentication to your requests
-$ curl -I https://api.github.com/notifications
-HTTP/1.1 200 OK
-Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
-X-Poll-Interval: 60
-
-# Pass the Last-Modified header exactly
-$ curl -I https://api.github.com/notifications
-    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
-HTTP/1.1 304 Not Modified
-X-Poll-Interval: 60
-&lt;/pre&gt;
-
-&lt;p&gt;You can read about the API details in depth in the &lt;a href="http://developer.github.com/v3/activity/notifications/"&gt;Notifications documentation&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gist Comments | GitHub API</title>
+  <title>List all teams for the authenticated user</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,165 +36,63 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="gist-comments-api">Gist Comments API</h1>
+    <div class="change" id="/changes/2013-10-08-list-all-user-teams/">
+<h2 class="title">
+  <a href="/changes/2013-10-08-list-all-user-teams/">List all teams for the authenticated user</a>
+</h2>
 
-<ul id="markdown-toc">
-<li><a href="#list-comments-on-a-gist">List comments on a gist</a></li>
-  <li><a href="#get-a-single-comment">Get a single comment</a></li>
-  <li><a href="#create-a-comment">Create a comment</a></li>
-  <li><a href="#edit-a-comment">Edit a comment</a></li>
-  <li><a href="#delete-a-comment">Delete a comment</a></li>
-  <li><a href="#custom-media-types">Custom media types</a></li>
-</ul><p>Gist Comments use <a href="#custom-media-types">these custom media types</a>.
-You can read more about the use of media types in the API
-<a href="/v3/media/">here</a>.</p>
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 8, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
 
-<h2 id="list-comments-on-a-gist">List comments on a gist</h2>
 
-<pre><code>GET /gists/:gist_id/comments
-</code></pre>
+<p>We just added a <a href="/v3/orgs/teams/#list-user-teams">new API method</a> to list all
+the teams for the authenticated user across all organizations:</p>
 
-<h3 id="response">Response</h3>
+<pre class="terminal">
+$ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+[
+  {
+    "name": "Testing",
+    "id": 396018,
+    "slug": "testing",
+    "permission": "pull",
+    "url": "https://api.github.com/teams/396018",
+    "members_url": "https://api.github.com/teams/396018/members{/member}",
+    "repositories_url": "https://api.github.com/teams/396018/repos",
+    "members_count": 1,
+    "repos_count": 0,
+    "organization": {
+      "login": "dotfiles",
+      "id": 1593590,
+      "url": "https://api.github.com/orgs/dotfiles",
+      "repos_url": "https://api.github.com/orgs/dotfiles/repos",
+      "events_url": "https://api.github.com/orgs/dotfiles/events",
+      "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",
+      "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"
+    }
+  },
+  ...
+]
 
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/0b46c5cead50b5399b49/comments/1"</span><span class="p">,</span>
-    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-    <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
+As always, if you have any questions or feedback, please [drop us a line][contact].
 
-<h2 id="get-a-single-comment">Get a single comment</h2>
+[contact]: https://github.com/contact?form[subject]=API+-+Listing+Teams+for+User
+</pre>
+</div>
 
-<pre><code>GET /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/0b46c5cead50b5399b49/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="create-a-comment">Create a comment</h2>
-
-<pre><code>POST /gists/:gist_id/comments
-</code></pre>
-
-<h3 id="input">Input</h3>
-
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/gists/comments/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/0b46c5cead50b5399b49/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="edit-a-comment">Edit a comment</h2>
-
-<pre><code>PATCH /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="input-1">Input</h3>
-
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/0b46c5cead50b5399b49/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="delete-a-comment">Delete a comment</h2>
-
-<pre><code>DELETE /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="custom-media-types">Custom media types</h2>
-
-<p>These are the supported media types for gist comments. You can read more about the
-use of media types in the API <a href="/v3/media/">here</a>.</p>
-
-<pre><code>application/vnd.github.VERSION.raw+json
-application/vnd.github.VERSION.text+json
-application/vnd.github.VERSION.html+json
-application/vnd.github.VERSION.full+json
-</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

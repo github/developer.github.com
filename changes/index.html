@@ -38,6 +38,61 @@
       <div class="content">
     <h1 id="api-changes">API Changes</h1>
 
+<div class="change" id="/changes/2013-10-08-list-all-user-teams/">
+  <h2 class="title">
+  <a href="/changes/2013-10-08-list-all-user-teams/">List all teams for the authenticated user</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 8, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>We just added a <a href="/v3/orgs/teams/#list-user-teams">new API method</a> to list all
+the teams for the authenticated user across all organizations:</p>
+
+<pre class="terminal">
+$ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
+
+[
+  {
+    "name": "Testing",
+    "id": 396018,
+    "slug": "testing",
+    "permission": "pull",
+    "url": "https://api.github.com/teams/396018",
+    "members_url": "https://api.github.com/teams/396018/members{/member}",
+    "repositories_url": "https://api.github.com/teams/396018/repos",
+    "members_count": 1,
+    "repos_count": 0,
+    "organization": {
+      "login": "dotfiles",
+      "id": 1593590,
+      "url": "https://api.github.com/orgs/dotfiles",
+      "repos_url": "https://api.github.com/orgs/dotfiles/repos",
+      "events_url": "https://api.github.com/orgs/dotfiles/events",
+      "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",
+      "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"
+    }
+  },
+  ...
+]
+
+As always, if you have any questions or feedback, please [drop us a line][contact].
+
+[contact]: https://github.com/contact?form[subject]=API+-+Listing+Teams+for+User
+</pre>
+</div>
+
 <div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
   <h2 class="title">
   <a href="/changes/2013-10-04-oauth-changes-coming/">OAuth changes coming</a>
@@ -529,6 +584,32 @@ curl -u defunkt https://api.github.com/feeds
 <p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
 </div>
 
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/b1b1d33e0655e841d4fd8467359c58d0?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
+</div>
+
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -561,32 +642,6 @@ but we can’t wait to see what others can do with this information.</p>
   <li><strong><a href="/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day">Punch Card</a></strong></li>
 </ul>
 <p>Enjoy!</p>
-</div>
-
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/b1b1d33e0655e841d4fd8467359c58d0?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><a href="https://github.com/ymendel">ymendel</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
 </div>
 
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
@@ -1308,86 +1363,6 @@ major change of the GitHub API.</p>
 <p>Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
 
 <p>We have also added a <code>comments_url</code> member to the Gist documents. The <code>comments_url</code> link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using <code>url</code> and <code>*_url</code> properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.</p>
-</div>
-
-<div class="change" id="/changes/2012-10-26-notifications-api/">
-  <h2 class="title">
-  <a href="/changes/2012-10-26-notifications-api/">Notifications API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    October 26, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/821395fe70906c8290df7f18ac4ac6cf?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"><a href="https://github.com/technoweenie">technoweenie</a>
-  </li>
-</ul>
-</div>
-
-    <p>Now that the dust has settled around <a href="https://github.com/blog/1204-notifications-stars">Notifications and Stars</a>,
-we’ve unleashed all that :sparkles: in a <a href="http://developer.github.com/v3/activity/notifications/">brand new API</a>.  You can now
-view and mark notifications as read.</p>
-
-<h2 id="endpoint">Endpoint</h2>
-
-<p>The core notifications functionality is under the <code>/notifications</code> endpoint.
-You can look for unread notifications:</p>
-
-<pre class="terminal">
-$ curl https://api.github.com/notifications
-</pre>
-
-<p>You can filter these notifications to a single Repository:</p>
-
-<pre class="terminal">
-$ curl https://api.github.com/repos/technoweenie/faraday/notifications
-</pre>
-
-<p>You can mark them as read:</p>
-
-<pre class="terminal">
-# all notifications
-$ curl https://api.github.com/notifications \
-    -X PUT -d '{"read": true}'
-
-# notifications for a single repository
-$ curl https://api.github.com/repos/technoweenie/faraday/notifications \
-    -X PUT -d '{"read": true}'
-</pre>
-
-<p>You can also modify subscriptions for a Repository or a single thread.</p>
-
-<pre class="terminal">
-# subscription details for the thread (either an Issue or Commit)
-$ curl https://api.github.com/notifications/threads/1/subscription
-
-# subscription details for a whole Repository.
-$ curl https://api.github.com/repos/technoweenie/faraday/subscription
-</pre>
-
-<h2 id="polling">Polling</h2>
-
-<p>The Notifications API is optimized for polling by the last modified time:</p>
-
-<pre class="terminal">
-# Add authentication to your requests
-$ curl -I https://api.github.com/notifications
-HTTP/1.1 200 OK
-Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
-X-Poll-Interval: 60
-
-# Pass the Last-Modified header exactly
-$ curl -I https://api.github.com/notifications
-    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
-HTTP/1.1 304 Not Modified
-X-Poll-Interval: 60
-</pre>
-
-<p>You can read about the API details in depth in the <a href="http://developer.github.com/v3/activity/notifications/">Notifications documentation</a>.</p>
 </div>
       </div>
 

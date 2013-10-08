@@ -223,3 +223,14 @@ NOTE: This does not delete the repo, it just removes it from the team.
 
 <%= headers 204 %>
 
+## List user teams
+
+List all of the teams across all of the organizations to which the
+authenticated user belongs.
+
+    GET /user/teams
+
+### Response
+
+<%= headers 200 %>
+<%= json(:full_team) { |h| [h] } %>

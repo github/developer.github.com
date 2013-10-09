@@ -28,6 +28,7 @@ module GitHub
 
       AUTHORS = {
         :technoweenie => '821395fe70906c8290df7f18ac4ac6cf',
+        :tclem        => '2f4861b27dc35663ed271d39f5358261',
         :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0',
         :pezra        => 'f38112009dc16547051c8ac246cee443',
         :rick         => 'a44d5abad6e86cff4e34d9f0839535c9',
@@ -201,7 +202,7 @@ module GitHub
       "name"        => "v0.1",
       "commit"      => {
           "sha"     => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
-          "url"  => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"
       },
       "zipball_url" => "https://github.com/octocat/Hello-World/zipball/v0.1",
       "tarball_url" => "https://github.com/octocat/Hello-World/tarball/v0.1",
@@ -350,11 +351,12 @@ module GitHub
 
 
     PULL = {
-      "url"        => "https://api.github.com/octocat/Hello-World/pulls/1",
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
       "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
       "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
       "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
       "issue_url"  => "https://github.com/octocat/Hello-World/issue/1",
+      "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "number"     => 1,
       "state"      => "open",
       "title"      => "new-feature",
@@ -379,13 +381,15 @@ module GitHub
       },
       "_links" => {
         "self" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/pulls/1"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1"},
         "html" => {'href' =>
           "https://github.com/octocat/Hello-World/pull/1"},
         "comments" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/issues/1/comments"},
+          "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
         "review_comments" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/pulls/1/comments"}
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+        "statuses" => {'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"}
       },
       "user" => USER
     }
@@ -502,11 +506,11 @@ module GitHub
       "updated_at" => "2011-04-14T16:00:49Z",
       "_links" => {
         "self" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/pulls/comments/1"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"},
         "html" => {'href' =>
           "https://github.com/octocat/Hello-World/pull/1#discussion-diff-1"},
         "pull_request" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/pulls/1"}
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1"}
       }
     }
 
@@ -609,7 +613,8 @@ module GitHub
     FULL_TEAM = TEAM.merge({
       "permission" => "admin",
       "members_count" => 3,
-      "repos_count" => 10
+      "repos_count" => 10,
+      "organization" =>  ORG
     })
 
     LABEL = {
@@ -1199,26 +1204,26 @@ module GitHub
     }
     TREE_EXTRA = {
       "sha"  => "fc6274d15fa3ae2ab983129fb037999f264ba9a7",
-      "url"  => "https://api.github.com/repo/octocat/Hello-World/trees/fc6274d15fa3ae2ab983129fb037999f264ba9a7",
+      "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/fc6274d15fa3ae2ab983129fb037999f264ba9a7",
       "tree" => [ {
           "path" => "subdir/file.txt",
           "mode" => "100644",
           "type" => "blob",
           "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
-          "url"  => "https://api.github.com/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
       } ]
     }
     TREE_NEW = {
       "sha"  => "cd8274d15fa3ae2ab983129fb037999f264ba9a7",
-      "url"  => "https://api.github.com/repo/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7",
+      "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7",
       "tree" => [ {
           "path" => "file.rb",
           "mode" => "100644",
           "type" => "blob",
           "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
-          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
       } ]
     }
 

@@ -48,7 +48,7 @@ against cross-site request forgery attacks.
 
 If the user accepts your request, GitHub redirects back to your site
 with a temporary code in a `code` parameter as well as the state you provided in
-the previous step in a state parameter. If the states don't match, the request
+the previous step in a `state` parameter. If the states don't match, the request
 has been created by a third party and the process should be aborted.
 
 Exchange this for an access token:
@@ -75,17 +75,18 @@ code
 
 By default, the response will take the following form:
 
-    access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&token_type=bearer
+    access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&scope=user%2Cgist&token_type=bearer
 
 You can also receive the content in different formats depending on the Accept
 header:
 
     Accept: application/json
-    {"access_token":"e72e16c7e42f292c6912e7710c838347ae178b4a","token_type":"bearer"}
+    {"access_token":"e72e16c7e42f292c6912e7710c838347ae178b4a", "scope":"repo,gist", "token_type":"bearer"}
 
     Accept: application/xml
     <OAuth>
       <token_type>bearer</token_type>
+      <scope>repo,gist</scope>
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
 

@@ -164,6 +164,9 @@ including the filename with a null hash.
 
 **Note**: Previously `/gists/:id/fork`
 
+_Note_: You cannot fork your own gists
+
+
 ### Response
 
 <%= headers 201, :Location => "https://api.github.com/gists/2" %>

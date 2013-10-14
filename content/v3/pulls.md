@@ -31,6 +31,9 @@ Pull Requests have these possible link relations:
 `review_comments`
 : The API location of this Pull Request's Review comments.
 
+`statuses`
+: The API location of this Pull Request's commit statuses, which are the statuses of its `head` branch.
+
 ## List pull requests
 
     GET /repos/:owner/:repo/pulls

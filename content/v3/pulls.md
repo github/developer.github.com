@@ -32,7 +32,7 @@ Pull Requests have these possible link relations:
 : The API location of this Pull Request's Review comments.
 
 `statuses`
-: The API location of this Pull Request's statuses, which are the statuses of its `head` branch.
+: The API location of this Pull Request's commit statuses, which are the statuses of its `head` branch.
 
 ## List pull requests
 

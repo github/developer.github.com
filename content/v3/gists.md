@@ -66,7 +66,7 @@ description
 : _Optional_ **string**
 
 public
-: _Optional_ **boolean** - If missing, the gist will be secret.
+: _Optional_ **boolean** - Default: `false`.
 
 files
 : _Required_ **hash** - Files that make up this gist. The key of which

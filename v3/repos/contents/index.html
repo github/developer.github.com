@@ -63,7 +63,7 @@ Base64 encoded content. See <a href="#custom-media-types">media types</a> for re
 <dl>
 <dt>ref</dt>
   <dd>
-<em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag.  Defaults to <code>master</code>.</dd>
+<em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag. If not provided, uses the repository’s default branch (usually <code>master</code>).</dd>
 </dl><h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
@@ -111,7 +111,7 @@ Directories and submodules do <em>not</em> support custom media types.</p>
 <em>Optional</em> <strong>string</strong> - The content path.</dd>
   <dt>ref</dt>
   <dd>
-<em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag.  Defaults to <code>master</code>.</dd>
+<em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag. If not provided, uses the repository’s default branch (usually <code>master</code>).</dd>
 </dl><h3 id="response-if-content-is-a-file">Response if content is a file</h3>
 
 <pre class="headers"><code>Status: 200 OK
@@ -251,12 +251,12 @@ Git uses the given URL when cloning the submodule repository, and checks out the
 <em>Required</em> <strong>string</strong> - The new file content, Base64 encoded.</dd>
   <dt>branch</dt>
   <dd>
-<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s
 default branch (usually <code>master</code>).</dd>
 </dl><h3 id="optional-parameters">Optional Parameters</h3>
 
 <p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
-information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+information if omitted. If the <code>committer</code> information is omitted, the authenticated
 user’s information is used.</p>
 
 <p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use
@@ -361,12 +361,12 @@ X-RateLimit-Remaining: 4999</code></pre>
 <em>Required</em> <strong>string</strong> - The blob SHA of the file being replaced.</dd>
   <dt>branch</dt>
   <dd>
-<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s
 default branch (usually <code>master</code>).</dd>
 </dl><h3 id="optional-parameters-1">Optional Parameters</h3>
 
 <p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
-information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+information if omitted. If the <code>committer</code> information is omitted, the authenticated
 user’s information is used.</p>
 
 <p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use
@@ -469,12 +469,12 @@ X-RateLimit-Remaining: 4999</code></pre>
 <em>Required</em> <strong>string</strong> - The blob SHA of the file being removed.</dd>
   <dt>branch</dt>
   <dd>
-<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s
 default branch (usually <code>master</code>).</dd>
 </dl><h3 id="optional-parameters-2">Optional Parameters</h3>
 
 <p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
-information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+information if omitted. If the <code>committer</code> information is omitted, the authenticated
 user’s information is used.</p>
 
 <p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use

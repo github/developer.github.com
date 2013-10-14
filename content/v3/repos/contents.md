@@ -21,7 +21,7 @@ READMEs support [a custom media type](#custom-media-types) for getting the raw c
 ### Parameters
 
 ref
-: _Optional_ **string** - The String name of the Commit/Branch/Tag.  Defaults to `master`.
+: _Optional_ **string** - The String name of the Commit/Branch/Tag. If not provided, uses the repository’s default branch (usually `master`).
 
 ### Response
 
@@ -48,7 +48,7 @@ path
 : _Optional_ **string** - The content path.
 
 ref
-: _Optional_ **string** - The String name of the Commit/Branch/Tag.  Defaults to `master`.
+: _Optional_ **string** - The String name of the Commit/Branch/Tag. If not provided, uses the repository’s default branch (usually `master`).
 
 ### Response if content is a file
 
@@ -97,13 +97,13 @@ content
 : _Required_ **string** - The new file content, Base64 encoded.
 
 branch
-: _Optional_ **string** - The branch name. If not provided, uses the repository's 
+: _Optional_ **string** - The branch name. If not provided, uses the repository's
 default branch (usually `master`).
 
 ### Optional Parameters
 
 The `author` section is optional and is filled in with the `committer`
-information if omitted. If the `committer` information is omitted, the authenticated 
+information if omitted. If the `committer` information is omitted, the authenticated
 user's information is used.
 
 You must provide values for both `name` and `email`, whether you choose to use
@@ -154,13 +154,13 @@ sha
 : _Required_ **string** - The blob SHA of the file being replaced.
 
 branch
-: _Optional_ **string** - The branch name. If not provided, uses the repository's 
+: _Optional_ **string** - The branch name. If not provided, uses the repository's
 default branch (usually `master`).
 
 ### Optional Parameters
 
 The `author` section is optional and is filled in with the `committer`
-information if omitted. If the `committer` information is omitted, the authenticated 
+information if omitted. If the `committer` information is omitted, the authenticated
 user's information is used.
 
 You must provide values for both `name` and `email`, whether you choose to use
@@ -209,13 +209,13 @@ sha
 : _Required_ **string** - The blob SHA of the file being removed.
 
 branch
-: _Optional_ **string** - The branch name. If not provided, uses the repository's 
+: _Optional_ **string** - The branch name. If not provided, uses the repository's
 default branch (usually `master`).
 
 ### Optional Parameters
 
 The `author` section is optional and is filled in with the `committer`
-information if omitted. If the `committer` information is omitted, the authenticated 
+information if omitted. If the `committer` information is omitted, the authenticated
 user's information is used.
 
 You must provide values for both `name` and `email`, whether you choose to use

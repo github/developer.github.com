@@ -40,7 +40,7 @@ ref
 : **string** - The git ref (or `null` if only a repository was created).
 
 master\_branch
-: **string** - The name of the repository's master branch.
+: **string** - The name of the repository's default branch (usually `master`).
 
 description
 : **string** - The repository's current description.

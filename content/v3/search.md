@@ -223,9 +223,11 @@ q
    * [Language](https://help.github.com/articles/searching-issues#language)
      Searches for issues within repositories that match a certain language.
    * [Created and Last Updated](https://help.github.com/articles/searching-issues#created-and-last-updated)
-      Filters issues based on times of creation, or when they were last updated.
+     Filters issues based on times of creation, or when they were last updated.
    * [Comments](https://help.github.com/articles/searching-issues#comments)
-      Filters issues based on the quantity of comments.
+     Filters issues based on the quantity of comments.
+   * [Users or Repositories](https://help.github.com/articles/searching-issues#users-organizations-and-repositories)
+     Limits searches to a specific user or repository.
 
 sort
 : _Optional_ Sort field. One of `comments`, `created`, or `updated`. If not
@@ -310,7 +312,7 @@ order
 
 Imagine you're looking for a list of popular users. You might try out this query:
 
-    https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
+    https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000
 
 Here, we're looking at users with the name Tom. We're only interested in those
 with more than 42 repositories, and only if they have over 1,000 followers.
@@ -327,7 +329,7 @@ media type in your Accept header. For example, via curl, the above query would
 look like this:
 
     curl -H 'Accept: application/vnd.github.preview.text-match+json' \
-      https://api.github.com/search/users?q=tom+repos:%3A42+followers:%3A1000
+      https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as

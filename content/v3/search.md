@@ -226,6 +226,8 @@ q
       Filters issues based on times of creation, or when they were last updated.
    * [Comments](https://help.github.com/articles/searching-issues#comments)
       Filters issues based on the quantity of comments.
+   * [Users or Repositories](https://help.github.com/articles/searching-issues#users-organizations-and-repositories)
+     Limits searches to a specific user or repository.
 
 sort
 : _Optional_ Sort field. One of `comments`, `created`, or `updated`. If not

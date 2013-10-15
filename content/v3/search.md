@@ -223,9 +223,9 @@ q
    * [Language](https://help.github.com/articles/searching-issues#language)
      Searches for issues within repositories that match a certain language.
    * [Created and Last Updated](https://help.github.com/articles/searching-issues#created-and-last-updated)
-      Filters issues based on times of creation, or when they were last updated.
+     Filters issues based on times of creation, or when they were last updated.
    * [Comments](https://help.github.com/articles/searching-issues#comments)
-      Filters issues based on the quantity of comments.
+     Filters issues based on the quantity of comments.
    * [Users or Repositories](https://help.github.com/articles/searching-issues#users-organizations-and-repositories)
      Limits searches to a specific user or repository.
 

@@ -11,7 +11,13 @@ we're making sure that it's ready to handle the traffic from all the apps you'll
 In order to support the expected volume of requests, we're applying some new validation rules to the [Code Search API][code-search-docs].
 Starting today, you will need to scope your code queries to a specific set of [users, organizations, or repositories][search-by-user-org-repo].
 
-**TODO**: Include an example?
+For example, with this query, we're searching for code from [@twitter][] or [@facebook][] that uses an MIT License:
+
+    MIT License @twitter @facebook
+
+And here, we're looking for uses of the underscore library in [@mozilla's BrowserQuest][@mozilla/BrowserQuest] repository:
+
+    underscore language:js @mozilla/BrowserQuest
 
 By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
 
@@ -21,6 +27,9 @@ However, rather than delay the stable release of the Code Search API, we're putt
 
 As always, if you have any questions or feedback, please [get in touch][contact].
 
+[@facebook]: https://github.com/facebook
+[@twitter]: https://github.com/twitter
+[@mozilla/BrowserQuest]: https://github.com/mozilla/BrowserQuest
 [code-search-docs]: /v3/search/#search-code
 [contact]: https://github.com/contact?form[subject]=New+Validation+Rules+for+Code+Search+API
 [search-by-user-org-repo]: https://help.github.com/articles/searching-code#users-organizations-and-repositories

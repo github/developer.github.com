@@ -23,7 +23,6 @@ By ensuring that code queries are more targeted in nature, the API will be ready
 
 As we continue to tune the Search API, we hope to relax this validation in the future.
 There's no ETA, but we'd like to relax it as soon as it's feasible.
-However, rather than delay the stable release of the Code Search API, we're putting this validation in place for now.
 
 As always, if you have any questions or feedback, please [get in touch][contact].
 

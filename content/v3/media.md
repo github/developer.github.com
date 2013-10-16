@@ -84,18 +84,18 @@ default if you do not pass any specific media type.
 Return a text only representation of the markdown body. Response will
 include `body_text`.
 
-### Html
+### HTML
 
     application/vnd.github.VERSION.html+json
 
-Return html rendered from the body's markdown. Response will include
+Return HTML rendered from the body's markdown. Response will include
 `body_html`.
 
 ### Full
 
     application/vnd.github.VERSION.full+json
 
-Return raw, text and html representations. Response will include `body`,
+Return raw, text and HTML representations. Response will include `body`,
 `body_text`, and `body_html`:
 
 ## Git Blob Properties

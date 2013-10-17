@@ -8,8 +8,13 @@ author_name: jasonrudolph
 As we [prepare to end the preview period][sept-search-api-post] for the new search API,
 we're making sure that it's ready to handle the traffic from all the apps you'll build on top of it.
 
-In order to support the expected volume of requests, we're applying some new validation rules to the [Code Search API][code-search-docs].
-Starting today, you will need to scope your code queries to a specific set of [users, organizations, or repositories][search-by-user-org-repo].
+## New Validation Rules
+
+In order to support the expected volume of requests, we're applying some new validation rules to the [Code Search API][code-search-api].
+Starting today, you will need to scope your code queries to a specific set of users, organizations, or repositories.
+
+You specify the query via the `q` parameter.
+The value must include [at least one user, organization, or repository][search-by-user-org-repo].
 
 For example, with this query, we're searching for code from [@twitter][] or [@facebook][] that uses an MIT License:
 
@@ -19,7 +24,18 @@ And here, we're looking for uses of the underscore library in [@mozilla's Browse
 
     underscore language:js @mozilla/BrowserQuest
 
+All the [code search qualifiers][code-search-qualifiers] are still available to you.
+A [user, organization, or repository qualifier][search-by-user-org-repo] is now required.
+The other search qualifiers are still optional.
+
 By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
+
+## Other Search Types Not Affected
+
+This new validation only applies to the [Code Search API][code-search-api].
+It does not apply to the Search API for [issues][issue-search-api], [users][user-search-api], or [repositories][repo-search-api].
+
+This validation does not affect searches performed on [github.com/search][web-search].
 
 As we continue to tune the Search API, we hope to relax this validation in the future.
 There's no ETA, but we'd like to relax it as soon as it's feasible.
@@ -29,7 +45,12 @@ As always, if you have any questions or feedback, please [get in touch][contact]
 [@facebook]: https://github.com/facebook
 [@twitter]: https://github.com/twitter
 [@mozilla/BrowserQuest]: https://github.com/mozilla/BrowserQuest
-[code-search-docs]: /v3/search/#search-code
+[code-search-api]: /v3/search/#search-code
+[code-search-qualifiers]: https://help.github.com/articles/searching-code#users-organizations-and-repositories
 [contact]: https://github.com/contact?form[subject]=New+Validation+Rules+for+Code+Search+API
+[issue-search-api]: /v3/search/#search-issues
+[repo-search-api]: /v3/search/#search-repositories
 [search-by-user-org-repo]: https://help.github.com/articles/searching-code#users-organizations-and-repositories
 [sept-search-api-post]: /changes/2013-09-28-an-update-on-the-new-search-api/
+[user-search-api]: /v3/search/#search-users
+[web-search]: https://github.com/search

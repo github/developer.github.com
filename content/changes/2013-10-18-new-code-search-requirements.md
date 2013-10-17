@@ -34,8 +34,6 @@ All the various [code search qualifiers][code-search-qualifiers] are still avail
 A [user, organization, or repository qualifier][search-by-user-org-repo] is now required.
 The other search qualifiers are still optional.
 
-By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
-
 ## Other Search Types Not Affected
 
 This new validation only applies to the [Code Search API][code-search-api].
@@ -43,6 +41,7 @@ It does not apply to the Search API for [issues][issue-search-api], [users][user
 
 This validation does not affect searches performed on [github.com/search][web-search].
 
+By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
 As we continue to tune the Search API, we hope to relax this validation in the future.
 There's no ETA, but we'd like to relax it as soon as it's feasible.
 

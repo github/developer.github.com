@@ -24,7 +24,7 @@ And here, we're looking for uses of the underscore library in [@mozilla's Browse
 
     underscore language:js @mozilla/BrowserQuest
 
-All the [code search qualifiers][code-search-qualifiers] are still available to you.
+All the various [code search qualifiers][code-search-qualifiers] are still available to you.
 A [user, organization, or repository qualifier][search-by-user-org-repo] is now required.
 The other search qualifiers are still optional.
 

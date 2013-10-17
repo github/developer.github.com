@@ -1,6 +1,6 @@
 ---
 kind: change
-title: New Validation Rules for the Code Search API
+title: New Validation Rule for Beta Code Search API
 created_at: 2013-10-18
 author_name: jasonrudolph
 ---
@@ -8,9 +8,9 @@ author_name: jasonrudolph
 As we [prepare to end the preview period][sept-search-api-post] for the new search API,
 we're making sure that it's ready to handle the traffic from all the apps you'll build on top of it.
 
-## New Validation Rules
+## New Validation Rule
 
-In order to support the expected volume of requests, we're applying some new validation rules to the [Code Search API][code-search-api].
+In order to support the expected volume of requests, we're applying a new validation rule to the [Code Search API][code-search-api].
 Starting today, you will need to scope your code queries to a specific set of users, organizations, or repositories.
 
 You specify the query via the `q` parameter.
@@ -47,7 +47,7 @@ As always, if you have any questions or feedback, please [get in touch][contact]
 [@mozilla/BrowserQuest]: https://github.com/mozilla/BrowserQuest
 [code-search-api]: /v3/search/#search-code
 [code-search-qualifiers]: https://help.github.com/articles/searching-code#users-organizations-and-repositories
-[contact]: https://github.com/contact?form[subject]=New+Validation+Rules+for+Code+Search+API
+[contact]: https://github.com/contact?form[subject]=New+Validation+Rule+for+Code+Search+API
 [issue-search-api]: /v3/search/#search-issues
 [repo-search-api]: /v3/search/#search-repositories
 [search-by-user-org-repo]: https://help.github.com/articles/searching-code#users-organizations-and-repositories

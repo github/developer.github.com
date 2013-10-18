@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gist Comments | GitHub API</title>
+  <title>New Validation Rule for Beta Code Search API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -36,165 +36,72 @@
 
     <div id="wrapper">
       <div class="content">
-    <h1 id="gist-comments-api">Gist Comments API</h1>
+    <div class="change" id="/changes/2013-10-18-new-code-search-requirements/">
+<h2 class="title">
+  <a href="/changes/2013-10-18-new-code-search-requirements/">New Validation Rule for Beta Code Search API</a>
+</h2>
 
-<ul id="markdown-toc">
-<li><a href="#list-comments-on-a-gist">List comments on a gist</a></li>
-  <li><a href="#get-a-single-comment">Get a single comment</a></li>
-  <li><a href="#create-a-comment">Create a comment</a></li>
-  <li><a href="#edit-a-comment">Edit a comment</a></li>
-  <li><a href="#delete-a-comment">Delete a comment</a></li>
-  <li><a href="#custom-media-types">Custom media types</a></li>
-</ul><p>Gist Comments use <a href="#custom-media-types">these custom media types</a>.
-You can read more about the use of media types in the API
-<a href="/v3/media/">here</a>.</p>
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 18, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/592e1e6f041f9a4ec51846fd82013aea?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
 
-<h2 id="list-comments-on-a-gist">List comments on a gist</h2>
 
-<pre><code>GET /gists/:gist_id/comments
+<p>As we <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">prepare to end the preview period</a> for the new search API,
+we’re making sure that it’s ready to handle the traffic from all the apps you’ll build on top of it.</p>
+
+<h2 id="new-validation-rule">New Validation Rule</h2>
+
+<p>In order to support the expected volume of requests, we’re applying a new validation rule to the <a href="/v3/search/#search-code">Code Search API</a>.
+Starting today, you will need to scope your code queries to a specific set of users, organizations, or repositories.</p>
+
+<p>As usual, you specify the query via the <code>q</code> parameter.
+The value must include <a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">at least one user, organization, or repository</a>.</p>
+
+<p>For example, with this query, we’re searching for code from <a href="https://github.com/twitter">@twitter</a> or <a href="https://github.com/facebook">@facebook</a> that uses an MIT License:</p>
+
+<pre><code>MIT License @twitter @facebook
 </code></pre>
 
-<h3 id="response">Response</h3>
+<p>And here, we’re looking for uses of the underscore library in <a href="https://github.com/mozilla/BrowserQuest">@mozilla’s BrowserQuest</a> repository:</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/e13f77ea7515080534c5/comments/1"</span><span class="p">,</span>
-    <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-    <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-    <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h2 id="get-a-single-comment">Get a single comment</h2>
-
-<pre><code>GET /gists/:gist_id/comments/:id
+<pre><code>underscore language:js @mozilla/BrowserQuest
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<p>To perform these queries via the API, we would use the following URLs (respectively):</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<pre><code>https://api.github.com/search/code?q=MIT+License+%40twitter+%40facebook
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/e13f77ea7515080534c5/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="create-a-comment">Create a comment</h2>
-
-<pre><code>POST /gists/:gist_id/comments
+https://api.github.com/search/code?q=underscore+language%3Ajs+%40mozilla%2FBrowserQuest
 </code></pre>
 
-<h3 id="input">Input</h3>
+<p>All the various <a href="https://help.github.com/articles/searching-code">code search qualifiers</a> are still available to you.
+A <a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">user, organization, or repository qualifier</a> is now required.
+The other search qualifiers are still optional.</p>
 
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
+<h2 id="other-search-types-not-affected">Other Search Types Not Affected</h2>
 
-<h3 id="response-2">Response</h3>
+<p>This new validation only applies to the <a href="/v3/search/#search-code">Code Search API</a>.
+It does not apply to the Search API for <a href="/v3/search/#search-issues">issues</a>, <a href="/v3/search/#search-users">users</a>, or <a href="/v3/search/#search-repositories">repositories</a>.</p>
 
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/gists/comments/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>This validation does not affect searches performed on <a href="https://github.com/search">github.com/search</a>.</p>
 
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/e13f77ea7515080534c5/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
+<p>By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
+As we continue to tune the Search API, we hope to relax this validation in the future.
+There’s no ETA, but we’d like to relax it as soon as it’s feasible.</p>
 
-<h2 id="edit-a-comment">Edit a comment</h2>
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Validation+Rule+for+Code+Search+API">get in touch</a>.</p>
+</div>
 
-<pre><code>PATCH /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="input-1">Input</h3>
-
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/e13f77ea7515080534c5/comments/1"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"Just commenting for the sake of commenting"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-  <span class="p">},</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-18T23:23:56Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="delete-a-comment">Delete a comment</h2>
-
-<pre><code>DELETE /gists/:gist_id/comments/:id
-</code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="custom-media-types">Custom media types</h2>
-
-<p>These are the supported media types for gist comments. You can read more about the
-use of media types in the API <a href="/v3/media/">here</a>.</p>
-
-<pre><code>application/vnd.github.VERSION.raw+json
-application/vnd.github.VERSION.text+json
-application/vnd.github.VERSION.html+json
-application/vnd.github.VERSION.full+json
-</code></pre>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

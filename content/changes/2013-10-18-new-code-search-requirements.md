@@ -13,7 +13,7 @@ we're making sure that it's ready to handle the traffic from all the apps you'll
 In order to support the expected volume of requests, we're applying a new validation rule to the [Code Search API][code-search-api].
 Starting today, you will need to scope your code queries to a specific set of users, organizations, or repositories.
 
-You specify the query via the `q` parameter.
+As usual, you specify the query via the `q` parameter.
 The value must include [at least one user, organization, or repository][search-by-user-org-repo].
 
 For example, with this query, we're searching for code from [@twitter][] or [@facebook][] that uses an MIT License:

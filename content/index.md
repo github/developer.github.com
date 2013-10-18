@@ -58,7 +58,7 @@ objects.
 
 * `gravatar_url` is being deprecated in favor of `avatar_url` for all
   responses that include users or orgs. A default size is no longer
-  included in the url.
+  included in the URL.
 * Creating new gists (both anonymously and with an authenticated user)
   should use `POST /gists` from now on. `POST /users/:user/gists` is no
   longer supported.

@@ -17,7 +17,7 @@ useful in the GitHub UI.
 
 As an example, one common use is for continuous integration
 services to mark commits as passing or failing builds using Status.  The
-`target_url` would be the full url to the build output, and the
+`target_url` would be the full URL to the build output, and the
 `description` would be the high level summary of what happened with the
 build.
 
@@ -54,7 +54,7 @@ state
 `success`, `error`, or `failure`.
 
 target_url
-: _Optional_ **string** Target url to associate with this status.  This
+: _Optional_ **string** Target URL to associate with this status.  This
 URL will be linked from the GitHub UI to allow users to easily see the
 'source' of the Status.
 

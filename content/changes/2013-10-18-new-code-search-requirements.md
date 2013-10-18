@@ -51,7 +51,7 @@ As always, if you have any questions or feedback, please [get in touch][contact]
 [@twitter]: https://github.com/twitter
 [@mozilla/BrowserQuest]: https://github.com/mozilla/BrowserQuest
 [code-search-api]: /v3/search/#search-code
-[code-search-qualifiers]: https://help.github.com/articles/searching-code#users-organizations-and-repositories
+[code-search-qualifiers]: https://help.github.com/articles/searching-code
 [contact]: https://github.com/contact?form[subject]=New+Validation+Rule+for+Code+Search+API
 [issue-search-api]: /v3/search/#search-issues
 [repo-search-api]: /v3/search/#search-repositories

@@ -37,12 +37,16 @@ enter the password.)
 curl -u mojombo https://api.github.com/user
 </pre>
 
+Problems with the `curl` command above? Be sure that you use the word "user" at the end of the URL,
+and *not* your username (i.e. not "mojombo"). (we will know who you from your "-u" username 
+and don't need it repeated)
+
 ### Via OAuth Tokens
 
 Alternatively, you can authenticate using [personal access
 tokens][personal-access-tokens] or OAuth tokens. To do so, provide the token as
-the username and provide a blank password or a password of `x-oauth-basic`. For
-example:
+the username and provide a blank password or a password of `x-oauth-basic`. 
+Here is the OAuth Token example (again, use the literal word "user" on the end of the URL, not your username):
 
 <pre class='terminal'>
 curl -u 3816d821c80a6847ca84550052c1ff6246e8169b:x-oauth-basic https://api.github.com/user

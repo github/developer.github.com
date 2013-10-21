@@ -204,7 +204,7 @@ default\_branch
   :name          => "Hello-World",
   :description   => "This is your first repo",
   :homepage      => "https://github.com",
-  :public        => true,
+  :private       => true,
   :has_issues    => true,
   :has_wiki      => true,
   :has_downloads => true

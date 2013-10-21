@@ -48,6 +48,7 @@ objects.
 * `[ ]` Remove the unused "bio" field for Users.
 * `[ ]` When listing the contents of a directory in the [Repository Contents API](/v3/repos/contents/#get-contents), fix the `type` value returned for submodules: change the value to `"submodule"` (instead of `"file"`).
 * `[ ]` Remove the [Legacy Search API](/v3/search/legacy/).
+* `[ ]` Top-level `rate` hash on the [Rate Limit API](v3/rate_limit/) will no longer be returned.
 
 ### Breaking Beta Changes
 

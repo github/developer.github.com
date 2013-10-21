@@ -10,8 +10,17 @@ title: Legacy Search | GitHub API
 This is a listing of the Legacy Search API features from API v2 that have been ported to API
 v3. There should be no changes, other than the new URL and JSON output format.
 
-Please note that [the Search API](/v3/search/) contains new endpoints and much 
-more functionality.
+### Legacy Search API is Deprecated
+
+<div class="alert">
+  <p>
+    The Legacy Search API (described below) is <a href="/#expected-changes">deprecated</a>
+    and is scheduled for removal in the next version of the API.
+
+    We recommend using the <a href="/v3/search/">v3 Search API</a> instead.
+    It contains new endpoints and much more functionality.
+  </p>
+</div>
 
 ## Search issues
 

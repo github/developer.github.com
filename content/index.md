@@ -47,6 +47,7 @@ objects.
 * `[✓]` <del>User Emails come back [as a hash][v3-email] instead of a string.</del>
 * `[ ]` Remove the unused "bio" field for Users.
 * `[ ]` When listing the contents of a directory in the [Repository Contents API](/v3/repos/contents/#get-contents), fix the `type` value returned for submodules: change the value to `"submodule"` (instead of `"file"`).
+* `[ ]` Remove the [Legacy Search API](/v3/search/legacy/).
 
 ### Breaking Beta Changes
 

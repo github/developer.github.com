@@ -39,3 +39,13 @@ the rate limit governing the rest of the API. For that reason, the response
 hash, the `"search"` hash provides your rate limit status for the
 [Search API](v3/search). The `"core"` hash provides your rate limit status for
 all the _rest_ of the API.
+
+#### Deprecation Notice
+
+The `"rate"` hash (shown at the bottom of the response above) is
+[deprecated](/#expected-changes) and is scheduled for removal in the next
+version of the API.
+
+If you're writing new API client code (or updating your existing code), you
+should use the `"core"` hash instead of the `"rate"` hash. The `"core"` hash
+contains the same information that is present in the `"rate"` hash.

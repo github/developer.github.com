@@ -7,23 +7,6 @@ title: Search | GitHub API
 * TOC
 {:toc}
 
-### Preview mode
-
-<div class="alert">
-  <p>
-    The Search API is currently available for developers to preview.
-    During the preview period, the API may change without advance notice.
-    Please see the <a href="/changes/2013-07-19-preview-the-new-search-api">blog post</a> for full details.
-  </p>
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.preview</pre>
-  </p>
-</div>
-
-If you have any questions or feedback about this new API, please [get in
-touch](https://github.com/contact?form[subject]=New+Search+API).
-
 ### About the Search API
 
 The Search API is optimized to help you find the specific item you're looking
@@ -105,7 +88,7 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
+    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
 
 This produces the same JSON payload as above, with an extra key called
@@ -179,7 +162,7 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
+    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
 
 This produces the same JSON payload as above, with an extra key called
@@ -258,7 +241,7 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
+    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
 
 This produces the same JSON payload as above, with an extra key called
@@ -327,7 +310,7 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
+    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000
 
 This produces the same JSON payload as above, with an extra key called
@@ -355,7 +338,7 @@ by numeric offsets identifying the exact location of each matching search term.
 To get this metadata in your search results, specify the `text-match` media type
 in your Accept header.
 
-    application/vnd.github.preview.text-match+json
+    application/vnd.github.v3.text-match+json
 
 The results will provide the same JSON payloads as shown above, with an extra
 key called `text_matches`. Inside the `text_matches` array, each hash includes
@@ -383,7 +366,7 @@ matches
 Using curl, and the [example issue search](#issue-search-example) above, our API
 request would look like this:
 
-    curl -H 'Accept: application/vnd.github.preview.text-match+json' \
+    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
 
 The response will include a `text_matches` array for each search result. In the

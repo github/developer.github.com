@@ -288,7 +288,7 @@ q
 
    * [Search In](https://help.github.com/articles/searching-users#search-in)
      Qualifies which fields are searched. With this qualifier you can restrict
-     the search to just the username, public email, full name, location, or any
+     the search to just the username, public email, full name, or any
      combination of these.
    * [Repository count](https://help.github.com/articles/searching-users#repository-count)
      Filters users based on the number of repositories they have.

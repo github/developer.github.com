@@ -58,11 +58,11 @@ List all notifications for the current user, grouped by repository.
 ### Parameters
 
 all
-: _Optional_ **boolean** `true` to show notifications marked as read.
+: _Optional_ **boolean** - Also show notifications marked as read. Default: `false`.
 
 participating
-: _Optional_ **boolean** `true` to show only notifications in which the user is
-directly participating or mentioned.
+: _Optional_ **boolean** - Only show notifications in which the user is
+directly participating or mentioned. Default: `false`.
 
 since
 : _Optional_ **time** filters out any notifications updated before the given
@@ -83,11 +83,11 @@ List all notifications for the current user.
 ### Parameters
 
 all
-: _Optional_ **boolean** `true` to show notifications marked as read.
+: _Optional_ **boolean** - Also show notifications marked as read. Default: `false`.
 
 participating
-: _Optional_ **boolean** `true` to show only notifications in which the user is
-directly participating or mentioned.
+: _Optional_ **boolean** - Only show notifications in which the user is
+directly participating or mentioned. Default: `false`.
 
 since
 : _Optional_ **time** filters out any notifications updated before the given

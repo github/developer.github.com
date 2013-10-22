@@ -59,9 +59,9 @@ out these changes, certain methods will support the API v3 media type:
 
     application/vnd.github.v3
 
-We'll clearly mark those methods that publicly support the v3 media type. 
+We'll clearly mark those methods that publicly support the v3 media type.
 
-**NOTE:** _Using the v3 media type for methods other than those marked may yield 
+**NOTE:** _Using the v3 media type for methods other than those marked may yield
 unexpected results._
 
 ## Comment Body Properties

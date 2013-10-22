@@ -7,14 +7,55 @@ title: Repo Hooks | GitHub API
 * TOC
 {:toc}
 
-The Repository Hooks API allows repository admins to manage the post-receive
-web and service hooks for a repository.  There are two main APIs to manage
-these hooks: a JSON HTTP API, and [PubSubHubbub](#pubsubhubbub).
+The Repository Hooks API allows repository admins to manage the post-receive 
+hooks for a repository.  Hooks can be managed using the [JSON HTTP API](#json-http)
+and the [PubSubHubbub API](#pubsubhubbub).
 
-Active hooks can be configured to trigger for one or more events.
-The default event is `push`.  The available events are:
+Each hook can be configured for a specific [service](#services) and one or 
+more [event](#events) regardless of the API used to do so.
 
-* `push` - Any git push to a Repository.
+## Services
+
+A service is basically the name used to refer to a hook that has configuration
+settings, a list of available events, and default events.
+
+> For instance, the 
+[email](https://github.com/github/github-services/blob/master/lib/services/email.rb)
+service is a built-in GitHub service that will send event [payloads](#payloads) 
+to, at most, two email addresses, use an optional `Approved` header, and 
+can send the email 'from' the commit author.  It will trigger for the `push` 
+event by default and supports the `public` event type as well.
+
+A number of services have been integrated through the open source
+[github-services](https://github.com/github/github-services) project.  When 
+creating a [hook](#create-a-hook), the `:name` parameter must refer to one of 
+these services.  A generic 
+[Web](https://github.com/github/github-services/blob/master/lib/services/web.rb) 
+service is available that can configured to trigger for any of the available 
+[events](#events).
+
+Documentation for all available service hooks can be found in the
+[docs directory](https://github.com/github/github-services/tree/master/docs)
+of the github-services repository.  A JSON representation of their names,
+default events, supported events, and configuration options can be seen 
+at [api.github.com/hooks](https://api.github.com/hooks).
+
+
+## Events 
+
+Active hooks can be configured to trigger for one or more service supported 
+events. In other words, the service must support listening for the event you 
+want to trigger.
+
+> For example, the 
+[Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
+service listens for all events while the
+[IRC](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
+service can only listen for `push`, `issues`, and `pull_request` events.
+
+The available events are:
+
+* `push` - Any git push to a Repository. **This is the default event.**
 * `issues` - Any time an Issue is opened or closed.
 * `issue_comment` - Any time an Issue is commented on.
 * `commit_comment` - Any time a Commit is commented on.
@@ -33,51 +74,42 @@ request is tracking).
 * `team_add` - Any time a team is added or modified on a Repository.
 * `status` - Any time a Repository has a status update from the API
 
-The payloads for all of the hooks mirror [the payloads for the Event
+### Payloads
+
+The payloads for all hooks mirror [the payloads for the Event
 types](/v3/activity/events/types/), with the exception of [the original `push`
-event](http://help.github.com/post-receive-hooks/).
+event](http://help.github.com/post-receive-hooks/), 
+which has a more detailed payload.
 
-A number of external services have already been integrated through the open source
-[github-services](https://github.com/github/github-services) project, including the generic
-[Web Service](https://github.com/github/github-services/blob/master/lib/services/web.rb) service
-which can be used to define your own custom hooks.
-Documentation for all available hooks can be found in the
-[docs directory](https://github.com/github/github-services/tree/master/docs)
-of the github-services repository, and a JSON representation of their names,
-the events they support, and their configuration can be seen at
-[api.github.com/hooks](https://api.github.com/hooks).
 
-For a Hook to go through, the Hook needs to be configured to trigger for an event,
-and the Service has to listen to it.
-Most of the Services only listen for `push` events.  However, the generic
-[Web Service](https://github.com/github/github-services/blob/master/lib/services/web.rb)
-listens for all events.  Other services like the
-[IRC Service](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
-may only listen for `push`, `issues`, and `pull_request` events.
+## JSON HTTP
 
-## List
+The JSON HTTP API follows the same conventions as the rest of the 
+[GitHub API](http://developer.github.com/v3/).
+
+### List
 
     GET /repos/:owner/:repo/hooks
 
-### Response
+#### Response
 
 <%= headers 200, :pagination => true %>
 <%= json(:hook) { |h| [h] } %>
 
-## Get single hook
+### Get single hook
 
     GET /repos/:owner/:repo/hooks/:id
 
-### Response
+#### Response
 
 <%= headers 200 %>
 <%= json :hook %>
 
-## Create a hook
+### Create a hook
 
     POST /repos/:owner/:repo/hooks
 
-### Input
+#### Input
 
 `name`
 : _Required_ **string** - The name of the service that is being called.
@@ -118,17 +150,17 @@ Here's how you can setup a hook that posts raw JSON
         :content_type => 'json'}
 %>
 
-### Response
+#### Response
 
 <%= headers 201,
       :Location => 'https://api.github.com/repos/user/repo/hooks/1' %>
 <%= json :hook %>
 
-## Edit a hook
+### Edit a hook
 
     PATCH /repos/:owner/:repo/hooks/:id
 
-### Input
+#### Input
 
 `config`
 : _Optional_ **hash** - A Hash containing key/value pairs to provide
@@ -155,19 +187,19 @@ list of events that the Hook triggers for.
 : _Optional_ **boolean** - Determines whether the hook is actually
 triggered on pushes.
 
-#### Example
+##### Example
 
 <%= json \
       :active => true,
       :add_events => ['pull_request']
 %>
 
-### Response
+#### Response
 
 <%= headers 200 %>
 <%= json :hook %>
 
-## Test a `push` hook
+### Test a `push` hook
 
 This will trigger the hook with the latest push to the current
 repository if the hook is subscribed to `push` events. If the
@@ -178,7 +210,7 @@ with 204 but no test POST will be generated.
 
 **Note**: Previously `/repos/:owner/:repo/hooks/:id/test`
 
-### Response
+#### Response
 
 <%= headers 204 %>
 
@@ -186,7 +218,7 @@ with 204 but no test POST will be generated.
 
     DELETE /repos/:owner/:repo/hooks/:id
 
-### Response
+#### Response
 
 <%= headers 204 %>
 
@@ -200,8 +232,10 @@ Topic URLs for a GitHub repository's pushes are in this format:
 
     https://github.com/:owner/:repo/events/:event
 
-The event can be any Event string that is listed at the top of this
+The event can be any [event](#events) string that is listed at the top of this
 document.
+
+### Response format
 
 The default format is what [existing post-receive hooks should
 expect][post-receive]: A JSON body sent as the `payload` parameter in a
@@ -211,6 +245,8 @@ POST.  You can also specify to receive the raw JSON body with either an
     Accept: application/json
     https://github.com/:owner/:repo/events/push.json
 
+### Callback URLs
+
 Callback URLs can use either the `http://` protocol, or `github://`.
 `github://` callbacks specify a GitHub service.
 
@@ -219,6 +255,8 @@ Callback URLs can use either the `http://` protocol, or `github://`.
 
     # Send updates to Campfire
     github://campfire?subdomain=github&room=Commits&token=abc123
+
+### Subscribing
 
 The GitHub PubSubHubbub endpoint is: https://api.github.com/hub.
 (GitHub Enterprise users should use http://yourhost/api/v3/hub as the
@@ -234,7 +272,7 @@ successful request with curl looks like:
 PubSubHubbub requests can be sent multiple times.  If the hook already
 exists, it will be modified according to the request.
 
-### Parameters
+#### Parameters
 
 `hub.mode`
 : _Required_ **string** - Either `subscribe` or `unsubscribe`.

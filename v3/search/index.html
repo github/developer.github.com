@@ -294,95 +294,95 @@ provided, results are sorted by best match.</dd>
 <em>Optional</em> Sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>; the default is <code>desc</code>.</dd>
 </dl><h4 id="code-search-example">Example</h4>
 
-<p>Suppose you want to find recently-updated Ruby gems that are using the <code>octokit</code>
-library. Your query might look like this:</p>
+<p>Suppose you want to find the definition of the <code>addClass</code> function inside
+<a href="https://github.com/jquery/jquery">jQuery</a>. Your query would look something like
+this:</p>
 
-<pre><code>https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb&amp;sort=indexed
+<pre><code>https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
 </code></pre>
 
-<p>Here, we’re searching for the keyword <code>octokit</code> within a file’s contents. We’re
-making sure that we’re only looking in files that end in <em>.gemspec</em>. The <code>-repo</code>
-notation ensures that we’re also excluding <a href="https://github.com/octokit/octokit.rb">the Octokit.rb repo</a>.
-We’re sorting by <code>indexed</code>, so that the most recently-indexed repositories
-appear first in the search results.</p>
+<p>Here, we’re searching for the keyword <code>addClass</code> within a file’s contents. We’re
+making sure that we’re only looking in files where the language is JavaScript.
+And we’re scoping the search to the <code>@jquery/jquery</code> repository.</p>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"total_count"</span><span class="o">:</span> <span class="mi">104</span><span class="p">,</span>
+  <span class="s2">"total_count"</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span>
   <span class="s2">"items"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"github-issue-importer.gemspec"</span><span class="p">,</span>
-      <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"github-issue-importer.gemspec"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"394508202991504d8a0771ae027454facaaa045a"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repositories/1586630/contents/github-issue-importer.gemspec?ref=aa22a4be513163c73531e96bd99f4b49d6ded8a6"</span><span class="p">,</span>
-      <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repositories/1586630/git/blobs/394508202991504d8a0771ae027454facaaa045a"</span><span class="p">,</span>
-      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/johnf/github-issue-importer/blob/aa22a4be513163c73531e96bd99f4b49d6ded8a6/github-issue-importer.gemspec"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"classes.js"</span><span class="p">,</span>
+      <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"src/attributes/classes.js"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"d7212f9dee2dcc18f084d7df8f417b80846ded5a"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4"</span><span class="p">,</span>
+      <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repositories/167174/git/blobs/d7212f9dee2dcc18f084d7df8f417b80846ded5a"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery/jquery/blob/825ac3773694e0cd23ee74895fd5aeb535b27da4/src/attributes/classes.js"</span><span class="p">,</span>
       <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1586630</span><span class="p">,</span>
-        <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"github-issue-importer"</span><span class="p">,</span>
-        <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"johnf/github-issue-importer"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">167174</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"jquery"</span><span class="p">,</span>
+        <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"jquery/jquery"</span><span class="p">,</span>
         <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
-          <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"johnf"</span><span class="p">,</span>
-          <span class="s2">"id"</span><span class="o">:</span> <span class="mi">42590</span><span class="p">,</span>
-          <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://secure.gravatar.com/avatar/ab4d879ba3233a270aa14f447c795505?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"</span><span class="p">,</span>
-          <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"ab4d879ba3233a270aa14f447c795505"</span><span class="p">,</span>
-          <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf"</span><span class="p">,</span>
-          <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/johnf"</span><span class="p">,</span>
-          <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/followers"</span><span class="p">,</span>
-          <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/following{/other_user}"</span><span class="p">,</span>
-          <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/gists{/gist_id}"</span><span class="p">,</span>
-          <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/starred{/owner}{/repo}"</span><span class="p">,</span>
-          <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/subscriptions"</span><span class="p">,</span>
-          <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/orgs"</span><span class="p">,</span>
-          <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/repos"</span><span class="p">,</span>
-          <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/events{/privacy}"</span><span class="p">,</span>
-          <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/johnf/received_events"</span><span class="p">,</span>
-          <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span>
+          <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"jquery"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="o">:</span> <span class="mi">70142</span><span class="p">,</span>
+          <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://0.gravatar.com/avatar/6906f317a4733f4379b06c32229ef02f?d=https%3A%2F%2Fidenticons.github.com%2Ff426f04f2f9813718fb806b30e0093de.png"</span><span class="p">,</span>
+          <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"6906f317a4733f4379b06c32229ef02f"</span><span class="p">,</span>
+          <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery"</span><span class="p">,</span>
+          <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/followers"</span><span class="p">,</span>
+          <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/following{/other_user}"</span><span class="p">,</span>
+          <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/gists{/gist_id}"</span><span class="p">,</span>
+          <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/starred{/owner}{/repo}"</span><span class="p">,</span>
+          <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/subscriptions"</span><span class="p">,</span>
+          <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/orgs"</span><span class="p">,</span>
+          <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/repos"</span><span class="p">,</span>
+          <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/events{/privacy}"</span><span class="p">,</span>
+          <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/jquery/received_events"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Organization"</span><span class="p">,</span>
+          <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
         <span class="p">},</span>
         <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/johnf/github-issue-importer"</span><span class="p">,</span>
-        <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Import Issues from Launchpad (for now) into github"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery/jquery"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"jQuery JavaScript Library"</span><span class="p">,</span>
         <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer"</span><span class="p">,</span>
-        <span class="s2">"forks_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/forks"</span><span class="p">,</span>
-        <span class="s2">"keys_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/keys{/key_id}"</span><span class="p">,</span>
-        <span class="s2">"collaborators_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/collaborators{/collaborator}"</span><span class="p">,</span>
-        <span class="s2">"teams_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/teams"</span><span class="p">,</span>
-        <span class="s2">"hooks_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/hooks"</span><span class="p">,</span>
-        <span class="s2">"issue_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/issues/events{/number}"</span><span class="p">,</span>
-        <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/events"</span><span class="p">,</span>
-        <span class="s2">"assignees_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/assignees{/user}"</span><span class="p">,</span>
-        <span class="s2">"branches_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/branches{/branch}"</span><span class="p">,</span>
-        <span class="s2">"tags_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/tags"</span><span class="p">,</span>
-        <span class="s2">"blobs_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/git/blobs{/sha}"</span><span class="p">,</span>
-        <span class="s2">"git_tags_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/git/tags{/sha}"</span><span class="p">,</span>
-        <span class="s2">"git_refs_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/git/refs{/sha}"</span><span class="p">,</span>
-        <span class="s2">"trees_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/git/trees{/sha}"</span><span class="p">,</span>
-        <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/statuses/{sha}"</span><span class="p">,</span>
-        <span class="s2">"languages_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/languages"</span><span class="p">,</span>
-        <span class="s2">"stargazers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/stargazers"</span><span class="p">,</span>
-        <span class="s2">"contributors_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/contributors"</span><span class="p">,</span>
-        <span class="s2">"subscribers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/subscribers"</span><span class="p">,</span>
-        <span class="s2">"subscription_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/subscription"</span><span class="p">,</span>
-        <span class="s2">"commits_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/commits{/sha}"</span><span class="p">,</span>
-        <span class="s2">"git_commits_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/git/commits{/sha}"</span><span class="p">,</span>
-        <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/comments{/number}"</span><span class="p">,</span>
-        <span class="s2">"issue_comment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/issues/comments/{number}"</span><span class="p">,</span>
-        <span class="s2">"contents_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/contents/{+path}"</span><span class="p">,</span>
-        <span class="s2">"compare_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/compare/{base}...{head}"</span><span class="p">,</span>
-        <span class="s2">"merges_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/merges"</span><span class="p">,</span>
-        <span class="s2">"archive_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/{archive_format}{/ref}"</span><span class="p">,</span>
-        <span class="s2">"downloads_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/downloads"</span><span class="p">,</span>
-        <span class="s2">"issues_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/issues{/number}"</span><span class="p">,</span>
-        <span class="s2">"pulls_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/pulls{/number}"</span><span class="p">,</span>
-        <span class="s2">"milestones_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/milestones{/number}"</span><span class="p">,</span>
-        <span class="s2">"notifications_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/notifications{?since,all,participating}"</span><span class="p">,</span>
-        <span class="s2">"labels_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/johnf/github-issue-importer/labels{/name}"</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery"</span><span class="p">,</span>
+        <span class="s2">"forks_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/forks"</span><span class="p">,</span>
+        <span class="s2">"keys_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/keys{/key_id}"</span><span class="p">,</span>
+        <span class="s2">"collaborators_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/collaborators{/collaborator}"</span><span class="p">,</span>
+        <span class="s2">"teams_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/teams"</span><span class="p">,</span>
+        <span class="s2">"hooks_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/hooks"</span><span class="p">,</span>
+        <span class="s2">"issue_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/issues/events{/number}"</span><span class="p">,</span>
+        <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/events"</span><span class="p">,</span>
+        <span class="s2">"assignees_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/assignees{/user}"</span><span class="p">,</span>
+        <span class="s2">"branches_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/branches{/branch}"</span><span class="p">,</span>
+        <span class="s2">"tags_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/tags"</span><span class="p">,</span>
+        <span class="s2">"blobs_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/git/blobs{/sha}"</span><span class="p">,</span>
+        <span class="s2">"git_tags_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/git/tags{/sha}"</span><span class="p">,</span>
+        <span class="s2">"git_refs_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/git/refs{/sha}"</span><span class="p">,</span>
+        <span class="s2">"trees_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/git/trees{/sha}"</span><span class="p">,</span>
+        <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/statuses/{sha}"</span><span class="p">,</span>
+        <span class="s2">"languages_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/languages"</span><span class="p">,</span>
+        <span class="s2">"stargazers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/stargazers"</span><span class="p">,</span>
+        <span class="s2">"contributors_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contributors"</span><span class="p">,</span>
+        <span class="s2">"subscribers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/subscribers"</span><span class="p">,</span>
+        <span class="s2">"subscription_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/subscription"</span><span class="p">,</span>
+        <span class="s2">"commits_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/commits{/sha}"</span><span class="p">,</span>
+        <span class="s2">"git_commits_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/git/commits{/sha}"</span><span class="p">,</span>
+        <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/comments{/number}"</span><span class="p">,</span>
+        <span class="s2">"issue_comment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/issues/comments/{number}"</span><span class="p">,</span>
+        <span class="s2">"contents_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/{+path}"</span><span class="p">,</span>
+        <span class="s2">"compare_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/compare/{base}...{head}"</span><span class="p">,</span>
+        <span class="s2">"merges_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/merges"</span><span class="p">,</span>
+        <span class="s2">"archive_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/{archive_format}{/ref}"</span><span class="p">,</span>
+        <span class="s2">"downloads_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/downloads"</span><span class="p">,</span>
+        <span class="s2">"issues_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/issues{/number}"</span><span class="p">,</span>
+        <span class="s2">"pulls_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/pulls{/number}"</span><span class="p">,</span>
+        <span class="s2">"milestones_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/milestones{/number}"</span><span class="p">,</span>
+        <span class="s2">"notifications_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/notifications{?since,all,participating}"</span><span class="p">,</span>
+        <span class="s2">"labels_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/labels{/name}"</span>
       <span class="p">},</span>
-      <span class="s2">"score"</span><span class="o">:</span> <span class="mf">0.96691436</span>
+      <span class="s2">"score"</span><span class="o">:</span> <span class="mf">0.5269679</span>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
@@ -396,7 +396,7 @@ media type in your Accept header. For example, via curl, the above query would
 look like this:</p>
 
 <pre><code>curl -H 'Accept: application/vnd.github.preview.text-match+json' \
-  https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb&amp;sort=indexed
+  https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
 </code></pre>
 
 <p>This produces the same JSON payload as above, with an extra key called
@@ -413,45 +413,31 @@ included the search term.</p>
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"text_matches"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"object_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repositories/8460725/contents/.bundle/ruby/1.8/specifications/octokit-1.23.0.gemspec?ref=9c580b22493df1b3044c321729278c4e79302b7f"</span><span class="p">,</span>
+      <span class="s2">"object_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4"</span><span class="p">,</span>
       <span class="s2">"object_type"</span><span class="o">:</span> <span class="s2">"FileContent"</span><span class="p">,</span>
       <span class="s2">"property"</span><span class="o">:</span> <span class="s2">"content"</span><span class="p">,</span>
-      <span class="s2">"fragment"</span><span class="o">:</span> <span class="s2">"name = %q{octokit}\n  s.version = \"1.23.0\"\n\n  s.required_rubygems_version = Gem::Requirement.new(\"&gt;= 1.3.6\")"</span><span class="p">,</span>
+      <span class="s2">"fragment"</span><span class="o">:</span> <span class="s2">";\n\njQuery.fn.extend({\n\taddClass: function( value ) {\n\t\tvar classes, elem, cur, clazz, j, finalValue"</span><span class="p">,</span>
       <span class="s2">"matches"</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">"text"</span><span class="o">:</span> <span class="s2">"octokit"</span><span class="p">,</span>
+          <span class="s2">"text"</span><span class="o">:</span> <span class="s2">"addClass"</span><span class="p">,</span>
           <span class="s2">"indices"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="mi">10</span><span class="p">,</span>
-            <span class="mi">17</span>
+            <span class="mi">23</span><span class="p">,</span>
+            <span class="mi">31</span>
           <span class="p">]</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">"object_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repositories/8460725/contents/.bundle/ruby/1.8/specifications/octokit-1.23.0.gemspec?ref=9c580b22493df1b3044c321729278c4e79302b7f"</span><span class="p">,</span>
+      <span class="s2">"object_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4"</span><span class="p">,</span>
       <span class="s2">"object_type"</span><span class="o">:</span> <span class="s2">"FileContent"</span><span class="p">,</span>
       <span class="s2">"property"</span><span class="o">:</span> <span class="s2">"content"</span><span class="p">,</span>
-      <span class="s2">"fragment"</span><span class="o">:</span> <span class="s2">"\"Rakefile\", \"octokit.gemspec\", \"lib/faraday/response/raise_octokit_error.rb\", \"lib/octokit/authentication.rb\""</span><span class="p">,</span>
+      <span class="s2">"fragment"</span><span class="o">:</span> <span class="s2">".isFunction( value ) ) {\n\t\t\treturn this.each(function( j ) {\n\t\t\t\tjQuery( this ).addClass( value.call( this"</span><span class="p">,</span>
       <span class="s2">"matches"</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">"text"</span><span class="o">:</span> <span class="s2">"octokit"</span><span class="p">,</span>
+          <span class="s2">"text"</span><span class="o">:</span> <span class="s2">"addClass"</span><span class="p">,</span>
           <span class="s2">"indices"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="mi">13</span><span class="p">,</span>
-            <span class="mi">20</span>
-          <span class="p">]</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-          <span class="s2">"text"</span><span class="o">:</span> <span class="s2">"octokit"</span><span class="p">,</span>
-          <span class="s2">"indices"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="mi">59</span><span class="p">,</span>
-            <span class="mi">66</span>
-          <span class="p">]</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-          <span class="s2">"text"</span><span class="o">:</span> <span class="s2">"octokit"</span><span class="p">,</span>
-          <span class="s2">"indices"</span><span class="o">:</span> <span class="p">[</span>
-            <span class="mi">83</span><span class="p">,</span>
-            <span class="mi">90</span>
+            <span class="mi">80</span><span class="p">,</span>
+            <span class="mi">88</span>
           <span class="p">]</span>
         <span class="p">}</span>
       <span class="p">]</span>

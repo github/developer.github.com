@@ -1522,7 +1522,7 @@ module GitHub
     }
 
     THREAD = {
-      :id => 1,
+      :id => "1",
       :repository => SIMPLE_REPO,
       :subject => {
         :title => "Greetings",

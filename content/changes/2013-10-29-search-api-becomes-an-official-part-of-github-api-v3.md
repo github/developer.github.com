@@ -9,7 +9,7 @@ We're excited to announce that the [new Search API][search-api] has graduated fr
 As of today, the Search API is an official part of [GitHub API v3](/v3).
 As such, the Search API is now stable and suitable for production use.
 
-## Preview Media Type No Longer Needed
+### Preview Media Type No Longer Needed
 
 If you used the Search API during the preview period, you needed to provide a custom media type in the Accept header:
 
@@ -17,11 +17,11 @@ If you used the Search API during the preview period, you needed to provide a cu
 
 Now that the preview period has ended, you no longer need to pass this custom media type.
 
-Instead, we [recommend][media-types] that you specify `v3` in the accept header:
+Instead, we [recommend][media-types] that you specify `v3` as the version in the accept header:
 
     application/vnd.github.v3+json
 
-## Onward!
+### Onward!
 
 Thanks again to everyone that tried out the Search API during the preview period.
 

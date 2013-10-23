@@ -57,8 +57,6 @@ Ultimately, we aim for a version-less, [Hypermedia][hypermedia]-driven API.
 Before we get there, we [expect a few changes][expected-changes]. As we roll
 out these changes, certain methods will support the API v3 media type:
 
-FIXME
-
     application/vnd.github.v3
 
 We'll clearly mark those methods that publicly support the v3 media type.

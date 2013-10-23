@@ -26,12 +26,12 @@ Neither of these specify a version, so you will always get the latest
 JSON representation of resources.  If you're building an application and
 care about the stability of the API, specify a version like so:
 
-    application/vnd.github.beta+json
+    application/vnd.github.v3+json
 
 If you're specifying a property (such as full/raw/etc defined below),
 put the version before the property:
 
-    application/vnd.github.beta.raw+json
+    application/vnd.github.v3.raw+json
 
 You can check the current version through every response's headers.  Look
 for the `X-GitHub-Media-Type` header:
@@ -51,18 +51,22 @@ for the `X-GitHub-Media-Type` header:
     X-GitHub-Media-Type: github.v3; param=full; format=json
 
 
-## API v3 media type and the future
+## Beta, v3, and the Future
 
 Ultimately, we aim for a version-less, [Hypermedia][hypermedia]-driven API.
-Before we get there, we [expect a few changes][expected-changes]. As we roll
-out these changes, certain methods will support the API v3 media type:
+Before we get there, we [expect a few changes][expected-changes].
+
+In the mean time, if you don't specify a version in the `Accept` header, you'll
+get the `beta` version (as shown above) by default.
+
+Eventually, `v3` will become the default version. We recommend that you start
+using `v3` now. To get that version today, explicitly request the API v3
+media type in the `Accept` header:
 
     application/vnd.github.v3
 
-We'll clearly mark those methods that publicly support the v3 media type.
-
-**NOTE:** _Using the v3 media type for methods other than those marked may yield
-unexpected results._
+Where there's a difference between the `beta` and `v3` representations, we'll
+strive to call out those differences.
 
 ## Comment Body Properties
 

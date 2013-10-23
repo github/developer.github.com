@@ -20,7 +20,7 @@ sort
 : `due_date`, `completeness`, default: `due_date`
 
 direction
-: `asc` or `desc`, default: `desc`.
+: `asc` or `desc`, default: `asc`.
 
 ### Response
 

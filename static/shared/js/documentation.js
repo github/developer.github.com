@@ -97,11 +97,8 @@ $(function() {
         .attr("title", "API Status: " + data.status + ". Click for details.")
         .text("API Status: " + data.status);
       var img = $("<img>")
-        .attr("src", "/images/status-icon-" + data.status + ".png")
-        .height(16)
-        .width(16);
-      link.append(img);
-      $('.api-status').html(link);
+        .attr("src", "/images/status-icon-" + data.status + ".png");	
+      $('.api-status').html(link).append(img);
     }
   });
 

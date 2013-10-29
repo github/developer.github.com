@@ -28,14 +28,14 @@ end
     filter :colorize_syntax,
       :colorizers => {:javascript => :pygmentsrb}
     layout 'changes' if version[0] == '*'
-    layout 'default'
+    layout item[:layout] || 'default'
   end
 end
 
 compile '/guides/*' do
   filter :kramdown, :toc_levels => [2]
   filter :erb
-  layout 'default'
+  layout item[:layout] || 'default'
 end
 
 compile '*' do
@@ -43,7 +43,7 @@ compile '*' do
   filter :kramdown, :toc_levels => [2]
   filter :colorize_syntax,
     :colorizers => {:javascript => :pygmentsrb}
-  layout 'default'
+  layout item[:layout] || 'default'
 end
 
 route '/static/*' do

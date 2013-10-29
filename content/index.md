@@ -21,7 +21,7 @@ layout: empty
 		<li>
 			<h2>Libraries</h2>
 			<p>We’ve got you covered. Use the GitHub API in your favorite language.</p>
-			<a href="/guides/" class="button-secondary">Browse libraries</a>
+			<a href="/libraries/" class="button-secondary">Browse libraries</a>
 			<img class="octocat" src="/shared/images/gundamcat-small.png">
 		</li>
 		<li>

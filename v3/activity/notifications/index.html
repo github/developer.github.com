@@ -103,11 +103,11 @@ X-Poll-Interval: 60
 <dl>
 <dt>all</dt>
   <dd>
-<em>Optional</em> <strong>boolean</strong> <code>true</code> to show notifications marked as read.</dd>
+<em>Optional</em> <strong>boolean</strong> - Also show notifications marked as read. Default: <code>false</code>.</dd>
   <dt>participating</dt>
   <dd>
-<em>Optional</em> <strong>boolean</strong> <code>true</code> to show only notifications in which the user is
-directly participating or mentioned.</dd>
+<em>Optional</em> <strong>boolean</strong> - Only show notifications in which the user is
+directly participating or mentioned. Default: <code>false</code>.</dd>
   <dt>since</dt>
   <dd>
 <em>Optional</em> <strong>time</strong> filters out any notifications updated before the given
@@ -121,7 +121,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
     <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
       <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
@@ -165,11 +165,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 <dl>
 <dt>all</dt>
   <dd>
-<em>Optional</em> <strong>boolean</strong> <code>true</code> to show notifications marked as read.</dd>
+<em>Optional</em> <strong>boolean</strong> - Also show notifications marked as read. Default: <code>false</code>.</dd>
   <dt>participating</dt>
   <dd>
-<em>Optional</em> <strong>boolean</strong> <code>true</code> to show only notifications in which the user is
-directly participating or mentioned.</dd>
+<em>Optional</em> <strong>boolean</strong> - Only show notifications in which the user is
+directly participating or mentioned. Default: <code>false</code>.</dd>
   <dt>since</dt>
   <dd>
 <em>Optional</em> <strong>time</strong> filters out any notifications updated before the given
@@ -183,7 +183,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
     <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
       <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
@@ -271,7 +271,7 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
     <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
@@ -318,7 +318,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>This checks to see if the current user is subscribed to a thread.  You can also
 <a href="/v3/activity/watching/#get-a-repository-subscription">get a Repository subscription</a>.</p>
 
-<pre><code>GET /notifications/threads/1/subscription
+<pre><code>GET /notifications/threads/:id/subscription
 </code></pre>
 
 <h3 id="response-6">Response</h3>
@@ -343,7 +343,7 @@ is unnecessary if the user is already subscribed to the repository.  Ignoring
 a thread will mute all future notifications (until you comment or get
 @mentioned).</p>
 
-<pre><code>PUT /notifications/threads/1/subscription
+<pre><code>PUT /notifications/threads/:id/subscription
 </code></pre>
 
 <h3 id="input-2">Input</h3>
@@ -374,7 +374,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="delete-a-thread-subscription">Delete a Thread Subscription</h2>
 
-<pre><code>DELETE /notifications/threads/1/subscription
+<pre><code>DELETE /notifications/threads/:id/subscription
 </code></pre>
 
 <h3 id="response-8">Response</h3>

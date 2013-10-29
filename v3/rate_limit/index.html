@@ -57,36 +57,6 @@ X-RateLimit-Remaining: 4999
 X-RateLimit-Reset: 1372700873</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"rate"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"limit"</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
-    <span class="s2">"remaining"</span><span class="o">:</span> <span class="mi">4999</span><span class="p">,</span>
-    <span class="s2">"reset"</span><span class="o">:</span> <span class="mi">1372700873</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
-<p><br></p>
-
-<h4 id="future-response">Future response</h4>
-
-<p>The current response (shown above) provides the rate limit status for <em>most</em> of
-the API. However, the Search API has a <a href="/v3/search/#rate-%0Alimit">custom rate limit</a>, separate from the rate limit governing the rest of the API. For that
-reason, this endpoint will
-<a href="/changes/2013-07-19-preview-the-new-search-api">soon</a> begin returning a
-<code>"resources"</code> hash, which provides the rate limit status for all API resources.</p>
-
-<p>To get this response format today, use the <code>application/vnd.github.preview</code>
-<a href="/v3/media">media type</a>.</p>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-X-RateLimit-Reset: 1372700873</code></pre>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"rate"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"limit"</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
-    <span class="s2">"remaining"</span><span class="o">:</span> <span class="mi">4999</span><span class="p">,</span>
-    <span class="s2">"reset"</span><span class="o">:</span> <span class="mi">1372700873</span>
-  <span class="p">},</span>
   <span class="s2">"resources"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"core"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"limit"</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
@@ -98,8 +68,33 @@ X-RateLimit-Reset: 1372700873</code></pre>
       <span class="s2">"remaining"</span><span class="o">:</span> <span class="mi">18</span><span class="p">,</span>
       <span class="s2">"reset"</span><span class="o">:</span> <span class="mi">1372697452</span>
     <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"rate"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"limit"</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
+    <span class="s2">"remaining"</span><span class="o">:</span> <span class="mi">4999</span><span class="p">,</span>
+    <span class="s2">"reset"</span><span class="o">:</span> <span class="mi">1372700873</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
+<p><br></p>
+
+<h4 id="understanding-your-rate-limit-status">Understanding Your Rate Limit Status</h4>
+
+<p>The Search API has a <a href="/v3/search/#rate-limit">custom rate limit</a>, separate from
+the rate limit governing the rest of the API. For that reason, the response
+(shown above) categorizes your rate limit by resource. Within the <code>"resources"</code>
+hash, the <code>"search"</code> hash provides your rate limit status for the
+<a href="v3/search">Search API</a>. The <code>"core"</code> hash provides your rate limit status for
+all the <em>rest</em> of the API.</p>
+
+<h4 id="deprecation-notice">Deprecation Notice</h4>
+
+<p>The <code>"rate"</code> hash (shown at the bottom of the response above) is
+<a href="/#expected-changes">deprecated</a> and is scheduled for removal in the next
+version of the API.</p>
+
+<p>If you’re writing new API client code (or updating your existing code), you
+should use the <code>"core"</code> hash instead of the <code>"rate"</code> hash. The <code>"core"</code> hash
+contains the same information that is present in the <code>"rate"</code> hash.</p>
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

@@ -95,7 +95,7 @@ $(function() {
         .attr("href", "https://status.github.com")
         .addClass(data.status)
         .attr("title", "API Status: " + data.status + ". Click for details.")
-        .text("Status: " + data.status);
+        .text("API Status: " + data.status);
       var img = $("<img>")
         .attr("src", "/images/status-icon-" + data.status + ".png")
         .height(16)

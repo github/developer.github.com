@@ -141,16 +141,15 @@ order
 
 <h4 id="code-search-example">Example</h4>
 
-Suppose you want to find recently-updated Ruby gems that are using the `octokit`
-library. Your query might look like this:
+Suppose you want to find the definition of the `addClass` function inside
+[jQuery](https://github.com/jquery/jquery). Your query would look something like
+this:
 
-    https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb&sort=indexed
+    https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
 
-Here, we're searching for the keyword `octokit` within a file's contents. We're
-making sure that we're only looking in files that end in _.gemspec_. The `-repo`
-notation ensures that we're also excluding [the Octokit.rb repo](https://github.com/octokit/octokit.rb).
-We’re sorting by `indexed`, so that the most recently-indexed repositories
-appear first in the search results.
+Here, we're searching for the keyword `addClass` within a file's contents. We're
+making sure that we're only looking in files where the language is JavaScript.
+And we're scoping the search to the `@jquery/jquery` repository.
 
 <%= headers 200 %>
 <%= json(:code_search_v3_results) %>
@@ -164,7 +163,7 @@ media type in your Accept header. For example, via curl, the above query would
 look like this:
 
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/code?q=octokit+in:file+extension:gemspec+-repo:octokit/octokit.rb&sort=indexed
+      https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as

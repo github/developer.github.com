@@ -21,6 +21,12 @@ compile '/feed/' do
   filter :kramdown, :toc_levels => [2]
 end
 
+compile '/v3/*' do
+  filter :kramdown, :toc_levels => [2]
+  filter :erb
+  layout item[:layout] || 'api'
+end
+
 %w(v3 */).each do |version|
   compile "/changes/#{version}" do
     filter :erb

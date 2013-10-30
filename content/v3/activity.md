@@ -1,6 +1,7 @@
 ---
 title: Activity | GitHub API
 ---
+#Activity
 
 Serving up the 'social' in Social Coding™, the Activity APIs provide access to
 notifications, subscriptions, and timelines.

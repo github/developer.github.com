@@ -50,7 +50,7 @@ $(function() {
     var clickedTopic = $(this).parents('.js-topic'),
         topicGuides  = clickedTopic.find('.js-guides li')
     $(this).toggleClass('collapsed expanded')
-    topicGuides.toggle(100)
+    topicGuides.slideToggle(100)
     return false
   })
 
@@ -62,13 +62,13 @@ $(function() {
 
     if(activeItem != clickedTopic.index()){
       if(helpList.eq(activeItem)){
-        helpList.eq(activeItem).find('.js-guides li').toggle(100)
+        helpList.eq(activeItem).find('.js-guides li').slideToggle(100)
       }
       activeItem = clickedTopic.index()
-      topicGuides.toggle(100)
+      topicGuides.slideToggle(100)
     } else {
       activeItem = undefined
-      topicGuides.toggle(100)
+      topicGuides.slideToggle(100)
     }
 
     return false

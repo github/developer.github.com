@@ -1,6 +1,6 @@
 ---
 title: GitHub Developer
-layout: empty
+layout: overview
 ---
 
 <div class="wrapper feature">

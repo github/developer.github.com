@@ -27,7 +27,7 @@ GitHub in your app</h1>
 		</li>
 		<li>
 			<h2>Support</h2>
-			<p>Are you stuck? Already tried our troubleshooting guide? Talk to a supportocat.</p>
+			<p>Are you stuck? Already tried our <a href="/v3/troubleshooting/">troubleshooting guide</a>? Talk to a supportocat.</p>
 			<a href="http://github.com/contact" class="button-secondary">Get in touch</a>
 			<img class="octocat" src="/shared/images/supportocat.png">
 		</li>

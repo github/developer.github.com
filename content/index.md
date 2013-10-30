@@ -16,7 +16,7 @@ layout: overview
 			<h2>Get Started</h2>
 			<p>New to the GitHub API? With these guides you’ll be up and running in a snap.</p>
 			<a href="/guides/" class="button-secondary">View introduction guides</a>
-			<img class="octocat" src="/shared/images/professorcat.png">
+			<img class="octocat professorcat" src="/shared/images/professorcat.png">
 		</li>
 		<li>
 			<h2>Libraries</h2>

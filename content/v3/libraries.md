@@ -18,6 +18,12 @@ Libraries for accessing the GitHub API from your favorite language.
 
 [tentacles]: https://github.com/Raynes/tentacles
 
+## .NET
+
+* **[OctoKit][octokit.net]** (officially maintained by GitHub)
+ 
+  [octokit.net]: https://github.com/octokit/octokit.net
+
 ## CSharp
 
 * [CSharp GitHub API][csharp]

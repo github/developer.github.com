@@ -58,11 +58,11 @@ List all notifications for the current user, grouped by repository.
 ### Parameters
 
 all
-: _Optional_ **boolean** `true` to show notifications marked as read.
+: _Optional_ **boolean** - Also show notifications marked as read. Default: `false`.
 
 participating
-: _Optional_ **boolean** `true` to show only notifications in which the user is
-directly participating or mentioned.
+: _Optional_ **boolean** - Only show notifications in which the user is
+directly participating or mentioned. Default: `false`.
 
 since
 : _Optional_ **time** filters out any notifications updated before the given
@@ -83,11 +83,11 @@ List all notifications for the current user.
 ### Parameters
 
 all
-: _Optional_ **boolean** `true` to show notifications marked as read.
+: _Optional_ **boolean** - Also show notifications marked as read. Default: `false`.
 
 participating
-: _Optional_ **boolean** `true` to show only notifications in which the user is
-directly participating or mentioned.
+: _Optional_ **boolean** - Only show notifications in which the user is
+directly participating or mentioned. Default: `false`.
 
 since
 : _Optional_ **time** filters out any notifications updated before the given
@@ -157,7 +157,7 @@ updated since this time will not be updated.  Default: Now.  Expected in ISO
 This checks to see if the current user is subscribed to a thread.  You can also
 [get a Repository subscription](/v3/activity/watching/#get-a-repository-subscription).
 
-    GET /notifications/threads/1/subscription
+    GET /notifications/threads/:id/subscription
 
 ### Response
 
@@ -171,7 +171,7 @@ is unnecessary if the user is already subscribed to the repository.  Ignoring
 a thread will mute all future notifications (until you comment or get
 @mentioned).
 
-    PUT /notifications/threads/1/subscription
+    PUT /notifications/threads/:id/subscription
 
 ### Input
 
@@ -190,7 +190,7 @@ thread.
 
 ## Delete a Thread Subscription
 
-    DELETE /notifications/threads/1/subscription
+    DELETE /notifications/threads/:id/subscription
 
 ### Response
 

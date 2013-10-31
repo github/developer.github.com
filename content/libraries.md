@@ -8,8 +8,8 @@ layout: libraries
 many flavors</h1>
 	<p class="intro">Use the official Octokit library, or choose between any of the available third party libraries.</p>
 	<ul class="library-links">
-		<li><span>Ruby</span><a href="#">octokit.rb</a></li>
-		<li><span>Obj-C</span><a href="#">octokit.objc</a></li>
+		<li><span>Ruby</span><a href="https://github.com/octokit/octokit.rb">octokit.rb</a></li>
+		<li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
 		<li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
 	</ul>
 	<img src="/shared/images/gundamcat.png" class="gundamcat" />

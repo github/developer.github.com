@@ -208,7 +208,7 @@ Most any meaningful use of the GitHub API will involve some level of Repository
 information. We can `GET` repository details in the same way we fetched user
 details earlier:
 
-      curl -i https://github.com/twbs/bootstrap
+      curl -i https://api.github.com/repos/twbs/bootstrap
 
 In the same way, we can view repositories for the authenticated user:
 

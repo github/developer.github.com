@@ -96,9 +96,7 @@ $(function() {
         .addClass(data.status)
         .attr("title", "API Status: " + data.status + ". Click for details.")
         .text("API Status: " + data.status);
-      var img = $("<img>")
-        .attr("src", "/images/status-icon-" + data.status + ".png");	
-      $('.api-status').html(link).append(img);
+      $('.api-status').html(link);
     }
   });
 

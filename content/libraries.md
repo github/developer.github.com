@@ -10,6 +10,7 @@ many flavors</h1>
 	<ul class="library-links">
 		<li><span>Ruby</span><a href="#">octokit.rb</a></li>
 		<li><span>Obj-C</span><a href="#">octokit.objc</a></li>
+		<li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
 	</ul>
 	<img src="/shared/images/gundamcat.png" class="gundamcat" />
 </div>

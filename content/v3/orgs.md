@@ -9,7 +9,7 @@ title: Organizations | GitHub API
 
 ## List User Organizations
 
-List all public organizations for a user. This will also include private organizations for an authenticated user.
+List all public organizations for an unauthenticated user. Lists private *and* public organizations for authenticated users.
 
     GET /users/:user/orgs
 

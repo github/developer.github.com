@@ -14,7 +14,7 @@ title: Repo Forks | GitHub API
 ### Parameters
 
 sort
-: `newest`, `oldest`, `watchers`, default: `newest`.
+: `newest`, `oldest`, `stargazers`, default: `newest`.
 
 ### Response
 

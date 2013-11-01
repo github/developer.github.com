@@ -53,6 +53,9 @@ The recommendations below will help you prepare your application for the next ma
 1. Query parameters when POSTing to /repos/:owner/:repo/forks
 : Recommendation: Use JSON to POST to this method instead.
 
+1. Query parameter value: Passing "watchers" as the value for the "sort" parameter in a GET request to /repos/:owner/:repo/forks
+: Recommendation: Use **stargazers** as the value instead.
+
 1. Pull Request attribute: merge_commit_sha
 : Recommendation: [Do not use this attribute](/changes/2013-04-25-deprecating-merge-commit-sha/).
 

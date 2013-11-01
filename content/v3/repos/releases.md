@@ -131,7 +131,7 @@ prerelease. `false` to identify the release as a full release.
   :tag_name         => "v1.0.0",
   :target_commitish => "master",
   :name             => "v1.0.0",
-  :description      => "Description of the release",
+  :body             => "Description of the release",
   :draft            => false,
   :prerelease       => false
 %>

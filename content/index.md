@@ -59,13 +59,22 @@ The recommendations below will help you prepare your application for the next ma
 1. Rate Limit attribute: rate
 : Recommendation: Use **resources["core"]** instead.
 
+1. Repository attribute: forks
+: Recommendation: Use **fork_count** instead.
+
 1. Repository attribute: master_branch
 : Recommendation: Use **default_branch** instead.
+
+1. Repository attribute: open_issues
+: Recommendation: Use **open_issues_count** instead.
 
 1. Repository attribute: public
 : Recommendation: When [creating a repository](/v3/repos/#create), use the
   **private** attribute to indicate whether the repository should be public or
   private. Do not use the **public** attribute.
+
+1. Repository attribute: watchers
+: Recommendation: Use **watchers_count** instead.
 
 1. User attribute: bio
 : Recommendation: Do not use this attribute. It is obsolete.

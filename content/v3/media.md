@@ -138,4 +138,4 @@ The Commit, Commit Comparison, and Pull Request resources support
 [git-diff]: http://git-scm.com/docs/git-diff
 [git-patch]: http://git-scm.com/docs/git-format-patch
 [hypermedia]: /v3/#hypermedia
-[expected-changes]: /#expected-changes
+[expected-changes]: /#deprecations

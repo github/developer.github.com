@@ -8,7 +8,7 @@ Libraries for accessing the GitHub API from your favorite language.
 
 ## .NET
 
-* **[OctoKit][octokit.net]** (officially maintained by GitHub)
+* **[Octokit][octokit.net]** (officially maintained by GitHub)
 * [IronGithub][irongithub]
 * [CSharp GitHub API][csharp]
 * [FSharp.GitHubApi][fsharp]

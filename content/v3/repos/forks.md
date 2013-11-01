@@ -14,7 +14,9 @@ title: Repo Forks | GitHub API
 ### Parameters
 
 sort
-: `newest`, `oldest`, `stargazers`, default: `newest`.
+: _Optional_ Sort order if `sort` parameter is provided.
+  One of `newest`, `oldest`, or `stargazers`;
+  the default is `newest`.
 
 ### Response
 

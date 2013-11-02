@@ -24,7 +24,7 @@ Instead, we [recommend][media-types] that you specify `v3` as the version in the
 ### Onward!
 
 Thanks again to everyone that tried out the Releases API during the preview period.
-We got a lot of feedback and are already discussing additions to the API.
+We got some great feedback, and we are already discussing additions to the API.
 
 We can't wait to see what you build!
 

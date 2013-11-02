@@ -225,9 +225,9 @@ query might look something like this.
 
     https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
 
-In this query, we're searching for the keyword `win32`, within any open issue
+In this query, we're searching for the keyword `windows`, within any open issue
 that's labeled as `bug`. The search runs across repositories whose primary
-language is Ruby. We’re sorting by creation date in ascending order, so that
+language is Python. We’re sorting by creation date in ascending order, so that
 the oldest issues appear first in the search results.
 
 <%= headers 200 %>

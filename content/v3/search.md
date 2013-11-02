@@ -145,11 +145,11 @@ Suppose you want to find the definition of the `addClass` function inside
 [jQuery](https://github.com/jquery/jquery). Your query would look something like
 this:
 
-    https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
+    https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
 
 Here, we're searching for the keyword `addClass` within a file's contents. We're
 making sure that we're only looking in files where the language is JavaScript.
-And we're scoping the search to the `@jquery/jquery` repository.
+And we're scoping the search to the `repo:jquery/jquery` repository.
 
 <%= headers 200 %>
 <%= json(:code_search_v3_results) %>
@@ -163,7 +163,7 @@ media type in your Accept header. For example, via curl, the above query would
 look like this:
 
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
+      https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as

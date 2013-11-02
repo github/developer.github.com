@@ -30,22 +30,23 @@ To use Basic Authentication with the GitHub API, simply send the username and
 password associated with the account.
 
 For example, if you're accessing the API via [cURL][curl], the following command
-would authenticate with `mojombo` as the username. (cURL will prompt you to
-enter the password.)
+would authenticate you if you replace `<username>` with your GitHub username.
+(cURL will prompt you to enter the password.)
 
 <pre class='terminal'>
-curl -u mojombo https://api.github.com/user
+curl -u <username> https://api.github.com/user
 </pre>
 
 ### Via OAuth Tokens
 
 Alternatively, you can authenticate using [personal access
 tokens][personal-access-tokens] or OAuth tokens. To do so, provide the token as
-the username and provide a blank password or a password of `x-oauth-basic`. For
-example:
+the username and provide a blank password or a password of `x-oauth-basic`. If
+you're accessing the API via cURL, replace `<token>` with your OAuth token in
+the following command:
 
 <pre class='terminal'>
-curl -u 3816d821c80a6847ca84550052c1ff6246e8169b:x-oauth-basic https://api.github.com/user
+curl -u <token>:x-oauth-basic https://api.github.com/user
 </pre>
 
 This approach is useful if your tools only support Basic Authentication but you

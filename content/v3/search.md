@@ -198,6 +198,11 @@ q
      Finds issues that are assigned to a certain user.
    * [Mentions](https://help.github.com/articles/searching-issues#mentions)
      Finds issues that mention a certain user.
+   * [Commenter](https://help.github.com/articles/searching-issues#commenter)
+     Finds issues that a certain user commented on.
+   * [Involves](https://help.github.com/articles/searching-issues#involves)
+     Finds issues that were either created by a certain user, assigned to that
+     user, mention that user, or were commented on by that user.
    * [State](https://help.github.com/articles/searching-issues#state)
      Filter issues based on whether they're open or closed.
    * [Labels](https://help.github.com/articles/searching-issues#labels)

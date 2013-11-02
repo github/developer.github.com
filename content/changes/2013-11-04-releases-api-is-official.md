@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Releases API is Official
-created_at: 2013-11-01
+created_at: 2013-11-04
 author_name: technoweenie
 ---
 

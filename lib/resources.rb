@@ -656,7 +656,8 @@ module GitHub
     }
 
     ISSUE_EVENT = {
-      "url" => "https://api.github.com/repos/octocat/Hello-World/issues/events/1",
+      "id"         => 1,
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/events/1",
       "actor"      => USER,
       "event"      => "closed",
       "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",

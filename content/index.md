@@ -24,31 +24,60 @@ to the actual date.
 We consider the "beta" API unchangeable.  [File a support issue](https://github.com/contact)
 if you have problems.
 
-#### Expected Changes
+### Deprecations
 
-These changes are _not_ implemented, just planned for the next major API version.
+The following functionality is deprecated. For backwards compatibility purposes,
+API v3 will continue to provide this functionality. However, this deprecated
+functionality **will be removed** in the _next_ major version of the API.
 
-* `[ ]` Standardize on existing `*_url` attributes for hypermedia.  Remove all `_links`
-objects.
-* `[✓]` <del>The '/repos/:owner/:repo/hooks/:id/test' action becomes
-  '/repos/:owner/:repo/hooks/:id/tests'.</del>
-* `[✓]` <del>The '/gists/:id/fork' action becomes '/gists/:id/forks'.</del> 
-* `[ ]` Gist forks/history objects become separate API calls.
-* `[ ]` Gist files object is not returned on Gist listings.
-* `[ ]` Commit schema will change to be [more consistent](https://gist.github.com/3a2e5779588e21b0c0f3).
-* `[ ]` `master_branch` becomes `default_branch`.
-* `[ ]` `integrate_branch` on the [repo API](/v3/repos/#get) will no longer be
-  returned.
-* `[ ]` `merge_commit_sha` on the [pull request API](/v3/pulls/#get-a-single-pull-request)
-  will no longer be returned.
-* `[ ]` Use the `private` attribute when creating a private repository,
-  instead of setting `public` to false.
-* `[ ]` Use JSON to POST to the "repos/:owner/:repo/forks" endpoint, instead of a query string.
-* `[✓]` <del>User Emails come back [as a hash][v3-email] instead of a string.</del>
-* `[ ]` Remove the unused "bio" field for Users.
-* `[ ]` When listing the contents of a directory in the [Repository Contents API](/v3/repos/contents/#get-contents), fix the `type` value returned for submodules: change the value to `"submodule"` (instead of `"file"`).
-* `[ ]` Remove the [Legacy Search API](/v3/search/legacy/).
-* `[ ]` Top-level `rate` hash on the [Rate Limit API](v3/rate_limit/) will no longer be returned.
+The recommendations below will help you prepare your application for the next major version of the API.
+
+1. Method: /gists/:id/fork
+: Recommendation: Use **/gists/:id/forks** (plural) instead.
+
+1. Method: /legacy/issues/search/:owner/:repository/:state/:keyword
+: Recommendation: Use [v3 Issue Search API](v3/search/#search-issues) instead.
+
+1. Method: /legacy/repos/search/:keyword
+: Recommendation: Use [v3 Repository Search API](/v3/search/#search-repositories) instead.
+
+1. Method: /legacy/user/search/:keyword
+: Recommendation: Use [v3 User Search API](/v3/search/#search-users) instead.
+
+1. Method: /legacy/user/email/:email
+: Recommendation: Use [v3 User Search API](/v3/search/#search-users) instead.
+
+1. Method: /repos/:owner/:repo/hooks/:id/test
+: Recommendation: Use **/repos/:owner/:repo/hooks/:id/tests** (plural) instead.
+
+1. Query parameters when POSTing to /repos/:owner/:repo/forks
+: Recommendation: Use JSON to POST to this method instead.
+
+1. Pull Request attribute: merge_commit_sha
+: Recommendation: [Do not use this attribute](/changes/2013-04-25-deprecating-merge-commit-sha/).
+
+1. Rate Limit attribute: rate
+: Recommendation: Use **resources["core"]** instead.
+
+1. Repository attribute: forks
+: Recommendation: Use **fork_count** instead.
+
+1. Repository attribute: master_branch
+: Recommendation: Use **default_branch** instead.
+
+1. Repository attribute: open_issues
+: Recommendation: Use **open_issues_count** instead.
+
+1. Repository attribute: public
+: Recommendation: When [creating a repository](/v3/repos/#create), use the
+  **private** attribute to indicate whether the repository should be public or
+  private. Do not use the **public** attribute.
+
+1. Repository attribute: watchers
+: Recommendation: Use **watchers_count** instead.
+
+1. User attribute: bio
+: Recommendation: Do not use this attribute. It is obsolete.
 
 ### Breaking Beta Changes
 

@@ -288,9 +288,8 @@ target_url
 
 branches
 : **array** - An array of branch objects containing the status' SHA.
-These branches definitely contain the given SHA, but it may or may not be
-the head of any of them. A maximum of 10 branches will be attached to the
-event.
+Each branch contains the given SHA, but the SHA may or may not be the
+head of the branch. The array includes a maximum of 10 branches.
 
 ## TeamAddEvent
 

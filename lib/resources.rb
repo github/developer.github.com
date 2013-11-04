@@ -176,13 +176,10 @@ module GitHub
       "mirror_url"        => "git://git.example.com/octocat/Hello-World",
       "homepage"          => "https://github.com",
       "language"          => nil,
-      "forks"             => 9,
       "forks_count"       => 9,
-      "watchers"          => 80,
       "watchers_count"    => 80,
       "size"              => 108,
       "master_branch"     => 'master',
-      "open_issues"       => 0,
       "open_issues_count" => 0,
       "pushed_at"         => "2011-01-26T19:06:43Z",
       "created_at"        => "2011-01-26T19:01:12Z",
@@ -656,7 +653,8 @@ module GitHub
     }
 
     ISSUE_EVENT = {
-      "url" => "https://api.github.com/repos/octocat/Hello-World/issues/events/1",
+      "id"         => 1,
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/events/1",
       "actor"      => USER,
       "event"      => "closed",
       "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
@@ -846,9 +844,6 @@ module GitHub
           "language" => "Assembly",
           "forks_count" => 0,
           "open_issues_count" => 0,
-          "forks" => 0,
-          "open_issues" => 0,
-          "watchers" => 1,
           "master_branch" => "master",
           "default_branch" => "master",
           "score" => 10.309712

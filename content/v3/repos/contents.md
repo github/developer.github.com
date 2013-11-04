@@ -60,6 +60,11 @@ ref
 <%= headers 200 %>
 <%= json :directory_content %>
 
+Note: When listing the contents of a directory, submodules have their "type"
+specified as "file". Logically, the value *should* be "submodule". This behavior
+exists in API v3 [for backwards compatibility purposes](https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490).
+In the next major version of the API, the type will be returned as "submodule".
+
 ### Response if content is a symlink
 
 If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the API responds with the content of the file (in the [format shown above](#response-if-content-is-a-file)).

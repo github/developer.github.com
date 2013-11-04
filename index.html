@@ -59,51 +59,108 @@ to the actual date.</p>
 <p>We consider the “beta” API unchangeable.  <a href="https://github.com/contact">File a support issue</a>
 if you have problems.</p>
 
-<h4 id="expected-changes">Expected Changes</h4>
+<h3 id="deprecations">Deprecations</h3>
 
-<p>These changes are <em>not</em> implemented, just planned for the next major API version.</p>
+<p>The following functionality is deprecated. For backwards compatibility purposes,
+API v3 will continue to provide this functionality. However, this deprecated
+functionality <strong>will be removed</strong> in the <em>next</em> major version of the API.</p>
 
-<ul>
+<p>The recommendations below will help you prepare your application for the next major version of the API.</p>
+
+<ol>
 <li>
-<code>[ ]</code> Standardize on existing <code>*_url</code> attributes for hypermedia.  Remove all <code>_links</code>
-objects.</li>
-  <li>
-<code>[✓]</code> <del>The ‘/repos/:owner/:repo/hooks/:id/test’ action becomes
-‘/repos/:owner/:repo/hooks/:id/tests’.</del>
+    <dl>
+<dt>Method: /gists/:id/fork</dt>
+      <dd>Recommendation: Use <strong>/gists/:id/forks</strong> (plural) instead.</dd>
+    </dl>
 </li>
   <li>
-<code>[✓]</code> <del>The ‘/gists/:id/fork’ action becomes ‘/gists/:id/forks’.</del> </li>
-  <li>
-<code>[ ]</code> Gist forks/history objects become separate API calls.</li>
-  <li>
-<code>[ ]</code> Gist files object is not returned on Gist listings.</li>
-  <li>
-<code>[ ]</code> Commit schema will change to be <a href="https://gist.github.com/3a2e5779588e21b0c0f3">more consistent</a>.</li>
-  <li>
-<code>[ ]</code> <code>master_branch</code> becomes <code>default_branch</code>.</li>
-  <li>
-<code>[ ]</code> <code>integrate_branch</code> on the <a href="/v3/repos/#get">repo API</a> will no longer be
-returned.</li>
-  <li>
-<code>[ ]</code> <code>merge_commit_sha</code> on the <a href="/v3/pulls/#get-a-single-pull-request">pull request API</a>
-will no longer be returned.</li>
-  <li>
-<code>[ ]</code> Use the <code>private</code> attribute when creating a private repository,
-instead of setting <code>public</code> to false.</li>
-  <li>
-<code>[ ]</code> Use JSON to POST to the “repos/:owner/:repo/forks” endpoint, instead of a query string.</li>
-  <li>
-<code>[✓]</code> <del>User Emails come back <a href="/v3/users/emails/#future-response">as a hash</a> instead of a string.</del>
+    <dl>
+<dt>Method: /legacy/issues/search/:owner/:repository/:state/:keyword</dt>
+      <dd>Recommendation: Use <a href="v3/search/#search-issues">v3 Issue Search API</a> instead.</dd>
+    </dl>
 </li>
   <li>
-<code>[ ]</code> Remove the unused “bio” field for Users.</li>
+    <dl>
+<dt>Method: /legacy/repos/search/:keyword</dt>
+      <dd>Recommendation: Use <a href="/v3/search/#search-repositories">v3 Repository Search API</a> instead.</dd>
+    </dl>
+</li>
   <li>
-<code>[ ]</code> When listing the contents of a directory in the <a href="/v3/repos/contents/#get-contents">Repository Contents API</a>, fix the <code>type</code> value returned for submodules: change the value to <code>"submodule"</code> (instead of <code>"file"</code>).</li>
+    <dl>
+<dt>Method: /legacy/user/search/:keyword</dt>
+      <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
+    </dl>
+</li>
   <li>
-<code>[ ]</code> Remove the <a href="/v3/search/legacy/">Legacy Search API</a>.</li>
+    <dl>
+<dt>Method: /legacy/user/email/:email</dt>
+      <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
+    </dl>
+</li>
   <li>
-<code>[ ]</code> Top-level <code>rate</code> hash on the <a href="v3/rate_limit/">Rate Limit API</a> will no longer be returned.</li>
-</ul><h3 id="breaking-beta-changes">Breaking Beta Changes</h3>
+    <dl>
+<dt>Method: /repos/:owner/:repo/hooks/:id/test</dt>
+      <dd>Recommendation: Use <strong>/repos/:owner/:repo/hooks/:id/tests</strong> (plural) instead.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Query parameters when POSTing to /repos/:owner/:repo/forks</dt>
+      <dd>Recommendation: Use JSON to POST to this method instead.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Pull Request attribute: merge_commit_sha</dt>
+      <dd>Recommendation: <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Do not use this attribute</a>.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Rate Limit attribute: rate</dt>
+      <dd>Recommendation: Use <strong>resources[“core”]</strong> instead.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Repository attribute: forks</dt>
+      <dd>Recommendation: Use <strong>fork_count</strong> instead.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Repository attribute: master_branch</dt>
+      <dd>Recommendation: Use <strong>default_branch</strong> instead.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Repository attribute: open_issues</dt>
+      <dd>Recommendation: Use <strong>open_issues_count</strong> instead.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Repository attribute: public</dt>
+      <dd>Recommendation: When <a href="/v3/repos/#create">creating a repository</a>, use the
+<strong>private</strong> attribute to indicate whether the repository should be public or
+private. Do not use the <strong>public</strong> attribute.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Repository attribute: watchers</dt>
+      <dd>Recommendation: Use <strong>watchers_count</strong> instead.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>User attribute: bio</dt>
+      <dd>Recommendation: Do not use this attribute. It is obsolete.</dd>
+    </dl>
+</li>
+</ol><h3 id="breaking-beta-changes">Breaking Beta Changes</h3>
 
 <h5 id="june-12-2012">June 12, 2012:</h5>
 <ul>

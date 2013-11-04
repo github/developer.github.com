@@ -175,6 +175,11 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
+<p>Note: When listing the contents of a directory, submodules have their “type”
+specified as “file”. Logically, the value <em>should</em> be “submodule”. This behavior
+exists in API v3 <a href="https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490">for backwards compatibility purposes</a>.
+In the next major version of the API, the type will be returned as “submodule”.</p>
+
 <h3 id="response-if-content-is-a-symlink">Response if content is a symlink</h3>
 
 <p>If the requested <code>:path</code> points to a symlink, and the symlink’s target is a normal file in the repository, then the API responds with the content of the file (in the <a href="#response-if-content-is-a-file">format shown above</a>).</p>

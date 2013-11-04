@@ -17,6 +17,18 @@ many flavors</h1>
 
 # Third-party libraries
 
+## .NET
+
+* **[Octokit][octokit.net]** (officially maintained by GitHub)
+* [IronGithub][irongithub]
+* [CSharp GitHub API][csharp]
+* [FSharp.GitHubApi][fsharp]
+
+[octokit.net]: https://github.com/octokit/octokit.net
+[irongithub]: https://github.com/in2bits/IronGitHub
+[csharp]: https://github.com/sgrassie/csharp-github-api
+[fsharp]: https://github.com/saxonmatt/FSharp.GitHubApi
+
 ## ActionScript
 
 * [ActionScript GitHub API][as3]
@@ -28,20 +40,6 @@ many flavors</h1>
 * [Tentacles][tentacles]
 
 [tentacles]: https://github.com/Raynes/tentacles
-
-## CSharp
-
-* [CSharp GitHub API][csharp]
-* [IronGithub][irongithub]
-
-[csharp]: https://github.com/sgrassie/csharp-github-api
-[irongithub]: https://github.com/in2bits/IronGitHub
-
-## FSharp
-
-* [FSharp.GitHubApi][fsharp]
-
-[fsharp]: https://github.com/saxonmatt/FSharp.GitHubApi
 
 ## Emacs Lisp
 

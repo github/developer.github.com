@@ -26,7 +26,7 @@ Instead, we [recommend][media-types] that you specify `v3` as the version in the
 Thanks again to everyone that tried out the Releases API during the preview period.
 We got some great feedback, and we are already discussing additions to the API.
 
-We can't wait to see what you build!
+We can't wait to see what you ship!
 
 [media-types]: /v3/media
 [preview-period]: /changes/2013-07-19-preview-the-new-search-api/#preview-period

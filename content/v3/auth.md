@@ -33,8 +33,9 @@ For example, if you're accessing the API via [cURL][curl], the following command
 would authenticate you if you replace `<username>` with your GitHub username.
 (cURL will prompt you to enter the password.)
 
-    curl -u <username> https://api.github.com/user
-
+<pre class='terminal'>
+curl -u &lt;username&gt; https://api.github.com/user
+</pre>
 
 ### Via OAuth Tokens
 
@@ -44,7 +45,9 @@ the username and provide a blank password or a password of `x-oauth-basic`. If
 you're accessing the API via cURL, replace `<token>` with your OAuth token in
 the following command:
 
-    curl -u <token>:x-oauth-basic https://api.github.com/user
+<pre class='terminal'>
+curl -u &lt;token&gt;:x-oauth-basic https://api.github.com/user
+</pre>
 
 This approach is useful if your tools only support Basic Authentication but you
 want to take advantage of OAuth access token security features.

@@ -114,20 +114,19 @@ body.api .content h2 {
   font-weight: 300;
 }
 
-.change h2 {
+.change h2, .sidebar-shell h2 {
 	font-weight: 300;
 	font-size: 22px;
-	margin: 1.5em 0 1em;
+	margin: 1.2em 0 1em;
 }
 
 .change h2.title {
   background: none;
   line-height: 1.4em;
-  margin: 2em 0 0px;
+  margin: 1.2em 0 0px;
   padding-left: 0;
-  font-size:36px;
+  font-size: 30px;
   font-weight: 300;
-  text-align: center;
 }
 
 h2 span.step {
@@ -218,15 +217,18 @@ a img {
 	background-color: #7e909e;	
 }
 
-.rss-container {
-  text-align: center;
+.rss-subscribe {
+  display: block;
+  padding: 15px 14px 16px 47px;
+  background: url(/images/feed-icon.png) 10px center no-repeat;
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
 }
 
-.rss-subscribe {
-  display: inline-block;
-  margin-bottom: 100px;
-  padding: 14px 14px 14px 47px;
-  background: url(/images/feed-icon.png) 10px center no-repeat #738797;
+.rss-subscribe:hover {
+  background-color: #f4f4f7;
+  text-decoration: none;
 }
 
 /*------------------------------------------------------------------------------
@@ -498,12 +500,12 @@ a img {
 .sidebar-module.notice {
   background: #fafafb;
   border: 1px solid #CACACA;
-  padding: 12px;
   border-radius: 4px;
   line-height: 1.5em;
 }
 
 .sidebar-module.notice p {
+  padding: 12px;
 	margin: 0;
 }
 
@@ -511,7 +513,7 @@ a img {
   list-style-type: none;
 }
 
-.sidebar-module ul li:last-child h3 {
+.sidebar-module ul li:last-child h3, .headlines li:last-child {
   border-bottom: none;
 }
 
@@ -519,11 +521,34 @@ a img {
   border-top: 1px solid #eee;
 }
 
-.sidebar-module ul h3 {
+.sidebar-module ul h3, .headlines li {
   margin: 0px;
   color: #666;
   border-bottom: 1px solid #eee;
   font-size: 14px;
+}
+
+.headlines li a {
+  color: #555;
+  display: block;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-backface-visibility: hidden;
+}
+
+.headlines a .date {
+  font-weight: normal;
+  font-size: 12px;
+  color: #777;
+}
+
+.headlines li a:hover {
+  color: #333;
+}
+
+.headlines li:hover {
+  background-color: #fdfdfd;
 }
 
 .sidebar-module h3 a,
@@ -575,6 +600,11 @@ div.sidebar-module li.disable a {
   text-decoration: none;
   font-weight: normal;
   color: #777;
+}
+
+.sidebar-module ul ul li a:hover {
+  background-color: #f2f2f2;
+  color: #444;
 }
 
 div.sidebar-module ul ul li span {
@@ -729,9 +759,6 @@ div.sidebar-module ul ul li span {
 }
 
 .blog .content {
-	width: 690px;
-	font-size: 16px;
-	line-height: 1.6em;
 	margin-bottom: 60px;
 }
 
@@ -807,18 +834,21 @@ p code {
 }
 
 .change {
-  padding-bottom: 1em;
+  padding-bottom: 40px;
 }
 
 
 .change .meta {
-  font-size: 14px;
-  text-align: center;
-  margin-bottom: 30px;
+  font-size: 13px;
+  margin: 3px 0 20px;
 }
 
 .change .meta ul {
 	margin: 0;
+}
+
+.change .meta ul img {
+  margin: 0;
 }
 
 .who_when a {

@@ -3,13 +3,17 @@
 <body class="blog">
 	<%= render 'header' %>
 	
-	<div class="wrapper blog">
+	<div id="wrapper">
 		<div class="content">
 			<%= yield %>
 		</div>
+    
+    <div class="sidebar-shell">
+        <%= render 'headlines', :changes => api_changes %>
+        
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
 	</div>
-  
-  <div class="wrapper rss-container"><a class="rss-subscribe button-secondary" href="/changes.atom">Subscribe to the RSS feed</a></div>
   
 	<%= render 'footer' %>
 </body>

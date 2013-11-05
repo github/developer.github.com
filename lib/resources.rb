@@ -188,12 +188,13 @@ module GitHub
     })
 
     FULL_REPO = REPO.merge({
-      "organization"     => USER.merge('type' => 'Organization'),
-      "parent"           => REPO,
-      "source"           => REPO,
-      "has_issues"       => true,
-      "has_wiki"         => true,
-      "has_downloads"    => true
+      "subscribers_count" => 42,
+      "organization"      => USER.merge('type' => 'Organization'),
+      "parent"            => REPO,
+      "source"            => REPO,
+      "has_issues"        => true,
+      "has_wiki"          => true,
+      "has_downloads"     => true
     })
 
     TAG = {

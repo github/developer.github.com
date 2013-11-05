@@ -39,7 +39,7 @@
     <h1 id="oauth">OAuth</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#web-application-flow">Web Application Flow</a></li>
+<li><a href="#web-application-flow">Web Application Flow</a></li>
   <li><a href="#non-web-application-flow">Non-Web Application Flow</a></li>
   <li><a href="#redirect-urls">Redirect URLs</a></li>
   <li><a href="#scopes">Scopes</a></li>
@@ -51,10 +51,10 @@
   <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   <li><a href="#delete-an-authorization">Delete an authorization</a></li>
   <li><a href="#check-an-authorization">Check an authorization</a></li>
+  <li><a href="#revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</a></li>
+  <li><a href="#revoke-an-authorization-for-an-application">Revoke an authorization for an application</a></li>
   <li><a href="#more-information">More Information</a></li>
-</ul>
-
-<p>OAuth2 is a protocol that lets external apps request authorization to
+</ul><p>OAuth2 is a protocol that lets external apps request authorization to
 private details in a user’s GitHub account without getting their
 password. This is preferred over <a href="/v3/auth#basic-authentication">Basic Authentication</a> because tokens can
 be limited to specific types of data, and can be revoked by users at any
@@ -77,7 +77,7 @@ and Client Secret. The Client Secret should not be shared.</p>
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-  <dt>client_id</dt>
+<dt>client_id</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The client ID you received from GitHub when
 you <a href="https://github.com/settings/applications/new">registered</a>.</dd>
@@ -93,9 +93,7 @@ urls</a>.</dd>
   <dd>
 <em>Optional</em> <strong>string</strong> - An unguessable random string. It is used to protect
 against cross-site request forgery attacks.</dd>
-</dl>
-
-<h3 id="github-redirects-back-to-your-site">2. GitHub redirects back to your site</h3>
+</dl><h3 id="github-redirects-back-to-your-site">2. GitHub redirects back to your site</h3>
 
 <p>If the user accepts your request, GitHub redirects back to your site
 with a temporary code in a <code>code</code> parameter as well as the state you provided in
@@ -110,7 +108,7 @@ has been created by a third party and the process should be aborted.</p>
 <h3 id="parameters-1">Parameters</h3>
 
 <dl>
-  <dt>client_id</dt>
+<dt>client_id</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The client ID you received from GitHub when
 you <a href="https://github.com/settings/applications/new">registered</a>.</dd>
@@ -125,9 +123,7 @@ when you <a href="https://github.com/settings/applications/new">registered</a>.<
   <dt>code</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The code you received as a response to <a href="#redirect-users-to-request-github-access">Step 1</a>.</dd>
-</dl>
-
-<h3 id="response">Response</h3>
+</dl><h3 id="response">Response</h3>
 
 <p>By default, the response will take the following form:</p>
 
@@ -205,7 +201,7 @@ X-Accepted-OAuth-Scopes: user
 <code>X-Accepted-OAuth-Scopes</code> lists the scopes that the action checks for.</p>
 
 <dl>
-  <dt>(no scope)</dt>
+<dt>(no scope)</dt>
   <dd>public read-only access (includes public user profile info, public
 repo info, and gists).</dd>
   <dt>user</dt>
@@ -231,9 +227,7 @@ public repositories respectively.</dd>
   <dd>Read access to a user’s notifications.  <code>repo</code> is accepted too.</dd>
   <dt>gist</dt>
   <dd>Write access to gists.</dd>
-</dl>
-
-<p>NOTE: Your application can request the scopes in the initial redirection. You
+</dl><p>NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them by a comma.</p>
 
 <pre><code>https://github.com/login/oauth/authorize?
@@ -327,7 +321,7 @@ Read more about these tokens on the <a href="https://help.github.com/articles/cr
 <h3 id="input">Input</h3>
 
 <dl>
-  <dt>scopes</dt>
+<dt>scopes</dt>
   <dd>
 <em>Optional</em> <strong>array</strong> - A list of scopes that this authorization is in.</dd>
   <dt>note</dt>
@@ -344,9 +338,7 @@ token.</dd>
   <dd>
 <em>Optional</em> <strong>String</strong> - The 40 character OAuth app client secret for which to create the
 token.</dd>
-</dl>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
@@ -392,7 +384,7 @@ exists. Otherwise, it creates one.</p>
 <h3 id="input-1">Input</h3>
 
 <dl>
-  <dt>client_secret</dt>
+<dt>client_secret</dt>
   <dd>
 <strong>String</strong> - The 40 character OAuth app client secret associated with the
 client ID specified in the URL.</dd>
@@ -405,9 +397,7 @@ client ID specified in the URL.</dd>
   <dt>note_url</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - A URL to remind you what app the OAuth token is for.</dd>
-</dl>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"client_secret"</span><span class="o">:</span> <span class="s2">"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"</span><span class="p">,</span>
   <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
@@ -473,7 +463,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-2">Input</h3>
 
 <dl>
-  <dt>scopes</dt>
+<dt>scopes</dt>
   <dd>
 <em>Optional</em> <strong>array</strong> - Replaces the authorization scopes with these.</dd>
   <dt>add_scopes</dt>
@@ -489,9 +479,7 @@ authorization.</dd>
   <dt>note_url</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - A URL to remind you what app the OAuth token is for.</dd>
-</dl>
-
-<p>You can only send one of these scope keys at a time.</p>
+</dl><p>You can only send one of these scope keys at a time.</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"add_scopes"</span><span class="o">:</span> <span class="p">[</span>
@@ -578,13 +566,46 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
+<h2 id="revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</h2>
+
+<p>OAuth application owners can revoke every token for an OAuth application. You
+must use <a href="/v3/auth#basic-authentication">Basic Authentication</a> when calling
+this method. The username is the OAuth application <code>client_id</code> and the password
+is its <code>client_secret</code>. Tokens are revoked via a background job, and it might
+take a few minutes for the process to complete.</p>
+
+<pre><code>DELETE /applications/:client_id/tokens
+</code></pre>
+
+<h3 id="response-7">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="revoke-an-authorization-for-an-application">Revoke an authorization for an application</h2>
+
+<p>OAuth application owners can also revoke a single token for an OAuth
+application. You must use <a href="/v3/auth#basic-authentication">Basic Authentication</a>
+for this method, where the username is the OAuth application <code>client_id</code> and
+  the password is its <code>client_secret</code>.</p>
+
+<pre><code>DELETE /applications/:client_id/tokens/:access_token
+</code></pre>
+
+<h3 id="response-8">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
 <h2 id="more-information">More Information</h2>
 
 <p>It can be a little tricky to get started with OAuth. Here are a few
 links that might be of help:</p>
 
 <ul>
-  <li><a href="http://tools.ietf.org/html/rfc6749">OAuth 2 spec</a></li>
+<li><a href="http://tools.ietf.org/html/rfc6749">OAuth 2 spec</a></li>
   <li><a href="http://developers.facebook.com/docs/technical-guides/login/">Facebook Login API</a></li>
   <li><a href="https://github.com/intridea/oauth2">Ruby OAuth2 lib</a></li>
   <li><a href="https://gist.github.com/9fd1a6199da0465ec87c">Simple Ruby/Sinatra example</a></li>
@@ -598,8 +619,6 @@ links that might be of help:</p>
   <li><a href="https://github.com/atmos/sinatra_auth_github">Ruby Sinatra extension</a></li>
   <li><a href="https://github.com/atmos/warden-github">Ruby Warden strategy</a></li>
 </ul>
-
-
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

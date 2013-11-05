@@ -68,124 +68,118 @@ functionality <strong>will be removed</strong> in the <em>next</em> major versio
 <p>The recommendations below will help you prepare your application for the next major version of the API.</p>
 
 <ol>
-  <li>
+<li>
     <dl>
-      <dt>Method: /gists/:id/fork</dt>
+<dt>Method: /gists/:id/fork</dt>
       <dd>Recommendation: Use <strong>/gists/:id/forks</strong> (plural) instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Method: /legacy/issues/search/:owner/:repository/:state/:keyword</dt>
+<dt>Method: /legacy/issues/search/:owner/:repository/:state/:keyword</dt>
       <dd>Recommendation: Use <a href="v3/search/#search-issues">v3 Issue Search API</a> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Method: /legacy/repos/search/:keyword</dt>
+<dt>Method: /legacy/repos/search/:keyword</dt>
       <dd>Recommendation: Use <a href="/v3/search/#search-repositories">v3 Repository Search API</a> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Method: /legacy/user/search/:keyword</dt>
+<dt>Method: /legacy/user/search/:keyword</dt>
       <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Method: /legacy/user/email/:email</dt>
+<dt>Method: /legacy/user/email/:email</dt>
       <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Method: /repos/:owner/:repo/hooks/:id/test</dt>
+<dt>Method: /repos/:owner/:repo/hooks/:id/test</dt>
       <dd>Recommendation: Use <strong>/repos/:owner/:repo/hooks/:id/tests</strong> (plural) instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Query parameters when POSTing to /repos/:owner/:repo/forks</dt>
+<dt>Query parameters when POSTing to /repos/:owner/:repo/forks</dt>
       <dd>Recommendation: Use JSON to POST to this method instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Pull Request attribute: merge_commit_sha</dt>
+<dt>Pull Request attribute: merge_commit_sha</dt>
       <dd>Recommendation: <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Do not use this attribute</a>.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Rate Limit attribute: rate</dt>
+<dt>Rate Limit attribute: rate</dt>
       <dd>Recommendation: Use <strong>resources[“core”]</strong> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Repository attribute: forks</dt>
+<dt>Repository attribute: forks</dt>
       <dd>Recommendation: Use <strong>fork_count</strong> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Repository attribute: master_branch</dt>
+<dt>Repository attribute: master_branch</dt>
       <dd>Recommendation: Use <strong>default_branch</strong> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Repository attribute: open_issues</dt>
+<dt>Repository attribute: open_issues</dt>
       <dd>Recommendation: Use <strong>open_issues_count</strong> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Repository attribute: public</dt>
+<dt>Repository attribute: public</dt>
       <dd>Recommendation: When <a href="/v3/repos/#create">creating a repository</a>, use the
 <strong>private</strong> attribute to indicate whether the repository should be public or
 private. Do not use the <strong>public</strong> attribute.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>Repository attribute: watchers</dt>
+<dt>Repository attribute: watchers</dt>
       <dd>Recommendation: Use <strong>watchers_count</strong> instead.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>User attribute: bio</dt>
+<dt>User attribute: bio</dt>
       <dd>Recommendation: Do not use this attribute. It is obsolete.</dd>
     </dl>
-  </li>
-</ol>
-
-<h3 id="breaking-beta-changes">Breaking Beta Changes</h3>
+</li>
+</ol><h3 id="breaking-beta-changes">Breaking Beta Changes</h3>
 
 <h5 id="june-12-2012">June 12, 2012:</h5>
 <ul>
-  <li>Removed API v1 support</li>
+<li>Removed API v1 support</li>
   <li>Removed API v2 support</li>
-</ul>
-
-<h5 id="june-15th-2011">June 15th, 2011:</h5>
+</ul><h5 id="june-15th-2011">June 15th, 2011:</h5>
 
 <ul>
-  <li>
+<li>
 <code>gravatar_url</code> is being deprecated in favor of <code>avatar_url</code> for all
 responses that include users or orgs. A default size is no longer
 included in the URL.</li>
   <li>Creating new gists (both anonymously and with an authenticated user)
 should use <code>POST /gists</code> from now on. <code>POST /users/:user/gists</code> is no
 longer supported.</li>
-</ul>
-
-<h5 id="june-1st-2011">June 1st, 2011:</h5>
+</ul><h5 id="june-1st-2011">June 1st, 2011:</h5>
 
 <ul>
-  <li>Removed support for PUT verb on update requests. Use POST or PATCH
+<li>Removed support for PUT verb on update requests. Use POST or PATCH
 instead.</li>
   <li>Removed <code>.json</code> extension from all URLs.</li>
   <li>No longer using the X-Next or X-Last headers. Pagination info is
@@ -193,8 +187,6 @@ returned in the Link header instead.</li>
   <li>JSON-P response has completely changed to a more consistent format.</li>
   <li>Starring gists now uses PUT verb (instead of POST) and returns 204.</li>
 </ul>
-
-
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

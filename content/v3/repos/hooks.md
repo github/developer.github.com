@@ -12,7 +12,7 @@ hooks for a repository.  Hooks can be managed using the [JSON HTTP API](#json-ht
 and the [PubSubHubbub API](#pubsubhubbub).
 
 Each hook can be configured for a specific [service](#services) and one or 
-more [event](#events) regardless of the API used to do so.
+more [event](#events), regardless of the API used to do so.
 
 ## Services
 
@@ -22,8 +22,7 @@ settings, a list of available events, and default events.
 > For instance, the 
 [email](https://github.com/github/github-services/blob/master/lib/services/email.rb)
 service is a built-in GitHub service that will send event [payloads](#payloads) 
-to, at most, two email addresses, use an optional `Approved` header, and 
-can send the email 'from' the commit author.  It will trigger for the `push` 
+to, at most, two email addresses.  It will trigger for the `push` 
 event by default and supports the `public` event type as well.
 
 A number of services have been integrated through the open source
@@ -47,9 +46,9 @@ Active hooks can be configured to trigger for one or more service supported
 events. In other words, the service must support listening for the event you 
 want to trigger.
 
-> For example, the 
+For example, the 
 [Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
-service listens for all events while the
+service listens for all events, while the
 [IRC](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
 service can only listen for `push`, `issues`, and `pull_request` events.
 

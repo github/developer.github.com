@@ -7,23 +7,6 @@ title: Releases | GitHub API
 * TOC
 {:toc}
 
-### Preview mode
-
-<div class="alert">
-  <p>
-    The Releases API is currently available for developers to preview.
-    During the preview period, the API may change without advance notice.
-    Please see the <a href="/changes/2013-09-25-releases-api">blog post</a> for full details.
-  </p>
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.manifold-preview</pre>
-  </p>
-</div>
-
-If you have any questions or feedback about this new API, please [get in
-touch](https://github.com/contact?form[subject]=New+Releases+API).
-
 ## List releases for a repository
 
 Users with push access to the repository will receive all releases

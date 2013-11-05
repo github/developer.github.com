@@ -39,9 +39,11 @@
     <h1 id="repo-statuses-api">Repo Statuses API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-statuses-for-a-specific-ref">List Statuses for a specific Ref</a></li>
+  <li><a href="#list-statuses-for-a-specific-ref">List Statuses for a specific Ref</a></li>
   <li><a href="#create-a-status">Create a Status</a></li>
-</ul><p>The Status API allows external services to mark commits with a success,
+</ul>
+
+<p>The Status API allows external services to mark commits with a success,
 failure, error, or pending <code>state</code>, which is then reflected in pull requests
 involving those commits.</p>
 
@@ -69,10 +71,12 @@ access to Statuses <strong>without</strong> also granting access to repo code, w
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt>ref</dt>
+  <dt>ref</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.</dd>
-</dl><h3 id="response">Response</h3>
+</dl>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -107,7 +111,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-1">Parameters</h3>
 
 <dl>
-<dt>state</dt>
+  <dt>state</dt>
   <dd>
 <em>Required</em> <strong>string</strong> State of the status - can be one of <code>pending</code>,
 <code>success</code>, <code>error</code>, or <code>failure</code>.</dd>
@@ -124,7 +128,9 @@ this specific sha - <code>http://ci.example.com/johndoe/my-repo/builds/sha</code
   <dt>description</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> Short description of the status</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
   <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://example.com/build/status"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"The build succeeded!"</span>
@@ -153,6 +159,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
+
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

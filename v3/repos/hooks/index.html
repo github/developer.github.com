@@ -39,14 +39,16 @@
     <h1 id="repo-hooks-api">Repo Hooks API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list">List</a></li>
+  <li><a href="#list">List</a></li>
   <li><a href="#get-single-hook">Get single hook</a></li>
   <li><a href="#create-a-hook">Create a hook</a></li>
   <li><a href="#edit-a-hook">Edit a hook</a></li>
   <li><a href="#test-a-push-hook">Test a <code>push</code> hook</a></li>
   <li><a href="#delete-a-hook">Delete a hook</a></li>
   <li><a href="#pubsubhubbub">PubSubHubbub</a></li>
-</ul><p>The Repository Hooks API allows repository admins to manage the post-receive
+</ul>
+
+<p>The Repository Hooks API allows repository admins to manage the post-receive
 web and service hooks for a repository.  There are two main APIs to manage
 these hooks: a JSON HTTP API, and <a href="#pubsubhubbub">PubSubHubbub</a>.</p>
 
@@ -54,7 +56,7 @@ these hooks: a JSON HTTP API, and <a href="#pubsubhubbub">PubSubHubbub</a>.</p>
 The default event is <code>push</code>.  The available events are:</p>
 
 <ul>
-<li>
+  <li>
 <code>push</code> - Any git push to a Repository.</li>
   <li>
 <code>issues</code> - Any time an Issue is opened or closed.</li>
@@ -86,7 +88,9 @@ non-Organization Repository.</li>
 <code>team_add</code> - Any time a team is added or modified on a Repository.</li>
   <li>
 <code>status</code> - Any time a Repository has a status update from the API</li>
-</ul><p>The payloads for all of the hooks mirror <a href="/v3/activity/events/types/">the payloads for the Event
+</ul>
+
+<p>The payloads for all of the hooks mirror <a href="/v3/activity/events/types/">the payloads for the Event
 types</a>, with the exception of <a href="http://help.github.com/post-receive-hooks/">the original <code>push</code>
 event</a>.</p>
 
@@ -176,7 +180,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input">Input</h3>
 
 <dl>
-<dt><code>name</code></dt>
+  <dt><code>name</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The name of the service that is being called.
 (See <a href="https://api.github.com/hooks">/hooks</a> for the list of valid hook names.)</dd>
@@ -196,14 +200,18 @@ for.  Default: <code>["push"]</code>.</dd>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
-</dl><p>Example:  The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
+</dl>
+
+<p>Example:  The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
 takes these fields:</p>
 
 <ul>
-<li><code>url</code></li>
+  <li><code>url</code></li>
   <li><code>content_type</code></li>
   <li><code>secret</code></li>
-</ul><p>Here’s how you can setup a hook that posts raw JSON
+</ul>
+
+<p>Here’s how you can setup a hook that posts raw JSON
 (instead of the default legacy format):</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
@@ -251,7 +259,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <dl>
-<dt><code>config</code></dt>
+  <dt><code>config</code></dt>
   <dd>
 <em>Optional</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
 settings for this hook.  Modifying this will replace the entire config
@@ -276,7 +284,9 @@ list of events that the Hook triggers for.</dd>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
-</dl><h4 id="example">Example</h4>
+</dl>
+
+<h4 id="example">Example</h4>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -388,7 +398,7 @@ exists, it will be modified according to the request.</p>
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt><code>hub.mode</code></dt>
+  <dt><code>hub.mode</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - Either <code>subscribe</code> or <code>unsubscribe</code>.</dd>
   <dt><code>hub.topic</code></dt>
@@ -406,6 +416,8 @@ comparing the raw request body with the contents of the <code>X-Hub-Signature</c
 header.  You can see <a href="https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50">our Ruby implementation</a>, or <a href="http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify">the
 PubSubHubbub documentation</a> for more details.</dd>
 </dl>
+
+
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">

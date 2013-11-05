@@ -12,13 +12,14 @@ are shown next to repositories to show an approximate level of interest.  Stars
 have no effect on notifications or the activity feed.  For that, see [Repository
 Watching](/v3/activity/watching).
 
-We recently [changed the way watching
-works](https://github.com/blog/1204-notifications-stars) on GitHub.  Many 3rd
-party applications may be using the "watcher" endpoints for accessing these.
-Starting today, you can start changing these to the new "star" endpoints.  See
-below.  Check the [Watcher API Change post](/changes/2012-9-5-watcher-api/) for
-more.
+### Starring vs. Watching
 
+In August 2012, we [changed the way watching
+works](https://github.com/blog/1204-notifications-stars) on GitHub.  Many API
+client applications may be using the original "watcher" endpoints for accessing
+this data. You can now start using the "star" endpoints instead (described
+below). Check out the [Watcher API Change post](/changes/2012-9-5-watcher-api/)
+for more details.
 
 ## List Stargazers
 

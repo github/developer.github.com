@@ -11,11 +11,17 @@ Watching a Repository registers the user to receive notifications on new
 discussions, as well as events in the user's activity feed.  See [Repository
 Starring](/v3/activity/starring) for simple repository bookmarks.
 
-We recently [changed the way watching
-works](https://github.com/blog/1204-notifications-stars) on GitHub.  Until 3rd
-party applications stop using the "watcher" endpoints for the current Starring
-API, the Watching API will use the below "subscription" endpoints.  Check the
-[Watcher API Change post](/changes/2012-9-5-watcher-api/) for more.
+### Watching vs. Starring
+
+In August 2012, we [changed the way watching
+works](https://github.com/blog/1204-notifications-stars) on GitHub.  At the time
+of that change, many API clients were already using the existing "watcher"
+endpoints to access starring data. To avoid breaking those applications, the
+legacy "watcher" endpoints continue to provide starring data.
+
+To provide access to watching data, the v3 Watcher API uses the "subscription"
+endpoints described below. Check out the [Watcher API Change
+post](/changes/2012-9-5-watcher-api/) for more details.
 
 ## List watchers
 

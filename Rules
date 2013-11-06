@@ -21,6 +21,14 @@ compile '/feed/' do
   filter :kramdown, :toc_levels => [2]
 end
 
+compile '/v3/*' do
+  filter :erb
+  filter :kramdown, :toc_levels => [2]
+  filter :colorize_syntax,
+    :colorizers => {:javascript => :pygmentsrb}
+  layout item[:layout] || 'api'
+end
+
 %w(v3 */).each do |version|
   compile "/changes/#{version}" do
     filter :erb
@@ -28,14 +36,14 @@ end
     filter :colorize_syntax,
       :colorizers => {:javascript => :pygmentsrb}
     layout 'changes' if version[0] == '*'
-    layout 'default'
+    layout item[:layout] || 'blog'
   end
 end
 
 compile '/guides/*' do
   filter :kramdown, :toc_levels => [2]
   filter :erb
-  layout 'default'
+  layout item[:layout] || 'guides'
 end
 
 compile '*' do
@@ -43,7 +51,7 @@ compile '*' do
   filter :kramdown, :toc_levels => [2]
   filter :colorize_syntax,
     :colorizers => {:javascript => :pygmentsrb}
-  layout 'default'
+  layout item[:layout] || 'default'
 end
 
 route '/static/*' do

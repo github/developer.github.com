@@ -1,11 +1,10 @@
 ---
 title: Custom Media Types | GitHub API
 ---
+# GitHub Media Types
 
 * TOC
 {:toc}
-
-# GitHub Media Types
 
 Custom media types are used in the API to let consumers choose the format
 of the data they wish to receive. This is done by adding one or more of
@@ -138,4 +137,4 @@ The Commit, Commit Comparison, and Pull Request resources support
 [git-diff]: http://git-scm.com/docs/git-diff
 [git-patch]: http://git-scm.com/docs/git-format-patch
 [hypermedia]: /v3/#hypermedia
-[expected-changes]: /#deprecations
+[expected-changes]: /v3/#deprecations

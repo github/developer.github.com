@@ -39,7 +39,7 @@
     <h1 id="gists-api">Gists API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#authentication">Authentication</a></li>
+  <li><a href="#authentication">Authentication</a></li>
   <li><a href="#list-gists">List gists</a></li>
   <li><a href="#get-a-single-gist">Get a single gist</a></li>
   <li><a href="#create-a-gist">Create a gist</a></li>
@@ -49,7 +49,9 @@
   <li><a href="#check-if-a-gist-is-starred">Check if a gist is starred</a></li>
   <li><a href="#fork-a-gist">Fork a gist</a></li>
   <li><a href="#delete-a-gist">Delete a gist</a></li>
-</ul><h2 id="authentication">Authentication</h2>
+</ul>
+
+<h2 id="authentication">Authentication</h2>
 
 <p>You can read public gists and create them for anonymous users without a token; however, to read or write gists on a user’s behalf the <strong>gist</strong> <a href="/v3/oauth/#scopes">OAuth scope</a> is required.</p>
 
@@ -83,11 +85,13 @@ return all public gists:</p>
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt>since</dt>
+  <dt>since</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 Only gists updated at or after this time are returned.</dd>
-</dl><h3 id="response">Response</h3>
+</dl>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -97,7 +101,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/cd520d99c3087f2d18b4"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/b97e047448585e65a931"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
     <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"description of gist"</span><span class="p">,</span>
     <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -116,7 +120,7 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="p">}</span>
     <span class="p">},</span>
     <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/f6a9f28f5c3404533c31/comments/"</span><span class="p">,</span>
+    <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/088e037ee7f1cf3fcfe6/comments/"</span><span class="p">,</span>
     <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/1"</span><span class="p">,</span>
     <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/1.git"</span><span class="p">,</span>
     <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:1.git"</span><span class="p">,</span>
@@ -138,7 +142,7 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/cd520d99c3087f2d18b4"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/b97e047448585e65a931"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"description of gist"</span><span class="p">,</span>
   <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -157,7 +161,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/f6a9f28f5c3404533c31/comments/"</span><span class="p">,</span>
+  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/088e037ee7f1cf3fcfe6/comments/"</span><span class="p">,</span>
   <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/1"</span><span class="p">,</span>
   <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/1.git"</span><span class="p">,</span>
   <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:1.git"</span><span class="p">,</span>
@@ -171,13 +175,13 @@ X-RateLimit-Remaining: 4999</code></pre>
         <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
         <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
       <span class="p">},</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/caf7011f80b948487b32"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/5b397543ffa266398031"</span><span class="p">,</span>
       <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
     <span class="p">}</span>
   <span class="p">],</span>
   <span class="s2">"history"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/a0b028f686d0cdb9abef"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/d6e910148f9579568c04"</span><span class="p">,</span>
       <span class="s2">"version"</span><span class="o">:</span> <span class="s2">"57a7f021a713b1c5a6a199b54cc514735d2d462f"</span><span class="p">,</span>
       <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
@@ -204,7 +208,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input">Input</h3>
 
 <dl>
-<dt>description</dt>
+  <dt>description</dt>
   <dd>
 <em>Optional</em> <strong>string</strong>
 </dd>
@@ -219,7 +223,9 @@ should be a <em>required</em> <strong>string</strong> filename and the value ano
   <dt>content</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - File contents.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"the description for this gist"</span><span class="p">,</span>
   <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="s2">"files"</span><span class="o">:</span> <span class="p">{</span>
@@ -240,7 +246,7 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/cd520d99c3087f2d18b4"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/b97e047448585e65a931"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"description of gist"</span><span class="p">,</span>
   <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -259,7 +265,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/f6a9f28f5c3404533c31/comments/"</span><span class="p">,</span>
+  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/088e037ee7f1cf3fcfe6/comments/"</span><span class="p">,</span>
   <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/1"</span><span class="p">,</span>
   <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/1.git"</span><span class="p">,</span>
   <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:1.git"</span><span class="p">,</span>
@@ -273,13 +279,13 @@ X-RateLimit-Remaining: 4999</code></pre>
         <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
         <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
       <span class="p">},</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/caf7011f80b948487b32"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/5b397543ffa266398031"</span><span class="p">,</span>
       <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
     <span class="p">}</span>
   <span class="p">],</span>
   <span class="s2">"history"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/a0b028f686d0cdb9abef"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/d6e910148f9579568c04"</span><span class="p">,</span>
       <span class="s2">"version"</span><span class="o">:</span> <span class="s2">"57a7f021a713b1c5a6a199b54cc514735d2d462f"</span><span class="p">,</span>
       <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
@@ -306,7 +312,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <dl>
-<dt>description</dt>
+  <dt>description</dt>
   <dd>
 <em>Optional</em> <strong>string</strong>
 </dd>
@@ -317,15 +323,17 @@ should be an <em>optional</em> <strong>string</strong> filename and the value an
 <em>optional</em> <strong>hash</strong> with parameters:
 
     <dl>
-<dt>content</dt>
+      <dt>content</dt>
       <dd>
 <em>Optional</em> <strong>string</strong> - Updated file contents.</dd>
       <dt>filename</dt>
       <dd>
 <em>Optional</em> <strong>string</strong> - New name for this file.</dd>
     </dl>
-</dd>
-</dl><p>NOTE: All files from the previous version of the gist are carried over by
+  </dd>
+</dl>
+
+<p>NOTE: All files from the previous version of the gist are carried over by
 default if not included in the hash. Deletes can be performed by
 including the filename with a null hash.</p>
 
@@ -353,7 +361,7 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/cd520d99c3087f2d18b4"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/b97e047448585e65a931"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"description of gist"</span><span class="p">,</span>
   <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -372,7 +380,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/f6a9f28f5c3404533c31/comments/"</span><span class="p">,</span>
+  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/088e037ee7f1cf3fcfe6/comments/"</span><span class="p">,</span>
   <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/1"</span><span class="p">,</span>
   <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/1.git"</span><span class="p">,</span>
   <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:1.git"</span><span class="p">,</span>
@@ -386,13 +394,13 @@ X-RateLimit-Remaining: 4999</code></pre>
         <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
         <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
       <span class="p">},</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/caf7011f80b948487b32"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/5b397543ffa266398031"</span><span class="p">,</span>
       <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-14T16:00:49Z"</span>
     <span class="p">}</span>
   <span class="p">],</span>
   <span class="s2">"history"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/a0b028f686d0cdb9abef"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/d6e910148f9579568c04"</span><span class="p">,</span>
       <span class="s2">"version"</span><span class="o">:</span> <span class="s2">"57a7f021a713b1c5a6a199b54cc514735d2d462f"</span><span class="p">,</span>
       <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
@@ -465,7 +473,7 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/cd520d99c3087f2d18b4"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/b97e047448585e65a931"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"description of gist"</span><span class="p">,</span>
   <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -484,7 +492,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">"comments"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/f6a9f28f5c3404533c31/comments/"</span><span class="p">,</span>
+  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/gists/088e037ee7f1cf3fcfe6/comments/"</span><span class="p">,</span>
   <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/1"</span><span class="p">,</span>
   <span class="s2">"git_pull_url"</span><span class="o">:</span> <span class="s2">"git://gist.github.com/1.git"</span><span class="p">,</span>
   <span class="s2">"git_push_url"</span><span class="o">:</span> <span class="s2">"git@gist.github.com:1.git"</span><span class="p">,</span>
@@ -501,6 +509,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
+
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -701,6 +711,16 @@ X-RateLimit-Remaining: 4999</code></pre>
         t.src = '//secure.gaug.es/track.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3769691-27']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
 </body>

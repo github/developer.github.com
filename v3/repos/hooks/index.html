@@ -39,23 +39,65 @@
     <h1 id="repo-hooks-api">Repo Hooks API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list">List</a></li>
-  <li><a href="#get-single-hook">Get single hook</a></li>
-  <li><a href="#create-a-hook">Create a hook</a></li>
-  <li><a href="#edit-a-hook">Edit a hook</a></li>
-  <li><a href="#test-a-push-hook">Test a <code>push</code> hook</a></li>
+  <li><a href="#services">Services</a></li>
+  <li><a href="#events">Events</a></li>
+  <li><a href="#json-http">JSON HTTP</a></li>
   <li><a href="#delete-a-hook">Delete a hook</a></li>
   <li><a href="#pubsubhubbub">PubSubHubbub</a></li>
-</ul><p>The Repository Hooks API allows repository admins to manage the post-receive
-web and service hooks for a repository.  There are two main APIs to manage
-these hooks: a JSON HTTP API, and <a href="#pubsubhubbub">PubSubHubbub</a>.</p>
+</ul>
 
-<p>Active hooks can be configured to trigger for one or more events.
-The default event is <code>push</code>.  The available events are:</p>
+<p>The Repository Hooks API allows repository admins to manage the post-receive 
+hooks for a repository.  Hooks can be managed using the <a href="#json-http">JSON HTTP API</a>
+and the <a href="#pubsubhubbub">PubSubHubbub API</a>.</p>
+
+<p>Each hook can be configured for a specific <a href="#services">service</a> and one or 
+more <a href="#events">events</a>, regardless of the API used to do so.</p>
+
+<h2 id="services">Services</h2>
+
+<p>A service is basically the name used to refer to a hook that has configuration
+settings, a list of available events, and default events.</p>
+
+<blockquote>
+  <p>For instance, the 
+<a href="https://github.com/github/github-services/blob/master/lib/services/email.rb">email</a>
+service is a built-in GitHub service that will send event <a href="#payloads">payloads</a> 
+to, at most, two email addresses.  It will trigger for the <code>push</code> 
+event by default and supports the <code>public</code> event type as well.</p>
+</blockquote>
+
+<p>A number of services have been integrated through the open source
+<a href="https://github.com/github/github-services">github-services</a> project.  When 
+creating a <a href="#create-a-hook">hook</a>, the <code>:name</code> parameter must refer to one of 
+these services.  A generic 
+<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web</a> 
+service is available that can configured to trigger for any of the available 
+<a href="#events">events</a>.</p>
+
+<p>Documentation for all available service hooks can be found in the
+<a href="https://github.com/github/github-services/tree/master/docs">docs directory</a>
+of the github-services repository.  A JSON representation of their names,
+default events, supported events, and configuration options can be seen 
+at <a href="https://api.github.com/hooks">api.github.com/hooks</a>.</p>
+
+<h2 id="events">Events</h2>
+
+<p>Active hooks can be configured to trigger for one or more service supported 
+events. In other words, the service must support listening for the event you 
+want to trigger.</p>
+
+<p>For example, the 
+<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web</a>
+service listens for all events, while the
+<a href="https://github.com/github/github-services/blob/master/lib/services/irc.rb">IRC</a>
+service can only listen for <code>push</code>, <code>issues</code>, and <code>pull_request</code> events.</p>
+
+<p>The available events are:</p>
 
 <ul>
-<li>
-<code>push</code> - Any git push to a Repository.</li>
+  <li>
+<code>push</code> - Any git push to a Repository. <strong>This is the default event.</strong>
+</li>
   <li>
 <code>issues</code> - Any time an Issue is opened or closed.</li>
   <li>
@@ -86,34 +128,26 @@ non-Organization Repository.</li>
 <code>team_add</code> - Any time a team is added or modified on a Repository.</li>
   <li>
 <code>status</code> - Any time a Repository has a status update from the API</li>
-</ul><p>The payloads for all of the hooks mirror <a href="/v3/activity/events/types/">the payloads for the Event
+</ul>
+
+<h3 id="payloads">Payloads</h3>
+
+<p>The payloads for all hooks mirror <a href="/v3/activity/events/types/">the payloads for the Event
 types</a>, with the exception of <a href="http://help.github.com/post-receive-hooks/">the original <code>push</code>
-event</a>.</p>
+event</a>, 
+which has a more detailed payload.</p>
 
-<p>A number of external services have already been integrated through the open source
-<a href="https://github.com/github/github-services">github-services</a> project, including the generic
-<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web Service</a> service
-which can be used to define your own custom hooks.
-Documentation for all available hooks can be found in the
-<a href="https://github.com/github/github-services/tree/master/docs">docs directory</a>
-of the github-services repository, and a JSON representation of their names,
-the events they support, and their configuration can be seen at
-<a href="https://api.github.com/hooks">api.github.com/hooks</a>.</p>
+<h2 id="json-http">JSON HTTP</h2>
 
-<p>For a Hook to go through, the Hook needs to be configured to trigger for an event,
-and the Service has to listen to it.
-Most of the Services only listen for <code>push</code> events.  However, the generic
-<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web Service</a>
-listens for all events.  Other services like the
-<a href="https://github.com/github/github-services/blob/master/lib/services/irc.rb">IRC Service</a>
-may only listen for <code>push</code>, <code>issues</code>, and <code>pull_request</code> events.</p>
+<p>The JSON HTTP API follows the same conventions as the rest of the 
+<a href="http://developer.github.com/v3/">GitHub API</a>.</p>
 
-<h2 id="list">List</h2>
+<h3 id="list">List</h3>
 
 <pre><code>GET /repos/:owner/:repo/hooks
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h4 id="response">Response</h4>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -140,12 +174,12 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
-<h2 id="get-single-hook">Get single hook</h2>
+<h3 id="get-single-hook">Get single hook</h3>
 
 <pre><code>GET /repos/:owner/:repo/hooks/:id
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h4 id="response-1">Response</h4>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -168,15 +202,15 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="create-a-hook">Create a hook</h2>
+<h3 id="create-a-hook">Create a hook</h3>
 
 <pre><code>POST /repos/:owner/:repo/hooks
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h4 id="input">Input</h4>
 
 <dl>
-<dt><code>name</code></dt>
+  <dt><code>name</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The name of the service that is being called.
 (See <a href="https://api.github.com/hooks">/hooks</a> for the list of valid hook names.)</dd>
@@ -196,14 +230,18 @@ for.  Default: <code>["push"]</code>.</dd>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
-</dl><p>Example:  The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
+</dl>
+
+<p>Example:  The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
 takes these fields:</p>
 
 <ul>
-<li><code>url</code></li>
+  <li><code>url</code></li>
   <li><code>content_type</code></li>
   <li><code>secret</code></li>
-</ul><p>Here’s how you can setup a hook that posts raw JSON
+</ul>
+
+<p>Here’s how you can setup a hook that posts raw JSON
 (instead of the default legacy format):</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
@@ -219,7 +257,7 @@ takes these fields:</p>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-2">Response</h3>
+<h4 id="response-2">Response</h4>
 
 <pre class="headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/user/repo/hooks/1
@@ -243,15 +281,15 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="edit-a-hook">Edit a hook</h2>
+<h3 id="edit-a-hook">Edit a hook</h3>
 
 <pre><code>PATCH /repos/:owner/:repo/hooks/:id
 </code></pre>
 
-<h3 id="input-1">Input</h3>
+<h4 id="input-1">Input</h4>
 
 <dl>
-<dt><code>config</code></dt>
+  <dt><code>config</code></dt>
   <dd>
 <em>Optional</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
 settings for this hook.  Modifying this will replace the entire config
@@ -276,7 +314,9 @@ list of events that the Hook triggers for.</dd>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
 triggered on pushes.</dd>
-</dl><h4 id="example">Example</h4>
+</dl>
+
+<h5 id="example">Example</h5>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -285,7 +325,7 @@ triggered on pushes.</dd>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-3">Response</h3>
+<h4 id="response-3">Response</h4>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -308,7 +348,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="test-a-push-hook">Test a <code>push</code> hook</h2>
+<h3 id="test-a-push-hook">Test a <code>push</code> hook</h3>
 
 <p>This will trigger the hook with the latest push to the current
 repository if the hook is subscribed to <code>push</code> events. If the
@@ -320,7 +360,7 @@ with 204 but no test POST will be generated.</p>
 
 <p><strong>Note</strong>: Previously <code>/repos/:owner/:repo/hooks/:id/test</code></p>
 
-<h3 id="response-4">Response</h3>
+<h4 id="response-4">Response</h4>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -331,7 +371,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>DELETE /repos/:owner/:repo/hooks/:id
 </code></pre>
 
-<h3 id="response-5">Response</h3>
+<h4 id="response-5">Response</h4>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -348,8 +388,10 @@ Topic URLs for a GitHub repository’s pushes are in this format:</p>
 <pre><code>https://github.com/:owner/:repo/events/:event
 </code></pre>
 
-<p>The event can be any Event string that is listed at the top of this
+<p>The event can be any <a href="#events">event</a> string that is listed at the top of this
 document.</p>
+
+<h3 id="response-format">Response format</h3>
 
 <p>The default format is what <a href="http://help.github.com/post-receive-hooks/">existing post-receive hooks should
 expect</a>: A JSON body sent as the <code>payload</code> parameter in a
@@ -360,6 +402,8 @@ POST.  You can also specify to receive the raw JSON body with either an
 https://github.com/:owner/:repo/events/push.json
 </code></pre>
 
+<h3 id="callback-urls">Callback URLs</h3>
+
 <p>Callback URLs can use either the <code>http://</code> protocol, or <code>github://</code>.
 <code>github://</code> callbacks specify a GitHub service.</p>
 
@@ -369,6 +413,8 @@ http://postbin.org/123
 # Send updates to Campfire
 github://campfire?subdomain=github&amp;room=Commits&amp;token=abc123
 </code></pre>
+
+<h3 id="subscribing">Subscribing</h3>
 
 <p>The GitHub PubSubHubbub endpoint is: https://api.github.com/hub.
 (GitHub Enterprise users should use http://yourhost/api/v3/hub as the
@@ -385,10 +431,10 @@ successful request with curl looks like:</p>
 <p>PubSubHubbub requests can be sent multiple times.  If the hook already
 exists, it will be modified according to the request.</p>
 
-<h3 id="parameters">Parameters</h3>
+<h4 id="parameters">Parameters</h4>
 
 <dl>
-<dt><code>hub.mode</code></dt>
+  <dt><code>hub.mode</code></dt>
   <dd>
 <em>Required</em> <strong>string</strong> - Either <code>subscribe</code> or <code>unsubscribe</code>.</dd>
   <dt><code>hub.topic</code></dt>
@@ -406,6 +452,8 @@ comparing the raw request body with the contents of the <code>X-Hub-Signature</c
 header.  You can see <a href="https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50">our Ruby implementation</a>, or <a href="http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify">the
 PubSubHubbub documentation</a> for more details.</dd>
 </dl>
+
+
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -606,6 +654,16 @@ PubSubHubbub documentation</a> for more details.</dd>
         t.src = '//secure.gaug.es/track.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3769691-27']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
 </body>

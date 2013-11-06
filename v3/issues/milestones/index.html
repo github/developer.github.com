@@ -39,12 +39,14 @@
     <h1 id="milestones-api">Milestones API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-milestones-for-a-repository">List milestones for a repository</a></li>
+  <li><a href="#list-milestones-for-a-repository">List milestones for a repository</a></li>
   <li><a href="#get-a-single-milestone">Get a single milestone</a></li>
   <li><a href="#create-a-milestone">Create a milestone</a></li>
   <li><a href="#update-a-milestone">Update a milestone</a></li>
   <li><a href="#delete-a-milestone">Delete a milestone</a></li>
-</ul><h2 id="list-milestones-for-a-repository">List milestones for a repository</h2>
+</ul>
+
+<h2 id="list-milestones-for-a-repository">List milestones for a repository</h2>
 
 <pre><code>GET /repos/:owner/:repo/milestones
 </code></pre>
@@ -52,7 +54,7 @@
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt>state</dt>
+  <dt>state</dt>
   <dd>
 <code>open</code>, <code>closed</code>, default: <code>open</code>
 </dd>
@@ -63,7 +65,9 @@
   <dt>direction</dt>
   <dd>
 <code>asc</code> or <code>desc</code>, default: <code>asc</code>.</dd>
-</dl><h3 id="response">Response</h3>
+</dl>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -130,7 +134,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input">Input</h3>
 
 <dl>
-<dt>title</dt>
+  <dt>title</dt>
   <dd>
 <em>Required</em> <strong>string</strong>
 </dd>
@@ -144,7 +148,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dt>due_on</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - ISO 8601 time.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open or closed"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
@@ -185,7 +191,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <dl>
-<dt>number</dt>
+  <dt>number</dt>
   <dd>
 <em>Required</em> <strong>integer</strong>
 </dd>
@@ -203,7 +209,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dt>due_on</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - ISO 8601 time.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open or closed"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
@@ -245,6 +253,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -445,6 +454,16 @@ X-RateLimit-Remaining: 4999</code></pre>
         t.src = '//secure.gaug.es/track.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3769691-27']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
 </body>

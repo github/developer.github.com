@@ -61,6 +61,7 @@
 <p>Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
 
 <p>We have also added a <code>comments_url</code> member to the Gist documents. The <code>comments_url</code> link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using <code>url</code> and <code>*_url</code> properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.</p>
+
 </div>
 
       </div>
@@ -263,6 +264,16 @@
         t.src = '//secure.gaug.es/track.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3769691-27']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
 </body>

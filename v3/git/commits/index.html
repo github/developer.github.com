@@ -39,9 +39,11 @@
     <h1 id="commits-api">Commits API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-a-commit">Get a Commit</a></li>
+  <li><a href="#get-a-commit">Get a Commit</a></li>
   <li><a href="#create-a-commit">Create a Commit</a></li>
-</ul><h2 id="get-a-commit">Get a Commit</h2>
+</ul>
+
+<h2 id="get-a-commit">Get a Commit</h2>
 
 <pre><code>GET /repos/:owner/:repo/git/commits/:sha
 </code></pre>
@@ -86,7 +88,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt>message</dt>
+  <dt>message</dt>
   <dd>
 <em>String</em> of the commit message</dd>
   <dt>tree</dt>
@@ -98,14 +100,16 @@ X-RateLimit-Remaining: 4999</code></pre>
 commit.  If omitted or empty, the commit will be written as a root
 commit.  For a single parent, an array of one SHA should be provided,
 for a merge commit, an array of more than one should be provided.</dd>
-</dl><h3 id="optional-parameters">Optional Parameters</h3>
+</dl>
+
+<h3 id="optional-parameters">Optional Parameters</h3>
 
 <p>The <code>committer</code> section is optional and will be filled with the <code>author</code>
 data if omitted. If the <code>author</code> section is omitted, it will be filled
 in with the authenticated user’s information and the current date.</p>
 
 <dl>
-<dt>author.name</dt>
+  <dt>author.name</dt>
   <dd>
 <em>String</em> of the name of the author of the commit</dd>
   <dt>author.email</dt>
@@ -123,7 +127,9 @@ in with the authenticated user’s information and the current date.</p>
   <dt>committer.date</dt>
   <dd>
 <em>Timestamp</em> of when this commit was committed</dd>
-</dl><h3 id="example-input">Example Input</h3>
+</dl>
+
+<h3 id="example-input">Example Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
@@ -170,6 +176,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
+
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -370,6 +377,16 @@ X-RateLimit-Remaining: 4999</code></pre>
         t.src = '//secure.gaug.es/track.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3769691-27']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
 </body>

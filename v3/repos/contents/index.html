@@ -39,14 +39,16 @@
     <h1 id="repo-contents-api">Repo Contents API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-the-readme">Get the README</a></li>
+  <li><a href="#get-the-readme">Get the README</a></li>
   <li><a href="#get-contents">Get contents</a></li>
   <li><a href="#create-a-file">Create a file</a></li>
   <li><a href="#update-a-file">Update a file</a></li>
   <li><a href="#delete-a-file">Delete a file</a></li>
   <li><a href="#get-archive-link">Get archive link</a></li>
   <li><a href="#custom-media-types">Custom media types</a></li>
-</ul><p>These API methods let you retrieve the contents of files within a repository as
+</ul>
+
+<p>These API methods let you retrieve the contents of files within a repository as
 Base64 encoded content. See <a href="#custom-media-types">media types</a> for requesting raw format.</p>
 
 <h2 id="get-the-readme">Get the README</h2>
@@ -61,10 +63,12 @@ Base64 encoded content. See <a href="#custom-media-types">media types</a> for re
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt>ref</dt>
+  <dt>ref</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag. If not provided, uses the repository’s default branch (usually <code>master</code>).</dd>
-</dl><h3 id="response">Response</h3>
+</dl>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -101,18 +105,22 @@ Directories and submodules do <em>not</em> support custom media types.</p>
 <p><em>Notes</em>:</p>
 
 <ul>
-<li>To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get the tree</a>.</li>
+  <li>To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get the tree</a>.</li>
   <li>This API supports files up to 1 megabyte in size.</li>
-</ul><h3 id="parameters-1">Parameters</h3>
+</ul>
+
+<h3 id="parameters-1">Parameters</h3>
 
 <dl>
-<dt>path</dt>
+  <dt>path</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - The content path.</dd>
   <dt>ref</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag. If not provided, uses the repository’s default branch (usually <code>master</code>).</dd>
-</dl><h3 id="response-if-content-is-a-file">Response if content is a file</h3>
+</dl>
+
+<h3 id="response-if-content-is-a-file">Response if content is a file</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -245,7 +253,7 @@ Git uses the given URL when cloning the submodule repository, and checks out the
 <h3 id="parameters-2">Parameters</h3>
 
 <dl>
-<dt>path</dt>
+  <dt>path</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The content path.</dd>
   <dt>message</dt>
@@ -258,7 +266,9 @@ Git uses the given URL when cloning the submodule repository, and checks out the
   <dd>
 <em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s
 default branch (usually <code>master</code>).</dd>
-</dl><h3 id="optional-parameters">Optional Parameters</h3>
+</dl>
+
+<h3 id="optional-parameters">Optional Parameters</h3>
 
 <p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
 information if omitted. If the <code>committer</code> information is omitted, the authenticated
@@ -268,7 +278,7 @@ user’s information is used.</p>
 <code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
 
 <dl>
-<dt>author.name</dt>
+  <dt>author.name</dt>
   <dd>
 <strong>string</strong> - The name of the author of the commit</dd>
   <dt>author.email</dt>
@@ -280,7 +290,9 @@ user’s information is used.</p>
   <dt>committer.email</dt>
   <dd>
 <strong>string</strong> - The email of the committer of the commit</dd>
-</dl><h3 id="example-input">Example Input</h3>
+</dl>
+
+<h3 id="example-input">Example Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
@@ -352,7 +364,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-3">Parameters</h3>
 
 <dl>
-<dt>path</dt>
+  <dt>path</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The content path.</dd>
   <dt>message</dt>
@@ -368,7 +380,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dd>
 <em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s
 default branch (usually <code>master</code>).</dd>
-</dl><h3 id="optional-parameters-1">Optional Parameters</h3>
+</dl>
+
+<h3 id="optional-parameters-1">Optional Parameters</h3>
 
 <p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
 information if omitted. If the <code>committer</code> information is omitted, the authenticated
@@ -378,7 +392,7 @@ user’s information is used.</p>
 <code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
 
 <dl>
-<dt>author.name</dt>
+  <dt>author.name</dt>
   <dd>
 <strong>string</strong> - The name of the author of the commit</dd>
   <dt>author.email</dt>
@@ -390,7 +404,9 @@ user’s information is used.</p>
   <dt>committer.email</dt>
   <dd>
 <strong>string</strong> - The email of the committer of the commit</dd>
-</dl><h3 id="example-input-1">Example Input</h3>
+</dl>
+
+<h3 id="example-input-1">Example Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
@@ -463,7 +479,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-4">Parameters</h3>
 
 <dl>
-<dt>path</dt>
+  <dt>path</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The content path.</dd>
   <dt>message</dt>
@@ -476,7 +492,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dd>
 <em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s
 default branch (usually <code>master</code>).</dd>
-</dl><h3 id="optional-parameters-2">Optional Parameters</h3>
+</dl>
+
+<h3 id="optional-parameters-2">Optional Parameters</h3>
 
 <p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
 information if omitted. If the <code>committer</code> information is omitted, the authenticated
@@ -486,7 +504,7 @@ user’s information is used.</p>
 <code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
 
 <dl>
-<dt>author.name</dt>
+  <dt>author.name</dt>
   <dd>
 <strong>string</strong> - The name of the author of the commit</dd>
   <dt>author.email</dt>
@@ -498,7 +516,9 @@ user’s information is used.</p>
   <dt>committer.email</dt>
   <dd>
 <strong>string</strong> - The email of the committer of the commit</dd>
-</dl><h3 id="example-input-2">Example Input</h3>
+</dl>
+
+<h3 id="example-input-2">Example Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
@@ -561,14 +581,16 @@ to make a second <code>GET</code> request.</p>
 <h3 id="parameters-5">Parameters</h3>
 
 <dl>
-<dt>archive_format</dt>
+  <dt>archive_format</dt>
   <dd>Either <code>tarball</code> or <code>zipball</code>
 </dd>
   <dt>ref</dt>
   <dd>
 <em>Optional</em>  <strong>string</strong> - valid Git reference, defaults to <code>master</code>
 </dd>
-</dl><h3 id="response-4">Response</h3>
+</dl>
+
+<h3 id="response-4">Response</h3>
 
 <pre class="headers"><code>Status: 302 Found
 Location: https://codeload.github.com/me/myprivate/legacy.zip/master?login=me&amp;token=thistokenexpires
@@ -593,6 +615,7 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball &gt; octokit.tar.g
 </code></pre>
 
 <p>You can read more about the use of media types in the API <a href="/v3/media/">here</a>.</p>
+
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -793,6 +816,16 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball &gt; octokit.tar.g
         t.src = '//secure.gaug.es/track.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3769691-27']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
 </body>

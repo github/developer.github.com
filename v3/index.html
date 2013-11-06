@@ -43,7 +43,7 @@ you have any problems or requests please contact
 <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">support</a>.</p>
 
 <ul id="markdown-toc">
-<li><a href="#schema">Schema</a></li>
+  <li><a href="#schema">Schema</a></li>
   <li><a href="#parameters">Parameters</a></li>
   <li><a href="#client-errors">Client Errors</a></li>
   <li><a href="#http-redirects">HTTP Redirects</a></li>
@@ -56,7 +56,9 @@ you have any problems or requests please contact
   <li><a href="#conditional-requests">Conditional requests</a></li>
   <li><a href="#cross-origin-resource-sharing">Cross Origin Resource Sharing</a></li>
   <li><a href="#json-p-callbacks">JSON-P Callbacks</a></li>
-</ul><h2 id="schema">Schema</h2>
+</ul>
+
+<h2 id="schema">Schema</h2>
 
 <p>All API access is over HTTPS, and accessed from the <code>api.github.com</code>
 domain (or through <code>yourdomain.com/api/v3/</code> for enterprise).  All data is
@@ -149,7 +151,7 @@ $ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/aut
 receive request bodies:</p>
 
 <ol>
-<li>
+  <li>
     <p>Sending invalid JSON will result in a <code>400 Bad Request</code> response.</p>
 
     <pre><code> HTTP/1.1 400 Bad Request
@@ -187,13 +189,15 @@ response.</p>
  }
 </code></pre>
   </li>
-</ol><p>All error objects have resource and field properties so that your client
+</ol>
+
+<p>All error objects have resource and field properties so that your client
 can tell what the problem is.  There’s also an error code to let you
 know what is wrong with the field.  These are the possible validation error
 codes:</p>
 
 <dl>
-<dt>missing</dt>
+  <dt>missing</dt>
   <dd>This means a resource does not exist.</dd>
   <dt>missing_field</dt>
   <dd>This means a required field on a resource has not been set.</dd>
@@ -204,7 +208,9 @@ for that resource should be able to give you more specific information.</dd>
   <dd>This means another resource has the same value as this field.  This
 can happen in resources that must have some unique key (such as Label
 names).</dd>
-</dl><p>If resources have custom validation errors, they will be documented with the resource.</p>
+</dl>
+
+<p>If resources have custom validation errors, they will be documented with the resource.</p>
 
 <h2 id="http-redirects">HTTP Redirects</h2>
 
@@ -215,7 +221,7 @@ error and clients should follow that redirect. Redirect responses will have a
 client should repeat the requests.</p>
 
 <dl>
-<dt>301</dt>
+  <dt>301</dt>
   <dd>Permanent redirection. The URI you used to make the request has been
 superseded by the one specified in the <code>Location</code> header field. This and all
 future requests to this resource should be directed to the new URI.</dd>
@@ -223,7 +229,9 @@ future requests to this resource should be directed to the new URI.</dd>
   <dd>Temporary redirection. The request should be repeated verbatim to the URI
 specified in the <code>Location</code> header field but clients should continue to use the
 original URI for future requests.</dd>
-</dl><p>Other redirection status codes may be used in accordance with the HTTP 1.1 spec.</p>
+</dl>
+
+<p>Other redirection status codes may be used in accordance with the HTTP 1.1 spec.</p>
 
 <h2 id="http-verbs">HTTP Verbs</h2>
 
@@ -231,7 +239,7 @@ original URI for future requests.</dd>
 action.</p>
 
 <dl>
-<dt>HEAD</dt>
+  <dt>HEAD</dt>
   <dd>Can be issued against any resource to get just the HTTP header info.</dd>
   <dt>GET</dt>
   <dd>Used for retrieving resources.</dd>
@@ -249,7 +257,9 @@ POST requests.</dd>
 with no <code>body</code> attribute, be sure to set the <code>Content-Length</code> header to zero.</dd>
   <dt>DELETE</dt>
   <dd>Used for deleting resources.</dd>
-</dl><h2 id="authentication">Authentication</h2>
+</dl>
+
+<h2 id="authentication">Authentication</h2>
 
 <p>There are three ways to authenticate through GitHub API v3.  Requests that
 require authentication will return 404, instead of 403, in some places.  This
@@ -343,7 +353,7 @@ SHA1 and not on page number.</p>
 <p>The possible <code>rel</code> values are:</p>
 
 <dl>
-<dt><code>next</code></dt>
+  <dt><code>next</code></dt>
   <dd>Shows the URL of the immediate next page of results.</dd>
   <dt><code>last</code></dt>
   <dd>Shows the URL of the last page of results.</dd>
@@ -351,7 +361,9 @@ SHA1 and not on page number.</p>
   <dd>Shows the URL of the first page of results.</dd>
   <dt><code>prev</code></dt>
   <dd>Shows the URL of the immediate previous page of results.</dd>
-</dl><h2 id="rate-limiting">Rate Limiting</h2>
+</dl>
+
+<h2 id="rate-limiting">Rate Limiting</h2>
 
 <p>For requests using Basic Authentication or OAuth, you can make up to 5,000
 requests per hour. For unauthenticated requests, the rate limit allows you to
@@ -375,13 +387,15 @@ X-RateLimit-Reset: 1372700873
 <p>The headers tell you everything you need to know about your current rate limit status:</p>
 
 <dl>
-<dt><code>X-RateLimit-Limit</code></dt>
+  <dt><code>X-RateLimit-Limit</code></dt>
   <dd>The maximum number of requests that the consumer is permitted to make per hour.</dd>
   <dt><code>X-RateLimit-Remaining</code></dt>
   <dd>The number of requests remaining in the current rate limit window.</dd>
   <dt><code>X-RateLimit-Reset</code></dt>
   <dd>The time at which the current rate limit window resets in <a href="http://en.wikipedia.org/wiki/Unix_time">UTC epoch seconds</a>.</dd>
-</dl><p>If you need the time in a different format, any modern programming language can get the job done. For example, if you open up the console on your web browser, you can easily get the reset time as a JavaScript Date object.</p>
+</dl>
+
+<p>If you need the time in a different format, any modern programming language can get the job done. For example, if you open up the console on your web browser, you can easily get the reset time as a JavaScript Date object.</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1372700873</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="c1">// =&gt; Mon Jul 01 2013 13:47:53 GMT-0400 (EDT)</span></code></pre>
@@ -590,6 +604,8 @@ through as an array of <code>[url, options]</code> tuples.</p>
     <span class="p">]</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
+
+
       </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -790,6 +806,16 @@ through as an array of <code>[url, options]</code> tuples.</p>
         t.src = '//secure.gaug.es/track.js';
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3769691-27']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
 </body>

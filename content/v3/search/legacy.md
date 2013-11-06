@@ -14,7 +14,7 @@ v3. There should be no changes, other than the new URL and JSON output format.
 
 <div class="alert">
   <p>
-    The Legacy Search API (described below) is <a href="/#deprecations">deprecated</a>
+    The Legacy Search API (described below) is <a href="/v3/#deprecations">deprecated</a>
     and is scheduled for removal in the next version of the API.
 
     We recommend using the <a href="/v3/search/">v3 Search API</a> instead.

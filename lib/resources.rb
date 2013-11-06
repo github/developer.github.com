@@ -177,6 +177,7 @@ module GitHub
       "homepage"          => "https://github.com",
       "language"          => nil,
       "forks_count"       => 9,
+      "stargazers_count"  => 80,
       "watchers_count"    => 80,
       "size"              => 108,
       "master_branch"     => 'master',
@@ -187,12 +188,13 @@ module GitHub
     })
 
     FULL_REPO = REPO.merge({
-      "organization"     => USER.merge('type' => 'Organization'),
-      "parent"           => REPO,
-      "source"           => REPO,
-      "has_issues"       => true,
-      "has_wiki"         => true,
-      "has_downloads"    => true
+      "subscribers_count" => 42,
+      "organization"      => USER.merge('type' => 'Organization'),
+      "parent"            => REPO,
+      "source"            => REPO,
+      "has_issues"        => true,
+      "has_wiki"          => true,
+      "has_downloads"     => true
     })
 
     TAG = {
@@ -840,6 +842,7 @@ module GitHub
           "pushed_at" => "2012-01-01T00:37:02Z",
           "homepage" => "",
           "size" => 524,
+          "stargazers_count" => 1,
           "watchers_count" => 1,
           "language" => "Assembly",
           "forks_count" => 0,

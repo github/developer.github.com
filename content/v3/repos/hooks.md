@@ -12,7 +12,7 @@ hooks for a repository.  Hooks can be managed using the [JSON HTTP API](#json-ht
 and the [PubSubHubbub API](#pubsubhubbub).
 
 Each hook can be configured for a specific [service](#services) and one or 
-more [event](#events), regardless of the API used to do so.
+more [events](#events), regardless of the API used to do so.
 
 ## Services
 

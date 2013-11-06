@@ -46,7 +46,7 @@
     	<h1 id="repository-watching-api">Repository Watching API</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-watchers">List watchers</a></li>
+<li><a href="#list-watchers">List watchers</a></li>
   <li><a href="#list-repositories-being-watched">List repositories being watched</a></li>
   <li><a href="#get-a-repository-subscription">Get a Repository Subscription</a></li>
   <li><a href="#set-a-repository-subscription">Set a Repository Subscription</a></li>
@@ -54,17 +54,21 @@
   <li><a href="#check-if-you-are-watching-a-repository-legacy">Check if you are watching a repository (LEGACY)</a></li>
   <li><a href="#watch-a-repository-legacy">Watch a repository (LEGACY)</a></li>
   <li><a href="#stop-watching-a-repository-legacy">Stop watching a repository (LEGACY)</a></li>
-</ul>
-
-<p>Watching a Repository registers the user to receive notifications on new
+</ul><p>Watching a Repository registers the user to receive notifications on new
 discussions, as well as events in the user’s activity feed.  See <a href="/v3/activity/starring">Repository
 Starring</a> for simple repository bookmarks.</p>
 
-<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the way watching
-works</a> on GitHub.  Until 3rd
-party applications stop using the “watcher” endpoints for the current Starring
-API, the Watching API will use the below “subscription” endpoints.  Check the
-<a href="/changes/2012-9-5-watcher-api/">Watcher API Change post</a> for more.</p>
+<h3 id="watching-vs-starring">Watching vs. Starring</h3>
+
+<p>In August 2012, we <a href="https://github.com/blog/1204-notifications-stars">changed the way watching
+works</a> on GitHub.  At the time
+of that change, many API clients were already using the existing “watcher”
+endpoints to access starring data. To avoid breaking those applications, the
+legacy “watcher” endpoints continue to provide starring data.</p>
+
+<p>To provide access to watching data, the v3 Watcher API uses the “subscription”
+endpoints described below. Check out the <a href="/changes/2012-9-5-watcher-api/">Watcher API Change
+post</a> for more details.</p>
 
 <h2 id="list-watchers">List watchers</h2>
 
@@ -134,6 +138,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
     <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="s2">"forks_count"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"stargazers_count"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
     <span class="s2">"watchers_count"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
     <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
     <span class="s2">"master_branch"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
@@ -172,7 +177,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input">Input</h3>
 
 <dl>
-  <dt>subscribed</dt>
+<dt>subscribed</dt>
   <dd>
 <strong>boolean</strong> Determines if notifications should be received from this
 repository.</dd>
@@ -180,9 +185,7 @@ repository.</dd>
   <dd>
 <strong>boolean</strong> Determines if all notifications should be blocked from this
 repository.</dd>
-</dl>
-
-<h3 id="response-3">Response</h3>
+</dl><h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -252,7 +255,6 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

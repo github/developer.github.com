@@ -56,7 +56,7 @@ organization (if applicable).</p>
 They’re only created for various internal and repository hooks.</p>
 
 <ul id="markdown-toc">
-  <li><a href="#commitcommentevent">CommitCommentEvent</a></li>
+<li><a href="#commitcommentevent">CommitCommentEvent</a></li>
   <li><a href="#createevent">CreateEvent</a></li>
   <li><a href="#deleteevent">DeleteEvent</a></li>
   <li><a href="#downloadevent">DownloadEvent</a></li>
@@ -76,28 +76,24 @@ They’re only created for various internal and repository hooks.</p>
   <li><a href="#statusevent">StatusEvent</a></li>
   <li><a href="#teamaddevent">TeamAddEvent</a></li>
   <li><a href="#watchevent">WatchEvent</a></li>
-</ul>
-
-<h2 id="commitcommentevent">CommitCommentEvent</h2>
+</ul><h2 id="commitcommentevent">CommitCommentEvent</h2>
 
 <p>Triggered when a <a href="/v3/repos/comments/#list-commit-comments-for-a-repository">commit comment</a> is created.</p>
 
 <p>Hook name: <code>commit_comment</code></p>
 
 <dl>
-  <dt>comment</dt>
+<dt>comment</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/repos/comments/#list-commit-comments-for-a-repository">comment</a> itself.</dd>
-</dl>
-
-<h2 id="createevent">CreateEvent</h2>
+</dl><h2 id="createevent">CreateEvent</h2>
 
 <p>Represents a created repository, branch, or tag.</p>
 
 <p>Hook name: <code>create</code></p>
 
 <dl>
-  <dt>ref_type</dt>
+<dt>ref_type</dt>
   <dd>
 <strong>string</strong> - The object that was created. Can be one of “repository”, “branch”, or
 “tag”</dd>
@@ -110,24 +106,20 @@ They’re only created for various internal and repository hooks.</p>
   <dt>description</dt>
   <dd>
 <strong>string</strong> - The repository’s current description.</dd>
-</dl>
-
-<h2 id="deleteevent">DeleteEvent</h2>
+</dl><h2 id="deleteevent">DeleteEvent</h2>
 
 <p>Represents a <a href="/v3/git/refs/#delete-a-reference">deleted branch or tag</a>.</p>
 
 <p>Hook name: <code>delete</code></p>
 
 <dl>
-  <dt>ref_type</dt>
+<dt>ref_type</dt>
   <dd>
 <strong>string</strong> - The object that was deleted. Can be “branch” or “tag”.</dd>
   <dt>ref</dt>
   <dd>
 <strong>string</strong> - The full git ref.</dd>
-</dl>
-
-<h2 id="downloadevent">DownloadEvent</h2>
+</dl><h2 id="downloadevent">DownloadEvent</h2>
 
 <p>Triggered when a new <a href="/v3/repos/downloads/">download</a> is created.</p>
 
@@ -136,37 +128,31 @@ They’re only created for various internal and repository hooks.</p>
 <p>Events of this type are <strong>no longer created</strong>, but it’s possible that they exist in timelines of some users.</p>
 
 <dl>
-  <dt>download</dt>
+<dt>download</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/repos/downloads/">download</a> that was just
 created.</dd>
-</dl>
-
-<h2 id="followevent">FollowEvent</h2>
+</dl><h2 id="followevent">FollowEvent</h2>
 
 <p>Triggered when a user <a href="/v3/users/followers/#follow-a-user">follows another user</a>.</p>
 
 <p>Hook name: <code>follow</code></p>
 
 <dl>
-  <dt>target</dt>
+<dt>target</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/users">user</a> that was just followed.</dd>
-</dl>
-
-<h2 id="forkevent">ForkEvent</h2>
+</dl><h2 id="forkevent">ForkEvent</h2>
 
 <p>Triggered when a user <a href="/v3/repos/forks/#create-a-fork">forks a repository</a>.</p>
 
 <p>Hook name: <code>fork</code></p>
 
 <dl>
-  <dt>forkee</dt>
+<dt>forkee</dt>
   <dd>
 <strong>object</strong> - The created <a href="/v3/repos/">repository</a>.</dd>
-</dl>
-
-<h2 id="forkapplyevent">ForkApplyEvent</h2>
+</dl><h2 id="forkapplyevent">ForkApplyEvent</h2>
 
 <p>Triggered when a patch is applied in the Fork Queue.</p>
 
@@ -175,7 +161,7 @@ created.</dd>
 <p>Hook name: <code>fork_apply</code></p>
 
 <dl>
-  <dt>head</dt>
+<dt>head</dt>
   <dd>
 <strong>string</strong> - The branch name the patch is applied to.</dd>
   <dt>before</dt>
@@ -184,9 +170,7 @@ created.</dd>
   <dt>after</dt>
   <dd>
 <strong>string</strong> - SHA of the repo state after the patch.</dd>
-</dl>
-
-<h2 id="gistevent">GistEvent</h2>
+</dl><h2 id="gistevent">GistEvent</h2>
 
 <p>Triggered when a <a href="/v3/gists/">Gist</a> is created or updated.</p>
 
@@ -195,22 +179,20 @@ created.</dd>
 <p>Events of this type are <strong>no longer created</strong>, but it’s possible that they exist in timelines of some users.</p>
 
 <dl>
-  <dt>action</dt>
+<dt>action</dt>
   <dd>
 <strong>string</strong> - The action that was performed. Can be “create” or “update”</dd>
   <dt>gist</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/gists/">gist</a> itself.</dd>
-</dl>
-
-<h2 id="gollumevent">GollumEvent</h2>
+</dl><h2 id="gollumevent">GollumEvent</h2>
 
 <p>Triggered when a Wiki page is created or updated.</p>
 
 <p>Hook name: <code>gollum</code></p>
 
 <dl>
-  <dt>pages</dt>
+<dt>pages</dt>
   <dd>
 <strong>array</strong> - The pages that were updated.</dd>
   <dt>pages[][page_name]</dt>
@@ -228,16 +210,14 @@ created.</dd>
   <dt>pages[][html_url]</dt>
   <dd>
 <strong>string</strong> - Points to the HTML wiki page.</dd>
-</dl>
-
-<h2 id="issuecommentevent">IssueCommentEvent</h2>
+</dl><h2 id="issuecommentevent">IssueCommentEvent</h2>
 
 <p>Triggered when an <a href="/v3/issues/comments/">issue comment</a> is created.</p>
 
 <p>Hook name: <code>issue_comment</code></p>
 
 <dl>
-  <dt>action</dt>
+<dt>action</dt>
   <dd>
 <strong>string</strong> - The action that was performed on the comment. Currently, can only be “created”.</dd>
   <dt>issue</dt>
@@ -246,40 +226,34 @@ created.</dd>
   <dt>comment</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/issues/comments/">comment</a> itself.</dd>
-</dl>
-
-<h2 id="issuesevent">IssuesEvent</h2>
+</dl><h2 id="issuesevent">IssuesEvent</h2>
 
 <p>Triggered when an <a href="/v3/issues">issue</a> is created, closed or reopened.</p>
 
 <p>Hook name: <code>issues</code></p>
 
 <dl>
-  <dt>action</dt>
+<dt>action</dt>
   <dd>
 <strong>string</strong> - The action that was performed. Can be one of “opened”, “closed”, or
 “reopened”.</dd>
   <dt>issue</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/issues">issue</a> itself.</dd>
-</dl>
-
-<h2 id="memberevent">MemberEvent</h2>
+</dl><h2 id="memberevent">MemberEvent</h2>
 
 <p>Triggered when a user is <a href="/v3/repos/collaborators/#add-collaborator">added as a collaborator</a> to a repository.</p>
 
 <p>Hook name: <code>member</code></p>
 
 <dl>
-  <dt>member</dt>
+<dt>member</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/users/">user</a> that was added.</dd>
   <dt>action</dt>
   <dd>
 <strong>string</strong> - The action that was performed. Currently, can only be “added”.</dd>
-</dl>
-
-<h2 id="publicevent">PublicEvent</h2>
+</dl><h2 id="publicevent">PublicEvent</h2>
 
 <p>Triggered when a private repository is <a href="/v3/repos/#edit">open sourced</a>.  Without a doubt: the best GitHub event.</p>
 
@@ -294,7 +268,7 @@ created.</dd>
 <p>Hook name: <code>pull_request</code></p>
 
 <dl>
-  <dt>action</dt>
+<dt>action</dt>
   <dd>
 <strong>string</strong> - The action that was performed. Can be one of “opened”, “closed”,
 “synchronize”, or “reopened”.</dd>
@@ -304,28 +278,24 @@ created.</dd>
   <dt>pull_request</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/pulls">pull request</a> itself.</dd>
-</dl>
-
-<h2 id="pullrequestreviewcommentevent">PullRequestReviewCommentEvent</h2>
+</dl><h2 id="pullrequestreviewcommentevent">PullRequestReviewCommentEvent</h2>
 
 <p>Triggered when a <a href="/v3/pulls/comments">comment is created on a portion of the unified diff</a> of a pull request.</p>
 
 <p>Hook name: <code>pull_request_review_comment</code></p>
 
 <dl>
-  <dt>comment</dt>
+<dt>comment</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/pulls/comments">comment</a> itself.</dd>
-</dl>
-
-<h2 id="pushevent">PushEvent</h2>
+</dl><h2 id="pushevent">PushEvent</h2>
 
 <p>Triggered when a repository branch is pushed to.</p>
 
 <p>Hook name: <code>push</code></p>
 
 <dl>
-  <dt>head</dt>
+<dt>head</dt>
   <dd>
 <strong>string</strong> - The SHA of the HEAD commit on the repository.</dd>
   <dt>ref</dt>
@@ -360,31 +330,27 @@ created.</dd>
   <dd>
 <strong>boolean</strong> - Whether this commit is distinct from any that have been pushed
 before.</dd>
-</dl>
-
-<h2 id="releaseevent">ReleaseEvent</h2>
+</dl><h2 id="releaseevent">ReleaseEvent</h2>
 
 <p>Triggered when a <a href="/v3/repos/releases/#get-a-single-release">release</a> is published.</p>
 
 <p>Hook name: <code>release</code></p>
 
 <dl>
-  <dt>action</dt>
+<dt>action</dt>
   <dd>
 <strong>string</strong> - The action that was performed. Currently, can only be “published”.</dd>
   <dt>release</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/repos/releases/#get-a-single-release">release</a> itself.</dd>
-</dl>
-
-<h2 id="statusevent">StatusEvent</h2>
+</dl><h2 id="statusevent">StatusEvent</h2>
 
 <p>Triggered when the status of a Git commit changes.</p>
 
 <p>Hook name: <code>status</code></p>
 
 <dl>
-  <dt>sha</dt>
+<dt>sha</dt>
   <dd>
 <strong>string</strong> - The Commit SHA.</dd>
   <dt>state</dt>
@@ -401,9 +367,7 @@ before.</dd>
 <strong>array</strong> - An array of branch objects containing the status’ SHA.
 Each branch contains the given SHA, but the SHA may or may not be the
 head of the branch. The array includes a maximum of 10 branches.</dd>
-</dl>
-
-<h2 id="teamaddevent">TeamAddEvent</h2>
+</dl><h2 id="teamaddevent">TeamAddEvent</h2>
 
 <p>Triggered when a <a href="/v3/orgs/teams/#add-team-member">user is added to a team</a> or when a <a href="/v3/orgs/teams/#add-team-repo">repository is added to a team</a>.</p>
 
@@ -412,7 +376,7 @@ head of the branch. The array includes a maximum of 10 branches.</dd>
 <p>Hook name: <code>team_add</code></p>
 
 <dl>
-  <dt>team</dt>
+<dt>team</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/orgs/teams/">team</a> that was modified.  Note:
 older events may not include this in the payload.</dd>
@@ -422,9 +386,7 @@ older events may not include this in the payload.</dd>
   <dt>repo</dt>
   <dd>
 <strong>object</strong> - The <a href="/v3/repos/">repository</a> that was added to this team.</dd>
-</dl>
-
-<h2 id="watchevent">WatchEvent</h2>
+</dl><h2 id="watchevent">WatchEvent</h2>
 
 <p>The WatchEvent is related to <a href="/v3/activity/starring/#star-a-repository">starring a repository</a>, not <a href="/v3/activity/watching/">watching</a>.
 See <a href="/changes/2012-9-5-watcher-api/">this API blog post</a> for an explanation.</p>
@@ -435,11 +397,10 @@ event’s repo is the <a href="/v3/repos/">repository</a> that was starred.</p>
 <p>Hook name: <code>watch</code></p>
 
 <dl>
-  <dt>action</dt>
+<dt>action</dt>
   <dd>
 <strong>string</strong> - The action that was performed. Currently, can only be “started”.</dd>
 </dl>
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

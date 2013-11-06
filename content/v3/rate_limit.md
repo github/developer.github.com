@@ -43,7 +43,7 @@ all the _rest_ of the API.
 #### Deprecation Notice
 
 The `"rate"` hash (shown at the bottom of the response above) is
-[deprecated](/#deprecations) and is scheduled for removal in the next
+[deprecated](/v3/#deprecations) and is scheduled for removal in the next
 version of the API.
 
 If you're writing new API client code (or updating your existing code), you

@@ -5,7 +5,7 @@ module ChangesHelper
   #
   # version - Optional String version key.
   #
-  # Returns an Array of the first 30 Nanoc::Item objects, sorted in reverse
+  # Returns an Array of all 30 Nanoc::Item objects, sorted in reverse
   # chronological order.
   def api_changes(version = nil)
     changes = @items.select { |item| item[:kind] == 'change' }
@@ -16,7 +16,7 @@ module ChangesHelper
       changes
     end.sort! do |x, y|
       attribute_to_time(y[:created_at]) <=> attribute_to_time(x[:created_at])
-    end.first(30)
+    end
   end
 
   # Public
@@ -86,4 +86,3 @@ module ChangesHelper
     @api_versions ||= Array(@site.config[:api_versions])
   end
 end
-

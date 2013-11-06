@@ -1,19 +1,28 @@
 ---
 title: Libraries | GitHub API
+layout: libraries
 ---
 
-# Libraries
+<div class="feature">
+	<h1>Octokit comes in<br />
+many flavors</h1>
+	<p class="intro">Use the official Octokit library, or choose between any of the available third party libraries.</p>
+	<ul class="library-links">
+		<li><span>Ruby</span><a href="https://github.com/octokit/octokit.rb">octokit.rb</a></li>
+		<li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
+		<li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
+	</ul>
+	<img src="/shared/images/gundamcat.png" class="gundamcat" />
+</div>
 
-Libraries for accessing the GitHub API from your favorite language.
+# Third-party libraries
 
 ## .NET
 
-* **[Octokit][octokit.net]** (officially maintained by GitHub)
 * [IronGithub][irongithub]
 * [CSharp GitHub API][csharp]
 * [FSharp.GitHubApi][fsharp]
 
-[octokit.net]: https://github.com/octokit/octokit.net
 [irongithub]: https://github.com/in2bits/IronGitHub
 [csharp]: https://github.com/sgrassie/csharp-github-api
 [fsharp]: https://github.com/saxonmatt/FSharp.GitHubApi
@@ -77,10 +86,8 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Objective-C
 
-* **[OctoKit][octokit.objc]** (officially maintained by GitHub)
 * [UAGithubEngine][uagithubengine]
 
-[octokit.objc]: https://github.com/octokit/octokit.objc
 [uagithubengine]: http://github.com/owainhunt/uagithubengine
 
 ## OCaml
@@ -139,14 +146,12 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## Ruby
 
-* **[Octokit][octokit.rb]** (officially maintained by GitHub)
 * [GitHub API Gem][ghapi]
 * [Octocat Herder][herder]
 * [GitHub v3 API][ruby1]
 * [GitHub API Client][ruby2]
 * [Ghee][ghee]
 
-[octokit.rb]: https://github.com/octokit/octokit.rb
 [herder]: https://github.com/jhelwig/octocat_herder
 [ghapi]: https://github.com/peter-murach/github
 [ruby1]: https://github.com/jwilger/github-v3-api

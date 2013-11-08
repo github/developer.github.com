@@ -23,7 +23,7 @@ Triggered when a [commit comment](/v3/repos/comments/#list-commit-comments-for-a
 
 Hook name: `commit_comment`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `comment`|`object` | The [comment](/v3/repos/comments/#list-commit-comments-for-a-repository) itself.
 
@@ -34,7 +34,7 @@ Represents a created repository, branch, or tag.
 
 Hook name: `create`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `ref_type`|`string` | The object that was created. Can be one of "repository", "branch", or "tag"
 `ref`|`string` | The git ref (or `null` if only a repository was created).
@@ -48,7 +48,7 @@ Represents a [deleted branch or tag](/v3/git/refs/#delete-a-reference).
 
 Hook name: `delete`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `ref_type`|`string` | The object that was deleted. Can be "branch" or "tag".
 `ref`|`string` | The full git ref.
@@ -62,7 +62,7 @@ Hook name: `download`
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `download`|`object` | The [download](/v3/repos/downloads/) that was just created.
 
@@ -73,7 +73,7 @@ Triggered when a user [follows another user](/v3/users/followers/#follow-a-user)
 
 Hook name: `follow`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `target`|`object` | The [user](/v3/users) that was just followed.
 
@@ -84,7 +84,7 @@ Triggered when a user [forks a repository](/v3/repos/forks/#create-a-fork).
 
 Hook name: `fork`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `forkee`|`object` | The created [repository](/v3/repos/).
 
@@ -97,7 +97,7 @@ Events of this type are **no longer created**, but it's possible that they exist
 
 Hook name: `fork_apply`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `head`|`string` | The branch name the patch is applied to.
 `before`|`string` | SHA of the repo state before the patch.
@@ -112,7 +112,7 @@ Hook name: `gist`
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed. Can be "create" or "update"
 `gist`|`object` | The [gist](/v3/gists/) itself.
@@ -124,7 +124,7 @@ Triggered when a Wiki page is created or updated.
 
 Hook name: `gollum`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `pages`|`array` | The pages that were updated.
 `pages[][page_name]`|`string` | The name of the page.
@@ -140,7 +140,7 @@ Triggered when an [issue comment](/v3/issues/comments/) is created.
 
 Hook name: `issue_comment`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed on the comment. Currently, can only be "created".
 `issue`|`object` | The [issue](/v3/issues/) the comment belongs to.
@@ -153,7 +153,7 @@ Triggered when an [issue](/v3/issues) is created, closed or reopened.
 
 Hook name: `issues`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed. Can be one of "opened", "closed", or "reopened".
 `issue`|`object` | The [issue](/v3/issues) itself.
@@ -165,7 +165,7 @@ Triggered when a user is [added as a collaborator](/v3/repos/collaborators/#add-
 
 Hook name: `member`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `member`|`object` | The [user](/v3/users/) that was added.
 `action`|`string` | The action that was performed. Currently, can only be "added".
@@ -185,7 +185,7 @@ Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synch
 
 Hook name: `pull_request`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed. Can be one of "opened", "closed", "synchronize", or "reopened".
 `number`|`integer` | The pull request number.
@@ -198,7 +198,7 @@ Triggered when a [comment is created on a portion of the unified diff](/v3/pulls
 
 Hook name: `pull_request_review_comment`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `comment`|`object` | The [comment](/v3/pulls/comments) itself.
 
@@ -209,7 +209,7 @@ Triggered when a repository branch is pushed to.
 
 Hook name: `push`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `head`|`string` | The SHA of the HEAD commit on the repository.
 `ref`|`string` | The full Git ref that was pushed.  Example: "refs/heads/master"
@@ -230,7 +230,7 @@ Triggered when a [release](/v3/repos/releases/#get-a-single-release) is publishe
 
 Hook name: `release`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed. Currently, can only be "published".
 `release`|`object` | The [release](/v3/repos/releases/#get-a-single-release) itself.
@@ -242,7 +242,7 @@ Triggered when the status of a Git commit changes.
 
 Hook name: `status`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `sha`|`string` | The Commit SHA.
 `state`|`string` | The new state. Can be `pending`, `success`, `failure`, or `error`.
@@ -259,7 +259,7 @@ Note: this event is created in [users' organization timelines](/v3/activity/even
 
 Hook name: `team_add`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `team`|`object` | The [team](/v3/orgs/teams/) that was modified.  Note: older events may not include this in the payload.
 `user`|`object` | The [user](/v3/users/) that was added to this team.
@@ -276,7 +276,7 @@ event’s repo is the [repository](/v3/repos/) that was starred.
 
 Hook name: `watch`
 
-key | type | description
+Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed. Currently, can only be "started".
 

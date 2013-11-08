@@ -23,8 +23,10 @@ Triggered when a [commit comment](/v3/repos/comments/#list-commit-comments-for-a
 
 Hook name: `commit_comment`
 
-comment
-: **object** - The [comment](/v3/repos/comments/#list-commit-comments-for-a-repository) itself.
+key | type | description
+------------- | -------------
+`comment`|`object` | The [comment](/v3/repos/comments/#list-commit-comments-for-a-repository) itself.
+
 
 ## CreateEvent
 
@@ -32,18 +34,13 @@ Represents a created repository, branch, or tag.
 
 Hook name: `create`
 
-ref\_type
-: **string** - The object that was created. Can be one of "repository", "branch", or
-"tag"
+key | type | description
+------------- | -------------
+`ref_type`|`string` | The object that was created. Can be one of "repository", "branch", or "tag"
+`ref`|`string` | The git ref (or `null` if only a repository was created).
+`master_branch`|`string` | The name of the repository's default branch (usually `master`).
+`description`|`string` | The repository's current description.
 
-ref
-: **string** - The git ref (or `null` if only a repository was created).
-
-master\_branch
-: **string** - The name of the repository's default branch (usually `master`).
-
-description
-: **string** - The repository's current description.
 
 ## DeleteEvent
 
@@ -51,11 +48,11 @@ Represents a [deleted branch or tag](/v3/git/refs/#delete-a-reference).
 
 Hook name: `delete`
 
-ref\_type
-: **string** - The object that was deleted. Can be "branch" or "tag".
+key | type | description
+------------- | -------------
+`ref_type`|`string` | The object that was deleted. Can be "branch" or "tag".
+`ref`|`string` | The full git ref.
 
-ref
-: **string** - The full git ref.
 
 ## DownloadEvent
 
@@ -65,9 +62,10 @@ Hook name: `download`
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-download
-: **object** - The [download](/v3/repos/downloads/) that was just
-created.
+key | type | description
+------------- | -------------
+`download`|`object` | The [download](/v3/repos/downloads/) that was just created.
+
 
 ## FollowEvent
 
@@ -75,8 +73,10 @@ Triggered when a user [follows another user](/v3/users/followers/#follow-a-user)
 
 Hook name: `follow`
 
-target
-: **object** - The [user](/v3/users) that was just followed.
+key | type | description
+------------- | -------------
+`target`|`object` | The [user](/v3/users) that was just followed.
+
 
 ## ForkEvent
 
@@ -84,8 +84,10 @@ Triggered when a user [forks a repository](/v3/repos/forks/#create-a-fork).
 
 Hook name: `fork`
 
-forkee
-: **object** - The created [repository](/v3/repos/).
+key | type | description
+------------- | -------------
+`forkee`|`object` | The created [repository](/v3/repos/).
+
 
 ## ForkApplyEvent
 
@@ -95,14 +97,12 @@ Events of this type are **no longer created**, but it's possible that they exist
 
 Hook name: `fork_apply`
 
-head
-: **string** - The branch name the patch is applied to.
+key | type | description
+------------- | -------------
+`head`|`string` | The branch name the patch is applied to.
+`before`|`string` | SHA of the repo state before the patch.
+`after`|`string` | SHA of the repo state after the patch.
 
-before
-: **string** - SHA of the repo state before the patch.
-
-after
-: **string** - SHA of the repo state after the patch.
 
 ## GistEvent
 
@@ -112,11 +112,11 @@ Hook name: `gist`
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-action
-: **string** - The action that was performed. Can be "create" or "update"
+key | type | description
+------------- | -------------
+`action`|`string` | The action that was performed. Can be "create" or "update"
+`gist`|`object` | The [gist](/v3/gists/) itself.
 
-gist
-: **object** - The [gist](/v3/gists/) itself.
 
 ## GollumEvent
 
@@ -124,23 +124,15 @@ Triggered when a Wiki page is created or updated.
 
 Hook name: `gollum`
 
-pages
-: **array** - The pages that were updated.
+key | type | description
+------------- | -------------
+`pages`|`array` | The pages that were updated.
+`pages[][page_name]`|`string` | The name of the page.
+`pages[][title]`|`string` | The current page title.
+`pages[][action]`|`string` | The action that was performed on the page. Can be "created" or "edited".
+`pages[][sha]`|`string` | The latest commit SHA of the page.
+`pages[][html_url]`|`string` | Points to the HTML wiki page.
 
-pages[][page_name]
-: **string** - The name of the page.
-
-pages[][title]
-: **string** - The current page title.
-
-pages[][action]
-: **string** - The action that was performed on the page. Can be "created" or "edited".
-
-pages[][sha]
-: **string** - The latest commit SHA of the page.
-
-pages[][html_url]
-: **string** - Points to the HTML wiki page.
 
 ## IssueCommentEvent
 
@@ -148,14 +140,12 @@ Triggered when an [issue comment](/v3/issues/comments/) is created.
 
 Hook name: `issue_comment`
 
-action
-: **string** - The action that was performed on the comment. Currently, can only be "created".
+key | type | description
+------------- | -------------
+`action`|`string` | The action that was performed on the comment. Currently, can only be "created".
+`issue`|`object` | The [issue](/v3/issues/) the comment belongs to.
+`comment`|`object` | The [comment](/v3/issues/comments/) itself.
 
-issue
-: **object** - The [issue](/v3/issues/) the comment belongs to.
-
-comment
-: **object** - The [comment](/v3/issues/comments/) itself.
 
 ## IssuesEvent
 
@@ -163,12 +153,11 @@ Triggered when an [issue](/v3/issues) is created, closed or reopened.
 
 Hook name: `issues`
 
-action
-: **string** - The action that was performed. Can be one of "opened", "closed", or
-"reopened".
+key | type | description
+------------- | -------------
+`action`|`string` | The action that was performed. Can be one of "opened", "closed", or "reopened".
+`issue`|`object` | The [issue](/v3/issues) itself.
 
-issue
-: **object** - The [issue](/v3/issues) itself.
 
 ## MemberEvent
 
@@ -176,11 +165,11 @@ Triggered when a user is [added as a collaborator](/v3/repos/collaborators/#add-
 
 Hook name: `member`
 
-member
-: **object** - The [user](/v3/users/) that was added.
+key | type | description
+------------- | -------------
+`member`|`object` | The [user](/v3/users/) that was added.
+`action`|`string` | The action that was performed. Currently, can only be "added".
 
-action
-: **string** - The action that was performed. Currently, can only be "added".
 
 ## PublicEvent
 
@@ -196,15 +185,12 @@ Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synch
 
 Hook name: `pull_request`
 
-action
-: **string** - The action that was performed. Can be one of "opened", "closed",
-"synchronize", or "reopened".
+key | type | description
+------------- | -------------
+`action`|`string` | The action that was performed. Can be one of "opened", "closed", "synchronize", or "reopened".
+`number`|`integer` | The pull request number.
+`pull_request`|`object` | The [pull request](/v3/pulls) itself.
 
-number
-: **integer** - The pull request number.
-
-pull\_request
-: **object** - The [pull request](/v3/pulls) itself.
 
 ## PullRequestReviewCommentEvent
 
@@ -212,8 +198,10 @@ Triggered when a [comment is created on a portion of the unified diff](/v3/pulls
 
 Hook name: `pull_request_review_comment`
 
-comment
-: **object** - The [comment](/v3/pulls/comments) itself.
+key | type | description
+------------- | -------------
+`comment`|`object` | The [comment](/v3/pulls/comments) itself.
+
 
 ## PushEvent
 
@@ -221,40 +209,20 @@ Triggered when a repository branch is pushed to.
 
 Hook name: `push`
 
-head
-: **string** - The SHA of the HEAD commit on the repository.
+key | type | description
+------------- | -------------
+`head`|`string` | The SHA of the HEAD commit on the repository.
+`ref`|`string` | The full Git ref that was pushed.  Example: "refs/heads/master"
+`size`|`integer` | The number of commits in the push.
+`commits`|`array` | The list of pushed commits.
+`commits[][sha]`|`string` | The SHA of the commit.
+`commits[][message]`|`string` | The commit message.
+`commits[][author]`|`object` | The git author of the commit.
+`commits[][author][name]`|`string` | The git author's name.
+`commits[][author][email]`|`string` | The git author's email address.
+`commits[][url]`|`url` | Points to the commit API resource.
+`commits[][distinct]`|`boolean` | Whether this commit is distinct from any that have been pushed before.
 
-ref
-: **string** - The full Git ref that was pushed.  Example:
-"refs/heads/master"
-
-size
-: **integer** - The number of commits in the push.
-
-commits
-: **array** - The list of pushed commits.
-
-commits[][sha]
-: **string** - The SHA of the commit.
-
-commits[][message]
-: **string** - The commit message.
-
-commits[][author]
-: **object** - The git author of the commit.
-
-commits[][author][name]
-: **string** - The git author's name.
-
-commits[][author][email]
-: **string** - The git author's email address.
-
-commits[][url]
-: **url** - Points to the commit API resource.
-
-commits[][distinct]
-: **boolean** - Whether this commit is distinct from any that have been pushed
-before.
 
 ## ReleaseEvent
 
@@ -262,11 +230,11 @@ Triggered when a [release](/v3/repos/releases/#get-a-single-release) is publishe
 
 Hook name: `release`
 
-action
-: **string** - The action that was performed. Currently, can only be "published".
+key | type | description
+------------- | -------------
+`action`|`string` | The action that was performed. Currently, can only be "published".
+`release`|`object` | The [release](/v3/repos/releases/#get-a-single-release) itself.
 
-release
-: **object** - The [release](/v3/repos/releases/#get-a-single-release) itself.
 
 ## StatusEvent
 
@@ -274,22 +242,14 @@ Triggered when the status of a Git commit changes.
 
 Hook name: `status`
 
-sha
-: **string** - The Commit SHA.
+key | type | description
+------------- | -------------
+`sha`|`string` | The Commit SHA.
+`state`|`string` | The new state. Can be `pending`, `success`, `failure`, or `error`.
+`description`|`string` | The optional human-readable description added to the status.
+`target_url`|`string` | The optional link added to the status.
+`branches`|`array` | An array of branch objects containing the status' SHA. Each branch contains the given SHA, but the SHA may or may not be the head of the branch. The array includes a maximum of 10 branches.
 
-state
-: **string** - The new state. Can be `pending`, `success`, `failure`, or `error`.
-
-description
-: **string** - The optional human-readable description added to the status.
-
-target_url
-: **string** - The optional link added to the status.
-
-branches
-: **array** - An array of branch objects containing the status' SHA.
-Each branch contains the given SHA, but the SHA may or may not be the
-head of the branch. The array includes a maximum of 10 branches.
 
 ## TeamAddEvent
 
@@ -299,15 +259,12 @@ Note: this event is created in [users' organization timelines](/v3/activity/even
 
 Hook name: `team_add`
 
-team
-: **object** - The [team](/v3/orgs/teams/) that was modified.  Note:
-older events may not include this in the payload.
+key | type | description
+------------- | -------------
+`team`|`object` | The [team](/v3/orgs/teams/) that was modified.  Note: older events may not include this in the payload.
+`user`|`object` | The [user](/v3/users/) that was added to this team.
+`repo`|`object` | The [repository](/v3/repos/) that was added to this team.
 
-user
-: **object** - The [user](/v3/users/) that was added to this team.
-
-repo
-: **object** - The [repository](/v3/repos/) that was added to this team.
 
 ## WatchEvent
 
@@ -319,5 +276,8 @@ event’s repo is the [repository](/v3/repos/) that was starred.
 
 Hook name: `watch`
 
-action
-: **string** - The action that was performed. Currently, can only be "started".
+key | type | description
+------------- | -------------
+`action`|`string` | The action that was performed. Currently, can only be "started".
+
+

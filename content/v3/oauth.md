@@ -20,7 +20,7 @@ and Client Secret. The Client Secret should not be shared.
 
 ## Web Application Flow
 
-This is a description of the OAuth flow from 3rd party web sites.
+This is a description of the OAuth2 flow from 3rd party web sites.
 
 ### 1. Redirect users to request GitHub access
 

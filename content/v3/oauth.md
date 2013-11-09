@@ -28,21 +28,12 @@ This is a description of the OAuth flow from 3rd party web sites.
 
 ### Parameters
 
-client\_id
-: _Required_ **string** - The client ID you received from GitHub when
-you [registered](https://github.com/settings/applications/new).
-
-redirect\_uri
-: _Optional_ **string** - URL in your app where users will be sent
-after authorization. See details below about [redirect
-urls](#redirect-urls).
-
-scope
-: _Optional_ **string** - Comma separated list of [scopes](#scopes).
-
-state
-: _Optional_ **string** - An unguessable random string. It is used to protect
-against cross-site request forgery attacks.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`client_id`|`string` | The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).|**YES**|
+`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).| |
+`scope`|`string` | A comma separated list of [scopes](#scopes).| |
+`state`|`string` | An unguessable random string. It is used to protect against cross-site request forgery attacks.| |
 
 ### 2. GitHub redirects back to your site
 
@@ -57,19 +48,12 @@ Exchange this for an access token:
 
 ### Parameters
 
-client\_id
-: _Required_ **string** - The client ID you received from GitHub when
-you [registered](https://github.com/settings/applications/new).
-
-redirect\_uri
-: _Optional_ **string**
-
-client\_secret
-: _Required_ **string** - The client secret you received from GitHub
-when you [registered](https://github.com/settings/applications/new).
-
-code
-: _Required_ **string** - The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`client_id`|`string` | The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).|**YES**|
+`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).| |
+`client_secret`|`string` | The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).|**YES**|
+`code`|`string` | The code you received as a response to [Step 1](#redirect-users-to-request-github-access).|**YES**|
 
 ### Response
 
@@ -143,44 +127,22 @@ accepts.
 `X-OAuth-Scopes` lists the scopes your token has authorized.
 `X-Accepted-OAuth-Scopes` lists the scopes that the action checks for.
 
-(no scope)
-: public read-only access (includes public user profile info, public
-repo info, and gists).
 
-user
-: Read/write access to profile info only.  Note: this scope includes user:email
-and user:follow.
-
-user:email
-: Read access to a user's email addresses.
-
-user:follow
-: Access to follow or unfollow other users.
-
-public\_repo
-: Read/write access to public repos and organizations.
-
-repo
-: Read/write access to public and private repos and organizations.
-
-repo:status
-: Read/write access to public and private repository commit statuses. This
-scope is only necessary to grant other users or services access to private
-repository commit statuses without granting access to the code. The `repo` and
-`public_repo` scopes already include access to commit status for private and
-public repositories respectively.
-
-delete\_repo
-: Delete access to adminable repositories.
-
-notifications
-: Read access to a user's notifications.  `repo` is accepted too.
-
-gist
-: Write access to gists.
+Name | Description
+-----|-----------|
+`(no scope)`| Public read-only access (includes public user profile info, public repo info, and gists)
+`user` |Read/write access to profile info only.  Note: this scope includes `user:email` and `user:follow`.
+`user:email`| Read access to a user's email addresses.
+`user:follow`| Access to follow or unfollow other users.
+`public_repo`| Read/write access to public repos and organizations.
+`repo`| Read/write access to public and private repos and organizations.
+`repo:status`| Read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses without granting access to the code. The `repo` and `public_repo` scopes already include access to commit status for private and public repositories, respectively.
+`delete_repo`| Delete access to adminable repositories.
+`notifications`| Read access to a user's notifications.  `repo` is accepted too.
+`gist`| Write access to gists.
 
 NOTE: Your application can request the scopes in the initial redirection. You
-can specify multiple scopes by separating them by a comma.
+can specify multiple scopes by separating them with a comma:
 
     https://github.com/login/oauth/authorize?
       client_id=...&
@@ -224,24 +186,16 @@ Read more about these tokens on the [GitHub Help page](https://help.github.com/a
 
     POST /authorizations
 
-### Input
+### Parameters
 
-scopes
-: _Optional_ **array** - A list of scopes that this authorization is in.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`scopes`|`array` | A list of scopes that this authorization is in.| |
+`note`|`string` | A note to remind you what the OAuth token is for.| |
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.| |
+`client_id`|`String` | The 20 character OAuth app client key for which to create the token.| |
+`client_secret`|`String` | The 40 character OAuth app client secret for which to create the token.| |
 
-note
-: _Optional_ **string** - A note to remind you what the OAuth token is for.
-
-note_url
-: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
-
-client_id
-: _Optional_ **String** - The 20 character OAuth app client key for which to create the
-token.
-
-client_secret
-: _Optional_ **String** - The 40 character OAuth app client secret for which to create the
-token.
 
 <%= json :scopes => ["public_repo"], :note => 'admin script' %>
 
@@ -261,20 +215,15 @@ exists. Otherwise, it creates one.
 
     PUT /authorizations/clients/:client_id
 
-### Input
+### Parameters
 
-client_secret
-: **String** - The 40 character OAuth app client secret associated with the
-client ID specified in the URL.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`client_secret`|| The 40 character OAuth app client secret associated with the client ID specified in the URL.| |
+`scopes`|`array` | A list of scopes that this authorization is in.| |
+`note`|`string` | A note to remind you what the OAuth token is for.| |
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.| |
 
-scopes
-: _Optional_ **array** - A list of scopes that this authorization is in.
-
-note
-: _Optional_ **string** - A note to remind you what the OAuth token is for.
-
-note_url
-: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
 
 <%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
 
@@ -294,23 +243,16 @@ note_url
 
     PATCH /authorizations/:id
 
-### Input
+### Parameters
 
-scopes
-: _Optional_ **array** - Replaces the authorization scopes with these.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`scopes`|`array` | Replaces the authorization scopes with these.| |
+`add_scopes`|`array` | A list of scopes to add to this authorization.| |
+`remove_scopes`|`array` | A list of scopes to remove from this authorization.| |
+`note`|`string` | A note to remind you what the OAuth token is for.| |
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.| |
 
-add_scopes
-: _Optional_ **array** - A list of scopes to add to this authorization.
-
-remove_scopes
-: _Optional_ **array** - A list of scopes to remove from this
-authorization.
-
-note
-: _Optional_ **string** - A note to remind you what the OAuth token is for.
-
-note_url
-: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
 
 You can only send one of these scope keys at a time.
 

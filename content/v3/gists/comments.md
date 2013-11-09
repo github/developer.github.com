@@ -33,10 +33,12 @@ You can read more about the use of media types in the API
 
     POST /gists/:gist_id/comments
 
-### Input
+### Parameters
 
-body
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`body`|`string` | The contents of the gist|**YES**|
+
 
 <%= json :body => 'Just commenting for the sake of commenting' %>
 
@@ -52,8 +54,10 @@ body
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`body`|`string` | The contents of the gist|**YES**|
+
 
 <%= json :body => 'Just commenting for the sake of commenting' %>
 

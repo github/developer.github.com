@@ -54,7 +54,7 @@ Name | Type | Description | Default
 `keyword`|`string`| The search term|
 `language`|`string` | Filter results by [language](https://github.com/languages)|
 `start_page`|`string` | The page number to fetch|
-`sort`|`string` | The sort field. One of `stars`, `forks`, or `updated`. Defautlt: Results are sorted by best match.|
+`sort`|`string` | The sort field. One of `stars`, `forks`, or `updated`.|Results are sorted by best match.
 `order`|`string` | The sort field. if `sort` param is provided. Can be either `asc` or `desc`.|
 
 
@@ -73,7 +73,7 @@ Name | Type | Description | Default
 -----|------|-------------|---------
 `keyword`|`string`| The search term|
 `start_page`|`string` | The page number to fetch|
-`sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`. Defautlt: Results are sorted by best match.|
+`sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`.|Results are sorted by best match.
 `order`|`string`| The sort field. if `sort` param is provided. Can be either `asc` or `desc`.|
 
 

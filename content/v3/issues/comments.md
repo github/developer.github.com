@@ -33,7 +33,7 @@ By default, Issue Comments are ordered by ascending ID.
 
 Name | Type | Description | Default
 ----|------|--------------|---------
-`sort`|`string` | Either `created` or `updated`.|
+`sort`|`string` | Either `created` or `updated`.|`created`
 `direction`|`string` | Either `asc` or `desc`. Ignored without `sort` parameter.|
 `since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 

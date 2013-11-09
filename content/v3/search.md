@@ -53,7 +53,7 @@ The `q` search term can also contain any combination of the supported repository
   Finds repositories that match a certain size (in kilobytes).
 * [`forks`](https://help.github.com/articles/searching-repositories#forks)
   Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.
-* [`created` and `pushed`](https://help.github.com/articles/searching-repositories#created-and-last-updated)
+* [`created` or `pushed`](https://help.github.com/articles/searching-repositories#created-and-last-updated)
   Filters repositories based on times of creation, or when they were last updated.
 * [`user` or `repo`](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)
   Limits searches to a specific user or repository.
@@ -210,7 +210,7 @@ The `q` search term can also contain any combination of the supported issue sear
    Filters issues based on their labels.
  * [`language`](https://help.github.com/articles/searching-issues#language)
    Searches for issues within repositories that match a certain language.
- * [`created` and `updated`](https://help.github.com/articles/searching-issues#created-and-last-updated)
+ * [`created` or `updated`](https://help.github.com/articles/searching-issues#created-and-last-updated)
    Filters issues based on times of creation, or when they were last updated.
  * [`comments`](https://help.github.com/articles/searching-issues#comments)
    Filters issues based on the quantity of comments.

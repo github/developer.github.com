@@ -19,21 +19,13 @@ Update the notification settings for the authenticated user.
 
 ### Parameters
 
-participating.email
-: _Optional_ **boolean** `true` to receive participating notifications via
-email.
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`participating.email`|`boolean` | `true` to receive participating notifications via email.| |
+`participating.web`|`boolean` | `true` to receive participating notifications via web.| |
+`watching.email`|`boolean` | `true` to receive watching notifications via email.| |
+`watching.web`|`boolean` | `true` to receive watching notifications via web.| |
 
-participating.web
-: _Optional_ **boolean** `true` to receive participating notifications via
-web.
-
-watching.email
-: _Optional_ **boolean** `true` to receive watching notifications via
-email.
-
-watching.web
-: _Optional_ **boolean** `true` to receive watching notifications via
-web.
 
 <%= json \
   :participating => {:email => true, :web => false},
@@ -61,9 +53,10 @@ web.
 
 ### Parameters
 
-email
-: _Required_ **string** Email address to which to send notifications to the
-authenticated user for discussions related to projects for this organization.
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`email`|`string` | Email address to where notifications to the authenticated user fare sent or discussions related to projects for this organization.|**YES**|
+
 
 ## Update Organization email settings
 
@@ -73,7 +66,8 @@ Update the notification settings for the authenticated user.
 
 ### Parameters
 
-email
-: _Required_ **string** Email address to which to send notifications to the
-authenticated user for discussions related to projects for this organization.
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`email`|`string` | Email address to where notifications to the authenticated user are sent for discussions related to projects for this organization.|**YES**|
+
 

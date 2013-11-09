@@ -37,7 +37,7 @@ You can read more about the use of media types in the API
 
 Name | Type | Description | Required? | Default
 ----|------|--------------|-----------|---------
-`body`|`string` | The contents of the gist|**YES**|
+`body`|`string` | The comment text.|**YES**|
 
 
 <%= json :body => 'Just commenting for the sake of commenting' %>
@@ -56,7 +56,7 @@ Name | Type | Description | Required? | Default
 
 Name | Type | Description | Required? | Default
 ----|------|--------------|-----------|---------
-`body`|`string` | The contents of the gist|**YES**|
+`body`|`string` | The comment text.|**YES**|
 
 
 <%= json :body => 'Just commenting for the sake of commenting' %>

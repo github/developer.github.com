@@ -11,19 +11,15 @@ title: Markdown Rendering | GitHub API
 
 	POST /markdown
 
-### Input
+### Parameters
 
-text
-: _Required_ **string** - The Markdown text to render
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`text`|`string` | The Markdown text to render|**YES**|
+`mode`|`string` | The rendering mode. Can be either:<br/>* `markdown` to render a document as plain Markdown, just like README files are rendered. <br/>* `gfm` to render a document as user-content, _e.g._ like user comments or issues are rendered. In GFM mode, hard line breaks are always taken into account, and issue and user mentions are linked accordingly.| |
+`context`|`string` | The repository context. Only taken into account when rendering as `gfm`| |
 
-mode
-: _Optional_ **string** - The rendering mode
-
-	- `markdown` to render a document as plain Markdown, just like README files are rendered.
-	- `gfm` to render a document as user-content, e.g. like user comments or issues are rendered. In GFM mode, hard line breaks are always taken into account, and issue and user mentions are linked accordingly.
-
-context
-: _Optional_ **string** - The repository context, only taken into account when rendering as `gfm`
+#### Example
 
 <%= json \
   :text => "Hello world github/linguist#1 **cool**, and #1!",
@@ -41,7 +37,7 @@ context
 
 	POST /markdown/raw
 
-### Input
+### Parameters
 
 The raw API is not JSON-based. It takes a Markdown document as plaintext (`text/plain` or `text/x-markdown`) and renders it as plain Markdown without a repository context (just like a README.md file is rendered -- this is the simplest way to preview a readme online).
 

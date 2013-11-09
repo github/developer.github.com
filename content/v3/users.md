@@ -50,6 +50,7 @@ Name | Type | Description | Default
 `hireable`|`boolean` | The new hiring availability of the user|
 `bio`|`string` | The new short biography of the user|
 
+#### Example
 
 <%= json \
     :name     => "monalisa octocat",

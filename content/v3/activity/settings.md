@@ -26,6 +26,7 @@ Name | Type | Description | Default
 `watching.email`|`boolean` | `true` to receive watching notifications via email.|
 `watching.web`|`boolean` | `true` to receive watching notifications via web.|
 
+#### Example
 
 <%= json \
   :participating => {:email => true, :web => false},

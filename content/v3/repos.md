@@ -108,6 +108,7 @@ Name | Type | Description | Default
 `auto_init`|`boolean` | Pass `true` to create an initial commit with empty README.|`false`
 `gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._|
 
+#### Example
 
 <%= json \
   :name          => "Hello-World",
@@ -156,6 +157,7 @@ Name | Type | Description | Default
 `has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them.|`true`
 `default_branch`|`String` | Updates the default branch for this repository.|
 
+#### Example
 
 <%= json \
   :name          => "Hello-World",

@@ -45,6 +45,7 @@ Name | Type | Description | Default
 `location`|`string` | The location.|
 `name`|`string` | The shorthand name of the company.|
 
+### Example
 
 <%= json \
     :billing_email => "support@github.com",

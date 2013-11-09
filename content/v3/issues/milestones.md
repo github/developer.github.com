@@ -47,6 +47,7 @@ Name | Type | Description | Default
 `description`|`string` | A description of the milestone.|
 `due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`|
 
+#### Example
 
 <%= json \
   :title => "String",
@@ -75,6 +76,7 @@ Name | Type | Description | Default
 `description`|`string` | A description of the milestone.|
 `due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`|
 
+#### Example
 
 <%= json \
   :title => "String",

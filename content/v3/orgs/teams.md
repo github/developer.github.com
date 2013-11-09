@@ -44,6 +44,7 @@ Name | Type | Description | Default
 `repo_names`|`array` of `strings` | The repositories to add the team to.|
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.| `pull`
 
+#### Example
 
 <%= json \
   :name => 'new team',
@@ -69,6 +70,7 @@ Name | Type | Description | Default
 `name`|`string` | **Required**. The name of the team.|
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.| `pull`
 
+#### Example
 
 <%= json \
   :name => 'new team name',

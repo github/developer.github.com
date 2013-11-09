@@ -49,6 +49,7 @@ Name | Type | Description | Default
 `draft`|`boolean` | `true` to create a draft (unpublished) release, `false` to create a published one.|`false`
 `prerelease`|`boolean` | `true` to identify the release as a prerelease. `false` to identify the release as a full release.|`false`
 
+#### Example
 
 <%= json \
   :tag_name         => "v1.0.0",
@@ -82,6 +83,7 @@ Name | Type | Description | Default
 `draft`|`boolean` | `true` makes the release a draft, and `false` publishes the release.|
 `prerelease`|`boolean` | `true` to identify the release as a prerelease, `false` to identify the release as a full release.|
 
+#### Example
 
 <%= json \
   :tag_name         => "v1.0.0",
@@ -187,6 +189,7 @@ Name | Type | Description | Default
 `name`|`string` | **Required**. The file name of the asset.|
 `label`|`string` | An alternate short description of the asset.  Used in place of the filename.|
 
+#### Example
 
 <%= json \
   :name  => "foo-1.0.0-osx.zip",

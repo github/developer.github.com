@@ -248,7 +248,7 @@ to make a second `GET` request.
 
 Name | Type | Description | Default
 -----|------|-------------|---------
-`archive_format`|`string` | Can be either `tarball` or `zipball`|
+`archive_format`|`string` | Can be either `tarball` or `zipball`|`tarball`
 `ref`| `string` | A valid Git reference.|The repository’s default branch (usually `master`)
 
 

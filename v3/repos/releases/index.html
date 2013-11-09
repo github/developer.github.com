@@ -46,7 +46,7 @@
     	<h1 id="releases-api">Releases API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-releases-for-a-repository">List releases for a repository</a></li>
+  <li><a href="#list-releases-for-a-repository">List releases for a repository</a></li>
   <li><a href="#get-a-single-release">Get a single release</a></li>
   <li><a href="#create-a-release">Create a release</a></li>
   <li><a href="#edit-a-release">Edit a release</a></li>
@@ -56,7 +56,9 @@
   <li><a href="#get-a-single-release-asset">Get a single release asset</a></li>
   <li><a href="#edit-a-release-asset">Edit a release asset</a></li>
   <li><a href="#delete-a-release-asset">Delete a release asset</a></li>
-</ul><h2 id="list-releases-for-a-repository">List releases for a repository</h2>
+</ul>
+
+<h2 id="list-releases-for-a-repository">List releases for a repository</h2>
 
 <p>Users with push access to the repository will receive all releases
 (i.e., published releases and draft releases). Users with pull access
@@ -129,7 +131,7 @@ that creates release assets</a>.</p>
 <h3 id="input">Input</h3>
 
 <dl>
-<dt>tag_name</dt>
+  <dt>tag_name</dt>
   <dd>
 <em>Required</em> <strong>string</strong>
 </dd>
@@ -156,7 +158,9 @@ release, <code>false</code> to create a published one. Default is <code>false</c
 <em>Optional</em> <strong>boolean</strong> - <code>true</code> to identify the release as a
 prerelease. <code>false</code> to identify the release as a full release. Default is
 <code>false</code>.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
   <span class="s2">"target_commitish"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
@@ -198,7 +202,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <dl>
-<dt>tag_name</dt>
+  <dt>tag_name</dt>
   <dd>
 <em>Optional</em> <strong>string</strong>
 </dd>
@@ -224,7 +228,9 @@ publishes the release.</dd>
   <dd>
 <em>Optional</em> <strong>boolean</strong> - <code>true</code> to identify the release as a
 prerelease. <code>false</code> to identify the release as a full release.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
   <span class="s2">"target_commitish"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
@@ -312,14 +318,16 @@ authentication exactly the same as the rest of the API.</p>
 asset’s name in a URI query parameter.</p>
 
 <dl>
-<dt>Content-Type (Header)</dt>
+  <dt>Content-Type (Header)</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The content type of the asset.  Example:
 “application/zip”.  See this list of <a href="http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types">common media types</a>.</dd>
   <dt>name (URI query parameter)</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The file name of the asset.</dd>
-</dl><p>Send the raw binary content of the asset as the request body.</p>
+</dl>
+
+<p>Send the raw binary content of the asset as the request body.</p>
 
 <h3 id="response-for-successful-upload">Response for successful upload</h3>
 
@@ -412,14 +420,16 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-3">Input</h3>
 
 <dl>
-<dt>name</dt>
+  <dt>name</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The file name of the asset.</dd>
   <dt>label</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - An alternate short description of the asset.  Used in
 place of the filename.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"foo-1.0.0-osx.zip"</span><span class="p">,</span>
   <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"Mac binary"</span>
 <span class="p">}</span></code></pre>
@@ -453,6 +463,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

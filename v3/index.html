@@ -49,7 +49,7 @@
 <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">support</a>.</p>
 
 <ul id="markdown-toc">
-<li><a href="#current-version">Current Version</a></li>
+  <li><a href="#current-version">Current Version</a></li>
   <li><a href="#schema">Schema</a></li>
   <li><a href="#parameters">Parameters</a></li>
   <li><a href="#client-errors">Client Errors</a></li>
@@ -64,7 +64,9 @@
   <li><a href="#cross-origin-resource-sharing">Cross Origin Resource Sharing</a></li>
   <li><a href="#json-p-callbacks">JSON-P Callbacks</a></li>
   <li><a href="#deprecations">Deprecations</a></li>
-</ul><h2 id="current-version">Current Version</h2>
+</ul>
+
+<h2 id="current-version">Current Version</h2>
 
 <pre><code>Accept: application/vnd.github.beta+json
 </code></pre>
@@ -169,7 +171,7 @@ $ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/aut
 receive request bodies:</p>
 
 <ol>
-<li>
+  <li>
     <p>Sending invalid JSON will result in a <code>400 Bad Request</code> response.</p>
 
     <pre><code> HTTP/1.1 400 Bad Request
@@ -207,13 +209,15 @@ response.</p>
  }
 </code></pre>
   </li>
-</ol><p>All error objects have resource and field properties so that your client
+</ol>
+
+<p>All error objects have resource and field properties so that your client
 can tell what the problem is.  There’s also an error code to let you
 know what is wrong with the field.  These are the possible validation error
 codes:</p>
 
 <dl>
-<dt>missing</dt>
+  <dt>missing</dt>
   <dd>This means a resource does not exist.</dd>
   <dt>missing_field</dt>
   <dd>This means a required field on a resource has not been set.</dd>
@@ -224,7 +228,9 @@ for that resource should be able to give you more specific information.</dd>
   <dd>This means another resource has the same value as this field.  This
 can happen in resources that must have some unique key (such as Label
 names).</dd>
-</dl><p>If resources have custom validation errors, they will be documented with the resource.</p>
+</dl>
+
+<p>If resources have custom validation errors, they will be documented with the resource.</p>
 
 <h2 id="http-redirects">HTTP Redirects</h2>
 
@@ -235,7 +241,7 @@ error and clients should follow that redirect. Redirect responses will have a
 client should repeat the requests.</p>
 
 <dl>
-<dt>301</dt>
+  <dt>301</dt>
   <dd>Permanent redirection. The URI you used to make the request has been
 superseded by the one specified in the <code>Location</code> header field. This and all
 future requests to this resource should be directed to the new URI.</dd>
@@ -243,7 +249,9 @@ future requests to this resource should be directed to the new URI.</dd>
   <dd>Temporary redirection. The request should be repeated verbatim to the URI
 specified in the <code>Location</code> header field but clients should continue to use the
 original URI for future requests.</dd>
-</dl><p>Other redirection status codes may be used in accordance with the HTTP 1.1 spec.</p>
+</dl>
+
+<p>Other redirection status codes may be used in accordance with the HTTP 1.1 spec.</p>
 
 <h2 id="http-verbs">HTTP Verbs</h2>
 
@@ -251,7 +259,7 @@ original URI for future requests.</dd>
 action.</p>
 
 <dl>
-<dt>HEAD</dt>
+  <dt>HEAD</dt>
   <dd>Can be issued against any resource to get just the HTTP header info.</dd>
   <dt>GET</dt>
   <dd>Used for retrieving resources.</dd>
@@ -269,7 +277,9 @@ POST requests.</dd>
 with no <code>body</code> attribute, be sure to set the <code>Content-Length</code> header to zero.</dd>
   <dt>DELETE</dt>
   <dd>Used for deleting resources.</dd>
-</dl><h2 id="authentication">Authentication</h2>
+</dl>
+
+<h2 id="authentication">Authentication</h2>
 
 <p>There are three ways to authenticate through GitHub API v3.  Requests that
 require authentication will return 404, instead of 403, in some places.  This
@@ -363,7 +373,7 @@ SHA1 and not on page number.</p>
 <p>The possible <code>rel</code> values are:</p>
 
 <dl>
-<dt><code>next</code></dt>
+  <dt><code>next</code></dt>
   <dd>Shows the URL of the immediate next page of results.</dd>
   <dt><code>last</code></dt>
   <dd>Shows the URL of the last page of results.</dd>
@@ -371,7 +381,9 @@ SHA1 and not on page number.</p>
   <dd>Shows the URL of the first page of results.</dd>
   <dt><code>prev</code></dt>
   <dd>Shows the URL of the immediate previous page of results.</dd>
-</dl><h2 id="rate-limiting">Rate Limiting</h2>
+</dl>
+
+<h2 id="rate-limiting">Rate Limiting</h2>
 
 <p>For requests using Basic Authentication or OAuth, you can make up to 5,000
 requests per hour. For unauthenticated requests, the rate limit allows you to
@@ -395,13 +407,15 @@ X-RateLimit-Reset: 1372700873
 <p>The headers tell you everything you need to know about your current rate limit status:</p>
 
 <dl>
-<dt><code>X-RateLimit-Limit</code></dt>
+  <dt><code>X-RateLimit-Limit</code></dt>
   <dd>The maximum number of requests that the consumer is permitted to make per hour.</dd>
   <dt><code>X-RateLimit-Remaining</code></dt>
   <dd>The number of requests remaining in the current rate limit window.</dd>
   <dt><code>X-RateLimit-Reset</code></dt>
   <dd>The time at which the current rate limit window resets in <a href="http://en.wikipedia.org/wiki/Unix_time">UTC epoch seconds</a>.</dd>
-</dl><p>If you need the time in a different format, any modern programming language can get the job done. For example, if you open up the console on your web browser, you can easily get the reset time as a JavaScript Date object.</p>
+</dl>
+
+<p>If you need the time in a different format, any modern programming language can get the job done. For example, if you open up the console on your web browser, you can easily get the reset time as a JavaScript Date object.</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1372700873</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="c1">// =&gt; Mon Jul 01 2013 13:47:53 GMT-0400 (EDT)</span></code></pre>
@@ -620,124 +634,130 @@ functionality <strong>will be removed</strong> in the <em>next</em> major versio
 <p>The recommendations below will help you prepare your application for the next major version of the API.</p>
 
 <ol>
-<li>
+  <li>
     <dl>
-<dt>Method: /gists/:id/fork</dt>
+      <dt>Method: /gists/:id/fork</dt>
       <dd>Recommendation: Use <strong>/gists/:id/forks</strong> (plural) instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Method: /legacy/issues/search/:owner/:repository/:state/:keyword</dt>
+      <dt>Method: /legacy/issues/search/:owner/:repository/:state/:keyword</dt>
       <dd>Recommendation: Use <a href="v3/search/#search-issues">v3 Issue Search API</a> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Method: /legacy/repos/search/:keyword</dt>
+      <dt>Method: /legacy/repos/search/:keyword</dt>
       <dd>Recommendation: Use <a href="/v3/search/#search-repositories">v3 Repository Search API</a> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Method: /legacy/user/search/:keyword</dt>
+      <dt>Method: /legacy/user/search/:keyword</dt>
       <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Method: /legacy/user/email/:email</dt>
+      <dt>Method: /legacy/user/email/:email</dt>
       <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Method: /repos/:owner/:repo/hooks/:id/test</dt>
+      <dt>Method: /repos/:owner/:repo/hooks/:id/test</dt>
       <dd>Recommendation: Use <strong>/repos/:owner/:repo/hooks/:id/tests</strong> (plural) instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Query parameters when POSTing to /repos/:owner/:repo/forks</dt>
+      <dt>Query parameters when POSTing to /repos/:owner/:repo/forks</dt>
       <dd>Recommendation: Use JSON to POST to this method instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Query parameter value: Passing “watchers” as the value for the “sort” parameter in a GET request to /repos/:owner/:repo/forks</dt>
+      <dt>Query parameter value: Passing “watchers” as the value for the “sort” parameter in a GET request to /repos/:owner/:repo/forks</dt>
       <dd>Recommendation: Use <strong>stargazers</strong> as the value instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Pull Request attribute: merge_commit_sha</dt>
+      <dt>Pull Request attribute: merge_commit_sha</dt>
       <dd>Recommendation: <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Do not use this attribute</a>.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Rate Limit attribute: rate</dt>
+      <dt>Rate Limit attribute: rate</dt>
       <dd>Recommendation: Use <strong>resources[“core”]</strong> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Repository attribute: forks</dt>
+      <dt>Repository attribute: forks</dt>
       <dd>Recommendation: Use <strong>fork_count</strong> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Repository attribute: master_branch</dt>
+      <dt>Repository attribute: master_branch</dt>
       <dd>Recommendation: Use <strong>default_branch</strong> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Repository attribute: open_issues</dt>
+      <dt>Repository attribute: open_issues</dt>
       <dd>Recommendation: Use <strong>open_issues_count</strong> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Repository attribute: public</dt>
+      <dt>Repository attribute: public</dt>
       <dd>Recommendation: When <a href="/v3/repos/#create">creating a repository</a>, use the
 <strong>private</strong> attribute to indicate whether the repository should be public or
 private. Do not use the <strong>public</strong> attribute.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>Repository attribute: watchers</dt>
+      <dt>Repository attribute: watchers</dt>
       <dd>Recommendation: Use <strong>watchers_count</strong> instead.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>User attribute: bio</dt>
+      <dt>User attribute: bio</dt>
       <dd>Recommendation: Do not use this attribute. It is obsolete.</dd>
     </dl>
-</li>
-</ol><h3 id="breaking-beta-changes">Breaking Beta Changes</h3>
+  </li>
+</ol>
+
+<h3 id="breaking-beta-changes">Breaking Beta Changes</h3>
 
 <h4 id="june-12-2012">June 12, 2012:</h4>
 <ul>
-<li>Removed API v1 support</li>
+  <li>Removed API v1 support</li>
   <li>Removed API v2 support</li>
-</ul><h4 id="june-15th-2011">June 15th, 2011:</h4>
+</ul>
+
+<h4 id="june-15th-2011">June 15th, 2011:</h4>
 
 <ul>
-<li>
+  <li>
 <code>gravatar_url</code> is being deprecated in favor of <code>avatar_url</code> for all
 responses that include users or orgs. A default size is no longer
 included in the URL.</li>
   <li>Creating new gists (both anonymously and with an authenticated user)
 should use <code>POST /gists</code> from now on. <code>POST /users/:user/gists</code> is no
 longer supported.</li>
-</ul><h4 id="june-1st-2011">June 1st, 2011:</h4>
+</ul>
+
+<h4 id="june-1st-2011">June 1st, 2011:</h4>
 
 <ul>
-<li>Removed support for PUT verb on update requests. Use POST or PATCH
+  <li>Removed support for PUT verb on update requests. Use POST or PATCH
 instead.</li>
   <li>Removed <code>.json</code> extension from all URLs.</li>
   <li>No longer using the X-Next or X-Last headers. Pagination info is
@@ -745,6 +765,8 @@ returned in the Link header instead.</li>
   <li>JSON-P response has completely changed to a more consistent format.</li>
   <li>Starring gists now uses PUT verb (instead of POST) and returns 204.</li>
 </ul>
+
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

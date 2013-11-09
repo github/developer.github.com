@@ -46,26 +46,30 @@
     	<h1 id="issue-events-api">Issue Events API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-events-for-an-issue">List events for an issue</a></li>
+  <li><a href="#list-events-for-an-issue">List events for an issue</a></li>
   <li><a href="#list-events-for-a-repository">List events for a repository</a></li>
   <li><a href="#get-a-single-event">Get a single event</a></li>
-</ul><p>Records various events that occur around an Issue or Pull Request. This is
+</ul>
+
+<p>Records various events that occur around an Issue or Pull Request. This is
 useful both for display on issue/pull request information pages and also to
 determine who should be notified of comments.</p>
 
 <h3 id="attributes">Attributes</h3>
 
 <dl>
-<dt>actor</dt>
+  <dt>actor</dt>
   <dd>Always the User that generated the event.</dd>
   <dt>commit_id</dt>
   <dd>The String SHA of a commit that referenced this Issue</dd>
   <dt>event</dt>
   <dd>Identifies the actual type of Event that occurred.</dd>
-</dl><h3 id="events">Events</h3>
+</dl>
+
+<h3 id="events">Events</h3>
 
 <dl>
-<dt>closed</dt>
+  <dt>closed</dt>
   <dd>The issue was closed by the actor. When the commit_id is present, it
 identifies the commit that closed the issue using “closes / fixes #NN”
 syntax.</dd>
@@ -83,7 +87,9 @@ the commit SHA1 of where that happened.</dd>
   <dd>The actor was @mentioned in an issue body.</dd>
   <dt>assigned</dt>
   <dd>The issue was assigned to the actor.</dd>
-</dl><h2 id="list-events-for-an-issue">List events for an issue</h2>
+</dl>
+
+<h2 id="list-events-for-an-issue">List events for an issue</h2>
 
 <pre><code>GET /repos/:owner/:repo/issues/:issue_number/events
 </code></pre>
@@ -280,6 +286,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-04-22T13:33:48Z"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

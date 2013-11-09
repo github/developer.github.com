@@ -46,7 +46,7 @@
     	<h1 id="pull-request-api">Pull Request API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#link-relations">Link Relations</a></li>
+  <li><a href="#link-relations">Link Relations</a></li>
   <li><a href="#list-pull-requests">List pull requests</a></li>
   <li><a href="#get-a-single-pull-request">Get a single pull request</a></li>
   <li><a href="#create-a-pull-request">Create a pull request</a></li>
@@ -56,7 +56,9 @@
   <li><a href="#get-if-a-pull-request-has-been-merged">Get if a pull request has been merged</a></li>
   <li><a href="#merge-a-pull-request-merge-buttontrade">Merge a pull request (Merge Button™)</a></li>
   <li><a href="#custom-media-types">Custom media types</a></li>
-</ul><p>The Pull Request API allows you to list, view, edit, create, and even merge
+</ul>
+
+<p>The Pull Request API allows you to list, view, edit, create, and even merge
 pull requests. Comments on pull requests can be managed via the <a href="/v3/issues/comments/">Issue
 Comments API</a>.</p>
 
@@ -69,7 +71,7 @@ can read more about the use of media types in the API
 <p>Pull Requests have these possible link relations:</p>
 
 <dl>
-<dt><code>self</code></dt>
+  <dt><code>self</code></dt>
   <dd>The API location of this Pull Request.</dd>
   <dt><code>html</code></dt>
   <dd>The HTML location of this Pull Request.</dd>
@@ -79,7 +81,9 @@ can read more about the use of media types in the API
   <dd>The API location of this Pull Request’s Review comments.</dd>
   <dt><code>statuses</code></dt>
   <dd>The API location of this Pull Request’s commit statuses, which are the statuses of its <code>head</code> branch.</dd>
-</dl><h2 id="list-pull-requests">List pull requests</h2>
+</dl>
+
+<h2 id="list-pull-requests">List pull requests</h2>
 
 <pre><code>GET /repos/:owner/:repo/pulls
 </code></pre>
@@ -87,7 +91,7 @@ can read more about the use of media types in the API
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-<dt>state</dt>
+  <dt>state</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> - <code>open</code> or <code>closed</code> to filter by state. Default
 is <code>open</code>.</dd>
@@ -99,7 +103,9 @@ of: <code>user:ref-name</code>. Example: <code>github:new-script-format</code>.<
   <dd>
 <em>Optional</em> <strong>string</strong> - Filter pulls by base branch name. Example:
 <code>gh-pages</code>.</dd>
-</dl><h3 id="response">Response</h3>
+</dl>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -417,7 +423,7 @@ remain to indicate whether the pull request can be automatically merged.</p>
 <h3 id="input">Input</h3>
 
 <dl>
-<dt>title</dt>
+  <dt>title</dt>
   <dd>
 <em>Required</em> <strong>string</strong>
 </dd>
@@ -434,7 +440,9 @@ another repo.</dd>
   <dt>head</dt>
   <dd>
 <em>Required</em> <strong>string</strong> - The branch (or git ref) where your changes are implemented.</dd>
-</dl><p>NOTE: <code>head</code> and <code>base</code> can be either a sha or a branch name. Typically you
+</dl>
+
+<p>NOTE: <code>head</code> and <code>base</code> can be either a sha or a branch name. Typically you
 would namespace <code>head</code> with a user like this: <code>username:branch</code>.</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
@@ -450,11 +458,13 @@ would namespace <code>head</code> with a user like this: <code>username:branch</
 Issue number instead of <code>title</code> and <code>body</code>.</p>
 
 <dl>
-<dt>issue</dt>
+  <dt>issue</dt>
   <dd>
 <em>Required</em> <strong>number</strong> - Issue number in this repository to turn into a
 Pull Request.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"issue"</span><span class="o">:</span> <span class="s2">"5"</span><span class="p">,</span>
   <span class="s2">"head"</span><span class="o">:</span> <span class="s2">"octocat:new-feature"</span><span class="p">,</span>
   <span class="s2">"base"</span><span class="o">:</span> <span class="s2">"master"</span>
@@ -606,7 +616,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <dl>
-<dt>title</dt>
+  <dt>title</dt>
   <dd>
 <em>Optional</em> <strong>string</strong>
 </dd>
@@ -618,7 +628,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dd>
 <em>Optional</em> <strong>string</strong> - State of this Pull Request. Valid values are
 <code>open</code> and <code>closed</code>.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"new title"</span><span class="p">,</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"updated body"</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span>
@@ -867,10 +879,12 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-2">Input</h3>
 
 <dl>
-<dt>commit_message</dt>
+  <dt>commit_message</dt>
   <dd>
 <em>Optional</em> <strong>string</strong>  - The message that will be used for the merge commit</dd>
-</dl><h3 id="response-if-merge-was-successful">Response if merge was successful</h3>
+</dl>
+
+<h3 id="response-if-merge-was-successful">Response if merge was successful</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -904,6 +918,7 @@ application/vnd.github.VERSION.text+json
 application/vnd.github.VERSION.html+json
 application/vnd.github.VERSION.full+json
 </code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

@@ -36,25 +36,14 @@ In order to create a team, the authenticated user must be an owner of
 
     POST /orgs/:org/teams
 
-### Input
+### Parameters
 
-name
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`name`|`string` | The name of the team.|**YES**|
+`repo_names`|`array` of `strings` | The repositories to add the team to.| |
+`permission`|`string` | The permission to grant the team. Can be one of:<br/>*`pull` - team members can pull, but not push to or administer these repositories.<br/>*``push` - team members can pull and push, but not administer these repositories.<br/>*`admin` - team members can pull, push and administer these repositories.| | `pull`
 
-repo\_names
-: _Optional_ **array** of **strings**
-
-permission
-: _Optional_ **string**
-
-  `pull` - team members can pull, but not push to or administer these
-  repositories. **Default**
-
-  `push` - team members can pull and push, but not administer these
-  repositories.
-
-  `admin` - team members can pull, push and administer these
-  repositories.
 
 <%= json \
   :name => 'new team',
@@ -73,13 +62,13 @@ the org that the team is associated with.
 
     PATCH /teams/:id
 
-### Input
+### Parameters
 
-name
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`name`|`string` | The name of the team.|**YES**|
+`permission`|`string` | The permission to grant the team. Can be one of:<br/>*`pull` - team members can pull, but not push to or administer these repositories.<br/>*``push` - team members can pull and push, but not administer these repositories.<br/>*`admin` - team members can pull, push and administer these repositories.| | `pull`
 
-permission
-: _Optional_ **string**
 
 <%= json \
   :name => 'new team name',

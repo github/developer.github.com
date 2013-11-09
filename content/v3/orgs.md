@@ -37,21 +37,14 @@ List public and private organizations for the authenticated user.
 
 ### Input
 
-billing_email
-: _Optional_ **string** - Billing email address. This address is not
-publicized.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`billing_email`|`string` | Billing email address. This address is not publicized.| |
+`company`|`string` | The company name.| |
+`email`|`string` | The publicly visible email address.| |
+`location`|`string` | The location.| |
+`name`|`string` | The shorthand name of the company.| |
 
-company
-: _Optional_ **string**
-
-email
-: _Optional_ **string** - Publicly visible email address.
-
-location
-: _Optional_ **string**
-
-name
-: _Optional_ **string**
 
 <%= json \
     :billing_email => "support@github.com",

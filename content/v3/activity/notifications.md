@@ -57,17 +57,12 @@ List all notifications for the current user, grouped by repository.
 
 ### Parameters
 
-all
-: _Optional_ **boolean** - Also show notifications marked as read. Default: `false`.
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`all`|`boolean` | If `true`, show notifications marked as read. | |`false`
+`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. | |`false`
+`since`|`time` | Filters out any notifications updated before the given time.  The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".| |
 
-participating
-: _Optional_ **boolean** - Only show notifications in which the user is
-directly participating or mentioned. Default: `false`.
-
-since
-: _Optional_ **time** filters out any notifications updated before the given
-time.  The time should be passed in as UTC in the ISO 8601 format:
-`YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
 
 ### Response
 
@@ -82,17 +77,12 @@ List all notifications for the current user.
 
 ### Parameters
 
-all
-: _Optional_ **boolean** - Also show notifications marked as read. Default: `false`.
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`all`|`boolean` | If `true`, show notifications marked as read. | |`false`
+`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. | |`false`
+`since`|`time` | Filters out any notifications updated before the given time.  The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".| |
 
-participating
-: _Optional_ **boolean** - Only show notifications in which the user is
-directly participating or mentioned. Default: `false`.
-
-since
-: _Optional_ **time** filters out any notifications updated before the given
-time.  The time should be passed in as UTC in the ISO 8601 format:
-`YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
 
 ### Response
 
@@ -106,12 +96,12 @@ on GitHub.com](https://github.com/notifications).
 
     PUT /notifications
 
-### Input
+### Parameters
 
-last_read_at
-: _Optional_ **Time** Describes the last point that notifications were checked.  Anything
-updated since this time will not be updated.  Default: Now.  Expected in ISO
-8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`last_read_at`|`time` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated.  Expected in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z". | |Now.
+
 
 ### Response
 
@@ -124,12 +114,12 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
     PUT /repos/:owner/:repo/notifications
 
-### Input
+### Parameters
 
-last_read_at
-: _Optional_ **Time** Describes the last point that notifications were checked.  Anything
-updated since this time will not be updated.  Default: Now.  Expected in ISO
-8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`last_read_at`|`time` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated.   Expected in ISO 8601 format: `YYYY|MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z". | |Now.
+
 
 ### Response
 
@@ -173,15 +163,13 @@ a thread will mute all future notifications (until you comment or get
 
     PUT /notifications/threads/:id/subscription
 
-### Input
+### Parameters
 
-subscribed
-: **boolean** Determines if notifications should be received from this
-thread.
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`subscribed`|`boolean`| Determines if notifications should be received from this thread | | |
+`ignored`|`boolean`| Determines if all notifications should be blocked from this thread | | |
 
-ignored
-: **boolean** Determines if all notifications should be blocked from this
-thread.
 
 ### Response
 

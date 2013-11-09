@@ -30,11 +30,11 @@ Find issues by state and keyword.
 
 ### Parameters
 
-state
-: `open` or `closed`
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`state`|`string` | Indicates the state of the issues to return. Can be either `open` or `closed`.| |
+`keyword`|| The search term| |
 
-keyword
-: Search term
 
 <%= headers 200 %>
 <%= json(:issue_search_results) %>
@@ -49,21 +49,14 @@ pages can be fetched using the `start_page` parameter.
 
 ### Parameters
 
-keyword
-: Search term
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`keyword`|| The search term| |
+`language`|`string` | Filter results by [language](https://github.com/languages)| |
+`start_page`|`string` | The page number to fetch| |
+`sort`|`string` | The sort field. One of `stars`, `forks`, or `updated`. Defautlt: Results are sorted by best match.| |
+`order`|`string` | The sort field. if `sort` param is provided. Can be either `asc` or `desc`.| |
 
-language
-: _Optional_ Filter results by [language](https://github.com/languages)
-
-start_page
-: _Optional_ Page number to fetch
-
-sort
-: _Optional_ Sort field. One of `stars`, `forks`, or `updated`. If not
-provided, results are sorted by best match.
-
-order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
 
 <%= headers 200 %>
 <%= json(:repo_search_results) %>
@@ -76,18 +69,13 @@ Find users by keyword.
 
 ### Parameters
 
-keyword
-: Keyword search parameters
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`keyword`|| The search term| |
+`start_page`|`string` | The page number to fetch| |
+`sort`|| The sort field. One of `stars`, `forks`, or `updated`. Defautlt: Results are sorted by best match.| |
+`order`|| The sort field. if `sort` param is provided. Can be either `asc` or `desc`.| |
 
-start_page
-: _Optional_ Page number to fetch
-
-sort
-: _Optional_ Sort field. One of `followers`, `joined`, or `repositories`. If not
-provided, results are sorted by best match.
-
-order
-: _Optional_ Sort order if `sort` param is provided. One of `asc` or `desc`.
 
 <%= headers 200 %>
 <%= json(:user_search_results) %>
@@ -103,8 +91,10 @@ address must be left unencoded. Searches only against public email addresses
 
 ### Parameters
 
-email
-: Email address
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`email`|| The email address| |
+
 
 <%= headers 200 %>
 <%= json(:email_search_results) %>

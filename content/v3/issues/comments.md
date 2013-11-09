@@ -31,14 +31,12 @@ By default, Issue Comments are ordered by ascending ID.
 
 ### Parameters
 
-sort
-: _Optional_ **String** `created` or `updated`
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`sort`|`String` | Either `created` or `updated`.| |
+`direction`|`String` | Either `asc` or `desc`. Ignored without `sort` parameter.| |
+`since`|`String` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.| |
 
-direction
-: _Optional_ **String** `asc` or `desc`. Ignored without `sort` parameter.
-
-since
-: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 
 ### Response
 
@@ -60,8 +58,10 @@ since
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`body`|`string` | The contents of the comment.|**YES**|
+
 
 <%= json :body => "a new comment" %>
 
@@ -78,8 +78,10 @@ body
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`body`|`string` | The contents of the comment.|**YES**|
+
 
 <%= json :body => "String" %>
 

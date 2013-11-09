@@ -29,13 +29,13 @@ title: Issue Labels | GitHub API
 
     POST /repos/:owner/:repo/labels
 
-### Input
+### Parameters
 
-name
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`name`|`string` | The name of the label.|**YES**|
+`color`|`string` | A 6 character hex code, without the leading `#`, identifying the color.|**YES**|
 
-color
-: _Required_ **string** - 6 character hex code, without a leading `#`.
 
 <%= json :name => "API", :color => "FFFFFF" %>
 
@@ -50,13 +50,13 @@ color
 
     PATCH /repos/:owner/:repo/labels/:name
 
-### Input
+### Parameters
 
-name
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`name`|`string` | The name of the label.|**YES**|
+`color`|`string` | A 6 character hex code, without the leading `#`, identifying the color.|**YES**|
 
-color
-: _Required_ **string** - 6 character hex code, without a leading `#`.
 
 <%= json :name => "API", :color => "FFFFFF" %>
 

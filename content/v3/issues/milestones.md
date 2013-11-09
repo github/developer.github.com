@@ -13,14 +13,12 @@ title: Issue Milestones | GitHub API
 
 ### Parameters
 
-state
-: `open`, `closed`, default: `open`
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`state`|`string` | The state of the milestone. Either `open` or `closed`. | |`open`
+`sort`|`string` | What to sort results by. Either `due_date` or `completeness`. | |`due_date`
+`direction`|`string` | The direction of the sort. Either `asc` or `desc`. | |`asc`
 
-sort
-: `due_date`, `completeness`, default: `due_date`
-
-direction
-: `asc` or `desc`, default: `asc`.
 
 ### Response
 
@@ -42,23 +40,19 @@ direction
 
 ### Input
 
-title
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`title`|`string` | The title of the milestone.|**YES**|
+`state`|`string` | The state of the milestone. Either `open` or `closed`. | |`open`
+`description`|`string` | A description of the milestone.| |
+`due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`| |
 
-state
-: _Optional_ **string** - `open` or `closed`. Default is `open`.
-
-description
-: _Optional_ **string**
-
-due\_on
-: _Optional_ **string** - ISO 8601 time.
 
 <%= json \
   :title => "String",
   :state => "open or closed",
   :description => "String",
-  :due_on => "Time"
+  :due_on => "2012-10-09T23:39:01Z"
 %>
 
 ### Response
@@ -74,20 +68,13 @@ due\_on
 
 ### Input
 
-number
-: _Required_ **integer**
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`title`|`string` | The title of the milestone.| |
+`state`|`string` | The state of the milestone. Either `open` or `closed`. | |`open`
+`description`|`string` | A description of the milestone.| |
+`due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`| |
 
-title
-: _Optional_ **string**
-
-state
-: _Optional_ **string** - `open` or `closed`. Default is `open`.
-
-description
-: _Optional_ **string**
-
-due\_on
-: _Optional_ **string** - ISO 8601 time.
 
 <%= json \
   :title => "String",

@@ -33,14 +33,12 @@ By default, Review Comments are ordered by ascending ID.
 
 ### Parameters
 
-sort
-: _Optional_ **String** `created` or `updated`
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`sort`|`string` | Can be either `created` or `updated`| |
+`direction`|`string` | Can be either `asc` or `desc`. Ignored without `sort` parameter.| |
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only comments updated at or after this time are returned.| |
 
-direction
-: _Optional_ **String** `asc` or `desc`. Ignored without `sort` parameter.
-
-since
-: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 
 ### Response
 
@@ -62,17 +60,13 @@ since
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`body`|`string` | The text of the comment|**YES**|
+`commit_id`|`string` | The SHA of the commit to comment on.|**YES**|
+`path`|`string` | The relative path of the file to comment on.|**YES**|
+`position`|`number` | The line index in the diff to comment on.|**YES**|
 
-commit_id
-: _Required_ **string** - Sha of the commit to comment on.
-
-path
-: _Required_ **string** - Relative path of the file to comment on.
-
-position
-: _Required_ **number** - Line index in the diff to comment on.
 
 #### Example
 
@@ -88,11 +82,11 @@ position
 Instead of passing `commit_id`, `path`, and `position` you can reply to
 an existing Pull Request Comment like this:
 
-body
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`body`|`string` | The text of the comment|**YES**|
+`in_reply_to`|`number` | The comment id to reply to.|**YES**|
 
-in_reply_to
-: _Required_ **number** - Comment id to reply to.
 
 #### Example
 
@@ -114,8 +108,10 @@ in_reply_to
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`body`|`string` | The text of the comment|**YES**|
+
 
 #### Example
 

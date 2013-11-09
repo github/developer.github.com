@@ -19,20 +19,13 @@ can read more about the use of media types in the API
 
 Pull Requests have these possible link relations:
 
-`self`
-: The API location of this Pull Request.
-
-`html`
-: The HTML location of this Pull Request.
-
-`comments`
-: The API location of this Pull Request's Issue comments.
-
-`review_comments`
-: The API location of this Pull Request's Review comments.
-
-`statuses`
-: The API location of this Pull Request's commit statuses, which are the statuses of its `head` branch.
+Name | Description
+-----|-----------|
+`self`| The API location of this Pull Request.
+`html`| The HTML location of this Pull Request.
+`comments`| The API location of this Pull Request's Issue comments.
+`review_comments`| The API location of this Pull Request's Review comments.
+`statuses`| The API location of this Pull Request's commit statuses, which are the statuses of its `head` branch.
 
 ## List pull requests
 
@@ -40,17 +33,12 @@ Pull Requests have these possible link relations:
 
 ### Parameters
 
-state
-: _Optional_ **string** - `open` or `closed` to filter by state. Default
-is `open`.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`state`|`string` | Either `open` or `closed` to filter by state. | |`open`
+`head`|`string` | Filter pulls by head user and branch name in the format of `user:ref-name`. Example: `github:new-script-format`.| |
+`base`|`string` | Filter pulls by base branch name. Example: `gh-pages`.| |
 
-head
-: _Optional_ **string** - Filter pulls by head user and branch name in the format
-of: `user:ref-name`. Example: `github:new-script-format`.
-
-base
-: _Optional_ **string** - Filter pulls by base branch name. Example:
-`gh-pages`.
 
 ### Response
 
@@ -86,20 +74,13 @@ Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-
 
 ### Input
 
-title
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`title`|`string` | The title of the pull request.|**YES**|
+`body`|`string` | The contents of the pull request.| |
+`base`|`string` | The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository.  You cannot submit a pull request to one repo that requests a merge to a base of another repo.|**YES**|
+`head`|`string` | The branch (or git ref) where your changes are implemented.|**YES**|
 
-body
-: _Optional_ **string**
-
-base
-: _Required_ **string** - The branch (or git ref) you want your changes pulled into.
-This should be an existing branch on the current repository.  You cannot
-submit a pull request to one repo that requests a merge to a base of
-another repo.
-
-head
-: _Required_ **string** - The branch (or git ref) where your changes are implemented.
 
 NOTE: `head` and `base` can be either a sha or a branch name. Typically you
 would namespace `head` with a user like this: `username:branch`.
@@ -116,9 +97,10 @@ would namespace `head` with a user like this: `username:branch`.
 You can also create a Pull Request from an existing Issue by passing an
 Issue number instead of `title` and `body`.
 
-issue
-: _Required_ **number** - Issue number in this repository to turn into a
-Pull Request.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`issue`|`number` | The issue number in this repository to turn into a Pull Request.|**YES**|
+
 
 <%= json \
   :issue => "5",
@@ -137,15 +119,12 @@ Pull Request.
 
 ### Input
 
-title
-: _Optional_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`title`|`string` | The title of the pull request.| |
+`body`|`string` | The contents of the pull request.| |
+`state`|`string` | State of this Pull Request. Either `open` or `closed`.| |
 
-body
-: _Optional_ **string**
-
-state
-: _Optional_ **string** - State of this Pull Request. Valid values are
-`open` and `closed`.
 
 <%= json \
   :title     => "new title",
@@ -194,8 +173,10 @@ state
 
 ### Input
 
-commit\_message
-: _Optional_ **string**  - The message that will be used for the merge commit
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`commit_message`|`string`  | The message that will be used for the merge commit| |
+
 
 ### Response if merge was successful
 

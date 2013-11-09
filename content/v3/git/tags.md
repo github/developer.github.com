@@ -45,9 +45,9 @@ The `tagger` hash contains the following keys:
 
 Name | Type | Description | Default
 ----|------|--------------|---------
-`name`|| The name of the author of the tag|
-`email`|| The email of the author of the tag|
-`date`|| When this object was tagged. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+`name`|`string`| The name of the author of the tag|
+`email`|`string`| The email of the author of the tag|
+`date`|`string`| When this object was tagged. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 
 ### Example Input

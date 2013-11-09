@@ -61,7 +61,7 @@ Name | Type | Description | Default
 ----|------|--------------|---------
 `all`|`boolean` | If `true`, show notifications marked as read.|`false`
 `participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned.|`false`
-`since`|`time` | Filters out any notifications updated before the given time.  The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".|
+`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 
 ### Response
@@ -81,7 +81,7 @@ Name | Type | Description | Default
 ----|------|--------------|---------
 `all`|`boolean` | If `true`, show notifications marked as read.|`false`
 `participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned.|`false`
-`since`|`time` | Filters out any notifications updated before the given time.  The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".|
+`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 
 ### Response
@@ -100,7 +100,7 @@ on GitHub.com](https://github.com/notifications).
 
 Name | Type | Description | Default
 ----|------|--------------|---------
-`last_read_at`|`time` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated.  Expected in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".|Now.
+`last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.| Now.
 
 
 ### Response
@@ -118,7 +118,7 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
 Name | Type | Description | Default
 ----|------|--------------|---------
-`last_read_at`|`time` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated.   Expected in ISO 8601 format: `YYYY|MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".|Now.
+`last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|Now.
 
 
 ### Response

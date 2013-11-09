@@ -25,8 +25,8 @@ Name | Type | Description | Default
 `sha`|`string` | SHA or branch to start listing commits from.|
 `path`|`string` | Only commits containing this file path will be returned.|
 `author`|`string` | GitHub login, name, or email by which to filter by commit author|
-`since`|`time` | The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only commits after this date will be returned|
-`until`|`time` | The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only commits before this date will be returned|
+`since`|`string` | Only commits after this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+`until`|`string` | Only commits before this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 
 ### Response

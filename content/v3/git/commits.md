@@ -45,7 +45,7 @@ Name | Type | Description | Default
 -----|------|-------------|---------
 `name`|`string` | The name of the author (or commiter) of the commit|
 `email`|`string` | The email of the author (or commiter) of the commit|
-`date`|`string` | Indicates when this commit was authored (or committed). The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+`date`|`string` | Indicates when this commit was authored (or committed). This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 ### Example Input
 

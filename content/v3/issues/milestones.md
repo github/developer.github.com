@@ -45,7 +45,7 @@ Name | Type | Description | Default
 `title`|`string` | **Required**. The title of the milestone.|
 `state`|`string` | The state of the milestone. Either `open` or `closed`.|`open`
 `description`|`string` | A description of the milestone.|
-`due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`|
+`due_on`|`string` | The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 #### Example
 
@@ -74,7 +74,7 @@ Name | Type | Description | Default
 `title`|`string` | The title of the milestone.|
 `state`|`string` | The state of the milestone. Either `open` or `closed`.|`open`
 `description`|`string` | A description of the milestone.|
-`due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`|
+`due_on`|`string` | The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 #### Example
 

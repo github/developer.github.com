@@ -40,7 +40,6 @@ Name | Type | Description | Default
 ----|------|--------------|---------
 `since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.|
 
-
 ### Response
 
 <%= headers 200, :pagination => true %>

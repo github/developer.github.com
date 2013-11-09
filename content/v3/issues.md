@@ -35,7 +35,7 @@ Name | Type | Description | Default
 `labels`|`string`| A list of comma separated label names.  Example: `bug,ui,@high`|
 `sort`|`string`|  What to sort results by. Can be either `created`, `updated`, `comments`.|`created`
 `direction`|`string`| The direction of the sort. Can be either `asc` or `desc`.|`desc`
-`since`|`string` | Only issues updated at or after this time are returned. A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+`since`|`string` | Only issues updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 ### Response
 
@@ -58,7 +58,7 @@ Name | Type | Description | Default
 `labels`|`string`| A list of comma separated label names.  Example: `bug,ui,@high`|
 `sort`|`string`|  What to sort results by. Can be either `created`, `updated`, `comments`.|`created`
 `direction`|`string`| The direction of the sort. Can be either `asc` or `desc`.|`desc`
-`since`|`string` | Only issues updated at or after this time are returned. A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+`since`|`string` |Only issues updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 ### Response
 

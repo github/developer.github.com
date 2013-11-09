@@ -37,7 +37,7 @@ Name | Type | Description | Default
 -----|------|-------------|---------
 `sort`|`string` | Can be either `created` or `updated`|`created`
 `direction`|`string` | Can be either `asc` or `desc`. Ignored without `sort` parameter.|
-`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only comments updated at or after this time are returned.|
+`since`|`string` | Only comments updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
 
 
 ### Response

@@ -33,27 +33,16 @@ would be unnecessary.
 
 ### Parameters
 
-tag
-: _String_ of the tag
+Name | Type | Description | Required? | Default
+----|------|--------------|-----------|---------
+`tag`|| The tag| |
+`message`|| The tag message| |
+`object`|| The SHA of the git object this is tagging| |
+`type`|| The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.| |
+`tagger.name`|| The name of the author of the tag| |
+`tagger.email`|| The email of the author of the tag| |
+`tagger.date`|| When this object was tagged. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.| |
 
-message
-: _String_ of the tag message
-
-object
-: _String_ of the SHA of the git object this is tagging
-
-type
-: _String_ of the type of the object we're tagging. Normally this is a
-`commit` but it can also be a `tree` or a `blob`.
-
-tagger.name
-: _String_ of the name of the author of the tag
-
-tagger.email
-: _String_ of the email of the author of the tag
-
-tagger.date
-: _Timestamp_ of when this object was tagged
 
 ### Example Input
 

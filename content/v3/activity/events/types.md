@@ -21,7 +21,11 @@ They're only created for various internal and repository hooks.
 
 Triggered when a [commit comment](/v3/repos/comments/#list-commit-comments-for-a-repository) is created.
 
-Hook name: `commit_comment`
+### Hook name
+
+`commit_comment`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -32,7 +36,11 @@ Key | Type | Description
 
 Represents a created repository, branch, or tag.
 
-Hook name: `create`
+### Hook name
+
+`create`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -46,7 +54,11 @@ Key | Type | Description
 
 Represents a [deleted branch or tag](/v3/git/refs/#delete-a-reference).
 
-Hook name: `delete`
+### Hook name
+
+`delete`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -58,7 +70,11 @@ Key | Type | Description
 
 Triggered when a new [download](/v3/repos/downloads/) is created.
 
-Hook name: `download`
+### Hook name
+
+`download`
+
+### Payload
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
@@ -71,7 +87,11 @@ Key | Type | Description
 
 Triggered when a user [follows another user](/v3/users/followers/#follow-a-user).
 
-Hook name: `follow`
+### Hook name
+
+`follow`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -82,7 +102,11 @@ Key | Type | Description
 
 Triggered when a user [forks a repository](/v3/repos/forks/#create-a-fork).
 
-Hook name: `fork`
+### Hook name
+
+`fork`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -95,7 +119,11 @@ Triggered when a patch is applied in the Fork Queue.
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-Hook name: `fork_apply`
+### Hook name
+
+`fork_apply`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -108,7 +136,11 @@ Key | Type | Description
 
 Triggered when a [Gist](/v3/gists/) is created or updated.
 
-Hook name: `gist`
+### Hook name
+
+`gist`
+
+### Payload
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
@@ -122,7 +154,11 @@ Key | Type | Description
 
 Triggered when a Wiki page is created or updated.
 
-Hook name: `gollum`
+### Hook name
+
+`gollum`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -138,7 +174,11 @@ Key | Type | Description
 
 Triggered when an [issue comment](/v3/issues/comments/) is created.
 
-Hook name: `issue_comment`
+### Hook name
+
+`issue_comment`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -151,7 +191,11 @@ Key | Type | Description
 
 Triggered when an [issue](/v3/issues) is created, closed or reopened.
 
-Hook name: `issues`
+### Hook name
+
+`issues`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -163,7 +207,11 @@ Key | Type | Description
 
 Triggered when a user is [added as a collaborator](/v3/repos/collaborators/#add-collaborator) to a repository.
 
-Hook name: `member`
+### Hook name
+
+`member`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -175,7 +223,11 @@ Key | Type | Description
 
 Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without a doubt: the best GitHub event.
 
-Hook name: `public`
+### Hook name
+
+`public`
+
+### Payload
 
 (empty payload)
 
@@ -183,7 +235,11 @@ Hook name: `public`
 
 Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synchronized.
 
-Hook name: `pull_request`
+### Hook name
+
+`pull_request`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -196,7 +252,11 @@ Key | Type | Description
 
 Triggered when a [comment is created on a portion of the unified diff](/v3/pulls/comments) of a pull request.
 
-Hook name: `pull_request_review_comment`
+### Hook name
+
+`pull_request_review_comment`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -207,7 +267,11 @@ Key | Type | Description
 
 Triggered when a repository branch is pushed to.
 
-Hook name: `push`
+### Hook name
+
+`push`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -228,7 +292,11 @@ Key | Type | Description
 
 Triggered when a [release](/v3/repos/releases/#get-a-single-release) is published.
 
-Hook name: `release`
+### Hook name
+
+`release`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -240,7 +308,11 @@ Key | Type | Description
 
 Triggered when the status of a Git commit changes.
 
-Hook name: `status`
+### Hook name
+
+`status`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -257,7 +329,11 @@ Triggered when a [user is added to a team](/v3/orgs/teams/#add-team-member) or w
 
 Note: this event is created in [users' organization timelines](/v3/activity/events/#list-events-for-an-organization).
 
-Hook name: `team_add`
+### Hook name
+
+`team_add`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
@@ -274,10 +350,12 @@ See [this API blog post](/changes/2012-9-5-watcher-api/) for an explanation.
 The event’s actor is the [user](/v3/users/) who starred a repository, and the
 event’s repo is the [repository](/v3/repos/) that was starred.
 
-Hook name: `watch`
+### Hook name
+
+`watch`
+
+### Payload
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed. Currently, can only be "started".
-
-
+`action`|`string` | The action that was performed. Currently, can only be `started`.

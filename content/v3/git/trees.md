@@ -36,20 +36,20 @@ a new tree out.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`base_tree`| `string` | The SHA1 of the tree you want to update with new data. If you don't set this, the commit will be created on top of everything; however, it will only contain your change, the rest of your files will show up as deleted.| |
-`tree`|`array` of `hash`es | Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure|**YES**|
+Name | Type | Description | Default
+----|------|--------------|---------
+`tree`|`array` of `hash`es | **Required**. Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure|
+`base_tree`| `string` | The SHA1 of the tree you want to update with new data. If you don't set this, the commit will be created on top of everything; however, it will only contain your change, the rest of your files will show up as deleted.|
 
 The `tree` parameter takes the following keys:
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`path`|`string`| The file referenced in the tree| |
-`mode`|`string`| The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink| |
-`type`| `string`| Either `blob`, `tree`, or `commit`| |
-`sha`|`string`| The SHA1 checksum ID of the object in the tree| |
-`content`|`string` | The content you want this file to have. GitHub will write this blob out and use that SHA for this entry.  Use either this, or `tree.sha`.| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`path`|`string`| The file referenced in the tree|
+`mode`|`string`| The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink|
+`type`| `string`| Either `blob`, `tree`, or `commit`|
+`sha`|`string`| The SHA1 checksum ID of the object in the tree|
+`content`|`string` | The content you want this file to have. GitHub will write this blob out and use that SHA for this entry.  Use either this, or `tree.sha`.|
 
 
 ### Input

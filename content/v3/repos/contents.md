@@ -20,9 +20,9 @@ READMEs support [a custom media type](#custom-media-types) for getting the raw c
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`ref`|`string` | The name of the commit/branch/tag.| | The repository’s default branch (usually `master`)
+Name | Type | Description | Default
+-----|------|-------------|---------
+`ref`|`string` | The name of the commit/branch/tag.| The repository’s default branch (usually `master`)
 
 ### Response
 
@@ -45,10 +45,10 @@ Directories and submodules do _not_ support custom media types.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`path`|`string` | The content path.| |
-`ref`|`string` | The name of the commit/branch/tag.| | The repository’s default branch (usually `master`)
+Name | Type | Description | Default
+-----|------|-------------|---------
+`path`|`string` | The content path.|
+`ref`|`string` | The name of the commit/branch/tag.| The repository’s default branch (usually `master`)
 
 ### Response if content is a file
 
@@ -92,14 +92,18 @@ This method creates a new file in a repository
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`path`|`string` | The content path.|**YES**|
-`message`|`string` | The commit message.|**YES**|
-`content`|`string` | The new file content, Base64 encoded.|**YES**|
-`branch` | `string` | The branch name. | | The repository’s default branch (usually `master`)
+Name | Type | Description | Default
+-----|------|-------------|---------
+`path`|`string` | **Required**. The content path.|
+`message`|`string` | **Required**. The commit message.|
+`content`|`string` | **Required**. The new file content, Base64 encoded.|
+`branch` | `string` | The branch name.| The repository’s default branch (usually `master`)
 
 ### Optional Parameters
+
+You can provide an additional `commiter` parameter, which is a hash containing
+information about the committer. Or, you can provide an `author` parameter, which
+is a hash containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated
@@ -108,12 +112,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `500` status code.
 
-Both the `author` and `commiter` parameters are hashes with the same keys:
+Both the `author` and `commiter` parameters have the same keys:
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`name`|`string` | The name of the author (or commiter) of the commit | |
-`email`|`string` | The email of the author (or commiter) of the commit | |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`name`|`string` | The name of the author (or commiter) of the commit|
+`email`|`string` | The email of the author (or commiter) of the commit|
 
 ### Example Input
 
@@ -135,15 +139,19 @@ This method updates a file in a repository
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`path`|`string` | The content path.|**YES**|
-`message`|`string` | The commit message.|**YES**|
-`content`|`string` | The updated file content, Base64 encoded.|**YES**|
-`sha` | `string` | The blob SHA of the file being replaced. |**YES**|
-`branch` | `string` | The branch name. | | The repository’s default branch (usually `master`)
+Name | Type | Description | Default
+-----|------|-------------|---------
+`path`|`string` | **Required**. The content path.|
+`message`|`string` | **Required**. The commit message.|
+`content`|`string` | **Required**. The updated file content, Base64 encoded.|
+`sha` | `string` | **Required**. The blob SHA of the file being replaced. |
+`branch` | `string` | The branch name.| The repository’s default branch (usually `master`)
 
 ### Optional Parameters
+
+You can provide an additional `commiter` parameter, which is a hash containing
+information about the committer. Or, you can provide an `author` parameter, which
+is a hash containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated
@@ -152,12 +160,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `500` status code.
 
-Both the `author` and `commiter` parameters are hashes with the same keys:
+Both the `author` and `commiter` parameters have the same keys:
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`name`|`string` | The name of the author (or commiter) of the commit | |
-`email`|`string` | The email of the author (or commiter) of the commit | |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`name`|`string` | The name of the author (or commiter) of the commit|
+`email`|`string` | The email of the author (or commiter) of the commit|
 
 ### Example Input
 
@@ -181,14 +189,18 @@ This method deletes a file in a repository
 ### Parameters
 
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`path`|`string` | The content path.|**YES**|
-`message`|`string` | The commit message.|**YES**|
-`sha` | `string` | The blob SHA of the file being replaced. |**YES**|
-`branch` | `string` | The branch name. | | The repository’s default branch (usually `master`)
+Name | Type | Description | Default
+-----|------|-------------|---------
+`path`|`string` | **Required**. The content path.|
+`message`|`string` | **Required**. The commit message.|
+`sha` | `string` | **Required**. The blob SHA of the file being replaced. |
+`branch` | `string` | The branch name.| The repository’s default branch (usually `master`)
 
 ### Optional Parameters
+
+You can provide an additional `commiter` parameter, which is a hash containing
+information about the committer. Or, you can provide an `author` parameter, which
+is a hash containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated
@@ -197,12 +209,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `500` status code.
 
-Both the `author` and `commiter` parameters are hashes with the same keys:
+Both the `author` and `commiter` parameters have the same keys:
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`name`|`string` | The name of the author (or commiter) of the commit | |
-`email`|`string` | The email of the author (or commiter) of the commit | |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`name`|`string` | The name of the author (or commiter) of the commit|
+`email`|`string` | The email of the author (or commiter) of the commit|
 
 ### Example Input
 
@@ -234,10 +246,10 @@ to make a second `GET` request.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`archive_format`|`string` | Can be either `tarball` or `zipball`| |
-`ref`| `string` | A valid Git reference. | |The repository’s default branch (usually `master`)
+Name | Type | Description | Default
+-----|------|-------------|---------
+`archive_format`|`string` | Can be either `tarball` or `zipball`|
+`ref`| `string` | A valid Git reference.|The repository’s default branch (usually `master`)
 
 
 ### Response

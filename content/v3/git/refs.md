@@ -46,10 +46,10 @@ For a full refs listing, you'll get something that looks like:
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`ref`|| The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.| |
-`sha`|| The SHA1 value to set this reference to| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`ref`|`type`| The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.|
+`sha`|`type`| The SHA1 value to set this reference to|
 
 
 ### Input
@@ -68,10 +68,10 @@ Name | Type | Description | Required? | Default
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`sha`|| The SHA1 value to set this reference to| |
-`force`|| Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work. | |`false`
+Name | Type | Description | Default
+----|------|--------------|---------
+`sha`|`type`| The SHA1 value to set this reference to|
+`force`|`boolean`| Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work.|`false`
 
 
 ### Input

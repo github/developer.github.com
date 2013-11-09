@@ -51,10 +51,10 @@ List repositories being starred by the authenticated user.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`sort`|`string` | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). | |`created`
-`direction`|`string` | One of `asc` or `desc`. | |`desc`
+Name | Type | Description | Default
+----|------|--------------|---------
+`sort`|`string` | One of `created` (when the repository was starred) or `updated` (when it was last pushed to).|`created`
+`direction`|`string` | One of `asc` or `desc`.|`desc`
 
 
 ### Response

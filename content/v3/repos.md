@@ -19,11 +19,11 @@ separately.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. | |`all`
-`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. | |`full_name`
-`direction`|`string` | Can be one of `asc` or `desc`. | |When using `full_name`: `asc`; otherwise `desc`
+Name | Type | Description | Default
+-----|------|-------------|---------
+`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`.|`all`
+`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`.|`full_name`
+`direction`|`string` | Can be one of `asc` or `desc`.|When using `full_name`: `asc`; otherwise `desc`
 
 
 ## List user repositories
@@ -34,11 +34,11 @@ List public repositories for the specified user.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`type`|`string` | Can be one of `all`, `owner`, `member`. | |`all`
-`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. | |`full_name`
-`direction`|`string` | Can be one of `asc` or `desc`. | |When using `full_name`: `asc`, otherwise `desc`
+Name | Type | Description | Default
+-----|------|-------------|---------
+`type`|`string` | Can be one of `all`, `owner`, `member`.|`all`
+`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`.|`full_name`
+`direction`|`string` | Can be one of `asc` or `desc`.|When using `full_name`: `asc`, otherwise `desc`
 
 
 ## List organization repositories
@@ -49,9 +49,9 @@ List repositories for the specified org.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`type`|`string` | Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`. | |`all`
+Name | Type | Description | Default
+-----|------|-------------|---------
+`type`|`string` | Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`.|`all`
 
 
 ### Response
@@ -71,9 +71,9 @@ repositories.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`since`| | The integer ID of the last Repository that you've seen.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`since`|`string`| The integer ID of the last Repository that you've seen.|
 
 
 ### Response
@@ -95,18 +95,18 @@ be a member of the specified organization.
 
 ### Input
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`name`|`string` | The name of the repository|**YES**|
-`description`|`string` | A short description of the repository| |
-`homepage`|`string` | A URL with more information about the repository| |
-`private`|`boolean` | Either `true` to create a private repository, or `false` to create a public one. Creating private repositories requires a paid GitHub account.  | |`false`
-`has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. | |`true`
-`has_wiki`|`boolean` | Either `true` to enable the wiki for this repository, `false` to disable it. | |`true`
-`has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. | |`true`
-`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.| |
-`auto_init`|`boolean` | Pass `true` to create an initial commit with empty README. | |`false`
-`gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`name`|`string` | **Required**. The name of the repository|
+`description`|`string` | A short description of the repository|
+`homepage`|`string` | A URL with more information about the repository|
+`private`|`boolean` | Either `true` to create a private repository, or `false` to create a public one. Creating private repositories requires a paid GitHub account. |`false`
+`has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them.|`true`
+`has_wiki`|`boolean` | Either `true` to enable the wiki for this repository, `false` to disable it.|`true`
+`has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them.|`true`
+`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.|
+`auto_init`|`boolean` | Pass `true` to create an initial commit with empty README.|`false`
+`gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._|
 
 
 <%= json \
@@ -145,16 +145,16 @@ The `parent` and `source` objects are present when the repo is a fork.
 
 ### Input
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`name`|`string` | The name of the repository|**YES**|
-`description`|`string` | A short description of the repository| |
-`homepage`|`string` | A URL with more information about the repository| |
-`private`|`boolean` | Either `true` to make the repository private, or `false` to make it public. Creating private repositories requires a paid GitHub account.  | |`false`
-`has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. | |`true`
-`has_wiki`|`boolean` |  Either `true` to enable the wiki for this repository, `false` to disable it. | |`true`
-`has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. | |`true`
-`default_branch`|`String` | Updates the default branch for this repository.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`name`|`string` | **Required**. The name of the repository|
+`description`|`string` | A short description of the repository|
+`homepage`|`string` | A URL with more information about the repository|
+`private`|`boolean` | Either `true` to make the repository private, or `false` to make it public. Creating private repositories requires a paid GitHub account. |`false`
+`has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them.|`true`
+`has_wiki`|`boolean` |  Either `true` to enable the wiki for this repository, `false` to disable it.|`true`
+`has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them.|`true`
+`default_branch`|`String` | Updates the default branch for this repository.|
 
 
 <%= json \
@@ -178,9 +178,9 @@ Name | Type | Description | Required? | Default
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`anon`|`string` | Set to `1` or `true` to include anonymous contributors in results.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`anon`|`string` | Set to `1` or `true` to include anonymous contributors in results.|
 
 
 ### Response

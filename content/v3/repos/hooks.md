@@ -108,12 +108,12 @@ The JSON HTTP API follows the same conventions as the rest of the
 
 #### Parameter
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`name`|`string` | The name of the service that is being called. (See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)|**YES**|
-`config`|`hash` | Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repo. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.|**YES**|
-`events`|`array` | Determines what events the hook is triggered for.  | |`["push"]`
-`active`|`boolean` | Determines whether the hook is actually triggered on pushes.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`name`|`string` | **Required**. The name of the service that is being called. (See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)|
+`config`|`hash` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repo. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.|
+`events`|`array` | Determines what events the hook is triggered for. |`["push"]`
+`active`|`boolean` | Determines whether the hook is actually triggered on pushes.|
 
 ##### Example
 
@@ -148,13 +148,13 @@ Here's how you can setup a hook that posts raw JSON
 
 #### Parameter
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`config`|`hash` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repo. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.| |
-`events`|`array` | Determines what events the hook is triggered for.  This replaces the entire array of events.  | |`["push"]`
-`add_events`|`array` | Determines a list of events to be added to the list of events that the Hook triggers for.| |
-`remove_events`|`array` | Determines a list of events to be removed from the list of events that the Hook triggers for.| |
-`active`|`boolean` | Determines whether the hook is actually triggered on pushes.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`config`|`hash` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repo. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.|
+`events`|`array` | Determines what events the hook is triggered for.  This replaces the entire array of events. |`["push"]`
+`add_events`|`array` | Determines a list of events to be added to the list of events that the Hook triggers for.|
+`remove_events`|`array` | Determines a list of events to be removed from the list of events that the Hook triggers for.|
+`active`|`boolean` | Determines whether the hook is actually triggered on pushes.|
 
 
 ##### Example
@@ -244,12 +244,12 @@ exists, it will be modified according to the request.
 
 #### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-``hub.mode``|`string` | Either `subscribe` or `unsubscribe`.|**YES**|
-``hub.topic``|`string` | The URI of the GitHub repository to subscribe to.  The path must be in the format of `/:owner/:repo/events/:event`.|**YES**|
-``hub.callback``|`string` | The URI to receive the updates to the topic.|**YES**|
-``hub.secret``|`string` | A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the `X-Hub-Signature` header.  You can see [our Ruby implementation][ruby-secret], or [the PubSubHubbub documentation][pshb-secret] for more details.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+``hub.mode``|`string` | **Required**. Either `subscribe` or `unsubscribe`.|
+``hub.topic``|`string` |**Required**.  The URI of the GitHub repository to subscribe to.  The path must be in the format of `/:owner/:repo/events/:event`.|
+``hub.callback``|`string` | The URI to receive the updates to the topic.|
+``hub.secret``|`string` | A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the `X-Hub-Signature` header.  You can see [our Ruby implementation][ruby-secret], or [the PubSubHubbub documentation][pshb-secret] for more details.|
 
 
 [pubsub]: http://code.google.com/p/pubsubhubbub/

@@ -13,11 +13,11 @@ title: Issue Milestones | GitHub API
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`state`|`string` | The state of the milestone. Either `open` or `closed`. | |`open`
-`sort`|`string` | What to sort results by. Either `due_date` or `completeness`. | |`due_date`
-`direction`|`string` | The direction of the sort. Either `asc` or `desc`. | |`asc`
+Name | Type | Description | Default
+----|------|--------------|---------
+`state`|`string` | The state of the milestone. Either `open` or `closed`.|`open`
+`sort`|`string` | What to sort results by. Either `due_date` or `completeness`.|`due_date`
+`direction`|`string` | The direction of the sort. Either `asc` or `desc`.|`asc`
 
 
 ### Response
@@ -40,12 +40,12 @@ Name | Type | Description | Required? | Default
 
 ### Input
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`title`|`string` | The title of the milestone.|**YES**|
-`state`|`string` | The state of the milestone. Either `open` or `closed`. | |`open`
-`description`|`string` | A description of the milestone.| |
-`due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`title`|`string` | **Required**. The title of the milestone.|
+`state`|`string` | The state of the milestone. Either `open` or `closed`.|`open`
+`description`|`string` | A description of the milestone.|
+`due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`|
 
 
 <%= json \
@@ -68,12 +68,12 @@ Name | Type | Description | Required? | Default
 
 ### Input
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`title`|`string` | The title of the milestone.| |
-`state`|`string` | The state of the milestone. Either `open` or `closed`. | |`open`
-`description`|`string` | A description of the milestone.| |
-`due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`title`|`string` | The title of the milestone.|
+`state`|`string` | The state of the milestone. Either `open` or `closed`.|`open`
+`description`|`string` | A description of the milestone.|
+`due_on`|`time` | The milestone due date. The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`|
 
 
 <%= json \

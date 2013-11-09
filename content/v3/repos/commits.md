@@ -20,13 +20,13 @@ instead of constructing page links yourself.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`sha`|`string` | SHA or branch to start listing commits from.| |
-`path`|`string` | Only commits containing this file path will be returned.| |
-`author`|`string` | GitHub login, name, or email by which to filter by commit author| |
-`since`|`time` | The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only commits after this date will be returned| |
-`until`|`time` | The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only commits before this date will be returned| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`sha`|`string` | SHA or branch to start listing commits from.|
+`path`|`string` | Only commits containing this file path will be returned.|
+`author`|`string` | GitHub login, name, or email by which to filter by commit author|
+`since`|`time` | The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only commits after this date will be returned|
+`until`|`time` | The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only commits before this date will be returned|
 
 
 ### Response

@@ -19,12 +19,12 @@ Update the notification settings for the authenticated user.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`participating.email`|`boolean` | `true` to receive participating notifications via email.| |
-`participating.web`|`boolean` | `true` to receive participating notifications via web.| |
-`watching.email`|`boolean` | `true` to receive watching notifications via email.| |
-`watching.web`|`boolean` | `true` to receive watching notifications via web.| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`participating.email`|`boolean` | `true` to receive participating notifications via email.|
+`participating.web`|`boolean` | `true` to receive participating notifications via web.|
+`watching.email`|`boolean` | `true` to receive watching notifications via email.|
+`watching.web`|`boolean` | `true` to receive watching notifications via web.|
 
 
 <%= json \
@@ -53,9 +53,9 @@ Name | Type | Description | Required? | Default
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`email`|`string` | Email address to where notifications to the authenticated user fare sent or discussions related to projects for this organization.|**YES**|
+Name | Type | Description | Default
+----|------|--------------|---------
+`email`|`string` | **Required**. Email address to where notifications to the authenticated user fare sent or discussions related to projects for this organization.|
 
 
 ## Update Organization email settings
@@ -66,8 +66,8 @@ Update the notification settings for the authenticated user.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`email`|`string` | Email address to where notifications to the authenticated user are sent for discussions related to projects for this organization.|**YES**|
+Name | Type | Description | Default
+----|------|--------------|---------
+`email`|`string` | **Required**. Email address to where notifications to the authenticated user are sent for discussions related to projects for this organization.|
 
 

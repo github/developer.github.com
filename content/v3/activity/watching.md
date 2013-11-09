@@ -62,8 +62,8 @@ List repositories being watched by the authenticated user.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
+Name | Type | Description | Default
+----|------|--------------|---------
 `subscribed`|`boolean`| Determines if notifications should be received from this repository.||
 `ignored`|`boolean`| Determines if all notifications should be blocked from this repository.||
 

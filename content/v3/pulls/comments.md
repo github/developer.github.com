@@ -33,11 +33,11 @@ By default, Review Comments are ordered by ascending ID.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`sort`|`string` | Can be either `created` or `updated`| |
-`direction`|`string` | Can be either `asc` or `desc`. Ignored without `sort` parameter.| |
-`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only comments updated at or after this time are returned.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`sort`|`string` | Can be either `created` or `updated`|
+`direction`|`string` | Can be either `asc` or `desc`. Ignored without `sort` parameter.|
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only comments updated at or after this time are returned.|
 
 
 ### Response
@@ -60,12 +60,12 @@ Name | Type | Description | Required? | Default
 
 ### Input
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`body`|`string` | The text of the comment|**YES**|
-`commit_id`|`string` | The SHA of the commit to comment on.|**YES**|
-`path`|`string` | The relative path of the file to comment on.|**YES**|
-`position`|`number` | The line index in the diff to comment on.|**YES**|
+Name | Type | Description | Default
+-----|------|-------------|---------
+`body`|`string` | **Required**. The text of the comment|
+`commit_id`|`string` | **Required**. The SHA of the commit to comment on.|
+`path`|`string` | **Required**. The relative path of the file to comment on.|
+`position`|`number` | **Required**. The line index in the diff to comment on.|
 
 
 #### Example
@@ -82,10 +82,10 @@ Name | Type | Description | Required? | Default
 Instead of passing `commit_id`, `path`, and `position` you can reply to
 an existing Pull Request Comment like this:
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`body`|`string` | The text of the comment|**YES**|
-`in_reply_to`|`number` | The comment id to reply to.|**YES**|
+Name | Type | Description | Default
+-----|------|-------------|---------
+`body`|`string` | **Required**. The text of the comment|
+`in_reply_to`|`number` | **Required**. The comment id to reply to.|
 
 
 #### Example
@@ -108,9 +108,9 @@ Name | Type | Description | Required? | Default
 
 ### Input
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`body`|`string` | The text of the comment|**YES**|
+Name | Type | Description | Default
+-----|------|-------------|---------
+`body`|`string` | **Required**. The text of the comment|
 
 
 #### Example

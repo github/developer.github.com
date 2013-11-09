@@ -28,12 +28,12 @@ This is a description of the OAuth flow from 3rd party web sites.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`client_id`|`string` | The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).|**YES**|
-`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).| |
-`scope`|`string` | A comma separated list of [scopes](#scopes).| |
-`state`|`string` | An unguessable random string. It is used to protect against cross-site request forgery attacks.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).|
+`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).|
+`scope`|`string` | A comma separated list of [scopes](#scopes).|
+`state`|`string` | An unguessable random string. It is used to protect against cross-site request forgery attacks.|
 
 ### 2. GitHub redirects back to your site
 
@@ -48,12 +48,12 @@ Exchange this for an access token:
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`client_id`|`string` | The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).|**YES**|
-`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).| |
-`client_secret`|`string` | The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).|**YES**|
-`code`|`string` | The code you received as a response to [Step 1](#redirect-users-to-request-github-access).|**YES**|
+Name | Type | Description | Default
+----|------|--------------|---------
+`client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).|
+`client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).|
+`code`|`string` | **Required**. The code you received as a response to [Step 1](#redirect-users-to-request-github-access).|
+`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).|
 
 ### Response
 
@@ -188,13 +188,13 @@ Read more about these tokens on the [GitHub Help page](https://help.github.com/a
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`scopes`|`array` | A list of scopes that this authorization is in.| |
-`note`|`string` | A note to remind you what the OAuth token is for.| |
-`note_url`|`string` | A URL to remind you what app the OAuth token is for.| |
-`client_id`|`String` | The 20 character OAuth app client key for which to create the token.| |
-`client_secret`|`String` | The 40 character OAuth app client secret for which to create the token.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`scopes`|`array` | A list of scopes that this authorization is in.|
+`note`|`string` | A note to remind you what the OAuth token is for.|
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.|
+`client_id`|`string` | The 20 character OAuth app client key for which to create the token.|
+`client_secret`|`string` | The 40 character OAuth app client secret for which to create the token.|
 
 
 <%= json :scopes => ["public_repo"], :note => 'admin script' %>
@@ -217,12 +217,12 @@ exists. Otherwise, it creates one.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`client_secret`|| The 40 character OAuth app client secret associated with the client ID specified in the URL.| |
-`scopes`|`array` | A list of scopes that this authorization is in.| |
-`note`|`string` | A note to remind you what the OAuth token is for.| |
-`note_url`|`string` | A URL to remind you what app the OAuth token is for.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`client_secret`|`string`| The 40 character OAuth app client secret associated with the client ID specified in the URL.|
+`scopes`|`array` | A list of scopes that this authorization is in.|
+`note`|`string` | A note to remind you what the OAuth token is for.|
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.|
 
 
 <%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
@@ -245,13 +245,13 @@ Name | Type | Description | Required? | Default
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`scopes`|`array` | Replaces the authorization scopes with these.| |
-`add_scopes`|`array` | A list of scopes to add to this authorization.| |
-`remove_scopes`|`array` | A list of scopes to remove from this authorization.| |
-`note`|`string` | A note to remind you what the OAuth token is for.| |
-`note_url`|`string` | A URL to remind you what app the OAuth token is for.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`scopes`|`array` | Replaces the authorization scopes with these.|
+`add_scopes`|`array` | A list of scopes to add to this authorization.|
+`remove_scopes`|`array` | A list of scopes to remove from this authorization.|
+`note`|`string` | A note to remind you what the OAuth token is for.|
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.|
 
 
 You can only send one of these scope keys at a time.

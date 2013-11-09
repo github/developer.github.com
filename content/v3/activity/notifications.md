@@ -23,8 +23,8 @@ user is involved including:
 * Commits the user authors or commits
 * Any discussion in which the user actively participates
 
-All Notification API calls require the <strong>"notifications"</strong> or
-<strong>"repo</strong> API scopes.  Doing this will give read-only access to
+All Notification API calls require the `notifications` or
+`repo` API scopes.  Doing this will give read-only access to
 some Issue/Commit content. You will still need the "repo" scope to access
 Issues and Commits from their respective endpoints.
 
@@ -57,11 +57,11 @@ List all notifications for the current user, grouped by repository.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`all`|`boolean` | If `true`, show notifications marked as read. | |`false`
-`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. | |`false`
-`since`|`time` | Filters out any notifications updated before the given time.  The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`all`|`boolean` | If `true`, show notifications marked as read.|`false`
+`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned.|`false`
+`since`|`time` | Filters out any notifications updated before the given time.  The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".|
 
 
 ### Response
@@ -77,11 +77,11 @@ List all notifications for the current user.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`all`|`boolean` | If `true`, show notifications marked as read. | |`false`
-`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. | |`false`
-`since`|`time` | Filters out any notifications updated before the given time.  The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`all`|`boolean` | If `true`, show notifications marked as read.|`false`
+`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned.|`false`
+`since`|`time` | Filters out any notifications updated before the given time.  The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".|
 
 
 ### Response
@@ -98,9 +98,9 @@ on GitHub.com](https://github.com/notifications).
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`last_read_at`|`time` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated.  Expected in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z". | |Now.
+Name | Type | Description | Default
+----|------|--------------|---------
+`last_read_at`|`time` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated.  Expected in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".|Now.
 
 
 ### Response
@@ -116,9 +116,9 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`last_read_at`|`time` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated.   Expected in ISO 8601 format: `YYYY|MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z". | |Now.
+Name | Type | Description | Default
+----|------|--------------|---------
+`last_read_at`|`time` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated.   Expected in ISO 8601 format: `YYYY|MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".|Now.
 
 
 ### Response
@@ -165,10 +165,10 @@ a thread will mute all future notifications (until you comment or get
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`subscribed`|`boolean`| Determines if notifications should be received from this thread | | |
-`ignored`|`boolean`| Determines if all notifications should be blocked from this thread | | |
+Name | Type | Description | Default
+----|------|--------------|---------
+`subscribed`|`boolean`| Determines if notifications should be received from this thread|
+`ignored`|`boolean`| Determines if all notifications should be blocked from this thread|
 
 
 ### Response

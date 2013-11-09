@@ -30,10 +30,10 @@ Find issues by state and keyword.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`state`|`string` | Indicates the state of the issues to return. Can be either `open` or `closed`.| |
-`keyword`|| The search term| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`state`|`string` | Indicates the state of the issues to return. Can be either `open` or `closed`.|
+`keyword`|`string`| The search term|
 
 
 <%= headers 200 %>
@@ -49,13 +49,13 @@ pages can be fetched using the `start_page` parameter.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`keyword`|| The search term| |
-`language`|`string` | Filter results by [language](https://github.com/languages)| |
-`start_page`|`string` | The page number to fetch| |
-`sort`|`string` | The sort field. One of `stars`, `forks`, or `updated`. Defautlt: Results are sorted by best match.| |
-`order`|`string` | The sort field. if `sort` param is provided. Can be either `asc` or `desc`.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`keyword`|`string`| The search term|
+`language`|`string` | Filter results by [language](https://github.com/languages)|
+`start_page`|`string` | The page number to fetch|
+`sort`|`string` | The sort field. One of `stars`, `forks`, or `updated`. Defautlt: Results are sorted by best match.|
+`order`|`string` | The sort field. if `sort` param is provided. Can be either `asc` or `desc`.|
 
 
 <%= headers 200 %>
@@ -69,12 +69,12 @@ Find users by keyword.
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`keyword`|| The search term| |
-`start_page`|`string` | The page number to fetch| |
-`sort`|| The sort field. One of `stars`, `forks`, or `updated`. Defautlt: Results are sorted by best match.| |
-`order`|| The sort field. if `sort` param is provided. Can be either `asc` or `desc`.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`keyword`|`string`| The search term|
+`start_page`|`string` | The page number to fetch|
+`sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`. Defautlt: Results are sorted by best match.|
+`order`|`string`| The sort field. if `sort` param is provided. Can be either `asc` or `desc`.|
 
 
 <%= headers 200 %>
@@ -91,9 +91,9 @@ address must be left unencoded. Searches only against public email addresses
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`email`|| The email address| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`email`|`string`| The email address|
 
 
 <%= headers 200 %>

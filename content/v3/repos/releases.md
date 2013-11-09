@@ -40,14 +40,14 @@ Users with push access to the repository can create a release.
 
 ### Input
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`tag_name`|`string` | The name of the tag.|**YES**|
-`target_commitish`|`string` | Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists. | |The repository's default branch (usually `master`).
-`name`|`string` | The name of the release.| |
-`body`|`string` | Text describing the contents of the tag.| |
-`draft`|`boolean` | `true` to create a draft (unpublished) release, `false` to create a published one. | |`false`
-`prerelease`|`boolean` | `true` to identify the release as a prerelease. `false` to identify the release as a full release. | |`false`
+Name | Type | Description | Default
+-----|------|-------------|---------
+`tag_name`|`string` | **Required**. The name of the tag.|
+`target_commitish`|`string` | Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists.|The repository's default branch (usually `master`).
+`name`|`string` | The name of the release.|
+`body`|`string` | Text describing the contents of the tag.|
+`draft`|`boolean` | `true` to create a draft (unpublished) release, `false` to create a published one.|`false`
+`prerelease`|`boolean` | `true` to identify the release as a prerelease. `false` to identify the release as a full release.|`false`
 
 
 <%= json \
@@ -73,14 +73,14 @@ Users with push access to the repository can edit a release.
 
 ### Input
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`tag_name`|`string` | The name of the tag.| |
-`target_commitish`|`string` | Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists. | |The repository's default branch (usually `master`).
-`name`|`string` | The name of the release.| |
-`body`|`string` | Text describing the contents of the tag.| |
-`draft`|`boolean` | `true` makes the release a draft, and `false` publishes the release.| |
-`prerelease`|`boolean` | `true` to identify the release as a prerelease, `false` to identify the release as a full release.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`tag_name`|`string` | The name of the tag.|
+`target_commitish`|`string` | Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists.|The repository's default branch (usually `master`).
+`name`|`string` | The name of the release.|
+`body`|`string` | Text describing the contents of the tag.|
+`draft`|`boolean` | `true` makes the release a draft, and `false` publishes the release.|
+`prerelease`|`boolean` | `true` to identify the release as a prerelease, `false` to identify the release as a full release.|
 
 
 <%= json \
@@ -132,10 +132,10 @@ This endpoint is provided by a URI template in [the release's API response](#get
 The raw file is uploaded to GitHub.  Set the content type appropriately, and the
 asset's name in a URI query parameter.
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`Content-Type`|`string` | The content type of the asset. This should be set in the Header. Example: "application/zip". For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).|**YES**|
-`name`|`string` | The file name of the asset. This should be set in the URI query parameter.|**YES**|
+Name | Type | Description | Default
+-----|------|-------------|---------
+`Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: "application/zip". For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).|
+`name`|`string` | **Required**. The file name of the asset. This should be set in the URI query parameter.|
 
 
 Send the raw binary content of the asset as the request body.
@@ -182,10 +182,10 @@ Users with push access to the repository can edit a release asset.
 
 ### Input
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`name`|`string` | The file name of the asset.|**YES**|
-`label`|`string` | An alternate short description of the asset.  Used in place of the filename.| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`name`|`string` | **Required**. The file name of the asset.|
+`label`|`string` | An alternate short description of the asset.  Used in place of the filename.|
 
 
 <%= json \

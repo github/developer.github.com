@@ -33,9 +33,9 @@ Users with pull access can view commit statuses for a given ref:
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`ref`|`string` | Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.|**YES**|
+Name | Type | Description | Default
+-----|------|-------------|---------
+`ref`|`string` | **Required**. Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.|
 
 
 ### Response
@@ -51,11 +51,11 @@ Users with push access can create commit statuses for a given ref:
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
------|------|--------------|----------|---------
-`state`|`string` | The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.|**YES**|
-`target_url`|`string` | The target URL to associate with this status.  This URL will be linked from the GitHub UI to allow users to easily see the 'source' of the Status.<br/>For example, if your Continuous Integration system is posting build status, you would want to provide the deep link for the build output for this specific sha: `http://ci.example.com/johndoe/my-repo/builds/sha`.| |
-`description`|`string` | A short description of the status| |
+Name | Type | Description | Default
+-----|------|-------------|---------
+`state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.|
+`target_url`|`string` | The target URL to associate with this status.  This URL will be linked from the GitHub UI to allow users to easily see the 'source' of the Status.<br/>For example, if your Continuous Integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:<br/>`http://ci.example.com/user/repo/build/sha`.|
+`description`|`string` | A short description of the status|
 
 
 <%= json \

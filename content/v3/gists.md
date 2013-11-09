@@ -36,9 +36,9 @@ List the authenticated user's starred gists:
 
 ### Parameters
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.|
 
 
 ### Response
@@ -63,13 +63,13 @@ _Note_: When using the [v3 media type][2] the "user" field will become "owner"
 
 ### Input
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`description`|`string` | A description of the gist.| |
-`public`|`boolean` | Indicates whether the gist is public. | |`false`
-`files`|`hash` | Files that make up this gist.|**YES**|
+Name | Type | Description | Default
+----|------|--------------|---------
+`files`|`hash` | **Required**. Files that make up this gist.|
+`description`|`string` | A description of the gist.|
+`public`|`boolean` | Indicates whether the gist is public. |`false`
 
-The keys in the `files` hash are the `string` filename, and the value is another `hash` with a key of `contents`, and a value of the file contents. For example:
+The keys in the `files` hash are the `string` filename, and the value is another `hash` with a key of `content`, and a value of the file contents. For example:
 
 <%= json \
   :description => "the description for this gist",
@@ -93,17 +93,14 @@ format of the automatic naming scheme that Gist uses internally.
 
 ### Input
 
-Name | Type | Description | Required? | Default
-----|------|--------------|-----------|---------
-`description`|`string` | A description of the gist.| |
-`files`|`hash` | Files that make up this gist. The key of which should be an _optional_ **string** filename and the value another _optional_ **hash** with parameters:| |
-`content`|`string` | Updated file contents.| |
-`filename`|`string` | New name for this file.| |
+Name | Type | Description | Default
+----|------|--------------|---------
+`description`|`string` | A description of the gist.|
+`files`|`hash` | Files that make up this gist.| 
+`content`|`string` | Updated file contents.| 
+`filename`|`string` | New name for this file.| 
 
-
-NOTE: All files from the previous version of the gist are carried over by
-default if not included in the hash. Deletes can be performed by
-including the filename with a null hash.
+The keys in the `files` hash are the `string` filename. The value is another `hash` with a key of `content` (indicating the new contents), or `filename` (indicating the new filename). For example:
 
 <%= json \
   :description => "the description for this gist",
@@ -113,6 +110,11 @@ including the filename with a null hash.
     "new_file.txt" => {"content"  => "a new file"},
     "delete_this_file.txt" => nil,
   } %>
+
+NOTE: All files from the previous version of the gist are carried over by
+default if not included in the hash. Deletes can be performed by
+including the filename with a `null` hash.
+
 
 ### Response
 
@@ -151,7 +153,7 @@ including the filename with a null hash.
 
     POST /gists/:id/forks
 
-**Note**: Previously `/gists/:id/fork`
+**Note**: This was previously `/gists/:id/fork`
 
 ### Response
 

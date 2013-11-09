@@ -20,22 +20,14 @@ instead of constructing page links yourself.
 
 ### Parameters
 
-sha
-: _Optional_ **string** - Sha or branch to start listing commits from.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`sha`|`string` | SHA or branch to start listing commits from.| |
+`path`|`string` | Only commits containing this file path will be returned.| |
+`author`|`string` | GitHub login, name, or email by which to filter by commit author| |
+`since`|`time` | The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only commits after this date will be returned| |
+`until`|`time` | The time should be passed in as UTC in the ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only commits before this date will be returned| |
 
-path
-: _Optional_ **string** - Only commits containing this file path
-will be returned.
-
-author
-: _Optional_ **string** - GitHub login, name, or email by which to filter by
-commit author
-
-since
-: _Optional_ **ISO 8601 Date** - Only commits after this date will be returned
-
-until
-: _Optional_ **ISO 8601 Date** - Only commits before this date will be returned
 
 ### Response
 

@@ -19,14 +19,12 @@ separately.
 
 ### Parameters
 
-type
-: `all`, `owner`, `public`, `private`, `member`. Default: `all`.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. | |`all`
+`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. | |`full_name`
+`direction`|`string` | Can be one of `asc` or `desc`. | |When using `full_name`: `asc`; otherwise `desc`
 
-sort
-: `created`, `updated`, `pushed`, `full_name`, default: `full_name`.
-
-direction
-: `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
 
 ## List user repositories
 
@@ -36,14 +34,12 @@ List public repositories for the specified user.
 
 ### Parameters
 
-type
-: `all`, `owner`, `member`. Default: `all`.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`type`|`string` | Can be one of `all`, `owner`, `member`. | |`all`
+`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. | |`full_name`
+`direction`|`string` | Can be one of `asc` or `desc`. | |When using `full_name`: `asc`, otherwise `desc`
 
-sort
-: `created`, `updated`, `pushed`, `full_name`, default: `full_name`.
-
-direction
-: `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
 
 ## List organization repositories
 
@@ -53,8 +49,10 @@ List repositories for the specified org.
 
 ### Parameters
 
-type
-: `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`type`|`string` | Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`. | |`all`
+
 
 ### Response
 
@@ -73,8 +71,10 @@ repositories.
 
 ### Parameters
 
-since
-: The integer ID of the last Repository that you've seen.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`since`| | The integer ID of the last Repository that you've seen.| |
+
 
 ### Response
 
@@ -95,46 +95,19 @@ be a member of the specified organization.
 
 ### Input
 
-name
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`name`|`string` | The name of the repository|**YES**|
+`description`|`string` | A short description of the repository| |
+`homepage`|`string` | A URL with more information about the repository| |
+`private`|`boolean` | Either `true` to create a private repository, or `false` to create a public one. Creating private repositories requires a paid GitHub account.  | |`false`
+`has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. | |`true`
+`has_wiki`|`boolean` | Either `true` to enable the wiki for this repository, `false` to disable it. | |`true`
+`has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. | |`true`
+`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.| |
+`auto_init`|`boolean` | Pass `true` to create an initial commit with empty README. | |`false`
+`gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._| |
 
-description
-: _Optional_ **string**
-
-homepage
-: _Optional_ **string**
-
-private
-: _Optional_ **boolean** - `true` to create a private repository, `false`
-to create a public one. Creating private repositories requires a paid
-GitHub account.  Default is `false`.
-
-has\_issues
-: _Optional_ **boolean** - `true` to enable issues for this repository,
-`false` to disable them. Default is `true`.
-
-has\_wiki
-: _Optional_ **boolean** - `true` to enable the wiki for this
-repository, `false` to disable it. Default is `true`.
-
-has\_downloads
-: _Optional_ **boolean** - `true` to enable downloads for this
-repository, `false` to disable them. Default is `true`.
-
-team\_id
-: _Optional_ **number** - The id of the team that will be granted access
-to this repository. This is only valid when creating a repo in an
-organization.
-
-auto\_init
-: _Optional_ **boolean** - `true` to create an initial commit with empty
-README. Default is `false`.
-
-gitignore\_template
-: _Optional_ **string** - Desired language or platform [.gitignore
-template](https://github.com/github/gitignore) to
-apply. Use the name of the template without the extension. For example, "Haskell"
-_Ignored if `auto_init` parameter is not provided._
 
 <%= json \
   :name          => "Hello-World",
@@ -172,33 +145,17 @@ The `parent` and `source` objects are present when the repo is a fork.
 
 ### Input
 
-name
-: _Required_ **string**
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`name`|`string` | The name of the repository|**YES**|
+`description`|`string` | A short description of the repository| |
+`homepage`|`string` | A URL with more information about the repository| |
+`private`|`boolean` | Either `true` to make the repository private, or `false` to make it public. Creating private repositories requires a paid GitHub account.  | |`false`
+`has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. | |`true`
+`has_wiki`|`boolean` |  Either `true` to enable the wiki for this repository, `false` to disable it. | |`true`
+`has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. | |`true`
+`default_branch`|`String` | Updates the default branch for this repository.| |
 
-description
-: _Optional_ **string**
-
-homepage
-: _Optional_ **string**
-
-private
-: _Optional_ **boolean** - `true` makes the repository private, and
-`false` makes it public.
-
-has\_issues
-: _Optional_ **boolean** - `true` to enable issues for this repository,
-`false` to disable them. Default is `true`.
-
-has\_wiki
-: _Optional_ **boolean** - `true` to enable the wiki for this
-repository, `false` to disable it. Default is `true`.
-
-has\_downloads
-: _Optional_ **boolean** - `true` to enable downloads for this
-repository, `false` to disable them. Default is `true`.
-
-default\_branch
-: _Optional_ **String** - Update the default branch for this repository.
 
 <%= json \
   :name          => "Hello-World",
@@ -221,9 +178,10 @@ default\_branch
 
 ### Parameters
 
-anon
-: Optional flag. Set to `1` or `true` to include anonymous contributors
-in results.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`anon`|`string` | Set to `1` or `true` to include anonymous contributors in results.| |
+
 
 ### Response
 

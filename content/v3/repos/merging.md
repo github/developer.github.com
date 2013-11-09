@@ -21,15 +21,12 @@ The authenticated user will be the author of any merges done through this endpoi
 
 ### Input
 
-base
-: _Required_ **string** - The name of the base branch that the head will be merged into.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`base`|`string` | The name of the base branch that the head will be merged into.|**YES**|
+`head`|`string` | The head to merge. This can be a branch name or a commit SHA1.|**YES**|
+`commit_message`|`string` | Commit message to use for the merge commit. If omitted, a default message will be used.| |
 
-head
-: _Required_ **string** - The head to merge. This can be a branch name or a commit SHA1.
-
-commit_message
-: _Optional_ **string** - Commit message to use for the merge commit.
-If omitted, a default message will be used.
 
 <%= json \
   :base           => "master",

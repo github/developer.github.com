@@ -33,8 +33,10 @@ Users with pull access can view commit statuses for a given ref:
 
 ### Parameters
 
-ref
-: _Required_ **string** - Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`ref`|`string` | Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.|**YES**|
+
 
 ### Response
 
@@ -49,21 +51,12 @@ Users with push access can create commit statuses for a given ref:
 
 ### Parameters
 
-state
-: _Required_ **string** State of the status - can be one of `pending`,
-`success`, `error`, or `failure`.
+Name | Type | Description | Required? | Default
+-----|------|--------------|----------|---------
+`state`|`string` | The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.|**YES**|
+`target_url`|`string` | The target URL to associate with this status.  This URL will be linked from the GitHub UI to allow users to easily see the 'source' of the Status.<br/>For example, if your Continuous Integration system is posting build status, you would want to provide the deep link for the build output for this specific sha: `http://ci.example.com/johndoe/my-repo/builds/sha`.| |
+`description`|`string` | A short description of the status| |
 
-target_url
-: _Optional_ **string** Target URL to associate with this status.  This
-URL will be linked from the GitHub UI to allow users to easily see the
-'source' of the Status.
-
-: For example, if your Continuous Integration system is posting build
-status, you would want to provide the deep link for the build output for
-this specific sha - `http://ci.example.com/johndoe/my-repo/builds/sha`.
-
-description
-: _Optional_ **string** Short description of the status
 
 <%= json \
   :state         => "success",

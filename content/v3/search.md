@@ -140,11 +140,11 @@ Suppose you want to find the definition of the `addClass` function inside
 [jQuery](https://github.com/jquery/jquery). Your query would look something like
 this:
 
-    https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
+    https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
 
 Here, we're searching for the keyword `addClass` within a file's contents. We're
 making sure that we're only looking in files where the language is JavaScript.
-And we're scoping the search to the `@jquery/jquery` repository.
+And we're scoping the search to the `repo:jquery/jquery` repository.
 
 <%= headers 200 %>
 <%= json(:code_search_v3_results) %>
@@ -158,7 +158,7 @@ media type in your Accept header. For example, via curl, the above query would
 look like this:
 
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/code?q=addClass+in:file+language:js+@jquery/jquery
+      https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -199,11 +199,10 @@ The `q` search term can also contain any combination of the supported issue sear
  * [`mentions`](https://help.github.com/articles/searching-issues#mentions)
    Finds issues that mention a certain user.
  * [`commenter`](https://help.github.com/articles/searching-issues#commenter)
-   Finds issues with comments by a certain user.
+   Finds issues that a certain user commented on.
  * [`involves`](https://help.github.com/articles/searching-issues#involves)
-   Finds issues with involving a certain user. This qualifier finds issues that were 
-   either created by a certain user, assigned to that user, mention that user, 
-   or were commented on by that user.
+   Finds issues that were either created by a certain user, assigned to that
+     user, mention that user, or were commented on by that user.
  * [`state`](https://help.github.com/articles/searching-issues#state)
    Filter issues based on whether they're open or closed.
  * [`labels`](https://help.github.com/articles/searching-issues#labels)

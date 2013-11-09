@@ -18,17 +18,17 @@ The value must include [at least one user, organization, or repository][search-b
 
 For example, with this query, we're searching for code from [@twitter][] or [@facebook][] that uses an MIT License:
 
-    MIT License @twitter @facebook
+    MIT License user:twitter user:facebook
 
 And here, we're looking for uses of the underscore library in [@mozilla's BrowserQuest][@mozilla/BrowserQuest] repository:
 
-    underscore language:js @mozilla/BrowserQuest
+    underscore language:js repo:mozilla/BrowserQuest
 
 To perform these queries via the API, we would use the following URLs (respectively):
 
-    https://api.github.com/search/code?q=MIT+License+%40twitter+%40facebook
+    https://api.github.com/search/code?q=MIT+License+user%3Atwitter+user%3Afacebook
 
-    https://api.github.com/search/code?q=underscore+language%3Ajs+%40mozilla%2FBrowserQuest
+    https://api.github.com/search/code?q=underscore+language%3Ajs+repo%3Amozilla%2FBrowserQuest
 
 All the various [code search qualifiers][code-search-qualifiers] are still available to you.
 A [user, organization, or repository qualifier][search-by-user-org-repo] is now required.

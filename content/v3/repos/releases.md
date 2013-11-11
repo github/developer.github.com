@@ -145,8 +145,12 @@ Users with push access to the repository can delete a release.
 
 ## Upload a release asset
 
-This is a unique endpoint.  The domain of the request changes from "api.github.com"
-to **"uploads.github.com"**.  The asset data is expected in its raw binary form,
+This is a unique endpoint. The domain of the request changes from "api.github.com"
+to **"uploads.github.com"**. You need to use an HTTP client which supports
+[SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this
+endpoint.
+
+The asset data is expected in its raw binary form,
 instead of JSON.  Everything else about the endpoint is the same.  Pass your
 authentication exactly the same as the rest of the API.
 

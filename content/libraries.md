@@ -72,13 +72,13 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 
 ## JavaScript
 
-* [Node-GitHub][ajaxorg-node-github]
+* [Node-GitHub][mikedeboer-node-github]
 * [NodeJS GitHub library][octonode]
 * [gh3 client-side API v3 wrapper][gh3]
 * [GitHub.js wrapper around the GitHub API][github]
 * [Promise-Based CoffeeScript library for the browser or NodeJS][github-client]
 
-[ajaxorg-node-github]: https://github.com/ajaxorg/node-github
+[mikedeboer-node-github]: https://github.com/mikedeboer/node-github
 [octonode]: https://github.com/pksunkara/octonode
 [gh3]: https://github.com/k33g/gh3
 [github]: https://github.com/michael/github

@@ -46,15 +46,13 @@
     	<h1 id="issues-api">Issues API</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-issues">List issues</a></li>
+<li><a href="#list-issues">List issues</a></li>
   <li><a href="#list-issues-for-a-repository">List issues for a repository</a></li>
   <li><a href="#get-a-single-issue">Get a single issue</a></li>
   <li><a href="#create-an-issue">Create an issue</a></li>
   <li><a href="#edit-an-issue">Edit an issue</a></li>
   <li><a href="#custom-media-types">Custom media types</a></li>
-</ul>
-
-<p>Issues use <a href="#custom-media-types">these custom media types</a>. You can
+</ul><p>Issues use <a href="#custom-media-types">these custom media types</a>. You can
 read more about the use of media types in the API <a href="/v3/media/">here</a>.</p>
 
 <h2 id="list-issues">List issues</h2>
@@ -79,10 +77,10 @@ repositories:</p>
 <h3 id="parameters">Parameters</h3>
 
 <dl>
-  <dt>filter</dt>
+<dt>filter</dt>
   <dd>
     <ul>
-      <li>
+<li>
 <code>assigned</code>: Issues assigned to you (default)</li>
       <li>
 <code>created</code>: Issues created by you</li>
@@ -93,7 +91,7 @@ repositories:</p>
       <li>
 <code>all</code>: All issues the authenticated user can see, regardless of participation or creation</li>
     </ul>
-  </dd>
+</dd>
   <dt>state</dt>
   <dd>
 <code>open</code>, <code>closed</code>, default: <code>open</code>
@@ -112,9 +110,7 @@ repositories:</p>
   <dt>since</dt>
   <dd>
 <em>Optional</em> <strong>string</strong> of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.</dd>
-</dl>
-
-<h3 id="response">Response</h3>
+</dl><h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -189,17 +185,17 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-1">Parameters</h3>
 
 <dl>
-  <dt>milestone</dt>
+<dt>milestone</dt>
   <dd>
     <ul>
-      <li>
+<li>
 <em>Integer</em> Milestone number</li>
       <li>
 <code>none</code> for Issues with no Milestone.</li>
       <li>
 <code>*</code> for Issues with any Milestone.</li>
     </ul>
-  </dd>
+</dd>
   <dt>state</dt>
   <dd>
 <code>open</code>, <code>closed</code>, default: <code>open</code>
@@ -207,14 +203,14 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dt>assignee</dt>
   <dd>
     <ul>
-      <li>
+<li>
 <em>String</em> User login</li>
       <li>
 <code>none</code> for Issues with no assigned User.</li>
       <li>
 <code>*</code> for Issues with any assigned User.</li>
     </ul>
-  </dd>
+</dd>
   <dt>creator</dt>
   <dd>
 <em>String</em> User login.</dd>
@@ -236,9 +232,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <dt>since</dt>
   <dd>
 <em>Optional</em> <strong>String</strong> of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.</dd>
-</dl>
-
-<h3 id="response-1">Response</h3>
+</dl><h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -383,7 +377,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input">Input</h3>
 
 <dl>
-  <dt>title</dt>
+<dt>title</dt>
   <dd>
 <em>Required</em> <strong>string</strong>
 </dd>
@@ -409,9 +403,7 @@ silently dropped otherwise.</em>
 issue. <em>NOTE: Only users with push access can set labels for new issues. Labels are
 silently dropped otherwise.</em>
 </dd>
-</dl>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Found a bug"</span><span class="p">,</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"I'm having a problem with this."</span><span class="p">,</span>
   <span class="s2">"assignee"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
@@ -496,7 +488,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <dl>
-  <dt>title</dt>
+<dt>title</dt>
   <dd>
 <em>Optional</em> <strong>string</strong>
 </dd>
@@ -519,9 +511,7 @@ assigned to.</dd>
 <em>Optional</em> <strong>array</strong> of <strong>strings</strong> - Labels to associate with this
 issue. Pass one or more Labels to <em>replace</em> the set of Labels on this
 Issue. Send an empty array (<code>[]</code>) to clear all Labels from the Issue.</dd>
-</dl>
-
-<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Found a bug"</span><span class="p">,</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"I'm having a problem with this."</span><span class="p">,</span>
   <span class="s2">"assignee"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
@@ -606,7 +596,6 @@ application/vnd.github.VERSION.text+json
 application/vnd.github.VERSION.html+json
 application/vnd.github.VERSION.full+json
 </code></pre>
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

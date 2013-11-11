@@ -14,7 +14,7 @@ Maybe you want to find [popular Tetris implementations written in Assembly][tetr
 We've got you covered.
 Or perhaps you're looking for [new gems that are using Octokit.rb][octokit-gemspecs].
 No problem.
-The possibilites are endless.
+The possibilities are endless.
 
 ## Highlights
 

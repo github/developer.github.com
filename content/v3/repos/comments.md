@@ -36,13 +36,13 @@ Comments are ordered by ascending ID.
 
 ### Input
 
-Name | Type | Description | Default
------|------|-------------|---------
-`sha`|`string` | **Required**. The SHA of the commit to comment on.|
-`body`|`string` | **Required**. The contents of the comment.|
-`path`|`string` | Relative path of the file to comment on.|
-`position`|`number` | Line index in the diff to comment on.|
-`line`|`number` | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on.|`null`
+Name | Type | Description 
+-----|------|--------------
+`sha`|`string` | **Required**. The SHA of the commit to comment on.
+`body`|`string` | **Required**. The contents of the comment.
+`path`|`string` | Relative path of the file to comment on.
+`position`|`number` | Line index in the diff to comment on.
+`line`|`number` | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on.
 
 
 #### Example
@@ -74,9 +74,9 @@ Name | Type | Description | Default
 
 ### Input
 
-Name | Type | Description | Default
------|------|-------------|---------
-`body`|`string` | **Required**. The contents of the comment|
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The contents of the comment
 
 
 #### Example

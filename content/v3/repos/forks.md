@@ -13,9 +13,9 @@ title: Repo Forks | GitHub API
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`sort`|`string` | The sort order. Can be either `newest`, `oldest`, or `stargazers`.|`newest`
+Name | Type | Description
+-----|------|-------------
+`sort`|`string` | The sort order. Can be either `newest`, `oldest`, or `stargazers`. Default: `newest`
 
 
 ### Response
@@ -34,9 +34,9 @@ the field `organization`
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`organization`|`string` | The organization login. The repository will be forked into this organization.|
+Name | Type | Description 
+-----|------|-------------
+`organization`|`string` | The organization login. The repository will be forked into this organization.
 
 
 ### Response

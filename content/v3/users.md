@@ -40,15 +40,15 @@ Note: The returned email is the user's publicly visible email address
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`name`|`string` | The new name of the user|
-`email`|`string` | Publicly visible email address.|
-`blog`|`string` | The new blog URL of the user|
-`company`|`string` | The new company of the user|
-`location`|`string` | The new location of the user|
-`hireable`|`boolean` | The new hiring availability of the user|
-`bio`|`string` | The new short biography of the user|
+Name | Type | Description 
+-----|------|--------------
+`name`|`string` | The new name of the user
+`email`|`string` | Publicly visible email address.
+`blog`|`string` | The new blog URL of the user.
+`company`|`string` | The new company of the user.
+`location`|`string` | The new location of the user.
+`hireable`|`boolean` | The new hiring availability of the user.
+`bio`|`string` | The new short biography of the user.
 
 #### Example
 
@@ -80,9 +80,9 @@ users.
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`since`|`string`| The integer ID of the last User that you've seen.|
+Name | Type | Description 
+-----|------|--------------
+`since`|`string`| The integer ID of the last User that you've seen.
 
 
 ### Response

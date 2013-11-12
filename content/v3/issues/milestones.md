@@ -13,11 +13,11 @@ title: Issue Milestones | GitHub API
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`state`|`string` | The state of the milestone. Either `open` or `closed`.|`open`
-`sort`|`string` | What to sort results by. Either `due_date` or `completeness`.|`due_date`
-`direction`|`string` | The direction of the sort. Either `asc` or `desc`.|`asc`
+Name | Type | Description 
+-----|------|--------------
+`state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
+`sort`|`string` | What to sort results by. Either `due_date` or `completeness`. Default: `due_date`
+`direction`|`string` | The direction of the sort. Either `asc` or `desc`. Default: `asc`
 
 
 ### Response
@@ -40,12 +40,12 @@ Name | Type | Description | Default
 
 ### Input
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`title`|`string` | **Required**. The title of the milestone.|
-`state`|`string` | The state of the milestone. Either `open` or `closed`.|`open`
-`description`|`string` | A description of the milestone.|
-`due_on`|`string` | The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+Name | Type | Description 
+-----|------|---------------
+`title`|`string` | **Required**. The title of the milestone.
+`state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
+`description`|`string` | A description of the milestone.
+`due_on`|`string` | The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 #### Example
 
@@ -69,12 +69,12 @@ Name | Type | Description | Default
 
 ### Input
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`title`|`string` | The title of the milestone.|
-`state`|`string` | The state of the milestone. Either `open` or `closed`.|`open`
-`description`|`string` | A description of the milestone.|
-`due_on`|`string` | The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+Name | Type | Description 
+-----|------|---------------
+`title`|`string` | The title of the milestone.
+`state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
+`description`|`string` | A description of the milestone.
+`due_on`|`string` | The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 #### Example
 

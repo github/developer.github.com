@@ -57,11 +57,11 @@ List all notifications for the current user, grouped by repository.
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`all`|`boolean` | If `true`, show notifications marked as read.|`false`
-`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned.|`false`
-`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+Name | Type | Description
+-----|------|--------------
+`all`|`boolean` | If `true`, show notifications marked as read. Default: `false`
+`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. Default: `false`
+`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
 
 
 ### Response
@@ -77,11 +77,11 @@ List all notifications for the current user.
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`all`|`boolean` | If `true`, show notifications marked as read.|`false`
-`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned.|`false`
-`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+Name | Type | Description
+-----|------|--------------
+`all`|`boolean` | If `true`, show notifications marked as read. Default: `false`
+`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. Default: `false`
+`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
 
 
 ### Response
@@ -98,9 +98,9 @@ on GitHub.com](https://github.com/notifications).
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.| Now.
+Name | Type | Description
+-----|------|--------------
+`last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
 
 
 ### Response
@@ -116,9 +116,9 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|Now.
+Name | Type | Description 
+-----|------|--------------
+`last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
 
 
 ### Response
@@ -165,10 +165,10 @@ a thread will mute all future notifications (until you comment or get
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`subscribed`|`boolean`| Determines if notifications should be received from this thread|
-`ignored`|`boolean`| Determines if all notifications should be blocked from this thread|
+Name | Type | Description
+-----|------|--------------
+`subscribed`|`boolean`| Determines if notifications should be received from this thread
+`ignored`|`boolean`| Determines if all notifications should be blocked from this thread
 
 
 ### Response

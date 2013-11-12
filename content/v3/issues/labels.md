@@ -31,10 +31,10 @@ title: Issue Labels | GitHub API
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`name`|`string` | **Required**. The name of the label.|
-`color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.|
+Name | Type | Description 
+-----|------|--------------
+`name`|`string` | **Required**. The name of the label.
+`color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
 
 
 <%= json :name => "API", :color => "FFFFFF" %>
@@ -52,10 +52,10 @@ Name | Type | Description | Default
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`name`|`string` | **Required**. The name of the label.|
-`color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.|
+Name | Type | Description 
+-----|------|--------------
+`name`|`string` | **Required**. The name of the label.
+`color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
 
 
 <%= json :name => "API", :color => "FFFFFF" %>

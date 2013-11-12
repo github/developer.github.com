@@ -19,12 +19,12 @@ Update the notification settings for the authenticated user.
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`participating.email`|`boolean` | `true` to receive participating notifications via email.|
-`participating.web`|`boolean` | `true` to receive participating notifications via web.|
-`watching.email`|`boolean` | `true` to receive watching notifications via email.|
-`watching.web`|`boolean` | `true` to receive watching notifications via web.|
+Name | Type | Description 
+-----|------|--------------
+`participating.email`|`boolean` | `true` to receive participating notifications via email.
+`participating.web`|`boolean` | `true` to receive participating notifications via web.
+`watching.email`|`boolean` | `true` to receive watching notifications via email.
+`watching.web`|`boolean` | `true` to receive watching notifications via web.
 
 #### Example
 
@@ -54,9 +54,9 @@ Name | Type | Description | Default
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`email`|`string` | **Required**. Email address to where notifications to the authenticated user fare sent or discussions related to projects for this organization.|
+Name | Type | Description 
+-----|------|--------------
+`email`|`string` | **Required**. Email address to where notifications to the authenticated user fare sent or discussions related to projects for this organization.
 
 
 ## Update Organization email settings
@@ -67,8 +67,8 @@ Update the notification settings for the authenticated user.
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`email`|`string` | **Required**. Email address to where notifications to the authenticated user are sent for discussions related to projects for this organization.|
+Name | Type | Description 
+-----|------|--------------
+`email`|`string` | **Required**. Email address to where notifications to the authenticated user are sent for discussions related to projects for this organization.
 
 

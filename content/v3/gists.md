@@ -36,9 +36,9 @@ List the authenticated user's starred gists:
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.|
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.
 
 ### Response
 
@@ -62,11 +62,11 @@ _Note_: When using the [v3 media type][2] the "user" field will become "owner"
 
 ### Input
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`files`|`hash` | **Required**. Files that make up this gist.|
-`description`|`string` | A description of the gist.|
-`public`|`boolean` | Indicates whether the gist is public. |`false`
+Name | Type | Description 
+-----|------|--------------
+`files`|`hash` | **Required**. Files that make up this gist.
+`description`|`string` | A description of the gist.
+`public`|`boolean` | Indicates whether the gist is public. Default: `false`
 
 The keys in the `files` hash are the `string` filename, and the value is another `hash` with a key of `content`, and a value of the file contents. For example:
 
@@ -92,12 +92,12 @@ format of the automatic naming scheme that Gist uses internally.
 
 ### Input
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`description`|`string` | A description of the gist.|
-`files`|`hash` | Files that make up this gist.| 
-`content`|`string` | Updated file contents.| 
-`filename`|`string` | New name for this file.| 
+Name | Type | Description 
+-----|------|--------------
+`description`|`string` | A description of the gist.
+`files`|`hash` | Files that make up this gist.
+`content`|`string` | Updated file contents.
+`filename`|`string` | New name for this file.
 
 The keys in the `files` hash are the `string` filename. The value is another `hash` with a key of `content` (indicating the new contents), or `filename` (indicating the new filename). For example:
 

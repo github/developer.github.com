@@ -33,11 +33,11 @@ Name | Description
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`state`|`string` | Either `open` or `closed` to filter by state.|`open`
-`head`|`string` | Filter pulls by head user and branch name in the format of `user:ref-name`. Example: `github:new-script-format`.|
-`base`|`string` | Filter pulls by base branch name. Example: `gh-pages`.|
+Name | Type | Description 
+-----|------|--------------
+`state`|`string` | Either `open` or `closed` to filter by state. Default: `open`
+`head`|`string` | Filter pulls by head user and branch name in the format of `user:ref-name`. Example: `github:new-script-format`.
+`base`|`string` | Filter pulls by base branch name. Example: `gh-pages`.
 
 
 ### Response
@@ -74,12 +74,12 @@ Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-
 
 ### Input
 
-Name | Type | Description | Default
------|------|-------------|---------
-`title`|`string` | **Required**. The title of the pull request.|
+Name | Type | Description
+-----|------|-------------
+`title`|`string` | **Required**. The title of the pull request.
 `head`|`string` | **Required**. The branch (or git ref) where your changes are implemented.
-`base`|`string` | **Required**. The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo.|
-`body`|`string` | The contents of the pull request.|
+`base`|`string` | **Required**. The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo.
+`body`|`string` | The contents of the pull request.
 
 
 NOTE: `head` and `base` can be either a sha or a branch name. Typically you
@@ -99,9 +99,9 @@ would namespace `head` with a user like this: `username:branch`.
 You can also create a Pull Request from an existing Issue by passing an
 Issue number instead of `title` and `body`.
 
-Name | Type | Description | Default
------|------|-------------|---------
-`issue`|`number` | **Required**. The issue number in this repository to turn into a Pull Request.|
+Name | Type | Description 
+-----|------|--------------
+`issue`|`number` | **Required**. The issue number in this repository to turn into a Pull Request.
 
 #### Example
 
@@ -122,11 +122,11 @@ Name | Type | Description | Default
 
 ### Input
 
-Name | Type | Description | Default
------|------|-------------|---------
-`title`|`string` | The title of the pull request.|
-`body`|`string` | The contents of the pull request.|
-`state`|`string` | State of this Pull Request. Either `open` or `closed`.|
+Name | Type | Description 
+-----|------|--------------
+`title`|`string` | The title of the pull request.
+`body`|`string` | The contents of the pull request.
+`state`|`string` | State of this Pull Request. Either `open` or `closed`.
 
 #### Example
 
@@ -177,9 +177,9 @@ Name | Type | Description | Default
 
 ### Input
 
-Name | Type | Description | Default
------|------|-------------|---------
-`commit_message`|`string`  | The message that will be used for the merge commit|
+Name | Type | Description 
+-----|------|-------------
+`commit_message`|`string`| The message that will be used for the merge commit
 
 
 ### Response if merge was successful

@@ -37,13 +37,13 @@ List public and private organizations for the authenticated user.
 
 ### Input
 
-Name | Type | Description | Default
------|------|-------------|---------
-`billing_email`|`string` | Billing email address. This address is not publicized.|
-`company`|`string` | The company name.|
-`email`|`string` | The publicly visible email address.|
-`location`|`string` | The location.|
-`name`|`string` | The shorthand name of the company.|
+Name | Type | Description 
+-----|------|--------------
+`billing_email`|`string` | Billing email address. This address is not publicized.
+`company`|`string` | The company name.
+`email`|`string` | The publicly visible email address.
+`location`|`string` | The location.
+`name`|`string` | The shorthand name of the company.
 
 ### Example
 

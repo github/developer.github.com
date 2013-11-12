@@ -22,11 +22,11 @@ title: Git Commits | GitHub API
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`message`|`string` | **Required**. The commit message|
-`tree`|`string` | **Required**. The SHA of the tree object this commit points to|
-`parents`|`array` of `string`s| **Required**. The SHAs of the commits that were the parents of this commit.  If omitted or empty, the commit will be written as a root commit.  For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided.|
+Name | Type | Description 
+-----|------|--------------
+`message`|`string` | **Required**. The commit message
+`tree`|`string` | **Required**. The SHA of the tree object this commit points to
+`parents`|`array` of `string`s| **Required**. The SHAs of the commits that were the parents of this commit.  If omitted or empty, the commit will be written as a root commit.  For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided.
 
 
 ### Optional Parameters
@@ -41,11 +41,11 @@ in with the authenticated user's information and the current date.
 
 Both the `author` and `commiter` parameters have the same keys:
 
-Name | Type | Description | Default
------|------|-------------|---------
-`name`|`string` | The name of the author (or commiter) of the commit|
-`email`|`string` | The email of the author (or commiter) of the commit|
-`date`|`string` | Indicates when this commit was authored (or committed). This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+Name | Type | Description 
+-----|------|-------------
+`name`|`string` | The name of the author (or commiter) of the commit
+`email`|`string` | The email of the author (or commiter) of the commit
+`date`|`string` | Indicates when this commit was authored (or committed). This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Example Input
 

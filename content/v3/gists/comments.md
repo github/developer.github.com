@@ -35,9 +35,9 @@ You can read more about the use of media types in the API
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`body`|`string` | **Required**. The comment text.|
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The comment text.
 
 
 <%= json :body => 'Just commenting for the sake of commenting' %>
@@ -54,9 +54,9 @@ Name | Type | Description | Default
 
 ### Input
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`body`|`string` | **Required**. The comment text.|
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The comment text.
 
 
 <%= json :body => 'Just commenting for the sake of commenting' %>

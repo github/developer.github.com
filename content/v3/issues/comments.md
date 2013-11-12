@@ -31,11 +31,11 @@ By default, Issue Comments are ordered by ascending ID.
 
 ### Parameters
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`sort`|`string` | Either `created` or `updated`.|`created`
-`direction`|`string` | Either `asc` or `desc`. Ignored without `sort` parameter.|
-`since`|`string` | Only comments updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+Name | Type | Description 
+-----|------|--------------
+`sort`|`string` | Either `created` or `updated`. Default: `created`
+`direction`|`string` | Either `asc` or `desc`. Ignored without the `sort` parameter.
+`since`|`string` | Only comments updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 
 ### Response
@@ -58,9 +58,9 @@ Name | Type | Description | Default
 
 ### Input
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`body`|`string` | **Required**. The contents of the comment.|
+Name | Type | Description
+-----|------|--------------
+`body`|`string` | **Required**. The contents of the comment.
 
 
 <%= json :body => "a new comment" %>
@@ -78,9 +78,9 @@ Name | Type | Description | Default
 
 ### Input
 
-Name | Type | Description | Default
-----|------|--------------|---------
-`body`|`string` | **Required**. The contents of the comment.|
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The contents of the comment.
 
 
 <%= json :body => "String" %>

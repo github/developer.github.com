@@ -20,13 +20,13 @@ instead of constructing page links yourself.
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`sha`|`string` | SHA or branch to start listing commits from.|
-`path`|`string` | Only commits containing this file path will be returned.|
-`author`|`string` | GitHub login, name, or email by which to filter by commit author|
-`since`|`string` | Only commits after this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
-`until`|`string` | Only commits before this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.|
+Name | Type | Description 
+-----|------|--------------
+`sha`|`string` | SHA or branch to start listing commits from.
+`path`|`string` | Only commits containing this file path will be returned.
+`author`|`string` | GitHub login, name, or email by which to filter by commit author
+`since`|`string` | Only commits after this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+`until`|`string` | Only commits before this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 
 ### Response

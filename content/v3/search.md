@@ -37,11 +37,11 @@ Find repositories via various criteria. This method returns up to 100 results [p
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`q`|`string`| The search keywords, as well as any qualifiers.|
-`sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`.|Results are sorted by best match.
-`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`.|`desc`
+Name | Type | Description 
+-----|------|--------------
+`q`|`string`| The search keywords, as well as any qualifiers.
+`sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.
+`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
 The `q` search term can also contain any combination of the supported repository search qualifiers:
 
@@ -110,11 +110,11 @@ Find file contents via various criteria. (This method returns up to 100 results 
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`q`|`string`| The search terms.|
-`sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure.|Results are sorted by best match.
-`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`.|`desc`
+Name | Type | Description 
+-----|------|--------------
+`q`|`string`| The search terms.
+`sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match.
+`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
 The `q` search term can also contain any combination of the supported code search qualifiers:
 
@@ -181,11 +181,11 @@ Find issues by state and keyword. (This method returns up to 100 results [per pa
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`q`|`string`| The search terms.|
-`sort`|`string`| The sort field. Can be `comments`, `created`, or `updated`|Results are sorted by best match.
-`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`.|`desc`
+Name | Type | Description 
+-----|------|--------------
+`q`|`string`| The search terms.
+`sort`|`string`| The sort field. Can be `comments`, `created`, or `updated`. Default: results are sorted by best match.
+`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
 The `q` search term can also contain any combination of the supported issue search qualifiers:
 
@@ -264,11 +264,11 @@ Find users via various criteria. (This method returns up to 100 results [per pag
 
 ### Parameters
 
-Name | Type | Description | Default
------|------|-------------|---------
-`q`|`string`| The search terms.|
-`sort`|`string`| The sort field. Can be `followers`, `repositories`, or `joined`|Results are sorted by best match.
-`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`.|`desc`
+Name | Type | Description 
+-----|------|--------------
+`q`|`string`| The search terms.
+`sort`|`string`| The sort field. Can be `followers`, `repositories`, or `joined`.  Default: results are sorted by best match.
+`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
 The `q` search term can also contain any combination of the supported user search qualifiers:
 

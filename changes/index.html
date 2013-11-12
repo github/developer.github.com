@@ -1855,19 +1855,19 @@ for API requests.</s></p>
   </p>
 </div>
 
-<h2 id="sphase-2-switch-watchers-api-endpoints"><s>Phase 2: Switch `/watchers` API Endpoint</s></h2>
+<h2 id="sphase-2-switch-codewatcherscode-api-endpoints"><s>Phase 2: Switch <code>/watchers</code> API Endpoint</s></h2>
 
 <s>The "watch" endpoints will now be a copy of the "subscription" endpoints.  You
-will have to use `/user/starred` to get a user's starred repositories, not
-`/user/watched`.</s>
+will have to use <code>/user/starred</code> to get a user's starred repositories, not
+<code>/user/watched</code>.</s>
 
 <s>This requires a new media type value:</s>
 
 <s><pre>application/vnd.github.v3+json</pre></s>
 
-<p>-<s>This is a breaking change from Phase 1.  We will release this change in an
+<s>This is a breaking change from Phase 1.  We will release this change in an
 experimental mode first, letting developers gracefully upgrade their
-applications by specifying the new media value for the Accept header.</s></p>
+applications by specifying the new media value for the Accept header.</s>
 
 <s>
 <pre>
@@ -1877,12 +1877,12 @@ curl https://api.github.com/user/watched \
 </pre>
 </s>
 
-<h2 id="sphase-3-remove-subscribers-api-endpoints"><s>Phase 3: Remove `/subscribers` API Endpoint.</s></h2>
+<h2 id="sphase-3-remove-codesubscriberscode-api-endpoints"><s>Phase 3: Remove <code>/subscribers</code> API Endpoint.</s></h2>
 
 <s>This phase involves disabling the subscription endpoints completely.  At this
 point, you should be using the starring endpoints for starred repositories, and
 the watch endpoints for watched repositories.  No date has been set yet, but we
-expect this to be _3-6 months_ after Phase 2 is in place.  This should give
+expect this to be <em>3-6 months</em> after Phase 2 is in place.  This should give
 developers enough time for a smooth upgrade path.  If they use popular API
 wrappers, the work will likely mostly be done for them.</s>
 
@@ -1890,7 +1890,7 @@ wrappers, the work will likely mostly be done for them.</s>
 another breaking change to make.  If you can't make the deadline for Phase 3,
 just set the "beta" media type until we shut that down completely.  It's likely
 that we will keep the old "beta" media type active for another month, like
-the [last time](https://github.com/blog/1090-github-api-moving-on) we terminated
+the <a href="https://github.com/blog/1090-github-api-moving-on">last time</a> we terminated
 old API functionality.</s>
 
 <p>We look forward to assisting you through this transition.  Hit us up at

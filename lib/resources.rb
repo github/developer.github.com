@@ -180,7 +180,6 @@ module GitHub
       "stargazers_count"  => 80,
       "watchers_count"    => 80,
       "size"              => 108,
-      "master_branch"     => 'master',
       "open_issues_count" => 0,
       "pushed_at"         => "2011-01-26T19:06:43Z",
       "created_at"        => "2011-01-26T19:01:12Z",

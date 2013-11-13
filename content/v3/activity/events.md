@@ -46,9 +46,8 @@ All Events have the same response format:
 
 ## List issue events for a repository
 
-These are events that have occurred around Issues for a repository.
-They are returned in a format that is different from other events and
-that is documented in the [Issue Events API page](http://developer.github.com/v3/issues/events/#list-events-for-a-repository).
+Repository issue events have a different format than other events,
+as documented in the [Issue Events API](http://developer.github.com/v3/issues/events/).
 
     GET /repos/:owner/:repo/issues/events
 

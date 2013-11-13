@@ -43,13 +43,15 @@
 	
   <div id="wrapper">
   	<div class="content">
-    	<h1 id="orgs-api">Orgs API</h1>
+    	<h1 id="organizations-api">Organizations API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-user-organizations">List User Organizations</a></li>
+  <li><a href="#list-user-organizations">List User Organizations</a></li>
   <li><a href="#get-an-organization">Get an Organization</a></li>
   <li><a href="#edit-an-organization">Edit an Organization</a></li>
-</ul><h2 id="list-user-organizations">List User Organizations</h2>
+</ul>
+
+<h2 id="list-user-organizations">List User Organizations</h2>
 
 <p>List all public organizations for an unauthenticated user. Lists private <em>and</em> public organizations for authenticated users.</p>
 
@@ -115,27 +117,46 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input">Input</h3>
 
-<dl>
-<dt>billing_email</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - Billing email address. This address is not
-publicized.</dd>
-  <dt>company</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>email</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - Publicly visible email address.</dd>
-  <dt>location</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>name</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>billing_email</code></td>
+      <td><code>string</code></td>
+      <td>Billing email address. This address is not publicized.</td>
+    </tr>
+    <tr>
+      <td><code>company</code></td>
+      <td><code>string</code></td>
+      <td>The company name.</td>
+    </tr>
+    <tr>
+      <td><code>email</code></td>
+      <td><code>string</code></td>
+      <td>The publicly visible email address.</td>
+    </tr>
+    <tr>
+      <td><code>location</code></td>
+      <td><code>string</code></td>
+      <td>The location.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>The shorthand name of the company.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="example">Example</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"billing_email"</span><span class="o">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
   <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"https://github.com/blog"</span><span class="p">,</span>
   <span class="s2">"company"</span><span class="o">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
@@ -179,6 +200,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"private_repos"</span><span class="o">:</span> <span class="mi">20</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -241,7 +263,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

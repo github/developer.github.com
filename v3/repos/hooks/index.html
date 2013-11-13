@@ -46,12 +46,14 @@
     	<h1 id="repo-hooks-api">Repo Hooks API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#services">Services</a></li>
+  <li><a href="#services">Services</a></li>
   <li><a href="#events">Events</a></li>
   <li><a href="#json-http">JSON HTTP</a></li>
   <li><a href="#delete-a-hook">Delete a hook</a></li>
   <li><a href="#pubsubhubbub">PubSubHubbub</a></li>
-</ul><p>The Repository Hooks API allows repository admins to manage the post-receive 
+</ul>
+
+<p>The Repository Hooks API allows repository admins to manage the post-receive 
 hooks for a repository.  Hooks can be managed using the <a href="#json-http">JSON HTTP API</a>
 and the <a href="#pubsubhubbub">PubSubHubbub API</a>.</p>
 
@@ -99,41 +101,75 @@ service can only listen for <code>push</code>, <code>issues</code>, and <code>pu
 
 <p>The available events are:</p>
 
-<ul>
-<li>
-<code>push</code> - Any git push to a Repository. <strong>This is the default event.</strong>
-</li>
-  <li>
-<code>issues</code> - Any time an Issue is opened or closed.</li>
-  <li>
-<code>issue_comment</code> - Any time an Issue is commented on.</li>
-  <li>
-<code>commit_comment</code> - Any time a Commit is commented on.</li>
-  <li>
-<code>pull_request</code> - Any time a Pull Request is opened, closed, or
-synchronized (updated due to a new push in the branch that the pull
-request is tracking).</li>
-  <li>
-<code>pull_request_review_comment</code> - Any time a Commit is commented on
-while inside a Pull Request review (the Files Changed tab).</li>
-  <li>
-<code>gollum</code> - Any time a Wiki page is updated.</li>
-  <li>
-<code>watch</code> - Any time a User watches the Repository.</li>
-  <li>
-<code>release</code> - Any time a Release is published in the Repository.</li>
-  <li>
-<code>fork</code> - Any time a Repository is forked.</li>
-  <li>
-<code>member</code> - Any time a User is added as a collaborator to a
-non-Organization Repository.</li>
-  <li>
-<code>public</code> - Any time a Repository changes from private to public.</li>
-  <li>
-<code>team_add</code> - Any time a team is added or modified on a Repository.</li>
-  <li>
-<code>status</code> - Any time a Repository has a status update from the API</li>
-</ul><h3 id="payloads">Payloads</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>push</code></td>
+      <td>Any git push to a Repository. <strong>This is the default event.</strong>
+</td>
+    </tr>
+    <tr>
+      <td><code>issues</code></td>
+      <td>Any time an Issue is opened or closed.</td>
+    </tr>
+    <tr>
+      <td><code>issue_comment</code></td>
+      <td>Any time an Issue is commented on.</td>
+    </tr>
+    <tr>
+      <td><code>commit_comment</code></td>
+      <td>Any time a Commit is commented on.</td>
+    </tr>
+    <tr>
+      <td><code>pull_request</code></td>
+      <td>Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).</td>
+    </tr>
+    <tr>
+      <td><code>pull_request_review_comment</code></td>
+      <td>Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).</td>
+    </tr>
+    <tr>
+      <td><code>gollum</code></td>
+      <td>Any time a Wiki page is updated.</td>
+    </tr>
+    <tr>
+      <td><code>watch</code></td>
+      <td>Any time a User watches the Repository.</td>
+    </tr>
+    <tr>
+      <td><code>release</code></td>
+      <td>Any time a Release is published in the Repository.</td>
+    </tr>
+    <tr>
+      <td><code>fork</code></td>
+      <td>Any time a Repository is forked.</td>
+    </tr>
+    <tr>
+      <td><code>member</code></td>
+      <td>Any time a User is added as a collaborator to a non-Organization Repository.</td>
+    </tr>
+    <tr>
+      <td><code>public</code></td>
+      <td>Any time a Repository changes from private to public.</td>
+    </tr>
+    <tr>
+      <td><code>team_add</code></td>
+      <td>Any time a team is added or modified on a Repository.</td>
+    </tr>
+    <tr>
+      <td><code>status</code></td>
+      <td>Any time a Repository has a status update from the API</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="payloads">Payloads</h3>
 
 <p>The payloads for all hooks mirror <a href="/v3/activity/events/types/">the payloads for the Event
 types</a>, with the exception of <a href="http://help.github.com/post-receive-hooks/">the original <code>push</code>
@@ -210,37 +246,55 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /repos/:owner/:repo/hooks
 </code></pre>
 
-<h4 id="input">Input</h4>
+<h4 id="parameter">Parameter</h4>
 
-<dl>
-<dt><code>name</code></dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - The name of the service that is being called.
-(See <a href="https://api.github.com/hooks">/hooks</a> for the list of valid hook names.)</dd>
-  <dt><code>config</code></dt>
-  <dd>
-<em>Required</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
-settings for this hook.  These settings vary between the services and
-are defined in the
-<a href="https://github.com/github/github-services">github-services</a> repo.
-Booleans are stored internally as “1” for true, and “0” for false.  Any
-JSON true/false values will be converted automatically.</dd>
-  <dt><code>events</code></dt>
-  <dd>
-<em>Optional</em> <strong>array</strong> - Determines what events the hook is triggered
-for.  Default: <code>["push"]</code>.</dd>
-  <dt><code>active</code></dt>
-  <dd>
-<em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
-triggered on pushes.</dd>
-</dl><p>Example:  The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The name of the service that is being called. (See <a href="https://api.github.com/hooks">/hooks</a> for the list of valid hook names.)</td>
+    </tr>
+    <tr>
+      <td><code>config</code></td>
+      <td><code>hash</code></td>
+      <td>
+<strong>Required</strong>. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the <a href="https://github.com/github/github-services">github-services</a> repo. Booleans are stored internally as “1” for true, and “0” for false.  Any JSON <code>true</code>/<code>false</code> values will be converted automatically.</td>
+    </tr>
+    <tr>
+      <td><code>events</code></td>
+      <td><code>array</code></td>
+      <td>Determines what events the hook is triggered for.  Default: <code>["push"]</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>active</code></td>
+      <td><code>boolean</code></td>
+      <td>Determines whether the hook is actually triggered on pushes.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="example">Example</h5>
+
+<p>The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
 takes these fields:</p>
 
 <ul>
-<li><code>url</code></li>
+  <li><code>url</code></li>
   <li><code>content_type</code></li>
   <li><code>secret</code></li>
-</ul><p>Here’s how you can setup a hook that posts raw JSON
+</ul>
+
+<p>Here’s how you can setup a hook that posts raw JSON
 (instead of the default legacy format):</p>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
@@ -285,35 +339,47 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>PATCH /repos/:owner/:repo/hooks/:id
 </code></pre>
 
-<h4 id="input-1">Input</h4>
+<h4 id="parameter-1">Parameter</h4>
 
-<dl>
-<dt><code>config</code></dt>
-  <dd>
-<em>Optional</em> <strong>hash</strong> - A Hash containing key/value pairs to provide
-settings for this hook.  Modifying this will replace the entire config
-object.  These settings vary between the services and
-are defined in the
-<a href="https://github.com/github/github-services">github-services</a> repo.
-Booleans are stored internally as “1” for true, and “0” for false.  Any
-JSON true/false values will be converted automatically.</dd>
-  <dt><code>events</code></dt>
-  <dd>
-<em>Optional</em> <strong>array</strong> - Determines what events the hook is triggered
-for.  This replaces the entire array of events.  Default: <code>["push"]</code>.</dd>
-  <dt><code>add_events</code></dt>
-  <dd>
-<em>Optional</em> <strong>array</strong> - Determines a list of events to be added to the
-list of events that the Hook triggers for.</dd>
-  <dt><code>remove_events</code></dt>
-  <dd>
-<em>Optional</em> <strong>array</strong> - Determines a list of events to be removed from the
-list of events that the Hook triggers for.</dd>
-  <dt><code>active</code></dt>
-  <dd>
-<em>Optional</em> <strong>boolean</strong> - Determines whether the hook is actually
-triggered on pushes.</dd>
-</dl><h5 id="example">Example</h5>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>config</code></td>
+      <td><code>hash</code></td>
+      <td>Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the <a href="https://github.com/github/github-services">github-services</a> repo. Booleans are stored internally as “1” for true, and “0” for false.  Any JSON <code>true</code>/<code>false</code> values will be converted automatically.</td>
+    </tr>
+    <tr>
+      <td><code>events</code></td>
+      <td><code>array</code></td>
+      <td>Determines what events the hook is triggered for.  This replaces the entire array of events.  Default: <code>["push"]</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>add_events</code></td>
+      <td><code>array</code></td>
+      <td>Determines a list of events to be added to the list of events that the Hook triggers for.</td>
+    </tr>
+    <tr>
+      <td><code>remove_events</code></td>
+      <td><code>array</code></td>
+      <td>Determines a list of events to be removed from the list of events that the Hook triggers for.</td>
+    </tr>
+    <tr>
+      <td><code>active</code></td>
+      <td><code>boolean</code></td>
+      <td>Determines whether the hook is actually triggered on pushes.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="example-1">Example</h5>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -430,25 +496,41 @@ exists, it will be modified according to the request.</p>
 
 <h4 id="parameters">Parameters</h4>
 
-<dl>
-<dt><code>hub.mode</code></dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - Either <code>subscribe</code> or <code>unsubscribe</code>.</dd>
-  <dt><code>hub.topic</code></dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - The URI of the GitHub repository to subscribe
-to.  The path must be in the format of <code>/:owner/:repo/events/:event</code>.</dd>
-  <dt><code>hub.callback</code></dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - The URI to receive the updates to the topic.</dd>
-  <dt><code>hub.secret</code></dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - A shared secret key that generates a SHA1 HMAC
-of the outgoing body content.  You can verify a push came from GitHub by
-comparing the raw request body with the contents of the <code>X-Hub-Signature</code>
-header.  You can see <a href="https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50">our Ruby implementation</a>, or <a href="http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify">the
-PubSubHubbub documentation</a> for more details.</dd>
-</dl>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>hub.mode</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. Either <code>subscribe</code> or <code>unsubscribe</code>.</td>
+    </tr>
+    <tr>
+      <td><code>hub.topic</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>.  The URI of the GitHub repository to subscribe to.  The path must be in the format of <code>/:owner/:repo/events/:event</code>.</td>
+    </tr>
+    <tr>
+      <td><code>hub.callback</code></td>
+      <td><code>string</code></td>
+      <td>The URI to receive the updates to the topic.</td>
+    </tr>
+    <tr>
+      <td><code>hub.secret</code></td>
+      <td><code>string</code></td>
+      <td>A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the <code>X-Hub-Signature</code> header.  You can see <a href="https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50">our Ruby implementation</a>, or <a href="http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify">the PubSubHubbub documentation</a> for more details.</td>
+    </tr>
+  </tbody>
+</table>
+
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -511,7 +593,7 @@ PubSubHubbub documentation</a> for more details.</dd>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

@@ -46,9 +46,11 @@
     	<h1 id="tags-api">Tags API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-a-tag">Get a Tag</a></li>
+  <li><a href="#get-a-tag">Get a Tag</a></li>
   <li><a href="#create-a-tag-object">Create a Tag Object</a></li>
-</ul><p>This tags API only deals with tag objects - so only annotated tags, not
+</ul>
+
+<p>This tags API only deals with tag objects - so only annotated tags, not
 lightweight tags.</p>
 
 <h2 id="get-a-tag">Get a Tag</h2>
@@ -94,30 +96,73 @@ would be unnecessary.</p>
 
 <h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>tag</dt>
-  <dd>
-<em>String</em> of the tag</dd>
-  <dt>message</dt>
-  <dd>
-<em>String</em> of the tag message</dd>
-  <dt>object</dt>
-  <dd>
-<em>String</em> of the SHA of the git object this is tagging</dd>
-  <dt>type</dt>
-  <dd>
-<em>String</em> of the type of the object we’re tagging. Normally this is a
-<code>commit</code> but it can also be a <code>tree</code> or a <code>blob</code>.</dd>
-  <dt>tagger.name</dt>
-  <dd>
-<em>String</em> of the name of the author of the tag</dd>
-  <dt>tagger.email</dt>
-  <dd>
-<em>String</em> of the email of the author of the tag</dd>
-  <dt>tagger.date</dt>
-  <dd>
-<em>Timestamp</em> of when this object was tagged</dd>
-</dl><h3 id="example-input">Example Input</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>tag</code></td>
+      <td><code>string</code></td>
+      <td>The tag</td>
+    </tr>
+    <tr>
+      <td><code>message</code></td>
+      <td><code>string</code></td>
+      <td>The tag message</td>
+    </tr>
+    <tr>
+      <td><code>object</code></td>
+      <td><code>string</code></td>
+      <td>The SHA of the git object this is tagging</td>
+    </tr>
+    <tr>
+      <td><code>type</code></td>
+      <td><code>string</code></td>
+      <td>The type of the object we’re tagging. Normally this is a <code>commit</code> but it can also be a <code>tree</code> or a <code>blob</code>.</td>
+    </tr>
+    <tr>
+      <td><code>tagger</code></td>
+      <td><code>hash</code></td>
+      <td>A hash with information about the individual creating the tag.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The <code>tagger</code> hash contains the following keys:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>The name of the author of the tag</td>
+    </tr>
+    <tr>
+      <td><code>email</code></td>
+      <td><code>string</code></td>
+      <td>The email of the author of the tag</td>
+    </tr>
+    <tr>
+      <td><code>date</code></td>
+      <td><code>string</code></td>
+      <td>When this object was tagged. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="example-input">Example Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"tag"</span><span class="o">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
@@ -154,6 +199,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -216,7 +262,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

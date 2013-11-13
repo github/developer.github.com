@@ -46,9 +46,11 @@
     	<h1 id="repo-statuses-api">Repo Statuses API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-statuses-for-a-specific-ref">List Statuses for a specific Ref</a></li>
+  <li><a href="#list-statuses-for-a-specific-ref">List Statuses for a specific Ref</a></li>
   <li><a href="#create-a-status">Create a Status</a></li>
-</ul><p>The Status API allows external services to mark commits with a success,
+</ul>
+
+<p>The Status API allows external services to mark commits with a success,
 failure, error, or pending <code>state</code>, which is then reflected in pull requests
 involving those commits.</p>
 
@@ -75,11 +77,25 @@ access to Statuses <strong>without</strong> also granting access to repo code, w
 
 <h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>ref</dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.</dd>
-</dl><h3 id="response">Response</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ref</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -113,25 +129,37 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="parameters-1">Parameters</h3>
 
-<dl>
-<dt>state</dt>
-  <dd>
-<em>Required</em> <strong>string</strong> State of the status - can be one of <code>pending</code>,
-<code>success</code>, <code>error</code>, or <code>failure</code>.</dd>
-  <dt>target_url</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> Target URL to associate with this status.  This
-URL will be linked from the GitHub UI to allow users to easily see the
-‘source’ of the Status.</dd>
-  <dd>
-    <p>For example, if your Continuous Integration system is posting build
-status, you would want to provide the deep link for the build output for
-this specific sha - <code>http://ci.example.com/johndoe/my-repo/builds/sha</code>.</p>
-  </dd>
-  <dt>description</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> Short description of the status</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>state</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The state of the status. Can be one of <code>pending</code>, <code>success</code>, <code>error</code>, or <code>failure</code>.</td>
+    </tr>
+    <tr>
+      <td><code>target_url</code></td>
+      <td><code>string</code></td>
+      <td>The target URL to associate with this status.  This URL will be linked from the GitHub UI to allow users to easily see the ‘source’ of the Status.<br>For example, if your Continuous Integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:<br><code>http://ci.example.com/user/repo/build/sha</code>.</td>
+    </tr>
+    <tr>
+      <td><code>description</code></td>
+      <td><code>string</code></td>
+      <td>A short description of the status</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example">Example</h4>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
   <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://example.com/build/status"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"The build succeeded!"</span>
@@ -160,6 +188,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -222,7 +251,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

@@ -46,12 +46,14 @@
     	<h1 id="references-api">References API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-a-reference">Get a Reference</a></li>
+  <li><a href="#get-a-reference">Get a Reference</a></li>
   <li><a href="#get-all-references">Get all References</a></li>
   <li><a href="#create-a-reference">Create a Reference</a></li>
   <li><a href="#update-a-reference">Update a Reference</a></li>
   <li><a href="#delete-a-reference">Delete a Reference</a></li>
-</ul><h2 id="get-a-reference">Get a Reference</h2>
+</ul>
+
+<h2 id="get-a-reference">Get a Reference</h2>
 
 <pre><code>GET /repos/:owner/:repo/git/refs/:ref
 </code></pre>
@@ -136,15 +138,29 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>ref</dt>
-  <dd>
-<em>String</em> of the name of the fully qualified reference (ie: <code>refs/heads/master</code>).
-If it doesn’t start with ‘refs’ and have at least two slashes, it will be rejected.</dd>
-  <dt>sha</dt>
-  <dd>
-<em>String</em> of the SHA1 value to set this reference to</dd>
-</dl><h3 id="input">Input</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ref</code></td>
+      <td><code>type</code></td>
+      <td>The name of the fully qualified reference (ie: <code>refs/heads/master</code>). If it doesn’t start with ‘refs’ and have at least two slashes, it will be rejected.</td>
+    </tr>
+    <tr>
+      <td><code>sha</code></td>
+      <td><code>type</code></td>
+      <td>The SHA1 value to set this reference to</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="input">Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/master"</span><span class="p">,</span>
@@ -174,16 +190,30 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="parameters-1">Parameters</h3>
 
-<dl>
-<dt>sha</dt>
-  <dd>
-<em>String</em> of the SHA1 value to set this reference to</dd>
-  <dt>force</dt>
-  <dd>
-<em>Boolean</em> indicating whether to force the update or to make sure the
-update is a fast-forward update. The default is <code>false</code>, so leaving this
-out or setting it to <code>false</code> will make sure you’re not overwriting work.</dd>
-</dl><h3 id="input-1">Input</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sha</code></td>
+      <td><code>type</code></td>
+      <td>The SHA1 value to set this reference to</td>
+    </tr>
+    <tr>
+      <td><code>force</code></td>
+      <td><code>boolean</code></td>
+      <td>Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to <code>false</code> will make sure you’re not overwriting work. Default: <code>false</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="input-1">Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
@@ -227,6 +257,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -289,7 +320,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

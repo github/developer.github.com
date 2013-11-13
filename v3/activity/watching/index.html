@@ -46,7 +46,7 @@
     	<h1 id="repository-watching-api">Repository Watching API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-watchers">List watchers</a></li>
+  <li><a href="#list-watchers">List watchers</a></li>
   <li><a href="#list-repositories-being-watched">List repositories being watched</a></li>
   <li><a href="#get-a-repository-subscription">Get a Repository Subscription</a></li>
   <li><a href="#set-a-repository-subscription">Set a Repository Subscription</a></li>
@@ -54,7 +54,9 @@
   <li><a href="#check-if-you-are-watching-a-repository-legacy">Check if you are watching a repository (LEGACY)</a></li>
   <li><a href="#watch-a-repository-legacy">Watch a repository (LEGACY)</a></li>
   <li><a href="#stop-watching-a-repository-legacy">Stop watching a repository (LEGACY)</a></li>
-</ul><p>Watching a Repository registers the user to receive notifications on new
+</ul>
+
+<p>Watching a Repository registers the user to receive notifications on new
 discussions, as well as events in the user’s activity feed.  See <a href="/v3/activity/starring">Repository
 Starring</a> for simple repository bookmarks.</p>
 
@@ -174,18 +176,31 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>PUT /repos/:owner/:repo/subscription
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>subscribed</dt>
-  <dd>
-<strong>boolean</strong> Determines if notifications should be received from this
-repository.</dd>
-  <dt>ignored</dt>
-  <dd>
-<strong>boolean</strong> Determines if all notifications should be blocked from this
-repository.</dd>
-</dl><h3 id="response-3">Response</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>subscribed</code></td>
+      <td><code>boolean</code></td>
+      <td>Determines if notifications should be received from this repository.</td>
+    </tr>
+    <tr>
+      <td><code>ignored</code></td>
+      <td><code>boolean</code></td>
+      <td>Determines if all notifications should be blocked from this repository.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -255,6 +270,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -317,7 +333,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

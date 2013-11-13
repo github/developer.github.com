@@ -49,7 +49,7 @@
 various activity streams on the site.</p>
 
 <ul id="markdown-toc">
-<li><a href="#list-public-events">List public events</a></li>
+  <li><a href="#list-public-events">List public events</a></li>
   <li><a href="#list-repository-events">List repository events</a></li>
   <li><a href="#list-issue-events-for-a-repository">List issue events for a repository</a></li>
   <li><a href="#list-public-events-for-a-network-of-repositories">List public events for a network of repositories</a></li>
@@ -59,7 +59,9 @@ various activity streams on the site.</p>
   <li><a href="#list-events-performed-by-a-user">List events performed by a user</a></li>
   <li><a href="#list-public-events-performed-by-a-user">List public events performed by a user</a></li>
   <li><a href="#list-events-for-an-organization">List events for an organization</a></li>
-</ul><p>Events are optimized for polling with the “ETag” header.  If no new events have
+</ul>
+
+<p>Events are optimized for polling with the “ETag” header.  If no new events have
 been triggered, you will see a “304 Not Modified” response, and your current
 rate limit will be untouched.  There is also an “X-Poll-Interval” header that
 specifies how often (in seconds) you are allowed to poll.  In times of high
@@ -132,6 +134,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="list-issue-events-for-a-repository">List issue events for a repository</h2>
 
+<p>Repository issue events have a different format than other events,
+as documented in the <a href="http://developer.github.com/v3/issues/events/">Issue Events API</a>.</p>
+
 <pre><code>GET /repos/:owner/:repo/issues/events
 </code></pre>
 
@@ -179,6 +184,7 @@ the user to view this.</p>
 
 <pre><code>GET /users/:user/events/orgs/:org
 </code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -241,7 +247,7 @@ the user to view this.</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

@@ -46,31 +46,51 @@
     	<h1 id="milestones-api">Milestones API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-milestones-for-a-repository">List milestones for a repository</a></li>
+  <li><a href="#list-milestones-for-a-repository">List milestones for a repository</a></li>
   <li><a href="#get-a-single-milestone">Get a single milestone</a></li>
   <li><a href="#create-a-milestone">Create a milestone</a></li>
   <li><a href="#update-a-milestone">Update a milestone</a></li>
   <li><a href="#delete-a-milestone">Delete a milestone</a></li>
-</ul><h2 id="list-milestones-for-a-repository">List milestones for a repository</h2>
+</ul>
+
+<h2 id="list-milestones-for-a-repository">List milestones for a repository</h2>
 
 <pre><code>GET /repos/:owner/:repo/milestones
 </code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>state</dt>
-  <dd>
-<code>open</code>, <code>closed</code>, default: <code>open</code>
-</dd>
-  <dt>sort</dt>
-  <dd>
-<code>due_date</code>, <code>completeness</code>, default: <code>due_date</code>
-</dd>
-  <dt>direction</dt>
-  <dd>
-<code>asc</code> or <code>desc</code>, default: <code>asc</code>.</dd>
-</dl><h3 id="response">Response</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>state</code></td>
+      <td><code>string</code></td>
+      <td>The state of the milestone. Either <code>open</code> or <code>closed</code>. Default: <code>open</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>sort</code></td>
+      <td><code>string</code></td>
+      <td>What to sort results by. Either <code>due_date</code> or <code>completeness</code>. Default: <code>due_date</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>direction</code></td>
+      <td><code>string</code></td>
+      <td>The direction of the sort. Either <code>asc</code> or <code>desc</code>. Default: <code>asc</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -136,26 +156,47 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input">Input</h3>
 
-<dl>
-<dt>title</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-  <dt>state</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - <code>open</code> or <code>closed</code>. Default is <code>open</code>.</dd>
-  <dt>description</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>due_on</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - ISO 8601 time.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>title</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The title of the milestone.</td>
+    </tr>
+    <tr>
+      <td><code>state</code></td>
+      <td><code>string</code></td>
+      <td>The state of the milestone. Either <code>open</code> or <code>closed</code>. Default: <code>open</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>description</code></td>
+      <td><code>string</code></td>
+      <td>A description of the milestone.</td>
+    </tr>
+    <tr>
+      <td><code>due_on</code></td>
+      <td><code>string</code></td>
+      <td>The milestone due date. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example">Example</h4>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open or closed"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="o">:</span> <span class="s2">"Time"</span>
+  <span class="s2">"due_on"</span><span class="o">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -191,26 +232,42 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input-1">Input</h3>
 
-<dl>
-<dt>number</dt>
-  <dd>
-<em>Required</em> <strong>integer</strong>
-</dd>
-  <dt>title</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>state</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - <code>open</code> or <code>closed</code>. Default is <code>open</code>.</dd>
-  <dt>description</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>due_on</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - ISO 8601 time.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>title</code></td>
+      <td><code>string</code></td>
+      <td>The title of the milestone.</td>
+    </tr>
+    <tr>
+      <td><code>state</code></td>
+      <td><code>string</code></td>
+      <td>The state of the milestone. Either <code>open</code> or <code>closed</code>. Default: <code>open</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>description</code></td>
+      <td><code>string</code></td>
+      <td>A description of the milestone.</td>
+    </tr>
+    <tr>
+      <td><code>due_on</code></td>
+      <td><code>string</code></td>
+      <td>The milestone due date. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example-1">Example</h4>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open or closed"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
@@ -252,6 +309,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -314,7 +372,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

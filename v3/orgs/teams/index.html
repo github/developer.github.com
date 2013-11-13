@@ -43,10 +43,10 @@
 	
   <div id="wrapper">
   	<div class="content">
-    	<h1 id="org-teams-api">Org Teams API</h1>
+    	<h1 id="organization-teams-api">Organization Teams API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-teams">List teams</a></li>
+  <li><a href="#list-teams">List teams</a></li>
   <li><a href="#get-team">Get team</a></li>
   <li><a href="#create-team">Create team</a></li>
   <li><a href="#edit-team">Edit team</a></li>
@@ -60,7 +60,9 @@
   <li><a href="#add-team-repo">Add team repo</a></li>
   <li><a href="#remove-team-repo">Remove team repo</a></li>
   <li><a href="#list-user-teams">List user teams</a></li>
-</ul><p>All actions against teams require at a minimum an authenticated user who
+</ul>
+
+<p>All actions against teams require at a minimum an authenticated user who
 is a member of the Owners team in the <code>:org</code> being managed. Additionally,
 OAuth users require “user” <a href="/v3/oauth/#scopes">scope</a>.</p>
 
@@ -117,31 +119,42 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /orgs/:org/teams
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>name</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-  <dt>repo_names</dt>
-  <dd>
-<em>Optional</em> <strong>array</strong> of <strong>strings</strong>
-</dd>
-  <dt>permission</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The name of the team.</td>
+    </tr>
+    <tr>
+      <td><code>repo_names</code></td>
+      <td>
+<code>array</code> of <code>strings</code>
+</td>
+      <td>The repositories to add the team to.</td>
+    </tr>
+    <tr>
+      <td><code>permission</code></td>
+      <td><code>string</code></td>
+      <td>The permission to grant the team. Can be one of:<br> * <code>pull</code> - team members can pull, but not push to or administer these repositories.<br> * <code>push</code> - team members can pull and push, but not administer these repositories.<br> * <code>admin</code> - team members can pull, push and administer these repositories.<br>Default: <code>pull</code>
+</td>
+    </tr>
+  </tbody>
+</table>
 
-    <p><code>pull</code> - team members can pull, but not push to or administer these
-repositories. <strong>Default</strong></p>
+<h4 id="example">Example</h4>
 
-    <p><code>push</code> - team members can pull and push, but not administer these
-repositories.</p>
-
-    <p><code>admin</code> - team members can pull, push and administer these
-repositories.</p>
-  </dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new team"</span><span class="p">,</span>
   <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"push"</span><span class="p">,</span>
   <span class="s2">"repo_names"</span><span class="o">:</span> <span class="p">[</span>
@@ -178,18 +191,35 @@ the org that the team is associated with.</p>
 <pre><code>PATCH /teams/:id
 </code></pre>
 
-<h3 id="input-1">Input</h3>
+<h3 id="parameters-1">Parameters</h3>
 
-<dl>
-<dt>name</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-  <dt>permission</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The name of the team.</td>
+    </tr>
+    <tr>
+      <td><code>permission</code></td>
+      <td><code>string</code></td>
+      <td>The permission to grant the team. Can be one of:<br> * <code>pull</code> - team members can pull, but not push to or administer these repositories.<br> * <code>push</code> - team members can pull and push, but not administer these repositories.<br> * <code>admin</code> - team members can pull, push and administer these repositories. Default: <code>pull</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example-1">Example</h4>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new team name"</span><span class="p">,</span>
   <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"push"</span>
 <span class="p">}</span></code></pre>
@@ -465,6 +495,8 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
+
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -527,7 +559,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

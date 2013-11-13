@@ -46,11 +46,13 @@
     	<h1 id="users-api">Users API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-a-single-user">Get a single user</a></li>
+  <li><a href="#get-a-single-user">Get a single user</a></li>
   <li><a href="#get-the-authenticated-user">Get the authenticated user</a></li>
   <li><a href="#update-the-authenticated-user">Update the authenticated user</a></li>
   <li><a href="#get-all-users">Get all users</a></li>
-</ul><p>Many of the resources on the users API provide a shortcut for getting
+</ul>
+
+<p>Many of the resources on the users API provide a shortcut for getting
 information about the currently authenticated user. If a request URL
 does not include a <code>:user</code> parameter then the response will be for the
 logged in user (and you must pass <a href="/v3/#authentication">authentication
@@ -141,37 +143,58 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>PATCH /user
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>name</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>email</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong> - Publicly visible email address.</dd>
-  <dt>blog</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>company</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>location</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-  <dt>hireable</dt>
-  <dd>
-<em>Optional</em> <strong>boolean</strong>
-</dd>
-  <dt>bio</dt>
-  <dd>
-<em>Optional</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>The new name of the user</td>
+    </tr>
+    <tr>
+      <td><code>email</code></td>
+      <td><code>string</code></td>
+      <td>Publicly visible email address.</td>
+    </tr>
+    <tr>
+      <td><code>blog</code></td>
+      <td><code>string</code></td>
+      <td>The new blog URL of the user.</td>
+    </tr>
+    <tr>
+      <td><code>company</code></td>
+      <td><code>string</code></td>
+      <td>The new company of the user.</td>
+    </tr>
+    <tr>
+      <td><code>location</code></td>
+      <td><code>string</code></td>
+      <td>The new location of the user.</td>
+    </tr>
+    <tr>
+      <td><code>hireable</code></td>
+      <td><code>boolean</code></td>
+      <td>The new hiring availability of the user.</td>
+    </tr>
+    <tr>
+      <td><code>bio</code></td>
+      <td><code>string</code></td>
+      <td>The new short biography of the user.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example">Example</h4>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"monalisa octocat"</span><span class="p">,</span>
   <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
   <span class="s2">"blog"</span><span class="o">:</span> <span class="s2">"https://github.com/blog"</span><span class="p">,</span>
@@ -232,12 +255,26 @@ users.</p>
 <pre><code>GET /users
 </code></pre>
 
-<h3 id="parameters">Parameters</h3>
+<h3 id="parameters-1">Parameters</h3>
 
-<dl>
-<dt>since</dt>
-  <dd>The integer ID of the last User that you’ve seen.</dd>
-</dl><h3 id="response-3">Response</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>since</code></td>
+      <td><code>string</code></td>
+      <td>The integer ID of the last User that you’ve seen.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -252,6 +289,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -314,7 +352,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

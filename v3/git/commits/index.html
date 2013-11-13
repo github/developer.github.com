@@ -46,9 +46,11 @@
     	<h1 id="commits-api">Commits API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-a-commit">Get a Commit</a></li>
+  <li><a href="#get-a-commit">Get a Commit</a></li>
   <li><a href="#create-a-commit">Create a Commit</a></li>
-</ul><h2 id="get-a-commit">Get a Commit</h2>
+</ul>
+
+<h2 id="get-a-commit">Get a Commit</h2>
 
 <pre><code>GET /repos/:owner/:repo/git/commits/:sha
 </code></pre>
@@ -92,45 +94,77 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>message</dt>
-  <dd>
-<em>String</em> of the commit message</dd>
-  <dt>tree</dt>
-  <dd>
-<em>String</em> of the SHA of the tree object this commit points to</dd>
-  <dt>parents</dt>
-  <dd>
-<em>Array</em> of the SHAs of the commits that were the parents of this
-commit.  If omitted or empty, the commit will be written as a root
-commit.  For a single parent, an array of one SHA should be provided,
-for a merge commit, an array of more than one should be provided.</dd>
-</dl><h3 id="optional-parameters">Optional Parameters</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>message</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The commit message</td>
+    </tr>
+    <tr>
+      <td><code>tree</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The SHA of the tree object this commit points to</td>
+    </tr>
+    <tr>
+      <td><code>parents</code></td>
+      <td>
+<code>array</code> of <code>string</code>s</td>
+      <td>
+<strong>Required</strong>. The SHAs of the commits that were the parents of this commit.  If omitted or empty, the commit will be written as a root commit.  For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="optional-parameters">Optional Parameters</h3>
+
+<p>You can provide an additional <code>commiter</code> parameter, which is a hash containing
+information about the committer. Or, you can provide an <code>author</code> parameter, which
+is a hash containing information about the author.</p>
 
 <p>The <code>committer</code> section is optional and will be filled with the <code>author</code>
 data if omitted. If the <code>author</code> section is omitted, it will be filled
 in with the authenticated user’s information and the current date.</p>
 
-<dl>
-<dt>author.name</dt>
-  <dd>
-<em>String</em> of the name of the author of the commit</dd>
-  <dt>author.email</dt>
-  <dd>
-<em>String</em> of the email of the author of the commit</dd>
-  <dt>author.date</dt>
-  <dd>
-<em>Timestamp</em> of when this commit was authored</dd>
-  <dt>committer.name</dt>
-  <dd>
-<em>String</em> of the name of the committer of the commit</dd>
-  <dt>committer.email</dt>
-  <dd>
-<em>String</em> of the email of the committer of the commit</dd>
-  <dt>committer.date</dt>
-  <dd>
-<em>Timestamp</em> of when this commit was committed</dd>
-</dl><h3 id="example-input">Example Input</h3>
+<p>Both the <code>author</code> and <code>commiter</code> parameters have the same keys:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>The name of the author (or commiter) of the commit</td>
+    </tr>
+    <tr>
+      <td><code>email</code></td>
+      <td><code>string</code></td>
+      <td>The email of the author (or commiter) of the commit</td>
+    </tr>
+    <tr>
+      <td><code>date</code></td>
+      <td><code>string</code></td>
+      <td>Indicates when this commit was authored (or committed). This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="example-input">Example Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
@@ -177,6 +211,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -239,7 +274,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

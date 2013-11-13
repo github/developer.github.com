@@ -46,14 +46,16 @@
     	<h1 id="issue-comments-api">Issue Comments API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-comments-on-an-issue">List comments on an issue</a></li>
+  <li><a href="#list-comments-on-an-issue">List comments on an issue</a></li>
   <li><a href="#list-comments-in-a-repository">List comments in a repository</a></li>
   <li><a href="#get-a-single-comment">Get a single comment</a></li>
   <li><a href="#create-a-comment">Create a comment</a></li>
   <li><a href="#edit-a-comment">Edit a comment</a></li>
   <li><a href="#delete-a-comment">Delete a comment</a></li>
   <li><a href="#custom-media-types">Custom media types</a></li>
-</ul><p>The Issue Comments API supports listing, viewing, editing, and creating
+</ul>
+
+<p>The Issue Comments API supports listing, viewing, editing, and creating
 comments on issues and pull requests.</p>
 
 <p>Issue Comments use <a href="#custom-media-types">these custom media types</a>.
@@ -100,18 +102,35 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>sort</dt>
-  <dd>
-<em>Optional</em> <strong>String</strong> <code>created</code> or <code>updated</code>
-</dd>
-  <dt>direction</dt>
-  <dd>
-<em>Optional</em> <strong>String</strong> <code>asc</code> or <code>desc</code>. Ignored without <code>sort</code> parameter.</dd>
-  <dt>since</dt>
-  <dd>
-<em>Optional</em> <strong>String</strong> of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ</dd>
-</dl><h3 id="response-1">Response</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sort</code></td>
+      <td><code>string</code></td>
+      <td>Either <code>created</code> or <code>updated</code>. Default: <code>created</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>direction</code></td>
+      <td><code>string</code></td>
+      <td>Either <code>asc</code> or <code>desc</code>. Ignored without the <code>sort</code> parameter.</td>
+    </tr>
+    <tr>
+      <td><code>since</code></td>
+      <td><code>string</code></td>
+      <td>Only comments updated at or after this time are returned. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -182,12 +201,25 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input">Input</h3>
 
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>body</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The contents of the comment.</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"a new comment"</span>
 <span class="p">}</span></code></pre>
 
@@ -221,12 +253,25 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input-1">Input</h3>
 
-<dl>
-<dt>body</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>body</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The contents of the comment.</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"body"</span><span class="o">:</span> <span class="s2">"String"</span>
 <span class="p">}</span></code></pre>
 
@@ -273,6 +318,7 @@ application/vnd.github.VERSION.text+json
 application/vnd.github.VERSION.html+json
 application/vnd.github.VERSION.full+json
 </code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -335,7 +381,7 @@ application/vnd.github.VERSION.full+json
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

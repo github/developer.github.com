@@ -46,12 +46,14 @@
     	<h1 id="search">Search</h1>
 
 <ul id="markdown-toc">
-<li><a href="#search-repositories">Search repositories</a></li>
+  <li><a href="#search-repositories">Search repositories</a></li>
   <li><a href="#search-code">Search code</a></li>
   <li><a href="#search-issues">Search issues</a></li>
   <li><a href="#search-users">Search users</a></li>
   <li><a href="#text-match-metadata">Text match metadata</a></li>
-</ul><h3 id="about-the-search-api">About the Search API</h3>
+</ul>
+
+<h3 id="about-the-search-api">About the Search API</h3>
 
 <p>The Search API is optimized to help you find the specific item you’re looking
 for (e.g., a specific user, a specific file in a repository, etc.). Think of it
@@ -75,51 +77,70 @@ determining your current rate limit status.</p>
 
 <h2 id="search-repositories">Search repositories</h2>
 
-<p>Find repositories via various criteria. (This method returns up to 100 results <a href="/v3/#pagination">per page</a>.)</p>
+<p>Find repositories via various criteria. This method returns up to 100 results <a href="/v3/#pagination">per page</a>.</p>
 
 <pre><code>GET /search/repositories
 </code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>q</dt>
-  <dd>The search terms. This can be any combination of the supported repository search parameters:
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>q</code></td>
+      <td><code>string</code></td>
+      <td>The search keywords, as well as any qualifiers.</td>
+    </tr>
+    <tr>
+      <td><code>sort</code></td>
+      <td><code>string</code></td>
+      <td>The sort field. One of <code>stars</code>, <code>forks</code>, or <code>updated</code>. Default: results are sorted by best match.</td>
+    </tr>
+    <tr>
+      <td><code>order</code></td>
+      <td><code>string</code></td>
+      <td>The sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>. Default: <code>desc</code>
+</td>
+    </tr>
+  </tbody>
+</table>
 
-    <ul>
-<li>
-<a href="https://help.github.com/articles/searching-repositories#search-in">Search In</a>
-Qualifies which fields are searched. With this qualifier you can restrict the
-search to just the repository name, description, readme, or
-any combination of these.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-repositories#size">Size</a>
- Finds repositories that match a certain size (in kilobytes).</li>
-      <li>
-<a href="https://help.github.com/articles/searching-repositories#forks">Forks</a>
- Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-repositories#created-and-last-updated">Created and Last Updated</a>
- Filters repositories based on times of creation, or when they were last updated.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-repositories#users-organizations-and-repositories">Users or Repositories</a>
- Limits searches to a specific user or repository.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-repositories#languages">Languages</a>
- Searches repositories based on the language they’re written in.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-repositories#stars">Stars</a>
- Searches repositories based on the number of stars.</li>
-    </ul>
-</dd>
-  <dt>sort</dt>
-  <dd>
-<em>Optional</em> Sort field. One of <code>stars</code>, <code>forks</code>, or <code>updated</code>. If not
-provided, results are sorted by best match.</dd>
-  <dt>order</dt>
-  <dd>
-<em>Optional</em> Sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>; the default is <code>desc</code>.</dd>
-</dl><h4 id="repository-search-example">Example</h4>
+<p>The <code>q</code> search term can also contain any combination of the supported repository search qualifiers:</p>
+
+<ul>
+  <li>
+<a href="https://help.github.com/articles/searching-repositories#search-in"><code>in</code></a>
+ Qualifies which fields are searched. With this qualifier you can restrict the
+ search to just the repository name, description, readme, or
+ any combination of these.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-repositories#size"><code>size</code></a>
+Finds repositories that match a certain size (in kilobytes).</li>
+  <li>
+<a href="https://help.github.com/articles/searching-repositories#forks"><code>forks</code></a>
+Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-repositories#created-and-last-updated"><code>created</code> or <code>pushed</code></a>
+Filters repositories based on times of creation, or when they were last updated.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-repositories#users-organizations-and-repositories"><code>user</code> or <code>repo</code></a>
+Limits searches to a specific user or repository.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-repositories#languages"><code>language</code></a>
+Searches repositories based on the language they’re written in.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-repositories#stars"><code>stars</code></a>
+Searches repositories based on the number of stars.</li>
+</ul>
+
+<h4 id="repository-search-example">Example</h4>
 
 <p>Suppose you want to search for popular Tetris repositories written in Assembly.
 Your query might look like this.</p>
@@ -242,44 +263,62 @@ included the search term.</p>
 
 <h3 id="parameters-1">Parameters</h3>
 
-<dl>
-<dt>q</dt>
-  <dd>The search terms. This can be any combination of the supported code search parameters:
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>q</code></td>
+      <td><code>string</code></td>
+      <td>The search terms.</td>
+    </tr>
+    <tr>
+      <td><code>sort</code></td>
+      <td><code>string</code></td>
+      <td>The sort field. Can only be <code>indexed</code>, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match.</td>
+    </tr>
+    <tr>
+      <td><code>order</code></td>
+      <td><code>string</code></td>
+      <td>The sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>. Default: <code>desc</code>
+</td>
+    </tr>
+  </tbody>
+</table>
 
-    <ul>
-<li>
-<a href="https://help.github.com/articles/searching-code#search-in">Search In</a>
-Qualifies which fields are searched. With this qualifier you can restrict the
-search to just the file contents, the file path, or both.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-code#language">Languages</a>
- Searches code based on the language it’s written in.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-code#forks">Forks</a>
- Filters repositories based on the number of forks, and/or whether code from forked repositories should be included in the results at all.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-code#size">Size</a>
- Finds files that match a certain size (in bytes).</li>
-      <li>
-<a href="https://help.github.com/articles/searching-code#path">Path</a>
- Specifies the path that the resulting file must be at.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-code#extension">Extension</a>
- Matches files with a certain extension.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">Users or Repositories</a>
- Limits searches to a specific user or repository.</li>
-    </ul>
-</dd>
-  <dt>sort</dt>
-  <dd>
-<em>Optional</em> Sort field. Can only be <code>indexed</code>, which indicates how recently
-a file has been indexed by the GitHub search infrastructure. If not
-provided, results are sorted by best match.</dd>
-  <dt>order</dt>
-  <dd>
-<em>Optional</em> Sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>; the default is <code>desc</code>.</dd>
-</dl><h4 id="code-search-example">Example</h4>
+<p>The <code>q</code> search term can also contain any combination of the supported code search qualifiers:</p>
+
+<ul>
+  <li>
+<a href="https://help.github.com/articles/searching-code#search-in"><code>in</code></a>
+ Qualifies which fields are searched. With this qualifier you can restrict the
+ search to just the file contents, the file path, or both.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-code#language"><code>language</code></a>
+Searches code based on the language it’s written in.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-code#forks"><code>forks</code></a>
+Filters repositories based on the number of forks, and/or whether code from forked repositories should be included in the results at all.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-code#size"><code>size</code></a>
+Finds files that match a certain size (in bytes).</li>
+  <li>
+<a href="https://help.github.com/articles/searching-code#path"><code>path</code></a>
+Specifies the path that the resulting file must be at.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-code#extension"><code>extension</code></a>
+Matches files with a certain extension.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories"><code>user</code> or <code>repo</code></a>
+  Limits searches to a specific user or repository.</li>
+</ul>
+
+<h4 id="code-search-example">Example</h4>
 
 <p>Suppose you want to find the definition of the <code>addClass</code> function inside
 <a href="https://github.com/jquery/jquery">jQuery</a>. Your query would look something like
@@ -441,59 +480,78 @@ included the search term.</p>
 
 <h3 id="parameters-2">Parameters</h3>
 
-<dl>
-<dt>q</dt>
-  <dd>The search terms. This can be any combination of the supported issue search parameters:
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>q</code></td>
+      <td><code>string</code></td>
+      <td>The search terms.</td>
+    </tr>
+    <tr>
+      <td><code>sort</code></td>
+      <td><code>string</code></td>
+      <td>The sort field. Can be <code>comments</code>, <code>created</code>, or <code>updated</code>. Default: results are sorted by best match.</td>
+    </tr>
+    <tr>
+      <td><code>order</code></td>
+      <td><code>string</code></td>
+      <td>The sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>. Default: <code>desc</code>
+</td>
+    </tr>
+  </tbody>
+</table>
 
-    <ul>
-<li>
-<a href="https://help.github.com/articles/searching-issues#search-in">Search In</a>
+<p>The <code>q</code> search term can also contain any combination of the supported issue search qualifiers:</p>
+
+<ul>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#search-in"><code>in</code></a>
 Qualifies which fields are searched. With this qualifier you can restrict the
 search to just the title, body, comments, or any combination of these.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#author">Author</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#author"><code>author</code></a>
 Finds issues created by a certain user.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#assignee">Assignee</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#assignee"><code>assignee</code></a>
 Finds issues that are assigned to a certain user.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#mentions">Mentions</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#mentions"><code>mentions</code></a>
 Finds issues that mention a certain user.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#commenter">Commenter</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#commenter"><code>commenter</code></a>
 Finds issues that a certain user commented on.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#involves">Involves</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#involves"><code>involves</code></a>
 Finds issues that were either created by a certain user, assigned to that
-user, mention that user, or were commented on by that user.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#state">State</a>
+  user, mention that user, or were commented on by that user.</li>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#state"><code>state</code></a>
 Filter issues based on whether they’re open or closed.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#labels">Labels</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#labels"><code>labels</code></a>
 Filters issues based on their labels.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#language">Language</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#language"><code>language</code></a>
 Searches for issues within repositories that match a certain language.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#created-and-last-updated">Created and Last Updated</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#created-and-last-updated"><code>created</code> or <code>updated</code></a>
 Filters issues based on times of creation, or when they were last updated.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#comments">Comments</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#comments"><code>comments</code></a>
 Filters issues based on the quantity of comments.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-issues#users-organizations-and-repositories">Users or Repositories</a>
+  <li>
+<a href="https://help.github.com/articles/searching-issues#users-organizations-and-repositories"><code>user</code> or <code>repo</code></a>
 Limits searches to a specific user or repository.</li>
-    </ul>
-</dd>
-  <dt>sort</dt>
-  <dd>
-<em>Optional</em> Sort field. One of <code>comments</code>, <code>created</code>, or <code>updated</code>. If not
-provided, results are sorted by best match.</dd>
-  <dt>order</dt>
-  <dd>
-<em>Optional</em> Sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>; the default is <code>desc</code>.</dd>
-</dl><h4 id="issue-search-example">Example</h4>
+</ul>
+
+<h4 id="issue-search-example">Example</h4>
 
 <p>Let’s say you want to find the oldest unresolved Python bugs on Windows. Your
 query might look something like this.</p>
@@ -639,41 +697,60 @@ on <a href="#text-match-metadata">text match metadata </a> for full details.)</p
 
 <h3 id="parameters-3">Parameters</h3>
 
-<dl>
-<dt>q</dt>
-  <dd>The search terms. This can be any combination of the supported user search parameters:
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>q</code></td>
+      <td><code>string</code></td>
+      <td>The search terms.</td>
+    </tr>
+    <tr>
+      <td><code>sort</code></td>
+      <td><code>string</code></td>
+      <td>The sort field. Can be <code>followers</code>, <code>repositories</code>, or <code>joined</code>.  Default: results are sorted by best match.</td>
+    </tr>
+    <tr>
+      <td><code>order</code></td>
+      <td><code>string</code></td>
+      <td>The sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>. Default: <code>desc</code>
+</td>
+    </tr>
+  </tbody>
+</table>
 
-    <ul>
-<li>
-<a href="https://help.github.com/articles/searching-users#search-in">Search In</a>
+<p>The <code>q</code> search term can also contain any combination of the supported user search qualifiers:</p>
+
+<ul>
+  <li>
+<a href="https://help.github.com/articles/searching-users#search-in"><code>in</code></a>
 Qualifies which fields are searched. With this qualifier you can restrict
 the search to just the username, public email, full name, or any
 combination of these.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-users#repository-count">Repository count</a>
+  <li>
+<a href="https://help.github.com/articles/searching-users#repository-count"><code>repos</code></a>
 Filters users based on the number of repositories they have.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-users#location">Location</a>
+  <li>
+<a href="https://help.github.com/articles/searching-users#location"><code>location</code></a>
 Filter users by the location indicated in their profile.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-users#language">Language</a>
+  <li>
+<a href="https://help.github.com/articles/searching-users#language"><code>language</code></a>
 Search for users that have repositories that match a certain language.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-users#created">Created</a>
+  <li>
+<a href="https://help.github.com/articles/searching-users#created"><code>created</code></a>
 Filter users based on when they joined.</li>
-      <li>
-<a href="https://help.github.com/articles/searching-users#followers">Followers</a>
+  <li>
+<a href="https://help.github.com/articles/searching-users#followers"><code>followers</code></a>
 Filter users based on the number of followers they have.</li>
-    </ul>
-</dd>
-  <dt>sort</dt>
-  <dd>
-<em>Optional</em> Sort field. One of <code>followers</code>, <code>repositories</code>, or <code>joined</code>. If not
-provided, results are sorted by best match.</dd>
-  <dt>order</dt>
-  <dd>
-<em>Optional</em> Sort order if <code>sort</code> parameter is provided. One of <code>asc</code> or <code>desc</code>; the default is <code>desc</code>.</dd>
-</dl><h4 id="user-search-example">Example</h4>
+</ul>
+
+<h4 id="user-search-example">Example</h4>
 
 <p>Imagine you’re looking for a list of popular users. You might try out this query:</p>
 
@@ -785,20 +862,38 @@ in your Accept header.</p>
 key called <code>text_matches</code>. Inside the <code>text_matches</code> array, each hash includes
 the following attributes:</p>
 
-<dl>
-<dt>object_url</dt>
-  <dd>The URL for the resource that contains a string property matching one of the search terms.</dd>
-  <dt>object_type</dt>
-  <dd>The name for the type of resource that exists at the given <code>object_url</code>.</dd>
-  <dt>property</dt>
-  <dd>The name of a property of the resource that exists at <code>object_url</code>.
-That property is a string that matches one of the search terms.
-(In the JSON returned from <code>object_url</code>, the full content for the <code>fragment</code> will be found in the property with this name.)</dd>
-  <dt>fragment</dt>
-  <dd>A subset of the value of <code>property</code>. This is the text fragment that matches one or more of the search terms.</dd>
-  <dt>matches</dt>
-  <dd>An array of one or more search terms that are present in <code>fragment</code>. The indices (i.e., “offsets”) are relative to the fragment. (They are not relative to the <em>full</em> content of <code>property</code>.)</dd>
-</dl><h3 id="example">Example</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>object_url</code></td>
+      <td>The URL for the resource that contains a string property matching one of the search terms.</td>
+    </tr>
+    <tr>
+      <td><code>object_type</code></td>
+      <td>The name for the type of resource that exists at the given <code>object_url</code>.</td>
+    </tr>
+    <tr>
+      <td><code>property</code></td>
+      <td>The name of a property of the resource that exists at <code>object_url</code>. That property is a string that matches one of the search terms. (In the JSON returned from <code>object_url</code>, the full content for the <code>fragment</code> will be found in the property with this name.)</td>
+    </tr>
+    <tr>
+      <td><code>fragment</code></td>
+      <td>A subset of the value of <code>property</code>. This is the text fragment that matches one or more of the search terms.</td>
+    </tr>
+    <tr>
+      <td><code>matches</code></td>
+      <td>An array of one or more search terms that are present in <code>fragment</code>. The indices (i.e., “offsets”) are relative to the fragment. (They are not relative to the <em>full</em> content of <code>property</code>.)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="example">Example</h3>
 
 <p>Using curl, and the <a href="#issue-search-example">example issue search</a> above, our API
 request would look like this:</p>
@@ -860,6 +955,7 @@ within that fragment.</p>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -922,7 +1018,7 @@ within that fragment.</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

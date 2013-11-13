@@ -46,7 +46,7 @@
     	<h1 id="labels-api">Labels API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-all-labels-for-this-repository">List all labels for this repository</a></li>
+  <li><a href="#list-all-labels-for-this-repository">List all labels for this repository</a></li>
   <li><a href="#get-a-single-label">Get a single label</a></li>
   <li><a href="#create-a-label">Create a label</a></li>
   <li><a href="#update-a-label">Update a label</a></li>
@@ -57,7 +57,9 @@
   <li><a href="#replace-all-labels-for-an-issue">Replace all labels for an issue</a></li>
   <li><a href="#remove-all-labels-from-an-issue">Remove all labels from an issue</a></li>
   <li><a href="#get-labels-for-every-issue-in-a-milestone">Get labels for every issue in a milestone</a></li>
-</ul><h2 id="list-all-labels-for-this-repository">List all labels for this repository</h2>
+</ul>
+
+<h2 id="list-all-labels-for-this-repository">List all labels for this repository</h2>
 
 <pre><code>GET /repos/:owner/:repo/labels
 </code></pre>
@@ -98,17 +100,33 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /repos/:owner/:repo/labels
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>name</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-  <dt>color</dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - 6 character hex code, without a leading <code>#</code>.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The name of the label.</td>
+    </tr>
+    <tr>
+      <td><code>color</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>.  A 6 character hex code, without the leading <code>#</code>, identifying the color.</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"API"</span><span class="p">,</span>
   <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"FFFFFF"</span>
 <span class="p">}</span></code></pre>
@@ -131,17 +149,33 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>PATCH /repos/:owner/:repo/labels/:name
 </code></pre>
 
-<h3 id="input-1">Input</h3>
+<h3 id="parameters-1">Parameters</h3>
 
-<dl>
-<dt>name</dt>
-  <dd>
-<em>Required</em> <strong>string</strong>
-</dd>
-  <dt>color</dt>
-  <dd>
-<em>Required</em> <strong>string</strong> - 6 character hex code, without a leading <code>#</code>.</dd>
-</dl><pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The name of the label.</td>
+    </tr>
+    <tr>
+      <td><code>color</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>.  A 6 character hex code, without the leading <code>#</code>, identifying the color.</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"API"</span><span class="p">,</span>
   <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"FFFFFF"</span>
 <span class="p">}</span></code></pre>
@@ -193,7 +227,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /repos/:owner/:repo/issues/:number/labels
 </code></pre>
 
-<h3 id="input-2">Input</h3>
+<h3 id="input">Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="s2">"Label1"</span><span class="p">,</span>
@@ -230,7 +264,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>PUT /repos/:owner/:repo/issues/:number/labels
 </code></pre>
 
-<h3 id="input-3">Input</h3>
+<h3 id="input-1">Input</h3>
 
 <pre class="highlight"><code class="language-javascript"><span class="p">[</span>
   <span class="s2">"Label1"</span><span class="p">,</span>
@@ -282,6 +316,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -344,7 +379,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

@@ -46,12 +46,14 @@
     	<h1 id="repository-starring-api">Repository Starring API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-stargazers">List Stargazers</a></li>
+  <li><a href="#list-stargazers">List Stargazers</a></li>
   <li><a href="#list-repositories-being-starred">List repositories being starred</a></li>
   <li><a href="#check-if-you-are-starring-a-repository">Check if you are starring a repository</a></li>
   <li><a href="#star-a-repository">Star a repository</a></li>
   <li><a href="#unstar-a-repository">Unstar a repository</a></li>
-</ul><p>Repository Starring is a feature that lets users bookmark repositories.  Stars
+</ul>
+
+<p>Repository Starring is a feature that lets users bookmark repositories.  Stars
 are shown next to repositories to show an approximate level of interest.  Stars
 have no effect on notifications or the activity feed.  For that, see <a href="/v3/activity/watching">Repository
 Watching</a>.</p>
@@ -111,15 +113,31 @@ GET /user/watched
 
 <h3 id="parameters">Parameters</h3>
 
-<dl>
-<dt>sort</dt>
-  <dd>
-<em>Optional</em> <strong>String</strong> One of <code>created</code> (when the repository was starred) or
-<code>updated</code> (when it was last pushed to). Default: <code>created</code>.</dd>
-  <dt>direction</dt>
-  <dd>
-<em>Optional</em> <strong>String</strong> One of <code>asc</code> or <code>desc</code>. Default: <code>desc</code>.</dd>
-</dl><h3 id="response-1">Response</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sort</code></td>
+      <td><code>string</code></td>
+      <td>One of <code>created</code> (when the repository was starred) or <code>updated</code> (when it was last pushed to). Default: <code>created</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>direction</code></td>
+      <td><code>string</code></td>
+      <td>One of <code>asc</code> (ascending) or <code>desc</code> (descending). Default: <code>desc</code>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -216,6 +234,7 @@ DELETE /user/watched/:owner/:repo
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -278,7 +297,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Orgs</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>

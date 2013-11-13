@@ -22,42 +22,30 @@ title: Git Commits | GitHub API
 
 ### Parameters
 
-message
-: _String_ of the commit message
+Name | Type | Description 
+-----|------|--------------
+`message`|`string` | **Required**. The commit message
+`tree`|`string` | **Required**. The SHA of the tree object this commit points to
+`parents`|`array` of `string`s| **Required**. The SHAs of the commits that were the parents of this commit.  If omitted or empty, the commit will be written as a root commit.  For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided.
 
-tree
-: _String_ of the SHA of the tree object this commit points to
-
-parents
-: _Array_ of the SHAs of the commits that were the parents of this
-commit.  If omitted or empty, the commit will be written as a root
-commit.  For a single parent, an array of one SHA should be provided,
-for a merge commit, an array of more than one should be provided.
 
 ### Optional Parameters
+
+You can provide an additional `commiter` parameter, which is a hash containing
+information about the committer. Or, you can provide an `author` parameter, which
+is a hash containing information about the author.
 
 The `committer` section is optional and will be filled with the `author`
 data if omitted. If the `author` section is omitted, it will be filled
 in with the authenticated user's information and the current date.
 
+Both the `author` and `commiter` parameters have the same keys:
 
-author.name
-: _String_ of the name of the author of the commit
-
-author.email
-: _String_ of the email of the author of the commit
-
-author.date
-: _Timestamp_ of when this commit was authored
-
-committer.name
-: _String_ of the name of the committer of the commit
-
-committer.email
-: _String_ of the email of the committer of the commit
-
-committer.date
-: _Timestamp_ of when this commit was committed
+Name | Type | Description 
+-----|------|-------------
+`name`|`string` | The name of the author (or commiter) of the commit
+`email`|`string` | The email of the author (or commiter) of the commit
+`date`|`string` | Indicates when this commit was authored (or committed). This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Example Input
 

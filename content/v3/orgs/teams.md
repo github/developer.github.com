@@ -2,7 +2,7 @@
 title: Organization Teams | GitHub API
 ---
 
-# Org Teams API
+# Organization Teams API
 
 * TOC
 {:toc}
@@ -36,25 +36,15 @@ In order to create a team, the authenticated user must be an owner of
 
     POST /orgs/:org/teams
 
-### Input
+### Parameters
 
-name
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`name`|`string` | **Required**. The name of the team.
+`repo_names`|`array` of `strings` | The repositories to add the team to.
+`permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
 
-repo\_names
-: _Optional_ **array** of **strings**
-
-permission
-: _Optional_ **string**
-
-  `pull` - team members can pull, but not push to or administer these
-  repositories. **Default**
-
-  `push` - team members can pull and push, but not administer these
-  repositories.
-
-  `admin` - team members can pull, push and administer these
-  repositories.
+#### Example
 
 <%= json \
   :name => 'new team',
@@ -73,13 +63,14 @@ the org that the team is associated with.
 
     PATCH /teams/:id
 
-### Input
+### Parameters
 
-name
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`name`|`string` | **Required**. The name of the team.
+`permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
 
-permission
-: _Optional_ **string**
+#### Example
 
 <%= json \
   :name => 'new team name',

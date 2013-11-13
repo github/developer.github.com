@@ -62,7 +62,7 @@ addition to the username and password). The `:2fa-type` in this header indicates
 whether the account receives its two-factor authentication codes via SMS or via
 an application.
 
-In additon to the Basic Authentication credentials, you must send the user's
+In addition to the Basic Authentication credentials, you must send the user's
 authentication code (i.e., one-time password) in the `X-GitHub-OTP` header.
 Because these authentication codes expire quickly, we recommend using the
 Authorizations API to [create an access token][create-access] and using that

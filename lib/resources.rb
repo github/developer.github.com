@@ -1132,7 +1132,9 @@ module GitHub
     GIST_FILE = {
       "size"     => 932,
       "filename" => "ring.erl",
-      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
+      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+      "type"     => "text/plain",
+      "language" => "Erlang"
     }
 
     GIST = {
@@ -1151,7 +1153,7 @@ module GitHub
     }
 
     FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
-    FULL_GIST['files'].merge('ring.erl' => GIST_FILE.merge('content' => 'contents of gist'))
+    FULL_GIST["files"] = GIST_FILE.merge({'content' => 'contents of gist'})
 
     GIST_COMMENT = {
       "id"         => 1,

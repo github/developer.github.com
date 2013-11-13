@@ -36,33 +36,21 @@ a new tree out.
 
 ### Parameters
 
-base_tree
-: optional _String_ of the SHA1 of the tree you want to update with new data.
-If you don't set this, the commit will be created on top of everything,
-however, it will only contain your change, the rest of your files will show up
-as deleted.
+Name | Type | Description 
+-----|------|--------------
+`tree`|`array` of `hash`es | **Required**. Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure
+`base_tree`| `string` | The SHA1 of the tree you want to update with new data. If you don't set this, the commit will be created on top of everything; however, it will only contain your change, the rest of your files will show up as deleted.
 
-tree
-: _Array_ of _Hash_ objects (of `path`, `mode`, `type` and `sha`) specifying a
-tree structure
+The `tree` parameter takes the following keys:
 
-tree.path
-: _String_ of the file referenced in the tree
+Name | Type | Description 
+-----|------|--------------
+`path`|`string`| The file referenced in the tree
+`mode`|`string`| The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink
+`type`| `string`| Either `blob`, `tree`, or `commit`
+`sha`|`string`| The SHA1 checksum ID of the object in the tree
+`content`|`string` | The content you want this file to have. GitHub will write this blob out and use that SHA for this entry.  Use either this, or `tree.sha`.
 
-tree.mode
-: _String_ of the file mode - one of `100644` for file (blob), `100755` for
-executable (blob), `040000` for subdirectory (tree), `160000` for submodule
-(commit) or `120000` for a blob that specifies the path of a symlink
-
-tree.type
-: _String_ of `blob`, `tree`, `commit`
-
-tree.sha
-: _String_ of SHA1 checksum ID of the object in the tree
-
-tree.content
-: _String_ of content you want this file to have - GitHub will write this blob
-out and use that SHA for this entry.  Use either this or `tree.sha`
 
 ### Input
 

@@ -31,38 +31,36 @@ determining your current rate limit status.
 
 ## Search repositories
 
-Find repositories via various criteria. (This method returns up to 100 results [per page](/v3/#pagination).)
+Find repositories via various criteria. This method returns up to 100 results [per page](/v3/#pagination).
 
     GET /search/repositories
 
 ### Parameters
 
-q
-: The search terms. This can be any combination of the supported repository search parameters:
+Name | Type | Description 
+-----|------|--------------
+`q`|`string`| The search keywords, as well as any qualifiers.
+`sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.
+`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-   * [Search In](https://help.github.com/articles/searching-repositories#search-in)
-     Qualifies which fields are searched. With this qualifier you can restrict the
-     search to just the repository name, description, readme, or
-     any combination of these.
-   * [Size](https://help.github.com/articles/searching-repositories#size)
-      Finds repositories that match a certain size (in kilobytes).
-   * [Forks](https://help.github.com/articles/searching-repositories#forks)
-      Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.
-   * [Created and Last Updated](https://help.github.com/articles/searching-repositories#created-and-last-updated)
-      Filters repositories based on times of creation, or when they were last updated.
-   * [Users or Repositories](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)
-      Limits searches to a specific user or repository.
-   * [Languages](https://help.github.com/articles/searching-repositories#languages)
-      Searches repositories based on the language they're written in.
-   * [Stars](https://help.github.com/articles/searching-repositories#stars)
-      Searches repositories based on the number of stars.
+The `q` search term can also contain any combination of the supported repository search qualifiers:
 
-sort
-: _Optional_ Sort field. One of `stars`, `forks`, or `updated`. If not
-provided, results are sorted by best match.
-
-order
-: _Optional_ Sort order if `sort` parameter is provided. One of `asc` or `desc`; the default is `desc`.
+* [`in`](https://help.github.com/articles/searching-repositories#search-in)
+ Qualifies which fields are searched. With this qualifier you can restrict the
+ search to just the repository name, description, readme, or
+ any combination of these.
+* [`size`](https://help.github.com/articles/searching-repositories#size)
+  Finds repositories that match a certain size (in kilobytes).
+* [`forks`](https://help.github.com/articles/searching-repositories#forks)
+  Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.
+* [`created` or `pushed`](https://help.github.com/articles/searching-repositories#created-and-last-updated)
+  Filters repositories based on times of creation, or when they were last updated.
+* [`user` or `repo`](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)
+  Limits searches to a specific user or repository.
+* [`language`](https://help.github.com/articles/searching-repositories#languages)
+  Searches repositories based on the language they're written in.
+* [`stars`](https://help.github.com/articles/searching-repositories#stars)
+  Searches repositories based on the number of stars.
 
 <h4 id="repository-search-example">Example</h4>
 
@@ -112,32 +110,29 @@ Find file contents via various criteria. (This method returns up to 100 results 
 
 ### Parameters
 
-q
-: The search terms. This can be any combination of the supported code search parameters:
+Name | Type | Description 
+-----|------|--------------
+`q`|`string`| The search terms.
+`sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match.
+`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-   * [Search In](https://help.github.com/articles/searching-code#search-in)
-     Qualifies which fields are searched. With this qualifier you can restrict the
-     search to just the file contents, the file path, or both.
-   * [Languages](https://help.github.com/articles/searching-code#language)
-      Searches code based on the language it's written in.
-   * [Forks](https://help.github.com/articles/searching-code#forks)
-      Filters repositories based on the number of forks, and/or whether code from forked repositories should be included in the results at all.
-   * [Size](https://help.github.com/articles/searching-code#size)
-      Finds files that match a certain size (in bytes).
-   * [Path](https://help.github.com/articles/searching-code#path)
-      Specifies the path that the resulting file must be at.
-   * [Extension](https://help.github.com/articles/searching-code#extension)
-      Matches files with a certain extension.
-   * [Users or Repositories](https://help.github.com/articles/searching-code#users-organizations-and-repositories)
-      Limits searches to a specific user or repository.
+The `q` search term can also contain any combination of the supported code search qualifiers:
 
-sort
-: _Optional_ Sort field. Can only be `indexed`, which indicates how recently
-a file has been indexed by the GitHub search infrastructure. If not
-provided, results are sorted by best match.
-
-order
-: _Optional_ Sort order if `sort` parameter is provided. One of `asc` or `desc`; the default is `desc`.
+* [`in`](https://help.github.com/articles/searching-code#search-in)
+ Qualifies which fields are searched. With this qualifier you can restrict the
+ search to just the file contents, the file path, or both.
+* [`language`](https://help.github.com/articles/searching-code#language)
+  Searches code based on the language it's written in.
+* [`forks`](https://help.github.com/articles/searching-code#forks)
+  Filters repositories based on the number of forks, and/or whether code from forked repositories should be included in the results at all.
+* [`size`](https://help.github.com/articles/searching-code#size)
+  Finds files that match a certain size (in bytes).
+* [`path`](https://help.github.com/articles/searching-code#path)
+  Specifies the path that the resulting file must be at.
+* [`extension`](https://help.github.com/articles/searching-code#extension)
+  Matches files with a certain extension.
+* [`user` or `repo`](https://help.github.com/articles/searching-code#users-organizations-and-repositories)
+    Limits searches to a specific user or repository.
 
 <h4 id="code-search-example">Example</h4>
 
@@ -186,42 +181,41 @@ Find issues by state and keyword. (This method returns up to 100 results [per pa
 
 ### Parameters
 
-q
-: The search terms. This can be any combination of the supported issue search parameters:
+Name | Type | Description 
+-----|------|--------------
+`q`|`string`| The search terms.
+`sort`|`string`| The sort field. Can be `comments`, `created`, or `updated`. Default: results are sorted by best match.
+`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-   * [Search In](https://help.github.com/articles/searching-issues#search-in)
-     Qualifies which fields are searched. With this qualifier you can restrict the
-     search to just the title, body, comments, or any combination of these.
-   * [Author](https://help.github.com/articles/searching-issues#author)
-     Finds issues created by a certain user.
-   * [Assignee](https://help.github.com/articles/searching-issues#assignee)
-     Finds issues that are assigned to a certain user.
-   * [Mentions](https://help.github.com/articles/searching-issues#mentions)
-     Finds issues that mention a certain user.
-   * [Commenter](https://help.github.com/articles/searching-issues#commenter)
-     Finds issues that a certain user commented on.
-   * [Involves](https://help.github.com/articles/searching-issues#involves)
-     Finds issues that were either created by a certain user, assigned to that
+The `q` search term can also contain any combination of the supported issue search qualifiers:
+
+ * [`in`](https://help.github.com/articles/searching-issues#search-in)
+   Qualifies which fields are searched. With this qualifier you can restrict the
+   search to just the title, body, comments, or any combination of these.
+ * [`author`](https://help.github.com/articles/searching-issues#author)
+   Finds issues created by a certain user.
+ * [`assignee`](https://help.github.com/articles/searching-issues#assignee)
+   Finds issues that are assigned to a certain user.
+ * [`mentions`](https://help.github.com/articles/searching-issues#mentions)
+   Finds issues that mention a certain user.
+ * [`commenter`](https://help.github.com/articles/searching-issues#commenter)
+   Finds issues that a certain user commented on.
+ * [`involves`](https://help.github.com/articles/searching-issues#involves)
+   Finds issues that were either created by a certain user, assigned to that
      user, mention that user, or were commented on by that user.
-   * [State](https://help.github.com/articles/searching-issues#state)
-     Filter issues based on whether they're open or closed.
-   * [Labels](https://help.github.com/articles/searching-issues#labels)
-     Filters issues based on their labels.
-   * [Language](https://help.github.com/articles/searching-issues#language)
-     Searches for issues within repositories that match a certain language.
-   * [Created and Last Updated](https://help.github.com/articles/searching-issues#created-and-last-updated)
-     Filters issues based on times of creation, or when they were last updated.
-   * [Comments](https://help.github.com/articles/searching-issues#comments)
-     Filters issues based on the quantity of comments.
-   * [Users or Repositories](https://help.github.com/articles/searching-issues#users-organizations-and-repositories)
-     Limits searches to a specific user or repository.
+ * [`state`](https://help.github.com/articles/searching-issues#state)
+   Filter issues based on whether they're open or closed.
+ * [`labels`](https://help.github.com/articles/searching-issues#labels)
+   Filters issues based on their labels.
+ * [`language`](https://help.github.com/articles/searching-issues#language)
+   Searches for issues within repositories that match a certain language.
+ * [`created` or `updated`](https://help.github.com/articles/searching-issues#created-and-last-updated)
+   Filters issues based on times of creation, or when they were last updated.
+ * [`comments`](https://help.github.com/articles/searching-issues#comments)
+   Filters issues based on the quantity of comments.
+ * [`user` or `repo`](https://help.github.com/articles/searching-issues#users-organizations-and-repositories)
+   Limits searches to a specific user or repository.
 
-sort
-: _Optional_ Sort field. One of `comments`, `created`, or `updated`. If not
-provided, results are sorted by best match.
-
-order
-: _Optional_ Sort order if `sort` parameter is provided. One of `asc` or `desc`; the default is `desc`.
 
 <h4 id="issue-search-example">Example</h4>
 
@@ -270,30 +264,28 @@ Find users via various criteria. (This method returns up to 100 results [per pag
 
 ### Parameters
 
-q
-: The search terms. This can be any combination of the supported user search parameters:
+Name | Type | Description 
+-----|------|--------------
+`q`|`string`| The search terms.
+`sort`|`string`| The sort field. Can be `followers`, `repositories`, or `joined`.  Default: results are sorted by best match.
+`order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-   * [Search In](https://help.github.com/articles/searching-users#search-in)
-     Qualifies which fields are searched. With this qualifier you can restrict
-     the search to just the username, public email, full name, or any
-     combination of these.
-   * [Repository count](https://help.github.com/articles/searching-users#repository-count)
-     Filters users based on the number of repositories they have.
-   * [Location](https://help.github.com/articles/searching-users#location)
-     Filter users by the location indicated in their profile.
-   * [Language](https://help.github.com/articles/searching-users#language)
-     Search for users that have repositories that match a certain language.
-   * [Created](https://help.github.com/articles/searching-users#created)
-     Filter users based on when they joined.
-   * [Followers](https://help.github.com/articles/searching-users#followers)
-     Filter users based on the number of followers they have.
+The `q` search term can also contain any combination of the supported user search qualifiers:
 
-sort
-: _Optional_ Sort field. One of `followers`, `repositories`, or `joined`. If not
-provided, results are sorted by best match.
-
-order
-: _Optional_ Sort order if `sort` parameter is provided. One of `asc` or `desc`; the default is `desc`.
+ * [`in`](https://help.github.com/articles/searching-users#search-in)
+   Qualifies which fields are searched. With this qualifier you can restrict
+   the search to just the username, public email, full name, or any
+   combination of these.
+ * [`repos`](https://help.github.com/articles/searching-users#repository-count)
+   Filters users based on the number of repositories they have.
+ * [`location`](https://help.github.com/articles/searching-users#location)
+   Filter users by the location indicated in their profile.
+ * [`language`](https://help.github.com/articles/searching-users#language)
+   Search for users that have repositories that match a certain language.
+ * [`created`](https://help.github.com/articles/searching-users#created)
+   Filter users based on when they joined.
+ * [`followers`](https://help.github.com/articles/searching-users#followers)
+   Filter users based on the number of followers they have.
 
 <h4 id="user-search-example">Example</h4>
 
@@ -349,22 +341,14 @@ The results will provide the same JSON payloads as shown above, with an extra
 key called `text_matches`. Inside the `text_matches` array, each hash includes
 the following attributes:
 
-object_url
-: The URL for the resource that contains a string property matching one of the search terms.
 
-object_type
-: The name for the type of resource that exists at the given `object_url`.
-
-property
-: The name of a property of the resource that exists at `object_url`.
-  That property is a string that matches one of the search terms.
-  (In the JSON returned from `object_url`, the full content for the `fragment` will be found in the property with this name.)
-
-fragment
-: A subset of the value of `property`. This is the text fragment that matches one or more of the search terms.
-
-matches
-: An array of one or more search terms that are present in `fragment`. The indices (i.e., "offsets") are relative to the fragment. (They are not relative to the _full_ content of `property`.)
+Name | Description
+-----|-----------|
+`object_url` | The URL for the resource that contains a string property matching one of the search terms.
+`object_type` | The name for the type of resource that exists at the given `object_url`.
+`property` | The name of a property of the resource that exists at `object_url`. That property is a string that matches one of the search terms. (In the JSON returned from `object_url`, the full content for the `fragment` will be found in the property with this name.)
+`fragment` | A subset of the value of `property`. This is the text fragment that matches one or more of the search terms.
+`matches` | An array of one or more search terms that are present in `fragment`. The indices (i.e., "offsets") are relative to the fragment. (They are not relative to the _full_ content of `property`.)
 
 ### Example
 

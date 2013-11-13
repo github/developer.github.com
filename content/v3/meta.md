@@ -15,11 +15,9 @@ This gives some information about GitHub.com, the service.
 
 ### Body
 
-hooks
-: An Array of IP addresses in CIDR format specifying the addresses that incoming
-service hooks will originate from.  Subscribe to the [API Changes blog](http://developer.github.com/changes/)
-or follow [@GitHubAPI](https://twitter.com/GitHubAPI) on Twitter to get
-updated when this list changes.
+Name | Type | Description
+-----|------|--------------
+`hooks`|`array` of `strings` | An Array of IP addresses in CIDR format specifying the addresses that incoming service hooks will originate from.  Subscribe to the [API Changes blog](http://developer.github.com/changes/) or follow [@GitHubAPI](https://twitter.com/GitHubAPI) on Twitter to get updated when this list changes.
+`git`|`array` of `strings` | An Array of IP addresses in CIDR format specifying the Git servers at GitHub.
 
-git
-: An Array of IP addresses in CIDR format specifying the Git servers at GitHub.
+

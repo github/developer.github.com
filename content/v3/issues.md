@@ -28,28 +28,14 @@ List all issues for a given organization for the authenticated user:
 
 ### Parameters
 
-filter
-: * `assigned`: Issues assigned to you (default)
-  * `created`: Issues created by you
-  * `mentioned`: Issues mentioning you
-  * `subscribed`: Issues you're subscribed to updates for
-  * `all`: All issues the authenticated user can see, regardless of participation or creation
-
-state
-: `open`, `closed`, default: `open`
-
-labels
-: _String_ list of comma separated Label names.  Example:
-`bug,ui,@high`
-
-sort
-: `created`, `updated`, `comments`, default: `created`.
-
-direction
-: `asc` or `desc`, default: `desc`.
-
-since
-: _Optional_ **string** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.
+Name | Type | Description 
+-----|------|--------------
+`filter`|`string`| Indicates which sorts of issues to return. Can be one of:<br/>* `assigned`: Issues assigned to you<br/>* `created`: Issues created by you<br/>* `mentioned`: Issues mentioning you<br/>* `subscribed`: Issues you're subscribed to updates for<br/>* `all`: All issues the authenticated user can see, regardless of participation or creation<br/> Default: `assigned`
+`state`|`string`| Indicates the state of the issues to return. Can be either `open` or `closed`. Default: `open`
+`labels`|`string`| A list of comma separated label names.  Example: `bug,ui,@high`
+`sort`|`string`|  What to sort results by. Can be either `created`, `updated`, `comments`. Default: `created`
+`direction`|`string`| The direction of the sort. Can be either `asc` or `desc`. Default: `desc`
+`since`|`string` | Only issues updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Response
 
@@ -62,37 +48,17 @@ since
 
 ### Parameters
 
-milestone
-: * _Integer_ Milestone number
-  * `none` for Issues with no Milestone.
-  * `*` for Issues with any Milestone.
-
-state
-: `open`, `closed`, default: `open`
-
-assignee
-: * _String_ User login
-  * `none` for Issues with no assigned User.
-  * `*` for Issues with any assigned User.
-
-creator
-: _String_ User login.
-
-mentioned
-: _String_ User login.
-
-labels
-: _String_ list of comma separated Label names.  Example:
-`bug,ui,@high`
-
-sort
-: `created`, `updated`, `comments`, default: `created`
-
-direction
-: `asc` or `desc`, default: `desc`.
-
-since
-: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ. Only issues updated at or after this time are returned.
+Name | Type | Description 
+-----|------|--------------
+`filter`|`integer` or `string`| If an `integer` is passed, it should refer to a milestone number. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. Default: `*`
+`state`|`string`| Indicates the state of the issues to return. Can be either `open` or `closed`. Default: `open`
+`assignee`|`string`| Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. Default: `*`
+`creator`|`string`| The user that created the issue.
+`mentioned`|`string`| A user that's mentioned in the issue.
+`labels`|`string`| A list of comma separated label names.  Example: `bug,ui,@high`
+`sort`|`string`|  What to sort results by. Can be either `created`, `updated`, `comments`. Default: `created`
+`direction`|`string`| The direction of the sort. Can be either `asc` or `desc`. Default: `desc`
+`since`|`string` |Only issues updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Response
 
@@ -114,30 +80,17 @@ Any user with pull access to a repository can create an issue.
 
     POST /repos/:owner/:repo/issues
 
-### Input
+### Parameters
 
-title
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`title`|`string` | **Required**. The title of the issue.
+`body`|`string` | The contents of the issue.
+`assignee`|`string` | Login for the user that this issue should be assigned to. _NOTE: Only users with push access can set the assignee for new issues. The assignee is silently dropped otherwise._
+`milestone`|`number` | Milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
+`labels`|`array` of `strings` | Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
 
-body
-: _Optional_ **string**
-
-assignee
-: _Optional_ **string** - Login for the user that this issue should be
-assigned to. _NOTE: Only users with push access can set the assignee for new
-issues. The assignee is silently dropped otherwise._
-
-
-milestone
-: _Optional_ **number** - Milestone to associate this issue with. _NOTE: Only
-users with push access can set the milestone for new issues. The milestone is
-silently dropped otherwise._
-
-
-labels
-: _Optional_ **array** of **strings** - Labels to associate with this
-issue. _NOTE: Only users with push access can set labels for new issues. Labels are
-silently dropped otherwise._
+#### Example
 
 <%= json \
   :title     => "Found a bug",
@@ -160,28 +113,19 @@ Issue owners and users with push access can edit an issue.
 
     PATCH /repos/:owner/:repo/issues/:number
 
-### Input
+### Parameters
 
-title
-: _Optional_ **string**
+Name | Type | Description 
+-----|------|--------------
+`title`|`string` | **Required**. The title of the issue.
+`body`|`string` | The contents of the issue.
+`assignee`|`string` | Login for the user that this issue should be assigned to.
+`state`|`string` | State of the issue. Either `open` or `closed`.
+`milestone`|`number` | Milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
+`labels`|`array` of `strings` | Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
 
-body
-: _Optional_ **string**
 
-assignee
-: _Optional_ **string** - Login for the user that this issue should be
-assigned to.
-
-state
-: _Optional_ **string** - State of the issue: `open` or `closed`.
-
-milestone
-: _Optional_ **number** - Milestone to associate this issue with.
-
-labels
-: _Optional_ **array** of **strings** - Labels to associate with this
-issue. Pass one or more Labels to _replace_ the set of Labels on this
-Issue. Send an empty array (`[]`) to clear all Labels from the Issue.
+#### Example
 
 <%= json \
   :title     => "Found a bug",

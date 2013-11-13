@@ -47,7 +47,4 @@ dreams with the current rate limit (but don't worry, we'll help you out).
 
 When we send events to your server, we attempt to negotiate either SSL version 2 or 3.
 If your server requires a specific SSL version and does not support SSL negotiation,
-you can specify a specific version within the [WebHook's config block](http://developer.github.com/v3/repos/hooks/#edit-a-hook).
-
-`ssl`
-  : *Optional* **integer** - Supports either `2` or `3`. It defaults to SSL negotiation.
+you can specify a specific version within the [WebHook's config block](http://developer.github.com/v3/repos/hooks/#edit-a-hook). Include a parameter called `ssl`, with a value of either `2` or `3`.

@@ -1164,7 +1164,8 @@ module GitHub
       "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
-      "created_at"   => "2010-04-14T02:15:15Z"
+      "created_at"   => "2010-04-14T02:15:15Z",
+      "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
     FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)

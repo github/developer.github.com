@@ -1464,6 +1464,18 @@ module GitHub
       "description" => "Deploy request from hubot",
     }
 
+    DEPLOYMENT_STATUS = {
+      "id" => 1,
+      "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
+      "state" => "success",
+      "creator" => USER,
+      "payload" => JSON.dump({:environment => 'production'}),
+      "target_url" => "https://gist.github.com/628b2736d379f",
+      "created_at" => "2012-07-20T01:19:13Z",
+      "updated_at" => "2012-07-20T01:19:13Z",
+      "description" => "Deploy request from hubot",
+    }
+
     STATUS = {
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",

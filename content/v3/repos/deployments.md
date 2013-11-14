@@ -13,6 +13,10 @@ listen for and act on. This enables developers and organizations to build
 tooling around deployments without having to worry about implementation details
 of delivering different types of applications(web,native).
 
+Note that the `repo:deployment` [OAuth scope](/v3/oauth/#scopes) grants targeted
+access to Deployments **without** also granting access to repo code, while the
+`repo` scope grants permission to code as well.
+
 ## List Deployments for a Repository
 
 Users with pull access can view deployments for a repository:
@@ -71,3 +75,8 @@ Name | Type | Description
       :Location =>
 'https://api.github.com/repos/octocat/example/deployments/1' %>
 <%= json :deployment %>
+
+## Updating a Deployment
+
+Once a deployment is created it can not be updated. Information relating to the
+success or failure of a deployment is handled through [Deployment Statuses](/v3/repos/deployment_statuses/).

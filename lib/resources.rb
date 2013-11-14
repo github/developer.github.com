@@ -1137,7 +1137,7 @@ module GitHub
     GIST_FORKS = {
       "forks" => [
         {
-          "user" => USER,
+          "user" => FULL_USER,
           "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
           "created_at" => "2011-04-14T16:00:49Z"
         }
@@ -1152,10 +1152,12 @@ module GitHub
 
     GIST = {
       "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+      "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
+      "commits_url"  => "https://api.github.com/gists/#{SecureRandom.hex(10)}/commits",
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
-      "user"         => USER,
+      "user"         => FULL_USER,
       "files"        => { "ring.erl" => GIST_FILE },
       "comments"     => 0,
       "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
@@ -1172,7 +1174,7 @@ module GitHub
       "id"         => 1,
       "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
-      "user"       => USER,
+      "user"       => FULL_USER,
       "created_at" => "2011-04-18T23:23:56Z"
     }
 

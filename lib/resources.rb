@@ -1453,6 +1453,17 @@ module GitHub
       },
     ]
 
+    DEPLOYMENT = {
+      "id" => 1,
+      "ref" => "topic-branch",
+      "url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "creator" => USER,
+      "payload" => JSON.dump({:environment => 'production'}),
+      "created_at" => "2012-07-20T01:19:13Z",
+      "updated_at" => "2012-07-20T01:19:13Z",
+      "description" => "Deploy request from hubot",
+    }
+
     STATUS = {
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",

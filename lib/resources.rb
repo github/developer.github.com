@@ -1151,7 +1151,9 @@ module GitHub
         {
           "user" => USER,
           "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "created_at" => "2011-04-14T16:00:49Z"
+          "id" => 1,
+          "created_at" => "2011-04-14T16:00:49Z",
+          "updated_at" => "2011-04-14T16:00:49Z"
         }
       ]
     }
@@ -1188,7 +1190,8 @@ module GitHub
       "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
-      "created_at" => "2011-04-18T23:23:56Z"
+      "created_at" => "2011-04-18T23:23:56Z",
+      "updated_at" => "2011-04-18T23:23:56Z"
     }
 
     TREE = {

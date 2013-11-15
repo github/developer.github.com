@@ -51,26 +51,26 @@
   <li><a href="#implementing-persistent-authentication">Implementing “persistent” authentication</a></li>
 </ul>
 
-<p>In this section, we’re going to focus on the basics of authentication. Specifically, 
-we’re going to create a Ruby server (using <a href="http://www.sinatrarb.com/">Sinatra</a>) that implements 
-the <a href="http://developer.github.com/v3/oauth/#web-application-flow">web flow</a> of an application in several different ways.</p>
+<p>In this section, we’re going to focus on the basics of authentication. Specifically,
+we’re going to create a Ruby server (using <a href="http://www.sinatrarb.com/">Sinatra</a>) that implements
+the <a href="/v3/oauth/#web-application-flow">web flow</a> of an application in several different ways.</p>
 
 <p>Note: you can download the complete source code for this project <a href="https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication">from the platform-samples repo</a>.</p>
 
 <h2 id="registering-your-app">Registering your app</h2>
 
 <p>First, you’ll need to <a href="https://github.com/settings/applications/new">register your
-application</a>. Every 
-registered OAuth application is assigned a unique Client ID and Client Secret. 
+application</a>. Every
+registered OAuth application is assigned a unique Client ID and Client Secret.
 The Client Secret should not be shared! That includes checking the string
 into your repository.</p>
 
-<p>You can fill out every piece of information however you like, except the 
-<strong>Authorization callback URL</strong>. This is easily the most important piece to setting 
-up your application. It’s the callback URL that GitHub returns the user to after 
+<p>You can fill out every piece of information however you like, except the
+<strong>Authorization callback URL</strong>. This is easily the most important piece to setting
+up your application. It’s the callback URL that GitHub returns the user to after
 successful authentication.</p>
 
-<p>Since we’re running a regular Sinatra server, the location of the local instance 
+<p>Since we’re running a regular Sinatra server, the location of the local instance
 is set to <code>http://localhost:4567</code>. Let’s fill in the callback URL as <code>http://localhost:4567/callback</code>.</p>
 
 <h2 id="accepting-user-authorization">Accepting user authorization</h2>
@@ -88,7 +88,7 @@ get '/' do
 end
 </code></pre>
 
-<p>Your client ID and client secret keys come from <a href="https://github.com/settings/applications">your application’s configuration page</a>. You should <strong>never, <em>ever</em></strong> store these values in 
+<p>Your client ID and client secret keys come from <a href="https://github.com/settings/applications">your application’s configuration page</a>. You should <strong>never, <em>ever</em></strong> store these values in
 GitHub–or any other public place, for that matter. We recommend storing them as
 <a href="http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables">environment variables</a>–which is exactly what we’ve done here.</p>
 
@@ -100,24 +100,24 @@ GitHub–or any other public place, for that matter. We recommend storing them a
   &lt;body&gt;
     &lt;p&gt;Well, hello there!&lt;/p&gt;
     &lt;p&gt;We're going to now talk to the GitHub API. Ready? &lt;a href="https://github.com/login/oauth/authorize?client_id=&lt;%= client_id %&gt;"&gt;Click here&lt;/a&gt; to begin!&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;If that link doesn't work, remember to provide your own &lt;a href="http://developer.github.com/v3/oauth/#web-application-flow"&gt;Client ID&lt;/a&gt;!&lt;/p&gt;
+    &lt;p&gt;If that link doesn't work, remember to provide your own &lt;a href="/v3/oauth/#web-application-flow"&gt;Client ID&lt;/a&gt;!&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
 
 <p>(If you’re unfamiliar with how Sinatra works, we recommend <a href="http://sinatra-book.gittr.com/#hello_world_application">reading the Sinatra guide</a>.)</p>
 
-<p>Obviously, you’ll want to change <code>&lt;your_client_id&gt;</code> to match your actual Client ID. </p>
+<p>Obviously, you’ll want to change <code>&lt;your_client_id&gt;</code> to match your actual Client ID.</p>
 
-<p>Navigate your browser to <code>http://localhost:4567</code>. After clicking on the link, you 
+<p>Navigate your browser to <code>http://localhost:4567</code>. After clicking on the link, you
 should be taken to GitHub, and presented with a dialog that looks something like this:<br />
 <img src="/images/oauth_prompt.png" alt="" /></p>
 
-<p>If you trust yourself, click <strong>Authorize App</strong>. Wuh-oh! Sinatra spits out a 
+<p>If you trust yourself, click <strong>Authorize App</strong>. Wuh-oh! Sinatra spits out a
 <code>404</code> error. What gives?!</p>
 
 <p>Well, remember when we specified a Callback URL to be <code>callback</code>? We didn’t provide
-a route for it, so GitHub doesn’t know where to drop the user after they authorize 
+a route for it, so GitHub doesn’t know where to drop the user after they authorize
 the app. Let’s fix that now!</p>
 
 <h3 id="providing-a-callback">Providing a callback</h3>
@@ -140,10 +140,10 @@ end
 </code></pre>
 
 <p>After a successful app authentication, GitHub provides a temporary <code>code</code> value.
-You’ll need to <code>POST</code> this code back to GitHub in exchange for an <code>access_token</code>. 
+You’ll need to <code>POST</code> this code back to GitHub in exchange for an <code>access_token</code>.
 To simplify our GET and POST HTTP requests, we’re using the <a href="https://github.com/archiloque/rest-client">rest-client</a>.
-Note that you’ll probably never access the API through REST. For a more serious 
-application, you should probably use <a href="http://developer.github.com/v3/libraries/">a library written in the language of your choice</a>.</p>
+Note that you’ll probably never access the API through REST. For a more serious
+application, you should probably use <a href="/libraries/">a library written in the language of your choice</a>.</p>
 
 <p>At last, with this access token, you’ll be able to make authenticated requests as
 the logged in user:</p>
@@ -164,12 +164,12 @@ erb :basic, :locals =&gt; {:auth_result =&gt; auth_result}
 <h2 id="implementing-persistent-authentication">Implementing “persistent” authentication</h2>
 
 <p>It’d be a pretty bad model if we required users to log into the app every single
-time they needed to access the web page. For example, try navigating directly to 
+time they needed to access the web page. For example, try navigating directly to
 <code>http://localhost:4567/basic</code>. You’ll get an error.</p>
 
 <p>What if we could circumvent the entire
 “click here” process, and just <em>remember</em> that, as long as the user’s logged into
-GitHub, they should be able to access this application? Hold on to your hat, 
+GitHub, they should be able to access this application? Hold on to your hat,
 because <em>that’s exactly what we’re going to do</em>.</p>
 
 <p>Our little server above is rather simple. In order to wedge in some intelligent
@@ -212,7 +212,7 @@ module Example
         authenticate!
       else
         access_token = github_user["token"]
-        auth_result = RestClient.get("https://api.github.com/user", {:params =&gt; {:access_token =&gt; access_token, :accept =&gt; :json}, 
+        auth_result = RestClient.get("https://api.github.com/user", {:params =&gt; {:access_token =&gt; access_token, :accept =&gt; :json},
                                                                                   :accept =&gt; :json})
 
         auth_result = JSON.parse(auth_result)
@@ -233,14 +233,14 @@ module Example
 end
 </code></pre>
 
-<p>Much of the code should look familiar. For example, we’re still using <code>RestClient.get</code> 
+<p>Much of the code should look familiar. For example, we’re still using <code>RestClient.get</code>
 to call out to the GitHub API, and we’re still passing our results to be rendered
 in an ERB template (this time, it’s called <code>advanced.erb</code>). Some of the other
 details–like turning our app into a class that inherits from <code>Sinatra::Base</code>–are a result
 of inheriting from <code>sinatra/auth/github</code>, which is written as <a href="http://www.sinatrarb.com/extensions.html">a Sinatra extension</a>.</p>
 
 <p>Also, we now have a <code>github_user</code> object, which comes from <code>sinatra-auth-github</code>. The
-<code>token</code> key represents the same <code>access_token</code> we used during our simple server. </p>
+<code>token</code> key represents the same <code>access_token</code> we used during our simple server.</p>
 
 <p><code>sinatra-auth-github</code> comes with quite a few options that you can customize. Here,
 we’re establishing them through the <code>:github_options</code> symbol. Passing your client ID

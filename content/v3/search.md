@@ -124,8 +124,9 @@ The `q` search term can also contain any combination of the supported code searc
 * [`language`](https://help.github.com/articles/searching-code#language)
   Searches code based on the language it's written in.
 * [`fork`](https://help.github.com/articles/searching-code#forks)
-  Specifies that code from forks only should be searched. Note that only forks
-  with more stars than the repositories they were forked from will be searched.
+  Specifies that code from forked repositories should be searched. Repository
+  forks will not be searchable unless the fork has more stars than the parent 
+  repository.
 * [`size`](https://help.github.com/articles/searching-code#size)
   Finds files that match a certain size (in bytes).
 * [`path`](https://help.github.com/articles/searching-code#path)

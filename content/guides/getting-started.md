@@ -444,7 +444,7 @@ responses don't count against your [rate limit][rate-limiting].
 
 
 
-[wrappers]: http://developer.github.com/v3/libraries/
+[wrappers]: http://developer.github.com/libraries/
 [curl]: http://curl.haxx.se/
 [media types]: http://developer.github.com/v3/media/
 [oauth]: http://developer.github.com/v3/oauth/

@@ -240,7 +240,7 @@ available as a separate project.
 [about env vars]: http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables
 [Sinatra guide]: http://sinatra-book.gittr.com/#hello_world_application
 [REST Client]: https://github.com/archiloque/rest-client
-[libraries]: http://developer.github.com/v3/libraries/
+[libraries]: http://developer.github.com/libraries/
 [rack guide]: http://en.wikipedia.org/wiki/Rack_(web_server_interface)
 [sinatra auth github]: https://github.com/atmos/sinatra_auth_github
 [sinatra extension]: http://www.sinatrarb.com/extensions.html

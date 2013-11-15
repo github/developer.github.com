@@ -125,7 +125,7 @@ The `q` search term can also contain any combination of the supported code searc
   Searches code based on the language it's written in.
 * [`fork`](https://help.github.com/articles/searching-code#forks)
   Specifies that code from forked repositories should be searched. Repository
-  forks will not be searchable unless the fork has more stars than the parent 
+  forks will not be searchable unless the fork has more stars than the parent
   repository.
 * [`size`](https://help.github.com/articles/searching-code#size)
   Finds files that match a certain size (in bytes).
@@ -191,6 +191,8 @@ Name | Type | Description
 
 The `q` search term can also contain any combination of the supported issue search qualifiers:
 
+ * [`type`](https://help.github.com/articles/searching-issues#type)
+   With this qualifier you can restrict the search to issues or pull request only.
  * [`in`](https://help.github.com/articles/searching-issues#search-in)
    Qualifies which fields are searched. With this qualifier you can restrict the
    search to just the title, body, comments, or any combination of these.
@@ -274,6 +276,9 @@ Name | Type | Description
 
 The `q` search term can also contain any combination of the supported user search qualifiers:
 
+ * [`type`](https://help.github.com/articles/searching-users#type)
+   With this qualifier you can restrict the search to just personal accounts or
+   just organization accounts.
  * [`in`](https://help.github.com/articles/searching-users#search-in)
    Qualifies which fields are searched. With this qualifier you can restrict
    the search to just the username, public email, full name, or any

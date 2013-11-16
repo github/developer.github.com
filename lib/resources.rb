@@ -493,16 +493,21 @@ module GitHub
       "files" => [FILE],
     }
 
-    PULL_COMMENT = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
-      "id"         => 1,
-      "body"       => "Great stuff",
-      "path"       => "file1.txt",
-      "position"   => 4,
-      "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
-      "user"       => USER,
-      "created_at" => "2011-04-14T16:00:49Z",
-      "updated_at" => "2011-04-14T16:00:49Z",
+	PULL_COMMENT = {
+      "url"                => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
+      "id"                 => 1,
+	  "diff_hunk"          => "@@ -16,33 +16,40 @@ public class Connection : IConnection...",
+	  "path"               => "file1.txt",
+	  "position"           => 1,
+	  "original_position"  => 4,
+	  "commit_id"          => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+	  "original_commit_id" => "9c48853fa3dc5c1c3d6f1f1cd1f2743e72652840",
+	  "user"               => USER,
+      "body"               => "Great stuff",
+      "created_at"         => "2011-04-14T16:00:49Z",
+      "updated_at"         => "2011-04-14T16:00:49Z",
+	  "html_url"           => "https://github.com/octocat/Hello-World/pull/1#discussion-diff-1",
+	  "pull_request_url"   => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
       "_links" => {
         "self" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"},

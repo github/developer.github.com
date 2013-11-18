@@ -109,7 +109,19 @@ module GitHub
       "id"           => 1,
       "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
       "gravatar_id"  => "somehexcode",
-      "url"          => "https://api.github.com/users/octocat"
+      "url"          => "https://api.github.com/users/octocat",
+      "html_url"     => "https://github.com/octocat",
+      "followers_url" => "https://api.github.com/users/octocat/followers",
+      "following_url" => "https://api.github.com/users/octocat/following{/other_user}",
+      "gists_url"    => "https://api.github.com/users/octocat/gists{/gist_id}",
+      "starred_url"  => "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+      "subscriptions_url" => "https://api.github.com/users/octocat/subscriptions",
+      "organizations_url" => "https://api.github.com/users/octocat/orgs",
+      "repos_url"    => "https://api.github.com/users/octocat/repos",
+      "events_url"   => "https://api.github.com/users/octocat/events{/privacy}",
+      "received_events_url" => "https://api.github.com/users/octocat/received_events",
+      "type"         => "User",
+      "site_admin"   => false
     }
 
     CONTRIBUTOR = USER.merge({
@@ -130,7 +142,7 @@ module GitHub
       "following"    => 0,
       "html_url"     => "https://github.com/octocat",
       "created_at"   => "2008-01-14T04:33:35Z",
-      "type"         => "User"
+      "updated_at"   => "2008-01-14T04:33:35Z"
     })
 
     PRIVATE_USER = FULL_USER.merge({
@@ -1124,7 +1136,9 @@ module GitHub
         {
           "user" => USER,
           "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "created_at" => "2011-04-14T16:00:49Z"
+          "id" => 1,
+          "created_at" => "2011-04-14T16:00:49Z",
+          "updated_at" => "2011-04-14T16:00:49Z"
         }
       ]
     }
@@ -1139,6 +1153,8 @@ module GitHub
 
     GIST = {
       "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+      "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
+      "commits_url"  => "https://api.github.com/gists/#{SecureRandom.hex(10)}/commits",
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
@@ -1149,7 +1165,8 @@ module GitHub
       "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
-      "created_at"   => "2010-04-14T02:15:15Z"
+      "created_at"   => "2010-04-14T02:15:15Z",
+      "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
     FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
@@ -1160,7 +1177,8 @@ module GitHub
       "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
-      "created_at" => "2011-04-18T23:23:56Z"
+      "created_at" => "2011-04-18T23:23:56Z",
+      "updated_at" => "2011-04-18T23:23:56Z"
     }
 
     TREE = {

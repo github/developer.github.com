@@ -59,8 +59,10 @@ many flavors</h1>
 
 ## Haskell
 
+* [github][haskell-github]
 * [Haskell GitHub API][haskell]
 
+[haskell-github]: https://github.com/fpco/GitHub
 [haskell]: https://github.com/dmnpignaud/haskell-github-api
 
 ## Java

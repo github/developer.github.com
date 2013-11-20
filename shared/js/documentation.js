@@ -99,5 +99,13 @@ $(function() {
       $('.api-status').html(link);
     }
   });
+  
+  // Add link anchors for headers with IDs
+  $(".content h1, .content h2, .content h3, .content h4").each(function(e){
+    var id = $(this).attr("id");
+    if (!id) return;
+    
+    $(this).prepend("<a class='header-anchor' href='#" + id + "'></a>");
+  });
 
 });

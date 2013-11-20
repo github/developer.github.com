@@ -77,12 +77,45 @@ h1 {
 	-webkit-backface-visibility: hidden;
 	font-size: 36px;
 	margin: 0em 0 0.5em;
+	position: relative;
+}
+
+.header-anchor {
+  position: absolute;
+  left: -32px;
+  top: 0;
+  opacity: 0;
+  padding: 0 10px;
+  height: 100%;
+  width: 20px;
+  font: normal normal 16px octicons;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  color: #333;
+  
+  -webkit-transition: opacity 0.3s ease-in-out 0s;
+  -moz-transition: opacity 0.3s ease-in-out 0s;
+  -ms-transition: opacity 0.3s ease-in-out 0s;
+}
+
+h1 .header-anchor {
+  line-height: 55px;
+}
+
+.content h1:hover .header-anchor, .content h2:hover .header-anchor, .content h3:hover .header-anchor, .content h4:hover .header-anchor, .header-anchor:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.header-anchor:before {
+  content:'\f05c';
 }
 
 h2 {
   font-size: 16px;
   color: #333;
   margin: 2em auto 1em;
+  position: relative;
 }
 
 .library-list h1 {
@@ -137,6 +170,11 @@ h3 {
   font-size: 14px;
   color: #333;
   margin: 1.5em 0 .5em;
+  position: relative;
+}
+
+h4 {
+  position: relative;
 }
 
 h5 {

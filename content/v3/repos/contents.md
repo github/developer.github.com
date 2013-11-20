@@ -270,6 +270,6 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball > octokit.tar.gz
 
 [READMEs](#get-the-readme), [files](#get-contents), and [symlinks](#get-contents) support the following custom media type.
 
-    application/vnd.github.VERSION.raw
+    application/vnd.github.v3.raw
 
 You can read more about the use of media types in the API [here](/v3/media/).

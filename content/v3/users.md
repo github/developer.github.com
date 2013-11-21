@@ -13,7 +13,10 @@ does not include a `:user` parameter then the response will be for the
 logged in user (and you must pass [authentication
 information](/v3/#authentication) with your request).
 
-## Get a single user
+Note: The returned email is the user's publicly visible email address
+(or `null` if the user has not [specified a public email address in their profile](https://github.com/settings/profile)).
+
+## Get a single user by their username
 
     GET /users/:user
 
@@ -22,8 +25,14 @@ information](/v3/#authentication) with your request).
 <%= headers 200 %>
 <%= json :full_user %>
 
-Note: The returned email is the user's publicly visible email address
-(or `null` if the user has not [specified a public email address in their profile](https://github.com/settings/profile)).
+## Get a single user by their numeric user ID
+
+    GET /user/:user
+
+### Response
+
+<%= headers 200 %>
+<%= json :full_user %>
 
 ## Get the authenticated user
 

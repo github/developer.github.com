@@ -24,7 +24,7 @@ $(function() {
       }
 
   // bind every href with a hash; take a look at v3/search/ for example
-  $('#js-sidebar .js-topic a[href*=#]').bind("click", function(e) {
+  $('#js-sidebar .js-accordion-list .js-topic a[href*=#]').bind("click", function(e) {
     if (window.location.toString().indexOf($(e.target).attr('href')) == -1)
       setTimeout(styleTOC, 0); // trigger the window.location change, then stylize
   });

@@ -36,29 +36,22 @@ Comments are ordered by ascending ID.
 
 ### Input
 
-sha
-: _Required_ **string** - SHA of the commit to comment on.
-
-body
-: _Required_ **string**
-
-path
-: _Optional_ **string** - Relative path of the file to comment on.
-
-position
-: _Optional_ **number** - Line index in the diff to comment on.
-
-line
-: _Optional_ **number** - Line number in the file to comment on. Defaults to 1.
+Name | Type | Description 
+-----|------|--------------
+`sha`|`string` | **Required**. The SHA of the commit to comment on.
+`body`|`string` | **Required**. The contents of the comment.
+`path`|`string` | Relative path of the file to comment on.
+`position`|`number` | Line index in the diff to comment on.
+`line`|`number` | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on.
 
 
 #### Example
 
 <%= json \
   :body      => 'Nice change',
-  :line      => 1,
   :path      => 'file1.txt',
-  :position  => 4
+  :position  => 4,
+  :line      => nil
 %>
 
 ### Response
@@ -81,8 +74,10 @@ line
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The contents of the comment
+
 
 #### Example
 

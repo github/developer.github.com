@@ -85,8 +85,8 @@ and token to the `Octokit::Client` constructor:
     end
 
 Let's do something interesting with the data about our repositories. We're going
-to see the different programming languages they use, and count which ones are used 
-most often. To do that, we'll first need a list of our repositories from the API. 
+to see the different programming languages they use, and count which ones are used
+most often. To do that, we'll first need a list of our repositories from the API.
 With Octokit, that looks like this:
 
     repos = client.repositories

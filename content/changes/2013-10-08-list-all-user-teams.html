@@ -1,0 +1,42 @@
+---
+kind: change
+title: List all teams for the authenticated user
+created_at: 2013-10-08
+author_name: pengwynn
+---
+
+We just added a [new API method](/v3/orgs/teams/#list-user-teams) to list all
+the teams for the authenticated user across all organizations:
+
+<pre class="terminal">
+$ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
+
+[
+  {
+    "name": "Testing",
+    "id": 396018,
+    "slug": "testing",
+    "permission": "pull",
+    "url": "https://api.github.com/teams/396018",
+    "members_url": "https://api.github.com/teams/396018/members{/member}",
+    "repositories_url": "https://api.github.com/teams/396018/repos",
+    "members_count": 1,
+    "repos_count": 0,
+    "organization": {
+      "login": "dotfiles",
+      "id": 1593590,
+      "url": "https://api.github.com/orgs/dotfiles",
+      "repos_url": "https://api.github.com/orgs/dotfiles/repos",
+      "events_url": "https://api.github.com/orgs/dotfiles/events",
+      "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",
+      "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"
+    }
+  },
+  ...
+]
+</pre>
+
+As always, if you have any questions or feedback, please [drop us a line][contact].
+
+[contact]: https://github.com/contact?form[subject]=API+-+Listing+Teams+for+User

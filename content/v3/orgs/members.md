@@ -2,7 +2,7 @@
 title: Organization Members | GitHub API
 ---
 
-# Org Members API
+# Organization Members API
 
 * TOC
 {:toc}
@@ -89,6 +89,9 @@ publicized or not.
 <%= headers 404 %>
 
 ## Publicize a user's membership
+
+The user can publicize their own membership.
+(A user cannot publicize the membership for another user.)
 
     PUT /orgs/:org/public_members/:user
 

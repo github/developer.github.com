@@ -2,24 +2,36 @@
 $(function() {
   var activeItem,
       helpList = $('#js-sidebar .js-topic'),
-      firstOccurance = true
+      firstOccurance = true,
+      styleTOC = function() {
+        var pathRegEx = /\/\/[^\/]+(\/.+)/g,
+            docUrl = pathRegEx.exec(window.location.toString())
+        if (docUrl){
+          $('#js-sidebar .js-topic a').each(function(){
+            if ($(this).parent('li').hasClass('disable'))
+              $(this).parent('li').removeClass('disable')
+            
+            var url = $(this).attr('href').toString()
+            var cleanDocUrl = docUrl[1]
+            if(url.indexOf(cleanDocUrl) >= 0 && url.length == cleanDocUrl.length){
+              $(this).parent('li').addClass('disable')
+              var parentTopic = $(this).parentsUntil('div.sidebar-module > ul').last()
+              parentTopic.addClass('js-current')
+              parentTopic.find('.js-expand-btn').toggleClass('collapsed expanded')
+            }
+          });
+        }
+      }
+
+  // bind every href with a hash; take a look at v3/search/ for example
+  $('#js-sidebar .js-topic a[href*=#]').bind("click", function(e) {
+    if (window.location.toString().indexOf($(e.target).attr('href')) == -1)
+      setTimeout(styleTOC, 0); // trigger the window.location change, then stylize
+  });
 
   // hide list items at startup
   if($('body.api') && window.location){
-    var reg = /\/\/[^\/]+(\/.+)/g,
-        docUrl = reg.exec(window.location.toString())
-    if(docUrl){
-      $('#js-sidebar .js-topic a').each(function(){
-        var url = $(this).attr('href').toString()
-        var cleanDocUrl = docUrl[1].split('#')[0]
-        if(url.indexOf(cleanDocUrl) >= 0 && url.length == cleanDocUrl.length){
-          $(this).parent('li').addClass('disable')
-          var parentTopic = $(this).parentsUntil('div.sidebar-module > ul').last()
-          parentTopic.addClass('js-current')
-          parentTopic.find('.js-expand-btn').toggleClass('collapsed expanded')
-        }
-      })
-    }
+    styleTOC();
   }
 
   $('#js-sidebar .js-topic').each(function(){
@@ -38,7 +50,7 @@ $(function() {
     var clickedTopic = $(this).parents('.js-topic'),
         topicGuides  = clickedTopic.find('.js-guides li')
     $(this).toggleClass('collapsed expanded')
-    topicGuides.toggle(100)
+    topicGuides.slideToggle(100)
     return false
   })
 
@@ -50,13 +62,13 @@ $(function() {
 
     if(activeItem != clickedTopic.index()){
       if(helpList.eq(activeItem)){
-        helpList.eq(activeItem).find('.js-guides li').toggle(100)
+        helpList.eq(activeItem).find('.js-guides li').slideToggle(100)
       }
       activeItem = clickedTopic.index()
-      topicGuides.toggle(100)
+      topicGuides.slideToggle(100)
     } else {
       activeItem = undefined
-      topicGuides.toggle(100)
+      topicGuides.slideToggle(100)
     }
 
     return false
@@ -83,14 +95,17 @@ $(function() {
         .attr("href", "https://status.github.com")
         .addClass(data.status)
         .attr("title", "API Status: " + data.status + ". Click for details.")
-        .text("Status: " + data.status);
-      var img = $("<img>")
-        .attr("src", "/images/status-icon-" + data.status + ".png")
-        .height(16)
-        .width(16);
-      link.append(img);
+        .text("API Status: " + data.status);
       $('.api-status').html(link);
     }
+  });
+  
+  // Add link anchors for headers with IDs
+  $(".content h1, .content h2, .content h3, .content h4").each(function(e){
+    var id = $(this).attr("id");
+    if (!id) return;
+    
+    $(this).prepend("<a class='header-anchor' href='#" + id + "'></a>");
   });
 
 });

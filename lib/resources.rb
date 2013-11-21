@@ -28,6 +28,7 @@ module GitHub
 
       AUTHORS = {
         :technoweenie => '821395fe70906c8290df7f18ac4ac6cf',
+        :tclem        => '2f4861b27dc35663ed271d39f5358261',
         :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0',
         :pezra        => 'f38112009dc16547051c8ac246cee443',
         :rick         => 'a44d5abad6e86cff4e34d9f0839535c9',
@@ -35,7 +36,8 @@ module GitHub
         :jasonrudolph => '592e1e6f041f9a4ec51846fd82013aea',
         :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f',
         :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
-        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0'
+        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
+        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -71,8 +73,8 @@ module GitHub
           end
         end
 
-        lines << "X-RateLimit-Limit: 5000"
-        lines << "X-RateLimit-Remaining: 4999"
+        lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
+        lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
         %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
       end
@@ -107,7 +109,19 @@ module GitHub
       "id"           => 1,
       "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
       "gravatar_id"  => "somehexcode",
-      "url"          => "https://api.github.com/users/octocat"
+      "url"          => "https://api.github.com/users/octocat",
+      "html_url"     => "https://github.com/octocat",
+      "followers_url" => "https://api.github.com/users/octocat/followers",
+      "following_url" => "https://api.github.com/users/octocat/following{/other_user}",
+      "gists_url"    => "https://api.github.com/users/octocat/gists{/gist_id}",
+      "starred_url"  => "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+      "subscriptions_url" => "https://api.github.com/users/octocat/subscriptions",
+      "organizations_url" => "https://api.github.com/users/octocat/orgs",
+      "repos_url"    => "https://api.github.com/users/octocat/repos",
+      "events_url"   => "https://api.github.com/users/octocat/events{/privacy}",
+      "received_events_url" => "https://api.github.com/users/octocat/received_events",
+      "type"         => "User",
+      "site_admin"   => false
     }
 
     CONTRIBUTOR = USER.merge({
@@ -128,7 +142,7 @@ module GitHub
       "following"    => 0,
       "html_url"     => "https://github.com/octocat",
       "created_at"   => "2008-01-14T04:33:35Z",
-      "type"         => "User"
+      "updated_at"   => "2008-01-14T04:33:35Z"
     })
 
     PRIVATE_USER = FULL_USER.merge({
@@ -167,39 +181,39 @@ module GitHub
     }
 
     REPO = SIMPLE_REPO.merge({
-      "clone_url"        => "https://github.com/octocat/Hello-World.git",
-      "git_url"          => "git://github.com/octocat/Hello-World.git",
-      "ssh_url"          => "git@github.com:octocat/Hello-World.git",
-      "svn_url"          => "https://svn.github.com/octocat/Hello-World",
-      "mirror_url"       => "git://git.example.com/octocat/Hello-World",
-      "homepage"         => "https://github.com",
-      "language"         => nil,
-      "forks"            => 9,
-      "forks_count"      => 9,
-      "watchers"         => 80,
-      "watchers_count"   => 80,
-      "size"             => 108,
-      "master_branch"    => 'master',
-      "open_issues"      => 0,
-      "pushed_at"        => "2011-01-26T19:06:43Z",
-      "created_at"       => "2011-01-26T19:01:12Z",
-      "updated_at"       => "2011-01-26T19:14:43Z"
+      "clone_url"         => "https://github.com/octocat/Hello-World.git",
+      "git_url"           => "git://github.com/octocat/Hello-World.git",
+      "ssh_url"           => "git@github.com:octocat/Hello-World.git",
+      "svn_url"           => "https://svn.github.com/octocat/Hello-World",
+      "mirror_url"        => "git://git.example.com/octocat/Hello-World",
+      "homepage"          => "https://github.com",
+      "language"          => nil,
+      "forks_count"       => 9,
+      "stargazers_count"  => 80,
+      "watchers_count"    => 80,
+      "size"              => 108,
+      "master_branch"     => 'master',
+      "open_issues_count" => 0,
+      "pushed_at"         => "2011-01-26T19:06:43Z",
+      "created_at"        => "2011-01-26T19:01:12Z",
+      "updated_at"        => "2011-01-26T19:14:43Z"
     })
 
     FULL_REPO = REPO.merge({
-      "organization"     => USER.merge('type' => 'Organization'),
-      "parent"           => REPO,
-      "source"           => REPO,
-      "has_issues"       => true,
-      "has_wiki"         => true,
-      "has_downloads"    => true
+      "subscribers_count" => 42,
+      "organization"      => USER.merge('type' => 'Organization'),
+      "parent"            => REPO,
+      "source"            => REPO,
+      "has_issues"        => true,
+      "has_wiki"          => true,
+      "has_downloads"     => true
     })
 
     TAG = {
       "name"        => "v0.1",
       "commit"      => {
           "sha"     => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
-          "url"  => "https://api.github.com/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"
       },
       "zipball_url" => "https://github.com/octocat/Hello-World/zipball/v0.1",
       "tarball_url" => "https://github.com/octocat/Hello-World/tarball/v0.1",
@@ -348,11 +362,12 @@ module GitHub
 
 
     PULL = {
-      "url"        => "https://api.github.com/octocat/Hello-World/pulls/1",
-      "html_url"   => "https://github.com/octocat/Hello-World/pulls/1",
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
+      "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
       "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
       "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
       "issue_url"  => "https://github.com/octocat/Hello-World/issue/1",
+      "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "number"     => 1,
       "state"      => "open",
       "title"      => "new-feature",
@@ -377,13 +392,15 @@ module GitHub
       },
       "_links" => {
         "self" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/pulls/1"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1"},
         "html" => {'href' =>
           "https://github.com/octocat/Hello-World/pull/1"},
         "comments" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/issues/1/comments"},
+          "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
         "review_comments" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/pulls/1/comments"}
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+        "statuses" => {'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"}
       },
       "user" => USER
     }
@@ -488,24 +505,58 @@ module GitHub
       "files" => [FILE],
     }
 
-    PULL_COMMENT = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
-      "id"         => 1,
-      "body"       => "Great stuff",
-      "path"       => "file1.txt",
-      "position"   => 4,
-      "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
-      "user"       => USER,
-      "created_at" => "2011-04-14T16:00:49Z",
-      "updated_at" => "2011-04-14T16:00:49Z",
+	PULL_COMMENT = {
+      "url"                => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
+      "id"                 => 1,
+      "diff_hunk"          => "@@ -16,33 +16,40 @@ public class Connection : IConnection...",
+      "path"               => "file1.txt",
+      "position"           => 1,
+      "original_position"  => 4,
+      "commit_id"          => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "original_commit_id" => "9c48853fa3dc5c1c3d6f1f1cd1f2743e72652840",
+      "user"               => USER,
+      "body"               => "Great stuff",
+      "created_at"         => "2011-04-14T16:00:49Z",
+      "updated_at"         => "2011-04-14T16:00:49Z",
+      "html_url"           => "https://github.com/octocat/Hello-World/pull/1#discussion-diff-1",
+      "pull_request_url"   => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
       "_links" => {
         "self" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/pulls/comments/1"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"},
         "html" => {'href' =>
           "https://github.com/octocat/Hello-World/pull/1#discussion-diff-1"},
         "pull_request" => {'href' =>
-          "https://api.github.com/octocat/Hello-World/pulls/1"}
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1"}
       }
+    }
+
+    RELEASE = {
+      "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
+      "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
+      "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
+      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
+      "id"               => 1,
+      "tag_name"         => "v1.0.0",
+      "target_commitish" => "master",
+      "name"             => "v1.0.0",
+      "body"             => "Description of the release",
+      "draft"            => false,
+      "prerelease"       => false,
+      "created_at"       => "2013-02-27T19:35:32Z",
+      "published_at"     => "2013-02-27T19:35:32Z",
+    }
+
+    RELEASE_ASSET = {
+      "url"            => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
+      "id"             => 1,
+      "name"           => "example.zip",
+      "label"          => "short description",
+      "state"          => "uploaded",
+      "content_type"   => "application/zip",
+      "size"           => 1024,
+      "download_count" => 42,
+      "created_at"     => "2013-02-27T19:35:32Z",
+      "updated_at"     => "2013-02-27T19:35:32Z"
     }
 
     DOWNLOAD = {
@@ -578,7 +629,8 @@ module GitHub
     FULL_TEAM = TEAM.merge({
       "permission" => "admin",
       "members_count" => 3,
-      "repos_count" => 10
+      "repos_count" => 10,
+      "organization" =>  ORG
     })
 
     LABEL = {
@@ -600,9 +652,9 @@ module GitHub
       "milestone"  => MILESTONE,
       "comments"   => 0,
       "pull_request" => {
-        "html_url"  => "https://github.com/octocat/Hello-World/issues/1347",
-        "diff_url"  => "https://github.com/octocat/Hello-World/issues/1347.diff",
-        "patch_url" => "https://github.com/octocat/Hello-World/issues/1347.patch"
+        "html_url"  => "https://github.com/octocat/Hello-World/pull/1347",
+        "diff_url"  => "https://github.com/octocat/Hello-World/pull/1347.diff",
+        "patch_url" => "https://github.com/octocat/Hello-World/pull/1347.patch"
       },
       "closed_at"  => nil,
       "created_at" => "2011-04-22T13:33:48Z",
@@ -620,7 +672,8 @@ module GitHub
     }
 
     ISSUE_EVENT = {
-      "url" => "https://api.github.com/repos/octocat/Hello-World/issues/events/1",
+      "id"         => 1,
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/events/1",
       "actor"      => USER,
       "event"      => "closed",
       "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
@@ -653,6 +706,103 @@ module GitHub
       "issues" => [ISSUE_SEARCH_ITEM]
     }
 
+    ISSUE_SEARCH_V3_RESULTS = {
+      "total_count" => 280,
+      "items" => [
+        {
+          "url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132",
+          "labels_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/labels{/name}",
+          "comments_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/comments",
+          "events_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/events",
+          "html_url" => "https://github.com/batterseapower/pinyin-toolkit/issues/132",
+          "id" => 35802,
+          "number" => 132,
+          "title" => "Line Number Indexes Beyond 20 Not Displayed",
+          "user" => {
+            "login" => "Nick3C",
+            "id" => 90254,
+            "avatar_url" => "https://secure.gravatar.com/avatar/934442aadfe3b2f4630510de416c5718?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+            "gravatar_id" => "934442aadfe3b2f4630510de416c5718",
+            "url" => "https://api.github.com/users/Nick3C",
+            "html_url" => "https://github.com/Nick3C",
+            "followers_url" => "https://api.github.com/users/Nick3C/followers",
+            "following_url" => "https://api.github.com/users/Nick3C/following{/other_user}",
+            "gists_url" => "https://api.github.com/users/Nick3C/gists{/gist_id}",
+            "starred_url" => "https://api.github.com/users/Nick3C/starred{/owner}{/repo}",
+            "subscriptions_url" => "https://api.github.com/users/Nick3C/subscriptions",
+            "organizations_url" => "https://api.github.com/users/Nick3C/orgs",
+            "repos_url" => "https://api.github.com/users/Nick3C/repos",
+            "events_url" => "https://api.github.com/users/Nick3C/events{/privacy}",
+            "received_events_url" => "https://api.github.com/users/Nick3C/received_events",
+            "type" => "User"
+          },
+          "labels" => [
+            {
+              "url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/labels/bug",
+              "name" => "bug",
+              "color" => "ff0000"
+            }
+          ],
+          "state" => "open",
+          "assignee" => nil,
+          "milestone" => nil,
+          "comments" => 15,
+          "created_at" => "2009-07-12T20:10:41Z",
+          "updated_at" => "2009-07-19T09:23:43Z",
+          "closed_at" => nil,
+          "pull_request" => {
+            "html_url" => nil,
+            "diff_url" => nil,
+            "patch_url" => nil
+          },
+          "body" => "...",
+          "score" => 1.3859273
+        }
+      ]
+    }
+
+    ISSUE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/215335/issues/132",
+          "object_type" => "Issue",
+          "property" => "body",
+          "fragment" => "comprehensive windows font I know of).\n\nIf we can find a commonly distributed windows font that supports them then no problem (we can use html font tags) but otherwise the '(21)' style is probably better.\n",
+          "matches" => [
+            {
+              "text" => "windows",
+              "indices" => [
+                14,
+                21
+              ]
+            },
+            {
+              "text" => "windows",
+              "indices" => [
+                78,
+                85
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/215335/issues/comments/25688",
+          "object_type" => "IssueComment",
+          "property" => "body",
+          "fragment" => " right after that are a bit broken IMHO :). I suppose we could have some hack that maxes out at whatever the font does...\n\nI'll check what the state of play is on Windows.\n",
+          "matches" => [
+            {
+              "text" => "Windows",
+              "indices" => [
+                163,
+                170
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
     REPO_SEARCH_ITEM = {
       "type" => "repo",
       "created" => "2011-09-05T11:07:54Z",
@@ -683,6 +833,192 @@ module GitHub
       "repositories" => [REPO_SEARCH_ITEM]
     }
 
+    REPO_SEARCH_V3_RESULTS = {
+      "total_count" => 40,
+      "items" => [
+        {
+          "id" => 3081286,
+          "name" => "Tetris",
+          "full_name" => "dtrupenn/Tetris",
+          "owner" => {
+            "login" => "dtrupenn",
+            "id" => 872147,
+            "avatar_url" => "https://secure.gravatar.com/avatar/e7956084e75f239de85d3a31bc172ace?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+            "gravatar_id" => "e7956084e75f239de85d3a31bc172ace",
+            "url" => "https://api.github.com/users/dtrupenn",
+            "received_events_url" => "https://api.github.com/users/dtrupenn/received_events",
+            "type" => "User"
+          },
+          "private" => false,
+          "html_url" => "https://github.com/dtrupenn/Tetris",
+          "description" => "A C implementation of Tetris using Pennsim through LC4",
+          "fork" => false,
+          "url" => "https://api.github.com/repos/dtrupenn/Tetris",
+          "created_at" => "2012-01-01T00:31:50Z",
+          "updated_at" => "2013-01-05T17:58:47Z",
+          "pushed_at" => "2012-01-01T00:37:02Z",
+          "homepage" => "",
+          "size" => 524,
+          "stargazers_count" => 1,
+          "watchers_count" => 1,
+          "language" => "Assembly",
+          "forks_count" => 0,
+          "open_issues_count" => 0,
+          "master_branch" => "master",
+          "default_branch" => "master",
+          "score" => 10.309712
+        }
+      ]
+    }
+
+    REPO_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/3081286",
+          "object_type" => "Repository",
+          "property" => "name",
+          "fragment" => "Tetris",
+          "matches" => [
+            {
+              "text" => "Tetris",
+              "indices" => [
+                0,
+                6
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/3081286",
+          "object_type" => "Repository",
+          "property" => "description",
+          "fragment" => "A C implementation of Tetris using Pennsim through LC4",
+          "matches" => [
+            {
+              "text" => "Tetris",
+              "indices" => [
+                22,
+                28
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+    CODE_SEARCH_V3_RESULTS = {
+      "total_count" => 7,
+      "items" => [
+        {
+          "name" => "classes.js",
+          "path" => "src/attributes/classes.js",
+          "sha" => "d7212f9dee2dcc18f084d7df8f417b80846ded5a",
+          "url" => "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
+          "git_url" => "https://api.github.com/repositories/167174/git/blobs/d7212f9dee2dcc18f084d7df8f417b80846ded5a",
+          "html_url" => "https://github.com/jquery/jquery/blob/825ac3773694e0cd23ee74895fd5aeb535b27da4/src/attributes/classes.js",
+          "repository" => {
+            "id" => 167174,
+            "name" => "jquery",
+            "full_name" => "jquery/jquery",
+            "owner" => {
+              "login" => "jquery",
+              "id" => 70142,
+              "avatar_url" => "https://0.gravatar.com/avatar/6906f317a4733f4379b06c32229ef02f?d=https%3A%2F%2Fidenticons.github.com%2Ff426f04f2f9813718fb806b30e0093de.png",
+              "gravatar_id" => "6906f317a4733f4379b06c32229ef02f",
+              "url" => "https://api.github.com/users/jquery",
+              "html_url" => "https://github.com/jquery",
+              "followers_url" => "https://api.github.com/users/jquery/followers",
+              "following_url" => "https://api.github.com/users/jquery/following{/other_user}",
+              "gists_url" => "https://api.github.com/users/jquery/gists{/gist_id}",
+              "starred_url" => "https://api.github.com/users/jquery/starred{/owner}{/repo}",
+              "subscriptions_url" => "https://api.github.com/users/jquery/subscriptions",
+              "organizations_url" => "https://api.github.com/users/jquery/orgs",
+              "repos_url" => "https://api.github.com/users/jquery/repos",
+              "events_url" => "https://api.github.com/users/jquery/events{/privacy}",
+              "received_events_url" => "https://api.github.com/users/jquery/received_events",
+              "type" => "Organization",
+              "site_admin" => false
+            },
+            "private" => false,
+            "html_url" => "https://github.com/jquery/jquery",
+            "description" => "jQuery JavaScript Library",
+            "fork" => false,
+            "url" => "https://api.github.com/repos/jquery/jquery",
+            "forks_url" => "https://api.github.com/repos/jquery/jquery/forks",
+            "keys_url" => "https://api.github.com/repos/jquery/jquery/keys{/key_id}",
+            "collaborators_url" => "https://api.github.com/repos/jquery/jquery/collaborators{/collaborator}",
+            "teams_url" => "https://api.github.com/repos/jquery/jquery/teams",
+            "hooks_url" => "https://api.github.com/repos/jquery/jquery/hooks",
+            "issue_events_url" => "https://api.github.com/repos/jquery/jquery/issues/events{/number}",
+            "events_url" => "https://api.github.com/repos/jquery/jquery/events",
+            "assignees_url" => "https://api.github.com/repos/jquery/jquery/assignees{/user}",
+            "branches_url" => "https://api.github.com/repos/jquery/jquery/branches{/branch}",
+            "tags_url" => "https://api.github.com/repos/jquery/jquery/tags",
+            "blobs_url" => "https://api.github.com/repos/jquery/jquery/git/blobs{/sha}",
+            "git_tags_url" => "https://api.github.com/repos/jquery/jquery/git/tags{/sha}",
+            "git_refs_url" => "https://api.github.com/repos/jquery/jquery/git/refs{/sha}",
+            "trees_url" => "https://api.github.com/repos/jquery/jquery/git/trees{/sha}",
+            "statuses_url" => "https://api.github.com/repos/jquery/jquery/statuses/{sha}",
+            "languages_url" => "https://api.github.com/repos/jquery/jquery/languages",
+            "stargazers_url" => "https://api.github.com/repos/jquery/jquery/stargazers",
+            "contributors_url" => "https://api.github.com/repos/jquery/jquery/contributors",
+            "subscribers_url" => "https://api.github.com/repos/jquery/jquery/subscribers",
+            "subscription_url" => "https://api.github.com/repos/jquery/jquery/subscription",
+            "commits_url" => "https://api.github.com/repos/jquery/jquery/commits{/sha}",
+            "git_commits_url" => "https://api.github.com/repos/jquery/jquery/git/commits{/sha}",
+            "comments_url" => "https://api.github.com/repos/jquery/jquery/comments{/number}",
+            "issue_comment_url" => "https://api.github.com/repos/jquery/jquery/issues/comments/{number}",
+            "contents_url" => "https://api.github.com/repos/jquery/jquery/contents/{+path}",
+            "compare_url" => "https://api.github.com/repos/jquery/jquery/compare/{base}...{head}",
+            "merges_url" => "https://api.github.com/repos/jquery/jquery/merges",
+            "archive_url" => "https://api.github.com/repos/jquery/jquery/{archive_format}{/ref}",
+            "downloads_url" => "https://api.github.com/repos/jquery/jquery/downloads",
+            "issues_url" => "https://api.github.com/repos/jquery/jquery/issues{/number}",
+            "pulls_url" => "https://api.github.com/repos/jquery/jquery/pulls{/number}",
+            "milestones_url" => "https://api.github.com/repos/jquery/jquery/milestones{/number}",
+            "notifications_url" => "https://api.github.com/repos/jquery/jquery/notifications{?since,all,participating}",
+            "labels_url" => "https://api.github.com/repos/jquery/jquery/labels{/name}"
+          },
+          "score" => 0.5269679,
+        }
+      ]
+    }
+
+    CODE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+      "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
+          "object_type" => "FileContent",
+          "property" => "content",
+          "fragment" => ";\n\njQuery.fn.extend({\n\taddClass: function( value ) {\n\t\tvar classes, elem, cur, clazz, j, finalValue",
+          "matches" => [
+            {
+              "text" => "addClass",
+              "indices" => [
+                23,
+                31
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
+          "object_type" => "FileContent",
+          "property" => "content",
+          "fragment" => ".isFunction( value ) ) {\n\t\t\treturn this.each(function( j ) {\n\t\t\t\tjQuery( this ).addClass( value.call( this",
+          "matches" => [
+            {
+              "text" => "addClass",
+              "indices" => [
+                80,
+                88
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
     USER_SEARCH_ITEM = {
       "gravatar_id" => "70889091349f7598bce9afa588034310",
       "name" => "Hirotaka Kawata",
@@ -704,6 +1040,63 @@ module GitHub
 
     USER_SEARCH_RESULTS = {
       "users" => [USER_SEARCH_ITEM]
+    }
+
+    USER_SEARCH_V3_RESULTS = {
+      "total_count" => 12,
+      "items" => [
+        {
+          "login" => "mojombo",
+          "id" => 1,
+          "avatar_url" => "https://secure.gravatar.com/avatar/25c7c18223fb42a4c6ae1c8db6f50f9b?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+          "gravatar_id" => "25c7c18223fb42a4c6ae1c8db6f50f9b",
+          "url" => "https://api.github.com/users/mojombo",
+          "html_url" => "https://github.com/mojombo",
+          "followers_url" => "https://api.github.com/users/mojombo/followers",
+          "subscriptions_url" => "https://api.github.com/users/mojombo/subscriptions",
+          "organizations_url" => "https://api.github.com/users/mojombo/orgs",
+          "repos_url" => "https://api.github.com/users/mojombo/repos",
+          "received_events_url" => "https://api.github.com/users/mojombo/received_events",
+          "type" => "User",
+          "score" => 105.47857
+        }
+      ]
+    }
+
+
+    USER_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+     "text_matches" => [
+        {
+          "object_url" => "https://api.github.com/users/mojombo",
+          "object_type" => "User",
+          "property" => "email",
+          "fragment" => "tom@github.com",
+          "matches" => [
+            {
+              "text" => "tom",
+              "indices" => [
+                0,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "object_url" => "https://api.github.com/users/mojombo",
+          "object_type" => "User",
+          "property" => "name",
+          "fragment" => "Tom Preston-Werner",
+          "matches" => [
+            {
+              "text" => "Tom",
+              "indices" => [
+                0,
+                3
+              ]
+            }
+          ]
+        }
+      ]
     }
 
     EMAIL_SEARCH_RESULTS = {
@@ -748,7 +1141,9 @@ module GitHub
         {
           "user" => USER,
           "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "created_at" => "2011-04-14T16:00:49Z"
+          "id" => 1,
+          "created_at" => "2011-04-14T16:00:49Z",
+          "updated_at" => "2011-04-14T16:00:49Z"
         }
       ]
     }
@@ -756,11 +1151,15 @@ module GitHub
     GIST_FILE = {
       "size"     => 932,
       "filename" => "ring.erl",
-      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
+      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+      "type"     => "text/plain",
+      "language" => "Erlang"
     }
 
     GIST = {
       "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+      "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
+      "commits_url"  => "https://api.github.com/gists/#{SecureRandom.hex(10)}/commits",
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
@@ -771,18 +1170,20 @@ module GitHub
       "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
-      "created_at"   => "2010-04-14T02:15:15Z"
+      "created_at"   => "2010-04-14T02:15:15Z",
+      "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
     FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
-    FULL_GIST['files'].merge('ring.erl' => GIST_FILE.merge('content' => 'contents of gist'))
+    FULL_GIST["files"] = GIST_FILE.merge({'content' => 'contents of gist'})
 
     GIST_COMMENT = {
       "id"         => 1,
       "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
-      "created_at" => "2011-04-18T23:23:56Z"
+      "created_at" => "2011-04-18T23:23:56Z",
+      "updated_at" => "2011-04-18T23:23:56Z"
     }
 
     TREE = {
@@ -813,26 +1214,26 @@ module GitHub
     }
     TREE_EXTRA = {
       "sha"  => "fc6274d15fa3ae2ab983129fb037999f264ba9a7",
-      "url"  => "https://api.github.com/repo/octocat/Hello-World/trees/fc6274d15fa3ae2ab983129fb037999f264ba9a7",
+      "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/fc6274d15fa3ae2ab983129fb037999f264ba9a7",
       "tree" => [ {
           "path" => "subdir/file.txt",
           "mode" => "100644",
           "type" => "blob",
           "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
-          "url"  => "https://api.github.com/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
       } ]
     }
     TREE_NEW = {
       "sha"  => "cd8274d15fa3ae2ab983129fb037999f264ba9a7",
-      "url"  => "https://api.github.com/repo/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7",
+      "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7",
       "tree" => [ {
           "path" => "file.rb",
           "mode" => "100644",
           "type" => "blob",
           "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
-          "url"  => "https://api.github.com/octocat/Hello-World/git/blobs/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
+          "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
       } ]
     }
 
@@ -1100,18 +1501,18 @@ module GitHub
 
     CONTENT_CRUD = {
       "content" => {
-        "name" => "hellothere",
-        "path" => "hellothere",
+        "name" => "hello.txt",
+        "path" => "notes/hello.txt",
         "sha" => "95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
         "size" => 9,
-        "url" => "https://api.github.com/repos/octocat/Hello-World/contents/hellothere",
-        "html_url" => "https://github.com/octocat/Hello-World/blob/master/hellothere",
+        "url" => "https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt",
+        "html_url" => "https://github.com/octocat/Hello-World/blob/master/notes/hello.txt",
         "git_url" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
         "type" => "file",
         "_links" => {
-          "self" => "https://api.github.com/repos/octocat/Hello-World/contents/hellothere",
+          "self" => "https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt",
           "git" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
-          "html" => "https://github.com/octocat/Hello-World/blob/master/hellothere"
+          "html" => "https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"
         }
       },
       "commit" => {
@@ -1144,7 +1545,7 @@ module GitHub
     }
 
     THREAD = {
-      :id => 1,
+      :id => "1",
       :repository => SIMPLE_REPO,
       :subject => {
         :title => "Greetings",
@@ -1210,7 +1611,7 @@ module GitHub
     REPO_STATS_COMMIT_ACTIVITY = [{
       :days => [0, 3, 26, 20, 39, 1, 0],
       :total => 89,
-      :week => "2012-05-06"
+      :week => 1336280400
     }]
 
     REPO_STATS_CODE_FREQUENCY = [[
@@ -1229,6 +1630,52 @@ module GitHub
       [0,1,43],
       [0,2,21]
     ]
+
+    FEEDS = {
+      :timeline_url => "https://github.com/timeline",
+      :user_url => "https://github.com/{user}",
+      :current_user_public => "https://github.com/defunkt",
+      :current_user_url => "https://github.com/defunkt.private?token=abc123",
+      :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
+      :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      :_links => {
+        :timeline => {
+          :href => "https://github.com/timeline",
+          :type => "application/atom+xml"
+        },
+        :user => {
+          :href => "https://github.com/{user}",
+          :type => "application/atom+xml"
+        },
+        :current_user_public => {
+          :href => "https://github.com/defunkt",
+          :type => "application/atom+xml"
+        },
+        :current_user => {
+          :href => "https://github.com/defunkt.private?token=abc123",
+          :type => "application/atom+xml"
+        },
+        :current_user_actor => {
+          :href => "https://github.com/defunkt.private.actor?token=abc123",
+          :type => "application/atom+xml"
+        },
+        :current_user_organization => {
+          :href => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+          :type => "application/atom+xml"
+        }
+      }
+    }
+
+    EMOJIS = {
+      "+1" => "https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5",
+      "-1" => "https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5",
+      "100" => "https://github.global.ssl.fastly.net/images/icons/emoji/100.png?v5",
+      "1234" => "https://github.global.ssl.fastly.net/images/icons/emoji/1234.png?v5",
+      "8ball" => "https://github.global.ssl.fastly.net/images/icons/emoji/8ball.png?v5",
+      "a" => "https://github.global.ssl.fastly.net/images/icons/emoji/a.png?v5",
+      "ab" => "https://github.global.ssl.fastly.net/images/icons/emoji/ab.png?v5"
+    }
+
   end
 end
 

@@ -9,20 +9,22 @@ title: Repos | GitHub API
 
 ## List your repositories
 
-List repositories for the authenticated user.
+List repositories for the authenticated user. Note that this does not include
+repositories owned by organizations which the user can access. You can
+[list user organizations](/v3/orgs/#list-user-organizations) and
+[list organization repositories](/v3/repos/#list-organization-repositories)
+separately.
 
     GET /user/repos
 
 ### Parameters
 
-type
-: `all`, `owner`, `public`, `private`, `member`. Default: `all`.
+Name | Type | Description 
+-----|------|--------------
+`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
+`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
+`direction`|`string` | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`; otherwise `desc`
 
-sort
-: `created`, `updated`, `pushed`, `full_name`, default: `full_name`.
-
-direction
-: `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
 
 ## List user repositories
 
@@ -32,14 +34,12 @@ List public repositories for the specified user.
 
 ### Parameters
 
-type
-: `all`, `owner`, `member`. Default: `all`.
+Name | Type | Description 
+-----|------|-------------
+`type`|`string` | Can be one of `all`, `owner`, `member`. Default: `owner`
+`sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
+`direction`|`string` | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`
 
-sort
-: `created`, `updated`, `pushed`, `full_name`, default: `full_name`.
-
-direction
-: `asc` or `desc`, default: when using `full_name`: `asc`, otherwise `desc`.
 
 ## List organization repositories
 
@@ -49,24 +49,32 @@ List repositories for the specified org.
 
 ### Parameters
 
-type
-: `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`.
+Name | Type | Description 
+-----|------|--------------
+`type`|`string` | Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`
+
 
 ### Response
 
 <%= headers 200, :pagination => true %>
 <%= json(:repo) { |h| [h] } %>
 
-## List all repositories
+## List all public repositories
 
-This provides a dump of every repository, in the order that they were created.
+This provides a dump of every public repository, in the order that they were created.
+
+Note: Pagination is powered exclusively by the `since` parameter.
+Use the [Link header](/v3/#link-header) to get the URL for the next page of
+repositories.
 
     GET /repositories
 
 ### Parameters
 
-since
-: The integer ID of the last Repository that you've seen.
+Name | Type | Description 
+-----|------|--------------
+`since`|`string`| The integer ID of the last Repository that you've seen.
+
 
 ### Response
 
@@ -87,46 +95,20 @@ be a member of the specified organization.
 
 ### Input
 
-name
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`name`|`string` | **Required**. The name of the repository
+`description`|`string` | A short description of the repository
+`homepage`|`string` | A URL with more information about the repository
+`private`|`boolean` | Either `true` to create a private repository, or `false` to create a public one. Creating private repositories requires a paid GitHub account.  Default: `false`
+`has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. Default: `true`
+`has_wiki`|`boolean` | Either `true` to enable the wiki for this repository, `false` to disable it. Default: `true`
+`has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. Default: `true`
+`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
+`auto_init`|`boolean` | Pass `true` to create an initial commit with empty README. Default: `false`
+`gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._
 
-description
-: _Optional_ **string**
-
-homepage
-: _Optional_ **string**
-
-private
-: _Optional_ **boolean** - `true` to create a private repository, `false`
-to create a public one. Creating private repositories requires a paid
-GitHub account.  Default is `false`.
-
-has\_issues
-: _Optional_ **boolean** - `true` to enable issues for this repository,
-`false` to disable them. Default is `true`.
-
-has\_wiki
-: _Optional_ **boolean** - `true` to enable the wiki for this
-repository, `false` to disable it. Default is `true`.
-
-has\_downloads
-: _Optional_ **boolean** - `true` to enable downloads for this
-repository, `false` to disable them. Default is `true`.
-
-team\_id
-: _Optional_ **number** - The id of the team that will be granted access
-to this repository. This is only valid when creating a repo in an
-organization.
-
-auto\_init
-: _Optional_ **boolean** - `true` to create an initial commit with empty
-README. Default is `false`.
-
-gitignore\_template
-: _Optional_ **string** - Desired language or platform [.gitignore
-template](https://github.com/github/gitignore) to
-apply. Use the name of the template without the extension. For example, "Haskell"
-_Ignored if `auto_init` parameter is not provided._
+#### Example
 
 <%= json \
   :name          => "Hello-World",
@@ -164,39 +146,24 @@ The `parent` and `source` objects are present when the repo is a fork.
 
 ### Input
 
-name
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`name`|`string` | **Required**. The name of the repository
+`description`|`string` | A short description of the repository
+`homepage`|`string` | A URL with more information about the repository
+`private`|`boolean` | Either `true` to make the repository private, or `false` to make it public. Creating private repositories requires a paid GitHub account.  Default: `false`
+`has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. Default: `true`
+`has_wiki`|`boolean` |  Either `true` to enable the wiki for this repository, `false` to disable it. Default: `true`
+`has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. Default: `true`
+`default_branch`|`String` | Updates the default branch for this repository.
 
-description
-: _Optional_ **string**
-
-homepage
-: _Optional_ **string**
-
-private
-: _Optional_ **boolean** - `true` makes the repository private, and
-`false` makes it public.
-
-has\_issues
-: _Optional_ **boolean** - `true` to enable issues for this repository,
-`false` to disable them. Default is `true`.
-
-has\_wiki
-: _Optional_ **boolean** - `true` to enable the wiki for this
-repository, `false` to disable it. Default is `true`.
-
-has\_downloads
-: _Optional_ **boolean** - `true` to enable downloads for this
-repository, `false` to disable them. Default is `true`.
-
-default\_branch
-: _Optional_ **String** - Update the default branch for this repository.
+#### Example
 
 <%= json \
   :name          => "Hello-World",
   :description   => "This is your first repo",
   :homepage      => "https://github.com",
-  :public        => true,
+  :private       => true,
   :has_issues    => true,
   :has_wiki      => true,
   :has_downloads => true
@@ -213,9 +180,10 @@ default\_branch
 
 ### Parameters
 
-anon
-: Optional flag. Set to `1` or `true` to include anonymous contributors
-in results.
+Name | Type | Description 
+-----|------|-------------
+`anon`|`string` | Set to `1` or `true` to include anonymous contributors in results.
+
 
 ### Response
 
@@ -282,4 +250,3 @@ Deleting a repository requires admin access.  If OAuth is used, the
 ### Response
 
 <%= headers 204 %>
-

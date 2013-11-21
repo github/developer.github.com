@@ -18,11 +18,22 @@ This endpoint is accessible with the user:email scope.
 
 ### Response
 
+<div class="alert">
+  <p>
+    <strong>Deprecated</strong>: This response format is deprecated.
+    The API will remove support for this response format in the future.
+  </p>
+  <p>
+    We recommend that you start requesting the new response format as described
+    in the <a href="#future-response">Future Response</a> section below.
+  </p>
+</div>
+
 <%= headers 200 %>
 <%= json ["octocat@github.com", "support@github.com"] %>
 <br>
 
-#### Future response
+#### Future Response
 
 In the final version of the API, this method will return an array of hashes
 with extended information for each email address indicating if the address has

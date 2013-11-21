@@ -1,5 +1,6 @@
 ---
 title: Development Guides | GitHub API
+layout: guides
 ---
 
 # Development Guides
@@ -13,3 +14,5 @@ stored and documented in our public
 [platform-samples](https://github.com/github/platform-samples) repo.
 
 Feel free to fork, clone, and improve these guides.
+
+![](/images/professorcat.png)

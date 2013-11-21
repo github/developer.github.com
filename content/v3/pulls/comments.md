@@ -33,14 +33,12 @@ By default, Review Comments are ordered by ascending ID.
 
 ### Parameters
 
-sort
-: _Optional_ **String** `created` or `updated`
+Name | Type | Description 
+-----|------|--------------
+`sort`|`string` | Can be either `created` or `updated`. Default: `created`
+`direction`|`string` | Can be either `asc` or `desc`. Ignored without `sort` parameter.
+`since`|`string` | Only comments updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
-direction
-: _Optional_ **String** `asc` or `desc`. Ignored without `sort` parameter.
-
-since
-: _Optional_ **String** of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
 
 ### Response
 
@@ -62,17 +60,13 @@ since
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The text of the comment
+`commit_id`|`string` | **Required**. The SHA of the commit to comment on.
+`path`|`string` | **Required**. The relative path of the file to comment on.
+`position`|`number` | **Required**. The line index in the diff to comment on.
 
-commit_id
-: _Required_ **string** - Sha of the commit to comment on.
-
-path
-: _Required_ **string** - Relative path of the file to comment on.
-
-position
-: _Required_ **number** - Line index in the diff to comment on.
 
 #### Example
 
@@ -88,11 +82,11 @@ position
 Instead of passing `commit_id`, `path`, and `position` you can reply to
 an existing Pull Request Comment like this:
 
-body
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The text of the comment
+`in_reply_to`|`number` | **Required**. The comment id to reply to.
 
-in_reply_to
-: _Required_ **number** - Comment id to reply to.
 
 #### Example
 
@@ -114,8 +108,10 @@ in_reply_to
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The text of the comment
+
 
 #### Example
 
@@ -136,3 +132,12 @@ body
 
 <%= headers 204 %>
 
+## Custom media types
+
+These are the supported media types for pull request review comments. You can
+read more about the use of media types in the API [here](/v3/media/).
+
+    application/vnd.github.VERSION.raw+json
+    application/vnd.github.VERSION.text+json
+    application/vnd.github.VERSION.html+json
+    application/vnd.github.VERSION.full+json

@@ -13,13 +13,15 @@ title: Repo Forks | GitHub API
 
 ### Parameters
 
-sort
-: `newest`, `oldest`, `watchers`, default: `newest`.
+Name | Type | Description
+-----|------|-------------
+`sort`|`string` | The sort order. Can be either `newest`, `oldest`, or `stargazers`. Default: `newest`
+
 
 ### Response
 
 <%= headers 200 %>
-<%= json(:repo) { |h| [h] } %>
+<%= json(:repo) { |h| h['fork'] = true; [h] } %>
 
 ## Create a fork
 
@@ -32,15 +34,16 @@ the field `organization`
 
 ### Parameters
 
-organization
-: _Optional_ **String** - Organization login. The repository will be
-forked into this organization.
+Name | Type | Description 
+-----|------|-------------
+`organization`|`string` | The organization login. The repository will be forked into this organization.
+
 
 ### Response
 
 Forking a Repository happens asynchronously.  Therefore, you may have to wait
 a short period before accessing the git objects.  If this takes longer than
-5 minutes, be sure to [contact Support](https://github.com/contact).
+5 minutes, be sure to [contact Support](https://github.com/contact?form[subject]=APIv3).
 
 <%= headers 202 %>
-<%= json :repo %>
+<%= json(:repo) { |h| h['fork'] = true; h } %>

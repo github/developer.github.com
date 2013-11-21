@@ -44,10 +44,11 @@ Mmmmm, tastes like JSON. Let's include the `-i` flag to include headers:
     Connection: keep-alive
     Status: 200 OK
     ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
+    X-RateLimit-Limit: 60
     X-RateLimit-Remaining: 57
+    X-RateLimit-Reset: 1352660008
     X-GitHub-Media-Type: github.beta
     Vary: Accept
-    X-RateLimit-Limit: 60
     Cache-Control: public, max-age=60, s-maxage=60
     X-Content-Type-Options: nosniff
     Content-Length: 692
@@ -207,7 +208,7 @@ Most any meaningful use of the GitHub API will involve some level of Repository
 information. We can `GET` repository details in the same way we fetched user
 details earlier:
 
-      curl -i https://api.github.com/repos/twitter/bootstrap
+      curl -i https://api.github.com/repos/twbs/bootstrap
 
 In the same way, we can view repositories for the authenticated user:
 
@@ -443,7 +444,7 @@ responses don't count against your [rate limit][rate-limiting].
 
 
 
-[wrappers]: http://developer.github.com/v3/libraries/
+[wrappers]: http://developer.github.com/libraries/
 [curl]: http://curl.haxx.se/
 [media types]: http://developer.github.com/v3/media/
 [oauth]: http://developer.github.com/v3/oauth/

@@ -1,5 +1,5 @@
 ---
-title: GitHub Meta API | GitHub API
+title: Meta | GitHub API
 ---
 
 # Meta

@@ -1,5 +1,5 @@
 ---
-title: Repo Hooks | GitHub API
+title: Hooks | GitHub API
 ---
 
 # Hooks

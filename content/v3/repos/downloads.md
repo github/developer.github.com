@@ -1,5 +1,5 @@
 ---
-title: Repo Downloads | GitHub API
+title: Downloads | GitHub API
 ---
 
 # Downloads

@@ -1,5 +1,5 @@
 ---
-title: Repo Contents | GitHub API
+title: Contents | GitHub API
 ---
 
 # Contents

@@ -1,5 +1,5 @@
 ---
-title: GitHub Rate Limit API | GitHub API
+title: Rate Limit | GitHub API
 ---
 
 # Rate Limit

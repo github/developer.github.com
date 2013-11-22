@@ -1,5 +1,5 @@
 ---
-title: Repo Collaborators | GitHub API
+title: Collaborators | GitHub API
 ---
 
 # Collaborators

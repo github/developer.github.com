@@ -1,5 +1,5 @@
 ---
-title: Repository Starring | GitHub API
+title: Starring | GitHub API
 ---
 
 # Starring

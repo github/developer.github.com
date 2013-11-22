@@ -1,5 +1,5 @@
 ---
-title: Repo Comments | GitHub API
+title: Comments | GitHub API
 ---
 
 # Comments

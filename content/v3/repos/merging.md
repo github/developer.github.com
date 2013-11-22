@@ -1,5 +1,5 @@
 ---
-title: Repo Merging | GitHub API
+title: Merging | GitHub API
 ---
 
 # Merging

@@ -1,5 +1,5 @@
 ---
-title: Markdown Rendering | GitHub API
+title: Markdown | GitHub API
 ---
 
 # Markdown

@@ -1,5 +1,5 @@
 ---
-title: Repo Forks | GitHub API
+title: Forks | GitHub API
 ---
 
 # Forks

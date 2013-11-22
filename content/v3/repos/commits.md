@@ -1,5 +1,5 @@
 ---
-title: Repo Commits | GitHub API
+title: Commits | GitHub API
 ---
 
 # Commits

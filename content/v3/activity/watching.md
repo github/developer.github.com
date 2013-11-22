@@ -1,5 +1,5 @@
 ---
-title: Repository Watching | GitHub API
+title: Watching | GitHub API
 ---
 
 # Watching

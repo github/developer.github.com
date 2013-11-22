@@ -1,5 +1,5 @@
 ---
-title: Repo Statistics | GitHub API
+title: Statistics | GitHub API
 ---
 
 # Statistics

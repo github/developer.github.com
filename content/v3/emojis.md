@@ -1,5 +1,5 @@
 ---
-title: GitHub Emojis API | GitHub API
+title: Emojis | GitHub API
 ---
 
 # Emojis

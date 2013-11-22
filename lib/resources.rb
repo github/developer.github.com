@@ -1489,7 +1489,8 @@ module GitHub
 
     META = {
       :hooks => ['127.0.0.1/32'],
-      :git => ['127.0.0.1/32']
+      :git => ['127.0.0.1/32'],
+      :verifiable_password_authentication => true
     }
 
     BLOB = {

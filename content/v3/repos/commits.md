@@ -2,7 +2,7 @@
 title: Repo Commits | GitHub API
 ---
 
-# Repo Commits API
+# Commits
 
 * TOC
 {:toc}

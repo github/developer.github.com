@@ -2,7 +2,7 @@
 title: Users | GitHub API
 ---
 
-# Users API
+# Users
 
 * TOC
 {:toc}

@@ -1,7 +1,7 @@
 ---
 title: Custom Media Types | GitHub API
 ---
-# GitHub Media Types
+# Media Types
 
 * TOC
 {:toc}

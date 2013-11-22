@@ -2,7 +2,7 @@
 title: Issue Assignees | GitHub API
 ---
 
-# Assignees API
+# Assignees
 
 * TOC
 {:toc}

@@ -2,7 +2,7 @@
 title: Issue Labels | GitHub API
 ---
 
-# Labels API
+# Labels
 
 * TOC
 {:toc}

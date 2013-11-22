@@ -2,7 +2,7 @@
 title: Repo Statistics | GitHub API
 ---
 
-# Repo Statistics API
+# Statistics
 
 * TOC
 {:toc}

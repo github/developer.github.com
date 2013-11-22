@@ -2,7 +2,7 @@
 title: Pull Request Comments | GitHub API
 ---
 
-# Pull Request Review Comments API
+# Review Comments
 
 * TOC
 {:toc}

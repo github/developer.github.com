@@ -2,7 +2,7 @@
 title: Repo Contents | GitHub API
 ---
 
-# Repo Contents API
+# Contents
 
 * TOC
 {:toc}

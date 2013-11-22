@@ -2,7 +2,7 @@
 title: Repo Downloads | GitHub API
 ---
 
-# Repo Downloads API
+# Downloads
 
 * TOC
 {:toc}

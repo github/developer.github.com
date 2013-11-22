@@ -2,7 +2,7 @@
 title: GitHub Meta API | GitHub API
 ---
 
-# GitHub Meta API
+# Meta
 
 This gives some information about GitHub.com, the service.
 

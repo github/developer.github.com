@@ -2,7 +2,7 @@
 title: Gitignore templates | GitHub API
 ---
 
-# Gitignore Templates API
+# Gitignore
 
 * TOC
 {:toc}

@@ -2,7 +2,7 @@
 title: Markdown Rendering | GitHub API
 ---
 
-# Markdown Rendering API
+# Markdown
 
 * TOC
 {:toc}

@@ -2,7 +2,7 @@
 title: Repos | GitHub API
 ---
 
-# Repos API
+# Repositories
 
 * TOC
 {:toc}

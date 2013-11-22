@@ -2,7 +2,7 @@
 title: Pull Requests | GitHub API
 ---
 
-# Pull Request API
+# Pull Requests
 
 * TOC
 {:toc}

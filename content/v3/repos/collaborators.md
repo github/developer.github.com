@@ -2,7 +2,7 @@
 title: Repo Collaborators | GitHub API
 ---
 
-# Repo Collaborators API
+# Collaborators
 
 * TOC
 {:toc}

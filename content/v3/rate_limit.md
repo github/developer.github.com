@@ -2,7 +2,7 @@
 title: GitHub Rate Limit API | GitHub API
 ---
 
-# GitHub Rate Limit API
+# Rate Limit
 
 The overview documentation describes the [rate limit rules](/v3/#rate-limiting).
 You can check your current rate limit status at any time using the Rate Limit

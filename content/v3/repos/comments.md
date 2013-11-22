@@ -2,7 +2,7 @@
 title: Repo Comments | GitHub API
 ---
 
-# Repo Comments API
+# Comments
 
 * TOC
 {:toc}

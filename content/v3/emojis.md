@@ -2,7 +2,7 @@
 title: GitHub Emojis API | GitHub API
 ---
 
-# GitHub Emojis API
+# Emojis
 
 Lists all the emojis available to use on GitHub.
 

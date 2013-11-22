@@ -2,7 +2,7 @@
 title: Repo Hooks | GitHub API
 ---
 
-# Repo Hooks API
+# Hooks
 
 * TOC
 {:toc}

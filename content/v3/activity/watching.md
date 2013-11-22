@@ -2,7 +2,7 @@
 title: Repository Watching | GitHub API
 ---
 
-# Repository Watching API
+# Watching
 
 * TOC
 {:toc}

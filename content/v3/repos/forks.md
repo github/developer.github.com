@@ -2,7 +2,7 @@
 title: Repo Forks | GitHub API
 ---
 
-# Repo Forks API
+# Forks
 
 * TOC
 {:toc}

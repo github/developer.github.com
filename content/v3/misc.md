@@ -2,7 +2,7 @@
 title: Miscellaneous | GitHub API
 ---
 
-# Miscellaneous APIs
+# Miscellaneous
 
 This is a miscellaneous set of APIs which provide access to top level GitHub resources and info.
 

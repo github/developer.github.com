@@ -23,43 +23,45 @@ First, [register a new application][new oauth application] on GitHub. Set the ma
 URLs to `http://localhost:4567/`. As [before][basics-of-authentication], we're going to handle authentication for the API by
 implementing a Rack middleware using [sinatra-auth-github][sinatra auth github]:
 
-	require 'sinatra/auth/github'
+    #!ruby
+    require 'sinatra/auth/github'
 
-	module Example
-	  class MyGraphApp < Sinatra::Base
-	    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-	    # Instead, set and test environment variables, like below
-	    # if ENV['GITHUB_CLIENT_ID'] && ENV['GITHUB_CLIENT_SECRET']
-	    #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
-	    #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
-	    # end
+    module Example
+      class MyGraphApp < Sinatra::Base
+        # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+        # Instead, set and test environment variables, like below
+        # if ENV['GITHUB_CLIENT_ID'] && ENV['GITHUB_CLIENT_SECRET']
+        #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
+        #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
+        # end
 
-	    CLIENT_ID = ENV['GH_GRAPH_CLIENT_ID']
-	    CLIENT_SECRET = ENV['GH_GRAPH_SECRET_ID']
+        CLIENT_ID = ENV['GH_GRAPH_CLIENT_ID']
+        CLIENT_SECRET = ENV['GH_GRAPH_SECRET_ID']
 
-	    enable :sessions
+        enable :sessions
 
-	    set :github_options, {
-	      :scopes    => "repo",
-	      :secret    => CLIENT_SECRET,
-	      :client_id => CLIENT_ID,
-	      :callback_url => "/"
-	    }
+        set :github_options, {
+          :scopes    => "repo",
+          :secret    => CLIENT_SECRET,
+          :client_id => CLIENT_ID,
+          :callback_url => "/"
+        }
 
-	    register Sinatra::Auth::Github
+        register Sinatra::Auth::Github
 
-	    get '/' do
-	      if !authenticated?
-	        authenticate!
-	      else
-	        access_token = github_user["token"]
-	      end
-	    end
-	  end
-	end
+        get '/' do
+          if !authenticated?
+            authenticate!
+          else
+            access_token = github_user["token"]
+          end
+        end
+      end
+    end
 
 Set up a similar _config.ru_ file as in the previous example:
 
+    #!ruby
     ENV['RACK_ENV'] ||= 'development'
     require "rubygems"
     require "bundler/setup"
@@ -78,6 +80,7 @@ so you know it'll work.
 Authentication with the API via Octokit is easy. Just pass your login
 and token to the `Octokit::Client` constructor:
 
+    #!ruby
     if !authenticated?
       authenticate!
     else
@@ -89,11 +92,13 @@ to see the different programming languages they use, and count which ones are us
 most often. To do that, we'll first need a list of our repositories from the API.
 With Octokit, that looks like this:
 
+    #!ruby
     repos = client.repositories
 
 Next, we'll iterate over each repository, and count the language that GitHub
 associates with it:
 
+    #!ruby
     language_obj = {}
     repos.each do |repo|
       # sometimes language can be nil
@@ -126,6 +131,7 @@ check out ["D3 for Mortals"][D3 mortals].
 D3 is a JavaScript library, and likes working with data as arrays. So, let's convert our Ruby hash into
 a JSON array for use by JavaScript in the browser.
 
+    #!ruby
     languages = []
     language_obj.each do |lang, count|
       languages.push :language => lang, :count => count
@@ -141,6 +147,7 @@ Now, _lang_freq.erb_ is going to need some JavaScript to support rendering a bar
 For now, you can just use the code provided here, and refer to the resources linked above
 if you want to learn more about how D3 works:
 
+    #!html
     <!DOCTYPE html>
     <meta charset="utf-8">
     <html>
@@ -239,6 +246,7 @@ should be a great way to visualize the sizes of our coding languages used, rathe
 than simply the count. We'll need to construct an array of objects that looks
 something like this:
 
+    #!javascript
     [ { "name": "language1", "size": 100},
       { "name": "language2", "size": 23}
       ...
@@ -247,6 +255,7 @@ something like this:
 Since we already have a list of repositories above, let's inspect each one, and
 call [the language listing API method][language API]:
 
+    #!ruby
     repos.each do |repo|
       repo_name = repo.name
       repo_langs = octokit_client.languages("#{github_user.login}/#{repo_name}")
@@ -254,6 +263,7 @@ call [the language listing API method][language API]:
 
 From there, we'll cumulatively add each language found to a "master list":
 
+    #!ruby
     repo_langs.each do |lang, count|
       if !language_obj[lang]
         language_obj[lang] = count
@@ -264,6 +274,7 @@ From there, we'll cumulatively add each language found to a "master list":
 
 After that, we'll format the contents into a structure that D3 understands:
 
+    #!ruby
     language_obj.each do |lang, count|
       language_byte_count.push :name => "#{lang} (#{count})", :count => count
     end
@@ -275,12 +286,14 @@ After that, we'll format the contents into a structure that D3 understands:
 
 To wrap up, we pass this JSON information over to the same ERB template:
 
+    #!ruby
     erb :lang_freq, :locals => { :languages => languages.to_json, :language_byte_count => language_bytes.to_json}
 
 
 Like before, here's a bunch of JavaScript that you can drop
 directly into your template:
 
+    #!html
     <div id="byte_freq"></div>
     <script>
       var language_bytes = <%= language_byte_count %>

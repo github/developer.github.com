@@ -1,8 +1,8 @@
 ---
-title: GitHub Meta API | GitHub API
+title: Meta | GitHub API
 ---
 
-# GitHub Meta API
+# Meta
 
 This gives some information about GitHub.com, the service.
 

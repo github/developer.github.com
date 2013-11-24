@@ -1,8 +1,8 @@
 ---
-title: Repo Downloads | GitHub API
+title: Downloads | GitHub API
 ---
 
-# Repo Downloads API
+# Downloads
 
 * TOC
 {:toc}

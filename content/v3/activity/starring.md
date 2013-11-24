@@ -1,8 +1,8 @@
 ---
-title: Repository Starring | GitHub API
+title: Starring | GitHub API
 ---
 
-# Repository Starring API
+# Starring
 
 * TOC
 {:toc}

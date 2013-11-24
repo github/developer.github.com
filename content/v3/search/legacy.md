@@ -2,7 +2,7 @@
 title: Legacy Search | GitHub API
 ---
 
-# Legacy Search API
+# Legacy Search
 
 * TOC
 {:toc}

@@ -2,7 +2,7 @@
 title: Gist Comments | GitHub API
 ---
 
-# Gist Comments API
+# Comments
 
 * TOC
 {:toc}

@@ -1,8 +1,8 @@
 ---
-title: Repo Contents | GitHub API
+title: Contents | GitHub API
 ---
 
-# Repo Contents API
+# Contents
 
 * TOC
 {:toc}

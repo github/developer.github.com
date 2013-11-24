@@ -1,8 +1,8 @@
 ---
-title: Repos | GitHub API
+title: Repositories | GitHub API
 ---
 
-# Repos API
+# Repositories
 
 * TOC
 {:toc}

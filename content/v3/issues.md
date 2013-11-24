@@ -2,7 +2,7 @@
 title: Issues | GitHub API
 ---
 
-# Issues API
+# Issues
 
 * TOC
 {:toc}

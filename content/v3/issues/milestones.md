@@ -2,7 +2,7 @@
 title: Issue Milestones | GitHub API
 ---
 
-# Milestones API
+# Milestones
 
 * TOC
 {:toc}

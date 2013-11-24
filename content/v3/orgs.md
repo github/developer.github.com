@@ -2,7 +2,7 @@
 title: Organizations | GitHub API
 ---
 
-# Organizations API
+# Organizations
 
 * TOC
 {:toc}

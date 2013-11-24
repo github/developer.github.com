@@ -2,7 +2,7 @@
 title: Authentication | GitHub API
 ---
 
-# Authentication
+# Other Authentication Methods
 
 * TOC
 {:toc}

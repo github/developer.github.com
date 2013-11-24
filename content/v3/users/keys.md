@@ -2,7 +2,7 @@
 title: User Public Keys | GitHub API
 ---
 
-# User Public Keys API
+# Public Keys
 
 * TOC
 {:toc}

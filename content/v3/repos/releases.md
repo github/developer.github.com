@@ -2,7 +2,7 @@
 title: Releases | GitHub API
 ---
 
-# Releases API
+# Releases
 
 * TOC
 {:toc}

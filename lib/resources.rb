@@ -92,14 +92,14 @@ module GitHub
 
         hash = yield hash if block_given?
 
-        %(<pre class="highlight"><code class="language-javascript">) +
+        %(<pre><code class="language-javascript">) +
           JSON.pretty_generate(hash) + "</code></pre>"
       end
 
       def text_html(response, status, head = {})
         hs = headers(status, head.merge('Content-Type' => 'text/html'))
         res = CGI.escapeHTML(response)
-        hs + %(<pre class="highlight"><code>) + res + "</code></pre>"
+        hs + %(<pre><code>) + res + "</code></pre>"
       end
 
     end

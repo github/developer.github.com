@@ -33,6 +33,7 @@ is set to `http://localhost:4567`. Let's fill in the callback URL as `http://loc
 
 Now, let's start filling out our simple server. Create a file called _server.rb_ and paste this into it:
 
+    #!ruby
     require 'sinatra'
     require 'rest-client'
 
@@ -49,7 +50,7 @@ GitHub--or any other public place, for that matter. We recommend storing them as
 
 Next, in _views/index.erb_, paste this content:
 
-
+    #!html+erb
     <html>
       <head>
       </head>
@@ -79,6 +80,7 @@ the app. Let's fix that now!
 
 In _server.rb_, add a route to specify what the callback should do:
 
+    #!ruby
     get '/callback' do
       # get temporary GitHub code...
       session_code = request.env['rack.request.query_hash']["code"]
@@ -102,12 +104,14 @@ application, you should probably use [a library written in the language of your 
 At last, with this access token, you'll be able to make authenticated requests as
 the logged in user:
 
+    #!ruby
     auth_result = RestClient.get("https://api.github.com/user", {:params => {:access_token => access_token}})
 
     erb :basic, :locals => {:auth_result => auth_result}
 
 We can do whatever we want with our results. In this case, we'll just dump them straight into _basic.erb_:
 
+    #!html+erb
     <p>Okay, here's a JSON dump:</p>
     <p>
       <p>Hello, <%= login %>! It looks like you're <%= hire_status %>.</p>
@@ -133,6 +137,7 @@ This will make authentication transparent to the user.
 After you run `gem install sinatra_auth_github`, create a file called _advanced_server.rb_,
 and paste these lines into it:
 
+    #!ruby
     require 'sinatra/auth/github'
     require 'rest-client'
 
@@ -201,6 +206,7 @@ to simplify your authentication.
 We must also create a _config.ru_ config file, which Rack will use for its configuration
 options:
 
+    #!ruby
     ENV['RACK_ENV'] ||= 'development'
     require "rubygems"
     require "bundler/setup"
@@ -211,6 +217,7 @@ options:
 
 Next, create a file in _views_ called _advanced.erb_, and paste this markup into it:
 
+    #!html+erb
     <html>
       <head>
       </head>

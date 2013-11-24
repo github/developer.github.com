@@ -68,52 +68,50 @@ guide before starting this example. You can find the complete source code for th
 URLs to <code>http://localhost:4567/</code>. As <a href="../basics-of-authentication/">before</a>, we’re going to handle authentication for the API by
 implementing a Rack middleware using <a href="https://github.com/atmos/sinatra_auth_github">sinatra-auth-github</a>:</p>
 
-<pre><code>require 'sinatra/auth/github'
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra/auth/github'</span>
 
-module Example
-  class MyGraphApp &lt; Sinatra::Base
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    # if ENV['GITHUB_CLIENT_ID'] &amp;&amp; ENV['GITHUB_CLIENT_SECRET']
-    #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
-    #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
-    # end
+<span class="k">module</span> <span class="nn">Example</span>
+  <span class="k">class</span> <span class="nc">MyGraphApp</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+    <span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+    <span class="c1"># Instead, set and test environment variables, like below</span>
+    <span class="c1"># if ENV['GITHUB_CLIENT_ID'] &amp;&amp; ENV['GITHUB_CLIENT_SECRET']</span>
+    <span class="c1">#  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']</span>
+    <span class="c1">#  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']</span>
+    <span class="c1"># end</span>
 
-    CLIENT_ID = ENV['GH_GRAPH_CLIENT_ID']
-    CLIENT_SECRET = ENV['GH_GRAPH_SECRET_ID']
+    <span class="no">CLIENT_ID</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'GH_GRAPH_CLIENT_ID'</span><span class="o">]</span>
+    <span class="no">CLIENT_SECRET</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'GH_GRAPH_SECRET_ID'</span><span class="o">]</span>
 
-    enable :sessions
+    <span class="n">enable</span> <span class="ss">:sessions</span>
 
-    set :github_options, {
-      :scopes    =&gt; "repo",
-      :secret    =&gt; CLIENT_SECRET,
-      :client_id =&gt; CLIENT_ID,
-      :callback_url =&gt; "/"
-    }
+    <span class="n">set</span> <span class="ss">:github_options</span><span class="p">,</span> <span class="p">{</span>
+      <span class="ss">:scopes</span>    <span class="o">=&gt;</span> <span class="s2">"repo"</span><span class="p">,</span>
+      <span class="ss">:secret</span>    <span class="o">=&gt;</span> <span class="no">CLIENT_SECRET</span><span class="p">,</span>
+      <span class="ss">:client_id</span> <span class="o">=&gt;</span> <span class="no">CLIENT_ID</span><span class="p">,</span>
+      <span class="ss">:callback_url</span> <span class="o">=&gt;</span> <span class="s2">"/"</span>
+    <span class="p">}</span>
 
-    register Sinatra::Auth::Github
+    <span class="n">register</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Auth</span><span class="o">::</span><span class="no">Github</span>
 
-    get '/' do
-      if !authenticated?
-        authenticate!
-      else
-        access_token = github_user["token"]
-      end
-    end
-  end
-end
-</code></pre>
+    <span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+      <span class="k">if</span> <span class="o">!</span><span class="n">authenticated?</span>
+        <span class="n">authenticate!</span>
+      <span class="k">else</span>
+        <span class="n">access_token</span> <span class="o">=</span> <span class="n">github_user</span><span class="o">[</span><span class="s2">"token"</span><span class="o">]</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
 
 <p>Set up a similar <em>config.ru</em> file as in the previous example:</p>
 
-<pre><code>ENV['RACK_ENV'] ||= 'development'
-require "rubygems"
-require "bundler/setup"
+<pre><code class="language-ruby"><span class="no">ENV</span><span class="o">[</span><span class="s1">'RACK_ENV'</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">'development'</span>
+<span class="nb">require</span> <span class="s2">"rubygems"</span>
+<span class="nb">require</span> <span class="s2">"bundler/setup"</span>
 
-require File.expand_path(File.join(File.dirname(__FILE__), 'server'))
+<span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">),</span> <span class="s1">'server'</span><span class="p">))</span>
 
-run Example::MyGraphApp
-</code></pre>
+<span class="n">run</span> <span class="no">Example</span><span class="o">::</span><span class="no">MyGraphApp</span></code></pre>
 
 <h2 id="fetching-repository-information">Fetching repository information</h2>
 
@@ -125,38 +123,35 @@ so you know it’ll work.</p>
 <p>Authentication with the API via Octokit is easy. Just pass your login
 and token to the <code>Octokit::Client</code> constructor:</p>
 
-<pre><code>if !authenticated?
-  authenticate!
-else
-  octokit_client = Octokit::Client.new(:login =&gt; github_user.login, :oauth_token =&gt; github_user.token)
-end
-</code></pre>
+<pre><code class="language-ruby"><span class="k">if</span> <span class="o">!</span><span class="n">authenticated?</span>
+  <span class="n">authenticate!</span>
+<span class="k">else</span>
+  <span class="n">octokit_client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:login</span> <span class="o">=&gt;</span> <span class="n">github_user</span><span class="o">.</span><span class="n">login</span><span class="p">,</span> <span class="ss">:oauth_token</span> <span class="o">=&gt;</span> <span class="n">github_user</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+<span class="k">end</span></code></pre>
 
 <p>Let’s do something interesting with the data about our repositories. We’re going
 to see the different programming languages they use, and count which ones are used
 most often. To do that, we’ll first need a list of our repositories from the API.
 With Octokit, that looks like this:</p>
 
-<pre><code>repos = client.repositories
-</code></pre>
+<pre><code class="language-ruby"><span class="n">repos</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">repositories</span></code></pre>
 
 <p>Next, we’ll iterate over each repository, and count the language that GitHub
 associates with it:</p>
 
-<pre><code>language_obj = {}
-repos.each do |repo|
-  # sometimes language can be nil
-  if repo.language
-    if !language_obj[repo.language]
-      language_obj[repo.language] = 1
-    else
-      language_obj[repo.language] += 1
-    end
-  end
-end
+<pre><code class="language-ruby"><span class="n">language_obj</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">repos</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">repo</span><span class="o">|</span>
+  <span class="c1"># sometimes language can be nil</span>
+  <span class="k">if</span> <span class="n">repo</span><span class="o">.</span><span class="n">language</span>
+    <span class="k">if</span> <span class="o">!</span><span class="n">language_obj</span><span class="o">[</span><span class="n">repo</span><span class="o">.</span><span class="n">language</span><span class="o">]</span>
+      <span class="n">language_obj</span><span class="o">[</span><span class="n">repo</span><span class="o">.</span><span class="n">language</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span>
+      <span class="n">language_obj</span><span class="o">[</span><span class="n">repo</span><span class="o">.</span><span class="n">language</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 
-languages.to_s
-</code></pre>
+<span class="n">languages</span><span class="o">.</span><span class="n">to_s</span></code></pre>
 
 <p>When you restart your server, your web page should display something
 that looks like this:</p>
@@ -177,13 +172,12 @@ check out <a href="http://www.recursion.org/d3-for-mere-mortals/">“D3 for Mort
 <p>D3 is a JavaScript library, and likes working with data as arrays. So, let’s convert our Ruby hash into
 a JSON array for use by JavaScript in the browser.</p>
 
-<pre><code>languages = []
-language_obj.each do |lang, count|
-  languages.push :language =&gt; lang, :count =&gt; count
-end
+<pre><code class="language-ruby"><span class="n">languages</span> <span class="o">=</span> <span class="o">[]</span>
+<span class="n">language_obj</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">lang</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span>
+  <span class="n">languages</span><span class="o">.</span><span class="n">push</span> <span class="ss">:language</span> <span class="o">=&gt;</span> <span class="n">lang</span><span class="p">,</span> <span class="ss">:count</span> <span class="o">=&gt;</span> <span class="n">count</span>
+<span class="k">end</span>
 
-erb :lang_freq, :locals =&gt; { :languages =&gt; languages.to_json}
-</code></pre>
+<span class="n">erb</span> <span class="ss">:lang_freq</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:languages</span> <span class="o">=&gt;</span> <span class="n">languages</span><span class="o">.</span><span class="n">to_json</span><span class="p">}</span></code></pre>
 
 <p>We’re simply iterating over each key-value pair in our object and pushing them into
 a new array. The reason we didn’t do this earlier is because we didn’t want to iterate
@@ -193,83 +187,82 @@ over our <code>language_obj</code> object while we were creating it.</p>
 For now, you can just use the code provided here, and refer to the resources linked above
 if you want to learn more about how D3 works:</p>
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;meta charset="utf-8"&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"&gt;&lt;/script&gt;
-    &lt;style&gt;
-    svg {
-      padding: 20px;
-    }
-    rect {
-      fill: #2d578b
-    }
-    text {
-      fill: white;
-    }
-    text.yAxis {
-      font-size: 12px;
-      font-family: Helvetica, sans-serif;
-      fill: black;
-    }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;Check this sweet data out:&lt;/p&gt;
-    &lt;div id="lang_freq"&gt;&lt;/div&gt;
+<pre><code class="language-html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+    <span class="nt">svg</span> <span class="p">{</span>
+      <span class="k">padding</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">rect</span> <span class="p">{</span>
+      <span class="n">fill</span><span class="o">:</span> <span class="m">#2d578b</span>
+    <span class="p">}</span>
+    <span class="nt">text</span> <span class="p">{</span>
+      <span class="n">fill</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">text</span><span class="nc">.yAxis</span> <span class="p">{</span>
+      <span class="k">font-size</span><span class="o">:</span> <span class="m">12px</span><span class="p">;</span>
+      <span class="k">font-family</span><span class="o">:</span> <span class="n">Helvetica</span><span class="o">,</span> <span class="k">sans-serif</span><span class="p">;</span>
+      <span class="n">fill</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Check this sweet data out:<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"lang_freq"</span><span class="nt">&gt;&lt;/div&gt;</span>
 
-  &lt;/body&gt;
-  &lt;script&gt;
-    var data = &lt;%= languages %&gt;;
+  <span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;script&gt;</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="o">&lt;%=</span> <span class="nx">languages</span> <span class="o">%&gt;</span><span class="p">;</span>
 
-    var barWidth = 40;
-    var width = (barWidth + 10) * data.length;
-    var height = 300;
+    <span class="kd">var</span> <span class="nx">barWidth</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="p">(</span><span class="nx">barWidth</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
 
-    var x = d3.scale.linear().domain([0, data.length]).range([0, width]);
-    var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum.count; })]).
-      rangeRound([0, height]);
+    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">linear</span><span class="p">().</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">]).</span><span class="nx">range</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">width</span><span class="p">]);</span>
+    <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">linear</span><span class="p">().</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">datum</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span> <span class="p">})]).</span>
+      <span class="nx">rangeRound</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">height</span><span class="p">]);</span>
 
-    // add the canvas to the DOM
-    var languageBars = d3.select("#lang_freq").
-      append("svg:svg").
-      attr("width", width).
-      attr("height", height);
+    <span class="c1">// add the canvas to the DOM</span>
+    <span class="kd">var</span> <span class="nx">languageBars</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">"#lang_freq"</span><span class="p">).</span>
+      <span class="nx">append</span><span class="p">(</span><span class="s2">"svg:svg"</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"width"</span><span class="p">,</span> <span class="nx">width</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"height"</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 
-    languageBars.selectAll("rect").
-      data(data).
-      enter().
-      append("svg:rect").
-      attr("x", function(datum, index) { return x(index); }).
-      attr("y", function(datum) { return height - y(datum.count); }).
-      attr("height", function(datum) { return y(datum.count); }).
-      attr("width", barWidth);
+    <span class="nx">languageBars</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"rect"</span><span class="p">).</span>
+      <span class="nx">data</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span>
+      <span class="nx">enter</span><span class="p">().</span>
+      <span class="nx">append</span><span class="p">(</span><span class="s2">"svg:rect"</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span> <span class="p">}).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">height</span> <span class="o">-</span> <span class="nx">y</span><span class="p">(</span><span class="nx">datum</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span> <span class="p">}).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"height"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">y</span><span class="p">(</span><span class="nx">datum</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span> <span class="p">}).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"width"</span><span class="p">,</span> <span class="nx">barWidth</span><span class="p">);</span>
 
-    languageBars.selectAll("text").
-      data(data).
-      enter().
-      append("svg:text").
-      attr("x", function(datum, index) { return x(index) + barWidth; }).
-      attr("y", function(datum) { return height - y(datum.count); }).
-      attr("dx", -barWidth/2).
-      attr("dy", "1.2em").
-      attr("text-anchor", "middle").
-      text(function(datum) { return datum.count;});
+    <span class="nx">languageBars</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"text"</span><span class="p">).</span>
+      <span class="nx">data</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span>
+      <span class="nx">enter</span><span class="p">().</span>
+      <span class="nx">append</span><span class="p">(</span><span class="s2">"svg:text"</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">+</span> <span class="nx">barWidth</span><span class="p">;</span> <span class="p">}).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">height</span> <span class="o">-</span> <span class="nx">y</span><span class="p">(</span><span class="nx">datum</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span> <span class="p">}).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"dx"</span><span class="p">,</span> <span class="o">-</span><span class="nx">barWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"dy"</span><span class="p">,</span> <span class="s2">"1.2em"</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"text-anchor"</span><span class="p">,</span> <span class="s2">"middle"</span><span class="p">).</span>
+      <span class="nx">text</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">datum</span><span class="p">.</span><span class="nx">count</span><span class="p">;});</span>
 
-    languageBars.selectAll("text.yAxis").
-      data(data).
-      enter().append("svg:text").
-      attr("x", function(datum, index) { return x(index) + barWidth; }).
-      attr("y", height).
-      attr("dx", -barWidth/2).
-      attr("text-anchor", "middle").
-      text(function(datum) { return datum.language;}).
-      attr("transform", "translate(0, 18)").
-      attr("class", "yAxis");
-  &lt;/script&gt;
-&lt;/html&gt;
-</code></pre>
+    <span class="nx">languageBars</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"text.yAxis"</span><span class="p">).</span>
+      <span class="nx">data</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span>
+      <span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">"svg:text"</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span><span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">+</span> <span class="nx">barWidth</span><span class="p">;</span> <span class="p">}).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="nx">height</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"dx"</span><span class="p">,</span> <span class="o">-</span><span class="nx">barWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"text-anchor"</span><span class="p">,</span> <span class="s2">"middle"</span><span class="p">).</span>
+      <span class="nx">text</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">datum</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">datum</span><span class="p">.</span><span class="nx">language</span><span class="p">;}).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="s2">"translate(0, 18)"</span><span class="p">).</span>
+      <span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span> <span class="s2">"yAxis"</span><span class="p">);</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre>
 
 <p>Phew! Again, don’t worry about what most of this code is doing. The relevant part
 here is a line way at the top–<code>var data = &lt;%= languages %&gt;;</code>–which indicates
@@ -292,99 +285,93 @@ should be a great way to visualize the sizes of our coding languages used, rathe
 than simply the count. We’ll need to construct an array of objects that looks
 something like this:</p>
 
-<pre><code>[ { "name": "language1", "size": 100},
-  { "name": "language2", "size": 23}
-  ...
-]
-</code></pre>
+<pre><code class="language-javascript"><span class="p">[</span> <span class="p">{</span> <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"language1"</span><span class="p">,</span> <span class="s2">"size"</span><span class="o">:</span> <span class="mi">100</span><span class="p">},</span>
+  <span class="p">{</span> <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"language2"</span><span class="p">,</span> <span class="s2">"size"</span><span class="o">:</span> <span class="mi">23</span><span class="p">}</span>
+  <span class="p">...</span>
+<span class="p">]</span></code></pre>
 
 <p>Since we already have a list of repositories above, let’s inspect each one, and
 call <a href="http://developer.github.com/v3/repos/#list-languages">the language listing API method</a>:</p>
 
-<pre><code>repos.each do |repo|
-  repo_name = repo.name
-  repo_langs = octokit_client.languages("#{github_user.login}/#{repo_name}")
-end
-</code></pre>
+<pre><code class="language-ruby"><span class="n">repos</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">repo</span><span class="o">|</span>
+  <span class="n">repo_name</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">name</span>
+  <span class="n">repo_langs</span> <span class="o">=</span> <span class="n">octokit_client</span><span class="o">.</span><span class="n">languages</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="n">github_user</span><span class="o">.</span><span class="n">login</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">repo_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">end</span></code></pre>
 
 <p>From there, we’ll cumulatively add each language found to a “master list”:</p>
 
-<pre><code>repo_langs.each do |lang, count|
-  if !language_obj[lang]
-    language_obj[lang] = count
-  else
-    language_obj[lang] += count
-  end
-end
-</code></pre>
+<pre><code class="language-ruby"><span class="n">repo_langs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">lang</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span>
+  <span class="k">if</span> <span class="o">!</span><span class="n">language_obj</span><span class="o">[</span><span class="n">lang</span><span class="o">]</span>
+    <span class="n">language_obj</span><span class="o">[</span><span class="n">lang</span><span class="o">]</span> <span class="o">=</span> <span class="n">count</span>
+  <span class="k">else</span>
+    <span class="n">language_obj</span><span class="o">[</span><span class="n">lang</span><span class="o">]</span> <span class="o">+=</span> <span class="n">count</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
 
 <p>After that, we’ll format the contents into a structure that D3 understands:</p>
 
-<pre><code>language_obj.each do |lang, count|
-  language_byte_count.push :name =&gt; "#{lang} (#{count})", :count =&gt; count
-end
+<pre><code class="language-ruby"><span class="n">language_obj</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">lang</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span>
+  <span class="n">language_byte_count</span><span class="o">.</span><span class="n">push</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">#{</span><span class="n">lang</span><span class="si">}</span><span class="s2"> (</span><span class="si">#{</span><span class="n">count</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="ss">:count</span> <span class="o">=&gt;</span> <span class="n">count</span>
+<span class="k">end</span>
 
-# some mandatory formatting for D3
-language_bytes = [ :name =&gt; "language_bytes", :elements =&gt; language_byte_count]
-</code></pre>
+<span class="c1"># some mandatory formatting for D3</span>
+<span class="n">language_bytes</span> <span class="o">=</span> <span class="o">[</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"language_bytes"</span><span class="p">,</span> <span class="ss">:elements</span> <span class="o">=&gt;</span> <span class="n">language_byte_count</span><span class="o">]</span></code></pre>
 
 <p>(For more information on D3 tree map magic, check out <a href="http://developer.github.com/v3/repos/#list-languages">this simple tutorial</a>.)</p>
 
 <p>To wrap up, we pass this JSON information over to the same ERB template:</p>
 
-<pre><code>erb :lang_freq, :locals =&gt; { :languages =&gt; languages.to_json, :language_byte_count =&gt; language_bytes.to_json}
-</code></pre>
+<pre><code class="language-ruby"><span class="n">erb</span> <span class="ss">:lang_freq</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:languages</span> <span class="o">=&gt;</span> <span class="n">languages</span><span class="o">.</span><span class="n">to_json</span><span class="p">,</span> <span class="ss">:language_byte_count</span> <span class="o">=&gt;</span> <span class="n">language_bytes</span><span class="o">.</span><span class="n">to_json</span><span class="p">}</span></code></pre>
 
 <p>Like before, here’s a bunch of JavaScript that you can drop
 directly into your template:</p>
 
-<pre><code>&lt;div id="byte_freq"&gt;&lt;/div&gt;
-&lt;script&gt;
-  var language_bytes = &lt;%= language_byte_count %&gt;
+<pre><code class="language-html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"byte_freq"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  <span class="kd">var</span> <span class="nx">language_bytes</span> <span class="o">=</span> <span class="o">&lt;%=</span> <span class="nx">language_byte_count</span> <span class="o">%&gt;</span>
 
-  var childrenFunction = function(d){return d.elements};
-  var sizeFunction = function(d){return d.count;};
-  var colorFunction = function(d){return Math.floor(Math.random()*20)};
-  var nameFunction = function(d){return d.name;};
+  <span class="kd">var</span> <span class="nx">childrenFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">elements</span><span class="p">};</span>
+  <span class="kd">var</span> <span class="nx">sizeFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">count</span><span class="p">;};</span>
+  <span class="kd">var</span> <span class="nx">colorFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">20</span><span class="p">)};</span>
+  <span class="kd">var</span> <span class="nx">nameFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">name</span><span class="p">;};</span>
 
-  var color = d3.scale.linear()
-              .domain([0,10,15,20])
-              .range(["grey","green","yellow","red"]);
+  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">linear</span><span class="p">()</span>
+              <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+              <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="s2">"grey"</span><span class="p">,</span><span class="s2">"green"</span><span class="p">,</span><span class="s2">"yellow"</span><span class="p">,</span><span class="s2">"red"</span><span class="p">]);</span>
 
-  drawTreemap(5000, 2000, '#byte_freq', language_bytes, childrenFunction, nameFunction, sizeFunction, colorFunction, color);
+  <span class="nx">drawTreemap</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">'#byte_freq'</span><span class="p">,</span> <span class="nx">language_bytes</span><span class="p">,</span> <span class="nx">childrenFunction</span><span class="p">,</span> <span class="nx">nameFunction</span><span class="p">,</span> <span class="nx">sizeFunction</span><span class="p">,</span> <span class="nx">colorFunction</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
 
-  function drawTreemap(height,width,elementSelector,language_bytes,childrenFunction,nameFunction,sizeFunction,colorFunction,colorScale){
+  <span class="kd">function</span> <span class="nx">drawTreemap</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span><span class="nx">width</span><span class="p">,</span><span class="nx">elementSelector</span><span class="p">,</span><span class="nx">language_bytes</span><span class="p">,</span><span class="nx">childrenFunction</span><span class="p">,</span><span class="nx">nameFunction</span><span class="p">,</span><span class="nx">sizeFunction</span><span class="p">,</span><span class="nx">colorFunction</span><span class="p">,</span><span class="nx">colorScale</span><span class="p">){</span>
 
-      var treemap = d3.layout.treemap()
-          .children(childrenFunction)
-          .size([width,height])
-          .value(sizeFunction);
+      <span class="kd">var</span> <span class="nx">treemap</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">treemap</span><span class="p">()</span>
+          <span class="p">.</span><span class="nx">children</span><span class="p">(</span><span class="nx">childrenFunction</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">size</span><span class="p">([</span><span class="nx">width</span><span class="p">,</span><span class="nx">height</span><span class="p">])</span>
+          <span class="p">.</span><span class="nx">value</span><span class="p">(</span><span class="nx">sizeFunction</span><span class="p">);</span>
 
-      var div = d3.select(elementSelector)
-          .append("div")
-          .style("position","relative")
-          .style("width",width + "px")
-          .style("height",height + "px");
+      <span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="nx">elementSelector</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"position"</span><span class="p">,</span><span class="s2">"relative"</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"width"</span><span class="p">,</span><span class="nx">width</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"height"</span><span class="p">,</span><span class="nx">height</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">);</span>
 
-      div.data(language_bytes).selectAll("div")
-          .data(function(d){return treemap.nodes(d);})
-          .enter()
-          .append("div")
-          .attr("class","cell")
-          .style("background",function(d){ return colorScale(colorFunction(d));})
-          .call(cell)
-          .text(nameFunction);
-  }
+      <span class="nx">div</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">language_bytes</span><span class="p">).</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">treemap</span><span class="p">.</span><span class="nx">nodes</span><span class="p">(</span><span class="nx">d</span><span class="p">);})</span>
+          <span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+          <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">"div"</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span><span class="s2">"cell"</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"background"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span> <span class="k">return</span> <span class="nx">colorScale</span><span class="p">(</span><span class="nx">colorFunction</span><span class="p">(</span><span class="nx">d</span><span class="p">));})</span>
+          <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">cell</span><span class="p">)</span>
+          <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">nameFunction</span><span class="p">);</span>
+  <span class="p">}</span>
 
-  function cell(){
-      this
-          .style("left",function(d){return d.x + "px";})
-          .style("top",function(d){return d.y + "px";})
-          .style("width",function(d){return d.dx - 1 + "px";})
-          .style("height",function(d){return d.dy - 1 + "px";});
-  }
-&lt;/script&gt;
-</code></pre>
+  <span class="kd">function</span> <span class="nx">cell</span><span class="p">(){</span>
+      <span class="k">this</span>
+          <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"left"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">;})</span>
+          <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"top"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">;})</span>
+          <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"width"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">dx</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">;})</span>
+          <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"height"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">dy</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">;});</span>
+  <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span></code></pre>
 
 <p>Et voila! Beautiful rectangles containing your repo languages, with relative
 proportions that are easy to see at a glance. You might need to

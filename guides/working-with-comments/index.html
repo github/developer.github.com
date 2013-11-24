@@ -73,20 +73,19 @@ create comments on a Pull Request.</p>
 <p>The following code should help you get started accessing comments from a Pull Request
 using Octokit.rb:</p>
 
-<pre><code>require 'octokit'
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
-# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-# Instead, set and test environment variables, like below
-client = Octokit::Client.new :access_token =&gt; ENV['MY_PERSONAL_TOKEN']
+<span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+<span class="c1"># Instead, set and test environment variables, like below</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
 
-client.issue_comments("octocat/Spoon-Knife", 1176).each do |comment|
-  username = comment[:user][:login]
-  post_date = comment[:created_at]
-  content = comment[:body]
+<span class="n">client</span><span class="o">.</span><span class="n">issue_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="mi">1176</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
+  <span class="n">username</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:user</span><span class="o">][</span><span class="ss">:login</span><span class="o">]</span>
+  <span class="n">post_date</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:created_at</span><span class="o">]</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:body</span><span class="o">]</span>
 
-  puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
-end
-</code></pre>
+  <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="n">username</span><span class="si">}</span><span class="s2"> made a comment on </span><span class="si">#{</span><span class="n">post_date</span><span class="si">}</span><span class="s2">. It says:</span><span class="se">\n</span><span class="s2">'</span><span class="si">#{</span><span class="n">content</span><span class="si">}</span><span class="s2">'</span><span class="se">\n</span><span class="s2">"</span>
+<span class="k">end</span></code></pre>
 
 <p>Here, we’re specifically calling out to the Issues API to get the comments (<code>issue_comments</code>),
 providing both the repository’s name (<code>octocat/Spoon-Knife</code>), and the Pull Request ID
@@ -96,27 +95,26 @@ the comments to fetch information about each one.</p>
 <h2 id="pull-request-comments-on-a-line">Pull Request Comments on a Line</h2>
 
 <p>Within the diff view, you can start a discussion on a particular aspect of a singular
-change made within the Pull Request. These comments occur on the individual lines 
+change made within the Pull Request. These comments occur on the individual lines
 within a changed file. The endpoint URL for this discussion comes from <a href="http://developer.github.com/v3/pulls/comments/">the Pull Request Review API</a>.</p>
 
 <p>The following code fetches all the Pull Request comments made on files, given a single Pull Request number:</p>
 
-<pre><code>require 'octokit'
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
-# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-# Instead, set and test environment variables, like below
-client = Octokit::Client.new :access_token =&gt; ENV['MY_PERSONAL_TOKEN']
+<span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+<span class="c1"># Instead, set and test environment variables, like below</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
 
-client.pull_request_comments("octocat/Spoon-Knife", 1176).each do |comment|
-  username = comment[:user][:login]
-  post_date = comment[:created_at]
-  content = comment[:body]
-  path = comment[:path]
-  position = comment[:position]
+<span class="n">client</span><span class="o">.</span><span class="n">pull_request_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="mi">1176</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
+  <span class="n">username</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:user</span><span class="o">][</span><span class="ss">:login</span><span class="o">]</span>
+  <span class="n">post_date</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:created_at</span><span class="o">]</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:body</span><span class="o">]</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:path</span><span class="o">]</span>
+  <span class="n">position</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:position</span><span class="o">]</span>
 
-  puts "#{username} made a comment on #{post_date} for the file called #{path}, on line #{position}. It says:\n'#{content}'\n"
-end
-</code></pre>
+  <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="n">username</span><span class="si">}</span><span class="s2"> made a comment on </span><span class="si">#{</span><span class="n">post_date</span><span class="si">}</span><span class="s2"> for the file called </span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">, on line </span><span class="si">#{</span><span class="n">position</span><span class="si">}</span><span class="s2">. It says:</span><span class="se">\n</span><span class="s2">'</span><span class="si">#{</span><span class="n">content</span><span class="si">}</span><span class="s2">'</span><span class="se">\n</span><span class="s2">"</span>
+<span class="k">end</span></code></pre>
 
 <p>You’ll notice that it’s incredibly similar to the example above. The difference
 between this view and the Pull Request comment is the focus of the conversation.
@@ -132,20 +130,19 @@ they make use of <a href="http://developer.github.com/v3/repos/comments/#get-a-s
 <p>To retrieve the comments on a commit, you’ll want to use the SHA1 of the commit.
 In other words, you won’t use any identifier related to the Pull Request. Here’s an example:</p>
 
-<pre><code>require 'octokit'
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
-# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-# Instead, set and test environment variables, like below
-client = Octokit::Client.new :access_token =&gt; ENV['MY_PERSONAL_TOKEN']
+<span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+<span class="c1"># Instead, set and test environment variables, like below</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
 
-client.commit_comments("octocat/Spoon-Knife", "cbc28e7c8caee26febc8c013b0adfb97a4edd96e").each do |comment|
-  username = comment[:user][:login]
-  post_date = comment[:created_at]
-  content = comment[:body]
+<span class="n">client</span><span class="o">.</span><span class="n">commit_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="s2">"cbc28e7c8caee26febc8c013b0adfb97a4edd96e"</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
+  <span class="n">username</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:user</span><span class="o">][</span><span class="ss">:login</span><span class="o">]</span>
+  <span class="n">post_date</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:created_at</span><span class="o">]</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:body</span><span class="o">]</span>
 
-  puts "#{username} made a comment on #{post_date}. It says:\n'#{content}'\n"
-end
-</code></pre>
+  <span class="nb">puts</span> <span class="s2">"</span><span class="si">#{</span><span class="n">username</span><span class="si">}</span><span class="s2"> made a comment on </span><span class="si">#{</span><span class="n">post_date</span><span class="si">}</span><span class="s2">. It says:</span><span class="se">\n</span><span class="s2">'</span><span class="si">#{</span><span class="n">content</span><span class="si">}</span><span class="s2">'</span><span class="se">\n</span><span class="s2">"</span>
+<span class="k">end</span></code></pre>
 
 <p>Note that this API call will retrieve single line comments, as well as comments made
 on the entire commit.</p>

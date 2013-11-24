@@ -77,16 +77,15 @@ is set to <code>http://localhost:4567</code>. Let’s fill in the callback URL a
 
 <p>Now, let’s start filling out our simple server. Create a file called <em>server.rb</em> and paste this into it:</p>
 
-<pre><code>require 'sinatra'
-require 'rest-client'
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<span class="nb">require</span> <span class="s1">'rest-client'</span>
 
-CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
-CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
+<span class="no">CLIENT_ID</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'GH_BASIC_CLIENT_ID'</span><span class="o">]</span>
+<span class="no">CLIENT_SECRET</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'GH_BASIC_SECRET_ID'</span><span class="o">]</span>
 
-get '/' do
-  erb :index, :locals =&gt; {:client_id =&gt; CLIENT_ID}
-end
-</code></pre>
+<span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+  <span class="n">erb</span> <span class="ss">:index</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:client_id</span> <span class="o">=&gt;</span> <span class="no">CLIENT_ID</span><span class="p">}</span>
+<span class="k">end</span></code></pre>
 
 <p>Your client ID and client secret keys come from <a href="https://github.com/settings/applications">your application’s configuration page</a>. You should <strong>never, <em>ever</em></strong> store these values in
 GitHub–or any other public place, for that matter. We recommend storing them as
@@ -94,24 +93,23 @@ GitHub–or any other public place, for that matter. We recommend storing them a
 
 <p>Next, in <em>views/index.erb</em>, paste this content:</p>
 
-<pre><code>&lt;html&gt;
-  &lt;head&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;Well, hello there!&lt;/p&gt;
-    &lt;p&gt;We're going to now talk to the GitHub API. Ready? &lt;a href="https://github.com/login/oauth/authorize?client_id=&lt;%= client_id %&gt;"&gt;Click here&lt;/a&gt; to begin!&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;If that link doesn't work, remember to provide your own &lt;a href="/v3/oauth/#web-application-flow"&gt;Client ID&lt;/a&gt;!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<pre><code class="language-html+erb"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Well, hello there!<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>We're going to now talk to the GitHub API. Ready? <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/login/oauth/authorize?client_id=</span><span class="cp">&lt;%=</span> <span class="n">client_id</span> <span class="cp">%&gt;</span><span class="s">"</span><span class="nt">&gt;</span>Click here<span class="nt">&lt;/a&gt;</span> to begin!<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>If that link doesn't work, remember to provide your own <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/v3/oauth/#web-application-flow"</span><span class="nt">&gt;</span>Client ID<span class="nt">&lt;/a&gt;</span>!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre>
 
 <p>(If you’re unfamiliar with how Sinatra works, we recommend <a href="http://sinatra-book.gittr.com/#hello_world_application">reading the Sinatra guide</a>.)</p>
 
 <p>Obviously, you’ll want to change <code>&lt;your_client_id&gt;</code> to match your actual Client ID.</p>
 
 <p>Navigate your browser to <code>http://localhost:4567</code>. After clicking on the link, you
-should be taken to GitHub, and presented with a dialog that looks something like this:<br />
-<img src="/images/oauth_prompt.png" alt="" /></p>
+should be taken to GitHub, and presented with a dialog that looks something like this:<br>
+<img src="/images/oauth_prompt.png" alt=""></p>
 
 <p>If you trust yourself, click <strong>Authorize App</strong>. Wuh-oh! Sinatra spits out a
 <code>404</code> error. What gives?!</p>
@@ -124,20 +122,19 @@ the app. Let’s fix that now!</p>
 
 <p>In <em>server.rb</em>, add a route to specify what the callback should do:</p>
 
-<pre><code>get '/callback' do
-  # get temporary GitHub code...
-  session_code = request.env['rack.request.query_hash']["code"]
-  # ... and POST it back to GitHub
-  result = RestClient.post("https://github.com/login/oauth/access_token",
-                          {:client_id =&gt; CLIENT_ID,
-                           :client_secret =&gt; CLIENT_SECRET,
-                           :code =&gt; session_code
-                          },{
-                           :accept =&gt; :json
-                          })
-  access_token = JSON.parse(result)["access_token"]
-end
-</code></pre>
+<pre><code class="language-ruby"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
+  <span class="c1"># get temporary GitHub code...</span>
+  <span class="n">session_code</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">'rack.request.query_hash'</span><span class="o">][</span><span class="s2">"code"</span><span class="o">]</span>
+  <span class="c1"># ... and POST it back to GitHub</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">"https://github.com/login/oauth/access_token"</span><span class="p">,</span>
+                          <span class="p">{</span><span class="ss">:client_id</span> <span class="o">=&gt;</span> <span class="no">CLIENT_ID</span><span class="p">,</span>
+                           <span class="ss">:client_secret</span> <span class="o">=&gt;</span> <span class="no">CLIENT_SECRET</span><span class="p">,</span>
+                           <span class="ss">:code</span> <span class="o">=&gt;</span> <span class="n">session_code</span>
+                          <span class="p">},{</span>
+                           <span class="ss">:accept</span> <span class="o">=&gt;</span> <span class="ss">:json</span>
+                          <span class="p">})</span>
+  <span class="n">access_token</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s2">"access_token"</span><span class="o">]</span>
+<span class="k">end</span></code></pre>
 
 <p>After a successful app authentication, GitHub provides a temporary <code>code</code> value.
 You’ll need to <code>POST</code> this code back to GitHub in exchange for an <code>access_token</code>.
@@ -148,18 +145,16 @@ application, you should probably use <a href="/libraries/">a library written in 
 <p>At last, with this access token, you’ll be able to make authenticated requests as
 the logged in user:</p>
 
-<pre><code>auth_result = RestClient.get("https://api.github.com/user", {:params =&gt; {:access_token =&gt; access_token}})
+<pre><code class="language-ruby"><span class="n">auth_result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://api.github.com/user"</span><span class="p">,</span> <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">}})</span>
 
-erb :basic, :locals =&gt; {:auth_result =&gt; auth_result}
-</code></pre>
+<span class="n">erb</span> <span class="ss">:basic</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:auth_result</span> <span class="o">=&gt;</span> <span class="n">auth_result</span><span class="p">}</span></code></pre>
 
 <p>We can do whatever we want with our results. In this case, we’ll just dump them straight into <em>basic.erb</em>:</p>
 
-<pre><code>&lt;p&gt;Okay, here's a JSON dump:&lt;/p&gt;
-&lt;p&gt;
-  &lt;p&gt;Hello, &lt;%= login %&gt;! It looks like you're &lt;%= hire_status %&gt;.&lt;/p&gt;
-&lt;/p&gt;
-</code></pre>
+<pre><code class="language-html+erb"><span class="nt">&lt;p&gt;</span>Okay, here's a JSON dump:<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Hello, <span class="cp">&lt;%=</span> <span class="n">login</span> <span class="cp">%&gt;</span>! It looks like you're <span class="cp">&lt;%=</span> <span class="n">hire_status</span> <span class="cp">%&gt;</span>.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/p&gt;</span></code></pre>
 
 <h2 id="implementing-persistent-authentication">Implementing “persistent” authentication</h2>
 
@@ -181,57 +176,56 @@ This will make authentication transparent to the user.</p>
 <p>After you run <code>gem install sinatra_auth_github</code>, create a file called <em>advanced_server.rb</em>,
 and paste these lines into it:</p>
 
-<pre><code>require 'sinatra/auth/github'
-require 'rest-client'
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra/auth/github'</span>
+<span class="nb">require</span> <span class="s1">'rest-client'</span>
 
-module Example
-  class MyBasicApp &lt; Sinatra::Base
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    # if ENV['GITHUB_CLIENT_ID'] &amp;&amp; ENV['GITHUB_CLIENT_SECRET']
-    #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
-    #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
-    # end
+<span class="k">module</span> <span class="nn">Example</span>
+  <span class="k">class</span> <span class="nc">MyBasicApp</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+    <span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+    <span class="c1"># Instead, set and test environment variables, like below</span>
+    <span class="c1"># if ENV['GITHUB_CLIENT_ID'] &amp;&amp; ENV['GITHUB_CLIENT_SECRET']</span>
+    <span class="c1">#  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']</span>
+    <span class="c1">#  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']</span>
+    <span class="c1"># end</span>
 
-    CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
-    CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
+    <span class="no">CLIENT_ID</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'GH_BASIC_CLIENT_ID'</span><span class="o">]</span>
+    <span class="no">CLIENT_SECRET</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'GH_BASIC_SECRET_ID'</span><span class="o">]</span>
 
-    enable :sessions
+    <span class="n">enable</span> <span class="ss">:sessions</span>
 
-    set :github_options, {
-      :scopes    =&gt; "user",
-      :secret    =&gt; CLIENT_SECRET,
-      :client_id =&gt; CLIENT_ID,
-      :callback_url =&gt; "/callback"
-    }
+    <span class="n">set</span> <span class="ss">:github_options</span><span class="p">,</span> <span class="p">{</span>
+      <span class="ss">:scopes</span>    <span class="o">=&gt;</span> <span class="s2">"user"</span><span class="p">,</span>
+      <span class="ss">:secret</span>    <span class="o">=&gt;</span> <span class="no">CLIENT_SECRET</span><span class="p">,</span>
+      <span class="ss">:client_id</span> <span class="o">=&gt;</span> <span class="no">CLIENT_ID</span><span class="p">,</span>
+      <span class="ss">:callback_url</span> <span class="o">=&gt;</span> <span class="s2">"/callback"</span>
+    <span class="p">}</span>
 
-    register Sinatra::Auth::Github
+    <span class="n">register</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Auth</span><span class="o">::</span><span class="no">Github</span>
 
-    get '/' do
-      if !authenticated?
-        authenticate!
-      else
-        access_token = github_user["token"]
-        auth_result = RestClient.get("https://api.github.com/user", {:params =&gt; {:access_token =&gt; access_token, :accept =&gt; :json},
-                                                                                  :accept =&gt; :json})
+    <span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+      <span class="k">if</span> <span class="o">!</span><span class="n">authenticated?</span>
+        <span class="n">authenticate!</span>
+      <span class="k">else</span>
+        <span class="n">access_token</span> <span class="o">=</span> <span class="n">github_user</span><span class="o">[</span><span class="s2">"token"</span><span class="o">]</span>
+        <span class="n">auth_result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"https://api.github.com/user"</span><span class="p">,</span> <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">,</span> <span class="ss">:accept</span> <span class="o">=&gt;</span> <span class="ss">:json</span><span class="p">},</span>
+                                                                                  <span class="ss">:accept</span> <span class="o">=&gt;</span> <span class="ss">:json</span><span class="p">})</span>
 
-        auth_result = JSON.parse(auth_result)
+        <span class="n">auth_result</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">auth_result</span><span class="p">)</span>
 
-        erb :advanced, :locals =&gt; {:login =&gt; auth_result["login"],
-                                   :hire_status =&gt; auth_result["hireable"] ? "hireable" : "not hireable"}
-      end
-    end
+        <span class="n">erb</span> <span class="ss">:advanced</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:login</span> <span class="o">=&gt;</span> <span class="n">auth_result</span><span class="o">[</span><span class="s2">"login"</span><span class="o">]</span><span class="p">,</span>
+                                   <span class="ss">:hire_status</span> <span class="o">=&gt;</span> <span class="n">auth_result</span><span class="o">[</span><span class="s2">"hireable"</span><span class="o">]</span> <span class="p">?</span> <span class="s2">"hireable"</span> <span class="p">:</span> <span class="s2">"not hireable"</span><span class="p">}</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
 
-    get '/callback' do
-      if authenticated?
-        redirect "/"
-      else
-        authenticate!
-      end
-    end
-  end
-end
-</code></pre>
+    <span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
+      <span class="k">if</span> <span class="n">authenticated?</span>
+        <span class="n">redirect</span> <span class="s2">"/"</span>
+      <span class="k">else</span>
+        <span class="n">authenticate!</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre>
 
 <p>Much of the code should look familiar. For example, we’re still using <code>RestClient.get</code>
 to call out to the GitHub API, and we’re still passing our results to be rendered
@@ -250,25 +244,23 @@ to simplify your authentication.</p>
 <p>We must also create a <em>config.ru</em> config file, which Rack will use for its configuration
 options:</p>
 
-<pre><code>ENV['RACK_ENV'] ||= 'development'
-require "rubygems"
-require "bundler/setup"
+<pre><code class="language-ruby"><span class="no">ENV</span><span class="o">[</span><span class="s1">'RACK_ENV'</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">'development'</span>
+<span class="nb">require</span> <span class="s2">"rubygems"</span>
+<span class="nb">require</span> <span class="s2">"bundler/setup"</span>
 
-require File.expand_path(File.join(File.dirname(__FILE__), 'advanced_server'))
+<span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">),</span> <span class="s1">'advanced_server'</span><span class="p">))</span>
 
-run Example::MyBasicApp
-</code></pre>
+<span class="n">run</span> <span class="no">Example</span><span class="o">::</span><span class="no">MyBasicApp</span></code></pre>
 
 <p>Next, create a file in <em>views</em> called <em>advanced.erb</em>, and paste this markup into it:</p>
 
-<pre><code>&lt;html&gt;
-  &lt;head&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;Well, well, well, &lt;%= login %&gt;! It looks like you're &lt;em&gt;still&lt;/em&gt; &lt;%= hire_status %&gt;!&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<pre><code class="language-html+erb"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Well, well, well, <span class="cp">&lt;%=</span> <span class="n">login</span> <span class="cp">%&gt;</span>! It looks like you're <span class="nt">&lt;em&gt;</span>still<span class="nt">&lt;/em&gt;</span> <span class="cp">&lt;%=</span> <span class="n">hire_status</span> <span class="cp">%&gt;</span>!<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre>
 
 <p>From the command line, call <code>rackup -p 4567</code>, which starts up your
 Rack server on port <code>4567</code>–the same port we used when we had a simple Sinatra app.

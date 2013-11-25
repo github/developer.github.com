@@ -45,7 +45,7 @@
   	<div class="content">
     	<h1 id="meta">Meta</h1>
 
-<p>This gives some information about GitHub.com, the service.</p>
+<p>This gives some information about the GitHub server.</p>
 
 <pre><code>GET /meta
 </code></pre>
@@ -62,7 +62,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">],</span>
   <span class="s2">"git"</span><span class="o">:</span> <span class="p">[</span>
     <span class="s2">"127.0.0.1/32"</span>
-  <span class="p">]</span>
+  <span class="p">],</span>
+  <span class="s2">"verifiable_password_authentication"</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="body">Body</h3>
@@ -81,14 +82,19 @@ X-RateLimit-Remaining: 4999</code></pre>
       <td>
 <code>array</code> of <code>strings</code>
 </td>
-      <td>An Array of IP addresses in CIDR format specifying the addresses that incoming service hooks will originate from.  Subscribe to the <a href="http://developer.github.com/changes/">API Changes blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> on Twitter to get updated when this list changes.</td>
+      <td>An Array of IP addresses in CIDR format specifying the addresses that incoming service hooks will originate from on GitHub.com.  Subscribe to the <a href="http://developer.github.com/changes/">API Changes blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> on Twitter to get updated when this list changes.</td>
     </tr>
     <tr>
       <td><code>git</code></td>
       <td>
 <code>array</code> of <code>strings</code>
 </td>
-      <td>An Array of IP addresses in CIDR format specifying the Git servers at GitHub.</td>
+      <td>An Array of IP addresses in CIDR format specifying the Git servers for GitHub.com.</td>
+    </tr>
+    <tr>
+      <td><code>verifiable_password_authentication</code></td>
+      <td><code>boolean</code></td>
+      <td>Whether <a href="/v3/auth/#basic-authentication">Basic Authentication</a> is supported. Some <a href="https://enterprise.github.com/">GitHub Enterprise</a> servers may return <code>false</code> here.</td>
     </tr>
   </tbody>
 </table>

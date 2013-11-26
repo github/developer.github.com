@@ -157,7 +157,7 @@ $(function() {
   
   // Update the UI representation of the search hits
   function updateResults(){
-    $("#search-results").show().empty();
+    $("#search-results").empty();
     
     // Check if there are any results. If not, show placeholder and exit
     // […]

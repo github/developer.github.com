@@ -126,14 +126,14 @@ $(function() {
   
   // Press ESC to exit search
   $("#search").keydown(function(e) {
-    if (e.keyCode == 27) exitSearch();
+    if (e.keyCode == 27) cancelSearch();
   });
   
   $(".cancel-search").click(function(e) {
-    exitSearch();
+    cancelSearch();
   });
   
-  function exitSearch() {
+  function cancelSearch() {
     $("#search-container").removeClass("active");
     $("#search").val("");
   }

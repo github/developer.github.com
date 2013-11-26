@@ -107,5 +107,51 @@ $(function() {
     
     $(this).prepend("<a class='header-anchor' href='#" + id + "'></a>");
   });
+  
+  // # Search
+  var searchIndex,
+      searchHits;
+  
+  // Load the JSON containing all pages
+  $.getJSON('/search-index.json', function(data) {
+    searchIndex = data["pages"];    
+  });
+  
+  // On input change, update the search results
+  $("#search").change(function(e){
+    searchForString($(this).val());
+  });
+  
+  function searchForString(searchString) {
+    searchHits = [];
+    searchString = searchString.toLowerCase();
+    
+    // Search for string in all pages
+    for (var i = 0; i < searchIndex.length; i++) {
+      var page = searchIndex[i];
+      
+      // Add the page to the array of hits if there's a match
+      if (page.title.toLowerCase().indexOf(searchString) !== -1) {
+        searchHits.push(page);
+      }
+    }
+    
+    updateResults();
+  }
+  
+  // Update the UI representation of the search hits
+  function updateResults(){
+    $("#search-results").show().empty();
+    
+    // Check if there are any results. If not, show placeholder and exit
+    // […]
+    
+    // Render results
+    for (var i = 0; i < searchHits.length; i++) {
+      var page = searchHits[i];
+    
+      $('<li class="result"><a href="' + page.url + '"><em>' + page.title + '</em><small>' + page.section + '</small></a></li>').appendTo("#search-results");
+    }
+  }
 
 });

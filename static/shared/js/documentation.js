@@ -118,7 +118,9 @@ $(function() {
   });
   
   // On input change, update the search results
-  $("#search").change(function(e){
+  $("#search").bind("input", function(e) {
+    $(this).val().length > 0 ? $("#search-container").addClass("active") : $("#search-container").removeClass("active");
+    
     searchForString($(this).val());
   });
   

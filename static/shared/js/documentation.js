@@ -127,6 +127,10 @@ $(function() {
   $("body").keyup(function(e) {
     if (e.keyCode == 83) {
       // S key
+      if ($("#search").is(":focus"))
+        return;
+        
+      e.preventDefault();
       $("#search").focus();
     }
   });
@@ -200,7 +204,6 @@ $(function() {
   
   // Move the selected list item when hovering
   $("#search-results").on("mouseenter", "li", function(e) {
-    console.log("mouse enter");
     $(this).parent().find(".selected").removeClass("selected").end().end()
       .addClass("selected");
   });

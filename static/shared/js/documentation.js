@@ -162,7 +162,13 @@ $(function() {
     if (e.keyCode == 27) {
       // ESC
       $("#search").val().length > 0 ? cancelSearch() : $("#search").blur();
-    } else if (e.keyCode == 38) {
+    } else if (e.keyCode == 13) {
+      // Return/enter
+      e.preventDefault();
+      goToSelectedSearchResult();
+    }
+  }).keydown(function(e) {
+    if (e.keyCode == 38) {
       // Arrow up
       e.preventDefault();
       moveSearchSelectionUp();
@@ -170,10 +176,6 @@ $(function() {
       // Arrow down
       e.preventDefault();
       moveSearchSelectionDown();
-    } else if (e.keyCode == 13) {
-      // Return/enter
-      e.preventDefault();
-      goToSelectedSearchResult();
     }
   });
   

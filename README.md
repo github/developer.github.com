@@ -10,11 +10,15 @@ Ruby 1.9 is required to build the site.
 
 Get the nanoc gem, plus kramdown for markdown parsing:
 
-    bundle install
+```sh
+bundle install
+```
 
 You can see the available commands with nanoc:
 
-    nanoc -h
+```sh
+$ bundle exec nanoc -h
+```
 
 Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about nanoc.
 
@@ -91,41 +95,49 @@ to show how to access it with `curl`.
 Nanoc compiles the site into static files living in `./output`.  It's
 smart enough not to try to compile unchanged files:
 
-    $ nanoc compile
-    Loading site data...
-    Compiling site...
-       identical  [0.00s]  output/css/960.css
-       identical  [0.00s]  output/css/pygments.css
-       identical  [0.00s]  output/css/reset.css
-       identical  [0.00s]  output/css/styles.css
-       identical  [0.00s]  output/css/uv_active4d.css
-          update  [0.28s]  output/index.html
-          update  [1.31s]  output/v3/gists/comments/index.html
-          update  [1.92s]  output/v3/gists/index.html
-          update  [0.25s]  output/v3/issues/comments/index.html
-          update  [0.99s]  output/v3/issues/labels/index.html
-          update  [0.49s]  output/v3/issues/milestones/index.html
-          update  [0.50s]  output/v3/issues/index.html
-          update  [0.05s]  output/v3/index.html
+```sh
+$ bundle exec nanoc compile
+Loading site data...
+Compiling site...
+   identical  [0.00s]  output/css/960.css
+   identical  [0.00s]  output/css/pygments.css
+   identical  [0.00s]  output/css/reset.css
+   identical  [0.00s]  output/css/styles.css
+   identical  [0.00s]  output/css/uv_active4d.css
+      update  [0.28s]  output/index.html
+      update  [1.31s]  output/v3/gists/comments/index.html
+      update  [1.92s]  output/v3/gists/index.html
+      update  [0.25s]  output/v3/issues/comments/index.html
+      update  [0.99s]  output/v3/issues/labels/index.html
+      update  [0.49s]  output/v3/issues/milestones/index.html
+      update  [0.50s]  output/v3/issues/index.html
+      update  [0.05s]  output/v3/index.html
 
-    Site compiled in 5.81s.
+Site compiled in 5.81s.
+```
 
 You can setup whatever you want to view the files.  If you have the adsf
 gem, however (I hope so, it was in the Gemfile), you can start Webrick:
 
-    $ nanoc view
-    $ open http://localhost:3000
+```sh
+$ bundle exec nanoc view
+$ open http://localhost:3000
+```
 
 Compilation times got you down?  Use `autocompile`!
 
-    $ nanoc autocompile
+```sh
+    $ bundle exec nanoc autocompile
+```
 
 This starts a web server too, so there's no need to run `nanoc view`.
 One thing: remember to add trailing slashes to all nanoc links!
 
 ## Deploy
 
-    $ rake publish
+```sh
+$ bundle exec rake publish
+```
 
 ## TODO
 

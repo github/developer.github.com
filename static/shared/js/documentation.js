@@ -124,6 +124,20 @@ $(function() {
     searchForString($(this).val());
   });
   
+  // Press ESC to exit search
+  $("#search").keydown(function(e) {
+    if (e.keyCode == 27) exitSearch();
+  });
+  
+  $(".cancel-search").click(function(e) {
+    exitSearch();
+  });
+  
+  function exitSearch() {
+    $("#search-container").removeClass("active");
+    $("#search").val("");
+  }
+  
   function searchForString(searchString) {
     searchHits = [];
     searchString = searchString.toLowerCase();

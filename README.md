@@ -11,7 +11,7 @@ Ruby 1.9 is required to build the site.
 Get the nanoc gem, plus kramdown for markdown parsing:
 
 ```sh
-bundle install
+$ bundle install
 ```
 
 You can see the available commands with nanoc:
@@ -127,7 +127,7 @@ $ open http://localhost:3000
 Compilation times got you down?  Use `autocompile`!
 
 ```sh
-    $ bundle exec nanoc autocompile
+$ bundle exec nanoc autocompile
 ```
 
 This starts a web server too, so there's no need to run `nanoc view`.

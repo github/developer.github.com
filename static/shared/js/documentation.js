@@ -152,15 +152,18 @@ $(function() {
       }
     }
     
-    updateResults();
+    updateResultsForSearch(searchString);
   }
   
   // Update the UI representation of the search hits
-  function updateResults(){
+  function updateResultsForSearch(searchString){
     $("#search-results").empty();
     
     // Check if there are any results. If not, show placeholder and exit
-    // […]
+    if (searchHits.length < 1) {
+      $('<li class="placeholder">No results for <em>' + searchString + '</em></li>').appendTo("#search-results");
+      return;
+    }
     
     // Render results
     for (var i = 0; i < searchHits.length; i++) {

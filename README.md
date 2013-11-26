@@ -27,18 +27,24 @@ API docs should look like:
 
     # API title
 
+    * TOC
+    {:toc}
+
     ## API endpoint title
 
-        [VERB] /path/to/endpoint.json
+        [VERB] /path/to/endpoint
 
     ### Parameters
 
-    name
-    : description
+    Name | Type | Description
+    -----|------|--------------
+    `name`|`type` | Description.
 
-    ### Input (request json body)
+    ### Input (request JSON body)
 
-    <%= json :field => "sample value" %>
+    Name | Type | Description
+    -----|------|--------------
+    `name`|`type` | Description.
 
     ### Response
 
@@ -70,10 +76,12 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 You can specify terminal blocks with `pre.terminal` elements.  It'd be
 nice if Markdown could do this more cleanly...
 
-    <pre class="terminal">
-    $ curl foobar
-    ....
-    </pre>
+```html
+<pre class="terminal">
+$ curl foobar
+....
+</pre>
+```
 
 This isn't a `curl` tutorial though, I'm not sure every API call needs
 to show how to access it with `curl`.

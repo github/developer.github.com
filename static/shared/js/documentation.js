@@ -124,6 +124,13 @@ $(function() {
     searchForString($(this).val());
   });
   
+  $("body").keyup(function(e) {
+    if (e.keyCode == 83) {
+      // S key
+      $("#search").focus();
+    }
+  });
+  
   // Keyboard support for the search field
   $("#search").keyup(function(e) {
     if (e.keyCode == 27) {

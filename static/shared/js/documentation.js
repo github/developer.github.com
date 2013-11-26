@@ -114,11 +114,13 @@ $(function() {
   
   // Load the JSON containing all pages
   // Has it been loaded before (and stored with localstorage)?
-  searchIndex = JSON.parse(localStorage['searchIndex']);
-  if (!searchIndex) {
-    loadSearchIndex();
-  } else if (localStorageHasExpired()) {
-    loadSearchIndex();
+  if (localStorage['searchIndex']) {
+    searchIndex = JSON.parse(localStorage['searchIndex']);
+    
+    if (localStorageHasExpired())
+      loadSearchIndex();
+  } else {
+    loadSearchIndex();    
   }
   
   function loadSearchIndex() {

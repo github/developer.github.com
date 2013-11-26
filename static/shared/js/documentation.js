@@ -113,10 +113,31 @@ $(function() {
       searchHits;
   
   // Load the JSON containing all pages
-  $.getJSON('/search-index.json', function(data) {
-    searchIndex = data["pages"];    
-  });
+  // Has it been loaded before (and stored with localstorage)?
+  searchIndex = JSON.parse(localStorage['searchIndex']);
+  if (!searchIndex) {
+    loadSearchIndex();
+  } else if (localStorageHasExpired()) {
+    loadSearchIndex();
+  }
   
+  function loadSearchIndex() {
+    $.getJSON('/search-index.json', function(data) {
+      searchIndex = data["pages"];
+      localStorage['searchIndex'] = JSON.stringify(searchIndex); 
+      localStorage['updated'] = new Date().getTime();
+    });
+  }
+  
+  function localStorageHasExpired() {
+    // Expires in one day (86400000 ms)
+    if (new Date().getTime() - parseInt(localStorage['updated'],10) > 86400000) {
+      return true;
+    }
+    
+    return false;
+  }
+    
   // On input change, update the search results
   $("#search").on("input", function(e) {
     $(this).val().length > 0 ? $("#search-container").addClass("active") : $("#search-container").removeClass("active");
@@ -124,6 +145,7 @@ $(function() {
     searchForString($(this).val());
   });
   
+  // Global keyboard shortcuts
   $("body").keyup(function(e) {
     if (e.keyCode == 83) {
       // S key

@@ -125,10 +125,10 @@ $(function() {
   });
   
   // Keyboard support for the search field
-  $("#search").keydown(function(e) {
+  $("#search").keyup(function(e) {
     if (e.keyCode == 27) {
       // ESC
-      cancelSearch();
+      $("#search").val().length > 0 ? cancelSearch() : $("#search").blur();
     } else if (e.keyCode == 38) {
       // Arrow up
       e.preventDefault();

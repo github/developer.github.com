@@ -118,15 +118,30 @@ $(function() {
   });
   
   // On input change, update the search results
-  $("#search").bind("input", function(e) {
+  $("#search").on("input", function(e) {
     $(this).val().length > 0 ? $("#search-container").addClass("active") : $("#search-container").removeClass("active");
     
     searchForString($(this).val());
   });
   
-  // Press ESC to exit search
+  // Keyboard support for the search field
   $("#search").keydown(function(e) {
-    if (e.keyCode == 27) cancelSearch();
+    if (e.keyCode == 27) {
+      // ESC
+      cancelSearch();
+    } else if (e.keyCode == 38) {
+      // Arrow up
+      e.preventDefault();
+      moveSearchSelectionUp();
+    } else if (e.keyCode == 40) {
+      // Arrow down
+      e.preventDefault();
+      moveSearchSelectionDown();
+    } else if (e.keyCode == 13) {
+      // Return/enter
+      e.preventDefault();
+      goToSelectedSearchResult();
+    }
   });
   
   $(".cancel-search").click(function(e) {
@@ -171,6 +186,40 @@ $(function() {
     
       $('<li class="result"><a href="' + page.url + '"><em>' + page.title + '</em><small>' + page.section + '</small></a></li>').appendTo("#search-results");
     }
+    
+    // Select the first alternative
+    $("#search-results li:first-child").addClass("selected");
+  }
+  
+  // Move the selected list item when hovering
+  $("#search-results").on("mouseenter", "li", function(e) {
+    console.log("mouse enter");
+    $(this).parent().find(".selected").removeClass("selected").end().end()
+      .addClass("selected");
+  });
+  
+  function moveSearchSelectionUp() {
+    $prev = $("#search-results .selected").prev();
+    if ($prev.length < 1) 
+      return;
+    
+    $("#search-results .selected").removeClass("selected");
+    $prev.addClass("selected");   
+  }
+  
+  function moveSearchSelectionDown() {
+    $next = $("#search-results .selected").next();
+    if ($next.length < 1)
+      return;
+    
+    $("#search-results .selected").removeClass("selected");
+    $next.addClass("selected");  
+  }
+  
+  function goToSelectedSearchResult() {
+    var href = $("#search-results .selected a").attr("href");
+    if (href)
+      window.location.href = href;
   }
 
 });

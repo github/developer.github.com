@@ -37,7 +37,7 @@ Find repositories via various criteria. This method returns up to 100 results [p
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `q`|`string`| The search keywords, as well as any qualifiers.
 `sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.
@@ -110,7 +110,7 @@ Find file contents via various criteria. (This method returns up to 100 results 
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `q`|`string`| The search terms.
 `sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match.
@@ -123,8 +123,10 @@ The `q` search term can also contain any combination of the supported code searc
  search to just the file contents, the file path, or both.
 * [`language`](https://help.github.com/articles/searching-code#language)
   Searches code based on the language it's written in.
-* [`forks`](https://help.github.com/articles/searching-code#forks)
-  Filters repositories based on the number of forks, and/or whether code from forked repositories should be included in the results at all.
+* [`fork`](https://help.github.com/articles/searching-code#forks)
+  Specifies that code from forked repositories should be searched. Repository
+  forks will not be searchable unless the fork has more stars than the parent
+  repository.
 * [`size`](https://help.github.com/articles/searching-code#size)
   Finds files that match a certain size (in bytes).
 * [`path`](https://help.github.com/articles/searching-code#path)
@@ -181,7 +183,7 @@ Find issues by state and keyword. (This method returns up to 100 results [per pa
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `q`|`string`| The search terms.
 `sort`|`string`| The sort field. Can be `comments`, `created`, or `updated`. Default: results are sorted by best match.
@@ -189,6 +191,8 @@ Name | Type | Description
 
 The `q` search term can also contain any combination of the supported issue search qualifiers:
 
+ * [`type`](https://help.github.com/articles/searching-issues#type)
+   With this qualifier you can restrict the search to issues or pull request only.
  * [`in`](https://help.github.com/articles/searching-issues#search-in)
    Qualifies which fields are searched. With this qualifier you can restrict the
    search to just the title, body, comments, or any combination of these.
@@ -264,7 +268,7 @@ Find users via various criteria. (This method returns up to 100 results [per pag
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `q`|`string`| The search terms.
 `sort`|`string`| The sort field. Can be `followers`, `repositories`, or `joined`.  Default: results are sorted by best match.
@@ -272,6 +276,9 @@ Name | Type | Description
 
 The `q` search term can also contain any combination of the supported user search qualifiers:
 
+ * [`type`](https://help.github.com/articles/searching-users#type)
+   With this qualifier you can restrict the search to just personal accounts or
+   just organization accounts.
  * [`in`](https://help.github.com/articles/searching-users#search-in)
    Qualifies which fields are searched. With this qualifier you can restrict
    the search to just the username, public email, full name, or any

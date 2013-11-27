@@ -2,7 +2,7 @@
 title: User Emails | GitHub API
 ---
 
-# User Emails API
+# Emails
 
 * TOC
 {:toc}

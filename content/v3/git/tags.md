@@ -2,7 +2,7 @@
 title: Git Tags | GitHub API
 ---
 
-# Tags API
+# Tags
 
 * TOC
 {:toc}

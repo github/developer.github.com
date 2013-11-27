@@ -1,8 +1,8 @@
 ---
-title: Repo Deploy Keys | GitHub API
+title: Deploy Keys | GitHub API
 ---
 
-# Repo Deploy Keys API
+# Deploy Keys
 
 * TOC
 {:toc}

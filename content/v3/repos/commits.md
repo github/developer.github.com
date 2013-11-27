@@ -1,8 +1,8 @@
 ---
-title: Repo Commits | GitHub API
+title: Commits | GitHub API
 ---
 
-# Repo Commits API
+# Commits
 
 * TOC
 {:toc}

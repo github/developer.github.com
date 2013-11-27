@@ -2,7 +2,7 @@
 title: Git Trees | GitHub API
 ---
 
-# Trees API
+# Trees
 
 * TOC
 {:toc}

@@ -85,14 +85,14 @@ h1 {
   left: -32px;
   top: 0;
   opacity: 0;
-  padding: 0 10px;
+  padding: 0 5px 0 10px;
   height: 100%;
   width: 20px;
   font: normal normal 16px/20px octiconsregular;
   color: #000;
   -webkit-font-smoothing: antialiased;
   color: #333;
-  
+
   -webkit-transition: opacity 0.3s ease-in-out 0s;
   -moz-transition: opacity 0.3s ease-in-out 0s;
   -ms-transition: opacity 0.3s ease-in-out 0s;
@@ -241,7 +241,7 @@ a img {
 
 .button:hover {
 	text-decoration: none;
-	background-color: #3088d0;	
+	background-color: #3088d0;
 }
 
 .button-secondary {
@@ -253,7 +253,7 @@ a img {
 
 .button-secondary:hover {
 	text-decoration: none;
-	background-color: #7e909e;	
+	background-color: #7e909e;
 }
 
 .rss-subscribe {
@@ -483,6 +483,12 @@ a img {
 	font-size: 22px;
 	-webkit-backface-visibility: hidden;
 	margin: 50px 0 10px 0;
+	text-decoration: none;
+}
+
+.sub-nav h2 a {
+  z-index: 10;
+  position: relative;
 }
 
 .sub-nav li a:hover {
@@ -505,15 +511,21 @@ a img {
 .sub-nav li a {
 	color: #767676;
 	font-size: 14px;
-	margin-left: 20px;
+	margin-left: 16px;
+	padding: 4px 2px 8px;
 }
 
-.sub-nav li a:hover {
-	color: #327fc7 !important;
+.sub-nav li:last-child a {
+  padding-right: 0;
 }
 
 .sub-nav li a.active {
 	color: #222;
+	border-bottom: 2px solid #d8d8d8;
+}
+
+.sub-nav li a:hover {
+	color: #327fc7;
 }
 
 /*------------------------------------------------------------------------------
@@ -606,8 +618,8 @@ a img {
 .full-width-divider {
 	width: 100%;
 	background: #f2f2f2;
-	border-top: 1px solid #cdcdcd;
-	border-bottom: 1px solid #cdcdcd;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 	overflow: hidden;
 	z-index: 1;
 	position: relative;
@@ -772,6 +784,8 @@ div.sidebar-module ul ul li {
 
 div.sidebar-module li.disable a {
   color: #333;
+  border-left: 2px solid #d8d8d8;
+  padding-left: 29px;
 }
 
 .sidebar-module ul ul li a,
@@ -804,7 +818,7 @@ div.sidebar-module ul ul li span {
 .api-status {
 	text-align: center;
 	padding: 20px 0;
-	border-top: 1px solid #ddd;	
+	border-top: 1px solid #ddd;
 	font-size: 14px;
 }
 
@@ -1174,18 +1188,11 @@ pre.no-response {
   border-bottom: 1px solid #CACACA;
 }
 
-pre.headers + pre.highlight {
+pre.headers + pre {
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
   margin-top: 0;
-}
-
-pre.highlight {
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:3px;
-  background-color: #FAFAFB;
 }
 
 pre.terminal {
@@ -1438,7 +1445,7 @@ span.bash-output {
 .sidebar-module h3 {
   position: relative;
 }
- 
+
 .sidebar-module .arrow-btn {
  background-image: url(/shared/images/expand-arrows.png);
  background-repeat: no-repeat;
@@ -1502,13 +1509,13 @@ li.api-status img {
 /*  Retina support  */
 /********************/
 
-@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) { 
-  
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi) {
+
   #header-wrapper {
     background-image: url(../images/header@2x.png);
     background-size: 8px 61px;
   }
-  
+
   #header .logo {
     background-image: url(/images/logo_developer@2x.png);
     background-size: 186px 27px;
@@ -1528,32 +1535,32 @@ li.api-status img {
     background-image: url(/shared/images/expand-arrows@2x.png);
     background-size: 73px 80px;
   }
-  
+
   .api-status .unknown {
     background-image: url(/images/status-icon-unknown@2x.png);
     background-size: 32px 32px;
   }
-  
+
   .api-status .good {
     background-image: url(/images/status-icon-good@2x.png);
     background-size: 32px 32px;
   }
-  
+
   .api-status .minor {
     background-image: url(/images/status-icon-minor@2x.png);
     background-size: 32px 32px;
   }
-  
+
   .api-status .major {
     background-image: url(/images/status-icon-major@2x.png);
     background-size: 32px 32px;
   }
-  
+
   .rss-subscribe {
     background-image: url(/images/feed-icon@2x.png);
     background-size: 28px 28px;
   }
-    
+
 }
 
 /* @end */

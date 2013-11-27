@@ -1,8 +1,8 @@
 ---
-title: Repository Watching | GitHub API
+title: Watching | GitHub API
 ---
 
-# Repository Watching API
+# Watching
 
 * TOC
 {:toc}

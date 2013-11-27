@@ -1,8 +1,8 @@
 ---
-title: Markdown Rendering | GitHub API
+title: Markdown | GitHub API
 ---
 
-# Markdown Rendering API
+# Markdown
 
 * TOC
 {:toc}

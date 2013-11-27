@@ -1,8 +1,8 @@
 ---
-title: Gitignore templates | GitHub API
+title: Gitignore | GitHub API
 ---
 
-# Gitignore Templates API
+# Gitignore
 
 * TOC
 {:toc}

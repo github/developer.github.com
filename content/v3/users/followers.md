@@ -2,7 +2,7 @@
 title: User Followers | GitHub API
 ---
 
-# User Followers API
+# Followers
 
 * TOC
 {:toc}

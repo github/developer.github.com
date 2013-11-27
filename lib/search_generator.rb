@@ -16,6 +16,8 @@ class SearchFilter < Nanoc::Filter
 
     $search_file_contents[:pages] << page
 
+    $search_file_contents[:pages] = merge_sort($search_file_contents[:pages])
+
     write_search_file
 
     content
@@ -27,5 +29,27 @@ class SearchFilter < Nanoc::Filter
     rescue
       puts 'WARNING: cannot write search file.'
     end
+  end
+
+  private
+
+  # basically we need a merge sort for elements like "/v3/orgs." Otherwise,
+  # nanoc puts "/v3/orgs/mebers" before "/v3/orgs." Children should respect their
+  # parents, yo.
+  def merge_sort(a)
+      return a if a.size <= 1
+      l, r = split_array(a)
+      result = combine(merge_sort(l), merge_sort(r))
+  end
+   
+  def split_array(a)
+    mid = (a.size / 2).round
+    [a.take(mid), a.drop(mid)]
+  end
+   
+  def combine(a, b)
+    return b.empty? ? a : b if a.empty? || b.empty?
+    smallest = a.first[:url] <= b.first[:url] ? a.shift : b.shift
+    combine(a, b).unshift(smallest)
   end
 end

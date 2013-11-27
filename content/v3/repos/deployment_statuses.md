@@ -50,11 +50,11 @@ Users with push access can create commit statuses for a given deployment:
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
 `target_url`|`string` | The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment.
-`description`|`string` | A short description of the status. "Deployment finished successfully."
+`description`|`string` | A short description of the status.
 
 #### Example
 

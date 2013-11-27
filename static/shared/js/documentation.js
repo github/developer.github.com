@@ -204,11 +204,11 @@ $(function() {
       }
     }
     
-    updateResultsForSearch(searchString);
+    renderResultsForSearch(searchString);
   }
   
   // Update the UI representation of the search hits
-  function updateResultsForSearch(searchString){
+  function renderResultsForSearch(searchString){
     $("#search-results").empty();
     
     // Check if there are any results. If not, show placeholder and exit

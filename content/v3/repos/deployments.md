@@ -2,7 +2,7 @@
 title: Deployment | GitHub API
 ---
 
-# Deployments API
+# Deployments
 
 * TOC
 {:toc}

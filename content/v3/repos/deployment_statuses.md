@@ -2,7 +2,7 @@
 title: Deployment Statuses | GitHub API
 ---
 
-# Deployment Statuses API
+# Deployment Statuses
 
 * TOC
 {:toc}
@@ -44,7 +44,7 @@ Name | Type | Description
 
 ## Create a Deployment Status
 
-Users with push access can create commit statuses for a given deployment:
+Users with push access can create deployment statuses for a given deployment:
 
     POST /repos/:owner/:repo/deployments/:id/statuses
 
@@ -68,5 +68,5 @@ Name | Type | Description
 
 <%= headers 201,
       :Location =>
-'https://api.github.com/repos/octocat/example/statuses/1' %>
+'https://api.github.com/repos/octocat/example/deployments/42/statuses/1' %>
 <%= json :deployment_status %>

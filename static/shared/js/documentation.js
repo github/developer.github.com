@@ -141,7 +141,7 @@ $(function() {
   }
     
   // On input change, update the search results
-  $("#search").on("input", function(e) {
+  $("#searchfield").on("input", function(e) {
     $(this).val().length > 0 ? $("#search-container").addClass("active") : $("#search-container").removeClass("active");
     
     searchForString($(this).val());
@@ -151,19 +151,19 @@ $(function() {
   $("body").keyup(function(e) {
     if (e.keyCode == 83) {
       // S key
-      if ($("#search").is(":focus"))
+      if ($("#searchfield").is(":focus"))
         return;
         
       e.preventDefault();
-      $("#search").focus();
+      $("#searchfield").focus();
     }
   });
   
   // Keyboard support for the search field
-  $("#search").keyup(function(e) {
+  $("#searchfield").keyup(function(e) {
     if (e.keyCode == 27) {
       // ESC
-      $("#search").val().length > 0 ? cancelSearch() : $("#search").blur();
+      $("#searchfield").val().length > 0 ? cancelSearch() : $("#searchfield").blur();
     } else if (e.keyCode == 13) {
       // Return/enter
       e.preventDefault();
@@ -187,7 +187,7 @@ $(function() {
   
   function cancelSearch() {
     $("#search-container").removeClass("active");
-    $("#search").val("");
+    $("#searchfield").val("");
   }
   
   function searchForString(searchString) {

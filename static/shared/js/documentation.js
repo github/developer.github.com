@@ -217,8 +217,8 @@ $(function() {
       return;
     }
     
-    // Render results
-    for (var i = 0; i < searchHits.length; i++) {
+    // Render results (max 8)
+    for (var i = 0; i < Math.min(searchHits.length, 8); i++) {
       var page = searchHits[i];
     
       $('<li class="result"><a href="' + page.url + '"><em>' + page.title + '</em><small>' + page.section + '</small></a></li>').appendTo("#search-results");

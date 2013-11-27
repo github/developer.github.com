@@ -2,7 +2,7 @@
 title: Organization Teams | GitHub API
 ---
 
-# Organization Teams API
+# Teams
 
 * TOC
 {:toc}

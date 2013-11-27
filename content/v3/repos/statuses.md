@@ -2,7 +2,7 @@
 title: Statuses | GitHub API
 ---
 
-# Repo Statuses API
+# Statuses
 
 * TOC
 {:toc}

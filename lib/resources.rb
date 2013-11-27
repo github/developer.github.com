@@ -92,14 +92,14 @@ module GitHub
 
         hash = yield hash if block_given?
 
-        %(<pre class="highlight"><code class="language-javascript">) +
+        %(<pre><code class="language-javascript">) +
           JSON.pretty_generate(hash) + "</code></pre>"
       end
 
       def text_html(response, status, head = {})
         hs = headers(status, head.merge('Content-Type' => 'text/html'))
         res = CGI.escapeHTML(response)
-        hs + %(<pre class="highlight"><code>) + res + "</code></pre>"
+        hs + %(<pre><code>) + res + "</code></pre>"
       end
 
     end
@@ -109,7 +109,19 @@ module GitHub
       "id"           => 1,
       "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
       "gravatar_id"  => "somehexcode",
-      "url"          => "https://api.github.com/users/octocat"
+      "url"          => "https://api.github.com/users/octocat",
+      "html_url"     => "https://github.com/octocat",
+      "followers_url" => "https://api.github.com/users/octocat/followers",
+      "following_url" => "https://api.github.com/users/octocat/following{/other_user}",
+      "gists_url"    => "https://api.github.com/users/octocat/gists{/gist_id}",
+      "starred_url"  => "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+      "subscriptions_url" => "https://api.github.com/users/octocat/subscriptions",
+      "organizations_url" => "https://api.github.com/users/octocat/orgs",
+      "repos_url"    => "https://api.github.com/users/octocat/repos",
+      "events_url"   => "https://api.github.com/users/octocat/events{/privacy}",
+      "received_events_url" => "https://api.github.com/users/octocat/received_events",
+      "type"         => "User",
+      "site_admin"   => false
     }
 
     CONTRIBUTOR = USER.merge({
@@ -130,7 +142,7 @@ module GitHub
       "following"    => 0,
       "html_url"     => "https://github.com/octocat",
       "created_at"   => "2008-01-14T04:33:35Z",
-      "type"         => "User"
+      "updated_at"   => "2008-01-14T04:33:35Z"
     })
 
     PRIVATE_USER = FULL_USER.merge({
@@ -493,16 +505,21 @@ module GitHub
       "files" => [FILE],
     }
 
-    PULL_COMMENT = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
-      "id"         => 1,
-      "body"       => "Great stuff",
-      "path"       => "file1.txt",
-      "position"   => 4,
-      "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
-      "user"       => USER,
-      "created_at" => "2011-04-14T16:00:49Z",
-      "updated_at" => "2011-04-14T16:00:49Z",
+	PULL_COMMENT = {
+      "url"                => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
+      "id"                 => 1,
+      "diff_hunk"          => "@@ -16,33 +16,40 @@ public class Connection : IConnection...",
+      "path"               => "file1.txt",
+      "position"           => 1,
+      "original_position"  => 4,
+      "commit_id"          => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "original_commit_id" => "9c48853fa3dc5c1c3d6f1f1cd1f2743e72652840",
+      "user"               => USER,
+      "body"               => "Great stuff",
+      "created_at"         => "2011-04-14T16:00:49Z",
+      "updated_at"         => "2011-04-14T16:00:49Z",
+      "html_url"           => "https://github.com/octocat/Hello-World/pull/1#discussion-diff-1",
+      "pull_request_url"   => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
       "_links" => {
         "self" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"},
@@ -1124,7 +1141,9 @@ module GitHub
         {
           "user" => USER,
           "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "created_at" => "2011-04-14T16:00:49Z"
+          "id" => 1,
+          "created_at" => "2011-04-14T16:00:49Z",
+          "updated_at" => "2011-04-14T16:00:49Z"
         }
       ]
     }
@@ -1139,6 +1158,8 @@ module GitHub
 
     GIST = {
       "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+      "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
+      "commits_url"  => "https://api.github.com/gists/#{SecureRandom.hex(10)}/commits",
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
@@ -1149,7 +1170,8 @@ module GitHub
       "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
-      "created_at"   => "2010-04-14T02:15:15Z"
+      "created_at"   => "2010-04-14T02:15:15Z",
+      "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
     FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
@@ -1160,7 +1182,8 @@ module GitHub
       "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
-      "created_at" => "2011-04-18T23:23:56Z"
+      "created_at" => "2011-04-18T23:23:56Z",
+      "updated_at" => "2011-04-18T23:23:56Z"
     }
 
     TREE = {

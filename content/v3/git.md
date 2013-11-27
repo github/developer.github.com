@@ -2,7 +2,7 @@
 title: Git | GitHub API
 ---
 
-# Git DB API
+# Git Data
 
 The Git Database API gives you access to read and write raw Git objects
 to your Git database on GitHub and to list and update your references

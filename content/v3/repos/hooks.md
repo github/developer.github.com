@@ -1,8 +1,8 @@
 ---
-title: Repo Hooks | GitHub API
+title: Hooks | GitHub API
 ---
 
-# Repo Hooks API
+# Hooks
 
 * TOC
 {:toc}

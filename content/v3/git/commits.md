@@ -2,7 +2,7 @@
 title: Git Commits | GitHub API
 ---
 
-# Commits API
+# Commits
 
 * TOC
 {:toc}

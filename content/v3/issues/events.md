@@ -2,7 +2,7 @@
 title: Issue Events | GitHub API
 ---
 
-# Issue Events API
+# Events
 
 * TOC
 {:toc}

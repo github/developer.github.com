@@ -2,7 +2,7 @@
 title: Issue Comments | GitHub API
 ---
 
-# Issue Comments API
+# Comments
 
 * TOC
 {:toc}

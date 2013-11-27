@@ -2,7 +2,7 @@
 title: Notification Settings | GitHub API
 ---
 
-# Notification Settings API
+# Notification Settings
 
 This API is not implemented.  This documentation is a placeholder for when it
 is ready for public consumption.

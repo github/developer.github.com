@@ -1,8 +1,8 @@
 ---
-title: Repo Comments | GitHub API
+title: Comments | GitHub API
 ---
 
-# Repo Comments API
+# Comments
 
 * TOC
 {:toc}

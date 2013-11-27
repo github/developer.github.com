@@ -1,5 +1,5 @@
 ---
-title: Event types | GitHub API
+title: Event Types | GitHub API
 ---
 
 # Event Types

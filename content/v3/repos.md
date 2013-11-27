@@ -1,8 +1,8 @@
 ---
-title: Repos | GitHub API
+title: Repositories | GitHub API
 ---
 
-# Repos API
+# Repositories
 
 * TOC
 {:toc}
@@ -36,7 +36,7 @@ List public repositories for the specified user.
 
 Name | Type | Description 
 -----|------|-------------
-`type`|`string` | Can be one of `all`, `owner`, `member`. Default: `all`
+`type`|`string` | Can be one of `all`, `owner`, `member`. Default: `owner`
 `sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
 `direction`|`string` | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`
 

@@ -2,7 +2,7 @@
 title: Gists | GitHub API
 ---
 
-# Gists API
+# Gists
 
 * TOC
 {:toc}

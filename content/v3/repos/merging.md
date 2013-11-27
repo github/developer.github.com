@@ -1,8 +1,8 @@
 ---
-title: Repo Merging | GitHub API
+title: Merging | GitHub API
 ---
 
-# Repo Merging API
+# Merging
 
 * TOC
 {:toc}

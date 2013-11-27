@@ -24,7 +24,7 @@ $(function() {
       }
 
   // bind every href with a hash; take a look at v3/search/ for example
-  $('#js-sidebar .js-topic a[href*=#]').bind("click", function(e) {
+  $('#js-sidebar .js-accordion-list .js-topic a[href*=#]').bind("click", function(e) {
     if (window.location.toString().indexOf($(e.target).attr('href')) == -1)
       setTimeout(styleTOC, 0); // trigger the window.location change, then stylize
   });
@@ -98,6 +98,14 @@ $(function() {
         .text("API Status: " + data.status);
       $('.api-status').html(link);
     }
+  });
+  
+  // Add link anchors for headers with IDs
+  $(".content h1, .content h2, .content h3, .content h4").each(function(e){
+    var id = $(this).attr("id");
+    if (!id) return;
+    
+    $(this).prepend("<a class='header-anchor' href='#" + id + "'></a>");
   });
 
 });

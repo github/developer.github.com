@@ -29,6 +29,7 @@ We'll demonstrate fetching Pull Request comments by creating a Ruby script using
 The following code should help you get started accessing comments from a Pull Request
 using Octokit.rb:
 
+    #!ruby
     require 'octokit'
 
     # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
@@ -51,11 +52,12 @@ the comments to fetch information about each one.
 ## Pull Request Comments on a Line
 
 Within the diff view, you can start a discussion on a particular aspect of a singular
-change made within the Pull Request. These comments occur on the individual lines 
+change made within the Pull Request. These comments occur on the individual lines
 within a changed file. The endpoint URL for this discussion comes from [the Pull Request Review API][PR Review API].
 
 The following code fetches all the Pull Request comments made on files, given a single Pull Request number:
 
+    #!ruby
     require 'octokit'
 
     # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
@@ -86,6 +88,7 @@ they make use of [the commit comment API][commit comment API].
 To retrieve the comments on a commit, you'll want to use the SHA1 of the commit.
 In other words, you won't use any identifier related to the Pull Request. Here's an example:
 
+    #!ruby
     require 'octokit'
 
     # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!

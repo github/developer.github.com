@@ -1,8 +1,8 @@
 ---
-title: Repo Forks | GitHub API
+title: Forks | GitHub API
 ---
 
-# Repo Forks API
+# Forks
 
 * TOC
 {:toc}

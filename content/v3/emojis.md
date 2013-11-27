@@ -1,8 +1,8 @@
 ---
-title: GitHub Emojis API | GitHub API
+title: Emojis | GitHub API
 ---
 
-# GitHub Emojis API
+# Emojis
 
 Lists all the emojis available to use on GitHub.
 

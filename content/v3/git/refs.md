@@ -2,7 +2,7 @@
 title: Git Refs | GitHub API
 ---
 
-# References API
+# References
 
 * TOC
 {:toc}

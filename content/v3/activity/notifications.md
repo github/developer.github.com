@@ -2,7 +2,7 @@
 title: Notifications | GitHub API
 ---
 
-# Notifications API
+# Notifications
 
 * TOC
 {:toc}

@@ -60,8 +60,8 @@ Name | Description
 `issues` | Any time an Issue is opened or closed.
 `issue_comment` | Any time an Issue is commented on.
 `commit_comment` | Any time a Commit is commented on.
-`create` | Any time a Repository, Branch or Tag is created
-`delete` | Any time a Branch or Tag is deleted
+`create` | Any time a Repository, Branch, or Tag is created.
+`delete` | Any time a Branch or Tag is deleted.
 `pull_request` | Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).
 `pull_request_review_comment` | Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).
 `gollum` | Any time a Wiki page is updated.

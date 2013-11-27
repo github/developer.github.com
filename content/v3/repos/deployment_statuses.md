@@ -32,7 +32,7 @@ Users with pull access can view deployment statuses for a deployment:
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `id` |`integer`| **Required**. The Deployment id to list the statuses from.
 

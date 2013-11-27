@@ -55,7 +55,7 @@ Users with push access can create a Deployment for a given ref:
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `ref`|`string`| The ref to deploy. This can be a branch, tag, or sha.
 `force`|`boolean`| Optional parameter to bypass any ahead/behind or commit status checks.

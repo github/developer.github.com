@@ -28,7 +28,7 @@ This is a description of the OAuth2 flow from 3rd party web sites.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
@@ -48,7 +48,7 @@ Exchange this for an access token:
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|---------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
@@ -73,6 +73,20 @@ header:
       <scope>repo,gist</scope>
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
+
+The `scope` attribute lists scopes attached to the token that were granted by
+the user. Normally, these scopes will be identical to what you requested.
+However, users are able to edit their scopes, effectively granting your
+application less access than you originally requested. You should be aware of
+this possibility and adjust your application behavior accordingly.
+
+It is important to handle the error cases where a user chooses to grant you
+less access than you originally requested. For example, applications can warn
+or otherwise communicate with their users that they will see reduced
+functionality or be unable to perform some actions.
+
+Also, applications can always send users back through the flow again to get
+additional permission, but don’t forget that users can always say no.
 
 ### 3. Use the access token to access the API
 
@@ -188,7 +202,7 @@ Read more about these tokens on the [GitHub Help page](https://help.github.com/a
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `scopes`|`array` | A list of scopes that this authorization is in.
 `note`|`string` | A note to remind you what the OAuth token is for.
@@ -217,7 +231,7 @@ exists. Otherwise, it creates one.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `client_secret`|`string`| The 40 character OAuth app client secret associated with the client ID specified in the URL.
 `scopes`|`array` | A list of scopes that this authorization is in.
@@ -245,7 +259,7 @@ Name | Type | Description
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `scopes`|`array` | Replaces the authorization scopes with these.
 `add_scopes`|`array` | A list of scopes to add to this authorization.

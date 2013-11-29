@@ -36,6 +36,7 @@ Now, let's start filling out our simple server. Create a file called _server.rb_
     #!ruby
     require 'sinatra'
     require 'rest-client'
+    require 'json'
 
     CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
     CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
@@ -55,15 +56,24 @@ Next, in _views/index.erb_, paste this content:
       <head>
       </head>
       <body>
-        <p>Well, hello there!</p>
-        <p>We're going to now talk to the GitHub API. Ready? <a href="https://github.com/login/oauth/authorize?client_id=<%= client_id %>">Click here</a> to begin!</a></p>
-        <p>If that link doesn't work, remember to provide your own <a href="/v3/oauth/#web-application-flow">Client ID</a>!</p>
+        <p>
+          Well, hello there!
+        </p>
+        <p>
+          We're going to now talk to the GitHub API. Ready?
+          <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=<%= client_id %>">Click here</a> to begin!</a>
+        </p>
+        <p>
+          If that link doesn't work, remember to provide your own <a href="/v3/oauth/#web-application-flow">Client ID</a>!
+        </p>
       </body>
     </html>
 
 (If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra guide].)
 
-Obviously, you'll want to change `<your_client_id>` to match your actual Client ID.
+Also, notice that the URL uses the `scope` query parameter to define the
+[scopes][oauth scopes] requested by the application. For our application, we're
+requesting `user:email` scope for reading private emails.
 
 Navigate your browser to `http://localhost:4567`. After clicking on the link, you
 should be taken to GitHub, and presented with a dialog that looks something like this:  
@@ -84,15 +94,17 @@ In _server.rb_, add a route to specify what the callback should do:
     get '/callback' do
       # get temporary GitHub code...
       session_code = request.env['rack.request.query_hash']["code"]
+
       # ... and POST it back to GitHub
       result = RestClient.post("https://github.com/login/oauth/access_token",
                               {:client_id => CLIENT_ID,
                                :client_secret => CLIENT_SECRET,
-                               :code => session_code
-                              },{
-                               :accept => :json
-                              })
+                               :code => session_code},
+                               :accept => :json)
+
+      # extract the token and granted scopes
       access_token = JSON.parse(result)["access_token"]
+      scopes = JSON.parse(result)["scope"].split(",")
     end
 
 After a successful app authentication, GitHub provides a temporary `code` value.
@@ -101,20 +113,42 @@ To simplify our GET and POST HTTP requests, we're using the [rest-client][REST C
 Note that you'll probably never access the API through REST. For a more serious
 application, you should probably use [a library written in the language of your choice][libraries].
 
+Also, you'll need to check the scopes that were granted for the token by the user.
+Users are able to edit the scopes you requested, effectively granting your
+application less access than you originally asked for.
+
 At last, with this access token, you'll be able to make authenticated requests as
 the logged in user:
 
     #!ruby
-    auth_result = RestClient.get("https://api.github.com/user", {:params => {:access_token => access_token}})
+    # fetch user information
+    auth_result = JSON.parse(RestClient.get("https://api.github.com/user",
+                                            {:params => {:access_token => access_token}}))
 
-    erb :basic, :locals => {:auth_result => auth_result}
+    # if the user authorized it, fetch private emails
+    if scopes.include? 'user:email'
+      auth_result['private_emails'] =
+        JSON.parse(RestClient.get("https://api.github.com/user/emails",
+                                  {:params => {:access_token => access_token}}))
+
+    erb :basic, :locals => auth_result
 
 We can do whatever we want with our results. In this case, we'll just dump them straight into _basic.erb_:
 
     #!html+erb
-    <p>Okay, here's a JSON dump:</p>
+    <p>Hello, <%= login %>!</p>
     <p>
-      <p>Hello, <%= login %>! It looks like you're <%= hire_status %>.</p>
+      <% if !email.empty? %> It looks like your public email address is <%= email %>.
+      <% else %> It looks like you don't have a public email. That's cool.
+      <% end %>
+    </p>
+    <p>
+      <% if defined? private_emails %>
+      With your permission, we were also able to dig up your private email addresses:
+      <%= private_emails.join(", ") %>
+      <% else %>
+      Also, you're a bit secretive about your private email addresses.
+      <% end %>
     </p>
 
 ## Implementing "persistent" authentication
@@ -129,91 +163,83 @@ GitHub, they should be able to access this application? Hold on to your hat,
 because _that's exactly what we're going to do_.
 
 Our little server above is rather simple. In order to wedge in some intelligent
-authentication, we're going to switch over to implementing [a Rack layer][rack guide]
-into our Sinatra app. On top of that, we're going to be using a middleware called
-[sinatra-auth-github][sinatra auth github] (which was written by a GitHubber).
-This will make authentication transparent to the user.
+authentication, we're going to switch over to using sessions for storing tokens
+and scopes. This will make authentication transparent to the user.
 
-After you run `gem install sinatra_auth_github`, create a file called _advanced_server.rb_,
-and paste these lines into it:
+Create a file called _advanced_server.rb_, and paste these lines into it:
 
     #!ruby
-    require 'sinatra/auth/github'
-    require 'rest-client'
+    require 'sinatra'
+    require 'rest_client'
+    require 'json'
 
-    module Example
-      class MyBasicApp < Sinatra::Base
-        # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-        # Instead, set and test environment variables, like below
-        # if ENV['GITHUB_CLIENT_ID'] && ENV['GITHUB_CLIENT_SECRET']
-        #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
-        #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
-        # end
+    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+    # Instead, set and test environment variables, like below
+    # if ENV['GITHUB_CLIENT_ID'] && ENV['GITHUB_CLIENT_SECRET']
+    #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
+    #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
+    # end
 
-        CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
-        CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
+    CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
+    CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 
-        enable :sessions
+    use Rack::Session::Cookie, :secret => rand.to_s()
 
-        set :github_options, {
-          :scopes    => "user",
-          :secret    => CLIENT_SECRET,
-          :client_id => CLIENT_ID,
-          :callback_url => "/callback"
-        }
+    def authenticated?
+      puts session[:access_token]
+      session[:access_token]
+    end
 
-        register Sinatra::Auth::Github
+    def authenticate!
+      erb :index, :locals => {:client_id => CLIENT_ID}
+    end
 
-        get '/' do
-          if !authenticated?
-            authenticate!
-          else
-            access_token = github_user["token"]
-            auth_result = RestClient.get("https://api.github.com/user", {:params => {:access_token => access_token, :accept => :json},
-                                                                                      :accept => :json})
+    get '/' do
+      if !authenticated?
+        authenticate!
+      else
+        access_token = session[:access_token]
+        scopes = session[:scopes]
 
-            auth_result = JSON.parse(auth_result)
+        auth_result = JSON.parse(RestClient.get("https://api.github.com/user",
+                                                {:params => {:access_token => access_token},
+                                                 :accept => :json}))
 
-            erb :advanced, :locals => {:login => auth_result["login"],
-                                       :hire_status => auth_result["hireable"] ? "hireable" : "not hireable"}
-          end
+        if scopes.include? 'user:email'
+          auth_result['private_emails'] =
+            JSON.parse(RestClient.get("https://api.github.com/user/emails",
+                                      {:params => {:access_token => access_token},
+                                       :accept => :json}))
         end
 
-        get '/callback' do
-          if authenticated?
-            redirect "/"
-          else
-            authenticate!
-          end
-        end
+        erb :advanced, :locals => {:login => auth_result["login"],
+                                   :public_email => auth_result["email"],
+                                   :private_emails => auth_result["private_emails"]}
       end
+    end
+
+    get '/callback' do
+      session_code = request.env['rack.request.query_hash']["code"]
+
+      result = RestClient.post("https://github.com/login/oauth/access_token",
+                              {:client_id => CLIENT_ID,
+                               :client_secret => CLIENT_SECRET,
+                               :code => session_code},
+                               :accept => :json)
+
+      session[:access_token] = JSON.parse(result)["access_token"]
+      session[:scopes] = JSON.parse(result)["scope"].split(",")
+
+      redirect '/'
     end
 
 Much of the code should look familiar. For example, we're still using `RestClient.get`
 to call out to the GitHub API, and we're still passing our results to be rendered
-in an ERB template (this time, it's called `advanced.erb`). Some of the other
-details--like turning our app into a class that inherits from `Sinatra::Base`--are a result
-of inheriting from `sinatra/auth/github`, which is written as [a Sinatra extension][sinatra extension].
+in an ERB template (this time, it's called `advanced.erb`).
 
-Also, we now have a `github_user` object, which comes from `sinatra-auth-github`. The
-`token` key represents the same `access_token` we used during our simple server.
-
-`sinatra-auth-github` comes with quite a few options that you can customize. Here,
-we're establishing them through the `:github_options` symbol. Passing your client ID
-and client secret, and calling `register Sinatra::Auth::Github`, is everything you need
-to simplify your authentication.
-
-We must also create a _config.ru_ config file, which Rack will use for its configuration
-options:
-
-    #!ruby
-    ENV['RACK_ENV'] ||= 'development'
-    require "rubygems"
-    require "bundler/setup"
-
-    require File.expand_path(File.join(File.dirname(__FILE__), 'advanced_server'))
-
-    run Example::MyBasicApp
+Also, we now have the `authenticated?` method which checks if the user is already
+authenticated. If not, the `authenticate!` method is called, which performs the
+OAuth flow and updates the session with the granted token and scopes.
 
 Next, create a file in _views_ called _advanced.erb_, and paste this markup into it:
 
@@ -222,21 +248,34 @@ Next, create a file in _views_ called _advanced.erb_, and paste this markup into
       <head>
       </head>
       <body>
-        <p>Well, well, well, <%= login %>! It looks like you're <em>still</em> <%= hire_status %>!</p>
+        <p>Well, well, well, <%= login %>!</p>
+        <p>
+          <% if !public_email.empty? %> It looks like your public email address is <%= public_email %>.
+          <% else %> It looks like you don't have a public email. That's cool.
+          <% end %>
+        </p>
+        <p>
+          <% if defined? private_emails %>
+          With your permission, we were also able to dig up your private email addresses:
+          <%= private_emails.join(", ") %>
+          <% else %>
+          Also, you're a bit secretive about your private email addresses.
+          <% end %>
+        </p>
       </body>
     </html>
 
-From the command line, call `rackup -p 4567`, which starts up your
-Rack server on port `4567`--the same port we used when we had a simple Sinatra app.
-When you navigate to `http://localhost:4567`, the app calls `authenticate!`--another
-internal `sinatra-auth-github` method--which redirects you to `/callback`. `/callback`
-then sends us back to `/`, and since we've been authenticated, renders _advanced.erb_.
+From the command line, call `ruby advanced_server.rb`, which starts up your
+server on port `4567` -- the same port we used when we had a simple Sinatra app.
+When you navigate to `http://localhost:4567`, the app calls `authenticate!`
+which redirects you to `/callback`. `/callback` then sends us back to `/`,
+and since we've been authenticated, renders _advanced.erb_.
 
 We could completely simplify this roundtrip routing by simply changing our callback
 URL in GitHub to `/`. But, since both _server.rb_ and _advanced.rb_ are relying on
 the same callback URL, we've got to do a little bit of wonkiness to make it work.
 
-Also, if we had never authorized this Rack application to access our GitHub data,
+Also, if we had never authorized this application to access our GitHub data,
 we would've seen the same confirmation dialog from earlier pop-up and warn us.
 
 If you'd like, you can play around with [yet another Sinatra-GitHub auth example][sinatra auth github test]
@@ -248,7 +287,4 @@ available as a separate project.
 [Sinatra guide]: http://sinatra-book.gittr.com/#hello_world_application
 [REST Client]: https://github.com/archiloque/rest-client
 [libraries]: /libraries/
-[rack guide]: http://en.wikipedia.org/wiki/Rack_(web_server_interface)
-[sinatra auth github]: https://github.com/atmos/sinatra_auth_github
-[sinatra extension]: http://www.sinatrarb.com/extensions.html
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test

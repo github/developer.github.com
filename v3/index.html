@@ -548,6 +548,19 @@ application, for the <code>User-Agent</code> header value. This allows us to con
 User-Agent: Awesome-Octocat-App
 </pre>
 
+<p>If you provide an invalid <code>User-Agent</code> header, you will receive a <code>403 Forbidden</code> response:</p>
+
+<pre class="terminal">
+$ curl -iH 'User-Agent: ' https://api.github.com/meta
+HTTP/1.0 403 Forbidden
+Connection: close
+Content-Type: text/html
+
+Request forbidden by administrative rules.
+Please make sure your request has a User-Agent header.
+Check https://developer.github.com for other possible causes.
+</pre>
+
 <h2 id="conditional-requests">Conditional requests</h2>
 
 <p>Most responses return an <code>ETag</code> header. Many responses also return a <code>Last-Modified</code> header. You can use the values

@@ -70,13 +70,13 @@ Key | Type | Description
 
 Triggered when a new [download](/v3/repos/downloads/) is created.
 
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
+
 ### Hook name
 
 `download`
 
 ### Payload
-
-Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 Key | Type | Description
 ----|------|-------------
@@ -136,13 +136,13 @@ Key | Type | Description
 
 Triggered when a [Gist](/v3/gists/) is created or updated.
 
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
+
 ### Hook name
 
 `gist`
 
 ### Payload
-
-Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 Key | Type | Description
 ----|------|-------------

@@ -10,6 +10,11 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
+# Reset search-index by deleting it every time
+preprocess do
+  File.delete("output/search-index.json")
+end
+
 compile '/static/*' do
 end
 

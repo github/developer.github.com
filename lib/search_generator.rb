@@ -12,10 +12,6 @@ class SearchFilter < Nanoc::Filter
   $sidebar_doc = Nokogiri::HTML(sidebar)
   sidebar.close
 
-  def initialize(hash = {})
-    super
-  end
-
   def run(content, params={})
     # uses nokogiri to determine parent section name
     containing_li_text = $sidebar_doc.xpath("//a[@href='#{@item.identifier}']/../../../h3/a[2]/text()")

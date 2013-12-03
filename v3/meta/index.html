@@ -45,7 +45,8 @@
   	<div class="content">
     	<h1 id="meta">Meta</h1>
 
-<p>This gives some information about the GitHub server.</p>
+<p>This endpoint provides information about GitHub.com, the service.
+Or, if you access this endpoint on your organization’s <a href="https://enterprise.github.com/">GitHub Enterprise</a> installation, this endpoint provides information about that installation.</p>
 
 <pre><code>GET /meta
 </code></pre>
@@ -94,7 +95,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <tr>
       <td><code>verifiable_password_authentication</code></td>
       <td><code>boolean</code></td>
-      <td>Whether <a href="/v3/auth/#basic-authentication">Basic Authentication</a> is supported. Some <a href="https://enterprise.github.com/">GitHub Enterprise</a> servers may return <code>false</code> here.</td>
+      <td>Whether authentication with username and password is supported. (GitHub Enterprise instances using CAS or OAuth for authentication will return <code>false</code>. Features like <a href="/v3/auth/#via-username-and-password">Basic Authentication with a username and password</a>, <a href="https://help.github.com/articles/sudo-mode">sudo mode</a>, and <a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a> are not supported on these servers.)</td>
     </tr>
   </tbody>
 </table>

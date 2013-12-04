@@ -8,8 +8,8 @@ title: Deployment Statuses | GitHub API
 {:toc}
 
 The Deployment Status API allows external services to mark deployments with a
-success, failure, error, or pending `state`, which can then be consumed by any
-system listening for `deployment_status` events.
+'success', 'failure', 'error', or 'pending' state, which can then be consumed
+by any system listening for `deployment_status` events.
 
 Deployment Statuses can also include an optional `description` and `target_url`, and
 we highly recommend providing them as they make deployment statuses much more

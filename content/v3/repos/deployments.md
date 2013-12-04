@@ -25,7 +25,7 @@ The deployments API is a request for a specific ref(branch,sha,tag) to be
 deployed. GitHub then dispatches deployment events that external services can
 listen for and act on. This enables developers and organizations to build
 tooling around deployments without having to worry about implementation details
-of delivering different types of applications(web,native).
+of delivering different types of applications (web,native).
 
 Note that the `repo:deployment` [OAuth scope](/v3/oauth/#scopes) grants targeted
 access to Deployments **without** also granting access to repo code, while the
@@ -71,7 +71,7 @@ Users with push access can create a deployment for a given ref:
 
 Name | Type | Description
 -----|------|--------------
-`ref`|`string`| The ref to deploy. This can be a branch, tag, or sha.
+`ref`|`string`| Required ref to deploy. This can be a branch, tag, or sha.
 `force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks.
 `payload`|`string` | Optional JSON payload with extra information about the deployment.
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary.

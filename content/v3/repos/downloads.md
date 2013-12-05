@@ -7,6 +7,17 @@ title: Downloads | GitHub API
 * TOC
 {:toc}
 
+### Downloads API is Deprecated
+
+<div class="alert">
+  <p>
+    The Downloads API (described below) is <a href="/v3/#deprecations">deprecated</a>
+    and is scheduled for removal in the next version of the API.
+
+    We recommend using <a href="/v3/repos/releases/">Releases</a> instead.
+  </p>
+</div>
+
 The downloads API is for package downloads only. If you want to get
 source tarballs you should use [this](/v3/repos/contents/#get-archive-link)
 instead.

@@ -25,9 +25,6 @@ for more details.
 
     GET /repos/:owner/:repo/stargazers
 
-    # Legacy, using github.beta media type.
-    GET /repos/:owner/:repo/watchers
-
 ### Response
 
 <%= headers 200, :pagination => true %>
@@ -39,15 +36,9 @@ List repositories being starred by a user.
 
     GET /users/:user/starred
 
-    # Legacy, using github.beta media type.
-    GET /users/:user/watched
-
 List repositories being starred by the authenticated user.
 
     GET /user/starred
-
-    # Legacy, using github.beta media type.
-    GET /user/watched
 
 ### Parameters
 
@@ -68,9 +59,6 @@ Requires for the user to be authenticated.
 
     GET /user/starred/:owner/:repo
 
-    # Legacy, using github.beta media type.
-    GET /user/watched/:owner/:repo
-
 ### Response if this repository is starred by you
 
 <%= headers 204 %>
@@ -85,9 +73,6 @@ Requires for the user to be authenticated.
 
     PUT /user/starred/:owner/:repo
 
-    # Legacy, using github.beta media type.
-    PUT /user/watched/:owner/:repo
-
 ### Response
 
 <%= headers 204 %>
@@ -97,9 +82,6 @@ Requires for the user to be authenticated.
 Requires for the user to be authenticated.
 
     DELETE /user/starred/:owner/:repo
-
-    # Legacy, using github.beta media type.
-    DELETE /user/watched/:owner/:repo
 
 ### Response
 

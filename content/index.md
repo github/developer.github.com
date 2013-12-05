@@ -13,25 +13,21 @@ GitHub in your app</h1>
 
 <div class="full-width-divider">
 	<ul class="wrapper highlights">
-		<li>
-			<h2>Get Started</h2>
+		<li class="highlight-module">
+			<a href="/guides/"><span class="mega-icon octicon-file-text"></span></a>
+			<h2><a href="/guides/">Get Started</a></h2>
 			<p>New to the GitHub API? With these guides you’ll be up and running in a snap.</p>
-			<a href="/guides/" class="button-secondary">View introduction guides</a>
-			<img class="octocat professorcat" src="/shared/images/professorcat.png">
 		</li>
-		<li>
-			<h2>Libraries</h2>
+		<li class="highlight-module">
+			<a href="/libraries/"><span class="mega-icon octicon-code"></span></a>
+			<h2><a href="/libraries/">Libraries</a></h2>
 			<p>We’ve got you covered. Use the GitHub API in your favorite language.</p>
-			<a href="/libraries/" class="button-secondary">Browse libraries</a>
-			<img class="octocat" src="/shared/images/gundamcat-small.png">
 		</li>
-		<li>
-			<h2>Support</h2>
+		<li class="highlight-module">
+			<a href="http://github.com/contact"><span class="mega-icon octicon-mail-read"></span></a>
+			<h2><a href="http://github.com/contact">Support</a></h2>
 			<p>Are you stuck? Already tried our <a href="/v3/troubleshooting/">troubleshooting guide</a>? Talk to a supportocat.</p>
-			<a href="http://github.com/contact" class="button-secondary">Get in touch</a>
-			<img class="octocat" src="/shared/images/supportocat.png">
 		</li>
 		
 	</ul>
 </div>
-

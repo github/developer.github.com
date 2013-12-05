@@ -28,7 +28,7 @@ List all issues for a given organization for the authenticated user:
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `filter`|`string`| Indicates which sorts of issues to return. Can be one of:<br/>* `assigned`: Issues assigned to you<br/>* `created`: Issues created by you<br/>* `mentioned`: Issues mentioning you<br/>* `subscribed`: Issues you're subscribed to updates for<br/>* `all`: All issues the authenticated user can see, regardless of participation or creation<br/> Default: `assigned`
 `state`|`string`| Indicates the state of the issues to return. Can be either `open` or `closed`. Default: `open`
@@ -48,7 +48,7 @@ Name | Type | Description
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `milestone`|`integer` or `string`| If an `integer` is passed, it should refer to a milestone number. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. Default: `*`
 `state`|`string`| Indicates the state of the issues to return. Can be either `open` or `closed`. Default: `open`
@@ -88,7 +88,7 @@ Any user with pull access to a repository can create an issue.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `title`|`string` | **Required**. The title of the issue.
 `body`|`string` | The contents of the issue.
@@ -121,7 +121,7 @@ Issue owners and users with push access can edit an issue.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `title`|`string` | **Required**. The title of the issue.
 `body`|`string` | The contents of the issue.

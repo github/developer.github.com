@@ -66,7 +66,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `files`|`hash` | **Required**. Files that make up this gist.
 `description`|`string` | A description of the gist.
@@ -96,7 +96,7 @@ format of the automatic naming scheme that Gist uses internally.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `description`|`string` | A description of the gist.
 `files`|`hash` | Files that make up this gist.

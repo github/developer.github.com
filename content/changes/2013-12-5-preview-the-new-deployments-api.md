@@ -32,7 +32,7 @@ bypassed but is useful in cases where continuous integration is being used.
 ### Force Deployments
 
 Sometimes the world crashes down on you and you need to just get the code out.
-Forced deployments bypass and commit status or ahead/behind checks in the repo.
+Forced deployments bypass any commit status or ahead/behind checks in the repo.
 
 ### Deployment Statuses
 

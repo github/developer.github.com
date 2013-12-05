@@ -15,7 +15,7 @@ v3. There should be no changes, other than the new URL and JSON output format.
 <div class="alert">
   <p>
     The Legacy Search API (described below) is <a href="/v3/#deprecations">deprecated</a>
-    and is scheduled for removal in the next version of the API.
+    and is scheduled for removal in the next major version of the API.
 
     We recommend using the <a href="/v3/search/">v3 Search API</a> instead.
     It contains new endpoints and much more functionality.
@@ -30,7 +30,7 @@ Find issues by state and keyword.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `state`|`string` | Indicates the state of the issues to return. Can be either `open` or `closed`.
 `keyword`|`string`| The search term.
@@ -49,7 +49,7 @@ pages can be fetched using the `start_page` parameter.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `keyword`|`string`| The search term|
 `language`|`string` | Filter results by [language](https://github.com/languages)
@@ -69,7 +69,7 @@ Find users by keyword.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `keyword`|`string`| The search term
 `start_page`|`string` | The page number to fetch
@@ -91,7 +91,7 @@ address must be left unencoded. Searches only against public email addresses
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `email`|`string`| The email address
 

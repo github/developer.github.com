@@ -49,7 +49,11 @@ Name | Type | Description
 
     GET /gists/:id
 
-_Note_: When using the [v3 media type][2] the "user" field will become "owner"
+<div class="alert">
+  <p>
+    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the <code>user</code> attribute is renamed to <code>owner</code>.
+  </p>
+</div>
 
 ### Response
 
@@ -168,4 +172,3 @@ including the filename with a `null` hash.
 <%= headers 204 %>
 
 [1]: /v3/oauth/#scopes
-[2]: /v3/media

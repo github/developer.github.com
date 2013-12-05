@@ -53,8 +53,6 @@ for the `X-GitHub-Media-Type` header:
 ## Beta, v3, and the Future
 
 Ultimately, we aim for a version-less, [Hypermedia][hypermedia]-driven API.
-Before we get there, we [expect a few changes][expected-changes].
-
 In the mean time, if you don't specify a version in the `Accept` header, you'll
 get the `beta` version (as shown above) by default.
 
@@ -64,8 +62,31 @@ media type in the `Accept` header:
 
     application/vnd.github.v3
 
-Where there's a difference between the `beta` and `v3` representations, we'll
-strive to call out those differences.
+Check out the [full list of differences](#beta-to-v3-changelog) between `beta` and `v3` below.
+
+## Beta-to-v3 Changelog
+
+The v3 media type differs from the beta media type in just a few places:
+
+### Gist JSON
+
+For [Gists](/v3/gists/#get-a-single-gist), the v3 media type renames the `user` attribute to `owner`.
+
+### Issue JSON
+
+When an [issue](/v3/issues/#get-a-single-issue) is not a pull request, the v3 media type omits the `pull_request` attribute.
+
+### Repository JSON
+
+TODO
+
+### User JSON
+
+TODO
+
+### User Emails JSON
+
+TODO
 
 ## Comment Body Properties
 

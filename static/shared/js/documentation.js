@@ -185,6 +185,12 @@ $(function() {
       moveSearchSelectionDown();
     }
   });
+
+  // Make clicking the label focus the input label
+  // for browsers (IE) that doesn't support pointer-events: none
+  $("#search-container .search-placeholder").click(function(e) {
+    $("#searchfield").focus();
+  });
   
   $(".cancel-search").click(function(e) {
     cancelSearch();

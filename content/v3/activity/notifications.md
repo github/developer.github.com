@@ -52,7 +52,7 @@ of high server load, the time may increase.  Please obey the header.
 ## Notification Reasons
 
 When retrieving responses from the Notifications API, each payload has a key titled
-`reason`. These correspond to events that trigger a notifications.
+`reason`. These correspond to events that trigger a notification.
 
 Here's a list of potential `reason`s for receiving a noitification:
 

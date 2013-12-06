@@ -49,6 +49,32 @@ of high server load, the time may increase.  Please obey the header.
     HTTP/1.1 304 Not Modified
     X-Poll-Interval: 60
 
+## Notification Reasons
+
+When retrieving responses from the Notifications API, each payload has a key titled
+`reason`. These correspond to events that trigger a notification.
+
+Here's a list of potential `reason`s for receiving a notification:
+
+Reason Name | Description
+------------|------------
+`subscribed` | The notification arrived because you're watching the repository
+`manual` | The notification arrived because you've specifically decided to watch the item (via an Issue or Pull Request) 
+`author` | The notification arrived because you've created the item 
+`comment` | The notification arrived because you've commented on the item 
+`mention` | The notification arrived because you were specifically **@mentioned** in the content 
+`team_mention` | The notification arrived because you were on a team that was mentioned (like @org/team) 
+`state_change` | The notification arrived because you changed the item state (like closing an Issue or merging a Pull Request) 
+`assign` | The notification arrived because you were assigned to the Issue 
+
+Note that the `reason` is modified on a per-thread basis, and can change, if the
+`reason` on a later notification is different. 
+
+For example, if you are the author of an issue, subsequent notifications on that 
+issue will have a `reason` of `author`. If you're then  **@mentioned** on the same 
+issue, the notifications you fetch thereafter will have a `reason` of `mention`. 
+The `reason` remains as `mention`, regardless of whether you're ever mentioned again.
+
 ## List your notifications
 
 List all notifications for the current user, grouped by repository.

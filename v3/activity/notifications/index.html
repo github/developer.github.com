@@ -26,6 +26,13 @@
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
       </ul>
     </div>
   </div><!-- #header -->
@@ -46,6 +53,7 @@
     	<h1 id="notifications">Notifications</h1>
 
 <ul id="markdown-toc">
+  <li><a href="#notification-reasons">Notification Reasons</a></li>
   <li><a href="#list-your-notifications">List your notifications</a></li>
   <li><a href="#list-your-notifications-in-a-repository">List your notifications in a repository</a></li>
   <li><a href="#mark-as-read">Mark as read</a></li>
@@ -103,6 +111,64 @@ $ curl -I https://api.github.com/notifications
 HTTP/1.1 304 Not Modified
 X-Poll-Interval: 60
 </code></pre>
+
+<h2 id="notification-reasons">Notification Reasons</h2>
+
+<p>When retrieving responses from the Notifications API, each payload has a key titled
+<code>reason</code>. These correspond to events that trigger a notification.</p>
+
+<p>Here’s a list of potential <code>reason</code>s for receiving a notification:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reason Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>subscribed</code></td>
+      <td>The notification arrived because you’re watching the repository</td>
+    </tr>
+    <tr>
+      <td><code>manual</code></td>
+      <td>The notification arrived because you’ve specifically decided to watch the item (via an Issue or Pull Request)</td>
+    </tr>
+    <tr>
+      <td><code>author</code></td>
+      <td>The notification arrived because you’ve created the item</td>
+    </tr>
+    <tr>
+      <td><code>comment</code></td>
+      <td>The notification arrived because you’ve commented on the item</td>
+    </tr>
+    <tr>
+      <td><code>mention</code></td>
+      <td>The notification arrived because you were specifically <strong>@mentioned</strong> in the content</td>
+    </tr>
+    <tr>
+      <td><code>team_mention</code></td>
+      <td>The notification arrived because you were on a team that was mentioned (like @org/team)</td>
+    </tr>
+    <tr>
+      <td><code>state_change</code></td>
+      <td>The notification arrived because you changed the item state (like closing an Issue or merging a Pull Request)</td>
+    </tr>
+    <tr>
+      <td><code>assign</code></td>
+      <td>The notification arrived because you were assigned to the Issue</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note that the <code>reason</code> is modified on a per-thread basis, and can change, if the
+<code>reason</code> on a later notification is different. </p>
+
+<p>For example, if you are the author of an issue, subsequent notifications on that 
+issue will have a <code>reason</code> of <code>author</code>. If you’re then  <strong>@mentioned</strong> on the same 
+issue, the notifications you fetch thereafter will have a <code>reason</code> of <code>mention</code>. 
+The <code>reason</code> remains as <code>mention</code>, regardless of whether you’re ever mentioned again.</p>
 
 <h2 id="list-your-notifications">List your notifications</h2>
 

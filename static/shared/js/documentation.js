@@ -120,13 +120,13 @@ $(function() {
     if (localStorageHasExpired())
       loadSearchIndex();
   } else {
-    loadSearchIndex();    
+    loadSearchIndex();
   }
   
   function loadSearchIndex() {
     $.getJSON('/search-index.json', function(data) {
       searchIndex = data["pages"];
-      localStorage['searchIndex'] = JSON.stringify(searchIndex); 
+      localStorage['searchIndex'] = JSON.stringify(searchIndex);
       localStorage['updated'] = new Date().getTime();
     });
   }
@@ -143,7 +143,7 @@ $(function() {
   // On input change, update the search results
   $("#searchfield").on("input", function(e) {
     $(this).val().length > 0 ? $("#search-container").addClass("active") : $("#search-container").removeClass("active");
-    
+
     searchForString($(this).val());
   });
   
@@ -236,11 +236,11 @@ $(function() {
   
   function moveSearchSelectionUp() {
     $prev = $("#search-results .selected").prev();
-    if ($prev.length < 1) 
+    if ($prev.length < 1)
       return;
     
     $("#search-results .selected").removeClass("selected");
-    $prev.addClass("selected");   
+    $prev.addClass("selected");
   }
   
   function moveSearchSelectionDown() {
@@ -249,7 +249,7 @@ $(function() {
       return;
     
     $("#search-results .selected").removeClass("selected");
-    $next.addClass("selected");  
+    $next.addClass("selected");
   }
   
   function goToSelectedSearchResult() {

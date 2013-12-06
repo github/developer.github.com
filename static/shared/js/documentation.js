@@ -173,6 +173,8 @@ $(function() {
       // Update search if backspace/delete was pressed
       // IE9 doesn't trigger the input event on backspace/delete,
       // but they do trigger keyUp
+      $(this).val().length > 0 ? $("#search-container").addClass("active") : $("#search-container").removeClass("active");
+
       searchForString($(this).val());
     }
   }).keydown(function(e) {

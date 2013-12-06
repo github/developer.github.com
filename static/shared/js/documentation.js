@@ -168,6 +168,11 @@ $(function() {
       // Return/enter
       e.preventDefault();
       goToSelectedSearchResult();
+    }  else if (e.keyCode == 8 || e.keyCode == 46) {
+      // Update search if backspace/delete was pressed
+      // IE9 doesn't trigger the input event on backspace/delete,
+      // but they do trigger keyUp
+      searchForString($(this).val());
     }
   }).keydown(function(e) {
     if (e.keyCode == 38) {

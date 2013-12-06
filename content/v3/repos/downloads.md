@@ -11,8 +11,9 @@ title: Downloads | GitHub API
 
 <div class="alert">
   <p>
-    The Downloads API (described below) is <a href="/v3/#deprecations">deprecated</a>
-    and is scheduled for removal in the next version of the API.
+    The Downloads API (described below) was
+    <a href="https://github.com/blog/1302-goodbye-uploads">deprecated on December 11, 2012</a>.
+    It will be removed at a future date.
 
     We recommend using <a href="/v3/repos/releases/">Releases</a> instead.
   </p>

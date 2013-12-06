@@ -108,7 +108,7 @@ $(function() {
     $(this).prepend("<a class='header-anchor' href='#" + id + "'></a>");
   });
   
-  // # Search
+  // #### Search ####
   var searchIndex,
       searchHits;
   
@@ -138,6 +138,12 @@ $(function() {
     }
     
     return false;
+  }
+
+  // Expand and activate search if the page loaded with a value set for the search field
+  if ($("#searchfield").val().length > 0) {
+    $("#search-container").addClass("active");
+    searchForString($("#searchfield").val());
   }
     
   // On input change, update the search results

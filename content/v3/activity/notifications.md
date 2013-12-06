@@ -67,6 +67,11 @@ Reason Name | Description
 `state_change` | The notification arrived because you changed the item state (like closing an Issue or merging a Pull Request) 
 `assign` | The notification arrived because you were assigned to the Issue 
 
+Note that the `reason` is on a per-thread basis, and does not change on a 
+per-notification basis. For example, if you are **@mentioned** on an issue, the 
+notifications you fetch thereafter will all have a `reason` of `mention`, 
+regardless of whether you're mentioned again.
+
 ## List your notifications
 
 List all notifications for the current user, grouped by repository.

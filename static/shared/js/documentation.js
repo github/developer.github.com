@@ -163,6 +163,7 @@ $(function() {
   $("#searchfield").keyup(function(e) {
     if (e.keyCode == 27) {
       // ESC
+      e.preventDefault();
       $("#searchfield").val().length > 0 ? cancelSearch() : $("#searchfield").blur();
     } else if (e.keyCode == 13) {
       // Return/enter
@@ -183,6 +184,11 @@ $(function() {
       // Arrow down
       e.preventDefault();
       moveSearchSelectionDown();
+    } else if (e.keyCode == 27) {
+      // Prevent default on ESC key
+      // IE inputs come with some native behaviors that will
+      // prevent the DOM from updating correctly unless prevented
+      e.preventDefault();
     }
   });
 
@@ -197,8 +203,8 @@ $(function() {
   });
   
   function cancelSearch() {
-    $("#search-container").removeClass("active");
     $("#searchfield").val("");
+    $("#search-container").removeClass("active");
   }
   
   function searchForString(searchString) {

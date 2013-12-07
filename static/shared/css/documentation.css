@@ -338,6 +338,7 @@ a img {
 #header .nav #search-container {
   position: relative;
   margin-left: 5px;
+  text-shadow: none;
 }
 
 #searchfield {
@@ -350,11 +351,18 @@ a img {
   width: 51px;
   border-radius: 3px;
   background: url(/shared/images/search.png) 5px center no-repeat #fff;
-  
+
   -webkit-transition: width 0.3s ease-in-out 0s;
   -moz-transition: width 0.3s ease-in-out 0s;
   -ms-transition: width 0.3s ease-in-out 0s;
   transition: width 0.3s ease-in-out 0s;
+}
+
+/** Hide native X appearing in IE10 **/
+
+#searchfield::-ms-clear {
+    height: 0;
+    width: 0;
 }
 
 #searchfield:focus, #search-container.active #searchfield {
@@ -375,7 +383,7 @@ a img {
   pointer-events: none;
   color: #aaa;
   line-height: 20px;
-  
+
   -webkit-transition: opacity 0.3s ease-in-out 0s;
   -moz-appearance-transition: opacity 0.3s ease-in-out 0s;
   -ms-transition: opacity 0.3s ease-in-out 0s;
@@ -388,7 +396,7 @@ a img {
   top: 2px;
   background: url(/shared/images/cancel.png) 0 0 no-repeat;
   width: 14px;
-  height: 14px; 
+  height: 14px;
   display: none;
 }
 
@@ -411,13 +419,13 @@ a img {
   opacity: 0;
 }
 
-#search-container.active #searchfield:focus ~ #search-results, #search-results:active, #search-results:focus {
+#search-container.active #searchfield:focus ~ #search-results, #search-results:active, #search-results:focus, #search-results:hover {
   visibility: visible;
   opacity: 1;
   -webkit-transition: opacity 0.3s ease-in-out 0s;
   -moz-transition: opacity 0.3s ease-in-out 0s;
   -ms-transition: opacity 0.3s ease-in-out 0s;
-  transition: opacity 0.3s ease-in-out 0s;  
+  transition: opacity 0.3s ease-in-out 0s;
 }
 
 #search-results li {
@@ -1535,17 +1543,17 @@ li.api-status img {
     background-image: url(/images/logo_developer@2x.png);
     background-size: 186px 27px;
   }
-  
+
   #searchfield {
     background-image: url(/shared/images/search@2x.png);
     background-size: 13px 13px;
   }
-  
+
   .cancel-search {
     background-image: url(/shared/images/cancel@2x.png);
     background-size: 14px 14px;
   }
-  
+
   .sidebar-module .arrow-btn {
     background-image: url(/shared/images/expand-arrows@2x.png);
     background-size: 73px 80px;

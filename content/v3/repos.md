@@ -19,7 +19,7 @@ separately.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
 `sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
@@ -34,7 +34,7 @@ List public repositories for the specified user.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
 `type`|`string` | Can be one of `all`, `owner`, `member`. Default: `owner`
 `sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
@@ -49,7 +49,7 @@ List repositories for the specified org.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `type`|`string` | Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`
 
@@ -77,7 +77,7 @@ repositories.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `since`|`string`| The integer ID of the last Repository that you've seen.
 
@@ -101,7 +101,7 @@ be a member of the specified organization.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the repository
 `description`|`string` | A short description of the repository
@@ -158,7 +158,7 @@ The `parent` and `source` objects are present when the repo is a fork.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the repository
 `description`|`string` | A short description of the repository
@@ -192,7 +192,7 @@ Name | Type | Description
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
 `anon`|`string` | Set to `1` or `true` to include anonymous contributors in results.
 

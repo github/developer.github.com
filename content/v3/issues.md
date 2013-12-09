@@ -69,16 +69,16 @@ Name | Type | Description
 
     GET /repos/:owner/:repo/issues/:number
 
+### Response
+
+<%= headers 200 %>
+<%= json :issue %>
+
 <div class="alert">
   <p>
     <strong>Note</strong>: Every pull request is an issue, but not every issue is a pull request. When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, if the issue is not a pull request, the response omits the <code>pull_request</code> attribute.
   </p>
 </div>
-
-### Response
-
-<%= headers 200 %>
-<%= json :issue %>
 
 ## Create an issue
 

@@ -49,13 +49,13 @@ Name | Type | Description
 
     GET /gists/:id
 
+### Response
+
 <div class="alert">
   <p>
     <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the <code>user</code> attribute is renamed to <code>owner</code>.
   </p>
 </div>
-
-### Response
 
 <%= headers 200 %>
 <%= json :full_gist %>

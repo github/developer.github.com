@@ -86,7 +86,7 @@ For [Users](/v3/users/), the v3 media type omits the `public_gists` and `private
 
 ### User Emails JSON
 
-TODO
+For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of hashes (instead of an array of strings).
 
 ## Comment Body Properties
 

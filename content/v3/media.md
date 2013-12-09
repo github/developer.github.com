@@ -78,7 +78,7 @@ When an [issue](/v3/issues/#get-a-single-issue) is not a pull request, the v3 me
 
 ### Repository JSON
 
-TODO
+For [Repositories](/v3/repos/#get), the v3 media type omits the `master_branch` attribute. API clients should use the `default_branch` attribute to obtain the repository's default branch.
 
 ### User JSON
 

@@ -25,6 +25,12 @@ information](/v3/#authentication) with your request).
 Note: The returned email is the user's publicly visible email address
 (or `null` if the user has not [specified a public email address in their profile](https://github.com/settings/profile)).
 
+<div class="alert">
+  <p>
+    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>public_gists</code> attribute.
+  </p>
+</div>
+
 ## Get the authenticated user
 
     GET /user
@@ -33,6 +39,12 @@ Note: The returned email is the user's publicly visible email address
 
 <%= headers 200 %>
 <%= json :private_user %>
+
+<div class="alert">
+  <p>
+    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>public_gists</code> and <code>private_gists</code> attributes.
+  </p>
+</div>
 
 ## Update the authenticated user
 

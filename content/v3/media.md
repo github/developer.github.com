@@ -82,7 +82,7 @@ For [Repositories](/v3/repos/#get), the v3 media type omits the `master_branch` 
 
 ### User JSON
 
-TODO
+For [Users](/v3/users/), the v3 media type omits the `public_gists` and `private_gists` attributes.
 
 ### User Emails JSON
 

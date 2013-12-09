@@ -21,7 +21,7 @@ The most basic media types the API supports are:
     application/json
     application/vnd.github+json
 
-Neither of these specify a version, so you will always get the latest
+Neither of these specify a [version][versions], so you will always get the current default
 JSON representation of resources.  If you're building an application and
 care about the stability of the API, specify a version like so:
 
@@ -52,41 +52,16 @@ for the `X-GitHub-Media-Type` header:
 
 ## Beta, v3, and the Future
 
-Ultimately, we aim for a version-less, [Hypermedia][hypermedia]-driven API.
-In the mean time, if you don't specify a version in the `Accept` header, you'll
-get the `beta` version (as shown above) by default.
+If you don't specify a version in the `Accept` header, you'll
+get the [beta version](/v3/versions#beta) (as shown above) by default.
 
-Eventually, `v3` will become the default version. We recommend that you start
-using `v3` now. To get that version today, explicitly request the API v3
+Eventually, [v3](/v3/versions#v3) will become the default version. We recommend that you start
+using v3 now. To get that version today, explicitly request the API v3
 media type in the `Accept` header:
 
     application/vnd.github.v3
 
-Check out the [full list of differences](#beta-to-v3-changelog) between `beta` and `v3` below.
-
-## Beta-to-v3 Changelog
-
-The v3 media type differs from the beta media type in just a few places:
-
-### Gist JSON
-
-For [Gists](/v3/gists/#get-a-single-gist), the v3 media type renames the `user` attribute to `owner`.
-
-### Issue JSON
-
-When an [issue](/v3/issues/#get-a-single-issue) is not a pull request, the v3 media type omits the `pull_request` attribute.
-
-### Repository JSON
-
-For [Repositories](/v3/repos/#get), the v3 media type omits the `master_branch` attribute. API clients should use the `default_branch` attribute to obtain the repository's default branch.
-
-### User JSON
-
-For [Users](/v3/users/), the v3 media type omits the `public_gists` and `private_gists` attributes.
-
-### User Emails JSON
-
-For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of hashes (instead of an array of strings).
+Check out [version docs][versions] for the [full list of differences](/v3/versions#differences-from-beta-version) between beta and v3.
 
 ## Comment Body Properties
 
@@ -158,4 +133,4 @@ The Commit, Commit Comparison, and Pull Request resources support
 [git-diff]: http://git-scm.com/docs/git-diff
 [git-patch]: http://git-scm.com/docs/git-format-patch
 [hypermedia]: /v3/#hypermedia
-[expected-changes]: /v3/#deprecations
+[versions]: /v3/versions

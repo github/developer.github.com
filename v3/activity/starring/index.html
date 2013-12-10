@@ -77,9 +77,6 @@ for more details.</p>
 <h2 id="list-stargazers">List Stargazers</h2>
 
 <pre><code>GET /repos/:owner/:repo/stargazers
-
-# Legacy, using github.beta media type.
-GET /repos/:owner/:repo/watchers
 </code></pre>
 
 <h3 id="response">Response</h3>
@@ -117,17 +114,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>List repositories being starred by a user.</p>
 
 <pre><code>GET /users/:user/starred
-
-# Legacy, using github.beta media type.
-GET /users/:user/watched
 </code></pre>
 
 <p>List repositories being starred by the authenticated user.</p>
 
 <pre><code>GET /user/starred
-
-# Legacy, using github.beta media type.
-GET /user/watched
 </code></pre>
 
 <h3 id="parameters">Parameters</h3>
@@ -204,6 +195,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"stargazers_count"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
     <span class="s2">"watchers_count"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
     <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"default_branch"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
     <span class="s2">"master_branch"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
     <span class="s2">"open_issues_count"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
@@ -217,9 +209,6 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>Requires for the user to be authenticated.</p>
 
 <pre><code>GET /user/starred/:owner/:repo
-
-# Legacy, using github.beta media type.
-GET /user/watched/:owner/:repo
 </code></pre>
 
 <h3 id="response-if-this-repository-is-starred-by-you">Response if this repository is starred by you</h3>
@@ -239,9 +228,6 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>Requires for the user to be authenticated.</p>
 
 <pre><code>PUT /user/starred/:owner/:repo
-
-# Legacy, using github.beta media type.
-PUT /user/watched/:owner/:repo
 </code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -255,9 +241,6 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>Requires for the user to be authenticated.</p>
 
 <pre><code>DELETE /user/starred/:owner/:repo
-
-# Legacy, using github.beta media type.
-DELETE /user/watched/:owner/:repo
 </code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -278,6 +261,7 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li><a href="/v3/oauth/">OAuth</a></li>
           <li><a href="/v3/auth/">Other Authentication Methods</a></li>
           <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
+          <li><a href="/v3/versions/">Versions</a></li>
         </ul>
       </li>
       <li class="js-topic">

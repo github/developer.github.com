@@ -76,7 +76,7 @@ formats that other resources don’t.</p>
 application/vnd.github+json
 </code></pre>
 
-<p>Neither of these specify a version, so you will always get the latest
+<p>Neither of these specify a <a href="/v3/versions">version</a>, so you will always get the current default
 JSON representation of resources.  If you’re building an application and
 care about the stability of the API, specify a version like so:</p>
 
@@ -109,21 +109,17 @@ X-GitHub-Media-Type: github.v3; param=full; format=json
 
 <h2 id="beta-v3-and-the-future">Beta, v3, and the Future</h2>
 
-<p>Ultimately, we aim for a version-less, <a href="/v3/#hypermedia">Hypermedia</a>-driven API.
-Before we get there, we <a href="/v3/#deprecations">expect a few changes</a>.</p>
+<p>If you don’t specify a version in the <code>Accept</code> header, you’ll
+get the <a href="/v3/versions#beta">beta version</a> (as shown above) by default.</p>
 
-<p>In the mean time, if you don’t specify a version in the <code>Accept</code> header, you’ll
-get the <code>beta</code> version (as shown above) by default.</p>
-
-<p>Eventually, <code>v3</code> will become the default version. We recommend that you start
-using <code>v3</code> now. To get that version today, explicitly request the API v3
+<p>Eventually, <a href="/v3/versions#v3">v3</a> will become the default version. We recommend that you start
+using v3 now. To get that version today, explicitly request the API v3
 media type in the <code>Accept</code> header:</p>
 
 <pre><code>application/vnd.github.v3
 </code></pre>
 
-<p>Where there’s a difference between the <code>beta</code> and <code>v3</code> representations, we’ll
-strive to call out those differences.</p>
+<p>Check out <a href="/v3/versions">version docs</a> for the <a href="/v3/versions#differences-from-beta-version">full list of differences</a> between beta and v3.</p>
 
 <h2 id="comment-body-properties">Comment Body Properties</h2>
 
@@ -211,6 +207,7 @@ encoded string. This is the default if nothing is passed.</p>
           <li><a href="/v3/oauth/">OAuth</a></li>
           <li><a href="/v3/auth/">Other Authentication Methods</a></li>
           <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
+          <li><a href="/v3/versions/">Versions</a></li>
         </ul>
       </li>
       <li class="js-topic">

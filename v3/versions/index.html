@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Events | GitHub API</title>
+  <title>Versions | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -50,146 +50,189 @@
 	
   <div id="wrapper">
   	<div class="content">
-    	<h1 id="events">Events</h1>
+    	<h1 id="versions">Versions</h1>
 
-<p>This is a read-only API to the GitHub events.  These events power the
-various activity streams on the site.</p>
+<p>There are two stable versions of the GitHub API: <a href="#beta">beta</a> and <a href="#v3">v3</a>. There are just a few <a href="#differences-from-beta-version">differences between these two versions</a>.</p>
 
-<ul id="markdown-toc">
-  <li><a href="#list-public-events">List public events</a></li>
-  <li><a href="#list-repository-events">List repository events</a></li>
-  <li><a href="#list-issue-events-for-a-repository">List issue events for a repository</a></li>
-  <li><a href="#list-public-events-for-a-network-of-repositories">List public events for a network of repositories</a></li>
-  <li><a href="#list-public-events-for-an-organization">List public events for an organization</a></li>
-  <li><a href="#list-events-that-a-user-has-received">List events that a user has received</a></li>
-  <li><a href="#list-public-events-that-a-user-has-received">List public events that a user has received</a></li>
-  <li><a href="#list-events-performed-by-a-user">List events performed by a user</a></li>
-  <li><a href="#list-public-events-performed-by-a-user">List public events performed by a user</a></li>
-  <li><a href="#list-events-for-an-organization">List events for an organization</a></li>
+<p>By default, all requests receive the beta version. Eventually, v3 will become the default version. We encourage you to <a href="/v3/media/#beta-v3-and-the-future">request a specific version via the <code>Accept</code> header</a>.</p>
+
+<h1 id="v3">v3</h1>
+
+<p>The <a href="/v3">v3 API</a> is stable and unchangeable. Please <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">file a support issue</a> if you have problems.</p>
+
+<p>Some v3 functionality is <a href="#v3-deprecations">deprecated</a> and will be removed in the next major version of the API.</p>
+
+<h2 id="differences-from-beta-version">Differences from beta version</h2>
+
+<p>The v3 media type differs from the beta media type in just a few places:</p>
+
+<h3 id="gist-json">Gist JSON</h3>
+
+<p>For <a href="/v3/gists/#get-a-single-gist">Gists</a>, the v3 media type renames the <code>user</code> attribute to <code>owner</code>.</p>
+
+<h3 id="issue-json">Issue JSON</h3>
+
+<p>When an <a href="/v3/issues/#get-a-single-issue">issue</a> is not a pull request, the v3 media type omits the <code>pull_request</code> attribute.</p>
+
+<h3 id="repository-json">Repository JSON</h3>
+
+<p>For <a href="/v3/repos/#get">Repositories</a>, the v3 media type omits the <code>master_branch</code> attribute. API clients should use the <code>default_branch</code> attribute to obtain the repository’s default branch.</p>
+
+<h3 id="user-json">User JSON</h3>
+
+<p>For <a href="/v3/users/">Users</a>, the v3 media type omits the <code>public_gists</code> and <code>private_gists</code> attributes.</p>
+
+<h3 id="user-emails-json">User Emails JSON</h3>
+
+<p>For <a href="/v3/users/emails/#list-email-addresses-for-a-user">User Emails</a>, the v3 media type returns an array of hashes (instead of an array of strings).</p>
+
+<h2 id="v3-deprecations">v3 deprecations</h2>
+
+<p>The following functionality is deprecated. For backwards compatibility purposes,
+v3 will continue to provide this functionality. However, this deprecated
+functionality <em>will be removed</em> in the next major version of the API.</p>
+
+<p>The recommendations below will help you prepare your application for the next major version of the API.</p>
+
+<ol>
+  <li>
+    <dl>
+      <dt>Method: /gists/:id/fork</dt>
+      <dd>Recommendation: Use <strong>/gists/:id/forks</strong> (plural) instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Method: /legacy/issues/search/:owner/:repository/:state/:keyword</dt>
+      <dd>Recommendation: Use <a href="/v3/search/#search-issues">v3 Issue Search API</a> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Method: /legacy/repos/search/:keyword</dt>
+      <dd>Recommendation: Use <a href="/v3/search/#search-repositories">v3 Repository Search API</a> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Method: /legacy/user/search/:keyword</dt>
+      <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Method: /legacy/user/email/:email</dt>
+      <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Method: /repos/:owner/:repo/hooks/:id/test</dt>
+      <dd>Recommendation: Use <strong>/repos/:owner/:repo/hooks/:id/tests</strong> (plural) instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Query parameters when POSTing to /repos/:owner/:repo/forks</dt>
+      <dd>Recommendation: Use JSON to POST to this method instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Query parameter value: Passing “watchers” as the value for the “sort” parameter in a GET request to /repos/:owner/:repo/forks</dt>
+      <dd>Recommendation: Use <strong>stargazers</strong> as the value instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Pull Request attribute: merge_commit_sha</dt>
+      <dd>Recommendation: <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Do not use this attribute</a>.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Rate Limit attribute: rate</dt>
+      <dd>Recommendation: Use <strong>resources[“core”]</strong> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Repository attribute: forks</dt>
+      <dd>Recommendation: Use <strong>fork_count</strong> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Repository attribute: master_branch</dt>
+      <dd>Recommendation: Use <strong>default_branch</strong> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Repository attribute: open_issues</dt>
+      <dd>Recommendation: Use <strong>open_issues_count</strong> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Repository attribute: public</dt>
+      <dd>Recommendation: When <a href="/v3/repos/#create">creating a repository</a>, use the
+<strong>private</strong> attribute to indicate whether the repository should be public or
+private. Do not use the <strong>public</strong> attribute.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>Repository attribute: watchers</dt>
+      <dd>Recommendation: Use <strong>watchers_count</strong> instead.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt>User attribute: bio</dt>
+      <dd>Recommendation: Do not use this attribute. It is obsolete.</dd>
+    </dl>
+  </li>
+</ol>
+
+<h1 id="beta">beta</h1>
+
+<p>The <a href="/v3">beta API</a> is now stable and unchangeable. Please <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">file a support issue</a> if you have problems.</p>
+
+<h2 id="breaking-beta-changes">Breaking beta changes</h2>
+
+<h3 id="june-15th-2011">June 15th, 2011:</h3>
+
+<ul>
+  <li>
+<code>gravatar_url</code> is being deprecated in favor of <code>avatar_url</code> for all
+responses that include users or orgs. A default size is no longer
+included in the URL.</li>
+  <li>Creating new gists (both anonymously and with an authenticated user)
+should use <code>POST /gists</code> from now on. <code>POST /users/:user/gists</code> is no
+longer supported.</li>
 </ul>
 
-<p>Events are optimized for polling with the “ETag” header.  If no new events have
-been triggered, you will see a “304 Not Modified” response, and your current
-rate limit will be untouched.  There is also an “X-Poll-Interval” header that
-specifies how often (in seconds) you are allowed to poll.  In times of high
-server load, the time may increase.  Please obey the header.</p>
+<h3 id="june-1st-2011">June 1st, 2011:</h3>
 
-<pre><code>$ curl -I https://api.github.com/users/tater/events
-HTTP/1.1 200 OK
-X-Poll-Interval: 60
-ETag: "a18c3bded88eb5dbb5c849a489412bf3"
+<ul>
+  <li>Removed support for PUT verb on update requests. Use POST or PATCH
+instead.</li>
+  <li>Removed <code>.json</code> extension from all URLs.</li>
+  <li>No longer using the X-Next or X-Last headers. Pagination info is
+returned in the Link header instead.</li>
+  <li>JSON-P response has completely changed to a more consistent format.</li>
+  <li>Starring gists now uses PUT verb (instead of POST) and returns 204.</li>
+</ul>
 
-# The quotes around the ETag value are important
-$ curl -I https://api.github.com/users/tater/events \
-    -H 'If-None-Match: "a18c3bded88eb5dbb5c849a489412bf3"'
-HTTP/1.1 304 Not Modified
-X-Poll-Interval: 60
-</code></pre>
+<h1 id="v2">v2</h1>
 
-<p>Events support <a href="/v3/#pagination">pagination</a>,
-however the <code>per_page</code> option is unsupported. The fixed page size is 30 items.
-Fetching up to ten pages is supported, for a total of 300 events.</p>
+<p>We removed support for API v2 on June 12, 2012.</p>
 
-<p>All Events have the same response format:</p>
+<h1 id="v1">v1</h1>
 
-<pre class="headers"><code>Status: 200 OK
-Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
-      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>We removed support for API v1 on June 12, 2012.</p>
 
-<pre><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Event"</span><span class="p">,</span>
-    <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="p">},</span>
-    <span class="s2">"repo"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span>
-    <span class="p">},</span>
-    <span class="s2">"actor"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
-    <span class="p">},</span>
-    <span class="s2">"org"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
-    <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"12345"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h2 id="list-public-events">List public events</h2>
-
-<pre><code>GET /events
-</code></pre>
-
-<h2 id="list-repository-events">List repository events</h2>
-
-<pre><code>GET /repos/:owner/:repo/events
-</code></pre>
-
-<h2 id="list-issue-events-for-a-repository">List issue events for a repository</h2>
-
-<p>Repository issue events have a different format than other events,
-as documented in the <a href="http://developer.github.com/v3/issues/events/">Issue Events API</a>.</p>
-
-<pre><code>GET /repos/:owner/:repo/issues/events
-</code></pre>
-
-<h2 id="list-public-events-for-a-network-of-repositories">List public events for a network of repositories</h2>
-
-<pre><code>GET /networks/:owner/:repo/events
-</code></pre>
-
-<h2 id="list-public-events-for-an-organization">List public events for an organization</h2>
-
-<pre><code>GET /orgs/:org/events
-</code></pre>
-
-<h2 id="list-events-that-a-user-has-received">List events that a user has received</h2>
-
-<p>These are events that you’ve received by watching repos and following
-users.  If you are authenticated as the given user, you will see private
-events.  Otherwise, you’ll only see public events.</p>
-
-<pre><code>GET /users/:user/received_events
-</code></pre>
-
-<h2 id="list-public-events-that-a-user-has-received">List public events that a user has received</h2>
-
-<pre><code>GET /users/:user/received_events/public
-</code></pre>
-
-<h2 id="list-events-performed-by-a-user">List events performed by a user</h2>
-
-<p>If you are authenticated as the given user, you will see your private
-events.  Otherwise, you’ll only see public events.</p>
-
-<pre><code>GET /users/:user/events
-</code></pre>
-
-<h2 id="list-public-events-performed-by-a-user">List public events performed by a user</h2>
-
-<pre><code>GET /users/:user/events/public
-</code></pre>
-
-<h2 id="list-events-for-an-organization">List events for an organization</h2>
-
-<p>This is the user’s organization dashboard.  You must be authenticated as
-the user to view this.</p>
-
-<pre><code>GET /users/:user/events/orgs/:org
-</code></pre>
 
     </div>
 

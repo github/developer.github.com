@@ -3,9 +3,9 @@ title: Versions | GitHub API
 ---
 # Versions
 
-There are two stable versions of the GitHub API: [beta](#beta) and [v3](#v3). There are just a few [differences between these two versions](#/v3/media/#beta-v3-and-the-future).
+There are two stable versions of the GitHub API: [beta](#beta) and [v3](#v3). There are just a few [differences between these two versions](#differences-from-beta-version).
 
-By default, all requests receive the beta version. We encourage you to [request a specific version via the `Accept` header](#/v3/media/#beta-v3-and-the-future).
+By default, all requests receive the beta version. We encourage you to [request a specific version via the `Accept` header](/v3/media/#beta-v3-and-the-future).
 
 # v3
 

@@ -322,9 +322,9 @@ action.</p>
 <h2 id="authentication">Authentication</h2>
 
 <p>There are three ways to authenticate through GitHub API v3.  Requests that
-require authentication will return 404, instead of 403, in some places.  This
-is to prevent the accidental leakage of private repositories to unauthorized
-users.</p>
+require authentication will return <code>404 Not Found</code>, instead of
+<code>403 Forbidden</code>, in some places.  This is to prevent the accidental leakage
+of private repositories to unauthorized users.</p>
 
 <h3 id="basic-authentication">Basic Authentication</h3>
 
@@ -357,6 +357,36 @@ $ curl https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yy
 <p>This should only be used in server to server scenarios.  Don’t leak your
 OAuth application’s client secret to your users.  Read <a href="#unauthenticated-rate-limited-requests">more about
 unauthenticated rate limiting</a>.</p>
+
+<h3 id="failed-login-limit">Failed login limit</h3>
+
+<p>Authenticating with invalid credentials will return <code>401 Unauthorized</code>:</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com -u foo:bar
+
+HTTP/1.1 401 Unauthorized
+
+{
+  "message": "Bad credentials",
+  "documentation_url": "http://developer.github.com/v3"
+}
+</pre>
+
+<p>After detecting several requests with invalid credentials within a short period,
+the API will temporarily reject all authentication attempts for that user
+(including ones with valid credentials) with <code>403 Forbidden</code>:</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com -u valid_username:valid_password
+
+HTTP/1.1 403 Forbidden
+
+{
+  "message": "Maximum number of login attempts exceeded",
+  "documentation_url": "http://developer.github.com/v3"
+}
+</pre>
 
 <h2 id="hypermedia">Hypermedia</h2>
 

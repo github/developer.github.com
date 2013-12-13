@@ -21,5 +21,5 @@ Happy paginating.
 [members]: http://developer.github.com/v3/orgs/members/#members-list
 [public members]: http://developer.github.com/v3/orgs/members/#public-members-list
 [paginating]: http://developer.github.com/v3/#pagination
-[contact]: https://github.com/contact?form[subject]=Paginating+org+members
+[contact]: https://github.com/contact?form[subject]=API+v3:+Paginating+org+members
 

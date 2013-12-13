@@ -6,14 +6,14 @@ author_name: atmos
 ---
 
 Today we're excited to announce a [Deployments API][docs]. We ship a lot of
-software at GitHub, web, mobile, and native. For the last few years we've been
-driving our deployments from our [chatops tooling][chatops] and we've learned a
+software at GitHub: web, mobile, and native. For the last few years, we've been
+driving our deployments from our [ChatOps tooling][chatops], and we've learned a
 lot. The Deployments API is a generalization of what we think is necessary with
-enough flexibilty that we hope our users will be able to start building
+enough flexibility that we hope our users will be able to start building
 interesting things around it.
 
 Deployments are a new model in the GitHub ecosystem. We don't have any UI
-components and they're intended to be used exclusively by tooling.
+components, and deployments are intended to be used exclusively by tooling.
 
 ## Highlights
 
@@ -27,12 +27,13 @@ easy to fall behind, let automation watch your back.
 
 The system rejects deployment requests for repositories that have commit
 statuses but don't have a green build for the deployment ref. This can be
-bypassed but is useful in cases where continuous integration is being used.
+bypassed, but is useful in cases where continuous integration is being used.
 
 ### Force Deployments
 
-Sometimes the world crashes down on you and you need to just get the code out.
-Forced deployments bypass any commit status or ahead/behind checks in the repo.
+Sometimes the world crashes down on you, and you need to just get the code out.
+Forced deployments bypass any commit status or ahead/behind checks in the
+repository.
 
 ### Deployment Statuses
 
@@ -44,9 +45,9 @@ build status or output.
 
 Both Deployments and Deployment Statuses trigger events on GitHub. 3rd party
 integrations can listen for these events via [webhooks][hooks] and choose
-whether or not to actually deploy the repo that the event was created for.
+whether or not to actually deploy the repository that the event was created for.
 
-## Preview period
+## Preview Period
 
 We're making this new API available today for developers to
 [preview][preview-mode]. We think developers and existing integrations are

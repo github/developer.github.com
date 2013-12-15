@@ -80,20 +80,18 @@ username and password via Basic Authentication.
 
     curl -i -u <your_username> https://api.github.com/users/defunkt
     Enter host password for user '<your_username>':
+    
+If you have 2 factor authentication enabled you will get a message - "Must specify two-factor authentication OTP code." The easiest way to move on is to grab a token. Go to to settings/applications and click 'Create new token'.
+
+Type in: 
+
+   `curl -u <new_token>:x-oauth-basic https://api.github.com/users/<your_username>`
 
 The `-u` flag sets the username, and cURL will prompt you for the password. You
 can use `-u "username:password"` to avoid the prompt, but this leaves your
 password in shell history and isn't recommended. When authenticating, you
 should see your rate limit bumped to 5,000 requests an hour, as indicated in the
 `X-RateLimit-Limit` header.
-
-If you have 2 factor authentication enabled you will get a message - "Must specify two-factor authentication OTP code."
-
-The easiest way to move on is to grab a token. Go to to settings/applications and click 'Create new token'.
-
-Type in: 
-
-   `curl -u <new_token>:x-oauth-basic https://api.github.com/users/<your_username>`
 
 In addition to just getting more calls per hour, authentication is the key to
 reading and writing private information via the API.

@@ -12,9 +12,9 @@ cases.
 
 ## Overview
 
-Most applications will use an existing [wrapper library][wrappers] in the language 
-of your choice, but it's important to familiarize yourself with the underlying API 
-HTTP methods first. 
+Most applications will use an existing [wrapper library][wrappers] in the language
+of your choice, but it's important to familiarize yourself with the underlying API
+HTTP methods first.
 
 There's no easier way to kick the tires than through [cURL][curl].
 
@@ -55,16 +55,16 @@ Mmmmm, tastes like JSON. Let's include the `-i` flag to include headers:
     Last-Modified: Tue, 30 Oct 2012 18:58:42 GMT
 
 There are a few interesting bits in the response headers. As expected, the
-`Content-Type` is `application/json`. 
+`Content-Type` is `application/json`.
 
-Any headers beginning with `X-` are custom headers, and are not included in the 
+Any headers beginning with `X-` are custom headers, and are not included in the
 HTTP spec. Let's take a look at a few of them:
 
-* `X-GitHub-Media-Type` has a value of `github.beta`. This lets us know the [media type][media types] 
-for the response. Media types have helped us version our output in API v3. We'll 
+* `X-GitHub-Media-Type` has a value of `github.beta`. This lets us know the [media type][media types]
+for the response. Media types have helped us version our output in API v3. We'll
 talk more about that later.
-* Take note of the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers. This 
-pair of headers indicate how many requests a client can make in a rolling hour 
+* Take note of the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers. This
+pair of headers indicate how many requests a client can make in a rolling hour
 and how many of those requests the client has already spent.
 
 ## Authentication
@@ -75,11 +75,17 @@ authentication.
 
 ### Basic
 
-The easiest way to authenticate with the GitHub API is by simply using your GitHub 
+The easiest way to authenticate with the GitHub API is by simply using your GitHub
 username and password via Basic Authentication.
 
     curl -i -u <your_username> https://api.github.com/users/defunkt
     Enter host password for user '<your_username>':
+
+If you have 2 factor authentication enabled you will get a message - "Must specify two-factor authentication OTP code." The easiest way to move on is to grab a token. Go to to settings/applications and click 'Create new token'.
+
+Type in:
+
+    curl -u <new_token>:x-oauth-basic https://api.github.com/users/<your_username>
 
 The `-u` flag sets the username, and cURL will prompt you for the password. You
 can use `-u "username:password"` to avoid the prompt, but this leaves your
@@ -133,7 +139,7 @@ has once it's authorized by the user. After a user authorizes access, GitHub
 redirects the user back to the application:
 ![](/images/oauth_prompt.png)
 
-You don't need to set up the entire web flow to begin working with OAuth tokens. 
+You don't need to set up the entire web flow to begin working with OAuth tokens.
 The [Authorizations API][authorizations api] makes it simple to use Basic Authentication
 to create an OAuth token. Try pasting and running the following command:
 
@@ -195,8 +201,8 @@ grab our own user info again, using OAuth this time:
     curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
         https://api.github.com/user
 
-**Treat OAuth tokens like passwords!** Don't share them with other users or store 
-them in insecure places. The tokens in these examples are fake and the names have 
+**Treat OAuth tokens like passwords!** Don't share them with other users or store
+them in insecure places. The tokens in these examples are fake and the names have
 been changed to protect the innocent.
 
 Now that we've got the hang of making authenticated calls, let's move along to
@@ -232,7 +238,7 @@ The information returned from these calls will depend on how we authenticate:
 
 As the [docs][repos-api] indicate, these methods take a `type` parameter that
 can filter the repositories returned based on what type of access the user has
-for the repository. In this way, we can fetch only directly-owned repositories, 
+for the repository. In this way, we can fetch only directly-owned repositories,
 organization repositories, or repositories the user collaborates on via a team.
 
     curl -i "https://api.github.com/users/technoweenie/repos?type=owner"

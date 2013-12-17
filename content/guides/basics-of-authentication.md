@@ -76,7 +76,7 @@ Also, notice that the URL uses the `scope` query parameter to define the
 requesting `user:email` scope for reading private email addresses.
 
 Navigate your browser to `http://localhost:4567`. After clicking on the link, you
-should be taken to GitHub, and presented with a dialog that looks something like this:  
+should be taken to GitHub, and presented with a dialog that looks something like this:
 ![](/images/oauth_prompt.png)
 
 If you trust yourself, click **Authorize App**. Wuh-oh! Sinatra spits out a
@@ -114,10 +114,10 @@ application, you should probably use [a library written in the language of your 
 
 ### Checking granted scopes
 
-Since users are able to edit the scopes you requested, your application might be
-granted less access than you originally asked for. So, before making any requests
-with the token, you should check the scopes that were granted for the token
-by the user.
+In the future, users will be able to [edit the scopes you requested][edit scopes post],
+and your application might be granted less access than you originally asked for.
+So, before making any requests with the token, you should check the scopes that
+were granted for the token by the user.
 
 The scopes that were granted are returned as a part of the response from
 exchanging a token.
@@ -311,3 +311,4 @@ available as a separate project.
 [libraries]: /libraries/
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test
 [oauth scopes]: /v3/oauth/#scopes
+[edit scopes post]: /changes/2013-10-04-oauth-changes-coming/

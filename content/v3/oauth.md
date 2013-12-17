@@ -74,20 +74,6 @@ header:
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
 
-The `scope` attribute lists scopes attached to the token that were granted by
-the user. Normally, these scopes will be identical to what you requested.
-However, users are able to edit their scopes, effectively granting your
-application less access than you originally requested. You should be aware of
-this possibility and adjust your application behavior accordingly.
-
-It is important to handle the error cases where a user chooses to grant you
-less access than you originally requested. For example, applications can warn
-or otherwise communicate with their users that they will see reduced
-functionality or be unable to perform some actions.
-
-Also, applications can always send users back through the flow again to get
-additional permission, but don’t forget that users can always say no.
-
 ### 3. Use the access token to access the API
 
 The access token allows you to make requests to the API on a behalf of a user.

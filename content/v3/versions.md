@@ -29,10 +29,6 @@ When an [issue](/v3/issues/#get-a-single-issue) is not a pull request, the v3 me
 
 For [Repositories](/v3/repos/#get), the v3 media type omits the `master_branch` attribute. API clients should use the `default_branch` attribute to obtain the repository's default branch.
 
-### User JSON
-
-For [Users](/v3/users/), the v3 media type omits the `public_gists` and `private_gists` attributes.
-
 ### User Emails JSON
 
 For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of hashes (instead of an array of strings).

@@ -128,8 +128,8 @@ Events of this type are **no longer created**, but it's possible that they exist
 Key | Type | Description
 ----|------|-------------
 `head`|`string` | The branch name the patch is applied to.
-`before`|`string` | SHA of the repo state before the patch.
-`after`|`string` | SHA of the repo state after the patch.
+`before`|`string` | SHA of the repository state before the patch.
+`after`|`string` | SHA of the repository state after the patch.
 
 
 ## GistEvent
@@ -348,7 +348,7 @@ The WatchEvent is related to [starring a repository](/v3/activity/starring/#star
 See [this API blog post](/changes/2012-9-5-watcher-api/) for an explanation.
 
 The event’s actor is the [user](/v3/users/) who starred a repository, and the
-event’s repo is the [repository](/v3/repos/) that was starred.
+event’s repository is the [repository](/v3/repos/) that was starred.
 
 ### Hook name
 

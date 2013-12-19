@@ -165,23 +165,23 @@ NOTE: This does not delete the user, it just remove them from the team.
 <%= headers 200 %>
 <%= json(:repo) { |h| [h] } %>
 
-## Get team repo
+## Check if a team manages a repository {#get-team-repo}
 
     GET /teams/:id/repos/:owner/:repo
 
-### Response if repo is managed by this team
+### Response if repository is managed by this team
 
 <%= headers 204 %>
 
-### Response if repo is not managed by this team
+### Response if repository is not managed by this team
 
 <%= headers 404 %>
 
-## Add team repo
+## Add team repository {#add-team-repo}
 
-In order to add a repo to a team, the authenticated user must be an
-owner of the org that the team is associated with.  Also, the repo must
-be owned by the organization, or a direct fork of a repo owned by the
+In order to add a repository to a team, the authenticated user must be an
+owner of the org that the team is associated with.  Also, the repository must
+be owned by the organization, or a direct fork of a repository owned by the
 organization.
 
     PUT /teams/:id/repos/:org/:repo
@@ -190,7 +190,7 @@ organization.
 
 <%= headers 204 %>
 
-If you attempt to add a repo to a team that is not owned by the
+If you attempt to add a repository to a team that is not owned by the
 organization, you get:
 
 <%= headers 422 %>
@@ -202,11 +202,11 @@ organization, you get:
       :resource => :TeamMember}]
 %>
 
-## Remove team repo
+## Remove team repository {#remove-team-repo}
 
-In order to remove a repo from a team, the authenticated user must be an
+In order to remove a repository from a team, the authenticated user must be an
 owner of the org that the team is associated with.
-NOTE: This does not delete the repo, it just removes it from the team.
+NOTE: This does not delete the repository, it just removes it from the team.
 
     DELETE /teams/:id/repos/:owner/:repo
 

@@ -11,7 +11,7 @@ authentication, to manipulating results, to combining results with other service
 
 Every tutorial here will have a project, and every project will be
 stored and documented in our public
-[platform-samples](https://github.com/github/platform-samples) repo.
+[platform-samples](https://github.com/github/platform-samples) repository.
 
 Feel free to fork, clone, and improve these guides.
 

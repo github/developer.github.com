@@ -110,7 +110,7 @@ Name | Type | Description
 `has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. Default: `true`
 `has_wiki`|`boolean` | Either `true` to enable the wiki for this repository, `false` to disable it. Default: `true`
 `has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. Default: `true`
-`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
+`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
 `auto_init`|`boolean` | Pass `true` to create an initial commit with empty README. Default: `false`
 `gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._
 
@@ -118,7 +118,7 @@ Name | Type | Description
 
 <%= json \
   :name          => "Hello-World",
-  :description   => "This is your first repo",
+  :description   => "This is your first repository",
   :homepage      => "https://github.com",
   :private       => false,
   :has_issues    => true,
@@ -139,8 +139,8 @@ Name | Type | Description
 
 ### Response
 
-The `parent` and `source` objects are present when the repo is a fork.
-`parent` is the repo this repo was forked from,
+The `parent` and `source` objects are present when the repository is a fork.
+`parent` is the repository this repository was forked from,
 `source` is the ultimate source for the network.
 
 <div class="alert">
@@ -173,7 +173,7 @@ Name | Type | Description
 
 <%= json \
   :name          => "Hello-World",
-  :description   => "This is your first repo",
+  :description   => "This is your first repository",
   :homepage      => "https://github.com",
   :private       => true,
   :has_issues    => true,

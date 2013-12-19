@@ -22,7 +22,7 @@ services to mark commits as passing or failing builds using Status.  The
 build.
 
 Note that the `repo:status` [OAuth scope](/v3/oauth/#scopes) grants targeted
-access to Statuses **without** also granting access to repo code, while the
+access to Statuses **without** also granting access to repository code, while the
 `repo` scope grants permission to code as well as statuses.
 
 ## List Statuses for a specific Ref

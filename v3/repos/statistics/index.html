@@ -53,11 +53,11 @@
     	<h1 id="statistics">Statistics</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#get-contributors-list-with-additions-deletions-and-commit-counts">Get contributors list with additions, deletions, and commit counts</a></li>
+  <li><a href="#contributors">Get contributors list with additions, deletions, and commit counts</a></li>
   <li><a href="#get-the-last-year-of-commit-activity-data">Get the last year of commit activity data</a></li>
-  <li><a href="#get-the-number-of-additions-and-deletions-per-week">Get the number of additions and deletions per week</a></li>
-  <li><a href="#get-the-weekly-commit-count-for-the-repo-owner-and-everyone-else">Get the weekly commit count for the repo owner and everyone else</a></li>
-  <li><a href="#get-the-number-of-commits-per-hour-in-each-day">Get the number of commits per hour in each day</a></li>
+  <li><a href="#code-frequency">Get the number of additions and deletions per week</a></li>
+  <li><a href="#participation">Get the weekly commit count for the repository owner and everyone else</a></li>
+  <li><a href="#punch-card">Get the number of commits per hour in each day</a></li>
 </ul>
 
 <p>The Repository Statistics API allows you to fetch the data that GitHub uses for visualizing different
@@ -75,7 +75,7 @@ then submit the request again. If the job has completed, that request will recei
 <p>Repository statistics are cached by the SHA of the repository’s default branch,
 which is usually master; pushing to the default branch resets the statistics cache.</p>
 
-<h2 id="get-contributors-list-with-additions-deletions-and-commit-counts">Get contributors list with additions, deletions, and commit counts</h2>
+<h2 id="contributors">Get contributors list with additions, deletions, and commit counts</h2>
 
 <pre><code>GET /repos/:owner/:repo/stats/contributors
 </code></pre>
@@ -167,7 +167,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
-<h2 id="get-the-number-of-additions-and-deletions-per-week">Get the number of additions and deletions per week</h2>
+<h2 id="code-frequency">Get the number of additions and deletions per week</h2>
 
 <pre><code>GET /repos/:owner/:repo/stats/code_frequency
 </code></pre>
@@ -189,7 +189,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">]</span>
 <span class="p">]</span></code></pre>
 
-<h2 id="get-the-weekly-commit-count-for-the-repo-owner-and-everyone-else">Get the weekly commit count for the repo owner and everyone else</h2>
+<h2 id="participation">Get the weekly commit count for the repository owner and everyone else</h2>
 
 <pre><code>GET /repos/:owner/:repo/stats/participation
 </code></pre>
@@ -317,7 +317,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="get-the-number-of-commits-per-hour-in-each-day">Get the number of commits per hour in each day</h2>
+<h2 id="punch-card">Get the number of commits per hour in each day</h2>
 
 <pre><code>GET /repos/:owner/:repo/stats/punch_card
 </code></pre>

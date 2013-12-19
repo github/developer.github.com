@@ -63,9 +63,9 @@
   <li><a href="#add-team-member">Add team member</a></li>
   <li><a href="#remove-team-member">Remove team member</a></li>
   <li><a href="#list-team-repos">List team repos</a></li>
-  <li><a href="#get-team-repo">Check if a team manages a repo</a></li>
-  <li><a href="#add-team-repo">Add team repo</a></li>
-  <li><a href="#remove-team-repo">Remove team repo</a></li>
+  <li><a href="#get-team-repo">Check if a team manages a repository</a></li>
+  <li><a href="#add-team-repo">Add team repository</a></li>
+  <li><a href="#remove-team-repo">Remove team repository</a></li>
   <li><a href="#list-user-teams">List user teams</a></li>
 </ul>
 
@@ -430,28 +430,28 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
-<h2 id="get-team-repo">Check if a team manages a repo</h2>
+<h2 id="get-team-repo">Check if a team manages a repository</h2>
 
 <pre><code>GET /teams/:id/repos/:owner/:repo
 </code></pre>
 
-<h3 id="response-if-repo-is-managed-by-this-team">Response if repo is managed by this team</h3>
+<h3 id="response-if-repository-is-managed-by-this-team">Response if repository is managed by this team</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<h3 id="response-if-repo-is-not-managed-by-this-team">Response if repo is not managed by this team</h3>
+<h3 id="response-if-repository-is-not-managed-by-this-team">Response if repository is not managed by this team</h3>
 
 <pre class="headers no-response"><code>Status: 404 Not Found
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<h2 id="add-team-repo">Add team repo</h2>
+<h2 id="add-team-repo">Add team repository</h2>
 
-<p>In order to add a repo to a team, the authenticated user must be an
-owner of the org that the team is associated with.  Also, the repo must
-be owned by the organization, or a direct fork of a repo owned by the
+<p>In order to add a repository to a team, the authenticated user must be an
+owner of the org that the team is associated with.  Also, the repository must
+be owned by the organization, or a direct fork of a repository owned by the
 organization.</p>
 
 <pre><code>PUT /teams/:id/repos/:org/:repo
@@ -463,7 +463,7 @@ organization.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<p>If you attempt to add a repo to a team that is not owned by the
+<p>If you attempt to add a repository to a team that is not owned by the
 organization, you get:</p>
 
 <pre class="headers"><code>Status: 422 Unprocessable Entity
@@ -481,11 +481,11 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="remove-team-repo">Remove team repo</h2>
+<h2 id="remove-team-repo">Remove team repository</h2>
 
-<p>In order to remove a repo from a team, the authenticated user must be an
+<p>In order to remove a repository from a team, the authenticated user must be an
 owner of the org that the team is associated with.
-NOTE: This does not delete the repo, it just removes it from the team.</p>
+NOTE: This does not delete the repository, it just removes it from the team.</p>
 
 <pre><code>DELETE /teams/:id/repos/:owner/:repo
 </code></pre>

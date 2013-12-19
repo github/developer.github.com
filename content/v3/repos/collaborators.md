@@ -7,7 +7,7 @@ title: Collaborators | GitHub API
 * TOC
 {:toc}
 
-## List
+## List a repo's collaborators {#list}
 
     GET /repos/:owner/:repo/collaborators
 
@@ -21,7 +21,7 @@ collaborators list.
 <%= headers 200 %>
 <%= json(:user) { |h| [h] } %>
 
-## Get
+## Check if a user is a repo collaborator {#get}
 
     GET /repos/:owner/:repo/collaborators/:user
 
@@ -33,7 +33,7 @@ collaborators list.
 
 <%= headers 404 %>
 
-## Add collaborator
+## Add collaborator to a repo {#add-collaborator}
 
     PUT /repos/:owner/:repo/collaborators/:user
 
@@ -41,7 +41,7 @@ collaborators list.
 
 <%= headers 204 %>
 
-## Remove collaborator
+## Remove collaborator from a repo {#remove-collaborator}
 
     DELETE /repos/:owner/:repo/collaborators/:user
 

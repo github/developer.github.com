@@ -7,7 +7,7 @@ title: Deploy Keys | GitHub API
 * TOC
 {:toc}
 
-## List deploy keys associated with a repo {#list}
+## List deploy keys {#list}
 
     GET /repos/:owner/:repo/keys
 
@@ -16,7 +16,7 @@ title: Deploy Keys | GitHub API
 <%= headers 200 %>
 <%= json(:public_key) { |h| [h] } %>
 
-## Get a deploy key on a repo {#get}
+## Get a deploy key {#get}
 
     GET /repos/:owner/:repo/keys/:id
 
@@ -25,7 +25,7 @@ title: Deploy Keys | GitHub API
 <%= headers 200 %>
 <%= json :public_key %>
 
-## Add a new deploy key to a repo {#create}
+## Add a new deploy key {#create}
 
     POST /repos/:owner/:repo/keys
 
@@ -38,7 +38,7 @@ title: Deploy Keys | GitHub API
 <%= headers 201, :Location => "https://api.github.com/user/repo/keys/1" %>
 <%= json :public_key %>
 
-## Edit a deploy key on a repo {#edit}
+## Edit a deploy key {#edit}
 
     PATCH /repos/:owner/:repo/keys/:id
 
@@ -51,7 +51,7 @@ title: Deploy Keys | GitHub API
 <%= headers 200 %>
 <%= json :public_key %>
 
-## Remove a deploy key from a repo {#delete}
+## Remove a deploy key {#delete}
 
     DELETE /repos/:owner/:repo/keys/:id
 

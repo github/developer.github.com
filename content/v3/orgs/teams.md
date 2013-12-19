@@ -165,7 +165,7 @@ NOTE: This does not delete the user, it just remove them from the team.
 <%= headers 200 %>
 <%= json(:repo) { |h| [h] } %>
 
-## Check if a team manages a specific repo {#get-team-repo}
+## Check if a team manages a repo {#get-team-repo}
 
     GET /teams/:id/repos/:owner/:repo
 

@@ -16,7 +16,7 @@ title: Deploy Keys | GitHub API
 <%= headers 200 %>
 <%= json(:public_key) { |h| [h] } %>
 
-## Get a specific deploy key on a repo {#get}
+## Get a deploy key on a repo {#get}
 
     GET /repos/:owner/:repo/keys/:id
 
@@ -38,7 +38,7 @@ title: Deploy Keys | GitHub API
 <%= headers 201, :Location => "https://api.github.com/user/repo/keys/1" %>
 <%= json :public_key %>
 
-## Edit a specific deploy key on a repo {#edit}
+## Edit a deploy key on a repo {#edit}
 
     PATCH /repos/:owner/:repo/keys/:id
 

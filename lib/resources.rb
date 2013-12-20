@@ -23,7 +23,8 @@ module GitHub
         405 => '405 Method not allowed',
         409 => '409 Conflict',
         422 => '422 Unprocessable Entity',
-        500 => '500 Server Error'
+        500 => '500 Server Error',
+        502 => '502 Bad Gateway'
       }
 
       AUTHORS = {

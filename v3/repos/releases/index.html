@@ -409,32 +409,11 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-for-accepted-upload">Response for accepted upload</h3>
-
-<p>The upload did not complete, but we will keep trying.</p>
-
-<pre class="headers"><code>Status: 202 Accepted
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
-  <span class="s2">"label"</span><span class="o">:</span> <span class="s2">"short description"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
-  <span class="s2">"content_type"</span><span class="o">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="s2">"download_count"</span><span class="o">:</span> <span class="mi">42</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span>
-<span class="p">}</span></code></pre>
-
 <h3 id="response-for-upstream-failure">Response for upstream failure</h3>
 
 <p>This may leave an empty asset with a state of “new”.  It can be safely deleted.</p>
 
-<pre class="headers"><code>Status: 
+<pre class="headers"><code>Status: 502 Bad Gateway
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 

@@ -39,7 +39,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => :default %>
 <%= json(:issue) { |h| [h] } %>
 
 ## List issues for a repository
@@ -62,7 +62,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => :default %>
 <%= json(:issue) { |h| [h] } %>
 
 ## Get a single issue

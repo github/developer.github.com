@@ -19,7 +19,7 @@ List public and private organizations for the authenticated user.
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => :default %>
 <%= json(:org) { |h| [h] } %>
 
 ## Get an Organization

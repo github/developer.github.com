@@ -33,7 +33,7 @@ Fetching up to ten pages is supported, for a total of 300 events.
 
 All Events have the same response format:
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => :default %>
 <%= json(:event) { |h| [h] } %>
 
 ## List public events

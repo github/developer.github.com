@@ -766,7 +766,7 @@ module GitHub
     ISSUE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
       "text_matches" => [
         {
-          "object_url" => "https://api.github.com/repositories/215335/issues/132",
+          "object_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132",
           "object_type" => "Issue",
           "property" => "body",
           "fragment" => "comprehensive windows font I know of).\n\nIf we can find a commonly distributed windows font that supports them then no problem (we can use html font tags) but otherwise the '(21)' style is probably better.\n",
@@ -788,7 +788,7 @@ module GitHub
           ]
         },
         {
-          "object_url" => "https://api.github.com/repositories/215335/issues/comments/25688",
+          "object_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/comments/25688",
           "object_type" => "IssueComment",
           "property" => "body",
           "fragment" => " right after that are a bit broken IMHO :). I suppose we could have some hack that maxes out at whatever the font does...\n\nI'll check what the state of play is on Windows.\n",
@@ -876,7 +876,7 @@ module GitHub
     REPO_SEARCH_V3_RESULTS_HIGHLIGHTING = {
       "text_matches" => [
         {
-          "object_url" => "https://api.github.com/repositories/3081286",
+          "object_url" => "https://api.github.com/repos/dtrupenn/Tetris",
           "object_type" => "Repository",
           "property" => "name",
           "fragment" => "Tetris",
@@ -891,7 +891,7 @@ module GitHub
           ]
         },
         {
-          "object_url" => "https://api.github.com/repositories/3081286",
+          "object_url" => "https://api.github.com/repos/dtrupenn/Tetris",
           "object_type" => "Repository",
           "property" => "description",
           "fragment" => "A C implementation of Tetris using Pennsim through LC4",
@@ -915,8 +915,8 @@ module GitHub
           "name" => "classes.js",
           "path" => "src/attributes/classes.js",
           "sha" => "d7212f9dee2dcc18f084d7df8f417b80846ded5a",
-          "url" => "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
-          "git_url" => "https://api.github.com/repositories/167174/git/blobs/d7212f9dee2dcc18f084d7df8f417b80846ded5a",
+          "url" => "https://api.github.com/repos/jquery/jquery/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
+          "git_url" => "https://api.github.com/repos/jquery/jquery/git/blobs/d7212f9dee2dcc18f084d7df8f417b80846ded5a",
           "html_url" => "https://github.com/jquery/jquery/blob/825ac3773694e0cd23ee74895fd5aeb535b27da4/src/attributes/classes.js",
           "repository" => {
             "id" => 167174,
@@ -989,7 +989,7 @@ module GitHub
     CODE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
       "text_matches" => [
         {
-          "object_url" => "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
+          "object_url" => "https://api.github.com/repos/jquery/jquery/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
           "object_type" => "FileContent",
           "property" => "content",
           "fragment" => ";\n\njQuery.fn.extend({\n\taddClass: function( value ) {\n\t\tvar classes, elem, cur, clazz, j, finalValue",
@@ -1004,7 +1004,7 @@ module GitHub
           ]
         },
         {
-          "object_url" => "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
+          "object_url" => "https://api.github.com/repos/jquery/jquery/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
           "object_type" => "FileContent",
           "property" => "content",
           "fragment" => ".isFunction( value ) ) {\n\t\t\treturn this.each(function( j ) {\n\t\t\t\tjQuery( this ).addClass( value.call( this",

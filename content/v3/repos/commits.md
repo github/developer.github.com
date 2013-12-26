@@ -31,7 +31,11 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%=
+  headers 200, :pagination => {
+    :next => 'https://api.github.com/repositories/417862/commits?top=master&last_sha=4f9890864feb48296917c2fcf3682d8dc3adf16a'
+  }
+%>
 <%= json(:commit) { |h| [h] } %>
 
 ## Get a single commit

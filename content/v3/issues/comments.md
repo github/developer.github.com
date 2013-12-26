@@ -20,7 +20,7 @@ You can read more about the use of media types in the API
 
 ### Response
 
-<%= headers 200, :pagination => :default %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:issue_comment) { |h| [h] } %>
 
 ## List comments in a repository

@@ -92,7 +92,7 @@ The JSON HTTP API follows the same conventions as the rest of the
 
 #### Response
 
-<%= headers 200, :pagination => :default %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:hook) { |h| [h] } %>
 
 ### Get single hook

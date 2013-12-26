@@ -29,7 +29,7 @@ post](/changes/2012-9-5-watcher-api/) for more details.
 
 ### Response
 
-<%= headers 200, :pagination => :default %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## List repositories being watched
@@ -44,7 +44,7 @@ List repositories being watched by the authenticated user.
 
 ### Response
 
-<%= headers 200, :pagination => :default %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
 ## Get a Repository Subscription

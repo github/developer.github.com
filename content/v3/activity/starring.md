@@ -27,7 +27,7 @@ for more details.
 
 ### Response
 
-<%= headers 200, :pagination => :default %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## List repositories being starred
@@ -50,7 +50,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200, :pagination => :default %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
 ## Check if you are starring a repository

@@ -81,7 +81,6 @@ module GitHub
       end
 
       def link_header(rels)
-        rels = default_rels if rels == :default
         formatted_rels = rels.map { |name, url| link_header_rel(name, url) }
 
         lines = ["Link: #{formatted_rels.shift}"]
@@ -97,7 +96,7 @@ module GitHub
         %Q{<#{url}>; rel="#{name}"}
       end
 
-      def default_rels
+      def default_pagination_rels
         {
           :next => "https://api.github.com/resource?page=2",
           :last => "https://api.github.com/resource?page=5"

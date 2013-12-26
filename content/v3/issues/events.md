@@ -55,7 +55,7 @@ assigned
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:issue_event) { |h| [h] } %>
 
 ## List events for a repository
@@ -64,7 +64,7 @@ assigned
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:full_issue_event) { |h| [h] } %>
 
 ## Get a single event

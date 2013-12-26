@@ -87,5 +87,5 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => { :next => 'https://api.github.com/users?since=135' } %>
 <%= json(:user) { |h| [h] } %>

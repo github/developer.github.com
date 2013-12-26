@@ -56,7 +56,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
 <div class="alert">
@@ -84,7 +84,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => { :next => 'https://api.github.com/repositories?since=364' } %>
 <%= json(:simple_repo) { |h| [h] } %>
 
 ## Create

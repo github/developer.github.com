@@ -287,6 +287,7 @@ Key | Type | Description
 `commits[][url]`|`url` | Points to the commit API resource.
 `commits[][distinct]`|`boolean` | Whether this commit is distinct from any that have been pushed before.
 
+Note: If the push contained more than 20 commits, only the first 20 commits will be included in the `commits` array. To get the full list of commits in the push, you can use the [Git Data API](/v3/git/commits/) or [Repositories Commits API](/v3/repos/commits/) to fetch `size` commits starting from the commit pointed to by `head`.
 
 ## ReleaseEvent
 

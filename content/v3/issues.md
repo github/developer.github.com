@@ -12,7 +12,7 @@ read more about the use of media types in the API [here](/v3/media/).
 
 ## List issues
 
-List all issues across all the authenticated user's visible repositories
+List all issues assigned to the authenticated user across all visible repositories
 including owned repositories, member repositories, and organization
 repositories:
 

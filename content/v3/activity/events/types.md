@@ -278,7 +278,7 @@ Key | Type | Description
 `head`|`string` | The SHA of the HEAD commit on the repository.
 `ref`|`string` | The full Git ref that was pushed.  Example: "refs/heads/master"
 `size`|`integer` | The number of commits in the push.
-`commits`|`array` | The list of pushed commits.
+`commits`|`array` | The list of pushed commits (max 20, use the [Commits API](/v3/repos/commits/) to fetch more).
 `commits[][sha]`|`string` | The SHA of the commit.
 `commits[][message]`|`string` | The commit message.
 `commits[][author]`|`object` | The git author of the commit.
@@ -286,8 +286,6 @@ Key | Type | Description
 `commits[][author][email]`|`string` | The git author's email address.
 `commits[][url]`|`url` | Points to the commit API resource.
 `commits[][distinct]`|`boolean` | Whether this commit is distinct from any that have been pushed before.
-
-Note: If the push contained more than 20 commits, only the first 20 commits will be included in the `commits` array. To get the full list of commits in the push, you can use the [Git Data API](/v3/git/commits/) or [Repositories Commits API](/v3/repos/commits/) to fetch `size` commits starting from the commit pointed to by `head`.
 
 ## ReleaseEvent
 

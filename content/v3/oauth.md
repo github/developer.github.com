@@ -205,39 +205,6 @@ Name | Type | Description
 %>
 <%= json :oauth_access %>
 
-## Get-or-create an authorization for a specific app
-
-This method will create a new authorization for the specified OAuth application,
-only if an authorization for that application doesn't already exist for the
-user. (The URL includes the 20 character client ID for the OAuth app that is
-requesting the token.) It returns the user's token for the application if one
-exists. Otherwise, it creates one.
-
-    PUT /authorizations/clients/:client_id
-
-### Parameters
-
-Name | Type | Description 
------|------|--------------
-`client_secret`|`string`| The 40 character OAuth app client secret associated with the client ID specified in the URL.
-`scopes`|`array` | A list of scopes that this authorization is in.
-`note`|`string` | A note to remind you what the OAuth token is for.
-`note_url`|`string` | A URL to remind you what app the OAuth token is for.
-
-
-<%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
-
-### Response if returning a new token
-
-<%= headers 201, :Location => "https://api.github.com/authorizations/1"
-%>
-<%= json :oauth_access %>
-
-### Response if returning an existing token
-
-<%= headers 200, :Location => "https://api.github.com/authorizations/1"
-%>
-<%= json :oauth_access %>
 
 ## Update an existing authorization
 

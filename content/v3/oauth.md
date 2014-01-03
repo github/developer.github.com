@@ -28,11 +28,11 @@ This is a description of the OAuth2 flow from 3rd party web sites.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
-`scope`|`string` | A comma separated list of [scopes](#scopes).
+`scope`|`string` | A comma separated list of [scopes](#scopes). If not provided, `scope` defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.
 `state`|`string` | An unguessable random string. It is used to protect against cross-site request forgery attacks.
 
 ### 2. GitHub redirects back to your site
@@ -48,7 +48,7 @@ Exchange this for an access token:
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|---------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
@@ -188,7 +188,7 @@ Read more about these tokens on the [GitHub Help page](https://help.github.com/a
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `scopes`|`array` | A list of scopes that this authorization is in.
 `note`|`string` | A note to remind you what the OAuth token is for.
@@ -217,7 +217,7 @@ exists. Otherwise, it creates one.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `client_secret`|`string`| The 40 character OAuth app client secret associated with the client ID specified in the URL.
 `scopes`|`array` | A list of scopes that this authorization is in.
@@ -245,7 +245,7 @@ Name | Type | Description
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `scopes`|`array` | Replaces the authorization scopes with these.
 `add_scopes`|`array` | A list of scopes to add to this authorization.

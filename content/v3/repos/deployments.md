@@ -1,5 +1,5 @@
 ---
-title: Deployment | GitHub API
+title: Deployments | GitHub API
 ---
 
 # Deployments
@@ -21,15 +21,29 @@ title: Deployment | GitHub API
     <pre>application/vnd.github.preview</pre>
 </div>
 
-The deployments API is a request for a specific ref(branch,sha,tag) to be
+The Deployments API is a request for a specific ref(branch,sha,tag) to be
 deployed. GitHub then dispatches deployment events that external services can
 listen for and act on. This enables developers and organizations to build
 tooling around deployments without having to worry about implementation details
 of delivering different types of applications (web,native).
 
-Note that the `repo:deployment` [OAuth scope](/v3/oauth/#scopes) grants targeted
-access to Deployments **without** also granting access to repo code, while the
-`repo` scope grants permission to code as well.
+The Deployment Status API allows external services to mark deployments with a
+'success', 'failure', 'error', or 'pending' state, which can then be consumed
+by any system listening for `deployment_status` events.
+
+Deployment Statuses can also include an optional `description` and `target_url`, and
+we highly recommend providing them as they make deployment statuses much more
+useful.
+
+As an example, one common use is for deployment systems to mark deployments as
+succeeding or failing using Deployment Statuses.  The `target_url` would be the
+full URL to the deployment output, and the `description` would be the high
+level summary of what happened with the deployment.
+
+Note that the `repo:deployment` [OAuth scope](/v3/oauth/#scopes) grants
+targeted access to Deployments and Deployment Statuses **without** also
+granting access to repo code, while the `repo` scope grants permission to code
+as well.
 
 ## List Deployments for a Repository
 
@@ -93,4 +107,51 @@ Name | Type | Description
 ## Updating a Deployment
 
 Once a deployment is created it can not be updated. Information relating to the
-success or failure of a deployment is handled through [Deployment Statuses](/v3/repos/deployment_statuses/).
+success or failure of a deployment is handled through Deployment Statuses.
+
+## Listing Statuses for a Deployment
+
+Users with pull access can view deployment statuses for a deployment:
+
+    GET /repos/:owner/:repo/deployments/:id/statuses
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`id` |`integer`| **Required**. The Deployment id to list the statuses from.
+
+
+### Response
+
+<%= headers 200, :pagination => true %>
+<%= json(:deployment_status) { |h| [h] } %>
+
+## Creating Statuses for a Deployment
+
+Users with push access can create deployment statuses for a given deployment:
+
+    POST /repos/:owner/:repo/deployments/:id/statuses
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
+`target_url`|`string` | The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment.
+`description`|`string` | A short description of the status.
+
+#### Example
+
+<%= json \
+  :state       => "success",
+  :target_url  => "https://example.com/deployment/42/output",
+  :description => "Deployment finished successfully."
+%>
+
+### Response
+
+<%= headers 201,
+      :Location =>
+'https://api.github.com/repos/octocat/example/deployments/42/statuses/1' %>
+<%= json :deployment_status %>

@@ -162,7 +162,7 @@ users have two-factor authentication enabled.)
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:oauth_access) { |h| [h] } %>
 
 ## Get a single authorization

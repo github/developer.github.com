@@ -42,16 +42,20 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:gist) { |h| [h] } %>
 
 ## Get a single gist
 
     GET /gists/:id
 
-_Note_: When using the [v3 media type][2] the "user" field will become "owner"
-
 ### Response
+
+<div class="alert">
+  <p>
+    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the <code>user</code> attribute is renamed to <code>owner</code>.
+  </p>
+</div>
 
 <%= headers 200 %>
 <%= json :full_gist %>
@@ -62,7 +66,7 @@ _Note_: When using the [v3 media type][2] the "user" field will become "owner"
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `files`|`hash` | **Required**. Files that make up this gist.
 `description`|`string` | A description of the gist.
@@ -92,7 +96,7 @@ format of the automatic naming scheme that Gist uses internally.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `description`|`string` | A description of the gist.
 `files`|`hash` | Files that make up this gist.
@@ -168,4 +172,3 @@ including the filename with a `null` hash.
 <%= headers 204 %>
 
 [1]: /v3/oauth/#scopes
-[2]: /v3/media

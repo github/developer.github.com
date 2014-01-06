@@ -22,7 +22,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:milestone) { |h| [h] } %>
 
 ## Get a single milestone

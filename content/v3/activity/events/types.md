@@ -70,13 +70,13 @@ Key | Type | Description
 
 Triggered when a new [download](/v3/repos/downloads/) is created.
 
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
+
 ### Hook name
 
 `download`
 
 ### Payload
-
-Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 Key | Type | Description
 ----|------|-------------
@@ -128,21 +128,21 @@ Events of this type are **no longer created**, but it's possible that they exist
 Key | Type | Description
 ----|------|-------------
 `head`|`string` | The branch name the patch is applied to.
-`before`|`string` | SHA of the repo state before the patch.
-`after`|`string` | SHA of the repo state after the patch.
+`before`|`string` | SHA of the repository state before the patch.
+`after`|`string` | SHA of the repository state after the patch.
 
 
 ## GistEvent
 
 Triggered when a [Gist](/v3/gists/) is created or updated.
 
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
+
 ### Hook name
 
 `gist`
 
 ### Payload
-
-Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 Key | Type | Description
 ----|------|-------------
@@ -278,7 +278,7 @@ Key | Type | Description
 `head`|`string` | The SHA of the HEAD commit on the repository.
 `ref`|`string` | The full Git ref that was pushed.  Example: "refs/heads/master"
 `size`|`integer` | The number of commits in the push.
-`commits`|`array` | The list of pushed commits.
+`commits`|`array` | The list of pushed commits (max 20, use the [Commits API](/v3/repos/commits/) to fetch more).
 `commits[][sha]`|`string` | The SHA of the commit.
 `commits[][message]`|`string` | The commit message.
 `commits[][author]`|`object` | The git author of the commit.
@@ -286,7 +286,6 @@ Key | Type | Description
 `commits[][author][email]`|`string` | The git author's email address.
 `commits[][url]`|`url` | Points to the commit API resource.
 `commits[][distinct]`|`boolean` | Whether this commit is distinct from any that have been pushed before.
-
 
 ## ReleaseEvent
 
@@ -348,7 +347,7 @@ The WatchEvent is related to [starring a repository](/v3/activity/starring/#star
 See [this API blog post](/changes/2012-9-5-watcher-api/) for an explanation.
 
 The event’s actor is the [user](/v3/users/) who starred a repository, and the
-event’s repo is the [repository](/v3/repos/) that was starred.
+event’s repository is the [repository](/v3/repos/) that was starred.
 
 ### Hook name
 

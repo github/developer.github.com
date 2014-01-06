@@ -5,17 +5,18 @@ task :compile do
   `nanoc compile`
 end
 
-# prompt user for a commit message; default: HEAD commit 1-liner
+# Prompt user for a commit message; default: P U B L I S H :emoji:
 def commit_message
-  last_commit = `git log -1 --pretty=format:"%s"`.chomp.strip
-  last_commit = 'Publishing developer content to GitHub pages.' if last_commit == ''
+  publish_emojis = [':boom:', ':rocket:', ':metal:', ':bulb:', ':zap:',
+    ':sailboat:', ':gift:', ':ship:', ':shipit:', ':sparkles:', ':rainbow:']
+  default_message = "P U B L I S H #{publish_emojis.sample}"
 
-  print "Enter a commit message (default: '#{last_commit}'): "
+  print "Enter a commit message (default: '#{default_message}'): "
   STDOUT.flush
   mesg = STDIN.gets.chomp.strip
 
-  mesg = last_commit if mesg == ''
-  mesg.gsub(/'/, '') # to allow this to be handed off via -m '#{message}'
+  mesg = default_message if mesg == ''
+  mesg.gsub(/'/, '') # Allow this to be handed off via -m '#{message}'
 end
 
 desc "Publish to http://developer.github.com"

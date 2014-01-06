@@ -40,7 +40,7 @@ Note: The returned email is the user's publicly visible email address
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | The new name of the user
 `email`|`string` | Publicly visible email address.
@@ -80,12 +80,12 @@ users.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `since`|`string`| The integer ID of the last User that you've seen.
 
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => { :next => 'https://api.github.com/users?since=135' } %>
 <%= json(:user) { |h| [h] } %>

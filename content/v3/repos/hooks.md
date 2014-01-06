@@ -60,6 +60,8 @@ Name | Description
 `issues` | Any time an Issue is opened or closed.
 `issue_comment` | Any time an Issue is commented on.
 `commit_comment` | Any time a Commit is commented on.
+`create` | Any time a Repository, Branch, or Tag is created.
+`delete` | Any time a Branch or Tag is deleted.
 `pull_request` | Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).
 `pull_request_review_comment` | Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).
 `gollum` | Any time a Wiki page is updated.
@@ -90,7 +92,7 @@ The JSON HTTP API follows the same conventions as the rest of the
 
 #### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:hook) { |h| [h] } %>
 
 ### Get single hook
@@ -111,7 +113,7 @@ The JSON HTTP API follows the same conventions as the rest of the
 Name | Type | Description 
 -----|------|--------------
 `name`|`string` | **Required**. The name of the service that is being called. (See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)
-`config`|`hash` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repo. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
+`config`|`hash` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
 `events`|`array` | Determines what events the hook is triggered for.  Default: `["push"]`
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
@@ -150,7 +152,7 @@ Here's how you can setup a hook that posts raw JSON
 
 Name | Type | Description 
 -----|------|--------------
-`config`|`hash` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repo. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
+`config`|`hash` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
 `events`|`array` | Determines what events the hook is triggered for.  This replaces the entire array of events.  Default: `["push"]`
 `add_events`|`array` | Determines a list of events to be added to the list of events that the Hook triggers for.
 `remove_events`|`array` | Determines a list of events to be removed from the list of events that the Hook triggers for.

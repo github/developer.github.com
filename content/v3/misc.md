@@ -22,7 +22,8 @@ The [Markdown API][Markdown] lets you render Markdown documents.
 
 ## [Meta][]
 
-The [Meta API][Meta] gives some information about GitHub.com, the service.
+The [Meta API][Meta] provides information about GitHub.com (the service) or your
+organization's [GitHub Enterprise](https://enterprise.github.com/) installation.
 
 ## [Rate Limit][]
 

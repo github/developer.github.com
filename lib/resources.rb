@@ -23,7 +23,8 @@ module GitHub
         405 => '405 Method not allowed',
         409 => '409 Conflict',
         422 => '422 Unprocessable Entity',
-        500 => '500 Server Error'
+        500 => '500 Server Error',
+        502 => '502 Bad Gateway'
       }
 
       AUTHORS = {
@@ -67,9 +68,9 @@ module GitHub
         head.each do |key, value|
           case key
             when :pagination
-              lines << 'Link: <https://api.github.com/resource?page=2>; rel="next",'
-              lines << '      <https://api.github.com/resource?page=5>; rel="last"'
-            else lines << "#{key}: #{value}"
+              lines << link_header(value)
+            else
+              lines << "#{key}: #{value}"
           end
         end
 
@@ -77,6 +78,29 @@ module GitHub
         lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
         %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
+      end
+
+      def link_header(rels)
+        formatted_rels = rels.map { |name, url| link_header_rel(name, url) }
+
+        lines = ["Link: #{formatted_rels.shift}"]
+        while formatted_rels.any?
+          lines.last << ","
+          lines << "      #{formatted_rels.shift}"
+        end
+
+        lines
+      end
+
+      def link_header_rel(name, url)
+        %Q{<#{url}>; rel="#{name}"}
+      end
+
+      def default_pagination_rels
+        {
+          :next => "https://api.github.com/resource?page=2",
+          :last => "https://api.github.com/resource?page=5"
+        }
       end
 
       def json(key)
@@ -192,6 +216,7 @@ module GitHub
       "stargazers_count"  => 80,
       "watchers_count"    => 80,
       "size"              => 108,
+      "default_branch"    => 'master',
       "master_branch"     => 'master',
       "open_issues_count" => 0,
       "pushed_at"         => "2011-01-26T19:06:43Z",
@@ -1385,8 +1410,20 @@ module GitHub
         :name => "octocat/Hello-World",
         :url => "https://api.github.com/repos/octocat/Hello-World"
       },
-      :actor => USER,
-      :org => USER,
+      :actor => {
+        :id => 1,
+        :login => "octocat",
+        :gravatar_id => "somehexcode",
+        :avatar_url => "https://github.com/images/error/octocat_happy.gif",
+        :url => "https://api.github.com/users/octocat"
+      },
+      :org => {
+        :id => 1,
+        :login => "github",
+        :gravatar_id => "somehexcode",
+        :url => "https://api.github.com/orgs/github",
+        :avatar_url =>  "https://github.com/images/error/octocat_happy.gif"
+      },
       :created_at => "2011-09-06T17:26:27Z",
       :id => "12345"
     }
@@ -1512,7 +1549,8 @@ module GitHub
 
     META = {
       :hooks => ['127.0.0.1/32'],
-      :git => ['127.0.0.1/32']
+      :git => ['127.0.0.1/32'],
+      :verifiable_password_authentication => true
     }
 
     BLOB = {

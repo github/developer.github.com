@@ -19,7 +19,7 @@ separately.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
 `sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
@@ -34,7 +34,7 @@ List public repositories for the specified user.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
 `type`|`string` | Can be one of `all`, `owner`, `member`. Default: `owner`
 `sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
@@ -49,15 +49,21 @@ List repositories for the specified org.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `type`|`string` | Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`. Default: `all`
 
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
+
+<div class="alert">
+  <p>
+    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>master_branch</code> attribute. API clients should instead use the <code>default_branch</code> attribute to obtain the repository's default branch.
+  </p>
+</div>
 
 ## List all public repositories
 
@@ -71,14 +77,14 @@ repositories.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `since`|`string`| The integer ID of the last Repository that you've seen.
 
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => { :next => 'https://api.github.com/repositories?since=364' } %>
 <%= json(:simple_repo) { |h| [h] } %>
 
 ## Create
@@ -95,7 +101,7 @@ be a member of the specified organization.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the repository
 `description`|`string` | A short description of the repository
@@ -104,7 +110,7 @@ Name | Type | Description
 `has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. Default: `true`
 `has_wiki`|`boolean` | Either `true` to enable the wiki for this repository, `false` to disable it. Default: `true`
 `has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. Default: `true`
-`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization.
+`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
 `auto_init`|`boolean` | Pass `true` to create an initial commit with empty README. Default: `false`
 `gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._
 
@@ -112,7 +118,7 @@ Name | Type | Description
 
 <%= json \
   :name          => "Hello-World",
-  :description   => "This is your first repo",
+  :description   => "This is your first repository",
   :homepage      => "https://github.com",
   :private       => false,
   :has_issues    => true,
@@ -133,9 +139,15 @@ Name | Type | Description
 
 ### Response
 
-The `parent` and `source` objects are present when the repo is a fork.
-`parent` is the repo this repo was forked from,
+The `parent` and `source` objects are present when the repository is a fork.
+`parent` is the repository this repository was forked from,
 `source` is the ultimate source for the network.
+
+<div class="alert">
+  <p>
+    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>master_branch</code> attribute. API clients should instead use the <code>default_branch</code> attribute to obtain the repository's default branch.
+  </p>
+</div>
 
 <%= headers 200 %>
 <%= json :full_repo %>
@@ -146,7 +158,7 @@ The `parent` and `source` objects are present when the repo is a fork.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the repository
 `description`|`string` | A short description of the repository
@@ -161,7 +173,7 @@ Name | Type | Description
 
 <%= json \
   :name          => "Hello-World",
-  :description   => "This is your first repo",
+  :description   => "This is your first repository",
   :homepage      => "https://github.com",
   :private       => true,
   :has_issues    => true,
@@ -180,7 +192,7 @@ Name | Type | Description
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
 `anon`|`string` | Set to `1` or `true` to include anonymous contributors in results.
 

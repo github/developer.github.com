@@ -60,7 +60,7 @@ Each time the pull request receives new commits, GitHub creates a merge commit
 to _test_ whether the pull request can be automatically merged into the base
 branch. (This _test_ commit is not added to the base branch or the head branch.)
 The `merge_commit_sha` attribute holds the SHA of the _test_ merge commit;
-however, this attribute is [deprecated](/v3/#deprecations) and is scheduled for
+however, this attribute is [deprecated](/v3/versions/#v3-deprecations) and is scheduled for
 removal in the next version of the API. The Boolean `mergeable` attribute will
 remain to indicate whether the pull request can be automatically merged.
 
@@ -78,7 +78,7 @@ Name | Type | Description
 -----|------|-------------
 `title`|`string` | **Required**. The title of the pull request.
 `head`|`string` | **Required**. The branch (or git ref) where your changes are implemented.
-`base`|`string` | **Required**. The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repo that requests a merge to a base of another repo.
+`base`|`string` | **Required**. The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository.
 `body`|`string` | The contents of the pull request.
 
 

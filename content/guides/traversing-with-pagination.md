@@ -12,7 +12,8 @@ Most of the time, you might even find that you're asking for _too much_ informat
 and in order to keep our servers happy, the API will automatically [paginate the requested items][pagination].
 
 In this guide, we'll make some calls to the GitHub Search API, and iterate over
-the results using pagination.
+the results using pagination. You can find the complete source code for this project 
+in the [platform-samples][platform samples] repository. 
 
 ## Basics of Pagination
 
@@ -99,7 +100,80 @@ pass in our [personal access token][personal token]:
     # Instead, set and test environment variables, like below
     client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
 
+Next, we'll execute the search, using Octokit's `search_code` method. Unlike 
+using `curl`, we can also immediately retrieve the number of results, so let's
+do that:
+
+    #!ruby
+    results = client.search_code('addClass user:mozilla')
+    total_count = results.total_count
+
+Now, let's grab the number of the last page, similar to `page=34>; rel="last"`
+information in the link header. Octokit.rb support pagination information through
+an implementation called "[Hypermedia link relations][hypermedia-relations]."
+We won't go into detail about what that is, but, suffice to say, each element
+in the `results` variable has a hash called `rels`, which can contain information
+about `:next`, `:last`, `:first`, and `:prev`, depending on which result you're
+on. These relations also contain information about the resulting URL, by calling
+`rels[:last].href`.
+
+Knowing this, let's grab the page number of the last result, and present all
+this information to the user:
+
+    #!ruby
+    last_response = client.last_response
+    number_of_pages = last_response.rels[:last].href.match(/page=(\d+)$/)[1]
+
+    puts "There are #{total_count} results, on #{number_of_pages} pages!"
+
+Finally, let's iterate through the results. You could do this with a loop `for i in 1..number_of_pages.to_i`,
+but instead, let's follow the `rels[:next]` headers to retrieve information from 
+each page. For the sake of simplicity, let's just grab the file path of the first
+result from each page. To do this, we'll need a loop; and at the end of every loop,
+we'll retrieve the data set for the next page by following the `rels[:next]` information.
+The loop will finish when there is no `rels[:next]` information to consume (in other
+words, we are at `rels[:last]`). It might look something like this:
+
+    #!ruby
+    loop do
+      puts last_response.data.items.first.path
+      last_response = last_response.rels[:next].get
+      sleep 4 # back off from the API rate limiting; don't do this in Real Life
+      break if last_response.rels[:next].nil?
+    end
+
+Changing the number of items per page is extremely simple with Octokit.rb. Simply
+pass a `per_page` options hash to the initial client construction. After that,
+your code should remain intact:
+
+
+    #!ruby
+    require 'octokit'
+
+    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+    # Instead, set and test environment variables, like below
+    client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+
+    results = client.search_code('addClass user:mozilla', :per_page => 100)
+    total_count = results.total_count
+
+    last_response = client.last_response
+    number_of_pages = last_response.rels[:last].href.match(/page=(\d+)$/)[1]
+
+    puts last_response.rels[:last].href
+    puts "There are #{total_count} results, on #{number_of_pages} pages!"
+
+    puts "And here's the first path for every set"
+
+    loop do
+      puts last_response.data.items.first.path
+      last_response = last_response.rels[:next].get
+      sleep 4 # back off from the API rate limiting; don't do this in Real Life
+      break if last_response.rels[:next].nil?
+    end
 
 [pagination]: /v3/#pagination
+[platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/traversing-with-pagination
 [octokit.rb]: https://github.com/octokit/octokit.rb
 [personal token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
+[hypermedia-relations]: https://github.com/octokit/octokit.rb#pagination

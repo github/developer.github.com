@@ -122,9 +122,10 @@ Name | Type | Description
 The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
 takes these fields:
 
-* `url`
-* `content_type`
+* `url` 
+* `content_type` 
 * `secret`
+* `insecure_ssl`
 
 Here's how you can setup a hook that posts raw JSON
 (instead of the default legacy format):

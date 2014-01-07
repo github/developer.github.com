@@ -126,7 +126,7 @@ Name | Type | Description
 -----|------|--------------
 `url`|`string` | **Required**. The URL to which the payloads will be delivered.
 `content_type`|`string` | The media type used to serialize the payloads. Currently, only `json` is supported. Default: `json`
-`secret`|`string` | If defined, then HTTP request that deliver the payloads will include an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`secret`|`string` | If defined, then HTTP requests that deliver the payloads will include an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
 `insecure_ssl`|`boolean` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Default: `0` (verification is performed)
 
 Here's how you can setup a hook that posts payloads in JSON format:

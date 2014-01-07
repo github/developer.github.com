@@ -55,11 +55,12 @@ for the `X-GitHub-Media-Type` header:
 If you don't specify a version in the `Accept` header, you'll
 get the [beta version](/v3/versions#beta) (as shown above) by default.
 
-Eventually, [v3](/v3/versions#v3) will become the default version. We recommend that you start
-using v3 now. To get that version today, explicitly request the API v3
-media type in the `Accept` header:
+Soon, [v3](/v3/versions#v3) will become the default version. (Check out
+the [blog post](/changes/2014-01-07-upcoming-change-to-default-media-type/) for
+details.) We recommend that you start using v3 now. To get that version today,
+explicitly request the API v3 media type in the `Accept` header:
 
-    application/vnd.github.v3
+    application/vnd.github.v3+json
 
 Check out [version docs][versions] for the [full list of differences](/v3/versions#differences-from-beta-version) between beta and v3.
 

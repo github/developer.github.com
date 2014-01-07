@@ -150,6 +150,8 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json(:commit) { |h| [h] } %>
 
+Note: The response includes a maximum of 250 commits. If necessary, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to fetch additional commits.
+
 ## List pull requests files
 
     GET /repos/:owner/:repo/pulls/:number/files

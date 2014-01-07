@@ -21,24 +21,49 @@ title: Deployments | GitHub API
     <pre>application/vnd.github.preview</pre>
 </div>
 
-The Deployments API is a request for a specific ref(branch,sha,tag) to be
-deployed. GitHub then dispatches deployment events that external services can
-listen for and act on. This enables developers and organizations to build
-tooling around deployments without having to worry about implementation details
-of delivering different types of applications (web,native).
+Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
+GitHub then dispatches deployment events that external services can listen for
+and act on. This enables developers and organizations to build tooling around
+deployments without having to worry about implementation details of delivering
+different types of applications (web,native).
 
-The Deployment Status API allows external services to mark deployments with a
+Deployment Statuses allow external services to mark deployments with a
 'success', 'failure', 'error', or 'pending' state, which can then be consumed
 by any system listening for `deployment_status` events.
 
 Deployment Statuses can also include an optional `description` and `target_url`, and
 we highly recommend providing them as they make deployment statuses much more
-useful.
+useful. The `target_url` would be the full URL to the deployment output, and
+the `description` would be the high level summary of what happened with the
+deployment.
 
-As an example, one common use is for deployment systems to mark deployments as
-succeeding or failing using Deployment Statuses.  The `target_url` would be the
-full URL to the deployment output, and the `description` would be the high
-level summary of what happened with the deployment.
+Deployment and Deployment Statuses both have associated repository events when
+they're created. This allows web hooks and 3rd party integrations to respond to
+deployment requests as well as update the status of a deployment as progress is
+made.
+
+Below is a simple sequence diagram for how these interactions would work.
+<pre>
++---------+             +--------+            +-----------+
+| Tooling |             | GitHub |            | 3rd Party |
++---------+             +--------+            +-----------+
+     |                      |                       |
+     |  Create Deployment   |                       |
+     |--------------------->|                       |
+     |                      |                       |
+     |  Deployment Created  |                       |
+     |<---------------------|                       |
+     |                      |                       |
+     |                      |   Deployment Event    |
+     |                      |---------------------->|
+     |                      |                       |
+     |                      |   Deployment Status   |
+     |                      |<----------------------|
+     |                      |                       |
+     |                      |   Deployment Status   |
+     |                      |<----------------------|
+     |                      |                       |
+</pre>
 
 Note that the `repo:deployment` [OAuth scope](/v3/oauth/#scopes) grants
 targeted access to Deployments and Deployment Statuses **without** also

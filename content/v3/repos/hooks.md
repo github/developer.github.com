@@ -122,10 +122,12 @@ Name | Type | Description
 The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
 takes these fields:
 
-* `url` 
-* `content_type` 
-* `secret`
-* `insecure_ssl`
+Name | Type | Description 
+-----|------|--------------
+`url`|`string` | **Required**. The URL to which the payloads will be delivered.
+`content_type`|`string` | The media type used to serialize the payloads. Currently, only `json` is supported. Default: `json`
+`secret`|`string` | If defined, then HTTP request that deliver the payloads will include an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`insecure_ssl`|`boolean` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Default: `0` (verification is performed)
 
 Here's how you can setup a hook that posts raw JSON
 (instead of the default legacy format):
@@ -258,4 +260,5 @@ Name | Type | Description
 [pubsub]: http://code.google.com/p/pubsubhubbub/
 [post-receive]: http://help.github.com/post-receive-hooks/
 [ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
+[hub-signature]: https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77
 [pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify

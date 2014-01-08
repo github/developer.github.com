@@ -16,7 +16,7 @@ title: Deployments | GitHub API
 
   <p>
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.preview</pre>
+    <pre>application/vnd.github.cannonball-preview+json</pre>
   </p>
 </div>
 

@@ -16,7 +16,7 @@ Deployments are a new model in the GitHub ecosystem. We don't have any UI
 components currently, and deployments are intended to be used exclusively by
 tooling.  Much like the status API, we won't be doing the actual deployment for
 you. We're hoping to provide consistency across the various type of release
-processes regardless of what's involved with getting it build or on your
+processes regardless of what's involved with getting it built or on your
 servers.
 
 ## Highlights

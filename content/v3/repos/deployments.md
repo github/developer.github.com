@@ -79,7 +79,7 @@ those systems to decide whether or not they're responsible for pushing the code
 out to your servers, building native code, etc.
 
 Note that the `repo:deployment` [OAuth scope](/v3/oauth/#scopes) grants
-targeted access to Deployments and Deployment Statuses **without** also
+targeted access to Deployments and Deployment Statuses **without**
 granting access to repository code, while the `repo` scope grants permission to code
 as well.
 

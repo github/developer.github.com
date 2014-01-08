@@ -38,7 +38,8 @@ module GitHub
         :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f',
         :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
         :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
-        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134'
+        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134',
+        :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

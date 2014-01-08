@@ -19,6 +19,7 @@ title: Deployments | GitHub API
   <p>
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
     <pre>application/vnd.github.preview</pre>
+  </p>
 </div>
 
 Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
@@ -43,6 +44,7 @@ deployment requests as well as update the status of a deployment as progress is
 made.
 
 Below is a simple sequence diagram for how these interactions would work.
+
 <pre>
 +---------+             +--------+            +-----------+
 | Tooling |             | GitHub |            | 3rd Party |
@@ -78,7 +80,7 @@ Users with pull access can view deployments for a repository:
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:deployment) { |h| [h] } %>
 
 ## Create a Deployment
@@ -149,7 +151,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:deployment_status) { |h| [h] } %>
 
 ## Creating Statuses for a Deployment

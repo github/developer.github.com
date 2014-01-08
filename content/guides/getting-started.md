@@ -127,7 +127,7 @@ $ curl -i -u &lt;your_username&gt; https://api.github.com/users/defunkt
 Enter host password for user '&lt;your_username&gt;':
 
 HTTP/1.1 401 Unauthorized
-X-GitHub-OTP: required; app
+X-GitHub-OTP: required; :2fa-type
 
 {
   "message": "Must specify two-factor authentication OTP code.",

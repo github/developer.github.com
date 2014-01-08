@@ -74,7 +74,7 @@ Keep in mind that GitHub is never actually accessing your servers. It's up to
 your 3rd party integration to interact with deployment events.
 This allows for [github-services](https://github.com/github/github-services)
 integrations as well as running your own systems depending on your use case.
-Multiple systems can be listening for deployment events and it's up to each of
+Multiple systems can listen for deployment events, and it's up to each of
 those systems to decide whether or not they're responsible for pushing the code
 out to your servers, building native code, etc.
 

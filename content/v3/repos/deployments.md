@@ -11,7 +11,7 @@ title: Deployments | GitHub API
   <p>
     The Deployments API is currently available for developers to preview.
     During the preview period, the API may change without advance notice.
-    Please see the <a href="/changes/2014-01-09-preview-the-new-deployments-api">blog post</a> for full details.
+    Please see the <a href="/changes/2014-01-08-preview-the-new-deployments-api">blog post</a> for full details.
   </p>
 
   <p>

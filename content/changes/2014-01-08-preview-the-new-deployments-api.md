@@ -41,8 +41,8 @@ be bypassed, but is useful in cases where continuous integration is being used.
 ### Force Deployments
 
 Sometimes the world crashes down on you, and you need to just get the code out
-the door.  Forced deployments bypass any commit status or ahead/behind checks
-in the repository.
+the door.  Forced deployments bypass any commit status checks or ahead/behind
+checks in the repository.
 
 ### Deployment Statuses
 

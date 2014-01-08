@@ -142,14 +142,14 @@ Name | Type | Description
 'https://api.github.com/repos/octocat/example/deployments/1' %>
 <%= json :deployment %>
 
-## Updating a Deployment
+## Update a Deployment
 
 Once a deployment is created it can not be updated. Information relating to the
 success or failure of a deployment is handled through Deployment Statuses.
 
 # Deployment Statuses
 
-## Listing Deployment Statuses
+## List Deployment Statuses
 
 Users with pull access can view deployment statuses for a deployment:
 
@@ -167,7 +167,7 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:deployment_status) { |h| [h] } %>
 
-## Creating Deployment Statuses
+## Create Deployment Statuses
 
 Users with push access can create deployment statuses for a given deployment:
 

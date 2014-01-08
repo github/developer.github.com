@@ -185,7 +185,7 @@ $ curl -i -u &lt;your_username&gt; https://api.github.com/user
 </pre>
 
 This time, in addition to the same set of public information we
-retrieved for defunkt earlier, you should also see the non-public
+retrieved for [@defunkt][defunkt github] earlier, you should also see the non-public
 information for your user profile. For example, you'll see a `plan` object
 in the response which gives details about the GitHub plan for the account.
 

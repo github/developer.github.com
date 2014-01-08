@@ -176,6 +176,69 @@ your code should remain intact:
       break if last_response.rels[:next].nil?
     end
 
+## Constructing Pagination Links
+
+Normally, with pagination, your goal isn't to concatenate all of the possible 
+results, but rather, to produce a set of navigation, like this:
+
+![Sample of pagination links](/images/pagination_sample.png)
+
+Let's sketch out a micro-version of what that might entail.
+
+From the code above, we already know we can get the `number_of_pages` in the 
+paginated results from the first call:
+
+    #!ruby
+    require 'octokit'
+
+    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+    # Instead, set and test environment variables, like below
+    client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+
+    results = client.search_code('addClass user:mozilla')
+    total_count = results.total_count
+
+    last_response = client.last_response
+    number_of_pages = last_response.rels[:last].href.match(/page=(\d+)$/)[1]
+
+    puts last_response.rels[:last].href
+    puts "There are #{total_count} results, on #{number_of_pages} pages!"
+
+
+From there, we can construct a beautiful ASCII representation of the number boxes:
+
+    #!ruby
+    numbers = ""
+    for i in 1..number_of_pages.to_i
+      numbers << "[#{i}] "
+    end
+    puts numbers
+
+Let's simulate a user clicking on one of these boxes, by constructing a random
+number:
+
+    #!ruby
+    random_page = Random.new
+    random_page = random_page.rand(1..number_of_pages.to_i)
+
+    puts "A User appeared, and clicked number #{random_page}!"
+
+Now that we have a page number, we can use Octokit to explicitly retrieve that
+individual page, by passing the `:page` option:
+
+    #!ruby
+    clicked_results = client.search_code('addClass user:mozilla', :page => random_page)
+
+If we wanted to get fancy, we could also grab the previous and next pages, in 
+order to generate links for back (`<<`) and foward (`>>`) elements:
+
+    #!ruby
+    prev_page_href = client.last_response.rels[:prev] ? client.last_response.rels[:prev].href : "(none)"
+    next_page_href = client.last_response.rels[:next] ? client.last_response.rels[:next].href : "(none)"
+    
+    puts "The prev page link is #{prev_page_href}"
+    puts "The next page link is #{next_page_href}"
+
 [pagination]: /v3/#pagination
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/traversing-with-pagination
 [octokit.rb]: https://github.com/octokit/octokit.rb

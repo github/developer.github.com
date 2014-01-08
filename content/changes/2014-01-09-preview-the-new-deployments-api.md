@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Preview the New Deployments API
-created_at: 2013-12-4
+created_at: 2014-01-08
 author_name: atmos
 ---
 
@@ -14,14 +14,19 @@ building around it.
 
 Deployments are a new model in the GitHub ecosystem. We don't have any UI
 components currently, and deployments are intended to be used exclusively by
-tooling.  Much like the Status API, we won't be doing the actual deployment for
-you. We're hoping to provide consistency across the various type of release
-processes regardless of what's involved with getting it built or on your
+tooling.  If you're familiar with the Status API, you know that it allows
+various tools to report on the status of a commit (e.g., the progress of an
+attempt to perform a build at a particular commit). The Status API doesn't
+perform the build; it just reports the results. Much like the Status API, we
+won't be doing actual deployments for you. Instead, the API provides a way for
+you to track the status of your deployments. We're hoping to provide
+consistency across the various type of release processes, regardless of the
+underlying steps involved with getting your code built or shipped to your
 servers.
 
 ## Highlights
 
-### Auto Merging
+### Automatic Merging
 
 The system can auto-merge the default branch for the repository if the
 requested deployment ref is behind the default branch. On active projects it's

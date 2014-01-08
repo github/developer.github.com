@@ -34,15 +34,15 @@ easy to fall behind, so let automation watch your back.
 
 ### Commit Status Integration
 
-The system rejects deployment requests for repositories that have commit
-statuses but don't have a green build for the deployment ref. This can be
-bypassed, but is useful in cases where continuous integration is being used.
+By default, the system rejects deployment requests for repositories that have
+commit statuses but don't have a green build for the deployment ref. This can
+be bypassed, but is useful in cases where continuous integration is being used.
 
 ### Force Deployments
 
-Sometimes the world crashes down on you, and you need to just get the code out.
-Forced deployments bypass any commit status or ahead/behind checks in the
-repository.
+Sometimes the world crashes down on you, and you need to just get the code out
+the door.  Forced deployments bypass any commit status or ahead/behind checks
+in the repository.
 
 ### Deployment Statuses
 

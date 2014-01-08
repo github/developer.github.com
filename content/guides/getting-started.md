@@ -301,7 +301,7 @@ $ curl -i https://api.github.com/users/technoweenie/repos
 Or, we can list repositories for an organization:
 
 <pre class="terminal">
-$ curl -i https://api.github.com/orgs/github/repos
+$ curl -i https://api.github.com/orgs/mozilla/repos
 </pre>
 
 The information returned from these calls will depend on how we authenticate:

@@ -22,9 +22,9 @@ title: Deployments | GitHub API
 
 Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
 GitHub then dispatches deployment events that external services can listen for
-and act on. This enables developers and organizations to build tooling around
-deployments without having to worry about implementation details of delivering
-different types of applications (web,native).
+and act on. This enables developers and organizations to build loosely-coupled
+tooling around deployments, without having to worry about implementation
+details of delivering different types of applications (e.g., web, native).
 
 Deployment Statuses allow external services to mark deployments with a
 'success', 'failure', 'error', or 'pending' state, which can then be consumed
@@ -36,7 +36,7 @@ useful. The `target_url` would be the full URL to the deployment output, and
 the `description` would be the high level summary of what happened with the
 deployment.
 
-Deployment and Deployment Statuses both have associated repository events when
+Deployments and Deployment Statuses both have associated repository events when
 they're created. This allows web hooks and 3rd party integrations to respond to
 deployment requests as well as update the status of a deployment as progress is
 made.

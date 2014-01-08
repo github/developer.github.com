@@ -59,5 +59,5 @@ patch formats.
 
 <%= json :commit_comparison %>
 
-Note: The response will include a comparison of no more than 250 commits. If necessary, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to fetch additional commits.
+Note: The response will include a comparison of up to 250 commits. If you are working with a larger commit range, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the range.
 Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.

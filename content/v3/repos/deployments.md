@@ -159,7 +159,7 @@ Users with pull access can view deployment statuses for a deployment:
 
 Name | Type | Description
 -----|------|--------------
-`id` |`integer`| **Required**. The Deployment id to list the statuses from.
+`id` |`integer`| **Required**. The Deployment ID to list the statuses from.
 
 
 ### Response
@@ -167,7 +167,7 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:deployment_status) { |h| [h] } %>
 
-## Create Deployment Statuses
+## Create a Deployment Status
 
 Users with push access can create deployment statuses for a given deployment:
 

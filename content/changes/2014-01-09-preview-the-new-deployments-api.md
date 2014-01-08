@@ -21,7 +21,7 @@ components, and deployments are intended to be used exclusively by tooling.
 
 The system can auto-merge the default branch for the repository if the
 requested deployment ref is behind the default branch. On active projects it's
-easy to fall behind, let automation watch your back.
+easy to fall behind, so let automation watch your back.
 
 ### Commit Status Integration
 

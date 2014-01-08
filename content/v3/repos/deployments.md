@@ -13,7 +13,7 @@ title: Deployments | GitHub API
   <p>
     The Deployments API is currently available for developers to preview.
     During the preview period, the API may change without advance notice.
-    Please see the <a href="/changes/2013-12-02-preview-the-new-deployments-api">blog post</a> for full details.
+    Please see the <a href="/changes/2014-01-09-preview-the-new-deployments-api">blog post</a> for full details.
   </p>
 
   <p>
@@ -125,7 +125,7 @@ Users with push access can create a deployment for a given ref:
 
 Name | Type | Description
 -----|------|--------------
-`ref`|`string`| Required ref to deploy. This can be a branch, tag, or sha.
+`ref`|`string`| **Required** ref to deploy. This can be a branch, tag, or sha.
 `force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks.
 `payload`|`string` | Optional JSON payload with extra information about the deployment.
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary.

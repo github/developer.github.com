@@ -7,8 +7,6 @@ title: Deployments | GitHub API
 * TOC
 {:toc}
 
-### Preview mode
-
 <div class="alert">
   <p>
     The Deployments API is currently available for developers to preview.
@@ -85,7 +83,7 @@ targeted access to Deployments and Deployment Statuses **without** also
 granting access to repo code, while the `repo` scope grants permission to code
 as well.
 
-## List Deployments for a Repository
+## List Deployments
 
 Users with pull access can view deployments for a repository:
 

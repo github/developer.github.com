@@ -7,13 +7,17 @@ author_name: atmos
 
 Today we're excited to announce a [Deployments API][docs]. We ship a lot of
 software at GitHub: web, mobile, and native. For the last few years, we've been
-driving our deployments from our [ChatOps tooling][chatops], and we've learned a
-lot. The Deployments API is a generalization of what we think is necessary with
-enough flexibility that we hope our users will be able to start building
-interesting things around it.
+driving our deployments from our [ChatOps tooling][chatops] and we've learned a
+lot. The Deployments API is a generalization of the approach that we've been
+taking, and we're really excited to see what our users and integrations start
+building around it.
 
 Deployments are a new model in the GitHub ecosystem. We don't have any UI
-components, and deployments are intended to be used exclusively by tooling.
+components currently, and deployments are intended to be used exclusively by
+tooling.  Much like the status API, we won't be doing the actual deployment for
+you. We're hoping to provide consistency across the various type of release
+processes regardless of what's involved with getting it build or on your
+servers.
 
 ## Highlights
 
@@ -38,8 +42,8 @@ repository.
 ### Deployment Statuses
 
 Different deployment systems can update the status of a deployment to be
-pending, success, failure, or error. There's also a field for linking to
-build status or output.
+`pending`, `success`, `failure`, or `error`. There's also a field for linking
+to deployment output.
 
 ### Events
 
@@ -49,11 +53,10 @@ whether or not to actually deploy the repository that the event was created for.
 
 ## Preview Period
 
-We're making this new API available today for developers to
-[preview][preview-mode]. We think developers and existing integrations are
-going to love it, but we want to get your feedback before we declare the
-Deployment API "final" and "unchangeable." We expect the preview period to last
-for roughly 60-90 days.
+We're making this new API available today for developers to preview.  We think
+developers and existing integrations are going to love it, but we want to get
+your feedback before we declare the Deployment API "final" and "unchangeable."
+We expect the preview period to last for roughly 60-90 days.
 
 As we discover opportunities to improve the API during the preview period, we
 may ship changes that break clients using the preview version of the API. We
@@ -64,10 +67,9 @@ At the end of preview period, the Deployment API will become an official
 component of GitHub API v3. At that point, the new Deployment API will be
 stable and suitable for production use.
 
-We're really excited to see what types of integrations people come up with.
+We're really excited to see what people come up with.
 
 [docs]: /v3/repos/deployments/
 [hooks]: /v3/repos/hooks/
-[preview-mode]: /v3/repos/deployments/#preview-mode
 [chatops]: https://speakerdeck.com/jnewland/chatops
 [contact]: https://github.com/contact?form[subject]=Deployments+API

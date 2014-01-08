@@ -323,7 +323,7 @@ $ curl -i "https://api.github.com/users/technoweenie/repos?type=owner"
 In this example, we grab only those repositories that technoweenie owns, not the
 ones on which he collaborates. Note the quoted URL above. Depending on your
 shell setup, cURL sometimes requires a quoted URL or else it ignores the
-querystring.
+query string.
 
 ### Create a repository
 

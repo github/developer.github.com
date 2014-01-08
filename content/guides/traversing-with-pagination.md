@@ -24,8 +24,9 @@ To start with, it's important to know a few facts about receiving paginated item
 provides paginated items in sets of 30, whereas a call to the GitHub Search API
 provides items in sets of 100
 2. You can specify how many items to receive (up to a maximum of 100); but,
-3. For technical reasons, not every endpoint lets you specific the maximum set
-(such as [events](http://developer.github.com/v3/activity/events/))
+3. For technical reasons, not every endpoint behaves the same. For example, 
+[events](http://developer.github.com/v3/activity/events/) won't let you set a maximum for items to receive.
+Be sure to read the documentation on how to handle paginated results for specific endpoints.
 
 Information about pagination is provided in [the Link header](http://tools.ietf.org/html/rfc5988)
 of an API call. For example, let's make a curl request to the search API, to find

@@ -86,8 +86,9 @@ HTTP spec. Let's take a look at a few of them:
 for the response. Media types have helped us version our output in API v3. We'll
 talk more about that later.
 * Take note of the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers. This
-pair of headers indicate [how many requests a client can make][rate limiting] in a rolling hour
-and how many of those requests the client has already spent.
+pair of headers indicate [how many requests a client can make][rate limiting] in
+a rolling time period (typically an hour) and how many of those requests the
+client has already spent.
 
 ## Authentication
 

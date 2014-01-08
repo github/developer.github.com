@@ -11,6 +11,7 @@ many flavors</h1>
 		<li><span>Ruby</span><a href="https://github.com/octokit/octokit.rb">octokit.rb</a></li>
 		<li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
 		<li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
+    <li><span>Go</span><a href="https://github.com/octokit/go-octokit">go-octokit</a></li>
 	</ul>
 	<img src="/shared/images/gundamcat.png" class="gundamcat" />
 </div>

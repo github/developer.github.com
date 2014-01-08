@@ -14,7 +14,7 @@ building around it.
 
 Deployments are a new model in the GitHub ecosystem. We don't have any UI
 components currently, and deployments are intended to be used exclusively by
-tooling.  Much like the status API, we won't be doing the actual deployment for
+tooling.  Much like the Status API, we won't be doing the actual deployment for
 you. We're hoping to provide consistency across the various type of release
 processes regardless of what's involved with getting it built or on your
 servers.
@@ -55,7 +55,7 @@ whether or not to actually deploy the repository that the event was created for.
 
 We're making this new API available today for developers to preview.  We think
 developers and existing integrations are going to love it, but we want to get
-your feedback before we declare the Deployment API "final" and "unchangeable."
+your feedback before we declare the Deployments API "final" and "unchangeable."
 We expect the preview period to last for roughly 60-90 days.
 
 As we discover opportunities to improve the API during the preview period, we
@@ -63,8 +63,8 @@ may ship changes that break clients using the preview version of the API. We
 want to iterate quickly. To do so, we will announce any changes here (on the
 developer blog), but we will not provide any advance notice.
 
-At the end of preview period, the Deployment API will become an official
-component of GitHub API v3. At that point, the new Deployment API will be
+At the end of preview period, the Deployments API will become an official
+component of GitHub API v3. At that point, the new Deployments API will be
 stable and suitable for production use.
 
 We're really excited to see what people come up with.

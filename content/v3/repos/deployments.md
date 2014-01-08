@@ -46,25 +46,30 @@ made.
 Below is a simple sequence diagram for how these interactions would work.
 
 <pre>
-+---------+             +--------+            +-----------+
-| Tooling |             | GitHub |            | 3rd Party |
-+---------+             +--------+            +-----------+
-     |                      |                       |
-     |  Create Deployment   |                       |
-     |--------------------->|                       |
-     |                      |                       |
-     |  Deployment Created  |                       |
-     |<---------------------|                       |
-     |                      |                       |
-     |                      |   Deployment Event    |
-     |                      |---------------------->|
-     |                      |                       |
-     |                      |   Deployment Status   |
-     |                      |<----------------------|
-     |                      |                       |
-     |                      |   Deployment Status   |
-     |                      |<----------------------|
-     |                      |                       |
++---------+             +--------+            +-----------+        +-------------+
+| Tooling |             | GitHub |            | 3rd Party |        | Your Server |
++---------+             +--------+            +-----------+        +-------------+
+     |                      |                       |                     |
+     |  Create Deployment   |                       |                     |
+     |--------------------->|                       |                     |
+     |                      |                       |                     |
+     |  Deployment Created  |                       |                     |
+     |<---------------------|                       |                     |
+     |                      |                       |                     |
+     |                      |   Deployment Event    |                     |
+     |                      |---------------------->|                     |
+     |                      |                       |     SSH+Deploys     |
+     |                      |                       |-------------------->|
+     |                      |                       |                     |
+     |                      |   Deployment Status   |                     |
+     |                      |<----------------------|                     |
+     |                      |                       |                     |
+     |                      |                       |   Deploy Completed  |
+     |                      |                       |<--------------------|
+     |                      |                       |                     |
+     |                      |   Deployment Status   |                     |
+     |                      |<----------------------|                     |
+     |                      |                       |                     |
 </pre>
 
 Note that the `repo:deployment` [OAuth scope](/v3/oauth/#scopes) grants
@@ -136,7 +141,9 @@ Name | Type | Description
 Once a deployment is created it can not be updated. Information relating to the
 success or failure of a deployment is handled through Deployment Statuses.
 
-## Listing Statuses for a Deployment
+# Deployment Statuses
+
+## Listing Deployment Statuses
 
 Users with pull access can view deployment statuses for a deployment:
 
@@ -154,7 +161,7 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:deployment_status) { |h| [h] } %>
 
-## Creating Statuses for a Deployment
+## Creating Deployment Statuses
 
 Users with push access can create deployment statuses for a given deployment:
 

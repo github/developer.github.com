@@ -545,6 +545,13 @@ The `304` status indicates that the resource hasn't changed since the last time
 we asked for it and the response will contain no body. As a bonus, `304`
 responses don't count against your [rate limit][rate-limiting].
 
+Woot! Now you know the basics of the GitHub API!
+
+* Basic & OAuth authentication
+* Fetching and creating repositories and issues
+* Conditional requests
+
+Keep learning with the next API guide [Basics of Authentication][auth guide]!
 
 
 [wrappers]: /libraries/
@@ -575,3 +582,4 @@ responses don't count against your [rate limit][rate-limiting].
 [pagination]: /v3/#pagination
 [create repo]: /v3/repos/#create
 [create issue]: /v3/issues/#create
+[auth guide]: /guides/basics-of-authentication

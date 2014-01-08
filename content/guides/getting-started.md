@@ -24,13 +24,11 @@ following command (without the `$`):
 
 <pre class="terminal">
 $ curl https://api.github.com/zen
-</pre>
 
-You should get a random response about one of our design philosophies:
-
-<pre class="terminal">
 Keep it logically awesome.
 </pre>
+
+The response will be a random selection from our design philosophies.
 
 Next, let's `GET` [Chris Wanstrath's][defunkt github] [GitHub profile][users api]:
 
@@ -172,14 +170,7 @@ user profile:
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; https://api.github.com/user
-</pre>
 
-This time, in addition to the same set of public information we
-retrieved for defunkt earlier, you should also see the non-public
-information for your user profile. For example, you see a `plan` object
-on the response:
-
-<pre class="terminal">
 {
   ...
   "plan": {
@@ -191,6 +182,11 @@ on the response:
   ...
 }
 </pre>
+
+This time, in addition to the same set of public information we
+retrieved for defunkt earlier, you should also see the non-public
+information for your user profile. For example, you'll see a `plan` object
+in the response which gives details about the GitHub plan for the account.
 
 ### OAuth
 
@@ -225,11 +221,7 @@ to create an OAuth token. Try pasting and running the following command:
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo"]}' \
     https://api.github.com/authorizations
-</pre>
 
-You should see output similar to this:
-
-<pre class="terminal">
 HTTP/1.1 201 Created
 Location: https://api.github.com/authorizations/2
 Content-Length: 384
@@ -431,6 +423,11 @@ find the next page and the last page of results.
 Now that we've seen how to paginate lists of issues, let's [create an issue][create issue] from
 the API.
 
+To create an issue, we need to be authenticated, so we'll pass an
+OAuth token in the header. Also, we'll pass the title, body, and labels in the JSON
+body to the `/issues` path underneath the repository in which we want to create
+the issue:
+
 <pre class="terminal">
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
     -d '{ \
@@ -439,14 +436,7 @@ $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
          "labels": ["design"] \
        }' \
     https://api.github.com/repos/pengwynn/api-sandbox/issues
-</pre>
 
-To create an issue, we need to be authenticated, so we pass an
-OAuth token in the header. We pass the title, body, and labels in the JSON
-body to the `/issues` path underneath the repository in which we want to create
-the issue.
-
-<pre class="terminal">
 HTTP/1.1 201 Created
 Location: https://api.github.com/repos/pengwynn/api-sandbox/issues/17
 X-RateLimit-Limit: 5000
@@ -533,16 +523,13 @@ first call we made to get defunkt's profile:
 
 <pre class="terminal">
 $ curl -i https://api.github.com/users/defunkt
-</pre>
 
-In addition to the JSON body, take note of the HTTP status code of `200` and
-the `ETag` header:
-
-<pre class="terminal">
 HTTP/1.1 200 OK
 ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
 </pre>
 
+In addition to the JSON body, take note of the HTTP status code of `200` and
+the `ETag` header.
 The ETag is a fingerprint of the response. If we pass that on subsequent calls,
 we can tell the API to give us the resource again, only if it has changed:
 

@@ -45,7 +45,7 @@ $ curl https://api.github.com/users/defunkt
 }
 </pre>
 
-Mmmmm, tastes like [JSON][json]. Let's include the `-i` flag to include headers:
+Mmmmm, tastes like [JSON][json]. Let's add the `-i` flag to include headers:
 
 <pre class="terminal">
 $ curl -i https://api.github.com/users/defunkt

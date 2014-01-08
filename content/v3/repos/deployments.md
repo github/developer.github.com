@@ -102,7 +102,7 @@ is not required to use commit statuses. If no commit statuses are present, the
 deployment will always be created.)
 
 The `force` parameter can be used when you really just need a deployment to go
-out. In these cases, all checks are bypassed and the deployment is created for
+out. In these cases, all checks are bypassed, and the deployment is created for
 the ref.
 
 The `auto_merge` parameter is used to ensure that the requested ref is not
@@ -123,11 +123,11 @@ Users with push access can create a deployment for a given ref:
 
 Name | Type | Description
 -----|------|--------------
-`ref`|`string`| **Required** ref to deploy. This can be a branch, tag, or sha.
+`ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
 `force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks.
 `payload`|`string` | Optional JSON payload with extra information about the deployment.
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary.
-`description`|`string` | Optional short description
+`description`|`string` | Optional short description.
 
 #### Example
 
@@ -144,7 +144,7 @@ Name | Type | Description
 
 ## Update a Deployment
 
-Once a deployment is created it can not be updated. Information relating to the
+Once a deployment is created, it cannot be updated. Information relating to the
 success or failure of a deployment is handled through Deployment Statuses.
 
 # Deployment Statuses

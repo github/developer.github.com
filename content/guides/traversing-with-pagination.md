@@ -41,10 +41,15 @@ that looks like this:
       <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=34>; rel="last"
 
 Let's break that down. `rel="next"` says that the next page is `page=2`. This makes
-sense, since by default, all queries with pagination start at `1.` `rel="last"`
-provides some more information, stating that the last page of results is on `34`.
+sense, since by default, all paginated queries start at page `1.` `rel="last"`
+provides some more information, stating that the last page of results is on page `34`.
 Thus, we have 33 more pages of information about `addClass` that we can consume.
 Nice!
+
+Keep in mind that you should **always** rely on these link relations provided
+to you. Don't try to guess or construct your own URL. Some API calls, like [listing
+commits on a repository][listing commits], use pagination results that are based
+on SHA values, not numbers. 
 
 ### Navigating through the pages
 
@@ -57,7 +62,7 @@ and see what happens:
 
 Here's the link header once more:
 
-    Link: <<https://api.github.com/search/code?q=addClass+user%3Amozilla&page=15>; rel="next",
+    Link: <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=15>; rel="next",
       <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=34>; rel="last",
       <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=1>; rel="first",
       <https://api.github.com/search/code?q=addClass+user%3Amozilla&page=13>; rel="prev"
@@ -146,7 +151,6 @@ Changing the number of items per page is extremely simple with Octokit.rb. Simpl
 pass a `per_page` options hash to the initial client construction. After that,
 your code should remain intact:
 
-
     #!ruby
     require 'octokit'
 
@@ -177,3 +181,4 @@ your code should remain intact:
 [octokit.rb]: https://github.com/octokit/octokit.rb
 [personal token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
 [hypermedia-relations]: https://github.com/octokit/octokit.rb#pagination
+[listing commits]: http://developer.github.com/v3/repos/commits/#list-commits-on-a-repository

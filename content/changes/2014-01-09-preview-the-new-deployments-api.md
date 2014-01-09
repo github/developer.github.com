@@ -59,9 +59,9 @@ whether or not to actually deploy the repository that the event was created for.
 ## Preview Period
 
 We're making this new API available today for developers to preview.  We think
-developers and existing integrations are going to love it, but we want to get
-your feedback before we declare the Deployments API "final" and "unchangeable."
-We expect the preview period to last for roughly 60-90 days.
+developers and existing integrations are going to love it, but we want to [get
+your feedback][contact] before we declare the Deployments API "final" and
+"unchangeable." We expect the preview period to last for roughly 60-90 days.
 
 As we discover opportunities to improve the API during the preview period, we
 may ship changes that break clients using the preview version of the API. We

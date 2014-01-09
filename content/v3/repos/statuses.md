@@ -31,6 +31,9 @@ Users with pull access can view commit statuses for a given ref:
 
     GET /repos/:owner/:repo/statuses/:ref
 
+Statuses are returned in reverse chronological order. The first status in the
+list will be the latest one.
+
 ### Parameters
 
 Name | Type | Description 

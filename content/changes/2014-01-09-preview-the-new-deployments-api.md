@@ -72,8 +72,6 @@ At the end of preview period, the Deployments API will become an official
 component of GitHub API v3. At that point, the new Deployments API will be
 stable and suitable for production use.
 
-We're really excited to see what people come up with.
-
 [docs]: /v3/repos/deployments/
 [hooks]: /v3/repos/hooks/
 [chatops]: https://speakerdeck.com/jnewland/chatops

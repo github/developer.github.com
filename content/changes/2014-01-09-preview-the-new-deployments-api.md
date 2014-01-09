@@ -73,6 +73,8 @@ At the end of preview period, the Deployments API will become an official
 component of GitHub API v3. At that point, the new Deployments API will be
 stable and suitable for production use.
 
+We hope you’ll take it for a spin and [send us your feedback][contact].
+
 ![](http://shipitsquirrel.github.io/images/ship%20it%20squirrel.png)
 
 [docs]: /v3/repos/deployments/

@@ -287,7 +287,6 @@ Key | Type | Description
 `commits[][url]`|`url` | Points to the commit API resource.
 `commits[][distinct]`|`boolean` | Whether this commit is distinct from any that have been pushed before.
 
-
 ## ReleaseEvent
 
 Triggered when a [release](/v3/repos/releases/#get-a-single-release) is published.

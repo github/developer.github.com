@@ -124,10 +124,10 @@ Users with push access can create a deployment for a given ref:
 Name | Type | Description
 -----|------|--------------
 `ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
-`force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks.
-`payload`|`string` | Optional JSON payload with extra information about the deployment.
-`auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary.
-`description`|`string` | Optional short description.
+`force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks. Default: `false`
+`payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`
+`auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: `false`
+`description`|`string` | Optional short description. Default: `""`
 
 #### Example
 
@@ -178,8 +178,8 @@ Users with push access can create deployment statuses for a given deployment:
 Name | Type | Description
 -----|------|--------------
 `state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
-`target_url`|`string` | The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment.
-`description`|`string` | A short description of the status.
+`target_url`|`string` | The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: `""`
+`description`|`string` | A short description of the status. Default: `""`
 
 #### Example
 

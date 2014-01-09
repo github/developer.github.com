@@ -38,7 +38,8 @@ module GitHub
         :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f',
         :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
         :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
-        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134'
+        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134',
+        :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -1512,6 +1513,30 @@ module GitHub
         },
       },
     ]
+
+    DEPLOYMENT = {
+      "id" => 1,
+      "sha" => "topic-branch",
+      "url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "creator" => USER,
+      "payload" => JSON.dump({:environment => 'production'}),
+      "created_at" => "2012-07-20T01:19:13Z",
+      "updated_at" => "2012-07-20T01:19:13Z",
+      "description" => "Deploy request from hubot",
+      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
+    }
+
+    DEPLOYMENT_STATUS = {
+      "id" => 1,
+      "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
+      "state" => "success",
+      "creator" => USER,
+      "payload" => JSON.dump({:environment => 'production'}),
+      "target_url" => "https://gist.github.com/628b2736d379f",
+      "created_at" => "2012-07-20T01:19:13Z",
+      "updated_at" => "2012-07-20T01:19:13Z",
+      "description" => "Deploy request from hubot",
+    }
 
     STATUS = {
       "created_at" => "2012-07-20T01:19:13Z",

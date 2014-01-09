@@ -61,7 +61,7 @@ Name | Type | Description
 
 <%= json \
   :state         => "success",
-  :target_url      => "https://example.com/build/status",
+  :target_url    => "https://example.com/build/status",
   :description   => "The build succeeded!"
 %>
 

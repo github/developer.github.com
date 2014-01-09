@@ -2,13 +2,93 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-01-07T05:00:00Z</updated>
+  <updated>2014-01-09T05:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-01-09:/changes/2014-01-09-preview-the-new-deployments-api/</id>
+    <title type="html">Preview the New Deployments API</title>
+    <published>2014-01-09T05:00:00Z</published>
+    <updated>2014-01-09T05:00:00Z</updated>
+    <author>
+      <name>atmos</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/" />
+    <content type="html">&lt;p&gt;Today we’re excited to announce a &lt;a href="/v3/repos/deployments/"&gt;Deployments API&lt;/a&gt;. We ship a lot of
+software at GitHub: web, mobile, and native. For the last few years, we’ve been
+driving our deployments from our &lt;a href="https://speakerdeck.com/jnewland/chatops"&gt;ChatOps tooling&lt;/a&gt; and we’ve learned a
+lot. The Deployments API is a generalization of the approach that we’ve been
+taking, and we’re really excited to see what our users and integrations start
+building around it.&lt;/p&gt;
+
+&lt;p&gt;Deployments are a new model in the GitHub ecosystem. We don’t have any UI
+components currently, and deployments are intended to be used exclusively by
+tooling.  If you’re familiar with the Status API, you know that it allows
+various tools to report on the status of a commit (e.g., the progress of an
+attempt to perform a build at a particular commit). The Status API doesn’t
+perform the build; it just reports the results. Much like the Status API, we
+won’t be doing actual deployments for you. Instead, the API provides a way for
+you to track the status of your deployments. We’re hoping to provide
+consistency across the various type of release processes, regardless of the
+underlying steps involved with getting your code built or shipped to your
+servers.&lt;/p&gt;
+
+&lt;h2 id="highlights"&gt;Highlights&lt;/h2&gt;
+
+&lt;h3 id="automatic-merging"&gt;Automatic Merging&lt;/h3&gt;
+
+&lt;p&gt;The system can auto-merge the default branch for the repository if the
+requested deployment ref is behind the default branch. On active projects it’s
+easy to fall behind, so let automation watch your back.&lt;/p&gt;
+
+&lt;h3 id="commit-status-integration"&gt;Commit Status Integration&lt;/h3&gt;
+
+&lt;p&gt;By default, the system rejects deployment requests for repositories that have
+commit statuses but don’t have a green build for the deployment ref. This can
+be bypassed, but is useful in cases where continuous integration is being used.&lt;/p&gt;
+
+&lt;h3 id="force-deployments"&gt;Force Deployments&lt;/h3&gt;
+
+&lt;p&gt;Sometimes the world crashes down on you, and you need to just get the code out
+the door.  Forced deployments bypass any commit status checks or ahead/behind
+checks in the repository.&lt;/p&gt;
+
+&lt;h3 id="deployment-statuses"&gt;Deployment Statuses&lt;/h3&gt;
+
+&lt;p&gt;Different deployment systems can update the status of a deployment to be
+&lt;code&gt;pending&lt;/code&gt;, &lt;code&gt;success&lt;/code&gt;, &lt;code&gt;failure&lt;/code&gt;, or &lt;code&gt;error&lt;/code&gt;. There’s also a field for linking
+to deployment output.&lt;/p&gt;
+
+&lt;h3 id="events"&gt;Events&lt;/h3&gt;
+
+&lt;p&gt;Both Deployments and Deployment Statuses trigger events on GitHub. 3rd party
+integrations can listen for these events via &lt;a href="/v3/repos/hooks/"&gt;webhooks&lt;/a&gt; and choose
+whether or not to actually deploy the repository that the event was created for.&lt;/p&gt;
+
+&lt;h2 id="preview-period"&gt;Preview Period&lt;/h2&gt;
+
+&lt;p&gt;We’re making this new API available today for developers to
+&lt;a href="/v3/repos/deployments/#preview-mode"&gt;preview&lt;/a&gt;.  We think developers and existing integrations are
+going to love it, but we want to &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;get your feedback&lt;/a&gt; before we declare
+the Deployments API “final” and “unchangeable.” We expect the preview period to
+last for roughly 60-90 days.&lt;/p&gt;
+
+&lt;p&gt;As we discover opportunities to improve the API during the preview period, we
+may ship changes that break clients using the preview version of the API. We
+want to iterate quickly. To do so, we will announce any changes here (on the
+developer blog), but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;At the end of preview period, the Deployments API will become an official
+component of GitHub API v3. At that point, the new Deployments API will be
+stable and suitable for production use.&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-01-07:/changes/2014-01-07-upcoming-change-to-default-media-type/</id>
     <title type="html">Upcoming Change to Default Media Type</title>
@@ -706,6 +786,25 @@ curl -u defunkt https://api.github.com/feeds
 </content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-create-update-delete-individual-files/</id>
+    <title type="html">Create, update, and delete individual files</title>
+    <published>2013-05-06T04:00:00Z</published>
+    <updated>2013-05-06T04:00:00Z</updated>
+    <author>
+      <name>ymendel</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-05-06-create-update-delete-individual-files/" />
+    <content type="html">&lt;p&gt;We’re following in the footsteps of GitHub.com’s ability to &lt;a href="https://github.com/blog/143-inline-file-editing"&gt;edit&lt;/a&gt; and
+&lt;a href="https://github.com/blog/1327-creating-files-on-github"&gt;create&lt;/a&gt; files in your web browser. Starting today, the
+&lt;a href="/v3/repos/contents/"&gt;Repository Contents API&lt;/a&gt; will let you easily &lt;a href="/v3/repos/contents/#create-a-file"&gt;create&lt;/a&gt;, &lt;a href="/v3/repos/contents/#update-a-file"&gt;update&lt;/a&gt;, and even
+&lt;a href="/v3/repos/contents/#delete-a-file"&gt;delete&lt;/a&gt; individual files.&lt;/p&gt;
+
+&lt;p&gt;Happy editing!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-repository-stats/</id>
     <title type="html">Repository Statistics</title>
     <published>2013-05-06T04:00:00Z</published>
@@ -730,25 +829,6 @@ but we can’t wait to see what others can do with this information.&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Enjoy!&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-create-update-delete-individual-files/</id>
-    <title type="html">Create, update, and delete individual files</title>
-    <published>2013-05-06T04:00:00Z</published>
-    <updated>2013-05-06T04:00:00Z</updated>
-    <author>
-      <name>ymendel</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-05-06-create-update-delete-individual-files/" />
-    <content type="html">&lt;p&gt;We’re following in the footsteps of GitHub.com’s ability to &lt;a href="https://github.com/blog/143-inline-file-editing"&gt;edit&lt;/a&gt; and
-&lt;a href="https://github.com/blog/1327-creating-files-on-github"&gt;create&lt;/a&gt; files in your web browser. Starting today, the
-&lt;a href="/v3/repos/contents/"&gt;Repository Contents API&lt;/a&gt; will let you easily &lt;a href="/v3/repos/contents/#create-a-file"&gt;create&lt;/a&gt;, &lt;a href="/v3/repos/contents/#update-a-file"&gt;update&lt;/a&gt;, and even
-&lt;a href="/v3/repos/contents/#delete-a-file"&gt;delete&lt;/a&gt; individual files.&lt;/p&gt;
-
-&lt;p&gt;Happy editing!&lt;/p&gt;
-
 </content>
   </entry>
   <entry>
@@ -1115,36 +1195,6 @@ regardless of what you send in the &lt;code&gt;type&lt;/code&gt; parameter.&lt;/
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;EDIT:&lt;/strong&gt; &lt;code&gt;Link&lt;/code&gt; headers are our preferred navigation technique.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2012-12-08:/changes/2012-12-08-finding-source-and-fork-repos-for-organizations/</id>
-    <title type="html">Finding sources and fork repositories for organizations</title>
-    <published>2012-12-08T05:00:00Z</published>
-    <updated>2012-12-08T05:00:00Z</updated>
-    <author>
-      <name>rick</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2012-12-08-finding-source-and-fork-repos-for-organizations/" />
-    <content type="html">&lt;p&gt;We’ve made a couple of changes today to the Organization repositories
-listing to bring it a bit closer to the functionality of the GitHub.com
-Organization repositories tab.  We now let you retrieve repositories
-which are forks of another repository, as well as those repositories which
-are sources (not forks).&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Grab all fork Repositories for an Organization
-curl "https://api.github.com/orgs/:org/repos?type=forks"
-
-# Grab all source Repositories for an Organization
-curl "https://api.github.com/orgs/:org/repos?type=sources"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Check out the docs for sorting and filtering options:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="/v3/repos/#list-organization-repositories"&gt;Organization Repositories&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>

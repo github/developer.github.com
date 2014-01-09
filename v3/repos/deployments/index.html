@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Issue Milestones | GitHub API</title>
+  <title>Deployments | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -50,52 +50,99 @@
 	
   <div id="wrapper">
   	<div class="content">
-    	<h1 id="milestones">Milestones</h1>
+    	<h1 id="deployments">Deployments</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-milestones-for-a-repository">List milestones for a repository</a></li>
-  <li><a href="#get-a-single-milestone">Get a single milestone</a></li>
-  <li><a href="#create-a-milestone">Create a milestone</a></li>
-  <li><a href="#update-a-milestone">Update a milestone</a></li>
-  <li><a href="#delete-a-milestone">Delete a milestone</a></li>
+  <li><a href="#list-deployments">List Deployments</a></li>
+  <li><a href="#create-a-deployment">Create a Deployment</a></li>
+  <li><a href="#update-a-deployment">Update a Deployment</a></li>
+  <li><a href="#list-deployment-statuses">List Deployment Statuses</a></li>
+  <li><a href="#create-a-deployment-status">Create a Deployment Status</a></li>
 </ul>
 
-<h2 id="list-milestones-for-a-repository">List milestones for a repository</h2>
+<div class="alert">
+  <p>
+    The Deployments API is currently available for developers to preview.
+    During the preview period, the API may change without advance notice.
+    Please see the <a href="/changes/2014-01-09-preview-the-new-deployments-api/">blog post</a> for full details.
+  </p>
 
-<pre><code>GET /repos/:owner/:repo/milestones
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.cannonball-preview+json</pre>
+  
+</div>
+
+<p>Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
+GitHub then dispatches deployment events that external services can listen for
+and act on. This enables developers and organizations to build loosely-coupled
+tooling around deployments, without having to worry about implementation
+details of delivering different types of applications (e.g., web, native).</p>
+
+<p>Deployment Statuses allow external services to mark deployments with a
+‘success’, ‘failure’, ‘error’, or ‘pending’ state, which can then be consumed
+by any system listening for <code>deployment_status</code> events.</p>
+
+<p>Deployment Statuses can also include an optional <code>description</code> and <code>target_url</code>, and
+we highly recommend providing them as they make deployment statuses much more
+useful. The <code>target_url</code> would be the full URL to the deployment output, and
+the <code>description</code> would be the high level summary of what happened with the
+deployment.</p>
+
+<p>Deployments and Deployment Statuses both have associated repository events when
+they’re created. This allows web hooks and 3rd party integrations to respond to
+deployment requests as well as update the status of a deployment as progress is
+made.</p>
+
+<p>Below is a simple sequence diagram for how these interactions would work.</p>
+
+<pre>
++---------+             +--------+            +-----------+        +-------------+
+| Tooling |             | GitHub |            | 3rd Party |        | Your Server |
++---------+             +--------+            +-----------+        +-------------+
+     |                      |                       |                     |
+     |  Create Deployment   |                       |                     |
+     |---------------------&gt;|                       |                     |
+     |                      |                       |                     |
+     |  Deployment Created  |                       |                     |
+     |&lt;---------------------|                       |                     |
+     |                      |                       |                     |
+     |                      |   Deployment Event    |                     |
+     |                      |----------------------&gt;|                     |
+     |                      |                       |     SSH+Deploys     |
+     |                      |                       |--------------------&gt;|
+     |                      |                       |                     |
+     |                      |   Deployment Status   |                     |
+     |                      |&lt;----------------------|                     |
+     |                      |                       |                     |
+     |                      |                       |   Deploy Completed  |
+     |                      |                       |&lt;--------------------|
+     |                      |                       |                     |
+     |                      |   Deployment Status   |                     |
+     |                      |&lt;----------------------|                     |
+     |                      |                       |                     |
+</pre>
+
+<p>Keep in mind that GitHub is never actually accessing your servers. It’s up to
+your 3rd party integration to interact with deployment events.
+This allows for <a href="https://github.com/github/github-services">github-services</a>
+integrations as well as running your own systems depending on your use case.
+Multiple systems can listen for deployment events, and it’s up to each of
+those systems to decide whether or not they’re responsible for pushing the code
+out to your servers, building native code, etc.</p>
+
+<p>Note that the <code>repo:deployment</code> <a href="/v3/oauth/#scopes">OAuth scope</a> grants
+targeted access to Deployments and Deployment Statuses <strong>without</strong>
+granting access to repository code, while the <code>repo</code> scope grants permission to code
+as well.</p>
+
+<h2 id="list-deployments">List Deployments</h2>
+
+<p>Users with pull access can view deployments for a repository:</p>
+
+<pre><code>GET /repos/:owner/:repo/deployments
 </code></pre>
-
-<h3 id="parameters">Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>state</code></td>
-      <td><code>string</code></td>
-      <td>The state of the milestone. Either <code>open</code> or <code>closed</code>. Default: <code>open</code>
-</td>
-    </tr>
-    <tr>
-      <td><code>sort</code></td>
-      <td><code>string</code></td>
-      <td>What to sort results by. Either <code>due_date</code> or <code>completeness</code>. Default: <code>due_date</code>
-</td>
-    </tr>
-    <tr>
-      <td><code>direction</code></td>
-      <td><code>string</code></td>
-      <td>The direction of the sort. Either <code>asc</code> or <code>desc</code>. Default: <code>asc</code>
-</td>
-    </tr>
-  </tbody>
-</table>
 
 <h3 id="response">Response</h3>
 
@@ -107,11 +154,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
-    <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
-    <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"topic-branch"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span><span class="p">,</span>
     <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
       <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -131,61 +176,41 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
       <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="s2">"closed_issues"</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
-    <span class="s2">"due_on"</span><span class="o">:</span> <span class="kc">null</span>
+    <span class="s2">"payload"</span><span class="o">:</span> <span class="s2">"{\"environment\":\"production\"}"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
+    <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
-<h2 id="get-a-single-milestone">Get a single milestone</h2>
+<h2 id="create-a-deployment">Create a Deployment</h2>
 
-<pre><code>GET /repos/:owner/:repo/milestones/:number
+<p>If your repository is taking advantage of <a href="/v3/repos/statuses">commit statuses</a>,
+the API will reject requests that do not have a success status. (Your repository
+is not required to use commit statuses. If no commit statuses are present, the
+deployment will always be created.)</p>
+
+<p>The <code>force</code> parameter can be used when you really just need a deployment to go
+out. In these cases, all checks are bypassed, and the deployment is created for
+the ref.</p>
+
+<p>The <code>auto_merge</code> parameter is used to ensure that the requested ref is not
+behind the repository’s default branch. If the ref <em>is</em> behind the default
+branch for the repository, we will attempt to merge it for you. If the merge
+succeeds, the API will return a successful merge commit. If merge conflicts
+prevent the merge from succeeding, the API will return a failure response.</p>
+
+<p>The <code>payload</code> parameter is available for any extra information that a
+deployment system might need. It is a JSON text field that will be passed on
+when a deployment event is dispatched.</p>
+
+<p>Users with push access can create a deployment for a given ref:</p>
+
+<pre><code>POST /repos/:owner/:repo/deployments
 </code></pre>
 
-<h3 id="response-1">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
-  <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
-  <span class="p">},</span>
-  <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="s2">"closed_issues"</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="o">:</span> <span class="kc">null</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="create-a-milestone">Create a milestone</h2>
-
-<pre><code>POST /repos/:owner/:repo/milestones
-</code></pre>
-
-<h3 id="input">Input</h3>
+<h3 id="parameters">Parameters</h3>
 
 <table>
   <thead>
@@ -197,26 +222,34 @@ X-RateLimit-Remaining: 4999</code></pre>
   </thead>
   <tbody>
     <tr>
-      <td><code>title</code></td>
+      <td><code>ref</code></td>
       <td><code>string</code></td>
       <td>
-<strong>Required</strong>. The title of the milestone.</td>
+<strong>Required</strong>. The ref to deploy. This can be a branch, tag, or sha.</td>
     </tr>
     <tr>
-      <td><code>state</code></td>
+      <td><code>force</code></td>
+      <td><code>boolean</code></td>
+      <td>Optional parameter to bypass any ahead/behind checks or commit status checks. Default: <code>false</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>payload</code></td>
       <td><code>string</code></td>
-      <td>The state of the milestone. Either <code>open</code> or <code>closed</code>. Default: <code>open</code>
+      <td>Optional JSON payload with extra information about the deployment. Default: <code>""</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>auto_merge</code></td>
+      <td><code>boolean</code></td>
+      <td>Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: <code>false</code>
 </td>
     </tr>
     <tr>
       <td><code>description</code></td>
       <td><code>string</code></td>
-      <td>A description of the milestone.</td>
-    </tr>
-    <tr>
-      <td><code>due_on</code></td>
-      <td><code>string</code></td>
-      <td>The milestone due date. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
+      <td>Optional short description. Default: <code>""</code>
+</td>
     </tr>
   </tbody>
 </table>
@@ -224,25 +257,20 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h4 id="example">Example</h4>
 
 <pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open or closed"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="o">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
+  <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"topic-branch"</span><span class="p">,</span>
+  <span class="s2">"payload"</span><span class="o">:</span> <span class="s2">"{\"environment\":\"production\",\"deploy_user\":\"atmos\",\"room_id\":123456}"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploying my sweet branch"</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-2">Response</h3>
-
 <pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/repos/user/repo/milestones/1
+Location: https://api.github.com/repos/octocat/example/deployments/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
-  <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"topic-branch"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span><span class="p">,</span>
   <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -262,18 +290,28 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
     <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="s2">"closed_issues"</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="o">:</span> <span class="kc">null</span>
+  <span class="s2">"payload"</span><span class="o">:</span> <span class="s2">"{\"environment\":\"production\"}"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
+  <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses"</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="update-a-milestone">Update a milestone</h2>
+<h2 id="update-a-deployment">Update a Deployment</h2>
 
-<pre><code>PATCH /repos/:owner/:repo/milestones/:number
+<p>Once a deployment is created, it cannot be updated. Information relating to the
+success or failure of a deployment is handled through Deployment Statuses.</p>
+
+<h1 id="deployment-statuses">Deployment Statuses</h1>
+
+<h2 id="list-deployment-statuses">List Deployment Statuses</h2>
+
+<p>Users with pull access can view deployment statuses for a deployment:</p>
+
+<pre><code>GET /repos/:owner/:repo/deployments/:id/statuses
 </code></pre>
 
-<h3 id="input-1">Input</h3>
+<h3 id="parameters-1">Parameters</h3>
 
 <table>
   <thead>
@@ -285,25 +323,89 @@ X-RateLimit-Remaining: 4999</code></pre>
   </thead>
   <tbody>
     <tr>
-      <td><code>title</code></td>
-      <td><code>string</code></td>
-      <td>The title of the milestone.</td>
+      <td><code>id</code></td>
+      <td><code>integer</code></td>
+      <td>
+<strong>Required</strong>. The Deployment ID to list the statuses from.</td>
     </tr>
+  </tbody>
+</table>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses/42"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+      <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+      <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+      <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+      <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+      <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+      <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+      <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="s2">"payload"</span><span class="o">:</span> <span class="s2">"{\"environment\":\"production\"}"</span><span class="p">,</span>
+    <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/628b2736d379f"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="create-a-deployment-status">Create a Deployment Status</h2>
+
+<p>Users with push access can create deployment statuses for a given deployment:</p>
+
+<pre><code>POST /repos/:owner/:repo/deployments/:id/statuses
+</code></pre>
+
+<h3 id="parameters-2">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td><code>state</code></td>
       <td><code>string</code></td>
-      <td>The state of the milestone. Either <code>open</code> or <code>closed</code>. Default: <code>open</code>
+      <td>
+<strong>Required</strong>. The state of the status. Can be one of <code>pending</code>, <code>success</code>, <code>error</code>, or <code>failure</code>.</td>
+    </tr>
+    <tr>
+      <td><code>target_url</code></td>
+      <td><code>string</code></td>
+      <td>The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: <code>""</code>
 </td>
     </tr>
     <tr>
       <td><code>description</code></td>
       <td><code>string</code></td>
-      <td>A description of the milestone.</td>
-    </tr>
-    <tr>
-      <td><code>due_on</code></td>
-      <td><code>string</code></td>
-      <td>The milestone due date. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
+      <td>A short description of the status. Default: <code>""</code>
+</td>
     </tr>
   </tbody>
 </table>
@@ -311,24 +413,22 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h4 id="example-1">Example</h4>
 
 <pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open or closed"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"String"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="o">:</span> <span class="s2">"Time"</span>
+  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://example.com/deployment/42/output"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deployment finished successfully."</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-3">Response</h3>
+<h3 id="response-2">Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/repos/octocat/example/deployments/42/statuses/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
-  <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses/42"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
   <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -348,22 +448,12 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
     <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="s2">"closed_issues"</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="o">:</span> <span class="kc">null</span>
+  <span class="s2">"payload"</span><span class="o">:</span> <span class="s2">"{\"environment\":\"production\"}"</span><span class="p">,</span>
+  <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/628b2736d379f"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span>
 <span class="p">}</span></code></pre>
-
-<h2 id="delete-a-milestone">Delete a milestone</h2>
-
-<pre><code>DELETE /repos/:owner/:repo/milestones/:number
-</code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
 
     </div>
 

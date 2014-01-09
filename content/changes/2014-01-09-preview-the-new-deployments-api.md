@@ -58,10 +58,11 @@ whether or not to actually deploy the repository that the event was created for.
 
 ## Preview Period
 
-We're making this new API available today for developers to preview.  We think
-developers and existing integrations are going to love it, but we want to [get
-your feedback][contact] before we declare the Deployments API "final" and
-"unchangeable." We expect the preview period to last for roughly 60-90 days.
+We're making this new API available today for developers to
+[preview][preview-mode].  We think developers and existing integrations are
+going to love it, but we want to [get your feedback][contact] before we declare
+the Deployments API "final" and "unchangeable." We expect the preview period to
+last for roughly 60-90 days.
 
 As we discover opportunities to improve the API during the preview period, we
 may ship changes that break clients using the preview version of the API. We
@@ -74,5 +75,6 @@ stable and suitable for production use.
 
 [docs]: /v3/repos/deployments/
 [hooks]: /v3/repos/hooks/
+[preview-mode]: /v3/repos/deployments/#preview-mode
 [chatops]: https://speakerdeck.com/jnewland/chatops
 [contact]: https://github.com/contact?form[subject]=Deployments+API

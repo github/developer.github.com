@@ -51,10 +51,14 @@ List repositories being watched by the authenticated user.
 
     GET /repos/:owner/:repo/subscription
 
-### Response
+### Response if you are subscribed to the repository
 
 <%= headers 200 %>
 <%= json :repo_subscription %>
+
+### Response if you are not subscribed to the repository
+
+<%= headers 404 %>
 
 ## Set a Repository Subscription
 

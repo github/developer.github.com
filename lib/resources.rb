@@ -1516,13 +1516,14 @@ module GitHub
 
     DEPLOYMENT = {
       "id" => 1,
-      "ref" => "topic-branch",
+      "sha" => "topic-branch",
       "url" => "https://api.github.com/repos/octocat/example/deployments/1",
       "creator" => USER,
       "payload" => JSON.dump({:environment => 'production'}),
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "description" => "Deploy request from hubot",
+      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
     }
 
     DEPLOYMENT_STATUS = {

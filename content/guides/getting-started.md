@@ -136,7 +136,7 @@ X-GitHub-OTP: required; :2fa-type
 </pre>
 
 If you enabled 2FA with a mobile application, you can get around that error
-by providing an 2FA OTP code in the [X-GitHub-OTP request header][2fa header]:
+by providing a 2FA OTP code in the [X-GitHub-OTP request header][2fa header]:
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; -H "X-GitHub-OTP: &lt;your_2fa_OTP_code&gt;" \

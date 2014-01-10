@@ -482,39 +482,6 @@ X-RateLimit-Limit: 5000
 The response gives us a couple of pointers to the newly created issue, both in
 the `Location` response header and the `url` field of the JSON response.
 
-### Convert an issue to a Pull Request
-
-GitHub moves fast and the API tries to keep pace, but there are some things you
-can do with the API that you can't do on github.com. Using the API, you can
-[turn an issue into a Pull Request][issue to pull api].
-
-But at this point, we'll need to create a branch called `new-feature`
-with at least one commit so it's ahead of the `master` branch:
-
-<pre class="terminal">
-$ git clone https://github.com/github/platform-sandbox
-$ git checkout -b new-feature
-$ touch cool-feature.rb
-$ git add cool-feature.rb
-$ git commit -m "Add new feature."
-$ git push origin new-feature
-</pre>
-
-Now let's convert the issue we created in the previous section:
-
-<pre class="terminal">
-$ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    -d '{ \
-         "issue": 17, \
-         "head": "new-feature", \
-         "base": "master" \
-       }' \
-    https://api.github.com/repos/pengwynn/api-sandbox/pulls
-</pre>
-
-Using this shorthand, the details for the pull request title and body are taken
-from the issue we provide.
-
 ## Conditional requests
 
 A big part of being a good API citizen is respecting rate limits by
@@ -590,5 +557,4 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [org repos api]: /v3/repos/#list-organization-repositories
 [get issues api]: /v3/issues/#list-issues
 [repo issues api]: /v3/issues/#list-issues-for-a-repository
-[issue to pull api]: /v3/pulls/#alternative-input
 [etag]: http://en.wikipedia.org/wiki/HTTP_ETag

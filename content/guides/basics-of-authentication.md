@@ -142,7 +142,7 @@ what it asked for, but the granted scopes would have still been sufficient.
 Checking for scopes only before making requests is not enough since it's posible
 that users will change the scopes in between your check and the actual request.
 In case that happens, API calls you expected to succeed might fail with a `404`
-or `403` status, or return a different subset of information.
+or `401` status, or return a different subset of information.
 
 To help you gracefully handle these situations, all API responses for requests
 made with valid tokens also contain an [`X-OAuth-Scopes` header][oauth scopes].

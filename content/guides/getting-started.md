@@ -166,8 +166,8 @@ below for more information.
 ### Get your own user profile
 
 When properly authenticated, you can take advantage of the permissions
-associated with your GitHub account. For example, try getting your own
-user profile:
+associated with your GitHub account. For example, try getting
+[your own user profile][auth user api]:
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; https://api.github.com/user
@@ -278,27 +278,27 @@ the [Repositories API][repos-api].
 ## Repositories
 
 Almost any meaningful use of the GitHub API will involve some level of Repository
-information. We can `GET` repository details in the same way we fetched user
+information. We can [`GET` repository details][get repo] in the same way we fetched user
 details earlier:
 
 <pre class="terminal">
 $ curl -i https://api.github.com/repos/twbs/bootstrap
 </pre>
 
-In the same way, we can view repositories for the authenticated user:
+In the same way, we can [view repositories for the authenticated user][user repos api]:
 
 <pre class="terminal">
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
     https://api.github.com/user/repos
 </pre>
 
-Or, we can list repositories for another user:
+Or, we can [list repositories for another user][other user repos api]:
 
 <pre class="terminal">
 $ curl -i https://api.github.com/users/technoweenie/repos
 </pre>
 
-Or, we can list repositories for an organization:
+Or, we can [list repositories for an organization][org repos api]:
 
 <pre class="terminal">
 $ curl -i https://api.github.com/orgs/mozilla/repos
@@ -378,14 +378,14 @@ data out or create issues from other tools to create a workflow that works for
 your team.
 
 Just like github.com, the API provides a few methods to view issues for the
-authenticated user. To see all your issues, call `GET /issues`:
+authenticated user. To [see all your issues][get issues api], call `GET /issues`:
 
 <pre class="terminal">
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
     https://api.github.com/issues
 </pre>
 
-To get only the issues under one of your GitHub organizations, call `GET
+To get only the [issues under one of your GitHub organizations][get issues api], call `GET
 /orgs/<org>/issues`:
 
 <pre class="terminal">
@@ -393,7 +393,7 @@ $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
     https://api.github.com/orgs/rails/issues
 </pre>
 
-We can also get all the issues under a single repository:
+We can also get [all the issues under a single repository][repo issues api]:
 
 <pre class="terminal">
 $ curl -i https://api.github.com/repos/rails/rails/issues
@@ -486,7 +486,7 @@ the `Location` response header and the `url` field of the JSON response.
 
 GitHub moves fast and the API tries to keep pace, but there are some things you
 can do with the API that you can't do on github.com. Using the API, you can
-turn an issue into a Pull Request.
+[turn an issue into a Pull Request][issue to pull api].
 
 But at this point, we'll need to create a branch called `new-feature`
 with at least one commit so it's ahead of the `master` branch:
@@ -531,7 +531,7 @@ ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
 
 In addition to the JSON body, take note of the HTTP status code of `200` and
 the `ETag` header.
-The ETag is a fingerprint of the response. If we pass that on subsequent calls,
+The [ETag][etag] is a fingerprint of the response. If we pass that on subsequent calls,
 we can tell the API to give us the resource again, only if it has changed:
 
 <pre class="terminal">
@@ -559,7 +559,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [media types]: /v3/media/
 [oauth]: /v3/oauth/
 [webflow]: /v3/oauth/#web-application-flow
-[authorizations api]: /v3/oauth/#oauth-authorizations-api
+[authorizations api]: /v3/oauth/#create-a-new-authorization
 [scopes]: /v3/oauth/#scopes
 [repos-api]: /v3/repos/
 [pages]: http://pages.github.com
@@ -569,7 +569,8 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [link-header]: http://www.w3.org/wiki/LinkHeader
 [conditional-requests]: /v3/#conditional-requests
 [rate-limiting]: /v3/#rate-limiting
-[users api]: /v3/users/
+[users api]: /v3/users/#get-a-single-user
+[auth user api]: /v3/users/#get-the-authenticated-user
 [defunkt github]: https://github.com/defunkt
 [json]: http://en.wikipedia.org/wiki/JSON
 [rate limiting]: /v3/#rate-limiting
@@ -580,6 +581,14 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [personal token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
 [application settings]: https://github.com/settings/applications
 [pagination]: /v3/#pagination
+[get repo]: /v3/repos/#get
 [create repo]: /v3/repos/#create
 [create issue]: /v3/issues/#create
 [auth guide]: /guides/basics-of-authentication
+[user repos api]: /v3/repos/#list-your-repositories
+[other user repos api]: /v3/repos/#list-user-repositories
+[org repos api]: /v3/repos/#list-organization-repositories
+[get issues api]: /v3/issues/#list-issues
+[repo issues api]: /v3/issues/#list-issues-for-a-repository
+[issue to pull api]: /v3/pulls/#alternative-input
+[etag]: http://en.wikipedia.org/wiki/HTTP_ETag

@@ -139,6 +139,19 @@ if the application had asked for `user` scope, it might have been granted only
 `user:email` scope. In that case, the application wouldn't have been granted
 what it asked for, but the granted scopes would have still been sufficient.
 
+Checking for scopes only before making requests is not enough since it's posible
+that users will change the scopes in between your check and the actual request.
+In case that happens, API calls you expected to succeed might fail with a `404`
+or `403` status, or return a different subset of information.
+
+To help you gracefully handle these situations, all API responses for requests
+made with valid tokens also contain an [`X-OAuth-Scopes` header][oauth scopes].
+This header contains the list of scopes of the token that was used to make the
+request. In addition to that, the Authorization API provides an endpoint to
+[check a token for validity][check token valid].
+Use this information to detect changes in token scopes, and inform your users of
+changes in available application functionality.
+
 ### Making authenticated requests
 
 At last, with this access token, you'll be able to make authenticated requests as
@@ -187,8 +200,15 @@ GitHub, they should be able to access this application? Hold on to your hat,
 because _that's exactly what we're going to do_.
 
 Our little server above is rather simple. In order to wedge in some intelligent
-authentication, we're going to switch over to using sessions for storing tokens
-and scopes. This will make authentication transparent to the user.
+authentication, we're going to switch over to using sessions for storing tokens.
+This will make authentication transparent to the user.
+
+Also, since we're persisting scopes within the session, we'll need to
+handle cases when the user updates the scopes after we checked them, or revokes
+the token. To do that, we'll use a `rescue` block and check that the first API
+call succeeded, which verifies that the token is still valid. After that, we'll
+check the `X-OAuth-Scopes` response header to verify that the user hasn't revoked
+the `user:email` scope.
 
 Create a file called _advanced_server.rb_, and paste these lines into it:
 
@@ -210,7 +230,6 @@ Create a file called _advanced_server.rb_, and paste these lines into it:
     use Rack::Session::Cookie, :secret => rand.to_s()
 
     def authenticated?
-      puts session[:access_token]
       session[:access_token]
     end
 
@@ -223,18 +242,33 @@ Create a file called _advanced_server.rb_, and paste these lines into it:
         authenticate!
       else
         access_token = session[:access_token]
-        scopes = session[:scopes]
-        has_user_email_scope = scopes.include? 'user:email'
+        scopes = []
 
-        auth_result = JSON.parse(RestClient.get('https://api.github.com/user',
-                                                {:params => {:access_token => access_token},
-                                                 :accept => :json}))
+        begin
+          auth_result = RestClient.get('https://api.github.com/user',
+                                       {:params => {:access_token => access_token},
+                                        :accept => :json})
+        rescue => e
+          # request didn't succeed because the token was revoked so we
+          # invalidate the token stored in the session and render the
+          # index page so that the user can start the OAuth flow again
 
-        if has_user_email_scope
+          session[:access_token] = nil
+          return authenticate!
+        end
+
+        # the request succeeded, so we check the list of current scopes
+        if auth_result.headers.include? :x_oauth_scopes
+          scopes = auth_result.headers[:x_oauth_scopes].split(', ')
+        end
+
+        auth_result = JSON.parse(auth_result)
+
+        if scopes.include? 'user:email'
           auth_result['private_emails'] =
             JSON.parse(RestClient.get('https://api.github.com/user/emails',
-                                      {:params => {:access_token => access_token},
-                                       :accept => :json}))
+                           {:params => {:access_token => access_token},
+                            :accept => :json}))
         end
 
         erb :advanced, :locals => auth_result
@@ -251,10 +285,10 @@ Create a file called _advanced_server.rb_, and paste these lines into it:
                                :accept => :json)
 
       session[:access_token] = JSON.parse(result)['access_token']
-      session[:scopes] = JSON.parse(result)['scope'].split(',')
 
       redirect '/'
     end
+
 
 Much of the code should look familiar. For example, we're still using `RestClient.get`
 to call out to the GitHub API, and we're still passing our results to be rendered
@@ -313,6 +347,7 @@ available as a separate project.
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test
 [oauth scopes]: /v3/oauth/#scopes
 [edit scopes post]: /changes/2013-10-04-oauth-changes-coming/
+[check token valid]: /v3/oauth/#check-an-authorization
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication
 [new oauth app]: https://github.com/settings/applications/new
 [app settings]: https://github.com/settings/applications

@@ -236,7 +236,7 @@ in order to not frighten users with potentially invasive actions. The `201`
 status code tells us that the call was successful, and the JSON returned
 contains the details of our new OAuth token.
 
-If you enabled [two-factor authentication][2fa] enabled, the API will
+If you have [two-factor authentication][2fa] enabled, the API will
 return the [previously described `401 Unauthorized` error code][2fa section]
 for the above request. You can get around that error by providing a 2FA OTP code
 in the [X-GitHub-OTP request header][2fa header]:

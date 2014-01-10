@@ -135,7 +135,8 @@ X-GitHub-OTP: required; :2fa-type
 }
 </pre>
 
-To get around that error, provide your 2FA OTP code in the [X-GitHub-OTP request header][2fa header]:
+If you enabled 2FA with a mobile application, you can get around that error
+by providing an 2FA OTP code in the [X-GitHub-OTP request header][2fa header]:
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; -H "X-GitHub-OTP: &lt;your_2fa_OTP_code&gt;" \
@@ -154,14 +155,13 @@ HTTP/1.1 200 OK
 }
 </pre>
 
-If you enabled 2FA with a mobile application, then you can get an OTP
-code from that application on your phone. If you enabled 2FA with text messages,
-then you'll get an SMS with your OTP code after making a request to an API
-endpoint which requires such an OTP code.
+To get an OTP code, use the one-time password application on your phone.
+However, because these OTP codes expire quickly, an easier workaround is to
+create and use a Personal token for authentication. See the
+[OAuth section][oauth section] below for more information.
 
-Because these OTP codes expire quickly, an easier workaround is to create and
-use a Personal token for authentication. See the [OAuth section][oauth section]
-below for more information.
+If you enabled 2FA with text messages (SMS), you'll need to create an OAuth
+token and use [OAuth authentication][oauth section] instead of Basic Authentication.
 
 ### Get your own user profile
 
@@ -259,6 +259,14 @@ scopes. You should **only** request scopes that your application actually needs,
 in order to not frighten users with potentially invasive actions. The `201`
 status code tells us that the call was successful, and the JSON returned
 contains the details of our new OAuth token.
+
+Again, if you enabled [two-factor authentication][2fa] enabled, the API will
+return the [previously described `401 Unauthorized` error code][2fa section]
+for the above request. You can get around that error by providing an OTP code
+in the [X-GitHub-OTP request header][2fa header], [as described above][2fa section].
+If you enabled 2FA with a mobile application, go ahead and get an OTP code from your
+one-time password application on your phone. If you enabled 2FA with text messages,
+you'll receive an SMS with your OTP code after making a request to this endpoint.
 
 Now, we can use the forty character `token` instead of a username and password
 in the rest of our examples. Let's grab our own user info again, using OAuth this time:
@@ -558,3 +566,4 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [get issues api]: /v3/issues/#list-issues
 [repo issues api]: /v3/issues/#list-issues-for-a-repository
 [etag]: http://en.wikipedia.org/wiki/HTTP_ETag
+[2fa section]: /guides/getting-started/#two-factor-authentication

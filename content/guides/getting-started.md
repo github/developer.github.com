@@ -119,8 +119,7 @@ reading and writing private information via the API.
 ### Two-factor authentication
 
 If you have [two-factor authentication][2fa] enabled, the API will return a
-`401 Unauthorized` error code for the above request
-(and every other API request, in fa):
+`401 Unauthorized` error code for the above request (and every other API request):
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; https://api.github.com/users/defunkt

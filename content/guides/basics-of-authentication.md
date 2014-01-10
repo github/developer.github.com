@@ -11,12 +11,12 @@ In this section, we're going to focus on the basics of authentication. Specifica
 we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements
 the [web flow][webflow] of an application in several different ways.
 
-Note: you can download the complete source code for this project [from the platform-samples repo](https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication).
+Note: you can download the complete source code for this project
+[from the platform-samples repo][platform samples].
 
 ## Registering your app
 
-First, you'll need to [register your
-application](https://github.com/settings/applications/new). Every
+First, you'll need to [register your application][new oauth app]. Every
 registered OAuth application is assigned a unique Client ID and Client Secret.
 The Client Secret should not be shared! That includes checking the string
 into your repository.
@@ -45,7 +45,8 @@ Now, let's start filling out our simple server. Create a file called _server.rb_
       erb :index, :locals => {:client_id => CLIENT_ID}
     end
 
-Your client ID and client secret keys come from [your application's configuration page](https://github.com/settings/applications). You should **never, _ever_** store these values in
+Your client ID and client secret keys come from [your application's configuration
+page][app settings]. You should **never, _ever_** store these values in
 GitHub--or any other public place, for that matter. We recommend storing them as
 [environment variables][about env vars]--which is exactly what we've done here.
 
@@ -312,3 +313,6 @@ available as a separate project.
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test
 [oauth scopes]: /v3/oauth/#scopes
 [edit scopes post]: /changes/2013-10-04-oauth-changes-coming/
+[platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication
+[new oauth app]: https://github.com/settings/applications/new
+[app settings]: https://github.com/settings/applications

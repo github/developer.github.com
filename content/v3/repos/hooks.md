@@ -72,6 +72,9 @@ Name | Description
 `public` | Any time a Repository changes from private to public.
 `team_add` | Any time a team is added or modified on a Repository.
 `status` | Any time a Repository has a status update from the API
+`deployment` | Any time a Repository has a new deployment created from the API.
+`deployment_status` | Any time a deployment for the Repository has a status update from the API.
+
 
 ### Payloads
 

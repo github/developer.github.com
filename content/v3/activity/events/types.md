@@ -65,6 +65,43 @@ Key | Type | Description
 `ref_type`|`string` | The object that was deleted. Can be "branch" or "tag".
 `ref`|`string` | The full git ref.
 
+## DeploymentEvent
+
+Represents a [deployment](/v3/repos/deployments/#list-deployments).
+
+### Hook name
+
+`deployment`
+
+### Payload
+
+Key | Type | Description
+----|------|-------------
+`sha`        |`string` | The commit SHA for which this deployment was created.
+`name`       |`string` | Name of repository for this deployment, formatted as `:owner/:repo`.
+`payload`    |`string` | The optional extra information for this deployment.
+`description`|`string` | The optional human-readable description added to the deployment.
+
+
+## DeploymentStatusEvent
+
+Represents a [deployment status](/v3/repos/deployments/#list-deployment-statuses).
+
+### Hook name
+
+`deployment_status`
+
+### Payload
+
+Key | Type | Description
+----|------|-------------
+`sha`        |`string` | The commit SHA for the associated deployment.
+`name`       |`string` | Name of repository for the associated deployment, formatted as `:owner/:repo`.
+`state`      |`string` | The new state. Can be `pending`, `success`, `failure`, or `error`.
+`payload`    |`string` | The optional extra information for the associated deployment.
+`target_url` |`string` | The optional link added to the status.
+`description`|`string` | The optional human-readable description added to the status.
+
 
 ## DownloadEvent
 

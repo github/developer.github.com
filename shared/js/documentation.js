@@ -238,7 +238,7 @@ $(function() {
     
     // Check if there are any results. If not, show placeholder and exit
     if (searchHits.length < 1) {
-      $('<li class="placeholder">No results for <em>' + searchString + '</em></li>').appendTo("#search-results");
+      $('<li class="placeholder">No results for <em></em></li>').appendTo("#search-results").find("em").text(searchString);
       return;
     }
     

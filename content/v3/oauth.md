@@ -74,6 +74,25 @@ header:
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
 
+The `scope` attribute lists scopes attached to the token that were granted by
+the user. Normally, these scopes will be identical to what you requested.
+However, users [will be able to edit their scopes](oauth changes blog), effectively
+granting your application less access than you originally requested. Also, users
+will also be able to edit token scopes after the OAuth flow completed.
+You should be aware of this possibility and adjust your application's behavior
+accordingly.
+
+It is important to handle error cases where a user chooses to grant you
+less access than you originally requested. For example, applications can warn
+or otherwise communicate with their users that they will see reduced
+functionality or be unable to perform some actions.
+
+Also, applications can always send users back through the flow again to get
+additional permission, but don’t forget that users can always say no.
+
+Check out the [Basics of Authentication guide](basics auth guide) which
+provides tips on handling modifiable token scopes.
+
 ### 3. Use the access token to access the API
 
 The access token allows you to make requests to the API on a behalf of a user.
@@ -331,3 +350,5 @@ links that might be of help:
 * [Ruby Warden strategy](https://github.com/atmos/warden-github)
 
 [app-listing]: https://github.com/settings/applications
+[oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
+[basics auth guide]: /guides/basics-of-authentication/

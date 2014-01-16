@@ -15,6 +15,9 @@ will receive published releases only.
 
     GET /repos/:owner/:repo/releases
 
+Note: This returns a list of releases only, which doesn't include tag archives.
+To get a list of tag archives, use the [Repository Tags API][repo tags api].
+
 ### Response
 
 <%= headers 200 %>
@@ -40,7 +43,7 @@ Users with push access to the repository can create a release.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `tag_name`|`string` | **Required**. The name of the tag.
 `target_commitish`|`string` | Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`).
@@ -74,7 +77,7 @@ Users with push access to the repository can edit a release.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `tag_name`|`string` | The name of the tag.
 `target_commitish`|`string` | Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`).
@@ -138,7 +141,7 @@ This endpoint is provided by a URI template in [the release's API response](#get
 The raw file is uploaded to GitHub.  Set the content type appropriately, and the
 asset's name in a URI query parameter.
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: "application/zip". For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
 `name`|`string` | **Required**. The file name of the asset. This should be set in the URI query parameter.
@@ -181,7 +184,7 @@ Users with push access to the repository can edit a release asset.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The file name of the asset.
 `label`|`string` | An alternate short description of the asset.  Used in place of the filename.
@@ -205,3 +208,5 @@ Name | Type | Description
 ### Response
 
 <%= headers 204 %>
+
+[repo tags api]: /v3/repos/#list-tags

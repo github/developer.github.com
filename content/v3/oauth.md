@@ -76,7 +76,7 @@ header:
 
 The `scope` attribute lists scopes attached to the token that were granted by
 the user. Normally, these scopes will be identical to what you requested.
-However, users [will be able to edit their scopes][oauth changes blog], effectively
+However, users [will soon be able to edit their scopes][oauth changes blog], effectively
 granting your application less access than you originally requested. Also, users
 will also be able to edit token scopes after the OAuth flow completed.
 You should be aware of this possibility and adjust your application's behavior

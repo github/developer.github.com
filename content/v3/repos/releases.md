@@ -15,8 +15,9 @@ will receive published releases only.
 
     GET /repos/:owner/:repo/releases
 
-Note: This returns a list of releases only, which doesn't include tag archives.
-To get a list of tag archives, use the [Repository Tags API][repo tags api].
+Note: This returns a list of releases, which does not include regular 
+Git tags that have not been associated with a release.
+To get a list of Git tags, use the [Repository Tags API][repo tags api].
 
 ### Response
 

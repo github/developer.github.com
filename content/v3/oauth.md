@@ -74,6 +74,9 @@ header:
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
 
+
+#### Requested scopes vs. granted scopes
+
 The `scope` attribute lists scopes attached to the token that were granted by
 the user. Normally, these scopes will be identical to what you requested.
 However, users [will soon be able to edit their scopes][oauth changes blog], effectively

@@ -195,6 +195,27 @@ Accept: application/xml
 &lt;/OAuth&gt;
 </code></pre>
 
+<h4 id="requested-scopes-vs-granted-scopes">Requested scopes vs. granted scopes</h4>
+
+<p>The <code>scope</code> attribute lists scopes attached to the token that were granted by
+the user. Normally, these scopes will be identical to what you requested.
+However, users <a href="/changes/2013-10-04-oauth-changes-coming/">will soon be able to edit their scopes</a>, effectively
+granting your application less access than you originally requested. Also, users
+will also be able to edit token scopes after the OAuth flow completed.
+You should be aware of this possibility and adjust your application’s behavior
+accordingly.</p>
+
+<p>It is important to handle error cases where a user chooses to grant you
+less access than you originally requested. For example, applications can warn
+or otherwise communicate with their users that they will see reduced
+functionality or be unable to perform some actions.</p>
+
+<p>Also, applications can always send users back through the flow again to get
+additional permission, but don’t forget that users can always say no.</p>
+
+<p>Check out the <a href="/guides/basics-of-authentication/">Basics of Authentication guide</a> which
+provides tips on handling modifiable token scopes.</p>
+
 <h3 id="use-the-access-token-to-access-the-api">3. Use the access token to access the API</h3>
 
 <p>The access token allows you to make requests to the API on a behalf of a user.</p>

@@ -686,7 +686,8 @@ Name | Type | Description
       "login"      => "github",
       "id"         => 1,
       "url"        => "https://api.github.com/orgs/github",
-      "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
+      "avatar_url" => "https://github.com/images/error/octocat_happy.gif",
+      "description" => "A great organization"
     }
 
     FULL_ORG ||= ORG.merge({
@@ -721,6 +722,7 @@ Name | Type | Description
     TEAM ||= {
       "url" => "https://api.github.com/teams/1",
       "name" => "Owners",
+      "description" => "A great team.",
       "id" => 1
     }
 

@@ -159,6 +159,7 @@ Name | Description
 `public_repo`| Read/write access to public repos and organizations.
 `repo`| Read/write access to public and private repos and organizations.
 `repo:status`| Read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses without granting access to the code. The `repo` and `public_repo` scopes already include access to commit status for private and public repositories, respectively.
+`repo:deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, without granting access to the code. The `repo` and `public_repo` scopes already include access to deployment statuses for private and public repositories, respectively.
 `delete_repo`| Delete access to adminable repositories.
 `notifications`| Read access to a user's notifications.  `repo` is accepted too.
 `gist`| Write access to gists.
@@ -355,3 +356,4 @@ links that might be of help:
 [app-listing]: https://github.com/settings/applications
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
+[deployments]: /v3/repos/deployments

@@ -188,6 +188,9 @@ Name | Type | Description
 
 ## List contributors
 
+This provides the lists all GitHub users who have contributed to a project, 
+sorted by number of commits.
+
     GET /repos/:owner/:repo/contributors
 
 ### Parameters

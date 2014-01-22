@@ -120,14 +120,14 @@ Name | Type | Description
 ##### Example
 
 The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
-takes these fields:
+takes these fields in the `config`:
 
 Name | Type | Description 
 -----|------|--------------
 `url`|`string` | **Required**. The URL to which the payloads will be delivered.
 `content_type`|`string` | The media type used to serialize the payloads. Currently, only `json` is supported. Default: `json`
 `secret`|`string` | If defined, then HTTP requests that deliver the payloads will include an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
-`insecure_ssl`|`boolean` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Default: `0` (verification is performed)
+`insecure_ssl`|`string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values: `"0"` (verification is performed) and `"1"` (verification is not performed). Default: `"0"`.
 
 Here's how you can setup a hook that posts payloads in JSON format:
 
@@ -152,7 +152,7 @@ Here's how you can setup a hook that posts payloads in JSON format:
 
 #### Parameter
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `config`|`hash` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
 `events`|`array` | Determines what events the hook is triggered for.  This replaces the entire array of events.  Default: `["push"]`

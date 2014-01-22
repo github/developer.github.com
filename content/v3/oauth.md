@@ -155,13 +155,13 @@ Name | Description
 `(no scope)`| Public read-only access (includes public user profile info, public repo info, and gists)
 `user` |Read/write access to profile info only.  Note: this scope includes `user:email` and `user:follow`.
 `user:email`| Read access to a user's email addresses.
-`user:follow`| Access to follow or unfollow other users.
-`public_repo`| Read/write access to public repos and organizations.
-`repo`| Read/write access to public and private repos and organizations.
-`repo:status`| Read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses without granting access to the code. The `repo` and `public_repo` scopes already include access to commit status for private and public repositories, respectively.
-`repo:deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, without granting access to the code. The `repo` and `public_repo` scopes already include access to deployment statuses for private and public repositories, respectively.
-`delete_repo`| Delete access to adminable repositories.
-`notifications`| Read access to a user's notifications.  `repo` is accepted too.
+`user:follow`| Grant access to follow or unfollow other users.
+`public_repo`| Read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.
+`repo`| Read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
+`repo:status`| Read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses *without* granting access to the code.
+`repo:deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, *without* granting access to the code.
+`delete_repo`| Grant access to delete adminable repositories.
+`notifications`| Read access to a user's notifications. `repo` also provides this access.
 `gist`| Write access to gists.
 
 NOTE: Your application can request the scopes in the initial redirection. You

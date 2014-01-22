@@ -160,16 +160,17 @@ accepts.
 
 Name | Description
 -----|-----------|
-`(no scope)`| Public read-only access (includes public user profile info, public repo info, and gists)
-`user` |Read/write access to profile info only.  Note: this scope includes `user:email` and `user:follow`.
-`user:email`| Read access to a user's email addresses.
-`user:follow`| Access to follow or unfollow other users.
-`public_repo`| Read/write access to public repos and organizations.
-`repo`| Read/write access to public and private repos and organizations.
-`repo:status`| Read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses without granting access to the code. The `repo` and `public_repo` scopes already include access to commit status for private and public repositories, respectively.
-`delete_repo`| Delete access to adminable repositories.
-`notifications`| Read access to a user's notifications.  `repo` is accepted too.
-`gist`| Write access to gists.
+`(no scope)`| Grants read-only access to public information (includes public user profile info, public repository info, and gists)
+`user` | Grants read/write access to profile info only.  Note that this scope includes `user:email` and `user:follow`.
+`user:email`| Grants read access to a user's email addresses.
+`user:follow`| Grants access to follow or unfollow other users.
+`public_repo`| Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.
+`repo`| Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
+`repo:status`| Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses *without* granting access to the code.
+`repo:deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, *without* granting access to the code.
+`delete_repo`| Grants access to delete adminable repositories.
+`notifications`| Grants read access to a user's notifications. `repo` also provides this access.
+`gist`| Grants write access to gists.
 
 NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:
@@ -363,3 +364,4 @@ links that might be of help:
 [app-listing]: https://github.com/settings/applications
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
+[deployments]: /v3/repos/deployments

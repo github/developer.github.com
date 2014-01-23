@@ -125,7 +125,7 @@ takes these fields in the `config`:
 Name | Type | Description 
 -----|------|--------------
 `url`|`string` | **Required**. The URL to which the payloads will be delivered.
-`content_type`|`string` | The media type used to serialize the payloads. Currently, only `json` is supported. Default: `json`
+`content_type`|`string` | The media type used to serialize the payloads. Supported values: `json` and `form`. Default: `form`.
 `secret`|`string` | If defined, then HTTP requests that deliver the payloads will include an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
 `insecure_ssl`|`string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values: `"0"` (verification is performed) and `"1"` (verification is not performed). Default: `"0"`.
 

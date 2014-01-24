@@ -1,8 +1,8 @@
 ---
-title: Repo Hooks | GitHub API
+title: Hooks | GitHub API
 ---
 
-# Repo Hooks API
+# Hooks
 
 * TOC
 {:toc}
@@ -54,24 +54,27 @@ service can only listen for `push`, `issues`, and `pull_request` events.
 
 The available events are:
 
-* `push` - Any git push to a Repository. **This is the default event.**
-* `issues` - Any time an Issue is opened or closed.
-* `issue_comment` - Any time an Issue is commented on.
-* `commit_comment` - Any time a Commit is commented on.
-* `pull_request` - Any time a Pull Request is opened, closed, or
-  synchronized (updated due to a new push in the branch that the pull
-request is tracking).
-* `pull_request_review_comment` - Any time a Commit is commented on
-  while inside a Pull Request review (the Files Changed tab).
-* `gollum` - Any time a Wiki page is updated.
-* `watch` - Any time a User watches the Repository.
-* `release` - Any time a Release is published in the Repository.
-* `fork` - Any time a Repository is forked.
-* `member` - Any time a User is added as a collaborator to a
-  non-Organization Repository.
-* `public` - Any time a Repository changes from private to public.
-* `team_add` - Any time a team is added or modified on a Repository.
-* `status` - Any time a Repository has a status update from the API
+Name | Description
+-----|-----------|
+`push` | Any git push to a Repository. **This is the default event.**
+`issues` | Any time an Issue is opened or closed.
+`issue_comment` | Any time an Issue is commented on.
+`commit_comment` | Any time a Commit is commented on.
+`create` | Any time a Repository, Branch, or Tag is created.
+`delete` | Any time a Branch or Tag is deleted.
+`pull_request` | Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).
+`pull_request_review_comment` | Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).
+`gollum` | Any time a Wiki page is updated.
+`watch` | Any time a User watches the Repository.
+`release` | Any time a Release is published in the Repository.
+`fork` | Any time a Repository is forked.
+`member` | Any time a User is added as a collaborator to a non-Organization Repository.
+`public` | Any time a Repository changes from private to public.
+`team_add` | Any time a team is added or modified on a Repository.
+`status` | Any time a Repository has a status update from the API
+`deployment` | Any time a Repository has a new deployment created from the API.
+`deployment_status` | Any time a deployment for the Repository has a status update from the API.
+
 
 ### Payloads
 
@@ -92,7 +95,7 @@ The JSON HTTP API follows the same conventions as the rest of the
 
 #### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:hook) { |h| [h] } %>
 
 ### Get single hook
@@ -108,37 +111,28 @@ The JSON HTTP API follows the same conventions as the rest of the
 
     POST /repos/:owner/:repo/hooks
 
-#### Input
+#### Parameter
 
-`name`
-: _Required_ **string** - The name of the service that is being called.
-(See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)
+Name | Type | Description 
+-----|------|--------------
+`name`|`string` | **Required**. The name of the service that is being called. (See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)
+`config`|`hash` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
+`events`|`array` | Determines what events the hook is triggered for.  Default: `["push"]`
+`active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
-`config`
-: _Required_ **hash** - A Hash containing key/value pairs to provide
-settings for this hook.  These settings vary between the services and
-are defined in the
-[github-services](https://github.com/github/github-services) repo.
-Booleans are stored internally as "1" for true, and "0" for false.  Any
-JSON true/false values will be converted automatically.
+##### Example
 
-`events`
-: _Optional_ **array** - Determines what events the hook is triggered
-for.  Default: `["push"]`.
+The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
+takes these fields in the `config`:
 
-`active`
-: _Optional_ **boolean** - Determines whether the hook is actually
-triggered on pushes.
+Name | Type | Description 
+-----|------|--------------
+`url`|`string` | **Required**. The URL to which the payloads will be delivered.
+`content_type`|`string` | The media type used to serialize the payloads. Supported values: `json` and `form`. Default: `form`.
+`secret`|`string` | If defined, then HTTP requests that deliver the payloads will include an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`insecure_ssl`|`string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values: `"0"` (verification is performed) and `"1"` (verification is not performed). Default: `"0"`.
 
-Example:  The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
-takes these fields:
-
-* `url`
-* `content_type`
-* `secret`
-
-Here's how you can setup a hook that posts raw JSON
-(instead of the default legacy format):
+Here's how you can setup a hook that posts payloads in JSON format:
 
 <%= json \
       :name => "web",
@@ -159,32 +153,16 @@ Here's how you can setup a hook that posts raw JSON
 
     PATCH /repos/:owner/:repo/hooks/:id
 
-#### Input
+#### Parameter
 
-`config`
-: _Optional_ **hash** - A Hash containing key/value pairs to provide
-settings for this hook.  Modifying this will replace the entire config
-object.  These settings vary between the services and
-are defined in the
-[github-services](https://github.com/github/github-services) repo.
-Booleans are stored internally as "1" for true, and "0" for false.  Any
-JSON true/false values will be converted automatically.
+Name | Type | Description
+-----|------|--------------
+`config`|`hash` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
+`events`|`array` | Determines what events the hook is triggered for.  This replaces the entire array of events.  Default: `["push"]`
+`add_events`|`array` | Determines a list of events to be added to the list of events that the Hook triggers for.
+`remove_events`|`array` | Determines a list of events to be removed from the list of events that the Hook triggers for.
+`active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
-`events`
-: _Optional_ **array** - Determines what events the hook is triggered
-for.  This replaces the entire array of events.  Default: `["push"]`.
-
-`add_events`
-: _Optional_ **array** - Determines a list of events to be added to the
-list of events that the Hook triggers for.
-
-`remove_events`
-: _Optional_ **array** - Determines a list of events to be removed from the
-list of events that the Hook triggers for.
-
-`active`
-: _Optional_ **boolean** - Determines whether the hook is actually
-triggered on pushes.
 
 ##### Example
 
@@ -273,24 +251,16 @@ exists, it will be modified according to the request.
 
 #### Parameters
 
-`hub.mode`
-: _Required_ **string** - Either `subscribe` or `unsubscribe`.
+Name | Type | Description 
+-----|------|--------------
+``hub.mode``|`string` | **Required**. Either `subscribe` or `unsubscribe`.
+``hub.topic``|`string` |**Required**.  The URI of the GitHub repository to subscribe to.  The path must be in the format of `/:owner/:repo/events/:event`.
+``hub.callback``|`string` | The URI to receive the updates to the topic.
+``hub.secret``|`string` | A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the `X-Hub-Signature` header.  You can see [our Ruby implementation][ruby-secret], or [the PubSubHubbub documentation][pshb-secret] for more details.
 
-`hub.topic`
-: _Required_ **string** - The URI of the GitHub repository to subscribe
-to.  The path must be in the format of `/:owner/:repo/events/:event`.
-
-`hub.callback`
-: _Required_ **string** - The URI to receive the updates to the topic.
-
-`hub.secret`
-: _Optional_ **string** - A shared secret key that generates a SHA1 HMAC
-of the outgoing body content.  You can verify a push came from GitHub by
-comparing the raw request body with the contents of the `X-Hub-Signature`
-header.  You can see [our Ruby implementation][ruby-secret], or [the
-PubSubHubbub documentation][pshb-secret] for more details.
 
 [pubsub]: http://code.google.com/p/pubsubhubbub/
 [post-receive]: http://help.github.com/post-receive-hooks/
 [ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
+[hub-signature]: https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77
 [pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify

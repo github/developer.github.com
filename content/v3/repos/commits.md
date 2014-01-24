@@ -1,8 +1,8 @@
 ---
-title: Repo Commits | GitHub API
+title: Commits | GitHub API
 ---
 
-# Repo Commits API
+# Commits
 
 * TOC
 {:toc}
@@ -20,26 +20,22 @@ instead of constructing page links yourself.
 
 ### Parameters
 
-sha
-: _Optional_ **string** - Sha or branch to start listing commits from.
+Name | Type | Description 
+-----|------|--------------
+`sha`|`string` | SHA or branch to start listing commits from.
+`path`|`string` | Only commits containing this file path will be returned.
+`author`|`string` | GitHub login, name, or email by which to filter by commit author
+`since`|`string` | Only commits after this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+`until`|`string` | Only commits before this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
-path
-: _Optional_ **string** - Only commits containing this file path
-will be returned.
-
-author
-: _Optional_ **string** - GitHub login, name, or email by which to filter by
-commit author
-
-since
-: _Optional_ **ISO 8601 Date** - Only commits after this date will be returned
-
-until
-: _Optional_ **ISO 8601 Date** - Only commits before this date will be returned
 
 ### Response
 
-<%= headers 200 %>
+<%=
+  headers 200, :pagination => {
+    :next => 'https://api.github.com/repositories/417862/commits?top=master&last_sha=4f9890864feb48296917c2fcf3682d8dc3adf16a'
+  }
+%>
 <%= json(:commit) { |h| [h] } %>
 
 ## Get a single commit
@@ -64,3 +60,9 @@ patch formats.
 <%= json :commit_comparison %>
 
 Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
+
+### Working with large comparisons
+
+The response will include a comparison of up to 250 commits. If you are working with a larger commit range, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the range.
+
+For comparisons with extremely large diffs, you may receive an error response indicating that the diff took too long to generate. You can typically resolve this error by using a smaller commit range.

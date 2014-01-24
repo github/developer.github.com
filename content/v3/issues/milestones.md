@@ -2,7 +2,7 @@
 title: Issue Milestones | GitHub API
 ---
 
-# Milestones API
+# Milestones
 
 * TOC
 {:toc}
@@ -13,18 +13,16 @@ title: Issue Milestones | GitHub API
 
 ### Parameters
 
-state
-: `open`, `closed`, default: `open`
+Name | Type | Description 
+-----|------|--------------
+`state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
+`sort`|`string` | What to sort results by. Either `due_date` or `completeness`. Default: `due_date`
+`direction`|`string` | The direction of the sort. Either `asc` or `desc`. Default: `asc`
 
-sort
-: `due_date`, `completeness`, default: `due_date`
-
-direction
-: `asc` or `desc`, default: `asc`.
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:milestone) { |h| [h] } %>
 
 ## Get a single milestone
@@ -42,23 +40,20 @@ direction
 
 ### Input
 
-title
-: _Required_ **string**
+Name | Type | Description 
+-----|------|---------------
+`title`|`string` | **Required**. The title of the milestone.
+`state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
+`description`|`string` | A description of the milestone.
+`due_on`|`string` | The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
-state
-: _Optional_ **string** - `open` or `closed`. Default is `open`.
-
-description
-: _Optional_ **string**
-
-due\_on
-: _Optional_ **string** - ISO 8601 time.
+#### Example
 
 <%= json \
   :title => "String",
   :state => "open or closed",
   :description => "String",
-  :due_on => "Time"
+  :due_on => "2012-10-09T23:39:01Z"
 %>
 
 ### Response
@@ -74,20 +69,14 @@ due\_on
 
 ### Input
 
-number
-: _Required_ **integer**
+Name | Type | Description 
+-----|------|---------------
+`title`|`string` | The title of the milestone.
+`state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
+`description`|`string` | A description of the milestone.
+`due_on`|`string` | The milestone due date. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
-title
-: _Optional_ **string**
-
-state
-: _Optional_ **string** - `open` or `closed`. Default is `open`.
-
-description
-: _Optional_ **string**
-
-due\_on
-: _Optional_ **string** - ISO 8601 time.
+#### Example
 
 <%= json \
   :title => "String",

@@ -1,7 +1,7 @@
 ---
-title: Custom Media Types | GitHub API
+title: Media Types | GitHub API
 ---
-# GitHub Media Types
+# Media Types
 
 * TOC
 {:toc}
@@ -21,7 +21,7 @@ The most basic media types the API supports are:
     application/json
     application/vnd.github+json
 
-Neither of these specify a version, so you will always get the latest
+Neither of these specify a [version][versions], so you will always get the current default
 JSON representation of resources.  If you're building an application and
 care about the stability of the API, specify a version like so:
 
@@ -52,20 +52,17 @@ for the `X-GitHub-Media-Type` header:
 
 ## Beta, v3, and the Future
 
-Ultimately, we aim for a version-less, [Hypermedia][hypermedia]-driven API.
-Before we get there, we [expect a few changes][expected-changes].
+If you don't specify a version in the `Accept` header, you'll
+get the [beta version](/v3/versions#beta) (as shown above) by default.
 
-In the mean time, if you don't specify a version in the `Accept` header, you'll
-get the `beta` version (as shown above) by default.
+Soon, [v3](/v3/versions#v3) will become the default version. (Check out
+the [blog post](/changes/2014-01-07-upcoming-change-to-default-media-type/) for
+details.) We recommend that you start using v3 now. To get that version today,
+explicitly request the API v3 media type in the `Accept` header:
 
-Eventually, `v3` will become the default version. We recommend that you start
-using `v3` now. To get that version today, explicitly request the API v3
-media type in the `Accept` header:
+    application/vnd.github.v3+json
 
-    application/vnd.github.v3
-
-Where there's a difference between the `beta` and `v3` representations, we'll
-strive to call out those differences.
+Check out [version docs][versions] for the [full list of differences](/v3/versions#differences-from-beta-version) between beta and v3.
 
 ## Comment Body Properties
 
@@ -137,4 +134,4 @@ The Commit, Commit Comparison, and Pull Request resources support
 [git-diff]: http://git-scm.com/docs/git-diff
 [git-patch]: http://git-scm.com/docs/git-format-patch
 [hypermedia]: /v3/#hypermedia
-[expected-changes]: /v3/#deprecations
+[versions]: /v3/versions

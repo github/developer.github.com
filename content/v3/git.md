@@ -1,8 +1,8 @@
 ---
-title: Git | GitHub API
+title: Git Data | GitHub API
 ---
 
-# Git DB API
+# Git Data
 
 The Git Database API gives you access to read and write raw Git objects
 to your Git database on GitHub and to list and update your references
@@ -13,7 +13,7 @@ our API - by creating raw objects directly into the database and updating
 branch references you could technically do just about anything that Git
 can do without having Git installed.
 
-Git DB API functions will return a `409 Conflict` if the git repo for a Repository is empty
+Git DB API functions will return a `409 Conflict` if the git repository for a Repository is empty
 or unavailable.  This typically means it is being created still.  [Contact
 Support](https://github.com/contact?form[subject]=Commits API) if this response status persists.
 

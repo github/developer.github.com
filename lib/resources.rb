@@ -23,7 +23,8 @@ module GitHub
         405 => '405 Method not allowed',
         409 => '409 Conflict',
         422 => '422 Unprocessable Entity',
-        500 => '500 Server Error'
+        500 => '500 Server Error',
+        502 => '502 Bad Gateway'
       }
 
       AUTHORS = {
@@ -37,7 +38,8 @@ module GitHub
         :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f',
         :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
         :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
-        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134'
+        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134',
+        :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -67,9 +69,9 @@ module GitHub
         head.each do |key, value|
           case key
             when :pagination
-              lines << 'Link: <https://api.github.com/resource?page=2>; rel="next",'
-              lines << '      <https://api.github.com/resource?page=5>; rel="last"'
-            else lines << "#{key}: #{value}"
+              lines << link_header(value)
+            else
+              lines << "#{key}: #{value}"
           end
         end
 
@@ -77,6 +79,29 @@ module GitHub
         lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
         %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
+      end
+
+      def link_header(rels)
+        formatted_rels = rels.map { |name, url| link_header_rel(name, url) }
+
+        lines = ["Link: #{formatted_rels.shift}"]
+        while formatted_rels.any?
+          lines.last << ","
+          lines << "      #{formatted_rels.shift}"
+        end
+
+        lines
+      end
+
+      def link_header_rel(name, url)
+        %Q{<#{url}>; rel="#{name}"}
+      end
+
+      def default_pagination_rels
+        {
+          :next => "https://api.github.com/resource?page=2",
+          :last => "https://api.github.com/resource?page=5"
+        }
       end
 
       def json(key)
@@ -92,14 +117,14 @@ module GitHub
 
         hash = yield hash if block_given?
 
-        %(<pre class="highlight"><code class="language-javascript">) +
+        %(<pre><code class="language-javascript">) +
           JSON.pretty_generate(hash) + "</code></pre>"
       end
 
       def text_html(response, status, head = {})
         hs = headers(status, head.merge('Content-Type' => 'text/html'))
         res = CGI.escapeHTML(response)
-        hs + %(<pre class="highlight"><code>) + res + "</code></pre>"
+        hs + %(<pre><code>) + res + "</code></pre>"
       end
 
     end
@@ -109,7 +134,19 @@ module GitHub
       "id"           => 1,
       "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
       "gravatar_id"  => "somehexcode",
-      "url"          => "https://api.github.com/users/octocat"
+      "url"          => "https://api.github.com/users/octocat",
+      "html_url"     => "https://github.com/octocat",
+      "followers_url" => "https://api.github.com/users/octocat/followers",
+      "following_url" => "https://api.github.com/users/octocat/following{/other_user}",
+      "gists_url"    => "https://api.github.com/users/octocat/gists{/gist_id}",
+      "starred_url"  => "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+      "subscriptions_url" => "https://api.github.com/users/octocat/subscriptions",
+      "organizations_url" => "https://api.github.com/users/octocat/orgs",
+      "repos_url"    => "https://api.github.com/users/octocat/repos",
+      "events_url"   => "https://api.github.com/users/octocat/events{/privacy}",
+      "received_events_url" => "https://api.github.com/users/octocat/received_events",
+      "type"         => "User",
+      "site_admin"   => false
     }
 
     CONTRIBUTOR = USER.merge({
@@ -130,7 +167,7 @@ module GitHub
       "following"    => 0,
       "html_url"     => "https://github.com/octocat",
       "created_at"   => "2008-01-14T04:33:35Z",
-      "type"         => "User"
+      "updated_at"   => "2008-01-14T04:33:35Z"
     })
 
     PRIVATE_USER = FULL_USER.merge({
@@ -180,6 +217,7 @@ module GitHub
       "stargazers_count"  => 80,
       "watchers_count"    => 80,
       "size"              => 108,
+      "default_branch"    => 'master',
       "master_branch"     => 'master',
       "open_issues_count" => 0,
       "pushed_at"         => "2011-01-26T19:06:43Z",
@@ -493,16 +531,21 @@ module GitHub
       "files" => [FILE],
     }
 
-    PULL_COMMENT = {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
-      "id"         => 1,
-      "body"       => "Great stuff",
-      "path"       => "file1.txt",
-      "position"   => 4,
-      "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
-      "user"       => USER,
-      "created_at" => "2011-04-14T16:00:49Z",
-      "updated_at" => "2011-04-14T16:00:49Z",
+	PULL_COMMENT = {
+      "url"                => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
+      "id"                 => 1,
+      "diff_hunk"          => "@@ -16,33 +16,40 @@ public class Connection : IConnection...",
+      "path"               => "file1.txt",
+      "position"           => 1,
+      "original_position"  => 4,
+      "commit_id"          => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "original_commit_id" => "9c48853fa3dc5c1c3d6f1f1cd1f2743e72652840",
+      "user"               => USER,
+      "body"               => "Great stuff",
+      "created_at"         => "2011-04-14T16:00:49Z",
+      "updated_at"         => "2011-04-14T16:00:49Z",
+      "html_url"           => "https://github.com/octocat/Hello-World/pull/1#discussion-diff-1",
+      "pull_request_url"   => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
       "_links" => {
         "self" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1"},
@@ -1124,7 +1167,9 @@ module GitHub
         {
           "user" => USER,
           "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "created_at" => "2011-04-14T16:00:49Z"
+          "id" => 1,
+          "created_at" => "2011-04-14T16:00:49Z",
+          "updated_at" => "2011-04-14T16:00:49Z"
         }
       ]
     }
@@ -1132,11 +1177,15 @@ module GitHub
     GIST_FILE = {
       "size"     => 932,
       "filename" => "ring.erl",
-      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl"
+      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+      "type"     => "text/plain",
+      "language" => "Erlang"
     }
 
     GIST = {
       "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+      "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
+      "commits_url"  => "https://api.github.com/gists/#{SecureRandom.hex(10)}/commits",
       "id"           => "1",
       "description"  => "description of gist",
       "public"       => true,
@@ -1147,18 +1196,20 @@ module GitHub
       "html_url"     => "https://gist.github.com/1",
       "git_pull_url" => "git://gist.github.com/1.git",
       "git_push_url" => "git@gist.github.com:1.git",
-      "created_at"   => "2010-04-14T02:15:15Z"
+      "created_at"   => "2010-04-14T02:15:15Z",
+      "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
     FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
-    FULL_GIST['files'].merge('ring.erl' => GIST_FILE.merge('content' => 'contents of gist'))
+    FULL_GIST["files"] = GIST_FILE.merge({'content' => 'contents of gist'})
 
     GIST_COMMENT = {
       "id"         => 1,
       "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
-      "created_at" => "2011-04-18T23:23:56Z"
+      "created_at" => "2011-04-18T23:23:56Z",
+      "updated_at" => "2011-04-18T23:23:56Z"
     }
 
     TREE = {
@@ -1360,8 +1411,20 @@ module GitHub
         :name => "octocat/Hello-World",
         :url => "https://api.github.com/repos/octocat/Hello-World"
       },
-      :actor => USER,
-      :org => USER,
+      :actor => {
+        :id => 1,
+        :login => "octocat",
+        :gravatar_id => "somehexcode",
+        :avatar_url => "https://github.com/images/error/octocat_happy.gif",
+        :url => "https://api.github.com/users/octocat"
+      },
+      :org => {
+        :id => 1,
+        :login => "github",
+        :gravatar_id => "somehexcode",
+        :url => "https://api.github.com/orgs/github",
+        :avatar_url =>  "https://github.com/images/error/octocat_happy.gif"
+      },
       :created_at => "2011-09-06T17:26:27Z",
       :id => "12345"
     }
@@ -1451,6 +1514,30 @@ module GitHub
       },
     ]
 
+    DEPLOYMENT = {
+      "id" => 1,
+      "sha" => "topic-branch",
+      "url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "creator" => USER,
+      "payload" => JSON.dump({:environment => 'production'}),
+      "created_at" => "2012-07-20T01:19:13Z",
+      "updated_at" => "2012-07-20T01:19:13Z",
+      "description" => "Deploy request from hubot",
+      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
+    }
+
+    DEPLOYMENT_STATUS = {
+      "id" => 1,
+      "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
+      "state" => "success",
+      "creator" => USER,
+      "payload" => JSON.dump({:environment => 'production'}),
+      "target_url" => "https://gist.github.com/628b2736d379f",
+      "created_at" => "2012-07-20T01:19:13Z",
+      "updated_at" => "2012-07-20T01:19:13Z",
+      "description" => "Deploy request from hubot",
+    }
+
     STATUS = {
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
@@ -1464,7 +1551,8 @@ module GitHub
 
     META = {
       :hooks => ['127.0.0.1/32'],
-      :git => ['127.0.0.1/32']
+      :git => ['127.0.0.1/32'],
+      :verifiable_password_authentication => true
     }
 
     BLOB = {

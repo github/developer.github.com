@@ -2,7 +2,7 @@
 title: Pull Requests | GitHub API
 ---
 
-# Pull Request API
+# Pull Requests
 
 * TOC
 {:toc}
@@ -19,20 +19,13 @@ can read more about the use of media types in the API
 
 Pull Requests have these possible link relations:
 
-`self`
-: The API location of this Pull Request.
-
-`html`
-: The HTML location of this Pull Request.
-
-`comments`
-: The API location of this Pull Request's Issue comments.
-
-`review_comments`
-: The API location of this Pull Request's Review comments.
-
-`statuses`
-: The API location of this Pull Request's commit statuses, which are the statuses of its `head` branch.
+Name | Description
+-----|-----------|
+`self`| The API location of this Pull Request.
+`html`| The HTML location of this Pull Request.
+`comments`| The API location of this Pull Request's Issue comments.
+`review_comments`| The API location of this Pull Request's Review comments.
+`statuses`| The API location of this Pull Request's commit statuses, which are the statuses of its `head` branch.
 
 ## List pull requests
 
@@ -40,17 +33,12 @@ Pull Requests have these possible link relations:
 
 ### Parameters
 
-state
-: _Optional_ **string** - `open` or `closed` to filter by state. Default
-is `open`.
+Name | Type | Description 
+-----|------|--------------
+`state`|`string` | Either `open` or `closed` to filter by state. Default: `open`
+`head`|`string` | Filter pulls by head user and branch name in the format of `user:ref-name`. Example: `github:new-script-format`.
+`base`|`string` | Filter pulls by base branch name. Example: `gh-pages`.
 
-head
-: _Optional_ **string** - Filter pulls by head user and branch name in the format
-of: `user:ref-name`. Example: `github:new-script-format`.
-
-base
-: _Optional_ **string** - Filter pulls by base branch name. Example:
-`gh-pages`.
 
 ### Response
 
@@ -72,7 +60,7 @@ Each time the pull request receives new commits, GitHub creates a merge commit
 to _test_ whether the pull request can be automatically merged into the base
 branch. (This _test_ commit is not added to the base branch or the head branch.)
 The `merge_commit_sha` attribute holds the SHA of the _test_ merge commit;
-however, this attribute is [deprecated](/v3/#deprecations) and is scheduled for
+however, this attribute is [deprecated](/v3/versions/#v3-deprecations) and is scheduled for
 removal in the next version of the API. The Boolean `mergeable` attribute will
 remain to indicate whether the pull request can be automatically merged.
 
@@ -86,23 +74,18 @@ Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-
 
 ### Input
 
-title
-: _Required_ **string**
+Name | Type | Description
+-----|------|-------------
+`title`|`string` | **Required**. The title of the pull request.
+`head`|`string` | **Required**. The branch (or git ref) where your changes are implemented.
+`base`|`string` | **Required**. The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository.
+`body`|`string` | The contents of the pull request.
 
-body
-: _Optional_ **string**
-
-base
-: _Required_ **string** - The branch (or git ref) you want your changes pulled into.
-This should be an existing branch on the current repository.  You cannot
-submit a pull request to one repo that requests a merge to a base of
-another repo.
-
-head
-: _Required_ **string** - The branch (or git ref) where your changes are implemented.
 
 NOTE: `head` and `base` can be either a sha or a branch name. Typically you
 would namespace `head` with a user like this: `username:branch`.
+
+#### Example
 
 <%= json \
   :title     => "Amazing new feature",
@@ -116,9 +99,11 @@ would namespace `head` with a user like this: `username:branch`.
 You can also create a Pull Request from an existing Issue by passing an
 Issue number instead of `title` and `body`.
 
-issue
-: _Required_ **number** - Issue number in this repository to turn into a
-Pull Request.
+Name | Type | Description 
+-----|------|--------------
+`issue`|`number` | **Required**. The issue number in this repository to turn into a Pull Request.
+
+#### Example
 
 <%= json \
   :issue => "5",
@@ -137,15 +122,13 @@ Pull Request.
 
 ### Input
 
-title
-: _Optional_ **string**
+Name | Type | Description 
+-----|------|--------------
+`title`|`string` | The title of the pull request.
+`body`|`string` | The contents of the pull request.
+`state`|`string` | State of this Pull Request. Either `open` or `closed`.
 
-body
-: _Optional_ **string**
-
-state
-: _Optional_ **string** - State of this Pull Request. Valid values are
-`open` and `closed`.
+#### Example
 
 <%= json \
   :title     => "new title",
@@ -166,6 +149,8 @@ state
 
 <%= headers 200 %>
 <%= json(:commit) { |h| [h] } %>
+
+Note: The response includes a maximum of 250 commits. If you are working with a pull request larger than that, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the pull request.
 
 ## List pull requests files
 
@@ -194,8 +179,10 @@ state
 
 ### Input
 
-commit\_message
-: _Optional_ **string**  - The message that will be used for the merge commit
+Name | Type | Description 
+-----|------|-------------
+`commit_message`|`string`| The message that will be used for the merge commit
+
 
 ### Response if merge was successful
 

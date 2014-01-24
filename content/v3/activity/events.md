@@ -33,7 +33,7 @@ Fetching up to ten pages is supported, for a total of 300 events.
 
 All Events have the same response format:
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => { :next => 'https://api.github.com/resource?page=2' } %>
 <%= json(:event) { |h| [h] } %>
 
 ## List public events
@@ -45,6 +45,9 @@ All Events have the same response format:
     GET /repos/:owner/:repo/events
 
 ## List issue events for a repository
+
+Repository issue events have a different format than other events,
+as documented in the [Issue Events API](http://developer.github.com/v3/issues/events/).
 
     GET /repos/:owner/:repo/issues/events
 

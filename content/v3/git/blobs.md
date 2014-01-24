@@ -2,7 +2,7 @@
 title: Git Blobs | GitHub API
 ---
 
-# Blobs API
+# Blobs
 
 * TOC
 {:toc}

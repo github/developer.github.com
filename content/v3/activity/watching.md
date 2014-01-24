@@ -1,8 +1,8 @@
 ---
-title: Repository Watching | GitHub API
+title: Watching | GitHub API
 ---
 
-# Repository Watching API
+# Watching
 
 * TOC
 {:toc}
@@ -29,7 +29,7 @@ post](/changes/2012-9-5-watcher-api/) for more details.
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## List repositories being watched
@@ -44,7 +44,7 @@ List repositories being watched by the authenticated user.
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
 ## Get a Repository Subscription
@@ -60,15 +60,13 @@ List repositories being watched by the authenticated user.
 
     PUT /repos/:owner/:repo/subscription
 
-### Input
+### Parameters
 
-subscribed
-: **boolean** Determines if notifications should be received from this
-repository.
+Name | Type | Description 
+-----|------|--------------
+`subscribed`|`boolean`| Determines if notifications should be received from this repository.
+`ignored`|`boolean`| Determines if all notifications should be blocked from this repository.
 
-ignored
-: **boolean** Determines if all notifications should be blocked from this
-repository.
 
 ### Response
 

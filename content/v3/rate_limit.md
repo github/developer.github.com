@@ -1,8 +1,8 @@
 ---
-title: GitHub Rate Limit API | GitHub API
+title: Rate Limit | GitHub API
 ---
 
-# GitHub Rate Limit API
+# Rate Limit
 
 The overview documentation describes the [rate limit rules](/v3/#rate-limiting).
 You can check your current rate limit status at any time using the Rate Limit
@@ -43,7 +43,7 @@ all the _rest_ of the API.
 #### Deprecation Notice
 
 The `"rate"` hash (shown at the bottom of the response above) is
-[deprecated](/v3/#deprecations) and is scheduled for removal in the next
+[deprecated](/v3/versions/#v3-deprecations) and is scheduled for removal in the next
 version of the API.
 
 If you're writing new API client code (or updating your existing code), you

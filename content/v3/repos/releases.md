@@ -2,7 +2,7 @@
 title: Releases | GitHub API
 ---
 
-# Releases API
+# Releases
 
 * TOC
 {:toc}
@@ -14,6 +14,10 @@ Users with push access to the repository will receive all releases
 will receive published releases only.
 
     GET /repos/:owner/:repo/releases
+
+Note: This returns a list of releases, which does not include regular 
+Git tags that have not been associated with a release.
+To get a list of Git tags, use the [Repository Tags API][repo tags api].
 
 ### Response
 
@@ -40,29 +44,16 @@ Users with push access to the repository can create a release.
 
 ### Input
 
-tag_name
-: _Required_ **string**
+Name | Type | Description
+-----|------|--------------
+`tag_name`|`string` | **Required**. The name of the tag.
+`target_commitish`|`string` | Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`).
+`name`|`string` | The name of the release.
+`body`|`string` | Text describing the contents of the tag.
+`draft`|`boolean` | `true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`
+`prerelease`|`boolean` | `true` to identify the release as a prerelease. `false` to identify the release as a full release. Default: `false`
 
-target_commitish
-: _Optional_ **string** - Specifies the commitish value that determines where
-the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
-the repository's default branch (usually "master").  Unused if the Git tag
-already exists.
-
-name
-: _Optional_ **string**
-
-body
-: _Optional_ **string**
-
-draft
-: _Optional_ **boolean** - `true` to create a draft (unpublished)
-release, `false` to create a published one. Default is `false`.
-
-prerelease
-: _Optional_ **boolean** - `true` to identify the release as a
-prerelease. `false` to identify the release as a full release. Default is
-`false`.
+#### Example
 
 <%= json \
   :tag_name         => "v1.0.0",
@@ -87,28 +78,16 @@ Users with push access to the repository can edit a release.
 
 ### Input
 
-tag_name
-: _Optional_ **string**
+Name | Type | Description
+-----|------|--------------
+`tag_name`|`string` | The name of the tag.
+`target_commitish`|`string` | Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`).
+`name`|`string` | The name of the release.
+`body`|`string` | Text describing the contents of the tag.
+`draft`|`boolean` | `true` makes the release a draft, and `false` publishes the release.
+`prerelease`|`boolean` | `true` to identify the release as a prerelease, `false` to identify the release as a full release.
 
-target_commitish
-: _Optional_ **string** - Specifies the commitish value that determines where
-the Git tag is created from.  Can be any branch or commit SHA.  Defaults to
-the repository's default branch (usually "master").  Unused if the Git tag
-already exists.
-
-name
-: _Optional_ **string**
-
-body
-: _Optional_ **string**
-
-draft
-: _Optional_ **boolean** - `true` makes the release a draft, and `false`
-publishes the release.
-
-prerelease
-: _Optional_ **boolean** - `true` to identify the release as a
-prerelease. `false` to identify the release as a full release.
+#### Example
 
 <%= json \
   :tag_name         => "v1.0.0",
@@ -145,8 +124,12 @@ Users with push access to the repository can delete a release.
 
 ## Upload a release asset
 
-This is a unique endpoint.  The domain of the request changes from "api.github.com"
-to **"uploads.github.com"**.  The asset data is expected in its raw binary form,
+This is a unique endpoint. The domain of the request changes from "api.github.com"
+to **"uploads.github.com"**. You need to use an HTTP client which supports
+[SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this
+endpoint.
+
+The asset data is expected in its raw binary form,
 instead of JSON.  Everything else about the endpoint is the same.  Pass your
 authentication exactly the same as the rest of the API.
 
@@ -159,25 +142,17 @@ This endpoint is provided by a URI template in [the release's API response](#get
 The raw file is uploaded to GitHub.  Set the content type appropriately, and the
 asset's name in a URI query parameter.
 
-Content-Type (Header)
-: _Required_ **string** - The content type of the asset.  Example:
-"application/zip".  See this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
+Name | Type | Description
+-----|------|--------------
+`Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: "application/zip". For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
+`name`|`string` | **Required**. The file name of the asset. This should be set in the URI query parameter.
 
-name (URI query parameter)
-: _Required_ **string** - The file name of the asset.
 
 Send the raw binary content of the asset as the request body.
 
 ### Response for successful upload
 
 <%= headers 201 %>
-<%= json :release_asset %>
-
-### Response for accepted upload
-
-The upload did not complete, but we will keep trying.
-
-<%= headers 202 %>
 <%= json :release_asset %>
 
 ### Response for upstream failure
@@ -210,12 +185,12 @@ Users with push access to the repository can edit a release asset.
 
 ### Input
 
-name
-: _Required_ **string** - The file name of the asset.
+Name | Type | Description
+-----|------|--------------
+`name`|`string` | **Required**. The file name of the asset.
+`label`|`string` | An alternate short description of the asset.  Used in place of the filename.
 
-label
-: _Optional_ **string** - An alternate short description of the asset.  Used in
-place of the filename.
+#### Example
 
 <%= json \
   :name  => "foo-1.0.0-osx.zip",
@@ -234,3 +209,5 @@ place of the filename.
 ### Response
 
 <%= headers 204 %>
+
+[repo tags api]: /v3/repos/#list-tags

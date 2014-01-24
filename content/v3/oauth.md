@@ -20,7 +20,7 @@ and Client Secret. The Client Secret should not be shared.
 
 ## Web Application Flow
 
-This is a description of the OAuth flow from 3rd party web sites.
+This is a description of the OAuth2 flow from 3rd party web sites.
 
 ### 1. Redirect users to request GitHub access
 
@@ -28,21 +28,12 @@ This is a description of the OAuth flow from 3rd party web sites.
 
 ### Parameters
 
-client\_id
-: _Required_ **string** - The client ID you received from GitHub when
-you [registered](https://github.com/settings/applications/new).
-
-redirect\_uri
-: _Optional_ **string** - URL in your app where users will be sent
-after authorization. See details below about [redirect
-urls](#redirect-urls).
-
-scope
-: _Optional_ **string** - Comma separated list of [scopes](#scopes).
-
-state
-: _Optional_ **string** - An unguessable random string. It is used to protect
-against cross-site request forgery attacks.
+Name | Type | Description
+-----|------|--------------
+`client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
+`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
+`scope`|`string` | A comma separated list of [scopes](#scopes). If not provided, `scope` defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.
+`state`|`string` | An unguessable random string. It is used to protect against cross-site request forgery attacks.
 
 ### 2. GitHub redirects back to your site
 
@@ -57,19 +48,12 @@ Exchange this for an access token:
 
 ### Parameters
 
-client\_id
-: _Required_ **string** - The client ID you received from GitHub when
-you [registered](https://github.com/settings/applications/new).
-
-redirect\_uri
-: _Optional_ **string**
-
-client\_secret
-: _Required_ **string** - The client secret you received from GitHub
-when you [registered](https://github.com/settings/applications/new).
-
-code
-: _Required_ **string** - The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
+Name | Type | Description
+-----|------|---------------
+`client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
+`client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
+`code`|`string` | **Required**. The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
+`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
 
 ### Response
 
@@ -89,6 +73,28 @@ header:
       <scope>repo,gist</scope>
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
+
+
+#### Requested scopes vs. granted scopes
+
+The `scope` attribute lists scopes attached to the token that were granted by
+the user. Normally, these scopes will be identical to what you requested.
+However, users [will soon be able to edit their scopes][oauth changes blog], effectively
+granting your application less access than you originally requested. Also, users
+will also be able to edit token scopes after the OAuth flow completed.
+You should be aware of this possibility and adjust your application's behavior
+accordingly.
+
+It is important to handle error cases where a user chooses to grant you
+less access than you originally requested. For example, applications can warn
+or otherwise communicate with their users that they will see reduced
+functionality or be unable to perform some actions.
+
+Also, applications can always send users back through the flow again to get
+additional permission, but don’t forget that users can always say no.
+
+Check out the [Basics of Authentication guide][basics auth guide] which
+provides tips on handling modifiable token scopes.
 
 ### 3. Use the access token to access the API
 
@@ -143,44 +149,22 @@ accepts.
 `X-OAuth-Scopes` lists the scopes your token has authorized.
 `X-Accepted-OAuth-Scopes` lists the scopes that the action checks for.
 
-(no scope)
-: public read-only access (includes public user profile info, public
-repo info, and gists).
 
-user
-: Read/write access to profile info only.  Note: this scope includes user:email
-and user:follow.
-
-user:email
-: Read access to a user's email addresses.
-
-user:follow
-: Access to follow or unfollow other users.
-
-public\_repo
-: Read/write access to public repos and organizations.
-
-repo
-: Read/write access to public and private repos and organizations.
-
-repo:status
-: Read/write access to public and private repository commit statuses. This
-scope is only necessary to grant other users or services access to private
-repository commit statuses without granting access to the code. The `repo` and
-`public_repo` scopes already include access to commit status for private and
-public repositories respectively.
-
-delete\_repo
-: Delete access to adminable repositories.
-
-notifications
-: Read access to a user's notifications.  `repo` is accepted too.
-
-gist
-: Write access to gists.
+Name | Description
+-----|-----------|
+`(no scope)`| Public read-only access (includes public user profile info, public repo info, and gists)
+`user` |Read/write access to profile info only.  Note: this scope includes `user:email` and `user:follow`.
+`user:email`| Read access to a user's email addresses.
+`user:follow`| Access to follow or unfollow other users.
+`public_repo`| Read/write access to public repos and organizations.
+`repo`| Read/write access to public and private repos and organizations.
+`repo:status`| Read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses without granting access to the code. The `repo` and `public_repo` scopes already include access to commit status for private and public repositories, respectively.
+`delete_repo`| Delete access to adminable repositories.
+`notifications`| Read access to a user's notifications.  `repo` is accepted too.
+`gist`| Write access to gists.
 
 NOTE: Your application can request the scopes in the initial redirection. You
-can specify multiple scopes by separating them by a comma.
+can specify multiple scopes by separating them with a comma:
 
     https://github.com/login/oauth/authorize?
       client_id=...&
@@ -200,7 +184,7 @@ users have two-factor authentication enabled.)
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:oauth_access) { |h| [h] } %>
 
 ## Get a single authorization
@@ -224,24 +208,16 @@ Read more about these tokens on the [GitHub Help page](https://help.github.com/a
 
     POST /authorizations
 
-### Input
+### Parameters
 
-scopes
-: _Optional_ **array** - A list of scopes that this authorization is in.
+Name | Type | Description
+-----|------|--------------
+`scopes`|`array` | A list of scopes that this authorization is in.
+`note`|`string` | A note to remind you what the OAuth token is for.
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.
+`client_id`|`string` | The 20 character OAuth app client key for which to create the token.
+`client_secret`|`string` | The 40 character OAuth app client secret for which to create the token.
 
-note
-: _Optional_ **string** - A note to remind you what the OAuth token is for.
-
-note_url
-: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
-
-client_id
-: _Optional_ **String** - The 20 character OAuth app client key for which to create the
-token.
-
-client_secret
-: _Optional_ **String** - The 40 character OAuth app client secret for which to create the
-token.
 
 <%= json :scopes => ["public_repo"], :note => 'admin script' %>
 
@@ -261,20 +237,15 @@ exists. Otherwise, it creates one.
 
     PUT /authorizations/clients/:client_id
 
-### Input
+### Parameters
 
-client_secret
-: **String** - The 40 character OAuth app client secret associated with the
-client ID specified in the URL.
+Name | Type | Description
+-----|------|--------------
+`client_secret`|`string`| The 40 character OAuth app client secret associated with the client ID specified in the URL.
+`scopes`|`array` | A list of scopes that this authorization is in.
+`note`|`string` | A note to remind you what the OAuth token is for.
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.
 
-scopes
-: _Optional_ **array** - A list of scopes that this authorization is in.
-
-note
-: _Optional_ **string** - A note to remind you what the OAuth token is for.
-
-note_url
-: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
 
 <%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
 
@@ -294,23 +265,16 @@ note_url
 
     PATCH /authorizations/:id
 
-### Input
+### Parameters
 
-scopes
-: _Optional_ **array** - Replaces the authorization scopes with these.
+Name | Type | Description
+-----|------|--------------
+`scopes`|`array` | Replaces the authorization scopes with these.
+`add_scopes`|`array` | A list of scopes to add to this authorization.
+`remove_scopes`|`array` | A list of scopes to remove from this authorization.
+`note`|`string` | A note to remind you what the OAuth token is for.
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.
 
-add_scopes
-: _Optional_ **array** - A list of scopes to add to this authorization.
-
-remove_scopes
-: _Optional_ **array** - A list of scopes to remove from this
-authorization.
-
-note
-: _Optional_ **string** - A note to remind you what the OAuth token is for.
-
-note_url
-: _Optional_ **string** - A URL to remind you what app the OAuth token is for.
 
 You can only send one of these scope keys at a time.
 
@@ -389,3 +353,5 @@ links that might be of help:
 * [Ruby Warden strategy](https://github.com/atmos/warden-github)
 
 [app-listing]: https://github.com/settings/applications
+[oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
+[basics auth guide]: /guides/basics-of-authentication/

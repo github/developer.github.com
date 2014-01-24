@@ -2,7 +2,7 @@
 title: Notifications | GitHub API
 ---
 
-# Notifications API
+# Notifications
 
 * TOC
 {:toc}
@@ -23,8 +23,8 @@ user is involved including:
 * Commits the user authors or commits
 * Any discussion in which the user actively participates
 
-All Notification API calls require the <strong>"notifications"</strong> or
-<strong>"repo</strong> API scopes.  Doing this will give read-only access to
+All Notification API calls require the `notifications` or
+`repo` API scopes.  Doing this will give read-only access to
 some Issue/Commit content. You will still need the "repo" scope to access
 Issues and Commits from their respective endpoints.
 
@@ -49,6 +49,32 @@ of high server load, the time may increase.  Please obey the header.
     HTTP/1.1 304 Not Modified
     X-Poll-Interval: 60
 
+## Notification Reasons
+
+When retrieving responses from the Notifications API, each payload has a key titled
+`reason`. These correspond to events that trigger a notification.
+
+Here's a list of potential `reason`s for receiving a notification:
+
+Reason Name | Description
+------------|------------
+`subscribed` | The notification arrived because you're watching the repository
+`manual` | The notification arrived because you've specifically decided to watch the item (via an Issue or Pull Request) 
+`author` | The notification arrived because you've created the item 
+`comment` | The notification arrived because you've commented on the item 
+`mention` | The notification arrived because you were specifically **@mentioned** in the content 
+`team_mention` | The notification arrived because you were on a team that was mentioned (like @org/team) 
+`state_change` | The notification arrived because you changed the item state (like closing an Issue or merging a Pull Request) 
+`assign` | The notification arrived because you were assigned to the Issue 
+
+Note that the `reason` is modified on a per-thread basis, and can change, if the
+`reason` on a later notification is different. 
+
+For example, if you are the author of an issue, subsequent notifications on that 
+issue will have a `reason` of `author`. If you're then  **@mentioned** on the same 
+issue, the notifications you fetch thereafter will have a `reason` of `mention`. 
+The `reason` remains as `mention`, regardless of whether you're ever mentioned again.
+
 ## List your notifications
 
 List all notifications for the current user, grouped by repository.
@@ -57,17 +83,12 @@ List all notifications for the current user, grouped by repository.
 
 ### Parameters
 
-all
-: _Optional_ **boolean** - Also show notifications marked as read. Default: `false`.
+Name | Type | Description
+-----|------|--------------
+`all`|`boolean` | If `true`, show notifications marked as read. Default: `false`
+`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. Default: `false`
+`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
 
-participating
-: _Optional_ **boolean** - Only show notifications in which the user is
-directly participating or mentioned. Default: `false`.
-
-since
-: _Optional_ **time** filters out any notifications updated before the given
-time.  The time should be passed in as UTC in the ISO 8601 format:
-`YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
 
 ### Response
 
@@ -82,17 +103,12 @@ List all notifications for the current user.
 
 ### Parameters
 
-all
-: _Optional_ **boolean** - Also show notifications marked as read. Default: `false`.
+Name | Type | Description
+-----|------|--------------
+`all`|`boolean` | If `true`, show notifications marked as read. Default: `false`
+`participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. Default: `false`
+`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
 
-participating
-: _Optional_ **boolean** - Only show notifications in which the user is
-directly participating or mentioned. Default: `false`.
-
-since
-: _Optional_ **time** filters out any notifications updated before the given
-time.  The time should be passed in as UTC in the ISO 8601 format:
-`YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
 
 ### Response
 
@@ -106,12 +122,12 @@ on GitHub.com](https://github.com/notifications).
 
     PUT /notifications
 
-### Input
+### Parameters
 
-last_read_at
-: _Optional_ **Time** Describes the last point that notifications were checked.  Anything
-updated since this time will not be updated.  Default: Now.  Expected in ISO
-8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
+Name | Type | Description
+-----|------|--------------
+`last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
+
 
 ### Response
 
@@ -124,12 +140,12 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
     PUT /repos/:owner/:repo/notifications
 
-### Input
+### Parameters
 
-last_read_at
-: _Optional_ **Time** Describes the last point that notifications were checked.  Anything
-updated since this time will not be updated.  Default: Now.  Expected in ISO
-8601 format: `YYYY-MM-DDTHH:MM:SSZ`.  Example: "2012-10-09T23:39:01Z".
+Name | Type | Description 
+-----|------|--------------
+`last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
+
 
 ### Response
 
@@ -173,15 +189,13 @@ a thread will mute all future notifications (until you comment or get
 
     PUT /notifications/threads/:id/subscription
 
-### Input
+### Parameters
 
-subscribed
-: **boolean** Determines if notifications should be received from this
-thread.
+Name | Type | Description
+-----|------|--------------
+`subscribed`|`boolean`| Determines if notifications should be received from this thread
+`ignored`|`boolean`| Determines if all notifications should be blocked from this thread
 
-ignored
-: **boolean** Determines if all notifications should be blocked from this
-thread.
 
 ### Response
 

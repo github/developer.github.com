@@ -2,7 +2,7 @@
 title: User Followers | GitHub API
 ---
 
-# User Followers API
+# Followers
 
 * TOC
 {:toc}
@@ -19,7 +19,7 @@ List the authenticated user's followers:
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## List users followed by another user
@@ -34,7 +34,7 @@ List who the authenticated user is following:
 
 ### Response
 
-<%= headers 200, :pagination => true %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## Check if you are following a user

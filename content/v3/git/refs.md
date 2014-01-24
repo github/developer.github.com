@@ -2,7 +2,7 @@
 title: Git Refs | GitHub API
 ---
 
-# References API
+# References
 
 * TOC
 {:toc}
@@ -46,12 +46,11 @@ For a full refs listing, you'll get something that looks like:
 
 ### Parameters
 
-ref
-: _String_ of the name of the fully qualified reference (ie: `refs/heads/master`).
-  If it doesn't start with 'refs' and have at least two slashes, it will be rejected.
+Name | Type | Description 
+-----|------|--------------
+`ref`|`type`| The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.
+`sha`|`type`| The SHA1 value to set this reference to
 
-sha
-: _String_ of the SHA1 value to set this reference to
 
 ### Input
 
@@ -69,13 +68,11 @@ sha
 
 ### Parameters
 
-sha
-: _String_ of the SHA1 value to set this reference to
+Name | Type | Description 
+-----|------|--------------
+`sha`|`type`| The SHA1 value to set this reference to
+`force`|`boolean`| Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work. Default: `false`
 
-force
-: _Boolean_ indicating whether to force the update or to make sure the
-update is a fast-forward update. The default is `false`, so leaving this
-out or setting it to `false` will make sure you're not overwriting work.
 
 ### Input
 

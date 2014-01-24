@@ -2,7 +2,7 @@
 title: Organization Members | GitHub API
 ---
 
-# Org Members API
+# Members
 
 * TOC
 {:toc}

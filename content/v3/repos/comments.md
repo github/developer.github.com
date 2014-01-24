@@ -1,8 +1,8 @@
 ---
-title: Repo Comments | GitHub API
+title: Comments | GitHub API
 ---
 
-# Repo Comments API
+# Comments
 
 * TOC
 {:toc}
@@ -36,21 +36,14 @@ Comments are ordered by ascending ID.
 
 ### Input
 
-sha
-: _Required_ **string** - SHA of the commit to comment on.
+Name | Type | Description 
+-----|------|--------------
+`sha`|`string` | **Required**. The SHA of the commit to comment on.
+`body`|`string` | **Required**. The contents of the comment.
+`path`|`string` | Relative path of the file to comment on.
+`position`|`number` | Line index in the diff to comment on.
+`line`|`number` | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on.
 
-body
-: _Required_ **string**
-
-path
-: _Optional_ **string** - Relative path of the file to comment on.
-
-position
-: _Optional_ **number** - Line index in the diff to comment on.
-
-line
-: _Deprecated_ - Use **position** parameter instead.
-: _Optional_ **number** - Line number in the file to comment on. Defaults to `null`.
 
 #### Example
 
@@ -81,8 +74,10 @@ line
 
 ### Input
 
-body
-: _Required_ **string**
+Name | Type | Description 
+-----|------|--------------
+`body`|`string` | **Required**. The contents of the comment
+
 
 #### Example
 

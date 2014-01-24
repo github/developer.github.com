@@ -2,7 +2,7 @@
 title: Git Tags | GitHub API
 ---
 
-# Tags API
+# Tags
 
 * TOC
 {:toc}
@@ -33,27 +33,22 @@ would be unnecessary.
 
 ### Parameters
 
-tag
-: _String_ of the tag
+Name | Type | Description 
+-----|------|--------------
+`tag`|`string`| The tag
+`message`|`string`| The tag message
+`object`|`string`| The SHA of the git object this is tagging
+`type`|`string`| The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
+`tagger`|`hash`| A hash with information about the individual creating the tag.
 
-message
-: _String_ of the tag message
+The `tagger` hash contains the following keys:
 
-object
-: _String_ of the SHA of the git object this is tagging
+Name | Type | Description 
+-----|------|--------------
+`name`|`string`| The name of the author of the tag
+`email`|`string`| The email of the author of the tag
+`date`|`string`| When this object was tagged. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
-type
-: _String_ of the type of the object we're tagging. Normally this is a
-`commit` but it can also be a `tree` or a `blob`.
-
-tagger.name
-: _String_ of the name of the author of the tag
-
-tagger.email
-: _String_ of the email of the author of the tag
-
-tagger.date
-: _Timestamp_ of when this object was tagged
 
 ### Example Input
 

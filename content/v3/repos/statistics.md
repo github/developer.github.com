@@ -1,8 +1,8 @@
 ---
-title: Repo Statistics | GitHub API
+title: Statistics | GitHub API
 ---
 
-# Repo Statistics API
+# Statistics
 
 * TOC
 {:toc}
@@ -22,7 +22,7 @@ then submit the request again. If the job has completed, that request will recei
 Repository statistics are cached by the SHA of the repository's default branch,
 which is usually master; pushing to the default branch resets the statistics cache.
 
-## Get contributors list with additions, deletions, and commit counts
+## Get contributors list with additions, deletions, and commit counts {#contributors}
 
     GET /repos/:owner/:repo/stats/contributors
 
@@ -53,7 +53,7 @@ is a group of commits per day, starting on `Sunday`.
 <%= headers 200 %>
 <%= json(:repo_stats_commit_activity) %>
 
-## Get the number of additions and deletions per week
+## Get the number of additions and deletions per week {#code-frequency}
 
     GET /repos/:owner/:repo/stats/code_frequency
 
@@ -65,7 +65,7 @@ to a repository.
 <%= headers 200 %>
 <%= json(:repo_stats_code_frequency) %>
 
-## Get the weekly commit count for the repo owner and everyone else
+## Get the weekly commit count for the repository owner and everyone else {#participation}
 
     GET /repos/:owner/:repo/stats/participation
 
@@ -80,7 +80,7 @@ The array order is oldest week (index 0) to most recent week.
 <%= headers 200 %>
 <%= json(:repo_stats_participation) %>
 
-## Get the number of commits per hour in each day
+## Get the number of commits per hour in each day {#punch-card}
 
     GET /repos/:owner/:repo/stats/punch_card
 

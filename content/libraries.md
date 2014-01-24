@@ -59,8 +59,10 @@ many flavors</h1>
 
 ## Haskell
 
+* [github][haskell-github]
 * [Haskell GitHub API][haskell]
 
+[haskell-github]: https://github.com/fpco/GitHub
 [haskell]: https://github.com/dmnpignaud/haskell-github-api
 
 ## Java
@@ -69,16 +71,18 @@ many flavors</h1>
 is part of the [GitHub Mylyn Connector](https://github.com/eclipse/egit-github) and aims to support the entire
 GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22org.eclipse.egit.github.core%22).
 * [GitHub API for Java (org.kohsuke.github)](http://github-api.kohsuke.org/) defines an object oriented representation of the GitHub API.
+* [JCabi GitHub API](http://github.jcabi.com) is based on Java7 JSON API (JSR-353), simplifies tests with a runtime GitHub stub, and
+covers the entire API.
 
 ## JavaScript
 
-* [Node-GitHub][ajaxorg-node-github]
+* [Node-GitHub][mikedeboer-node-github]
 * [NodeJS GitHub library][octonode]
 * [gh3 client-side API v3 wrapper][gh3]
 * [GitHub.js wrapper around the GitHub API][github]
 * [Promise-Based CoffeeScript library for the browser or NodeJS][github-client]
 
-[ajaxorg-node-github]: https://github.com/ajaxorg/node-github
+[mikedeboer-node-github]: https://github.com/mikedeboer/node-github
 [octonode]: https://github.com/pksunkara/octonode
 [gh3]: https://github.com/k33g/gh3
 [github]: https://github.com/michael/github

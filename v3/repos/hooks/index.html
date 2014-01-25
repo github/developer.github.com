@@ -309,16 +309,42 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h5 id="example">Example</h5>
 
 <p>The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
-takes these fields:</p>
+takes these fields in the <code>config</code>:</p>
 
-<ul>
-  <li><code>url</code></li>
-  <li><code>content_type</code></li>
-  <li><code>secret</code></li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>url</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The URL to which the payloads will be delivered.</td>
+    </tr>
+    <tr>
+      <td><code>content_type</code></td>
+      <td><code>string</code></td>
+      <td>The media type used to serialize the payloads. Supported values: <code>json</code> and <code>form</code>. Default: <code>form</code>.</td>
+    </tr>
+    <tr>
+      <td><code>secret</code></td>
+      <td><code>string</code></td>
+      <td>If defined, then HTTP requests that deliver the payloads will include an <code>X-Hub-Signature</code> header. The value of this header is computed as the <a href="https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77">HMAC hex digest of the body, using the <code>secret</code> as the key</a>.</td>
+    </tr>
+    <tr>
+      <td><code>insecure_ssl</code></td>
+      <td><code>string</code></td>
+      <td>Determines whether the SSL certificate of the host for <code>url</code> will be verified when delivering payloads. Supported values: <code>"0"</code> (verification is performed) and <code>"1"</code> (verification is not performed). Default: <code>"0"</code>.</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Here’s how you can setup a hook that posts raw JSON
-(instead of the default legacy format):</p>
+<p>Here’s how you can setup a hook that posts payloads in JSON format:</p>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>

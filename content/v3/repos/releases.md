@@ -15,7 +15,7 @@ will receive published releases only.
 
     GET /repos/:owner/:repo/releases
 
-Note: This returns a list of releases, which does not include regular 
+Note: This returns a list of releases, which does not include regular
 Git tags that have not been associated with a release.
 To get a list of Git tags, use the [Repository Tags API][repo tags api].
 
@@ -68,7 +68,7 @@ Name | Type | Description
 
 <%= headers 201,
   :Location => 'https://api.github.com/repos/octocat/Hello-World/releases/1' %>
-<%= json(:release) %>
+<%= json(:created_release) %>
 
 ## Edit a release
 

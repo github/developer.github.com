@@ -556,22 +556,6 @@ module GitHub
       }
     }
 
-    RELEASE = {
-      "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
-      "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
-      "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
-      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
-      "id"               => 1,
-      "tag_name"         => "v1.0.0",
-      "target_commitish" => "master",
-      "name"             => "v1.0.0",
-      "body"             => "Description of the release",
-      "draft"            => false,
-      "prerelease"       => false,
-      "created_at"       => "2013-02-27T19:35:32Z",
-      "published_at"     => "2013-02-27T19:35:32Z",
-    }
-
     RELEASE_ASSET = {
       "url"            => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
       "id"             => 1,
@@ -582,8 +566,33 @@ module GitHub
       "size"           => 1024,
       "download_count" => 42,
       "created_at"     => "2013-02-27T19:35:32Z",
-      "updated_at"     => "2013-02-27T19:35:32Z"
+      "updated_at"     => "2013-02-27T19:35:32Z",
+      "uploader"       => USER
     }
+
+    RELEASE = {
+      "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
+      "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
+      "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
+      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
+      "tarball_url"      => "https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0",
+      "zipball_url"      => "https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0",
+      "id"               => 1,
+      "tag_name"         => "v1.0.0",
+      "target_commitish" => "master",
+      "name"             => "v1.0.0",
+      "body"             => "Description of the release",
+      "draft"            => false,
+      "prerelease"       => false,
+      "created_at"       => "2013-02-27T19:35:32Z",
+      "published_at"     => "2013-02-27T19:35:32Z",
+      "author"           => USER,
+      "assets"           => [RELEASE_ASSET]
+    }
+
+    CREATED_RELEASE = RELEASE.merge({
+      "assets"         => []
+    })
 
     DOWNLOAD = {
       "url"            => "https://api.github.com/repos/octocat/Hello-World/downloads/1",

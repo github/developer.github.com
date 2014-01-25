@@ -8,5 +8,5 @@ the repository is pushed to. These "WebHooks" can be used to update an external
 issue tracker, trigger CI builds, update a backup mirror, or even deploy to your 
 production server.
 
-Follow the instructions in this guide to learn all about developing, testing,
-and installing web hooks in your repositories!
+This section of the GitHub Developer Guide will instruct you on how to develop, configure,
+and test your first web hook.

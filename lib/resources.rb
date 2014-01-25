@@ -505,7 +505,7 @@ module GitHub
     }
 
     FILE = {
-      "sha"       => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "sha"       => "bbcd538c8e72b8c175046e27cc8f907076331401",
       "filename"  => "file1.txt",
       "status"    => "added",
       "additions" => 103,

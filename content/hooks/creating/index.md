@@ -1,0 +1,58 @@
+---
+title: Creating Hooks | GitHub API
+layout: hooks
+---
+
+# Creating Hooks
+
+* TOC
+{:toc}
+
+At their core, Hooks are post-receive messages that deliver a payload of 
+information about activity in a repository. Hooks can trigger across several 
+different actions. For example, you can fire a payload of information any time
+a commit is made, a repository is forked, or an issue is created.
+
+In this tutorial, our hook will be responsible for listing out how popular our 
+repository is, based on the number of Issues it receives per day.
+
+Creating a hook is a two-step process. You'll first need to set up how you want
+your hook to behave through GitHub--what events should it listen to, and what
+fields (if any) should be passed along. After that, you'll manage how to receive 
+the payload on your server.
+
+## Setting up a Hook
+
+To set up a hook on GitHub, head over to the **Settings** page of your repository,
+and click on **Webhooks & services**. After that, click on **Add webhook**.
+
+You'll be presented with a page that lists all the capabilities your webhook
+can take advantage of. We'll go through each of these below.
+
+## Payload URL
+
+This is the server endpoint that will receive the hook payload.
+
+Since we're developing locally for our tutorial, let's set it to `http://localhost:4567/payload`.
+We'll explain why in the [Configuring Your Server](/hooks/configuring/) docs. 
+
+## Payload version
+
+Webhooks can deliver various [media types](/v3/media/) as defined by the GitHub API. 
+Choose the one that best fits your needs. For this tutorial, the default format is fine.
+
+## Events
+
+Events are at the core of webhooks. These hooks fire whenever a certain action is
+taken on the repository, which your server's payload URL intercepts and acts upon.
+
+A full list of hooks, and when they execute, can be found in [the hooks API][hooks-api] reference.
+
+Since our hook is dealing with Issues in a repository, we'll click on **Issues**,
+and toggle the options there.
+
+When you're finished, click on **Add webhook**. Phew! Now that the hook is created, 
+it's time to set up our local server to test the webhook. Head on over to
+[Configuring Your Server](/hooks/configuring/) to learn how to do that.
+
+[hooks-api]: http://developer.github.com/v3/repos/hooks/#events

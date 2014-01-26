@@ -392,7 +392,10 @@ module GitHub
       "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
       "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
       "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
-      "issue_url"  => "https://github.com/octocat/Hello-World/issue/1",
+      "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1",
+      "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits",
+      "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments",
+      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1/comments",
       "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "number"     => 1,
       "state"      => "open",
@@ -421,10 +424,14 @@ module GitHub
           "https://api.github.com/repos/octocat/Hello-World/pulls/1"},
         "html" => {'href' =>
           "https://github.com/octocat/Hello-World/pull/1"},
+        "issue" => {'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/issues/1"},
         "comments" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
         "review_comments" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+        "commits" => { 'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"},
         "statuses" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"}
       },

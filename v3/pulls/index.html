@@ -94,16 +94,24 @@ can read more about the use of media types in the API
       <td>The HTML location of this Pull Request.</td>
     </tr>
     <tr>
+      <td><code>issue</code></td>
+      <td>The API location of this Pull Request’s <a href="/v3/issues/">Issue</a>.</td>
+    </tr>
+    <tr>
       <td><code>comments</code></td>
-      <td>The API location of this Pull Request’s Issue comments.</td>
+      <td>The API location of this Pull Request’s <a href="/v3/issues/comments/">Issue comments</a>.</td>
     </tr>
     <tr>
       <td><code>review_comments</code></td>
-      <td>The API location of this Pull Request’s Review comments.</td>
+      <td>The API location of this Pull Request’s <a href="/v3/pulls/comments/">Review comments</a>.</td>
+    </tr>
+    <tr>
+      <td><code>commits</code></td>
+      <td>The API location of this Pull Request’s <a href="#list-commits-on-a-pull-request">commits</a>.</td>
     </tr>
     <tr>
       <td><code>statuses</code></td>
-      <td>The API location of this Pull Request’s commit statuses, which are the statuses of its <code>head</code> branch.</td>
+      <td>The API location of this Pull Request’s <a href="/v3/repos/statuses/">commit statuses</a>, which are the statuses of its <code>head</code> branch.</td>
     </tr>
   </tbody>
 </table>
@@ -155,7 +163,10 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1"</span><span class="p">,</span>
     <span class="s2">"diff_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pulls/1.diff"</span><span class="p">,</span>
     <span class="s2">"patch_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pulls/1.patch"</span><span class="p">,</span>
-    <span class="s2">"issue_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/issue/1"</span><span class="p">,</span>
+    <span class="s2">"issue_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span><span class="p">,</span>
+    <span class="s2">"commits_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"</span><span class="p">,</span>
+    <span class="s2">"review_comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"</span><span class="p">,</span>
+    <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1/comments"</span><span class="p">,</span>
     <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
     <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
@@ -312,11 +323,17 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"html"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1"</span>
       <span class="p">},</span>
+      <span class="s2">"issue"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span>
+      <span class="p">},</span>
       <span class="s2">"comments"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1/comments"</span>
       <span class="p">},</span>
       <span class="s2">"review_comments"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"</span>
+      <span class="p">},</span>
+      <span class="s2">"commits"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"</span>
       <span class="p">},</span>
       <span class="s2">"statuses"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>
@@ -360,7 +377,10 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1"</span><span class="p">,</span>
   <span class="s2">"diff_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pulls/1.diff"</span><span class="p">,</span>
   <span class="s2">"patch_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pulls/1.patch"</span><span class="p">,</span>
-  <span class="s2">"issue_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/issue/1"</span><span class="p">,</span>
+  <span class="s2">"issue_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span><span class="p">,</span>
+  <span class="s2">"commits_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"</span><span class="p">,</span>
+  <span class="s2">"review_comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"</span><span class="p">,</span>
+  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1/comments"</span><span class="p">,</span>
   <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
   <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
@@ -517,11 +537,17 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"html"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1"</span>
     <span class="p">},</span>
+    <span class="s2">"issue"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span>
+    <span class="p">},</span>
     <span class="s2">"comments"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1/comments"</span>
     <span class="p">},</span>
     <span class="s2">"review_comments"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"</span>
+    <span class="p">},</span>
+    <span class="s2">"commits"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"</span>
     <span class="p">},</span>
     <span class="s2">"statuses"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>
@@ -686,7 +712,10 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1"</span><span class="p">,</span>
   <span class="s2">"diff_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pulls/1.diff"</span><span class="p">,</span>
   <span class="s2">"patch_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pulls/1.patch"</span><span class="p">,</span>
-  <span class="s2">"issue_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/issue/1"</span><span class="p">,</span>
+  <span class="s2">"issue_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span><span class="p">,</span>
+  <span class="s2">"commits_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"</span><span class="p">,</span>
+  <span class="s2">"review_comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"</span><span class="p">,</span>
+  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1/comments"</span><span class="p">,</span>
   <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
   <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
@@ -843,11 +872,17 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"html"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1"</span>
     <span class="p">},</span>
+    <span class="s2">"issue"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span>
+    <span class="p">},</span>
     <span class="s2">"comments"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1/comments"</span>
     <span class="p">},</span>
     <span class="s2">"review_comments"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"</span>
+    <span class="p">},</span>
+    <span class="s2">"commits"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"</span>
     <span class="p">},</span>
     <span class="s2">"statuses"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>
@@ -927,7 +962,10 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1"</span><span class="p">,</span>
   <span class="s2">"diff_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pulls/1.diff"</span><span class="p">,</span>
   <span class="s2">"patch_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pulls/1.patch"</span><span class="p">,</span>
-  <span class="s2">"issue_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/issue/1"</span><span class="p">,</span>
+  <span class="s2">"issue_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span><span class="p">,</span>
+  <span class="s2">"commits_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"</span><span class="p">,</span>
+  <span class="s2">"review_comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"</span><span class="p">,</span>
+  <span class="s2">"comments_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1/comments"</span><span class="p">,</span>
   <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
   <span class="s2">"number"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"open"</span><span class="p">,</span>
@@ -1084,11 +1122,17 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"html"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/pull/1"</span>
     <span class="p">},</span>
+    <span class="s2">"issue"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1"</span>
+    <span class="p">},</span>
     <span class="s2">"comments"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/issues/1/comments"</span>
     <span class="p">},</span>
     <span class="s2">"review_comments"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"</span>
+    <span class="p">},</span>
+    <span class="s2">"commits"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"</span>
     <span class="p">},</span>
     <span class="s2">"statuses"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span>

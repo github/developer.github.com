@@ -56,7 +56,6 @@ setup might look something like this:
       puts "I got some JSON: #{push.inspect}"
     end
 
-
 (If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra guide].)
 
 Start this server up.
@@ -79,7 +78,7 @@ were setting up a "real" web application, you might want to log some of the JSON
 output to a database.
 
 For additional information on working with webhooks for fun and profit, head on
-over to the [Testing Webhooks][/hooks/testing] guide.
+over to the [Testing Webhooks](/hooks/testing) guide.
 
 [platform samples]: https://github.com/github/platform-samples/tree/master/hooks/ruby/configuring-your-server
 [Sinatra]: http://www.sinatrarb.com/

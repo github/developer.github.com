@@ -188,6 +188,8 @@ Name | Type | Description
 
 ## List contributors
 
+List contributors to the specified repository, sorted by the number of commits per contributor in descending order.
+
     GET /repos/:owner/:repo/contributors
 
 ### Parameters

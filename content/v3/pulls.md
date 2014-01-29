@@ -23,9 +23,11 @@ Name | Description
 -----|-----------|
 `self`| The API location of this Pull Request.
 `html`| The HTML location of this Pull Request.
-`comments`| The API location of this Pull Request's Issue comments.
-`review_comments`| The API location of this Pull Request's Review comments.
-`statuses`| The API location of this Pull Request's commit statuses, which are the statuses of its `head` branch.
+`issue`| The API location of this Pull Request's [Issue](/v3/issues/).
+`comments`| The API location of this Pull Request's [Issue comments](/v3/issues/comments/).
+`review_comments`| The API location of this Pull Request's [Review comments](/v3/pulls/comments/).
+`commits`|The API location of this Pull Request's [commits](#list-commits-on-a-pull-request).
+`statuses`| The API location of this Pull Request's [commit statuses](/v3/repos/statuses/), which are the statuses of its `head` branch.
 
 ## List pull requests
 

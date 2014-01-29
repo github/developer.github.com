@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Paginated results for organization members</title>
+  <title>Audit organization members for two-factor authentication</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -40,16 +40,16 @@
 	
 	<div id="wrapper">
 		<div class="content">
-			<div class="change" id="/changes/2013-12-13-paginating-org-members/">
+			<div class="change" id="/changes/2014-01-29-audit-org-members-for-2fa/">
 <h2 class="title">
-  <a href="/changes/2013-12-13-paginating-org-members/">Paginated results for organization members</a>
+  <a href="/changes/2014-01-29-audit-org-members-for-2fa/">Audit organization members for two-factor authentication</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 13, 2013
+    January 29, 2014
     
   </li>
   <li class="who_when">
@@ -60,16 +60,16 @@
 </div>
 
 
-<p>The <a href="http://developer.github.com/v3/orgs/members/#members-list">organization members</a> and <a href="http://developer.github.com/v3/orgs/members/#public-members-list">organization public members</a> methods will soon return paginated results by default. Beginning
-today, these methods will paginate if you include <code>page</code> or <code>per_page</code> query
-parameters. Starting January 15th, 2014, these methods will <em>always</em> return paginated
-results.</p>
+<p>We’ve added a <a href="/v3/orgs/members/#audit-two-factor-auth">new filter</a> for listing members of an organization without
+<a href="https://github.com/blog/1614-two-factor-authentication">two-factor authentication</a> enabled:</p>
 
-<p>As always, be sure and follow those <a href="http://developer.github.com/v3/#pagination">Link headers</a> to get
-subsequent results. If you have any questions or run into trouble, feel free to
-<a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Paginating+org+members">get in touch</a>.</p>
+<pre class="terminal">
+$ curl -H "Authorization: token [yours]" \
+       https://api.github.com/orgs/octokit/members\?filter\=2fa_disabled
+</pre>
 
-<p>Happy paginating.</p>
+<p>The new filter is available for owners of organizations with private
+repositories. Happy auditing and <a href="https://github.com/contact?form%5Bsubject%5D=API+2FA+filter">send us your feedback or questions</a>.</p>
 
 
 </div>

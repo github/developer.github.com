@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Audit organization members for two-factor authenication
+title: Audit organization members for two-factor authentication
 created_at: 2014-01-29
 author_name: pengwynn
 ---

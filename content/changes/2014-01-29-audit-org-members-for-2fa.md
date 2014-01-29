@@ -14,7 +14,7 @@ $ curl -H "Authorization: token [yours]" \
        https://api.github.com/orgs/octokit/members\?filter\=2fa_disabled
 </pre>
 
-The new filter is availbe for owners of organizations with private
+The new filter is available for owners of organizations with private
 repositories. Happy auditing and [send us your feedback or questions][contact].
 
 [filter]: /v3/orgs/members/#audit-two-factor-auth

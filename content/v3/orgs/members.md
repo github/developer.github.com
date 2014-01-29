@@ -21,7 +21,7 @@ will be redirected to the [public members list](#public-members-list).
 
 Name    | Type    | Description
 --------|---------|--------------
-`filter`|`string` | `2fa_disabled` - List users without [two-factor authentication][2fa-blog] enabled.
+`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two factor authentication][2fa-blog] enabled. Available only for paid organizations and usable only by organization owners.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
 

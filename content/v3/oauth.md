@@ -99,8 +99,8 @@ provides tips on handling modifiable token scopes.
 #### Normalized scopes
 
 When requesting multiple scopes, the token will be saved with a normalized list
-of scopes, discarding any scopes that are already included in any other scopes
-in the list. For example, requesting `user,gist,user:email` will result in a
+of scopes, discarding those that are implicitly included by another requested
+scope. For example, requesting `user,gist,user:email` will result in a
 token with `user` and `gist` scopes only since the access granted with
 `user:email` scope [is included](#scopes) in the `user` scope.
 

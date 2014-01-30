@@ -96,6 +96,14 @@ additional permission, but don’t forget that users can always say no.
 Check out the [Basics of Authentication guide][basics auth guide] which
 provides tips on handling modifiable token scopes.
 
+#### Normalized scopes
+
+When requesting multiple scopes, the token will be saved with a normalized list
+of scopes, discarding those that are implicitly included by another requested
+scope. For example, requesting `user,gist,user:email` will result in a
+token with `user` and `gist` scopes only since the access granted with
+`user:email` scope [is included](#scopes) in the `user` scope.
+
 ### 3. Use the access token to access the API
 
 The access token allows you to make requests to the API on a behalf of a user.

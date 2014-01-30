@@ -26,6 +26,7 @@ Name | Description
 `issue`| The API location of this Pull Request's [Issue](/v3/issues/).
 `comments`| The API location of this Pull Request's [Issue comments](/v3/issues/comments/).
 `review_comments`| The API location of this Pull Request's [Review comments](/v3/pulls/comments/).
+`review_comment`| The [URL template](/v3/#hypermedia) to construct the API location for a [Review comment](/v3/pulls/comments/) in this Pull Request's repository.
 `commits`|The API location of this Pull Request's [commits](#list-commits-on-a-pull-request).
 `statuses`| The API location of this Pull Request's [commit statuses](/v3/repos/statuses/), which are the statuses of its `head` branch.
 

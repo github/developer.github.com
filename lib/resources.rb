@@ -395,6 +395,7 @@ module GitHub
       "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1",
       "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits",
       "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments",
+      "review_comment_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}",
       "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1/comments",
       "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "number"     => 1,
@@ -430,6 +431,8 @@ module GitHub
           "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
         "review_comments" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+        "review_comment" => {'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}"},
         "commits" => { 'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"},
         "statuses" => {'href' =>

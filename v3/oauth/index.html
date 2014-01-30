@@ -216,6 +216,14 @@ additional permission, but don’t forget that users can always say no.</p>
 <p>Check out the <a href="/guides/basics-of-authentication/">Basics of Authentication guide</a> which
 provides tips on handling modifiable token scopes.</p>
 
+<h4 id="normalized-scopes">Normalized scopes</h4>
+
+<p>When requesting multiple scopes, the token will be saved with a normalized list
+of scopes, discarding those that are implicitly included by another requested
+scope. For example, requesting <code>user,gist,user:email</code> will result in a
+token with <code>user</code> and <code>gist</code> scopes only since the access granted with
+<code>user:email</code> scope <a href="#scopes">is included</a> in the <code>user</code> scope.</p>
+
 <h3 id="use-the-access-token-to-access-the-api">3. Use the access token to access the API</h3>
 
 <p>The access token allows you to make requests to the API on a behalf of a user.</p>

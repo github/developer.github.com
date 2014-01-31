@@ -1,15 +1,15 @@
 ---
-title: Testing Hooks | GitHub API
-layout: hooks
+title: Testing Webhooks | GitHub API
+layout: webhooks
 ---
 
-# Testing Hooks
+# Testing Webhooks
 
 * TOC
 {:toc}
 
 Now that you've [configured your local server](/hooks/configuring/), you might
-be interested in pushing your code to the limits. To that end, GitHub's webhooks 
+be interested in pushing your code to the limits. To that end, GitHub's webhooks
 view provides some tooling for testing your deployed payloads.
 
 
@@ -35,6 +35,6 @@ It also includes details about the JSON payload.
 
 ## Response
 
-The response tab lists how your server replied once it received the payload from 
+The response tab lists how your server replied once it received the payload from
 GitHub. This includes the status code, the headers, and any additional data
 within the response body.

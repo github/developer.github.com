@@ -1,17 +1,17 @@
 ---
-title: Hooks | GitHub API
+title: Webhooks | GitHub API
 ---
 
-# Hooks
+# Webhooks
 
 * TOC
 {:toc}
 
-The Repository Hooks API allows repository admins to manage the post-receive 
-hooks for a repository.  Hooks can be managed using the [JSON HTTP API](#json-http)
+The Repository Webhooks API allows repository admins to manage the post-receive
+hooks for a repository.  Webhooks can be managed using the [JSON HTTP API](#json-http)
 and the [PubSubHubbub API](#pubsubhubbub).
 
-Each hook can be configured for a specific [service](#services) and one or 
+Each hook can be configured for a specific [service](#services) and one or
 more [events](#events), regardless of the API used to do so.
 
 ## Services
@@ -19,34 +19,34 @@ more [events](#events), regardless of the API used to do so.
 A service is basically the name used to refer to a hook that has configuration
 settings, a list of available events, and default events.
 
-> For instance, the 
+> For instance, the
 [email](https://github.com/github/github-services/blob/master/lib/services/email.rb)
-service is a built-in GitHub service that will send event [payloads](#payloads) 
-to, at most, two email addresses.  It will trigger for the `push` 
+service is a built-in GitHub service that will send event [payloads](#payloads)
+to, at most, two email addresses.  It will trigger for the `push`
 event by default and supports the `public` event type as well.
 
 A number of services have been integrated through the open source
-[github-services](https://github.com/github/github-services) project.  When 
-creating a [hook](#create-a-hook), the `:name` parameter must refer to one of 
-these services.  A generic 
-[Web](https://github.com/github/github-services/blob/master/lib/services/web.rb) 
-service is available that can configured to trigger for any of the available 
+[github-services](https://github.com/github/github-services) project.  When
+creating a [hook](#create-a-hook), the `:name` parameter must refer to one of
+these services.  A generic
+[Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
+service is available that can configured to trigger for any of the available
 [events](#events).
 
 Documentation for all available service hooks can be found in the
 [docs directory](https://github.com/github/github-services/tree/master/docs)
 of the github-services repository.  A JSON representation of their names,
-default events, supported events, and configuration options can be seen 
+default events, supported events, and configuration options can be seen
 at [api.github.com/hooks](https://api.github.com/hooks).
 
 
-## Events 
+## Events
 
-Active hooks can be configured to trigger for one or more service supported 
-events. In other words, the service must support listening for the event you 
+Active hooks can be configured to trigger for one or more service supported
+events. In other words, the service must support listening for the event you
 want to trigger.
 
-For example, the 
+For example, the
 [Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
 service listens for all events, while the
 [IRC](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
@@ -80,13 +80,13 @@ Name | Description
 
 The payloads for all hooks mirror [the payloads for the Event
 types](/v3/activity/events/types/), with the exception of [the original `push`
-event](http://help.github.com/post-receive-hooks/), 
+event](http://help.github.com/post-receive-hooks/),
 which has a more detailed payload.
 
 
 ## JSON HTTP
 
-The JSON HTTP API follows the same conventions as the rest of the 
+The JSON HTTP API follows the same conventions as the rest of the
 [GitHub API](http://developer.github.com/v3/).
 
 ### List
@@ -113,7 +113,7 @@ The JSON HTTP API follows the same conventions as the rest of the
 
 #### Parameter
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the service that is being called. (See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)
 `config`|`hash` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
@@ -125,7 +125,7 @@ Name | Type | Description
 The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
 takes these fields in the `config`:
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `url`|`string` | **Required**. The URL to which the payloads will be delivered.
 `content_type`|`string` | The media type used to serialize the payloads. Supported values: `json` and `form`. Default: `form`.
@@ -251,7 +251,7 @@ exists, it will be modified according to the request.
 
 #### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 ``hub.mode``|`string` | **Required**. Either `subscribe` or `unsubscribe`.
 ``hub.topic``|`string` |**Required**.  The URI of the GitHub repository to subscribe to.  The path must be in the format of `/:owner/:repo/events/:event`.

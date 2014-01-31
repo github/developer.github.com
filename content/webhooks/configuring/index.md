@@ -1,6 +1,6 @@
 ---
 title: Configuring Your Server | GitHub API
-layout: hooks
+layout: webhooks
 ---
 
 # Configuring Your Server
@@ -8,8 +8,8 @@ layout: hooks
 * TOC
 {:toc}
 
-Now that our hook is ready to deliver messages, we'll set up a basic Sinatra server 
-to handle incoming payloads. 
+Now that our hook is ready to deliver messages, we'll set up a basic Sinatra server
+to handle incoming payloads.
 
 Recall that we specifically set our webhook URL to `http://localhost:4567/payload`.
 Since we're developing locally, we'll need to expose our local development environment
@@ -34,7 +34,7 @@ on the command line. You should see a line that looks something like this:
 Copy that funky `*.ngrok.com` URL! We're now going to go *back* to the Payload
 URL and pasting this server into that field. It should look something like `http://7e9ea9dc.ngrok.com/payload`.
 
-By doing this, we've set ourselves up to expose our localhost at path `/payload` 
+By doing this, we've set ourselves up to expose our localhost at path `/payload`
 to the Internet.
 
 ## Writing the server
@@ -44,13 +44,13 @@ because that's where we told GitHub our webhook URL was. Since ngrok is exposing
 our local environment, we don't need to set up a real server someone online, and
 can happily test out our code locally.
 
-Let's set up a little Sinatra app to do something with the information. Our initial 
+Let's set up a little Sinatra app to do something with the information. Our initial
 setup might look something like this:
 
     #!ruby
     require 'sinatra'
     require 'json'
-    
+
     post '/payload' do
       push = JSON.parse(params[:payload])
       puts "I got some JSON: #{push.inspect}"
@@ -65,7 +65,7 @@ and create a new Issue on the repository you're testing with. Once you create
 it, switch back to your terminal. You should see something like this in your output:
 
     #!bash
-    [adding-hooks]* ~/github/platform-samples/hooks/ruby/configuring-your-server $ ruby server.rb 
+    [adding-hooks]* ~/github/platform-samples/hooks/ruby/configuring-your-server $ ruby server.rb
     == Sinatra/1.4.4 has taken the stage on 4567 for development with backup from Thin
     >> Thin web server (v1.5.1 codename Straight Razor)
     >> Maximum connections set to 1024

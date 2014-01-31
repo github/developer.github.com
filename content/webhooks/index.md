@@ -1,6 +1,6 @@
 ---
-title: Hooks | GitHub API
-layout: hooks
+title: Webhooks | GitHub API
+layout: webhooks
 ---
 
 Every GitHub repository has the option to communicate with a web server whenever

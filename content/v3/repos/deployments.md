@@ -37,7 +37,7 @@ the `description` would be the high level summary of what happened with the
 deployment.
 
 Deployments and Deployment Statuses both have associated repository events when
-they're created. This allows web hooks and 3rd party integrations to respond to
+they're created. This allows webhooks and 3rd party integrations to respond to
 deployment requests as well as update the status of a deployment as progress is
 made.
 

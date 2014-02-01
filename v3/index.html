@@ -688,7 +688,7 @@ plus the relevant HTTP Header information.</p>
 <pre class="terminal">
 $ curl https://api.github.com?callback=foo
 
-foo({
+/**/foo({
   "meta": {
     "status": 200,
     "X-RateLimit-Limit": "5000",
@@ -704,14 +704,30 @@ foo({
 })
 </pre>
 
-<p>You can write a JavaScript handler to process the callback like this:</p>
+<p>You can write a JavaScript handler to process the callback. Here’s a minimal example you can try out:</p>
 
-<pre><code class="language-javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">meta</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span>
-  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">meta</span><span class="p">)</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
-<span class="p">}</span></code></pre>
+<div class="CodeRay"><div class="code"><pre><code class="language-html"><span class="tag">&lt;html&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+<span class="tag">&lt;script</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">"</span><span class="content">text/javascript</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+<span class="inline"><span class="keyword">function</span> <span class="function">foo</span>(response) {
+  <span class="keyword">var</span> meta = response.meta
+  <span class="keyword">var</span> data = response.data
+  console.log(meta)
+  console.log(data)
+}
+
+<span class="keyword">var</span> script = document.createElement(<span class="string"><span class="delimiter">'</span><span class="content">script</span><span class="delimiter">'</span></span>);
+script.src = <span class="string"><span class="delimiter">'</span><span class="content">https://api.github.com?callback=foo</span><span class="delimiter">'</span></span>
+
+document.getElementsByTagName(<span class="string"><span class="delimiter">'</span><span class="content">head</span><span class="delimiter">'</span></span>)[<span class="integer">0</span>].appendChild(script);</span>
+<span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+
+<span class="tag">&lt;body&gt;</span>
+<span class="tag">&lt;p&gt;</span>Open up your browser's console.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+
+<span class="tag">&lt;/html&gt;</span></code></pre></div></div>
 
 <p>All of the headers are the same String value as the HTTP Headers with one
 notable exception: Link.  Link headers are pre-parsed for you and come

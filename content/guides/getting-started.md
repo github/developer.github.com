@@ -496,7 +496,7 @@ we can tell the API to give us the resource again, only if it has changed:
 $ curl -i -H 'If-None-Match: "bfd85cbf23ac0b0c8a29bee02e7117c6"' \
     https://api.github.com/users/defunkt
 
-HTTP/1.1 304 OK
+HTTP/1.1 304 Not modified
 </pre>
 
 The `304` status indicates that the resource hasn't changed since the last time

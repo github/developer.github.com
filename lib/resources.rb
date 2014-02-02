@@ -1353,8 +1353,8 @@ module GitHub
     }
 
     REF = {
-      "ref" => "refs/heads/sc/featureA",
-      "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/sc/featureA",
+      "ref" => "refs/heads/featureA",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA",
       "object" => {
         "type" => "commit",
         "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd",
@@ -1578,8 +1578,14 @@ module GitHub
     BLOB = {
       :content => "Content of the blob",
       :encoding => "utf-8",
+      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :size => 100
+    }
+
+    BLOB_AFTER_CREATE = {
+      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+      :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
     CONTENT_CRUD = {

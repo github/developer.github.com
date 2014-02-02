@@ -33,7 +33,7 @@ would be unnecessary.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `tag`|`string`| The tag
 `message`|`string`| The tag message
@@ -43,7 +43,7 @@ Name | Type | Description
 
 The `tagger` hash contains the following keys:
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string`| The name of the author of the tag
 `email`|`string`| The email of the author of the tag
@@ -63,6 +63,5 @@ Name | Type | Description
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/repos/:owner/:repo/git/tags/:sha" %>
+      :Location => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac" %>
 <%= json :gittag %>
-

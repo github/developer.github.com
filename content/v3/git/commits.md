@@ -22,7 +22,7 @@ title: Git Commits | GitHub API
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `message`|`string` | **Required**. The commit message
 `tree`|`string` | **Required**. The SHA of the tree object this commit points to
@@ -41,7 +41,7 @@ in with the authenticated user's information and the current date.
 
 Both the `author` and `commiter` parameters have the same keys:
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
 `name`|`string` | The name of the author (or commiter) of the commit
 `email`|`string` | The email of the author (or commiter) of the commit
@@ -59,6 +59,5 @@ Name | Type | Description
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/git/:owner/:repo/commit/:sha" %>
+      :Location => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd" %>
 <%= json :new_commit %>
-

@@ -35,8 +35,8 @@ read more about the use of media types in the API [here](/v3/media/).
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/git/:owner/:repo/blob/:sha" %>
-<%= json :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15" %>
+      :Location => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15" %>
+<%= json :blob_after_create %>
 
 ## Custom media types
 

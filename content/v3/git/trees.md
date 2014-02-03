@@ -36,14 +36,14 @@ a new tree out.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `tree`|`array` of `hash`es | **Required**. Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure
 `base_tree`| `string` | The SHA1 of the tree you want to update with new data. If you don't set this, the commit will be created on top of everything; however, it will only contain your change, the rest of your files will show up as deleted.
 
 The `tree` parameter takes the following keys:
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `path`|`string`| The file referenced in the tree
 `mode`|`string`| The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink
@@ -65,6 +65,5 @@ Name | Type | Description
 ### Response
 
 <%= headers 201,
-      :Location => "https://api.github.com/repos/:owner/:repo/git/trees/:sha" %>
+      :Location => "https://api.github.com/repos/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7" %>
 <%= json :tree_new %>
-

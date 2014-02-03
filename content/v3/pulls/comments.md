@@ -33,7 +33,7 @@ By default, Review Comments are ordered by ascending ID.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `sort`|`string` | Can be either `created` or `updated`. Default: `created`
 `direction`|`string` | Can be either `asc` or `desc`. Ignored without `sort` parameter.
@@ -60,7 +60,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The text of the comment
 `commit_id`|`string` | **Required**. The SHA of the commit to comment on.
@@ -82,7 +82,7 @@ Name | Type | Description
 Instead of passing `commit_id`, `path`, and `position` you can reply to
 an existing Pull Request Comment like this:
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The text of the comment
 `in_reply_to`|`number` | **Required**. The comment id to reply to.
@@ -99,7 +99,7 @@ Name | Type | Description
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/:owner/:repo/pulls/comments/1" %>
+"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1" %>
 <%= json :pull_comment %>
 
 ## Edit a comment
@@ -108,7 +108,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The text of the comment
 

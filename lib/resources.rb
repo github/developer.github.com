@@ -395,6 +395,7 @@ module GitHub
       "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1",
       "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits",
       "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments",
+      "review_comment_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}",
       "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1/comments",
       "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "number"     => 1,
@@ -430,6 +431,8 @@ module GitHub
           "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
         "review_comments" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+        "review_comment" => {'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}"},
         "commits" => { 'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"},
         "statuses" => {'href' =>
@@ -1350,8 +1353,8 @@ module GitHub
     }
 
     REF = {
-      "ref" => "refs/heads/sc/featureA",
-      "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/sc/featureA",
+      "ref" => "refs/heads/featureA",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA",
       "object" => {
         "type" => "commit",
         "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd",
@@ -1575,8 +1578,14 @@ module GitHub
     BLOB = {
       :content => "Content of the blob",
       :encoding => "utf-8",
+      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :size => 100
+    }
+
+    BLOB_AFTER_CREATE = {
+      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+      :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
     CONTENT_CRUD = {

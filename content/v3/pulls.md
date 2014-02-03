@@ -26,6 +26,7 @@ Name | Description
 `issue`| The API location of this Pull Request's [Issue](/v3/issues/).
 `comments`| The API location of this Pull Request's [Issue comments](/v3/issues/comments/).
 `review_comments`| The API location of this Pull Request's [Review comments](/v3/pulls/comments/).
+`review_comment`| The [URL template](/v3/#hypermedia) to construct the API location for a [Review comment](/v3/pulls/comments/) in this Pull Request's repository.
 `commits`|The API location of this Pull Request's [commits](#list-commits-on-a-pull-request).
 `statuses`| The API location of this Pull Request's [commit statuses](/v3/repos/statuses/), which are the statuses of its `head` branch.
 
@@ -35,7 +36,7 @@ Name | Description
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `state`|`string` | Either `open` or `closed` to filter by state. Default: `open`
 `head`|`string` | Filter pulls by head user and branch name in the format of `user:ref-name`. Example: `github:new-script-format`.
@@ -101,7 +102,7 @@ would namespace `head` with a user like this: `username:branch`.
 You can also create a Pull Request from an existing Issue by passing an
 Issue number instead of `title` and `body`.
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `issue`|`number` | **Required**. The issue number in this repository to turn into a Pull Request.
 
@@ -124,7 +125,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `title`|`string` | The title of the pull request.
 `body`|`string` | The contents of the pull request.
@@ -181,7 +182,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
 `commit_message`|`string`| The message that will be used for the merge commit
 

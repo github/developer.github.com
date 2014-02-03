@@ -493,10 +493,10 @@ The [ETag][etag] is a fingerprint of the response. If we pass that on subsequent
 we can tell the API to give us the resource again, only if it has changed:
 
 <pre class="terminal">
-$ curl -i -H 'If-None-Match: "644b5b0155e6404a9cc4bd9d8b1ae730"' \
+$ curl -i -H 'If-None-Match: "bfd85cbf23ac0b0c8a29bee02e7117c6"' \
     https://api.github.com/users/defunkt
 
-HTTP/1.1 304 OK
+HTTP/1.1 304 Not Modified
 </pre>
 
 The `304` status indicates that the resource hasn't changed since the last time

@@ -54,6 +54,12 @@ patch formats.
 ## Compare two commits
 
     GET /repos/:owner/:repo/compare/:base...:head
+    
+## Compare two forks of a repository
+
+It's possible to compare branch positions between forks
+    
+    GET /repos/:fork_owner/:repo/compare/:owner:base...:head
 
 ### Response
 

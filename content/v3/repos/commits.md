@@ -54,12 +54,10 @@ patch formats.
 ## Compare two commits
 
     GET /repos/:owner/:repo/compare/:base...:head
-    
-## Compare two forks of a repository
 
-It's possible to compare branch positions between forks
-    
-    GET /repos/:fork_owner/:repo/compare/:owner:base...:head
+Note: Both :base and :head here can be either branch names in the current :repo or branches that are in other repositories in the same network as :repo. For the latter case use the sytax user:branch is used for example:
+
+    GET /repos/:owner/:repo/compare/user1:branchname...user2:branchname
 
 ### Response
 

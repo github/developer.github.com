@@ -17,6 +17,14 @@ will be redirected to the [public members list](#public-members-list).
 
     GET /orgs/:org/members
 
+### Parameters {#audit-two-factor-auth}
+
+Name    | Type    | Description
+--------|---------|--------------
+`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for owners of organizations with private repositories.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
+
+[2fa-blog]: https://github.com/blog/1614-two-factor-authentication
+
 ### Response
 
 <%= headers 200 %>

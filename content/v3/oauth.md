@@ -166,7 +166,7 @@ Name | Description
 `user:follow`| Grants access to follow or unfollow other users.
 `public_repo`| Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.
 `repo`| Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
-`repo:deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, *without* granting access to the code.
+`repo_deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, *without* granting access to the code.
 `repo:status`| Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses *without* granting access to the code.
 `delete_repo`| Grants access to delete adminable repositories.
 `notifications`| Grants read access to a user's notifications. `repo` also provides this access.

@@ -83,6 +83,19 @@ types](/v3/activity/events/types/), with the exception of [the original `push`
 event](http://help.github.com/post-receive-hooks/),
 which has a more detailed payload.
 
+## Ping Event
+
+When you create a new webhook, we'll send you a simple `ping` event to let you
+know you've setup the webhook correctly. This event isn't stored so it isn't
+retrievable via the [Events API](/v3/activity/events/). You can trigger a `ping`
+again by calling the [ping endpoint](#).
+
+### Ping Event Payload
+
+Key | Value |
+----| ----- |
+zen | Random string of GitHub zen |
+hook_id | The ID of the webhook that triggered the ping |
 
 ## JSON HTTP
 

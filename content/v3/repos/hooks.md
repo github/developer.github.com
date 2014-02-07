@@ -97,34 +97,29 @@ Key | Value |
 zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
 
-## JSON HTTP
-
-The JSON HTTP API follows the same conventions as the rest of the
-[GitHub API](http://developer.github.com/v3/).
-
-### List
+## List hooks
 
     GET /repos/:owner/:repo/hooks
 
-#### Response
+### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:hook) { |h| [h] } %>
 
-### Get single hook
+## Get single hook
 
     GET /repos/:owner/:repo/hooks/:id
 
-#### Response
+### Response
 
 <%= headers 200 %>
 <%= json :hook %>
 
-### Create a hook
+## Create a hook
 
     POST /repos/:owner/:repo/hooks
 
-#### Parameter
+### Parameter
 
 Name | Type | Description
 -----|------|--------------
@@ -133,7 +128,7 @@ Name | Type | Description
 `events`|`array` | Determines what events the hook is triggered for.  Default: `["push"]`
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
-##### Example
+#### Example
 
 The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
 takes these fields in the `config`:
@@ -156,17 +151,17 @@ Here's how you can setup a hook that posts payloads in JSON format:
         :content_type => 'json'}
 %>
 
-#### Response
+### Response
 
 <%= headers 201,
       :Location => 'https://api.github.com/repos/user/repo/hooks/1' %>
 <%= json :hook %>
 
-### Edit a hook
+## Edit a hook
 
     PATCH /repos/:owner/:repo/hooks/:id
 
-#### Parameter
+### Parameter
 
 Name | Type | Description
 -----|------|--------------
@@ -177,19 +172,19 @@ Name | Type | Description
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
 
-##### Example
+#### Example
 
 <%= json \
       :active => true,
       :add_events => ['pull_request']
 %>
 
-#### Response
+### Response
 
 <%= headers 200 %>
 <%= json :hook %>
 
-### Test a `push` hook
+## Test a `push` hook
 
 This will trigger the hook with the latest push to the current
 repository if the hook is subscribed to `push` events. If the
@@ -200,17 +195,17 @@ with 204 but no test POST will be generated.
 
 **Note**: Previously `/repos/:owner/:repo/hooks/:id/test`
 
-#### Response
+### Response
 
 <%= headers 204 %>
 
-### Ping a hook
+## Ping a hook
 
 This will trigger a [ping event](#ping-event) to be sent to the hook.
 
     POST /repos/:owner/:repo/hooks/:id/pings
 
-#### Response
+### Response
 
 <%= headers 204 %>
 
@@ -218,7 +213,7 @@ This will trigger a [ping event](#ping-event) to be sent to the hook.
 
     DELETE /repos/:owner/:repo/hooks/:id
 
-#### Response
+### Response
 
 <%= headers 204 %>
 

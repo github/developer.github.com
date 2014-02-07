@@ -55,7 +55,7 @@ patch formats.
 
     GET /repos/:owner/:repo/compare/:base...:head
 
-Note: Both :base and :head here can be either branch names in the current :repo or branches that are in other repositories in the same network as :repo. For the latter case use the sytax user:branch is used for example:
+Note: Both `:base` and `:head` here can be either branch names in the current :repo or branches that are in other repositories in the same network as `:repo`. For the latter case use the format `user:branch` for example:
 
     GET /repos/:owner/:repo/compare/user1:branchname...user2:branchname
 

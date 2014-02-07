@@ -204,6 +204,16 @@ with 204 but no test POST will be generated.
 
 <%= headers 204 %>
 
+### Ping a hook
+
+This will trigger a [ping event](#ping-event) to be sent to the hook.
+
+    POST /repos/:owner/:repo/hooks/:id/pings
+
+#### Response
+
+<%= headers 204 %>
+
 ## Delete a hook
 
     DELETE /repos/:owner/:repo/hooks/:id

@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>GitHub API v3</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/960.css" rel="stylesheet" type="text/css" />
+  <link href="/css/uv_active4d.css" rel="stylesheet" type="text/css" />
+  <link href="/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/shared/js/documentation.js" type="text/javascript"></script>
+</head>
+
+<body class="api">
+	<div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/" class="nav-overview">Overview</a></li>
+        <li><a href="/v3/" class="nav-api">API</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+	
+	<div class="sub-nav">
+		<h2><a href="/v3/">API</a></h2>
+		
+		<ul>
+      <li><a href="/v3/" class="active">Documentation</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li><a href="/libraries/">Libraries</a></li>
+		</ul>
+	</div>
+	
+  <div id="wrapper">
+  	<div class="content">
+    	<h1 id="overview">Overview</h1>
+
+<p>This describes the resources that make up the official GitHub API v3. If you have any problems or requests please contact
+<a href="https://github.com/contact?form%5Bsubject%5D=APIv3">support</a>.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#current-version">Current Version</a></li>
+  <li><a href="#schema">Schema</a></li>
+  <li><a href="#parameters">Parameters</a></li>
+  <li><a href="#client-errors">Client Errors</a></li>
+  <li><a href="#http-redirects">HTTP Redirects</a></li>
+  <li><a href="#http-verbs">HTTP Verbs</a></li>
+  <li><a href="#authentication">Authentication</a></li>
+  <li><a href="#hypermedia">Hypermedia</a></li>
+  <li><a href="#pagination">Pagination</a></li>
+  <li><a href="#rate-limiting">Rate Limiting</a></li>
+  <li><a href="#user-agent-required">User Agent Required</a></li>
+  <li><a href="#conditional-requests">Conditional requests</a></li>
+  <li><a href="#cross-origin-resource-sharing">Cross Origin Resource Sharing</a></li>
+  <li><a href="#json-p-callbacks">JSON-P Callbacks</a></li>
+</ul>
+
+<h2 id="current-version">Current Version</h2>
+
+<p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. By default, all requests receive the beta version:</p>
+
+<pre><code>Accept: application/vnd.github.beta+json
+</code></pre>
+
+<p>Soon, v3 will become the default version. Check out the <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">blog post</a> for details.</p>
+
+<p>We encourage you to <a href="/v3/media/#beta-v3-and-the-future">request a specific version via the <code>Accept</code> header</a>.</p>
+
+<h2 id="schema">Schema</h2>
+
+<p>All API access is over HTTPS, and accessed from the <code>api.github.com</code>
+domain (or through <code>yourdomain.com/api/v3/</code> for enterprise).  All data is
+sent and received as JSON.</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com/users/octocat/orgs
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 12 Oct 2012 23:33:14 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+ETag: "a00049ba79152d03380c34652f2cb612"
+X-GitHub-Media-Type: github.beta
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4987
+X-RateLimit-Reset: 1350085394
+Content-Length: 5
+Cache-Control: max-age=0, private, must-revalidate
+X-Content-Type-Options: nosniff
+
+[]
+</pre>
+
+<p>Blank fields are included as <code>null</code> instead of being omitted.</p>
+
+<p>All timestamps are returned in ISO 8601 format:</p>
+
+<pre><code>YYYY-MM-DDTHH:MM:SSZ
+</code></pre>
+
+<h3 id="summary-representations">Summary Representations</h3>
+
+<p>When you fetch a list of resources, the response includes a <em>subset</em> of the
+attributes for that resource. This is the “summary” representation of the
+resource. (Some attributes are computationally expensive for the API to provide.
+For performance reasons, the summary representation excludes those attributes.
+To obtain those attributes, fetch the “detailed” representation.)</p>
+
+<p><strong>Example</strong>: When you get a list of repositories, you get the summary
+representation of each repository. Here, we fetch the list of repositories owned
+by the <a href="https://github.com/octokit">octokit</a> organization:</p>
+
+<pre><code>GET /orgs/octokit/repos
+</code></pre>
+
+<h3 id="detailed-representations">Detailed Representations</h3>
+
+<p>When you fetch an individual resource, the response typically includes <em>all</em>
+attributes for that resource. This is the “detailed” representation of the
+resource. (Note that authorization sometimes influences the amount of detail
+included in the representation.)</p>
+
+<p><strong>Example</strong>: When you get an individual repository, you get the detailed
+representation of the repository. Here, we fetch the
+<a href="https://github.com/octokit/octokit.rb">octokit/octokit.rb</a> repository:</p>
+
+<pre><code>GET /repos/octokit/octokit.rb
+</code></pre>
+
+<p>The documentation provides an example response for each API method. The example
+response illustrates all attributes that are returned by that method.</p>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>Many API methods take optional parameters. For GET requests, any parameters not
+specified as a segment in the path can be passed as an HTTP query string
+parameter:</p>
+
+<pre class="terminal">
+$ curl -i "https://api.github.com/repos/mojombo/jekyll/issues?state=closed"
+</pre>
+
+<p>In this example, the ‘mojombo’ and ‘jekyll’ values are provided for the <code>:owner</code>
+and <code>:repo</code> parameters in the path while <code>:state</code> is passed in the query
+string.</p>
+
+<p>For POST, PATCH, PUT, and DELETE requests, parameters not included in the URL should be encoded as JSON
+with a Content-Type of ‘application/x-www-form-urlencoded’:</p>
+
+<pre class="terminal">
+$ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/authorizations
+</pre>
+
+<h2 id="client-errors">Client Errors</h2>
+
+<p>There are three possible types of client errors on API calls that
+receive request bodies:</p>
+
+<ol>
+  <li>
+    <p>Sending invalid JSON will result in a <code>400 Bad Request</code> response.</p>
+
+    <pre><code> HTTP/1.1 400 Bad Request
+ Content-Length: 35
+
+ {"message":"Problems parsing JSON"}
+</code></pre>
+  </li>
+  <li>
+    <p>Sending the wrong type of JSON values will result in a <code>400 Bad
+Request</code> response.</p>
+
+    <pre><code> HTTP/1.1 400 Bad Request
+ Content-Length: 40
+
+ {"message":"Body should be a JSON Hash"}
+</code></pre>
+  </li>
+  <li>
+    <p>Sending invalid fields will result in a <code>422 Unprocessable Entity</code>
+response.</p>
+
+    <pre><code> HTTP/1.1 422 Unprocessable Entity
+ Content-Length: 149
+
+ {
+   "message": "Validation Failed",
+   "errors": [
+     {
+       "resource": "Issue",
+       "field": "title",
+       "code": "missing_field"
+     }
+   ]
+ }
+</code></pre>
+  </li>
+</ol>
+
+<p>All error objects have resource and field properties so that your client
+can tell what the problem is.  There’s also an error code to let you
+know what is wrong with the field.  These are the possible validation error
+codes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>missing</code></td>
+      <td>This means a resource does not exist.</td>
+    </tr>
+    <tr>
+      <td><code>missing_field</code></td>
+      <td>This means a required field on a resource has not been set.</td>
+    </tr>
+    <tr>
+      <td><code>invalid</code></td>
+      <td>This means the formatting of a field is invalid.  The documentation for that resource should be able to give you more specific information.</td>
+    </tr>
+    <tr>
+      <td><code>already_exists</code></td>
+      <td>This means another resource has the same value as this field.  This can happen in resources that must have some unique key (such as Label names).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If resources have custom validation errors, they will be documented with the resource.</p>
+
+<h2 id="http-redirects">HTTP Redirects</h2>
+
+<p>API v3 uses HTTP redirection where appropriate. Clients should assume that any
+request may result in a redirection. Receiving an HTTP redirection is <em>not</em> an
+error and clients should follow that redirect. Redirect responses will have a
+<code>Location</code> header field which contains the URI of the resource to which the
+client should repeat the requests.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>301</code></td>
+      <td>Permanent redirection. The URI you used to make the request has been superseded by the one specified in the <code>Location</code> header field. This and all future requests to this resource should be directed to the new URI.</td>
+    </tr>
+    <tr>
+      <td>
+<code>302</code>, <code>307</code>
+</td>
+      <td>Temporary redirection. The request should be repeated verbatim to the URI specified in the <code>Location</code> header field but clients should continue to use the original URI for future requests.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Other redirection status codes may be used in accordance with the HTTP 1.1 spec.</p>
+
+<h2 id="http-verbs">HTTP Verbs</h2>
+
+<p>Where possible, API v3 strives to use appropriate HTTP verbs for each
+action.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Verb</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>HEAD</code></td>
+      <td>Can be issued against any resource to get just the HTTP header info.</td>
+    </tr>
+    <tr>
+      <td><code>GET</code></td>
+      <td>Used for retrieving resources.</td>
+    </tr>
+    <tr>
+      <td><code>POST</code></td>
+      <td>Used for creating resources, or performing custom actions (such as merging a pull request).</td>
+    </tr>
+    <tr>
+      <td><code>PATCH</code></td>
+      <td>Used for updating resources with partial JSON data.  For instance, an Issue resource has <code>title</code> and <code>body</code> attributes.  A PATCH request may accept one or more of the attributes to update the resource.  PATCH is a relatively new and uncommon HTTP verb, so resource endpoints also accept <code>POST</code> requests.</td>
+    </tr>
+    <tr>
+      <td><code>PUT</code></td>
+      <td>Used for replacing resources or collections. For <code>PUT</code> requests with no <code>body</code> attribute, be sure to set the <code>Content-Length</code> header to zero.</td>
+    </tr>
+    <tr>
+      <td><code>DELETE</code></td>
+      <td>Used for deleting resources.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>There are three ways to authenticate through GitHub API v3.  Requests that
+require authentication will return <code>404 Not Found</code>, instead of
+<code>403 Forbidden</code>, in some places.  This is to prevent the accidental leakage
+of private repositories to unauthorized users.</p>
+
+<h3 id="basic-authentication">Basic Authentication</h3>
+
+<pre class="terminal">
+$ curl -u "username" https://api.github.com
+</pre>
+
+<h3 id="oauth2-token-sent-in-a-header">OAuth2 Token (sent in a header)</h3>
+
+<pre class="terminal">
+$ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com
+</pre>
+
+<h3 id="oauth2-token-sent-as-a-parameter">OAuth2 Token (sent as a parameter)</h3>
+
+<pre class="terminal">
+$ curl https://api.github.com/?access_token=OAUTH-TOKEN
+</pre>
+
+<p>Read <a href="/v3/oauth/">more about OAuth2</a>.  Note that OAuth2 tokens can be <a href="/v3/oauth/#create-a-new-authorization">acquired
+programmatically</a>, for applications that
+are not websites.</p>
+
+<h3 id="oauth2-keysecret">OAuth2 Key/Secret</h3>
+
+<pre class="terminal">
+$ curl https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy
+</pre>
+
+<p>This should only be used in server to server scenarios.  Don’t leak your
+OAuth application’s client secret to your users.  Read <a href="#unauthenticated-rate-limited-requests">more about
+unauthenticated rate limiting</a>.</p>
+
+<h3 id="failed-login-limit">Failed login limit</h3>
+
+<p>Authenticating with invalid credentials will return <code>401 Unauthorized</code>:</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com -u foo:bar
+
+HTTP/1.1 401 Unauthorized
+
+{
+  "message": "Bad credentials",
+  "documentation_url": "http://developer.github.com/v3"
+}
+</pre>
+
+<p>After detecting several requests with invalid credentials within a short period,
+the API will temporarily reject all authentication attempts for that user
+(including ones with valid credentials) with <code>403 Forbidden</code>:</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com -u valid_username:valid_password
+
+HTTP/1.1 403 Forbidden
+
+{
+  "message": "Maximum number of login attempts exceeded. Please try again later.",
+  "documentation_url": "http://developer.github.com/v3"
+}
+</pre>
+
+<h2 id="hypermedia">Hypermedia</h2>
+
+<p>All resources may have one or more <code>*_url</code> properties linking to other
+resources.  These are meant to provide explicit URLs so that proper API clients
+don’t need to construct URLs on their own.  It is highly recommended that API
+clients use these.  Doing so will make future upgrades of the API easier for
+developers.  All URLs are expected to be proper <a href="http://tools.ietf.org/html/rfc6570">RFC 6570</a> URI templates.</p>
+
+<p>You can then expand these templates using something like the <a href="https://github.com/hannesg/uri_template">uri_template</a>
+gem:</p>
+
+<pre><code>&gt;&gt; tmpl = URITemplate.new('/notifications{?since,all,participating}')
+&gt;&gt; tmpl.expand
+=&gt; "/notifications"
+
+&gt;&gt; tmpl.expand :all =&gt; 1
+=&gt; "/notifications?all=1"
+
+&gt;&gt; tmpl.expand :all =&gt; 1, :participating =&gt; 1
+=&gt; "/notifications?all=1&amp;participating=1"
+</code></pre>
+
+<h2 id="pagination">Pagination</h2>
+
+<p>Requests that return multiple items will be paginated to 30 items by
+default.  You can specify further pages with the <code>?page</code> parameter. For some
+resources, you can also set a custom page size up to 100 with the <code>?per_page</code> parameter.
+Note that for technical reasons not all endpoints respect the <code>?per_page</code> parameter,
+see <a href="http://developer.github.com/v3/activity/events/">events</a> for example.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/user/repos?page=2&amp;per_page=100
+</pre>
+
+<p>Note that page numbering is 1-based and that omitting the <code>?page</code>
+parameter will return the first page.</p>
+
+<p>For more information on pagination, check out our guide on <a href="/guides/traversing-with-pagination">Traversing with Pagination</a>.</p>
+
+<h3 id="link-header">Link Header</h3>
+
+<p>The pagination info is included in <a href="http://tools.ietf.org/html/rfc5988">the Link
+header</a>. It is important to
+follow these Link header values instead of constructing your own URLs. In some
+instances, such as in the <a href="/v3/repos/commits/">Commits
+API</a>, pagination is based on
+SHA1 and not on page number.</p>
+
+<pre><code>Link: &lt;https://api.github.com/user/repos?page=3&amp;per_page=100&gt;; rel="next",
+  &lt;https://api.github.com/user/repos?page=50&amp;per_page=100&gt;; rel="last"
+</code></pre>
+
+<p><em>Linebreak is included for readability.</em></p>
+
+<p>The possible <code>rel</code> values are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>next</code></td>
+      <td>Shows the URL of the immediate next page of results.</td>
+    </tr>
+    <tr>
+      <td><code>last</code></td>
+      <td>Shows the URL of the last page of results.</td>
+    </tr>
+    <tr>
+      <td><code>first</code></td>
+      <td>Shows the URL of the first page of results.</td>
+    </tr>
+    <tr>
+      <td><code>prev</code></td>
+      <td>Shows the URL of the immediate previous page of results.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="rate-limiting">Rate Limiting</h2>
+
+<p>For requests using Basic Authentication or OAuth, you can make up to 5,000
+requests per hour. For unauthenticated requests, the rate limit allows you to
+make up to 60 requests per hour. (The Search API has <a href="/v3/search/#rate-limit">custom rate limit
+rules</a>.)</p>
+
+<p>You can check the returned HTTP headers of any API request to see your current
+rate limit status:</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com/users/whatever
+
+HTTP/1.1 200 OK
+Date: Mon, 01 Jul 2013 17:27:06 GMT
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 56
+X-RateLimit-Reset: 1372700873
+</pre>
+
+<p>The headers tell you everything you need to know about your current rate limit status:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Header Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>X-RateLimit-Limit</code></td>
+      <td>The maximum number of requests that the consumer is permitted to make per hour.</td>
+    </tr>
+    <tr>
+      <td><code>X-RateLimit-Remaining</code></td>
+      <td>The number of requests remaining in the current rate limit window.</td>
+    </tr>
+    <tr>
+      <td><code>X-RateLimit-Reset</code></td>
+      <td>The time at which the current rate limit window resets in <a href="http://en.wikipedia.org/wiki/Unix_time">UTC epoch seconds</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you need the time in a different format, any modern programming language can get the job done. For example, if you open up the console on your web browser, you can easily get the reset time as a JavaScript Date object.</p>
+
+<pre><code class="language-javascript"><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1372700873</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1">// =&gt; Mon Jul 01 2013 13:47:53 GMT-0400 (EDT)</span></code></pre>
+
+<p>Once you go over the rate limit you will receive an error response:</p>
+
+<pre class="terminal">
+HTTP/1.1 403 Forbidden
+Date: Tue, 20 Aug 2013 14:50:41 GMT
+Status: 403 Forbidden
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1377013266
+
+{
+    "message": "API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting for details."
+}
+</pre>
+
+<p>You can also <a href="/v3/rate_limit">check your rate limit status</a> without incurring an
+API hit.
+<br></p>
+
+<h3 id="unauthenticated-rate-limited-requests">Unauthenticated rate limited requests</h3>
+
+<p>If you need to make unauthenticated calls but need to use a higher rate limit
+associated with your OAuth application, you can send over your client ID and
+secret in the query string.</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com/users/whatever?client_id=xxxxxxxxxxxxxx&amp;client_secret=yyyyyyyyyyyyyyyyyyyyy
+
+HTTP/1.1 200 OK
+Date: Mon, 01 Jul 2013 17:27:06 GMT
+Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4966
+X-RateLimit-Reset: 1372700873
+</pre>
+
+<p>This method should only be used for server-to-server calls. You should never
+share your client secret with anyone or include it in client-side browser code.</p>
+
+<h3 id="staying-within-the-rate-limit">Staying within the rate limit</h3>
+
+<p>If you are using Basic Authentication or OAuth, and you are exceeding
+your rate limit, you can likely fix the issue by caching API responses
+and using <a href="#conditional-requests">conditional requests</a>.</p>
+
+<p>If you’re using conditional requests and still exceeding your rate
+limit, please <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">contact us</a> to request a
+higher rate limit for your OAuth application.</p>
+
+<h2 id="user-agent-required">User Agent Required</h2>
+
+<p>All API requests MUST include a valid <code>User-Agent</code> header. Requests with no <code>User-Agent</code>
+header will be rejected. We request that you use your GitHub username, or the name of your
+application, for the <code>User-Agent</code> header value. This allows us to contact you if there are problems.</p>
+
+<p>Here’s an example:</p>
+
+<pre class="terminal">
+User-Agent: Awesome-Octocat-App
+</pre>
+
+<p>If you provide an invalid <code>User-Agent</code> header, you will receive a <code>403 Forbidden</code> response:</p>
+
+<pre class="terminal">
+$ curl -iH 'User-Agent: ' https://api.github.com/meta
+HTTP/1.0 403 Forbidden
+Connection: close
+Content-Type: text/html
+
+Request forbidden by administrative rules.
+Please make sure your request has a User-Agent header.
+Check https://developer.github.com for other possible causes.
+</pre>
+
+<h2 id="conditional-requests">Conditional requests</h2>
+
+<p>Most responses return an <code>ETag</code> header. Many responses also return a <code>Last-Modified</code> header. You can use the values
+of these headers to make subsequent requests to those resources using the
+<code>If-None-Match</code> and <code>If-Modified-Since</code> headers, respectively. If the resource
+has not changed, the server will return a <code>304 Not Modified</code>. Also note: making
+a conditional request and receiving a 304 response does not count against your
+<a href="#rate-limiting">Rate Limit</a>, so we encourage you to use it whenever possible.</p>
+
+<pre class="terminal">
+$ curl -i https://api.github.com/user
+HTTP/1.1 200 OK
+Cache-Control: private, max-age=60
+ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"
+Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT
+Status: 200 OK
+Vary: Accept, Authorization, Cookie
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4996
+X-RateLimit-Reset: 1372700873
+
+$ curl -i https://api.github.com/user -H 'If-None-Match: "644b5b0155e6404a9cc4bd9d8b1ae730"'
+HTTP/1.1 304 Not Modified
+Cache-Control: private, max-age=60
+ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"
+Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT
+Status: 304 Not Modified
+Vary: Accept, Authorization, Cookie
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4996
+X-RateLimit-Reset: 1372700873
+
+$ curl -i https://api.github.com/user -H "If-Modified-Since: Thu, 05 Jul 2012 15:31:30 GMT"
+HTTP/1.1 304 Not Modified
+Cache-Control: private, max-age=60
+Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT
+Status: 304 Not Modified
+Vary: Accept, Authorization, Cookie
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4996
+X-RateLimit-Reset: 1372700873
+</pre>
+
+<h2 id="cross-origin-resource-sharing">Cross Origin Resource Sharing</h2>
+
+<p>The API supports Cross Origin Resource Sharing (CORS) for AJAX requests.
+you can read the <a href="http://www.w3.org/TR/cors">CORS W3C working draft</a>, or
+<a href="http://code.google.com/p/html5security/wiki/CrossOriginRequestSecurity">this intro</a> from the
+HTML 5 Security Guide.</p>
+
+<p>Here’s a sample request sent from a browser hitting
+<code>http://example.com</code>:</p>
+
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://example.com"
+HTTP/1.1 302 Found
+</code></pre>
+
+<p>Any domain that is registered as an OAuth Application is accepted.
+Here’s a sample request for a browser hitting <a href="http://travis-ci.org/">Travis CI</a>:</p>
+
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://travis-ci.org"
+HTTP/1.1 302 Found
+Access-Control-Allow-Origin: *
+Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+Access-Control-Allow-Credentials: true
+</code></pre>
+
+<p>This is what the CORS preflight request looks like:</p>
+
+<pre><code>$ curl -i https://api.github.com -H "Origin: http://travis-ci.org" -X OPTIONS
+HTTP/1.1 204 No Content
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With
+Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE
+Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+Access-Control-Max-Age: 86400
+Access-Control-Allow-Credentials: true
+</code></pre>
+
+<h2 id="json-p-callbacks">JSON-P Callbacks</h2>
+
+<p>You can send a <code>?callback</code> parameter to any GET call to have the results
+wrapped in a JSON function.  This is typically used when browsers want
+to embed GitHub content in web pages by getting around cross domain
+issues.  The response includes the same data output as the regular API,
+plus the relevant HTTP Header information.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com?callback=foo
+
+foo({
+  "meta": {
+    "status": 200,
+    "X-RateLimit-Limit": "5000",
+    "X-RateLimit-Remaining": "4966",
+    "X-RateLimit-Reset": "1372700873",
+    "Link": [ // pagination headers and other links
+      ["https://api.github.com?page=2", {"rel": "next"}]
+    ]
+  },
+  "data": {
+    // the data
+  }
+})
+</pre>
+
+<p>You can write a JavaScript handler to process the callback like this:</p>
+
+<pre><code class="language-javascript"><span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">meta</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">meta</span>
+  <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">meta</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span></code></pre>
+
+<p>All of the headers are the same String value as the HTTP Headers with one
+notable exception: Link.  Link headers are pre-parsed for you and come
+through as an array of <code>[url, options]</code> tuples.</p>
+
+<p>A link that looks like this:</p>
+
+<pre><code>Link: &lt;url1&gt;; rel="next", &lt;url2&gt;; rel="foo"; bar="baz"
+</code></pre>
+
+<p>… will look like this in the Callback output:</p>
+
+<pre><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"Link"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">[</span>
+      <span class="s2">"url1"</span><span class="p">,</span>
+      <span class="p">{</span>
+        <span class="s2">"rel"</span><span class="o">:</span> <span class="s2">"next"</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+      <span class="s2">"url2"</span><span class="p">,</span>
+      <span class="p">{</span>
+        <span class="s2">"rel"</span><span class="o">:</span> <span class="s2">"foo"</span><span class="p">,</span>
+        <span class="s2">"bar"</span><span class="o">:</span> <span class="s2">"baz"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+
+    </div>
+
+		<div id="js-sidebar" class="sidebar-shell">
+  <div class="js-toggle-list sidebar-module expandable">
+    <ul>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/">Overview</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/media/">Media Types</a></li>
+          <li><a href="/v3/oauth/">OAuth</a></li>
+          <li><a href="/v3/auth/">Other Authentication Methods</a></li>
+          <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
+          <li><a href="/v3/versions/">Versions</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/activity/">Activity</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/activity/events/">Events</a></li>
+          <li><a href="/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/v3/activity/feeds/">Feeds</a></li>
+          <li><a href="/v3/activity/notifications/">Notifications</a></li>
+          <li><a href="/v3/activity/starring/">Starring</a></li>
+          <li><a href="/v3/activity/watching/">Watching</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/gists/">Gists</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/gists/comments/">Comments</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/git/">Git Data</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/git/blobs/">Blobs</a></li>
+          <li><a href="/v3/git/commits/">Commits</a></li>
+          <li><a href="/v3/git/refs/">References</a></li>
+          <li><a href="/v3/git/tags/">Tags</a></li>
+          <li><a href="/v3/git/trees/">Trees</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/issues/">Issues</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/issues/assignees/">Assignees</a></li>
+          <li><a href="/v3/issues/comments/">Comments</a></li>
+          <li><a href="/v3/issues/events/">Events</a></li>
+          <li><a href="/v3/issues/labels/">Labels</a></li>
+          <li><a href="/v3/issues/milestones/">Milestones</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/misc/">Miscellaneous</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/emojis/">Emojis</a></li>
+          <li><a href="/v3/gitignore/">Gitignore</a></li>
+          <li><a href="/v3/markdown/">Markdown</a></li>
+          <li><a href="/v3/meta/">Meta</a></li>
+          <li><a href="/v3/rate_limit/">Rate Limit</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/orgs/members/">Members</a></li>
+          <li><a href="/v3/orgs/teams/">Teams</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/pulls/">Pull Requests</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/repos/">Repositories</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
+          <li><a href="/v3/repos/comments/">Comments</a></li>
+          <li><a href="/v3/repos/commits/">Commits</a></li>
+          <li><a href="/v3/repos/contents/">Contents</a></li>
+          <li><a href="/v3/repos/keys/">Deploy Keys</a></li>
+          <li><a href="/v3/repos/deployments/">Deployments</a></li>
+          <li><a href="/v3/repos/downloads/">Downloads</a></li>
+          <li><a href="/v3/repos/forks/">Forks</a></li>
+          <li><a href="/v3/repos/hooks/">Hooks</a></li>
+          <li><a href="/v3/repos/merging/">Merging</a></li>
+          <li><a href="/v3/repos/releases/">Releases</a></li>
+          <li><a href="/v3/repos/statistics/">Statistics</a></li>
+          <li><a href="/v3/repos/statuses/">Statuses</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/search/">Search</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/search/#search-repositories">Repositories</a></li>
+          <li><a href="/v3/search/#search-code">Code</a></li>
+          <li><a href="/v3/search/#search-issues">Issues</a></li>
+          <li><a href="/v3/search/#search-users">Users</a></li>
+          <li><a href="/v3/search/legacy/">Legacy Search</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/users/">Users</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/users/emails/">Emails</a></li>
+          <li><a href="/v3/users/followers/">Followers</a></li>
+          <li><a href="/v3/users/keys/">Public Keys</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div> <!-- /sidebar-module -->
+  <div class="sidebar-module notice">
+    <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+  </div>
+	<div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+</div><!-- /sidebar-shell -->
+
+  </div><!-- #wrapper -->
+		
+		<div id="footer" >
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="http://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="http://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>				
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-icon mega-icon-invertocat"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+		
+		<div class="wrapper">
+			<p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+		</div>
+
+  </div><!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3769691-27']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+  </script>
+  <script src="/shared/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

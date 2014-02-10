@@ -14,7 +14,7 @@ repository contents:
 * `write:repo_hook` grants read, write, and ping access to hooks in public or private repositories.
 * `admin:repo_hook` grants read, write, ping, and delete access to hooks in public or private repositories.
 
-As always, if you have any questions or feedback [get in touch][contact].
+As always, if you have any questions or feedback, [get in touch][contact].
 
 [hooks]: http://developer.github.com/v3/repos/hooks/
 [scopes]: http://developer.github.com/v3/oauth/#scopes

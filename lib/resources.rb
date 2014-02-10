@@ -393,7 +393,11 @@ module GitHub
       "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
       "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
       "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
-      "issue_url"  => "https://github.com/octocat/Hello-World/issue/1",
+      "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1",
+      "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits",
+      "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments",
+      "review_comment_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}",
+      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1/comments",
       "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "number"     => 1,
       "state"      => "open",
@@ -422,10 +426,16 @@ module GitHub
           "https://api.github.com/repos/octocat/Hello-World/pulls/1"},
         "html" => {'href' =>
           "https://github.com/octocat/Hello-World/pull/1"},
+        "issue" => {'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/issues/1"},
         "comments" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
         "review_comments" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+        "review_comment" => {'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}"},
+        "commits" => { 'href' =>
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"},
         "statuses" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"}
       },
@@ -506,7 +516,7 @@ module GitHub
     }
 
     FILE = {
-      "sha"       => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "sha"       => "bbcd538c8e72b8c175046e27cc8f907076331401",
       "filename"  => "file1.txt",
       "status"    => "added",
       "additions" => 103,
@@ -514,6 +524,7 @@ module GitHub
       "changes"   => 124,
       "blob_url"  => "https://github.com/octocat/Hello-World/blob/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt",
       "raw_url"   => "https://github.com/octocat/Hello-World/raw/6dcb09b5b57875f334f61aebed695e2e4193db5e/file1.txt",
+      "contents_url" => "https://api.github.com/repos/octocat/Hello-World/contents/file1.txt?ref=6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "patch"     => "@@ -132,7 +132,7 @@ module Test @@ -1000,7 +1000,7 @@ module Test"
     }
 
@@ -557,22 +568,6 @@ module GitHub
       }
     }
 
-    RELEASE = {
-      "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
-      "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
-      "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
-      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
-      "id"               => 1,
-      "tag_name"         => "v1.0.0",
-      "target_commitish" => "master",
-      "name"             => "v1.0.0",
-      "body"             => "Description of the release",
-      "draft"            => false,
-      "prerelease"       => false,
-      "created_at"       => "2013-02-27T19:35:32Z",
-      "published_at"     => "2013-02-27T19:35:32Z",
-    }
-
     RELEASE_ASSET = {
       "url"            => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
       "id"             => 1,
@@ -583,8 +578,33 @@ module GitHub
       "size"           => 1024,
       "download_count" => 42,
       "created_at"     => "2013-02-27T19:35:32Z",
-      "updated_at"     => "2013-02-27T19:35:32Z"
+      "updated_at"     => "2013-02-27T19:35:32Z",
+      "uploader"       => USER
     }
+
+    RELEASE = {
+      "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
+      "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
+      "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
+      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
+      "tarball_url"      => "https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0",
+      "zipball_url"      => "https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0",
+      "id"               => 1,
+      "tag_name"         => "v1.0.0",
+      "target_commitish" => "master",
+      "name"             => "v1.0.0",
+      "body"             => "Description of the release",
+      "draft"            => false,
+      "prerelease"       => false,
+      "created_at"       => "2013-02-27T19:35:32Z",
+      "published_at"     => "2013-02-27T19:35:32Z",
+      "author"           => USER,
+      "assets"           => [RELEASE_ASSET]
+    }
+
+    CREATED_RELEASE = RELEASE.merge({
+      "assets"         => []
+    })
 
     DOWNLOAD = {
       "url"            => "https://api.github.com/repos/octocat/Hello-World/downloads/1",
@@ -1334,8 +1354,8 @@ module GitHub
     }
 
     REF = {
-      "ref" => "refs/heads/sc/featureA",
-      "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/sc/featureA",
+      "ref" => "refs/heads/featureA",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA",
       "object" => {
         "type" => "commit",
         "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd",
@@ -1559,8 +1579,14 @@ module GitHub
     BLOB = {
       :content => "Content of the blob",
       :encoding => "utf-8",
+      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :size => 100
+    }
+
+    BLOB_AFTER_CREATE = {
+      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+      :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
     CONTENT_CRUD = {

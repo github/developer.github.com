@@ -173,7 +173,7 @@ Name | Description
 `gist`| Grants write access to gists.
 `read:repo_hook`| Grants read and ping access to hooks in public or private repositories.
 `write:repo_hook`| Grants read, write, and ping access to hooks in public or private repositories.
-`admin:repo_hook`| Grants read, write, and ping, and delete access to hooks in public or private repositories.
+`admin:repo_hook`| Grants read, write, ping, and delete access to hooks in public or private repositories.
 
 NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:

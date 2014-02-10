@@ -55,6 +55,10 @@ patch formats.
 
     GET /repos/:owner/:repo/compare/:base...:head
 
+Note: Both `:base` and `:head` can be either branch names in `:repo` or branch names in other repositories in the same network as `:repo`. For the latter case, use the format `user:branch`:
+
+    GET /repos/:owner/:repo/compare/user1:branchname...user2:branchname
+
 ### Response
 
 <%= json :commit_comparison %>

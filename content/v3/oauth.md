@@ -171,6 +171,9 @@ Name | Description
 `delete_repo`| Grants access to delete adminable repositories.
 `notifications`| Grants read access to a user's notifications. `repo` also provides this access.
 `gist`| Grants write access to gists.
+`read:repo_hook`| Grants read access to hooks in public or private repositories.
+`write:repo_hook`| Grants read and write access to hooks in public or private repositories.
+`admin:repo_hook`| Grants read, write, and delete access to hooks in public or private repositories.
 
 NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:

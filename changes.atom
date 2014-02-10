@@ -2,13 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-01-29T06:00:00Z</updated>
+  <updated>2014-02-10T06:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-02-10:/changes/2014-02-10-repo-hook-scopes/</id>
+    <title type="html">New scopes for managing repository hooks</title>
+    <published>2014-02-10T06:00:00Z</published>
+    <updated>2014-02-10T06:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-02-10-repo-hook-scopes/" />
+    <content type="html">&lt;p&gt;Many third party services need to set up &lt;a href="http://developer.github.com/v3/repos/hooks/"&gt;hooks&lt;/a&gt; in order to act upon events
+in your repositories. Today, we’ve introduced three new &lt;a href="http://developer.github.com/v3/oauth/#scopes"&gt;scopes&lt;/a&gt; that provide
+more granular access to your repository hooks without allowing access to your
+repository contents:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+&lt;code&gt;read:repo_hook&lt;/code&gt; grants read access to hooks in public or private repositories.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;write:repo_hook&lt;/code&gt; grants read and write access to hooks in public or private repositories.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;admin:repo_hook&lt;/code&gt; grants read, write, and delete access to hooks in public or private repositories.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-01-29:/changes/2014-01-29-audit-org-members-for-2fa/</id>
     <title type="html">Audit organization members for two-factor authentication</title>
@@ -1156,44 +1184,6 @@ can be potentially dangerous.&lt;/p&gt;
 &lt;p&gt;We also added a read-only endpoint to get a user’s public SSH keys.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;GET https://api.github.com/users/technoweenie/keys
-&lt;/code&gt;&lt;/pre&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2012-12-10:/changes/2012-12-10-Diff-and-patch-media-types/</id>
-    <title type="html">Diff and patch media types</title>
-    <published>2012-12-10T06:00:00Z</published>
-    <updated>2012-12-10T06:00:00Z</updated>
-    <author>
-      <name>pengwynn</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2012-12-10-Diff-and-patch-media-types/" />
-    <content type="html">&lt;p&gt;Starting today, you can get &lt;code&gt;.diff&lt;/code&gt; and &lt;code&gt;.patch&lt;/code&gt; content directly from the API for the following resources:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="/v3/repos/commits/#get-a-single-commit"&gt;Commits&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="/v3/repos/commits/#compare-two-commits"&gt;Commit comparisons&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="/v3/pulls/#get-a-single-pull-request"&gt;Pull request&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Simply use the same resource URL and send either &lt;code&gt;application/vnd.github.diff&lt;/code&gt; or &lt;code&gt;application/vnd.github.patch&lt;/code&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl -H "Accept: application/vnd.github.diff" https://api.github.com/repos/pengwynn/dotfiles/commits/aee60a4cd56fb4c6a50e60f17096fc40c0d4d72c
-
-diff --git a/tmux/tmux.conf.symlink b/tmux/tmux.conf.symlink
-index 1f599cb..abaf625 100755
---- a/tmux/tmux.conf.symlink
-+++ b/tmux/tmux.conf.symlink
-@@ -111,6 +111,7 @@ set-option -g base-index 1
- ## enable mouse
- set-option -g mouse-select-pane on
- set-option -g mouse-select-window on
-+set-option -g mouse-resize-pane on
- set-window-option -g mode-keys vi
- set-window-option -g mode-mouse on
- # set-window-option -g monitor-activity off
 &lt;/code&gt;&lt;/pre&gt;
 
 </content>

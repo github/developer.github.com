@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Change to Default Media Type</title>
+  <title>New scopes for managing repository hooks</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -40,76 +40,41 @@
 	
 	<div id="wrapper">
 		<div class="content">
-			<div class="change" id="/changes/2014-01-07-upcoming-change-to-default-media-type/">
+			<div class="change" id="/changes/2014-02-10-repo-hook-scopes/">
 <h2 class="title">
-  <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">Upcoming Change to Default Media Type</a>
+  <a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    January 7, 2014
+    February 10, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/592e1e6f041f9a4ec51846fd82013aea?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
-      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" />
+      <a href="https://github.com/pengwynn">pengwynn</a>
   </li>
 </ul>
 </div>
 
 
-<p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you’ll find tips below to help you smoothly navigate this change.</p>
+<p>Many third party services need to set up <a href="http://developer.github.com/v3/repos/hooks/">hooks</a> in order to act upon events
+in your repositories. Today, we’ve introduced three new <a href="http://developer.github.com/v3/oauth/#scopes">scopes</a> that provide
+more granular access to your repository hooks without allowing access to your
+repository contents:</p>
 
-<h2 id="whats-changing">What’s changing?</h2>
+<ul>
+  <li>
+<code>read:repo_hook</code> grants read access to hooks in public or private repositories.</li>
+  <li>
+<code>write:repo_hook</code> grants read and write access to hooks in public or private repositories.</li>
+  <li>
+<code>admin:repo_hook</code> grants read, write, and delete access to hooks in public or private repositories.</li>
+</ul>
 
-<h3 id="a-new-default-version">A new default version</h3>
-
-<p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. Today, requests receive the beta version by default. On April 15<a href="#cutover-test">*</a>, requests will begin receiving the v3 version by default.</p>
-
-<p>For the most part, beta and v3 are remarkably similar. There are <a href="/v3/versions/#differences-from-beta-version">just a few differences</a> to keep in mind.</p>
-
-<h3 id="a-new-default-media-type">A new default media type</h3>
-
-<p>The version is one part of the <a href="/v3/media">media type</a>. By default, the API provides the beta media type:</p>
-
-<pre><code>application/vnd.github.beta+json
-</code></pre>
-
-<p>On April 15<a href="#cutover-test">*</a>, requests will begin responding with the v3 media type by default:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<h2 id="who-is-affected">Who is affected?</h2>
-
-<p>Since 2012, we have encouraged developers to explicitly <a href="/v3/media/#beta-v3-and-the-future">request a specific media type via the <code>Accept</code> header</a>. If you are requesting either beta or v3 via the <code>Accept</code> header, then you are <em>not</em> affected by this change. The API will continue to respond with the requested media type.</p>
-
-<p>If you are not requesting beta or v3 via the <code>Accept</code> header, then the API is currently responding with the beta media type. On April 15<a href="#cutover-test">*</a>, the API will begin responding with the v3 media type. If your application relies on <a href="/v3/versions/#differences-from-beta-version">functionality that differs between beta and v3</a>, then you are affected by this change. You will need to take steps to prepare for the change.</p>
-
-<h2 id="what-should-you-do">What should you do?</h2>
-
-<p>If you are affected by this change, we recommend that you:</p>
-
-<ol>
-  <li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there’s a good chance that they’ve already done the work for you. In that case, you can just update to the latest version of that library.)</li>
-  <li>Request the v3 media type via the <code>Accept</code> header.</li>
-</ol>
-
-<p>If you cannot update your application to depend on the v3 functionality by April 15<a href="#cutover-test">*</a>, you can just request the beta media type via the <code>Accept</code> header. Doing so will insulate you from this change.</p>
-
-<h2 id="cutover-test">Cutover test on March 12, 2014</h2>
-
-<p>To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.</p>
-
-<p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
-
-<h2 id="stay-informed">Stay informed</h2>
-
-<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we’ll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
-
-<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We’ll be happy to help.</p>
+<p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes">get in touch</a>.</p>
 
 
 </div>

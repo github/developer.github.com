@@ -8,7 +8,7 @@ layout: webhooks
 * TOC
 {:toc}
 
-Now that you've [configured your local server](/hooks/configuring/), you might
+Now that you've [configured your local server](/webhooks/configuring/), you might
 be interested in pushing your code to the limits. To that end, GitHub's webhooks
 view provides some tooling for testing your deployed payloads.
 

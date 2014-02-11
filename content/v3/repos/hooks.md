@@ -8,8 +8,8 @@ title: Webhooks | GitHub API
 {:toc}
 
 The Repository Webhooks API allows repository admins to manage the post-receive
-hooks for a repository.  Webhooks can be managed using the [JSON HTTP API](#json-http)
-and the [PubSubHubbub API](#pubsubhubbub).
+hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
+or the [PubSubHubbub API](#pubsubhubbub).
 
 ## List hooks
 

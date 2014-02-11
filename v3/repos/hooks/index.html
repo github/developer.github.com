@@ -22,9 +22,7 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        <li><a href="/" class="nav-overview">Overview</a></li>
         <li><a href="/v3/" class="nav-api">API</a></li>
-        <li><a href="/webhooks/" class="nav-webhooks">Webhooks</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
         <li id="search-container">
@@ -38,179 +36,43 @@
     </div>
   </div><!-- #header -->
 </div><!-- #header-wrapper -->
-	
+
 	<div class="sub-nav">
 		<h2><a href="/v3/">API</a></h2>
-		
+
 		<ul>
-      <li><a href="/v3/" class="active">Documentation</a></li>
+      <li><a href="/v3/" class="active">Reference</a></li>
+      <li><a href="/webhooks/">Webhooks</a></li>
       <li><a href="/guides/">Guides</a></li>
       <li><a href="/libraries/">Libraries</a></li>
 		</ul>
 	</div>
-	
+
   <div id="wrapper">
   	<div class="content">
     	<h1 id="webhooks">Webhooks</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#services">Services</a></li>
-  <li><a href="#events">Events</a></li>
-  <li><a href="#json-http">JSON HTTP</a></li>
+  <li><a href="#list-hooks">List hooks</a></li>
+  <li><a href="#get-single-hook">Get single hook</a></li>
+  <li><a href="#create-a-hook">Create a hook</a></li>
+  <li><a href="#edit-a-hook">Edit a hook</a></li>
+  <li><a href="#test-a-push-hook">Test a <code>push</code> hook</a></li>
+  <li><a href="#ping-a-hook">Ping a hook</a></li>
   <li><a href="#delete-a-hook">Delete a hook</a></li>
   <li><a href="#pubsubhubbub">PubSubHubbub</a></li>
 </ul>
 
 <p>The Repository Webhooks API allows repository admins to manage the post-receive
-hooks for a repository.  Webhooks can be managed using the <a href="#json-http">JSON HTTP API</a>
-and the <a href="#pubsubhubbub">PubSubHubbub API</a>.</p>
+hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
+or the <a href="#pubsubhubbub">PubSubHubbub API</a>.</p>
 
-<p>Each hook can be configured for a specific <a href="#services">service</a> and one or
-more <a href="#events">events</a>, regardless of the API used to do so.</p>
-
-<h2 id="services">Services</h2>
-
-<p>A service is basically the name used to refer to a hook that has configuration
-settings, a list of available events, and default events.</p>
-
-<blockquote>
-  <p>For instance, the
-<a href="https://github.com/github/github-services/blob/master/lib/services/email.rb">email</a>
-service is a built-in GitHub service that will send event <a href="#payloads">payloads</a>
-to, at most, two email addresses.  It will trigger for the <code>push</code>
-event by default and supports the <code>public</code> event type as well.</p>
-</blockquote>
-
-<p>A number of services have been integrated through the open source
-<a href="https://github.com/github/github-services">github-services</a> project.  When
-creating a <a href="#create-a-hook">hook</a>, the <code>:name</code> parameter must refer to one of
-these services.  A generic
-<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web</a>
-service is available that can configured to trigger for any of the available
-<a href="#events">events</a>.</p>
-
-<p>Documentation for all available service hooks can be found in the
-<a href="https://github.com/github/github-services/tree/master/docs">docs directory</a>
-of the github-services repository.  A JSON representation of their names,
-default events, supported events, and configuration options can be seen
-at <a href="https://api.github.com/hooks">api.github.com/hooks</a>.</p>
-
-<h2 id="events">Events</h2>
-
-<p>Active hooks can be configured to trigger for one or more service supported
-events. In other words, the service must support listening for the event you
-want to trigger.</p>
-
-<p>For example, the
-<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web</a>
-service listens for all events, while the
-<a href="https://github.com/github/github-services/blob/master/lib/services/irc.rb">IRC</a>
-service can only listen for <code>push</code>, <code>issues</code>, and <code>pull_request</code> events.</p>
-
-<p>The available events are:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>push</code></td>
-      <td>Any git push to a Repository. <strong>This is the default event.</strong>
-</td>
-    </tr>
-    <tr>
-      <td><code>issues</code></td>
-      <td>Any time an Issue is opened or closed.</td>
-    </tr>
-    <tr>
-      <td><code>issue_comment</code></td>
-      <td>Any time an Issue is commented on.</td>
-    </tr>
-    <tr>
-      <td><code>commit_comment</code></td>
-      <td>Any time a Commit is commented on.</td>
-    </tr>
-    <tr>
-      <td><code>create</code></td>
-      <td>Any time a Repository, Branch, or Tag is created.</td>
-    </tr>
-    <tr>
-      <td><code>delete</code></td>
-      <td>Any time a Branch or Tag is deleted.</td>
-    </tr>
-    <tr>
-      <td><code>pull_request</code></td>
-      <td>Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).</td>
-    </tr>
-    <tr>
-      <td><code>pull_request_review_comment</code></td>
-      <td>Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).</td>
-    </tr>
-    <tr>
-      <td><code>gollum</code></td>
-      <td>Any time a Wiki page is updated.</td>
-    </tr>
-    <tr>
-      <td><code>watch</code></td>
-      <td>Any time a User watches the Repository.</td>
-    </tr>
-    <tr>
-      <td><code>release</code></td>
-      <td>Any time a Release is published in the Repository.</td>
-    </tr>
-    <tr>
-      <td><code>fork</code></td>
-      <td>Any time a Repository is forked.</td>
-    </tr>
-    <tr>
-      <td><code>member</code></td>
-      <td>Any time a User is added as a collaborator to a non-Organization Repository.</td>
-    </tr>
-    <tr>
-      <td><code>public</code></td>
-      <td>Any time a Repository changes from private to public.</td>
-    </tr>
-    <tr>
-      <td><code>team_add</code></td>
-      <td>Any time a team is added or modified on a Repository.</td>
-    </tr>
-    <tr>
-      <td><code>status</code></td>
-      <td>Any time a Repository has a status update from the API</td>
-    </tr>
-    <tr>
-      <td><code>deployment</code></td>
-      <td>Any time a Repository has a new deployment created from the API.</td>
-    </tr>
-    <tr>
-      <td><code>deployment_status</code></td>
-      <td>Any time a deployment for the Repository has a status update from the API.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="payloads">Payloads</h3>
-
-<p>The payloads for all hooks mirror <a href="/v3/activity/events/types/">the payloads for the Event
-types</a>, with the exception of <a href="http://help.github.com/post-receive-hooks/">the original <code>push</code>
-event</a>,
-which has a more detailed payload.</p>
-
-<h2 id="json-http">JSON HTTP</h2>
-
-<p>The JSON HTTP API follows the same conventions as the rest of the
-<a href="http://developer.github.com/v3/">GitHub API</a>.</p>
-
-<h3 id="list">List</h3>
+<h2 id="list-hooks">List hooks</h2>
 
 <pre><code>GET /repos/:owner/:repo/hooks
 </code></pre>
 
-<h4 id="response">Response</h4>
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -237,12 +99,12 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
-<h3 id="get-single-hook">Get single hook</h3>
+<h2 id="get-single-hook">Get single hook</h2>
 
 <pre><code>GET /repos/:owner/:repo/hooks/:id
 </code></pre>
 
-<h4 id="response-1">Response</h4>
+<h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -265,12 +127,12 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="create-a-hook">Create a hook</h3>
+<h2 id="create-a-hook">Create a hook</h2>
 
 <pre><code>POST /repos/:owner/:repo/hooks
 </code></pre>
 
-<h4 id="parameter">Parameter</h4>
+<h3 id="parameter">Parameter</h3>
 
 <table>
   <thead>
@@ -307,7 +169,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   </tbody>
 </table>
 
-<h5 id="example">Example</h5>
+<h4 id="example">Example</h4>
 
 <p>The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
 takes these fields in the <code>config</code>:</p>
@@ -360,7 +222,7 @@ takes these fields in the <code>config</code>:</p>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
-<h4 id="response-2">Response</h4>
+<h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/user/repo/hooks/1
@@ -384,12 +246,12 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="edit-a-hook">Edit a hook</h3>
+<h2 id="edit-a-hook">Edit a hook</h2>
 
 <pre><code>PATCH /repos/:owner/:repo/hooks/:id
 </code></pre>
 
-<h4 id="parameter-1">Parameter</h4>
+<h3 id="parameter-1">Parameter</h3>
 
 <table>
   <thead>
@@ -429,7 +291,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   </tbody>
 </table>
 
-<h5 id="example-1">Example</h5>
+<h4 id="example-1">Example</h4>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -438,7 +300,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
-<h4 id="response-3">Response</h4>
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -461,7 +323,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="test-a-push-hook">Test a <code>push</code> hook</h3>
+<h2 id="test-a-push-hook">Test a <code>push</code> hook</h2>
 
 <p>This will trigger the hook with the latest push to the current
 repository if the hook is subscribed to <code>push</code> events. If the
@@ -473,7 +335,20 @@ with 204 but no test POST will be generated.</p>
 
 <p><strong>Note</strong>: Previously <code>/repos/:owner/:repo/hooks/:id/test</code></p>
 
-<h4 id="response-4">Response</h4>
+<h3 id="response-4">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="ping-a-hook">Ping a hook</h2>
+
+<p>This will trigger a <a href="/webhooks/#ping-event">ping event</a> to be sent to the hook.</p>
+
+<pre><code>POST /repos/:owner/:repo/hooks/:id/pings
+</code></pre>
+
+<h3 id="response-5">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -484,7 +359,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>DELETE /repos/:owner/:repo/hooks/:id
 </code></pre>
 
-<h4 id="response-5">Response</h4>
+<h3 id="response-6">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -501,7 +376,7 @@ Topic URLs for a GitHub repository’s pushes are in this format:</p>
 <pre><code>https://github.com/:owner/:repo/events/:event
 </code></pre>
 
-<p>The event can be any <a href="#events">event</a> string that is listed at the top of this
+<p>The event can be any <a href="/webhooks/#events">event</a> string that is listed at the top of this
 document.</p>
 
 <h3 id="response-format">Response format</h3>
@@ -701,7 +576,7 @@ exists, it will be modified according to the request.</p>
 </div><!-- /sidebar-shell -->
 
   </div><!-- #wrapper -->
-		
+
 		<div id="footer" >
     <div class="lower_footer">
       <ul class="footer-cell">

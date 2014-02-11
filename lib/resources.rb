@@ -1536,7 +1536,7 @@ module GitHub
 
     DEPLOYMENT = {
       "id" => 1,
-      "sha" => "topic-branch",
+      "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
       "url" => "https://api.github.com/repos/octocat/example/deployments/1",
       "creator" => USER,
       "payload" => JSON.dump({:environment => 'production'}),

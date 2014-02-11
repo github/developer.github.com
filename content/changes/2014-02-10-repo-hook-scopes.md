@@ -10,9 +10,9 @@ in your repositories. Today, we've introduced three new [scopes][] that provide
 more granular access to your repository hooks without allowing access to your
 repository contents:
 
-* `read:repo_hook` grants read access to hooks in public or private repositories.
-* `write:repo_hook` grants read and write access to hooks in public or private repositories.
-* `admin:repo_hook` grants read, write, and delete access to hooks in public or private repositories.
+* `read:repo_hook` grants read and ping access to hooks in public or private repositories.
+* `write:repo_hook` grants read, write, and ping access to hooks in public or private repositories.
+* `admin:repo_hook` grants read, write, ping, and delete access to hooks in public or private repositories.
 
 As always, if you have any questions or feedback, [get in touch][contact].
 

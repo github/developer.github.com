@@ -8,6 +8,7 @@ end
 
 desc "Test the output"
 task :test => [:clean, :compile] do
+  puts "==> Running tests…"
   HTML::Proofer.new("./output").run
 end
 

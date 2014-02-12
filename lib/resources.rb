@@ -54,7 +54,7 @@ module GitHub
       end
 
       def gravatar_for(login)
-        %(<img height="16" width="16" src="%s" />) % gravatar_url_for(login)
+        %(<img height="16" width="16" src="%s" alt="gravatar_for_#{login}"/>) % gravatar_url_for(login)
       end
 
       def gravatar_url_for(login)

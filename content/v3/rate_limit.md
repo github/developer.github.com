@@ -37,7 +37,7 @@ The Search API has a [custom rate limit](/v3/search/#rate-limit), separate from
 the rate limit governing the rest of the API. For that reason, the response
 (shown above) categorizes your rate limit by resource. Within the `"resources"`
 hash, the `"search"` hash provides your rate limit status for the
-[Search API](v3/search). The `"core"` hash provides your rate limit status for
+[Search API](/v3/search). The `"core"` hash provides your rate limit status for
 all the _rest_ of the API.
 
 #### Deprecation Notice

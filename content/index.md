@@ -8,7 +8,7 @@ layout: overview
 GitHub in your app</h1>
 	<p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
 	<a href="/v3/" class="button">Browse the documentation</a>
-	<img src="/shared/images/labtocat.png" class="labtocat" />
+	<img src="/shared/images/labtocat.png" class="labtocat" alt="The Labtocat" />
 </div>
 
 <div class="full-width-divider">
@@ -28,6 +28,6 @@ GitHub in your app</h1>
 			<h2><a href="http://github.com/contact">Support</a></h2>
 			<p>Are you stuck? Already tried our <a href="/v3/troubleshooting/">troubleshooting guide</a>? Talk to a supportocat.</p>
 		</li>
-		
+
 	</ul>
 </div>

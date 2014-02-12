@@ -7,7 +7,7 @@ task :compile do
 end
 
 desc "Test the output"
-task :test => [:compile] do
+task :test => [:clean, :compile] do
   HTML::Proofer.new("./output").run
 end
 

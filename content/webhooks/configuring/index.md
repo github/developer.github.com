@@ -65,7 +65,7 @@ and create a new Issue on the repository you're testing with. Once you create
 it, switch back to your terminal. You should see something like this in your output:
 
     #!bash
-    [adding-hooks]* ~/github/platform-samples/hooks/ruby/configuring-your-server $ ruby server.rb
+    ~/Developer/platform-samples/hooks/ruby/configuring-your-server $ ruby server.rb
     == Sinatra/1.4.4 has taken the stage on 4567 for development with backup from Thin
     >> Thin web server (v1.5.1 codename Straight Razor)
     >> Maximum connections set to 1024

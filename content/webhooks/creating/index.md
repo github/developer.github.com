@@ -33,7 +33,7 @@ can take advantage of. We'll go through each of these below.
 This is the server endpoint that will receive the webhook payload.
 
 Since we're developing locally for our tutorial, let's set it to `http://localhost:4567/payload`.
-We'll explain why in the [Configuring Your Server](/hooks/configuring/) docs.
+We'll explain why in the [Configuring Your Server](/webhooks/configuring/) docs.
 
 ## Payload version
 
@@ -52,6 +52,6 @@ and toggle the options there.
 
 When you're finished, click on **Add webhook**. Phew! Now that the webhook is created,
 it's time to set up our local server to test the webhook. Head on over to
-[Configuring Your Server](/hooks/configuring/) to learn how to do that.
+[Configuring Your Server](/webhooks/configuring/) to learn how to do that.
 
 [hooks-api]: http://developer.github.com/v3/repos/hooks/#events

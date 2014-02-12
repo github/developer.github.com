@@ -69,6 +69,8 @@ Key | Type | Description
 
 Represents a [deployment](/v3/repos/deployments/#list-deployments).
 
+Events of this type are not visible in timelines, they are only used to trigger hooks.
+
 ### Hook name
 
 `deployment`
@@ -86,6 +88,8 @@ Key | Type | Description
 ## DeploymentStatusEvent
 
 Represents a [deployment status](/v3/repos/deployments/#list-deployment-statuses).
+
+Events of this type are not visible in timelines, they are only used to trigger hooks.
 
 ### Hook name
 
@@ -123,6 +127,8 @@ Key | Type | Description
 ## FollowEvent
 
 Triggered when a user [follows another user](/v3/users/followers/#follow-a-user).
+
+Events of this type are not visible in timelines, they are only used to trigger hooks.
 
 ### Hook name
 
@@ -343,6 +349,8 @@ Key | Type | Description
 ## StatusEvent
 
 Triggered when the status of a Git commit changes.
+
+Events of this type are not visible in timelines, they are only used to trigger hooks.
 
 ### Hook name
 

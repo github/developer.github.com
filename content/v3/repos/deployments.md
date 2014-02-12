@@ -36,7 +36,8 @@ useful. The `target_url` would be the full URL to the deployment output, and
 the `description` would be the high level summary of what happened with the
 deployment.
 
-Deployments and Deployment Statuses both have associated repository events when
+Deployments and Deployment Statuses both have associated
+[repository events](/v3/activity/events/types/#deploymentevent) when
 they're created. This allows webhooks and 3rd party integrations to respond to
 deployment requests as well as update the status of a deployment as progress is
 made.

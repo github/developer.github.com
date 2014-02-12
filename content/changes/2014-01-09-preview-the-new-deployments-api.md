@@ -59,7 +59,7 @@ whether or not to actually deploy the repository that the event was created for.
 ## Preview Period
 
 We're making this new API available today for developers to
-[preview][preview-mode].  We think developers and existing integrations are
+<a href="/v3/repos/deployments/#preview-mode" data-proofer-ignore>preview</a>.  We think developers and existing integrations are
 going to love it, but we want to [get your feedback][contact] before we declare
 the Deployments API "final" and "unchangeable." We expect the preview period to
 last for roughly 60-90 days.
@@ -75,10 +75,9 @@ stable and suitable for production use.
 
 We hope you’ll take it for a spin and [send us your feedback][contact].
 
-![](http://shipitsquirrel.github.io/images/ship%20it%20squirrel.png)
+![Shipit Squirrel](http://shipitsquirrel.github.io/images/ship%20it%20squirrel.png)
 
 [docs]: /v3/repos/deployments/
 [hooks]: /v3/repos/hooks/
-[preview-mode]: /v3/repos/deployments/#preview-mode
 [chatops]: https://speakerdeck.com/jnewland/chatops
 [contact]: https://github.com/contact?form[subject]=Deployments+API

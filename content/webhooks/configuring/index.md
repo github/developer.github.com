@@ -39,9 +39,9 @@ to the Internet.
 
 ## Writing the server
 
-Now comes the fun part! We want out server to listen to `POST` requests, at `/payload`,
+Now comes the fun part! We want our server to listen to `POST` requests, at `/payload`,
 because that's where we told GitHub our webhook URL was. Since ngrok is exposing
-our local environment, we don't need to set up a real server someone online, and
+our local environment, we don't need to set up a real server somewhere online, and
 can happily test out our code locally.
 
 Let's set up a little Sinatra app to do something with the information. Our initial
@@ -56,7 +56,7 @@ setup might look something like this:
       puts "I got some JSON: #{push.inspect}"
     end
 
-(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra guide].)
+(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra].)
 
 Start this server up.
 

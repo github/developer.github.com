@@ -7,7 +7,7 @@ author_name: pezra
 
 Requesting the [member list](/v3/orgs/members/index.html#members-list) of an
 organization of which you are not a member now redirects to the [public members
-list](v3/orgs/members/index.html#public-members-list). Similarly, requests to
+list](/v3/orgs/members/index.html#public-members-list). Similarly, requests to
 [membership check](/v3/orgs/members/index.html#check-membership) resources of
 an organization of which you are not a member are redirected to the equivalent
 [public membership check](/v3/orgs/members/index.html#check-public-membership).

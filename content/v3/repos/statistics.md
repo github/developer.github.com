@@ -41,7 +41,7 @@ which is usually master; pushing to the default branch resets the statistics cac
 * `c` - Number of commits
 
 
-## Get the last year of commit activity data
+## Get the last year of commit activity data {#commit-activity}
 
 Returns the last year of commit activity grouped by week.  The `days` array
 is a group of commits per day, starting on `Sunday`.

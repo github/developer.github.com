@@ -12,7 +12,7 @@ many flavors</h1>
 		<li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
 		<li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
 	</ul>
-	<img src="/shared/images/gundamcat.png" class="gundamcat" />
+	<img src="/shared/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
 </div>
 
 # Third-party libraries

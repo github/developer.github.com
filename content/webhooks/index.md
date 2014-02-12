@@ -91,7 +91,7 @@ which has a more detailed payload.
 When you create a new webhook, we'll send you a simple `ping` event to let you
 know you've set up the webhook correctly. This event isn't stored so it isn't
 retrievable via the [Events API](/v3/activity/events/). You can trigger a `ping`
-again by calling the [ping endpoint](#).
+again by calling the [ping endpoint](/v3/repos/hooks/#ping-a-hook).
 
 ### Ping Event Payload
 

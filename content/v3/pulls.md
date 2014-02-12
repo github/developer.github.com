@@ -80,13 +80,10 @@ Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-
 Name | Type | Description
 -----|------|-------------
 `title`|`string` | **Required**. The title of the pull request.
-`head`|`string` | **Required**. The branch (or git ref) where your changes are implemented.
-`base`|`string` | **Required**. The branch (or git ref) you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository.
+`head`|`string` | **Required**. The name of the branch where your changes are implemented. For cross-repository pull requests in the same network, namespace `head` with a user like this: `username:branch`.
+`base`|`string` | **Required**. The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository.
 `body`|`string` | The contents of the pull request.
 
-
-NOTE: `head` and `base` can be either a sha or a branch name. Typically you
-would namespace `head` with a user like this: `username:branch`.
 
 #### Example
 

@@ -707,28 +707,28 @@ $ curl https://api.github.com?callback=foo
 
 <p>You can write a JavaScript handler to process the callback. Here’s a minimal example you can try out:</p>
 
-<div class="CodeRay"><div class="code"><pre><code class="language-html"><span class="tag">&lt;html&gt;</span>
-<span class="tag">&lt;head&gt;</span>
-<span class="tag">&lt;script</span> <span class="attribute-name">type</span>=<span class="string"><span class="delimiter">"</span><span class="content">text/javascript</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
-<span class="inline"><span class="keyword">function</span> <span class="function">foo</span>(response) {
-  <span class="keyword">var</span> meta = response.meta
-  <span class="keyword">var</span> data = response.data
-  console.log(meta)
-  console.log(data)
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+&lt;script type="text/javascript"&gt;
+function foo(response) {
+  var meta = response.meta;
+  var data = response.data;
+  console.log(meta);
+  console.log(data);
 }
 
-<span class="keyword">var</span> script = document.createElement(<span class="string"><span class="delimiter">'</span><span class="content">script</span><span class="delimiter">'</span></span>);
-script.src = <span class="string"><span class="delimiter">'</span><span class="content">https://api.github.com?callback=foo</span><span class="delimiter">'</span></span>
+var script = document.createElement('script');
+script.src = 'https://api.github.com?callback=foo';
 
-document.getElementsByTagName(<span class="string"><span class="delimiter">'</span><span class="content">head</span><span class="delimiter">'</span></span>)[<span class="integer">0</span>].appendChild(script);</span>
-<span class="tag">&lt;/script&gt;</span>
-<span class="tag">&lt;/head&gt;</span>
+document.getElementsByTagName('head')[0].appendChild(script);
+&lt;/script&gt;
+&lt;/head&gt;
 
-<span class="tag">&lt;body&gt;</span>
-<span class="tag">&lt;p&gt;</span>Open up your browser's console.<span class="tag">&lt;/p&gt;</span>
-<span class="tag">&lt;/body&gt;</span>
-
-<span class="tag">&lt;/html&gt;</span></code></pre></div></div>
+&lt;body&gt;
+  &lt;p&gt;Open up your browser's console.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 <p>All of the headers are the same String value as the HTTP Headers with one
 notable exception: Link.  Link headers are pre-parsed for you and come

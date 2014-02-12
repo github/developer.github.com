@@ -56,7 +56,7 @@ setup might look something like this:
       puts "I got some JSON: #{push.inspect}"
     end
 
-(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra guide].)
+(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide](http://www.sinatrarb.com).)
 
 Start this server up.
 

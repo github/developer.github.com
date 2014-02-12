@@ -30,7 +30,7 @@ event by default and supports the `public` event type as well.
 
 A number of services have been integrated through the open source
 [github-services](https://github.com/github/github-services) project.  When
-creating a [hook](#create-a-hook), the `:name` parameter must refer to one of
+[creating a hook](/webhooks/creating/), the `:name` parameter must refer to one of
 these services.  A generic
 [Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
 service is available that can configured to trigger for any of the available

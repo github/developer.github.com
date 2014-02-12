@@ -22,7 +22,6 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        <li><a href="/" class="nav-overview">Overview</a></li>
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
@@ -54,12 +53,10 @@
     	<h1 id="traversing-with-pagination">Traversing with Pagination</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#basics-of-pagination">Basics of Pagination</a></li>
+<li><a href="#basics-of-pagination">Basics of Pagination</a></li>
   <li><a href="#consuming-the-information">Consuming the information</a></li>
   <li><a href="#constructing-pagination-links">Constructing Pagination Links</a></li>
-</ul>
-
-<p>The GitHub API provides a vast wealth of information for developers to consume.
+</ul><p>The GitHub API provides a vast wealth of information for developers to consume.
 Most of the time, you might even find that you’re asking for <em>too much</em> information,
 and in order to keep our servers happy, the API will automatically <a href="/v3/#pagination">paginate the requested items</a>.</p>
 
@@ -72,7 +69,7 @@ in the <a href="https://github.com/github/platform-samples/tree/master/api/ruby/
 <p>To start with, it’s important to know a few facts about receiving paginated items:</p>
 
 <ol>
-  <li>Different API calls respond with different defaults. For example, a call to
+<li>Different API calls respond with different defaults. For example, a call to
 <a href="http://developer.github.com/v3/repos/#list-all-public-repositories">list GitHub’s public repositories</a>
 provides paginated items in sets of 30, whereas a call to the GitHub Search API
 provides items in sets of 100</li>
@@ -80,9 +77,7 @@ provides items in sets of 100</li>
   <li>For technical reasons, not every endpoint behaves the same. For example, 
 <a href="http://developer.github.com/v3/activity/events/">events</a> won’t let you set a maximum for items to receive.
 Be sure to read the documentation on how to handle paginated results for specific endpoints.</li>
-</ol>
-
-<p>Information about pagination is provided in <a href="http://tools.ietf.org/html/rfc5988">the Link header</a>
+</ol><p>Information about pagination is provided in <a href="http://tools.ietf.org/html/rfc5988">the Link header</a>
 of an API call. For example, let’s make a curl request to the search API, to find
 out how many times Mozilla projects use the phrase <code>addClass</code>:</p>
 
@@ -288,8 +283,6 @@ order to generate links for back (<code>&lt;&lt;</code>) and foward (<code>&gt;&
 
 <span class="nb">puts</span> <span class="s2">"The prev page link is </span><span class="si">#{</span><span class="n">prev_page_href</span><span class="si">}</span><span class="s2">"</span>
 <span class="nb">puts</span> <span class="s2">"The next page link is </span><span class="si">#{</span><span class="n">next_page_href</span><span class="si">}</span><span class="s2">"</span></code></pre>
-
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

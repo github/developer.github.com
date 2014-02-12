@@ -22,7 +22,6 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        <li><a href="/" class="nav-overview">Overview</a></li>
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
@@ -54,7 +53,7 @@
     	<h1 id="oauth">OAuth</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#web-application-flow">Web Application Flow</a></li>
+<li><a href="#web-application-flow">Web Application Flow</a></li>
   <li><a href="#non-web-application-flow">Non-Web Application Flow</a></li>
   <li><a href="#redirect-urls">Redirect URLs</a></li>
   <li><a href="#scopes">Scopes</a></li>
@@ -69,9 +68,7 @@
   <li><a href="#revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</a></li>
   <li><a href="#revoke-an-authorization-for-an-application">Revoke an authorization for an application</a></li>
   <li><a href="#more-information">More Information</a></li>
-</ul>
-
-<p>OAuth2 is a protocol that lets external apps request authorization to
+</ul><p>OAuth2 is a protocol that lets external apps request authorization to
 private details in a user’s GitHub account without getting their
 password. This is preferred over <a href="/v3/auth#basic-authentication">Basic Authentication</a> because tokens can
 be limited to specific types of data, and can be revoked by users at any
@@ -94,39 +91,35 @@ and Client Secret. The Client Secret should not be shared.</p>
 <h3 id="parameters">Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>client_id</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>client_id</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The client ID you received from GitHub when you <a href="https://github.com/settings/applications/new">registered</a>.</td>
     </tr>
-    <tr>
-      <td><code>redirect_uri</code></td>
+<tr>
+<td><code>redirect_uri</code></td>
       <td><code>string</code></td>
       <td>The URL in your app where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
     </tr>
-    <tr>
-      <td><code>scope</code></td>
+<tr>
+<td><code>scope</code></td>
       <td><code>string</code></td>
       <td>A comma separated list of <a href="#scopes">scopes</a>. If not provided, <code>scope</code> defaults to an empty list of scopes for users that don’t have a valid token for the app. For users who do already have a valid token for the app, the user won’t be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.</td>
     </tr>
-    <tr>
-      <td><code>state</code></td>
+<tr>
+<td><code>state</code></td>
       <td><code>string</code></td>
       <td>An unguessable random string. It is used to protect against cross-site request forgery attacks.</td>
     </tr>
-  </tbody>
-</table>
-
-<h3 id="github-redirects-back-to-your-site">2. GitHub redirects back to your site</h3>
+</tbody>
+</table><h3 id="github-redirects-back-to-your-site">2. GitHub redirects back to your site</h3>
 
 <p>If the user accepts your request, GitHub redirects back to your site
 with a temporary code in a <code>code</code> parameter as well as the state you provided in
@@ -141,41 +134,37 @@ has been created by a third party and the process should be aborted.</p>
 <h3 id="parameters-1">Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>client_id</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>client_id</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The client ID you received from GitHub when you <a href="https://github.com/settings/applications/new">registered</a>.</td>
     </tr>
-    <tr>
-      <td><code>client_secret</code></td>
+<tr>
+<td><code>client_secret</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The client secret you received from GitHub when you <a href="https://github.com/settings/applications/new">registered</a>.</td>
     </tr>
-    <tr>
-      <td><code>code</code></td>
+<tr>
+<td><code>code</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The code you received as a response to <a href="#redirect-users-to-request-github-access">Step 1</a>.</td>
     </tr>
-    <tr>
-      <td><code>redirect_uri</code></td>
+<tr>
+<td><code>redirect_uri</code></td>
       <td><code>string</code></td>
       <td>The URL in your app where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
     </tr>
-  </tbody>
-</table>
-
-<h3 id="response">Response</h3>
+</tbody>
+</table><h3 id="response">Response</h3>
 
 <p>By default, the response will take the following form:</p>
 
@@ -282,73 +271,69 @@ X-Accepted-OAuth-Scopes: user
 <code>X-Accepted-OAuth-Scopes</code> lists the scopes that the action checks for.</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>(no scope)</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>(no scope)</code></td>
       <td>Grants read-only access to public information (includes public user profile info, public repository info, and gists)</td>
     </tr>
-    <tr>
-      <td><code>user</code></td>
+<tr>
+<td><code>user</code></td>
       <td>Grants read/write access to profile info only.  Note that this scope includes <code>user:email</code> and <code>user:follow</code>.</td>
     </tr>
-    <tr>
-      <td><code>user:email</code></td>
+<tr>
+<td><code>user:email</code></td>
       <td>Grants read access to a user’s email addresses.</td>
     </tr>
-    <tr>
-      <td><code>user:follow</code></td>
+<tr>
+<td><code>user:follow</code></td>
       <td>Grants access to follow or unfollow other users.</td>
     </tr>
-    <tr>
-      <td><code>public_repo</code></td>
+<tr>
+<td><code>public_repo</code></td>
       <td>Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.</td>
     </tr>
-    <tr>
-      <td><code>repo</code></td>
+<tr>
+<td><code>repo</code></td>
       <td>Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.</td>
     </tr>
-    <tr>
-      <td><code>repo_deployment</code></td>
+<tr>
+<td><code>repo_deployment</code></td>
       <td>Grants access to <a href="/v3/repos/deployments">deployment statuses</a> for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, <em>without</em> granting access to the code.</td>
     </tr>
-    <tr>
-      <td><code>repo:status</code></td>
+<tr>
+<td><code>repo:status</code></td>
       <td>Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses <em>without</em> granting access to the code.</td>
     </tr>
-    <tr>
-      <td><code>delete_repo</code></td>
+<tr>
+<td><code>delete_repo</code></td>
       <td>Grants access to delete adminable repositories.</td>
     </tr>
-    <tr>
-      <td><code>notifications</code></td>
+<tr>
+<td><code>notifications</code></td>
       <td>Grants read access to a user’s notifications. <code>repo</code> also provides this access.</td>
     </tr>
-    <tr>
-      <td><code>gist</code></td>
+<tr>
+<td><code>gist</code></td>
       <td>Grants write access to gists.</td>
     </tr>
-    <tr>
-      <td><code>read:repo_hook</code></td>
+<tr>
+<td><code>read:repo_hook</code></td>
       <td>Grants read and ping access to hooks in public or private repositories.</td>
     </tr>
-    <tr>
-      <td><code>write:repo_hook</code></td>
+<tr>
+<td><code>write:repo_hook</code></td>
       <td>Grants read, write, and ping access to hooks in public or private repositories.</td>
     </tr>
-    <tr>
-      <td><code>admin:repo_hook</code></td>
+<tr>
+<td><code>admin:repo_hook</code></td>
       <td>Grants read, write, ping, and delete access to hooks in public or private repositories.</td>
     </tr>
-  </tbody>
-</table>
-
-<p>NOTE: Your application can request the scopes in the initial redirection. You
+</tbody>
+</table><p>NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:</p>
 
 <pre><code>https://github.com/login/oauth/authorize?
@@ -442,43 +427,39 @@ Read more about these tokens on the <a href="https://help.github.com/articles/cr
 <h3 id="parameters-2">Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>scopes</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>scopes</code></td>
       <td><code>array</code></td>
       <td>A list of scopes that this authorization is in.</td>
     </tr>
-    <tr>
-      <td><code>note</code></td>
+<tr>
+<td><code>note</code></td>
       <td><code>string</code></td>
       <td>A note to remind you what the OAuth token is for.</td>
     </tr>
-    <tr>
-      <td><code>note_url</code></td>
+<tr>
+<td><code>note_url</code></td>
       <td><code>string</code></td>
       <td>A URL to remind you what app the OAuth token is for.</td>
     </tr>
-    <tr>
-      <td><code>client_id</code></td>
+<tr>
+<td><code>client_id</code></td>
       <td><code>string</code></td>
       <td>The 20 character OAuth app client key for which to create the token.</td>
     </tr>
-    <tr>
-      <td><code>client_secret</code></td>
+<tr>
+<td><code>client_secret</code></td>
       <td><code>string</code></td>
       <td>The 40 character OAuth app client secret for which to create the token.</td>
     </tr>
-  </tbody>
-</table>
-
-<pre><code class="language-javascript"><span class="p">{</span>
+</tbody>
+</table><pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
@@ -524,38 +505,34 @@ exists. Otherwise, it creates one.</p>
 <h3 id="parameters-3">Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>client_secret</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>client_secret</code></td>
       <td><code>string</code></td>
       <td>The 40 character OAuth app client secret associated with the client ID specified in the URL.</td>
     </tr>
-    <tr>
-      <td><code>scopes</code></td>
+<tr>
+<td><code>scopes</code></td>
       <td><code>array</code></td>
       <td>A list of scopes that this authorization is in.</td>
     </tr>
-    <tr>
-      <td><code>note</code></td>
+<tr>
+<td><code>note</code></td>
       <td><code>string</code></td>
       <td>A note to remind you what the OAuth token is for.</td>
     </tr>
-    <tr>
-      <td><code>note_url</code></td>
+<tr>
+<td><code>note_url</code></td>
       <td><code>string</code></td>
       <td>A URL to remind you what app the OAuth token is for.</td>
     </tr>
-  </tbody>
-</table>
-
-<pre><code class="language-javascript"><span class="p">{</span>
+</tbody>
+</table><pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"client_secret"</span><span class="o">:</span> <span class="s2">"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"</span><span class="p">,</span>
   <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
@@ -621,43 +598,39 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-4">Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>scopes</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>scopes</code></td>
       <td><code>array</code></td>
       <td>Replaces the authorization scopes with these.</td>
     </tr>
-    <tr>
-      <td><code>add_scopes</code></td>
+<tr>
+<td><code>add_scopes</code></td>
       <td><code>array</code></td>
       <td>A list of scopes to add to this authorization.</td>
     </tr>
-    <tr>
-      <td><code>remove_scopes</code></td>
+<tr>
+<td><code>remove_scopes</code></td>
       <td><code>array</code></td>
       <td>A list of scopes to remove from this authorization.</td>
     </tr>
-    <tr>
-      <td><code>note</code></td>
+<tr>
+<td><code>note</code></td>
       <td><code>string</code></td>
       <td>A note to remind you what the OAuth token is for.</td>
     </tr>
-    <tr>
-      <td><code>note_url</code></td>
+<tr>
+<td><code>note_url</code></td>
       <td><code>string</code></td>
       <td>A URL to remind you what app the OAuth token is for.</td>
     </tr>
-  </tbody>
-</table>
-
-<p>You can only send one of these scope keys at a time.</p>
+</tbody>
+</table><p>You can only send one of these scope keys at a time.</p>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"add_scopes"</span><span class="o">:</span> <span class="p">[</span>
@@ -795,7 +768,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 links that might be of help:</p>
 
 <ul>
-  <li><a href="http://tools.ietf.org/html/rfc6749">OAuth 2 spec</a></li>
+<li><a href="http://tools.ietf.org/html/rfc6749">OAuth 2 spec</a></li>
   <li><a href="http://developers.facebook.com/docs/technical-guides/login/">Facebook Login API</a></li>
   <li><a href="https://github.com/intridea/oauth2">Ruby OAuth2 lib</a></li>
   <li><a href="https://gist.github.com/9fd1a6199da0465ec87c">Simple Ruby/Sinatra example</a></li>
@@ -809,15 +782,13 @@ links that might be of help:</p>
   <li><a href="https://github.com/atmos/sinatra_auth_github">Ruby Sinatra extension</a></li>
   <li><a href="https://github.com/atmos/warden-github">Ruby Warden strategy</a></li>
 </ul>
-
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
   <div class="js-toggle-list sidebar-module expandable">
     <ul>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/">Overview</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/media/">Media Types</a></li>
           <li><a href="/v3/oauth/">OAuth</a></li>
@@ -827,7 +798,7 @@ links that might be of help:</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/activity/">Activity</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
           <li><a href="/v3/activity/events/types/">Event Types</a></li>
@@ -838,13 +809,13 @@ links that might be of help:</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/gists/">Gists</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/gists/">Gists</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/gists/comments/">Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/git/">Git Data</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/git/">Git Data</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/git/blobs/">Blobs</a></li>
           <li><a href="/v3/git/commits/">Commits</a></li>
@@ -854,7 +825,7 @@ links that might be of help:</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/issues/">Issues</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/issues/">Issues</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/issues/assignees/">Assignees</a></li>
           <li><a href="/v3/issues/comments/">Comments</a></li>
@@ -864,7 +835,7 @@ links that might be of help:</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/misc/">Miscellaneous</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/emojis/">Emojis</a></li>
           <li><a href="/v3/gitignore/">Gitignore</a></li>
@@ -874,20 +845,20 @@ links that might be of help:</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/pulls/">Pull Requests</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/pulls/">Pull Requests</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/pulls/comments/">Review Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/repos/">Repositories</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/repos/">Repositories</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/v3/repos/comments/">Comments</a></li>
@@ -899,13 +870,14 @@ links that might be of help:</p>
           <li><a href="/v3/repos/forks/">Forks</a></li>
           <li><a href="/v3/repos/hooks/">Hooks</a></li>
           <li><a href="/v3/repos/merging/">Merging</a></li>
+          <li><a href="/v3/repos/pages/">Pages</a></li>
           <li><a href="/v3/repos/releases/">Releases</a></li>
           <li><a href="/v3/repos/statistics/">Statistics</a></li>
           <li><a href="/v3/repos/statuses/">Statuses</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/search/">Search</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/search/">Search</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/search/#search-repositories">Repositories</a></li>
           <li><a href="/v3/search/#search-code">Code</a></li>
@@ -915,7 +887,7 @@ links that might be of help:</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/users/">Users</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/users/">Users</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>

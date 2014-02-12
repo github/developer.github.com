@@ -22,7 +22,6 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        <li><a href="/" class="nav-overview">Overview</a></li>
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
@@ -54,12 +53,10 @@
     	<h1 id="trees">Trees</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#get-a-tree">Get a Tree</a></li>
+<li><a href="#get-a-tree">Get a Tree</a></li>
   <li><a href="#get-a-tree-recursively">Get a Tree Recursively</a></li>
   <li><a href="#create-a-tree">Create a Tree</a></li>
-</ul>
-
-<h2 id="get-a-tree">Get a Tree</h2>
+</ul><h2 id="get-a-tree">Get a Tree</h2>
 
 <pre><code>GET /repos/:owner/:repo/git/trees/:sha
 </code></pre>
@@ -139,70 +136,62 @@ a new tree out.</p>
 <h3 id="parameters">Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>tree</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>tree</code></td>
       <td>
 <code>array</code> of <code>hash</code>es</td>
       <td>
 <strong>Required</strong>. Objects (of <code>path</code>, <code>mode</code>, <code>type</code>, and <code>sha</code>) specifying a tree structure</td>
     </tr>
-    <tr>
-      <td><code>base_tree</code></td>
+<tr>
+<td><code>base_tree</code></td>
       <td><code>string</code></td>
       <td>The SHA1 of the tree you want to update with new data. If you don’t set this, the commit will be created on top of everything; however, it will only contain your change, the rest of your files will show up as deleted.</td>
     </tr>
-  </tbody>
-</table>
-
-<p>The <code>tree</code> parameter takes the following keys:</p>
+</tbody>
+</table><p>The <code>tree</code> parameter takes the following keys:</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>path</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>path</code></td>
       <td><code>string</code></td>
       <td>The file referenced in the tree</td>
     </tr>
-    <tr>
-      <td><code>mode</code></td>
+<tr>
+<td><code>mode</code></td>
       <td><code>string</code></td>
       <td>The file mode; one of <code>100644</code> for file (blob), <code>100755</code> for executable (blob), <code>040000</code> for subdirectory (tree), <code>160000</code> for submodule (commit), or <code>120000</code> for a blob that specifies the path of a symlink</td>
     </tr>
-    <tr>
-      <td><code>type</code></td>
+<tr>
+<td><code>type</code></td>
       <td><code>string</code></td>
       <td>Either <code>blob</code>, <code>tree</code>, or <code>commit</code>
 </td>
     </tr>
-    <tr>
-      <td><code>sha</code></td>
+<tr>
+<td><code>sha</code></td>
       <td><code>string</code></td>
       <td>The SHA1 checksum ID of the object in the tree</td>
     </tr>
-    <tr>
-      <td><code>content</code></td>
+<tr>
+<td><code>content</code></td>
       <td><code>string</code></td>
       <td>The content you want this file to have. GitHub will write this blob out and use that SHA for this entry.  Use either this, or <code>tree.sha</code>.</td>
     </tr>
-  </tbody>
-</table>
-
-<h3 id="input">Input</h3>
+</tbody>
+</table><h3 id="input">Input</h3>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"base_tree"</span><span class="o">:</span> <span class="s2">"9fb037999f264ba9a7fc6274d15fa3ae2ab98312"</span><span class="p">,</span>
@@ -237,14 +226,13 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
   <div class="js-toggle-list sidebar-module expandable">
     <ul>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/">Overview</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/media/">Media Types</a></li>
           <li><a href="/v3/oauth/">OAuth</a></li>
@@ -254,7 +242,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/activity/">Activity</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
           <li><a href="/v3/activity/events/types/">Event Types</a></li>
@@ -265,13 +253,13 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/gists/">Gists</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/gists/">Gists</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/gists/comments/">Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/git/">Git Data</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/git/">Git Data</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/git/blobs/">Blobs</a></li>
           <li><a href="/v3/git/commits/">Commits</a></li>
@@ -281,7 +269,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/issues/">Issues</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/issues/">Issues</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/issues/assignees/">Assignees</a></li>
           <li><a href="/v3/issues/comments/">Comments</a></li>
@@ -291,7 +279,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/misc/">Miscellaneous</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/emojis/">Emojis</a></li>
           <li><a href="/v3/gitignore/">Gitignore</a></li>
@@ -301,20 +289,20 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/pulls/">Pull Requests</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/pulls/">Pull Requests</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/pulls/comments/">Review Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/repos/">Repositories</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/repos/">Repositories</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/v3/repos/comments/">Comments</a></li>
@@ -326,13 +314,14 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li><a href="/v3/repos/forks/">Forks</a></li>
           <li><a href="/v3/repos/hooks/">Hooks</a></li>
           <li><a href="/v3/repos/merging/">Merging</a></li>
+          <li><a href="/v3/repos/pages/">Pages</a></li>
           <li><a href="/v3/repos/releases/">Releases</a></li>
           <li><a href="/v3/repos/statistics/">Statistics</a></li>
           <li><a href="/v3/repos/statuses/">Statuses</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/search/">Search</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/search/">Search</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/search/#search-repositories">Repositories</a></li>
           <li><a href="/v3/search/#search-code">Code</a></li>
@@ -342,7 +331,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/users/">Users</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/users/">Users</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>

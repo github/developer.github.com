@@ -22,7 +22,6 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        <li><a href="/" class="nav-overview">Overview</a></li>
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
@@ -54,7 +53,7 @@
     	<h1 id="webhooks">Webhooks</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-hooks">List hooks</a></li>
+<li><a href="#list-hooks">List hooks</a></li>
   <li><a href="#get-single-hook">Get single hook</a></li>
   <li><a href="#create-a-hook">Create a hook</a></li>
   <li><a href="#edit-a-hook">Edit a hook</a></li>
@@ -62,9 +61,7 @@
   <li><a href="#ping-a-hook">Ping a hook</a></li>
   <li><a href="#delete-a-hook">Delete a hook</a></li>
   <li><a href="#pubsubhubbub">PubSubHubbub</a></li>
-</ul>
-
-<p>The Repository Webhooks API allows repository admins to manage the post-receive
+</ul><p>The Repository Webhooks API allows repository admins to manage the post-receive
 hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
 or the <a href="#pubsubhubbub">PubSubHubbub API</a>.</p>
 
@@ -136,79 +133,71 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameter">Parameter</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>name</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The name of the service that is being called. (See <a href="https://api.github.com/hooks">/hooks</a> for the list of valid hook names.)</td>
     </tr>
-    <tr>
-      <td><code>config</code></td>
+<tr>
+<td><code>config</code></td>
       <td><code>hash</code></td>
       <td>
 <strong>Required</strong>. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the <a href="https://github.com/github/github-services">github-services</a> repository. Booleans are stored internally as “1” for true, and “0” for false.  Any JSON <code>true</code>/<code>false</code> values will be converted automatically.</td>
     </tr>
-    <tr>
-      <td><code>events</code></td>
+<tr>
+<td><code>events</code></td>
       <td><code>array</code></td>
       <td>Determines what events the hook is triggered for.  Default: <code>["push"]</code>
 </td>
     </tr>
-    <tr>
-      <td><code>active</code></td>
+<tr>
+<td><code>active</code></td>
       <td><code>boolean</code></td>
       <td>Determines whether the hook is actually triggered on pushes.</td>
     </tr>
-  </tbody>
-</table>
-
-<h4 id="example">Example</h4>
+</tbody>
+</table><h4 id="example">Example</h4>
 
 <p>The <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">“web” service hook</a>
 takes these fields in the <code>config</code>:</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>url</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The URL to which the payloads will be delivered.</td>
     </tr>
-    <tr>
-      <td><code>content_type</code></td>
+<tr>
+<td><code>content_type</code></td>
       <td><code>string</code></td>
       <td>The media type used to serialize the payloads. Supported values: <code>json</code> and <code>form</code>. Default: <code>form</code>.</td>
     </tr>
-    <tr>
-      <td><code>secret</code></td>
+<tr>
+<td><code>secret</code></td>
       <td><code>string</code></td>
       <td>If defined, then HTTP requests that deliver the payloads will include an <code>X-Hub-Signature</code> header. The value of this header is computed as the <a href="https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77">HMAC hex digest of the body, using the <code>secret</code> as the key</a>.</td>
     </tr>
-    <tr>
-      <td><code>insecure_ssl</code></td>
+<tr>
+<td><code>insecure_ssl</code></td>
       <td><code>string</code></td>
       <td>Determines whether the SSL certificate of the host for <code>url</code> will be verified when delivering payloads. Supported values: <code>"0"</code> (verification is performed) and <code>"1"</code> (verification is not performed). Default: <code>"0"</code>.</td>
     </tr>
-  </tbody>
-</table>
-
-<p>Here’s how you can setup a hook that posts payloads in JSON format:</p>
+</tbody>
+</table><p>Here’s how you can setup a hook that posts payloads in JSON format:</p>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"web"</span><span class="p">,</span>
@@ -255,44 +244,40 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameter-1">Parameter</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>config</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>config</code></td>
       <td><code>hash</code></td>
       <td>Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the <a href="https://github.com/github/github-services">github-services</a> repository. Booleans are stored internally as “1” for true, and “0” for false.  Any JSON <code>true</code>/<code>false</code> values will be converted automatically.</td>
     </tr>
-    <tr>
-      <td><code>events</code></td>
+<tr>
+<td><code>events</code></td>
       <td><code>array</code></td>
       <td>Determines what events the hook is triggered for.  This replaces the entire array of events.  Default: <code>["push"]</code>
 </td>
     </tr>
-    <tr>
-      <td><code>add_events</code></td>
+<tr>
+<td><code>add_events</code></td>
       <td><code>array</code></td>
       <td>Determines a list of events to be added to the list of events that the Hook triggers for.</td>
     </tr>
-    <tr>
-      <td><code>remove_events</code></td>
+<tr>
+<td><code>remove_events</code></td>
       <td><code>array</code></td>
       <td>Determines a list of events to be removed from the list of events that the Hook triggers for.</td>
     </tr>
-    <tr>
-      <td><code>active</code></td>
+<tr>
+<td><code>active</code></td>
       <td><code>boolean</code></td>
       <td>Determines whether the hook is actually triggered on pushes.</td>
     </tr>
-  </tbody>
-</table>
-
-<h4 id="example-1">Example</h4>
+</tbody>
+</table><h4 id="example-1">Example</h4>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"active"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -423,47 +408,43 @@ exists, it will be modified according to the request.</p>
 <h4 id="parameters">Parameters</h4>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>hub.mode</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>hub.mode</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. Either <code>subscribe</code> or <code>unsubscribe</code>.</td>
     </tr>
-    <tr>
-      <td><code>hub.topic</code></td>
+<tr>
+<td><code>hub.topic</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>.  The URI of the GitHub repository to subscribe to.  The path must be in the format of <code>/:owner/:repo/events/:event</code>.</td>
     </tr>
-    <tr>
-      <td><code>hub.callback</code></td>
+<tr>
+<td><code>hub.callback</code></td>
       <td><code>string</code></td>
       <td>The URI to receive the updates to the topic.</td>
     </tr>
-    <tr>
-      <td><code>hub.secret</code></td>
+<tr>
+<td><code>hub.secret</code></td>
       <td><code>string</code></td>
       <td>A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the <code>X-Hub-Signature</code> header.  You can see <a href="https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50">our Ruby implementation</a>, or <a href="http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify">the PubSubHubbub documentation</a> for more details.</td>
     </tr>
-  </tbody>
+</tbody>
 </table>
-
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
   <div class="js-toggle-list sidebar-module expandable">
     <ul>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/">Overview</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/media/">Media Types</a></li>
           <li><a href="/v3/oauth/">OAuth</a></li>
@@ -473,7 +454,7 @@ exists, it will be modified according to the request.</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/activity/">Activity</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
           <li><a href="/v3/activity/events/types/">Event Types</a></li>
@@ -484,13 +465,13 @@ exists, it will be modified according to the request.</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/gists/">Gists</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/gists/">Gists</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/gists/comments/">Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/git/">Git Data</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/git/">Git Data</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/git/blobs/">Blobs</a></li>
           <li><a href="/v3/git/commits/">Commits</a></li>
@@ -500,7 +481,7 @@ exists, it will be modified according to the request.</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/issues/">Issues</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/issues/">Issues</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/issues/assignees/">Assignees</a></li>
           <li><a href="/v3/issues/comments/">Comments</a></li>
@@ -510,7 +491,7 @@ exists, it will be modified according to the request.</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/misc/">Miscellaneous</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/emojis/">Emojis</a></li>
           <li><a href="/v3/gitignore/">Gitignore</a></li>
@@ -520,20 +501,20 @@ exists, it will be modified according to the request.</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/pulls/">Pull Requests</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/pulls/">Pull Requests</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/pulls/comments/">Review Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/repos/">Repositories</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/repos/">Repositories</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/v3/repos/comments/">Comments</a></li>
@@ -545,13 +526,14 @@ exists, it will be modified according to the request.</p>
           <li><a href="/v3/repos/forks/">Forks</a></li>
           <li><a href="/v3/repos/hooks/">Hooks</a></li>
           <li><a href="/v3/repos/merging/">Merging</a></li>
+          <li><a href="/v3/repos/pages/">Pages</a></li>
           <li><a href="/v3/repos/releases/">Releases</a></li>
           <li><a href="/v3/repos/statistics/">Statistics</a></li>
           <li><a href="/v3/repos/statuses/">Statuses</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/search/">Search</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/search/">Search</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/search/#search-repositories">Repositories</a></li>
           <li><a href="/v3/search/#search-code">Code</a></li>
@@ -561,7 +543,7 @@ exists, it will be modified according to the request.</p>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/users/">Users</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/users/">Users</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>

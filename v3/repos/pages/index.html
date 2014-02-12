@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Other Authentication Methods | GitHub API</title>
+  <title>Pages | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -50,74 +50,115 @@
 
   <div id="wrapper">
   	<div class="content">
-    	<h1 id="other-authentication-methods">Other Authentication Methods</h1>
+    	<h1 id="pages">Pages</h1>
+
+<p>The Pages API retrieves information about your GitHub Pages configuration, and
+the statuses of your builds. Information about the site and the builds can only be
+accessed by authenticated owners, even thought the websites are public.</p>
 
 <ul id="markdown-toc">
-<li><a href="#basic-authentication">Basic Authentication</a></li>
-  <li><a href="#working-with-two-factor-authentication">Working with two-factor authentication</a></li>
-</ul><p>While the API provides multiple methods for authentication, we strongly
-recommend using <a href="/v3/oauth/">OAuth</a> for production applications. The other
-methods provided are intended to be used for scripts or testing (i.e., cases
-where full OAuth would be overkill). Third party applications that rely on
-GitHub for authentication should not ask for or collect GitHub credentials.
-Instead, they should use the <a href="/v3/oauth">OAuth web flow</a>.</p>
+<li><a href="#get-information-about-a-pages-site">Get information about a Pages site</a></li>
+  <li><a href="#list-pages-builds">List Pages builds</a></li>
+  <li><a href="#list-latest-pages-build">List latest Pages build</a></li>
+</ul><h2 id="get-information-about-a-pages-site">Get information about a Pages site</h2>
 
-<h2 id="basic-authentication">Basic Authentication</h2>
+<pre><code>GET /repos/:owner/:repo/pages
+</code></pre>
 
-<p>The API supports Basic Authentication as defined in
-<a href="http://www.ietf.org/rfc/rfc2617.txt">RFC2617</a> with a few slight differences.
-The main difference is that the RFC requires unauthenticated requests to be
-answered with <code>401 Unauthorized</code> responses. In many places, this would disclose
-the existence of user data. Instead, the GitHub API responds with <code>404 Not Found</code>.
-This may cause problems for HTTP libraries that assume a <code>401 Unauthorized</code>
-response. The solution is to manually craft the <code>Authorization</code> header.</p>
+<h3 id="response">Response</h3>
 
-<h3 id="via-username-and-password">Via Username and Password</h3>
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<p>To use Basic Authentication with the GitHub API, simply send the username and
-password associated with the account.</p>
+<pre><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/github/developer.github.com/pages"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="o">:</span> <span class="s2">"built"</span><span class="p">,</span>
+  <span class="s2">"cname"</span><span class="o">:</span> <span class="s2">"developer.github.com"</span><span class="p">,</span>
+  <span class="s2">"custom_404"</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span></code></pre>
 
-<p>For example, if you’re accessing the API via <a href="http://curl.haxx.se/">cURL</a>, the following command
-would authenticate you if you replace <code>&lt;username&gt;</code> with your GitHub username.
-(cURL will prompt you to enter the password.)</p>
+<h2 id="list-pages-builds">List Pages builds</h2>
 
-<pre class="terminal">
-$ curl -u &lt;username&gt; https://api.github.com/user
-</pre>
+<pre><code>GET /repos/:owner/:repo/pages/builds
+</code></pre>
 
-<h3 id="via-oauth-tokens">Via OAuth Tokens</h3>
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<p>Alternatively, you can authenticate using <a href="https://github.com/blog/1509-personal-api-tokens">personal access
-tokens</a> or OAuth tokens. To do so, provide the token as
-the username and provide a blank password or a password of <code>x-oauth-basic</code>. If
-you’re accessing the API via cURL, replace <code>&lt;token&gt;</code> with your OAuth token in
-the following command:</p>
+<pre><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/github/developer.github.com/pages/builds/5472601"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="o">:</span> <span class="s2">"built"</span><span class="p">,</span>
+    <span class="s2">"error"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"message"</span><span class="o">:</span> <span class="kc">null</span>
+    <span class="p">},</span>
+    <span class="s2">"pusher"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+      <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+      <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+      <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+      <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+      <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+      <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+      <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="s2">"commit"</span><span class="o">:</span> <span class="s2">"351391cdcb88ffae71ec3028c91f375a8036a26b"</span><span class="p">,</span>
+    <span class="s2">"duration"</span><span class="o">:</span> <span class="mi">2104</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2014-02-10T19:00:49Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2014-02-10T19:00:51Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
 
-<pre class="terminal">
-$ curl -u &lt;token&gt;:x-oauth-basic https://api.github.com/user
-</pre>
+<h2 id="list-latest-pages-build">List latest Pages build</h2>
 
-<p>This approach is useful if your tools only support Basic Authentication but you
-want to take advantage of OAuth access token security features.</p>
+<pre><code>GET /repos/:owner/:repo/pages/builds/latest
+</code></pre>
 
-<h2 id="working-with-two-factor-authentication">Working with two-factor authentication</h2>
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
-<p>For users with two-factor authentication enabled, Basic Authentication requires
-an extra step. When you attempt to authenticate with Basic Authentication, the
-server will respond with a <code>401</code> and an <code>X-GitHub-OTP: required;:2fa-type</code>
-header. This indicates that a two-factor authentication code is needed (in
-addition to the username and password). The <code>:2fa-type</code> in this header indicates
-whether the account receives its two-factor authentication codes via SMS or via
-an application.</p>
-
-<p>In addition to the Basic Authentication credentials, you must send the user’s
-authentication code (i.e., one-time password) in the <code>X-GitHub-OTP</code> header.
-Because these authentication codes expire quickly, we recommend using the
-Authorizations API to <a href="/v3/oauth/#create-a-new-authorization">create an access token</a> and using that
-token to <a href="/v3/#authentication">authenticate via OAuth</a> for most API access.</p>
-
-<p>Alternately, you can create access tokens from the Personal Access Token
-section of your <a href="https://github.com/settings/applications">application settings page</a>.</p>
+<pre><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/github/developer.github.com/pages/builds/5472601"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="o">:</span> <span class="s2">"built"</span><span class="p">,</span>
+  <span class="s2">"error"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"message"</span><span class="o">:</span> <span class="kc">null</span>
+  <span class="p">},</span>
+  <span class="s2">"pusher"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">},</span>
+  <span class="s2">"commit"</span><span class="o">:</span> <span class="s2">"351391cdcb88ffae71ec3028c91f375a8036a26b"</span><span class="p">,</span>
+  <span class="s2">"duration"</span><span class="o">:</span> <span class="mi">2104</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2014-02-10T19:00:49Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2014-02-10T19:00:51Z"</span>
+<span class="p">}</span></code></pre>
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

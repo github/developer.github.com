@@ -22,7 +22,6 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        <li><a href="/" class="nav-overview">Overview</a></li>
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
@@ -54,12 +53,10 @@
       <h1 id="webhooks">Webhooks</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#services">Services</a></li>
+<li><a href="#services">Services</a></li>
   <li><a href="#events">Events</a></li>
   <li><a href="#ping-event">Ping Event</a></li>
-</ul>
-
-<p>Every GitHub repository has the option to communicate with a web server whenever
+</ul><p>Every GitHub repository has the option to communicate with a web server whenever
 the repository is pushed to. These “webhooks” can be used to update an external
 issue tracker, trigger CI builds, update a backup mirror, or even deploy to your
 production server.</p>
@@ -110,90 +107,86 @@ service can only listen for <code>push</code>, <code>issues</code>, and <code>pu
 <p>The available events are:</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>push</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>push</code></td>
       <td>Any git push to a Repository. <strong>This is the default event.</strong>
 </td>
     </tr>
-    <tr>
-      <td><code>issues</code></td>
+<tr>
+<td><code>issues</code></td>
       <td>Any time an Issue is opened or closed.</td>
     </tr>
-    <tr>
-      <td><code>issue_comment</code></td>
+<tr>
+<td><code>issue_comment</code></td>
       <td>Any time an Issue is commented on.</td>
     </tr>
-    <tr>
-      <td><code>commit_comment</code></td>
+<tr>
+<td><code>commit_comment</code></td>
       <td>Any time a Commit is commented on.</td>
     </tr>
-    <tr>
-      <td><code>create</code></td>
+<tr>
+<td><code>create</code></td>
       <td>Any time a Repository, Branch, or Tag is created.</td>
     </tr>
-    <tr>
-      <td><code>delete</code></td>
+<tr>
+<td><code>delete</code></td>
       <td>Any time a Branch or Tag is deleted.</td>
     </tr>
-    <tr>
-      <td><code>pull_request</code></td>
+<tr>
+<td><code>pull_request</code></td>
       <td>Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).</td>
     </tr>
-    <tr>
-      <td><code>pull_request_review_comment</code></td>
+<tr>
+<td><code>pull_request_review_comment</code></td>
       <td>Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).</td>
     </tr>
-    <tr>
-      <td><code>gollum</code></td>
+<tr>
+<td><code>gollum</code></td>
       <td>Any time a Wiki page is updated.</td>
     </tr>
-    <tr>
-      <td><code>watch</code></td>
+<tr>
+<td><code>watch</code></td>
       <td>Any time a User watches the Repository.</td>
     </tr>
-    <tr>
-      <td><code>release</code></td>
+<tr>
+<td><code>release</code></td>
       <td>Any time a Release is published in the Repository.</td>
     </tr>
-    <tr>
-      <td><code>fork</code></td>
+<tr>
+<td><code>fork</code></td>
       <td>Any time a Repository is forked.</td>
     </tr>
-    <tr>
-      <td><code>member</code></td>
+<tr>
+<td><code>member</code></td>
       <td>Any time a User is added as a collaborator to a non-Organization Repository.</td>
     </tr>
-    <tr>
-      <td><code>public</code></td>
+<tr>
+<td><code>public</code></td>
       <td>Any time a Repository changes from private to public.</td>
     </tr>
-    <tr>
-      <td><code>team_add</code></td>
+<tr>
+<td><code>team_add</code></td>
       <td>Any time a team is added or modified on a Repository.</td>
     </tr>
-    <tr>
-      <td><code>status</code></td>
+<tr>
+<td><code>status</code></td>
       <td>Any time a Repository has a status update from the API</td>
     </tr>
-    <tr>
-      <td><code>deployment</code></td>
+<tr>
+<td><code>deployment</code></td>
       <td>Any time a Repository has a new deployment created from the API.</td>
     </tr>
-    <tr>
-      <td><code>deployment_status</code></td>
+<tr>
+<td><code>deployment_status</code></td>
       <td>Any time a deployment for the Repository has a status update from the API.</td>
     </tr>
-  </tbody>
-</table>
-
-<h3 id="payloads">Payloads</h3>
+</tbody>
+</table><h3 id="payloads">Payloads</h3>
 
 <p>The payloads for all hooks mirror <a href="/v3/activity/events/types/">the payloads for the Event
 types</a>, with the exception of <a href="http://help.github.com/post-receive-hooks/">the original <code>push</code>
@@ -210,24 +203,21 @@ again by calling the <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a>.</
 <h3 id="ping-event-payload">Ping Event Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>zen</td>
+    </tr></thead>
+<tbody>
+<tr>
+<td>zen</td>
       <td>Random string of GitHub zen</td>
     </tr>
-    <tr>
-      <td>hook_id</td>
+<tr>
+<td>hook_id</td>
       <td>The ID of the webhook that triggered the ping</td>
     </tr>
-  </tbody>
+</tbody>
 </table>
-
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

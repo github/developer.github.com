@@ -22,7 +22,6 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        <li><a href="/" class="nav-overview">Overview</a></li>
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
@@ -64,7 +63,7 @@ organization (if applicable).</p>
 They’re only created for various internal and repository hooks.</p>
 
 <ul id="markdown-toc">
-  <li><a href="#commitcommentevent">CommitCommentEvent</a></li>
+<li><a href="#commitcommentevent">CommitCommentEvent</a></li>
   <li><a href="#createevent">CreateEvent</a></li>
   <li><a href="#deleteevent">DeleteEvent</a></li>
   <li><a href="#deploymentevent">DeploymentEvent</a></li>
@@ -86,9 +85,7 @@ They’re only created for various internal and repository hooks.</p>
   <li><a href="#statusevent">StatusEvent</a></li>
   <li><a href="#teamaddevent">TeamAddEvent</a></li>
   <li><a href="#watchevent">WatchEvent</a></li>
-</ul>
-
-<h2 id="commitcommentevent">CommitCommentEvent</h2>
+</ul><h2 id="commitcommentevent">CommitCommentEvent</h2>
 
 <p>Triggered when a <a href="/v3/repos/comments/#list-commit-comments-for-a-repository">commit comment</a> is created.</p>
 
@@ -99,23 +96,17 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>comment</code></td>
+    </tr></thead>
+<tbody><tr>
+<td><code>comment</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/repos/comments/#list-commit-comments-for-a-repository">comment</a> itself.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="createevent">CreateEvent</h2>
+    </tr></tbody>
+</table><h2 id="createevent">CreateEvent</h2>
 
 <p>Represents a created repository, branch, or tag.</p>
 
@@ -126,38 +117,34 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-1">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>ref_type</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>ref_type</code></td>
       <td><code>string</code></td>
       <td>The object that was created. Can be one of “repository”, “branch”, or “tag”</td>
     </tr>
-    <tr>
-      <td><code>ref</code></td>
+<tr>
+<td><code>ref</code></td>
       <td><code>string</code></td>
       <td>The git ref (or <code>null</code> if only a repository was created).</td>
     </tr>
-    <tr>
-      <td><code>master_branch</code></td>
+<tr>
+<td><code>master_branch</code></td>
       <td><code>string</code></td>
       <td>The name of the repository’s default branch (usually <code>master</code>).</td>
     </tr>
-    <tr>
-      <td><code>description</code></td>
+<tr>
+<td><code>description</code></td>
       <td><code>string</code></td>
       <td>The repository’s current description.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="deleteevent">DeleteEvent</h2>
+</tbody>
+</table><h2 id="deleteevent">DeleteEvent</h2>
 
 <p>Represents a <a href="/v3/git/refs/#delete-a-reference">deleted branch or tag</a>.</p>
 
@@ -168,28 +155,24 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-2">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>ref_type</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>ref_type</code></td>
       <td><code>string</code></td>
       <td>The object that was deleted. Can be “branch” or “tag”.</td>
     </tr>
-    <tr>
-      <td><code>ref</code></td>
+<tr>
+<td><code>ref</code></td>
       <td><code>string</code></td>
       <td>The full git ref.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="deploymentevent">DeploymentEvent</h2>
+</tbody>
+</table><h2 id="deploymentevent">DeploymentEvent</h2>
 
 <p>Represents a <a href="/v3/repos/deployments/#list-deployments">deployment</a>.</p>
 
@@ -202,38 +185,34 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-3">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>sha</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>sha</code></td>
       <td><code>string</code></td>
       <td>The commit SHA for which this deployment was created.</td>
     </tr>
-    <tr>
-      <td><code>name</code></td>
+<tr>
+<td><code>name</code></td>
       <td><code>string</code></td>
       <td>Name of repository for this deployment, formatted as <code>:owner/:repo</code>.</td>
     </tr>
-    <tr>
-      <td><code>payload</code></td>
+<tr>
+<td><code>payload</code></td>
       <td><code>string</code></td>
       <td>The optional extra information for this deployment.</td>
     </tr>
-    <tr>
-      <td><code>description</code></td>
+<tr>
+<td><code>description</code></td>
       <td><code>string</code></td>
       <td>The optional human-readable description added to the deployment.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="deploymentstatusevent">DeploymentStatusEvent</h2>
+</tbody>
+</table><h2 id="deploymentstatusevent">DeploymentStatusEvent</h2>
 
 <p>Represents a <a href="/v3/repos/deployments/#list-deployment-statuses">deployment status</a>.</p>
 
@@ -246,48 +225,44 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-4">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>sha</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>sha</code></td>
       <td><code>string</code></td>
       <td>The commit SHA for the associated deployment.</td>
     </tr>
-    <tr>
-      <td><code>name</code></td>
+<tr>
+<td><code>name</code></td>
       <td><code>string</code></td>
       <td>Name of repository for the associated deployment, formatted as <code>:owner/:repo</code>.</td>
     </tr>
-    <tr>
-      <td><code>state</code></td>
+<tr>
+<td><code>state</code></td>
       <td><code>string</code></td>
       <td>The new state. Can be <code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>.</td>
     </tr>
-    <tr>
-      <td><code>payload</code></td>
+<tr>
+<td><code>payload</code></td>
       <td><code>string</code></td>
       <td>The optional extra information for the associated deployment.</td>
     </tr>
-    <tr>
-      <td><code>target_url</code></td>
+<tr>
+<td><code>target_url</code></td>
       <td><code>string</code></td>
       <td>The optional link added to the status.</td>
     </tr>
-    <tr>
-      <td><code>description</code></td>
+<tr>
+<td><code>description</code></td>
       <td><code>string</code></td>
       <td>The optional human-readable description added to the status.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="downloadevent">DownloadEvent</h2>
+</tbody>
+</table><h2 id="downloadevent">DownloadEvent</h2>
 
 <p>Triggered when a new <a href="/v3/repos/downloads/">download</a> is created.</p>
 
@@ -300,23 +275,17 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-5">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>download</code></td>
+    </tr></thead>
+<tbody><tr>
+<td><code>download</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/repos/downloads/">download</a> that was just created.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="followevent">FollowEvent</h2>
+    </tr></tbody>
+</table><h2 id="followevent">FollowEvent</h2>
 
 <p>Triggered when a user <a href="/v3/users/followers/#follow-a-user">follows another user</a>.</p>
 
@@ -329,23 +298,17 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-6">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>target</code></td>
+    </tr></thead>
+<tbody><tr>
+<td><code>target</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/users">user</a> that was just followed.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="forkevent">ForkEvent</h2>
+    </tr></tbody>
+</table><h2 id="forkevent">ForkEvent</h2>
 
 <p>Triggered when a user <a href="/v3/repos/forks/#create-a-fork">forks a repository</a>.</p>
 
@@ -356,23 +319,17 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-7">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>forkee</code></td>
+    </tr></thead>
+<tbody><tr>
+<td><code>forkee</code></td>
       <td><code>object</code></td>
       <td>The created <a href="/v3/repos/">repository</a>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="forkapplyevent">ForkApplyEvent</h2>
+    </tr></tbody>
+</table><h2 id="forkapplyevent">ForkApplyEvent</h2>
 
 <p>Triggered when a patch is applied in the Fork Queue.</p>
 
@@ -385,33 +342,29 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-8">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>head</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>head</code></td>
       <td><code>string</code></td>
       <td>The branch name the patch is applied to.</td>
     </tr>
-    <tr>
-      <td><code>before</code></td>
+<tr>
+<td><code>before</code></td>
       <td><code>string</code></td>
       <td>SHA of the repository state before the patch.</td>
     </tr>
-    <tr>
-      <td><code>after</code></td>
+<tr>
+<td><code>after</code></td>
       <td><code>string</code></td>
       <td>SHA of the repository state after the patch.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="gistevent">GistEvent</h2>
+</tbody>
+</table><h2 id="gistevent">GistEvent</h2>
 
 <p>Triggered when a <a href="/v3/gists/">Gist</a> is created or updated.</p>
 
@@ -424,28 +377,24 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-9">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>action</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed. Can be “create” or “update”</td>
     </tr>
-    <tr>
-      <td><code>gist</code></td>
+<tr>
+<td><code>gist</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/gists/">gist</a> itself.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="gollumevent">GollumEvent</h2>
+</tbody>
+</table><h2 id="gollumevent">GollumEvent</h2>
 
 <p>Triggered when a Wiki page is created or updated.</p>
 
@@ -456,48 +405,44 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-10">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>pages</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>pages</code></td>
       <td><code>array</code></td>
       <td>The pages that were updated.</td>
     </tr>
-    <tr>
-      <td><code>pages[][page_name]</code></td>
+<tr>
+<td><code>pages[][page_name]</code></td>
       <td><code>string</code></td>
       <td>The name of the page.</td>
     </tr>
-    <tr>
-      <td><code>pages[][title]</code></td>
+<tr>
+<td><code>pages[][title]</code></td>
       <td><code>string</code></td>
       <td>The current page title.</td>
     </tr>
-    <tr>
-      <td><code>pages[][action]</code></td>
+<tr>
+<td><code>pages[][action]</code></td>
       <td><code>string</code></td>
       <td>The action that was performed on the page. Can be “created” or “edited”.</td>
     </tr>
-    <tr>
-      <td><code>pages[][sha]</code></td>
+<tr>
+<td><code>pages[][sha]</code></td>
       <td><code>string</code></td>
       <td>The latest commit SHA of the page.</td>
     </tr>
-    <tr>
-      <td><code>pages[][html_url]</code></td>
+<tr>
+<td><code>pages[][html_url]</code></td>
       <td><code>string</code></td>
       <td>Points to the HTML wiki page.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="issuecommentevent">IssueCommentEvent</h2>
+</tbody>
+</table><h2 id="issuecommentevent">IssueCommentEvent</h2>
 
 <p>Triggered when an <a href="/v3/issues/comments/">issue comment</a> is created.</p>
 
@@ -508,33 +453,29 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-11">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>action</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed on the comment. Currently, can only be “created”.</td>
     </tr>
-    <tr>
-      <td><code>issue</code></td>
+<tr>
+<td><code>issue</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/issues/">issue</a> the comment belongs to.</td>
     </tr>
-    <tr>
-      <td><code>comment</code></td>
+<tr>
+<td><code>comment</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/issues/comments/">comment</a> itself.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="issuesevent">IssuesEvent</h2>
+</tbody>
+</table><h2 id="issuesevent">IssuesEvent</h2>
 
 <p>Triggered when an <a href="/v3/issues">issue</a> is created, closed or reopened.</p>
 
@@ -545,28 +486,24 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-12">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>action</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed. Can be one of “opened”, “closed”, or “reopened”.</td>
     </tr>
-    <tr>
-      <td><code>issue</code></td>
+<tr>
+<td><code>issue</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/issues">issue</a> itself.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="memberevent">MemberEvent</h2>
+</tbody>
+</table><h2 id="memberevent">MemberEvent</h2>
 
 <p>Triggered when a user is <a href="/v3/repos/collaborators/#add-collaborator">added as a collaborator</a> to a repository.</p>
 
@@ -577,28 +514,24 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-13">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>member</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>member</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/users/">user</a> that was added.</td>
     </tr>
-    <tr>
-      <td><code>action</code></td>
+<tr>
+<td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed. Currently, can only be “added”.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="publicevent">PublicEvent</h2>
+</tbody>
+</table><h2 id="publicevent">PublicEvent</h2>
 
 <p>Triggered when a private repository is <a href="/v3/repos/#edit">open sourced</a>.  Without a doubt: the best GitHub event.</p>
 
@@ -621,33 +554,29 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-15">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>action</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed. Can be one of “opened”, “closed”, “synchronize”, or “reopened”.</td>
     </tr>
-    <tr>
-      <td><code>number</code></td>
+<tr>
+<td><code>number</code></td>
       <td><code>integer</code></td>
       <td>The pull request number.</td>
     </tr>
-    <tr>
-      <td><code>pull_request</code></td>
+<tr>
+<td><code>pull_request</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/pulls">pull request</a> itself.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="pullrequestreviewcommentevent">PullRequestReviewCommentEvent</h2>
+</tbody>
+</table><h2 id="pullrequestreviewcommentevent">PullRequestReviewCommentEvent</h2>
 
 <p>Triggered when a <a href="/v3/pulls/comments">comment is created on a portion of the unified diff</a> of a pull request.</p>
 
@@ -658,23 +587,17 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-16">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>comment</code></td>
+    </tr></thead>
+<tbody><tr>
+<td><code>comment</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/pulls/comments">comment</a> itself.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="pushevent">PushEvent</h2>
+    </tr></tbody>
+</table><h2 id="pushevent">PushEvent</h2>
 
 <p>Triggered when a repository branch is pushed to.</p>
 
@@ -685,73 +608,69 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-17">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>head</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>head</code></td>
       <td><code>string</code></td>
       <td>The SHA of the HEAD commit on the repository.</td>
     </tr>
-    <tr>
-      <td><code>ref</code></td>
+<tr>
+<td><code>ref</code></td>
       <td><code>string</code></td>
       <td>The full Git ref that was pushed.  Example: “refs/heads/master”</td>
     </tr>
-    <tr>
-      <td><code>size</code></td>
+<tr>
+<td><code>size</code></td>
       <td><code>integer</code></td>
       <td>The number of commits in the push.</td>
     </tr>
-    <tr>
-      <td><code>commits</code></td>
+<tr>
+<td><code>commits</code></td>
       <td><code>array</code></td>
       <td>An array of commit objects describing the pushed commits. (The array includes a maximum of 20 commits. If necessary, you can use the <a href="/v3/repos/commits/">Commits API</a> to fetch additional commits.)</td>
     </tr>
-    <tr>
-      <td><code>commits[][sha]</code></td>
+<tr>
+<td><code>commits[][sha]</code></td>
       <td><code>string</code></td>
       <td>The SHA of the commit.</td>
     </tr>
-    <tr>
-      <td><code>commits[][message]</code></td>
+<tr>
+<td><code>commits[][message]</code></td>
       <td><code>string</code></td>
       <td>The commit message.</td>
     </tr>
-    <tr>
-      <td><code>commits[][author]</code></td>
+<tr>
+<td><code>commits[][author]</code></td>
       <td><code>object</code></td>
       <td>The git author of the commit.</td>
     </tr>
-    <tr>
-      <td><code>commits[][author][name]</code></td>
+<tr>
+<td><code>commits[][author][name]</code></td>
       <td><code>string</code></td>
       <td>The git author’s name.</td>
     </tr>
-    <tr>
-      <td><code>commits[][author][email]</code></td>
+<tr>
+<td><code>commits[][author][email]</code></td>
       <td><code>string</code></td>
       <td>The git author’s email address.</td>
     </tr>
-    <tr>
-      <td><code>commits[][url]</code></td>
+<tr>
+<td><code>commits[][url]</code></td>
       <td><code>url</code></td>
       <td>Points to the commit API resource.</td>
     </tr>
-    <tr>
-      <td><code>commits[][distinct]</code></td>
+<tr>
+<td><code>commits[][distinct]</code></td>
       <td><code>boolean</code></td>
       <td>Whether this commit is distinct from any that have been pushed before.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="releaseevent">ReleaseEvent</h2>
+</tbody>
+</table><h2 id="releaseevent">ReleaseEvent</h2>
 
 <p>Triggered when a <a href="/v3/repos/releases/#get-a-single-release">release</a> is published.</p>
 
@@ -762,28 +681,24 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-18">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>action</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed. Currently, can only be “published”.</td>
     </tr>
-    <tr>
-      <td><code>release</code></td>
+<tr>
+<td><code>release</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/repos/releases/#get-a-single-release">release</a> itself.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="statusevent">StatusEvent</h2>
+</tbody>
+</table><h2 id="statusevent">StatusEvent</h2>
 
 <p>Triggered when the status of a Git commit changes.</p>
 
@@ -796,43 +711,39 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-19">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>sha</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>sha</code></td>
       <td><code>string</code></td>
       <td>The Commit SHA.</td>
     </tr>
-    <tr>
-      <td><code>state</code></td>
+<tr>
+<td><code>state</code></td>
       <td><code>string</code></td>
       <td>The new state. Can be <code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>.</td>
     </tr>
-    <tr>
-      <td><code>description</code></td>
+<tr>
+<td><code>description</code></td>
       <td><code>string</code></td>
       <td>The optional human-readable description added to the status.</td>
     </tr>
-    <tr>
-      <td><code>target_url</code></td>
+<tr>
+<td><code>target_url</code></td>
       <td><code>string</code></td>
       <td>The optional link added to the status.</td>
     </tr>
-    <tr>
-      <td><code>branches</code></td>
+<tr>
+<td><code>branches</code></td>
       <td><code>array</code></td>
       <td>An array of branch objects containing the status’ SHA. Each branch contains the given SHA, but the SHA may or may not be the head of the branch. The array includes a maximum of 10 branches.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="teamaddevent">TeamAddEvent</h2>
+</tbody>
+</table><h2 id="teamaddevent">TeamAddEvent</h2>
 
 <p>Triggered when a <a href="/v3/orgs/teams/#add-team-member">user is added to a team</a> or when a <a href="/v3/orgs/teams/#add-team-repo">repository is added to a team</a>.</p>
 
@@ -845,33 +756,29 @@ They’re only created for various internal and repository hooks.</p>
 <h3 id="payload-20">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>team</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>team</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/orgs/teams/">team</a> that was modified.  Note: older events may not include this in the payload.</td>
     </tr>
-    <tr>
-      <td><code>user</code></td>
+<tr>
+<td><code>user</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/users/">user</a> that was added to this team.</td>
     </tr>
-    <tr>
-      <td><code>repo</code></td>
+<tr>
+<td><code>repo</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/repos/">repository</a> that was added to this team.</td>
     </tr>
-  </tbody>
-</table>
-
-<h2 id="watchevent">WatchEvent</h2>
+</tbody>
+</table><h2 id="watchevent">WatchEvent</h2>
 
 <p>The WatchEvent is related to <a href="/v3/activity/starring/#star-a-repository">starring a repository</a>, not <a href="/v3/activity/watching/">watching</a>.
 See <a href="/changes/2012-9-5-watcher-api/">this API blog post</a> for an explanation.</p>
@@ -886,29 +793,24 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
 <h3 id="payload-21">Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>action</code></td>
+    </tr></thead>
+<tbody><tr>
+<td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed. Currently, can only be <code>started</code>.</td>
-    </tr>
-  </tbody>
+    </tr></tbody>
 </table>
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
   <div class="js-toggle-list sidebar-module expandable">
     <ul>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/">Overview</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/media/">Media Types</a></li>
           <li><a href="/v3/oauth/">OAuth</a></li>
@@ -918,7 +820,7 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/activity/">Activity</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
           <li><a href="/v3/activity/events/types/">Event Types</a></li>
@@ -929,13 +831,13 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/gists/">Gists</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/gists/">Gists</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/gists/comments/">Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/git/">Git Data</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/git/">Git Data</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/git/blobs/">Blobs</a></li>
           <li><a href="/v3/git/commits/">Commits</a></li>
@@ -945,7 +847,7 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/issues/">Issues</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/issues/">Issues</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/issues/assignees/">Assignees</a></li>
           <li><a href="/v3/issues/comments/">Comments</a></li>
@@ -955,7 +857,7 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/misc/">Miscellaneous</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/emojis/">Emojis</a></li>
           <li><a href="/v3/gitignore/">Gitignore</a></li>
@@ -965,20 +867,20 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/pulls/">Pull Requests</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/pulls/">Pull Requests</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/pulls/comments/">Review Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/repos/">Repositories</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/repos/">Repositories</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/v3/repos/comments/">Comments</a></li>
@@ -990,13 +892,14 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
           <li><a href="/v3/repos/forks/">Forks</a></li>
           <li><a href="/v3/repos/hooks/">Hooks</a></li>
           <li><a href="/v3/repos/merging/">Merging</a></li>
+          <li><a href="/v3/repos/pages/">Pages</a></li>
           <li><a href="/v3/repos/releases/">Releases</a></li>
           <li><a href="/v3/repos/statistics/">Statistics</a></li>
           <li><a href="/v3/repos/statuses/">Statuses</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/search/">Search</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/search/">Search</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/search/#search-repositories">Repositories</a></li>
           <li><a href="/v3/search/#search-code">Code</a></li>
@@ -1006,7 +909,7 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/users/">Users</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/users/">Users</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>

@@ -22,7 +22,6 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
-        <li><a href="/" class="nav-overview">Overview</a></li>
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
@@ -54,7 +53,7 @@
     	<h1 id="releases">Releases</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-releases-for-a-repository">List releases for a repository</a></li>
+<li><a href="#list-releases-for-a-repository">List releases for a repository</a></li>
   <li><a href="#get-a-single-release">Get a single release</a></li>
   <li><a href="#create-a-release">Create a release</a></li>
   <li><a href="#edit-a-release">Edit a release</a></li>
@@ -64,9 +63,7 @@
   <li><a href="#get-a-single-release-asset">Get a single release asset</a></li>
   <li><a href="#edit-a-release-asset">Edit a release asset</a></li>
   <li><a href="#delete-a-release-asset">Delete a release asset</a></li>
-</ul>
-
-<h2 id="list-releases-for-a-repository">List releases for a repository</h2>
+</ul><h2 id="list-releases-for-a-repository">List releases for a repository</h2>
 
 <p>Users with push access to the repository will receive all releases
 (i.e., published releases and draft releases). Users with pull access
@@ -251,53 +248,49 @@ that creates release assets</a>.</p>
 <h3 id="input">Input</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>tag_name</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>tag_name</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The name of the tag.</td>
     </tr>
-    <tr>
-      <td><code>target_commitish</code></td>
+<tr>
+<td><code>target_commitish</code></td>
       <td><code>string</code></td>
       <td>Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository’s default branch (usually <code>master</code>).</td>
     </tr>
-    <tr>
-      <td><code>name</code></td>
+<tr>
+<td><code>name</code></td>
       <td><code>string</code></td>
       <td>The name of the release.</td>
     </tr>
-    <tr>
-      <td><code>body</code></td>
+<tr>
+<td><code>body</code></td>
       <td><code>string</code></td>
       <td>Text describing the contents of the tag.</td>
     </tr>
-    <tr>
-      <td><code>draft</code></td>
+<tr>
+<td><code>draft</code></td>
       <td><code>boolean</code></td>
       <td>
 <code>true</code> to create a draft (unpublished) release, <code>false</code> to create a published one. Default: <code>false</code>
 </td>
     </tr>
-    <tr>
-      <td><code>prerelease</code></td>
+<tr>
+<td><code>prerelease</code></td>
       <td><code>boolean</code></td>
       <td>
 <code>true</code> to identify the release as a prerelease. <code>false</code> to identify the release as a full release. Default: <code>false</code>
 </td>
     </tr>
-  </tbody>
-</table>
-
-<h4 id="example">Example</h4>
+</tbody>
+</table><h4 id="example">Example</h4>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
@@ -365,50 +358,46 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-1">Input</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>tag_name</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>tag_name</code></td>
       <td><code>string</code></td>
       <td>The name of the tag.</td>
     </tr>
-    <tr>
-      <td><code>target_commitish</code></td>
+<tr>
+<td><code>target_commitish</code></td>
       <td><code>string</code></td>
       <td>Specifies the commitish value that determines where the Git tag is created from.  Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository’s default branch (usually <code>master</code>).</td>
     </tr>
-    <tr>
-      <td><code>name</code></td>
+<tr>
+<td><code>name</code></td>
       <td><code>string</code></td>
       <td>The name of the release.</td>
     </tr>
-    <tr>
-      <td><code>body</code></td>
+<tr>
+<td><code>body</code></td>
       <td><code>string</code></td>
       <td>Text describing the contents of the tag.</td>
     </tr>
-    <tr>
-      <td><code>draft</code></td>
+<tr>
+<td><code>draft</code></td>
       <td><code>boolean</code></td>
       <td>
 <code>true</code> makes the release a draft, and <code>false</code> publishes the release.</td>
     </tr>
-    <tr>
-      <td><code>prerelease</code></td>
+<tr>
+<td><code>prerelease</code></td>
       <td><code>boolean</code></td>
       <td>
 <code>true</code> to identify the release as a prerelease, <code>false</code> to identify the release as a full release.</td>
     </tr>
-  </tbody>
-</table>
-
-<h4 id="example-1">Example</h4>
+</tbody>
+</table><h4 id="example-1">Example</h4>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"tag_name"</span><span class="o">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
@@ -575,30 +564,26 @@ authentication exactly the same as the rest of the API.</p>
 asset’s name in a URI query parameter.</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Content-Type</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>Content-Type</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The content type of the asset. This should be set in the Header. Example: “application/zip”. For a list of acceptable types, refer this list of <a href="http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types">common media types</a>.</td>
     </tr>
-    <tr>
-      <td><code>name</code></td>
+<tr>
+<td><code>name</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The file name of the asset. This should be set in the URI query parameter.</td>
     </tr>
-  </tbody>
-</table>
-
-<p>Send the raw binary content of the asset as the request body.</p>
+</tbody>
+</table><p>Send the raw binary content of the asset as the request body.</p>
 
 <h3 id="response-for-successful-upload">Response for successful upload</h3>
 
@@ -708,29 +693,25 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="input-3">Input</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>name</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The file name of the asset.</td>
     </tr>
-    <tr>
-      <td><code>label</code></td>
+<tr>
+<td><code>label</code></td>
       <td><code>string</code></td>
       <td>An alternate short description of the asset.  Used in place of the filename.</td>
     </tr>
-  </tbody>
-</table>
-
-<h4 id="example-2">Example</h4>
+</tbody>
+</table><h4 id="example-2">Example</h4>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"foo-1.0.0-osx.zip"</span><span class="p">,</span>
@@ -785,15 +766,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
-
-
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
   <div class="js-toggle-list sidebar-module expandable">
     <ul>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/">Overview</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/media/">Media Types</a></li>
           <li><a href="/v3/oauth/">OAuth</a></li>
@@ -803,7 +782,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/activity/">Activity</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
           <li><a href="/v3/activity/events/types/">Event Types</a></li>
@@ -814,13 +793,13 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/gists/">Gists</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/gists/">Gists</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/gists/comments/">Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/git/">Git Data</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/git/">Git Data</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/git/blobs/">Blobs</a></li>
           <li><a href="/v3/git/commits/">Commits</a></li>
@@ -830,7 +809,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/issues/">Issues</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/issues/">Issues</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/issues/assignees/">Assignees</a></li>
           <li><a href="/v3/issues/comments/">Comments</a></li>
@@ -840,7 +819,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/misc/">Miscellaneous</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/emojis/">Emojis</a></li>
           <li><a href="/v3/gitignore/">Gitignore</a></li>
@@ -850,20 +829,20 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/orgs/">Organizations</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/pulls/">Pull Requests</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/pulls/">Pull Requests</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/pulls/comments/">Review Comments</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/repos/">Repositories</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/repos/">Repositories</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/v3/repos/comments/">Comments</a></li>
@@ -875,13 +854,14 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li><a href="/v3/repos/forks/">Forks</a></li>
           <li><a href="/v3/repos/hooks/">Hooks</a></li>
           <li><a href="/v3/repos/merging/">Merging</a></li>
+          <li><a href="/v3/repos/pages/">Pages</a></li>
           <li><a href="/v3/repos/releases/">Releases</a></li>
           <li><a href="/v3/repos/statistics/">Statistics</a></li>
           <li><a href="/v3/repos/statuses/">Statuses</a></li>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/search/">Search</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/search/">Search</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/search/#search-repositories">Repositories</a></li>
           <li><a href="/v3/search/#search-code">Code</a></li>
@@ -891,7 +871,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         </ul>
       </li>
       <li class="js-topic">
-        <h3><a href="#" class="js-expand-btn collapsed arrow-btn"></a><a href="/v3/users/">Users</a></h3>
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/users/">Users</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>

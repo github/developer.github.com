@@ -1,6 +1,8 @@
 require 'nanoc3/tasks'
 require 'html/proofer'
 
+task :default => [:test]
+
 desc "Compile the site"
 task :compile do
   `nanoc compile`

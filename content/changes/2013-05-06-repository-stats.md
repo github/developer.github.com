@@ -11,10 +11,10 @@ but we can't wait to see what others can do with this information.
 
 Starting today, these resources are available to you:
 
-* **[Contributors](/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts)**
-* **[Commit Activity](/v3/repos/statistics/#get-the-last-year-of-commit-activity-data)**
-* **[Code Frequency](/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week)**
-* **[Participation](/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repo-owner-and-everyone-else)**
-* **[Punch Card](/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day)**
+* **[Contributors](/v3/repos/statistics/#contributors)**
+* **[Commit Activity](/v3/repos/statistics/#commit-activity)**
+* **[Code Frequency](/v3/repos/statistics/#code-frequency)**
+* **[Participation](/v3/repos/statistics/#participation)**
+* **[Punch Card](/v3/repos/statistics/#punch-card)**
 
 Enjoy!

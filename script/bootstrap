@@ -1,8 +1,11 @@
 #!/bin/sh
 
 set -e
+export CC=gcc
 
 command -v bundle >/dev/null 2>&1 || { echo >&2 "Bundler required but not found: gem install bundler"; exit 1; }
 
-echo "===> Bundling"
-bundle install --quiet "$@"
+echo "==> Installing gem dependencies…"
+bundle check --path vendor/gems 2>&1 > /dev/null || {
+  bundle install --binstubs bin --path vendor/gems --quiet
+}

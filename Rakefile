@@ -1,3 +1,4 @@
+require 'nanoc3/tasks'
 require 'html/proofer'
 
 desc "Compile the site"

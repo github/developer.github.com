@@ -1,8 +1,14 @@
 require 'nanoc3/tasks'
+require 'html/proofer'
 
 desc "Compile the site"
 task :compile do
   `nanoc compile`
+end
+
+desc "Test the output"
+task :test => [:compile] do
+  HTML::Proofer.new("./output").run
 end
 
 # Prompt user for a commit message; default: P U B L I S H :emoji:

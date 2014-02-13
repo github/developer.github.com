@@ -6,7 +6,7 @@ title: Pages | GitHub API
 
 The Pages API retrieves information about your GitHub Pages configuration, and
 the statuses of your builds. Information about the site and the builds can only be
-accessed by authenticated owners, even thought the websites are public.
+accessed by authenticated owners, even though the websites are public.
 
 * TOC
 {:toc}

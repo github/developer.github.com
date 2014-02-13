@@ -4,12 +4,19 @@ title: Pages | GitHub API
 
 # Pages
 
+* TOC
+{:toc}
+
 The Pages API retrieves information about your GitHub Pages configuration, and
 the statuses of your builds. Information about the site and the builds can only be
 accessed by authenticated owners, even thought the websites are public.
 
-* TOC
-{:toc}
+In JSON responses, `status` can be one of:
+
+* `null`, which means the site has yet to be built
+* `building`, which means the build is in progress
+* `built`, which means the site has been built
+* `errored`, which indicates an error occurred during the build
 
 ## Get information about a Pages site
 

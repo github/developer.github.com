@@ -53,14 +53,25 @@
   	<div class="content">
     	<h1 id="pages">Pages</h1>
 
-<p>The Pages API retrieves information about your GitHub Pages configuration, and
-the statuses of your builds. Information about the site and the builds can only be
-accessed by authenticated owners, even though the websites are public.</p>
-
 <ul id="markdown-toc">
 <li><a href="#get-information-about-a-pages-site">Get information about a Pages site</a></li>
   <li><a href="#list-pages-builds">List Pages builds</a></li>
   <li><a href="#list-latest-pages-build">List latest Pages build</a></li>
+</ul><p>The Pages API retrieves information about your GitHub Pages configuration, and
+the statuses of your builds. Information about the site and the builds can only be
+accessed by authenticated owners, even though the websites are public.</p>
+
+<p>In JSON responses, <code>status</code> can be one of:</p>
+
+<ul>
+<li>
+<code>null</code>, which means the site has yet to be built</li>
+  <li>
+<code>building</code>, which means the build is in progress</li>
+  <li>
+<code>built</code>, which means the site has been built</li>
+  <li>
+<code>errored</code>, which indicates an error occurred during the build</li>
 </ul><h2 id="get-information-about-a-pages-site">Get information about a Pages site</h2>
 
 <pre><code>GET /repos/:owner/:repo/pages

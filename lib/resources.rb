@@ -729,6 +729,10 @@ module GitHub
       "updated_at" => "2011-04-22T13:33:48Z"
     }
 
+    FULL_ISSUE = ISSUE.merge({
+      "closed_by" => USER
+    })
+
     ISSUE_COMMENT = {
       "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1",

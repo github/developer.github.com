@@ -72,7 +72,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json :issue %>
+<%= json :full_issue %>
 
 <div class="alert">
   <p>
@@ -111,7 +111,7 @@ Name | Type | Description
 <%= headers 201,
       :Location =>
 'https://api.github.com/repos/user/repo/issues/1' %>
-<%= json :issue %>
+<%= json :full_issue %>
 
 ## Edit an issue
 
@@ -145,7 +145,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json :issue %>
+<%= json :full_issue %>
 
 ## Custom media types
 

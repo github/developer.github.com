@@ -347,7 +347,7 @@ available as a separate project.
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test
 [oauth scopes]: /v3/oauth/#scopes
 [edit scopes post]: /changes/2013-10-04-oauth-changes-coming/
-[check token valid]: /v3/oauth/#check-an-authorization
+[check token valid]: /v3/oauth_authorizations/#check-an-authorization
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication
 [new oauth app]: https://github.com/settings/applications/new
 [app settings]: https://github.com/settings/applications

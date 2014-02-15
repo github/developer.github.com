@@ -30,7 +30,7 @@ users have two-factor authentication enabled.)
 
 ## Create a new authorization
 
-If you need a small number of tokens, implementing the [web flow](#web-application-flow)
+If you need a small number of tokens, implementing the [web flow](/v3/oauth/#web-application-flow)
 can be cumbersome. Instead, tokens can be created using the Authorizations API using
 [Basic Authentication](/v3/auth#basic-authentication). To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings

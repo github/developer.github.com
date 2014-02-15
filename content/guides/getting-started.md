@@ -517,7 +517,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [media types]: /v3/media/
 [oauth]: /v3/oauth/
 [webflow]: /v3/oauth/#web-application-flow
-[authorizations api]: /v3/oauth/#create-a-new-authorization
+[authorizations api]: /v3/oauth_authorizations/#create-a-new-authorization
 [scopes]: /v3/oauth/#scopes
 [repos-api]: /v3/repos/
 [pages]: http://pages.github.com

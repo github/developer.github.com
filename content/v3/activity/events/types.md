@@ -34,7 +34,9 @@ Key | Type | Description
 
 ## CreateEvent
 
-Represents a created branch or tag.
+Represents a created repository, branch, or tag.
+
+Note: webhooks will not receive this event for created repositories.
 
 ### Hook name
 

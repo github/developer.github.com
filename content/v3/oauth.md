@@ -241,12 +241,12 @@ an additional set of errors that can occur. The format of these
 responses is determined by the accept header you pass. The following
 examples only show JSON responses.
 
-### Invalid client credentials
+### Incorrect client credentials
 
 If the client\_id and or client\_secret you pass are incorrect you will
 receive this error response.
 
-<%= json :error => :invalid_client_credentials %>
+<%= json :error => :incorrect_client_credentials %>
 
 To solve this error, go back and make sure you have the correct
 credentials for your oauth application. Double check the `client_id` and

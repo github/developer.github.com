@@ -205,6 +205,9 @@ registered callback URL with the following parameters summerizing the
 error:
 
     http://your-application.com/callback?error=application_suspended
+      &error_description=Your%20application%20has%20been%20suspended.%20Contact%20support@github.com.
+      &error_uri=http://developer.github.com/v3/oauth/%23application-suspended
+      &state=xyz
 
 Please contact [support](https://github.com/contact) to solve issues
 with suspended applications.
@@ -216,6 +219,9 @@ with your application, GitHub will redirect to the registered callback
 URL with the following parameters summerizing the error:
 
     http://your-application.com/callback?error=redirect_uri_mismatch
+      &error_description=The%20redirect_uri%20MUST%20match%20the%20registered%20callback%20URL%20for%20this%20application.
+      &error_uri=http://developer.github.com/v3/oauth/%23redirect-uri-mismatch
+      &state=xyz
 
 To correct this error, either provide a redirect_uri that matches what
 you registered or leave out this parameter to use the default one
@@ -228,6 +234,9 @@ the registered callback URL with the following parameters summerizing
 the error:
 
     http://your-application.com/callback?error=access_denied
+      &error_description=The%20user%20has%20denied%20your%20application%20access.
+      &error_uri=http://developer.github.com/v3/oauth/%23access-denied
+      &state=xyz
 
 There's nothing you can do here as users are free to choose not to use
 your application. More often that not, users will just close the window
@@ -246,12 +255,29 @@ examples only show JSON responses.
 If the client\_id and or client\_secret you pass are incorrect you will
 receive this error response.
 
-<%= json :error => :incorrect_client_credentials %>
+<%= json :error             => :incorrect_client_credentials,
+         :error_description => "The client_id and/or client_secret passed are incorrect.",
+         :error_uri         => "http://developer.github.com/v3/oauth/#incorrect-client-credentials"
+%>
 
 To solve this error, go back and make sure you have the correct
 credentials for your oauth application. Double check the `client_id` and
 `client_secret` to make sure they are correct and being passed correctly
 to GitHub.
+
+### Redirect URI mismatch(2)
+
+If you provide a redirect_uri that doesn't match what you've registered
+with your application, you will receive this error message:
+
+<%= json :error             => :redirect_uri_mismatch,
+         :error_description => "The redirect_uri MUST match the registered callback URL for this application.",
+         :error_uri         => "http://developer.github.com/v3/oauth/#redirect-uri-mismatch(2)"
+%>
+
+To correct this error, either provide a redirect_uri that matches what
+you registered or leave out this parameter to use the default one
+registered with your application.
 
 ### Bad verification code
 
@@ -259,7 +285,11 @@ If the verification code you pass is incorrect, expired, or doesn't
 match what you received in the first request for authorization you will
 receive this error.
 
-<%= json :error => :bad_verification_code %>
+<%= json :error             => :bad_verification_code,
+         :error_description => "The code passed is incorrect or expired.",
+         :error_uri         => "http://developer.github.com/v3/oauth/#bad-verification-code"
+%>
+
 
 To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
 and get a new code.

@@ -58,17 +58,8 @@
   <li><a href="#non-web-application-flow">Non-Web Application Flow</a></li>
   <li><a href="#redirect-urls">Redirect URLs</a></li>
   <li><a href="#scopes">Scopes</a></li>
-  <li><a href="#oauth-authorizations-api">OAuth Authorizations API</a></li>
-  <li><a href="#list-your-authorizations">List your authorizations</a></li>
-  <li><a href="#get-a-single-authorization">Get a single authorization</a></li>
-  <li><a href="#create-a-new-authorization">Create a new authorization</a></li>
-  <li><a href="#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a></li>
-  <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
-  <li><a href="#delete-an-authorization">Delete an authorization</a></li>
-  <li><a href="#check-an-authorization">Check an authorization</a></li>
-  <li><a href="#revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</a></li>
-  <li><a href="#revoke-an-authorization-for-an-application">Revoke an authorization for an application</a></li>
-  <li><a href="#more-information">More Information</a></li>
+  <li><a href="#common-errors-for-the-authorization-request">Common errors for the authorization request</a></li>
+  <li><a href="#common-errors-for-the-access-token-request">Common errors for the access token request</a></li>
 </ul><p>OAuth2 is a protocol that lets external apps request authorization to
 private details in a user’s GitHub account without getting their
 password. This is preferred over <a href="/v3/auth#basic-authentication">Basic Authentication</a> because tokens can
@@ -222,10 +213,21 @@ token with <code>user</code> and <code>gist</code> scopes only since the access 
 <pre><code>GET https://api.github.com/user?access_token=...
 </code></pre>
 
+<p>You can pass the token in the query params like shown above, but a
+cleaner approach is to include it in the Authorization header</p>
+
+<pre><code>Authorization: token OAUTH-TOKEN
+</code></pre>
+
+<p>For example, in curl you can set the Authorization header like this:</p>
+
+<pre><code>curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+</code></pre>
+
 <h2 id="non-web-application-flow">Non-Web Application Flow</h2>
 
 <p>Use <a href="/v3/auth#basic-authentication">Basic Authentication</a> to create an OAuth2
-token using the <a href="/v3/oauth/#create-a-new-authorization">interface below</a>.  With
+token using the <a href="/v3/oauth_authorizations/#create-a-new-authorization">interface below</a>.  With
 this technique, a username and password need not be stored permanently, and the
 user can revoke access at any time. (Make sure to understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with
 two-factor authentication</a> if
@@ -241,7 +243,7 @@ subdirectory of the callback URL.</p>
 
 <pre><code>CALLBACK: http://example.com/path
 
-GOOD: https://example.com/path
+GOOD: http://example.com/path
 GOOD: http://example.com/path/subdir/other
 BAD:  http://example.com/bar
 BAD:  http://example.com/
@@ -342,447 +344,85 @@ can specify multiple scopes by separating them with a comma:</p>
   scope=user,public_repo
 </code></pre>
 
-<h2 id="oauth-authorizations-api">OAuth Authorizations API</h2>
+<h2 id="common-errors-for-the-authorization-request">Common errors for the authorization request</h2>
 
-<p>There is an API for users to manage their own tokens.  You can only access your
-own tokens, and only via <a href="/v3/auth#basic-authentication">Basic Authentication</a>.
-(Make sure to understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with two-factor
-authentication</a> if you or your
-users have two-factor authentication enabled.)</p>
+<p>There are a few things that can go wrong in the process of obtaining an
+OAuth token for a user. In the initial authorization request phase,
+these are some errors you might see:</p>
 
-<h2 id="list-your-authorizations">List your authorizations</h2>
+<h3 id="application-suspended">Application Suspended</h3>
 
-<pre><code>GET /authorizations
+<p>If the OAuth application you set up has been suspended (due to reported
+abuse, spam, or a mis-use of the API), GitHub will redirect to the
+registered callback URL with the following parameters summerizing the
+error:</p>
+
+<pre><code>http://your-application.com/callback?error=application_suspended
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<p>Please contact <a href="https://github.com/contact">support</a> to solve issues
+with suspended applications.</p>
 
-<pre class="headers"><code>Status: 200 OK
-Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
-      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<h3 id="redirect-uri-mismatch">Redirect URI mismatch</h3>
 
-<pre><code class="language-javascript"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-    <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-      <span class="s2">"public_repo"</span>
-    <span class="p">],</span>
-    <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-    <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-      <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-    <span class="p">},</span>
-    <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-    <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
+<p>If you provide a redirect_uri that doesn’t match what you’ve registered
+with your application, GitHub will redirect to the registered callback
+URL with the following parameters summerizing the error:</p>
 
-<h2 id="get-a-single-authorization">Get a single authorization</h2>
-
-<pre><code>GET /authorizations/:id
+<pre><code>http://your-application.com/callback?error=redirect_uri_mismatch
 </code></pre>
 
-<h3 id="response-2">Response</h3>
+<p>To correct this error, either provide a redirect_uri that matches what
+you registered or leave out this parameter to use the default one
+registered with your application.</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<h3 id="access-denied">Access denied</h3>
+
+<p>If the user rejects access to your application, GItHub will redirect to
+the registered callback URL with the following parameters summerizing
+the error:</p>
+
+<pre><code>http://your-application.com/callback?error=access_denied
+</code></pre>
+
+<p>There’s nothing you can do here as users are free to choose not to use
+your application. More often that not, users will just close the window
+or press back in their browser, so it is likely that you’ll never see
+this error.</p>
+
+<h2 id="common-errors-for-the-access-token-request">Common errors for the access token request</h2>
+
+<p>In the second phase of exchanging a code for an access token, there are
+an additional set of errors that can occur. The format of these
+responses is determined by the accept header you pass. The following
+examples only show JSON responses.</p>
+
+<h3 id="invalid-client-credentials">Invalid client credentials</h3>
+
+<p>If the client_id and or client_secret you pass are incorrect you will
+receive this error response.</p>
 
 <pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-  <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"error"</span><span class="o">:</span> <span class="s2">"invalid_client_credentials"</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="create-a-new-authorization">Create a new authorization</h2>
+<p>To solve this error, go back and make sure you have the correct
+credentials for your oauth application. Double check the <code>client_id</code> and
+<code>client_secret</code> to make sure they are correct and being passed correctly
+to GitHub.</p>
 
-<p>If you need a small number of tokens, implementing the <a href="#web-application-flow">web flow</a>
-can be cumbersome. Instead, tokens can be created using the Authorizations API using
-<a href="/v3/auth#basic-authentication">Basic Authentication</a>. To create tokens for a particular OAuth application, you
-must provide its client ID and secret, found on the OAuth application settings
-page, linked from your <a href="https://github.com/settings/applications">OAuth applications listing on GitHub</a>. OAuth tokens
-can also be created through the web UI via the <a href="https://github.com/settings/applications">Application settings page</a>.
-Read more about these tokens on the <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">GitHub Help page</a>.</p>
+<h3 id="bad-verification-code">Bad verification code</h3>
 
-<pre><code>POST /authorizations
-</code></pre>
-
-<h3 id="parameters-2">Parameters</h3>
-
-<table>
-<thead><tr>
-<th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>scopes</code></td>
-      <td><code>array</code></td>
-      <td>A list of scopes that this authorization is in.</td>
-    </tr>
-<tr>
-<td><code>note</code></td>
-      <td><code>string</code></td>
-      <td>A note to remind you what the OAuth token is for.</td>
-    </tr>
-<tr>
-<td><code>note_url</code></td>
-      <td><code>string</code></td>
-      <td>A URL to remind you what app the OAuth token is for.</td>
-    </tr>
-<tr>
-<td><code>client_id</code></td>
-      <td><code>string</code></td>
-      <td>The 20 character OAuth app client key for which to create the token.</td>
-    </tr>
-<tr>
-<td><code>client_secret</code></td>
-      <td><code>string</code></td>
-      <td>The 40 character OAuth app client secret for which to create the token.</td>
-    </tr>
-</tbody>
-</table><pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/authorizations/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+<p>If the verification code you pass is incorrect, expired, or doesn’t
+match what you received in the first request for authorization you will
+receive this error.</p>
 
 <pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-  <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"error"</span><span class="o">:</span> <span class="s2">"bad_verification_code"</span>
 <span class="p">}</span></code></pre>
 
-<h2 id="get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</h2>
-
-<p>This method will create a new authorization for the specified OAuth application,
-only if an authorization for that application doesn’t already exist for the
-user. (The URL includes the 20 character client ID for the OAuth app that is
-requesting the token.) It returns the user’s token for the application if one
-exists. Otherwise, it creates one.</p>
-
-<pre><code>PUT /authorizations/clients/:client_id
-</code></pre>
-
-<h3 id="parameters-3">Parameters</h3>
-
-<table>
-<thead><tr>
-<th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>client_secret</code></td>
-      <td><code>string</code></td>
-      <td>The 40 character OAuth app client secret associated with the client ID specified in the URL.</td>
-    </tr>
-<tr>
-<td><code>scopes</code></td>
-      <td><code>array</code></td>
-      <td>A list of scopes that this authorization is in.</td>
-    </tr>
-<tr>
-<td><code>note</code></td>
-      <td><code>string</code></td>
-      <td>A note to remind you what the OAuth token is for.</td>
-    </tr>
-<tr>
-<td><code>note_url</code></td>
-      <td><code>string</code></td>
-      <td>A URL to remind you what app the OAuth token is for.</td>
-    </tr>
-</tbody>
-</table><pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"client_secret"</span><span class="o">:</span> <span class="s2">"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-if-returning-a-new-token">Response if returning a new token</h3>
-
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/authorizations/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-  <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-if-returning-an-existing-token">Response if returning an existing token</h3>
-
-<pre class="headers"><code>Status: 200 OK
-Location: https://api.github.com/authorizations/1
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-  <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="update-an-existing-authorization">Update an existing authorization</h2>
-
-<pre><code>PATCH /authorizations/:id
-</code></pre>
-
-<h3 id="parameters-4">Parameters</h3>
-
-<table>
-<thead><tr>
-<th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>scopes</code></td>
-      <td><code>array</code></td>
-      <td>Replaces the authorization scopes with these.</td>
-    </tr>
-<tr>
-<td><code>add_scopes</code></td>
-      <td><code>array</code></td>
-      <td>A list of scopes to add to this authorization.</td>
-    </tr>
-<tr>
-<td><code>remove_scopes</code></td>
-      <td><code>array</code></td>
-      <td>A list of scopes to remove from this authorization.</td>
-    </tr>
-<tr>
-<td><code>note</code></td>
-      <td><code>string</code></td>
-      <td>A note to remind you what the OAuth token is for.</td>
-    </tr>
-<tr>
-<td><code>note_url</code></td>
-      <td><code>string</code></td>
-      <td>A URL to remind you what app the OAuth token is for.</td>
-    </tr>
-</tbody>
-</table><p>You can only send one of these scope keys at a time.</p>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"add_scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-  <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="delete-an-authorization">Delete an authorization</h2>
-
-<pre><code>DELETE /authorizations/:id
-</code></pre>
-
-<h3 id="response-5">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="check-an-authorization">Check an authorization</h2>
-
-<p>OAuth applications can use a special API method for checking OAuth token
-validity without running afoul of normal rate limits for failed login attempts.
-Authentication works differently with this particular endpoint. You must use
-<a href="/v3/auth#basic-authentication">Basic Authentication</a> when accessing it, where the username is the OAuth
-application <code>client_id</code> and the password is its <code>client_secret</code>. Invalid tokens
-will return <code>404 NOT FOUND</code>.</p>
-
-<pre><code>GET /applications/:client_id/tokens/:access_token
-</code></pre>
-
-<h3 id="response-6">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
-    <span class="s2">"public_repo"</span>
-  <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
-  <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
-
-<h2 id="revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</h2>
-
-<p>OAuth application owners can revoke every token for an OAuth application. You
-must use <a href="/v3/auth#basic-authentication">Basic Authentication</a> when calling
-this method. The username is the OAuth application <code>client_id</code> and the password
-is its <code>client_secret</code>. Tokens are revoked via a background job, and it might
-take a few minutes for the process to complete.</p>
-
-<pre><code>DELETE /applications/:client_id/tokens
-</code></pre>
-
-<h3 id="response-7">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="revoke-an-authorization-for-an-application">Revoke an authorization for an application</h2>
-
-<p>OAuth application owners can also revoke a single token for an OAuth
-application. You must use <a href="/v3/auth#basic-authentication">Basic Authentication</a>
-for this method, where the username is the OAuth application <code>client_id</code> and
-  the password is its <code>client_secret</code>.</p>
-
-<pre><code>DELETE /applications/:client_id/tokens/:access_token
-</code></pre>
-
-<h3 id="response-8">Response</h3>
-
-<pre class="headers no-response"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<h2 id="more-information">More Information</h2>
-
-<p>It can be a little tricky to get started with OAuth. Here are a few
-links that might be of help:</p>
-
-<ul>
-<li><a href="http://tools.ietf.org/html/rfc6749">OAuth 2 spec</a></li>
-  <li><a href="http://developers.facebook.com/docs/technical-guides/login/">Facebook Login API</a></li>
-  <li><a href="https://github.com/intridea/oauth2">Ruby OAuth2 lib</a></li>
-  <li><a href="https://gist.github.com/9fd1a6199da0465ec87c">Simple Ruby/Sinatra example</a></li>
-  <li>
-<a href="https://gist.github.com/ib-lundgren/6507798">Python Flask example</a> using <a href="https://github.com/requests/requests-oauthlib">requests-oauthlib</a>
-</li>
-  <li>
-<a href="https://gist.github.com/e3fbd47fbb7ee3c626bb">Simple Python example</a> using <a href="https://github.com/dgouldin/python-oauth2">python-oauth2</a>
-</li>
-  <li><a href="https://github.com/intridea/omniauth">Ruby OmniAuth example</a></li>
-  <li><a href="https://github.com/atmos/sinatra_auth_github">Ruby Sinatra extension</a></li>
-  <li><a href="https://github.com/atmos/warden-github">Ruby Warden strategy</a></li>
-</ul>
+<p>To solve this error, start the <a href="#redirect-users-to-request-github-access">OAuth process over from the beginning</a>
+and get a new code.</p>
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">
@@ -793,6 +433,7 @@ links that might be of help:</p>
         <ul class="js-guides">
           <li><a href="/v3/media/">Media Types</a></li>
           <li><a href="/v3/oauth/">OAuth</a></li>
+          <li><a href="/v3/oauth_authorizations/">OAuth Authorizations API</a></li>
           <li><a href="/v3/auth/">Other Authentication Methods</a></li>
           <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
           <li><a href="/v3/versions/">Versions</a></li>

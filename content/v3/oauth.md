@@ -138,7 +138,7 @@ subdirectory of the callback URL.
 
     CALLBACK: http://example.com/path
 
-    GOOD: https://example.com/path
+    GOOD: http://example.com/path
     GOOD: http://example.com/path/subdir/other
     BAD:  http://example.com/bar
     BAD:  http://example.com/

@@ -34,7 +34,7 @@ Key | Type | Description
 
 ## CreateEvent
 
-Represents a created repository, branch, or tag.
+Represents a created branch or tag.
 
 ### Hook name
 

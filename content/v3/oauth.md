@@ -205,7 +205,7 @@ registered callback URL with the following parameters summerizing the
 error:
 
     http://your-application.com/callback?error=application_suspended
-      &error_description=Your%20application%20has%20been%20suspended.%20Contact%20support@github.com.
+      &error_description=Your+application+has+been+suspended.+Contact+support@github.com.
       &error_uri=http://developer.github.com/v3/oauth/%23application-suspended
       &state=xyz
 
@@ -219,7 +219,7 @@ with your application, GitHub will redirect to the registered callback
 URL with the following parameters summerizing the error:
 
     http://your-application.com/callback?error=redirect_uri_mismatch
-      &error_description=The%20redirect_uri%20MUST%20match%20the%20registered%20callback%20URL%20for%20this%20application.
+      &error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.
       &error_uri=http://developer.github.com/v3/oauth/%23redirect-uri-mismatch
       &state=xyz
 
@@ -234,7 +234,7 @@ the registered callback URL with the following parameters summerizing
 the error:
 
     http://your-application.com/callback?error=access_denied
-      &error_description=The%20user%20has%20denied%20your%20application%20access.
+      &error_description=The+user+has+denied+your+application+access.
       &error_uri=http://developer.github.com/v3/oauth/%23access-denied
       &state=xyz
 

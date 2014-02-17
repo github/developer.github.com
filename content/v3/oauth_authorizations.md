@@ -9,7 +9,7 @@ title: Authorizations | GitHub API
 
 There is an API for users to manage their own tokens.  You can only access your
 own tokens, and only via [Basic Authentication](/v3/auth#basic-authentication).
-(Make sure to understand how to [work with two-factor
+(Make sure you understand how to [work with two-factor
 authentication](/v3/auth/#working-with-two-factor-authentication) if you or your
 users have two-factor authentication enabled.)
 

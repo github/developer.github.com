@@ -4,6 +4,9 @@ title: Authorizations | GitHub API
 
 # OAuth Authorizations API
 
+* TOC
+{:toc}
+
 There is an API for users to manage their own tokens.  You can only access your
 own tokens, and only via [Basic Authentication](/v3/auth#basic-authentication).
 (Make sure to understand how to [work with two-factor

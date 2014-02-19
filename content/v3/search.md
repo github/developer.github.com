@@ -29,6 +29,12 @@ to make up to 5 requests per minute.
 See the [rate limit documentation](/v3/#rate-limiting) for details on
 determining your current rate limit status.
 
+### Timeouts
+
+Search API responses include a `timed_out` Boolean attribute. For queries that are taking [too long to execute](/changes/2014-02-20-search-timeouts-exposed.md), search  stops the execution of the query, collects and returns matches that were already found, and sets `timed_out` to `true`.
+
+Reaching a timeout does not necessarily mean that search results are incomplete. More results might have been found if the execution wasn't stopped, but also might have not.
+
 ## Search repositories
 
 Find repositories via various criteria. This method returns up to 100 results [per page](/v3/#pagination).

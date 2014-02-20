@@ -2,13 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-02-12T23:00:00Z</updated>
+  <updated>2014-02-19T23:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-02-20:/changes/2014-02-19-repo-contributors-for-empty-repos/</id>
+    <title type="html">Repository Contributors and Empty Repositories</title>
+    <published>2014-02-19T23:00:00Z</published>
+    <updated>2014-02-19T23:00:00Z</updated>
+    <author>
+      <name>izuzak</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-02-19-repo-contributors-for-empty-repos/" />
+    <content type="html">&lt;p&gt;We’ve made a small change to the &lt;a href="/v3/repos/#list-contributors"&gt;Repository Contributors API&lt;/a&gt; in the way empty repositories are handled. Previously, the API returned a &lt;code&gt;404 Not Found&lt;/code&gt; status when the list of contributors was fetched for an empty repository. To improve consistency with other API endpoints and reduce confusion, the API now returns a &lt;code&gt;204 No Content&lt;/code&gt; status instead.&lt;/p&gt;
+
+&lt;p&gt;If you notice any strangeness, &lt;a href="https://github.com/contact?form%5Bsubject%5D=APIv3"&gt;just let us know&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-02-13:/changes/2014-02-13-exposing-the-page-api/</id>
     <title type="html">Introducing the Pages API</title>
@@ -26,6 +40,28 @@ by owners of a Pages repo, whether it’s owned by an individual or an organizat
 on previous Pages builds.&lt;/p&gt;
 
 &lt;p&gt;Enjoy!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2014-02-10:/changes/2014-2-10-ping-event-for-webhooks/</id>
+    <title type="html">Ping Event for Webhooks</title>
+    <published>2014-02-09T23:00:00Z</published>
+    <updated>2014-02-09T23:00:00Z</updated>
+    <author>
+      <name>kdaigle</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-2-10-ping-event-for-webhooks/" />
+    <content type="html">&lt;p&gt;With the release of our &lt;a href="https://github.com/blog/1778-webhooks-level-up"&gt;new webhook UI&lt;/a&gt;, we included a new
+&lt;a href="/webhooks/#ping-event"&gt;ping event&lt;/a&gt; that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.&lt;/p&gt;
+
+&lt;p&gt;The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.&lt;/p&gt;
+
+&lt;p&gt;We also added a &lt;a href="/v3/repos/hooks/#ping-a-hook"&gt;ping endpoint&lt;/a&gt; to the hooks API.
+By using ping instead of &lt;a href="/v3/repos/hooks/#test-a-push-hook"&gt;test&lt;/a&gt;, you can ensure
+you won’t be limited by the &lt;code&gt;push&lt;/code&gt; event requirement that the test endpoint has.&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2014-02-10:/changes/2014-02-10-repo-hook-scopes/</id>
@@ -50,28 +86,6 @@ repository contents:&lt;/p&gt;
   &lt;li&gt;
 &lt;code&gt;admin:repo_hook&lt;/code&gt; grants read, write, ping, and delete access to hooks in public or private repositories.&lt;/li&gt;
 &lt;/ul&gt;&lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-02-10:/changes/2014-2-10-ping-event-for-webhooks/</id>
-    <title type="html">Ping Event for Webhooks</title>
-    <published>2014-02-09T23:00:00Z</published>
-    <updated>2014-02-09T23:00:00Z</updated>
-    <author>
-      <name>kdaigle</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-2-10-ping-event-for-webhooks/" />
-    <content type="html">&lt;p&gt;With the release of our &lt;a href="https://github.com/blog/1778-webhooks-level-up"&gt;new webhook UI&lt;/a&gt;, we included a new
-&lt;a href="/webhooks/#ping-event"&gt;ping event&lt;/a&gt; that webhooks will receive. When you
-create a new webhook, we will send this event as an initial test of the webhook.&lt;/p&gt;
-
-&lt;p&gt;The ping is only informational, doesn’t need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It’s just a quick
-“hello world” to let you know you set everything up correctly.&lt;/p&gt;
-
-&lt;p&gt;We also added a &lt;a href="/v3/repos/hooks/#ping-a-hook"&gt;ping endpoint&lt;/a&gt; to the hooks API.
-By using ping instead of &lt;a href="/v3/repos/hooks/#test-a-push-hook"&gt;test&lt;/a&gt;, you can ensure
-you won’t be limited by the &lt;code&gt;push&lt;/code&gt; event requirement that the test endpoint has.&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2014-01-29:/changes/2014-01-29-audit-org-members-for-2fa/</id>
@@ -1076,44 +1090,5 @@ an IP restriction, we recommend the following:&lt;/p&gt;
   &lt;li&gt;Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.&lt;/li&gt;
 &lt;/ol&gt;&lt;p&gt;We’re currently working on solving this problem.  Hit up &lt;a href="mailto:support@github.com"&gt;support@github.com&lt;/a&gt;
 if you have any questions.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-02-05:/changes/2013-2-5-changes-to-services/</id>
-    <title type="html">Upcoming Changes to GitHub Services</title>
-    <published>2013-02-04T23:00:00Z</published>
-    <updated>2013-02-04T23:00:00Z</updated>
-    <author>
-      <name>technoweenie</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-2-5-changes-to-services/" />
-    <content type="html">&lt;p&gt;We are finishing up a new GitHub Services backend, dubbed “Hookshot”, to
-increase the speed and reliability of our delivered payloads.  We are doing
-what we can to make this a seamless transition for everyone.  However, there
-are a few notable changes.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-    &lt;p&gt;There is a new &lt;a href="http://developer.github.com/v3/meta/"&gt;Meta API endpoint&lt;/a&gt;
-listing the current public IPs that hooks originate from.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;We’re removing the AMQP service from GitHub. It hasn’t worked in quite some
-time, and the code it uses doesn’t work in our background workers.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;We’re also instituting a new guideline to improve the reliability and
-maintainability of services in the future. As of today, all new services must
-accept an unmodified payload over HTTP. Any service that does not will be
-rejected. To see an example of an acceptable service, check out &lt;a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb"&gt;Code Climate&lt;/a&gt;.
-Notice their service simply accepts HTTP POST from GitHub unmodified. For an
-example of a service that won’t be accepted after today, check out &lt;a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb"&gt;Campfire&lt;/a&gt;. It
-uses other Ruby gems and contains custom logic to transform the GitHub payload
-to Campfire messages.  Existing hooks will keep working (don’t worry 37signals, we
-:heart: Campfire).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;We’re making these changes because we want to focus on the reliability of the
-core Services backend for everyone.  Maintaining custom logic and libraries for
-over 100 services is taking too much of this focus away.&lt;/p&gt;</content>
   </entry>
 </feed>

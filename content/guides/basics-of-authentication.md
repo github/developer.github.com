@@ -175,7 +175,7 @@ We can do whatever we want with our results. In this case, we'll just dump them 
     #!html+erb
     <p>Hello, <%= login %>!</p>
     <p>
-      <% if !email.empty? %> It looks like your public email address is <%= email %>.
+      <% if !email.nil? && !email.empty? %> It looks like your public email address is <%= email %>.
       <% else %> It looks like you don't have a public email. That's cool.
       <% end %>
     </p>

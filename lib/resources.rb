@@ -41,7 +41,8 @@ module GitHub
         :mastahyeti   => '8caa0afdae1a934c30a1998472c63134',
         :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7',
         :kdaigle      => 'dd18bb36fa5f06e45843ff8de33b793e',
-        :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068'
+        :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068',
+        :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

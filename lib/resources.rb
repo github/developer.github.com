@@ -1750,7 +1750,7 @@ module GitHub
     FEEDS = {
       :timeline_url => "https://github.com/timeline",
       :user_url => "https://github.com/{user}",
-      :current_user_public => "https://github.com/defunkt",
+      :current_user_public_url => "https://github.com/defunkt",
       :current_user_url => "https://github.com/defunkt.private?token=abc123",
       :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
       :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",

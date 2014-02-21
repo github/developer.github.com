@@ -77,6 +77,7 @@ Name | Description
 `status` | Any time a Repository has a status update from the API
 `deployment` | Any time a Repository has a new deployment created from the API.
 `deployment_status` | Any time a deployment for the Repository has a status update from the API.
+`*` | Any time any event is triggered ([Wildcard Event](#wildcard-event)).
 
 
 ### Payloads
@@ -85,6 +86,13 @@ The payloads for all hooks mirror [the payloads for the Event
 types](/v3/activity/events/types/), with the exception of [the original `push`
 event](http://help.github.com/post-receive-hooks/),
 which has a more detailed payload.
+
+## Wildcard Event
+
+We also support a wildcard (`*`) that will match all supported events. When you
+add the wildcard event, we'll replace any existing events you have configured with
+the wildcard event and send you payloads for all supported events. You'll also
+automatically get any new events we might add in the future.
 
 ## Ping Event
 

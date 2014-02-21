@@ -42,7 +42,8 @@ module GitHub
         :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7',
         :kdaigle      => 'bc622cf1dc277323515fd4d7ed66ed24',
         :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068',
-        :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51'
+        :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51',
+        :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -1220,7 +1221,7 @@ module GitHub
     GIST_FILE = {
       "size"     => 932,
       "filename" => "ring.erl",
-      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+      "raw_url"  => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
       "type"     => "text/plain",
       "language" => "Erlang"
     }

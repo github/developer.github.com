@@ -24,8 +24,7 @@ To simplify the security audit trail for SSH keys, we're making keys immutable. 
 
 ## Deleting keys when revoking a token
 
-In addition, starting today, any keys created via an OAuth token will be
-deleted when that token is revoked.
+Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.
 
 As always, if you have any questions or feedback, [please get in touch][contact].
 

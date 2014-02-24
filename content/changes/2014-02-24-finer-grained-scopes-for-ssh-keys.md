@@ -2,7 +2,7 @@
 kind: change
 title: Finer-grained OAuth scopes for SSH keys
 created_at: 2014-02-24
-author_name: jasonrudolph
+author_name: pengwynn
 ---
 Today we're announcing some important changes to the way that API consumers manage SSH keys.
 
@@ -14,9 +14,9 @@ In our quest to better enable OAuth applications to only request the permissions
 - `write:public_key` allows an app to read existing keys and create new ones
 - `admin:public_key` enables an app to read, write, and delete keys
 
-## Upcoming changes to `user` scope
+## Changes to `user` scope
 
-Historically, `user` scope has provided full access to manage a user's SSH keys. Now that we have dedicated scopes for managing a user's SSH keys, we will soon remove those permissions from `user` scope. Starting **March 24, 2014**, `user` scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.
+Historically, `user` scope has provided full access to manage a user's SSH keys. Now that we have dedicated scopes for managing a user's SSH keys, we have removed those permissions from `user` scope. Starting today, `user` scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.
 
 ## Keys are now immutable
 

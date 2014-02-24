@@ -8,7 +8,7 @@ Today we're announcing some important changes to the way that API consumers mana
 
 ## Finer-grained OAuth scopes
 
-To meet our goal of allowing third party applications to request only permissions that they need, the API now supports three new [scopes][] for working with a user's public SSH keys.
+To help third party applications request only permissions that they need, the API now supports three new [scopes][] for working with a user's public SSH keys.
 
 - `read:public_key` provides read access to the user's SSH keys
 - `write:public_key` allows an app to read existing keys and create new ones

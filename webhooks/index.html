@@ -56,6 +56,7 @@
 <ul id="markdown-toc">
 <li><a href="#services">Services</a></li>
   <li><a href="#events">Events</a></li>
+  <li><a href="#wildcard-event">Wildcard Event</a></li>
   <li><a href="#ping-event">Ping Event</a></li>
 </ul><p>Every GitHub repository has the option to communicate with a web server whenever
 the repository is pushed to. These “webhooks” can be used to update an external
@@ -186,6 +187,10 @@ service can only listen for <code>push</code>, <code>issues</code>, and <code>pu
 <td><code>deployment_status</code></td>
       <td>Any time a deployment for the Repository has a status update from the API.</td>
     </tr>
+<tr>
+<td><code>*</code></td>
+      <td>Any time any event is triggered (<a href="#wildcard-event">Wildcard Event</a>).</td>
+    </tr>
 </tbody>
 </table><h3 id="payloads">Payloads</h3>
 
@@ -193,6 +198,13 @@ service can only listen for <code>push</code>, <code>issues</code>, and <code>pu
 types</a>, with the exception of <a href="http://help.github.com/post-receive-hooks/">the original <code>push</code>
 event</a>,
 which has a more detailed payload.</p>
+
+<h2 id="wildcard-event">Wildcard Event</h2>
+
+<p>We also support a wildcard (<code>*</code>) that will match all supported events. When you
+add the wildcard event, we’ll replace any existing events you have configured with
+the wildcard event and send you payloads for all supported events. You’ll also
+automatically get any new events we might add in the future.</p>
 
 <h2 id="ping-event">Ping Event</h2>
 

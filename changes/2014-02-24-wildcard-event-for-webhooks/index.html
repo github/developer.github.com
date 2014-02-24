@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Paginated results for organization members</title>
+  <title>Wildcard Event for Webhooks</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -40,36 +40,33 @@
 	
 	<div id="wrapper">
 		<div class="content">
-			<div class="change" id="/changes/2013-12-13-paginating-org-members/">
+			<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
 <h2 class="title">
-  <a href="/changes/2013-12-13-paginating-org-members/">Paginated results for organization members</a>
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 13, 2013
+    February 24, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/dd18bb36fa5f06e45843ff8de33b793e?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_kdaigle"/>
+      <a href="https://github.com/kdaigle">kdaigle</a>
   </li>
 </ul>
 </div>
 
 
-<p>The <a href="http://developer.github.com/v3/orgs/members/#members-list">organization members</a> and <a href="http://developer.github.com/v3/orgs/members/#public-members-list">organization public members</a> methods will soon return paginated results by default. Beginning
-today, these methods will paginate if you include <code>page</code> or <code>per_page</code> query
-parameters. Starting January 15th, 2014, these methods will <em>always</em> return paginated
-results.</p>
+<p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
 
-<p>As always, be sure and follow those <a href="http://developer.github.com/v3/#pagination">Link headers</a> to get
-subsequent results. If you have any questions or run into trouble, feel free to
-<a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Paginating+org+members">get in touch</a>.</p>
-
-<p>Happy paginating.</p>
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
 </div>
 
 		</div>

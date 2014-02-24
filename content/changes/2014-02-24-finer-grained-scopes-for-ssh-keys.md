@@ -16,7 +16,7 @@ To help third party applications request only permissions that they need, the AP
 
 ## Changes to `user` scope
 
-Historically, `user` scope has provided full access to manage a user's SSH keys. Now that we have dedicated scopes for managing a user's SSH keys, we have removed those permissions from `user` scope. Starting today, `user` scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.
+Historically, `user` scope has provided full access to manage a user's SSH keys. Now that we have dedicated scopes for managing a user's SSH keys, we have removed those permissions from the `user` scope. Now `user` scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.
 
 ## Keys are now immutable
 

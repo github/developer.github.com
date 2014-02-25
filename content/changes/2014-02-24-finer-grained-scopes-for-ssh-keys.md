@@ -4,7 +4,7 @@ title: Finer-grained OAuth scopes for SSH keys
 created_at: 2014-02-24
 author_name: pengwynn
 ---
-Today we're announcing some important changes to the way that API consumers manage SSH keys.
+As [we announced][blog], we've made some important changes to the way that API consumers manage SSH keys.
 
 ## Finer-grained OAuth scopes
 
@@ -32,3 +32,4 @@ As always, if you have any questions or feedback, [please get in touch][contact]
 [scopes]: /v3/oauth/#scopes
 [user-keys]: /v3/users/keys/
 [deploy-keys]: /v3/repos/keys/
+[blog]: https://github.com/blog/1786-enhanced-oauth-security-for-ssh-keys

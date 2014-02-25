@@ -183,6 +183,9 @@ Name | Description
 `read:repo_hook`| Grants read and ping access to hooks in public or private repositories.
 `write:repo_hook`| Grants read, write, and ping access to hooks in public or private repositories.
 `admin:repo_hook`| Grants read, write, ping, and delete access to hooks in public or private repositories.
+`read:public_key`| List and view details for public keys.
+`write:public_key`| Create, list, and view details for public keys.
+`admin:public_key`| Fully manage public keys.
 
 NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:
@@ -351,6 +354,8 @@ registered with your application.
 
 ### Bad verification code
 
+<%= json :add_scopes => ['repo'], :note => 'admin script' %>
+
 If the verification code you pass is incorrect, expired, or doesn't
 match what you received in the first request for authorization you will
 receive this error.
@@ -368,3 +373,4 @@ and get a new code.
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments
+[public keys]: /v3/users/keys/

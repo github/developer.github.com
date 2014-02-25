@@ -17,17 +17,17 @@ layout: overview
     <li class="highlight-module">
       <a href="/guides/"><span class="mega-icon octicon-file-text"></span></a>
       <h2>Stay in the know</h2>
-      <p>By joining the GitHub Developer Program, you'll be eligible to receive early access to select GitHub feature releases and advanced notification about API changes.</p>
+      <p>By joining the GitHub Developer Program, you'll receive ongoing notifications about API changes, and be eligible to receive early access to select GitHub feature releases.</p>
     </li>
     <li class="highlight-module">
       <a href="/libraries/"><span class="mega-icon octicon-code"></span></a>
       <h2>Develop on the GitHub platform</h2>
-      <p>Through an exclusive development license offered to program members, you'll be able to build and test your application against GitHub products without additional costs.</p>
+      <p>Through the program, you'll have the opportunity to obtain developer licenses to build and test your application against GitHub products.</p>
     </li>
     <li class="highlight-module">
       <a href="http://github.com/contact"><span class="mega-icon octicon-mail-read"></span></a>
       <h2>Showcase your integrations</h2>
-      <p>As a member of the Developer Program, you'll have access to our integrations directory where you can list and promote your application to more than 5 million GitHub users.</p>
+      <p>As a member of the Developer Program, you'll be able to submit your integration to our directory that reaches more than 5 million GitHub users.</p>
     </li>
   </ul>
 </div>

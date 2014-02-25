@@ -34,8 +34,7 @@ GitHub in your app</h1>
 <div class="full-width dev-program-callout">
   <div class="wrapper">
     <h2>Join the GitHub Developer Program.</h2>
-    <p>The best way to integrate with GitHub.</p>
-    <a href="https://github.com/developer/register" class="nav-register-button">Register</a>
+    <p>The best way to integrate with GitHub. <a href="/program/">Learn more.</a></p>
   </div>
 </div>
 

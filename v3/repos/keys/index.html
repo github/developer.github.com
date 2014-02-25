@@ -125,35 +125,15 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="edit">Edit a deploy key</h2>
 
-<pre><code>PATCH /repos/:owner/:repo/keys/:id
-</code></pre>
-
-<h3 id="input-1">Input</h3>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
-<span class="p">}</span></code></pre>
+<p>Deploy keys are immutable. If you need to update a key, <a href="#delete">remove the
+key</a> and <a href="#create">create a new one</a> instead.</p>
 
 <h2 id="delete">Remove a deploy key</h2>
 
 <pre><code>DELETE /repos/:owner/:repo/keys/:id
 </code></pre>
 
-<h3 id="response-4">Response</h3>
+<h3 id="response-3">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

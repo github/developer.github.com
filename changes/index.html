@@ -41,6 +41,53 @@
 	<div id="wrapper">
 		<div class="content">
 			
+<div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_pengwynn"><a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>As <a href="https://github.com/blog/1786-enhanced-oauth-security-for-ssh-keys">we announced</a>, we’ve made some important changes to the way that API consumers manage SSH keys.</p>
+
+<h2 id="finer-grained-oauth-scopes">Finer-grained OAuth scopes</h2>
+
+<p>To help third party applications request only permissions that they need, the API now supports three new <a href="/v3/oauth/#scopes">scopes</a> for working with a user’s public SSH keys.</p>
+
+<ul>
+<li>
+<code>read:public_key</code> provides read access to the user’s SSH keys</li>
+  <li>
+<code>write:public_key</code> allows an app to read existing keys and create new ones</li>
+  <li>
+<code>admin:public_key</code> enables an app to read, write, and delete keys</li>
+</ul>
+<h2 id="changes-to-user-scope">Changes to <code>user</code> scope</h2>
+
+<p>Historically, <code>user</code> scope has provided full access to manage a user’s SSH keys. Now that we have dedicated scopes for managing a user’s SSH keys, we have removed those permissions from the <code>user</code> scope. Now <code>user</code> scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.</p>
+
+<h2 id="keys-are-now-immutable">Keys are now immutable</h2>
+
+<p>To simplify the security audit trail for SSH keys, we’re making keys immutable. API consumers can continue to create keys and delete keys as needed, but keys can no longer be changed. To change an existing key, API consumers should delete the existing key and create a new one with the desired attributes. This change applies both to a <a href="/v3/users/keys/">user’s SSH keys</a> and a <a href="/v3/repos/keys/">repository’s deploy keys</a>.</p>
+
+<h2 id="deleting-keys-when-revoking-a-token">Deleting keys when revoking a token</h2>
+
+<p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
+
+<p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
+</div>
+
 <div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
   <h2 class="title">
   <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
@@ -2294,6 +2341,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys<br /><span class="date">February 24, 2014</span></a></li>
+
   <li><a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks<br /><span class="date">February 24, 2014</span></a></li>
 
   <li><a href="/changes/2014-02-21-gist-raw-file-url-change/">Gist raw file URI change<br /><span class="date">February 21, 2014</span></a></li>
@@ -2307,8 +2356,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks<br /><span class="date">February 10, 2014</span></a></li>
 
   <li><a href="/changes/2014-01-29-audit-org-members-for-2fa/">Audit organization members for two-factor authentication<br /><span class="date">January 29, 2014</span></a></li>
-
-  <li><a href="/changes/2014-01-09-preview-the-new-deployments-api/">Preview the New Deployments API<br /><span class="date">January 9, 2014</span></a></li>
 
 </ul>
 

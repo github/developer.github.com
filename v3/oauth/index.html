@@ -335,6 +335,18 @@ X-Accepted-OAuth-Scopes: user
 <td><code>admin:repo_hook</code></td>
       <td>Grants read, write, ping, and delete access to hooks in public or private repositories.</td>
     </tr>
+<tr>
+<td><code>read:public_key</code></td>
+      <td>List and view details for public keys.</td>
+    </tr>
+<tr>
+<td><code>write:public_key</code></td>
+      <td>Create, list, and view details for public keys.</td>
+    </tr>
+<tr>
+<td><code>admin:public_key</code></td>
+      <td>Fully manage public keys.</td>
+    </tr>
 </tbody>
 </table><p>NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:</p>
@@ -438,6 +450,13 @@ you registered or leave out this parameter to use the default one
 registered with your application.</p>
 
 <h3 id="bad-verification-code">Bad verification code</h3>
+
+<pre><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"add_scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
+<span class="p">}</span></code></pre>
 
 <p>If the verification code you pass is incorrect, expired, or doesn’t
 match what you received in the first request for authorization you will

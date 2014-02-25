@@ -85,8 +85,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /user/keys
 </code></pre>
 
-<p>Lists the current user’s keys.  Management of public keys via the API requires
-that you are authenticated through basic auth, or OAuth with the ‘user’ scope.</p>
+<p>Lists the current user’s keys. Requires that you are authenticated via
+Basic Auth or via OAuth with at least <code>read:public_key</code>
+<a href="/v3/oauth/#scopes">scope</a>.</p>
 
 <h3 id="response-1">Response</h3>
 
@@ -105,6 +106,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-a-single-public-key">Get a single public key</h2>
 
+<p>View extended details for a single public key. Requires that you are
+authenticated via Basic Auth or via OAuth with at least <code>read:public_key</code>
+<a href="/v3/oauth/#scopes">scope</a>.</p>
+
 <pre><code>GET /user/keys/:id
 </code></pre>
 
@@ -122,6 +127,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-public-key">Create a public key</h2>
+
+<p>Creates a public key. Requires that you are authenticated via Basic Auth,
+or OAuth with at least <code>write:public_key</code> <a href="/v3/oauth/#scopes">scope</a>.</p>
 
 <pre><code>POST /user/keys
 </code></pre>
@@ -149,35 +157,19 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="update-a-public-key">Update a public key</h2>
 
-<pre><code>PATCH /user/keys/:id
-</code></pre>
-
-<h3 id="input-1">Input</h3>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
-<span class="p">}</span></code></pre>
+<p>Public keys are immutable. If you need to update a public key, <a href="#delete-a-public-key">remove the
+key</a> and <a href="#create-a-public-key">create a new one</a>
+instead.</p>
 
 <h2 id="delete-a-public-key">Delete a public key</h2>
+
+<p>Removes a public key. Requires that you are authenticated via Basic Auth
+or via OAuth with at least <code>admin:public_key</code> <a href="/v3/oauth/#scopes">scope</a>.</p>
 
 <pre><code>DELETE /user/keys/:id
 </code></pre>
 
-<h3 id="response-5">Response</h3>
+<h3 id="response-4">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

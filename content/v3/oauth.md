@@ -174,6 +174,9 @@ Name | Description
 `read:repo_hook`| Grants read and ping access to hooks in public or private repositories.
 `write:repo_hook`| Grants read, write, and ping access to hooks in public or private repositories.
 `admin:repo_hook`| Grants read, write, ping, and delete access to hooks in public or private repositories.
+`read:public_key`| List and view details for public keys.
+`write:public_key`| Create, list, and view details for public keys.
+`admin:public_key`| Fully manage public keys.
 
 NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:
@@ -299,6 +302,9 @@ You can only send one of these scope keys at a time.
 
 ## Delete an authorization
 
+Destroys an OAuth token and any [public keys][] previously created with that
+token.
+
     DELETE /authorizations/:id
 
 ### Response
@@ -368,3 +374,4 @@ links that might be of help:
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments
+[public keys]: /v3/users/keys/

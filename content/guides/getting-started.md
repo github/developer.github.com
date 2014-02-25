@@ -184,13 +184,13 @@ indicating the name of the app, as well as the level of access the app
 has once it's authorized by the user. After a user authorizes access, GitHub
 redirects the user back to the application:
 
-![](/images/oauth_prompt.png)
+![GitHub's OAuth Prompt](/images/oauth_prompt.png)
 
 However, you don't need to set up the entire web flow to begin working with OAuth tokens.
 An easier way to get a token is to [create a **Personal token**][personal token] via your
 [Application settings page][application settings]:
 
-![](/images/personal_token.png)
+![Personal Token selection](/images/personal_token.png)
 
 Also, the [**Authorizations API**][authorizations api] makes it simple to use Basic Authentication
 to create an OAuth token. Try pasting and running the following command:
@@ -517,7 +517,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [media types]: /v3/media/
 [oauth]: /v3/oauth/
 [webflow]: /v3/oauth/#web-application-flow
-[authorizations api]: /v3/oauth/#create-a-new-authorization
+[authorizations api]: /v3/oauth_authorizations/#create-a-new-authorization
 [scopes]: /v3/oauth/#scopes
 [repos-api]: /v3/repos/
 [pages]: http://pages.github.com
@@ -541,7 +541,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [pagination]: /v3/#pagination
 [get repo]: /v3/repos/#get
 [create repo]: /v3/repos/#create
-[create issue]: /v3/issues/#create
+[create issue]: /v3/issues/#create-an-issue
 [auth guide]: /guides/basics-of-authentication
 [user repos api]: /v3/repos/#list-your-repositories
 [other user repos api]: /v3/repos/#list-user-repositories

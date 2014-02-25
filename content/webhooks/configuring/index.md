@@ -39,9 +39,9 @@ to the Internet.
 
 ## Writing the server
 
-Now comes the fun part! We want out server to listen to `POST` requests, at `/payload`,
+Now comes the fun part! We want our server to listen to `POST` requests, at `/payload`,
 because that's where we told GitHub our webhook URL was. Since ngrok is exposing
-our local environment, we don't need to set up a real server someone online, and
+our local environment, we don't need to set up a real server somewhere online, and
 can happily test out our code locally.
 
 Let's set up a little Sinatra app to do something with the information. Our initial
@@ -56,7 +56,7 @@ setup might look something like this:
       puts "I got some JSON: #{push.inspect}"
     end
 
-(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra guide].)
+(If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra].)
 
 Start this server up.
 
@@ -65,7 +65,7 @@ and create a new Issue on the repository you're testing with. Once you create
 it, switch back to your terminal. You should see something like this in your output:
 
     #!bash
-    [adding-hooks]* ~/github/platform-samples/hooks/ruby/configuring-your-server $ ruby server.rb
+    ~/Developer/platform-samples/hooks/ruby/configuring-your-server $ ruby server.rb
     == Sinatra/1.4.4 has taken the stage on 4567 for development with backup from Thin
     >> Thin web server (v1.5.1 codename Straight Razor)
     >> Maximum connections set to 1024

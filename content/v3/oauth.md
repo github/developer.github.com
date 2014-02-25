@@ -110,10 +110,19 @@ The access token allows you to make requests to the API on a behalf of a user.
 
     GET https://api.github.com/user?access_token=...
 
+You can pass the token in the query params like shown above, but a
+cleaner approach is to include it in the Authorization header
+
+    Authorization: token OAUTH-TOKEN
+
+For example, in curl you can set the Authorization header like this:
+
+    curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+
 ## Non-Web Application Flow
 
 Use [Basic Authentication](/v3/auth#basic-authentication) to create an OAuth2
-token using the [interface below](/v3/oauth/#create-a-new-authorization).  With
+token using the [interface below](/v3/oauth_authorizations/#create-a-new-authorization).  With
 this technique, a username and password need not be stored permanently, and the
 user can revoke access at any time. (Make sure to understand how to [work with
 two-factor authentication](/v3/auth/#working-with-two-factor-authentication) if
@@ -129,7 +138,7 @@ subdirectory of the callback URL.
 
     CALLBACK: http://example.com/path
 
-    GOOD: https://example.com/path
+    GOOD: http://example.com/path
     GOOD: http://example.com/path/subdir/other
     BAD:  http://example.com/bar
     BAD:  http://example.com/
@@ -185,192 +194,111 @@ can specify multiple scopes by separating them with a comma:
       client_id=...&
       scope=user,public_repo
 
-## OAuth Authorizations API
+## Common errors for the authorization request
 
-There is an API for users to manage their own tokens.  You can only access your
-own tokens, and only via [Basic Authentication](/v3/auth#basic-authentication).
-(Make sure to understand how to [work with two-factor
-authentication](/v3/auth/#working-with-two-factor-authentication) if you or your
-users have two-factor authentication enabled.)
+There are a few things that can go wrong in the process of obtaining an
+OAuth token for a user. In the initial authorization request phase,
+these are some errors you might see:
 
-## List your authorizations
+### Application Suspended
 
-    GET /authorizations
+If the OAuth application you set up has been suspended (due to reported
+abuse, spam, or a mis-use of the API), GitHub will redirect to the
+registered callback URL with the following parameters summerizing the
+error:
 
-### Response
+    http://your-application.com/callback?error=application_suspended
+      &error_description=Your+application+has+been+suspended.+Contact+support@github.com.
+      &error_uri=http://developer.github.com/v3/oauth/%23application-suspended
+      &state=xyz
 
-<%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:oauth_access) { |h| [h] } %>
+Please contact [support](https://github.com/contact) to solve issues
+with suspended applications.
 
-## Get a single authorization
+### Redirect URI mismatch
 
-    GET /authorizations/:id
+If you provide a redirect_uri that doesn't match what you've registered
+with your application, GitHub will redirect to the registered callback
+URL with the following parameters summerizing the error:
 
-### Response
+    http://your-application.com/callback?error=redirect_uri_mismatch
+      &error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.
+      &error_uri=http://developer.github.com/v3/oauth/%23redirect-uri-mismatch
+      &state=xyz
 
-<%= headers 200 %>
-<%= json :oauth_access %>
+To correct this error, either provide a redirect_uri that matches what
+you registered or leave out this parameter to use the default one
+registered with your application.
 
-## Create a new authorization
+### Access denied
 
-If you need a small number of tokens, implementing the [web flow](#web-application-flow)
-can be cumbersome. Instead, tokens can be created using the Authorizations API using
-[Basic Authentication](/v3/auth#basic-authentication). To create tokens for a particular OAuth application, you
-must provide its client ID and secret, found on the OAuth application settings
-page, linked from your [OAuth applications listing on GitHub][app-listing]. OAuth tokens
-can also be created through the web UI via the [Application settings page](https://github.com/settings/applications).
-Read more about these tokens on the [GitHub Help page](https://help.github.com/articles/creating-an-access-token-for-command-line-use).
+If the user rejects access to your application, GItHub will redirect to
+the registered callback URL with the following parameters summerizing
+the error:
 
-    POST /authorizations
+    http://your-application.com/callback?error=access_denied
+      &error_description=The+user+has+denied+your+application+access.
+      &error_uri=http://developer.github.com/v3/oauth/%23access-denied
+      &state=xyz
 
-### Parameters
+There's nothing you can do here as users are free to choose not to use
+your application. More often that not, users will just close the window
+or press back in their browser, so it is likely that you'll never see
+this error.
 
-Name | Type | Description
------|------|--------------
-`scopes`|`array` | A list of scopes that this authorization is in.
-`note`|`string` | A note to remind you what the OAuth token is for.
-`note_url`|`string` | A URL to remind you what app the OAuth token is for.
-`client_id`|`string` | The 20 character OAuth app client key for which to create the token.
-`client_secret`|`string` | The 40 character OAuth app client secret for which to create the token.
+## Common errors for the access token request
 
+In the second phase of exchanging a code for an access token, there are
+an additional set of errors that can occur. The format of these
+responses is determined by the accept header you pass. The following
+examples only show JSON responses.
 
-<%= json :scopes => ["public_repo"], :note => 'admin script' %>
+### Incorrect client credentials
 
-### Response
+If the client\_id and or client\_secret you pass are incorrect you will
+receive this error response.
 
-<%= headers 201, :Location => "https://api.github.com/authorizations/1"
+<%= json :error             => :incorrect_client_credentials,
+         :error_description => "The client_id and/or client_secret passed are incorrect.",
+         :error_uri         => "http://developer.github.com/v3/oauth/#incorrect-client-credentials"
 %>
-<%= json :oauth_access %>
 
-## Get-or-create an authorization for a specific app
+To solve this error, go back and make sure you have the correct
+credentials for your oauth application. Double check the `client_id` and
+`client_secret` to make sure they are correct and being passed correctly
+to GitHub.
 
-This method will create a new authorization for the specified OAuth application,
-only if an authorization for that application doesn't already exist for the
-user. (The URL includes the 20 character client ID for the OAuth app that is
-requesting the token.) It returns the user's token for the application if one
-exists. Otherwise, it creates one.
+### Redirect URI mismatch(2)
 
-    PUT /authorizations/clients/:client_id
+If you provide a redirect_uri that doesn't match what you've registered
+with your application, you will receive this error message:
 
-### Parameters
-
-Name | Type | Description
------|------|--------------
-`client_secret`|`string`| The 40 character OAuth app client secret associated with the client ID specified in the URL.
-`scopes`|`array` | A list of scopes that this authorization is in.
-`note`|`string` | A note to remind you what the OAuth token is for.
-`note_url`|`string` | A URL to remind you what app the OAuth token is for.
-
-
-<%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
-
-### Response if returning a new token
-
-<%= headers 201, :Location => "https://api.github.com/authorizations/1"
+<%= json :error             => :redirect_uri_mismatch,
+         :error_description => "The redirect_uri MUST match the registered callback URL for this application.",
+         :error_uri         => "http://developer.github.com/v3/oauth/#redirect-uri-mismatch(2)"
 %>
-<%= json :oauth_access %>
 
-### Response if returning an existing token
+To correct this error, either provide a redirect_uri that matches what
+you registered or leave out this parameter to use the default one
+registered with your application.
 
-<%= headers 200, :Location => "https://api.github.com/authorizations/1"
-%>
-<%= json :oauth_access %>
-
-## Update an existing authorization
-
-    PATCH /authorizations/:id
-
-### Parameters
-
-Name | Type | Description
------|------|--------------
-`scopes`|`array` | Replaces the authorization scopes with these.
-`add_scopes`|`array` | A list of scopes to add to this authorization.
-`remove_scopes`|`array` | A list of scopes to remove from this authorization.
-`note`|`string` | A note to remind you what the OAuth token is for.
-`note_url`|`string` | A URL to remind you what app the OAuth token is for.
-
-
-You can only send one of these scope keys at a time.
+### Bad verification code
 
 <%= json :add_scopes => ['repo'], :note => 'admin script' %>
 
-### Response
+If the verification code you pass is incorrect, expired, or doesn't
+match what you received in the first request for authorization you will
+receive this error.
 
-<%= headers 200 %>
-<%= json :oauth_access %>
-
-## Delete an authorization
-
-Destroys an OAuth token and any [public keys][] previously created with that
-token.
-
-    DELETE /authorizations/:id
-
-### Response
-
-<%= headers 204 %>
-
-## Check an authorization
-
-OAuth applications can use a special API method for checking OAuth token
-validity without running afoul of normal rate limits for failed login attempts.
-Authentication works differently with this particular endpoint. You must use
-[Basic Authentication](/v3/auth#basic-authentication) when accessing it, where the username is the OAuth
-application `client_id` and the password is its `client_secret`. Invalid tokens
-will return `404 NOT FOUND`.
-
-    GET /applications/:client_id/tokens/:access_token
-
-### Response
-
-<%= headers 200 %>
-<%= json(:oauth_access_with_user) %>
-
-## Revoke all authorizations for an application
-
-OAuth application owners can revoke every token for an OAuth application. You
-must use [Basic Authentication](/v3/auth#basic-authentication) when calling
-this method. The username is the OAuth application `client_id` and the password
-is its `client_secret`. Tokens are revoked via a background job, and it might
-take a few minutes for the process to complete.
-
-    DELETE /applications/:client_id/tokens
-
-### Response
-
-<%= headers 204 %>
-
-## Revoke an authorization for an application
-
-OAuth application owners can also revoke a single token for an OAuth
-application. You must use [Basic Authentication](/v3/auth#basic-authentication)
-for this method, where the username is the OAuth application `client_id` and
-  the password is its `client_secret`.
-
-    DELETE /applications/:client_id/tokens/:access_token
-
-### Response
-
-<%= headers 204 %>
-
-## More Information
+<%= json :error             => :bad_verification_code,
+         :error_description => "The code passed is incorrect or expired.",
+         :error_uri         => "http://developer.github.com/v3/oauth/#bad-verification-code"
+%>
 
 
-It can be a little tricky to get started with OAuth. Here are a few
-links that might be of help:
+To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
+and get a new code.
 
-* [OAuth 2 spec](http://tools.ietf.org/html/rfc6749)
-* [Facebook Login API](http://developers.facebook.com/docs/technical-guides/login/)
-* [Ruby OAuth2 lib](https://github.com/intridea/oauth2)
-* [Simple Ruby/Sinatra example](https://gist.github.com/9fd1a6199da0465ec87c)
-* [Python Flask example](https://gist.github.com/ib-lundgren/6507798) using [requests-oauthlib](https://github.com/requests/requests-oauthlib)
-* [Simple Python example](https://gist.github.com/e3fbd47fbb7ee3c626bb) using [python-oauth2](https://github.com/dgouldin/python-oauth2)
-* [Ruby OmniAuth example](https://github.com/intridea/omniauth)
-* [Ruby Sinatra extension](https://github.com/atmos/sinatra_auth_github)
-* [Ruby Warden strategy](https://github.com/atmos/warden-github)
-
-[app-listing]: https://github.com/settings/applications
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments

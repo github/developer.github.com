@@ -78,7 +78,7 @@ requesting `user:email` scope for reading private email addresses.
 
 Navigate your browser to `http://localhost:4567`. After clicking on the link, you
 should be taken to GitHub, and presented with a dialog that looks something like this:
-![](/images/oauth_prompt.png)
+![GitHub's OAuth Prompt](/images/oauth_prompt.png)
 
 If you trust yourself, click **Authorize App**. Wuh-oh! Sinatra spits out a
 `404` error. What gives?!
@@ -175,7 +175,7 @@ We can do whatever we want with our results. In this case, we'll just dump them 
     #!html+erb
     <p>Hello, <%= login %>!</p>
     <p>
-      <% if !email.empty? %> It looks like your public email address is <%= email %>.
+      <% if !email.nil? && !email.empty? %> It looks like your public email address is <%= email %>.
       <% else %> It looks like you don't have a public email. That's cool.
       <% end %>
     </p>
@@ -347,7 +347,7 @@ available as a separate project.
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test
 [oauth scopes]: /v3/oauth/#scopes
 [edit scopes post]: /changes/2013-10-04-oauth-changes-coming/
-[check token valid]: /v3/oauth/#check-an-authorization
+[check token valid]: /v3/oauth_authorizations/#check-an-authorization
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication
 [new oauth app]: https://github.com/settings/applications/new
 [app settings]: https://github.com/settings/applications

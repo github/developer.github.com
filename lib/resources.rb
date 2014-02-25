@@ -40,7 +40,10 @@ module GitHub
         :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
         :mastahyeti   => '8caa0afdae1a934c30a1998472c63134',
         :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7',
-        :kdaigle      => 'bc622cf1dc277323515fd4d7ed66ed24'
+        :kdaigle      => 'dd18bb36fa5f06e45843ff8de33b793e',
+        :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068',
+        :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51',
+        :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8'
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -54,7 +57,7 @@ module GitHub
       end
 
       def gravatar_for(login)
-        %(<img height="16" width="16" src="%s" />) % gravatar_url_for(login)
+        %(<img height="16" width="16" src="%s" alt="gravatar_for_#{login}"/>) % gravatar_url_for(login)
       end
 
       def gravatar_url_for(login)
@@ -631,6 +634,26 @@ module GitHub
       "s3_url"         => "https://github.s3.amazonaws.com/"
     })
 
+    PAGES = {
+      "url" => "https://api.github.com/repos/github/developer.github.com/pages",
+      "status" => "built",
+      "cname" => "developer.github.com",
+      "custom_404" => false
+    }
+
+    PAGES_BUILD = {
+      "url" => "https://api.github.com/repos/github/developer.github.com/pages/builds/5472601",
+      "status" => "built",
+      "error" => {
+        "message" => nil
+      },
+      "pusher" => USER,
+      "commit" => "351391cdcb88ffae71ec3028c91f375a8036a26b",
+      "duration" => 2104,
+      "created_at" => "2014-02-10T19:00:49Z",
+      "updated_at" => "2014-02-10T19:00:51Z"
+    }
+
     ORG = {
       "login"      => "github",
       "id"         => 1,
@@ -707,6 +730,10 @@ module GitHub
       "created_at" => "2011-04-22T13:33:48Z",
       "updated_at" => "2011-04-22T13:33:48Z"
     }
+
+    FULL_ISSUE = ISSUE.merge({
+      "closed_by" => USER
+    })
 
     ISSUE_COMMENT = {
       "id"         => 1,
@@ -1198,7 +1225,7 @@ module GitHub
     GIST_FILE = {
       "size"     => 932,
       "filename" => "ring.erl",
-      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+      "raw_url"  => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
       "type"     => "text/plain",
       "language" => "Erlang"
     }
@@ -1724,7 +1751,7 @@ module GitHub
     FEEDS = {
       :timeline_url => "https://github.com/timeline",
       :user_url => "https://github.com/{user}",
-      :current_user_public => "https://github.com/defunkt",
+      :current_user_public_url => "https://github.com/defunkt",
       :current_user_url => "https://github.com/defunkt.private?token=abc123",
       :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
       :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",

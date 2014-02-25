@@ -15,4 +15,4 @@ stored and documented in our public
 
 Feel free to fork, clone, and improve these guides.
 
-![](/images/professorcat.png)
+![The Professorcat](/images/professorcat.png)

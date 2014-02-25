@@ -52,7 +52,7 @@ pages can be fetched using the `start_page` parameter.
 Name | Type | Description
 -----|------|--------------
 `keyword`|`string`| The search term|
-`language`|`string` | Filter results by [language](https://github.com/languages)
+`language`|`string` | Filter results by language
 `start_page`|`string` | The page number to fetch
 `sort`|`string` | The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.
 `order`|`string` | The sort field. if `sort` param is provided. Can be either `asc` or `desc`.

@@ -30,7 +30,7 @@ event by default and supports the `public` event type as well.
 
 A number of services have been integrated through the open source
 [github-services](https://github.com/github/github-services) project.  When
-creating a [hook](#create-a-hook), the `:name` parameter must refer to one of
+[creating a hook](/webhooks/creating/), the `:name` parameter must refer to one of
 these services.  A generic
 [Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
 service is available that can configured to trigger for any of the available
@@ -77,6 +77,7 @@ Name | Description
 `status` | Any time a Repository has a status update from the API
 `deployment` | Any time a Repository has a new deployment created from the API.
 `deployment_status` | Any time a deployment for the Repository has a status update from the API.
+`*` | Any time any event is triggered ([Wildcard Event](#wildcard-event)).
 
 
 ### Payloads
@@ -86,12 +87,19 @@ types](/v3/activity/events/types/), with the exception of [the original `push`
 event](http://help.github.com/post-receive-hooks/),
 which has a more detailed payload.
 
+## Wildcard Event
+
+We also support a wildcard (`*`) that will match all supported events. When you
+add the wildcard event, we'll replace any existing events you have configured with
+the wildcard event and send you payloads for all supported events. You'll also
+automatically get any new events we might add in the future.
+
 ## Ping Event
 
 When you create a new webhook, we'll send you a simple `ping` event to let you
 know you've set up the webhook correctly. This event isn't stored so it isn't
 retrievable via the [Events API](/v3/activity/events/). You can trigger a `ping`
-again by calling the [ping endpoint](#).
+again by calling the [ping endpoint](/v3/repos/hooks/#ping-a-hook).
 
 ### Ping Event Payload
 

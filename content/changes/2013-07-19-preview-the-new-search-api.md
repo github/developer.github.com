@@ -31,7 +31,7 @@ numeric offsets identifying the exact location of each matching search term.
 ## Preview period
 
 We're making this new API available today for developers to
-[preview][preview-mode]. We think developers are going to love it, but we want
+<a href="/v3/search/#preview-mode" data-proofer-ignore>preview</a>. We think developers are going to love it, but we want
 to get your feedback before we declare the Search API "final" and
 "unchangeable." We expect the preview period to last for roughly 60 days.
 
@@ -63,7 +63,6 @@ We hope you'll kick the tires and [send us your feedback][contact]. Happy
 [issue-docs]: /v3/search/#search-issues
 [legacy-search]: /v3/search/legacy/
 [octokit-gemspecs]: /v3/search/#code-search-example
-[preview-mode]: /v3/search/#preview-mode
 [repo-docs]: /v3/search/#search-repositories
 [tetris-repos]: /v3/search/#repository-search-example
 [text-matches]: /v3/search#text-match-metadata

@@ -184,7 +184,7 @@ Name | Description
 `write:repo_hook`| Grants read, write, and ping access to hooks in public or private repositories.
 `admin:repo_hook`| Grants read, write, ping, and delete access to hooks in public or private repositories.
 `read:org`| Read-only access to organization, teams, and membership.
-`write:org`| Write access to organization and (un)publicize organization membership.
+`write:org`| Publicize and unpublicize organization membership.
 `admin:org`| Fully manage organization, teams, and memberships.
 `read:public_key`| List and view details for public keys.
 `write:public_key`| Create, list, and view details for public keys.

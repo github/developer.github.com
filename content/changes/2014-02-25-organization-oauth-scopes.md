@@ -9,7 +9,7 @@ introduced even more OAuth scopes for working with organization and team
 resources:
 
 - `read:org` provides read-only access to organizations, teams, and membership.
-- `write:org` allows an application to update an organization and (un)publicize organization membership.
+- `write:org` allows an application to publicize and unpublicize an organization membership.
 - `admin:org` enables an application to fully manage organizations, teams, and memberships.
 
 Check out [the full list of OAuth scopes][scopes] supported by the API to

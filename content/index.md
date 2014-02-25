@@ -28,6 +28,14 @@ GitHub in your app</h1>
 			<h2><a href="http://github.com/contact">Support</a></h2>
 			<p>Are you stuck? Already tried our <a href="/v3/troubleshooting/">troubleshooting guide</a>? Talk to a supportocat.</p>
 		</li>
-
 	</ul>
 </div>
+
+<div class="full-width dev-program-callout">
+  <div class="wrapper">
+    <h2>Join the GitHub Developer Program.</h2>
+    <p>The best way to integrate with GitHub.</p>
+    <a href="https://github.com/developer/register" class="nav-register-button">Register</a>
+  </div>
+</div>
+

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Two-Factor Authentication and the API</title>
+  <title>OAuth scopes for organization and team resources</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -40,64 +40,40 @@
 	
 	<div id="wrapper">
 		<div class="content">
-			<div class="change" id="/changes/2013-09-03-two-factor-authentication/">
+			<div class="change" id="/changes/2014-02-25-organization-oauth-scopes/">
 <h2 class="title">
-  <a href="/changes/2013-09-03-two-factor-authentication/">Two-Factor Authentication and the API</a>
+  <a href="/changes/2014-02-25-organization-oauth-scopes/">OAuth scopes for organization and team resources</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    September 3, 2013
+    February 25, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/8caa0afdae1a934c30a1998472c63134?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_mastahyeti"/>
-      <a href="https://github.com/mastahyeti">mastahyeti</a>
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_pengwynn"/>
+      <a href="https://github.com/pengwynn">pengwynn</a>
   </li>
 </ul>
 </div>
 
 
-<p>As <a href="https://github.com/blog/1614-two-factor-authentication">announced earlier today</a>, GitHub.com now supports two-factor
-authentication (2FA) for increased security. For users with this feature
-enabled, GitHub.com will prompt for a 2FA code in addition to a username and
-password during authentication. We’ve also rolled out some improvements to the
-API to ensure that 2FA requirements in the API are consistent with GitHub.com.</p>
+<p>As a follow up to <a href="http://developer.github.com/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">the new scopes</a> we announced yesterday, we’ve
+introduced even more OAuth scopes for working with organization and team
+resources:</p>
 
-<h2 id="authenticating-with-the-api">Authenticating with the API</h2>
-
-<p>For users without 2FA enabled, and for applications using the <a href="/v3/oauth/#web-application-flow">OAuth web
-flow</a> for authentication, everything is
-business as usual. You’ll continue to authenticate with the API just as you
-always have. (That was easy.)</p>
-
-<p>If you enable 2FA <em>and</em> use Basic Authentication to access the API, we’re
-providing multiple options to make the flow simple and easy.</p>
-
-<h2 id="basic-authentication-and-2fa">Basic Authentication and 2FA</h2>
-
-<h3 id="personal-access-tokens">Personal Access Tokens</h3>
-
-<p>Personal access tokens provide the simplest option for using 2FA with Basic
-Authentication. You can create these tokens via the <a href="https://github.com/settings/applications">application settings page
-on GitHub.com</a>, and you can revoke
-them at any time. For more information about authenticating to the API with
-personal access tokens, be sure to check out our <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">help article on the
-topic</a>.</p>
-
-<h3 id="tightly-integrated-2fa">Tightly-integrated 2FA</h3>
-
-<p>For developers wishing to integrate GitHub 2FA directly into their application,
-the API’s Basic Authentication now supports the <a href="/v3/auth/#working-with-two-factor-authentication">ability to send the user’s 2FA
-code</a>, in addition to the username and password.</p>
-
-<h2 id="were-here-to-help">We’re here to help</h2>
-
-<p>We think GitHub users are going to love the additional security provided by
-two-factor authentication. As always, if you have any questions or feedback,
-<a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API">let us know</a>. We’re here to help!</p>
+<ul>
+<li>
+<code>read:org</code> provides read-only access to organizations, teams, and membership.</li>
+  <li>
+<code>write:org</code> allows an application to publicize and unpublicize an organization membership.</li>
+  <li>
+<code>admin:org</code> enables an application to fully manage organizations, teams, and memberships.</li>
+</ul><p>Check out <a href="/v3/oauth/#scopes">the full list of OAuth scopes</a> supported by the API to
+ensure your application asks for only the permissions it needs. As always, if
+you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes">get in touch</a>.</p>
 </div>
 
 		</div>

@@ -284,7 +284,7 @@ $(function() {
   }
 
   // Earth animation
-  if $('.dev-program').length {
+  if ($('.dev-program').length) {
     setTimeout(function() {
       $('.earth').fadeOut();
       $('.earth-short-loop').show();

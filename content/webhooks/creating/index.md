@@ -27,8 +27,8 @@ and click on **Webhooks & services**. After that, click on **Add webhook**.
 
 Alternatively, you can choose to build and manage a webhook [through the Webhooks API][webhook-api].
 
-Webhooks require a few configuration options before making use of them.
-We'll go through each of these below.
+Webhooks require a few configuration options before you can use of them.
+We'll go through each of these settings below.
 
 ## Payload URL
 

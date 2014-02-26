@@ -25,8 +25,10 @@ you'll set up your server to receive and manage the payload.
 To set up a webhook on GitHub, head over to the **Settings** page of your repository,
 and click on **Webhooks & services**. After that, click on **Add webhook**.
 
-You'll be presented with a page that lists all the capabilities your webhook
-can take advantage of. We'll go through each of these below.
+Alternatively, you can choose to build and manage a webhook [through the Webhooks API][webhook-api].
+
+Webhooks require a few configuration options before making use of them.
+We'll go through each of these below.
 
 ## Payload URL
 
@@ -54,4 +56,6 @@ When you're finished, click on **Add webhook**. Phew! Now that the webhook is cr
 it's time to set up our local server to test the webhook. Head on over to
 [Configuring Your Server](/webhooks/configuring/) to learn how to do that.
 
-[hooks-api]: http://developer.github.com/v3/repos/hooks/#events
+[webhook-api]: /v3/repos/hooks/
+[hooks-api]: /webhooks/#events
+

@@ -6,7 +6,7 @@ layout: overview
 <div class="feature dev-program">
   <div class="wrapper">
     <h1>It takes a community to design, build, and ship great software.</h1>
-    <p class="intro">With the GitHub Developer Program, the possibilities are endless and the credit is all yours.</p>
+    <p class="intro">With the GitHub Developer Program, the possibilities are endless and the kudos is all yours.</p>
     <a href="https://github.com/developer/register" class="button">Register now</a>
   </div>
   <img src="/shared/images/header-animation.gif" alt="" class="earth" width="700" height="350">

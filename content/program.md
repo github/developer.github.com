@@ -9,7 +9,8 @@ layout: overview
     <p class="intro">With the GitHub Developer Program, the possibilities are endless and the kudos is all yours.</p>
     <a href="https://github.com/developer/register" class="button">Register now</a>
   </div>
-  <img src="/shared/images/header-animation.gif" alt="" class="earth" width="700" height="350">
+  <img src="/shared/images/header-animation.gif" alt="" class="earth" width="450" height="375">
+  <img src="/shared/images/header-animation-short-loop.gif" alt="" class="earth earth-short-loop" width="450" height="375">
 </div>
 
 <div class="full-width-divider">

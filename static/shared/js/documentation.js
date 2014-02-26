@@ -10,7 +10,7 @@ $(function() {
           $('#js-sidebar .js-topic a').each(function(){
             if ($(this).parent('li').hasClass('disable'))
               $(this).parent('li').removeClass('disable')
-            
+
             var url = $(this).attr('href').toString()
             var cleanDocUrl = docUrl[1]
             if(url.indexOf(cleanDocUrl) >= 0 && url.length == cleanDocUrl.length){
@@ -99,30 +99,30 @@ $(function() {
       $('.api-status').html(link);
     }
   });
-  
+
   // Add link anchors for headers with IDs
   $(".content h1, .content h2, .content h3, .content h4").each(function(e){
     var id = $(this).attr("id");
     if (!id) return;
-    
+
     $(this).prepend("<a class='header-anchor' href='#" + id + "'></a>");
   });
-  
+
   // #### Search ####
   var searchIndex,
       searchHits;
-  
+
   // Load the JSON containing all pages
   // Has it been loaded before (and stored with localstorage)?
   if (localStorage['searchIndex']) {
     searchIndex = JSON.parse(localStorage['searchIndex']);
-    
+
     if (localStorageHasExpired())
       loadSearchIndex();
   } else {
     loadSearchIndex();
   }
-  
+
   function loadSearchIndex() {
     $.getJSON('/search-index.json', function(data) {
       searchIndex = data["pages"];
@@ -130,13 +130,13 @@ $(function() {
       localStorage['updated'] = new Date().getTime();
     });
   }
-  
+
   function localStorageHasExpired() {
     // Expires in one day (86400000 ms)
     if (new Date().getTime() - parseInt(localStorage['updated'],10) > 86400000) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -145,26 +145,26 @@ $(function() {
     $("#search-container").addClass("active");
     searchForString($("#searchfield").val());
   }
-    
+
   // On input change, update the search results
   $("#searchfield").on("input", function(e) {
     $(this).val().length > 0 ? $("#search-container").addClass("active") : $("#search-container").removeClass("active");
 
     searchForString($(this).val());
   });
-  
+
   // Global keyboard shortcuts
   $("body").keyup(function(e) {
     if (e.keyCode == 83) {
       // S key
       if ($("#searchfield").is(":focus"))
         return;
-        
+
       e.preventDefault();
       $("#searchfield").focus();
     }
   });
-  
+
   // Keyboard support for the search field
   $("#searchfield").keyup(function(e) {
     if (e.keyCode == 27) {
@@ -205,82 +205,89 @@ $(function() {
   $("#search-container .search-placeholder").click(function(e) {
     $("#searchfield").focus();
   });
-  
+
   $(".cancel-search").click(function(e) {
     cancelSearch();
   });
-  
+
   function cancelSearch() {
     $("#searchfield").val("");
     $("#search-container").removeClass("active");
   }
-  
+
   function searchForString(searchString) {
     searchHits = [];
     searchString = searchString.toLowerCase();
-    
+
     // Search for string in all pages
     for (var i = 0; i < searchIndex.length; i++) {
       var page = searchIndex[i];
-      
+
       // Add the page to the array of hits if there's a match
       if (page.title.toLowerCase().indexOf(searchString) !== -1) {
         searchHits.push(page);
       }
     }
-    
+
     renderResultsForSearch(searchString);
   }
-  
+
   // Update the UI representation of the search hits
   function renderResultsForSearch(searchString){
     $("#search-results").empty();
-    
+
     // Check if there are any results. If not, show placeholder and exit
     if (searchHits.length < 1) {
       $('<li class="placeholder">No results for <em></em></li>').appendTo("#search-results").find("em").text(searchString);
       return;
     }
-    
+
     // Render results (max 8)
     for (var i = 0; i < Math.min(searchHits.length, 8); i++) {
       var page = searchHits[i];
-    
+
       $('<li class="result"><a href="' + page.url + '"><em>' + page.title + '</em><small>' + page.section + '</small></a></li>').appendTo("#search-results");
     }
-    
+
     // Select the first alternative
     $("#search-results li:first-child").addClass("selected");
   }
-  
+
   // Move the selected list item when hovering
   $("#search-results").on("mouseenter", "li", function(e) {
     $(this).parent().find(".selected").removeClass("selected").end().end()
       .addClass("selected");
   });
-  
+
   function moveSearchSelectionUp() {
     $prev = $("#search-results .selected").prev();
     if ($prev.length < 1)
       return;
-    
+
     $("#search-results .selected").removeClass("selected");
     $prev.addClass("selected");
   }
-  
+
   function moveSearchSelectionDown() {
     $next = $("#search-results .selected").next();
     if ($next.length < 1)
       return;
-    
+
     $("#search-results .selected").removeClass("selected");
     $next.addClass("selected");
   }
-  
+
   function goToSelectedSearchResult() {
     var href = $("#search-results .selected a").attr("href");
     if (href)
       window.location.href = href;
   }
 
+  // Earth animation
+  if $('.dev-program').length {
+    setTimeout(function() {
+      $('.earth').fadeOut();
+      $('.earth-short-loop').show();
+    }, 19 * 1000); // Let first loop run through 19 seconds
+  }
 });

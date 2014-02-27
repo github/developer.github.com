@@ -5,18 +5,17 @@ created_at: 2014-02-27
 author_name: dbussink
 ---
 
-Timezones always present interesting engineering problems. Git already handles
-this by allowing for timezone offset information in for example commits. We have
-improved support in our API as well. If you create commits through the API, we
-now allow for specifying timezone information more accurately.
+Timezones always present interesting engineering problems. Git can handle timezone
+information by storing timezone offsets. We have improved support in our API
+as well where we create these kinds of git objects. If you create commits through
+the API, we now allow for specifying timezone information more accurately.
 
-We use the following steps to determine the timezone we use when a timestamp is
-generated in the API. These steps are ordered by priority, so we use the first
-case in this list that applies to the call you make.
+We apply the following rules, in order of priority, to determine timezone
+information for API calls:
 
 #### Explicitly provide an ISO 8601 timestamp with timezone information
 
-For API call that allows for a timestamp to be specified, we use that exact
+For API calls that allow for a timestamp to be specified, we use that exact
 timestamp. An example of this is the [Commits API](/v3/git/commits).
 
 These timestamps look something like `2014-02-27T15:05:06+01:00`

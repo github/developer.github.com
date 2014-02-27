@@ -8,7 +8,7 @@ layout: overview
 GitHub in your app</h1>
 	<p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
 	<a href="/v3/" class="button">Browse the documentation</a>
-	<img src="/shared/images/labtocat.png" class="labtocat" alt="The Labtocat" />
+	<img src="/shared/images/electrocat.png" class="electrocat" alt="The Electrocat" />
 </div>
 
 <div class="full-width-divider">

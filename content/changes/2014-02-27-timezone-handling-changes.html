@@ -15,11 +15,15 @@ information for API calls:
 #### Explicitly provide an ISO 8601 timestamp with timezone information
 
 For API calls that allow for a timestamp to be specified, we use that exact
-timestamp. An example of this is the [Commits API](/v3/git/commits).
+timestamp. An example of this is the [Commits API](/v3/git/commits) which allows
+for specifying the `date` property.
 
-These timestamps look something like `2014-02-27T15:05:06+01:00`. Also see
-[this example](http://developer.github.com/v3/git/commits/#example-input) for
-how these timestamps can be specified.
+<%= json "message"=> "my commit message", \
+    "author"=> \
+    {"name" => "Dirkjan Bussink", "email" => "d.bussink@gmail.com", \
+    "date" => "2014-02-27T15:05:06+01:00"}, \
+    "parents"=>["7d1b31e74ee336d15cbd21741bc88a537ed063a0"], \
+    "tree"=>"827efc6d56897b048c772eb4087f854f46256132" %>
 
 #### Using the `Time-Zone` header
 

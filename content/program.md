@@ -1,6 +1,6 @@
 ---
 title: GitHub Developer
-layout: overview
+layout: developers
 ---
 
 <div class="feature dev-program">

@@ -2,13 +2,40 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-02-25T08:00:00Z</updated>
+  <updated>2014-02-28T08:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-02-28:/changes/2014-02-28-issue-and-pull-query-enhancements/</id>
+    <title type="html">Query enhancements for listing issues and pull requests</title>
+    <published>2014-02-28T08:00:00Z</published>
+    <updated>2014-02-28T08:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-02-28-issue-and-pull-query-enhancements/" />
+    <content type="html">&lt;p&gt;We’ve made it even easier to list all &lt;a href="/v3/issues/#list-issues"&gt;issues&lt;/a&gt; and &lt;a href="/v3/pulls/#list-pull-requests"&gt;pull requests&lt;/a&gt; via the API.
+The &lt;code&gt;state&lt;/code&gt; parameter now supports a value of &lt;code&gt;all&lt;/code&gt; that will return issues and
+pull requests regardless of state.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/repos/atom/vim-mode/issues\?state\=all
+&lt;/pre&gt;
+
+&lt;p&gt;We’ve also introduced new sorting options for &lt;a href="/v3/pulls/#list-pull-requests"&gt;listing pull requests&lt;/a&gt;. You can now sort pull requests by &lt;code&gt;created&lt;/code&gt;, &lt;code&gt;updated&lt;/code&gt;,
+&lt;code&gt;popularity&lt;/code&gt;, and &lt;code&gt;long-running&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/repos/rails/rails/pulls\?sort\=long-running\&amp;amp;direction\=desc
+&lt;/pre&gt;
+
+&lt;p&gt;Happy querying. If you have any questions or feedback &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+query+enhancements"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-02-25:/changes/2014-02-25-organization-oauth-scopes/</id>
     <title type="html">OAuth scopes for organization and team resources</title>
@@ -135,28 +162,6 @@ on previous Pages builds.&lt;/p&gt;
 &lt;p&gt;Enjoy!&lt;/p&gt;</content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2014-02-10:/changes/2014-2-10-ping-event-for-webhooks/</id>
-    <title type="html">Ping Event for Webhooks</title>
-    <published>2014-02-10T08:00:00Z</published>
-    <updated>2014-02-10T08:00:00Z</updated>
-    <author>
-      <name>kdaigle</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-2-10-ping-event-for-webhooks/" />
-    <content type="html">&lt;p&gt;With the release of our &lt;a href="https://github.com/blog/1778-webhooks-level-up"&gt;new webhook UI&lt;/a&gt;, we included a new
-&lt;a href="/webhooks/#ping-event"&gt;ping event&lt;/a&gt; that webhooks will receive. When you
-create a new webhook, we will send this event as an initial test of the webhook.&lt;/p&gt;
-
-&lt;p&gt;The ping is only informational, doesn’t need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It’s just a quick
-“hello world” to let you know you set everything up correctly.&lt;/p&gt;
-
-&lt;p&gt;We also added a &lt;a href="/v3/repos/hooks/#ping-a-hook"&gt;ping endpoint&lt;/a&gt; to the hooks API.
-By using ping instead of &lt;a href="/v3/repos/hooks/#test-a-push-hook"&gt;test&lt;/a&gt;, you can ensure
-you won’t be limited by the &lt;code&gt;push&lt;/code&gt; event requirement that the test endpoint has.&lt;/p&gt;</content>
-  </entry>
-  <entry>
     <id>tag:developer.github.com,2014-02-10:/changes/2014-02-10-repo-hook-scopes/</id>
     <title type="html">New scopes for managing repository hooks</title>
     <published>2014-02-10T08:00:00Z</published>
@@ -179,6 +184,28 @@ repository contents:&lt;/p&gt;
   &lt;li&gt;
 &lt;code&gt;admin:repo_hook&lt;/code&gt; grants read, write, ping, and delete access to hooks in public or private repositories.&lt;/li&gt;
 &lt;/ul&gt;&lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2014-02-10:/changes/2014-2-10-ping-event-for-webhooks/</id>
+    <title type="html">Ping Event for Webhooks</title>
+    <published>2014-02-10T08:00:00Z</published>
+    <updated>2014-02-10T08:00:00Z</updated>
+    <author>
+      <name>kdaigle</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-2-10-ping-event-for-webhooks/" />
+    <content type="html">&lt;p&gt;With the release of our &lt;a href="https://github.com/blog/1778-webhooks-level-up"&gt;new webhook UI&lt;/a&gt;, we included a new
+&lt;a href="/webhooks/#ping-event"&gt;ping event&lt;/a&gt; that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.&lt;/p&gt;
+
+&lt;p&gt;The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.&lt;/p&gt;
+
+&lt;p&gt;We also added a &lt;a href="/v3/repos/hooks/#ping-a-hook"&gt;ping endpoint&lt;/a&gt; to the hooks API.
+By using ping instead of &lt;a href="/v3/repos/hooks/#test-a-push-hook"&gt;test&lt;/a&gt;, you can ensure
+you won’t be limited by the &lt;code&gt;push&lt;/code&gt; event requirement that the test endpoint has.&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2014-01-29:/changes/2014-01-29-audit-org-members-for-2fa/</id>
@@ -992,6 +1019,26 @@ but we can’t wait to see what others can do with this information.&lt;/p&gt;
 &lt;/ul&gt;&lt;p&gt;Enjoy!&lt;/p&gt;</content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
+    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
+    <published>2013-04-30T07:00:00Z</published>
+    <updated>2013-04-30T07:00:00Z</updated>
+    <author>
+      <name>foca</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
+    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
+Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
+has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+&lt;/pre&gt;
+
+&lt;p&gt;Enjoy.&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/</id>
     <title type="html">Improved Support for Submodules in the Repository Contents API</title>
     <published>2013-04-30T07:00:00Z</published>
@@ -1032,26 +1079,6 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 &lt;a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
-    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
-    <published>2013-04-30T07:00:00Z</published>
-    <updated>2013-04-30T07:00:00Z</updated>
-    <author>
-      <name>foca</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
-    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
-Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
-has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-&lt;/pre&gt;
-
-&lt;p&gt;Enjoy.&lt;/p&gt;</content>
-  </entry>
-  <entry>
     <id>tag:developer.github.com,2013-04-25:/changes/2013-04-25-deprecating-merge-commit-sha/</id>
     <title type="html">Deprecating a Confusing Attribute in the Pull Request API</title>
     <published>2013-04-25T07:00:00Z</published>
@@ -1077,23 +1104,5 @@ remove it in the next major version of the API.&lt;/p&gt;
 
 &lt;p&gt;As always, if you have any questions or feedback, please drop us a line at
 &lt;a href="mailto:support@github.com?subject=Deprecating%20merge_commit_sha"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-04-24:/changes/2013-04-24-user-agent-required/</id>
-    <title type="html">User Agent now mandatory</title>
-    <published>2013-04-24T07:00:00Z</published>
-    <updated>2013-04-24T07:00:00Z</updated>
-    <author>
-      <name>pengwynn</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-04-24-user-agent-required/" />
-    <content type="html">&lt;p&gt;After an almost six week grace period, we’re now enforcing the &lt;a href="/v3/#user-agent-required"&gt;User Agent
-header&lt;/a&gt; for all API requests. Most HTTP libraries (including cURL)
-set this header by default. If you’re experiencing an increase in &lt;code&gt;403&lt;/code&gt;
-responses, be sure and check your code.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, please drop us a line at
-&lt;a href="mailto:support@github.com?subject=User%20Agent%20Requirement"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>

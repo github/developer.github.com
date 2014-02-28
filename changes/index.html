@@ -41,6 +41,42 @@
 	<div id="wrapper">
 		<div class="content">
 			
+<div class="change" id="/changes/2014-02-28-issue-and-pull-query-enhancements/">
+  <h2 class="title">
+  <a href="/changes/2014-02-28-issue-and-pull-query-enhancements/">Query enhancements for listing issues and pull requests</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 28, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_pengwynn"><a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made it even easier to list all <a href="/v3/issues/#list-issues">issues</a> and <a href="/v3/pulls/#list-pull-requests">pull requests</a> via the API.
+The <code>state</code> parameter now supports a value of <code>all</code> that will return issues and
+pull requests regardless of state.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/repos/atom/vim-mode/issues\?state\=all
+</pre>
+
+<p>We’ve also introduced new sorting options for <a href="/v3/pulls/#list-pull-requests">listing pull requests</a>. You can now sort pull requests by <code>created</code>, <code>updated</code>,
+<code>popularity</code>, and <code>long-running</code>.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/repos/rails/rails/pulls\?sort\=long-running\&amp;direction\=desc
+</pre>
+
+<p>Happy querying. If you have any questions or feedback <a href="https://github.com/contact?form%5Bsubject%5D=API+query+enhancements">get in touch</a>.</p>
+</div>
+
 <div class="change" id="/changes/2014-02-25-organization-oauth-scopes/">
   <h2 class="title">
   <a href="/changes/2014-02-25-organization-oauth-scopes/">OAuth scopes for organization and team resources</a>
@@ -74,6 +110,33 @@ resources:</p>
 <p>Check out <a href="/v3/oauth/#scopes">the full list of OAuth scopes</a> supported by the API to
 ensure your application asks for only the permissions it needs. As always, if
 you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/dd18bb36fa5f06e45843ff8de33b793e?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_kdaigle"><a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
 </div>
 
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
@@ -121,33 +184,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 <p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
-</div>
-
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/dd18bb36fa5f06e45843ff8de33b793e?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_kdaigle"><a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
 </div>
 
 <div class="change" id="/changes/2014-02-21-gist-raw-file-url-change/">
@@ -2376,11 +2412,13 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-02-28-issue-and-pull-query-enhancements/">Query enhancements for listing issues and pull requests<br /><span class="date">February 28, 2014</span></a></li>
+
   <li><a href="/changes/2014-02-25-organization-oauth-scopes/">OAuth scopes for organization and team resources<br /><span class="date">February 25, 2014</span></a></li>
 
-  <li><a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys<br /><span class="date">February 24, 2014</span></a></li>
-
   <li><a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks<br /><span class="date">February 24, 2014</span></a></li>
+
+  <li><a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys<br /><span class="date">February 24, 2014</span></a></li>
 
   <li><a href="/changes/2014-02-21-gist-raw-file-url-change/">Gist raw file URI change<br /><span class="date">February 21, 2014</span></a></li>
 
@@ -2389,8 +2427,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-02-13-exposing-the-page-api/">Introducing the Pages API<br /><span class="date">February 13, 2014</span></a></li>
 
   <li><a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks<br /><span class="date">February 10, 2014</span></a></li>
-
-  <li><a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks<br /><span class="date">February 10, 2014</span></a></li>
 
 </ul>
 

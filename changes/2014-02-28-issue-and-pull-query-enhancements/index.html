@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Pagination for Organization Repository lists now paginates properly</title>
+  <title>Query enhancements for listing issues and pull requests</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -40,38 +40,42 @@
 	
 	<div id="wrapper">
 		<div class="content">
-			<div class="change" id="/changes/2012-12-09-organization-repositories-results-now-paginate/">
+			<div class="change" id="/changes/2014-02-28-issue-and-pull-query-enhancements/">
 <h2 class="title">
-  <a href="/changes/2012-12-09-organization-repositories-results-now-paginate/">Pagination for Organization Repository lists now paginates properly</a>
+  <a href="/changes/2014-02-28-issue-and-pull-query-enhancements/">Query enhancements for listing issues and pull requests</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 9, 2012
+    February 28, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/a44d5abad6e86cff4e34d9f0839535c9?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_rick"/>
-      <a href="https://github.com/rick">rick</a>
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_pengwynn"/>
+      <a href="https://github.com/pengwynn">pengwynn</a>
   </li>
 </ul>
 </div>
 
 
-<p><img src="https://github-images.s3.amazonaws.com/skitch/seger-turn-the-page-20121209-154956.png" alt="seger-is-so-dreamy"></p>
+<p>We’ve made it even easier to list all <a href="/v3/issues/#list-issues">issues</a> and <a href="/v3/pulls/#list-pull-requests">pull requests</a> via the API.
+The <code>state</code> parameter now supports a value of <code>all</code> that will return issues and
+pull requests regardless of state.</p>
 
-<p>Improvements continue to the Organizations Repository listing endpoint.
-Today we’re improving pagination so that it works as documented.  Now
-you can expect <code>Link</code> headers to navigate through the results space,
-regardless of what you send in the <code>type</code> parameter.</p>
+<pre class="terminal">
+$ curl https://api.github.com/repos/atom/vim-mode/issues\?state\=all
+</pre>
 
-<p>The docs for Organization Repositories queries are still here:</p>
+<p>We’ve also introduced new sorting options for <a href="/v3/pulls/#list-pull-requests">listing pull requests</a>. You can now sort pull requests by <code>created</code>, <code>updated</code>,
+<code>popularity</code>, and <code>long-running</code>.</p>
 
-<ul>
-<li><a href="/v3/repos/#list-organization-repositories">Organization Repositories</a></li>
-</ul><p><strong>EDIT:</strong> <code>Link</code> headers are our preferred navigation technique.</p>
+<pre class="terminal">
+$ curl https://api.github.com/repos/rails/rails/pulls\?sort\=long-running\&amp;direction\=desc
+</pre>
+
+<p>Happy querying. If you have any questions or feedback <a href="https://github.com/contact?form%5Bsubject%5D=API+query+enhancements">get in touch</a>.</p>
 </div>
 
 		</div>

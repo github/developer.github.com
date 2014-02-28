@@ -4,15 +4,15 @@ layout: libraries
 ---
 
 <div class="feature">
-	<h1>Octokit comes in<br />
+  <h1>Octokit comes in<br />
 many flavors</h1>
-	<p class="intro">Use the official Octokit library, or choose between any of the available third party libraries.</p>
-	<ul class="library-links">
-		<li><span>Ruby</span><a href="https://github.com/octokit/octokit.rb">octokit.rb</a></li>
-		<li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
-		<li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
-	</ul>
-	<img src="/shared/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
+  <p class="intro">Use the official Octokit library, or choose between any of the available third party libraries.</p>
+  <ul class="library-links">
+    <li><span>Ruby</span><a href="https://github.com/octokit/octokit.rb">octokit.rb</a></li>
+    <li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
+    <li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
+  </ul>
+  <img src="/shared/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
 </div>
 
 # Third-party libraries

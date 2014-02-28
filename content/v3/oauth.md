@@ -198,76 +198,6 @@ can specify multiple scopes by separating them with a comma:
       scope=user,public_repo
 
 ## Common errors for the authorization request
-<<<<<<< HEAD
-
-There are a few things that can go wrong in the process of obtaining an
-OAuth token for a user. In the initial authorization request phase,
-these are some errors you might see:
-
-### Application Suspended
-
-If the OAuth application you set up has been suspended (due to reported
-abuse, spam, or a mis-use of the API), GitHub will redirect to the
-registered callback URL with the following parameters summerizing the
-error:
-
-    http://your-application.com/callback?error=application_suspended
-
-Please contact [support](https://github.com/contact) to solve issues
-with suspended applications.
-
-### Redirect URI mismatch
-
-If you provide a redirect_uri that doesn't match what you've registered
-with your application, GitHub will redirect to the registered callback
-URL with the following parameters summerizing the error:
-
-    http://your-application.com/callback?error=redirect_uri_mismatch
-
-To correct this error, either provide a redirect_uri that matches what
-you registered or leave out this parameter to use the default one
-registered with your application.
-
-### Access denied
-
-If the user rejects access to your application, GItHub will redirect to
-the registered callback URL with the following parameters summerizing
-the error:
-
-    http://your-application.com/callback?error=access_denied
-
-There's nothing you can do here as users are free to choose not to use
-your application. More often that not, users will just close the window
-or press back in their browser, so it is likely that you'll never see
-this error.
-
-## Common errors for the access token request
-
-In the second phase of exchanging a code for an access token, there are
-an additional set of errors that can occur. The format of these
-responses is determined by the accept header you pass. The following
-examples only show JSON responses.
-
-### Invalid client credentials
-
-If the client\_id and or client\_secret you pass are incorrect you will
-receive this error response.
-
-<%= json :error => :invalid_client_credentials %>
-
-To solve this error, go back and make sure you have the correct
-credentials for your oauth application. Double check the `client_id` and
-`client_secret` to make sure they are correct and being passed correctly
-to GitHub.
-
-### Bad verification code
-
-If the verification code you pass is incorrect, expired, or doesn't
-match what you received in the first request for authorization you will
-receive this error.
-
-<%= json :error => :bad_verification_code %>
-=======
 
 There are a few things that can go wrong in the process of obtaining an
 OAuth token for a user. In the initial authorization request phase,
@@ -367,8 +297,6 @@ receive this error.
          :error_description => "The code passed is incorrect or expired.",
          :error_uri         => "http://developer.github.com/v3/oauth/#bad-verification-code"
 %>
-
->>>>>>> master
 
 To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
 and get a new code.

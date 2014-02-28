@@ -11,6 +11,13 @@ GitHub in your app</h1>
 	<img src="/shared/images/electrocat.png" class="electrocat" alt="The Electrocat" />
 </div>
 
+<div class="full-width dev-program-callout">
+  <div class="wrapper">
+    <h2>Join the GitHub Developer Program.</h2>
+    <p>The best way to integrate with GitHub. <a href="/program/">Learn more</a>.</p>
+  </div>
+</div>
+
 <div class="full-width-divider">
 	<ul class="wrapper highlights">
 		<li class="highlight-module">
@@ -30,11 +37,3 @@ GitHub in your app</h1>
 		</li>
 	</ul>
 </div>
-
-<div class="full-width dev-program-callout">
-  <div class="wrapper">
-    <h2>Join the GitHub Developer Program.</h2>
-    <p>The best way to integrate with GitHub. <a href="/program/">Learn more</a>.</p>
-  </div>
-</div>
-

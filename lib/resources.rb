@@ -43,7 +43,8 @@ module GitHub
         :kdaigle      => 'dd18bb36fa5f06e45843ff8de33b793e',
         :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068',
         :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51',
-        :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8'
+        :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8',
+        :dbussink     => 'b012094b37ab6946c44eaa41d7828478',
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

@@ -1,6 +1,6 @@
 ---
 kind: change
-title: New Payload format for Deployments
+title: New Payload Format for Deployments
 created_at: 2014-03-03
 author_name: atmos
 ---
@@ -11,7 +11,7 @@ As we [iterate on the preview][january-deployment-api-post] for the new Deployme
 
 To make the API even easier to use, we'll now return your custom payload as a JSON object along with the rest of the Deployment resource. No need to parse it as JSON again.
 
-## Code you need to update
+## Code You Need to Update
 
 You should only need to remove the JSON parsing if you're taking advantage of the custom payloads. The formats for creating Deployments remain unchanged.
 

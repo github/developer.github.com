@@ -10,7 +10,7 @@ layout: overview
   </h1>
   <p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
   <a href="/v3/" class="button">Browse the documentation</a>
-  <img src="/shared/images/electrocat.png" class="electrocat" alt="The Electrocat" />
+  <img src="/shared/images/rocketship.png" class="rocketship" alt="Rocketship" />
 </div>
 
 <div class="full-width dev-program-callout">

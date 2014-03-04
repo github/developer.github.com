@@ -18,17 +18,17 @@ layout: developers
     <li class="highlight-module">
       <a href="/changes/"><span class="mega-octicon octicon-broadcast"></span></a>
       <h2><a href="/changes/">Stay in the know</a></h2>
-      <p>Be the first to know about API changes and try out preview features before they launch.</p>
+      <p>Be the first to know about API changes and try out new features before they launch.</p>
     </li>
     <li class="highlight-module">
       <a href="/v3/"><span class="mega-octicon octicon-light-bulb"></span></a>
       <h2><a href="/v3/">Scratch an itch</a></h2>
-      <p>Build your own tools with powerful integrations to the place you push code every day.</p>
+      <p>Build your own tools that seamlessly integrate with the place you push code every day.</p>
     </li>
     <li class="highlight-module">
       <a href="http://github.com/contact?form[subject]=Development+licenses"><span class="mega-octicon octicon-mark-github"></span></a>
       <h2><a href="http://github.com/contact?form[subject]=Development+licenses">Take on the enterprise</a></h2>
-      <p>Request developer licenses to build and test your application against GitHub Enterprise.</p>
+      <p>Obtain developer licenses to build and test your application against GitHub Enterprise.</p>
     </li>
   </ul>
 </div>

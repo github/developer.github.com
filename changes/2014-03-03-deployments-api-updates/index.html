@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>OAuth scopes for organization and team resources</title>
+  <title>New Payload format for Deployments</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -40,40 +40,37 @@
 	
 	<div id="wrapper">
 		<div class="content">
-			<div class="change" id="/changes/2014-02-25-organization-oauth-scopes/">
+			<div class="change" id="/changes/2014-03-03-deployments-api-updates/">
 <h2 class="title">
-  <a href="/changes/2014-02-25-organization-oauth-scopes/">OAuth scopes for organization and team resources</a>
+  <a href="/changes/2014-03-03-deployments-api-updates/">New Payload format for Deployments</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 25, 2014
+    March 3, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/a86224d72ce21cd9f5bee6784d4b06c7?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_atmos"/>
+      <a href="https://github.com/atmos">atmos</a>
   </li>
 </ul>
 </div>
 
 
-<p>As a follow up to <a href="http://developer.github.com/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">the new scopes</a> we announced yesterday, we’ve
-introduced even more OAuth scopes for working with organization and team
-resources:</p>
+<p>As we <a href="/changes/2014-01-09-preview-the-new-deployments-api/">iterate on the preview</a> for the new Deployment API, we’re making sure that it’s friendly to work with for the apps built on top of it.</p>
 
-<ul>
-<li>
-<code>read:org</code> provides read-only access to organizations, teams, and membership.</li>
-  <li>
-<code>write:org</code> allows an application to publicize and unpublicize an organization membership.</li>
-  <li>
-<code>admin:org</code> enables an application to fully manage organizations, teams, and memberships.</li>
-</ul><p>Check out <a href="/v3/oauth/#scopes">the full list of OAuth scopes</a> supported by the API to
-ensure your application asks for only the permissions it needs. As always, if
-you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes">get in touch</a>.</p>
+<h2 id="deserialize-deployment-payloads">Deserialize Deployment Payloads</h2>
+
+<p>To make the API even easier to use, we’ll now return your custom payload as a JSON object along with the rest of the Deployment resource. No need to parse it as JSON again.</p>
+
+<h2 id="code-you-need-to-update">Code you need to update</h2>
+
+<p>You should only need to remove the JSON parsing if you’re taking advantage of the custom payloads. The formats for creating Deployments remain unchanged.</p>
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
 </div>
 
 		</div>

@@ -41,6 +41,78 @@
 	<div id="wrapper">
 		<div class="content">
 			
+<div class="change" id="/changes/2014-03-04-timezone-handling-changes/">
+  <h2 class="title">
+  <a href="/changes/2014-03-04-timezone-handling-changes/">Improved timezone handling in the API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 4, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_dbussink"><a href="https://github.com/dbussink">dbussink</a>
+  </li>
+</ul>
+</div>
+
+    <p>We have improved support for handling timezones in our API. For example, if you
+create commits through the API, we now allow for specifying timezone information
+more accurately.</p>
+
+<p>We apply the following rules, in order of priority, to determine timezone
+information for API calls:</p>
+
+<h4 id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information">Explicitly provide an ISO 8601 timestamp with timezone information</h4>
+
+<p>For API calls that allow for a timestamp to be specified, we use that exact
+timestamp. An example of this is the <a href="/v3/git/commits">Commits API</a> which allows
+for specifying the <code>date</code> property.</p>
+
+<pre><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Dirkjan Bussink"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"d.bussink@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2014-02-27T15:05:06+01:00"</span>
+  <span class="p">},</span>
+  <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span>
+  <span class="p">],</span>
+  <span class="s2">"tree"</span><span class="o">:</span> <span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span>
+<span class="p">}</span></code></pre>
+
+<h4 id="using-the-time-zone-header">Using the <code>Time-Zone</code> header</h4>
+
+<p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
+to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
+
+<pre><code>$ curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md
+</code></pre>
+
+<p>This means that we generate a timestamp for the moment your API call is made in
+the timezone this header defines. For example, the <a href="/v3/repos/contents/">Contents API</a>
+generates a git commit for each addition or change and uses the current time
+as the timestamp. This header will determine the timezone used for generating
+that current timestamp.</p>
+
+<h4 id="using-the-last-known-timezone-for-the-user">Using the last known timezone for the user</h4>
+
+<p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
+API, we use the last known timezone for the authenticated user. The last know
+timezone is updated whenever you browse the GitHub.com website.</p>
+
+<h4 id="utc">UTC</h4>
+
+<p>If the steps above don’t result in any information, we use UTC as the timezone
+to create the git commit.</p>
+
+<p>If you have any questions or feedback, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=API+timezones">contact</a> us!</p>
+</div>
+
 <div class="change" id="/changes/2014-03-03-deployments-api-updates/">
   <h2 class="title">
   <a href="/changes/2014-03-03-deployments-api-updates/">New Payload format for Deployments</a>
@@ -143,6 +215,33 @@ ensure your application asks for only the permissions it needs. As always, if
 you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes">get in touch</a>.</p>
 </div>
 
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/dd18bb36fa5f06e45843ff8de33b793e?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_kdaigle"><a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
+</div>
+
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -188,33 +287,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 <p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
-</div>
-
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/dd18bb36fa5f06e45843ff8de33b793e?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_kdaigle"><a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
 </div>
 
 <div class="change" id="/changes/2014-02-21-gist-raw-file-url-change/">
@@ -1329,35 +1401,6 @@ but we can’t wait to see what others can do with this information.</p>
 <p>Happy editing!</p>
 </div>
 
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/d0ca2bf32bda9e9ea8c4473ffc3aaa0d?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_foca"><a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
-</div>
-
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
@@ -1405,6 +1448,35 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+</div>
+
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/d0ca2bf32bda9e9ea8c4473ffc3aaa0d?s=20&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_foca"><a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
 </div>
 
 <div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
@@ -2443,21 +2515,21 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-03-04-timezone-handling-changes/">Improved timezone handling in the API<br /><span class="date">March 4, 2014</span></a></li>
+
   <li><a href="/changes/2014-03-03-deployments-api-updates/">New Payload format for Deployments<br /><span class="date">March 3, 2014</span></a></li>
 
   <li><a href="/changes/2014-02-28-issue-and-pull-query-enhancements/">Query enhancements for listing issues and pull requests<br /><span class="date">February 28, 2014</span></a></li>
 
   <li><a href="/changes/2014-02-25-organization-oauth-scopes/">OAuth scopes for organization and team resources<br /><span class="date">February 25, 2014</span></a></li>
 
-  <li><a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys<br /><span class="date">February 24, 2014</span></a></li>
-
   <li><a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks<br /><span class="date">February 24, 2014</span></a></li>
+
+  <li><a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys<br /><span class="date">February 24, 2014</span></a></li>
 
   <li><a href="/changes/2014-02-21-gist-raw-file-url-change/">Gist raw file URI change<br /><span class="date">February 21, 2014</span></a></li>
 
   <li><a href="/changes/2014-02-19-repo-contributors-for-empty-repos/">Repository Contributors and Empty Repositories<br /><span class="date">February 20, 2014</span></a></li>
-
-  <li><a href="/changes/2014-02-13-exposing-the-page-api/">Introducing the Pages API<br /><span class="date">February 13, 2014</span></a></li>
 
 </ul>
 

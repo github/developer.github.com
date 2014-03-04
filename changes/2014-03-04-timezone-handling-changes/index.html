@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Query enhancements for listing issues and pull requests</title>
+  <title>Improved timezone handling in the API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -40,42 +40,78 @@
 	
 	<div id="wrapper">
 		<div class="content">
-			<div class="change" id="/changes/2014-02-28-issue-and-pull-query-enhancements/">
+			<div class="change" id="/changes/2014-03-04-timezone-handling-changes/">
 <h2 class="title">
-  <a href="/changes/2014-02-28-issue-and-pull-query-enhancements/">Query enhancements for listing issues and pull requests</a>
+  <a href="/changes/2014-03-04-timezone-handling-changes/">Improved timezone handling in the API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 28, 2014
+    March 4, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://secure.gravatar.com/avatar/?s=20&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" alt="gravatar_for_dbussink"/>
+      <a href="https://github.com/dbussink">dbussink</a>
   </li>
 </ul>
 </div>
 
 
-<p>We’ve made it even easier to list all <a href="/v3/issues/#list-issues">issues</a> and <a href="/v3/pulls/#list-pull-requests">pull requests</a> via the API.
-The <code>state</code> parameter now supports a value of <code>all</code> that will return issues and
-pull requests regardless of state.</p>
+<p>We have improved support for handling timezones in our API. For example, if you
+create commits through the API, we now allow for specifying timezone information
+more accurately.</p>
 
-<pre class="terminal">
-$ curl https://api.github.com/repos/atom/vim-mode/issues\?state\=all
-</pre>
+<p>We apply the following rules, in order of priority, to determine timezone
+information for API calls:</p>
 
-<p>We’ve also introduced new sorting options for <a href="/v3/pulls/#list-pull-requests">listing pull requests</a>. You can now sort pull requests by <code>created</code>, <code>updated</code>,
-<code>popularity</code>, and <code>long-running</code>.</p>
+<h4 id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information">Explicitly provide an ISO 8601 timestamp with timezone information</h4>
 
-<pre class="terminal">
-$ curl https://api.github.com/repos/rails/rails/pulls\?sort\=long-running\&amp;direction\=desc
-</pre>
+<p>For API calls that allow for a timestamp to be specified, we use that exact
+timestamp. An example of this is the <a href="/v3/git/commits">Commits API</a> which allows
+for specifying the <code>date</code> property.</p>
 
-<p>Happy querying. If you have any questions or feedback <a href="https://github.com/contact?form%5Bsubject%5D=API+query+enhancements">get in touch</a>.</p>
+<pre><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Dirkjan Bussink"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"d.bussink@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2014-02-27T15:05:06+01:00"</span>
+  <span class="p">},</span>
+  <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span>
+  <span class="p">],</span>
+  <span class="s2">"tree"</span><span class="o">:</span> <span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span>
+<span class="p">}</span></code></pre>
+
+<h4 id="using-the-time-zone-header">Using the <code>Time-Zone</code> header</h4>
+
+<p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
+to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
+
+<pre><code>$ curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md
+</code></pre>
+
+<p>This means that we generate a timestamp for the moment your API call is made in
+the timezone this header defines. For example, the <a href="/v3/repos/contents/">Contents API</a>
+generates a git commit for each addition or change and uses the current time
+as the timestamp. This header will determine the timezone used for generating
+that current timestamp.</p>
+
+<h4 id="using-the-last-known-timezone-for-the-user">Using the last known timezone for the user</h4>
+
+<p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
+API, we use the last known timezone for the authenticated user. The last know
+timezone is updated whenever you browse the GitHub.com website.</p>
+
+<h4 id="utc">UTC</h4>
+
+<p>If the steps above don’t result in any information, we use UTC as the timezone
+to create the git commit.</p>
+
+<p>If you have any questions or feedback, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=API+timezones">contact</a> us!</p>
 </div>
 
 		</div>

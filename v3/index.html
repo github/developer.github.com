@@ -71,6 +71,7 @@
   <li><a href="#conditional-requests">Conditional requests</a></li>
   <li><a href="#cross-origin-resource-sharing">Cross Origin Resource Sharing</a></li>
   <li><a href="#json-p-callbacks">JSON-P Callbacks</a></li>
+  <li><a href="#timezones">Timezones</a></li>
 </ul><h2 id="current-version">Current Version</h2>
 
 <p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. By default, all requests receive the beta version:</p>
@@ -734,6 +735,46 @@ through as an array of <code>[url, options]</code> tuples.</p>
     <span class="p">]</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
+
+<h2 id="timezones">Timezones</h2>
+
+<p>Some requests allow for specifying timestamps or generate timestamps with time
+zone information. We apply the following rules, in order of priority, to
+determine timezone information for API calls.</p>
+
+<h4 id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information">Explicitly provide an ISO 8601 timestamp with timezone information</h4>
+
+<p>For API calls that allow for a timestamp to be specified, we use that exact
+timestamp. An example of this is the <a href="/v3/git/commits">Commits API</a>.</p>
+
+<p>These timestamps look something like <code>2014-02-27T15:05:06+01:00</code>. Also see
+<a href="http://developer.github.com/v3/git/commits/#example-input">this example</a> for
+how these timestamps can be specified.</p>
+
+<h4 id="using-the-time-zone-header">Using the <code>Time-Zone</code> header</h4>
+
+<p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
+to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
+
+<pre><code>$ curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md
+</code></pre>
+
+<p>This means that we generate a timestamp for the moment your API call is made in
+the timezone this header defines. For example, the <a href="/v3/repos/contents/">Contents API</a>
+generates a git commit for each addition or change and uses the current time
+as the timestamp. This header will determine the timezone used for generating
+that current timestamp.</p>
+
+<h4 id="using-the-last-known-timezone-for-the-user">Using the last known timezone for the user</h4>
+
+<p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
+API, we use the last known timezone for the authenticated user. The last know
+timezone is updated whenever you browse the GitHub.com website.</p>
+
+<h4 id="utc">UTC</h4>
+
+<p>If the steps above don’t result in any information, we use UTC as the timezone
+to create the git commit.</p>
     </div>
 
 		<div id="js-sidebar" class="sidebar-shell">

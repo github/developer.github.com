@@ -9,7 +9,7 @@ As we [iterate on the preview][january-deployment-api-post] for the new Deployme
 
 ## Deserialize Deployment Payloads
 
-If you've built anything around the API then you're probably doing a second deserialization of the returned JSON body for Deployment or DeploymentStatus objects. It seemed silly to keep this in place and it was a convention that we don't follow anywhere else in the API. 
+To make the API even easier to use, we'll now return your custom payload as a JSON object along with the rest of the Deployment resource. No need to parse it as JSON again.
 
 ## Code you need to update
 

@@ -16,19 +16,19 @@ layout: developers
 <div class="full-width-divider">
   <ul class="wrapper highlights">
     <li class="highlight-module">
-      <span class="mega-octicon octicon-broadcast"></span>
-      <h2>Stay in the know</h2>
-      <p>Receive notifications about API changes and early access to select GitHub feature releases.</p>
+      <a href="/changes/"><span class="mega-octicon octicon-broadcast"></span></a>
+      <h2><a href="/changes/">Stay in the know</a></h2>
+      <p>Be the first to know about API changes and try out preview features before they launch.</p>
     </li>
     <li class="highlight-module">
-      <span class="mega-octicon octicon-code"></span>
-      <h2>Develop on the GitHub platform</h2>
-      <p>Request developer licenses to build and test your application against GitHub products.</p>
+      <a href="/v3/"><span class="mega-octicon octicon-light-bulb"></span></a>
+      <h2><a href="/v3/">Scratch an itch</a></h2>
+      <p>Build your own tools with powerful integrations to the place you push code every day.</p>
     </li>
     <li class="highlight-module">
-      <span class="mega-octicon octicon-globe"></span>
-      <h2>Showcase your work</h2>
-      <p>Submit your integration to our directory that reaches more than 5 million GitHub users.</p>
+      <a href="http://github.com/contact?form[subject]=Development+licenses"><span class="mega-octicon octicon-mark-github"></span></a>
+      <h2><a href="http://github.com/contact?form[subject]=Development+licenses">Take on the enterprise</a></h2>
+      <p>Request developer licenses to build and test your application against GitHub Enterprise.</p>
     </li>
   </ul>
 </div>

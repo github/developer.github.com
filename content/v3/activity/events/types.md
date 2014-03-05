@@ -405,3 +405,17 @@ event’s repository is the [repository](/v3/repos/) that was starred.
 Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed. Currently, can only be `started`.
+
+## BuildEvent
+
+The BuildEvent represents an attempted build of a GitHub Pages site, whether successful or not. The BuildEvent is triggered on push to a GitHub Pages enabled branch (`gh-pages` for project pages, `master` for user and organization pages).
+
+### Hook Name
+
+`build_event`
+
+### Payload
+
+Key | Type | Description
+----|------|------------
+`build` | `object` | The [build](http://developer.github.com/v3/repos/pages/#list-pages-builds) itself

@@ -43,7 +43,8 @@ module GitHub
         :kdaigle      => 'dd18bb36fa5f06e45843ff8de33b793e',
         :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068',
         :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51',
-        :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8'
+        :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8',
+        :dbussink     => 'b012094b37ab6946c44eaa41d7828478',
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -1567,7 +1568,7 @@ module GitHub
       "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
       "url" => "https://api.github.com/repos/octocat/example/deployments/1",
       "creator" => USER,
-      "payload" => JSON.dump({:environment => 'production'}),
+      "payload" => {:environment => 'production'},
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "description" => "Deploy request from hubot",
@@ -1579,7 +1580,7 @@ module GitHub
       "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
       "state" => "success",
       "creator" => USER,
-      "payload" => JSON.dump({:environment => 'production'}),
+      "payload" => {:environment => 'production'},
       "target_url" => "https://gist.github.com/628b2736d379f",
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",

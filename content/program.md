@@ -33,10 +33,10 @@ layout: developers
   </ul>
 </div>
 
-<div class="wrapper">
+<div class="wrapper clearfix">
   <div class="program-info-column">
     <span class="mega-octicon octicon-person-add"></span>
-    <h2>Ready to join the GitHub Developer Program?</h3>
+    <h2>Ready to join the GitHub Developer Program?</h2>
     <p>Membership is open to individual developers and companies who have:</p>
     <ul>
       <li>A paid GitHub.com personal or organization plan</li>

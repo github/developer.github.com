@@ -35,24 +35,24 @@ layout: developers
 
 <div class="wrapper clearfix">
   <div class="program-info-column">
-    <span class="mega-octicon octicon-person-add"></span>
-    <h2>Ready to join the GitHub Developer Program?</h2>
-    <p>Membership is open to individual developers and companies who have:</p>
+    <span class="mega-octicon octicon-zap"></span>
+    <h2>Have an integration that works with GitHub?</h2>
+    <p>Awesome! We'd love to have you be part of the program. Here’s how you can spread the word:</p>
     <ul>
-      <li>A paid GitHub.com personal or organization plan</li>
-      <li>An integration in production or development using the GitHub API</li>
-      <li>An email address where GitHub users can contact you for support</li>
+      <li>Let us know about your integration</li>
+      <li>Use the <a href="https://github.com/logos">Octocat or GitHub logo</a> to advertise that your product works with GitHub</li>
+      <li>Post a video or a blog on your website about your integration</li>
     </ul>
   </div>
 
   <div class="program-info-column">
-    <span class="mega-octicon octicon-zap"></span>
-    <h2>Have an integration that works with GitHub?</h2>
-    <p>Awesome! Here’s how you can spread the word:</p>
+    <span class="mega-octicon octicon-person-add"></span>
+    <h2>Ready to join the GitHub Developer Program?</h2>
+    <p>Membership is open to individual developers and companies who have:</p>
     <ul>
-      <li>Let us know about your integration</li>
-      <li>Use the Octocat or GitHub logo to advertise that your product works with GitHub</li>
-      <li>Post a video or a blog on your website about your integration</li>
+      <li>A <a href="https://github.com/pricing">paid GitHub.com personal or organization plan</a></li>
+      <li>An integration in production or development using the GitHub API</li>
+      <li>An email address where GitHub users can contact you for support</li>
     </ul>
   </div>
 </div>

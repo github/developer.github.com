@@ -245,7 +245,7 @@ the error:
       &state=xyz
 
 There's nothing you can do here as users are free to choose not to use
-your application. More often that not, users will just close the window
+your application. More often than not, users will just close the window
 or press back in their browser, so it is likely that you'll never see
 this error.
 

@@ -40,7 +40,7 @@ layout: developers
     <p>Membership is open to individual developers and companies who have:</p>
     <ul>
       <li>A paid GitHub.com personal or organization plan</li>
-      <li>An integration in production or development that uses the GitHub API</li>
+      <li>An integration in production or development using the GitHub API</li>
       <li>An email address where GitHub users can contact you for support</li>
     </ul>
   </div>

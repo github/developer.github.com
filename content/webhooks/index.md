@@ -77,7 +77,7 @@ Name | Description
 `status` | Any time a Repository has a status update from the API
 `deployment` | Any time a Repository has a new deployment created from the API.
 `deployment_status` | Any time a deployment for the Repository has a status update from the API.
-`page_build` | Any time a Pages site is built or results in a failed build
+`page_build` | Any time a Pages site is built or results in a failed build.
 `*` | Any time any event is triggered ([Wildcard Event](#wildcard-event)).
 
 ### Payloads

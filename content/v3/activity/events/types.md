@@ -408,7 +408,9 @@ Key | Type | Description
 
 ## PageBuildEvent
 
-The PageBuildEvent represents an attempted build of a GitHub Pages site, whether successful or not. The PageBuildEvent is triggered on push to a GitHub Pages enabled branch (`gh-pages` for project pages, `master` for user and organization pages).
+Represents an attempted build of a GitHub Pages site, whether successful or not.
+
+Triggered on push to a GitHub Pages enabled branch (`gh-pages` for project pages, `master` for user and organization pages).
 
 ### Hook Name
 
@@ -418,4 +420,4 @@ The PageBuildEvent represents an attempted build of a GitHub Pages site, whether
 
 Key | Type | Description
 ----|------|------------
-`build` | `object` | The [page build](http://developer.github.com/v3/repos/pages/#list-pages-builds) itself
+`build` | `object` | The [page build](http://developer.github.com/v3/repos/pages/#list-pages-builds) itself.

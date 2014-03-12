@@ -133,6 +133,8 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
 ## Receiving Webhooks
 
+In order for GitHub to send webhooks to your service it needs to be accessible from the internet. We highly suggest using SSL to encrypt the payloads we send to your server.
+
 ### Webhook Headers
 
 GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.

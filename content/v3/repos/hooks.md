@@ -33,16 +33,6 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
     POST /repos/:owner/:repo/hooks
 
-### Webhook Headers
-
-GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.
-
-Name | Description
------|-----------|
-`X-GitHub-Event` | The [event type](#events) that was triggered.
-`X-GitHub-Delivery` | A [guid][guid] to identify the payload and event being sent.
-`X-GitHub-Signature` | The value of this header is computed as the HMAC hex digest of the body, using the `secret` config option as the key.
-
 ### Parameter
 
 Name | Type | Description
@@ -140,6 +130,18 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 ### Response
 
 <%= headers 204 %>
+
+## Receiving Webhooks
+
+### Webhook Headers
+
+GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.
+
+Name | Description
+-----|-----------|
+`X-GitHub-Event` | The [event type](#events) that was triggered.
+`X-GitHub-Delivery` | A [guid][guid] to identify the payload and event being sent.
+`X-GitHub-Signature` | The value of this header is computed as the HMAC hex digest of the body, using the `secret` config option as the key.
 
 ## PubSubHubbub
 

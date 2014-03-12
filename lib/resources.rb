@@ -389,6 +389,7 @@ module GitHub
       "open_issues"   => 4,
       "closed_issues" => 8,
       "created_at"    => "2011-04-10T20:09:31Z",
+      "updated_at"  => "2014-03-03T18:58:10Z",
       "due_on"        => nil
     }
 

@@ -87,6 +87,7 @@ They’re only created for various internal and repository hooks.</p>
   <li><a href="#statusevent">StatusEvent</a></li>
   <li><a href="#teamaddevent">TeamAddEvent</a></li>
   <li><a href="#watchevent">WatchEvent</a></li>
+  <li><a href="#pagebuildevent">PageBuildEvent</a></li>
 </ul><h2 id="commitcommentevent">CommitCommentEvent</h2>
 
 <p>Triggered when a <a href="/v3/repos/comments/#list-commit-comments-for-a-repository">commit comment</a> is created.</p>
@@ -806,6 +807,29 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
 <td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed. Currently, can only be <code>started</code>.</td>
+    </tr></tbody>
+</table><h2 id="pagebuildevent">PageBuildEvent</h2>
+
+<p>Represents an attempted build of a GitHub Pages site, whether successful or not.</p>
+
+<p>Triggered on push to a GitHub Pages enabled branch (<code>gh-pages</code> for project pages, <code>master</code> for user and organization pages).</p>
+
+<h3 id="hook-name-22">Hook Name</h3>
+
+<p><code>page_build</code></p>
+
+<h3 id="payload-22">Payload</h3>
+
+<table>
+<thead><tr>
+<th>Key</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody><tr>
+<td><code>build</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="http://developer.github.com/v3/repos/pages/#list-pages-builds">page build</a> itself.</td>
     </tr></tbody>
 </table>
     </div>

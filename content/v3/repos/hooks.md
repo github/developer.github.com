@@ -39,9 +39,9 @@ GitHub will send along a few HTTP headers to differentiate between event types a
 
 Name | Description
 -----|-----------|
-`X-GitHub_Event` | The [event type](#events) that was triggered.
-`X-GitHub_Delivery` | A [guid][guid] to identify the payload and event being sent.
-`X-GitHub_Signature` | The value of this header is computed as the HMAC hex digest of the body, using the `secret` config option as the key.
+`X-GitHub-Event` | The [event type](#events) that was triggered.
+`X-GitHub-Delivery` | A [guid][guid] to identify the payload and event being sent.
+`X-GitHub-Signature` | The value of this header is computed as the HMAC hex digest of the body, using the `secret` config option as the key.
 
 ### Parameter
 

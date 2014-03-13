@@ -131,6 +131,20 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
 <%= headers 204 %>
 
+## Receiving Webhooks
+
+In order for GitHub to send Webhook payloads to your service, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.
+
+### Webhook Headers
+
+GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.
+
+Name | Description
+-----|-----------|
+`X-GitHub-Event` | The [event type](#events) that was triggered.
+`X-GitHub-Delivery` | A [guid][guid] to identify the payload and event being sent.
+`X-GitHub-Signature` | The value of this header is computed as the HMAC hex digest of the body, using the `secret` config option as the key.
+
 ## PubSubHubbub
 
 GitHub can also serve as a [PubSubHubbub][pubsub] hub for all repositories.
@@ -191,6 +205,7 @@ Name | Type | Description
 ``hub.secret``|`string` | A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the `X-Hub-Signature` header.  You can see [our Ruby implementation][ruby-secret], or [the PubSubHubbub documentation][pshb-secret] for more details.
 
 
+[guid]: http://en.wikipedia.org/wiki/Globally_unique_identifier
 [pubsub]: http://code.google.com/p/pubsubhubbub/
 [post-receive]: http://help.github.com/post-receive-hooks/
 [ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50

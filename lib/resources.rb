@@ -45,6 +45,7 @@ module GitHub
         :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51',
         :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8',
         :dbussink     => 'b012094b37ab6946c44eaa41d7828478',
+        :benbalter    => '19d03ecc1ff5da1a5e63a3ddaa2d84c2',
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -388,6 +389,7 @@ module GitHub
       "open_issues"   => 4,
       "closed_issues" => 8,
       "created_at"    => "2011-04-10T20:09:31Z",
+      "updated_at"  => "2014-03-03T18:58:10Z",
       "due_on"        => nil
     }
 

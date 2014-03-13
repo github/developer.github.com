@@ -64,4 +64,4 @@ subsequent results. If you have any questions or run into trouble, feel free to
 [User emails]: /v3/users/emails/#future-response
 [User keys]: /v3/users/keys/#list-public-keys-for-a-user
 [paginating]: /v3/#pagination
-[contact]: https://github.com/contact?form[subject]=API+v3:+Paginating+org+members
+[contact]: https://github.com/contact?form[subject]=API+v3:+Pagination+changes

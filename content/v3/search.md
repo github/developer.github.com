@@ -18,6 +18,8 @@ search results so that you can find the item that best meets your needs. To
 satisfy that need, the GitHub Search API provides **up to 1,000 results for each
 search**.
 
+### Ranking search results
+
 Unless another sort option is provided as a query parameter, results are sorted
 by best match, as indicated by the `score` field for each item returned. This
 is a computed value representing the relevance of a item relative to the other

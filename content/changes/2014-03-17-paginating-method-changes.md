@@ -12,8 +12,7 @@ Beginning today, the methods below will paginate if you include `page` or
 _always_ return [paginated results][paginating]. If you have any questions or
 run into trouble, feel free to [get in touch][contact].
 
-
-Here's the entire list of updated methods:
+Here's the complete list of updated methods:
 
 #### [Gist comments][]
 

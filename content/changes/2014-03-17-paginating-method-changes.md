@@ -5,7 +5,7 @@ created_at: 2014-03-17
 author_name: pengwynn
 ---
 
-In an effort to keep the API fast for everyone, we're enabling pagination on
+In an effort to keep the API fast for everyone, we're enabling [pagination][paginating] on
 some API methods that previously did not support it. Beginning today,
 the methods below will paginate if you include `page` or `per_page` query
 parameters. Starting April 17th, 2014, these methods will _always_ return

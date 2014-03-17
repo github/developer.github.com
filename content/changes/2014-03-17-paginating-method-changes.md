@@ -9,9 +9,11 @@ In an effort to keep the API fast for everyone, we're enabling pagination on a
 few API methods that previously did not support it. Beginning today,
 these methods will paginate if you include `page` or `per_page` query
 parameters. Starting April 17th, 2014, these methods will _always_ return
-[paginated results][paginating].
+[paginated results][paginating]. If you have any questions or run into trouble,
+feel free to [get in touch][contact].
 
-These methods include:
+
+Here's the entire list of updated methods:
 
 #### [Gist comments][]
 
@@ -93,10 +95,6 @@ These methods include:
 
     GET /users/:user/keys
     GET /user/keys
-
-As always, be sure and follow those [Link headers][paginating] to get
-subsequent results. If you have any questions or run into trouble, feel free to
-[get in touch][contact].
 
 [Gist comments]: /v3/gists/comments/#list-comments-on-a-gist
 [Git refs]: /v3/git/refs/#get-all-references

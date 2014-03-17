@@ -1196,34 +1196,30 @@ module GitHub
       }
     }
 
-    GIST_HISTORY = {
-      "history" => [
-        {
-          "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
-          "user"    => USER,
-          "change_status" => {
-            "deletions" => 0,
-            "additions" => 180,
-            "total"     => 180
-          },
-          "committed_at" => "2010-04-14T02:15:15Z"
-        }
-      ]
-    }
+    GIST_HISTORY = [
+      {
+        "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+        "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
+        "user"    => USER,
+        "change_status" => {
+          "deletions" => 0,
+          "additions" => 180,
+          "total"     => 180
+        },
+        "committed_at" => "2010-04-14T02:15:15Z"
+      }
+    ]
 
 
-    GIST_FORKS = {
-      "forks" => [
-        {
-          "user" => USER,
-          "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "id" => 1,
-          "created_at" => "2011-04-14T16:00:49Z",
-          "updated_at" => "2011-04-14T16:00:49Z"
-        }
-      ]
-    }
+    GIST_FORKS = [
+      {
+        "user" => USER,
+        "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+        "id" => 1,
+        "created_at" => "2011-04-14T16:00:49Z",
+        "updated_at" => "2011-04-14T16:00:49Z"
+      }
+    ]
 
     GIST_FILE = {
       "size"     => 932,
@@ -1251,8 +1247,10 @@ module GitHub
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
-    FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
-    FULL_GIST["files"] = GIST_FILE.merge({'content' => 'contents of gist'})
+    FULL_GIST.update \
+      :forks   => GIST_FORKS,
+      :history => GIST_HISTORY,
+      :files   => GIST_FILE.merge({'content' => 'contents of gist'})
 
     GIST_COMMENT = {
       "id"         => 1,

@@ -124,6 +124,16 @@ including the filename with a `null` hash.
 <%= headers 200 %>
 <%= json :full_gist %>
 
+
+## List gist commits
+
+    GET /gists/:id/commits
+
+### Response
+
+<%= headers 200 %>
+<%= json(:gist_history) %>
+
 ## Star a gist
 
     PUT /gists/:id/star
@@ -162,6 +172,15 @@ including the filename with a `null` hash.
 
 <%= headers 201, :Location => "https://api.github.com/gists/2" %>
 <%= json(:gist) %>
+
+## List gist forks
+
+    GET /gists/:id/forks
+
+### Response
+
+<%= headers 200 %>
+<%= json(:gist_forks) %>
 
 ## Delete a gist
 

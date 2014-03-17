@@ -1,15 +1,15 @@
 ---
 kind: change
-title: Pagination changes for some listing methods
-created_at: 2014-03-13
+title: Pagination changes for some resource lists
+created_at: 2014-03-17
 author_name: pengwynn
 ---
 
 In an effort to keep the API fast for everyone, we're enabling pagination on a
-few API methods that previously did not support pagination. Beginning today,
+few API methods that previously did not support it. Beginning today,
 these methods will paginate if you include `page` or `per_page` query
-parameters. Starting April 15th, 2014, these methods will _always_ return
-paginated results.
+parameters. Starting April 17th, 2014, these methods will _always_ return
+[paginated results][paginating].
 
 These methods include:
 
@@ -21,9 +21,41 @@ These methods include:
 
     GET /repos/:owner/:repo/git/refs
 
+#### [Issue labels][]
+
+    GET /repos/:owner/:repo/labels/:number/labels
+
+#### [Milestone labels][]
+
+    GET /repos/:owner/:repo/milestones/:id/labels
+
+#### [Organization teams][]
+
+    GET /orgs/:org/teams
+
+#### [Pull Request commits][]
+
+    GET /repos/:owner/:repo/pulls/:number/commits
+
+#### [Pull Request files][]
+
+    GET /repos/:owner/:repo/pulls/:number/files
+
+#### [Release assets][]
+
+    GET /repos/:owner/:repo/releases/:id/assets
+
 #### [Repository collaborators][]
 
     GET /repos/:owner/:repo/collaborators
+
+#### [Repository contributors][]
+
+    GET /repos/:owner/:repo/contributors
+
+#### [Repository branches][]
+
+    GET /repos/:owner/:repo/branches
 
 #### [Repository downloads][]
 
@@ -36,6 +68,18 @@ These methods include:
 #### [Repository labels][]
 
     GET /repos/:owner/:repo/labels
+
+#### [Repository tags][]
+
+    GET /repos/:owner/:repo/tags
+
+#### [Repository teams][]
+
+    GET /repos/:owner/:repo/teams
+
+#### [Team members][]
+
+    GET /teams/:id/members
 
 #### [Team repositories][]
 
@@ -63,6 +107,17 @@ subsequent results. If you have any questions or run into trouble, feel free to
 [Team repositories]: /v3/orgs/teams/#list-team-repos
 [User emails]: /v3/users/emails/#future-response
 [User keys]: /v3/users/keys/#list-public-keys-for-a-user
+[Issue labels]:/v3/issues/labels/#list-labels-on-an-issue
+[Milestone labels]: /v3/issues/labels/#get-labels-for-every-issue-in-a-milestone
+[Organization teams]: /v3/orgs/teams/#list-teams
+[Pull Request commits]: /v3/pulls/#list-commits-on-a-pull-request
+[Pull Request files]: /v3/pulls/#list-pull-requests-files
+[Release assets]: /v3/repos/releases/#list-assets-for-a-release
+[Repository contributors]: /v3/repos/#list-contributors
+[Repository branches]: /v3/repos/#list-branches
+[Repository tags]: /v3/repos/#list-tags
+[Repository teams]: /v3/repos/#list-teams
+[Team members]: /v3/orgs/teams/#list-team-members
 [paginating]: http://developer.github.com/v3/#pagination
 [contact]: https://github.com/contact?form[subject]=API+v3:+Paginating+org+members
 

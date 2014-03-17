@@ -103,7 +103,7 @@ subsequent results. If you have any questions or run into trouble, feel free to
 [Repository collaborators]: /v3/repos/collaborators/#list
 [Repository downloads]: /v3/repos/downloads/#list-downloads-for-a-repository
 [Repository keys]: /v3/repos/keys/#list
-[Repository labels]: http://developer.github.com/v3/issues/labels/#list-all-labels-for-this-repository
+[Repository labels]: /v3/issues/labels/#list-all-labels-for-this-repository
 [Team repositories]: /v3/orgs/teams/#list-team-repos
 [User emails]: /v3/users/emails/#future-response
 [User keys]: /v3/users/keys/#list-public-keys-for-a-user
@@ -118,6 +118,6 @@ subsequent results. If you have any questions or run into trouble, feel free to
 [Repository tags]: /v3/repos/#list-tags
 [Repository teams]: /v3/repos/#list-teams
 [Team members]: /v3/orgs/teams/#list-team-members
-[paginating]: http://developer.github.com/v3/#pagination
-[contact]: https://github.com/contact?form[subject]=API+v3:+Paginating+org+members
 
+[paginating]: /v3/#pagination
+[contact]: https://github.com/contact?form[subject]=API+v3:+Pagination+changes

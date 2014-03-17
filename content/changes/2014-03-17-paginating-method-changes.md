@@ -18,6 +18,14 @@ Here's the complete list of updated methods:
 
     GET /gists/:gist_id/comments
 
+#### [Gist commits][]
+
+    GET /gists/:gist_id/commits
+
+#### [Gist forks][]
+
+    GET /gists/:gist_id/forks
+
 #### [Git refs][]
 
     GET /repos/:owner/:repo/git/refs
@@ -96,6 +104,8 @@ Here's the complete list of updated methods:
     GET /user/keys
 
 [Gist comments]: /v3/gists/comments/#list-comments-on-a-gist
+[Gist commits]: /v3/gists/#list-gist-commits
+[Gist forks]: /v3/gists/#list-gist-forks
 [Git refs]: /v3/git/refs/#get-all-references
 [Repository collaborators]: /v3/repos/collaborators/#list
 [Repository downloads]: /v3/repos/downloads/#list-downloads-for-a-repository

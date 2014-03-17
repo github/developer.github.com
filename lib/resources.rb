@@ -1247,7 +1247,7 @@ module GitHub
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
-    FULL_GIST.update \
+    FULL_GIST = GIST.dup.update \
       :forks   => GIST_FORKS,
       :history => GIST_HISTORY,
       :files   => GIST_FILE.merge({'content' => 'contents of gist'})

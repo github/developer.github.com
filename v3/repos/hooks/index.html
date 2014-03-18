@@ -62,6 +62,7 @@
   <li><a href="#test-a-push-hook">Test a <code>push</code> hook</a></li>
   <li><a href="#ping-a-hook">Ping a hook</a></li>
   <li><a href="#delete-a-hook">Delete a hook</a></li>
+  <li><a href="#receiving-webhooks">Receiving Webhooks</a></li>
   <li><a href="#pubsubhubbub">PubSubHubbub</a></li>
 </ul><p>The Repository Webhooks API allows repository admins to manage the post-receive
 hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
@@ -353,7 +354,34 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<h2 id="pubsubhubbub">PubSubHubbub</h2>
+<h2 id="receiving-webhooks">Receiving Webhooks</h2>
+
+<p>In order for GitHub to send Webhook payloads to your service, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.</p>
+
+<h3 id="webhook-headers">Webhook Headers</h3>
+
+<p>GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.</p>
+
+<table>
+<thead><tr>
+<th>Name</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>X-GitHub-Event</code></td>
+      <td>The <a href="/v3/activity/events/types/">event type</a> that was triggered.</td>
+    </tr>
+<tr>
+<td><code>X-GitHub-Delivery</code></td>
+      <td>A <a href="http://en.wikipedia.org/wiki/Globally_unique_identifier">guid</a> to identify the payload and event being sent.</td>
+    </tr>
+<tr>
+<td><code>X-GitHub-Signature</code></td>
+      <td>The value of this header is computed as the HMAC hex digest of the body, using the <code>secret</code> config option as the key.</td>
+    </tr>
+</tbody>
+</table><h2 id="pubsubhubbub">PubSubHubbub</h2>
 
 <p>GitHub can also serve as a <a href="http://code.google.com/p/pubsubhubbub/">PubSubHubbub</a> hub for all repositories.
 PSHB is a simple publish/subscribe protocol

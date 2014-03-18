@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-03-12T07:00:00Z</updated>
+  <updated>2014-03-18T05:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
@@ -10,10 +10,141 @@
     <uri>https://github.com/technoweenie</uri>
   </author>
   <entry>
+    <id>tag:developer.github.com,2014-03-18:/changes/2014-03-18-paginating-method-changes/</id>
+    <title type="html">Pagination changes for some resource lists</title>
+    <published>2014-03-18T05:00:00Z</published>
+    <updated>2014-03-18T05:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-03-18-paginating-method-changes/" />
+    <content type="html">&lt;p&gt;In an effort to keep the API fast for everyone, we’re enabling
+&lt;a href="/v3/#pagination"&gt;pagination&lt;/a&gt; on some API methods that previously did not support it.
+Beginning today, the methods below will paginate if you include &lt;code&gt;page&lt;/code&gt; or
+&lt;code&gt;per_page&lt;/code&gt; query parameters. Starting April 17th, 2014, these methods will
+&lt;em&gt;always&lt;/em&gt; return &lt;a href="/v3/#pagination"&gt;paginated results&lt;/a&gt;. If you have any questions or
+run into trouble, feel free to &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Pagination+changes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here’s the complete list of updated methods:&lt;/p&gt;
+
+&lt;h4 id="gist-comments"&gt;&lt;a href="/v3/gists/comments/#list-comments-on-a-gist"&gt;Gist comments&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /gists/:gist_id/comments
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="gist-commits"&gt;&lt;a href="/v3/gists/#list-gist-commits"&gt;Gist commits&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /gists/:gist_id/commits
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="gist-forks"&gt;&lt;a href="/v3/gists/#list-gist-forks"&gt;Gist forks&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /gists/:gist_id/forks
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="git-refs"&gt;&lt;a href="/v3/git/refs/#get-all-references"&gt;Git refs&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/git/refs
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="issue-labels"&gt;&lt;a href="/v3/issues/labels/#list-labels-on-an-issue"&gt;Issue labels&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/labels/:number/labels
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="milestone-labels"&gt;&lt;a href="/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone"&gt;Milestone labels&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/milestones/:id/labels
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="organization-teams"&gt;&lt;a href="/v3/orgs/teams/#list-teams"&gt;Organization teams&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /orgs/:org/teams
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="pull-request-commits"&gt;&lt;a href="/v3/pulls/#list-commits-on-a-pull-request"&gt;Pull Request commits&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/pulls/:number/commits
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="pull-request-files"&gt;&lt;a href="/v3/pulls/#list-pull-requests-files"&gt;Pull Request files&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/pulls/:number/files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="release-assets"&gt;&lt;a href="/v3/repos/releases/#list-assets-for-a-release"&gt;Release assets&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/releases/:id/assets
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="repository-collaborators"&gt;&lt;a href="/v3/repos/collaborators/#list"&gt;Repository collaborators&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/collaborators
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="repository-contributors"&gt;&lt;a href="/v3/repos/#list-contributors"&gt;Repository contributors&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/contributors
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="repository-branches"&gt;&lt;a href="/v3/repos/#list-branches"&gt;Repository branches&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/branches
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="repository-downloads"&gt;&lt;a href="/v3/repos/downloads/#list-downloads-for-a-repository"&gt;Repository downloads&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/downloads
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="repository-keys"&gt;&lt;a href="/v3/repos/keys/#list"&gt;Repository keys&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/keys
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="repository-labels"&gt;&lt;a href="/v3/issues/labels/#list-all-labels-for-this-repository"&gt;Repository labels&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/labels
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="repository-tags"&gt;&lt;a href="/v3/repos/#list-tags"&gt;Repository tags&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/tags
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="repository-teams"&gt;&lt;a href="/v3/repos/#list-teams"&gt;Repository teams&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/teams
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="team-members"&gt;&lt;a href="/v3/orgs/teams/#list-team-members"&gt;Team members&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /teams/:id/members
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="team-repositories"&gt;&lt;a href="/v3/orgs/teams/#list-team-repos"&gt;Team repositories&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /teams/:id/repos
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="user-emails-v3-media-type-only"&gt;
+&lt;a href="/v3/users/emails/#future-response"&gt;User emails&lt;/a&gt; (v3 media type only)&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /users/:user/emails
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="user-keys"&gt;&lt;a href="/v3/users/keys/#list-public-keys-for-a-user"&gt;User keys&lt;/a&gt;&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /users/:user/keys
+GET /user/keys
+&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2014-03-12:/changes/2014-03-12-page-build-event-for-webhooks/</id>
     <title type="html">Page Build Event for Webhooks</title>
-    <published>2014-03-12T07:00:00Z</published>
-    <updated>2014-03-12T07:00:00Z</updated>
+    <published>2014-03-12T05:00:00Z</published>
+    <updated>2014-03-12T05:00:00Z</updated>
     <author>
       <name>benbalter</name>
       <uri>https://github.com/technoweenie</uri>
@@ -28,8 +159,8 @@
   <entry>
     <id>tag:developer.github.com,2014-03-05:/changes/2014-03-05-reminder-about-upcoming-cutover-test/</id>
     <title type="html">Reminder: March 12 Cutover Test for Default Media Type</title>
-    <published>2014-03-05T08:00:00Z</published>
-    <updated>2014-03-05T08:00:00Z</updated>
+    <published>2014-03-05T06:00:00Z</published>
+    <updated>2014-03-05T06:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -46,8 +177,8 @@
   <entry>
     <id>tag:developer.github.com,2014-03-04:/changes/2014-03-04-timezone-handling-changes/</id>
     <title type="html">Improved timezone handling in the API</title>
-    <published>2014-03-04T08:00:00Z</published>
-    <updated>2014-03-04T08:00:00Z</updated>
+    <published>2014-03-04T06:00:00Z</published>
+    <updated>2014-03-04T06:00:00Z</updated>
     <author>
       <name>dbussink</name>
       <uri>https://github.com/technoweenie</uri>
@@ -109,8 +240,8 @@ to create the git commit.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2014-03-03:/changes/2014-03-03-deployments-api-updates/</id>
     <title type="html">New Payload Format for Deployments</title>
-    <published>2014-03-03T08:00:00Z</published>
-    <updated>2014-03-03T08:00:00Z</updated>
+    <published>2014-03-03T06:00:00Z</published>
+    <updated>2014-03-03T06:00:00Z</updated>
     <author>
       <name>atmos</name>
       <uri>https://github.com/technoweenie</uri>
@@ -131,8 +262,8 @@ to create the git commit.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2014-02-28:/changes/2014-02-28-issue-and-pull-query-enhancements/</id>
     <title type="html">Query enhancements for listing issues and pull requests</title>
-    <published>2014-02-28T08:00:00Z</published>
-    <updated>2014-02-28T08:00:00Z</updated>
+    <published>2014-02-28T06:00:00Z</published>
+    <updated>2014-02-28T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -158,8 +289,8 @@ $ curl https://api.github.com/repos/rails/rails/pulls\?sort\=long-running\&amp;a
   <entry>
     <id>tag:developer.github.com,2014-02-25:/changes/2014-02-25-organization-oauth-scopes/</id>
     <title type="html">OAuth scopes for organization and team resources</title>
-    <published>2014-02-25T08:00:00Z</published>
-    <updated>2014-02-25T08:00:00Z</updated>
+    <published>2014-02-25T06:00:00Z</published>
+    <updated>2014-02-25T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -181,10 +312,28 @@ ensure your application asks for only the permissions it needs. As always, if
 you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
+    <title type="html">Wildcard Event for Webhooks</title>
+    <published>2014-02-24T06:00:00Z</published>
+    <updated>2014-02-24T06:00:00Z</updated>
+    <author>
+      <name>kdaigle</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
+    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/</id>
     <title type="html">Finer-grained OAuth scopes for SSH keys</title>
-    <published>2014-02-24T08:00:00Z</published>
-    <updated>2014-02-24T08:00:00Z</updated>
+    <published>2014-02-24T06:00:00Z</published>
+    <updated>2014-02-24T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -218,28 +367,10 @@ you have any questions or feedback, &lt;a href="https://github.com/contact?form%
 &lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys"&gt;please get in touch&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
-    <title type="html">Wildcard Event for Webhooks</title>
-    <published>2014-02-24T08:00:00Z</published>
-    <updated>2014-02-24T08:00:00Z</updated>
-    <author>
-      <name>kdaigle</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
-    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.&lt;/p&gt;</content>
-  </entry>
-  <entry>
     <id>tag:developer.github.com,2014-02-21:/changes/2014-02-21-gist-raw-file-url-change/</id>
     <title type="html">Gist raw file URI change</title>
-    <published>2014-02-21T08:00:00Z</published>
-    <updated>2014-02-21T08:00:00Z</updated>
+    <published>2014-02-21T06:00:00Z</published>
+    <updated>2014-02-21T06:00:00Z</updated>
     <author>
       <name>spicycode</name>
       <uri>https://github.com/technoweenie</uri>
@@ -251,8 +382,8 @@ The new host is &lt;code&gt;https://gist.githubusercontent.com&lt;/code&gt;.  Ex
   <entry>
     <id>tag:developer.github.com,2014-02-20:/changes/2014-02-19-repo-contributors-for-empty-repos/</id>
     <title type="html">Repository Contributors and Empty Repositories</title>
-    <published>2014-02-20T08:00:00Z</published>
-    <updated>2014-02-20T08:00:00Z</updated>
+    <published>2014-02-20T06:00:00Z</published>
+    <updated>2014-02-20T06:00:00Z</updated>
     <author>
       <name>izuzak</name>
       <uri>https://github.com/technoweenie</uri>
@@ -265,8 +396,8 @@ The new host is &lt;code&gt;https://gist.githubusercontent.com&lt;/code&gt;.  Ex
   <entry>
     <id>tag:developer.github.com,2014-02-13:/changes/2014-02-13-exposing-the-page-api/</id>
     <title type="html">Introducing the Pages API</title>
-    <published>2014-02-13T08:00:00Z</published>
-    <updated>2014-02-13T08:00:00Z</updated>
+    <published>2014-02-13T06:00:00Z</published>
+    <updated>2014-02-13T06:00:00Z</updated>
     <author>
       <name>gjtorikian</name>
       <uri>https://github.com/technoweenie</uri>
@@ -281,32 +412,10 @@ on previous Pages builds.&lt;/p&gt;
 &lt;p&gt;Enjoy!&lt;/p&gt;</content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2014-02-10:/changes/2014-2-10-ping-event-for-webhooks/</id>
-    <title type="html">Ping Event for Webhooks</title>
-    <published>2014-02-10T08:00:00Z</published>
-    <updated>2014-02-10T08:00:00Z</updated>
-    <author>
-      <name>kdaigle</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-2-10-ping-event-for-webhooks/" />
-    <content type="html">&lt;p&gt;With the release of our &lt;a href="https://github.com/blog/1778-webhooks-level-up"&gt;new webhook UI&lt;/a&gt;, we included a new
-&lt;a href="/webhooks/#ping-event"&gt;ping event&lt;/a&gt; that webhooks will receive. When you
-create a new webhook, we will send this event as an initial test of the webhook.&lt;/p&gt;
-
-&lt;p&gt;The ping is only informational, doesn’t need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It’s just a quick
-“hello world” to let you know you set everything up correctly.&lt;/p&gt;
-
-&lt;p&gt;We also added a &lt;a href="/v3/repos/hooks/#ping-a-hook"&gt;ping endpoint&lt;/a&gt; to the hooks API.
-By using ping instead of &lt;a href="/v3/repos/hooks/#test-a-push-hook"&gt;test&lt;/a&gt;, you can ensure
-you won’t be limited by the &lt;code&gt;push&lt;/code&gt; event requirement that the test endpoint has.&lt;/p&gt;</content>
-  </entry>
-  <entry>
     <id>tag:developer.github.com,2014-02-10:/changes/2014-02-10-repo-hook-scopes/</id>
     <title type="html">New scopes for managing repository hooks</title>
-    <published>2014-02-10T08:00:00Z</published>
-    <updated>2014-02-10T08:00:00Z</updated>
+    <published>2014-02-10T06:00:00Z</published>
+    <updated>2014-02-10T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -327,10 +436,32 @@ repository contents:&lt;/p&gt;
 &lt;/ul&gt;&lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2014-02-10:/changes/2014-2-10-ping-event-for-webhooks/</id>
+    <title type="html">Ping Event for Webhooks</title>
+    <published>2014-02-10T06:00:00Z</published>
+    <updated>2014-02-10T06:00:00Z</updated>
+    <author>
+      <name>kdaigle</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-2-10-ping-event-for-webhooks/" />
+    <content type="html">&lt;p&gt;With the release of our &lt;a href="https://github.com/blog/1778-webhooks-level-up"&gt;new webhook UI&lt;/a&gt;, we included a new
+&lt;a href="/webhooks/#ping-event"&gt;ping event&lt;/a&gt; that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.&lt;/p&gt;
+
+&lt;p&gt;The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.&lt;/p&gt;
+
+&lt;p&gt;We also added a &lt;a href="/v3/repos/hooks/#ping-a-hook"&gt;ping endpoint&lt;/a&gt; to the hooks API.
+By using ping instead of &lt;a href="/v3/repos/hooks/#test-a-push-hook"&gt;test&lt;/a&gt;, you can ensure
+you won’t be limited by the &lt;code&gt;push&lt;/code&gt; event requirement that the test endpoint has.&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2014-01-29:/changes/2014-01-29-audit-org-members-for-2fa/</id>
     <title type="html">Audit organization members for two-factor authentication</title>
-    <published>2014-01-29T08:00:00Z</published>
-    <updated>2014-01-29T08:00:00Z</updated>
+    <published>2014-01-29T06:00:00Z</published>
+    <updated>2014-01-29T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -350,8 +481,8 @@ repositories. Happy auditing and &lt;a href="https://github.com/contact?form%5Bs
   <entry>
     <id>tag:developer.github.com,2014-01-09:/changes/2014-01-09-preview-the-new-deployments-api/</id>
     <title type="html">Preview the New Deployments API</title>
-    <published>2014-01-09T08:00:00Z</published>
-    <updated>2014-01-09T08:00:00Z</updated>
+    <published>2014-01-09T06:00:00Z</published>
+    <updated>2014-01-09T06:00:00Z</updated>
     <author>
       <name>atmos</name>
       <uri>https://github.com/technoweenie</uri>
@@ -432,8 +563,8 @@ stable and suitable for production use.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2014-01-07:/changes/2014-01-07-upcoming-change-to-default-media-type/</id>
     <title type="html">Upcoming Change to Default Media Type</title>
-    <published>2014-01-07T08:00:00Z</published>
-    <updated>2014-01-07T08:00:00Z</updated>
+    <published>2014-01-07T06:00:00Z</published>
+    <updated>2014-01-07T06:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -491,8 +622,8 @@ stable and suitable for production use.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-12-13:/changes/2013-12-13-paginating-org-members/</id>
     <title type="html">Paginated results for organization members</title>
-    <published>2013-12-13T08:00:00Z</published>
-    <updated>2013-12-13T08:00:00Z</updated>
+    <published>2013-12-13T06:00:00Z</published>
+    <updated>2013-12-13T06:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -512,8 +643,8 @@ subsequent results. If you have any questions or run into trouble, feel free to
   <entry>
     <id>tag:developer.github.com,2013-11-04:/changes/2013-11-04-releases-api-is-official/</id>
     <title type="html">Releases API is Official</title>
-    <published>2013-11-04T08:00:00Z</published>
-    <updated>2013-11-04T08:00:00Z</updated>
+    <published>2013-11-04T06:00:00Z</published>
+    <updated>2013-11-04T06:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -547,8 +678,8 @@ We got some great feedback, and we are already discussing additions to the API.&
   <entry>
     <id>tag:developer.github.com,2013-10-29:/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/</id>
     <title type="html">Search API Becomes an Official Part of API v3</title>
-    <published>2013-10-29T07:00:00Z</published>
-    <updated>2013-10-29T07:00:00Z</updated>
+    <published>2013-10-29T05:00:00Z</published>
+    <updated>2013-10-29T05:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -581,8 +712,8 @@ As such, the Search API is now stable and suitable for production use.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-10-18:/changes/2013-10-18-new-code-search-requirements/</id>
     <title type="html">New Validation Rule for Beta Code Search API</title>
-    <published>2013-10-18T07:00:00Z</published>
-    <updated>2013-10-18T07:00:00Z</updated>
+    <published>2013-10-18T05:00:00Z</published>
+    <updated>2013-10-18T05:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -636,8 +767,8 @@ There’s no ETA, but we’d like to relax it as soon as it’s feasible.&lt;/p&
   <entry>
     <id>tag:developer.github.com,2013-10-08:/changes/2013-10-08-list-all-user-teams/</id>
     <title type="html">List all teams for the authenticated user</title>
-    <published>2013-10-08T07:00:00Z</published>
-    <updated>2013-10-08T07:00:00Z</updated>
+    <published>2013-10-08T05:00:00Z</published>
+    <updated>2013-10-08T05:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -680,8 +811,8 @@ $ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
   <entry>
     <id>tag:developer.github.com,2013-10-04:/changes/2013-10-04-oauth-changes-coming/</id>
     <title type="html">OAuth changes coming</title>
-    <published>2013-10-04T07:00:00Z</published>
-    <updated>2013-10-04T07:00:00Z</updated>
+    <published>2013-10-04T05:00:00Z</published>
+    <updated>2013-10-04T05:00:00Z</updated>
     <author>
       <name>tclem</name>
       <uri>https://github.com/technoweenie</uri>
@@ -729,8 +860,8 @@ additional permission, but don’t forget that users can always say no.&lt;/p&gt
   <entry>
     <id>tag:developer.github.com,2013-09-28:/changes/2013-09-28-an-update-on-the-new-search-api/</id>
     <title type="html">An Update on the New Search API</title>
-    <published>2013-09-28T07:00:00Z</published>
-    <updated>2013-09-28T07:00:00Z</updated>
+    <published>2013-09-28T05:00:00Z</published>
+    <updated>2013-09-28T05:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -753,8 +884,8 @@ and we expect to have more news in the coming weeks.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-09-25:/changes/2013-09-25-releases-api/</id>
     <title type="html">Releases API</title>
-    <published>2013-09-25T07:00:00Z</published>
-    <updated>2013-09-25T07:00:00Z</updated>
+    <published>2013-09-25T05:00:00Z</published>
+    <updated>2013-09-25T05:00:00Z</updated>
     <author>
       <name>technoweenie</name>
       <uri>https://github.com/technoweenie</uri>
@@ -816,8 +947,8 @@ a member of the Avengers, with the ability to teleport through time and space.  
   <entry>
     <id>tag:developer.github.com,2013-09-03:/changes/2013-09-03-two-factor-authentication/</id>
     <title type="html">Two-Factor Authentication and the API</title>
-    <published>2013-09-03T07:00:00Z</published>
-    <updated>2013-09-03T07:00:00Z</updated>
+    <published>2013-09-03T05:00:00Z</published>
+    <updated>2013-09-03T05:00:00Z</updated>
     <author>
       <name>mastahyeti</name>
       <uri>https://github.com/technoweenie</uri>
@@ -865,8 +996,8 @@ two-factor authentication. As always, if you have any questions or feedback,
   <entry>
     <id>tag:developer.github.com,2013-08-20:/changes/2013-08-20-search-api-improvements/</id>
     <title type="html">Improvements to the Search API</title>
-    <published>2013-08-20T07:00:00Z</published>
-    <updated>2013-08-20T07:00:00Z</updated>
+    <published>2013-08-20T05:00:00Z</published>
+    <updated>2013-08-20T05:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -938,8 +1069,8 @@ We appreciate everyone that has provided feedback so far. Please &lt;a href="htt
   <entry>
     <id>tag:developer.github.com,2013-07-19:/changes/2013-07-19-preview-the-new-search-api/</id>
     <title type="html">Preview the New Search API</title>
-    <published>2013-07-19T07:00:00Z</published>
-    <updated>2013-07-19T07:00:00Z</updated>
+    <published>2013-07-19T05:00:00Z</published>
+    <updated>2013-07-19T05:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -999,8 +1130,8 @@ GitHub API v3.&lt;/p&gt;
   <entry>
     <id>tag:developer.github.com,2013-07-02:/changes/2013-07-02-rate-limit-reset/</id>
     <title type="html">When Does My Rate Limit Reset?</title>
-    <published>2013-07-02T07:00:00Z</published>
-    <updated>2013-07-02T07:00:00Z</updated>
+    <published>2013-07-02T05:00:00Z</published>
+    <updated>2013-07-02T05:00:00Z</updated>
     <author>
       <name>jasonrudolph</name>
       <uri>https://github.com/technoweenie</uri>
@@ -1043,8 +1174,8 @@ $ curl https://api.github.com/rate_limit
   <entry>
     <id>tag:developer.github.com,2013-07-01:/changes/2013-07-01-feeds-api/</id>
     <title type="html">Feeds API</title>
-    <published>2013-07-01T07:00:00Z</published>
-    <updated>2013-07-01T07:00:00Z</updated>
+    <published>2013-07-01T05:00:00Z</published>
+    <updated>2013-07-01T05:00:00Z</updated>
     <author>
       <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
@@ -1095,22 +1226,5 @@ curl -u defunkt https://api.github.com/feeds
 &lt;/pre&gt;
 
 &lt;p&gt;If you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API"&gt;please drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-create-update-delete-individual-files/</id>
-    <title type="html">Create, update, and delete individual files</title>
-    <published>2013-05-06T07:00:00Z</published>
-    <updated>2013-05-06T07:00:00Z</updated>
-    <author>
-      <name>ymendel</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-05-06-create-update-delete-individual-files/" />
-    <content type="html">&lt;p&gt;We’re following in the footsteps of GitHub.com’s ability to &lt;a href="https://github.com/blog/143-inline-file-editing"&gt;edit&lt;/a&gt; and
-&lt;a href="https://github.com/blog/1327-creating-files-on-github"&gt;create&lt;/a&gt; files in your web browser. Starting today, the
-&lt;a href="/v3/repos/contents/"&gt;Repository Contents API&lt;/a&gt; will let you easily &lt;a href="/v3/repos/contents/#create-a-file"&gt;create&lt;/a&gt;, &lt;a href="/v3/repos/contents/#update-a-file"&gt;update&lt;/a&gt;, and even
-&lt;a href="/v3/repos/contents/#delete-a-file"&gt;delete&lt;/a&gt; individual files.&lt;/p&gt;
-
-&lt;p&gt;Happy editing!&lt;/p&gt;</content>
   </entry>
 </feed>

@@ -79,6 +79,7 @@ They’re only created for various internal and repository hooks.</p>
   <li><a href="#issuecommentevent">IssueCommentEvent</a></li>
   <li><a href="#issuesevent">IssuesEvent</a></li>
   <li><a href="#memberevent">MemberEvent</a></li>
+  <li><a href="#pagebuildevent">PageBuildEvent</a></li>
   <li><a href="#publicevent">PublicEvent</a></li>
   <li><a href="#pullrequestevent">PullRequestEvent</a></li>
   <li><a href="#pullrequestreviewcommentevent">PullRequestReviewCommentEvent</a></li>
@@ -87,7 +88,6 @@ They’re only created for various internal and repository hooks.</p>
   <li><a href="#statusevent">StatusEvent</a></li>
   <li><a href="#teamaddevent">TeamAddEvent</a></li>
   <li><a href="#watchevent">WatchEvent</a></li>
-  <li><a href="#pagebuildevent">PageBuildEvent</a></li>
 </ul><h2 id="commitcommentevent">CommitCommentEvent</h2>
 
 <p>Triggered when a <a href="/v3/repos/comments/#list-commit-comments-for-a-repository">commit comment</a> is created.</p>
@@ -536,15 +536,38 @@ They’re only created for various internal and repository hooks.</p>
       <td>The action that was performed. Currently, can only be “added”.</td>
     </tr>
 </tbody>
+</table><h2 id="pagebuildevent">PageBuildEvent</h2>
+
+<p>Represents an attempted build of a GitHub Pages site, whether successful or not.</p>
+
+<p>Triggered on push to a GitHub Pages enabled branch (<code>gh-pages</code> for project pages, <code>master</code> for user and organization pages).</p>
+
+<h3 id="hook-name-14">Hook Name</h3>
+
+<p><code>page_build</code></p>
+
+<h3 id="payload-14">Payload</h3>
+
+<table>
+<thead><tr>
+<th>Key</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody><tr>
+<td><code>build</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="http://developer.github.com/v3/repos/pages/#list-pages-builds">page build</a> itself.</td>
+    </tr></tbody>
 </table><h2 id="publicevent">PublicEvent</h2>
 
 <p>Triggered when a private repository is <a href="/v3/repos/#edit">open sourced</a>.  Without a doubt: the best GitHub event.</p>
 
-<h3 id="hook-name-14">Hook name</h3>
+<h3 id="hook-name-15">Hook name</h3>
 
 <p><code>public</code></p>
 
-<h3 id="payload-14">Payload</h3>
+<h3 id="payload-15">Payload</h3>
 
 <p>(empty payload)</p>
 
@@ -552,11 +575,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Triggered when a <a href="/v3/pulls">pull request</a> is created, closed, reopened or synchronized.</p>
 
-<h3 id="hook-name-15">Hook name</h3>
+<h3 id="hook-name-16">Hook name</h3>
 
 <p><code>pull_request</code></p>
 
-<h3 id="payload-15">Payload</h3>
+<h3 id="payload-16">Payload</h3>
 
 <table>
 <thead><tr>
@@ -585,11 +608,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Triggered when a <a href="/v3/pulls/comments">comment is created on a portion of the unified diff</a> of a pull request.</p>
 
-<h3 id="hook-name-16">Hook name</h3>
+<h3 id="hook-name-17">Hook name</h3>
 
 <p><code>pull_request_review_comment</code></p>
 
-<h3 id="payload-16">Payload</h3>
+<h3 id="payload-17">Payload</h3>
 
 <table>
 <thead><tr>
@@ -606,11 +629,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Triggered when a repository branch is pushed to.</p>
 
-<h3 id="hook-name-17">Hook name</h3>
+<h3 id="hook-name-18">Hook name</h3>
 
 <p><code>push</code></p>
 
-<h3 id="payload-17">Payload</h3>
+<h3 id="payload-18">Payload</h3>
 
 <table>
 <thead><tr>
@@ -679,11 +702,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Triggered when a <a href="/v3/repos/releases/#get-a-single-release">release</a> is published.</p>
 
-<h3 id="hook-name-18">Hook name</h3>
+<h3 id="hook-name-19">Hook name</h3>
 
 <p><code>release</code></p>
 
-<h3 id="payload-18">Payload</h3>
+<h3 id="payload-19">Payload</h3>
 
 <table>
 <thead><tr>
@@ -709,11 +732,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Events of this type are not visible in timelines, they are only used to trigger hooks.</p>
 
-<h3 id="hook-name-19">Hook name</h3>
+<h3 id="hook-name-20">Hook name</h3>
 
 <p><code>status</code></p>
 
-<h3 id="payload-19">Payload</h3>
+<h3 id="payload-20">Payload</h3>
 
 <table>
 <thead><tr>
@@ -754,11 +777,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Note: this event is created in <a href="/v3/activity/events/#list-events-for-an-organization">users’ organization timelines</a>.</p>
 
-<h3 id="hook-name-20">Hook name</h3>
+<h3 id="hook-name-21">Hook name</h3>
 
 <p><code>team_add</code></p>
 
-<h3 id="payload-20">Payload</h3>
+<h3 id="payload-21">Payload</h3>
 
 <table>
 <thead><tr>
@@ -791,11 +814,11 @@ See <a href="/changes/2012-9-5-watcher-api/">this API blog post</a> for an expla
 <p>The event’s actor is the <a href="/v3/users/">user</a> who starred a repository, and the
 event’s repository is the <a href="/v3/repos/">repository</a> that was starred.</p>
 
-<h3 id="hook-name-21">Hook name</h3>
+<h3 id="hook-name-22">Hook name</h3>
 
 <p><code>watch</code></p>
 
-<h3 id="payload-21">Payload</h3>
+<h3 id="payload-22">Payload</h3>
 
 <table>
 <thead><tr>
@@ -807,29 +830,6 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
 <td><code>action</code></td>
       <td><code>string</code></td>
       <td>The action that was performed. Currently, can only be <code>started</code>.</td>
-    </tr></tbody>
-</table><h2 id="pagebuildevent">PageBuildEvent</h2>
-
-<p>Represents an attempted build of a GitHub Pages site, whether successful or not.</p>
-
-<p>Triggered on push to a GitHub Pages enabled branch (<code>gh-pages</code> for project pages, <code>master</code> for user and organization pages).</p>
-
-<h3 id="hook-name-22">Hook Name</h3>
-
-<p><code>page_build</code></p>
-
-<h3 id="payload-22">Payload</h3>
-
-<table>
-<thead><tr>
-<th>Key</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr></thead>
-<tbody><tr>
-<td><code>build</code></td>
-      <td><code>object</code></td>
-      <td>The <a href="http://developer.github.com/v3/repos/pages/#list-pages-builds">page build</a> itself.</td>
     </tr></tbody>
 </table>
     </div>

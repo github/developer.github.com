@@ -234,7 +234,8 @@ Key | Type | Description
 
 ## IssuesEvent
 
-Triggered when an [issue](/v3/issues) is created, closed or reopened.
+Triggered when an [issue](/v3/issues) is created, closed, reopened,
+assigned, unassigned, labeled, or unlabeled.
 
 ### Hook name
 
@@ -244,8 +245,10 @@ Triggered when an [issue](/v3/issues) is created, closed or reopened.
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed. Can be one of "opened", "closed", or "reopened".
+`action`|`string` | The action that was performed. Can be one of "opened", "closed", "reopened", "assigned", "unassigned", "labeled", or "unlabeled".
 `issue`|`object` | The [issue](/v3/issues) itself.
+`assignee`|`object` | The optional user who was assigned or unassigned from the issue.
+`label`|`object` | The optional label that was added or removed from the issue.
 
 
 ## MemberEvent

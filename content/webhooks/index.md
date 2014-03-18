@@ -68,7 +68,7 @@ Name | Description
 `fork` | Any time a Repository is forked.
 `gollum` | Any time a Wiki page is updated.
 `issue_comment` | Any time an Issue is commented on.
-`issues` | Any time an Issue is opened or closed.
+`issues` | Any time an Issue is opened, closed, assigned, unassigned, labeled, or unlabeled.
 `member` | Any time a User is added as a collaborator to a non-Organization Repository.
 `page_build` | Any time a Pages site is built or results in a failed build.
 `public` | Any time a Repository changes from private to public.

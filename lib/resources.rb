@@ -1222,11 +1222,12 @@ module GitHub
     ]
 
     GIST_FILE = {
-      "size"     => 932,
-      "filename" => "ring.erl",
-      "raw_url"  => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
-      "type"     => "text/plain",
-      "language" => "Erlang"
+      "ring.erl" => {
+        "size"     => 932,
+        "raw_url"  => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+        "type"     => "text/plain",
+        "language" => "Erlang"
+      }
     }
 
     GIST = {
@@ -1237,7 +1238,7 @@ module GitHub
       "description"  => "description of gist",
       "public"       => true,
       "user"         => USER,
-      "files"        => { "ring.erl" => GIST_FILE },
+      "files"        => GIST_FILE,
       "comments"     => 0,
       "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
       "html_url"     => "https://gist.github.com/1",

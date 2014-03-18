@@ -46,6 +46,7 @@ module GitHub
         :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8',
         :dbussink     => 'b012094b37ab6946c44eaa41d7828478',
         :benbalter    => '19d03ecc1ff5da1a5e63a3ddaa2d84c2',
+        :jdpace       => '4c36f7481ec8ed0dc5f286c10eb71a9e',
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze

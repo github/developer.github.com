@@ -72,7 +72,7 @@ The recommendations below will help you prepare your application for the next ma
 : Recommendation: Use **resources["core"]** instead.
 
 1. Repository attribute: forks
-: Recommendation: Use **fork_count** instead.
+: Recommendation: Use **forks_count** instead.
 
 1. Repository attribute: master_branch
 : Recommendation: Use **default_branch** instead.

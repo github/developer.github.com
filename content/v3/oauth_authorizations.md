@@ -48,7 +48,7 @@ Read more about these tokens on the [GitHub Help page](https://help.github.com/a
 Name | Type | Description
 -----|------|--------------
 `scopes`|`array` | A list of scopes that this authorization is in.
-`note`|`string` | A note to remind you what the OAuth token is for.
+`note`|`string` | **Required** A note to remind you what the OAuth token is for.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
 `client_id`|`string` | The 20 character OAuth app client key for which to create the token.
 `client_secret`|`string` | The 40 character OAuth app client secret for which to create the token.
@@ -76,7 +76,7 @@ exists. Otherwise, it creates one.
 
 Name | Type | Description
 -----|------|--------------
-`client_secret`|`string`| The 40 character OAuth app client secret associated with the client ID specified in the URL.
+`client_secret`|`string`| **Required** The 40 character OAuth app client secret associated with the client ID specified in the URL.
 `scopes`|`array` | A list of scopes that this authorization is in.
 `note`|`string` | A note to remind you what the OAuth token is for.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.

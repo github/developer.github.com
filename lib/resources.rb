@@ -725,6 +725,7 @@ module GitHub
       "milestone"  => MILESTONE,
       "comments"   => 0,
       "pull_request" => {
+        "url"       => "https://api.github.com/repos/octocat/Hello-World/pulls/1347",
         "html_url"  => "https://github.com/octocat/Hello-World/pull/1347",
         "diff_url"  => "https://github.com/octocat/Hello-World/pull/1347.diff",
         "patch_url" => "https://github.com/octocat/Hello-World/pull/1347.patch"

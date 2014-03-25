@@ -297,7 +297,7 @@ Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without
 
 ## PullRequestEvent
 
-Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synchronized.
+Triggered when a [pull request](/v3/pulls) is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized.
 
 ### Hook name
 
@@ -307,7 +307,7 @@ Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synch
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed. Can be one of "opened", "closed", "synchronize", or "reopened".
+`action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "closed", or "reopened", or "synchronize".
 `number`|`integer` | The pull request number.
 `pull_request`|`object` | The [pull request](/v3/pulls) itself.
 

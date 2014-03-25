@@ -27,27 +27,6 @@ module GitHub
         502 => '502 Bad Gateway'
       }
 
-      AUTHORS = {
-        :technoweenie => '821395fe70906c8290df7f18ac4ac6cf',
-        :tclem        => '2f4861b27dc35663ed271d39f5358261',
-        :pengwynn     => '7e19cd5486b5d6dc1ef90e671ba52ae0',
-        :pezra        => 'f38112009dc16547051c8ac246cee443',
-        :rick         => 'a44d5abad6e86cff4e34d9f0839535c9',
-        :agh          => '6af915d3c6aa4ad30bbad43d8035fe10',
-        :jasonrudolph => '592e1e6f041f9a4ec51846fd82013aea',
-        :Caged        => '97c3a8eea9b7eaa9e1e93ea3cd47399f',
-        :foca         => 'd0ca2bf32bda9e9ea8c4473ffc3aaa0d',
-        :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
-        :mastahyeti   => '8caa0afdae1a934c30a1998472c63134',
-        :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7',
-        :kdaigle      => 'dd18bb36fa5f06e45843ff8de33b793e',
-        :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068',
-        :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51',
-        :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8',
-        :dbussink     => 'b012094b37ab6946c44eaa41d7828478',
-        :benbalter    => '19d03ecc1ff5da1a5e63a3ddaa2d84c2',
-      }
-
       DefaultTimeFormat = "%B %-d, %Y".freeze
 
       def post_date(item)
@@ -63,10 +42,7 @@ module GitHub
       end
 
       def gravatar_url_for(login)
-        md5 = AUTHORS[login.to_sym]
-        default = "https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png"
-        "https://secure.gravatar.com/avatar/%s?s=20&d=%s" %
-          [md5, default]
+        "https://github.com/#{login}.png"
       end
 
       def headers(status, head = {})

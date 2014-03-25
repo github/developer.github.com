@@ -19,6 +19,8 @@ read more about the use of media types in the API [here](/v3/media/).
 
     GET /repos/:owner/:repo/git/blobs/:sha
 
+*Note*: This API supports blobs up to 100 megabytes in size.
+
 ### Response
 
 <%= headers 200 %>

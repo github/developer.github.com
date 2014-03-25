@@ -59,26 +59,26 @@ The available events are:
 
 Name | Description
 -----|-----------|
-`push` | Any git push to a Repository. **This is the default event.**
-`issues` | Any time an Issue is opened or closed.
-`issue_comment` | Any time an Issue is commented on.
+`*` | Any time any event is triggered ([Wildcard Event](#wildcard-event)).
 `commit_comment` | Any time a Commit is commented on.
 `create` | Any time a Repository, Branch, or Tag is created.
 `delete` | Any time a Branch or Tag is deleted.
-`pull_request` | Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).
-`pull_request_review_comment` | Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).
-`gollum` | Any time a Wiki page is updated.
-`watch` | Any time a User watches the Repository.
-`release` | Any time a Release is published in the Repository.
-`fork` | Any time a Repository is forked.
-`member` | Any time a User is added as a collaborator to a non-Organization Repository.
-`public` | Any time a Repository changes from private to public.
-`team_add` | Any time a team is added or modified on a Repository.
-`status` | Any time a Repository has a status update from the API
-`deployment` | Any time a Repository has a new deployment created from the API.
 `deployment_status` | Any time a deployment for the Repository has a status update from the API.
+`deployment` | Any time a Repository has a new deployment created from the API.
+`fork` | Any time a Repository is forked.
+`gollum` | Any time a Wiki page is updated.
+`issue_comment` | Any time an Issue is commented on.
+`issues` | Any time an Issue is opened or closed.
+`member` | Any time a User is added as a collaborator to a non-Organization Repository.
 `page_build` | Any time a Pages site is built or results in a failed build.
-`*` | Any time any event is triggered ([Wildcard Event](#wildcard-event)).
+`public` | Any time a Repository changes from private to public.
+`pull_request_review_comment` | Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).
+`pull_request` | Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).
+`push` | Any git push to a Repository. **This is the default event.**
+`release` | Any time a Release is published in the Repository.
+`status` | Any time a Repository has a status update from the API
+`team_add` | Any time a team is added or modified on a Repository.
+`watch` | Any time a User watches the Repository.
 
 ### Payloads
 

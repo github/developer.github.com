@@ -23,7 +23,7 @@ Comments are ordered by ascending ID.
 
 ## List comments for a single commit
 
-    GET /repos/:owner/:repo/commits/:sha/comments
+    GET /repos/:owner/:repo/commits/:ref/comments
 
 ### Response
 

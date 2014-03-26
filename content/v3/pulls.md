@@ -175,7 +175,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 <%= headers 404 %>
 
-## Merge a pull request (Merge Button&trade;)
+## Merge a pull request (Merge Button)
 
     PUT /repos/:owner/:repo/pulls/:number/merge
 

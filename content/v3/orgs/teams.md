@@ -9,7 +9,7 @@ title: Organization Teams | GitHub API
 
 All actions against teams require at a minimum an authenticated user who
 is a member of the Owners team in the `:org` being managed. Additionally,
-OAuth users require "user" [scope](/v3/oauth/#scopes).
+OAuth users require "read:org", "write:org" or "admin:org" [scopes](/v3/oauth/#scopes) depending on the action performed.
 
 ## List teams
 

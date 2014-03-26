@@ -37,11 +37,11 @@ module GitHub
         attribute_to_time(time).strftime(format)
       end
 
-      def gravatar_for(login)
-        %(<img height="16" width="16" src="%s" alt="gravatar_for_#{login}"/>) % gravatar_url_for(login)
+      def avatar_for(login)
+        %(<img height="16" width="16" src="%s" alt="Avatar for #{login}"/>) % avatar_url_for(login)
       end
 
-      def gravatar_url_for(login)
+      def avatar_url_for(login)
         "https://github.com/#{login}.png"
       end
 

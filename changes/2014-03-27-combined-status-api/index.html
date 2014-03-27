@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>An Update on the New Search API</title>
+  <title>Preview the New Combined Status API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -41,39 +41,67 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-09-28-an-update-on-the-new-search-api/">
+      <div class="change" id="/changes/2014-03-27-combined-status-api/">
 <h2 class="title">
-  <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">An Update on the New Search API</a>
+  <a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    September 28, 2013
+    March 27, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph"/>
-      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga"/>
+      <a href="https://github.com/bhuga">bhuga</a>
   </li>
 </ul>
 </div>
 
 
-<p>We owe a big “Thank You!” to everyone that has taken the time to try out the <a href="/changes/2013-07-19-preview-the-new-search-api">new Search API</a>.
-We <code>:heart:</code> every one of you.
-Just as we hoped,
-the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> has allowed us to see how you want to use the new API,
-and it has given us a chance to improve the API before finalizing it.</p>
+<p>What does it mean for a branch to be “green?” The <a href="/v3/repos/statuses/">Status API</a> helps
+thousands of teams answer that question. Developers use it to record the status
+of continuous integration builds, contributor license agreements, code coverage
+analysis, automated security testing, dependency management, and more.</p>
 
-<p>In order to incorporate everything that we’ve learned,
-we’re going to keep the Search API in <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a> for a little while longer.
-We have a few bugs to squash and a couple performance kinks to iron out.
-We’re hard at work on those improvements now,
-and we expect to have more news in the coming weeks.</p>
+<p>For many teams, a branch is considered “green” only when <em>all</em> of their various
+status checks are successful. With the new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status
+API</a>, developers can easily fetch this single, consolidated
+status for any branch, commit, or tag.</p>
 
-<p>In the mean time, <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">keep the suggestions coming</a>!</p>
+<h3 id="status-context">Status context</h3>
+
+<p>To help multiple service providers use the Status API simultaneously, statuses
+now support a <code>context</code> field. This field allows a provider to distinguish its
+statuses from another provider’s statuses. For example, your <a href="http://jenkins-ci.org/">Jenkins</a> builds
+might use a context of <code>ci/jenkins</code>, while your <a href="http://brakemanscanner.org/">Brakeman</a> checks might adopt a
+context of <code>security/brakeman</code>.</p>
+
+<p>The new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status endpoint</a> returns a single,
+combined state, as well as the latest status from each context. Systems that
+consume status updates can now get all the information they need in one place.</p>
+
+<h3 id="opt-in">Opt-in</h3>
+
+<p>The existing <a href="/v3/repos/statuses/#list-statuses-for-a-specific-ref">Status API</a> continues to work as it always has. The
+<code>context</code> field is entirely optional, and the <a href="https://github.com/blog/1227-commit-status-api">color of the merge button on pull
+requests</a> does not currently
+take context into account.</p>
+
+<h3 id="preview-period">Preview period</h3>
+
+<p>We’re making this new API available today for developers to
+<a href="/v3/repos/statuses/">preview</a>. During this period, we may change aspects of the Combined
+Status API from time to time. We will announce any changes here (on the
+developer blog), but we will not provide any advance notice.</p>
+
+<p>We expect the preview period to last 30-60 days. At the end of preview period,
+the Combined Status API will become an official component of GitHub API v3. At
+that point, this new API will be stable and suitable for production use.</p>
+
+<p>We hope you’ll <a href="/v3/repos/statuses/">try it out</a> and <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">send us your feedback</a>!</p>
 </div>
 
     </div>

@@ -68,7 +68,7 @@ Users with pull access can view commit statuses for a given ref:
   <p>
     If you send an <code>Accept</code> header with the Combined Status API preview
     <a href="/v3/media/">media type</a>, <code><%= combined_media_type %></code>,
-    this endpoint is also available at <code>/repos/:owner/:repo/:ref/status</code>.
+    this endpoint is also available at <code>/repos/:owner/:repo/:ref/statuses</code>.
   </p>
 </div>
 
@@ -104,7 +104,7 @@ Name | Type | Description
 
 Users with pull access can access a combined view of commit statuses for a given ref.
 
-    GET /repos/:owner/:repo/:ref/statuses
+    GET /repos/:owner/:repo/:ref/status
 
 The most recent status for each context is returned (up to 25), as well as a combined
 `state`. The `state` is `pending` to start, `failure` if any status reports as

@@ -6,7 +6,7 @@ layout: developers
 <div class="feature dev-program">
   <div class="wrapper">
     <h1>It takes a community to design, build, and ship great software.</h1>
-    <p class="intro">Building an application that integrates with GitHub? Register for our Developer Program, the possibilities are endless and the kudos is all yours.</p>
+    <p class="intro">Building an application that integrates with GitHub? Register for our Developer Program! The possibilities are endless, and you enjoy the kudos.</p>
     <a href="https://github.com/developer/register" class="button">Register now</a>
   </div>
   <img src="/shared/images/header-animation.gif" alt="GitHub Universe" class="earth" width="450" height="375">

@@ -98,9 +98,10 @@ Users with pull access can view deployments for a repository:
 ## Create a Deployment
 
 If your repository is taking advantage of [commit statuses](/v3/repos/statuses),
-the API will reject requests that do not have a success status. (Your repository
-is not required to use commit statuses. If no commit statuses are present, the
-deployment will always be created.)
+the API will reject requests that do not have a successful [combined
+status.](/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref) (Your
+repository is not required to use commit statuses. If no commit statuses are
+present, the deployment will always be created.)
 
 The `force` parameter can be used when you really just need a deployment to go
 out. In these cases, all checks are bypassed, and the deployment is created for

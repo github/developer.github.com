@@ -701,6 +701,7 @@ module GitHub
       "milestone"  => MILESTONE,
       "comments"   => 0,
       "pull_request" => {
+        "url"       => "https://api.github.com/repos/octocat/Hello-World/pulls/1347",
         "html_url"  => "https://github.com/octocat/Hello-World/pull/1347",
         "diff_url"  => "https://github.com/octocat/Hello-World/pull/1347.diff",
         "patch_url" => "https://github.com/octocat/Hello-World/pull/1347.patch"
@@ -1172,34 +1173,30 @@ module GitHub
       }
     }
 
-    GIST_HISTORY = {
-      "history" => [
-        {
-          "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
-          "user"    => USER,
-          "change_status" => {
-            "deletions" => 0,
-            "additions" => 180,
-            "total"     => 180
-          },
-          "committed_at" => "2010-04-14T02:15:15Z"
-        }
-      ]
-    }
+    GIST_HISTORY = [
+      {
+        "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+        "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
+        "user"    => USER,
+        "change_status" => {
+          "deletions" => 0,
+          "additions" => 180,
+          "total"     => 180
+        },
+        "committed_at" => "2010-04-14T02:15:15Z"
+      }
+    ]
 
 
-    GIST_FORKS = {
-      "forks" => [
-        {
-          "user" => USER,
-          "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "id" => 1,
-          "created_at" => "2011-04-14T16:00:49Z",
-          "updated_at" => "2011-04-14T16:00:49Z"
-        }
-      ]
-    }
+    GIST_FORKS = [
+      {
+        "user" => USER,
+        "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+        "id" => 1,
+        "created_at" => "2011-04-14T16:00:49Z",
+        "updated_at" => "2011-04-14T16:00:49Z"
+      }
+    ]
 
     GIST_FILE = {
       "ring.erl" => {
@@ -1228,8 +1225,10 @@ module GitHub
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
-    FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
-    FULL_GIST["files"] = {"ring.erl" => GIST_FILE["ring.erl"].merge({"content" => "contents of gist"})}
+    FULL_GIST = GIST.dup.update \
+      :forks   => GIST_FORKS,
+      :history => GIST_HISTORY,
+      :files   => GIST_FILE.merge({'content' => 'contents of gist'})
 
     GIST_COMMENT = {
       "id"         => 1,
@@ -1566,7 +1565,7 @@ module GitHub
       "description" => "Deploy request from hubot",
     }
 
-    STATUS = {
+    SIMPLE_STATUS = {
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "state" => "success",
@@ -1574,7 +1573,23 @@ module GitHub
       "description" => "Build has completed successfully",
       "id" => 1,
       "url" => "https://api.github.com/repos/octocat/example/statuses/1",
+      "context" => "continuous-integration/jenkins"
+    }
+
+    STATUS = SIMPLE_STATUS.merge(
       "creator" => USER
+    )
+
+    COMBINED_STATUS = {
+      "state" => "success",
+      "name"  => "octocat/Hello-World",
+      "sha"   => COMMIT["sha"],
+      "statuses" => [
+        SIMPLE_STATUS.merge("context" => "continuous-integration/jenkins"),
+        SIMPLE_STATUS.merge("context" => "security/brakeman")
+      ],
+      "commit_url" => "https://api.github.com/repos/octocat/Hello-World/#{COMMIT["sha"]}",
+      "repository_url" => "https://api.github.com/repos/octocat/Hello-World"
     }
 
     META = {

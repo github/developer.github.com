@@ -58,4 +58,3 @@ it's time to set up our local server to test the webhook. Head on over to
 
 [webhook-api]: /v3/repos/hooks/
 [hooks-api]: /webhooks/#events
-

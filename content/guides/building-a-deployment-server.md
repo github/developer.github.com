@@ -103,18 +103,54 @@ you can click **Redeliver** to send the same payload. There's no need to make a
 new pull request every time you make a change!
 
 Since we're interacting with the GitHub API, we'll use [Octokit.rb][octokit.rb]
-to manage our interactions.
+to manage our interactions. We'll configure that client with
+[a personal access token][access token]:
 
+    #!ruby
+    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+    # Instead, set and test environment variables, like below
+    ACCESS_TOKEN = ENV['MY_PERSONAL_TOKEN']
 
+    before do
+      @client ||= Octokit::Client.new(:access_token => ACCESS_TOKEN)
+    end
+
+After that, we'll just need to update the pull request on GitHub to make clear
+that we're processing on the CI:
+
+    #!ruby
+    def process_pull_request(pull_request)
+      @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'pending')
+    end
+
+We're doing three very basic things here:
+
+* we're looking up the full name of the repository
+* we're looking up the last SHA of the pull request
+* we're setting the status to "pending"
+
+That's it! From here, you can run whatever process you need to in order to execute
+your test suite. Maybe you're going to pass off your code to Jenkins, or call
+on another web service via its API, like [Travis][travis api]. After that, you'd
+be sure to update the status once more. In our example, we'll just set it to `"success"`:
+
+    #!ruby
+    def process_pull_request(pull_request)
+      @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'pending')
+      sleep 2 # do busy work...
+      @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'success')
+    end
 
 
 
 
 [deploy API]: /v3/repos/deployments/
 [status API]: /v3/repos/statuses/
-[ngrok]: https: /ngrok.com/
+[ngrok]: https://ngrok.com/
 [using ngrok]: /webhooks/configuring/#using-ngrok
 [platform samples]: https://github.com/github/platform-samples/tree/master/hooks/ruby/configuring-your-server
 [Sinatra]: http://www.sinatrarb.com/
 [webhook]: /webhooks/
 [octokit.rb]: https://github.com/octokit/octokit.rb
+[access token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
+[travis api]: https://api.travis-ci.org/docs/

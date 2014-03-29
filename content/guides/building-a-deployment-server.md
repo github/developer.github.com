@@ -141,8 +141,35 @@ be sure to update the status once more. In our example, we'll just set it to `"s
       @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'success')
     end
 
+## Working with deployments
 
+Our CI tests have passed, and the code has been reviewed. When the pull request
+is merged, we want our project to be deployed to the production server.
 
+We'll start by modifying our event listener to pay attention when pull requests
+have been merged:
+
+    #!ruby
+    when "pull_request"
+      if @payload["action"] == "opened"
+        process_pull_request(@payload["pull_request"])
+      elsif @payload["action"] == "closed" && @payload["pull_request"]["merged"]
+        start_deployment(@payload["pull_request"])
+      end
+    end
+
+Next, we'll start writing the `start_deploymenet` method:
+
+    #!ruby
+    def start_deployment(pull_request)
+      user = pull_request['user']['login']
+      payload = "payload": "{\"environment\":\"production\",\"deploy_user\":\"#{user}\",\"channel\":123456}"
+      @client.create_deployment(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], {:payload => payload, :description => "Deploying my sweet branch"})
+    end
+
+Deployments can have some metadata attached to them, in the form of a `payload`
+and a `description`. Although these values are optional, it's helpful to use
+for logging and representing information.
 
 [deploy API]: /v3/repos/deployments/
 [status API]: /v3/repos/statuses/

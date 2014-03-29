@@ -1207,6 +1207,16 @@ module GitHub
       }
     }
 
+    GIST_FILE_WITH_CONTENT = {
+      "ring.erl" => {
+        "size"     => 932,
+        "raw_url"  => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+        "type"     => "text/plain",
+        "language" => "Erlang",
+        "content"  => "contents of gist"
+      }
+    }
+
     GIST = {
       "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
       "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
@@ -1226,9 +1236,10 @@ module GitHub
     }
 
     FULL_GIST = GIST.dup.update \
-      :forks   => GIST_FORKS,
-      :history => GIST_HISTORY,
-      :files   => GIST_FILE.merge({'content' => 'contents of gist'})
+      "forks"   => GIST_FORKS,
+      "history" => GIST_HISTORY,
+      "files"   => GIST_FILE_WITH_CONTENT
+
 
     GIST_COMMENT = {
       "id"         => 1,

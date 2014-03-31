@@ -27,6 +27,9 @@ If you haven't already, be sure to [download ngrok][ngrok], and learn how
 to [use it][using ngrok]. We find it to be a very useful tool for exposing local
 connections.
 
+Note: you can download the complete source code for this project
+[from the platform-samples repo][platform samples].
+
 ## Writing your server
 
 We'll write a quick Sinatra app to prove that our local connections are working.
@@ -120,6 +123,7 @@ that we're processing on the CI:
 
     #!ruby
     def process_pull_request(pull_request)
+      puts "Processing pull request..."
       @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'pending')
     end
 
@@ -139,6 +143,7 @@ be sure to update the status once more. In our example, we'll just set it to `"s
       @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'pending')
       sleep 2 # do busy work...
       @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'success')
+      puts "Pull request processed!"
     end
 
 ## Working with deployments
@@ -156,14 +161,18 @@ have been merged:
       elsif @payload["action"] == "closed" && @payload["pull_request"]["merged"]
         start_deployment(@payload["pull_request"])
       end
+    when "deployment"
+      process_deployment(@payload)
     end
 
-Next, we'll start writing the `start_deploymenet` method:
+When a pull request is merged (its state is `closed`, and `merged` is `true`), we'll
+kick off a deployment. Based on the information from the pull request, we'll fill
+out the `start_deployment` method:
 
     #!ruby
     def start_deployment(pull_request)
       user = pull_request['user']['login']
-      payload = "payload": "{\"environment\":\"production\",\"deploy_user\":\"#{user}\",\"channel\":123456}"
+      payload = JSON.generate(:environment => 'production', :deploy_user => user)
       @client.create_deployment(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], {:payload => payload, :description => "Deploying my sweet branch"})
     end
 
@@ -171,13 +180,76 @@ Deployments can have some metadata attached to them, in the form of a `payload`
 and a `description`. Although these values are optional, it's helpful to use
 for logging and representing information.
 
+When a new deployment is created, a completely separate event is trigged. That's
+why we have a new `switch` case in the event handler for `deployment`. You can
+use this information to be notified when a deployment has been triggered.
+
+Deployments can take a rather long time, so we'll want to listen for various events,
+such as when the deployment was created, and what state it's in.
+
+Let's simulate a deployment that does some work, and notice the effect it has on
+the output. First, let's write our `process_deployment` method:
+
+    #!ruby
+    def process_deployment
+      payload = JSON.parse(@payload['payload'])
+      # you can send this information to your chat room, monitor, pager, e.t.c.
+      puts "Processing '#{@payload['description']}' for #{payload['deploy_user']} to #{payload['environment']}"
+      sleep 2 # simulate work
+      @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['id']}", 'pending')
+      sleep 2 # simulate work
+      @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['id']}", 'success')
+    end
+
+We'll also add a new case to the `switch` statement for deployment statuses:
+
+    #!ruby
+    when "deployment_status"
+      update_deployment_status
+    end
+
+Finally, we'll simulate storing the status information as console output:
+
+    #!ruby
+    def update_deployment_status
+      puts "Deployment status for #{@payload['id']} is #{@payload['state']}"
+    end
+
+Let's break down what's going on. A new deployment is created by `start_deployment`,
+which triggers the `deployment` event. From there, we call `process_deployment`
+to simulate work that's going on. Meanwhile, we also make a call to `create_deployment_status`,
+which lets a receiver know what's going on, as we switch the status to `pending`.
+
+After the deployment is finished, we set the status to `success`. You'll notice
+that this pattern is the exact same as when we updated our CI status.
+
+## Conclusion
+
+At GitHub, we've used [Janky][janky] and [Heaven][heaven] to manage our deployments
+for years. The basic flow is essentially the exact same as the server we've built
+above. At GitHub, we:
+
+* Fire to Jenkins when a pull request is created or updated (via Janky)
+* Wait for a response on the state of the CI
+* If the code is green, we merge the pull request
+* Heaven takes the merged code, and deploys it to our production servers
+* In the meantime, Heaven also notifies everyone about the build, via [Hubot][hubot] sitting in our chat rooms
+
+That's it! You don't need to build your own CI or deployment setup to use this example.
+You can always rely on third-party services like Travis CI, Heroku, or any number
+[of additional integrators][integrations].
+
 [deploy API]: /v3/repos/deployments/
 [status API]: /v3/repos/statuses/
 [ngrok]: https://ngrok.com/
 [using ngrok]: /webhooks/configuring/#using-ngrok
-[platform samples]: https://github.com/github/platform-samples/tree/master/hooks/ruby/configuring-your-server
+[platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/building-a-deployment-server
 [Sinatra]: http://www.sinatrarb.com/
 [webhook]: /webhooks/
 [octokit.rb]: https://github.com/octokit/octokit.rb
 [access token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
 [travis api]: https://api.travis-ci.org/docs/
+[janky]: https://github.com/github/janky
+[heaven]: https://github.com/atmos/heaven
+[hubot]: https://github.com/github/hubot
+[integrations]: https://github.com/integrations

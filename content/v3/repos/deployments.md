@@ -179,9 +179,9 @@ Users with push access can create deployment statuses for a given deployment:
 
 Name | Type | Description
 -----|------|--------------
-`target_url`|`string` | **Required**. The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: `""`.
 `state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
-`description`|`string` | A short description of the status. Default: `""`.
+`target_url`|`string` | The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: `""`
+`description`|`string` | A short description of the status. Default: `""`
 
 #### Example
 

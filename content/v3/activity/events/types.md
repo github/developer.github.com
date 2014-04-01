@@ -402,7 +402,7 @@ Key | Type | Description
 ----|------|-------------
 `team`|`object` | The [team](/v3/orgs/teams/) that was modified.  Note: older events may not include this in the payload.
 `user`|`object` | The [user](/v3/users/) that was added to this team.
-`repo`|`object` | The [repository](/v3/repos/) that was added to this team.
+`repository`|`object` | The [repository](/v3/repos/) that was added to this team.
 
 
 ## WatchEvent

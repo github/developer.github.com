@@ -1,16 +1,16 @@
 ---
-title: Building a Deployment Server | GitHub API
+title: Constructing a basic CI server | GitHub API
 ---
 
-# Building a Deployment Server
+# Constructing a basic CI server
 
 * TOC
 {:toc}
 
 The [Deployment API][deploy API] provides your projects hosted on GitHub with
 the capability to launch them on a production server that you own. Combined with
-[the status API][status API], you'll be able to instantaneously serve projects
-that pass your CI tests.
+[the status API][status API], you'll be able to coordinate your deployments
+the moment your code lands on `master`.
 
 This guide will combine these two API to demonstrate an end-to-end setup that
 you can use. In our scenario, we will:
@@ -225,9 +225,9 @@ that this pattern is the exact same as when we updated our CI status.
 
 ## Conclusion
 
-At GitHub, we've used [Janky][janky] and [Heaven][heaven] to manage our deployments
-for years. The basic flow is essentially the exact same as the server we've built
-above. At GitHub, we:
+At GitHub, we've used versions of [Janky][janky] and [Heaven][heaven] to manage
+our deployments for years. The basic flow is essentially the exact same as the
+server we've built above. At GitHub, we:
 
 * Fire to Jenkins when a pull request is created or updated (via Janky)
 * Wait for a response on the state of the CI

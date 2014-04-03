@@ -187,6 +187,12 @@ module GitHub
       "html_url"         => "https://github.com/octocat/Hello-World"
     }
 
+    REPO_PERMISSIONS = {
+      "admin"  => false,
+      "push"   => false,
+      "pull"   => true
+    }
+
     REPO = SIMPLE_REPO.merge({
       "clone_url"         => "https://github.com/octocat/Hello-World.git",
       "git_url"           => "git://github.com/octocat/Hello-World.git",
@@ -202,19 +208,20 @@ module GitHub
       "default_branch"    => 'master',
       "master_branch"     => 'master',
       "open_issues_count" => 0,
+      "has_issues"        => true,
+      "has_wiki"          => true,
+      "has_downloads"     => true,
       "pushed_at"         => "2011-01-26T19:06:43Z",
       "created_at"        => "2011-01-26T19:01:12Z",
-      "updated_at"        => "2011-01-26T19:14:43Z"
+      "updated_at"        => "2011-01-26T19:14:43Z",
+      "permissions"       => REPO_PERMISSIONS
     })
 
     FULL_REPO = REPO.merge({
       "subscribers_count" => 42,
       "organization"      => USER.merge('type' => 'Organization'),
       "parent"            => REPO,
-      "source"            => REPO,
-      "has_issues"        => true,
-      "has_wiki"          => true,
-      "has_downloads"     => true
+      "source"            => REPO
     })
 
     TAG = {

@@ -29,9 +29,9 @@ to make up to 5 requests per minute.
 See the [rate limit documentation](/v3/#rate-limiting) for details on
 determining your current rate limit status.
 
-### Timeouts
+### Timeouts and incomplete results
 
-Search API responses include a `timed_out` Boolean attribute. For queries that are taking [too long to execute](/changes/2014-02-20-search-timeouts-exposed/), search  stops the execution of the query, collects and returns matches that were already found, and sets `timed_out` to `true`.
+Search API responses include a `incomplete_results` Boolean attribute. For queries that are taking [too long to execute](/changes/2014-04-07-search-timeouts-exposed/), search stops the execution of the query, collects and returns matches that were already found, and sets `incomplete_results` to `true`.
 
 Reaching a timeout does not necessarily mean that search results are incomplete. More results might have been found if the execution wasn't stopped, but also might have not.
 

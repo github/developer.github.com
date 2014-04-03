@@ -778,7 +778,7 @@ module GitHub
 
     ISSUE_SEARCH_V3_RESULTS = {
       "total_count" => 280,
-      "timed_out" => false,
+      "incomplete_results" => false,
       "items" => [
         {
           "url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132",
@@ -906,7 +906,7 @@ module GitHub
 
     REPO_SEARCH_V3_RESULTS = {
       "total_count" => 40,
-      "timed_out" => false,
+      "incomplete_results" => false,
       "items" => [
         {
           "id" => 3081286,
@@ -980,7 +980,7 @@ module GitHub
 
     CODE_SEARCH_V3_RESULTS = {
       "total_count" => 7,
-      "timed_out" => false,
+      "incomplete_results" => false,
       "items" => [
         {
           "name" => "classes.js",
@@ -1117,7 +1117,7 @@ module GitHub
 
     USER_SEARCH_V3_RESULTS = {
       "total_count" => 12,
-      "timed_out" => false,
+      "incomplete_results" => false,
       "items" => [
         {
           "login" => "mojombo",

@@ -55,7 +55,7 @@ suggest [@octocat's Spoon/Knife repository](https://github.com/octocat/Spoon-Kni
 After that, you'll create a new webhook in your repository, feeding it the URL
 that ngrok gave you:
 
-![A new ngrok URL](/images/webhooks_recent_deliveries.png)
+![A new ngrok URL](/images/webhook_sample_url.png)
 
 Click **Update webhook**. You should see a body response of `Well, it worked!`.
 Great! Click on **Let me select individual events.**, and select the following:

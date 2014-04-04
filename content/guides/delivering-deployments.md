@@ -7,9 +7,9 @@ title: Delivering deployments | GitHub API
 * TOC
 {:toc}
 
-The [Deployment API][deploy API] provides your projects hosted on GitHub with
+The [Deployments API][deploy API] provides your projects hosted on GitHub with
 the capability to launch them on a production server that you own. Combined with
-[the status API][status API], you'll be able to coordinate your deployments
+[the Status API][status API], you'll be able to coordinate your deployments
 the moment your code lands on `master`.
 
 This guide will use that API to demonstrate a setup that you can use.
@@ -57,7 +57,7 @@ suggest [@octocat's Spoon/Knife repository](https://github.com/octocat/Spoon-Kni
 After that, you'll create a new webhook in your repository, feeding it the URL
 that ngrok gave you:
 
-![A new ngrok URL](/images/webhooks_recent_deliveries.png)
+![A new ngrok URL](/images/webhook_sample_url.png)
 
 Click **Update webhook**. You should see a body response of `Well, it worked!`.
 Great! Click on **Let me select individual events.**, and select the following:
@@ -67,7 +67,8 @@ Great! Click on **Let me select individual events.**, and select the following:
 * Pull Request
 
 These are the events GitHub will send to our server whenever the relevant action
-occurs. We'll configure our server to *just* handle the Pull Request scenario right now:
+occurs. We'll configure our server to *just* handle when Pull Requests are merged
+right now:
 
     #!ruby
     post '/event_handler' do
@@ -76,7 +77,7 @@ occurs. We'll configure our server to *just* handle the Pull Request scenario ri
       case request.env['HTTP_X_GITHUB_EVENT']
       when "pull_request"
         if @payload["action"] == "closed" && @payload["pull_request"]["merged"]
-          puts "A pull request was merged! A dpeloyment should start now..."
+          puts "A pull request was merged! A deployment should start now..."
         end
       end
     end
@@ -103,9 +104,12 @@ merged, and start paying attention to deployments:
       end
     when "deployment"
       process_deployment(@payload)
+    when "deployment_status"
+      update_deployment_status
     end
 
-Based on the information from the pull request, we'll fill out the `start_deployment` method:
+Based on the information from the pull request, we'll start by filling out the
+`start_deployment` method:
 
     #!ruby
     def start_deployment(pull_request)
@@ -126,7 +130,7 @@ Deployments can take a rather long time, so we'll want to listen for various eve
 such as when the deployment was created, and what state it's in.
 
 Let's simulate a deployment that does some work, and notice the effect it has on
-the output. First, let's write our `process_deployment` method:
+the output. First, let's complete our `process_deployment` method:
 
     #!ruby
     def process_deployment
@@ -139,13 +143,6 @@ the output. First, let's write our `process_deployment` method:
       @client.create_deployment_status("repos/#{@payload['repository']['full_name']}/deployments/#{@payload['id']}", 'success')
     end
 
-We'll also add a new case to the `switch` statement for deployment statuses:
-
-    #!ruby
-    when "deployment_status"
-      update_deployment_status
-    end
-
 Finally, we'll simulate storing the status information as console output:
 
     #!ruby
@@ -155,11 +152,12 @@ Finally, we'll simulate storing the status information as console output:
 
 Let's break down what's going on. A new deployment is created by `start_deployment`,
 which triggers the `deployment` event. From there, we call `process_deployment`
-to simulate work that's going on. Meanwhile, we also make a call to `create_deployment_status`,
-which lets a receiver know what's going on, as we switch the status to `pending`.
+to simulate work that's going on. During that processing, we also make a call to
+`create_deployment_status`, which lets a receiver know what's going on, as we
+switch the status to `pending`.
 
 After the deployment is finished, we set the status to `success`. You'll notice
-that this pattern is the exact same as when we updated our CI status.
+that this pattern is the exact same as when we you your CI statuses.
 
 ## Conclusion
 

@@ -49,6 +49,12 @@ mentioned
 assigned
 : The issue was assigned to the actor.
 
+head_ref_deleted
+: The pull request's branch was deleted.
+
+head_ref_restored
+: The pull request's branch was restored.
+
 ## List events for an issue
 
     GET /repos/:owner/:repo/issues/:issue_number/events

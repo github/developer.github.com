@@ -6,7 +6,7 @@ layout: developers
 <div class="feature dev-program">
   <div class="wrapper">
     <h1>It takes a community to design, build, and ship great software.</h1>
-    <p class="intro">Building an application that integrates with GitHub? Register for our Developer Program, the possibilities are endless and the kudos is all yours.</p>
+    <p class="intro">Building an application that integrates with GitHub? Register for our Developer Program! The possibilities are endless, and you enjoy the kudos.</p>
     <a href="https://github.com/developer/register" class="button">Register now</a>
   </div>
   <img src="/shared/images/header-animation.gif" alt="GitHub Universe" class="earth" width="450" height="375">
@@ -39,7 +39,7 @@ layout: developers
     <h2>Have an integration that works with GitHub?</h2>
     <p>Awesome! We'd love to have you be part of the program. Here’s how you can spread the word:</p>
     <ul>
-      <li>Let us know about your integration</li>
+      <li><a href="https://github.com/contact?form[subject]=New+GitHub+Integration">Let us know about your integration</a></li>
       <li>Use the <a href="https://github.com/logos">Octocat or GitHub logo</a> to advertise that your product works with GitHub</li>
       <li>Post a video or a blog on your website about your integration</li>
     </ul>

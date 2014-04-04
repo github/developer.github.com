@@ -123,7 +123,7 @@ Issue owners and users with push access can edit an issue.
 
 Name | Type | Description
 -----|------|--------------
-`title`|`string` | **Required**. The title of the issue.
+`title`|`string` | The title of the issue.
 `body`|`string` | The contents of the issue.
 `assignee`|`string` | Login for the user that this issue should be assigned to.
 `state`|`string` | State of the issue. Either `open` or `closed`.

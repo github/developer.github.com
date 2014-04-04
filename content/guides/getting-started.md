@@ -196,7 +196,7 @@ Also, the [**Authorizations API**][authorizations api] makes it simple to use Ba
 to create an OAuth token. Try pasting and running the following command:
 
 <pre class="terminal">
-$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo"]}' \
+$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 
 HTTP/1.1 201 Created
@@ -217,7 +217,7 @@ Content-Length: 384
   "created_at": "2012-11-14T14:04:24Z",
   "note_url": null,
   "id": 2,
-  "note": null
+  "note": "getting-started"
 }
 </pre>
 
@@ -243,7 +243,8 @@ in the [X-GitHub-OTP request header][2fa header]:
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; -H "X-GitHub-OTP: &lt;your_2fa_OTP_code&gt;" \
-    -d '{"scopes": ["repo"]}' https://api.github.com/authorizations
+    -d '{"scopes": ["repo"], "note": "getting-started"}' \
+    https://api.github.com/authorizations
 </pre>
 
 If you enabled 2FA with a mobile application, go ahead and get an OTP code from

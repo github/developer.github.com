@@ -31,9 +31,13 @@ determining your current rate limit status.
 
 ### Timeouts and incomplete results
 
-Search API responses include a `incomplete_results` Boolean attribute. For queries that are taking [too long to execute](/changes/2014-04-07-search-timeouts-exposed/), search stops the execution of the query, collects and returns matches that were already found, and sets `incomplete_results` to `true`.
+To keep the Search API fast for everyone, we limit how long any individual query
+can run. For queries that [exceed the time limit](/changes/2014-04-07-understanding-search-results-and-potential-timeouts/),
+the API collects and returns all matches that were already found prior to the
+timeout, and sets `incomplete_results` to `true`.
 
-Reaching a timeout does not necessarily mean that search results are incomplete. More results might have been found if the execution wasn't stopped, but also might have not.
+Reaching a timeout does not necessarily mean that search results are incomplete.
+More results might have been found, but also might have not.
 
 ## Search repositories
 

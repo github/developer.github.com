@@ -143,7 +143,7 @@ Name | Description
 -----|-----------|
 `X-GitHub-Event` | The [event type](/v3/activity/events/types/) that was triggered.
 `X-GitHub-Delivery` | A [guid][guid] to identify the payload and event being sent.
-`X-GitHub-Signature` | The value of this header is computed as the HMAC hex digest of the body, using the `secret` config option as the key.
+`X-Hub-Signature` | The value of this header is computed as the HMAC hex digest of the body, using the `secret` config option as the key.
 
 ## PubSubHubbub
 

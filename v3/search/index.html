@@ -90,6 +90,16 @@ to make up to 5 requests per minute.</p>
 <p>See the <a href="/v3/#rate-limiting">rate limit documentation</a> for details on
 determining your current rate limit status.</p>
 
+<h3 id="timeouts-and-incomplete-results">Timeouts and incomplete results</h3>
+
+<p>To keep the Search API fast for everyone, we limit how long any individual query
+can run. For queries that <a href="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">exceed the time limit</a>,
+the API returns the matches that were already found prior to the timeout, and
+the response has the <code>incomplete_results</code> property set to <code>true</code>.</p>
+
+<p>Reaching a timeout does not necessarily mean that search results are incomplete.
+More results might have been found, but also might not.</p>
+
 <h2 id="search-repositories">Search repositories</h2>
 
 <p>Find repositories via various criteria. This method returns up to 100 results <a href="/v3/#pagination">per page</a>.</p>
@@ -169,6 +179,7 @@ X-RateLimit-Remaining: 19</code></pre>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"total_count"</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
+  <span class="s2">"incomplete_results"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"items"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"id"</span><span class="o">:</span> <span class="mi">3081286</span><span class="p">,</span>
@@ -342,6 +353,7 @@ X-RateLimit-Remaining: 19</code></pre>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"total_count"</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="s2">"incomplete_results"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"items"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"classes.js"</span><span class="p">,</span>
@@ -572,6 +584,7 @@ X-RateLimit-Remaining: 19</code></pre>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"total_count"</span><span class="o">:</span> <span class="mi">280</span><span class="p">,</span>
+  <span class="s2">"incomplete_results"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"items"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132"</span><span class="p">,</span>
@@ -766,6 +779,7 @@ X-RateLimit-Remaining: 19</code></pre>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"total_count"</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="s2">"incomplete_results"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
   <span class="s2">"items"</span><span class="o">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"mojombo"</span><span class="p">,</span>

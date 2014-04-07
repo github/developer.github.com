@@ -42,6 +42,44 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">
+  <h2 class="title">
+  <a href="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">Understanding search results and potential timeouts</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 7, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak"><a href="https://github.com/izuzak">izuzak</a>
+  </li>
+</ul>
+</div>
+
+    <p>Some queries are computationally expensive for our search infrastructure to
+execute. To keep the <a href="/v3/search">Search API</a> fast for everyone, we limit how
+long any individual query can run. In rare situations when a query exceeds the
+time limit, the API returns all matches that were found prior to the timeout.</p>
+
+<p>Starting today, the Search API also now <a href="/v3/search/#timeouts-and-incomplete-results">informs you when such a timeout
+happens</a>. Reaching a timeout does
+not necessarily mean that search results are incomplete. It just means that the
+query was discontinued before it searched through all possible data. More
+results might have been found, but also might not.</p>
+
+<p>In some cases, if you know that your search results are potentially incomplete,
+you might think about the data differently. By exposing timeouts when they
+happen, the API helps you better understand how to interpret the results.</p>
+
+<p>We hope this is useful as you integrate with the Search API. In the meantime,
+we’re working on improving search so that these timeouts occur as rarely as
+possible. If you have any questions, <a href="https://github.com/contact?form%5Bsubject%5D=Search+API">let us know</a>.</p>
+</div>
+
 <div class="change" id="/changes/2014-04-04-create-public-repo-without-repo-scope/">
   <h2 class="title">
   <a href="/changes/2014-04-04-create-public-repo-without-repo-scope/">Grant access to create public repositories without granting access to private repositories</a>
@@ -1681,6 +1719,35 @@ but we can’t wait to see what others can do with this information.</p>
 <p>Happy editing!</p>
 </div>
 
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca"><a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
+</div>
+
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
@@ -1728,35 +1795,6 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
-</div>
-
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca"><a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
 </div>
 
 <div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
@@ -2795,6 +2833,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">Understanding search results and potential timeouts<br /><span class="date">April 7, 2014</span></a></li>
+
   <li><a href="/changes/2014-04-04-create-public-repo-without-repo-scope/">Grant access to create public repositories without granting access to private repositories<br /><span class="date">April 4, 2014</span></a></li>
 
   <li><a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API<br /><span class="date">March 27, 2014</span></a></li>
@@ -2808,8 +2848,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-03-04-timezone-handling-changes/">Improved timezone handling in the API<br /><span class="date">March 4, 2014</span></a></li>
 
   <li><a href="/changes/2014-03-03-deployments-api-updates/">New Payload Format for Deployments<br /><span class="date">March 3, 2014</span></a></li>
-
-  <li><a href="/changes/2014-02-28-issue-and-pull-query-enhancements/">Query enhancements for listing issues and pull requests<br /><span class="date">February 28, 2014</span></a></li>
 
 </ul>
 

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Preview the New Search API</title>
+  <title>Understanding search results and potential timeouts</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -41,76 +41,44 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-07-19-preview-the-new-search-api/">
+      <div class="change" id="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">
 <h2 class="title">
-  <a href="/changes/2013-07-19-preview-the-new-search-api/">Preview the New Search API</a>
+  <a href="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">Understanding search results and potential timeouts</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    July 19, 2013
+    April 7, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph"/>
-      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak"/>
+      <a href="https://github.com/izuzak">izuzak</a>
   </li>
 </ul>
 </div>
 
 
-<p>Today we’re excited to announce a <a href="/v3/search/">brand new Search API</a>. Whether you’re
-searching for <a href="/v3/search/#search-code">code</a>, <a href="/v3/search/#search-repositories">repositories</a>,
-<a href="/v3/search/#search-issues">issues</a>, or <a href="/v3/search/#search-users">users</a>, all the query abilities of
-github.com are now available via the API as well.</p>
+<p>Some queries are computationally expensive for our search infrastructure to
+execute. To keep the <a href="/v3/search">Search API</a> fast for everyone, we limit how
+long any individual query can run. In rare situations when a query exceeds the
+time limit, the API returns all matches that were found prior to the timeout.</p>
 
-<p>Maybe you want to find <a href="/v3/search/#repository-search-example">popular Tetris implementations written in Assembly</a>.
-We’ve got you covered.
-Or perhaps you’re looking for <a href="/v3/search/#code-search-example">new gems that are using Octokit.rb</a>.
-No problem.
-The possibilities are endless.</p>
+<p>Starting today, the Search API also now <a href="/v3/search/#timeouts-and-incomplete-results">informs you when such a timeout
+happens</a>. Reaching a timeout does
+not necessarily mean that search results are incomplete. It just means that the
+query was discontinued before it searched through all possible data. More
+results might have been found, but also might not.</p>
 
-<h2 id="highlights">Highlights</h2>
+<p>In some cases, if you know that your search results are potentially incomplete,
+you might think about the data differently. By exposing timeouts when they
+happen, the API helps you better understand how to interpret the results.</p>
 
-<p>On github.com, we enjoy the context provided by code snippets and highlights in
-search results.</p>
-
-<p><a href="https://github.com/search?q=faraday+builder+repo%3Aoctokit%2Foctokit.rb&amp;type=Code"><img src="https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png" alt="code-snippet-highlighting"></a></p>
-
-<p>We want API consumers to have access to that information as well. So, API
-requests can opt to receive those
-<a href="/v3/search#text-match-metadata">text fragments in the response</a>. Each fragment is accompanied by
-numeric offsets identifying the exact location of each matching search term.</p>
-
-<h2 id="preview-period">Preview period</h2>
-
-<p>We’re making this new API available today for developers to
-<a href="/v3/search/#preview-mode" data-proofer-ignore="">preview</a>. We think developers are going to love it, but we want
-to get your feedback before we declare the Search API “final” and
-“unchangeable.” We expect the preview period to last for roughly 60 days.</p>
-
-<p>As we discover opportunities to improve this new API during the preview period,
-we may ship changes that break clients using the preview version of the API. We
-want to iterate quickly. To do so, we will announce any changes here (on the
-developer blog), but we will not provide any advance notice.</p>
-
-<p>At the end of preview period, the Search API will become an official component
-of GitHub API v3. At that point, the new Search API will be stable and suitable
-for production use.</p>
-
-<h2 id="what-about-the-old-search-api">What about the old search API?</h2>
-
-<p>The <a href="/v3/search/legacy/">legacy search API</a> is still available. Many existing clients
-depend on it, and it is not changing in any way. While the new API offers much
-more functionality, the legacy search endpoints remain an official part of
-GitHub API v3.</p>
-
-<h2 id="take-it-for-a-spin">Take it for a spin</h2>
-
-<p>We hope you’ll kick the tires and <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">send us your feedback</a>. Happy
-<del>searching</del> finding!</p>
+<p>We hope this is useful as you integrate with the Search API. In the meantime,
+we’re working on improving search so that these timeouts occur as rarely as
+possible. If you have any questions, <a href="https://github.com/contact?form%5Bsubject%5D=Search+API">let us know</a>.</p>
 </div>
 
     </div>

@@ -14,7 +14,7 @@ Starting today, the Search API also now [informs you when such a timeout
 happens](/v3/search/#timeouts-and-incomplete-results). Reaching a timeout does
 not necessarily mean that search results are incomplete. It just means that the
 query was discontinued before it searched through all possible data. More
-results might have been found, but also might have not.
+results might have been found, but also might not.
 
 In some cases, if you know that your search results are potentially incomplete,
 you might think about the data differently. By exposing timeouts when they

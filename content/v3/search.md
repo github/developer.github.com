@@ -37,7 +37,7 @@ the API collects and returns all matches that were already found prior to the
 timeout, and sets `incomplete_results` to `true`.
 
 Reaching a timeout does not necessarily mean that search results are incomplete.
-More results might have been found, but also might have not.
+More results might have been found, but also might not.
 
 ## Search repositories
 

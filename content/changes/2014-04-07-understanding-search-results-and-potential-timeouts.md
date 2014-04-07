@@ -8,8 +8,7 @@ author_name: izuzak
 Some queries are computationally expensive for our search infrastructure to
 execute. To keep the [Search API](/v3/search) fast for everyone, we limit how
 long any individual query can run. In rare situations when a query exceeds the
-time limit, the API collects and returns all matches that were already found
-prior to the timeout.
+time limit, the API returns all matches that were found prior to the timeout.
 
 Starting today, the Search API also now [informs you when such a timeout
 happens](/v3/search/#timeouts-and-incomplete-results). Reaching a timeout does

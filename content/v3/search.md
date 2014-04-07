@@ -33,8 +33,8 @@ determining your current rate limit status.
 
 To keep the Search API fast for everyone, we limit how long any individual query
 can run. For queries that [exceed the time limit](/changes/2014-04-07-understanding-search-results-and-potential-timeouts/),
-the API returns the matches that were already found prior to the
-timeout, and sets `incomplete_results` to `true`.
+the API returns the matches that were already found prior to the timeout, and
+the response has the `incomplete_results` property set to `true`.
 
 Reaching a timeout does not necessarily mean that search results are incomplete.
 More results might have been found, but also might not.

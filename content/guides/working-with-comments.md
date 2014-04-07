@@ -111,8 +111,8 @@ on the entire commit.
 [commit comment]: https://github.com/octocat/Spoon-Knife/commit/cbc28e7c8caee26febc8c013b0adfb97a4edd96e#commitcomment-4049848
 [sample PR]: https://github.com/octocat/Spoon-Knife/pull/1176
 [platform-samples]: https://github.com/github/platform-samples/tree/master/api/ruby/working-with-comments
-[issues]: http://developer.github.com/v3/issues/comments/
+[issues]: https://developer.github.com/v3/issues/comments/
 [personal token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
 [octokit.rb]: https://github.com/octokit/octokit.rb
-[PR Review API]: http://developer.github.com/v3/pulls/comments/
-[commit comment API]: http://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
+[PR Review API]: https://developer.github.com/v3/pulls/comments/
+[commit comment API]: https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment

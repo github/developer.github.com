@@ -32,4 +32,4 @@ tokens.
 
 [Atom]: http://en.wikipedia.org/wiki/Atom_(standard)
 [authenticating]: /v3/#basic-authentication
-[URI template]: http://developer.github.com/v3/#hypermedia
+[URI template]: https://developer.github.com/v3/#hypermedia

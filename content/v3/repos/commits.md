@@ -15,7 +15,7 @@ The Repo Commits API supports listing, viewing, and comparing commits in a repos
 
 _A special note on pagination:_ Due to the way Git works, commits are paginated
 based on SHA instead of page number. Please follow the link headers as outlined
-in the [pagination overview](http://developer.github.com/v3/#pagination)
+in the [pagination overview](https://developer.github.com/v3/#pagination)
 instead of constructing page links yourself.
 
 ### Parameters

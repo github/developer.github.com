@@ -75,7 +75,7 @@ stable and suitable for production use.
 
 We hope you’ll take it for a spin and [send us your feedback][contact].
 
-![Shipit Squirrel](http://shipitsquirrel.github.io/images/ship%20it%20squirrel.png)
+![Shipit Squirrel](https://camo.githubusercontent.com/da8106f759bf0d163fb002e715fb1d1f1d2b6f4e/687474703a2f2f736869706974737175697272656c2e6769746875622e696f2f696d616765732f736869702532306974253230737175697272656c2e706e67)
 
 [docs]: /v3/repos/deployments/
 [hooks]: /v3/repos/hooks/

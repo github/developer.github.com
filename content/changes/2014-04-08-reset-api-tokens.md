@@ -6,7 +6,7 @@ author_name: pengwynn
 ---
 
 As [announced earlier today][heartbleed-blog-post], we are actively responding
-to the recently-released [Heartbleed security
+to the recently-disclosed [Heartbleed security
 vulnerability][heartbleed-blog-post] in OpenSSL. While at this time GitHub has
 no indication that the attack has been used beyond testing the vulnerability, we
 recommend that integrators [reset the API authorizations][api] for their OAuth

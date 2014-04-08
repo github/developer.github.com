@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Releases API is Official</title>
+  <title>Recommendation: Reset OAuth authorizations</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -41,50 +41,43 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-11-04-releases-api-is-official/">
+      <div class="change" id="/changes/2014-04-08-reset-api-tokens/">
 <h2 class="title">
-  <a href="/changes/2013-11-04-releases-api-is-official/">Releases API is Official</a>
+  <a href="/changes/2014-04-08-reset-api-tokens/">Recommendation: Reset OAuth authorizations</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    November 4, 2013
+    April 8, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie"/>
-      <a href="https://github.com/technoweenie">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
+      <a href="https://github.com/pengwynn">pengwynn</a>
   </li>
 </ul>
 </div>
 
 
-<p>Hot on the heels of the <a href="http://developer.github.com/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">Search API</a>, the <a href="/v3/repos/releases/">Releases API</a>
-is now officially part of GitHub API v3.  We now consider it stable for
-production use.  </p>
+<p>As <a href="https://github.com/blog/1818-security-heartbleed-vulnerability">announced earlier today</a>, we are actively responding
+to the recently-disclosed <a href="https://github.com/blog/1818-security-heartbleed-vulnerability">Heartbleed security
+vulnerability</a> in OpenSSL. While at this time GitHub has
+no indication that the attack has been used beyond testing the vulnerability, we
+recommend that integrators <a href="/v3/oauth_authorizations/#reset-an-authorization">reset the API authorizations</a> for their OAuth
+applications.</p>
 
-<h3 id="preview-media-type-no-longer-needed">Preview Media Type No Longer Needed</h3>
+<p>We’ve added a <a href="/v3/oauth_authorizations/#reset-an-authorization">new API method</a> for this exact purpose. Calling this method
+will invalidate the old token and return a new token for applications to store
+and use in its place. This new method provides a safe way to reset user
+authorizations without requiring users to re-authorize the application on the
+web.</p>
 
-<p>If you used the Releases API during the preview period, you needed to provide a custom media type in the <code>Accept</code> header:</p>
+<p>Integrators can also use the existing revocation methods to <a href="/v3/oauth_authorizations/#revoke-all-authorizations-for-an-application">revoke all
+tokens</a> or <a href="/v3/oauth_authorizations/#revoke-an-authorization-for-an-application">revoke a single token</a> for their applications.</p>
 
-<pre><code>application/vnd.github.manifold-preview+json
-</code></pre>
-
-<p>Now that the preview period has ended, you no longer need to pass this custom media type.</p>
-
-<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<h3 id="onward">Onward!</h3>
-
-<p>Thanks again to everyone that tried out the Releases API during the preview period.
-We got some great feedback, and we are already discussing additions to the API.</p>
-
-<p>We can’t wait to see what you ship!</p>
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+resetting+tokens">get in touch</a>.</p>
 </div>
 
     </div>

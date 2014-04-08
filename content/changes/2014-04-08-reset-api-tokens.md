@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Resetting OAuth authorizations in response to Heartbleed security vulnerability
+title: "Recommendation: Reset OAuth authorizations"
 created_at: 2014-04-08
 author_name: pengwynn
 ---

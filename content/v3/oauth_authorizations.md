@@ -146,12 +146,12 @@ will return `404 NOT FOUND`.
 
 ## Reset an authorization
 
-OAuth applications can use this API method for resetting the token of a
-valid OAuth token without end user involvement.  Applications must save the
-"token" property in the response, because changes take effect immediately.
-You must use [Basic Authentication](/v3/auth#basic-authentication) when accessing 
-it, where the username is the OAuth application `client_id` and the password is 
-its `client_secret`. Invalid tokens will return `404 NOT FOUND`.
+OAuth applications can use this API method to reset a valid OAuth token without
+end user involvement.  Applications must save the "token" property in the
+response, because changes take effect immediately. You must use 
+[Basic Authentication](/v3/auth#basic-authentication) when accessing it, where
+the username is the OAuth application `client_id` and the password is its 
+`client_secret`. Invalid tokens will return `404 NOT FOUND`.
 
     POST /applications/:client_id/tokens/:access_token
 

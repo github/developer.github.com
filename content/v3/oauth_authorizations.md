@@ -144,6 +144,22 @@ will return `404 NOT FOUND`.
 <%= headers 200 %>
 <%= json(:oauth_access_with_user) %>
 
+## Reset an authorization
+
+OAuth applications can use this API method for resetting the token of a
+valid OAuth token without end user involvement.  Applications must save the
+"token" property in the response, because changes take effect immediately.
+You must use [Basic Authentication](/v3/auth#basic-authentication) when accessing 
+it, where the username is the OAuth application `client_id` and the password is 
+its `client_secret`. Invalid tokens will return `404 NOT FOUND`.
+
+    POST /applications/:client_id/tokens/:access_token
+
+### Response
+
+<%= headers 200 %>
+<%= json(:oauth_access_with_user) %>
+
 ## Revoke all authorizations for an application
 
 OAuth application owners can revoke every token for an OAuth application. You

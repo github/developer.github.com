@@ -63,8 +63,8 @@ Most of the time, you might even find that you’re asking for <em>too much</em>
 and in order to keep our servers happy, the API will automatically <a href="/v3/#pagination">paginate the requested items</a>.</p>
 
 <p>In this guide, we’ll make some calls to the GitHub Search API, and iterate over
-the results using pagination. You can find the complete source code for this project 
-in the <a href="https://github.com/github/platform-samples/tree/master/api/ruby/traversing-with-pagination">platform-samples</a> repository. </p>
+the results using pagination. You can find the complete source code for this project
+in the <a href="https://github.com/github/platform-samples/tree/master/api/ruby/traversing-with-pagination">platform-samples</a> repository.</p>
 
 <h2 id="basics-of-pagination">Basics of Pagination</h2>
 
@@ -72,12 +72,12 @@ in the <a href="https://github.com/github/platform-samples/tree/master/api/ruby/
 
 <ol>
 <li>Different API calls respond with different defaults. For example, a call to
-<a href="http://developer.github.com/v3/repos/#list-all-public-repositories">list GitHub’s public repositories</a>
+<a href="https://developer.github.com/v3/repos/#list-all-public-repositories">list GitHub’s public repositories</a>
 provides paginated items in sets of 30, whereas a call to the GitHub Search API
 provides items in sets of 100</li>
   <li>You can specify how many items to receive (up to a maximum of 100); but,</li>
-  <li>For technical reasons, not every endpoint behaves the same. For example, 
-<a href="http://developer.github.com/v3/activity/events/">events</a> won’t let you set a maximum for items to receive.
+  <li>For technical reasons, not every endpoint behaves the same. For example,
+<a href="https://developer.github.com/v3/activity/events/">events</a> won’t let you set a maximum for items to receive.
 Be sure to read the documentation on how to handle paginated results for specific endpoints.</li>
 </ol><p>Information about pagination is provided in <a href="http://tools.ietf.org/html/rfc5988">the Link header</a>
 of an API call. For example, let’s make a curl request to the search API, to find
@@ -101,9 +101,9 @@ Thus, we have 33 more pages of information about <code>addClass</code> that we c
 Nice!</p>
 
 <p>Keep in mind that you should <strong>always</strong> rely on these link relations provided
-to you. Don’t try to guess or construct your own URL. Some API calls, like <a href="http://developer.github.com/v3/repos/commits/#list-commits-on-a-repository">listing
+to you. Don’t try to guess or construct your own URL. Some API calls, like <a href="https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository">listing
 commits on a repository</a>, use pagination results that are based
-on SHA values, not numbers. </p>
+on SHA values, not numbers.</p>
 
 <h3 id="navigating-through-the-pages">Navigating through the pages</h3>
 
@@ -162,7 +162,7 @@ pass in our <a href="https://help.github.com/articles/creating-an-access-token-f
 <span class="c1"># Instead, set and test environment variables, like below</span>
 <span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span></code></pre>
 
-<p>Next, we’ll execute the search, using Octokit’s <code>search_code</code> method. Unlike 
+<p>Next, we’ll execute the search, using Octokit’s <code>search_code</code> method. Unlike
 using <code>curl</code>, we can also immediately retrieve the number of results, so let’s
 do that:</p>
 
@@ -187,7 +187,7 @@ this information to the user:</p>
 <span class="nb">puts</span> <span class="s2">"There are </span><span class="si">#{</span><span class="n">total_count</span><span class="si">}</span><span class="s2"> results, on </span><span class="si">#{</span><span class="n">number_of_pages</span><span class="si">}</span><span class="s2"> pages!"</span></code></pre>
 
 <p>Finally, let’s iterate through the results. You could do this with a loop <code>for i in 1..number_of_pages.to_i</code>,
-but instead, let’s follow the <code>rels[:next]</code> headers to retrieve information from 
+but instead, let’s follow the <code>rels[:next]</code> headers to retrieve information from
 each page. For the sake of simplicity, let’s just grab the file path of the first
 result from each page. To do this, we’ll need a loop; and at the end of every loop,
 we’ll retrieve the data set for the next page by following the <code>rels[:next]</code> information.
@@ -231,14 +231,14 @@ your code should remain intact:</p>
 
 <h2 id="constructing-pagination-links">Constructing Pagination Links</h2>
 
-<p>Normally, with pagination, your goal isn’t to concatenate all of the possible 
+<p>Normally, with pagination, your goal isn’t to concatenate all of the possible
 results, but rather, to produce a set of navigation, like this:</p>
 
 <p><img src="/images/pagination_sample.png" alt="Sample of pagination links"></p>
 
 <p>Let’s sketch out a micro-version of what that might entail.</p>
 
-<p>From the code above, we already know we can get the <code>number_of_pages</code> in the 
+<p>From the code above, we already know we can get the <code>number_of_pages</code> in the
 paginated results from the first call:</p>
 
 <pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
@@ -277,7 +277,7 @@ individual page, by passing the <code>:page</code> option:</p>
 
 <pre><code class="language-ruby"><span class="n">clicked_results</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">search_code</span><span class="p">(</span><span class="s1">'addClass user:mozilla'</span><span class="p">,</span> <span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">random_page</span><span class="p">)</span></code></pre>
 
-<p>If we wanted to get fancy, we could also grab the previous and next pages, in 
+<p>If we wanted to get fancy, we could also grab the previous and next pages, in
 order to generate links for back (<code>&lt;&lt;</code>) and foward (<code>&gt;&gt;</code>) elements:</p>
 
 <pre><code class="language-ruby"><span class="n">prev_page_href</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">last_response</span><span class="o">.</span><span class="n">rels</span><span class="o">[</span><span class="ss">:prev</span><span class="o">]</span> <span class="p">?</span> <span class="n">client</span><span class="o">.</span><span class="n">last_response</span><span class="o">.</span><span class="n">rels</span><span class="o">[</span><span class="ss">:prev</span><span class="o">].</span><span class="n">href</span> <span class="p">:</span> <span class="s2">"(none)"</span>

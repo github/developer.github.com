@@ -62,6 +62,7 @@
   <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   <li><a href="#delete-an-authorization">Delete an authorization</a></li>
   <li><a href="#check-an-authorization">Check an authorization</a></li>
+  <li><a href="#reset-an-authorization">Reset an authorization</a></li>
   <li><a href="#revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</a></li>
   <li><a href="#revoke-an-authorization-for-an-application">Revoke an authorization for an application</a></li>
   <li><a href="#more-information">More Information</a></li>
@@ -453,6 +454,61 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
+<h2 id="reset-an-authorization">Reset an authorization</h2>
+
+<p>OAuth applications can use this API method to reset a valid OAuth token without
+end user involvement.  Applications must save the “token” property in the
+response, because changes take effect immediately. You must use 
+<a href="/v3/auth#basic-authentication">Basic Authentication</a> when accessing it, where
+the username is the OAuth application <code>client_id</code> and the password is its 
+<code>client_secret</code>. Invalid tokens will return <code>404 NOT FOUND</code>.</p>
+
+<pre><code>POST /applications/:client_id/tokens/:access_token
+</code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="p">},</span>
+  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
 <h2 id="revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</h2>
 
 <p>OAuth application owners can revoke every token for an OAuth application. You
@@ -464,7 +520,7 @@ take a few minutes for the process to complete.</p>
 <pre><code>DELETE /applications/:client_id/tokens
 </code></pre>
 
-<h3 id="response-6">Response</h3>
+<h3 id="response-7">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -480,7 +536,7 @@ for this method, where the username is the OAuth application <code>client_id</co
 <pre><code>DELETE /applications/:client_id/tokens/:access_token
 </code></pre>
 
-<h3 id="response-7">Response</h3>
+<h3 id="response-8">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

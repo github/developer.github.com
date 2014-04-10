@@ -5,11 +5,11 @@ created_at: 2014-04-10
 author_name: atmos
 ---
 
-We're going to extend the Deployment API preview timeframe based on feedback from end-users.  We're still fleshing out what the [Deployments API][january-deployment-api-post] will look like when it graduates from preview mode and becomes a fully supported part of the GitHub API. We've already [updated the payload][payload-update] that integrations can use to customize deployments. We're also integrating with the [Combined Status API][combined-statuses] to help ensure that only verified code gets deployed, even if you have multiple systems verifying different aspects of your software.
+The preview period for the new [Deployments API][2014-01-deployments-api-post] continues to yield valuable feedback from developers. In early March, we used that feedback to [improve the payload format][payload-update] that integrations can use to customize deployments. A few weeks later, we began integrating with the new [Combined Status API][combined-statuses] to help ensure that only verified code gets deployed, even if you have multiple systems verifying different aspects of your software.
 
-We've decided to extend the Deployments API preview for another 30-60 days in order to make sure that everything works well with the changes we've been introducing. As always, if you have any questions or feedback, please [get in touch][contact].
+To give developers time to explore these recent refinements to the Deployments API, we're extending the preview period for a little while longer. As always, if you have any questions or feedback, please [get in touch][contact].
 
-[january-deployment-api-post]: /changes/2014-01-09-preview-the-new-deployments-api/
+[2014-01-deployments-api-post]: /changes/2014-01-09-preview-the-new-deployments-api/
 [payload-update]: /changes/2014-03-03-deployments-api-updates/
 [combined-statuses]: /changes/2014-03-27-combined-status-api/
 [contact]: https://github.com/contact?form[subject]=Deployments+API

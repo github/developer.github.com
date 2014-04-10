@@ -2,13 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-04-09T04:00:00Z</updated>
+  <updated>2014-04-10T04:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-04-10:/changes/2014-04-10-deployment-api-preview-extension/</id>
+    <title type="html">Extending the preview period for the Deployments API</title>
+    <published>2014-04-10T04:00:00Z</published>
+    <updated>2014-04-10T04:00:00Z</updated>
+    <author>
+      <name>atmos</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-04-10-deployment-api-preview-extension/" />
+    <content type="html">&lt;p&gt;The preview period for the new &lt;a href="/changes/2014-01-09-preview-the-new-deployments-api/"&gt;Deployments API&lt;/a&gt; continues to yield valuable feedback from developers. In early March, we used that feedback to &lt;a href="/changes/2014-03-03-deployments-api-updates/"&gt;improve the payload format&lt;/a&gt; that integrations can use to customize deployments. A few weeks later, we began integrating with the new &lt;a href="/changes/2014-03-27-combined-status-api/"&gt;Combined Status API&lt;/a&gt; to help ensure that only verified code gets deployed, even if you have multiple systems verifying different aspects of your software.&lt;/p&gt;
+
+&lt;p&gt;To give developers time to explore these recent refinements to the Deployments API, we’re extending the preview period for a little while longer. As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-04-09:/changes/2014-04-09-reminder-about-default-media-type-change/</id>
     <title type="html">Reminder: Default media type will change on April 15</title>
@@ -387,7 +401,7 @@ to create the git commit.&lt;/p&gt;
       <uri>https://github.com/technoweenie</uri>
     </author>
     <link rel="alternate" href="http://developer.github.com/changes/2014-03-03-deployments-api-updates/" />
-    <content type="html">&lt;p&gt;As we &lt;a href="/changes/2014-01-09-preview-the-new-deployments-api/"&gt;iterate on the preview&lt;/a&gt; for the new Deployment API, we’re making sure that it’s friendly to work with for the apps built on top of it.&lt;/p&gt;
+    <content type="html">&lt;p&gt;As we &lt;a href="/changes/2014-01-09-preview-the-new-deployments-api/"&gt;iterate on the preview&lt;/a&gt; for the new Deployments API, we’re making sure that it’s friendly to work with for the apps built on top of it.&lt;/p&gt;
 
 &lt;h2 id="deserialize-deployment-payloads"&gt;Deserialize Deployment Payloads&lt;/h2&gt;
 
@@ -698,7 +712,7 @@ stable and suitable for production use.&lt;/p&gt;
 
 &lt;p&gt;We hope you’ll take it for a spin and &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;send us your feedback&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="http://shipitsquirrel.github.io/images/ship%20it%20squirrel.png" alt="Shipit Squirrel"&gt;&lt;/p&gt;</content>
+&lt;p&gt;&lt;img src="https://camo.githubusercontent.com/da8106f759bf0d163fb002e715fb1d1f1d2b6f4e/687474703a2f2f736869706974737175697272656c2e6769746875622e696f2f696d616765732f736869702532306974253230737175697272656c2e706e67" alt="Shipit Squirrel"&gt;&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2014-01-07:/changes/2014-01-07-upcoming-change-to-default-media-type/</id>
@@ -1020,68 +1034,5 @@ We’re hard at work on those improvements now,
 and we expect to have more news in the coming weeks.&lt;/p&gt;
 
 &lt;p&gt;In the mean time, &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API"&gt;keep the suggestions coming&lt;/a&gt;!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-09-25:/changes/2013-09-25-releases-api/</id>
-    <title type="html">Releases API</title>
-    <published>2013-09-25T04:00:00Z</published>
-    <updated>2013-09-25T04:00:00Z</updated>
-    <author>
-      <name>technoweenie</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-09-25-releases-api/" />
-    <content type="html">&lt;p&gt;This summer we made it easier to &lt;a href="https://github.com/blog/1547-release-your-software"&gt;release your software&lt;/a&gt;.  Today, you can fully automate those releases via the
-&lt;a href="http://developer.github.com/v3/repos/releases/"&gt;Releases API Preview&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;This API is a little different due to the binary assets.  We use the &lt;code&gt;Accept&lt;/code&gt; header for content negotiation when requesting
-a release asset.  Pass a standard API media type to get the API representation:&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-$ curl -i -H "Authorization: token TOKEN" \
-     -H "Accept: application/vnd.github.manifold-preview" \
-     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
-
-HTTP/1.1 200 OK
-
-{
-  "id": 123,
-  ...
-}
-&lt;/pre&gt;
-
-&lt;p&gt;Pass “application/octet-stream” to download the binary content.&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-$ curl -i -H "Authorization: token TOKEN" \
-     -H "Accept: application/octet-stream" \
-     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
-
-HTTP/1.1 302 Found
-&lt;/pre&gt;
-
-&lt;p&gt;Uploads are handled by a single request to a companion “uploads.github.com” service.&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-$ curl -H "Authorization: token TOKEN" \
-     -H "Accept: application/vnd.github.manifold-preview" \
-     -H "Content-Type: application/zip" \
-     --data-binary @build/mac/package.zip \
-     "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
-&lt;/pre&gt;
-
-&lt;h2 id="preview-mode"&gt;Preview mode&lt;/h2&gt;
-
-&lt;p&gt;The new API is available as a &lt;a href="http://developer.github.com/v3/repos/releases/#preview-mode"&gt;preview&lt;/a&gt;.  This gives developers a chance to &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API"&gt;provide feedback&lt;/a&gt; on the direction of
-the API before we freeze changes.  We expect to lift the preview status in 30 days.&lt;/p&gt;
-
-&lt;p&gt;As with &lt;a href="http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/"&gt;the Search API&lt;/a&gt;, we’ll take this opportunity to iterate quickly.  Breaking changes will be announced
-on this developer blog without any advance warning.  Once the preview period is over, we’ll consider the Releases API unchangeable.
-At that point, it will be stable and suitable for production use.&lt;/p&gt;
-
-&lt;p&gt;The preview media type is “application/vnd.github.manifold-preview”.  &lt;a href="http://en.wikipedia.org/wiki/Eden_Fesi"&gt;Manifold&lt;/a&gt; is
-a member of the Avengers, with the ability to teleport through time and space.  He’s the one in the middle holding the spear.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src="https://f.cloud.github.com/assets/21/1210628/ae8556fa-25fc-11e3-986d-0ab522271d43.png" alt="Manifold teleporting the Avengers to a terraformed Mars surface"&gt;&lt;/p&gt;</content>
   </entry>
 </feed>

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Changes to GitHub Services</title>
+  <title>Extending the preview period for the Deployments API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -41,54 +41,29 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-2-5-changes-to-services/">
+      <div class="change" id="/changes/2014-04-10-deployment-api-preview-extension/">
 <h2 class="title">
-  <a href="/changes/2013-2-5-changes-to-services/">Upcoming Changes to GitHub Services</a>
+  <a href="/changes/2014-04-10-deployment-api-preview-extension/">Extending the preview period for the Deployments API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 5, 2013
+    April 10, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie"/>
-      <a href="https://github.com/technoweenie">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos"/>
+      <a href="https://github.com/atmos">atmos</a>
   </li>
 </ul>
 </div>
 
 
-<p>We are finishing up a new GitHub Services backend, dubbed “Hookshot”, to
-increase the speed and reliability of our delivered payloads.  We are doing
-what we can to make this a seamless transition for everyone.  However, there
-are a few notable changes.</p>
+<p>The preview period for the new <a href="/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API</a> continues to yield valuable feedback from developers. In early March, we used that feedback to <a href="/changes/2014-03-03-deployments-api-updates/">improve the payload format</a> that integrations can use to customize deployments. A few weeks later, we began integrating with the new <a href="/changes/2014-03-27-combined-status-api/">Combined Status API</a> to help ensure that only verified code gets deployed, even if you have multiple systems verifying different aspects of your software.</p>
 
-<ul>
-<li>
-    <p>There is a new <a href="http://developer.github.com/v3/meta/">Meta API endpoint</a>
-listing the current public IPs that hooks originate from.</p>
-  </li>
-  <li>
-    <p>We’re removing the AMQP service from GitHub. It hasn’t worked in quite some
-time, and the code it uses doesn’t work in our background workers.</p>
-  </li>
-  <li>
-    <p>We’re also instituting a new guideline to improve the reliability and
-maintainability of services in the future. As of today, all new services must
-accept an unmodified payload over HTTP. Any service that does not will be
-rejected. To see an example of an acceptable service, check out <a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb">Code Climate</a>.
-Notice their service simply accepts HTTP POST from GitHub unmodified. For an
-example of a service that won’t be accepted after today, check out <a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb">Campfire</a>. It
-uses other Ruby gems and contains custom logic to transform the GitHub payload
-to Campfire messages.  Existing hooks will keep working (don’t worry 37signals, we
-:heart: Campfire).</p>
-  </li>
-</ul><p>We’re making these changes because we want to focus on the reliability of the
-core Services backend for everyone.  Maintaining custom logic and libraries for
-over 100 services is taking too much of this focus away.</p>
+<p>To give developers time to explore these recent refinements to the Deployments API, we’re extending the preview period for a little while longer. As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
 </div>
 
     </div>

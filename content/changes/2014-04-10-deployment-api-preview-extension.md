@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Extending the preview period for the Deployments API
-created_at: 2014-04-08
+created_at: 2014-04-10
 author_name: atmos
 ---
 

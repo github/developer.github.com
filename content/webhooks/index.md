@@ -84,7 +84,7 @@ Name | Description
 
 The payloads for all hooks mirror [the payloads for the Event
 types](/v3/activity/events/types/), with the exception of [the original `push`
-event](http://developer.github.com/v3/activity/events/types/#pushevent),
+event](https://developer.github.com/v3/activity/events/types/#pushevent),
 which has a more detailed payload.
 
 ## Wildcard Event

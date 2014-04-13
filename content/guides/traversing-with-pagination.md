@@ -12,20 +12,20 @@ Most of the time, you might even find that you're asking for _too much_ informat
 and in order to keep our servers happy, the API will automatically [paginate the requested items][pagination].
 
 In this guide, we'll make some calls to the GitHub Search API, and iterate over
-the results using pagination. You can find the complete source code for this project 
-in the [platform-samples][platform samples] repository. 
+the results using pagination. You can find the complete source code for this project
+in the [platform-samples][platform samples] repository.
 
 ## Basics of Pagination
 
 To start with, it's important to know a few facts about receiving paginated items:
 
 1. Different API calls respond with different defaults. For example, a call to
-[list GitHub's public repositories](http://developer.github.com/v3/repos/#list-all-public-repositories)
+[list GitHub's public repositories](https://developer.github.com/v3/repos/#list-all-public-repositories)
 provides paginated items in sets of 30, whereas a call to the GitHub Search API
 provides items in sets of 100
 2. You can specify how many items to receive (up to a maximum of 100); but,
-3. For technical reasons, not every endpoint behaves the same. For example, 
-[events](http://developer.github.com/v3/activity/events/) won't let you set a maximum for items to receive.
+3. For technical reasons, not every endpoint behaves the same. For example,
+[events](https://developer.github.com/v3/activity/events/) won't let you set a maximum for items to receive.
 Be sure to read the documentation on how to handle paginated results for specific endpoints.
 
 Information about pagination is provided in [the Link header](http://tools.ietf.org/html/rfc5988)
@@ -50,7 +50,7 @@ Nice!
 Keep in mind that you should **always** rely on these link relations provided
 to you. Don't try to guess or construct your own URL. Some API calls, like [listing
 commits on a repository][listing commits], use pagination results that are based
-on SHA values, not numbers. 
+on SHA values, not numbers.
 
 ### Navigating through the pages
 
@@ -106,7 +106,7 @@ pass in our [personal access token][personal token]:
     # Instead, set and test environment variables, like below
     client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
 
-Next, we'll execute the search, using Octokit's `search_code` method. Unlike 
+Next, we'll execute the search, using Octokit's `search_code` method. Unlike
 using `curl`, we can also immediately retrieve the number of results, so let's
 do that:
 
@@ -133,7 +133,7 @@ this information to the user:
     puts "There are #{total_count} results, on #{number_of_pages} pages!"
 
 Finally, let's iterate through the results. You could do this with a loop `for i in 1..number_of_pages.to_i`,
-but instead, let's follow the `rels[:next]` headers to retrieve information from 
+but instead, let's follow the `rels[:next]` headers to retrieve information from
 each page. For the sake of simplicity, let's just grab the file path of the first
 result from each page. To do this, we'll need a loop; and at the end of every loop,
 we'll retrieve the data set for the next page by following the `rels[:next]` information.
@@ -179,14 +179,14 @@ your code should remain intact:
 
 ## Constructing Pagination Links
 
-Normally, with pagination, your goal isn't to concatenate all of the possible 
+Normally, with pagination, your goal isn't to concatenate all of the possible
 results, but rather, to produce a set of navigation, like this:
 
 ![Sample of pagination links](/images/pagination_sample.png)
 
 Let's sketch out a micro-version of what that might entail.
 
-From the code above, we already know we can get the `number_of_pages` in the 
+From the code above, we already know we can get the `number_of_pages` in the
 paginated results from the first call:
 
     #!ruby
@@ -230,13 +230,13 @@ individual page, by passing the `:page` option:
     #!ruby
     clicked_results = client.search_code('addClass user:mozilla', :page => random_page)
 
-If we wanted to get fancy, we could also grab the previous and next pages, in 
+If we wanted to get fancy, we could also grab the previous and next pages, in
 order to generate links for back (`<<`) and foward (`>>`) elements:
 
     #!ruby
     prev_page_href = client.last_response.rels[:prev] ? client.last_response.rels[:prev].href : "(none)"
     next_page_href = client.last_response.rels[:next] ? client.last_response.rels[:next].href : "(none)"
-    
+
     puts "The prev page link is #{prev_page_href}"
     puts "The next page link is #{next_page_href}"
 
@@ -245,4 +245,4 @@ order to generate links for back (`<<`) and foward (`>>`) elements:
 [octokit.rb]: https://github.com/octokit/octokit.rb
 [personal token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
 [hypermedia-relations]: https://github.com/octokit/octokit.rb#pagination
-[listing commits]: http://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
+[listing commits]: https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository

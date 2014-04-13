@@ -278,7 +278,7 @@ Triggered on push to a GitHub Pages enabled branch (`gh-pages` for project pages
 
 Key | Type | Description
 ----|------|------------
-`build` | `object` | The [page build](http://developer.github.com/v3/repos/pages/#list-pages-builds) itself.
+`build` | `object` | The [page build](https://developer.github.com/v3/repos/pages/#list-pages-builds) itself.
 
 
 ## PublicEvent

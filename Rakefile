@@ -1,5 +1,4 @@
 require 'nanoc3/tasks'
-require 'html/proofer'
 
 task :default => [:test]
 
@@ -10,6 +9,7 @@ end
 
 desc "Test the output"
 task :test => [:clean, :remove_output_dir, :compile] do
+  require 'html/proofer'
   HTML::Proofer.new("./output").run
 end
 

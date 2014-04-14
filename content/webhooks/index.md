@@ -33,7 +33,7 @@ A number of services have been integrated through the open source
 [creating a hook](/webhooks/creating/), the `:name` parameter must refer to one of
 these services.  A generic
 [Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
-service is available that can configured to trigger for any of the available
+service is available that can be configured to trigger for any of the available
 [events](#events).
 
 Documentation for all available service hooks can be found in the

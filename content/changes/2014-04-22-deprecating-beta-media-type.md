@@ -14,4 +14,4 @@ As always, if you have any questions, please [get in touch][contact].
 [v3-default]: /changes/2014-01-07-upcoming-change-to-default-media-type/
 [beta]: /v3/versions/#beta
 [differences]: /v3/versions/#differences-from-beta-version
-[contact]: https://github.com/contact?form[subject]=Deprecating+the+beta+media+type
+[contact]: https://github.com/contact?form[subject]=API:+Deprecating+the+beta+media+type

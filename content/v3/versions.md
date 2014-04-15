@@ -3,9 +3,9 @@ title: Versions | GitHub API
 ---
 # Versions
 
-There are two stable versions of the GitHub API: [beta](#beta) and [v3](#v3). There are just a few [differences between these two versions](#differences-from-beta-version).
+There are two stable versions of the GitHub API: the [v3](#v3) version and the legacy [beta](#beta) version. There are just a few [differences between these two versions](#differences-from-beta-version).
 
-By default, all requests receive the beta version. Soon, v3 will become the default version. (Check out the [blog post](/changes/2014-01-07-upcoming-change-to-default-media-type/) for details.) We encourage you to [request a specific version via the `Accept` header](/v3/media/#beta-v3-and-the-future).
+By default, all requests receive the v3 version. We encourage you to [request a specific version via the `Accept` header](/v3/media/#request-specific-version).
 
 # v3
 
@@ -94,9 +94,17 @@ The recommendations below will help you prepare your application for the next ma
 
 # beta
 
-The [beta API](/v3) is now stable and unchangeable. Please [file a support issue][support] if you have problems.
+<div class="alert">
+  <p>
+    <strong>Note</strong>: We recommend using the <a href="#v3">v3 API</a>
+    instead of the legacy beta version of the API. We will eventually retire the
+    beta version, but we have no official retirement date to annouce at the
+    moment. When the time comes, rest assured that we'll announce the retirement
+    with plenty of notice.
+  </p>
+</div>
 
-Starting April 15, 2014, the [beta version will no longer be the _default_ version](/changes/2014-01-07-upcoming-change-to-default-media-type/). However, we expect to continue supporting the beta version for a while. We will eventually retire the beta version, but we have no official retirement date to annouce at the moment. When the time comes, rest assured that we'll announce the retirement with plenty of notice.
+The [beta API](/v3) is stable and unchangeable. Please [file a support issue][support] if you have problems.
 
 ## Breaking beta changes
 

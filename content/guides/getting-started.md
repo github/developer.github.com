@@ -60,7 +60,7 @@ ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
 X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 57
 X-RateLimit-Reset: 1352660008
-X-GitHub-Media-Type: github.beta
+X-GitHub-Media-Type: github.v3
 Vary: Accept
 Cache-Control: public, max-age=60, s-maxage=60
 X-Content-Type-Options: nosniff
@@ -82,7 +82,7 @@ There are a few interesting bits in the response headers. As expected, the
 Any headers beginning with `X-` are custom headers, and are not included in the
 HTTP spec. Let's take a look at a few of them:
 
-* `X-GitHub-Media-Type` has a value of `github.beta`. This lets us know the [media type][media types]
+* `X-GitHub-Media-Type` has a value of `github.v3`. This lets us know the [media type][media types]
 for the response. Media types have helped us version our output in API v3. We'll
 talk more about that later.
 * Take note of the `X-RateLimit-Limit` and `X-RateLimit-Remaining` headers. This

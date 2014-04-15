@@ -112,7 +112,7 @@ Here's the complete list of updated methods:
 [Repository keys]: /v3/repos/keys/#list
 [Repository labels]: /v3/issues/labels/#list-all-labels-for-this-repository
 [Team repositories]: /v3/orgs/teams/#list-team-repos
-[User emails]: /v3/users/emails/#future-response
+[User emails]: /v3/users/emails/#list-email-addresses-for-a-user
 [User keys]: /v3/users/keys/#list-public-keys-for-a-user
 [Issue labels]:/v3/issues/labels/#list-labels-on-an-issue
 [Milestone labels]: /v3/issues/labels/#get-labels-for-every-issue-in-a-milestone

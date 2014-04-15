@@ -105,7 +105,7 @@ The [beta API](/v3) is deprecated. Its current functionality is stable and uncha
     The beta media type differs from the v3 media type in
     <a href="#differences-from-beta-version">just a few places</a>. In most
     cases, migrating an application from the beta media type to the v3 media
-    type requires minimal effort.
+    type is smooth and painless.
   </p>
   <p>
     We will eventually retire the beta version, but we have no official

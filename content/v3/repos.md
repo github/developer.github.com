@@ -59,12 +59,6 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>master_branch</code> attribute. API clients should instead use the <code>default_branch</code> attribute to obtain the repository's default branch.
-  </p>
-</div>
-
 ## List all public repositories
 
 This provides a dump of every public repository, in the order that they were created.
@@ -143,12 +137,6 @@ Name | Type | Description
 The `parent` and `source` objects are present when the repository is a fork.
 `parent` is the repository this repository was forked from,
 `source` is the ultimate source for the network.
-
-<div class="alert">
-  <p>
-    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>master_branch</code> attribute. API clients should instead use the <code>default_branch</code> attribute to obtain the repository's default branch.
-  </p>
-</div>
 
 <%= headers 200 %>
 <%= json :full_repo %>

@@ -98,13 +98,19 @@ The [beta API](/v3) is deprecated. Its current functionality is stable and uncha
 
 <div class="alert">
   <p>
-
     <strong>Note</strong>: We recommend using the <a href="#v3">v3 API</a>
-    instead of the deprecated beta version of the API. We will eventually retire
-    the beta version, but we have no official retirement date to annouce at the
-    moment. When the time comes, rest assured that we'll announce the retirement
-    with plenty of notice.
-
+    instead of the deprecated beta version of the API.
+  </p>
+  <p>
+    The beta media type differs from the v3 media type in
+    <a href="#differences-from-beta-version">just a few places</a>. In most
+    cases, migrating an application from the beta media type to the v3 media
+    type requires minimal effort.
+  </p>
+  <p>
+    We will eventually retire the beta version, but we have no official
+    retirement date to annouce at the moment. When the time comes, rest assured
+    that we'll announce the retirement with plenty of notice.
   </p>
 </div>
 

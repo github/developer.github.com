@@ -70,36 +70,6 @@ authenticated through basic auth or OAuth with the user scope.</p>
 
 <h3 id="response">Response</h3>
 
-<div class="alert">
-  <p>
-    <strong>Deprecated</strong>: This response format is deprecated.
-    The API will remove support for this response format in the future.
-  </p>
-  <p>
-    We recommend that you start requesting the new response format as described
-    in the <a href="#future-response">Future Response</a> section below.
-  </p>
-</div>
-
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre><code class="language-javascript"><span class="p">[</span>
-  <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-  <span class="s2">"support@github.com"</span>
-<span class="p">]</span></code></pre>
-<p><br></p>
-
-<h4 id="future-response">Future Response</h4>
-
-<p>In the final version of the API, this method will return an array of hashes
-with extended information for each email address indicating if the address has
-been verified and if it’s the user’s primary email address for GitHub.</p>
-
-<p>Until API v3 is finalized, use the <code>application/vnd.github.v3</code>
-<a href="/v3/media">media type</a> to get this response format.</p>
-
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
@@ -133,8 +103,16 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript"><span class="p">[</span>
-  <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-  <span class="s2">"support@github.com"</span>
+  <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
+    <span class="s2">"primary"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"verified"</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
+    <span class="s2">"primary"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"verified"</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
 <h2 id="delete-email-addresses">Delete email address(es)</h2>

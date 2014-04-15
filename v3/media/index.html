@@ -55,8 +55,7 @@
       <h1 id="media-types">Media Types</h1>
 
 <ul id="markdown-toc">
-<li><a href="#beta-v3-and-the-future">Beta, v3, and the Future</a></li>
-  <li><a href="#comment-body-properties">Comment Body Properties</a></li>
+<li><a href="#comment-body-properties">Comment Body Properties</a></li>
   <li><a href="#git-blob-properties">Git Blob Properties</a></li>
   <li><a href="#commits-commit-comparison-and-pull-requests">Commits, Commit comparison, and Pull Requests</a></li>
 </ul><p>Custom media types are used in the API to let consumers choose the format
@@ -76,9 +75,19 @@ formats that other resources don’t.</p>
 application/vnd.github+json
 </code></pre>
 
-<p>Neither of these specify a <a href="/v3/versions">version</a>, so you will always get the current default
-JSON representation of resources.  If you’re building an application and
-care about the stability of the API, specify a version like so:</p>
+<p>Neither of these specify a <a href="/v3/versions">version</a>, so you will always get the
+current default JSON representation of resources.</p>
+
+<div class="alert" id="request-specific-version">
+  <p>
+    <strong>Important</strong>: The default version of the API may change in the
+    future. If you're building an application and care about the stability of
+    the API, be sure to request a specific version in the <code>Accept</code>
+    header as shown in the examples below.
+  </p>
+</div>
+
+<p>You can specify a version like so:</p>
 
 <pre><code>application/vnd.github.v3+json
 </code></pre>
@@ -94,33 +103,18 @@ for the <code>X-GitHub-Media-Type</code> header:</p>
 
 <pre><code>$ curl https://api.github.com/users/technoweenie -I
 HTTP/1.1 200 OK
-X-GitHub-Media-Type: github.beta
+X-GitHub-Media-Type: github.v3
 
 $ curl https://api.github.com/users/technoweenie -I \
   -H "Accept: application/vnd.github.full+json"
 HTTP/1.1 200 OK
-X-GitHub-Media-Type: github.beta; param=full; format=json
+X-GitHub-Media-Type: github.v3; param=full; format=json
 
 $ curl https://api.github.com/users/technoweenie -I \
   -H "Accept: application/vnd.github.v3.full+json"
 HTTP/1.1 200 OK
 X-GitHub-Media-Type: github.v3; param=full; format=json
 </code></pre>
-
-<h2 id="beta-v3-and-the-future">Beta, v3, and the Future</h2>
-
-<p>If you don’t specify a version in the <code>Accept</code> header, you’ll
-get the <a href="/v3/versions#beta">beta version</a> (as shown above) by default.</p>
-
-<p>Soon, <a href="/v3/versions#v3">v3</a> will become the default version. (Check out
-the <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">blog post</a> for
-details.) We recommend that you start using v3 now. To get that version today,
-explicitly request the API v3 media type in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<p>Check out <a href="/v3/versions">version docs</a> for the <a href="/v3/versions#differences-from-beta-version">full list of differences</a> between beta and v3.</p>
 
 <h2 id="comment-body-properties">Comment Body Properties</h2>
 

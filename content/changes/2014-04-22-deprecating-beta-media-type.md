@@ -9,8 +9,6 @@ Now that the GitHub API is [serving the v3 media type by default][v3-default], w
 
 We will eventually remove support for the beta media type, but we have no official retirement date to annouce at the moment. When the time comes, rest assured that we'll announce the retirement with plenty of notice. In the meantime, existing API clients that rely on the beta media type should start making plans to migrate to the v3 media type. The beta media type differs from the v3 media type in [just a few places][differences]. In most cases, migrating an application from the beta media type to the v3 media type is smooth and painless.
 
-New API clients should use the v3 media type, and we recommend that you [explicitly declare your dependence on it](/v3/media/#request-specific-version).
-
 As always, if you have any questions, please [get in touch][contact].
 
 [v3-default]: /changes/2014-01-07-upcoming-change-to-default-media-type/

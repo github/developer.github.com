@@ -3,7 +3,7 @@ title: Versions | GitHub API
 ---
 # Versions
 
-There are two stable versions of the GitHub API: the [v3](#v3) version and the legacy [beta](#beta) version. There are just a few [differences between these two versions](#differences-from-beta-version).
+There are two stable versions of the GitHub API: the [v3](#v3) version and the deprecated [beta](#beta) version. There are just a few [differences between these two versions](#differences-from-beta-version).
 
 By default, all requests receive the v3 version. We encourage you to [request a specific version via the `Accept` header](/v3/media/#request-specific-version).
 
@@ -92,19 +92,21 @@ The recommendations below will help you prepare your application for the next ma
 : Recommendation: Do not use this attribute. It is obsolete.
 
 
-# beta
+# beta (Deprecated) {#beta}
+
+The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.
 
 <div class="alert">
   <p>
+
     <strong>Note</strong>: We recommend using the <a href="#v3">v3 API</a>
-    instead of the legacy beta version of the API. We will eventually retire the
-    beta version, but we have no official retirement date to annouce at the
+    instead of the deprecated beta version of the API. We will eventually retire
+    the beta version, but we have no official retirement date to annouce at the
     moment. When the time comes, rest assured that we'll announce the retirement
     with plenty of notice.
+
   </p>
 </div>
-
-The [beta API](/v3) is stable and unchangeable. Please [file a support issue][support] if you have problems.
 
 ## Breaking beta changes
 

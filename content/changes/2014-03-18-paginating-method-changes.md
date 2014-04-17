@@ -96,7 +96,7 @@ Here's the complete list of updated methods:
 
 #### [User emails][] (v3 media type only)
 
-    GET /users/emails
+    GET /user/emails
 
 #### [User keys][]
 

@@ -1,13 +1,13 @@
 ---
 kind: change
 title: New user content domains
-created_at: 2014-04-15
+created_at: 2014-04-21
 author_name: azizshamim
 ---
 
 ## Securing your content
 
-We've moved user generated content to be served from multiple subdomains of `githubusercontent.com`.
+A couple of different cross-domain vulnerabilities were highlighted as a result of our [Bounty program](https://bounty.github.com). In order to better isolate user content, we've moved user generated content to be served from multiple subdomains of `githubusercontent.com`.
 
 ### Older links
 
@@ -20,7 +20,9 @@ This means that some security systems like web proxies may not recognize the dom
 ### What's affected
 * raw.github.com : raw links to the content from your repository
 * embed.github.com : embedded renders of maps and 3d models and other cool technohotness
-* render.github.com
+* render.github.com : renders the embedded content
 * f.cloud.github.com : all those amazing gifs you use in PR and Issues
 
 *Happy and Safe GitHubbing!*
+As always, if you have any questions, please [get in touch][contact]
+[contact]: https://github.com/contact?form[subject]=Changes+to+user+content+domains

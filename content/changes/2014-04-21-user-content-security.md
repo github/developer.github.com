@@ -24,5 +24,6 @@ This means that some security systems like web proxies may not recognize the dom
 * f.cloud.github.com : all those amazing gifs you use in PR and Issues
 
 *Happy and Safe GitHubbing!*
-As always, if you have any questions, please [get in touch][contact]
+As always, if you have any questions, please [get in touch][contact].
+
 [contact]: https://github.com/contact?form[subject]=Changes+to+user+content+domains

@@ -19,10 +19,11 @@ This means that some security systems like web proxies may not recognize the dom
 
 ### What's affected
 * raw.github.com : raw links to the content from your repository
-* embed.github.com : embedded renders of maps and 3d models and other cool technohotness
+* embed.github.com : embedded renders of maps and 3D models and other cool technohotness
 * render.github.com : renders the embedded content
-* f.cloud.github.com : all those amazing gifs you use in PR and Issues
+* f.cloud.github.com : all those amazing gifs you use in Pull Requests and Issues
 
 *Happy and Safe GitHubbing!*
-As always, if you have any questions, please [get in touch][contact]
+As always, if you have any questions, please [get in touch][contact].
+
 [contact]: https://github.com/contact?form[subject]=Changes+to+user+content+domains

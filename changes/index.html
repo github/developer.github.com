@@ -42,6 +42,31 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-04-22-deprecating-beta-media-type/">
+  <h2 class="title">
+  <a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 22, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph"><a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>Now that the GitHub API is <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">serving the v3 media type by default</a>, we are deprecating the legacy <a href="/v3/versions/#beta">beta media type</a>.</p>
+
+<p>We will eventually remove support for the beta media type, but we have no official retirement date to annouce at the moment. When the time comes, rest assured that we’ll announce the retirement with plenty of notice. In the meantime, existing API clients that rely on the beta media type should start making plans to migrate to v3. The beta media type differs from v3 in <a href="/v3/versions/#differences-from-beta-version">just a few places</a>. In most cases, migrating an application from the beta media type to the v3 media type is smooth and painless.</p>
+
+<p>As always, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=API:+Deprecating+the+beta+media+type">get in touch</a>.</p>
+</div>
+
 <div class="change" id="/changes/2014-04-10-deployment-api-preview-extension/">
   <h2 class="title">
   <a href="/changes/2014-04-10-deployment-api-preview-extension/">Extending the preview period for the Deployments API</a>
@@ -299,7 +324,7 @@ run into trouble, feel free to <a href="https://github.com/contact?form%5Bsubjec
 
 <h4 id="issue-labels"><a href="/v3/issues/labels/#list-labels-on-an-issue">Issue labels</a></h4>
 
-<pre><code>GET /repos/:owner/:repo/labels/:number/labels
+<pre><code>GET /repos/:owner/:repo/issues/:number/labels
 </code></pre>
 
 <h4 id="milestone-labels"><a href="/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone">Milestone labels</a></h4>
@@ -380,7 +405,7 @@ run into trouble, feel free to <a href="https://github.com/contact?form%5Bsubjec
 <h4 id="user-emails-v3-media-type-only">
 <a href="/v3/users/emails/#list-email-addresses-for-a-user">User emails</a> (v3 media type only)</h4>
 
-<pre><code>GET /users/:user/emails
+<pre><code>GET /user/emails
 </code></pre>
 
 <h4 id="user-keys"><a href="/v3/users/keys/#list-public-keys-for-a-user">User keys</a></h4>
@@ -1802,6 +1827,35 @@ but we can’t wait to see what others can do with this information.</p>
 <p>Enjoy!</p>
 </div>
 
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca"><a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
+</div>
+
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
@@ -1849,35 +1903,6 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
-</div>
-
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca"><a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
 </div>
 
 <div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
@@ -2916,6 +2941,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type<br /><span class="date">April 22, 2014</span></a></li>
+
   <li><a href="/changes/2014-04-10-deployment-api-preview-extension/">Extending the preview period for the Deployments API<br /><span class="date">April 10, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-09-reminder-about-default-media-type-change/">Reminder: Default media type will change on April 15<br /><span class="date">April 9, 2014</span></a></li>
@@ -2929,8 +2956,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API<br /><span class="date">March 27, 2014</span></a></li>
 
   <li><a href="/changes/2014-03-18-paginating-method-changes/">Pagination changes for some resource lists<br /><span class="date">March 18, 2014</span></a></li>
-
-  <li><a href="/changes/2014-03-12-page-build-event-for-webhooks/">Page Build Event for Webhooks<br /><span class="date">March 12, 2014</span></a></li>
 
 </ul>
 

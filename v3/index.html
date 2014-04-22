@@ -75,12 +75,11 @@
   <li><a href="#timezones">Timezones</a></li>
 </ul><h2 id="current-version">Current Version</h2>
 
-<p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>v3</strong> and <strong>beta</strong>. By default, all requests receive the v3 version:</p>
+<p>By default, all requests receive the <strong>v3</strong> <a href="/v3/versions">version</a> of the API.
+We encourage you to <a href="/v3/media/#request-specific-version">explicitly request this version via the <code>Accept</code> header</a>.</p>
 
 <pre><code>Accept: application/vnd.github.v3+json
 </code></pre>
-
-<p>We encourage you to <a href="/v3/media/#request-specific-version">request a specific version via the <code>Accept</code> header</a>.</p>
 
 <h2 id="schema">Schema</h2>
 
@@ -163,7 +162,7 @@ and <code>:repo</code> parameters in the path while <code>:state</code> is passe
 string.</p>
 
 <p>For POST, PATCH, PUT, and DELETE requests, parameters not included in the URL should be encoded as JSON
-with a Content-Type of ‘application/x-www-form-urlencoded’:</p>
+with a Content-Type of ‘application/json’:</p>
 
 <pre class="terminal">
 $ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/authorizations

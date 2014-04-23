@@ -11,7 +11,7 @@ The [GitHub Bug Bounty program](https://bounty.github.com) recently identified a
 
 In order to better isolate your content from potentially malicious content uploaded by other users (e.g., content that might contain Cross-Site Scripting or other embedded attacks), we now serve user-generated content from subdomains of **githubusercontent.com**. This content is no longer served from subdomains of **github.com**.
 
-### What's affected
+## What's affected
 
 This change affects the following subdomains:
 
@@ -22,11 +22,11 @@ This change affects the following subdomains:
 
 Content formerly served by these subdomains is now served from subdomains of `githubusercontent.com`.
 
-### Older links
+## Older links
 
 If you have old links to this content, don't worry: as of today, we're forcing the old domains to redirect to the new domains. Your existing links should continue to work automatically in your browser. If you're using a URL from Gist or GitHub to directly access user-generated content via `curl`, `wget`, or a library (like [HTTParty](https://github.com/jnunemaker/httparty)), be sure to configure that tool to follow the redirect.
 
-### Your proxies or filters
+## Your proxies or filters
 
 Some security systems (web proxies, for example) may not recognize the `githubusercontent.com` domain. In those cases, you may need update your proxies and security software accordingly.
 

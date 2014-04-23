@@ -11,7 +11,7 @@ A couple of different cross-domain vulnerabilities were highlighted as a result 
 
 ### Older links
 
-As of today, we're forcing the old domains to redirect to the new domains. Don't worry, your old links should still work in the browser and if you're using a URL from Gist or GitHub to directly access raw content, configure your `curl`, `wget` or library (like [HTTParty](https://github.com/jnunemaker/httparty)) application to follow the redirect.
+If you have old links to this content, don't worry: as of today, we're forcing the old domains to redirect to the new domains. Your existing links should continue to work automatically in your browser. If you're using a URL from Gist or GitHub to directly access user-generated content via `curl`, `wget`, or a library (like [HTTParty](https://github.com/jnunemaker/httparty)), be sure to configure that tool to follow the redirect.
 
 ### Your proxies or filters
 

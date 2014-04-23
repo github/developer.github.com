@@ -30,8 +30,8 @@ If you have old links to this content, don't worry: as of today, we're forcing t
 
 Some security systems (web proxies, for example) may not recognize the **githubusercontent.com** domain. In those cases, you may need update your proxies and security software accordingly.
 
-*Happy and Safe GitHubbing!*
-
 As always, if you have any questions, please [get in touch][contact].
+
+*Happy and safe GitHubbing!*
 
 [contact]: https://github.com/contact?form[subject]=Changes+to+user+content+domains

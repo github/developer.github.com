@@ -18,10 +18,10 @@ As of today, we're forcing the old domains to redirect to the new domains. Don't
 This means that some security systems like web proxies may not recognize the domain `githubusercontent.com`. You might need update your proxies and security software accordingly.
 
 ### What's affected
-* raw.github.com : The raw content from your repository.
-* embed.github.com : Embed allows users to embed rich GitHub content in other places.
-* render.github.com : Render displays rich content on GitHub.com.
-* f.cloud.github.com : All those amazing gifs you use in Pull Requests and Issues
+* raw.github.com : Serves raw file content from your repository.
+* embed.github.com : Allows users to embed rich GitHub content in other places.
+* render.github.com : Displays rich content on GitHub.com.
+* f.cloud.github.com : Hosts all those amazing gifs you use in Pull Requests and Issues.
 
 *Happy and Safe GitHubbing!*
 As always, if you have any questions, please [get in touch][contact].

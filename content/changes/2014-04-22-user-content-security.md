@@ -15,12 +15,12 @@ In order to better isolate your content from potentially malicious content uploa
 
 This change affects the following subdomains:
 
-* raw.github.com : Serves raw file content from your repository.
-* embed.github.com : Allows users to embed rich GitHub content in other places.
-* render.github.com : Displays rich content on GitHub.com.
-* f.cloud.github.com : Hosts all those amazing gifs you use in Pull Requests and Issues.
+* **raw.github.com** : Serves raw file content from your repository.
+* **embed.github.com** : Allows users to embed rich GitHub content in other places.
+* **render.github.com** : Displays rich content on GitHub.com.
+* **f.cloud.github.com** : Hosts all those amazing gifs you use in Pull Requests and Issues.
 
-Content formerly served by these subdomains is now served from subdomains of `githubusercontent.com`.
+Content formerly served by these subdomains is now served from subdomains of **githubusercontent.com**.
 
 ## Older links
 
@@ -28,7 +28,7 @@ If you have old links to this content, don't worry: as of today, we're forcing t
 
 ## Your proxies or filters
 
-Some security systems (web proxies, for example) may not recognize the `githubusercontent.com` domain. In those cases, you may need update your proxies and security software accordingly.
+Some security systems (web proxies, for example) may not recognize the **githubusercontent.com** domain. In those cases, you may need update your proxies and security software accordingly.
 
 *Happy and Safe GitHubbing!*
 

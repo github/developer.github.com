@@ -15,7 +15,7 @@ As of today, we're forcing the old domains to redirect to the new domains. Don't
 
 ### Your proxies or filters
 
-This means that some security systems like web proxies may not recognize the domain `githubusercontent.com`. You might need update your proxies and security software accordingly.
+Some security systems (web proxies, for example) may not recognize the `githubusercontent.com` domain. In those cases, you may need update your proxies and security software accordingly.
 
 ### What's affected
 

@@ -7,14 +7,20 @@ author_name: azizshamim
 
 ## Securing your content
 
-The [GitHub Bug Bounty program](https://bounty.github.com) recently identified a few cross-domain vulnerabilities, and we've shipped improvements today to address those issues.  In order to better isolate user content from possibly harmful content uploaded by other users that might contain embedded Cross Site Scripting (XSS) or other embedded attacks, we've moved user generated content that we deliver raw to be served from multiple sub-domains of **githubusercontent.com**.
+The [GitHub Bug Bounty program](https://bounty.github.com) recently identified a few cross-domain vulnerabilities related to user-generated content, and we've shipped improvements today to address those issues.
+
+In order to better isolate your content from potentially malicious content uploaded by other users (e.g., content that might contain Cross-Site Scripting or other embedded attacks), we now serve user-generated content from subdomains of **githubusercontent.com**. This content is no longer served from subdomains of **github.com**.
 
 ### What's affected
+
+This change affects the following subdomains:
 
 * raw.github.com : Serves raw file content from your repository.
 * embed.github.com : Allows users to embed rich GitHub content in other places.
 * render.github.com : Displays rich content on GitHub.com.
 * f.cloud.github.com : Hosts all those amazing gifs you use in Pull Requests and Issues.
+
+Content formerly served by these subdomains is now served from subdomains of `githubusercontent.com`.
 
 ### Older links
 

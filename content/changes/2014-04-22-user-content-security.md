@@ -7,7 +7,7 @@ author_name: azizshamim
 
 ## Securing your content
 
-A couple of different cross-domain vulnerabilities were highlighted as a result of our [Bounty program](https://bounty.github.com). In order to better isolate user content from possibly harmful content uploaded by other users that might contain embedded Cross Site Scripting (XSS) or other embedded attacks, we've moved user generated content that we deliver raw to be served from multiple sub-domains of **githubusercontent.com**.
+The [GitHub Bug Bounty program](https://bounty.github.com) recently identified a few cross-domain vulnerabilities, and we've shipped improvements today to address those issues.  In order to better isolate user content from possibly harmful content uploaded by other users that might contain embedded Cross Site Scripting (XSS) or other embedded attacks, we've moved user generated content that we deliver raw to be served from multiple sub-domains of **githubusercontent.com**.
 
 ### Older links
 

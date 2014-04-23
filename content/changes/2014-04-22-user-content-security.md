@@ -9,6 +9,13 @@ author_name: azizshamim
 
 The [GitHub Bug Bounty program](https://bounty.github.com) recently identified a few cross-domain vulnerabilities, and we've shipped improvements today to address those issues.  In order to better isolate user content from possibly harmful content uploaded by other users that might contain embedded Cross Site Scripting (XSS) or other embedded attacks, we've moved user generated content that we deliver raw to be served from multiple sub-domains of **githubusercontent.com**.
 
+### What's affected
+
+* raw.github.com : Serves raw file content from your repository.
+* embed.github.com : Allows users to embed rich GitHub content in other places.
+* render.github.com : Displays rich content on GitHub.com.
+* f.cloud.github.com : Hosts all those amazing gifs you use in Pull Requests and Issues.
+
 ### Older links
 
 If you have old links to this content, don't worry: as of today, we're forcing the old domains to redirect to the new domains. Your existing links should continue to work automatically in your browser. If you're using a URL from Gist or GitHub to directly access user-generated content via `curl`, `wget`, or a library (like [HTTParty](https://github.com/jnunemaker/httparty)), be sure to configure that tool to follow the redirect.
@@ -16,13 +23,6 @@ If you have old links to this content, don't worry: as of today, we're forcing t
 ### Your proxies or filters
 
 Some security systems (web proxies, for example) may not recognize the `githubusercontent.com` domain. In those cases, you may need update your proxies and security software accordingly.
-
-### What's affected
-
-* raw.github.com : Serves raw file content from your repository.
-* embed.github.com : Allows users to embed rich GitHub content in other places.
-* render.github.com : Displays rich content on GitHub.com.
-* f.cloud.github.com : Hosts all those amazing gifs you use in Pull Requests and Issues.
 
 *Happy and Safe GitHubbing!*
 

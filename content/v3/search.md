@@ -154,6 +154,8 @@ The `q` search term can also contain any combination of the supported code searc
 * [`user` or `repo`](https://help.github.com/articles/searching-code#users-organizations-and-repositories)
     Limits searches to a specific user or repository.
 
+For a valid search, your query must include at least one user, organization, or repository.
+
 <h4 id="code-search-example">Example</h4>
 
 Suppose you want to find the definition of the `addClass` function inside

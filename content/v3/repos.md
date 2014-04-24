@@ -83,8 +83,9 @@ Name | Type | Description
 
 ## Create
 
-Create a new repository for the authenticated user. OAuth users must supply
-`repo` scope.
+Create a new repository for the authenticated user. (OAuth users must supply
+`public_repo` scope or `repo` scope to create a public repository. OAuth users
+must supply `repo` scope to create a private repository.)
 
     POST /user/repos
 

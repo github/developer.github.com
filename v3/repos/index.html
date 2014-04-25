@@ -293,8 +293,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create">Create</h2>
 
-<p>Create a new repository for the authenticated user. OAuth users must supply
-<code>repo</code> scope.</p>
+<p>Create a new repository for the authenticated user.</p>
 
 <pre><code>POST /user/repos
 </code></pre>
@@ -305,7 +304,16 @@ be a member of the specified organization.</p>
 <pre><code>POST /orgs/:org/repos
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3 id="oauth-scope-requirements">OAuth scope requirements</h3>
+
+<p>When using <a href="/v3/oauth/#scopes">OAuth</a>, authorizations must include:</p>
+
+<ul>
+<li>
+<code>public_repo</code> scope or <code>repo</code> scope to create a public repository</li>
+  <li>
+<code>repo</code> scope to create a private repository</li>
+</ul><h3 id="input">Input</h3>
 
 <table>
 <thead><tr>

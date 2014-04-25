@@ -30,7 +30,7 @@ When you need the full contents of the file, simply make a request to the URL sp
 
 ### New "truncated" attribute
 
-In this small example payload, you'll notice the new **truncated** attribute has been added to each file's payload. It is a boolean attribute indicating if the content attribute's value has been truncated for this request.
+In the example JSON excerpt above, you'll notice a new **truncated** attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
 
 If you have any questions, please [get in touch][contact].
 

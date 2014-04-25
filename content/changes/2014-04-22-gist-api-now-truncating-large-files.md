@@ -1,6 +1,6 @@
 ---
 kind: change
-title: "Gist API now truncates large files"
+title: "Changes to Gist API response for large files"
 created_at: 2014-04-22
 author_name: leongersing
 ---

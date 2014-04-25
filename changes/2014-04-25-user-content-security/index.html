@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Forking to Organizations</title>
+  <title>New user content domains</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -41,50 +41,58 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-11-27-forking-to-organizations/">
+      <div class="change" id="/changes/2014-04-25-user-content-security/">
 <h2 class="title">
-  <a href="/changes/2012-11-27-forking-to-organizations/">Forking to Organizations</a>
+  <a href="/changes/2014-04-25-user-content-security/">New user content domains</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    November 27, 2012
+    April 25, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie"/>
-      <a href="https://github.com/technoweenie">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/azizshamim.png" alt="Avatar for azizshamim"/>
+      <a href="https://github.com/azizshamim">azizshamim</a>
   </li>
 </ul>
 </div>
 
 
-<p>We made a slight change to the way you fork a repository.  By default, you
-can fork my repository through an HTTP POST to the repository’s fork resource.</p>
+<h2 id="securing-your-content">Securing your content</h2>
 
-<pre><code>$ curl -X POST https://api.github.com/repos/technoweenie/faraday/forks
-</code></pre>
+<p>The <a href="https://bounty.github.com">GitHub Bug Bounty program</a> recently identified a few cross-domain vulnerabilities related to user-generated content, and we’ve shipped improvements today to address those issues.</p>
 
-<p>This repository forks to your personal account.  However, there are cases when
-you want to fork to one of your organizations instead.  The previous method
-required a <code>?org</code> query parameter:</p>
+<p>In order to better isolate your content from potentially malicious content uploaded by other users (e.g., content that might contain Cross-Site Scripting or other embedded attacks), we now serve user-generated content from subdomains of <strong>githubusercontent.com</strong>. This content is no longer served from subdomains of <strong>github.com</strong>.</p>
 
-<pre><code>$ curl -X POST /repos/technoweenie/faraday/forks?org=mycompany
-</code></pre>
+<h2 id="whats-affected">What’s affected?</h2>
 
-<p>Query parameters on POST requests are unusual in APIs, and definitely
-inconsistent with the rest of the GitHub API.  You should be able to post a
-JSON body like every other POST endpoint.  Now, you can!  Only, now we’re
-calling the field <code>organization</code>.</p>
+<p>This change affects the following subdomains:</p>
 
-<pre><code>$ curl /repos/technoweenie/faraday/forks?org=mycompany \
-  -d '{"organization": "mycompany"}'
-</code></pre>
+<ul>
+<li>
+<strong>raw.github.com</strong> : Serves raw file content from your repository.</li>
+  <li>
+<strong>embed.github.com</strong> : Allows users to embed rich GitHub content on other sites.</li>
+  <li>
+<strong>render.github.com</strong> : Displays rich content on GitHub.com.</li>
+  <li>
+<strong>f.cloud.github.com</strong> : Hosts all those amazing gifs you use in Pull Requests and Issues.</li>
+</ul><p>Content formerly served by these subdomains is now served from subdomains of <strong>githubusercontent.com</strong>.</p>
 
-<p>Don’t worry, we are committed to maintaining the legacy behavior until the next
-major change of the GitHub API.</p>
+<h2 id="older-links">Older links</h2>
+
+<p>If you have old links to this content, don’t worry: as of today, we’re forcing the old domains to redirect to the new domains. Your existing links should continue to work automatically in your browser. If you’re using a URL from Gist or GitHub to directly access user-generated content via <code>curl</code>, <code>wget</code>, or a library (like <a href="https://github.com/jnunemaker/httparty">HTTParty</a>), be sure to configure that tool to follow the redirect.</p>
+
+<h2 id="your-proxies-or-filters">Your proxies or filters</h2>
+
+<p>Some security systems (web proxies, for example) may not recognize the <strong>githubusercontent.com</strong> domain. In those cases, you may need update your proxies and security software accordingly.</p>
+
+<p>As always, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Changes+to+user+content+domains">get in touch</a>.</p>
+
+<p><em>Happy and safe GitHubbing!</em></p>
 </div>
 
     </div>

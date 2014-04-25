@@ -42,6 +42,59 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-04-25-user-content-security/">
+  <h2 class="title">
+  <a href="/changes/2014-04-25-user-content-security/">New user content domains</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 25, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/azizshamim.png" alt="Avatar for azizshamim"><a href="https://github.com/azizshamim">azizshamim</a>
+  </li>
+</ul>
+</div>
+
+    <h2 id="securing-your-content">Securing your content</h2>
+
+<p>The <a href="https://bounty.github.com">GitHub Bug Bounty program</a> recently identified a few cross-domain vulnerabilities related to user-generated content, and we’ve shipped improvements today to address those issues.</p>
+
+<p>In order to better isolate your content from potentially malicious content uploaded by other users (e.g., content that might contain Cross-Site Scripting or other embedded attacks), we now serve user-generated content from subdomains of <strong>githubusercontent.com</strong>. This content is no longer served from subdomains of <strong>github.com</strong>.</p>
+
+<h2 id="whats-affected">What’s affected?</h2>
+
+<p>This change affects the following subdomains:</p>
+
+<ul>
+<li>
+<strong>raw.github.com</strong> : Serves raw file content from your repository.</li>
+  <li>
+<strong>embed.github.com</strong> : Allows users to embed rich GitHub content on other sites.</li>
+  <li>
+<strong>render.github.com</strong> : Displays rich content on GitHub.com.</li>
+  <li>
+<strong>f.cloud.github.com</strong> : Hosts all those amazing gifs you use in Pull Requests and Issues.</li>
+</ul>
+<p>Content formerly served by these subdomains is now served from subdomains of <strong>githubusercontent.com</strong>.</p>
+
+<h2 id="older-links">Older links</h2>
+
+<p>If you have old links to this content, don’t worry: as of today, we’re forcing the old domains to redirect to the new domains. Your existing links should continue to work automatically in your browser. If you’re using a URL from Gist or GitHub to directly access user-generated content via <code>curl</code>, <code>wget</code>, or a library (like <a href="https://github.com/jnunemaker/httparty">HTTParty</a>), be sure to configure that tool to follow the redirect.</p>
+
+<h2 id="your-proxies-or-filters">Your proxies or filters</h2>
+
+<p>Some security systems (web proxies, for example) may not recognize the <strong>githubusercontent.com</strong> domain. In those cases, you may need update your proxies and security software accordingly.</p>
+
+<p>As always, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Changes+to+user+content+domains">get in touch</a>.</p>
+
+<p><em>Happy and safe GitHubbing!</em></p>
+</div>
+
 <div class="change" id="/changes/2014-04-22-deprecating-beta-media-type/">
   <h2 class="title">
   <a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type</a>
@@ -641,6 +694,33 @@ ensure your application asks for only the permissions it needs. As always, if
 you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes">get in touch</a>.</p>
 </div>
 
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle"><a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
+</div>
+
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -686,33 +766,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 <p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
-</div>
-
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle"><a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
 </div>
 
 <div class="change" id="/changes/2014-02-21-gist-raw-file-url-change/">
@@ -2941,6 +2994,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-04-25-user-content-security/">New user content domains<br /><span class="date">April 25, 2014</span></a></li>
+
   <li><a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type<br /><span class="date">April 22, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-10-deployment-api-preview-extension/">Extending the preview period for the Deployments API<br /><span class="date">April 10, 2014</span></a></li>
@@ -2954,8 +3009,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-04-04-create-public-repo-without-repo-scope/">Grant access to create public repositories without granting access to private repositories<br /><span class="date">April 4, 2014</span></a></li>
 
   <li><a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API<br /><span class="date">March 27, 2014</span></a></li>
-
-  <li><a href="/changes/2014-03-18-paginating-method-changes/">Pagination changes for some resource lists<br /><span class="date">March 18, 2014</span></a></li>
 
 </ul>
 

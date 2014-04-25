@@ -2,13 +2,56 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-04-22T04:00:00Z</updated>
+  <updated>2014-04-25T04:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-04-25:/changes/2014-04-25-user-content-security/</id>
+    <title type="html">New user content domains</title>
+    <published>2014-04-25T04:00:00Z</published>
+    <updated>2014-04-25T04:00:00Z</updated>
+    <author>
+      <name>azizshamim</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-04-25-user-content-security/" />
+    <content type="html">&lt;h2 id="securing-your-content"&gt;Securing your content&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href="https://bounty.github.com"&gt;GitHub Bug Bounty program&lt;/a&gt; recently identified a few cross-domain vulnerabilities related to user-generated content, and we’ve shipped improvements today to address those issues.&lt;/p&gt;
+
+&lt;p&gt;In order to better isolate your content from potentially malicious content uploaded by other users (e.g., content that might contain Cross-Site Scripting or other embedded attacks), we now serve user-generated content from subdomains of &lt;strong&gt;githubusercontent.com&lt;/strong&gt;. This content is no longer served from subdomains of &lt;strong&gt;github.com&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id="whats-affected"&gt;What’s affected?&lt;/h2&gt;
+
+&lt;p&gt;This change affects the following subdomains:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;strong&gt;raw.github.com&lt;/strong&gt; : Serves raw file content from your repository.&lt;/li&gt;
+  &lt;li&gt;
+&lt;strong&gt;embed.github.com&lt;/strong&gt; : Allows users to embed rich GitHub content on other sites.&lt;/li&gt;
+  &lt;li&gt;
+&lt;strong&gt;render.github.com&lt;/strong&gt; : Displays rich content on GitHub.com.&lt;/li&gt;
+  &lt;li&gt;
+&lt;strong&gt;f.cloud.github.com&lt;/strong&gt; : Hosts all those amazing gifs you use in Pull Requests and Issues.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Content formerly served by these subdomains is now served from subdomains of &lt;strong&gt;githubusercontent.com&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id="older-links"&gt;Older links&lt;/h2&gt;
+
+&lt;p&gt;If you have old links to this content, don’t worry: as of today, we’re forcing the old domains to redirect to the new domains. Your existing links should continue to work automatically in your browser. If you’re using a URL from Gist or GitHub to directly access user-generated content via &lt;code&gt;curl&lt;/code&gt;, &lt;code&gt;wget&lt;/code&gt;, or a library (like &lt;a href="https://github.com/jnunemaker/httparty"&gt;HTTParty&lt;/a&gt;), be sure to configure that tool to follow the redirect.&lt;/p&gt;
+
+&lt;h2 id="your-proxies-or-filters"&gt;Your proxies or filters&lt;/h2&gt;
+
+&lt;p&gt;Some security systems (web proxies, for example) may not recognize the &lt;strong&gt;githubusercontent.com&lt;/strong&gt; domain. In those cases, you may need update your proxies and security software accordingly.&lt;/p&gt;
+
+&lt;p&gt;As always, if you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Changes+to+user+content+domains"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Happy and safe GitHubbing!&lt;/em&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-04-22:/changes/2014-04-22-deprecating-beta-media-type/</id>
     <title type="html">Deprecating the beta media type</title>
@@ -482,6 +525,24 @@ ensure your application asks for only the permissions it needs. As always, if
 you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
+    <title type="html">Wildcard Event for Webhooks</title>
+    <published>2014-02-24T05:00:00Z</published>
+    <updated>2014-02-24T05:00:00Z</updated>
+    <author>
+      <name>kdaigle</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
+    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/</id>
     <title type="html">Finer-grained OAuth scopes for SSH keys</title>
     <published>2014-02-24T05:00:00Z</published>
@@ -517,24 +578,6 @@ you have any questions or feedback, &lt;a href="https://github.com/contact?form%
 &lt;p&gt;Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.&lt;/p&gt;
 
 &lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys"&gt;please get in touch&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
-    <title type="html">Wildcard Event for Webhooks</title>
-    <published>2014-02-24T05:00:00Z</published>
-    <updated>2014-02-24T05:00:00Z</updated>
-    <author>
-      <name>kdaigle</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
-    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.&lt;/p&gt;</content>
   </entry>
   <entry>
     <id>tag:developer.github.com,2014-02-21:/changes/2014-02-21-gist-raw-file-url-change/</id>
@@ -977,54 +1020,5 @@ $ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
 &lt;/pre&gt;
 
 &lt;p&gt;As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Teams+for+User"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-10-04:/changes/2013-10-04-oauth-changes-coming/</id>
-    <title type="html">OAuth changes coming</title>
-    <published>2013-10-04T04:00:00Z</published>
-    <updated>2013-10-04T04:00:00Z</updated>
-    <author>
-      <name>tclem</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-10-04-oauth-changes-coming/" />
-    <content type="html">&lt;p&gt;Starting today, we are returning granted scopes as part of the
-&lt;a href="/v3/oauth/#github-redirects-back-to-your-site"&gt;access_token response&lt;/a&gt;.
-For example, if you are making a POST with the &lt;code&gt;application/json&lt;/code&gt;
-mime-type you’ll see an additional field for the granted scopes.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="language-javascript"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="s2"&gt;"access_token"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;"e72e16c7e42f292c6912e7710c838347ae178b4a"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="s2"&gt;"scope"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;"repo,gist"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-  &lt;span class="s2"&gt;"token_type"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;"bearer"&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Right now, these scopes will be identical to what you requested, but we
-are moving towards a feature set that will allow GitHub users to edit
-their scopes, effectively granting your application less access than you
-originally requested. You should be aware of this possibility and adjust
-your application behavior accordingly.&lt;/p&gt;
-
-&lt;p&gt;Some things to watch out for and keep in mind:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-    &lt;p&gt;Most third party applications using GitHub OAuth to identify users have
-the best success in adoption by starting out with a request for the
-minimum access that the application can possibly get away with.
-Something like no scopes or just &lt;code&gt;user:email&lt;/code&gt; is very sane.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;It is important to handle the error cases where a user chooses to
-grant you less access than you originally requested. Now that we are
-surfacing the granted scopes on the access_token response, applications
-can warn or otherwise communicate with their users that they will see
-reduced functionality or be unable to perform some actions.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Applications can always send users back through the flow again to get
-additional permission, but don’t forget that users can always say no.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content>
   </entry>
 </feed>

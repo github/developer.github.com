@@ -9,7 +9,11 @@ In order to provide the most robust, fast and accurate API for Gist, we are maki
 
 ### Truncating file contents larger than one megabyte
 
-This change imposes a sensible (according to our data) limit on the amount of raw file data that is returned in gist fetches via the API. This means faster response times while eliminating browser timeouts when fetching gists that contains large files. When you need the full contents of your gist's file, simply make a request to the url specified in the raw_url attribute.
+The [Gist API response][gist-json-representation] includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.
+
+To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won't notice any impact from this change.)
+
+When you need the full contents of the file, simply make a request to the URL specified in the `raw_url` attribute.
 
 ### "truncated" attribute
 

@@ -83,8 +83,7 @@ Name | Type | Description
 
 ## Create
 
-Create a new repository for the authenticated user. OAuth users must supply
-`repo` scope.
+Create a new repository for the authenticated user.
 
     POST /user/repos
 
@@ -92,6 +91,13 @@ Create a new repository in this organization. The authenticated user must
 be a member of the specified organization.
 
     POST /orgs/:org/repos
+
+### OAuth scope requirements
+
+When using [OAuth](/v3/oauth/#scopes), authorizations must include:
+
+- `public_repo` scope or `repo` scope to create a public repository
+- `repo` scope to create a private repository
 
 ### Input
 

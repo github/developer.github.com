@@ -15,8 +15,6 @@ To eliminate those timeouts, the API now limits the amount of content returned f
 
 When you need the full contents of the file, simply make a request to the URL specified in the `raw_url` attribute.
 
-### "truncated" attribute
-
     {
       files: {
         "my_large_file.md": {
@@ -29,6 +27,9 @@ When you need the full contents of the file, simply make a request to the URL sp
         }
       }
     }
+
+### "truncated" attribute
+
 
 In this small example payload, you'll notice the new **truncated** attribute has been added to each file's payload. It is a boolean attribute indicating if the content attribute's value has been truncated for this request.
 

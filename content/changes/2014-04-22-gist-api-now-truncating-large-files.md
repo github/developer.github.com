@@ -34,7 +34,7 @@ The JSON snippet below illustrates the attributes provided for each file in the 
 
 We recognize that sometimes you'll still want the full content for a file, even if it's too large to get returned in the standard Gist API response. In those cases, simply make a request to the URL specified in the `raw_url` attribute, and you'll receive the complete content for that file.
 
-If you have any questions, please [get in touch][contact].
+If you have any questions, don’t hesitate to [get in touch][contact].
 
 [contact]: https://github.com/contact?form[subject]=Gist+API+now+tuncates+large+files
 [gist-json-representation]: /v3/gists/#detailed-gist-representation

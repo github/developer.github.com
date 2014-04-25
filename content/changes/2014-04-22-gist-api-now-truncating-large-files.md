@@ -15,6 +15,10 @@ To eliminate those timeouts, the API now limits the amount of content returned f
 
 When you need the full contents of the file, simply make a request to the URL specified in the `raw_url` attribute.
 
+### New "truncated" attribute
+
+The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new **truncated** attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
+
     {
       files: {
         "my_large_file.md": {
@@ -27,10 +31,6 @@ When you need the full contents of the file, simply make a request to the URL sp
         }
       }
     }
-
-### New "truncated" attribute
-
-In the example JSON excerpt above, you'll notice a new **truncated** attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
 
 If you have any questions, please [get in touch][contact].
 

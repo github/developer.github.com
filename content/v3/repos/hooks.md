@@ -33,7 +33,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
     POST /repos/:owner/:repo/hooks
 
-**Note**: Services other than the `web` service can have at most one hook configured for a epository. Creating hooks for a service that already has a hook configured will [update the existing hook](#edit-a-hook). The `web` service can have multiple hooks configured for a repository.
+**Note**: Services other than the `web` service can have at most one hook configured for a repository. Creating hooks for a service that already has a hook configured will [update the existing hook](#edit-a-hook). The `web` service can have multiple hooks configured for a repository.
 
 ### Parameters
 

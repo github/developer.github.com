@@ -13,8 +13,6 @@ The [Gist API response][gist-json-representation] includes data for every file i
 
 To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won't notice any impact from this change.)
 
-When you need the full contents of the file, simply make a request to the URL specified in the `raw_url` attribute.
-
 ### New "truncated" attribute
 
 The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new **truncated** attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
@@ -31,6 +29,10 @@ The JSON snippet below illustrates the attributes provided for each file in the 
         }
       }
     }
+
+### Getting the full content for truncated files
+
+We recognize that sometimes you'll still want the full content for a file, even if it's too large to get returned in the standard Gist API response. In those cases, simply make a request to the URL specified in the `raw_url` attribute, and you'll receive the complete content for that file.
 
 If you have any questions, please [get in touch][contact].
 

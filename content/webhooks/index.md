@@ -87,6 +87,35 @@ types](/v3/activity/events/types/), with the exception of [the original `push`
 event](https://developer.github.com/v3/activity/events/types/#pushevent),
 which has a more detailed payload.
 
+A full payload will also show the user that performed the event (`sender`),
+the repository (`repository`), and the organization (`organization`) if applicable.
+
+HTTP requests made to your server's endpoint will contain several special
+headers:
+
+Header | Description
+-------|-------------|
+`X-Github-Event`| Name of the [event](#events) that triggered this delivery.
+`X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`](/v3/repos/hooks/#create-a-hook) as the key (if configured).
+`X-Github-Delivery`| Unique ID for this delivery.
+
+Also, the `User-Agent` for the requests will have the prefix `GitHub Hookshot`.
+
+**Example**:
+
+<pre class="terminal">
+POST /payload HTTP/1.1
+
+Host: localhost:4567
+X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+User-Agent: GitHub Hookshot 044aadd
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 2491
+X-Github-Event: push
+
+payload=%7B%22zen%22%3A%22Keep+it+logically+awesome.%22%2C%22hook_id%22%3A2151407%7D
+</pre>
+
 ## Wildcard Event
 
 We also support a wildcard (`*`) that will match all supported events. When you

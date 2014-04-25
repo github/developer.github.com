@@ -5,7 +5,7 @@ created_at: 2014-04-22
 author_name: leongersing
 ---
 
-In order to provide the most robust, fast and accurate API for Gist we recently decided to make a few small changes to the *files* attribute.
+In order to provide the most robust, fast and accurate API for Gist, we are making two changes to better handle large files in Gist API responses.
 
 ### Truncating file contents larger than 1MB
 This change imposes a sensible (according to our data) limit on the amount of raw file data that is returned in gist fetches via the API. This means faster response times while eliminating browser timeouts when fetching gists that contains large files. When you need the full contents of your gist's file, simply make a request to the url specified in the raw_url attribute.

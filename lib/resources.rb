@@ -312,6 +312,7 @@ module GitHub
     "comment_count" => 0
   },
   "url" => "https://api.github.com/repos/octocat/Hello-World/commits/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
+  "html_url" => "https://github.com/octocat/Hello-World/commit/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
   "comments_url" => "https://api.github.com/repos/octocat/Hello-World/commits/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d/comments",
   "author" => {
     "login" => "octocat",
@@ -445,6 +446,8 @@ module GitHub
     COMMIT = {
       "url" => "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "html_url" => "https://github.com/octocat/Hello-World/commit/6dcb09b5b57875f334f61aebed695e2e4193db5e",
+      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e/comments",
       "commit" => {
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
         "author" => {
@@ -462,6 +465,7 @@ module GitHub
           "url" => "https://api.github.com/repos/octocat/Hello-World/tree/6dcb09b5b57875f334f61aebed695e2e4193db5e",
           "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
         },
+        "comment_count" => 0,
       },
       "author" => USER,
       "committer" => USER,

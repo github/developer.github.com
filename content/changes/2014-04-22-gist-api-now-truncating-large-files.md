@@ -37,3 +37,4 @@ We recognize that sometimes you'll still want the full content for a file, even 
 If you have any questions, please [get in touch][contact].
 
 [contact]: https://github.com/contact?form[subject]=Gist+API+now+tuncates+large+files
+[gist-json-representation]: /v3/gists/#detailed-gist-representation

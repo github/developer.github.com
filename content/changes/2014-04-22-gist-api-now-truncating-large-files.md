@@ -19,11 +19,11 @@ When you need the full contents of the file, simply make a request to the URL sp
       files: {
         "my_large_file.md": {
           "size": 2097152,
+          "content": "Large content. Truncated at end of first megabyte. [...]",
+          "truncated": true,
           "raw_url": "https://raw.githubusercontent.com/[...]/my_large_file.md",
           "type": "text/plain",
-          "language": "Markdown",
-          "content": "Large content. Truncated at end of first megabyte. [...]",
-          "truncated": true
+          "language": "Markdown"
         }
       }
     }

@@ -9,8 +9,8 @@ title: Releases | GitHub API
 
 ## List releases for a repository
 
-All users will receive published releases.
-Users with push access will additionally receive draft releases.
+Information about published releases are available to everyone. 
+Only users with push access will receive listings for draft releases.
 
     GET /repos/:owner/:repo/releases
 

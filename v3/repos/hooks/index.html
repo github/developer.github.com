@@ -133,7 +133,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /repos/:owner/:repo/hooks
 </code></pre>
 
-<h3 id="parameter">Parameter</h3>
+<p><strong>Note</strong>: Services other than the <code>web</code> service can have at most one hook configured for a repository. Creating hooks for a service that already has a hook configured will <a href="#edit-a-hook">update the existing hook</a>. The <code>web</code> service can have multiple hooks configured for a repository.</p>
+
+<h3 id="parameters">Parameters</h3>
 
 <table>
 <thead><tr>
@@ -244,7 +246,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>PATCH /repos/:owner/:repo/hooks/:id
 </code></pre>
 
-<h3 id="parameter-1">Parameter</h3>
+<h3 id="parameters-1">Parameters</h3>
 
 <table>
 <thead><tr>
@@ -435,7 +437,7 @@ successful request with curl looks like:</p>
 <p>PubSubHubbub requests can be sent multiple times.  If the hook already
 exists, it will be modified according to the request.</p>
 
-<h4 id="parameters">Parameters</h4>
+<h4 id="parameters-2">Parameters</h4>
 
 <table>
 <thead><tr>

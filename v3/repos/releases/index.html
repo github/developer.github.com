@@ -67,16 +67,15 @@
   <li><a href="#delete-a-release-asset">Delete a release asset</a></li>
 </ul><h2 id="list-releases-for-a-repository">List releases for a repository</h2>
 
-<p>Users with push access to the repository will receive all releases
-(i.e., published releases and draft releases). Users with pull access
-will receive published releases only.</p>
+<p>Information about published releases are available to everyone. 
+Only users with push access will receive listings for draft releases.</p>
 
 <pre><code>GET /repos/:owner/:repo/releases
 </code></pre>
 
-<p>Note: This returns a list of releases, which does not include regular
+<p><strong>Note:</strong> This returns a list of releases, which does not include regular
 Git tags that have not been associated with a release.
-To get a list of Git tags, use the <a href="/v3/repos/#list-tags">Repository Tags API</a>.</p>
+(To get a list of Git tags, use the <a href="/v3/repos/#list-tags">Repository Tags API</a>.)</p>
 
 <h3 id="response">Response</h3>
 
@@ -237,8 +236,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
-<p>Note: This returns an “upload_url” hypermedia relation that provides the <a href="#upload-a-release-asset">endpoint
-that creates release assets</a>.</p>
+<p><strong>Note:</strong> This returns an <code>"upload_url"</code> hypermedia relation that provides the 
+<a href="#upload-a-release-asset">endpoint that creates release assets</a>.</p>
 
 <h2 id="create-a-release">Create a release</h2>
 
@@ -546,14 +545,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="upload-a-release-asset">Upload a release asset</h2>
 
-<p>This is a unique endpoint. The domain of the request changes from “api.github.com”
-to <strong>“uploads.github.com”</strong>. You need to use an HTTP client which supports
+<p>This is a unique endpoint. The request’s domain changes from <code>"api.github.com"</code>
+to <strong><code>"uploads.github.com"</code></strong>. You need to use an HTTP client which supports
 <a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a> to make calls to this
 endpoint.</p>
 
-<p>The asset data is expected in its raw binary form,
-instead of JSON.  Everything else about the endpoint is the same.  Pass your
-authentication exactly the same as the rest of the API.</p>
+<p>The asset data is expected in its raw binary form, rather than JSON. 
+Everything else about the endpoint is the same. 
+Pass your authentication exactly the same as the rest of the API. </p>
 
 <pre><code>POST https://uploads.github.com/repos/:owner/:repo/releases/:id/assets?name=foo.zip
 </code></pre>
@@ -576,7 +575,7 @@ asset’s name in a URI query parameter.</p>
 <td><code>Content-Type</code></td>
       <td><code>string</code></td>
       <td>
-<strong>Required</strong>. The content type of the asset. This should be set in the Header. Example: “application/zip”. For a list of acceptable types, refer this list of <a href="http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types">common media types</a>.</td>
+<strong>Required</strong>. The content type of the asset. This should be set in the Header. Example: <code>"application/zip"</code>. For a list of acceptable types, refer this list of <a href="http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types">common media types</a>.</td>
     </tr>
 <tr>
 <td><code>name</code></td>
@@ -627,7 +626,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="response-for-upstream-failure">Response for upstream failure</h3>
 
-<p>This may leave an empty asset with a state of “new”.  It can be safely deleted.</p>
+<p>This may leave an empty asset with a state of <code>"new"</code>.  It can be safely deleted.</p>
 
 <pre class="headers"><code>Status: 502 Bad Gateway
 X-RateLimit-Limit: 5000
@@ -677,9 +676,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 <span class="p">}</span></code></pre>
 
 <p>If you want to download the asset’s binary content, pass a media type of
-“application/octet-stream”.  The API will either redirect the client to the
+<code>"application/octet-stream"</code>.  The API will either redirect the client to the
 location, or stream it directly if possible.  API clients should handle both a
-200 or 302 response.</p>
+<code>200</code> or <code>302</code> response.</p>
 
 <pre class="headers"><code>Status: 302 Found
 X-RateLimit-Limit: 5000

@@ -1210,20 +1210,23 @@ module GitHub
 
     GIST_FILE = {
       "ring.erl" => {
-        "size"     => 932,
-        "raw_url"  => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
-        "type"     => "text/plain",
-        "language" => "Erlang"
+        "size"      => 932,
+        "raw_url"   => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+        "type"      => "text/plain",
+        "language"  => "Erlang"
+        "truncated" => true,
+        "content"   => "..."
       }
     }
 
     GIST_FILE_WITH_CONTENT = {
       "ring.erl" => {
-        "size"     => 932,
-        "raw_url"  => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
-        "type"     => "text/plain",
-        "language" => "Erlang",
-        "content"  => "contents of gist"
+        "size"      => 932,
+        "raw_url"   => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+        "type"      => "text/plain",
+        "language"  => "Erlang",
+        "truncated" => false,
+        "content"   => "contents of gist"
       }
     }
 

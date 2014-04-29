@@ -32,7 +32,7 @@ The JSON snippet below illustrates the attributes provided for each file in the 
 
 ### Getting the full content for truncated files
 
-We recognize that sometimes you'll still want the full content for a file, even if it's too large to get returned in the standard Gist API response. In those cases, simply make a request to the URL specified in the `raw_url` attribute, and you'll receive the complete content for that file.
+We recognize that sometimes you'll still want the full content for a file, even if it's too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the `raw_url` attribute, and you'll receive the complete content for that file. For larger files you'll need to clone the gist locally via the ```git_pull_url``` to access the full file contents.
 
 If you have any questions, don’t hesitate to [get in touch][contact].
 

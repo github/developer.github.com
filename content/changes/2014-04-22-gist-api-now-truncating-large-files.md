@@ -1,32 +1,40 @@
 ---
 kind: change
-title: "Gist API now truncates large files"
+title: "Changes to Gist API response for large files"
 created_at: 2014-04-22
 author_name: leongersing
 ---
 
-In order to provide the most robust, fast and accurate API for Gist we recently decided to make a few small changes to the *files* attribute.
+In order to provide the most robust, fast and accurate API for Gist, we are making two changes to better handle large files in [Gist API responses][gist-json-representation].
 
-### Truncating file contents larger than 1MB
-This change imposes a sensible (according to our data) limit on the amount of raw file data that is returned in gist fetches via the API. This means faster response times while eliminating browser timeouts when fetching gists that contains large files. When you need the full contents of your gist's file, simply make a request to the url specified in the raw_url attribute.
+### Truncating file contents larger than one megabyte
 
-### "truncated" attribute
+The [Gist API response][gist-json-representation] includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.
+
+To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won't notice any impact from this change.)
+
+### New "truncated" attribute
+
+The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new **truncated** attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
 
     {
       files: {
         "my_large_file.md": {
           "size": 2097152,
+          "content": "Large content. Truncated at end of first megabyte. [...]",
+          "truncated": true,
           "raw_url": "https://raw.githubusercontent.com/[...]/my_large_file.md",
           "type": "text/plain",
-          "language": "Markdown",
-          "content": "",
-          "truncated": true
+          "language": "Markdown"
         }
       }
     }
 
-In this small example payload, you'll notice the new **truncated** attribute has been added to each file's payload. It is a boolean attribute indicating if the content attribute's value has been truncated for this request.
+### Getting the full content for truncated files
 
-If you have any questions, please [get in touch][contact].
+We recognize that sometimes you'll still want the full content for a file, even if it's too large to get returned in the standard Gist API response. In those cases, simply make a request to the URL specified in the `raw_url` attribute, and you'll receive the complete content for that file.
+
+If you have any questions, don’t hesitate to [get in touch][contact].
 
 [contact]: https://github.com/contact?form[subject]=Gist+API+now+tuncates+large+files
+[gist-json-representation]: /v3/gists/#detailed-gist-representation

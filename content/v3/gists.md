@@ -49,7 +49,7 @@ Name | Type | Description
 
     GET /gists/:id
 
-### Response
+### Response {#detailed-gist-representation}
 
 <%= headers 200 %>
 <%= json :full_gist %>

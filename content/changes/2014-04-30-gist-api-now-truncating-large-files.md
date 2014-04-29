@@ -15,7 +15,7 @@ To eliminate those timeouts, the API now limits the amount of content returned f
 
 ### New "truncated" attribute
 
-The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new **truncated** attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
+The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new `truncated` attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
 
     {
       files: {

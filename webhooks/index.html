@@ -204,6 +204,72 @@ types</a>, with the exception of <a href="https://developer.github.com/v3/activi
 event</a>,
 which has a more detailed payload.</p>
 
+<p>A full payload will also show the user who performed the event (<code>sender</code>),
+the repository (<code>repository</code>), and the organization (<code>organization</code>) if applicable.</p>
+
+<h4 id="delivery-headers">Delivery headers</h4>
+
+<p>HTTP requests made to your server’s endpoint will contain several special
+headers:</p>
+
+<table>
+<thead><tr>
+<th>Header</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>X-Github-Event</code></td>
+      <td>Name of the <a href="#events">event</a> that triggered this delivery.</td>
+    </tr>
+<tr>
+<td><code>X-Hub-Signature</code></td>
+      <td>HMAC hex digest of the payload, using <a href="/v3/repos/hooks/#create-a-hook">the hook’s <code>secret</code></a> as the key (if configured).</td>
+    </tr>
+<tr>
+<td><code>X-Github-Delivery</code></td>
+      <td>Unique ID for this delivery.</td>
+    </tr>
+</tbody>
+</table><p>Also, the <code>User-Agent</code> for the requests will have the prefix <code>GitHub Hookshot</code>.</p>
+
+<h4 id="example-delivery">Example delivery</h4>
+
+<pre class="terminal">
+POST /payload HTTP/1.1
+
+Host: localhost:4567
+X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+User-Agent: GitHub Hookshot 044aadd
+Content-Type: application/json
+Content-Length: 6615
+X-Github-Event: issue
+
+{
+  "action": "opened",
+  "issue": {
+    "url": "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+    "number": 1347,
+    ...
+  },
+  "repository" : {
+    "id": 1296269,
+    "full_name": "octocat/Hello-World",
+    "owner": {
+      "login": "octocat",
+      "id": 1,
+      ...
+    },
+    ...
+  },
+  "sender": {
+    "login": "octocat",
+    "id": 1,
+    ...
+  }
+}
+</pre>
+
 <h2 id="wildcard-event">Wildcard Event</h2>
 
 <p>We also support a wildcard (<code>*</code>) that will match all supported events. When you

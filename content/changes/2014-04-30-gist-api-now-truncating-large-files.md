@@ -5,7 +5,7 @@ created_at: 2014-04-30
 author_name: leongersing
 ---
 
-In order to provide the most robust, fast and accurate API for Gist, we are making two changes to better handle large files in [Gist API responses][gist-json-representation].
+In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in [Gist API responses][gist-json-representation].
 
 ### Truncating file contents larger than one megabyte
 

@@ -5,7 +5,7 @@ created_at: 2014-05-01
 author_name: leongersing
 ---
 
-In order to provide the most robust, fast and accurate API for Gist, we are making two changes to better handle large files in [Gist API responses][gist-json-representation].
+In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in [Gist API responses][gist-json-representation].
 
 ### Truncating file contents larger than one megabyte
 
@@ -15,7 +15,7 @@ To eliminate those timeouts, the API now limits the amount of content returned f
 
 ### New "truncated" attribute
 
-The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new **truncated** attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
+The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new `truncated` attribute included as part of the file metadata. This Boolean attribute indicates whether the `content` value is truncated for this request.
 
     {
       files: {

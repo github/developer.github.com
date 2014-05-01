@@ -87,6 +87,59 @@ types](/v3/activity/events/types/), with the exception of [the original `push`
 event](https://developer.github.com/v3/activity/events/types/#pushevent),
 which has a more detailed payload.
 
+A full payload will also show the user who performed the event (`sender`),
+the repository (`repository`), and the organization (`organization`) if applicable.
+
+#### Delivery headers
+
+HTTP requests made to your server's endpoint will contain several special
+headers:
+
+Header | Description
+-------|-------------|
+`X-Github-Event`| Name of the [event](#events) that triggered this delivery.
+`X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`](/v3/repos/hooks/#create-a-hook) as the key (if configured).
+`X-Github-Delivery`| Unique ID for this delivery.
+
+Also, the `User-Agent` for the requests will have the prefix `GitHub Hookshot`.
+
+#### Example delivery
+
+<pre class="terminal">
+POST /payload HTTP/1.1
+
+Host: localhost:4567
+X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+User-Agent: GitHub Hookshot 044aadd
+Content-Type: application/json
+Content-Length: 6615
+X-Github-Event: issue
+
+{
+  "action": "opened",
+  "issue": {
+    "url": "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+    "number": 1347,
+    ...
+  },
+  "repository" : {
+    "id": 1296269,
+    "full_name": "octocat/Hello-World",
+    "owner": {
+      "login": "octocat",
+      "id": 1,
+      ...
+    },
+    ...
+  },
+  "sender": {
+    "login": "octocat",
+    "id": 1,
+    ...
+  }
+}
+</pre>
+
 ## Wildcard Event
 
 We also support a wildcard (`*`) that will match all supported events. When you

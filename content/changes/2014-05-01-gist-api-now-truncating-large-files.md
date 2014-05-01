@@ -1,7 +1,7 @@
 ---
 kind: change
 title: "Changes to Gist API response for large files"
-created_at: 2014-04-22
+created_at: 2014-05-01
 author_name: leongersing
 ---
 
@@ -36,5 +36,5 @@ We recognize that sometimes you'll still want the full content for a file, even 
 
 If you have any questions, don’t hesitate to [get in touch][contact].
 
-[contact]: https://github.com/contact?form[subject]=Gist+API+now+tuncates+large+files
+[contact]: https://github.com/contact?form[subject]=Gist+API+now+truncates+large+files
 [gist-json-representation]: /v3/gists/#detailed-gist-representation

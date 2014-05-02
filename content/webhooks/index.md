@@ -53,7 +53,7 @@ For example, the
 [Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
 service listens for all events, while the
 [IRC](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
-service can only listen for `push`, `issues`, and `pull_request` events.
+service can only listen for `push` and `pull_request` events by default.
 
 The available events are:
 

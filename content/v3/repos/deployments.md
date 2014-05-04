@@ -128,7 +128,7 @@ Name | Type | Description
 `ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
 `force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks. Default: `false`
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`
-`environment`|`string` | Optional name for the deployment. e.g. production,staging,qd. Default: `"production"`
+`environment`|`string` | Optional name for the deployment. e.g. production,staging,qa. Default: `"production"`
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: `false`
 `description`|`string` | Optional short description. Default: `""`
 

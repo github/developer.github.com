@@ -136,7 +136,7 @@ Name | Type | Description
 
 <%= json \
   :ref           => "topic-branch",
-  :payload       => "{\"environment\":\"production\",\"deploy_user\":\"atmos\",\"room_id\":123456}",
+  :payload       => "{\"user\":\"atmos\",\"room_id\":123456}",
   :description   => "Deploying my sweet branch"
 %>
 

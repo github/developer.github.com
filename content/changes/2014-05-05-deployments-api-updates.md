@@ -9,13 +9,13 @@ We're starting to feel pretty good about the Deployments API, and we'd like to i
 
 ## API Changes
 
-First off, we're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target, lots of people tend toward the concept of environments for staging and QA.
+We're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target, lots of people tend toward the concept of environments for staging and QA.
 
 ![doc changes](https://camo.githubusercontent.com/5d3367127c45fc914b8dd65f3df8483459895873/687474703a2f2f636c6f75646170702e61746d6f732e6f72672f696d6167652f336d343530493031305533762f696e7465726e616c2d646576656c6f7065722e6769746875622e636f6d253230323031342d30352d303425323031342d33362d3033253230323031342d30352d303425323031342d33362d30372e6a7067)
 
 ## Event Changes
 
-Second, we're adding a few attributes to the outbound payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha. We're also including the `environment` and `sha` on both the Deployment and DeploymentStatus payloads.
+We're also adding a few attributes to the outbound payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha. We're also including the `environment` and `sha` on both the Deployment and DeploymentStatus payloads.
 
 ### Deployment
 

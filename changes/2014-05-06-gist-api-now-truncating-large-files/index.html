@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Commit Statuses Now Available for Branches and Tags</title>
+  <title>Changes to Gist API response for large files</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -41,35 +41,57 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+      <div class="change" id="/changes/2014-05-06-gist-api-now-truncating-large-files/">
 <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+  <a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    April 30, 2013
+    May 6, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca"/>
-      <a href="https://github.com/foca">foca</a>
+    <img height="16" width="16" src="https://github.com/leongersing.png" alt="Avatar for leongersing"/>
+      <a href="https://github.com/leongersing">leongersing</a>
   </li>
 </ul>
 </div>
 
 
-<p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
+<p>In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in <a href="/v3/gists/#detailed-gist-representation">Gist API responses</a>.</p>
 
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
+<h3 id="truncating-file-contents-larger-than-one-megabyte">Truncating file contents larger than one megabyte</h3>
 
-<p>Enjoy.</p>
+<p>The <a href="/v3/gists/#detailed-gist-representation">Gist API response</a> includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.</p>
+
+<p>To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won’t notice any impact from this change.)</p>
+
+<h3 id="new-truncated-attribute">New “truncated” attribute</h3>
+
+<p>The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you’ll notice a new <code>truncated</code> attribute included as part of the file metadata. This Boolean attribute indicates whether the <code>content</code> value is truncated for this request.</p>
+
+<pre><code>{
+  files: {
+    "my_large_file.md": {
+      "size": 2097152,
+      "content": "Large content. Truncated at end of first megabyte. [...]",
+      "truncated": true,
+      "raw_url": "https://raw.githubusercontent.com/[...]/my_large_file.md",
+      "type": "text/plain",
+      "language": "Markdown"
+    }
+  }
+}
+</code></pre>
+
+<h3 id="getting-the-full-content-for-truncated-files">Getting the full content for truncated files</h3>
+
+<p>We recognize that sometimes you’ll still want the full content for a file, even if it’s too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the <code>raw_url</code> attribute, and you’ll receive the complete content for that file. For larger files, you’ll need to clone the gist locally via the <code>git_pull_url</code> to access the full file contents.</p>
+
+<p>If you have any questions, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=Gist+API+now+truncates+large+files">get in touch</a>.</p>
 </div>
 
     </div>

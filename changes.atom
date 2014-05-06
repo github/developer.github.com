@@ -2,13 +2,55 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-04-25T04:00:00Z</updated>
+  <updated>2014-05-06T04:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-05-06:/changes/2014-05-06-gist-api-now-truncating-large-files/</id>
+    <title type="html">Changes to Gist API response for large files</title>
+    <published>2014-05-06T04:00:00Z</published>
+    <updated>2014-05-06T04:00:00Z</updated>
+    <author>
+      <name>leongersing</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-05-06-gist-api-now-truncating-large-files/" />
+    <content type="html">&lt;p&gt;In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in &lt;a href="/v3/gists/#detailed-gist-representation"&gt;Gist API responses&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="truncating-file-contents-larger-than-one-megabyte"&gt;Truncating file contents larger than one megabyte&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href="/v3/gists/#detailed-gist-representation"&gt;Gist API response&lt;/a&gt; includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.&lt;/p&gt;
+
+&lt;p&gt;To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won’t notice any impact from this change.)&lt;/p&gt;
+
+&lt;h3 id="new-truncated-attribute"&gt;New “truncated” attribute&lt;/h3&gt;
+
+&lt;p&gt;The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you’ll notice a new &lt;code&gt;truncated&lt;/code&gt; attribute included as part of the file metadata. This Boolean attribute indicates whether the &lt;code&gt;content&lt;/code&gt; value is truncated for this request.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  files: {
+    "my_large_file.md": {
+      "size": 2097152,
+      "content": "Large content. Truncated at end of first megabyte. [...]",
+      "truncated": true,
+      "raw_url": "https://raw.githubusercontent.com/[...]/my_large_file.md",
+      "type": "text/plain",
+      "language": "Markdown"
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="getting-the-full-content-for-truncated-files"&gt;Getting the full content for truncated files&lt;/h3&gt;
+
+&lt;p&gt;We recognize that sometimes you’ll still want the full content for a file, even if it’s too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the &lt;code&gt;raw_url&lt;/code&gt; attribute, and you’ll receive the complete content for that file. For larger files, you’ll need to clone the gist locally via the &lt;code&gt;git_pull_url&lt;/code&gt; to access the full file contents.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, don’t hesitate to &lt;a href="https://github.com/contact?form%5Bsubject%5D=Gist+API+now+truncates+large+files"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-04-25:/changes/2014-04-25-user-content-security/</id>
     <title type="html">New user content domains</title>
@@ -976,49 +1018,5 @@ As we continue to tune the Search API, we hope to relax this validation in the f
 There’s no ETA, but we’d like to relax it as soon as it’s feasible.&lt;/p&gt;
 
 &lt;p&gt;As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Validation+Rule+for+Code+Search+API"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2013-10-08:/changes/2013-10-08-list-all-user-teams/</id>
-    <title type="html">List all teams for the authenticated user</title>
-    <published>2013-10-08T04:00:00Z</published>
-    <updated>2013-10-08T04:00:00Z</updated>
-    <author>
-      <name>pengwynn</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2013-10-08-list-all-user-teams/" />
-    <content type="html">&lt;p&gt;We just added a &lt;a href="/v3/orgs/teams/#list-user-teams"&gt;new API method&lt;/a&gt; to list all
-the teams for the authenticated user across all organizations:&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-$ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
-
-[
-  {
-    "name": "Testing",
-    "id": 396018,
-    "slug": "testing",
-    "permission": "pull",
-    "url": "https://api.github.com/teams/396018",
-    "members_url": "https://api.github.com/teams/396018/members{/member}",
-    "repositories_url": "https://api.github.com/teams/396018/repos",
-    "members_count": 1,
-    "repos_count": 0,
-    "organization": {
-      "login": "dotfiles",
-      "id": 1593590,
-      "url": "https://api.github.com/orgs/dotfiles",
-      "repos_url": "https://api.github.com/orgs/dotfiles/repos",
-      "events_url": "https://api.github.com/orgs/dotfiles/events",
-      "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",
-      "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",
-      "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"
-    }
-  },
-  ...
-]
-&lt;/pre&gt;
-
-&lt;p&gt;As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Teams+for+User"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>

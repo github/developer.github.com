@@ -42,6 +42,57 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-05-06-gist-api-now-truncating-large-files/">
+  <h2 class="title">
+  <a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/leongersing.png" alt="Avatar for leongersing"><a href="https://github.com/leongersing">leongersing</a>
+  </li>
+</ul>
+</div>
+
+    <p>In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in <a href="/v3/gists/#detailed-gist-representation">Gist API responses</a>.</p>
+
+<h3 id="truncating-file-contents-larger-than-one-megabyte">Truncating file contents larger than one megabyte</h3>
+
+<p>The <a href="/v3/gists/#detailed-gist-representation">Gist API response</a> includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.</p>
+
+<p>To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won’t notice any impact from this change.)</p>
+
+<h3 id="new-truncated-attribute">New “truncated” attribute</h3>
+
+<p>The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you’ll notice a new <code>truncated</code> attribute included as part of the file metadata. This Boolean attribute indicates whether the <code>content</code> value is truncated for this request.</p>
+
+<pre><code>{
+  files: {
+    "my_large_file.md": {
+      "size": 2097152,
+      "content": "Large content. Truncated at end of first megabyte. [...]",
+      "truncated": true,
+      "raw_url": "https://raw.githubusercontent.com/[...]/my_large_file.md",
+      "type": "text/plain",
+      "language": "Markdown"
+    }
+  }
+}
+</code></pre>
+
+<h3 id="getting-the-full-content-for-truncated-files">Getting the full content for truncated files</h3>
+
+<p>We recognize that sometimes you’ll still want the full content for a file, even if it’s too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the <code>raw_url</code> attribute, and you’ll receive the complete content for that file. For larger files, you’ll need to clone the gist locally via the <code>git_pull_url</code> to access the full file contents.</p>
+
+<p>If you have any questions, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=Gist+API+now+truncates+large+files">get in touch</a>.</p>
+</div>
+
 <div class="change" id="/changes/2014-04-25-user-content-security/">
   <h2 class="title">
   <a href="/changes/2014-04-25-user-content-security/">New user content domains</a>
@@ -1820,32 +1871,6 @@ curl -u defunkt https://api.github.com/feeds
 <p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
 </div>
 
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-<li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel"><a href="https://github.com/ymendel">ymendel</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
-</div>
-
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -1878,6 +1903,32 @@ but we can’t wait to see what others can do with this information.</p>
   <li><strong><a href="/v3/repos/statistics/#punch-card">Punch Card</a></strong></li>
 </ul>
 <p>Enjoy!</p>
+</div>
+
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel"><a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
 </div>
 
 <div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
@@ -2994,6 +3045,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files<br /><span class="date">May 6, 2014</span></a></li>
+
   <li><a href="/changes/2014-04-25-user-content-security/">New user content domains<br /><span class="date">April 25, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type<br /><span class="date">April 22, 2014</span></a></li>
@@ -3007,8 +3060,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">Understanding search results and potential timeouts<br /><span class="date">April 7, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-04-create-public-repo-without-repo-scope/">Grant access to create public repositories without granting access to private repositories<br /><span class="date">April 4, 2014</span></a></li>
-
-  <li><a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API<br /><span class="date">March 27, 2014</span></a></li>
 
 </ul>
 

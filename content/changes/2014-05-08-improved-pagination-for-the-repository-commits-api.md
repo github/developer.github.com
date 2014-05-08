@@ -5,7 +5,7 @@ created_at: 2014-05-08
 author_name: izuzak
 ---
 
-The [Repository Commits API](/v3/repos/commits/) now supports an additional way for paginating [commit lists](/v3/repos/commits/#list-commits-on-a-repository). As of today, this endpoint supports the "standard" [`page` and `per_page` parameters](/v3/#pagination) for controlling pagination and will use these by default when constructing [page links](/v3/#pagination).
+The [Repository Commits API](/v3/repos/commits/) now supports an additional approach for paginating [commit lists](/v3/repos/commits/#list-commits-on-a-repository). As of today, this endpoint supports the "standard" [`page` and `per_page` parameters](/v3/#pagination) for controlling pagination. This API now uses these parameters by default when constructing [page links](/v3/#pagination).
 
 The old way of controlling pagination, using `top`, `last_sha`, and `per_page` parameters, is still supported but will be removed in the [next major version of the API](https://developer.github.com/v3/versions/#v3-deprecations). API clients that are manually constructing URLs for pages should be modified to use the new parameters. Even better, API clients shouldn't construct URLs for pages manually, but should use [page links provided by the `Link` header](/guides/traversing-with-pagination/) in API responses.
 

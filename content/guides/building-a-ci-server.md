@@ -120,7 +120,7 @@ that we're processing on the CI:
     #!ruby
     def process_pull_request(pull_request)
       puts "Processing pull request..."
-      @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'pending')
+      @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'pending')
     end
 
 We're doing three very basic things here:
@@ -136,9 +136,9 @@ be sure to update the status once more. In our example, we'll just set it to `"s
 
     #!ruby
     def process_pull_request(pull_request)
-      @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'pending')
+      @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'pending')
       sleep 2 # do busy work...
-      @client.create_status(pull_request['head']['repo']['full_name'], pull_request['head']['sha'], 'success')
+      @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'success')
       puts "Pull request processed!"
     end
 

@@ -27,12 +27,6 @@ many flavors</h1>
 [csharp]: https://github.com/sgrassie/csharp-github-api
 [fsharp]: https://github.com/saxonmatt/FSharp.GitHubApi
 
-## ActionScript
-
-* [ActionScript GitHub API][as3]
-
-[as3]: https://github.com/cbrammer/api-github-as3
-
 ## Clojure
 
 * [Tentacles][tentacles]

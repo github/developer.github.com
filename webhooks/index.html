@@ -103,9 +103,17 @@ want to trigger.</p>
 
 <p>For example, the
 <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web</a>
-service listens for all events, while the
+service supports listening for all events, while the
 <a href="https://github.com/github/github-services/blob/master/lib/services/irc.rb">IRC</a>
-service can only listen for <code>push</code>, <code>issues</code>, and <code>pull_request</code> events.</p>
+service can only listen for <code>push</code>, <code>issues</code>, <code>pull_request</code>, <code>commit_comment</code>,
+<code>pull_request_review_comment</code>, and <code>issue_comment</code> events.</p>
+
+<p>Each service also has a set of default events for which it listens if it isn’t 
+configured. For example, the Web service listens only for <code>push</code> events by 
+default, while the IRC service listens on <code>push</code> and <code>pull_requests</code> events.
+Service hooks set up via the repository settings UI listen only for the default
+set of events, but can be
+<a href="/v3/repos/hooks/#edit-a-hook">re-configured via the API</a>.</p>
 
 <p>The available events are:</p>
 

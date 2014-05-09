@@ -5,17 +5,21 @@ created_at: 2014-05-05
 author_name: atmos
 ---
 
-We're still iterating on the [Deployments API preview mode][2]starting to feel pretty good about the Deployments API, and we'd like to introduce a new payload field plus a few extra attributes to the events API.
+We're still iterating on the [Deployments API preview][2] and we're starting to feel good about it.  Today we're introducing new attributes for a Deployment and a modification to the events API.
 
 ## API Changes
 
 We're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target, lots of people tend toward the concept of environments for staging and QA. We hope this will help for users that deploy to multiple environments.
 
+We're also persisting the request deployment `ref`. Previously we resolved a `ref` to the current `sha` for that ref. Now we'll be keeping it around for historical purposes. This helps a lot if you're deploying branches to verify them before you merge them into your default(master) branch.
+
 ## Event Changes
 
-We're also adding a few attributes to the outbound payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha. We're also including the `environment` and `sha` on both the Deployment and DeploymentStatus payloads.
+We're also adding a few attributes to the outbound Deployment payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha.
 
-### Deployment
+The DeploymentStatus payloads now include a copy of the associated Deployment object. Ths means that DeploymentStatus events received via webhooks will have enough information to notify other systems without having to callback to GitHub for the `environment` or the `ref` that was deployed.
+
+### Example Deployment Payload
 
 <pre><code class="language-javascript">
 {
@@ -44,7 +48,7 @@ We're also adding a few attributes to the outbound payloads. We're now including
 }
 </code></pre>
 
-### DeploymentStatus
+### Example DeploymentStatus
 
 <pre><code class="language-javascript">
 {

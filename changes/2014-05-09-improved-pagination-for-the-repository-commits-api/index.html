@@ -63,11 +63,11 @@
 
 <p>The <a href="/v3/repos/commits/">Repository Commits API</a> now supports an additional approach for paginating <a href="/v3/repos/commits/#list-commits-on-a-repository">commit lists</a>. As of today, this endpoint supports the “standard” <a href="/v3/#pagination"><code>page</code> and <code>per_page</code> parameters</a> for controlling pagination. This API now uses these parameters by default when constructing <a href="/v3/#pagination">page links</a>.</p>
 
-<h1 id="improved-results-and-increased-consistency">Improved results and increased consistency</h1>
+<h2 id="improved-results-and-increased-consistency">Improved results and increased consistency</h2>
 
 <p>This new approach improves the reliability of this endpoint, which on rare occasions skipped some commits during pagination. This enhancement also increases the overall consistency of the API, as all endpoints now paginate resource lists the same way.</p>
 
-<h1 id="old-parameters-still-supported">Old parameters still supported</h1>
+<h2 id="old-parameters-still-supported">Old parameters still supported</h2>
 
 <p>The old way of paginating, using <code>top</code>, <code>last_sha</code>, and <code>per_page</code> parameters, is still supported in API v3, but it will be removed in the <a href="https://developer.github.com/v3/versions/#v3-deprecations">next major version of the API</a>. API clients that are manually constructing URLs for pages should be modified to use the new parameters. Even better, API clients shouldn’t construct URLs for pages manually, but should use <a href="/guides/traversing-with-pagination/">page links provided by the <code>Link</code> header</a> in API responses.</p>
 

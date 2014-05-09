@@ -21,11 +21,11 @@
     <link rel="alternate" href="http://developer.github.com/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/" />
     <content type="html">&lt;p&gt;The &lt;a href="/v3/repos/commits/"&gt;Repository Commits API&lt;/a&gt; now supports an additional approach for paginating &lt;a href="/v3/repos/commits/#list-commits-on-a-repository"&gt;commit lists&lt;/a&gt;. As of today, this endpoint supports the “standard” &lt;a href="/v3/#pagination"&gt;&lt;code&gt;page&lt;/code&gt; and &lt;code&gt;per_page&lt;/code&gt; parameters&lt;/a&gt; for controlling pagination. This API now uses these parameters by default when constructing &lt;a href="/v3/#pagination"&gt;page links&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h1 id="improved-results-and-increased-consistency"&gt;Improved results and increased consistency&lt;/h1&gt;
+&lt;h2 id="improved-results-and-increased-consistency"&gt;Improved results and increased consistency&lt;/h2&gt;
 
 &lt;p&gt;This new approach improves the reliability of this endpoint, which on rare occasions skipped some commits during pagination. This enhancement also increases the overall consistency of the API, as all endpoints now paginate resource lists the same way.&lt;/p&gt;
 
-&lt;h1 id="old-parameters-still-supported"&gt;Old parameters still supported&lt;/h1&gt;
+&lt;h2 id="old-parameters-still-supported"&gt;Old parameters still supported&lt;/h2&gt;
 
 &lt;p&gt;The old way of paginating, using &lt;code&gt;top&lt;/code&gt;, &lt;code&gt;last_sha&lt;/code&gt;, and &lt;code&gt;per_page&lt;/code&gt; parameters, is still supported in API v3, but it will be removed in the &lt;a href="https://developer.github.com/v3/versions/#v3-deprecations"&gt;next major version of the API&lt;/a&gt;. API clients that are manually constructing URLs for pages should be modified to use the new parameters. Even better, API clients shouldn’t construct URLs for pages manually, but should use &lt;a href="/guides/traversing-with-pagination/"&gt;page links provided by the &lt;code&gt;Link&lt;/code&gt; header&lt;/a&gt; in API responses.&lt;/p&gt;
 

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Finer-grained OAuth scopes for SSH keys</title>
+  <title>Improved pagination for the Repository Commits API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/960.css" rel="stylesheet" type="text/css" />
@@ -41,52 +41,37 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
+      <div class="change" id="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">
 <h2 class="title">
-  <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
+  <a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 24, 2014
+    May 9, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak"/>
+      <a href="https://github.com/izuzak">izuzak</a>
   </li>
 </ul>
 </div>
 
 
-<p>As <a href="https://github.com/blog/1786-enhanced-oauth-security-for-ssh-keys">we announced</a>, we’ve made some important changes to the way that API consumers manage SSH keys.</p>
+<p>The <a href="/v3/repos/commits/">Repository Commits API</a> now supports an additional approach for paginating <a href="/v3/repos/commits/#list-commits-on-a-repository">commit lists</a>. As of today, this endpoint supports the “standard” <a href="/v3/#pagination"><code>page</code> and <code>per_page</code> parameters</a> for controlling pagination. This API now uses these parameters by default when constructing <a href="/v3/#pagination">page links</a>.</p>
 
-<h2 id="finer-grained-oauth-scopes">Finer-grained OAuth scopes</h2>
+<h1 id="improved-results-and-increased-consistency">Improved results and increased consistency</h1>
 
-<p>To help third party applications request only permissions that they need, the API now supports three new <a href="/v3/oauth/#scopes">scopes</a> for working with a user’s public SSH keys.</p>
+<p>This new approach improves the reliability of this endpoint, which on rare occasions skipped some commits during pagination. This enhancement also increases the overall consistency of the API, as all endpoints now paginate resource lists the same way.</p>
 
-<ul>
-<li>
-<code>read:public_key</code> provides read access to the user’s SSH keys</li>
-  <li>
-<code>write:public_key</code> allows an app to read existing keys and create new ones</li>
-  <li>
-<code>admin:public_key</code> enables an app to read, write, and delete keys</li>
-</ul><h2 id="changes-to-user-scope">Changes to <code>user</code> scope</h2>
+<h1 id="old-parameters-still-supported">Old parameters still supported</h1>
 
-<p>Historically, <code>user</code> scope has provided full access to manage a user’s SSH keys. Now that we have dedicated scopes for managing a user’s SSH keys, we have removed those permissions from the <code>user</code> scope. Now <code>user</code> scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.</p>
+<p>The old way of paginating, using <code>top</code>, <code>last_sha</code>, and <code>per_page</code> parameters, is still supported in API v3, but it will be removed in the <a href="https://developer.github.com/v3/versions/#v3-deprecations">next major version of the API</a>. API clients that are manually constructing URLs for pages should be modified to use the new parameters. Even better, API clients shouldn’t construct URLs for pages manually, but should use <a href="/guides/traversing-with-pagination/">page links provided by the <code>Link</code> header</a> in API responses.</p>
 
-<h2 id="keys-are-now-immutable">Keys are now immutable</h2>
-
-<p>To simplify the security audit trail for SSH keys, we’re making keys immutable. API consumers can continue to create keys and delete keys as needed, but keys can no longer be changed. To change an existing key, API consumers should delete the existing key and create a new one with the desired attributes. This change applies both to a <a href="/v3/users/keys/">user’s SSH keys</a> and a <a href="/v3/repos/keys/">repository’s deploy keys</a>.</p>
-
-<h2 id="deleting-keys-when-revoking-a-token">Deleting keys when revoking a token</h2>
-
-<p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
-
-<p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
+<p>Since both the new and the old pagination parameters are still supported in API v3, API clients shouldn’t notice any changes today. Still, if you notice any problems with this endpoint, please <a href="https://github.com/contact?form%5Bsubject%5D=API:+Commits+pagination+improvements">let us know</a>.</p>
 </div>
 
     </div>

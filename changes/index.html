@@ -42,6 +42,37 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">
+  <h2 class="title">
+  <a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+<li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 9, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak"><a href="https://github.com/izuzak">izuzak</a>
+  </li>
+</ul>
+</div>
+
+    <p>The <a href="/v3/repos/commits/">Repository Commits API</a> now supports an additional approach for paginating <a href="/v3/repos/commits/#list-commits-on-a-repository">commit lists</a>. As of today, this endpoint supports the “standard” <a href="/v3/#pagination"><code>page</code> and <code>per_page</code> parameters</a> for controlling pagination. This API now uses these parameters by default when constructing <a href="/v3/#pagination">page links</a>.</p>
+
+<h1 id="improved-results-and-increased-consistency">Improved results and increased consistency</h1>
+
+<p>This new approach improves the reliability of this endpoint, which on rare occasions skipped some commits during pagination. This enhancement also increases the overall consistency of the API, as all endpoints now paginate resource lists the same way.</p>
+
+<h1 id="old-parameters-still-supported">Old parameters still supported</h1>
+
+<p>The old way of paginating, using <code>top</code>, <code>last_sha</code>, and <code>per_page</code> parameters, is still supported in API v3, but it will be removed in the <a href="https://developer.github.com/v3/versions/#v3-deprecations">next major version of the API</a>. API clients that are manually constructing URLs for pages should be modified to use the new parameters. Even better, API clients shouldn’t construct URLs for pages manually, but should use <a href="/guides/traversing-with-pagination/">page links provided by the <code>Link</code> header</a> in API responses.</p>
+
+<p>Since both the new and the old pagination parameters are still supported in API v3, API clients shouldn’t notice any changes today. Still, if you notice any problems with this endpoint, please <a href="https://github.com/contact?form%5Bsubject%5D=API:+Commits+pagination+improvements">let us know</a>.</p>
+</div>
+
 <div class="change" id="/changes/2014-05-06-gist-api-now-truncating-large-files/">
   <h2 class="title">
   <a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files</a>
@@ -3045,6 +3076,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API<br /><span class="date">May 9, 2014</span></a></li>
+
   <li><a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files<br /><span class="date">May 6, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-25-user-content-security/">New user content domains<br /><span class="date">April 25, 2014</span></a></li>
@@ -3058,8 +3091,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-04-08-reset-api-tokens/">Recommendation: Reset OAuth authorizations<br /><span class="date">April 8, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">Understanding search results and potential timeouts<br /><span class="date">April 7, 2014</span></a></li>
-
-  <li><a href="/changes/2014-04-04-create-public-repo-without-repo-scope/">Grant access to create public repositories without granting access to private repositories<br /><span class="date">April 4, 2014</span></a></li>
 
 </ul>
 

@@ -13,11 +13,6 @@ The Repo Commits API supports listing, viewing, and comparing commits in a repos
 
     GET /repos/:owner/:repo/commits
 
-_A special note on pagination:_ Due to the way Git works, commits are paginated
-based on SHA instead of page number. Please follow the link headers as outlined
-in the [pagination overview](https://developer.github.com/v3/#pagination)
-instead of constructing page links yourself.
-
 ### Parameters
 
 Name | Type | Description
@@ -32,9 +27,7 @@ Name | Type | Description
 ### Response
 
 <%=
-  headers 200, :pagination => {
-    :next => 'https://api.github.com/repositories/417862/commits?top=master&last_sha=4f9890864feb48296917c2fcf3682d8dc3adf16a'
-  }
+  headers 200, :pagination => default_pagination_rels
 %>
 <%= json(:commit) { |h| [h] } %>
 

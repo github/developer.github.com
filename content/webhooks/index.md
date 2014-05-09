@@ -51,9 +51,17 @@ want to trigger.
 
 For example, the
 [Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
-service listens for all events, while the
+service supports listening for all events, while the
 [IRC](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
-service can only listen for `push` and `pull_request` events by default.
+service can only listen for `push`, `issues`, `pull_request`, `commit_comment`,
+`pull_request_review_comment`, and `issue_comment` events.
+
+Each service also has a set of default events for which it listens if it isn't 
+configured. For example, the Web service listens only for `push` events by 
+default, while the IRC service listens on `push` and `pull_requests` events.
+Service hooks set up via the repository settings UI listen only for the default
+set of events, but can be
+[re-configured via the API](/v3/repos/hooks/#edit-a-hook).
 
 The available events are:
 

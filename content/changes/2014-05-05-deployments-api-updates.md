@@ -5,13 +5,11 @@ created_at: 2014-05-05
 author_name: atmos
 ---
 
-We're starting to feel pretty good about the Deployments API, and we'd like to introduce a new payload field plus a few extra attributes to the events API.
+We're still iterating on the [Deployments API preview mode][2]starting to feel pretty good about the Deployments API, and we'd like to introduce a new payload field plus a few extra attributes to the events API.
 
 ## API Changes
 
-We're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target, lots of people tend toward the concept of environments for staging and QA.
-
-![doc changes](https://camo.githubusercontent.com/5d3367127c45fc914b8dd65f3df8483459895873/687474703a2f2f636c6f75646170702e61746d6f732e6f72672f696d6167652f336d343530493031305533762f696e7465726e616c2d646576656c6f7065722e6769746875622e636f6d253230323031342d30352d303425323031342d33362d3033253230323031342d30352d303425323031342d33362d30372e6a7067)
+We're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target, lots of people tend toward the concept of environments for staging and QA. We hope this will help for users that deploy to multiple environments.
 
 ## Event Changes
 
@@ -19,11 +17,66 @@ We're also adding a few attributes to the outbound payloads. We're now including
 
 ### Deployment
 
-![deployment payload changes](https://camo.githubusercontent.com/5ea6c3c4042bb44e722aba30ecfd5f6accbd8c66/687474703a2f2f636c6f75646170702e61746d6f732e6f72672f696d6167652f3349313332673351317231792f6576656e7473253230323031342d30352d303425323031342d35332d3230253230323031342d30352d303425323031342d35332d33322e6a7067)
+<pre><code class="language-javascript">
+{
+  "url": "https://api.github.com/repos/my-org/my-repo/deployments/392",
+  "id": 392,
+  "sha": "837db83be4137ca555d9a5598d0a1ea2987ecfee",
+  "ref": "master",
+  "payload": {
+    "fe": [
+      "fe1",
+      "fe2",
+      "fe3"
+    ]
+  },
+  "environment": "staging",
+  "description": "ship it!",
+  "creator": {
+    "login": "my-org",
+    "id": 521,
+    "avatar_url": "http://alambic.github.test/avatars/u/521?",
+    "type": "User"
+  },
+  "created_at": "2014-05-09T19:56:47Z",
+  "updated_at": "2014-05-09T19:56:47Z",
+  "statuses_url": "https://api.github.com/repos/my-org/my-repo/deployments/392/statuses"
+}
+</code></pre>
 
 ### DeploymentStatus
 
-![deployment status payload changes](https://camo.githubusercontent.com/4b80ae3a3b1579f4faf62469d89f291b6a1539f2/687474703a2f2f636c6f75646170702e61746d6f732e6f72672f696d6167652f3370324234323164324130342f6576656e7473253230323031342d30352d303425323031342d33372d3139253230323031342d30352d303425323031342d33372d34352e6a7067)
+<pre><code class="language-javascript">
+{
+  "url": "https://api.github.com/repos/my-org/my-repo/deployments/396/statuses/1",
+  "id": 1,
+  "state": "success",
+  "deployment": {
+    "url": "https://api.github.com/repos/my-org/my-repo/deployments/396",
+    "id": 396,
+    "sha": "3b1039786c4c24b7a94987dc92fa4a92636c4e02",
+    "ref": "master",
+    "payload": {
+
+    },
+    "environment": "production",
+    "description": null,
+    "creator": {
+      "login": "alysson-goldner",
+      "id": 540,
+      "type": "User"
+    },
+    "created_at": "2014-05-09T19:59:36Z",
+    "updated_at": "2014-05-09T19:59:36Z",
+    "statuses_url": "https://api.github.com/repos/my-org/my-repo/deployments/396/statuses"
+  },
+  "description": null,
+  "target_url": "https://deploy.myorg.com/apps/my-repo/logs/420",
+  "created_at": "2014-05-09T19:59:39Z",
+  "updated_at": "2014-05-09T19:59:39Z",
+  "deployment_url": "https://api.github.com/repos/my-org/my-repo/deployments/396"
+}
+</code></pre>
 
 If you have any questions or feedback, please [get in touch][contact].
 

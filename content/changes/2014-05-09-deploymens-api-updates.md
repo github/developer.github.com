@@ -1,23 +1,25 @@
 ---
 kind: change
 title: New attributes for the Deployments API
-created_at: 2014-05-09
+created_at: 2014-05-10
 author_name: atmos
 ---
 
-We're still iterating on the [Deployments API preview][2] and we're starting to feel good about it.  Today we're introducing new attributes for a Deployment and a modification to the events API.
+We're still iterating on the [Deployments API preview][2] and we're starting to feel good about it.  Today we're introducing new attributes for Deployments and DeploymentStatuses as well as a few payload changes.
+
+**This is a breaking change for DeploymentStatus payloads**. You'll need to update your code to continue working with it.
 
 ## API Changes
 
-We're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target, lots of people tend toward the concept of environments for staging and QA. We hope this will help for users that deploy to multiple environments.
+For Deployments we're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, and user acceptance testing. We hope this will help our users that deploy to multiple environments interact with the API in a more sane manner.
 
-We're also persisting the request deployment `ref`. Previously we resolved a `ref` to the current `sha` for that ref. Now we'll be keeping it around for historical purposes. This helps a lot if you're deploying branches to verify them before you merge them into your default(master) branch.
+Deployments are also persisting the request deployment `ref`. Previously we resolved a `ref` to the current `sha` for that ref. Now we'll be keeping it around for historical purposes. This helps a lot if you're deploying branches to verify them before you merge them into your default(master) branch.
 
-## Event Changes
+## JSON Payload Changes
 
-We're also adding a few attributes to the outbound Deployment payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha.
+We're also adding a few attributes to the outbound Deployment payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha. The `environment` will also be present.
 
-The DeploymentStatus payloads now include a copy of the associated Deployment object. Ths means that DeploymentStatus events received via webhooks will have enough information to notify other systems without having to callback to GitHub for the `environment` or the `ref` that was deployed.
+The DeploymentStatus payloads now include a copy of the associated Deployment object. Ths means that DeploymentStatus events received via webhooks will have enough information to notify other systems without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
 
 ### Example Deployment Payload
 

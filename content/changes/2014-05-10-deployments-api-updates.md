@@ -19,7 +19,7 @@ Deployments are also persisting the requested deployment `ref`. Previously we re
 
 We're also adding a few attributes to the outbound Deployment payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha. The `environment` is also present.
 
-The Deployment Status payloads now embed the associated Deployment object. Ths means that Deployment Status events received via webhooks will have enough information to notify other systems without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
+The Deployment Status payloads now embed the associated Deployment object. With this enhancement, Deployment Status events received via webhooks will have enough information to notify other systems, without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
 
 ### Example Deployment Payload
 

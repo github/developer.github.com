@@ -11,7 +11,7 @@ We're continuing to iterate on the [Deployments API preview][2], and we're start
 
 ## API Changes
 
-For Deployments we're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, and user acceptance testing. We hope this will help our users that deploy to multiple environments interact with the API in a more sane manner.
+For Deployments we're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, and user acceptance testing. We hope this enhancement will enable more use cases for our users that deploy to multiple environments.
 
 Deployments are also persisting the request deployment `ref`. Previously we resolved a `ref` to the current `sha` for that ref. Now we'll be keeping it around for historical purposes. This helps a lot if you're deploying branches to verify them before you merge them into your default(master) branch.
 

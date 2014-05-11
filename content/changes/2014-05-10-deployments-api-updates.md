@@ -5,9 +5,9 @@ created_at: 2014-05-10
 author_name: atmos
 ---
 
-We're continuing to iterate on the [Deployments API preview][2], and we're starting to see it satisfy more and more use cases. Today we're introducing new attributes for Deployments and DeploymentStatuses as well as a few payload changes.
+We're continuing to iterate on the [Deployments API preview][2], and we're starting to see it satisfy more and more use cases. Today we're introducing new attributes for Deployments and Deployment Statuses as well as a few payload changes.
 
-**This is a breaking change for DeploymentStatus payloads**. You'll need to update your code to continue working with it.
+**This is a breaking change for Deployment Status payloads**. You'll need to update your code to continue working with it.
 
 ## API Changes
 
@@ -19,7 +19,7 @@ Deployments are also persisting the request deployment `ref`. Previously we reso
 
 We're also adding a few attributes to the outbound Deployment payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha. The `environment` will also be present.
 
-The DeploymentStatus payloads now include a copy of the associated Deployment object. Ths means that DeploymentStatus events received via webhooks will have enough information to notify other systems without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
+The Deployment Status payloads now include a copy of the associated Deployment object. Ths means that Deployment Status events received via webhooks will have enough information to notify other systems without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
 
 ### Example Deployment Payload
 

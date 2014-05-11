@@ -7,7 +7,7 @@ author_name: atmos
 
 We're continuing to iterate on the [Deployments API preview][2], and we're starting to see it satisfy more and more use cases. Today we're introducing new attributes for Deployments and Deployment Statuses as well as a few payload changes.
 
-**This is a breaking change for Deployment Status payloads**. You'll need to update your code to continue working with it.
+**This is a breaking change for Deployment Status payloads**. If you're trying out this new API during its preview period, you'll need to update your code to continue working with it.
 
 ## API Changes
 

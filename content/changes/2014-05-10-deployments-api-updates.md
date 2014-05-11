@@ -5,7 +5,7 @@ created_at: 2014-05-10
 author_name: atmos
 ---
 
-We're still iterating on the [Deployments API preview][2] and we're starting to feel good about it.  Today we're introducing new attributes for Deployments and DeploymentStatuses as well as a few payload changes.
+We're continuing to iterate on the [Deployments API preview][2], and we're starting to see it satisfy more and more use cases. Today we're introducing new attributes for Deployments and DeploymentStatuses as well as a few payload changes.
 
 **This is a breaking change for DeploymentStatus payloads**. You'll need to update your code to continue working with it.
 

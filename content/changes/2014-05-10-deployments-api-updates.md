@@ -21,7 +21,7 @@ We're also adding a few attributes to the outbound Deployment payloads. We're no
 
 The Deployment Status payloads now embed the associated Deployment object. With this enhancement, Deployment Status events received via webhooks will have enough information to notify other systems, without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
 
-### Example Deployment Payload
+### Example Deployment JSON
 
 <pre><code class="language-javascript">
 {
@@ -50,7 +50,7 @@ The Deployment Status payloads now embed the associated Deployment object. With 
 }
 </code></pre>
 
-### Example DeploymentStatus
+### Example DeploymentStatus JSON
 
 <pre><code class="language-javascript">
 {

@@ -1,7 +1,7 @@
 ---
-title: Media Types | GitHub API
+title: Media types | GitHub API
 ---
-# Media Types
+# Media types
 
 * TOC
 {:toc}
@@ -59,10 +59,10 @@ for the `X-GitHub-Media-Type` header:
     HTTP/1.1 200 OK
     X-GitHub-Media-Type: github.v3; param=full; format=json
 
-## Comment Body Properties
+## Comment body properties
 
 The body of a comment can be written in [GitHub Flavored Markdown][gfm].
-Issues, Issue Comments, Pull Request Comments, and Gist Comments all
+Issues, issue comments, Pull Request comments, and Gist comments all
 accept these same media types:
 
 ### Raw
@@ -93,7 +93,7 @@ Return HTML rendered from the body's markdown. Response will include
 Return raw, text and HTML representations. Response will include `body`,
 `body_text`, and `body_html`:
 
-## Git Blob Properties
+## Git blob properties
 
 The following media types are allowed when getting a blob:
 
@@ -111,7 +111,7 @@ encoded string. This is the default if nothing is passed.
 
 Return the raw blob data.
 
-## Commits, Commit comparison, and Pull Requests
+## Commits, commit comparison, and Pull Requests
 
 The Commit, Commit Comparison, and Pull Request resources support
 [diff][git-diff] and [patch][git-patch] formats:

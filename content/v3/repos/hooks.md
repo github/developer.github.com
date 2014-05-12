@@ -7,8 +7,7 @@ title: Webhooks | GitHub API
 * TOC
 {:toc}
 
-The Repository Webhooks API allows repository admins to manage the post-receive
-hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
+The Repository Webhooks API allows repository admins to manage the post-receive hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
 or the [PubSubHubbub API](#pubsubhubbub).
 
 ## List hooks
@@ -133,11 +132,11 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
 <%= headers 204 %>
 
-## Receiving Webhooks
+## Receiving webhooks
 
 In order for GitHub to send Webhook payloads to your service, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.
 
-### Webhook Headers
+### Webhook headers
 
 GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.
 

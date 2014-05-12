@@ -1,5 +1,5 @@
 ---
-title: User Emails | GitHub API
+title: User emails | GitHub API
 ---
 
 # Emails

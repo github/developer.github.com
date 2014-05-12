@@ -1,5 +1,5 @@
 ---
-title: Git Tags | GitHub API
+title: Git tags | GitHub API
 ---
 
 # Tags
@@ -10,7 +10,7 @@ title: Git Tags | GitHub API
 This tags API only deals with tag objects - so only annotated tags, not
 lightweight tags.
 
-## Get a Tag
+## Get a tag
 
     GET /repos/:owner/:repo/git/tags/:sha
 
@@ -19,7 +19,7 @@ lightweight tags.
 <%= headers 200 %>
 <%= json :gittag %>
 
-## Create a Tag Object
+## Create a tag object
 
 Note that creating a tag object does not create the reference that
 makes a tag in Git.  If you want to create an annotated tag in Git,
@@ -50,7 +50,7 @@ Name | Type | Description
 `date`|`string`| When this object was tagged. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 
-### Example Input
+### Example input
 
 <%= json "tag"=> "v0.0.1", \
     "message" => "initial version\n", \

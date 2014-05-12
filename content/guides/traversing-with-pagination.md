@@ -1,8 +1,8 @@
 ---
-title: Traversing with Pagination | GitHub API
+title: Traversing with pagination | GitHub API
 ---
 
-# Traversing with Pagination
+# Traversing with pagination
 
 * TOC
 {:toc}
@@ -15,7 +15,7 @@ In this guide, we'll make some calls to the GitHub Search API, and iterate over
 the results using pagination. You can find the complete source code for this project
 in the [platform-samples][platform samples] repository.
 
-## Basics of Pagination
+## Basics of pagination
 
 To start with, it's important to know a few facts about receiving paginated items:
 
@@ -177,7 +177,7 @@ your code should remain intact:
       break if last_response.rels[:next].nil?
     end
 
-## Constructing Pagination Links
+## Constructing pagination links
 
 Normally, with pagination, your goal isn't to concatenate all of the possible
 results, but rather, to produce a set of navigation, like this:

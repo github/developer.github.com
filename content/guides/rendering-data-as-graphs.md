@@ -1,8 +1,8 @@
 ---
-title: Rendering Data as Graphs | GitHub API
+title: Rendering data as graphs | GitHub API
 ---
 
-# Rendering Data as Graphs
+# Rendering data as graphs
 
 * TOC
 {:toc}

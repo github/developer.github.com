@@ -1,9 +1,9 @@
 ---
-title: Development Guides | GitHub API
+title: Development guides | GitHub API
 layout: guides
 ---
 
-# Development Guides
+# Development guides
 
 This section of the documentation is intended to get you up-and-running with
 real-world GitHub API applications. We'll cover everything you need to know, from

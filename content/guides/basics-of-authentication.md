@@ -2,7 +2,7 @@
 title: Basics of Authentication | GitHub API
 ---
 
-# Basics of Authentication
+# Basics of authentication
 
 * TOC
 {:toc}

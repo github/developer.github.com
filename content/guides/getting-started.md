@@ -1,8 +1,8 @@
 ---
-title: Getting Started | GitHub API
+title: Getting started | GitHub API
 ---
 
-# Getting Started
+# Getting started
 
 * TOC
 {:toc}

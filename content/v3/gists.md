@@ -165,7 +165,11 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 
     POST /gists/:id/forks
 
-**Note**: This was previously `/gists/:id/fork`
+<div class="alert">
+  <p>
+    <strong>Note</strong>: This was previously <code>/gists/:id/fork</code>
+	</p>
+</div>
 
 ### Response
 

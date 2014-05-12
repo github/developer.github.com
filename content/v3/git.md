@@ -1,10 +1,10 @@
 ---
-title: Git Data | GitHub API
+title: Git data | GitHub API
 ---
 
-# Git Data
+# Git data
 
-The Git Database API gives you access to read and write raw Git objects
+The Git database API gives you access to read and write raw Git objects
 to your Git database on GitHub and to list and update your references
 (branch heads and tags).
 
@@ -13,15 +13,11 @@ our API - by creating raw objects directly into the database and updating
 branch references you could technically do just about anything that Git
 can do without having Git installed.
 
-Git DB API functions will return a `409 Conflict` if the git repository for a Repository is empty
-or unavailable.  This typically means it is being created still.  [Contact
-Support](https://github.com/contact?form[subject]=Commits API) if this response status persists.
+Git DB API functions will return a `409 Conflict` if the git repository for a Repository is empty or unavailable.  This typically means it is being created still.  [Contact support](https://github.com/contact?form[subject]=Commits API) if this response status persists.
 
 ![git db](http://git-scm.com/figures/18333fig0904-tn.png)
 
-For more information on the Git object database, please read the
-[Git Internals](http://git-scm.com/book/en/Git-Internals) chapter of
-the Pro Git book.
+For more information on the Git object database, please read the [Git Internals](http://git-scm.com/book/en/Git-Internals) chapter of the Pro Git book.
 
 As an example, if you wanted to commit a change to a file in your
 repository, you would:

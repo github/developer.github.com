@@ -1,5 +1,5 @@
 ---
-title: Git Trees | GitHub API
+title: Git trees | GitHub API
 ---
 
 # Trees
@@ -7,7 +7,7 @@ title: Git Trees | GitHub API
 * TOC
 {:toc}
 
-## Get a Tree
+## Get a tree
 
     GET /repos/:owner/:repo/git/trees/:sha
 
@@ -16,7 +16,7 @@ title: Git Trees | GitHub API
 <%= headers 200 %>
 <%= json :tree %>
 
-## Get a Tree Recursively
+## Get a tree recursively
 
     GET /repos/:owner/:repo/git/trees/:sha?recursive=1
 
@@ -25,7 +25,7 @@ title: Git Trees | GitHub API
 <%= headers 200 %>
 <%= json :tree_extra %>
 
-## Create a Tree
+## Create a tree
 
 The tree creation API will take nested entries as well. If both a
 tree and a nested path modifying that tree are specified, it will

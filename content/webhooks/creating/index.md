@@ -37,7 +37,7 @@ This is the server endpoint that will receive the webhook payload.
 Since we're developing locally for our tutorial, let's set it to `http://localhost:4567/payload`.
 We'll explain why in the [Configuring Your Server](/webhooks/configuring/) docs.
 
-## Content Type
+## Content type
 
 Webhooks can be delivered using different content types:
 
@@ -60,7 +60,7 @@ and toggle the options there.
 
 When you're finished, click on **Add webhook**. Phew! Now that the webhook is created,
 it's time to set up our local server to test the webhook. Head on over to
-[Configuring Your Server](/webhooks/configuring/) to learn how to do that.
+[Configuring your server](/webhooks/configuring/) to learn how to do that.
 
 [webhook-api]: /v3/repos/hooks/
 [hooks-api]: /webhooks/#events

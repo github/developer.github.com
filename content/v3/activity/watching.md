@@ -7,21 +7,14 @@ title: Watching | GitHub API
 * TOC
 {:toc}
 
-Watching a Repository registers the user to receive notifications on new
-discussions, as well as events in the user's activity feed.  See [Repository
-Starring](/v3/activity/starring) for simple repository bookmarks.
+Watching a repository registers the user to receive notifications on new discussions, as well as events in the user's activity feed.  See [Repository Starring](/v3/activity/starring) for simple repository bookmarks.
 
-### Watching vs. Starring
+### Watching vs. starring
 
-In August 2012, we [changed the way watching
-works](https://github.com/blog/1204-notifications-stars) on GitHub.  At the time
-of that change, many API clients were already using the existing "watcher"
-endpoints to access starring data. To avoid breaking those applications, the
-legacy "watcher" endpoints continue to provide starring data.
+In August 2012, we [changed the way watching works](https://github.com/blog/1204-notifications-stars) on GitHub.  At the time of that change, many API clients were already using the existing "watcher" endpoints to access starring data. To avoid breaking those applications, the legacy "watcher" endpoints continue to provide starring data.
 
 To provide access to watching data, the v3 Watcher API uses the "subscription"
-endpoints described below. Check out the [Watcher API Change
-post](/changes/2012-9-5-watcher-api/) for more details.
+endpoints described below. Check out the [Watcher API Change post](/changes/2012-9-5-watcher-api/) for more details.
 
 ## List watchers
 
@@ -47,7 +40,7 @@ List repositories being watched by the authenticated user.
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
-## Get a Repository Subscription
+## Get a repository subscription
 
     GET /repos/:owner/:repo/subscription
 
@@ -60,7 +53,7 @@ List repositories being watched by the authenticated user.
 
 <%= headers 404 %>
 
-## Set a Repository Subscription
+## Set a repository subscription
 
     PUT /repos/:owner/:repo/subscription
 
@@ -77,7 +70,7 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :repo_subscription %>
 
-## Delete a Repository Subscription
+## Delete a repository subscription
 
     DELETE /repos/:owner/:repo/subscription
 

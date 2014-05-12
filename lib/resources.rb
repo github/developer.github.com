@@ -161,8 +161,11 @@ module GitHub
       "plan"                => {
         "name"          => "Medium",
         "space"         => 400,
-        "collaborators" => 10,
-        "private_repos" => 20
+        "private_repos" => 20,
+        "collaborators" => 0 # Plans now allow *unlimited* collaborators, so
+                             # this attribute is deprecated. However, the beta
+                             # and v3 media types need to continue to return an
+                             # integer value for backwards compatibility.
       }
     })
 

@@ -29,7 +29,7 @@ When an [issue](/v3/issues/#get-a-single-issue) is not a pull request, the v3 me
 
 For [Repositories](/v3/repos/#get), the v3 media type omits the `master_branch` attribute. API clients should use the `default_branch` attribute to obtain the repository's default branch.
 
-### User Emails JSON
+### User emails JSON
 
 For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of hashes (instead of an array of strings).
 
@@ -96,7 +96,7 @@ The recommendations below will help you prepare your application for the next ma
   use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,
   `top`, and `sha`.
 
-# beta (Deprecated) {#beta}
+# Beta (deprecated) {#beta}
 
 The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.
 

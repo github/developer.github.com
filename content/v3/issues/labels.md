@@ -1,5 +1,5 @@
 ---
-title: Issue Labels | GitHub API
+title: Issue labels | GitHub API
 ---
 
 # Labels

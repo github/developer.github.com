@@ -1,5 +1,5 @@
 ---
-title: Issue Assignees | GitHub API
+title: Issue assignees | GitHub API
 ---
 
 # Assignees

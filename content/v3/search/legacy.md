@@ -1,16 +1,15 @@
 ---
-title: Legacy Search | GitHub API
+title: Legacy search | GitHub API
 ---
 
-# Legacy Search
+# Legacy search
 
 * TOC
 {:toc}
 
-This is a listing of the Legacy Search API features from API v2 that have been ported to API
-v3. There should be no changes, other than the new URL and JSON output format.
+This is a listing of the Legacy Search API features from API v2 that have been ported to API v3. There should be no changes, other than the new URL and JSON output format.
 
-### Legacy Search API is Deprecated
+### Legacy search API is deprecated
 
 <div class="alert">
   <p>

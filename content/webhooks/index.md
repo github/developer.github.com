@@ -22,7 +22,7 @@ can configure hooks programmatically [via the API](/v3/repos/hooks/).
 A service is basically the name used to refer to a hook that has configuration
 settings, a list of available events, and default events.
 
-> For instance, the
+For instance, the
 [email](https://github.com/github/github-services/blob/master/lib/services/email.rb)
 service is a built-in GitHub service that will send event [payloads](#payloads)
 to, at most, two email addresses.  It will trigger for the `push`

@@ -76,8 +76,11 @@ The keys in the `files` hash are the `string` filename, and the value is another
   }
 %>
 
-_Note:_ Don't name your files "gistfile" with a numerical suffix.  This is the
-format of the automatic naming scheme that Gist uses internally.
+<div class="alert">
+  <p>
+    <strong>Note</strong>: Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally. 
+	</p>
+</div>
 
 ### Response
 

@@ -1,5 +1,5 @@
 ---
-title: Git Refs | GitHub API
+title: Git references | GitHub API
 ---
 
 # References
@@ -7,7 +7,7 @@ title: Git Refs | GitHub API
 * TOC
 {:toc}
 
-## Get a Reference
+## Get a reference
 
     GET /repos/:owner/:repo/git/refs/:ref
 
@@ -20,7 +20,7 @@ The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For
 <%= headers 200 %>
 <%= json :ref %>
 
-## Get all References
+## Get all references
 
     GET /repos/:owner/:repo/git/refs
 
@@ -40,7 +40,7 @@ For a full refs listing, you'll get something that looks like:
 <%= json :refs %>
 
 
-## Create a Reference
+## Create a reference
 
     POST /repos/:owner/:repo/git/refs
 
@@ -63,7 +63,7 @@ Name | Type | Description
       :Location => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA" %>
 <%= json :ref %>
 
-## Update a Reference
+## Update a reference
 
     PATCH /repos/:owner/:repo/git/refs/:ref
 
@@ -85,7 +85,7 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :ref %>
 
-## Delete a Reference
+## Delete a reference
 
     DELETE /repos/:owner/:repo/git/refs/:ref
 

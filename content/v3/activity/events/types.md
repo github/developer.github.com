@@ -179,7 +179,7 @@ Key | Type | Description
 
 ## GistEvent
 
-Triggered when a [Gist](/v3/gists/) is created or updated.
+Triggered when a [gist](/v3/gists/) is created or updated.
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 

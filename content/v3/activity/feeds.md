@@ -7,7 +7,7 @@ title: Feeds | GitHub API
 * TOC
 {:toc}
 
-## List Feeds
+## List feeds
 
 GitHub provides several timeline resources in [Atom][] format. The Feeds API
 lists all the feeds available to the authenticating user:

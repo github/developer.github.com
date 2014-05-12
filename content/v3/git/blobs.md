@@ -1,5 +1,5 @@
 ---
-title: Git Blobs | GitHub API
+title: Git blobs | GitHub API
 ---
 
 # Blobs
@@ -7,15 +7,11 @@ title: Git Blobs | GitHub API
 * TOC
 {:toc}
 
-Since blobs can be any arbitrary binary data, the input and responses
-for the blob API takes an encoding parameter that can be either `utf-8`
-or `base64`.  If your data cannot be losslessly sent as a UTF-8 string,
-you can base64 encode it.
+Since blobs can be any arbitrary binary data, the input and responses for the blob API takes an encoding parameter that can be either `utf-8` or `base64`.  If your data cannot be losslessly sent as a UTF-8 string, you can base64 encode it.
 
-Blobs leverage [these custom media types](#custom-media-types). You can
-read more about the use of media types in the API [here](/v3/media/).
+Blobs leverage [these custom media types](#custom-media-types). You can read more about the use of media types in the API [here](/v3/media/).
 
-## Get a Blob
+## Get a blob
 
     GET /repos/:owner/:repo/git/blobs/:sha
 
@@ -26,7 +22,7 @@ read more about the use of media types in the API [here](/v3/media/).
 <%= headers 200 %>
 <%= json(:blob) %>
 
-## Create a Blob
+## Create a blob
 
     POST /repos/:owner/:repo/git/blobs
 
@@ -42,8 +38,7 @@ read more about the use of media types in the API [here](/v3/media/).
 
 ## Custom media types
 
-These are the supported media types for blobs. You can read more about the
-use of media types in the API [here](/v3/media/).
+These are the supported media types for blobs. You can read more about the use of media types in the API [here](/v3/media/).
 
     application/json
     application/vnd.github.VERSION.raw

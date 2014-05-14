@@ -11,17 +11,17 @@ We're continuing to iterate on the [Deployments API preview][deployments-preview
 
 ## API Changes
 
-For Deployments we're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, and user acceptance testing. We hope this enhancement will enable more use cases for our users that deploy to multiple environments.
+For Deployments we're introducing the concept of an `environment`. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, user acceptance testing, etc. We hope this enhancement will enable more use cases for our users that deploy to multiple environments.
 
-Deployments are also persisting the requested deployment `ref`. Previously we resolved a `ref` to the current `sha` for that ref. Now we'll be keeping the ref around for historical purposes. This helps a lot if you're deploying branches to verify them before you merge them into your default branch (e.g., "master").
+Deployments are also persisting the requested deployment `ref`. Previously we resolved a ref to the current SHA for that ref. Now we'll be keeping the ref around for historical purposes. This is especially helpful if you're deploying branches to verify them before you merge them into your default branch (e.g., "master").
 
 ## JSON Payload Changes
 
-We're also adding a few attributes to the outbound Deployment payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha. The `environment` is also present.
+We're also adding a few attributes to the outbound Deployment payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific SHA. The `environment` is also present.
 
 ## Webhook Changes
 
-The DeploymentStatus payloads now embed the associated Deployment object. With this enhancement, DeploymentStatus events received via webhooks will have enough information to notify other systems, without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
+The Deployment Status payloads now embed the associated Deployment object. With this enhancement, Deployment Status events received via webhooks will have enough information to notify other systems, without having to call back to the GitHub API for the `environment`, `ref`, or payload that was deployed.
 
 ### Example Deployment JSON
 
@@ -52,7 +52,7 @@ The DeploymentStatus payloads now embed the associated Deployment object. With t
 }
 </code></pre>
 
-### Example DeploymentStatus JSON
+### Example Deployment Status JSON
 
 <pre><code class="language-javascript">
 {

@@ -182,7 +182,7 @@ We can do whatever we want with our results. In this case, we'll just dump them 
     <p>
       <% if defined? private_emails %>
       With your permission, we were also able to dig up your private email addresses:
-      <%= private_emails.join(', ') %>
+      <%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %>
       <% else %>
       Also, you're a bit secretive about your private email addresses.
       <% end %>
@@ -227,7 +227,7 @@ Create a file called _advanced_server.rb_, and paste these lines into it:
     CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
     CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 
-    use Rack::Session::Cookie, :secret => rand.to_s()
+    use Rack::Session::Pool, :cookie_only => false
 
     def authenticated?
       session[:access_token]
@@ -314,7 +314,7 @@ Next, create a file in _views_ called _advanced.erb_, and paste this markup into
         <p>
           <% if defined? private_emails %>
           With your permission, we were also able to dig up your private email addresses:
-          <%= private_emails.join(', ') %>
+          <%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %>
           <% else %>
           Also, you're a bit secretive about your private email addresses.
           <% end %>

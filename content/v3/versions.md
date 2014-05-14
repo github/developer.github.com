@@ -91,6 +91,9 @@ The recommendations below will help you prepare your application for the next ma
 1. User attribute: bio
 : Recommendation: Do not use this attribute. It is obsolete.
 
+1. User attribute: plan["collaborators"]
+: Recommendation: Do not use this attribute. It is obsolete.
+
 1. Pagination parameters `top` and `sha` for method: /repos/:owner/:repo/commits
 : Recommendation: When fetching [the list of commits for a repository](/v3/repos/commits/#list-commits-on-a-repository)
   use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,

@@ -19,7 +19,9 @@ Deployments are also persisting the requested deployment `ref`. Previously we re
 
 We're also adding a few attributes to the outbound Deployment payloads. We're now including the `ref` attribute so you know the branch or tag name that resolved to a specific sha. The `environment` is also present.
 
-The Deployment Status payloads now embed the associated Deployment object. With this enhancement, Deployment Status events received via webhooks will have enough information to notify other systems, without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
+## Webhook Changes
+
+The DeploymentStatus payloads now embed the associated Deployment object. With this enhancement, DeploymentStatus events received via webhooks will have enough information to notify other systems, without having to callback to GitHub for the `environment`, `ref`, or payload that was deployed.
 
 ### Example Deployment JSON
 
@@ -29,6 +31,7 @@ The Deployment Status payloads now embed the associated Deployment object. With 
   "id": 392,
   "sha": "837db83be4137ca555d9a5598d0a1ea2987ecfee",
   "ref": "master",
+  "environment": "staging",
   "payload": {
     "fe": [
       "fe1",
@@ -36,7 +39,6 @@ The Deployment Status payloads now embed the associated Deployment object. With 
       "fe3"
     ]
   },
-  "environment": "staging",
   "description": "ship it!",
   "creator": {
     "login": "my-org",
@@ -59,11 +61,15 @@ The Deployment Status payloads now embed the associated Deployment object. With 
   "state": "success",
   "deployment": {
     "url": "https://api.github.com/repos/my-org/my-repo/deployments/396",
-    "id": 396,
-    "sha": "3b1039786c4c24b7a94987dc92fa4a92636c4e02",
+    "id": 392,
+    "sha": "837db83be4137ca555d9a5598d0a1ea2987ecfee",
     "ref": "master",
     "payload": {
-
+      "fe": [
+        "fe1",
+        "fe2",
+        "fe3"
+      ]
     },
     "environment": "production",
     "description": null,

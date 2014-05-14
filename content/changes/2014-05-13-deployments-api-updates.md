@@ -5,7 +5,7 @@ created_at: 2014-05-13
 author_name: atmos
 ---
 
-We're continuing to iterate on the [Deployments API preview][2], and we're starting to see it satisfy more and more use cases. Today we're introducing new attributes for Deployments and Deployment Statuses as well as a few payload changes.
+We're continuing to iterate on the [Deployments API preview][deployments-preview], and we're starting to see it satisfy more and more use cases. Today we're introducing new attributes for Deployments and Deployment Statuses as well as a few payload changes.
 
 **This is a breaking change for Deployment Status payloads**. If you're trying out this new API during its preview period, you'll need to update your code to continue working with it.
 
@@ -93,3 +93,4 @@ The DeploymentStatus payloads now embed the associated Deployment object. With t
 If you have any questions or feedback, please [get in touch][contact].
 
 [contact]: https://github.com/contact?form[subject]=Deployments+API
+[deployments-preview]: https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/

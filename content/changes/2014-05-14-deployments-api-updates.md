@@ -43,7 +43,7 @@ The Deployment Status payloads now embed the associated Deployment object. With 
   "creator": {
     "login": "my-org",
     "id": 521,
-    "avatar_url": "http://alambic.github.test/avatars/u/521?",
+    "avatar_url": "https://avatars.githubusercontent.com/u/2988?",
     "type": "User"
   },
   "created_at": "2014-05-09T19:56:47Z",

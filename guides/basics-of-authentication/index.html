@@ -226,7 +226,7 @@ the logged in user:</p>
 <span class="nt">&lt;p&gt;</span>
   <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">defined?</span> <span class="n">private_emails</span> <span class="cp">%&gt;</span>
   With your permission, we were also able to dig up your private email addresses:
-  <span class="cp">&lt;%=</span> <span class="n">private_emails</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">private_emails</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">private_email_address</span><span class="o">|</span> <span class="n">private_email_address</span><span class="o">[</span><span class="s2">"email"</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span> <span class="cp">%&gt;</span>
   <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
   Also, you're a bit secretive about your private email addresses.
   <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
@@ -270,7 +270,7 @@ the <code>user:email</code> scope.</p>
 <span class="no">CLIENT_ID</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'GH_BASIC_CLIENT_ID'</span><span class="o">]</span>
 <span class="no">CLIENT_SECRET</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'GH_BASIC_SECRET_ID'</span><span class="o">]</span>
 
-<span class="n">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Session</span><span class="o">::</span><span class="no">Cookie</span><span class="p">,</span> <span class="ss">:secret</span> <span class="o">=&gt;</span> <span class="nb">rand</span><span class="o">.</span><span class="n">to_s</span><span class="p">()</span>
+<span class="n">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Session</span><span class="o">::</span><span class="no">Pool</span><span class="p">,</span> <span class="ss">:cookie_only</span> <span class="o">=&gt;</span> <span class="kp">false</span>
 
 <span class="k">def</span> <span class="nf">authenticated?</span>
   <span class="n">session</span><span class="o">[</span><span class="ss">:access_token</span><span class="o">]</span>
@@ -355,7 +355,7 @@ OAuth flow and updates the session with the granted token and scopes.</p>
     <span class="nt">&lt;p&gt;</span>
       <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">defined?</span> <span class="n">private_emails</span> <span class="cp">%&gt;</span>
       With your permission, we were also able to dig up your private email addresses:
-      <span class="cp">&lt;%=</span> <span class="n">private_emails</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span> <span class="cp">%&gt;</span>
+      <span class="cp">&lt;%=</span> <span class="n">private_emails</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">private_email_address</span><span class="o">|</span> <span class="n">private_email_address</span><span class="o">[</span><span class="s2">"email"</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span> <span class="cp">%&gt;</span>
       <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
       Also, you're a bit secretive about your private email addresses.
       <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>

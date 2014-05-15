@@ -46,7 +46,7 @@ layout: developers
   </div>
 
   <div class="program-info-column">
-    <span class="mega-octicon octicon-person-add"></span>
+    <span class="mega-octicon octicon-organization"></span>
     <h2>Ready to join the GitHub Developer Program?</h2>
     <p>Membership is open to individual developers and companies who have:</p>
     <ul>

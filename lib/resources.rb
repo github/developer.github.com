@@ -1586,9 +1586,15 @@ module GitHub
     }
 
     DEPLOYMENT_STATUS = {
-      "id" => 1,
       "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
+      "id" => 1,
       "state" => "success",
+      "creator" => USER,
+      "description" => "Deploy request from hubot",
+      "target_url" => "https://gist.github.com/628b2736d379f",
+      "created_at" => "2012-07-20T01:19:13Z",
+      "updated_at" => "2012-07-20T01:19:13Z",
+      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1",
       "deployment" => {
         "id" => 1,
         "ref" => "master",
@@ -1601,13 +1607,7 @@ module GitHub
         "updated_at" => "2012-07-20T01:19:13Z",
         "description" => "Deploy request from hubot",
         "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
-      },
-      "creator" => USER,
-      "target_url" => "https://gist.github.com/628b2736d379f",
-      "created_at" => "2012-07-20T01:19:13Z",
-      "updated_at" => "2012-07-20T01:19:13Z",
-      "description" => "Deploy request from hubot",
-      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1"
+      }
     }
 
     SIMPLE_STATUS = {

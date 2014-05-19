@@ -1,7 +1,7 @@
 ---
 kind: change
 title: New attributes for the Deployments API
-created_at: 2014-05-14
+created_at: 2014-05-19
 author_name: atmos
 ---
 
@@ -72,7 +72,7 @@ The DeploymentStatus payloads now embed the associated Deployment object. With t
       ]
     },
     "environment": "production",
-    "description": null,
+    "description": "Deploying to production",
     "creator": {
       "login": "alysson-goldner",
       "id": 540,
@@ -82,7 +82,7 @@ The DeploymentStatus payloads now embed the associated Deployment object. With t
     "updated_at": "2014-05-09T19:59:36Z",
     "statuses_url": "https://api.github.com/repos/my-org/my-repo/deployments/396/statuses"
   },
-  "description": null,
+  "description": "Deployment succeeded",
   "target_url": "https://deploy.myorg.com/apps/my-repo/logs/420",
   "created_at": "2014-05-09T19:59:39Z",
   "updated_at": "2014-05-09T19:59:39Z",

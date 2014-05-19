@@ -84,7 +84,7 @@ Key | Type | Description
 `sha`        |`string` | The commit SHA for which this deployment was created.
 `name`       |`string` | Name of repository for this deployment, formatted as `:owner/:repo`.
 `payload`    |`string` | The optional extra information for this deployment.
-`environment`|`string` | The optional environment to deploy to, defaults to production.
+`environment`|`string` | The optional environment to deploy to. Default: `"production"`
 `description`|`string` | The optional human-readable description added to the deployment.
 
 

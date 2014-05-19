@@ -154,9 +154,15 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span><span class="p">,</span>
+    <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+    <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"task"</span><span class="o">:</span> <span class="s2">"deploy:migrate"</span>
+    <span class="p">},</span>
+    <span class="s2">"environment"</span><span class="o">:</span> <span class="s2">"production"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
     <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
       <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -176,12 +182,8 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
       <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"environment"</span><span class="o">:</span> <span class="s2">"production"</span>
-    <span class="p">},</span>
     <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
     <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
     <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
@@ -241,6 +243,12 @@ when a deployment event is dispatched.</p>
 </td>
     </tr>
 <tr>
+<td><code>environment</code></td>
+      <td><code>string</code></td>
+      <td>Optional name for the target deployment environment (e.g., production, staging, qa). Default: <code>"production"</code>
+</td>
+    </tr>
+<tr>
 <td><code>auto_merge</code></td>
       <td><code>boolean</code></td>
       <td>Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: <code>false</code>
@@ -257,7 +265,7 @@ when a deployment event is dispatched.</p>
 
 <pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"topic-branch"</span><span class="p">,</span>
-  <span class="s2">"payload"</span><span class="o">:</span> <span class="s2">"{\"environment\":\"production\",\"deploy_user\":\"atmos\",\"room_id\":123456}"</span><span class="p">,</span>
+  <span class="s2">"payload"</span><span class="o">:</span> <span class="s2">"{\"user\":\"atmos\",\"room_id\":123456}"</span><span class="p">,</span>
   <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploying my sweet branch"</span>
 <span class="p">}</span></code></pre>
 
@@ -267,9 +275,15 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span><span class="p">,</span>
   <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span><span class="p">,</span>
+  <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"task"</span><span class="o">:</span> <span class="s2">"deploy:migrate"</span>
+  <span class="p">},</span>
+  <span class="s2">"environment"</span><span class="o">:</span> <span class="s2">"production"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
   <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -289,12 +303,8 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
     <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"environment"</span><span class="o">:</span> <span class="s2">"production"</span>
-  <span class="p">},</span>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
   <span class="s2">"statuses_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses"</span>
 <span class="p">}</span></code></pre>
 
@@ -336,8 +346,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses/42"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
     <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
       <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
@@ -358,13 +368,11 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
       <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"environment"</span><span class="o">:</span> <span class="s2">"production"</span>
-    <span class="p">},</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
     <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/628b2736d379f"</span><span class="p">,</span>
     <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
     <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span>
+    <span class="s2">"deployment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -419,8 +427,8 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses/42"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
   <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
@@ -441,13 +449,11 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
     <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"environment"</span><span class="o">:</span> <span class="s2">"production"</span>
-  <span class="p">},</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
   <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://gist.github.com/628b2736d379f"</span><span class="p">,</span>
   <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Deploy request from hubot"</span>
+  <span class="s2">"deployment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span>
 <span class="p">}</span></code></pre>
     </div>
 

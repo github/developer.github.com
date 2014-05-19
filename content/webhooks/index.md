@@ -71,8 +71,8 @@ Name | Description
 `commit_comment` | Any time a Commit is commented on.
 `create` | Any time a Repository, Branch, or Tag is created.
 `delete` | Any time a Branch or Tag is deleted.
-`deployment_status` | Any time a deployment for the Repository has a status update from the API.
 `deployment` | Any time a Repository has a new deployment created from the API.
+`deployment_status` | Any time a deployment for the Repository has a status update from the API.
 `fork` | Any time a Repository is forked.
 `gollum` | Any time a Wiki page is updated.
 `issue_comment` | Any time an Issue is commented on.

@@ -1606,6 +1606,7 @@ module GitHub
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "description" => "Deploy request from hubot",
+      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1"
     }
 
     SIMPLE_STATUS = {

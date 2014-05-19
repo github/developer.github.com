@@ -72,7 +72,7 @@ The `q` search term can also contain any combination of the supported repository
 * [`forks`](https://help.github.com/articles/searching-repositories#forks)
   Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.
 * [`created` or `pushed`](https://help.github.com/articles/searching-repositories#created-and-last-updated)
-  Filters repositories based on times of creation, or when they were last updated.
+  Filters repositories based on date of creation, or when they were last updated.
 * [`user` or `repo`](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)
   Limits searches to a specific user or repository.
 * [`language`](https://help.github.com/articles/searching-repositories#languages)
@@ -229,10 +229,16 @@ The `q` search term can also contain any combination of the supported issue sear
    Filter issues based on whether they're open or closed.
  * [`labels`](https://help.github.com/articles/searching-issues#labels)
    Filters issues based on their labels.
+ * [`no`](https://help.github.com/articles/searching-issues#no)
+   Filters items missing certain metadata, such as `label`, `milestone`, or `assignee`
  * [`language`](https://help.github.com/articles/searching-issues#language)
    Searches for issues within repositories that match a certain language.
+ * [`is`](https://help.github.com/articles/searching-issues#is)
+   Searches for items within repositories that match a certain state, such as `open`, `closed`, or `merged`
  * [`created` or `updated`](https://help.github.com/articles/searching-issues#created-and-last-updated)
-   Filters issues based on times of creation, or when they were last updated.
+   Filters issues based on date of creation, or when they were last updated.
+ * [`merged`](https://help.github.com/articles/searching-issues#merged)
+   Filters pull requests based on the date when they were merged.
  * [`comments`](https://help.github.com/articles/searching-issues#comments)
    Filters issues based on the quantity of comments.
  * [`user` or `repo`](https://help.github.com/articles/searching-issues#users-organizations-and-repositories)

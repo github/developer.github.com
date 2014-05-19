@@ -9,8 +9,8 @@ layout: developers
     <p class="intro">Building an application that integrates with GitHub? Register for our Developer Program! The possibilities are endless, and you enjoy the kudos.</p>
     <a href="https://github.com/developer/register" class="button">Register now</a>
   </div>
-  <img src="/shared/images/header-animation.gif" alt="GitHub Universe" class="earth" width="450" height="375">
-  <img src="/shared/images/header-animation-short-loop.gif" alt="GitHub Universe" class="earth earth-short-loop" width="450" height="375">
+  <img src="/images/header-animation.gif" alt="GitHub Universe" class="earth" width="450" height="375">
+  <img src="/images/header-animation-short-loop.gif" alt="GitHub Universe" class="earth earth-short-loop" width="450" height="375">
 </div>
 
 <div class="full-width-divider">
@@ -46,7 +46,7 @@ layout: developers
   </div>
 
   <div class="program-info-column">
-    <span class="mega-octicon octicon-person-add"></span>
+    <span class="mega-octicon octicon-organization"></span>
     <h2>Ready to join the GitHub Developer Program?</h2>
     <p>Membership is open to individual developers and companies who have:</p>
     <ul>

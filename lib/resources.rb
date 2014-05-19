@@ -1572,16 +1572,16 @@ module GitHub
     ]
 
     DEPLOYMENT = {
-      "id" => 1,
-      "ref" => "master",
-      "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
       "url" => "https://api.github.com/repos/octocat/example/deployments/1",
-      "creator" => USER,
-      "environment" => "production",
+      "id" => 1,
+      "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+      "ref" => "master",
       "payload" => {:task => 'deploy:migrate'},
+      "environment" => "production",
+      "description" => "Deploy request from hubot",
+      "creator" => USER,
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
-      "description" => "Deploy request from hubot",
       "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
     }
 

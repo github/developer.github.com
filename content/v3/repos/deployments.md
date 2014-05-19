@@ -168,7 +168,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:deployment_status) { |h| [h] } %>
+<%= json(:deployment_status) { |h| h.delete("deployment"); [h] } %>
 
 ## Create a Deployment Status
 

@@ -128,6 +128,7 @@ Name | Type | Description
 `ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
 `force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks. Default: `false`
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`
+`environment`|`string` | Optional name for the target deployment environment (e.g., production, staging, qa). Default: `"production"`
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: `false`
 `description`|`string` | Optional short description. Default: `""`
 
@@ -135,7 +136,7 @@ Name | Type | Description
 
 <%= json \
   :ref           => "topic-branch",
-  :payload       => "{\"environment\":\"production\",\"deploy_user\":\"atmos\",\"room_id\":123456}",
+  :payload       => "{\"user\":\"atmos\",\"room_id\":123456}",
   :description   => "Deploying my sweet branch"
 %>
 
@@ -167,7 +168,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:deployment_status) { |h| [h] } %>
+<%= json(:deployment_status) { |h| h.delete("deployment"); [h] } %>
 
 ## Create a Deployment Status
 

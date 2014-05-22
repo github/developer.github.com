@@ -33,7 +33,7 @@ Name | Type | Description
 
 This method returns the contents of a file or directory in a repository.
 
-    GET /repos/:owner/:repo/contents/:path
+    GET /repos/:owner/:ref/contents/:path
 
 Files and symlinks support [a custom media type](#custom-media-types) for getting the raw content.
 Directories and submodules do _not_ support custom media types.

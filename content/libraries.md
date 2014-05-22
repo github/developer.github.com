@@ -139,7 +139,7 @@ covers the entire API.
 [agithub]: https://github.com/jpaugh/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
 [octohub]: https://github.com/turnkeylinux/octohub
-[github-flask]: https://github-flask.readthedocs.org
+[github-flask]: http://github-flask.readthedocs.org
 [torngithub]: https://github.com/jkeylu/torngithub
 
 ## Ruby

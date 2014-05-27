@@ -187,7 +187,7 @@ redirects the user back to the application:
 ![GitHub's OAuth Prompt](/images/oauth_prompt.png)
 
 However, you don't need to set up the entire web flow to begin working with OAuth tokens.
-An easier way to get a token is to [create a **Personal token**][personal token] via your
+An easier way to get a token is to [create a **personal access token**][personal token] via your
 [Application settings page][application settings]:
 
 ![Personal Token selection](/images/personal_token.png)

@@ -6,6 +6,7 @@ author_name: atmos
 ---
 
 Today we're making a couple of minor changes to the [Deployments API preview][2]. With the introduction of [combined status][4] in the [Deployment API preview update][3] we realized a few incosistencies with the API that we'd like to remedy.
+Today we're making a couple of minor changes to the [Deployments API preview][2]. With the introduction of [combined statuses][4] in the [Deployment API preview update][3], we realized a few incosistencies with the API that we'd like to remedy.
 
 The first change provides a mechanism for bypassing commit status checks without the use of the `force` parameter. Requiring users to use the `force` parameter bypassed the auto-merging feature which ensures that the requested `ref` is up to date with the repo's default branch. To remedy this we're introducing a new boolean parameter called `commit_status_check`. If this parameter is provided, and is set to false, commit status checks will not be run during deployment creation. The default behavior will be as before though, verify commit statuses are in a `success` state before creating a deployment.
 

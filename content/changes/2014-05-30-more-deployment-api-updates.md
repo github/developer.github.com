@@ -5,10 +5,9 @@ created_at: 2014-05-30
 author_name: atmos
 ---
 
-Today we're making a couple of minor changes to the [Deployments API preview][2]. With the introduction of [combined status][4] in the [Deployment API preview update][3] we realized a few incosistencies with the API that we'd like to remedy.
 Today we're making a couple of minor changes to the [Deployments API preview][2]. With the introduction of [combined statuses][4] in the [Deployment API preview update][3], we realized a few incosistencies with the API that we'd like to remedy.
 
-The first change provides a mechanism for bypassing commit status checks without the use of the `force` parameter. Requiring users to use the `force` parameter bypassed the auto-merging feature which ensures that the requested `ref` is up to date with the repo's default branch. To remedy this we're introducing a new boolean parameter called `commit_status_check`. If this parameter is provided, and is set to false, commit status checks will not be run during deployment creation. The default behavior will be as before though, verify commit statuses are in a `success` state before creating a deployment.
+The first change provides a mechanism for bypassing commit status checks without the use of the `force` parameter. Requiring users to use the `force` parameter bypassed the auto-merging feature which ensures that the requested `ref` is up to date with the repo's default branch. To remedy this, we're introducing a new boolean parameter called `commit_status_check`. If this parameter is provided, and is set to `false`, commit status checks will not be run during deployment creation. The default behavior will be as before though, and you should verify commit statuses are in a `success` state before creating a deployment.
 
 The second change allows for specific contexts to be required when creating a deployment. To reconcile this issue we're introducing a new parameter called `commit_status_contexts`. This parameter accepts an array of named contexts that are ensured to be in a "success" state. If the `commit_status_contexts` array is ommitted then it will attempt to validate that all unique contexts are in a "success" state. If you aren't using multiple commit status contexts then this parameter can be safely omitted and we will verify the default context.
 

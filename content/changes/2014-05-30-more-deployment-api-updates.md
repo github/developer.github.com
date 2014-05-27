@@ -11,7 +11,7 @@ The first change provides a mechanism for bypassing commit status checks without
 
 The second change allows for specific contexts to be required when creating a deployment. To reconcile this issue we're introducing a new parameter called `commit_status_contexts`. This parameter accepts an array of named contexts that are ensured to be in a "success" state. If the `commit_status_contexts` array is ommitted then it will attempt to validate that all unique contexts are in a "success" state. If you aren't using multiple commit status contexts then this parameter can be safely omitted and we will verify the default context.
 
-We're also deprecating the `force` parameter entirely. The `force` parameter existed to bypass both the up-to date checks and the commit status checks. The same behavior can now be accomplished by setting both the `auto_merge` and `commit_status_check` to false.
+We're also deprecating the `force` parameter entirely. The `force` parameter existed to bypass both the up-to date checks and the commit status checks. The same behavior can now be accomplished by setting both the `auto_merge` and `commit_status_check` to `false`.
 
 This will hopefully resolve the last of our concerns around the Deployments APIand we're hoping to take it out of preview mode in the next 60 days.
 

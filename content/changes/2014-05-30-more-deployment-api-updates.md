@@ -13,7 +13,7 @@ The second change allows for specific contexts to be required when creating a de
 
 We're also deprecating the `force` parameter entirely. The `force` parameter existed to bypass both the up-to date checks and the commit status checks. The same behavior can now be accomplished by setting both the `auto_merge` and `commit_status_check` to `false`.
 
-This will hopefully resolve the last of our concerns around the Deployments APIand we're hoping to take it out of preview mode in the next 60 days.
+This will hopefully resolve the last of our concerns around the Deployments API and we're hoping to take it out of preview mode in the next 60 days.
 
 If you have any questions or concerns, [drop us a line][1].
 

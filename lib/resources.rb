@@ -46,7 +46,7 @@ module GitHub
       end
 
       def headers(status, head = {})
-        css_class = (status == 204 || status == 404) ? 'headers no-response' : 'headers'
+        css_class = (status == 202 || status == 204 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
@@ -1833,6 +1833,75 @@ module GitHub
       "ab" => "https://github.global.ssl.fastly.net/images/icons/emoji/ab.png?v5"
     }
 
+    ADMIN_STATS = {
+      "issues" =>  {
+        "total_issues" =>  610,
+        "closed_issues" =>  505,
+        "open_issues" =>  105
+      },
+      "hooks" =>  {
+        "total_hooks" =>  0,
+        "active_hooks" =>  0,
+        "inactive_hooks" =>  0
+      },
+      "milestones" =>  {
+        "closed_milestones" =>  7,
+        "open_milestones" =>  4,
+        "total_milestones" =>  11
+      },
+      "orgs" =>  {
+        "total_team_members" =>  232,
+        "disabled_orgs" =>  0,
+        "total_orgs" =>  17,
+        "total_teams" =>  32
+      },
+      "comments" =>  {
+        "total_gist_comments" =>  0,
+        "total_commit_comments" =>  80,
+        "total_pull_request_comments" =>  47,
+        "total_issue_comments" =>  1166
+      },
+      "pages" =>  {
+        "total_pages" =>  3
+      },
+      "users" =>  {
+        "disabled_user" =>  0,
+        "admin_users" =>  48,
+        "total_users" =>  507
+      },
+      "gists" =>  {
+        "private_gists" =>  0,
+        "public_gists" =>  0,
+        "total_gists" =>  0
+      },
+      "pulls" =>  {
+        "mergeable_pulls" =>  38,
+        "merged_pulls" =>  178,
+        "unmergeable_pulls" =>  11,
+        "total_pulls" =>  250
+      },
+      "repos" =>  {
+        "fork_repos" =>  7,
+        "root_repos" =>  153,
+        "total_repos" =>  153,
+        "total_pushes" =>  0,
+        "org_repos" =>  17,
+        "total_wikis" =>  0
+      }
+    }
+
+    LICENSING = {
+      "seats" => 1400,
+      "seats_used" => 1316,
+      "seats_available" => 84,
+      "kind" => "standard",
+      "days_until_expiration" => 365,
+      "expire_at" => "2016/02/06 12:41:52 -0600"
+    }
+
+    INDEXING_SUCCESS = {
+      "message" => "Repository \"kansaichris/japaning\" has been added to the indexing queue"
+    }
   end
 end
 

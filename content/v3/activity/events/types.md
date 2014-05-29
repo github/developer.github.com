@@ -128,7 +128,7 @@ Key | Type | Description
 
 Triggered when a user [follows another user](/v3/users/followers/#follow-a-user).
 
-Events of this type are not visible in timelines, they are only used to trigger hooks.
+Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
 ### Hook name
 
@@ -267,6 +267,8 @@ Key | Type | Description
 Represents an attempted build of a GitHub Pages site, whether successful or not.
 
 Triggered on push to a GitHub Pages enabled branch (`gh-pages` for project pages, `master` for user and organization pages).
+
+Events of this type are not visible in timelines, they are only used to trigger hooks.
 
 ### Hook Name
 

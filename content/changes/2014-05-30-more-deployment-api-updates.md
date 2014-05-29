@@ -9,9 +9,9 @@ Today we're making a couple of minor changes to the [Deployments API preview][2]
 
 We now provide a mechanism for bypassing commit status checks without the use of the `force` parameter. Requiring users to use the `force` parameter also bypassed the auto-merging feature which ensures that the requested `ref` is up to date with the repo's default branch. To reconcile this issue we're introducing a new parameter called `required_contexts`. This parameter accepts an array of named contexts that are ensured to be in a "success" state. If the `required_contexts` array is ommitted then it will attempt to validate that all unique contexts are in a "success" state. If you want to bypass commit status checks pass in an empty array as `required_contexts`.
 
-We're also deprecating the `force` parameter entirely. The `force` parameter existed to bypass both the up-to date checks and the commit status checks. The same behavior can now be accomplished by setting `auto_merge` to `false` and `required_contexts` to `[]`.
+We've removed support for the `force` parameter. The `force` parameter existed to bypass both the up-to date checks and the commit status checks. The same behavior can now be accomplished by setting `auto_merge` to `false` and `required_contexts` to `[]`.
 
-This will hopefully resolve the last of our concerns around the Deployments API and we're hoping to take it out of preview mode in the next 60 days.
+This will hopefully resolve the last of our concerns around the Deployments API and we'll be extending the preview period until we're fully comfortable with it.
 
 If you have any questions or concerns, [drop us a line][1].
 

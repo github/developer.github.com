@@ -104,15 +104,13 @@ branch for the repository, we will attempt to merge it for you. If the merge
 succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.
 
-The `commit_status_check` parameter is used to verify that [commit
+The `required_contexts` parameter is used to specify a list of [commit
 statuses](/v3/repos/statuses) are in a "success" state before creating a
 deployment. If your repository is taking advantage of [combined
 statuses](/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref) then
 all statuses with unique contexts will need to be in a "success" state.  (Your
 repository is not required to use commit statuses. If no commit statuses are
 present, the deployment will always be created.)
-
-The `commit_status_contexts` parameter is used to specify a list of required contexts that are necessary for a successful deployment to be created. In some cases contexts are only informational and are not intentionally blockers for a deployment.
 
 The `payload` parameter is available for any extra information that a
 deployment system might need. It is a JSON text field that will be passed on
@@ -128,11 +126,9 @@ Name | Type | Description
 -----|------|--------------
 `ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: `true`
-`commit_status_check`|`boolean`| Optional parameter to bypass any commit status checks. Default: `true`
-`commit_status_contexts`|`boolean`| Optional parameter to specify which contexts are required in order to create a deployment. Default: `["nil"]`
+`required_contexts`|`Array`| Optional array of status contexts verified against commit status checks. Default: `["default"]`
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`
 `environment`|`string` | Optional name for the target deployment environment (e.g., production, staging, qa). Default: `"production"`
-`auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: `false`
 `description`|`string` | Optional short description. Default: `""`
 
 #### Example

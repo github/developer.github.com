@@ -7,15 +7,17 @@ title: Enterprise | GitHub API
 * TOC
 {:toc}
 
-GitHub Enterprise supports the same powerful API available on GitHub.com with no additional configuration required. In addition, the Enterprise installation has its own set of API endpoints.
+GitHub Enterprise supports the same powerful API available on GitHub.com with no additional configuration required. In addition, the Enterprise installation has its own set of API endpoints, which are documented in this section.
 
 ## Accessing the API
 
-To access the API, just send requests to the following URL:
+To access both the GitHub.com and Enterprise API endpoints, send requests to the following URL:
 
-The Admin Stats API is available to pull a variety of metrics about your installation. Any admin user can access the API. Normal users will receive a 404 response if they try to access it. To access the API, hit the following endpoint:
+``` command-line
+http(s)://<em>hostname</em>/api/v3/
+```
 
-    http(s)://<hostname>/api/v3/
+`hostname` is the name of your Enterprise installation. Note that this differs from the GitHub.com API endpoint of `api.github.com`.
 
 ## Authentication
 

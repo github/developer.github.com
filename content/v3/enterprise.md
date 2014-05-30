@@ -21,9 +21,8 @@ http(s)://<em>hostname</em>/api/v3/
 
 ## Authentication
 
-The GitHub Enterprise API is an extension of the main GitHub.com API, so you can [use the same authentication methods](http://developer.github.com/v3/#authentication) for it. The main difference between them is that the Enterprise API is only accessible to Admin users on a GitHub Enterprise installation.
+The API endpoints available on your Enterprise installation is an extension of the main GitHub.com API, so you can [use the same authentication methods](http://developer.github.com/v3/#authentication) for it. For example, you can use **OAuth tokens** (which can be created using the [Authorizations API][]) or **basic auth** for authenticating your user.
 
-You can use **OAuth tokens** (which can be created using the [Authorizations API][]) or **basic auth** for authenticating your user.
 
 ### Usage Examples
 
@@ -40,5 +39,6 @@ Below, you'll find some example Ruby scripts that demonstrate using the API on a
 <script src="https://gist.github.com/2582006.js?file=user-api-example.rb">
 </script>
 <noscript>[View gist](https://gist.github.com/watsonian/2582006)</noscript>
+Enterprise API endpoints are only accessible to Admin users on a GitHub Enterprise installation.
 
 [Authorizations API]: /v3/oauth_authorizations/#create-a-new-authorization

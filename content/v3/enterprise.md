@@ -13,9 +13,9 @@ GitHub Enterprise supports the same powerful API available on GitHub.com with no
 
 To access both the GitHub.com and Enterprise API endpoints, requests are sent to the following URL:
 
-``` command-line
+<pre class="terminal">
 http(s)://<em>hostname</em>/api/v3/
-```
+</pre>
 
 `hostname` is the name of your Enterprise installation. Note that this differs from the GitHub.com API endpoint of `api.github.com`.
 

@@ -11,33 +11,42 @@ You can use this API to manage your GitHub Enterprise installation. We've includ
 
 Note: only admin users can access Enterprise API endpoints. Normal users will receive a `404` response if they try to access it.
 
+## Endpoint
+
+The Management Console API is a little different than the other Enterprise API endpoints. Requests to this API are sent to the following URL:
+
+<pre class="terminal">
+http://<em>hostname</em>/setup/api/
+</pre>
+
+`hostname` is the name of your Enterprise installation.
+
 ## Authentication
 
-Every call to this API needs to be authenticated. The MD5 of the license is used as the authentication token.
+Every call to this API needs to be authenticated. You must use [an MD5 hash](https://en.wikipedia.org/wiki/MD5#MD5_hashes) of your GHL license as an authentication token. On most systems, this is as simple as calling `md5sum` on the license file:
 
 <pre class="terminal">
 $ md5sum github-enterprise.ghl
 5d10ffffa442a336061daee294536234  github-enterprise.ghl
 </pre>
 
-This token can be sent in each request using the `license_md5` parameter. For example:
+This token can be sent with each request using the `license_md5` parameter. For example:
 
 <pre class="terminal">
-$ curl 'http://<em>hostname</em>/setup/api?license_md5=<em>5d10ffffa442a336061daee294536234</em>'
+$ curl 'http://<em>hostname</em>/setup/api?license_md5=<em>md5-checksum-of-license</em>'
 </pre>
 
-Or using the standard http basic authentication. For example:
+You can also choose to send it via the standard HTTP basic authentication. For example:
 
 <pre class="terminal">
-$ curl 'http://license:<em>5d10ffffa442a336061daee294536234</em>@<em>hostname</em>/setup/api'
+$ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api'
 </pre>
 
 The only time that you're not required to pass this token is when you're [uploading the license and package for the first time](#upload-license-and-package-for-the-first-time).
 
 ## Upload license and package for the first time
 
-Once the virtual machine is booted for the first time, you can use the API to
-upload the new license and package:
+Once the virtual machine is booted for the first time, you can use the API to upload the new license and package:
 
     POST /setup/api/start
 
@@ -47,380 +56,235 @@ Name | Type | Description
 -----|------|--------------
 `license`|`string` | **Required**. The path to your *.ghl* license file.
 `package`|`string`|**Required**. The path to your *.ghp* license file.
-`settings`| `string`| Optional path to a JSON file containing your installation settings
+`settings`| `string`| Optional path to a JSON file containing your installation settings.
 
 ### Response
 
-<%= headers 202 %>
+<pre class="terminal">
+HTTP/1.1 202 Created
+Location: http://<em>hostname</em>/setup/api/configcheck
+</pre>
 
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://<em>hostname</em>/setup/api/start' -F package=@<em>/path/to/package.ghp</em> -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/start' -F package=@<em>/path/to/package.ghp</em> -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
-#### Configuration status
+## Configuration status
 
-Once the configuration process is running, we can check its status using
+Once the configuration process is running, you can check its status using
 this endpoint:
 
-<pre class="terminal">
-GET /setup/api/configcheck
-</pre>
+    GET /setup/api/configcheck
 
-##### Response:
+### Response
 
-<pre class="terminal">
-Status: 200 OK
-[
-  {
-    "key": "Appliance core components",
-    "status": "DONE"
-  },
-  {
-    "key": "GitHub utilities",
-    "status": "DONE"
-  },
-  {
-    "key": "GitHub applications",
-    "status": "DONE"
-  },
-  {
-    "key": "GitHub services",
-    "status": "CONFIGURING"
-  },
-  {
-    "key": "Reloading appliance services",
-    "status": "PENDING"
-  }
-]
-</pre>
+<%= headers 200 %>
+<%= json(:config_statuses) %>
 
 The different statuses are:
 
-* `PENDING`: When a job has not started yet.
-* `CONFIGURING`: When a job is running.
-* `DONE`: When a job has finished correctly.
-* `FAILED`: When a job has finished unexpectedly.
+* `PENDING`: The job has not started yet.
+* `CONFIGURING`: The job is running.
+* `DONE`: The job has finished correctly.
+* `FAILED`: The job has finished unexpectedly.
 
-##### Example:
-
-<pre class="terminal">
-curl 'http://<em>hostname</em>/setup/api/configcheck?license_md5=<em>md5-checksum-of-license</em>'
-</pre>
-
-### Settings
-
-Using this endpoint, we can retrieve and modify the installation settings.
-
-#### Retrieve current settings:
+### Example
 
 <pre class="terminal">
-GET /setup/api/settings
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
 </pre>
 
-##### Response:
+## Retrieve current settings
+
+Using this endpoint, we can retrieve and modify the installation settings:
+
+    GET /setup/api/settings
+
+### Response
+
+<%= headers 200 %>
+<%= json(:fetch_settings) %>
+
+### Example
 
 <pre class="terminal">
-Status: 200 OK
-{
-  "device": {
-    "path": "/dev/xyz"
-  },
-  "smtp": {
-    "enabled": true,
-    "address": "smtp.example.com",
-    "authentication": "plain",
-    "port": "1234",
-    "domain": "blah",
-    "username": "foo",
-    "password": "bar",
-    "support_address": "enterprise@github.com",
-    "noreply_address": "noreply@github.com"
-  },
-  "dns": {
-    "primary_nameserver": "8.8.8.8"
-  },
-  "private_mode": true,
-  "ldap": {
-    "host": "ldap.example.com",
-    "port": 389,
-    "base": "ou=People,dc=github,dc=com",
-    "uid": "github"
-  },
-  "github_hostname": "github.example.com",
-  "github_ssl": {
-    "enabled": false
-  },
-  "storage_mode": "rootfs",
-  "cas": {
-    "url" : "cas.example.com"
-  },
-  "auth_mode": "default",
-  "snmp": {
-    "enabled": true
-  },
-  "rsyslog": {
-    "enabled": false
-  }
-}
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
 </pre>
 
-##### Example:
+## Modify settings
+
+    PUT /setup/api/settings
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`settings`|`string` | **Required**. A JSON string with the new settings.
+
+### Response
 
 <pre class="terminal">
-curl 'http://<em>hostname</em>/setup/api/settings?license_md5=<em>md5-checksum-of-license</em>'
+HTTP/1.1 204 No Content
 </pre>
 
-#### Modify settings:
+### Example
 
 <pre class="terminal">
-PUT /setup/api/settings
+curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
 </pre>
 
-##### Parameters:
-
-* `settings`: JSON string with the new settings.
-
-##### Response:
-
-<pre class="terminal">
-Status 204 No Content
-</pre>
-
-##### Example:
-
-<pre class="terminal">
-curl -X PUT 'http://<em>hostname</em>/setup/api/settings?license_md5=<em>md5-checksum-of-license</em>' --data-urlencode "settings=`cat /path/to/settings.json`"
-</pre>
-
-### Configuration
+## Configuration processes
 
 This endpoint allows you to start a configuration process at any time:
 
+    POST /setup/api/configure
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`complete`|`string` | An optional parameter which, if set to `1`, ensures that the process is executed completely. For example, if you are upgrading to a new version.
+
+### Response
+
 <pre class="terminal">
-POST /setup/api/configure
-</pre>
-
-##### Parameters:
-
-* `complete`: If this parameter is set to `1` the process is executed completely. For example, if we were upgrading to a new version. _Optional_
-
-##### Response:
-
-<pre class="terminal">
-Status: 202 Accepted
+HTTP/1.1 202 Accepted
 Location: http://hostname/setup/api/configcheck
 </pre>
 
-##### Example:
+### Example
 
 <pre class="terminal">
-curl -X POST 'http://<em>hostname</em>/setup/api/configure?license_md5=<em>md5-checksum-of-license</em>'
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
 </pre>
 
-### Upgrade license or package
+## Upgrade license or package
 
-This call upgrades your license or package and also triggers the configuration process.
+This API upgrades your license or package and also triggers the configuration process:
+
+    POST /setup/api/upgrade
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`license`|`string` |  The path to your new *.ghl* license file.
+`package`|`string`| The path to your new *.ghp* license file.
+
+### Response
 
 <pre class="terminal">
-POST /setup/api/upgrade
-</pre>
-
-##### Parameters:
-
-* `license`: new license file. _Optional_
-* `package`: new ghp. _Optional_
-
-##### Response:
-
-<pre class="terminal">
-Status: 202 Accepted
+HTTP/1.1 202 Accepted
 Location: http://hostname/setup/api/configcheck
 </pre>
 
-##### Example:
+### Example
 
 <pre class="terminal">
-curl -X POST 'http://<em>hostname</em>/setup/api/upgrade?license_md5=<em>md5-checksum-of-license</em>' -F package=@<em>/path/to/package.ghp</em>
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/upgrade' -F package=@<em>/path/to/package.ghp</em>
 </pre>
 
-### Maintenance status
+## Check maintenance status
 
-Check and modify the installation's maintenance status:
+Check your installation's maintenance status:
 
-#### Check
+    GET /setup/api/maintenance
+
+### Response
+
+<%= headers 200 %>
+<%= json(:check_maintenance_status) %>
+
+### Example
 
 <pre class="terminal">
-GET /setup/api/maintenance
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
-##### Response:
+## Modify maintenance status
 
-<pre class="terminal">
-Status: 200 OK
-{
-  "status": "scheduled",
-  "scheduled_time": "Tuesday, January 22 at 15:34 -0800",
-  "connection_services": [
-    {
-      "name": "git operations", "number": 0
-    },
-    {
-      "name": "mysql queries", "number": 233
-    },
-    {
-      "name": "resque jobs", "number": 54
-    }
-  ]
-}
-</pre>
+Modify your installation's maintenance status:
 
-##### Example:
+    POST /setup/api/maintenance
 
-<pre class="terminal">
-curl 'http://<em>hostname</em>/setup/api/maintenance?license_md5=<em>md5-checksum-of-license</em>'
-</pre>
+### Parameters
 
-#### Modify
-
-<pre class="terminal">
-POST /setup/api/maintenance
-</pre>
-
-##### Parameters:
-
-* `maintenance`: JSON string with the attributes `enabled` and `when`.
+Name | Type | Description
+-----|------|--------------
+`maintenance`|`string` | **Required**. A JSON string with the attributes `enabled` and `when`.
 
 The possible values for `enabled` are `true` and `false`. When it's `false`,
-the attribute `when` is ignored and the maintenance mode is turned off.
+the attribute `when` is ignored and the maintenance mode is turned off. `when` defines the time period when the maintenance was enabled.
 
 The possible values for `when` are `now` or any date parseable by
 [mojombo/chronic](https://github.com/mojombo/chronic).
 
-##### Response:
+### Response
+
+<%= headers 200 %>
+<%= json(:set_maintenance_status) %>
+
+### Example
 
 <pre class="terminal">
-Status: 200 OK
-{
-  "status": "scheduled",
-  "scheduled_time": "Tuesday, January 22 at 15:34 -0800",
-  "connection_services": [
-    {
-      "name": "git operations", "number": 0
-    },
-    {
-      "name": "mysql queries", "number": 233
-    },
-    {
-      "name": "resque jobs", "number": 54
-    }
-  ]
-}
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
 </pre>
 
-##### Example:
+## Retrieve authorized SSH keys
+
+    GET /setup/api/settings/authorized-keys
+
+### Response
+
+<%= headers 200 %>
+<%= json(:get_authorized_ssh_keys) %>
+
+### Example
 
 <pre class="terminal">
-curl -X POST 'http://<em>hostname</em>/setup/api/maintenance?license_md5=<em>md5-checksum-of-license</em>' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
 </pre>
 
-### Authorized SSH keys
+## Add a new authorized SSH key
 
-You can add, delete, or retrieve the public SSH keys authorized in the installation.
+    POST /setup/api/settings/authorized-keys
 
-#### Retrieve keys
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`authorized_key`|`string` | **Required**. The path to the public SSH key.
+
+### Response
+
+<%= headers 201 %>
+<%= json(:get_authorized_ssh_keys) { |h| h.push({"key" => "ssh-rsa AAAAB3NzaC1yc2EAAAAB...", "pretty-print" => "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"}); h }%>
+
+### Example
 
 <pre class="terminal">
-GET /setup/api/settings/authorized-keys
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
-##### Response:
+## Remove an authorized SSH key
+
+    DELETE /setup/api/settings/authorized-keys
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`authorized_key`|`string` | **Required**. The path to the public SSH key.
+
+### Response
+
+<%= headers 200 %>
+<%= json(:get_authorized_ssh_keys) { |h| h.shift; h } %>
+
+### Example
 
 <pre class="terminal">
-Status: 200 OK
-[
-  {
-    "key": ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
-    "pretty-print": "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
-  },
-  {
-    "key": ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
-    "pretty-print": "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
-  }
-]
-</pre>
-
-##### Example:
-
-<pre class="terminal">
-curl 'http://<em>hostname</em>/setup/api/settings/authorized-keys?license_md5=<em>md5-checksum-of-license</em>'
-</pre>
-
-#### Add a new authorized key
-
-<pre class="terminal">
-POST /setup/api/settings/authorized-keys
-</pre>
-
-##### Parameters:
-
-* `authorized_key`: public ssh key.
-
-##### Response:
-
-<pre class="terminal">
-Status: 201 Created
-[
-  {
-    "key": ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
-    "pretty-print": "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
-  },
-  {
-    "key": ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
-    "pretty-print": "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
-  },
-  {
-    "key": ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
-    "pretty-print": "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
-  }
-]
-</pre>
-
-##### Example:
-
-<pre class="terminal">
-curl -X POST 'http://<em>hostname</em>/setup/api/settings/authorized-keys?license_md5=<em>md5-checksum-of-license</em>' -F authorized_key=@<em>/path/to/key.pub</em>
-</pre>
-
-#### Remove an authorized-key
-
-<pre class="terminal">
-DELETE /setup/api/settings/authorized-keys
-</pre>
-
-##### Parameters:
-
-* `authorized_key`: public ssh key.
-
-##### Response:
-
-<pre class="terminal">
-Status: 200 OK
-[
-  {
-    "key": ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
-    "pretty-print": "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
-  },
-  {
-    "key": ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
-    "pretty-print": "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
-  }
-]
-</pre>
-
-##### Example:
-
-<pre class="terminal">
-curl -X DELETE 'http://<em>hostname</em>/setup/api/settings/authorized-keys?license_md5=<em>md5-checksum-of-license</em>' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>

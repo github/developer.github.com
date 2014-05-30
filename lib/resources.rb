@@ -1902,6 +1902,114 @@ module GitHub
     INDEXING_SUCCESS = {
       "message" => "Repository \"kansaichris/japaning\" has been added to the indexing queue"
     }
+
+    CONFIG_STATUSES = [
+      {
+        "key" =>  "Appliance core components",
+        "status" =>  "DONE"
+      },
+      {
+        "key" =>  "GitHub utilities",
+        "status" =>  "DONE"
+      },
+      {
+        "key" =>  "GitHub applications",
+        "status" =>  "DONE"
+      },
+      {
+        "key" =>  "GitHub services",
+        "status" =>  "CONFIGURING"
+      },
+      {
+        "key" =>  "Reloading appliance services",
+        "status" =>  "PENDING"
+      }
+    ]
+
+    FETCH_SETTINGS = {
+      "device" =>  {
+        "path" =>  "/dev/xyz"
+      },
+      "smtp" =>  {
+        "enabled" =>  true,
+        "address" =>  "smtp.example.com",
+        "authentication" =>  "plain",
+        "port" =>  "1234",
+        "domain" =>  "blah",
+        "username" =>  "foo",
+        "password" =>  "bar",
+        "support_address" =>  "enterprise@github.com",
+        "noreply_address" =>  "noreply@github.com"
+      },
+      "dns" =>  {
+        "primary_nameserver" =>  "8.8.8.8"
+      },
+      "private_mode" =>  true,
+      "ldap" =>  {
+        "host" =>  "ldap.example.com",
+        "port" =>  389,
+        "base" =>  "ou=People,dc=github,dc=com",
+        "uid" =>  "github"
+      },
+      "github_hostname" =>  "github.example.com",
+      "github_ssl" =>  {
+        "enabled" =>  false
+      },
+      "storage_mode" =>  "rootfs",
+      "cas" =>  {
+        "url"  =>  "cas.example.com"
+      },
+      "auth_mode" =>  "default",
+      "snmp" =>  {
+        "enabled" =>  true
+      },
+      "rsyslog" =>  {
+        "enabled" =>  false
+      }
+    }
+
+    CHECK_MAINTENANCE_STATUS = {
+      "status" =>  "scheduled",
+      "scheduled_time" =>  "Tuesday, January 22 at 15 => 34 -0800",
+      "connection_services" =>  [
+        {
+          "name" =>  "git operations", "number" =>  0
+        },
+        {
+          "name" =>  "mysql queries", "number" =>  233
+        },
+        {
+          "name" =>  "resque jobs", "number" =>  54
+        }
+      ]
+    }
+
+    SET_MAINTENANCE_STATUS = {
+      "status" =>  "scheduled",
+      "scheduled_time" =>  "Tuesday, January 22 at 15 => 34 -0800",
+      "connection_services" =>  [
+        {
+          "name" =>  "git operations", "number" =>  0
+        },
+        {
+          "name" =>  "mysql queries", "number" =>  233
+        },
+        {
+          "name" =>  "resque jobs", "number" =>  54
+        }
+      ]
+    }
+
+    GET_AUTHORIZED_SSH_KEYS = [
+      {
+        "key" => "ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
+        "pretty-print" => "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
+      },
+      {
+        "key" => "ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
+        "pretty-print" => "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
+      }
+    ]
   end
 end
 

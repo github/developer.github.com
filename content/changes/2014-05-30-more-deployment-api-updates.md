@@ -5,7 +5,7 @@ created_at: 2014-05-30
 author_name: atmos
 ---
 
-Today we're making a couple of minor changes to the [Deployments API preview][2]. With the introduction of [combined statuses][4] in the [Deployment API preview update][3], we realized a few incosistencies with the API that we'd like to remedy.
+Today we're making a couple of minor changes to the [Deployments API preview][2]. With the introduction of [combined statuses][4] in the [Deployment API preview update][3], we noticed a few incosistencies with the API that we'd like to remedy.
 
 We now provide a mechanism for bypassing commit status checks without the use of the `force` parameter. Requiring users to use the `force` parameter also bypassed the auto-merging feature which ensures that the requested `ref` is up to date with the repo's default branch. To reconcile this issue we're introducing a new parameter called `required_contexts`. This parameter accepts an array of named [commit status][5] contexts that are ensured to be in a "success" state. If the `required_contexts` array is ommitted then it will attempt to validate that all unique contexts are in a "success" state. If you want to bypass commit status checks pass in an empty array as `required_contexts`.
 

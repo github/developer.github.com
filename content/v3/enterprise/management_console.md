@@ -7,7 +7,9 @@ title: Management console | GitHub API
 * TOC
 {:toc}
 
-You can use this API to manage your GitHub Enterprise installation.
+You can use this API to manage your GitHub Enterprise installation. We've included some parameters, responses, and examples to help you understand and use the API to manage your Enterprise installation.
+
+Note: only admin users can access Enterprise API endpoints. Normal users will receive a `404` response if they try to access it.
 
 ## Authentication
 

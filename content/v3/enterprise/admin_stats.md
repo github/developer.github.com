@@ -7,7 +7,9 @@ title: Admin Stats | GitHub API
 * TOC
 {:toc}
 
-The Admin Stats API is available to pull a variety of metrics about your installation. Any admin user can access the API. Normal users will receive a 404 response if they try to access it.
+The Admin Stats API is available to pull a variety of metrics about your installation.
+
+Note: only admin users can access Enterprise API endpoints. Normal users will receive a `404` response if they try to access it.
 
 ## Get statistics
 

@@ -7,7 +7,9 @@ title: Search indexing | GitHub API
 * TOC
 {:toc}
 
-You can queue up a variety of search indexing tasks using the API endpoints.
+You can queue up a variety of search indexing tasks using these API endpoints.
+
+Note: only admin users can access Enterprise API endpoints. Normal users will receive a `404` response if they try to access it.
 
 ## Request an indexing job to be queued
 

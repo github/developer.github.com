@@ -105,7 +105,7 @@ succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.
 
 The `required_contexts` parameter is used to specify a list of [commit
-statuses](/v3/repos/statuses) are in a "success" state before creating a
+statuses](/v3/repos/statuses) that are in a "success" state before creating a
 deployment. If your repository is taking advantage of [combined
 statuses](/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref) then
 all statuses with unique contexts will need to be in a "success" state.  (Your

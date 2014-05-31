@@ -11,6 +11,8 @@ We now provide a mechanism for bypassing commit status checks without the use of
 
 We've removed support for the `force` parameter. The `force` parameter existed to bypass both the up-to date checks and the commit status checks. The same behavior can now be accomplished by setting `auto_merge` to `false` and `required_contexts` to `[]`.
 
+We're now setting a default `context` for [commit statuses][5]. Previously we'd return `null` in the API if one wasn't specified, now we'll be returning `"default"`.
+
 This will hopefully resolve the last of our concerns around the Deployments API and we'll be extending the preview period until we're fully comfortable with it.
 
 If you have any questions or concerns, [drop us a line][1].

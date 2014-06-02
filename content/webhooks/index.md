@@ -69,7 +69,7 @@ Name | Description
 -----|-----------|
 `*` | Any time any event is triggered ([Wildcard Event](#wildcard-event)).
 `commit_comment` | Any time a Commit is commented on.
-`create` | Any time a Repository, Branch, or Tag is created.
+`create` | Any time a Branch or Tag is created.
 `delete` | Any time a Branch or Tag is deleted.
 `deployment` | Any time a Repository has a new deployment created from the API.
 `deployment_status` | Any time a deployment for the Repository has a status update from the API.

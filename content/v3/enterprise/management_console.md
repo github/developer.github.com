@@ -98,8 +98,6 @@ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/ap
 
 ## Retrieve current settings
 
-Using this endpoint, we can retrieve and modify the installation settings:
-
     GET /setup/api/settings
 
 ### Response

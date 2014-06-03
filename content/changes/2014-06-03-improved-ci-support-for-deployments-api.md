@@ -1,11 +1,11 @@
 ---
 kind: change
-title: Deployments API support for combined statuses
+title: Improved CI support for the Deployments API
 created_at: 2014-06-03
 author_name: atmos
 ---
 
-Today we're making a couple of minor changes to the [Deployments API preview][2]. With the introduction of [combined statuses][4] in a [recent update][3], we noticed a few inconsistencies with the API that we'd like to remedy.
+Today we're making a few minor changes to the [Deployments API preview][2]. With the introduction of [combined statuses][4] in a [recent update][3], we noticed a few inconsistencies with the API that we'd like to remedy.
 
 We're introducing a new parameter called `required_contexts`. This parameter accepts an array of named [commit status][5] contexts that are ensured to be in a "success" state before the deployment is created. This allows you to verify that more than one system verified your code before you deploy it.
 

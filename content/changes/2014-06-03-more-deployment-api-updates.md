@@ -11,7 +11,7 @@ We're introducing a new parameter called `required_contexts`. This parameter acc
 
 We've removed support for the `force` parameter. The force parameter existed to bypass both the auto-merge and commit status checks. The same behavior can now be accomplished by setting `auto_merge` and `required_contexts` appropriately.
 
-We're now setting a default context for [commit statuses][5]. If a context isn't set with a name we're defaulting to "default".
+We're also setting a default context for [commit statuses][5]. If a context isn't set with a name we're defaulting to "default".
 
 If you have any questions or concerns, [drop us a line][1].
 

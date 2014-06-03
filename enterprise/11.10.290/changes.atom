@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://developer.github.com/</id>
+  <title>GitHub API Changes</title>
+  <updated>2012-10-31T06:00:00Z</updated>
+  <link rel="alternate" href="http://developer.github.com/" />
+  <link rel="self" href="http://developer.github.com/changes.atom" />
+  <author>
+    <name>technoweenie</name>
+    <uri>https://github.com/technoweenie</uri>
+  </author>
+  <entry>
+    <id>tag:developer.github.com,2012-10-31:/changes/2012-10-31-gist-comment-uris/</id>
+    <title type="html">Gist comment URIs</title>
+    <published>2012-10-31T06:00:00Z</published>
+    <updated>2012-10-31T06:00:00Z</updated>
+    <author>
+      <name>pezra</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-10-31-gist-comment-uris/" />
+    <content type="html">&lt;p&gt;The URIs of all gist comments are changing immediately. The new URI pattern for gist comments is &lt;code&gt;/gists/{gist-id}/comments/{id}&lt;/code&gt;. (See &lt;a href="/v3/gists/comments/"&gt;gist comments section of the docs&lt;/a&gt; for more details.) This change is necessary because the auto-incremented ids of gist comments are easy to guess. This predictability allows anyone to view comments on private Gists with relative ease. Obviously, comments on private gists should be just as private as the gist itself.&lt;/p&gt;
+
+&lt;p&gt;Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.&lt;/p&gt;
+
+&lt;p&gt;We have also added a &lt;code&gt;comments_url&lt;/code&gt; member to the Gist documents. The &lt;code&gt;comments_url&lt;/code&gt; link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using &lt;code&gt;url&lt;/code&gt; and &lt;code&gt;*_url&lt;/code&gt; properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2012-10-26:/changes/2012-10-26-notifications-api/</id>
+    <title type="html">Notifications API</title>
+    <published>2012-10-26T06:00:00Z</published>
+    <updated>2012-10-26T06:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-10-26-notifications-api/" />
+    <content type="html">&lt;p&gt;Now that the dust has settled around &lt;a href="https://github.com/blog/1204-notifications-stars"&gt;Notifications and Stars&lt;/a&gt;,
+we’ve unleashed all that :sparkles: in a &lt;a href="http://developer.github.com/v3/activity/notifications/"&gt;brand new API&lt;/a&gt;.  You can now
+view and mark notifications as read.&lt;/p&gt;
+
+&lt;h2 id="endpoint"&gt;Endpoint&lt;/h2&gt;
+
+&lt;p&gt;The core notifications functionality is under the &lt;code&gt;/notifications&lt;/code&gt; endpoint.
+You can look for unread notifications:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/notifications
+&lt;/pre&gt;
+
+&lt;p&gt;You can filter these notifications to a single Repository:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/repos/technoweenie/faraday/notifications
+&lt;/pre&gt;
+
+&lt;p&gt;You can mark them as read:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+# all notifications
+$ curl https://api.github.com/notifications \
+    -X PUT -d '{"read": true}'
+
+# notifications for a single repository
+$ curl https://api.github.com/repos/technoweenie/faraday/notifications \
+    -X PUT -d '{"read": true}'
+&lt;/pre&gt;
+
+&lt;p&gt;You can also modify subscriptions for a Repository or a single thread.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+# subscription details for the thread (either an Issue or Commit)
+$ curl https://api.github.com/notifications/threads/1/subscription
+
+# subscription details for a whole Repository.
+$ curl https://api.github.com/repos/technoweenie/faraday/subscription
+&lt;/pre&gt;
+
+&lt;h2 id="polling"&gt;Polling&lt;/h2&gt;
+
+&lt;p&gt;The Notifications API is optimized for polling by the last modified time:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+# Add authentication to your requests
+$ curl -I https://api.github.com/notifications
+HTTP/1.1 200 OK
+Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
+X-Poll-Interval: 60
+
+# Pass the Last-Modified header exactly
+$ curl -I https://api.github.com/notifications
+    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
+HTTP/1.1 304 Not Modified
+X-Poll-Interval: 60
+&lt;/pre&gt;
+
+&lt;p&gt;You can read about the API details in depth in the &lt;a href="http://developer.github.com/v3/activity/notifications/"&gt;Notifications documentation&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2012-10-24:/changes/2012-10-24-set-default-branch/</id>
+    <title type="html">Set the default branch for a repository</title>
+    <published>2012-10-24T06:00:00Z</published>
+    <updated>2012-10-24T06:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-10-24-set-default-branch/" />
+    <content type="html">&lt;p&gt;You can set the default branch for a repository to something other than ‘master’ from the GitHub repository admin screen:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/posts/default-branch.png" alt="repo admin"&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, you can update this setting via the API. We’ve added a &lt;code&gt;default_branch&lt;/code&gt; parameter to the &lt;a href="/v3/repos/#edit"&gt;Edit Repository method&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl -u pengwynn \
+     -d '{"name": "octokit", "default_branch":"development"}' \
+     https://api.github.com/repos/pengwynn/octokit
+&lt;/pre&gt;
+
+&lt;p&gt;If you provide a branch name that hasn’t been pushed to GitHub, we’ll gracefully fall back to &lt;code&gt;'master'&lt;/code&gt; or the first branch.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2012-10-17:/changes/2012-10-17-org-members-redirection/</id>
+    <title type="html">Organization Members Resource Changes</title>
+    <published>2012-10-17T06:00:00Z</published>
+    <updated>2012-10-17T06:00:00Z</updated>
+    <author>
+      <name>pezra</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-10-17-org-members-redirection/" />
+    <content type="html">&lt;p&gt;Requesting the &lt;a href="/v3/orgs/members/index.html#members-list"&gt;member list&lt;/a&gt; of an
+organization of which you are not a member now redirects to the &lt;a href="v3/orgs/members/index.html#public-members-list"&gt;public members
+list&lt;/a&gt;. Similarly, requests to
+&lt;a href="/v3/orgs/members/index.html#check-membership"&gt;membership check&lt;/a&gt; resources of
+an organization of which you are not a member are redirected to the equivalent
+&lt;a href="/v3/orgs/members/index.html#check-public-membership"&gt;public membership check&lt;/a&gt;.
+One exception to the latter case is that if you are checking about your own
+membership the request is not redirected. You are always allowed to know what
+organizations you belong to.&lt;/p&gt;
+
+&lt;p&gt;The changes where made to clarify the purpose of these various resources. The
+&lt;code&gt;/orgs/:org/members&lt;/code&gt; resources are intended for use by members of the
+organization in question. The &lt;code&gt;/orgs/:org/public_members&lt;/code&gt; resources are for
+acquiring information about the public membership of organizations. If you are
+not a member you are not allowed to see private membership information so you
+should be using the public membership resources.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please drop us a line at
+&lt;a href="mailto:support@github.com?subject=Org%20members%20API"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2012-10-14:/changes/2012-10-14-rate-limit-changes/</id>
+    <title type="html">Rate limit changes for unauthenticated requests</title>
+    <published>2012-10-14T06:00:00Z</published>
+    <updated>2012-10-14T06:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-10-14-rate-limit-changes/" />
+    <content type="html">&lt;p&gt;To ensure a high quality of service for all API consumers, we’ve reduced the
+default rate limit for unauthenticated requests. To enjoy the default rate
+limit of 5,000 requests per hour, you’ll need to
+&lt;a href="http://developer.github.com/v3/#authentication"&gt;authenticate&lt;/a&gt; via Basic Auth
+or OAuth. Unauthenticated requests will be limited to 60 per hour unless you
+&lt;a href="http://developer.github.com/v3/#unauthenticated-rate-limited-requests"&gt;include your OAuth client and
+secret&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We’ll soon require all requests to include a valid &lt;a href="http://en.wikipedia.org/wiki/User_agent"&gt;User Agent
+header&lt;/a&gt;. Setting a
+unique value for this header helps us identify requests and get in touch with
+developers who are abusing the API. Most HTTP libraries, wrapper libraries, and
+even cURL provide a valid header for you already and allow you to change it to
+something unique to your application.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please drop us a line at
+&lt;a href="mailto:support@github.com?subject=API%20Rate%20limit"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2012-09-28:/changes/2012-9-28-auto-init-for-repositories/</id>
+    <title type="html">Initialize a repository when creating</title>
+    <published>2012-09-28T06:00:00Z</published>
+    <updated>2012-09-28T06:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-9-28-auto-init-for-repositories/" />
+    <content type="html">&lt;p&gt;Today we’ve made it easier to add commits to a repository via the GitHub API.
+Until now, you could &lt;a href="/v3/repos/#create"&gt;create a repository&lt;/a&gt;, but you would
+need to initialize it locally via your Git client before adding any commits via
+the API.&lt;/p&gt;
+
+&lt;p&gt;Now you can optionally init a repository when it’s created by sending &lt;code&gt;true&lt;/code&gt;
+for the &lt;code&gt;auto_init&lt;/code&gt; parameter:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true}' \
+     https://api.github.com/user/repos
+&lt;/pre&gt;
+
+&lt;p&gt;The resulting repository will have a README stub and an initial commit.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/posts/create-repo-init.png" alt="create repo screenshot"&gt;&lt;/p&gt;
+
+&lt;h3 id="gitignore-templates"&gt;.gitignore templates&lt;/h3&gt;
+
+&lt;p&gt;Along with this change, you can set up your &lt;code&gt;.gitignore&lt;/code&gt; template by passing
+the basename of any template in the &lt;a href="https://github.com/github/gitignore"&gt;GitHub gitignore templates
+project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true, \
+          "gitignore_template": "Haskell"}' \
+     https://api.github.com/user/repos
+&lt;/pre&gt;
+
+&lt;p&gt;As the &lt;a href="/v3/repos/#create"&gt;docs point out&lt;/a&gt;, the &lt;code&gt;gitignore_template&lt;/code&gt; parameter
+is ignored if &lt;code&gt;auto_init&lt;/code&gt; is not present and &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, drop us a line at
+&lt;a href="https://github.com/c"&gt;https://github.com/contact&lt;/a&gt;, &lt;a href="mailto:support@github.com"&gt;support@github.com&lt;/a&gt;, or
+&lt;a href="https://twitter.com/githubapi"&gt;@GitHubAPI&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2012-09-05:/changes/2012-9-5-watcher-api/</id>
+    <title type="html">Upcoming Changes to Watcher and Star APIs</title>
+    <published>2012-09-05T06:00:00Z</published>
+    <updated>2012-09-05T06:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-9-5-watcher-api/" />
+    <content type="html">&lt;p&gt;We recently &lt;a href="https://github.com/blog/1204-notifications-stars"&gt;changed the Watcher behavior&lt;/a&gt; on GitHub.  What
+used to be known as “Watching” is now “Starring”.  Starring is basically a way
+to bookmark interesting repositories.  Watching is a way to indicate that you
+want to receive email or web notifications on a Repository.&lt;/p&gt;
+
+&lt;p&gt;This works well on GitHub.com, but poses a problem for the GitHub API.  How do
+we change this in a way that developers can gracefully upgrade their
+applications?  We’re currently looking at rolling out the changes in three
+phases over an extended period of time.&lt;/p&gt;
+
+&lt;h2 id="current-status"&gt;Current Status&lt;/h2&gt;
+
+&lt;p&gt;The current &lt;a href="http://developer.github.com/v3/repos/starring/"&gt;Repository Starring&lt;/a&gt; methods look like this:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;/repos/:owner/:repo/watchers&lt;/code&gt; - A list of users starring the repository.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/users/:user/watched&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/user/watched&lt;/code&gt; - A list of repositories the current user has starred.&lt;/li&gt;
+&lt;/ul&gt;&lt;h2 id="phase-1-add-watchers-as-subscriptions"&gt;Phase 1: Add Watchers as Subscriptions&lt;/h2&gt;
+
+&lt;p&gt;This phase exposes Watchers as “Subscriptions”.  This is to
+keep from clashing with the legacy endpoints.  This phase will happen
+automatically and will not break your application until Phase 3 starts.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;/repos/:owner/:repo/subscribers&lt;/code&gt; - A list of users watching the repository.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/users/:user/subscriptions&lt;/code&gt; - A list of repositories that a user is watching.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/user/subscriptions&lt;/code&gt; - A list of repositories the current user is watching.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We’ll also add a copy of the legacy Watchers API in the new endpoint:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;/repos/:owner/:repo/stargazers&lt;/code&gt; - A list of users starring the repository.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/users/:user/starred&lt;/code&gt; - A list of repositories that a user has starred.&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;/user/starred&lt;/code&gt; - A list of repositories the current user has starred.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;This is in place &lt;em&gt;now&lt;/em&gt; with the current media type for the API:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.beta+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you care about your application not breaking, make sure all outgoing API
+requests pass that value for the “Accept” header.  You should do this now.  This
+can be verified by checking the &lt;code&gt;X-GitHub-Media-Type&lt;/code&gt; header on all API
+responses.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Accesses a user's starred repositories.
+curl https://api.github.com/user/watched \
+  -H "Accept: application/vnd.github.beta+json"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
+the “beta” media type, and makes the “v3” media type the implicit default
+for API requests.&lt;/p&gt;
+
+&lt;h2 id="phase-2-switch-watchers-api-endpoint"&gt;Phase 2: Switch &lt;code&gt;/watchers&lt;/code&gt; API Endpoint&lt;/h2&gt;
+
+&lt;p&gt;The “watch” endpoints will now be a copy of the “subscription” endpoints.  You
+will have to use &lt;code&gt;/user/starred&lt;/code&gt; to get a user’s starred repositories, not
+&lt;code&gt;/user/watched&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This requires a new media type value:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is a breaking change from Phase 1.  We will release this change in an
+experimental mode first, letting developers gracefully upgrade their
+applications by specifying the new media value for the Accept header.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Accesses a user's watched repositories.
+curl https://api.github.com/user/watched \
+  -H "Accept: application/vnd.github.v3+json"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="phase-3-remove-subscribers-api-endpoint"&gt;Phase 3: Remove &lt;code&gt;/subscribers&lt;/code&gt; API Endpoint.&lt;/h2&gt;
+
+&lt;p&gt;This phase involves disabling the subscription endpoints completely.  At this
+point, you should be using the starring endpoints for starred repositories, and
+the watch endpoints for watched repositories.  No date has been set yet, but we
+expect this to be &lt;em&gt;3-6 months&lt;/em&gt; after Phase 2 is in place.  This should give
+developers enough time for a smooth upgrade path.  If they use popular API
+wrappers, the work will likely mostly be done for them.&lt;/p&gt;
+
+&lt;p&gt;Keep on passing the “v3” media type in your application, until the API has
+another breaking change to make.  If you can’t make the deadline for Phase 3,
+just set the “beta” media type until we shut that down completely.  It’s likely
+that we will keep the old “beta” media type active for another month, like
+the &lt;a href="https://github.com/blog/1090-github-api-moving-on"&gt;last time&lt;/a&gt; we terminated
+old API functionality.&lt;/p&gt;
+
+&lt;p&gt;We look forward to assisting you through this transition.  Hit us up at
+&lt;a href="https://github.com/c"&gt;https://github.com/contact&lt;/a&gt;, &lt;a href="mailto:support@github.com"&gt;support@github.com&lt;/a&gt;, or
+&lt;a href="https://twitter.com/githubapi"&gt;@GitHubAPI&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+</feed>

@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Deployments API support for combined statuses
-created_at: 2014-05-30
+created_at: 2014-06-03
 author_name: atmos
 ---
 

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Repo Collaborators | GitHub API</title>
+  <link href="/enterprise/11.10.270/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.270/css/960.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.270/css/uv_active4d.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.270/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.270/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/11.10.270/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/11.10.270/shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="/enterprise/11.10.270/"><img src="/enterprise/11.10.270/images/logo_developer.png" width="255" height="45"></a>
+          <ul class="nav">
+            <li><a href="/enterprise/11.10.270/v3/">API v3</a></li>
+            <li><a href="http://develop.github.com">API v2</a></li>
+            <li><a href="http://support.github.com/discussions/api">Support</a></li>
+          </ul>
+        </div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="repo-collaborators-api">Repo Collaborators API</h1>
+
+<h2 id="list">List</h2>
+
+<pre><code>GET /repos/:user/:repo/collaborators
+</code></pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre>
+
+<h2 id="get">Get</h2>
+
+<pre><code>GET /repos/:user/:repo/collaborators/:user
+</code></pre>
+
+<h3 id="response-if-user-is-a-collaborator">Response if user is a collaborator</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h3 id="response-if-user-is-not-a-collaborator">Response if user is not a collaborator</h3>
+
+<pre class="headers no-response"><code>Status: 404 Not Found
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="add-collaborator">Add collaborator</h2>
+
+<pre><code>PUT /repos/:user/:repo/collaborators/:user
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="remove-collaborator">Remove collaborator</h2>
+
+<pre><code>DELETE /repos/:user/:repo/collaborators/:user
+</code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/">Summary</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/oauth/">OAuth</a></li>
+              <li><a href="/enterprise/11.10.270/v3/mime/">Mime Types</a></li>
+              <li><a href="/enterprise/11.10.270/v3/changelog/">Changelog</a></li>
+              <li><a href="/enterprise/11.10.270/v3/libraries/">Libraries</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/gists/">Gists</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/git/">Git Data</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/git/blobs/">Blobs</a></li>
+              <li><a href="/enterprise/11.10.270/v3/git/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.270/v3/git/refs/">References</a></li>
+              <li><a href="/enterprise/11.10.270/v3/git/tags/">Tags</a></li>
+              <li><a href="/enterprise/11.10.270/v3/git/trees/">Trees</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/issues/">Issues</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/issues/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.270/v3/issues/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.270/v3/issues/labels/">Labels</a></li>
+              <li><a href="/enterprise/11.10.270/v3/issues/milestones/">Milestones</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/orgs/">Orgs</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/orgs/members/">Members</a></li>
+              <li><a href="/enterprise/11.10.270/v3/orgs/teams/">Teams</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/pulls/">Pull Requests</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/pulls/comments/">Review Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/repos/">Repos</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/enterprise/11.10.270/v3/repos/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.270/v3/repos/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.270/v3/repos/contents/">Contents</a></li>
+              <li><a href="/enterprise/11.10.270/v3/repos/downloads/">Downloads</a></li>
+              <li><a href="/enterprise/11.10.270/v3/repos/forks/">Forks</a></li>
+              <li><a href="/enterprise/11.10.270/v3/repos/keys/">Keys</a></li>
+              <li><a href="/enterprise/11.10.270/v3/repos/watching/">Watching</a></li>
+              <li><a href="/enterprise/11.10.270/v3/repos/hooks/">Hooks</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/users/">Users</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/users/emails/">Emails</a></li>
+              <li><a href="/enterprise/11.10.270/v3/users/followers/">Followers</a></li>
+              <li><a href="/enterprise/11.10.270/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/events/">Events</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/events/types/">Types</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.270/v3/search/">Search</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.270/v3/search/#search-issues">Issues</a></li>
+              <li><a href="/enterprise/11.10.270/v3/search/#search-repositories">Repositories</a></li>
+              <li><a href="/enterprise/11.10.270/v3/search/#search-users">Users</a></li>
+              <li><a href="/enterprise/11.10.270/v3/search/#email-search">Email</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div> <!-- /sidebar-module -->
+      <div class="sidebar-module">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repo</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+          <h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+                <li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+
+              <p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+
+            <div class="sponsor">
+              <a href="http://www.rackspace.com" class="logo">
+                <img src="/enterprise/11.10.270/shared/images/rackspace_logo.png" alt="Dedicated Server" width="38" height="36">
+              </a>
+              Powered by the <a href="http://www.rackspace.com%20">Dedicated
+              Servers</a> and<br> <a href="http://www.rackspacecloud.com">Cloud
+              Computing</a> of Rackspace Hosting<span>®</span>
+          </div>
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>

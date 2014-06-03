@@ -974,6 +974,80 @@ a .mega-octicon {
   margin: 12px 0;
 }
 
+/* Taken from Help in order to show images in ordered lists inline */
+ol {
+  counter-reset: li;
+  list-style: none;
+  position: relative;
+  padding-bottom: 10px;
+}
+ol > li {
+  padding: 5px 0 5px 55px;
+  position: relative;
+  margin-bottom: 5px;
+}
+ol > li:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30px;
+  padding: 0 10px 0 0;
+  color: #999;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 35px;
+  text-align: right;
+  border-right: 1px solid #ddd;
+}
+ol > li > p:first-child {
+  margin-top: 0;
+}
+ol > li:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.content ol > li img {
+  max-width: 100px;
+  margin: 0 0 0 10px;
+  float: right;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+.content ol > li img.expanded {
+  max-width: 400px;
+}
+
+.content .full-image {
+  position: absolute;
+  top: 5px;
+  right: -20px;
+  z-index: 100;
+}
+.content .full-image img {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  margin: 0;
+  max-width: 600px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.content .full-image:hover .octicon, .full-image:hover .mini-icon {
+  color: #666;
+}
+.content .full-image .octicon, .full-image .octicon-remove-close {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: #999;
+  cursor: pointer;
+}
 
 .content .description {
   margin-left: 20px;

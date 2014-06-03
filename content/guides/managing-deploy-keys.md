@@ -112,7 +112,7 @@ The setup process is basically the same as adding a new user:
 
 <div class="alert">
 
-<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by “bots” or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you make machine users for your server deploy scripts. Machine users are kosher.
+<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by “bots” or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you make machine users for your server deploy scripts. Machine users are completely kosher.
 
 </div>
 

@@ -145,11 +145,11 @@ Name | Type | Description
 <%= json :deployment %>
 
 <%= json \
-  :ref                    => "topic-branch",
-  :auto_merge             => true,
-  :payload                => "{\"user\":\"atmos\",\"room_id\":123456}",
-  :description            => "Deploying my sweet branch",
-  :commit_status_contexts => ["ci/janky", "security/brakeman"]
+  :ref               => "topic-branch",
+  :auto_merge        => true,
+  :payload           => "{\"user\":\"atmos\",\"room_id\":123456}",
+  :description       => "Deploying my sweet branch",
+  :required_contexts => ["ci/janky", "security/brakeman"]
 %>
 
 <%= headers 201,

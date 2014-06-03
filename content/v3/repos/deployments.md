@@ -131,7 +131,10 @@ Name | Type | Description
 `environment`|`string` | Optional name for the target deployment environment (e.g., production, staging, qa). Default: `"production"`
 `description`|`string` | Optional short description. Default: `""`
 
-#### Example
+#### Simple Example
+
+A simple example putting the user and room into the payload to notify back to
+chat networks.
 
 <%= json \
   :ref           => "topic-branch",
@@ -144,9 +147,13 @@ Name | Type | Description
 'https://api.github.com/repos/octocat/example/deployments/1' %>
 <%= json :deployment %>
 
+#### Advanced Example
+
+A more advanced example specifying required commit statuses and bypassing auto-merging.
+
 <%= json \
   :ref               => "topic-branch",
-  :auto_merge        => true,
+  :auto_merge        => false,
   :payload           => "{\"user\":\"atmos\",\"room_id\":123456}",
   :description       => "Deploying my sweet branch",
   :required_contexts => ["ci/janky", "security/brakeman"]

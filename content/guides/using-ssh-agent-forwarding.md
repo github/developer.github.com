@@ -2,7 +2,7 @@
 title: Using SSH Agent Forwarding | GitHub API
 ---
 
-# Using SSH Agent Forwarding
+# Using SSH agent forwarding
 
 * TOC
 {:toc}

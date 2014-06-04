@@ -1,5 +1,5 @@
 ---
-title: Managing Deploy Keys | GitHub API
+title: Managing deploy keys | GitHub API
 ---
 
 # Managing Deploy Keys
@@ -7,12 +7,12 @@ title: Managing Deploy Keys | GitHub API
 * TOC
 {:toc}
 
-If you need to manage SSH keys on your servers for your deployment scripts, there are four common methods:
+There are four common methods to managing SSH keys on your servers when automating deployment scripts:
 
 * SSH agent forwarding
 * HTTPS with OAuth tokens
 * Deploy keys
-* Machine users.  
+* Machine users
 
 This guide will help you decide what strategy is best for you.
 

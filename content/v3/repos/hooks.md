@@ -33,7 +33,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
     POST /repos/:owner/:repo/hooks
 
-**Note**: Services other than the `web` service can have at most one hook configured for a repository. Creating hooks for a service that already has a hook configured will [update the existing hook](#edit-a-hook). The `web` service can have multiple hooks configured for a repository.
+**Note**: Repositories can have more than one webhook configured, but all other services can have at most one configuration. Creating hooks for a service that already has one configured will [update the existing hook](#edit-a-hook).
 
 ### Parameters
 
@@ -46,25 +46,23 @@ Name | Type | Description
 
 #### Example
 
-The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
+The [`email` service hook](https://github.com/github/github-services/blob/master/lib/services/email.rb#L13-L15)
 takes these fields in the `config`:
 
-Name | Type | Description
------|------|--------------
-`url`|`string` | **Required**. The URL to which the payloads will be delivered.
-`content_type`|`string` | The media type used to serialize the payloads. Supported values: `json` and `form`. Default: `form`.
-`secret`|`string` | If defined, then HTTP requests that deliver the payloads will include an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
-`insecure_ssl`|`string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values: `"0"` (verification is performed) and `"1"` (verification is not performed). Default: `"0"`.
+* `address`: the email address where messages should be sent.
+* `secret`: populates the `Approved` header to automatically approve the message.
+* `send_from_author`: uses the commit author email address in the `From` address of the email.
 
 Here's how you can setup a hook that posts payloads in JSON format:
 
 <%= json \
-      :name => "web",
+      :name => "email",
       :active => true,
       :events => ['push', 'pull_request'],
       :config => {
-        :url => 'http://example.com/webhook',
-        :content_type => 'json'}
+        :address => 'someguy@afakewebsite.com',
+        :secret => '2legit',
+        :send_from_author => false}
 %>
 
 ### Response

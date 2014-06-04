@@ -31,10 +31,7 @@ event by default and supports the `public` event type as well.
 A number of services have been integrated through the open source
 [github-services](https://github.com/github/github-services) project.  When
 [creating a hook](/webhooks/creating/), the `:name` parameter must refer to one of
-these services.  A generic
-[Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
-service is available that can be configured to trigger for any of the available
-[events](#events).
+these services.
 
 Documentation for all available service hooks can be found in the
 [docs directory](https://github.com/github/github-services/tree/master/docs)
@@ -49,15 +46,13 @@ Active hooks can be configured to trigger for one or more service supported
 events. In other words, the service must support listening for the event you
 want to trigger.
 
-For example, the
-[Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
-service supports listening for all events, while the
+For example, generic webhooks supports listening for all events, while the
 [IRC](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
 service can only listen for `push`, `issues`, `pull_request`, `commit_comment`,
 `pull_request_review_comment`, and `issue_comment` events.
 
-Each service also has a set of default events for which it listens if it isn't 
-configured. For example, the Web service listens only for `push` events by 
+Each service also has a set of default events for which it listens if it isn't
+configured. For example, generic webhooks listen only for `push` events by
 default, while the IRC service listens on `push` and `pull_requests` events.
 Service hooks set up via the repository settings UI listen only for the default
 set of events, but can be

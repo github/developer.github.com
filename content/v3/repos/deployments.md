@@ -104,13 +104,7 @@ branch for the repository, we will attempt to merge it for you. If the merge
 succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.
 
-The `required_contexts` parameter is used to specify a list of [commit
-statuses](/v3/repos/statuses) that are in a "success" state before creating a
-deployment. If your repository is taking advantage of [combined
-statuses](/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref) then
-all statuses with unique contexts will need to be in a "success" state.  (Your
-repository is not required to use commit statuses. If no commit statuses are
-present, the deployment will always be created.)
+By default, [commit statuses](/v3/repos/statuses) for every submitted context must be in a 'success' state. The `required_contexts` parameter allows you to specify a subset of contexts that must be "success", or to specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do not require any contexts or create any commit statuses, the deployment will always succeed.
 
 The `payload` parameter is available for any extra information that a
 deployment system might need. It is a JSON text field that will be passed on

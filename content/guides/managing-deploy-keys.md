@@ -43,8 +43,8 @@ If you don't want to use SSH keys, you can use [HTTPS with OAuth tokens][git-aut
 
 * Anyone with access to the server can deploy the repository.
 * Users don't have to change their local SSH settings.
-* Multiple tokens are not needed; one token per server is adequate.
-* A compromised token can be revoked at any time, turning it essentially into a one-use password.
+* Multiple tokens (one for each user) are not needed; one token per server is enough.
+* A token can be revoked at any time, turning it essentially into a one-use password.
 * Generating new tokens can be easily scripted using [the OAuth API](https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization)
 
 #### Cons
@@ -58,11 +58,11 @@ See [our guide on Git automation with tokens][git-automation].
 
 ## Deploy keys
 
-A deploy key is an SSH key that is stored on the server and grants access to a single repository on GitHub.  This key is attached directly to the repository instead of to a user account.
+A deploy key is an SSH key that is stored on your server and grants access to a single GitHub repository.  This key is attached directly to the repository instead of to a personal user account.
 
 #### Pros
 
-* Anyone with access to the server has access to deploy the repository.
+* Anyone with access to the repository and server has the ability to deploy the project.
 * Users don't have to change their local SSH settings.
 
 #### Cons
@@ -74,7 +74,11 @@ A deploy key is an SSH key that is stored on the server and grants access to a s
 #### Setup
 
 1. [Run the `ssh-keygen` procedure][generating-ssh-keys] on your server.
-2. Instead of going to your account settings, go to the your repository's settings page.
+2. In the top right corner of any GitHub page, click your profile photo.
+   ![Sample of an avatar](https://github-images.s3.amazonaws.com/help/profile/top_right_avatar.png)
+3. On your profile page, click the **Repositories** tab, then click the name of your repository.
+   ![Repository tab](https://github-images.s3.amazonaws.com/help/profile/profile_repositories_tab.png)
+4. In your repository's right sidebar, click **Settings**.
    ![Settings tab](https://github-images.s3.amazonaws.com/help/repository/repo-actions-settings.png)
 3. In the sidebar, click **Deploy Keys**.
    ![Deploy Keys section](/images/deploy-keys.png)
@@ -83,12 +87,18 @@ A deploy key is an SSH key that is stored on the server and grants access to a s
 
 ## Machine users
 
-If your server needs to access multiple repositories, the simplest solution is to attach an SSH key to a user account.  Since this account won't be used by a human, it's called a machine user. You should treat this user the same way you would a human, though, by attaching the key to the machine user account as if it were a normal account. You can then [add the account as collaborator][collaborator] or [add it to a team][team] to the repositories it needs to access.
+If your server needs to access multiple repositories, you can choose to attach an SSH key to an automated user account. Since this account won't be used by a human, it's called a machine user. You can then [add the machine account as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.
+
+<div class="alert">
+<p>
+<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you make machine users for your server deploy scripts. Machine users are completely kosher.
+</p>
+</div>
 
 #### Pros
 
-* Anyone with access to the server has access to deploy the repository.
-* Users don't have to change their local SSH settings.
+* Anyone with access to the repository and server has the ability to deploy the project.
+* No (human) users need to change their local SSH settings.
 * Multiple keys are not needed; one per server is adequate.
 * Organizations can give read-only access to their machine users.
 
@@ -102,15 +112,8 @@ If your server needs to access multiple repositories, the simplest solution is t
 1. [Run the `ssh-keygen` procedure][generating-ssh-keys] on your server and attach the public key to the machine user account.
 2. Give that account access to the repositories it will need to access. You can do this by [adding the account as collaborator][collaborator] or [adding it to a team][team] in an organization.
 
-
-<div class="alert">
-
-<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by “bots” or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you make machine users for your server deploy scripts. Machine users are completely kosher.
-
-</div>
-
 [ssh-agent-forwarding]: /guides/using-ssh-agent-forwarding/
-[generating-ssh-keys]: /articles/generating-ssh-keys
+[generating-ssh-keys]: https://help.github.com/articles/generating-ssh-keys
 [tos]: https://help.github.com/articles/github-terms-of-service
 [git-automation]: https://help.github.com/articles/git-automation-with-oauth-tokens
 [collaborator]: https://help.github.com/articles/how-do-i-add-a-collaborator

@@ -99,7 +99,7 @@ If your server needs to access multiple repositories, the simplest solution is t
 
 #### Cons
 
-* The key has full read/write access to the repository if the repository belongs to a user account.
+* By default, the key has full read/write access to the repository if the repository belongs to a user account. You can add the machine user to a read-only team if it's accessing repositories in an organization.
 * Machine user keys, like deploy keys, are usually not protected by a passphrase.
 
 #### Setup

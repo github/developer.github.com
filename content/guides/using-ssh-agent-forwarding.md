@@ -131,6 +131,6 @@ ssh-add <em>yourkey</em>
 </pre>
 
 [tech-tips]: http://www.unixwiz.net/techtips/ssh-agent-forwarding.html
-[generating-keys]: /articles/generating-ssh-keys
+[generating-keys]: https://help.github.com/articles/generating-ssh-keys
 [ssh-passphrases]: https://help.github.com/ssh-key-passphrases/
 [autolaunch-ssh-agent]: https://help.github.com/articles/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-msysgit

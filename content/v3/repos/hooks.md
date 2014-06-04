@@ -46,23 +46,22 @@ Name | Type | Description
 
 #### Example
 
-The [`email` service hook](https://github.com/github/github-services/blob/master/lib/services/email.rb#L13-L15)
-takes these fields in the `config`:
+To create a webhook, [the following fields are required](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11) by the `config`:
 
-* `address`: the email address where messages should be sent.
-* `secret`: populates the `Approved` header to automatically approve the message.
-* `send_from_author`: uses the commit author email address in the `From` address of the email.
+* `url`: A required string defining the URL to which the payloads will be delivered.
+* `content_type`: An optional string defining the media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+* `secret`: An optional string that's passed with the HTTP requests as an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+* `insecure_ssl`: An optional string that determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`.
 
-Here's how you can setup a hook that posts payloads in JSON format:
+Here's how you can create a hook that posts payloads in JSON format:
 
 <%= json \
-      :name => "email",
+      :name => "web",
       :active => true,
       :events => ['push', 'pull_request'],
       :config => {
-        :address => 'someguy@afakewebsite.com',
-        :secret => '2legit',
-        :send_from_author => false}
+        :url => 'http://example.com/webhook',
+        :content_type => 'json'}
 %>
 
 ### Response

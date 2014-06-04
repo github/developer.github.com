@@ -18,7 +18,7 @@ This guide will help you decide what strategy is best for you.
 
 ## SSH agent forwarding
 
-In many cases, especially in the beginning of a project, SSH agent forwarding is the quickest and simplest method to use.  Agent forwarding uses the same SSH keys that your local development machine uses.
+In many cases, especially in the beginning of a project, SSH agent forwarding is the quickest and simplest method to use.  Agent forwarding uses the same SSH keys that your local development computer uses.
 #### Pros
 
 * You do not have to generate or keep track of any new keys.

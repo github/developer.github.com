@@ -72,7 +72,7 @@ Here are some things to look out for when troubleshooting SSH agent forwarding.
 
 Before you can make your keys work through agent forwarding, they must work locally first. [Our guide on generating SSH keys][generating-keys] can help you set up your SSH keys locally.
 
-### Your local machine must allow SSH agent forwarding
+### Your system must allow SSH agent forwarding
 
 Sometimes, system configurations disallow SSH agent forwarding. You can check if a system configuration file is being used by entering the following command in the terminal:
 
@@ -108,7 +108,7 @@ Agent forwarding may also be blocked on your server. You can check that agent fo
 
 On most computers, the operating system automatically launches `ssh-agent` for you.  On Windows, however, you need to do this manually. We have [a guide on how to start `ssh-agent` whenever you open Git Bash][autolaunch-ssh-agent].
 
-To verify that `ssh-agent` is running on your machine, type the following command in the terminal:
+To verify that `ssh-agent` is running on your computer, type the following command in the terminal:
 
 <pre class="terminal">
 $ echo "$SSH_AUTH_SOCK"

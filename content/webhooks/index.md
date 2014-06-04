@@ -19,7 +19,7 @@ can configure hooks programmatically [via the API](/v3/repos/hooks/).
 
 ## Services
 
-A service is basically the name used to refer to a hook that has configuration
+A service is basically the name used to refer to a webhook that has configuration
 settings, a list of available events, and default events.
 
 For instance, the

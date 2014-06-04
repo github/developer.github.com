@@ -46,7 +46,7 @@ Name | Type | Description
 
 #### Example
 
-To create a webhook, [the following fields are required](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11) by the `config`:
+To create [a webhook](/webhooks), [the following fields are required](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11) by the `config`:
 
 * `url`: A required string defining the URL to which the payloads will be delivered.
 * `content_type`: An optional string defining the media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
@@ -132,7 +132,7 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
 ## Receiving Webhooks
 
-In order for GitHub to send Webhook payloads to your service, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.
+In order for GitHub to send webhook payloads, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.
 
 ### Webhook Headers
 

@@ -18,8 +18,7 @@ This guide will help you decide what strategy is best for you.
 
 ## SSH agent forwarding
 
-In many cases, especially in the beginning of a project, SSH agent forwarding is the quickest and simplest method to use.  Agent forwarding uses the SSH keys already set up on your local development machine. When you SSH into your server and run Git commands, agent forwarding uses those same keys.
-
+In many cases, especially in the beginning of a project, SSH agent forwarding is the quickest and simplest method to use.  Agent forwarding uses the same SSH keys that your local development machine uses.
 #### Pros
 
 * You do not have to generate or keep track of any new keys.
@@ -32,8 +31,6 @@ In many cases, especially in the beginning of a project, SSH agent forwarding is
 * SSH agent forwarding can be troublesome to run for Windows users.
 
 #### Setup
-
-Setting up agent forwarding requires only two setups:
 
 1. Turn on agent forwarding locally. See [our guide on SSH agent forwarding][ssh-agent-forwarding] for more information.
 2. Set your deploy scripts to use agent forwarding. For example, on a bash script, enabling agent forwarding would look something like this: `ssh -A serverA 'bash -s' < deploy.sh`
@@ -76,8 +73,6 @@ A deploy key is an SSH key that is stored on the server and grants access to a s
 
 #### Setup
 
-Setting up a deploy key is almost exactly the same as setting up a normal key, but you attach the key to a repository instead of a user.
-
 1. [Run the `ssh-keygen` procedure][generating-ssh-keys] on your server.
 2. Instead of going to your account settings, go to the your repository's settings page.
    ![Settings tab](https://github-images.s3.amazonaws.com/help/repository/repo-actions-settings.png)
@@ -103,8 +98,6 @@ If your server needs to access multiple repositories, the simplest solution is t
 * Machine user keys, like deploy keys, are usually not protected by a passphrase.
 
 #### Setup
-
-The setup process is basically the same as adding a new user:
 
 1. [Run the `ssh-keygen` procedure][generating-ssh-keys] on your server and attach the public key to the machine user account.
 2. Give that account access to the repositories it will need to access. You can do this by [adding the account as collaborator][collaborator] or [adding it to a team][team] in an organization.

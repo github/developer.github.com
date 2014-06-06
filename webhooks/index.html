@@ -69,7 +69,7 @@ can configure hooks programmatically <a href="/v3/repos/hooks/">via the API</a>.
 
 <h2 id="services">Services</h2>
 
-<p>A service is basically the name used to refer to a hook that has configuration
+<p>A service is basically the name used to refer to a webhook that has configuration
 settings, a list of available events, and default events.</p>
 
 <p>For instance, the
@@ -81,10 +81,7 @@ event by default and supports the <code>public</code> event type as well.</p>
 <p>A number of services have been integrated through the open source
 <a href="https://github.com/github/github-services">github-services</a> project.  When
 <a href="/webhooks/creating/">creating a hook</a>, the <code>:name</code> parameter must refer to one of
-these services.  A generic
-<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web</a>
-service is available that can be configured to trigger for any of the available
-<a href="#events">events</a>.</p>
+these services.</p>
 
 <p>Documentation for all available service hooks can be found in the
 <a href="https://github.com/github/github-services/tree/master/docs">docs directory</a>
@@ -98,15 +95,13 @@ at <a href="https://api.github.com/hooks">api.github.com/hooks</a>.</p>
 events. In other words, the service must support listening for the event you
 want to trigger.</p>
 
-<p>For example, the
-<a href="https://github.com/github/github-services/blob/master/lib/services/web.rb">Web</a>
-service supports listening for all events, while the
+<p>For example, generic webhooks supports listening for all events, while the
 <a href="https://github.com/github/github-services/blob/master/lib/services/irc.rb">IRC</a>
 service can only listen for <code>push</code>, <code>issues</code>, <code>pull_request</code>, <code>commit_comment</code>,
 <code>pull_request_review_comment</code>, and <code>issue_comment</code> events.</p>
 
-<p>Each service also has a set of default events for which it listens if it isn’t 
-configured. For example, the Web service listens only for <code>push</code> events by 
+<p>Each service also has a set of default events for which it listens if it isn’t
+configured. For example, generic webhooks listen only for <code>push</code> events by
 default, while the IRC service listens on <code>push</code> and <code>pull_requests</code> events.
 Service hooks set up via the repository settings UI listen only for the default
 set of events, but can be
@@ -130,7 +125,7 @@ set of events, but can be
     </tr>
 <tr>
 <td><code>create</code></td>
-      <td>Any time a Repository, Branch, or Tag is created.</td>
+      <td>Any time a Branch or Tag is created.</td>
     </tr>
 <tr>
 <td><code>delete</code></td>

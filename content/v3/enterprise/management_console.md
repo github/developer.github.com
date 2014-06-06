@@ -46,7 +46,7 @@ The only time that you're not required to pass this token is when you're [upload
 
 ## Upload license and package for the first time
 
-Once the virtual machine is booted for the first time, you can use the API to upload the new license and package:
+Once the virtual machine is booted for the first time, you can use the API to upload the new license and package
 
     POST /setup/api/start
 
@@ -57,6 +57,8 @@ Name | Type | Description
 `license`|`string` | **Required**. The path to your *.ghl* license file.
 `package`|`string`|**Required**. The path to your *.ghp* license file.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
+
+You can find a list of the available settings at the "[Retrieve Current Settings][settings]" docs.
 
 ### Response
 
@@ -286,3 +288,5 @@ Name | Type | Description
 <pre class="terminal">
 curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
+
+[settings]: /v3/enterprise/management_console/#retrieve-current-settings

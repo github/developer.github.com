@@ -65,7 +65,7 @@ Obviously, your language and server implementations may differ than this code. T
 
 * No matter which implementation you use, the hash signature starts with `sha1=`, using the key of your secret token and your payload body.
 
-* Using a plain `==` operator is **not advised**. A method like `[secure_compare][]` performs a "constant time" string comparison, which renders it safe from certain timing attacks against regular equality operators.
+* Using a plain `==` operator is **not advised**. A method like [`secure_compare`][secure_compare] performs a "constant time" string comparison, which renders it safe from certain timing attacks against regular equality operators.
 
 [ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
 [secure_compare]: http://rubydoc.info/github/rack/rack/master/Rack/Utils.secure_compare

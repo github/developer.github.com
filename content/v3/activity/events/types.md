@@ -322,6 +322,8 @@ Triggered when a [comment is created on a portion of the unified diff](/v3/pulls
 
 Key | Type | Description
 ----|------|-------------
+`action`|`string` | The action that was performed on the comment. Currently, can only be "created".
+`pull_request`|`object` | The [pull request](/v3/pulls/) the comment belongs to.
 `comment`|`object` | The [comment](/v3/pulls/comments) itself.
 
 

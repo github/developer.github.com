@@ -45,7 +45,7 @@ This hash signature is passed along with each request in the headers as `X-Hub-S
       puts "I got some JSON: #{push.inspect}"
     end
 
-The goal is to compute a hash using the `SECRET_TOKEN` password, and ensure that the content from GitHub matches. GitHub uses an HMAC hexdigest to compute the hash, so you could change your server to look a little like this:
+The goal is to compute a hash using your `SECRET_TOKEN`, and ensure that the hash from GitHub matches. GitHub uses an HMAC hexdigest to compute the hash, so you could change your server to look a little like this:
 
     #!ruby
     post '/payload' do

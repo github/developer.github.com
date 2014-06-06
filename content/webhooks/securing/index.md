@@ -32,8 +32,7 @@ export SECRET_TOKEN=<em>your_token</em>
 
 ## Validating payloads from GitHub
 
-When your secret token is set, GitHub uses it to create a hash signature with each payload. You can find details on the implementation [in our Ruby implementation]([ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
-).
+When your secret token is set, GitHub uses it to create a hash signature with each payload. You can find details on the implementation [in our Ruby implementation][ruby-secret].
 
 This hash signature is passed along with each request in the headers as `X-Hub-Signature`. Suppose you have a basic server listening to webhooks that looks like this:
 

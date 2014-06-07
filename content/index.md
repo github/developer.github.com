@@ -24,7 +24,7 @@ layout: overview
   <ul class="wrapper highlights">
     <li class="highlight-module">
       <a href="/guides/"><span class="mega-octicon octicon-file-text"></span></a>
-      <h2><a href="/guides/">Get Started</a></h2>
+      <h2><a href="/guides/">Get started</a></h2>
       <p>New to the GitHub API? With these guides you’ll be up and running in a snap.</p>
     </li>
     <li class="highlight-module">

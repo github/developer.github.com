@@ -7,9 +7,9 @@ title: Search | GitHub API
 * TOC
 {:toc}
 
-### About the Search API
+### About the search API
 
-The Search API is optimized to help you find the specific item you're looking
+The search API is optimized to help you find the specific item you're looking
 for (e.g., a specific user, a specific file in a repository, etc.). Think of it
 the way you think of performing a search on Google. It's designed to help you
 find the one result you're looking for (or maybe the few results you're looking
@@ -96,7 +96,7 @@ search results.
 <%= headers 200, {'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
 <%= json(:repo_search_v3_results) %>
 
-### Highlighting Repository Search Results
+### Highlighting repository search results
 
 Some API consumers will want to highlight the matching search terms when
 displaying search results. The API offers additional metadata to support this
@@ -169,7 +169,7 @@ And we're scoping the search to the `repo:jquery/jquery` repository.
 <%= headers 200, {'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
 <%= json(:code_search_v3_results) %>
 
-### Highlighting Code Search Results
+### Highlighting code search results
 
 Some API consumers will want to highlight the matching search terms when
 displaying search results. The API offers additional metadata to support this
@@ -260,7 +260,7 @@ the oldest issues appear first in the search results.
 <%= headers 200, {'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
 <%= json(:issue_search_v3_results) %>
 
-### Highlighting Issue Search Results
+### Highlighting issue search results
 
 Some API consumers will want to highlight the matching search terms when
 displaying search results. The API offers additional metadata to support this
@@ -330,7 +330,7 @@ with more than 42 repositories, and only if they have over 1,000 followers.
 <%= headers 200, {'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
 <%= json(:user_search_v3_results) %>
 
-### Highlighting User Search Results
+### Highlighting user search results
 
 Some API consumers will want to highlight the matching search terms when
 displaying search results. The API offers additional metadata to support this

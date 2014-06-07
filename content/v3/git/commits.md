@@ -7,7 +7,7 @@ title: Git Commits | GitHub API
 * TOC
 {:toc}
 
-## Get a Commit
+## Get a commit
 
     GET /repos/:owner/:repo/git/commits/:sha
 
@@ -16,7 +16,7 @@ title: Git Commits | GitHub API
 <%= headers 200 %>
 <%= json :git_commit %>
 
-## Create a Commit
+## Create a commit
 
     POST /repos/:owner/:repo/git/commits
 
@@ -29,11 +29,10 @@ Name | Type | Description
 `parents`|`array` of `string`s| **Required**. The SHAs of the commits that were the parents of this commit.  If omitted or empty, the commit will be written as a root commit.  For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided.
 
 
-### Optional Parameters
+### Optional parameters
 
 You can provide an additional `commiter` parameter, which is a hash containing
-information about the committer. Or, you can provide an `author` parameter, which
-is a hash containing information about the author.
+information about the committer. Or, you can provide an `author` parameter, which is a hash containing information about the author.
 
 The `committer` section is optional and will be filled with the `author`
 data if omitted. If the `author` section is omitted, it will be filled
@@ -47,7 +46,7 @@ Name | Type | Description
 `email`|`string` | The email of the author (or commiter) of the commit
 `date`|`string` | Indicates when this commit was authored (or committed). This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
-### Example Input
+### Example input
 
 <%= json "message"=> "my commit message", \
     "author"=> \

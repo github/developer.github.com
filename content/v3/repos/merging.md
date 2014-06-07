@@ -34,7 +34,7 @@ Name | Type | Description
   :commit_message => "Shipped cool_feature!"
 %>
 
-### Successful Response *(The resulting merge commit)*
+### Successful response *(The resulting merge commit)*
 
 <%= headers 201 %>
 <%= json(:merge_commit) %>

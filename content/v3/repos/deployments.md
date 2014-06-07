@@ -26,17 +26,13 @@ and act on. This enables developers and organizations to build loosely-coupled
 tooling around deployments, without having to worry about implementation
 details of delivering different types of applications (e.g., web, native).
 
-Deployment Statuses allow external services to mark deployments with a
+Deployment statuses allow external services to mark deployments with a
 'success', 'failure', 'error', or 'pending' state, which can then be consumed
 by any system listening for `deployment_status` events.
 
-Deployment Statuses can also include an optional `description` and `target_url`, and
-we highly recommend providing them as they make deployment statuses much more
-useful. The `target_url` would be the full URL to the deployment output, and
-the `description` would be the high level summary of what happened with the
-deployment.
+Deployment statuses can also include an optional `description` and `target_url`, and we highly recommend providing them as they make deployment statuses much more useful. The `target_url` would be the full URL to the deployment output, and the `description` would be the high level summary of what happened with the deployment.
 
-Deployments and Deployment Statuses both have associated
+Deployments and deployment statuses both have associated
 [repository events](/v3/activity/events/types/#deploymentevent) when
 they're created. This allows webhooks and 3rd party integrations to respond to
 deployment requests as well as update the status of a deployment as progress is
@@ -46,27 +42,27 @@ Below is a simple sequence diagram for how these interactions would work.
 
 <pre>
 +---------+             +--------+            +-----------+        +-------------+
-| Tooling |             | GitHub |            | 3rd Party |        | Your Server |
+| Tooling |             | GitHub |            | 3rd party |        | Your server |
 +---------+             +--------+            +-----------+        +-------------+
      |                      |                       |                     |
-     |  Create Deployment   |                       |                     |
+     |  Create deployment   |                       |                     |
      |--------------------->|                       |                     |
      |                      |                       |                     |
-     |  Deployment Created  |                       |                     |
+     |  Deployment created  |                       |                     |
      |<---------------------|                       |                     |
      |                      |                       |                     |
-     |                      |   Deployment Event    |                     |
+     |                      |   Deployment event    |                     |
      |                      |---------------------->|                     |
      |                      |                       |     SSH+Deploys     |
      |                      |                       |-------------------->|
      |                      |                       |                     |
-     |                      |   Deployment Status   |                     |
+     |                      |   Deployment status   |                     |
      |                      |<----------------------|                     |
      |                      |                       |                     |
-     |                      |                       |   Deploy Completed  |
+     |                      |                       |   Deploy completed  |
      |                      |                       |<--------------------|
      |                      |                       |                     |
-     |                      |   Deployment Status   |                     |
+     |                      |   Deployment status   |                     |
      |                      |<----------------------|                     |
      |                      |                       |                     |
 </pre>
@@ -84,7 +80,7 @@ targeted access to Deployments and Deployment Statuses **without**
 granting access to repository code, while the `repo` scope grants permission to code
 as well.
 
-## List Deployments
+## List deployments
 
 Users with pull access can view deployments for a repository:
 
@@ -95,7 +91,7 @@ Users with pull access can view deployments for a repository:
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:deployment) { |h| [h] } %>
 
-## Create a Deployment
+## Create a deployment
 
 If your repository is taking advantage of [commit statuses](/v3/repos/statuses),
 the API will reject requests that do not have a successful [combined
@@ -145,14 +141,14 @@ Name | Type | Description
 'https://api.github.com/repos/octocat/example/deployments/1' %>
 <%= json :deployment %>
 
-## Update a Deployment
+## Update a deployment
 
 Once a deployment is created, it cannot be updated. Information relating to the
 success or failure of a deployment is handled through Deployment Statuses.
 
-# Deployment Statuses
+# Deployment statuses
 
-## List Deployment Statuses
+## List deployment statuses
 
 Users with pull access can view deployment statuses for a deployment:
 
@@ -170,7 +166,7 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:deployment_status) { |h| h.delete("deployment"); [h] } %>
 
-## Create a Deployment Status
+## Create a deployment status
 
 Users with push access can create deployment statuses for a given deployment:
 

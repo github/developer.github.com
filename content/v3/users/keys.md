@@ -1,8 +1,8 @@
 ---
-title: User Public Keys | GitHub API
+title: User public keys | GitHub API
 ---
 
-# Public Keys
+# Public keys
 
 * TOC
 {:toc}

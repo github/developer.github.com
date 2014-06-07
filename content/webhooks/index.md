@@ -143,21 +143,21 @@ X-Github-Event: issue
 }
 </pre>
 
-## Wildcard Event
+## Wildcard event
 
 We also support a wildcard (`*`) that will match all supported events. When you
 add the wildcard event, we'll replace any existing events you have configured with
 the wildcard event and send you payloads for all supported events. You'll also
 automatically get any new events we might add in the future.
 
-## Ping Event
+## Ping event
 
 When you create a new webhook, we'll send you a simple `ping` event to let you
 know you've set up the webhook correctly. This event isn't stored so it isn't
 retrievable via the [Events API](/v3/activity/events/). You can trigger a `ping`
 again by calling the [ping endpoint](/v3/repos/hooks/#ping-a-hook).
 
-### Ping Event Payload
+### Ping event payload
 
 Key | Value |
 ----| ----- |

@@ -18,7 +18,7 @@ application](https://github.com/settings/applications/new) before getting
 started. A registered OAuth application is assigned a unique Client ID
 and Client Secret. The Client Secret should not be shared.
 
-## Web Application Flow
+## Web application flow
 
 This is a description of the OAuth2 flow from 3rd party web sites.
 
@@ -119,9 +119,9 @@ For example, in curl you can set the Authorization header like this:
 
     curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
 
-## Non-Web Application Flow
+## Non-web application flow
 
-Use [Basic Authentication](/v3/auth#basic-authentication) to create an OAuth2
+Use [Basic authentication](/v3/auth#basic-authentication) to create an OAuth2
 token using the [interface below](/v3/oauth_authorizations/#create-a-new-authorization).  With
 this technique, a username and password need not be stored permanently, and the
 user can revoke access at any time. (Make sure to understand how to [work with
@@ -203,7 +203,7 @@ There are a few things that can go wrong in the process of obtaining an
 OAuth token for a user. In the initial authorization request phase,
 these are some errors you might see:
 
-### Application Suspended
+### Application suspended
 
 If the OAuth application you set up has been suspended (due to reported
 abuse, spam, or a mis-use of the API), GitHub will redirect to the

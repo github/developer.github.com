@@ -1,8 +1,8 @@
 ---
-title: Working with Comments | GitHub API
+title: Working with comments | GitHub API
 ---
 
-# Working with Comments
+# Working with comments
 
 * TOC
 {:toc}
@@ -16,7 +16,7 @@ In this guide, we'll explore how you can access and manipulate each one. For eve
 example, we'll be using [this sample Pull Request made][sample PR] on the "octocat"
 repository. As always, samples can be found in [our platform-samples repository][platform-samples].
 
-## Pull Request Comments
+## Pull Request comments
 
 To access comments on a Pull Request, you'll go through [the Issues API][issues].
 This may seem counterintuitive at first. But once you understand that a Pull
@@ -49,7 +49,7 @@ providing both the repository's name (`octocat/Spoon-Knife`), and the Pull Reque
 we're interested in (`1176`). After that, it's simply a matter of iterating through
 the comments to fetch information about each one.
 
-## Pull Request Comments on a Line
+## Pull Request comments on a line
 
 Within the diff view, you can start a discussion on a particular aspect of a singular
 change made within the Pull Request. These comments occur on the individual lines
@@ -80,7 +80,7 @@ A comment made on a Pull Request should be reserved for discussion or ideas on
 the overall direction of the code. A comment made as part of a Pull Request review should
 deal specifically with the way a particular change was implemented within a file.
 
-## Commit Comments
+## Commit comments
 
 The last type of comments occur specifically on individual commits. For this reason,
 they make use of [the commit comment API][commit comment API].

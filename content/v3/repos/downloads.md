@@ -7,7 +7,7 @@ title: Downloads | GitHub API
 * TOC
 {:toc}
 
-### Downloads API is Deprecated
+### Downloads API is deprecated
 
 <div class="alert">
   <p>

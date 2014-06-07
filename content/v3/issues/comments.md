@@ -1,5 +1,5 @@
 ---
-title: Issue Comments | GitHub API
+title: Issue comments | GitHub API
 ---
 
 # Comments

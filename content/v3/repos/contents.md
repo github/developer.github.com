@@ -99,7 +99,7 @@ Name | Type | Description
 `content`|`string` | **Required**. The new file content, Base64 encoded.
 `branch` | `string` | The branch name. Default: the repository’s default branch (usually `master`)
 
-### Optional Parameters
+### Optional parameters
 
 You can provide an additional `commiter` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
@@ -119,7 +119,7 @@ Name | Type | Description
 `name`|`string` | The name of the author (or commiter) of the commit
 `email`|`string` | The email of the author (or commiter) of the commit
 
-### Example Input
+### Example input
 
 <%= json "message" => "my commit message", \
     "committer" => \
@@ -147,7 +147,7 @@ Name | Type | Description
 `sha` | `string` | **Required**. The blob SHA of the file being replaced. 
 `branch` | `string` | The branch name. Default: the repository’s default branch (usually `master`)
 
-### Optional Parameters
+### Optional parameters
 
 You can provide an additional `commiter` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
@@ -167,7 +167,7 @@ Name | Type | Description
 `name`|`string` | The name of the author (or commiter) of the commit
 `email`|`string` | The email of the author (or commiter) of the commit
 
-### Example Input
+### Example input
 
 <%= json "message" => "my commit message", \
     "committer" => \
@@ -196,7 +196,7 @@ Name | Type | Description
 `sha` | `string` | **Required**. The blob SHA of the file being replaced. 
 `branch` | `string` | The branch name. Default: the repository’s default branch (usually `master`)
 
-### Optional Parameters
+### Optional parameters
 
 You can provide an additional `commiter` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
@@ -216,7 +216,7 @@ Name | Type | Description
 `name`|`string` | The name of the author (or commiter) of the commit
 `email`|`string` | The email of the author (or commiter) of the commit
 
-### Example Input
+### Example input
 
 <%= json "message" => "my commit message", \
     "committer" => \

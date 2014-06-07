@@ -1,9 +1,9 @@
 ---
-title: Creating Webhooks | GitHub API
+title: Creating webhooks | GitHub API
 layout: webhooks
 ---
 
-# Creating Webhooks
+# Creating webhooks
 
 * TOC
 {:toc}
@@ -20,7 +20,7 @@ Creating a webhook is a two-step process. You'll first need to set up how you wa
 your webhook to behave through GitHub--what events should it listen to. After that,
 you'll set up your server to receive and manage the payload.
 
-## Setting up a Webhook
+## Setting up a webhook
 
 To set up a webhook on GitHub, head over to the **Settings** page of your repository,
 and click on **Webhooks & services**. After that, click on **Add webhook**.
@@ -37,7 +37,7 @@ This is the server endpoint that will receive the webhook payload.
 Since we're developing locally for our tutorial, let's set it to `http://localhost:4567/payload`.
 We'll explain why in the [Configuring Your Server](/webhooks/configuring/) docs.
 
-## Content Type
+## Content type
 
 Webhooks can be delivered using different content types:
 
@@ -60,7 +60,7 @@ and toggle the options there.
 
 When you're finished, click on **Add webhook**. Phew! Now that the webhook is created,
 it's time to set up our local server to test the webhook. Head on over to
-[Configuring Your Server](/webhooks/configuring/) to learn how to do that.
+[Configuring your server](/webhooks/configuring/) to learn how to do that.
 
 [webhook-api]: /v3/repos/hooks/
 [hooks-api]: /webhooks/#events

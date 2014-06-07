@@ -2,7 +2,7 @@
 title: Authorizations | GitHub API
 ---
 
-# OAuth Authorizations API
+# OAuth authorizations API
 
 * TOC
 {:toc}
@@ -187,7 +187,7 @@ for this method, where the username is the OAuth application `client_id` and
 
 <%= headers 204 %>
 
-## More Information
+## More information
 
 
 It can be a little tricky to get started with OAuth. Here are a few

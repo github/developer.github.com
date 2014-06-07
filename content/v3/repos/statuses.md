@@ -25,7 +25,7 @@ Note that the `repo:status` [OAuth scope](/v3/oauth/#scopes) grants targeted
 access to Statuses **without** also granting access to repository code, while the
 `repo` scope grants permission to code as well as statuses.
 
-## Create a Status
+## Create a status
 
 Users with push access can create commit statuses for a given ref:
 
@@ -58,7 +58,7 @@ Name | Type | Description
 
 <% combined_media_type = "application/vnd.github.she-hulk-preview+json" %>
 
-## List Statuses for a specific Ref
+## List statuses for a specific Ref
 
 Users with pull access can view commit statuses for a given ref:
 

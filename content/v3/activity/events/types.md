@@ -1,8 +1,8 @@
 ---
-title: Event Types | GitHub API
+title: Event types | GitHub API
 ---
 
-# Event Types
+# Event types
 
 Each event has a similar JSON schema, but a unique `payload` object that is
 determined by its event type.  [Repository hook](/v3/repos/hooks/) names relate to event types, and will have the exact same payload.  The only exception to this is the `push` hook, which has a larger, more detailed payload.
@@ -158,7 +158,7 @@ Key | Type | Description
 
 ## ForkApplyEvent
 
-Triggered when a patch is applied in the Fork Queue.
+Triggered when a patch is applied in the fork queue.
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
@@ -177,7 +177,7 @@ Key | Type | Description
 
 ## GistEvent
 
-Triggered when a [Gist](/v3/gists/) is created or updated.
+Triggered when a [gist](/v3/gists/) is created or updated.
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 

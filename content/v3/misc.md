@@ -27,11 +27,11 @@ organization's [GitHub Enterprise](https://enterprise.github.com/) installation.
 
 ## [Rate Limit][]
 
-The [Rate Limit API][Rate Limit] lets you check your current rate limit
+The [Rate limit API][Rate limit] lets you check your current rate limit
 status at any time.
 
 [Emojis]: /v3/emojis
 [Gitignore]: /v3/gitignore
 [Markdown]: /v3/markdown
 [Meta]: /v3/meta
-[Rate Limit]: /v3/rate_limit
+[Rate limit]: /v3/rate_limit

@@ -43,8 +43,6 @@ In certain exceptional cases, we may temporarily bump your rate limit higher. Yo
 should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest
 dreams with the current rate limit (but don't worry, we'll help you out).
 
-## Why can't my server with SSL receive Webhooks?
+## Why can't my server with SSL receive webhooks?
 
-When we send events to your server, we attempt to negotiate either SSL version 2 or 3.
-If your server requires a specific SSL version and does not support SSL negotiation,
-you can specify a specific version within the [webhook's config block](https://developer.github.com/v3/repos/hooks/#edit-a-hook). Include a parameter called `ssl_version`, with a value of either `2` or `3`.
+When we send events to your server, we attempt to negotiate either SSL version 2 or 3. If your server requires a specific SSL version and does not support SSL negotiation, you can specify a specific version within the [webhook's config block](https://developer.github.com/v3/repos/hooks/#edit-a-hook). Include a parameter called `ssl_version`, with a value of either `2` or `3`.

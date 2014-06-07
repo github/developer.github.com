@@ -49,7 +49,7 @@ of high server load, the time may increase.  Please obey the header.
     HTTP/1.1 304 Not Modified
     X-Poll-Interval: 60
 
-## Notification Reasons
+## Notification reasons
 
 When retrieving responses from the Notifications API, each payload has a key titled
 `reason`. These correspond to events that trigger a notification.
@@ -168,7 +168,7 @@ Name | Type | Description
 
 <%= headers 205 %>
 
-## Get a Thread Subscription
+## Get a thread subscription
 
 This checks to see if the current user is subscribed to a thread.  You can also
 [get a Repository subscription](/v3/activity/watching/#get-a-repository-subscription).
@@ -180,7 +180,7 @@ This checks to see if the current user is subscribed to a thread.  You can also
 <%= headers 200 %>
 <%= json :subscription %>
 
-## Set a Thread Subscription
+## Set a thread subscription
 
 This lets you subscribe to a thread, or ignore it.  Subscribing to a thread
 is unnecessary if the user is already subscribed to the repository.  Ignoring
@@ -202,7 +202,7 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :subscription %>
 
-## Delete a Thread Subscription
+## Delete a thread subscription
 
     DELETE /notifications/threads/:id/subscription
 

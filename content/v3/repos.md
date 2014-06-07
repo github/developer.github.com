@@ -213,7 +213,7 @@ List languages for the specified repository. The value on the right of a languag
   "Python" => 7769
 %>
 
-## List Teams
+## List teams
 
     GET /repos/:owner/:repo/teams
 
@@ -222,7 +222,7 @@ List languages for the specified repository. The value on the right of a languag
 <%= headers 200 %>
 <%= json(:team) { |h| [h] } %>
 
-## List Tags
+## List tags
 
     GET /repos/:owner/:repo/tags
 
@@ -231,7 +231,7 @@ List languages for the specified repository. The value on the right of a languag
 <%= headers 200 %>
 <%= json(:tag) { |h| [h] } %>
 
-## List Branches
+## List branches
 
     GET /repos/:owner/:repo/branches
 
@@ -240,7 +240,7 @@ List languages for the specified repository. The value on the right of a languag
 <%= headers 200 %>
 <%= json(:branches) %>
 
-## Get Branch
+## Get branch
 
     GET /repos/:owner/:repo/branches/:branch
 
@@ -249,7 +249,7 @@ List languages for the specified repository. The value on the right of a languag
 <%= headers 200 %>
 <%= json(:branch) %>
 
-## Delete a Repository
+## Delete a repository
 
 Deleting a repository requires admin access.  If OAuth is used, the
 `delete_repo` scope is required.

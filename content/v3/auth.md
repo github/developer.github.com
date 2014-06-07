@@ -1,8 +1,8 @@
 ---
-title: Other Authentication Methods | GitHub API
+title: Other authentication methods | GitHub API
 ---
 
-# Other Authentication Methods
+# Other authentication methods
 
 * TOC
 {:toc}
@@ -14,7 +14,7 @@ where full OAuth would be overkill). Third party applications that rely on
 GitHub for authentication should not ask for or collect GitHub credentials.
 Instead, they should use the [OAuth web flow](/v3/oauth).
 
-## Basic Authentication
+## Basic authentication
 
 The API supports Basic Authentication as defined in
 [RFC2617](http://www.ietf.org/rfc/rfc2617.txt) with a few slight differences.
@@ -24,7 +24,7 @@ the existence of user data. Instead, the GitHub API responds with `404 Not Found
 This may cause problems for HTTP libraries that assume a `401 Unauthorized`
 response. The solution is to manually craft the `Authorization` header.
 
-### Via Username and Password
+### Via username and password
 
 To use Basic Authentication with the GitHub API, simply send the username and
 password associated with the account.
@@ -37,7 +37,7 @@ would authenticate you if you replace `<username>` with your GitHub username.
 $ curl -u &lt;username&gt; https://api.github.com/user
 </pre>
 
-### Via OAuth Tokens
+### Via OAuth tokens
 
 Alternatively, you can authenticate using [personal access
 tokens][personal-access-tokens] or OAuth tokens. To do so, provide the token as

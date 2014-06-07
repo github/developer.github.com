@@ -41,6 +41,7 @@ task :publish => [:clean, :remove_output_dir] do
   sh "nanoc compile"
 
   ENV['GIT_DIR'] = File.expand_path(`git rev-parse --git-dir`.chomp)
+  ENV['RUBYOPT'] = nil
   old_sha = `git rev-parse refs/remotes/origin/gh-pages`.chomp
   Dir.chdir('output') do
     ENV['GIT_INDEX_FILE'] = gif = '/tmp/dev.gh.i'

@@ -54,13 +54,15 @@
       <h1 id="oauth">OAuth</h1>
 
 <ul id="markdown-toc">
-<li><a href="#web-application-flow">Web Application Flow</a></li>
+  <li><a href="#web-application-flow">Web Application Flow</a></li>
   <li><a href="#non-web-application-flow">Non-Web Application Flow</a></li>
   <li><a href="#redirect-urls">Redirect URLs</a></li>
   <li><a href="#scopes">Scopes</a></li>
   <li><a href="#common-errors-for-the-authorization-request">Common errors for the authorization request</a></li>
   <li><a href="#common-errors-for-the-access-token-request">Common errors for the access token request</a></li>
-</ul><p>OAuth2 is a protocol that lets external apps request authorization to
+</ul>
+
+<p>OAuth2 is a protocol that lets external apps request authorization to
 private details in a user’s GitHub account without getting their
 password. This is preferred over <a href="/v3/auth#basic-authentication">Basic Authentication</a> because tokens can
 be limited to specific types of data, and can be revoked by users at any
@@ -83,35 +85,39 @@ and Client Secret. The Client Secret should not be shared.</p>
 <h3 id="parameters">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>client_id</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>client_id</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The client ID you received from GitHub when you <a href="https://github.com/settings/applications/new">registered</a>.</td>
     </tr>
-<tr>
-<td><code>redirect_uri</code></td>
+    <tr>
+      <td><code>redirect_uri</code></td>
       <td><code>string</code></td>
       <td>The URL in your app where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
     </tr>
-<tr>
-<td><code>scope</code></td>
+    <tr>
+      <td><code>scope</code></td>
       <td><code>string</code></td>
       <td>A comma separated list of <a href="#scopes">scopes</a>. If not provided, <code>scope</code> defaults to an empty list of scopes for users that don’t have a valid token for the app. For users who do already have a valid token for the app, the user won’t be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.</td>
     </tr>
-<tr>
-<td><code>state</code></td>
+    <tr>
+      <td><code>state</code></td>
       <td><code>string</code></td>
       <td>An unguessable random string. It is used to protect against cross-site request forgery attacks.</td>
     </tr>
-</tbody>
-</table><h3 id="github-redirects-back-to-your-site">2. GitHub redirects back to your site</h3>
+  </tbody>
+</table>
+
+<h3 id="github-redirects-back-to-your-site">2. GitHub redirects back to your site</h3>
 
 <p>If the user accepts your request, GitHub redirects back to your site
 with a temporary code in a <code>code</code> parameter as well as the state you provided in
@@ -126,37 +132,41 @@ has been created by a third party and the process should be aborted.</p>
 <h3 id="parameters-1">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>client_id</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>client_id</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The client ID you received from GitHub when you <a href="https://github.com/settings/applications/new">registered</a>.</td>
     </tr>
-<tr>
-<td><code>client_secret</code></td>
+    <tr>
+      <td><code>client_secret</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The client secret you received from GitHub when you <a href="https://github.com/settings/applications/new">registered</a>.</td>
     </tr>
-<tr>
-<td><code>code</code></td>
+    <tr>
+      <td><code>code</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The code you received as a response to <a href="#redirect-users-to-request-github-access">Step 1</a>.</td>
     </tr>
-<tr>
-<td><code>redirect_uri</code></td>
+    <tr>
+      <td><code>redirect_uri</code></td>
       <td><code>string</code></td>
       <td>The URL in your app where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
     </tr>
-</tbody>
-</table><h3 id="response">Response</h3>
+  </tbody>
+</table>
+
+<h3 id="response">Response</h3>
 
 <p>By default, the response will take the following form:</p>
 
@@ -274,93 +284,97 @@ X-Accepted-OAuth-Scopes: user
 <code>X-Accepted-OAuth-Scopes</code> lists the scopes that the action checks for.</p>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>(no scope)</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>(no scope)</code></td>
       <td>Grants read-only access to public information (includes public user profile info, public repository info, and gists)</td>
     </tr>
-<tr>
-<td><code>user</code></td>
+    <tr>
+      <td><code>user</code></td>
       <td>Grants read/write access to profile info only.  Note that this scope includes <code>user:email</code> and <code>user:follow</code>.</td>
     </tr>
-<tr>
-<td><code>user:email</code></td>
+    <tr>
+      <td><code>user:email</code></td>
       <td>Grants read access to a user’s email addresses.</td>
     </tr>
-<tr>
-<td><code>user:follow</code></td>
+    <tr>
+      <td><code>user:follow</code></td>
       <td>Grants access to follow or unfollow other users.</td>
     </tr>
-<tr>
-<td><code>public_repo</code></td>
+    <tr>
+      <td><code>public_repo</code></td>
       <td>Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.</td>
     </tr>
-<tr>
-<td><code>repo</code></td>
+    <tr>
+      <td><code>repo</code></td>
       <td>Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.</td>
     </tr>
-<tr>
-<td><code>repo_deployment</code></td>
+    <tr>
+      <td><code>repo_deployment</code></td>
       <td>Grants access to <a href="/v3/repos/deployments">deployment statuses</a> for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, <em>without</em> granting access to the code.</td>
     </tr>
-<tr>
-<td><code>repo:status</code></td>
+    <tr>
+      <td><code>repo:status</code></td>
       <td>Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses <em>without</em> granting access to the code.</td>
     </tr>
-<tr>
-<td><code>delete_repo</code></td>
+    <tr>
+      <td><code>delete_repo</code></td>
       <td>Grants access to delete adminable repositories.</td>
     </tr>
-<tr>
-<td><code>notifications</code></td>
+    <tr>
+      <td><code>notifications</code></td>
       <td>Grants read access to a user’s notifications. <code>repo</code> also provides this access.</td>
     </tr>
-<tr>
-<td><code>gist</code></td>
+    <tr>
+      <td><code>gist</code></td>
       <td>Grants write access to gists.</td>
     </tr>
-<tr>
-<td><code>read:repo_hook</code></td>
+    <tr>
+      <td><code>read:repo_hook</code></td>
       <td>Grants read and ping access to hooks in public or private repositories.</td>
     </tr>
-<tr>
-<td><code>write:repo_hook</code></td>
+    <tr>
+      <td><code>write:repo_hook</code></td>
       <td>Grants read, write, and ping access to hooks in public or private repositories.</td>
     </tr>
-<tr>
-<td><code>admin:repo_hook</code></td>
+    <tr>
+      <td><code>admin:repo_hook</code></td>
       <td>Grants read, write, ping, and delete access to hooks in public or private repositories.</td>
     </tr>
-<tr>
-<td><code>read:org</code></td>
+    <tr>
+      <td><code>read:org</code></td>
       <td>Read-only access to organization, teams, and membership.</td>
     </tr>
-<tr>
-<td><code>write:org</code></td>
+    <tr>
+      <td><code>write:org</code></td>
       <td>Publicize and unpublicize organization membership.</td>
     </tr>
-<tr>
-<td><code>admin:org</code></td>
+    <tr>
+      <td><code>admin:org</code></td>
       <td>Fully manage organization, teams, and memberships.</td>
     </tr>
-<tr>
-<td><code>read:public_key</code></td>
+    <tr>
+      <td><code>read:public_key</code></td>
       <td>List and view details for public keys.</td>
     </tr>
-<tr>
-<td><code>write:public_key</code></td>
+    <tr>
+      <td><code>write:public_key</code></td>
       <td>Create, list, and view details for public keys.</td>
     </tr>
-<tr>
-<td><code>admin:public_key</code></td>
+    <tr>
+      <td><code>admin:public_key</code></td>
       <td>Fully manage public keys.</td>
     </tr>
-</tbody>
-</table><p>NOTE: Your application can request the scopes in the initial redirection. You
+  </tbody>
+</table>
+
+<p>NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:</p>
 
 <pre><code>https://github.com/login/oauth/authorize?
@@ -435,10 +449,10 @@ examples only show JSON responses.</p>
 <p>If the client_id and or client_secret you pass are incorrect you will
 receive this error response.</p>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"error"</span><span class="o">:</span> <span class="s2">"incorrect_client_credentials"</span><span class="p">,</span>
-  <span class="s2">"error_description"</span><span class="o">:</span> <span class="s2">"The client_id and/or client_secret passed are incorrect."</span><span class="p">,</span>
-  <span class="s2">"error_uri"</span><span class="o">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#incorrect-client-credentials"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"error"</span><span class="p">:</span> <span class="s2">"incorrect_client_credentials"</span><span class="p">,</span>
+  <span class="s2">"error_description"</span><span class="p">:</span> <span class="s2">"The client_id and/or client_secret passed are incorrect."</span><span class="p">,</span>
+  <span class="s2">"error_uri"</span><span class="p">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#incorrect-client-credentials"</span>
 <span class="p">}</span></code></pre>
 
 <p>To solve this error, go back and make sure you have the correct
@@ -451,10 +465,10 @@ to GitHub.</p>
 <p>If you provide a redirect_uri that doesn’t match what you’ve registered
 with your application, you will receive this error message:</p>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"error"</span><span class="o">:</span> <span class="s2">"redirect_uri_mismatch"</span><span class="p">,</span>
-  <span class="s2">"error_description"</span><span class="o">:</span> <span class="s2">"The redirect_uri MUST match the registered callback URL for this application."</span><span class="p">,</span>
-  <span class="s2">"error_uri"</span><span class="o">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#redirect-uri-mismatch(2)"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"error"</span><span class="p">:</span> <span class="s2">"redirect_uri_mismatch"</span><span class="p">,</span>
+  <span class="s2">"error_description"</span><span class="p">:</span> <span class="s2">"The redirect_uri MUST match the registered callback URL for this application."</span><span class="p">,</span>
+  <span class="s2">"error_uri"</span><span class="p">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#redirect-uri-mismatch(2)"</span>
 <span class="p">}</span></code></pre>
 
 <p>To correct this error, either provide a redirect_uri that matches what
@@ -463,25 +477,27 @@ registered with your application.</p>
 
 <h3 id="bad-verification-code">Bad verification code</h3>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"add_scopes"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"add_scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"repo"</span>
   <span class="p">],</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"admin script"</span>
 <span class="p">}</span></code></pre>
 
 <p>If the verification code you pass is incorrect, expired, or doesn’t
 match what you received in the first request for authorization you will
 receive this error.</p>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"error"</span><span class="o">:</span> <span class="s2">"bad_verification_code"</span><span class="p">,</span>
-  <span class="s2">"error_description"</span><span class="o">:</span> <span class="s2">"The code passed is incorrect or expired."</span><span class="p">,</span>
-  <span class="s2">"error_uri"</span><span class="o">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#bad-verification-code"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"error"</span><span class="p">:</span> <span class="s2">"bad_verification_code"</span><span class="p">,</span>
+  <span class="s2">"error_description"</span><span class="p">:</span> <span class="s2">"The code passed is incorrect or expired."</span><span class="p">,</span>
+  <span class="s2">"error_uri"</span><span class="p">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#bad-verification-code"</span>
 <span class="p">}</span></code></pre>
 
 <p>To solve this error, start the <a href="#redirect-users-to-request-github-access">OAuth process over from the beginning</a>
 and get a new code.</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

@@ -54,7 +54,7 @@
       <h1 id="oauth-authorizations-api">OAuth Authorizations API</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-your-authorizations">List your authorizations</a></li>
+  <li><a href="#list-your-authorizations">List your authorizations</a></li>
   <li><a href="#get-a-single-authorization">Get a single authorization</a></li>
   <li><a href="#create-a-new-authorization">Create a new authorization</a></li>
   <li><a href="#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a></li>
@@ -65,7 +65,9 @@
   <li><a href="#revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</a></li>
   <li><a href="#revoke-an-authorization-for-an-application">Revoke an authorization for an application</a></li>
   <li><a href="#more-information">More Information</a></li>
-</ul><p>There is an API for users to manage their own tokens.  You can only access your
+</ul>
+
+<p>There is an API for users to manage their own tokens.  You can only access your
 own tokens, and only via <a href="/v3/auth#basic-authentication">Basic Authentication</a>.
 (Make sure you understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with two-factor
 authentication</a> if you or your
@@ -84,23 +86,23 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-    <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+    <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
       <span class="s2">"public_repo"</span>
     <span class="p">],</span>
-    <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-    <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-      <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+    <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+    <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+      <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
     <span class="p">},</span>
-    <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-    <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+    <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+    <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -115,22 +117,22 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
   <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-new-authorization">Create a new authorization</h2>
@@ -149,44 +151,48 @@ Read more about these tokens on the <a href="https://help.github.com/articles/cr
 <h3 id="parameters">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>scopes</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>scopes</code></td>
       <td><code>array</code></td>
       <td>A list of scopes that this authorization is in.</td>
     </tr>
-<tr>
-<td><code>note</code></td>
+    <tr>
+      <td><code>note</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. A note to remind you what the OAuth token is for.</td>
     </tr>
-<tr>
-<td><code>note_url</code></td>
+    <tr>
+      <td><code>note_url</code></td>
       <td><code>string</code></td>
       <td>A URL to remind you what app the OAuth token is for.</td>
     </tr>
-<tr>
-<td><code>client_id</code></td>
+    <tr>
+      <td><code>client_id</code></td>
       <td><code>string</code></td>
       <td>The 20 character OAuth app client key for which to create the token.</td>
     </tr>
-<tr>
-<td><code>client_secret</code></td>
+    <tr>
+      <td><code>client_secret</code></td>
       <td><code>string</code></td>
       <td>The 40 character OAuth app client secret for which to create the token.</td>
     </tr>
-</tbody>
-</table><pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+  </tbody>
+</table>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"admin script"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -196,22 +202,22 @@ Location: https://api.github.com/authorizations/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
   <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</h2>
@@ -228,40 +234,44 @@ exists. Otherwise, it creates one.</p>
 <h3 id="parameters-1">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>client_secret</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>client_secret</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The 40 character OAuth app client secret associated with the client ID specified in the URL.</td>
     </tr>
-<tr>
-<td><code>scopes</code></td>
+    <tr>
+      <td><code>scopes</code></td>
       <td><code>array</code></td>
       <td>A list of scopes that this authorization is in.</td>
     </tr>
-<tr>
-<td><code>note</code></td>
+    <tr>
+      <td><code>note</code></td>
       <td><code>string</code></td>
       <td>A note to remind you what the OAuth token is for.</td>
     </tr>
-<tr>
-<td><code>note_url</code></td>
+    <tr>
+      <td><code>note_url</code></td>
       <td><code>string</code></td>
       <td>A URL to remind you what app the OAuth token is for.</td>
     </tr>
-</tbody>
-</table><pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"client_secret"</span><span class="o">:</span> <span class="s2">"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+  </tbody>
+</table>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"client_secret"</span><span class="p">:</span> <span class="s2">"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"admin script"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-if-returning-a-new-token">Response if returning a new token</h3>
@@ -271,22 +281,22 @@ Location: https://api.github.com/authorizations/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
   <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-if-returning-an-existing-token">Response if returning an existing token</h3>
@@ -296,22 +306,22 @@ Location: https://api.github.com/authorizations/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
   <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="update-an-existing-authorization">Update an existing authorization</h2>
@@ -322,45 +332,49 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-2">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>scopes</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>scopes</code></td>
       <td><code>array</code></td>
       <td>Replaces the authorization scopes with these.</td>
     </tr>
-<tr>
-<td><code>add_scopes</code></td>
+    <tr>
+      <td><code>add_scopes</code></td>
       <td><code>array</code></td>
       <td>A list of scopes to add to this authorization.</td>
     </tr>
-<tr>
-<td><code>remove_scopes</code></td>
+    <tr>
+      <td><code>remove_scopes</code></td>
       <td><code>array</code></td>
       <td>A list of scopes to remove from this authorization.</td>
     </tr>
-<tr>
-<td><code>note</code></td>
+    <tr>
+      <td><code>note</code></td>
       <td><code>string</code></td>
       <td>A note to remind you what the OAuth token is for.</td>
     </tr>
-<tr>
-<td><code>note_url</code></td>
+    <tr>
+      <td><code>note_url</code></td>
       <td><code>string</code></td>
       <td>A URL to remind you what app the OAuth token is for.</td>
     </tr>
-</tbody>
-</table><p>You can only send one of these scope keys at a time.</p>
+  </tbody>
+</table>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"add_scopes"</span><span class="o">:</span> <span class="p">[</span>
+<p>You can only send one of these scope keys at a time.</p>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"add_scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"repo"</span>
   <span class="p">],</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"admin script"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"admin script"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -369,22 +383,22 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
   <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="delete-an-authorization">Delete an authorization</h2>
@@ -416,40 +430,40 @@ will return <code>404 NOT FOUND</code>.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
   <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -471,40 +485,40 @@ the username is the OAuth application <code>client_id</code> and the password is
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
-  <span class="s2">"scopes"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="o">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
-  <span class="s2">"app"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
-    <span class="s2">"client_id"</span><span class="o">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
   <span class="p">},</span>
-  <span class="s2">"note"</span><span class="o">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
-  <span class="s2">"note_url"</span><span class="o">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
-  <span class="s2">"user"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -547,7 +561,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 links that might be of help:</p>
 
 <ul>
-<li><a href="http://tools.ietf.org/html/rfc6749">OAuth 2 spec</a></li>
+  <li><a href="http://tools.ietf.org/html/rfc6749">OAuth 2 spec</a></li>
   <li><a href="http://developers.facebook.com/docs/technical-guides/login/">Facebook Login API</a></li>
   <li><a href="https://github.com/intridea/oauth2">Ruby OAuth2 lib</a></li>
   <li><a href="https://gist.github.com/9fd1a6199da0465ec87c">Simple Ruby/Sinatra example</a></li>
@@ -561,6 +575,8 @@ links that might be of help:</p>
   <li><a href="https://github.com/atmos/sinatra_auth_github">Ruby Sinatra extension</a></li>
   <li><a href="https://github.com/atmos/warden-github">Ruby Warden strategy</a></li>
 </ul>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

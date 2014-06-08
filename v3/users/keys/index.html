@@ -54,13 +54,15 @@
       <h1 id="public-keys">Public Keys</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-public-keys-for-a-user">List public keys for a user</a></li>
+  <li><a href="#list-public-keys-for-a-user">List public keys for a user</a></li>
   <li><a href="#list-your-public-keys">List your public keys</a></li>
   <li><a href="#get-a-single-public-key">Get a single public key</a></li>
   <li><a href="#create-a-public-key">Create a public key</a></li>
   <li><a href="#update-a-public-key">Update a public key</a></li>
   <li><a href="#delete-a-public-key">Delete a public key</a></li>
-</ul><h2 id="list-public-keys-for-a-user">List public keys for a user</h2>
+</ul>
+
+<h2 id="list-public-keys-for-a-user">List public keys for a user</h2>
 
 <pre><code>GET /users/:user/keys
 </code></pre>
@@ -73,10 +75,10 @@
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -95,12 +97,12 @@ Basic Auth or via OAuth with at least <code>read:public_key</code>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-    <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -119,11 +121,11 @@ authenticated via Basic Auth or via OAuth with at least <code>read:public_key</c
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-public-key">Create a public key</h2>
@@ -136,9 +138,9 @@ or OAuth with at least <code>write:public_key</code> <a href="/v3/oauth/#scopes"
 
 <h3 id="input">Input</h3>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
+  <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -148,11 +150,11 @@ Location: https://api.github.com/user/keys/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="o">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"octocat@octomac"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="update-a-public-key">Update a public key</h2>
@@ -174,6 +176,7 @@ or via OAuth with at least <code>admin:public_key</code> <a href="/v3/oauth/#sco
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

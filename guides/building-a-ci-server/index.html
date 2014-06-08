@@ -54,10 +54,12 @@
       <h1 id="building-a-ci-server">Building a CI server</h1>
 
 <ul id="markdown-toc">
-<li><a href="#writing-your-server">Writing your server</a></li>
+  <li><a href="#writing-your-server">Writing your server</a></li>
   <li><a href="#working-with-statuses">Working with statuses</a></li>
   <li><a href="#conclusion">Conclusion</a></li>
-</ul><p>The <a href="/v3/repos/statuses/">Status API</a> is responsible for tying together commits with
+</ul>
+
+<p>The <a href="/v3/repos/statuses/">Status API</a> is responsible for tying together commits with
 a testing service, so that every push you make can be tested and represented
 in a GitHub pull request.</p>
 
@@ -65,9 +67,11 @@ in a GitHub pull request.</p>
 In our scenario, we will:</p>
 
 <ul>
-<li>Run our CI suite when a Pull Request is opened (we’ll set the CI status to pending).</li>
+  <li>Run our CI suite when a Pull Request is opened (we’ll set the CI status to pending).</li>
   <li>When the CI is finished, we’ll set the Pull Request’s status accordingly.</li>
-</ul><p>Our CI system and host server will be figments of our imagination. They could be
+</ul>
+
+<p>Our CI system and host server will be figments of our imagination. They could be
 Travis, Jenkins, or something else entirely. The crux of this guide will be setting up
 and configuring the server managing the communication.</p>
 
@@ -83,11 +87,11 @@ connections.</p>
 <p>We’ll write a quick Sinatra app to prove that our local connections are working.
 Let’s start with this:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
-  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
   <span class="s2">"Well, it worked!"</span>
 <span class="k">end</span></code></pre>
 
@@ -109,15 +113,17 @@ that ngrok gave you:</p>
 Great! Click on <strong>Let me select individual events.</strong>, and select the following:</p>
 
 <ul>
-<li>Status</li>
+  <li>Status</li>
   <li>Pull Request</li>
-</ul><p>These are the events GitHub will send to our server whenever the relevant action
+</ul>
+
+<p>These are the events GitHub will send to our server whenever the relevant action
 occurs. Let’s update our server to <em>just</em> handle the Pull Request scenario right now:</p>
 
-<pre><code class="language-ruby"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
-  <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+<pre><code class="language-ruby highlight"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
+  <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
 
-  <span class="k">case</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="o">]</span>
+  <span class="k">case</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="o">]</span>
   <span class="k">when</span> <span class="s2">"pull_request"</span>
     <span class="k">if</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"action"</span><span class="o">]</span> <span class="o">==</span> <span class="s2">"opened"</span>
       <span class="n">process_pull_request</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">]</span><span class="p">)</span>
@@ -152,37 +158,39 @@ new pull request every time you make a change!</p>
 to manage our interactions. We’ll configure that client with
 <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">a personal access token</a>:</p>
 
-<pre><code class="language-ruby"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+<pre><code class="language-ruby highlight"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
 <span class="no">ACCESS_TOKEN</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
 
 <span class="n">before</span> <span class="k">do</span>
-  <span class="vi">@client</span> <span class="o">||=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ACCESS_TOKEN</span><span class="p">)</span>
+  <span class="vi">@client</span> <span class="o">||=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ACCESS_TOKEN</span><span class="p">)</span>
 <span class="k">end</span></code></pre>
 
 <p>After that, we’ll just need to update the pull request on GitHub to make clear
 that we’re processing on the CI:</p>
 
-<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
+<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
   <span class="nb">puts</span> <span class="s2">"Processing pull request..."</span>
-  <span class="vi">@client</span><span class="o">.</span><span class="n">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
 <span class="k">end</span></code></pre>
 
 <p>We’re doing three very basic things here:</p>
 
 <ul>
-<li>we’re looking up the full name of the repository</li>
+  <li>we’re looking up the full name of the repository</li>
   <li>we’re looking up the last SHA of the pull request</li>
   <li>we’re setting the status to “pending”</li>
-</ul><p>That’s it! From here, you can run whatever process you need to in order to execute
+</ul>
+
+<p>That’s it! From here, you can run whatever process you need to in order to execute
 your test suite. Maybe you’re going to pass off your code to Jenkins, or call
 on another web service via its API, like <a href="https://api.travis-ci.org/docs/">Travis</a>. After that, you’d
 be sure to update the status once more. In our example, we’ll just set it to <code>"success"</code>:</p>
 
-<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
-  <span class="vi">@client</span><span class="o">.</span><span class="n">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
+<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
   <span class="nb">sleep</span> <span class="mi">2</span> <span class="c1"># do busy work...</span>
-  <span class="vi">@client</span><span class="o">.</span><span class="n">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
   <span class="nb">puts</span> <span class="s2">"Pull request processed!"</span>
 <span class="k">end</span></code></pre>
 
@@ -193,12 +201,16 @@ The basic flow is essentially the exact same as the server we’ve built above.
 At GitHub, we:</p>
 
 <ul>
-<li>Fire to Jenkins when a pull request is created or updated (via Janky)</li>
+  <li>Fire to Jenkins when a pull request is created or updated (via Janky)</li>
   <li>Wait for a response on the state of the CI</li>
   <li>If the code is green, we merge the pull request</li>
-</ul><p>All of this communication is funneled back to our chat rooms. You don’t need to
+</ul>
+
+<p>All of this communication is funneled back to our chat rooms. You don’t need to
 build your own CI or deployment setup to use this example.
 You can always rely on <a href="https://github.com/integrations">third-party services</a>.</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

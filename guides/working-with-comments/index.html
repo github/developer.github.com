@@ -54,10 +54,12 @@
       <h1 id="working-with-comments">Working with Comments</h1>
 
 <ul id="markdown-toc">
-<li><a href="#pull-request-comments">Pull Request Comments</a></li>
+  <li><a href="#pull-request-comments">Pull Request Comments</a></li>
   <li><a href="#pull-request-comments-on-a-line">Pull Request Comments on a Line</a></li>
   <li><a href="#commit-comments">Commit Comments</a></li>
-</ul><p>For any Pull Request, GitHub provides three kinds of comment views:
+</ul>
+
+<p>For any Pull Request, GitHub provides three kinds of comment views:
 <a href="https://github.com/octocat/Spoon-Knife/pull/1176#issuecomment-24114792">comments on the Pull Request</a> as a whole, <a href="https://github.com/octocat/Spoon-Knife/pull/1176#discussion_r6252889">comments on a specific line</a> within the Pull Request,
 and <a href="https://github.com/octocat/Spoon-Knife/commit/cbc28e7c8caee26febc8c013b0adfb97a4edd96e#commitcomment-4049848">comments on a specific commit</a> within the Pull Request.</p>
 
@@ -79,13 +81,13 @@ create comments on a Pull Request.</p>
 <p>The following code should help you get started accessing comments from a Pull Request
 using Octokit.rb:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
 <span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
-<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
 
-<span class="n">client</span><span class="o">.</span><span class="n">issue_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="mi">1176</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
+<span class="n">client</span><span class="p">.</span><span class="nf">issue_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="mi">1176</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
   <span class="n">username</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:user</span><span class="o">][</span><span class="ss">:login</span><span class="o">]</span>
   <span class="n">post_date</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:created_at</span><span class="o">]</span>
   <span class="n">content</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:body</span><span class="o">]</span>
@@ -106,13 +108,13 @@ within a changed file. The endpoint URL for this discussion comes from <a href="
 
 <p>The following code fetches all the Pull Request comments made on files, given a single Pull Request number:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
 <span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
-<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
 
-<span class="n">client</span><span class="o">.</span><span class="n">pull_request_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="mi">1176</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
+<span class="n">client</span><span class="p">.</span><span class="nf">pull_request_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="mi">1176</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
   <span class="n">username</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:user</span><span class="o">][</span><span class="ss">:login</span><span class="o">]</span>
   <span class="n">post_date</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:created_at</span><span class="o">]</span>
   <span class="n">content</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:body</span><span class="o">]</span>
@@ -136,13 +138,13 @@ they make use of <a href="https://developer.github.com/v3/repos/comments/#get-a-
 <p>To retrieve the comments on a commit, you’ll want to use the SHA1 of the commit.
 In other words, you won’t use any identifier related to the Pull Request. Here’s an example:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
 <span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
-<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="o">.</span><span class="n">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
+<span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
 
-<span class="n">client</span><span class="o">.</span><span class="n">commit_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="s2">"cbc28e7c8caee26febc8c013b0adfb97a4edd96e"</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
+<span class="n">client</span><span class="p">.</span><span class="nf">commit_comments</span><span class="p">(</span><span class="s2">"octocat/Spoon-Knife"</span><span class="p">,</span> <span class="s2">"cbc28e7c8caee26febc8c013b0adfb97a4edd96e"</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">comment</span><span class="o">|</span>
   <span class="n">username</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:user</span><span class="o">][</span><span class="ss">:login</span><span class="o">]</span>
   <span class="n">post_date</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:created_at</span><span class="o">]</span>
   <span class="n">content</span> <span class="o">=</span> <span class="n">comment</span><span class="o">[</span><span class="ss">:body</span><span class="o">]</span>
@@ -152,6 +154,8 @@ In other words, you won’t use any identifier related to the Pull Request. Here
 
 <p>Note that this API call will retrieve single line comments, as well as comments made
 on the entire commit.</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Configuring Your Server | GitHub API</title>
+  <title>Securing Your Webhooks | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -51,50 +51,42 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="configuring-your-server">Configuring Your Server</h1>
+      <h1 id="securing-your-webhooks">Securing your webhooks</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#using-ngrok">Using ngrok</a></li>
-  <li><a href="#writing-the-server">Writing the server</a></li>
+  <li><a href="#setting-your-secret-token">Setting your secret token</a></li>
+  <li><a href="#validating-payloads-from-github">Validating payloads from GitHub</a></li>
 </ul>
 
-<p>Now that our webhook is ready to deliver messages, we’ll set up a basic Sinatra server
-to handle incoming payloads.</p>
+<p>Once your server is configured to receive payloads, it’ll listen for any payload sent to the endpoint you configured. For security reasons, you probably want to limit requests to those coming from GitHub. There are a few ways to go about this–for example, you could opt to whitelist requests from GitHub’s IP address–but a far easier method is to set up a secret token and validate the information.</p>
 
-<p>Recall that we specifically set our webhook URL to <code>http://localhost:4567/payload</code>.
-Since we’re developing locally, we’ll need to expose our local development environment
-to the Internet, so that GitHub can send out messages, and our local server can
-process them.</p>
+<h2 id="setting-your-secret-token">Setting your secret token</h2>
 
-<p>Note: you can download the complete source code for this project
-<a href="https://github.com/github/platform-samples/tree/master/hooks/ruby/configuring-your-server">from the platform-samples repo</a>.</p>
+<p>You’ll need to set up your secret token in two places: GitHub and your server.</p>
 
-<h2 id="using-ngrok">Using ngrok</h2>
+<p>To set your token on GitHub:</p>
 
-<p>First, we’ll install a program to expose our local host to the Internet. We’ll use
-ngrok to do this. <a href="https://ngrok.com/download">ngrok is a free download</a> available
-for all major operating systems.</p>
+<ol>
+  <li>Navigate to the repository where you’re setting up your webhook.</li>
+  <li>Fill out the Secret textbox. Try to incorporate a variation of numbers, letters, and symbols.
+<img src="/images/webhook_secret_token.png" alt="Webhook secret token field">
+</li>
+  <li>Click <strong>Update Webhook</strong>.</li>
+</ol>
 
-<p>When you’re done with that, you can expose your localhost by running <code>./ngrok 4567</code>
-on the command line. You should see a line that looks something like this:</p>
+<p>Next, set up an environment variable on your server that stores this token. Typically, this is as simple as running:</p>
 
-<pre><code class="language-bash highlight">Forwarding    http://7e9ea9dc.ngrok.com -&gt; 127.0.0.1:4567</code></pre>
+<pre class="terminal">
+export SECRET_TOKEN=<em>your_token</em>
+</pre>
 
-<p>Copy that funky <code>*.ngrok.com</code> URL! We’re now going to go <em>back</em> to the Payload
-URL and pasting this server into that field. It should look something like <code>http://7e9ea9dc.ngrok.com/payload</code>.</p>
+<p><strong>Never</strong> hardcode the token into your app!</p>
 
-<p>By doing this, we’ve set ourselves up to expose our localhost at path <code>/payload</code>
-to the Internet.</p>
+<h2 id="validating-payloads-from-github">Validating payloads from GitHub</h2>
 
-<h2 id="writing-the-server">Writing the server</h2>
+<p>When your secret token is set, GitHub uses it to create a hash signature with each payload. You can find details on the implementation <a href="https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50">in our Ruby implementation</a>.</p>
 
-<p>Now comes the fun part! We want our server to listen to <code>POST</code> requests, at <code>/payload</code>,
-because that’s where we told GitHub our webhook URL was. Since ngrok is exposing
-our local environment, we don’t need to set up a real server somewhere online, and
-can happily test out our code locally.</p>
-
-<p>Let’s set up a little Sinatra app to do something with the information. Our initial
-setup might look something like this:</p>
+<p>This hash signature is passed along with each request in the headers as <code>X-Hub-Signature</code>. Suppose you have a basic server listening to webhooks that looks like this:</p>
 
 <pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
@@ -104,28 +96,31 @@ setup might look something like this:</p>
   <span class="nb">puts</span> <span class="s2">"I got some JSON: </span><span class="si">#{</span><span class="n">push</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">end</span></code></pre>
 
-<p>(If you’re unfamiliar with how Sinatra works, we recommend <a href="http://www.sinatrarb.com/">reading the Sinatra guide</a>.)</p>
+<p>The goal is to compute a hash using your <code>SECRET_TOKEN</code>, and ensure that the hash from GitHub matches. GitHub uses an HMAC hexdigest to compute the hash, so you could change your server to look a little like this:</p>
 
-<p>Start this server up.</p>
+<pre><code class="language-ruby highlight"><span class="n">post</span> <span class="s1">'/payload'</span> <span class="k">do</span>
+  <span class="n">request</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">rewind</span>
+  <span class="n">payload_body</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">read</span>
+  <span class="n">verify_signature</span><span class="p">(</span><span class="n">payload_body</span><span class="p">)</span>
+  <span class="n">push</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"I got some JSON: </span><span class="si">#{</span><span class="n">push</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
 
-<p>Since we set up our webhook to listen to events dealing with <code>Issues</code>, go ahead
-and create a new Issue on the repository you’re testing with. Once you create
-it, switch back to your terminal. You should see something like this in your output:</p>
+<span class="k">def</span> <span class="nf">verify_signature</span><span class="p">(</span><span class="n">payload_body</span><span class="p">)</span>
+  <span class="n">signature</span> <span class="o">=</span> <span class="s1">'sha1='</span> <span class="o">+</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">hexdigest</span><span class="p">(</span><span class="no">OpenSSL</span><span class="o">::</span><span class="no">Digest</span><span class="o">::</span><span class="no">Digest</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s1">'sha1'</span><span class="p">),</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'SECRET_TOKEN'</span><span class="o">]</span><span class="p">,</span> <span class="n">payload_body</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">halt</span> <span class="mi">500</span><span class="p">,</span> <span class="s2">"Signatures didn't match!"</span> <span class="k">unless</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Utils</span><span class="p">.</span><span class="nf">secure_compare</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'HTTP_X_HUB_SIGNATURE'</span><span class="o">]</span><span class="p">)</span>
+<span class="k">end</span></code></pre>
 
-<pre><code class="language-bash highlight">~/Developer/platform-samples/hooks/ruby/configuring-your-server <span class="nv">$ </span>ruby server.rb
-<span class="o">==</span> Sinatra/1.4.4 has taken the stage on 4567 <span class="k">for </span>development with backup from Thin
-<span class="gp">&gt;&gt; </span>Thin web server <span class="o">(</span>v1.5.1 codename Straight Razor<span class="o">)</span>
-<span class="gp">&gt;&gt; </span>Maximum connections <span class="nb">set </span>to 1024
-<span class="gp">&gt;&gt; </span>Listening on localhost:4567, CTRL+C to stop
-I got some JSON: <span class="o">{</span><span class="s2">"action"</span><span class="o">=</span>&gt;<span class="s2">"opened"</span>, <span class="s2">"issue"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"url"</span><span class="o">=</span>&gt;<span class="s2">"...</span></code></pre>
+<p>Obviously, your language and server implementations may differ than this code. There’s a couple of very important thing to point out, however:</p>
 
-<p>Success! You’ve successfully configured your server to listen to webhooks. Your
-server can now process this information any way you see fit. For example, if you
-were setting up a “real” web application, you might want to log some of the JSON
-output to a database.</p>
-
-<p>For additional information on working with webhooks for fun and profit, head on
-over to the <a href="/webhooks/testing">Testing Webhooks</a> guide.</p>
+<ul>
+  <li>
+    <p>No matter which implementation you use, the hash signature starts with <code>sha1=</code>, using the key of your secret token and your payload body.</p>
+  </li>
+  <li>
+    <p>Using a plain <code>==</code> operator is <strong>not advised</strong>. A method like <a href="http://rubydoc.info/github/rack/rack/master/Rack/Utils.secure_compare"><code>secure_compare</code></a> performs a “constant time” string comparison, which renders it safe from certain timing attacks against regular equality operators.</p>
+  </li>
+</ul>
 
 
     </div>

@@ -67,13 +67,15 @@
 <p>To help third party applications request only permissions that they need, the API now supports three new <a href="/v3/oauth/#scopes">scopes</a> for working with a user’s public SSH keys.</p>
 
 <ul>
-<li>
+  <li>
 <code>read:public_key</code> provides read access to the user’s SSH keys</li>
   <li>
 <code>write:public_key</code> allows an app to read existing keys and create new ones</li>
   <li>
 <code>admin:public_key</code> enables an app to read, write, and delete keys</li>
-</ul><h2 id="changes-to-user-scope">Changes to <code>user</code> scope</h2>
+</ul>
+
+<h2 id="changes-to-user-scope">Changes to <code>user</code> scope</h2>
 
 <p>Historically, <code>user</code> scope has provided full access to manage a user’s SSH keys. Now that we have dedicated scopes for managing a user’s SSH keys, we have removed those permissions from the <code>user</code> scope. Now <code>user</code> scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.</p>
 
@@ -86,6 +88,8 @@
 <p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
+
+
 </div>
 
     </div>

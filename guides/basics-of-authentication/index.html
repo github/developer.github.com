@@ -54,10 +54,12 @@
       <h1 id="basics-of-authentication">Basics of Authentication</h1>
 
 <ul id="markdown-toc">
-<li><a href="#registering-your-app">Registering your app</a></li>
+  <li><a href="#registering-your-app">Registering your app</a></li>
   <li><a href="#accepting-user-authorization">Accepting user authorization</a></li>
   <li><a href="#implementing-persistent-authentication">Implementing “persistent” authentication</a></li>
-</ul><p>In this section, we’re going to focus on the basics of authentication. Specifically,
+</ul>
+
+<p>In this section, we’re going to focus on the basics of authentication. Specifically,
 we’re going to create a Ruby server (using <a href="http://www.sinatrarb.com/">Sinatra</a>) that implements
 the <a href="/v3/oauth/#web-application-flow">web flow</a> of an application in several different ways.</p>
 
@@ -84,7 +86,7 @@ is set to <code>http://localhost:4567</code>. Let’s fill in the callback URL a
 
 <p>Now, let’s start filling out our simple server. Create a file called <em>server.rb</em> and paste this into it:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'rest-client'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
@@ -102,22 +104,22 @@ GitHub–or any other public place, for that matter. We recommend storing them a
 
 <p>Next, in <em>views/index.erb</em>, paste this content:</p>
 
-<pre><code class="language-html+erb"><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;</span>
+<pre><code class="language-html+erb highlight">&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;
       Well, hello there!
-    <span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;p&gt;</span>
+    &lt;/p&gt;
+    &lt;p&gt;
       We're going to now talk to the GitHub API. Ready?
-      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/login/oauth/authorize?scope=user:email&amp;client_id=</span><span class="cp">&lt;%=</span> <span class="n">client_id</span> <span class="cp">%&gt;</span><span class="s">"</span><span class="nt">&gt;</span>Click here<span class="nt">&lt;/a&gt;</span> to begin!<span class="nt">&lt;/a&gt;</span>
-    <span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;p&gt;</span>
-      If that link doesn't work, remember to provide your own <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/v3/oauth/#web-application-flow"</span><span class="nt">&gt;</span>Client ID<span class="nt">&lt;/a&gt;</span>!
-    <span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span></code></pre>
+      &lt;a href="https://github.com/login/oauth/authorize?scope=user:email&amp;client_id=&lt;%= client_id %&gt;"&gt;Click here&lt;/a&gt; to begin!&lt;/a&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      If that link doesn't work, remember to provide your own &lt;a href="/v3/oauth/#web-application-flow"&gt;Client ID&lt;/a&gt;!
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 <p>(If you’re unfamiliar with how Sinatra works, we recommend <a href="http://sinatra-book.gittr.com/#hello_world_application">reading the Sinatra guide</a>.)</p>
 
@@ -140,19 +142,19 @@ the app. Let’s fix that now!</p>
 
 <p>In <em>server.rb</em>, add a route to specify what the callback should do:</p>
 
-<pre><code class="language-ruby"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
+<pre><code class="language-ruby highlight"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
   <span class="c1"># get temporary GitHub code...</span>
-  <span class="n">session_code</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">'rack.request.query_hash'</span><span class="o">][</span><span class="s1">'code'</span><span class="o">]</span>
+  <span class="n">session_code</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'rack.request.query_hash'</span><span class="o">][</span><span class="s1">'code'</span><span class="o">]</span>
 
   <span class="c1"># ... and POST it back to GitHub</span>
-  <span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://github.com/login/oauth/access_token'</span><span class="p">,</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s1">'https://github.com/login/oauth/access_token'</span><span class="p">,</span>
                           <span class="p">{</span><span class="ss">:client_id</span> <span class="o">=&gt;</span> <span class="no">CLIENT_ID</span><span class="p">,</span>
                            <span class="ss">:client_secret</span> <span class="o">=&gt;</span> <span class="no">CLIENT_SECRET</span><span class="p">,</span>
                            <span class="ss">:code</span> <span class="o">=&gt;</span> <span class="n">session_code</span><span class="p">},</span>
                            <span class="ss">:accept</span> <span class="o">=&gt;</span> <span class="ss">:json</span><span class="p">)</span>
 
   <span class="c1"># extract the token and granted scopes</span>
-  <span class="n">access_token</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s1">'access_token'</span><span class="o">]</span>
+  <span class="n">access_token</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s1">'access_token'</span><span class="o">]</span>
 <span class="k">end</span></code></pre>
 
 <p>After a successful app authentication, GitHub provides a temporary <code>code</code> value.
@@ -171,9 +173,9 @@ were granted for the token by the user.</p>
 <p>The scopes that were granted are returned as a part of the response from
 exchanging a token.</p>
 
-<pre><code class="language-ruby"><span class="c1"># check if we were granted user:email scope</span>
-<span class="n">scopes</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s1">'scope'</span><span class="o">].</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
-<span class="n">has_user_email_scope</span> <span class="o">=</span> <span class="n">scopes</span><span class="o">.</span><span class="n">include?</span> <span class="s1">'user:email'</span></code></pre>
+<pre><code class="language-ruby highlight"><span class="c1"># check if we were granted user:email scope</span>
+<span class="n">scopes</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s1">'scope'</span><span class="o">]</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+<span class="n">has_user_email_scope</span> <span class="o">=</span> <span class="n">scopes</span><span class="p">.</span><span class="nf">include?</span> <span class="s1">'user:email'</span></code></pre>
 
 <p>In our application, we’re using <code>scopes.include?</code> to check if we were granted
 the <code>user:email</code> scope needed for fetching the authenticated user’s private
@@ -204,34 +206,34 @@ changes in available application functionality.</p>
 <p>At last, with this access token, you’ll be able to make authenticated requests as
 the logged in user:</p>
 
-<pre><code class="language-ruby"><span class="c1"># fetch user information</span>
-<span class="n">auth_result</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user'</span><span class="p">,</span>
+<pre><code class="language-ruby highlight"><span class="c1"># fetch user information</span>
+<span class="n">auth_result</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user'</span><span class="p">,</span>
                                         <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">}}))</span>
 
 <span class="c1"># if the user authorized it, fetch private emails</span>
 <span class="k">if</span> <span class="n">has_user_email_scope</span>
   <span class="n">auth_result</span><span class="o">[</span><span class="s1">'private_emails'</span><span class="o">]</span> <span class="o">=</span>
-    <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user/emails'</span><span class="p">,</span>
+    <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user/emails'</span><span class="p">,</span>
                               <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">}}))</span>
 
 <span class="n">erb</span> <span class="ss">:basic</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="n">auth_result</span></code></pre>
 
 <p>We can do whatever we want with our results. In this case, we’ll just dump them straight into <em>basic.erb</em>:</p>
 
-<pre><code class="language-html+erb"><span class="nt">&lt;p&gt;</span>Hello, <span class="cp">&lt;%=</span> <span class="n">login</span> <span class="cp">%&gt;</span>!<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;p&gt;</span>
-  <span class="cp">&lt;%</span> <span class="k">if</span> <span class="o">!</span><span class="n">email</span><span class="o">.</span><span class="n">nil?</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">email</span><span class="o">.</span><span class="n">empty?</span> <span class="cp">%&gt;</span> It looks like your public email address is <span class="cp">&lt;%=</span> <span class="n">email</span> <span class="cp">%&gt;</span>.
-  <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span> It looks like you don't have a public email. That's cool.
-  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;p&gt;</span>
-  <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">defined?</span> <span class="n">private_emails</span> <span class="cp">%&gt;</span>
+<pre><code class="language-html+erb highlight">&lt;p&gt;Hello, &lt;%= login %&gt;!&lt;/p&gt;
+&lt;p&gt;
+  &lt;% if !email.nil? &amp;&amp; !email.empty? %&gt; It looks like your public email address is &lt;%= email %&gt;.
+  &lt;% else %&gt; It looks like you don't have a public email. That's cool.
+  &lt;% end %&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;% if defined? private_emails %&gt;
   With your permission, we were also able to dig up your private email addresses:
-  <span class="cp">&lt;%=</span> <span class="n">private_emails</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">private_email_address</span><span class="o">|</span> <span class="n">private_email_address</span><span class="o">[</span><span class="s2">"email"</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span> <span class="cp">%&gt;</span>
-  <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
+  &lt;%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %&gt;
+  &lt;% else %&gt;
   Also, you're a bit secretive about your private email addresses.
-  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-<span class="nt">&lt;/p&gt;</span></code></pre>
+  &lt;% end %&gt;
+&lt;/p&gt;</code></pre>
 
 <h2 id="implementing-persistent-authentication">Implementing “persistent” authentication</h2>
 
@@ -257,7 +259,7 @@ the <code>user:email</code> scope.</p>
 
 <p>Create a file called <em>advanced_server.rb</em>, and paste these lines into it:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'rest_client'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
@@ -289,7 +291,7 @@ the <code>user:email</code> scope.</p>
     <span class="n">scopes</span> <span class="o">=</span> <span class="o">[]</span>
 
     <span class="k">begin</span>
-      <span class="n">auth_result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user'</span><span class="p">,</span>
+      <span class="n">auth_result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user'</span><span class="p">,</span>
                                    <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">},</span>
                                     <span class="ss">:accept</span> <span class="o">=&gt;</span> <span class="ss">:json</span><span class="p">})</span>
     <span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
@@ -302,15 +304,15 @@ the <code>user:email</code> scope.</p>
     <span class="k">end</span>
 
     <span class="c1"># the request succeeded, so we check the list of current scopes</span>
-    <span class="k">if</span> <span class="n">auth_result</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">include?</span> <span class="ss">:x_oauth_scopes</span>
-      <span class="n">scopes</span> <span class="o">=</span> <span class="n">auth_result</span><span class="o">.</span><span class="n">headers</span><span class="o">[</span><span class="ss">:x_oauth_scopes</span><span class="o">].</span><span class="n">split</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">auth_result</span><span class="p">.</span><span class="nf">headers</span><span class="p">.</span><span class="nf">include?</span> <span class="ss">:x_oauth_scopes</span>
+      <span class="n">scopes</span> <span class="o">=</span> <span class="n">auth_result</span><span class="p">.</span><span class="nf">headers</span><span class="o">[</span><span class="ss">:x_oauth_scopes</span><span class="o">]</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span>
     <span class="k">end</span>
 
-    <span class="n">auth_result</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">auth_result</span><span class="p">)</span>
+    <span class="n">auth_result</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">auth_result</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">scopes</span><span class="o">.</span><span class="n">include?</span> <span class="s1">'user:email'</span>
+    <span class="k">if</span> <span class="n">scopes</span><span class="p">.</span><span class="nf">include?</span> <span class="s1">'user:email'</span>
       <span class="n">auth_result</span><span class="o">[</span><span class="s1">'private_emails'</span><span class="o">]</span> <span class="o">=</span>
-        <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="no">RestClient</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user/emails'</span><span class="p">,</span>
+        <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user/emails'</span><span class="p">,</span>
                        <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">},</span>
                         <span class="ss">:accept</span> <span class="o">=&gt;</span> <span class="ss">:json</span><span class="p">}))</span>
     <span class="k">end</span>
@@ -320,15 +322,15 @@ the <code>user:email</code> scope.</p>
 <span class="k">end</span>
 
 <span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
-  <span class="n">session_code</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">'rack.request.query_hash'</span><span class="o">][</span><span class="s1">'code'</span><span class="o">]</span>
+  <span class="n">session_code</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'rack.request.query_hash'</span><span class="o">][</span><span class="s1">'code'</span><span class="o">]</span>
 
-  <span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://github.com/login/oauth/access_token'</span><span class="p">,</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="no">RestClient</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s1">'https://github.com/login/oauth/access_token'</span><span class="p">,</span>
                           <span class="p">{</span><span class="ss">:client_id</span> <span class="o">=&gt;</span> <span class="no">CLIENT_ID</span><span class="p">,</span>
                            <span class="ss">:client_secret</span> <span class="o">=&gt;</span> <span class="no">CLIENT_SECRET</span><span class="p">,</span>
                            <span class="ss">:code</span> <span class="o">=&gt;</span> <span class="n">session_code</span><span class="p">},</span>
                            <span class="ss">:accept</span> <span class="o">=&gt;</span> <span class="ss">:json</span><span class="p">)</span>
 
-  <span class="n">session</span><span class="o">[</span><span class="ss">:access_token</span><span class="o">]</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s1">'access_token'</span><span class="o">]</span>
+  <span class="n">session</span><span class="o">[</span><span class="ss">:access_token</span><span class="o">]</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s1">'access_token'</span><span class="o">]</span>
 
   <span class="n">redirect</span> <span class="s1">'/'</span>
 <span class="k">end</span></code></pre>
@@ -343,26 +345,26 @@ OAuth flow and updates the session with the granted token and scopes.</p>
 
 <p>Next, create a file in <em>views</em> called <em>advanced.erb</em>, and paste this markup into it:</p>
 
-<pre><code class="language-html+erb"><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;</span>Well, well, well, <span class="cp">&lt;%=</span> <span class="n">login</span> <span class="cp">%&gt;</span>!<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;p&gt;</span>
-      <span class="cp">&lt;%</span> <span class="k">if</span> <span class="o">!</span><span class="n">email</span><span class="o">.</span><span class="n">empty?</span> <span class="cp">%&gt;</span> It looks like your public email address is <span class="cp">&lt;%=</span> <span class="n">email</span> <span class="cp">%&gt;</span>.
-      <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span> It looks like you don't have a public email. That's cool.
-      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-    <span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;p&gt;</span>
-      <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">defined?</span> <span class="n">private_emails</span> <span class="cp">%&gt;</span>
+<pre><code class="language-html+erb highlight">&lt;html&gt;
+  &lt;head&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Well, well, well, &lt;%= login %&gt;!&lt;/p&gt;
+    &lt;p&gt;
+      &lt;% if !email.empty? %&gt; It looks like your public email address is &lt;%= email %&gt;.
+      &lt;% else %&gt; It looks like you don't have a public email. That's cool.
+      &lt;% end %&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;% if defined? private_emails %&gt;
       With your permission, we were also able to dig up your private email addresses:
-      <span class="cp">&lt;%=</span> <span class="n">private_emails</span><span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="o">|</span><span class="n">private_email_address</span><span class="o">|</span> <span class="n">private_email_address</span><span class="o">[</span><span class="s2">"email"</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span> <span class="cp">%&gt;</span>
-      <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
+      &lt;%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %&gt;
+      &lt;% else %&gt;
       Also, you're a bit secretive about your private email addresses.
-      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
-    <span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span></code></pre>
+      &lt;% end %&gt;
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 
 <p>From the command line, call <code>ruby advanced_server.rb</code>, which starts up your
 server on port <code>4567</code> – the same port we used when we had a simple Sinatra app.
@@ -379,6 +381,8 @@ we would’ve seen the same confirmation dialog from earlier pop-up and warn us.
 
 <p>If you’d like, you can play around with <a href="https://github.com/atmos/sinatra-auth-github-test">yet another Sinatra-GitHub auth example</a>
 available as a separate project.</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

@@ -54,10 +54,12 @@
       <h1 id="delivering-deployments">Delivering deployments</h1>
 
 <ul id="markdown-toc">
-<li><a href="#writing-your-server">Writing your server</a></li>
+  <li><a href="#writing-your-server">Writing your server</a></li>
   <li><a href="#working-with-deployments">Working with deployments</a></li>
   <li><a href="#conclusion">Conclusion</a></li>
-</ul><p>The <a href="/v3/repos/deployments/">Deployments API</a> provides your projects hosted on GitHub with
+</ul>
+
+<p>The <a href="/v3/repos/deployments/">Deployments API</a> provides your projects hosted on GitHub with
 the capability to launch them on a production server that you own. Combined with
 <a href="/guides/building-a-ci-server">the Status API</a>, you’ll be able to coordinate your deployments
 the moment your code lands on <code>master</code>.</p>
@@ -66,10 +68,12 @@ the moment your code lands on <code>master</code>.</p>
 In our scenario, we will:</p>
 
 <ul>
-<li>Merge a Pull Request</li>
+  <li>Merge a Pull Request</li>
   <li>When the CI is finished, we’ll set the Pull Request’s status accordingly.</li>
   <li>When the Pull Request is merged, we’ll run our deployment to our server.</li>
-</ul><p>Our CI system and host server will be figments of our imagination. They could be
+</ul>
+
+<p>Our CI system and host server will be figments of our imagination. They could be
 Heroku, Amazon, or something else entirely. The crux of this guide will be setting up
 and configuring the server managing the communication.</p>
 
@@ -85,11 +89,11 @@ connections.</p>
 <p>We’ll write a quick Sinatra app to prove that our local connections are working.
 Let’s start with this:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
-  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
   <span class="s2">"Well, it worked!"</span>
 <span class="k">end</span></code></pre>
 
@@ -111,17 +115,19 @@ that ngrok gave you:</p>
 Great! Click on <strong>Let me select individual events.</strong>, and select the following:</p>
 
 <ul>
-<li>Deployment</li>
+  <li>Deployment</li>
   <li>Deployment status</li>
   <li>Pull Request</li>
-</ul><p>These are the events GitHub will send to our server whenever the relevant action
+</ul>
+
+<p>These are the events GitHub will send to our server whenever the relevant action
 occurs. We’ll configure our server to <em>just</em> handle when Pull Requests are merged
 right now:</p>
 
-<pre><code class="language-ruby"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
-  <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+<pre><code class="language-ruby highlight"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
+  <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
 
-  <span class="k">case</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="o">]</span>
+  <span class="k">case</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="o">]</span>
   <span class="k">when</span> <span class="s2">"pull_request"</span>
     <span class="k">if</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"action"</span><span class="o">]</span> <span class="o">==</span> <span class="s2">"closed"</span> <span class="o">&amp;&amp;</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">][</span><span class="s2">"merged"</span><span class="o">]</span>
       <span class="nb">puts</span> <span class="s2">"A pull request was merged! A deployment should start now..."</span>
@@ -144,7 +150,7 @@ is merged, we want our project to be deployed to the production server.</p>
 <p>We’ll start by modifying our event listener to process pull requests when they’re
 merged, and start paying attention to deployments:</p>
 
-<pre><code class="language-ruby"><span class="k">when</span> <span class="s2">"pull_request"</span>
+<pre><code class="language-ruby highlight"><span class="k">when</span> <span class="s2">"pull_request"</span>
   <span class="k">if</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"action"</span><span class="o">]</span> <span class="o">==</span> <span class="s2">"closed"</span> <span class="o">&amp;&amp;</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">][</span><span class="s2">"merged"</span><span class="o">]</span>
     <span class="n">start_deployment</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">]</span><span class="p">)</span>
   <span class="k">end</span>
@@ -157,10 +163,10 @@ merged, and start paying attention to deployments:</p>
 <p>Based on the information from the pull request, we’ll start by filling out the
 <code>start_deployment</code> method:</p>
 
-<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">start_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
+<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">start_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
   <span class="n">user</span> <span class="o">=</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'user'</span><span class="o">][</span><span class="s1">'login'</span><span class="o">]</span>
-  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="ss">:environment</span> <span class="o">=&gt;</span> <span class="s1">'production'</span><span class="p">,</span> <span class="ss">:deploy_user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">)</span>
-  <span class="vi">@client</span><span class="o">.</span><span class="n">create_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="p">{</span><span class="ss">:payload</span> <span class="o">=&gt;</span> <span class="n">payload</span><span class="p">,</span> <span class="ss">:description</span> <span class="o">=&gt;</span> <span class="s2">"Deploying my sweet branch"</span><span class="p">})</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="ss">:environment</span> <span class="o">=&gt;</span> <span class="s1">'production'</span><span class="p">,</span> <span class="ss">:deploy_user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="p">{</span><span class="ss">:payload</span> <span class="o">=&gt;</span> <span class="n">payload</span><span class="p">,</span> <span class="ss">:description</span> <span class="o">=&gt;</span> <span class="s2">"Deploying my sweet branch"</span><span class="p">})</span>
 <span class="k">end</span></code></pre>
 
 <p>Deployments can have some metadata attached to them, in the form of a <code>payload</code>
@@ -177,19 +183,19 @@ such as when the deployment was created, and what state it’s in.</p>
 <p>Let’s simulate a deployment that does some work, and notice the effect it has on
 the output. First, let’s complete our <code>process_deployment</code> method:</p>
 
-<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">process_deployment</span>
-  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'payload'</span><span class="o">]</span><span class="p">)</span>
+<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_deployment</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'payload'</span><span class="o">]</span><span class="p">)</span>
   <span class="c1"># you can send this information to your chat room, monitor, pager, e.t.c.</span>
   <span class="nb">puts</span> <span class="s2">"Processing '</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'description'</span><span class="o">]</span><span class="si">}</span><span class="s2">' for </span><span class="si">#{</span><span class="n">payload</span><span class="o">[</span><span class="s1">'deploy_user'</span><span class="o">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">#{</span><span class="n">payload</span><span class="o">[</span><span class="s1">'environment'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span>
   <span class="nb">sleep</span> <span class="mi">2</span> <span class="c1"># simulate work</span>
-  <span class="vi">@client</span><span class="o">.</span><span class="n">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'repository'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'repository'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
   <span class="nb">sleep</span> <span class="mi">2</span> <span class="c1"># simulate work</span>
-  <span class="vi">@client</span><span class="o">.</span><span class="n">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'repository'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'repository'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
 <span class="k">end</span></code></pre>
 
 <p>Finally, we’ll simulate storing the status information as console output:</p>
 
-<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">update_deployment_status</span>
+<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">update_deployment_status</span>
   <span class="nb">puts</span> <span class="s2">"Deployment status for </span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2"> is </span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'state'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">end</span></code></pre>
 
@@ -209,12 +215,16 @@ our deployments for years. The basic flow is essentially the exact same as the
 server we’ve built above. At GitHub, we:</p>
 
 <ul>
-<li>Wait for a response on the state of the CI</li>
+  <li>Wait for a response on the state of the CI</li>
   <li>If the code is green, we merge the pull request</li>
   <li>Heaven takes the merged code, and deploys it to our production servers</li>
   <li>In the meantime, Heaven also notifies everyone about the build, via <a href="https://github.com/github/hubot">Hubot</a> sitting in our chat rooms</li>
-</ul><p>That’s it! You don’t need to build your own CI or deployment setup to use this example.
+</ul>
+
+<p>That’s it! You don’t need to build your own CI or deployment setup to use this example.
 You can always rely on <a href="https://github.com/integrations">third-party services</a>.</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

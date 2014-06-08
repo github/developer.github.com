@@ -54,12 +54,14 @@
       <h1 id="references">References</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-a-reference">Get a Reference</a></li>
+  <li><a href="#get-a-reference">Get a Reference</a></li>
   <li><a href="#get-all-references">Get all References</a></li>
   <li><a href="#create-a-reference">Create a Reference</a></li>
   <li><a href="#update-a-reference">Update a Reference</a></li>
   <li><a href="#delete-a-reference">Delete a Reference</a></li>
-</ul><h2 id="get-a-reference">Get a Reference</h2>
+</ul>
+
+<h2 id="get-a-reference">Get a Reference</h2>
 
 <pre><code>GET /repos/:owner/:repo/git/refs/:ref
 </code></pre>
@@ -75,13 +77,13 @@
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/featureA"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA"</span><span class="p">,</span>
-  <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"refs/heads/featureA"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA"</span><span class="p">,</span>
+  <span class="s2">"object"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -107,32 +109,32 @@ references, you can call:</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/master"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/master"</span><span class="p">,</span>
-    <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
+    <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"refs/heads/master"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/master"</span><span class="p">,</span>
+    <span class="s2">"object"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/gh-pages"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/gh-pages"</span><span class="p">,</span>
-    <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"</span>
+    <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"refs/heads/gh-pages"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/gh-pages"</span><span class="p">,</span>
+    <span class="s2">"object"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/tags/v0.0.1"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/tags/v0.0.1"</span><span class="p">,</span>
-    <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"tag"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span>
+    <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"refs/tags/v0.0.1"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/tags/v0.0.1"</span><span class="p">,</span>
+    <span class="s2">"object"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"tag"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
@@ -145,28 +147,32 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>ref</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ref</code></td>
       <td><code>type</code></td>
       <td>The name of the fully qualified reference (ie: <code>refs/heads/master</code>). If it doesn’t start with ‘refs’ and have at least two slashes, it will be rejected.</td>
     </tr>
-<tr>
-<td><code>sha</code></td>
+    <tr>
+      <td><code>sha</code></td>
       <td><code>type</code></td>
       <td>The SHA1 value to set this reference to</td>
     </tr>
-</tbody>
-</table><h3 id="input">Input</h3>
+  </tbody>
+</table>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/featureA"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
+<h3 id="input">Input</h3>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"refs/heads/featureA"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -176,13 +182,13 @@ Location: https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featur
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/featureA"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA"</span><span class="p">,</span>
-  <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"refs/heads/featureA"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA"</span><span class="p">,</span>
+  <span class="s2">"object"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -194,29 +200,33 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-1">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>sha</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sha</code></td>
       <td><code>type</code></td>
       <td>The SHA1 value to set this reference to</td>
     </tr>
-<tr>
-<td><code>force</code></td>
+    <tr>
+      <td><code>force</code></td>
       <td><code>boolean</code></td>
       <td>Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to <code>false</code> will make sure you’re not overwriting work. Default: <code>false</code>
 </td>
     </tr>
-</tbody>
-</table><h3 id="input-1">Input</h3>
+  </tbody>
+</table>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
-  <span class="s2">"force"</span><span class="o">:</span> <span class="kc">true</span>
+<h3 id="input-1">Input</h3>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
+  <span class="s2">"force"</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -225,13 +235,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"ref"</span><span class="o">:</span> <span class="s2">"refs/heads/featureA"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA"</span><span class="p">,</span>
-  <span class="s2">"object"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"refs/heads/featureA"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA"</span><span class="p">,</span>
+  <span class="s2">"object"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -255,6 +265,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

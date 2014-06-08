@@ -65,46 +65,49 @@ Or, if you access this endpoint on your organization’s <a href="https://enterp
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"hooks"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"hooks"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"127.0.0.1/32"</span>
   <span class="p">],</span>
-  <span class="s2">"git"</span><span class="o">:</span> <span class="p">[</span>
+  <span class="s2">"git"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"127.0.0.1/32"</span>
   <span class="p">],</span>
-  <span class="s2">"verifiable_password_authentication"</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="s2">"verifiable_password_authentication"</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="body">Body</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>hooks</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>hooks</code></td>
       <td>
 <code>array</code> of <code>strings</code>
 </td>
       <td>An Array of IP addresses in CIDR format specifying the addresses that incoming service hooks will originate from on GitHub.com.  Subscribe to the <a href="https://developer.github.com/changes/">API Changes blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> on Twitter to get updated when this list changes.</td>
     </tr>
-<tr>
-<td><code>git</code></td>
+    <tr>
+      <td><code>git</code></td>
       <td>
 <code>array</code> of <code>strings</code>
 </td>
       <td>An Array of IP addresses in CIDR format specifying the Git servers for GitHub.com.</td>
     </tr>
-<tr>
-<td><code>verifiable_password_authentication</code></td>
+    <tr>
+      <td><code>verifiable_password_authentication</code></td>
       <td><code>boolean</code></td>
       <td>Whether authentication with username and password is supported. (GitHub Enterprise instances using CAS or OAuth for authentication will return <code>false</code>. Features like <a href="/v3/auth/#via-username-and-password">Basic Authentication with a username and password</a>, <a href="https://help.github.com/articles/sudo-mode">sudo mode</a>, and <a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a> are not supported on these servers.)</td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

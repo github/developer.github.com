@@ -54,14 +54,16 @@
       <h1 id="contents">Contents</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-the-readme">Get the README</a></li>
+  <li><a href="#get-the-readme">Get the README</a></li>
   <li><a href="#get-contents">Get contents</a></li>
   <li><a href="#create-a-file">Create a file</a></li>
   <li><a href="#update-a-file">Update a file</a></li>
   <li><a href="#delete-a-file">Delete a file</a></li>
   <li><a href="#get-archive-link">Get archive link</a></li>
   <li><a href="#custom-media-types">Custom media types</a></li>
-</ul><p>These API methods let you retrieve the contents of files within a repository as
+</ul>
+
+<p>These API methods let you retrieve the contents of files within a repository as
 Base64 encoded content. See <a href="#custom-media-types">media types</a> for requesting raw format.</p>
 
 <h2 id="get-the-readme">Get the README</h2>
@@ -76,37 +78,43 @@ Base64 encoded content. See <a href="#custom-media-types">media types</a> for re
 <h3 id="parameters">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody><tr>
-<td><code>ref</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ref</code></td>
       <td><code>string</code></td>
       <td>The name of the commit/branch/tag. Default: the repository’s default branch (usually <code>master</code>)</td>
-    </tr></tbody>
-</table><h3 id="response">Response</h3>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
-  <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"base64"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">5362</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
-  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
-  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span><span class="p">,</span>
-  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
-    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
-    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"file"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="p">:</span> <span class="s2">"base64"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">5362</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -123,49 +131,55 @@ Directories and submodules do <em>not</em> support custom media types.</p>
 <p><em>Notes</em>:</p>
 
 <ul>
-<li>To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get the tree</a>.</li>
+  <li>To get a repository’s contents recursively, you can <a href="/v3/git/trees/">recursively get the tree</a>.</li>
   <li>This API supports files up to 1 megabyte in size.</li>
-</ul><h3 id="parameters-1">Parameters</h3>
+</ul>
+
+<h3 id="parameters-1">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>path</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>path</code></td>
       <td><code>string</code></td>
       <td>The content path.</td>
     </tr>
-<tr>
-<td><code>ref</code></td>
+    <tr>
+      <td><code>ref</code></td>
       <td><code>string</code></td>
       <td>The name of the commit/branch/tag. Default: the repository’s default branch (usually <code>master</code>)</td>
     </tr>
-</tbody>
-</table><h3 id="response-if-content-is-a-file">Response if content is a file</h3>
+  </tbody>
+</table>
+
+<h3 id="response-if-content-is-a-file">Response if content is a file</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
-  <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"base64"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">5362</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
-  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
-  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span><span class="p">,</span>
-  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
-    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
-    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"file"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="p">:</span> <span class="s2">"base64"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">5362</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -175,35 +189,35 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
-    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">625</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octokit.rb"</span><span class="p">,</span>
-    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"lib/octokit.rb"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb"</span><span class="p">,</span>
-    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb"</span><span class="p">,</span>
-    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb"</span><span class="p">,</span>
-      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
-      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb"</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="p">:</span> <span class="mi">625</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb"</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"dir"</span><span class="p">,</span>
-    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octokit"</span><span class="p">,</span>
-    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"lib/octokit"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit"</span><span class="p">,</span>
-    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/tree/master/lib/octokit"</span><span class="p">,</span>
-    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit"</span><span class="p">,</span>
-      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
-      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/tree/master/lib/octokit"</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"dir"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"octokit"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/tree/master/lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/tree/master/lib/octokit"</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
@@ -223,20 +237,20 @@ In the next major version of the API, the type will be returned as “submodule�
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"symlink"</span><span class="p">,</span>
-  <span class="s2">"target"</span><span class="o">:</span> <span class="s2">"/path/to/symlink/target"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">23</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"some-symlink"</span><span class="p">,</span>
-  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"bin/some-symlink"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink"</span><span class="p">,</span>
-  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"</span><span class="p">,</span>
-  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
-    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink"</span><span class="p">,</span>
-    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"symlink"</span><span class="p">,</span>
+  <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"/path/to/symlink/target"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"some-symlink"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -246,20 +260,20 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"submodule"</span><span class="p">,</span>
-  <span class="s2">"submodule_git_url"</span><span class="o">:</span> <span class="s2">"git://github.com/jquery/qunit.git"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"qunit"</span><span class="p">,</span>
-  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"test/qunit"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master"</span><span class="p">,</span>
-  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
-  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
-    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master"</span><span class="p">,</span>
-    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"submodule"</span><span class="p">,</span>
+  <span class="s2">"submodule_git_url"</span><span class="p">:</span> <span class="s2">"git://github.com/jquery/qunit.git"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"qunit"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"test/qunit"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -278,37 +292,41 @@ Git uses the given URL when cloning the submodule repository, and checks out the
 <h3 id="parameters-2">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>path</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>path</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The content path.</td>
     </tr>
-<tr>
-<td><code>message</code></td>
+    <tr>
+      <td><code>message</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The commit message.</td>
     </tr>
-<tr>
-<td><code>content</code></td>
+    <tr>
+      <td><code>content</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The new file content, Base64 encoded.</td>
     </tr>
-<tr>
-<td><code>branch</code></td>
+    <tr>
+      <td><code>branch</code></td>
       <td><code>string</code></td>
       <td>The branch name. Default: the repository’s default branch (usually <code>master</code>)</td>
     </tr>
-</tbody>
-</table><h3 id="optional-parameters">Optional Parameters</h3>
+  </tbody>
+</table>
+
+<h3 id="optional-parameters">Optional Parameters</h3>
 
 <p>You can provide an additional <code>commiter</code> parameter, which is a hash containing
 information about the committer. Or, you can provide an <code>author</code> parameter, which
@@ -324,32 +342,36 @@ user’s information is used.</p>
 <p>Both the <code>author</code> and <code>commiter</code> parameters have the same keys:</p>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
       <td><code>string</code></td>
       <td>The name of the author (or commiter) of the commit</td>
     </tr>
-<tr>
-<td><code>email</code></td>
+    <tr>
+      <td><code>email</code></td>
       <td><code>string</code></td>
       <td>The email of the author (or commiter) of the commit</td>
     </tr>
-</tbody>
-</table><h3 id="example-input">Example Input</h3>
+  </tbody>
+</table>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
-  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+<h3 id="example-input">Example Input</h3>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
   <span class="p">},</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"bXkgbmV3IGZpbGUgY29udGVudHM="</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"bXkgbmV3IGZpbGUgY29udGVudHM="</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -358,46 +380,46 @@ user’s information is used.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"hello.txt"</span><span class="p">,</span>
-    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"notes/hello.txt"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
-    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span><span class="p">,</span>
-    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
-    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
-      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
-      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"hello.txt"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="s2">"commit"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
     <span class="p">},</span>
-    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="s2">"committer"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
     <span class="p">},</span>
-    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
-    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
     <span class="p">},</span>
-    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"parents"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
-        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
-        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">}</span>
@@ -413,43 +435,47 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-3">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>path</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>path</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The content path.</td>
     </tr>
-<tr>
-<td><code>message</code></td>
+    <tr>
+      <td><code>message</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The commit message.</td>
     </tr>
-<tr>
-<td><code>content</code></td>
+    <tr>
+      <td><code>content</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The updated file content, Base64 encoded.</td>
     </tr>
-<tr>
-<td><code>sha</code></td>
+    <tr>
+      <td><code>sha</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The blob SHA of the file being replaced.</td>
     </tr>
-<tr>
-<td><code>branch</code></td>
+    <tr>
+      <td><code>branch</code></td>
       <td><code>string</code></td>
       <td>The branch name. Default: the repository’s default branch (usually <code>master</code>)</td>
     </tr>
-</tbody>
-</table><h3 id="optional-parameters-1">Optional Parameters</h3>
+  </tbody>
+</table>
+
+<h3 id="optional-parameters-1">Optional Parameters</h3>
 
 <p>You can provide an additional <code>commiter</code> parameter, which is a hash containing
 information about the committer. Or, you can provide an <code>author</code> parameter, which
@@ -465,33 +491,37 @@ user’s information is used.</p>
 <p>Both the <code>author</code> and <code>commiter</code> parameters have the same keys:</p>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
       <td><code>string</code></td>
       <td>The name of the author (or commiter) of the commit</td>
     </tr>
-<tr>
-<td><code>email</code></td>
+    <tr>
+      <td><code>email</code></td>
       <td><code>string</code></td>
       <td>The email of the author (or commiter) of the commit</td>
     </tr>
-</tbody>
-</table><h3 id="example-input-1">Example Input</h3>
+  </tbody>
+</table>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
-  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+<h3 id="example-input-1">Example Input</h3>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
   <span class="p">},</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"329688480d39049927147c162b9d2deaf885005f"</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"329688480d39049927147c162b9d2deaf885005f"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -500,46 +530,46 @@ user’s information is used.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"hello.txt"</span><span class="p">,</span>
-    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"notes/hello.txt"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
-    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span><span class="p">,</span>
-    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
-    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
-      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
-      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"hello.txt"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="s2">"commit"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
     <span class="p">},</span>
-    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="s2">"committer"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
     <span class="p">},</span>
-    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
-    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
     <span class="p">},</span>
-    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"parents"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
-        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
-        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">}</span>
@@ -555,37 +585,41 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-4">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>path</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>path</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The content path.</td>
     </tr>
-<tr>
-<td><code>message</code></td>
+    <tr>
+      <td><code>message</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The commit message.</td>
     </tr>
-<tr>
-<td><code>sha</code></td>
+    <tr>
+      <td><code>sha</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The blob SHA of the file being replaced.</td>
     </tr>
-<tr>
-<td><code>branch</code></td>
+    <tr>
+      <td><code>branch</code></td>
       <td><code>string</code></td>
       <td>The branch name. Default: the repository’s default branch (usually <code>master</code>)</td>
     </tr>
-</tbody>
-</table><h3 id="optional-parameters-2">Optional Parameters</h3>
+  </tbody>
+</table>
+
+<h3 id="optional-parameters-2">Optional Parameters</h3>
 
 <p>You can provide an additional <code>commiter</code> parameter, which is a hash containing
 information about the committer. Or, you can provide an <code>author</code> parameter, which
@@ -601,32 +635,36 @@ user’s information is used.</p>
 <p>Both the <code>author</code> and <code>commiter</code> parameters have the same keys:</p>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
       <td><code>string</code></td>
       <td>The name of the author (or commiter) of the commit</td>
     </tr>
-<tr>
-<td><code>email</code></td>
+    <tr>
+      <td><code>email</code></td>
       <td><code>string</code></td>
       <td>The email of the author (or commiter) of the commit</td>
     </tr>
-</tbody>
-</table><h3 id="example-input-2">Example Input</h3>
+  </tbody>
+</table>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
-  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+<h3 id="example-input-2">Example Input</h3>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
   <span class="p">},</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"329688480d39049927147c162b9d2deaf885005f"</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"329688480d39049927147c162b9d2deaf885005f"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -635,32 +673,32 @@ user’s information is used.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
-    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"commit"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
     <span class="p">},</span>
-    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="s2">"committer"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span>
     <span class="p">},</span>
-    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
-    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
-      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
     <span class="p">},</span>
-    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"parents"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
-        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
-        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">}</span>
@@ -681,25 +719,29 @@ to make a second <code>GET</code> request.</p>
 <h3 id="parameters-5">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>archive_format</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>archive_format</code></td>
       <td><code>string</code></td>
       <td>Can be either <code>tarball</code> or <code>zipball</code>. Default: <code>tarball</code>
 </td>
     </tr>
-<tr>
-<td><code>ref</code></td>
+    <tr>
+      <td><code>ref</code></td>
       <td><code>string</code></td>
       <td>A valid Git reference. Default: the repository’s default branch (usually <code>master</code>)</td>
     </tr>
-</tbody>
-</table><h3 id="response-4">Response</h3>
+  </tbody>
+</table>
+
+<h3 id="response-4">Response</h3>
 
 <pre class="headers"><code>Status: 302 Found
 Location: https://codeload.github.com/me/myprivate/legacy.zip/master?login=me&amp;token=thistokenexpires
@@ -724,6 +766,7 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball &gt; octokit.tar.g
 </code></pre>
 
 <p>You can read more about the use of media types in the API <a href="/v3/media/">here</a>.</p>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

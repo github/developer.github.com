@@ -54,12 +54,14 @@
       <h1 id="getting-started">Getting Started</h1>
 
 <ul id="markdown-toc">
-<li><a href="#overview">Overview</a></li>
+  <li><a href="#overview">Overview</a></li>
   <li><a href="#authentication">Authentication</a></li>
   <li><a href="#repositories">Repositories</a></li>
   <li><a href="#issues">Issues</a></li>
   <li><a href="#conditional-requests">Conditional requests</a></li>
-</ul><p>Let’s walk through core API concepts as we tackle some everyday use cases.</p>
+</ul>
+
+<p>Let’s walk through core API concepts as we tackle some everyday use cases.</p>
 
 <h2 id="overview">Overview</h2>
 
@@ -135,7 +137,7 @@ Last-Modified: Tue, 30 Oct 2012 18:58:42 GMT
 HTTP spec. Let’s take a look at a few of them:</p>
 
 <ul>
-<li>
+  <li>
 <code>X-GitHub-Media-Type</code> has a value of <code>github.v3</code>. This lets us know the <a href="/v3/media/">media type</a>
 for the response. Media types have helped us version our output in API v3. We’ll
 talk more about that later.</li>
@@ -143,7 +145,9 @@ talk more about that later.</li>
 pair of headers indicate <a href="/v3/#rate-limiting">how many requests a client can make</a> in
 a rolling time period (typically an hour) and how many of those requests the
 client has already spent.</li>
-</ul><h2 id="authentication">Authentication</h2>
+</ul>
+
+<h2 id="authentication">Authentication</h2>
 
 <p>Unauthenticated clients can make 60 requests per hour. To get more, we’ll need to
 <em>authenticate</em>. In fact, doing anything interesting with the GitHub API requires
@@ -228,12 +232,14 @@ private information using the API on behalf of another user should use <a href="
 features:</p>
 
 <ul>
-<li>
+  <li>
 <strong>Revokable access</strong>: users can revoke authorization to third party apps at any time</li>
   <li>
 <strong>Limited access</strong>: users can review the specific access that a token
 will provide before authorizing a third party app</li>
-</ul><p>Normally, tokens are created via a <a href="/v3/oauth/#web-application-flow">web flow</a>. An application
+</ul>
+
+<p>Normally, tokens are created via a <a href="/v3/oauth/#web-application-flow">web flow</a>. An application
 sends users to GitHub to log in. GitHub then presents a dialog
 indicating the name of the app, as well as the level of access the app
 has once it’s authorized by the user. After a user authorizes access, GitHub
@@ -354,11 +360,13 @@ $ curl -i https://api.github.com/orgs/mozilla/repos
 <p>The information returned from these calls will depend on how we authenticate:</p>
 
 <ul>
-<li>Using Basic Authentication, the response includes all repositories the
+  <li>Using Basic Authentication, the response includes all repositories the
 the user has access to see on github.com.</li>
   <li>Using OAuth, private repositories are only returned if the OAuth token
 contains the <code>repo</code> <a href="/v3/oauth/#scopes">scope</a>.</li>
-</ul><p>As the <a href="/v3/repos/">docs</a> indicate, these methods take a <code>type</code> parameter that
+</ul>
+
+<p>As the <a href="/v3/repos/">docs</a> indicate, these methods take a <code>type</code> parameter that
 can filter the repositories returned based on what type of access the user has
 for the repository. In this way, we can fetch only directly-owned repositories,
 organization repositories, or repositories the user collaborates on via a team.</p>
@@ -561,10 +569,14 @@ responses don’t count against your <a href="/v3/#rate-limiting">rate limit</a>
 <p>Woot! Now you know the basics of the GitHub API!</p>
 
 <ul>
-<li>Basic &amp; OAuth authentication</li>
+  <li>Basic &amp; OAuth authentication</li>
   <li>Fetching and creating repositories and issues</li>
   <li>Conditional requests</li>
-</ul><p>Keep learning with the next API guide <a href="/guides/basics-of-authentication">Basics of Authentication</a>!</p>
+</ul>
+
+<p>Keep learning with the next API guide <a href="/guides/basics-of-authentication">Basics of Authentication</a>!</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

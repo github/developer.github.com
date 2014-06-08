@@ -54,12 +54,14 @@
       <h1 id="statistics">Statistics</h1>
 
 <ul id="markdown-toc">
-<li><a href="#contributors">Get contributors list with additions, deletions, and commit counts</a></li>
+  <li><a href="#contributors">Get contributors list with additions, deletions, and commit counts</a></li>
   <li><a href="#commit-activity">Get the last year of commit activity data</a></li>
   <li><a href="#code-frequency">Get the number of additions and deletions per week</a></li>
   <li><a href="#participation">Get the weekly commit count for the repository owner and everyone else</a></li>
   <li><a href="#punch-card">Get the number of commits per hour in each day</a></li>
-</ul><p>The Repository Statistics API allows you to fetch the data that GitHub uses for visualizing different
+</ul>
+
+<p>The Repository Statistics API allows you to fetch the data that GitHub uses for visualizing different
 types of repository activity.</p>
 
 <h3 id="a-word-about-caching">A word about caching</h3>
@@ -85,46 +87,48 @@ which is usually master; pushing to the default branch resets the statistics cac
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-      <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-      <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-      <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-      <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-      <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-      <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-      <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-      <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-      <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-      <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+      <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+      <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+      <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+      <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+      <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+      <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+      <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"total"</span><span class="o">:</span> <span class="mi">135</span><span class="p">,</span>
-    <span class="s2">"weeks"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"total"</span><span class="p">:</span> <span class="mi">135</span><span class="p">,</span>
+    <span class="s2">"weeks"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">"w"</span><span class="o">:</span> <span class="s2">"1367712000"</span><span class="p">,</span>
-        <span class="s2">"a"</span><span class="o">:</span> <span class="mi">6898</span><span class="p">,</span>
-        <span class="s2">"d"</span><span class="o">:</span> <span class="mi">77</span><span class="p">,</span>
-        <span class="s2">"c"</span><span class="o">:</span> <span class="mi">10</span>
+        <span class="s2">"w"</span><span class="p">:</span> <span class="s2">"1367712000"</span><span class="p">,</span>
+        <span class="s2">"a"</span><span class="p">:</span> <span class="mi">6898</span><span class="p">,</span>
+        <span class="s2">"d"</span><span class="p">:</span> <span class="mi">77</span><span class="p">,</span>
+        <span class="s2">"c"</span><span class="p">:</span> <span class="mi">10</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
 <ul>
-<li>
+  <li>
 <code>total</code> - The Total number of commits authored by the contributor.</li>
-</ul><p><strong>Weekly Hash</strong></p>
+</ul>
+
+<p><strong>Weekly Hash</strong></p>
 
 <ul>
-<li>
+  <li>
 <code>w</code> - Start of the week, given as a <a href="http://en.wikipedia.org/wiki/Unix_time">Unix timestamp</a>.</li>
   <li>
 <code>a</code> - Number of additions</li>
@@ -132,7 +136,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 <code>d</code> - Number of deletions</li>
   <li>
 <code>c</code> - Number of commits</li>
-</ul><h2 id="commit-activity">Get the last year of commit activity data</h2>
+</ul>
+
+<h2 id="commit-activity">Get the last year of commit activity data</h2>
 
 <p>Returns the last year of commit activity grouped by week.  The <code>days</code> array
 is a group of commits per day, starting on <code>Sunday</code>.</p>
@@ -146,9 +152,9 @@ is a group of commits per day, starting on <code>Sunday</code>.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"days"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"days"</span><span class="p">:</span> <span class="p">[</span>
       <span class="mi">0</span><span class="p">,</span>
       <span class="mi">3</span><span class="p">,</span>
       <span class="mi">26</span><span class="p">,</span>
@@ -157,8 +163,8 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="mi">1</span><span class="p">,</span>
       <span class="mi">0</span>
     <span class="p">],</span>
-    <span class="s2">"total"</span><span class="o">:</span> <span class="mi">89</span><span class="p">,</span>
-    <span class="s2">"week"</span><span class="o">:</span> <span class="mi">1336280400</span>
+    <span class="s2">"total"</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span>
+    <span class="s2">"week"</span><span class="p">:</span> <span class="mi">1336280400</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -176,7 +182,7 @@ to a repository.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">[</span>
     <span class="mi">1302998400</span><span class="p">,</span>
     <span class="mi">1124</span><span class="p">,</span>
@@ -201,8 +207,8 @@ counts for non-owners, you can subtract <code>owner</code> from <code>all</code>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"all"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"all"</span><span class="p">:</span> <span class="p">[</span>
     <span class="mi">11</span><span class="p">,</span>
     <span class="mi">21</span><span class="p">,</span>
     <span class="mi">15</span><span class="p">,</span>
@@ -256,7 +262,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="mi">29</span><span class="p">,</span>
     <span class="mi">7</span>
   <span class="p">],</span>
-  <span class="s2">"owner"</span><span class="o">:</span> <span class="p">[</span>
+  <span class="s2">"owner"</span><span class="p">:</span> <span class="p">[</span>
     <span class="mi">3</span><span class="p">,</span>
     <span class="mi">2</span><span class="p">,</span>
     <span class="mi">3</span><span class="p">,</span>
@@ -322,19 +328,21 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>Each array contains the day number, hour number, and number of commits:</p>
 
 <ul>
-<li>
+  <li>
 <code>0-6</code>: Sunday - Saturday</li>
   <li>
 <code>0-23</code>: Hour of day</li>
   <li>Number of commits</li>
-</ul><p>For example, <code>[2, 14, 25]</code> indicates that there were 25 total commits, during the
+</ul>
+
+<p>For example, <code>[2, 14, 25]</code> indicates that there were 25 total commits, during the
 2:00pm hour on Tuesdays.  All times are based on the time zone of individual commits.</p>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">[</span>
     <span class="mi">0</span><span class="p">,</span>
     <span class="mi">0</span><span class="p">,</span>
@@ -351,6 +359,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="mi">21</span>
   <span class="p">]</span>
 <span class="p">]</span></code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

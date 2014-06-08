@@ -54,7 +54,7 @@
       <h1 id="notifications">Notifications</h1>
 
 <ul id="markdown-toc">
-<li><a href="#notification-reasons">Notification Reasons</a></li>
+  <li><a href="#notification-reasons">Notification Reasons</a></li>
   <li><a href="#list-your-notifications">List your notifications</a></li>
   <li><a href="#list-your-notifications-in-a-repository">List your notifications in a repository</a></li>
   <li><a href="#mark-as-read">Mark as read</a></li>
@@ -64,23 +64,29 @@
   <li><a href="#get-a-thread-subscription">Get a Thread Subscription</a></li>
   <li><a href="#set-a-thread-subscription">Set a Thread Subscription</a></li>
   <li><a href="#delete-a-thread-subscription">Delete a Thread Subscription</a></li>
-</ul><p>GitHub Notifications are powered by <a href="/v3/activity/watching/">watched repositories</a>.
+</ul>
+
+<p>GitHub Notifications are powered by <a href="/v3/activity/watching/">watched repositories</a>.
 Users receive notifications for discussions in repositories they watch
 including:</p>
 
 <ul>
-<li>Issues and their comments</li>
+  <li>Issues and their comments</li>
   <li>Pull Requests and their comments</li>
   <li>Comments on any commits</li>
-</ul><p>Notifications are also sent for discussions in unwatched repositories when the
+</ul>
+
+<p>Notifications are also sent for discussions in unwatched repositories when the
 user is involved including:</p>
 
 <ul>
-<li><strong>@mentions</strong></li>
+  <li><strong>@mentions</strong></li>
   <li>Issue assignments</li>
   <li>Commits the user authors or commits</li>
   <li>Any discussion in which the user actively participates</li>
-</ul><p>All Notification API calls require the <code>notifications</code> or
+</ul>
+
+<p>All Notification API calls require the <code>notifications</code> or
 <code>repo</code> API scopes.  Doing this will give read-only access to
 some Issue/Commit content. You will still need the “repo” scope to access
 Issues and Commits from their respective endpoints.</p>
@@ -115,45 +121,49 @@ X-Poll-Interval: 60
 <p>Here’s a list of potential <code>reason</code>s for receiving a notification:</p>
 
 <table>
-<thead><tr>
-<th>Reason Name</th>
+  <thead>
+    <tr>
+      <th>Reason Name</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>subscribed</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>subscribed</code></td>
       <td>The notification arrived because you’re watching the repository</td>
     </tr>
-<tr>
-<td><code>manual</code></td>
+    <tr>
+      <td><code>manual</code></td>
       <td>The notification arrived because you’ve specifically decided to watch the item (via an Issue or Pull Request)</td>
     </tr>
-<tr>
-<td><code>author</code></td>
+    <tr>
+      <td><code>author</code></td>
       <td>The notification arrived because you’ve created the item</td>
     </tr>
-<tr>
-<td><code>comment</code></td>
+    <tr>
+      <td><code>comment</code></td>
       <td>The notification arrived because you’ve commented on the item</td>
     </tr>
-<tr>
-<td><code>mention</code></td>
+    <tr>
+      <td><code>mention</code></td>
       <td>The notification arrived because you were specifically <strong>@mentioned</strong> in the content</td>
     </tr>
-<tr>
-<td><code>team_mention</code></td>
+    <tr>
+      <td><code>team_mention</code></td>
       <td>The notification arrived because you were on a team that was mentioned (like @org/team)</td>
     </tr>
-<tr>
-<td><code>state_change</code></td>
+    <tr>
+      <td><code>state_change</code></td>
       <td>The notification arrived because you changed the item state (like closing an Issue or merging a Pull Request)</td>
     </tr>
-<tr>
-<td><code>assign</code></td>
+    <tr>
+      <td><code>assign</code></td>
       <td>The notification arrived because you were assigned to the Issue</td>
     </tr>
-</tbody>
-</table><p>Note that the <code>reason</code> is modified on a per-thread basis, and can change, if the
+  </tbody>
+</table>
+
+<p>Note that the <code>reason</code> is modified on a per-thread basis, and can change, if the
 <code>reason</code> on a later notification is different. </p>
 
 <p>For example, if you are the author of an issue, subsequent notifications on that 
@@ -171,80 +181,84 @@ The <code>reason</code> remains as <code>mention</code>, regardless of whether y
 <h3 id="parameters">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>all</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>all</code></td>
       <td><code>boolean</code></td>
       <td>If <code>true</code>, show notifications marked as read. Default: <code>false</code>
 </td>
     </tr>
-<tr>
-<td><code>participating</code></td>
+    <tr>
+      <td><code>participating</code></td>
       <td><code>boolean</code></td>
       <td>If <code>true</code>, only shows notifications in which the user is directly participating or mentioned. Default: <code>false</code>
 </td>
     </tr>
-<tr>
-<td><code>since</code></td>
+    <tr>
+      <td><code>since</code></td>
       <td><code>string</code></td>
       <td>Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>. Default: <code>Time.now</code>
 </td>
     </tr>
-</tbody>
-</table><h3 id="response">Response</h3>
+  </tbody>
+</table>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
-    <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
-      <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-        <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-        <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-        <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-        <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-        <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-        <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-        <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-        <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-        <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-        <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-        <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-        <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="s2">"repository"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1296269</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+        <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+        <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+        <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+        <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+        <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+        <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+        <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+        <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+        <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+        <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+        <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
       <span class="p">},</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
-      <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
-      <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
-      <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
-      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+      <span class="s2">"full_name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+      <span class="s2">"private"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"fork"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
     <span class="p">},</span>
-    <span class="s2">"subject"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
-      <span class="s2">"latest_comment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Issue"</span>
+    <span class="s2">"subject"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
+      <span class="s2">"latest_comment_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Issue"</span>
     <span class="p">},</span>
-    <span class="s2">"reason"</span><span class="o">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
-    <span class="s2">"unread"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
-    <span class="s2">"last_read_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
+    <span class="s2">"unread"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+    <span class="s2">"last_read_at"</span><span class="p">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -258,80 +272,84 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-1">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>all</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>all</code></td>
       <td><code>boolean</code></td>
       <td>If <code>true</code>, show notifications marked as read. Default: <code>false</code>
 </td>
     </tr>
-<tr>
-<td><code>participating</code></td>
+    <tr>
+      <td><code>participating</code></td>
       <td><code>boolean</code></td>
       <td>If <code>true</code>, only shows notifications in which the user is directly participating or mentioned. Default: <code>false</code>
 </td>
     </tr>
-<tr>
-<td><code>since</code></td>
+    <tr>
+      <td><code>since</code></td>
       <td><code>string</code></td>
       <td>Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>. Default: <code>Time.now</code>
 </td>
     </tr>
-</tbody>
-</table><h3 id="response-1">Response</h3>
+  </tbody>
+</table>
+
+<h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
-    <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
-      <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-        <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-        <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-        <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-        <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-        <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-        <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-        <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-        <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-        <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-        <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-        <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-        <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+    <span class="s2">"repository"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1296269</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+        <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+        <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+        <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+        <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+        <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+        <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+        <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+        <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+        <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+        <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+        <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
       <span class="p">},</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
-      <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
-      <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
-      <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
-      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+      <span class="s2">"full_name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+      <span class="s2">"private"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"fork"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
     <span class="p">},</span>
-    <span class="s2">"subject"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
-      <span class="s2">"latest_comment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Issue"</span>
+    <span class="s2">"subject"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
+      <span class="s2">"latest_comment_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Issue"</span>
     <span class="p">},</span>
-    <span class="s2">"reason"</span><span class="o">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
-    <span class="s2">"unread"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
-    <span class="s2">"last_read_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
+    <span class="s2">"unread"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+    <span class="s2">"last_read_at"</span><span class="p">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -346,18 +364,24 @@ on GitHub.com</a>.</p>
 <h3 id="parameters-2">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody><tr>
-<td><code>last_read_at</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>last_read_at</code></td>
       <td><code>string</code></td>
       <td>Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>. Default: <code>Time.now</code>
 </td>
-    </tr></tbody>
-</table><h3 id="response-2">Response</h3>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 205 Reset Content
 X-RateLimit-Limit: 5000
@@ -374,18 +398,24 @@ from the <a href="https://github.com/notifications">default view on GitHub.com</
 <h3 id="parameters-3">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody><tr>
-<td><code>last_read_at</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>last_read_at</code></td>
       <td><code>string</code></td>
       <td>Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>. Default: <code>Time.now</code>
 </td>
-    </tr></tbody>
-</table><h3 id="response-3">Response</h3>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 205 Reset Content
 X-RateLimit-Limit: 5000
@@ -402,48 +432,48 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
-  <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
-    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-      <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-      <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-      <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-      <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-      <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-      <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-      <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-      <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-      <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-      <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+  <span class="s2">"repository"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1296269</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+      <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+      <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+      <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+      <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+      <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+      <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+      <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
-    <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
-    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"full_name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
   <span class="p">},</span>
-  <span class="s2">"subject"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
-    <span class="s2">"latest_comment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Issue"</span>
+  <span class="s2">"subject"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
+    <span class="s2">"latest_comment_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Issue"</span>
   <span class="p">},</span>
-  <span class="s2">"reason"</span><span class="o">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
-  <span class="s2">"unread"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
-  <span class="s2">"last_read_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
+  <span class="s2">"unread"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+  <span class="s2">"last_read_at"</span><span class="p">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="mark-a-thread-as-read">Mark a thread as read</h2>
@@ -471,13 +501,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"subscribed"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"ignored"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"reason"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-10-06T21:34:12Z"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1/subscription"</span><span class="p">,</span>
-  <span class="s2">"thread_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"subscribed"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"ignored"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2012-10-06T21:34:12Z"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/notifications/threads/1/subscription"</span><span class="p">,</span>
+  <span class="s2">"thread_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="set-a-thread-subscription">Set a Thread Subscription</h2>
@@ -493,36 +523,40 @@ a thread will mute all future notifications (until you comment or get
 <h3 id="parameters-4">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>subscribed</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>subscribed</code></td>
       <td><code>boolean</code></td>
       <td>Determines if notifications should be received from this thread</td>
     </tr>
-<tr>
-<td><code>ignored</code></td>
+    <tr>
+      <td><code>ignored</code></td>
       <td><code>boolean</code></td>
       <td>Determines if all notifications should be blocked from this thread</td>
     </tr>
-</tbody>
-</table><h3 id="response-7">Response</h3>
+  </tbody>
+</table>
+
+<h3 id="response-7">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"subscribed"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"ignored"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"reason"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-10-06T21:34:12Z"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1/subscription"</span><span class="p">,</span>
-  <span class="s2">"thread_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"subscribed"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"ignored"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2012-10-06T21:34:12Z"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/notifications/threads/1/subscription"</span><span class="p">,</span>
+  <span class="s2">"thread_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="delete-a-thread-subscription">Delete a Thread Subscription</h2>
@@ -535,6 +569,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

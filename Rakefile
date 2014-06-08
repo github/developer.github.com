@@ -19,12 +19,12 @@ task :remove_output_dir do
 end
 
 # Prompt user for a commit message; default: P U B L I S H :emoji:
-def commit_message
+def commit_message(no_commit_msg = false)
   publish_emojis = [':boom:', ':rocket:', ':metal:', ':bulb:', ':zap:',
     ':sailboat:', ':gift:', ':ship:', ':shipit:', ':sparkles:', ':rainbow:']
   default_message = "P U B L I S H #{publish_emojis.sample}"
 
-  unless ENV["no_commit_msg"]
+  unless no_commit_msg
     print "Enter a commit message (default: '#{default_message}'): "
     STDOUT.flush
     mesg = STDIN.gets.chomp.strip
@@ -35,9 +35,8 @@ def commit_message
 end
 
 desc "Publish to http://developer.github.com"
-task :publish => [:clean, :remove_output_dir] do
-  mesg = commit_message
-
+task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
+  mesg = commit_message(args[:no_commit_msg])
   sh "nanoc compile"
 
   ENV['GIT_DIR'] = File.expand_path(`git rev-parse --git-dir`.chomp)

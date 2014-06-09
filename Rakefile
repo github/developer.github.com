@@ -1,4 +1,5 @@
 require 'nanoc3/tasks'
+require 'tmpdir'
 
 task :default => [:test]
 
@@ -54,7 +55,9 @@ task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
     ENV['GIT_WORK_TREE'] = Dir.pwd
     File.unlink(gif) if File.file?(gif)
     # restore precious files
-    FileUtils.cp_r(Dir.glob("#{tmpdir}/**/*"), ".")
+    FileUtils.cp_r("#{tmpdir}/enterprise", ".")
+    FileUtils.cp("#{tmpdir}/robots.txt", ".")
+    FileUtils.rm_rf(tmpdir) if File.exists?(tmpdir)
     `git add -A`
     tsha = `git write-tree`.strip
     puts "Created tree   #{tsha}"

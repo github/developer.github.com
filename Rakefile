@@ -49,7 +49,11 @@ task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
     `git add -A`
     tsha = `git write-tree`.strip
     puts "Created tree   #{tsha}"
-    if old_sha.size == 40
+    # Heroku runs git@1.7, we don't have the luxury of -m
+    if ENV['IS_HEROKU']
+      `echo #{mesg} > changelog`
+      csha = `git commit-tree #{tsha} -p #{old_sha} < changelog`.strip
+    elsif old_sha.size == 40
       csha = `git commit-tree #{tsha} -p #{old_sha} -m '#{mesg}'`.strip
     else
       csha = `git commit-tree #{tsha} -m '#{mesg}'`.strip

@@ -39,13 +39,6 @@ task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
   mesg = commit_message(args[:no_commit_msg])
   sh "nanoc compile"
 
-  # save precious files
-  `git checkout gh-pages`
-  tmpdir = Dir.mktmpdir
-  FileUtils.cp_r("enterprise", tmpdir)
-  FileUtils.cp("robots.txt", tmpdir)
-  `git checkout master`
-
   ENV['GIT_DIR'] = File.expand_path(`git rev-parse --git-dir`.chomp)
   ENV['RUBYOPT'] = nil
   old_sha = `git rev-parse refs/remotes/origin/gh-pages`.chomp
@@ -53,12 +46,14 @@ task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
     ENV['GIT_INDEX_FILE'] = gif = '/tmp/dev.gh.i'
     ENV['GIT_WORK_TREE'] = Dir.pwd
     File.unlink(gif) if File.file?(gif)
-    # restore precious files
-    FileUtils.cp_r(Dir.glob("#{tmpdir}/**/*"), ".")
     `git add -A`
     tsha = `git write-tree`.strip
     puts "Created tree   #{tsha}"
-    if old_sha.size == 40
+    # Heroku runs git@1.7, we don't have the luxury of -m
+    if ENV['IS_HEROKU']
+      `echo #{mesg} > changelog`
+      csha = `git commit-tree #{tsha} -p #{old_sha} < changelog`.strip
+    elsif old_sha.size == 40
       csha = `git commit-tree #{tsha} -p #{old_sha} -m '#{mesg}'`.strip
     else
       csha = `git commit-tree #{tsha} -m '#{mesg}'`.strip
@@ -67,6 +62,6 @@ task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
     puts `git show #{csha} --stat`
     puts "Updating gh-pages from #{old_sha}"
     `git update-ref refs/heads/gh-pages #{csha}`
-    # `git push origin gh-pages`
+    `git push origin gh-pages`
   end
 end

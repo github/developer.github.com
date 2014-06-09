@@ -5,7 +5,7 @@ created_at: 2014-06-09
 author_name: jdpace
 ---
 
-We've improved [PullRequestReviewComment events payloads][pr-review-comment-events] by adding `action` and `pull_request` attributes. This means you can now get detailed information about the pull request without making an additional API request.
+We've enhanced the [PullRequestReviewComment events payloads][pr-review-comment-events] to include `action` and `pull_request` attributes. With the addition of the `pull_request` attribute, you now have immediate access to detailed information about the pull request without needing an additional API request.
 
 If you have any questions or feedback, please [get in touch][contact].
 

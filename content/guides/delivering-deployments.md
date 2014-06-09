@@ -8,7 +8,7 @@ title: Delivering deployments | GitHub API
 {:toc}
 
 The [Deployments API][deploy API] provides your projects hosted on GitHub with
-the capability to launch them on a production server that you own. Combined with
+the capability to launch them on a server that you own. Combined with
 [the Status API][status API], you'll be able to coordinate your deployments
 the moment your code lands on `master`.
 
@@ -92,7 +92,7 @@ repository, open a pull request, and merge it. Your server should respond accord
 ## Working with deployments
 
 With our server in place, the code being reviewed, and our pull request
-is merged, we want our project to be deployed to the production server.
+merged, we want our project to be deployed.
 
 We'll start by modifying our event listener to process pull requests when they're
 merged, and start paying attention to deployments:
@@ -167,7 +167,7 @@ server we've built above. At GitHub, we:
 
 * Wait for a response on the state of the CI
 * If the code is green, we merge the pull request
-* Heaven takes the merged code, and deploys it to our production servers
+* Heaven takes the merged code, and deploys it to our production and staging servers
 * In the meantime, Heaven also notifies everyone about the build, via [Hubot][hubot] sitting in our chat rooms
 
 That's it! You don't need to build your own CI or deployment setup to use this example.

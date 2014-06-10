@@ -111,12 +111,14 @@ covers the entire API.
 * [GitHub API][github-api]
 * [GitHub Kohana Module][kohana]
 * [GitHub Joomla! Package][joomla]
+* [Github Nette Extension][kdyby-github]
 
 [github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
 [github-api]: https://github.com/yiiext/github-api
 [kohana]: https://github.com/acoulton/github_v3_api
 [joomla]: https://github.com/joomla/joomla-framework
+[kdyby-github]: https://github.com/kdyby/github
 
 ## Python
 

@@ -41,7 +41,11 @@ task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
   sh "nanoc compile"
 
   # save precious files
-  `git checkout gh-pages`
+  if ENV['IS_HEROKU']
+    `git checkout origin/gh-pages`
+  else
+    `git checkout gh-pages`
+  end
   tmpdir = Dir.mktmpdir
   FileUtils.cp_r("enterprise", tmpdir)
   FileUtils.cp("robots.txt", tmpdir)

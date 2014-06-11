@@ -97,21 +97,14 @@ Users with pull access can view deployments for a repository:
 
 ## Create a Deployment
 
-If your repository is taking advantage of [commit statuses](/v3/repos/statuses),
-the API will reject requests that do not have a successful [combined
-status.](/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref) (Your
-repository is not required to use commit statuses. If no commit statuses are
-present, the deployment will always be created.)
-
-The `force` parameter can be used when you really just need a deployment to go
-out. In these cases, all checks are bypassed, and the deployment is created for
-the ref.
 
 The `auto_merge` parameter is used to ensure that the requested ref is not
 behind the repository's default branch. If the ref *is* behind the default
 branch for the repository, we will attempt to merge it for you. If the merge
 succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.
+
+By default, [commit statuses](/v3/repos/statuses) for every submitted context must be in a 'success' state. The `required_contexts` parameter allows you to specify a subset of contexts that must be "success", or to specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do not require any contexts or create any commit statuses, the deployment will always succeed.
 
 The `payload` parameter is available for any extra information that a
 deployment system might need. It is a JSON text field that will be passed on
@@ -126,13 +119,16 @@ Users with push access can create a deployment for a given ref:
 Name | Type | Description
 -----|------|--------------
 `ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
-`force`|`boolean`| Optional parameter to bypass any ahead/behind checks or commit status checks. Default: `false`
+`auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: `true`
+`required_contexts`|`Array`| Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts.
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`
 `environment`|`string` | Optional name for the target deployment environment (e.g., production, staging, qa). Default: `"production"`
-`auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: `false`
 `description`|`string` | Optional short description. Default: `""`
 
-#### Example
+#### Simple Example
+
+A simple example putting the user and room into the payload to notify back to
+chat networks.
 
 <%= json \
   :ref           => "topic-branch",
@@ -143,6 +139,23 @@ Name | Type | Description
 <%= headers 201,
       :Location =>
 'https://api.github.com/repos/octocat/example/deployments/1' %>
+<%= json :deployment %>
+
+#### Advanced Example
+
+A more advanced example specifying required commit statuses and bypassing auto-merging.
+
+<%= json \
+  :ref               => "topic-branch",
+  :auto_merge        => false,
+  :payload           => "{\"user\":\"atmos\",\"room_id\":123456}",
+  :description       => "Deploying my sweet branch",
+  :required_contexts => ["ci/janky", "security/brakeman"]
+%>
+
+<%= headers 201,
+      :Location =>
+'https://api.github.com/repos/octocat/example/deployments/2' %>
 <%= json :deployment %>
 
 ## Update a Deployment

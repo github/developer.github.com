@@ -38,7 +38,7 @@ Name | Type | Description
 `state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
 `target_url`|`string` | The target URL to associate with this status.  This URL will be linked from the GitHub UI to allow users to easily see the 'source' of the Status.<br/>For example, if your Continuous Integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:<br/>`http://ci.example.com/user/repo/build/sha`.
 `description`|`string` | A short description of the status.
-`context`|`string` | A string label to differentiate this status from the status of other systems.
+`context`|`string` | A string label to differentiate this status from the status of other systems. Default: `"default"`
 
 #### Example
 

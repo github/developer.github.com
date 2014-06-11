@@ -239,6 +239,8 @@ The `q` search term can also contain any combination of the supported issue sear
    Filters issues based on date of creation, or when they were last updated.
  * [`merged`](https://help.github.com/articles/searching-issues#merged)
    Filters pull requests based on the date when they were merged.
+ * [`closed`](https://help.github.com/articles/searching-issues#closed)
+   Filters issues based on the date when they were closed.
  * [`comments`](https://help.github.com/articles/searching-issues#comments)
    Filters issues based on the quantity of comments.
  * [`user` or `repo`](https://help.github.com/articles/searching-issues#users-organizations-and-repositories)

@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Improved CI support for the Deployments API
-created_at: 2014-06-03
+created_at: 2014-06-11
 author_name: atmos
 ---
 

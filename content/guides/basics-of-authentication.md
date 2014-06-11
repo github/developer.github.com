@@ -11,8 +11,9 @@ In this section, we're going to focus on the basics of authentication. Specifica
 we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements
 the [web flow][webflow] of an application in several different ways.
 
-Note: you can download the complete source code for this project
-[from the platform-samples repo][platform samples].
+<div class="alert">
+	<p>You can download the complete source code for this project <a href="https://github.com/github/platform-samples/tree/master/api/">from the platform-samples repo</a>.</p>
+</div>
 
 ## Registering your app
 

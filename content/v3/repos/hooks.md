@@ -33,7 +33,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
     POST /repos/:owner/:repo/hooks
 
-**Note**: Services other than the `web` service can have at most one hook configured for a repository. Creating hooks for a service that already has a hook configured will [update the existing hook](#edit-a-hook). The `web` service can have multiple hooks configured for a repository.
+**Note**: Repositories can have more than one webhook configured, but all other services can have at most one configuration. Creating hooks for a service that already has one configured will [update the existing hook](#edit-a-hook).
 
 ### Parameters
 
@@ -46,17 +46,14 @@ Name | Type | Description
 
 #### Example
 
-The ["web" service hook](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11)
-takes these fields in the `config`:
+To create [a webhook](/webhooks), [the following fields are required](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11) by the `config`:
 
-Name | Type | Description
------|------|--------------
-`url`|`string` | **Required**. The URL to which the payloads will be delivered.
-`content_type`|`string` | The media type used to serialize the payloads. Supported values: `json` and `form`. Default: `form`.
-`secret`|`string` | If defined, then HTTP requests that deliver the payloads will include an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
-`insecure_ssl`|`string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values: `"0"` (verification is performed) and `"1"` (verification is not performed). Default: `"0"`.
+* `url`: A required string defining the URL to which the payloads will be delivered.
+* `content_type`: An optional string defining the media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+* `secret`: An optional string that's passed with the HTTP requests as an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+* `insecure_ssl`: An optional string that determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`.
 
-Here's how you can setup a hook that posts payloads in JSON format:
+Here's how you can create a hook that posts payloads in JSON format:
 
 <%= json \
       :name => "web",
@@ -135,7 +132,7 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
 ## Receiving Webhooks
 
-In order for GitHub to send Webhook payloads to your service, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.
+In order for GitHub to send webhook payloads, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.
 
 ### Webhook Headers
 

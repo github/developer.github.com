@@ -41,6 +41,38 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-06-11-improved-ci-support-for-deployments-api/">
+  <h2 class="title">
+  <a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 11, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos">
+      <a href="https://github.com/atmos">atmos</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today we’re making a few minor changes to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>. With the introduction of <a href="https://developer.github.com/changes/2014-03-27-combined-status-api/">combined statuses</a> in a <a href="https://developer.github.com/changes/2014-04-10-deployment-api-preview-extension/">recent update</a>, we noticed a few inconsistencies with the API that we’d like to remedy.</p>
+
+<p>We’re introducing a new parameter called <code>required_contexts</code>. This parameter accepts an array of named <a href="https://developer.github.com/v3/repos/statuses/">commit status</a> contexts that are ensured to be in a “success” state before the deployment is created. This allows you to verify that more than one system verified your code before you deploy it.</p>
+
+<p>We’ve removed support for the <code>force</code> parameter. The force parameter existed to bypass both the auto-merge and commit status checks. The same behavior can now be accomplished by setting <code>auto_merge</code> and <code>required_contexts</code> appropriately.</p>
+
+<p>We’re also setting a context for all <a href="https://developer.github.com/v3/repos/statuses/">commit statuses</a>. If a commit status is created without a context, we’ll now set it to the string “default”.</p>
+
+<p>If you have any questions or concerns, <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">drop us a line</a>.</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">
   <h2 class="title">
   <a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events</a>
@@ -2215,38 +2247,6 @@ but we can’t wait to see what others can do with this information.</p>
 
 </div>
 
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
-      <a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
-
-
-</div>
-
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
@@ -2295,6 +2295,38 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
 
 
 </div>
@@ -3400,6 +3432,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API<br /><span class="date">June 11, 2014</span></a></li>
+
   <li><a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events<br /><span class="date">June 9, 2014</span></a></li>
 
   <li><a href="/changes/2014-05-19-deployments-api-updates/">New attributes for the Deployments API<br /><span class="date">May 19, 2014</span></a></li>
@@ -3413,8 +3447,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type<br /><span class="date">April 22, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-10-deployment-api-preview-extension/">Extending the preview period for the Deployments API<br /><span class="date">April 10, 2014</span></a></li>
-
-  <li><a href="/changes/2014-04-09-reminder-about-default-media-type-change/">Reminder: Default media type will change on April 15<br /><span class="date">April 9, 2014</span></a></li>
 
 </ul>
 

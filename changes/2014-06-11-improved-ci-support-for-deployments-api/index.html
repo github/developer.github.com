@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Create, update, and delete individual files</title>
+  <title>Improved CI support for the Deployments API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,32 +40,35 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+      <div class="change" id="/changes/2014-06-11-improved-ci-support-for-deployments-api/">
 <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+  <a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    May 6, 2013
+    June 11, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel"/>
-      <a href="https://github.com/ymendel">ymendel</a>
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos"/>
+      <a href="https://github.com/atmos">atmos</a>
   </li>
 </ul>
 </div>
 
 
-<p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+<p>Today we’re making a few minor changes to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>. With the introduction of <a href="https://developer.github.com/changes/2014-03-27-combined-status-api/">combined statuses</a> in a <a href="https://developer.github.com/changes/2014-04-10-deployment-api-preview-extension/">recent update</a>, we noticed a few inconsistencies with the API that we’d like to remedy.</p>
 
-<p>Happy editing!</p>
+<p>We’re introducing a new parameter called <code>required_contexts</code>. This parameter accepts an array of named <a href="https://developer.github.com/v3/repos/statuses/">commit status</a> contexts that are ensured to be in a “success” state before the deployment is created. This allows you to verify that more than one system verified your code before you deploy it.</p>
+
+<p>We’ve removed support for the <code>force</code> parameter. The force parameter existed to bypass both the auto-merge and commit status checks. The same behavior can now be accomplished by setting <code>auto_merge</code> and <code>required_contexts</code> appropriately.</p>
+
+<p>We’re also setting a context for all <a href="https://developer.github.com/v3/repos/statuses/">commit statuses</a>. If a commit status is created without a context, we’ll now set it to the string “default”.</p>
+
+<p>If you have any questions or concerns, <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">drop us a line</a>.</p>
 
 
 </div>

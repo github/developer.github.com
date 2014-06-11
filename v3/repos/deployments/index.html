@@ -192,21 +192,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create-a-deployment">Create a Deployment</h2>
 
-<p>If your repository is taking advantage of <a href="/v3/repos/statuses">commit statuses</a>,
-the API will reject requests that do not have a successful <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">combined
-status.</a> (Your
-repository is not required to use commit statuses. If no commit statuses are
-present, the deployment will always be created.)</p>
-
-<p>The <code>force</code> parameter can be used when you really just need a deployment to go
-out. In these cases, all checks are bypassed, and the deployment is created for
-the ref.</p>
-
 <p>The <code>auto_merge</code> parameter is used to ensure that the requested ref is not
 behind the repository’s default branch. If the ref <em>is</em> behind the default
 branch for the repository, we will attempt to merge it for you. If the merge
 succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.</p>
+
+<p>By default, <a href="/v3/repos/statuses">commit statuses</a> for every submitted context must be in a ‘success’ state. The <code>required_contexts</code> parameter allows you to specify a subset of contexts that must be “success”, or to specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do not require any contexts or create any commit statuses, the deployment will always succeed.</p>
 
 <p>The <code>payload</code> parameter is available for any extra information that a
 deployment system might need. It is a JSON text field that will be passed on
@@ -235,10 +227,15 @@ when a deployment event is dispatched.</p>
 <strong>Required</strong>. The ref to deploy. This can be a branch, tag, or sha.</td>
     </tr>
     <tr>
-      <td><code>force</code></td>
+      <td><code>auto_merge</code></td>
       <td><code>boolean</code></td>
-      <td>Optional parameter to bypass any ahead/behind checks or commit status checks. Default: <code>false</code>
+      <td>Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: <code>true</code>
 </td>
+    </tr>
+    <tr>
+      <td><code>required_contexts</code></td>
+      <td><code>Array</code></td>
+      <td>Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts.</td>
     </tr>
     <tr>
       <td><code>payload</code></td>
@@ -253,12 +250,6 @@ when a deployment event is dispatched.</p>
 </td>
     </tr>
     <tr>
-      <td><code>auto_merge</code></td>
-      <td><code>boolean</code></td>
-      <td>Optional parameter to merge the default branch into the requested deployment branch if necessary. Default: <code>false</code>
-</td>
-    </tr>
-    <tr>
       <td><code>description</code></td>
       <td><code>string</code></td>
       <td>Optional short description. Default: <code>""</code>
@@ -267,7 +258,10 @@ when a deployment event is dispatched.</p>
   </tbody>
 </table>
 
-<h4 id="example">Example</h4>
+<h4 id="simple-example">Simple Example</h4>
+
+<p>A simple example putting the user and room into the payload to notify back to
+chat networks.</p>
 
 <pre><code class="language-javascript highlight"><span class="p">{</span>
   <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"topic-branch"</span><span class="p">,</span>
@@ -277,6 +271,60 @@ when a deployment event is dispatched.</p>
 
 <pre class="headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/octocat/example/deployments/1
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+  <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"deploy:migrate"</span>
+  <span class="p">},</span>
+  <span class="s2">"environment"</span><span class="p">:</span> <span class="s2">"production"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Deploy request from hubot"</span><span class="p">,</span>
+  <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">},</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+  <span class="s2">"statuses_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses"</span>
+<span class="p">}</span></code></pre>
+
+<h4 id="advanced-example">Advanced Example</h4>
+
+<p>A more advanced example specifying required commit statuses and bypassing auto-merging.</p>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"topic-branch"</span><span class="p">,</span>
+  <span class="s2">"auto_merge"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"payload"</span><span class="p">:</span> <span class="s2">"{\"user\":\"atmos\",\"room_id\":123456}"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Deploying my sweet branch"</span><span class="p">,</span>
+  <span class="s2">"required_contexts"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"ci/janky"</span><span class="p">,</span>
+    <span class="s2">"security/brakeman"</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/repos/octocat/example/deployments/2
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
@@ -427,7 +475,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   </tbody>
 </table>
 
-<h4 id="example-1">Example</h4>
+<h4 id="example">Example</h4>
 
 <pre><code class="language-javascript highlight"><span class="p">{</span>
   <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>

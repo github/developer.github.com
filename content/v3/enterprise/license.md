@@ -7,11 +7,9 @@ title: License | GitHub API
 * TOC
 {:toc}
 
-You can use the licensing API to get information on your Enterprise license.
+The License API provides information on your Enterprise license. *It is only available to site admins.* Normal users will receive a `404` response if they try to access it.
 
-Note: only admin users can access Enterprise API endpoints. Normal users will receive a `404` response if they try to access it.
-
-## Get licensing information
+## Get license information
 
 ### Request
 

@@ -1900,7 +1900,7 @@ module GitHub
     }
 
     INDEXING_SUCCESS = {
-      "message" => "Repository \"kansaichris/japaning\" has been added to the indexing queue"
+      "message" => "Repository 'kansaichris/japaning' has been added to the indexing queue"
     }
 
     CONFIG_STATUSES = [

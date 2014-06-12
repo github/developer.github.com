@@ -33,7 +33,7 @@ The following targets are available:
     :user/:repository/issues - index the issues for the repository
     :user/:repository/code   - index the source code for the repository
 
-You can also use a wildcard (*) in the `repository` field. If you do this, then the indexing action is performed for all repositories belonging to the user. For example:
+You can also use a wildcard (`*`) in the `repository` field. If you do this, then the indexing action is performed for all repositories belonging to the user. For example:
 
     :user/*        - indexes all of the user's repositories
     :user/*/issues - indexes all the issues for all of the user's repositories
@@ -50,7 +50,7 @@ You can also replace the user field with an organization to queue up reindex job
 ### Example
 
 <pre class="terminal">
-$ curl -u jwatson -X POST "http://[hostname]/api/v3/staff/indexing_jobs?target=jwatson%2Flaughing-robot"
+$ curl -u jwatson -X POST "http://<em>hostname</em>/api/v3/staff/indexing_jobs?target=jwatson%2Flaughing-robot"
 {
   "message": "Repository \"jwatson/laughing-robot\" has been added to the indexing queue"
 }

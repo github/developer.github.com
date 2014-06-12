@@ -48,6 +48,6 @@ Your Enterprise installation's API endpoints accept [the same authentication met
 [OAuth tokens]: /v3/oauth/
 [basic authentication]: /v3/#basic-authentication
 
-Enterprise-specific API endpoints ([Admin Stats][], [License][], [Search Indexing][], and [Management Console][]) are only accessible to GitHub Enterprise site admins.
+The [Admin Stats][], [License][], and [Search Indexing][] API endpoints are only accessible to GitHub Enterprise site admins. The [Management Console][] API endpoints are only accessible with a valid license file.
 
 [Authorizations API]: /v3/oauth_authorizations/#create-a-new-authorization

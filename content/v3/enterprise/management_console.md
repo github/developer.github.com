@@ -7,7 +7,7 @@ title: Management Console | GitHub API
 * TOC
 {:toc}
 
-The Management Console API helps you manage your GitHub Enterprise installation. *It is only available to site admins.* Normal users will receive a `404` response if they try to access it.
+The Management Console API helps you manage your GitHub Enterprise installation.
 
 ## Authentication
 

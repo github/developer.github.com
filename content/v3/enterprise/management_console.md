@@ -46,7 +46,7 @@ Name | Type | Description
 `package`|`string`|**Required**. The path to your *.ghp* license file.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
 
-You can find a list of the available settings at the "[Retrieve Current Settings][settings]" docs.
+For a list of the available settings, see [the `/setup/api/settings` endpoint](#retrieve-settings).
 
 ### Response
 

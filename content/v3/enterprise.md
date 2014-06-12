@@ -9,10 +9,10 @@ title: Enterprise | GitHub API
 
 GitHub Enterprise supports the same powerful API available on GitHub.com as well as its own set of API endpoints:
 
-- [Admin Stats][]
-- [License][]
-- [Search Indexing][]
-- [Management Console][]
+- Use the [Admin Stats][] API to get usage statistics
+- Use the [License][] API to get license information
+- Use the [Search Indexing][] API to queue up search indexing jobs
+- Use the [Management Console][] API to perform common administrative tasks
 
 [Admin Stats]: admin_stats/
 [License]: license/

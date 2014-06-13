@@ -1,54 +1,42 @@
 ---
-title: Management console | GitHub API
+title: Management Console | GitHub API
 ---
 
-# Management console
+# Management Console
 
 * TOC
 {:toc}
 
-You can use this API to manage your GitHub Enterprise installation. We've included some parameters, responses, and examples to help you understand and use the API to manage your Enterprise installation.
-
-Note: only admin users can access Enterprise API endpoints. Normal users will receive a `404` response if they try to access it.
-
-## Endpoint
-
-The Management Console API is a little different than the other Enterprise API endpoints. Requests to this API are sent to the following URL:
-
-<pre class="terminal">
-http://<em>hostname</em>/setup/api/
-</pre>
-
-`hostname` is the name of your Enterprise installation.
+The Management Console API helps you manage your GitHub Enterprise installation.
 
 ## Authentication
 
-Every call to this API needs to be authenticated. You must use [an MD5 hash](https://en.wikipedia.org/wiki/MD5#MD5_hashes) of your GHL license as an authentication token. On most systems, this is as simple as calling `md5sum` on the license file:
+You need to pass [an MD5 hash](https://en.wikipedia.org/wiki/MD5#MD5_hashes) of your license file as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-and-software-package-for-the-first-time). On most systems, you can get this hash by simply calling `md5sum` on the license file:
 
 <pre class="terminal">
 $ md5sum github-enterprise.ghl
 5d10ffffa442a336061daee294536234  github-enterprise.ghl
 </pre>
 
-This token can be sent with each request using the `license_md5` parameter. For example:
+You can use the `license_md5` parameter to send this token with each request. For example:
 
 <pre class="terminal">
 $ curl 'http://<em>hostname</em>/setup/api?license_md5=<em>md5-checksum-of-license</em>'
 </pre>
 
-You can also choose to send it via the standard HTTP basic authentication. For example:
+You can also use standard HTTP authentication to send this token. For example:
 
 <pre class="terminal">
 $ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api'
 </pre>
 
-The only time that you're not required to pass this token is when you're [uploading the license and package for the first time](#upload-license-and-package-for-the-first-time).
+## Upload a license and software package for the first time
 
-## Upload license and package for the first time
-
-Once the virtual machine is booted for the first time, you can use the API to upload the new license and package
+When you boot a virtual machine for the first time, you can use the following endpoint to upload a license and software package:
 
     POST /setup/api/start
+
+Note that you need to POST to [`/setup/api/configure`](#start-a-configuration-process) to start the actual configuration process.
 
 ### Parameters
 
@@ -58,7 +46,7 @@ Name | Type | Description
 `package`|`string`|**Required**. The path to your *.ghp* license file.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
 
-You can find a list of the available settings at the "[Retrieve Current Settings][settings]" docs.
+For a list of the available settings, see [the `/setup/api/settings` endpoint](#retrieve-settings).
 
 ### Response
 
@@ -73,94 +61,7 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/start' -F package=@<em>/path/to/package.ghp</em> -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
-## Configuration status
-
-Once the configuration process is running, you can check its status using
-this endpoint:
-
-    GET /setup/api/configcheck
-
-### Response
-
-<%= headers 200 %>
-<%= json(:config_statuses) %>
-
-The different statuses are:
-
-* `PENDING`: The job has not started yet.
-* `CONFIGURING`: The job is running.
-* `DONE`: The job has finished correctly.
-* `FAILED`: The job has finished unexpectedly.
-
-### Example
-
-<pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
-</pre>
-
-## Retrieve current settings
-
-    GET /setup/api/settings
-
-### Response
-
-<%= headers 200 %>
-<%= json(:fetch_settings) %>
-
-### Example
-
-<pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
-</pre>
-
-## Modify settings
-
-    PUT /setup/api/settings
-
-### Parameters
-
-Name | Type | Description
------|------|--------------
-`settings`|`string` | **Required**. A JSON string with the new settings.
-
-### Response
-
-<pre class="terminal">
-HTTP/1.1 204 No Content
-</pre>
-
-### Example
-
-<pre class="terminal">
-curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
-</pre>
-
-## Configuration processes
-
-This endpoint allows you to start a configuration process at any time:
-
-    POST /setup/api/configure
-
-### Parameters
-
-Name | Type | Description
------|------|--------------
-`complete`|`string` | An optional parameter which, if set to `1`, ensures that the process is executed completely. For example, if you are upgrading to a new version.
-
-### Response
-
-<pre class="terminal">
-HTTP/1.1 202 Accepted
-Location: http://hostname/setup/api/configcheck
-</pre>
-
-### Example
-
-<pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
-</pre>
-
-## Upgrade license or package
+## Upgrade a license or software package
 
 This API upgrades your license or package and also triggers the configuration process:
 
@@ -186,26 +87,96 @@ Location: http://hostname/setup/api/configcheck
 curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/upgrade' -F package=@<em>/path/to/package.ghp</em>
 </pre>
 
-## Check maintenance status
+## Start a configuration process
 
-Check your installation's maintenance status:
+This endpoint allows you to start a configuration process at any time:
 
-    GET /setup/api/maintenance
+    POST /setup/api/configure
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`complete`|`string` | An optional parameter which, if set to `1`, ensures that the process is executed completely. For example, if you are upgrading to a new version.
 
 ### Response
 
-<%= headers 200 %>
-<%= json(:check_maintenance_status) %>
+<pre class="terminal">
+HTTP/1.1 202 Accepted
+Location: http://hostname/setup/api/configcheck
+</pre>
 
 ### Example
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
 </pre>
 
-## Modify maintenance status
+## Check configuration status
 
-Modify your installation's maintenance status:
+Once the configuration process is running, you can check its status using
+this endpoint:
+
+    GET /setup/api/configcheck
+
+### Response
+
+<%= headers 200 %>
+<%= json(:config_statuses) %>
+
+The different statuses are:
+
+Status        | Description
+--------------|----------------------------------
+`PENDING`     | The job has not started yet
+`CONFIGURING` | The job is running
+`DONE`        | The job has finished correctly
+`FAILED`      | The job has finished unexpectedly
+
+### Example
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
+</pre>
+
+## Modify settings
+
+    PUT /setup/api/settings
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`settings`|`string` | **Required**. A JSON string with the new settings.
+
+### Response
+
+<pre class="terminal">
+HTTP/1.1 204 No Content
+</pre>
+
+### Example
+
+<pre class="terminal">
+curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
+</pre>
+
+## Retrieve settings
+
+    GET /setup/api/settings
+
+### Response
+
+<%= headers 200 %>
+<%= json(:fetch_settings) %>
+
+### Example
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
+</pre>
+
+## Enable or disable maintenance mode
 
     POST /setup/api/maintenance
 
@@ -232,19 +203,21 @@ The possible values for `when` are `now` or any date parseable by
 curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
 </pre>
 
-## Retrieve authorized SSH keys
+## Check maintenance status
 
-    GET /setup/api/settings/authorized-keys
+Check your installation's maintenance status:
+
+    GET /setup/api/maintenance
 
 ### Response
 
 <%= headers 200 %>
-<%= json(:get_authorized_ssh_keys) %>
+<%= json(:check_maintenance_status) %>
 
 ### Example
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
 ## Add a new authorized SSH key
@@ -289,4 +262,17 @@ Name | Type | Description
 curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
-[settings]: /v3/enterprise/management_console/#retrieve-current-settings
+## Retrieve authorized SSH keys
+
+    GET /setup/api/settings/authorized-keys
+
+### Response
+
+<%= headers 200 %>
+<%= json(:get_authorized_ssh_keys) %>
+
+### Example
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+</pre>

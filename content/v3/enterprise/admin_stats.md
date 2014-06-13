@@ -7,9 +7,7 @@ title: Admin Stats | GitHub API
 * TOC
 {:toc}
 
-The Admin Stats API is available to pull a variety of metrics about your installation.
-
-Note: only admin users can access Enterprise API endpoints. Normal users will receive a `404` response if they try to access it.
+The Admin Stats API provides a variety of metrics about your installation. *It is only available to site admins.* Normal users will receive a `404` response if they try to access it.
 
 ## Get statistics
 
@@ -19,19 +17,21 @@ Note: only admin users can access Enterprise API endpoints. Normal users will re
 
 There are a variety of types to choose from:
 
-* `all` - returns all available stats
-* `repos` - returns only repository-related stats
-* `hooks` - returns only hooks-related stats
-* `pages` - returns only pages-related stats
-* `orgs` - returns only organization-related stats
-* `users` - returns only user-related stats
-* `pulls` - returns only pull request-related stats
-* `issues` - returns only issue-related stats
-* `milestones` - returns only milestone-related stats
-* `gists` - returns only gist-related stats
-* `comments` - returns only comment-related stats
+Type         | Description
+-------------|-------------------------------------
+`issues`     | The number of open and closed issues
+`hooks`      | The number of active and inactive hooks
+`milestones` | The number of open and closed milestones
+`orgs`       | The number of organizations, teams, team members, and disabled organizations
+`comments`   | The number of comments on issues, pull requests, commits, and gists
+`pages`      | The number of GitHub Pages sites
+`users`      | The number of disabled and admin users
+`gists`      | The number of private and public gists
+`pulls`      | The number of merged, mergeable, and unmergeable pull requests
+`repos`      | The number of organization-owned repositories, root repositories, forks, pushed commits, and wikis.
+`all`        | All of the statistics listed above
 
-These stats are cached and update roughly every 10 minutes.
+These statistics are cached and will be updated approximately every 10 minutes.
 
 ### Response
 

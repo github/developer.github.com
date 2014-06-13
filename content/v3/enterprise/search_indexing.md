@@ -1,51 +1,40 @@
 ---
-title: Search indexing | GitHub API
+title: Search Indexing | GitHub API
 ---
 
-# Search indexing
+# Search Indexing
 
 * TOC
 {:toc}
 
-You can queue up a variety of search indexing tasks using these API endpoints.
+The Search Indexing API allows you to queue up a variety of search indexing tasks. *It is only available to site admins.* Normal users will receive a `404` response if they try to access it.
 
-Note: only admin users can access Enterprise API endpoints. Normal users will receive a `404` response if they try to access it.
-
-## Request an indexing job to be queued
+## Queue an indexing job
 
     POST /api/v3/staff/indexing_jobs
 
-
 ### Parameters
 
-Name | Type | Description
------|------|--------------
+Name    | Type    | Description
+--------|---------|--------------
 `target`|`string` | **Required**. A string representing the item to index.
 
-The job is expressed as a "target" consisting of a user, repository, and a job. The fields given will determine the type of indexing job performed.
+You can index the following targets (replace `:account` with the name of a user or organization account and `:repository` with the name of a repository):
 
-For example, if the target is `:user/:repository`, then the repository is indexed. If the target is just `:user`, then only the user is indexed.
-
-The following targets are available:
-
-    :user                    - index the "user"
-    :user/:repository        - index the repository
-    :user/:repository/issues - index the issues for the repository
-    :user/:repository/code   - index the source code for the repository
-
-You can also use a wildcard (`*`) in the `repository` field. If you do this, then the indexing action is performed for all repositories belonging to the user. For example:
-
-    :user/*        - indexes all of the user's repositories
-    :user/*/issues - indexes all the issues for all of the user's repositories
-    :user/*/code   - indexes the source code for all of the user's repositories
-
-You can also replace the user field with an organization to queue up reindex jobs for repositories belonging to that organization.
+Target                     | Description
+---------------------------|-------
+`:account`                    | A user or organization account
+`:account/:repository`        | A repository
+`:account/*`                  | All of a user or organization's repositories
+`:account/:repository/issues` | All the issues in a repository
+`:account/*/issues`           | All the issues in all of a user or organization's repositories
+`:account/:repository/code`   | All the source code in a repository
+`:account/*/code`             | All the source code in all of a user or organization's repositories
 
 ### Response
 
 <%= headers 202 %>
 <%= json(:indexing_success)  %>
-
 
 ### Example
 

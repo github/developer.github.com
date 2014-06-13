@@ -23,13 +23,13 @@ You can index the following targets (replace `:account` with the name of a user 
 
 Target                     | Description
 ---------------------------|-------
-`:account`                    | A user or organization account
-`:account/:repository`        | A repository
-`:account/*`                  | All of a user or organization's repositories
-`:account/:repository/issues` | All the issues in a repository
-`:account/*/issues`           | All the issues in all of a user or organization's repositories
-`:account/:repository/code`   | All the source code in a repository
-`:account/*/code`             | All the source code in all of a user or organization's repositories
+`:account`                    | A user or organization account.
+`:account/:repository`        | A repository.
+`:account/*`                  | All of a user or organization's repositories.
+`:account/:repository/issues` | All the issues in a repository.
+`:account/*/issues`           | All the issues in all of a user or organization's repositories.
+`:account/:repository/code`   | All the source code in a repository.
+`:account/*/code`             | All the source code in all of a user or organization's repositories.
 
 ### Response
 

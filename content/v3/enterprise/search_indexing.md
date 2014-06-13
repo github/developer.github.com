@@ -39,7 +39,7 @@ Target                     | Description
 ### Example
 
 <pre class="terminal">
-$ curl -u jwatson -X POST "http://[hostname]/api/v3/staff/indexing_jobs?target=jwatson%2Flaughing-robot"
+$ curl -u jwatson -X POST "http://<em>hostname</em>/api/v3/staff/indexing_jobs?target=jwatson%2Flaughing-robot"
 {
   "message": "Repository \"jwatson/laughing-robot\" has been added to the indexing queue"
 }

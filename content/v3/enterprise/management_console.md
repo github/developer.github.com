@@ -139,6 +139,21 @@ Status        | Description
 curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
 </pre>
 
+## Retrieve settings
+
+    GET /setup/api/settings
+
+### Response
+
+<%= headers 200 %>
+<%= json(:fetch_settings) %>
+
+### Example
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
+</pre>
+
 ## Modify settings
 
     PUT /setup/api/settings
@@ -159,21 +174,6 @@ HTTP/1.1 204 No Content
 
 <pre class="terminal">
 curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
-</pre>
-
-## Retrieve settings
-
-    GET /setup/api/settings
-
-### Response
-
-<%= headers 200 %>
-<%= json(:fetch_settings) %>
-
-### Example
-
-<pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
 </pre>
 
 ## Enable or disable maintenance mode

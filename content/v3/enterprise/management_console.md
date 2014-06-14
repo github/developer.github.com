@@ -220,6 +220,21 @@ Check your installation's maintenance status:
 curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
+## Retrieve authorized SSH keys
+
+    GET /setup/api/settings/authorized-keys
+
+### Response
+
+<%= headers 200 %>
+<%= json(:get_authorized_ssh_keys) %>
+
+### Example
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+</pre>
+
 ## Add a new authorized SSH key
 
     POST /setup/api/settings/authorized-keys
@@ -260,19 +275,4 @@ Name | Type | Description
 
 <pre class="terminal">
 curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
-</pre>
-
-## Retrieve authorized SSH keys
-
-    GET /setup/api/settings/authorized-keys
-
-### Response
-
-<%= headers 200 %>
-<%= json(:get_authorized_ssh_keys) %>
-
-### Example
-
-<pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
 </pre>

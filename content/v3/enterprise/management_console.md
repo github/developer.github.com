@@ -87,31 +87,6 @@ Location: http://hostname/setup/api/configcheck
 curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/upgrade' -F package=@<em>/path/to/package.ghp</em>
 </pre>
 
-## Start a configuration process
-
-This endpoint allows you to start a configuration process at any time:
-
-    POST /setup/api/configure
-
-### Parameters
-
-Name | Type | Description
------|------|--------------
-`complete`|`string` | An optional parameter which, if set to `1`, ensures that the process is executed completely. For example, if you are upgrading to a new version.
-
-### Response
-
-<pre class="terminal">
-HTTP/1.1 202 Accepted
-Location: http://hostname/setup/api/configcheck
-</pre>
-
-### Example
-
-<pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
-</pre>
-
 ## Check configuration status
 
 Once the configuration process is running, you can check its status using
@@ -137,6 +112,31 @@ Status        | Description
 
 <pre class="terminal">
 curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
+</pre>
+
+## Start a configuration process
+
+This endpoint allows you to start a configuration process at any time:
+
+    POST /setup/api/configure
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`complete`|`string` | An optional parameter which, if set to `1`, ensures that the process is executed completely. For example, if you are upgrading to a new version.
+
+### Response
+
+<pre class="terminal">
+HTTP/1.1 202 Accepted
+Location: http://hostname/setup/api/configcheck
+</pre>
+
+### Example
+
+<pre class="terminal">
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
 </pre>
 
 ## Retrieve settings

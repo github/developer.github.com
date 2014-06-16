@@ -2021,6 +2021,13 @@ module GitHub
           "server" => "",
           "protocol_name" => "TCP"
         },
+        "assets" => {
+          "storage" => "file",
+          "bucket" => nil,
+          "host_name" => nil,
+          "key_id" => nil,
+          "access_key" => nil
+        },
         "pages" => {
           "enabled" => true
         },

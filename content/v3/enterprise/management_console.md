@@ -176,6 +176,23 @@ HTTP/1.1 204 No Content
 curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
 </pre>
 
+## Check maintenance status
+
+Check your installation's maintenance status:
+
+    GET /setup/api/maintenance
+
+### Response
+
+<%= headers 200 %>
+<%= json(:check_maintenance_status) %>
+
+### Example
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
+</pre>
+
 ## Enable or disable maintenance mode
 
     POST /setup/api/maintenance
@@ -201,23 +218,6 @@ The possible values for `when` are `now` or any date parseable by
 
 <pre class="terminal">
 curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
-</pre>
-
-## Check maintenance status
-
-Check your installation's maintenance status:
-
-    GET /setup/api/maintenance
-
-### Response
-
-<%= headers 200 %>
-<%= json(:check_maintenance_status) %>
-
-### Example
-
-<pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
 ## Retrieve authorized SSH keys

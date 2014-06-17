@@ -1834,59 +1834,59 @@ module GitHub
     }
 
     ADMIN_STATS = {
-      "issues" =>  {
-        "total_issues" =>  610,
-        "closed_issues" =>  505,
-        "open_issues" =>  105
+      "repos" =>  {
+        "total_repos" => 212,
+        "root_repos" => 194,
+        "fork_repos" => 18,
+        "org_repos" => 51,
+        "total_pushes" => 3082,
+        "total_wikis" => 15
       },
       "hooks" =>  {
-        "total_hooks" =>  0,
-        "active_hooks" =>  0,
-        "inactive_hooks" =>  0
-      },
-      "milestones" =>  {
-        "closed_milestones" =>  7,
-        "open_milestones" =>  4,
-        "total_milestones" =>  11
-      },
-      "orgs" =>  {
-        "total_team_members" =>  232,
-        "disabled_orgs" =>  0,
-        "total_orgs" =>  17,
-        "total_teams" =>  32
-      },
-      "comments" =>  {
-        "total_gist_comments" =>  0,
-        "total_commit_comments" =>  80,
-        "total_pull_request_comments" =>  47,
-        "total_issue_comments" =>  1166
+        "total_hooks" => 27,
+        "active_hooks" => 23,
+        "inactive_hooks" => 4
       },
       "pages" =>  {
-        "total_pages" =>  3
+        "total_pages" => 36
+      },
+      "orgs" =>  {
+        "total_orgs" => 33,
+        "disabled_orgs" => 0,
+        "total_teams" => 60,
+        "total_team_members" => 314
       },
       "users" =>  {
-        "disabled_user" =>  0,
-        "admin_users" =>  48,
-        "total_users" =>  507
-      },
-      "gists" =>  {
-        "private_gists" =>  0,
-        "public_gists" =>  0,
-        "total_gists" =>  0
+        "total_users" => 254,
+        "admin_users" => 45,
+        "suspended_users" => 21
       },
       "pulls" =>  {
-        "mergeable_pulls" =>  38,
-        "merged_pulls" =>  178,
-        "unmergeable_pulls" =>  11,
-        "total_pulls" =>  250
+        "total_pulls" => 86,
+        "merged_pulls" => 60,
+        "mergeable_pulls" => 21,
+        "unmergeable_pulls" => 3,
       },
-      "repos" =>  {
-        "fork_repos" =>  7,
-        "root_repos" =>  153,
-        "total_repos" =>  153,
-        "total_pushes" =>  0,
-        "org_repos" =>  17,
-        "total_wikis" =>  0
+      "issues" =>  {
+        "total_issues" => 179,
+        "closed_issues" => 83,
+        "open_issues" => 96
+      },
+      "milestones" =>  {
+        "total_milestones" => 7,
+        "closed_milestones" => 6,
+        "open_milestones" => 1
+      },
+      "gists" =>  {
+        "total_gists" => 178,
+        "private_gists" => 151,
+        "public_gists" => 25
+      },
+      "comments" =>  {
+        "total_commit_comments" => 6,
+        "total_gist_comments" => 28,
+        "total_issue_comments" => 366,
+        "total_pull_request_comments" => 30
       }
     }
 

@@ -1945,7 +1945,7 @@ module GitHub
         },
         "customer" => {
           "name" => "GitHub",
-          "email" => "lee@github.com",
+          "email" => "stannis@themannis.biz",
           "uuid" => "af6cac80-e4e1-012e-d822-1231380e52e9",
           "secret_key_data" => "-----BEGIN PGP PRIVATE KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nlQcYBE5TCgsBEACk4yHpUcapplebaumBMXYMiLF+nCQ0lxpx...\n-----END PGP PRIVATE KEY BLOCK-----\n",
           "public_key_data" => "-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nmI0ETqzZYgEEALSe6snowdenXyqvLfSQ34HWD6C7....\n-----END PGP PUBLIC KEY BLOCK-----\n"

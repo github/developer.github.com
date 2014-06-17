@@ -19,17 +19,17 @@ Name    | Type    | Description
 --------|---------|--------------
 `target`|`string` | **Required**. A string representing the item to index.
 
-You can index the following targets (replace `:account` with the name of a user or organization account and `:repository` with the name of a repository):
+You can index the following targets (replace `:owner` with the name of a user or organization account and `:repository` with the name of a repository):
 
-Target                     | Description
----------------------------|-------
-`:account`                    | A user or organization account.
-`:account/:repository`        | A repository.
-`:account/*`                  | All of a user or organization's repositories.
-`:account/:repository/issues` | All the issues in a repository.
-`:account/*/issues`           | All the issues in all of a user or organization's repositories.
-`:account/:repository/code`   | All the source code in a repository.
-`:account/*/code`             | All the source code in all of a user or organization's repositories.
+Target                      | Description
+----------------------------|---------------------------------------------------------------------
+`:owner`                    | A user or organization account.
+`:owner/:repository`        | A repository.
+`:owner/*`                  | All of a user or organization's repositories.
+`:owner/:repository/issues` | All the issues in a repository.
+`:owner/*/issues`           | All the issues in all of a user or organization's repositories.
+`:owner/:repository/code`   | All the source code in a repository.
+`:owner/*/code`             | All the source code in all of a user or organization's repositories.
 
 ### Response
 

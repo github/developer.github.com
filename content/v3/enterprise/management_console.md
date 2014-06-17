@@ -89,10 +89,12 @@ curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/
 
 ## Check configuration status
 
-Once the configuration process is running, you can check its status using
-this endpoint:
+This endpoint allows you to check the status of the most recent configuration process:
 
     GET /setup/api/configcheck
+
+Note that you may need to wait several seconds after you start a process before you can
+check its status.
 
 ### Response
 

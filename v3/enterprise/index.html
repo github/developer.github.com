@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Rate Limit | GitHub API</title>
+  <title>Enterprise | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -51,65 +51,54 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="rate-limit">Rate Limit</h1>
+      <h1 id="enterprise">Enterprise</h1>
 
-<p>The overview documentation describes the <a href="/v3/#rate-limiting">rate limit rules</a>.
-You can check your current rate limit status at any time using the Rate Limit
-API described below.</p>
+<ul id="markdown-toc">
+  <li><a href="#endpoint-urls">Endpoint URLs</a></li>
+  <li><a href="#authentication">Authentication</a></li>
+</ul>
 
-<h2 id="get-your-current-rate-limit-status">Get your current rate limit status</h2>
+<p>GitHub Enterprise supports the same powerful API available on GitHub.com as well as its own set of API endpoints:</p>
 
-<p>Note: Accessing this endpoint does not count against your rate limit.</p>
+<ul>
+  <li>Use the <a href="admin_stats/">Admin Stats</a> API to get usage statistics</li>
+  <li>Use the <a href="license/">License</a> API to get license information</li>
+  <li>Use the <a href="search_indexing/">Search Indexing</a> API to queue up search indexing jobs</li>
+  <li>Use the <a href="management_console/">Management Console</a> API to perform common administrative tasks</li>
+</ul>
 
-<pre><code>GET /rate_limit
-</code></pre>
+<h2 id="endpoint-urls">Endpoint URLs</h2>
 
-<h3 id="response">Response</h3>
+<p>Every endpoint used by the GitHub API depends on your <code>hostname</code>, which is the name of your Enterprise installation.</p>
 
-<pre class="headers"><code>Status: 200 OK
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-X-RateLimit-Reset: 1372700873</code></pre>
+<p>Endpoints for the GitHub.com API and most of the Enterprise API start with the following URL:</p>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"resources"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"core"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
-      <span class="s2">"remaining"</span><span class="p">:</span> <span class="mi">4999</span><span class="p">,</span>
-      <span class="s2">"reset"</span><span class="p">:</span> <span class="mi">1372700873</span>
-    <span class="p">},</span>
-    <span class="s2">"search"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-      <span class="s2">"remaining"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-      <span class="s2">"reset"</span><span class="p">:</span> <span class="mi">1372697452</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="s2">"rate"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
-    <span class="s2">"remaining"</span><span class="p">:</span> <span class="mi">4999</span><span class="p">,</span>
-    <span class="s2">"reset"</span><span class="p">:</span> <span class="mi">1372700873</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
-<p><br></p>
+<pre class="terminal">
+http(s)://<em>hostname</em>/api/v3/
+</pre>
 
-<h4 id="understanding-your-rate-limit-status">Understanding Your Rate Limit Status</h4>
+<p>Endpoints for the <a href="search_indexing/">Search Indexing</a> API start with the following URL:</p>
 
-<p>The Search API has a <a href="/v3/search/#rate-limit">custom rate limit</a>, separate from
-the rate limit governing the rest of the API. For that reason, the response
-(shown above) categorizes your rate limit by resource. Within the <code>"resources"</code>
-hash, the <code>"search"</code> hash provides your rate limit status for the
-<a href="/v3/search">Search API</a>. The <code>"core"</code> hash provides your rate limit status for
-all the <em>rest</em> of the API.</p>
+<pre class="terminal">
+http(s)://<em>hostname</em>/api/v3/staff/
+</pre>
 
-<h4 id="deprecation-notice">Deprecation Notice</h4>
+<p>Endpoints for the <a href="management_console/">Management Console</a> API start with the following URL:</p>
 
-<p>The <code>"rate"</code> hash (shown at the bottom of the response above) is
-<a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for removal in the next
-version of the API.</p>
+<pre class="terminal">
+http(s)://<em>hostname</em>/setup/api/
+</pre>
 
-<p>If you’re writing new API client code (or updating your existing code), you
-should use the <code>"core"</code> hash instead of the <code>"rate"</code> hash. The <code>"core"</code> hash
-contains the same information that is present in the <code>"rate"</code> hash.</p>
+<h3 id="example">Example</h3>
+
+<p>If your Enterprise host name is <code>ghe.local</code>, a call to <a href="/v3/issues/">the Issues API</a> would be made to <code>https://ghe.local/api/v3/issues</code>.</p>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>Your Enterprise installation’s API endpoints accept <a href="http://developer.github.com/v3/#authentication">the same authentication methods</a> as the GitHub.com API. Specifically, you can authenticate yourself with <strong><a href="/v3/oauth/">OAuth tokens</a></strong> (which can be created using the <a href="/v3/oauth_authorizations/#create-a-new-authorization">Authorizations API</a>) or <strong><a href="/v3/#basic-authentication">basic authentication</a></strong>.</p>
+
+<p>The <a href="admin_stats/">Admin Stats</a>, <a href="license/">License</a>, and <a href="search_indexing/">Search Indexing</a> API endpoints are only accessible to GitHub Enterprise site admins. The <a href="management_console/">Management Console</a> API endpoints are accessible to anyone with a valid license file.</p>
+
 
     </div>
 

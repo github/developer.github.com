@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Rate Limit | GitHub API</title>
+  <title>Search Indexing | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -51,65 +51,98 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="rate-limit">Rate Limit</h1>
+      <h1 id="search-indexing">Search Indexing</h1>
 
-<p>The overview documentation describes the <a href="/v3/#rate-limiting">rate limit rules</a>.
-You can check your current rate limit status at any time using the Rate Limit
-API described below.</p>
+<ul id="markdown-toc">
+  <li><a href="#queue-an-indexing-job">Queue an indexing job</a></li>
+</ul>
 
-<h2 id="get-your-current-rate-limit-status">Get your current rate limit status</h2>
+<p>The Search Indexing API allows you to queue up a variety of search indexing tasks. <em>It is only available to site admins.</em> Normal users will receive a <code>404</code> response if they try to access it.</p>
 
-<p>Note: Accessing this endpoint does not count against your rate limit.</p>
+<h2 id="queue-an-indexing-job">Queue an indexing job</h2>
 
-<pre><code>GET /rate_limit
+<pre><code>POST /api/v3/staff/indexing_jobs
 </code></pre>
+
+<h3 id="parameters">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>target</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. A string representing the item to index.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You can index the following targets (replace <code>:owner</code> with the name of a user or organization account and <code>:repository</code> with the name of a repository):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Target</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>:owner</code></td>
+      <td>A user or organization account.</td>
+    </tr>
+    <tr>
+      <td><code>:owner/:repository</code></td>
+      <td>A repository.</td>
+    </tr>
+    <tr>
+      <td><code>:owner/*</code></td>
+      <td>All of a user or organization’s repositories.</td>
+    </tr>
+    <tr>
+      <td><code>:owner/:repository/issues</code></td>
+      <td>All the issues in a repository.</td>
+    </tr>
+    <tr>
+      <td><code>:owner/*/issues</code></td>
+      <td>All the issues in all of a user or organization’s repositories.</td>
+    </tr>
+    <tr>
+      <td><code>:owner/:repository/code</code></td>
+      <td>All the source code in a repository.</td>
+    </tr>
+    <tr>
+      <td><code>:owner/*/code</code></td>
+      <td>All the source code in all of a user or organization’s repositories.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="response">Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="headers no-response"><code>Status: 202 Accepted
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-X-RateLimit-Reset: 1372700873</code></pre>
+X-RateLimit-Remaining: 4999</code></pre>
 
 <pre><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"resources"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"core"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
-      <span class="s2">"remaining"</span><span class="p">:</span> <span class="mi">4999</span><span class="p">,</span>
-      <span class="s2">"reset"</span><span class="p">:</span> <span class="mi">1372700873</span>
-    <span class="p">},</span>
-    <span class="s2">"search"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-      <span class="s2">"remaining"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-      <span class="s2">"reset"</span><span class="p">:</span> <span class="mi">1372697452</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="s2">"rate"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
-    <span class="s2">"remaining"</span><span class="p">:</span> <span class="mi">4999</span><span class="p">,</span>
-    <span class="s2">"reset"</span><span class="p">:</span> <span class="mi">1372700873</span>
-  <span class="p">}</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Repository 'kansaichris/japaning' has been added to the indexing queue"</span>
 <span class="p">}</span></code></pre>
-<p><br></p>
 
-<h4 id="understanding-your-rate-limit-status">Understanding Your Rate Limit Status</h4>
+<h3 id="example">Example</h3>
 
-<p>The Search API has a <a href="/v3/search/#rate-limit">custom rate limit</a>, separate from
-the rate limit governing the rest of the API. For that reason, the response
-(shown above) categorizes your rate limit by resource. Within the <code>"resources"</code>
-hash, the <code>"search"</code> hash provides your rate limit status for the
-<a href="/v3/search">Search API</a>. The <code>"core"</code> hash provides your rate limit status for
-all the <em>rest</em> of the API.</p>
-
-<h4 id="deprecation-notice">Deprecation Notice</h4>
-
-<p>The <code>"rate"</code> hash (shown at the bottom of the response above) is
-<a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for removal in the next
-version of the API.</p>
-
-<p>If you’re writing new API client code (or updating your existing code), you
-should use the <code>"core"</code> hash instead of the <code>"rate"</code> hash. The <code>"core"</code> hash
-contains the same information that is present in the <code>"rate"</code> hash.</p>
+<pre class="terminal">
+$ curl -u jwatson -X POST "http://<em>hostname</em>/api/v3/staff/indexing_jobs?target=jwatson%2Flaughing-robot"
+{
+  "message": "Repository \"jwatson/laughing-robot\" has been added to the indexing queue"
+}
+</pre>
 
     </div>
 

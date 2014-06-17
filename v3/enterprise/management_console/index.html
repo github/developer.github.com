@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Management Console | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/js/jquery.js" type="text/javascript"></script>
+  <script src="/js/documentation.js" type="text/javascript"></script>
+</head>
+
+
+<body class="api">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/v3/" class="nav-api">API</a></li>
+        <li><a href="/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+
+  <div class="sub-nav">
+    <h2><a href="/v3/">API</a></h2>
+
+    <ul>
+      <li><a href="/v3/" class="active">Reference</a></li>
+      <li><a href="/webhooks/">Webhooks</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li><a href="/libraries/">Libraries</a></li>
+    </ul>
+  </div>
+
+  <div id="wrapper">
+    <div class="content">
+      <h1 id="management-console">Management Console</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#authentication">Authentication</a></li>
+  <li><a href="#upload-a-license-and-software-package-for-the-first-time">Upload a license and software package for the first time</a></li>
+  <li><a href="#upgrade-a-license-or-software-package">Upgrade a license or software package</a></li>
+  <li><a href="#check-configuration-status">Check configuration status</a></li>
+  <li><a href="#start-a-configuration-process">Start a configuration process</a></li>
+  <li><a href="#retrieve-settings">Retrieve settings</a></li>
+  <li><a href="#modify-settings">Modify settings</a></li>
+  <li><a href="#check-maintenance-status">Check maintenance status</a></li>
+  <li><a href="#enable-or-disable-maintenance-mode">Enable or disable maintenance mode</a></li>
+  <li><a href="#retrieve-authorized-ssh-keys">Retrieve authorized SSH keys</a></li>
+  <li><a href="#add-a-new-authorized-ssh-key">Add a new authorized SSH key</a></li>
+  <li><a href="#remove-an-authorized-ssh-key">Remove an authorized SSH key</a></li>
+</ul>
+
+<p>The Management Console API helps you manage your GitHub Enterprise installation.</p>
+
+<h2 id="authentication">Authentication</h2>
+
+<p>You need to pass <a href="https://en.wikipedia.org/wiki/MD5#MD5_hashes">an MD5 hash</a> of your license file as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-and-software-package-for-the-first-time"><code>/setup/api/start</code></a>. On most systems, you can get this hash by simply calling <code>md5sum</code> on the license file:</p>
+
+<pre class="terminal">
+$ md5sum github-enterprise.ghl
+5d10ffffa442a336061daee294536234  github-enterprise.ghl
+</pre>
+
+<p>You can use the <code>license_md5</code> parameter to send this token with each request. For example:</p>
+
+<pre class="terminal">
+$ curl 'http://<em>hostname</em>/setup/api?license_md5=<em>md5-checksum-of-license</em>'
+</pre>
+
+<p>You can also use standard HTTP authentication to send this token. For example:</p>
+
+<pre class="terminal">
+$ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api'
+</pre>
+
+<h2 id="upload-a-license-and-software-package-for-the-first-time">Upload a license and software package for the first time</h2>
+
+<p>When you boot a virtual machine for the first time, you can use the following endpoint to upload a license and software package:</p>
+
+<pre><code>POST /setup/api/start
+</code></pre>
+
+<p>Note that you need to POST to <a href="#start-a-configuration-process"><code>/setup/api/configure</code></a> to start the actual configuration process.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>license</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The content of your <em>.ghl</em> license file.</td>
+    </tr>
+    <tr>
+      <td><code>package</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The content of your <em>.ghp</em> package file.</td>
+    </tr>
+    <tr>
+      <td><code>settings</code></td>
+      <td><code>string</code></td>
+      <td>Optional path to a JSON file containing your installation settings.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For a list of the available settings, see <a href="#retrieve-settings">the <code>/setup/api/settings</code> endpoint</a>.</p>
+
+<h3 id="response">Response</h3>
+
+<pre class="terminal">
+HTTP/1.1 202 Created
+Location: http://<em>hostname</em>/setup/api/configcheck
+</pre>
+
+<h3 id="example">Example</h3>
+
+<pre class="terminal">
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/start' -F package=@<em>/path/to/package.ghp</em> -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+</pre>
+
+<h2 id="upgrade-a-license-or-software-package">Upgrade a license or software package</h2>
+
+<p>This API upgrades your license or package and also triggers the configuration process:</p>
+
+<pre><code>POST /setup/api/upgrade
+</code></pre>
+
+<h3 id="parameters-1">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>license</code></td>
+      <td><code>string</code></td>
+      <td>The content of your new <em>.ghl</em> license file.</td>
+    </tr>
+    <tr>
+      <td><code>package</code></td>
+      <td><code>string</code></td>
+      <td>The content of your new <em>.ghp</em> package file.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="terminal">
+HTTP/1.1 202 Accepted
+Location: http://hostname/setup/api/configcheck
+</pre>
+
+<h3 id="example-1">Example</h3>
+
+<pre class="terminal">
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/upgrade' -F package=@<em>/path/to/package.ghp</em>
+</pre>
+
+<h2 id="check-configuration-status">Check configuration status</h2>
+
+<p>This endpoint allows you to check the status of the most recent configuration process:</p>
+
+<pre><code>GET /setup/api/configcheck
+</code></pre>
+
+<p>Note that you may need to wait several seconds after you start a process before you can
+check its status.</p>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="s2">"progress"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"DONE"</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Appliance core components"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"DONE"</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"GitHub utilities"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"DONE"</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"GitHub applications"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CONFIGURING"</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"GitHub services"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"PENDING"</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Reloading appliance services"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<p>The different statuses are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>PENDING</code></td>
+      <td>The job has not started yet</td>
+    </tr>
+    <tr>
+      <td><code>CONFIGURING</code></td>
+      <td>The job is running</td>
+    </tr>
+    <tr>
+      <td><code>DONE</code></td>
+      <td>The job has finished correctly</td>
+    </tr>
+    <tr>
+      <td><code>FAILED</code></td>
+      <td>The job has finished unexpectedly</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="example-2">Example</h3>
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
+</pre>
+
+<h2 id="start-a-configuration-process">Start a configuration process</h2>
+
+<p>This endpoint allows you to start a configuration process at any time:</p>
+
+<pre><code>POST /setup/api/configure
+</code></pre>
+
+<h3 id="parameters-2">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>complete</code></td>
+      <td><code>string</code></td>
+      <td>An optional parameter which, if set to <code>1</code>, ensures that the process is executed completely by running through the entire provisioning process. This can take up to twenty minutes to finish.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Note</strong>: Typically, you wouldn’t need to set <code>complete</code> to <code>1</code> if you’re just updating your settings. Upgrades should <em>always</em> be full runs.</p>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="terminal">
+HTTP/1.1 202 Accepted
+Location: http://hostname/setup/api/configcheck
+</pre>
+
+<h3 id="example-3">Example</h3>
+
+<pre class="terminal">
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
+</pre>
+
+<h2 id="retrieve-settings">Retrieve settings</h2>
+
+<pre><code>GET /setup/api/settings
+</code></pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"enterprise"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"private_mode"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"github_hostname"</span><span class="p">:</span> <span class="s2">"ghe.local"</span><span class="p">,</span>
+    <span class="s2">"auth_mode"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+    <span class="s2">"storage_mode"</span><span class="p">:</span> <span class="s2">"rootfs"</span><span class="p">,</span>
+    <span class="s2">"admin_password"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"configuration_id"</span><span class="p">:</span> <span class="mi">1401777404</span><span class="p">,</span>
+    <span class="s2">"configuration_run_count"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"11.10.332"</span><span class="p">,</span>
+    <span class="s2">"avatar"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"uri"</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">},</span>
+    <span class="s2">"customer"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"stannis@themannis.biz"</span><span class="p">,</span>
+      <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"af6cac80-e4e1-012e-d822-1231380e52e9"</span><span class="p">,</span>
+      <span class="s2">"secret_key_data"</span><span class="p">:</span> <span class="s2">"-----BEGIN PGP PRIVATE KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nlQcYBE5TCgsBEACk4yHpUcapplebaumBMXYMiLF+nCQ0lxpx...\n-----END PGP PRIVATE KEY BLOCK-----\n"</span><span class="p">,</span>
+      <span class="s2">"public_key_data"</span><span class="p">:</span> <span class="s2">"-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nmI0ETqzZYgEEALSe6snowdenXyqvLfSQ34HWD6C7....\n-----END PGP PUBLIC KEY BLOCK-----\n"</span>
+    <span class="p">},</span>
+    <span class="s2">"license"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"seats"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"evaluation"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"expire_at"</span><span class="p">:</span> <span class="s2">"2015-04-27T00:00:00-07:00"</span><span class="p">,</span>
+      <span class="s2">"perpetual"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"unlimited_seating"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="s2">"support_key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3N...."</span><span class="p">,</span>
+      <span class="s2">"ssh_allowed"</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="s2">"github_ssl"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"cert"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="p">},</span>
+    <span class="s2">"ldap"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"host"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"port"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"base"</span><span class="p">:</span> <span class="p">[</span>
+
+      <span class="p">],</span>
+      <span class="s2">"uid"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"bind_dn"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"password"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"Plain"</span><span class="p">,</span>
+      <span class="s2">"user_groups"</span><span class="p">:</span> <span class="p">[</span>
+
+      <span class="p">],</span>
+      <span class="s2">"admin_group"</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">},</span>
+    <span class="s2">"cas"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">},</span>
+    <span class="s2">"github_oauth"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"12313412"</span><span class="p">,</span>
+      <span class="s2">"client_secret"</span><span class="p">:</span> <span class="s2">"kj123131132"</span><span class="p">,</span>
+      <span class="s2">"organization_name"</span><span class="p">:</span> <span class="s2">"Homestar Runners"</span><span class="p">,</span>
+      <span class="s2">"organization_team"</span><span class="p">:</span> <span class="s2">"homestarrunners/owners"</span>
+    <span class="p">},</span>
+    <span class="s2">"smtp"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"smtp.example.com"</span><span class="p">,</span>
+      <span class="s2">"authentication"</span><span class="p">:</span> <span class="s2">"plain"</span><span class="p">,</span>
+      <span class="s2">"port"</span><span class="p">:</span> <span class="s2">"1234"</span><span class="p">,</span>
+      <span class="s2">"domain"</span><span class="p">:</span> <span class="s2">"blah"</span><span class="p">,</span>
+      <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span>
+      <span class="s2">"user_name"</span><span class="p">:</span> <span class="s2">"mr_foo"</span><span class="p">,</span>
+      <span class="s2">"enable_starttls_auto"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"bar"</span><span class="p">,</span>
+      <span class="s2">"support_address"</span><span class="p">:</span> <span class="s2">"enterprise@github.com"</span><span class="p">,</span>
+      <span class="s2">"noreply_address"</span><span class="p">:</span> <span class="s2">"noreply@github.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"dns"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"primary_nameserver"</span><span class="p">:</span> <span class="s2">"8.8.8.8"</span><span class="p">,</span>
+      <span class="s2">"secondary_nameserver"</span><span class="p">:</span> <span class="s2">"8.8.4.4"</span>
+    <span class="p">},</span>
+    <span class="s2">"ntp"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"primary_server"</span><span class="p">:</span> <span class="s2">"0.ubuntu.pool.ntp.org"</span><span class="p">,</span>
+      <span class="s2">"secondary_server"</span><span class="p">:</span> <span class="s2">"1.ubuntu.pool.ntp.org"</span>
+    <span class="p">},</span>
+    <span class="s2">"timezone"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"identifier"</span><span class="p">:</span> <span class="s2">"UTC"</span>
+    <span class="p">},</span>
+    <span class="s2">"device"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/dev/xyz"</span>
+    <span class="p">},</span>
+    <span class="s2">"snmp"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"community"</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">},</span>
+    <span class="s2">"rsyslog"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"server"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"protocol_name"</span><span class="p">:</span> <span class="s2">"TCP"</span>
+    <span class="p">},</span>
+    <span class="s2">"assets"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"storage"</span><span class="p">:</span> <span class="s2">"file"</span><span class="p">,</span>
+      <span class="s2">"bucket"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="s2">"host_name"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="s2">"key_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="s2">"access_key"</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="p">},</span>
+    <span class="s2">"pages"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="s2">"collectd"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"server"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"port"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"encryption"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span>
+      <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"bar"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"run_list"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"role[configure]"</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="example-4">Example</h3>
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
+</pre>
+
+<h2 id="modify-settings">Modify settings</h2>
+
+<pre><code>PUT /setup/api/settings
+</code></pre>
+
+<h3 id="parameters-3">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>settings</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. A JSON string with the new settings.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="terminal">
+HTTP/1.1 204 No Content
+</pre>
+
+<h3 id="example-5">Example</h3>
+
+<pre class="terminal">
+curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
+</pre>
+
+<h2 id="check-maintenance-status">Check maintenance status</h2>
+
+<p>Check your installation’s maintenance status:</p>
+
+<pre><code>GET /setup/api/maintenance
+</code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"scheduled"</span><span class="p">,</span>
+  <span class="s2">"scheduled_time"</span><span class="p">:</span> <span class="s2">"Tuesday, January 22 at 15 =&gt; 34 -0800"</span><span class="p">,</span>
+  <span class="s2">"connection_services"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"git operations"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mysql queries"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">233</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"resque jobs"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">54</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="example-6">Example</h3>
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
+</pre>
+
+<h2 id="enable-or-disable-maintenance-mode">Enable or disable maintenance mode</h2>
+
+<pre><code>POST /setup/api/maintenance
+</code></pre>
+
+<h3 id="parameters-4">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>maintenance</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. A JSON string with the attributes <code>enabled</code> and <code>when</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The possible values for <code>enabled</code> are <code>true</code> and <code>false</code>. When it’s <code>false</code>,
+the attribute <code>when</code> is ignored and the maintenance mode is turned off. <code>when</code> defines the time period when the maintenance was enabled.</p>
+
+<p>The possible values for <code>when</code> are <code>now</code> or any date parseable by
+<a href="https://github.com/mojombo/chronic">mojombo/chronic</a>.</p>
+
+<h3 id="response-7">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"scheduled"</span><span class="p">,</span>
+  <span class="s2">"scheduled_time"</span><span class="p">:</span> <span class="s2">"Tuesday, January 22 at 15 =&gt; 34 -0800"</span><span class="p">,</span>
+  <span class="s2">"connection_services"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"git operations"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mysql queries"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">233</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"resque jobs"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">54</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="example-7">Example</h3>
+
+<pre class="terminal">
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
+</pre>
+
+<h2 id="retrieve-authorized-ssh-keys">Retrieve authorized SSH keys</h2>
+
+<pre><code>GET /setup/api/settings/authorized-keys
+</code></pre>
+
+<h3 id="response-8">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
+    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
+    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="example-8">Example</h3>
+
+<pre class="terminal">
+curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+</pre>
+
+<h2 id="add-a-new-authorized-ssh-key">Add a new authorized SSH key</h2>
+
+<pre><code>POST /setup/api/settings/authorized-keys
+</code></pre>
+
+<h3 id="parameters-5">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>authorized_key</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The path to the public SSH key.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-9">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
+    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
+    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
+    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="example-9">Example</h3>
+
+<pre class="terminal">
+curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+</pre>
+
+<h2 id="remove-an-authorized-ssh-key">Remove an authorized SSH key</h2>
+
+<pre><code>DELETE /setup/api/settings/authorized-keys
+</code></pre>
+
+<h3 id="parameters-6">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>authorized_key</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The path to the public SSH key.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-10">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
+    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
+    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="example-10">Example</h3>
+
+<pre class="terminal">
+curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+</pre>
+
+    </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+  <div class="js-toggle-list sidebar-module expandable">
+    <ul>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/media/">Media Types</a></li>
+          <li><a href="/v3/oauth/">OAuth</a></li>
+          <li><a href="/v3/oauth_authorizations/">OAuth Authorizations API</a></li>
+          <li><a href="/v3/auth/">Other Authentication Methods</a></li>
+          <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
+          <li><a href="/v3/versions/">Versions</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/activity/events/">Events</a></li>
+          <li><a href="/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/v3/activity/feeds/">Feeds</a></li>
+          <li><a href="/v3/activity/notifications/">Notifications</a></li>
+          <li><a href="/v3/activity/starring/">Starring</a></li>
+          <li><a href="/v3/activity/watching/">Watching</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/gists/">Gists</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/gists/comments/">Comments</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/git/">Git Data</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/git/blobs/">Blobs</a></li>
+          <li><a href="/v3/git/commits/">Commits</a></li>
+          <li><a href="/v3/git/refs/">References</a></li>
+          <li><a href="/v3/git/tags/">Tags</a></li>
+          <li><a href="/v3/git/trees/">Trees</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/issues/">Issues</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/issues/assignees/">Assignees</a></li>
+          <li><a href="/v3/issues/comments/">Comments</a></li>
+          <li><a href="/v3/issues/events/">Events</a></li>
+          <li><a href="/v3/issues/labels/">Labels</a></li>
+          <li><a href="/v3/issues/milestones/">Milestones</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/emojis/">Emojis</a></li>
+          <li><a href="/v3/gitignore/">Gitignore</a></li>
+          <li><a href="/v3/markdown/">Markdown</a></li>
+          <li><a href="/v3/meta/">Meta</a></li>
+          <li><a href="/v3/rate_limit/">Rate Limit</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/orgs/members/">Members</a></li>
+          <li><a href="/v3/orgs/teams/">Teams</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/pulls/">Pull Requests</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/repos/">Repositories</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
+          <li><a href="/v3/repos/comments/">Comments</a></li>
+          <li><a href="/v3/repos/commits/">Commits</a></li>
+          <li><a href="/v3/repos/contents/">Contents</a></li>
+          <li><a href="/v3/repos/keys/">Deploy Keys</a></li>
+          <li><a href="/v3/repos/deployments/">Deployments</a></li>
+          <li><a href="/v3/repos/downloads/">Downloads</a></li>
+          <li><a href="/v3/repos/forks/">Forks</a></li>
+          <li><a href="/v3/repos/hooks/">Hooks</a></li>
+          <li><a href="/v3/repos/merging/">Merging</a></li>
+          <li><a href="/v3/repos/pages/">Pages</a></li>
+          <li><a href="/v3/repos/releases/">Releases</a></li>
+          <li><a href="/v3/repos/statistics/">Statistics</a></li>
+          <li><a href="/v3/repos/statuses/">Statuses</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/search/">Search</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/search/#search-repositories">Repositories</a></li>
+          <li><a href="/v3/search/#search-code">Code</a></li>
+          <li><a href="/v3/search/#search-issues">Issues</a></li>
+          <li><a href="/v3/search/#search-users">Users</a></li>
+          <li><a href="/v3/search/legacy/">Legacy Search</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/users/">Users</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/users/emails/">Emails</a></li>
+          <li><a href="/v3/users/followers/">Followers</a></li>
+          <li><a href="/v3/users/keys/">Public Keys</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/v3/enterprise/license/">License</a></li>
+          <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div> <!-- /sidebar-module -->
+  <div class="sidebar-module notice">
+    <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+  </div>
+	<div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+</div><!-- /sidebar-shell -->
+
+  </div><!-- #wrapper -->
+
+    <div id="footer" >
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="http://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="http://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+    </div>
+
+  </div><!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

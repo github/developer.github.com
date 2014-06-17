@@ -25,7 +25,7 @@ Type         | Description
 `orgs`       | The number of organizations, teams, team members, and disabled organizations.
 `comments`   | The number of comments on issues, pull requests, commits, and gists.
 `pages`      | The number of GitHub Pages sites.
-`users`      | The number of disabled and admin users.
+`users`      | The number of suspended and admin users.
 `gists`      | The number of private and public gists.
 `pulls`      | The number of merged, mergeable, and unmergeable pull requests.
 `repos`      | The number of organization-owned repositories, root repositories, forks, pushed commits, and wikis.

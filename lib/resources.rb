@@ -1869,8 +1869,8 @@ module GitHub
       },
       "issues" =>  {
         "total_issues" => 179,
-        "closed_issues" => 83,
-        "open_issues" => 96
+        "open_issues" => 83,
+        "closed_issues" => 96
       },
       "milestones" =>  {
         "total_milestones" => 7,

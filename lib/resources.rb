@@ -1874,8 +1874,8 @@ module GitHub
       },
       "milestones" =>  {
         "total_milestones" => 7,
-        "closed_milestones" => 6,
-        "open_milestones" => 1
+        "open_milestones" => 6,
+        "closed_milestones" => 1
       },
       "gists" =>  {
         "total_gists" => 178,

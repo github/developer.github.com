@@ -1903,28 +1903,30 @@ module GitHub
       "message" => "Repository 'kansaichris/japaning' has been added to the indexing queue"
     }
 
-    CONFIG_STATUSES = [
-      {
-        "key" =>  "Appliance core components",
-        "status" =>  "DONE"
-      },
-      {
-        "key" =>  "GitHub utilities",
-        "status" =>  "DONE"
-      },
-      {
-        "key" =>  "GitHub applications",
-        "status" =>  "DONE"
-      },
-      {
-        "key" =>  "GitHub services",
-        "status" =>  "CONFIGURING"
-      },
-      {
-        "key" =>  "Reloading appliance services",
-        "status" =>  "PENDING"
-      }
-    ]
+    CONFIG_STATUSES =
+      "status" => "success",
+      "progress" => [
+        {
+          "status" =>  "DONE"
+          "key" =>  "Appliance core components",
+        },
+        {
+          "status" =>  "DONE"
+          "key" =>  "GitHub utilities",
+        },
+        {
+          "status" =>  "DONE"
+          "key" =>  "GitHub applications",
+        },
+        {
+          "status" =>  "CONFIGURING"
+          "key" =>  "GitHub services",
+        },
+        {
+          "status" =>  "PENDING"
+          "key" =>  "Reloading appliance services",
+        }
+      ]
 
     FETCH_SETTINGS = {
       "enterprise" => {

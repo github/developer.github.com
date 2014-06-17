@@ -1907,24 +1907,24 @@ module GitHub
       "status" => "success",
       "progress" => [
         {
-          "status" =>  "DONE"
-          "key" =>  "Appliance core components",
+          "status" =>  "DONE",
+          "key" =>  "Appliance core components"
         },
         {
-          "status" =>  "DONE"
-          "key" =>  "GitHub utilities",
+          "status" =>  "DONE",
+          "key" =>  "GitHub utilities"
         },
         {
-          "status" =>  "DONE"
-          "key" =>  "GitHub applications",
+          "status" =>  "DONE",
+          "key" =>  "GitHub applications"
         },
         {
-          "status" =>  "CONFIGURING"
-          "key" =>  "GitHub services",
+          "status" =>  "CONFIGURING",
+          "key" =>  "GitHub services"
         },
         {
-          "status" =>  "PENDING"
-          "key" =>  "Reloading appliance services",
+          "status" =>  "PENDING",
+          "key" =>  "Reloading appliance services"
         }
       ]
     }

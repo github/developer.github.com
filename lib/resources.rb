@@ -1903,7 +1903,7 @@ module GitHub
       "message" => "Repository 'kansaichris/japaning' has been added to the indexing queue"
     }
 
-    CONFIG_STATUSES =
+    CONFIG_STATUSES = {
       "status" => "success",
       "progress" => [
         {
@@ -1927,6 +1927,7 @@ module GitHub
           "key" =>  "Reloading appliance services",
         }
       ]
+    }
 
     FETCH_SETTINGS = {
       "enterprise" => {

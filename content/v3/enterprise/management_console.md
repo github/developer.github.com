@@ -42,8 +42,8 @@ Note that you need to POST to [`/setup/api/configure`](#start-a-configuration-pr
 
 Name | Type | Description
 -----|------|--------------
-`license`|`string` | **Required**. The path to your *.ghl* license file.
-`package`|`string`|**Required**. The path to your *.ghp* license file.
+`license`|`string` | **Required**. The content of your *.ghl* license file.
+`package`|`string`|**Required**. The content of your *.ghp* package file.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
 
 For a list of the available settings, see [the `/setup/api/settings` endpoint](#retrieve-settings).
@@ -71,8 +71,8 @@ This API upgrades your license or package and also triggers the configuration pr
 
 Name | Type | Description
 -----|------|--------------
-`license`|`string` |  The path to your new *.ghl* license file.
-`package`|`string`| The path to your new *.ghp* license file.
+`license`|`string` |  The content of your new *.ghl* license file.
+`package`|`string`| The content of your new *.ghp* package file.
 
 ### Response
 

@@ -1904,7 +1904,7 @@ module GitHub
     }
 
     CONFIG_STATUSES = {
-      "status" => "success",
+      "status" => "running",
       "progress" => [
         {
           "status" =>  "DONE",

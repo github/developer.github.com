@@ -207,7 +207,7 @@ these are some errors you might see:
 
 If the OAuth application you set up has been suspended (due to reported
 abuse, spam, or a mis-use of the API), GitHub will redirect to the
-registered callback URL with the following parameters summerizing the
+registered callback URL with the following parameters summarizing the
 error:
 
     http://your-application.com/callback?error=application_suspended
@@ -222,7 +222,7 @@ with suspended applications.
 
 If you provide a redirect_uri that doesn't match what you've registered
 with your application, GitHub will redirect to the registered callback
-URL with the following parameters summerizing the error:
+URL with the following parameters summarizing the error:
 
     http://your-application.com/callback?error=redirect_uri_mismatch
       &error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.
@@ -236,7 +236,7 @@ registered with your application.
 ### Access denied
 
 If the user rejects access to your application, GItHub will redirect to
-the registered callback URL with the following parameters summerizing
+the registered callback URL with the following parameters summarizing
 the error:
 
     http://your-application.com/callback?error=access_denied

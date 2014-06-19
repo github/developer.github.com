@@ -15,7 +15,7 @@ title: Issue Milestones | GitHub API
 
 Name | Type | Description 
 -----|------|--------------
-`state`|`string` | The state of the milestone. Either `open` or `closed`. Default: `open`
+`state`|`string` | The state of the milestone. Either `open`, `closed`, or `all`. Default: `open`
 `sort`|`string` | What to sort results by. Either `due_date` or `completeness`. Default: `due_date`
 `direction`|`string` | The direction of the sort. Either `asc` or `desc`. Default: `asc`
 

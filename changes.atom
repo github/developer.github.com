@@ -2,13 +2,37 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-06-11T00:00:00Z</updated>
+  <updated>2014-06-19T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-06-19:/changes/2014-06-19-combined-status-api-pagination/</id>
+    <title type="html">Pagination in the Combined Status API</title>
+    <published>2014-06-19T00:00:00Z</published>
+    <updated>2014-06-19T00:00:00Z</updated>
+    <author>
+      <name>bhuga</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-06-19-combined-status-api-pagination/" />
+    <content type="html">&lt;p&gt;We’re getting close to bringing the &lt;a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref"&gt;Combined Status API&lt;/a&gt; out of preview
+mode, and have just a couple of small changes to make before it’s :sparkles:.&lt;/p&gt;
+
+&lt;p&gt;First, we’re now &lt;a href="/v3/#pagination"&gt;paginating&lt;/a&gt; combined status API calls. The combined status
+&lt;code&gt;state&lt;/code&gt; field will always take all statuses into account, but we’ll now only
+return 100 embedded statuses at a time.&lt;/p&gt;
+
+&lt;p&gt;Second, we’re adding a &lt;code&gt;total_count&lt;/code&gt; field, mirroring the Search API. This
+count represents the number of contexts submitted for the given commit.&lt;/p&gt;
+
+&lt;p&gt;As always, we’re interested in &lt;a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API"&gt;hearing your feedback&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-06-11:/changes/2014-06-11-improved-ci-support-for-deployments-api/</id>
     <title type="html">Improved CI support for the Deployments API</title>
@@ -1020,69 +1044,6 @@ stable and suitable for production use.&lt;/p&gt;
 &lt;p&gt;We hope you’ll take it for a spin and &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;send us your feedback&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src="https://camo.githubusercontent.com/da8106f759bf0d163fb002e715fb1d1f1d2b6f4e/687474703a2f2f736869706974737175697272656c2e6769746875622e696f2f696d616765732f736869702532306974253230737175697272656c2e706e67" alt="Shipit Squirrel"&gt;&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-01-07:/changes/2014-01-07-upcoming-change-to-default-media-type/</id>
-    <title type="html">Upcoming Change to Default Media Type</title>
-    <published>2014-01-07T00:00:00Z</published>
-    <updated>2014-01-07T00:00:00Z</updated>
-    <author>
-      <name>jasonrudolph</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-01-07-upcoming-change-to-default-media-type/" />
-    <content type="html">&lt;p&gt;On April 15, 2014&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you’ll find tips below to help you smoothly navigate this change.&lt;/p&gt;
-
-&lt;h2 id="whats-changing"&gt;What’s changing?&lt;/h2&gt;
-
-&lt;h3 id="a-new-default-version"&gt;A new default version&lt;/h3&gt;
-
-&lt;p&gt;There are &lt;a href="/v3/versions"&gt;two versions&lt;/a&gt; of the GitHub API: &lt;strong&gt;beta&lt;/strong&gt; and &lt;strong&gt;v3&lt;/strong&gt;. Today, requests receive the beta version by default. On April 15&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, requests will begin receiving the v3 version by default.&lt;/p&gt;
-
-&lt;p&gt;For the most part, beta and v3 are remarkably similar. There are &lt;a href="/v3/versions/#differences-from-beta-version"&gt;just a few differences&lt;/a&gt; to keep in mind.&lt;/p&gt;
-
-&lt;h3 id="a-new-default-media-type"&gt;A new default media type&lt;/h3&gt;
-
-&lt;p&gt;The version is one part of the &lt;a href="/v3/media"&gt;media type&lt;/a&gt;. By default, the API provides the beta media type:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.beta+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;On April 15&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, requests will begin responding with the v3 media type by default:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id="who-is-affected"&gt;Who is affected?&lt;/h2&gt;
-
-&lt;p&gt;Since 2012, we have encouraged developers to explicitly &lt;a href="/v3/media/#request-specific-version"&gt;request a specific media type via the &lt;code&gt;Accept&lt;/code&gt; header&lt;/a&gt;. If you are requesting either beta or v3 via the &lt;code&gt;Accept&lt;/code&gt; header, then you are &lt;em&gt;not&lt;/em&gt; affected by this change. The API will continue to respond with the requested media type.&lt;/p&gt;
-
-&lt;p&gt;If you are not requesting beta or v3 via the &lt;code&gt;Accept&lt;/code&gt; header, then the API is currently responding with the beta media type. On April 15&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, the API will begin responding with the v3 media type. If your application relies on &lt;a href="/v3/versions/#differences-from-beta-version"&gt;functionality that differs between beta and v3&lt;/a&gt;, then you are affected by this change. You will need to take steps to prepare for the change.&lt;/p&gt;
-
-&lt;h2 id="what-should-you-do"&gt;What should you do?&lt;/h2&gt;
-
-&lt;p&gt;If you are affected by this change, we recommend that you:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular &lt;a href="/libraries/"&gt;client libraries&lt;/a&gt;, there’s a good chance that they’ve already done the work for you. In that case, you can just update to the latest version of that library.)&lt;/li&gt;
-  &lt;li&gt;Request the v3 media type via the &lt;code&gt;Accept&lt;/code&gt; header.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;If you cannot update your application to depend on the v3 functionality by April 15&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, you can just request the beta media type via the &lt;code&gt;Accept&lt;/code&gt; header. Doing so will insulate you from this change.&lt;/p&gt;
-
-&lt;h2 id="cutover-test"&gt;Cutover test on March 12, 2014&lt;/h2&gt;
-
-&lt;p&gt;To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.&lt;/p&gt;
-
-&lt;p&gt;Follow &lt;a href="https://twitter.com/GitHubAPI"&gt;@GitHubAPI&lt;/a&gt; to receive updates before and after the test.&lt;/p&gt;
-
-&lt;h2 id="stay-informed"&gt;Stay informed&lt;/h2&gt;
-
-&lt;p&gt;Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we’ll to announce them in advance. Be sure to stay tuned to the &lt;a href="/changes"&gt;blog&lt;/a&gt; or follow &lt;a href="https://twitter.com/GitHubAPI"&gt;@GitHubAPI&lt;/a&gt; for updates.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type"&gt;get in touch&lt;/a&gt;. We’ll be happy to help.&lt;/p&gt;
 
 </content>
   </entry>

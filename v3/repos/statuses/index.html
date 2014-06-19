@@ -263,11 +263,19 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /repos/:owner/:repo/commits/:ref/status
 </code></pre>
 
-<p>The most recent status for each context is returned (up to 25), as well as a combined
-<code>state</code>. The <code>state</code> is <code>pending</code> to start, <code>failure</code> if any status reports as
-<code>error</code> or <code>failure</code>, <code>pending</code> if any context’s latest status is <code>pending</code>, and
-<code>success</code> if the latest status for all contexts is <code>success</code>. (<code>null</code> is
-considered a distinct context)</p>
+<p>The most recent status for each context is returned, up to 100. This field
+<a href="/v3/#pagination">paginates</a> if there are over 100 contexts.</p>
+
+<p>Additionally, a combined <code>state</code> is returned. The <code>state</code> is one of:</p>
+
+<ul>
+  <li>
+<strong>failure</strong> if any of the contexts report as error or failure</li>
+  <li>
+<strong>pending</strong> if there are no statuses or a context is pending</li>
+  <li>
+<strong>success</strong> if the latest status for all contexts is success</li>
+</ul>
 
 <h3 id="parameters-2">Parameters</h3>
 
@@ -299,6 +307,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
     <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+    <span class="s2">"total_count"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="s2">"statuses"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
         <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>

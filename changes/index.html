@@ -41,6 +41,40 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-06-19-combined-status-api-pagination/">
+  <h2 class="title">
+  <a href="/changes/2014-06-19-combined-status-api-pagination/">Pagination in the Combined Status API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 19, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga">
+      <a href="https://github.com/bhuga">bhuga</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re getting close to bringing the <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status API</a> out of preview
+mode, and have just a couple of small changes to make before it’s :sparkles:.</p>
+
+<p>First, we’re now <a href="/v3/#pagination">paginating</a> combined status API calls. The combined status
+<code>state</code> field will always take all statuses into account, but we’ll now only
+return 100 embedded statuses at a time.</p>
+
+<p>Second, we’re adding a <code>total_count</code> field, mirroring the Search API. This
+count represents the number of contexts submitted for the given commit.</p>
+
+<p>As always, we’re interested in <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">hearing your feedback</a>.</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-06-11-improved-ci-support-for-deployments-api/">
   <h2 class="title">
   <a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API</a>
@@ -2181,35 +2215,6 @@ curl -u defunkt https://api.github.com/feeds
 
 </div>
 
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
-      <a href="https://github.com/ymendel">ymendel</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
-
-
-</div>
-
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -2244,6 +2249,67 @@ but we can’t wait to see what others can do with this information.</p>
 </ul>
 
 <p>Enjoy!</p>
+
+</div>
+
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
+      <a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
+
 
 </div>
 
@@ -2295,38 +2361,6 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
-
-
-</div>
-
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
-      <a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
 
 
 </div>
@@ -3432,6 +3466,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-06-19-combined-status-api-pagination/">Pagination in the Combined Status API<br /><span class="date">June 19, 2014</span></a></li>
+
   <li><a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API<br /><span class="date">June 11, 2014</span></a></li>
 
   <li><a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events<br /><span class="date">June 9, 2014</span></a></li>
@@ -3445,8 +3481,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-04-25-user-content-security/">New user content domains<br /><span class="date">April 25, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type<br /><span class="date">April 22, 2014</span></a></li>
-
-  <li><a href="/changes/2014-04-10-deployment-api-preview-extension/">Extending the preview period for the Deployments API<br /><span class="date">April 10, 2014</span></a></li>
 
 </ul>
 

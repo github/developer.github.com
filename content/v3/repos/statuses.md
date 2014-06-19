@@ -111,7 +111,7 @@ The most recent status for each context is returned, up to 100. This field
 combined `state` is returned. The `state` is `pending` to start, `failure` if
 any status reports as `error` or `failure`, `pending` if any context's latest
 status is `pending`, and `success` if the latest status for all contexts is
-`success`. (`null` is considered a distinct context)
+`success`.
 
 ### Parameters
 

@@ -6,7 +6,7 @@ author_name: bhuga
 ---
 
 We're getting close to bringing the [Combined Status API][1] out of preview
-mode, and have just a couple of small changes to make before it's :sparkles:
+mode, and have just a couple of small changes to make before it's :sparkles:.
 
 First, we're now [paginating][2] combined status API calls. The combined status
 `state` field will always take all statuses into account, but we'll now only

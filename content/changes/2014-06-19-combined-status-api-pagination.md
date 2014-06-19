@@ -2,7 +2,7 @@
 kind: change
 title: Pagination in the Combined Status API
 created_at: 2014-06-19
-author_name: @bhuga
+author_name: bhuga
 ---
 
 We're getting close to bringing the [Combined Status API][1] out of preview

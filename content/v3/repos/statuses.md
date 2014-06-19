@@ -106,11 +106,14 @@ Users with pull access can access a combined view of commit statuses for a given
 
     GET /repos/:owner/:repo/commits/:ref/status
 
-The most recent status for each context is returned (up to 25), as well as a combined
-`state`. The `state` is `pending` to start, `failure` if any status reports as
-`error` or `failure`, `pending` if any context's latest status is `pending`, and
-`success` if the latest status for all contexts is `success`. (`null` is
-considered a distinct context)
+The most recent status for each context is returned, up to 100. This field
+[paginates](/v3/#pagination) if there are over 100 contexts.
+
+Additionally, a combined `state` is returned. The `state` is one of:
+
+ * **failure** if any of the contexts report as error or failure
+ * **pending** if there are no statuses or a context is pending
+ * **success** if the latest status for all contexts is success
 
 ### Parameters
 

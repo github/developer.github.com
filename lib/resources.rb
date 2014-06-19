@@ -1629,6 +1629,7 @@ module GitHub
       "state" => "success",
       "name"  => "octocat/Hello-World",
       "sha"   => COMMIT["sha"],
+      "total_count" => 2,
       "statuses" => [
         SIMPLE_STATUS.merge("context" => "continuous-integration/jenkins"),
         SIMPLE_STATUS.merge("context" => "security/brakeman")

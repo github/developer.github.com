@@ -1,6 +1,6 @@
 ---
 kind: change
-title: New location for Enterprise Admin API documentation
+title: The GitHub Enterprise API documentation has a new home
 created_at: 2014-06-19
 author_name: gjtorikian
 ---

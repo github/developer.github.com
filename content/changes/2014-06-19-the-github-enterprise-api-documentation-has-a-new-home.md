@@ -1,6 +1,6 @@
 ---
 kind: change
-title: The GitHub Enterprise API documentation has a new home
+title: The GitHub Enterprise API documentation has a new home!
 created_at: 2014-06-19
 author_name: gjtorikian
 ---

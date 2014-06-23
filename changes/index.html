@@ -41,6 +41,33 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-06-23-the-github-enterprise-api-documentation-has-a-new-home/">
+  <h2 class="title">
+  <a href="/changes/2014-06-23-the-github-enterprise-api-documentation-has-a-new-home/">The GitHub Enterprise API documentation has a new home!</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 23, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/gjtorikian.png" alt="Avatar for gjtorikian">
+      <a href="https://github.com/gjtorikian">gjtorikian</a>
+  </li>
+</ul>
+</div>
+
+    <p><a href="https://enterprise.github.com">GitHub Enterprise</a> offers the same set of APIs as GitHub.com, as well as its own set of Enterprise-specific functionality.</p>
+
+<p>The GitHub Enterprise API has been documented on <a href="https://enterprise.github.com/help">the Enterprise Help site</a> for some time. We’ve now <a href="https://developer.github.com/v3/enterprise/">moved the resources to this site</a> to be hosted alongside the rest of the GitHub API documentation.</p>
+
+<p>Is there an API workflow you’re particularly interested in? <a href="https://github.com/contact?form%5Bsubject%5D=Suggestion+for+an+Enterprise+Guide">Let us know</a> and we’ll do our best to <a href="https://developer.github.com/guides/">write a guide</a>!</p>
+
+</div>
+
 <div class="change" id="/changes/2014-06-19-combined-status-api-pagination/">
   <h2 class="title">
   <a href="/changes/2014-06-19-combined-status-api-pagination/">Pagination in the Combined Status API</a>
@@ -1023,6 +1050,35 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 </div>
 
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
+
+</div>
+
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -1071,35 +1127,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
 
-
-</div>
-
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
 
 </div>
 
@@ -1181,6 +1208,39 @@ on previous Pages builds.</p>
 
 </div>
 
+<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 10, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
+<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.</p>
+
+<p>The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.</p>
+
+<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
+By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
+you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
+
+</div>
+
 <div class="change" id="/changes/2014-02-10-repo-hook-scopes/">
   <h2 class="title">
   <a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks</a>
@@ -1216,39 +1276,6 @@ repository contents:</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes">get in touch</a>.</p>
 
-
-</div>
-
-<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 10, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
-<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
-create a new webhook, we will send this event as an initial test of the webhook.</p>
-
-<p>The ping is only informational, doesn’t need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It’s just a quick
-“hello world” to let you know you set everything up correctly.</p>
-
-<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
-By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
-you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
 
 </div>
 
@@ -2215,6 +2242,35 @@ curl -u defunkt https://api.github.com/feeds
 
 </div>
 
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
+      <a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -2249,35 +2305,6 @@ but we can’t wait to see what others can do with this information.</p>
 </ul>
 
 <p>Enjoy!</p>
-
-</div>
-
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
-      <a href="https://github.com/ymendel">ymendel</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
-
 
 </div>
 
@@ -3466,6 +3493,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-06-23-the-github-enterprise-api-documentation-has-a-new-home/">The GitHub Enterprise API documentation has a new home!<br /><span class="date">June 23, 2014</span></a></li>
+
   <li><a href="/changes/2014-06-19-combined-status-api-pagination/">Pagination in the Combined Status API<br /><span class="date">June 19, 2014</span></a></li>
 
   <li><a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API<br /><span class="date">June 11, 2014</span></a></li>
@@ -3479,8 +3508,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files<br /><span class="date">May 6, 2014</span></a></li>
 
   <li><a href="/changes/2014-04-25-user-content-security/">New user content domains<br /><span class="date">April 25, 2014</span></a></li>
-
-  <li><a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type<br /><span class="date">April 22, 2014</span></a></li>
 
 </ul>
 

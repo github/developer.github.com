@@ -1,7 +1,7 @@
 ---
 kind: change
 title: The GitHub Enterprise API documentation has a new home!
-created_at: 2014-06-20
+created_at: 2014-06-23
 author_name: gjtorikian
 ---
 

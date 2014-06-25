@@ -19,7 +19,7 @@ The API will return a 401 "Bad credentials" response if the gists scope was give
 
 List a user's gists:
 
-    GET /users/:user/gists
+    GET /users/:username/gists
 
 List the authenticated user's gists or if called anonymously, this will
 return all public gists:
@@ -78,7 +78,7 @@ The keys in the `files` hash are the `string` filename, and the value is another
 
 <div class="alert">
   <p>
-    <strong>Note</strong>: Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally. 
+    <strong>Note</strong>: Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally.
 	</p>
 </div>
 

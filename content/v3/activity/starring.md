@@ -34,7 +34,7 @@ for more details.
 
 List repositories being starred by a user.
 
-    GET /users/:user/starred
+    GET /users/:username/starred
 
 List repositories being starred by the authenticated user.
 
@@ -42,7 +42,7 @@ List repositories being starred by the authenticated user.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `sort`|`string` | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). Default: `created`
 `direction`|`string` | One of `asc` (ascending) or `desc` (descending). Default: `desc`

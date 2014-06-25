@@ -38,7 +38,7 @@ Name    | Type    | Description
 
 Check if a user is, publicly or privately, a member of the organization.
 
-    GET /orgs/:org/members/:user
+    GET /orgs/:org/members/:username
 
 ### Response if requester is an organization member and user is a member
 
@@ -66,7 +66,7 @@ To add someone as a member to an org, you must add them to a
 Removing a user from this list will remove them from all teams and
 they will no longer have any access to the organization's repositories.
 
-    DELETE /orgs/:org/members/:user
+    DELETE /orgs/:org/members/:username
 
 ### Response
 
@@ -86,7 +86,7 @@ publicized or not.
 
 ## Check public membership
 
-    GET /orgs/:org/public_members/:user
+    GET /orgs/:org/public_members/:username
 
 ### Response if user is a public member
 
@@ -101,7 +101,7 @@ publicized or not.
 The user can publicize their own membership.
 (A user cannot publicize the membership for another user.)
 
-    PUT /orgs/:org/public_members/:user
+    PUT /orgs/:org/public_members/:username
 
 ### Response
 
@@ -109,7 +109,7 @@ The user can publicize their own membership.
 
 ## Conceal a user's membership
 
-    DELETE /orgs/:org/public_members/:user
+    DELETE /orgs/:org/public_members/:username
 
 ### Response
 

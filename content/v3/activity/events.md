@@ -65,26 +65,26 @@ These are events that you've received by watching repos and following
 users.  If you are authenticated as the given user, you will see private
 events.  Otherwise, you'll only see public events.
 
-    GET /users/:user/received_events
+    GET /users/:username/received_events
 
 ## List public events that a user has received
 
-    GET /users/:user/received_events/public
+    GET /users/:username/received_events/public
 
 ## List events performed by a user
 
 If you are authenticated as the given user, you will see your private
 events.  Otherwise, you'll only see public events.
 
-    GET /users/:user/events
+    GET /users/:username/events
 
 ## List public events performed by a user
 
-    GET /users/:user/events/public
+    GET /users/:username/events/public
 
 ## List events for an organization
 
 This is the user's organization dashboard.  You must be authenticated as
 the user to view this.
 
-    GET /users/:user/events/orgs/:org
+    GET /users/:username/events/orgs/:org

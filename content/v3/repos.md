@@ -30,7 +30,7 @@ Name | Type | Description
 
 List public repositories for the specified user.
 
-    GET /users/:user/repos
+    GET /users/:username/repos
 
 ### Parameters
 

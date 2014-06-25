@@ -38,7 +38,7 @@ In order to create a team, the authenticated user must be an owner of
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
 `repo_names`|`array` of `strings` | The repositories to add the team to.
@@ -65,7 +65,7 @@ the org that the team is associated with.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
@@ -109,7 +109,7 @@ member of the team.
 In order to get if a user is a member of a team, the authenticated user
 must be a member of the team.
 
-    GET /teams/:id/members/:user
+    GET /teams/:id/members/:username
 
 ### Response if user is a member
 
@@ -125,7 +125,7 @@ In order to add a user to a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the org that the team
 is associated with.
 
-    PUT /teams/:id/members/:user
+    PUT /teams/:id/members/:username
 
 ### Response
 
@@ -150,7 +150,7 @@ In order to remove a user from a team, the authenticated user must have
 is associated with.
 NOTE: This does not delete the user, it just remove them from the team.
 
-    DELETE /teams/:id/members/:user
+    DELETE /teams/:id/members/:username
 
 ### Response
 

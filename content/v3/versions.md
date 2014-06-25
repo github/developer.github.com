@@ -129,7 +129,7 @@ The [beta API](/v3) is deprecated. Its current functionality is stable and uncha
   responses that include users or orgs. A default size is no longer
   included in the URL.
 * Creating new gists (both anonymously and with an authenticated user)
-  should use `POST /gists` from now on. `POST /users/:user/gists` is no
+  should use `POST /gists` from now on. `POST /users/:username/gists` is no
   longer supported.
 
 ### June 1st, 2011:

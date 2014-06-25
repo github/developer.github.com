@@ -23,7 +23,7 @@ collaborators list.
 
 ## Check if a user is a collaborator {#get}
 
-    GET /repos/:owner/:repo/collaborators/:user
+    GET /repos/:owner/:repo/collaborators/:username
 
 ### Response if user is a collaborator
 
@@ -35,7 +35,7 @@ collaborators list.
 
 ## Add user as a collaborator {#add-collaborator}
 
-    PUT /repos/:owner/:repo/collaborators/:user
+    PUT /repos/:owner/:repo/collaborators/:username
 
 ### Response
 
@@ -43,7 +43,7 @@ collaborators list.
 
 ## Remove user as a collaborator {#remove-collaborator}
 
-    DELETE /repos/:owner/:repo/collaborators/:user
+    DELETE /repos/:owner/:repo/collaborators/:username
 
 ### Response
 

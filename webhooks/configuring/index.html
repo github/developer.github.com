@@ -100,7 +100,7 @@ setup might look something like this:</p>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/payload'</span> <span class="k">do</span>
-  <span class="n">push</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">push</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">read</span><span class="p">)</span>
   <span class="nb">puts</span> <span class="s2">"I got some JSON: </span><span class="si">#{</span><span class="n">push</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">end</span></code></pre>
 

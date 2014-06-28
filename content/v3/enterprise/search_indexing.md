@@ -7,7 +7,7 @@ title: Search Indexing | GitHub API
 * TOC
 {:toc}
 
-The Search Indexing API allows you to queue up a variety of search indexing tasks. *It is only available to site administrators.* Normal users will receive a `404` response if they try to access it.
+The Search Indexing API allows you to queue up a variety of search indexing tasks. *It is only available to [authenticated](/v3/#authentication) site administrators.* Normal users will receive a `404` response if they try to access it.
 
 ## Queue an indexing job
 

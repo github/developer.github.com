@@ -2,7 +2,7 @@
 title: User Administration | GitHub API
 ---
 
-# User Administration
+# Administration (Enterprise)
 
 * TOC
 {:toc}

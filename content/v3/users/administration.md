@@ -27,7 +27,7 @@ These endpoints allow you to promote, demote, suspend, or unsuspend users on you
 
 <%= headers 204 %>
 
-## Suspend a user from the installation
+## Suspend a user
 
     PUT /user/:username/suspended
 
@@ -35,7 +35,7 @@ These endpoints allow you to promote, demote, suspend, or unsuspend users on you
 
 <%= headers 204 %>
 
-## Restore a user to the installation
+## Unsuspend a user
 
     DELETE /user/:username/suspended
 

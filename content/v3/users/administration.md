@@ -11,7 +11,7 @@ These endpoints allow you to promote, demote, suspend, or unsuspend users on you
 
 [The Users API](/v3/users/) has additional functionality that's available to both GitHub.com and GitHub Enterprise consumers.
 
-## Promote a user to site administrator
+## Promote an ordinary user to a site administrator
 
     PUT /user/:username/site_admin
 
@@ -19,7 +19,7 @@ These endpoints allow you to promote, demote, suspend, or unsuspend users on you
 
 <%= headers 204 %>
 
-## Demote a user from site administrator
+## Demote a site administrator to an ordinary user
 
     DELETE /user/:username/site_admin
 

@@ -7,7 +7,7 @@ title: User Administration | GitHub API
 * TOC
 {:toc}
 
-The User Administration API allows you to promote, demote, suspend, and unsuspend users on a GitHub Enterprise appliance. *It is only available to site admins.* Normal users will receive a `403` response if they try to access it.
+The User Administration API allows you to promote, demote, suspend, and unsuspend users on a GitHub Enterprise appliance. *It is only available to site administrators.* Normal users will receive a `403` response if they try to access it.
 
 ## Promote an ordinary user to a site administrator
 

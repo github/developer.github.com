@@ -21,6 +21,8 @@ The User Administration API allows you to promote, demote, suspend, and unsuspen
 
     DELETE /user/:username/site_admin
 
+You can demote any user account except your own.
+
 ### Response
 
 <%= headers 204 %>
@@ -28,6 +30,8 @@ The User Administration API allows you to promote, demote, suspend, and unsuspen
 ## Suspend a user
 
     PUT /user/:username/suspended
+
+You can suspend any user account except your own.
 
 ### Response
 

@@ -306,8 +306,6 @@ Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without
 
 ### Payload
 
-(empty payload)
-
 <%= webhook_payload "public" %>
 
 ## PullRequestEvent

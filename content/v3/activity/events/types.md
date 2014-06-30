@@ -21,7 +21,7 @@ They're only created for various internal and repository hooks.
 
 Triggered when a [commit comment](/v3/repos/comments/#list-commit-comments-for-a-repository) is created.
 
-### Hook name
+### Event name
 
 `commit_comment`
 
@@ -38,7 +38,7 @@ Represents a created repository, branch, or tag.
 
 Note: webhooks will not receive this event for created repositories.
 
-### Hook name
+### Event name
 
 `create`
 
@@ -56,7 +56,7 @@ Key | Type | Description
 
 Represents a [deleted branch or tag](/v3/git/refs/#delete-a-reference).
 
-### Hook name
+### Event name
 
 `delete`
 
@@ -73,7 +73,7 @@ Represents a [deployment](/v3/repos/deployments/#list-deployments).
 
 Events of this type are not visible in timelines, they are only used to trigger hooks.
 
-### Hook name
+### Event name
 
 `deployment`
 
@@ -94,7 +94,7 @@ Represents a [deployment status](/v3/repos/deployments/#list-deployment-statuses
 
 Events of this type are not visible in timelines, they are only used to trigger hooks.
 
-### Hook name
+### Event name
 
 `deployment_status`
 
@@ -113,7 +113,7 @@ Triggered when a new [download](/v3/repos/downloads/) is created.
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-### Hook name
+### Event name
 
 `download`
 
@@ -130,7 +130,7 @@ Triggered when a user [follows another user](/v3/users/followers/#follow-a-user)
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-### Hook name
+### Event name
 
 `follow`
 
@@ -145,7 +145,7 @@ Key | Type | Description
 
 Triggered when a user [forks a repository](/v3/repos/forks/#create-a-fork).
 
-### Hook name
+### Event name
 
 `fork`
 
@@ -162,7 +162,7 @@ Triggered when a patch is applied in the Fork Queue.
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-### Hook name
+### Event name
 
 `fork_apply`
 
@@ -181,7 +181,7 @@ Triggered when a [Gist](/v3/gists/) is created or updated.
 
 Events of this type are **no longer created**, but it's possible that they exist in timelines of some users.
 
-### Hook name
+### Event name
 
 `gist`
 
@@ -197,7 +197,7 @@ Key | Type | Description
 
 Triggered when a Wiki page is created or updated.
 
-### Hook name
+### Event name
 
 `gollum`
 
@@ -217,7 +217,7 @@ Key | Type | Description
 
 Triggered when an [issue comment](/v3/issues/comments/) is created.
 
-### Hook name
+### Event name
 
 `issue_comment`
 
@@ -234,7 +234,7 @@ Key | Type | Description
 
 Triggered when an [issue](/v3/issues) is created, closed or reopened.
 
-### Hook name
+### Event name
 
 `issues`
 
@@ -250,7 +250,7 @@ Key | Type | Description
 
 Triggered when a user is [added as a collaborator](/v3/repos/collaborators/#add-collaborator) to a repository.
 
-### Hook name
+### Event name
 
 `member`
 
@@ -285,7 +285,7 @@ Key | Type | Description
 
 Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without a doubt: the best GitHub event.
 
-### Hook name
+### Event name
 
 `public`
 
@@ -297,7 +297,7 @@ Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without
 
 Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synchronized.
 
-### Hook name
+### Event name
 
 `pull_request`
 
@@ -314,7 +314,7 @@ Key | Type | Description
 
 Triggered when a [comment is created on a portion of the unified diff](/v3/pulls/comments) of a pull request.
 
-### Hook name
+### Event name
 
 `pull_request_review_comment`
 
@@ -331,7 +331,7 @@ Key | Type | Description
 
 Triggered when a repository branch is pushed to.
 
-### Hook name
+### Event name
 
 `push`
 
@@ -355,7 +355,7 @@ Key | Type | Description
 
 Triggered when a [release](/v3/repos/releases/#get-a-single-release) is published.
 
-### Hook name
+### Event name
 
 `release`
 
@@ -373,7 +373,7 @@ Triggered when the status of a Git commit changes.
 
 Events of this type are not visible in timelines, they are only used to trigger hooks.
 
-### Hook name
+### Event name
 
 `status`
 
@@ -394,7 +394,7 @@ Triggered when a [user is added to a team](/v3/orgs/teams/#add-team-member) or w
 
 Note: this event is created in [users' organization timelines](/v3/activity/events/#list-events-for-an-organization).
 
-### Hook name
+### Event name
 
 `team_add`
 
@@ -415,7 +415,7 @@ See [this API blog post](/changes/2012-9-5-watcher-api/) for an explanation.
 The event’s actor is the [user](/v3/users/) who starred a repository, and the
 event’s repository is the [repository](/v3/repos/) that was starred.
 
-### Hook name
+### Event name
 
 `watch`
 

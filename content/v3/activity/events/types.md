@@ -2,7 +2,7 @@
 title: Event Types | GitHub API
 ---
 
-# Event Types
+# Event Types & Payloads
 
 Each event has a similar JSON schema, but a unique `payload` object that is
 determined by its event type.  [Repository hook](/v3/repos/hooks/) names relate to event types, and will have the exact same payload.  The only exception to this is the `push` hook, which has a larger, more detailed payload.

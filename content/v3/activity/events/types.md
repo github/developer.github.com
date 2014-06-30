@@ -32,6 +32,8 @@ Key | Type | Description
 `comment`|`object` | The [comment](/v3/repos/comments/#list-commit-comments-for-a-repository) itself.
 
 
+<%= webhook_payload "commit_comment" %>
+
 ## CreateEvent
 
 Represents a created repository, branch, or tag.
@@ -51,6 +53,7 @@ Key | Type | Description
 `master_branch`|`string` | The name of the repository's default branch (usually `master`).
 `description`|`string` | The repository's current description.
 
+<%= webhook_payload "create" %>
 
 ## DeleteEvent
 
@@ -66,6 +69,8 @@ Key | Type | Description
 ----|------|-------------
 `ref_type`|`string` | The object that was deleted. Can be "branch" or "tag".
 `ref`|`string` | The full git ref.
+
+<%= webhook_payload "delete" %>
 
 ## DeploymentEvent
 
@@ -88,6 +93,8 @@ Key | Type | Description
 `description`|`string` | The optional human-readable description added to the deployment.
 
 
+<%= webhook_payload "deployment" %>
+
 ## DeploymentStatusEvent
 
 Represents a [deployment status](/v3/repos/deployments/#list-deployment-statuses).
@@ -106,6 +113,8 @@ Key | Type | Description
 `target_url` |`string` | The optional link added to the status.
 `deployment` |`hash`   | The deployment that this status is associated with.
 `description`|`string` | The optional human-readable description added to the status.
+
+<%= webhook_payload "deployment_status" %>
 
 ## DownloadEvent
 
@@ -155,6 +164,7 @@ Key | Type | Description
 ----|------|-------------
 `forkee`|`object` | The created [repository](/v3/repos/).
 
+<%= webhook_payload "fork" %>
 
 ## ForkApplyEvent
 
@@ -212,6 +222,7 @@ Key | Type | Description
 `pages[][sha]`|`string` | The latest commit SHA of the page.
 `pages[][html_url]`|`string` | Points to the HTML wiki page.
 
+<%= webhook_payload "gollum" %>
 
 ## IssueCommentEvent
 
@@ -229,6 +240,7 @@ Key | Type | Description
 `issue`|`object` | The [issue](/v3/issues/) the comment belongs to.
 `comment`|`object` | The [comment](/v3/issues/comments/) itself.
 
+<%= webhook_payload "issue_comment" %>
 
 ## IssuesEvent
 
@@ -245,6 +257,7 @@ Key | Type | Description
 `action`|`string` | The action that was performed. Can be one of "opened", "closed", or "reopened".
 `issue`|`object` | The [issue](/v3/issues) itself.
 
+<%= webhook_payload "issues" %>
 
 ## MemberEvent
 
@@ -261,6 +274,7 @@ Key | Type | Description
 `member`|`object` | The [user](/v3/users/) that was added.
 `action`|`string` | The action that was performed. Currently, can only be "added".
 
+<%= webhook_payload "member" %>
 
 ## PageBuildEvent
 
@@ -280,6 +294,7 @@ Key | Type | Description
 ----|------|------------
 `build` | `object` | The [page build](https://developer.github.com/v3/repos/pages/#list-pages-builds) itself.
 
+<%= webhook_payload "page_build" %>
 
 ## PublicEvent
 
@@ -292,6 +307,8 @@ Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without
 ### Payload
 
 (empty payload)
+
+<%= webhook_payload "public" %>
 
 ## PullRequestEvent
 
@@ -309,6 +326,7 @@ Key | Type | Description
 `number`|`integer` | The pull request number.
 `pull_request`|`object` | The [pull request](/v3/pulls) itself.
 
+<%= webhook_payload "pull_request" %>
 
 ## PullRequestReviewCommentEvent
 
@@ -326,6 +344,7 @@ Key | Type | Description
 `pull_request`|`object` | The [pull request](/v3/pulls/) the comment belongs to.
 `comment`|`object` | The [comment](/v3/pulls/comments) itself.
 
+<%= webhook_payload "pull_request_review_comment" %>
 
 ## PushEvent
 
@@ -351,6 +370,8 @@ Key | Type | Description
 `commits[][url]`|`url` | Points to the commit API resource.
 `commits[][distinct]`|`boolean` | Whether this commit is distinct from any that have been pushed before.
 
+<%= webhook_payload "push" %>
+
 ## ReleaseEvent
 
 Triggered when a [release](/v3/repos/releases/#get-a-single-release) is published.
@@ -366,6 +387,7 @@ Key | Type | Description
 `action`|`string` | The action that was performed. Currently, can only be "published".
 `release`|`object` | The [release](/v3/repos/releases/#get-a-single-release) itself.
 
+<%= webhook_payload "release" %>
 
 ## StatusEvent
 
@@ -387,6 +409,7 @@ Key | Type | Description
 `target_url`|`string` | The optional link added to the status.
 `branches`|`array` | An array of branch objects containing the status' SHA. Each branch contains the given SHA, but the SHA may or may not be the head of the branch. The array includes a maximum of 10 branches.
 
+<%= webhook_payload "status" %>
 
 ## TeamAddEvent
 
@@ -406,6 +429,7 @@ Key | Type | Description
 `user`|`object` | The [user](/v3/users/) that was added to this team.
 `repository`|`object` | The [repository](/v3/repos/) that was added to this team.
 
+<%= webhook_payload "team_add" %>
 
 ## WatchEvent
 
@@ -424,3 +448,5 @@ event’s repository is the [repository](/v3/repos/) that was starred.
 Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed. Currently, can only be `started`.
+
+<%= webhook_payload "watch" %>

@@ -12,7 +12,7 @@ we include an [example payload][full-payload]. You can learn more about how webh
 
 If you have any questions or feedback, please [get in touch][get-in-touch].
 
-[webhooks]: https://developer.github.com/changes/updated-webhooks
+[webhooks]: https://github.com/blog/1778-webhooks-level-up
 [event-types]: https://developer.github.com/v3/activity/events/types/
 [full-payload]: https://developer.github.com/v3/activity/events/types/#issuesevent
 [webhooks-guide]: https://developer.github.com/webhooks/

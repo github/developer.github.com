@@ -5,11 +5,12 @@ title: Event Types | GitHub API
 # Event Types & Payloads
 
 Each event has a similar JSON schema, but a unique `payload` object that is
-determined by its event type.  [Repository hook](/v3/repos/hooks/) names relate to event types, and will have the exact same payload.  The only exception to this is the `push` hook, which has a larger, more detailed payload.
+determined by its event type.  
 
-This describes just the payload of an event.  A full event will also
-show the user that performed the event (actor), the repository, and the
-organization (if applicable).
+Event names are used by [repository webhooks](/v3/repos/hooks/) to specify
+which events the webhook should receive. The included payloads below are from webhook deliveries but
+match events returned by the [Events API](/v3/activity/events/) (except where noted).
+
 
 Note that some of these events may not be rendered in timelines.
 They're only created for various internal and repository hooks.
@@ -347,6 +348,8 @@ Key | Type | Description
 ## PushEvent
 
 Triggered when a repository branch is pushed to.
+
+Note: the example payload below is from a webhook delivery. The Event API `PushEvent` payload will differ.
 
 ### Event name
 

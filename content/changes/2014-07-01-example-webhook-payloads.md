@@ -12,6 +12,6 @@ we include a [full example payload][full-payload] you would receive.
 If you have any questions or feedback, please [get in touch][get-in-touch].
 
 [webhooks]: https://developer.github.com/changes/updated-webhooks
-[event-types]: https://developer.github.com/changes/event-types
+[event-types]: https://developer.github.com/v3/activity/events/types/
 [full-payload]: https://developer.github.com/v3/activity/events/types/#issuesevent
 [get-in-touch]: https://github.com/contact?form[subject]=Example+webhook+payloads

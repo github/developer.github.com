@@ -109,6 +109,14 @@ module GitHub
         hs + %(<pre><code>) + res + "</code></pre>"
       end
 
+      def webhook_headers(event_name)
+        "<pre><code>" + File.read("lib/webhooks/#{event_name}.headers.txt") + "</code></pre>"
+      end
+
+      def webhook_payload(event_name)
+        "<pre><code class='language-javascript'>" + File.read("lib/webhooks/#{event_name}.payload.json") + "</code></pre>"
+      end
+
     end
 
     USER = {

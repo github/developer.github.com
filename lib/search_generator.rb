@@ -40,7 +40,7 @@ class SearchFilter < Nanoc::Filter
   private
 
   # basically we need a merge sort for elements like "/v3/orgs." Otherwise,
-  # nanoc puts "/v3/orgs/mebers" before "/v3/orgs." Children should respect their
+  # nanoc puts "/v3/orgs/members" before "/v3/orgs." Children should respect their
   # parents, yo.
   def merge_sort(a)
       return a if a.size <= 1

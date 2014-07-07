@@ -12,7 +12,7 @@ You can learn more about how webhooks work with our [Webhooks Guide][webhooks-gu
 If you have any questions or feedback, please [get in touch][get-in-touch].
 
 [webhooks]: https://github.com/blog/1778-webhooks-level-up
-[event-types]: https://developer.github.com/v3/activity/events/types/
-[full-payload]: https://developer.github.com/v3/activity/events/types/#issuesevent
-[webhooks-guide]: https://developer.github.com/webhooks/
+[event-types]: /v3/activity/events/types/
+[full-payload]: /v3/activity/events/types/#issuesevent
+[webhooks-guide]: /webhooks/
 [get-in-touch]: https://github.com/contact?form[subject]=Example+webhook+payloads

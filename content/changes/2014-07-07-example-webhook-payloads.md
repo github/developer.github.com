@@ -6,8 +6,9 @@ author_name: kdaigle
 ---
 
 Today, we’ve added example [webhook][webhooks] payloads to the [event types][event-types] page.
-Now, alongside existing descriptions for each event, we include an [example payload][full-payload].
-You can learn more about how webhooks work with our [Webhooks Guide][webhooks-guide].
+Alongside existing descriptions for each event, we now include an [example payload][full-payload]
+so that you can quickly see the data provided by the event. You can learn more about how webhooks
+work with our [Webhooks Guide][webhooks-guide].
 
 If you have any questions or feedback, please [get in touch][get-in-touch].
 

@@ -1,5 +1,5 @@
 ---
-title: Event Types | GitHub API
+title: Event Types & Payloads | GitHub API
 ---
 
 # Event Types & Payloads

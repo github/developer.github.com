@@ -342,7 +342,7 @@ available as a separate project.
 [webflow]: /v3/oauth/#web-application-flow
 [Sinatra]: http://www.sinatrarb.com/
 [about env vars]: http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables
-[Sinatra guide]: http://sinatra-book.gittr.com/#hello_world_application
+[Sinatra guide]: https://github.com/sinatra/sinatra-book/blob/master/book/Introduction.markdown#hello-world-application
 [REST Client]: https://github.com/archiloque/rest-client
 [libraries]: /libraries/
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test

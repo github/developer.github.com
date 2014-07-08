@@ -64,8 +64,8 @@ Users with pull access can view commit statuses for a given ref:
 
 <div class="alert">
   <p>
-    A legacy route, `/repos/:owner/:repo/statuses/:ref, is also an available
-    and supported part of GitHub API v3.
+    A legacy route, <code>/repos/:owner/:repo/statuses/:ref</code>, is also
+    an available and supported part of GitHub API v3.
   </p>
 </div>
 

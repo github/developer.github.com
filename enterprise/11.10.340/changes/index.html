@@ -1,0 +1,3571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>GitHub API Changes</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/js/jquery.js" type="text/javascript"></script>
+  <script src="/js/documentation.js" type="text/javascript"></script>
+</head>
+
+
+<body class="blog">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/v3/" class="nav-api">API</a></li>
+        <li><a href="/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+
+  <div id="wrapper">
+    <div class="content">
+      
+<div class="change" id="/changes/2014-06-23-the-github-enterprise-api-documentation-has-a-new-home/">
+  <h2 class="title">
+  <a href="/changes/2014-06-23-the-github-enterprise-api-documentation-has-a-new-home/">The GitHub Enterprise API documentation has a new home!</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 23, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/gjtorikian.png" alt="Avatar for gjtorikian">
+      <a href="https://github.com/gjtorikian">gjtorikian</a>
+  </li>
+</ul>
+</div>
+
+    <p><a href="https://enterprise.github.com">GitHub Enterprise</a> offers the same set of APIs as GitHub.com, as well as its own set of Enterprise-specific functionality.</p>
+
+<p>The GitHub Enterprise API has been documented on <a href="https://enterprise.github.com/help">the Enterprise Help site</a> for some time. We’ve now <a href="https://developer.github.com/v3/enterprise/">moved the resources to this site</a> to be hosted alongside the rest of the GitHub API documentation.</p>
+
+<p>Is there an API workflow you’re particularly interested in? <a href="https://github.com/contact?form%5Bsubject%5D=Suggestion+for+an+Enterprise+Guide">Let us know</a> and we’ll do our best to <a href="https://developer.github.com/guides/">write a guide</a>!</p>
+
+</div>
+
+<div class="change" id="/changes/2014-06-19-combined-status-api-pagination/">
+  <h2 class="title">
+  <a href="/changes/2014-06-19-combined-status-api-pagination/">Pagination in the Combined Status API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 19, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga">
+      <a href="https://github.com/bhuga">bhuga</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re getting close to bringing the <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status API</a> out of preview
+mode, and have just a couple of small changes to make before it’s :sparkles:.</p>
+
+<p>First, we’re now <a href="/v3/#pagination">paginating</a> combined status API calls. The combined status
+<code>state</code> field will always take all statuses into account, but we’ll now only
+return 100 embedded statuses at a time.</p>
+
+<p>Second, we’re adding a <code>total_count</code> field, mirroring the Search API. This
+count represents the number of contexts submitted for the given commit.</p>
+
+<p>As always, we’re interested in <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">hearing your feedback</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-06-11-improved-ci-support-for-deployments-api/">
+  <h2 class="title">
+  <a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 11, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos">
+      <a href="https://github.com/atmos">atmos</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today we’re making a few minor changes to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>. With the introduction of <a href="https://developer.github.com/changes/2014-03-27-combined-status-api/">combined statuses</a> in a <a href="https://developer.github.com/changes/2014-04-10-deployment-api-preview-extension/">recent update</a>, we noticed a few inconsistencies with the API that we’d like to remedy.</p>
+
+<p>We’re introducing a new parameter called <code>required_contexts</code>. This parameter accepts an array of named <a href="https://developer.github.com/v3/repos/statuses/">commit status</a> contexts that are ensured to be in a “success” state before the deployment is created. This allows you to verify that more than one system verified your code before you deploy it.</p>
+
+<p>We’ve removed support for the <code>force</code> parameter. The force parameter existed to bypass both the auto-merge and commit status checks. The same behavior can now be accomplished by setting <code>auto_merge</code> and <code>required_contexts</code> appropriately.</p>
+
+<p>We’re also setting a context for all <a href="https://developer.github.com/v3/repos/statuses/">commit statuses</a>. If a commit status is created without a context, we’ll now set it to the string “default”.</p>
+
+<p>If you have any questions or concerns, <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">drop us a line</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">
+  <h2 class="title">
+  <a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 9, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace">
+      <a href="https://github.com/jdpace">jdpace</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve enhanced the <a href="https://developer.github.com/v3/activity/events/types/#pullrequestreviewcommentevent">PullRequestReviewComment events payloads</a> to include <code>action</code> and <code>pull_request</code> attributes. With the addition of the <code>pull_request</code> attribute, you now have immediate access to detailed information about the pull request without needing an additional API request.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=PullRequestReviewComment+Event+Payloads">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-05-19-deployments-api-updates/">
+  <h2 class="title">
+  <a href="/changes/2014-05-19-deployments-api-updates/">New attributes for the Deployments API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 19, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos">
+      <a href="https://github.com/atmos">atmos</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re continuing to iterate on the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>, and we’re starting to see it satisfy more and more use cases. Today we’re introducing new attributes for Deployments and Deployment Statuses as well as a few payload changes.</p>
+
+<p><strong>This is a breaking change for Deployment Status payloads</strong>. If you’re trying out this new API during its preview period, you’ll need to update your code to continue working with it.</p>
+
+<h2 id="api-changes">API Changes</h2>
+
+<p>For Deployments we’re introducing the concept of an <code>environment</code>. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, user acceptance testing, etc. We hope this enhancement will enable more use cases for our users that deploy to multiple environments.</p>
+
+<p>Deployments are also persisting the requested deployment <code>ref</code>. Previously we resolved a ref to the current SHA for that ref. Now we’ll be keeping the ref around for historical purposes. This is especially helpful if you’re deploying branches to verify them before you merge them into your default branch (e.g., “master”).</p>
+
+<h2 id="json-payload-changes">JSON Payload Changes</h2>
+
+<p>We’re also adding a few attributes to the outbound Deployment payloads. We’re now including the <code>ref</code> attribute so you know the branch or tag name that resolved to a specific SHA. The <code>environment</code> is also present.</p>
+
+<h2 id="webhook-changes">Webhook Changes</h2>
+
+<p>The Deployment Status payloads now embed the associated Deployment object. With this enhancement, Deployment Status events received via webhooks will have enough information to notify other systems, without having to call back to the GitHub API for the <code>environment</code>, <code>ref</code>, or payload that was deployed.</p>
+
+<h3 id="example-deployment-json">Example Deployment JSON</h3>
+
+<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/392"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">392</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"837db83be4137ca555d9a5598d0a1ea2987ecfee"</span><span class="p">,</span>
+  <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"environment"</span><span class="p">:</span> <span class="s2">"staging"</span><span class="p">,</span>
+  <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"fe"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"fe1"</span><span class="p">,</span>
+      <span class="s2">"fe2"</span><span class="p">,</span>
+      <span class="s2">"fe3"</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"ship it!"</span><span class="p">,</span>
+  <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"my-org"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">521</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://avatars.githubusercontent.com/u/2988?"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span>
+  <span class="p">},</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-05-09T19:56:47Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2014-05-09T19:56:47Z"</span><span class="p">,</span>
+  <span class="s2">"statuses_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/392/statuses"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="example-deployment-status-json">Example Deployment Status JSON</h3>
+
+<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396/statuses/1"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="s2">"deployment"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">392</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"837db83be4137ca555d9a5598d0a1ea2987ecfee"</span><span class="p">,</span>
+    <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
+    <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"fe"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"fe1"</span><span class="p">,</span>
+        <span class="s2">"fe2"</span><span class="p">,</span>
+        <span class="s2">"fe3"</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="s2">"environment"</span><span class="p">:</span> <span class="s2">"production"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Deploying to production"</span><span class="p">,</span>
+    <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"alysson-goldner"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">540</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span>
+    <span class="p">},</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-05-09T19:59:36Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2014-05-09T19:59:36Z"</span><span class="p">,</span>
+    <span class="s2">"statuses_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396/statuses"</span>
+  <span class="p">},</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Deployment succeeded"</span><span class="p">,</span>
+  <span class="s2">"target_url"</span><span class="p">:</span> <span class="s2">"https://deploy.myorg.com/apps/my-repo/logs/420"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-05-09T19:59:39Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2014-05-09T19:59:39Z"</span><span class="p">,</span>
+  <span class="s2">"deployment_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396"</span>
+<span class="p">}</span></code></pre>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">
+  <h2 class="title">
+  <a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 9, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak">
+      <a href="https://github.com/izuzak">izuzak</a>
+  </li>
+</ul>
+</div>
+
+    <p>The <a href="/v3/repos/commits/">Repository Commits API</a> now supports an additional approach for paginating <a href="/v3/repos/commits/#list-commits-on-a-repository">commit lists</a>. As of today, this endpoint supports the “standard” <a href="/v3/#pagination"><code>page</code> and <code>per_page</code> parameters</a> for controlling pagination. This API now uses these parameters by default when constructing <a href="/v3/#pagination">page links</a>.</p>
+
+<h2 id="improved-results-and-increased-consistency">Improved results and increased consistency</h2>
+
+<p>This new approach improves the reliability of this endpoint, which on rare occasions skipped some commits during pagination. This enhancement also increases the overall consistency of the API, as all endpoints now paginate resource lists the same way.</p>
+
+<h2 id="old-parameters-still-supported">Old parameters still supported</h2>
+
+<p>The old way of paginating, using <code>top</code>, <code>last_sha</code>, and <code>per_page</code> parameters, is still supported in API v3, but it will be removed in the <a href="https://developer.github.com/v3/versions/#v3-deprecations">next major version of the API</a>. API clients that are manually constructing URLs for pages should be modified to use the new parameters. Even better, API clients shouldn’t construct URLs for pages manually, but should use <a href="/guides/traversing-with-pagination/">page links provided by the <code>Link</code> header</a> in API responses.</p>
+
+<p>Since both the new and the old pagination parameters are still supported in API v3, API clients shouldn’t notice any changes today. Still, if you notice any problems with this endpoint, please <a href="https://github.com/contact?form%5Bsubject%5D=API:+Commits+pagination+improvements">let us know</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2014-05-06-gist-api-now-truncating-large-files/">
+  <h2 class="title">
+  <a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/leongersing.png" alt="Avatar for leongersing">
+      <a href="https://github.com/leongersing">leongersing</a>
+  </li>
+</ul>
+</div>
+
+    <p>In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in <a href="/v3/gists/#detailed-gist-representation">Gist API responses</a>.</p>
+
+<h3 id="truncating-file-contents-larger-than-one-megabyte">Truncating file contents larger than one megabyte</h3>
+
+<p>The <a href="/v3/gists/#detailed-gist-representation">Gist API response</a> includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.</p>
+
+<p>To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won’t notice any impact from this change.)</p>
+
+<h3 id="new-truncated-attribute">New “truncated” attribute</h3>
+
+<p>The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you’ll notice a new <code>truncated</code> attribute included as part of the file metadata. This Boolean attribute indicates whether the <code>content</code> value is truncated for this request.</p>
+
+<pre><code>{
+  files: {
+    "my_large_file.md": {
+      "size": 2097152,
+      "content": "Large content. Truncated at end of first megabyte. [...]",
+      "truncated": true,
+      "raw_url": "https://raw.githubusercontent.com/[...]/my_large_file.md",
+      "type": "text/plain",
+      "language": "Markdown"
+    }
+  }
+}
+</code></pre>
+
+<h3 id="getting-the-full-content-for-truncated-files">Getting the full content for truncated files</h3>
+
+<p>We recognize that sometimes you’ll still want the full content for a file, even if it’s too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the <code>raw_url</code> attribute, and you’ll receive the complete content for that file. For larger files, you’ll need to clone the gist locally via the <code>git_pull_url</code> to access the full file contents.</p>
+
+<p>If you have any questions, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=Gist+API+now+truncates+large+files">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-04-25-user-content-security/">
+  <h2 class="title">
+  <a href="/changes/2014-04-25-user-content-security/">New user content domains</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 25, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/azizshamim.png" alt="Avatar for azizshamim">
+      <a href="https://github.com/azizshamim">azizshamim</a>
+  </li>
+</ul>
+</div>
+
+    <h2 id="securing-your-content">Securing your content</h2>
+
+<p>The <a href="https://bounty.github.com">GitHub Bug Bounty program</a> recently identified a few cross-domain vulnerabilities related to user-generated content, and we’ve shipped improvements today to address those issues.</p>
+
+<p>In order to better isolate your content from potentially malicious content uploaded by other users (e.g., content that might contain Cross-Site Scripting or other embedded attacks), we now serve user-generated content from subdomains of <strong>githubusercontent.com</strong>. This content is no longer served from subdomains of <strong>github.com</strong>.</p>
+
+<h2 id="whats-affected">What’s affected?</h2>
+
+<p>This change affects the following subdomains:</p>
+
+<ul>
+  <li>
+<strong>raw.github.com</strong> : Serves raw file content from your repository.</li>
+  <li>
+<strong>embed.github.com</strong> : Allows users to embed rich GitHub content on other sites.</li>
+  <li>
+<strong>render.github.com</strong> : Displays rich content on GitHub.com.</li>
+  <li>
+<strong>f.cloud.github.com</strong> : Hosts all those amazing gifs you use in Pull Requests and Issues.</li>
+</ul>
+
+<p>Content formerly served by these subdomains is now served from subdomains of <strong>githubusercontent.com</strong>.</p>
+
+<h2 id="older-links">Older links</h2>
+
+<p>If you have old links to this content, don’t worry: as of today, we’re forcing the old domains to redirect to the new domains. Your existing links should continue to work automatically in your browser. If you’re using a URL from Gist or GitHub to directly access user-generated content via <code>curl</code>, <code>wget</code>, or a library (like <a href="https://github.com/jnunemaker/httparty">HTTParty</a>), be sure to configure that tool to follow the redirect.</p>
+
+<h2 id="your-proxies-or-filters">Your proxies or filters</h2>
+
+<p>Some security systems (web proxies, for example) may not recognize the <strong>githubusercontent.com</strong> domain. In those cases, you may need update your proxies and security software accordingly.</p>
+
+<p>As always, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Changes+to+user+content+domains">get in touch</a>.</p>
+
+<p><em>Happy and safe GitHubbing!</em></p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-04-22-deprecating-beta-media-type/">
+  <h2 class="title">
+  <a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 22, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>Now that the GitHub API is <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">serving the v3 media type by default</a>, we are deprecating the legacy <a href="/v3/versions/#beta">beta media type</a>.</p>
+
+<p>We will eventually remove support for the beta media type, but we have no official retirement date to annouce at the moment. When the time comes, rest assured that we’ll announce the retirement with plenty of notice. In the meantime, existing API clients that rely on the beta media type should start making plans to migrate to v3. The beta media type differs from v3 in <a href="/v3/versions/#differences-from-beta-version">just a few places</a>. In most cases, migrating an application from the beta media type to the v3 media type is smooth and painless.</p>
+
+<p>As always, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=API:+Deprecating+the+beta+media+type">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-04-10-deployment-api-preview-extension/">
+  <h2 class="title">
+  <a href="/changes/2014-04-10-deployment-api-preview-extension/">Extending the preview period for the Deployments API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 10, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos">
+      <a href="https://github.com/atmos">atmos</a>
+  </li>
+</ul>
+</div>
+
+    <p>The preview period for the new <a href="/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API</a> continues to yield valuable feedback from developers. In early March, we used that feedback to <a href="/changes/2014-03-03-deployments-api-updates/">improve the payload format</a> that integrations can use to customize deployments. A few weeks later, we began integrating with the new <a href="/changes/2014-03-27-combined-status-api/">Combined Status API</a> to help ensure that only verified code gets deployed, even if you have multiple systems verifying different aspects of your software.</p>
+
+<p>To give developers time to explore these recent refinements to the Deployments API, we’re extending the preview period for a little while longer. As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-04-09-reminder-about-default-media-type-change/">
+  <h2 class="title">
+  <a href="/changes/2014-04-09-reminder-about-default-media-type-change/">Reminder: Default media type will change on April 15</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 9, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>Just a friendly reminder: On April 15, 2014, the GitHub API will start serving the v3 media type by default. Please see the <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">original announcement</a> for full details about <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#whats-changing">this change</a>, <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#who-is-affected">who it affects</a>, and <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#what-should-you-do">how to ensure that you are prepared</a>.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-04-08-reset-api-tokens/">
+  <h2 class="title">
+  <a href="/changes/2014-04-08-reset-api-tokens/">Recommendation: Reset OAuth authorizations</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 8, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>As <a href="https://github.com/blog/1818-security-heartbleed-vulnerability">announced earlier today</a>, we are actively responding
+to the recently-disclosed <a href="https://github.com/blog/1818-security-heartbleed-vulnerability">Heartbleed security
+vulnerability</a> in OpenSSL. While at this time GitHub has
+no indication that the attack has been used beyond testing the vulnerability, we
+recommend that integrators <a href="/v3/oauth_authorizations/#reset-an-authorization">reset the API authorizations</a> for their OAuth
+applications.</p>
+
+<p>We’ve added a <a href="/v3/oauth_authorizations/#reset-an-authorization">new API method</a> for this exact purpose. Calling this method
+will invalidate the old token and return a new token for applications to store
+and use in its place. This new method provides a safe way to reset user
+authorizations without requiring users to re-authorize the application on the
+web.</p>
+
+<p>Integrators can also use the existing revocation methods to <a href="/v3/oauth_authorizations/#revoke-all-authorizations-for-an-application">revoke all
+tokens</a> or <a href="/v3/oauth_authorizations/#revoke-an-authorization-for-an-application">revoke a single token</a> for their applications.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+resetting+tokens">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">
+  <h2 class="title">
+  <a href="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">Understanding search results and potential timeouts</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 7, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak">
+      <a href="https://github.com/izuzak">izuzak</a>
+  </li>
+</ul>
+</div>
+
+    <p>Some queries are computationally expensive for our search infrastructure to
+execute. To keep the <a href="/v3/search">Search API</a> fast for everyone, we limit how
+long any individual query can run. In rare situations when a query exceeds the
+time limit, the API returns all matches that were found prior to the timeout.</p>
+
+<p>Starting today, the Search API also now <a href="/v3/search/#timeouts-and-incomplete-results">informs you when such a timeout
+happens</a>. Reaching a timeout does
+not necessarily mean that search results are incomplete. It just means that the
+query was discontinued before it searched through all possible data. More
+results might have been found, but also might not.</p>
+
+<p>In some cases, if you know that your search results are potentially incomplete,
+you might think about the data differently. By exposing timeouts when they
+happen, the API helps you better understand how to interpret the results.</p>
+
+<p>We hope this is useful as you integrate with the Search API. In the meantime,
+we’re working on improving search so that these timeouts occur as rarely as
+possible. If you have any questions, <a href="https://github.com/contact?form%5Bsubject%5D=Search+API">let us know</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2014-04-04-create-public-repo-without-repo-scope/">
+  <h2 class="title">
+  <a href="/changes/2014-04-04-create-public-repo-without-repo-scope/">Grant access to create public repositories without granting access to private repositories</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 4, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>The <a href="/v3/repos/#create">Create Repository method</a> now allows creating public repositories via
+OAuth with <code>public_repo</code> <a href="/v3/oauth/#scopes">scope</a>.  This means you can safely grant third
+party applications the ability to create public repositories on your behalf
+without granting access to your private repositories.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+create+repositories+with+public_repo+scope">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-03-27-combined-status-api/">
+  <h2 class="title">
+  <a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 27, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga">
+      <a href="https://github.com/bhuga">bhuga</a>
+  </li>
+</ul>
+</div>
+
+    <p>What does it mean for a branch to be “green?” The <a href="/v3/repos/statuses/">Status API</a> helps
+thousands of teams answer that question. Developers use it to record the status
+of continuous integration builds, contributor license agreements, code coverage
+analysis, automated security testing, dependency management, and more.</p>
+
+<p>For many teams, a branch is considered “green” only when <em>all</em> of their various
+status checks are successful. With the new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status
+API</a>, developers can easily fetch this single, consolidated
+status for any branch, commit, or tag.</p>
+
+<h3 id="status-context">Status context</h3>
+
+<p>To help multiple service providers use the Status API simultaneously, statuses
+now support a <code>context</code> field. This field allows a provider to distinguish its
+statuses from another provider’s statuses. For example, your <a href="http://jenkins-ci.org/">Jenkins</a> builds
+might use a context of <code>ci/jenkins</code>, while your <a href="http://brakemanscanner.org/">Brakeman</a> checks might adopt a
+context of <code>security/brakeman</code>.</p>
+
+<p>The new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status endpoint</a> returns a single,
+combined state, as well as the latest status from each context. Systems that
+consume status updates can now get all the information they need in one place.</p>
+
+<h3 id="opt-in">Opt-in</h3>
+
+<p>The existing <a href="/v3/repos/statuses/#list-statuses-for-a-specific-ref">Status API</a> continues to work as it always has. The
+<code>context</code> field is entirely optional, and the <a href="https://github.com/blog/1227-commit-status-api">color of the merge button on pull
+requests</a> does not currently
+take context into account.</p>
+
+<h3 id="preview-period">Preview period</h3>
+
+<p>We’re making this new API available today for developers to
+<a href="/v3/repos/statuses/">preview</a>. During this period, we may change aspects of the Combined
+Status API from time to time. We will announce any changes here (on the
+developer blog), but we will not provide any advance notice.</p>
+
+<p>We expect the preview period to last 30-60 days. At the end of preview period,
+the Combined Status API will become an official component of GitHub API v3. At
+that point, this new API will be stable and suitable for production use.</p>
+
+<p>We hope you’ll <a href="/v3/repos/statuses/">try it out</a> and <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">send us your feedback</a>!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-03-18-paginating-method-changes/">
+  <h2 class="title">
+  <a href="/changes/2014-03-18-paginating-method-changes/">Pagination changes for some resource lists</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 18, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>In an effort to keep the API fast for everyone, we’re enabling
+<a href="/v3/#pagination">pagination</a> on some API methods that previously did not support it.
+Beginning today, the methods below will paginate if you include <code>page</code> or
+<code>per_page</code> query parameters. Starting April 17th, 2014, these methods will
+<em>always</em> return <a href="/v3/#pagination">paginated results</a>. If you have any questions or
+run into trouble, feel free to <a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Pagination+changes">get in touch</a>.</p>
+
+<p>Here’s the complete list of updated methods:</p>
+
+<h4 id="gist-comments"><a href="/v3/gists/comments/#list-comments-on-a-gist">Gist comments</a></h4>
+
+<pre><code>GET /gists/:gist_id/comments
+</code></pre>
+
+<h4 id="gist-commits"><a href="/v3/gists/#list-gist-commits">Gist commits</a></h4>
+
+<pre><code>GET /gists/:gist_id/commits
+</code></pre>
+
+<h4 id="gist-forks"><a href="/v3/gists/#list-gist-forks">Gist forks</a></h4>
+
+<pre><code>GET /gists/:gist_id/forks
+</code></pre>
+
+<h4 id="git-refs"><a href="/v3/git/refs/#get-all-references">Git refs</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/git/refs
+</code></pre>
+
+<h4 id="issue-labels"><a href="/v3/issues/labels/#list-labels-on-an-issue">Issue labels</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/issues/:number/labels
+</code></pre>
+
+<h4 id="milestone-labels"><a href="/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone">Milestone labels</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/milestones/:id/labels
+</code></pre>
+
+<h4 id="organization-teams"><a href="/v3/orgs/teams/#list-teams">Organization teams</a></h4>
+
+<pre><code>GET /orgs/:org/teams
+</code></pre>
+
+<h4 id="pull-request-commits"><a href="/v3/pulls/#list-commits-on-a-pull-request">Pull Request commits</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/pulls/:number/commits
+</code></pre>
+
+<h4 id="pull-request-files"><a href="/v3/pulls/#list-pull-requests-files">Pull Request files</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/pulls/:number/files
+</code></pre>
+
+<h4 id="release-assets"><a href="/v3/repos/releases/#list-assets-for-a-release">Release assets</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/releases/:id/assets
+</code></pre>
+
+<h4 id="repository-collaborators"><a href="/v3/repos/collaborators/#list">Repository collaborators</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/collaborators
+</code></pre>
+
+<h4 id="repository-contributors"><a href="/v3/repos/#list-contributors">Repository contributors</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/contributors
+</code></pre>
+
+<h4 id="repository-branches"><a href="/v3/repos/#list-branches">Repository branches</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/branches
+</code></pre>
+
+<h4 id="repository-downloads"><a href="/v3/repos/downloads/#list-downloads-for-a-repository">Repository downloads</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/downloads
+</code></pre>
+
+<h4 id="repository-keys"><a href="/v3/repos/keys/#list">Repository keys</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/keys
+</code></pre>
+
+<h4 id="repository-labels"><a href="/v3/issues/labels/#list-all-labels-for-this-repository">Repository labels</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/labels
+</code></pre>
+
+<h4 id="repository-tags"><a href="/v3/repos/#list-tags">Repository tags</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/tags
+</code></pre>
+
+<h4 id="repository-teams"><a href="/v3/repos/#list-teams">Repository teams</a></h4>
+
+<pre><code>GET /repos/:owner/:repo/teams
+</code></pre>
+
+<h4 id="team-members"><a href="/v3/orgs/teams/#list-team-members">Team members</a></h4>
+
+<pre><code>GET /teams/:id/members
+</code></pre>
+
+<h4 id="team-repositories"><a href="/v3/orgs/teams/#list-team-repos">Team repositories</a></h4>
+
+<pre><code>GET /teams/:id/repos
+</code></pre>
+
+<h4 id="user-emails-v3-media-type-only">
+<a href="/v3/users/emails/#list-email-addresses-for-a-user">User emails</a> (v3 media type only)</h4>
+
+<pre><code>GET /user/emails
+</code></pre>
+
+<h4 id="user-keys"><a href="/v3/users/keys/#list-public-keys-for-a-user">User keys</a></h4>
+
+<pre><code>GET /users/:user/keys
+GET /user/keys
+</code></pre>
+
+
+</div>
+
+<div class="change" id="/changes/2014-03-12-page-build-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-03-12-page-build-event-for-webhooks/">Page Build Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 12, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter">
+      <a href="https://github.com/benbalter">benbalter</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made it even easier to track the status of your <a href="http://pages.github.com/">GitHub Pages</a> builds. By subscribing to the new <a href="/v3/activity/events/types/#pagebuildevent"><code>page_build</code></a> event, your application will receive an event payload containing the results of each build. (As always, these builds occur automatically following each push to a GitHub Pages-enabled branch.)</p>
+
+<p>If you have a <a href="/webhooks/">webhook</a> with the <a href="https://github.com/blog/1778-webhooks-level-up">“send me everything” option</a> selected (or if you use the “<a href="/changes/2014-02-24-wildcard-event-for-webhooks/">wildcard event</a>” via the API), you will receive the <code>page_build</code> event after the next build of your GitHub Pages site. Alternatively, if you prefer to subscribe to specific event types, you can add to the new <code>page_build</code> event to your webhooks via your repository’s webhook settings page or via the <a href="/v3/repos/hooks/">webhooks API</a>.</p>
+
+<p>For more information, be sure to check out our guide on <a href="/webhooks/">working with webhooks</a>. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+Page+Build+Event">drop us a line</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-03-05-reminder-about-upcoming-cutover-test/">
+  <h2 class="title">
+  <a href="/changes/2014-03-05-reminder-about-upcoming-cutover-test/">Reminder: March 12 Cutover Test for Default Media Type</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 5, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>In January, we announced an <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">upcoming change to the default media type</a>. To help developers assess the impact of that change before it becomes permanent, we’re performing a <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#cutover-test">24-hour cutover test next week</a>.</p>
+
+<p>From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#whats-changing">respond with the v3 media type by default</a>. (See the <a href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20140312T00&amp;p1=1440">start time for the cutover test in your time zone</a>.)</p>
+
+<p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
+
+<p>Please see the <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">original announcement</a> for full details. If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-03-04-timezone-handling-changes/">
+  <h2 class="title">
+  <a href="/changes/2014-03-04-timezone-handling-changes/">Improved timezone handling in the API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 4, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/dbussink.png" alt="Avatar for dbussink">
+      <a href="https://github.com/dbussink">dbussink</a>
+  </li>
+</ul>
+</div>
+
+    <p>We have improved support for handling timezones in our API. For example, if you
+create commits through the API, we now allow for specifying timezone information
+more accurately.</p>
+
+<p>We apply the following rules, in order of priority, to determine timezone
+information for API calls:</p>
+
+<h4 id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information">Explicitly provide an ISO 8601 timestamp with timezone information</h4>
+
+<p>For API calls that allow for a timestamp to be specified, we use that exact
+timestamp. An example of this is the <a href="/v3/git/commits">Commits API</a> which allows
+for specifying the <code>date</code> property.</p>
+
+<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Dirkjan Bussink"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"d.bussink@gmail.com"</span><span class="p">,</span>
+    <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2014-02-27T15:05:06+01:00"</span>
+  <span class="p">},</span>
+  <span class="s2">"parents"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span>
+  <span class="p">],</span>
+  <span class="s2">"tree"</span><span class="p">:</span> <span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span>
+<span class="p">}</span></code></pre>
+
+<h4 id="using-the-time-zone-header">Using the <code>Time-Zone</code> header</h4>
+
+<p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
+to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
+
+<pre><code>$ curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md
+</code></pre>
+
+<p>This means that we generate a timestamp for the moment your API call is made in
+the timezone this header defines. For example, the <a href="/v3/repos/contents/">Contents API</a>
+generates a git commit for each addition or change and uses the current time
+as the timestamp. This header will determine the timezone used for generating
+that current timestamp.</p>
+
+<h4 id="using-the-last-known-timezone-for-the-user">Using the last known timezone for the user</h4>
+
+<p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
+API, we use the last known timezone for the authenticated user. The last know
+timezone is updated whenever you browse the GitHub.com website.</p>
+
+<h4 id="utc">UTC</h4>
+
+<p>If the steps above don’t result in any information, we use UTC as the timezone
+to create the git commit.</p>
+
+<p>If you have any questions or feedback, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=API+timezones">contact</a> us!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-03-03-deployments-api-updates/">
+  <h2 class="title">
+  <a href="/changes/2014-03-03-deployments-api-updates/">New Payload Format for Deployments</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 3, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos">
+      <a href="https://github.com/atmos">atmos</a>
+  </li>
+</ul>
+</div>
+
+    <p>As we <a href="/changes/2014-01-09-preview-the-new-deployments-api/">iterate on the preview</a> for the new Deployments API, we’re making sure that it’s friendly to work with for the apps built on top of it.</p>
+
+<h2 id="deserialize-deployment-payloads">Deserialize Deployment Payloads</h2>
+
+<p>To make the API even easier to use, we’ll now return your custom payload as a JSON object along with the rest of the Deployment resource. No need to parse it as JSON again.</p>
+
+<h2 id="code-you-need-to-update">Code You Need to Update</h2>
+
+<p>You should only need to remove the JSON parsing if you’re taking advantage of the custom payloads. The formats for creating Deployments remain unchanged.</p>
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-02-28-issue-and-pull-query-enhancements/">
+  <h2 class="title">
+  <a href="/changes/2014-02-28-issue-and-pull-query-enhancements/">Query enhancements for listing issues and pull requests</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 28, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made it even easier to list all <a href="/v3/issues/#list-issues">issues</a> and <a href="/v3/pulls/#list-pull-requests">pull requests</a> via the API.
+The <code>state</code> parameter now supports a value of <code>all</code> that will return issues and
+pull requests regardless of state.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/repos/atom/vim-mode/issues\?state\=all
+</pre>
+
+<p>We’ve also introduced new sorting options for <a href="/v3/pulls/#list-pull-requests">listing pull requests</a>. You can now sort pull requests by <code>created</code>, <code>updated</code>,
+<code>popularity</code>, and <code>long-running</code>.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/repos/rails/rails/pulls\?sort\=long-running\&amp;direction\=desc
+</pre>
+
+<p>Happy querying. If you have any questions or feedback <a href="https://github.com/contact?form%5Bsubject%5D=API+query+enhancements">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-02-25-organization-oauth-scopes/">
+  <h2 class="title">
+  <a href="/changes/2014-02-25-organization-oauth-scopes/">OAuth scopes for organization and team resources</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 25, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>As a follow up to <a href="http://developer.github.com/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">the new scopes</a> we announced yesterday, we’ve
+introduced even more OAuth scopes for working with organization and team
+resources:</p>
+
+<ul>
+  <li>
+<code>read:org</code> provides read-only access to organizations, teams, and membership.</li>
+  <li>
+<code>write:org</code> allows an application to publicize and unpublicize an organization membership.</li>
+  <li>
+<code>admin:org</code> enables an application to fully manage organizations, teams, and memberships.</li>
+</ul>
+
+<p>Check out <a href="/v3/oauth/#scopes">the full list of OAuth scopes</a> supported by the API to
+ensure your application asks for only the permissions it needs. As always, if
+you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
+
+</div>
+
+<div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>As <a href="https://github.com/blog/1786-enhanced-oauth-security-for-ssh-keys">we announced</a>, we’ve made some important changes to the way that API consumers manage SSH keys.</p>
+
+<h2 id="finer-grained-oauth-scopes">Finer-grained OAuth scopes</h2>
+
+<p>To help third party applications request only permissions that they need, the API now supports three new <a href="/v3/oauth/#scopes">scopes</a> for working with a user’s public SSH keys.</p>
+
+<ul>
+  <li>
+<code>read:public_key</code> provides read access to the user’s SSH keys</li>
+  <li>
+<code>write:public_key</code> allows an app to read existing keys and create new ones</li>
+  <li>
+<code>admin:public_key</code> enables an app to read, write, and delete keys</li>
+</ul>
+
+<h2 id="changes-to-user-scope">Changes to <code>user</code> scope</h2>
+
+<p>Historically, <code>user</code> scope has provided full access to manage a user’s SSH keys. Now that we have dedicated scopes for managing a user’s SSH keys, we have removed those permissions from the <code>user</code> scope. Now <code>user</code> scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.</p>
+
+<h2 id="keys-are-now-immutable">Keys are now immutable</h2>
+
+<p>To simplify the security audit trail for SSH keys, we’re making keys immutable. API consumers can continue to create keys and delete keys as needed, but keys can no longer be changed. To change an existing key, API consumers should delete the existing key and create a new one with the desired attributes. This change applies both to a <a href="/v3/users/keys/">user’s SSH keys</a> and a <a href="/v3/repos/keys/">repository’s deploy keys</a>.</p>
+
+<h2 id="deleting-keys-when-revoking-a-token">Deleting keys when revoking a token</h2>
+
+<p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
+
+<p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-02-21-gist-raw-file-url-change/">
+  <h2 class="title">
+  <a href="/changes/2014-02-21-gist-raw-file-url-change/">Gist raw file URI change</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 21, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/spicycode.png" alt="Avatar for spicycode">
+      <a href="https://github.com/spicycode">spicycode</a>
+  </li>
+</ul>
+</div>
+
+    <p>The raw host for all Gist files is changing immediately.  This change was made to further isolate user content from trusted GitHub applications.
+The new host is <code>https://gist.githubusercontent.com</code>.  Existing URIs will redirect to the new host.</p>
+
+</div>
+
+<div class="change" id="/changes/2014-02-19-repo-contributors-for-empty-repos/">
+  <h2 class="title">
+  <a href="/changes/2014-02-19-repo-contributors-for-empty-repos/">Repository Contributors and Empty Repositories</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 20, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak">
+      <a href="https://github.com/izuzak">izuzak</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to the <a href="/v3/repos/#list-contributors">Repository Contributors API</a> in the way empty repositories are handled. Previously, the API returned a <code>404 Not Found</code> status when the list of contributors was fetched for an empty repository. To improve consistency with other API endpoints and reduce confusion, the API now returns a <code>204 No Content</code> status instead.</p>
+
+<p>If you notice any strangeness, <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">just let us know</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2014-02-13-exposing-the-page-api/">
+  <h2 class="title">
+  <a href="/changes/2014-02-13-exposing-the-page-api/">Introducing the Pages API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 13, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/gjtorikian.png" alt="Avatar for gjtorikian">
+      <a href="https://github.com/gjtorikian">gjtorikian</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve created <a href="/v3/repos/pages/">a new API to GitHub Pages</a>. This API is accessible
+by owners of a Pages repo, whether it’s owned by an individual or an organization.</p>
+
+<p>With the Pages API, you can get information about your site, as well as details
+on previous Pages builds.</p>
+
+<p>Enjoy!</p>
+
+</div>
+
+<div class="change" id="/changes/2014-02-10-repo-hook-scopes/">
+  <h2 class="title">
+  <a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 10, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>Many third party services need to set up <a href="http://developer.github.com/v3/repos/hooks/">hooks</a> in order to act upon events
+in your repositories. Today, we’ve introduced three new <a href="http://developer.github.com/v3/oauth/#scopes">scopes</a> that provide
+more granular access to your repository hooks without allowing access to your
+repository contents:</p>
+
+<ul>
+  <li>
+<code>read:repo_hook</code> grants read and ping access to hooks in public or private repositories.</li>
+  <li>
+<code>write:repo_hook</code> grants read, write, and ping access to hooks in public or private repositories.</li>
+  <li>
+<code>admin:repo_hook</code> grants read, write, ping, and delete access to hooks in public or private repositories.</li>
+</ul>
+
+<p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 10, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
+<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.</p>
+
+<p>The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.</p>
+
+<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
+By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
+you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
+
+</div>
+
+<div class="change" id="/changes/2014-01-29-audit-org-members-for-2fa/">
+  <h2 class="title">
+  <a href="/changes/2014-01-29-audit-org-members-for-2fa/">Audit organization members for two-factor authentication</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 29, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve added a <a href="/v3/orgs/members/#audit-two-factor-auth">new filter</a> for listing members of an organization without
+<a href="https://github.com/blog/1614-two-factor-authentication">two-factor authentication</a> enabled:</p>
+
+<pre class="terminal">
+$ curl -H "Authorization: token [yours]" \
+       https://api.github.com/orgs/[orgname]/members\?filter\=2fa_disabled
+</pre>
+
+<p>The new filter is available for owners of organizations with private
+repositories. Happy auditing and <a href="https://github.com/contact?form%5Bsubject%5D=API+2FA+filter">send us your feedback or questions</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-01-09-preview-the-new-deployments-api/">
+  <h2 class="title">
+  <a href="/changes/2014-01-09-preview-the-new-deployments-api/">Preview the New Deployments API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 9, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos">
+      <a href="https://github.com/atmos">atmos</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today we’re excited to announce a <a href="/v3/repos/deployments/">Deployments API</a>. We ship a lot of
+software at GitHub: web, mobile, and native. For the last few years, we’ve been
+driving our deployments from our <a href="https://speakerdeck.com/jnewland/chatops">ChatOps tooling</a> and we’ve learned a
+lot. The Deployments API is a generalization of the approach that we’ve been
+taking, and we’re really excited to see what our users and integrations start
+building around it.</p>
+
+<p>Deployments are a new model in the GitHub ecosystem. We don’t have any UI
+components currently, and deployments are intended to be used exclusively by
+tooling.  If you’re familiar with the Status API, you know that it allows
+various tools to report on the status of a commit (e.g., the progress of an
+attempt to perform a build at a particular commit). The Status API doesn’t
+perform the build; it just reports the results. Much like the Status API, we
+won’t be doing actual deployments for you. Instead, the API provides a way for
+you to track the status of your deployments. We’re hoping to provide
+consistency across the various type of release processes, regardless of the
+underlying steps involved with getting your code built or shipped to your
+servers.</p>
+
+<h2 id="highlights">Highlights</h2>
+
+<h3 id="automatic-merging">Automatic Merging</h3>
+
+<p>The system can auto-merge the default branch for the repository if the
+requested deployment ref is behind the default branch. On active projects it’s
+easy to fall behind, so let automation watch your back.</p>
+
+<h3 id="commit-status-integration">Commit Status Integration</h3>
+
+<p>By default, the system rejects deployment requests for repositories that have
+commit statuses but don’t have a green build for the deployment ref. This can
+be bypassed, but is useful in cases where continuous integration is being used.</p>
+
+<h3 id="force-deployments">Force Deployments</h3>
+
+<p>Sometimes the world crashes down on you, and you need to just get the code out
+the door.  Forced deployments bypass any commit status checks or ahead/behind
+checks in the repository.</p>
+
+<h3 id="deployment-statuses">Deployment Statuses</h3>
+
+<p>Different deployment systems can update the status of a deployment to be
+<code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>. There’s also a field for linking
+to deployment output.</p>
+
+<h3 id="events">Events</h3>
+
+<p>Both Deployments and Deployment Statuses trigger events on GitHub. 3rd party
+integrations can listen for these events via <a href="/v3/repos/hooks/">webhooks</a> and choose
+whether or not to actually deploy the repository that the event was created for.</p>
+
+<h2 id="preview-period">Preview Period</h2>
+
+<p>We’re making this new API available today for developers to
+<a href="/v3/repos/deployments/#preview-mode" data-proofer-ignore="">preview</a>.  We think developers and existing integrations are
+going to love it, but we want to <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get your feedback</a> before we declare
+the Deployments API “final” and “unchangeable.” We expect the preview period to
+last for roughly 60-90 days.</p>
+
+<p>As we discover opportunities to improve the API during the preview period, we
+may ship changes that break clients using the preview version of the API. We
+want to iterate quickly. To do so, we will announce any changes here (on the
+developer blog), but we will not provide any advance notice.</p>
+
+<p>At the end of preview period, the Deployments API will become an official
+component of GitHub API v3. At that point, the new Deployments API will be
+stable and suitable for production use.</p>
+
+<p>We hope you’ll take it for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">send us your feedback</a>.</p>
+
+<p><img src="https://camo.githubusercontent.com/da8106f759bf0d163fb002e715fb1d1f1d2b6f4e/687474703a2f2f736869706974737175697272656c2e6769746875622e696f2f696d616765732f736869702532306974253230737175697272656c2e706e67" alt="Shipit Squirrel"></p>
+
+
+</div>
+
+<div class="change" id="/changes/2014-01-07-upcoming-change-to-default-media-type/">
+  <h2 class="title">
+  <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">Upcoming Change to Default Media Type</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 7, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you’ll find tips below to help you smoothly navigate this change.</p>
+
+<h2 id="whats-changing">What’s changing?</h2>
+
+<h3 id="a-new-default-version">A new default version</h3>
+
+<p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. Today, requests receive the beta version by default. On April 15<a href="#cutover-test">*</a>, requests will begin receiving the v3 version by default.</p>
+
+<p>For the most part, beta and v3 are remarkably similar. There are <a href="/v3/versions/#differences-from-beta-version">just a few differences</a> to keep in mind.</p>
+
+<h3 id="a-new-default-media-type">A new default media type</h3>
+
+<p>The version is one part of the <a href="/v3/media">media type</a>. By default, the API provides the beta media type:</p>
+
+<pre><code>application/vnd.github.beta+json
+</code></pre>
+
+<p>On April 15<a href="#cutover-test">*</a>, requests will begin responding with the v3 media type by default:</p>
+
+<pre><code>application/vnd.github.v3+json
+</code></pre>
+
+<h2 id="who-is-affected">Who is affected?</h2>
+
+<p>Since 2012, we have encouraged developers to explicitly <a href="/v3/media/#request-specific-version">request a specific media type via the <code>Accept</code> header</a>. If you are requesting either beta or v3 via the <code>Accept</code> header, then you are <em>not</em> affected by this change. The API will continue to respond with the requested media type.</p>
+
+<p>If you are not requesting beta or v3 via the <code>Accept</code> header, then the API is currently responding with the beta media type. On April 15<a href="#cutover-test">*</a>, the API will begin responding with the v3 media type. If your application relies on <a href="/v3/versions/#differences-from-beta-version">functionality that differs between beta and v3</a>, then you are affected by this change. You will need to take steps to prepare for the change.</p>
+
+<h2 id="what-should-you-do">What should you do?</h2>
+
+<p>If you are affected by this change, we recommend that you:</p>
+
+<ol>
+  <li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there’s a good chance that they’ve already done the work for you. In that case, you can just update to the latest version of that library.)</li>
+  <li>Request the v3 media type via the <code>Accept</code> header.</li>
+</ol>
+
+<p>If you cannot update your application to depend on the v3 functionality by April 15<a href="#cutover-test">*</a>, you can just request the beta media type via the <code>Accept</code> header. Doing so will insulate you from this change.</p>
+
+<h2 id="cutover-test">Cutover test on March 12, 2014</h2>
+
+<p>To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.</p>
+
+<p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
+
+<h2 id="stay-informed">Stay informed</h2>
+
+<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we’ll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We’ll be happy to help.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-12-13-paginating-org-members/">
+  <h2 class="title">
+  <a href="/changes/2013-12-13-paginating-org-members/">Paginated results for organization members</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 13, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>The <a href="http://developer.github.com/v3/orgs/members/#members-list">organization members</a> and <a href="http://developer.github.com/v3/orgs/members/#public-members-list">organization public members</a> methods will soon return paginated results by default. Beginning
+today, these methods will paginate if you include <code>page</code> or <code>per_page</code> query
+parameters. Starting January 15th, 2014, these methods will <em>always</em> return paginated
+results.</p>
+
+<p>As always, be sure and follow those <a href="http://developer.github.com/v3/#pagination">Link headers</a> to get
+subsequent results. If you have any questions or run into trouble, feel free to
+<a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Paginating+org+members">get in touch</a>.</p>
+
+<p>Happy paginating.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-11-04-releases-api-is-official/">
+  <h2 class="title">
+  <a href="/changes/2013-11-04-releases-api-is-official/">Releases API is Official</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    November 4, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>Hot on the heels of the <a href="http://developer.github.com/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">Search API</a>, the <a href="/v3/repos/releases/">Releases API</a>
+is now officially part of GitHub API v3.  We now consider it stable for
+production use.  </p>
+
+<h3 id="preview-media-type-no-longer-needed">Preview Media Type No Longer Needed</h3>
+
+<p>If you used the Releases API during the preview period, you needed to provide a custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.manifold-preview+json
+</code></pre>
+
+<p>Now that the preview period has ended, you no longer need to pass this custom media type.</p>
+
+<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.v3+json
+</code></pre>
+
+<h3 id="onward">Onward!</h3>
+
+<p>Thanks again to everyone that tried out the Releases API during the preview period.
+We got some great feedback, and we are already discussing additions to the API.</p>
+
+<p>We can’t wait to see what you ship!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">
+  <h2 class="title">
+  <a href="/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">Search API Becomes an Official Part of API v3</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 29, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re excited to announce that the <a href="/v3/search">new Search API</a> has graduated from <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a>.
+As of today, the Search API is an official part of <a href="/v3">GitHub API v3</a>.
+As such, the Search API is now stable and suitable for production use.</p>
+
+<h3 id="preview-media-type-no-longer-needed">Preview Media Type No Longer Needed</h3>
+
+<p>If you used the Search API during the preview period, you needed to provide a custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.preview+json
+</code></pre>
+
+<p>Now that the preview period has ended, you no longer need to pass this custom media type.</p>
+
+<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.v3+json
+</code></pre>
+
+<h3 id="onward">Onward!</h3>
+
+<p>Thanks again to everyone that tried out the Search API during the preview period.</p>
+
+<p>We can’t wait to see what you build!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-10-18-new-code-search-requirements/">
+  <h2 class="title">
+  <a href="/changes/2013-10-18-new-code-search-requirements/">New Validation Rule for Beta Code Search API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 18, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>As we <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">prepare to end the preview period</a> for the new search API,
+we’re making sure that it’s ready to handle the traffic from all the apps you’ll build on top of it.</p>
+
+<h2 id="new-validation-rule">New Validation Rule</h2>
+
+<p>In order to support the expected volume of requests, we’re applying a new validation rule to the <a href="/v3/search/#search-code">Code Search API</a>.
+Starting today, you will need to scope your code queries to a specific set of users, organizations, or repositories.</p>
+
+<p>As usual, you specify the query via the <code>q</code> parameter.
+The value must include <a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">at least one user, organization, or repository</a>.</p>
+
+<p>For example, with this query, we’re searching for code from <a href="https://github.com/twitter">@twitter</a> or <a href="https://github.com/facebook">@facebook</a> that uses an MIT License:</p>
+
+<pre><code>MIT License user:twitter user:facebook
+</code></pre>
+
+<p>And here, we’re looking for uses of the underscore library in <a href="https://github.com/mozilla/BrowserQuest">@mozilla’s BrowserQuest</a> repository:</p>
+
+<pre><code>underscore language:js repo:mozilla/BrowserQuest
+</code></pre>
+
+<p>To perform these queries via the API, we would use the following URLs (respectively):</p>
+
+<pre><code>https://api.github.com/search/code?q=MIT+License+user%3Atwitter+user%3Afacebook
+
+https://api.github.com/search/code?q=underscore+language%3Ajs+repo%3Amozilla%2FBrowserQuest
+</code></pre>
+
+<p>All the various <a href="https://help.github.com/articles/searching-code">code search qualifiers</a> are still available to you.
+A <a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">user, organization, or repository qualifier</a> is now required.
+The other search qualifiers are still optional.</p>
+
+<h2 id="other-search-types-not-affected">Other Search Types Not Affected</h2>
+
+<p>This new validation only applies to the <a href="/v3/search/#search-code">Code Search API</a>.
+It does not apply to the Search API for <a href="/v3/search/#search-issues">issues</a>, <a href="/v3/search/#search-users">users</a>, or <a href="/v3/search/#search-repositories">repositories</a>.</p>
+
+<p>This validation does not affect searches performed on <a href="https://github.com/search">github.com/search</a>.</p>
+
+<p>By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
+As we continue to tune the Search API, we hope to relax this validation in the future.
+There’s no ETA, but we’d like to relax it as soon as it’s feasible.</p>
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Validation+Rule+for+Code+Search+API">get in touch</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-10-08-list-all-user-teams/">
+  <h2 class="title">
+  <a href="/changes/2013-10-08-list-all-user-teams/">List all teams for the authenticated user</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 8, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>We just added a <a href="/v3/orgs/teams/#list-user-teams">new API method</a> to list all
+the teams for the authenticated user across all organizations:</p>
+
+<pre class="terminal">
+$ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
+
+[
+  {
+    "name": "Testing",
+    "id": 396018,
+    "slug": "testing",
+    "permission": "pull",
+    "url": "https://api.github.com/teams/396018",
+    "members_url": "https://api.github.com/teams/396018/members{/member}",
+    "repositories_url": "https://api.github.com/teams/396018/repos",
+    "members_count": 1,
+    "repos_count": 0,
+    "organization": {
+      "login": "dotfiles",
+      "id": 1593590,
+      "url": "https://api.github.com/orgs/dotfiles",
+      "repos_url": "https://api.github.com/orgs/dotfiles/repos",
+      "events_url": "https://api.github.com/orgs/dotfiles/events",
+      "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",
+      "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"
+    }
+  },
+  ...
+]
+</pre>
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Teams+for+User">drop us a line</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
+  <h2 class="title">
+  <a href="/changes/2013-10-04-oauth-changes-coming/">OAuth changes coming</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 4, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/tclem.png" alt="Avatar for tclem">
+      <a href="https://github.com/tclem">tclem</a>
+  </li>
+</ul>
+</div>
+
+    <p>Starting today, we are returning granted scopes as part of the
+<a href="/v3/oauth/#github-redirects-back-to-your-site">access_token response</a>.
+For example, if you are making a POST with the <code>application/json</code>
+mime-type you’ll see an additional field for the granted scopes.</p>
+
+<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
+  <span class="s2">"access_token"</span><span class="p">:</span><span class="s2">"e72e16c7e42f292c6912e7710c838347ae178b4a"</span><span class="p">,</span>
+  <span class="s2">"scope"</span><span class="p">:</span><span class="s2">"repo,gist"</span><span class="p">,</span>
+  <span class="s2">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span>
+<span class="p">}</span></code></pre>
+
+<p>Right now, these scopes will be identical to what you requested, but we
+are moving towards a feature set that will allow GitHub users to edit
+their scopes, effectively granting your application less access than you
+originally requested. You should be aware of this possibility and adjust
+your application behavior accordingly.</p>
+
+<p>Some things to watch out for and keep in mind:</p>
+
+<ul>
+  <li>
+    <p>Most third party applications using GitHub OAuth to identify users have
+the best success in adoption by starting out with a request for the
+minimum access that the application can possibly get away with.
+Something like no scopes or just <code>user:email</code> is very sane.</p>
+  </li>
+  <li>
+    <p>It is important to handle the error cases where a user chooses to
+grant you less access than you originally requested. Now that we are
+surfacing the granted scopes on the access_token response, applications
+can warn or otherwise communicate with their users that they will see
+reduced functionality or be unable to perform some actions.</p>
+  </li>
+  <li>
+    <p>Applications can always send users back through the flow again to get
+additional permission, but don’t forget that users can always say no.</p>
+  </li>
+</ul>
+
+</div>
+
+<div class="change" id="/changes/2013-09-28-an-update-on-the-new-search-api/">
+  <h2 class="title">
+  <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">An Update on the New Search API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 28, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>We owe a big “Thank You!” to everyone that has taken the time to try out the <a href="/changes/2013-07-19-preview-the-new-search-api">new Search API</a>.
+We <code>:heart:</code> every one of you.
+Just as we hoped,
+the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> has allowed us to see how you want to use the new API,
+and it has given us a chance to improve the API before finalizing it.</p>
+
+<p>In order to incorporate everything that we’ve learned,
+we’re going to keep the Search API in <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a> for a little while longer.
+We have a few bugs to squash and a couple performance kinks to iron out.
+We’re hard at work on those improvements now,
+and we expect to have more news in the coming weeks.</p>
+
+<p>In the mean time, <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">keep the suggestions coming</a>!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-09-25-releases-api/">
+  <h2 class="title">
+  <a href="/changes/2013-09-25-releases-api/">Releases API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 25, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>This summer we made it easier to <a href="https://github.com/blog/1547-release-your-software">release your software</a>.  Today, you can fully automate those releases via the
+<a href="http://developer.github.com/v3/repos/releases/">Releases API Preview</a>.</p>
+
+<p>This API is a little different due to the binary assets.  We use the <code>Accept</code> header for content negotiation when requesting
+a release asset.  Pass a standard API media type to get the API representation:</p>
+
+<pre class="terminal">
+$ curl -i -H "Authorization: token TOKEN" \
+     -H "Accept: application/vnd.github.manifold-preview" \
+     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
+
+HTTP/1.1 200 OK
+
+{
+  "id": 123,
+  ...
+}
+</pre>
+
+<p>Pass “application/octet-stream” to download the binary content.</p>
+
+<pre class="terminal">
+$ curl -i -H "Authorization: token TOKEN" \
+     -H "Accept: application/octet-stream" \
+     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
+
+HTTP/1.1 302 Found
+</pre>
+
+<p>Uploads are handled by a single request to a companion “uploads.github.com” service.</p>
+
+<pre class="terminal">
+$ curl -H "Authorization: token TOKEN" \
+     -H "Accept: application/vnd.github.manifold-preview" \
+     -H "Content-Type: application/zip" \
+     --data-binary @build/mac/package.zip \
+     "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
+</pre>
+
+<h2 id="preview-mode">Preview mode</h2>
+
+<p>The new API is available as a <a href="http://developer.github.com/v3/repos/releases/#preview-mode">preview</a>.  This gives developers a chance to <a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API">provide feedback</a> on the direction of
+the API before we freeze changes.  We expect to lift the preview status in 30 days.</p>
+
+<p>As with <a href="http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/">the Search API</a>, we’ll take this opportunity to iterate quickly.  Breaking changes will be announced
+on this developer blog without any advance warning.  Once the preview period is over, we’ll consider the Releases API unchangeable.
+At that point, it will be stable and suitable for production use.</p>
+
+<p>The preview media type is “application/vnd.github.manifold-preview”.  <a href="http://en.wikipedia.org/wiki/Eden_Fesi">Manifold</a> is
+a member of the Avengers, with the ability to teleport through time and space.  He’s the one in the middle holding the spear.</p>
+
+<p><img src="https://f.cloud.github.com/assets/21/1210628/ae8556fa-25fc-11e3-986d-0ab522271d43.png" alt="Manifold teleporting the Avengers to a terraformed Mars surface"></p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-09-03-two-factor-authentication/">
+  <h2 class="title">
+  <a href="/changes/2013-09-03-two-factor-authentication/">Two-Factor Authentication and the API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 3, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti">
+      <a href="https://github.com/mastahyeti">mastahyeti</a>
+  </li>
+</ul>
+</div>
+
+    <p>As <a href="https://github.com/blog/1614-two-factor-authentication">announced earlier today</a>, GitHub.com now supports two-factor
+authentication (2FA) for increased security. For users with this feature
+enabled, GitHub.com will prompt for a 2FA code in addition to a username and
+password during authentication. We’ve also rolled out some improvements to the
+API to ensure that 2FA requirements in the API are consistent with GitHub.com.</p>
+
+<h2 id="authenticating-with-the-api">Authenticating with the API</h2>
+
+<p>For users without 2FA enabled, and for applications using the <a href="/v3/oauth/#web-application-flow">OAuth web
+flow</a> for authentication, everything is
+business as usual. You’ll continue to authenticate with the API just as you
+always have. (That was easy.)</p>
+
+<p>If you enable 2FA <em>and</em> use Basic Authentication to access the API, we’re
+providing multiple options to make the flow simple and easy.</p>
+
+<h2 id="basic-authentication-and-2fa">Basic Authentication and 2FA</h2>
+
+<h3 id="personal-access-tokens">Personal Access Tokens</h3>
+
+<p>Personal access tokens provide the simplest option for using 2FA with Basic
+Authentication. You can create these tokens via the <a href="https://github.com/settings/applications">application settings page
+on GitHub.com</a>, and you can revoke
+them at any time. For more information about authenticating to the API with
+personal access tokens, be sure to check out our <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">help article on the
+topic</a>.</p>
+
+<h3 id="tightly-integrated-2fa">Tightly-integrated 2FA</h3>
+
+<p>For developers wishing to integrate GitHub 2FA directly into their application,
+the API’s Basic Authentication now supports the <a href="/v3/auth/#working-with-two-factor-authentication">ability to send the user’s 2FA
+code</a>, in addition to the username and password.</p>
+
+<h2 id="were-here-to-help">We’re here to help</h2>
+
+<p>We think GitHub users are going to love the additional security provided by
+two-factor authentication. As always, if you have any questions or feedback,
+<a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API">let us know</a>. We’re here to help!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-08-20-search-api-improvements/">
+  <h2 class="title">
+  <a href="/changes/2013-08-20-search-api-improvements/">Improvements to the Search API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    August 20, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today we’re shipping two improvements to the <a href="/changes/2013-07-19-preview-the-new-search-api/">new Search API</a>.</p>
+
+<h2 id="more-text-match-metadata">More Text Match Metadata</h2>
+
+<p>When searching for code, the API previously provided <a href="/v3/search/#text-match-metadata">text match metadata</a> (i.e., “highlights”) for file content.
+Now, you can also <a href="/v3/search/#highlighting-code-search-results">get this metadata</a> for matches that occur within the file path.</p>
+
+<p>For example, when <a href="https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&amp;type=Code">searching for files that have “client” in their path</a>, the results include this match for <code>lib/octokit/client/commits.rb</code>:</p>
+
+<pre class="json">
+{
+  "name": "commits.rb",
+  "path": "lib/octokit/client/commits.rb",
+  "text_matches": [
+    {
+      "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
+      "object_type": "FileContent",
+      "property": "path",
+      "fragment": "lib/octokit/client/commits.rb",
+      "matches": [
+        {
+          "text": "client",
+          "indices": [ 12, 18 ]
+        }
+      ]
+    }
+  ]
+  // ...
+}
+</pre>
+
+<h2 id="better-text-match-metadata">Better Text Match Metadata</h2>
+
+<p>Before today, the API applied HTML entity encoding to all <code>fragment</code> data.
+For example, imagine your search returns an issue like <a href="https://github.com/rails/rails/issues/11889">rails/rails#11889</a>:</p>
+
+<p><img src="https://f.cloud.github.com/assets/2988/994632/a84f2888-09af-11e3-9417-4bd92f1f1ed6.png" alt="Example Issue Title"></p>
+
+<p>The response would include a <code>text_matches</code> array with the following object:</p>
+
+<pre class="json">
+{
+  "fragment": "undefined method `except' for #&amp;lt;Array:XXX&amp;gt;",
+  // ...
+}
+</pre>
+
+<p>Inside the <code>fragment</code> value, we see HTML-encoded entities (e.g., <code>&amp;lt;</code>).
+Since we’re returning JSON (not HTML), API clients might not expect any HTML-encoded text.
+As of today, the API returns these fragments <em>without</em> this extraneous encoding.</p>
+
+<pre class="json">
+{
+  "fragment": "undefined method `except' for #&lt;Array:XXX&gt;",
+  // ...
+}
+</pre>
+
+<h2 id="preview-period">Preview Period</h2>
+
+<p>We’re about halfway through the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> for the new Search API.
+We appreciate everyone that has provided feedback so far. Please <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">keep it coming</a>!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-07-19-preview-the-new-search-api/">
+  <h2 class="title">
+  <a href="/changes/2013-07-19-preview-the-new-search-api/">Preview the New Search API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    July 19, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today we’re excited to announce a <a href="/v3/search/">brand new Search API</a>. Whether you’re
+searching for <a href="/v3/search/#search-code">code</a>, <a href="/v3/search/#search-repositories">repositories</a>,
+<a href="/v3/search/#search-issues">issues</a>, or <a href="/v3/search/#search-users">users</a>, all the query abilities of
+github.com are now available via the API as well.</p>
+
+<p>Maybe you want to find <a href="/v3/search/#repository-search-example">popular Tetris implementations written in Assembly</a>.
+We’ve got you covered.
+Or perhaps you’re looking for <a href="/v3/search/#code-search-example">new gems that are using Octokit.rb</a>.
+No problem.
+The possibilities are endless.</p>
+
+<h2 id="highlights">Highlights</h2>
+
+<p>On github.com, we enjoy the context provided by code snippets and highlights in
+search results.</p>
+
+<p><a href="https://github.com/search?q=faraday+builder+repo%3Aoctokit%2Foctokit.rb&amp;type=Code"><img src="https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png" alt="code-snippet-highlighting"></a></p>
+
+<p>We want API consumers to have access to that information as well. So, API
+requests can opt to receive those
+<a href="/v3/search#text-match-metadata">text fragments in the response</a>. Each fragment is accompanied by
+numeric offsets identifying the exact location of each matching search term.</p>
+
+<h2 id="preview-period">Preview period</h2>
+
+<p>We’re making this new API available today for developers to
+<a href="/v3/search/#preview-mode" data-proofer-ignore="">preview</a>. We think developers are going to love it, but we want
+to get your feedback before we declare the Search API “final” and
+“unchangeable.” We expect the preview period to last for roughly 60 days.</p>
+
+<p>As we discover opportunities to improve this new API during the preview period,
+we may ship changes that break clients using the preview version of the API. We
+want to iterate quickly. To do so, we will announce any changes here (on the
+developer blog), but we will not provide any advance notice.</p>
+
+<p>At the end of preview period, the Search API will become an official component
+of GitHub API v3. At that point, the new Search API will be stable and suitable
+for production use.</p>
+
+<h2 id="what-about-the-old-search-api">What about the old search API?</h2>
+
+<p>The <a href="/v3/search/legacy/">legacy search API</a> is still available. Many existing clients
+depend on it, and it is not changing in any way. While the new API offers much
+more functionality, the legacy search endpoints remain an official part of
+GitHub API v3.</p>
+
+<h2 id="take-it-for-a-spin">Take it for a spin</h2>
+
+<p>We hope you’ll kick the tires and <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">send us your feedback</a>. Happy
+<del>searching</del> finding!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-07-02-rate-limit-reset/">
+  <h2 class="title">
+  <a href="/changes/2013-07-02-rate-limit-reset/">When Does My Rate Limit Reset?</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    July 2, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>Have you ever wondered when your <a href="/v3/#rate-limiting">rate limit</a> will reset back to its maximum value?
+That information is now available in the new <code>X-RateLimit-Reset</code> response header.</p>
+
+<pre class="terminal">
+$ curl -I https://api.github.com/orgs/octokit
+
+HTTP/1.1 200 OK
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 42
+X-RateLimit-Reset: 1372700873
+...
+</pre>
+
+<p>The <code>X-RateLimit-Reset</code> header provides a <a href="http://en.wikipedia.org/wiki/Unix_time">Unix UTC timestamp</a>, letting you know the exact time that your fresh new rate limit kicks in.</p>
+
+<p>The reset timestamp is also available as part of the <code>/rate_limit</code> resource.</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/rate_limit
+
+{
+  "rate": {
+    "limit": 60,
+    "remaining": 42,
+    "reset": 1372700873
+  }
+}
+</pre>
+
+<p>For more information on rate limits, be sure to check out the <a href="/v3/#rate-limiting">docs</a>.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=X-RateLimit-Reset">drop us a line</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-07-01-feeds-api/">
+  <h2 class="title">
+  <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    July 1, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today we’re releasing a new <a href="/v3/activity/feeds/">Feeds API</a>, an easy way to list all the Atom
+resources available to the authenticated user.</p>
+
+<pre class="terminal">
+
+curl -u defunkt https://api.github.com/feeds
+
+{
+  "timeline_url": "https://github.com/timeline",
+  "user_url": "https://github.com/{user}",
+  "current_user_public_url": "https://github.com/defunkt",
+  "current_user_url": "https://github.com/defunkt.private?token=abc123",
+  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",
+  "current_user_organization_url": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+  "_links": {
+    "timeline": {
+      "href": "https://github.com/timeline",
+      "type": "application/atom+xml"
+    },
+    "user": {
+      "href": "https://github.com/{user}",
+      "type": "application/atom+xml"
+    },
+    "current_user_public": {
+      "href": "https://github.com/defunkt",
+      "type": "application/atom+xml"
+    },
+    "current_user": {
+      "href": "https://github.com/defunkt.private?token=abc123",
+      "type": "application/atom+xml"
+    },
+    "current_user_actor": {
+      "href": "https://github.com/defunkt.private.actor?token=abc123",
+      "type": "application/atom+xml"
+    },
+    "current_user_organization": {
+      "href": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      "type": "application/atom+xml"
+    }
+  }
+}
+
+</pre>
+
+<p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-05-06-repository-stats/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/Caged.png" alt="Avatar for Caged">
+      <a href="https://github.com/Caged">Caged</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today we’re happy to open our <a href="/v3/repos/statistics">Repository Statistics API</a> to everyone.  We’re using
+repository statistics to power <a href="https://github.com/github/linguist/graphs">our graphs</a>,
+but we can’t wait to see what others can do with this information.</p>
+
+<p>Starting today, these resources are available to you:</p>
+
+<ul>
+  <li><strong><a href="/v3/repos/statistics/#contributors">Contributors</a></strong></li>
+  <li><strong><a href="/v3/repos/statistics/#commit-activity">Commit Activity</a></strong></li>
+  <li><strong><a href="/v3/repos/statistics/#code-frequency">Code Frequency</a></strong></li>
+  <li><strong><a href="/v3/repos/statistics/#participation">Participation</a></strong></li>
+  <li><strong><a href="/v3/repos/statistics/#punch-card">Punch Card</a></strong></li>
+</ul>
+
+<p>Enjoy!</p>
+
+</div>
+
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
+      <a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>When you view a repository with a submodule on github.com, you get useful links and information for the submodule.</p>
+
+<p><a href="/images/posts/submodule-links.png"><img src="/images/posts/submodule-links.png" alt="Repository Contents with Submodule"></a></p>
+
+<p>Today we’re making that data available in the <a href="/v3/repos/contents/#get-contents">Repository Contents API</a>.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
+
+{
+  "name": "qunit",
+  "path": "test/qunit",
+  "type": "submodule",
+  "submodule_git_url": "git://github.com/jquery/qunit.git",
+  "sha": "6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "size": 0,
+  "url": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+  "git_url": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "html_url": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "_links": {
+    "self": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+    "git": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+    "html": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"
+  }
+}
+</pre>
+
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
+  <h2 class="title">
+  <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Deprecating a Confusing Attribute in the Pull Request API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 25, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+    <p>When you get the details for a Pull Request from the API, the
+<a href="/v3/pulls/#get-a-single-pull-request">response</a> provides everything there is to
+know about that Pull Request. In addition to the useful information provided in
+the API response, the JSON also includes the <code>merge_commit_sha</code> attribute. This
+attribute is a frequent source of misunderstanding, and we aim to remove the
+confusion.</p>
+
+<p>To help current API consumers, we’ve <a href="/v3/pulls/#mergability">documented the
+attribute</a> for improved understanding.</p>
+
+<p>To protect future API consumers from this confusion, we have
+<a href="/v3/versions/#v3-deprecations">deprecated</a> the <code>merge_commit_sha</code> attribute, and we will
+remove it in the next major version of the API.</p>
+
+<p>As always, if you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=Deprecating%20merge_commit_sha">support@github.com</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2013-04-24-user-agent-required/">
+  <h2 class="title">
+  <a href="/changes/2013-04-24-user-agent-required/">User Agent now mandatory</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 24, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>After an almost six week grace period, we’re now enforcing the <a href="/v3/#user-agent-required">User Agent
+header</a> for all API requests. Most HTTP libraries (including cURL)
+set this header by default. If you’re experiencing an increase in <code>403</code>
+responses, be sure and check your code.</p>
+
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=User%20Agent%20Requirement">support@github.com</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2013-3-1-new-hookshot-coming/">
+  <h2 class="title">
+  <a href="/changes/2013-3-1-new-hookshot-coming/">New Hookshot Changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 1, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>We are experimenting with changes to the “Hookshot” backend that powers service
+hooks.  There were some significant networking changes with the new cluster,
+so there are some new IP whitelist rules for hooks:</p>
+
+<ul>
+  <li>204.232.175.64/27</li>
+  <li>192.30.252.0/22</li>
+</ul>
+
+<p>These are in CIDR notation.  They represent a significant range of GitHub
+addresses, meaning this should be the last IP change for a while.  Once this
+cluster is activated and we shut the other cluster down, we will be removing
+the other entries.</p>
+
+<p>We are currently testing the new backend with all repositories in the GitHub
+organization only, and expect to start testing it with user data next week.</p>
+
+<p>This also means we should be able to start accepting <a href="https://github.com/github/github-services/pulls">GitHub Services pull
+requests</a> very soon :)</p>
+
+</div>
+
+<div class="change" id="/changes/2013-2-13-sortable-stars/">
+  <h2 class="title">
+  <a href="/changes/2013-2-13-sortable-stars/">Sortable Stars in Repository Starring API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 14, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>As we <a href="https://github.com/blog/1410-sortable-stars">announced on the GitHub blog</a>, Stars now support sorting. The
+Repository Starring API now supports <a href="/v3/activity/starring/#list-repositories-being-starred">two new parameters</a> when listing
+Stars: <code>sort</code> and <code>direction</code>.</p>
+
+<pre class="terminal">
+curl https://api.github.com/users/defunkt/starred?sort=created&amp;direction=asc
+</pre>
+
+<p>Enjoy.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-2-13-hookshot-load-balancer/">
+  <h2 class="title">
+  <a href="/changes/2013-2-13-hookshot-load-balancer/">Hookshot Load balancer</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 13, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>We had an issue with the Hookshot load balancer this morning, causing the
+majority of hooks to flow to a single node only.  This lead to massive queue
+times.  While fixing this, we’re putting the old Services backend in use.</p>
+
+<p>This means the old IPs are back in use.  Use this <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">Help guide</a>
+if you already removed them from your firewall.</p>
+
+</div>
+
+<div class="change" id="/changes/2013-2-13-hookshot-issues/">
+  <h2 class="title">
+  <a href="/changes/2013-2-13-hookshot-issues/">Some Hookshot Issues</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 13, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
+been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
+the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
+
+<p>If your web hook servers are on EC2 and are missing hooks from GitHub due to
+an IP restriction, we recommend the following:</p>
+
+<ol>
+  <li>Remove the IP white list.</li>
+  <li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
+</ol>
+
+<p>We’re currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
+if you have any questions.</p>
+
+</div>
+
+<div class="change" id="/changes/2013-2-5-changes-to-services/">
+  <h2 class="title">
+  <a href="/changes/2013-2-5-changes-to-services/">Upcoming Changes to GitHub Services</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 5, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>We are finishing up a new GitHub Services backend, dubbed “Hookshot”, to
+increase the speed and reliability of our delivered payloads.  We are doing
+what we can to make this a seamless transition for everyone.  However, there
+are a few notable changes.</p>
+
+<ul>
+  <li>
+    <p>There is a new <a href="http://developer.github.com/v3/meta/">Meta API endpoint</a>
+listing the current public IPs that hooks originate from.</p>
+  </li>
+  <li>
+    <p>We’re removing the AMQP service from GitHub. It hasn’t worked in quite some
+time, and the code it uses doesn’t work in our background workers.</p>
+  </li>
+  <li>
+    <p>We’re also instituting a new guideline to improve the reliability and
+maintainability of services in the future. As of today, all new services must
+accept an unmodified payload over HTTP. Any service that does not will be
+rejected. To see an example of an acceptable service, check out <a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb">Code Climate</a>.
+Notice their service simply accepts HTTP POST from GitHub unmodified. For an
+example of a service that won’t be accepted after today, check out <a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb">Campfire</a>. It
+uses other Ruby gems and contains custom logic to transform the GitHub payload
+to Campfire messages.  Existing hooks will keep working (don’t worry 37signals, we
+:heart: Campfire).</p>
+  </li>
+</ul>
+
+<p>We’re making these changes because we want to focus on the reliability of the
+core Services backend for everyone.  Maintaining custom logic and libraries for
+over 100 services is taking too much of this focus away.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">
+  <h2 class="title">
+  <a href="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">User Agent mandatory from March 4th 2013</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 31, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/agh.png" alt="Avatar for agh">
+      <a href="https://github.com/agh">agh</a>
+  </li>
+</ul>
+</div>
+
+    <p>Following on from our <a href="http://developer.github.com/changes/2012-10-14-rate-limit-changes/">previous post</a>
+about requiring requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent header</a>
+we will soon be changing our API servers to return HTTP 403 
+to any clients not providing a valid User Agent header.</p>
+
+<p>We will be making this change on Monday, March 4th 2013.</p>
+
+<p>Setting this helps us identify requests from you, and get in touch with people who are using
+the API in a way which causes disruption to GitHub. Most HTTP libraries and tools like cURL
+already provide a valid header for you, and allow you to customize it, so this will not require
+many of our users to make any changes whatsoever.</p>
+
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=User%20Agent%20Requirement">support@github.com</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2013-01-08-new-user-scopes/">
+  <h2 class="title">
+  <a href="/changes/2013-01-08-new-user-scopes/">New User scopes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 8, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve added a <a href="http://developer.github.com/v3/oauth/#scopes">few new user scopes</a> for 3rd party applications that want very
+specific user functionality.  The <code>user:email</code> scope gives apps read-only access
+to a user’s private email addresses.  The <code>user:follow</code> scope lets a user
+follow and unfollow other users.</p>
+
+<p>This should help keep applications from requiring the <code>user</code> scope, which
+can be potentially dangerous.</p>
+
+<p>We also added a read-only endpoint to get a user’s public SSH keys.</p>
+
+<pre><code>GET https://api.github.com/users/technoweenie/keys
+</code></pre>
+
+
+</div>
+
+<div class="change" id="/changes/2012-12-10-Diff-and-patch-media-types/">
+  <h2 class="title">
+  <a href="/changes/2012-12-10-Diff-and-patch-media-types/">Diff and patch media types</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 10, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>Starting today, you can get <code>.diff</code> and <code>.patch</code> content directly from the API for the following resources:</p>
+
+<ul>
+  <li><a href="/v3/repos/commits/#get-a-single-commit">Commits</a></li>
+  <li><a href="/v3/repos/commits/#compare-two-commits">Commit comparisons</a></li>
+  <li><a href="/v3/pulls/#get-a-single-pull-request">Pull request</a></li>
+</ul>
+
+<p>Simply use the same resource URL and send either <code>application/vnd.github.diff</code> or <code>application/vnd.github.patch</code> in the <code>Accept</code> header:</p>
+
+<pre><code>curl -H "Accept: application/vnd.github.diff" https://api.github.com/repos/pengwynn/dotfiles/commits/aee60a4cd56fb4c6a50e60f17096fc40c0d4d72c
+
+diff --git a/tmux/tmux.conf.symlink b/tmux/tmux.conf.symlink
+index 1f599cb..abaf625 100755
+--- a/tmux/tmux.conf.symlink
++++ b/tmux/tmux.conf.symlink
+@@ -111,6 +111,7 @@ set-option -g base-index 1
+ ## enable mouse
+ set-option -g mouse-select-pane on
+ set-option -g mouse-select-window on
++set-option -g mouse-resize-pane on
+ set-window-option -g mode-keys vi
+ set-window-option -g mode-mouse on
+ # set-window-option -g monitor-activity off
+</code></pre>
+
+
+</div>
+
+<div class="change" id="/changes/2012-12-09-organization-repositories-results-now-paginate/">
+  <h2 class="title">
+  <a href="/changes/2012-12-09-organization-repositories-results-now-paginate/">Pagination for Organization Repository lists now paginates properly</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 9, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/rick.png" alt="Avatar for rick">
+      <a href="https://github.com/rick">rick</a>
+  </li>
+</ul>
+</div>
+
+    <p><img src="https://github-images.s3.amazonaws.com/skitch/seger-turn-the-page-20121209-154956.png" alt="seger-is-so-dreamy"></p>
+
+<p>Improvements continue to the Organizations Repository listing endpoint.
+Today we’re improving pagination so that it works as documented.  Now
+you can expect <code>Link</code> headers to navigate through the results space,
+regardless of what you send in the <code>type</code> parameter.</p>
+
+<p>The docs for Organization Repositories queries are still here:</p>
+
+<ul>
+  <li><a href="/v3/repos/#list-organization-repositories">Organization Repositories</a></li>
+</ul>
+
+<p><strong>EDIT:</strong> <code>Link</code> headers are our preferred navigation technique.</p>
+
+</div>
+
+<div class="change" id="/changes/2012-12-08-finding-source-and-fork-repos-for-organizations/">
+  <h2 class="title">
+  <a href="/changes/2012-12-08-finding-source-and-fork-repos-for-organizations/">Finding sources and fork repositories for organizations</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 8, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/rick.png" alt="Avatar for rick">
+      <a href="https://github.com/rick">rick</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a couple of changes today to the Organization repositories
+listing to bring it a bit closer to the functionality of the GitHub.com
+Organization repositories tab.  We now let you retrieve repositories
+which are forks of another repository, as well as those repositories which
+are sources (not forks).</p>
+
+<pre><code># Grab all fork Repositories for an Organization
+curl "https://api.github.com/orgs/:org/repos?type=forks"
+
+# Grab all source Repositories for an Organization
+curl "https://api.github.com/orgs/:org/repos?type=sources"
+</code></pre>
+
+<p>Check out the docs for sorting and filtering options:</p>
+
+<ul>
+  <li><a href="/v3/repos/#list-organization-repositories">Organization Repositories</a></li>
+</ul>
+
+</div>
+
+<div class="change" id="/changes/2012-12-06-create-authorization-for-app/">
+  <h2 class="title">
+  <a href="/changes/2012-12-06-create-authorization-for-app/">Create an OAuth authorization for an app</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 6, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>The <a href="/v3/oauth_authorizations/#oauth-authorizations-api">Authorizations API</a> is an easy way to create an OAuth
+authorization using Basic Auth. Just POST your desired scopes and optional
+note and you get a token back:</p>
+
+<pre class="terminal">
+    curl -u pengwynn -d '{"scopes": ["user", "gist"]}' \
+         https://api.github.com/authorizations
+</pre>
+
+<p>This call creates a token for the authenticating user tied to a special “API”
+OAuth application.</p>
+
+<p>We now support creating tokens for <em>your own OAuth application</em> by passing your
+twenty character <code>client_id</code> and forty character <code>client_secret</code> as found in
+the settings page for your OAuth application.</p>
+
+<pre class="terminal">
+    curl -u pengwynn -d '{ \
+                          "scopes": ["user", "gist"], \
+                          "client_id": "abcdeabcdeabcdeabcdeabcde" \
+                          "client_secret": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde" \
+                         }' \ '
+            https://api.github.com/authorizations
+</pre>
+
+<p>No more implementing the <a href="/v3/oauth/#web-application-flow">web flow</a> just to get a token tied to your
+app’s rate limit.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2012-12-04-List-comments-for-repo/">
+  <h2 class="title">
+  <a href="/changes/2012-12-04-List-comments-for-repo/">Per-repository Review and Issue Comment listing</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 4, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>You’ve always been able to grab all the commit comments for an entire
+repository via the API, but to get Issue comments and Pull Request Review
+Comments, you could only fetch the comments for a single Issue or Pull Request.</p>
+
+<p>Today, we’re introducing two new methods to grab all Issue Comments and Review
+Comments for a repository.</p>
+
+<pre><code># Grab all Issue Comments
+curl https://api.github.com/repos/mathiasbynens/dotfiles/issues/comments
+
+# Grab all Review Comments
+curl https://api.github.com/repos/mathiasbynens/dotfiles/pulls/comments
+</code></pre>
+
+<p>Check out the docs for sorting and filtering options:</p>
+
+<ul>
+  <li><a href="/v3/issues/comments/#list-comments-in-a-repository">Issue comments</a></li>
+  <li><a href="/v3/pulls/comments/#list-comments-in-a-repository">Review comments</a></li>
+</ul>
+
+</div>
+
+<div class="change" id="/changes/2012-11-29-gitignore-templates/">
+  <h2 class="title">
+  <a href="/changes/2012-11-29-gitignore-templates/">Gitignore Templates API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    November 29, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>We recently <a href="/changes/2012-9-28-auto-init-for-repositories/">made it easy</a> to initialize a repository when you create
+it <a href="/v3/repos/#create">via the API</a>. One of the options you can pass when creating a
+repository is <code>gitignore_template</code>. This value is the name of one of the
+templates from the the public <a href="https://github.com/github/gitignore">GitHub .gitignore repository</a>.</p>
+
+<p>The <a href="/v3/gitignore/">Gitignore Templates API</a> makes it easy to list those templates:</p>
+
+<pre><code>curl https://api.github.com/gitignore/templates
+
+HTTP/1.1 200 OK
+
+[
+  "Actionscript",
+  "Android",
+  "AppceleratorTitanium",
+  "Autotools",
+  "Bancha",
+  "C",
+  "C++",
+  ...
+</code></pre>
+
+<p>If you’d like to view the source, you can also fetch a single template.</p>
+
+<pre><code>curl -H 'Accept: application/vnd.github.raw' \
+     https://api.github.com/gitignore/templates/Objective-C
+
+HTTP/1.1 200 OK
+
+# Xcode
+.DS_Store
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+</code></pre>
+
+
+</div>
+
+<div class="change" id="/changes/2012-11-27-forking-to-organizations/">
+  <h2 class="title">
+  <a href="/changes/2012-11-27-forking-to-organizations/">Forking to Organizations</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    November 27, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>We made a slight change to the way you fork a repository.  By default, you
+can fork my repository through an HTTP POST to the repository’s fork resource.</p>
+
+<pre><code>$ curl -X POST https://api.github.com/repos/technoweenie/faraday/forks
+</code></pre>
+
+<p>This repository forks to your personal account.  However, there are cases when
+you want to fork to one of your organizations instead.  The previous method
+required a <code>?org</code> query parameter:</p>
+
+<pre><code>$ curl -X POST /repos/technoweenie/faraday/forks?org=mycompany
+</code></pre>
+
+<p>Query parameters on POST requests are unusual in APIs, and definitely
+inconsistent with the rest of the GitHub API.  You should be able to post a
+JSON body like every other POST endpoint.  Now, you can!  Only, now we’re
+calling the field <code>organization</code>.</p>
+
+<pre><code>$ curl /repos/technoweenie/faraday/forks?org=mycompany \
+  -d '{"organization": "mycompany"}'
+</code></pre>
+
+<p>Don’t worry, we are committed to maintaining the legacy behavior until the next
+major change of the GitHub API.</p>
+
+</div>
+
+<div class="change" id="/changes/2012-10-31-gist-comment-uris/">
+  <h2 class="title">
+  <a href="/changes/2012-10-31-gist-comment-uris/">Gist comment URIs</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 31, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra">
+      <a href="https://github.com/pezra">pezra</a>
+  </li>
+</ul>
+</div>
+
+    <p>The URIs of all gist comments are changing immediately. The new URI pattern for gist comments is <code>/gists/{gist-id}/comments/{id}</code>. (See <a href="/v3/gists/comments/">gist comments section of the docs</a> for more details.) This change is necessary because the auto-incremented ids of gist comments are easy to guess. This predictability allows anyone to view comments on private Gists with relative ease. Obviously, comments on private gists should be just as private as the gist itself.</p>
+
+<p>Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
+
+<p>We have also added a <code>comments_url</code> member to the Gist documents. The <code>comments_url</code> link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using <code>url</code> and <code>*_url</code> properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.</p>
+
+</div>
+
+<div class="change" id="/changes/2012-10-26-notifications-api/">
+  <h2 class="title">
+  <a href="/changes/2012-10-26-notifications-api/">Notifications API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 26, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>Now that the dust has settled around <a href="https://github.com/blog/1204-notifications-stars">Notifications and Stars</a>,
+we’ve unleashed all that :sparkles: in a <a href="http://developer.github.com/v3/activity/notifications/">brand new API</a>.  You can now
+view and mark notifications as read.</p>
+
+<h2 id="endpoint">Endpoint</h2>
+
+<p>The core notifications functionality is under the <code>/notifications</code> endpoint.
+You can look for unread notifications:</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/notifications
+</pre>
+
+<p>You can filter these notifications to a single Repository:</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/repos/technoweenie/faraday/notifications
+</pre>
+
+<p>You can mark them as read:</p>
+
+<pre class="terminal">
+# all notifications
+$ curl https://api.github.com/notifications \
+    -X PUT -d '{"read": true}'
+
+# notifications for a single repository
+$ curl https://api.github.com/repos/technoweenie/faraday/notifications \
+    -X PUT -d '{"read": true}'
+</pre>
+
+<p>You can also modify subscriptions for a Repository or a single thread.</p>
+
+<pre class="terminal">
+# subscription details for the thread (either an Issue or Commit)
+$ curl https://api.github.com/notifications/threads/1/subscription
+
+# subscription details for a whole Repository.
+$ curl https://api.github.com/repos/technoweenie/faraday/subscription
+</pre>
+
+<h2 id="polling">Polling</h2>
+
+<p>The Notifications API is optimized for polling by the last modified time:</p>
+
+<pre class="terminal">
+# Add authentication to your requests
+$ curl -I https://api.github.com/notifications
+HTTP/1.1 200 OK
+Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
+X-Poll-Interval: 60
+
+# Pass the Last-Modified header exactly
+$ curl -I https://api.github.com/notifications
+    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
+HTTP/1.1 304 Not Modified
+X-Poll-Interval: 60
+</pre>
+
+<p>You can read about the API details in depth in the <a href="http://developer.github.com/v3/activity/notifications/">Notifications documentation</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2012-10-24-set-default-branch/">
+  <h2 class="title">
+  <a href="/changes/2012-10-24-set-default-branch/">Set the default branch for a repository</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 24, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>You can set the default branch for a repository to something other than ‘master’ from the GitHub repository admin screen:</p>
+
+<p><img src="/images/posts/default-branch.png" alt="repo admin"></p>
+
+<p>Now, you can update this setting via the API. We’ve added a <code>default_branch</code> parameter to the <a href="/v3/repos/#edit">Edit Repository method</a>:</p>
+
+<pre class="terminal">
+curl -u pengwynn \
+     -d '{"name": "octokit", "default_branch":"development"}' \
+     https://api.github.com/repos/pengwynn/octokit
+</pre>
+
+<p>If you provide a branch name that hasn’t been pushed to GitHub, we’ll gracefully fall back to <code>'master'</code> or the first branch.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2012-10-17-org-members-redirection/">
+  <h2 class="title">
+  <a href="/changes/2012-10-17-org-members-redirection/">Organization Members Resource Changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 17, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra">
+      <a href="https://github.com/pezra">pezra</a>
+  </li>
+</ul>
+</div>
+
+    <p>Requesting the <a href="/v3/orgs/members/index.html#members-list">member list</a> of an
+organization of which you are not a member now redirects to the <a href="/v3/orgs/members/index.html#public-members-list">public members
+list</a>. Similarly, requests to
+<a href="/v3/orgs/members/index.html#check-membership">membership check</a> resources of
+an organization of which you are not a member are redirected to the equivalent
+<a href="/v3/orgs/members/index.html#check-public-membership">public membership check</a>.
+One exception to the latter case is that if you are checking about your own
+membership the request is not redirected. You are always allowed to know what
+organizations you belong to.</p>
+
+<p>The changes where made to clarify the purpose of these various resources. The
+<code>/orgs/:org/members</code> resources are intended for use by members of the
+organization in question. The <code>/orgs/:org/public_members</code> resources are for
+acquiring information about the public membership of organizations. If you are
+not a member you are not allowed to see private membership information so you
+should be using the public membership resources.</p>
+
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=Org%20members%20API">support@github.com</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2012-10-14-rate-limit-changes/">
+  <h2 class="title">
+  <a href="/changes/2012-10-14-rate-limit-changes/">Rate limit changes for unauthenticated requests</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 14, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>To ensure a high quality of service for all API consumers, we’ve reduced the
+default rate limit for unauthenticated requests. To enjoy the default rate
+limit of 5,000 requests per hour, you’ll need to
+<a href="http://developer.github.com/v3/#authentication">authenticate</a> via Basic Auth
+or OAuth. Unauthenticated requests will be limited to 60 per hour unless you
+<a href="http://developer.github.com/v3/#unauthenticated-rate-limited-requests">include your OAuth client and
+secret</a>.</p>
+
+<p>We’ll soon require all requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent
+header</a>. Setting a
+unique value for this header helps us identify requests and get in touch with
+developers who are abusing the API. Most HTTP libraries, wrapper libraries, and
+even cURL provide a valid header for you already and allow you to change it to
+something unique to your application.</p>
+
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=API%20Rate%20limit">support@github.com</a>.</p>
+
+</div>
+
+<div class="change" id="/changes/2012-9-28-auto-init-for-repositories/">
+  <h2 class="title">
+  <a href="/changes/2012-9-28-auto-init-for-repositories/">Initialize a repository when creating</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 28, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
+      <a href="https://github.com/pengwynn">pengwynn</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today we’ve made it easier to add commits to a repository via the GitHub API.
+Until now, you could <a href="/v3/repos/#create">create a repository</a>, but you would
+need to initialize it locally via your Git client before adding any commits via
+the API.</p>
+
+<p>Now you can optionally init a repository when it’s created by sending <code>true</code>
+for the <code>auto_init</code> parameter:</p>
+
+<pre class="terminal">
+curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true}' \
+     https://api.github.com/user/repos
+</pre>
+
+<p>The resulting repository will have a README stub and an initial commit.</p>
+
+<p><img src="/images/posts/create-repo-init.png" alt="create repo screenshot"></p>
+
+<h3 id="gitignore-templates">.gitignore templates</h3>
+
+<p>Along with this change, you can set up your <code>.gitignore</code> template by passing
+the basename of any template in the <a href="https://github.com/github/gitignore">GitHub gitignore templates
+project</a>.</p>
+
+<pre class="terminal">
+curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true, \
+          "gitignore_template": "Haskell"}' \
+     https://api.github.com/user/repos
+</pre>
+
+<p>As the <a href="/v3/repos/#create">docs point out</a>, the <code>gitignore_template</code> parameter
+is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
+
+<p>If you have any questions or feedback, drop us a line at
+<a href="https://github.com/c">https://github.com/contact</a>, <a href="mailto:support@github.com">support@github.com</a>, or
+<a href="https://twitter.com/githubapi">@GitHubAPI</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2012-9-5-watcher-api/">
+  <h2 class="title">
+  <a href="/changes/2012-9-5-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 5, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie">
+      <a href="https://github.com/technoweenie">technoweenie</a>
+  </li>
+</ul>
+</div>
+
+    <p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
+used to be known as “Watching” is now “Starring”.  Starring is basically a way
+to bookmark interesting repositories.  Watching is a way to indicate that you
+want to receive email or web notifications on a Repository.</p>
+
+<p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
+we change this in a way that developers can gracefully upgrade their
+applications?  We’re currently looking at rolling out the changes in three
+phases over an extended period of time.</p>
+
+<h2 id="current-status">Current Status</h2>
+
+<p>The current <a href="/v3/activity/starring/">Repository Starring</a> methods look like this:</p>
+
+<ul>
+  <li>
+<code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
+  <li>
+<code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
+  <li>
+<code>/user/watched</code> - A list of repositories the current user has starred.</li>
+</ul>
+
+<h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
+
+<p>This phase exposes Watchers as “Subscriptions”.  This is to
+keep from clashing with the legacy endpoints.  This phase will happen
+automatically <s>and will not break your application until Phase 3 starts</s>.
+(<strong>UPDATE</strong>: API v3 will continue to support this functionality indefinitely.)</p>
+
+<ul>
+  <li>
+<code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
+  <li>
+<code>/users/:user/subscriptions</code> - A list of repositories that a user is watching.</li>
+  <li>
+<code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
+</ul>
+
+<p>We’ll also add a copy of the legacy Watchers API in the new endpoint:</p>
+
+<ul>
+  <li>
+<code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
+  <li>
+<code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
+  <li>
+<code>/user/starred</code> - A list of repositories the current user has starred.</li>
+</ul>
+
+<p>This is in place <em>now</em> with the current media type for the API:</p>
+
+<pre><code>application/vnd.github.beta+json
+</code></pre>
+
+<p>If you care about your application not breaking, make sure all outgoing API
+requests pass that value for the “Accept” header.  You should do this now.  This
+can be verified by checking the <code>X-GitHub-Media-Type</code> header on all API
+responses.</p>
+
+<pre><code># Accesses a user's starred repositories.
+curl https://api.github.com/user/watched \
+  -H "Accept: application/vnd.github.beta+json"
+</code></pre>
+
+<p>-<s>This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
+the "beta" media type, and makes the "v3" media type the implicit default
+for API requests.</s></p>
+
+<h2 id="update---november-6-2013">UPDATE - November 6, 2013</h2>
+
+<div class="alert">
+  <p>
+    API v3 will continue to officially support the functionality described in
+    Phase 1 above. This functionality will remain intact for the lifetime of
+    API v3.
+  </p>
+  <p>
+    API v3 will <em>not</em> include Phases 2 and 3 (below). Those phases will
+    likely be part of the next major version of the API. (We have not announced
+    a timeline for the next major version of the API.)
+  </p>
+</div>
+
+<h2 id="sphase-2-switch-codewatcherscode-api-endpoints"><s>Phase 2: Switch <code>/watchers</code> API Endpoint</s></h2>
+
+<s>The "watch" endpoints will now be a copy of the "subscription" endpoints.  You
+will have to use <code>/user/starred</code> to get a user's starred repositories, not
+<code>/user/watched</code>.</s>
+
+<s>This requires a new media type value:</s>
+
+<s><pre>application/vnd.github.v3+json</pre></s>
+
+<s>This is a breaking change from Phase 1.  We will release this change in an
+experimental mode first, letting developers gracefully upgrade their
+applications by specifying the new media value for the Accept header.</s>
+
+<s>
+<pre>
+# Accesses a user's watched repositories.
+curl https://api.github.com/user/watched \
+  -H "Accept: application/vnd.github.v3+json"
+</pre>
+</s>
+
+<h2 id="sphase-3-remove-codesubscriberscode-api-endpoints"><s>Phase 3: Remove <code>/subscribers</code> API Endpoint.</s></h2>
+
+<s>This phase involves disabling the subscription endpoints completely.  At this
+point, you should be using the starring endpoints for starred repositories, and
+the watch endpoints for watched repositories.  No date has been set yet, but we
+expect this to be <em>3-6 months</em> after Phase 2 is in place.  This should give
+developers enough time for a smooth upgrade path.  If they use popular API
+wrappers, the work will likely mostly be done for them.</s>
+
+<s>Keep on passing the "v3" media type in your application, until the API has
+another breaking change to make.  If you can't make the deadline for Phase 3,
+just set the "beta" media type until we shut that down completely.  It's likely
+that we will keep the old "beta" media type active for another month, like
+the <a href="https://github.com/blog/1090-github-api-moving-on">last time</a> we terminated
+old API functionality.</s>
+
+<p>We look forward to assisting you through this transition.  Hit us up at
+<a href="https://github.com/c">https://github.com/contact</a>, <a href="mailto:support@github.com">support@github.com</a>, or
+<a href="https://twitter.com/githubapi">@GitHubAPI</a>.</p>
+
+
+</div>
+
+
+    </div>
+
+    <div class="sidebar-shell">
+        <h2>Recent Posts</h2>
+<ul class="headlines sidebar-module">
+
+  <li><a href="/changes/2014-06-23-the-github-enterprise-api-documentation-has-a-new-home/">The GitHub Enterprise API documentation has a new home!<br /><span class="date">June 23, 2014</span></a></li>
+
+  <li><a href="/changes/2014-06-19-combined-status-api-pagination/">Pagination in the Combined Status API<br /><span class="date">June 19, 2014</span></a></li>
+
+  <li><a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API<br /><span class="date">June 11, 2014</span></a></li>
+
+  <li><a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events<br /><span class="date">June 9, 2014</span></a></li>
+
+  <li><a href="/changes/2014-05-19-deployments-api-updates/">New attributes for the Deployments API<br /><span class="date">May 19, 2014</span></a></li>
+
+  <li><a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API<br /><span class="date">May 9, 2014</span></a></li>
+
+  <li><a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files<br /><span class="date">May 6, 2014</span></a></li>
+
+  <li><a href="/changes/2014-04-25-user-content-security/">New user content domains<br /><span class="date">April 25, 2014</span></a></li>
+
+</ul>
+
+
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
+  </div>
+
+    <div id="footer" >
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="http://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="http://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+    </div>
+
+  </div><!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

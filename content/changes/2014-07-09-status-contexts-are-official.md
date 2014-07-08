@@ -6,7 +6,7 @@ author_name: bhuga
 ---
 
 We're happy to announce that the [Combined Status API][docs] is officially part
-of the GitHub API v3. We consider it stable for production use.
+of the GitHub API v3. We now consider it stable for production use.
 
 Thanks to everyone who provided feedback during the comment period. We got
 some great feedback, and hope this feature helps you build the tools you

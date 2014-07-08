@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Status Contexts are Official
+title: The combined status API is official
 created_at: 2014-07-09
 author_name: bhuga
 ---
@@ -12,7 +12,7 @@ Thanks to everyone who provided feedback during the comment period. We got
 some great feedback, and hope this feature helps you build the tools you
 need to make GitHub the best place to ship exactly the way you want.
 
-### Preview Media Type No Longer Needed
+### Preview media type no longer needed
 
 If you used the Combined Status API during the preview period, you needed to
 provide a custom media type in the `Accept` header:

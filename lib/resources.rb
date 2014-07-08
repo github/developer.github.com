@@ -572,17 +572,18 @@ module GitHub
     }
 
     RELEASE_ASSET = {
-      "url"            => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
-      "id"             => 1,
-      "name"           => "example.zip",
-      "label"          => "short description",
-      "state"          => "uploaded",
-      "content_type"   => "application/zip",
-      "size"           => 1024,
-      "download_count" => 42,
-      "created_at"     => "2013-02-27T19:35:32Z",
-      "updated_at"     => "2013-02-27T19:35:32Z",
-      "uploader"       => USER
+      "url"                  => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
+      "browser_download_url" => "https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip",
+      "id"                   => 1,
+      "name"                 => "example.zip",
+      "label"                => "short description",
+      "state"                => "uploaded",
+      "content_type"         => "application/zip",
+      "size"                 => 1024,
+      "download_count"       => 42,
+      "created_at"           => "2013-02-27T19:35:32Z",
+      "updated_at"           => "2013-02-27T19:35:32Z",
+      "uploader"             => USER
     }
 
     RELEASE = {

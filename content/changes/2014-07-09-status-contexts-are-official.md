@@ -22,8 +22,10 @@ provide a custom media type in the `Accept` header:
 Now that the preview period has ended, you no longer need to pass this custom
 media type.
 
-Instead, we [recommend][media-types] that you specify `v3` as the version in the `Accept` header:
-return 100 embedded statuses at a time.
+Instead, we [recommend][media-types] that you specify `v3` as the version in the
+`Accept` header:
+
+    application/vnd.github.v3+json
 
 ### Feedback
 

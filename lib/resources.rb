@@ -1591,7 +1591,8 @@ module GitHub
       "creator" => USER,
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
-      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
+      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses",
+      "repository_url" => "https://api.github.com/repos/octocat/example"
     }
 
     DEPLOYMENT_STATUS = {
@@ -1604,6 +1605,7 @@ module GitHub
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "repository_url" => "https://api.github.com/repos/octocat/example",
       "deployment" => {
         "id" => 1,
         "ref" => "master",

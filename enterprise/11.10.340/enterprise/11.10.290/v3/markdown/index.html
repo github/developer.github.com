@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Markdown Rendering | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/11.10.290/changes.atom">
+  <link href="/enterprise/11.10.290/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.290/css/960.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.290/css/uv_active4d.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.290/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.290/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/11.10.290/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/11.10.290/shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="/enterprise/11.10.290/"><img src="/enterprise/11.10.290/images/logo_developer.png" width="255" height="45" alt="GitHub:Developer"></a>
+          <ul class="nav">
+            <li><a href="/enterprise/11.10.290/v3/">API v3</a></li>
+            <li><a href="/enterprise/11.10.290/changes/">Changes</a></li>
+            <li><a href="https://github.com/contact">Support</a></li>
+            <li><a href="/enterprise/11.10.290/changes.atom">
+              <img src="/enterprise/11.10.290/images/feed-icon-28x28.png" width="16" height="16" alt="GitHub API Changes Feed">
+            </a></li>
+          </ul>
+        </div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="markdown-rendering-api">Markdown Rendering API</h1>
+
+<ul id="markdown-toc">
+<li><a href="#render-an-arbitrary-markdown-document">Render an arbitrary Markdown document</a></li>
+  <li><a href="#render-a-markdown-document-in-raw-mode">Render a Markdown document in raw mode</a></li>
+</ul>
+<h2 id="render-an-arbitrary-markdown-document">Render an arbitrary Markdown document</h2>
+
+<pre><code>POST /markdown
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<dl>
+<dt>text</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The Markdown text to render</dd>
+  <dt>mode</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The rendering mode
+
+    <ul>
+<li>
+<code>markdown</code> to render a document as plain Markdown, just like README files are rendered.</li>
+      <li>
+<code>gfm</code> to render a document as user-content, e.g. like user comments or issues are rendered. In GFM mode, hard line breaks are always taken into account, and issue and user mentions are linked accordingly.</li>
+    </ul>
+</dd>
+  <dt>context</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The repository context, only taken into account when rendering as <code>gfm</code>
+</dd>
+</dl>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"text"</span><span class="o">:</span> <span class="s2">"Hello world github/linguist#1 **cool**, and #1!"</span><span class="p">,</span>
+  <span class="s2">"mode"</span><span class="o">:</span> <span class="s2">"gfm"</span><span class="p">,</span>
+  <span class="s2">"context"</span><span class="o">:</span> <span class="s2">"github/gollum"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Content-Type: text/html
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+<pre class="highlight"><code>&lt;p&gt;Hello world &lt;a href="http://github.com/github/linguist/issues/1" class="issue-link" title="This is a simple issue"&gt;github/linguist#1&lt;/a&gt; &lt;strong&gt;cool&lt;/strong&gt;, and &lt;a href="http://github.com/github/gollum/issues/1" class="issue-link" title="This is another issue"&gt;#1&lt;/a&gt;!&lt;/p&gt;</code></pre>
+
+<h2 id="render-a-markdown-document-in-raw-mode">Render a Markdown document in raw mode</h2>
+
+<pre><code>POST /markdown/raw
+</code></pre>
+
+<h3 id="input-1">Input</h3>
+
+<p>The raw API is not JSON-based. It takes a Markdown document as plaintext (<code>text/plain</code> or <code>text/x-markdown</code>) and renders it as plain Markdown without a repository context (just like a README.md file is rendered – this is the simplest way to preview a readme online).</p>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Content-Type: text/html
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+<pre class="highlight"><code>&lt;p&gt;Hello world github/linguist#1 &lt;strong&gt;cool&lt;/strong&gt;, and #1!&lt;/p&gt;</code></pre>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/">Overview</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/oauth/">OAuth</a></li>
+              <li><a href="/enterprise/11.10.290/v3/media/">Media Types</a></li>
+              <li><a href="/enterprise/11.10.290/v3/libraries/">Libraries</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/activity/">Activity</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/activity/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.290/v3/activity/events/types/">Event Types</a></li>
+              <li><a href="/enterprise/11.10.290/v3/activity/notifications/">Notifications</a></li>
+              <li><a href="/enterprise/11.10.290/v3/activity/starring/">Starring</a></li>
+              <li><a href="/enterprise/11.10.290/v3/activity/watching/">Watching</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/gists/">Gists</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/git/">Git Data</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/git/blobs/">Blobs</a></li>
+              <li><a href="/enterprise/11.10.290/v3/git/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.290/v3/git/refs/">References</a></li>
+              <li><a href="/enterprise/11.10.290/v3/git/tags/">Tags</a></li>
+              <li><a href="/enterprise/11.10.290/v3/git/trees/">Trees</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/issues/">Issues</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/issues/assignees/">Assignees</a></li>
+              <li><a href="/enterprise/11.10.290/v3/issues/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.290/v3/issues/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.290/v3/issues/labels/">Labels</a></li>
+              <li><a href="/enterprise/11.10.290/v3/issues/milestones/">Milestones</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/orgs/">Orgs</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/orgs/members/">Members</a></li>
+              <li><a href="/enterprise/11.10.290/v3/orgs/teams/">Teams</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/pulls/">Pull Requests</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/pulls/comments/">Review Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/repos/">Repositories</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/contents/">Contents</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/downloads/">Downloads</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/forks/">Forks</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/keys/">Keys</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/hooks/">Hooks</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/merging/">Merging</a></li>
+              <li><a href="/enterprise/11.10.290/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/users/">Users</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/users/emails/">Emails</a></li>
+              <li><a href="/enterprise/11.10.290/v3/users/followers/">Followers</a></li>
+              <li><a href="/enterprise/11.10.290/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.290/v3/search/">Search</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.290/v3/search/#search-issues">Issues</a></li>
+              <li><a href="/enterprise/11.10.290/v3/search/#search-repositories">Repositories</a></li>
+              <li><a href="/enterprise/11.10.290/v3/search/#search-users">Users</a></li>
+              <li><a href="/enterprise/11.10.290/v3/search/#email-search">Email</a></li>
+            </ul>
+          </li>
+          <li class="js-guides"><h3><a href="/enterprise/11.10.290/v3/markdown/">Markdown</a></h3></li>
+        </ul>
+      </div> <!-- /sidebar-module -->
+      <div class="sidebar-module">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+          <h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+                <li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+
+              <p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>

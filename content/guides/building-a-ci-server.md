@@ -58,7 +58,7 @@ that ngrok gave you:
 ![A new ngrok URL](/images/webhook_sample_url.png)
 
 Click **Update webhook**. You should see a body response of `Well, it worked!`.
-Great! Click on **Let me select individual events.**, and select the following:
+Great! Click on **Let me select individual events**, and select the following:
 
 * Status
 * Pull Request

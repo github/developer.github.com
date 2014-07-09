@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gitignore Templates API</title>
+  <title>The combined status API is official</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,74 +40,54 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-11-29-gitignore-templates/">
+      <div class="change" id="/changes/2014-07-09-status-contexts-are-official/">
 <h2 class="title">
-  <a href="/changes/2012-11-29-gitignore-templates/">Gitignore Templates API</a>
+  <a href="/changes/2014-07-09-status-contexts-are-official/">The combined status API is official</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    November 29, 2012
+    July 9, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga"/>
+      <a href="https://github.com/bhuga">bhuga</a>
   </li>
 </ul>
 </div>
 
 
-<p>We recently <a href="/changes/2012-9-28-auto-init-for-repositories/">made it easy</a> to initialize a repository when you create
-it <a href="/v3/repos/#create">via the API</a>. One of the options you can pass when creating a
-repository is <code>gitignore_template</code>. This value is the name of one of the
-templates from the the public <a href="https://github.com/github/gitignore">GitHub .gitignore repository</a>.</p>
+<p>We’re happy to announce that the <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status API</a> is officially part
+of the GitHub API v3. We now consider it stable for production use.</p>
 
-<p>The <a href="/v3/gitignore/">Gitignore Templates API</a> makes it easy to list those templates:</p>
+<p>Thanks to everyone who provided feedback during the comment period. We got
+some great feedback, and hope this feature helps you build the tools you
+need to make GitHub the best place to ship exactly the way you want.</p>
 
-<pre><code>curl https://api.github.com/gitignore/templates
+<h3 id="preview-media-type-no-longer-needed">Preview media type no longer needed</h3>
 
-HTTP/1.1 200 OK
+<p>If you used the Combined Status API during the preview period, you needed to
+provide a custom media type in the <code>Accept</code> header:</p>
 
-[
-  "Actionscript",
-  "Android",
-  "AppceleratorTitanium",
-  "Autotools",
-  "Bancha",
-  "C",
-  "C++",
-  ...
+<pre><code>application/vnd.github.she-hulk-preview+json
 </code></pre>
 
-<p>If you’d like to view the source, you can also fetch a single template.</p>
+<p>Now that the preview period has ended, you no longer need to pass this custom
+media type.</p>
 
-<pre><code>curl -H 'Accept: application/vnd.github.raw' \
-     https://api.github.com/gitignore/templates/Objective-C
+<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the
+<code>Accept</code> header:</p>
 
-HTTP/1.1 200 OK
-
-# Xcode
-.DS_Store
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-*.xcworkspace
-!default.xcworkspace
-xcuserdata
-profile
-*.moved-aside
-DerivedData
-.idea/
+<pre><code>application/vnd.github.v3+json
 </code></pre>
+
+<h3 id="feedback">Feedback</h3>
+
+<p>We’ll never be done listening to you! As always, please don’t hestitate to
+<a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">share your feedback</a>.</p>
 
 
 </div>

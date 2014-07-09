@@ -41,6 +41,57 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-07-09-status-contexts-are-official/">
+  <h2 class="title">
+  <a href="/changes/2014-07-09-status-contexts-are-official/">The combined status API is official</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    July 9, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga">
+      <a href="https://github.com/bhuga">bhuga</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re happy to announce that the <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status API</a> is officially part
+of the GitHub API v3. We now consider it stable for production use.</p>
+
+<p>Thanks to everyone who provided feedback during the comment period. We got
+some great feedback, and hope this feature helps you build the tools you
+need to make GitHub the best place to ship exactly the way you want.</p>
+
+<h3 id="preview-media-type-no-longer-needed">Preview media type no longer needed</h3>
+
+<p>If you used the Combined Status API during the preview period, you needed to
+provide a custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.she-hulk-preview+json
+</code></pre>
+
+<p>Now that the preview period has ended, you no longer need to pass this custom
+media type.</p>
+
+<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the
+<code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.v3+json
+</code></pre>
+
+<h3 id="feedback">Feedback</h3>
+
+<p>We’ll never be done listening to you! As always, please don’t hestitate to
+<a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">share your feedback</a>.</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-07-07-example-webhook-payloads/">
   <h2 class="title">
   <a href="/changes/2014-07-07-example-webhook-payloads/">New example webhook payloads</a>
@@ -2337,38 +2388,6 @@ but we can’t wait to see what others can do with this information.</p>
 
 </div>
 
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
-      <a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
-
-
-</div>
-
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
@@ -2417,6 +2436,38 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
 
 
 </div>
@@ -3522,6 +3573,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-07-09-status-contexts-are-official/">The combined status API is official<br /><span class="date">July 9, 2014</span></a></li>
+
   <li><a href="/changes/2014-07-07-example-webhook-payloads/">New example webhook payloads<br /><span class="date">July 7, 2014</span></a></li>
 
   <li><a href="/changes/2014-06-23-the-github-enterprise-api-documentation-has-a-new-home/">The GitHub Enterprise API documentation has a new home!<br /><span class="date">June 23, 2014</span></a></li>
@@ -3535,8 +3588,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-05-19-deployments-api-updates/">New attributes for the Deployments API<br /><span class="date">May 19, 2014</span></a></li>
 
   <li><a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API<br /><span class="date">May 9, 2014</span></a></li>
-
-  <li><a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files<br /><span class="date">May 6, 2014</span></a></li>
 
 </ul>
 

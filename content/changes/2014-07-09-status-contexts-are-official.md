@@ -29,7 +29,7 @@ Instead, we [recommend][media-types] that you specify `v3` as the version in the
 
 ### Feedback
 
-We'll never be done listening to you! As always, please don't hestitate to
+We'll never be done listening to you! As always, please don't hesitate to
 [share your feedback][feedback].
 
 [docs]: /v3/repos/statuses/#get-the-combined-status-for-a-specific-ref

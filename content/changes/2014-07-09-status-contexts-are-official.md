@@ -1,6 +1,6 @@
 ---
 kind: change
-title: The combined status API is official
+title: The Combined Status API is official
 created_at: 2014-07-09
 author_name: bhuga
 ---

@@ -1,0 +1,87 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
+
+require 'rack'
+require 'optparse'
+require 'adsf'
+
+# Parse options
+options = {
+  :handler            => nil,
+  :port               => 3000,
+  :index_filenames => %w( index.html ),
+  :root               => '.',
+  :host               => '0.0.0.0',
+}
+OptionParser.new do |opts|
+  opts.banner = "Usage: adsf [options]"
+
+  opts.separator ''
+  opts.separator 'Specific options:'
+
+  # handler
+  opts.on('-H', '--handler [handler]', 'Specify the handler to use') do |o|
+    options[:handler] = o
+  end
+
+  # help
+  opts.on('-h', '--help', 'Display help') do |o|
+    puts opts
+    exit
+  end
+
+  # index filenames
+  opts.on('-i', '--index-filenames [index-filenames]', 'Specify index filenames (comma-separated)') do |o|
+    options[:index_filenames] = o.split(',')
+  end
+
+  # port
+  opts.on('-p', '--port [port]', Integer, 'Specify the port number to use') do |o|
+    options[:port] = o
+  end
+
+  # root
+  opts.on('-r', '--root [root]', 'Specify the web root to use') do |o|
+    options[:root] = o
+  end
+
+  # host
+  opts.on('-l', '--local-only', 'Only listen to requests from localhost (short for "-a localhost")') do
+    options[:host] = 'localhost'
+  end
+
+  # host
+  opts.on('-a', '--listen-address [host]', 'Specify the address to listen to') do |o|
+    options[:host] = o
+  end
+end.parse!
+
+# Find handler
+handler = Rack::Handler.get(options[:handler])
+if handler.nil?
+  begin
+    handler = Rack::Handler::Mongrel
+  rescue LoadError
+    handler = Rack::Handler::WEBrick
+  end
+end
+
+# Create app
+app = Rack::Builder.new do
+  use Rack::CommonLogger
+  use Rack::ShowExceptions
+  use Rack::Lint
+  use Adsf::Rack::IndexFileFinder,
+    :root            => options[:root],
+    :index_filenames => options[:index_filenames]
+  run Rack::File.new(options[:root])
+end.to_app
+
+# Be quittable
+%w( INT TERM ).each do |s|
+  Signal.trap(s) { handler.shutdown }
+end
+
+# Run
+handler.run(app, :Port => options[:port], :Host => options[:host])

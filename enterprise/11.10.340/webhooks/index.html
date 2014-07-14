@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Webhooks | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/11.10.340/changes.atom">
+  <link href="/enterprise/11.10.340/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/11.10.340/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/11.10.340/js/documentation.js" type="text/javascript"></script>
+</head>
+
+
+<body class="api">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/11.10.340/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/enterprise/11.10.340/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/11.10.340/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/enterprise/11.10.340/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+
+
+  <div class="sub-nav">
+    <h2><a href="/enterprise/11.10.340/v3/">API</a></h2>
+
+    <ul>
+      <li><a href="/enterprise/11.10.340/v3/">Reference</a></li>
+      <li><a href="/enterprise/11.10.340/webhooks/" class="active">Webhooks</a></li>
+      <li><a href="/enterprise/11.10.340/guides/">Guides</a></li>
+      <li><a href="/enterprise/11.10.340/libraries/">Libraries</a></li>
+    </ul>
+  </div>
+
+  <div id="wrapper">
+    <div class="content">
+      <h1 id="webhooks">Webhooks</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#services">Services</a></li>
+  <li><a href="#events">Events</a></li>
+  <li><a href="#wildcard-event">Wildcard Event</a></li>
+  <li><a href="#ping-event">Ping Event</a></li>
+</ul>
+
+<p>Every GitHub repository has the option to communicate with a web server whenever
+the repository is pushed to. These “webhooks” can be used to update an external
+issue tracker, trigger CI builds, update a backup mirror, or even deploy to your
+production server.</p>
+
+<p>Each hook can be configured for a specific <a href="#services">service</a> and one or
+more <a href="#events">events</a>, regardless of the API used to do so. Repository admins
+can configure hooks programmatically <a href="/enterprise/11.10.340/v3/repos/hooks/">via the API</a>.</p>
+
+<h2 id="services">Services</h2>
+
+<p>A service is basically the name used to refer to a webhook that has configuration
+settings, a list of available events, and default events.</p>
+
+<p>For instance, the
+<a href="https://github.com/github/github-services/blob/master/lib/services/email.rb">email</a>
+service is a built-in GitHub service that will send event <a href="#payloads">payloads</a>
+to, at most, two email addresses.  It will trigger for the <code>push</code>
+event by default and supports the <code>public</code> event type as well.</p>
+
+<p>A number of services have been integrated through the open source
+<a href="https://github.com/github/github-services">github-services</a> project.  When
+<a href="/enterprise/11.10.340/webhooks/creating/">creating a hook</a>, the <code>:name</code> parameter must refer to one of
+these services.</p>
+
+<p>Documentation for all available service hooks can be found in the
+<a href="https://github.com/github/github-services/tree/master/docs">docs directory</a>
+of the github-services repository.  A JSON representation of their names,
+default events, supported events, and configuration options can be seen
+at <a href="https://api.github.com/hooks">api.github.com/hooks</a>.</p>
+
+<h2 id="events">Events</h2>
+
+<p>Active hooks can be configured to trigger for one or more service supported
+events. In other words, the service must support listening for the event you
+want to trigger.</p>
+
+<p>For example, generic webhooks supports listening for all events, while the
+<a href="https://github.com/github/github-services/blob/master/lib/services/irc.rb">IRC</a>
+service can only listen for <code>push</code>, <code>issues</code>, <code>pull_request</code>, <code>commit_comment</code>,
+<code>pull_request_review_comment</code>, and <code>issue_comment</code> events.</p>
+
+<p>Each service also has a set of default events for which it listens if it isn’t
+configured. For example, generic webhooks listen only for <code>push</code> events by
+default, while the IRC service listens on <code>push</code> and <code>pull_requests</code> events.
+Service hooks set up via the repository settings UI listen only for the default
+set of events, but can be
+<a href="/enterprise/11.10.340/v3/repos/hooks/#edit-a-hook">re-configured via the API</a>.</p>
+
+<p>The available events are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>*</code></td>
+      <td>Any time any event is triggered (<a href="#wildcard-event">Wildcard Event</a>).</td>
+    </tr>
+    <tr>
+      <td><code>commit_comment</code></td>
+      <td>Any time a Commit is commented on.</td>
+    </tr>
+    <tr>
+      <td><code>create</code></td>
+      <td>Any time a Branch or Tag is created.</td>
+    </tr>
+    <tr>
+      <td><code>delete</code></td>
+      <td>Any time a Branch or Tag is deleted.</td>
+    </tr>
+    <tr>
+      <td><code>deployment</code></td>
+      <td>Any time a Repository has a new deployment created from the API.</td>
+    </tr>
+    <tr>
+      <td><code>deployment_status</code></td>
+      <td>Any time a deployment for the Repository has a status update from the API.</td>
+    </tr>
+    <tr>
+      <td><code>fork</code></td>
+      <td>Any time a Repository is forked.</td>
+    </tr>
+    <tr>
+      <td><code>gollum</code></td>
+      <td>Any time a Wiki page is updated.</td>
+    </tr>
+    <tr>
+      <td><code>issue_comment</code></td>
+      <td>Any time an Issue is commented on.</td>
+    </tr>
+    <tr>
+      <td><code>issues</code></td>
+      <td>Any time an Issue is opened or closed.</td>
+    </tr>
+    <tr>
+      <td><code>member</code></td>
+      <td>Any time a User is added as a collaborator to a non-Organization Repository.</td>
+    </tr>
+    <tr>
+      <td><code>page_build</code></td>
+      <td>Any time a Pages site is built or results in a failed build.</td>
+    </tr>
+    <tr>
+      <td><code>public</code></td>
+      <td>Any time a Repository changes from private to public.</td>
+    </tr>
+    <tr>
+      <td><code>pull_request_review_comment</code></td>
+      <td>Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).</td>
+    </tr>
+    <tr>
+      <td><code>pull_request</code></td>
+      <td>Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).</td>
+    </tr>
+    <tr>
+      <td><code>push</code></td>
+      <td>Any git push to a Repository. <strong>This is the default event.</strong>
+</td>
+    </tr>
+    <tr>
+      <td><code>release</code></td>
+      <td>Any time a Release is published in the Repository.</td>
+    </tr>
+    <tr>
+      <td><code>status</code></td>
+      <td>Any time a Repository has a status update from the API</td>
+    </tr>
+    <tr>
+      <td><code>team_add</code></td>
+      <td>Any time a team is added or modified on a Repository.</td>
+    </tr>
+    <tr>
+      <td><code>watch</code></td>
+      <td>Any time a User watches the Repository.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="payloads">Payloads</h3>
+
+<p>The payloads for all hooks mirror <a href="/enterprise/11.10.340/v3/activity/events/types/">the payloads for the Event
+types</a>, with the exception of <a href="https://developer.github.com/v3/activity/events/types/#pushevent">the original <code>push</code>
+event</a>,
+which has a more detailed payload.</p>
+
+<p>A full payload will also show the user who performed the event (<code>sender</code>),
+the repository (<code>repository</code>), and the organization (<code>organization</code>) if applicable.</p>
+
+<h4 id="delivery-headers">Delivery headers</h4>
+
+<p>HTTP requests made to your server’s endpoint will contain several special
+headers:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Header</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>X-Github-Event</code></td>
+      <td>Name of the <a href="#events">event</a> that triggered this delivery.</td>
+    </tr>
+    <tr>
+      <td><code>X-Hub-Signature</code></td>
+      <td>HMAC hex digest of the payload, using <a href="/enterprise/11.10.340/v3/repos/hooks/#create-a-hook">the hook’s <code>secret</code></a> as the key (if configured).</td>
+    </tr>
+    <tr>
+      <td><code>X-Github-Delivery</code></td>
+      <td>Unique ID for this delivery.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Also, the <code>User-Agent</code> for the requests will have the prefix <code>GitHub Hookshot</code>.</p>
+
+<h4 id="example-delivery">Example delivery</h4>
+
+<pre class="terminal">
+POST /payload HTTP/1.1
+
+Host: localhost:4567
+X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+User-Agent: GitHub Hookshot 044aadd
+Content-Type: application/json
+Content-Length: 6615
+X-Github-Event: issues
+
+{
+  "action": "opened",
+  "issue": {
+    "url": "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+    "number": 1347,
+    ...
+  },
+  "repository" : {
+    "id": 1296269,
+    "full_name": "octocat/Hello-World",
+    "owner": {
+      "login": "octocat",
+      "id": 1,
+      ...
+    },
+    ...
+  },
+  "sender": {
+    "login": "octocat",
+    "id": 1,
+    ...
+  }
+}
+</pre>
+
+<h2 id="wildcard-event">Wildcard Event</h2>
+
+<p>We also support a wildcard (<code>*</code>) that will match all supported events. When you
+add the wildcard event, we’ll replace any existing events you have configured with
+the wildcard event and send you payloads for all supported events. You’ll also
+automatically get any new events we might add in the future.</p>
+
+<h2 id="ping-event">Ping Event</h2>
+
+<p>When you create a new webhook, we’ll send you a simple <code>ping</code> event to let you
+know you’ve set up the webhook correctly. This event isn’t stored so it isn’t
+retrievable via the <a href="/enterprise/11.10.340/v3/activity/events/">Events API</a>. You can trigger a <code>ping</code>
+again by calling the <a href="/enterprise/11.10.340/v3/repos/hooks/#ping-a-hook">ping endpoint</a>.</p>
+
+<h3 id="ping-event-payload">Ping Event Payload</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>zen</td>
+      <td>Random string of GitHub zen</td>
+    </tr>
+    <tr>
+      <td>hook_id</td>
+      <td>The ID of the webhook that triggered the ping</td>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="sidebar-module">
+        <ul>
+          <li><h3><a href="/enterprise/11.10.340/webhooks/creating">Creating Webhooks</a></h3></li>
+          <li><h3><a href="/enterprise/11.10.340/webhooks/configuring/">Configuring Your Server</a></h3></li>
+          <li><h3><a href="/enterprise/11.10.340/webhooks/testing/">Testing Webhooks</a></h3></li>
+          <li><h3><a href="/enterprise/11.10.340/webhooks/securing">Securing Your Webhooks</a></h3></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-module notice">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+      <div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+    </div>
+<!-- sidebar-shell -->
+  </div>
+<!-- #wrapper -->
+  <!-- #wrapper -->
+
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="http://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="http://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design © <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+    </div>
+
+  </div>
+<!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/enterprise/11.10.340/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

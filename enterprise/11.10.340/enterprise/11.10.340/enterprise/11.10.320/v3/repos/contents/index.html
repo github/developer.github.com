@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Repo Contents | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/11.10.340/enterprise/11.10.320/changes.atom">
+  <link href="/enterprise/11.10.340/enterprise/11.10.320/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.320/css/960.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.320/css/uv_active4d.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.320/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.320/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/11.10.340/enterprise/11.10.320/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/11.10.340/enterprise/11.10.320/shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="/enterprise/11.10.340/enterprise/11.10.320/"><img src="/enterprise/11.10.340/enterprise/11.10.320/images/logo_developer.png" height="45" alt="GitHub:Developer"></a>
+          <ul class="nav">
+            <li class="api-status">
+            </li>
+<li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/">API v3</a></li>
+            <li><a href="/enterprise/11.10.340/enterprise/11.10.320/changes/">Changes</a></li>
+            <li><a href="https://github.com/contact">Support</a></li>
+            <li><a href="/enterprise/11.10.340/enterprise/11.10.320/changes.atom">
+              <img src="/enterprise/11.10.340/enterprise/11.10.320/images/feed-icon-28x28.png" width="16" height="16" alt="GitHub API Changes Feed">
+            </a></li>
+          </ul>
+        </div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="repo-contents-api">Repo Contents API</h1>
+
+<ul id="markdown-toc">
+<li><a href="#get-the-readme">Get the README</a></li>
+  <li><a href="#get-contents">Get contents</a></li>
+  <li><a href="#create-a-file">Create a file</a></li>
+  <li><a href="#update-a-file">Update a file</a></li>
+  <li><a href="#delete-a-file">Delete a file</a></li>
+  <li><a href="#get-archive-link">Get archive link</a></li>
+  <li><a href="#custom-media-types">Custom media types</a></li>
+</ul>
+<p>These API methods let you retrieve the contents of files within a repository as
+Base64 encoded content. See <a href="#custom-media-types">media types</a> for requesting raw format.</p>
+
+<h2 id="get-the-readme">Get the README</h2>
+
+<p>This method returns the preferred README for a repository.</p>
+
+<pre><code>GET /repos/:owner/:repo/readme
+</code></pre>
+
+<p>READMEs support <a href="#custom-media-types">a custom media type</a> for getting the raw content.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>ref</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag.  Defaults to <code>master</code>.</dd>
+</dl>
+<h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"base64"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">5362</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="get-contents">Get contents</h2>
+
+<p>This method returns the contents of a file or directory in a repository.</p>
+
+<pre><code>GET /repos/:owner/:repo/contents/:path
+</code></pre>
+
+<p>Files and symlinks support <a href="#custom-media-types">a custom media type</a> for getting the raw content.
+Directories and submodules do <em>not</em> support custom media types.</p>
+
+<p><em>Notes</em>:</p>
+
+<ul>
+<li>To get a repository’s contents recursively, you can <a href="/enterprise/11.10.340/enterprise/11.10.320/v3/git/trees/">recursively get the tree</a>.</li>
+  <li>This API supports files up to 1 megabyte in size.</li>
+</ul>
+<h3 id="parameters-1">Parameters</h3>
+
+<dl>
+<dt>path</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The content path.</dd>
+  <dt>ref</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The String name of the Commit/Branch/Tag.  Defaults to <code>master</code>.</dd>
+</dl>
+<h3 id="response-if-content-is-a-file">Response if content is a file</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"base64"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">5362</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"README.md"</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"encoded content ..."</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/README.md"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/README.md"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-if-content-is-a-directory">Response if content is a directory</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">625</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"dir"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octokit"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/tree/master/lib/octokit"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/tree/master/lib/octokit"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="response-if-content-is-a-symlink">Response if content is a symlink</h3>
+
+<p>If the requested <code>:path</code> points to a symlink, and the symlink’s target is a normal file in the repository, then the API responds with the content of the file (in the <a href="#response-if-content-is-a-file">format shown above</a>).</p>
+
+<p>Otherwise, the API responds with a hash describing the symlink itself:</p>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"symlink"</span><span class="p">,</span>
+  <span class="s2">"target"</span><span class="o">:</span> <span class="s2">"/path/to/symlink/target"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">23</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"some-symlink"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-if-content-is-a-submodule">Response if content is a submodule</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"submodule"</span><span class="p">,</span>
+  <span class="s2">"submodule_git_url"</span><span class="o">:</span> <span class="s2">"git://github.com/jquery/qunit.git"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"qunit"</span><span class="p">,</span>
+  <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"test/qunit"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+  <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master"</span><span class="p">,</span>
+    <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<p>The <code>submodule_git_url</code> identifies the location of the submodule repository, and the <code>sha</code> identifies a specific commit within the submodule repository.
+Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.</p>
+
+<p>If the submodule repository is not hosted on github.com, the Git URLs (<code>git_url</code> and <code>_links["git"]</code>) and the github.com URLs (<code>html_url</code> and <code>_links["html"]</code>) will have null values.</p>
+
+<h2 id="create-a-file">Create a file</h2>
+
+<p>This method creates a new file in a repository</p>
+
+<pre><code>PUT /repos/:owner/:repo/contents/:path
+</code></pre>
+
+<h3 id="parameters-2">Parameters</h3>
+
+<dl>
+<dt>path</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The content path.</dd>
+  <dt>message</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The commit message.</dd>
+  <dt>content</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The new file content, Base64 encoded.</dd>
+  <dt>branch</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+default branch (usually <code>master</code>).</dd>
+</dl>
+<h3 id="optional-parameters">Optional Parameters</h3>
+
+<p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
+information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+user’s information is used.</p>
+
+<p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use
+<code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
+
+<dl>
+<dt>author.name</dt>
+  <dd>
+<strong>string</strong> - The name of the author of the commit</dd>
+  <dt>author.email</dt>
+  <dd>
+<strong>string</strong> - The email of the author of the commit</dd>
+  <dt>committer.name</dt>
+  <dd>
+<strong>string</strong> - The name of the committer of the commit</dd>
+  <dt>committer.email</dt>
+  <dd>
+<strong>string</strong> - The email of the committer of the commit</dd>
+</dl>
+<h3 id="example-input">Example Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"bXkgbmV3IGZpbGUgY29udGVudHM="</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"hello.txt"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="p">},</span>
+    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="update-a-file">Update a file</h2>
+
+<p>This method updates a file in a repository</p>
+
+<pre><code>PUT /repos/:owner/:repo/contents/:path
+</code></pre>
+
+<h3 id="parameters-3">Parameters</h3>
+
+<dl>
+<dt>path</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The content path.</dd>
+  <dt>message</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The commit message.</dd>
+  <dt>content</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The updated file content, Base64 encoded.</dd>
+  <dt>sha</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The blob SHA of the file being replaced.</dd>
+  <dt>branch</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+default branch (usually <code>master</code>).</dd>
+</dl>
+<h3 id="optional-parameters-1">Optional Parameters</h3>
+
+<p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
+information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+user’s information is used.</p>
+
+<p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use
+<code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
+
+<dl>
+<dt>author.name</dt>
+  <dd>
+<strong>string</strong> - The name of the author of the commit</dd>
+  <dt>author.email</dt>
+  <dd>
+<strong>string</strong> - The email of the author of the commit</dd>
+  <dt>committer.name</dt>
+  <dd>
+<strong>string</strong> - The name of the committer of the commit</dd>
+  <dt>committer.email</dt>
+  <dd>
+<strong>string</strong> - The email of the committer of the commit</dd>
+</dl>
+<h3 id="example-input-1">Example Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"bXkgdXBkYXRlZCBmaWxlIGNvbnRlbnRz"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"329688480d39049927147c162b9d2deaf885005f"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"hello.txt"</span><span class="p">,</span>
+    <span class="s2">"path"</span><span class="o">:</span> <span class="s2">"notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"file"</span><span class="p">,</span>
+    <span class="s2">"_links"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"self"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt"</span><span class="p">,</span>
+      <span class="s2">"git"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3"</span><span class="p">,</span>
+      <span class="s2">"html"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/blob/master/notes/hello.txt"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="p">},</span>
+    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="delete-a-file">Delete a file</h2>
+
+<p>This method deletes a file in a repository</p>
+
+<pre><code>DELETE /repos/:owner/:repo/contents/:path
+</code></pre>
+
+<h3 id="parameters-4">Parameters</h3>
+
+<dl>
+<dt>path</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The content path.</dd>
+  <dt>message</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The commit message.</dd>
+  <dt>sha</dt>
+  <dd>
+<em>Required</em> <strong>string</strong> - The blob SHA of the file being removed.</dd>
+  <dt>branch</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong> - The branch name. If not provided, uses the repository’s 
+default branch (usually <code>master</code>).</dd>
+</dl>
+<h3 id="optional-parameters-2">Optional Parameters</h3>
+
+<p>The <code>author</code> section is optional and is filled in with the <code>committer</code>
+information if omitted. If the <code>committer</code> information is omitted, the authenticated 
+user’s information is used.</p>
+
+<p>You must provide values for both <code>name</code> and <code>email</code>, whether you choose to use
+<code>author</code> or <code>committer</code>. Otherwise, you’ll receive a <code>500</code> status code.</p>
+
+<dl>
+<dt>author.name</dt>
+  <dd>
+<strong>string</strong> - The name of the author of the commit</dd>
+  <dt>author.email</dt>
+  <dd>
+<strong>string</strong> - The email of the author of the commit</dd>
+  <dt>committer.name</dt>
+  <dd>
+<strong>string</strong> - The name of the committer of the commit</dd>
+  <dt>committer.email</dt>
+  <dd>
+<strong>string</strong> - The email of the committer of the commit</dd>
+</dl>
+<h3 id="example-input-2">Example Input</h3>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+  <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+  <span class="p">},</span>
+  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"329688480d39049927147c162b9d2deaf885005f"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"commit"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span>
+    <span class="s2">"author"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"committer"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2010-04-10T14:10:01-07:00"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
+      <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"schacon@gmail.com"</span>
+    <span class="p">},</span>
+    <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
+    <span class="s2">"tree"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span>
+      <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span>
+    <span class="p">},</span>
+    <span class="s2">"parents"</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World/git/commit/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span>
+        <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="get-archive-link">Get archive link</h2>
+
+<p>This method will return a <code>302</code> to a URL to download a tarball
+or zipball archive for a repository. Please make sure your HTTP framework
+is configured to follow redirects or you will need to use the <code>Location</code> header
+to make a second <code>GET</code> request.</p>
+
+<p><em>Note</em>: For private repositories, these links are temporary and expire quickly.</p>
+
+<pre><code>GET /repos/:owner/:repo/:archive_format/:ref
+</code></pre>
+
+<h3 id="parameters-5">Parameters</h3>
+
+<dl>
+<dt>archive_format</dt>
+  <dd>Either <code>tarball</code> or <code>zipball</code>
+</dd>
+  <dt>ref</dt>
+  <dd>
+<em>Optional</em>  <strong>string</strong> - valid Git reference, defaults to <code>master</code>
+</dd>
+</dl>
+<h3 id="response-4">Response</h3>
+
+<pre class="headers"><code>Status: 302 Found
+Location: https://codeload.github.com/me/myprivate/legacy.zip/master?login=me&amp;token=thistokenexpires
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<p>To follow redirects with curl, use the <code>-L</code> switch:</p>
+
+<pre class="terminal">
+curl -L https://api.github.com/repos/pengwynn/octokit/tarball &gt; octokit.tar.gz
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
+</pre>
+
+<h2 id="custom-media-types">Custom media types</h2>
+
+<p><a href="#get-the-readme">READMEs</a>, <a href="#get-contents">files</a>, and <a href="#get-contents">symlinks</a> support the following custom media type.</p>
+
+<pre><code>application/vnd.github.VERSION.raw
+</code></pre>
+
+<p>You can read more about the use of media types in the API <a href="/enterprise/11.10.340/enterprise/11.10.320/v3/media/">here</a>.</p>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/">Overview</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/libraries/">Libraries</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/media/">Media Types</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/oauth/">OAuth</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/auth/">Other Authentication Methods</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/troubleshooting/">Troubleshooting</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/guides/">Guides</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/guides/getting-started/">Getting Started</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/guides/basics-of-authentication/">Basics of Authentication</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/guides/rendering-data-as-graphs/">Rendering Data as Graphs</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/activity/">Activity</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/activity/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/activity/events/types/">Event Types</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/activity/feeds/">Feeds</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/activity/notifications/">Notifications</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/activity/starring/">Starring</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/activity/watching/">Watching</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/gists/">Gists</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/git/">Git Data</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/git/blobs/">Blobs</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/git/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/git/refs/">References</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/git/tags/">Tags</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/git/trees/">Trees</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/issues/">Issues</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/issues/assignees/">Assignees</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/issues/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/issues/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/issues/labels/">Labels</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/issues/milestones/">Milestones</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/misc/">Miscellaneous</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/emojis/">Emojis</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/gitignore/">Gitignore</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/markdown/">Markdown</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/meta/">Meta</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/rate_limit/">Rate Limit</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/orgs/">Orgs</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/orgs/members/">Members</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/orgs/teams/">Teams</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/pulls/">Pull Requests</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/pulls/comments/">Review Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/">Repositories</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/contents/">Contents</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/downloads/">Downloads</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/forks/">Forks</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/keys/">Keys</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/hooks/">Hooks</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/merging/">Merging</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/statistics/">Statistics</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/search/">Search</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/search/#search-repositories">Repositories</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/search/#search-code">Code</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/search/#search-issues">Issues</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/search/#search-users">Users</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/search/legacy/">Legacy Search</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/users/">Users</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/users/emails/">Emails</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/users/followers/">Followers</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.320/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div> <!-- /sidebar-module -->
+      <div class="sidebar-module">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <ul class="footer_nav">
+          <h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <ul class="footer-cell">
+          <li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+          <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+          <li><a href="http://help.github.com/security/">Security</a></li>
+        </ul>
+
+        <span class="footer-cell">
+          <a href="https://github.com" class="mega-icon mega-icon-invertocat"></a>
+        </span>
+
+        <span class="footer-cell">
+          Design © <span class="js-year">2013</span> GitHub, Inc. All rights reserved.
+          <p>
+            Except where otherwise noted, content on this site is licensed under a
+            <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.
+          </p>
+        </span>
+      </div>
+
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>

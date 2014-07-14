@@ -4,6 +4,9 @@ require 'fileutils'
 require 'tmpdir'
 require 'nokogiri'
 
+%x(git checkout gh-pages)
+%x(git pull origin gh-pages)
+
 %x(git checkout -b add-backfilled-versions)
 
 date = ARGV[0].dup # yyyy, mm, dd, like, 2014-07-08

@@ -1,0 +1,564 @@
+have_header: checking for iconv.h... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib     -lruby-static  -lpthread -ldl -lobjc  "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+"/usr/bin/cc -E -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <iconv.h>
+/* end */
+
+--------------------
+
+have_func: checking for iconv_open() in iconv.h... -------------------- no
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib     -lruby-static  -lpthread -ldl -lobjc  "
+Undefined symbols for architecture x86_64:
+  "_iconv_open", referenced from:
+      _t in conftest-0181fc.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <iconv.h>
+ 4: 
+ 5: /*top*/
+ 6: int t() { void ((*volatile p)()); p = (void ((*)()))iconv_open; return 0; }
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib     -lruby-static  -lpthread -ldl -lobjc  "
+conftest.c:6:22: error: too few arguments to function call, expected 2, have 0
+int t() { iconv_open(); return 0; }
+          ~~~~~~~~~~ ^
+/usr/include/iconv.h:62:1: note: 'iconv_open' declared here
+iconv_t iconv_open (const char* /*tocode*/, const char* /*fromcode*/);
+^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <iconv.h>
+ 4: 
+ 5: /*top*/
+ 6: int t() { iconv_open(); return 0; }
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+/* end */
+
+--------------------
+
+have_library: checking for iconv_open() in -liconv... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib     -lruby-static -liconv  -lpthread -ldl -lobjc  "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <iconv.h>
+ 4: 
+ 5: /*top*/
+ 6: int t() { void ((*volatile p)()); p = (void ((*)()))iconv_open; return 0; }
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+/* end */
+
+--------------------
+
+have_library: checking for main() in -llzma... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib     -lruby-static -llzma  -lpthread -ldl -lobjc  "
+conftest.c:4:53: error: use of undeclared identifier 'main'
+int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib     -lruby-static -llzma  -lpthread -ldl -lobjc  "
+conftest.c:4:11: warning: implicit declaration of function 'main' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { main(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { main(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_func: checking for xmlParseDoc() in libxml/parser.h... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <libxml/parser.h>
+ 4: 
+ 5: /*top*/
+ 6: int t() { void ((*volatile p)()); p = (void ((*)()))xmlParseDoc; return 0; }
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+/* end */
+
+--------------------
+
+have_func: checking for xsltParseStylesheetDoc() in libxslt/xslt.h... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:6:53: error: use of undeclared identifier 'xsltParseStylesheetDoc'
+int t() { void ((*volatile p)()); p = (void ((*)()))xsltParseStylesheetDoc; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <libxslt/xslt.h>
+ 4: 
+ 5: /*top*/
+ 6: int t() { void ((*volatile p)()); p = (void ((*)()))xsltParseStylesheetDoc; return 0; }
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:6:11: warning: implicit declaration of function 'xsltParseStylesheetDoc' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { xsltParseStylesheetDoc(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <libxslt/xslt.h>
+ 4: 
+ 5: /*top*/
+ 6: int t() { xsltParseStylesheetDoc(); return 0; }
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+/* end */
+
+--------------------
+
+have_func: checking for exsltFuncRegister() in libexslt/exslt.h... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <libexslt/exslt.h>
+ 4: 
+ 5: /*top*/
+ 6: int t() { void ((*volatile p)()); p = (void ((*)()))exsltFuncRegister; return 0; }
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+/* end */
+
+--------------------
+
+have_func: checking for xmlHasFeature()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:53: error: use of undeclared identifier 'xmlHasFeature'
+int t() { void ((*volatile p)()); p = (void ((*)()))xmlHasFeature; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))xmlHasFeature; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:11: warning: implicit declaration of function 'xmlHasFeature' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { xmlHasFeature(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { xmlHasFeature(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_func: checking for xmlFirstElementChild()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:53: error: use of undeclared identifier 'xmlFirstElementChild'
+int t() { void ((*volatile p)()); p = (void ((*)()))xmlFirstElementChild; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))xmlFirstElementChild; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:11: warning: implicit declaration of function 'xmlFirstElementChild' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { xmlFirstElementChild(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { xmlFirstElementChild(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_func: checking for xmlRelaxNGSetParserStructuredErrors()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:53: error: use of undeclared identifier 'xmlRelaxNGSetParserStructuredErrors'
+int t() { void ((*volatile p)()); p = (void ((*)()))xmlRelaxNGSetParserStructuredErrors; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))xmlRelaxNGSetParserStructuredErrors; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:11: warning: implicit declaration of function 'xmlRelaxNGSetParserStructuredErrors' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { xmlRelaxNGSetParserStructuredErrors(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { xmlRelaxNGSetParserStructuredErrors(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_func: checking for xmlRelaxNGSetParserStructuredErrors()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:53: error: use of undeclared identifier 'xmlRelaxNGSetParserStructuredErrors'
+int t() { void ((*volatile p)()); p = (void ((*)()))xmlRelaxNGSetParserStructuredErrors; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))xmlRelaxNGSetParserStructuredErrors; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:11: warning: implicit declaration of function 'xmlRelaxNGSetParserStructuredErrors' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { xmlRelaxNGSetParserStructuredErrors(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { xmlRelaxNGSetParserStructuredErrors(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_func: checking for xmlRelaxNGSetValidStructuredErrors()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:53: error: use of undeclared identifier 'xmlRelaxNGSetValidStructuredErrors'
+int t() { void ((*volatile p)()); p = (void ((*)()))xmlRelaxNGSetValidStructuredErrors; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))xmlRelaxNGSetValidStructuredErrors; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:11: warning: implicit declaration of function 'xmlRelaxNGSetValidStructuredErrors' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { xmlRelaxNGSetValidStructuredErrors(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { xmlRelaxNGSetValidStructuredErrors(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_func: checking for xmlSchemaSetValidStructuredErrors()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:53: error: use of undeclared identifier 'xmlSchemaSetValidStructuredErrors'
+int t() { void ((*volatile p)()); p = (void ((*)()))xmlSchemaSetValidStructuredErrors; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))xmlSchemaSetValidStructuredErrors; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:11: warning: implicit declaration of function 'xmlSchemaSetValidStructuredErrors' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { xmlSchemaSetValidStructuredErrors(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { xmlSchemaSetValidStructuredErrors(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+
+have_func: checking for xmlSchemaSetParserStructuredErrors()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:53: error: use of undeclared identifier 'xmlSchemaSetParserStructuredErrors'
+int t() { void ((*volatile p)()); p = (void ((*)()))xmlSchemaSetParserStructuredErrors; return 0; }
+                                                    ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { void ((*volatile p)()); p = (void ((*)()))xmlSchemaSetParserStructuredErrors; return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/x86_64-darwin13.2.0 -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1/ruby/backward -I/opt/rubies/1.9.3-p484/include/ruby-1.9.1 -I. -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/include/libxml2 -I/usr/include -I/opt/rubies/1.9.3-p484/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE  -I/opt/rubies/1.9.3-p484/include  -DNOKOGIRI_LIBXML2_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0\" -DNOKOGIRI_LIBXSLT_PATH\=\"/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28\" -I/opt/boxen/homebrew/include -I/opt/X11/include -O3 -Wno-error=shorten-64-to-32  -pipe -I/opt/boxen/homebrew/include -g -DXP_UNIX -Wall -Wcast-qual -Wwrite-strings -Wconversion -Wmissing-noreturn -Winline -DNOKOGIRI_USE_PACKAGED_LIBRARIES conftest.c  -L. -L/opt/rubies/1.9.3-p484/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib -L/Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib -L/usr/lib -L. -L/opt/rubies/1.9.3-p484/lib -L/opt/boxen/homebrew/lib -L/opt/X11/lib    /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lruby-static /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libexslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxslt/1.1.28/lib/libxslt.a -lm -liconv -lpthread -lz /Users/garentorikian/Development/developer.github.com/vendor/gems/ruby/1.9.1/gems/nokogiri-1.6.2.1/ports/x86_64-apple-darwin13.2.0/libxml2/2.8.0/lib/libxml2.a -llzma -lpthread -ldl -lobjc  "
+conftest.c:4:11: warning: implicit declaration of function 'xmlSchemaSetParserStructuredErrors' is invalid in C99 [-Wimplicit-function-declaration]
+int t() { xmlSchemaSetParserStructuredErrors(); return 0; }
+          ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: int t() { xmlSchemaSetParserStructuredErrors(); return 0; }
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+/* end */
+
+--------------------
+

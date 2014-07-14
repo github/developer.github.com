@@ -6,8 +6,8 @@ require 'nokogiri'
 
 %x(git checkout -b add-backfilled-versions)
 
-date = ARGV[0] # yyyy, mm, dd, like, 2014-07-08
-version = ARGV[1] # like, 11.10.340
+date = ARGV[0].dup # yyyy, mm, dd, like, 2014-07-08
+version = ARGV[1].dup # like, 11.10.340
 
 temp_dir = Dir.mktmpdir
 begin

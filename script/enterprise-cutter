@@ -9,7 +9,9 @@ require 'nokogiri'
 
 %x(git checkout -b add-backfilled-versions)
 
-date = ARGV[0].dup # yyyy, mm, dd, like, 2014-07-08
+# run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
+# where [DATE] and [VERSION} are command-line arguments, defined below
+date = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
 version = ARGV[1].dup # like, 11.10.340
 
 temp_dir = Dir.mktmpdir

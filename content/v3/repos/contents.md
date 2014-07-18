@@ -110,7 +110,7 @@ information if omitted. If the `committer` information is omitted, the authentic
 user's information is used.
 
 You must provide values for both `name` and `email`, whether you choose to use
-`author` or `committer`. Otherwise, you'll receive a `500` status code.
+`author` or `committer`. Otherwise, you'll receive a `422` status code.
 
 Both the `author` and `commiter` parameters have the same keys:
 
@@ -158,7 +158,7 @@ information if omitted. If the `committer` information is omitted, the authentic
 user's information is used.
 
 You must provide values for both `name` and `email`, whether you choose to use
-`author` or `committer`. Otherwise, you'll receive a `500` status code.
+`author` or `committer`. Otherwise, you'll receive a `422` status code.
 
 Both the `author` and `commiter` parameters have the same keys:
 
@@ -207,7 +207,7 @@ information if omitted. If the `committer` information is omitted, the authentic
 user's information is used.
 
 You must provide values for both `name` and `email`, whether you choose to use
-`author` or `committer`. Otherwise, you'll receive a `500` status code.
+`author` or `committer`. Otherwise, you'll receive a `422` status code.
 
 Both the `author` and `commiter` parameters have the same keys:
 

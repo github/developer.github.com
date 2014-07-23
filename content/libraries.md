@@ -82,6 +82,11 @@ covers the entire API.
 [github]: https://github.com/michael/github
 [github-client]: https://github.com/philschatz/github-client
 
+## Julia
+* [GitHub.jl][github.jl]
+
+[github.jl]: https://github.com/WestleyArgentum/GitHub.jl
+
 ## Objective-C
 
 * [UAGithubEngine][uagithubengine]

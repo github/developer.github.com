@@ -321,7 +321,7 @@ Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synch
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed. Can be one of "opened", "closed", "synchronize", or "reopened". If the action is "closed" and the `merged_at` key is `null`, the pull request was closed with unmerged commits. If the action is "closed" and the `merged_at` key is a timestamp, the pull request was merged.
+`action`|`string` | The action that was performed. Can be one of "opened", "closed", "synchronize", or "reopened". If the action is "closed" and the `merged` key is `false`, the pull request was closed with unmerged commits. If the action is "closed" and the `merged` key is `true`, the pull request was merged.
 `number`|`integer` | The pull request number.
 `pull_request`|`object` | The [pull request](/v3/pulls) itself.
 

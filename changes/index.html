@@ -1130,6 +1130,35 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 </div>
 
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
+
+</div>
+
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -1178,35 +1207,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
 
-
-</div>
-
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
 
 </div>
 
@@ -1288,39 +1288,6 @@ on previous Pages builds.</p>
 
 </div>
 
-<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 10, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
-<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
-create a new webhook, we will send this event as an initial test of the webhook.</p>
-
-<p>The ping is only informational, doesn’t need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It’s just a quick
-“hello world” to let you know you set everything up correctly.</p>
-
-<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
-By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
-you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
-
-</div>
-
 <div class="change" id="/changes/2014-02-10-repo-hook-scopes/">
   <h2 class="title">
   <a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks</a>
@@ -1356,6 +1323,39 @@ repository contents:</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes">get in touch</a>.</p>
 
+
+</div>
+
+<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 10, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
+<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.</p>
+
+<p>The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.</p>
+
+<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
+By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
+you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
 
 </div>
 
@@ -2322,35 +2322,6 @@ curl -u defunkt https://api.github.com/feeds
 
 </div>
 
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
-      <a href="https://github.com/ymendel">ymendel</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
-
-
-</div>
-
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -2388,34 +2359,31 @@ but we can’t wait to see what others can do with this information.</p>
 
 </div>
 
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
   <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    April 30, 2013
+    May 6, 2013
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
-      <a href="https://github.com/foca">foca</a>
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
+      <a href="https://github.com/ymendel">ymendel</a>
   </li>
 </ul>
 </div>
 
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
 
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
+<p>Happy editing!</p>
 
 
 </div>
@@ -2468,6 +2436,38 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
 
 
 </div>

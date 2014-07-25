@@ -967,31 +967,26 @@ on previous Pages builds.&lt;/p&gt;
 </content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2014-02-10:/changes/2014-02-10-repo-hook-scopes/</id>
-    <title type="html">New scopes for managing repository hooks</title>
+    <id>tag:developer.github.com,2014-02-10:/changes/2014-2-10-ping-event-for-webhooks/</id>
+    <title type="html">Ping Event for Webhooks</title>
     <published>2014-02-10T00:00:00Z</published>
     <updated>2014-02-10T00:00:00Z</updated>
     <author>
-      <name>pengwynn</name>
+      <name>kdaigle</name>
       <uri>https://github.com/technoweenie</uri>
     </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-02-10-repo-hook-scopes/" />
-    <content type="html">&lt;p&gt;Many third party services need to set up &lt;a href="http://developer.github.com/v3/repos/hooks/"&gt;hooks&lt;/a&gt; in order to act upon events
-in your repositories. Today, we’ve introduced three new &lt;a href="http://developer.github.com/v3/oauth/#scopes"&gt;scopes&lt;/a&gt; that provide
-more granular access to your repository hooks without allowing access to your
-repository contents:&lt;/p&gt;
+    <link rel="alternate" href="http://developer.github.com/changes/2014-2-10-ping-event-for-webhooks/" />
+    <content type="html">&lt;p&gt;With the release of our &lt;a href="https://github.com/blog/1778-webhooks-level-up"&gt;new webhook UI&lt;/a&gt;, we included a new
+&lt;a href="/webhooks/#ping-event"&gt;ping event&lt;/a&gt; that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-&lt;code&gt;read:repo_hook&lt;/code&gt; grants read and ping access to hooks in public or private repositories.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;write:repo_hook&lt;/code&gt; grants read, write, and ping access to hooks in public or private repositories.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;admin:repo_hook&lt;/code&gt; grants read, write, ping, and delete access to hooks in public or private repositories.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.&lt;/p&gt;
 
-&lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
-
+&lt;p&gt;We also added a &lt;a href="/v3/repos/hooks/#ping-a-hook"&gt;ping endpoint&lt;/a&gt; to the hooks API.
+By using ping instead of &lt;a href="/v3/repos/hooks/#test-a-push-hook"&gt;test&lt;/a&gt;, you can ensure
+you won’t be limited by the &lt;code&gt;push&lt;/code&gt; event requirement that the test endpoint has.&lt;/p&gt;
 </content>
   </entry>
 </feed>

@@ -3,9 +3,9 @@ title: Versions | GitHub API
 ---
 # Versions
 
-There are two stable versions of the GitHub API: [beta](#beta) and [v3](#v3). There are just a few [differences between these two versions](#differences-from-beta-version).
+There are two stable versions of the GitHub API: the [v3](#v3) version and the deprecated [beta](#beta) version. There are just a few [differences between these two versions](#differences-from-beta-version).
 
-By default, all requests receive the beta version. Soon, v3 will become the default version. (Check out the [blog post](/changes/2014-01-07-upcoming-change-to-default-media-type/) for details.) We encourage you to [request a specific version via the `Accept` header](/v3/media/#beta-v3-and-the-future).
+By default, all requests receive the v3 version. We encourage you to [request a specific version via the `Accept` header](/v3/media/#request-specific-version).
 
 # v3
 
@@ -91,12 +91,35 @@ The recommendations below will help you prepare your application for the next ma
 1. User attribute: bio
 : Recommendation: Do not use this attribute. It is obsolete.
 
+1. User attribute: plan["collaborators"]
+: Recommendation: Do not use this attribute. It is obsolete.
 
-# beta
+1. Pagination parameters `top` and `sha` for method: /repos/:owner/:repo/commits
+: Recommendation: When fetching [the list of commits for a repository](/v3/repos/commits/#list-commits-on-a-repository)
+  use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,
+  `top`, and `sha`.
 
-The [beta API](/v3) is now stable and unchangeable. Please [file a support issue][support] if you have problems.
+# beta (Deprecated) {#beta}
 
-Starting April 15, 2014, the [beta version will no longer be the _default_ version](/changes/2014-01-07-upcoming-change-to-default-media-type/). However, we expect to continue supporting the beta version for a while. We will eventually retire the beta version, but we have no official retirement date to annouce at the moment. When the time comes, rest assured that we'll announce the retirement with plenty of notice.
+The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.
+
+<div class="alert">
+  <p>
+    <strong>Note</strong>: We recommend using the <a href="#v3">v3 API</a>
+    instead of the deprecated beta version of the API.
+  </p>
+  <p>
+    The beta media type differs from the v3 media type in
+    <a href="#differences-from-beta-version">just a few places</a>. In most
+    cases, migrating an application from the beta media type to the v3 media
+    type is smooth and painless.
+  </p>
+  <p>
+    We will eventually retire the beta version, but we have no official
+    retirement date to annouce at the moment. When the time comes, rest assured
+    that we'll announce the retirement with plenty of notice.
+  </p>
+</div>
 
 ## Breaking beta changes
 
@@ -106,7 +129,7 @@ Starting April 15, 2014, the [beta version will no longer be the _default_ versi
   responses that include users or orgs. A default size is no longer
   included in the URL.
 * Creating new gists (both anonymously and with an authenticated user)
-  should use `POST /gists` from now on. `POST /users/:user/gists` is no
+  should use `POST /gists` from now on. `POST /users/:username/gists` is no
   longer supported.
 
 ### June 1st, 2011:

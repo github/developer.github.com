@@ -30,7 +30,7 @@ Name | Type | Description
 
 List public repositories for the specified user.
 
-    GET /users/:user/repos
+    GET /users/:username/repos
 
 ### Parameters
 
@@ -59,12 +59,6 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>master_branch</code> attribute. API clients should instead use the <code>default_branch</code> attribute to obtain the repository's default branch.
-  </p>
-</div>
-
 ## List all public repositories
 
 This provides a dump of every public repository, in the order that they were created.
@@ -89,8 +83,7 @@ Name | Type | Description
 
 ## Create
 
-Create a new repository for the authenticated user. OAuth users must supply
-`repo` scope.
+Create a new repository for the authenticated user.
 
     POST /user/repos
 
@@ -98,6 +91,13 @@ Create a new repository in this organization. The authenticated user must
 be a member of the specified organization.
 
     POST /orgs/:org/repos
+
+### OAuth scope requirements
+
+When using [OAuth](/v3/oauth/#scopes), authorizations must include:
+
+- `public_repo` scope or `repo` scope to create a public repository
+- `repo` scope to create a private repository
 
 ### Input
 
@@ -143,12 +143,6 @@ Name | Type | Description
 The `parent` and `source` objects are present when the repository is a fork.
 `parent` is the repository this repository was forked from,
 `source` is the ultimate source for the network.
-
-<div class="alert">
-  <p>
-    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>master_branch</code> attribute. API clients should instead use the <code>default_branch</code> attribute to obtain the repository's default branch.
-  </p>
-</div>
 
 <%= headers 200 %>
 <%= json :full_repo %>

@@ -36,7 +36,7 @@ post](/changes/2012-9-5-watcher-api/) for more details.
 
 List repositories being watched by a user.
 
-    GET /users/:user/subscriptions
+    GET /users/:username/subscriptions
 
 List repositories being watched by the authenticated user.
 
@@ -66,7 +66,7 @@ List repositories being watched by the authenticated user.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `subscribed`|`boolean`| Determines if notifications should be received from this repository.
 `ignored`|`boolean`| Determines if all notifications should be blocked from this repository.

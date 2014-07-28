@@ -50,7 +50,7 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`milestone`|`integer` or `string`| If an `integer` is passed, it should refer to a milestone number. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. Default: `*`
+`milestone`|`integer` or `string`| If an `integer` is passed, it should refer to a milestone number. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
 `state`|`string`| Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. Default: `open`
 `assignee`|`string`| Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. Default: `*`
 `creator`|`string`| The user that created the issue.
@@ -76,7 +76,7 @@ Name | Type | Description
 
 <div class="alert">
   <p>
-    <strong>Note</strong>: Every pull request is an issue, but not every issue is a pull request. When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, if the issue is not a pull request, the response omits the <code>pull_request</code> attribute.
+    <strong>Note</strong>: Every pull request is an issue, but not every issue is a pull request. If the issue is not a pull request, the response omits the <code>pull_request</code> attribute.
   </p>
 </div>
 
@@ -127,8 +127,8 @@ Name | Type | Description
 `body`|`string` | The contents of the issue.
 `assignee`|`string` | Login for the user that this issue should be assigned to.
 `state`|`string` | State of the issue. Either `open` or `closed`.
-`milestone`|`number` | Milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
-`labels`|`array` of `strings` | Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
+`milestone`|`number` | Milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._
+`labels`|`array` of `strings` | Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise._
 
 
 #### Example

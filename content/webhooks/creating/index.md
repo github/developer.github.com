@@ -37,10 +37,16 @@ This is the server endpoint that will receive the webhook payload.
 Since we're developing locally for our tutorial, let's set it to `http://localhost:4567/payload`.
 We'll explain why in the [Configuring Your Server](/webhooks/configuring/) docs.
 
-## Payload version
+## Content Type
 
-Webhooks can deliver various [media types](/v3/media/) as defined by the GitHub API.
-Choose the one that best fits your needs. For this tutorial, the default format is fine.
+Webhooks can be delivered using different content types:
+
+- The `application/json` content type will deliver the JSON payload directly as the body of the POST.
+- The `application/x-www-form-urlencoded` content type will send the JSON payload as a form parameter
+  called "payload".
+
+Choose the one that best fits your needs. For this tutorial, the default content type of
+`application/json` is fine.
 
 ## Events
 
@@ -58,4 +64,3 @@ it's time to set up our local server to test the webhook. Head on over to
 
 [webhook-api]: /v3/repos/hooks/
 [hooks-api]: /webhooks/#events
-

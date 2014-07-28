@@ -19,7 +19,7 @@ The API will return a 401 "Bad credentials" response if the gists scope was give
 
 List a user's gists:
 
-    GET /users/:user/gists
+    GET /users/:username/gists
 
 List the authenticated user's gists or if called anonymously, this will
 return all public gists:
@@ -49,13 +49,7 @@ Name | Type | Description
 
     GET /gists/:id
 
-### Response
-
-<div class="alert">
-  <p>
-    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the <code>user</code> attribute is renamed to <code>owner</code>.
-  </p>
-</div>
+### Response {#detailed-gist-representation}
 
 <%= headers 200 %>
 <%= json :full_gist %>
@@ -82,8 +76,11 @@ The keys in the `files` hash are the `string` filename, and the value is another
   }
 %>
 
-_Note:_ Don't name your files "gistfile" with a numerical suffix.  This is the
-format of the automatic naming scheme that Gist uses internally.
+<div class="alert">
+  <p>
+    <strong>Note</strong>: Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally.
+	</p>
+</div>
 
 ### Response
 
@@ -114,9 +111,11 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
     "delete_this_file.txt" => nil,
   } %>
 
-NOTE: All files from the previous version of the gist are carried over by
-default if not included in the hash. Deletes can be performed by
-including the filename with a `null` hash.
+<div class="alert">
+  <p>
+    <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the hash. Deletes can be performed by including the filename with a `null` hash.
+	</p>
+</div>
 
 
 ### Response
@@ -166,7 +165,11 @@ including the filename with a `null` hash.
 
     POST /gists/:id/forks
 
-**Note**: This was previously `/gists/:id/fork`
+<div class="alert">
+  <p>
+    <strong>Note</strong>: This was previously <code>/gists/:id/fork</code>
+	</p>
+</div>
 
 ### Response
 

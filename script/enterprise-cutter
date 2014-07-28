@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'tmpdir'
+require 'nokogiri'
+
+%x(git checkout gh-pages)
+%x(git pull origin gh-pages)
+
+%x(git checkout -b add-backfilled-versions)
+
+# run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
+# where [DATE] and [VERSION} are command-line arguments, defined below
+date = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
+version = ARGV[1].dup # like, 11.10.340
+
+temp_dir = Dir.mktmpdir
+begin
+  %x(git checkout `git rev-list -n 1 --before="#{date}" gh-pages`)
+  %x(cp -r * #{temp_dir})
+  %x(git checkout add-backfilled-versions)
+  version.sub!(/enterprise-/, '')
+  FileUtils.mkdir_p("enterprise/#{version}")
+  %x(cp -r #{temp_dir}/* enterprise/#{version})
+
+  # we need to point links not to the root, but to the enterprise version root
+  # for assets and links
+  Dir.glob("enterprise/#{version}/**/*.html") do |html_file|
+    doc = Nokogiri::HTML(File.read(html_file))
+    doc.css('a').each do |a|
+      a['href'] = "/enterprise/#{version}#{a['href']}" if a['href'] =~ /^\//
+    end
+    doc.css('link').each do |link|
+      link['href'] = "/enterprise/#{version}#{link['href']}" if link['href'] =~ /^\//
+    end
+    doc.css('script').each do |script|
+      script['src'] = "/enterprise/#{version}#{script['src']}" if script['src'] =~ /^\//
+    end
+    doc.css('img').each do |img|
+      img['src'] = "/enterprise/#{version}#{img['src']}" if img['src'] =~ /^\//
+    end
+    File.open(html_file, 'w') { |file| file.write(doc.to_html) }
+  end
+
+  Dir.glob("enterprise/#{version}/**/*.css") do |css_file|
+    contents = File.read(css_file)
+    contents.gsub!(/url\(\/shared/, "url(/enterprise/#{version}/shared")
+    File.open(css_file, 'w') { |file| file.write(contents) }
+  end
+
+  %x(git add enterprise)
+  %x(git commit -m "Added enterprise-#{version} files")
+ensure
+  FileUtils.remove_entry_secure temp_dir
+end

@@ -49,6 +49,15 @@ mentioned
 assigned
 : The issue was assigned to the actor.
 
+unassigned
+: The actor was unassigned from the issue.
+
+labeled
+: The label_name was added to the issue.
+
+unlabeled
+: The label_name was removed from the issue.
+
 head_ref_deleted
 : The pull request's branch was deleted.
 

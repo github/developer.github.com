@@ -1,11 +1,11 @@
 ---
 kind: change
-title: Assignee and label actions for issue events
+title: New assigned/labeled actions for issue and pull request events
 created_at: 2014-7-28
 author_name: jdpace
 ---
 
-Today we're expanding the Event API for issues and pull requests. We've made it easier for your application to know about changes to issues and pull requests with four new triggers. In addition to "opened", "closed, and "reopened", the issues and pull requests events will be triggered for "assigned", "unassigned", "labeled", and "unlabeled" actions. The event payload will also include the respective assignee or label for these new actions.
+Hot on the heels of [The New GitHub Issues](https://github.com/blog/1866-the-new-github-issues) we're expanding webook payloads for issues and pull requests. We've made it easier for your application to know about changes to issues and pull requests with four new triggers. In addition to "opened", "closed, and "reopened", the issues and pull requests webhooks will be triggered for "assigned", "unassigned", "labeled", and "unlabeled" actions. The payload will also include the respective assignee or label for these new actions.
 
 If you already have a [webhook](/webhooks/) subscribed to the `issues` or `pull_request` events, you'll start seeing these new actions immediately. The new events can also be fetched from the [activity events API](/v3/activity/events/).
 

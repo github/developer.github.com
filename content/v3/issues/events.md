@@ -53,19 +53,19 @@ unassigned
 : The actor was unassigned from the issue.
 
 labeled
-: The label_name was added to the issue.
+: A label was added to the issue.
 
 unlabeled
-: The label_name was removed from the issue.
+: A label was removed from the issue.
 
 milestoned
-: The issue was added to milestone_title.
+: The issue was added to a milestone.
 
 demilestoned
-: The issue was removed from milestone_title.
+: The issue was removed from a milestone.
 
 renamed
-: The issue title was changed from title_was to title_is.
+: The issue title was changed.
 
 locked
 : The issue was locked by the actor.

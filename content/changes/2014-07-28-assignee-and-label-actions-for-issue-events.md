@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Assignee and label actions for issue events
-created_at: 2014-3-19
+created_at: 2014-7-28
 author_name: jdpace
 ---
 

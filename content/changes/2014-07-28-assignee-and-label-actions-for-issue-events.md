@@ -11,4 +11,4 @@ If you already have a [webhook](/webhooks/) subscribed to the `issues` or `pull_
 
 For more information, be sure to check out our documentation for the [IssuesEvent](/v3/activity/events/types/#issuesevent) or [PullRequestEvent](/v3/activity/events/types/#pullrequestevent). If you have any questions or feedback, please [drop us a line][contact].
 
-[contact]: https://github.com/contact?form%5Bsubject%5D=New+Actions+for+Issues+and+Pull+Requests
+[contact]: https://github.com/contact?form%5Bsubject%5D=New+Assigned+and+Labeled+Actions+for+Issues+and+Pull+Request+Events

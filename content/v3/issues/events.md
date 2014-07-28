@@ -55,15 +55,6 @@ head_ref_deleted
 head_ref_restored
 : The pull request's branch was restored.
 
-labeled
-: The issue / pull request was given a label.
-
-milestoned
-: The issue / pull request was given a milestone.
-
-renamed
-: The issue / pull request was given renamed.
-
 ## List events for an issue
 
     GET /repos/:owner/:repo/issues/:issue_number/events

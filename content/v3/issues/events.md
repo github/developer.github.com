@@ -58,6 +58,21 @@ labeled
 unlabeled
 : The label_name was removed from the issue.
 
+milestoned
+: The issue was added to milestone_title.
+
+demilestoned
+: The issue was removed from milestone_title.
+
+renamed
+: The issue title was changed from title_was to title_is.
+
+locked
+: The issue was locked by the actor.
+
+unlocked
+: The issue was unlocked by the actor.
+
 head_ref_deleted
 : The pull request's branch was deleted.
 

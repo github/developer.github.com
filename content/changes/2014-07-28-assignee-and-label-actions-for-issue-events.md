@@ -1,7 +1,7 @@
 ---
 kind: change
 title: New assigned/labeled actions for issue and pull request events
-created_at: 2014-7-28
+created_at: 2014-07-28
 author_name: jdpace
 ---
 

@@ -49,6 +49,30 @@ mentioned
 assigned
 : The issue was assigned to the actor.
 
+unassigned
+: The actor was unassigned from the issue.
+
+labeled
+: A label was added to the issue.
+
+unlabeled
+: A label was removed from the issue.
+
+milestoned
+: The issue was added to a milestone.
+
+demilestoned
+: The issue was removed from a milestone.
+
+renamed
+: The issue title was changed.
+
+locked
+: The issue was locked by the actor.
+
+unlocked
+: The issue was unlocked by the actor.
+
 head_ref_deleted
 : The pull request's branch was deleted.
 

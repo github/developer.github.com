@@ -36,16 +36,16 @@ Note: Accessing this endpoint does not count against your rate limit.
 The Search API has a [custom rate limit](/v3/search/#rate-limit), separate from
 the rate limit governing the rest of the API. For that reason, the response
 (shown above) categorizes your rate limit by resource. Within the `"resources"`
-hash, the `"search"` hash provides your rate limit status for the
-[Search API](/v3/search). The `"core"` hash provides your rate limit status for
+object, the `"search"` object provides your rate limit status for the
+[Search API](/v3/search). The `"core"` object provides your rate limit status for
 all the _rest_ of the API.
 
 #### Deprecation Notice
 
-The `"rate"` hash (shown at the bottom of the response above) is
+The `"rate"` object (shown at the bottom of the response above) is
 [deprecated](/v3/versions/#v3-deprecations) and is scheduled for removal in the next
 version of the API.
 
 If you're writing new API client code (or updating your existing code), you
-should use the `"core"` hash instead of the `"rate"` hash. The `"core"` hash
-contains the same information that is present in the `"rate"` hash.
+should use the `"core"` object instead of the `"rate"` object. The `"core"` object
+contains the same information that is present in the `"rate"` object.

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Create an OAuth authorization for an app</title>
+  <title>New assigned/labeled actions for issue and pull request events</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,53 +40,31 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-12-06-create-authorization-for-app/">
+      <div class="change" id="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">
 <h2 class="title">
-  <a href="/changes/2012-12-06-create-authorization-for-app/">Create an OAuth authorization for an app</a>
+  <a href="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">New assigned/labeled actions for issue and pull request events</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 6, 2012
+    July 28, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace"/>
+      <a href="https://github.com/jdpace">jdpace</a>
   </li>
 </ul>
 </div>
 
 
-<p>The <a href="/v3/oauth_authorizations/#oauth-authorizations-api">Authorizations API</a> is an easy way to create an OAuth
-authorization using Basic Auth. Just POST your desired scopes and optional
-note and you get a token back:</p>
+<p>As part of the <a href="https://github.com/blog/1866-the-new-github-issues">new GitHub Issues</a>, we’ve added new actions to the issues and pull requests webhook events: “labeled”, “unlabeled”, “assigned”, and “unassigned”. The payload will also include the respective assignee or label for these new actions.</p>
 
-<pre class="terminal">
-    curl -u pengwynn -d '{"scopes": ["user", "gist"]}' \
-         https://api.github.com/authorizations
-</pre>
+<p>If you already have a <a href="/webhooks/">webhook</a> subscribed to the <code>issues</code> or <code>pull_request</code> events, you’ll start seeing these new actions immediately. The new events can also be fetched from the <a href="/v3/issues/events/">issue events API</a>.</p>
 
-<p>This call creates a token for the authenticating user tied to a special “API”
-OAuth application.</p>
-
-<p>We now support creating tokens for <em>your own OAuth application</em> by passing your
-twenty character <code>client_id</code> and forty character <code>client_secret</code> as found in
-the settings page for your OAuth application.</p>
-
-<pre class="terminal">
-    curl -u pengwynn -d '{ \
-                          "scopes": ["user", "gist"], \
-                          "client_id": "abcdeabcdeabcdeabcdeabcde" \
-                          "client_secret": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde" \
-                         }' \ '
-            https://api.github.com/authorizations
-</pre>
-
-<p>No more implementing the <a href="/v3/oauth/#web-application-flow">web flow</a> just to get a token tied to your
-app’s rate limit.</p>
+<p>For more information, be sure to check out our documentation for the <a href="/v3/activity/events/types/#issuesevent">IssuesEvent</a> or <a href="/v3/activity/events/types/#pullrequestevent">PullRequestEvent</a>. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Assigned+and+Labeled+Actions+for+Issues+and+Pull+Request+Events">drop us a line</a>.</p>
 
 
 </div>

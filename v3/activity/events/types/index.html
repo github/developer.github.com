@@ -1655,7 +1655,7 @@ They’re only created for various internal and repository hooks.</p>
 
 <h2 id="issuesevent">IssuesEvent</h2>
 
-<p>Triggered when an <a href="/v3/issues">issue</a> is created, closed or reopened.</p>
+<p>Triggered when an <a href="/v3/issues">issue</a> is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.</p>
 
 <h3 id="event-name-12">Event name</h3>
 
@@ -1675,12 +1675,22 @@ They’re only created for various internal and repository hooks.</p>
     <tr>
       <td><code>action</code></td>
       <td><code>string</code></td>
-      <td>The action that was performed. Can be one of “opened”, “closed”, or “reopened”.</td>
+      <td>The action that was performed. Can be one of “assigned”, “unassigned”, “labeled”, “unlabeled”, “opened”, “closed”, or “reopened”.</td>
     </tr>
     <tr>
       <td><code>issue</code></td>
       <td><code>object</code></td>
       <td>The <a href="/v3/issues">issue</a> itself.</td>
+    </tr>
+    <tr>
+      <td><code>assignee</code></td>
+      <td><code>object</code></td>
+      <td>The optional user who was assigned or unassigned from the issue.</td>
+    </tr>
+    <tr>
+      <td><code>label</code></td>
+      <td><code>object</code></td>
+      <td>The optional label that was added or removed from the issue.</td>
     </tr>
   </tbody>
 </table>
@@ -2288,7 +2298,7 @@ They’re only created for various internal and repository hooks.</p>
 
 <h2 id="pullrequestevent">PullRequestEvent</h2>
 
-<p>Triggered when a <a href="/v3/pulls">pull request</a> is created, closed, reopened or synchronized.</p>
+<p>Triggered when a <a href="/v3/pulls">pull request</a> is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized.</p>
 
 <h3 id="event-name-15">Event name</h3>
 
@@ -2308,7 +2318,7 @@ They’re only created for various internal and repository hooks.</p>
     <tr>
       <td><code>action</code></td>
       <td><code>string</code></td>
-      <td>The action that was performed. Can be one of “opened”, “closed”, “synchronize”, or “reopened”. If the action is “closed” and the <code>merged</code> key is <code>false</code>, the pull request was closed with unmerged commits. If the action is “closed” and the <code>merged</code> key is <code>true</code>, the pull request was merged.</td>
+      <td>The action that was performed. Can be one of “assigned”, “unassigned”, “labeled”, “unlabeled”, “opened”, “closed”, or “reopened”, or “synchronize”. If the action is “closed” and the <code>merged</code> key is <code>false</code>, the pull request was closed with unmerged commits. If the action is “closed” and the <code>merged</code> key is <code>true</code>, the pull request was merged.</td>
     </tr>
     <tr>
       <td><code>number</code></td>

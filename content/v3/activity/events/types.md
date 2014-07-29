@@ -245,7 +245,7 @@ Key | Type | Description
 
 ## IssuesEvent
 
-Triggered when an [issue](/v3/issues) is created, closed or reopened.
+Triggered when an [issue](/v3/issues) is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.
 
 ### Event name
 
@@ -255,8 +255,10 @@ Triggered when an [issue](/v3/issues) is created, closed or reopened.
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed. Can be one of "opened", "closed", or "reopened".
+`action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "closed", or "reopened".
 `issue`|`object` | The [issue](/v3/issues) itself.
+`assignee`|`object` | The optional user who was assigned or unassigned from the issue.
+`label`|`object` | The optional label that was added or removed from the issue.
 
 <%= webhook_payload "issues" %>
 
@@ -311,7 +313,7 @@ Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without
 
 ## PullRequestEvent
 
-Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synchronized.
+Triggered when a [pull request](/v3/pulls) is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized.
 
 ### Event name
 
@@ -321,7 +323,7 @@ Triggered when a [pull request](/v3/pulls) is created, closed, reopened or synch
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed. Can be one of "opened", "closed", "synchronize", or "reopened". If the action is "closed" and the `merged` key is `false`, the pull request was closed with unmerged commits. If the action is "closed" and the `merged` key is `true`, the pull request was merged.
+`action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "closed", or "reopened", or "synchronize". If the action is "closed" and the `merged` key is `false`, the pull request was closed with unmerged commits. If the action is "closed" and the `merged` key is `true`, the pull request was merged.
 `number`|`integer` | The pull request number.
 `pull_request`|`object` | The [pull request](/v3/pulls) itself.
 

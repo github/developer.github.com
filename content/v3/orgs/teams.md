@@ -170,15 +170,6 @@ NOTE: This does not delete the user, it just remove them from the team.
 
 <%= headers 204 %>
 
-## List team repos
-
-    GET /teams/:id/repos
-
-### Response
-
-<%= headers 200 %>
-<%= json(:repo) { |h| [h] } %>
-
 ## Get team membership
 
 In order to get a user's membership with a team, the authenticated user must be
@@ -229,6 +220,15 @@ If you attempt to add an organization to a team, you will get this:
       :resource => :TeamMember
     }]
 %>
+
+## List team repos
+
+    GET /teams/:id/repos
+
+### Response
+
+<%= headers 200 %>
+<%= json(:repo) { |h| [h] } %>
 
 ## Check if a team manages a repository {#get-team-repo}
 

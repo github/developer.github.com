@@ -7,11 +7,9 @@ title: Authorizations | GitHub API
 * TOC
 {:toc}
 
-There is an API for users to manage their own tokens.  You can only access your
-own tokens, and only via [Basic Authentication](/v3/auth#basic-authentication).
-(Make sure you understand how to [work with two-factor
-authentication](/v3/auth/#working-with-two-factor-authentication) if you or your
-users have two-factor authentication enabled.)
+You can use this API to manage your OAuth applications. You can only access this API via [Basic Authentication](/v3/auth#basic-authentication) using your username and password, not tokens.
+
+Make sure you understand how to [work with two-factor authentication](/v3/auth/#working-with-two-factor-authentication) if you or your users have two-factor authentication enabled.
 
 ## List your authorizations
 
@@ -148,9 +146,9 @@ will return `404 NOT FOUND`.
 
 OAuth applications can use this API method to reset a valid OAuth token without
 end user involvement.  Applications must save the "token" property in the
-response, because changes take effect immediately. You must use 
+response, because changes take effect immediately. You must use
 [Basic Authentication](/v3/auth#basic-authentication) when accessing it, where
-the username is the OAuth application `client_id` and the password is its 
+the username is the OAuth application `client_id` and the password is its
 `client_secret`. Invalid tokens will return `404 NOT FOUND`.
 
     POST /applications/:client_id/tokens/:access_token

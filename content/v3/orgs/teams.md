@@ -200,6 +200,36 @@ a member of the team or an owner of the team's organization.
 
 <%= headers 404 %>
 
+## Add team membership
+
+In order to add a membership between a user and a team, the authenticated user
+must have 'admin' permissions to the team or be an owner of the org that the team
+is associated with.
+
+    PUT /teams/:id/memberships/:username
+
+### Response if user's membership with team is now active
+
+<%= headers 200 %>
+<%= json(:active_team_membership) %>
+
+### Response if user's membership with team is now pending
+
+<%= headers 200 %>
+<%= json(:active_team_membership) %>
+
+If you attempt to add an organization to a team, you will get this:
+
+<%= headers 422 %>
+<%=
+  json :message => "Validation Failed",
+    :errors => [{
+      :code     => "org",
+      :field    => :user,
+      :resource => :TeamMember
+    }]
+%>
+
 ## Check if a team manages a repository {#get-team-repo}
 
     GET /teams/:id/repos/:owner/:repo

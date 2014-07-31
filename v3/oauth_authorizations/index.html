@@ -67,11 +67,9 @@
   <li><a href="#more-information">More Information</a></li>
 </ul>
 
-<p>There is an API for users to manage their own tokens.  You can only access your
-own tokens, and only via <a href="/v3/auth#basic-authentication">Basic Authentication</a>.
-(Make sure you understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with two-factor
-authentication</a> if you or your
-users have two-factor authentication enabled.)</p>
+<p>You can use this API to manage your OAuth applications. You can only access this API via <a href="/v3/auth#basic-authentication">Basic Authentication</a> using your username and password, not tokens.</p>
+
+<p>Make sure you understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with two-factor authentication</a> if you or your users have two-factor authentication enabled.</p>
 
 <h2 id="list-your-authorizations">List your authorizations</h2>
 
@@ -471,9 +469,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>OAuth applications can use this API method to reset a valid OAuth token without
 end user involvement.  Applications must save the “token” property in the
-response, because changes take effect immediately. You must use 
+response, because changes take effect immediately. You must use
 <a href="/v3/auth#basic-authentication">Basic Authentication</a> when accessing it, where
-the username is the OAuth application <code>client_id</code> and the password is its 
+the username is the OAuth application <code>client_id</code> and the password is its
 <code>client_secret</code>. Invalid tokens will return <code>404 NOT FOUND</code>.</p>
 
 <pre><code>POST /applications/:client_id/tokens/:access_token

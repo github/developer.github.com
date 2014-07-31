@@ -117,9 +117,14 @@ module GitHub
         "<pre><code class='language-javascript'>" + File.read("lib/webhooks/#{event_name}.payload.json") + "</code></pre>"
       end
 
+      CONTENT = {
+        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\""
+      }
+
       def fetch_content(key)
         CONTENT[key.to_s.upcase]
       end
+
     end
 
     USER = {

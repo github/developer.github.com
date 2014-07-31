@@ -123,7 +123,8 @@ must be a member of the team.
 
 In order to add a user to a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the org that the team
-is associated with.
+is associated with, and the user being added must already be a member of at
+least one other team on the same organization.
 
     PUT /teams/:id/members/:username
 
@@ -138,6 +139,19 @@ If you attempt to add an organization to a team, you will get this:
   json :message => "Validation Failed",
     :errors => [{
       :code     => "org",
+      :field    => :user,
+      :resource => :TeamMember
+    }]
+%>
+
+If you attempt to add a user to a team and that user is not a member of at least
+one other team on the same organization, you will get this:
+
+<%= headers 422 %>
+<%=
+  json :message => "Validation Failed",
+    :errors => [{
+      :code     => "unaffiliated",
       :field    => :user,
       :resource => :TeamMember
     }]

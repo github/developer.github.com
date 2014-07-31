@@ -179,6 +179,27 @@ NOTE: This does not delete the user, it just remove them from the team.
 <%= headers 200 %>
 <%= json(:repo) { |h| [h] } %>
 
+## Get team membership
+
+In order to get a user's membership with a team, the authenticated user must be
+a member of the team or an owner of the team's organization.
+
+    GET /teams/:id/memberships/:username
+
+### Response if user has an active membership with team
+
+<%= headers 200 %>
+<%= json(:active_team_membership) %>
+
+### Response if user has a pending membership with team
+
+<%= headers 200 %>
+<%= json(:pending_team_membership) %>
+
+### Response if user has no membership with team
+
+<%= headers 404 %>
+
 ## Check if a team manages a repository {#get-team-repo}
 
     GET /teams/:id/repos/:owner/:repo

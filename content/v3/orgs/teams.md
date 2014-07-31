@@ -221,6 +221,20 @@ If you attempt to add an organization to a team, you will get this:
     }]
 %>
 
+## Remove team membership
+
+In order to remove a membership between a user and a team, the authenticated
+user must have 'admin' permissions to the team or be an owner of the org that
+the team is associated with.
+NOTE: This does not delete the user, it just remove their membership from the
+team.
+
+    DELETE /teams/:id/memberships/:username
+
+### Response
+
+<%= headers 204 %>
+
 ## List team repos
 
     GET /teams/:id/repos

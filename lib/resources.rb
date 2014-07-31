@@ -117,6 +117,9 @@ module GitHub
         "<pre><code class='language-javascript'>" + File.read("lib/webhooks/#{event_name}.payload.json") + "</code></pre>"
       end
 
+      def fetch_content(key)
+        CONTENT[key.to_s.upcase]
+      end
     end
 
     USER = {

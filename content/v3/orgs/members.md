@@ -103,6 +103,8 @@ The user can publicize their own membership.
 
     PUT /orgs/:org/public_members/:username
 
+<%= fetch_content(:put_content_length) %>
+
 ### Response
 
 <%= headers 204 %>

@@ -73,6 +73,8 @@ Requires for the user to be authenticated.
 
     PUT /user/starred/:owner/:repo
 
+<%= fetch_content(:put_content_length) %>
+
 ### Response
 
 <%= headers 204 %>

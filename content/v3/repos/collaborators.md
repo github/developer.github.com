@@ -37,6 +37,8 @@ collaborators list.
 
     PUT /repos/:owner/:repo/collaborators/:username
 
+<%= fetch_content(:put_content_length) %>
+
 ### Response
 
 <%= headers 204 %>

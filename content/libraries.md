@@ -17,6 +17,12 @@ many flavors</h1>
 
 # Third-party libraries
 
+## Dart
+
+* [github.dart][github.dart]
+
+[github.dart]: https://github.com/DirectMyFile/github.dart
+
 ## .NET
 
 * [IronGithub][irongithub]

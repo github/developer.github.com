@@ -137,6 +137,8 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 
     PUT /gists/:id/star
 
+<%= fetch_content(:put_content_length) %>
+
 ### Response
 
 <%= headers 204 %>

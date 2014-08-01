@@ -127,6 +127,8 @@ is associated with.
 
     PUT /teams/:id/members/:username
 
+<%= fetch_content(:put_content_length) %>
+
 ### Response
 
 <%= headers 204 %>
@@ -185,6 +187,8 @@ be owned by the organization, or a direct fork of a repository owned by the
 organization.
 
     PUT /teams/:id/repos/:org/:repo
+
+<%= fetch_content(:put_content_length) %>
 
 ### Response
 

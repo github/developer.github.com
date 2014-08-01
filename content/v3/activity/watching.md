@@ -101,9 +101,11 @@ Requires for the user to be authenticated.
 
 ## Watch a repository (LEGACY)
 
-Requires for the user to be authenticated.
+Requires the user to be authenticated.
 
     PUT /user/subscriptions/:owner/:repo
+
+<%= fetch_content(:put_content_length) %>
 
 ### Response
 

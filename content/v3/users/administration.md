@@ -13,6 +13,8 @@ The User Administration API allows you to promote, demote, suspend, and unsuspen
 
     PUT /user/:username/site_admin
 
+<%= fetch_content(:put_content_length) %>
+
 ### Response
 
 <%= headers 204 %>

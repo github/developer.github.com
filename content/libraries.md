@@ -82,6 +82,12 @@ covers the entire API.
 [github]: https://github.com/michael/github
 [github-client]: https://github.com/philschatz/github-client
 
+## Julia
+
+* [GitHub.jl][github.jl]
+
+[github.jl]: https://github.com/WestleyArgentum/GitHub.jl
+
 ## Objective-C
 
 * [UAGithubEngine][uagithubengine]
@@ -112,6 +118,7 @@ covers the entire API.
 * [GitHub Kohana Module][kohana]
 * [GitHub Joomla! Package][joomla]
 * [Github Nette Extension][kdyby-github]
+* [GitHub API Easy Access][milo-github-api]
 
 [github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
@@ -119,6 +126,7 @@ covers the entire API.
 [kohana]: https://github.com/acoulton/github_v3_api
 [joomla]: https://github.com/joomla/joomla-framework
 [kdyby-github]: https://github.com/kdyby/github
+[milo-github-api]: https://github.com/milo/github-api
 
 ## Python
 

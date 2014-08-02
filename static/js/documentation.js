@@ -86,7 +86,7 @@ $(function() {
 
   // Dynamic year for footer copyright
   var currentYear = (new Date).getFullYear();
-  $("#year").text( (new Date).getFullYear() );
+  $.each($(".js-year"), (function() { $(this).text( currentYear ) }));
 
   // Grab API status
   $.getJSON('https://status.github.com/api/status.json?callback=?', function(data) {

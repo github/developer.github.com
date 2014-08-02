@@ -109,6 +109,22 @@ module GitHub
         hs + %(<pre><code>) + res + "</code></pre>"
       end
 
+      def webhook_headers(event_name)
+        "<pre><code>" + File.read("lib/webhooks/#{event_name}.headers.txt") + "</code></pre>"
+      end
+
+      def webhook_payload(event_name)
+        "<pre><code class='language-javascript'>" + File.read("lib/webhooks/#{event_name}.payload.json") + "</code></pre>"
+      end
+
+      CONTENT = {
+        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\""
+      }
+
+      def fetch_content(key)
+        CONTENT[key.to_s.upcase]
+      end
+
     end
 
     USER = {
@@ -564,17 +580,18 @@ module GitHub
     }
 
     RELEASE_ASSET = {
-      "url"            => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
-      "id"             => 1,
-      "name"           => "example.zip",
-      "label"          => "short description",
-      "state"          => "uploaded",
-      "content_type"   => "application/zip",
-      "size"           => 1024,
-      "download_count" => 42,
-      "created_at"     => "2013-02-27T19:35:32Z",
-      "updated_at"     => "2013-02-27T19:35:32Z",
-      "uploader"       => USER
+      "url"                  => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
+      "browser_download_url" => "https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip",
+      "id"                   => 1,
+      "name"                 => "example.zip",
+      "label"                => "short description",
+      "state"                => "uploaded",
+      "content_type"         => "application/zip",
+      "size"                 => 1024,
+      "download_count"       => 42,
+      "created_at"           => "2013-02-27T19:35:32Z",
+      "updated_at"           => "2013-02-27T19:35:32Z",
+      "uploader"             => USER
     }
 
     RELEASE = {
@@ -1582,7 +1599,8 @@ module GitHub
       "creator" => USER,
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
-      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
+      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses",
+      "repository_url" => "https://api.github.com/repos/octocat/example"
     }
 
     DEPLOYMENT_STATUS = {
@@ -1595,6 +1613,7 @@ module GitHub
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "repository_url" => "https://api.github.com/repos/octocat/example",
       "deployment" => {
         "id" => 1,
         "ref" => "master",

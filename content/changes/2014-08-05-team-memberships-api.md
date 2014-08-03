@@ -15,14 +15,6 @@ This means that, if you try to use the [add team member][add-team-member] endpoi
 
 You should change all your [add team member][add-team-member] requests to use the new [add team membership][add-team-membership] endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team's organization, that user will be sent an invitation via email.
 
-### Getting the status of a user's membership with a team
-
-You should also consider changing your [get team member][get-team-member] requests to use the new [get team membership][get-team-membership] endpoint. This will tell you if the membership between the specified user and team is active (meaning the user is a member of the team) or pending (meaning the user has an invitation to the team).
-
-### Removing a user's membership from a team
-
-Finally, you should consider changing your [remove team member][remove-team-member] requests to use the new [remove team membership][remove-team-membership] endpoint. In addition to removing members from teams like the old endpoint did, this new endpoint will cancel invitations when appropriate.
-
 ### Preview period
 
 We're making these new APIs (and the breaking changes to the [add team member][add-team-member] API) available today for developers to preview. During this period, we may change aspects of these four endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.

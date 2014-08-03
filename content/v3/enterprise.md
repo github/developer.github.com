@@ -23,29 +23,17 @@ GitHub Enterprise supports the same powerful API available on GitHub.com as well
 
 ## Endpoint URLs
 
-Every endpoint used by the GitHub API depends on your `hostname`, which is the name of your Enterprise installation.
-
-Endpoints for the GitHub.com API and most of the Enterprise API start with the following URL:
+All API endpoints—except for [Management Console][] API endpoints!—are prefixed with the following URL:
 
 <pre class="terminal">
 http(s)://<em>hostname</em>/api/v3/
 </pre>
 
-Endpoints for the [Search Indexing][] API start with the following URL:
+Endpoints for the [Management Console][] API are only prefixed with a hostname:
 
 <pre class="terminal">
-http(s)://<em>hostname</em>/api/v3/staff/
+http(s)://<em>hostname</em>/
 </pre>
-
-Endpoints for the [Management Console][] API start with the following URL:
-
-<pre class="terminal">
-http(s)://<em>hostname</em>/setup/api/
-</pre>
-
-### Example
-
-If your Enterprise host name is `ghe.local`, a call to [the Issues API](/v3/issues/) would be made to `https://ghe.local/api/v3/issues`.
 
 ## Authentication
 

@@ -35,6 +35,8 @@ You can demote any user account except your own.
 
 You can suspend any user account except your own.
 
+<%= fetch_content(:put_content_length) %>
+
 ### Response
 
 <%= headers 204 %>

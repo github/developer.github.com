@@ -29,7 +29,7 @@ All API endpoints—except [Management Console][] API endpoints—are prefixed w
 http(s)://<em>hostname</em>/api/v3/
 </pre>
 
-Endpoints for the [Management Console][] API are only prefixed with a hostname:
+[Management Console][] API endpoints are only prefixed with a hostname:
 
 <pre class="terminal">
 http(s)://<em>hostname</em>/

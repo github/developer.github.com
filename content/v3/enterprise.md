@@ -23,7 +23,7 @@ GitHub Enterprise supports the same powerful API available on GitHub.com as well
 
 ## Endpoint URLs
 
-All API endpoints—except for [Management Console][] API endpoints!—are prefixed with the following URL:
+All API endpoints—except [Management Console][] API endpoints—are prefixed with the following URL:
 
 <pre class="terminal">
 http(s)://<em>hostname</em>/api/v3/

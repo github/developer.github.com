@@ -9,9 +9,15 @@ title: User Administration | GitHub API
 
 The User Administration API allows you to promote, demote, suspend, and unsuspend users on a GitHub Enterprise appliance. *It is only available to [authenticated](/v3/#authentication) site administrators.* Normal users will receive a `403` response if they try to access it.
 
+Prefix all the endpoints for this API with the following URL:
+
+<pre class="terminal">
+http(s)://<em>hostname</em>/api/v3
+</pre>
+
 ## Promote an ordinary user to a site administrator
 
-    PUT /api/v3/user/:username/site_admin
+    PUT /user/:username/site_admin
 
 <%= fetch_content(:put_content_length) %>
 
@@ -21,7 +27,7 @@ The User Administration API allows you to promote, demote, suspend, and unsuspen
 
 ## Demote a site administrator to an ordinary user
 
-    DELETE /api/v3/user/:username/site_admin
+    DELETE /user/:username/site_admin
 
 You can demote any user account except your own.
 
@@ -31,7 +37,7 @@ You can demote any user account except your own.
 
 ## Suspend a user
 
-    PUT /api/v3/user/:username/suspended
+    PUT /user/:username/suspended
 
 You can suspend any user account except your own.
 
@@ -43,7 +49,7 @@ You can suspend any user account except your own.
 
 ## Unsuspend a user
 
-    DELETE /api/v3/user/:username/suspended
+    DELETE /user/:username/suspended
 
 ### Response
 

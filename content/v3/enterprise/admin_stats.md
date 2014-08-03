@@ -9,11 +9,17 @@ title: Admin Stats | GitHub API
 
 The Admin Stats API provides a variety of metrics about your installation. *It is only available to [authenticated](/v3/#authentication) site administrators.* Normal users will receive a `404` response if they try to access it.
 
+Prefix all the endpoints for this API with the following URL:
+
+<pre class="terminal">
+http(s)://<em>hostname</em>/api/v3
+</pre>
+
 ## Get statistics
 
 ### Request
 
-    GET /api/v3/enterprise/stats/:type
+    GET /enterprise/stats/:type
 
 There are a variety of types to choose from:
 

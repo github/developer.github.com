@@ -122,7 +122,7 @@ must be a member of the team.
 ## Add team member
 
 In order to add a user to a team, the authenticated user must have
-'admin' permissions to the team or be an owner of the org that the team
+'admin' permissions to the team or be an owner of the organization that the team
 is associated with, and the user being added must already be a member of at
 least one other team on the same organization.
 
@@ -194,8 +194,8 @@ a member of the team or an owner of the team's organization.
 ## Add team membership
 
 In order to add a membership between a user and a team, the authenticated user
-must have 'admin' permissions to the team or be an owner of the org that the team
-is associated with.
+must have 'admin' permissions to the team or be an owner of the organization
+that the team is associated with.
 
 If the membership's user is already a part of the membership's team's
 organization (meaning they're on at least one other team in the organization),
@@ -235,8 +235,8 @@ If you attempt to add an organization to a team, you will get this:
 ## Remove team membership
 
 In order to remove a membership between a user and a team, the authenticated
-user must have 'admin' permissions to the team or be an owner of the org that
-the team is associated with.
+user must have 'admin' permissions to the team or be an owner of the
+organization that the team is associated with.
 NOTE: This does not delete the user, it just removes their membership from the
 team.
 

@@ -104,7 +104,7 @@ Header | Description
 `X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`](/v3/repos/hooks/#create-a-hook) as the key (if configured).
 `X-Github-Delivery`| Unique ID for this delivery.
 
-Also, the `User-Agent` for the requests will have the prefix `GitHub Hookshot`.
+Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
 
 #### Example delivery
 
@@ -113,7 +113,7 @@ POST /payload HTTP/1.1
 
 Host: localhost:4567
 X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
-User-Agent: GitHub Hookshot 044aadd
+User-Agent: GitHub-Hookshot/044aadd
 Content-Type: application/json
 Content-Length: 6615
 X-Github-Event: issues

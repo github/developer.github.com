@@ -162,7 +162,7 @@ one other team on the same organization, you will get this:
 In order to remove a user from a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the org that the team
 is associated with.
-NOTE: This does not delete the user, it just remove them from the team.
+NOTE: This does not delete the user, it just removes them from the team.
 
     DELETE /teams/:id/members/:username
 
@@ -237,7 +237,7 @@ If you attempt to add an organization to a team, you will get this:
 In order to remove a membership between a user and a team, the authenticated
 user must have 'admin' permissions to the team or be an owner of the org that
 the team is associated with.
-NOTE: This does not delete the user, it just remove their membership from the
+NOTE: This does not delete the user, it just removes their membership from the
 team.
 
     DELETE /teams/:id/memberships/:username

@@ -9,7 +9,7 @@ Today, we're announcing a change to the way organization owners add new members 
 
 Previously, if you were an organization owner, you could use the [add team member][add-team-member] endpoint to add any GitHub user to any team on your organization without any sort of approval from them. Now, we're increasing user security by sending [invitations][org-invitations] to users when they're added to teams on organizations that they aren't already a part of.
 
-This means that, if you try to use the [add team member][add-team-member] endpoint to add a user to a team and that user isn't already on another team in your organization, the request will error.
+This means that, if you try to use the [add team member][add-team-member] endpoint to add a user to a team and that user isn't already on another team in your organization, the request will fail.
 
 ### The Team Memberships API
 

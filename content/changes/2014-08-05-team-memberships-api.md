@@ -30,7 +30,7 @@ We expect the preview period to last 30-60 days. At the end of the preview perio
 If you have any questions or feedback, please [get in touch with us][contact]!
 
 [contact]: https://github.com/contact?form[subject]=Team+Memberships+API
-[org-invitations]: https://help.github.com/articles/adding-or-inviting-organization-members-to-a-team
+[org-invitations]: https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization
 [add-team-member]: /v3/orgs/teams/#add-team-member
 [add-team-membership]: /v3/orgs/teams/#add-team-membership
 [get-team-member]: /v3/orgs/teams/#get-team-member

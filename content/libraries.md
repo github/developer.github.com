@@ -73,6 +73,7 @@ GitHub v3 API.  Builds are available in [Maven Central](http://search.maven.org/
 * [GitHub API for Java (org.kohsuke.github)](http://github-api.kohsuke.org/) defines an object oriented representation of the GitHub API.
 * [JCabi GitHub API](http://github.jcabi.com) is based on Java7 JSON API (JSR-353), simplifies tests with a runtime GitHub stub, and
 covers the entire API.
+* [GetHub](http://github.com/Asyncronous/GetHub) Modular object oriented based representation of the GitHub API
 
 ## JavaScript
 

@@ -19,7 +19,7 @@ Unlike the [add team member][add-team-member] endpoint, a successful request to 
 
 ### Preview period
 
-We're making the new Team Memberships API (and the breaking changes to the [add team member][add-team-member] API) available today for developers to preview. During this period, we may change aspects of these four endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
+We're making the new Team Memberships API (and the breaking changes to the [add team member][add-team-member] API) available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
 
 While these new APIs are in their preview period, you'll need to provide the following custom media type in the `Accept` header:
 

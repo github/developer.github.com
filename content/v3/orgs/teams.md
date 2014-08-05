@@ -172,6 +172,19 @@ NOTE: This does not delete the user, it just removes them from the team.
 
 ## Get team membership
 
+<div class="alert">
+  <p>
+    The Team Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
+
 In order to get a user's membership with a team, the authenticated user must be
 a member of the team or an owner of the team's organization.
 
@@ -192,6 +205,19 @@ a member of the team or an owner of the team's organization.
 <%= headers 404 %>
 
 ## Add team membership
+
+<div class="alert">
+  <p>
+    The Team Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
 
 In order to add a membership between a user and a team, the authenticated user
 must have 'admin' permissions to the team or be an owner of the organization
@@ -233,6 +259,19 @@ If you attempt to add an organization to a team, you will get this:
 %>
 
 ## Remove team membership
+
+<div class="alert">
+  <p>
+    The Team Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
 
 In order to remove a membership between a user and a team, the authenticated
 user must have 'admin' permissions to the team or be an owner of the

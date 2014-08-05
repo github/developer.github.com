@@ -27,7 +27,7 @@ While these new APIs are in their preview period, you'll need to provide the fol
 
 We expect the preview period to last 30-60 days. At the end of the preview period, the Team Memberships API will become an official component of GitHub API v3, as will the [add team member][add-team-member] API's breaking changes.
 
-If you have any questions or feedback, please [send it to us][contact]!
+If you have any questions or feedback, please [get in touch with us][contact]!
 
 [contact]: https://github.com/contact?form[subject]=Team+Memberships+API
 [org-invitations]: https://help.github.com/articles/adding-or-inviting-organization-members-to-a-team

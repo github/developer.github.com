@@ -11,7 +11,7 @@ Previously, if you were an organization owner, you could use the [add team membe
 
 With this change, if you use the [add team member][add-team-member] endpoint to add a user to a team and that user isn't already on another team in your organization, the request will fail.
 
-### The Team Memberships API
+### The new Team Memberships API
 
 You should change all your [add team member][add-team-member] requests to use the new [add team membership][add-team-membership] endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team's organization, that user will be sent an invitation via email.
 

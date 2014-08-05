@@ -15,7 +15,7 @@ With this change, if you use the [add team member][add-team-member] endpoint to 
 
 You should change all your [add team member][add-team-member] requests to use the new [add team membership][add-team-membership] endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team's organization, that user will be sent an invitation via email.
 
-This means that, unlike the [add team member][add-team-member] endpoint, a successful request to the [add team membership][add-team-membership] endpoint does *not* guarantee that the user is now a member of the team. If you're trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out [TeamAddEvent][team-add-event].
+Unlike the [add team member][add-team-member] endpoint, a successful request to the [add team membership][add-team-membership] endpoint does *not* guarantee that the user is now a member of the team. If you're trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out [TeamAddEvent][team-add-event].
 
 ### Preview period
 

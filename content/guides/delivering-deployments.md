@@ -170,7 +170,7 @@ server we've built above. At GitHub, we:
 * Heaven takes the merged code, and deploys it to our production and staging servers
 * In the meantime, Heaven also notifies everyone about the build, via [Hubot][hubot] sitting in our chat rooms
 
-That's it! You don't need to build your own CI or deployment setup to use this example.
+That's it! You don't need to build your own deployment setup to use this example.
 You can always rely on [third-party services][integrations].
 
 [deploy API]: /v3/repos/deployments/

@@ -712,6 +712,18 @@ module GitHub
       "organization" =>  ORG
     })
 
+    TEAM_MEMBERSHIP = {
+      "url" => "https://api.github.com/teams/1/memberships/octocat"
+    }
+
+    ACTIVE_TEAM_MEMBERSHIP = TEAM_MEMBERSHIP.merge(
+      "status" => "active"
+    )
+
+    PENDING_TEAM_MEMBERSHIP = TEAM_MEMBERSHIP.merge(
+      "status" => "pending"
+    )
+
     LABEL = {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
       "name"  => "bug",

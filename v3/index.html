@@ -60,6 +60,7 @@
   <li><a href="#current-version">Current Version</a></li>
   <li><a href="#schema">Schema</a></li>
   <li><a href="#parameters">Parameters</a></li>
+  <li><a href="#root-endpoint">Root Endpoint</a></li>
   <li><a href="#client-errors">Client Errors</a></li>
   <li><a href="#http-redirects">HTTP Redirects</a></li>
   <li><a href="#http-verbs">HTTP Verbs</a></li>
@@ -167,6 +168,20 @@ with a Content-Type of ‘application/json’:</p>
 
 <pre class="terminal">
 $ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/authorizations
+</pre>
+
+<h2 id="root-endpoint">Root Endpoint</h2>
+
+<p>You can issue a <code>GET</code> request to the root endpoint to get all the endpoint categories that the API supports:</p>
+
+<pre class="terminal">
+$ curl https://api.github.com
+</pre>
+
+<p>Note that for GitHub Enterprise, <a href="https://developer.github.com/v3/enterprise/#endpoint-urls">as with all other endpoints</a>, you’ll need to pass in your GitHub Enterprise endpoint as the hostname, <em>as well as your username and password</em>:</p>
+
+<pre class="terminal">
+$ curl https://<em>hostname</em>/api/v3/ -u <em>username</em>:<em>password</em>
 </pre>
 
 <h2 id="client-errors">Client Errors</h2>

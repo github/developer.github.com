@@ -2,13 +2,50 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-07-28T00:00:00Z</updated>
+  <updated>2014-08-05T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-08-05:/changes/2014-08-05-team-memberships-api/</id>
+    <title type="html">We're changing the way you add new members to your organization</title>
+    <published>2014-08-05T00:00:00Z</published>
+    <updated>2014-08-05T00:00:00Z</updated>
+    <author>
+      <name>jakeboxer</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-08-05-team-memberships-api/" />
+    <content type="html">&lt;p&gt;Today, we’re announcing a change to the way organization owners add new members to their organization.&lt;/p&gt;
+
+&lt;p&gt;Previously, if you were an organization owner, you could use the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; endpoint to add any GitHub user to any team on your organization without any sort of approval from them. Now, we’re increasing user security by sending &lt;a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization"&gt;invitations&lt;/a&gt; to users when they’re added to teams on organizations that they aren’t yet a part of.&lt;/p&gt;
+
+&lt;p&gt;With this change, if you use the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; endpoint to add a user to a team and that user isn’t already on another team in your organization, the request will fail.&lt;/p&gt;
+
+&lt;h3 id="the-new-team-memberships-api"&gt;The new Team Memberships API&lt;/h3&gt;
+
+&lt;p&gt;You should change all your &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; requests to use the new &lt;a href="/v3/orgs/teams/#add-team-membership"&gt;add team membership&lt;/a&gt; endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team’s organization, that user will be sent an invitation via email.&lt;/p&gt;
+
+&lt;p&gt;Unlike the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; endpoint, a successful request to the &lt;a href="/v3/orgs/teams/#add-team-membership"&gt;add team membership&lt;/a&gt; endpoint does &lt;em&gt;not&lt;/em&gt; guarantee that the user is now a member of the team. If you’re trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out &lt;a href="/v3/activity/events/types/#teamaddevent"&gt;TeamAddEvent&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="preview-period"&gt;Preview period&lt;/h3&gt;
+
+&lt;p&gt;We’re making the new Team Memberships API (and the breaking changes to the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; API) available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;While these new APIs are in their preview period, you’ll need to provide the following custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.the-wasp-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We expect the preview period to last 30-60 days. At the end of the preview period, the Team Memberships API will become an official component of GitHub API v3, as will the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; API’s breaking changes.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-07-28:/changes/2014-07-28-assignee-and-label-actions-for-issue-events/</id>
     <title type="html">New assigned/labeled actions for issue and pull request events</title>
@@ -877,6 +914,25 @@ you have any questions or feedback, &lt;a href="https://github.com/contact?form%
 </content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
+    <title type="html">Wildcard Event for Webhooks</title>
+    <published>2014-02-24T00:00:00Z</published>
+    <updated>2014-02-24T00:00:00Z</updated>
+    <author>
+      <name>kdaigle</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
+    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/</id>
     <title type="html">Finer-grained OAuth scopes for SSH keys</title>
     <published>2014-02-24T00:00:00Z</published>
@@ -918,25 +974,6 @@ you have any questions or feedback, &lt;a href="https://github.com/contact?form%
 </content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
-    <title type="html">Wildcard Event for Webhooks</title>
-    <published>2014-02-24T00:00:00Z</published>
-    <updated>2014-02-24T00:00:00Z</updated>
-    <author>
-      <name>kdaigle</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
-    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
     <id>tag:developer.github.com,2014-02-21:/changes/2014-02-21-gist-raw-file-url-change/</id>
     <title type="html">Gist raw file URI change</title>
     <published>2014-02-21T00:00:00Z</published>
@@ -963,25 +1000,6 @@ The new host is &lt;code&gt;https://gist.githubusercontent.com&lt;/code&gt;.  Ex
     <content type="html">&lt;p&gt;We’ve made a small change to the &lt;a href="/v3/repos/#list-contributors"&gt;Repository Contributors API&lt;/a&gt; in the way empty repositories are handled. Previously, the API returned a &lt;code&gt;404 Not Found&lt;/code&gt; status when the list of contributors was fetched for an empty repository. To improve consistency with other API endpoints and reduce confusion, the API now returns a &lt;code&gt;204 No Content&lt;/code&gt; status instead.&lt;/p&gt;
 
 &lt;p&gt;If you notice any strangeness, &lt;a href="https://github.com/contact?form%5Bsubject%5D=APIv3"&gt;just let us know&lt;/a&gt;.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-02-13:/changes/2014-02-13-exposing-the-page-api/</id>
-    <title type="html">Introducing the Pages API</title>
-    <published>2014-02-13T00:00:00Z</published>
-    <updated>2014-02-13T00:00:00Z</updated>
-    <author>
-      <name>gjtorikian</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-02-13-exposing-the-page-api/" />
-    <content type="html">&lt;p&gt;We’ve created &lt;a href="/v3/repos/pages/"&gt;a new API to GitHub Pages&lt;/a&gt;. This API is accessible
-by owners of a Pages repo, whether it’s owned by an individual or an organization.&lt;/p&gt;
-
-&lt;p&gt;With the Pages API, you can get information about your site, as well as details
-on previous Pages builds.&lt;/p&gt;
-
-&lt;p&gt;Enjoy!&lt;/p&gt;
 </content>
   </entry>
 </feed>

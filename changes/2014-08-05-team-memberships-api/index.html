@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Some Hookshot Issues</title>
+  <title>We're changing the way you add new members to your organization</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,40 +40,51 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-2-13-hookshot-issues/">
+      <div class="change" id="/changes/2014-08-05-team-memberships-api/">
 <h2 class="title">
-  <a href="/changes/2013-2-13-hookshot-issues/">Some Hookshot Issues</a>
+  <a href="/changes/2014-08-05-team-memberships-api/">We're changing the way you add new members to your organization</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 13, 2013
+    August 5, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie"/>
-      <a href="https://github.com/technoweenie">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer"/>
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
   </li>
 </ul>
 </div>
 
 
-<p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
-been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
-the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
+<p>Today, we’re announcing a change to the way organization owners add new members to their organization.</p>
 
-<p>If your web hook servers are on EC2 and are missing hooks from GitHub due to
-an IP restriction, we recommend the following:</p>
+<p>Previously, if you were an organization owner, you could use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add any GitHub user to any team on your organization without any sort of approval from them. Now, we’re increasing user security by sending <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invitations</a> to users when they’re added to teams on organizations that they aren’t yet a part of.</p>
 
-<ol>
-  <li>Remove the IP white list.</li>
-  <li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
-</ol>
+<p>With this change, if you use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add a user to a team and that user isn’t already on another team in your organization, the request will fail.</p>
 
-<p>We’re currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
-if you have any questions.</p>
+<h3 id="the-new-team-memberships-api">The new Team Memberships API</h3>
+
+<p>You should change all your <a href="/v3/orgs/teams/#add-team-member">add team member</a> requests to use the new <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team’s organization, that user will be sent an invitation via email.</p>
+
+<p>Unlike the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint, a successful request to the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint does <em>not</em> guarantee that the user is now a member of the team. If you’re trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out <a href="/v3/activity/events/types/#teamaddevent">TeamAddEvent</a>.</p>
+
+<h3 id="preview-period">Preview period</h3>
+
+<p>We’re making the new Team Memberships API (and the breaking changes to the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API) available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>While these new APIs are in their preview period, you’ll need to provide the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.the-wasp-preview+json
+</code></pre>
+
+<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team Memberships API will become an official component of GitHub API v3, as will the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API’s breaking changes.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API">get in touch with us</a>!</p>
+
 
 </div>
 

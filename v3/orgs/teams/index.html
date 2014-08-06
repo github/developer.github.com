@@ -63,6 +63,9 @@
   <li><a href="#get-team-member">Get team member</a></li>
   <li><a href="#add-team-member">Add team member</a></li>
   <li><a href="#remove-team-member">Remove team member</a></li>
+  <li><a href="#get-team-membership">Get team membership</a></li>
+  <li><a href="#add-team-membership">Add team membership</a></li>
+  <li><a href="#remove-team-membership">Remove team membership</a></li>
   <li><a href="#list-team-repos">List team repos</a></li>
   <li><a href="#get-team-repo">Check if a team manages a repository</a></li>
   <li><a href="#add-team-repo">Add team repository</a></li>
@@ -326,8 +329,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h2 id="add-team-member">Add team member</h2>
 
 <p>In order to add a user to a team, the authenticated user must have
-‘admin’ permissions to the team or be an owner of the org that the team
-is associated with.</p>
+‘admin’ permissions to the team or be an owner of the organization that the team
+is associated with, and the user being added must already be a member of at
+least one other team on the same organization.</p>
 
 <pre><code>PUT /teams/:id/members/:username
 </code></pre>
@@ -357,12 +361,30 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
+<p>If you attempt to add a user to a team and that user is not a member of at least
+one other team on the same organization, you will get this:</p>
+
+<pre class="headers"><code>Status: 422 Unprocessable Entity
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Validation Failed"</span><span class="p">,</span>
+  <span class="s2">"errors"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"unaffiliated"</span><span class="p">,</span>
+      <span class="s2">"field"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+      <span class="s2">"resource"</span><span class="p">:</span> <span class="s2">"TeamMember"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
 <h2 id="remove-team-member">Remove team member</h2>
 
 <p>In order to remove a user from a team, the authenticated user must have
 ‘admin’ permissions to the team or be an owner of the org that the team
 is associated with.
-NOTE: This does not delete the user, it just remove them from the team.</p>
+NOTE: This does not delete the user, it just removes them from the team.</p>
 
 <pre><code>DELETE /teams/:id/members/:username
 </code></pre>
@@ -373,12 +395,166 @@ NOTE: This does not delete the user, it just remove them from the team.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
+<h2 id="get-team-membership">Get team membership</h2>
+
+<div class="alert">
+  <p>
+    The Team Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.the-wasp-preview+json</pre>
+  
+</div>
+
+<p>In order to get a user’s membership with a team, the authenticated user must be
+a member of the team or an owner of the team’s organization.</p>
+
+<pre><code>GET /teams/:id/memberships/:username
+</code></pre>
+
+<h3 id="response-if-user-has-an-active-membership-with-team">Response if user has an active membership with team</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"active"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-if-user-has-a-pending-membership-with-team">Response if user has a pending membership with team</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"pending"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-if-user-has-no-membership-with-team">Response if user has no membership with team</h3>
+
+<pre class="headers no-response"><code>Status: 404 Not Found
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="add-team-membership">Add team membership</h2>
+
+<div class="alert">
+  <p>
+    The Team Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.the-wasp-preview+json</pre>
+  
+</div>
+
+<p>In order to add a membership between a user and a team, the authenticated user
+must have ‘admin’ permissions to the team or be an owner of the organization
+that the team is associated with.</p>
+
+<p>If the user is already a part of the team’s organization (meaning they’re on at
+least one other team in the organization), this endpoint will add the user to
+the team.</p>
+
+<p>If the user is completely unaffiliated with the team’s organization (meaning
+they’re on none of the organization’s teams), this endpoint will send an
+invitation to the user via email. This newly-created membership will be in the
+“pending” state until the user accepts the invitation, at which point the
+membership will transition to the “active” state and the user will be added as a
+member of the team.</p>
+
+<pre><code>PUT /teams/:id/memberships/:username
+</code></pre>
+
+<h3 id="response-if-users-membership-with-team-is-now-active">Response if user’s membership with team is now active</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"active"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-if-users-membership-with-team-is-now-pending">Response if user’s membership with team is now pending</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"active"</span>
+<span class="p">}</span></code></pre>
+
+<p>If you attempt to add an organization to a team, you will get this:</p>
+
+<pre class="headers"><code>Status: 422 Unprocessable Entity
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Validation Failed"</span><span class="p">,</span>
+  <span class="s2">"errors"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"org"</span><span class="p">,</span>
+      <span class="s2">"field"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+      <span class="s2">"resource"</span><span class="p">:</span> <span class="s2">"TeamMember"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="remove-team-membership">Remove team membership</h2>
+
+<div class="alert">
+  <p>
+    The Team Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.the-wasp-preview+json</pre>
+  
+</div>
+
+<p>In order to remove a membership between a user and a team, the authenticated
+user must have ‘admin’ permissions to the team or be an owner of the
+organization that the team is associated with.
+NOTE: This does not delete the user, it just removes their membership from the
+team.</p>
+
+<pre><code>DELETE /teams/:id/memberships/:username
+</code></pre>
+
+<h3 id="response-8">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
 <h2 id="list-team-repos">List team repos</h2>
 
 <pre><code>GET /teams/:id/repos
 </code></pre>
 
-<h3 id="response-8">Response</h3>
+<h3 id="response-9">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -410,7 +586,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"full_name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
     <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
     <span class="s2">"private"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"fork"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
     <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
     <span class="s2">"clone_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
@@ -469,7 +645,7 @@ organization.</p>
 
 <p>Note that you’ll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see “<a href="/v3/#http-verbs">HTTP verbs</a>.”</p>
 
-<h3 id="response-9">Response</h3>
+<h3 id="response-10">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -504,7 +680,7 @@ NOTE: This does not delete the repository, it just removes it from the team.</p>
 <pre><code>DELETE /teams/:id/repos/:owner/:repo
 </code></pre>
 
-<h3 id="response-10">Response</h3>
+<h3 id="response-11">Response</h3>
 
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -519,7 +695,7 @@ authenticated user belongs. This method requires <code>user</code> or <code>repo
 <pre><code>GET /user/teams
 </code></pre>
 
-<h3 id="response-11">Response</h3>
+<h3 id="response-12">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000

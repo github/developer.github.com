@@ -41,6 +41,53 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-08-05-team-memberships-api/">
+  <h2 class="title">
+  <a href="/changes/2014-08-05-team-memberships-api/">We're changing the way you add new members to your organization</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    August 5, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer">
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+    <p>Today, we’re announcing a change to the way organization owners add new members to their organization.</p>
+
+<p>Previously, if you were an organization owner, you could use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add any GitHub user to any team on your organization without any sort of approval from them. Now, we’re increasing user security by sending <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invitations</a> to users when they’re added to teams on organizations that they aren’t yet a part of.</p>
+
+<p>With this change, if you use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add a user to a team and that user isn’t already on another team in your organization, the request will fail.</p>
+
+<h3 id="the-new-team-memberships-api">The new Team Memberships API</h3>
+
+<p>You should change all your <a href="/v3/orgs/teams/#add-team-member">add team member</a> requests to use the new <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team’s organization, that user will be sent an invitation via email.</p>
+
+<p>Unlike the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint, a successful request to the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint does <em>not</em> guarantee that the user is now a member of the team. If you’re trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out <a href="/v3/activity/events/types/#teamaddevent">TeamAddEvent</a>.</p>
+
+<h3 id="preview-period">Preview period</h3>
+
+<p>We’re making the new Team Memberships API (and the breaking changes to the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API) available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>While these new APIs are in their preview period, you’ll need to provide the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.the-wasp-preview+json
+</code></pre>
+
+<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team Memberships API will become an official component of GitHub API v3, as will the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API’s breaking changes.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API">get in touch with us</a>!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">
   <h2 class="title">
   <a href="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">New assigned/labeled actions for issue and pull request events</a>
@@ -1158,6 +1205,35 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 </div>
 
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
+
+</div>
+
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -1206,35 +1282,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
 
-
-</div>
-
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
 
 </div>
 
@@ -2416,38 +2463,6 @@ but we can’t wait to see what others can do with this information.</p>
 
 </div>
 
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
-      <a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
-
-
-</div>
-
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
@@ -2496,6 +2511,38 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
 
 
 </div>
@@ -3601,6 +3648,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-08-05-team-memberships-api/">We're changing the way you add new members to your organization<br /><span class="date">August 5, 2014</span></a></li>
+
   <li><a href="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">New assigned/labeled actions for issue and pull request events<br /><span class="date">July 28, 2014</span></a></li>
 
   <li><a href="/changes/2014-07-09-status-contexts-are-official/">The Combined Status API is official<br /><span class="date">July 9, 2014</span></a></li>
@@ -3614,8 +3663,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API<br /><span class="date">June 11, 2014</span></a></li>
 
   <li><a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events<br /><span class="date">June 9, 2014</span></a></li>
-
-  <li><a href="/changes/2014-05-19-deployments-api-updates/">New attributes for the Deployments API<br /><span class="date">May 19, 2014</span></a></li>
 
 </ul>
 

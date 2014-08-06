@@ -1,5 +1,5 @@
 ---
-title: Securing Your Webhooks | GitHub API
+title: Securing your webhooks | GitHub API
 layout: webhooks
 ---
 

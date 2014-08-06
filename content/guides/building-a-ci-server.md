@@ -153,7 +153,7 @@ At GitHub, we:
 * If the code is green, we merge the pull request
 
 All of this communication is funneled back to our chat rooms. You don't need to
-build your own CI or deployment setup to use this example.
+build your own CI setup to use this example.
 You can always rely on [third-party services][integrations].
 
 [deploy API]: /v3/repos/deployments/

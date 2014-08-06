@@ -16,6 +16,7 @@ gem 'yajl-ruby', '~> 0.8.2'
 group :development do
   gem 'adsf'
   gem 'fssm'
+  gem 'guard-nanoc'
 end
 
 group :test do

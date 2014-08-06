@@ -24,6 +24,9 @@ By enforcing a secret token, you're ensuring that any data received by your serv
 
 ## Provide an access token to secure access to your service
 
+Your server may need to perform actions on behalf of the user. Rather than requiring them to provide sensitive login information, you should generate a highly random OAuth token, and have your user provide that token to interact with your service. If possible, you should ensure that [the token is scoped to just the relevant access](/v3/oauth/#scopes).
+
+GitHub provides [a way to create OAuth tokens through the website](https://help.github.com/articles/creating-an-access-token-for-command-line-use). You should request a GitHub OAuth token with the appropriate scopes if your service needs to interact with GitHub in some way. Note that you do not need a token if your service simply responds to a webhook.
 ## Favor asynchronous work over synchronous
 
 ## Use appropriate HTTP status codes when responding

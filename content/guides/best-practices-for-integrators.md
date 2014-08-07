@@ -36,6 +36,18 @@ Treat OAuth tokens just like user passwords. Don't store your user's OAuth token
 
 ## Favor asynchronous work over synchronous
 
-## Use appropriate HTTP status codes when responding
+GitHub expects that services that integrate with GitHub finish their work within thirty seconds. If your service takes longer than that to complete, then GitHub terminates the connection and the payload is lost.
+
+Since it's impossible to predict how fast your service will complete, you should do all of "the real work" in a background job. [Resque](http://resquework.org/) (for Ruby), [RQ](http://python-rq.org/) (for Python), or [RabbitMQ](http://www.rabbitmq.com/) (for Java) are examples of libraries that can handle queuing and processing of background jobs.
+
+Note that even with a background job running, GitHub still expects your server to respond within thirty seconds. Your server simply needs to acknowledge that it received the payload by sending some sort of response. It's also important to perform any validations on a payload as soon as possible, so that you can accurately report whether your server can continue with the request or not.
+
+## Use appropriate HTTP status codes when responding to GitHub
+
+Every webhook has its own "Recent Deliverie" section, which lists whether a deployment was successful or not.
+
+![Recent Deliveries view](/images/webhooks_recent_deliveries.png)
+
+You should make use of proper HTTP status codes in order to inform users. You can use codes like `201` or `202` to acknowledge receipt of payload that won't be processed (for example, a payload delivered by a branch that's not the default). Reserve the `500` error code for catastrophic failures.
 
 ## Provide as much information as possible to the user

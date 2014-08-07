@@ -30,7 +30,7 @@ GitHub provides [a way to create OAuth tokens through the website](https://help.
 
 {{#warning}}
 
-Treat OAuth tokens just like user passwords. Don't store your user's OAuth tokens directly in a database; instead use a hash of the token. In case your database gets compromised, attackers won't be able to use the hashed token to act on behalf of a user.
+Treat OAuth tokens just like user passwords. Don't store your user's OAuth tokens directly in a database; instead, use a hash of the token. In case your database gets compromised, attackers won't be able to use the hashed token to act on behalf of a user.
 
 {{/warning}}
 
@@ -51,3 +51,7 @@ Every webhook has its own "Recent Deliverie" section, which lists whether a depl
 You should make use of proper HTTP status codes in order to inform users. You can use codes like `201` or `202` to acknowledge receipt of payload that won't be processed (for example, a payload delivered by a branch that's not the default). Reserve the `500` error code for catastrophic failures.
 
 ## Provide as much information as possible to the user
+
+Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.  
+
+![Viewing a payload response](/images/payload_response_tab.png)

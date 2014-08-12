@@ -65,39 +65,28 @@
   <li>Use the <a href="license/">License</a> API to get license information</li>
   <li>Use the <a href="search_indexing/">Search Indexing</a> API to queue up search indexing jobs</li>
   <li>Use the <a href="management_console/">Management Console</a> API to perform common administrative tasks</li>
+  <li>Use the <a href="/v3/users/administration/">User Administration</a> API to promote, demote, suspend, and unsuspend users</li>
 </ul>
 
 <h2 id="endpoint-urls">Endpoint URLs</h2>
 
-<p>Every endpoint used by the GitHub API depends on your <code>hostname</code>, which is the name of your Enterprise installation.</p>
-
-<p>Endpoints for the GitHub.com API and most of the Enterprise API start with the following URL:</p>
+<p>All API endpoints—except <a href="management_console/">Management Console</a> API endpoints—are prefixed with the following URL:</p>
 
 <pre class="terminal">
 http(s)://<em>hostname</em>/api/v3/
 </pre>
 
-<p>Endpoints for the <a href="search_indexing/">Search Indexing</a> API start with the following URL:</p>
+<p><a href="management_console/">Management Console</a> API endpoints are only prefixed with a hostname:</p>
 
 <pre class="terminal">
-http(s)://<em>hostname</em>/api/v3/staff/
+http(s)://<em>hostname</em>/
 </pre>
-
-<p>Endpoints for the <a href="management_console/">Management Console</a> API start with the following URL:</p>
-
-<pre class="terminal">
-http(s)://<em>hostname</em>/setup/api/
-</pre>
-
-<h3 id="example">Example</h3>
-
-<p>If your Enterprise host name is <code>ghe.local</code>, a call to <a href="/v3/issues/">the Issues API</a> would be made to <code>https://ghe.local/api/v3/issues</code>.</p>
 
 <h2 id="authentication">Authentication</h2>
 
 <p>Your Enterprise installation’s API endpoints accept <a href="http://developer.github.com/v3/#authentication">the same authentication methods</a> as the GitHub.com API. Specifically, you can authenticate yourself with <strong><a href="/v3/oauth/">OAuth tokens</a></strong> (which can be created using the <a href="/v3/oauth_authorizations/#create-a-new-authorization">Authorizations API</a>) or <strong><a href="/v3/#basic-authentication">basic authentication</a></strong>.</p>
 
-<p>The <a href="admin_stats/">Admin Stats</a>, <a href="license/">License</a>, and <a href="search_indexing/">Search Indexing</a> API endpoints are only accessible to GitHub Enterprise site admins. The <a href="management_console/">Management Console</a> API endpoints are accessible to anyone with a valid license file.</p>
+<p>The <a href="admin_stats/">Admin Stats</a>, <a href="license/">License</a>, <a href="search_indexing/">Search Indexing</a>, and <a href="/v3/users/administration/">User Administration</a> API endpoints are only accessible to GitHub Enterprise site administrators. The <a href="management_console/">Management Console</a> API endpoints are only accessible with a valid license file.</p>
 
 
     </div>
@@ -211,6 +200,7 @@ http(s)://<em>hostname</em>/setup/api/
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
           <li><a href="/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
       </li>
       <li class="js-topic">

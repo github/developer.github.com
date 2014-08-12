@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Git Tags | GitHub API</title>
+  <title>User Administration | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -51,162 +51,74 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="tags">Tags</h1>
+      <h1 id="administration-enterprise">Administration (Enterprise)</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#get-a-tag">Get a Tag</a></li>
-  <li><a href="#create-a-tag-object">Create a Tag Object</a></li>
+  <li><a href="#promote-an-ordinary-user-to-a-site-administrator">Promote an ordinary user to a site administrator</a></li>
+  <li><a href="#demote-a-site-administrator-to-an-ordinary-user">Demote a site administrator to an ordinary user</a></li>
+  <li><a href="#suspend-a-user">Suspend a user</a></li>
+  <li><a href="#unsuspend-a-user">Unsuspend a user</a></li>
 </ul>
 
-<p>This tags API only deals with tag objects - so only annotated tags, not
-lightweight tags.</p>
+<p>The User Administration API allows you to promote, demote, suspend, and unsuspend users on a GitHub Enterprise appliance. <em>It is only available to <a href="/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>403</code> response if they try to access it.</p>
 
-<h2 id="get-a-tag">Get a Tag</h2>
+<p>Prefix all the endpoints for this API with the following URL:</p>
 
-<pre><code>GET /repos/:owner/:repo/git/tags/:sha
+<pre class="terminal">
+http(s)://<em>hostname</em>/api/v3
+</pre>
+
+<h2 id="promote-an-ordinary-user-to-a-site-administrator">Promote an ordinary user to a site administrator</h2>
+
+<pre><code>PUT /user/:username/site_admin
 </code></pre>
+
+<p>Note that you’ll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see “<a href="/v3/#http-verbs">HTTP verbs</a>.”</p>
 
 <h3 id="response">Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
-  <span class="s2">"tagger"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
-    <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2011-06-17T14:53:35-07:00"</span>
-  <span class="p">},</span>
-  <span class="s2">"object"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<h2 id="demote-a-site-administrator-to-an-ordinary-user">Demote a site administrator to an ordinary user</h2>
 
-<h2 id="create-a-tag-object">Create a Tag Object</h2>
-
-<p>Note that creating a tag object does not create the reference that
-makes a tag in Git.  If you want to create an annotated tag in Git,
-you have to do this call to create the tag object, and then
-<a href="/v3/git/refs/#create-a-reference">create</a> the <code>refs/tags/[tag]</code> reference.
-If you want to create a lightweight tag, you only have to
-<a href="/v3/git/refs/#create-a-reference">create</a> the tag reference - this call
-would be unnecessary.</p>
-
-<pre><code>POST /repos/:owner/:repo/git/tags
+<pre><code>DELETE /user/:username/site_admin
 </code></pre>
 
-<h3 id="parameters">Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>tag</code></td>
-      <td><code>string</code></td>
-      <td>The tag</td>
-    </tr>
-    <tr>
-      <td><code>message</code></td>
-      <td><code>string</code></td>
-      <td>The tag message</td>
-    </tr>
-    <tr>
-      <td><code>object</code></td>
-      <td><code>string</code></td>
-      <td>The SHA of the git object this is tagging</td>
-    </tr>
-    <tr>
-      <td><code>type</code></td>
-      <td><code>string</code></td>
-      <td>The type of the object we’re tagging. Normally this is a <code>commit</code> but it can also be a <code>tree</code> or a <code>blob</code>.</td>
-    </tr>
-    <tr>
-      <td><code>tagger</code></td>
-      <td><code>hash</code></td>
-      <td>A hash with information about the individual creating the tag.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>The <code>tagger</code> hash contains the following keys:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>name</code></td>
-      <td><code>string</code></td>
-      <td>The name of the author of the tag</td>
-    </tr>
-    <tr>
-      <td><code>email</code></td>
-      <td><code>string</code></td>
-      <td>The email of the author of the tag</td>
-    </tr>
-    <tr>
-      <td><code>date</code></td>
-      <td><code>string</code></td>
-      <td>When this object was tagged. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="example-input">Example Input</h3>
-
-<pre><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
-  <span class="s2">"object"</span><span class="p">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
-  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-  <span class="s2">"tagger"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
-    <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2011-06-17T14:53:35-07:00"</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<p>You can demote any user account except your own.</p>
 
 <h3 id="response-1">Response</h3>
 
-<pre class="headers"><code>Status: 201 Created
-Location: https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac
+<pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
-  <span class="s2">"tagger"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
-    <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2011-06-17T14:53:35-07:00"</span>
-  <span class="p">},</span>
-  <span class="s2">"object"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<h2 id="suspend-a-user">Suspend a user</h2>
+
+<pre><code>PUT /user/:username/suspended
+</code></pre>
+
+<p>You can suspend any user account except your own.</p>
+
+<p>Note that you’ll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see “<a href="/v3/#http-verbs">HTTP verbs</a>.”</p>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="unsuspend-a-user">Unsuspend a user</h2>
+
+<pre><code>DELETE /user/:username/suspended
+</code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
     </div>
 

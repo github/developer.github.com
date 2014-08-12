@@ -40,7 +40,7 @@ GitHub expects that services that integrate with GitHub finish their work within
 
 Since it's impossible to predict how fast your service will complete, you should do all of "the real work" in a background job. [Resque](http://resquework.org/) (for Ruby), [RQ](http://python-rq.org/) (for Python), or [RabbitMQ](http://www.rabbitmq.com/) (for Java) are examples of libraries that can handle queuing and processing of background jobs.
 
-Note that even with a background job running, GitHub still expects your server to respond within thirty seconds. Your server simply needs to acknowledge that it received the payload by sending some sort of response. It's also important to perform any validations on a payload as soon as possible, so that you can accurately report whether your server can continue with the request or not.
+Note that even with a background job running, GitHub still expects your server to respond within thirty seconds. Your server simply needs to acknowledge that it received the payload by sending some sort of response. It's critical that your service to performs any validations on a payload as soon as possible, so that you can accurately report whether your server can continue with the request or not.
 
 ## Use appropriate HTTP status codes when responding to GitHub
 

@@ -9,7 +9,7 @@ title: Best practices for integrators | GitHub API
 
 Interested in integrating with the GitHub platform? [You're in good company](https://github.com/integrations). This guide will help you design a flexible system that provides the best experience for your users, and ensure that both services maintain a secure connection.
 
-## Secure the payloads delivered from GitHub
+## Secure payloads delivered from GitHub
 
 It's very important that you secure [the payloads sent from GitHub](/v3/activity/events/types/). Although no personal information is transmitted, for private repositories, leaking information is generally considered a bad practice.
 

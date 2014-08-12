@@ -1,8 +1,8 @@
 ---
-title: Automating deployments to an integrator | GitHub API
+title: Automating deployments to integrators | GitHub API
 ---
 
-# Automating deployments to an integrator
+# Automating deployments to integrators
 
 * TOC
 {:toc}

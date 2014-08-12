@@ -22,7 +22,7 @@ Note that the Auto-Deployment service only picks up changes from your default br
 To set up the Auto-Deployment service:
 
 1. Navigate to the repository where you’re setting up your deployments.
-2. In your repository's right sidebar, click <span title="The edit icon" class="octicon octicon-tools"></span>.
+2. In your repository's right sidebar, click <span aria-label="The edit icon" title="The edit icon" class="octicon octicon-tools"></span>.
 3. On the left, click **Webhooks & Services**.
 ![The webhooks and services menu](https://github-images.s3.amazonaws.com/help/settings/webhooks_and_services_menu.png)
 4. Click **Add service**, then type "GitHub Auto-Deployment." ![Adding the GitHub Auto-Deployment service](/images/add_github_autodeploy_service.png)

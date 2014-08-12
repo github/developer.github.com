@@ -20,7 +20,7 @@ There are two steps to take in order to secure payloads delivered by GitHub:
 
 By enforcing a secret token, you're ensuring that any data received by your server is absolutely coming from GitHub. Ideally, you should provide a different secret token *per user* of your service. That way, if one token is compromised, no other user would be affected.
 
-[Whitelisting GitHub's IP addresses](https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist) is another heavy-duty solution. However, we reserve the right to change those numbers at any time and without advance notice.
+Whitelisting [the IP address used when delivering hooks](https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist) is another heavy-duty solution. However, we reserve the right to change those numbers at any time and without advance notice. To ensure that you're always checking the right IP address, you can [use the `/meta` endpoint](/v3/meta/#meta) to find the address we use.
 
 ## Provide an access token to secure access to your service
 

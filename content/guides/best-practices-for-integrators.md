@@ -13,14 +13,11 @@ Interested in integrating with the GitHub platform? [You're in good company](htt
 
 It's very important that you secure [the payloads sent from GitHub](/v3/activity/events/types/). Although no personal information (like passwords) is ever transmitted in a payload, leaking *any* information is not good. Some information that might be sensitive include committer email address or the names of private repositories.
 
-There are two steps to take in order to secure payloads delivered by GitHub:
+There are three steps you can take to secure receipt of payloads delivered by GitHub:
 
 1. Ensure that your receiving server is on an HTTPS connection. By default, GitHub will verify SSL certificates when delivering payloads.
-2. Provide [a secret token](/webhooks/securing/) to ensure payloads are definitely coming from GitHub.
-
-By enforcing a secret token, you're ensuring that any data received by your server is absolutely coming from GitHub. Ideally, you should provide a different secret token *per user* of your service. That way, if one token is compromised, no other user would be affected.
-
-Whitelisting [the IP address used when delivering hooks](https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist) is another heavy-duty solution. However, we reserve the right to change those numbers at any time and without advance notice. To ensure that you're always checking the right IP address, you can [use the `/meta` endpoint](/v3/meta/#meta) to find the address we use.
+2. You can whitelist [the IP address we use when delivering hooks](https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist)  to your server. To ensure that you're always checking the right IP address, you can [use the `/meta` endpoint](/v3/meta/#meta) to find the address we use.
+3. Provide [a secret token](/webhooks/securing/) to ensure payloads are definitely coming from GitHub. By enforcing a secret token, you're ensuring that any data received by your server is absolutely coming from GitHub. Ideally, you should provide a different secret token *per user* of your service. That way, if one token is compromised, no other user would be affected.
 
 ## Favor asynchronous work over synchronous
 

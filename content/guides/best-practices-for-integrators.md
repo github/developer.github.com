@@ -22,18 +22,6 @@ By enforcing a secret token, you're ensuring that any data received by your serv
 
 Whitelisting [the IP address used when delivering hooks](https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist) is another heavy-duty solution. However, we reserve the right to change those numbers at any time and without advance notice. To ensure that you're always checking the right IP address, you can [use the `/meta` endpoint](/v3/meta/#meta) to find the address we use.
 
-## Provide a token to secure access to your service
-
-Your server may need to perform actions on behalf of the user. Rather than requiring them to provide sensitive login information, you should generate a highly random OAuth token, and have your user provide that token to interact with your service. If possible, you should ensure that [the token is scoped to just the relevant access](/v3/oauth/#scopes).
-
-GitHub provides [a way to create OAuth tokens through the website](https://help.github.com/articles/creating-an-access-token-for-command-line-use). Your service also request a GitHub OAuth token with the appropriate scopes if your service needs to interact with GitHub in some way. Note that you do not need a token if your service simply responds to a webhook.
-
-{{#warning}}
-
-Treat OAuth tokens just like user passwords. Don't store your user's OAuth tokens directly in a database; instead, use a hash of the token. In case your database gets compromised, attackers won't be able to use the hashed token to act on behalf of a user.
-
-{{/warning}}
-
 ## Favor asynchronous work over synchronous
 
 GitHub expects that services that integrate with GitHub finish their work within thirty seconds. If your service takes longer than that to complete, then GitHub terminates the connection and the payload is lost.

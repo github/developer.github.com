@@ -11,7 +11,7 @@ Interested in integrating with the GitHub platform? [You're in good company](htt
 
 ## Secure payloads delivered from GitHub
 
-It's very important that you secure [the payloads sent from GitHub](/v3/activity/events/types/). Although no personal information is ever transmitted in a payload, leaking *any* information is not good.
+It's very important that you secure [the payloads sent from GitHub](/v3/activity/events/types/). Although no personal information (like passwords) is ever transmitted in a payload, leaking *any* information is not good. Some information that might be sensitive include committer email address or the names of private repositories.
 
 There are two steps to take in order to secure payloads delivered by GitHub:
 

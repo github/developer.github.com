@@ -44,7 +44,7 @@ Note that even with a background job running, GitHub still expects your server t
 
 ## Use appropriate HTTP status codes when responding to GitHub
 
-Every webhook has its own "Recent Deliverie" section, which lists whether a deployment was successful or not.
+Every webhook has its own "Recent Deliveries" section, which lists whether a deployment was successful or not.
 
 ![Recent Deliveries view](/images/webhooks_recent_deliveries.png)
 

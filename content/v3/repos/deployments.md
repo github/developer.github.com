@@ -86,9 +86,16 @@ as well.
 
 ## List Deployments
 
-Users with pull access can view deployments for a repository:
+Users with `repo` or `repo_deployment` scopes can view deployments for a repository. Simple filtering is available via query parameters:
 
     GET /repos/:owner/:repo/deployments
+
+Name | Type | Description
+-----|------|--------------
+`sha`|`string` | The short or long sha that was recorded at creation time. Default: `none`
+`ref`|`string` | The name of the ref. This can be a branch, tag, or sha. Default: `none`
+`task`|`string` | The name of the task for the deployment. e.g. `deploy` or `deploy:migrations`. Default: `none`
+`environment`|`string` | The name of the environment that was deployed to. e.g. `staging` or `production`. Default: `none`
 
 ### Response
 
@@ -119,6 +126,7 @@ Users with push access can create a deployment for a given ref:
 Name | Type | Description
 -----|------|--------------
 `ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
+`task`|`string`| **Required**. The named task to execute. e.g. `deploy` or `deploy:migrations`. Default: `deploy`
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: `true`
 `required_contexts`|`Array`| Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts.
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`

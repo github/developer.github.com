@@ -1576,6 +1576,7 @@ module GitHub
       "id" => 1,
       "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
       "ref" => "master",
+      "task" => "deploy",
       "payload" => {:task => 'deploy:migrate'},
       "environment" => "production",
       "description" => "Deploy request from hubot",

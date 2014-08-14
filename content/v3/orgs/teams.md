@@ -138,7 +138,7 @@ If you attempt to add an organization to a team, you will get this:
 
 <%= headers 422 %>
 <%=
-  json :message => "Validation Failed",
+  json :message => "Cannot add an organization as a member.",
     :errors => [{
       :code     => "org",
       :field    => :user,
@@ -151,7 +151,7 @@ one other team on the same organization, you will get this:
 
 <%= headers 422 %>
 <%=
-  json :message => "Validation Failed",
+  json :message => "User isn't a member of this organization. Please invite them first.",
     :errors => [{
       :code     => "unaffiliated",
       :field    => :user,
@@ -252,7 +252,7 @@ If you attempt to add an organization to a team, you will get this:
 
 <%= headers 422 %>
 <%=
-  json :message => "Validation Failed",
+  json :message => "Cannot add an organization as a member.",
     :errors => [{
       :code     => "org",
       :field    => :user,

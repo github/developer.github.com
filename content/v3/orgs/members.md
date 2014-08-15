@@ -12,8 +12,7 @@ title: Organization Members | GitHub API
 List all users who are members of an organization. A member is a user that
 belongs to at least 1 team in the organization. If the authenticated user is
 also an owner of this organization then both concealed and public members will
-be returned. If the requester is not an owner of the organization the query
-will be redirected to the [public members list](#public-members-list).
+be returned.
 
     GET /orgs/:org/members
 
@@ -38,7 +37,7 @@ Name    | Type    | Description
 
 Check if a user is, publicly or privately, a member of the organization.
 
-    GET /orgs/:org/members/:user
+    GET /orgs/:org/members/:username
 
 ### Response if requester is an organization member and user is a member
 
@@ -66,7 +65,7 @@ To add someone as a member to an org, you must add them to a
 Removing a user from this list will remove them from all teams and
 they will no longer have any access to the organization's repositories.
 
-    DELETE /orgs/:org/members/:user
+    DELETE /orgs/:org/members/:username
 
 ### Response
 
@@ -86,7 +85,7 @@ publicized or not.
 
 ## Check public membership
 
-    GET /orgs/:org/public_members/:user
+    GET /orgs/:org/public_members/:username
 
 ### Response if user is a public member
 
@@ -101,7 +100,9 @@ publicized or not.
 The user can publicize their own membership.
 (A user cannot publicize the membership for another user.)
 
-    PUT /orgs/:org/public_members/:user
+    PUT /orgs/:org/public_members/:username
+
+<%= fetch_content(:put_content_length) %>
 
 ### Response
 
@@ -109,7 +110,7 @@ The user can publicize their own membership.
 
 ## Conceal a user's membership
 
-    DELETE /orgs/:org/public_members/:user
+    DELETE /orgs/:org/public_members/:username
 
 ### Response
 

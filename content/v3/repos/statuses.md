@@ -56,19 +56,16 @@ Name | Type | Description
 'https://api.github.com/repos/octocat/example/statuses/1' %>
 <%= json :status %>
 
-<% combined_media_type = "application/vnd.github.she-hulk-preview+json" %>
-
 ## List Statuses for a specific Ref
 
 Users with pull access can view commit statuses for a given ref:
 
-    GET /repos/:owner/:repo/statuses/:ref
+    GET /repos/:owner/:repo/commits/:ref/statuses
 
 <div class="alert">
   <p>
-    If you send an <code>Accept</code> header with the Combined Status API preview
-    <a href="/v3/media/">media type</a>, <code><%= combined_media_type %></code>,
-    this endpoint is also available at <code>/repos/:owner/:repo/commits/:ref/statuses</code>.
+    This resource is also available via a legacy route:
+    <code>GET /repos/:owner/:repo/statuses/:ref</code>.
   </p>
 </div>
 
@@ -89,28 +86,18 @@ Name | Type | Description
 
 ## Get the combined Status for a specific Ref
 
-<div class="alert">
-  <p>
-    The Combined status endpoint is currently available for developers to preview.
-    During the preview period, the API may change without advance notice.
-    Please see the <a href="/changes/2014-03-27-combined-status-api/">blog post</a> for full details.
-  </p>
-  <p>
-    To access this endpoint during the preview period, you must provide a custom
-    <a href="/v3/media/">media type</a> in the <code>Accept</code> header:
-    <pre><%= combined_media_type %></pre>
-  </p>
-</div>
-
 Users with pull access can access a combined view of commit statuses for a given ref.
 
     GET /repos/:owner/:repo/commits/:ref/status
 
-The most recent status for each context is returned (up to 25), as well as a combined
-`state`. The `state` is `pending` to start, `failure` if any status reports as
-`error` or `failure`, `pending` if any context's latest status is `pending`, and
-`success` if the latest status for all contexts is `success`. (`null` is
-considered a distinct context)
+The most recent status for each context is returned, up to 100. This field
+[paginates](/v3/#pagination) if there are over 100 contexts.
+
+Additionally, a combined `state` is returned. The `state` is one of:
+
+ * **failure** if any of the contexts report as error or failure
+ * **pending** if there are no statuses or a context is pending
+ * **success** if the latest status for all contexts is success
 
 ### Parameters
 

@@ -50,9 +50,9 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`milestone`|`integer` or `string`| If an `integer` is passed, it should refer to a milestone number. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. Default: `*`
+`milestone`|`integer` or `string`| If an `integer` is passed, it should refer to a milestone number. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
 `state`|`string`| Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. Default: `open`
-`assignee`|`string`| Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. Default: `*`
+`assignee`|`string`| Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
 `creator`|`string`| The user that created the issue.
 `mentioned`|`string`| A user that's mentioned in the issue.
 `labels`|`string`| A list of comma separated label names.  Example: `bug,ui,@high`

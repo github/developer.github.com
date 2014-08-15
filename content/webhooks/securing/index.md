@@ -1,5 +1,5 @@
 ---
-title: Securing Your Webhooks | GitHub API
+title: Securing your webhooks | GitHub API
 layout: webhooks
 ---
 
@@ -18,7 +18,7 @@ You'll need to set up your secret token in two places: GitHub and your server.
 To set your token on GitHub:
 
 1. Navigate to the repository where you're setting up your webhook.
-2. Fill out the Secret textbox. Try to incorporate a variation of numbers, letters, and symbols.
+2. Fill out the Secret textbox. Use a random string with high entropy (e.g., by taking the output of `ruby -rsecurerandom -e 'puts SecureRandom.hex(20)'` at the terminal).
 ![Webhook secret token field](/images/webhook_secret_token.png)
 3. Click **Update Webhook**.
 

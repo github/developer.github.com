@@ -11,7 +11,7 @@ title: Organizations | GitHub API
 
 List all public organizations for an unauthenticated user. Lists private *and* public organizations for authenticated users.
 
-    GET /users/:user/orgs
+    GET /users/:username/orgs
 
 List public and private organizations for the authenticated user.
 
@@ -37,7 +37,7 @@ List public and private organizations for the authenticated user.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `billing_email`|`string` | Billing email address. This address is not publicized.
 `company`|`string` | The company name.

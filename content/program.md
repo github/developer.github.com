@@ -40,7 +40,7 @@ layout: developers
     <p>Awesome! We'd love to have you be part of the program. Here’s how you can spread the word:</p>
     <ul>
       <li><a href="https://github.com/contact?form[subject]=New+GitHub+Integration">Let us know about your integration</a></li>
-      <li>Use the <a href="https://github.com/logos">Octocat or GitHub logo</a> to advertise that your product works with GitHub</li>
+      <li>Use the <a href="https://github.com/logos">Octocat or GitHub logo</a> to identify that your product works with GitHub</li>
       <li>Post a video or a blog on your website about your integration</li>
     </ul>
   </div>

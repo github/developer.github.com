@@ -58,7 +58,7 @@ that ngrok gave you:
 ![A new ngrok URL](/images/webhook_sample_url.png)
 
 Click **Update webhook**. You should see a body response of `Well, it worked!`.
-Great! Click on **Let me select individual events.**, and select the following:
+Great! Click on **Let me select individual events**, and select the following:
 
 * Status
 * Pull Request
@@ -153,7 +153,7 @@ At GitHub, we:
 * If the code is green, we merge the pull request
 
 All of this communication is funneled back to our chat rooms. You don't need to
-build your own CI or deployment setup to use this example.
+build your own CI setup to use this example.
 You can always rely on [third-party services][integrations].
 
 [deploy API]: /v3/repos/deployments/

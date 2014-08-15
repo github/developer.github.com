@@ -7,7 +7,7 @@ require 'securerandom'
 module GitHub
   module Resources
     module Helpers
-      STATUSES = {
+      STATUSES ||= {
         200 => '200 OK',
         201 => '201 Created',
         202 => '202 Accepted',
@@ -27,7 +27,7 @@ module GitHub
         502 => '502 Bad Gateway'
       }
 
-      DefaultTimeFormat = "%B %-d, %Y".freeze
+      DefaultTimeFormat ||= "%B %-d, %Y".freeze
 
       def post_date(item)
         strftime item[:created_at]
@@ -46,7 +46,7 @@ module GitHub
       end
 
       def headers(status, head = {})
-        css_class = (status == 204 || status == 404) ? 'headers no-response' : 'headers'
+        css_class = (status == 202 || status == 204 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
@@ -109,9 +109,25 @@ module GitHub
         hs + %(<pre><code>) + res + "</code></pre>"
       end
 
+      def webhook_headers(event_name)
+        "<pre><code>" + File.read("lib/webhooks/#{event_name}.headers.txt") + "</code></pre>"
+      end
+
+      def webhook_payload(event_name)
+        "<pre><code class='language-javascript'>" + File.read("lib/webhooks/#{event_name}.payload.json") + "</code></pre>"
+      end
+
+      CONTENT ||= {
+        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\""
+      }
+
+      def fetch_content(key)
+        CONTENT[key.to_s.upcase]
+      end
+
     end
 
-    USER = {
+    USER ||= {
       "login"        => "octocat",
       "id"           => 1,
       "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
@@ -131,11 +147,11 @@ module GitHub
       "site_admin"   => false
     }
 
-    CONTRIBUTOR = USER.merge({
+    CONTRIBUTOR ||= USER.merge({
       "contributions" => 32
     })
 
-    FULL_USER = USER.merge({
+    FULL_USER ||= USER.merge({
       "name"         => "monalisa octocat",
       "company"      => "GitHub",
       "blog"         => "https://github.com/blog",
@@ -152,7 +168,7 @@ module GitHub
       "updated_at"   => "2008-01-14T04:33:35Z"
     })
 
-    PRIVATE_USER = FULL_USER.merge({
+    PRIVATE_USER ||= FULL_USER.merge({
       "total_private_repos" => 100,
       "owned_private_repos" => 100,
       "private_gists"       => 81,
@@ -169,16 +185,16 @@ module GitHub
       }
     })
 
-    SIMPLE_PUBLIC_KEY = {
+    SIMPLE_PUBLIC_KEY ||= {
       "id"    => 1,
       "key"   => "ssh-rsa AAA..."
     }
 
-    PUBLIC_KEY = SIMPLE_PUBLIC_KEY.merge \
+    PUBLIC_KEY ||= SIMPLE_PUBLIC_KEY.merge \
       "url"   => "https://api.github.com/user/keys/1",
       "title" => "octocat@octomac"
 
-    SIMPLE_REPO = {
+    SIMPLE_REPO ||= {
       "id"               => 1296269,
       "owner"            => USER,
       "name"             => "Hello-World",
@@ -190,13 +206,13 @@ module GitHub
       "html_url"         => "https://github.com/octocat/Hello-World"
     }
 
-    REPO_PERMISSIONS = {
+    REPO_PERMISSIONS ||= {
       "admin"  => false,
       "push"   => false,
       "pull"   => true
     }
 
-    REPO = SIMPLE_REPO.merge({
+    REPO ||= SIMPLE_REPO.merge({
       "clone_url"         => "https://github.com/octocat/Hello-World.git",
       "git_url"           => "git://github.com/octocat/Hello-World.git",
       "ssh_url"           => "git@github.com:octocat/Hello-World.git",
@@ -219,14 +235,14 @@ module GitHub
       "permissions"       => REPO_PERMISSIONS
     })
 
-    FULL_REPO = REPO.merge({
+    FULL_REPO ||= REPO.merge({
       "subscribers_count" => 42,
       "organization"      => USER.merge('type' => 'Organization'),
       "parent"            => REPO,
       "source"            => REPO
     })
 
-    TAG = {
+    TAG ||= {
       "name"        => "v0.1",
       "commit"      => {
           "sha"     => "c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc",
@@ -236,7 +252,7 @@ module GitHub
       "tarball_url" => "https://github.com/octocat/Hello-World/tarball/v0.1",
     }
 
-    BRANCHES = [
+    BRANCHES ||= [
       {
         "name"   => "master",
         "commit" => {
@@ -246,7 +262,7 @@ module GitHub
       }
     ]
 
-    BRANCH = {"name"=>"master",
+    BRANCH ||= {"name"=>"master",
  "commit"=>
   {"sha"=>"7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
    "commit"=>
@@ -293,7 +309,7 @@ module GitHub
   {"html"=>"https://github.com/octocat/Hello-World/tree/master",
    "self"=>"https://api.github.com/repos/octocat/Hello-World/branches/master"}}
 
- MERGE_COMMIT = {
+ MERGE_COMMIT ||= {
   "sha" => "7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
   "commit" => {
     "author" => {
@@ -365,7 +381,7 @@ module GitHub
   ]
 }
 
-    MILESTONE = {
+    MILESTONE ||= {
       "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1",
       "number"        => 1,
       "state"         => "open",
@@ -380,7 +396,7 @@ module GitHub
     }
 
 
-    PULL = {
+    PULL ||= {
       "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
       "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
       "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
@@ -434,7 +450,7 @@ module GitHub
       "user" => USER
     }
 
-    FULL_PULL = PULL.merge({
+    FULL_PULL ||= PULL.merge({
       "merge_commit_sha" =>  "e5bd3914e2e596debea16f433f57875b5b90bcd6",
       "merged"        => false,
       "mergeable"     => true,
@@ -446,7 +462,7 @@ module GitHub
       "changed_files" => 5
     })
 
-    COMMIT = {
+    COMMIT ||= {
       "url" => "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
       "html_url" => "https://github.com/octocat/Hello-World/commit/6dcb09b5b57875f334f61aebed695e2e4193db5e",
@@ -478,7 +494,7 @@ module GitHub
       }]
     }
 
-    FULL_COMMIT = COMMIT.merge({
+    FULL_COMMIT ||= COMMIT.merge({
       "stats" => {
         "additions" => 104,
         "deletions" => 4,
@@ -496,7 +512,7 @@ module GitHub
       }]
     })
 
-    COMMIT_COMMENT = {
+    COMMIT_COMMENT ||= {
       "html_url"   => "https://github.com/octocat/Hello-World/commit/6dcb09b5b57875f334f61aebed695e2e4193db5e#commitcomment-1",
       "url"        => "https://api.github.com/repos/octocat/Hello-World/comments/1",
       "id"         => 1,
@@ -510,7 +526,7 @@ module GitHub
       "updated_at" => "2011-04-14T16:00:49Z"
     }
 
-    FILE = {
+    FILE ||= {
       "sha"       => "bbcd538c8e72b8c175046e27cc8f907076331401",
       "filename"  => "file1.txt",
       "status"    => "added",
@@ -523,7 +539,7 @@ module GitHub
       "patch"     => "@@ -132,7 +132,7 @@ module Test @@ -1000,7 +1000,7 @@ module Test"
     }
 
-    COMMIT_COMPARISON = {
+    COMMIT_COMPARISON ||= {
       "url" => "https://api.github.com/repos/octocat/Hello-World/compare/master...topic",
       "html_url" => "https://github.com/octocat/Hello-World/compare/master...topic",
       "permalink_url" => "https://github.com/octocat/Hello-World/compare/octocat:bbcd538c8e72b8c175046e27cc8f907076331401...octocat:0328041d1152db8ae77652d1618a02e57f745f17",
@@ -538,7 +554,7 @@ module GitHub
       "files" => [FILE],
     }
 
-	PULL_COMMENT = {
+  PULL_COMMENT ||= {
       "url"                => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/1",
       "id"                 => 1,
       "diff_hunk"          => "@@ -16,33 +16,40 @@ public class Connection : IConnection...",
@@ -563,21 +579,22 @@ module GitHub
       }
     }
 
-    RELEASE_ASSET = {
-      "url"            => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
-      "id"             => 1,
-      "name"           => "example.zip",
-      "label"          => "short description",
-      "state"          => "uploaded",
-      "content_type"   => "application/zip",
-      "size"           => 1024,
-      "download_count" => 42,
-      "created_at"     => "2013-02-27T19:35:32Z",
-      "updated_at"     => "2013-02-27T19:35:32Z",
-      "uploader"       => USER
+    RELEASE_ASSET ||= {
+      "url"                  => "https://api.github.com/repos/octocat/Hello-World/releases/assets/1",
+      "browser_download_url" => "https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip",
+      "id"                   => 1,
+      "name"                 => "example.zip",
+      "label"                => "short description",
+      "state"                => "uploaded",
+      "content_type"         => "application/zip",
+      "size"                 => 1024,
+      "download_count"       => 42,
+      "created_at"           => "2013-02-27T19:35:32Z",
+      "updated_at"           => "2013-02-27T19:35:32Z",
+      "uploader"             => USER
     }
 
-    RELEASE = {
+    RELEASE ||= {
       "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
       "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
       "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
@@ -597,11 +614,11 @@ module GitHub
       "assets"           => [RELEASE_ASSET]
     }
 
-    CREATED_RELEASE = RELEASE.merge({
+    CREATED_RELEASE ||= RELEASE.merge({
       "assets"         => []
     })
 
-    DOWNLOAD = {
+    DOWNLOAD ||= {
       "url"            => "https://api.github.com/repos/octocat/Hello-World/downloads/1",
       "html_url"       => "https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg",
       "id"             => 1,
@@ -612,7 +629,7 @@ module GitHub
       "content_type"   => ".jpg"
     }
 
-    CREATE_DOWNLOAD = DOWNLOAD.merge({
+    CREATE_DOWNLOAD ||= DOWNLOAD.merge({
       "policy"         => "ewogICAg...",
       "signature"      => "mwnFDC...",
       "bucket"         => "github",
@@ -626,14 +643,14 @@ module GitHub
       "s3_url"         => "https://github.s3.amazonaws.com/"
     })
 
-    PAGES = {
+    PAGES ||= {
       "url" => "https://api.github.com/repos/github/developer.github.com/pages",
       "status" => "built",
       "cname" => "developer.github.com",
       "custom_404" => false
     }
 
-    PAGES_BUILD = {
+    PAGES_BUILD ||= {
       "url" => "https://api.github.com/repos/github/developer.github.com/pages/builds/5472601",
       "status" => "built",
       "error" => {
@@ -646,14 +663,14 @@ module GitHub
       "updated_at" => "2014-02-10T19:00:51Z"
     }
 
-    ORG = {
+    ORG ||= {
       "login"      => "github",
       "id"         => 1,
       "url"        => "https://api.github.com/orgs/github",
       "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
     }
 
-    FULL_ORG = ORG.merge({
+    FULL_ORG ||= ORG.merge({
       "name"         => "github",
       "company"      => "GitHub",
       "blog"         => "https://github.com/blog",
@@ -668,7 +685,7 @@ module GitHub
       "type"         => "Organization"
     })
 
-    PRIVATE_ORG = FULL_ORG.merge({
+    PRIVATE_ORG ||= FULL_ORG.merge({
       "total_private_repos" => 100,
       "owned_private_repos" => 100,
       "private_gists"       => 81,
@@ -682,26 +699,38 @@ module GitHub
       }
     })
 
-    TEAM = {
+    TEAM ||= {
       "url" => "https://api.github.com/teams/1",
       "name" => "Owners",
       "id" => 1
     }
 
-    FULL_TEAM = TEAM.merge({
+    FULL_TEAM ||= TEAM.merge({
       "permission" => "admin",
       "members_count" => 3,
       "repos_count" => 10,
       "organization" =>  ORG
     })
 
-    LABEL = {
+    TEAM_MEMBERSHIP ||= {
+      "url" => "https://api.github.com/teams/1/memberships/octocat"
+    }
+
+    ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
+      "status" => "active"
+    )
+
+    PENDING_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
+      "status" => "pending"
+    )
+
+    LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
       "name"  => "bug",
       "color" => "f29513"
     }
 
-    ISSUE = {
+    ISSUE ||= {
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1347",
       "number"     => 1347,
@@ -724,11 +753,11 @@ module GitHub
       "updated_at" => "2011-04-22T13:33:48Z"
     }
 
-    FULL_ISSUE = ISSUE.merge({
+    FULL_ISSUE ||= ISSUE.merge({
       "closed_by" => USER
     })
 
-    ISSUE_COMMENT = {
+    ISSUE_COMMENT ||= {
       "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/comments/1",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1347#issuecomment-1",
@@ -738,7 +767,7 @@ module GitHub
       "updated_at" => "2011-04-14T16:00:49Z"
     }
 
-    ISSUE_EVENT = {
+    ISSUE_EVENT ||= {
       "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/events/1",
       "actor"      => USER,
@@ -747,9 +776,9 @@ module GitHub
       "created_at" => "2011-04-14T16:00:49Z"
     }
 
-    FULL_ISSUE_EVENT = ISSUE_EVENT.merge('issue' => ISSUE)
+    FULL_ISSUE_EVENT ||= ISSUE_EVENT.merge('issue' => ISSUE)
 
-    ISSUE_SEARCH_ITEM = {
+    ISSUE_SEARCH_ITEM ||= {
       "gravatar_id" =>  "4c3d600867886124a73f14a907b1a955",
       "position" =>  10,
       "number" =>  10,
@@ -769,11 +798,11 @@ module GitHub
       "state" =>  "open"
     }
 
-    ISSUE_SEARCH_RESULTS = {
+    ISSUE_SEARCH_RESULTS ||= {
       "issues" => [ISSUE_SEARCH_ITEM]
     }
 
-    ISSUE_SEARCH_V3_RESULTS = {
+    ISSUE_SEARCH_V3_RESULTS ||= {
       "total_count" => 280,
       "incomplete_results" => false,
       "items" => [
@@ -829,7 +858,7 @@ module GitHub
       ]
     }
 
-    ISSUE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+    ISSUE_SEARCH_V3_RESULTS_HIGHLIGHTING ||= {
       "text_matches" => [
         {
           "object_url" => "https://api.github.com/repositories/215335/issues/132",
@@ -871,7 +900,7 @@ module GitHub
       ]
     }
 
-    REPO_SEARCH_ITEM = {
+    REPO_SEARCH_ITEM ||= {
       "type" => "repo",
       "created" => "2011-09-05T11:07:54Z",
       "watchers" => 2913,
@@ -897,11 +926,11 @@ module GitHub
       "created_at" => "2011-09-05T11:07:54Z"
     }
 
-    REPO_SEARCH_RESULTS = {
+    REPO_SEARCH_RESULTS ||= {
       "repositories" => [REPO_SEARCH_ITEM]
     }
 
-    REPO_SEARCH_V3_RESULTS = {
+    REPO_SEARCH_V3_RESULTS ||= {
       "total_count" => 40,
       "incomplete_results" => false,
       "items" => [
@@ -940,7 +969,7 @@ module GitHub
       ]
     }
 
-    REPO_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+    REPO_SEARCH_V3_RESULTS_HIGHLIGHTING ||= {
       "text_matches" => [
         {
           "object_url" => "https://api.github.com/repositories/3081286",
@@ -975,7 +1004,7 @@ module GitHub
       ]
     }
 
-    CODE_SEARCH_V3_RESULTS = {
+    CODE_SEARCH_V3_RESULTS ||= {
       "total_count" => 7,
       "incomplete_results" => false,
       "items" => [
@@ -1054,7 +1083,7 @@ module GitHub
       ]
     }
 
-    CODE_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+    CODE_SEARCH_V3_RESULTS_HIGHLIGHTING ||= {
       "text_matches" => [
         {
           "object_url" => "https://api.github.com/repositories/167174/contents/src/attributes/classes.js?ref=825ac3773694e0cd23ee74895fd5aeb535b27da4",
@@ -1089,7 +1118,7 @@ module GitHub
       ]
     }
 
-    USER_SEARCH_ITEM = {
+    USER_SEARCH_ITEM ||= {
       "gravatar_id" => "70889091349f7598bce9afa588034310",
       "name" => "Hirotaka Kawata",
       "created_at" => "2009-10-05T01:32:06Z",
@@ -1108,11 +1137,11 @@ module GitHub
       "created" => "2009-10-05T01:32:06Z"
     }
 
-    USER_SEARCH_RESULTS = {
+    USER_SEARCH_RESULTS ||= {
       "users" => [USER_SEARCH_ITEM]
     }
 
-    USER_SEARCH_V3_RESULTS = {
+    USER_SEARCH_V3_RESULTS ||= {
       "total_count" => 12,
       "incomplete_results" => false,
       "items" => [
@@ -1135,7 +1164,7 @@ module GitHub
     }
 
 
-    USER_SEARCH_V3_RESULTS_HIGHLIGHTING = {
+    USER_SEARCH_V3_RESULTS_HIGHLIGHTING ||= {
      "text_matches" => [
         {
           "object_url" => "https://api.github.com/users/mojombo",
@@ -1170,7 +1199,7 @@ module GitHub
       ]
     }
 
-    EMAIL_SEARCH_RESULTS = {
+    EMAIL_SEARCH_RESULTS ||= {
       "user" => {
         "public_repo_count" => 2,
         "public_gist_count" => 1,
@@ -1190,7 +1219,7 @@ module GitHub
       }
     }
 
-    GIST_HISTORY = [
+    GIST_HISTORY ||= [
       {
         "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
         "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
@@ -1205,7 +1234,7 @@ module GitHub
     ]
 
 
-    GIST_FORKS = [
+    GIST_FORKS ||= [
       {
         "user" => USER,
         "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
@@ -1215,7 +1244,7 @@ module GitHub
       }
     ]
 
-    GIST_FILE = {
+    GIST_FILE ||= {
       "ring.erl" => {
         "size"      => 932,
         "raw_url"   => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
@@ -1224,7 +1253,7 @@ module GitHub
       }
     }
 
-    GIST_FILE_WITH_CONTENT = {
+    GIST_FILE_WITH_CONTENT ||= {
       "ring.erl" => {
         "size"      => 932,
         "raw_url"   => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
@@ -1235,7 +1264,7 @@ module GitHub
       }
     }
 
-    GIST = {
+    GIST ||= {
       "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
       "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
       "commits_url"  => "https://api.github.com/gists/#{SecureRandom.hex(10)}/commits",
@@ -1254,13 +1283,13 @@ module GitHub
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
-    FULL_GIST = GIST.dup.update \
+    FULL_GIST ||= GIST.dup.update \
       "forks"   => GIST_FORKS,
       "history" => GIST_HISTORY,
       "files"   => GIST_FILE_WITH_CONTENT
 
 
-    GIST_COMMENT = {
+    GIST_COMMENT ||= {
       "id"         => 1,
       "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
       "body"       => "Just commenting for the sake of commenting",
@@ -1269,7 +1298,7 @@ module GitHub
       "updated_at" => "2011-04-18T23:23:56Z"
     }
 
-    TREE = {
+    TREE ||= {
       "sha"  => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
       "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
       "tree"  => [
@@ -1295,7 +1324,7 @@ module GitHub
         }
       ]
     }
-    TREE_EXTRA = {
+    TREE_EXTRA ||= {
       "sha"  => "fc6274d15fa3ae2ab983129fb037999f264ba9a7",
       "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/fc6274d15fa3ae2ab983129fb037999f264ba9a7",
       "tree" => [ {
@@ -1307,7 +1336,7 @@ module GitHub
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
       } ]
     }
-    TREE_NEW = {
+    TREE_NEW ||= {
       "sha"  => "cd8274d15fa3ae2ab983129fb037999f264ba9a7",
       "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7",
       "tree" => [ {
@@ -1320,7 +1349,7 @@ module GitHub
       } ]
     }
 
-    GIT_COMMIT = {
+    GIT_COMMIT ||= {
       "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
       "author" => {
@@ -1346,7 +1375,7 @@ module GitHub
       ]
     }
 
-    NEW_COMMIT = {
+    NEW_COMMIT ||= {
       "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
       "author" => {
@@ -1372,7 +1401,7 @@ module GitHub
       ]
     }
 
-    GITTAG = {
+    GITTAG ||= {
       "tag" => "v0.0.1",
       "sha" => "940bd336248efae0f9ee5bc7b2d5c985887b16ac",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac",
@@ -1389,7 +1418,7 @@ module GitHub
       }
     }
 
-    REF = {
+    REF ||= {
       "ref" => "refs/heads/featureA",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA",
       "object" => {
@@ -1399,7 +1428,7 @@ module GitHub
       }
     }
 
-    REFS = [
+    REFS ||= [
       {
         "ref" => "refs/heads/master",
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/master",
@@ -1429,7 +1458,7 @@ module GitHub
       }
     ]
 
-    HOOK = {
+    HOOK ||= {
       "url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1",
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z",
@@ -1441,7 +1470,7 @@ module GitHub
       "id" => 1
     }
 
-    OAUTH_ACCESS = {
+    OAUTH_ACCESS ||= {
       "id" => 1,
       "url" => "https://api.github.com/authorizations/1",
       "scopes" => ["public_repo"],
@@ -1457,9 +1486,9 @@ module GitHub
       "created_at" => "2011-09-06T17:26:27Z"
     }
 
-    OAUTH_ACCESS_WITH_USER = OAUTH_ACCESS.merge(:user => USER)
+    OAUTH_ACCESS_WITH_USER ||= OAUTH_ACCESS.merge(:user => USER)
 
-    EVENT = {
+    EVENT ||= {
       :type   => "Event",
       :public => true,
       :payload => {},
@@ -1486,7 +1515,7 @@ module GitHub
       :id => "12345"
     }
 
-    README_CONTENT = {
+    README_CONTENT ||= {
       "type" =>  "file",
       "encoding" =>  "base64",
       "size" =>  5362,
@@ -1504,7 +1533,7 @@ module GitHub
       },
     }
 
-    SYMLINK_CONTENT = {
+    SYMLINK_CONTENT ||= {
       "type" => "symlink",
       "target" => "/path/to/symlink/target",
       "size" => 23,
@@ -1521,7 +1550,7 @@ module GitHub
       },
     }
 
-    SUBMODULE_CONTENT = {
+    SUBMODULE_CONTENT ||= {
       "type" => "submodule",
       "submodule_git_url" => "git://github.com/jquery/qunit.git",
       "size" => 0,
@@ -1538,7 +1567,7 @@ module GitHub
       }
     }
 
-    DIRECTORY_CONTENT = [
+    DIRECTORY_CONTENT ||= [
       {
         "type" => "file",
         "size" => 625,
@@ -1571,7 +1600,7 @@ module GitHub
       },
     ]
 
-    DEPLOYMENT = {
+    DEPLOYMENT ||= {
       "url" => "https://api.github.com/repos/octocat/example/deployments/1",
       "id" => 1,
       "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
@@ -1583,10 +1612,11 @@ module GitHub
       "creator" => USER,
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
-      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
+      "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses",
+      "repository_url" => "https://api.github.com/repos/octocat/example"
     }
 
-    DEPLOYMENT_STATUS = {
+    DEPLOYMENT_STATUS ||= {
       "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
       "id" => 1,
       "state" => "success",
@@ -1596,6 +1626,7 @@ module GitHub
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "repository_url" => "https://api.github.com/repos/octocat/example",
       "deployment" => {
         "id" => 1,
         "ref" => "master",
@@ -1611,7 +1642,7 @@ module GitHub
       }
     }
 
-    SIMPLE_STATUS = {
+    SIMPLE_STATUS ||= {
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "state" => "success",
@@ -1622,14 +1653,15 @@ module GitHub
       "context" => "continuous-integration/jenkins"
     }
 
-    STATUS = SIMPLE_STATUS.merge(
+    STATUS ||= SIMPLE_STATUS.merge(
       "creator" => USER
     )
 
-    COMBINED_STATUS = {
+    COMBINED_STATUS ||= {
       "state" => "success",
       "name"  => "octocat/Hello-World",
       "sha"   => COMMIT["sha"],
+      "total_count" => 2,
       "statuses" => [
         SIMPLE_STATUS.merge("context" => "continuous-integration/jenkins"),
         SIMPLE_STATUS.merge("context" => "security/brakeman")
@@ -1638,13 +1670,13 @@ module GitHub
       "repository_url" => "https://api.github.com/repos/octocat/Hello-World"
     }
 
-    META = {
+    META ||= {
       :hooks => ['127.0.0.1/32'],
       :git => ['127.0.0.1/32'],
       :verifiable_password_authentication => true
     }
 
-    BLOB = {
+    BLOB ||= {
       :content => "Content of the blob",
       :encoding => "utf-8",
       :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
@@ -1652,12 +1684,12 @@ module GitHub
       :size => 100
     }
 
-    BLOB_AFTER_CREATE = {
+    BLOB_AFTER_CREATE ||= {
       :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
-    CONTENT_CRUD = {
+    CONTENT_CRUD ||= {
       "content" => {
         "name" => "hello.txt",
         "path" => "notes/hello.txt",
@@ -1702,7 +1734,7 @@ module GitHub
       }
     }
 
-    THREAD = {
+    THREAD ||= {
       :id => "1",
       :repository => SIMPLE_REPO,
       :subject => {
@@ -1718,7 +1750,7 @@ module GitHub
       :url => "https://api.github.com/notifications/threads/1"
     }
 
-    SUBSCRIPTION = {
+    SUBSCRIPTION ||= {
       :subscribed => true,
       :ignored => false,
       :reason => nil,
@@ -1727,17 +1759,17 @@ module GitHub
       :thread_url => "https://api.github.com/notifications/threads/1"
     }
 
-    REPO_SUBSCRIPTION = SUBSCRIPTION.merge \
+    REPO_SUBSCRIPTION ||= SUBSCRIPTION.merge \
       :url => "https://api.github.com/repos/octocat/example/subscription",
       :repository_url => "https://api.github.com/repos/octocat/example"
     REPO_SUBSCRIPTION.delete :thread_url
 
-    TEMPLATE = {
+    TEMPLATE ||= {
       :name => "C",
       :source => "# Object files\n*.o\n\n# Libraries\n*.lib\n*.a\n\n# Shared objects (inc. Windows DLLs)\n*.dll\n*.so\n*.so.*\n*.dylib\n\n# Executables\n*.exe\n*.out\n*.app\n"
     }
 
-    TEMPLATES = [
+    TEMPLATES ||= [
       "Actionscript",
       "Android",
       "AppceleratorTitanium",
@@ -1747,13 +1779,13 @@ module GitHub
       "C++"
     ]
 
-    USER_EMAIL = {
+    USER_EMAIL ||= {
       :email    => "octocat@github.com",
       :verified => true,
       :primary  => true
     }
 
-    REPO_STATS_CONTRIBUTORS = [{
+    REPO_STATS_CONTRIBUTORS ||= [{
       :author => USER,
       :total => 135,
       :weeks => [
@@ -1766,30 +1798,30 @@ module GitHub
       ]
     }]
 
-    REPO_STATS_COMMIT_ACTIVITY = [{
+    REPO_STATS_COMMIT_ACTIVITY ||= [{
       :days => [0, 3, 26, 20, 39, 1, 0],
       :total => 89,
       :week => 1336280400
     }]
 
-    REPO_STATS_CODE_FREQUENCY = [[
+    REPO_STATS_CODE_FREQUENCY ||= [[
       1302998400,
       1124,
       -435
     ]]
 
-    REPO_STATS_PARTICIPATION = {
+    REPO_STATS_PARTICIPATION ||= {
       :all => [11,21,15,2,8,1,8,23,17,21,11,10,33,91,38,34,22,23,32,3,43,87,71,18,13,5,13,16,66,27,12,45,110,117,13,8,18,9,19,26,39,12,20,31,46,91,45,10,24,9,29,7],
       :owner => [3,2,3,0,2,0,5,14,7,9,1,5,0,48,19,2,0,1,10,2,23,40,35,8,8,2,10,6,30,0,2,9,53,104,3,3,10,4,7,11,21,4,4,22,26,63,11,2,14,1,10,3]
     }
 
-    REPO_STATS_PUNCH_CARD = [
+    REPO_STATS_PUNCH_CARD ||= [
       [0,0,5],
       [0,1,43],
       [0,2,21]
     ]
 
-    FEEDS = {
+    FEEDS ||= {
       :timeline_url => "https://github.com/timeline",
       :user_url => "https://github.com/{user}",
       :current_user_public_url => "https://github.com/defunkt",
@@ -1824,7 +1856,7 @@ module GitHub
       }
     }
 
-    EMOJIS = {
+    EMOJIS ||= {
       "+1" => "https://github.global.ssl.fastly.net/images/icons/emoji/+1.png?v5",
       "-1" => "https://github.global.ssl.fastly.net/images/icons/emoji/-1.png?v5",
       "100" => "https://github.global.ssl.fastly.net/images/icons/emoji/100.png?v5",
@@ -1834,6 +1866,263 @@ module GitHub
       "ab" => "https://github.global.ssl.fastly.net/images/icons/emoji/ab.png?v5"
     }
 
+    ADMIN_STATS ||= {
+      "repos" =>  {
+        "total_repos" => 212,
+        "root_repos" => 194,
+        "fork_repos" => 18,
+        "org_repos" => 51,
+        "total_pushes" => 3082,
+        "total_wikis" => 15
+      },
+      "hooks" =>  {
+        "total_hooks" => 27,
+        "active_hooks" => 23,
+        "inactive_hooks" => 4
+      },
+      "pages" =>  {
+        "total_pages" => 36
+      },
+      "orgs" =>  {
+        "total_orgs" => 33,
+        "disabled_orgs" => 0,
+        "total_teams" => 60,
+        "total_team_members" => 314
+      },
+      "users" =>  {
+        "total_users" => 254,
+        "admin_users" => 45,
+        "suspended_users" => 21
+      },
+      "pulls" =>  {
+        "total_pulls" => 86,
+        "merged_pulls" => 60,
+        "mergeable_pulls" => 21,
+        "unmergeable_pulls" => 3,
+      },
+      "issues" =>  {
+        "total_issues" => 179,
+        "open_issues" => 83,
+        "closed_issues" => 96
+      },
+      "milestones" =>  {
+        "total_milestones" => 7,
+        "open_milestones" => 6,
+        "closed_milestones" => 1
+      },
+      "gists" =>  {
+        "total_gists" => 178,
+        "private_gists" => 151,
+        "public_gists" => 25
+      },
+      "comments" =>  {
+        "total_commit_comments" => 6,
+        "total_gist_comments" => 28,
+        "total_issue_comments" => 366,
+        "total_pull_request_comments" => 30
+      }
+    }
+
+    LICENSING ||= {
+      "seats" => 1400,
+      "seats_used" => 1316,
+      "seats_available" => 84,
+      "kind" => "standard",
+      "days_until_expiration" => 365,
+      "expire_at" => "2016/02/06 12:41:52 -0600"
+    }
+
+    INDEXING_SUCCESS ||= {
+      "message" => "Repository 'kansaichris/japaning' has been added to the indexing queue"
+    }
+
+    CONFIG_STATUSES ||= {
+      "status" => "running",
+      "progress" => [
+        {
+          "status" =>  "DONE",
+          "key" =>  "Appliance core components"
+        },
+        {
+          "status" =>  "DONE",
+          "key" =>  "GitHub utilities"
+        },
+        {
+          "status" =>  "DONE",
+          "key" =>  "GitHub applications"
+        },
+        {
+          "status" =>  "CONFIGURING",
+          "key" =>  "GitHub services"
+        },
+        {
+          "status" =>  "PENDING",
+          "key" =>  "Reloading appliance services"
+        }
+      ]
+    }
+
+    FETCH_SETTINGS ||= {
+      "enterprise" => {
+        "private_mode" => false,
+        "github_hostname" => "ghe.local",
+        "auth_mode" => "default",
+        "storage_mode" => "rootfs",
+        "admin_password" => nil,
+        "configuration_id" => 1401777404,
+        "configuration_run_count" => 4,
+        "package_version" => "11.10.332",
+        "avatar" => {
+          "enabled" => false,
+          "uri" => ""
+        },
+        "customer" => {
+          "name" => "GitHub",
+          "email" => "stannis@themannis.biz",
+          "uuid" => "af6cac80-e4e1-012e-d822-1231380e52e9",
+          "secret_key_data" => "-----BEGIN PGP PRIVATE KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nlQcYBE5TCgsBEACk4yHpUcapplebaumBMXYMiLF+nCQ0lxpx...\n-----END PGP PRIVATE KEY BLOCK-----\n",
+          "public_key_data" => "-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nmI0ETqzZYgEEALSe6snowdenXyqvLfSQ34HWD6C7....\n-----END PGP PUBLIC KEY BLOCK-----\n"
+        },
+        "license" => {
+          "seats" => 0,
+          "evaluation" => false,
+          "expire_at" => "2015-04-27T00:00:00-07:00",
+          "perpetual" => false,
+          "unlimited_seating" => true,
+          "support_key" => "ssh-rsa AAAAB3N....",
+          "ssh_allowed" => true
+        },
+        "github_ssl" => {
+          "enabled" => false,
+          "cert" => nil,
+          "key" => nil
+        },
+        "ldap" => {
+          "host" => "",
+          "port" => "",
+          "base" => [
+
+          ],
+          "uid" => "",
+          "bind_dn" => "",
+          "password" => "",
+          "method" => "Plain",
+          "user_groups" => [
+
+          ],
+          "admin_group" => ""
+        },
+        "cas" => {
+          "url" => ""
+        },
+        "github_oauth" => {
+          "client_id" => "12313412",
+          "client_secret" => "kj123131132",
+          "organization_name" => "Homestar Runners",
+          "organization_team" => "homestarrunners/owners"
+        },
+        "smtp" => {
+          "enabled" => true,
+          "address" => "smtp.example.com",
+          "authentication" => "plain",
+          "port" => "1234",
+          "domain" => "blah",
+          "username" => "foo",
+          "user_name" => "mr_foo",
+          "enable_starttls_auto" => true,
+          "password" => "bar",
+          "support_address" => "enterprise@github.com",
+          "noreply_address" => "noreply@github.com"
+        },
+        "dns" => {
+          "primary_nameserver" => "8.8.8.8",
+          "secondary_nameserver" => "8.8.4.4"
+        },
+        "ntp" => {
+          "primary_server" => "0.ubuntu.pool.ntp.org",
+          "secondary_server" => "1.ubuntu.pool.ntp.org"
+        },
+        "timezone" => {
+          "identifier" => "UTC"
+        },
+        "device" => {
+          "path" => "/dev/xyz"
+        },
+        "snmp" => {
+          "enabled" => false,
+          "community" => ""
+        },
+        "rsyslog" => {
+          "enabled" => false,
+          "server" => "",
+          "protocol_name" => "TCP"
+        },
+        "assets" => {
+          "storage" => "file",
+          "bucket" => nil,
+          "host_name" => nil,
+          "key_id" => nil,
+          "access_key" => nil
+        },
+        "pages" => {
+          "enabled" => true
+        },
+        "collectd" => {
+          "enabled" => false,
+          "server" => "",
+          "port" => "",
+          "encryption" => "",
+          "username" => "foo",
+          "password" => "bar"
+        }
+      },
+      "run_list" => [
+        "role[configure]"
+      ]
+    }
+
+    CHECK_MAINTENANCE_STATUS ||= {
+      "status" =>  "scheduled",
+      "scheduled_time" =>  "Tuesday, January 22 at 15 => 34 -0800",
+      "connection_services" =>  [
+        {
+          "name" =>  "git operations", "number" =>  0
+        },
+        {
+          "name" =>  "mysql queries", "number" =>  233
+        },
+        {
+          "name" =>  "resque jobs", "number" =>  54
+        }
+      ]
+    }
+
+    SET_MAINTENANCE_STATUS ||= {
+      "status" =>  "scheduled",
+      "scheduled_time" =>  "Tuesday, January 22 at 15 => 34 -0800",
+      "connection_services" =>  [
+        {
+          "name" =>  "git operations", "number" =>  0
+        },
+        {
+          "name" =>  "mysql queries", "number" =>  233
+        },
+        {
+          "name" =>  "resque jobs", "number" =>  54
+        }
+      ]
+    }
+
+    GET_AUTHORIZED_SSH_KEYS ||= [
+      {
+        "key" => "ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
+        "pretty-print" => "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
+      },
+      {
+        "key" => "ssh-rsa AAAAB3NzaC1yc2EAAAAB...",
+        "pretty-print" => "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
+      }
+    ]
   end
 end
 

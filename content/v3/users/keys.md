@@ -9,7 +9,7 @@ title: User Public Keys | GitHub API
 
 ## List public keys for a user
 
-    GET /users/:user/keys
+    GET /users/:username/keys
 
 Lists the _verified_ public keys for a user.  This is accessible by anyone.
 

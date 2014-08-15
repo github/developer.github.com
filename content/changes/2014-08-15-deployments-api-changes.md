@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Deployment API Changes
+title: New features for the Deployments API preview
 created_at: 2014-08-15
 author_name: atmos
 ---

@@ -86,7 +86,7 @@ as well.
 
 ## List Deployments
 
-Users with `repo` or `repo_deployment` scopes can view deployments for a repository. Simple filtering is available via query parameters:
+Simple filtering of deployments is available via query parameters:
 
     GET /repos/:owner/:repo/deployments
 

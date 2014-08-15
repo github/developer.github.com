@@ -26,23 +26,6 @@ and act on. This enables developers and organizations to build loosely-coupled
 tooling around deployments, without having to worry about implementation
 details of delivering different types of applications (e.g., web, native).
 
-A Deployment has a few options it can take at creation time.
-
-A `ref` which can be any named branch, tag, or sha. At GitHub we often deploy
-branches and verify them before we merge a pull request.
-
-An `environment` that allows deployments to be issued to different runtime
-environments. Teams often have multiple environments for verifying their
-applications, like 'production', 'staging', and 'qa'. This allows for easy
-tracking of which environments had deployments requested. The default
-environment is 'production'
-
-Deployments also support a `task` attribute. This task is used by the
-deployment system to allow different execution paths. In the web world this
-might be 'deploy:migrations' to run schema changes on the system. In the
-compiled world this could be a flag to compile an application with debugging
-enabled.
-
 Deployment Statuses allow external services to mark deployments with a
 'success', 'failure', 'error', or 'pending' state, which can then be consumed
 by any system listening for `deployment_status` events.
@@ -121,6 +104,16 @@ Name | Type | Description
 
 ## Create a Deployment
 
+Deployments offer a few configurable parameters with sane defaults.
+
+The `ref` parameter can be any named branch, tag, or sha. At GitHub we often
+deploy branches and verify them before we merge a pull request.
+
+The `environment` parameters allows deployments to be issued to different
+runtime environments. Teams often have multiple environments for verifying
+their applications, like 'production', 'staging', and 'qa'. This allows for
+easy tracking of which environments had deployments requested. The default
+environment is 'production'
 
 The `auto_merge` parameter is used to ensure that the requested ref is not
 behind the repository's default branch. If the ref *is* behind the default
@@ -128,13 +121,23 @@ branch for the repository, we will attempt to merge it for you. If the merge
 succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.
 
-By default, [commit statuses](/v3/repos/statuses) for every submitted context must be in a 'success' state. The `required_contexts` parameter allows you to specify a subset of contexts that must be "success", or to specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do not require any contexts or create any commit statuses, the deployment will always succeed.
+By default, [commit statuses](/v3/repos/statuses) for every submitted context
+must be in a 'success' state. The `required_contexts` parameter allows you to
+specify a subset of contexts that must be "success", or to specify contexts
+that have not yet been submitted. You are not required to use commit statuses
+to deploy. If you do not require any contexts or create any commit statuses,
+the deployment will always succeed.
 
 The `payload` parameter is available for any extra information that a
 deployment system might need. It is a JSON text field that will be passed on
 when a deployment event is dispatched.
 
-Users with push access can create a deployment for a given ref:
+The `task` parameter is used by the deployment system to allow different
+execution paths. In the web world this might be 'deploy:migrations' to run
+schema changes on the system. In the compiled world this could be a flag to
+compile an application with debugging enabled.
+
+Users with `repo` or `repo_deployment` scopes can create a deployment for a given ref:
 
     POST /repos/:owner/:repo/deployments
 

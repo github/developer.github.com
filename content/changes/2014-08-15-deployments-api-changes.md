@@ -11,6 +11,11 @@ We're still working on the [Deployments API preview][deployments-preview], and w
 
 You can now search for deployments via query parameters to the [listing endpoint][listing-endpoint]. You can filter on `sha`, `ref`, `task`, and `environment`. This makes it easier to answer questions like "when was the last time someone deployed to staging?"
 
+<pre class="terminal">
+$ curl -H "Authorization: token [yours]" \
+       https://api.github.com/repos/octocat/my-repo/deployments?environment=staging
+</pre>
+
 ## New Attribute
 
 We've also added a `task` attribute to the deployments model. The `task` attribute exists to allow you to specify tasks other than just pushing code. Popular deployment tools like [capistrano][capistrano] and [fabric][fabric] support named tasks to do things like run schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.

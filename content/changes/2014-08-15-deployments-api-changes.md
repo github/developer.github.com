@@ -5,7 +5,7 @@ created_at: 2014-08-15
 author_name: atmos
 ---
 
-We're still working on the [Deployments API preview][deployments-preview], and we have a couple of new features to announce.
+We've added two new feature to the [Deployments API preview][deployments-preview]: the ability to query deployments and a new task attribute for naming events.
 
 ## API Changes
 

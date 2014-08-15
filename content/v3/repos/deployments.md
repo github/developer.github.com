@@ -26,6 +26,23 @@ and act on. This enables developers and organizations to build loosely-coupled
 tooling around deployments, without having to worry about implementation
 details of delivering different types of applications (e.g., web, native).
 
+A Deployment has a few options it can take at creation time.
+
+A `ref` which can be any named branch, tag, or sha. At GitHub we often deploy
+branches and verify them before we merge a pull request.
+
+An `environment` that allows deployments to be issued to different runtime
+environments. Teams often have multiple environments for verifying their
+applications, like 'production', 'staging', and 'qa'. This allows for easy
+tracking of which environments had deployments requested. The default
+environment is 'production'
+
+Deployments also support a `task` attribute. This task is used by the
+deployment system to allow different execution paths. In the web world this
+might be 'deploy:migrations' to run schema changes on the system. In the
+compiled world this could be a flag to compile an application with debugging
+enabled.
+
 Deployment Statuses allow external services to mark deployments with a
 'success', 'failure', 'error', or 'pending' state, which can then be consumed
 by any system listening for `deployment_status` events.
@@ -72,12 +89,12 @@ Below is a simple sequence diagram for how these interactions would work.
 </pre>
 
 Keep in mind that GitHub is never actually accessing your servers. It's up to
-your 3rd party integration to interact with deployment events.
-This allows for [github-services](https://github.com/github/github-services)
-integrations as well as running your own systems depending on your use case.
-Multiple systems can listen for deployment events, and it's up to each of
-those systems to decide whether or not they're responsible for pushing the code
-out to your servers, building native code, etc.
+your 3rd party integration to interact with deployment events.  This allows for
+[github-services](https://github.com/github/github-services) integrations as
+well as running your own systems depending on your use case.  Multiple systems
+can listen for deployment events, and it's up to each of those systems to
+decide whether or not they're responsible for pushing the code out to your
+servers, building native code, etc.
 
 Note that the `repo_deployment` [OAuth scope](/v3/oauth/#scopes) grants
 targeted access to Deployments and Deployment Statuses **without**

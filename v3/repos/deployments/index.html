@@ -127,12 +127,12 @@ made.</p>
 </pre>
 
 <p>Keep in mind that GitHub is never actually accessing your servers. It’s up to
-your 3rd party integration to interact with deployment events.
-This allows for <a href="https://github.com/github/github-services">github-services</a>
-integrations as well as running your own systems depending on your use case.
-Multiple systems can listen for deployment events, and it’s up to each of
-those systems to decide whether or not they’re responsible for pushing the code
-out to your servers, building native code, etc.</p>
+your 3rd party integration to interact with deployment events.  This allows for
+<a href="https://github.com/github/github-services">github-services</a> integrations as
+well as running your own systems depending on your use case.  Multiple systems
+can listen for deployment events, and it’s up to each of those systems to
+decide whether or not they’re responsible for pushing the code out to your
+servers, building native code, etc.</p>
 
 <p>Note that the <code>repo_deployment</code> <a href="/v3/oauth/#scopes">OAuth scope</a> grants
 targeted access to Deployments and Deployment Statuses <strong>without</strong>
@@ -141,10 +141,46 @@ as well.</p>
 
 <h2 id="list-deployments">List Deployments</h2>
 
-<p>Users with pull access can view deployments for a repository:</p>
+<p>Simple filtering of deployments is available via query parameters:</p>
 
 <pre><code>GET /repos/:owner/:repo/deployments
 </code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>sha</code></td>
+      <td><code>string</code></td>
+      <td>The short or long sha that was recorded at creation time. Default: <code>none</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>ref</code></td>
+      <td><code>string</code></td>
+      <td>The name of the ref. This can be a branch, tag, or sha. Default: <code>none</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>task</code></td>
+      <td><code>string</code></td>
+      <td>The name of the task for the deployment. e.g. <code>deploy</code> or <code>deploy:migrations</code>. Default: <code>none</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>environment</code></td>
+      <td><code>string</code></td>
+      <td>The name of the environment that was deployed to. e.g. <code>staging</code> or <code>production</code>. Default: <code>none</code>
+</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="response">Response</h3>
 
@@ -160,6 +196,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
     <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
+    <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"deploy"</span><span class="p">,</span>
     <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"deploy:migrate"</span>
     <span class="p">},</span>
@@ -193,19 +230,40 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="create-a-deployment">Create a Deployment</h2>
 
+<p>Deployments offer a few configurable parameters with sane defaults.</p>
+
+<p>The <code>ref</code> parameter can be any named branch, tag, or sha. At GitHub we often
+deploy branches and verify them before we merge a pull request.</p>
+
+<p>The <code>environment</code> parameters allows deployments to be issued to different
+runtime environments. Teams often have multiple environments for verifying
+their applications, like ‘production’, ‘staging’, and ‘qa’. This allows for
+easy tracking of which environments had deployments requested. The default
+environment is ‘production’</p>
+
 <p>The <code>auto_merge</code> parameter is used to ensure that the requested ref is not
 behind the repository’s default branch. If the ref <em>is</em> behind the default
 branch for the repository, we will attempt to merge it for you. If the merge
 succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.</p>
 
-<p>By default, <a href="/v3/repos/statuses">commit statuses</a> for every submitted context must be in a ‘success’ state. The <code>required_contexts</code> parameter allows you to specify a subset of contexts that must be “success”, or to specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do not require any contexts or create any commit statuses, the deployment will always succeed.</p>
+<p>By default, <a href="/v3/repos/statuses">commit statuses</a> for every submitted context
+must be in a ‘success’ state. The <code>required_contexts</code> parameter allows you to
+specify a subset of contexts that must be “success”, or to specify contexts
+that have not yet been submitted. You are not required to use commit statuses
+to deploy. If you do not require any contexts or create any commit statuses,
+the deployment will always succeed.</p>
 
 <p>The <code>payload</code> parameter is available for any extra information that a
 deployment system might need. It is a JSON text field that will be passed on
 when a deployment event is dispatched.</p>
 
-<p>Users with push access can create a deployment for a given ref:</p>
+<p>The <code>task</code> parameter is used by the deployment system to allow different
+execution paths. In the web world this might be ‘deploy:migrations’ to run
+schema changes on the system. In the compiled world this could be a flag to
+compile an application with debugging enabled.</p>
+
+<p>Users with <code>repo</code> or <code>repo_deployment</code> scopes can create a deployment for a given ref:</p>
 
 <pre><code>POST /repos/:owner/:repo/deployments
 </code></pre>
@@ -226,6 +284,13 @@ when a deployment event is dispatched.</p>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The ref to deploy. This can be a branch, tag, or sha.</td>
+    </tr>
+    <tr>
+      <td><code>task</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The named task to execute. e.g. <code>deploy</code> or <code>deploy:migrations</code>. Default: <code>deploy</code>
+</td>
     </tr>
     <tr>
       <td><code>auto_merge</code></td>
@@ -280,6 +345,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
   <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"deploy"</span><span class="p">,</span>
   <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"deploy:migrate"</span>
   <span class="p">},</span>
@@ -335,6 +401,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d"</span><span class="p">,</span>
   <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"deploy"</span><span class="p">,</span>
   <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"deploy:migrate"</span>
   <span class="p">},</span>

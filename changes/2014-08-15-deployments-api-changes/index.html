@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Changes to GitHub Services</title>
+  <title>New features for the Deployments API preview</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,56 +40,42 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-2-5-changes-to-services/">
+      <div class="change" id="/changes/2014-08-15-deployments-api-changes/">
 <h2 class="title">
-  <a href="/changes/2013-2-5-changes-to-services/">Upcoming Changes to GitHub Services</a>
+  <a href="/changes/2014-08-15-deployments-api-changes/">New features for the Deployments API preview</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 5, 2013
+    August 15, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie"/>
-      <a href="https://github.com/technoweenie">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos"/>
+      <a href="https://github.com/atmos">atmos</a>
   </li>
 </ul>
 </div>
 
 
-<p>We are finishing up a new GitHub Services backend, dubbed “Hookshot”, to
-increase the speed and reliability of our delivered payloads.  We are doing
-what we can to make this a seamless transition for everyone.  However, there
-are a few notable changes.</p>
+<p>We’ve added two new feature to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>: the ability to query deployments and a new <code>task</code> attribute for different types of deployment tasks.</p>
 
-<ul>
-  <li>
-    <p>There is a new <a href="http://developer.github.com/v3/meta/">Meta API endpoint</a>
-listing the current public IPs that hooks originate from.</p>
-  </li>
-  <li>
-    <p>We’re removing the AMQP service from GitHub. It hasn’t worked in quite some
-time, and the code it uses doesn’t work in our background workers.</p>
-  </li>
-  <li>
-    <p>We’re also instituting a new guideline to improve the reliability and
-maintainability of services in the future. As of today, all new services must
-accept an unmodified payload over HTTP. Any service that does not will be
-rejected. To see an example of an acceptable service, check out <a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb">Code Climate</a>.
-Notice their service simply accepts HTTP POST from GitHub unmodified. For an
-example of a service that won’t be accepted after today, check out <a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb">Campfire</a>. It
-uses other Ruby gems and contains custom logic to transform the GitHub payload
-to Campfire messages.  Existing hooks will keep working (don’t worry 37signals, we
-:heart: Campfire).</p>
-  </li>
-</ul>
+<h2 id="api-changes">API Changes</h2>
 
-<p>We’re making these changes because we want to focus on the reliability of the
-core Services backend for everyone.  Maintaining custom logic and libraries for
-over 100 services is taking too much of this focus away.</p>
+<p>You can now search for deployments via query parameters to the <a href="https://developer.github.com/v3/repos/deployments/#list-deployments">listing endpoint</a>. You can filter on <code>sha</code>, <code>ref</code>, <code>task</code>, and <code>environment</code>. This makes it easier to answer questions like “when was the last time someone deployed to staging?”</p>
+
+<pre class="terminal">
+$ curl -H "Authorization: token [yours]" \
+       https://api.github.com/repos/octocat/my-repo/deployments?environment=staging
+</pre>
+
+<h2 id="new-attribute">New Attribute</h2>
+
+<p>We’ve also added a <code>task</code> attribute to the deployments model. The <code>task</code> attribute exists to allow you to specify tasks other than just pushing code. Popular deployment tools like <a href="http://capistranorb.com/">capistrano</a> and <a href="http://www.fabfile.org/">fabric</a> support named tasks to do things like run schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
 
 
 </div>

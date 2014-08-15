@@ -112,8 +112,8 @@ Name | Type | Description
 `has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. Default: `true`
 `team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
 `auto_init`|`boolean` | Pass `true` to create an initial commit with empty README. Default: `false`
-`gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._
-`license_template`|`string` | Desired [LICENSE template](https://github.com/github/choosealicense.com) to apply. Use the [name of the template](https://github.com/github/choosealicense.com/tree/gh-pages/licenses) without the extension. For example, "mit" or "mozilla". _Ignored if the `auto_init` parameter is not provided._
+`gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell".
+`license_template`|`string` | Desired [LICENSE template](https://github.com/github/choosealicense.com) to apply. Use the [name of the template](https://github.com/github/choosealicense.com/tree/gh-pages/licenses) without the extension. For example, "mit" or "mozilla".
 
 #### Example
 

@@ -113,7 +113,7 @@ The `environment` parameter allows deployments to be issued to different
 runtime environments. Teams often have multiple environments for verifying
 their applications, like 'production', 'staging', and 'qa'. This allows for
 easy tracking of which environments had deployments requested. The default
-environment is 'production'
+environment is 'production'.
 
 The `auto_merge` parameter is used to ensure that the requested ref is not
 behind the repository's default branch. If the ref *is* behind the default

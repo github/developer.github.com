@@ -18,7 +18,7 @@ $ curl -H "Authorization: token [yours]" \
 
 ## New attribute
 
-We've also added a `task` attribute to the deployment resource. The `task` attribute exists to allow you to specify tasks other than just pushing code. Popular deployment tools like [capistrano][capistrano] and [fabric][fabric] support named tasks to do things like run schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.
+We've also added a `task` attribute to the deployment resource. The `task` attribute allows you to specify tasks other than just pushing code. Popular deployment tools like [capistrano][capistrano] and [fabric][fabric] support named tasks to do things like running schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.
 
 If you have any questions or feedback, please [get in touch][contact].
 

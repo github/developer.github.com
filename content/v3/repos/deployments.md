@@ -109,11 +109,11 @@ Deployments offer a few configurable parameters with sane defaults.
 The `ref` parameter can be any named branch, tag, or sha. At GitHub we often
 deploy branches and verify them before we merge a pull request.
 
-The `environment` parameters allows deployments to be issued to different
+The `environment` parameter allows deployments to be issued to different
 runtime environments. Teams often have multiple environments for verifying
 their applications, like 'production', 'staging', and 'qa'. This allows for
 easy tracking of which environments had deployments requested. The default
-environment is 'production'
+environment is 'production'.
 
 The `auto_merge` parameter is used to ensure that the requested ref is not
 behind the repository's default branch. If the ref *is* behind the default

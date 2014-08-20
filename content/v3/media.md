@@ -124,6 +124,20 @@ The Commit, Commit Comparison, and Pull Request resources support
 
     application/vnd.github.VERSION.patch
 
+## Repository contents
+
+### Raw
+
+    application/vnd.github.VERSION.raw
+
+Return the raw contents of a file. This is the default if you do not pass any specific media type.
+
+### HTML
+
+    application/vnd.github.VERSION.html
+
+For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the `.html` media type. Markup languages are rendered to HTML using our open-source [Markup library](https://github.com/github/markup).
+
 
 [gfm]:http://github.github.com/github-flavored-markdown/
 [git-diff]: http://git-scm.com/docs/git-diff

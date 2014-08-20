@@ -202,3 +202,11 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 <%= headers 204 %>
 
 [1]: /v3/oauth/#scopes
+
+## Custom media types
+
+The following media types are supported when fetching gist contents. You can read more about the
+use of media types in the API [here](/v3/media/).
+
+    application/vnd.github.VERSION.raw
+    application/vnd.github.VERSION.base64

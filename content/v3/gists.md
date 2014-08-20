@@ -119,7 +119,7 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 
 <div class="alert">
   <p>
-    <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the hash. Deletes can be performed by including the filename with a `null` hash.
+    <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the hash. Deletes can be performed by including the filename with a <code>null</code> hash.
 	</p>
 </div>
 

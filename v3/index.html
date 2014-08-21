@@ -371,7 +371,7 @@ $ curl 'https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=y
 </pre>
 
 <p>This should only be used in server to server scenarios.  Don’t leak your
-OAuth application’s client secret to your users.  Read <a href="#unauthenticated-rate-limited-requests">more about
+OAuth application’s client secret to your users.  Read <a href="#increasing-the-unauthenticated-rate-limit-for-oauth-applications">more about
 unauthenticated rate limiting</a>.</p>
 
 <h3 id="failed-login-limit">Failed login limit</h3>
@@ -491,8 +491,9 @@ SHA1 and not on page number.</p>
 
 <p>For requests using Basic Authentication or OAuth, you can make up to 5,000
 requests per hour. For unauthenticated requests, the rate limit allows you to
-make up to 60 requests per hour. (The Search API has <a href="/v3/search/#rate-limit">custom rate limit
-rules</a>.)</p>
+make up to 60 requests per hour. Unauthenticated requests are associated with your IP address,
+and not the user making requests. Note that <a href="/v3/search/#rate-limit">the Search API has custom rate limit
+rules</a>.</p>
 
 <p>You can check the returned HTTP headers of any API request to see your current
 rate limit status:</p>
@@ -557,11 +558,9 @@ X-RateLimit-Reset: 1377013266
 API hit.
 <br></p>
 
-<h3 id="unauthenticated-rate-limited-requests">Unauthenticated rate limited requests</h3>
+<h3 id="increasing-the-unauthenticated-rate-limit-for-oauth-applications">Increasing the unauthenticated rate limit for OAuth applications</h3>
 
-<p>If you need to make unauthenticated calls but need to use a higher rate limit
-associated with your OAuth application, you can send over your client ID and
-secret in the query string.</p>
+<p>If your OAuth application needs to make unauthenticated calls with a higher rate limit, you can pass your app’s client ID and secret as part of the query string.</p>
 
 <pre class="terminal">
 $ curl -i 'https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy'

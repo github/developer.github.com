@@ -64,7 +64,7 @@
 </ul>
 
 <p>These API methods let you retrieve the contents of files within a repository as
-Base64 encoded content. See <a href="#custom-media-types">media types</a> for requesting raw format.</p>
+Base64 encoded content. See <a href="#custom-media-types">media types</a> for requesting the raw format or rendered HTML (when supported).</p>
 
 <h2 id="get-the-readme">Get the README</h2>
 
@@ -73,7 +73,7 @@ Base64 encoded content. See <a href="#custom-media-types">media types</a> for re
 <pre><code>GET /repos/:owner/:repo/readme
 </code></pre>
 
-<p>READMEs support <a href="#custom-media-types">a custom media type</a> for getting the raw content.</p>
+<p>READMEs support <a href="#custom-media-types">custom media types</a> for retrieving the raw content or rendered HTML.</p>
 
 <h3 id="parameters">Parameters</h3>
 
@@ -125,7 +125,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /repos/:owner/:repo/contents/:path
 </code></pre>
 
-<p>Files and symlinks support <a href="#custom-media-types">a custom media type</a> for getting the raw content.
+<p>Files and symlinks support <a href="#custom-media-types">a custom media type</a> for retrieving the raw content or rendered HTML (when supported).
 Directories and submodules do <em>not</em> support custom media types.</p>
 
 <p><em>Notes</em>:</p>
@@ -760,10 +760,15 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball &gt; octokit.tar.g
 
 <h2 id="custom-media-types">Custom media types</h2>
 
-<p><a href="#get-the-readme">READMEs</a>, <a href="#get-contents">files</a>, and <a href="#get-contents">symlinks</a> support the following custom media type.</p>
+<p><a href="#get-the-readme">READMEs</a>, <a href="#get-contents">files</a>, and <a href="#get-contents">symlinks</a> support the following custom media types:</p>
 
 <pre><code>application/vnd.github.VERSION.raw
+application/vnd.github.VERSION.html
 </code></pre>
+
+<p>Use the <code>.raw</code> media type to retrieve the contents of the file.</p>
+
+<p>For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the <code>.html</code> media type. Markup languages are rendered to HTML using our open-source <a href="https://github.com/github/markup">Markup library</a>.</p>
 
 <p>You can read more about the use of media types in the API <a href="/v3/media/">here</a>.</p>
 

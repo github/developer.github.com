@@ -57,6 +57,8 @@
   <li><a href="#comment-body-properties">Comment Body Properties</a></li>
   <li><a href="#git-blob-properties">Git Blob Properties</a></li>
   <li><a href="#commits-commit-comparison-and-pull-requests">Commits, Commit comparison, and Pull Requests</a></li>
+  <li><a href="#repository-contents">Repository contents</a></li>
+  <li><a href="#gists">Gists</a></li>
 </ul>
 
 <p>Custom media types are used in the API to let consumers choose the format
@@ -189,6 +191,38 @@ encoded string. This is the default if nothing is passed.</p>
 
 <pre><code>application/vnd.github.VERSION.patch
 </code></pre>
+
+<h2 id="repository-contents">Repository contents</h2>
+
+<h3 id="raw-2">Raw</h3>
+
+<pre><code>application/vnd.github.VERSION.raw
+</code></pre>
+
+<p>Return the raw contents of a file. This is the default if you do not pass any specific media type.</p>
+
+<h3 id="html-1">HTML</h3>
+
+<pre><code>application/vnd.github.VERSION.html
+</code></pre>
+
+<p>For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the <code>.html</code> media type. Markup languages are rendered to HTML using our open-source <a href="https://github.com/github/markup">Markup library</a>.</p>
+
+<h2 id="gists">Gists</h2>
+
+<h3 id="raw-3">Raw</h3>
+
+<pre><code>application/vnd.github.VERSION.raw
+</code></pre>
+
+<p>Return the raw contents of a gist. This is the default if you do not pass any specific media type.</p>
+
+<h3 id="base64">base64</h3>
+
+<pre><code>application/vnd.github.VERSION.base64
+</code></pre>
+
+<p>The gist contents are base64-encoded before being sent out. This can be useful if your gist contains any invalid UTF-8 sequences.</p>
 
 
     </div>

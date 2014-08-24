@@ -101,7 +101,7 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `commiter` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
 is a hash containing information about the author.
 
@@ -112,12 +112,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `422` status code.
 
-Both the `author` and `commiter` parameters have the same keys:
+Both the `author` and `committer` parameters have the same keys:
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | The name of the author (or commiter) of the commit
-`email`|`string` | The email of the author (or commiter) of the commit
+`name`|`string` | The name of the author (or committer) of the commit
+`email`|`string` | The email of the author (or committer) of the commit
 
 ### Example Input
 
@@ -149,7 +149,7 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `commiter` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
 is a hash containing information about the author.
 
@@ -160,12 +160,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `422` status code.
 
-Both the `author` and `commiter` parameters have the same keys:
+Both the `author` and `committer` parameters have the same keys:
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | The name of the author (or commiter) of the commit
-`email`|`string` | The email of the author (or commiter) of the commit
+`name`|`string` | The name of the author (or committer) of the commit
+`email`|`string` | The email of the author (or committer) of the commit
 
 ### Example Input
 
@@ -198,7 +198,7 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `commiter` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
 is a hash containing information about the author.
 
@@ -209,12 +209,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `422` status code.
 
-Both the `author` and `commiter` parameters have the same keys:
+Both the `author` and `committer` parameters have the same keys:
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | The name of the author (or commiter) of the commit
-`email`|`string` | The email of the author (or commiter) of the commit
+`name`|`string` | The name of the author (or committer) of the commit
+`email`|`string` | The email of the author (or committer) of the commit
 
 ### Example Input
 

@@ -247,6 +247,8 @@ The `q` search term can also contain any combination of the supported issue sear
    Limits searches to a specific user or repository.
 
 
+If you know the specific SHA hash of a commit, you can use also use it to search for pull requests that contain that SHA. Note that the SHA syntax must be at least seven characters.
+
 <h4 id="issue-search-example">Example</h4>
 
 Let's say you want to find the oldest unresolved Python bugs on Windows. Your

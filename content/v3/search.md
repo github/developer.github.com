@@ -149,6 +149,8 @@ The `q` search term can also contain any combination of the supported code searc
   Finds files that match a certain size (in bytes).
 * [`path`](https://help.github.com/articles/searching-code#search-by-the-location-of-a-file-within-the-repository)
   Specifies the path that the resulting file must be at.
+* [`filename`](https://help.github.com/articles/searching-code#search-by-filename)
+  Matches files by their filename.
 * [`extension`](https://help.github.com/articles/searching-code#search-by-the-file-extension)
   Matches files with a certain extension.
 * [`user` or `repo`](https://help.github.com/articles/searching-code#search-within-a-users-or-organizations-repositories)

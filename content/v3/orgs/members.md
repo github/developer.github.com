@@ -116,11 +116,11 @@ The user can publicize their own membership.
 
 <%= headers 204 %>
 
-## List organization memberships
+## List all organization memberships
 
 <div class="alert">
   <p>
-    The Team Memberships API is currently available for developers to preview.
+    The Organization Memberships API is currently available for developers to preview.
     During the preview period, the API may change without notice.
     Please see the <a href="/changes/2014-08-27-team-memberships-api/">blog post</a> for full details.
   </p>
@@ -140,6 +140,19 @@ The user can publicize their own membership.
 
 ## List pending organization memberships
 
+<div class="alert">
+  <p>
+    The Organization Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-27-team-memberships-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
+
     GET /user/memberships/orgs?state=pending
 
 ### Response
@@ -148,6 +161,19 @@ The user can publicize their own membership.
 <%= json(:pending_org_memberships) %>
 
 ## List active organization memberships
+
+<div class="alert">
+  <p>
+    The Organization Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-27-team-memberships-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
 
     GET /user/memberships/orgs?state=active
 

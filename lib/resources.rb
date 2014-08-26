@@ -717,11 +717,11 @@ module GitHub
     }
 
     ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "active"
+      "state" => "active"
     )
 
     PENDING_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "pending"
+      "state" => "pending"
     )
 
     ACTIVE_ORG_MEMBERSHIP ||= {

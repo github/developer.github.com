@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Development Guides | GitHub API</title>
+  <title>Best practices for integrators | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -51,19 +51,50 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="development-guides">Development Guides</h1>
+      <h1 id="best-practices-for-integrators">Best practices for integrators</h1>
 
-<p>This section of the documentation is intended to get you up-and-running with
-real-world GitHub API applications. We’ll cover everything you need to know, from
-authentication, to manipulating results, to combining results with other services.</p>
+<ul id="markdown-toc">
+  <li><a href="#secure-payloads-delivered-from-github">Secure payloads delivered from GitHub</a></li>
+  <li><a href="#favor-asynchronous-work-over-synchronous">Favor asynchronous work over synchronous</a></li>
+  <li><a href="#use-appropriate-http-status-codes-when-responding-to-github">Use appropriate HTTP status codes when responding to GitHub</a></li>
+  <li><a href="#provide-as-much-information-as-possible-to-the-user">Provide as much information as possible to the user</a></li>
+</ul>
 
-<p>Every tutorial here will have a project, and every project will be
-stored and documented in our public
-<a href="https://github.com/github/platform-samples">platform-samples</a> repository.</p>
+<p>Interested in integrating with the GitHub platform? <a href="https://github.com/integrations">You’re in good company</a>. This guide will help you design a flexible system that provides the best experience for your users and provide a secure connection for transmitted information.</p>
 
-<p>Feel free to fork, clone, and improve these guides.</p>
+<h2 id="secure-payloads-delivered-from-github">Secure payloads delivered from GitHub</h2>
 
-<p><img src="/images/electrocat.png" alt="The Professorcat"></p>
+<p>It’s very important that you secure <a href="/v3/activity/events/types/">the payloads sent from GitHub</a>. Although no personal information (like passwords) is ever transmitted in a payload, leaking <em>any</em> information is not good. Some information that might be sensitive include committer email address or the names of private repositories.</p>
+
+<p>There are three steps you can take to secure receipt of payloads delivered by GitHub:</p>
+
+<ol>
+  <li>Ensure that your receiving server is on an HTTPS connection. By default, GitHub will verify SSL certificates when delivering payloads.</li>
+  <li>You can whitelist <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">the IP address we use when delivering hooks</a>  to your server. To ensure that you’re always checking the right IP address, you can <a href="/v3/meta/#meta">use the <code>/meta</code> endpoint</a> to find the address we use.</li>
+  <li>Provide <a href="/webhooks/securing/">a secret token</a> to ensure payloads are definitely coming from GitHub. By enforcing a secret token, you’re ensuring that any data received by your server is absolutely coming from GitHub. Ideally, you should provide a different secret token <em>per user</em> of your service. That way, if one token is compromised, no other user would be affected.</li>
+</ol>
+
+<h2 id="favor-asynchronous-work-over-synchronous">Favor asynchronous work over synchronous</h2>
+
+<p>GitHub expects that integrations respond within thirty seconds of receiving the webhook payload. If your service takes longer than that to complete, then GitHub terminates the connection and the payload is lost.</p>
+
+<p>Since it’s impossible to predict how fast your service will complete, you should do all of “the real work” in a background job. <a href="http://resquework.org/">Resque</a> (for Ruby), <a href="http://python-rq.org/">RQ</a> (for Python), or <a href="http://www.rabbitmq.com/">RabbitMQ</a> (for Java) are examples of libraries that can handle queuing and processing of background jobs.</p>
+
+<p>Note that even with a background job running, GitHub still expects your server to respond within thirty seconds. Your server simply needs to acknowledge that it received the payload by sending some sort of response. It’s critical that your service to performs any validations on a payload as soon as possible, so that you can accurately report whether your server will continue with the request or not.</p>
+
+<h2 id="use-appropriate-http-status-codes-when-responding-to-github">Use appropriate HTTP status codes when responding to GitHub</h2>
+
+<p>Every webhook has its own “Recent Deliveries” section, which lists whether a deployment was successful or not.</p>
+
+<p><img src="/images/webhooks_recent_deliveries.png" alt="Recent Deliveries view"></p>
+
+<p>You should make use of proper HTTP status codes in order to inform users. You can use codes like <code>201</code> or <code>202</code> to acknowledge receipt of payload that won’t be processed (for example, a payload delivered by a branch that’s not the default). Reserve the <code>500</code> error code for catastrophic failures.</p>
+
+<h2 id="provide-as-much-information-as-possible-to-the-user">Provide as much information as possible to the user</h2>
+
+<p>Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.  </p>
+
+<p><img src="/images/payload_response_tab.png" alt="Viewing a payload response"></p>
 
     </div>
 

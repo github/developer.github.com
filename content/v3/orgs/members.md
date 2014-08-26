@@ -122,7 +122,7 @@ The user can publicize their own membership.
   <p>
     The Organization Memberships API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-27-team-memberships-api/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-08-27-organization-memberships-api/">blog post</a> for full details.
   </p>
 
   <p>
@@ -144,7 +144,7 @@ The user can publicize their own membership.
   <p>
     The Organization Memberships API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-27-team-memberships-api/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-08-27-organization-memberships-api/">blog post</a> for full details.
   </p>
 
   <p>
@@ -166,7 +166,7 @@ The user can publicize their own membership.
   <p>
     The Organization Memberships API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-27-team-memberships-api/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-08-27-organization-memberships-api/">blog post</a> for full details.
   </p>
 
   <p>
@@ -188,7 +188,7 @@ The user can publicize their own membership.
   <p>
     The Organization Memberships API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-27-team-memberships-api/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-08-27-organization-memberships-api/">blog post</a> for full details.
   </p>
 
   <p>
@@ -210,7 +210,7 @@ The user can publicize their own membership.
   <p>
     The Organization Memberships API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-27-team-memberships-api/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-08-27-organization-memberships-api/">blog post</a> for full details.
   </p>
 
   <p>

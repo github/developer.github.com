@@ -116,7 +116,7 @@ The user can publicize their own membership.
 
 <%= headers 204 %>
 
-## List organization memberships
+## List your organization memberships
 
 <div class="alert">
   <p>
@@ -152,7 +152,7 @@ An optional `status` can be passed to request only pending or active memberships
 <%= headers 200 %>
 <%= json(:active_org_memberships) %>
 
-## Get organization membership
+## Get your organization membership
 
 <div class="alert">
   <p>
@@ -174,7 +174,7 @@ An optional `status` can be passed to request only pending or active memberships
 <%= headers 200 %>
 <%= json(:pending_org_membership) %>
 
-## Edit organization membership
+## Edit your organization membership
 
 <div class="alert">
   <p>

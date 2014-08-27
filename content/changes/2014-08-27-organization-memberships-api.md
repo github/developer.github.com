@@ -32,7 +32,7 @@ If you have any questions or feedback, please [get in touch with us][contact]!
 [contact]: https://github.com/contact?form[subject]=Team+Memberships+API
 [team-memberships-api]: /changes/2014-08-05-team-memberships-api/
 [org-invitations]: https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization
-[list-org-memberships]: /v3/orgs/members/#list-organization-memberships
-[edit-org-membership]: /v3/orgs/members/#edit-organization-membership
+[list-org-memberships]: /v3/orgs/members/#list-your-organization-memberships
+[edit-org-membership]: /v3/orgs/members/#edit-your-organization-membership
 [add-team-membership]: /v3/orgs/teams/#add-team-membership
 [get-team-membership]: /v3/orgs/teams/#get-team-membership

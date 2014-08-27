@@ -139,17 +139,17 @@ An optional `status` can be passed to request only pending or active memberships
 
 ### Response when no status is specified
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org_memberships) %>
 
 ### Response when a "pending" status is specified
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pending_org_memberships) %>
 
 ### Response when an "active" status is specified
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:active_org_memberships) %>
 
 ## Get your organization membership

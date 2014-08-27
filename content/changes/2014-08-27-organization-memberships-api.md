@@ -9,11 +9,11 @@ The upcoming [Team Memberships API][team-memberships-api] gives you the power to
 
 ### The new Organization Memberships API
 
-When someone [invites][org-invitations] you to an organization, your membership with that organization begins in the "pending" state. The new [list organization memberships][list-org-memberships] endpoint will allow you to find your pending memberships. You can then change them to "active" (accepting the invitation in the process) by using the [edit organization membership][edit-org-membership] endpoint.
+When someone [invites][org-invitations] you to an organization, your membership with that organization begins in the "pending" state. The new [list organization memberships][list-org-memberships] endpoint allows you to find your pending memberships. You can then change them to "active" (accepting the invitation in the process) by using the [edit organization membership][edit-org-membership] endpoint.
 
 ### New Team Membership API response attribute
 
-Previously, responses from the [add team membership][add-team-membership] and [get team membership][get-team-membership] endpoints included a "status" attribute, which could either be "active" or "pending". We've renamed this attribute from "status" to "state", in order to be more consistent with our other API calls.
+Previously, responses from the [add team membership][add-team-membership] and [get team membership][get-team-membership] endpoints included a "status" attribute, which could either be "active" or "pending". We've renamed this attribute from "status" to "state" for better consistency with our other API calls.
 
 To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until **September 3rd, 2014**.
 

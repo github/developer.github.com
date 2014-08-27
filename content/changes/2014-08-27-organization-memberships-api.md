@@ -15,7 +15,7 @@ If you've been [invited][org-invitations] to an organization, your membership wi
 
 Previously, responses from the [add team membership][add-team-membership] and [get team membership][get-team-membership] endpoints included a "status" attribute, which could either be "active" or "pending". We've renamed this attribute from "status" to "state", in order to be more consistent with our other API calls.
 
-To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until September 3rd, 2014.
+To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until **September 3rd, 2014**.
 
 ### Preview period
 
@@ -25,7 +25,7 @@ While these new APIs are in their preview period, you'll need to provide the fol
 
     application/vnd.github.the-wasp-preview+json
 
-We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become a official components of GitHub API v3.
+We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become official components of GitHub API v3.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

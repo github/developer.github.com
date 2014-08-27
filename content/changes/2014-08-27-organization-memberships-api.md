@@ -1,7 +1,7 @@
 ---
 kind: change
-title: Checking and accepting organization invitations from the API
-created_at: 2014-08-05
+title: Accepting organization invitations from the API
+created_at: 2014-08-27
 author_name: jakeboxer
 ---
 

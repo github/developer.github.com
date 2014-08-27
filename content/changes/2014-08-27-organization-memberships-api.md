@@ -9,7 +9,7 @@ The upcoming [Team Memberships API][team-memberships-api] gives you the power to
 
 ### The new Organization Memberships API
 
-If you've been [invited][org-invitations] to an organization, it will be represented with an organization membership in the "pending" state. The new [list organization memberships][list-org-memberships] endpoint will allow you to find your pending memberships. You can then change them to "active" (accepting the invitation in the process) by using the [edit organization membership][edit-org-membership] endpoint.
+If you've been [invited][org-invitations] to an organization, your membership with that organization will be in the "pending" state. The new [list organization memberships][list-org-memberships] endpoint will allow you to find your pending memberships. You can then change them to "active" (accepting the invitation in the process) by using the [edit organization membership][edit-org-membership] endpoint.
 
 ### New Team Membership API response attribute
 

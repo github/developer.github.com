@@ -116,7 +116,7 @@ The user can publicize their own membership.
 
 <%= headers 204 %>
 
-## List all organization memberships
+## List organization memberships
 
 <div class="alert">
   <p>
@@ -131,53 +131,23 @@ The user can publicize their own membership.
   </p>
 </div>
 
-    GET /user/memberships/orgs
+An optional `status` can be passed to request only pending or active memberships.
 
-### Response
+    GET /user/memberships/orgs
+    GET /user/memberships/orgs?status=active
+    GET /user/memberships/orgs?status=pending
+
+### Response when no status is specified
 
 <%= headers 200 %>
 <%= json(:org_memberships) %>
 
-## List pending organization memberships
-
-<div class="alert">
-  <p>
-    The Organization Memberships API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-27-organization-memberships-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
-  </p>
-</div>
-
-    GET /user/memberships/orgs?state=pending
-
-### Response
+### Response when a "pending" status is specified
 
 <%= headers 200 %>
 <%= json(:pending_org_memberships) %>
 
-## List active organization memberships
-
-<div class="alert">
-  <p>
-    The Organization Memberships API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-27-organization-memberships-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
-  </p>
-</div>
-
-    GET /user/memberships/orgs?state=active
-
-### Response
+### Response when an "active" status is specified
 
 <%= headers 200 %>
 <%= json(:active_org_memberships) %>

@@ -5,7 +5,7 @@ created_at: 2014-08-05
 author_name: jakeboxer
 ---
 
-The upcoming [Team Memberships API][team-memberships-api] gives you the power to [invite][org-invitations] new GitHub users to your organization via the API. Today, we're expanding the API to allow users to find out about (and accept) those invitations.
+The upcoming [Team Memberships API][team-memberships-api] gives you the power to [invite][org-invitations] new GitHub users to your organization via the API. We're expanding the API to also allow users to view their organization membership statuses and accept any invitations they've received.
 
 ### The new Organization Memberships API
 

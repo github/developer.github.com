@@ -63,21 +63,21 @@ Name | Type | Description
 
 The `q` search term can also contain any combination of the supported repository search qualifiers:
 
-* [`in`](https://help.github.com/articles/searching-repositories#search-in)
+* [`in`](https://help.github.com/articles/searching-repositories#scope-the-search-fields)
  Qualifies which fields are searched. With this qualifier you can restrict the
  search to just the repository name, description, readme, or
  any combination of these.
-* [`size`](https://help.github.com/articles/searching-repositories#size)
+* [`size`](https://help.github.com/articles/searching-repositories#search-based-on-the-size-of-a-repository)
   Finds repositories that match a certain size (in kilobytes).
-* [`forks`](https://help.github.com/articles/searching-repositories#forks)
+* [`forks`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has)
   Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.
-* [`created` or `pushed`](https://help.github.com/articles/searching-repositories#created-and-last-updated)
+* [`created` or `pushed`](https://help.github.com/articles/searching-repositories#search-based-on-when-a-repository-was-created-or-last-updated)
   Filters repositories based on date of creation, or when they were last updated.
-* [`user` or `repo`](https://help.github.com/articles/searching-repositories#users-organizations-and-repositories)
+* [`user` or `repo`](https://help.github.com/articles/searching-repositories#search-within-a-users-or-organizations-repositories)
   Limits searches to a specific user or repository.
-* [`language`](https://help.github.com/articles/searching-repositories#languages)
+* [`language`](https://help.github.com/articles/searching-repositories#search-based-on-the-main-language-of-a-repository)
   Searches repositories based on the language they're written in.
-* [`stars`](https://help.github.com/articles/searching-repositories#stars)
+* [`stars`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-stars-a-repository-has)
   Searches repositories based on the number of stars.
 
 <h4 id="repository-search-example">Example</h4>
@@ -136,22 +136,24 @@ Name | Type | Description
 
 The `q` search term can also contain any combination of the supported code search qualifiers:
 
-* [`in`](https://help.github.com/articles/searching-code#search-in)
+* [`in`](https://help.github.com/articles/searching-code#scope-the-search-fields)
  Qualifies which fields are searched. With this qualifier you can restrict the
  search to just the file contents, the file path, or both.
-* [`language`](https://help.github.com/articles/searching-code#language)
+* [`language`](https://help.github.com/articles/searching-code#search-by-language)
   Searches code based on the language it's written in.
-* [`fork`](https://help.github.com/articles/searching-code#forks)
+* [`fork`](https://help.github.com/articles/searching-code#search-by-the-number-of-forks-the-parent-repository-has)
   Specifies that code from forked repositories should be searched. Repository
   forks will not be searchable unless the fork has more stars than the parent
   repository.
-* [`size`](https://help.github.com/articles/searching-code#size)
+* [`size`](https://help.github.com/articles/searching-code#search-by-the-size-of-the-parent-repository)
   Finds files that match a certain size (in bytes).
-* [`path`](https://help.github.com/articles/searching-code#path)
+* [`path`](https://help.github.com/articles/searching-code#search-by-the-location-of-a-file-within-the-repository)
   Specifies the path that the resulting file must be at.
-* [`extension`](https://help.github.com/articles/searching-code#extension)
+* [`filename`](https://help.github.com/articles/searching-code#search-by-filename)
+  Matches files by their filename.
+* [`extension`](https://help.github.com/articles/searching-code#search-by-the-file-extension)
   Matches files with a certain extension.
-* [`user` or `repo`](https://help.github.com/articles/searching-code#users-organizations-and-repositories)
+* [`user` or `repo`](https://help.github.com/articles/searching-code#search-within-a-users-or-organizations-repositories)
     Limits searches to a specific user or repository.
 
 <h4 id="code-search-example">Example</h4>
@@ -209,43 +211,45 @@ Name | Type | Description
 
 The `q` search term can also contain any combination of the supported issue search qualifiers:
 
- * [`type`](https://help.github.com/articles/searching-issues#type)
+ * [`type`](https://help.github.com/articles/searching-issues#search-issues-or-pull-requests)
    With this qualifier you can restrict the search to issues or pull request only.
- * [`in`](https://help.github.com/articles/searching-issues#search-in)
+ * [`in`](https://help.github.com/articles/searching-issues#scope-the-search-fields)
    Qualifies which fields are searched. With this qualifier you can restrict the
    search to just the title, body, comments, or any combination of these.
- * [`author`](https://help.github.com/articles/searching-issues#author)
+ * [`author`](https://help.github.com/articles/searching-issues#search-by-the-author-of-an-issue-or-pull-request)
    Finds issues created by a certain user.
- * [`assignee`](https://help.github.com/articles/searching-issues#assignee)
+ * [`assignee`](https://help.github.com/articles/searching-issues#search-by-the-assignee-of-an-issue-or-pull-request)
    Finds issues that are assigned to a certain user.
- * [`mentions`](https://help.github.com/articles/searching-issues#mentions)
+ * [`mentions`](https://help.github.com/articles/searching-issues#search-by-a-mentioned-user-within-an-issue-or-pull-request)
    Finds issues that mention a certain user.
- * [`commenter`](https://help.github.com/articles/searching-issues#commenter)
+ * [`commenter`](https://help.github.com/articles/searching-issues#search-by-a-commenter-within-an-issue-or-pull-request)
    Finds issues that a certain user commented on.
- * [`involves`](https://help.github.com/articles/searching-issues#involves)
+ * [`involves`](https://help.github.com/articles/searching-issues#search-by-a-user-thats-involved-within-an-issue-or-pull-request)
    Finds issues that were either created by a certain user, assigned to that
      user, mention that user, or were commented on by that user.
- * [`state`](https://help.github.com/articles/searching-issues#state)
+ * [`state`](https://help.github.com/articles/searching-issues#search-based-on-whether-an-issue-or-pull-request-is-open)
    Filter issues based on whether they're open or closed.
- * [`labels`](https://help.github.com/articles/searching-issues#labels)
+ * [`labels`](https://help.github.com/articles/searching-issues#search-by-the-labels-on-an-issue)
    Filters issues based on their labels.
- * [`no`](https://help.github.com/articles/searching-issues#no)
+ * [`no`](https://help.github.com/articles/searching-issues#search-by-missing-metadata-on-an-issue-or-pull-request)
    Filters items missing certain metadata, such as `label`, `milestone`, or `assignee`
- * [`language`](https://help.github.com/articles/searching-issues#language)
+ * [`language`](https://help.github.com/articles/searching-issues#search-by-the-main-language-of-a-repository)
    Searches for issues within repositories that match a certain language.
- * [`is`](https://help.github.com/articles/searching-issues#is)
+ * [`is`](https://help.github.com/articles/searching-issues#search-based-on-the-state-of-an-issue-or-pull-request)
    Searches for items within repositories that match a certain state, such as `open`, `closed`, or `merged`
- * [`created` or `updated`](https://help.github.com/articles/searching-issues#created-and-last-updated)
+ * [`created` or `updated`](https://help.github.com/articles/searching-issues#search-based-on-when-an-issue-or-pull-request-was-created-or-last-updated)
    Filters issues based on date of creation, or when they were last updated.
- * [`merged`](https://help.github.com/articles/searching-issues#merged)
+ * [`merged`](https://help.github.com/articles/searching-issues#search-based-on-when-a-pull-request-was-merged)
    Filters pull requests based on the date when they were merged.
- * [`closed`](https://help.github.com/articles/searching-issues#closed)
+ * [`closed`](https://help.github.com/articles/searching-issues#search-based-on-when-an-issue-or-pull-request-was-closed)
    Filters issues based on the date when they were closed.
- * [`comments`](https://help.github.com/articles/searching-issues#comments)
+ * [`comments`](https://help.github.com/articles/searching-issues#search-by-the-number-of-comments-an-issue-or-pull-request-has)
    Filters issues based on the quantity of comments.
- * [`user` or `repo`](https://help.github.com/articles/searching-issues#users-organizations-and-repositories)
+ * [`user` or `repo`](https://help.github.com/articles/searching-issues#search-within-a-users-or-organizations-repositories)
    Limits searches to a specific user or repository.
 
+
+If you know the specific SHA hash of a commit, you can use also [use it to search for pull requests](https://help.github.com/articles/searching-issues#search-by-the-commit-shas-within-a-pull-request) that contain that SHA. Note that the SHA syntax must be at least seven characters.
 
 <h4 id="issue-search-example">Example</h4>
 
@@ -302,22 +306,22 @@ Name | Type | Description
 
 The `q` search term can also contain any combination of the supported user search qualifiers:
 
- * [`type`](https://help.github.com/articles/searching-users#type)
+ * [`type`](https://help.github.com/articles/searching-users#search-for-users-or-organizations)
    With this qualifier you can restrict the search to just personal accounts or
    just organization accounts.
- * [`in`](https://help.github.com/articles/searching-users#search-in)
+ * [`in`](https://help.github.com/articles/searching-users#scope-the-search-fields)
    Qualifies which fields are searched. With this qualifier you can restrict
    the search to just the username, public email, full name, or any
    combination of these.
- * [`repos`](https://help.github.com/articles/searching-users#repository-count)
+ * [`repos`](https://help.github.com/articles/searching-users#search-based-on-the-number-of-repositories-a-user-has)
    Filters users based on the number of repositories they have.
- * [`location`](https://help.github.com/articles/searching-users#location)
+ * [`location`](https://help.github.com/articles/searching-users#search-based-on-the-location-where-a-user-resides)
    Filter users by the location indicated in their profile.
- * [`language`](https://help.github.com/articles/searching-users#language)
+ * [`language`](https://help.github.com/articles/searching-users#search-based-on-the-languages-of-a-users-repositories)
    Search for users that have repositories that match a certain language.
- * [`created`](https://help.github.com/articles/searching-users#created)
+ * [`created`](https://help.github.com/articles/searching-users#search-based-on-when-a-user-joined-github)
    Filter users based on when they joined.
- * [`followers`](https://help.github.com/articles/searching-users#followers)
+ * [`followers`](https://help.github.com/articles/searching-users#search-based-on-the-number-of-followers-a-user-has)
    Filter users based on the number of followers they have.
 
 <h4 id="user-search-example">Example</h4>

@@ -115,3 +115,95 @@ The user can publicize their own membership.
 ### Response
 
 <%= headers 204 %>
+
+## List your organization memberships
+
+<div class="alert">
+  <p>
+    The Organization Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
+
+An optional `state` can be passed to request only pending or active memberships.
+
+    GET /user/memberships/orgs
+    GET /user/memberships/orgs?state=active
+    GET /user/memberships/orgs?state=pending
+
+### Response when no state is specified
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:org_memberships) %>
+
+### Response when a "pending" state is specified
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:pending_org_memberships) %>
+
+### Response when an "active" state is specified
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:active_org_memberships) %>
+
+## Get your organization membership
+
+<div class="alert">
+  <p>
+    The Organization Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
+
+    GET /user/memberships/orgs/:org
+
+### Response
+
+<%= headers 200 %>
+<%= json(:pending_org_membership) %>
+
+## Edit your organization membership
+
+<div class="alert">
+  <p>
+    The Organization Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
+
+    PATCH /user/memberships/orgs/:org
+
+### Input
+
+Name | Type | Description
+-----|------|--------------
+`state`|`string`| **Required**. The state that the membership should be in. Only `"active"` will be accepted.
+
+### Example
+
+<%= json \
+    :state => "active"
+    %>
+
+### Response
+
+<%= headers 200 %>
+<%= json(:active_org_membership) %>

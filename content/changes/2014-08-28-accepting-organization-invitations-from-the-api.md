@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Accepting organization invitations from the API
-created_at: 2014-08-27
+created_at: 2014-08-28
 author_name: jakeboxer
 ---
 

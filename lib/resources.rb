@@ -717,12 +717,28 @@ module GitHub
     }
 
     ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "active"
+      "state" => "active"
     )
 
     PENDING_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "pending"
+      "state" => "pending"
     )
+
+    ACTIVE_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/user/memberships/orgs/octocat",
+      "state"            => "active",
+      "organization_url" => "https://api.github.com/orgs/octocat"
+    }
+
+    PENDING_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/user/memberships/orgs/invitocat",
+      "state"            => "pending",
+      "organization_url" => "https://api.github.com/orgs/invitocat"
+    }
+
+    ORG_MEMBERSHIPS         ||= [ACTIVE_ORG_MEMBERSHIP, PENDING_ORG_MEMBERSHIP]
+    ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ORG_MEMBERSHIP]
+    PENDING_ORG_MEMBERSHIPS ||= [PENDING_ORG_MEMBERSHIP]
 
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",

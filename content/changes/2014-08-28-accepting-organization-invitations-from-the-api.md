@@ -15,7 +15,7 @@ When someone [invites][org-invitations] you to an organization, your membership 
 
 Previously, responses from the [add team membership][add-team-membership] and [get team membership][get-team-membership] endpoints included a "status" attribute, which could either be "active" or "pending". We've renamed this attribute from "status" to "state" for better consistency with our other API calls.
 
-To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until **September 3rd, 2014**.
+To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until **September 4th, 2014**.
 
 ### Preview period
 

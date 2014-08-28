@@ -2,13 +2,50 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-08-15T00:00:00Z</updated>
+  <updated>2014-08-28T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-08-28:/changes/2014-08-28-accepting-organization-invitations-from-the-api/</id>
+    <title type="html">Accepting organization invitations from the API</title>
+    <published>2014-08-28T00:00:00Z</published>
+    <updated>2014-08-28T00:00:00Z</updated>
+    <author>
+      <name>jakeboxer</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-08-28-accepting-organization-invitations-from-the-api/" />
+    <content type="html">&lt;p&gt;The upcoming &lt;a href="/changes/2014-08-05-team-memberships-api/"&gt;Team Memberships API&lt;/a&gt; gives you the power to &lt;a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization"&gt;invite&lt;/a&gt; new GitHub users to your organization via the API. We’re expanding the API to also allow users to view their organization membership statuses and accept any invitations they’ve received.&lt;/p&gt;
+
+&lt;h3 id="the-new-organization-memberships-api"&gt;The new Organization Memberships API&lt;/h3&gt;
+
+&lt;p&gt;When someone &lt;a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization"&gt;invites&lt;/a&gt; you to an organization, your membership with that organization begins in the “pending” state. The new &lt;a href="/v3/orgs/members/#list-your-organization-memberships"&gt;list organization memberships&lt;/a&gt; endpoint allows you to find your pending memberships. You can then change them to “active” (accepting the invitation in the process) by using the &lt;a href="/v3/orgs/members/#edit-your-organization-membership"&gt;edit organization membership&lt;/a&gt; endpoint.&lt;/p&gt;
+
+&lt;h3 id="new-team-membership-api-response-attribute"&gt;New Team Membership API response attribute&lt;/h3&gt;
+
+&lt;p&gt;Previously, responses from the &lt;a href="/v3/orgs/teams/#add-team-membership"&gt;add team membership&lt;/a&gt; and &lt;a href="/v3/orgs/teams/#get-team-membership"&gt;get team membership&lt;/a&gt; endpoints included a “status” attribute, which could either be “active” or “pending”. We’ve renamed this attribute from “status” to “state” for better consistency with our other API calls.&lt;/p&gt;
+
+&lt;p&gt;To give you time to update your apps, we’ll keep the legacy “status” attribute around alongside the new “state” attribute until &lt;strong&gt;September 4th, 2014&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3 id="preview-period"&gt;Preview period&lt;/h3&gt;
+
+&lt;p&gt;The new Organization Memberships API is available for developers to preview alongside the &lt;a href="/changes/2014-08-05-team-memberships-api/"&gt;Team Memberships API&lt;/a&gt;. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;While these new APIs are in their preview period, you’ll need to provide the following custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.the-wasp-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become official components of GitHub API v3.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-08-15:/changes/2014-08-15-deployments-api-changes/</id>
     <title type="html">New features for the Deployments API preview</title>
@@ -943,6 +980,25 @@ you have any questions or feedback, &lt;a href="https://github.com/contact?form%
 </content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
+    <title type="html">Wildcard Event for Webhooks</title>
+    <published>2014-02-24T00:00:00Z</published>
+    <updated>2014-02-24T00:00:00Z</updated>
+    <author>
+      <name>kdaigle</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
+    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/</id>
     <title type="html">Finer-grained OAuth scopes for SSH keys</title>
     <published>2014-02-24T00:00:00Z</published>
@@ -981,39 +1037,6 @@ you have any questions or feedback, &lt;a href="https://github.com/contact?form%
 
 &lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys"&gt;please get in touch&lt;/a&gt;.&lt;/p&gt;
 
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
-    <title type="html">Wildcard Event for Webhooks</title>
-    <published>2014-02-24T00:00:00Z</published>
-    <updated>2014-02-24T00:00:00Z</updated>
-    <author>
-      <name>kdaigle</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
-    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
-
-&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-02-21:/changes/2014-02-21-gist-raw-file-url-change/</id>
-    <title type="html">Gist raw file URI change</title>
-    <published>2014-02-21T00:00:00Z</published>
-    <updated>2014-02-21T00:00:00Z</updated>
-    <author>
-      <name>spicycode</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-02-21-gist-raw-file-url-change/" />
-    <content type="html">&lt;p&gt;The raw host for all Gist files is changing immediately.  This change was made to further isolate user content from trusted GitHub applications.
-The new host is &lt;code&gt;https://gist.githubusercontent.com&lt;/code&gt;.  Existing URIs will redirect to the new host.&lt;/p&gt;
 </content>
   </entry>
 </feed>

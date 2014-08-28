@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Search API Becomes an Official Part of API v3</title>
+  <title>Accepting organization invitations from the API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,49 +40,50 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">
+      <div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
 <h2 class="title">
-  <a href="/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">Search API Becomes an Official Part of API v3</a>
+  <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    October 29, 2013
+    August 28, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph"/>
-      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer"/>
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
   </li>
 </ul>
 </div>
 
 
-<p>We’re excited to announce that the <a href="/v3/search">new Search API</a> has graduated from <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a>.
-As of today, the Search API is an official part of <a href="/v3">GitHub API v3</a>.
-As such, the Search API is now stable and suitable for production use.</p>
+<p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invite</a> new GitHub users to your organization via the API. We’re expanding the API to also allow users to view their organization membership statuses and accept any invitations they’ve received.</p>
 
-<h3 id="preview-media-type-no-longer-needed">Preview Media Type No Longer Needed</h3>
+<h3 id="the-new-organization-memberships-api">The new Organization Memberships API</h3>
 
-<p>If you used the Search API during the preview period, you needed to provide a custom media type in the <code>Accept</code> header:</p>
+<p>When someone <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invites</a> you to an organization, your membership with that organization begins in the “pending” state. The new <a href="/v3/orgs/members/#list-your-organization-memberships">list organization memberships</a> endpoint allows you to find your pending memberships. You can then change them to “active” (accepting the invitation in the process) by using the <a href="/v3/orgs/members/#edit-your-organization-membership">edit organization membership</a> endpoint.</p>
 
-<pre><code>application/vnd.github.preview+json
+<h3 id="new-team-membership-api-response-attribute">New Team Membership API response attribute</h3>
+
+<p>Previously, responses from the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> and <a href="/v3/orgs/teams/#get-team-membership">get team membership</a> endpoints included a “status” attribute, which could either be “active” or “pending”. We’ve renamed this attribute from “status” to “state” for better consistency with our other API calls.</p>
+
+<p>To give you time to update your apps, we’ll keep the legacy “status” attribute around alongside the new “state” attribute until <strong>September 4th, 2014</strong>.</p>
+
+<h3 id="preview-period">Preview period</h3>
+
+<p>The new Organization Memberships API is available for developers to preview alongside the <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a>. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>While these new APIs are in their preview period, you’ll need to provide the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.the-wasp-preview+json
 </code></pre>
 
-<p>Now that the preview period has ended, you no longer need to pass this custom media type.</p>
+<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become official components of GitHub API v3.</p>
 
-<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<h3 id="onward">Onward!</h3>
-
-<p>Thanks again to everyone that tried out the Search API during the preview period.</p>
-
-<p>We can’t wait to see what you build!</p>
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API">get in touch with us</a>!</p>
 
 
 </div>

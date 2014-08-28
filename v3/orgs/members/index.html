@@ -62,6 +62,9 @@
   <li><a href="#check-public-membership">Check public membership</a></li>
   <li><a href="#publicize-a-users-membership">Publicize a user’s membership</a></li>
   <li><a href="#conceal-a-users-membership">Conceal a user’s membership</a></li>
+  <li><a href="#list-your-organization-memberships">List your organization memberships</a></li>
+  <li><a href="#get-your-organization-membership">Get your organization membership</a></li>
+  <li><a href="#edit-your-organization-membership">Edit your organization membership</a></li>
 </ul>
 
 <h2 id="members-list">Members list</h2>
@@ -259,6 +262,170 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="list-your-organization-memberships">List your organization memberships</h2>
+
+<div class="alert">
+  <p>
+    The Organization Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.the-wasp-preview+json</pre>
+  
+</div>
+
+<p>An optional <code>state</code> can be passed to request only pending or active memberships.</p>
+
+<pre><code>GET /user/memberships/orgs
+GET /user/memberships/orgs?state=active
+GET /user/memberships/orgs?state=pending
+</code></pre>
+
+<h3 id="response-when-no-state-is-specified">Response when no state is specified</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/octocat"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+    <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/invitocat"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"pending"</span><span class="p">,</span>
+    <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="response-when-a-pending-state-is-specified">Response when a “pending” state is specified</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/invitocat"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"pending"</span><span class="p">,</span>
+    <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="response-when-an-active-state-is-specified">Response when an “active” state is specified</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/octocat"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+    <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="get-your-organization-membership">Get your organization membership</h2>
+
+<div class="alert">
+  <p>
+    The Organization Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.the-wasp-preview+json</pre>
+  
+</div>
+
+<pre><code>GET /user/memberships/orgs/:org
+</code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/invitocat"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"pending"</span><span class="p">,</span>
+  <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="edit-your-organization-membership">Edit your organization membership</h2>
+
+<div class="alert">
+  <p>
+    The Organization Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.the-wasp-preview+json</pre>
+  
+</div>
+
+<pre><code>PATCH /user/memberships/orgs/:org
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>state</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The state that the membership should be in. Only <code>"active"</code> will be accepted.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="example">Example</h3>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/octocat"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+  <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span>
+<span class="p">}</span></code></pre>
 
     </div>
 

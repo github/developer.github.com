@@ -41,6 +41,53 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
+  <h2 class="title">
+  <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    August 28, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer">
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+    <p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invite</a> new GitHub users to your organization via the API. We’re expanding the API to also allow users to view their organization membership statuses and accept any invitations they’ve received.</p>
+
+<h3 id="the-new-organization-memberships-api">The new Organization Memberships API</h3>
+
+<p>When someone <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invites</a> you to an organization, your membership with that organization begins in the “pending” state. The new <a href="/v3/orgs/members/#list-your-organization-memberships">list organization memberships</a> endpoint allows you to find your pending memberships. You can then change them to “active” (accepting the invitation in the process) by using the <a href="/v3/orgs/members/#edit-your-organization-membership">edit organization membership</a> endpoint.</p>
+
+<h3 id="new-team-membership-api-response-attribute">New Team Membership API response attribute</h3>
+
+<p>Previously, responses from the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> and <a href="/v3/orgs/teams/#get-team-membership">get team membership</a> endpoints included a “status” attribute, which could either be “active” or “pending”. We’ve renamed this attribute from “status” to “state” for better consistency with our other API calls.</p>
+
+<p>To give you time to update your apps, we’ll keep the legacy “status” attribute around alongside the new “state” attribute until <strong>September 4th, 2014</strong>.</p>
+
+<h3 id="preview-period">Preview period</h3>
+
+<p>The new Organization Memberships API is available for developers to preview alongside the <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a>. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>While these new APIs are in their preview period, you’ll need to provide the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.the-wasp-preview+json
+</code></pre>
+
+<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become official components of GitHub API v3.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API">get in touch with us</a>!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-08-15-deployments-api-changes/">
   <h2 class="title">
   <a href="/changes/2014-08-15-deployments-api-changes/">New features for the Deployments API preview</a>
@@ -1244,6 +1291,35 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 </div>
 
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
+
+</div>
+
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -1292,35 +1368,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
 
-
-</div>
-
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
 
 </div>
 
@@ -2436,6 +2483,35 @@ curl -u defunkt https://api.github.com/feeds
 
 </div>
 
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
+      <a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -2470,67 +2546,6 @@ but we can’t wait to see what others can do with this information.</p>
 </ul>
 
 <p>Enjoy!</p>
-
-</div>
-
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
-      <a href="https://github.com/ymendel">ymendel</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
-
-
-</div>
-
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
-      <a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
-
 
 </div>
 
@@ -2582,6 +2597,38 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
+
+
+</div>
+
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
 
 
 </div>
@@ -3687,6 +3734,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API<br /><span class="date">August 28, 2014</span></a></li>
+
   <li><a href="/changes/2014-08-15-deployments-api-changes/">New features for the Deployments API preview<br /><span class="date">August 15, 2014</span></a></li>
 
   <li><a href="/changes/2014-08-05-team-memberships-api/">We're changing the way you add new members to your organization<br /><span class="date">August 5, 2014</span></a></li>
@@ -3700,8 +3749,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-06-23-the-github-enterprise-api-documentation-has-a-new-home/">The GitHub Enterprise API documentation has a new home!<br /><span class="date">June 23, 2014</span></a></li>
 
   <li><a href="/changes/2014-06-19-combined-status-api-pagination/">Pagination in the Combined Status API<br /><span class="date">June 19, 2014</span></a></li>
-
-  <li><a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API<br /><span class="date">June 11, 2014</span></a></li>
 
 </ul>
 

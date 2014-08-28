@@ -1673,9 +1673,9 @@ module GitHub
     }
 
     META ||= {
+      :verifiable_password_authentication => true,
       :hooks => ['127.0.0.1/32'],
       :git => ['127.0.0.1/32'],
-      :verifiable_password_authentication => true,
       :pages => [
         "192.30.252.153/32",
         "192.30.252.154/32"

@@ -191,11 +191,17 @@ An optional `state` can be passed to request only pending or active memberships.
 
     PATCH /user/memberships/orgs/:org
 
-### Parameters
+### Input
 
 Name | Type | Description
 -----|------|--------------
 `state`|`string`| **Required**. The state that the membership should be in. Only `"active"` will be accepted.
+
+### Example
+
+<%= json \
+    :state => "active"
+    %>
 
 ### Response
 

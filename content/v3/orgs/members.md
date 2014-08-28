@@ -131,23 +131,23 @@ The user can publicize their own membership.
   </p>
 </div>
 
-An optional `status` can be passed to request only pending or active memberships.
+An optional `state` can be passed to request only pending or active memberships.
 
     GET /user/memberships/orgs
-    GET /user/memberships/orgs?status=active
-    GET /user/memberships/orgs?status=pending
+    GET /user/memberships/orgs?state=active
+    GET /user/memberships/orgs?state=pending
 
-### Response when no status is specified
+### Response when no state is specified
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org_memberships) %>
 
-### Response when a "pending" status is specified
+### Response when a "pending" state is specified
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pending_org_memberships) %>
 
-### Response when an "active" status is specified
+### Response when an "active" state is specified
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:active_org_memberships) %>

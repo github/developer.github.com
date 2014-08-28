@@ -11,7 +11,8 @@ The [Meta API](https://developer.github.com/v3/meta/) now includes the A record 
 $ curl https://api.github.com/meta
 </pre>
 
-```javascript
+<pre><code class="language-javascript">
+{
   "verifiable_password_authentication": true,
   "hooks": [
     "192.30.252.0/22"
@@ -23,6 +24,7 @@ $ curl https://api.github.com/meta
     "192.30.252.153/32",
     "192.30.252.154/32"
   ]
-```
+}
+</code></pre>
 
 These IP addresses have changed a handful of times in the past, so this is a good way to identify them and keep them up to date.

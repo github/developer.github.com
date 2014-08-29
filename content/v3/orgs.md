@@ -9,11 +9,11 @@ title: Organizations | GitHub API
 
 ## List User Organizations
 
-List all public organizations for an unauthenticated user. Lists private *and* public organizations for authenticated users.
+If you make an unauthenticated call, you will list all [public memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) in organizations for any user. If you make an authenticated call, you will also list hidden memberships in organizations, but only for the currently authenticated user.
 
     GET /users/:username/orgs
 
-List public and private organizations for the authenticated user.
+List both hidden and public memberships in organizations for the currently authenticated user.
 
     GET /user/orgs
 

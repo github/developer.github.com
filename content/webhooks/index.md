@@ -77,7 +77,7 @@ Name | Description
 `public` | Any time a Repository changes from private to public.
 `pull_request_review_comment` | Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).
 `pull_request` | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
-`push` | Any git push to a Repository. **This is the default event.**
+`push` | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
 `release` | Any time a Release is published in the Repository.
 `status` | Any time a Repository has a status update from the API
 `team_add` | Any time a team is added or modified on a Repository.

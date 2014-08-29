@@ -67,18 +67,18 @@ Name | Type | Description
 
 ## Get a single issue
 
+{{#tip}}
+
+**Note**: Every pull request is an issue, but not every issue is a pull request. If the issue is not a pull request, the response omits the `pull_request` attribute.
+
+{{/tip}}
+
     GET /repos/:owner/:repo/issues/:number
 
 ### Response
 
 <%= headers 200 %>
 <%= json :full_issue %>
-
-<div class="alert">
-  <p>
-    <strong>Note</strong>: Every pull request is an issue, but not every issue is a pull request. If the issue is not a pull request, the response omits the <code>pull_request</code> attribute.
-  </p>
-</div>
 
 ## Create an issue
 

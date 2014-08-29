@@ -7,7 +7,7 @@ class SearchFilter < Nanoc::Filter
 
   $search_file_path = File.join(Dir.pwd, "static", "search-index.json")
   $search_file_contents = { :pages => [] }
-  
+
   sidebar = File.open(File.join(Dir.pwd, "layouts", "sidebar.html"))
   $sidebar_doc = Nokogiri::HTML(sidebar)
   sidebar.close
@@ -31,7 +31,7 @@ class SearchFilter < Nanoc::Filter
 
   def write_search_file
     begin
-      File.open($search_file_path, 'w') {|f| f.write(JSON.pretty_generate($search_file_contents)) }
+      File.open($search_file_path, 'w') {|f| f.write(JSON.pretty_generate($search_file_contents) << "\n") }  # and final newline)
     rescue
       puts 'WARNING: cannot write search file.'
     end
@@ -47,12 +47,12 @@ class SearchFilter < Nanoc::Filter
       l, r = split_array(a)
       result = combine(merge_sort(l), merge_sort(r))
   end
-   
+
   def split_array(a)
     mid = (a.size / 2).round
     [a.take(mid), a.drop(mid)]
   end
-   
+
   def combine(a, b)
     return b.empty? ? a : b if a.empty? || b.empty?
     smallest = a.first[:url] <= b.first[:url] ? a.shift : b.shift

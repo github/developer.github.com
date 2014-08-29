@@ -119,7 +119,7 @@ module GitHub
 
       CONTENT ||= {
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
-        "FETCH_MORE_TREES" => "{{#tip}}\n\nIf `truncated` is `true`, the number of items in `trees` exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.\n\n{{/tip}}"
+        "FETCH_MORE_TREES" => "{{#tip}}\n\nIf `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.\n\n{{/tip}}"
       }
 
       def fetch_content(key)

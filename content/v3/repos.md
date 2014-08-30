@@ -136,7 +136,13 @@ Name | Type | Description
 
 ## Get
 
+By owner and repository name:
+
     GET /repos/:owner/:repo
+    
+By repository id:
+
+    GET /repositories/:id
 
 ### Response
 

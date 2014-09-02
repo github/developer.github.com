@@ -14,7 +14,7 @@ now](https://github.com/blog/1803-switch-your-picture-with-ease). If users
 haven't uploaded an avatar, we still try to fetch one from Gravatar, but this is
 proxied through our own servers. This means that the `gravatar_id` field from
 the [user schema](https://developer.github.com/v3/users/) is no longer useful
-for finding users' GitHub avatar. Instead, the `avatar_url` field should be
+for finding users' GitHub avatars. Instead, the `avatar_url` field should be
 used. This field has always been present in the [v3 user
 schema](https://developer.github.com/v3/users/) and is the only reliable way to
 find users' GitHub avatars. 

@@ -1,11 +1,11 @@
 ---
 kind: change
 title: Removing Gravatar ID from user payloads
-created_at: 2014-09-02
+created_at: 2014-09-03
 author_name: mastahyeti
 ---
 
-*tl;dr* The `gravatar_id` field is being deprecated. Starting on September 16th, an
+*tl;dr* The `gravatar_id` field is being deprecated. Starting on September 17th, an
 empty string will be returned for this field in the user schema.
 
 Users have been able to upload avatars directly to GitHub for [a while
@@ -19,5 +19,5 @@ reliable way to find users' GitHub avatars.
 
 
 Because it is no longer useful, the `gravatar_id` field is being deprecated.
-Starting on September 16th, an empty string will be returned for this field in
+Starting on September 17th, an empty string will be returned for this field in
 the user schema.

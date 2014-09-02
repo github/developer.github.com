@@ -16,6 +16,8 @@ title: Git Trees | GitHub API
 <%= headers 200 %>
 <%= json :tree %>
 
+<%= fetch_content(:fetch_more_trees) %>
+
 ## Get a Tree Recursively
 
     GET /repos/:owner/:repo/git/trees/:sha?recursive=1
@@ -24,6 +26,8 @@ title: Git Trees | GitHub API
 
 <%= headers 200 %>
 <%= json :tree_extra %>
+
+<%= fetch_content(:fetch_more_trees) %>
 
 ## Create a Tree
 

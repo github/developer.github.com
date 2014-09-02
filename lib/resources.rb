@@ -118,7 +118,8 @@ module GitHub
       end
 
       CONTENT ||= {
-        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\""
+        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
+        "FETCH_MORE_TREES" => "{{#tip}}\n\nIf `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.\n\n{{/tip}}"
       }
 
       def fetch_content(key)
@@ -1339,7 +1340,8 @@ module GitHub
           "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
         }
-      ]
+      ],
+      "truncated" => false
     }
     TREE_EXTRA ||= {
       "sha"  => "fc6274d15fa3ae2ab983129fb037999f264ba9a7",
@@ -1351,7 +1353,8 @@ module GitHub
           "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
-      } ]
+      } ],
+      "truncated" => false
     }
     TREE_NEW ||= {
       "sha"  => "cd8274d15fa3ae2ab983129fb037999f264ba9a7",

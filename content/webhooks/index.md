@@ -163,4 +163,4 @@ Key | Value |
 ----| ----- |
 zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
-hook | The webhook including its configuration |
+hook | The [webhook configuration](/v3/repos/hooks/#get-single-hook) |

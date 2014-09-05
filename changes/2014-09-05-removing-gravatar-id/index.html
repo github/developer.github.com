@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Page Build Event for Webhooks</title>
+  <title>Removing Gravatar ID from user payloads</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,31 +40,40 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-03-12-page-build-event-for-webhooks/">
+      <div class="change" id="/changes/2014-09-05-removing-gravatar-id/">
 <h2 class="title">
-  <a href="/changes/2014-03-12-page-build-event-for-webhooks/">Page Build Event for Webhooks</a>
+  <a href="/changes/2014-09-05-removing-gravatar-id/">Removing Gravatar ID from user payloads</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    March 12, 2014
+    September 5, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter"/>
-      <a href="https://github.com/benbalter">benbalter</a>
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti"/>
+      <a href="https://github.com/mastahyeti">mastahyeti</a>
   </li>
 </ul>
 </div>
 
 
-<p>We’ve made it even easier to track the status of your <a href="http://pages.github.com/">GitHub Pages</a> builds. By subscribing to the new <a href="/v3/activity/events/types/#pagebuildevent"><code>page_build</code></a> event, your application will receive an event payload containing the results of each build. (As always, these builds occur automatically following each push to a GitHub Pages-enabled branch.)</p>
+<p>We have deprecated the <code>gravatar_id</code> attribute in the <a href="https://developer.github.com/v3/users/">user
+representation</a>. Starting September 19,
+the API will always provide an empty string as the value for this attribute.</p>
 
-<p>If you have a <a href="/webhooks/">webhook</a> with the <a href="https://github.com/blog/1778-webhooks-level-up">“send me everything” option</a> selected (or if you use the “<a href="/changes/2014-02-24-wildcard-event-for-webhooks/">wildcard event</a>” via the API), you will receive the <code>page_build</code> event after the next build of your GitHub Pages site. Alternatively, if you prefer to subscribe to specific event types, you can add to the new <code>page_build</code> event to your webhooks via your repository’s webhook settings page or via the <a href="/v3/repos/hooks/">webhooks API</a>.</p>
+<p>Users have been able to upload avatars directly to GitHub for <a href="https://github.com/blog/1803-switch-your-picture-with-ease">a while
+now</a>. If users
+haven’t uploaded an avatar, we still try to fetch one from Gravatar, but that
+happens behind the scenes on GitHub’s servers. As a result, the <code>gravatar_id</code>
+attribute no longer identifies a GitHub user’s canonical avatar. Instead, API
+consumers should use the <code>avatar_url</code> to fetch a user’s avatar. The <code>avatar_url</code>
+attribute has always been present in the <a href="/v3/users/">v3 user representation</a>
+and is the only reliable way to find a GitHub user’s avatar.</p>
 
-<p>For more information, be sure to check out our guide on <a href="/webhooks/">working with webhooks</a>. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+Page+Build+Event">drop us a line</a>.</p>
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+Gravatar+ID">get drop us a line</a>.</p>
 
 
 </div>

@@ -15,6 +15,12 @@ You can read public gists and create them for anonymous users without a token; h
 
 The API will return a 401 "Bad credentials" response if the gists scope was given to the application but the credentials are invalid. -->
 
+## Truncation
+
+The Gist API provides up to one megabyte of content for each file in the gist. Every call to retrieve a gist through the API has a key called `truncated`. If `truncated` is `true`, the file is too large and only a portion of the contents were returned in `content`.
+
+If you need the full contents of the file, you can make a `GET` request to the URL specified by `raw_url`. Be aware that for files larger than ten megabytes, you'll need to clone the gist via the URL provided by `git_pull_url`.
+
 ## List gists
 
 List a user's gists:
@@ -113,7 +119,7 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 
 <div class="alert">
   <p>
-    <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the hash. Deletes can be performed by including the filename with a `null` hash.
+    <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the hash. Deletes can be performed by including the filename with a <code>null</code> hash.
 	</p>
 </div>
 
@@ -196,3 +202,11 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 <%= headers 204 %>
 
 [1]: /v3/oauth/#scopes
+
+## Custom media types
+
+The following media types are supported when fetching gist contents. You can read more about the
+use of media types in the API [here](/v3/media/).
+
+    application/vnd.github.VERSION.raw
+    application/vnd.github.VERSION.base64

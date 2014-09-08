@@ -118,7 +118,8 @@ module GitHub
       end
 
       CONTENT ||= {
-        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\""
+        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
+        "FETCH_MORE_TREES" => "{{#tip}}\n\nIf `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.\n\n{{/tip}}"
       }
 
       def fetch_content(key)
@@ -717,12 +718,28 @@ module GitHub
     }
 
     ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "active"
+      "state" => "active"
     )
 
     PENDING_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "pending"
+      "state" => "pending"
     )
+
+    ACTIVE_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/user/memberships/orgs/octocat",
+      "state"            => "active",
+      "organization_url" => "https://api.github.com/orgs/octocat"
+    }
+
+    PENDING_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/user/memberships/orgs/invitocat",
+      "state"            => "pending",
+      "organization_url" => "https://api.github.com/orgs/invitocat"
+    }
+
+    ORG_MEMBERSHIPS         ||= [ACTIVE_ORG_MEMBERSHIP, PENDING_ORG_MEMBERSHIP]
+    ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ORG_MEMBERSHIP]
+    PENDING_ORG_MEMBERSHIPS ||= [PENDING_ORG_MEMBERSHIP]
 
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
@@ -1249,6 +1266,7 @@ module GitHub
         "size"      => 932,
         "raw_url"   => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
         "type"      => "text/plain",
+        "truncated" => false,
         "language"  => "Erlang"
       }
     }
@@ -1322,7 +1340,8 @@ module GitHub
           "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
         }
-      ]
+      ],
+      "truncated" => false
     }
     TREE_EXTRA ||= {
       "sha"  => "fc6274d15fa3ae2ab983129fb037999f264ba9a7",
@@ -1334,7 +1353,8 @@ module GitHub
           "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
-      } ]
+      } ],
+      "truncated" => false
     }
     TREE_NEW ||= {
       "sha"  => "cd8274d15fa3ae2ab983129fb037999f264ba9a7",
@@ -1605,6 +1625,7 @@ module GitHub
       "id" => 1,
       "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
       "ref" => "master",
+      "task" => "deploy",
       "payload" => {:task => 'deploy:migrate'},
       "environment" => "production",
       "description" => "Deploy request from hubot",
@@ -1631,6 +1652,7 @@ module GitHub
         "ref" => "master",
         "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
         "url" => "https://api.github.com/repos/octocat/example/deployments/1",
+        "task" => "deploy",
         "creator" => USER,
         "environment" => "production",
         "payload" => {:task => 'deploy:migrate'},

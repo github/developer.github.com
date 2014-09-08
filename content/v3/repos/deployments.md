@@ -72,12 +72,12 @@ Below is a simple sequence diagram for how these interactions would work.
 </pre>
 
 Keep in mind that GitHub is never actually accessing your servers. It's up to
-your 3rd party integration to interact with deployment events.
-This allows for [github-services](https://github.com/github/github-services)
-integrations as well as running your own systems depending on your use case.
-Multiple systems can listen for deployment events, and it's up to each of
-those systems to decide whether or not they're responsible for pushing the code
-out to your servers, building native code, etc.
+your 3rd party integration to interact with deployment events.  This allows for
+[github-services](https://github.com/github/github-services) integrations as
+well as running your own systems depending on your use case.  Multiple systems
+can listen for deployment events, and it's up to each of those systems to
+decide whether or not they're responsible for pushing the code out to your
+servers, building native code, etc.
 
 Note that the `repo_deployment` [OAuth scope](/v3/oauth/#scopes) grants
 targeted access to Deployments and Deployment Statuses **without**
@@ -86,9 +86,16 @@ as well.
 
 ## List Deployments
 
-Users with pull access can view deployments for a repository:
+Simple filtering of deployments is available via query parameters:
 
     GET /repos/:owner/:repo/deployments
+
+Name | Type | Description
+-----|------|--------------
+`sha`|`string` | The short or long sha that was recorded at creation time. Default: `none`
+`ref`|`string` | The name of the ref. This can be a branch, tag, or sha. Default: `none`
+`task`|`string` | The name of the task for the deployment. e.g. `deploy` or `deploy:migrations`. Default: `none`
+`environment`|`string` | The name of the environment that was deployed to. e.g. `staging` or `production`. Default: `none`
 
 ### Response
 
@@ -97,6 +104,16 @@ Users with pull access can view deployments for a repository:
 
 ## Create a Deployment
 
+Deployments offer a few configurable parameters with sane defaults.
+
+The `ref` parameter can be any named branch, tag, or sha. At GitHub we often
+deploy branches and verify them before we merge a pull request.
+
+The `environment` parameter allows deployments to be issued to different
+runtime environments. Teams often have multiple environments for verifying
+their applications, like 'production', 'staging', and 'qa'. This allows for
+easy tracking of which environments had deployments requested. The default
+environment is 'production'.
 
 The `auto_merge` parameter is used to ensure that the requested ref is not
 behind the repository's default branch. If the ref *is* behind the default
@@ -104,13 +121,23 @@ branch for the repository, we will attempt to merge it for you. If the merge
 succeeds, the API will return a successful merge commit. If merge conflicts
 prevent the merge from succeeding, the API will return a failure response.
 
-By default, [commit statuses](/v3/repos/statuses) for every submitted context must be in a 'success' state. The `required_contexts` parameter allows you to specify a subset of contexts that must be "success", or to specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do not require any contexts or create any commit statuses, the deployment will always succeed.
+By default, [commit statuses](/v3/repos/statuses) for every submitted context
+must be in a 'success' state. The `required_contexts` parameter allows you to
+specify a subset of contexts that must be "success", or to specify contexts
+that have not yet been submitted. You are not required to use commit statuses
+to deploy. If you do not require any contexts or create any commit statuses,
+the deployment will always succeed.
 
 The `payload` parameter is available for any extra information that a
 deployment system might need. It is a JSON text field that will be passed on
 when a deployment event is dispatched.
 
-Users with push access can create a deployment for a given ref:
+The `task` parameter is used by the deployment system to allow different
+execution paths. In the web world this might be 'deploy:migrations' to run
+schema changes on the system. In the compiled world this could be a flag to
+compile an application with debugging enabled.
+
+Users with `repo` or `repo_deployment` scopes can create a deployment for a given ref:
 
     POST /repos/:owner/:repo/deployments
 
@@ -119,6 +146,7 @@ Users with push access can create a deployment for a given ref:
 Name | Type | Description
 -----|------|--------------
 `ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
+`task`|`string`| **Required**. The named task to execute. e.g. `deploy` or `deploy:migrations`. Default: `deploy`
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: `true`
 `required_contexts`|`Array`| Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts.
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`

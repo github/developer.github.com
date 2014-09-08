@@ -16,7 +16,11 @@ title: Git Trees | GitHub API
 <%= headers 200 %>
 <%= json :tree %>
 
-<%= fetch_content(:fetch_more_trees) %>
+{{#tip}}
+
+If `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
+
+{{/tip}}
 
 ## Get a Tree Recursively
 
@@ -27,7 +31,12 @@ title: Git Trees | GitHub API
 <%= headers 200 %>
 <%= json :tree_extra %>
 
-<%= fetch_content(:fetch_more_trees) %>
+
+{{#tip}}
+
+If `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, you can clone the repository and iterate over the Git data locally.
+
+{{/tip}}
 
 ## Create a Tree
 

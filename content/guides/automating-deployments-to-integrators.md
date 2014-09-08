@@ -27,11 +27,12 @@ Note that the Auto-Deployment service only picks up changes from your default br
 5. Under **GitHub token**, paste an access token you've created. It must have at least the `repo` scope. For more information, see "[Creating an access token for command-line use](https://help.github.com/articles/creating-an-access-token-for-command-line-use)."
 6. Under **Environments**, optionally provide a list of environments you'd like to send your deployments to. The default is "production."
 7. If you *only* want builds that successfully passed a continuous test suite, select **Deploy on status**.
-8. Click **Add service**.
+8. If you're running this service on GitHub Enterprise, you must pass in your appliance's [endpoint URL](https://developer.github.com/v3/enterprise/#endpoint-urls).
+9. Click **Add service**.
 
 ## Hooking up an integrator to deployments
 
-To implement our deployments, we'll use Heroku as an example service. You can use any of the available [github-services][].
+To implement our deployments, we'll use Heroku as an example service.
 
 1. Navigate to the repository where you’re setting up your deployments.
 2. In your repository's right sidebar, click <span aria-label="The edit icon" title="The edit icon" class="octicon octicon-tools"></span>.
@@ -46,4 +47,3 @@ To implement our deployments, we'll use Heroku as an example service. You can us
 From now on, any commits made to your `master` branch--including those generated from merging pull requests--will automatically trigger a deployment to your Heroku application.
 
 [deploy API]: /v3/repos/deployments/
-[github-services]: https://github.com/github/github-services

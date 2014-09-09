@@ -246,7 +246,7 @@ member of the team.
 ### Response if user's membership with team is now pending
 
 <%= headers 200 %>
-<%= json(:active_team_membership) %>
+<%= json(:pending_team_membership) %>
 
 If you attempt to add an organization to a team, you will get this:
 

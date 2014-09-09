@@ -18,7 +18,7 @@ title: Git Trees | GitHub API
 
 {{#tip}}
 
-If `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
+If `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, you can clone the repository and iterate over the Git data locally.
 
 {{/tip}}
 
@@ -34,7 +34,7 @@ If `truncated` is `true`, the number of items in the `tree` array exceeded our m
 
 {{#tip}}
 
-If `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, you can clone the repository and iterate over the Git data locally.
+If `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
 
 {{/tip}}
 

@@ -1007,22 +1007,44 @@ you have any questions or feedback, &lt;a href="https://github.com/contact?form%
 </content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-wildcard-event-for-webhooks/</id>
-    <title type="html">Wildcard Event for Webhooks</title>
+    <id>tag:developer.github.com,2014-02-24:/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/</id>
+    <title type="html">Finer-grained OAuth scopes for SSH keys</title>
     <published>2014-02-24T00:00:00Z</published>
     <updated>2014-02-24T00:00:00Z</updated>
     <author>
-      <name>kdaigle</name>
+      <name>pengwynn</name>
       <uri>https://github.com/technoweenie</uri>
     </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-wildcard-event-for-webhooks/" />
-    <content type="html">&lt;p&gt;We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the &lt;a href="/webhooks/#wildcard-event"&gt;wildcard event&lt;/a&gt; (&lt;code&gt;*&lt;/code&gt;).&lt;/p&gt;
+    <link rel="alternate" href="http://developer.github.com/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/" />
+    <content type="html">&lt;p&gt;As &lt;a href="https://github.com/blog/1786-enhanced-oauth-security-for-ssh-keys"&gt;we announced&lt;/a&gt;, we’ve made some important changes to the way that API consumers manage SSH keys.&lt;/p&gt;
 
-&lt;p&gt;If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.&lt;/p&gt;
+&lt;h2 id="finer-grained-oauth-scopes"&gt;Finer-grained OAuth scopes&lt;/h2&gt;
+
+&lt;p&gt;To help third party applications request only permissions that they need, the API now supports three new &lt;a href="/v3/oauth/#scopes"&gt;scopes&lt;/a&gt; for working with a user’s public SSH keys.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+&lt;code&gt;read:public_key&lt;/code&gt; provides read access to the user’s SSH keys&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;write:public_key&lt;/code&gt; allows an app to read existing keys and create new ones&lt;/li&gt;
+  &lt;li&gt;
+&lt;code&gt;admin:public_key&lt;/code&gt; enables an app to read, write, and delete keys&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="changes-to-user-scope"&gt;Changes to &lt;code&gt;user&lt;/code&gt; scope&lt;/h2&gt;
+
+&lt;p&gt;Historically, &lt;code&gt;user&lt;/code&gt; scope has provided full access to manage a user’s SSH keys. Now that we have dedicated scopes for managing a user’s SSH keys, we have removed those permissions from the &lt;code&gt;user&lt;/code&gt; scope. Now &lt;code&gt;user&lt;/code&gt; scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.&lt;/p&gt;
+
+&lt;h2 id="keys-are-now-immutable"&gt;Keys are now immutable&lt;/h2&gt;
+
+&lt;p&gt;To simplify the security audit trail for SSH keys, we’re making keys immutable. API consumers can continue to create keys and delete keys as needed, but keys can no longer be changed. To change an existing key, API consumers should delete the existing key and create a new one with the desired attributes. This change applies both to a &lt;a href="/v3/users/keys/"&gt;user’s SSH keys&lt;/a&gt; and a &lt;a href="/v3/repos/keys/"&gt;repository’s deploy keys&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id="deleting-keys-when-revoking-a-token"&gt;Deleting keys when revoking a token&lt;/h2&gt;
+
+&lt;p&gt;Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.&lt;/p&gt;
+
+&lt;p&gt;As always, if you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys"&gt;please get in touch&lt;/a&gt;.&lt;/p&gt;
+
 </content>
   </entry>
 </feed>

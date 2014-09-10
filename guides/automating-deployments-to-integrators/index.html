@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Automating deployments to integrators | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
+  <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/js/jquery.js" type="text/javascript"></script>
+  <script src="/js/documentation.js" type="text/javascript"></script>
+</head>
+
+
+<body class="api">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/v3/" class="nav-api">API</a></li>
+        <li><a href="/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+
+  <div class="sub-nav">
+    <h2><a href="/v3/">API</a></h2>
+
+    <ul>
+      <li><a href="/v3/">Reference</a></li>
+      <li><a href="/webhooks/">Webhooks</a></li>
+      <li><a href="/guides/" class="active">Guides</a></li>
+      <li><a href="/libraries/">Libraries</a></li>
+    </ul>
+  </div>
+
+  <div id="wrapper">
+    <div class="content">
+      <h1 id="automating-deployments-to-integrators">Automating deployments to integrators</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#sending-deployments-whenever-you-push-to-a-repository">Sending deployments whenever you push to a repository</a></li>
+  <li><a href="#hooking-up-an-integrator-to-deployments">Hooking up an integrator to deployments</a></li>
+</ul>
+
+<p>The “<a href="/guides/delivering-deployments/">Delivering deployments</a>” guide describes how to build a server that uses the <a href="/v3/repos/deployments/">Deployments API</a> to easily get your code from GitHub into production. But what if you don’t want to host a separate service for deploying code? What if you just want to merge code and have it deploy without thinking about maintaining another app?</p>
+
+<p>You can use the GitHub Auto-Deployment service to receive changes made to your repository and configure it to deliver a deployment to integrators. The Auto-Deployment service can deliver payloads based on two events: whenever a push is made and whenever <a href="/guides/building-a-ci-server/">the CI status is passing</a>.</p>
+
+<p>Here’s a diagram demonstrating what the process might look like:</p>
+
+<p><code>
++--------------------+        +--------+                    +-----------+
+| GitHub Auto-Deploy |        | GitHub |                    |  Heroku   |
+|      Service       |        +--------+                    +-----------+
++--------------------+         |                                  |
+     |                         |                                  |
+     |  Create Deployment      |                                  |
+     |------------------------&gt;|                                  |
+     |                         |                                  |
+     |                         |                                  |
+     |                         |       Deployment Event           |
+     |                         |---------------------------------&gt;|
+     |                         |                                  |
+     |                         |    Deployment Status (pending)   |
+     |                         |&lt;---------------------------------|
+     |                         |                                  |
+     |                         |                                  |
+     |                         |   Deployment Status (success)    |
+     |                         |&lt;---------------------------------|
+     |                         |                                  |
+</code></p>
+
+<div class="alert tip">
+
+<p>Note that the Auto-Deployment service only picks up changes from your default branch, which is usually <code>master</code>.</p>
+
+</div>
+
+<h2 id="sending-deployments-whenever-you-push-to-a-repository">Sending deployments whenever you push to a repository</h2>
+
+<p>The Auto-Deployment service will be responsible for creating deployments when a push is made to your defalt branch. Next, we’ll set up a service to receive those deployment events and handle the deployment of your project.</p>
+
+<ol>
+  <li>Navigate to the repository where you’re setting up your deployments.</li>
+  <li>In your repository’s right sidebar, click <span aria-label="The edit icon" title="The edit icon" class="octicon octicon-tools"></span>.</li>
+  <li>On the left, click <strong>Webhooks &amp; Services</strong>.
+<img src="https://github-images.s3.amazonaws.com/help/settings/webhooks_and_services_menu.png" alt="The webhooks and services menu">
+</li>
+  <li>Click <strong>Add service</strong>, then type “GitHub Auto-Deployment.” <img src="/images/add_github_autodeploy_service.png" alt="Adding the GitHub Auto-Deployment service">
+</li>
+  <li>Under <strong>GitHub token</strong>, paste an access token you’ve created. It must have at least the <code>repo</code> scope. For more information, see “<a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">Creating an access token for command-line use</a>.”</li>
+  <li>Under <strong>Environments</strong>, optionally provide a list of environments you’d like to send your deployments to. This can be <a href="https://developer.github.com/v3/repos/deployments/#parameters">any string you define</a> to describe your environment. The default is “production.”</li>
+  <li>If you <em>only</em> want builds that successfully passed a continuous test suite, select <strong>Deploy on status</strong>.</li>
+  <li>If you’re running this service on GitHub Enterprise, you must pass in your appliance’s <a href="https://developer.github.com/v3/enterprise/#endpoint-urls">endpoint URL</a>.</li>
+  <li>Click <strong>Add service</strong>.</li>
+</ol>
+
+<h2 id="hooking-up-an-integrator-to-deployments">Hooking up an integrator to deployments</h2>
+
+<p>To implement our deployments, we’ll use Heroku as an example service.</p>
+
+<ol>
+  <li>Navigate to the repository where you’re setting up your deployments.</li>
+  <li>In your repository’s right sidebar, click <span aria-label="The edit icon" title="The edit icon" class="octicon octicon-tools"></span>.</li>
+  <li>On the left, click <strong>Webhooks &amp; Services</strong>.
+<img src="https://github-images.s3.amazonaws.com/help/settings/webhooks_and_services_menu.png" alt="The webhooks and services menu">
+</li>
+  <li>Click <strong>Add service</strong>, then type “Heroku.” <img src="/images/add_heroku_autodeploy_service.png" alt="Adding the GitHub Auto-Deployment service">
+</li>
+  <li>Type the name of the Heroku application your GitHub repository should deploy to.</li>
+  <li>Enter in your <a href="https://devcenter.heroku.com/articles/oauth#direct-authorization">Heroku OAuth token</a>. You must generate this yourself following the instructions in Heroku’s documentation.</li>
+  <li>Under <strong>GitHub token</strong>, paste the same token you provided earlier.</li>
+  <li>Click <strong>Add service</strong>.</li>
+</ol>
+
+<p>From now on, any commits made to your <code>master</code> branch–including those generated from merging pull requests–will automatically trigger a deployment to your Heroku application.</p>
+
+
+    </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="sidebar-module">
+        <ul>
+          <li><h3><a href="/guides/">Overview</a></h3></li>
+          <li><h3><a href="/guides/getting-started/">Getting started</a></h3></li>
+          <li><h3><a href="/guides/basics-of-authentication/">Basics of authentication</a></h3></li>
+          <li><h3><a href="/guides/managing-deploy-keys/">Managing deploy keys</a></h3></li>
+          <li><h3><a href="/guides/using-ssh-agent-forwarding/">Using SSH agent forwarding</a></h3></li>
+          <li><h3><a href="/guides/rendering-data-as-graphs/">Rendering data as graphs</a></h3></li>
+          <li><h3><a href="/guides/working-with-comments/">Working with comments</a></h3></li>
+          <li><h3><a href="/guides/traversing-with-pagination/">Traversing with pagination</a></h3></li>
+          <li><h3><a href="/guides/building-a-ci-server/">Building a CI server</a></h3></li>
+          <li><h3><a href="/guides/delivering-deployments/">Delivering deployments</a></h3></li>
+          <li><h3><a href="/guides/automating-deployments-to-integrators/">Automating deployments to integrators</a></h3></li>
+          <li><h3><a href="/guides/best-practices-for-integrators/">Best practices for integrators</a></h3></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-module notice">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+      <div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+    </div><!-- sidebar-shell -->
+  </div><!-- #wrapper -->
+
+    <div id="footer" >
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="http://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="http://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+    </div>
+
+  </div><!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

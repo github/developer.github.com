@@ -11,6 +11,30 @@ The "[Delivering deployments](/guides/delivering-deployments/)" guide describes 
 
 You can use the GitHub Auto-Deployment service to receive changes made to your repository and configure it to deliver a deployment to integrators. The Auto-Deployment service can deliver payloads based on two events: whenever a push is made and whenever [the CI status is passing](/guides/building-a-ci-server/).
 
+Here's a diagram demonstrating what the process might look like:
+
+```
++--------------------+        +--------+                    +-----------+
+| GitHub Auto-Deploy |        | GitHub |                    |  Heroku   |
+|      Service       |        +--------+                    +-----------+
++--------------------+         |                                  |
+     |                         |                                  |
+     |  Create Deployment      |                                  |
+     |------------------------>|                                  |
+     |                         |                                  |
+     |                         |                                  |
+     |                         |       Deployment Event           |
+     |                         |--------------------------------->|
+     |                         |                                  |
+     |                         |    Deployment Status (pending)   |
+     |                         |<---------------------------------|
+     |                         |                                  |
+     |                         |                                  |
+     |                         |   Deployment Status (success)    |
+     |                         |<---------------------------------|
+     |                         |                                  |
+```
+
 {{#tip}}
 
 Note that the Auto-Deployment service only picks up changes from your default branch, which is usually `master`.

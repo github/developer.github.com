@@ -43,13 +43,15 @@ Note that the Auto-Deployment service only picks up changes from your default br
 
 ## Sending deployments whenever you push to a repository
 
+The Auto-Deployment service will be responsible for creating deployments when a push is made to your defalt branch. Next, we'll set up a service to receive those deployment events and handle the deployment of your project.
+
 1. Navigate to the repository where you’re setting up your deployments.
 2. In your repository's right sidebar, click <span aria-label="The edit icon" title="The edit icon" class="octicon octicon-tools"></span>.
 3. On the left, click **Webhooks & Services**.
 ![The webhooks and services menu](https://github-images.s3.amazonaws.com/help/settings/webhooks_and_services_menu.png)
 4. Click **Add service**, then type "GitHub Auto-Deployment." ![Adding the GitHub Auto-Deployment service](/images/add_github_autodeploy_service.png)
 5. Under **GitHub token**, paste an access token you've created. It must have at least the `repo` scope. For more information, see "[Creating an access token for command-line use](https://help.github.com/articles/creating-an-access-token-for-command-line-use)."
-6. Under **Environments**, optionally provide a list of environments you'd like to send your deployments to. The default is "production."
+6. Under **Environments**, optionally provide a list of environments you'd like to send your deployments to. This can be [any string you define](https://developer.github.com/v3/repos/deployments/#parameters) to describe your environment. The default is "production."
 7. If you *only* want builds that successfully passed a continuous test suite, select **Deploy on status**.
 8. If you're running this service on GitHub Enterprise, you must pass in your appliance's [endpoint URL](https://developer.github.com/v3/enterprise/#endpoint-urls).
 9. Click **Add service**.

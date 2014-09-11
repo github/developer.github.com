@@ -12,7 +12,7 @@ September 11, 2014 blank values will be returned for these fields.
 These fields included a deprecated authentication token. The new style of token
 is valid only for a specific feed URL. Because the organization attributes were
 templates and did not specify a full URL, a token could not be generated for
-them.
+organization feeds
 
 In order to preserve the functionality of this API, we have added a new
 attribute and hypermedia link that list specific Atom feed urls for each
@@ -21,5 +21,5 @@ organization the authenticated user is a member of. Check out the updated
 
 If you have any questions or feedback, please [get drop us a line][contact].
 
-[docs]: /v3/repos/
+[docs]: /v3/activity/feeds/
 [contact]: https://github.com/contact?form[subject]=Removing+organization+feeds+from+the+feeds+API

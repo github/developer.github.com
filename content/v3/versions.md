@@ -102,6 +102,12 @@ The recommendations below will help you prepare your application for the next ma
   use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,
   `top`, and `sha`.
 
+1. Feeds API current_user_organization_url attribute.
+: Recommendation: Use **current_user_organization_urls** instead.
+
+1. Feeds API current_user_organization hypermedia link.
+: Recommendation: Use **current_user_organizations** instead.
+
 # beta (Deprecated) {#beta}
 
 The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.

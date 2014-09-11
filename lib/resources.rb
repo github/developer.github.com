@@ -1847,7 +1847,10 @@ module GitHub
       :current_user_public_url => "https://github.com/defunkt",
       :current_user_url => "https://github.com/defunkt.private?token=abc123",
       :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
-      :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      :current_user_organization_urls => "",
+      :current_user_organization_urls => [
+        "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123"
+      ],
       :_links => {
         :timeline => {
           :href => "https://github.com/timeline",
@@ -1870,9 +1873,15 @@ module GitHub
           :type => "application/atom+xml"
         },
         :current_user_organization => {
-          :href => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
-          :type => "application/atom+xml"
-        }
+          :href => "",
+          :type => ""
+        },
+        :current_user_organizations => [
+          {
+            :href => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+            :type => "application/atom+xml"
+          }
+        ]
       }
     }
 

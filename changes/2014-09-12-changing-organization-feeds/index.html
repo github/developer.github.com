@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Sortable Stars in Repository Starring API</title>
+  <title>Changing organization feeds in the Feeds API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,35 +40,58 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-2-13-sortable-stars/">
+      <div class="change" id="/changes/2014-09-12-changing-organization-feeds/">
 <h2 class="title">
-  <a href="/changes/2013-2-13-sortable-stars/">Sortable Stars in Repository Starring API</a>
+  <a href="/changes/2014-09-12-changing-organization-feeds/">Changing organization feeds in the Feeds API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 14, 2013
+    September 12, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti"/>
+      <a href="https://github.com/mastahyeti">mastahyeti</a>
   </li>
 </ul>
 </div>
 
 
-<p>As we <a href="https://github.com/blog/1410-sortable-stars">announced on the GitHub blog</a>, Stars now support sorting. The
-Repository Starring API now supports <a href="/v3/activity/starring/#list-repositories-being-starred">two new parameters</a> when listing
-Stars: <code>sort</code> and <code>direction</code>.</p>
+<p>We have deprecated the <code>current_user_organization_url</code> attribute and the
+<code>current_user_organization.href</code> attribute in the <a href="/v3/activity/feeds/">Feeds API</a>. If you make
+use of these attributes, you’ll want to update your code to use the new
+<code>current_user_organization_urls</code> attribute instead.</p>
 
-<pre class="terminal">
-curl https://api.github.com/users/defunkt/starred?sort=created&amp;direction=asc
-</pre>
+<h3 id="changes-to-the-deprecated-attributes">Changes to the deprecated attributes</h3>
 
-<p>Enjoy.</p>
+<p>Previously, the deprecated attributes returned URI template. For example:</p>
+
+<pre><code class="language-javascript highlight"><span class="s2">"current_user_organization_url"</span><span class="err">:</span>
+  <span class="s2">"https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"</span></code></pre>
+
+<p>The template included a deprecated authentication token. Our new tokens are
+valid only for a concrete feed URL (not for a URI template). Because the
+deprecated attributes were templates and did not specify a concrete URL, the API
+could not provide a token that could be used for organization feeds.</p>
+
+<p>Starting today, the API returns empty values for the deprecated attributes.</p>
+
+<h3 id="new-attribute-for-organization-feeds">New attribute for organization feeds</h3>
+
+<p>In order to preserve the functionality of this API, we have added a new
+attribute that lists specific Atom feed urls for each of the user’s
+organizations.</p>
+
+<pre><code class="language-javascript highlight"><span class="s2">"current_user_organization_urls"</span><span class="err">:</span> <span class="p">[</span>
+  <span class="s2">"https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"</span>
+  <span class="s2">"https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"</span>
+<span class="p">]</span></code></pre>
+
+<p>Check out the updated <a href="/v3/activity/feeds/">Feeds API documentation</a> for the new fields. If you
+have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Changing+organization+feeds+in+the+Feeds+API">get drop us a line</a>.</p>
 
 
 </div>

@@ -75,8 +75,7 @@ lists all the feeds available to the authenticating user:</p>
   <li>
 <strong>Current user actor</strong>: The private timeline for activity created by the authenticated user</li>
   <li>
-<strong>Current user organization</strong>: The private timeline for the authenticated user for a given organization, using <a href="https://developer.github.com/v3/#hypermedia">URI template</a>
-</li>
+<strong>Current user organizations</strong>: The private timeline for the organizations the authenticated user is a member of.</li>
 </ul>
 
 <p><strong>Note</strong>: Private feeds are only returned when <a href="/v3/#basic-authentication">authenticating via Basic
@@ -98,7 +97,10 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"current_user_public_url"</span><span class="p">:</span> <span class="s2">"https://github.com/defunkt"</span><span class="p">,</span>
   <span class="s2">"current_user_url"</span><span class="p">:</span> <span class="s2">"https://github.com/defunkt.private?token=abc123"</span><span class="p">,</span>
   <span class="s2">"current_user_actor_url"</span><span class="p">:</span> <span class="s2">"https://github.com/defunkt.private.actor?token=abc123"</span><span class="p">,</span>
-  <span class="s2">"current_user_organization_url"</span><span class="p">:</span> <span class="s2">"https://github.com/organizations/{org}/defunkt.private.atom?token=abc123"</span><span class="p">,</span>
+  <span class="s2">"current_user_organization_url"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"current_user_organization_urls"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"https://github.com/organizations/github/defunkt.private.atom?token=abc123"</span>
+  <span class="p">],</span>
   <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"timeline"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"href"</span><span class="p">:</span> <span class="s2">"https://github.com/timeline"</span><span class="p">,</span>
@@ -121,9 +123,15 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"application/atom+xml"</span>
     <span class="p">},</span>
     <span class="s2">"current_user_organization"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"href"</span><span class="p">:</span> <span class="s2">"https://github.com/organizations/{org}/defunkt.private.atom?token=abc123"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"application/atom+xml"</span>
-    <span class="p">}</span>
+      <span class="s2">"href"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">},</span>
+    <span class="s2">"current_user_organizations"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"href"</span><span class="p">:</span> <span class="s2">"https://github.com/organizations/github/defunkt.private.atom?token=abc123"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"application/atom+xml"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 

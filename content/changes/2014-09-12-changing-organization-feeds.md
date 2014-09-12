@@ -6,20 +6,41 @@ author_name: mastahyeti
 ---
 
 We have deprecated the `current_user_organization_url` attribute and the
-`current_user_organization` hypermedia link in the [Feeds API][docs]. Starting
-today, the API returns blank values for these fields.
+`current_user_organization.href` attribute in the [Feeds API][docs]. If you make
+use of these attributes, you'll want to update your code to use the new
+`current_user_organization_urls` attribute instead.
 
-These fields included a deprecated authentication token. The new style of token
-is valid only for a specific feed URL. Because the organization attributes were
-templates and did not specify a full URL, a token could not be generated for
-organization feeds
+### Changes to the deprecated attributes
+
+Previously, the deprecated attributes returned URI template. For example:
+
+<pre><code class="language-javascript">
+"current_user_organization_url":
+  "https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"
+</code></pre>
+
+The template included a deprecated authentication token. Our new tokens are
+valid only for a concrete feed URL (not for a URI template). Because the
+deprecated attributes were templates and did not specify a concrete URL, the API
+could not provide a token that could be used for organization feeds.
+
+Starting today, the API returns empty values for the deprecated attributes.
+
+### New attribute for organization feeds
 
 In order to preserve the functionality of this API, we have added a new
-attribute and hypermedia link that list specific Atom feed urls for each
-organization the authenticated user is a member of. Check out the updated
-[Feeds API documentation][docs] for the new fields.
+attribute that lists specific Atom feed urls for each of the user's
+organizations.
 
-If you have any questions or feedback, please [get drop us a line][contact].
+<pre><code class="language-javascript">
+"current_user_organization_urls": [
+  "https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"
+  "https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"
+]
+</code></pre>
+
+Check out the updated [Feeds API documentation][docs] for the new fields. If you
+have any questions or feedback, please [get drop us a line][contact].
 
 [docs]: /v3/activity/feeds/
 [contact]: https://github.com/contact?form[subject]=Changing+organization+feeds+in+the+Feeds+API

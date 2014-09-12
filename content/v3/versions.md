@@ -97,6 +97,12 @@ The recommendations below will help you prepare your application for the next ma
 1. User attribute: gravatar_id
 : Recommendation: Use **avatar_url** instead.
 
+1. Feed attribute: current_user_organization_url
+: Recommendation: Use **current_user_organization_urls** instead.
+
+1. Feed attribute: current_user_organization
+: Recommendation: Use **current_user_organizations** instead.
+
 1. Pagination parameters `top` and `sha` for method: /repos/:owner/:repo/commits
 : Recommendation: When fetching [the list of commits for a repository](/v3/repos/commits/#list-commits-on-a-repository)
   use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,

@@ -22,4 +22,4 @@ organization the authenticated user is a member of. Check out the updated
 If you have any questions or feedback, please [get drop us a line][contact].
 
 [docs]: /v3/activity/feeds/
-[contact]: https://github.com/contact?form[subject]=Removing+organization+feeds+from+the+feeds+API
+[contact]: https://github.com/contact?form[subject]=Changing+organization+feeds+in+the+Feeds+API

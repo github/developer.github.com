@@ -7,7 +7,7 @@ author_name: mastahyeti
 
 We have deprecated the `current_user_organization_url` attribute and the
 `current_user_organization` hypermedia link in the [Feeds API][docs]. Starting
-September 12, 2014 blank values will be returned for these fields.
+today, the API returns blank values for these fields.
 
 These fields included a deprecated authentication token. The new style of token
 is valid only for a specific feed URL. Because the organization attributes were

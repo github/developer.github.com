@@ -1,12 +1,12 @@
 ---
 kind: change
-title: Changing organization feeds in the feeds API
+title: Changing organization feeds in the Feeds API
 created_at: 2014-09-12
 author_name: mastahyeti
 ---
 
 We have deprecated the `current_user_organization_url` attribute and the
-`current_user_organization` hypermedia link in the [feeds API][docs]. Starting
+`current_user_organization` hypermedia link in the [Feeds API][docs]. Starting
 September 12, 2014 blank values will be returned for these fields.
 
 These fields included a deprecated authentication token. The new style of token
@@ -17,7 +17,7 @@ organization feeds
 In order to preserve the functionality of this API, we have added a new
 attribute and hypermedia link that list specific Atom feed urls for each
 organization the authenticated user is a member of. Check out the updated
-[feeds API documentation][docs] for the new fields.
+[Feeds API documentation][docs] for the new fields.
 
 If you have any questions or feedback, please [get drop us a line][contact].
 

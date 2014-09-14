@@ -228,6 +228,7 @@ module GitHub
       "open_issues_count" => 0,
       "has_issues"        => true,
       "has_wiki"          => true,
+      "has_pages"         => false,
       "has_downloads"     => true,
       "pushed_at"         => "2011-01-26T19:06:43Z",
       "created_at"        => "2011-01-26T19:01:12Z",

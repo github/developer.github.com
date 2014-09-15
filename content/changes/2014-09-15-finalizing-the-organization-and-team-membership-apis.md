@@ -5,17 +5,9 @@ created_at: 2014-09-15
 author_name: jakeboxer
 ---
 
-For the past few weeks, the [Organization Membership][org-membership-api] and [Team Membership][team-membership-api] APIs have been in preview periods, requiring special HTTP request headers to access. We also warned that these APIs were in-progress, and changes could come without advance notice.
+For the past few weeks, the new [Organization Membership][org-membership-api] and [Team Membership][team-membership-api] APIs have been available for early access via a preview media type.  As of today, these APIs are stable and suitable for production use.
 
-Today, we're announcing that these new APIs have been finalized.
-
-### What does "finalized" mean?
-
-We do not expect any more changes to these APIs. If we do have to change them, we will provide notice a week in advance.
-
-### When will these APIs become official?
-
-On **September 22nd, 2014**, these APIs will become official parts of the GitHub API v3. The special preview media type header will no longer be required to access them, and the [breaking changes to the "Add team member" endpoint][add-team-member] will go into effect for all requests.
+On **September 22nd, 2014**, these APIs will become official parts of the GitHub API v3. At that time, the preview media type will no longer be required to access these APIs, and the [breaking changes to the "Add team member" endpoint][add-team-member] will go into effect for all requests.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

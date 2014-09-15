@@ -15,6 +15,10 @@ On September 22, 2014, these APIs will become official parts of the GitHub API v
 
 The [breaking change to the "Add team member" endpoint][add-team-member] will also go into effect for all requests on **September 22, 2014**. At that time, if you use the [add team member][add-team-member] endpoint to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the [add team membership][add-team-membership] endpoint.
 
+### Addition to the Organization Membership API
+
+We've updated the [list your organization memberships][list-org-memberships] and [get your organization membership][get-org-membership] endpoints to include some basic information about the membership's organization.
+
 If you have any questions or feedback, please [get in touch with us][contact]!
 
 [contact]: https://github.com/contact?form[subject]=Organization+and+Team+Membership+APIs

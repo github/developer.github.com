@@ -13,7 +13,7 @@ On September 22, 2014, these APIs will become official parts of the GitHub API v
 
 ### Reminder: Breaking change to legacy endpoint
 
-The [breaking change to the "Add team member" endpoint][add-team-member] will also go into effect for all requests on **September 22, 2014**. At that time, if you use the [add team member][add-team-member] endpoint to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, please start using the [add team membership][add-team-membership] endpoint.
+The [breaking change to the "Add team member" endpoint][add-team-member] will also go into effect for all requests on **September 22, 2014**. At that time, if you use the [add team member][add-team-member] endpoint to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the [add team membership][add-team-membership] endpoint.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

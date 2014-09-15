@@ -5,13 +5,7 @@ created_at: 2014-09-15
 author_name: jakeboxer
 ---
 
-For the past few weeks, the new [Organization Membership][org-membership-api] and [Team Membership][team-membership-api] APIs have been available for early access via a preview media type. We also warned that these APIs were in-progress, and changes could come without advance notice.
-
-Today, we're announcing that these new APIs have been finalized.
-
-### What does "finalized" mean?
-
-We do not expect any more changes to these APIs. If we do have to change them, we will provide notice a week in advance.
+For the past few weeks, the new [Organization Membership][org-membership-api] and [Team Membership][team-membership-api] APIs have been available for early access via a preview media type.  As of today, these APIs are stable and suitable for production use.
 
 ### When will these APIs become official?
 

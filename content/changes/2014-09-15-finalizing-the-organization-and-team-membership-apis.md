@@ -17,7 +17,7 @@ The [breaking change to the "Add team member" endpoint][add-team-member] will al
 
 ### Addition to the Organization Membership API
 
-We've updated the [list your organization memberships][list-org-memberships] and [get your organization membership][get-org-membership] endpoints to include some basic information about the membership's organization.
+Thanks to your feedback, we've updated the Organization Membership API to provide direct access to basic information about the organization whenever you fetch a [list of memberships][list-org-memberships] or a [single membership][get-org-membership].
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

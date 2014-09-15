@@ -26,3 +26,5 @@ If you have any questions or feedback, please [get in touch with us][contact]!
 [team-membership-api]: /changes/2014-08-05-team-memberships-api/
 [add-team-member]: /v3/orgs/teams/#add-team-member
 [add-team-membership]: /v3/orgs/teams/#add-team-membership
+[list-org-memberships]: /v3/orgs/members/#list-your-organization-memberships
+[get-org-membership]: /v3/orgs/members/#get-your-organization-membership

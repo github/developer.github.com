@@ -727,13 +727,33 @@ module GitHub
     ACTIVE_ORG_MEMBERSHIP ||= {
       "url"              => "https://api.github.com/user/memberships/orgs/octocat",
       "state"            => "active",
-      "organization_url" => "https://api.github.com/orgs/octocat"
+      "organization_url" => "https://api.github.com/orgs/octocat",
+      "organization"     => {
+        "login"              => "octocat",
+        "url"                => "https://api.github.com/orgs/octocat",
+        "id"                 => 1,
+        "repos_url"          => "https://api.github.com/users/octocat/repos",
+        "events_url"         => "https://api.github.com/users/octocat/events{/privacy}",
+        "members_url"        => "https://api.github.com/users/octocat/members{/member}",
+        "public_members_url" => "https://api.github/com/users/octocat/public_members{/member}",
+        "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+      }
     }
 
     PENDING_ORG_MEMBERSHIP ||= {
       "url"              => "https://api.github.com/user/memberships/orgs/invitocat",
       "state"            => "pending",
-      "organization_url" => "https://api.github.com/orgs/invitocat"
+      "organization_url" => "https://api.github.com/orgs/invitocat",
+      "organization"     => {
+        "login"              => "invitocat",
+        "url"                => "https://api.github.com/orgs/invitocat",
+        "id"                 => 2,
+        "repos_url"          => "https://api.github.com/users/invitocat/repos",
+        "events_url"         => "https://api.github.com/users/invitocat/events{/privacy}",
+        "members_url"        => "https://api.github.com/users/invitocat/members{/member}",
+        "public_members_url" => "https://api.github/com/users/invitocat/public_members{/member}",
+        "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+      }
     }
 
     ORG_MEMBERSHIPS         ||= [ACTIVE_ORG_MEMBERSHIP, PENDING_ORG_MEMBERSHIP]

@@ -64,3 +64,10 @@ If you hit a rate limit, it's strongly recommended that you back off from making
 
 You can always [check your rate limit status](/v3/rate_limit/) at any time. Checking your rate limit incurs no cost on your rate limit.
 
+### Adjusting for API errors
+
+Although your code would never introduce a bug, you may find that you've encountered successive error when trying to access the API.
+
+Rather than ignore the errors, you should ensure that you're correctly interacting with the API. For example, if an endpoint requests a string and you're passing it a numeral, you're going to receive a validation error, and your call won't succeed.
+
+Intentionally ignoring repeated validation errors may result in the suspension of your app for abuse. Rare though it may be, please ensure that you address any errors in the way you are calling the API, should they ever occur.

@@ -55,3 +55,12 @@ Often, responses contain data in the form of URLs. For example, when requesting 
 For the stability of your app, you shouldn't try to parse this data, store it, or try to guess and construct the format of future URLs. Your app is liable to break if we *do* decide to change the URL, in which case we'd happily provide a redirect that you should be following.
 
 One immediate use case for not parsing URLs is when attempting to follow results with pagination. Although it's tempting to construct URLs that append `?page=<number>` to the end, there's really no need to. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on following paginated results in a reliable manner.
+
+### Adjusting for rate limits
+
+The GitHub API enforces [rate limiting](/v3/#rate-limiting) to ensure that everyone is accessing the API in a fair and friendly manner.
+
+If you hit a rate limit, it's strongly recommended that you back off from making requests and try again later. Failure to do so may result in the banning of your app.  
+
+You can always [check your rate limit status](/v3/rate_limit/) at any time. Checking your rate limit incurs no cost on your rate limit.
+

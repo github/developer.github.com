@@ -13,7 +13,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
 
 ### Deprecation Notice
 
-The `token` attribute is [deprecated](/v3/versions/#v3-deprecations) and will return an empty string as the value for this attribute after 1/1/2014.
+The `token` attribute is [deprecated](/v3/versions/#v3-deprecations) and will return an empty string as the value for this attribute after 12/1/2014.
 
 If you're writing new API client code (or updating your existing code), you
 should use the `token_last_eight`  and `hashed_token` attributes instead. Please see [the blog post](/changes/2014-09-16-removing-authorizations-token/) for more details.

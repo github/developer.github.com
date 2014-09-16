@@ -9,7 +9,7 @@ author_name: ptoomey3
 
 We have deprecated the `token` attribute in the [authorization
 representation](/v3/oauth_authorizations/). Starting
-1/1/2014, the API will always provide an empty string as the value for this
+12/1/2014, the API will always provide an empty string as the value for this
 attribute.
 
 

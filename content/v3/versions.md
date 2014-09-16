@@ -108,6 +108,9 @@ The recommendations below will help you prepare your application for the next ma
   use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,
   `top`, and `sha`.
 
+1. Authorization attribute: token
+: Recommendation: Use **token_last_eight** (the last eight characters of the token) and **hashed_token** (base64 of the SHA-256 digest of the token) instead.
+
 # beta (Deprecated) {#beta}
 
 The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.

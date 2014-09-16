@@ -1494,7 +1494,9 @@ module GitHub
       "id" => 1,
       "url" => "https://api.github.com/authorizations/1",
       "scopes" => ["public_repo"],
-      "token" => "abc123",
+      "token" => "abcdefgh12345678",
+      "token_last_eight" => "12345678",
+      "hashed_token" => "JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug=",
       "app" => {
         "url" => "http://my-github-app.com",
         "name" => "my github app",

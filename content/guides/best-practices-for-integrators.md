@@ -4,10 +4,11 @@ title: Best practices for integrators | GitHub API
 
 # Best practices for integrators
 
+Interested in integrating with the GitHub platform? [You're in good company](https://github.com/integrations). This guide will help you design a flexible system that provides the best experience for your users and ensure that your app is setup for any future changes we make to the API.
+
 * TOC
 {:toc}
 
-Interested in integrating with the GitHub platform? [You're in good company](https://github.com/integrations). This guide will help you design a flexible system that provides the best experience for your users and provide a secure connection for transmitted information.
 
 ## Secure payloads delivered from GitHub
 

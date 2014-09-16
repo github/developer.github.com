@@ -48,3 +48,10 @@ GitHub is very explicit when a resource has moved by providing a redirect status
 
 We've provided [a list of HTTP status codes](/v3/#http-redirects) to watch out for when designing your app.
 
+### Don't manually parse URLs
+
+Often, responses contain data in the form of URLs. For example, when requesting a repository, we'll send a key called `clone_url` with a URL you can use to clone the repository.
+
+For the stability of your app, you shouldn't try to parse this data, store it, or try to guess and construct the format of future URLs. Your app is liable to break if we *do* decide to change the URL, in which case we'd happily provide a redirect that you should be following.
+
+One immediate use case for not parsing URLs is when attempting to follow results with pagination. Although it's tempting to construct URLs that append `?page=<number>` to the end, there's really no need to. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on following paginated results in a reliable manner.

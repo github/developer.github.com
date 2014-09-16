@@ -41,6 +41,44 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-09-16-finalizing-the-organization-and-team-membership-apis/">
+  <h2 class="title">
+  <a href="/changes/2014-09-16-finalizing-the-organization-and-team-membership-apis/">Finalizing the Organization and Team Membership APIs</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 16, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer">
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+    <p>For the past few weeks, the new <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Organization Membership</a> and <a href="/changes/2014-08-05-team-memberships-api/">Team Membership</a> APIs have been available for early access via a preview media type.  As of today, these APIs are stable and suitable for production use.</p>
+
+<h3 id="preview-period-ends-on-september-23">Preview period ends on September 23</h3>
+
+<p>On September 23, 2014, these APIs will become official parts of the GitHub API v3. At that time, the preview media type will no longer be required to access these APIs.</p>
+
+<h3 id="reminder-breaking-change-to-legacy-endpoint">Reminder: Breaking change to legacy endpoint</h3>
+
+<p>The <a href="/v3/orgs/teams/#add-team-member">breaking change to the “Add team member” endpoint</a> will also go into effect for all requests on <strong>September 23, 2014</strong>. At that time, if you use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add a user to a team and that user isn’t already on another team in your organization, the request will fail. To avoid this, be sure to use the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint.</p>
+
+<h3 id="addition-to-the-organization-membership-api">Addition to the Organization Membership API</h3>
+
+<p>Thanks to your feedback, we’ve updated the Organization Membership API to provide direct access to basic information about the organization whenever you fetch a <a href="/v3/orgs/members/#list-your-organization-memberships">list of memberships</a> or a <a href="/v3/orgs/members/#get-your-organization-membership">single membership</a>.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+and+Team+Membership+APIs">get in touch with us</a>!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-09-12-changing-organization-feeds/">
   <h2 class="title">
   <a href="/changes/2014-09-12-changing-organization-feeds/">Changing organization feeds in the Feeds API</a>
@@ -1541,39 +1579,6 @@ on previous Pages builds.</p>
 
 </div>
 
-<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 10, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
-<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
-create a new webhook, we will send this event as an initial test of the webhook.</p>
-
-<p>The ping is only informational, doesn’t need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It’s just a quick
-“hello world” to let you know you set everything up correctly.</p>
-
-<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
-By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
-you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
-
-</div>
-
 <div class="change" id="/changes/2014-02-10-repo-hook-scopes/">
   <h2 class="title">
   <a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks</a>
@@ -1609,6 +1614,39 @@ repository contents:</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes">get in touch</a>.</p>
 
+
+</div>
+
+<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 10, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
+<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.</p>
+
+<p>The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.</p>
+
+<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
+By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
+you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
 
 </div>
 
@@ -3826,6 +3864,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-09-16-finalizing-the-organization-and-team-membership-apis/">Finalizing the Organization and Team Membership APIs<br /><span class="date">September 16, 2014</span></a></li>
+
   <li><a href="/changes/2014-09-12-changing-organization-feeds/">Changing organization feeds in the Feeds API<br /><span class="date">September 12, 2014</span></a></li>
 
   <li><a href="/changes/2014-09-05-removing-gravatar-id/">Removing Gravatar ID from user payloads<br /><span class="date">September 5, 2014</span></a></li>
@@ -3839,8 +3879,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">New assigned/labeled actions for issue and pull request events<br /><span class="date">July 28, 2014</span></a></li>
 
   <li><a href="/changes/2014-07-09-status-contexts-are-official/">The Combined Status API is official<br /><span class="date">July 9, 2014</span></a></li>
-
-  <li><a href="/changes/2014-07-07-example-webhook-payloads/">New example webhook payloads<br /><span class="date">July 7, 2014</span></a></li>
 
 </ul>
 

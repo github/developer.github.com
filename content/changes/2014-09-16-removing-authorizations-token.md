@@ -32,7 +32,7 @@ several common use cases.
 token. As an example, `token_last_eight` could be used to display a list of
 partial token values to help a user manage their OAuth tokens.
 
-* `hashed_token` is the base64 SHA-256 digest of the token value. `hashed_token`
+* `hashed_token` is the base64 of the SHA-256 digest of the token. `hashed_token`
 could be used to programmatically validate a given token matches an
 authorization returned by the API.
 

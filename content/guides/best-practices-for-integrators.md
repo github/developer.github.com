@@ -41,3 +41,10 @@ You should make use of proper HTTP status codes in order to inform users. You ca
 Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.  
 
 ![Viewing a payload response](/images/payload_response_tab.png)
+
+### Follow any redirects that the API sends you
+
+GitHub is very explicit when a resource has moved by providing a redirect status code. You should absolutely follow these redirections. Every redirect response sets the `Location` header with the new URI to go to. If you receive a redirect, it's best to update your code to follow that URI, in case you're requesting a deprecated path.
+
+We've provided [a list of HTTP status codes](/v3/#http-redirects) to watch out for when designing your app.
+

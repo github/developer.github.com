@@ -4,11 +4,10 @@ title: Best practices for integrators | GitHub API
 
 # Best practices for integrators
 
-Interested in integrating with the GitHub platform? [You're in good company](https://github.com/integrations). This guide will help you design a flexible system that provides the best experience for your users and ensure that your app is setup for any future changes we make to the API.
+Interested in integrating with the GitHub platform? [You're in good company](https://github.com/integrations). This guide will help you build an app that provides the best experience for your users *and* ensure that it's reliably interacting with the API.
 
 * TOC
 {:toc}
-
 
 ## Secure payloads delivered from GitHub
 
@@ -44,30 +43,30 @@ Users can dig into the server responses you send back to GitHub. Ensure that you
 
 ### Follow any redirects that the API sends you
 
-GitHub is very explicit when a resource has moved by providing a redirect status code. You should absolutely follow these redirections. Every redirect response sets the `Location` header with the new URI to go to. If you receive a redirect, it's best to update your code to follow that URI, in case you're requesting a deprecated path.
+GitHub is very explicit in telling you when a resource has moved by providing a redirect status code. You should absolutely follow these redirections. Every redirect response sets the `Location` header with the new URI to go to. If you receive a redirect, it's best to update your code to follow the new URI, in case you're requesting a deprecated path that we might remove.
 
-We've provided [a list of HTTP status codes](/v3/#http-redirects) to watch out for when designing your app.
+We've provided [a list of HTTP status codes](/v3/#http-redirects) to watch out for when designing your app to follow redirects.
 
 ### Don't manually parse URLs
 
-Often, responses contain data in the form of URLs. For example, when requesting a repository, we'll send a key called `clone_url` with a URL you can use to clone the repository.
+Often, API responses contain data in the form of URLs. For example, when requesting a repository, we'll send a key called `clone_url` with a URL you can use to clone the repository.
 
-For the stability of your app, you shouldn't try to parse this data, store it, or try to guess and construct the format of future URLs. Your app is liable to break if we *do* decide to change the URL, in which case we'd happily provide a redirect that you should be following.
+For the stability of your app, you shouldn't try to parse this data, store it, or try to guess and construct the format of future URLs. Your app is liable to break if we decide to change the URL.
 
-One immediate use case for not parsing URLs is when attempting to follow results with pagination. Although it's tempting to construct URLs that append `?page=<number>` to the end, there's really no need to. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on following paginated results in a reliable manner.
+One immediate use case for not parsing URLs is when attempting to follow results with pagination. Although it's tempting to construct URLs that append `?page=<number>` to the end, there's really no need to. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on dependably following paginated results.
 
-### Adjusting for rate limits
+### Dealing with rate limits
 
 The GitHub API enforces [rate limiting](/v3/#rate-limiting) to ensure that everyone is accessing the API in a fair and friendly manner.
 
-If you hit a rate limit, it's strongly recommended that you back off from making requests and try again later. Failure to do so may result in the banning of your app.  
+If you hit a rate limit, it's strongly recommended that you back off from making requests and try again later when you're permitted to do so. Failure to do so may result in the banning of your app.  
 
-You can always [check your rate limit status](/v3/rate_limit/) at any time. Checking your rate limit incurs no cost on your rate limit.
+You can always [check your rate limit status](/v3/rate_limit/) at any time. Checking your rate limit incurs no cost against your rate limit.
 
-### Adjusting for API errors
+### Dealing with API errors
 
-Although your code would never introduce a bug, you may find that you've encountered successive error when trying to access the API.
+Although your code would never introduce a bug, you may find that you've encountered successive errors when trying to access the API.
 
-Rather than ignore the errors, you should ensure that you're correctly interacting with the API. For example, if an endpoint requests a string and you're passing it a numeral, you're going to receive a validation error, and your call won't succeed.
+Rather than ignore the errors, you should ensure that you're correctly interacting with the API. For example, if an endpoint requests a string and you're passing it a numeric value, you're going to receive a validation error, and your call won't ever succeed.
 
-Intentionally ignoring repeated validation errors may result in the suspension of your app for abuse. Rare though it may be, please ensure that you address any errors in the way you are calling the API, should they ever occur.
+Intentionally ignoring repeated validation errors may result in the suspension of your app for abuse.

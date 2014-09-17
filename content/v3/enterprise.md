@@ -33,7 +33,7 @@ http(s)://<em>hostname</em>/
 
 Your Enterprise installation's API endpoints accept [the same authentication methods](http://developer.github.com/v3/#authentication) as the GitHub.com API. Specifically, you can authenticate yourself with **[OAuth tokens][]** (which can be created using the [Authorizations API][]) or **[basic authentication][]**.
 
-The [Admin Stats][], [License][], [Search Indexing][], and [User Administration][] API endpoints are only accessible to GitHub Enterprise site administrators. The [Management Console][] API endpoints are only accessible with a valid license file.
+The [Admin Stats][], [License][], [Search Indexing][], and [User Administration][] API endpoints are only accessible to GitHub Enterprise site administrators. The [Management Console][] API endpoints are only accessible via the Management Console password that you originally configured.
 
 [Authorizations API]: /v3/oauth_authorizations/#create-a-new-authorization
 [OAuth tokens]: /v3/oauth/

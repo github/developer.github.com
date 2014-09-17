@@ -11,23 +11,18 @@ The Management Console API helps you manage your GitHub Enterprise installation.
 
 ## Authentication
 
-You need to pass [an MD5 hash](https://en.wikipedia.org/wiki/MD5#MD5_hashes) of your license file as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-and-software-package-for-the-first-time). On most systems, you can get this hash by simply calling `md5sum` on the license file:
+You need to pass your Management Console password as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-and-software-package-for-the-first-time).
+
+Use the `api_key` parameter to send this token with each request. For example:
 
 <pre class="terminal">
-$ md5sum github-enterprise.ghl
-5d10ffffa442a336061daee294536234  github-enterprise.ghl
-</pre>
-
-You can use the `license_md5` parameter to send this token with each request. For example:
-
-<pre class="terminal">
-$ curl 'http://<em>hostname</em>/setup/api?license_md5=<em>md5-checksum-of-license</em>'
+$ curl 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em>'
 </pre>
 
 You can also use standard HTTP authentication to send this token. For example:
 
 <pre class="terminal">
-$ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api'
+$ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
 </pre>
 
 ## Upload a license and software package for the first time

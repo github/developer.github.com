@@ -37,13 +37,13 @@ You should make use of proper HTTP status codes in order to inform users. You ca
 
 ## Provide as much information as possible to the user
 
-Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.  
+Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.
 
 ![Viewing a payload response](/images/payload_response_tab.png)
 
 ### Follow any redirects that the API sends you
 
-GitHub is very explicit in telling you when a resource has moved by providing a redirect status code. You should absolutely follow these redirections. Every redirect response sets the `Location` header with the new URI to go to. If you receive a redirect, it's best to update your code to follow the new URI, in case you're requesting a deprecated path that we might remove.
+GitHub is explicit in telling you when a resource has moved by providing a redirect status code. You should follow these redirections. Every redirect response sets the `Location` header with the new URI to go to. If you receive a redirect, it's best to update your code to follow the new URI, in case you're requesting a deprecated path that we might remove.
 
 We've provided [a list of HTTP status codes](/v3/#http-redirects) to watch out for when designing your app to follow redirects.
 
@@ -51,15 +51,15 @@ We've provided [a list of HTTP status codes](/v3/#http-redirects) to watch out f
 
 Often, API responses contain data in the form of URLs. For example, when requesting a repository, we'll send a key called `clone_url` with a URL you can use to clone the repository.
 
-For the stability of your app, you shouldn't try to parse this data, store it, or try to guess and construct the format of future URLs. Your app is liable to break if we decide to change the URL.
+For the stability of your app, you shouldn't try to parse this data or try to guess and construct the format of future URLs. Your app is liable to break if we decide to change the URL.
 
-One immediate use case for not parsing URLs is when attempting to follow results with pagination. Although it's tempting to construct URLs that append `?page=<number>` to the end, there's really no need to. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on dependably following paginated results.
+For example, when working with paginated results, it's often tempting to construct URLs that append `?page=<number>` to the end. Avoid that temptation. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on dependably following paginated results.
 
 ### Dealing with rate limits
 
-The GitHub API enforces [rate limiting](/v3/#rate-limiting) to ensure that everyone is accessing the API in a fair and friendly manner.
+The GitHub API [rate limit](/v3/#rate-limiting) ensures that the API is fast and available for everyone.
 
-If you hit a rate limit, it's strongly recommended that you back off from making requests and try again later when you're permitted to do so. Failure to do so may result in the banning of your app.  
+If you hit a rate limit, it's expected that you back off from making requests and try again later when you're permitted to do so. Failure to do so may result in the banning of your app.
 
 You can always [check your rate limit status](/v3/rate_limit/) at any time. Checking your rate limit incurs no cost against your rate limit.
 
@@ -67,6 +67,6 @@ You can always [check your rate limit status](/v3/rate_limit/) at any time. Chec
 
 Although your code would never introduce a bug, you may find that you've encountered successive errors when trying to access the API.
 
-Rather than ignore the errors, you should ensure that you're correctly interacting with the API. For example, if an endpoint requests a string and you're passing it a numeric value, you're going to receive a validation error, and your call won't ever succeed.
+Rather than ignore repeated `4xx` and `5xx` status codes, you should ensure that you're correctly interacting with the API. For example, if an endpoint requests a string and you're passing it a numeric value, you're going to receive a `5xx` validation error, and your call won't succeed. Similarly, attempting to access an unauthorized or nonexistent endpoint will result in a `4xx` error.
 
 Intentionally ignoring repeated validation errors may result in the suspension of your app for abuse.

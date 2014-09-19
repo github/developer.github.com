@@ -130,7 +130,7 @@ covers the entire API.
 [php-github-api]: https://github.com/KnpLabs/php-github-api
 [github-api]: https://github.com/yiiext/github-api
 [kohana]: https://github.com/acoulton/github_v3_api
-[joomla]: https://github.com/joomla/joomla-framework
+[joomla]: https://github.com/joomla-framework/github-api
 [kdyby-github]: https://github.com/kdyby/github
 [milo-github-api]: https://github.com/milo/github-api
 

@@ -122,14 +122,6 @@ This endpoint allows you to start a configuration process at any time:
 
     POST /setup/api/configure
 
-### Parameters
-
-Name | Type | Description
------|------|--------------
-`complete`|`string` | An optional parameter which, if set to `1`, ensures that the process is executed completely by running through the entire provisioning process. This can take up to twenty minutes to finish.
-
-**Note**: Typically, you wouldn't need to set `complete` to `1` if you're just updating your settings. Upgrades should *always* be full runs.
-
 ### Response
 
 <pre class="terminal">

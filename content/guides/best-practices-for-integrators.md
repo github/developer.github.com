@@ -41,13 +41,13 @@ Users can dig into the server responses you send back to GitHub. Ensure that you
 
 ![Viewing a payload response](/images/payload_response_tab.png)
 
-### Follow any redirects that the API sends you
+## Follow any redirects that the API sends you
 
 GitHub is explicit in telling you when a resource has moved by providing a redirect status code. You should follow these redirections. Every redirect response sets the `Location` header with the new URI to go to. If you receive a redirect, it's best to update your code to follow the new URI, in case you're requesting a deprecated path that we might remove.
 
 We've provided [a list of HTTP status codes](/v3/#http-redirects) to watch out for when designing your app to follow redirects.
 
-### Don't manually parse URLs
+## Don't manually parse URLs
 
 Often, API responses contain data in the form of URLs. For example, when requesting a repository, we'll send a key called `clone_url` with a URL you can use to clone the repository.
 
@@ -55,7 +55,7 @@ For the stability of your app, you shouldn't try to parse this data or try to gu
 
 For example, when working with paginated results, it's often tempting to construct URLs that append `?page=<number>` to the end. Avoid that temptation. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on dependably following paginated results.
 
-### Dealing with rate limits
+## Dealing with rate limits
 
 The GitHub API [rate limit](/v3/#rate-limiting) ensures that the API is fast and available for everyone.
 
@@ -63,7 +63,7 @@ If you hit a rate limit, it's expected that you back off from making requests an
 
 You can always [check your rate limit status](/v3/rate_limit/) at any time. Checking your rate limit incurs no cost against your rate limit.
 
-### Dealing with API errors
+## Dealing with API errors
 
 Although your code would never introduce a bug, you may find that you've encountered successive errors when trying to access the API.
 

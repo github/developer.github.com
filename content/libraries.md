@@ -161,12 +161,10 @@ covers the entire API.
 ## Ruby
 
 * [GitHub API Gem][ghapi]
-* [Octocat Herder][herder]
 * [GitHub v3 API][ruby1]
 * [GitHub API Client][ruby2]
 * [Ghee][ghee]
 
-[herder]: https://github.com/jhelwig/octocat_herder
 [ghapi]: https://github.com/peter-murach/github
 [ruby1]: https://github.com/jwilger/github-v3-api
 [ruby2]: https://github.com/okonski/github-api-client

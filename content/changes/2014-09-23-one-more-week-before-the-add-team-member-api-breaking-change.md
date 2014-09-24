@@ -7,7 +7,7 @@ author_name: jakeboxer
 
 We're delaying the breaking change to the ["Add team member" API][add-team-member] by another week to give developers more time to update their applications.
 
-The [breaking change to the "Add team member" endpoint][add-team-member] will also go into effect for all requests on **September 30, 2014**. At that time, if you use the [add team member][add-team-member] endpoint to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the [add team membership][add-team-membership] endpoint.
+The [breaking change to the "Add team member" API][finalizing] will go into effect for all requests on **September 30, 2014**. At that time, if you use [the "Add team member" API][add-team-member] to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the [the "Add team membership" API][add-team-membership].
 
 ### The Organization and Team Membership APIs are now official
 

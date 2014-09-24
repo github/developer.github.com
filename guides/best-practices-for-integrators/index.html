@@ -60,6 +60,10 @@
   <li><a href="#favor-asynchronous-work-over-synchronous">Favor asynchronous work over synchronous</a></li>
   <li><a href="#use-appropriate-http-status-codes-when-responding-to-github">Use appropriate HTTP status codes when responding to GitHub</a></li>
   <li><a href="#provide-as-much-information-as-possible-to-the-user">Provide as much information as possible to the user</a></li>
+  <li><a href="#follow-any-redirects-that-the-api-sends-you">Follow any redirects that the API sends you</a></li>
+  <li><a href="#dont-manually-parse-urls">Don’t manually parse URLs</a></li>
+  <li><a href="#dealing-with-rate-limits">Dealing with rate limits</a></li>
+  <li><a href="#dealing-with-api-errors">Dealing with API errors</a></li>
 </ul>
 
 <h2 id="secure-payloads-delivered-from-github">Secure payloads delivered from GitHub</h2>
@@ -96,13 +100,13 @@
 
 <p><img src="/images/payload_response_tab.png" alt="Viewing a payload response"></p>
 
-<h3 id="follow-any-redirects-that-the-api-sends-you">Follow any redirects that the API sends you</h3>
+<h2 id="follow-any-redirects-that-the-api-sends-you">Follow any redirects that the API sends you</h2>
 
 <p>GitHub is explicit in telling you when a resource has moved by providing a redirect status code. You should follow these redirections. Every redirect response sets the <code>Location</code> header with the new URI to go to. If you receive a redirect, it’s best to update your code to follow the new URI, in case you’re requesting a deprecated path that we might remove.</p>
 
 <p>We’ve provided <a href="/v3/#http-redirects">a list of HTTP status codes</a> to watch out for when designing your app to follow redirects.</p>
 
-<h3 id="dont-manually-parse-urls">Don’t manually parse URLs</h3>
+<h2 id="dont-manually-parse-urls">Don’t manually parse URLs</h2>
 
 <p>Often, API responses contain data in the form of URLs. For example, when requesting a repository, we’ll send a key called <code>clone_url</code> with a URL you can use to clone the repository.</p>
 
@@ -110,7 +114,7 @@
 
 <p>For example, when working with paginated results, it’s often tempting to construct URLs that append <code>?page=&lt;number&gt;</code> to the end. Avoid that temptation. <a href="/guides/traversing-with-pagination">Our guide on pagination</a> offers some safe tips on dependably following paginated results.</p>
 
-<h3 id="dealing-with-rate-limits">Dealing with rate limits</h3>
+<h2 id="dealing-with-rate-limits">Dealing with rate limits</h2>
 
 <p>The GitHub API <a href="/v3/#rate-limiting">rate limit</a> ensures that the API is fast and available for everyone.</p>
 
@@ -118,7 +122,7 @@
 
 <p>You can always <a href="/v3/rate_limit/">check your rate limit status</a> at any time. Checking your rate limit incurs no cost against your rate limit.</p>
 
-<h3 id="dealing-with-api-errors">Dealing with API errors</h3>
+<h2 id="dealing-with-api-errors">Dealing with API errors</h2>
 
 <p>Although your code would never introduce a bug, you may find that you’ve encountered successive errors when trying to access the API.</p>
 

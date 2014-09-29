@@ -5,13 +5,13 @@ created_at: 2014-09-23
 author_name: jakeboxer
 ---
 
-We're delaying the breaking change to the ["Add team member" API][add-team-member] by another week to give developers more time to update their applications.
+**Updated:** Based on feedback from developers, we're delaying the breaking change to the ["Add team member" API][add-team-member] until next Monday. The change will go into effect for all requests on **October 6, 2014**.
 
-The [breaking change to the "Add team member" API][finalizing] will go into effect for all requests on **September 30, 2014**. At that time, if you use [the "Add team member" API][add-team-member] to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the [the "Add team membership" API][add-team-membership].
+On October 6, if you use [the "Add team member" API][add-team-member] to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the [the "Add team membership" API][add-team-membership].
 
 ### The Organization and Team Membership APIs are now official
 
-As promised in [our blog post last week][finalizing], the [Organization Membership][org-membership-api] and [Team Membership][team-membership-api] APIs are now an official part of the GitHub API! The preview media type is no longer required to access them.
+As promised in [our blog post earlier this month][finalizing], the [Organization Membership][org-membership-api] and [Team Membership][team-membership-api] APIs are now an official part of the GitHub API! The preview media type is no longer required to access them.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

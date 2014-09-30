@@ -5,9 +5,7 @@ created_at: 2014-09-31
 author_name: atmos
 ---
 
-Today we're introducing a breaking change to the [deployment][1] and [deployment status][2] payloads for webhooks. On October 22nd, 2014, we will stop supporting the old payload formats. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
-
-Since we're still in the [preview period][3] for the deployments API we felt it was best to correct this inconsistency now. This change brings the payloads for these events more inline with the responses you'd receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under deployment and deployment_status keys.
+Today we're introducing a compatability period for a breaking change to the [deployment][1] and [deployment status][2] payloads for webhooks. This change brings the payloads for these events more inline with the responses you'd receive from the API. During this period we'll continue sending the previous payload formats but we've started sending the new format along. On October 22nd, 2014, we will stop sending the old payload formats. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
 
 ## DeploymentEvent Changes
 
@@ -150,7 +148,7 @@ Since we're still in the [preview period][3] for the deployments API we felt it 
 }
 </code></pre>
 
-If you have any questions or feedback, please [get in touch][get-in-touch].
+Since we're still in the [preview period][3] for the deployments API we felt it was best to correct this inconsistency now. If you have any questions or feedback, please [get in touch][get-in-touch].
 
 [1]: https://developer.github.com/v3/activity/events/types/#deploymentevent
 [2]: https://developer.github.com/v3/activity/events/types/#deploymentstatusevent

@@ -5,9 +5,9 @@ created_at: 2014-09-23
 author_name: jakeboxer
 ---
 
-**Updated:** Based on feedback from developers, we're delaying the breaking change to the ["Add team member" API][add-team-member] until next Monday. The change will go into effect for all requests on **October 6, 2014**.
+**Update: 2014-09-30:** In response to feedback from developers, we're delaying the breaking change to the ["Add team member" API][add-team-member] until Monday, **October 6, 2014**. The change will go into effect for all requests on that date.
 
-On October 6, if you use [the "Add team member" API][add-team-member] to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the [the "Add team membership" API][add-team-membership].
+Starting October 6, if you use [the "Add team member" API][add-team-member] to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the [the "Add team membership" API][add-team-membership].
 
 ### The Organization and Team Membership APIs are now official
 

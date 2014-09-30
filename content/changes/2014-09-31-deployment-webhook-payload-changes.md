@@ -5,9 +5,9 @@ created_at: 2014-09-31
 author_name: atmos
 ---
 
-Today we're introducing a breaking change to the [deployment][1] and [deployment status][2] payloads we send to webhooks. We will continue supporting the existing payloads until October 22nd 2014. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption. Since we're still in the [preview period][3] for the deployments API we felt it was best to correct this inconsistency now.
+Today we're introducing a breaking change to the [deployment][1] and [deployment status][2] payloads for webhooks. On October 22nd, 2014, we will stop supporting the old payload formats. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
 
-This change brings the payloads for these events more inline with the responses you'd receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under deployment and deployment_status keys.
+Since we're still in the [preview period][3] for the deployments API we felt it was best to correct this inconsistency now. This change brings the payloads for these events more inline with the responses you'd receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under deployment and deployment_status keys.
 
 ## DeploymentEvent Changes
 

@@ -1,15 +1,15 @@
 ---
 kind: change
 title: Deployment webhook payload changes
-created_at: 2014-09-24
+created_at: 2014-09-31
 author_name: atmos
 ---
 
-Today, we’re introducing a few updates to the [DeploymentEvent][1] and [DeploymentStatusEvent][2] hook payloads. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under deployment and deployment_status keys. This change brings the payloads for these events more inline with the responses you'd receive from the API.
+Today we're introducing a breaking change to the [deployment][1] and [deployment status][2] payloads we send to webhooks. We will continue supporting the existing payloads until October 22nd 2014. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption. Since we're still in the [preview period][4] for the deployments API we felt it was best to correct this inconsistency now.
 
-We'll send payloads including both the new nested format as well as the existing top-level attributes until October 22nd.  At that time we'll remove the top-level attributes and expect everyone to start using the new format.
+This change brings the payloads for these events more inline with the responses you'd receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under deployment and deployment_status keys.
 
-## DeploymentEvent payloads
+## DeploymentEvent Changes
 
 #### Previously
 
@@ -29,7 +29,7 @@ We'll send payloads including both the new nested format as well as the existing
 
 </code></pre>
 
-#### Existing
+#### Existing - 2014/09/31
 
 <pre><code class="language-javascript">
 {
@@ -62,7 +62,7 @@ We'll send payloads including both the new nested format as well as the existing
 
 </code></pre>
 
-#### Planned
+#### Planned - 2014/10/22
 
 <pre><code class="language-javascript">
 {
@@ -86,7 +86,7 @@ We'll send payloads including both the new nested format as well as the existing
 }
 </code></pre>
 
-## DeploymentStatusEvent payloads
+## DeploymentStatusEvent Changes
 
 #### Previously
 
@@ -102,7 +102,7 @@ We'll send payloads including both the new nested format as well as the existing
 }
 </code></pre>
 
-#### Existing
+#### Existing - 2014/09/31
 
 <pre><code class="language-javascript">
 {
@@ -128,7 +128,7 @@ We'll send payloads including both the new nested format as well as the existing
 }
 </code></pre>
 
-#### Planned
+#### Planned - 2014/10/22
 
 <pre><code class="language-javascript">
 {

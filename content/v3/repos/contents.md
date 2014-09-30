@@ -8,7 +8,7 @@ title: Contents | GitHub API
 {:toc}
 
 These API methods let you retrieve the contents of files within a repository as
-Base64 encoded content. See [media types](#custom-media-types) for requesting raw format.
+Base64 encoded content. See [media types](#custom-media-types) for requesting the raw format or rendered HTML (when supported).
 
 ## Get the README
 
@@ -16,7 +16,7 @@ This method returns the preferred README for a repository.
 
     GET /repos/:owner/:repo/readme
 
-READMEs support [a custom media type](#custom-media-types) for getting the raw content.
+READMEs support [custom media types](#custom-media-types) for retrieving the raw content or rendered HTML.
 
 ### Parameters
 
@@ -35,7 +35,7 @@ This method returns the contents of a file or directory in a repository.
 
     GET /repos/:owner/:repo/contents/:path
 
-Files and symlinks support [a custom media type](#custom-media-types) for getting the raw content.
+Files and symlinks support [a custom media type](#custom-media-types) for retrieving the raw content or rendered HTML (when supported).
 Directories and submodules do _not_ support custom media types.
 
 *Notes*:
@@ -101,7 +101,7 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `commiter` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
 is a hash containing information about the author.
 
@@ -112,12 +112,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `422` status code.
 
-Both the `author` and `commiter` parameters have the same keys:
+Both the `author` and `committer` parameters have the same keys:
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | The name of the author (or commiter) of the commit
-`email`|`string` | The email of the author (or commiter) of the commit
+`name`|`string` | The name of the author (or committer) of the commit
+`email`|`string` | The email of the author (or committer) of the commit
 
 ### Example Input
 
@@ -149,7 +149,7 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `commiter` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
 is a hash containing information about the author.
 
@@ -160,12 +160,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `422` status code.
 
-Both the `author` and `commiter` parameters have the same keys:
+Both the `author` and `committer` parameters have the same keys:
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | The name of the author (or commiter) of the commit
-`email`|`string` | The email of the author (or commiter) of the commit
+`name`|`string` | The name of the author (or committer) of the commit
+`email`|`string` | The email of the author (or committer) of the commit
 
 ### Example Input
 
@@ -198,7 +198,7 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `commiter` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is a hash containing
 information about the committer. Or, you can provide an `author` parameter, which
 is a hash containing information about the author.
 
@@ -209,12 +209,12 @@ user's information is used.
 You must provide values for both `name` and `email`, whether you choose to use
 `author` or `committer`. Otherwise, you'll receive a `422` status code.
 
-Both the `author` and `commiter` parameters have the same keys:
+Both the `author` and `committer` parameters have the same keys:
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | The name of the author (or commiter) of the commit
-`email`|`string` | The email of the author (or commiter) of the commit
+`name`|`string` | The name of the author (or committer) of the commit
+`email`|`string` | The email of the author (or committer) of the commit
 
 ### Example Input
 
@@ -268,8 +268,13 @@ curl -L https://api.github.com/repos/pengwynn/octokit/tarball > octokit.tar.gz
 
 ## Custom media types
 
-[READMEs](#get-the-readme), [files](#get-contents), and [symlinks](#get-contents) support the following custom media type.
+[READMEs](#get-the-readme), [files](#get-contents), and [symlinks](#get-contents) support the following custom media types:
 
     application/vnd.github.VERSION.raw
+    application/vnd.github.VERSION.html
+
+Use the `.raw` media type to retrieve the contents of the file.
+
+For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the `.html` media type. Markup languages are rendered to HTML using our open-source [Markup library](https://github.com/github/markup).
 
 You can read more about the use of media types in the API [here](/v3/media/).

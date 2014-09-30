@@ -39,7 +39,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | **Required**. The name of the service that is being called. (See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)
+`name`|`string` | **Required**. The name of the service that is being called. (See  <a href='https://api.github.com/hooks' data-proofer-ignore>/hooks</a> for the list of valid hook names.)
 `config`|`hash` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
 `events`|`array` | Determines what events the hook is triggered for.  Default: `["push"]`
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.

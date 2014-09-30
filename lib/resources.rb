@@ -228,6 +228,7 @@ module GitHub
       "open_issues_count" => 0,
       "has_issues"        => true,
       "has_wiki"          => true,
+      "has_pages"         => false,
       "has_downloads"     => true,
       "pushed_at"         => "2011-01-26T19:06:43Z",
       "created_at"        => "2011-01-26T19:01:12Z",
@@ -717,12 +718,48 @@ module GitHub
     }
 
     ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "active"
+      "state" => "active"
     )
 
     PENDING_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "pending"
+      "state" => "pending"
     )
+
+    ACTIVE_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/user/memberships/orgs/octocat",
+      "state"            => "active",
+      "organization_url" => "https://api.github.com/orgs/octocat",
+      "organization"     => {
+        "login"              => "octocat",
+        "url"                => "https://api.github.com/orgs/octocat",
+        "id"                 => 1,
+        "repos_url"          => "https://api.github.com/users/octocat/repos",
+        "events_url"         => "https://api.github.com/users/octocat/events{/privacy}",
+        "members_url"        => "https://api.github.com/users/octocat/members{/member}",
+        "public_members_url" => "https://api.github/com/users/octocat/public_members{/member}",
+        "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+      }
+    }
+
+    PENDING_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/user/memberships/orgs/invitocat",
+      "state"            => "pending",
+      "organization_url" => "https://api.github.com/orgs/invitocat",
+      "organization"     => {
+        "login"              => "invitocat",
+        "url"                => "https://api.github.com/orgs/invitocat",
+        "id"                 => 2,
+        "repos_url"          => "https://api.github.com/users/invitocat/repos",
+        "events_url"         => "https://api.github.com/users/invitocat/events{/privacy}",
+        "members_url"        => "https://api.github.com/users/invitocat/members{/member}",
+        "public_members_url" => "https://api.github/com/users/invitocat/public_members{/member}",
+        "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+      }
+    }
+
+    ORG_MEMBERSHIPS         ||= [ACTIVE_ORG_MEMBERSHIP, PENDING_ORG_MEMBERSHIP]
+    ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ORG_MEMBERSHIP]
+    PENDING_ORG_MEMBERSHIPS ||= [PENDING_ORG_MEMBERSHIP]
 
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
@@ -1249,6 +1286,7 @@ module GitHub
         "size"      => 932,
         "raw_url"   => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
         "type"      => "text/plain",
+        "truncated" => false,
         "language"  => "Erlang"
       }
     }
@@ -1322,7 +1360,8 @@ module GitHub
           "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
         }
-      ]
+      ],
+      "truncated" => false
     }
     TREE_EXTRA ||= {
       "sha"  => "fc6274d15fa3ae2ab983129fb037999f264ba9a7",
@@ -1334,7 +1373,8 @@ module GitHub
           "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
-      } ]
+      } ],
+      "truncated" => false
     }
     TREE_NEW ||= {
       "sha"  => "cd8274d15fa3ae2ab983129fb037999f264ba9a7",
@@ -1828,7 +1868,10 @@ module GitHub
       :current_user_public_url => "https://github.com/defunkt",
       :current_user_url => "https://github.com/defunkt.private?token=abc123",
       :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
-      :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      :current_user_organization_url => "",
+      :current_user_organization_urls => [
+        "https://github.com/organizations/github/defunkt.private.atom?token=abc123"
+      ],
       :_links => {
         :timeline => {
           :href => "https://github.com/timeline",
@@ -1851,9 +1894,15 @@ module GitHub
           :type => "application/atom+xml"
         },
         :current_user_organization => {
-          :href => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
-          :type => "application/atom+xml"
-        }
+          :href => "",
+          :type => ""
+        },
+        :current_user_organizations => [
+          {
+            :href => "https://github.com/organizations/github/defunkt.private.atom?token=abc123",
+            :type => "application/atom+xml"
+          }
+        ]
       }
     }
 

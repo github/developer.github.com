@@ -37,7 +37,7 @@ Documentation for all available service hooks can be found in the
 [docs directory](https://github.com/github/github-services/tree/master/docs)
 of the github-services repository.  A JSON representation of their names,
 default events, supported events, and configuration options can be seen
-at [api.github.com/hooks](https://api.github.com/hooks).
+at <a href='https://api.github.com/hooks' data-proofer-ignore>https://api.github.com/hooks</a>.
 
 
 ## Events
@@ -77,7 +77,7 @@ Name | Description
 `public` | Any time a Repository changes from private to public.
 `pull_request_review_comment` | Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).
 `pull_request` | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
-`push` | Any git push to a Repository. **This is the default event.**
+`push` | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
 `release` | Any time a Release is published in the Repository.
 `status` | Any time a Repository has a status update from the API
 `team_add` | Any time a team is added or modified on a Repository.
@@ -163,3 +163,4 @@ Key | Value |
 ----| ----- |
 zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
+hook | The [webhook configuration](/v3/repos/hooks/#get-single-hook) |

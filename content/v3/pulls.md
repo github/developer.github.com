@@ -204,6 +204,10 @@ Name | Type | Description
   :message => 'Failure reason'
 %>
 
+### Labels, assignees, and milestones
+
+Every pull request is an issue, but not every issue is a pull request. For this reason, "shared" actions for both features, like manipulating assignees, labels and milestones, are provided within [the Issues API](/v3/issues).
+
 ## Custom media types
 
 These are the supported media types for pull requests. You can read more about the

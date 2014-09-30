@@ -5,11 +5,11 @@ created_at: 2014-09-31
 author_name: atmos
 ---
 
-Today we're introducing a compatability period for a breaking change to the [deployment][1] and [deployment status][2] payloads for webhooks. This change brings the payloads for these events more inline with the responses you'd receive from the API. During this period we'll continue sending the previous payload formats but we've started sending the new format along. On October 22nd, 2014, we will stop sending the old payload formats. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
+Today we're introducing a compatability period for a breaking change to the [deployment][1] and [deployment status][2] payloads for webhooks. This change brings the payloads for these events more inline with the responses you'd receive from the API. During this period we'll continue sending the previous payload formats but we've started sending the new format along also. On October 22nd, 2014, we will stop sending the old payload formats. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
 
 ## DeploymentEvent Changes
 
-#### Previously
+#### Old Format
 
 <pre><code class="language-javascript">
 {
@@ -27,7 +27,7 @@ Today we're introducing a compatability period for a breaking change to the [dep
 
 </code></pre>
 
-#### Existing - 2014/09/31
+#### Current Format - 2014/09/31
 
 <pre><code class="language-javascript">
 {
@@ -60,7 +60,7 @@ Today we're introducing a compatability period for a breaking change to the [dep
 
 </code></pre>
 
-#### Planned - 2014/10/22
+#### New Format - 2014/10/22
 
 <pre><code class="language-javascript">
 {
@@ -86,7 +86,7 @@ Today we're introducing a compatability period for a breaking change to the [dep
 
 ## DeploymentStatusEvent Changes
 
-#### Previously
+#### Old Format
 
 <pre><code class="language-javascript">
 {
@@ -100,7 +100,7 @@ Today we're introducing a compatability period for a breaking change to the [dep
 }
 </code></pre>
 
-#### Existing - 2014/09/31
+#### Current Format - 2014/09/31
 
 <pre><code class="language-javascript">
 {
@@ -126,7 +126,7 @@ Today we're introducing a compatability period for a breaking change to the [dep
 }
 </code></pre>
 
-#### Planned - 2014/10/22
+#### New Format - 2014/10/22
 
 <pre><code class="language-javascript">
 {

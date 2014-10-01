@@ -5,7 +5,9 @@ created_at: 2014-09-31
 author_name: atmos
 ---
 
-Today we're introducing a compatability period for a breaking change to the [deployment][1] and [deployment status][2] payloads for webhooks. This change brings the payloads for these events more inline with the responses you'd receive from the API. During this period we'll continue sending the previous payload formats but we've started sending the new format along also. On October 22nd, 2014, we will stop sending the old payload formats. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
+On October 22nd, 2014, we will begin sending a new format for [deployment][1] and [deployment status][2] payloads for webhooks. In the meantime we'll be running in a compatability mode that will give integrators the time needed to start taking advantage of the new format. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
+
+This change brings the payloads for these events more inline with the responses you'd receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under deployment and deployment_status keys. Since we're still in the [preview period][3] for the deployments API we felt it was best to correct this inconsistency now.
 
 ## DeploymentEvent Changes
 
@@ -148,7 +150,7 @@ Today we're introducing a compatability period for a breaking change to the [dep
 }
 </code></pre>
 
-Since we're still in the [preview period][3] for the deployments API we felt it was best to correct this inconsistency now. If you have any questions or feedback, please [get in touch][get-in-touch].
+If you have any questions or feedback, please [get in touch][get-in-touch].
 
 [1]: https://developer.github.com/v3/activity/events/types/#deploymentevent
 [2]: https://developer.github.com/v3/activity/events/types/#deploymentstatusevent

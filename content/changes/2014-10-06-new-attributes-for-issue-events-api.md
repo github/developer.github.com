@@ -7,7 +7,7 @@ author_name: jdpace
 
 We've made it easier to track changes to issues by giving more context for certain issue related events.
 
-- `assigned` and `unassigned` events now include an `assignee` object so you can see just who was (un)assigned.
+- `assigned` and `unassigned` events now include an `assignee` object so you can see just who was assigned or unassigned.
 - `labeled` and `unlabeled` events include a `label` object.
 - `milestoned` and `demilesoned` events include a `milestone` object.
 - `renamed` events include a `rename` object with the title before and after the rename.

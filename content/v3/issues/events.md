@@ -13,6 +13,12 @@ determine who should be notified of comments.
 
 ### Attributes
 
+id
+: The Integer ID of the event.
+
+url
+: The API URL for fetching the event.
+
 actor
 : Always the User that generated the event.
 
@@ -21,6 +27,25 @@ commit_id
 
 event
 : Identifies the actual type of Event that occurred.
+
+created_at
+: The timestamp indicating when the event occurred.
+
+label
+: The Label object including 'name' and 'color' attributes. Only provided for 'labeled'
+  and 'unlabeled' events.
+
+assignee
+: The User object which was (un)assigned to this Issue. Only provided for 'assigned'
+  and 'unassigned' events.
+
+milestone
+: The Milestone object including a 'title' attribute. Only provided for 'milestoned' and
+  'demilestoned' events.
+
+rename:
+: An object containing rename details including 'from' and 'to' attributes. Only
+  provided for 'renamed' events.
 
 ### Events
 

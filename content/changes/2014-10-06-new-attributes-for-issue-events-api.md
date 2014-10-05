@@ -5,7 +5,7 @@ created_at: 2014-10-06
 author_name: jdpace
 ---
 
-We've made it easier to track changes to issues by giving more context for certain issue related events.
+We've made it easier to track changes to issues. The Issue Events API now provides more context for several event types:
 
 - `assigned` and `unassigned` events now include an `assignee` object so you can see just who was assigned or unassigned.
 - `labeled` and `unlabeled` events include a `label` object.

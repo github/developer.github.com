@@ -36,7 +36,7 @@ label
   and 'unlabeled' events.
 
 assignee
-: The User object which was (un)assigned to this Issue. Only provided for 'assigned'
+: The User object which was assigned to (or unassigned from) this Issue. Only provided for 'assigned'
   and 'unassigned' events.
 
 milestone

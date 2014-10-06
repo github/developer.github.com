@@ -37,7 +37,7 @@ Documentation for all available service hooks can be found in the
 [docs directory](https://github.com/github/github-services/tree/master/docs)
 of the github-services repository.  A JSON representation of their names,
 default events, supported events, and configuration options can be seen
-at [api.github.com/hooks](https://api.github.com/hooks).
+at <a href='https://api.github.com/hooks' data-proofer-ignore>https://api.github.com/hooks</a>.
 
 
 ## Events
@@ -163,3 +163,4 @@ Key | Value |
 ----| ----- |
 zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
+hook | The [webhook configuration](/v3/repos/hooks/#get-single-hook) |

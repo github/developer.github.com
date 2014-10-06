@@ -130,7 +130,7 @@ covers the entire API.
 [php-github-api]: https://github.com/KnpLabs/php-github-api
 [github-api]: https://github.com/yiiext/github-api
 [kohana]: https://github.com/acoulton/github_v3_api
-[joomla]: https://github.com/joomla/joomla-framework
+[joomla]: https://github.com/joomla-framework/github-api
 [kdyby-github]: https://github.com/kdyby/github
 [milo-github-api]: https://github.com/milo/github-api
 
@@ -161,12 +161,10 @@ covers the entire API.
 ## Ruby
 
 * [GitHub API Gem][ghapi]
-* [Octocat Herder][herder]
 * [GitHub v3 API][ruby1]
 * [GitHub API Client][ruby2]
 * [Ghee][ghee]
 
-[herder]: https://github.com/jhelwig/octocat_herder
 [ghapi]: https://github.com/peter-murach/github
 [ruby1]: https://github.com/jwilger/github-v3-api
 [ruby2]: https://github.com/okonski/github-api-client

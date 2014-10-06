@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Paginated results for organization members</title>
+  <title>New Attributes for Issue Events API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,36 +40,41 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-12-13-paginating-org-members/">
+      <div class="change" id="/changes/2014-10-06-new-attributes-for-issue-events-api/">
 <h2 class="title">
-  <a href="/changes/2013-12-13-paginating-org-members/">Paginated results for organization members</a>
+  <a href="/changes/2014-10-06-new-attributes-for-issue-events-api/">New Attributes for Issue Events API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 13, 2013
+    October 6, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace"/>
+      <a href="https://github.com/jdpace">jdpace</a>
   </li>
 </ul>
 </div>
 
 
-<p>The <a href="http://developer.github.com/v3/orgs/members/#members-list">organization members</a> and <a href="http://developer.github.com/v3/orgs/members/#public-members-list">organization public members</a> methods will soon return paginated results by default. Beginning
-today, these methods will paginate if you include <code>page</code> or <code>per_page</code> query
-parameters. Starting January 15th, 2014, these methods will <em>always</em> return paginated
-results.</p>
+<p>We’ve made it easier to track changes to issues. The Issue Events API now provides more context for several event types:</p>
 
-<p>As always, be sure and follow those <a href="http://developer.github.com/v3/#pagination">Link headers</a> to get
-subsequent results. If you have any questions or run into trouble, feel free to
-<a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Paginating+org+members">get in touch</a>.</p>
+<ul>
+  <li>
+<code>assigned</code> and <code>unassigned</code> events now include an <code>assignee</code> object so you can see just who was assigned or unassigned.</li>
+  <li>
+<code>labeled</code> and <code>unlabeled</code> events include a <code>label</code> object.</li>
+  <li>
+<code>milestoned</code> and <code>demilesoned</code> events include a <code>milestone</code> object.</li>
+  <li>
+<code>renamed</code> events include a <code>rename</code> object with the title before and after the rename.</li>
+</ul>
 
-<p>Happy paginating.</p>
+<p>Check out the <a href="/v3/issues/events/">Issue Events API documentation</a> for a full list of supported events. If you have
+any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Attrs+for+Issue+Events+API">drop us a line</a>.</p>
 
 
 </div>

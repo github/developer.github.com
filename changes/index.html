@@ -41,6 +41,44 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-10-06-new-attributes-for-issue-events-api/">
+  <h2 class="title">
+  <a href="/changes/2014-10-06-new-attributes-for-issue-events-api/">New Attributes for Issue Events API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 6, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace">
+      <a href="https://github.com/jdpace">jdpace</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made it easier to track changes to issues. The Issue Events API now provides more context for several event types:</p>
+
+<ul>
+  <li>
+<code>assigned</code> and <code>unassigned</code> events now include an <code>assignee</code> object so you can see just who was assigned or unassigned.</li>
+  <li>
+<code>labeled</code> and <code>unlabeled</code> events include a <code>label</code> object.</li>
+  <li>
+<code>milestoned</code> and <code>demilesoned</code> events include a <code>milestone</code> object.</li>
+  <li>
+<code>renamed</code> events include a <code>rename</code> object with the title before and after the rename.</li>
+</ul>
+
+<p>Check out the <a href="/v3/issues/events/">Issue Events API documentation</a> for a full list of supported events. If you have
+any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Attrs+for+Issue+Events+API">drop us a line</a>.</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/">
   <h2 class="title">
   <a href="/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/">One more week before the "Add team member" API breaking change</a>
@@ -2711,6 +2749,38 @@ but we can’t wait to see what others can do with this information.</p>
 
 </div>
 
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
+
+
+</div>
+
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
@@ -2759,38 +2829,6 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
-
-
-</div>
-
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
-      <a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
 
 
 </div>
@@ -3896,6 +3934,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-10-06-new-attributes-for-issue-events-api/">New Attributes for Issue Events API<br /><span class="date">October 6, 2014</span></a></li>
+
   <li><a href="/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/">One more week before the "Add team member" API breaking change<br /><span class="date">September 23, 2014</span></a></li>
 
   <li><a href="/changes/2014-09-16-finalizing-the-organization-and-team-membership-apis/">Finalizing the Organization and Team Membership APIs<br /><span class="date">September 16, 2014</span></a></li>
@@ -3909,8 +3949,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-08-15-deployments-api-changes/">New features for the Deployments API preview<br /><span class="date">August 15, 2014</span></a></li>
 
   <li><a href="/changes/2014-08-05-team-memberships-api/">We're changing the way you add new members to your organization<br /><span class="date">August 5, 2014</span></a></li>
-
-  <li><a href="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">New assigned/labeled actions for issue and pull request events<br /><span class="date">July 28, 2014</span></a></li>
 
 </ul>
 

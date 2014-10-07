@@ -1,47 +1,73 @@
 ---
 kind: change
-title: Removing token from the Authorizations API
+title: Removing token attribute from the Authorizations API responses
 created_at: 2014-09-16
 author_name: ptoomey3
 ---
 
 ## API changes
 
-We have deprecated the `token` attribute from all responses in the
-[Authorizations API](/v3/oauth_authorizations/). Starting **December 1, 2014**
-the API will always provide an empty string as the value for this attribute.
+We have deprecated the `token` attribute from all [Authorizations
+API](/v3/oauth_authorizations/) responses, except for those related to token
+creation and reset. `token` will return an empty string as the value for this
+attribute after **December 1, 2014**.
 
 
-## Reason for the change
+## What's changing?
 
 The current OAuth Authorizations API requires GitHub to store the full value for
 each OAuth token on our servers. In order to increase the security for our
 users, we are changing our architecture to store the SHA-256 digest of OAuth
 tokens instead. GitHub securely hashes user passwords using bcrypt and we want
-to provide comparable security for our users' OAuth tokens as well.
+to provide comparable security for our users' OAuth tokens as well. To be clear,
+this change is a 100% proactive measure from GitHub and is not associated with
+any security incident.
 
-## New attributes
+## Who is affected?
+
+Any code that relies on accessing the `token` attribute from any response other
+than those associated with token creation and reset. For example, our own
+[GitHub for Mac][github-for-mac] and [GitHub for Windows][github-for-windows]
+applications previously relied on reading `token` from
+[this Authorizations API][get-or-create-for-app] to allow multiple installations
+of our desktop application for a single user.
+
+## What should you do?
 
 In order to reduce the impact of removing the `token` attribute, the GitHub
-Authorizations API has added two new response attributes: `token_last_eight` and
-`hashed_token`. While these attributes do not replace the full functionality
-provided by the `token` attribute, they can be used in place of `token` for
-several common use cases.
+Authorizations API has modified [one existing API][create-a-new-authorization],
+added [one new API][get-or-create-for-app-fingerprint], and added two new
+response attributes: `token_last_eight` and `hashed_token`. While these new APIs
+and attributes do not replace the full functionality that previously existed,
+they can be used in place of `token` for most common use cases.
 
 * `token_last_eight` returns the last eight characters of the associated OAuth
 token. As an example, `token_last_eight` could be used to display a list of
 partial token values to help a user manage their OAuth tokens.
 
-* `hashed_token` is the base64 of the SHA-256 digest of the token. `hashed_token`
-could be used to programmatically validate a given token matches an
-authorization returned by the API.
+* `hashed_token` is the base64 of the SHA-256 digest of the token.
+`hashed_token` could be used to programmatically validate that a given token
+matches an authorization returned by the API.
 
-## Miscellaneous Security Notes
+* [Create a new authorization][create-a-new-authorization] adds a new
+`fingerprint` request paramter. This optional parameter allows an OAuth
+application to create multiple authorizations for a single user. `fingerprint`
+should be a string that distinguishes the new authorization from others
+for the same client ID and user. For example, to differentiate installations of
+a desktop application across multiple devices you might set `fingerprint` to
+`SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")`. Since
+`fingerprint` is not meant to be a user facing value, you should still set
+`note` to help a user differentiate between authorizations on their
+[OAuth applications listing on GitHub][app-listing].
 
-This change is a 100% proactive measure from GitHub and is not associated with
-any security incident.
+* [Get-or-create an authorization for a specific app and fingerprint][get-or-create-for-app-fingerprint]
+is a new API that is analagous to the
+[Get-or-create an authorization for a specific app][get-or-create-for-app]
+API, but adds support for the new `fingerprint` request parameter.
 
-Some users will be curious why we are not using bcrypt to hash our OAuth tokens
+## Why SHA-256 over bcrypt?
+
+Some users may be curious why we are not using bcrypt to hash our OAuth tokens
 like we do for user passwords. Bcrypt is purposefully computationally expensive
 in order to mitigate brute force attacks against low entropy passwords. However,
 OAuth tokens are highly random and are not susceptible to brute force attacks.
@@ -53,3 +79,9 @@ SHA-256 for performance reasons.
 If you have any questions or feedback, please [get drop us a line][contact].
 
 [contact]: https://github.com/contact?form[subject]=Removing+authorizations+token
+[app-listing]: https://github.com/settings/applications
+[create-a-new-authorization]: /v3/oauth_authorizations/#create-a-new-authorization
+[get-or-create-for-app]: /v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app
+[get-or-create-for-app-fingerprint]: /v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint
+[github-for-mac]: https://mac.github.com/
+[github-for-windows]: https://windows.github.com/

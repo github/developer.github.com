@@ -109,7 +109,9 @@ The recommendations below will help you prepare your application for the next ma
   `top`, and `sha`.
 
 1. Authorization attribute: token
-: Recommendation: Use **token_last_eight** (the last eight characters of the token) and **hashed_token** (base64 of the SHA-256 digest of the token) instead.
+: Recommendation: [Do not use this attribute](/changes/2014-09-16-removing-authorizations-token/).
+  **token** will still be returned in Authorizations API responses related to
+  token creation and reset.
 
 # beta (Deprecated) {#beta}
 

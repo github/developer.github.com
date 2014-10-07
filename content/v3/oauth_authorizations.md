@@ -13,10 +13,12 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
 
 ### Deprecation Notice
 
-The `token` attribute is [deprecated](/v3/versions/#v3-deprecations) and will return an empty string as the value for this attribute after **December 1, 2014**.
+The `token` attribute is [deprecated](/v3/versions/#v3-deprecations) in all
+Authorizations API responses, except for those related to token creation and
+reset. `token` will return an empty string as the value for this attribute after
+**December 1, 2014**.
 
-If you're writing new API client code (or updating your existing code), you
-should use the `token_last_eight`  and `hashed_token` attributes instead. Please see [the blog post](/changes/2014-09-16-removing-authorizations-token/) for more details.
+Please see [the blog post](/changes/2014-09-16-removing-authorizations-token/) for more details.
 
 ## List your authorizations
 
@@ -42,8 +44,8 @@ If you need a small number of tokens, implementing the [web flow](/v3/oauth/#web
 can be cumbersome. Instead, tokens can be created using the Authorizations API using
 [Basic Authentication](/v3/auth#basic-authentication). To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
-page, linked from your [OAuth applications listing on GitHub][app-listing]. OAuth tokens
-can also be created through the web UI via the [Application settings page](https://github.com/settings/applications).
+page, linked from your [OAuth applications listing on GitHub][app-listing]. If your OAuth applicaion intends to create multiple tokens for one user you should use `fingerprint` to differentiate between them. OAuth tokens
+can also be created through the web UI via the [Application settings page][app-listing].
 Read more about these tokens on the [GitHub Help page](https://help.github.com/articles/creating-an-access-token-for-command-line-use).
 
     POST /authorizations
@@ -57,6 +59,7 @@ Name | Type | Description
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
 `client_id`|`string` | The 20 character OAuth app client key for which to create the token.
 `client_secret`|`string` | The 40 character OAuth app client secret for which to create the token.
+`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client ID and user.
 
 
 <%= json :scopes => ["public_repo"], :note => 'admin script' %>
@@ -71,11 +74,47 @@ Name | Type | Description
 
 This method will create a new authorization for the specified OAuth application,
 only if an authorization for that application doesn't already exist for the
-user. (The URL includes the 20 character client ID for the OAuth app that is
-requesting the token.) It returns the user's token for the application if one
-exists. Otherwise, it creates one.
+user. The URL includes the 20 character client ID for the OAuth app that is
+requesting the token. It returns the user's authorization for the application
+if one exists. Otherwise, it creates one.
 
     PUT /authorizations/clients/:client_id
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`client_secret`|`string`| **Required**. The 40 character OAuth app client secret associated with the client ID specified in the URL.
+`scopes`|`array` | A list of scopes that this authorization is in.
+`note`|`string` | A note to remind you what the OAuth token is for.
+`note_url`|`string` | A URL to remind you what app the OAuth token is for.
+
+
+<%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
+
+### Response if returning a new token
+
+<%= headers 201, :Location => "https://api.github.com/authorizations/1"
+%>
+<%= json :oauth_access %>
+
+### Response if returning an existing token
+
+<%= headers 200, :Location => "https://api.github.com/authorizations/1"
+%>
+<%= json :oauth_access %>
+
+## Get-or-create an authorization for a specific app and fingerprint
+
+This method will create a new authorization for the specified OAuth application,
+only if an authorization for that application and fingerprint do not already
+exist for the user. The URL includes the 20 character client ID for the OAuth
+app that is requesting the token. `fingerprint` is a unique URL safe string to
+distinguish an authorization from others created for the same client ID and
+user. It returns the user's authorization for the application if one exists.
+Otherwise, it creates one.
+
+    PUT /authorizations/clients/:client_id/:fingerprint
 
 ### Parameters
 

@@ -118,19 +118,6 @@ The user can publicize their own membership.
 
 ## List your organization memberships
 
-<div class="alert">
-  <p>
-    The Organization Memberships API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
-  </p>
-</div>
-
 An optional `state` can be passed to request only pending or active memberships.
 
     GET /user/memberships/orgs
@@ -154,19 +141,6 @@ An optional `state` can be passed to request only pending or active memberships.
 
 ## Get your organization membership
 
-<div class="alert">
-  <p>
-    The Organization Memberships API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
-  </p>
-</div>
-
     GET /user/memberships/orgs/:org
 
 ### Response
@@ -175,19 +149,6 @@ An optional `state` can be passed to request only pending or active memberships.
 <%= json(:pending_org_membership) %>
 
 ## Edit your organization membership
-
-<div class="alert">
-  <p>
-    The Organization Memberships API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
-  </p>
-</div>
 
     PATCH /user/memberships/orgs/:org
 

@@ -11,7 +11,7 @@ The Management Console API helps you manage your GitHub Enterprise installation.
 
 ## Authentication
 
-You need to pass your Management Console password as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-and-software-package-for-the-first-time).
+You need to pass your [Management Console password](https://enterprise.github.com/help/articles/setting-the-management-console-password) as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-and-software-package-for-the-first-time).
 
 Use the `api_key` parameter to send this token with each request. For example:
 

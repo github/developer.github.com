@@ -1714,7 +1714,8 @@ module GitHub
     META ||= {
       :hooks => ['127.0.0.1/32'],
       :git => ['127.0.0.1/32'],
-      :verifiable_password_authentication => true
+      :verifiable_password_authentication => true,
+      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
     BLOB ||= {

@@ -76,7 +76,7 @@ Name | Type | Description
 
 <%= headers 201, :Location => "https://api.github.com/authorizations/1"
 %>
-<%= json :oauth_access %>
+<%= json(:oauth_access) { |h| h.merge("fingerprint" => "") } %>
 
 ## Get-or-create an authorization for a specific app
 
@@ -105,13 +105,13 @@ Name | Type | Description
 
 <%= headers 201, :Location => "https://api.github.com/authorizations/1"
 %>
-<%= json :oauth_access %>
+<%= json(:oauth_access) { |h| h.merge("fingerprint" => "") } %>
 
 ### Response if returning an existing token
 
 <%= headers 200, :Location => "https://api.github.com/authorizations/1"
 %>
-<%= json(:oauth_access) { |h| h.merge("token" => "") } %>
+<%= json(:oauth_access) { |h| h.merge("token" => "", "fingerprint" => "") } %>
 
 ## Get-or-create an authorization for a specific app and fingerprint
 

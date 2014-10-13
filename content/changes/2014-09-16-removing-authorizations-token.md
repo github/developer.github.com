@@ -11,8 +11,8 @@ We have deprecated the `token` attribute from the majority of [Authorizations
 API](/v3/oauth_authorizations/) responses
 (see the
 [Authorization deprecation notice][authorizations-token-deprecation-notice] for
-a complete list of APIs that are affected). `token` will return an empty string
-as the value for this attribute after **December 31, 2014**.
+a complete list of APIs that are affected). For the affected APIs, the `token`
+attribute will return an empty string after **December 31, 2014**.
 
 
 ## What's changing?
@@ -76,8 +76,6 @@ in order to mitigate brute force attacks against low entropy passwords. However,
 OAuth tokens are highly random and are not susceptible to brute force attacks.
 Given that OAuth token validation occurs for each request to the API we chose
 SHA-256 for performance reasons.
-
-
 
 If you have any questions or feedback, please [get drop us a line][contact].
 

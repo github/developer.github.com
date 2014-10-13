@@ -23,8 +23,8 @@ of the following OAuth Authorizations API responses:
 * [Update an existing authorization](#update-an-existing-authorization)
 
 
-`token` will return an empty string as the value for this attribute after
-**December 1, 2014**.
+For the affected APIs, the `token` attribute will return an empty string after
+**December 31, 2014**.
 
 Please see [the blog post](/changes/2014-09-16-removing-authorizations-token/) for more details.
 

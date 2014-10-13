@@ -35,7 +35,7 @@ Please see [the blog post](/changes/2014-09-16-removing-authorizations-token/) f
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:oauth_access) { |h| [h] } %>
+<%= json(:oauth_access) { |h| [h.merge("token" => "")] } %>
 
 ## Get a single authorization
 
@@ -44,7 +44,7 @@ Please see [the blog post](/changes/2014-09-16-removing-authorizations-token/) f
 ### Response
 
 <%= headers 200 %>
-<%= json :oauth_access %>
+<%= json(:oauth_access) { |h| h.merge("token" => "") } %>
 
 ## Create a new authorization
 
@@ -111,7 +111,7 @@ Name | Type | Description
 
 <%= headers 200, :Location => "https://api.github.com/authorizations/1"
 %>
-<%= json :oauth_access %>
+<%= json(:oauth_access) { |h| h.merge("token" => "") } %>
 
 ## Get-or-create an authorization for a specific app and fingerprint
 
@@ -147,7 +147,7 @@ Name | Type | Description
 
 <%= headers 200, :Location => "https://api.github.com/authorizations/1"
 %>
-<%= json :oauth_access %>
+<%= json(:oauth_access) { |h| h.merge("token" => "") } %>
 
 ## Update an existing authorization
 
@@ -171,7 +171,7 @@ You can only send one of these scope keys at a time.
 ### Response
 
 <%= headers 200 %>
-<%= json :oauth_access %>
+<%= json(:oauth_access) { |h| h.merge("token" => "") } %>
 
 ## Delete an authorization
 

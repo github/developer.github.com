@@ -30,19 +30,19 @@ any security incident.
 Any code that relies on accessing the `token` attribute from
 [these OAuth Authorizations API responses][authorizations-token-deprecation-notice].
 For example, our own [GitHub for Mac][github-for-mac] and
-[GitHub for Windows][github-for-windows] applications previously relied on
-reading `token` from the [Get-or-create an authorization for a specific app
-][get-or-create-for-app] Authorizations API to allow multiple installations of
-our desktop application for a single user.
+[GitHub for Windows][github-for-windows] applications relied on reading `token`
+from the [Get-or-create an authorization for a specific app][get-or-create-for-app]
+Authorizations API to allow multiple installations of our desktop application
+for a single user.
 
 ## What should you do?
 
 In order to reduce the impact of removing the `token` attribute, the OAuth
-Authorizations API has added a new request attribute (`fingerprint`), added two
-new response attributes (`token_last_eight` and `hashed_token`), and added
-[one new API][get-or-create-for-app-fingerprint]. While these new APIs and
-attributes do not replace the full functionality that previously existed, they
-can be used in place of `token` for most common use cases.
+Authorizations API has added a new request attribute (`fingerprint`), added
+three new response attributes (`token_last_eight`, `hashed_token`, and
+`fingerprint`), and added [one new API][get-or-create-for-app-fingerprint].
+While these new APIs and attributes do not replace the full functionality that
+previously existed, they can be used in place of `token` for most common use cases.
 
 * `token_last_eight` returns the last eight characters of the associated OAuth
 token. As an example, `token_last_eight` could be used to display a list of
@@ -76,6 +76,7 @@ in order to mitigate brute force attacks against low entropy passwords. However,
 OAuth tokens are highly random and are not susceptible to brute force attacks.
 Given that OAuth token validation occurs for each request to the API we chose
 SHA-256 for performance reasons.
+
 
 If you have any questions or feedback, please [get drop us a line][contact].
 

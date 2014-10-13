@@ -14,8 +14,16 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
 ### Deprecation Notice
 
 The `token` attribute is [deprecated](/v3/versions/#v3-deprecations) in all
-Authorizations API responses, except for those related to token creation and
-reset. `token` will return an empty string as the value for this attribute after
+of the following OAuth Authorizations API responses:
+
+* [List your authorizations](#list-your-authorizations)
+* [Get a single authorization](#get-a-single-authorization)
+* [Get-or-create an authorization for a specific app](#get-or-create-an-authorization-for-a-specific-app) - `token` is still returned for "create"
+* [Get-or-create an authorization for a specific app and fingerprint](#get-or-create-an-authorization-for-a-specific-app-and-fingerprint) - `token` is still returned for "create"
+* [Update an existing authorization](#update-an-existing-authorization)
+
+
+`token` will return an empty string as the value for this attribute after
 **December 1, 2014**.
 
 Please see [the blog post](/changes/2014-09-16-removing-authorizations-token/) for more details.
@@ -41,7 +49,7 @@ Please see [the blog post](/changes/2014-09-16-removing-authorizations-token/) f
 ## Create a new authorization
 
 If you need a small number of tokens, implementing the [web flow](/v3/oauth/#web-application-flow)
-can be cumbersome. Instead, tokens can be created using the Authorizations API using
+can be cumbersome. Instead, tokens can be created using the OAuth Authorizations API using
 [Basic Authentication](/v3/auth#basic-authentication). To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
 page, linked from your [OAuth applications listing on GitHub][app-listing]. If your OAuth applicaion intends to create multiple tokens for one user you should use `fingerprint` to differentiate between them. OAuth tokens
@@ -88,6 +96,7 @@ Name | Type | Description
 `scopes`|`array` | A list of scopes that this authorization is in.
 `note`|`string` | A note to remind you what the OAuth token is for.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
+`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).
 
 
 <%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
@@ -109,7 +118,7 @@ Name | Type | Description
 This method will create a new authorization for the specified OAuth application,
 only if an authorization for that application and fingerprint do not already
 exist for the user. The URL includes the 20 character client ID for the OAuth
-app that is requesting the token. `fingerprint` is a unique URL safe string to
+app that is requesting the token. `fingerprint` is a unique string to
 distinguish an authorization from others created for the same client ID and
 user. It returns the user's authorization for the application if one exists.
 Otherwise, it creates one.

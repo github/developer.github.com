@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Removing token attribute from the Oauth Authorizations API responses
+title: Removing token attribute from the Oauth Authorizations API responses (breaking change)
 created_at: 2014-09-16
 author_name: ptoomey3
 ---
@@ -62,11 +62,14 @@ a desktop application across multiple devices you might set `fingerprint` to
 `note` to help a user differentiate between authorizations on their
 [OAuth applications listing on GitHub][app-listing]
 
-
 * [Get-or-create an authorization for a specific app and fingerprint][get-or-create-for-app-fingerprint]
 is a new API that is analagous to the
 [Get-or-create an authorization for a specific app][get-or-create-for-app]
 API, but adds support for the new `fingerprint` request parameter.
+
+To access the new API functionality during the preview period, you must provide
+a custom [media type](/v3/media/) in the `Accept` header:
+`application/vnd.github.mirage-preview+json`
 
 ## Why SHA-256 over bcrypt?
 

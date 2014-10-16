@@ -5,7 +5,7 @@ created_at: 2014-10-16
 author_name: kdaigle
 ---
 
-This morning, we [removed support][github-services-pr] for the webhook's `ssl_version` configuration
+This morning, we [removed support][github-services-pr] for the `ssl_version` webhook configuration
 option and made `TLS 1.X` the default cryptographic protocol to to address the [POODLE exploit][poodle].
 You should no longer set or rely on the `ssl_version` configuration option.
 

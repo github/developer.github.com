@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Improvements to the Search API</title>
+  <title>Removed SSLv3 support from webhooks and services</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,88 +40,31 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-08-20-search-api-improvements/">
+      <div class="change" id="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">
 <h2 class="title">
-  <a href="/changes/2013-08-20-search-api-improvements/">Improvements to the Search API</a>
+  <a href="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">Removed SSLv3 support from webhooks and services</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    August 20, 2013
+    October 16, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph"/>
-      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle"/>
+      <a href="https://github.com/kdaigle">kdaigle</a>
   </li>
 </ul>
 </div>
 
 
-<p>Today we’re shipping two improvements to the <a href="/changes/2013-07-19-preview-the-new-search-api/">new Search API</a>.</p>
+<p>This morning, we <a href="https://github.com/github/github-services/pull/949">removed support</a> for the <code>ssl_version</code> webhook configuration
+option and made <code>TLS 1.X</code> the default cryptographic protocol to address the <a href="https://www.openssl.org/~bodo/ssl-poodle.pdf">POODLE exploit</a>.
+You should no longer set or rely on the <code>ssl_version</code> configuration option.</p>
 
-<h2 id="more-text-match-metadata">More Text Match Metadata</h2>
-
-<p>When searching for code, the API previously provided <a href="/v3/search/#text-match-metadata">text match metadata</a> (i.e., “highlights”) for file content.
-Now, you can also <a href="/v3/search/#highlighting-code-search-results">get this metadata</a> for matches that occur within the file path.</p>
-
-<p>For example, when <a href="https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&amp;type=Code">searching for files that have “client” in their path</a>, the results include this match for <code>lib/octokit/client/commits.rb</code>:</p>
-
-<pre class="json">
-{
-  "name": "commits.rb",
-  "path": "lib/octokit/client/commits.rb",
-  "text_matches": [
-    {
-      "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
-      "object_type": "FileContent",
-      "property": "path",
-      "fragment": "lib/octokit/client/commits.rb",
-      "matches": [
-        {
-          "text": "client",
-          "indices": [ 12, 18 ]
-        }
-      ]
-    }
-  ]
-  // ...
-}
-</pre>
-
-<h2 id="better-text-match-metadata">Better Text Match Metadata</h2>
-
-<p>Before today, the API applied HTML entity encoding to all <code>fragment</code> data.
-For example, imagine your search returns an issue like <a href="https://github.com/rails/rails/issues/11889">rails/rails#11889</a>:</p>
-
-<p><img src="https://f.cloud.github.com/assets/2988/994632/a84f2888-09af-11e3-9417-4bd92f1f1ed6.png" alt="Example Issue Title"></p>
-
-<p>The response would include a <code>text_matches</code> array with the following object:</p>
-
-<pre class="json">
-{
-  "fragment": "undefined method `except' for #&amp;lt;Array:XXX&amp;gt;",
-  // ...
-}
-</pre>
-
-<p>Inside the <code>fragment</code> value, we see HTML-encoded entities (e.g., <code>&amp;lt;</code>).
-Since we’re returning JSON (not HTML), API clients might not expect any HTML-encoded text.
-As of today, the API returns these fragments <em>without</em> this extraneous encoding.</p>
-
-<pre class="json">
-{
-  "fragment": "undefined method `except' for #&lt;Array:XXX&gt;",
-  // ...
-}
-</pre>
-
-<h2 id="preview-period">Preview Period</h2>
-
-<p>We’re about halfway through the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> for the new Search API.
-We appreciate everyone that has provided feedback so far. Please <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">keep it coming</a>!</p>
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removed+SSLv3+support+from+webhooks+and+services">drop us a line</a>.</p>
 
 
 </div>

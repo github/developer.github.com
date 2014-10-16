@@ -41,6 +41,34 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">
+  <h2 class="title">
+  <a href="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">Removed SSLv3 support from webhooks and services</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 16, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>This morning, we <a href="https://github.com/github/github-services/pull/949">removed support</a> for the <code>ssl_version</code> webhook configuration
+option and made <code>TLS 1.X</code> the default cryptographic protocol to address the <a href="https://www.openssl.org/~bodo/ssl-poodle.pdf">POODLE exploit</a>.
+You should no longer set or rely on the <code>ssl_version</code> configuration option.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removed+SSLv3+support+from+webhooks+and+services">drop us a line</a>.</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-10-06-new-attributes-for-issue-events-api/">
   <h2 class="title">
   <a href="/changes/2014-10-06-new-attributes-for-issue-events-api/">New Attributes for Issue Events API</a>
@@ -2683,6 +2711,35 @@ curl -u defunkt https://api.github.com/feeds
 
 </div>
 
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
+      <a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -2717,35 +2774,6 @@ but we can’t wait to see what others can do with this information.</p>
 </ul>
 
 <p>Enjoy!</p>
-
-</div>
-
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
-      <a href="https://github.com/ymendel">ymendel</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
-
 
 </div>
 
@@ -3934,6 +3962,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">Removed SSLv3 support from webhooks and services<br /><span class="date">October 16, 2014</span></a></li>
+
   <li><a href="/changes/2014-10-06-new-attributes-for-issue-events-api/">New Attributes for Issue Events API<br /><span class="date">October 6, 2014</span></a></li>
 
   <li><a href="/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/">One more week before the "Add team member" API breaking change<br /><span class="date">September 23, 2014</span></a></li>
@@ -3947,8 +3977,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API<br /><span class="date">August 28, 2014</span></a></li>
 
   <li><a href="/changes/2014-08-15-deployments-api-changes/">New features for the Deployments API preview<br /><span class="date">August 15, 2014</span></a></li>
-
-  <li><a href="/changes/2014-08-05-team-memberships-api/">We're changing the way you add new members to your organization<br /><span class="date">August 5, 2014</span></a></li>
 
 </ul>
 

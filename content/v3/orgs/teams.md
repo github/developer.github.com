@@ -121,6 +121,20 @@ must be a member of the team.
 
 ## Add team member
 
+### Add team member API is Deprecated
+
+<div class="alert">
+  <p>
+    The "Add team member" API (described below) is
+    <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for
+    removal in the next major version of the API.
+
+    We recommend using the
+    <a href="/v3/orgs/teams/#add-team-membership">Add team membership API</a>
+    instead. It allows you to invite new organization members to your teams.
+  </p>
+</div>
+
 In order to add a user to a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the organization that the team
 is associated with, and the user being added must already be a member of at

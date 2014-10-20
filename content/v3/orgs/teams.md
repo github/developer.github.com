@@ -121,7 +121,7 @@ must be a member of the team.
 
 ## Add team member
 
-### Add team member API is Deprecated
+### Deprecation notice
 
 <div class="alert">
   <p>

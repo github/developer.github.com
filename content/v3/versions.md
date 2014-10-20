@@ -60,7 +60,7 @@ The recommendations below will help you prepare your application for the next ma
 : Recommendation: Use **/repos/:owner/:repo/hooks/:id/tests** (plural) instead.
 
 1. Method: /teams/:id/members/:username
-: Recommendation: Use [Add Team Membership API](/v3/orgs/teams/#add-team-membership) instead.
+: Recommendation: Use [Get Team Membership](/v3/orgs/teams/#get-team-membership), [Add Team Membership](/v3/orgs/teams/#add-team-membership), and [Remove Team Membership](/v3/orgs/teams/#remove-team-membership) instead.
 
 1. Query parameters when POSTing to /repos/:owner/:repo/forks
 : Recommendation: Use JSON to POST to this method instead.

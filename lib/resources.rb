@@ -1315,8 +1315,8 @@ module GitHub
       "comments"     => 0,
       "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
       "html_url"     => "https://gist.github.com/1",
-      "git_pull_url" => "git://gist.github.com/1.git",
-      "git_push_url" => "git@gist.github.com:1.git",
+      "git_pull_url" => "https://gist.github.com/1.git",
+      "git_push_url" => "https://gist.github.com/1.git",
       "created_at"   => "2010-04-14T02:15:15Z",
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
@@ -1714,7 +1714,8 @@ module GitHub
     META ||= {
       :hooks => ['127.0.0.1/32'],
       :git => ['127.0.0.1/32'],
-      :verifiable_password_authentication => true
+      :verifiable_password_authentication => true,
+      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
     BLOB ||= {

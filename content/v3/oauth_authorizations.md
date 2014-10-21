@@ -107,7 +107,7 @@ This method will create a new authorization for the specified OAuth application,
 only if an authorization for that application doesn't already exist for the
 user. The URL includes the 20 character client ID for the OAuth app that is
 requesting the token. It returns the user's existing authorization for the
-application if one exists. Otherwise, it creates and returns a new one.
+application if one is present. Otherwise, it creates and returns a new one.
 
     PUT /authorizations/clients/:client_id
 
@@ -146,7 +146,7 @@ exist for the user. The URL includes the 20 character client ID for the OAuth
 app that is requesting the token. `fingerprint` is a unique string to
 distinguish an authorization from others created for the same client ID and
 user. It returns the user's existing authorization for the application if one
-exists. Otherwise, it creates and returns a new one.
+is present. Otherwise, it creates and returns a new one.
 
     PUT /authorizations/clients/:client_id/:fingerprint
 

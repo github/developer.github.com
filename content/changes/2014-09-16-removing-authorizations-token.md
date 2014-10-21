@@ -8,11 +8,10 @@ author_name: ptoomey3
 ## API changes
 
 We have deprecated the `token` attribute from the majority of [Authorizations
-API](/v3/oauth_authorizations/) responses
-(see the
+API](/v3/oauth_authorizations/) responses. For the affected APIs, the `token`
+attribute will return an empty string after **January 12, 2015**. See the
 [Authorization deprecation notice][authorizations-token-deprecation-notice] for
-a complete list of APIs that are affected). For the affected APIs, the `token`
-attribute will return an empty string after **December 31, 2014**.
+a complete list of APIs that are affected.
 
 
 ## What's changing?
@@ -55,12 +54,14 @@ matches an authorization returned by the API.
 * `fingerprint` is a new optional request parameter that allows an OAuth
 application to create multiple authorizations for a single user. `fingerprint`
 should be a string that distinguishes the new authorization from others
-for the same client ID and user. For example, to differentiate installations of
-a desktop application across multiple devices you might set `fingerprint` to
-`SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")`. Since
-`fingerprint` is not meant to be a user facing value, you should still set
-`note` to help a user differentiate between authorizations on their
-[OAuth applications listing on GitHub][app-listing]
+for the same client ID and user.
+
+  For example, to differentiate installations of a desktop application across
+  multiple devices you might set `fingerprint` to
+  `SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")`. Since
+  `fingerprint` is not meant to be a user facing value, you should still set
+  `note` to help a user differentiate between authorizations on their
+  [OAuth applications listing on GitHub][app-listing]
 
 * [Get-or-create an authorization for a specific app and fingerprint][get-or-create-for-app-fingerprint]
 is a new API that is analagous to the
@@ -81,7 +82,7 @@ Given that OAuth token validation occurs for each request to the API we chose
 SHA-256 for performance reasons.
 
 
-If you have any questions or feedback, please [get drop us a line][contact].
+If you have any questions or feedback, please [drop us a line][contact].
 
 [contact]: https://github.com/contact?form[subject]=Removing+authorizations+token
 [app-listing]: https://github.com/settings/applications

@@ -29,7 +29,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
 
   <p>
     For the affected APIs, the <code>token</code> attribute will return an empty
-    string after <strong>December 31, 2014</strong>. Please see
+    string after <strong>January 12, 2015</strong>. Please see
     <a href="/changes/2014-09-16-removing-authorizations-token/">the blog post</a>
     for full details.
   </p>
@@ -106,8 +106,8 @@ Name | Type | Description
 This method will create a new authorization for the specified OAuth application,
 only if an authorization for that application doesn't already exist for the
 user. The URL includes the 20 character client ID for the OAuth app that is
-requesting the token. It returns the user's authorization for the application
-if one exists. Otherwise, it creates one.
+requesting the token. It returns the user's existing authorization for the
+application if one exists. Otherwise, it creates and returns a new one.
 
     PUT /authorizations/clients/:client_id
 
@@ -145,8 +145,8 @@ only if an authorization for that application and fingerprint do not already
 exist for the user. The URL includes the 20 character client ID for the OAuth
 app that is requesting the token. `fingerprint` is a unique string to
 distinguish an authorization from others created for the same client ID and
-user. It returns the user's authorization for the application if one exists.
-Otherwise, it creates one.
+user. It returns the user's existing authorization for the application if one
+exists. Otherwise, it creates and returns a new one.
 
     PUT /authorizations/clients/:client_id/:fingerprint
 

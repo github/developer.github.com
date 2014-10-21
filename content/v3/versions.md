@@ -112,7 +112,7 @@ The recommendations below will help you prepare your application for the next ma
 : Recommendation: This attribute will return an empty string in the majority of
   the Authorizations API responses. Please see
   [the deprecation blog post](/changes/2014-09-16-removing-authorizations-token/)
-  and the [Authorization API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
+  and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
   for full details.
 
 # beta (Deprecated) {#beta}

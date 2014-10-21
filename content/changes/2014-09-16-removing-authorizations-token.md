@@ -10,7 +10,7 @@ author_name: ptoomey3
 We have deprecated the `token` attribute from the majority of [Authorizations
 API](/v3/oauth_authorizations/) responses. For the affected APIs, the `token`
 attribute will return an empty string after **January 12, 2015**. See the
-[Authorization deprecation notice][authorizations-token-deprecation-notice] for
+[Authorizations API deprecation notice][authorizations-token-deprecation-notice] for
 a complete list of APIs that are affected.
 
 

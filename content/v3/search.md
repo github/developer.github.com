@@ -235,6 +235,8 @@ The `q` search term can also contain any combination of the supported issue sear
  * [`involves`](https://help.github.com/articles/searching-issues#search-by-a-user-thats-involved-within-an-issue-or-pull-request)
    Finds issues that were either created by a certain user, assigned to that
      user, mention that user, or were commented on by that user.
+ * [`team`](https://help.github.com/articles/searching-issues/#search-by-a-team-thats-mentioned-within-an-issue-or-pull-request)
+   For organizations you're a member of, finds issues or pull requests that @mention a team within the organization.
  * [`state`](https://help.github.com/articles/searching-issues#search-based-on-whether-an-issue-or-pull-request-is-open)
    Filter issues based on whether they're open or closed.
  * [`labels`](https://help.github.com/articles/searching-issues#search-by-the-labels-on-an-issue)

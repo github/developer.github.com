@@ -130,9 +130,11 @@ Find file contents via various criteria. (This method returns up to 100 results 
 
 Due to the complexity of searching code, there are a few restrictions on how searches are performed:
 
-* Only the _default branch_ is considered. In most cases, this will be the `master` branch.
-* Only files smaller than 200 KB are searchable.
-* You must always include at least one search term when searching source code. For example, searching for [`language:go`](https://github.com/search?utf8=✓&q=language%3Ago&type=Code) is not valid, while [`amazing language:go`](https://github.com/search?utf8=✓&q=amazing+language%3Ago&type=Code) is.
+<ul>
+<li>Only the _default branch_ is considered. In most cases, this will be the `master` branch.</li>
+<li>Only files smaller than 200 KB are searchable.</li>
+<li class='.not-enterprise'> You must always include at least one search term when searching source code. For example, searching for <a href="https://github.com/search?utf8=✓&q=language%3Ago&type=Code"><code>language:go</code></a> is not valid, while <a href="https://github.com/search?utf8=✓&q=amazing+language%3Ago&type=Code"><code>amazing language:go</code></a> is.</li>
+</ul>
 
 ### Parameters
 

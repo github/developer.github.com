@@ -13,5 +13,5 @@ records first.  We have discovered that most of these cases are a result of erra
 
 If you have any feedback or questions, please don't hesistate to [contact] us.
 
-[status]: /v3/repos/statuses/
+[statuses]: /v3/repos/statuses/
 [contact]: https://github.com/contact?form[subject]=Combined+Status+API

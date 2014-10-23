@@ -5,7 +5,7 @@ created_at: 2014-10-24
 author_name: rsanheim
 ---
 
-To ensure a high level of service for all API consumers, we are going to begin limiting the number of [statuses]
+To ensure a high level of service for all API consumers, we will soon limit the number of [statuses]
 to 1000 per commit SHA, repository, and context.  Attempts to create statuses beyond that limit will result in a validation error.
 
 Beginning Monday, October 27th, we will begin trimming existing data sets that exceed this limit, deleting the oldest 

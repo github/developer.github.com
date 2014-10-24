@@ -45,3 +45,10 @@ Your Enterprise installation's API endpoints accept [the same authentication met
 The [Admin Stats][], [License][], [Search Indexing][], and [User Administration][] API endpoints are only accessible to GitHub Enterprise site administrators. The [Management Console][] API endpoints are only accessible with a valid license file.
 
 [Authorizations API]: /v3/oauth_authorizations/#create-a-new-authorization
+
+## Past Releases
+
+Documentation for the API that's bundled with your GitHub Enterprise appliance is available for the past two releases:
+
+* [API documentation for 11.10.340](https://developer.github.com/enterprise/11.10.340/)
+* [API documentation for 11.10.320](https://developer.github.com/enterprise/11.10.320/)

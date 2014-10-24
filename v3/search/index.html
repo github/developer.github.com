@@ -288,6 +288,16 @@ included the search term.</p>
 <pre><code>GET /search/code
 </code></pre>
 
+<h3 id="considerations-for-code-search">Considerations for code search</h3>
+
+<p>Due to the complexity of searching code, there are a few restrictions on how searches are performed:</p>
+
+<ul>
+<li>Only the _default branch_ is considered. In most cases, this will be the `master` branch.</li>
+<li>Only files smaller than 200 KB are searchable.</li>
+<li class="not-enterprise"> You must always include at least one search term when searching source code. For example, searching for <a href="https://github.com/search?utf8=%E2%9C%93&amp;q=language%3Ago&amp;type=Code"><code>language:go</code></a> is not valid, while <a href="https://github.com/search?utf8=%E2%9C%93&amp;q=amazing+language%3Ago&amp;type=Code"><code>amazing language:go</code></a> is.</li>
+</ul>
+
 <h3 id="parameters-1">Parameters</h3>
 
 <table>
@@ -553,49 +563,52 @@ Qualifies which fields are searched. With this qualifier you can restrict the
 search to just the title, body, comments, or any combination of these.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-the-author-of-an-issue-or-pull-request"><code>author</code></a>
-Finds issues created by a certain user.</li>
+Finds issues or pull requests created by a certain user.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-the-assignee-of-an-issue-or-pull-request"><code>assignee</code></a>
-Finds issues that are assigned to a certain user.</li>
+Finds issues or pull requests that are assigned to a certain user.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-a-mentioned-user-within-an-issue-or-pull-request"><code>mentions</code></a>
-Finds issues that mention a certain user.</li>
+Finds issues or pull requests that mention a certain user.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-a-commenter-within-an-issue-or-pull-request"><code>commenter</code></a>
-Finds issues that a certain user commented on.</li>
+Finds issues or pull requests that a certain user commented on.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-a-user-thats-involved-within-an-issue-or-pull-request"><code>involves</code></a>
-Finds issues that were either created by a certain user, assigned to that
+Finds issues or pull requests that were either created by a certain user, assigned to that
   user, mention that user, or were commented on by that user.</li>
   <li>
+<a href="https://help.github.com/articles/searching-issues/#search-by-a-team-thats-mentioned-within-an-issue-or-pull-request"><code>team</code></a>
+For organizations you’re a member of, finds issues or pull requests that @mention a team within the organization.</li>
+  <li>
 <a href="https://help.github.com/articles/searching-issues#search-based-on-whether-an-issue-or-pull-request-is-open"><code>state</code></a>
-Filter issues based on whether they’re open or closed.</li>
+Filter issues or pull requests based on whether they’re open or closed.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-the-labels-on-an-issue"><code>labels</code></a>
-Filters issues based on their labels.</li>
+Filters issues or pull requests based on their labels.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-missing-metadata-on-an-issue-or-pull-request"><code>no</code></a>
 Filters items missing certain metadata, such as <code>label</code>, <code>milestone</code>, or <code>assignee</code>
 </li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-the-main-language-of-a-repository"><code>language</code></a>
-Searches for issues within repositories that match a certain language.</li>
+Searches for issues or pull requests within repositories that match a certain language.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-based-on-the-state-of-an-issue-or-pull-request"><code>is</code></a>
 Searches for items within repositories that match a certain state, such as <code>open</code>, <code>closed</code>, or <code>merged</code>
 </li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-based-on-when-an-issue-or-pull-request-was-created-or-last-updated"><code>created</code> or <code>updated</code></a>
-Filters issues based on date of creation, or when they were last updated.</li>
+Filters issues or pull requests based on date of creation, or when they were last updated.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-based-on-when-a-pull-request-was-merged"><code>merged</code></a>
 Filters pull requests based on the date when they were merged.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-based-on-when-an-issue-or-pull-request-was-closed"><code>closed</code></a>
-Filters issues based on the date when they were closed.</li>
+Filters issues or pull requests based on the date when they were closed.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-the-number-of-comments-an-issue-or-pull-request-has"><code>comments</code></a>
-Filters issues based on the quantity of comments.</li>
+Filters issues or pull requests based on the quantity of comments.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-within-a-users-or-organizations-repositories"><code>user</code> or <code>repo</code></a>
 Limits searches to a specific user or repository.</li>

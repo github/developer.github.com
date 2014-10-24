@@ -39,6 +39,9 @@ begin
     doc.css('img').each do |img|
       img['src'] = "/enterprise/#{version}#{img['src']}" if img['src'] =~ /^\//
     end
+    doc.css('.not-enterprise').each do |non_ent|
+      non_ent.remove
+    end
     File.open(html_file, 'w') { |file| file.write(doc.to_html) }
   end
 

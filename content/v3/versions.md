@@ -128,7 +128,7 @@ The [beta API](/v3) is deprecated. Its current functionality is stable and uncha
   </p>
   <p>
     We will eventually retire the beta version, but we have no official
-    retirement date to annouce at the moment. When the time comes, rest assured
+    retirement date to announce at the moment. When the time comes, rest assured
     that we'll announce the retirement with plenty of notice.
   </p>
 </div>

@@ -22,7 +22,7 @@ services to mark commits as passing or failing builds using Status.  The
 build.
 
 Statuses can include a `context` to indicate what service is providing that status. 
-For example, you may have your CI statuses push statuses with a context of `ci`,
+For example, you may have your CI service push statuses with a context of `ci`,
 and a security audit tool push statuses with a context of `security`.  You can
 then use the [combined status endpoint] to retrieve the whole status for a commit.
 

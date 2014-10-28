@@ -24,7 +24,8 @@ build.
 Statuses can include a `context` to indicate what service is providing that status. 
 For example, you may have your CI service push statuses with a context of `ci`,
 and a security audit tool push statuses with a context of `security`.  You can
-then use the [combined status endpoint] to retrieve the whole status for a commit.
+then use the [combined status endpoint](https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref) 
+to retrieve the whole status for a commit.
 
 Note that the `repo:status` [OAuth scope](/v3/oauth/#scopes) grants targeted
 access to Statuses **without** also granting access to repository code, while the

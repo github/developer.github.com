@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Status API Limits
-created_at: 2014-10-24
+created_at: 2014-10-29
 author_name: rsanheim
 ---
 

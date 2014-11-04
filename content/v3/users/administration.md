@@ -37,7 +37,7 @@ You can demote any user account except your own.
 
 ## Suspend a user
 
-    PUT /user/:username/suspended
+    PUT /users/:username/suspended
 
 You can suspend any user account except your own.
 
@@ -49,7 +49,7 @@ You can suspend any user account except your own.
 
 ## Unsuspend a user
 
-    DELETE /user/:username/suspended
+    DELETE /users/:username/suspended
 
 ### Response
 

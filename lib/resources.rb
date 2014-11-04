@@ -131,7 +131,7 @@ module GitHub
       "login"        => "octocat",
       "id"           => 1,
       "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
-      "gravatar_id"  => "somehexcode",
+      "gravatar_id"  => "",
       "url"          => "https://api.github.com/users/octocat",
       "html_url"     => "https://github.com/octocat",
       "followers_url" => "https://api.github.com/users/octocat/followers",
@@ -284,7 +284,7 @@ module GitHub
        "date"=>"2012-03-06T15:06:50-08:00",
        "email"=>"octocat@nowhere.com"}},
    "author"=>
-    {"gravatar_id"=>"7ad39074b0584bc555d0417ae3e7d974",
+    {"gravatar_id"=>"",
      "avatar_url"=>
       "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
      "url"=>"https://api.github.com/users/octocat",
@@ -300,7 +300,7 @@ module GitHub
    "url"=>
     "https://api.github.com/repos/octocat/Hello-World/commits/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
    "committer"=>
-    {"gravatar_id"=>"7ad39074b0584bc555d0417ae3e7d974",
+    {"gravatar_id"=>"",
      "avatar_url"=>
       "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
      "url"=>"https://api.github.com/users/octocat",
@@ -338,7 +338,7 @@ module GitHub
     "login" => "octocat",
     "id" => 583231,
     "avatar_url" => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-    "gravatar_id" => "7ad39074b0584bc555d0417ae3e7d974",
+    "gravatar_id" => "",
     "url" => "https://api.github.com/users/octocat",
     "html_url" => "https://github.com/octocat",
     "followers_url" => "https://api.github.com/users/octocat/followers",
@@ -356,7 +356,7 @@ module GitHub
     "login" => "octocat",
     "id" => 583231,
     "avatar_url" => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-    "gravatar_id" => "7ad39074b0584bc555d0417ae3e7d974",
+    "gravatar_id" => "",
     "url" => "https://api.github.com/users/octocat",
     "html_url" => "https://github.com/octocat",
     "followers_url" => "https://api.github.com/users/octocat/followers",
@@ -816,7 +816,7 @@ module GitHub
     FULL_ISSUE_EVENT ||= ISSUE_EVENT.merge('issue' => ISSUE)
 
     ISSUE_SEARCH_ITEM ||= {
-      "gravatar_id" =>  "4c3d600867886124a73f14a907b1a955",
+      "gravatar_id" =>  "",
       "position" =>  10,
       "number" =>  10,
       "votes" =>  2,
@@ -856,7 +856,7 @@ module GitHub
             "login" => "Nick3C",
             "id" => 90254,
             "avatar_url" => "https://secure.gravatar.com/avatar/934442aadfe3b2f4630510de416c5718?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-            "gravatar_id" => "934442aadfe3b2f4630510de416c5718",
+            "gravatar_id" => "",
             "url" => "https://api.github.com/users/Nick3C",
             "html_url" => "https://github.com/Nick3C",
             "followers_url" => "https://api.github.com/users/Nick3C/followers",
@@ -979,7 +979,7 @@ module GitHub
             "login" => "dtrupenn",
             "id" => 872147,
             "avatar_url" => "https://secure.gravatar.com/avatar/e7956084e75f239de85d3a31bc172ace?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-            "gravatar_id" => "e7956084e75f239de85d3a31bc172ace",
+            "gravatar_id" => "",
             "url" => "https://api.github.com/users/dtrupenn",
             "received_events_url" => "https://api.github.com/users/dtrupenn/received_events",
             "type" => "User"
@@ -1060,7 +1060,7 @@ module GitHub
               "login" => "jquery",
               "id" => 70142,
               "avatar_url" => "https://0.gravatar.com/avatar/6906f317a4733f4379b06c32229ef02f?d=https%3A%2F%2Fidenticons.github.com%2Ff426f04f2f9813718fb806b30e0093de.png",
-              "gravatar_id" => "6906f317a4733f4379b06c32229ef02f",
+              "gravatar_id" => "",
               "url" => "https://api.github.com/users/jquery",
               "html_url" => "https://github.com/jquery",
               "followers_url" => "https://api.github.com/users/jquery/followers",
@@ -1156,7 +1156,7 @@ module GitHub
     }
 
     USER_SEARCH_ITEM ||= {
-      "gravatar_id" => "70889091349f7598bce9afa588034310",
+      "gravatar_id" => "",
       "name" => "Hirotaka Kawata",
       "created_at" => "2009-10-05T01:32:06Z",
       "location" => "Tsukuba, Ibaraki, Japan",
@@ -1186,7 +1186,7 @@ module GitHub
           "login" => "mojombo",
           "id" => 1,
           "avatar_url" => "https://secure.gravatar.com/avatar/25c7c18223fb42a4c6ae1c8db6f50f9b?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-          "gravatar_id" => "25c7c18223fb42a4c6ae1c8db6f50f9b",
+          "gravatar_id" => "",
           "url" => "https://api.github.com/users/mojombo",
           "html_url" => "https://github.com/mojombo",
           "followers_url" => "https://api.github.com/users/mojombo/followers",
@@ -1252,7 +1252,7 @@ module GitHub
         "id"                => 2,
         "login"             => "octocat",
         "type"              => "User",
-        "gravatar_id"       => "70889091349f7598bce9afa588034310",
+        "gravatar_id"       => "",
       }
     }
 
@@ -1315,8 +1315,8 @@ module GitHub
       "comments"     => 0,
       "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
       "html_url"     => "https://gist.github.com/1",
-      "git_pull_url" => "git://gist.github.com/1.git",
-      "git_push_url" => "git@gist.github.com:1.git",
+      "git_pull_url" => "https://gist.github.com/1.git",
+      "git_push_url" => "https://gist.github.com/1.git",
       "created_at"   => "2010-04-14T02:15:15Z",
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
@@ -1540,14 +1540,14 @@ module GitHub
       :actor => {
         :id => 1,
         :login => "octocat",
-        :gravatar_id => "somehexcode",
+        :gravatar_id => "",
         :avatar_url => "https://github.com/images/error/octocat_happy.gif",
         :url => "https://api.github.com/users/octocat"
       },
       :org => {
         :id => 1,
         :login => "github",
-        :gravatar_id => "somehexcode",
+        :gravatar_id => "",
         :url => "https://api.github.com/orgs/github",
         :avatar_url =>  "https://github.com/images/error/octocat_happy.gif"
       },

@@ -44,3 +44,10 @@ The [Admin Stats][], [License][], [Search Indexing][], and [User Administration]
 [Management Console]: management_console/
 [User Administration]: /v3/users/administration/
 [Management Console password]: https://enterprise.github.com/help/articles/setting-the-management-console-password
+
+## Past Releases
+
+Documentation for the API that's bundled with your GitHub Enterprise appliance is available for the past two releases:
+
+* [API documentation for 11.10.340](https://developer.github.com/enterprise/11.10.340/)
+* [API documentation for 11.10.320](https://developer.github.com/enterprise/11.10.320/)

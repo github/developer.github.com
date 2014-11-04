@@ -59,6 +59,9 @@ The recommendations below will help you prepare your application for the next ma
 1. Method: /repos/:owner/:repo/hooks/:id/test
 : Recommendation: Use **/repos/:owner/:repo/hooks/:id/tests** (plural) instead.
 
+1. Method: /teams/:id/members/:username
+: Recommendation: Use [Get Team Membership](/v3/orgs/teams/#get-team-membership), [Add Team Membership](/v3/orgs/teams/#add-team-membership), and [Remove Team Membership](/v3/orgs/teams/#remove-team-membership) instead.
+
 1. Query parameters when POSTing to /repos/:owner/:repo/forks
 : Recommendation: Use JSON to POST to this method instead.
 
@@ -125,7 +128,7 @@ The [beta API](/v3) is deprecated. Its current functionality is stable and uncha
   </p>
   <p>
     We will eventually retire the beta version, but we have no official
-    retirement date to annouce at the moment. When the time comes, rest assured
+    retirement date to announce at the moment. When the time comes, rest assured
     that we'll announce the retirement with plenty of notice.
   </p>
 </div>

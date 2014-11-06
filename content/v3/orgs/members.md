@@ -27,14 +27,14 @@ Name    | Type    | Description
 
 <div class="alert">
   <p>
-    The Team Memberships API is currently available for developers to preview.
+    The Organization Admins Pre-release API is currently available for developers to preview.
     During the preview period, the API may change without notice.
     Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
   </p>
 
   <p>
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
+    <pre>application/vnd.github.moondragon-preview+json</pre>
   </p>
 </div>
 
@@ -182,3 +182,37 @@ Name | Type | Description
 
 <%= headers 200 %>
 <%= json(:active_org_membership) %>
+
+### Get organization membership
+
+<div class="alert">
+  <p>
+    The Organization Admins Pre-release API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.moondragon-preview+json</pre>
+  </p>
+</div>
+
+In order to get a user's membership with an organization, the authenticated user must be an organization admin.
+
+    GET /orgs/:org/memberships/:username
+
+### Response if user has an active admin membership with organization
+
+<%= headers 200 %>
+<%= json(:active_admin_org_membership) %>
+
+### Response if user has an active membership with organization
+
+<%= headers 200 %>
+<%= json(:active_limited_org_membership) %>
+
+### Response if user has a pending membership with organization
+
+<%= headers 200 %>
+<%= json(:pending_limited_org_membership) %>

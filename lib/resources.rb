@@ -762,6 +762,24 @@ module GitHub
     ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ORG_MEMBERSHIP]
     PENDING_ORG_MEMBERSHIPS ||= [PENDING_ORG_MEMBERSHIP]
 
+    ACTIVE_ADMIN_ORG_MEMBERSHIP ||= {
+      "user"  => USER,
+      "state" => "active",
+      "role"  => "admin"
+    }
+
+    ACTIVE_LIMITED_ORG_MEMBERSHIP ||= {
+      "user"  => USER,
+      "state" => "active",
+      "role"  => "limited_member"
+    }
+
+    PENDING_LIMITED_ORG_MEMBERSHIP ||= {
+      "user"  => USER,
+      "state" => "active",
+      "role"  => "limited_member"
+    }
+
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
       "name"  => "bug",

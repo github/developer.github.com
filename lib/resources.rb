@@ -774,6 +774,12 @@ module GitHub
       "role"  => "limited_member"
     }
 
+    PENDING_ADMIN_ORG_MEMBERSHIP ||= {
+      "user"  => USER,
+      "state" => "active",
+      "role"  => "admin"
+    }
+
     PENDING_LIMITED_ORG_MEMBERSHIP ||= {
       "user"  => USER,
       "state" => "active",

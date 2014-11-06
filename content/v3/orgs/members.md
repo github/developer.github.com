@@ -216,3 +216,38 @@ In order to get a user's membership with an organization, the authenticated user
 
 <%= headers 200 %>
 <%= json(:pending_limited_org_membership) %>
+
+### Add organization membership
+
+<div class="alert">
+  <p>
+    The Organization Admins Pre-release API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.moondragon-preview+json</pre>
+  </p>
+</div>
+
+In order to create or update a user's membership with an organization, the authenticated user must be an organization admin.
+
+    PUT /orgs/:org/memberships/:username
+
+### Parameters
+
+Name  | Type   | Description
+------|--------|--------------
+`role`|`string`| **Required**. The role to give the user in the organization. This must be `admin`.
+
+### Response if user was previously unaffiliated with organization
+
+<%= headers 200 %>
+<%= json(:pending_admin_org_membership) %>
+
+### Response if user already had membership with organization
+
+<%= headers 200 %>
+<%= json(:active_admin_org_membership) %>

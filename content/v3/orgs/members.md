@@ -251,3 +251,28 @@ Name  | Type   | Description
 
 <%= headers 200 %>
 <%= json(:active_admin_org_membership) %>
+
+### Remove organization membership
+
+<div class="alert">
+  <p>
+    The Organization Admins Pre-release API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.moondragon-preview+json</pre>
+  </p>
+</div>
+
+In order to remove a user's membership with an organization, the authenticated user must be an organization admin.
+
+    DELETE /orgs/:org/memberships/:username
+
+If the specified user is an active member of the organization, this will remove them from the organization. If the specified user has been invited to the organization, this will cancel their invitation.
+
+### Response
+
+<%= headers 204 %>

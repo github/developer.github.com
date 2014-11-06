@@ -21,8 +21,22 @@ be returned.
 Name    | Type    | Description
 --------|---------|--------------
 `filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for owners of organizations with private repositories.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
+`role`  |`string` | Filter members returned by their role. If specified, must be set to `admin`, which will only return users with admin permissions on the org. **This parameter requires a custom media type to be specified. Please see more in the alert below.**
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
+
+<div class="alert">
+  <p>
+    The Team Memberships API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.the-wasp-preview+json</pre>
+  </p>
+</div>
 
 ### Response
 

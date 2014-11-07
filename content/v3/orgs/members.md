@@ -217,7 +217,7 @@ In order to get a user's membership with an organization, the authenticated user
 <%= headers 200 %>
 <%= json(:pending_limited_org_membership) %>
 
-## Add organization membership
+## Add or update organization membership
 
 <div class="alert">
   <p>

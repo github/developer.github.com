@@ -33,6 +33,6 @@ We expect the preview period to last 7 days. That means, on **November 16th**, t
 If you have any questions or feedback, please [get in touch with us][contact]!
 
 [contact]: https://github.com/contact?form[subject]=Organization+Admin+Pre-release+Preview
-[add-org-membership]: /v3/orgs/members/#add-organization-membership
+[add-org-membership]: /v3/orgs/members/#add-or-update-organization-membership
 [list-org-members]: /v3/orgs/members/#members-list
 [get-org-membership]: /v3/orgs/members/#get-organization-membership

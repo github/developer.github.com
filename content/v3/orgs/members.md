@@ -205,7 +205,7 @@ Name  | Type   | Description
   <p>
     The Organization Admins API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-10-organization-admins-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-11-10-organization-admins-api-preview/">blog post</a> for full details.
   </p>
 
   <p>

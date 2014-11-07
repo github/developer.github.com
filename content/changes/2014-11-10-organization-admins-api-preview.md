@@ -8,7 +8,9 @@ We have some upcoming changes that will affect the way organization members are 
 
 ### What's happening to the Owners team?
 
-Currently, members of your Owners team are administrators of your organization. On **December 3rd, 2014**, your Owners team will become a totally normal team. Adding and removing Owners team members won't change their administrator status anymore. We won't delete your Owners team, but you'll be able to delete or rename it yourself if you want. Organizations created after December 3 won't have an Owners team.
+Currently, members of your Owners team are administrators of your organization. On **December 3rd, 2014**, your Owners team will become a totally normal team. Adding and removing Owners team members won't change their administrator status anymore. Instead, you'll be able to directly grant admin permissions to your organization's members without adding them to any special teams.
+
+We won't delete your Owners team, but you'll be able to delete or rename it yourself if you want. Organizations created after December 3 won't have an Owners team.
 
 In preparation for this change, we're releasing a few new APIs. You'll be able to use these APIs to manage organization admins without relying on the Owners team.
 

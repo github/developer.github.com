@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Previewing a new way to manage organization admins
+title: Previewing the new way to manage organization admins
 created_at: 2014-11-10
 author_name: jakeboxer
 ---

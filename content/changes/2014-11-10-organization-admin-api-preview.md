@@ -6,7 +6,7 @@ author_name: jakeboxer
 ---
 We have some upcoming changes that will affect the way organization members are managed. We'll reveal more in the coming weeks, but for now, the most important change is that **the Owners team will no longer be special**. Adding users to the Owners team won't make them admins, and removing users from the Owners team won't remove their admin status.
 
-In preparation for this change, we're pre-releasing a few new APIs, as well as a new parameter on an existing API. You'll be able to use these APIs to manage organization admins without relying on the Owners team.
+In preparation for this change, we're pre-releasing a few new APIs. You'll be able to use these APIs to manage organization admins without relying on the Owners team.
 
 ### Adding an organization admin
 

@@ -160,7 +160,7 @@ An optional `state` can be passed to request only pending or active memberships.
 ### Response
 
 <%= headers 200 %>
-<%= json(:pending_org_membership) %>
+<%= json(:pending_admin_org_membership) %>
 
 ## Edit your organization membership
 
@@ -181,7 +181,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json(:active_org_membership) %>
+<%= json(:active_admin_org_membership) %>
 
 ## Get organization membership
 

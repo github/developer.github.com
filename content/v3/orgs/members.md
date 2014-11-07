@@ -27,9 +27,9 @@ Name    | Type    | Description
 
 <div class="alert">
   <p>
-    The Organization Admins Pre-release API is currently available for developers to preview.
+    The Organization Admins API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-11-10-organization-admins-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -187,9 +187,9 @@ Name | Type | Description
 
 <div class="alert">
   <p>
-    The Organization Admins Pre-release API is currently available for developers to preview.
+    The Organization Admins API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-11-10-organization-admins-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -221,9 +221,9 @@ In order to get a user's membership with an organization, the authenticated user
 
 <div class="alert">
   <p>
-    The Organization Admins Pre-release API is currently available for developers to preview.
+    The Organization Admins API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-11-10-organization-admins-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -256,9 +256,9 @@ Name  | Type   | Description
 
 <div class="alert">
   <p>
-    The Organization Admins Pre-release API is currently available for developers to preview.
+    The Organization Admins API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-10-organization-admin-pre-release-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-11-10-organization-admins-preview/">blog post</a> for full details.
   </p>
 
   <p>

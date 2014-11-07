@@ -30,8 +30,7 @@ Git tags that have not been associated with a release.
 ### Response
 
 <div id="releases-hypermedia-url">
-<strong>Note:</strong> This returns an <code>upload_url</code> hypermedia relation that provides the
-<a href="#upload-a-release-asset">endpoint that creates release assets</a>.
+<strong>Note:</strong> This returns an <code>upload_url</code> key corresponding to the endpoint for uploading release assets. This key is a <a href="https://developer.github.com/v3/#hypermedia">hypermedia resource</a>.
 </div>
 
 <%= headers 200 %>

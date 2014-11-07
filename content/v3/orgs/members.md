@@ -130,59 +130,6 @@ The user can publicize their own membership.
 
 <%= headers 204 %>
 
-## List your organization memberships
-
-An optional `state` can be passed to request only pending or active memberships.
-
-    GET /user/memberships/orgs
-    GET /user/memberships/orgs?state=active
-    GET /user/memberships/orgs?state=pending
-
-### Response when no state is specified
-
-<%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:org_memberships) %>
-
-### Response when a "pending" state is specified
-
-<%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:pending_org_memberships) %>
-
-### Response when an "active" state is specified
-
-<%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:active_org_memberships) %>
-
-## Get your organization membership
-
-    GET /user/memberships/orgs/:org
-
-### Response
-
-<%= headers 200 %>
-<%= json(:pending_admin_org_membership) %>
-
-## Edit your organization membership
-
-    PATCH /user/memberships/orgs/:org
-
-### Input
-
-Name | Type | Description
------|------|--------------
-`state`|`string`| **Required**. The state that the membership should be in. Only `"active"` will be accepted.
-
-### Example
-
-<%= json \
-    :state => "active"
-    %>
-
-### Response
-
-<%= headers 200 %>
-<%= json(:active_admin_org_membership) %>
-
 ## Get organization membership
 
 <div class="alert">
@@ -276,3 +223,56 @@ If the specified user is an active member of the organization, this will remove 
 ### Response
 
 <%= headers 204 %>
+
+## List your organization memberships
+
+An optional `state` can be passed to request only pending or active memberships.
+
+    GET /user/memberships/orgs
+    GET /user/memberships/orgs?state=active
+    GET /user/memberships/orgs?state=pending
+
+### Response when no state is specified
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:org_memberships) %>
+
+### Response when a "pending" state is specified
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:pending_org_memberships) %>
+
+### Response when an "active" state is specified
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:active_org_memberships) %>
+
+## Get your organization membership
+
+    GET /user/memberships/orgs/:org
+
+### Response
+
+<%= headers 200 %>
+<%= json(:pending_admin_org_membership) %>
+
+## Edit your organization membership
+
+    PATCH /user/memberships/orgs/:org
+
+### Input
+
+Name | Type | Description
+-----|------|--------------
+`state`|`string`| **Required**. The state that the membership should be in. Only `"active"` will be accepted.
+
+### Example
+
+<%= json \
+    :state => "active"
+    %>
+
+### Response
+
+<%= headers 200 %>
+<%= json(:active_admin_org_membership) %>

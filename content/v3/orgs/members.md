@@ -183,7 +183,7 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json(:active_org_membership) %>
 
-### Get organization membership
+## Get organization membership
 
 <div class="alert">
   <p>
@@ -217,7 +217,7 @@ In order to get a user's membership with an organization, the authenticated user
 <%= headers 200 %>
 <%= json(:pending_limited_org_membership) %>
 
-### Add organization membership
+## Add organization membership
 
 <div class="alert">
   <p>
@@ -252,7 +252,7 @@ Name  | Type   | Description
 <%= headers 200 %>
 <%= json(:active_admin_org_membership) %>
 
-### Remove organization membership
+## Remove organization membership
 
 <div class="alert">
   <p>

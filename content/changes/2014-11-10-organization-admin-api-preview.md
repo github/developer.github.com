@@ -28,7 +28,7 @@ While these additions are in their preview period, you'll need to provide the fo
 
     application/vnd.github.moondragon-preview+json
 
-We expect the preview period to last 7-14 days. At the end of the preview period, these additions will become official components of GitHub API v3.
+We expect the preview period to last 7 days. That means, on **November 16th**, these additions will become official components of GitHub API v3.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

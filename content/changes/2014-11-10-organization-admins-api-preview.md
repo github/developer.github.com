@@ -28,11 +28,11 @@ To check if a given user is an organization admin, use the new [Get organization
 
 ### How long do I have to make the switch?
 
-Starting **today**, these new APIs are available for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
+Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last 7 days. On November 16, these additions will become official components of GitHub API v3.
 
-**From November 16 to December 2**, these new APIs will be finalized, and will be available without a custom media type. Anyone relying on the Owners team for managing their organization's admins must update their applications to use the new APIs during this period.
+Between **November 16 and December 2**, developers should update their applications to use the new APIs for managing organization admins. During this period, ... <TODO explain that the Owners team still functions as usual during this period.>
 
-On **December 3**, the Owners team will no longer be special. You'll no longer be able to rely on the Owners team for managing organization admins after this day.
+On **December 3**, the Owners team will no longer be special. You'll no longer be able to rely on the Owners team for managing organization admins after this date.
 
 ### Preview period
 
@@ -40,7 +40,7 @@ While these additions are in their preview period, you'll need to provide the fo
 
     application/vnd.github.moondragon-preview+json
 
-We expect the preview period to last 7 days. On **November 16**, these additions will become official components of GitHub API v3.
+During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

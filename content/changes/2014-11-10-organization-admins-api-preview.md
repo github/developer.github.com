@@ -28,7 +28,7 @@ To check if a given user is an organization admin, use the new [Get organization
 
 ### How long do I have to make the switch?
 
-Starting **today**, these new APIs will be available for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
+Starting **today**, these new APIs are available for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
 
 **From November 16 to December 2**, these new APIs will be finalized, and will be available without a custom media type. Anyone relying on the Owners team for managing their organization's admins must update their applications to use the new APIs during this period.
 

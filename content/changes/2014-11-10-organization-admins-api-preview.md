@@ -26,9 +26,15 @@ To get a list of all your organization's admins, use the [Organization members l
 
 To check if a given user is an organization admin, use the new [Get organization membership][get-org-membership] endpoint. If the returned `"role"` attribute is set to `"admin"` and the returned `"state"` attribute is set to `"active"`, the user is an organization admin. This replaces checking if a user is on the Owners team.
 
-### Preview period
+### How long do I have to make the switch?
 
-We're making these additions available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
+Starting **today**, these new APIs will be available for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
+
+**From November 16 to December 2**, these new APIs will be finalized, and will be available without a custom media type. Anyone relying on the Owners team for managing their organization's admins must update their applications to use the new APIs during this period.
+
+On **December 3**, the Owners team will no longer be special. You'll no longer be able to rely on the Owners team for managing organization admins after this day.
+
+### Preview period
 
 While these additions are in their preview period, you'll need to provide the following custom media type in the `Accept` header:
 

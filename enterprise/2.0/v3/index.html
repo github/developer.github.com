@@ -59,9 +59,10 @@
 <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">support</a>.</p>
 
 <ul id="markdown-toc">
-<li><a href="#current-version">Current Version</a></li>
+  <li><a href="#current-version">Current Version</a></li>
   <li><a href="#schema">Schema</a></li>
   <li><a href="#parameters">Parameters</a></li>
+  <li><a href="#root-endpoint">Root Endpoint</a></li>
   <li><a href="#client-errors">Client Errors</a></li>
   <li><a href="#http-redirects">HTTP Redirects</a></li>
   <li><a href="#http-verbs">HTTP Verbs</a></li>
@@ -75,6 +76,7 @@
   <li><a href="#json-p-callbacks">JSON-P Callbacks</a></li>
   <li><a href="#timezones">Timezones</a></li>
 </ul>
+
 <h2 id="current-version">Current Version</h2>
 
 <p>By default, all requests receive the <strong>v3</strong> <a href="/enterprise/2.0/v3/versions">version</a> of the API.
@@ -170,13 +172,27 @@ with a Content-Type of ‘application/json’:</p>
 $ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/authorizations
 </pre>
 
+<h2 id="root-endpoint">Root Endpoint</h2>
+
+<p>You can issue a <code>GET</code> request to the root endpoint to get all the endpoint categories that the API supports:</p>
+
+<pre class="terminal">
+$ curl https://api.github.com
+</pre>
+
+<p>Note that for GitHub Enterprise, <a href="https://developer.github.com/v3/enterprise/#endpoint-urls">as with all other endpoints</a>, you’ll need to pass in your GitHub Enterprise endpoint as the hostname, <em>as well as your username and password</em>:</p>
+
+<pre class="terminal">
+$ curl https://<em>hostname</em>/api/v3/ -u <em>username</em>:<em>password</em>
+</pre>
+
 <h2 id="client-errors">Client Errors</h2>
 
 <p>There are three possible types of client errors on API calls that
 receive request bodies:</p>
 
 <ol>
-<li>
+  <li>
     <p>Sending invalid JSON will result in a <code>400 Bad Request</code> response.</p>
 
     <pre><code> HTTP/1.1 400 Bad Request
@@ -215,35 +231,39 @@ response.</p>
 </code></pre>
   </li>
 </ol>
+
 <p>All error objects have resource and field properties so that your client
 can tell what the problem is.  There’s also an error code to let you
 know what is wrong with the field.  These are the possible validation error
 codes:</p>
 
 <table>
-<thead><tr>
-<th>Error Name</th>
+  <thead>
+    <tr>
+      <th>Error Name</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>missing</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>missing</code></td>
       <td>This means a resource does not exist.</td>
     </tr>
-<tr>
-<td><code>missing_field</code></td>
+    <tr>
+      <td><code>missing_field</code></td>
       <td>This means a required field on a resource has not been set.</td>
     </tr>
-<tr>
-<td><code>invalid</code></td>
+    <tr>
+      <td><code>invalid</code></td>
       <td>This means the formatting of a field is invalid.  The documentation for that resource should be able to give you more specific information.</td>
     </tr>
-<tr>
-<td><code>already_exists</code></td>
+    <tr>
+      <td><code>already_exists</code></td>
       <td>This means another resource has the same value as this field.  This can happen in resources that must have some unique key (such as Label names).</td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
 <p>If resources have custom validation errors, they will be documented with the resource.</p>
 
 <h2 id="http-redirects">HTTP Redirects</h2>
@@ -255,23 +275,26 @@ error and clients should follow that redirect. Redirect responses will have a
 client should repeat the requests.</p>
 
 <table>
-<thead><tr>
-<th>Status Code</th>
+  <thead>
+    <tr>
+      <th>Status Code</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>301</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>301</code></td>
       <td>Permanent redirection. The URI you used to make the request has been superseded by the one specified in the <code>Location</code> header field. This and all future requests to this resource should be directed to the new URI.</td>
     </tr>
-<tr>
-<td>
+    <tr>
+      <td>
 <code>302</code>, <code>307</code>
 </td>
       <td>Temporary redirection. The request should be repeated verbatim to the URI specified in the <code>Location</code> header field but clients should continue to use the original URI for future requests.</td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
 <p>Other redirection status codes may be used in accordance with the HTTP 1.1 spec.</p>
 
 <h2 id="http-verbs">HTTP Verbs</h2>
@@ -280,37 +303,40 @@ client should repeat the requests.</p>
 action.</p>
 
 <table>
-<thead><tr>
-<th>Verb</th>
+  <thead>
+    <tr>
+      <th>Verb</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>HEAD</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>HEAD</code></td>
       <td>Can be issued against any resource to get just the HTTP header info.</td>
     </tr>
-<tr>
-<td><code>GET</code></td>
+    <tr>
+      <td><code>GET</code></td>
       <td>Used for retrieving resources.</td>
     </tr>
-<tr>
-<td><code>POST</code></td>
+    <tr>
+      <td><code>POST</code></td>
       <td>Used for creating resources, or performing custom actions (such as merging a pull request).</td>
     </tr>
-<tr>
-<td><code>PATCH</code></td>
+    <tr>
+      <td><code>PATCH</code></td>
       <td>Used for updating resources with partial JSON data.  For instance, an Issue resource has <code>title</code> and <code>body</code> attributes.  A PATCH request may accept one or more of the attributes to update the resource.  PATCH is a relatively new and uncommon HTTP verb, so resource endpoints also accept <code>POST</code> requests.</td>
     </tr>
-<tr>
-<td><code>PUT</code></td>
+    <tr>
+      <td><code>PUT</code></td>
       <td>Used for replacing resources or collections. For <code>PUT</code> requests with no <code>body</code> attribute, be sure to set the <code>Content-Length</code> header to zero.</td>
     </tr>
-<tr>
-<td><code>DELETE</code></td>
+    <tr>
+      <td><code>DELETE</code></td>
       <td>Used for deleting resources.</td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
 <h2 id="authentication">Authentication</h2>
 
 <p>There are three ways to authenticate through GitHub API v3.  Requests that
@@ -347,7 +373,7 @@ $ curl 'https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=y
 </pre>
 
 <p>This should only be used in server to server scenarios.  Don’t leak your
-OAuth application’s client secret to your users.  Read <a href="#unauthenticated-rate-limited-requests">more about
+OAuth application’s client secret to your users.  Read <a href="#increasing-the-unauthenticated-rate-limit-for-oauth-applications">more about
 unauthenticated rate limiting</a>.</p>
 
 <h3 id="failed-login-limit">Failed login limit</h3>
@@ -437,35 +463,39 @@ SHA1 and not on page number.</p>
 <p>The possible <code>rel</code> values are:</p>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>next</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>next</code></td>
       <td>Shows the URL of the immediate next page of results.</td>
     </tr>
-<tr>
-<td><code>last</code></td>
+    <tr>
+      <td><code>last</code></td>
       <td>Shows the URL of the last page of results.</td>
     </tr>
-<tr>
-<td><code>first</code></td>
+    <tr>
+      <td><code>first</code></td>
       <td>Shows the URL of the first page of results.</td>
     </tr>
-<tr>
-<td><code>prev</code></td>
+    <tr>
+      <td><code>prev</code></td>
       <td>Shows the URL of the immediate previous page of results.</td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
 <h2 id="rate-limiting">Rate Limiting</h2>
 
 <p>For requests using Basic Authentication or OAuth, you can make up to 5,000
 requests per hour. For unauthenticated requests, the rate limit allows you to
-make up to 60 requests per hour. (The Search API has <a href="/enterprise/2.0/v3/search/#rate-limit">custom rate limit
-rules</a>.)</p>
+make up to 60 requests per hour. Unauthenticated requests are associated with your IP address,
+and not the user making requests. Note that <a href="/enterprise/2.0/v3/search/#rate-limit">the Search API has custom rate limit
+rules</a>.</p>
 
 <p>You can check the returned HTTP headers of any API request to see your current
 rate limit status:</p>
@@ -484,29 +514,32 @@ X-RateLimit-Reset: 1372700873
 <p>The headers tell you everything you need to know about your current rate limit status:</p>
 
 <table>
-<thead><tr>
-<th>Header Name</th>
+  <thead>
+    <tr>
+      <th>Header Name</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>X-RateLimit-Limit</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>X-RateLimit-Limit</code></td>
       <td>The maximum number of requests that the consumer is permitted to make per hour.</td>
     </tr>
-<tr>
-<td><code>X-RateLimit-Remaining</code></td>
+    <tr>
+      <td><code>X-RateLimit-Remaining</code></td>
       <td>The number of requests remaining in the current rate limit window.</td>
     </tr>
-<tr>
-<td><code>X-RateLimit-Reset</code></td>
+    <tr>
+      <td><code>X-RateLimit-Reset</code></td>
       <td>The time at which the current rate limit window resets in <a href="http://en.wikipedia.org/wiki/Unix_time">UTC epoch seconds</a>.</td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
 <p>If you need the time in a different format, any modern programming language can get the job done. For example, if you open up the console on your web browser, you can easily get the reset time as a JavaScript Date object.</p>
 
-<pre><code class="language-javascript"><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1372700873</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="c1">// =&gt; Mon Jul 01 2013 13:47:53 GMT-0400 (EDT)</span></code></pre>
+<pre><code class="language-javascript highlight"><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1372700873</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="o">/</span><span class="sr">/</span><span class="err"> =&gt; Mon Jul 01 2013 13:47:53 GMT-0400 (EDT)</span></code></pre>
 
 <p>Once you go over the rate limit you will receive an error response:</p>
 
@@ -527,11 +560,9 @@ X-RateLimit-Reset: 1377013266
 API hit.
 <br></p>
 
-<h3 id="unauthenticated-rate-limited-requests">Unauthenticated rate limited requests</h3>
+<h3 id="increasing-the-unauthenticated-rate-limit-for-oauth-applications">Increasing the unauthenticated rate limit for OAuth applications</h3>
 
-<p>If you need to make unauthenticated calls but need to use a higher rate limit
-associated with your OAuth application, you can send over your client ID and
-secret in the query string.</p>
+<p>If your OAuth application needs to make unauthenticated calls with a higher rate limit, you can pass your app’s client ID and secret as part of the query string.</p>
 
 <pre class="terminal">
 $ curl -i 'https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy'
@@ -724,19 +755,19 @@ through as an array of <code>[url, options]</code> tuples.</p>
 
 <p>… will look like this in the Callback output:</p>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"Link"</span><span class="o">:</span> <span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"Link"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">[</span>
       <span class="s2">"url1"</span><span class="p">,</span>
       <span class="p">{</span>
-        <span class="s2">"rel"</span><span class="o">:</span> <span class="s2">"next"</span>
+        <span class="s2">"rel"</span><span class="p">:</span> <span class="s2">"next"</span>
       <span class="p">}</span>
     <span class="p">],</span>
     <span class="p">[</span>
       <span class="s2">"url2"</span><span class="p">,</span>
       <span class="p">{</span>
-        <span class="s2">"rel"</span><span class="o">:</span> <span class="s2">"foo"</span><span class="p">,</span>
-        <span class="s2">"bar"</span><span class="o">:</span> <span class="s2">"baz"</span>
+        <span class="s2">"rel"</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span>
+        <span class="s2">"bar"</span><span class="p">:</span> <span class="s2">"baz"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">]</span>
@@ -781,6 +812,8 @@ timezone is updated whenever you browse the GitHub.com website.</p>
 
 <p>If the steps above don’t result in any information, we use UTC as the timezone
 to create the git commit.</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -805,7 +838,7 @@ to create the git commit.</p>
 </h3>
         <ul class="js-guides">
           <li><a href="/enterprise/2.0/v3/activity/events/">Events</a></li>
-          <li><a href="/enterprise/2.0/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/enterprise/2.0/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/enterprise/2.0/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/enterprise/2.0/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/enterprise/2.0/v3/activity/starring/">Starring</a></li>
@@ -914,6 +947,18 @@ to create the git commit.</p>
           <li><a href="/enterprise/2.0/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.0/v3/users/followers/">Followers</a></li>
           <li><a href="/enterprise/2.0/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.0/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise</a>
+</h3>
+        <ul class="js-guides">
+          <li><a href="/enterprise/2.0/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/license/">License</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/management_console/">Management Console</a></li>
         </ul>
       </li>
     </ul>
@@ -951,7 +996,7 @@ to create the git commit.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design © <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div>

@@ -59,7 +59,7 @@
 various activity streams on the site.</p>
 
 <ul id="markdown-toc">
-<li><a href="#list-public-events">List public events</a></li>
+  <li><a href="#list-public-events">List public events</a></li>
   <li><a href="#list-repository-events">List repository events</a></li>
   <li><a href="#list-issue-events-for-a-repository">List issue events for a repository</a></li>
   <li><a href="#list-public-events-for-a-network-of-repositories">List public events for a network of repositories</a></li>
@@ -70,6 +70,7 @@ various activity streams on the site.</p>
   <li><a href="#list-public-events-performed-by-a-user">List public events performed by a user</a></li>
   <li><a href="#list-events-for-an-organization">List events for an organization</a></li>
 </ul>
+
 <p>Events are optimized for polling with the “ETag” header.  If no new events have
 been triggered, you will see a “304 Not Modified” response, and your current
 rate limit will be untouched.  There is also an “X-Poll-Interval” header that
@@ -99,33 +100,33 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next"
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"Event"</span><span class="p">,</span>
-    <span class="s2">"public"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"payload"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Event"</span><span class="p">,</span>
+    <span class="s2">"public"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
     <span class="p">},</span>
-    <span class="s2">"repo"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span>
+    <span class="s2">"repo"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span>
     <span class="p">},</span>
-    <span class="s2">"actor"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="s2">"actor"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
     <span class="p">},</span>
-    <span class="s2">"org"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"github"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
+    <span class="s2">"org"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
     <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"12345"</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"12345"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -163,12 +164,12 @@ as documented in the <a href="https://developer.github.com/v3/issues/events/">Is
 users.  If you are authenticated as the given user, you will see private
 events.  Otherwise, you’ll only see public events.</p>
 
-<pre><code>GET /users/:user/received_events
+<pre><code>GET /users/:username/received_events
 </code></pre>
 
 <h2 id="list-public-events-that-a-user-has-received">List public events that a user has received</h2>
 
-<pre><code>GET /users/:user/received_events/public
+<pre><code>GET /users/:username/received_events/public
 </code></pre>
 
 <h2 id="list-events-performed-by-a-user">List events performed by a user</h2>
@@ -176,12 +177,12 @@ events.  Otherwise, you’ll only see public events.</p>
 <p>If you are authenticated as the given user, you will see your private
 events.  Otherwise, you’ll only see public events.</p>
 
-<pre><code>GET /users/:user/events
+<pre><code>GET /users/:username/events
 </code></pre>
 
 <h2 id="list-public-events-performed-by-a-user">List public events performed by a user</h2>
 
-<pre><code>GET /users/:user/events/public
+<pre><code>GET /users/:username/events/public
 </code></pre>
 
 <h2 id="list-events-for-an-organization">List events for an organization</h2>
@@ -189,8 +190,9 @@ events.  Otherwise, you’ll only see public events.</p>
 <p>This is the user’s organization dashboard.  You must be authenticated as
 the user to view this.</p>
 
-<pre><code>GET /users/:user/events/orgs/:org
+<pre><code>GET /users/:username/events/orgs/:org
 </code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -215,7 +217,7 @@ the user to view this.</p>
 </h3>
         <ul class="js-guides">
           <li><a href="/enterprise/2.0/v3/activity/events/">Events</a></li>
-          <li><a href="/enterprise/2.0/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/enterprise/2.0/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/enterprise/2.0/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/enterprise/2.0/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/enterprise/2.0/v3/activity/starring/">Starring</a></li>
@@ -324,6 +326,18 @@ the user to view this.</p>
           <li><a href="/enterprise/2.0/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.0/v3/users/followers/">Followers</a></li>
           <li><a href="/enterprise/2.0/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.0/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise</a>
+</h3>
+        <ul class="js-guides">
+          <li><a href="/enterprise/2.0/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/license/">License</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/management_console/">Management Console</a></li>
         </ul>
       </li>
     </ul>
@@ -361,7 +375,7 @@ the user to view this.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design © <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div>

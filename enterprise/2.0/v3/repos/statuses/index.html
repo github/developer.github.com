@@ -56,10 +56,11 @@
       <h1 id="statuses">Statuses</h1>
 
 <ul id="markdown-toc">
-<li><a href="#create-a-status">Create a Status</a></li>
+  <li><a href="#create-a-status">Create a Status</a></li>
   <li><a href="#list-statuses-for-a-specific-ref">List Statuses for a specific Ref</a></li>
   <li><a href="#get-the-combined-status-for-a-specific-ref">Get the combined Status for a specific Ref</a></li>
 </ul>
+
 <p>The Status API allows external services to mark commits with a success,
 failure, error, or pending <code>state</code>, which is then reflected in pull requests
 involving those commits.</p>
@@ -88,42 +89,46 @@ access to Statuses <strong>without</strong> also granting access to repository c
 <h3 id="parameters">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>state</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>state</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The state of the status. Can be one of <code>pending</code>, <code>success</code>, <code>error</code>, or <code>failure</code>.</td>
     </tr>
-<tr>
-<td><code>target_url</code></td>
+    <tr>
+      <td><code>target_url</code></td>
       <td><code>string</code></td>
       <td>The target URL to associate with this status.  This URL will be linked from the GitHub UI to allow users to easily see the ‘source’ of the Status.<br>For example, if your Continuous Integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:<br><code>http://ci.example.com/user/repo/build/sha</code>.</td>
     </tr>
-<tr>
-<td><code>description</code></td>
+    <tr>
+      <td><code>description</code></td>
       <td><code>string</code></td>
       <td>A short description of the status.</td>
     </tr>
-<tr>
-<td><code>context</code></td>
+    <tr>
+      <td><code>context</code></td>
       <td><code>string</code></td>
-      <td>A string label to differentiate this status from the status of other systems.</td>
+      <td>A string label to differentiate this status from the status of other systems. Default: <code>"default"</code>
+</td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
 <h4 id="example">Example</h4>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
-  <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://example.com/build/status"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"The build succeeded!"</span><span class="p">,</span>
-  <span class="s2">"context"</span><span class="o">:</span> <span class="s2">"continuous-integration/jenkins"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="s2">"target_url"</span><span class="p">:</span> <span class="s2">"https://example.com/build/status"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"The build succeeded!"</span><span class="p">,</span>
+  <span class="s2">"context"</span><span class="p">:</span> <span class="s2">"continuous-integration/jenkins"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response">Response</h3>
@@ -133,33 +138,33 @@ Location: https://api.github.com/repos/octocat/example/statuses/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
-  <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
-  <span class="s2">"context"</span><span class="o">:</span> <span class="s2">"continuous-integration/jenkins"</span><span class="p">,</span>
-  <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="s2">"target_url"</span><span class="p">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
+  <span class="s2">"context"</span><span class="p">:</span> <span class="s2">"continuous-integration/jenkins"</span><span class="p">,</span>
+  <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -167,14 +172,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>Users with pull access can view commit statuses for a given ref:</p>
 
-<pre><code>GET /repos/:owner/:repo/statuses/:ref
+<pre><code>GET /repos/:owner/:repo/commits/:ref/statuses
 </code></pre>
 
 <div class="alert">
   <p>
-    If you send an <code>Accept</code> header with the Combined Status API preview
-    <a href="/enterprise/2.0/v3/media/">media type</a>, <code>application/vnd.github.she-hulk-preview+json</code>,
-    this endpoint is also available at <code>/repos/:owner/:repo/commits/:ref/statuses</code>.
+    This resource is also available via a legacy route:
+    <code>GET /repos/:owner/:repo/statuses/:ref</code>.
   </p>
 </div>
 
@@ -184,134 +188,140 @@ list will be the latest one.</p>
 <h3 id="parameters-1">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody><tr>
-<td><code>ref</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ref</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. Ref to list the statuses from. It can be a SHA, a branch name, or a tag name.</td>
-    </tr></tbody>
+    </tr>
+  </tbody>
 </table>
+
 <h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-    <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
-    <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
-    <span class="s2">"context"</span><span class="o">:</span> <span class="s2">"continuous-integration/jenkins"</span><span class="p">,</span>
-    <span class="s2">"creator"</span><span class="o">:</span> <span class="p">{</span>
-      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-      <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-      <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-      <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-      <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-      <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-      <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-      <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-      <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-      <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-      <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"target_url"</span><span class="p">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
+    <span class="s2">"context"</span><span class="p">:</span> <span class="s2">"continuous-integration/jenkins"</span><span class="p">,</span>
+    <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+      <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+      <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+      <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+      <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+      <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+      <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+      <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
 <h2 id="get-the-combined-status-for-a-specific-ref">Get the combined Status for a specific Ref</h2>
 
-<div class="alert">
-  <p>
-    The Combined status endpoint is currently available for developers to preview.
-    During the preview period, the API may change without advance notice.
-    Please see the <a href="/enterprise/2.0/changes/2014-03-27-combined-status-api/">blog post</a> for full details.
-  </p>
-  <p>
-    To access this endpoint during the preview period, you must provide a custom
-    <a href="/enterprise/2.0/v3/media/">media type</a> in the <code>Accept</code> header:
-    </p>
-<pre>application/vnd.github.she-hulk-preview+json</pre>
-  
-</div>
-
 <p>Users with pull access can access a combined view of commit statuses for a given ref.</p>
 
 <pre><code>GET /repos/:owner/:repo/commits/:ref/status
 </code></pre>
 
-<p>The most recent status for each context is returned (up to 25), as well as a combined
-<code>state</code>. The <code>state</code> is <code>pending</code> to start, <code>failure</code> if any status reports as
-<code>error</code> or <code>failure</code>, <code>pending</code> if any context’s latest status is <code>pending</code>, and
-<code>success</code> if the latest status for all contexts is <code>success</code>. (<code>null</code> is
-considered a distinct context)</p>
+<p>The most recent status for each context is returned, up to 100. This field
+<a href="/enterprise/2.0/v3/#pagination">paginates</a> if there are over 100 contexts.</p>
+
+<p>Additionally, a combined <code>state</code> is returned. The <code>state</code> is one of:</p>
+
+<ul>
+  <li>
+<strong>failure</strong> if any of the contexts report as error or failure</li>
+  <li>
+<strong>pending</strong> if there are no statuses or a context is pending</li>
+  <li>
+<strong>success</strong> if the latest status for all contexts is success</li>
+</ul>
 
 <h3 id="parameters-2">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody><tr>
-<td><code>ref</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ref</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. Ref to fetch the status for. It can be a SHA, a branch name, or a tag name.</td>
-    </tr></tbody>
+    </tr>
+  </tbody>
 </table>
+
 <h3 id="response-2">Response</h3>
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
-    <span class="s2">"statuses"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+    <span class="s2">"total_count"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"statuses"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-        <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-        <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
-        <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
-        <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
-        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
-        <span class="s2">"context"</span><span class="o">:</span> <span class="s2">"continuous-integration/jenkins"</span>
+        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+        <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+        <span class="s2">"target_url"</span><span class="p">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
+        <span class="s2">"context"</span><span class="p">:</span> <span class="s2">"continuous-integration/jenkins"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-        <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
-        <span class="s2">"state"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
-        <span class="s2">"target_url"</span><span class="o">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
-        <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
-        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
-        <span class="s2">"context"</span><span class="o">:</span> <span class="s2">"security/brakeman"</span>
+        <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+        <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span>
+        <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+        <span class="s2">"target_url"</span><span class="p">:</span> <span class="s2">"https://ci.example.com/1000/output"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Build has completed successfully"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/statuses/1"</span><span class="p">,</span>
+        <span class="s2">"context"</span><span class="p">:</span> <span class="s2">"security/brakeman"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">"commit_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
-    <span class="s2">"repository_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span>
+    <span class="s2">"commit_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span>
+    <span class="s2">"repository_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -336,7 +346,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 </h3>
         <ul class="js-guides">
           <li><a href="/enterprise/2.0/v3/activity/events/">Events</a></li>
-          <li><a href="/enterprise/2.0/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/enterprise/2.0/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/enterprise/2.0/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/enterprise/2.0/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/enterprise/2.0/v3/activity/starring/">Starring</a></li>
@@ -445,6 +455,18 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li><a href="/enterprise/2.0/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.0/v3/users/followers/">Followers</a></li>
           <li><a href="/enterprise/2.0/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.0/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise</a>
+</h3>
+        <ul class="js-guides">
+          <li><a href="/enterprise/2.0/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/license/">License</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/enterprise/2.0/v3/enterprise/management_console/">Management Console</a></li>
         </ul>
       </li>
     </ul>
@@ -482,7 +504,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design © <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div>

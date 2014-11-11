@@ -72,23 +72,18 @@
 
 <h2 id="authentication">Authentication</h2>
 
-<p>You need to pass <a href="https://en.wikipedia.org/wiki/MD5#MD5_hashes">an MD5 hash</a> of your license file as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-and-software-package-for-the-first-time"><code>/setup/api/start</code></a>. On most systems, you can get this hash by simply calling <code>md5sum</code> on the license file:</p>
+<p>You need to pass your <a href="https://enterprise.github.com/help/articles/setting-the-management-console-password">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-and-software-package-for-the-first-time"><code>/setup/api/start</code></a>.</p>
+
+<p>Use the <code>api_key</code> parameter to send this token with each request. For example:</p>
 
 <pre class="terminal">
-$ md5sum github-enterprise.ghl
-5d10ffffa442a336061daee294536234  github-enterprise.ghl
-</pre>
-
-<p>You can use the <code>license_md5</code> parameter to send this token with each request. For example:</p>
-
-<pre class="terminal">
-$ curl 'http://<em>hostname</em>/setup/api?license_md5=<em>md5-checksum-of-license</em>'
+$ curl 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em>'
 </pre>
 
 <p>You can also use standard HTTP authentication to send this token. For example:</p>
 
 <pre class="terminal">
-$ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api'
+$ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
 </pre>
 
 <h2 id="upload-a-license-and-software-package-for-the-first-time">Upload a license and software package for the first time</h2>

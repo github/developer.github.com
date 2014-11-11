@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Notifications | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/11.10.340/enterprise/11.10.300/changes.atom">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/css/960.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/css/uv_active4d.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/11.10.340/enterprise/11.10.300/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/11.10.340/enterprise/11.10.300/shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="/enterprise/11.10.340/enterprise/11.10.300/"><img src="/enterprise/11.10.340/enterprise/11.10.300/images/logo_developer.png" width="255" height="45" alt="GitHub:Developer"></a>
+          <ul class="nav">
+            <li class="api-status">
+            </li>
+<li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/">API v3</a></li>
+            <li><a href="/enterprise/11.10.340/enterprise/11.10.300/changes/">Changes</a></li>
+            <li><a href="https://github.com/contact">Support</a></li>
+            <li><a href="/enterprise/11.10.340/enterprise/11.10.300/changes.atom">
+              <img src="/enterprise/11.10.340/enterprise/11.10.300/images/feed-icon-28x28.png" width="16" height="16" alt="GitHub API Changes Feed">
+            </a></li>
+          </ul>
+        </div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="notifications-api">Notifications API</h1>
+
+<ul id="markdown-toc">
+<li><a href="#list-your-notifications">List your notifications</a></li>
+  <li><a href="#list-your-notifications-in-a-repository">List your notifications in a repository</a></li>
+  <li><a href="#mark-as-read">Mark as read</a></li>
+  <li><a href="#mark-notifications-as-read-in-a-repository">Mark notifications as read in a repository</a></li>
+  <li><a href="#view-a-single-thread">View a single thread</a></li>
+  <li><a href="#mark-a-thread-as-read">Mark a thread as read</a></li>
+  <li><a href="#get-a-thread-subscription">Get a Thread Subscription</a></li>
+  <li><a href="#set-a-thread-subscription">Set a Thread Subscription</a></li>
+  <li><a href="#delete-a-thread-subscription">Delete a Thread Subscription</a></li>
+</ul>
+<p>GitHub Notifications are powered by <a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/watching/">watched repositories</a>.
+Users receive notifications for discussions in repositories they watch
+including:</p>
+
+<ul>
+<li>Issues and their comments</li>
+  <li>Pull Requests and their comments</li>
+  <li>Comments on any commits</li>
+</ul>
+<p>Notifications are also sent for discussions in unwatched repositories when the
+user is involved including:</p>
+
+<ul>
+<li><strong>@mentions</strong></li>
+  <li>Issue assignments</li>
+  <li>Commits the user authors or commits</li>
+  <li>Any discussion in which the user actively participates</li>
+</ul>
+<p>All Notification API calls require the <strong>“notifications”</strong> or
+<strong>“repo</strong> API scopes.  Doing this will give read-only access to
+some Issue/Commit content. You will still need the “repo” scope to access
+Issues and Commits from their respective endpoints.</p>
+
+<p>Notifications come back as “threads”.  A Thread contains information about the
+current discussion of an Issue/PullRequest/Commit.</p>
+
+<p>Notifications are optimized for polling with the “Last-Modified” header.  If
+there are no new notifications, you will see a “304 Not Modified” response,
+leaving your current rate limit untouched.  There is an “X-Poll-Interval”
+header that specifies how often (in seconds) you are allowed to poll.  In times
+of high server load, the time may increase.  Please obey the header.</p>
+
+<pre><code># Add authentication to your requests
+$ curl -I https://api.github.com/notifications
+HTTP/1.1 200 OK
+Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
+X-Poll-Interval: 60
+
+# Pass the Last-Modified header exactly
+$ curl -I https://api.github.com/notifications
+    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
+HTTP/1.1 304 Not Modified
+X-Poll-Interval: 60
+</code></pre>
+
+<h2 id="list-your-notifications">List your notifications</h2>
+
+<p>List all notifications for the current user, grouped by repository.</p>
+
+<pre><code>GET /notifications
+</code></pre>
+
+<h3 id="parameters">Parameters</h3>
+
+<dl>
+<dt>all</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> <code>true</code> to show notifications marked as read.</dd>
+  <dt>participating</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> <code>true</code> to show only notifications in which the user is
+directly participating or mentioned.</dd>
+  <dt>since</dt>
+  <dd>
+<em>Optional</em> <strong>time</strong> filters out any notifications updated before the given
+time.  The time should be passed in as UTC in the ISO 8601 format:
+<code>YYYY-MM-DDTHH:MM:SSZ</code>.  Example: “2012-10-09T23:39:01Z”.</dd>
+</dl>
+<h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+        <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+      <span class="p">},</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+      <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+      <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
+    <span class="p">},</span>
+    <span class="s2">"subject"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
+      <span class="s2">"latest_comment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span>
+    <span class="p">},</span>
+    <span class="s2">"reason"</span><span class="o">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
+    <span class="s2">"unread"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+    <span class="s2">"last_read_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="list-your-notifications-in-a-repository">List your notifications in a repository</h2>
+
+<p>List all notifications for the current user.</p>
+
+<pre><code>GET /repos/:owner/:repo/notifications
+</code></pre>
+
+<h3 id="parameters-1">Parameters</h3>
+
+<dl>
+<dt>all</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> <code>true</code> to show notifications marked as read.</dd>
+  <dt>participating</dt>
+  <dd>
+<em>Optional</em> <strong>boolean</strong> <code>true</code> to show only notifications in which the user is
+directly participating or mentioned.</dd>
+  <dt>since</dt>
+  <dd>
+<em>Optional</em> <strong>time</strong> filters out any notifications updated before the given
+time.  The time should be passed in as UTC in the ISO 8601 format:
+<code>YYYY-MM-DDTHH:MM:SSZ</code>.  Example: “2012-10-09T23:39:01Z”.</dd>
+</dl>
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+        <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+      <span class="p">},</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+      <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+      <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
+    <span class="p">},</span>
+    <span class="s2">"subject"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
+      <span class="s2">"latest_comment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span>
+    <span class="p">},</span>
+    <span class="s2">"reason"</span><span class="o">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
+    <span class="s2">"unread"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+    <span class="s2">"last_read_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="mark-as-read">Mark as read</h2>
+
+<p>Marking a notification as “read” removes it from the <a href="https://github.com/notifications">default view
+on GitHub.com</a>.</p>
+
+<pre><code>PUT /notifications
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<dl>
+<dt>unread</dt>
+  <dd>
+<strong>Boolean</strong> Changes the unread status of the threads.</dd>
+  <dt>read</dt>
+  <dd>
+<strong>Boolean</strong> Inverse of “unread”.</dd>
+  <dt>last_read_at</dt>
+  <dd>
+<em>Optional</em> <strong>Time</strong> Describes the last point that notifications were checked.  Anything
+updated since this time will not be updated.  Default: Now.  Expected in ISO
+8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.  Example: “2012-10-09T23:39:01Z”.</dd>
+</dl>
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 205 Reset Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="mark-notifications-as-read-in-a-repository">Mark notifications as read in a repository</h2>
+
+<p>Marking all notifications in a repository as “read” removes them
+from the <a href="https://github.com/notifications">default view on GitHub.com</a>.</p>
+
+<pre><code>PUT /repos/:owner/:repo/notifications
+</code></pre>
+
+<h3 id="input-1">Input</h3>
+
+<dl>
+<dt>unread</dt>
+  <dd>
+<strong>Boolean</strong> Changes the unread status of the threads.</dd>
+  <dt>read</dt>
+  <dd>
+<strong>Boolean</strong> Inverse of “unread”.</dd>
+  <dt>last_read_at</dt>
+  <dd>
+<em>Optional</em> <strong>Time</strong> Describes the last point that notifications were checked.  Anything
+updated since this time will not be updated.  Default: Now.  Expected in ISO
+8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.  Example: “2012-10-09T23:39:01Z”.</dd>
+</dl>
+<h3 id="response-3">Response</h3>
+
+<pre class="headers"><code>Status: 205 Reset Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="view-a-single-thread">View a single thread</h2>
+
+<pre><code>GET /notifications/threads/:id
+</code></pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"repository"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span>
+  <span class="p">},</span>
+  <span class="s2">"subject"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"title"</span><span class="o">:</span> <span class="s2">"Greetings"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/123"</span><span class="p">,</span>
+    <span class="s2">"latest_comment_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/pengwynn/octokit/issues/comments/123"</span>
+  <span class="p">},</span>
+  <span class="s2">"reason"</span><span class="o">:</span> <span class="s2">"subscribed"</span><span class="p">,</span>
+  <span class="s2">"unread"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+  <span class="s2">"last_read_at"</span><span class="o">:</span> <span class="s2">"2012-09-25T07:54:41-07:00"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="mark-a-thread-as-read">Mark a thread as read</h2>
+
+<pre><code>PATCH /notifications/threads/:id
+</code></pre>
+
+<h3 id="input-2">Input</h3>
+
+<dl>
+<dt>unread</dt>
+  <dd>
+<strong>Boolean</strong> Changes the unread status of the threads.</dd>
+  <dt>read</dt>
+  <dd>
+<strong>Boolean</strong> Inverse of “unread”.</dd>
+</dl>
+<h3 id="response-5">Response</h3>
+
+<pre class="headers"><code>Status: 205 Reset Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="get-a-thread-subscription">Get a Thread Subscription</h2>
+
+<p>This checks to see if the current user is subscribed to a thread.  You can also
+<a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/watching/#get-a-repository-subscription">get a Repository subscription</a>.</p>
+
+<pre><code>GET /notifications/threads/1/subscription
+</code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"subscribed"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"ignored"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-10-06T21:34:12Z"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1/subscription"</span><span class="p">,</span>
+  <span class="s2">"thread_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="set-a-thread-subscription">Set a Thread Subscription</h2>
+
+<p>This lets you subscribe to a thread, or ignore it.  Subscribing to a thread
+is unnecessary if the user is already subscribed to the repository.  Ignoring
+a thread will mute all future notifications (until you comment or get
+@mentioned).</p>
+
+<pre><code>PUT /notifications/threads/1/subscription
+</code></pre>
+
+<h3 id="input-3">Input</h3>
+
+<dl>
+<dt>subscribed</dt>
+  <dd>
+<strong>boolean</strong> Determines if notifications should be received from this
+thread.</dd>
+  <dt>ignored</dt>
+  <dd>
+<strong>boolean</strong> Determines if all notifications should be blocked from this
+thread.</dd>
+</dl>
+<h3 id="response-7">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"subscribed"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"ignored"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2012-10-06T21:34:12Z"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1/subscription"</span><span class="p">,</span>
+  <span class="s2">"thread_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/notifications/threads/1"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="delete-a-thread-subscription">Delete a Thread Subscription</h2>
+
+<pre><code>DELETE /notifications/threads/1/subscription
+</code></pre>
+
+<h3 id="response-8">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/">Overview</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/oauth/">OAuth</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/media/">Media Types</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/libraries/">Libraries</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/">Activity</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/events/types/">Event Types</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/notifications/">Notifications</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/starring/">Starring</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/watching/">Watching</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/gists/">Gists</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/">Git Data</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/blobs/">Blobs</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/refs/">References</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/tags/">Tags</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/trees/">Trees</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/">Issues</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/assignees/">Assignees</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/labels/">Labels</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/milestones/">Milestones</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/orgs/">Orgs</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/orgs/members/">Members</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/orgs/teams/">Teams</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/pulls/">Pull Requests</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/pulls/comments/">Review Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/">Repositories</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/contents/">Contents</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/downloads/">Downloads</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/forks/">Forks</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/keys/">Keys</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/hooks/">Hooks</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/merging/">Merging</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/users/">Users</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/users/emails/">Emails</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/users/followers/">Followers</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/">Search</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/#search-issues">Issues</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/#search-repositories">Repositories</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/#search-users">Users</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/#email-search">Email</a></li>
+            </ul>
+          </li>
+          <li class="js-guides"><h3><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/gitignore/">Gitignore</a></h3></li>
+          <li class="js-guides"><h3><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/markdown/">Markdown</a></h3></li>
+        </ul>
+      </div> <!-- /sidebar-module -->
+      <div class="sidebar-module">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+          <h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+                <li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+
+              <p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>

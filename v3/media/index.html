@@ -54,10 +54,14 @@
       <h1 id="media-types">Media Types</h1>
 
 <ul id="markdown-toc">
-<li><a href="#comment-body-properties">Comment Body Properties</a></li>
+  <li><a href="#comment-body-properties">Comment Body Properties</a></li>
   <li><a href="#git-blob-properties">Git Blob Properties</a></li>
   <li><a href="#commits-commit-comparison-and-pull-requests">Commits, Commit comparison, and Pull Requests</a></li>
-</ul><p>Custom media types are used in the API to let consumers choose the format
+  <li><a href="#repository-contents">Repository contents</a></li>
+  <li><a href="#gists">Gists</a></li>
+</ul>
+
+<p>Custom media types are used in the API to let consumers choose the format
 of the data they wish to receive. This is done by adding one or more of
 the following types to the <code>Accept</code> header when you make a request. Media types
 are specific to resources, allowing them to change independently and support
@@ -187,6 +191,40 @@ encoded string. This is the default if nothing is passed.</p>
 
 <pre><code>application/vnd.github.VERSION.patch
 </code></pre>
+
+<h2 id="repository-contents">Repository contents</h2>
+
+<h3 id="raw-2">Raw</h3>
+
+<pre><code>application/vnd.github.VERSION.raw
+</code></pre>
+
+<p>Return the raw contents of a file. This is the default if you do not pass any specific media type.</p>
+
+<h3 id="html-1">HTML</h3>
+
+<pre><code>application/vnd.github.VERSION.html
+</code></pre>
+
+<p>For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the <code>.html</code> media type. Markup languages are rendered to HTML using our open-source <a href="https://github.com/github/markup">Markup library</a>.</p>
+
+<h2 id="gists">Gists</h2>
+
+<h3 id="raw-3">Raw</h3>
+
+<pre><code>application/vnd.github.VERSION.raw
+</code></pre>
+
+<p>Return the raw contents of a gist. This is the default if you do not pass any specific media type.</p>
+
+<h3 id="base64">base64</h3>
+
+<pre><code>application/vnd.github.VERSION.base64
+</code></pre>
+
+<p>The gist contents are base64-encoded before being sent out. This can be useful if your gist contains any invalid UTF-8 sequences.</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -207,7 +245,7 @@ encoded string. This is the default if nothing is passed.</p>
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
-          <li><a href="/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/v3/activity/starring/">Starring</a></li>
@@ -298,6 +336,16 @@ encoded string. This is the default if nothing is passed.</p>
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
           <li><a href="/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/v3/enterprise/license/">License</a></li>
+          <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
         </ul>
       </li>
     </ul>
@@ -333,7 +381,7 @@ encoded string. This is the default if nothing is passed.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

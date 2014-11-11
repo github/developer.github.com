@@ -54,7 +54,7 @@
       <h1 id="members">Members</h1>
 
 <ul id="markdown-toc">
-<li><a href="#members-list">Members list</a></li>
+  <li><a href="#members-list">Members list</a></li>
   <li><a href="#check-membership">Check membership</a></li>
   <li><a href="#add-a-member">Add a member</a></li>
   <li><a href="#remove-a-member">Remove a member</a></li>
@@ -62,13 +62,17 @@
   <li><a href="#check-public-membership">Check public membership</a></li>
   <li><a href="#publicize-a-users-membership">Publicize a user’s membership</a></li>
   <li><a href="#conceal-a-users-membership">Conceal a user’s membership</a></li>
-</ul><h2 id="members-list">Members list</h2>
+  <li><a href="#list-your-organization-memberships">List your organization memberships</a></li>
+  <li><a href="#get-your-organization-membership">Get your organization membership</a></li>
+  <li><a href="#edit-your-organization-membership">Edit your organization membership</a></li>
+</ul>
+
+<h2 id="members-list">Members list</h2>
 
 <p>List all users who are members of an organization. A member is a user that
 belongs to at least 1 team in the organization. If the authenticated user is
 also an owner of this organization then both concealed and public members will
-be returned. If the requester is not an owner of the organization the query
-will be redirected to the <a href="#public-members-list">public members list</a>.</p>
+be returned.</p>
 
 <pre><code>GET /orgs/:org/members
 </code></pre>
@@ -76,42 +80,48 @@ will be redirected to the <a href="#public-members-list">public members list</a>
 <h3 id="audit-two-factor-auth">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody><tr>
-<td><code>filter</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>filter</code></td>
       <td><code>string</code></td>
       <td>Filter members returned in the list. Can be one of:<br>* <code>2fa_disabled</code>: Members without <a href="https://github.com/blog/1614-two-factor-authentication">two-factor authentication</a> enabled. Available for owners of organizations with private repositories.<br>* <code>all</code>: All members the authenticated user can see.<br><br>Default: <code>all</code>
 </td>
-    </tr></tbody>
-</table><h3 id="response">Response</h3>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -126,7 +136,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>Check if a user is, publicly or privately, a member of the organization.</p>
 
-<pre><code>GET /orgs/:org/members/:user
+<pre><code>GET /orgs/:org/members/:username
 </code></pre>
 
 <h3 id="response-if-requester-is-an-organization-member-and-user-is-a-member">Response if requester is an organization member and user is a member</h3>
@@ -164,7 +174,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>Removing a user from this list will remove them from all teams and
 they will no longer have any access to the organization’s repositories.</p>
 
-<pre><code>DELETE /orgs/:org/members/:user
+<pre><code>DELETE /orgs/:org/members/:username
 </code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -187,31 +197,31 @@ publicized or not.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
 <h2 id="check-public-membership">Check public membership</h2>
 
-<pre><code>GET /orgs/:org/public_members/:user
+<pre><code>GET /orgs/:org/public_members/:username
 </code></pre>
 
 <h3 id="response-if-user-is-a-public-member">Response if user is a public member</h3>
@@ -231,8 +241,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>The user can publicize their own membership.
 (A user cannot publicize the membership for another user.)</p>
 
-<pre><code>PUT /orgs/:org/public_members/:user
+<pre><code>PUT /orgs/:org/public_members/:username
 </code></pre>
+
+<p>Note that you’ll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see “<a href="/v3/#http-verbs">HTTP verbs</a>.”</p>
 
 <h3 id="response-3">Response</h3>
 
@@ -242,7 +254,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="conceal-a-users-membership">Conceal a user’s membership</h2>
 
-<pre><code>DELETE /orgs/:org/public_members/:user
+<pre><code>DELETE /orgs/:org/public_members/:username
 </code></pre>
 
 <h3 id="response-4">Response</h3>
@@ -250,6 +262,189 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="list-your-organization-memberships">List your organization memberships</h2>
+
+<p>An optional <code>state</code> can be passed to request only pending or active memberships.</p>
+
+<pre><code>GET /user/memberships/orgs
+GET /user/memberships/orgs?state=active
+GET /user/memberships/orgs?state=pending
+</code></pre>
+
+<h3 id="response-when-no-state-is-specified">Response when no state is specified</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/octocat"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+    <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span><span class="p">,</span>
+    <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/members{/member}"</span><span class="p">,</span>
+      <span class="s2">"public_members_url"</span><span class="p">:</span> <span class="s2">"https://api.github/com/users/octocat/public_members{/member}"</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/invitocat"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"pending"</span><span class="p">,</span>
+    <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span><span class="p">,</span>
+    <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"invitocat"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/members{/member}"</span><span class="p">,</span>
+      <span class="s2">"public_members_url"</span><span class="p">:</span> <span class="s2">"https://api.github/com/users/invitocat/public_members{/member}"</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="response-when-a-pending-state-is-specified">Response when a “pending” state is specified</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/invitocat"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"pending"</span><span class="p">,</span>
+    <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span><span class="p">,</span>
+    <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"invitocat"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/members{/member}"</span><span class="p">,</span>
+      <span class="s2">"public_members_url"</span><span class="p">:</span> <span class="s2">"https://api.github/com/users/invitocat/public_members{/member}"</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h3 id="response-when-an-active-state-is-specified">Response when an “active” state is specified</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/octocat"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+    <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span><span class="p">,</span>
+    <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/members{/member}"</span><span class="p">,</span>
+      <span class="s2">"public_members_url"</span><span class="p">:</span> <span class="s2">"https://api.github/com/users/octocat/public_members{/member}"</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="get-your-organization-membership">Get your organization membership</h2>
+
+<pre><code>GET /user/memberships/orgs/:org
+</code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/invitocat"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"pending"</span><span class="p">,</span>
+  <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"invitocat"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/invitocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/invitocat/members{/member}"</span><span class="p">,</span>
+    <span class="s2">"public_members_url"</span><span class="p">:</span> <span class="s2">"https://api.github/com/users/invitocat/public_members{/member}"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="edit-your-organization-membership">Edit your organization membership</h2>
+
+<pre><code>PATCH /user/memberships/orgs/:org
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>state</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The state that the membership should be in. Only <code>"active"</code> will be accepted.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="example">Example</h3>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/memberships/orgs/octocat"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+  <span class="s2">"organization_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/members{/member}"</span><span class="p">,</span>
+    <span class="s2">"public_members_url"</span><span class="p">:</span> <span class="s2">"https://api.github/com/users/octocat/public_members{/member}"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -270,7 +465,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
-          <li><a href="/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/v3/activity/starring/">Starring</a></li>
@@ -361,6 +556,16 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
           <li><a href="/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/v3/enterprise/license/">License</a></li>
+          <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
         </ul>
       </li>
     </ul>
@@ -396,7 +601,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

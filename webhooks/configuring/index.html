@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Configuring Your Server | GitHub API</title>
+  <title>Configuring your server | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -54,9 +54,11 @@
       <h1 id="configuring-your-server">Configuring Your Server</h1>
 
 <ul id="markdown-toc">
-<li><a href="#using-ngrok">Using ngrok</a></li>
+  <li><a href="#using-ngrok">Using ngrok</a></li>
   <li><a href="#writing-the-server">Writing the server</a></li>
-</ul><p>Now that our webhook is ready to deliver messages, we’ll set up a basic Sinatra server
+</ul>
+
+<p>Now that our webhook is ready to deliver messages, we’ll set up a basic Sinatra server
 to handle incoming payloads.</p>
 
 <p>Recall that we specifically set our webhook URL to <code>http://localhost:4567/payload</code>.
@@ -76,7 +78,7 @@ for all major operating systems.</p>
 <p>When you’re done with that, you can expose your localhost by running <code>./ngrok 4567</code>
 on the command line. You should see a line that looks something like this:</p>
 
-<pre><code class="language-bash">Forwarding    http://7e9ea9dc.ngrok.com -&gt; 127.0.0.1:4567</code></pre>
+<pre><code class="language-bash highlight">Forwarding    http://7e9ea9dc.ngrok.com -&gt; 127.0.0.1:4567</code></pre>
 
 <p>Copy that funky <code>*.ngrok.com</code> URL! We’re now going to go <em>back</em> to the Payload
 URL and pasting this server into that field. It should look something like <code>http://7e9ea9dc.ngrok.com/payload</code>.</p>
@@ -94,12 +96,12 @@ can happily test out our code locally.</p>
 <p>Let’s set up a little Sinatra app to do something with the information. Our initial
 setup might look something like this:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/payload'</span> <span class="k">do</span>
-  <span class="n">push</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"I got some JSON: </span><span class="si">#{</span><span class="n">push</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2">"</span>
+  <span class="n">push</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">read</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"I got some JSON: </span><span class="si">#{</span><span class="n">push</span><span class="p">.</span><span class="nf">inspect</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">end</span></code></pre>
 
 <p>(If you’re unfamiliar with how Sinatra works, we recommend <a href="http://www.sinatrarb.com/">reading the Sinatra guide</a>.)</p>
@@ -110,12 +112,12 @@ setup might look something like this:</p>
 and create a new Issue on the repository you’re testing with. Once you create
 it, switch back to your terminal. You should see something like this in your output:</p>
 
-<pre><code class="language-bash">~/Developer/platform-samples/hooks/ruby/configuring-your-server <span class="nv">$ </span>ruby server.rb
+<pre><code class="language-bash highlight">~/Developer/platform-samples/hooks/ruby/configuring-your-server <span class="nv">$ </span>ruby server.rb
 <span class="o">==</span> Sinatra/1.4.4 has taken the stage on 4567 <span class="k">for </span>development with backup from Thin
-&gt;&gt; Thin web server <span class="o">(</span>v1.5.1 codename Straight Razor<span class="o">)</span>
-&gt;&gt; Maximum connections <span class="nb">set </span>to 1024
-&gt;&gt; Listening on localhost:4567, CTRL+C to stop
-I got some JSON: <span class="o">{</span><span class="s2">"action"</span><span class="o">=</span>&gt;<span class="s2">"opened"</span>, <span class="s2">"issue"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"url"</span><span class="o">=</span>&gt;<span class="err">"</span>...</code></pre>
+<span class="gp">&gt;&gt; </span>Thin web server <span class="o">(</span>v1.5.1 codename Straight Razor<span class="o">)</span>
+<span class="gp">&gt;&gt; </span>Maximum connections <span class="nb">set </span>to 1024
+<span class="gp">&gt;&gt; </span>Listening on localhost:4567, CTRL+C to stop
+I got some JSON: <span class="o">{</span><span class="s2">"action"</span><span class="o">=</span>&gt;<span class="s2">"opened"</span>, <span class="s2">"issue"</span><span class="o">=</span>&gt;<span class="o">{</span><span class="s2">"url"</span><span class="o">=</span>&gt;<span class="s2">"...</span></code></pre>
 
 <p>Success! You’ve successfully configured your server to listen to webhooks. Your
 server can now process this information any way you see fit. For example, if you
@@ -124,14 +126,18 @@ output to a database.</p>
 
 <p>For additional information on working with webhooks for fun and profit, head on
 over to the <a href="/webhooks/testing">Testing Webhooks</a> guide.</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
       <div class="sidebar-module">
         <ul>
-          <li><h3><a href="/webhooks/creating">Creating Webhooks</a></h3></li>
-          <li><h3><a href="/webhooks/configuring/">Configuring Your Server</a></h3></li>
-          <li><h3><a href="/webhooks/testing/">Testing Webhooks</a></h3></li>
+          <li><h3><a href="/webhooks">Overview</a></h3></li>
+          <li><h3><a href="/webhooks/creating">Creating webhooks</a></h3></li>
+          <li><h3><a href="/webhooks/configuring/">Configuring your server</a></h3></li>
+          <li><h3><a href="/webhooks/testing/">Testing webhooks</a></h3></li>
+          <li><h3><a href="/webhooks/securing">Securing your webhooks</a></h3></li>
         </ul>
       </div>
 
@@ -166,7 +172,7 @@ over to the <a href="/webhooks/testing">Testing Webhooks</a> guide.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

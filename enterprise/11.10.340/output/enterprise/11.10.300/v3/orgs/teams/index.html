@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Organization Teams | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/11.10.340/enterprise/11.10.300/changes.atom">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/css/960.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/css/uv_active4d.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/11.10.340/enterprise/11.10.300/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/11.10.340/enterprise/11.10.300/shared/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/11.10.340/enterprise/11.10.300/shared/js/documentation.js" type="text/javascript"></script>
+</head>
+<body class="api">
+    <div id="header-wrapper">
+      <div id="header">
+        <div>
+          <a class="logo" href="/enterprise/11.10.340/enterprise/11.10.300/"><img src="/enterprise/11.10.340/enterprise/11.10.300/images/logo_developer.png" width="255" height="45" alt="GitHub:Developer"></a>
+          <ul class="nav">
+            <li class="api-status">
+            </li>
+<li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/">API v3</a></li>
+            <li><a href="/enterprise/11.10.340/enterprise/11.10.300/changes/">Changes</a></li>
+            <li><a href="https://github.com/contact">Support</a></li>
+            <li><a href="/enterprise/11.10.340/enterprise/11.10.300/changes.atom">
+              <img src="/enterprise/11.10.340/enterprise/11.10.300/images/feed-icon-28x28.png" width="16" height="16" alt="GitHub API Changes Feed">
+            </a></li>
+          </ul>
+        </div>
+      </div>
+<!-- #header -->
+    </div>
+<!-- #header-wrapper -->
+
+    <div id="wrapper">
+      <div class="content">
+    <h1 id="org-teams-api">Org Teams API</h1>
+
+<ul id="markdown-toc">
+<li><a href="#list-teams">List teams</a></li>
+  <li><a href="#get-team">Get team</a></li>
+  <li><a href="#create-team">Create team</a></li>
+  <li><a href="#edit-team">Edit team</a></li>
+  <li><a href="#delete-team">Delete team</a></li>
+  <li><a href="#list-team-members">List team members</a></li>
+  <li><a href="#get-team-member">Get team member</a></li>
+  <li><a href="#add-team-member">Add team member</a></li>
+  <li><a href="#remove-team-member">Remove team member</a></li>
+  <li><a href="#list-team-repos">List team repos</a></li>
+  <li><a href="#get-team-repo">Get team repo</a></li>
+  <li><a href="#add-team-repo">Add team repo</a></li>
+  <li><a href="#remove-team-repo">Remove team repo</a></li>
+</ul>
+<p>All actions against teams require at a minimum an authenticated user who
+is a member of the owner’s team in the <code>:org</code> being managed. Additionally,
+OAuth users require “user” <a href="/enterprise/11.10.340/enterprise/11.10.300/v3/oauth/#scopes">scope</a>.</p>
+
+<h2 id="list-teams">List teams</h2>
+
+<pre><code>GET /orgs/:org/teams
+</code></pre>
+
+<h3 id="response">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="get-team">Get team</h2>
+
+<pre><code>GET /teams/:id
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="create-team">Create team</h2>
+
+<p>In order to create a team, the authenticated user must be an owner of
+<code>:org</code>.</p>
+
+<pre><code>POST /orgs/:org/teams
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<dl>
+<dt>name</dt>
+  <dd>
+<em>Required</em> <strong>string</strong>
+</dd>
+  <dt>repo_names</dt>
+  <dd>
+<em>Optional</em> <strong>array</strong> of <strong>strings</strong>
+</dd>
+  <dt>permission</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+
+    <p><code>pull</code> - team members can pull, but not push to or administer these
+repositories. <strong>Default</strong></p>
+
+    <p><code>push</code> - team members can pull and push, but not administer these
+repositories.</p>
+
+    <p><code>admin</code> - team members can pull, push and administer these
+repositories.</p>
+  </dd>
+</dl>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new team"</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"push"</span><span class="p">,</span>
+  <span class="s2">"repo_names"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"github/dotfiles"</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="edit-team">Edit team</h2>
+
+<p>In order to edit a team, the authenticated user must be an owner of
+the org that the team is associated with.</p>
+
+<pre><code>PATCH /teams/:id
+</code></pre>
+
+<h3 id="input-1">Input</h3>
+
+<dl>
+<dt>name</dt>
+  <dd>
+<em>Required</em> <strong>string</strong>
+</dd>
+  <dt>permission</dt>
+  <dd>
+<em>Optional</em> <strong>string</strong>
+</dd>
+</dl>
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"new team name"</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"push"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="o">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="delete-team">Delete team</h2>
+
+<p>In order to delete a team, the authenticated user must be an owner of
+the org that the team is associated with.</p>
+
+<pre><code>DELETE /teams/:id
+</code></pre>
+
+<h3 id="response-4">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="list-team-members">List team members</h2>
+
+<p>In order to list members in a team, the authenticated user must be a
+member of the team.</p>
+
+<pre><code>GET /teams/:id/members
+</code></pre>
+
+<h3 id="response-5">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="get-team-member">Get team member</h2>
+
+<p>In order to get if a user is a member of a team, the authenticated user
+must be a member of the team.</p>
+
+<pre><code>GET /teams/:id/members/:user
+</code></pre>
+
+<h3 id="response-if-user-is-a-member">Response if user is a member</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h3 id="response-if-user-is-not-a-member">Response if user is not a member</h3>
+
+<pre class="headers no-response"><code>Status: 404 Not Found
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="add-team-member">Add team member</h2>
+
+<p>In order to add a user to a team, the authenticated user must have
+‘admin’ permissions to the team or be an owner of the org that the team
+is associated with.</p>
+
+<pre><code>PUT /teams/:id/members/:user
+</code></pre>
+
+<h3 id="response-6">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<p>If you attempt to add an organization to a team, you will get this:</p>
+
+<pre class="headers"><code>Status: 422 Unprocessable Entity
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"Validation Failed"</span><span class="p">,</span>
+  <span class="s2">"errors"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"code"</span><span class="o">:</span> <span class="s2">"org"</span><span class="p">,</span>
+      <span class="s2">"field"</span><span class="o">:</span> <span class="s2">"user"</span><span class="p">,</span>
+      <span class="s2">"resource"</span><span class="o">:</span> <span class="s2">"TeamMember"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="remove-team-member">Remove team member</h2>
+
+<p>In order to remove a user from a team, the authenticated user must have
+‘admin’ permissions to the team or be an owner of the org that the team
+is associated with.
+NOTE: This does not delete the user, it just remove them from the team.</p>
+
+<pre><code>DELETE /teams/:id/members/:user
+</code></pre>
+
+<h3 id="response-7">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="list-team-repos">List team repos</h2>
+
+<pre><code>GET /teams/:id/repos
+</code></pre>
+
+<h3 id="response-8">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1296269</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="o">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="o">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="o">:</span> <span class="s2">"somehexcode"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="p">},</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"full_name"</span><span class="o">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"clone_url"</span><span class="o">:</span> <span class="s2">"https://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="o">:</span> <span class="s2">"git://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"ssh_url"</span><span class="o">:</span> <span class="s2">"git@github.com:octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"svn_url"</span><span class="o">:</span> <span class="s2">"https://svn.github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"mirror_url"</span><span class="o">:</span> <span class="s2">"git://git.example.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="o">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"forks_count"</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"watchers_count"</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="o">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"master_branch"</span><span class="o">:</span> <span class="s2">"master"</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="o">:</span> <span class="s2">"2011-01-26T19:14:43Z"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
+<h2 id="get-team-repo">Get team repo</h2>
+
+<pre><code>GET /teams/:id/repos/:owner/:repo
+</code></pre>
+
+<h3 id="response-if-repo-is-managed-by-this-team">Response if repo is managed by this team</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h3 id="response-if-repo-is-not-managed-by-this-team">Response if repo is not managed by this team</h3>
+
+<pre class="headers no-response"><code>Status: 404 Not Found
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<h2 id="add-team-repo">Add team repo</h2>
+
+<p>In order to add a repo to a team, the authenticated user must be an
+owner of the org that the team is associated with.  Also, the repo must
+be owned by the organization, or a direct form of a repo owned by the
+organization.</p>
+
+<pre><code>PUT /teams/:id/repos/:owner/:repo
+</code></pre>
+
+<h3 id="response-9">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<p>If you attempt to add a repo to a team that is not owned by the
+organization, you get:</p>
+
+<pre class="headers"><code>Status: 422 Unprocessable Entity
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="o">:</span> <span class="s2">"Validation Failed"</span><span class="p">,</span>
+  <span class="s2">"errors"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"code"</span><span class="o">:</span> <span class="s2">"not_owned"</span><span class="p">,</span>
+      <span class="s2">"field"</span><span class="o">:</span> <span class="s2">"repository"</span><span class="p">,</span>
+      <span class="s2">"resource"</span><span class="o">:</span> <span class="s2">"TeamMember"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="remove-team-repo">Remove team repo</h2>
+
+<p>In order to remove a repo from a team, the authenticated user must be an
+owner of the org that the team is associated with.
+NOTE: This does not delete the repo, it just removes it from the team.</p>
+
+<pre><code>DELETE /teams/:id/repos/:owner/:repo
+</code></pre>
+
+<h3 id="response-10">Response</h3>
+
+<pre class="headers no-response"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+      </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="js-toggle-list sidebar-module expandable">
+        <ul>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/">Overview</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/oauth/">OAuth</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/media/">Media Types</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/libraries/">Libraries</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/">Activity</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/events/types/">Event Types</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/notifications/">Notifications</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/starring/">Starring</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/activity/watching/">Watching</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/gists/">Gists</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/gists/comments/">Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/">Git Data</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/blobs/">Blobs</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/refs/">References</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/tags/">Tags</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/git/trees/">Trees</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/">Issues</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/assignees/">Assignees</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/events/">Events</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/labels/">Labels</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/issues/milestones/">Milestones</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/orgs/">Orgs</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/orgs/members/">Members</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/orgs/teams/">Teams</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/pulls/">Pull Requests</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/pulls/comments/">Review Comments</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/">Repositories</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/collaborators/">Collaborators</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/comments/">Comments</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/commits/">Commits</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/contents/">Contents</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/downloads/">Downloads</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/forks/">Forks</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/keys/">Keys</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/hooks/">Hooks</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/merging/">Merging</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/repos/statuses/">Statuses</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/users/">Users</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/users/emails/">Emails</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/users/followers/">Followers</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/users/keys/">Keys</a></li>
+            </ul>
+          </li>
+          <li class="js-topic">
+            <h3>
+<a href="#" class="js-expand-btn collapsed"> </a><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/">Search</a>
+</h3>
+            <ul class="js-guides">
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/#search-issues">Issues</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/#search-repositories">Repositories</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/#search-users">Users</a></li>
+              <li><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/search/#email-search">Email</a></li>
+            </ul>
+          </li>
+          <li class="js-guides"><h3><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/gitignore/">Gitignore</a></h3></li>
+          <li class="js-guides"><h3><a href="/enterprise/11.10.340/enterprise/11.10.300/v3/markdown/">Markdown</a></h3></li>
+        </ul>
+      </div> <!-- /sidebar-module -->
+      <div class="sidebar-module">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+    </div>
+<!-- /sidebar-shell -->
+
+    </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+      <div class="upper_footer">
+        <div class="footer_inner clearfix">
+
+        <!--[if IE]><h4 id="blacktocat_ie">GitHub Links</h4><![endif]-->
+        <h4 id="blacktocat">GitHub Links</h4>
+
+        <ul class="footer_nav">
+          <h4>GitHub</h4>
+          <li><a href="https://github.com/about">About</a></li>
+          <li><a href="https://github.com/blog">Blog</a></li>
+          <li><a href="https://github.com/features">Features</a></li>
+          <li><a href="https://github.com/contact">Contact &amp; Support</a></li>
+          <li><a href="https://github.com/training">Training</a></li>
+          <li><a href="http://status.github.com/">Site Status</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Tools</h4>
+          <li><a href="http://mac.github.com/">GitHub for Mac</a></li>
+          <li><a href="http://mobile.github.com/">Issues for iPhone</a></li>
+          <li><a href="https://gist.github.com">Gist: Code Snippets</a></li>
+          <li><a href="http://enterprise.github.com/">GitHub Enterprise</a></li>
+          <li><a href="http://jobs.github.com/">Job Board</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Extras</h4>
+          <li><a href="http://shop.github.com/">GitHub Shop</a></li>
+          <li><a href="http://octodex.github.com/">The Octodex</a></li>
+        </ul>
+
+        <ul class="footer_nav">
+          <h4>Documentation</h4>
+          <li><a href="http://help.github.com/">GitHub Help</a></li>
+          <li><a href="http://developer.github.com/">Developer API</a></li>
+          <li><a href="http://github.github.com/github-flavored-markdown/">GitHub Flavored Markdown</a></li>
+          <li><a href="http://pages.github.com/">GitHub Pages</a></li>
+        </ul>
+
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.upper_footer -->
+
+      <div class="lower_footer">
+        <div class="footer_inner clearfix">
+            <div id="legal">
+              <!--[if IE]><a class="home_ie" href="http://github.com">Home</a><![endif]-->
+              <a class="home" href="http://github.com">Home</a>
+
+              <ul id="legal_links">
+                <li><a href="http://help.github.com/terms-of-service/">Terms of Service</a></li>
+                <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+                <li><a href="http://help.github.com/security/">Security</a></li>
+              </ul>
+
+              <p>© <span id="year">year</span> GitHub Inc. All rights reserved.</p>
+            </div>
+<!-- /#legal or /#legal_ie-->
+        </div>
+<!-- /.site -->
+      </div>
+<!-- /.lower_footer -->
+    </div>
+<!-- /#footer -->
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+</body>
+</html>

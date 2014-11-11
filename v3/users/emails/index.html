@@ -54,10 +54,12 @@
       <h1 id="emails">Emails</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-email-addresses-for-a-user">List email addresses for a user</a></li>
+  <li><a href="#list-email-addresses-for-a-user">List email addresses for a user</a></li>
   <li><a href="#add-email-addresses">Add email address(es)</a></li>
   <li><a href="#delete-email-addresses">Delete email address(es)</a></li>
-</ul><p>Management of email addresses via the API requires that you are
+</ul>
+
+<p>Management of email addresses via the API requires that you are
 authenticated through basic auth or OAuth with the user scope.</p>
 
 <h2 id="list-email-addresses-for-a-user">List email addresses for a user</h2>
@@ -73,11 +75,11 @@ authenticated through basic auth or OAuth with the user scope.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-    <span class="s2">"verified"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"primary"</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
+    <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"primary"</span><span class="p">:</span> <span class="kc">true</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -90,7 +92,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>You can post a single email address or an array of addresses:</p>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="s2">"octocat@github.com"</span><span class="p">,</span>
   <span class="s2">"support@github.com"</span>
 <span class="p">]</span></code></pre>
@@ -101,16 +103,16 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-    <span class="s2">"primary"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"verified"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
+    <span class="s2">"primary"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">false</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
-    <span class="s2">"primary"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"verified"</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
+    <span class="s2">"primary"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -123,7 +125,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>You can include a single email address or an array of addresses:</p>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="s2">"octocat@github.com"</span><span class="p">,</span>
   <span class="s2">"support@github.com"</span>
 <span class="p">]</span></code></pre>
@@ -133,6 +135,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="headers no-response"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -153,7 +157,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
-          <li><a href="/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/v3/activity/starring/">Starring</a></li>
@@ -244,6 +248,16 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
           <li><a href="/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/v3/enterprise/license/">License</a></li>
+          <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
         </ul>
       </li>
     </ul>
@@ -279,7 +293,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

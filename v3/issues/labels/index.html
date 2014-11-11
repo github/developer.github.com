@@ -54,7 +54,7 @@
       <h1 id="labels">Labels</h1>
 
 <ul id="markdown-toc">
-<li><a href="#list-all-labels-for-this-repository">List all labels for this repository</a></li>
+  <li><a href="#list-all-labels-for-this-repository">List all labels for this repository</a></li>
   <li><a href="#get-a-single-label">Get a single label</a></li>
   <li><a href="#create-a-label">Create a label</a></li>
   <li><a href="#update-a-label">Update a label</a></li>
@@ -65,7 +65,9 @@
   <li><a href="#replace-all-labels-for-an-issue">Replace all labels for an issue</a></li>
   <li><a href="#remove-all-labels-from-an-issue">Remove all labels from an issue</a></li>
   <li><a href="#get-labels-for-every-issue-in-a-milestone">Get labels for every issue in a milestone</a></li>
-</ul><h2 id="list-all-labels-for-this-repository">List all labels for this repository</h2>
+</ul>
+
+<h2 id="list-all-labels-for-this-repository">List all labels for this repository</h2>
 
 <pre><code>GET /repos/:owner/:repo/labels
 </code></pre>
@@ -76,11 +78,11 @@
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
-    <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+    <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"f29513"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -95,10 +97,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
-  <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"f29513"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-label">Create a label</h2>
@@ -109,28 +111,32 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The name of the label.</td>
     </tr>
-<tr>
-<td><code>color</code></td>
+    <tr>
+      <td><code>color</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>.  A 6 character hex code, without the leading <code>#</code>, identifying the color.</td>
     </tr>
-</tbody>
-</table><pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"API"</span><span class="p">,</span>
-  <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"FFFFFF"</span>
+  </tbody>
+</table>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"API"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"FFFFFF"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -140,10 +146,10 @@ Location: https://api.github.com/repos/user/repo/labels/foo
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
-  <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"f29513"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="update-a-label">Update a label</h2>
@@ -154,28 +160,32 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="parameters-1">Parameters</h3>
 
 <table>
-<thead><tr>
-<th>Name</th>
+  <thead>
+    <tr>
+      <th>Name</th>
       <th>Type</th>
       <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>name</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The name of the label.</td>
     </tr>
-<tr>
-<td><code>color</code></td>
+    <tr>
+      <td><code>color</code></td>
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>.  A 6 character hex code, without the leading <code>#</code>, identifying the color.</td>
     </tr>
-</tbody>
-</table><pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"API"</span><span class="p">,</span>
-  <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"FFFFFF"</span>
+  </tbody>
+</table>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"API"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"FFFFFF"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -184,10 +194,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
-  <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+  <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"f29513"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="delete-a-label">Delete a label</h2>
@@ -212,11 +222,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
-    <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+    <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"f29513"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -227,7 +237,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input">Input</h3>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="s2">"Label1"</span><span class="p">,</span>
   <span class="s2">"Label2"</span>
 <span class="p">]</span></code></pre>
@@ -238,11 +248,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
-    <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+    <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"f29513"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -264,7 +274,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input-1">Input</h3>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="s2">"Label1"</span><span class="p">,</span>
   <span class="s2">"Label2"</span>
 <span class="p">]</span></code></pre>
@@ -277,11 +287,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
-    <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+    <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"f29513"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -307,13 +317,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">[</span>
+<pre><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
-    <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"bug"</span><span class="p">,</span>
-    <span class="s2">"color"</span><span class="o">:</span> <span class="s2">"f29513"</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/labels/bug"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"bug"</span><span class="p">,</span>
+    <span class="s2">"color"</span><span class="p">:</span> <span class="s2">"f29513"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -334,7 +345,7 @@ X-RateLimit-Remaining: 4999</code></pre>
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
-          <li><a href="/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/v3/activity/starring/">Starring</a></li>
@@ -425,6 +436,16 @@ X-RateLimit-Remaining: 4999</code></pre>
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
           <li><a href="/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/v3/enterprise/license/">License</a></li>
+          <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
         </ul>
       </li>
     </ul>
@@ -460,7 +481,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

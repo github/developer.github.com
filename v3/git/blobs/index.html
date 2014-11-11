@@ -54,10 +54,12 @@
       <h1 id="blobs">Blobs</h1>
 
 <ul id="markdown-toc">
-<li><a href="#get-a-blob">Get a Blob</a></li>
+  <li><a href="#get-a-blob">Get a Blob</a></li>
   <li><a href="#create-a-blob">Create a Blob</a></li>
   <li><a href="#custom-media-types">Custom media types</a></li>
-</ul><p>Since blobs can be any arbitrary binary data, the input and responses
+</ul>
+
+<p>Since blobs can be any arbitrary binary data, the input and responses
 for the blob API takes an encoding parameter that can be either <code>utf-8</code>
 or <code>base64</code>.  If your data cannot be losslessly sent as a UTF-8 string,
 you can base64 encode it.</p>
@@ -78,12 +80,12 @@ read more about the use of media types in the API <a href="/v3/media/">here</a>.
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"Content of the blob"</span><span class="p">,</span>
-  <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"utf-8"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="o">:</span> <span class="mi">100</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Content of the blob"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="p">:</span> <span class="s2">"utf-8"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">100</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-blob">Create a Blob</h2>
@@ -93,9 +95,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="input">Input</h3>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"content"</span><span class="o">:</span> <span class="s2">"Content of the blob"</span><span class="p">,</span>
-  <span class="s2">"encoding"</span><span class="o">:</span> <span class="s2">"utf-8"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Content of the blob"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="p">:</span> <span class="s2">"utf-8"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -105,9 +107,9 @@ Location: https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="o">:</span> <span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
+  <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="custom-media-types">Custom media types</h2>
@@ -118,6 +120,7 @@ use of media types in the API <a href="/v3/media/">here</a>.</p>
 <pre><code>application/json
 application/vnd.github.VERSION.raw
 </code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -138,7 +141,7 @@ application/vnd.github.VERSION.raw
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/activity/events/">Events</a></li>
-          <li><a href="/v3/activity/events/types/">Event Types</a></li>
+          <li><a href="/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/v3/activity/starring/">Starring</a></li>
@@ -229,6 +232,16 @@ application/vnd.github.VERSION.raw
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
           <li><a href="/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/v3/enterprise/license/">License</a></li>
+          <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
         </ul>
       </li>
     </ul>
@@ -264,7 +277,7 @@ application/vnd.github.VERSION.raw
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

@@ -68,7 +68,7 @@
 
 <h2 id="list-releases-for-a-repository">List releases for a repository</h2>
 
-<p>Information about published releases are available to everyone. 
+<p>Information about published releases are available to everyone.
 Only users with push access will receive listings for draft releases.</p>
 
 <pre><code>GET /repos/:owner/:repo/releases
@@ -164,6 +164,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="response-1">Response</h3>
 
+<div class="alert tip">
+
+<p><a id="releases-hypermedia-url"></a></p>
+
+<p><strong>Note:</strong> This returns an <code>upload_url</code> key corresponding to the endpoint for uploading release assets. This key is a <a href="https://developer.github.com/v3/#hypermedia">hypermedia resource</a>.</p>
+
+</div>
+
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
@@ -238,9 +246,6 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
-
-<p><strong>Note:</strong> This returns an <code>"upload_url"</code> hypermedia relation that provides the 
-<a href="#upload-a-release-asset">endpoint that creates release assets</a>.</p>
 
 <h2 id="create-a-release">Create a release</h2>
 
@@ -558,19 +563,16 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="upload-a-release-asset">Upload a release asset</h2>
 
-<p>This is a unique endpoint. The request’s domain changes from <code>"api.github.com"</code>
-to <strong><code>"uploads.github.com"</code></strong>. You need to use an HTTP client which supports
-<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a> to make calls to this
-endpoint.</p>
+<p>This endpoint makes use of <a href="/v3/#hypermedia">a Hypermedia relation</a> to determine which URL to access.
+This endpoint is provided by a URI template in <a href="#get-a-single-release">the release’s API response</a>.
+<span class="not-enterprise">You need to use an HTTP client which supports
+<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a> to make calls to this endpoint.</span></p>
 
-<p>The asset data is expected in its raw binary form, rather than JSON. 
-Everything else about the endpoint is the same. 
-Pass your authentication exactly the same as the rest of the API. </p>
+<p>The asset data is expected in its raw binary form, rather than JSON.
+Everything else about the endpoint is the same as the rest of the API. For example, you’ll still need to pass your authentication to be able to upload an asset.</p>
 
-<pre><code>POST https://uploads.github.com/repos/:owner/:repo/releases/:id/assets?name=foo.zip
+<pre><code>POST https://&lt;upload_url&gt;/repos/:owner/:repo/releases/:id/assets?name=foo.zip
 </code></pre>
-
-<p>This endpoint is provided by a URI template in <a href="#get-a-single-release">the release’s API response</a>.</p>
 
 <h3 id="input-2">Input</h3>
 

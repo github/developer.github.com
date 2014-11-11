@@ -6,7 +6,7 @@ require 'nokogiri'
 
 ERROR_MESSAGE = """
 Error: Run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
-e.g. bundle exec script/enterprise-cutter 2014-07-8 11.10.340
+e.g. bundle exec script/enterprise-cutter 2014-07-08 11.10.340
 """
 
 if ARGV.length == 0
@@ -50,9 +50,7 @@ begin
     doc.css('img').each do |img|
       img['src'] = "/enterprise/#{version}#{img['src']}" if img['src'] =~ /^\//
     end
-    doc.css('.not-enterprise').each do |non_ent|
-      non_ent.remove
-    end
+    doc.css('.not-enterprise').remove
     File.open(html_file, 'w') { |file| file.write(doc.to_html) }
   end
 

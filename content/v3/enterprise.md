@@ -50,5 +50,5 @@ The [Admin Stats][], [License][], [Search Indexing][], and [User Administration]
 
 Documentation for the API that's bundled with your GitHub Enterprise appliance is available for the past two releases:
 
+* [API documentation for 2.0](https://developer.github.com/enterprise/2.0/)
 * [API documentation for 11.10.340](https://developer.github.com/enterprise/11.10.340/)
-* [API documentation for 11.10.320](https://developer.github.com/enterprise/11.10.320/)

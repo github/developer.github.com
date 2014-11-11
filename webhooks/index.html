@@ -54,13 +54,11 @@
       <h1 id="webhooks">Webhooks</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#services">Services</a></li>
+<li><a href="#services">Services</a></li>
   <li><a href="#events">Events</a></li>
   <li><a href="#wildcard-event">Wildcard Event</a></li>
   <li><a href="#ping-event">Ping Event</a></li>
-</ul>
-
-<p>Every GitHub repository has the option to communicate with a web server whenever
+</ul><p>Every GitHub repository has the option to communicate with a web server whenever
 the repository is pushed to. These “webhooks” can be used to update an external
 issue tracker, trigger CI builds, update a backup mirror, or even deploy to your
 production server.</p>
@@ -89,7 +87,7 @@ these services.</p>
 <a href="https://github.com/github/github-services/tree/master/docs">docs directory</a>
 of the github-services repository.  A JSON representation of their names,
 default events, supported events, and configuration options can be seen
-at <a href="https://api.github.com/hooks" data-proofer-ignore="">https://api.github.com/hooks</a>.</p>
+at <a href="https://api.github.com/hooks">api.github.com/hooks</a>.</p>
 
 <h2 id="events">Events</h2>
 
@@ -112,98 +110,94 @@ set of events, but can be
 <p>The available events are:</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
+<thead><tr>
+<th>Name</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>*</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
       <td>Any time any event is triggered (<a href="#wildcard-event">Wildcard Event</a>).</td>
     </tr>
-    <tr>
-      <td><code>commit_comment</code></td>
+<tr>
+<td><code>commit_comment</code></td>
       <td>Any time a Commit is commented on.</td>
     </tr>
-    <tr>
-      <td><code>create</code></td>
+<tr>
+<td><code>create</code></td>
       <td>Any time a Branch or Tag is created.</td>
     </tr>
-    <tr>
-      <td><code>delete</code></td>
+<tr>
+<td><code>delete</code></td>
       <td>Any time a Branch or Tag is deleted.</td>
     </tr>
-    <tr>
-      <td><code>deployment</code></td>
+<tr>
+<td><code>deployment</code></td>
       <td>Any time a Repository has a new deployment created from the API.</td>
     </tr>
-    <tr>
-      <td><code>deployment_status</code></td>
+<tr>
+<td><code>deployment_status</code></td>
       <td>Any time a deployment for the Repository has a status update from the API.</td>
     </tr>
-    <tr>
-      <td><code>fork</code></td>
+<tr>
+<td><code>fork</code></td>
       <td>Any time a Repository is forked.</td>
     </tr>
-    <tr>
-      <td><code>gollum</code></td>
+<tr>
+<td><code>gollum</code></td>
       <td>Any time a Wiki page is updated.</td>
     </tr>
-    <tr>
-      <td><code>issue_comment</code></td>
+<tr>
+<td><code>issue_comment</code></td>
       <td>Any time an Issue is commented on.</td>
     </tr>
-    <tr>
-      <td><code>issues</code></td>
-      <td>Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.</td>
+<tr>
+<td><code>issues</code></td>
+      <td>Any time an Issue is opened or closed.</td>
     </tr>
-    <tr>
-      <td><code>member</code></td>
+<tr>
+<td><code>member</code></td>
       <td>Any time a User is added as a collaborator to a non-Organization Repository.</td>
     </tr>
-    <tr>
-      <td><code>page_build</code></td>
+<tr>
+<td><code>page_build</code></td>
       <td>Any time a Pages site is built or results in a failed build.</td>
     </tr>
-    <tr>
-      <td><code>public</code></td>
+<tr>
+<td><code>public</code></td>
       <td>Any time a Repository changes from private to public.</td>
     </tr>
-    <tr>
-      <td><code>pull_request_review_comment</code></td>
+<tr>
+<td><code>pull_request_review_comment</code></td>
       <td>Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).</td>
     </tr>
-    <tr>
-      <td><code>pull_request</code></td>
-      <td>Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).</td>
+<tr>
+<td><code>pull_request</code></td>
+      <td>Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).</td>
     </tr>
-    <tr>
-      <td><code>push</code></td>
-      <td>Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. <strong>This is the default event.</strong>
+<tr>
+<td><code>push</code></td>
+      <td>Any git push to a Repository. <strong>This is the default event.</strong>
 </td>
     </tr>
-    <tr>
-      <td><code>release</code></td>
+<tr>
+<td><code>release</code></td>
       <td>Any time a Release is published in the Repository.</td>
     </tr>
-    <tr>
-      <td><code>status</code></td>
+<tr>
+<td><code>status</code></td>
       <td>Any time a Repository has a status update from the API</td>
     </tr>
-    <tr>
-      <td><code>team_add</code></td>
+<tr>
+<td><code>team_add</code></td>
       <td>Any time a team is added or modified on a Repository.</td>
     </tr>
-    <tr>
-      <td><code>watch</code></td>
+<tr>
+<td><code>watch</code></td>
       <td>Any time a User watches the Repository.</td>
     </tr>
-  </tbody>
-</table>
-
-<h3 id="payloads">Payloads</h3>
+</tbody>
+</table><h3 id="payloads">Payloads</h3>
 
 <p>The payloads for all hooks mirror <a href="/v3/activity/events/types/">the payloads for the Event
 types</a>, with the exception of <a href="https://developer.github.com/v3/activity/events/types/#pushevent">the original <code>push</code>
@@ -219,29 +213,25 @@ the repository (<code>repository</code>), and the organization (<code>organizati
 headers:</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Header</th>
+<thead><tr>
+<th>Header</th>
       <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>X-Github-Event</code></td>
+    </tr></thead>
+<tbody>
+<tr>
+<td><code>X-Github-Event</code></td>
       <td>Name of the <a href="#events">event</a> that triggered this delivery.</td>
     </tr>
-    <tr>
-      <td><code>X-Hub-Signature</code></td>
+<tr>
+<td><code>X-Hub-Signature</code></td>
       <td>HMAC hex digest of the payload, using <a href="/v3/repos/hooks/#create-a-hook">the hook’s <code>secret</code></a> as the key (if configured).</td>
     </tr>
-    <tr>
-      <td><code>X-Github-Delivery</code></td>
+<tr>
+<td><code>X-Github-Delivery</code></td>
       <td>Unique ID for this delivery.</td>
     </tr>
-  </tbody>
-</table>
-
-<p>Also, the <code>User-Agent</code> for the requests will have the prefix <code>GitHub-Hookshot/</code>.</p>
+</tbody>
+</table><p>Also, the <code>User-Agent</code> for the requests will have the prefix <code>GitHub Hookshot</code>.</p>
 
 <h4 id="example-delivery">Example delivery</h4>
 
@@ -250,10 +240,10 @@ POST /payload HTTP/1.1
 
 Host: localhost:4567
 X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
-User-Agent: GitHub-Hookshot/044aadd
+User-Agent: GitHub Hookshot 044aadd
 Content-Type: application/json
 Content-Length: 6615
-X-Github-Event: issues
+X-Github-Event: issue
 
 {
   "action": "opened",
@@ -297,39 +287,29 @@ again by calling the <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a>.</
 <h3 id="ping-event-payload">Ping Event Payload</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Key</th>
+<thead><tr>
+<th>Key</th>
       <th>Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>zen</td>
+    </tr></thead>
+<tbody>
+<tr>
+<td>zen</td>
       <td>Random string of GitHub zen</td>
     </tr>
-    <tr>
-      <td>hook_id</td>
+<tr>
+<td>hook_id</td>
       <td>The ID of the webhook that triggered the ping</td>
     </tr>
-    <tr>
-      <td>hook</td>
-      <td>The <a href="/v3/repos/hooks/#get-single-hook">webhook configuration</a>
-</td>
-    </tr>
-  </tbody>
+</tbody>
 </table>
-
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
       <div class="sidebar-module">
         <ul>
-          <li><h3><a href="/webhooks">Overview</a></h3></li>
-          <li><h3><a href="/webhooks/creating">Creating webhooks</a></h3></li>
-          <li><h3><a href="/webhooks/configuring/">Configuring your server</a></h3></li>
-          <li><h3><a href="/webhooks/testing/">Testing webhooks</a></h3></li>
-          <li><h3><a href="/webhooks/securing">Securing your webhooks</a></h3></li>
+          <li><h3><a href="/webhooks/creating">Creating Webhooks</a></h3></li>
+          <li><h3><a href="/webhooks/configuring/">Configuring Your Server</a></h3></li>
+          <li><h3><a href="/webhooks/testing/">Testing Webhooks</a></h3></li>
         </ul>
       </div>
 
@@ -364,7 +344,7 @@ again by calling the <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a>.</
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
     </div>
 
   </div><!-- /#footer -->

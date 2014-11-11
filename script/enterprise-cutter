@@ -4,21 +4,32 @@ require 'fileutils'
 require 'tmpdir'
 require 'nokogiri'
 
+ERROR_MESSAGE = """
+Error: Run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
+e.g. bundle exec script/enterprise-cutter 2014-07-8 11.10.340
+"""
+
+if ARGV.length == 0
+    abort "\n#{ERROR_MESSAGE}\n\n"
+elsif ARGV.length > 2
+    abort "\n#{ERROR_MESSAGE}\n\n"
+end
+
+date = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
+version = ARGV[1].dup # like, 11.10.340
+
+BRANCH_NAME = "add-#{version}-docs"
+
 %x(git checkout gh-pages)
 %x(git pull origin gh-pages)
 
-%x(git checkout -b add-backfilled-versions)
-
-# run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
-# where [DATE] and [VERSION} are command-line arguments, defined below
-date = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
-version = ARGV[1].dup # like, 11.10.340
+%x(git checkout -b #{BRANCH_NAME})
 
 temp_dir = Dir.mktmpdir
 begin
   %x(git checkout `git rev-list -n 1 --before="#{date}" gh-pages`)
   %x(cp -r * #{temp_dir})
-  %x(git checkout add-backfilled-versions)
+  %x(git checkout #{BRANCH_NAME})
   version.sub!(/enterprise-/, '')
   FileUtils.mkdir_p("enterprise/#{version}")
   %x(cp -r #{temp_dir}/* enterprise/#{version})

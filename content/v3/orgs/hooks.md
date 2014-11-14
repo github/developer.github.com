@@ -155,10 +155,5 @@ Name | Description
 
 
 [guid]: http://en.wikipedia.org/wiki/Globally_unique_identifier
-[pubsub]: http://code.google.com/p/pubsubhubbub/
-[post-receive]: http://help.github.com/post-receive-hooks/
-[ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
 [hub-signature]: https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77
-[pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify
-[events-url]: /webhooks/#events
 [ping-event-url]: /webhooks/#ping-event

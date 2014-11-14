@@ -60,19 +60,16 @@ In order to protect sensitive data which may be present in webhook configuration
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | **Required**. The name of the service that is being called. (See  <a href='https://api.github.com/hooks' data-proofer-ignore>/hooks</a> for the list of valid hook names.)
-`config`|`hash` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
+`name`|`string` | **Required**. Must be passed as "web".
+`config`|`hash` | **Required**. Key/value pairs to provide settings for this webhook (documented below).
+`config[url]`          | `string` | **Required** The URL to which the payloads will be delivered.
+`config[content_type]` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+`config[secret]`       | `string` | If given payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`config[insecure_ssl]` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`.
 `events`|`array` | Determines what events the hook is triggered for.  Default: `["push"]`
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
 #### Example
-
-To create [a webhook](/webhooks), [the following fields are required](https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11) by the `config`:
-
-* `url`: A required string defining the URL to which the payloads will be delivered.
-* `content_type`: An optional string defining the media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
-* `secret`: An optional string that's passed with the HTTP requests as an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
-* `insecure_ssl`: An optional string that determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`.
 
 Here's how you can create a hook that posts payloads in JSON format:
 
@@ -100,10 +97,12 @@ Here's how you can create a hook that posts payloads in JSON format:
 
 Name | Type | Description
 -----|------|--------------
-`config`|`hash` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
-`events`|`array` | Determines what events the hook is triggered for.  This replaces the entire array of events.  Default: `["push"]`
-`add_events`|`array` | Determines a list of events to be added to the list of events that the Hook triggers for.
-`remove_events`|`array` | Determines a list of events to be removed from the list of events that the Hook triggers for.
+`config`|`hash` | **Required**. Key/value pairs to provide settings for this webhook (documented below).
+`config[url]`          | `string` | **Required** The URL to which the payloads will be delivered.
+`config[content_type]` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+`config[secret]`       | `string` | If given payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`config[insecure_ssl]` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`.
+`events`|`array` | Determines what events the hook is triggered for.  Default: `["push"]`
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
 

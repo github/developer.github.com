@@ -11,6 +11,7 @@ The Repository Webhooks API allows repository admins to manage the post-receive
 hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
 or the [PubSubHubbub API](#pubsubhubbub).
 
+
 ## List hooks
 
     GET /repos/:owner/:repo/hooks
@@ -20,6 +21,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:hook) { |h| [h] } %>
 
+
 ## Get single hook
 
     GET /repos/:owner/:repo/hooks/:id
@@ -28,6 +30,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
 <%= headers 200 %>
 <%= json :hook %>
+
 
 ## Create a hook
 
@@ -70,6 +73,7 @@ Here's how you can create a hook that posts payloads in JSON format:
       :Location => 'https://api.github.com/repos/user/repo/hooks/1' %>
 <%= json :hook %>
 
+
 ## Edit a hook
 
     PATCH /repos/:owner/:repo/hooks/:id
@@ -97,6 +101,7 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :hook %>
 
+
 ## Ping a hook
 
 This will trigger a [ping event][ping-event-url] to be sent to the hook.
@@ -107,6 +112,7 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
 <%= headers 204 %>
 
+
 ## Delete a hook
 
     DELETE /repos/:owner/:repo/hooks/:id
@@ -114,6 +120,7 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 ### Response
 
 <%= headers 204 %>
+
 
 ## Receiving Webhooks
 

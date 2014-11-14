@@ -144,65 +144,6 @@ Name | Description
 `X-GitHub-Delivery` | A [guid][guid] to identify the payload and event being sent.
 `X-Hub-Signature` | The value of this header is computed as the HMAC hex digest of the body, using the `secret` config option as the key.
 
-## PubSubHubbub
-
-GitHub can also serve as a [PubSubHubbub][pubsub] hub for all repositories.
-PSHB is a simple publish/subscribe protocol
-that lets servers register to receive updates when a topic is updated.
-The updates are sent with an HTTP POST request to a callback URL.
-Topic URLs for a GitHub repository's pushes are in this format:
-
-    https://github.com/:owner/:repo/events/:event
-
-The event can be any [event][events-url] string that is listed at the top of this
-document.
-
-### Response format
-
-The default format is what [existing post-receive hooks should
-expect][post-receive]: A JSON body sent as the `payload` parameter in a
-POST.  You can also specify to receive the raw JSON body with either an
-`Accept` header, or a `.json` extension.
-
-    Accept: application/json
-    https://github.com/:owner/:repo/events/push.json
-
-### Callback URLs
-
-Callback URLs can use either the `http://` protocol, or `github://`.
-`github://` callbacks specify a GitHub service.
-
-    # Send updates to postbin.org
-    http://postbin.org/123
-
-    # Send updates to Campfire
-    github://campfire?subdomain=github&room=Commits&token=abc123
-
-### Subscribing
-
-The GitHub PubSubHubbub endpoint is: https://api.github.com/hub.
-(GitHub Enterprise users should use http://yourhost/api/v3/hub as the
-PubSubHubbub endpoint, but not change the `hub.topic` URI format.) A
-successful request with curl looks like:
-
-    curl -u "user" -i \
-      https://api.github.com/hub \
-      -F "hub.mode=subscribe" \
-      -F "hub.topic=https://github.com/:owner/:repo/events/push" \
-      -F "hub.callback=http://postbin.org/123"
-
-PubSubHubbub requests can be sent multiple times.  If the hook already
-exists, it will be modified according to the request.
-
-#### Parameters
-
-Name | Type | Description
------|------|--------------
-``hub.mode``|`string` | **Required**. Either `subscribe` or `unsubscribe`.
-``hub.topic``|`string` |**Required**.  The URI of the GitHub repository to subscribe to.  The path must be in the format of `/:owner/:repo/events/:event`.
-``hub.callback``|`string` | The URI to receive the updates to the topic.
-``hub.secret``|`string` | A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the `X-Hub-Signature` header.  You can see [our Ruby implementation][ruby-secret], or [the PubSubHubbub documentation][pshb-secret] for more details.
-
 
 [guid]: http://en.wikipedia.org/wiki/Globally_unique_identifier
 [pubsub]: http://code.google.com/p/pubsubhubbub/

@@ -14,7 +14,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
 ## List hooks
 
-    GET /repos/:owner/:repo/hooks
+    GET /orgs/:org/hooks
 
 ### Response
 
@@ -24,7 +24,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
 ## Get single hook
 
-    GET /repos/:owner/:repo/hooks/:id
+    GET /orgs/:org/hooks/:id
 
 ### Response
 
@@ -34,7 +34,7 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
 ## Create a hook
 
-    POST /repos/:owner/:repo/hooks
+    POST /orgs/:org/hooks
 
 **Note**: Repositories can have more than one webhook configured, but all other services can have at most one configuration. Creating hooks for a service that already has one configured will [update the existing hook](#edit-a-hook).
 
@@ -76,7 +76,7 @@ Here's how you can create a hook that posts payloads in JSON format:
 
 ## Edit a hook
 
-    PATCH /repos/:owner/:repo/hooks/:id
+    PATCH /orgs/:org/hooks/:id
 
 ### Parameters
 
@@ -106,7 +106,7 @@ Name | Type | Description
 
 This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
-    POST /repos/:owner/:repo/hooks/:id/pings
+    POST /orgs/:org/hooks/:id/pings
 
 ### Response
 
@@ -115,7 +115,7 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
 ## Delete a hook
 
-    DELETE /repos/:owner/:repo/hooks/:id
+    DELETE /orgs/:org/hooks/:id
 
 ### Response
 

@@ -85,7 +85,7 @@ Here's how you can create a hook that posts payloads in JSON format:
 ### Response
 
 <%= headers 201,
-      :Location => 'https://api.github.com/repos/user/repo/hooks/1' %>
+      :Location => 'https://api.github.com/orgs/org/hooks/1' %>
 <%= json :hook %>
 
 

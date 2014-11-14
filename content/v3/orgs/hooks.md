@@ -7,8 +7,21 @@ title: Organization Webhooks | GitHub API
 * TOC
 {:toc}
 
-Organization webhooks allow you to receive HTTP POST payloads whenever certain events happen within the organization. Subscribing to these events makes it possible to build integrations that react to actions on GitHub.com.
+<div class="alert">
+  <p>
+    The Organization Webhooks API is currently available for developers to preview.
+    During the preview period, the API may change without advance notice.
+    Please see the <a href="/changes/#TODO">blog post <strong style="color:red;">[UPDATE LINK]</strong></a> for full details.
+  </p>
 
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.sersi-preview+json</pre>
+  </p>
+</div>
+
+
+Organization webhooks allow you to receive HTTP POST payloads whenever certain events happen within the organization. Subscribing to these events makes it possible to build integrations that react to actions on GitHub.com.
 
 ## List hooks
 

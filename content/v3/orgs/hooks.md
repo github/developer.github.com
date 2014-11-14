@@ -23,6 +23,15 @@ title: Organization Webhooks | GitHub API
 
 Organization webhooks allow you to receive HTTP POST payloads whenever certain events happen within the organization. Subscribing to these events makes it possible to build integrations that react to actions on GitHub.com.
 
+## Scopes & Restrictions
+
+All actions against organization hooks require that the authenticating user be an admin of the `:org` being managed. Additionally, OAuth tokens require the "admin:org_hook" [scope](/v3/oauth/#scopes).
+
+In order to protect sensitive data which may be present in webhook configurations, we also enforce the following access control rules:
+
+- Oauth applications cannot list, view, or edit webhooks which they did not create.
+- Users cannot list, view, or edit webhooks which were created by Oauth applications.
+
 ## List hooks
 
     GET /orgs/:org/hooks

@@ -97,21 +97,6 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :hook %>
 
-## Test a `push` hook
-
-This will trigger the hook with the latest push to the current
-repository if the hook is subscribed to `push` events. If the
-hook is not subscribed to `push` events, the server will respond
-with 204 but no test POST will be generated.
-
-    POST /repos/:owner/:repo/hooks/:id/tests
-
-**Note**: Previously `/repos/:owner/:repo/hooks/:id/test`
-
-### Response
-
-<%= headers 204 %>
-
 ## Ping a hook
 
 This will trigger a [ping event][ping-event-url] to be sent to the hook.

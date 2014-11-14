@@ -1,5 +1,5 @@
 ---
-title: Webhooks | GitHub API
+title: Repository Webhooks | GitHub API
 ---
 
 # Webhooks

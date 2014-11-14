@@ -56,8 +56,6 @@ In order to protect sensitive data which may be present in webhook configuration
 
     POST /orgs/:org/hooks
 
-**Note**: Repositories can have more than one webhook configured, but all other services can have at most one configuration. Creating hooks for a service that already has one configured will [update the existing hook](#edit-a-hook).
-
 ### Parameters
 
 Name | Type | Description

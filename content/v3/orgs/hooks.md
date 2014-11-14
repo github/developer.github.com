@@ -7,9 +7,7 @@ title: Organization Webhooks | GitHub API
 * TOC
 {:toc}
 
-The Repository Webhooks API allows repository admins to manage the post-receive
-hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
-or the [PubSubHubbub API](#pubsubhubbub).
+Organization webhooks allow you to receive HTTP POST payloads whenever certain events happen within the organization. Subscribing to these events makes it possible to build integrations that react to actions on GitHub.com.
 
 
 ## List hooks

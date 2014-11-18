@@ -1,18 +1,17 @@
 ---
 kind: change
 title: Removing token attribute from the Oauth Authorizations API responses (breaking change)
-created_at: 2014-10-29
+created_at: 2014-11-19
 author_name: ptoomey3
 ---
 
-## API changes
-
-We have deprecated the `token` attribute from the majority of [Authorizations
-API](/v3/oauth_authorizations/) responses. For the affected APIs, the `token`
-attribute will return an empty string after **January 12, 2015**. See the
-[Authorizations API deprecation notice][authorizations-token-deprecation-notice] for
-a complete list of APIs that are affected.
-
+Today, we are announcing the deprecation of the `token` attribute from the
+majority of [Authorizations API](/v3/oauth_authorizations/) responses. For the
+affected APIs, the `token` attribute will return an empty string after the
+updated API has [been finalized](#preview-period) and we have given developers
+time to update existing code. See the
+[Authorizations API deprecation notice][authorizations-token-deprecation-notice]
+for a complete list of APIs that are affected.
 
 ## What's changing?
 
@@ -68,9 +67,22 @@ is a new API that is analagous to the
 [Get-or-create an authorization for a specific app][get-or-create-for-app]
 API, but adds support for the new `fingerprint` request parameter.
 
-To access the new API functionality during the preview period, you must provide
-a custom [media type](/v3/media/) in the `Accept` header:
-`application/vnd.github.mirage-preview+json`
+## Preview period
+
+We’re making the new Authorizations API available today for developers to
+preview. During this period, we may change aspects of these endpoints. If we do,
+we will announce the changes on the developer blog, but we will not provide any
+advance notice.
+
+While these new APIs are in their preview period, you’ll need to provide the
+following custom media type in the Accept header:
+
+    application/vnd.github.mirage-preview+json
+
+The preview period will last 4-6 weeks. At the end of the preview period, the
+changes to the  Authorizations API will become an official component of GitHub
+API v3. At that point, developers will be given 8 weeks to update existing code
+to use the new APIs before it is the default for all users.
 
 ## Why SHA-256 over bcrypt?
 

@@ -28,10 +28,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
   </ul>
 
   <p>
-    For the affected APIs, the <code>token</code> attribute will return an empty
-    string after <strong>January 12, 2015</strong>. Please see
-    <a href="/changes/2014-10-29-removing-authorizations-token/">the blog post</a>
-    for full details.
+    Please see <a href="/changes/2014-11-19-removing-authorizations-token/">the blog post</a> for full details.
   </p>
 
   <p>

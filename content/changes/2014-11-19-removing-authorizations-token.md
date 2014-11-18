@@ -82,7 +82,8 @@ following custom media type in the Accept header:
 The preview period will last 4-6 weeks. At the end of the preview period, the
 changes to the  Authorizations API will become an official component of GitHub
 API v3. At that point, developers will be given 8 weeks to update existing code
-to use the new APIs before it is the default for all users.
+to use the new APIs before it is the default for all users. At each of these
+milestones we will provide updates on the developer blog.
 
 ## Why SHA-256 over bcrypt?
 

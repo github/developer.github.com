@@ -21,13 +21,11 @@ Rest assured that this change is an entirely proactive measure from GitHub and i
 
 ## Who is affected?
 
-Any code that relies on accessing the `token` attribute from
+This change affects any code that relies on accessing the `token` attribute from
 [these OAuth Authorizations API responses][authorizations-token-deprecation-notice].
 For example, our own [GitHub for Mac][github-for-mac] and
-[GitHub for Windows][github-for-windows] applications relied on reading `token`
-from the [Get-or-create an authorization for a specific app][get-or-create-for-app]
-Authorizations API to allow multiple installations of our desktop application
-for a single user.
+[GitHub for Windows][github-for-windows] applications relied on reading the `token`
+from the [Get-or-create an authorization for a specific app][get-or-create-for-app] API, in order to support multiple installations of our desktop application for a single user.
 
 ## What should you do?
 

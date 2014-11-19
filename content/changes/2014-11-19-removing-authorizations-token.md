@@ -15,9 +15,9 @@ The current [OAuth Authorizations API](/v3/oauth_authorizations/) requires GitHu
 each OAuth token on our servers. In order to increase the security for our
 users, we are changing our architecture to store the SHA-256 digest of OAuth
 tokens instead. GitHub securely hashes user passwords using bcrypt and we want
-to provide comparable security for our users' OAuth tokens as well. To be clear,
-this change is a 100% proactive measure from GitHub and is not associated with
-any security incident.
+to provide comparable security for OAuth tokens as well.
+
+Rest assured that this change is an entirely proactive measure from GitHub and is not associated with any security incident.
 
 ## Who is affected?
 

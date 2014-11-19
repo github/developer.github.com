@@ -61,6 +61,13 @@ Name | Description
 `team_add` | Any time a team is added or modified on a Repository.
 `watch` | Any time a User watches the Repository.
 
+### Wildcard Event
+
+We also support a wildcard (`*`) that will match all supported events. When you
+add the wildcard event, we'll replace any existing events you have configured with
+the wildcard event and send you payloads for all supported events. You'll also
+automatically get any new events we might add in the future.
+
 
 ## Payloads
 
@@ -121,13 +128,6 @@ X-Github-Event: issues
   }
 }
 </pre>
-
-## Wildcard Event
-
-We also support a wildcard (`*`) that will match all supported events. When you
-add the wildcard event, we'll replace any existing events you have configured with
-the wildcard event and send you payloads for all supported events. You'll also
-automatically get any new events we might add in the future.
 
 ## Ping Event
 

@@ -61,7 +61,8 @@ Name | Description
 `team_add` | Any time a team is added or modified on a Repository.
 `watch` | Any time a User watches the Repository.
 
-### Payloads
+
+## Payloads
 
 The payloads for all hooks mirror [the payloads for the Event
 types](/v3/activity/events/types/), with the exception of [the original `push`
@@ -71,7 +72,7 @@ which has a more detailed payload.
 A full payload will also show the user who performed the event (`sender`),
 the repository (`repository`), and the organization (`organization`) if applicable.
 
-#### Delivery headers
+### Delivery headers
 
 HTTP requests made to your server's endpoint will contain several special
 headers:
@@ -84,7 +85,7 @@ Header | Description
 
 Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
 
-#### Example delivery
+### Example delivery
 
 <pre class="terminal">
 POST /payload HTTP/1.1

@@ -129,6 +129,7 @@ X-Github-Event: issues
 }
 </pre>
 
+
 ## Ping Event
 
 When you create a new webhook, we'll send you a simple `ping` event to let you

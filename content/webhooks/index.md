@@ -151,24 +151,32 @@ hook | The [webhook configuration][repo-hooks-show] |
 
 ## Service Hooks
 
-A service is basically the name used to refer to a webhook that has
-configuration settings, a list of available events, and default events.
+In addition to webhooks, we also offer the ability to install pre-rolled
+integrations for a variety of existing services. These services [are contributed
+and maintained by the Open Source community][github-services].
 
-For instance, the [email][email-service] service is a built-in GitHub service
-that will send event [payloads][payloads-section] to, at most, two email
-addresses.  It will trigger for the `push` event by default and supports the
-`public` event type as well.
+Service hooks are installed and configured in a similar fashion as webhooks.
+When [creating a hook][webhooks-guide-create], just set the `:name` parameter to
+a service name instead of "web" (for webhook). The main differences to keep in
+mind between webhooks and service hooks are:
 
-A number of services have been integrated through the open source
-[github-services][github-services] project.  When [creating a
-hook][webhooks-guide-create], the `:name` parameter must refer to one of these
-services.
+- Service hooks cannot be installed on organizations, only repositories.
+- A service may only be installed at most once per repository, whereas multiple
+  webhooks can be installed on each organization/repository.
+- Each service hook only supports a specific set of events, depending on the
+  services implementation.
+- Each service has it's own unique set of configuration options.
 
-Documentation for all available service hooks can be found in the [docs
-directory][github-services-docs] of the github-services repository. A JSON
-representation of their names, default events, supported events, and
-configuration options can be seen at <a href='https://api.github.com/hooks'
-data-proofer-ignore>https://api.github.com/hooks</a>.
+To see a full list of available services, their supported events, and
+configuration options, check out <a href='https://api.github.com/hooks'
+data-proofer-ignore>https://api.github.com/hooks</a>. Documentation for all
+service hooks can be found in the [docs directory][github-services-docs] of the
+github-services repository. A JSON
+
+**Note:** If you are building a new integration, you should build it as webhook.
+We suggest creating an [OAuth application][oauth-applications] to automatically
+install and manage your users' webhooks. We will no longer be accepting new
+services to the [github-services repository][github-services].
 
 
 [service-hooks-section]: #service-hooks
@@ -189,3 +197,4 @@ data-proofer-ignore>https://api.github.com/hooks</a>.
 [github-services-docs]: https://github.com/github/github-services/tree/master/docs
 [irc-service]: https://github.com/github/github-services/blob/master/lib/services/irc.rb
 [email-service]: https://github.com/github/github-services/blob/master/lib/services/email.rb
+[oauth-applications]: /v3/oauth/

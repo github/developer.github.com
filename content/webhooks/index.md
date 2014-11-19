@@ -13,9 +13,10 @@ the repository is pushed to. These "webhooks" can be used to update an external
 issue tracker, trigger CI builds, update a backup mirror, or even deploy to your
 production server.
 
-Each hook can be configured for a specific [service][service-hooks-section] and one or
-more [events][events-section], regardless of the API used to do so. Repository admins
-can configure hooks programmatically [via the API][repo-hooks].
+Each hook can be configured for a specific [service][service-hooks-section] and
+one or more [events][events-section], regardless of the API used to do so.
+Repository admins can configure hooks programmatically [via the
+API][repo-hooks].
 
 
 ## Events
@@ -62,19 +63,19 @@ Name | Description
 ### Wildcard Event
 
 We also support a wildcard (`*`) that will match all supported events. When you
-add the wildcard event, we'll replace any existing events you have configured with
-the wildcard event and send you payloads for all supported events. You'll also
-automatically get any new events we might add in the future.
+add the wildcard event, we'll replace any existing events you have configured
+with the wildcard event and send you payloads for all supported events. You'll
+also automatically get any new events we might add in the future.
 
 
 ## Payloads
 
-The payloads for all hooks mirror [the payloads for the Event types][event-types],
-with the exception of [the original `push` event][event-types-push], which has a
-more detailed payload.
+The payloads for all hooks mirror [the payloads for the Event
+types][event-types], with the exception of [the original `push`
+event][event-types-push], which has a more detailed payload.
 
-A full payload will also show the user who performed the event (`sender`),
-the repository (`repository`), and the organization (`organization`) if applicable.
+A full payload will also show the user who performed the event (`sender`), the
+repository (`repository`), and the organization (`organization`) if applicable.
 
 ### Delivery headers
 
@@ -131,8 +132,8 @@ X-Github-Event: issues
 
 When you create a new webhook, we'll send you a simple `ping` event to let you
 know you've set up the webhook correctly. This event isn't stored so it isn't
-retrievable via the [Events API][events-api]. You can trigger a `ping`
-again by calling the [ping endpoint][repo-hooks-ping].
+retrievable via the [Events API][events-api]. You can trigger a `ping` again by
+calling the [ping endpoint][repo-hooks-ping].
 
 ### Ping Event Payload
 
@@ -145,23 +146,24 @@ hook | The [webhook configuration][repo-hooks-show] |
 
 ## Service Hooks
 
-A service is basically the name used to refer to a webhook that has configuration
-settings, a list of available events, and default events.
+A service is basically the name used to refer to a webhook that has
+configuration settings, a list of available events, and default events.
 
-For instance, the [email][email-service]
-service is a built-in GitHub service that will send event [payloads][payloads-section]
-to, at most, two email addresses.  It will trigger for the `push`
-event by default and supports the `public` event type as well.
+For instance, the [email][email-service] service is a built-in GitHub service
+that will send event [payloads][payloads-section] to, at most, two email
+addresses.  It will trigger for the `push` event by default and supports the
+`public` event type as well.
 
 A number of services have been integrated through the open source
-[github-services][github-services] project.  When
-[creating a hook][webhooks-guide-create], the `:name` parameter must refer to one of
-these services.
+[github-services][github-services] project.  When [creating a
+hook][webhooks-guide-create], the `:name` parameter must refer to one of these
+services.
 
-Documentation for all available service hooks can be found in the
-[docs directory][github-services-docs] of the github-services repository. A JSON
-representation of their names, default events, supported events, and configuration
-options can be seen at <a href='https://api.github.com/hooks' data-proofer-ignore>https://api.github.com/hooks</a>.
+Documentation for all available service hooks can be found in the [docs
+directory][github-services-docs] of the github-services repository. A JSON
+representation of their names, default events, supported events, and
+configuration options can be seen at <a href='https://api.github.com/hooks'
+data-proofer-ignore>https://api.github.com/hooks</a>.
 
 
 [service-hooks-section]: #service-hooks

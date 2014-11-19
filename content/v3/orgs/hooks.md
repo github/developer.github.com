@@ -39,7 +39,7 @@ In order to protect sensitive data which may be present in webhook configuration
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:hook) { |h| [h] } %>
+<%= json(:org_hook) { |h| [h] } %>
 
 
 ## Get single hook
@@ -49,7 +49,7 @@ In order to protect sensitive data which may be present in webhook configuration
 ### Response
 
 <%= headers 200 %>
-<%= json :hook %>
+<%= json :org_hook %>
 
 
 ## Create a hook
@@ -85,8 +85,8 @@ Here's how you can create a hook that posts payloads in JSON format:
 ### Response
 
 <%= headers 201,
-      :Location => 'https://api.github.com/orgs/org/hooks/1' %>
-<%= json :hook %>
+      :Location => 'https://api.github.com/orgs/octocat/hooks/1' %>
+<%= json :org_hook %>
 
 
 ## Edit a hook
@@ -116,7 +116,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json :hook %>
+<%= json(:org_hook) { |h| h.merge "events" => %w(pull_request) } %>
 
 
 ## Ping a hook

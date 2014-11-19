@@ -110,7 +110,7 @@ Name | Type | Description
 
 <%= json \
       :active => true,
-      :add_events => ['pull_request']
+      :events => ['pull_request']
 %>
 
 ### Response

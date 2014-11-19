@@ -8,15 +8,17 @@ layout: webhooks
 * TOC
 {:toc}
 
-Every GitHub repository has the option to communicate with a web server whenever
-the repository is pushed to. These "webhooks" can be used to update an external
-issue tracker, trigger CI builds, update a backup mirror, or even deploy to your
-production server.
 
-Each hook can be configured for a specific [service][service-hooks-section] and
-one or more [events][events-section], regardless of the API used to do so.
-Repository admins can configure hooks programmatically [via the
-API][repo-hooks].
+Webhooks allow you to build or set up integrations which can respond to certain
+actions on GitHub.com. When an event you've subscribed to is triggered, we'll
+send a simple HTTP POST payload to the webhook's configured URL. There a simple
+web app can inspect the payload and perform some useful action. Webhooks  can be
+used to update an external issue tracker, trigger CI builds, update a backup
+mirror, or even deploy to your production server.
+
+Each webhook can be installed [on an organization][org-hooks] or [a specific
+respository][repo-hooks]. Once installed, they will be triggered each time one
+or more subscribed events occurs on that organization or repository.
 
 
 ## Events
@@ -171,6 +173,7 @@ data-proofer-ignore>https://api.github.com/hooks</a>.
 [wildcard-section]: #wildcard-event
 [payloads-section]: #payloads
 [webhooks-guide-create]: /webhooks/creating/
+[org-hooks]: /v3/orgs/hooks/
 [repo-hooks]: /v3/repos/hooks/
 [repo-hooks-show]: /v3/repos/hooks/#get-single-hook
 [repo-hooks-edit]: /v3/repos/hooks/#edit-a-hook

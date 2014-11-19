@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Removing token attribute from the Oauth Authorizations API responses (breaking change)
+title: Removing token attribute from Authorizations API responses
 created_at: 2014-11-19
 author_name: ptoomey3
 ---

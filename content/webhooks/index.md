@@ -24,19 +24,18 @@ or more subscribed events occurs on that organization or repository.
 
 ## Events
 
-Active hooks can be configured to trigger for one or more service supported
-events. In other words, the service must support listening for the event you
-want to trigger.
+When configuring a webhook, you can choose which events you would like to
+receive payloads for. You can [even opt-in to all current and future
+events][wildcard-event].  Only subscribing to the specific events you plan on
+handling is useful for limiting the number of HTTP requests to your server.  You
+can change the list of subscribed events through the API or UI anytime.  By
+default, webhooks are only subscribed to the `push` event.
 
-For example, generic webhooks supports listening for all events, while the
-[IRC][irc-service] service can only listen for `push`, `issues`, `pull_request`,
-`commit_comment`, `pull_request_review_comment`, and `issue_comment` events.
+Each event corresponds to a certain set of actions that can happen to your
+organization and/or repository. For example, if you subscribe to the `issues`
+event you'll receive [detailed payloads][payloads-section] every time an issue
+is opened, closed, labeled, etc.
 
-Each service also has a set of default events for which it listens if it isn't
-configured. For example, generic webhooks listen only for `push` events by
-default, while the IRC service listens on `push` and `pull_requests` events.
-Service hooks set up via the repository settings UI listen only for the default
-set of events, but can be [re-configured via the API][repo-hooks-edit].
 
 The available events are:
 

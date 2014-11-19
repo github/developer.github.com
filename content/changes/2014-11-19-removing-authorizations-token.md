@@ -5,13 +5,9 @@ created_at: 2014-11-19
 author_name: ptoomey3
 ---
 
-Today, we are announcing the deprecation of the `token` attribute from the
-majority of [Authorizations API](/v3/oauth_authorizations/) responses. For the
-affected APIs, the `token` attribute will return an empty string after the
-updated API has [been finalized](#preview-period) and we have given developers
-time to update existing code. See the
-[Authorizations API deprecation notice][authorizations-token-deprecation-notice]
-for a complete list of APIs that are affected.
+For increased security, we are deprecating use of the `token` attribute in the
+majority of the [Authorizations API](/v3/oauth_authorizations/) responses. For the
+[affected APIs][authorizations-token-deprecation-notice], the `token` attribute will soon return an empty string. To get ready for that change, we're giving developers a chance to [preview the updated API](#preview-period) starting today.
 
 ## What's changing?
 

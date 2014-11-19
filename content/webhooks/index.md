@@ -72,12 +72,15 @@ also automatically get any new events we might add in the future.
 
 ## Payloads
 
-The payloads for all hooks mirror [the payloads for the Event
+Each event type has a specific payload format with the relevant event
+information. All event payloads mirror [the payloads for the Event
 types][event-types], with the exception of [the original `push`
-event][event-types-push], which has a more detailed payload.
+event][event-types-push], which has a more detailed webhook payload.
 
-A full payload will also show the user who performed the event (`sender`), the
-repository (`repository`), and the organization (`organization`) if applicable.
+In addition to the fields [documented for each event][event-types], webhook
+payloads include the user who performed the event (`sender`) as well as the
+organization (`organization`) and/or repository (`repository`) which the event
+occurred on.
 
 ### Delivery headers
 

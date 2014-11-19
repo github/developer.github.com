@@ -13,7 +13,7 @@ the repository is pushed to. These "webhooks" can be used to update an external
 issue tracker, trigger CI builds, update a backup mirror, or even deploy to your
 production server.
 
-Each hook can be configured for a specific [service](#services) and one or
+Each hook can be configured for a specific [service](#service-hooks) and one or
 more [events](#events), regardless of the API used to do so. Repository admins
 can configure hooks programmatically [via the API](/v3/repos/hooks/).
 

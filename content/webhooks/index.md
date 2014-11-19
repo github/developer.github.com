@@ -17,28 +17,6 @@ Each hook can be configured for a specific [service](#services) and one or
 more [events](#events), regardless of the API used to do so. Repository admins
 can configure hooks programmatically [via the API](/v3/repos/hooks/).
 
-## Services
-
-A service is basically the name used to refer to a webhook that has configuration
-settings, a list of available events, and default events.
-
-For instance, the
-[email](https://github.com/github/github-services/blob/master/lib/services/email.rb)
-service is a built-in GitHub service that will send event [payloads](#payloads)
-to, at most, two email addresses.  It will trigger for the `push`
-event by default and supports the `public` event type as well.
-
-A number of services have been integrated through the open source
-[github-services](https://github.com/github/github-services) project.  When
-[creating a hook](/webhooks/creating/), the `:name` parameter must refer to one of
-these services.
-
-Documentation for all available service hooks can be found in the
-[docs directory](https://github.com/github/github-services/tree/master/docs)
-of the github-services repository.  A JSON representation of their names,
-default events, supported events, and configuration options can be seen
-at <a href='https://api.github.com/hooks' data-proofer-ignore>https://api.github.com/hooks</a>.
-
 
 ## Events
 
@@ -164,3 +142,26 @@ Key | Value |
 zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
 hook | The [webhook configuration](/v3/repos/hooks/#get-single-hook) |
+
+
+## Service Hooks
+
+A service is basically the name used to refer to a webhook that has configuration
+settings, a list of available events, and default events.
+
+For instance, the
+[email](https://github.com/github/github-services/blob/master/lib/services/email.rb)
+service is a built-in GitHub service that will send event [payloads](#payloads)
+to, at most, two email addresses.  It will trigger for the `push`
+event by default and supports the `public` event type as well.
+
+A number of services have been integrated through the open source
+[github-services](https://github.com/github/github-services) project.  When
+[creating a hook](/webhooks/creating/), the `:name` parameter must refer to one of
+these services.
+
+Documentation for all available service hooks can be found in the
+[docs directory](https://github.com/github/github-services/tree/master/docs)
+of the github-services repository.  A JSON representation of their names,
+default events, supported events, and configuration options can be seen
+at <a href='https://api.github.com/hooks' data-proofer-ignore>https://api.github.com/hooks</a>.

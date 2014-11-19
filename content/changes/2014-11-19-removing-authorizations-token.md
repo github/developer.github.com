@@ -58,9 +58,9 @@ for the same client ID and user.
   For example, to differentiate installations of a desktop application across
   multiple devices you might set `fingerprint` to
   `SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")`. Since
-  `fingerprint` is not meant to be a user facing value, you should still set
-  `note` to help a user differentiate between authorizations on their
-  [OAuth applications listing on GitHub][app-listing]
+  `fingerprint` is not meant to be a user-facing value, you should still set
+  the `note` attribute to help a user differentiate between authorizations on their
+  [OAuth applications listing on GitHub][app-listing].
 
 * [Get-or-create an authorization for a specific app and fingerprint][get-or-create-for-app-fingerprint]
 is a new API that is analagous to the

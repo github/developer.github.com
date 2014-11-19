@@ -11,7 +11,7 @@ majority of the [Authorizations API](/v3/oauth_authorizations/) responses. For t
 
 ## What's changing?
 
-The current OAuth Authorizations API requires GitHub to store the full value for
+The current [OAuth Authorizations API](/v3/oauth_authorizations/) requires GitHub to store the full value for
 each OAuth token on our servers. In order to increase the security for our
 users, we are changing our architecture to store the SHA-256 digest of OAuth
 tokens instead. GitHub securely hashes user passwords using bcrypt and we want

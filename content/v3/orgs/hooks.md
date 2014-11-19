@@ -25,7 +25,7 @@ Organization webhooks allow you to receive HTTP POST payloads whenever certain e
 
 ## Scopes & Restrictions
 
-All actions against organization webhooks require the authenticated user to be an admin of the organization being managed. Additionally, OAuth tokens require the "admin:org_hook" [scope](/v3/oauth/#scopes).
+All actions against organization webhooks require the authenticated user to be an admin of the organization being managed. Additionally, OAuth tokens require the `admin:org_hook` [scope](/v3/oauth/#scopes).
 
 In order to protect sensitive data which may be present in webhook configurations, we also enforce the following access control rules:
 

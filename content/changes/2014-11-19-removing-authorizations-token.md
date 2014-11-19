@@ -73,11 +73,11 @@ following custom media type in the Accept header:
 
     application/vnd.github.mirage-preview+json
 
-The preview period will last 4-6 weeks. At the end of the preview period, the
-changes to the  Authorizations API will become an official component of GitHub
-API v3. At that point, developers will be given 8 weeks to update existing code
-to use the new APIs before it is the default for all users. At each of these
-milestones we will provide updates on the developer blog.
+We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.
+
+## Migration period
+
+At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.
 
 ## Why SHA-256 over bcrypt?
 
@@ -87,7 +87,6 @@ in order to mitigate brute force attacks against low entropy passwords. However,
 OAuth tokens are highly random and are not susceptible to brute force attacks.
 Given that OAuth token validation occurs for each request to the API we chose
 SHA-256 for performance reasons.
-
 
 If you have any questions or feedback, please [drop us a line][contact].
 

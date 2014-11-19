@@ -187,7 +187,6 @@ services to the [github-services repository][github-services].
 [org-hooks]: /v3/orgs/hooks/
 [repo-hooks]: /v3/repos/hooks/
 [repo-hooks-show]: /v3/repos/hooks/#get-single-hook
-[repo-hooks-edit]: /v3/repos/hooks/#edit-a-hook
 [repo-hooks-create]: /v3/repos/hooks/#create-a-hook
 [repo-hooks-ping]: /v3/repos/hooks/#ping-a-hook
 [events-api]: /v3/activity/events/
@@ -195,6 +194,4 @@ services to the [github-services repository][github-services].
 [event-types-push]: /v3/activity/events/types/#pushevent
 [github-services]: https://github.com/github/github-services
 [github-services-docs]: https://github.com/github/github-services/tree/master/docs
-[irc-service]: https://github.com/github/github-services/blob/master/lib/services/irc.rb
-[email-service]: https://github.com/github/github-services/blob/master/lib/services/email.rb
 [oauth-applications]: /v3/oauth/

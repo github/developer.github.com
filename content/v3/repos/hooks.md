@@ -11,6 +11,8 @@ The Repository Webhooks API allows repository admins to manage the post-receive
 hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
 or the [PubSubHubbub API](#pubsubhubbub).
 
+If you would like to set up a single webhook to receive events from all or your organization's respositories, check out our [API documentation for Organization Webhooks][org-hooks].
+
 ## List hooks
 
     GET /repos/:owner/:repo/hooks
@@ -212,3 +214,4 @@ Name | Type | Description
 [pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify
 [events-url]: /webhooks/#events
 [ping-event-url]: /webhooks/#ping-event
+[org-hooks]: /v3/orgs/hooks/

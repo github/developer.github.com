@@ -13,9 +13,9 @@ the repository is pushed to. These "webhooks" can be used to update an external
 issue tracker, trigger CI builds, update a backup mirror, or even deploy to your
 production server.
 
-Each hook can be configured for a specific [service](#service-hooks) and one or
-more [events](#events), regardless of the API used to do so. Repository admins
-can configure hooks programmatically [via the API](/v3/repos/hooks/).
+Each hook can be configured for a specific [service][service-hooks-section] and one or
+more [events][events-section], regardless of the API used to do so. Repository admins
+can configure hooks programmatically [via the API][repo-hooks].
 
 
 ## Events
@@ -25,22 +25,20 @@ events. In other words, the service must support listening for the event you
 want to trigger.
 
 For example, generic webhooks supports listening for all events, while the
-[IRC](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
-service can only listen for `push`, `issues`, `pull_request`, `commit_comment`,
-`pull_request_review_comment`, and `issue_comment` events.
+[IRC][irc-service] service can only listen for `push`, `issues`, `pull_request`,
+`commit_comment`, `pull_request_review_comment`, and `issue_comment` events.
 
 Each service also has a set of default events for which it listens if it isn't
 configured. For example, generic webhooks listen only for `push` events by
 default, while the IRC service listens on `push` and `pull_requests` events.
 Service hooks set up via the repository settings UI listen only for the default
-set of events, but can be
-[re-configured via the API](/v3/repos/hooks/#edit-a-hook).
+set of events, but can be [re-configured via the API][repo-hooks-edit].
 
 The available events are:
 
 Name | Description
 -----|-----------|
-`*` | Any time any event is triggered ([Wildcard Event](#wildcard-event)).
+`*` | Any time any event is triggered ([Wildcard Event][wildcard-section]).
 `commit_comment` | Any time a Commit is commented on.
 `create` | Any time a Branch or Tag is created.
 `delete` | Any time a Branch or Tag is deleted.
@@ -71,10 +69,9 @@ automatically get any new events we might add in the future.
 
 ## Payloads
 
-The payloads for all hooks mirror [the payloads for the Event
-types](/v3/activity/events/types/), with the exception of [the original `push`
-event](https://developer.github.com/v3/activity/events/types/#pushevent),
-which has a more detailed payload.
+The payloads for all hooks mirror [the payloads for the Event types][event-types],
+with the exception of [the original `push` event][event-types-push], which has a
+more detailed payload.
 
 A full payload will also show the user who performed the event (`sender`),
 the repository (`repository`), and the organization (`organization`) if applicable.
@@ -86,8 +83,8 @@ headers:
 
 Header | Description
 -------|-------------|
-`X-Github-Event`| Name of the [event](#events) that triggered this delivery.
-`X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`](/v3/repos/hooks/#create-a-hook) as the key (if configured).
+`X-Github-Event`| Name of the [event][events-section] that triggered this delivery.
+`X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`][repo-hooks-create] as the key (if configured).
 `X-Github-Delivery`| Unique ID for this delivery.
 
 Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
@@ -134,8 +131,8 @@ X-Github-Event: issues
 
 When you create a new webhook, we'll send you a simple `ping` event to let you
 know you've set up the webhook correctly. This event isn't stored so it isn't
-retrievable via the [Events API](/v3/activity/events/). You can trigger a `ping`
-again by calling the [ping endpoint](/v3/repos/hooks/#ping-a-hook).
+retrievable via the [Events API][events-api]. You can trigger a `ping`
+again by calling the [ping endpoint][repo-hooks-ping].
 
 ### Ping Event Payload
 
@@ -143,7 +140,7 @@ Key | Value |
 ----| ----- |
 zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
-hook | The [webhook configuration](/v3/repos/hooks/#get-single-hook) |
+hook | The [webhook configuration][repo-hooks-show] |
 
 
 ## Service Hooks
@@ -151,19 +148,36 @@ hook | The [webhook configuration](/v3/repos/hooks/#get-single-hook) |
 A service is basically the name used to refer to a webhook that has configuration
 settings, a list of available events, and default events.
 
-For instance, the
-[email](https://github.com/github/github-services/blob/master/lib/services/email.rb)
-service is a built-in GitHub service that will send event [payloads](#payloads)
+For instance, the [email][email-service]
+service is a built-in GitHub service that will send event [payloads][payloads-section]
 to, at most, two email addresses.  It will trigger for the `push`
 event by default and supports the `public` event type as well.
 
 A number of services have been integrated through the open source
-[github-services](https://github.com/github/github-services) project.  When
-[creating a hook](/webhooks/creating/), the `:name` parameter must refer to one of
+[github-services][github-services] project.  When
+[creating a hook][webhooks-guide-create], the `:name` parameter must refer to one of
 these services.
 
 Documentation for all available service hooks can be found in the
-[docs directory](https://github.com/github/github-services/tree/master/docs)
-of the github-services repository.  A JSON representation of their names,
-default events, supported events, and configuration options can be seen
-at <a href='https://api.github.com/hooks' data-proofer-ignore>https://api.github.com/hooks</a>.
+[docs directory][github-services-docs] of the github-services repository. A JSON
+representation of their names, default events, supported events, and configuration
+options can be seen at <a href='https://api.github.com/hooks' data-proofer-ignore>https://api.github.com/hooks</a>.
+
+
+[service-hooks-section]: #service-hooks
+[events-section]: #events
+[wildcard-section]: #wildcard-event
+[payloads-section]: #payloads
+[webhooks-guide-create]: /webhooks/creating/
+[repo-hooks]: /v3/repos/hooks/
+[repo-hooks-show]: /v3/repos/hooks/#get-single-hook
+[repo-hooks-edit]: /v3/repos/hooks/#edit-a-hook
+[repo-hooks-create]: /v3/repos/hooks/#create-a-hook
+[repo-hooks-ping]: /v3/repos/hooks/#ping-a-hook
+[events-api]: /v3/activity/events/
+[event-types]: /v3/activity/events/types/
+[event-types-push]: /v3/activity/events/types/#pushevent
+[github-services]: https://github.com/github/github-services
+[github-services-docs]: https://github.com/github/github-services/tree/master/docs
+[irc-service]: https://github.com/github/github-services/blob/master/lib/services/irc.rb
+[email-service]: https://github.com/github/github-services/blob/master/lib/services/email.rb

@@ -84,8 +84,8 @@ occurred on.
 
 ### Delivery headers
 
-HTTP requests made to your server's endpoint will contain several special
-headers:
+HTTP requests made to your webhook's configured URL endpoint will contain
+several special headers:
 
 Header | Description
 -------|-------------|

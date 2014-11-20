@@ -43,7 +43,7 @@ The [Admin Stats][], [License][], [Search Indexing][], and [User Administration]
 [Search Indexing]: search_indexing/
 [Management Console]: management_console/
 [User Administration]: /v3/users/administration/
-[Management Console password]: https://enterprise.github.com/help/articles/setting-the-management-console-password
+[Management Console password]: https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/
 
 ## Past Releases
 

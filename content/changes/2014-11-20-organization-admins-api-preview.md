@@ -1,14 +1,14 @@
 ---
 kind: change
 title: Previewing the new way to manage organization admins
-created_at: 2014-11-10
+created_at: 2014-11-20
 author_name: jakeboxer
 ---
-We have some upcoming changes that will affect the way organization members are managed. The most important change is that **on December 3, 2014, the Owners team will no longer be special**.
+We have some upcoming changes that will affect the way organization members are managed. The most important change is that **on January 13, 2015, the Owners team will no longer be special**.
 
 ### What's happening to the Owners team?
 
-Currently, members of your Owners team are administrators of your organization. On **December 3rd, 2014**, your Owners team will become a totally normal team. Adding and removing Owners team members won't change their administrator status anymore. Instead, you'll be able to directly grant admin permissions to your organization's members without adding them to any special teams.
+Currently, members of your Owners team are administrators of your organization. On **January 13, 2015**, your Owners team will become a totally normal team. Adding and removing Owners team members won't change their administrator status anymore. Instead, you'll be able to directly grant admin permissions to your organization's members without adding them to any special teams.
 
 We won't delete your Owners team, but you'll be able to delete or rename it yourself if you want. Organizations created after December 3 won't have an Owners team.
 
@@ -28,11 +28,11 @@ To check if a given user is an organization admin, use the new [Get organization
 
 ### How long do I have to make the switch?
 
-Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last 7 days. On November 16, these additions will become official components of GitHub API v3.
+Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last 21 days. On December 11, these additions will become official components of GitHub API v3.
 
-Between **November 16 and December 2**, developers should update their applications to use the new APIs for managing organization admins. During this period, you will still be able to use the Owners team to manage your organization's admins, so that you have time to update your applications to use the new APIs without breakage.
+Between **December 11, 2014 and January 12, 2015**, developers should update their applications to use the new APIs for managing organization admins. During this period, you will still be able to use the Owners team to manage your organization's admins, so that you have time to update your applications to use the new APIs without breakage.
 
-On **December 3**, the Owners team will no longer be special. You'll no longer be able to rely on the Owners team for managing organization admins after this date.
+On **January 13, 2015**, the Owners team will no longer be special. You'll no longer be able to rely on the Owners team for managing organization admins after this date.
 
 ### Preview period
 

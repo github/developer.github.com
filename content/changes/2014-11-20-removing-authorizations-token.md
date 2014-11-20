@@ -11,8 +11,8 @@ via the Authorizations API. We are deprecating the use use of the `token`
 attribute in the majority of the [Authorizations API](/v3/oauth_authorizations/)
 responses. For the [affected APIs][authorizations-token-deprecation-notice], the
 `token` attribute will soon return an empty string. To get ready for that
-change, we're giving developers a chance to
-[preview the updated API](#preview-	period) starting today.
+change, we are giving developers a chance to
+[preview the updated API](#preview-period) starting today.
 
 ## What's changing?
 
@@ -68,7 +68,7 @@ API, but adds support for the new `fingerprint` request parameter.
 
 ## Preview period
 
-We’re making the new Authorizations API available today for developers to
+We are making the new Authorizations API available today for developers to
 preview. During this period, we may change aspects of these endpoints. If we do,
 we will announce the changes on the developer blog, but we will not provide any
 advance notice.

@@ -30,7 +30,7 @@ To check if a given user is an organization admin, use the new [Get organization
 
 ### Preview period
 
-Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last for three weeks. At the end of the preview period, these additions will become official components of GitHub API v3.
+Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last for three weeks. At the end of the preview period, these additions will become official components of the GitHub API.
 
 While these additions are in their preview period, you'll need to provide the following custom media type in the `Accept` header:
 

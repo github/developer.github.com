@@ -28,7 +28,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
   </ul>
 
   <p>
-    Please see <a href="/changes/2014-11-19-removing-authorizations-token/">the blog post</a> for full details.
+    Please see <a href="/changes/2014-11-20-removing-authorizations-token/">the blog post</a> for full details.
   </p>
 
   <p>

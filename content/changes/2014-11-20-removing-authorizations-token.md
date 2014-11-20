@@ -1,16 +1,18 @@
 ---
 kind: change
 title: Removing token attribute from the Oauth Authorizations API responses (breaking change)
-created_at: 2014-11-19
+created_at: 2014-11-20
 author_name: ptoomey3
 ---
 
-Today, we are announcing the deprecation of the `token` attribute from the
-majority of [Authorizations API](/v3/oauth_authorizations/) responses. For the
-affected APIs, the `token` attribute will return an empty string after the
-updated API has [been finalized](#preview-period) and we have given developers
-time to update existing code. See the
-[Authorizations API deprecation notice][authorizations-token-deprecation-notice]
+Since OAuth access tokens function like passwords, they should be treated with
+care. Today we are making it easier to more securely work with authorizations
+via the Authorizations API. We are deprecating the use of the `token` attribute
+from the majority of [Authorizations API](/v3/oauth_authorizations/) responses.
+For the affected APIs, the `token` attribute will return an empty string after
+the updated API has [been finalized](#preview-period) and we have given
+developers time to update existing code. See the
+[Authorizations API deprecation notice ][authorizations-token-deprecation-notice]
 for a complete list of APIs that are affected.
 
 ## What's changing?

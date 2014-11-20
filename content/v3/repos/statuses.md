@@ -21,6 +21,12 @@ services to mark commits as passing or failing builds using Status.  The
 `description` would be the high level summary of what happened with the
 build.
 
+Statuses can include a `context` to indicate what service is providing that status. 
+For example, you may have your continuous integration service push statuses with a context of `ci`,
+and a security audit tool push statuses with a context of `security`.  You can
+then use the [combined status endpoint](https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref) 
+to retrieve the whole status for a commit.
+
 Note that the `repo:status` [OAuth scope](/v3/oauth/#scopes) grants targeted
 access to Statuses **without** also granting access to repository code, while the
 `repo` scope grants permission to code as well as statuses.
@@ -30,6 +36,9 @@ access to Statuses **without** also granting access to repository code, while th
 Users with push access can create commit statuses for a given ref:
 
     POST /repos/:owner/:repo/statuses/:sha
+
+Note: there is a limit of 1000 statuses per `sha` and `context` within a Repository. 
+Attempts to create more than 1000 statuses will result in a validation error.
 
 ### Parameters
 

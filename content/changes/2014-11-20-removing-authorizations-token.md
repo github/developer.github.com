@@ -1,39 +1,36 @@
 ---
 kind: change
-title: Removing token attribute from the Oauth Authorizations API responses (breaking change)
+title: Removing token attribute from Authorizations API responses
 created_at: 2014-11-20
 author_name: ptoomey3
 ---
 
 Since OAuth access tokens function like passwords, they should be treated with
 care. Today we are making it easier to more securely work with authorizations
-via the Authorizations API. We are deprecating the use of the `token` attribute
-from the majority of [Authorizations API](/v3/oauth_authorizations/) responses.
-For the affected APIs, the `token` attribute will return an empty string after
-the updated API has [been finalized](#preview-period) and we have given
-developers time to update existing code. See the
-[Authorizations API deprecation notice ][authorizations-token-deprecation-notice]
-for a complete list of APIs that are affected.
+via the Authorizations API. We are deprecating the use use of the `token`
+attribute in the majority of the [Authorizations API](/v3/oauth_authorizations/)
+responses. For the [affected APIs][authorizations-token-deprecation-notice], the
+`token` attribute will soon return an empty string. To get ready for that
+change, we're giving developers a chance to
+[preview the updated API](#preview-	period) starting today.
 
 ## What's changing?
 
-The current OAuth Authorizations API requires GitHub to store the full value for
+The current [OAuth Authorizations API](/v3/oauth_authorizations/) requires GitHub to store the full value for
 each OAuth token on our servers. In order to increase the security for our
 users, we are changing our architecture to store the SHA-256 digest of OAuth
 tokens instead. GitHub securely hashes user passwords using bcrypt and we want
-to provide comparable security for our users' OAuth tokens as well. To be clear,
-this change is a 100% proactive measure from GitHub and is not associated with
-any security incident.
+to provide comparable security for OAuth tokens as well.
+
+Rest assured that this change is an entirely proactive measure from GitHub and is not associated with any security incident.
 
 ## Who is affected?
 
-Any code that relies on accessing the `token` attribute from
+This change affects any code that relies on accessing the `token` attribute from
 [these OAuth Authorizations API responses][authorizations-token-deprecation-notice].
 For example, our own [GitHub for Mac][github-for-mac] and
-[GitHub for Windows][github-for-windows] applications relied on reading `token`
-from the [Get-or-create an authorization for a specific app][get-or-create-for-app]
-Authorizations API to allow multiple installations of our desktop application
-for a single user.
+[GitHub for Windows][github-for-windows] applications relied on reading the `token`
+from the [Get-or-create an authorization for a specific app][get-or-create-for-app] API, in order to support multiple installations of our desktop application for a single user.
 
 ## What should you do?
 
@@ -60,9 +57,9 @@ for the same client ID and user.
   For example, to differentiate installations of a desktop application across
   multiple devices you might set `fingerprint` to
   `SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")`. Since
-  `fingerprint` is not meant to be a user facing value, you should still set
-  `note` to help a user differentiate between authorizations on their
-  [OAuth applications listing on GitHub][app-listing]
+  `fingerprint` is not meant to be a user-facing value, you should still set
+  the `note` attribute to help a user differentiate between authorizations on their
+  [OAuth applications listing on GitHub][app-listing].
 
 * [Get-or-create an authorization for a specific app and fingerprint][get-or-create-for-app-fingerprint]
 is a new API that is analagous to the
@@ -81,11 +78,11 @@ following custom media type in the Accept header:
 
     application/vnd.github.mirage-preview+json
 
-The preview period will last 4-6 weeks. At the end of the preview period, the
-changes to the  Authorizations API will become an official component of GitHub
-API v3. At that point, developers will be given 8 weeks to update existing code
-to use the new APIs before it is the default for all users. At each of these
-milestones we will provide updates on the developer blog.
+We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.
+
+## Migration period
+
+At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.
 
 ## Why SHA-256 over bcrypt?
 
@@ -95,7 +92,6 @@ in order to mitigate brute force attacks against low entropy passwords. However,
 OAuth tokens are highly random and are not susceptible to brute force attacks.
 Given that OAuth token validation occurs for each request to the API we chose
 SHA-256 for performance reasons.
-
 
 If you have any questions or feedback, please [drop us a line][contact].
 

@@ -106,6 +106,20 @@ member of the team.
 
 ## Get team member
 
+### Deprecation notice
+
+<div class="alert">
+  <p>
+    The "Get team member" API (described below) is
+    <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for
+    removal in the next major version of the API.
+
+    We recommend using the
+    <a href="/v3/orgs/teams/#get-team-membership">Get team membership API</a>
+    instead. It allows you to get both active and pending memberships.
+  </p>
+</div>
+
 In order to get if a user is a member of a team, the authenticated user
 must be a member of the team.
 
@@ -120,6 +134,20 @@ must be a member of the team.
 <%= headers 404 %>
 
 ## Add team member
+
+### Deprecation notice
+
+<div class="alert">
+  <p>
+    The "Add team member" API (described below) is
+    <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for
+    removal in the next major version of the API.
+
+    We recommend using the
+    <a href="/v3/orgs/teams/#add-team-membership">Add team membership API</a>
+    instead. It allows you to invite new organization members to your teams.
+  </p>
+</div>
 
 In order to add a user to a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the organization that the team
@@ -160,6 +188,20 @@ one other team on the same organization, you will get this:
 %>
 
 ## Remove team member
+
+### Deprecation notice
+
+<div class="alert">
+  <p>
+    The "Remove team member" API (described below) is
+    <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for
+    removal in the next major version of the API.
+
+    We recommend using the
+    <a href="/v3/orgs/teams/#remove-team-membership">Remove team membership API</a>
+    instead. It allows you to remove both active and pending memberships.
+  </p>
+</div>
 
 In order to remove a user from a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the org that the team

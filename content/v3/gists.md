@@ -68,11 +68,11 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`files`|`hash` | **Required**. Files that make up this gist.
+`files`|`object` | **Required**. Files that make up this gist.
 `description`|`string` | A description of the gist.
 `public`|`boolean` | Indicates whether the gist is public. Default: `false`
 
-The keys in the `files` hash are the `string` filename, and the value is another `hash` with a key of `content`, and a value of the file contents. For example:
+The keys in the `files` object are the `string` filename, and the value is another `object` with a key of `content`, and a value of the file contents. For example:
 
 <%= json \
   :description => "the description for this gist",
@@ -102,11 +102,11 @@ The keys in the `files` hash are the `string` filename, and the value is another
 Name | Type | Description
 -----|------|--------------
 `description`|`string` | A description of the gist.
-`files`|`hash` | Files that make up this gist.
+`files`|`object` | Files that make up this gist.
 `content`|`string` | Updated file contents.
 `filename`|`string` | New name for this file.
 
-The keys in the `files` hash are the `string` filename. The value is another `hash` with a key of `content` (indicating the new contents), or `filename` (indicating the new filename). For example:
+The keys in the `files` object are the `string` filename. The value is another `object` with a key of `content` (indicating the new contents), or `filename` (indicating the new filename). For example:
 
 <%= json \
   :description => "the description for this gist",

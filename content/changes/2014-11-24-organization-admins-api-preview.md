@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Previewing the new way to manage organization admins
-created_at: 2014-11-20
+created_at: 2014-11-24
 author_name: jakeboxer
 ---
 We have some upcoming changes that will affect the way organization members are managed. The most important change is that **the Owners team will no longer be special**.

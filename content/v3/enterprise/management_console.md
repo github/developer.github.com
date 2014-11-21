@@ -11,7 +11,7 @@ The Management Console API helps you manage your GitHub Enterprise installation.
 
 ## Authentication
 
-You need to pass your [Management Console password](https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/) as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-and-software-package-for-the-first-time).
+You need to pass your [Management Console password](https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/) as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-for-the-first-time).
 
 Use the `api_key` parameter to send this token with each request. For example:
 
@@ -25,9 +25,9 @@ You can also use standard HTTP authentication to send this token. For example:
 $ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
 </pre>
 
-## Upload a license and software package for the first time
+## Upload a license for the first time
 
-When you boot a virtual machine for the first time, you can use the following endpoint to upload a license and software package:
+When you boot a virtual machine for the first time, you can use the following endpoint to upload a license:
 
     POST /setup/api/start
 
@@ -38,7 +38,6 @@ Note that you need to POST to [`/setup/api/configure`](#start-a-configuration-pr
 Name | Type | Description
 -----|------|--------------
 `license`|`string` | **Required**. The content of your *.ghl* license file.
-`package`|`string`|**Required**. The content of your *.ghp* package file.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
 
 For a list of the available settings, see [the `/setup/api/settings` endpoint](#retrieve-settings).
@@ -53,12 +52,12 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/start' -F package=@<em>/path/to/package.ghp</em> -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
-## Upgrade a license or software package
+## Upgrade a license
 
-This API upgrades your license or package and also triggers the configuration process:
+This API upgrades your license and also triggers the configuration process:
 
     POST /setup/api/upgrade
 
@@ -67,7 +66,6 @@ This API upgrades your license or package and also triggers the configuration pr
 Name | Type | Description
 -----|------|--------------
 `license`|`string` |  The content of your new *.ghl* license file.
-`package`|`string`| The content of your new *.ghp* package file.
 
 ### Response
 
@@ -79,7 +77,7 @@ Location: http://hostname/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/upgrade' -F package=@<em>/path/to/package.ghp</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade'
 </pre>
 
 ## Check configuration status
@@ -108,7 +106,7 @@ Status        | Description
 ### Example
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configcheck'
 </pre>
 
 ## Start a configuration process
@@ -127,7 +125,7 @@ Location: http://hostname/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configure'
 </pre>
 
 ## Retrieve settings
@@ -142,7 +140,7 @@ curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/
 ### Example
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings'
 </pre>
 
 ## Modify settings
@@ -164,7 +162,7 @@ HTTP/1.1 204 No Content
 ### Example
 
 <pre class="terminal">
-curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
+curl -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
 </pre>
 
 ## Check maintenance status
@@ -181,7 +179,7 @@ Check your installation's maintenance status:
 ### Example
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
 ## Enable or disable maintenance mode
@@ -208,7 +206,7 @@ The possible values for `when` are `now` or any date parseable by
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
 </pre>
 
 ## Retrieve authorized SSH keys
@@ -223,7 +221,7 @@ curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/
 ### Example
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
 </pre>
 
 ## Add a new authorized SSH key
@@ -244,7 +242,7 @@ Name | Type | Description
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
 ## Remove an authorized SSH key
@@ -265,5 +263,5 @@ Name | Type | Description
 ### Example
 
 <pre class="terminal">
-curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>

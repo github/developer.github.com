@@ -18,7 +18,11 @@ In preparation for this change, we're releasing a few new APIs. You'll be able t
 
 #### Adding an organization admin
 
-To add a new organization admin, use the new [Add organization membership][add-org-membership] endpoint, specifying a role of `"admin"` in the request body. This replaces adding or inviting people to the Owners team.
+To add a new organization admin, use the new [Add or update organization membership][add-org-membership] endpoint, specifying a role of `"admin"` in the request body. This replaces adding or inviting people to the Owners team.
+
+#### Removing an organization admin
+
+To remove someone from the organization role but keep them as a member of their teams, use the new [Add or update organization membership] endpoint, specifying a role of `"member"` in the request body. This replaces removing people from the Owners team.
 
 #### Listing organization admins
 

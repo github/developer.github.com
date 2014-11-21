@@ -55,8 +55,8 @@
 
 <ul id="markdown-toc">
   <li><a href="#authentication">Authentication</a></li>
-  <li><a href="#upload-a-license-and-software-package-for-the-first-time">Upload a license and software package for the first time</a></li>
-  <li><a href="#upgrade-a-license-or-software-package">Upgrade a license or software package</a></li>
+  <li><a href="#upload-a-license-for-the-first-time">Upload a license for the first time</a></li>
+  <li><a href="#upgrade-a-license">Upgrade a license</a></li>
   <li><a href="#check-configuration-status">Check configuration status</a></li>
   <li><a href="#start-a-configuration-process">Start a configuration process</a></li>
   <li><a href="#retrieve-settings">Retrieve settings</a></li>
@@ -72,7 +72,7 @@
 
 <h2 id="authentication">Authentication</h2>
 
-<p>You need to pass your <a href="https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-and-software-package-for-the-first-time"><code>/setup/api/start</code></a>.</p>
+<p>You need to pass your <a href="https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-for-the-first-time"><code>/setup/api/start</code></a>.</p>
 
 <p>Use the <code>api_key</code> parameter to send this token with each request. For example:</p>
 
@@ -86,9 +86,9 @@ $ curl 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em
 $ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
 </pre>
 
-<h2 id="upload-a-license-and-software-package-for-the-first-time">Upload a license and software package for the first time</h2>
+<h2 id="upload-a-license-for-the-first-time">Upload a license for the first time</h2>
 
-<p>When you boot a virtual machine for the first time, you can use the following endpoint to upload a license and software package:</p>
+<p>When you boot a virtual machine for the first time, you can use the following endpoint to upload a license:</p>
 
 <pre><code>POST /setup/api/start
 </code></pre>
@@ -113,12 +113,6 @@ $ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/ap
 <strong>Required</strong>. The content of your <em>.ghl</em> license file.</td>
     </tr>
     <tr>
-      <td><code>package</code></td>
-      <td><code>string</code></td>
-      <td>
-<strong>Required</strong>. The content of your <em>.ghp</em> package file.</td>
-    </tr>
-    <tr>
       <td><code>settings</code></td>
       <td><code>string</code></td>
       <td>Optional path to a JSON file containing your installation settings.</td>
@@ -138,12 +132,12 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 <h3 id="example">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/start' -F package=@<em>/path/to/package.ghp</em> -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
-<h2 id="upgrade-a-license-or-software-package">Upgrade a license or software package</h2>
+<h2 id="upgrade-a-license">Upgrade a license</h2>
 
-<p>This API upgrades your license or package and also triggers the configuration process:</p>
+<p>This API upgrades your license and also triggers the configuration process:</p>
 
 <pre><code>POST /setup/api/upgrade
 </code></pre>
@@ -164,11 +158,6 @@ curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/
       <td><code>string</code></td>
       <td>The content of your new <em>.ghl</em> license file.</td>
     </tr>
-    <tr>
-      <td><code>package</code></td>
-      <td><code>string</code></td>
-      <td>The content of your new <em>.ghp</em> package file.</td>
-    </tr>
   </tbody>
 </table>
 
@@ -182,7 +171,7 @@ Location: http://hostname/setup/api/configcheck
 <h3 id="example-1">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/upgrade' -F package=@<em>/path/to/package.ghp</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade'
 </pre>
 
 <h2 id="check-configuration-status">Check configuration status</h2>
@@ -259,7 +248,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-2">Example</h3>
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configcheck'
 </pre>
 
 <h2 id="start-a-configuration-process">Start a configuration process</h2>
@@ -279,7 +268,7 @@ Location: http://hostname/setup/api/configcheck
 <h3 id="example-3">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configure'
 </pre>
 
 <h2 id="retrieve-settings">Retrieve settings</h2>
@@ -415,7 +404,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-4">Example</h3>
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings'
 </pre>
 
 <h2 id="modify-settings">Modify settings</h2>
@@ -452,7 +441,7 @@ HTTP/1.1 204 No Content
 <h3 id="example-5">Example</h3>
 
 <pre class="terminal">
-curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
+curl -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
 </pre>
 
 <h2 id="check-maintenance-status">Check maintenance status</h2>
@@ -490,7 +479,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-6">Example</h3>
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
 <h2 id="enable-or-disable-maintenance-mode">Enable or disable maintenance mode</h2>
@@ -552,7 +541,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-7">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
 </pre>
 
 <h2 id="retrieve-authorized-ssh-keys">Retrieve authorized SSH keys</h2>
@@ -580,7 +569,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-8">Example</h3>
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
 </pre>
 
 <h2 id="add-a-new-authorized-ssh-key">Add a new authorized SSH key</h2>
@@ -632,7 +621,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-9">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
 <h2 id="remove-an-authorized-ssh-key">Remove an authorized SSH key</h2>
@@ -680,7 +669,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-10">Example</h3>
 
 <pre class="terminal">
-curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
     </div>

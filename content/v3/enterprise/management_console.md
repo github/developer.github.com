@@ -22,7 +22,7 @@ $ curl 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em
 You can also use standard HTTP authentication to send this token. For example:
 
 <pre class="terminal">
-$ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
+$ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api'
 </pre>
 
 ## Upload a license and software package for the first time

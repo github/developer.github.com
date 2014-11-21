@@ -74,7 +74,7 @@
 
 <h2 id="authentication">Authentication</h2>
 
-<p>You need to pass your <a href="https://enterprise.github.com/help/articles/setting-the-management-console-password">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-and-software-package-for-the-first-time"><code>/setup/api/start</code></a>.</p>
+<p>You need to pass your <a href="https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-for-the-first-time"><code>/setup/api/start</code></a>.</p>
 
 <p>Use the <code>api_key</code> parameter to send this token with each request. For example:</p>
 
@@ -88,9 +88,9 @@ $ curl 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em
 $ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
 </pre>
 
-<h2 id="upload-a-license-and-software-package-for-the-first-time">Upload a license and software package for the first time</h2>
+<h2 id="upload-a-license-for-the-first-time">Upload a license for the first time</h2>
 
-<p>When you boot a virtual machine for the first time, you can use the following endpoint to upload a license and software package:</p>
+<p>When you boot a virtual machine for the first time, you can use the following endpoint to upload a license:</p>
 
 <pre><code>POST /setup/api/start
 </code></pre>
@@ -115,12 +115,6 @@ $ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/ap
 <strong>Required</strong>. The content of your <em>.ghl</em> license file.</td>
     </tr>
     <tr>
-      <td><code>package</code></td>
-      <td><code>string</code></td>
-      <td>
-<strong>Required</strong>. The content of your <em>.ghp</em> package file.</td>
-    </tr>
-    <tr>
       <td><code>settings</code></td>
       <td><code>string</code></td>
       <td>Optional path to a JSON file containing your installation settings.</td>
@@ -140,12 +134,12 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 <h3 id="example">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/start' -F package=@<em>/path/to/package.ghp</em> -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
-<h2 id="upgrade-a-license-or-software-package">Upgrade a license or software package</h2>
+<h2 id="upgrade-a-license">Upgrade a license</h2>
 
-<p>This API upgrades your license or package and also triggers the configuration process:</p>
+<p>This API upgrades your license and also triggers the configuration process:</p>
 
 <pre><code>POST /setup/api/upgrade
 </code></pre>
@@ -166,11 +160,6 @@ curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/
       <td><code>string</code></td>
       <td>The content of your new <em>.ghl</em> license file.</td>
     </tr>
-    <tr>
-      <td><code>package</code></td>
-      <td><code>string</code></td>
-      <td>The content of your new <em>.ghp</em> package file.</td>
-    </tr>
   </tbody>
 </table>
 
@@ -184,7 +173,7 @@ Location: http://hostname/setup/api/configcheck
 <h3 id="example-1">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/upgrade' -F package=@<em>/path/to/package.ghp</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade'
 </pre>
 
 <h2 id="check-configuration-status">Check configuration status</h2>
@@ -261,7 +250,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-2">Example</h3>
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configcheck'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configcheck'
 </pre>
 
 <h2 id="start-a-configuration-process">Start a configuration process</h2>
@@ -270,27 +259,6 @@ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/ap
 
 <pre><code>POST /setup/api/configure
 </code></pre>
-
-<h3 id="parameters-2">Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>complete</code></td>
-      <td><code>string</code></td>
-      <td>An optional parameter which, if set to <code>1</code>, ensures that the process is executed completely by running through the entire provisioning process. This can take up to twenty minutes to finish.</td>
-    </tr>
-  </tbody>
-</table>
-
-<p><strong>Note</strong>: Typically, you wouldn’t need to set <code>complete</code> to <code>1</code> if you’re just updating your settings. Upgrades should <em>always</em> be full runs.</p>
 
 <h3 id="response-3">Response</h3>
 
@@ -302,7 +270,7 @@ Location: http://hostname/setup/api/configcheck
 <h3 id="example-3">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/configure'
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configure'
 </pre>
 
 <h2 id="retrieve-settings">Retrieve settings</h2>
@@ -438,7 +406,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-4">Example</h3>
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings'
 </pre>
 
 <h2 id="modify-settings">Modify settings</h2>
@@ -446,7 +414,7 @@ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/ap
 <pre><code>PUT /setup/api/settings
 </code></pre>
 
-<h3 id="parameters-3">Parameters</h3>
+<h3 id="parameters-2">Parameters</h3>
 
 <table>
   <thead>
@@ -475,7 +443,7 @@ HTTP/1.1 204 No Content
 <h3 id="example-5">Example</h3>
 
 <pre class="terminal">
-curl -X PUT 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
+curl -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
 </pre>
 
 <h2 id="check-maintenance-status">Check maintenance status</h2>
@@ -513,7 +481,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-6">Example</h3>
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
 <h2 id="enable-or-disable-maintenance-mode">Enable or disable maintenance mode</h2>
@@ -521,7 +489,7 @@ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/ap
 <pre><code>POST /setup/api/maintenance
 </code></pre>
 
-<h3 id="parameters-4">Parameters</h3>
+<h3 id="parameters-3">Parameters</h3>
 
 <table>
   <thead>
@@ -575,7 +543,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-7">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
 </pre>
 
 <h2 id="retrieve-authorized-ssh-keys">Retrieve authorized SSH keys</h2>
@@ -603,7 +571,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-8">Example</h3>
 
 <pre class="terminal">
-curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
 </pre>
 
 <h2 id="add-a-new-authorized-ssh-key">Add a new authorized SSH key</h2>
@@ -611,7 +579,7 @@ curl 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/ap
 <pre><code>POST /setup/api/settings/authorized-keys
 </code></pre>
 
-<h3 id="parameters-5">Parameters</h3>
+<h3 id="parameters-4">Parameters</h3>
 
 <table>
   <thead>
@@ -655,7 +623,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-9">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
 <h2 id="remove-an-authorized-ssh-key">Remove an authorized SSH key</h2>
@@ -663,7 +631,7 @@ curl -X POST 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/
 <pre><code>DELETE /setup/api/settings/authorized-keys
 </code></pre>
 
-<h3 id="parameters-6">Parameters</h3>
+<h3 id="parameters-5">Parameters</h3>
 
 <table>
   <thead>
@@ -703,7 +671,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-10">Example</h3>
 
 <pre class="terminal">
-curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
     </div>
@@ -911,7 +879,6 @@ curl -X DELETE 'http://license:<em>md5-checksum-of-license</em>@<em>hostname</em
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
     ga('create', 'UA-3769691-37', 'github.com');
     ga('send', 'pageview');
   </script>

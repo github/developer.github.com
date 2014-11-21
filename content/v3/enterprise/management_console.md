@@ -11,7 +11,7 @@ The Management Console API helps you manage your GitHub Enterprise installation.
 
 ## Authentication
 
-You need to pass your [Management Console password](https://enterprise.github.com/help/articles/setting-the-management-console-password) as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-and-software-package-for-the-first-time).
+You need to pass your [Management Console password](https://enterprise.github.com/help/articles/setting-the-management-console-password) as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-for-the-first-time).
 
 Use the `api_key` parameter to send this token with each request. For example:
 
@@ -25,9 +25,9 @@ You can also use standard HTTP authentication to send this token. For example:
 $ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
 </pre>
 
-## Upload a license and software package for the first time
+## Upload a license for the first time
 
-When you boot a virtual machine for the first time, you can use the following endpoint to upload a license and software package:
+When you boot a virtual machine for the first time, you can use the following endpoint to upload a license:
 
     POST /setup/api/start
 
@@ -38,7 +38,6 @@ Note that you need to POST to [`/setup/api/configure`](#start-a-configuration-pr
 Name | Type | Description
 -----|------|--------------
 `license`|`string` | **Required**. The content of your *.ghl* license file.
-`package`|`string`|**Required**. The content of your *.ghp* package file.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
 
 For a list of the available settings, see [the `/setup/api/settings` endpoint](#retrieve-settings).
@@ -53,12 +52,12 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/start' -F package=@<em>/path/to/package.ghp</em> -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
-## Upgrade a license or software package
+## Upgrade a license
 
-This API upgrades your license or package and also triggers the configuration process:
+This API upgrades your license and also triggers the configuration process:
 
     POST /setup/api/upgrade
 
@@ -67,7 +66,6 @@ This API upgrades your license or package and also triggers the configuration pr
 Name | Type | Description
 -----|------|--------------
 `license`|`string` |  The content of your new *.ghl* license file.
-`package`|`string`| The content of your new *.ghp* package file.
 
 ### Response
 
@@ -79,7 +77,7 @@ Location: http://hostname/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade' -F package=@<em>/path/to/package.ghp</em>
+curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade'
 </pre>
 
 ## Check configuration status

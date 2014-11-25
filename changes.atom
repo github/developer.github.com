@@ -2,13 +2,54 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-10-29T00:00:00Z</updated>
+  <updated>2014-11-25T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-11-25:/changes/2014-11-25-the-deployments-api-is-official/</id>
+    <title type="html">The Deployments API is official</title>
+    <published>2014-11-25T00:00:00Z</published>
+    <updated>2014-11-25T00:00:00Z</updated>
+    <author>
+      <name>atmos</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-11-25-the-deployments-api-is-official/" />
+    <content type="html">&lt;p&gt;We’re happy to announce that the &lt;a href="/v3/repos/deployments"&gt;Deployments API&lt;/a&gt; is officially part
+of GitHub API v3. We now consider it stable for production use.&lt;/p&gt;
+
+&lt;p&gt;Thanks to everyone who provided feedback during the preview period. We got
+some great feedback, and hope this feature helps you build the tools you
+need to make GitHub the best place to ship exactly the way you want.&lt;/p&gt;
+
+&lt;h3 id="preview-media-type-no-longer-needed"&gt;Preview media type no longer needed&lt;/h3&gt;
+
+&lt;p&gt;If you used the Deployments API during the preview period, you needed to
+provide a custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.cannonball-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that the preview period has ended, you no longer need to pass this custom
+media type.&lt;/p&gt;
+
+&lt;p&gt;Instead, we &lt;a href="/v3/media"&gt;recommend&lt;/a&gt; that you specify &lt;code&gt;v3&lt;/code&gt; as the version in the
+&lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="feedback"&gt;Feedback&lt;/h3&gt;
+
+&lt;p&gt;We’ll never be done listening to you! As always, please don’t hesitate to
+&lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;share your feedback&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-10-29:/changes/2014-10-24-status-api-limits/</id>
     <title type="html">Status API Limits</title>
@@ -991,139 +1032,6 @@ the Combined Status API will become an official component of GitHub API v3. At
 that point, this new API will be stable and suitable for production use.&lt;/p&gt;
 
 &lt;p&gt;We hope you’ll &lt;a href="/v3/repos/statuses/"&gt;try it out&lt;/a&gt; and &lt;a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API"&gt;send us your feedback&lt;/a&gt;!&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-03-18:/changes/2014-03-18-paginating-method-changes/</id>
-    <title type="html">Pagination changes for some resource lists</title>
-    <published>2014-03-18T00:00:00Z</published>
-    <updated>2014-03-18T00:00:00Z</updated>
-    <author>
-      <name>pengwynn</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-03-18-paginating-method-changes/" />
-    <content type="html">&lt;p&gt;In an effort to keep the API fast for everyone, we’re enabling
-&lt;a href="/v3/#pagination"&gt;pagination&lt;/a&gt; on some API methods that previously did not support it.
-Beginning today, the methods below will paginate if you include &lt;code&gt;page&lt;/code&gt; or
-&lt;code&gt;per_page&lt;/code&gt; query parameters. Starting April 17th, 2014, these methods will
-&lt;em&gt;always&lt;/em&gt; return &lt;a href="/v3/#pagination"&gt;paginated results&lt;/a&gt;. If you have any questions or
-run into trouble, feel free to &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Pagination+changes"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Here’s the complete list of updated methods:&lt;/p&gt;
-
-&lt;h4 id="gist-comments"&gt;&lt;a href="/v3/gists/comments/#list-comments-on-a-gist"&gt;Gist comments&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /gists/:gist_id/comments
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="gist-commits"&gt;&lt;a href="/v3/gists/#list-gist-commits"&gt;Gist commits&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /gists/:gist_id/commits
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="gist-forks"&gt;&lt;a href="/v3/gists/#list-gist-forks"&gt;Gist forks&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /gists/:gist_id/forks
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="git-refs"&gt;&lt;a href="/v3/git/refs/#get-all-references"&gt;Git refs&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/git/refs
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="issue-labels"&gt;&lt;a href="/v3/issues/labels/#list-labels-on-an-issue"&gt;Issue labels&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/issues/:number/labels
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="milestone-labels"&gt;&lt;a href="/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone"&gt;Milestone labels&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/milestones/:id/labels
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="organization-teams"&gt;&lt;a href="/v3/orgs/teams/#list-teams"&gt;Organization teams&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /orgs/:org/teams
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="pull-request-commits"&gt;&lt;a href="/v3/pulls/#list-commits-on-a-pull-request"&gt;Pull Request commits&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/pulls/:number/commits
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="pull-request-files"&gt;&lt;a href="/v3/pulls/#list-pull-requests-files"&gt;Pull Request files&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/pulls/:number/files
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="release-assets"&gt;&lt;a href="/v3/repos/releases/#list-assets-for-a-release"&gt;Release assets&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/releases/:id/assets
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="repository-collaborators"&gt;&lt;a href="/v3/repos/collaborators/#list"&gt;Repository collaborators&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/collaborators
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="repository-contributors"&gt;&lt;a href="/v3/repos/#list-contributors"&gt;Repository contributors&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/contributors
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="repository-branches"&gt;&lt;a href="/v3/repos/#list-branches"&gt;Repository branches&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/branches
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="repository-downloads"&gt;&lt;a href="/v3/repos/downloads/#list-downloads-for-a-repository"&gt;Repository downloads&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/downloads
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="repository-keys"&gt;&lt;a href="/v3/repos/keys/#list"&gt;Repository keys&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/keys
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="repository-labels"&gt;&lt;a href="/v3/issues/labels/#list-all-labels-for-this-repository"&gt;Repository labels&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/labels
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="repository-tags"&gt;&lt;a href="/v3/repos/#list-tags"&gt;Repository tags&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/tags
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="repository-teams"&gt;&lt;a href="/v3/repos/#list-teams"&gt;Repository teams&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/teams
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="team-members"&gt;&lt;a href="/v3/orgs/teams/#list-team-members"&gt;Team members&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /teams/:id/members
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="team-repositories"&gt;&lt;a href="/v3/orgs/teams/#list-team-repos"&gt;Team repositories&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /teams/:id/repos
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="user-emails-v3-media-type-only"&gt;
-&lt;a href="/v3/users/emails/#list-email-addresses-for-a-user"&gt;User emails&lt;/a&gt; (v3 media type only)&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /user/emails
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id="user-keys"&gt;&lt;a href="/v3/users/keys/#list-public-keys-for-a-user"&gt;User keys&lt;/a&gt;&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /users/:user/keys
-GET /user/keys
-&lt;/code&gt;&lt;/pre&gt;
 
 </content>
   </entry>

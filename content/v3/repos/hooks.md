@@ -11,7 +11,7 @@ The Repository Webhooks API allows repository admins to manage the post-receive
 hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
 or the [PubSubHubbub API](#pubsubhubbub).
 
-If you would like to set up a single webhook to receive events from all or your organization's respositories, check out our [API documentation for Organization Webhooks][org-hooks].
+If you would like to set up a single webhook to receive events from all of your organization's respositories, check out our [API documentation for Organization Webhooks][org-hooks].
 
 ## List hooks
 

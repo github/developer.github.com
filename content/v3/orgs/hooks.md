@@ -7,18 +7,17 @@ title: Organization Webhooks | GitHub API
 * TOC
 {:toc}
 
-<div class="alert">
-  <p>
-    The Organization Webhooks API is currently available for developers to preview.
-    During the preview period, the API may change without advance notice.
-    Please see the <a href="/changes/#TODO">blog post <strong style="color:red;">[UPDATE LINK]</strong></a> for full details.
-  </p>
+{{#tip}}
 
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.sersi-preview+json</pre>
-  </p>
-</div>
+  The Organization Webhooks API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/#TODO">blog post <strong style="color:red;">[UPDATE LINK]</strong></a> for full details.
+
+  To access the API during the preview period, you must provide a custom [media type][media-type] in the `Accept` header:
+
+      application/vnd.github.sersi-preview+json
+
+{{/tip}}
 
 
 Organization webhooks allow you to receive HTTP POST payloads whenever certain events happen within the organization. Subscribing to these events makes it possible to build integrations that react to actions on GitHub.com.
@@ -158,3 +157,4 @@ Name | Description
 [hub-signature]: https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77
 [ping-event-url]: /webhooks/#ping-event
 [event-types]: /v3/activity/events/types/
+[media-type]: /v3/media

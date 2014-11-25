@@ -20,7 +20,7 @@ title: Organization Webhooks | GitHub API
 {{/tip}}
 
 
-Organization webhooks allow you to receive HTTP POST payloads whenever certain events happen within the organization. Subscribing to these events makes it possible to build integrations that react to actions on GitHub.com.
+Organization webhooks allow you to receive HTTP `POST` payloads whenever certain events happen within the organization. Subscribing to these events makes it possible to build integrations that react to actions on GitHub.com.
 
 ## Scopes & Restrictions
 

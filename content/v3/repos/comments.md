@@ -38,7 +38,6 @@ Comments are ordered by ascending ID.
 
 Name | Type | Description 
 -----|------|--------------
-`sha`|`string` | **Required**. The SHA of the commit to comment on.
 `body`|`string` | **Required**. The contents of the comment.
 `path`|`string` | Relative path of the file to comment on.
 `position`|`number` | Line index in the diff to comment on.

@@ -138,7 +138,7 @@ In order for GitHub to send webhook payloads, your server needs to be accessible
 
 ### Webhook Headers
 
-GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.
+GitHub will send along several HTTP headers to differentiate between event types and payload identifiers.
 
 Name | Description
 -----|-----------|

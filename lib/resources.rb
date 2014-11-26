@@ -243,9 +243,10 @@ module GitHub
       "source"            => REPO
     })
 
-    STARRED_REPO ||= REPO.merge({
-      "starred_at" => "2011-01-16T19:06:43Z"
-    })
+    STARRED_REPO ||= {
+      "starred_at" => "2011-01-16T19:06:43Z",
+      "repo" => REPO
+    }
 
     TAG ||= {
       "name"        => "v0.1",

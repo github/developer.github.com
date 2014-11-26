@@ -1,15 +1,15 @@
 ---
 kind: change
 title: New Attributes for Starring API
-created_at: 2014-10-22
+created_at: 2014-11-26
 author_name: arfon
 ---
 
-We've made it possible for you to easily find out when a user starred the repositories they're following. This information can be accessed by passing the following custom content type when accessing the [starring API][starring].
+You can now see when a user starred a repository. To receive the new response format containing the `starred_at` field, request the new media type:
 
-    application/vnd.github.v3.star+json
+    curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/users/andrew/starred
 
-Passing this content type adds an additional `starred_at` attribute to the response.
+Note the starred repository is now available in the repo field.
 
 ### Feedback
 

@@ -11,10 +11,9 @@ layout: webhooks
 
 Webhooks allow you to build or set up integrations which subscribe to certain
 events on GitHub.com. When one of those events is triggered, we'll send a
-simple HTTP POST payload to the webhook's configured URL. There a simple web
-app can inspect the payload and perform some useful action. Webhooks can be
-used to update an external issue tracker, trigger CI builds, update a backup
-mirror, or even deploy to your production server. You're only limited by your
+simple HTTP POST payload to the webhook's configured URL.  Webhooks can be used
+to update an external issue tracker, trigger CI builds, update a backup mirror,
+or even deploy to your production server. You're only limited by your
 imagination.
 
 Each webhook can be installed [on an organization][org-hooks] or [a specific

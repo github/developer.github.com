@@ -279,6 +279,25 @@ Key | Type | Description
 
 <%= webhook_payload "member" %>
 
+## MembershipEvent
+
+Triggered when a user is added or removed from a team.
+
+Events of this type are not visible in timelines, they are only used to trigger organization webhooks.
+
+### Event name
+
+`membership`
+
+### Payload
+
+Key | Type | Description
+----|------|-------------
+`action` |`string` | The action that was performed. Can be "added" or "removed".
+`scope`  |`string` | The scope of the membership. Currently, can only be "team".
+`member` |`object` | The [user](/v3/users/) that was added or removed.
+`team`   |`object` | The [team](/v3/orgs/teams/) for the membership.
+
 ## PageBuildEvent
 
 Represents an attempted build of a GitHub Pages site, whether successful or not.
@@ -391,6 +410,23 @@ Key | Type | Description
 `release`|`object` | The [release](/v3/repos/releases/#get-a-single-release) itself.
 
 <%= webhook_payload "release" %>
+
+## RepositoryEvent
+
+Triggered when a repository is created.
+
+Events of this type are not visible in timelines, they are only used to trigger organization webhooks.
+
+### Event name
+
+`repository`
+
+### Payload
+
+Key | Type | Description
+----|------|-------------
+`action` |`string` | The action that was performed. Currently, can only be "created".
+`repository`|`object` | The [repository](/v3/repos/) that was created.
 
 ## StatusEvent
 

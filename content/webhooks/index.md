@@ -159,8 +159,8 @@ a service name instead of "web" (for webhook). The main differences to keep in
 mind between webhooks and service hooks are:
 
 - Service hooks cannot be installed on organizations, only repositories.
-- A service may only be installed at most once per repository, whereas multiple
-  webhooks can be installed on each organization/repository.
+- You can only install a one service per integrator for a repository, whereas
+  multiple webhooks can be installed on each organization/repository.
 - Each service hook only supports a specific set of events, depending on the
   services implementation.
 - Each service has it's own unique set of configuration options.

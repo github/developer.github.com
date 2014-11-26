@@ -12,8 +12,8 @@ which events the webhook should receive. The included payloads below are from we
 match events returned by the [Events API](/v3/activity/events/) (except where noted).
 
 
-Note that some of these events may not be rendered in timelines.
-They're only created for various internal and repository hooks.
+**Note:** Some of these events may not be rendered in timelines, they're only
+created for various internal and webhook purposes.
 
 * TOC
 {:toc}

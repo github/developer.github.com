@@ -8,8 +8,11 @@ layout: webhooks
 * TOC
 {:toc}
 
-In this tutorial, our webhook will be responsible for listing out how popular our
-repository is, based on the number of Issues it receives per day.
+Now that we understand [the basics of webhooks][webhooks-overview], let's go
+through the process of building out our own webhook powered integration.  In
+this tutorial, we'll create a repository webhook that will be responsible for
+listing out how popular our repository is, based on the number of Issues it
+receives per day.
 
 Creating a webhook is a two-step process. You'll first need to set up how you want
 your webhook to behave through GitHub--what events should it listen to. After that,
@@ -17,8 +20,9 @@ you'll set up your server to receive and manage the payload.
 
 ## Setting up a Webhook
 
-To set up a webhook on GitHub, head over to the **Settings** page of your repository,
-and click on **Webhooks & services**. After that, click on **Add webhook**.
+To set up a repository webhook on GitHub, head over to the **Settings** page of
+your repository, and click on **Webhooks & services**. After that, click on
+**Add webhook**.
 
 Alternatively, you can choose to build and manage a webhook [through the Webhooks API][webhook-api].
 
@@ -57,5 +61,6 @@ When you're finished, click on **Add webhook**. Phew! Now that the webhook is cr
 it's time to set up our local server to test the webhook. Head on over to
 [Configuring Your Server](/webhooks/configuring/) to learn how to do that.
 
+[webhooks-overview]: /webhooks/
 [webhook-api]: /v3/repos/hooks/
 [hooks-api]: /webhooks/#events

@@ -9,7 +9,7 @@ title: Releases | GitHub API
 
 ## List releases for a repository
 
-Information about published releases are available to everyone. 
+Information about published releases are available to everyone.
 Only users with push access will receive listings for draft releases.
 
     GET /repos/:owner/:repo/releases
@@ -29,11 +29,17 @@ Git tags that have not been associated with a release.
 
 ### Response
 
+{{#tip}}
+
+<a id="releases-hypermedia-url"/>
+
+**Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://developer.github.com/v3/#hypermedia).
+
+{{/tip}}
+
 <%= headers 200 %>
 <%= json :release %>
 
-**Note:** This returns an `"upload_url"` hypermedia relation that provides the 
-[endpoint that creates release assets](#upload-a-release-asset).
 
 ## Create a release
 
@@ -123,18 +129,16 @@ Users with push access to the repository can delete a release.
 
 ## Upload a release asset
 
-This is a unique endpoint. The request's domain changes from `"api.github.com"`
-to **`"uploads.github.com"`**. You need to use an HTTP client which supports
-[SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this
-endpoint.
-
-The asset data is expected in its raw binary form, rather than JSON. 
-Everything else about the endpoint is the same. 
-Pass your authentication exactly the same as the rest of the API. 
-
-    POST https://uploads.github.com/repos/:owner/:repo/releases/:id/assets?name=foo.zip
-
+This endpoint makes use of [a Hypermedia relation](/v3/#hypermedia) to determine which URL to access.
 This endpoint is provided by a URI template in [the release's API response](#get-a-single-release).
+<span class="not-enterprise">You need to use an HTTP client which supports
+<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a> to make calls to this endpoint.</span>
+
+The asset data is expected in its raw binary form, rather than JSON.
+Everything else about the endpoint is the same as the rest of the API. For example, you'll still need to pass your authentication to be able to upload an asset.
+
+    POST https://<upload_url>/repos/:owner/:repo/releases/:id/assets?name=foo.zip
+
 
 ### Input
 

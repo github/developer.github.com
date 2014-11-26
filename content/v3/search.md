@@ -126,6 +126,16 @@ Find file contents via various criteria. (This method returns up to 100 results 
 
     GET /search/code
 
+### Considerations for code search
+
+Due to the complexity of searching code, there are a few restrictions on how searches are performed:
+
+<ul>
+<li>Only the _default branch_ is considered. In most cases, this will be the `master` branch.</li>
+<li>Only files smaller than 384 KB are searchable.</li>
+<li class='not-enterprise'> You must always include at least one search term when searching source code. For example, searching for <a href="https://github.com/search?utf8=✓&q=language%3Ago&type=Code"><code>language:go</code></a> is not valid, while <a href="https://github.com/search?utf8=✓&q=amazing+language%3Ago&type=Code"><code>amazing language:go</code></a> is.</li>
+</ul>
+
 ### Parameters
 
 Name | Type | Description
@@ -217,34 +227,36 @@ The `q` search term can also contain any combination of the supported issue sear
    Qualifies which fields are searched. With this qualifier you can restrict the
    search to just the title, body, comments, or any combination of these.
  * [`author`](https://help.github.com/articles/searching-issues#search-by-the-author-of-an-issue-or-pull-request)
-   Finds issues created by a certain user.
+   Finds issues or pull requests created by a certain user.
  * [`assignee`](https://help.github.com/articles/searching-issues#search-by-the-assignee-of-an-issue-or-pull-request)
-   Finds issues that are assigned to a certain user.
+   Finds issues or pull requests that are assigned to a certain user.
  * [`mentions`](https://help.github.com/articles/searching-issues#search-by-a-mentioned-user-within-an-issue-or-pull-request)
-   Finds issues that mention a certain user.
+   Finds issues or pull requests that mention a certain user.
  * [`commenter`](https://help.github.com/articles/searching-issues#search-by-a-commenter-within-an-issue-or-pull-request)
-   Finds issues that a certain user commented on.
+   Finds issues or pull requests that a certain user commented on.
  * [`involves`](https://help.github.com/articles/searching-issues#search-by-a-user-thats-involved-within-an-issue-or-pull-request)
-   Finds issues that were either created by a certain user, assigned to that
+   Finds issues or pull requests that were either created by a certain user, assigned to that
      user, mention that user, or were commented on by that user.
+ * [`team`](https://help.github.com/articles/searching-issues/#search-by-a-team-thats-mentioned-within-an-issue-or-pull-request)
+   For organizations you're a member of, finds issues or pull requests that @mention a team within the organization.
  * [`state`](https://help.github.com/articles/searching-issues#search-based-on-whether-an-issue-or-pull-request-is-open)
-   Filter issues based on whether they're open or closed.
+   Filter issues or pull requests based on whether they're open or closed.
  * [`labels`](https://help.github.com/articles/searching-issues#search-by-the-labels-on-an-issue)
-   Filters issues based on their labels.
+   Filters issues or pull requests based on their labels.
  * [`no`](https://help.github.com/articles/searching-issues#search-by-missing-metadata-on-an-issue-or-pull-request)
    Filters items missing certain metadata, such as `label`, `milestone`, or `assignee`
  * [`language`](https://help.github.com/articles/searching-issues#search-by-the-main-language-of-a-repository)
-   Searches for issues within repositories that match a certain language.
+   Searches for issues or pull requests within repositories that match a certain language.
  * [`is`](https://help.github.com/articles/searching-issues#search-based-on-the-state-of-an-issue-or-pull-request)
    Searches for items within repositories that match a certain state, such as `open`, `closed`, or `merged`
  * [`created` or `updated`](https://help.github.com/articles/searching-issues#search-based-on-when-an-issue-or-pull-request-was-created-or-last-updated)
-   Filters issues based on date of creation, or when they were last updated.
+   Filters issues or pull requests based on date of creation, or when they were last updated.
  * [`merged`](https://help.github.com/articles/searching-issues#search-based-on-when-a-pull-request-was-merged)
    Filters pull requests based on the date when they were merged.
  * [`closed`](https://help.github.com/articles/searching-issues#search-based-on-when-an-issue-or-pull-request-was-closed)
-   Filters issues based on the date when they were closed.
+   Filters issues or pull requests based on the date when they were closed.
  * [`comments`](https://help.github.com/articles/searching-issues#search-by-the-number-of-comments-an-issue-or-pull-request-has)
-   Filters issues based on the quantity of comments.
+   Filters issues or pull requests based on the quantity of comments.
  * [`user` or `repo`](https://help.github.com/articles/searching-issues#search-within-a-users-or-organizations-repositories)
    Limits searches to a specific user or repository.
 

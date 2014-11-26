@@ -163,7 +163,7 @@ mind between webhooks and service hooks are:
   multiple webhooks can be installed on each organization/repository.
 - Each service hook only supports a specific set of events, depending on the
   services implementation.
-- Each service has it's own unique set of configuration options.
+- Each service has its own unique set of configuration options.
 
 To see a full list of available services, their supported events, and
 configuration options, check out <a href='https://api.github.com/hooks'

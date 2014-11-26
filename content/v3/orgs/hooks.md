@@ -60,13 +60,19 @@ In order to protect sensitive data which may be present in webhook configuration
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. Must be passed as "web".
-`config`|`hash` | **Required**. Key/value pairs to provide settings for this webhook (documented below).
-`config[url]`          | `string` | **Required** The URL to which the payloads will be delivered.
-`config[content_type]` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
-`config[secret]`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
-`config[insecure_ssl]` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
+`config`|`hash` | **Required**. Key/value pairs to provide settings for this webhook. [These are defined below](#create-hook-config-params).
 `events`|`array` | Determines what [events][event-types] the hook is triggered for.  Default: `["push"]`.
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
+
+<a name="create-hook-config-params"></a>
+The `config` hash can accept the following keys:
+
+Name | Type | Description
+-----|------|--------------
+`url`          | `string` | **Required** The URL to which the payloads will be delivered.
+`content_type` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+`secret`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`insecure_ssl` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
 
 #### Example
 
@@ -96,13 +102,19 @@ Here's how you can create a hook that posts payloads in JSON format:
 
 Name | Type | Description
 -----|------|--------------
-`config`|`hash` | **Required**. Key/value pairs to provide settings for this webhook (documented below).
-`config[url]`          | `string` | **Required** The URL to which the payloads will be delivered.
-`config[content_type]` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
-`config[secret]`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
-`config[insecure_ssl]` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
+`config`|`hash` | **Required**. Key/value pairs to provide settings for this webhook. [These are defined below](#update-hook-config-params).
 `events`|`array` | Determines what [events][event-types] the hook is triggered for.  Default: `["push"]`.
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
+
+<a name="update-hook-config-params"></a>
+The `config` hash can accept the following keys:
+
+Name | Type | Description
+-----|------|--------------
+`url`          | `string` | **Required** The URL to which the payloads will be delivered.
+`content_type` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+`secret`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`insecure_ssl` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
 
 
 #### Example

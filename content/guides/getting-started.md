@@ -522,7 +522,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [scopes]: /v3/oauth/#scopes
 [repos-api]: /v3/repos/
 [pages]: http://pages.github.com
-[nanoc]: http://nanoc.stoneship.org/
+[nanoc]: http://nanoc.ws/
 [gitignore templates]: https://github.com/github/gitignore
 [issues-api]: /v3/issues/
 [link-header]: http://www.w3.org/wiki/LinkHeader

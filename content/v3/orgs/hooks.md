@@ -67,12 +67,7 @@ Name | Type | Description
 <a name="create-hook-config-params"></a>
 The `config` hash can accept the following keys:
 
-Name | Type | Description
------|------|--------------
-`url`          | `string` | **Required** The URL to which the payloads will be delivered.
-`content_type` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
-`secret`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
-`insecure_ssl` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
+<%= fetch_content(:org_hook_config_hash) %>
 
 #### Example
 
@@ -109,12 +104,7 @@ Name | Type | Description
 <a name="update-hook-config-params"></a>
 The `config` hash can accept the following keys:
 
-Name | Type | Description
------|------|--------------
-`url`          | `string` | **Required** The URL to which the payloads will be delivered.
-`content_type` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
-`secret`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
-`insecure_ssl` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
+<%= fetch_content(:org_hook_config_hash) %>
 
 
 #### Example

@@ -18,7 +18,7 @@ collaborators list.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## Check if a user is a collaborator {#get}

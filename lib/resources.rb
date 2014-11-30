@@ -770,6 +770,7 @@ module GitHub
     }
 
     ISSUE ||= {
+      "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1347",
       "number"     => 1347,

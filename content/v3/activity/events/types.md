@@ -418,7 +418,7 @@ Key | Type | Description
 
 Triggered when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).
 
-Events of this type are not visible in timelines, they are only used to trigger hooks.
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Event name
 

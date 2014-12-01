@@ -53,7 +53,7 @@
     <div class="content">
       <h1 id="events">Events</h1>
 
-<p>This is a read-only API to the GitHub events.  These events power the
+<p>This is a read-only API to the GitHub events. These events power the
 various activity streams on the site.</p>
 
 <ul id="markdown-toc">
@@ -90,6 +90,10 @@ X-Poll-Interval: 60
 <p>Events support <a href="/v3/#pagination">pagination</a>,
 however the <code>per_page</code> option is unsupported. The fixed page size is 30 items.
 Fetching up to ten pages is supported, for a total of 300 events.</p>
+
+<p>Only events created within 90 days will be included in timelines. Events
+older than 90 days will not be included (even if the total number of events
+in the timeline is less than 300).</p>
 
 <p>All Events have the same response format:</p>
 

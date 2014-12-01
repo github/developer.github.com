@@ -124,7 +124,7 @@ The user can publicize their own membership.
 
 Name | Type | Description
 -----|------|--------------
-`state`|`string`| Indicates the state of the memberships to return. Can be either `active` or `pending`.
+`state`|`string`| Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, both active and pending memberships are returned.
 
 ### Response
 

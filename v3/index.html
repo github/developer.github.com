@@ -657,39 +657,35 @@ X-RateLimit-Reset: 1372700873
 
 <h2 id="cross-origin-resource-sharing">Cross Origin Resource Sharing</h2>
 
-<p>The API supports Cross Origin Resource Sharing (CORS) for AJAX requests.
-you can read the <a href="http://www.w3.org/TR/cors">CORS W3C working draft</a>, or
+<p>The API supports Cross Origin Resource Sharing (CORS) for AJAX requests from
+any origin.
+You can read the <a href="http://www.w3.org/TR/cors">CORS W3C Recommendation</a>, or
 <a href="http://code.google.com/p/html5security/wiki/CrossOriginRequestSecurity">this intro</a> from the
 HTML 5 Security Guide.</p>
 
 <p>Here’s a sample request sent from a browser hitting
 <code>http://example.com</code>:</p>
 
-<pre><code>$ curl -i https://api.github.com -H "Origin: http://example.com"
-HTTP/1.1 302 Found
-</code></pre>
-
-<p>Any domain that is registered as an OAuth Application is accepted.
-Here’s a sample request for a browser hitting <a href="http://travis-ci.org/">Travis CI</a>:</p>
-
-<pre><code>$ curl -i https://api.github.com -H "Origin: http://travis-ci.org"
+<pre class="terminal">
+$ curl -i https://api.github.com -H "Origin: http://example.com"
 HTTP/1.1 302 Found
 Access-Control-Allow-Origin: *
-Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
 Access-Control-Allow-Credentials: true
-</code></pre>
+</pre>
 
 <p>This is what the CORS preflight request looks like:</p>
 
-<pre><code>$ curl -i https://api.github.com -H "Origin: http://travis-ci.org" -X OPTIONS
+<pre class="terminal">
+$ curl -i https://api.github.com -H "Origin: http://example.com" -X OPTIONS
 HTTP/1.1 204 No Content
 Access-Control-Allow-Origin: *
-Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With
+Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-GitHub-OTP, X-Requested-With
 Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE
-Access-Control-Expose-Headers: ETag, Link, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes
+Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
 Access-Control-Max-Age: 86400
 Access-Control-Allow-Credentials: true
-</code></pre>
+</pre>
 
 <h2 id="json-p-callbacks">JSON-P Callbacks</h2>
 

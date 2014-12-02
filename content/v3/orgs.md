@@ -7,13 +7,9 @@ title: Organizations | GitHub API
 * TOC
 {:toc}
 
-## List User Organizations
+## List your organizations
 
-If you make an unauthenticated call, you will list all [public memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) in organizations for any user. If you make an authenticated call, you will also list hidden memberships in organizations, but only for the currently authenticated user.
-
-    GET /users/:username/orgs
-
-List both hidden and public memberships in organizations for the currently authenticated user.
+List organizations for the authenticated user.
 
     GET /user/orgs
 
@@ -22,7 +18,18 @@ List both hidden and public memberships in organizations for the currently authe
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org) { |h| [h] } %>
 
-## Get an Organization
+## List user organizations
+
+If you make an unauthenticated call, you will list all [public memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) in organizations for any user. If you make an authenticated call, you will also list hidden memberships in organizations, but only for the currently authenticated user.
+
+    GET /users/:username/orgs
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:org) { |h| [h] } %>
+
+## Get an organization
 
     GET /orgs/:org
 
@@ -31,7 +38,7 @@ List both hidden and public memberships in organizations for the currently authe
 <%= headers 200 %>
 <%= json(:full_org) %>
 
-## Edit an Organization
+## Edit an organization
 
     PATCH /orgs/:org
 

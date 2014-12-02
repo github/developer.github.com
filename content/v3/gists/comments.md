@@ -17,7 +17,7 @@ You can read more about the use of media types in the API
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:gist_comment) { |h| [h] } %>
 
 ## Get a single comment
@@ -35,7 +35,7 @@ You can read more about the use of media types in the API
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The comment text.
 
@@ -54,7 +54,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The comment text.
 

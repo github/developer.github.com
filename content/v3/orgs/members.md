@@ -40,7 +40,7 @@ Name    | Type    | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ### Response if requester is not an organization member
@@ -94,7 +94,7 @@ publicized or not.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## Check public membership
@@ -226,26 +226,18 @@ If the specified user is an active member of the organization, this will remove 
 
 ## List your organization memberships
 
-An optional `state` can be passed to request only pending or active memberships.
-
     GET /user/memberships/orgs
-    GET /user/memberships/orgs?state=active
-    GET /user/memberships/orgs?state=pending
 
-### Response when no state is specified
+### Input
+
+Name | Type | Description
+-----|------|--------------
+`state`|`string`| Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, both active and pending memberships are returned.
+
+### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org_memberships) %>
-
-### Response when a "pending" state is specified
-
-<%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:pending_org_memberships) %>
-
-### Response when an "active" state is specified
-
-<%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:active_org_memberships) %>
 
 ## Get your organization membership
 

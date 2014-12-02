@@ -18,7 +18,7 @@ This endpoint is accessible with the user:email scope.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user_email) {|e| [e]} %>
 
 ## Add email address(es)

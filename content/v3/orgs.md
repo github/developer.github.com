@@ -29,7 +29,7 @@ If you make an unauthenticated call, you will list all [public memberships](http
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org) { |h| [h] } %>
 
-## Get an Organization
+## Get an organization
 
     GET /orgs/:org
 
@@ -38,7 +38,7 @@ If you make an unauthenticated call, you will list all [public memberships](http
 <%= headers 200 %>
 <%= json(:full_org) %>
 
-## Edit an Organization
+## Edit an organization
 
     PATCH /orgs/:org
 

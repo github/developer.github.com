@@ -17,10 +17,10 @@ the `membership` event, you'll be notivied whenever a user is added or removed
 from a team.
 
 We’re making this new API for Organization Webhooks available today [for
-developers to preview][docs-preview]. We think developers and existing
-integrations are going to love it, but we want to [get your feedback][contact]
-before we declare the Organization Webhooks API “final” and “unchangeable.” We
-expect the preview period to last for roughly 30-60 days.
+developers to preview][docs-preview]. The preview period will allow us to [get
+your feedback][contact] before declaring the Organization Webhooks API final.
+We expect the preview
+period to last for roughly 30-60 days.
 
 As we discover opportunities to improve the API during the preview period, we
 may ship changes that break clients using the preview version of the API. We

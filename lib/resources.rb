@@ -46,7 +46,7 @@ module GitHub
       end
 
       def headers(status, head = {})
-        css_class = (status == 202 || status == 204 || status == 404) ? 'headers no-response' : 'headers'
+        css_class = (status == 202 || status == 204 || status == 205 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key

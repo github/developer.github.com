@@ -20,7 +20,7 @@ Git tags that have not been associated with a release.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:release) { |h| [h] } %>
 
 ## Get a single release
@@ -124,7 +124,7 @@ Users with push access to the repository can delete a release.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:release_asset) { |h| [h] } %>
 
 ## Upload a release asset

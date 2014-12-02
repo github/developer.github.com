@@ -30,7 +30,7 @@ Webhooks API will be stable and suitable for production use.
 We hope you’ll take it for a spin and [send us your feedback][contact]. We
 can't wait to see what you build.
 
-[dotcom-blog-post]: https://github.com/blog/0000-announcing-organization-webhooks
+[dotcom-blog-post]: https://github.com/blog/1933-organization-webhooks
 [docs]: /v3/orgs/hooks/
 [docs-preview]: /v3/orgs/hooks/#preview-period
 [contact]: https://github.com/contact?form[subject]=Organization+Webhooks

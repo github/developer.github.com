@@ -171,7 +171,7 @@ To see a full list of available services, their supported events, and
 configuration options, check out <a href='https://api.github.com/hooks'
 data-proofer-ignore>https://api.github.com/hooks</a>. Documentation for all
 service hooks can be found in the [docs directory][github-services-docs] of the
-github-services repository. A JSON
+github-services repository.
 
 **Note:** If you are building a new integration, you should build it as webhook.
 We suggest creating an [OAuth application][oauth-applications] to automatically

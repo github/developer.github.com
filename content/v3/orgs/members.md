@@ -27,9 +27,9 @@ Name    | Type    | Description
 
 <div class="alert">
   <p>
-    The Organization Admins API is currently available for developers to preview.
+    The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-20-organization-admins-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -134,9 +134,9 @@ The user can publicize their own membership.
 
 <div class="alert">
   <p>
-    The Organization Admins API is currently available for developers to preview.
+    The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-20-organization-admins-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -168,9 +168,9 @@ In order to get a user's membership with an organization, the authenticated user
 
 <div class="alert">
   <p>
-    The Organization Admins API is currently available for developers to preview.
+    The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-20-organization-admins-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -203,9 +203,9 @@ Name  | Type   | Description
 
 <div class="alert">
   <p>
-    The Organization Admins API is currently available for developers to preview.
+    The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-11-20-organization-admins-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>

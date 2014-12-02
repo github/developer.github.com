@@ -47,7 +47,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull) { |h| [h] } %>
 
 ## Get a single pull request
@@ -149,7 +149,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit) { |h| [h] } %>
 
 Note: The response includes a maximum of 250 commits. If you are working with a pull request larger than that, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the pull request.
@@ -160,7 +160,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:file) { |h| [h] } %>
 
 ## Get if a pull request has been merged

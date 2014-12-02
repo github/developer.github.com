@@ -31,7 +31,7 @@ By default, Issue Comments are ordered by ascending ID.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `sort`|`string` | Either `created` or `updated`. Default: `created`
 `direction`|`string` | Either `asc` or `desc`. Ignored without the `sort` parameter.
@@ -49,7 +49,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json :issue_comment %>
 
 ## Create a comment
@@ -78,7 +78,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The contents of the comment.
 

@@ -46,7 +46,7 @@ module GitHub
       end
 
       def headers(status, head = {})
-        css_class = (status == 202 || status == 204 || status == 404) ? 'headers no-response' : 'headers'
+        css_class = (status == 202 || status == 204 || status == 205 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
@@ -549,6 +549,7 @@ module GitHub
       "diff_url" => "https://github.com/octocat/Hello-World/compare/master...topic.diff",
       "patch_url" => "https://github.com/octocat/Hello-World/compare/master...topic.patch",
       "base_commit" => COMMIT,
+      "merge_base_commit" => COMMIT,
       "status" => "behind",
       "ahead_by" => 1,
       "behind_by" => 2,

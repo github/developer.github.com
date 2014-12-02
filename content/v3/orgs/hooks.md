@@ -11,7 +11,7 @@ title: Organization Webhooks | GitHub API
 
   The Organization Webhooks API is currently available for developers to preview.
   During the preview period, the API may change without advance notice.
-  Please see the <a href="/changes/#TODO">blog post <strong style="color:red;">[UPDATE LINK]</strong></a> for full details.
+  Please see the [blog post][developer-blog-post] for full details.
 
   To access the API during the preview period, you must provide a custom [media type][media-type] in the `Accept` header:
 
@@ -164,3 +164,4 @@ Name | Description
 [event-types]: /v3/activity/events/types/
 [media-type]: /v3/media
 [best-integration-practices]: /guides/best-practices-for-integrators/
+[developer-blog-post]: /changes/2014-12-03-preview-the-new-organization-webhooks-api/

@@ -31,8 +31,7 @@ At the end of preview period, the Organization Webhooks API will become an
 official component of GitHub API v3. At that point, the new Organization
 Webhooks API will be stable and suitable for production use.
 
-We hope you’ll take it for a spin and [send us your feedback][contact]. We
-can't wait to see what you build.
+We hope you’ll take it for a spin and [send us your feedback][contact].
 
 [dotcom-blog-post]: https://github.com/blog/1933-organization-webhooks
 [docs]: /v3/orgs/hooks/

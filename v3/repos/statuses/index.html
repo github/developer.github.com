@@ -73,10 +73,10 @@ services to mark commits as passing or failing builds using Status.  The
 <code>description</code> would be the high level summary of what happened with the
 build.</p>
 
-<p>Statuses can include a <code>context</code> to indicate what service is providing that status. 
+<p>Statuses can include a <code>context</code> to indicate what service is providing that status.
 For example, you may have your continuous integration service push statuses with a context of <code>ci</code>,
 and a security audit tool push statuses with a context of <code>security</code>.  You can
-then use the <a href="https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">combined status endpoint</a> 
+then use the <a href="https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">combined status endpoint</a>
 to retrieve the whole status for a commit.</p>
 
 <p>Note that the <code>repo:status</code> <a href="/v3/oauth/#scopes">OAuth scope</a> grants targeted
@@ -90,7 +90,7 @@ access to Statuses <strong>without</strong> also granting access to repository c
 <pre><code>POST /repos/:owner/:repo/statuses/:sha
 </code></pre>
 
-<p>Note: there is a limit of 1000 statuses per <code>sha</code> and <code>context</code> within a Repository. 
+<p>Note: there is a limit of 1000 statuses per <code>sha</code> and <code>context</code> within a Repository.
 Attempts to create more than 1000 statuses will result in a validation error.</p>
 
 <h3 id="parameters">Parameters</h3>
@@ -215,6 +215,8 @@ list will be the latest one.</p>
 <h3 id="response-1">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 

@@ -7,8 +7,14 @@ author_name: jdpace
 
 Today we're very excited [to announce Organization Webhooks][dotcom-blog-post].
 Organization Webhooks allow you to subscribe to events that happen across an
-entire organization, whether it's an issue being opened or a new repository
-being created.
+entire organization.
+
+In addition to being able to subscribe to the existing repository oriented
+events across an organization, we're also adding some new events which are
+exclusive to organization webhooks. The new `repository` event allows you to
+receive webhook payloads when a new repository is created. By subscribing to
+the `membership` event, you'll be notivied whenever a user is added or removed
+from a team.
 
 We’re making this new API for Organization Webhooks available today [for
 developers to preview][docs-preview]. We think developers and existing

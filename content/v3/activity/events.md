@@ -31,7 +31,7 @@ Events support [pagination](/v3/#pagination),
 however the `per_page` option is unsupported. The fixed page size is 30 items.
 Fetching up to ten pages is supported, for a total of 300 events.
 
-Only events created within 90 days will be included in timelines. Events
+Only events created within the past 90 days will be included in timelines. Events
 older than 90 days will not be included (even if the total number of events
 in the timeline is less than 300).
 

@@ -13,7 +13,7 @@ In addition to being able to subscribe to the existing repository oriented
 events across an organization, we're also adding some new events which are
 exclusive to organization webhooks. The new `repository` event allows you to
 receive webhook payloads when a new repository is created. By subscribing to
-the `membership` event, you'll be notivied whenever a user is added or removed
+the `membership` event, you'll be notified whenever a user is added or removed
 from a team.
 
 We’re making this new API for Organization Webhooks available today [for

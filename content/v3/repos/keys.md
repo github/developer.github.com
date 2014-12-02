@@ -13,7 +13,7 @@ title: Deploy Keys | GitHub API
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:public_key) { |h| [h] } %>
 
 ## Get a deploy key {#get}

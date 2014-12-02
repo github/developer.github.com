@@ -36,7 +36,7 @@ references, you can call:
 
 For a full refs listing, you'll get something that looks like:
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json :refs %>
 
 

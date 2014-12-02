@@ -93,7 +93,7 @@ repositories where the primary language is Assembly. We're sorting by stars in
 descending order, so that the most popular repositories appear first in the
 search results.
 
-<%= headers 200, {'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
+<%= headers 200, {:pagination => default_pagination_rels, 'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
 <%= json(:repo_search_v3_results) %>
 
 ### Highlighting Repository Search Results
@@ -131,7 +131,7 @@ Find file contents via various criteria. (This method returns up to 100 results 
 Due to the complexity of searching code, there are a few restrictions on how searches are performed:
 
 <ul>
-<li>Only the _default branch_ is considered. In most cases, this will be the `master` branch.</li>
+<li>Only the <em>default branch</em> is considered. In most cases, this will be the <code>master</code> branch.</li>
 <li>Only files smaller than 384 KB are searchable.</li>
 <li class='not-enterprise'> You must always include at least one search term when searching source code. For example, searching for <a href="https://github.com/search?utf8=✓&q=language%3Ago&type=Code"><code>language:go</code></a> is not valid, while <a href="https://github.com/search?utf8=✓&q=amazing+language%3Ago&type=Code"><code>amazing language:go</code></a> is.</li>
 </ul>
@@ -178,7 +178,7 @@ Here, we're searching for the keyword `addClass` within a file's contents. We're
 making sure that we're only looking in files where the language is JavaScript.
 And we're scoping the search to the `repo:jquery/jquery` repository.
 
-<%= headers 200, {'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
+<%= headers 200, {:pagination => default_pagination_rels, 'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
 <%= json(:code_search_v3_results) %>
 
 ### Highlighting Code Search Results
@@ -275,7 +275,7 @@ that's labeled as `bug`. The search runs across repositories whose primary
 language is Python. We’re sorting by creation date in ascending order, so that
 the oldest issues appear first in the search results.
 
-<%= headers 200, {'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
+<%= headers 200, {:pagination => default_pagination_rels, 'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
 <%= json(:issue_search_v3_results) %>
 
 ### Highlighting Issue Search Results
@@ -345,7 +345,7 @@ Imagine you're looking for a list of popular users. You might try out this query
 Here, we're looking at users with the name Tom. We're only interested in those
 with more than 42 repositories, and only if they have over 1,000 followers.
 
-<%= headers 200, {'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
+<%= headers 200, {:pagination => default_pagination_rels, 'X-RateLimit-Limit' => 20, 'X-RateLimit-Remaining' => 19} %>
 <%= json(:user_search_v3_results) %>
 
 ### Highlighting User Search Results

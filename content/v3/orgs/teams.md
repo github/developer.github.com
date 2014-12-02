@@ -17,7 +17,7 @@ OAuth users require the "read:org" [scope](/v3/oauth/#scopes).
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:team) { |h| [h] } %>
 
 ## Get team
@@ -101,7 +101,7 @@ member of the team.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## Get team member
@@ -296,7 +296,7 @@ team.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
 ## Check if a team manages a repository {#get-team-repo}
@@ -362,7 +362,7 @@ authenticated user belongs. This method requires `user` or `repo`
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:full_team) { |h| [h] } %>
 
 [OAuth]: /v3/oauth/

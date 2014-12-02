@@ -15,7 +15,7 @@ Lists the _verified_ public keys for a user.  This is accessible by anyone.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:simple_public_key) { |h| [h] } %>
 
 
@@ -29,7 +29,7 @@ Basic Auth or via OAuth with at least `read:public_key`
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:public_key) { |h| [h] } %>
 
 ## Get a single public key

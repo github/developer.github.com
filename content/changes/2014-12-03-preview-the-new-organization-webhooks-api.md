@@ -6,11 +6,9 @@ author_name: jdpace
 ---
 
 Today we're very excited [to announce Organization Webhooks][dotcom-blog-post].
-We're always looking for ways to improve the integration experience and give
-you the tools needed to extend the GitHub experience. Organization Webhooks
-allow you to subscribe to events that happen across an entire
-organization, whether it's an issue being opened or a new repository being
-created.
+Organization Webhooks allow you to subscribe to events that happen across an
+entire organization, whether it's an issue being opened or a new repository
+being created.
 
 We’re making this new API for Organization Webhooks available today [for
 developers to preview][docs-preview]. We think developers and existing

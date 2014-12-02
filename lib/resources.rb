@@ -549,6 +549,7 @@ module GitHub
       "diff_url" => "https://github.com/octocat/Hello-World/compare/master...topic.diff",
       "patch_url" => "https://github.com/octocat/Hello-World/compare/master...topic.patch",
       "base_commit" => COMMIT,
+      "merge_base_commit" => COMMIT,
       "status" => "behind",
       "ahead_by" => 1,
       "behind_by" => 2,

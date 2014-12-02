@@ -54,19 +54,15 @@
       <h1 id="organizations">Organizations</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-user-organizations">List User Organizations</a></li>
+  <li><a href="#list-your-organizations">List your organizations</a></li>
+  <li><a href="#list-user-organizations">List user organizations</a></li>
   <li><a href="#get-an-organization">Get an Organization</a></li>
   <li><a href="#edit-an-organization">Edit an Organization</a></li>
 </ul>
 
-<h2 id="list-user-organizations">List User Organizations</h2>
+<h2 id="list-your-organizations">List your organizations</h2>
 
-<p>If you make an unauthenticated call, you will list all <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public memberships</a> in organizations for any user. If you make an authenticated call, you will also list hidden memberships in organizations, but only for the currently authenticated user.</p>
-
-<pre><code>GET /users/:username/orgs
-</code></pre>
-
-<p>List both hidden and public memberships in organizations for the currently authenticated user.</p>
+<p>List organizations for the authenticated user.</p>
 
 <pre><code>GET /user/orgs
 </code></pre>
@@ -88,12 +84,36 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
+<h2 id="list-user-organizations">List user organizations</h2>
+
+<p>If you make an unauthenticated call, you will list all <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public memberships</a> in organizations for any user. If you make an authenticated call, you will also list hidden memberships in organizations, but only for the currently authenticated user.</p>
+
+<pre><code>GET /users/:username/orgs
+</code></pre>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
 <h2 id="get-an-organization">Get an Organization</h2>
 
 <pre><code>GET /orgs/:org
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -173,7 +193,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"github"</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-2">Response</h3>
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000

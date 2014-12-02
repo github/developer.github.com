@@ -1,12 +1,15 @@
 ---
 kind: change
-title: Previewing the new way to manage organization admins
-created_at: 2014-12-01
+title: Previewing the upcoming organization permission changes
+created_at: 2014-12-03
 author_name: jakeboxer
 ---
-We have some upcoming changes that will affect the way organization members are managed. The most important change is that **the Owners team will no longer be special**.
+We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:
 
-### What's happening to the Owners team?
+- The Owners team will no longer be special.
+- The [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs will include organization-owned repositories that the user has access to.
+
+## What's happening to the Owners team?
 
 Currently, members of your Owners team are administrators of your organization. Soon, your Owners team will become a totally normal team. Adding and removing Owners team members won't change their administrator status anymore. Instead, you'll be able to directly grant admin permissions to your organization's members without adding them to any special teams.
 
@@ -14,7 +17,7 @@ We won't delete your Owners team, but you'll be able to delete or rename it your
 
 ### What should you do?
 
-In preparation for this change, we're releasing a few new APIs. You'll be able to use these APIs to manage organization admins without relying on the Owners team.
+In preparation for this change to the Owners team, we're releasing a few new APIs. You'll be able to use these APIs to manage organization admins without relying on the Owners team.
 
 #### Adding an organization admin
 
@@ -32,9 +35,21 @@ To get a list of all your organization's admins, use the [Organization members l
 
 To check if a given user is an organization admin, use the new [Get organization membership][get-org-membership] endpoint. If the returned `"role"` attribute is set to `"admin"` and the returned `"state"` attribute is set to `"active"`, the user is an organization admin. This replaces checking if a user is on the Owners team.
 
+## What's happening to the "list repositories" APIs?
+
+Currently, the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs only return repositories that are owned by users, not by organizations. This means, if you want a list of all the repositories that you have access to, you need to use multiple API calls.
+
+Soon, these APIs will include all repositories that the user has access to (whether they're owned by a user or by an organization).
+
+### What should you do?
+
+Many apps use the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs in conjunction with the [List your organizations][list-your-orgs], [List user organizations][list-user-orgs], and [List organization repositories][list-org-repos] APIs to build up a list of all the repositories a user has access to. If your app is doing this, you'll be able to get rid of all the organization-related API calls and just use the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs.
+
+If your app uses the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs for another purpose, you'll need to update your app to handle the new organization-owned repositories we'll be returning.
+
 ### Preview period
 
-Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last for three weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.
+Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last for four weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.
 
 While these additions are in their preview period, you'll need to provide the following custom media type in the `Accept` header:
 
@@ -51,6 +66,11 @@ At the end of the migration period, the Owners team will no longer be special, a
 If you have any questions or feedback, please [get in touch with us][contact]!
 
 [contact]: https://github.com/contact?form[subject]=Organization+Admin+Pre-release+Preview
+[list-your-repos]: /v3/repos/#list-your-repositories
+[list-user-repos]: /v3/repos/#list-user-repositories
+[list-your-orgs]: /v3/orgs/#list-your-organizations
+[list-user-orgs]: /v3/orgs/#list-user-organizations
+[list-org-repos]: /v3/repos/#list-organization-repositories
 [add-org-membership]: /v3/orgs/members/#add-or-update-organization-membership
 [list-org-members]: /v3/orgs/members/#members-list
 [get-org-membership]: /v3/orgs/members/#get-organization-membership

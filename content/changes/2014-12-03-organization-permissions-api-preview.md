@@ -37,7 +37,7 @@ To check if a given user is an organization admin, use the new [Get organization
 
 ## What's happening to the "list repositories" APIs?
 
-Currently, the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs only return repositories that are owned by users, not by organizations. This means, if you want a list of all the repositories that you have access to, you need to use multiple API calls.
+Currently, the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs only return repositories that are owned by users, not by organizations. If you want a list of *all* the repositories that you have access to, you need to use multiple API calls.
 
 Soon, these APIs will include all repositories that the user has access to (whether they're owned by a user or by an organization).
 

@@ -47,7 +47,7 @@ Many apps use the [List your repositories][list-your-repos] and [List user repos
 
 If your app uses the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs for another purpose, you'll need to update your app to handle the new organization-owned repositories we'll be returning.
 
-### Preview period
+## Preview period
 
 Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last for four weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.
 
@@ -57,7 +57,7 @@ While these additions are in their preview period, you'll need to provide the fo
 
 During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
 
-### Migration period
+## Migration period
 
 At the end of the preview period, we will announce the start of a migration period. At that time, developers should update their applications to use the new APIs for managing organization admins. During this period, you will still be able to use the Owners team to manage your organization's admins, so that you have time to update your applications to use the new APIs without breakage. We expect the migration period to last for four weeks.
 

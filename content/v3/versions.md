@@ -114,7 +114,7 @@ The recommendations below will help you prepare your application for the next ma
 1. Authorization attribute: token
 : Recommendation: This attribute will return an empty string in the majority of
   the Authorizations API responses. Please see
-  [the deprecation blog post](/changes/2014-11-20-removing-authorizations-token/)
+  [the deprecation blog post](/changes/2014-12-03-removing-authorizations-token/)
   and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
   for full details.
 

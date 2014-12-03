@@ -416,9 +416,9 @@ Key | Type | Description
 
 ## TeamAddEvent
 
-Triggered when a [user is added to a team](/v3/orgs/teams/#add-team-member) or when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).
+Triggered when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).
 
-Note: this event is created in [users' organization timelines](/v3/activity/events/#list-events-for-an-organization).
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Event name
 
@@ -429,7 +429,6 @@ Note: this event is created in [users' organization timelines](/v3/activity/even
 Key | Type | Description
 ----|------|-------------
 `team`|`object` | The [team](/v3/orgs/teams/) that was modified.  Note: older events may not include this in the payload.
-`user`|`object` | The [user](/v3/users/) that was added to this team.
 `repository`|`object` | The [repository](/v3/repos/) that was added to this team.
 
 <%= webhook_payload "team_add" %>

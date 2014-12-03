@@ -46,7 +46,7 @@ module GitHub
       end
 
       def headers(status, head = {})
-        css_class = (status == 202 || status == 204 || status == 404) ? 'headers no-response' : 'headers'
+        css_class = (status == 202 || status == 204 || status == 205 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
@@ -399,17 +399,18 @@ module GitHub
 
 
     PULL ||= {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
-      "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
-      "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
-      "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
-      "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1",
-      "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits",
-      "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments",
+      "id"         => 1,
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1347",
+      "html_url"   => "https://github.com/octocat/Hello-World/pull/1347",
+      "diff_url"   => "https://github.com/octocat/Hello-World/pull/1347.diff",
+      "patch_url"  => "https://github.com/octocat/Hello-World/pull/1347.patch",
+      "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+      "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1347/commits",
+      "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1347/comments",
       "review_comment_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}",
-      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1/comments",
+      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments",
       "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
-      "number"     => 1,
+      "number"     => 1347,
       "state"      => "open",
       "title"      => "new-feature",
       "body"       => "Please pull these awesome changes",
@@ -433,19 +434,19 @@ module GitHub
       },
       "_links" => {
         "self" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347"},
         "html" => {'href' =>
-          "https://github.com/octocat/Hello-World/pull/1"},
+          "https://github.com/octocat/Hello-World/pull/1347"},
         "issue" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/issues/1"},
+          "https://api.github.com/repos/octocat/Hello-World/issues/1347"},
         "comments" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
+          "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments"},
         "review_comments" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347/comments"},
         "review_comment" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}"},
         "commits" => { 'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347/commits"},
         "statuses" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"}
       },
@@ -548,6 +549,7 @@ module GitHub
       "diff_url" => "https://github.com/octocat/Hello-World/compare/master...topic.diff",
       "patch_url" => "https://github.com/octocat/Hello-World/compare/master...topic.patch",
       "base_commit" => COMMIT,
+      "merge_base_commit" => COMMIT,
       "status" => "behind",
       "ahead_by" => 1,
       "behind_by" => 2,
@@ -769,6 +771,7 @@ module GitHub
     }
 
     ISSUE ||= {
+      "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1347",
       "number"     => 1347,

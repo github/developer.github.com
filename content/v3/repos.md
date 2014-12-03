@@ -11,7 +11,7 @@ title: Repositories | GitHub API
 
 List repositories for the authenticated user. Note that this does not include
 repositories owned by organizations which the user can access. You can
-[list user organizations](/v3/orgs/#list-user-organizations) and
+[list user organizations](/v3/orgs/#list-your-organizations) and
 [list organization repositories](/v3/repos/#list-organization-repositories)
 separately.
 
@@ -196,7 +196,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:contributor) { |h| [h] } %>
 
 ## List languages
@@ -219,7 +219,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:team) { |h| [h] } %>
 
 ## List Tags
@@ -228,7 +228,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:tag) { |h| [h] } %>
 
 ## List Branches
@@ -237,7 +237,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:branches) %>
 
 ## Get Branch

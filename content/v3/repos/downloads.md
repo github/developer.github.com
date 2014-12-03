@@ -29,7 +29,7 @@ instead.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:download) { |h| [h] } %>
 
 ## Get a single download

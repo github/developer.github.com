@@ -54,14 +54,14 @@
       <h1 id="event-types--payloads">Event Types &amp; Payloads</h1>
 
 <p>Each event has a similar JSON schema, but a unique <code>payload</code> object that is
-determined by its event type.  </p>
+determined by its event type.</p>
 
 <p>Event names are used by <a href="/v3/repos/hooks/">repository webhooks</a> to specify
 which events the webhook should receive. The included payloads below are from webhook deliveries but
 match events returned by the <a href="/v3/activity/events/">Events API</a> (except where noted).</p>
 
-<p>Note that some of these events may not be rendered in timelines.
-They’re only created for various internal and repository hooks.</p>
+<p><strong>Note:</strong> Some of these events may not be rendered in timelines, they’re only
+created for various internal and webhook purposes.</p>
 
 <ul id="markdown-toc">
   <li><a href="#commitcommentevent">CommitCommentEvent</a></li>
@@ -78,12 +78,14 @@ They’re only created for various internal and repository hooks.</p>
   <li><a href="#issuecommentevent">IssueCommentEvent</a></li>
   <li><a href="#issuesevent">IssuesEvent</a></li>
   <li><a href="#memberevent">MemberEvent</a></li>
+  <li><a href="#membershipevent">MembershipEvent</a></li>
   <li><a href="#pagebuildevent">PageBuildEvent</a></li>
   <li><a href="#publicevent">PublicEvent</a></li>
   <li><a href="#pullrequestevent">PullRequestEvent</a></li>
   <li><a href="#pullrequestreviewcommentevent">PullRequestReviewCommentEvent</a></li>
   <li><a href="#pushevent">PushEvent</a></li>
   <li><a href="#releaseevent">ReleaseEvent</a></li>
+  <li><a href="#repositoryevent">RepositoryEvent</a></li>
   <li><a href="#statusevent">StatusEvent</a></li>
   <li><a href="#teamaddevent">TeamAddEvent</a></li>
   <li><a href="#watchevent">WatchEvent</a></li>
@@ -2090,6 +2092,112 @@ They’re only created for various internal and repository hooks.</p>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
+<h2 id="membershipevent">MembershipEvent</h2>
+
+<p>Triggered when a user is added or removed from a team.</p>
+
+<p>Events of this type are not visible in timelines, they are only used to trigger organization webhooks.</p>
+
+<h3 id="event-name-14">Event name</h3>
+
+<p><code>membership</code></p>
+
+<h3 id="payload-14">Payload</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>action</code></td>
+      <td><code>string</code></td>
+      <td>The action that was performed. Can be “added” or “removed”.</td>
+    </tr>
+    <tr>
+      <td><code>scope</code></td>
+      <td><code>string</code></td>
+      <td>The scope of the membership. Currently, can only be “team”.</td>
+    </tr>
+    <tr>
+      <td><code>member</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="/v3/users/">user</a> that was added or removed.</td>
+    </tr>
+    <tr>
+      <td><code>team</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="/v3/orgs/teams/">team</a> for the membership.</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"added"</span><span class="p">,</span>
+  <span class="s2">"scope"</span><span class="p">:</span> <span class="s2">"team"</span><span class="p">,</span>
+  <span class="s2">"member"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"kdaigle"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2501</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://avatars.githubusercontent.com/u/2501?v=3"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/kdaigle"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/kdaigle/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="s2">"sender"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"baxterthehacker"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">6752317</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://avatars.githubusercontent.com/u/6752317?v=2"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/baxterthehacker"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+  <span class="s2">"team"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Contractors"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">123456</span><span class="p">,</span>
+    <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"contractors"</span><span class="p">,</span>
+    <span class="s2">"permission"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/123456"</span><span class="p">,</span>
+    <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/123456/members{/member}"</span><span class="p">,</span>
+    <span class="s2">"repositories_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/123456/repos"</span>
+  <span class="p">},</span>
+  <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"baxterandthehackers"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">7649605</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers/events"</span><span class="p">,</span>
+    <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers/members{/member}"</span><span class="p">,</span>
+    <span class="s2">"public_members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers/public_members{/member}"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://avatars.githubusercontent.com/u/7649605?v=2"</span>
+  <span class="p">},</span>
+<span class="p">}</span></code></pre>
+
 <h2 id="pagebuildevent">PageBuildEvent</h2>
 
 <p>Represents an attempted build of a GitHub Pages site, whether successful or not.</p>
@@ -2102,7 +2210,7 @@ They’re only created for various internal and repository hooks.</p>
 
 <p><code>page_build</code></p>
 
-<h3 id="payload-14">Payload</h3>
+<h3 id="payload-15">Payload</h3>
 
 <table>
   <thead>
@@ -2265,11 +2373,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Triggered when a private repository is <a href="/v3/repos/#edit">open sourced</a>.  Without a doubt: the best GitHub event.</p>
 
-<h3 id="event-name-14">Event name</h3>
+<h3 id="event-name-15">Event name</h3>
 
 <p><code>public</code></p>
 
-<h3 id="payload-15">Payload</h3>
+<h3 id="payload-16">Payload</h3>
 
 <pre><code class="language-javascript highlight"><span class="p">{</span>
   <span class="s2">"repository"</span><span class="p">:</span> <span class="p">{</span>
@@ -2384,11 +2492,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Triggered when a <a href="/v3/pulls">pull request</a> is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized.</p>
 
-<h3 id="event-name-15">Event name</h3>
+<h3 id="event-name-16">Event name</h3>
 
 <p><code>pull_request</code></p>
 
-<h3 id="payload-16">Payload</h3>
+<h3 id="payload-17">Payload</h3>
 
 <table>
   <thead>
@@ -2834,11 +2942,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Triggered when a <a href="/v3/pulls/comments">comment is created on a portion of the unified diff</a> of a pull request.</p>
 
-<h3 id="event-name-16">Event name</h3>
+<h3 id="event-name-17">Event name</h3>
 
 <p><code>pull_request_review_comment</code></p>
 
-<h3 id="payload-17">Payload</h3>
+<h3 id="payload-18">Payload</h3>
 
 <table>
   <thead>
@@ -3320,11 +3428,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Note: the example payload below is from a webhook delivery. The Event API <code>PushEvent</code> payload will differ.</p>
 
-<h3 id="event-name-17">Event name</h3>
+<h3 id="event-name-18">Event name</h3>
 
 <p><code>push</code></p>
 
-<h3 id="payload-18">Payload</h3>
+<h3 id="payload-19">Payload</h3>
 
 <table>
   <thead>
@@ -3559,11 +3667,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Triggered when a <a href="/v3/repos/releases/#get-a-single-release">release</a> is published.</p>
 
-<h3 id="event-name-18">Event name</h3>
+<h3 id="event-name-19">Event name</h3>
 
 <p><code>release</code></p>
 
-<h3 id="payload-19">Payload</h3>
+<h3 id="payload-20">Payload</h3>
 
 <table>
   <thead>
@@ -3736,17 +3844,171 @@ They’re only created for various internal and repository hooks.</p>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
+<h2 id="repositoryevent">RepositoryEvent</h2>
+
+<p>Triggered when a repository is created.</p>
+
+<p>Events of this type are not visible in timelines, they are only used to trigger organization webhooks.</p>
+
+<h3 id="event-name-20">Event name</h3>
+
+<p><code>repository</code></p>
+
+<h3 id="payload-21">Payload</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>action</code></td>
+      <td><code>string</code></td>
+      <td>The action that was performed. Currently, can only be “created”.</td>
+    </tr>
+    <tr>
+      <td><code>repository</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="/v3/repos/">repository</a> that was created.</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"created"</span><span class="p">,</span>
+  <span class="s2">"repository"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">27496774</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"new-repository"</span><span class="p">,</span>
+    <span class="s2">"full_name"</span><span class="p">:</span> <span class="s2">"baxterandthehackers/new-repository"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"baxterandthehackers"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">7649605</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://avatars.githubusercontent.com/u/7649605?v=3"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/baxterandthehackers"</span><span class="p">,</span>
+      <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/followers"</span><span class="p">,</span>
+      <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/following{/other_user}"</span><span class="p">,</span>
+      <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/gists{/gist_id}"</span><span class="p">,</span>
+      <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/starred{/owner}{/repo}"</span><span class="p">,</span>
+      <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/subscriptions"</span><span class="p">,</span>
+      <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/orgs"</span><span class="p">,</span>
+      <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/repos"</span><span class="p">,</span>
+      <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/events{/privacy}"</span><span class="p">,</span>
+      <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterandthehackers/received_events"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Organization"</span><span class="p">,</span>
+      <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="s2">"private"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/baxterandthehackers/new-repository"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository"</span><span class="p">,</span>
+    <span class="s2">"forks_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/forks"</span><span class="p">,</span>
+    <span class="s2">"keys_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/keys{/key_id}"</span><span class="p">,</span>
+    <span class="s2">"collaborators_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/collaborators{/collaborator}"</span><span class="p">,</span>
+    <span class="s2">"teams_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/teams"</span><span class="p">,</span>
+    <span class="s2">"hooks_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/hooks"</span><span class="p">,</span>
+    <span class="s2">"issue_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/issues/events{/number}"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/events"</span><span class="p">,</span>
+    <span class="s2">"assignees_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/assignees{/user}"</span><span class="p">,</span>
+    <span class="s2">"branches_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/branches{/branch}"</span><span class="p">,</span>
+    <span class="s2">"tags_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/tags"</span><span class="p">,</span>
+    <span class="s2">"blobs_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/git/blobs{/sha}"</span><span class="p">,</span>
+    <span class="s2">"git_tags_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/git/tags{/sha}"</span><span class="p">,</span>
+    <span class="s2">"git_refs_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/git/refs{/sha}"</span><span class="p">,</span>
+    <span class="s2">"trees_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/git/trees{/sha}"</span><span class="p">,</span>
+    <span class="s2">"statuses_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/statuses/{sha}"</span><span class="p">,</span>
+    <span class="s2">"languages_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/languages"</span><span class="p">,</span>
+    <span class="s2">"stargazers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/stargazers"</span><span class="p">,</span>
+    <span class="s2">"contributors_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/contributors"</span><span class="p">,</span>
+    <span class="s2">"subscribers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/subscribers"</span><span class="p">,</span>
+    <span class="s2">"subscription_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/subscription"</span><span class="p">,</span>
+    <span class="s2">"commits_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/commits{/sha}"</span><span class="p">,</span>
+    <span class="s2">"git_commits_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/git/commits{/sha}"</span><span class="p">,</span>
+    <span class="s2">"comments_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/comments{/number}"</span><span class="p">,</span>
+    <span class="s2">"issue_comment_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/issues/comments/{number}"</span><span class="p">,</span>
+    <span class="s2">"contents_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/contents/{+path}"</span><span class="p">,</span>
+    <span class="s2">"compare_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/compare/{base}...{head}"</span><span class="p">,</span>
+    <span class="s2">"merges_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/merges"</span><span class="p">,</span>
+    <span class="s2">"archive_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/{archive_format}{/ref}"</span><span class="p">,</span>
+    <span class="s2">"downloads_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/downloads"</span><span class="p">,</span>
+    <span class="s2">"issues_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/issues{/number}"</span><span class="p">,</span>
+    <span class="s2">"pulls_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/pulls{/number}"</span><span class="p">,</span>
+    <span class="s2">"milestones_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/milestones{/number}"</span><span class="p">,</span>
+    <span class="s2">"notifications_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/notifications{?since,all,participating}"</span><span class="p">,</span>
+    <span class="s2">"labels_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/labels{/name}"</span><span class="p">,</span>
+    <span class="s2">"releases_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/baxterandthehackers/new-repository/releases{/id}"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-12-03T16:39:25Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2014-12-03T16:39:25Z"</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="p">:</span> <span class="s2">"2014-12-03T16:39:25Z"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"git://github.com/baxterandthehackers/new-repository.git"</span><span class="p">,</span>
+    <span class="s2">"ssh_url"</span><span class="p">:</span> <span class="s2">"git@github.com:baxterandthehackers/new-repository.git"</span><span class="p">,</span>
+    <span class="s2">"clone_url"</span><span class="p">:</span> <span class="s2">"https://github.com/baxterandthehackers/new-repository.git"</span><span class="p">,</span>
+    <span class="s2">"svn_url"</span><span class="p">:</span> <span class="s2">"https://github.com/baxterandthehackers/new-repository"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"stargazers_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"watchers_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"has_issues"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"has_downloads"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"has_wiki"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"has_pages"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"forks_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"mirror_url"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"open_issues_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"forks"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"watchers"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"default_branch"</span><span class="p">:</span> <span class="s2">"master"</span>
+  <span class="p">},</span>
+  <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"baxterandthehackers"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">7649605</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers/events"</span><span class="p">,</span>
+    <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers/members{/member}"</span><span class="p">,</span>
+    <span class="s2">"public_members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/baxterandthehackers/public_members{/member}"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://avatars.githubusercontent.com/u/7649605?v=2"</span>
+  <span class="p">},</span>
+  <span class="s2">"sender"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"baxterthehacker"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">6752317</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://avatars.githubusercontent.com/u/6752317?v=2"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/baxterthehacker"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/baxterthehacker/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre>
+
 <h2 id="statusevent">StatusEvent</h2>
 
 <p>Triggered when the status of a Git commit changes.</p>
 
 <p>Events of this type are not visible in timelines, they are only used to trigger hooks.</p>
 
-<h3 id="event-name-19">Event name</h3>
+<h3 id="event-name-21">Event name</h3>
 
 <p><code>status</code></p>
 
-<h3 id="payload-20">Payload</h3>
+<h3 id="payload-22">Payload</h3>
 
 <table>
   <thead>
@@ -3998,11 +4260,11 @@ They’re only created for various internal and repository hooks.</p>
 
 <p>Events of this type are not visible in timelines. These events are only used to trigger hooks.</p>
 
-<h3 id="event-name-20">Event name</h3>
+<h3 id="event-name-22">Event name</h3>
 
 <p><code>team_add</code></p>
 
-<h3 id="payload-21">Payload</h3>
+<h3 id="payload-23">Payload</h3>
 
 <table>
   <thead>
@@ -4162,11 +4424,11 @@ See <a href="/changes/2012-9-5-watcher-api/">this API blog post</a> for an expla
 <p>The event’s actor is the <a href="/v3/users/">user</a> who starred a repository, and the
 event’s repository is the <a href="/v3/repos/">repository</a> that was starred.</p>
 
-<h3 id="event-name-21">Event name</h3>
+<h3 id="event-name-23">Event name</h3>
 
 <p><code>watch</code></p>
 
-<h3 id="payload-22">Payload</h3>
+<h3 id="payload-24">Payload</h3>
 
 <table>
   <thead>
@@ -4363,6 +4625,7 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           <li><a href="/v3/orgs/teams/">Teams</a></li>
+          <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
       </li>
       <li class="js-topic">
@@ -4382,7 +4645,7 @@ event’s repository is the <a href="/v3/repos/">repository</a> that was starred
           <li><a href="/v3/repos/deployments/">Deployments</a></li>
           <li><a href="/v3/repos/downloads/">Downloads</a></li>
           <li><a href="/v3/repos/forks/">Forks</a></li>
-          <li><a href="/v3/repos/hooks/">Hooks</a></li>
+          <li><a href="/v3/repos/hooks/">Webhooks</a></li>
           <li><a href="/v3/repos/merging/">Merging</a></li>
           <li><a href="/v3/repos/pages/">Pages</a></li>
           <li><a href="/v3/repos/releases/">Releases</a></li>

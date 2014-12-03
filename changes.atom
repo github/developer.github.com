@@ -2,13 +2,54 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-11-25T00:00:00Z</updated>
+  <updated>2014-12-03T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-12-03:/changes/2014-12-03-preview-the-new-organization-webhooks-api/</id>
+    <title type="html">Preview the New Organization Webhooks API</title>
+    <published>2014-12-03T00:00:00Z</published>
+    <updated>2014-12-03T00:00:00Z</updated>
+    <author>
+      <name>jdpace</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-12-03-preview-the-new-organization-webhooks-api/" />
+    <content type="html">&lt;p&gt;Today we’re very excited &lt;a href="https://github.com/blog/1933-introducing-organization-webhooks"&gt;to announce Organization Webhooks&lt;/a&gt;.
+Organization Webhooks allow you to subscribe to events that happen across an
+entire organization.&lt;/p&gt;
+
+&lt;p&gt;In addition to being able to subscribe to the existing repository oriented
+events across an organization, we’re also adding some new events which are
+exclusive to organization webhooks. The new &lt;a href="/v3/activity/events/types/#repositoryevent"&gt;&lt;code&gt;repository&lt;/code&gt;
+event&lt;/a&gt; allows you to receive webhook payloads when a new
+repository is created. By subscribing to the &lt;a href="/v3/activity/events/types/#membershipevent"&gt;&lt;code&gt;membership&lt;/code&gt;
+event&lt;/a&gt;, you’ll be notified whenever a user is added or
+removed from a team.&lt;/p&gt;
+
+&lt;p&gt;We’re making this new API for Organization Webhooks available today &lt;a href="/v3/orgs/hooks/#preview-period"&gt;for
+developers to preview&lt;/a&gt;. The preview period will allow us to &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Webhooks"&gt;get
+your feedback&lt;/a&gt; before declaring the Organization Webhooks API final.
+We expect the preview
+period to last for roughly 30-60 days.&lt;/p&gt;
+
+&lt;p&gt;As we discover opportunities to improve the API during the preview period, we
+may ship changes that break clients using the preview version of the API. We
+want to iterate quickly. To do so, we will announce any changes here (on the
+developer blog), but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;At the end of preview period, the Organization Webhooks API will become an
+official component of GitHub API v3. At that point, the new Organization
+Webhooks API will be stable and suitable for production use.&lt;/p&gt;
+
+&lt;p&gt;We hope you’ll take it for a spin and &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Webhooks"&gt;send us your feedback&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-11-25:/changes/2014-11-25-the-deployments-api-is-official/</id>
     <title type="html">The Deployments API is official</title>
@@ -976,60 +1017,6 @@ party applications the ability to create public repositories on your behalf
 without granting access to your private repositories.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+create+repositories+with+public_repo+scope"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-03-27:/changes/2014-03-27-combined-status-api/</id>
-    <title type="html">Preview the New Combined Status API</title>
-    <published>2014-03-27T00:00:00Z</published>
-    <updated>2014-03-27T00:00:00Z</updated>
-    <author>
-      <name>bhuga</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-03-27-combined-status-api/" />
-    <content type="html">&lt;p&gt;What does it mean for a branch to be “green?” The &lt;a href="/v3/repos/statuses/"&gt;Status API&lt;/a&gt; helps
-thousands of teams answer that question. Developers use it to record the status
-of continuous integration builds, contributor license agreements, code coverage
-analysis, automated security testing, dependency management, and more.&lt;/p&gt;
-
-&lt;p&gt;For many teams, a branch is considered “green” only when &lt;em&gt;all&lt;/em&gt; of their various
-status checks are successful. With the new &lt;a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref"&gt;Combined Status
-API&lt;/a&gt;, developers can easily fetch this single, consolidated
-status for any branch, commit, or tag.&lt;/p&gt;
-
-&lt;h3 id="status-context"&gt;Status context&lt;/h3&gt;
-
-&lt;p&gt;To help multiple service providers use the Status API simultaneously, statuses
-now support a &lt;code&gt;context&lt;/code&gt; field. This field allows a provider to distinguish its
-statuses from another provider’s statuses. For example, your &lt;a href="http://jenkins-ci.org/"&gt;Jenkins&lt;/a&gt; builds
-might use a context of &lt;code&gt;ci/jenkins&lt;/code&gt;, while your &lt;a href="http://brakemanscanner.org/"&gt;Brakeman&lt;/a&gt; checks might adopt a
-context of &lt;code&gt;security/brakeman&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;The new &lt;a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref"&gt;Combined Status endpoint&lt;/a&gt; returns a single,
-combined state, as well as the latest status from each context. Systems that
-consume status updates can now get all the information they need in one place.&lt;/p&gt;
-
-&lt;h3 id="opt-in"&gt;Opt-in&lt;/h3&gt;
-
-&lt;p&gt;The existing &lt;a href="/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;Status API&lt;/a&gt; continues to work as it always has. The
-&lt;code&gt;context&lt;/code&gt; field is entirely optional, and the &lt;a href="https://github.com/blog/1227-commit-status-api"&gt;color of the merge button on pull
-requests&lt;/a&gt; does not currently
-take context into account.&lt;/p&gt;
-
-&lt;h3 id="preview-period"&gt;Preview period&lt;/h3&gt;
-
-&lt;p&gt;We’re making this new API available today for developers to
-&lt;a href="/v3/repos/statuses/"&gt;preview&lt;/a&gt;. During this period, we may change aspects of the Combined
-Status API from time to time. We will announce any changes here (on the
-developer blog), but we will not provide any advance notice.&lt;/p&gt;
-
-&lt;p&gt;We expect the preview period to last 30-60 days. At the end of preview period,
-the Combined Status API will become an official component of GitHub API v3. At
-that point, this new API will be stable and suitable for production use.&lt;/p&gt;
-
-&lt;p&gt;We hope you’ll &lt;a href="/v3/repos/statuses/"&gt;try it out&lt;/a&gt; and &lt;a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API"&gt;send us your feedback&lt;/a&gt;!&lt;/p&gt;
 
 </content>
   </entry>

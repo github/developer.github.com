@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Some Hookshot Issues</title>
+  <title>Preview the New Organization Webhooks API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,40 +40,55 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-2-13-hookshot-issues/">
+      <div class="change" id="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">
 <h2 class="title">
-  <a href="/changes/2013-2-13-hookshot-issues/">Some Hookshot Issues</a>
+  <a href="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">Preview the New Organization Webhooks API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 13, 2013
+    December 3, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie"/>
-      <a href="https://github.com/technoweenie">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace"/>
+      <a href="https://github.com/jdpace">jdpace</a>
   </li>
 </ul>
 </div>
 
 
-<p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
-been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
-the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
+<p>Today we’re very excited <a href="https://github.com/blog/1933-introducing-organization-webhooks">to announce Organization Webhooks</a>.
+Organization Webhooks allow you to subscribe to events that happen across an
+entire organization.</p>
 
-<p>If your web hook servers are on EC2 and are missing hooks from GitHub due to
-an IP restriction, we recommend the following:</p>
+<p>In addition to being able to subscribe to the existing repository oriented
+events across an organization, we’re also adding some new events which are
+exclusive to organization webhooks. The new <a href="/v3/activity/events/types/#repositoryevent"><code>repository</code>
+event</a> allows you to receive webhook payloads when a new
+repository is created. By subscribing to the <a href="/v3/activity/events/types/#membershipevent"><code>membership</code>
+event</a>, you’ll be notified whenever a user is added or
+removed from a team.</p>
 
-<ol>
-  <li>Remove the IP white list.</li>
-  <li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
-</ol>
+<p>We’re making this new API for Organization Webhooks available today <a href="/v3/orgs/hooks/#preview-period">for
+developers to preview</a>. The preview period will allow us to <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Webhooks">get
+your feedback</a> before declaring the Organization Webhooks API final.
+We expect the preview
+period to last for roughly 30-60 days.</p>
 
-<p>We’re currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
-if you have any questions.</p>
+<p>As we discover opportunities to improve the API during the preview period, we
+may ship changes that break clients using the preview version of the API. We
+want to iterate quickly. To do so, we will announce any changes here (on the
+developer blog), but we will not provide any advance notice.</p>
+
+<p>At the end of preview period, the Organization Webhooks API will become an
+official component of GitHub API v3. At that point, the new Organization
+Webhooks API will be stable and suitable for production use.</p>
+
+<p>We hope you’ll take it for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Webhooks">send us your feedback</a>.</p>
+
 
 </div>
 

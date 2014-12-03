@@ -117,7 +117,16 @@ module GitHub
       end
 
       CONTENT ||= {
-        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\""
+        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
+        "ORG_HOOK_CONFIG_HASH" =>
+        '''
+Name | Type | Description
+-----|------|--------------
+`url`          | `string` | **Required** The URL to which the payloads will be delivered.
+`content_type` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+`secret`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`insecure_ssl` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
+'''
       }
 
       def fetch_content(key)
@@ -1502,15 +1511,27 @@ module GitHub
     ]
 
     HOOK ||= {
+      "id" => 1,
       "url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1",
-      "updated_at" => "2011-09-06T20:39:23Z",
-      "created_at" => "2011-09-06T17:26:27Z",
       "name" => "web",
       "events" => ["push", "pull_request"],
       "active" => true,
       "config" =>
         {'url' => 'http://example.com', 'content_type' => 'json'},
-      "id" => 1
+      "updated_at" => "2011-09-06T20:39:23Z",
+      "created_at" => "2011-09-06T17:26:27Z",
+    }
+
+    ORG_HOOK ||= {
+      "id" => 1,
+      "url" => "https://api.github.com/orgs/octocat/hooks/1",
+      "name" => "web",
+      "events" => ["push", "pull_request"],
+      "active" => true,
+      "config" =>
+        {'url' => 'http://example.com', 'content_type' => 'json'},
+      "updated_at" => "2011-09-06T20:39:23Z",
+      "created_at" => "2011-09-06T17:26:27Z",
     }
 
     OAUTH_ACCESS ||= {

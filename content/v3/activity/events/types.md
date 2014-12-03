@@ -5,15 +5,15 @@ title: Event Types & Payloads | GitHub API
 # Event Types & Payloads
 
 Each event has a similar JSON schema, but a unique `payload` object that is
-determined by its event type.  
+determined by its event type.
 
 Event names are used by [repository webhooks](/v3/repos/hooks/) to specify
 which events the webhook should receive. The included payloads below are from webhook deliveries but
 match events returned by the [Events API](/v3/activity/events/) (except where noted).
 
 
-Note that some of these events may not be rendered in timelines.
-They're only created for various internal and repository hooks.
+**Note:** Some of these events may not be rendered in timelines, they're only
+created for various internal and webhook purposes.
 
 * TOC
 {:toc}
@@ -279,6 +279,27 @@ Key | Type | Description
 
 <%= webhook_payload "member" %>
 
+## MembershipEvent
+
+Triggered when a user is added or removed from a team.
+
+Events of this type are not visible in timelines, they are only used to trigger organization webhooks.
+
+### Event name
+
+`membership`
+
+### Payload
+
+Key | Type | Description
+----|------|-------------
+`action` |`string` | The action that was performed. Can be "added" or "removed".
+`scope`  |`string` | The scope of the membership. Currently, can only be "team".
+`member` |`object` | The [user](/v3/users/) that was added or removed.
+`team`   |`object` | The [team](/v3/orgs/teams/) for the membership.
+
+<%= webhook_payload "membership" %>
+
 ## PageBuildEvent
 
 Represents an attempted build of a GitHub Pages site, whether successful or not.
@@ -391,6 +412,25 @@ Key | Type | Description
 `release`|`object` | The [release](/v3/repos/releases/#get-a-single-release) itself.
 
 <%= webhook_payload "release" %>
+
+## RepositoryEvent
+
+Triggered when a repository is created.
+
+Events of this type are not visible in timelines, they are only used to trigger organization webhooks.
+
+### Event name
+
+`repository`
+
+### Payload
+
+Key | Type | Description
+----|------|-------------
+`action` |`string` | The action that was performed. Currently, can only be "created".
+`repository`|`object` | The [repository](/v3/repos/) that was created.
+
+<%= webhook_payload "repository" %>
 
 ## StatusEvent
 

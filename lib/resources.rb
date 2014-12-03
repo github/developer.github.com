@@ -46,7 +46,6 @@ module GitHub
       end
 
       def headers(status, head = {})
-        css_class = (status == 202 || status == 204 || status == 205 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
@@ -60,7 +59,7 @@ module GitHub
         lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
         lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
-        %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
+        %(<pre class="headers"><code>#{lines * "\n"}</code></pre>\n)
       end
 
       def link_header(rels)
@@ -99,7 +98,7 @@ module GitHub
 
         hash = yield hash if block_given?
 
-        %(<pre><code class="language-javascript">) +
+        %(<pre class="body-response"><code class="language-javascript">) +
           JSON.pretty_generate(hash) + "</code></pre>"
       end
 

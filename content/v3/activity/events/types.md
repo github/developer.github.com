@@ -5,7 +5,7 @@ title: Event Types & Payloads | GitHub API
 # Event Types & Payloads
 
 Each event has a similar JSON schema, but a unique `payload` object that is
-determined by its event type.  
+determined by its event type.
 
 Event names are used by [repository webhooks](/v3/repos/hooks/) to specify
 which events the webhook should receive. The included payloads below are from webhook deliveries but
@@ -298,6 +298,8 @@ Key | Type | Description
 `member` |`object` | The [user](/v3/users/) that was added or removed.
 `team`   |`object` | The [team](/v3/orgs/teams/) for the membership.
 
+<%= webhook_payload "membership" %>
+
 ## PageBuildEvent
 
 Represents an attempted build of a GitHub Pages site, whether successful or not.
@@ -427,6 +429,8 @@ Key | Type | Description
 ----|------|-------------
 `action` |`string` | The action that was performed. Currently, can only be "created".
 `repository`|`object` | The [repository](/v3/repos/) that was created.
+
+<%= webhook_payload "repository" %>
 
 ## StatusEvent
 

@@ -50,25 +50,6 @@ Name | Type | Description
 
 List public repositories for the specified user.
 
-With the new Organization Permissions API (described below), this *will* include
-public repositories owned by organizations which the user has push or admin
-access to. If you provide the custom media type (described below), you won't
-need to use other APIs to list the specified user's organization-owned
-repositories.
-
-<div class="alert">
-  <p>
-    The Organization Permissions API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon-preview+json</pre>
-  </p>
-</div>
-
     GET /users/:username/repos
 
 ### Parameters

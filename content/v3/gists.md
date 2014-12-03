@@ -136,7 +136,7 @@ The keys in the `files` object are the `string` filename. The value is another `
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => { :next => 'https://api.github.com/resource?page=2' } %>
 <%= json(:gist_history) %>
 
 ## Star a gist

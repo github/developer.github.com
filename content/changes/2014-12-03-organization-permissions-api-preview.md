@@ -7,7 +7,7 @@ author_name: jakeboxer
 We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:
 
 - The Owners team will no longer be special.
-- The [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs will include organization-owned repositories that the user has access to.
+- The [List your repositories][list-your-repos] API will include organization-owned repositories that the authenticated user has access to.
 
 ## What's happening to the Owners team?
 
@@ -35,17 +35,17 @@ To get a list of all your organization's admins, use the [Organization members l
 
 To check if a given user is an organization admin, use the new [Get organization membership][get-org-membership] endpoint. If the returned `"role"` attribute is set to `"admin"` and the returned `"state"` attribute is set to `"active"`, the user is an organization admin. This replaces checking if a user is on the Owners team.
 
-## What's happening to the "list repositories" APIs?
+## What's happening to the "List your repositories" API?
 
-Currently, the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs only return repositories that are owned by users, not by organizations. If you want a list of *all* the repositories that you have access to, you need to use multiple API calls.
+Currently, the [List your repositories][list-your-repos] API only returns repositories that are owned by users, not by organizations. If you want a list of *all* the repositories that the authenticated user has access to, you need to use multiple API calls.
 
-Soon, these APIs will include all repositories that the user has access to (whether they're owned by a user or by an organization).
+Soon, this API will include all repositories that the authenticated user has access to (whether they're owned by a user or by an organization).
 
 ### What should you do?
 
-Many apps use the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs in conjunction with the [List your organizations][list-your-orgs], [List user organizations][list-user-orgs], and [List organization repositories][list-org-repos] APIs to build up a list of all the repositories a user has access to. If your app is doing this, you'll be able to get rid of all the organization-related API calls and just use the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs.
+Many apps use the [List your repositories][list-your-repos] API in conjunction with the [List your organizations][list-your-orgs] and [List organization repositories][list-org-repos] APIs to build up a list of all the repositories the authenticated user has access to. If your app is doing this, you'll be able to get rid of all the organization-related API calls and just use the [List your repositories][list-your-repos] API.
 
-If your app uses the [List your repositories][list-your-repos] and [List user repositories][list-user-repos] APIs for another purpose, you'll need to update your app to handle the new organization-owned repositories we'll be returning.
+If your app uses the [List your repositories][list-your-repos] API for another purpose, you'll need to update your app to handle the new organization-owned repositories we'll be returning.
 
 ## Preview period
 
@@ -67,9 +67,7 @@ If you have any questions or feedback, please [get in touch with us][contact]!
 
 [contact]: https://github.com/contact?form[subject]=Organization+Admin+Pre-release+Preview
 [list-your-repos]: /v3/repos/#list-your-repositories
-[list-user-repos]: /v3/repos/#list-user-repositories
 [list-your-orgs]: /v3/orgs/#list-your-organizations
-[list-user-orgs]: /v3/orgs/#list-user-organizations
 [list-org-repos]: /v3/repos/#list-organization-repositories
 [add-org-membership]: /v3/orgs/members/#add-or-update-organization-membership
 [list-org-members]: /v3/orgs/members/#members-list

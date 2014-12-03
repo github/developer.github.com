@@ -5,7 +5,7 @@ created_at: 2014-12-03
 author_name: jdpace
 ---
 
-Today we're very excited [to announce Organization Webhooks][dotcom-blog-post].
+Today we're very excited to announce Organization Webhooks.
 Organization Webhooks allow you to subscribe to events that happen across an
 entire organization.
 
@@ -34,7 +34,6 @@ Webhooks API will be stable and suitable for production use.
 
 We hope you’ll take it for a spin and [send us your feedback][contact].
 
-[dotcom-blog-post]: https://github.com/blog/1933-introducing-organization-webhooks
 [repository-event]: /v3/activity/events/types/#repositoryevent
 [membership-event]: /v3/activity/events/types/#membershipevent
 [docs]: /v3/orgs/hooks/

@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Previewing the upcoming organization permission changes
+title: Preview the upcoming organization permission changes
 created_at: 2014-12-08
 author_name: jakeboxer
 ---

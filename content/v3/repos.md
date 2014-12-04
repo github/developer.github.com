@@ -26,7 +26,7 @@ list the authenticated user's organization-owned repositories.
   <p>
     The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>

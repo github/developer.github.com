@@ -1,7 +1,7 @@
 ---
 kind: change
 title: Previewing the upcoming organization permission changes
-created_at: 2014-12-03
+created_at: 2014-12-08
 author_name: jakeboxer
 ---
 We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:

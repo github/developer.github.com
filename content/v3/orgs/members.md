@@ -29,7 +29,7 @@ Name    | Type    | Description
   <p>
     The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -136,7 +136,7 @@ The user can publicize their own membership.
   <p>
     The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -170,7 +170,7 @@ In order to get a user's membership with an organization, the authenticated user
   <p>
     The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>
@@ -205,7 +205,7 @@ Name  | Type   | Description
   <p>
     The Organization Permissions API is currently available for developers to preview.
     During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-03-organization-permissions-api-preview/">blog post</a> for full details.
+    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
   </p>
 
   <p>

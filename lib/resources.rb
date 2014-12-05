@@ -105,7 +105,7 @@ module GitHub
       def text_html(response, status, head = {})
         hs = headers(status, head.merge('Content-Type' => 'text/html'))
         res = CGI.escapeHTML(response)
-        hs + %(<pre><code>) + res + "</code></pre>"
+        hs + %(<pre class="body-response"><code>) + res + "</code></pre>"
       end
 
       def webhook_headers(event_name)

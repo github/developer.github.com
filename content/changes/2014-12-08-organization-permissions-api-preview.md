@@ -7,7 +7,7 @@ author_name: jakeboxer
 We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:
 
 - The Owners team will no longer be special.
-- The [List your repositories][list-your-repos] API will include organization-owned repositories that the authenticated user has access to.
+- The [List your repositories][list-your-repos] API will include organization-owned repositories.
 
 ## What's happening to the Owners team?
 

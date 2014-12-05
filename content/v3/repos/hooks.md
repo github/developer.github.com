@@ -1,5 +1,5 @@
 ---
-title: Repository Webhooks | GitHub API
+title: Webhooks | GitHub API
 ---
 
 # Webhooks
@@ -10,8 +10,6 @@ title: Repository Webhooks | GitHub API
 The Repository Webhooks API allows repository admins to manage the post-receive
 hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
 or the [PubSubHubbub API](#pubsubhubbub).
-
-If you would like to set up a single webhook to receive events from all of your organization's respositories, check out our [API documentation for Organization Webhooks][org-hooks].
 
 ## List hooks
 
@@ -138,7 +136,7 @@ In order for GitHub to send webhook payloads, your server needs to be accessible
 
 ### Webhook Headers
 
-GitHub will send along several HTTP headers to differentiate between event types and payload identifiers.
+GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.
 
 Name | Description
 -----|-----------|
@@ -214,4 +212,3 @@ Name | Type | Description
 [pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify
 [events-url]: /webhooks/#events
 [ping-event-url]: /webhooks/#ping-event
-[org-hooks]: /v3/orgs/hooks/

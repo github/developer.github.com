@@ -8,6 +8,7 @@ We have some upcoming changes that will affect the way organization members and 
 
 - The Owners team will no longer be special.
 - The [List your repositories][list-your-repos] API will include organization-owned repositories.
+- The [List user organizations][list-user-organizations] API will only include public organization memberships.
 
 ## What's happening to the Owners team?
 
@@ -47,6 +48,16 @@ Many apps use the [List your repositories][list-your-repos] API in conjunction w
 
 If your app uses the [List your repositories][list-your-repos] API for another purpose, you'll need to update your app to handle the new organization-owned repositories we'll be returning.
 
+## What's happening to the "List user organizations" API?
+
+The [List user organizations][list-user-organizations] API is intended provide [public organization memberships][public-org-membership] for any user. When you use this API to fetch *your own* organizations, this API currently returns your public and private organization memberships.
+
+Soon, this API will only return public organization memberships.
+
+### What should you do?
+
+If your app uses the [List user organizations][list-user-organizations] API to fetch all of the organization memberships (public and private) for the authenticated user, you'll need to update your app to use the [List your organizations][list-your-organizations] API instead. The [List your organizations][list-your-organizations] API returns all organizations (public and private) that your app is authorized to access.
+
 ## Preview period
 
 Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last for four weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.
@@ -72,3 +83,6 @@ If you have any questions or feedback, please [get in touch with us][contact]!
 [add-org-membership]: /v3/orgs/members/#add-or-update-organization-membership
 [list-org-members]: /v3/orgs/members/#members-list
 [get-org-membership]: /v3/orgs/members/#get-organization-membership
+[list-user-organizations]: /v3/orgs/#list-user-organizations
+[list-your-organizations]: /v3/orgs/#list-your-organizations
+[public-org-membership]: https://help.github.com/articles/publicizing-or-concealing-organization-membership

@@ -11,6 +11,10 @@ title: Organizations | GitHub API
 
 List organizations for the authenticated user.
 
+### OAuth scope requirements
+
+When using [OAuth](/v3/oauth/#scopes), authorizations must include `user` scope or `read:org` scope.
+
     GET /user/orgs
 
 ### Response

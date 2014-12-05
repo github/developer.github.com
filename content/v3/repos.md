@@ -13,7 +13,7 @@ List repositories for the authenticated user.
 
 Note that this currently does not include repositories owned by organizations
 which the user can access. You can
-[list user organizations](/v3/orgs/#list-your-organizations) and
+[list your organizations](/v3/orgs/#list-your-organizations) and
 [list organization repositories](/v3/repos/#list-organization-repositories)
 separately.
 

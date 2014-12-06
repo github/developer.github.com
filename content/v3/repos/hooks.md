@@ -35,7 +35,9 @@ If you would like to set up a single webhook to receive events from all of your 
 
     POST /repos/:owner/:repo/hooks
 
-**Note**: Repositories can have more than one webhook configured, but all other services can have at most one configuration. Creating hooks for a service that already has one configured will [update the existing hook](#edit-a-hook).
+**Note**: Repository service hooks (like email or Campfire) can have at most one configured at a time. Creating hooks for a service that already has one configured will [update the existing hook](#edit-a-hook).
+
+Repositories can have many webhooks installed but each webhook must have a unique combination of `url` and `events`. Attempting to create a duplicate webhook will return a `422`.
 
 ### Parameters
 

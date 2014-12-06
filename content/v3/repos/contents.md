@@ -10,6 +10,8 @@ title: Contents | GitHub API
 These API methods let you retrieve the contents of files within a repository as
 Base64 encoded content. See [media types](#custom-media-types) for requesting the raw format or rendered HTML (when supported).
 
+Note that Base64 encoded content must not contain internal newlines when uploaded. However, Base64 encoded content recieved may contain newlines.
+
 ## Get the README
 
 This method returns the preferred README for a repository.

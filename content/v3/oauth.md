@@ -183,7 +183,6 @@ Name | Description
 `read:repo_hook`| Grants read and ping access to hooks in public or private repositories.
 `write:repo_hook`| Grants read, write, and ping access to hooks in public or private repositories.
 `admin:repo_hook`| Grants read, write, ping, and delete access to hooks in public or private repositories.
-`admin:org_hook`| Grants read, write, ping, and delete access to organization hooks. **Note:** OAuth tokens will only be able to perform these actions on organization hooks which were created by the OAuth application. Personal access tokens will only be able to perform these actions on organization hooks created by a user.
 `read:org`| Read-only access to organization, teams, and membership.
 `write:org`| Publicize and unpublicize organization membership.
 `admin:org`| Fully manage organization, teams, and memberships.

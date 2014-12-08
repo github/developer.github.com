@@ -77,8 +77,8 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 
 ### Terminal blocks
 
-You can specify terminal blocks with `pre.terminal` elements.  (It'd be
-nice if Markdown could do this more cleanly.)
+You can specify terminal blocks with `pre.terminal` elements.  (It'd be nice if
+Markdown could do this more cleanly.)
 
 ```html
 <pre class="terminal">

@@ -24,7 +24,7 @@ or more subscribed events occurs on that organization or repository.
 
 When configuring a webhook, you can choose which events you would like to
 receive payloads for. You can [even opt-in to all current and future
-events][wildcard-event].  Only subscribing to the specific events you plan on
+events][wildcard-section].  Only subscribing to the specific events you plan on
 handling is useful for limiting the number of HTTP requests to your server.  You
 can change the list of subscribed events through the API or UI anytime.  By
 default, webhooks are only subscribed to the `push` event.

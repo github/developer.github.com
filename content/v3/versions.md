@@ -111,6 +111,13 @@ The recommendations below will help you prepare your application for the next ma
   use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,
   `top`, and `sha`.
 
+1. Authorization attribute: token
+: Recommendation: This attribute will return an empty string in the majority of
+  the Authorizations API responses. Please see
+  [the deprecation blog post](/changes/2014-12-08-removing-authorizations-token/)
+  and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
+  for full details.
+
 # beta (Deprecated) {#beta}
 
 The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.

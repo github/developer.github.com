@@ -58,6 +58,7 @@
   <li><a href="#get-a-single-authorization">Get a single authorization</a></li>
   <li><a href="#create-a-new-authorization">Create a new authorization</a></li>
   <li><a href="#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a></li>
+  <li><a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a></li>
   <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   <li><a href="#delete-an-authorization">Delete an authorization</a></li>
   <li><a href="#check-an-authorization">Check an authorization</a></li>
@@ -70,6 +71,46 @@
 <p>You can use this API to manage your OAuth applications. You can only access this API via <a href="/v3/auth#basic-authentication">Basic Authentication</a> using your username and password, not tokens.</p>
 
 <p>Make sure you understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with two-factor authentication</a> if you or your users have two-factor authentication enabled.</p>
+
+<div class="alert">
+  <h3 id="deprecation-notice">Deprecation Notice</h3>
+
+  <p>
+    The <code>token</code> attribute is <a href="/v3/versions/#v3-deprecations">deprecated</a> in all
+    of the following OAuth Authorizations API responses:
+  </p>
+
+  <ul>
+    <li><a href="#list-your-authorizations">List your authorizations</a></li>
+    <li><a href="#get-a-single-authorization">Get a single authorization</a></li>
+    <li>
+<a href="#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> - <code>token</code> is still returned for "create" </li>
+    <li>
+<a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a> - <code>token</code> is still returned for "create" </li>
+    <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
+  </ul>
+
+  <p>
+    Please see <a href="/changes/2014-12-08-removing-authorizations-token/">the blog post</a> for full details.
+  </p>
+
+  <p>
+    In order to reduce the impact of removing the <code>token</code> attribute,
+    the OAuth Authorizations API has added a new request attribute
+    (<code>fingerprint</code>), added three new response attributes
+    (<code>token_last_eight</code>, <code>hashed_token</code>, and
+    <code>fingerprint</code>), and added
+    <a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new API</a>.
+  </p>
+
+  <p>
+    To access the new API functionality during the preview period, you must
+    provide a custom <a href="/v3/media/">media type</a> in the
+    <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.mirage-preview+json</pre>
+  
+</div>
 
 <h2 id="list-your-authorizations">List your authorizations</h2>
 
@@ -91,7 +132,9 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
       <span class="s2">"public_repo"</span>
     <span class="p">],</span>
-    <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+    <span class="s2">"token"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+    <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
     <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
       <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
@@ -100,7 +143,8 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
     <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
     <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+    <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">"jklmnop12345678"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -121,7 +165,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
   <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
@@ -130,16 +176,17 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
   <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">"jklmnop12345678"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-new-authorization">Create a new authorization</h2>
 
 <p>If you need a small number of tokens, implementing the <a href="/v3/oauth/#web-application-flow">web flow</a>
-can be cumbersome. Instead, tokens can be created using the Authorizations API using
+can be cumbersome. Instead, tokens can be created using the OAuth Authorizations API using
 <a href="/v3/auth#basic-authentication">Basic Authentication</a>. To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
-page, linked from your <a href="https://github.com/settings/applications">OAuth applications listing on GitHub</a>. OAuth tokens
+page, linked from your <a href="https://github.com/settings/applications">OAuth applications listing on GitHub</a>. If your OAuth applicaion intends to create multiple tokens for one user you should use <code>fingerprint</code> to differentiate between them. OAuth tokens
 can also be created through the web UI via the <a href="https://github.com/settings/applications">Application settings page</a>.
 Read more about these tokens on the <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">GitHub Help page</a>.</p>
 
@@ -183,6 +230,12 @@ Read more about these tokens on the <a href="https://help.github.com/articles/cr
       <td><code>string</code></td>
       <td>The 40 character OAuth app client secret for which to create the token.</td>
     </tr>
+    <tr>
+      <td><code>fingerprint</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>This attribute is only available when using the <a href="#deprecation-notice">mirage-preview</a> media type.</strong> A unique string to distinguish an authorization from others created for the same client ID and user.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -206,7 +259,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abcdefgh12345678"</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
   <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
@@ -215,21 +270,142 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
   <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">""</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</h2>
 
 <p>This method will create a new authorization for the specified OAuth application,
 only if an authorization for that application doesn’t already exist for the
-user. (The URL includes the 20 character client ID for the OAuth app that is
-requesting the token.) It returns the user’s token for the application if one
-exists. Otherwise, it creates one.</p>
+user. The URL includes the 20 character client ID for the OAuth app that is
+requesting the token. It returns the user’s existing authorization for the
+application if one is present. Otherwise, it creates and returns a new one.</p>
 
 <pre><code>PUT /authorizations/clients/:client_id
 </code></pre>
 
 <h3 id="parameters-1">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>client_secret</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The 40 character OAuth app client secret associated with the client ID specified in the URL.</td>
+    </tr>
+    <tr>
+      <td><code>scopes</code></td>
+      <td><code>array</code></td>
+      <td>A list of scopes that this authorization is in.</td>
+    </tr>
+    <tr>
+      <td><code>note</code></td>
+      <td><code>string</code></td>
+      <td>A note to remind you what the OAuth token is for.</td>
+    </tr>
+    <tr>
+      <td><code>note_url</code></td>
+      <td><code>string</code></td>
+      <td>A URL to remind you what app the OAuth token is for.</td>
+    </tr>
+    <tr>
+      <td><code>fingerprint</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>This attribute is only available when using the <a href="#deprecation-notice">mirage-preview</a> media type.</strong> A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"client_secret"</span><span class="p">:</span> <span class="s2">"abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"admin script"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-if-returning-a-new-token">Response if returning a new token</h3>
+
+<pre class="headers"><code>Status: 201 Created
+Location: https://api.github.com/authorizations/1
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abcdefgh12345678"</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="p">},</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">""</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-if-returning-an-existing-token">Response if returning an existing token</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Location: https://api.github.com/authorizations/1
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span>
+  <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"public_repo"</span>
+  <span class="p">],</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
+  <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
+    <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"abcde12345fghij67890"</span>
+  <span class="p">},</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
+  <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">""</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</h2>
+
+<p><strong>This API method is only available when using the
+<a href="#deprecation-notice">mirage-preview</a> media type.</strong>
+This method will create a new authorization for the specified OAuth application,
+only if an authorization for that application and fingerprint do not already
+exist for the user. The URL includes the 20 character client ID for the OAuth
+app that is requesting the token. <code>fingerprint</code> is a unique string to
+distinguish an authorization from others created for the same client ID and
+user. It returns the user’s existing authorization for the application if one
+is present. Otherwise, it creates and returns a new one.</p>
+
+<pre><code>PUT /authorizations/clients/:client_id/:fingerprint
+</code></pre>
+
+<h3 id="parameters-2">Parameters</h3>
 
 <table>
   <thead>
@@ -272,7 +448,7 @@ exists. Otherwise, it creates one.</p>
   <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"admin script"</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-if-returning-a-new-token">Response if returning a new token</h3>
+<h3 id="response-if-returning-a-new-token-1">Response if returning a new token</h3>
 
 <pre class="headers"><code>Status: 201 Created
 Location: https://api.github.com/authorizations/1
@@ -285,7 +461,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abcdefgh12345678"</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
   <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
@@ -294,10 +472,11 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
   <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">"jklmnop12345678"</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-if-returning-an-existing-token">Response if returning an existing token</h3>
+<h3 id="response-if-returning-an-existing-token-1">Response if returning an existing token</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Location: https://api.github.com/authorizations/1
@@ -310,7 +489,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
   <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
@@ -319,7 +500,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
   <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">"jklmnop12345678"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="update-an-existing-authorization">Update an existing authorization</h2>
@@ -327,7 +509,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>PATCH /authorizations/:id
 </code></pre>
 
-<h3 id="parameters-2">Parameters</h3>
+<h3 id="parameters-3">Parameters</h3>
 
 <table>
   <thead>
@@ -363,6 +545,12 @@ X-RateLimit-Remaining: 4999</code></pre>
       <td><code>string</code></td>
       <td>A URL to remind you what app the OAuth token is for.</td>
     </tr>
+    <tr>
+      <td><code>fingerprint</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>This attribute is only available when using the <a href="#deprecation-notice">mirage-preview</a> media type.</strong> A unique string to distinguish an authorization from others created for the same client ID and user.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -387,7 +575,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
   <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
@@ -396,7 +586,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"optional note"</span><span class="p">,</span>
   <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">"jklmnop12345678"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="delete-an-authorization">Delete an authorization</h2>
@@ -434,7 +625,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abcdefgh12345678"</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
   <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
@@ -444,6 +637,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
   <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">"jklmnop12345678"</span><span class="p">,</span>
   <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -489,7 +683,9 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"scopes"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"public_repo"</span>
   <span class="p">],</span>
-  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+  <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"abcdefgh12345678"</span><span class="p">,</span>
+  <span class="s2">"token_last_eight"</span><span class="p">:</span> <span class="s2">"12345678"</span><span class="p">,</span>
+  <span class="s2">"hashed_token"</span><span class="p">:</span> <span class="s2">"JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug="</span><span class="p">,</span>
   <span class="s2">"app"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://my-github-app.com"</span><span class="p">,</span>
     <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"my github app"</span><span class="p">,</span>
@@ -499,6 +695,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"note_url"</span><span class="p">:</span> <span class="s2">"http://optional/note/url"</span><span class="p">,</span>
   <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span>
   <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+  <span class="s2">"fingerprint"</span><span class="p">:</span> <span class="s2">"jklmnop12345678"</span><span class="p">,</span>
   <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>

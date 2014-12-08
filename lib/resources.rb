@@ -1538,7 +1538,9 @@ Name | Type | Description
       "id" => 1,
       "url" => "https://api.github.com/authorizations/1",
       "scopes" => ["public_repo"],
-      "token" => "abc123",
+      "token" => "abcdefgh12345678",
+      "token_last_eight" => "12345678",
+      "hashed_token" => "JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug=",
       "app" => {
         "url" => "http://my-github-app.com",
         "name" => "my github app",
@@ -1547,7 +1549,8 @@ Name | Type | Description
       "note" => "optional note",
       "note_url" => "http://optional/note/url",
       "updated_at" => "2011-09-06T20:39:23Z",
-      "created_at" => "2011-09-06T17:26:27Z"
+      "created_at" => "2011-09-06T17:26:27Z",
+      "fingerprint" => "jklmnop12345678",
     }
 
     OAUTH_ACCESS_WITH_USER ||= OAUTH_ACCESS.merge(:user => USER)

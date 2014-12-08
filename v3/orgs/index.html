@@ -64,6 +64,10 @@
 
 <p>List organizations for the authenticated user.</p>
 
+<h3 id="oauth-scope-requirements">OAuth scope requirements</h3>
+
+<p>When using <a href="/v3/oauth/#scopes">OAuth</a>, authorizations must include <code>user</code> scope or <code>read:org</code> scope.</p>
+
 <pre><code>GET /user/orgs
 </code></pre>
 
@@ -86,7 +90,25 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="list-user-organizations">List user organizations</h2>
 
-<p>If you make an unauthenticated call, you will list all <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public memberships</a> in organizations for any user. If you make an authenticated call, you will also list hidden memberships in organizations, but only for the currently authenticated user.</p>
+<p>List <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a> for the specified user.</p>
+
+<p>Currently, if you make an authenticated call, you can also list your private memberships in organizations (but only for the currently authenticated user).</p>
+
+<p>With the new Organization Permissions API (described below), this method will only list <em>public</em> memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the <a href="#list-your-organizations">List your organizations</a> API instead.</p>
+
+<div class="alert">
+  <p>
+    The Organization Permissions API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.moondragon-preview+json</pre>
+  
+</div>
 
 <pre><code>GET /users/:username/orgs
 </code></pre>

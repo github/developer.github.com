@@ -9,11 +9,31 @@ title: Repositories | GitHub API
 
 ## List your repositories
 
-List repositories for the authenticated user. Note that this does not include
-repositories owned by organizations which the user can access. You can
-[list user organizations](/v3/orgs/#list-your-organizations) and
+List repositories for the authenticated user.
+
+Note that this currently does not include repositories owned by organizations
+which the user can access. You can
+[list your organizations](/v3/orgs/#list-your-organizations) and
 [list organization repositories](/v3/repos/#list-organization-repositories)
 separately.
+
+With the new Organization Permissions API (described below), this *will* include
+repositories owned by organizations which the user can access. If you provide
+the custom media type (described below), you won't need to use other APIs to
+list the authenticated user's organization-owned repositories.
+
+<div class="alert">
+  <p>
+    The Organization Permissions API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.moondragon-preview+json</pre>
+  </p>
+</div>
 
     GET /user/repos
 

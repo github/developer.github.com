@@ -736,41 +736,87 @@ Name | Type | Description
       "state" => "pending"
     )
 
-    ACTIVE_ORG_MEMBERSHIP ||= {
-      "url"              => "https://api.github.com/user/memberships/orgs/octocat",
+    USER_FOR_ORG_MEMBERSHIP ||= {
+      "login"        => "defunkt",
+      "id"           => 3,
+      "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
+      "gravatar_id"  => "",
+      "url"          => "https://api.github.com/users/defunkt",
+      "html_url"     => "https://github.com/defunkt",
+      "followers_url" => "https://api.github.com/users/defunkt/followers",
+      "following_url" => "https://api.github.com/users/defunkt/following{/other_user}",
+      "gists_url"    => "https://api.github.com/users/defunkt/gists{/gist_id}",
+      "starred_url"  => "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
+      "subscriptions_url" => "https://api.github.com/users/defunkt/subscriptions",
+      "organizations_url" => "https://api.github.com/users/defunkt/orgs",
+      "repos_url"    => "https://api.github.com/users/defunkt/repos",
+      "events_url"   => "https://api.github.com/users/defunkt/events{/privacy}",
+      "received_events_url" => "https://api.github.com/users/defunkt/received_events",
+      "type"         => "User",
+      "site_admin"   => false
+    }
+
+    ORG_FOR_ACTIVE_ORG_MEMBERSHIP ||= {
+      "login"              => "octocat",
+      "url"                => "https://api.github.com/orgs/octocat",
+      "id"                 => 1,
+      "repos_url"          => "https://api.github.com/users/octocat/repos",
+      "events_url"         => "https://api.github.com/users/octocat/events{/privacy}",
+      "members_url"        => "https://api.github.com/users/octocat/members{/member}",
+      "public_members_url" => "https://api.github/com/users/octocat/public_members{/member}",
+      "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+    }
+
+    ORG_FOR_PENDING_ORG_MEMBERSHIP ||= {
+      "login"              => "invitocat",
+      "url"                => "https://api.github.com/orgs/invitocat",
+      "id"                 => 2,
+      "repos_url"          => "https://api.github.com/users/invitocat/repos",
+      "events_url"         => "https://api.github.com/users/invitocat/events{/privacy}",
+      "members_url"        => "https://api.github.com/users/invitocat/members{/member}",
+      "public_members_url" => "https://api.github/com/users/invitocat/public_members{/member}",
+      "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+    }
+
+    ACTIVE_ADMIN_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/octocat/memberships/defunkt",
       "state"            => "active",
+      "role"             => "admin",
       "organization_url" => "https://api.github.com/orgs/octocat",
-      "organization"     => {
-        "login"              => "octocat",
-        "url"                => "https://api.github.com/orgs/octocat",
-        "id"                 => 1,
-        "repos_url"          => "https://api.github.com/users/octocat/repos",
-        "events_url"         => "https://api.github.com/users/octocat/events{/privacy}",
-        "members_url"        => "https://api.github.com/users/octocat/members{/member}",
-        "public_members_url" => "https://api.github/com/users/octocat/public_members{/member}",
-        "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
-      }
+      "organization"     => ORG_FOR_ACTIVE_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
     }
 
-    PENDING_ORG_MEMBERSHIP ||= {
-      "url"              => "https://api.github.com/user/memberships/orgs/invitocat",
+    ACTIVE_LIMITED_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/octocat/memberships/defunkt",
+      "state"            => "active",
+      "role"             => "limited_member",
+      "organization_url" => "https://api.github.com/orgs/octocat",
+      "organization"     => ORG_FOR_ACTIVE_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
+    }
+
+    PENDING_ADMIN_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/invitocat/memberships/defunkt",
       "state"            => "pending",
+      "role"             => "admin",
       "organization_url" => "https://api.github.com/orgs/invitocat",
-      "organization"     => {
-        "login"              => "invitocat",
-        "url"                => "https://api.github.com/orgs/invitocat",
-        "id"                 => 2,
-        "repos_url"          => "https://api.github.com/users/invitocat/repos",
-        "events_url"         => "https://api.github.com/users/invitocat/events{/privacy}",
-        "members_url"        => "https://api.github.com/users/invitocat/members{/member}",
-        "public_members_url" => "https://api.github/com/users/invitocat/public_members{/member}",
-        "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
-      }
+      "organization"     => ORG_FOR_PENDING_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
     }
 
-    ORG_MEMBERSHIPS         ||= [ACTIVE_ORG_MEMBERSHIP, PENDING_ORG_MEMBERSHIP]
-    ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ORG_MEMBERSHIP]
-    PENDING_ORG_MEMBERSHIPS ||= [PENDING_ORG_MEMBERSHIP]
+    PENDING_LIMITED_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/invitocat/memberships/defunkt",
+      "state"            => "pending",
+      "role"             => "limited_member",
+      "organization_url" => "https://api.github.com/orgs/invitocat",
+      "organization"     => ORG_FOR_PENDING_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
+    }
+
+    ORG_MEMBERSHIPS         ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP, PENDING_ADMIN_ORG_MEMBERSHIP]
+    ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP]
+    PENDING_ORG_MEMBERSHIPS ||= [PENDING_ADMIN_ORG_MEMBERSHIP]
 
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",

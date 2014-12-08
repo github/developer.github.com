@@ -68,6 +68,14 @@ $ ssh -T git@github.com
 
 Here are some things to look out for when troubleshooting SSH agent forwarding.
 
+### You must be using an SSH URL to check out code
+
+SSH forwarding only works with SSH URLs - not http URLs. Check the `.git/config` on your server, and ensure the URL is an SSH-style URL like below (substituting `yourAccount` and `yourProject` as necessary).:
+
+    [remote "origin"]
+        url = git@github.com:yourAccount/yourProject.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+
 ### Your SSH keys must work locally
 
 Before you can make your keys work through agent forwarding, they must work locally first. [Our guide on generating SSH keys][generating-keys] can help you set up your SSH keys locally.

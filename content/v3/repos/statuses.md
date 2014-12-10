@@ -116,4 +116,4 @@ Name | Type | Description
 
 ### Response
 <%= headers 200 %>
-<%= json(:combined_status) { |h| [h] } %>
+<%= json(:combined_status) %>

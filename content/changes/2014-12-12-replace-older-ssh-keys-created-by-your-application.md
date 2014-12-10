@@ -14,7 +14,7 @@ We recommend the following steps for identifying and replacing the affected keys
 
 ### 1. Identify the affected keys
 
-You only need to replace keys that your application created prior to February 24, 2014. If you don't know when your app created a given key, you can get the creation timestamp from the API. The `created_at` property is available for [deploy keys](/v3/repos/keys/) and for [user keys](/v3/users/keys/).
+You only need to replace keys that your application created prior to February 24, 2014. If you don't know when your app created a given key, you can get the creation timestamp from the API. The `created_at` property is available for [deploy keys](/v3/repos/keys/) and for [user keys](/v3/users/keys/#list-your-public-keys).
 
 ### 2. Inform the affected users
 

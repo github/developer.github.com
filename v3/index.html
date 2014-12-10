@@ -587,6 +587,39 @@ and using <a href="#conditional-requests">conditional requests</a>.</p>
 limit, please <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">contact us</a> to request a
 higher rate limit for your OAuth application.</p>
 
+<h3 id="abuse-rate-limits">Abuse Rate Limits</h3>
+
+<p>To prevent abuse, additional rate limits apply to some endpoints that
+create content. This rate limit applies to the creation of new content 
+over a period of time. These rate limits do not apply to private repositories
+or GitHub Enterprise installations.</p>
+
+<p>It is not intended for this rate limit to interfere with any legimate use of
+the API. Your normal <a href="/v3/#rate-limiting">rate limits</a> should be the only
+limit you target. Please <a href="https://github.com/contact?form%5Bsubject%5D=API+Abuse+Rate+Limits">contact support</a> if your use is affected by
+this rate limit.</p>
+
+<p>If your application triggers this rate limit, you’ll receive an informative
+response:</p>
+
+<pre class="terminal">
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+Connection: close
+
+{
+  "errors": [
+    {
+      "resource": "IssueComment",
+      "code": "abuse",
+      "field": "base"
+    }
+  ],
+  "message": "Rate Limit Exceeded",
+  "documentation_url": "https://developer.github.com/v3#abuse-rate-limits"
+}
+</pre>
+
 <h2 id="user-agent-required">User Agent Required</h2>
 
 <p>All API requests MUST include a valid <code>User-Agent</code> header. Requests with no <code>User-Agent</code>

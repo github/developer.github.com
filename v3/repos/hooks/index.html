@@ -136,7 +136,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /repos/:owner/:repo/hooks
 </code></pre>
 
-<p><strong>Note</strong>: Repositories can have more than one webhook configured, but all other services can have at most one configuration. Creating hooks for a service that already has one configured will <a href="#edit-a-hook">update the existing hook</a>.</p>
+<p><strong>Note</strong>: Repository service hooks (like email or Campfire) can have at most one configured at a time. Creating hooks for a service that already has one configured will <a href="#edit-a-hook">update the existing hook</a>.</p>
+
+<p>Repositories can have multiple webhooks installed. Each webhook should have a unique <code>config</code>. Multiple webhooks can share the same <code>config</code> as long as those webhooks do not have any <code>events</code> that overlap.</p>
 
 <h3 id="parameters">Parameters</h3>
 

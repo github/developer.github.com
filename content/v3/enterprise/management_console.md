@@ -33,6 +33,8 @@ When you boot a virtual machine for the first time, you can use the following en
 
 Note that you need to POST to [`/setup/api/configure`](#start-a-configuration-process) to start the actual configuration process.
 
+You *must* provide a password when uploading your license for the first time. If you haven't previously set a password through the web interface, we'll set it to the password you provide.
+
 ### Parameters
 
 Name | Type | Description

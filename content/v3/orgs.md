@@ -13,7 +13,22 @@ List organizations for the authenticated user.
 
 ### OAuth scope requirements
 
-When using [OAuth](/v3/oauth/#scopes), authorizations must include `user` scope or `read:org` scope.
+Currently, [OAuth](/v3/oauth/#scopes) requests always receive the user's [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership), regardless of the OAuth scopes associated with the request. If the OAuth authorization has `user` or `read:org` scope, the response also includes private organization memberships.
+
+With the new Organization Permissions API (described below), this method will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with `read:org` scope, you can publicize your organization membership with `user` scope, etc.). Therefore, this API will require at least `user` or `read:org` scope. OAuth requests with insufficient scope will receive a `403 Forbidden` response.
+
+<div class="alert">
+  <p>
+    The Organization Permissions API is currently available for developers to preview.
+    During the preview period, the API may change without notice.
+    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.moondragon-preview+json</pre>
+  </p>
+</div>
 
     GET /user/orgs
 

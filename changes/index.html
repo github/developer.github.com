@@ -265,12 +265,15 @@ SHA-256 for performance reasons.</p>
 </ul>
 </div>
 
-    <p>We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:</p>
+    <p><strong>UPDATE (2014-12-12):</strong> The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API is now included in this preview as well.</p>
+
+<p>We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:</p>
 
 <ul>
   <li>The Owners team will no longer be special.</li>
   <li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API will include organization-owned repositories.</li>
   <li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API will only include public organization memberships.</li>
+  <li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API will require <code>user</code> scope or <code>read:org</code> scope.</li>
 </ul>
 
 <h2 id="whats-happening-to-the-owners-team">What’s happening to the Owners team?</h2>
@@ -320,6 +323,20 @@ SHA-256 for performance reasons.</p>
 <h3 id="what-should-you-do-2">What should you do?</h3>
 
 <p>If your app uses the <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API to fetch all of the organization memberships (public and private) for the authenticated user, you’ll need to update your app to use the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API instead. The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API returns all organizations (public and private) that your app is authorized to access.</p>
+
+<h2 id="whats-happening-to-the-list-your-organizations-api">What’s happening to the “List your organizations” API?</h2>
+
+<p>OAuth requests will soon require minimum <a href="/v3/oauth/#scopes">scopes</a> in order to access the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API.</p>
+
+<p>Currently, the API response always includes your <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a>, regardless of the OAuth scopes associated with your request. If you have <code>user</code>, <code>read:org</code>, <code>write:org</code>, or <code>admin:org</code> scope, the response also includes your private organization memberships.</p>
+
+<p>Soon, this API will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with <code>read:org</code> scope, you can publicize your organization membership with <code>user</code> scope, etc.). Therefore, this API will require at least <code>user</code> or <code>read:org</code> scope. (<code>write:org</code> and <code>admin:org</code> scope implicitly include <code>read:org</code> scope.) OAuth requests with insufficient scope will receive a <code>403 Forbidden</code> response.</p>
+
+<h3 id="what-should-you-do-3">What should you do?</h3>
+
+<p>If you <a href="/v3/auth/#via-username-and-password">authenticate via username and password</a>, you are not affected by this change.</p>
+
+<p>If your app only needs to fetch the user’s public organization memberships, you should use the <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API instead. Since that API only returns public information, it does not require any scopes.</p>
 
 <h2 id="preview-period">Preview period</h2>
 
@@ -713,7 +730,7 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
 </ul>
 </div>
 
-    <p><strong>Update: 2014-09-30:</strong> In response to feedback from developers, we’re delaying the breaking change to the <a href="/v3/orgs/teams/#add-team-member">“Add team member” API</a> until Monday, <strong>October 6, 2014</strong>. The change will go into effect for all requests on that date.</p>
+    <p><strong>UPDATE (2014-09-30):</strong> In response to feedback from developers, we’re delaying the breaking change to the <a href="/v3/orgs/teams/#add-team-member">“Add team member” API</a> until Monday, <strong>October 6, 2014</strong>. The change will go into effect for all requests on that date.</p>
 
 <p>Starting October 6, if you use <a href="/v3/orgs/teams/#add-team-member">the “Add team member” API</a> to add a user to a team and that user isn’t already on another team in your organization, the request will fail. To avoid this, be sure to use the <a href="/v3/orgs/teams/#add-team-membership">the “Add team membership” API</a>.</p>
 

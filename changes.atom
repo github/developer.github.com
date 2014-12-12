@@ -194,12 +194,15 @@ SHA-256 for performance reasons.&lt;/p&gt;
       <uri>https://github.com/technoweenie</uri>
     </author>
     <link rel="alternate" href="http://developer.github.com/changes/2014-12-08-organization-permissions-api-preview/" />
-    <content type="html">&lt;p&gt;We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;strong&gt;UPDATE (2014-12-12):&lt;/strong&gt; The &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API is now included in this preview as well.&lt;/p&gt;
+
+&lt;p&gt;We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;The Owners team will no longer be special.&lt;/li&gt;
   &lt;li&gt;The &lt;a href="/v3/repos/#list-your-repositories"&gt;List your repositories&lt;/a&gt; API will include organization-owned repositories.&lt;/li&gt;
   &lt;li&gt;The &lt;a href="/v3/orgs/#list-user-organizations"&gt;List user organizations&lt;/a&gt; API will only include public organization memberships.&lt;/li&gt;
+  &lt;li&gt;The &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API will require &lt;code&gt;user&lt;/code&gt; scope or &lt;code&gt;read:org&lt;/code&gt; scope.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id="whats-happening-to-the-owners-team"&gt;What’s happening to the Owners team?&lt;/h2&gt;
@@ -249,6 +252,20 @@ SHA-256 for performance reasons.&lt;/p&gt;
 &lt;h3 id="what-should-you-do-2"&gt;What should you do?&lt;/h3&gt;
 
 &lt;p&gt;If your app uses the &lt;a href="/v3/orgs/#list-user-organizations"&gt;List user organizations&lt;/a&gt; API to fetch all of the organization memberships (public and private) for the authenticated user, you’ll need to update your app to use the &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API instead. The &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API returns all organizations (public and private) that your app is authorized to access.&lt;/p&gt;
+
+&lt;h2 id="whats-happening-to-the-list-your-organizations-api"&gt;What’s happening to the “List your organizations” API?&lt;/h2&gt;
+
+&lt;p&gt;OAuth requests will soon require minimum &lt;a href="/v3/oauth/#scopes"&gt;scopes&lt;/a&gt; in order to access the &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API.&lt;/p&gt;
+
+&lt;p&gt;Currently, the API response always includes your &lt;a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership"&gt;public organization memberships&lt;/a&gt;, regardless of the OAuth scopes associated with your request. If you have &lt;code&gt;user&lt;/code&gt;, &lt;code&gt;read:org&lt;/code&gt;, &lt;code&gt;write:org&lt;/code&gt;, or &lt;code&gt;admin:org&lt;/code&gt; scope, the response also includes your private organization memberships.&lt;/p&gt;
+
+&lt;p&gt;Soon, this API will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with &lt;code&gt;read:org&lt;/code&gt; scope, you can publicize your organization membership with &lt;code&gt;user&lt;/code&gt; scope, etc.). Therefore, this API will require at least &lt;code&gt;user&lt;/code&gt; or &lt;code&gt;read:org&lt;/code&gt; scope. (&lt;code&gt;write:org&lt;/code&gt; and &lt;code&gt;admin:org&lt;/code&gt; scope implicitly include &lt;code&gt;read:org&lt;/code&gt; scope.) OAuth requests with insufficient scope will receive a &lt;code&gt;403 Forbidden&lt;/code&gt; response.&lt;/p&gt;
+
+&lt;h3 id="what-should-you-do-3"&gt;What should you do?&lt;/h3&gt;
+
+&lt;p&gt;If you &lt;a href="/v3/auth/#via-username-and-password"&gt;authenticate via username and password&lt;/a&gt;, you are not affected by this change.&lt;/p&gt;
+
+&lt;p&gt;If your app only needs to fetch the user’s public organization memberships, you should use the &lt;a href="/v3/orgs/#list-user-organizations"&gt;List user organizations&lt;/a&gt; API instead. Since that API only returns public information, it does not require any scopes.&lt;/p&gt;
 
 &lt;h2 id="preview-period"&gt;Preview period&lt;/h2&gt;
 
@@ -572,7 +589,7 @@ any questions or feedback, please &lt;a href="https://github.com/contact?form%5B
       <uri>https://github.com/technoweenie</uri>
     </author>
     <link rel="alternate" href="http://developer.github.com/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/" />
-    <content type="html">&lt;p&gt;&lt;strong&gt;Update: 2014-09-30:&lt;/strong&gt; In response to feedback from developers, we’re delaying the breaking change to the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;“Add team member” API&lt;/a&gt; until Monday, &lt;strong&gt;October 6, 2014&lt;/strong&gt;. The change will go into effect for all requests on that date.&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;strong&gt;UPDATE (2014-09-30):&lt;/strong&gt; In response to feedback from developers, we’re delaying the breaking change to the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;“Add team member” API&lt;/a&gt; until Monday, &lt;strong&gt;October 6, 2014&lt;/strong&gt;. The change will go into effect for all requests on that date.&lt;/p&gt;
 
 &lt;p&gt;Starting October 6, if you use &lt;a href="/v3/orgs/teams/#add-team-member"&gt;the “Add team member” API&lt;/a&gt; to add a user to a team and that user isn’t already on another team in your organization, the request will fail. To avoid this, be sure to use the &lt;a href="/v3/orgs/teams/#add-team-membership"&gt;the “Add team membership” API&lt;/a&gt;.&lt;/p&gt;
 

@@ -73,7 +73,7 @@ Soon, this API will only return organizations that your authorization allows you
 
 If you [authenticate via username and password][username-password-authn], you are not affected by this change.
 
-If your app only needs to fetch the user's public organization memberships, you should use the [List user organizations][list-user-organizations] API instead. Since that API only returns public information, it does does not require any scopes.
+If your app only needs to fetch the user's public organization memberships, you should use the [List user organizations][list-user-organizations] API instead. Since that API only returns public information, it does not require any scopes.
 
 ## Preview period
 

@@ -4,11 +4,14 @@ title: Preview the upcoming organization permission changes
 created_at: 2014-12-08
 author_name: jakeboxer
 ---
+**UPDATE (2014-12-12):** The [List your organizations][list-your-organizations] API is now included in this preview as well.
+
 We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:
 
 - The Owners team will no longer be special.
 - The [List your repositories][list-your-repos] API will include organization-owned repositories.
 - The [List user organizations][list-user-organizations] API will only include public organization memberships.
+- The [List your organizations][list-your-organizations] API will require `user` scope or `read:org` scope.
 
 ## What's happening to the Owners team?
 
@@ -58,6 +61,20 @@ Soon, this API will only return public organization memberships.
 
 If your app uses the [List user organizations][list-user-organizations] API to fetch all of the organization memberships (public and private) for the authenticated user, you'll need to update your app to use the [List your organizations][list-your-organizations] API instead. The [List your organizations][list-your-organizations] API returns all organizations (public and private) that your app is authorized to access.
 
+## What's happening to the "List your organizations" API?
+
+OAuth requests will soon require minimum [scopes][] in order to access the [List your organizations][list-your-organizations] API.
+
+Currently, the API response always includes your [public organization memberships][public-org-membership], regardless of the OAuth scopes associated with your request. If you have `user`, `read:org`, `write:org`, or `admin:org` scope, the response also includes your private organization memberships.
+
+Soon, this API will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with `read:org` scope, you can publicize your organization membership with `user` scope, etc.). Therefore, this API will require at least `user` or `read:org` scope. (`write:org` and `admin:org` scope implicitly include `read:org` scope.) OAuth requests with insufficient scope will receive a `403 Forbidden` response.
+
+### What should you do?
+
+If you [authenticate via username and password][username-password-authn], you are not affected by this change.
+
+If your app only needs to fetch the user's public organization memberships, you should use the [List user organizations][list-user-organizations] API instead. Since that API only returns public information, it does does not require any scopes.
+
 ## Preview period
 
 Starting **today**, these new APIs are available for developers to preview. We expect the preview period to last for four weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.
@@ -86,3 +103,5 @@ If you have any questions or feedback, please [get in touch with us][contact]!
 [list-user-organizations]: /v3/orgs/#list-user-organizations
 [list-your-organizations]: /v3/orgs/#list-your-organizations
 [public-org-membership]: https://help.github.com/articles/publicizing-or-concealing-organization-membership
+[username-password-authn]: /v3/auth/#via-username-and-password
+[scopes]: /v3/oauth/#scopes

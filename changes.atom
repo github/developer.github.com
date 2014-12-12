@@ -2,13 +2,55 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-12-09T00:00:00Z</updated>
+  <updated>2014-12-12T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2014-12-12:/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/</id>
+    <title type="html">Replace older SSH keys created by your application</title>
+    <published>2014-12-12T00:00:00Z</published>
+    <updated>2014-12-12T00:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/" />
+    <content type="html">&lt;p&gt;Back in February, we &lt;a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable"&gt;improved the security audit trail for SSH keys&lt;/a&gt;. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on &lt;a href="/guides/managing-deploy-keys/#deploy-keys"&gt;deploy keys&lt;/a&gt; or &lt;a href="/v3/users/keys/"&gt;user keys&lt;/a&gt; for repository access, we recommend replacing any keys created before February 24, 2014.&lt;/p&gt;
+
+&lt;p&gt;To ensure that your application is not affected by organizations blocking access to these keys, &lt;strong&gt;you should replace the affected keys by January 15, 2015&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id="how-should-you-replace-these-keys"&gt;How should you replace these keys?&lt;/h2&gt;
+
+&lt;p&gt;We recommend the following steps for identifying and replacing the affected keys.&lt;/p&gt;
+
+&lt;h3 id="identify-the-affected-keys"&gt;1. Identify the affected keys&lt;/h3&gt;
+
+&lt;p&gt;You only need to replace keys that your application created prior to February 24, 2014. If you don’t know when your app created a given key, you can get the creation timestamp from the API. The &lt;code&gt;created_at&lt;/code&gt; property is available for &lt;a href="/v3/repos/keys/"&gt;deploy keys&lt;/a&gt; and for &lt;a href="/v3/users/keys/#list-your-public-keys"&gt;user keys&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="inform-the-affected-users"&gt;2. Inform the affected users&lt;/h3&gt;
+
+&lt;p&gt;Once you know which keys you need to replace, we recommend that you inform the affected users.&lt;/p&gt;
+
+&lt;p&gt;For security, GitHub automatically sends an email to a user whenever a new SSH key is added to their account. Similarly, when a new deploy key is added to a repository, GitHub sends an email to the repository’s administrators. When you replace your application’s old keys with new ones, GitHub will email the affected users. To avoid surprising those users, you should alert them that you’ll be replacing your keys. You may want to include a link to this post in your message.&lt;/p&gt;
+
+&lt;h3 id="add-a-new-key"&gt;3. Add a new key&lt;/h3&gt;
+
+&lt;p&gt;Use the API to add the new &lt;a href="/v3/repos/keys/#create"&gt;deploy key&lt;/a&gt; or &lt;a href="/v3/users/keys/#create-a-public-key"&gt;user key&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="delete-the-old-key"&gt;4. Delete the old key&lt;/h3&gt;
+
+&lt;p&gt;Once your application is using the new key, use the API to delete the old one. There’s an &lt;a href="/v3/repos/keys/#delete"&gt;API for deleting deploy keys&lt;/a&gt; and an &lt;a href="/v3/users/keys/#delete-a-public-key"&gt;API for deleting user keys&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id="were-here-to-help"&gt;We’re here to help&lt;/h2&gt;
+
+&lt;p&gt;As always, if you have any questions or concerns, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Replace+SSH+keys+created+by+application"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-12-09:/changes/2014-12-09-new-attributes-for-stars-api/</id>
     <title type="html">New Attributes for Starring API</title>
@@ -1142,22 +1184,6 @@ count represents the number of contexts submitted for the given commit.&lt;/p&gt
     <content type="html">&lt;p&gt;The preview period for the new &lt;a href="/changes/2014-01-09-preview-the-new-deployments-api/"&gt;Deployments API&lt;/a&gt; continues to yield valuable feedback from developers. In early March, we used that feedback to &lt;a href="/changes/2014-03-03-deployments-api-updates/"&gt;improve the payload format&lt;/a&gt; that integrations can use to customize deployments. A few weeks later, we began integrating with the new &lt;a href="/changes/2014-03-27-combined-status-api/"&gt;Combined Status API&lt;/a&gt; to help ensure that only verified code gets deployed, even if you have multiple systems verifying different aspects of your software.&lt;/p&gt;
 
 &lt;p&gt;To give developers time to explore these recent refinements to the Deployments API, we’re extending the preview period for a little while longer. As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-04-09:/changes/2014-04-09-reminder-about-default-media-type-change/</id>
-    <title type="html">Reminder: Default media type will change on April 15</title>
-    <published>2014-04-09T00:00:00Z</published>
-    <updated>2014-04-09T00:00:00Z</updated>
-    <author>
-      <name>jasonrudolph</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-04-09-reminder-about-default-media-type-change/" />
-    <content type="html">&lt;p&gt;Just a friendly reminder: On April 15, 2014, the GitHub API will start serving the v3 media type by default. Please see the &lt;a href="/changes/2014-01-07-upcoming-change-to-default-media-type/"&gt;original announcement&lt;/a&gt; for full details about &lt;a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#whats-changing"&gt;this change&lt;/a&gt;, &lt;a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#who-is-affected"&gt;who it affects&lt;/a&gt;, and &lt;a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#what-should-you-do"&gt;how to ensure that you are prepared&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
 
 </content>
   </entry>

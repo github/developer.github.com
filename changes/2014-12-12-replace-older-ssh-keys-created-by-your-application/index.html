@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Upcoming Change to Default Media Type</title>
+  <title>Replace older SSH keys created by your application</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,16 +40,16 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-01-07-upcoming-change-to-default-media-type/">
+      <div class="change" id="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">
 <h2 class="title">
-  <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">Upcoming Change to Default Media Type</a>
+  <a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">Replace older SSH keys created by your application</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    January 7, 2014
+    December 12, 2014
     
   </li>
   <li class="who_when">
@@ -60,56 +60,35 @@
 </div>
 
 
-<p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you’ll find tips below to help you smoothly navigate this change.</p>
+<p>Back in February, we <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable">improved the security audit trail for SSH keys</a>. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on <a href="/guides/managing-deploy-keys/#deploy-keys">deploy keys</a> or <a href="/v3/users/keys/">user keys</a> for repository access, we recommend replacing any keys created before February 24, 2014.</p>
 
-<h2 id="whats-changing">What’s changing?</h2>
+<p>To ensure that your application is not affected by organizations blocking access to these keys, <strong>you should replace the affected keys by January 15, 2015</strong>.</p>
 
-<h3 id="a-new-default-version">A new default version</h3>
+<h2 id="how-should-you-replace-these-keys">How should you replace these keys?</h2>
 
-<p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. Today, requests receive the beta version by default. On April 15<a href="#cutover-test">*</a>, requests will begin receiving the v3 version by default.</p>
+<p>We recommend the following steps for identifying and replacing the affected keys.</p>
 
-<p>For the most part, beta and v3 are remarkably similar. There are <a href="/v3/versions/#differences-from-beta-version">just a few differences</a> to keep in mind.</p>
+<h3 id="identify-the-affected-keys">1. Identify the affected keys</h3>
 
-<h3 id="a-new-default-media-type">A new default media type</h3>
+<p>You only need to replace keys that your application created prior to February 24, 2014. If you don’t know when your app created a given key, you can get the creation timestamp from the API. The <code>created_at</code> property is available for <a href="/v3/repos/keys/">deploy keys</a> and for <a href="/v3/users/keys/#list-your-public-keys">user keys</a>.</p>
 
-<p>The version is one part of the <a href="/v3/media">media type</a>. By default, the API provides the beta media type:</p>
+<h3 id="inform-the-affected-users">2. Inform the affected users</h3>
 
-<pre><code>application/vnd.github.beta+json
-</code></pre>
+<p>Once you know which keys you need to replace, we recommend that you inform the affected users.</p>
 
-<p>On April 15<a href="#cutover-test">*</a>, requests will begin responding with the v3 media type by default:</p>
+<p>For security, GitHub automatically sends an email to a user whenever a new SSH key is added to their account. Similarly, when a new deploy key is added to a repository, GitHub sends an email to the repository’s administrators. When you replace your application’s old keys with new ones, GitHub will email the affected users. To avoid surprising those users, you should alert them that you’ll be replacing your keys. You may want to include a link to this post in your message.</p>
 
-<pre><code>application/vnd.github.v3+json
-</code></pre>
+<h3 id="add-a-new-key">3. Add a new key</h3>
 
-<h2 id="who-is-affected">Who is affected?</h2>
+<p>Use the API to add the new <a href="/v3/repos/keys/#create">deploy key</a> or <a href="/v3/users/keys/#create-a-public-key">user key</a>.</p>
 
-<p>Since 2012, we have encouraged developers to explicitly <a href="/v3/media/#request-specific-version">request a specific media type via the <code>Accept</code> header</a>. If you are requesting either beta or v3 via the <code>Accept</code> header, then you are <em>not</em> affected by this change. The API will continue to respond with the requested media type.</p>
+<h3 id="delete-the-old-key">4. Delete the old key</h3>
 
-<p>If you are not requesting beta or v3 via the <code>Accept</code> header, then the API is currently responding with the beta media type. On April 15<a href="#cutover-test">*</a>, the API will begin responding with the v3 media type. If your application relies on <a href="/v3/versions/#differences-from-beta-version">functionality that differs between beta and v3</a>, then you are affected by this change. You will need to take steps to prepare for the change.</p>
+<p>Once your application is using the new key, use the API to delete the old one. There’s an <a href="/v3/repos/keys/#delete">API for deleting deploy keys</a> and an <a href="/v3/users/keys/#delete-a-public-key">API for deleting user keys</a>.</p>
 
-<h2 id="what-should-you-do">What should you do?</h2>
+<h2 id="were-here-to-help">We’re here to help</h2>
 
-<p>If you are affected by this change, we recommend that you:</p>
-
-<ol>
-  <li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there’s a good chance that they’ve already done the work for you. In that case, you can just update to the latest version of that library.)</li>
-  <li>Request the v3 media type via the <code>Accept</code> header.</li>
-</ol>
-
-<p>If you cannot update your application to depend on the v3 functionality by April 15<a href="#cutover-test">*</a>, you can just request the beta media type via the <code>Accept</code> header. Doing so will insulate you from this change.</p>
-
-<h2 id="cutover-test">Cutover test on March 12, 2014</h2>
-
-<p>To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.</p>
-
-<p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
-
-<h2 id="stay-informed">Stay informed</h2>
-
-<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we’ll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
-
-<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We’ll be happy to help.</p>
+<p>As always, if you have any questions or concerns, please <a href="https://github.com/contact?form%5Bsubject%5D=Replace+SSH+keys+created+by+application">get in touch</a>.</p>
 
 
 </div>

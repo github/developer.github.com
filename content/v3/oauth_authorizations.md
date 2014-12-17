@@ -72,7 +72,7 @@ If you need a small number of tokens, implementing the [web flow](/v3/oauth/#web
 can be cumbersome. Instead, tokens can be created using the OAuth Authorizations API using
 [Basic Authentication](/v3/auth#basic-authentication). To create tokens for a particular OAuth application, you
 must provide its client ID and secret, found on the OAuth application settings
-page, linked from your [OAuth applications listing on GitHub][app-listing]. If your OAuth applicaion intends to create multiple tokens for one user you should use `fingerprint` to differentiate between them. OAuth tokens
+page, linked from your [OAuth applications listing on GitHub][app-listing]. If your OAuth application intends to create multiple tokens for one user you should use `fingerprint` to differentiate between them. OAuth tokens
 can also be created through the web UI via the [Application settings page][app-listing].
 Read more about these tokens on the [GitHub Help page](https://help.github.com/articles/creating-an-access-token-for-command-line-use).
 

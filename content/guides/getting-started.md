@@ -284,13 +284,13 @@ $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
     https://api.github.com/user/repos
 </pre>
 
-Or, we can [list repositories for another user][other user repos api]:
+Or, we can [list public repositories for another user][other user repos api]:
 
 <pre class="terminal">
 $ curl -i https://api.github.com/users/technoweenie/repos
 </pre>
 
-Or, we can [list repositories for an organization][org repos api]:
+Or, we can [list public repositories for an organization][org repos api]:
 
 <pre class="terminal">
 $ curl -i https://api.github.com/orgs/mozilla/repos

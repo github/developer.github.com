@@ -25,7 +25,7 @@ TODO GET /user/repos
 
 ## Discover the organizations that your app can access for a user
 
-Applications can perform all sorts of organization-related tasks for a user. To perform these tasks, the app needs an [OAuth authorization](/v3/oauth/#scopes) with sufficient permission (e.g., you can [list teams](/v3/orgs/teams/#list-teams) with `read:org` scope, you can [publicize the user’s organization membership](v3/orgs/members/#publicize-a-users-membership) with `user` scope, etc.). Once a user has granted one or more of these scopes to your app, you're ready to fetch the user’s organizations.
+Applications can perform all sorts of organization-related tasks for a user. To perform these tasks, the app needs an [OAuth authorization](/v3/oauth/#scopes) with sufficient permission (e.g., you can [list teams](/v3/orgs/teams/#list-teams) with `read:org` scope, you can [publicize the user’s organization membership](/v3/orgs/members/#publicize-a-users-membership) with `user` scope, etc.). Once a user has granted one or more of these scopes to your app, you're ready to fetch the user’s organizations.
 
 ### Find the URL
 

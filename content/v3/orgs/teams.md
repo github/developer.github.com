@@ -41,6 +41,7 @@ In order to create a team, the authenticated user must be an owner of
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
+`description`|`string` | The description of the team.
 `repo_names`|`array` of `strings` | The repositories to add the team to.
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
 
@@ -68,6 +69,7 @@ the org that the team is associated with.
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
+`description`|`string` | The description of the team.
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
 
 #### Example

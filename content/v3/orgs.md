@@ -87,6 +87,7 @@ Name | Type | Description
 `email`|`string` | The publicly visible email address.
 `location`|`string` | The location.
 `name`|`string` | The shorthand name of the company.
+`description`|`string` | The description of the company.
 
 ### Example
 
@@ -96,7 +97,8 @@ Name | Type | Description
     :company  => "GitHub",
     :email    => "support@github.com",
     :location => "San Francisco",
-    :name     => "github"
+    :name     => "github",
+    :description => "GitHub, the company."
     %>
 
 ### Response

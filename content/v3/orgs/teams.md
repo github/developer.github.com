@@ -49,6 +49,7 @@ Name | Type | Description
 
 <%= json \
   :name => 'new team',
+  :description => 'team description',
   :permission => 'push',
   :repo_names => ['github/dotfiles'] %>
 
@@ -76,6 +77,7 @@ Name | Type | Description
 
 <%= json \
   :name => 'new team name',
+  :name => 'new team description',
   :permission => 'push' %>
 
 ### Response

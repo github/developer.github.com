@@ -720,14 +720,16 @@ Name | Type | Description
     })
 
     TEAM ||= {
+      "id" => 1,
       "url" => "https://api.github.com/teams/1",
       "name" => "Owners",
       "description" => "A great team.",
-      "id" => 1
+      "permission" => "admin",
+      "members_url" => "https://api.github.com/teams/1/members{/member}",
+      "repositories_url" => "https://api.github.com/teams/1/repos"
     }
 
     FULL_TEAM ||= TEAM.merge({
-      "permission" => "admin",
       "members_count" => 3,
       "repos_count" => 10,
       "organization" =>  ORG

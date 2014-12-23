@@ -686,7 +686,8 @@ Name | Type | Description
       "login"      => "github",
       "id"         => 1,
       "url"        => "https://api.github.com/orgs/github",
-      "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
+      "avatar_url" => "https://github.com/images/error/octocat_happy.gif",
+      "description" => "A great organization"
     }
 
     FULL_ORG ||= ORG.merge({
@@ -719,13 +720,16 @@ Name | Type | Description
     })
 
     TEAM ||= {
+      "id" => 1,
       "url" => "https://api.github.com/teams/1",
       "name" => "Owners",
-      "id" => 1
+      "description" => "A great team.",
+      "permission" => "admin",
+      "members_url" => "https://api.github.com/teams/1/members{/member}",
+      "repositories_url" => "https://api.github.com/teams/1/repos"
     }
 
     FULL_TEAM ||= TEAM.merge({
-      "permission" => "admin",
       "members_count" => 3,
       "repos_count" => 10,
       "organization" =>  ORG

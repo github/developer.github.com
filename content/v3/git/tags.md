@@ -39,9 +39,9 @@ Name | Type | Description
 `message`|`string`| The tag message
 `object`|`string`| The SHA of the git object this is tagging
 `type`|`string`| The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
-`tagger`|`hash`| A hash with information about the individual creating the tag.
+`tagger`|`object`| An object with information about the individual creating the tag.
 
-The `tagger` hash contains the following keys:
+The `tagger` object contains the following keys:
 
 Name | Type | Description
 -----|------|--------------

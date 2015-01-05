@@ -51,7 +51,7 @@ a new tree out.
 
 Name | Type | Description
 -----|------|--------------
-`tree`|`array` of `hash`es | **Required**. Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure
+`tree`|`array` of `object`s | **Required**. Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure
 `base_tree`| `string` | The SHA1 of the tree you want to update with new data. If you don't set this, the commit will be created on top of everything; however, it will only contain your change, the rest of your files will show up as deleted.
 
 The `tree` parameter takes the following keys:

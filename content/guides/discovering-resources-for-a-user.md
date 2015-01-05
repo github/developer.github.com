@@ -1,8 +1,8 @@
 ---
-title: Discovering resources for the authenticated user | GitHub API
+title: Discovering resources for a user | GitHub API
 ---
 
-# Discovering resources for the authenticated user
+# Discovering resources for a user
 
 * TOC
 {:toc}
@@ -38,6 +38,6 @@ TODO GET /user/orgs
 
 ### Don’t rely on public organizations
 
-If you've read the docs from cover to cover, you may have noticed an [API method for listing a user's public organization memberships](/v3/orgs/#list-user-organizations). Most applications should avoid this API method. This method only returns the user's public organization memberships, not their private organization memberships. 
+If you've read the docs from cover to cover, you may have noticed an [API method for listing a user's public organization memberships](/v3/orgs/#list-user-organizations). Most applications should avoid this API method. This method only returns the user's public organization memberships, not their private organization memberships.
 
 As an application, you typically want all of the user's organizations (public and private) that your app is authorized to access. The workflow above will give you exactly that.

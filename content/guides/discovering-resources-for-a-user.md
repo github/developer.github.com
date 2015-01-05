@@ -2,6 +2,8 @@
 title: Discovering resources for a user | GitHub API
 ---
 
+TODO: Mention pagination
+
 # Discovering resources for a user
 
 * TOC
@@ -9,19 +11,50 @@ title: Discovering resources for a user | GitHub API
 
 When making authenticated requests to the GitHub API, applications often need to fetch the current user's repositories and organizations. In this guide, will explain how to reliably discover those resources.
 
+To interact with the GitHub API, we'll be using [Octokit.rb][octokit.rb]. You can find the complete source code for this project in the [platform-samples][platform samples] repository.
+
+## Getting started
+
+If you haven't already, you should read the ["Basics of Authentication"][basics-of-authentication] guide before working through the examples below. The examples below assume that you have [registered an OAuth application][register-oauth-app] and that your [application has an OAuth token for a user][make-authenticated-request-for-user].
+
 ## Discover the repositories that your app can access for a user
 
 In addition to having their own personal repositories, a user may be a collaborator on repositories owned by other users and organizations. Collectively, these are the repositories where the user has *privileged* access (i.e., private repositories where the user has read or write access, and public repositories where the user has write access).
 
 [OAuth scopes](/v3/oauth/#scopes) and [organization application policies](#todo) determine which of those repositories your app can access for a user. Use the workflow below to discover those repositories.
 
-### Find the URL
+As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. Then, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
 
-TODO Describe the process of hitting the root endpoint and fetching the `current_user_repositories_url`.
+    #!ruby
+    require 'octokit'
 
-### Fetch the repositories
+    # TODO Explain why this is needed.
+    Octokit.default_media_type = "application/vnd.github.moondragon-preview+json"
 
-TODO GET /user/repos
+    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+    # Instead, set and test environment variables, like below.
+    client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
+
+Next, we'll hit the [root endpoint][root endpoint] to get the [hypermedia][hypermedia] relation for the repositories that our application can access for the user:
+
+    #!ruby
+    repositories_relation = client.root.rels[:current_user_repositories]
+
+Then, we'll use that relation to fetch the repositories:
+
+    #!ruby
+    repositories_relation.get.data.each do |repository|
+      full_name = repository[:full_name]
+      has_push_access = repository[:permissions][:push]
+
+      access_type = if has_push_access
+                      "write"
+                    else
+                      "read-only"
+                    end
+
+      puts "User has #{access_type} access to #{full_name}."
+    end
 
 ## Discover the organizations that your app can access for a user
 
@@ -41,3 +74,11 @@ TODO GET /user/orgs
 If you've read the docs from cover to cover, you may have noticed an [API method for listing a user's public organization memberships](/v3/orgs/#list-user-organizations). Most applications should avoid this API method. This method only returns the user's public organization memberships, not their private organization memberships.
 
 As an application, you typically want all of the user's organizations (public and private) that your app is authorized to access. The workflow above will give you exactly that.
+
+[basics-of-authentication]: /guides/basics-of-authentication/
+[hypermedia]: /v3/#hypermedia
+[make-authenticated-request-for-user]: /guides/basics-of-authentication/#making-authenticated-requests
+[octokit.rb]: https://github.com/octokit/octokit.rb
+[platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/discovering-resources-for-a-user
+[register-oauth-app]: /guides/basics-of-authentication/#registering-your-app
+[root endpoint]: /v3/#root-endpoint

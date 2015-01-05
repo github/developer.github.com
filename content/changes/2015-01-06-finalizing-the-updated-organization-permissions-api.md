@@ -23,7 +23,7 @@ Now, this API will only return public organization memberships.
 
 ### The "List your organizations" API
 
-Previously, the "List your organizations" API always included your [public organization memberships][public-org-membership], regardless of the OAuth scopes associated with your request. If you had `user`, `read:org`, `write:org`, or `admin:org` scope, the response also included your private organization memberships.
+Previously, the [List your organizations][list-your-organizations] API always included your [public organization memberships][public-org-membership], regardless of the OAuth scopes associated with your request. If you had `user`, `read:org`, `write:org`, or `admin:org` scope, the response also included your private organization memberships.
 
 Now, this API will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with `read:org` scope, you can publicize your organization membership with `user` scope, etc.). Therefore, this API will require at least `user` or `read:org` scope. (`write:org` and `admin:org` scope implicitly include `read:org` scope.) OAuth requests with insufficient scope will receive a `403 Forbidden` response.
 
@@ -52,3 +52,13 @@ To check if a given user is an organization admin, use the new [Get organization
 In February 2015, your Owners team will lose its special status and become a totally normal team. At this point, using the API to manage organization admins through the Owners team will no longer work; your API requests will still succeed, but changing Owners team membership will have no impact on organization admin status. To keep your application working correctly, update it as soon as possible to use the new APIs described above.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
+
+[org-permissions-preview]: /changes/2014-12-08-organization-permissions-api-preview/
+[list-your-repos]: /v3/repos/#list-your-repositories
+[list-user-organizations]: /v3/orgs/#list-user-organizations
+[public-org-membership]: https://help.github.com/articles/publicizing-or-concealing-organization-membership
+[list-your-organizations]: /v3/orgs/#list-your-organizations
+[add-org-membership]: /v3/orgs/members/#add-or-update-organization-membership
+[list-org-members]: /v3/orgs/members/#members-list
+[get-org-membership]: /v3/orgs/members/#get-organization-membership
+[contact]: https://github.com/contact?form[subject]=Organization+Permissions+API

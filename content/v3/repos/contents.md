@@ -69,7 +69,7 @@ In the next major version of the API, the type will be returned as "submodule".
 
 If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the API responds with the content of the file (in the [format shown above](#response-if-content-is-a-file)).
 
-Otherwise, the API responds with a hash describing the symlink itself:
+Otherwise, the API responds with an object describing the symlink itself:
 
 <%= headers 200 %>
 <%= json :symlink_content %>
@@ -101,9 +101,9 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `committer` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is an object containing
 information about the committer. Or, you can provide an `author` parameter, which
-is a hash containing information about the author.
+is an object containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated
@@ -149,9 +149,9 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `committer` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is an object containing
 information about the committer. Or, you can provide an `author` parameter, which
-is a hash containing information about the author.
+is an object containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated
@@ -198,9 +198,9 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `committer` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is an object containing
 information about the committer. Or, you can provide an `author` parameter, which
-is a hash containing information about the author.
+is an object containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated

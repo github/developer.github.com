@@ -387,7 +387,7 @@ in your Accept header.
     application/vnd.github.v3.text-match+json
 
 The results will provide the same JSON payloads as shown above, with an extra
-key called `text_matches`. Inside the `text_matches` array, each hash includes
+key called `text_matches`. Inside the `text_matches` array, each object includes
 the following attributes:
 
 

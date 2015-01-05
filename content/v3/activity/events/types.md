@@ -112,7 +112,7 @@ Key | Type | Description
 ----|------|-------------
 `state`      |`string` | The new state. Can be `pending`, `success`, `failure`, or `error`.
 `target_url` |`string` | The optional link added to the status.
-`deployment` |`hash`   | The deployment that this status is associated with.
+`deployment` |`object`   | The deployment that this status is associated with.
 `description`|`string` | The optional human-readable description added to the status.
 
 <%= webhook_payload "deployment_status" %>

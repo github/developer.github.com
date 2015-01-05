@@ -62,12 +62,12 @@ In order to protect sensitive data which may be present in webhook configuration
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. Must be passed as "web".
-`config`|`hash` | **Required**. Key/value pairs to provide settings for this webhook. [These are defined below](#create-hook-config-params).
+`config`|`object` | **Required**. Key/value pairs to provide settings for this webhook. [These are defined below](#create-hook-config-params).
 `events`|`array` | Determines what [events][event-types] the hook is triggered for.  Default: `["push"]`.
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
 <a name="create-hook-config-params"></a>
-The `config` hash can accept the following keys:
+The `config` object can accept the following keys:
 
 <%= fetch_content(:org_hook_config_hash) %>
 
@@ -99,12 +99,12 @@ Here's how you can create a hook that posts payloads in JSON format:
 
 Name | Type | Description
 -----|------|--------------
-`config`|`hash` | **Required**. Key/value pairs to provide settings for this webhook. [These are defined below](#update-hook-config-params).
+`config`|`object` | **Required**. Key/value pairs to provide settings for this webhook. [These are defined below](#update-hook-config-params).
 `events`|`array` | Determines what [events][event-types] the hook is triggered for.  Default: `["push"]`.
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
 <a name="update-hook-config-params"></a>
-The `config` hash can accept the following keys:
+The `config` object can accept the following keys:
 
 <%= fetch_content(:org_hook_config_hash) %>
 

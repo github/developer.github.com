@@ -21,22 +21,9 @@ be returned.
 Name    | Type    | Description
 --------|---------|--------------
 `filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for owners of organizations with private repositories.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
-`role`  |`string` | Filter members returned by their role. If specified, must be set to `admin`, which will only return users with admin permissions on the org. **This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`role`  |`string` | Filter members returned by their role. If specified, must be set to `admin`, which will only return users with admin permissions on the org.
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
-
-<div class="alert">
-  <p>
-    The Organization Permissions API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon-preview+json</pre>
-  </p>
-</div>
 
 ### Response
 
@@ -132,19 +119,6 @@ The user can publicize their own membership.
 
 ## Get organization membership
 
-<div class="alert">
-  <p>
-    The Organization Permissions API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon-preview+json</pre>
-  </p>
-</div>
-
 In order to get a user's membership with an organization, the authenticated user must be an organization admin.
 
     GET /orgs/:org/memberships/:username
@@ -165,19 +139,6 @@ In order to get a user's membership with an organization, the authenticated user
 <%= json(:pending_limited_org_membership) %>
 
 ## Add or update organization membership
-
-<div class="alert">
-  <p>
-    The Organization Permissions API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon-preview+json</pre>
-  </p>
-</div>
 
 In order to create or update a user's membership with an organization, the authenticated user must be an organization admin.
 
@@ -200,19 +161,6 @@ Name  | Type   | Description
 <%= json(:active_admin_org_membership) %>
 
 ## Remove organization membership
-
-<div class="alert">
-  <p>
-    The Organization Permissions API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon-preview+json</pre>
-  </p>
-</div>
 
 In order to remove a user's membership with an organization, the authenticated user must be an organization admin.
 

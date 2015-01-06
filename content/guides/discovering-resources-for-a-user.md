@@ -60,14 +60,29 @@ Then, we'll use that relation to fetch the repositories:
 
 Applications can perform all sorts of organization-related tasks for a user. To perform these tasks, the app needs an [OAuth authorization](/v3/oauth/#scopes) with sufficient permission (e.g., you can [list teams](/v3/orgs/teams/#list-teams) with `read:org` scope, you can [publicize the user’s organization membership](/v3/orgs/members/#publicize-a-users-membership) with `user` scope, etc.). Once a user has granted one or more of these scopes to your app, you're ready to fetch the user’s organizations.
 
-### Find the URL
+Just as we did when discovering repositories above, we'll start by requiring [GitHub's Octokit.rb][octokit.rb] Ruby library. Then, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
 
-TODO Describe the process of hitting the root endpoint and fetching the `user_organizations_url`.
-TODO For consistency, `user_organizations_url` should really be `current_user_organizations_url`.
+    #!ruby
+    require 'octokit'
 
-### Fetch the organizations
+    # TODO Explain why this is needed.
+    Octokit.default_media_type = "application/vnd.github.moondragon-preview+json"
 
-TODO GET /user/orgs
+    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+    # Instead, set and test environment variables, like below.
+    client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
+
+Now, we'll access the [root endpoint][root endpoint] to fetch the [hypermedia][hypermedia] relation for the organizations that our application can access for the user:
+
+    #!ruby
+    organizations_relation = client.root.rels[:user_organizations]
+
+Then, we can use that relation to get the organizations:
+
+    #!ruby
+    organizations_relation.get.data.each do |organization|
+      puts "User belongs to the #{organization[:login]} organization."
+    end
 
 ### Don’t rely on public organizations
 

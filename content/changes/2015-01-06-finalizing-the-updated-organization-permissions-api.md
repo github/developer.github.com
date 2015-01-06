@@ -37,7 +37,7 @@ To add a new organization admin, use the new [Add or update organization members
 
 ### Removing an organization admin
 
-To remove someone from the organization role but keep them as a member of their teams, use the new [Add or update organization membership][add-org-membership] endpoint, specifying a role of `"member"` in the request body. This replaces removing people from the Owners team.
+To remove someone from the organization admin role but keep them as a member of their teams, use the new [Add or update organization membership][add-org-membership] endpoint, specifying a role of `"member"` in the request body. This replaces removing people from the Owners team.
 
 ### Listing organization admins
 

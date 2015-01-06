@@ -19,7 +19,7 @@ If you haven't already, you should read the ["Basics of Authentication"][basics-
 
 In addition to having their own personal repositories, a user may be a collaborator on repositories owned by other users and organizations. Collectively, these are the repositories where the user has privileged access: either it's a private repository where the user has read or write access, or it's a public repository where the user has write access.
 
-[OAuth scopes][scopes] and [organization application policies](#todo!) determine which of those repositories your app can access for a user. Use the workflow below to discover those repositories.
+[OAuth scopes][scopes] determine which of those repositories your app can access for a user. Use the workflow below to discover those repositories.
 
 As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. Then, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
 

@@ -35,15 +35,20 @@ As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. T
     # Instead, set and test environment variables, like below.
     client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
 
-Next, we'll hit the [root endpoint][root endpoint] to get the [hypermedia][hypermedia] relation for the repositories that our application can access for the user:
+Next, we'll hit the [root endpoint][root endpoint] to get the [hypermedia][hypermedia] URL for the repositories that our application can access for the user:
 
     #!ruby
-    repositories_relation = client.root.rels[:current_user_repositories]
+    repositories_url = client.root.rels[:current_user_repositories].href
 
-Then, we'll use that relation to fetch the repositories:
+Then, we'll use that URL to fetch the repositories. We'll rely on Octokit.rb to handle [pagination][pagination] for us:
 
     #!ruby
-    repositories_relation.get.data.each do |repository|
+    repositories = client.paginate(repositories_url)
+
+Once we have the repositories, we can iterate over them to discover information useful to our application:
+
+    #!ruby
+    repositories.each do |repository|
       full_name = repository[:full_name]
       has_push_access = repository[:permissions][:push]
 
@@ -94,6 +99,7 @@ As an application, you typically want all of the user's organizations (public an
 [hypermedia]: /v3/#hypermedia
 [make-authenticated-request-for-user]: /guides/basics-of-authentication/#making-authenticated-requests
 [octokit.rb]: https://github.com/octokit/octokit.rb
+[pagination]: /v3/#pagination
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/discovering-resources-for-a-user
 [register-oauth-app]: /guides/basics-of-authentication/#registering-your-app
 [root endpoint]: /v3/#root-endpoint

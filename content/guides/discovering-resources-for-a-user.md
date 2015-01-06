@@ -19,7 +19,7 @@ If you haven't already, you should read the ["Basics of Authentication"][basics-
 
 In addition to having their own personal repositories, a user may be a collaborator on repositories owned by other users and organizations. Collectively, these are the repositories where the user has privileged access: either it's a private repository where the user has read or write access, or it's a public repository where the user has write access.
 
-[OAuth scopes](/v3/oauth/#scopes) and [organization application policies](#todo) determine which of those repositories your app can access for a user. Use the workflow below to discover those repositories.
+[OAuth scopes][scopes] and [organization application policies](#todo!) determine which of those repositories your app can access for a user. Use the workflow below to discover those repositories.
 
 As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. Then, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
 
@@ -61,7 +61,7 @@ Once we have the repositories, we can iterate over them to discover information 
 
 ## Discover the organizations that your app can access for a user
 
-Applications can perform all sorts of organization-related tasks for a user. To perform these tasks, the app needs an [OAuth authorization](/v3/oauth/#scopes) with sufficient permission (e.g., you can [list teams](/v3/orgs/teams/#list-teams) with `read:org` scope, you can [publicize the user’s organization membership](/v3/orgs/members/#publicize-a-users-membership) with `user` scope, etc.). Once a user has granted one or more of these scopes to your app, you're ready to fetch the user’s organizations.
+Applications can perform all sorts of organization-related tasks for a user. To perform these tasks, the app needs an [OAuth authorization][scopes] with sufficient permission (e.g., you can [list teams][list-teams] with `read:org` scope, you can [publicize the user’s organization membership][publicize-membership] with `user` scope, etc.). Once a user has granted one or more of these scopes to your app, you're ready to fetch the user’s organizations.
 
 Just as we did when discovering repositories above, we'll start by requiring [GitHub's Octokit.rb][octokit.rb] Ruby library. Then, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
 
@@ -91,15 +91,19 @@ Then, we can use that relation to get the organizations. Once again, we'll ask O
 
 ### Don’t rely on public organizations
 
-If you've read the docs from cover to cover, you may have noticed an [API method for listing a user's public organization memberships](/v3/orgs/#list-user-organizations). Most applications should avoid this API method. This method only returns the user's public organization memberships, not their private organization memberships.
+If you've read the docs from cover to cover, you may have noticed an [API method for listing a user's public organization memberships][list-public-orgs]. Most applications should avoid this API method. This method only returns the user's public organization memberships, not their private organization memberships.
 
 As an application, you typically want all of the user's organizations (public and private) that your app is authorized to access. The workflow above will give you exactly that.
 
 [basics-of-authentication]: /guides/basics-of-authentication/
 [hypermedia]: /v3/#hypermedia
+[list-public-orgs]: /v3/orgs/#list-user-organizations
+[list-teams]: /v3/orgs/teams/#list-teams
 [make-authenticated-request-for-user]: /guides/basics-of-authentication/#making-authenticated-requests
 [octokit.rb]: https://github.com/octokit/octokit.rb
 [pagination]: /v3/#pagination
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/discovering-resources-for-a-user
+[publicize-membership]: /v3/orgs/members/#publicize-a-users-membership
 [register-oauth-app]: /guides/basics-of-authentication/#registering-your-app
 [root endpoint]: /v3/#root-endpoint
+[scopes]: /v3/oauth/#scopes

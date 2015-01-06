@@ -2,8 +2,6 @@
 title: Discovering resources for a user | GitHub API
 ---
 
-TODO: Mention pagination
-
 # Discovering resources for a user
 
 * TOC
@@ -77,15 +75,17 @@ Just as we did when discovering repositories above, we'll start by requiring [Gi
     # Instead, set and test environment variables, like below.
     client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
 
-Now, we'll access the [root endpoint][root endpoint] to fetch the [hypermedia][hypermedia] relation for the organizations that our application can access for the user:
+Now, we'll access the [root endpoint][root endpoint] to fetch the [hypermedia][hypermedia] URL for the organizations that our application can access for the user:
 
     #!ruby
-    organizations_relation = client.root.rels[:user_organizations]
+    organizations_url = client.root.rels[:user_organizations].href # TODO Change to current_user_organizations
 
-Then, we can use that relation to get the organizations:
+Then, we can use that relation to get the organizations. Once again, we'll ask Octokit.rb to take care of the [pagination][pagination] for us:
 
     #!ruby
-    organizations_relation.get.data.each do |organization|
+    organizations = client.paginate(organizations_url)
+
+    organizations.each do |organization|
       puts "User belongs to the #{organization[:login]} organization."
     end
 

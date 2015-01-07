@@ -5,7 +5,7 @@ created_at: 2015-01-07
 author_name: jakeboxer
 ---
 
-Last month, we [released][org-permissions-preview] a preview of the updated Organization Permissions API. Today, we're finalizing these API changes. As of today, these APIs are stable and suitable for production use.
+Last month, we [released a preview][org-permissions-preview] of several API changes related to managing organization members and repositories. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to **update your code before February 24** to account for these changes.
 
 ### Breaking changes coming on February 24
 

@@ -22,11 +22,11 @@ Starting today, we're offering a migration period allowing applications to opt i
 
 ### Migration period
 
-While these changes are in their migration period, you'll need to provide the following custom media type in the `Accept` header:
+During the migration period, you can opt-in to these changes using the following custom media type in the `Accept` header:
 
     application/vnd.github.moondragon+json
 
-If you have any questions or feedback, please [get in touch with us][contact]!
+We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please [get in touch with us][contact]!
 
 [org-permissions-preview]: /changes/2014-12-08-organization-permissions-api-preview/
 [list-your-repos]: /v3/repos/#list-your-repositories

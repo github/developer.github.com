@@ -2,13 +2,51 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2014-12-12T00:00:00Z</updated>
+  <updated>2015-01-07T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2015-01-07:/changes/2015-01-07-prepare-for-organization-permissions-changes/</id>
+    <title type="html">Prepare for upcoming organization permissions changes</title>
+    <published>2015-01-07T00:00:00Z</published>
+    <updated>2015-01-07T00:00:00Z</updated>
+    <author>
+      <name>jakeboxer</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-01-07-prepare-for-organization-permissions-changes/" />
+    <content type="html">&lt;p&gt;Last month, we &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;released a preview&lt;/a&gt; of several API changes related to managing organization members and repositories. Today, we’re finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to &lt;strong&gt;update your code before February 24&lt;/strong&gt; to account for these changes.&lt;/p&gt;
+
+&lt;h3 id="breaking-changes-coming-on-february-24"&gt;Breaking changes coming on February 24&lt;/h3&gt;
+
+&lt;p&gt;If your application uses any of the following APIs, then you are affected by this change:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;APIs for managing your organization’s admins through the Owners team&lt;/li&gt;
+  &lt;li&gt;The &lt;a href="/v3/repos/#list-your-repositories"&gt;List your repositories&lt;/a&gt; API&lt;/li&gt;
+  &lt;li&gt;The &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API&lt;/li&gt;
+  &lt;li&gt;The &lt;a href="/v3/orgs/#list-user-organizations"&gt;List user organizations&lt;/a&gt; API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If your application uses these APIs, we urge you to update your application as soon as possible. (Read &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;last month’s announcement&lt;/a&gt; for more details on the changes.)&lt;/p&gt;
+
+&lt;p&gt;Starting today, we’re offering a migration period allowing applications to opt in to these changes (as described below). On February 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.&lt;/p&gt;
+
+&lt;h3 id="migration-period"&gt;Migration period&lt;/h3&gt;
+
+&lt;p&gt;During the migration period, you can opt-in to these changes using the following custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.moondragon+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2014-12-12:/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/</id>
     <title type="html">Replace older SSH keys created by your application</title>
@@ -1185,22 +1223,6 @@ count represents the number of contexts submitted for the given commit.&lt;/p&gt
 &lt;p&gt;We will eventually remove support for the beta media type, but we have no official retirement date to annouce at the moment. When the time comes, rest assured that we’ll announce the retirement with plenty of notice. In the meantime, existing API clients that rely on the beta media type should start making plans to migrate to v3. The beta media type differs from v3 in &lt;a href="/v3/versions/#differences-from-beta-version"&gt;just a few places&lt;/a&gt;. In most cases, migrating an application from the beta media type to the v3 media type is smooth and painless.&lt;/p&gt;
 
 &lt;p&gt;As always, if you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=API:+Deprecating+the+beta+media+type"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-04-10:/changes/2014-04-10-deployment-api-preview-extension/</id>
-    <title type="html">Extending the preview period for the Deployments API</title>
-    <published>2014-04-10T00:00:00Z</published>
-    <updated>2014-04-10T00:00:00Z</updated>
-    <author>
-      <name>atmos</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-04-10-deployment-api-preview-extension/" />
-    <content type="html">&lt;p&gt;The preview period for the new &lt;a href="/changes/2014-01-09-preview-the-new-deployments-api/"&gt;Deployments API&lt;/a&gt; continues to yield valuable feedback from developers. In early March, we used that feedback to &lt;a href="/changes/2014-03-03-deployments-api-updates/"&gt;improve the payload format&lt;/a&gt; that integrations can use to customize deployments. A few weeks later, we began integrating with the new &lt;a href="/changes/2014-03-27-combined-status-api/"&gt;Combined Status API&lt;/a&gt; to help ensure that only verified code gets deployed, even if you have multiple systems verifying different aspects of your software.&lt;/p&gt;
-
-&lt;p&gt;To give developers time to explore these recent refinements to the Deployments API, we’re extending the preview period for a little while longer. As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
 
 </content>
   </entry>

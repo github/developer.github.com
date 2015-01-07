@@ -41,6 +41,54 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2015-01-07-prepare-for-organization-permissions-changes/">
+  <h2 class="title">
+  <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">Prepare for upcoming organization permissions changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 7, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer">
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+    <p>Last month, we <a href="/changes/2014-12-08-organization-permissions-api-preview/">released a preview</a> of several API changes related to managing organization members and repositories. Today, we’re finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before February 24</strong> to account for these changes.</p>
+
+<h3 id="breaking-changes-coming-on-february-24">Breaking changes coming on February 24</h3>
+
+<p>If your application uses any of the following APIs, then you are affected by this change:</p>
+
+<ul>
+  <li>APIs for managing your organization’s admins through the Owners team</li>
+  <li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API</li>
+  <li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API</li>
+  <li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API</li>
+</ul>
+
+<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-organization-permissions-api-preview/">last month’s announcement</a> for more details on the changes.)</p>
+
+<p>Starting today, we’re offering a migration period allowing applications to opt in to these changes (as described below). On February 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
+
+<h3 id="migration-period">Migration period</h3>
+
+<p>During the migration period, you can opt-in to these changes using the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.moondragon+json
+</code></pre>
+
+<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">
   <h2 class="title">
   <a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">Replace older SSH keys created by your application</a>
@@ -3315,6 +3363,35 @@ curl -u defunkt https://api.github.com/feeds
 
 </div>
 
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
+      <a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -3352,31 +3429,34 @@ but we can’t wait to see what others can do with this information.</p>
 
 </div>
 
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
   <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    May 6, 2013
+    April 30, 2013
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
-      <a href="https://github.com/ymendel">ymendel</a>
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
+      <a href="https://github.com/foca">foca</a>
   </li>
 </ul>
 </div>
 
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
 
-<p>Happy editing!</p>
+<pre class="terminal">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
 
 
 </div>
@@ -3429,38 +3509,6 @@ curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
-
-
-</div>
-
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca">
-      <a href="https://github.com/foca">foca</a>
-  </li>
-</ul>
-</div>
-
-    <p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
 
 
 </div>
@@ -4566,6 +4614,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">Prepare for upcoming organization permissions changes<br /><span class="date">January 7, 2015</span></a></li>
+
   <li><a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">Replace older SSH keys created by your application<br /><span class="date">December 12, 2014</span></a></li>
 
   <li><a href="/changes/2014-12-09-new-attributes-for-stars-api/">New Attributes for Starring API<br /><span class="date">December 9, 2014</span></a></li>
@@ -4579,8 +4629,6 @@ old API functionality.</s>
   <li><a href="/changes/2014-11-25-the-deployments-api-is-official/">The Deployments API is official<br /><span class="date">November 25, 2014</span></a></li>
 
   <li><a href="/changes/2014-10-24-status-api-limits/">Status API Limits<br /><span class="date">October 29, 2014</span></a></li>
-
-  <li><a href="/changes/2014-10-21-deployment-webhook-payload-changes/">Deployment webhook payload changes<br /><span class="date">October 21, 2014</span></a></li>
 
 </ul>
 

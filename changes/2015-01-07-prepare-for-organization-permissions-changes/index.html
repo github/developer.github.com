@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>New Attributes for Starring API</title>
+  <title>Prepare for upcoming organization permissions changes</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,36 +40,51 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-12-09-new-attributes-for-stars-api/">
+      <div class="change" id="/changes/2015-01-07-prepare-for-organization-permissions-changes/">
 <h2 class="title">
-  <a href="/changes/2014-12-09-new-attributes-for-stars-api/">New Attributes for Starring API</a>
+  <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">Prepare for upcoming organization permissions changes</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 9, 2014
+    January 7, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/arfon.png" alt="Avatar for arfon"/>
-      <a href="https://github.com/arfon">arfon</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer"/>
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
   </li>
 </ul>
 </div>
 
 
-<p>You can now see when a user starred a repository. To receive the new response format containing the <code>starred_at</code> field, request the new media type:</p>
+<p>Last month, we <a href="/changes/2014-12-08-organization-permissions-api-preview/">released a preview</a> of several API changes related to managing organization members and repositories. Today, we’re finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before February 24</strong> to account for these changes.</p>
 
-<pre><code>curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/users/andrew/starred
+<h3 id="breaking-changes-coming-on-february-24">Breaking changes coming on February 24</h3>
+
+<p>If your application uses any of the following APIs, then you are affected by this change:</p>
+
+<ul>
+  <li>APIs for managing your organization’s admins through the Owners team</li>
+  <li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API</li>
+  <li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API</li>
+  <li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API</li>
+</ul>
+
+<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-organization-permissions-api-preview/">last month’s announcement</a> for more details on the changes.)</p>
+
+<p>Starting today, we’re offering a migration period allowing applications to opt in to these changes (as described below). On February 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
+
+<h3 id="migration-period">Migration period</h3>
+
+<p>During the migration period, you can opt-in to these changes using the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.moondragon+json
 </code></pre>
 
-<p>Note the starred repository is now available in the repo field.</p>
-
-<h3 id="feedback">Feedback</h3>
-
-<p>If you have any questions or feedback about these changes, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Attributes+for+Starring+API">drop us a line</a>.</p>
+<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
 
 
 </div>

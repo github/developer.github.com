@@ -9,16 +9,16 @@ Last month, we [released a preview][org-permissions-preview] of several API chan
 
 ### Breaking changes coming on February 24
 
-On February 24, 2014, these API changes will become official parts of the GitHub API v3. At that time, the custom media type will no longer be required to access these API changes.
+If your application uses any of the following APIs, then you are affected by this change:
 
-If your application does any of these things:
+- APIs for managing your organization's admins through the Owners team
+- The [List your repositories][list-your-repos] API
+- The [List your organizations][list-your-organizations] API
+- The [List user organizations][list-user-organizations] API
 
-- Uses the API to manage your organization's admins through the Owners team
-- Uses the [List your repositories][list-your-repos] API
-- Uses the [List your organizations][list-your-organizations] API
-- Uses the [List user organizations][list-user-organizations] API
+If your application uses these APIs, we urge you to update your application as soon as possible. (Read [last month's announcement][org-permissions-preview] for more details on the changes.)
 
-We urge you to update your application as soon as possible. Read the [update Organization Permissions API][org-permissions-preview] blog post for more details on the changes.
+Starting today, we're offering a migration period allowing applications to opt in to these changes (as described below). On February 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.
 
 ### Migration period
 

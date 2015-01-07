@@ -21,32 +21,29 @@ In addition to having their own personal repositories, a user may be a collabora
 
 [OAuth scopes][scopes] determine which of those repositories your app can access for a user. Use the workflow below to discover those repositories.
 
-As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. Then, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
+As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. Then we'll configure Octokit.rb to automatically handle [pagination][pagination] for us.
 
     #!ruby
     require 'octokit'
 
-    # TODO Explain why this is needed.
-    Octokit.default_media_type = "application/vnd.github.moondragon-preview+json"
+    Octokit.auto_paginate = true
 
+Next, we want to opt in to the [upcoming improvements to the repository listing API][list-repositories-for-current-user]. To do so, we'll set the media type that gives us access to that functionality.
+
+    #!ruby
+    Octokit.default_media_type = "application/vnd.github.moondragon+json"
+
+Now, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
+
+    #!ruby
     # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
     # Instead, set and test environment variables, like below.
     client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
 
-Next, we'll hit the [root endpoint][root endpoint] to get the [hypermedia][hypermedia] URL for the repositories that our application can access for the user:
+Then, we're ready to fetch the [repositories that our application can access for the user][list-repositories-for-current-user]:
 
     #!ruby
-    repositories_url = client.root.rels[:current_user_repositories].href
-
-Then, we'll use that URL to fetch the repositories. We'll rely on Octokit.rb to handle [pagination][pagination] for us:
-
-    #!ruby
-    repositories = client.paginate(repositories_url)
-
-Once we have the repositories, we can iterate over them to discover information useful to our application:
-
-    #!ruby
-    repositories.each do |repository|
+    client.repositories.each do |repository|
       full_name = repository[:full_name]
       has_push_access = repository[:permissions][:push]
 
@@ -63,29 +60,28 @@ Once we have the repositories, we can iterate over them to discover information 
 
 Applications can perform all sorts of organization-related tasks for a user. To perform these tasks, the app needs an [OAuth authorization][scopes] with sufficient permission (e.g., you can [list teams][list-teams] with `read:org` scope, you can [publicize the user’s organization membership][publicize-membership] with `user` scope, etc.). Once a user has granted one or more of these scopes to your app, you're ready to fetch the user’s organizations.
 
-Just as we did when discovering repositories above, we'll start by requiring [GitHub's Octokit.rb][octokit.rb] Ruby library. Then, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
+Just as we did when discovering repositories above, we'll start by requiring [GitHub's Octokit.rb][octokit.rb] Ruby library, configuring Octokit.rb to take care of [pagination][pagination] for us, and use ... <media type> ...
 
     #!ruby
     require 'octokit'
 
-    # TODO Explain why this is needed.
-    Octokit.default_media_type = "application/vnd.github.moondragon-preview+json"
+    Octokit.auto_paginate = true
 
+Next, we'll opt in to the [upcoming enhancements to the organization listing API][list-orgs-for-current-user]. To do so, we'll set the media type that gives us access to that functionality.
+
+    Octokit.default_media_type = "application/vnd.github.moondragon+json"
+
+Now, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user] to initialize our API client:
+
+    #!ruby
     # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
     # Instead, set and test environment variables, like below.
     client = Octokit::Client.new :access_token => ENV["OAUTH_ACCESS_TOKEN"]
 
-Now, we'll access the [root endpoint][root endpoint] to fetch the [hypermedia][hypermedia] URL for the organizations that our application can access for the user:
+Then, we can [list the organizations that our application can access for the user][list-orgs-for-current-user]:
 
     #!ruby
-    organizations_url = client.root.rels[:user_organizations].href # TODO Change to current_user_organizations
-
-Then, we can use that relation to get the organizations. Once again, we'll ask Octokit.rb to take care of the [pagination][pagination] for us:
-
-    #!ruby
-    organizations = client.paginate(organizations_url)
-
-    organizations.each do |organization|
+    client.organizations.each do |organization|
       puts "User belongs to the #{organization[:login]} organization."
     end
 
@@ -96,8 +92,9 @@ If you've read the docs from cover to cover, you may have noticed an [API method
 As an application, you typically want all of the user's organizations (public and private) that your app is authorized to access. The workflow above will give you exactly that.
 
 [basics-of-authentication]: /guides/basics-of-authentication/
-[hypermedia]: /v3/#hypermedia
 [list-public-orgs]: /v3/orgs/#list-user-organizations
+[list-repositories-for-current-user]: /v3/repos/#list-your-repositories
+[list-orgs-for-current-user]: /v3/orgs/#list-your-organizations
 [list-teams]: /v3/orgs/teams/#list-teams
 [make-authenticated-request-for-user]: /guides/basics-of-authentication/#making-authenticated-requests
 [octokit.rb]: https://github.com/octokit/octokit.rb
@@ -105,5 +102,4 @@ As an application, you typically want all of the user's organizations (public an
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/discovering-resources-for-a-user
 [publicize-membership]: /v3/orgs/members/#publicize-a-users-membership
 [register-oauth-app]: /guides/basics-of-authentication/#registering-your-app
-[root endpoint]: /v3/#root-endpoint
 [scopes]: /v3/oauth/#scopes

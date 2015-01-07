@@ -24,14 +24,12 @@ list the authenticated user's organization-owned repositories.
 
 <div class="alert">
   <p>
-    The Organization Permissions API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-12-08-organization-permissions-api-preview/">blog post</a> for full details.
+    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers beginning February 24, 2015. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
   </p>
 
   <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon-preview+json</pre>
+    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.moondragon+json</pre>
   </p>
 </div>
 

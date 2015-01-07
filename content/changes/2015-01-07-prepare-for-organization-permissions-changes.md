@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Finalizing the updated Organization Permissions API
+title: Prepare for upcoming organization permissions changes
 created_at: 2015-01-07
 author_name: jakeboxer
 ---

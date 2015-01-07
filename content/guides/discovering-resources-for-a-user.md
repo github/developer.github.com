@@ -69,6 +69,7 @@ Just as we did when discovering repositories above, we'll start by requiring [Gi
 
 Next, we'll opt in to the [upcoming enhancements to the organization listing API][list-orgs-for-current-user]. To do so, we'll set the media type that gives us access to that functionality.
 
+    #!ruby
     Octokit.default_media_type = "application/vnd.github.moondragon+json"
 
 Now, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user] to initialize our API client:

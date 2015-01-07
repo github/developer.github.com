@@ -26,7 +26,7 @@ With the new Organization Permissions API (described below), this method will on
 
   <p>
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon-preview+json</pre>
+    <pre>application/vnd.github.moondragon+json</pre>
   </p>
 </div>
 
@@ -54,7 +54,7 @@ With the new Organization Permissions API (described below), this method will on
 
   <p>
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon-preview+json</pre>
+    <pre>application/vnd.github.moondragon+json</pre>
   </p>
 </div>
 

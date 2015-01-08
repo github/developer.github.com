@@ -20,7 +20,7 @@ be returned.
 
 Name    | Type    | Description
 --------|---------|--------------
-`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for owners of organizations with private repositories.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
+`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization admins.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
 `role`  |`string` | Filter members returned by their role. If specified, must be set to `admin`, which will only return users with admin permissions on the org. **This parameter requires a custom media type to be specified. Please see more in the alert below.**
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication

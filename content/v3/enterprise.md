@@ -32,7 +32,7 @@ Every Enterprise API endpoint is only accessible to GitHub Enterprise site admin
 [Authorizations API]: /v3/oauth_authorizations/#create-a-new-authorization
 [OAuth tokens]: /v3/oauth/
 [basic authentication]: /v3/#basic-authentication
-[Management Console]: /v3/users/management_console/
+[Management Console]: /v3/enterprise/management_console/
 [User Administration]: /v3/users/administration/
 [Management Console password]: https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/
 

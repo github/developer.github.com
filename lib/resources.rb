@@ -2258,6 +2258,18 @@ Name | Type | Description
         "pretty-print" => "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
       }
     ]
+
+    LDAP_USER_UPDATE ||= {
+      'ldap_dn' => 'uid=asdf,ou=users,dc=github,dc=com'
+    }.merge(USER)
+
+    LDAP_TEAM_UPDATE ||= {
+      'ldap_dn' => 'cn=Enterprise Ops,ou=teams,dc=github,dc=com'
+    }.merge(TEAM)
+
+    LDAP_SYNC_CONFIRM ||= {
+      'status' => 'queued'
+    }
   end
 end
 

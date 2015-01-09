@@ -88,7 +88,7 @@ What's going on? Every event that GitHub sends out attached a `X-GitHub-Event`
 HTTP header. We'll only care about the PR events for now. From there, we'll
 take the payload of information, and return the title field. In an ideal scenario,
 our server would be concerned with every time a pull request is updated, not just
-when it's updated. That would make sure that every new push passes the CI tests.
+when it's opened. That would make sure that every new push passes the CI tests.
 But for this demo, we'll just worry about when it's opened.
 
 To test out this proof-of-concept, make some changes in a branch in your test

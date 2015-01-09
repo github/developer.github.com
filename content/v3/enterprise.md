@@ -7,13 +7,7 @@ title: Enterprise | GitHub API
 * TOC
 {:toc}
 
-GitHub Enterprise supports the same powerful API available on GitHub.com as well as its own set of API endpoints:
-
-- Use the [Admin Stats][] API to get usage statistics
-- Use the [License][] API to get license information
-- Use the [Search Indexing][] API to queue up search indexing jobs
-- Use the [Management Console][] API to perform common administrative tasks
-- Use the [User Administration][] API to promote, demote, suspend, and unsuspend users
+GitHub Enterprise supports the same powerful API available on GitHub.com as well as its own set of API endpoints. You can find a list of these endpoints on the sidebar, with the exception of the [User Administration][] API, which is within its own section.
 
 ## Endpoint URLs
 
@@ -33,15 +27,12 @@ http(s)://<em>hostname</em>/
 
 Your Enterprise installation's API endpoints accept [the same authentication methods](http://developer.github.com/v3/#authentication) as the GitHub.com API. Specifically, you can authenticate yourself with **[OAuth tokens][]** (which can be created using the [Authorizations API][]) or **[basic authentication][]**.
 
-The [Admin Stats][], [License][], [Search Indexing][], and [User Administration][] API endpoints are only accessible to GitHub Enterprise site administrators. The [Management Console][] API endpoints are only accessible via the [Management Console password][].
+Every Enterprise API endpoint is only accessible to GitHub Enterprise site administrators, with the exception of the [Management Console][] API, which is only accessible via the [Management Console password][].
 
 [Authorizations API]: /v3/oauth_authorizations/#create-a-new-authorization
 [OAuth tokens]: /v3/oauth/
 [basic authentication]: /v3/#basic-authentication
-[Admin Stats]: admin_stats/
-[License]: license/
-[Search Indexing]: search_indexing/
-[Management Console]: management_console/
+[Management Console]: /v3/users/management_console/
 [User Administration]: /v3/users/administration/
 [Management Console password]: https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/
 

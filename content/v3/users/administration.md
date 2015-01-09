@@ -37,11 +37,11 @@ You can demote any user account except your own.
 
 ## Suspend a user
 
-{{#tip}}
+{{#warning}}
 
 If your GitHub Enterprise appliance has [LDAP Sync enabled](/enterprise/admin/guides/user-management/using-ldap), this API will return a `403` response. Users managed by an external account cannot be suspended via the API.
 
-{{/tip}}
+{{/warning}}
 
     PUT /users/:username/suspended
 
@@ -55,11 +55,11 @@ You can suspend any user account except your own.
 
 ## Unsuspend a user
 
-{{#tip}}
+{{#warning}}
 
 If your GitHub Enterprise appliance has [LDAP Sync enabled](/enterprise/admin/guides/user-management/using-ldap), this API will return a `403` response. Users managed by an external account cannot be unsuspended via the API.
 
-{{/tip}}
+{{/warning}}
 
     DELETE /users/:username/suspended
 

@@ -51,6 +51,9 @@ begin
       img['src'] = "/enterprise/#{version}#{img['src']}" if img['src'] =~ /^\//
     end
     doc.search('//*[@class="not-enterprise"]').remove
+    doc.search('//*[@class="enterprise-only"]') do |tag|
+      tag.attributes['style'].remove
+    end
     File.open(html_file, 'w') { |file| file.write(doc.to_html) }
   end
 

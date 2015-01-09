@@ -50,11 +50,16 @@ authenticated via Basic Auth or via OAuth with at least `read:public_key`
 Creates a public key. Requires that you are authenticated via Basic Auth,
 or OAuth with at least `write:public_key` [scope](/v3/oauth/#scopes).
 
+{{#enterprise-only}}
+
 {{#warning}}
 
 If your GitHub Enterprise appliance has [LDAP Sync enabled](/enterprise/admin/guides/user-management/using-ldap), this API will return a `403` response. Users managed by an external account cannot add a new SSH key via the API.
 
 {{/warning}}
+
+{{/enterprise-only}}
+
     POST /user/keys
 
 ### Input
@@ -77,11 +82,16 @@ instead.
 Removes a public key. Requires that you are authenticated via Basic Auth
 or via OAuth with at least `admin:public_key` [scope](/v3/oauth/#scopes).
 
+{{#enterprise-only}}
+
 {{#warning}}
 
 If your GitHub Enterprise appliance has [LDAP Sync enabled](/enterprise/admin/guides/user-management/using-ldap), this API will return a `403` response. Users managed by an external account cannot delete a new SSH key via the API.
 
 {{/warning}}
+
+{{/enterprise-only}}
+
     DELETE /user/keys/:id
 
 ### Response

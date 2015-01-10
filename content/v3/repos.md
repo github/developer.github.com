@@ -9,11 +9,29 @@ title: Repositories | GitHub API
 
 ## List your repositories
 
-List repositories for the authenticated user. Note that this does not include
-repositories owned by organizations which the user can access. You can
-[list user organizations](/v3/orgs/#list-user-organizations) and
+List repositories for the authenticated user.
+
+Note that this currently does not include repositories owned by organizations
+which the user can access. You can
+[list your organizations](/v3/orgs/#list-your-organizations) and
 [list organization repositories](/v3/repos/#list-organization-repositories)
 separately.
+
+With the new Organization Permissions API (described below), this *will* include
+repositories owned by organizations which the user can access. If you provide
+the custom media type (described below), you won't need to use other APIs to
+list the authenticated user's organization-owned repositories.
+
+<div class="alert">
+  <p>
+    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers beginning February 24, 2015. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.moondragon+json</pre>
+  </p>
+</div>
 
     GET /user/repos
 
@@ -196,7 +214,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:contributor) { |h| [h] } %>
 
 ## List languages
@@ -219,7 +237,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:team) { |h| [h] } %>
 
 ## List Tags
@@ -228,7 +246,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:tag) { |h| [h] } %>
 
 ## List Branches
@@ -237,7 +255,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:branches) %>
 
 ## Get Branch

@@ -22,7 +22,7 @@ $ bundle exec nanoc -h
 
 Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about nanoc.
 
-[nanoc]: http://nanoc.stoneship.org/
+[nanoc]: http://nanoc.ws/
 
 ## Styleguide
 
@@ -77,8 +77,8 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 
 ### Terminal blocks
 
-You can specify terminal blocks with `pre.terminal` elements.  (It'd be
-nice if Markdown could do this more cleanly.)
+You can specify terminal blocks with `pre.terminal` elements.  (It'd be nice if
+Markdown could do this more cleanly.)
 
 ```html
 <pre class="terminal">

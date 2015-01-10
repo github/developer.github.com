@@ -5,15 +5,15 @@ title: Event Types & Payloads | GitHub API
 # Event Types & Payloads
 
 Each event has a similar JSON schema, but a unique `payload` object that is
-determined by its event type.  
+determined by its event type.
 
 Event names are used by [repository webhooks](/v3/repos/hooks/) to specify
 which events the webhook should receive. The included payloads below are from webhook deliveries but
 match events returned by the [Events API](/v3/activity/events/) (except where noted).
 
 
-Note that some of these events may not be rendered in timelines.
-They're only created for various internal and repository hooks.
+**Note:** Some of these events may not be rendered in timelines, they're only
+created for various internal and webhook purposes.
 
 * TOC
 {:toc}
@@ -112,7 +112,7 @@ Key | Type | Description
 ----|------|-------------
 `state`      |`string` | The new state. Can be `pending`, `success`, `failure`, or `error`.
 `target_url` |`string` | The optional link added to the status.
-`deployment` |`hash`   | The deployment that this status is associated with.
+`deployment` |`object`   | The deployment that this status is associated with.
 `description`|`string` | The optional human-readable description added to the status.
 
 <%= webhook_payload "deployment_status" %>
@@ -279,6 +279,27 @@ Key | Type | Description
 
 <%= webhook_payload "member" %>
 
+## MembershipEvent
+
+Triggered when a user is added or removed from a team.
+
+Events of this type are not visible in timelines, they are only used to trigger organization webhooks.
+
+### Event name
+
+`membership`
+
+### Payload
+
+Key | Type | Description
+----|------|-------------
+`action` |`string` | The action that was performed. Can be "added" or "removed".
+`scope`  |`string` | The scope of the membership. Currently, can only be "team".
+`member` |`object` | The [user](/v3/users/) that was added or removed.
+`team`   |`object` | The [team](/v3/orgs/teams/) for the membership.
+
+<%= webhook_payload "membership" %>
+
 ## PageBuildEvent
 
 Represents an attempted build of a GitHub Pages site, whether successful or not.
@@ -392,6 +413,25 @@ Key | Type | Description
 
 <%= webhook_payload "release" %>
 
+## RepositoryEvent
+
+Triggered when a repository is created.
+
+Events of this type are not visible in timelines, they are only used to trigger organization webhooks.
+
+### Event name
+
+`repository`
+
+### Payload
+
+Key | Type | Description
+----|------|-------------
+`action` |`string` | The action that was performed. Currently, can only be "created".
+`repository`|`object` | The [repository](/v3/repos/) that was created.
+
+<%= webhook_payload "repository" %>
+
 ## StatusEvent
 
 Triggered when the status of a Git commit changes.
@@ -416,9 +456,9 @@ Key | Type | Description
 
 ## TeamAddEvent
 
-Triggered when a [user is added to a team](/v3/orgs/teams/#add-team-member) or when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).
+Triggered when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).
 
-Note: this event is created in [users' organization timelines](/v3/activity/events/#list-events-for-an-organization).
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Event name
 
@@ -429,7 +469,6 @@ Note: this event is created in [users' organization timelines](/v3/activity/even
 Key | Type | Description
 ----|------|-------------
 `team`|`object` | The [team](/v3/orgs/teams/) that was modified.  Note: older events may not include this in the payload.
-`user`|`object` | The [user](/v3/users/) that was added to this team.
 `repository`|`object` | The [repository](/v3/repos/) that was added to this team.
 
 <%= webhook_payload "team_add" %>

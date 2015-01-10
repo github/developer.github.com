@@ -31,7 +31,7 @@ For [Repositories](/v3/repos/#get), the v3 media type omits the `master_branch` 
 
 ### User Emails JSON
 
-For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of hashes (instead of an array of strings).
+For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of objects (instead of an array of strings).
 
 ## v3 deprecations
 
@@ -110,6 +110,13 @@ The recommendations below will help you prepare your application for the next ma
 : Recommendation: When fetching [the list of commits for a repository](/v3/repos/commits/#list-commits-on-a-repository)
   use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,
   `top`, and `sha`.
+
+1. Authorization attribute: token
+: Recommendation: This attribute will return an empty string in the majority of
+  the Authorizations API responses. Please see
+  [the deprecation blog post](/changes/2014-12-08-removing-authorizations-token/)
+  and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
+  for full details.
 
 # beta (Deprecated) {#beta}
 

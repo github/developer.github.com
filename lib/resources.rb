@@ -46,7 +46,6 @@ module GitHub
       end
 
       def headers(status, head = {})
-        css_class = (status == 202 || status == 204 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
@@ -60,7 +59,7 @@ module GitHub
         lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
         lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
-        %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
+        %(<pre class="headers"><code>#{lines * "\n"}</code></pre>\n)
       end
 
       def link_header(rels)
@@ -99,14 +98,14 @@ module GitHub
 
         hash = yield hash if block_given?
 
-        %(<pre><code class="language-javascript">) +
+        %(<pre class="body-response"><code class="language-javascript">) +
           JSON.pretty_generate(hash) + "</code></pre>"
       end
 
       def text_html(response, status, head = {})
         hs = headers(status, head.merge('Content-Type' => 'text/html'))
         res = CGI.escapeHTML(response)
-        hs + %(<pre><code>) + res + "</code></pre>"
+        hs + %(<pre class="body-response"><code>) + res + "</code></pre>"
       end
 
       def webhook_headers(event_name)
@@ -118,7 +117,16 @@ module GitHub
       end
 
       CONTENT ||= {
-        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\""
+        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
+        "ORG_HOOK_CONFIG_HASH" =>
+        '''
+Name | Type | Description
+-----|------|--------------
+`url`          | `string` | **Required** The URL to which the payloads will be delivered.
+`content_type` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+`secret`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`insecure_ssl` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
+'''
       }
 
       def fetch_content(key)
@@ -191,8 +199,10 @@ module GitHub
     }
 
     PUBLIC_KEY ||= SIMPLE_PUBLIC_KEY.merge \
-      "url"   => "https://api.github.com/user/keys/1",
-      "title" => "octocat@octomac"
+      "url"        => "https://api.github.com/user/keys/1",
+      "title"      => "octocat@octomac",
+      "verified"   => true,
+      "created_at" => "2014-12-10T15:53:42Z"
 
     SIMPLE_REPO ||= {
       "id"               => 1296269,
@@ -242,6 +252,11 @@ module GitHub
       "parent"            => REPO,
       "source"            => REPO
     })
+
+    STARRED_REPO ||= {
+      "starred_at" => "2011-01-16T19:06:43Z",
+      "repo" => REPO
+    }
 
     TAG ||= {
       "name"        => "v0.1",
@@ -392,23 +407,25 @@ module GitHub
       "open_issues"   => 4,
       "closed_issues" => 8,
       "created_at"    => "2011-04-10T20:09:31Z",
-      "updated_at"  => "2014-03-03T18:58:10Z",
+      "updated_at"    => "2014-03-03T18:58:10Z",
+      "closed_at"     => "2013-02-12T13:22:01Z",
       "due_on"        => nil
     }
 
 
     PULL ||= {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
-      "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
-      "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
-      "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
-      "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1",
-      "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits",
-      "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments",
+      "id"         => 1,
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1347",
+      "html_url"   => "https://github.com/octocat/Hello-World/pull/1347",
+      "diff_url"   => "https://github.com/octocat/Hello-World/pull/1347.diff",
+      "patch_url"  => "https://github.com/octocat/Hello-World/pull/1347.patch",
+      "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+      "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1347/commits",
+      "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1347/comments",
       "review_comment_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}",
-      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1/comments",
+      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments",
       "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
-      "number"     => 1,
+      "number"     => 1347,
       "state"      => "open",
       "title"      => "new-feature",
       "body"       => "Please pull these awesome changes",
@@ -432,19 +449,19 @@ module GitHub
       },
       "_links" => {
         "self" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347"},
         "html" => {'href' =>
-          "https://github.com/octocat/Hello-World/pull/1"},
+          "https://github.com/octocat/Hello-World/pull/1347"},
         "issue" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/issues/1"},
+          "https://api.github.com/repos/octocat/Hello-World/issues/1347"},
         "comments" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
+          "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments"},
         "review_comments" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347/comments"},
         "review_comment" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}"},
         "commits" => { 'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347/commits"},
         "statuses" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"}
       },
@@ -547,6 +564,7 @@ module GitHub
       "diff_url" => "https://github.com/octocat/Hello-World/compare/master...topic.diff",
       "patch_url" => "https://github.com/octocat/Hello-World/compare/master...topic.patch",
       "base_commit" => COMMIT,
+      "merge_base_commit" => COMMIT,
       "status" => "behind",
       "ahead_by" => 1,
       "behind_by" => 2,
@@ -668,7 +686,8 @@ module GitHub
       "login"      => "github",
       "id"         => 1,
       "url"        => "https://api.github.com/orgs/github",
-      "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
+      "avatar_url" => "https://github.com/images/error/octocat_happy.gif",
+      "description" => "A great organization"
     }
 
     FULL_ORG ||= ORG.merge({
@@ -701,13 +720,16 @@ module GitHub
     })
 
     TEAM ||= {
+      "id" => 1,
       "url" => "https://api.github.com/teams/1",
       "name" => "Owners",
-      "id" => 1
+      "description" => "A great team.",
+      "permission" => "admin",
+      "members_url" => "https://api.github.com/teams/1/members{/member}",
+      "repositories_url" => "https://api.github.com/teams/1/repos"
     }
 
     FULL_TEAM ||= TEAM.merge({
-      "permission" => "admin",
       "members_count" => 3,
       "repos_count" => 10,
       "organization" =>  ORG
@@ -725,41 +747,87 @@ module GitHub
       "state" => "pending"
     )
 
-    ACTIVE_ORG_MEMBERSHIP ||= {
-      "url"              => "https://api.github.com/user/memberships/orgs/octocat",
+    USER_FOR_ORG_MEMBERSHIP ||= {
+      "login"        => "defunkt",
+      "id"           => 3,
+      "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
+      "gravatar_id"  => "",
+      "url"          => "https://api.github.com/users/defunkt",
+      "html_url"     => "https://github.com/defunkt",
+      "followers_url" => "https://api.github.com/users/defunkt/followers",
+      "following_url" => "https://api.github.com/users/defunkt/following{/other_user}",
+      "gists_url"    => "https://api.github.com/users/defunkt/gists{/gist_id}",
+      "starred_url"  => "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
+      "subscriptions_url" => "https://api.github.com/users/defunkt/subscriptions",
+      "organizations_url" => "https://api.github.com/users/defunkt/orgs",
+      "repos_url"    => "https://api.github.com/users/defunkt/repos",
+      "events_url"   => "https://api.github.com/users/defunkt/events{/privacy}",
+      "received_events_url" => "https://api.github.com/users/defunkt/received_events",
+      "type"         => "User",
+      "site_admin"   => false
+    }
+
+    ORG_FOR_ACTIVE_ORG_MEMBERSHIP ||= {
+      "login"              => "octocat",
+      "url"                => "https://api.github.com/orgs/octocat",
+      "id"                 => 1,
+      "repos_url"          => "https://api.github.com/users/octocat/repos",
+      "events_url"         => "https://api.github.com/users/octocat/events{/privacy}",
+      "members_url"        => "https://api.github.com/users/octocat/members{/member}",
+      "public_members_url" => "https://api.github/com/users/octocat/public_members{/member}",
+      "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+    }
+
+    ORG_FOR_PENDING_ORG_MEMBERSHIP ||= {
+      "login"              => "invitocat",
+      "url"                => "https://api.github.com/orgs/invitocat",
+      "id"                 => 2,
+      "repos_url"          => "https://api.github.com/users/invitocat/repos",
+      "events_url"         => "https://api.github.com/users/invitocat/events{/privacy}",
+      "members_url"        => "https://api.github.com/users/invitocat/members{/member}",
+      "public_members_url" => "https://api.github/com/users/invitocat/public_members{/member}",
+      "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+    }
+
+    ACTIVE_ADMIN_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/octocat/memberships/defunkt",
       "state"            => "active",
+      "role"             => "admin",
       "organization_url" => "https://api.github.com/orgs/octocat",
-      "organization"     => {
-        "login"              => "octocat",
-        "url"                => "https://api.github.com/orgs/octocat",
-        "id"                 => 1,
-        "repos_url"          => "https://api.github.com/users/octocat/repos",
-        "events_url"         => "https://api.github.com/users/octocat/events{/privacy}",
-        "members_url"        => "https://api.github.com/users/octocat/members{/member}",
-        "public_members_url" => "https://api.github/com/users/octocat/public_members{/member}",
-        "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
-      }
+      "organization"     => ORG_FOR_ACTIVE_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
     }
 
-    PENDING_ORG_MEMBERSHIP ||= {
-      "url"              => "https://api.github.com/user/memberships/orgs/invitocat",
+    ACTIVE_LIMITED_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/octocat/memberships/defunkt",
+      "state"            => "active",
+      "role"             => "limited_member",
+      "organization_url" => "https://api.github.com/orgs/octocat",
+      "organization"     => ORG_FOR_ACTIVE_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
+    }
+
+    PENDING_ADMIN_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/invitocat/memberships/defunkt",
       "state"            => "pending",
+      "role"             => "admin",
       "organization_url" => "https://api.github.com/orgs/invitocat",
-      "organization"     => {
-        "login"              => "invitocat",
-        "url"                => "https://api.github.com/orgs/invitocat",
-        "id"                 => 2,
-        "repos_url"          => "https://api.github.com/users/invitocat/repos",
-        "events_url"         => "https://api.github.com/users/invitocat/events{/privacy}",
-        "members_url"        => "https://api.github.com/users/invitocat/members{/member}",
-        "public_members_url" => "https://api.github/com/users/invitocat/public_members{/member}",
-        "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
-      }
+      "organization"     => ORG_FOR_PENDING_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
     }
 
-    ORG_MEMBERSHIPS         ||= [ACTIVE_ORG_MEMBERSHIP, PENDING_ORG_MEMBERSHIP]
-    ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ORG_MEMBERSHIP]
-    PENDING_ORG_MEMBERSHIPS ||= [PENDING_ORG_MEMBERSHIP]
+    PENDING_LIMITED_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/invitocat/memberships/defunkt",
+      "state"            => "pending",
+      "role"             => "limited_member",
+      "organization_url" => "https://api.github.com/orgs/invitocat",
+      "organization"     => ORG_FOR_PENDING_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
+    }
+
+    ORG_MEMBERSHIPS         ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP, PENDING_ADMIN_ORG_MEMBERSHIP]
+    ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP]
+    PENDING_ORG_MEMBERSHIPS ||= [PENDING_ADMIN_ORG_MEMBERSHIP]
 
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
@@ -768,6 +836,7 @@ module GitHub
     }
 
     ISSUE ||= {
+      "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1347",
       "number"     => 1347,
@@ -1499,22 +1568,36 @@ module GitHub
     ]
 
     HOOK ||= {
+      "id" => 1,
       "url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1",
-      "updated_at" => "2011-09-06T20:39:23Z",
-      "created_at" => "2011-09-06T17:26:27Z",
       "name" => "web",
       "events" => ["push", "pull_request"],
       "active" => true,
       "config" =>
         {'url' => 'http://example.com', 'content_type' => 'json'},
-      "id" => 1
+      "updated_at" => "2011-09-06T20:39:23Z",
+      "created_at" => "2011-09-06T17:26:27Z",
+    }
+
+    ORG_HOOK ||= {
+      "id" => 1,
+      "url" => "https://api.github.com/orgs/octocat/hooks/1",
+      "name" => "web",
+      "events" => ["push", "pull_request"],
+      "active" => true,
+      "config" =>
+        {'url' => 'http://example.com', 'content_type' => 'json'},
+      "updated_at" => "2011-09-06T20:39:23Z",
+      "created_at" => "2011-09-06T17:26:27Z",
     }
 
     OAUTH_ACCESS ||= {
       "id" => 1,
       "url" => "https://api.github.com/authorizations/1",
       "scopes" => ["public_repo"],
-      "token" => "abc123",
+      "token" => "abcdefgh12345678",
+      "token_last_eight" => "12345678",
+      "hashed_token" => "JflKKlx/uvSZxmW8c9Z8HIfkltqJhRMWM+4KlYGdsug=",
       "app" => {
         "url" => "http://my-github-app.com",
         "name" => "my github app",
@@ -1523,7 +1606,8 @@ module GitHub
       "note" => "optional note",
       "note_url" => "http://optional/note/url",
       "updated_at" => "2011-09-06T20:39:23Z",
-      "created_at" => "2011-09-06T17:26:27Z"
+      "created_at" => "2011-09-06T17:26:27Z",
+      "fingerprint" => "jklmnop12345678",
     }
 
     OAUTH_ACCESS_WITH_USER ||= OAUTH_ACCESS.merge(:user => USER)

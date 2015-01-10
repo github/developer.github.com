@@ -17,7 +17,7 @@ OAuth users require the "read:org" [scope](/v3/oauth/#scopes).
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:team) { |h| [h] } %>
 
 ## Get team
@@ -41,6 +41,7 @@ In order to create a team, the authenticated user must be an owner of
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
+`description`|`string` | The description of the team.
 `repo_names`|`array` of `strings` | The repositories to add the team to.
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
 
@@ -48,6 +49,7 @@ Name | Type | Description
 
 <%= json \
   :name => 'new team',
+  :description => 'team description',
   :permission => 'push',
   :repo_names => ['github/dotfiles'] %>
 
@@ -68,12 +70,14 @@ the org that the team is associated with.
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
+`description`|`string` | The description of the team.
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
 
 #### Example
 
 <%= json \
   :name => 'new team name',
+  :name => 'new team description',
   :permission => 'push' %>
 
 ### Response
@@ -101,7 +105,7 @@ member of the team.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## Get team member
@@ -296,7 +300,7 @@ team.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
 ## Check if a team manages a repository {#get-team-repo}
@@ -362,7 +366,7 @@ authenticated user belongs. This method requires `user` or `repo`
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:full_team) { |h| [h] } %>
 
 [OAuth]: /v3/oauth/

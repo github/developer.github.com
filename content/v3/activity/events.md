@@ -4,7 +4,7 @@ title: Events | GitHub API
 
 # Events
 
-This is a read-only API to the GitHub events.  These events power the
+This is a read-only API to the GitHub events. These events power the
 various activity streams on the site.
 
 * TOC
@@ -31,9 +31,13 @@ Events support [pagination](/v3/#pagination),
 however the `per_page` option is unsupported. The fixed page size is 30 items.
 Fetching up to ten pages is supported, for a total of 300 events.
 
+Only events created within the past 90 days will be included in timelines. Events
+older than 90 days will not be included (even if the total number of events
+in the timeline is less than 300).
+
 All Events have the same response format:
 
-<%= headers 200, :pagination => { :next => 'https://api.github.com/resource?page=2' } %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:event) { |h| [h] } %>
 
 ## List public events

@@ -68,11 +68,11 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`files`|`hash` | **Required**. Files that make up this gist.
+`files`|`object` | **Required**. Files that make up this gist.
 `description`|`string` | A description of the gist.
 `public`|`boolean` | Indicates whether the gist is public. Default: `false`
 
-The keys in the `files` hash are the `string` filename, and the value is another `hash` with a key of `content`, and a value of the file contents. For example:
+The keys in the `files` object are the `string` filename, and the value is another `object` with a key of `content`, and a value of the file contents. For example:
 
 <%= json \
   :description => "the description for this gist",
@@ -102,11 +102,11 @@ The keys in the `files` hash are the `string` filename, and the value is another
 Name | Type | Description
 -----|------|--------------
 `description`|`string` | A description of the gist.
-`files`|`hash` | Files that make up this gist.
+`files`|`object` | Files that make up this gist.
 `content`|`string` | Updated file contents.
 `filename`|`string` | New name for this file.
 
-The keys in the `files` hash are the `string` filename. The value is another `hash` with a key of `content` (indicating the new contents), or `filename` (indicating the new filename). For example:
+The keys in the `files` object are the `string` filename. The value is another `object` with a key of `content` (indicating the new contents), or `filename` (indicating the new filename). For example:
 
 <%= json \
   :description => "the description for this gist",
@@ -119,7 +119,7 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 
 <div class="alert">
   <p>
-    <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the hash. Deletes can be performed by including the filename with a <code>null</code> hash.
+    <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the object. Deletes can be performed by including the filename with a <code>null</code> object.
 	</p>
 </div>
 
@@ -136,7 +136,7 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => { :next => 'https://api.github.com/resource?page=2' } %>
 <%= json(:gist_history) %>
 
 ## Star a gist
@@ -190,7 +190,7 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:gist_forks) %>
 
 ## Delete a gist

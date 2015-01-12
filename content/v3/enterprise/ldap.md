@@ -45,7 +45,7 @@ Note that this API call does not automatically initiate an LDAP sync. Rather, if
 
 ## Update LDAP mapping for a team
 
-    PATCH /admin/ldap/teams/:teamname/mapping
+    PATCH /admin/ldap/teams/:team_id/mapping
 
 ### Query parameters
 
@@ -61,7 +61,6 @@ Name | Type | Description
 
 <%= headers 200 %>
 <%= json :ldap_team_update %>
-
 
 ## Sync LDAP mapping for a team
 

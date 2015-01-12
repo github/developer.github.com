@@ -42,7 +42,7 @@ begin
     doc = Nokogiri::HTML(File.read(html_file))
 
     # add '.enterprise' to `@class` in `body`
-    body = doc.search('body').first['class']
+    body = doc.search('body').first
     classes = body.get_attribute('class')
     body.set_attribute('class', "#{classes} enterprise")
 

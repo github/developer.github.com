@@ -48,8 +48,10 @@ many flavors</h1>
 ## Erlang
 
 * [Erlang GitHub API][erlang]
+* [octo.erl][octo-erl]
 
 [erlang]: https://github.com/onlyshk/erlang-github-api
+[octo-erl]: https://github.com/sdepold/octo.erl
 
 ## Go
 

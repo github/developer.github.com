@@ -40,6 +40,7 @@ begin
   # for assets and links
   Dir.glob("enterprise/#{version}/**/*.html") do |html_file|
     doc = Nokogiri::HTML(File.read(html_file))
+    doc.search('body').first.add_class('enterprise')
     doc.css('a').each do |a|
       a['href'] = "/enterprise/#{version}#{a['href']}" if a['href'] =~ /^\//
     end
@@ -53,9 +54,6 @@ begin
       img['src'] = "/enterprise/#{version}#{img['src']}" if img['src'] =~ /^\//
     end
     doc.search('//*[@class="not-enterprise"]').remove
-    doc.search('//*[@class="enterprise-only"]') do |tag|
-      tag.attributes['style'].remove
-    end
     File.open(html_file, 'w') { |file| file.write(doc.to_html) }
   end
 

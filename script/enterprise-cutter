@@ -43,8 +43,8 @@ begin
 
     # add '.enterprise' to `@class` in `body`
     body = doc.search('body').first
-    classes = body.get_attribute('class')
-    body.set_attribute('class', "#{classes} enterprise")
+    classes = body.get_attribute('class').to_s.split(' ')
+    body.set_attribute('class', classes.push(name).uniq.join(' '))
 
     doc.search('body').first['class'] = 'enterprise'
     doc.css('a').each do |a|

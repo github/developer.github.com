@@ -1573,8 +1573,6 @@ Name | Type | Description
       "active" => true,
       "config" =>
         {'url' => 'http://example.com', 'content_type' => 'json'},
-      "last_response" => 
-        {'code' => 200, 'status' => 'active', 'message' => 'OK'},
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z",
     }

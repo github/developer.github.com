@@ -54,7 +54,7 @@ or OAuth with at least `write:public_key` [scope](/v3/oauth/#scopes).
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap), this API will return a `403` response. Users managed by an external account cannot add a new SSH key via the API.
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize SSH keys enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to add an SSH key address via the API with these options enabled.
 
 {{/warning}}
 
@@ -86,7 +86,7 @@ or via OAuth with at least `admin:public_key` [scope](/v3/oauth/#scopes).
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap), this API will return a `403` response. Users managed by an external account cannot delete a new SSH key via the API.
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize SSH keys enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to remove an SSH key address via the API with these options enabled.
 
 {{/warning}}
 

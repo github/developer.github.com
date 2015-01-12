@@ -40,7 +40,7 @@ begin
   # for assets and links
   Dir.glob("enterprise/#{version}/**/*.html") do |html_file|
     doc = Nokogiri::HTML(File.read(html_file))
-    doc.search('body').first.add_class('enterprise')
+    doc.search('body').first['class'] = 'enterprise'
     doc.css('a').each do |a|
       a['href'] = "/enterprise/#{version}#{a['href']}" if a['href'] =~ /^\//
     end

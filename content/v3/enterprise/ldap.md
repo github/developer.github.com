@@ -13,19 +13,15 @@ You can use the LDAP API to force synchronization or update account relationship
 
     PATCH /admin/ldap/user/:username/mapping
 
-### Body parameters
+### Query parameters
 
-You must pass in a JSON configuration that defines your new LDAP configuration.
+Name | Type | Description
+-----|------|--------------
+`ldap_dn`|`String` | **Required**. The new LDAP configuration.
 
 #### Example
 
-    #!javascript
-    {
-      "uid": "asdf",
-      "ou": "users",
-      "dc": "github",
-      "dc": "com"
-    }
+    ldap_dn=uid=asdf,ou=users,dc=github,dc=com
 
 ### Response
 
@@ -51,19 +47,15 @@ Note that this API call does not automatically initiate an LDAP sync. Rather, it
 
     PATCH /admin/ldap/teams/:teamname/mapping
 
-### Body parameters
+### Query parameters
 
-You must pass in a JSON configuration that defines your new LDAP configuration.
+Name | Type | Description
+-----|------|--------------
+`ldap_dn`|`String` | **Required**. The new LDAP configuration.
 
 #### Example
 
-    #!javascript
-    {
-      "cn": "Enterprise Ops",
-      "ou": "teams",
-      "dc": "github",
-      "dc": "co"
-    }
+    ldap_dn=cn=Enterprise,ou=teams,dc=github,dc=com
 
 ### Response
 

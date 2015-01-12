@@ -7,7 +7,9 @@ title: LDAP
 * TOC
 {:toc}
 
-You can use the LDAP API to force synchronization or update account relationships. Note that this API is only effective if your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap).
+You can use the LDAP API to update account relationships between a GitHub Enterprise user and its linked LDAP entry or queue a new synchronization.
+
+With the LDAP mapping endpoints, you're able to update the Distinguished Name (DN) that a user maps to. Note that the LDAP sync endpoints are only effective if your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap).
 
 ## Update LDAP mapping for a user
 

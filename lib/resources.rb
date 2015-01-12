@@ -1570,6 +1570,8 @@ Name | Type | Description
     HOOK ||= {
       "id" => 1,
       "url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1",
+      "test_url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1/test",
+      "ping_url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1/pings",
       "name" => "web",
       "events" => ["push", "pull_request"],
       "active" => true,
@@ -1582,6 +1584,7 @@ Name | Type | Description
     ORG_HOOK ||= {
       "id" => 1,
       "url" => "https://api.github.com/orgs/octocat/hooks/1",
+      "ping_url" => "https://api.github.com/orgs/octocat/hooks/1/pings",
       "name" => "web",
       "events" => ["push", "pull_request"],
       "active" => true,

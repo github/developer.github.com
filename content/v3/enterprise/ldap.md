@@ -32,7 +32,7 @@ Name | Type | Description
 
 {{#tip}}
 
-Note that this API call does not automatically initiate an LDAP sync. Rather, it queues a sync, and performs it when ready.
+Note that this API call does not automatically initiate an LDAP sync. Rather, if a `201` is returned, the sync job is queued successfully, and is performed when the instance is ready.
 
 {{/tip}}
 
@@ -67,7 +67,7 @@ Name | Type | Description
 
 {{#tip}}
 
-Note that this API call does not automatically initiate an LDAP sync. Rather, it queues a sync, and performs it when ready.
+Note that this API call does not automatically initiate an LDAP sync. Rather, if a `201` is returned, the sync job is queued successfully, and is performed when the instance is ready.
 
 {{/tip}}
 

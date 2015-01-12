@@ -46,7 +46,6 @@ begin
     classes = body.get_attribute('class').to_s.split(' ')
     body.set_attribute('class', classes.push('enterprise').uniq.join(' '))
 
-    doc.search('body').first['class'] = 'enterprise'
     doc.css('a').each do |a|
       a['href'] = "/enterprise/#{version}#{a['href']}" if a['href'] =~ /^\//
     end

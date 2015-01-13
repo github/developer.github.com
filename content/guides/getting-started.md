@@ -196,7 +196,7 @@ Also, the [**Authorizations API**][authorizations api] makes it simple to use Ba
 to create an OAuth token. Try pasting and running the following command:
 
 <pre class="terminal">
-$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo"], "note": "getting-started"}' \
+$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 
 HTTP/1.1 201 Created
@@ -205,7 +205,8 @@ Content-Length: 384
 
 {
   "scopes": [
-    "repo"
+    "repo",
+    "user"
   ],
   "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",
   "updated_at": "2012-11-14T14:04:24Z",
@@ -230,7 +231,9 @@ Next, let's look at the `scopes` we're sending over in this call. When creating
 a new token, we include an optional array of [_scopes_][scopes], or access
 levels, that indicate what information this token can access. In this case,
 we're setting up the token with _repo_ access, which grants access to read and
-write to private repositories. See [the scopes docs][scopes] for a full list of
+write to public and private repositories, and _user_ scope, which grants read
+and write access to public and private user profile data. See
+[the scopes docs][scopes] for a full list of
 scopes. You should **only** request scopes that your application actually needs,
 in order to not frighten users with potentially invasive actions. The `201`
 status code tells us that the call was successful, and the JSON returned
@@ -243,7 +246,7 @@ in the [X-GitHub-OTP request header][2fa header]:
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; -H "X-GitHub-OTP: &lt;your_2fa_OTP_code&gt;" \
-    -d '{"scopes": ["repo"], "note": "getting-started"}' \
+    -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 </pre>
 

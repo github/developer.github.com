@@ -257,7 +257,7 @@ An easier way to get a token is to <a href="https://help.github.com/articles/cre
 to create an OAuth token. Try pasting and running the following command:</p>
 
 <pre class="terminal">
-$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo"], "note": "getting-started"}' \
+$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 
 HTTP/1.1 201 Created
@@ -266,7 +266,8 @@ Content-Length: 384
 
 {
   "scopes": [
-    "repo"
+    "repo",
+    "user"
   ],
   "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",
   "updated_at": "2012-11-14T14:04:24Z",
@@ -291,7 +292,9 @@ requests to the GitHub API should be in JSON.</p>
 a new token, we include an optional array of <a href="/v3/oauth/#scopes"><em>scopes</em></a>, or access
 levels, that indicate what information this token can access. In this case,
 we’re setting up the token with <em>repo</em> access, which grants access to read and
-write to private repositories. See <a href="/v3/oauth/#scopes">the scopes docs</a> for a full list of
+write to public and private repositories, and <em>user</em> scope, which grants read
+and write access to public and private user profile data. See
+<a href="/v3/oauth/#scopes">the scopes docs</a> for a full list of
 scopes. You should <strong>only</strong> request scopes that your application actually needs,
 in order to not frighten users with potentially invasive actions. The <code>201</code>
 status code tells us that the call was successful, and the JSON returned
@@ -304,7 +307,7 @@ in the <a href="/v3/auth/#working-with-two-factor-authentication">X-GitHub-OTP r
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; -H "X-GitHub-OTP: &lt;your_2fa_OTP_code&gt;" \
-    -d '{"scopes": ["repo"], "note": "getting-started"}' \
+    -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 </pre>
 

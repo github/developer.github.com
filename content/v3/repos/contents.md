@@ -57,6 +57,8 @@ Name | Type | Description
 
 ### Response if content is a directory
 
+The response will be an array of objects, one object for each item in the directory.
+
 <%= headers 200 %>
 <%= json :directory_content %>
 

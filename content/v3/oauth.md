@@ -302,7 +302,21 @@ receive this error.
 To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
 and get a new code.
 
+## Directing users to review their access for an OAuth application
+
+Users can review and revoke their application authorizations from the [settings
+screen within GitHub][settings]. Integrators can deep link to the authorization
+information for their particular app to let their end users review those
+details.
+
+To build this link, you'll need your OAuth application's `client_id` you
+received from GitHub when you [registered the application][apps].
+
+    https://github.com/settings/connections/applications/:client_id
+
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments
 [public keys]: /v3/users/keys/
+[settings]: https://github.com/settings
+[apps]: https://github.com/settings/applications

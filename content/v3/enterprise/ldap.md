@@ -15,15 +15,19 @@ With the LDAP mapping endpoints, you're able to update the Distinguished Name (D
 
     PATCH /admin/ldap/user/:username/mapping
 
-### Query parameters
+### Body parameters
 
-Name | Type | Description
------|------|--------------
-`ldap_dn`|`String` | **Required**. The new LDAP configuration.
+You must pass in a JSON configuration that defines your new LDAP configuration.
 
 #### Example
 
-    ldap_dn=uid=asdf,ou=users,dc=github,dc=com
+    #!javascript
+    {
+      "uid": "asdf",
+      "ou": "users",
+      "dc": "github",
+      "dc": "com"
+    }
 
 ### Response
 
@@ -49,15 +53,19 @@ Note that this API call does not automatically initiate an LDAP sync. Rather, if
 
     PATCH /admin/ldap/teams/:team_id/mapping
 
-### Query parameters
+### Body parameters
 
-Name | Type | Description
------|------|--------------
-`ldap_dn`|`String` | **Required**. The new LDAP configuration.
+You must pass in a JSON configuration that defines your new LDAP configuration.
 
 #### Example
 
-    ldap_dn=cn=Enterprise,ou=teams,dc=github,dc=com
+    #!javascript
+    {
+      "cn": "Enterprise Ops",
+      "ou": "teams",
+      "dc": "github",
+      "dc": "co"
+    }
 
 ### Response
 

@@ -17,7 +17,7 @@ With the LDAP mapping endpoints, you're able to update the Distinguished Name (D
 
 ### Body parameters
 
-You must pass in a JSON configuration that defines your new LDAP configuration.
+Pass a JSON payload with the new LDAP Distinguished Name.
 
 #### Example
 
@@ -55,7 +55,7 @@ Note that this API call does not automatically initiate an LDAP sync. Rather, if
 
 ### Body parameters
 
-You must pass in a JSON configuration that defines your new LDAP configuration.
+Pass a JSON payload with the new LDAP Distinguished Name.
 
 #### Example
 

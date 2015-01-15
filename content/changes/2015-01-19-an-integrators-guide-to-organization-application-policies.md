@@ -1,6 +1,6 @@
 ---
 kind: change
-title: "An integrator's guide to Organization Application Policies"
+title: "An integrator's guide to organization application policies"
 created_at: 2015-01-19
 author_name: pengwynn
 ---
@@ -10,8 +10,8 @@ control how third-party applications access their organization data. Allowing
 admins to approve or deny applications will ultimately result in deeper trust
 and increase overall adoption of integrations within organizations on GitHub.
 
-As an integrator, here's what you need to know about Organization Application
-Policies and how this feature could impact your application.
+As an integrator, here's what you need to know about organization application
+policies and how this feature could impact your application.
 
 ### Guiding principles
 
@@ -42,9 +42,9 @@ to organization resources, this reduces the work integrators need to do.
 
 As organization admins adopt application whitelists and restrict third-party
 application access to organization resources, your application may lose access
-to those resources. Organization members may not be aware of the new access
-policy and wonder why their private repositories or other resources no longer
-work or show up in your application.
+to those resources. If an organization member is not aware of the new access
+policy, they may wonder why their private repositories or other resources no
+longer work or show up in your application.
 
 There are a couple of ways to help troubleshoot access for your end users.
 
@@ -53,10 +53,10 @@ There are a couple of ways to help troubleshoot access for your end users.
     provide a link to their authorization details under their GitHub account
     settings as [described in the OAuth documentation][auth-link].
 
-- **Via the API.** For an even better user experience, [use the API][list-orgs]
-    to list which user organizations your application can access, and provide
-    users with the link mentioned above to request access from their
-    organization admins.
+- **Via the API.** For an even better user experience, [use the
+    API][discovering-guide] to list which user organizations your application
+    can access, and provide users with the link mentioned above to request
+    access from their organization admins.
 
 ### Listing accessible organization resources
 

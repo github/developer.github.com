@@ -28,8 +28,8 @@ behalf of a user using OAuth will have:
 
 - **Read-only access to public resources.** Organization-owned public
     repositories, issues, and other resources will be visible via the API and
-    show up in resource listings, but mutating methods (`POST`, `PUT`, and
-    `DELETE`) will return status `403`.
+    show up in resource listings, but mutating methods (`POST`, `PATCH`, `PUT`,
+    and `DELETE`) will return status `403`.
 - **No access to private resources.** Organization-owned private repositories,
     issues, and other resources will not be visible via the API and will not
     show up in resource [listings][] that co-mingle public and private

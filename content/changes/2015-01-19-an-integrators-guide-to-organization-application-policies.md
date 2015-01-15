@@ -66,7 +66,7 @@ changes to the [Respositories API][listing-repos] might reduce the API calls
 your application needs to make to find a user's repositories across all of
 their organization mememberships.
 
-### Ensuring uninterupted SSH access
+### Ensuring uninterrupted SSH access
 
 Since many applications access organization-owned repositories via SSH keys,
 organziation application policies apply to those as well. Keys created by OAuth

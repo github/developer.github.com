@@ -33,7 +33,7 @@ behalf of a user using OAuth will have:
 - **No access to private resources.** Organization-owned private repositories,
     issues, and other resources will not be visible via the API and will not
     show up in resource [listings][] that co-mingle public and private
-    resources.
+    resources. Hooks related to private resources will not be delivered.
 
 Since applications should already handle the scenario where a user loses access
 to organization resources, this reduces the work integrators need to do.

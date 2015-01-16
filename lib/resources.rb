@@ -7,6 +7,7 @@ require 'securerandom'
 module GitHub
   module Resources
     module Helpers
+
       STATUSES ||= {
         200 => '200 OK',
         201 => '201 Created',
@@ -117,6 +118,7 @@ module GitHub
       end
 
       CONTENT ||= {
+        'LATEST_ENTERPRISE_VERSION' => '2.1',
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "ORG_HOOK_CONFIG_HASH" =>
         '''

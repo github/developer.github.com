@@ -33,13 +33,12 @@ When you boot a virtual machine for the first time, you can use the following en
 
 Note that you need to POST to [`/setup/api/configure`](#start-a-configuration-process) to start the actual configuration process.
 
-You *must* provide a password when uploading your license for the first time. If you haven't previously set a password through the web interface, we'll set it to the password you provide.
-
 ### Parameters
 
 Name | Type | Description
 -----|------|--------------
 `license`|`string` | **Required**. The content of your *.ghl* license file.
+`password`|`string` | You **must** provide a password when uploading your license for the first time. If you haven't previously set a password through the web interface, we'll set it to the password you provide.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
 
 For a list of the available settings, see [the `/setup/api/settings` endpoint](#retrieve-settings).

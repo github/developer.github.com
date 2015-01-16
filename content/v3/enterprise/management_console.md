@@ -33,12 +33,21 @@ When you boot a virtual machine for the first time, you can use the following en
 
 Note that you need to POST to [`/setup/api/configure`](#start-a-configuration-process) to start the actual configuration process.
 
+{{#warning}}
+
+When using this endpoint, your Enterprise instance must have a password set. This can be accomplished two ways:
+
+1. If you're working directly with the API before accessing the web interface, you must pass in the password parameter to set your password.
+2. If you set up your instance via the web interface before accessing the API, your calls to this endpoint do not need the password parameter.
+
+{{/warning}}
+
 ### Parameters
 
 Name | Type | Description
 -----|------|--------------
 `license`|`string` | **Required**. The content of your *.ghl* license file.
-`password`|`string` | You **must** provide a password when uploading your license for the first time. If you haven't previously set a password through the web interface, we'll set it to the password you provide.
+`password`|`string` | You **must** provide a password *only if* you are uploading your license for the first time. If you previously set a password through the web interface, you don't need this parameter.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
 
 For a list of the available settings, see [the `/setup/api/settings` endpoint](#retrieve-settings).

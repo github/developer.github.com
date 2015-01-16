@@ -53,7 +53,7 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+curl -X POST 'http://<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
 ## Upgrade a license

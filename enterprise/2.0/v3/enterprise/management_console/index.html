@@ -97,6 +97,17 @@ $ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/ap
 
 <p>Note that you need to POST to <a href="#start-a-configuration-process"><code>/setup/api/configure</code></a> to start the actual configuration process.</p>
 
+<div class="alert warning">
+
+<p>When using this endpoint, your Enterprise instance must have a password set. This can be accomplished two ways:</p>
+
+<ol>
+  <li>If you’re working directly with the API before accessing the web interface, you must pass in the password parameter to set your password.</li>
+  <li>If you set up your instance via the web interface before accessing the API, your calls to this endpoint do not need the password parameter.</li>
+</ol>
+
+</div>
+
 <h3 id="parameters">Parameters</h3>
 
 <table>
@@ -113,6 +124,11 @@ $ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/ap
       <td><code>string</code></td>
       <td>
 <strong>Required</strong>. The content of your <em>.ghl</em> license file.</td>
+    </tr>
+    <tr>
+      <td><code>password</code></td>
+      <td><code>string</code></td>
+      <td>You <strong>must</strong> provide a password <em>only if</em> you are uploading your license for the first time. If you previously set a password through the web interface, you don’t need this parameter.</td>
     </tr>
     <tr>
       <td><code>settings</code></td>
@@ -134,7 +150,7 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 <h3 id="example">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+curl -X POST 'http://<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
 <h2 id="upgrade-a-license">Upgrade a license</h2>

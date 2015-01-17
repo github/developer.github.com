@@ -33,11 +33,21 @@ When you boot a virtual machine for the first time, you can use the following en
 
 Note that you need to POST to [`/setup/api/configure`](#start-a-configuration-process) to start the actual configuration process.
 
+{{#warning}}
+
+When using this endpoint, your Enterprise instance must have a password set. This can be accomplished two ways:
+
+1. If you're working directly with the API before accessing the web interface, you must pass in the password parameter to set your password.
+2. If you set up your instance via the web interface before accessing the API, your calls to this endpoint do not need the password parameter.
+
+{{/warning}}
+
 ### Parameters
 
 Name | Type | Description
 -----|------|--------------
 `license`|`string` | **Required**. The content of your *.ghl* license file.
+`password`|`string` | You **must** provide a password *only if* you are uploading your license for the first time. If you previously set a password through the web interface, you don't need this parameter.
 `settings`| `string`| Optional path to a JSON file containing your installation settings.
 
 For a list of the available settings, see [the `/setup/api/settings` endpoint](#retrieve-settings).
@@ -52,7 +62,7 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F settings=&lt;<em>/path/to/settings.json</em>
+curl -X POST 'http://<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
 ## Upgrade a license

@@ -15,15 +15,13 @@ require 'fileutils'
 require 'tmpdir'
 require 'nokogiri'
 
-ERROR_MESSAGE = """
-Error: Run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
-e.g. bundle exec script/enterprise-cutter 2014-07-08 11.10.340
-"""
+ERROR_MESSAGE =
 
-if ARGV.length == 0
-    abort "\n#{ERROR_MESSAGE}\n\n"
-elsif ARGV.length > 2
-    abort "\n#{ERROR_MESSAGE}\n\n"
+if ARGV.length != 2
+  error = '''Error: Run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
+e.g. bundle exec script/enterprise-cutter 2014-07-08 11.10.340
+'''
+  abort error
 end
 
 date = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
@@ -31,19 +29,19 @@ version = ARGV[1].dup # like, 11.10.340
 
 BRANCH_NAME = "add-#{version}-docs"
 
-%x(git checkout gh-pages)
-%x(git pull origin gh-pages)
+`git checkout gh-pages`
+`git pull origin gh-pages`
 
-%x(git checkout -b #{BRANCH_NAME})
+`git checkout -b #{BRANCH_NAME}`
 
 temp_dir = Dir.mktmpdir
 begin
   %x(git checkout `git rev-list -n 1 --before="#{date}" gh-pages`)
-  %x(cp -r * #{temp_dir})
-  %x(git checkout #{BRANCH_NAME})
+  `cp -r * #{temp_dir}`
+  `git checkout #{BRANCH_NAME}`
   version.sub!(/enterprise-/, '')
   FileUtils.mkdir_p("enterprise/#{version}")
-  %x(cp -r #{temp_dir}/* enterprise/#{version})
+  `cp -r #{temp_dir}/* enterprise/#{version}`
 
   # we need to point links not to the root, but to the enterprise version root
   # for assets and links
@@ -71,8 +69,8 @@ begin
     File.open(css_file, 'w') { |file| file.write(contents) }
   end
 
-  %x(git add enterprise)
-  %x(git commit -m "Added enterprise-#{version} files")
+  `git add enterprise`
+  `git commit -m "Added enterprise-#{version} files"`
 ensure
   FileUtils.remove_entry_secure temp_dir
 end

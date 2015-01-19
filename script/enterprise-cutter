@@ -1,5 +1,16 @@
 #!/usr/bin/env ruby
 
+# When releasing a new Enterprise version, the set of GitHub APIs available to that
+# verison do not match the set of documentation generally available on developer.github.com.
+# That's because the content on developer.github.com represents everything available to DotCom
+# users; since Enterprise is a "managed" product, it's cut off of DotCom at a certain
+# time, and the APIs remain frozen (until an organization upgrades their instance).
+#
+# This script takes two arguments: a date and a version number. Given a date, it
+# fetches the state of the site at that moment in time. It then copies all of that
+# content into a new folder called *enterprise/<version>*. Thus, we're able to preserve
+# the state of the API documentation for a given version at a given time.
+#
 require 'fileutils'
 require 'tmpdir'
 require 'nokogiri'

@@ -10,12 +10,12 @@
 # fetches the state of the site at that moment in time. It then copies all of that
 # content into a new folder called *enterprise/<version>*. Thus, we're able to preserve
 # the state of the API documentation for a given version at a given time.
-#
+
 require 'fileutils'
 require 'tmpdir'
 require 'nokogiri'
 
-ERROR_MESSAGE =
+Dir.glob('tasks/*.rake').each { |r| load r }
 
 if ARGV.length != 2
   error = '''Error: Run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
@@ -29,45 +29,17 @@ version = ARGV[1].dup # like, 11.10.340
 
 BRANCH_NAME = "add-#{version}-docs"
 
-`git checkout gh-pages`
-`git pull origin gh-pages`
-
-`git checkout -b #{BRANCH_NAME}`
+setup
 
 temp_dir = Dir.mktmpdir
 begin
   %x(git checkout `git rev-list -n 1 --before="#{date}" gh-pages`)
   `cp -r * #{temp_dir}`
   `git checkout #{BRANCH_NAME}`
-  version.sub!(/enterprise-/, '')
   FileUtils.mkdir_p("enterprise/#{version}")
   `cp -r #{temp_dir}/* enterprise/#{version}`
 
-  # we need to point links not to the root, but to the enterprise version root
-  # for assets and links
-  Dir.glob("enterprise/#{version}/**/*.html") do |html_file|
-    doc = Nokogiri::HTML(File.read(html_file))
-    doc.css('a').each do |a|
-      a['href'] = "/enterprise/#{version}#{a['href']}" if a['href'] =~ /^\//
-    end
-    doc.css('link').each do |link|
-      link['href'] = "/enterprise/#{version}#{link['href']}" if link['href'] =~ /^\//
-    end
-    doc.css('script').each do |script|
-      script['src'] = "/enterprise/#{version}#{script['src']}" if script['src'] =~ /^\//
-    end
-    doc.css('img').each do |img|
-      img['src'] = "/enterprise/#{version}#{img['src']}" if img['src'] =~ /^\//
-    end
-    doc.search('//*[@class="not-enterprise"]').remove
-    File.open(html_file, 'w') { |file| file.write(doc.to_html) }
-  end
-
-  Dir.glob("enterprise/#{version}/**/*.css") do |css_file|
-    contents = File.read(css_file)
-    contents.gsub!(/url\(\/shared/, "url(/enterprise/#{version}/shared")
-    File.open(css_file, 'w') { |file| file.write(contents) }
-  end
+  rewrite_content("enterprise/#{version}")
 
   `git add enterprise`
   `git commit -m "Added enterprise-#{version} files"`

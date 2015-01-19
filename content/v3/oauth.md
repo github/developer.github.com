@@ -302,7 +302,7 @@ receive this error.
 To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
 and get a new code.
 
-## Directing users to review their access for an OAuth application
+## Directing users to review their access for an application
 
 Users can review and revoke their application authorizations from the [settings
 screen within GitHub][settings]. Integrators can deep link to the authorization

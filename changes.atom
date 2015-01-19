@@ -19,7 +19,7 @@
       <uri>https://github.com/technoweenie</uri>
     </author>
     <link rel="alternate" href="http://developer.github.com/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/" />
-    <content type="html">&lt;p&gt;As we &lt;a href="https://github.com/blog"&gt;announced over on the GitHub blog&lt;/a&gt;, organization admins can now
+    <content type="html">&lt;p&gt;As we &lt;a href="https://github.com/blog/1941-organization-approved-applications"&gt;announced over on the GitHub blog&lt;/a&gt;, organization admins can now
 control how third-party applications access their organization data. Allowing
 admins to approve or deny applications will ultimately result in deeper trust
 and increase overall adoption of integrations within organizations on GitHub.&lt;/p&gt;
@@ -34,7 +34,7 @@ user experience for integrators and end users. Organizations should be able to
 prevent applications they do not trust from accessing their organization data
 without creating a multitude of new edge cases for integrators.&lt;/p&gt;
 
-&lt;p&gt;With that goal in mind, the feature works this way: &lt;strong&gt;if an organization’s
+&lt;p&gt;With that goal in mind, the feature works like this: &lt;strong&gt;if an organization’s
 application policy prevents an application from accessing its resources, the
 API behaves as if the authenticating user is not a member of the
 organization&lt;/strong&gt;. Specifically, this means an application authenticating on
@@ -51,7 +51,7 @@ behalf of a user using OAuth will have:&lt;/p&gt;
   issues, and other resources will not be visible via the API and will not
   show up in resource &lt;a href="/v3/issues/#list-issues"&gt;listings&lt;/a&gt; that co-mingle public and private
   resources. Hooks for these private repositories are muted and will not be
-  delivered as long as the application is restricted.&lt;/li&gt;
+  delivered as long as the application is restricted by the organization.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Since applications should already handle the scenario where a user loses access
@@ -65,14 +65,15 @@ to those resources. If an organization member is not aware of the new access
 policy, they may wonder why their private repositories or other resources no
 longer work or show up in your application.&lt;/p&gt;
 
-&lt;p&gt;There are a couple of ways to help troubleshoot access for your end users.&lt;/p&gt;
+&lt;p&gt;There are a couple ways to help troubleshoot access for your end users.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Via the GitHub UI.&lt;/strong&gt; The simplest way to help end users understand how
   organization access policies affect their access to your application is to
-  provide a link to their authorization details under their GitHub account
-  settings as &lt;a href="/v3/oauth/#directing-users-to-review-their-access-for-an-application"&gt;described in the OAuth documentation&lt;/a&gt;.&lt;/p&gt;
+  provide a link to &lt;a href="https://help.github.com/articles/requesting-organization-approval-for-your-authorized-applications/"&gt;their authorization details&lt;/a&gt;
+  under their GitHub account settings as &lt;a href="/v3/oauth/#directing-users-to-review-their-access-for-an-application"&gt;described in the OAuth
+  documentation&lt;/a&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Via the API.&lt;/strong&gt; For an even better user experience, &lt;a href="/guides/discovering-resources-for-a-user/"&gt;use the
@@ -92,20 +93,21 @@ their organization mememberships.&lt;/p&gt;
 
 &lt;h3 id="ensuring-uninterrupted-ssh-access"&gt;Ensuring uninterrupted SSH access&lt;/h3&gt;
 
-&lt;p&gt;Since many applications access organization-owned repositories via SSH keys,
-organziation application policies apply to those as well. Keys created by OAuth
-applications (or those created before GitHub started tracking that information)
-will not have access to repositories owned by organizations that restrict
-third-party applications. If your application uses keys &lt;strong&gt;created before
-February 24, 2014&lt;/strong&gt;, you &lt;a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/"&gt;should replace those older keys&lt;/a&gt; to ensure
-things keep running smoothly for your application.&lt;/p&gt;
+&lt;p&gt;Since applications should already handle the scenario where a user loses access
+to organization resources (e.g., when a user leaves an organization), this
+reduces the work integrators need to do. Keys created by OAuth applications (or
+those created before GitHub started tracking that information) will not have
+access to repositories owned by organizations that restrict third-party
+applications. If your application uses keys &lt;strong&gt;created before February 24,
+2014&lt;/strong&gt;, you &lt;a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/"&gt;should replace those older keys&lt;/a&gt; to ensure things keep
+running smoothly for your application.&lt;/p&gt;
 
 &lt;h3 id="were-here-to-help"&gt;We’re here to help&lt;/h3&gt;
 
 &lt;p&gt;This is a big feature, and we’re sure it will impact many of our integrators as
-organizations adopt application whitelists. We also think it provides a huge
-net benefit for integrators as organizations choose to use OAuth integrations
-with more confidence.&lt;/p&gt;
+organizations adopt third-party application restrictions. We also think it
+provides a huge net benefit for integrators as organizations choose to use
+OAuth integrations with more confidence.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Access+Policies+help+for+integrators"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
 

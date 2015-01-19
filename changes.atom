@@ -2,13 +2,115 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2015-01-08T00:00:00Z</updated>
+  <updated>2015-01-19T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2015-01-19:/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/</id>
+    <title type="html">An integrator's guide to organization application policies</title>
+    <published>2015-01-19T00:00:00Z</published>
+    <updated>2015-01-19T00:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/" />
+    <content type="html">&lt;p&gt;As we &lt;a href="https://github.com/blog"&gt;announced over on the GitHub blog&lt;/a&gt;, organization admins can now
+control how third-party applications access their organization data. Allowing
+admins to approve or deny applications will ultimately result in deeper trust
+and increase overall adoption of integrations within organizations on GitHub.&lt;/p&gt;
+
+&lt;p&gt;As an integrator, here’s what you need to know about organization application
+policies and how this feature could impact your application.&lt;/p&gt;
+
+&lt;h3 id="guiding-principles"&gt;Guiding principles&lt;/h3&gt;
+
+&lt;p&gt;We’ve tried to strike the right balance between organization privacy and the
+user experience for integrators and end users. Organizations should be able to
+prevent applications they do not trust from accessing their organization data
+without creating a multitude of new edge cases for integrators.&lt;/p&gt;
+
+&lt;p&gt;With that goal in mind, the feature works this way: &lt;strong&gt;if an organization’s
+application policy prevents an application from accessing its resources, the
+API behaves as if the authenticating user is not a member of the
+organization&lt;/strong&gt;. Specifically, this means an application authenticating on
+behalf of a user using OAuth will have:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+&lt;strong&gt;Read-only access to public resources.&lt;/strong&gt; Organization-owned public
+  repositories, issues, and other resources will be visible via the API and
+  show up in resource listings, but mutating methods (&lt;code&gt;POST&lt;/code&gt;, &lt;code&gt;PATCH&lt;/code&gt;, &lt;code&gt;PUT&lt;/code&gt;,
+  and &lt;code&gt;DELETE&lt;/code&gt;) will return status &lt;code&gt;403&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;
+&lt;strong&gt;No access to private resources.&lt;/strong&gt; Organization-owned private repositories,
+  issues, and other resources will not be visible via the API and will not
+  show up in resource &lt;a href="/v3/issues/#list-issues"&gt;listings&lt;/a&gt; that co-mingle public and private
+  resources. Hooks for these private repositories are muted and will not be
+  delivered as long as the application is restricted.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since applications should already handle the scenario where a user loses access
+to organization resources, this reduces the work integrators need to do.&lt;/p&gt;
+
+&lt;h3 id="checking-organization-access"&gt;Checking organization access&lt;/h3&gt;
+
+&lt;p&gt;As organization admins adopt application whitelists and restrict third-party
+application access to organization resources, your application may lose access
+to those resources. If an organization member is not aware of the new access
+policy, they may wonder why their private repositories or other resources no
+longer work or show up in your application.&lt;/p&gt;
+
+&lt;p&gt;There are a couple of ways to help troubleshoot access for your end users.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Via the GitHub UI.&lt;/strong&gt; The simplest way to help end users understand how
+  organization access policies affect their access to your application is to
+  provide a link to their authorization details under their GitHub account
+  settings as &lt;a href="/v3/oauth/#directing-users-to-review-their-access-for-an-application"&gt;described in the OAuth documentation&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Via the API.&lt;/strong&gt; For an even better user experience, &lt;a href="/guides/discovering-resources-for-a-user/"&gt;use the
+  API&lt;/a&gt; to list which user organizations your application
+  can access, and provide users with the link mentioned above to request
+  access from their organization admins.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="listing-accessible-organization-resources"&gt;Listing accessible organization resources&lt;/h3&gt;
+
+&lt;p&gt;In addition to checking access to a user’s organizations, you’ll want to ensure
+you’re discovering their accessible resources in the most efficient way. Recent
+changes to the &lt;a href="/v3/repos/#list-your-repositories"&gt;Respositories API&lt;/a&gt; might reduce the API calls
+your application needs to make to find a user’s repositories across all of
+their organization mememberships.&lt;/p&gt;
+
+&lt;h3 id="ensuring-uninterrupted-ssh-access"&gt;Ensuring uninterrupted SSH access&lt;/h3&gt;
+
+&lt;p&gt;Since many applications access organization-owned repositories via SSH keys,
+organziation application policies apply to those as well. Keys created by OAuth
+applications (or those created before GitHub started tracking that information)
+will not have access to repositories owned by organizations that restrict
+third-party applications. If your application uses keys &lt;strong&gt;created before
+February 24, 2014&lt;/strong&gt;, you &lt;a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/"&gt;should replace those older keys&lt;/a&gt; to ensure
+things keep running smoothly for your application.&lt;/p&gt;
+
+&lt;h3 id="were-here-to-help"&gt;We’re here to help&lt;/h3&gt;
+
+&lt;p&gt;This is a big feature, and we’re sure it will impact many of our integrators as
+organizations adopt application whitelists. We also think it provides a huge
+net benefit for integrators as organizations choose to use OAuth integrations
+with more confidence.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Access+Policies+help+for+integrators"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2015-01-08:/changes/2015-01-08-discovering-resources-for-a-user/</id>
     <title type="html">New guide: Discovering resources for a user</title>
@@ -1174,53 +1276,6 @@ count represents the number of contexts submitted for the given commit.&lt;/p&gt
 &lt;p&gt;We recognize that sometimes you’ll still want the full content for a file, even if it’s too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the &lt;code&gt;raw_url&lt;/code&gt; attribute, and you’ll receive the complete content for that file. For larger files, you’ll need to clone the gist locally via the &lt;code&gt;git_pull_url&lt;/code&gt; to access the full file contents.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions, don’t hesitate to &lt;a href="https://github.com/contact?form%5Bsubject%5D=Gist+API+now+truncates+large+files"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-04-25:/changes/2014-04-25-user-content-security/</id>
-    <title type="html">New user content domains</title>
-    <published>2014-04-25T00:00:00Z</published>
-    <updated>2014-04-25T00:00:00Z</updated>
-    <author>
-      <name>azizshamim</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-04-25-user-content-security/" />
-    <content type="html">&lt;h2 id="securing-your-content"&gt;Securing your content&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href="https://bounty.github.com"&gt;GitHub Bug Bounty program&lt;/a&gt; recently identified a few cross-domain vulnerabilities related to user-generated content, and we’ve shipped improvements today to address those issues.&lt;/p&gt;
-
-&lt;p&gt;In order to better isolate your content from potentially malicious content uploaded by other users (e.g., content that might contain Cross-Site Scripting or other embedded attacks), we now serve user-generated content from subdomains of &lt;strong&gt;githubusercontent.com&lt;/strong&gt;. This content is no longer served from subdomains of &lt;strong&gt;github.com&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2 id="whats-affected"&gt;What’s affected?&lt;/h2&gt;
-
-&lt;p&gt;This change affects the following subdomains:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-&lt;strong&gt;raw.github.com&lt;/strong&gt; : Serves raw file content from your repository.&lt;/li&gt;
-  &lt;li&gt;
-&lt;strong&gt;embed.github.com&lt;/strong&gt; : Allows users to embed rich GitHub content on other sites.&lt;/li&gt;
-  &lt;li&gt;
-&lt;strong&gt;render.github.com&lt;/strong&gt; : Displays rich content on GitHub.com.&lt;/li&gt;
-  &lt;li&gt;
-&lt;strong&gt;f.cloud.github.com&lt;/strong&gt; : Hosts all those amazing gifs you use in Pull Requests and Issues.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Content formerly served by these subdomains is now served from subdomains of &lt;strong&gt;githubusercontent.com&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2 id="older-links"&gt;Older links&lt;/h2&gt;
-
-&lt;p&gt;If you have old links to this content, don’t worry: as of today, we’re forcing the old domains to redirect to the new domains. Your existing links should continue to work automatically in your browser. If you’re using a URL from Gist or GitHub to directly access user-generated content via &lt;code&gt;curl&lt;/code&gt;, &lt;code&gt;wget&lt;/code&gt;, or a library (like &lt;a href="https://github.com/jnunemaker/httparty"&gt;HTTParty&lt;/a&gt;), be sure to configure that tool to follow the redirect.&lt;/p&gt;
-
-&lt;h2 id="your-proxies-or-filters"&gt;Your proxies or filters&lt;/h2&gt;
-
-&lt;p&gt;Some security systems (web proxies, for example) may not recognize the &lt;strong&gt;githubusercontent.com&lt;/strong&gt; domain. In those cases, you may need update your proxies and security software accordingly.&lt;/p&gt;
-
-&lt;p&gt;As always, if you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Changes+to+user+content+domains"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Happy and safe GitHubbing!&lt;/em&gt;&lt;/p&gt;
 
 </content>
   </entry>

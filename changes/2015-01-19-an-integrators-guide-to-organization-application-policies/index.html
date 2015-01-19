@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Preview the New Deployments API</title>
+  <title>An integrator's guide to organization application policies</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,97 +40,115 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-01-09-preview-the-new-deployments-api/">
+      <div class="change" id="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">
 <h2 class="title">
-  <a href="/changes/2014-01-09-preview-the-new-deployments-api/">Preview the New Deployments API</a>
+  <a href="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">An integrator's guide to organization application policies</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    January 9, 2014
+    January 19, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos"/>
-      <a href="https://github.com/atmos">atmos</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
+      <a href="https://github.com/pengwynn">pengwynn</a>
   </li>
 </ul>
 </div>
 
 
-<p>Today we’re excited to announce a <a href="/v3/repos/deployments/">Deployments API</a>. We ship a lot of
-software at GitHub: web, mobile, and native. For the last few years, we’ve been
-driving our deployments from our <a href="https://speakerdeck.com/jnewland/chatops">ChatOps tooling</a> and we’ve learned a
-lot. The Deployments API is a generalization of the approach that we’ve been
-taking, and we’re really excited to see what our users and integrations start
-building around it.</p>
+<p>As we <a href="https://github.com/blog">announced over on the GitHub blog</a>, organization admins can now
+control how third-party applications access their organization data. Allowing
+admins to approve or deny applications will ultimately result in deeper trust
+and increase overall adoption of integrations within organizations on GitHub.</p>
 
-<p>Deployments are a new model in the GitHub ecosystem. We don’t have any UI
-components currently, and deployments are intended to be used exclusively by
-tooling.  If you’re familiar with the Status API, you know that it allows
-various tools to report on the status of a commit (e.g., the progress of an
-attempt to perform a build at a particular commit). The Status API doesn’t
-perform the build; it just reports the results. Much like the Status API, we
-won’t be doing actual deployments for you. Instead, the API provides a way for
-you to track the status of your deployments. We’re hoping to provide
-consistency across the various type of release processes, regardless of the
-underlying steps involved with getting your code built or shipped to your
-servers.</p>
+<p>As an integrator, here’s what you need to know about organization application
+policies and how this feature could impact your application.</p>
 
-<h2 id="highlights">Highlights</h2>
+<h3 id="guiding-principles">Guiding principles</h3>
 
-<h3 id="automatic-merging">Automatic Merging</h3>
+<p>We’ve tried to strike the right balance between organization privacy and the
+user experience for integrators and end users. Organizations should be able to
+prevent applications they do not trust from accessing their organization data
+without creating a multitude of new edge cases for integrators.</p>
 
-<p>The system can auto-merge the default branch for the repository if the
-requested deployment ref is behind the default branch. On active projects it’s
-easy to fall behind, so let automation watch your back.</p>
+<p>With that goal in mind, the feature works this way: <strong>if an organization’s
+application policy prevents an application from accessing its resources, the
+API behaves as if the authenticating user is not a member of the
+organization</strong>. Specifically, this means an application authenticating on
+behalf of a user using OAuth will have:</p>
 
-<h3 id="commit-status-integration">Commit Status Integration</h3>
+<ul>
+  <li>
+<strong>Read-only access to public resources.</strong> Organization-owned public
+  repositories, issues, and other resources will be visible via the API and
+  show up in resource listings, but mutating methods (<code>POST</code>, <code>PATCH</code>, <code>PUT</code>,
+  and <code>DELETE</code>) will return status <code>403</code>.</li>
+  <li>
+<strong>No access to private resources.</strong> Organization-owned private repositories,
+  issues, and other resources will not be visible via the API and will not
+  show up in resource <a href="/v3/issues/#list-issues">listings</a> that co-mingle public and private
+  resources. Hooks for these private repositories are muted and will not be
+  delivered as long as the application is restricted.</li>
+</ul>
 
-<p>By default, the system rejects deployment requests for repositories that have
-commit statuses but don’t have a green build for the deployment ref. This can
-be bypassed, but is useful in cases where continuous integration is being used.</p>
+<p>Since applications should already handle the scenario where a user loses access
+to organization resources, this reduces the work integrators need to do.</p>
 
-<h3 id="force-deployments">Force Deployments</h3>
+<h3 id="checking-organization-access">Checking organization access</h3>
 
-<p>Sometimes the world crashes down on you, and you need to just get the code out
-the door.  Forced deployments bypass any commit status checks or ahead/behind
-checks in the repository.</p>
+<p>As organization admins adopt application whitelists and restrict third-party
+application access to organization resources, your application may lose access
+to those resources. If an organization member is not aware of the new access
+policy, they may wonder why their private repositories or other resources no
+longer work or show up in your application.</p>
 
-<h3 id="deployment-statuses">Deployment Statuses</h3>
+<p>There are a couple of ways to help troubleshoot access for your end users.</p>
 
-<p>Different deployment systems can update the status of a deployment to be
-<code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>. There’s also a field for linking
-to deployment output.</p>
+<ul>
+  <li>
+    <p><strong>Via the GitHub UI.</strong> The simplest way to help end users understand how
+  organization access policies affect their access to your application is to
+  provide a link to their authorization details under their GitHub account
+  settings as <a href="/v3/oauth/#directing-users-to-review-their-access-for-an-application">described in the OAuth documentation</a>.</p>
+  </li>
+  <li>
+    <p><strong>Via the API.</strong> For an even better user experience, <a href="/guides/discovering-resources-for-a-user/">use the
+  API</a> to list which user organizations your application
+  can access, and provide users with the link mentioned above to request
+  access from their organization admins.</p>
+  </li>
+</ul>
 
-<h3 id="events">Events</h3>
+<h3 id="listing-accessible-organization-resources">Listing accessible organization resources</h3>
 
-<p>Both Deployments and Deployment Statuses trigger events on GitHub. 3rd party
-integrations can listen for these events via <a href="/v3/repos/hooks/">webhooks</a> and choose
-whether or not to actually deploy the repository that the event was created for.</p>
+<p>In addition to checking access to a user’s organizations, you’ll want to ensure
+you’re discovering their accessible resources in the most efficient way. Recent
+changes to the <a href="/v3/repos/#list-your-repositories">Respositories API</a> might reduce the API calls
+your application needs to make to find a user’s repositories across all of
+their organization mememberships.</p>
 
-<h2 id="preview-period">Preview Period</h2>
+<h3 id="ensuring-uninterrupted-ssh-access">Ensuring uninterrupted SSH access</h3>
 
-<p>We’re making this new API available today for developers to
-<a href="/v3/repos/deployments/#preview-mode" data-proofer-ignore="">preview</a>.  We think developers and existing integrations are
-going to love it, but we want to <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get your feedback</a> before we declare
-the Deployments API “final” and “unchangeable.” We expect the preview period to
-last for roughly 60-90 days.</p>
+<p>Since many applications access organization-owned repositories via SSH keys,
+organziation application policies apply to those as well. Keys created by OAuth
+applications (or those created before GitHub started tracking that information)
+will not have access to repositories owned by organizations that restrict
+third-party applications. If your application uses keys <strong>created before
+February 24, 2014</strong>, you <a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">should replace those older keys</a> to ensure
+things keep running smoothly for your application.</p>
 
-<p>As we discover opportunities to improve the API during the preview period, we
-may ship changes that break clients using the preview version of the API. We
-want to iterate quickly. To do so, we will announce any changes here (on the
-developer blog), but we will not provide any advance notice.</p>
+<h3 id="were-here-to-help">We’re here to help</h3>
 
-<p>At the end of preview period, the Deployments API will become an official
-component of GitHub API v3. At that point, the new Deployments API will be
-stable and suitable for production use.</p>
+<p>This is a big feature, and we’re sure it will impact many of our integrators as
+organizations adopt application whitelists. We also think it provides a huge
+net benefit for integrators as organizations choose to use OAuth integrations
+with more confidence.</p>
 
-<p>We hope you’ll take it for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">send us your feedback</a>.</p>
-
-<p><img src="https://camo.githubusercontent.com/da8106f759bf0d163fb002e715fb1d1f1d2b6f4e/687474703a2f2f736869706974737175697272656c2e6769746875622e696f2f696d616765732f736869702532306974253230737175697272656c2e706e67" alt="Shipit Squirrel"></p>
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Access+Policies+help+for+integrators">get in touch</a>.</p>
 
 
 </div>

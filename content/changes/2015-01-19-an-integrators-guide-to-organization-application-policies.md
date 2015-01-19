@@ -20,7 +20,7 @@ user experience for integrators and end users. Organizations should be able to
 prevent applications they do not trust from accessing their organization data
 without creating a multitude of new edge cases for integrators.
 
-With that goal in mind, the feature works this way: **if an organization's
+With that goal in mind, the feature works like this: **if an organization's
 application policy prevents an application from accessing its resources, the
 API behaves as if the authenticating user is not a member of the
 organization**. Specifically, this means an application authenticating on
@@ -34,7 +34,7 @@ behalf of a user using OAuth will have:
     issues, and other resources will not be visible via the API and will not
     show up in resource [listings][] that co-mingle public and private
     resources. Hooks for these private repositories are muted and will not be
-    delivered as long as the application is restricted.
+    delivered as long as the application is restricted by the organization.
 
 Since applications should already handle the scenario where a user loses access
 to organization resources, this reduces the work integrators need to do.
@@ -47,12 +47,13 @@ to those resources. If an organization member is not aware of the new access
 policy, they may wonder why their private repositories or other resources no
 longer work or show up in your application.
 
-There are a couple of ways to help troubleshoot access for your end users.
+There are a couple ways to help troubleshoot access for your end users.
 
 - **Via the GitHub UI.** The simplest way to help end users understand how
     organization access policies affect their access to your application is to
-    provide a link to their authorization details under their GitHub account
-    settings as [described in the OAuth documentation][auth-link].
+    provide a link to [their authorization details][help-request-approval]
+    under their GitHub account settings as [described in the OAuth
+    documentation][auth-link].
 
 - **Via the API.** For an even better user experience, [use the
     API][discovering-guide] to list which user organizations your application
@@ -69,25 +70,27 @@ their organization mememberships.
 
 ### Ensuring uninterrupted SSH access
 
-Since many applications access organization-owned repositories via SSH keys,
-organziation application policies apply to those as well. Keys created by OAuth
-applications (or those created before GitHub started tracking that information)
-will not have access to repositories owned by organizations that restrict
-third-party applications. If your application uses keys **created before
-February 24, 2014**, you [should replace those older keys][keys] to ensure
-things keep running smoothly for your application.
+Since applications should already handle the scenario where a user loses access
+to organization resources (e.g., when a user leaves an organization), this
+reduces the work integrators need to do. Keys created by OAuth applications (or
+those created before GitHub started tracking that information) will not have
+access to repositories owned by organizations that restrict third-party
+applications. If your application uses keys **created before February 24,
+2014**, you [should replace those older keys][keys] to ensure things keep
+running smoothly for your application.
 
 ### We're here to help
 
 This is a big feature, and we're sure it will impact many of our integrators as
-organizations adopt application whitelists. We also think it provides a huge
-net benefit for integrators as organizations choose to use OAuth integrations
-with more confidence.
+organizations adopt third-party application restrictions. We also think it
+provides a huge net benefit for integrators as organizations choose to use
+OAuth integrations with more confidence.
 
 If you have any questions or feedback, please [get in touch][contact].
 
-[ann]: https://github.com/blog
+[ann]: https://github.com/blog/1941-organization-approved-applications
 [auth-link]: /v3/oauth/#directing-users-to-review-their-access-for-an-application
+[help-request-approval]: https://help.github.com/articles/requesting-organization-approval-for-your-authorized-applications/
 [list-orgs]: /v3/orgs/#list-your-organizations
 [contact]: https://github.com/contact?form[subject]=Organization+Access+Policies+help+for+integrators
 [listing-repos]: /v3/repos/#list-your-repositories

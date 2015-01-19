@@ -19,7 +19,7 @@ If you haven't already, you should read the ["Basics of Authentication"][basics-
 
 In addition to having their own personal repositories, a user may be a collaborator on repositories owned by other users and organizations. Collectively, these are the repositories where the user has privileged access: either it's a private repository where the user has read or write access, or it's a public repository where the user has write access.
 
-[OAuth scopes][scopes] determine which of those repositories your app can access for a user. Use the workflow below to discover those repositories.
+[OAuth scopes][scopes] and [organization application policies][oap] determine which of those repositories your app can access for a user. Use the workflow below to discover those repositories.
 
 As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. Then we'll configure Octokit.rb to automatically handle [pagination][pagination] for us.
 
@@ -98,6 +98,7 @@ As an application, you typically want all of the user's organizations (public an
 [list-orgs-for-current-user]: /v3/orgs/#list-your-organizations
 [list-teams]: /v3/orgs/teams/#list-teams
 [make-authenticated-request-for-user]: /guides/basics-of-authentication/#making-authenticated-requests
+[oap]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/
 [octokit.rb]: https://github.com/octokit/octokit.rb
 [pagination]: /v3/#pagination
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/discovering-resources-for-a-user

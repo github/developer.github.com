@@ -4,6 +4,12 @@
 # will need to be backported to the previous verison. This script takes the latest content
 # for /enterprise and moves it into the appropriate version folder.
 
+require 'tmpdir'
+
+VERSION = ARGV[0].dup # like, 11.10.340
+
+BRANCH_NAME = "backport-docs-for-#{VERSION}"
+
 Dir.glob('tasks/*.rake').each { |r| load r }
 
 if ARGV.length != 1
@@ -13,23 +19,16 @@ e.g. bundle exec script/enterprise-cutter 2.0
   abort error
 end
 
-version = ARGV[0].dup # like, 11.10.340
-
-BRANCH_NAME = "backport-docs-for-#{version}"
-
 setup
 
 temp_dir = Dir.mktmpdir
 begin
-  %x(git checkout `git rev-list -n 1 --before="#{date}" gh-pages`)
-  `cp -r v3/enterprise #{temp_dir}`
-  `git checkout #{BRANCH_NAME}`
-  `cp -r #{temp_dir}/* enterprise/#{version}`
+  `cp -r v3/enterprise enterprise/#{VERSION}/v3/`
 
-  rewrite_content("enterprise/#{version}")
+  rewrite_content("enterprise/#{VERSION}/v3/enterprise")
 
   `git add enterprise`
-  `git commit -m "Added enterprise-#{version} backported files"`
+  `git commit -m "Added enterprise-#{VERSION} backported files"`
 ensure
   FileUtils.remove_entry_secure temp_dir
 end

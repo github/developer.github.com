@@ -55,7 +55,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/repo/comments/1" %>
+<%= headers 201, :Location => "https://api.github.com/repos/octocat/Hello-World/comments/1" %>
 <%= json :commit_comment %>
 
 ## Get a single commit comment

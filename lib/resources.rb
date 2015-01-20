@@ -1798,15 +1798,15 @@ Name | Type | Description
 
     COMBINED_STATUS ||= {
       "state" => "success",
-      "name"  => "octocat/Hello-World",
       "sha"   => COMMIT["sha"],
       "total_count" => 2,
       "statuses" => [
         SIMPLE_STATUS,
         OTHER_SIMPLE_STATUS
       ],
+      "repository" => SIMPLE_REPO,
       "commit_url" => "https://api.github.com/repos/octocat/Hello-World/#{COMMIT["sha"]}",
-      "repository_url" => "https://api.github.com/repos/octocat/Hello-World"
+      "url" => "https://api.github.com/repos/octocat/Hello-World/#{COMMIT["sha"]}/status"
     }
 
     META ||= {

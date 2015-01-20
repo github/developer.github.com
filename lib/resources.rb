@@ -1404,7 +1404,7 @@ Name | Type | Description
 
     GIST_COMMENT ||= {
       "id"         => 1,
-      "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
+      "url"        => "https://api.github.com/gists/a6db0bec360bb87e9418/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
       "created_at" => "2011-04-18T23:23:56Z",

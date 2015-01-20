@@ -69,7 +69,7 @@ Name | Type | Description
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/user/repo/issues/comments/1" %>
+"https://api.github.com/repos/octocat/Hello-World/issues/comments/1" %>
 <%= json :issue_comment %>
 
 ## Edit a comment

@@ -1777,7 +1777,7 @@ Name | Type | Description
       "target_url" => "https://ci.example.com/1000/output",
       "description" => "Build has completed successfully",
       "id" => 1,
-      "url" => "https://api.github.com/repos/octocat/example/statuses/1",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/statuses/1",
       "context" => "continuous-integration/jenkins"
     }
 
@@ -1788,7 +1788,7 @@ Name | Type | Description
       "target_url" => "https://ci.example.com/2000/output",
       "description" => "Testing has completed successfully",
       "id" => 2,
-      "url" => "https://api.github.com/repos/octocat/example/statuses/2",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/statuses/2",
       "context" => "security/brakeman"
     }
 

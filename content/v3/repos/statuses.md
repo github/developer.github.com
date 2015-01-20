@@ -62,7 +62,7 @@ Name | Type | Description
 
 <%= headers 201,
       :Location =>
-'https://api.github.com/repos/octocat/example/statuses/1' %>
+'https://api.github.com/repos/octocat/Hello-World/statuses/1' %>
 <%= json :status %>
 
 ## List Statuses for a specific Ref

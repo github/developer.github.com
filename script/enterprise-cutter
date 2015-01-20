@@ -22,10 +22,10 @@ e.g. bundle exec script/enterprise-cutter 2014-07-08 11.10.340
   abort error
 end
 
-date = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
-version = ARGV[1].dup # like, 11.10.340
+DATE = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
+VERSION = ARGV[1].dup # like, 11.10.340
 
-BRANCH_NAME = "add-#{version}-docs"
+BRANCH_NAME = "add-#{VERSION}-docs"
 
 Dir.glob('tasks/*.rake').each { |r| load r }
 
@@ -33,16 +33,16 @@ setup
 
 temp_dir = Dir.mktmpdir
 begin
-  %x(git checkout `git rev-list -n 1 --before="#{date}" gh-pages`)
+  %x(git checkout `git rev-list -n 1 --before="#{DATE}" gh-pages`)
   `cp -r * #{temp_dir}`
   `git checkout #{BRANCH_NAME}`
-  FileUtils.mkdir_p("enterprise/#{version}")
-  `cp -r #{temp_dir}/* enterprise/#{version}`
+  FileUtils.mkdir_p("enterprise/#{VERSION}")
+  `cp -r #{temp_dir}/* enterprise/#{VERSION}`
 
-  rewrite_content("enterprise/#{version}")
+  rewrite_content("enterprise/#{VERSION}")
 
   `git add enterprise`
-  `git commit -m "Added enterprise-#{version} files"`
+  `git commit -m "Added enterprise-#{VERSION} files"`
 ensure
   FileUtils.remove_entry_secure temp_dir
 end

@@ -23,7 +23,6 @@ setup
 
 temp_dir = Dir.mktmpdir
 begin
-  %x(git checkout `git rev-list -n 1 --before="#{date}" gh-pages`)
   `cp -r v3/enterprise #{temp_dir}`
   `git checkout #{BRANCH_NAME}`
   `cp -r #{temp_dir}/* enterprise/#{VERSION}`

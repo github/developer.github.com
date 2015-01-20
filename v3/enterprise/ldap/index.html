@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Markdown | GitHub API</title>
+  <title>LDAP</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -51,82 +51,140 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="markdown">Markdown</h1>
+      <h1 id="ldap">LDAP</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#render-an-arbitrary-markdown-document">Render an arbitrary Markdown document</a></li>
-  <li><a href="#render-a-markdown-document-in-raw-mode">Render a Markdown document in raw mode</a></li>
+  <li><a href="#update-ldap-mapping-for-a-user">Update LDAP mapping for a user</a></li>
+  <li><a href="#sync-ldap-mapping-for-a-user">Sync LDAP mapping for a user</a></li>
+  <li><a href="#update-ldap-mapping-for-a-team">Update LDAP mapping for a team</a></li>
+  <li><a href="#sync-ldap-mapping-for-a-team">Sync LDAP mapping for a team</a></li>
 </ul>
 
-<h2 id="render-an-arbitrary-markdown-document">Render an arbitrary Markdown document</h2>
+<p>You can use the LDAP API to update account relationships between a GitHub Enterprise user and its linked LDAP entry or queue a new synchronization.</p>
 
-<pre><code>POST /markdown
+<p>With the LDAP mapping endpoints, you’re able to update the Distinguished Name (DN) that a user maps to. Note that the LDAP sync endpoints are only effective if your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a>.</p>
+
+<h2 id="update-ldap-mapping-for-a-user">Update LDAP mapping for a user</h2>
+
+<pre><code>PATCH /admin/ldap/user/:username/mapping
 </code></pre>
 
-<h3 id="parameters">Parameters</h3>
+<h3 id="body-parameters">Body parameters</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>text</code></td>
-      <td><code>string</code></td>
-      <td>
-<strong>Required</strong>.The Markdown text to render</td>
-    </tr>
-    <tr>
-      <td><code>mode</code></td>
-      <td><code>string</code></td>
-      <td>The rendering mode. Can be either:<br>* <code>markdown</code> to render a document as plain Markdown, just like README files are rendered. <br>* <code>gfm</code> to render a document as user-content, <em>e.g.</em> like user comments or issues are rendered. In GFM mode, hard line breaks are always taken into account, and issue and user mentions are linked accordingly.<br> Default: <code>markdown</code>
-</td>
-    </tr>
-    <tr>
-      <td><code>context</code></td>
-      <td><code>string</code></td>
-      <td>The repository context. Only taken into account when rendering as <code>gfm</code>
-</td>
-    </tr>
-  </tbody>
-</table>
+<p>Pass a JSON payload with the new LDAP Distinguished Name.</p>
 
 <h4 id="example">Example</h4>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Hello world github/linguist#1 **cool**, and #1!"</span><span class="p">,</span>
-  <span class="s2">"mode"</span><span class="p">:</span> <span class="s2">"gfm"</span><span class="p">,</span>
-  <span class="s2">"context"</span><span class="p">:</span> <span class="s2">"github/gollum"</span>
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"uid"</span><span class="p">:</span> <span class="s2">"asdf"</span><span class="p">,</span>
+  <span class="s2">"ou"</span><span class="p">:</span> <span class="s2">"users"</span><span class="p">,</span>
+  <span class="s2">"dc"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+  <span class="s2">"dc"</span><span class="p">:</span> <span class="s2">"com"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
-Content-Type: text/html
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
-<pre class="body-response"><code>&lt;p&gt;Hello world &lt;a href="http://github.com/github/linguist/issues/1" class="issue-link" title="This is a simple issue"&gt;github/linguist#1&lt;/a&gt; &lt;strong&gt;cool&lt;/strong&gt;, and &lt;a href="http://github.com/github/gollum/issues/1" class="issue-link" title="This is another issue"&gt;#1&lt;/a&gt;!&lt;/p&gt;</code></pre>
 
-<h2 id="render-a-markdown-document-in-raw-mode">Render a Markdown document in raw mode</h2>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ldap_dn"</span><span class="p">:</span> <span class="s2">"uid=asdf,ou=users,dc=github,dc=com"</span><span class="p">,</span>
+  <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+  <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+  <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+  <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+  <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+  <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+  <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+  <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+  <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+  <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+  <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
+  <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span></code></pre>
 
-<pre><code>POST /markdown/raw
+<h2 id="sync-ldap-mapping-for-a-user">Sync LDAP mapping for a user</h2>
+
+<div class="alert tip">
+
+<p>Note that this API call does not automatically initiate an LDAP sync. Rather, if a <code>201</code> is returned, the sync job is queued successfully, and is performed when the instance is ready.</p>
+
+</div>
+
+<pre><code>POST /admin/ldap/user/:username/sync
 </code></pre>
-
-<h3 id="parameters-1">Parameters</h3>
-
-<p>The raw API is not JSON-based. It takes a Markdown document as plaintext (<code>text/plain</code> or <code>text/x-markdown</code>) and renders it as plain Markdown without a repository context (just like a README.md file is rendered – this is the simplest way to preview a readme online).</p>
 
 <h3 id="response-1">Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
-Content-Type: text/html
+<pre class="headers"><code>Status: 201 Created
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
-<pre class="body-response"><code>&lt;p&gt;Hello world github/linguist#1 &lt;strong&gt;cool&lt;/strong&gt;, and #1!&lt;/p&gt;</code></pre>
+
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"queued"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="update-ldap-mapping-for-a-team">Update LDAP mapping for a team</h2>
+
+<pre><code>PATCH /admin/ldap/teams/:team_id/mapping
+</code></pre>
+
+<h3 id="body-parameters-1">Body parameters</h3>
+
+<p>Pass a JSON payload with the new LDAP Distinguished Name.</p>
+
+<h4 id="example-1">Example</h4>
+
+<pre><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"cn"</span><span class="p">:</span> <span class="s2">"Enterprise Ops"</span><span class="p">,</span>
+  <span class="s2">"ou"</span><span class="p">:</span> <span class="s2">"teams"</span><span class="p">,</span>
+  <span class="s2">"dc"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+  <span class="s2">"dc"</span><span class="p">:</span> <span class="s2">"co"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-2">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ldap_dn"</span><span class="p">:</span> <span class="s2">"cn=Enterprise Ops,ou=teams,dc=github,dc=com"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Owners"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
+  <span class="s2">"repositories_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span>
+<span class="p">}</span></code></pre>
+
+<h2 id="sync-ldap-mapping-for-a-team">Sync LDAP mapping for a team</h2>
+
+<div class="alert tip">
+
+<p>Note that this API call does not automatically initiate an LDAP sync. Rather, if a <code>201</code> is returned, the sync job is queued successfully, and is performed when the instance is ready.</p>
+
+</div>
+
+<pre><code>POST /admin/ldap/user/:teamname/sync
+</code></pre>
+
+<h3 id="response-3">Response</h3>
+
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"queued"</span>
+<span class="p">}</span></code></pre>
 
     </div>
 

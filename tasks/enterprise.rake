@@ -13,8 +13,10 @@ def rewrite_content(path)
 
     # add '.enterprise' to `@class` in `body`
     body = doc.search('body').first
-    classes = body.get_attribute('class').to_s.split(' ')
-    body.set_attribute('class', classes.push('enterprise').uniq.join(' '))
+    unless body.nil?
+      classes = body.get_attribute('class').to_s.split(' ')
+      body.set_attribute('class', classes.push('enterprise').uniq.join(' '))
+    end
 
     doc.css('a').each do |a|
       a['href'] = "/enterprise/#{VERSION}#{a['href']}" if a['href'] =~ /^\//

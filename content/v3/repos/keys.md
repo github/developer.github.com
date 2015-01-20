@@ -14,7 +14,7 @@ title: Deploy Keys | GitHub API
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
-<%= json(:public_key) { |h| [h] } %>
+<%= json(:deploy_key) { |h| [h] } %>
 
 ## Get a deploy key {#get}
 
@@ -23,7 +23,7 @@ title: Deploy Keys | GitHub API
 ### Response
 
 <%= headers 200 %>
-<%= json :public_key %>
+<%= json :deploy_key %>
 
 ## Add a new deploy key {#create}
 
@@ -35,8 +35,8 @@ title: Deploy Keys | GitHub API
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/repo/keys/1" %>
-<%= json :public_key %>
+<%= headers 201, :Location => "https://api.github.com/repos/octocat/Hello-World/keys/1" %>
+<%= json :deploy_key %>
 
 ## Edit a deploy key {#edit}
 

@@ -60,7 +60,7 @@ Name | Type | Description
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/user/repo/milestones/1" %>
+"https://api.github.com/repos/octocat/Hello-World/milestones/1" %>
 <%= json :milestone %>
 
 ## Update a milestone

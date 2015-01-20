@@ -10,11 +10,13 @@ various activity streams on the site.
 * TOC
 {:toc}
 
-Events are optimized for polling with the "ETag" header.  If no new events have
-been triggered, you will see a "304 Not Modified" response, and your current
-rate limit will be untouched.  There is also an "X-Poll-Interval" header that
-specifies how often (in seconds) you are allowed to poll.  In times of high
-server load, the time may increase.  Please obey the header.
+Events are optimized for polling with the "ETag" header.  `Last-Modified` is
+returned on responses, but is inaccurate.  All events are always returned.
+If no new events have been triggered, you will see a "304 Not Modified"
+response, and your current rate limit will be untouched.  There is also an
+"X-Poll-Interval" header that specifies how often (in seconds) you are allowed
+to poll.  In times of high server load, the time may increase.  Please obey
+the header.
 
     $ curl -I https://api.github.com/users/tater/events
     HTTP/1.1 200 OK

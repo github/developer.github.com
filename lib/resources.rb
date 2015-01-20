@@ -7,6 +7,7 @@ require 'securerandom'
 module GitHub
   module Resources
     module Helpers
+
       STATUSES ||= {
         200 => '200 OK',
         201 => '201 Created',
@@ -117,6 +118,7 @@ module GitHub
       end
 
       CONTENT ||= {
+        'LATEST_ENTERPRISE_VERSION' => '2.1',
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "ORG_HOOK_CONFIG_HASH" =>
         '''
@@ -2261,6 +2263,18 @@ Name | Type | Description
         "pretty-print" => "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
       }
     ]
+
+    LDAP_USER_UPDATE ||= {
+      'ldap_dn' => 'uid=asdf,ou=users,dc=github,dc=com'
+    }.merge(USER)
+
+    LDAP_TEAM_UPDATE ||= {
+      'ldap_dn' => 'cn=Enterprise Ops,ou=teams,dc=github,dc=com'
+    }.merge(TEAM)
+
+    LDAP_SYNC_CONFIRM ||= {
+      'status' => 'queued'
+    }
   end
 end
 

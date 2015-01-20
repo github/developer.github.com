@@ -37,6 +37,12 @@ You can demote any user account except your own.
 
 ## Suspend a user
 
+{{#warning}}
+
+If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP servers](https://help.github.com/enterprise/admin/guides/user-management/using-ldap), this API is disabled and will return a `403` response. Users managed by an external account cannot be suspended via the API.
+
+{{/warning}}
+
     PUT /users/:username/suspended
 
 You can suspend any user account except your own.
@@ -48,6 +54,12 @@ You can suspend any user account except your own.
 <%= headers 204 %>
 
 ## Unsuspend a user
+
+{{#warning}}
+
+If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP servers](https://help.github.com/enterprise/admin/guides/user-management/using-ldap), this API is disabled and will return a `403` response. Users managed by an external account cannot be unsuspended via the API.
+
+{{/warning}}
 
     DELETE /users/:username/suspended
 

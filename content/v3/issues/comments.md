@@ -63,7 +63,7 @@ Name | Type | Description
 `body`|`string` | **Required**. The contents of the comment.
 
 
-<%= json :body => "a new comment" %>
+<%= json :body => "Me too" %>
 
 ### Response
 
@@ -83,7 +83,7 @@ Name | Type | Description
 `body`|`string` | **Required**. The contents of the comment.
 
 
-<%= json :body => "String" %>
+<%= json :body => "Me too" %>
 
 ### Response
 

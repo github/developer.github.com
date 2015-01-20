@@ -7,7 +7,7 @@ end
 
 # we need to point links not to the root, but to the enterprise version root
 # for assets and links
-def rewrite(path)
+def rewrite_content(path)
   Dir.glob("#{path}/**/*.html") do |html_file|
     doc = Nokogiri::HTML(File.read(html_file))
 

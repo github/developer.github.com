@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Preview the upcoming organization permission changes</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.1/changes.atom">
+  <link href="/enterprise/2.1/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.1/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.1/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/2.1/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/2.1/js/documentation.js" type="text/javascript"></script>
+</head>
+
+
+<body class="blog enterprise">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.1/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/enterprise/2.1/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.1/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/enterprise/2.1/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+
+
+  <div id="wrapper">
+    <div class="content">
+      <div class="change" id="/changes/2014-12-08-organization-permissions-api-preview/">
+<h2 class="title">
+  <a href="/enterprise/2.1/changes/2014-12-08-organization-permissions-api-preview/">Preview the upcoming organization permission changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 8, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer">
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+
+<p><strong>UPDATE (2014-12-12):</strong> The <a href="/enterprise/2.1/v3/orgs/#list-your-organizations">List your organizations</a> API is now included in this preview as well.</p>
+
+<p>We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:</p>
+
+<ul>
+  <li>The Owners team will no longer be special.</li>
+  <li>The <a href="/enterprise/2.1/v3/repos/#list-your-repositories">List your repositories</a> API will include organization-owned repositories.</li>
+  <li>The <a href="/enterprise/2.1/v3/orgs/#list-user-organizations">List user organizations</a> API will only include public organization memberships.</li>
+  <li>The <a href="/enterprise/2.1/v3/orgs/#list-your-organizations">List your organizations</a> API will require <code>user</code> scope or <code>read:org</code> scope.</li>
+</ul>
+
+<h2 id="whats-happening-to-the-owners-team">What’s happening to the Owners team?</h2>
+
+<p>Currently, members of your Owners team are administrators of your organization. Soon, your Owners team will become a totally normal team. Adding and removing Owners team members won’t change their administrator status anymore. Instead, you’ll be able to directly grant admin permissions to your organization’s members without adding them to any special teams.</p>
+
+<p>We won’t delete your Owners team, but you’ll be able to delete or rename it yourself if you want. Organizations created after the change won’t have an Owners team.</p>
+
+<h3 id="what-should-you-do">What should you do?</h3>
+
+<p>In preparation for this change to the Owners team, we’re releasing a few new APIs. You’ll be able to use these APIs to manage organization admins without relying on the Owners team.</p>
+
+<h4 id="adding-an-organization-admin">Adding an organization admin</h4>
+
+<p>To add a new organization admin, use the new <a href="/enterprise/2.1/v3/orgs/members/#add-or-update-organization-membership">Add or update organization membership</a> endpoint, specifying a role of <code>"admin"</code> in the request body. This replaces adding or inviting people to the Owners team.</p>
+
+<h4 id="removing-an-organization-admin">Removing an organization admin</h4>
+
+<p>To remove someone from the organization role but keep them as a member of their teams, use the new <a href="/enterprise/2.1/v3/orgs/members/#add-or-update-organization-membership">Add or update organization membership</a> endpoint, specifying a role of <code>"member"</code> in the request body. This replaces removing people from the Owners team.</p>
+
+<h4 id="listing-organization-admins">Listing organization admins</h4>
+
+<p>To get a list of all your organization’s admins, use the <a href="/enterprise/2.1/v3/orgs/members/#members-list">Organization members list</a> endpoint, specifying a role of <code>"admin"</code> in the query string. This replaces listing the members of the Owners team.</p>
+
+<h4 id="checking-if-someone-is-an-organization-admin">Checking if someone is an organization admin</h4>
+
+<p>To check if a given user is an organization admin, use the new <a href="/enterprise/2.1/v3/orgs/members/#get-organization-membership">Get organization membership</a> endpoint. If the returned <code>"role"</code> attribute is set to <code>"admin"</code> and the returned <code>"state"</code> attribute is set to <code>"active"</code>, the user is an organization admin. This replaces checking if a user is on the Owners team.</p>
+
+<h2 id="whats-happening-to-the-list-your-repositories-api">What’s happening to the “List your repositories” API?</h2>
+
+<p>Currently, the <a href="/enterprise/2.1/v3/repos/#list-your-repositories">List your repositories</a> API only returns repositories that are owned by users, not by organizations. If you want a list of <em>all</em> the repositories that the authenticated user has access to, you need to use multiple API methods.</p>
+
+<p>Soon, this API will include all repositories that the authenticated user has access to (whether they’re owned by a user or by an organization).</p>
+
+<h3 id="what-should-you-do-1">What should you do?</h3>
+
+<p>Many apps use the <a href="/enterprise/2.1/v3/repos/#list-your-repositories">List your repositories</a> API in conjunction with the <a href="/enterprise/2.1/v3/orgs/#list-your-organizations">List your organizations</a> and <a href="/enterprise/2.1/v3/repos/#list-organization-repositories">List organization repositories</a> APIs to build up a list of all the repositories the authenticated user has access to. If your app is doing this, you’ll be able to get rid of all the organization-related API calls and just use the <a href="/enterprise/2.1/v3/repos/#list-your-repositories">List your repositories</a> API.</p>
+
+<p>If your app uses the <a href="/enterprise/2.1/v3/repos/#list-your-repositories">List your repositories</a> API for another purpose, you’ll need to update your app to handle the new organization-owned repositories we’ll be returning.</p>
+
+<h2 id="whats-happening-to-the-list-user-organizations-api">What’s happening to the “List user organizations” API?</h2>
+
+<p>The <a href="/enterprise/2.1/v3/orgs/#list-user-organizations">List user organizations</a> API is intended provide <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a> for any user. When you use this API to fetch <em>your own</em> organizations, this API currently returns your public and private organization memberships.</p>
+
+<p>Soon, this API will only return public organization memberships.</p>
+
+<h3 id="what-should-you-do-2">What should you do?</h3>
+
+<p>If your app uses the <a href="/enterprise/2.1/v3/orgs/#list-user-organizations">List user organizations</a> API to fetch all of the organization memberships (public and private) for the authenticated user, you’ll need to update your app to use the <a href="/enterprise/2.1/v3/orgs/#list-your-organizations">List your organizations</a> API instead. The <a href="/enterprise/2.1/v3/orgs/#list-your-organizations">List your organizations</a> API returns all organizations (public and private) that your app is authorized to access.</p>
+
+<h2 id="whats-happening-to-the-list-your-organizations-api">What’s happening to the “List your organizations” API?</h2>
+
+<p>OAuth requests will soon require minimum <a href="/enterprise/2.1/v3/oauth/#scopes">scopes</a> in order to access the <a href="/enterprise/2.1/v3/orgs/#list-your-organizations">List your organizations</a> API.</p>
+
+<p>Currently, the API response always includes your <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a>, regardless of the OAuth scopes associated with your request. If you have <code>user</code>, <code>read:org</code>, <code>write:org</code>, or <code>admin:org</code> scope, the response also includes your private organization memberships.</p>
+
+<p>Soon, this API will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with <code>read:org</code> scope, you can publicize your organization membership with <code>user</code> scope, etc.). Therefore, this API will require at least <code>user</code> or <code>read:org</code> scope. (<code>write:org</code> and <code>admin:org</code> scope implicitly include <code>read:org</code> scope.) OAuth requests with insufficient scope will receive a <code>403 Forbidden</code> response.</p>
+
+<h3 id="what-should-you-do-3">What should you do?</h3>
+
+<p>If you <a href="/enterprise/2.1/v3/auth/#via-username-and-password">authenticate via username and password</a>, you are not affected by this change.</p>
+
+<p>If your app only needs to fetch the user’s public organization memberships, you should use the <a href="/enterprise/2.1/v3/orgs/#list-user-organizations">List user organizations</a> API instead. Since that API only returns public information, it does not require any scopes.</p>
+
+<h2 id="preview-period">Preview period</h2>
+
+<p>Starting <strong>today</strong>, these new APIs are available for developers to preview. We expect the preview period to last for four weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.</p>
+
+<p>While these additions are in their preview period, you’ll need to provide the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.moondragon-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<h2 id="migration-period">Migration period</h2>
+
+<p>At the end of the preview period, we will announce the start of a migration period. At that time, developers should update their applications to use the new APIs for managing organization admins. During this period, you will still be able to use the Owners team to manage your organization’s admins, so that you have time to update your applications to use the new APIs without breakage. We expect the migration period to last for four weeks.</p>
+
+<p>At the end of the migration period, the Owners team will no longer be special, and you’ll no longer be able to rely on it for managing organization admins.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Admin+Pre-release+Preview">get in touch with us</a>!</p>
+
+
+</div>
+
+    </div>
+
+    <div class="sidebar-shell">
+        <h2>Recent Posts</h2>
+<ul class="headlines sidebar-module">
+
+  <li><a href="/enterprise/2.1/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">Replace older SSH keys created by your application<br><span class="date">December 12, 2014</span></a></li>
+
+  <li><a href="/enterprise/2.1/changes/2014-12-09-new-attributes-for-stars-api/">New Attributes for Starring API<br><span class="date">December 9, 2014</span></a></li>
+
+  <li><a href="/enterprise/2.1/changes/2014-12-08-removing-authorizations-token/">Removing token attribute from Authorizations API responses<br><span class="date">December 8, 2014</span></a></li>
+
+  <li><a href="/enterprise/2.1/changes/2014-12-08-organization-permissions-api-preview/">Preview the upcoming organization permission changes<br><span class="date">December 8, 2014</span></a></li>
+
+  <li><a href="/enterprise/2.1/changes/2014-12-03-preview-the-new-organization-webhooks-api/">Preview the New Organization Webhooks API<br><span class="date">December 3, 2014</span></a></li>
+
+  <li><a href="/enterprise/2.1/changes/2014-11-25-the-deployments-api-is-official/">The Deployments API is official<br><span class="date">November 25, 2014</span></a></li>
+
+  <li><a href="/enterprise/2.1/changes/2014-10-24-status-api-limits/">Status API Limits<br><span class="date">October 29, 2014</span></a></li>
+
+  <li><a href="/enterprise/2.1/changes/2014-10-21-deployment-webhook-payload-changes/">Deployment webhook payload changes<br><span class="date">October 21, 2014</span></a></li>
+
+</ul>
+
+
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/enterprise/2.1/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
+  </div>
+
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="http://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="http://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+    </div>
+
+  </div>
+<!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/enterprise/2.1/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

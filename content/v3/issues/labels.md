@@ -37,7 +37,7 @@ Name | Type | Description
 `color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
 
 
-<%= json :name => "API", :color => "FFFFFF" %>
+<%= json :name => "bug", :color => "f29513" %>
 
 ### Response
 
@@ -58,7 +58,7 @@ Name | Type | Description
 `color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
 
 
-<%= json :name => "API", :color => "FFFFFF" %>
+<%= json :name => "bug", :color => "f29513" %>
 
 ### Response
 

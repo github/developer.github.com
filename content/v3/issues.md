@@ -110,7 +110,7 @@ Name | Type | Description
 
 <%= headers 201,
       :Location =>
-'https://api.github.com/repos/user/repo/issues/1' %>
+'https://api.github.com/repos/octocat/Hello-World/issues/1347' %>
 <%= json :full_issue %>
 
 ## Edit an issue

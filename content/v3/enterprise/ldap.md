@@ -22,12 +22,7 @@ Pass a JSON payload with the new LDAP Distinguished Name.
 #### Example
 
     #!javascript
-    {
-      "uid": "asdf",
-      "ou": "users",
-      "dc": "github",
-      "dc": "com"
-    }
+    "uid=asdf,ou=users,dc=github,dc=com"
 
 ### Response
 
@@ -60,12 +55,7 @@ Pass a JSON payload with the new LDAP Distinguished Name.
 #### Example
 
     #!javascript
-    {
-      "cn": "Enterprise Ops",
-      "ou": "teams",
-      "dc": "github",
-      "dc": "co"
-    }
+    "cn=Enterprise Ops,ou=teams,dc=github,dc=com"
 
 ### Response
 

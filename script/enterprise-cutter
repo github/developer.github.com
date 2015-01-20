@@ -15,8 +15,6 @@ require 'fileutils'
 require 'tmpdir'
 require 'nokogiri'
 
-Dir.glob('tasks/*.rake').each { |r| load r }
-
 if ARGV.length != 2
   error = '''Error: Run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
 e.g. bundle exec script/enterprise-cutter 2014-07-08 11.10.340
@@ -28,6 +26,8 @@ date = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
 version = ARGV[1].dup # like, 11.10.340
 
 BRANCH_NAME = "add-#{version}-docs"
+
+Dir.glob('tasks/*.rake').each { |r| load r }
 
 setup
 

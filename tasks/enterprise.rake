@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 def setup
   `git checkout gh-pages`
   `git pull origin gh-pages`

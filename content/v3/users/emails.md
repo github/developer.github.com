@@ -23,6 +23,16 @@ This endpoint is accessible with the user:email scope.
 
 ## Add email address(es)
 
+{{#enterprise-only}}
+
+{{#warning}}
+
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize emails enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to add an email address via the API with these options enabled.
+
+{{/warning}}
+
+{{/enterprise-only}}
+
     POST /user/emails
 
 ### Input
@@ -48,6 +58,16 @@ You can post a single email address or an array of addresses:
 ] %>
 
 ## Delete email address(es)
+
+{{#enterprise-only}}
+
+{{#warning}}
+
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize emails enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to remove an email address via the API with these options enabled.
+
+{{/warning}}
+
+{{/enterprise-only}}
 
     DELETE /user/emails
 

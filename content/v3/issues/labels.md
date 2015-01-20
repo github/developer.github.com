@@ -43,7 +43,7 @@ Name | Type | Description
 
 <%= headers 201,
       :Location =>
-"https://api.github.com/repos/user/repo/labels/foo" %>
+"https://api.github.com/repos/octocat/Hello-World/labels/bug" %>
 <%= json :label %>
 
 ## Update a label

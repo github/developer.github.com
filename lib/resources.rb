@@ -86,6 +86,14 @@ module GitHub
       end
 
       def json(key)
+        hash = get_resource(key)
+        hash = yield hash if block_given?
+
+        %(<pre class="body-response"><code class="language-javascript">) +
+          JSON.pretty_generate(hash) + "</code></pre>"
+      end
+
+      def get_resource(key)
         hash = case key
           when Hash
             h = {}
@@ -95,11 +103,6 @@ module GitHub
             key
           else Resources.const_get(key.to_s.upcase)
         end
-
-        hash = yield hash if block_given?
-
-        %(<pre class="body-response"><code class="language-javascript">) +
-          JSON.pretty_generate(hash) + "</code></pre>"
       end
 
       def text_html(response, status, head = {})

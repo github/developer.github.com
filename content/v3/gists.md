@@ -90,7 +90,7 @@ The keys in the `files` object are the `string` filename, and the value is anoth
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/gists/aa5a315d61ae9438b18d" %>
+<%= headers 201, :Location => get_resource(:full_gist)['url'] %>
 <%= json :full_gist %>
 
 ## Edit a gist

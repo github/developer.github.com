@@ -1750,7 +1750,7 @@ Name | Type | Description
     }
 
     DEPLOYMENT_STATUS ||= {
-      "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
+      "url" => "https://api.github.com/repos/octocat/example/deployments/42/statuses/1",
       "id" => 1,
       "state" => "success",
       "creator" => USER,
@@ -1758,13 +1758,13 @@ Name | Type | Description
       "target_url" => "https://gist.github.com/628b2736d379f",
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
-      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/42",
       "repository_url" => "https://api.github.com/repos/octocat/example",
       "deployment" => {
-        "id" => 1,
+        "id" => 42,
         "ref" => "master",
         "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-        "url" => "https://api.github.com/repos/octocat/example/deployments/1",
+        "url" => "https://api.github.com/repos/octocat/example/deployments/42",
         "task" => "deploy",
         "creator" => USER,
         "environment" => "production",
@@ -1772,7 +1772,7 @@ Name | Type | Description
         "created_at" => "2012-07-20T01:19:13Z",
         "updated_at" => "2012-07-20T01:19:13Z",
         "description" => "Deploy request from hubot",
-        "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
+        "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/42/statuses"
       }
     }
 

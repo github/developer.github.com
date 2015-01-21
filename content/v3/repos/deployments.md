@@ -170,7 +170,7 @@ A more advanced example specifying required commit statuses and bypassing auto-m
 
 <%= headers 201,
       :Location =>
-'https://api.github.com/repos/octocat/example/deployments/2' %>
+'https://api.github.com/repos/octocat/example/deployments/1' %>
 <%= json :deployment %>
 
 ## Update a Deployment

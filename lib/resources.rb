@@ -1834,8 +1834,8 @@ Name | Type | Description
     }
 
     BLOB_AFTER_CREATE ||= {
-      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
-      :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
+       'url'      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+       'sha' => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
     CONTENT_CRUD ||= {

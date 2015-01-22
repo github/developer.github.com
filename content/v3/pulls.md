@@ -115,7 +115,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/repos/octocat/Hello-World/pulls/1347" %>
+<%= headers 201, :Location => get_resource(:pull)['url'] %>
 <%= json :pull %>
 
 ## Update a pull request

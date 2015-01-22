@@ -97,9 +97,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1" %>
+<%= headers 201, :Location => get_resource(:pull_comment)['url'] %>
 <%= json :pull_comment %>
 
 ## Edit a comment

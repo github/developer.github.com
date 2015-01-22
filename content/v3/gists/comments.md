@@ -44,8 +44,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/gists/a6db0bec360bb87e9418/comments/1" %>
+<%= headers 201, :Location => get_resource(:gist_comment)['url'] %>
 <%= json :gist_comment %>
 
 ## Edit a comment

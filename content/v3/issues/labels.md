@@ -41,9 +41,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/octocat/Hello-World/labels/bug" %>
+<%= headers 201, :Location => get_resource(:label)['url'] %>
 <%= json :label %>
 
 ## Update a label

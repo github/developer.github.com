@@ -58,7 +58,7 @@ or OAuth with at least `write:public_key` [scope](/v3/oauth/#scopes).
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/keys/1" %>
+<%= headers 201, :Location => get_resource(:public_key)['url'] %>
 <%= json :public_key %>
 
 ## Update a public key

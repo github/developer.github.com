@@ -35,7 +35,7 @@ title: Deploy Keys | GitHub API
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/repos/octocat/Hello-World/keys/1" %>
+<%= headers 201, :Location => get_resource(:deploy_key)['url'] %>
 <%= json :deploy_key %>
 
 ## Edit a deploy key {#edit}

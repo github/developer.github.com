@@ -67,9 +67,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/octocat/Hello-World/issues/comments/1" %>
+<%= headers 201, :Location => get_resource(:issue_comment)['url'] %>
 <%= json :issue_comment %>
 
 ## Edit a comment

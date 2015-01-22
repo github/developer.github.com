@@ -181,7 +181,7 @@ The keys in the `files` object are the `string` filename. The value is another `
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/gists/aa5a315d61ae9438b18d" %>
+<%= headers 201, :Location => get_resource(:gist)['url'] %>
 <%= json(:gist) %>
 
 ## List gist forks

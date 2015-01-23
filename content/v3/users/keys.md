@@ -68,7 +68,7 @@ If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/keys/1" %>
+<%= headers 201, :Location => get_resource(:public_key)['url'] %>
 <%= json :public_key %>
 
 ## Update a public key

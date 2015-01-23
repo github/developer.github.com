@@ -77,6 +77,5 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/repos/octocat/Hello-World/trees/cd8274d15fa3ae2ab983129fb037999f264ba9a7" %>
+<%= headers 201, :Location => get_resource(:tree_new)['url'] %>
 <%= json :tree_new %>

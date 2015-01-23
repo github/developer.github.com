@@ -71,8 +71,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-  :Location => 'https://api.github.com/repos/octocat/Hello-World/releases/1' %>
+<%= headers 201, :Location => get_resource(:created_release)['url'] %>
 <%= json(:created_release) %>
 
 ## Edit a release

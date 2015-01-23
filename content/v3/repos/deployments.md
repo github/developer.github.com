@@ -151,9 +151,7 @@ chat networks.
   :description   => "Deploying my sweet branch"
 %>
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/deployments/1' %>
+<%= headers 201, :Location => get_resource(:deployment)['url'] %>
 <%= json :deployment %>
 
 #### Advanced Example
@@ -168,9 +166,7 @@ A more advanced example specifying required commit statuses and bypassing auto-m
   :required_contexts => ["ci/janky", "security/brakeman"]
 %>
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/deployments/2' %>
+<%= headers 201, :Location => get_resource(:deployment)['url'] %>
 <%= json :deployment %>
 
 ## Update a Deployment
@@ -222,7 +218,5 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/deployments/42/statuses/1' %>
+<%= headers 201, :Location => get_resource(:deployment_status)['url'] %>
 <%= json :deployment_status %>

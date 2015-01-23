@@ -86,8 +86,7 @@ Here's how you can create a hook that posts payloads in JSON format:
 
 ### Response
 
-<%= headers 201,
-      :Location => 'https://api.github.com/orgs/octocat/hooks/1' %>
+<%= headers 201, :Location => get_resource(:org_hook)['url'] %>
 <%= json :org_hook %>
 
 

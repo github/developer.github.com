@@ -37,13 +37,11 @@ Name | Type | Description
 `color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
 
 
-<%= json :name => "API", :color => "FFFFFF" %>
+<%= json :name => "bug", :color => "f29513" %>
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/user/repo/labels/foo" %>
+<%= headers 201, :Location => get_resource(:label)['url'] %>
 <%= json :label %>
 
 ## Update a label
@@ -58,7 +56,7 @@ Name | Type | Description
 `color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
 
 
-<%= json :name => "API", :color => "FFFFFF" %>
+<%= json :name => "bug", :color => "f29513" %>
 
 ### Response
 

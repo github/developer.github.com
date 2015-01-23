@@ -94,8 +94,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/authorizations/1"
-%>
+<%= headers 201, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("fingerprint" => "") } %>
 
 ## Get-or-create an authorization for a specific app
@@ -123,14 +122,12 @@ Name | Type | Description
 
 ### Response if returning a new token
 
-<%= headers 201, :Location => "https://api.github.com/authorizations/1"
-%>
+<%= headers 201, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("fingerprint" => "") } %>
 
 ### Response if returning an existing token
 
-<%= headers 200, :Location => "https://api.github.com/authorizations/1"
-%>
+<%= headers 200, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("token" => "", "fingerprint" => "") } %>
 
 ## Get-or-create an authorization for a specific app and fingerprint
@@ -161,14 +158,12 @@ Name | Type | Description
 
 ### Response if returning a new token
 
-<%= headers 201, :Location => "https://api.github.com/authorizations/1"
-%>
+<%= headers 201, :Location => get_resource(:oauth_access)['url'] %>
 <%= json :oauth_access %>
 
 ### Response if returning an existing token
 
-<%= headers 200, :Location => "https://api.github.com/authorizations/1"
-%>
+<%= headers 200, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("token" => "") } %>
 
 ## Update an existing authorization

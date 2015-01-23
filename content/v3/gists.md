@@ -90,7 +90,7 @@ The keys in the `files` object are the `string` filename, and the value is anoth
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/gists/1" %>
+<%= headers 201, :Location => get_resource(:full_gist)['url'] %>
 <%= json :full_gist %>
 
 ## Edit a gist
@@ -181,7 +181,7 @@ The keys in the `files` object are the `string` filename. The value is another `
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/gists/2" %>
+<%= headers 201, :Location => get_resource(:gist)['url'] %>
 <%= json(:gist) %>
 
 ## List gist forks

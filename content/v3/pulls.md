@@ -115,7 +115,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/repo/pulls/1" %>
+<%= headers 201, :Location => get_resource(:pull)['url'] %>
 <%= json :pull %>
 
 ## Update a pull request

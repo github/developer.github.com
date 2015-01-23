@@ -59,8 +59,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, \
-      :Location => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA" %>
+<%= headers 201, :Location => get_resource(:ref)['url'] %>
 <%= json :ref %>
 
 ## Update a Reference

@@ -62,6 +62,5 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac" %>
+<%= headers 201, :Location => get_resource(:gittag)['url'] %>
 <%= json :gittag %>

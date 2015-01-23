@@ -87,6 +87,14 @@ module GitHub
       end
 
       def json(key)
+        hash = get_resource(key)
+        hash = yield hash if block_given?
+
+        %(<pre class="body-response"><code class="language-javascript">) +
+          JSON.pretty_generate(hash) + "</code></pre>"
+      end
+
+      def get_resource(key)
         hash = case key
           when Hash
             h = {}
@@ -96,11 +104,6 @@ module GitHub
             key
           else Resources.const_get(key.to_s.upcase)
         end
-
-        hash = yield hash if block_given?
-
-        %(<pre class="body-response"><code class="language-javascript">) +
-          JSON.pretty_generate(hash) + "</code></pre>"
       end
 
       def text_html(response, status, head = {})
@@ -202,6 +205,12 @@ Name | Type | Description
 
     PUBLIC_KEY ||= SIMPLE_PUBLIC_KEY.merge \
       "url"        => "https://api.github.com/user/keys/1",
+      "title"      => "octocat@octomac",
+      "verified"   => true,
+      "created_at" => "2014-12-10T15:53:42Z"
+
+    DEPLOY_KEY ||= SIMPLE_PUBLIC_KEY.merge \
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
       "created_at" => "2014-12-10T15:53:42Z"
@@ -404,14 +413,14 @@ Name | Type | Description
       "number"        => 1,
       "state"         => "open",
       "title"         => "v1.0",
-      "description"   => "",
+      "description"   => "Tracking milestone for version 1.0",
       "creator"       => USER,
       "open_issues"   => 4,
       "closed_issues" => 8,
       "created_at"    => "2011-04-10T20:09:31Z",
       "updated_at"    => "2014-03-03T18:58:10Z",
       "closed_at"     => "2013-02-12T13:22:01Z",
-      "due_on"        => nil
+      "due_on"        => "2012-10-09T23:39:01Z"
     }
 
 
@@ -1329,7 +1338,7 @@ Name | Type | Description
 
     GIST_HISTORY ||= [
       {
-        "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+        "url"     => "https://api.github.com/gists/aa5a315d61ae9438b18d/57a7f021a713b1c5a6a199b54cc514735d2d462f",
         "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
         "user"    => USER,
         "change_status" => {
@@ -1345,8 +1354,8 @@ Name | Type | Description
     GIST_FORKS ||= [
       {
         "user" => USER,
-        "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-        "id" => 1,
+        "url" => "https://api.github.com/gists/dee9c42e4998ce2ea439",
+        "id" => "dee9c42e4998ce2ea439",
         "created_at" => "2011-04-14T16:00:49Z",
         "updated_at" => "2011-04-14T16:00:49Z"
       }
@@ -1374,20 +1383,20 @@ Name | Type | Description
     }
 
     GIST ||= {
-      "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-      "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
-      "commits_url"  => "https://api.github.com/gists/#{SecureRandom.hex(10)}/commits",
-      "id"           => "1",
+      "url"          => "https://api.github.com/gists/aa5a315d61ae9438b18d",
+      "forks_url"    => "https://api.github.com/gists/aa5a315d61ae9438b18d/forks",
+      "commits_url"  => "https://api.github.com/gists/aa5a315d61ae9438b18d/commits",
+      "id"           => "aa5a315d61ae9438b18d",
       "description"  => "description of gist",
       "public"       => true,
       "owner"        => USER,
       "user"         => nil,
       "files"        => GIST_FILE,
       "comments"     => 0,
-      "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
-      "html_url"     => "https://gist.github.com/1",
-      "git_pull_url" => "https://gist.github.com/1.git",
-      "git_push_url" => "https://gist.github.com/1.git",
+      "comments_url" => "https://api.github.com/gists/aa5a315d61ae9438b18d/comments/",
+      "html_url"     => "https://gist.github.com/aa5a315d61ae9438b18d",
+      "git_pull_url" => "https://gist.github.com/aa5a315d61ae9438b18d.git",
+      "git_push_url" => "https://gist.github.com/aa5a315d61ae9438b18d.git",
       "created_at"   => "2010-04-14T02:15:15Z",
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
@@ -1400,7 +1409,7 @@ Name | Type | Description
 
     GIST_COMMENT ||= {
       "id"         => 1,
-      "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
+      "url"        => "https://api.github.com/gists/a6db0bec360bb87e9418/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
       "created_at" => "2011-04-18T23:23:56Z",
@@ -1578,7 +1587,7 @@ Name | Type | Description
       "events" => ["push", "pull_request"],
       "active" => true,
       "config" =>
-        {'url' => 'http://example.com', 'content_type' => 'json'},
+        {'url' => 'http://example.com/webhook', 'content_type' => 'json'},
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z",
     }
@@ -1746,21 +1755,21 @@ Name | Type | Description
     }
 
     DEPLOYMENT_STATUS ||= {
-      "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
+      "url" => "https://api.github.com/repos/octocat/example/deployments/42/statuses/1",
       "id" => 1,
       "state" => "success",
       "creator" => USER,
-      "description" => "Deploy request from hubot",
-      "target_url" => "https://gist.github.com/628b2736d379f",
+      "description" => "Deployment finished successfully.",
+      "target_url" => "https://example.com/deployment/42/output",
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
-      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/42",
       "repository_url" => "https://api.github.com/repos/octocat/example",
       "deployment" => {
-        "id" => 1,
+        "id" => 42,
         "ref" => "master",
         "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-        "url" => "https://api.github.com/repos/octocat/example/deployments/1",
+        "url" => "https://api.github.com/repos/octocat/example/deployments/42",
         "task" => "deploy",
         "creator" => USER,
         "environment" => "production",
@@ -1768,7 +1777,7 @@ Name | Type | Description
         "created_at" => "2012-07-20T01:19:13Z",
         "updated_at" => "2012-07-20T01:19:13Z",
         "description" => "Deploy request from hubot",
-        "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
+        "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/42/statuses"
       }
     }
 
@@ -1779,8 +1788,19 @@ Name | Type | Description
       "target_url" => "https://ci.example.com/1000/output",
       "description" => "Build has completed successfully",
       "id" => 1,
-      "url" => "https://api.github.com/repos/octocat/example/statuses/1",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/statuses/1",
       "context" => "continuous-integration/jenkins"
+    }
+
+    OTHER_SIMPLE_STATUS ||= {
+      "created_at" => "2012-08-20T01:19:13Z",
+      "updated_at" => "2012-08-20T01:19:13Z",
+      "state" => "success",
+      "target_url" => "https://ci.example.com/2000/output",
+      "description" => "Testing has completed successfully",
+      "id" => 2,
+      "url" => "https://api.github.com/repos/octocat/Hello-World/statuses/2",
+      "context" => "security/brakeman"
     }
 
     STATUS ||= SIMPLE_STATUS.merge(
@@ -1789,15 +1809,15 @@ Name | Type | Description
 
     COMBINED_STATUS ||= {
       "state" => "success",
-      "name"  => "octocat/Hello-World",
       "sha"   => COMMIT["sha"],
       "total_count" => 2,
       "statuses" => [
-        SIMPLE_STATUS.merge("context" => "continuous-integration/jenkins"),
-        SIMPLE_STATUS.merge("context" => "security/brakeman")
+        SIMPLE_STATUS,
+        OTHER_SIMPLE_STATUS
       ],
+      "repository" => SIMPLE_REPO,
       "commit_url" => "https://api.github.com/repos/octocat/Hello-World/#{COMMIT["sha"]}",
-      "repository_url" => "https://api.github.com/repos/octocat/Hello-World"
+      "url" => "https://api.github.com/repos/octocat/Hello-World/#{COMMIT["sha"]}/status"
     }
 
     META ||= {
@@ -1816,8 +1836,8 @@ Name | Type | Description
     }
 
     BLOB_AFTER_CREATE ||= {
-      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
-      :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
+       'url'      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+       'sha' => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
     CONTENT_CRUD ||= {

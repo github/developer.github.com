@@ -108,9 +108,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/user/repo/issues/1' %>
+<%= headers 201, :Location => get_resource(:full_issue)['url'] %>
 <%= json :full_issue %>
 
 ## Edit an issue

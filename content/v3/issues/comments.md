@@ -63,13 +63,11 @@ Name | Type | Description
 `body`|`string` | **Required**. The contents of the comment.
 
 
-<%= json :body => "a new comment" %>
+<%= json :body => "Me too" %>
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/user/repo/issues/comments/1" %>
+<%= headers 201, :Location => get_resource(:issue_comment)['url'] %>
 <%= json :issue_comment %>
 
 ## Edit a comment
@@ -83,7 +81,7 @@ Name | Type | Description
 `body`|`string` | **Required**. The contents of the comment.
 
 
-<%= json :body => "String" %>
+<%= json :body => "Me too" %>
 
 ### Response
 

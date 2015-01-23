@@ -60,9 +60,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/statuses/1' %>
+<%= headers 201, :Location => get_resource(:status)['url'] %>
 <%= json :status %>
 
 ## List Statuses for a specific Ref

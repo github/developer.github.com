@@ -147,9 +147,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/Hello-World' %>
+<%= headers 201, :Location => get_resource(:repo)['url'] %>
 <%= json :repo %>
 
 ## Get

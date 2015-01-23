@@ -58,6 +58,5 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd" %>
+<%= headers 201, :Location => get_resource(:new_commit)['url'] %>
 <%= json :new_commit %>

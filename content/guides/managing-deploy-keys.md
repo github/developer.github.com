@@ -88,7 +88,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 
 ## Machine users
 
-If your server needs to access multiple repositories, you can choose to create a new github account and attach an SSH key that will be used exclusively for automation.  Since this github account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
+If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
 
 <div class="alert">
 <p>
@@ -104,7 +104,7 @@ If your server needs to access multiple repositories, you can choose to create a
 
 #### Cons
 
-* Only organizations have access to create teams; therefore only organizations can use them to restrict machine users to read-only access.  Individual user-owned repositories always grant read/write to collaborators.
+* Only organizations have access to create teams; therefore only organizations can use them to restrict machine users to read-only access.  Personal repositories always grant collaborators read/write access.
 * Machine user keys, like deploy keys, are usually not protected by a passphrase.
 
 #### Setup

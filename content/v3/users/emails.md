@@ -27,7 +27,7 @@ This endpoint is accessible with the user:email scope.
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize emails enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to add an email address via the API with these options enabled.
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap) and the option to synchronize emails enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to add an email address via the API with these options enabled.
 
 {{/warning}}
 

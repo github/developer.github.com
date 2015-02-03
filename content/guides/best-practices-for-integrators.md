@@ -23,7 +23,7 @@ There are three steps you can take to secure receipt of payloads delivered by Gi
 
 GitHub expects that integrations respond within thirty seconds of receiving the webhook payload. If your service takes longer than that to complete, then GitHub terminates the connection and the payload is lost.
 
-Since it's impossible to predict how fast your service will complete, you should do all of "the real work" in a background job. [Resque](http://resquework.org/) (for Ruby), [RQ](http://python-rq.org/) (for Python), or [RabbitMQ](http://www.rabbitmq.com/) (for Java) are examples of libraries that can handle queuing and processing of background jobs.
+Since it's impossible to predict how fast your service will complete, you should do all of "the real work" in a background job. [Resque](https://github.com/resque/resque/) (for Ruby), [RQ](http://python-rq.org/) (for Python), or [RabbitMQ](http://www.rabbitmq.com/) (for Java) are examples of libraries that can handle queuing and processing of background jobs.
 
 Note that even with a background job running, GitHub still expects your server to respond within thirty seconds. Your server simply needs to acknowledge that it received the payload by sending some sort of response. It's critical that your service to performs any validations on a payload as soon as possible, so that you can accurately report whether your server will continue with the request or not.
 

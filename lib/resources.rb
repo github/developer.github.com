@@ -734,6 +734,7 @@ Name | Type | Description
       "id" => 1,
       "url" => "https://api.github.com/teams/1",
       "name" => "Owners",
+      "slug" => "owners",
       "description" => "A great team.",
       "permission" => "admin",
       "members_url" => "https://api.github.com/teams/1/members{/member}",

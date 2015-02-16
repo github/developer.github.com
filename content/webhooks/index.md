@@ -16,7 +16,7 @@ an external issue tracker, trigger CI builds, update a backup mirror, or even
 deploy to your production server. You're only limited by your imagination.
 
 Each webhook can be installed [on an organization][org-hooks] or [a specific
-respository][repo-hooks]. Once installed, they will be triggered each time one
+repository][repo-hooks]. Once installed, they will be triggered each time one
 or more subscribed events occurs on that organization or repository.
 
 

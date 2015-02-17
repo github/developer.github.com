@@ -71,6 +71,11 @@ Name | Type | Description
 `subscribed`|`boolean`| Determines if notifications should be received from this repository.
 `ignored`|`boolean`| Determines if all notifications should be blocked from this repository.
 
+{{#tip}}
+
+If you would like to watch a repository, set `subscribed` to `true`. If you would like to ignore notifications made within a repository, set `ignored` to `true`. If you would like to stop watching a repository, [delete the repository's subscription](#delete-a-repository-subscription) completely.
+
+{{/tip}}
 
 ### Response
 
@@ -78,6 +83,12 @@ Name | Type | Description
 <%= json :repo_subscription %>
 
 ## Delete a Repository Subscription
+
+{{#tip}}
+
+This endpoint should only be used to stop watching a repository. To control whether or not you wish to receive notifications from a repository, [set the repository's subscription manually](#set-a-repository-subscription).
+
+{{/tip}}
 
     DELETE /repos/:owner/:repo/subscription
 

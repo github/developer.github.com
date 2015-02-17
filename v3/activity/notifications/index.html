@@ -66,8 +66,7 @@
   <li><a href="#delete-a-thread-subscription">Delete a Thread Subscription</a></li>
 </ul>
 
-<p>GitHub Notifications are powered by <a href="/v3/activity/watching/">watched repositories</a>.
-Users receive notifications for discussions in repositories they watch
+<p>Users receive notifications for conversations in repositories they watch
 including:</p>
 
 <ul>
@@ -76,7 +75,7 @@ including:</p>
   <li>Comments on any commits</li>
 </ul>
 
-<p>Notifications are also sent for discussions in unwatched repositories when the
+<p>Notifications are also sent for conversations in unwatched repositories when the
 user is involved including:</p>
 
 <ul>
@@ -134,15 +133,15 @@ X-Poll-Interval: 60
     </tr>
     <tr>
       <td><code>manual</code></td>
-      <td>The notification arrived because you’ve specifically decided to watch the item (via an Issue or Pull Request)</td>
+      <td>The notification arrived because you’ve specifically decided to subscribe to the thread (via an Issue or Pull Request)</td>
     </tr>
     <tr>
       <td><code>author</code></td>
-      <td>The notification arrived because you’ve created the item</td>
+      <td>The notification arrived because you’ve created the thread</td>
     </tr>
     <tr>
       <td><code>comment</code></td>
-      <td>The notification arrived because you’ve commented on the item</td>
+      <td>The notification arrived because you’ve commented on the thread</td>
     </tr>
     <tr>
       <td><code>mention</code></td>
@@ -154,7 +153,7 @@ X-Poll-Interval: 60
     </tr>
     <tr>
       <td><code>state_change</code></td>
-      <td>The notification arrived because you changed the item state (like closing an Issue or merging a Pull Request)</td>
+      <td>The notification arrived because you changed the thread state (like closing an Issue or merging a Pull Request)</td>
     </tr>
     <tr>
       <td><code>assign</code></td>
@@ -164,11 +163,11 @@ X-Poll-Interval: 60
 </table>
 
 <p>Note that the <code>reason</code> is modified on a per-thread basis, and can change, if the
-<code>reason</code> on a later notification is different. </p>
+<code>reason</code> on a later notification is different.</p>
 
-<p>For example, if you are the author of an issue, subsequent notifications on that 
-issue will have a <code>reason</code> of <code>author</code>. If you’re then  <strong>@mentioned</strong> on the same 
-issue, the notifications you fetch thereafter will have a <code>reason</code> of <code>mention</code>. 
+<p>For example, if you are the author of an issue, subsequent notifications on that
+issue will have a <code>reason</code> of <code>author</code>. If you’re then  <strong>@mentioned</strong> on the same
+issue, the notifications you fetch thereafter will have a <code>reason</code> of <code>mention</code>.
 The <code>reason</code> remains as <code>mention</code>, regardless of whether you’re ever mentioned again.</p>
 
 <h2 id="list-your-notifications">List your notifications</h2>
@@ -492,6 +491,12 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>This checks to see if the current user is subscribed to a thread.  You can also
 <a href="/v3/activity/watching/#get-a-repository-subscription">get a Repository subscription</a>.</p>
 
+<div class="alert tip">
+
+<p>Note that subscriptions are only generated if a user is participating in a conversation–for example, they’ve replied to the thread, were <strong>@mention</strong>ed, or manually subscribe to a thread.</p>
+
+</div>
+
 <pre><code>GET /notifications/threads/:id/subscription
 </code></pre>
 
@@ -512,10 +517,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="set-a-thread-subscription">Set a Thread Subscription</h2>
 
-<p>This lets you subscribe to a thread, or ignore it.  Subscribing to a thread
-is unnecessary if the user is already subscribed to the repository.  Ignoring
-a thread will mute all future notifications (until you comment or get
-@mentioned).</p>
+<p>This lets you subscribe or unsubscribe from a conversation. Unsubscribing from a conversation mutes all future notifications (until you comment or get <strong>@mention</strong>ed once more).</p>
 
 <pre><code>PUT /notifications/threads/:id/subscription
 </code></pre>

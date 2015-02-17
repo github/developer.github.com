@@ -199,9 +199,8 @@ Name | Type | Description
 
 <%= headers 405 %>
 <%= json \
-  :sha     => nil,
-  :merged  => false,
-  :message => 'Failure reason'
+  :message => "Pull Request is not mergeable",
+  :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
 %>
 
 ### Labels, assignees, and milestones

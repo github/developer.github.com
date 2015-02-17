@@ -60,6 +60,15 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :full_gist %>
 
+## Get a specific revision of a gist
+
+  GET /gists/:id/:sha
+
+### Response
+
+<%= headers 200 %>
+<%= json :full_gist %>
+
 ## Create a gist
 
     POST /gists

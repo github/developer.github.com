@@ -67,7 +67,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json :gist_revision %>
+<%= json :full_gist %>
 
 ## Create a gist
 

@@ -733,8 +733,8 @@ Name | Type | Description
     TEAM ||= {
       "id" => 1,
       "url" => "https://api.github.com/teams/1",
-      "name" => "Owners",
-      "slug" => "owners",
+      "name" => "Justice League",
+      "slug" => "justice-league",
       "description" => "A great team.",
       "permission" => "admin",
       "members_url" => "https://api.github.com/teams/1/members{/member}",
@@ -2180,7 +2180,7 @@ Name | Type | Description
           "client_id" => "12313412",
           "client_secret" => "kj123131132",
           "organization_name" => "Homestar Runners",
-          "organization_team" => "homestarrunners/owners"
+          "organization_team" => "homestarrunners/characters"
         },
         "smtp" => {
           "enabled" => true,

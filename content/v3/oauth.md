@@ -315,6 +315,9 @@ received from GitHub when you [registered the application][owned-apps].
 
     https://github.com/settings/connections/applications/:client_id
 
+For tips on discovering the resources that your application can access for a
+user, be sure to check out our [guide][resource-discovery-guide].
+
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments
@@ -322,3 +325,4 @@ received from GitHub when you [registered the application][owned-apps].
 [authorized-apps]: https://github.com/settings/applications#authorized
 [owned-apps]: https://github.com/settings/applications
 [org-app-policies]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/
+[resource-discovery-guide]: /guides/discovering-resources-for-a-user/

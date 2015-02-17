@@ -1416,6 +1416,10 @@ Name | Type | Description
       "updated_at" => "2011-04-18T23:23:56Z"
     }
 
+    GIST_REVISION ||= GIST.update \
+      "owner"    => USER,
+      "forks"    => GIST_FORKS
+
     TREE ||= {
       "sha"  => "9fb037999f264ba9a7fc6274d15fa3ae2ab98312",
       "url"  => "https://api.github.com/repos/octocat/Hello-World/trees/9fb037999f264ba9a7fc6274d15fa3ae2ab98312",

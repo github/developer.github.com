@@ -58,12 +58,12 @@ Here's a list of potential `reason`s for receiving a notification:
 Reason Name | Description
 ------------|------------
 `subscribed` | The notification arrived because you're watching the repository
-`manual` | The notification arrived because you've specifically decided to watch the item (via an Issue or Pull Request)
-`author` | The notification arrived because you've created the item
-`comment` | The notification arrived because you've commented on the item
+`manual` | The notification arrived because you've specifically decided to subscribe to the thread (via an Issue or Pull Request)
+`author` | The notification arrived because you've created the thread
+`comment` | The notification arrived because you've commented on the thread
 `mention` | The notification arrived because you were specifically **@mentioned** in the content
 `team_mention` | The notification arrived because you were on a team that was mentioned (like @org/team)
-`state_change` | The notification arrived because you changed the item state (like closing an Issue or merging a Pull Request)
+`state_change` | The notification arrived because you changed the thread state (like closing an Issue or merging a Pull Request)
 `assign` | The notification arrived because you were assigned to the Issue
 
 Note that the `reason` is modified on a per-thread basis, and can change, if the

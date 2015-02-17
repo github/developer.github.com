@@ -305,12 +305,12 @@ and get a new code.
 ## Directing users to review their access for an application
 
 Users can review and revoke their application authorizations from the [settings
-screen within GitHub][settings]. Integrators can deep link to the authorization
-information for their particular app to let their end users review those
-details.
+screen within GitHub][authorized-apps]. Integrators can deep link to the
+authorization information for their particular app to let their end users review
+those details.
 
 To build this link, you'll need your OAuth application's `client_id` you
-received from GitHub when you [registered the application][apps].
+received from GitHub when you [registered the application][owned-apps].
 
     https://github.com/settings/connections/applications/:client_id
 
@@ -318,5 +318,5 @@ received from GitHub when you [registered the application][apps].
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments
 [public keys]: /v3/users/keys/
-[settings]: https://github.com/settings
-[apps]: https://github.com/settings/applications
+[authorized-apps]: https://github.com/settings/applications#authorized
+[owned-apps]: https://github.com/settings/applications

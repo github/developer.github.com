@@ -1664,6 +1664,7 @@ Name | Type | Description
       "url" => "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
       "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
       "html_url" => "https://github.com/pengwynn/octokit/blob/master/README.md",
+      "download_url"      => "https://raw.githubusercontent.com/pengwynn/octokit/master/README.md",
       "_links" =>  {
         "git" =>  "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
         "self" =>  "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
@@ -1715,6 +1716,7 @@ Name | Type | Description
         "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
         "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
         "html_url" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+        "download_url"      => "https://raw.githubusercontent.com/pengwynn/octokit/master/lib/octokit.rb",
         "_links" => {
           "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
           "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
@@ -1849,6 +1851,7 @@ Name | Type | Description
         "url" => "https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt",
         "html_url" => "https://github.com/octocat/Hello-World/blob/master/notes/hello.txt",
         "git_url" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
+        "download_url"      => "https://raw.githubusercontent.com/octocat/HelloWorld/master/notes/hello.txt",
         "type" => "file",
         "_links" => {
           "self" => "https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt",

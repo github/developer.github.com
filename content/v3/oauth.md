@@ -305,18 +305,24 @@ and get a new code.
 ## Directing users to review their access for an application
 
 Users can review and revoke their application authorizations from the [settings
-screen within GitHub][settings]. Integrators can deep link to the authorization
-information for their particular app to let their end users review those
-details.
+screen within GitHub][authorized-apps]. A user's organizations [control whether
+an application can access organization data][org-app-policies]. Integrators can
+deep link to the authorization information for their particular app to let their
+end users review these details.
 
 To build this link, you'll need your OAuth application's `client_id` you
-received from GitHub when you [registered the application][apps].
+received from GitHub when you [registered the application][owned-apps].
 
     https://github.com/settings/connections/applications/:client_id
+
+For tips on discovering the resources that your application can access for a
+user, be sure to check out our [guide][resource-discovery-guide].
 
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments
 [public keys]: /v3/users/keys/
-[settings]: https://github.com/settings
-[apps]: https://github.com/settings/applications
+[authorized-apps]: https://github.com/settings/applications#authorized
+[owned-apps]: https://github.com/settings/applications
+[org-app-policies]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/
+[resource-discovery-guide]: /guides/discovering-resources-for-a-user/

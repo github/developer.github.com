@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>New User scopes</title>
+  <title>New Releases API methods</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,38 +40,37 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-01-08-new-user-scopes/">
+      <div class="change" id="/changes/2015-02-18-new-releases-api-methods/">
 <h2 class="title">
-  <a href="/changes/2013-01-08-new-user-scopes/">New User scopes</a>
+  <a href="/changes/2015-02-18-new-releases-api-methods/">New Releases API methods</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    January 8, 2013
+    February 18, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie"/>
-      <a href="https://github.com/technoweenie">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
+      <a href="https://github.com/pengwynn">pengwynn</a>
   </li>
 </ul>
 </div>
 
 
-<p>We’ve added a <a href="http://developer.github.com/v3/oauth/#scopes">few new user scopes</a> for 3rd party applications that want very
-specific user functionality.  The <code>user:email</code> scope gives apps read-only access
-to a user’s private email addresses.  The <code>user:follow</code> scope lets a user
-follow and unfollow other users.</p>
+<p>We’ve added two new methods to the <a href="/v3/repos/releases/">Releases API</a>. You can now get the <a href="/v3/repos/releases/#get-the-latest-release">latest published release</a> for a repository.</p>
 
-<p>This should help keep applications from requiring the <code>user</code> scope, which
-can be potentially dangerous.</p>
-
-<p>We also added a read-only endpoint to get a user’s public SSH keys.</p>
-
-<pre><code>GET https://api.github.com/users/technoweenie/keys
+<pre><code>GET /repos/:owner/:repo/releases/latest
 </code></pre>
+
+<p>You can also get a <a href="/v3/repos/releases/#get-a-release-by-tag-name">release by tag name</a>.</p>
+
+<pre><code>GET /repos/:owner/:repo/releases/tags/:tag
+</code></pre>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API+methods">get in touch</a>.</p>
 
 
 </div>

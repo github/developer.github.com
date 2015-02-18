@@ -1,5 +1,5 @@
 ---
-title: Configuring Your Server | GitHub API
+title: Configuring your server | GitHub API
 layout: webhooks
 ---
 
@@ -52,7 +52,7 @@ setup might look something like this:
     require 'json'
 
     post '/payload' do
-      push = JSON.parse(params[:payload])
+      push = JSON.parse(request.body.read)
       puts "I got some JSON: #{push.inspect}"
     end
 

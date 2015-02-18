@@ -12,10 +12,16 @@ many flavors</h1>
     <li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
     <li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
   </ul>
-  <img src="/shared/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
+  <img src="/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
 </div>
 
 # Third-party libraries
+
+## Dart
+
+* [github.dart][github.dart]
+
+[github.dart]: https://github.com/DirectMyFile/github.dart
 
 ## .NET
 
@@ -26,12 +32,6 @@ many flavors</h1>
 [irongithub]: https://github.com/in2bits/IronGitHub
 [csharp]: https://github.com/sgrassie/csharp-github-api
 [fsharp]: https://github.com/saxonmatt/FSharp.GitHubApi
-
-## ActionScript
-
-* [ActionScript GitHub API][as3]
-
-[as3]: https://github.com/cbrammer/api-github-as3
 
 ## Clojure
 
@@ -48,8 +48,10 @@ many flavors</h1>
 ## Erlang
 
 * [Erlang GitHub API][erlang]
+* [octo.erl][octo-erl]
 
 [erlang]: https://github.com/onlyshk/erlang-github-api
+[octo-erl]: https://github.com/sdepold/octo.erl
 
 ## Go
 
@@ -88,6 +90,12 @@ covers the entire API.
 [github]: https://github.com/michael/github
 [github-client]: https://github.com/philschatz/github-client
 
+## Julia
+
+* [GitHub.jl][github.jl]
+
+[github.jl]: https://github.com/WestleyArgentum/GitHub.jl
+
 ## Objective-C
 
 * [UAGithubEngine][uagithubengine]
@@ -117,12 +125,18 @@ covers the entire API.
 * [GitHub API][github-api]
 * [GitHub Kohana Module][kohana]
 * [GitHub Joomla! Package][joomla]
+* [Github Nette Extension][kdyby-github]
+* [GitHub API Easy Access][milo-github-api]
+* [GitHub bridge for Laravel][github-laravel]
 
 [github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
 [github-api]: https://github.com/yiiext/github-api
 [kohana]: https://github.com/acoulton/github_v3_api
-[joomla]: https://github.com/joomla/joomla-framework
+[joomla]: https://github.com/joomla-framework/github-api
+[kdyby-github]: https://github.com/kdyby/github
+[milo-github-api]: https://github.com/milo/github-api
+[github-laravel]: https://github.com/GrahamCampbell/Laravel-GitHub
 
 ## Python
 
@@ -145,18 +159,16 @@ covers the entire API.
 [agithub]: https://github.com/jpaugh/agithub "Agnostic GitHub"
 [githubpy]: https://github.com/michaelliao/githubpy
 [octohub]: https://github.com/turnkeylinux/octohub
-[github-flask]: https://github-flask.readthedocs.org
+[github-flask]: http://github-flask.readthedocs.org
 [torngithub]: https://github.com/jkeylu/torngithub
 
 ## Ruby
 
 * [GitHub API Gem][ghapi]
-* [Octocat Herder][herder]
 * [GitHub v3 API][ruby1]
 * [GitHub API Client][ruby2]
 * [Ghee][ghee]
 
-[herder]: https://github.com/jhelwig/octocat_herder
 [ghapi]: https://github.com/peter-murach/github
 [ruby1]: https://github.com/jwilger/github-v3-api
 [ruby2]: https://github.com/okonski/github-api-client

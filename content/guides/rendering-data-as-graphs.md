@@ -353,7 +353,7 @@ arguments to `drawTreemap` above, to get all the information to show up properly
 [Octokit]: https://github.com/pengwynn/octokit
 [D3 mortals]: http://www.recursion.org/d3-for-mere-mortals/
 [D3 treemap]: http://bl.ocks.org/mbostock/4063582
-[language API]: http://developer.github.com/v3/repos/#list-languages
+[language API]: https://developer.github.com/v3/repos/#list-languages
 [simple tree map]: http://2kittymafiasoftware.blogspot.com/2011/09/simple-treemap-visualization-with-d3.html
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/rendering-data-as-graphs
 [new oauth application]: https://github.com/settings/applications/new

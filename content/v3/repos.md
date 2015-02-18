@@ -9,11 +9,29 @@ title: Repositories | GitHub API
 
 ## List your repositories
 
-List repositories for the authenticated user. Note that this does not include
-repositories owned by organizations which the user can access. You can
-[list user organizations](/v3/orgs/#list-user-organizations) and
+List repositories for the authenticated user.
+
+Note that this currently does not include repositories owned by organizations
+which the user can access. You can
+[list your organizations](/v3/orgs/#list-your-organizations) and
 [list organization repositories](/v3/repos/#list-organization-repositories)
 separately.
+
+With the new Organization Permissions API (described below), this *will* include
+repositories owned by organizations which the user can access. If you provide
+the custom media type (described below), you won't need to use other APIs to
+list the authenticated user's organization-owned repositories.
+
+<div class="alert">
+  <p>
+    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers beginning February 24, 2015. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.moondragon+json</pre>
+  </p>
+</div>
 
     GET /user/repos
 
@@ -30,7 +48,7 @@ Name | Type | Description
 
 List public repositories for the specified user.
 
-    GET /users/:user/repos
+    GET /users/:username/repos
 
 ### Parameters
 
@@ -59,12 +77,6 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>master_branch</code> attribute. API clients should instead use the <code>default_branch</code> attribute to obtain the repository's default branch.
-  </p>
-</div>
-
 ## List all public repositories
 
 This provides a dump of every public repository, in the order that they were created.
@@ -89,8 +101,7 @@ Name | Type | Description
 
 ## Create
 
-Create a new repository for the authenticated user. OAuth users must supply
-`repo` scope.
+Create a new repository for the authenticated user.
 
     POST /user/repos
 
@@ -98,6 +109,13 @@ Create a new repository in this organization. The authenticated user must
 be a member of the specified organization.
 
     POST /orgs/:org/repos
+
+### OAuth scope requirements
+
+When using [OAuth](/v3/oauth/#scopes), authorizations must include:
+
+- `public_repo` scope or `repo` scope to create a public repository
+- `repo` scope to create a private repository
 
 ### Input
 
@@ -112,8 +130,8 @@ Name | Type | Description
 `has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. Default: `true`
 `team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
 `auto_init`|`boolean` | Pass `true` to create an initial commit with empty README. Default: `false`
-`gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". _Ignored if the `auto_init` parameter is not provided._
-`license_template`|`string` | Desired [LICENSE template](https://github.com/github/choosealicense.com) to apply. Use the [name of the template](https://github.com/github/choosealicense.com/tree/gh-pages/licenses) without the extension. For example, "mit" or "mozilla". _Ignored if the `auto_init` parameter is not provided._
+`gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell".
+`license_template`|`string` | Desired [LICENSE template](https://github.com/github/choosealicense.com) to apply. Use the [name of the template](https://github.com/github/choosealicense.com/tree/gh-pages/_licenses) without the extension. For example, "mit" or "mozilla".
 
 #### Example
 
@@ -129,9 +147,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/Hello-World' %>
+<%= headers 201, :Location => get_resource(:repo)['url'] %>
 <%= json :repo %>
 
 ## Get
@@ -143,12 +159,6 @@ Name | Type | Description
 The `parent` and `source` objects are present when the repository is a fork.
 `parent` is the repository this repository was forked from,
 `source` is the ultimate source for the network.
-
-<div class="alert">
-  <p>
-    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the response omits the <code>master_branch</code> attribute. API clients should instead use the <code>default_branch</code> attribute to obtain the repository's default branch.
-  </p>
-</div>
 
 <%= headers 200 %>
 <%= json :full_repo %>
@@ -202,7 +212,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:contributor) { |h| [h] } %>
 
 ## List languages
@@ -225,7 +235,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:team) { |h| [h] } %>
 
 ## List Tags
@@ -234,7 +244,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:tag) { |h| [h] } %>
 
 ## List Branches
@@ -243,7 +253,7 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:branches) %>
 
 ## Get Branch

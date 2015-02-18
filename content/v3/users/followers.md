@@ -11,7 +11,7 @@ title: User Followers | GitHub API
 
 List a user's followers:
 
-    GET /users/:user/followers
+    GET /users/:username/followers
 
 List the authenticated user's followers:
 
@@ -26,7 +26,7 @@ List the authenticated user's followers:
 
 List who a user is following:
 
-    GET /users/:user/following
+    GET /users/:username/following
 
 List who the authenticated user is following:
 
@@ -39,7 +39,7 @@ List who the authenticated user is following:
 
 ## Check if you are following a user
 
-    GET /user/following/:user
+    GET /user/following/:username
 
 ### Response if you are following this user
 
@@ -51,7 +51,7 @@ List who the authenticated user is following:
 
 ## Check if one user follows another
 
-    GET /users/:user/following/:target_user
+    GET /users/:username/following/:target_user
 
 ### Response if user follows target user
 
@@ -63,7 +63,9 @@ List who the authenticated user is following:
 
 ## Follow a user
 
-    PUT /user/following/:user
+    PUT /user/following/:username
+
+<%= fetch_content(:put_content_length) %>
 
 Following a user requires the user to be logged in and authenticated with basic
 auth or OAuth with the `user:follow` scope.
@@ -74,7 +76,7 @@ auth or OAuth with the `user:follow` scope.
 
 ## Unfollow a user
 
-    DELETE /user/following/:user
+    DELETE /user/following/:username
 
 Unfollowing a user requires the user to be logged in and authenticated with basic
 auth or OAuth with the `user:follow` scope.

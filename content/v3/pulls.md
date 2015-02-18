@@ -42,12 +42,12 @@ Name | Type | Description
 `head`|`string` | Filter pulls by head user and branch name in the format of `user:ref-name`. Example: `github:new-script-format`.
 `base`|`string` | Filter pulls by base branch name. Example: `gh-pages`.
 `sort`|`string`|  What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month). Default: `created`
-`direction`|`string`| The direction of the sort. Can be either `asc` or `desc`. Default: `desc`
+`direction`|`string`| The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
 
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull) { |h| [h] } %>
 
 ## Get a single pull request
@@ -115,7 +115,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/repo/pulls/1" %>
+<%= headers 201, :Location => get_resource(:pull)['url'] %>
 <%= json :pull %>
 
 ## Update a pull request
@@ -149,7 +149,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit) { |h| [h] } %>
 
 Note: The response includes a maximum of 250 commits. If you are working with a pull request larger than that, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the pull request.
@@ -160,7 +160,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:file) { |h| [h] } %>
 
 ## Get if a pull request has been merged
@@ -175,7 +175,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 <%= headers 404 %>
 
-## Merge a pull request (Merge Button&trade;)
+## Merge a pull request (Merge Button)
 
     PUT /repos/:owner/:repo/pulls/:number/merge
 
@@ -199,10 +199,13 @@ Name | Type | Description
 
 <%= headers 405 %>
 <%= json \
-  :sha     => nil,
-  :merged  => false,
-  :message => 'Failure reason'
+  :message => "Pull Request is not mergeable",
+  :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
 %>
+
+### Labels, assignees, and milestones
+
+Every pull request is an issue, but not every issue is a pull request. For this reason, "shared" actions for both features, like manipulating assignees, labels and milestones, are provided within [the Issues API](/v3/issues).
 
 ## Custom media types
 

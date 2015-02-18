@@ -34,7 +34,7 @@ for more details.
 
 List repositories being starred by a user.
 
-    GET /users/:user/starred
+    GET /users/:username/starred
 
 List repositories being starred by the authenticated user.
 
@@ -42,16 +42,25 @@ List repositories being starred by the authenticated user.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `sort`|`string` | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). Default: `created`
 `direction`|`string` | One of `asc` (ascending) or `desc` (descending). Default: `desc`
-
 
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
+
+## List repositories being starred with star creation timestamps
+
+You can also find out _when_ stars were created by passing the following custom content-type via the `Accept` header.
+
+    Accept: application/vnd.github.v3.star+json
+
+### Response
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:starred_repo) { |hash| [hash] } %>
 
 ## Check if you are starring a repository
 
@@ -72,6 +81,8 @@ Requires for the user to be authenticated.
 Requires for the user to be authenticated.
 
     PUT /user/starred/:owner/:repo
+
+<%= fetch_content(:put_content_length) %>
 
 ### Response
 

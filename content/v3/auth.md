@@ -56,7 +56,7 @@ want to take advantage of OAuth access token security features.
 
 For users with two-factor authentication enabled, Basic Authentication requires
 an extra step. When you attempt to authenticate with Basic Authentication, the
-server will respond with a `401` and an `X-GitHub-OTP: required;:2fa-type`
+server will respond with a `401` and an `X-GitHub-OTP: required; :2fa-type`
 header. This indicates that a two-factor authentication code is needed (in
 addition to the username and password). The `:2fa-type` in this header indicates
 whether the account receives its two-factor authentication codes via SMS or via

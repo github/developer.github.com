@@ -40,6 +40,28 @@ Git tags that have not been associated with a release.
 <%= headers 200 %>
 <%= json :release %>
 
+## Get the latest release
+
+View the latest published release for the repository.
+
+    GET /repos/:owner/:repo/releases/latest
+
+### Response
+
+<%= headers 200 %>
+<%= json :release %>
+
+## Get a release by tag name
+
+Get a release with the specified tag. Users must have push access to the repository to view draft releases.
+
+    GET /repos/:owner/:repo/releases/tags/:tag
+
+### Response
+
+<%= headers 200 %>
+<%= json :release %>
+
 
 ## Create a release
 

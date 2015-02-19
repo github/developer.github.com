@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Removing token attribute from Authorizations API responses (migration period)
+title: Breaking changes to Authorizations API responses on April 20
 created_at: 2015-02-19
 author_name: ptoomey3
 ---

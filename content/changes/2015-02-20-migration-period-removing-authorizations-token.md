@@ -5,7 +5,7 @@ created_at: 2015-02-19
 author_name: ptoomey3
 ---
 
-A couple weeks ago we [extended the preview period][removing-authorizations-token] of several API changes related to managing OAuth application authorizations. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to **update your code before April 20** to account for these changes.
+A couple weeks ago we [extended the preview period][removing-authorizations-token-extended-preview] of several API changes related to managing OAuth application authorizations. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to **update your code before April 20** to account for these changes.
 
 ### Breaking changes coming on April 20
 
@@ -30,10 +30,11 @@ During the migration period, you can opt-in to these changes using the following
 
 We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please [get in touch with us][contact]!
 
+[removing-authorizations-token-extended-preview]: /changes/2015-02-03-removing-authorizations-token-update/
 [removing-authorizations-token]: /changes/2014-12-08-removing-authorizations-token/
 [list-your-authorizations]: /v3/oauth_authorizations/#list-your-authorizations
 [get-a-single-authorization]: /v3/oauth_authorizations/#get-a-single-authorization
 [get-or-create-an-authorization-for-a-specific-app]: /v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app
 [get-or-create-an-authorization-for-a-specific-app-and-fingerprint]: /v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint
-[get-or-create-an-authorization-for-a-specific-app-and-fingerprint]: /v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint
+[update-an-existing-authorization]: /v3/oauth_authorizations/#update-an-existing-authorization
 [contact]: https://github.com/contact?form[subject]=Removing+authorizations+token

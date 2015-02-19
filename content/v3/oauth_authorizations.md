@@ -28,7 +28,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
   </ul>
 
   <p>
-    We're currently offering a migration period allowing applications to opt in to the new Authorization API behavior. This functionality will apply to all API consumers beginning Aril 20, 2015. Please see <a href="/changes/2015-02-20-migration-period-removing-authorizations-token/">the blog post</a> for full details.
+    We're currently offering a migration period allowing applications to opt in to the new Authorization API behavior. This functionality will apply to all API consumers beginning April 20, 2015. Please see <a href="/changes/2015-02-20-migration-period-removing-authorizations-token/">the blog post</a> for full details.
   </p>
 
   <p>

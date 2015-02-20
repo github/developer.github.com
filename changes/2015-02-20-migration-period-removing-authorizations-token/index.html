@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Repository Contributors and Empty Repositories</title>
+  <title>Breaking changes to Authorizations API responses on April 20</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,29 +40,53 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-02-19-repo-contributors-for-empty-repos/">
+      <div class="change" id="/changes/2015-02-20-migration-period-removing-authorizations-token/">
 <h2 class="title">
-  <a href="/changes/2014-02-19-repo-contributors-for-empty-repos/">Repository Contributors and Empty Repositories</a>
+  <a href="/changes/2015-02-20-migration-period-removing-authorizations-token/">Breaking changes to Authorizations API responses on April 20</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 20, 2014
+    February 19, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak"/>
-      <a href="https://github.com/izuzak">izuzak</a>
+    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3"/>
+      <a href="https://github.com/ptoomey3">ptoomey3</a>
   </li>
 </ul>
 </div>
 
 
-<p>We’ve made a small change to the <a href="/v3/repos/#list-contributors">Repository Contributors API</a> in the way empty repositories are handled. Previously, the API returned a <code>404 Not Found</code> status when the list of contributors was fetched for an empty repository. To improve consistency with other API endpoints and reduce confusion, the API now returns a <code>204 No Content</code> status instead.</p>
+<p>A couple weeks ago we <a href="/changes/2015-02-03-removing-authorizations-token-update/">extended the preview period</a> of several API changes related to managing OAuth application authorizations. Today, we’re finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before April 20</strong> to account for these changes.</p>
 
-<p>If you notice any strangeness, <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">just let us know</a>.</p>
+<h3 id="breaking-changes-coming-on-april-20">Breaking changes coming on April 20</h3>
+
+<p>If your application uses any of the following APIs, then you may be affected by this change:</p>
+
+<ul>
+  <li>The <a href="/v3/oauth_authorizations/#list-your-authorizations">List your authorizations</a> API</li>
+  <li>The <a href="/v3/oauth_authorizations/#get-a-single-authorization">Get a single authorization</a> API</li>
+  <li>The <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> API (<code>token</code> is still returned for “create”)</li>
+  <li>The <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a> API (<code>token</code> is still returned for “create”)</li>
+  <li>The <a href="/v3/oauth_authorizations/#update-an-existing-authorization">Update an existing authorization</a> API</li>
+</ul>
+
+<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-removing-authorizations-token/">the December announcement</a> for more details on the changes.)</p>
+
+<p>Starting today, we’re offering a migration period allowing applications to opt in to these changes (as described below). On April 20, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
+
+<h3 id="migration-period">Migration period</h3>
+
+<p>During the migration period, you can opt-in to these changes using the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.mirage-preview+json
+</code></pre>
+
+<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">get in touch with us</a>!</p>
+
 
 </div>
 

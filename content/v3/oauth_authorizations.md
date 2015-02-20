@@ -28,7 +28,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
   </ul>
 
   <p>
-    Please see <a href="/changes/2014-12-08-removing-authorizations-token/">the blog post</a> for full details.
+    We're currently offering a migration period allowing applications to opt in to the new Authorization API behavior. This functionality will apply to all API consumers beginning April 20, 2015. Please see <a href="/changes/2015-02-20-migration-period-removing-authorizations-token/">the blog post</a> for full details.
   </p>
 
   <p>
@@ -41,7 +41,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
   </p>
 
   <p>
-    To access the new API functionality during the preview period, you must
+    To access the new API functionality during the migration period, you must
     provide a custom <a href="/v3/media/">media type</a> in the
     <code>Accept</code> header:
     <pre>application/vnd.github.mirage-preview+json</pre>

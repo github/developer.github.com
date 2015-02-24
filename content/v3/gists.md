@@ -62,7 +62,7 @@ Name | Type | Description
 
 ## Get a specific revision of a gist
 
-  GET /gists/:id/:sha
+    GET /gists/:id/:sha
 
 ### Response
 

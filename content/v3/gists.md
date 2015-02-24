@@ -62,12 +62,12 @@ Name | Type | Description
 
 ## Get a specific revision of a gist
 
-  GET /gists/:id/:sha
+    GET /gists/:id/:sha
 
 ### Response
 
 <%= headers 200 %>
-<%= json :full_gist %>
+<%= json :full_gist_version %>
 
 ## Create a gist
 

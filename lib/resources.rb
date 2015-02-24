@@ -1407,6 +1407,8 @@ Name | Type | Description
       "history" => GIST_HISTORY,
       "files"   => GIST_FILE_WITH_CONTENT
 
+    FULL_GIST_VERSION ||= FULL_GIST.dup.update \
+      "url" => "https://api.github.com/gists/aa5a315d61ae9438b18d/57a7f021a713b1c5a6a199b54cc514735d2d462f"
 
     GIST_COMMENT ||= {
       "id"         => 1,

@@ -43,7 +43,7 @@ title: Licenses | GitHub API
 
 When passed the preview media type, requests to get a repository will also return the repository's license, if known.
 
-    GET /repos/benbalter/licensee
+    GET /repos/github/hubot
 
 ### Response
 

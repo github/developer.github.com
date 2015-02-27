@@ -22,6 +22,6 @@ Or get information about a particular license:
 
 When the preview media type is passed, the repository api will also return a repository's license when you get an individual repository:
 
-    GET /repos/benbalter/licensee
+    GET /repos/github/hubot
 
 If you have any questions or feedback, please [let us know](https://github.com/contact?form%5Bsubject%5D=licenses+api).

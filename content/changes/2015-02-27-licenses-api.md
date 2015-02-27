@@ -24,4 +24,4 @@ When the preview media type is passed, the repository api will also return a rep
 
     GET /repos/github/hubot
 
-If you have any questions or feedback, please [let us know](https://github.com/contact?form%5Bsubject%5D=Licenses+api).
+If you have any questions or feedback, please [let us know](https://github.com/contact?form%5Bsubject%5D=Licenses+API).

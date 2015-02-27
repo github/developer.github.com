@@ -32,7 +32,7 @@ title: Licenses | GitHub API
 
 ## Get an individual license
 
-    GET /licensees/mit
+    GET /licenses/mit
 
 ### Response
 

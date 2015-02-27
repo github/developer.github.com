@@ -21,6 +21,8 @@ title: Licenses | GitHub API
 
 {{/tip}}
 
+The Licenses API returns metadata about popular open source licenses and information about a particular project's license file.
+
 ## List all licenses
 
     GET /licenses
@@ -41,7 +43,9 @@ title: Licenses | GitHub API
 
 ## Get a repository's license
 
-When passed the preview media type, requests to get a repository will also return the repository's license, if known.
+When passed the preview media type, requests to get a repository will also return the repository's license, if it can be detected from the repository's license file.
+
+It's important to note that the API simply attempts to identity the project's license by the contents of the a `LICENSE` file, if any, and does not take into account the licenses of project dependencies or other means of documenting a project's license such as references in the documentation.
 
     GET /repos/github/hubot
 

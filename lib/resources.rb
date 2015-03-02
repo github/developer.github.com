@@ -410,6 +410,9 @@ Name | Type | Description
 
     MILESTONE ||= {
       "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1",
+      "html_url"      => "https://github.com/octocat/Hello-World/milestones/v1.0",
+      "labels_url"    => "https://api.github.com/repos/octocat/Hello-World/milestones/1/labels",
+      "id"            => 1002604,
       "number"        => 1,
       "state"         => "open",
       "title"         => "v1.0",

@@ -261,7 +261,7 @@ Name | Type | Description
 To follow redirects with curl, use the `-L` switch:
 
 <pre class="terminal">
-curl -L https://api.github.com/repos/pengwynn/octokit/tarball > octokit.tar.gz
+curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed

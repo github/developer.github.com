@@ -1667,14 +1667,14 @@ Name | Type | Description
       "path" =>  "README.md",
       "content" =>  "encoded content ...",
       "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1",
-      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
-      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
-      "html_url" => "https://github.com/pengwynn/octokit/blob/master/README.md",
-      "download_url"      => "https://raw.githubusercontent.com/pengwynn/octokit/master/README.md",
+      "url" => "https://api.github.com/repos/octokit/octokit.rb/contents/README.md",
+      "git_url" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+      "html_url" => "https://github.com/octokit/octokit.rb/blob/master/README.md",
+      "download_url"      => "https://raw.githubusercontent.com/octokit/octokit.rb/master/README.md",
       "_links" =>  {
-        "git" =>  "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
-        "self" =>  "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
-        "html" =>  "https://github.com/pengwynn/octokit/blob/master/README.md"
+        "git" =>  "https://api.github.com/repos/octokit/octokit.rb/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+        "self" =>  "https://api.github.com/repos/octokit/octokit.rb/contents/README.md",
+        "html" =>  "https://github.com/octokit/octokit.rb/blob/master/README.md"
       },
     }
 
@@ -1685,14 +1685,14 @@ Name | Type | Description
       "name" => "some-symlink",
       "path" => "bin/some-symlink",
       "sha" => "452a98979c88e093d682cab404a3ec82babebb48",
-      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
-      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
-      "html_url" => "https://github.com/pengwynn/octokit/blob/master/bin/some-symlink",
-      "download_url"      => "https://raw.githubusercontent.com/pengwynn/octokit/master/bin/some-symlink",
+      "url" => "https://api.github.com/repos/octokit/octokit.rb/contents/bin/some-symlink",
+      "git_url" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+      "html_url" => "https://github.com/octokit/octokit.rb/blob/master/bin/some-symlink",
+      "download_url"      => "https://raw.githubusercontent.com/octokit/octokit.rb/master/bin/some-symlink",
       "_links" => {
-        "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
-        "self" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
-        "html" => "https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"
+        "git" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+        "self" => "https://api.github.com/repos/octokit/octokit.rb/contents/bin/some-symlink",
+        "html" => "https://github.com/octokit/octokit.rb/blob/master/bin/some-symlink"
       },
     }
 
@@ -1721,14 +1721,14 @@ Name | Type | Description
         "name" => "octokit.rb",
         "path" => "lib/octokit.rb",
         "sha" => "fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
-        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
-        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
-        "html_url" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
-        "download_url"      => "https://raw.githubusercontent.com/pengwynn/octokit/master/lib/octokit.rb",
+        "url" => "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit.rb",
+        "git_url" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+        "html_url" => "https://github.com/octokit/octokit.rb/blob/master/lib/octokit.rb",
+        "download_url"      => "https://raw.githubusercontent.com/octokit/octokit.rb/master/lib/octokit.rb",
         "_links" => {
-          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
-          "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
-          "html" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+          "self" => "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit.rb",
+          "git" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+          "html" => "https://github.com/octokit/octokit.rb/blob/master/lib/octokit.rb",
         },
       },
       {
@@ -1737,14 +1737,14 @@ Name | Type | Description
         "name" => "octokit",
         "path" => "lib/octokit",
         "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
-        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-        "html_url" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit",
+        "url" => "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit",
+        "git_url" => "https://api.github.com/repos/octokit/octokit.rb/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+        "html_url" => "https://github.com/octokit/octokit.rb/tree/master/lib/octokit",
         "download_url"      => nil,
         "_links" => {
-          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
-          "git" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-          "html" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit"
+          "self" => "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit",
+          "git" => "https://api.github.com/repos/octokit/octokit.rb/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+          "html" => "https://github.com/octokit/octokit.rb/tree/master/lib/octokit"
         },
       },
     ]
@@ -1902,8 +1902,8 @@ Name | Type | Description
       :repository => SIMPLE_REPO,
       :subject => {
         :title => "Greetings",
-        :url => "https://api.github.com/repos/pengwynn/octokit/issues/123",
-        :latest_comment_url => "https://api.github.com/repos/pengwynn/octokit/issues/comments/123",
+        :url => "https://api.github.com/repos/octokit/octokit.rb/issues/123",
+        :latest_comment_url => "https://api.github.com/repos/octokit/octokit.rb/issues/comments/123",
         :type => "Issue"
       },
       :reason => 'subscribed',

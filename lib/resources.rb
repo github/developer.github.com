@@ -1479,12 +1479,12 @@ Name | Type | Description
       "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
       "author" => {
-        "date" => "2010-04-10T14:10:01-07:00",
+        "date" => "2014-11-07T22:01:45Z",
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com"
       },
       "committer" => {
-        "date" => "2010-04-10T14:10:01-07:00",
+        "date" => "2014-11-07T22:01:45Z",
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com"
       },
@@ -1505,12 +1505,12 @@ Name | Type | Description
       "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
       "author" => {
-        "date" => "2008-07-09T16:13:30+12:00",
+        "date" => "2014-11-07T22:01:45Z",
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com"
       },
       "committer" => {
-        "date" => "2008-07-09T16:13:30+12:00",
+        "date" => "2014-11-07T22:01:45Z",
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com"
       },
@@ -1535,7 +1535,7 @@ Name | Type | Description
       "tagger" => {
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com",
-        "date" => "2011-06-17T14:53:35-07:00"
+        "date" => "2014-11-07T22:01:45Z"
       },
       "object" => {
         "type" => "commit",
@@ -1873,12 +1873,12 @@ Name | Type | Description
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
         "html_url" => "https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd",
         "author" => {
-          "date" => "2010-04-10T14:10:01-07:00",
+          "date" => "2014-11-07T22:01:45Z",
           "name" => "Scott Chacon",
           "email" => "schacon@gmail.com"
         },
         "committer" => {
-          "date" => "2010-04-10T14:10:01-07:00",
+          "date" => "2014-11-07T22:01:45Z",
           "name" => "Scott Chacon",
           "email" => "schacon@gmail.com"
         },
@@ -1908,8 +1908,8 @@ Name | Type | Description
       },
       :reason => 'subscribed',
       :unread => true,
-      :updated_at => '2012-09-25T07:54:41-07:00',
-      :last_read_at => '2012-09-25T07:54:41-07:00',
+      :updated_at => '2014-11-07T22:01:45Z',
+      :last_read_at => '2014-11-07T22:01:45Z',
       :url => "https://api.github.com/notifications/threads/1"
     }
 

@@ -236,7 +236,7 @@ registered with your application.
 
 ### Access denied
 
-If the user rejects access to your application, GItHub will redirect to
+If the user rejects access to your application, GitHub will redirect to
 the registered callback URL with the following parameters summarizing
 the error:
 

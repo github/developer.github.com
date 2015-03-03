@@ -38,10 +38,15 @@ This method returns the contents of a file or directory in a repository.
 Files and symlinks support [a custom media type](#custom-media-types) for retrieving the raw content or rendered HTML (when supported).
 Directories and submodules do _not_ support custom media types.
 
-*Notes*:
+{{#tip}}
+
+**Note**:
 
 - To get a repository's contents recursively, you can [recursively get the tree](/v3/git/trees/).
+- This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Tree API](/v3/git/trees/#get-a-tree)
 - This API supports files up to 1 megabyte in size.
+
+{{/tip}}
 
 ### Parameters
 

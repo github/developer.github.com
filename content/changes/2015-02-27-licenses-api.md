@@ -5,7 +5,7 @@ created_at: 2015-02-27
 author_name: benbalter
 ---
 
-We're introducing a new [license API](/v3/licenses) preview to support [open source licensing GitHub.com](https://github.com/blog/1964-license-usage-on-github-com).
+We're introducing a new [license API](/v3/licenses) preview to support [open source license usage on GitHub.com](https://github.com/blog/1964-license-usage-on-github-com).
 
 To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
 
@@ -17,10 +17,9 @@ This will then expose two new API endpoints. You can get a list of all known lic
 
 Or get information about a particular license:
 
-
     GET /licenses/mit
 
-When the preview media type is passed, the repository api will also return a repository's license when you get an individual repository:
+When the preview media type is passed, the repository api will also return information about a repository's license file when you get an individual repository:
 
     GET /repos/github/hubot
 

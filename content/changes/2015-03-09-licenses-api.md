@@ -23,4 +23,4 @@ When the preview media type is passed, the repository api will also return infor
 
     GET /repos/github/hubot
 
-If you have any questions or feedback, please [let us know](https://github.com/contact?form%5Bsubject%5D=Licenses+API).
+For more information, see the [licenses API documentation](/v3/licenses/), and if you have any questions or feedback, please [let us know](https://github.com/contact?form%5Bsubject%5D=Licenses+API).

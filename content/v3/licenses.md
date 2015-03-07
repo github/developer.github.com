@@ -21,7 +21,7 @@ title: Licenses | GitHub API
 
 {{/tip}}
 
-The Licenses API returns metadata about popular open source licenses and information about a particular project's license file.
+The Licenses API returns metadata about popular open source licenses and information about a particular project's license file. The license key and name conforms to the [SPDX specification](https://spdx.org/).
 
 {{#warning}}
 

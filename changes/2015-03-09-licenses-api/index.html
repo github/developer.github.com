@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Repository Statistics</title>
+  <title>Licenses API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,41 +40,49 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-05-06-repository-stats/">
+      <div class="change" id="/changes/2015-03-09-licenses-api/">
 <h2 class="title">
-  <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
+  <a href="/changes/2015-03-09-licenses-api/">Licenses API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    May 6, 2013
+    March 9, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/Caged.png" alt="Avatar for Caged"/>
-      <a href="https://github.com/Caged">Caged</a>
+    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter"/>
+      <a href="https://github.com/benbalter">benbalter</a>
   </li>
 </ul>
 </div>
 
 
-<p>Today we’re happy to open our <a href="/v3/repos/statistics">Repository Statistics API</a> to everyone.  We’re using
-repository statistics to power <a href="https://github.com/github/linguist/graphs">our graphs</a>,
-but we can’t wait to see what others can do with this information.</p>
+<p>We’re introducing a new <a href="/v3/licenses">license API</a> preview to support <a href="https://github.com/blog/1964-license-usage-on-github-com">open source license usage on GitHub.com</a>.</p>
 
-<p>Starting today, these resources are available to you:</p>
+<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
 
-<ul>
-  <li><strong><a href="/v3/repos/statistics/#contributors">Contributors</a></strong></li>
-  <li><strong><a href="/v3/repos/statistics/#commit-activity">Commit Activity</a></strong></li>
-  <li><strong><a href="/v3/repos/statistics/#code-frequency">Code Frequency</a></strong></li>
-  <li><strong><a href="/v3/repos/statistics/#participation">Participation</a></strong></li>
-  <li><strong><a href="/v3/repos/statistics/#punch-card">Punch Card</a></strong></li>
-</ul>
+<pre><code>application/vnd.github.drax-preview+json
+</code></pre>
 
-<p>Enjoy!</p>
+<p>This will then expose two new API endpoints. You can get a list of all known licenses:</p>
+
+<pre><code>GET /licenses
+</code></pre>
+
+<p>Or get information about a particular license:</p>
+
+<pre><code>GET /licenses/mit
+</code></pre>
+
+<p>When the preview media type is passed, the repository api will also return information about a repository’s license file when you get an individual repository:</p>
+
+<pre><code>GET /repos/github/hubot
+</code></pre>
+
+<p>For more information, see the <a href="/v3/licenses/">licenses API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API">let us know</a>.</p>
 
 </div>
 

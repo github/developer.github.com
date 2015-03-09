@@ -30,8 +30,13 @@ organization's [GitHub Enterprise](https://enterprise.github.com/) installation.
 The [Rate Limit API][Rate Limit] lets you check your current rate limit
 status at any time.
 
+## [Licenses][]
+
+The [Licenses API][Licenses] returns information about open source licenses or under what license, if any a given project is distributed.
+
 [Emojis]: /v3/emojis
 [Gitignore]: /v3/gitignore
 [Markdown]: /v3/markdown
 [Meta]: /v3/meta
 [Rate Limit]: /v3/rate_limit
+[Licenses]: /v3/licenses

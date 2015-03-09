@@ -6,18 +6,18 @@
 
 require 'tmpdir'
 
-VERSION = ARGV[0].dup # like, 11.10.340
-
-BRANCH_NAME = "backport-docs-for-#{VERSION}"
-
-Dir.glob('tasks/*.rake').each { |r| load r }
-
 if ARGV.length != 1
   error = '''Error: Run the script like this: bundle exec script/enterprise-backport [VERSION]
 e.g. bundle exec script/enterprise-cutter 2.0
 '''
   abort error
 end
+
+VERSION = ARGV[0].dup # like, 11.10.340
+
+BRANCH_NAME = "backport-docs-for-#{VERSION}"
+
+Dir.glob('tasks/*.rake').each { |r| load r }
 
 setup
 
@@ -32,3 +32,5 @@ begin
 ensure
   FileUtils.remove_entry_secure temp_dir
 end
+
+puts "\n\nOkay! Feel free to `git push #{BRANCH_NAME}` if you like."

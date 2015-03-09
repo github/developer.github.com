@@ -41,7 +41,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json(:pull_comment) { |h| [h] } %>
+<%= json(:issue_comment) { |h| [h] } %>
 
 ## Get a single comment
 

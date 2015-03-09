@@ -13,7 +13,7 @@ title: Licenses | GitHub API
 
   The Licenses API is currently available for developers to preview.
   During the preview period, the API may change without advance notice.
-  Please see the [blog post][https://github.com/blog/1964-open-source-license-usage-on-github-com] for full details.
+  Please see the [blog post](https://github.com/blog/1964-open-source-license-usage-on-github-com) for full details.
 
   To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
 

@@ -55,7 +55,7 @@ When passed the preview media type, requests to get a repository will also retur
 
 It's important to note that the API simply attempts to identity the project's license by the contents of the a `LICENSE` file, if any, and does not take into account the licenses of project dependencies or other means of documenting a project's license such as references in the documentation.
 
-    GET /repos/github/hubot
+    GET /repos/benbalter/licensee
 
 ### Response
 

@@ -54,6 +54,8 @@ Both `:base` and `:head` must be branch names in `:repo`. To compare branches ac
 
 ### Response
 
+The response from the API is equivalent to running the `git log base..head` command; however, commits are returned in reverse chronological order.
+
 <%= json :commit_comparison %>
 
 Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.

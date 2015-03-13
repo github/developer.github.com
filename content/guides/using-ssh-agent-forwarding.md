@@ -140,6 +140,16 @@ If the command says that no identity is available, you'll need to add your key:
 ssh-add <em>yourkey</em>
 </pre>
 
+{{#tip}}
+
+On Mac OS X, `ssh-agent` will "forget" this key, once it gets restarted during reboots. But you can import your SSH keys into Keychain using this command:
+
+<pre class="terminal">
+/usr/bin/ssh-add -K <em>yourkey</em>
+</pre>
+
+{{/tip}}
+
 [tech-tips]: http://www.unixwiz.net/techtips/ssh-agent-forwarding.html
 [generating-keys]: https://help.github.com/articles/generating-ssh-keys
 [ssh-passphrases]: https://help.github.com/ssh-key-passphrases/

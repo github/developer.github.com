@@ -53,7 +53,6 @@ Name | Type | Description
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `code`|`string` | **Required**. The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
-`redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
 
 ### Response
 

@@ -12,6 +12,8 @@ read more about the use of media types in the API [here](/v3/media/).
 
 ## List issues
 
+<%= fetch_content(:prs_as_issues) %>
+
 List all issues across all the authenticated user's visible repositories
 including owned repositories, member repositories, and organization
 repositories:
@@ -44,6 +46,8 @@ Name | Type | Description
 
 ## List issues for a repository
 
+<%= fetch_content(:prs_as_issues) %>
+
     GET /repos/:owner/:repo/issues
 
 ### Parameters
@@ -67,11 +71,7 @@ Name | Type | Description
 
 ## Get a single issue
 
-{{#tip}}
-
-**Note**: Every pull request is an issue, but not every issue is a pull request. If the issue is not a pull request, the response omits the `pull_request` attribute.
-
-{{/tip}}
+<%= fetch_content(:prs_as_issues) %>
 
     GET /repos/:owner/:repo/issues/:number
 

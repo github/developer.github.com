@@ -131,6 +131,16 @@ Name | Type | Description
 `content_type` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
 `secret`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
 `insecure_ssl` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
+''',
+      "PRS_AS_ISSUES" =>
+      '''
+{{#tip}}
+
+**Note**: In the past, pull requests and issues were more closely aligned than they are now. As far as the API is concerned, every pull request is an issue, but not every issue is a pull request.
+
+This endpoint may also return pull requests in the response. If an issue *is* a pull request, the object will include a `pull_request` key.
+
+{{/tip}}
 '''
       }
 

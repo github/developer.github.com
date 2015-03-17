@@ -11,7 +11,7 @@ The Management Console API helps you manage your GitHub Enterprise installation.
 
 {{#tip}}
 
-You must explicitly set the port number when making API calls to the Management Console. If SSH is enabled on your Enterprise instance, the port number is `8443`; otherwise, the port number is `8080`.
+You must explicitly set the port number when making API calls to the Management Console. If SSL is enabled on your Enterprise instance, the port number is `8443`; otherwise, the port number is `8080`.
 
 If you don't want to provide a port number, you'll need to configure your tool to automatically follow redirects.
 

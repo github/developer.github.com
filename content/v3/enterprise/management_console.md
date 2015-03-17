@@ -9,6 +9,14 @@ title: Management Console | GitHub API
 
 The Management Console API helps you manage your GitHub Enterprise installation.
 
+{{#tip}}
+
+You must explicitly set the port number when making API calls to the Management Console. If SSL is enabled on your Enterprise instance, the port number is `8443`; otherwise, the port number is `8080`.
+
+If you don't want to provide a port number, you'll need to configure your tool to automatically follow redirects.
+
+{{/tip}}
+
 ## Authentication
 
 You need to pass your [Management Console password](https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/) as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-for-the-first-time).
@@ -16,13 +24,13 @@ You need to pass your [Management Console password](https://help.github.com/ente
 Use the `api_key` parameter to send this token with each request. For example:
 
 <pre class="terminal">
-$ curl 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em>'
+$ curl -L 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em>'
 </pre>
 
 You can also use standard HTTP authentication to send this token. For example:
 
 <pre class="terminal">
-$ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
+$ curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
 </pre>
 
 ## Upload a license for the first time
@@ -62,7 +70,7 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
+curl -L -X POST 'http://<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
 ## Upgrade a license
@@ -87,7 +95,7 @@ Location: http://hostname/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade'
+curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade'
 </pre>
 
 ## Check configuration status
@@ -116,7 +124,7 @@ Status        | Description
 ### Example
 
 <pre class="terminal">
-curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configcheck'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configcheck'
 </pre>
 
 ## Start a configuration process
@@ -135,7 +143,7 @@ Location: http://hostname/setup/api/configcheck
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configure'
+curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configure'
 </pre>
 
 ## Retrieve settings
@@ -150,7 +158,7 @@ curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/se
 ### Example
 
 <pre class="terminal">
-curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings'
 </pre>
 
 ## Modify settings
@@ -172,7 +180,7 @@ HTTP/1.1 204 No Content
 ### Example
 
 <pre class="terminal">
-curl -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
+curl -L -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
 </pre>
 
 ## Check maintenance status
@@ -189,7 +197,7 @@ Check your installation's maintenance status:
 ### Example
 
 <pre class="terminal">
-curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
 ## Enable or disable maintenance mode
@@ -216,7 +224,7 @@ The possible values for `when` are `now` or any date parseable by
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
+curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
 </pre>
 
 ## Retrieve authorized SSH keys
@@ -231,7 +239,7 @@ curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/se
 ### Example
 
 <pre class="terminal">
-curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
 </pre>
 
 ## Add a new authorized SSH key
@@ -252,7 +260,7 @@ Name | Type | Description
 ### Example
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
 ## Remove an authorized SSH key
@@ -273,5 +281,5 @@ Name | Type | Description
 ### Example
 
 <pre class="terminal">
-curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -L -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>

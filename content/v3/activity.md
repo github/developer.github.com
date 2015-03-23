@@ -13,7 +13,7 @@ types][types] that power the various activity streams on GitHub.
 
 ## [Feeds][]
 
-List of [Atom feeds][Feeds] available for the authenticating user.
+List of [Atom feeds][Feeds] available for the authenticated user.
 
 ## [Notifications][]
 

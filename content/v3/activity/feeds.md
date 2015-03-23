@@ -20,7 +20,7 @@ lists all the feeds available to the authenticated user:
 * **Current user organizations**: The private timeline for the organizations the authenticated user is a member of.
 
 **Note**: Private feeds are only returned when [authenticating via Basic
-Auth][authenticating] since current feed URIs use the older, non revokable auth
+Auth][authenticating] since current feed URIs use the older, non revocable auth
 tokens.
 
     GET /feeds

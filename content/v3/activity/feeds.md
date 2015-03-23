@@ -10,7 +10,7 @@ title: Feeds | GitHub API
 ## List Feeds
 
 GitHub provides several timeline resources in [Atom][] format. The Feeds API
-lists all the feeds available to the authenticating user:
+lists all the feeds available to the authenticated user:
 
 * **Timeline**: The GitHub global public timeline
 * **User**: The public timeline for any user, using [URI template][]

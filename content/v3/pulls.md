@@ -204,6 +204,14 @@ Name | Type | Description
   :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
 %>
 
+### Response if sha was provided and pull request head did not match
+
+<%= headers 409 %>
+<%= json \
+  :message => "Head branch was modified. Review and try the merge again.",
+  :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
+%>
+
 ### Labels, assignees, and milestones
 
 Every pull request is an issue, but not every issue is a pull request. For this reason, "shared" actions for both features, like manipulating assignees, labels and milestones, are provided within [the Issues API](/v3/issues).

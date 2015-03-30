@@ -28,7 +28,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
   </ul>
 
   <p>
-    In order to reduce the impact of removing the <code>token</code> attribute,
+    In order to reduce the impact of removing the <code>token</code> value,
     the OAuth Authorizations API has added a new request attribute
     (<code>fingerprint</code>), added three new response attributes
     (<code>token_last_eight</code>, <code>hashed_token</code>, and

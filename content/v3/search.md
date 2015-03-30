@@ -105,7 +105,7 @@ media type in your Accept header. For example, via curl, the above query would
 look like this:
 
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc
+      'https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc'
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -287,7 +287,7 @@ media type in your Accept header. For example, via curl, the above query would
 look like this:
 
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
+      'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -405,7 +405,7 @@ Using curl, and the [example issue search](#issue-search-example) above, our API
 request would look like this:
 
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc
+      'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
 
 The response will include a `text_matches` array for each search result. In the
 JSON below, we have two objects in the `text_matches` array.

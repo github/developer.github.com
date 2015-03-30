@@ -1,6 +1,6 @@
 ---
 kind: change
-title: The updated Authorization API is official
+title: The updated Authorizations API is official
 created_at: 2015-04-20
 author_name: ptoomey3
 ---

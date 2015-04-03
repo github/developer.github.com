@@ -19,7 +19,7 @@ http(s)://<em>hostname</em>/api/v3
 
     POST /staff/indexing_jobs
 
-### Parameters
+### Input
 
 Name    | Type    | Description
 --------|---------|--------------
@@ -37,16 +37,14 @@ Target                      | Description
 `:owner/:repository/code`   | All the source code in a repository.
 `:owner/*/code`             | All the source code in all of a user or organization's repositories.
 
+### Example
+
+<pre class="terminal">
+$ curl -u jwatson -X POST -H "Content-Type: application/json" -d '{"target": "kansaichris/japaning"}' "http://<em>hostname</em>/api/v3/staff/indexing_jobs"
+</pre>
+
+
 ### Response
 
 <%= headers 202 %>
 <%= json(:indexing_success)  %>
-
-### Example
-
-<pre class="terminal">
-$ curl -u jwatson -X POST "http://<em>hostname</em>/api/v3/staff/indexing_jobs?target=jwatson%2Flaughing-robot"
-{
-  "message": "Repository \"jwatson/laughing-robot\" has been added to the indexing queue"
-}
-</pre>

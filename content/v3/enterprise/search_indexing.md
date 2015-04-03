@@ -40,8 +40,11 @@ Target                      | Description
 ### Example
 
 <pre class="terminal">
-$ curl -u jwatson -X POST -H "Content-Type: application/json" -d '{"target": "jwatson/laughing-robot"}' "http://<em>hostname</em>/api/v3/staff/indexing_jobs"
-{
-  "message": "Repository \"jwatson/laughing-robot\" has been added to the indexing queue"
-}
+$ curl -u jwatson -X POST -H "Content-Type: application/json" -d '{"target": "kansaichris/japaning"}' "http://<em>hostname</em>/api/v3/staff/indexing_jobs"
 </pre>
+
+
+### Response
+
+<%= headers 202 %>
+<%= json(:indexing_success)  %>

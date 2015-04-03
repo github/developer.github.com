@@ -70,7 +70,7 @@ http(s)://<em>hostname</em>/api/v3
 <pre><code>POST /staff/indexing_jobs
 </code></pre>
 
-<h3 id="parameters">Parameters</h3>
+<h3 id="input">Input</h3>
 
 <table>
   <thead>
@@ -131,6 +131,12 @@ http(s)://<em>hostname</em>/api/v3
   </tbody>
 </table>
 
+<h3 id="example">Example</h3>
+
+<pre class="terminal">
+$ curl -u jwatson -X POST -H "Content-Type: application/json" -d '{"target": "kansaichris/japaning"}' "http://<em>hostname</em>/api/v3/staff/indexing_jobs"
+</pre>
+
 <h3 id="response">Response</h3>
 
 <pre class="headers"><code>Status: 202 Accepted
@@ -140,15 +146,6 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
   <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Repository 'kansaichris/japaning' has been added to the indexing queue"</span>
 <span class="p">}</span></code></pre>
-
-<h3 id="example">Example</h3>
-
-<pre class="terminal">
-$ curl -u jwatson -X POST "http://<em>hostname</em>/api/v3/staff/indexing_jobs?target=jwatson%2Flaughing-robot"
-{
-  "message": "Repository \"jwatson/laughing-robot\" has been added to the indexing queue"
-}
-</pre>
 
     </div>
 

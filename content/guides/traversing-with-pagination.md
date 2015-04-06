@@ -141,11 +141,10 @@ The loop will finish when there is no `rels[:next]` information to consume (in o
 words, we are at `rels[:last]`). It might look something like this:
 
     #!ruby
-    loop do
-      puts last_response.data.items.first.path
+    puts last_response.data.items.first.path
+    until last_response.rels[:next].nil?
       last_response = last_response.rels[:next].get
-      sleep 4 # back off from the API rate limiting; don't do this in Real Life
-      break if last_response.rels[:next].nil?
+      puts last_response.data.items.first.path
     end
 
 Changing the number of items per page is extremely simple with Octokit.rb. Simply
@@ -170,11 +169,10 @@ your code should remain intact:
 
     puts "And here's the first path for every set"
 
-    loop do
-      puts last_response.data.items.first.path
+    puts last_response.data.items.first.path
+    until last_response.rels[:next].nil?
       last_response = last_response.rels[:next].get
-      sleep 4 # back off from the API rate limiting; don't do this in Real Life
-      break if last_response.rels[:next].nil?
+      puts last_response.data.items.first.path
     end
 
 ## Constructing Pagination Links

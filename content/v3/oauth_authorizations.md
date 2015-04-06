@@ -37,7 +37,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
   </p>
 
   <p>
-    This functionality was finalized and became the default for all users beginning April 20, 2015. Please see <a href="/changes/2015-04-20-removing-authorizations-token-final/">the blog post</a> for full details.
+    This functionality became the default for all requests on April 20, 2015. Please see <a href="/changes/2015-04-20-removing-authorizations-token-final/">the blog post</a> for full details.
   </p>
 </div>
 

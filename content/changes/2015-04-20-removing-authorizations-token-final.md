@@ -8,10 +8,8 @@ author_name: ptoomey3
 Two months ago, we
 [announced the migration period][migration-period-announcement]
 for several [API changes related to managing OAuth authorizations][original-announcement].
-Today we're happy to announce that the updated [Authorizations API][docs] is
-officially part of GitHub API v3. We now consider it stable for production use.
-Thanks to everyone who provided feedback and updated their applications during
-the preview period.
+As promised, the migration period concluded today, and these changes are
+now in effect for all requests.
 
 ### Preview media type no longer needed
 

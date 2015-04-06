@@ -6,8 +6,8 @@ author_name: ptoomey3
 ---
 
 Two months ago, we
-[announced the migration period][migration-period-removing-authorizations-token]
-for several API changes related to managing OAuth application authorizations.
+[announced the migration period][migration-period-announcement]
+for several [API changes related to managing OAuth authorizations][original-announcement].
 Today we're happy to announce that the updated [Authorizations API][docs] is
 officially part of GitHub API v3. We now consider it stable for production use.
 Thanks to everyone who provided feedback and updated their applications during
@@ -33,7 +33,8 @@ Instead, we [recommend][media-types] that you specify `v3` as the version in the
 As always, if you have any feedback, please don't hesitate to
 [get in touch with us][contact].
 
-[migration-period-removing-authorizations-token]: /changes/2015-02-20-migration-period-removing-authorizations-token
+[migration-period-announcement]: /changes/2015-02-20-migration-period-removing-authorizations-token
+[original-announcement]: /changes/2014-12-08-removing-authorizations-token/
 [docs]: /v3/oauth_authorizations
 [media-types]: /v3/media
 [contact]: https://github.com/contact?form[subject]=Removing+token+from+Authorizations+API

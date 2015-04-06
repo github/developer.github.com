@@ -197,11 +197,10 @@ we’ll retrieve the data set for the next page by following the <code>rels[:nex
 The loop will finish when there is no <code>rels[:next]</code> information to consume (in other
 words, we are at <code>rels[:last]</code>). It might look something like this:</p>
 
-<pre><code class="language-ruby highlight"><span class="kp">loop</span> <span class="k">do</span>
-  <span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
+<pre><code class="language-ruby highlight"><span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
+<span class="k">until</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">nil?</span>
   <span class="n">last_response</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">get</span>
-  <span class="nb">sleep</span> <span class="mi">4</span> <span class="c1"># back off from the API rate limiting; don't do this in Real Life</span>
-  <span class="k">break</span> <span class="k">if</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
 <span class="k">end</span></code></pre>
 
 <p>Changing the number of items per page is extremely simple with Octokit.rb. Simply
@@ -225,11 +224,10 @@ your code should remain intact:</p>
 
 <span class="nb">puts</span> <span class="s2">"And here's the first path for every set"</span>
 
-<span class="kp">loop</span> <span class="k">do</span>
-  <span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
+<span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
+<span class="k">until</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">nil?</span>
   <span class="n">last_response</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">get</span>
-  <span class="nb">sleep</span> <span class="mi">4</span> <span class="c1"># back off from the API rate limiting; don't do this in Real Life</span>
-  <span class="k">break</span> <span class="k">if</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">nil?</span>
+  <span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
 <span class="k">end</span></code></pre>
 
 <h2 id="constructing-pagination-links">Constructing Pagination Links</h2>

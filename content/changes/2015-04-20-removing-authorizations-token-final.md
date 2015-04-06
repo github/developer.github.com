@@ -5,7 +5,7 @@ created_at: 2015-04-20
 author_name: ptoomey3
 ---
 
-A couple weeks ago we
+Two months ago, we
 [announced the migration period][migration-period-removing-authorizations-token]
 for several API changes related to managing OAuth application authorizations.
 Today we're happy to announce that the updated [Authorizations API][docs] is

@@ -36,4 +36,4 @@ As always, if you have any feedback, please don't hesitate to
 [migration-period-removing-authorizations-token]: /changes/2015-02-20-migration-period-removing-authorizations-token
 [docs]: /v3/oauth_authorizations
 [media-types]: /v3/media
-[contact]: https://github.com/contact?form[subject]=Removing+authorizations+token
+[contact]: https://github.com/contact?form[subject]=Removing+token+from+Authorizations+API

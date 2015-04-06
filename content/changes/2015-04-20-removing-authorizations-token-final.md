@@ -13,12 +13,12 @@ now in effect for all requests.
 
 ### Preview media type no longer needed
 
-If you used the updated Authorizations API during the preview period, you needed
+If you used the updated Authorizations API during the migration period, you needed
 to provide a custom media type in the `Accept` header:
 
     application/vnd.github.mirage-preview+json
 
-Now that the preview period has ended, you no longer need to pass this custom
+Now that the migration period has ended, you no longer need to pass this custom
 media type.
 
 Instead, we [recommend][media-types] that you specify `v3` as the version in the

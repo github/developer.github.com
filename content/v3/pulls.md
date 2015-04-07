@@ -184,6 +184,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 Name | Type | Description
 -----|------|-------------
 `commit_message`|`string`| The message that will be used for the merge commit
+`sha`|`string`| SHA that pull request head must match to allow merge
 
 
 ### Response if merge was successful
@@ -200,6 +201,14 @@ Name | Type | Description
 <%= headers 405 %>
 <%= json \
   :message => "Pull Request is not mergeable",
+  :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
+%>
+
+### Response if sha was provided and pull request head did not match
+
+<%= headers 409 %>
+<%= json \
+  :message => "Head branch was modified. Review and try the merge again.",
   :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
 %>
 

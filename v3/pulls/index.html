@@ -1411,6 +1411,11 @@ X-RateLimit-Remaining: 4999</code></pre>
       <td><code>string</code></td>
       <td>The message that will be used for the merge commit</td>
     </tr>
+    <tr>
+      <td><code>sha</code></td>
+      <td><code>string</code></td>
+      <td>SHA that pull request head must match to allow merge</td>
+    </tr>
   </tbody>
 </table>
 
@@ -1434,6 +1439,17 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
   <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Pull Request is not mergeable"</span><span class="p">,</span>
+  <span class="s2">"documentation_url"</span><span class="p">:</span> <span class="s2">"https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"</span>
+<span class="p">}</span></code></pre>
+
+<h3 id="response-if-sha-was-provided-and-pull-request-head-did-not-match">Response if sha was provided and pull request head did not match</h3>
+
+<pre class="headers"><code>Status: 409 Conflict
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Head branch was modified. Review and try the merge again."</span><span class="p">,</span>
   <span class="s2">"documentation_url"</span><span class="p">:</span> <span class="s2">"https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"</span>
 <span class="p">}</span></code></pre>
 

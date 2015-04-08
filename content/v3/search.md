@@ -61,7 +61,7 @@ Name | Type | Description
 `sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.
 `order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-The `q` search term can also contain any combination of the supported repository search qualifiers:
+The `q` search term can also contain any combination of the supported repository search qualifiers as described by the in-browser [repository search documentation](https://help.github.com/articles/searching-repositories/) and [search syntax documentation](https://help.github.com/articles/search-syntax/):
 
 * [`in`](https://help.github.com/articles/searching-repositories#scope-the-search-fields)
  Qualifies which fields are searched. With this qualifier you can restrict the
@@ -70,7 +70,8 @@ The `q` search term can also contain any combination of the supported repository
 * [`size`](https://help.github.com/articles/searching-repositories#search-based-on-the-size-of-a-repository)
   Finds repositories that match a certain size (in kilobytes).
 * [`forks`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has)
-  Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.
+  Filters repositories based on the number of forks
+* [`fork`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has) Filters whether forked repositories should be included (`true`) or only forked repositories should be returned (`only`).
 * [`created` or `pushed`](https://help.github.com/articles/searching-repositories#search-based-on-when-a-repository-was-created-or-last-updated)
   Filters repositories based on date of creation, or when they were last updated.
 * [`user` or `repo`](https://help.github.com/articles/searching-repositories#search-within-a-users-or-organizations-repositories)

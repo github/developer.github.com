@@ -138,7 +138,7 @@ More results might have been found, but also might not.</p>
   </tbody>
 </table>
 
-<p>The <code>q</code> search term can also contain any combination of the supported repository search qualifiers:</p>
+<p>The <code>q</code> search term can also contain any combination of the supported repository search qualifiers as described by the in-browser <a href="https://help.github.com/articles/searching-repositories/">repository search documentation</a> and <a href="https://help.github.com/articles/search-syntax/">search syntax documentation</a>:</p>
 
 <ul>
   <li>
@@ -151,7 +151,9 @@ More results might have been found, but also might not.</p>
 Finds repositories that match a certain size (in kilobytes).</li>
   <li>
 <a href="https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has"><code>forks</code></a>
-Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.</li>
+Filters repositories based on the number of forks</li>
+  <li>
+<a href="https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has"><code>fork</code></a> Filters whether forked repositories should be included (<code>true</code>) or only forked repositories should be returned (<code>only</code>).</li>
   <li>
 <a href="https://help.github.com/articles/searching-repositories#search-based-on-when-a-repository-was-created-or-last-updated"><code>created</code> or <code>pushed</code></a>
 Filters repositories based on date of creation, or when they were last updated.</li>
@@ -330,19 +332,19 @@ included the search term.</p>
   </tbody>
 </table>
 
-<p>The <code>q</code> search term can also contain any combination of the supported code search qualifiers:</p>
+<p>The <code>q</code> search term can also contain any combination of the supported code search qualifiers as described by the in-browser <a href="https://help.github.com/articles/searching-code/">code search documentation</a> and <a href="https://help.github.com/articles/search-syntax/">search syntax documentation</a>:</p>
 
 <ul>
   <li>
 <a href="https://help.github.com/articles/searching-code#scope-the-search-fields"><code>in</code></a>
  Qualifies which fields are searched. With this qualifier you can restrict the
- search to just the file contents, the file path, or both.</li>
+ search to the file contents (<code>file</code>), the file path (<code>path</code>), or both.</li>
   <li>
 <a href="https://help.github.com/articles/searching-code#search-by-language"><code>language</code></a>
 Searches code based on the language it’s written in.</li>
   <li>
 <a href="https://help.github.com/articles/searching-code#search-by-the-number-of-forks-the-parent-repository-has"><code>fork</code></a>
-Specifies that code from forked repositories should be searched. Repository
+Specifies that code from forked repositories should be searched (<code>true</code>). Repository
 forks will not be searchable unless the fork has more stars than the parent
 repository.</li>
   <li>
@@ -350,13 +352,13 @@ repository.</li>
 Finds files that match a certain size (in bytes).</li>
   <li>
 <a href="https://help.github.com/articles/searching-code#search-by-the-location-of-a-file-within-the-repository"><code>path</code></a>
-Specifies the path that the resulting file must be at.</li>
+Specifies the path prefix that the resulting file must be under.</li>
   <li>
 <a href="https://help.github.com/articles/searching-code#search-by-filename"><code>filename</code></a>
-Matches files by their filename.</li>
+Matches files by a substring of the filename.</li>
   <li>
 <a href="https://help.github.com/articles/searching-code#search-by-the-file-extension"><code>extension</code></a>
-Matches files with a certain extension.</li>
+Matches files with a certain extension after a dot.</li>
   <li>
 <a href="https://help.github.com/articles/searching-code#search-within-a-users-or-organizations-repositories"><code>user</code> or <code>repo</code></a>
   Limits searches to a specific user or repository.</li>
@@ -555,16 +557,16 @@ included the search term.</p>
   </tbody>
 </table>
 
-<p>The <code>q</code> search term can also contain any combination of the supported issue search qualifiers:</p>
+<p>The <code>q</code> search term can also contain any combination of the supported issue search qualifiers as described by the in-browser <a href="https://help.github.com/articles/searching-issues/">issue search documentation</a> and <a href="https://help.github.com/articles/search-syntax/">search syntax documentation</a>:</p>
 
 <ul>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-issues-or-pull-requests"><code>type</code></a>
-With this qualifier you can restrict the search to issues or pull request only.</li>
+With this qualifier you can restrict the search to issues (<code>issue</code>) or pull request (<code>pr</code>) only.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#scope-the-search-fields"><code>in</code></a>
 Qualifies which fields are searched. With this qualifier you can restrict the
-search to just the title, body, comments, or any combination of these.</li>
+search to just the title (<code>title</code>), body (<code>body</code>), comments (<code>comment</code>), or any combination of these.</li>
   <li>
 <a href="https://help.github.com/articles/searching-issues#search-by-the-author-of-an-issue-or-pull-request"><code>author</code></a>
 Finds issues or pull requests created by a certain user.</li>
@@ -797,17 +799,17 @@ on <a href="#text-match-metadata">text match metadata </a> for full details.)</p
   </tbody>
 </table>
 
-<p>The <code>q</code> search term can also contain any combination of the supported user search qualifiers:</p>
+<p>The <code>q</code> search term can also contain any combination of the supported user search qualifiers as described by the in-browser <a href="https://help.github.com/articles/searching-users/">user search documentation</a> and <a href="https://help.github.com/articles/search-syntax/">search syntax documentation</a>:</p>
 
 <ul>
   <li>
 <a href="https://help.github.com/articles/searching-users#search-for-users-or-organizations"><code>type</code></a>
-With this qualifier you can restrict the search to just personal accounts or
-just organization accounts.</li>
+With this qualifier you can restrict the search to just personal accounts (<code>user</code>) or
+just organization accounts (<code>org</code>).</li>
   <li>
 <a href="https://help.github.com/articles/searching-users#scope-the-search-fields"><code>in</code></a>
 Qualifies which fields are searched. With this qualifier you can restrict
-the search to just the username, public email, full name, or any
+the search to just the username (<code>login</code>), public email (<code>email</code>), full name (<code>fullname</code>), or any
 combination of these.</li>
   <li>
 <a href="https://help.github.com/articles/searching-users#search-based-on-the-number-of-repositories-a-user-has"><code>repos</code></a>

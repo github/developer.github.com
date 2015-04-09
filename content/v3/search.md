@@ -61,7 +61,7 @@ Name | Type | Description
 `sort`|`string`| The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.
 `order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-The `q` search term can also contain any combination of the supported repository search qualifiers:
+The `q` search term can also contain any combination of the supported repository search qualifiers as described by the in-browser [repository search documentation](https://help.github.com/articles/searching-repositories/) and [search syntax documentation](https://help.github.com/articles/search-syntax/):
 
 * [`in`](https://help.github.com/articles/searching-repositories#scope-the-search-fields)
  Qualifies which fields are searched. With this qualifier you can restrict the
@@ -70,7 +70,8 @@ The `q` search term can also contain any combination of the supported repository
 * [`size`](https://help.github.com/articles/searching-repositories#search-based-on-the-size-of-a-repository)
   Finds repositories that match a certain size (in kilobytes).
 * [`forks`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has)
-  Filters repositories based on the number of forks, and/or whether forked repositories should be included in the results at all.
+  Filters repositories based on the number of forks
+* [`fork`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has) Filters whether forked repositories should be included (`true`) or only forked repositories should be returned (`only`).
 * [`created` or `pushed`](https://help.github.com/articles/searching-repositories#search-based-on-when-a-repository-was-created-or-last-updated)
   Filters repositories based on date of creation, or when they were last updated.
 * [`user` or `repo`](https://help.github.com/articles/searching-repositories#search-within-a-users-or-organizations-repositories)
@@ -144,25 +145,25 @@ Name | Type | Description
 `sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match.
 `order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-The `q` search term can also contain any combination of the supported code search qualifiers:
+The `q` search term can also contain any combination of the supported code search qualifiers as described by the in-browser [code search documentation](https://help.github.com/articles/searching-code/) and [search syntax documentation](https://help.github.com/articles/search-syntax/):
 
 * [`in`](https://help.github.com/articles/searching-code#scope-the-search-fields)
  Qualifies which fields are searched. With this qualifier you can restrict the
- search to just the file contents, the file path, or both.
+ search to the file contents (`file`), the file path (`path`), or both.
 * [`language`](https://help.github.com/articles/searching-code#search-by-language)
   Searches code based on the language it's written in.
 * [`fork`](https://help.github.com/articles/searching-code#search-by-the-number-of-forks-the-parent-repository-has)
-  Specifies that code from forked repositories should be searched. Repository
+  Specifies that code from forked repositories should be searched (`true`). Repository
   forks will not be searchable unless the fork has more stars than the parent
   repository.
 * [`size`](https://help.github.com/articles/searching-code#search-by-the-size-of-the-parent-repository)
   Finds files that match a certain size (in bytes).
 * [`path`](https://help.github.com/articles/searching-code#search-by-the-location-of-a-file-within-the-repository)
-  Specifies the path that the resulting file must be at.
+  Specifies the path prefix that the resulting file must be under.
 * [`filename`](https://help.github.com/articles/searching-code#search-by-filename)
-  Matches files by their filename.
+  Matches files by a substring of the filename.
 * [`extension`](https://help.github.com/articles/searching-code#search-by-the-file-extension)
-  Matches files with a certain extension.
+  Matches files with a certain extension after a dot.
 * [`user` or `repo`](https://help.github.com/articles/searching-code#search-within-a-users-or-organizations-repositories)
     Limits searches to a specific user or repository.
 
@@ -219,13 +220,13 @@ Name | Type | Description
 `sort`|`string`| The sort field. Can be `comments`, `created`, or `updated`. Default: results are sorted by best match.
 `order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-The `q` search term can also contain any combination of the supported issue search qualifiers:
+The `q` search term can also contain any combination of the supported issue search qualifiers as described by the in-browser [issue search documentation](https://help.github.com/articles/searching-issues/) and [search syntax documentation](https://help.github.com/articles/search-syntax/):
 
  * [`type`](https://help.github.com/articles/searching-issues#search-issues-or-pull-requests)
-   With this qualifier you can restrict the search to issues or pull request only.
+   With this qualifier you can restrict the search to issues (`issue`) or pull request (`pr`) only.
  * [`in`](https://help.github.com/articles/searching-issues#scope-the-search-fields)
    Qualifies which fields are searched. With this qualifier you can restrict the
-   search to just the title, body, comments, or any combination of these.
+   search to just the title (`title`), body (`body`), comments (`comment`), or any combination of these.
  * [`author`](https://help.github.com/articles/searching-issues#search-by-the-author-of-an-issue-or-pull-request)
    Finds issues or pull requests created by a certain user.
  * [`assignee`](https://help.github.com/articles/searching-issues#search-by-the-assignee-of-an-issue-or-pull-request)
@@ -316,14 +317,14 @@ Name | Type | Description
 `sort`|`string`| The sort field. Can be `followers`, `repositories`, or `joined`.  Default: results are sorted by best match.
 `order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
-The `q` search term can also contain any combination of the supported user search qualifiers:
+The `q` search term can also contain any combination of the supported user search qualifiers as described by the in-browser [user search documentation](https://help.github.com/articles/searching-users/) and [search syntax documentation](https://help.github.com/articles/search-syntax/):
 
  * [`type`](https://help.github.com/articles/searching-users#search-for-users-or-organizations)
-   With this qualifier you can restrict the search to just personal accounts or
-   just organization accounts.
+   With this qualifier you can restrict the search to just personal accounts (`user`) or
+   just organization accounts (`org`).
  * [`in`](https://help.github.com/articles/searching-users#scope-the-search-fields)
    Qualifies which fields are searched. With this qualifier you can restrict
-   the search to just the username, public email, full name, or any
+   the search to just the username (`login`), public email (`email`), full name (`fullname`), or any
    combination of these.
  * [`repos`](https://help.github.com/articles/searching-users#search-based-on-the-number-of-repositories-a-user-has)
    Filters users based on the number of repositories they have.

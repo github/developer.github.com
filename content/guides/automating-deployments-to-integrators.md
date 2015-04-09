@@ -43,7 +43,7 @@ Note that the Auto-Deployment service only picks up changes from your default br
 
 ## Sending deployments whenever you push to a repository
 
-The Auto-Deployment service will be responsible for creating deployments when a push is made to your defalt branch. Next, we'll set up a service to receive those deployment events and handle the deployment of your project.
+The Auto-Deployment service will be responsible for creating deployments when a push is made to your default branch. Next, we'll set up a service to receive those deployment events and handle the deployment of your project.
 
 1. Navigate to the repository where you’re setting up your deployments.
 2. In your repository's right sidebar, click <span aria-label="The edit icon" title="The edit icon" class="octicon octicon-tools"></span>.

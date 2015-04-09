@@ -70,7 +70,7 @@ The `q` search term can also contain any combination of the supported repository
 * [`size`](https://help.github.com/articles/searching-repositories#search-based-on-the-size-of-a-repository)
   Finds repositories that match a certain size (in kilobytes).
 * [`forks`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has)
-  Filters repositories based on the number of forks
+  Filters repositories based on the number of forks.
 * [`fork`](https://help.github.com/articles/searching-repositories#search-based-on-the-number-of-forks-the-parent-repository-has) Filters whether forked repositories should be included (`true`) or only forked repositories should be returned (`only`).
 * [`created` or `pushed`](https://help.github.com/articles/searching-repositories#search-based-on-when-a-repository-was-created-or-last-updated)
   Filters repositories based on date of creation, or when they were last updated.

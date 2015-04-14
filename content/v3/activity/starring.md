@@ -32,7 +32,9 @@ for more details.
 
 ## List Stargazers with star creation timestamps
 
-You can also find out _when_ stars were created by passing the following custom content-type via the `Accept` header.
+    GET /repos/:owner/:repo/stargazers
+
+You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
 
     Accept: application/vnd.github.v3.star+json
 
@@ -65,7 +67,7 @@ Name | Type | Description
 
 ## List repositories being starred with star creation timestamps
 
-You can also find out _when_ stars were created by passing the following custom content-type via the `Accept` header.
+You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
 
     Accept: application/vnd.github.v3.star+json
 

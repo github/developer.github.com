@@ -25,6 +25,8 @@ To understand when these redirects would take place, you'll want to understand h
 - When the owner renames their user account or organization account.
 - When the owner transfers the repository to a new owner.
 
+With repository redirects, you'll be able to make an API request using a repository's old location, and you can [follow the redirect][redirects] to the new location.
+
 ## Send us your feedback
 
 We hope you'll take these redirects for a spin and [let us know what you think][contact]. Happy redirecting!

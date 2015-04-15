@@ -15,7 +15,7 @@ Starting today, developers can preview the redirect functionality for relocated 
 
     application/vnd.github.quicksilver-preview+json
 
-During the preview period, we may change aspects of the redirect behavior based on developer feedback. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
+During the preview period, we may change aspects of the redirect behavior based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.
 
 ## When will the redirects occur?
 

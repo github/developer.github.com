@@ -19,7 +19,7 @@ During the preview period, we may change aspects of the redirect behavior based 
 
 ## When will the redirects occur?
 
-To understand when these redirects would take place, you'll want to understand how to identify a repository's location. Repositories are located using the combination of the owner's name and the repository's name. (For example, the [@twbs][] organization owns the popular [bootstrap repository][twbs/bootstrap]. We identify this repository as [twbs/bootstrap](twbs/bootstrap).) The repository's location changes in the following scenarios:
+To understand when these redirects would take place, you'll want to understand how to identify a repository's location. Repositories are located using the combination of the owner's name and the repository's name. (For example, the [@twbs][] organization owns the popular [bootstrap repository](https://github.com/twbs/bootstrap). We identify this repository as [twbs/bootstrap](https://github.com/twbs/bootstrap).) The repository's location changes in the following scenarios:
 
 - When the owner changes the repository name.
 - When the owner renames their user account or organization account.
@@ -33,4 +33,3 @@ We hope you'll take these redirects for a spin and [let us know what you think][
 [contact]: https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects
 [media type]: /v3/media/
 [redirects]: /v3/#http-redirects
-[twbs/bootstrap]: https://github.com/twbs/bootstrap

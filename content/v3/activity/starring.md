@@ -30,15 +30,11 @@ for more details.
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
-## List Stargazers with star creation timestamps
-
-    GET /repos/:owner/:repo/stargazers
+### Alternative response with star creation timestamps
 
 You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
 
     Accept: application/vnd.github.v3.star+json
-
-### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:stargazer_with_timestamps) { |hash| [hash] } %>
@@ -65,13 +61,11 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
-## List repositories being starred with star creation timestamps
+### Alternative response with star creation timestamps
 
 You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
 
     Accept: application/vnd.github.v3.star+json
-
-### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:starred_repo) { |hash| [hash] } %>

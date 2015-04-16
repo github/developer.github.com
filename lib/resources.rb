@@ -279,6 +279,11 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "repo" => REPO
     }
 
+    STARGAZER_WITH_TIMESTAMPS ||= {
+      "starred_at" => "2011-01-16T19:06:43Z",
+      "user" => USER
+    }
+
     TAG ||= {
       "name"        => "v0.1",
       "commit"      => {

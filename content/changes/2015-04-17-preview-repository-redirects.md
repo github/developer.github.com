@@ -19,19 +19,22 @@ During the preview period, we may change aspects of the redirect behavior based 
 
 ## When will the redirects occur?
 
-To understand when these redirects would take place, you'll want to understand how to identify a repository's location. Repositories are located using the combination of the owner's name and the repository's name. (For example, the [@twbs][] organization owns the popular [bootstrap repository](https://github.com/twbs/bootstrap). We identify this repository as [twbs/bootstrap](https://github.com/twbs/bootstrap).) The repository's location changes in the following scenarios:
+To understand when these redirects would take place, you'll want to understand how to identify a repository's location. Repositories are located using the combination of the owner's name and the repository's name. For example, the [@twbs][] organization owns the popular [bootstrap repository](https://github.com/twbs/bootstrap). We identify this repository as [twbs/bootstrap](https://github.com/twbs/bootstrap).
+
+The repository's location changes in the following scenarios:
 
 - When the owner changes the repository name.
 - When the owner renames their user account or organization account.
 - When the owner transfers the repository to a new owner.
 
-With repository redirects, you'll be able to make an API request using a repository's old location, and you can [follow the redirect][redirects] to the new location.
+Continuing our [twbs/bootstrap](https://github.com/twbs/bootstrap) example, this repository used to be owned by the [@twitter][] organization, and it was therefore located at [twitter/bootstrap](https://github.com/twitter/bootstrap). With repository redirects, you can make an API request using the repository's old location, and you can [follow the redirect][redirects] to the new location.
 
 ## Send us your feedback
 
 We hope you'll take these redirects for a spin and [let us know what you think][contact]. Happy redirecting!
 
 [@twbs]: https://github.com/twbs
+[@twitter]:  https://github.com/twitter
 [contact]: https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects
 [media type]: /v3/media/
 [redirects]: /v3/#http-redirects

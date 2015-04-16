@@ -27,7 +27,7 @@ The repository's location changes in the following scenarios:
 - When the owner renames their user account or organization account.
 - When the owner transfers the repository to a new owner.
 
-Continuing our [twbs/bootstrap](https://github.com/twbs/bootstrap) example, this repository used to be owned by the [@twitter][] organization, and it was therefore located at [twitter/bootstrap](https://github.com/twitter/bootstrap). With repository redirects, you can make an API request using the repository's old location, and you can [follow the redirect][redirects] to the new location.
+Continuing our [twbs/bootstrap](https://github.com/twbs/bootstrap) example, this repository used to be owned by the [@twitter][] organization, and it was therefore located at [twitter/bootstrap](https://github.com/twitter/bootstrap). With repository redirects, you'll be able to make an API request using the repository's old location and receive [either a `301` or `307` HTTP redirect][redirects], depending on the type of request being made. You can then follow the redirect to the new location.
 
 ## Send us your feedback
 

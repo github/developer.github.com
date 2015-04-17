@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Deprecating a Confusing Attribute in the Pull Request API</title>
+  <title>Preview repository redirects</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,16 +40,16 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
+      <div class="change" id="/changes/2015-04-17-preview-repository-redirects/">
 <h2 class="title">
-  <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Deprecating a Confusing Attribute in the Pull Request API</a>
+  <a href="/changes/2015-04-17-preview-repository-redirects/">Preview repository redirects</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    April 25, 2013
+    April 17, 2015
     
   </li>
   <li class="who_when">
@@ -60,22 +60,37 @@
 </div>
 
 
-<p>When you get the details for a Pull Request from the API, the
-<a href="/v3/pulls/#get-a-single-pull-request">response</a> provides everything there is to
-know about that Pull Request. In addition to the useful information provided in
-the API response, the JSON also includes the <code>merge_commit_sha</code> attribute. This
-attribute is a frequent source of misunderstanding, and we aim to remove the
-confusion.</p>
+<p>From time to time, repository names change. If you make a GitHub API request using a repository’s old name in the URL, the API has historically responded with <code>404 Not Found</code>. To help API clients gracefully handle renamed repositories, the API will soon begin <a href="/v3/#http-redirects">redirecting</a> to the repository’s new location.</p>
 
-<p>To help current API consumers, we’ve <a href="/v3/pulls/#mergability">documented the
-attribute</a> for improved understanding.</p>
+<p>You can preview these redirects now. In the coming weeks, we’ll announce the timeline for enabling these redirects for everyone.</p>
 
-<p>To protect future API consumers from this confusion, we have
-<a href="/v3/versions/#v3-deprecations">deprecated</a> the <code>merge_commit_sha</code> attribute, and we will
-remove it in the next major version of the API.</p>
+<h2 id="how-can-i-try-out-the-redirects">How can I try out the redirects?</h2>
 
-<p>As always, if you have any questions or feedback, please drop us a line at
-<a href="mailto:support@github.com?subject=Deprecating%20merge_commit_sha">support@github.com</a>.</p>
+<p>Starting today, developers can preview the redirect functionality for relocated repositories. To access this redirect functionality during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.quicksilver-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of the redirect behavior based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<h2 id="when-will-the-redirects-occur">When will the redirects occur?</h2>
+
+<p>To understand when these redirects would take place, you’ll want to understand how to identify a repository’s location. Repositories are located using the combination of the owner’s name and the repository’s name. For example, the <a href="https://github.com/twbs">@twbs</a> organization owns the popular <a href="https://github.com/twbs/bootstrap">bootstrap repository</a>. We identify this repository as <a href="https://github.com/twbs/bootstrap">twbs/bootstrap</a>.</p>
+
+<p>The repository’s location changes in the following scenarios:</p>
+
+<ul>
+  <li>When the owner changes the repository name.</li>
+  <li>When the owner renames their user account or organization account.</li>
+  <li>When the owner transfers the repository to a new owner.</li>
+</ul>
+
+<p>Continuing our <a href="https://github.com/twbs/bootstrap">twbs/bootstrap</a> example, this repository used to be owned by the <a href="https://github.com/twitter">@twitter</a> organization, and it was therefore located at <a href="https://github.com/twitter/bootstrap">twitter/bootstrap</a>. With repository redirects, you’ll be able to make an API request using the repository’s old location and receive <a href="/v3/#http-redirects">either a <code>301</code> or <code>307</code> HTTP redirect</a>, depending on the type of request being made. You can then follow the redirect to the new location.</p>
+
+<h2 id="send-us-your-feedback">Send us your feedback</h2>
+
+<p>We hope you’ll take these redirects for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects">let us know what you think</a>. Happy redirecting!</p>
+
 
 </div>
 

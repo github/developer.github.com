@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Authorizations API response changes are now official
+title: Authorizations API response changes are now in effect
 created_at: 2015-04-20
 author_name: ptoomey3
 ---

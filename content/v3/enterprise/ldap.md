@@ -70,7 +70,7 @@ Note that this API call does not automatically initiate an LDAP sync. Rather, if
 
 {{/tip}}
 
-    POST /admin/ldap/user/:team_id/sync
+    POST /admin/ldap/teams/:team_id/sync
 
 ### Response
 

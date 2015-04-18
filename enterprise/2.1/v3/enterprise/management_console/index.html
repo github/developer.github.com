@@ -72,6 +72,14 @@
 
 <p>The Management Console API helps you manage your GitHub Enterprise installation.</p>
 
+<div class="alert tip">
+
+<p>You must explicitly set the port number when making API calls to the Management Console. If SSL is enabled on your Enterprise instance, the port number is <code>8443</code>; otherwise, the port number is <code>8080</code>.</p>
+
+<p>If you don’t want to provide a port number, you’ll need to configure your tool to automatically follow redirects.</p>
+
+</div>
+
 <h2 id="authentication">Authentication</h2>
 
 <p>You need to pass your <a href="https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-for-the-first-time"><code>/setup/api/start</code></a>.</p>
@@ -79,13 +87,13 @@
 <p>Use the <code>api_key</code> parameter to send this token with each request. For example:</p>
 
 <pre class="terminal">
-$ curl 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em>'
+$ curl -L 'http://<em>hostname</em>/setup/api?api_key=<em>your-amazing-password</em>'
 </pre>
 
 <p>You can also use standard HTTP authentication to send this token. For example:</p>
 
 <pre class="terminal">
-$ curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
+$ curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api'
 </pre>
 
 <h2 id="upload-a-license-for-the-first-time">Upload a license for the first time</h2>
@@ -150,7 +158,7 @@ Location: http://<em>hostname</em>/setup/api/configcheck
 <h3 id="example">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
+curl -L -X POST 'http://<em>hostname</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
 </pre>
 
 <h2 id="upgrade-a-license">Upgrade a license</h2>
@@ -189,7 +197,7 @@ Location: http://hostname/setup/api/configcheck
 <h3 id="example-1">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade'
+curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/upgrade'
 </pre>
 
 <h2 id="check-configuration-status">Check configuration status</h2>
@@ -266,7 +274,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-2">Example</h3>
 
 <pre class="terminal">
-curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configcheck'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configcheck'
 </pre>
 
 <h2 id="start-a-configuration-process">Start a configuration process</h2>
@@ -286,7 +294,7 @@ Location: http://hostname/setup/api/configcheck
 <h3 id="example-3">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configure'
+curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/configure'
 </pre>
 
 <h2 id="retrieve-settings">Retrieve settings</h2>
@@ -357,7 +365,7 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"12313412"</span><span class="p">,</span>
       <span class="s2">"client_secret"</span><span class="p">:</span> <span class="s2">"kj123131132"</span><span class="p">,</span>
       <span class="s2">"organization_name"</span><span class="p">:</span> <span class="s2">"Homestar Runners"</span><span class="p">,</span>
-      <span class="s2">"organization_team"</span><span class="p">:</span> <span class="s2">"homestarrunners/owners"</span>
+      <span class="s2">"organization_team"</span><span class="p">:</span> <span class="s2">"homestarrunners/characters"</span>
     <span class="p">},</span>
     <span class="s2">"smtp"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -422,7 +430,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-4">Example</h3>
 
 <pre class="terminal">
-curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings'
 </pre>
 
 <h2 id="modify-settings">Modify settings</h2>
@@ -459,7 +467,7 @@ HTTP/1.1 204 No Content
 <h3 id="example-5">Example</h3>
 
 <pre class="terminal">
-curl -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
+curl -L -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
 </pre>
 
 <h2 id="check-maintenance-status">Check maintenance status</h2>
@@ -497,7 +505,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-6">Example</h3>
 
 <pre class="terminal">
-curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance'
 </pre>
 
 <h2 id="enable-or-disable-maintenance-mode">Enable or disable maintenance mode</h2>
@@ -559,7 +567,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-7">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
+curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
 </pre>
 
 <h2 id="retrieve-authorized-ssh-keys">Retrieve authorized SSH keys</h2>
@@ -587,7 +595,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-8">Example</h3>
 
 <pre class="terminal">
-curl 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys'
 </pre>
 
 <h2 id="add-a-new-authorized-ssh-key">Add a new authorized SSH key</h2>
@@ -639,7 +647,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-9">Example</h3>
 
 <pre class="terminal">
-curl -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
 <h2 id="remove-an-authorized-ssh-key">Remove an authorized SSH key</h2>
@@ -687,7 +695,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h3 id="example-10">Example</h3>
 
 <pre class="terminal">
-curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+curl -L -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 </pre>
 
     </div>
@@ -760,6 +768,7 @@ curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/
         <ul class="js-guides">
           <li><a href="/enterprise/2.1/v3/emojis/">Emojis</a></li>
           <li><a href="/enterprise/2.1/v3/gitignore/">Gitignore</a></li>
+          <li><a href="/enterprise/2.1/v3/licenses/">Licenses</a></li>
           <li><a href="/enterprise/2.1/v3/markdown/">Markdown</a></li>
           <li><a href="/enterprise/2.1/v3/meta/">Meta</a></li>
           <li><a href="/enterprise/2.1/v3/rate_limit/">Rate Limit</a></li>
@@ -796,12 +805,12 @@ curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/
           <li><a href="/enterprise/2.1/v3/repos/deployments/">Deployments</a></li>
           <li><a href="/enterprise/2.1/v3/repos/downloads/">Downloads</a></li>
           <li><a href="/enterprise/2.1/v3/repos/forks/">Forks</a></li>
-          <li><a href="/enterprise/2.1/v3/repos/hooks/">Webhooks</a></li>
           <li><a href="/enterprise/2.1/v3/repos/merging/">Merging</a></li>
           <li><a href="/enterprise/2.1/v3/repos/pages/">Pages</a></li>
           <li><a href="/enterprise/2.1/v3/repos/releases/">Releases</a></li>
           <li><a href="/enterprise/2.1/v3/repos/statistics/">Statistics</a></li>
           <li><a href="/enterprise/2.1/v3/repos/statuses/">Statuses</a></li>
+          <li><a href="/enterprise/2.1/v3/repos/hooks/">Webhooks</a></li>
         </ul>
       </li>
       <li class="js-topic">
@@ -833,10 +842,10 @@ curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/
 </h3>
         <ul class="js-guides">
           <li><a href="/enterprise/2.1/v3/enterprise/admin_stats/">Admin Stats</a></li>
-          <li><a href="/enterprise/2.1/v3/enterprise/license/">License</a></li>
-          <li><a href="/enterprise/2.1/v3/enterprise/search_indexing/">Search Indexing</a></li>
-          <li><a href="/enterprise/2.1/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/enterprise/2.1/v3/enterprise/ldap/">LDAP</a></li>
+          <li><a href="/enterprise/2.1/v3/enterprise/license/">License</a></li>
+          <li><a href="/enterprise/2.1/v3/enterprise/management_console/">Management Console</a></li>
+          <li><a href="/enterprise/2.1/v3/enterprise/search_indexing/">Search Indexing</a></li>
         </ul>
       </li>
     </ul>
@@ -854,9 +863,9 @@ curl -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/
     <div id="footer">
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="http://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="http://help.github.com/security/">Security</a></li>
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
         <li><a href="https://github.com/contact">Contact</a></li>
       </ul>
 

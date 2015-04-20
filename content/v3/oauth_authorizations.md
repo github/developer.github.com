@@ -28,23 +28,16 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
   </ul>
 
   <p>
-    We're currently offering a migration period allowing applications to opt in to the new Authorization API behavior. This functionality will apply to all API consumers beginning April 20, 2015. Please see <a href="/changes/2015-02-20-migration-period-removing-authorizations-token/">the blog post</a> for full details.
-  </p>
-
-  <p>
-    In order to reduce the impact of removing the <code>token</code> attribute,
-    the OAuth Authorizations API has added a new request attribute
-    (<code>fingerprint</code>), added three new response attributes
+    To reduce the impact of removing the <code>token</code> value,
+    the OAuth Authorizations API now includes a new request attribute
+    (<code>fingerprint</code>), three new response attributes
     (<code>token_last_eight</code>, <code>hashed_token</code>, and
-    <code>fingerprint</code>), and added
-    <a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new API</a>.
+    <code>fingerprint</code>), and
+    <a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new endpoint</a>.
   </p>
 
   <p>
-    To access the new API functionality during the migration period, you must
-    provide a custom <a href="/v3/media/">media type</a> in the
-    <code>Accept</code> header:
-    <pre>application/vnd.github.mirage-preview+json</pre>
+    This functionality became the default for all requests on April 20, 2015. Please see <a href="/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/">the blog post</a> for full details.
   </p>
 </div>
 
@@ -87,7 +80,7 @@ Name | Type | Description
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
 `client_id`|`string` | The 20 character OAuth app client key for which to create the token.
 `client_secret`|`string` | The 40 character OAuth app client secret for which to create the token.
-`fingerprint`|`string` | **This attribute is only available when using the [mirage-preview](#deprecation-notice) media type.** A unique string to distinguish an authorization from others created for the same client ID and user.
+`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client ID and user.
 
 
 <%= json :scopes => ["public_repo"], :note => 'admin script' %>
@@ -115,7 +108,7 @@ Name | Type | Description
 `scopes`|`array` | A list of scopes that this authorization is in.
 `note`|`string` | A note to remind you what the OAuth token is for.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
-`fingerprint`|`string` | **This attribute is only available when using the [mirage-preview](#deprecation-notice) media type.** A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).
+`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).
 
 
 <%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
@@ -132,8 +125,6 @@ Name | Type | Description
 
 ## Get-or-create an authorization for a specific app and fingerprint
 
-**This API method is only available when using the
-[mirage-preview](#deprecation-notice) media type.**
 This method will create a new authorization for the specified OAuth application,
 only if an authorization for that application and fingerprint do not already
 exist for the user. The URL includes the 20 character client ID for the OAuth
@@ -179,7 +170,7 @@ Name | Type | Description
 `remove_scopes`|`array` | A list of scopes to remove from this authorization.
 `note`|`string` | A note to remind you what the OAuth token is for.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
-`fingerprint`|`string` | **This attribute is only available when using the [mirage-preview](#deprecation-notice) media type.** A unique string to distinguish an authorization from others created for the same client ID and user.
+`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client ID and user.
 
 
 You can only send one of these scope keys at a time.

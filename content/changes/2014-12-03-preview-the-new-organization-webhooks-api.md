@@ -38,5 +38,5 @@ We hope you’ll take it for a spin and [send us your feedback][contact].
 [repository-event]: /v3/activity/events/types/#repositoryevent
 [membership-event]: /v3/activity/events/types/#membershipevent
 [docs]: /v3/orgs/hooks/
-[docs-preview]: /v3/orgs/hooks/#preview-period
+[docs-preview]: /v3/orgs/hooks/
 [contact]: https://github.com/contact?form[subject]=Organization+Webhooks

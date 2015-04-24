@@ -92,7 +92,7 @@ If your server needs to access multiple repositories, you can choose to create a
 
 <div class="alert">
 <p>
-<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create machine users for your server deploy scripts. Machine users are completely kosher.
+<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Machine users are completely kosher.
 </p>
 </div>
 

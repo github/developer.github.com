@@ -86,8 +86,8 @@ Name | Type | Description
 -----|------|--------------
 `all`|`boolean` | If `true`, show notifications marked as read. Default: `false`
 `participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. Default: `false`
-`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
-
+`since`|`string` | Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
+`before`|`string` | Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Response
 
@@ -106,8 +106,8 @@ Name | Type | Description
 -----|------|--------------
 `all`|`boolean` | If `true`, show notifications marked as read. Default: `false`
 `participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. Default: `false`
-`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
-
+`since`|`string` | Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
+`before`|`string` | Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Response
 

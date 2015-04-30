@@ -42,5 +42,6 @@ The latest release for GitHub Enterprise is <%= fetch_content(:latest_enterprise
 
 Documentation for the API that's bundled with your GitHub Enterprise appliance is available for past releases:
 
+* [API documentation for 2.1](https://developer.github.com/enterprise/2.1/)
 * [API documentation for 2.0](https://developer.github.com/enterprise/2.0/)
 * [API documentation for 11.10.340](https://developer.github.com/enterprise/11.10.340/)

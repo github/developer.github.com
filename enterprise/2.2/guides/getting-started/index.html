@@ -8,13 +8,12 @@
   <title>Getting Started | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.2/changes.atom">
   <link href="/enterprise/2.2/css/reset.css" rel="stylesheet" type="text/css">
-  <link href="/enterprise/2.2/css/960.css" rel="stylesheet" type="text/css">
-  <link href="/enterprise/2.2/css/uv_active4d.css" rel="stylesheet" type="text/css">
-  <link href="/enterprise/2.2/shared/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
-  <link href="/enterprise/2.2/shared/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
-  <script src="/enterprise/2.2/shared/js/jquery.js" type="text/javascript"></script>
-  <script src="/enterprise/2.2/shared/js/documentation.js" type="text/javascript"></script>
+  <link href="/enterprise/2.2/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.2/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/2.2/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/2.2/js/documentation.js" type="text/javascript"></script>
 </head>
+
 
 <body class="api enterprise">
   <div id="header-wrapper">
@@ -57,12 +56,13 @@
       <h1 id="getting-started">Getting Started</h1>
 
 <ul id="markdown-toc">
-<li><a href="#overview">Overview</a></li>
+  <li><a href="#overview">Overview</a></li>
   <li><a href="#authentication">Authentication</a></li>
   <li><a href="#repositories">Repositories</a></li>
   <li><a href="#issues">Issues</a></li>
   <li><a href="#conditional-requests">Conditional requests</a></li>
 </ul>
+
 <p>Let’s walk through core API concepts as we tackle some everyday use cases.</p>
 
 <h2 id="overview">Overview</h2>
@@ -139,7 +139,7 @@ Last-Modified: Tue, 30 Oct 2012 18:58:42 GMT
 HTTP spec. Let’s take a look at a few of them:</p>
 
 <ul>
-<li>
+  <li>
 <code>X-GitHub-Media-Type</code> has a value of <code>github.v3</code>. This lets us know the <a href="/enterprise/2.2/v3/media/">media type</a>
 for the response. Media types have helped us version our output in API v3. We’ll
 talk more about that later.</li>
@@ -148,6 +148,7 @@ pair of headers indicate <a href="/enterprise/2.2/v3/#rate-limiting">how many re
 a rolling time period (typically an hour) and how many of those requests the
 client has already spent.</li>
 </ul>
+
 <h2 id="authentication">Authentication</h2>
 
 <p>Unauthenticated clients can make 60 requests per hour. To get more, we’ll need to
@@ -233,12 +234,13 @@ private information using the API on behalf of another user should use <a href="
 features:</p>
 
 <ul>
-<li>
+  <li>
 <strong>Revokable access</strong>: users can revoke authorization to third party apps at any time</li>
   <li>
 <strong>Limited access</strong>: users can review the specific access that a token
 will provide before authorizing a third party app</li>
 </ul>
+
 <p>Normally, tokens are created via a <a href="/enterprise/2.2/v3/oauth/#web-application-flow">web flow</a>. An application
 sends users to GitHub to log in. GitHub then presents a dialog
 indicating the name of the app, as well as the level of access the app
@@ -248,7 +250,7 @@ redirects the user back to the application:</p>
 <p><img src="/enterprise/2.2/images/oauth_prompt.png" alt="GitHub's OAuth Prompt"></p>
 
 <p>However, you don’t need to set up the entire web flow to begin working with OAuth tokens.
-An easier way to get a token is to <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">create a <strong>Personal token</strong></a> via your
+An easier way to get a token is to <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">create a <strong>personal access token</strong></a> via your
 <a href="https://github.com/settings/applications">Application settings page</a>:</p>
 
 <p><img src="/enterprise/2.2/images/personal_token.png" alt="Personal Token selection"></p>
@@ -257,7 +259,7 @@ An easier way to get a token is to <a href="https://help.github.com/articles/cre
 to create an OAuth token. Try pasting and running the following command:</p>
 
 <pre class="terminal">
-$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo"], "note": "getting-started"}' \
+$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 
 HTTP/1.1 201 Created
@@ -266,7 +268,8 @@ Content-Length: 384
 
 {
   "scopes": [
-    "repo"
+    "repo",
+    "user"
   ],
   "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",
   "updated_at": "2012-11-14T14:04:24Z",
@@ -291,7 +294,9 @@ requests to the GitHub API should be in JSON.</p>
 a new token, we include an optional array of <a href="/enterprise/2.2/v3/oauth/#scopes"><em>scopes</em></a>, or access
 levels, that indicate what information this token can access. In this case,
 we’re setting up the token with <em>repo</em> access, which grants access to read and
-write to private repositories. See <a href="/enterprise/2.2/v3/oauth/#scopes">the scopes docs</a> for a full list of
+write to public and private repositories, and <em>user</em> scope, which grants read
+and write access to public and private user profile data. See
+<a href="/enterprise/2.2/v3/oauth/#scopes">the scopes docs</a> for a full list of
 scopes. You should <strong>only</strong> request scopes that your application actually needs,
 in order to not frighten users with potentially invasive actions. The <code>201</code>
 status code tells us that the call was successful, and the JSON returned
@@ -304,7 +309,7 @@ in the <a href="/enterprise/2.2/v3/auth/#working-with-two-factor-authentication"
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; -H "X-GitHub-OTP: &lt;your_2fa_OTP_code&gt;" \
-    -d '{"scopes": ["repo"], "note": "getting-started"}' \
+    -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 </pre>
 
@@ -360,11 +365,12 @@ $ curl -i https://api.github.com/orgs/mozilla/repos
 <p>The information returned from these calls will depend on how we authenticate:</p>
 
 <ul>
-<li>Using Basic Authentication, the response includes all repositories the
+  <li>Using Basic Authentication, the response includes all repositories the
 the user has access to see on github.com.</li>
   <li>Using OAuth, private repositories are only returned if the OAuth token
 contains the <code>repo</code> <a href="/enterprise/2.2/v3/oauth/#scopes">scope</a>.</li>
 </ul>
+
 <p>As the <a href="/enterprise/2.2/v3/repos/">docs</a> indicate, these methods take a <code>type</code> parameter that
 can filter the repositories returned based on what type of access the user has
 for the repository. In this way, we can fetch only directly-owned repositories,
@@ -399,7 +405,7 @@ $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
 <p>In this minimal example, we create a new repository for our blog (to be served
 on <a href="http://pages.github.com">GitHub Pages</a>, perhaps). Though the blog will be public, we’ve made
 the repository private. In this single step, we’ll also initialize it with
-a README and a <a href="http://nanoc.stoneship.org/">nanoc</a>-flavored <a href="https://github.com/github/gitignore">.gitignore template</a>.</p>
+a README and a <a href="http://nanoc.ws/">nanoc</a>-flavored <a href="https://github.com/github/gitignore">.gitignore template</a>.</p>
 
 <p>The resulting repository will be found at <code>https://github.com/&lt;your_username&gt;/blog</code>.
 To create a repository under an organization for which you’re
@@ -568,24 +574,32 @@ responses don’t count against your <a href="/enterprise/2.2/v3/#rate-limiting"
 <p>Woot! Now you know the basics of the GitHub API!</p>
 
 <ul>
-<li>Basic &amp; OAuth authentication</li>
+  <li>Basic &amp; OAuth authentication</li>
   <li>Fetching and creating repositories and issues</li>
   <li>Conditional requests</li>
 </ul>
+
 <p>Keep learning with the next API guide <a href="/enterprise/2.2/guides/basics-of-authentication">Basics of Authentication</a>!</p>
+
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
       <div class="sidebar-module">
         <ul>
           <li><h3><a href="/enterprise/2.2/guides/">Overview</a></h3></li>
-          <li><h3><a href="/enterprise/2.2/guides/getting-started/">Getting Started</a></h3></li>
+          <li><h3><a href="/enterprise/2.2/guides/getting-started/">Getting started</a></h3></li>
           <li><h3><a href="/enterprise/2.2/guides/basics-of-authentication/">Basics of authentication</a></h3></li>
+          <li><h3><a href="/enterprise/2.2/guides/discovering-resources-for-a-user/">Discovering resources for a user</a></h3></li>
+          <li><h3><a href="/enterprise/2.2/guides/managing-deploy-keys/">Managing deploy keys</a></h3></li>
+          <li><h3><a href="/enterprise/2.2/guides/using-ssh-agent-forwarding/">Using SSH agent forwarding</a></h3></li>
           <li><h3><a href="/enterprise/2.2/guides/rendering-data-as-graphs/">Rendering data as graphs</a></h3></li>
           <li><h3><a href="/enterprise/2.2/guides/working-with-comments/">Working with comments</a></h3></li>
           <li><h3><a href="/enterprise/2.2/guides/traversing-with-pagination/">Traversing with pagination</a></h3></li>
           <li><h3><a href="/enterprise/2.2/guides/building-a-ci-server/">Building a CI server</a></h3></li>
           <li><h3><a href="/enterprise/2.2/guides/delivering-deployments/">Delivering deployments</a></h3></li>
+          <li><h3><a href="/enterprise/2.2/guides/automating-deployments-to-integrators/">Automating deployments to integrators</a></h3></li>
+          <li><h3><a href="/enterprise/2.2/guides/best-practices-for-integrators/">Best practices for integrators</a></h3></li>
         </ul>
       </div>
 
@@ -601,9 +615,9 @@ responses don’t count against your <a href="/enterprise/2.2/v3/#rate-limiting"
     <div id="footer">
     <div class="lower_footer">
       <ul class="footer-cell">
-        <li><a href="http://help.github.com/terms-of-service/">Terms</a></li>
-        <li><a href="http://help.github.com/privacy-policy/">Privacy</a></li>
-        <li><a href="http://help.github.com/security/">Security</a></li>
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
         <li><a href="https://github.com/contact">Contact</a></li>
       </ul>
 
@@ -621,7 +635,7 @@ responses don’t count against your <a href="/enterprise/2.2/v3/#rate-limiting"
     </div>
 
     <div class="wrapper">
-      <p>Design © <span class="js-year">2014</span> GitHub, Inc. All rights reserved. Except where otherwise noted, content on this site is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons CC-BY license</a>.</p>
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
     </div>
 
   </div>
@@ -648,7 +662,7 @@ responses don’t count against your <a href="/enterprise/2.2/v3/#rate-limiting"
     ga('create', 'UA-3769691-37', 'github.com');
     ga('send', 'pageview');
   </script>
-  <script src="/enterprise/2.2/shared/js/retina.js" type="text/javascript"></script>
+  <script src="/enterprise/2.2/js/retina.js" type="text/javascript"></script>
 
 </body>
 </html>

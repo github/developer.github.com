@@ -36,7 +36,8 @@ This method returns the contents of a file or directory in a repository.
     GET /repos/:owner/:repo/contents/:path
 
 Files and symlinks support [a custom media type](#custom-media-types) for retrieving the raw content or rendered HTML (when supported).
-Directories and submodules do _not_ support custom media types.
+Directories support [a custom media type](#custom-media-types) for retrieving the content as an object rather than an array of its entries.
+Submodules do _not_ support custom media types.
 
 {{#tip}}
 
@@ -281,6 +282,12 @@ curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
     application/vnd.github.VERSION.html
 
 Use the `.raw` media type to retrieve the contents of the file.
+
+[Directories](#get-contents) support the following custom media type:
+
+    application/vnd.github.VERSION.object
+
+Use the `.object` media type to retrieve the directory contents as an object rather than an array of its entries.
 
 For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the `.html` media type. Markup languages are rendered to HTML using our open-source [Markup library](https://github.com/github/markup).
 

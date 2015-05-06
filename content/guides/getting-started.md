@@ -188,7 +188,7 @@ redirects the user back to the application:
 
 However, you don't need to set up the entire web flow to begin working with OAuth tokens.
 An easier way to get a token is to [create a **personal access token**][personal token] via your
-[Application settings page][application settings]:
+[Personal access tokens settings page][tokens settings]:
 
 ![Personal Token selection](/images/personal_token.png)
 
@@ -541,7 +541,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [2fa header]: /v3/auth/#working-with-two-factor-authentication
 [oauth section]: /guides/getting-started/#oauth
 [personal token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
-[application settings]: https://github.com/settings/applications
+[tokens settings]: https://github.com/settings/tokens
 [pagination]: /v3/#pagination
 [get repo]: /v3/repos/#get
 [create repo]: /v3/repos/#create

@@ -351,4 +351,4 @@ available as a separate project.
 [check token valid]: /v3/oauth_authorizations/#check-an-authorization
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication
 [new oauth app]: https://github.com/settings/applications/new
-[app settings]: https://github.com/settings/applications
+[app settings]: https://github.com/settings/developers

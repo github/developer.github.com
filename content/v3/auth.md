@@ -65,8 +65,7 @@ Because these authentication codes expire quickly, we recommend using the
 Authorizations API to [create an access token][create-access] and using that
 token to [authenticate via OAuth][oauth-auth] for most API access.
 
-Alternately, you can create access tokens from the Personal Access Token
-section of your [application settings page](https://github.com/settings/applications).
+Alternately, you can create access tokens from the Personal Access Token [settings page](https://github.com/settings/tokens).
 
 [create-access]: /v3/oauth_authorizations/#create-a-new-authorization
 [curl]: http://curl.haxx.se/

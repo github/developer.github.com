@@ -323,6 +323,6 @@ user, be sure to check out our [guide][resource-discovery-guide].
 [deployments]: /v3/repos/deployments
 [public keys]: /v3/users/keys/
 [authorized-apps]: https://github.com/settings/applications#authorized
-[owned-apps]: https://github.com/settings/applications
+[owned-apps]: https://github.com/settings/developers
 [org-app-policies]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/
 [resource-discovery-guide]: /guides/discovering-resources-for-a-user/

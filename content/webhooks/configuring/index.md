@@ -25,7 +25,7 @@ First, we'll install a program to expose our local host to the Internet. We'll u
 ngrok to do this. [ngrok is a free download](https://ngrok.com/download) available
 for all major operating systems.
 
-When you're done with that, you can expose your localhost by running `./ngrok 4567`
+When you're done with that, you can expose your localhost by running `./ngrok http 4567`
 on the command line. You should see a line that looks something like this:
 
     #!bash

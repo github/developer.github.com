@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'builder'
 gem 'kramdown', '~> 0.13.2'
-gem 'nanoc', '~> 3.7'
+gem 'nanoc', '~> 4.0'
 gem 'nokogiri', '~> 1.6.0'
 gem 'rouge', '~> 1.4'
 gem 'rake', '~> 0.9.2'

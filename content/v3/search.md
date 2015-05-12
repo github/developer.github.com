@@ -22,7 +22,7 @@ search**.
 
 Unless another sort option is provided as a query parameter, results are sorted
 by best match, as indicated by the `score` field for each item returned. This
-is a computed value representing the relevance of a item relative to the other
+is a computed value representing the relevance of an item relative to the other
 items in the result set. Multiple factors are combined to boost the most
 relevant item to the top of the result list.
 

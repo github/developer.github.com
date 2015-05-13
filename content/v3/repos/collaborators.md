@@ -23,8 +23,6 @@ collaborators list.
 
 ## Check if a user is a collaborator {#get}
 
-User scope of `public_repo` or `repo` is required.
-
     GET /repos/:owner/:repo/collaborators/:username
 
 ### Response if user is a collaborator

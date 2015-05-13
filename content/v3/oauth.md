@@ -250,6 +250,10 @@ your application. More often than not, users will just close the window
 or press back in their browser, so it is likely that you'll never see
 this error.
 
+### Checking collaborators
+
+When requesting [repo collaborators](https://developer.github.com/v3/repos/collaborators/) the scope `public_repo` or `repo` is required otherwise Github will return `403 Forbidden: Must have push access to view repository collaborators.`.
+
 ## Common errors for the access token request
 
 In the second phase of exchanging a code for an access token, there are

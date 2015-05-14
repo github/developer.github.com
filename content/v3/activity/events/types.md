@@ -87,12 +87,12 @@ Events of this type are not visible in timelines, they are only used to trigger 
 
 Key | Type | Description
 ----|------|-------------
-`sha`        |`string` | The commit SHA for which this deployment was created.
-`name`       |`string` | Name of repository for this deployment, formatted as `:owner/:repo`.
-`payload`    |`string` | The optional extra information for this deployment.
-`environment`|`string` | The optional environment to deploy to. Default: `"production"`
-`description`|`string` | The optional human-readable description added to the deployment.
-
+`deployment` |`object` | The [deployment](/v3/repos/deployments/#list-deployments).
+`deployment`[`"sha"`] |`string` | The commit SHA for which this deployment was created.
+`deployment`[`"payload"`] |`string` | The optional extra information for this deployment.
+`deployment`[`"environment"`] |`string` | The optional environment to deploy to. Default: `"production"`
+`deployment`[`"description"`] |`string` | The optional human-readable description added to the deployment.
+`repository` |`object` | The [repository](/v3/repos/) for this deployment.
 
 <%= webhook_payload "deployment" %>
 
@@ -110,10 +110,12 @@ Events of this type are not visible in timelines, they are only used to trigger 
 
 Key | Type | Description
 ----|------|-------------
-`state`      |`string` | The new state. Can be `pending`, `success`, `failure`, or `error`.
-`target_url` |`string` | The optional link added to the status.
-`deployment` |`object`   | The deployment that this status is associated with.
-`description`|`string` | The optional human-readable description added to the status.
+`deployment_status` |`object` | The [deployment status](/v3/repos/deployments/#list-deployment-statuses).
+`deployment_status["state"]` |`string` | The new state. Can be `pending`, `success`, `failure`, or `error`.
+`deployment_status["target_url"]` |`string` | The optional link added to the status.
+`deployment_status["description"]`|`string` | The optional human-readable description added to the status.
+`deployment` |`object` | The [deployment](/v3/repos/deployments/#list-deployments) that this status is associated with.
+`repository` |`object` | The [repository](/v3/repos/) for this deployment.
 
 <%= webhook_payload "deployment_status" %>
 

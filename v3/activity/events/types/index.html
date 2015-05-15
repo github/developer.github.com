@@ -583,30 +583,39 @@ created for various internal and webhook purposes.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>sha</code></td>
+      <td><code>deployment</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="/v3/repos/deployments/#list-deployments">deployment</a>.</td>
+    </tr>
+    <tr>
+      <td>
+<code>deployment</code>[<code>"sha"</code>]</td>
       <td><code>string</code></td>
       <td>The commit SHA for which this deployment was created.</td>
     </tr>
     <tr>
-      <td><code>name</code></td>
-      <td><code>string</code></td>
-      <td>Name of repository for this deployment, formatted as <code>:owner/:repo</code>.</td>
-    </tr>
-    <tr>
-      <td><code>payload</code></td>
+      <td>
+<code>deployment</code>[<code>"payload"</code>]</td>
       <td><code>string</code></td>
       <td>The optional extra information for this deployment.</td>
     </tr>
     <tr>
-      <td><code>environment</code></td>
+      <td>
+<code>deployment</code>[<code>"environment"</code>]</td>
       <td><code>string</code></td>
       <td>The optional environment to deploy to. Default: <code>"production"</code>
 </td>
     </tr>
     <tr>
-      <td><code>description</code></td>
+      <td>
+<code>deployment</code>[<code>"description"</code>]</td>
       <td><code>string</code></td>
       <td>The optional human-readable description added to the deployment.</td>
+    </tr>
+    <tr>
+      <td><code>repository</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="/v3/repos/">repository</a> for this deployment.</td>
     </tr>
   </tbody>
 </table>
@@ -776,24 +785,34 @@ created for various internal and webhook purposes.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>state</code></td>
+      <td><code>deployment_status</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="/v3/repos/deployments/#list-deployment-statuses">deployment status</a>.</td>
+    </tr>
+    <tr>
+      <td><code>deployment_status["state"]</code></td>
       <td><code>string</code></td>
       <td>The new state. Can be <code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>.</td>
     </tr>
     <tr>
-      <td><code>target_url</code></td>
+      <td><code>deployment_status["target_url"]</code></td>
       <td><code>string</code></td>
       <td>The optional link added to the status.</td>
     </tr>
     <tr>
-      <td><code>deployment</code></td>
-      <td><code>object</code></td>
-      <td>The deployment that this status is associated with.</td>
-    </tr>
-    <tr>
-      <td><code>description</code></td>
+      <td><code>deployment_status["description"]</code></td>
       <td><code>string</code></td>
       <td>The optional human-readable description added to the status.</td>
+    </tr>
+    <tr>
+      <td><code>deployment</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="/v3/repos/deployments/#list-deployments">deployment</a> that this status is associated with.</td>
+    </tr>
+    <tr>
+      <td><code>repository</code></td>
+      <td><code>object</code></td>
+      <td>The <a href="/v3/repos/">repository</a> for this deployment.</td>
     </tr>
   </tbody>
 </table>

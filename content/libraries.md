@@ -128,6 +128,7 @@ covers the entire API.
 * [Github Nette Extension][kdyby-github]
 * [GitHub API Easy Access][milo-github-api]
 * [GitHub bridge for Laravel][github-laravel]
+* [GitHub API v3 wrapper][github-api-v3-wrapper]
 
 [github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
@@ -137,6 +138,7 @@ covers the entire API.
 [kdyby-github]: https://github.com/kdyby/github
 [milo-github-api]: https://github.com/milo/github-api
 [github-laravel]: https://github.com/GrahamCampbell/Laravel-GitHub
+[github-api-v3-wrapper]: https://github.com/Scion-Framework/GitHubAPI
 
 ## Python
 

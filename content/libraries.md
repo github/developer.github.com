@@ -106,7 +106,7 @@ covers the entire API.
 
 * [ocaml-github][ocaml-github]
 
-[ocaml-github]: https://github.com/avsm/ocaml-github
+[ocaml-github]: https://github.com/mirage/ocaml-github
 
 ## Perl
 

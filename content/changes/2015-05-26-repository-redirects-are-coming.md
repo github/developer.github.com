@@ -5,7 +5,7 @@ created_at: 2015-05-26
 author_name: jasonrudolph
 ---
 
-Last month, we announced the [upcoming repository redirect behavior for the API][original-announcement], and we made it available for developers to preview. Starting **July 21, 2015**, the API will automatically provide these redirects for all API consumers.
+Last month, we announced the [upcoming repository redirect behavior for the API][original announcement], and we made it available for developers to preview. Starting **July 21, 2015**, the API will automatically provide these redirects for all API consumers.
 
 To learn more about repository redirects and how they will benefit your applications, be sure to check out the [original announcement][].
 

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>New Payload Format for Deployments</title>
+  <title>Repository redirects are coming to API v3 in July</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,37 +40,38 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-03-03-deployments-api-updates/">
+      <div class="change" id="/changes/2015-05-26-repository-redirects-are-coming/">
 <h2 class="title">
-  <a href="/changes/2014-03-03-deployments-api-updates/">New Payload Format for Deployments</a>
+  <a href="/changes/2015-05-26-repository-redirects-are-coming/">Repository redirects are coming to API v3 in July</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    March 3, 2014
+    May 26, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos"/>
-      <a href="https://github.com/atmos">atmos</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph"/>
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
   </li>
 </ul>
 </div>
 
 
-<p>As we <a href="/changes/2014-01-09-preview-the-new-deployments-api/">iterate on the preview</a> for the new Deployments API, we’re making sure that it’s friendly to work with for the apps built on top of it.</p>
+<p>Last month, we announced the <a href="/changes/2015-04-17-preview-repository-redirects/">upcoming repository redirect behavior for the API</a>, and we made it available for developers to preview. Starting <strong>July 21, 2015</strong>, the API will automatically provide these redirects for all API consumers.</p>
 
-<h2 id="deserialize-deployment-payloads">Deserialize Deployment Payloads</h2>
+<p>To learn more about repository redirects and how they will benefit your applications, be sure to check out the <a href="/changes/2015-04-17-preview-repository-redirects/">original announcement</a>.</p>
 
-<p>To make the API even easier to use, we’ll now return your custom payload as a JSON object along with the rest of the Deployment resource. No need to parse it as JSON again.</p>
+<p>To start enjoying repository redirects right away, just provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
 
-<h2 id="code-you-need-to-update">Code You Need to Update</h2>
+<pre><code>application/vnd.github.quicksilver-preview+json
+</code></pre>
 
-<p>You should only need to remove the JSON parsing if you’re taking advantage of the custom payloads. The formats for creating Deployments remain unchanged.</p>
+<p>Thanks to everyone that tried out this enhancement during the preview period.</p>
 
-<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
+<p>As always, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects">get in touch</a>. We love hearing from you.</p>
 
 
 </div>

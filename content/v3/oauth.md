@@ -173,8 +173,8 @@ Name | Description
 `user` | Grants read/write access to profile info only.  Note that this scope includes `user:email` and `user:follow`.
 `user:email`| Grants read access to a user's email addresses.
 `user:follow`| Grants access to follow or unfollow other users.
-`public_repo`| Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations. Also required for starring public repositories.
-`repo`| Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
+`public_repo`| Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public repositories and organizations. Also required for starring public repositories.
+`repo`| Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public and private repositories and organizations.
 `repo_deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, *without* granting access to the code.
 `repo:status`| Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses *without* granting access to the code.
 `delete_repo`| Grants access to delete adminable repositories.

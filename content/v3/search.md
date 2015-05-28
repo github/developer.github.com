@@ -254,6 +254,10 @@ The `q` search term can also contain any combination of the supported issue sear
    Filters issues or pull requests based on date of creation, or when they were last updated.
  * [`merged`](https://help.github.com/articles/searching-issues#search-based-on-when-a-pull-request-was-merged)
    Filters pull requests based on the date when they were merged.
+ * [`status`](https://help.github.com/articles/searching-issues#search-based-on-commit-status)
+   Filters pull requests based on the commit status.
+ * [`head` or `base`](https://help.github.com/articles/searching-issues#search-based-on-which-branch-a-pull-request-modifies)
+   Filters pull requests based on the branch that they came from or that they are modifying.
  * [`closed`](https://help.github.com/articles/searching-issues#search-based-on-when-an-issue-or-pull-request-was-closed)
    Filters issues or pull requests based on the date when they were closed.
  * [`comments`](https://help.github.com/articles/searching-issues#search-by-the-number-of-comments-an-issue-or-pull-request-has)

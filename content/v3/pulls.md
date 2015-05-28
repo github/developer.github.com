@@ -225,3 +225,5 @@ use of media types in the API [here](/v3/media/).
     application/vnd.github.VERSION.text+json
     application/vnd.github.VERSION.html+json
     application/vnd.github.VERSION.full+json
+    application/vnd.github.VERSION.diff
+    application/vnd.github.VERSION.patch

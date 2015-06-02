@@ -225,3 +225,9 @@ use of media types in the API [here](/v3/media/).
     application/vnd.github.VERSION.text+json
     application/vnd.github.VERSION.html+json
     application/vnd.github.VERSION.full+json
+    application/vnd.github.VERSION.diff
+    application/vnd.github.VERSION.patch
+
+<a id="diff-error">
+
+If a diff is corrupt, <span class='not-enterprise'>please contact [GitHub Support](https://www.github.com/contact)</span><span class='enterprise-only'>contact your site administrator</span> to receive help. Be sure to include the repository name and pull request ID.

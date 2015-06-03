@@ -25,7 +25,7 @@ Note: Accessing this endpoint does not count against your rate limit.
 <%=
   json :resources => {
       :core   => {:limit => 5000, :remaining => 4999, :reset => 1372700873},
-      :search => {:limit => 20,   :remaining => 18,   :reset => 1372697452},
+      :search => {:limit => 30,   :remaining => 18,   :reset => 1372697452},
     },
     :rate => {:limit => 5000, :remaining => 4999, :reset => 1372700873}
 %>

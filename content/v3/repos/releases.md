@@ -174,7 +174,7 @@ Name | Type | Description
 -----|------|--------------
 `Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: `"application/zip"`. For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
 `name`|`string` | **Required**. The file name of the asset. This should be set in the URI query parameter.
-
+`label`|`string` | An alternate short description of the asset.  Used in place of the filename.
 
 Send the raw binary content of the asset as the request body.
 

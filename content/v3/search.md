@@ -31,8 +31,8 @@ relevant item to the top of the result list.
 The Search API has a custom rate limit. For requests using [Basic
 Authentication](/v3/#authentication), [OAuth](/v3/#authentication), or [client
 ID and secret](/v3/#increasing-the-unauthenticated-rate-limit-for-oauth-applications), you can make up to
-20 requests per minute. For unauthenticated requests, the rate limit allows you
-to make up to 5 requests per minute.
+30 requests per minute. For unauthenticated requests, the rate limit allows you
+to make up to 10 requests per minute.
 
 See the [rate limit documentation](/v3/#rate-limiting) for details on
 determining your current rate limit status.

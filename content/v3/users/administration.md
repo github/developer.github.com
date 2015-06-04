@@ -15,6 +15,29 @@ Prefix all the endpoints for this API with the following URL:
 http(s)://<em>hostname</em>/api/v3
 </pre>
 
+## Create a new user
+
+    POST /admin/users
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`login`|`string` | The user's username
+`email`|`string` | The user's email address
+
+#### Example
+
+<%= json \
+    :login    => "monalisa",
+    :email    => "octocat@github.com"
+%>
+
+### Response
+
+<%= headers 201 %>
+<%= json :full_user %>
+
 ## Promote an ordinary user to a site administrator
 
     PUT /users/:username/site_admin

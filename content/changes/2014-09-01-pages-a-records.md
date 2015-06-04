@@ -14,6 +14,7 @@ $ curl https://api.github.com/meta
 <pre><code class="language-javascript">
 {
   "verifiable_password_authentication": true,
+  "github_services_sha": "23c6105183b626cf74c045f6d53af7a178bfdb4c",
   "hooks": [
     "192.30.252.0/22"
   ],

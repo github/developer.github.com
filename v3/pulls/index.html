@@ -671,6 +671,12 @@ however, this attribute is <a href="/v3/versions/#v3-deprecations">deprecated</a
 removal in the next version of the API. The Boolean <code>mergeable</code> attribute will
 remain to indicate whether the pull request can be automatically merged.</p>
 
+<p>The value of the <code>mergeable</code> attribute can be <code>true</code>, <code>false</code>, or <code>null</code>. If 
+the value is <code>null</code>, this means that the mergeability hasn’t been computed yet,
+and a background job was started to compute it. Give the job a few moments to
+complete, and then submit the request again. When the job is complete, the
+response will include a non-<code>null</code> value for the <code>mergeable</code> attribute.</p>
+
 <h3 id="alternative-response-formats">Alternative Response Formats</h3>
 
 <p>Pass the appropriate <a href="/v3/media/#commits-commit-comparison-and-pull-requests">media type</a> to fetch diff and patch formats.</p>

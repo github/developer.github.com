@@ -13,6 +13,12 @@ determine who should be notified of comments.
 
 ### Attributes
 
+id
+: The Integer ID of the event.
+
+url
+: The API URL for fetching the event.
+
 actor
 : Always the User that generated the event.
 
@@ -21,6 +27,25 @@ commit_id
 
 event
 : Identifies the actual type of Event that occurred.
+
+created_at
+: The timestamp indicating when the event occurred.
+
+label
+: The Label object including 'name' and 'color' attributes. Only provided for 'labeled'
+  and 'unlabeled' events.
+
+assignee
+: The User object which was assigned to (or unassigned from) this Issue. Only provided for 'assigned'
+  and 'unassigned' events.
+
+milestone
+: The Milestone object including a 'title' attribute. Only provided for 'milestoned' and
+  'demilestoned' events.
+
+rename:
+: An object containing rename details including 'from' and 'to' attributes. Only
+  provided for 'renamed' events.
 
 ### Events
 
@@ -48,6 +73,36 @@ mentioned
 
 assigned
 : The issue was assigned to the actor.
+
+unassigned
+: The actor was unassigned from the issue.
+
+labeled
+: A label was added to the issue.
+
+unlabeled
+: A label was removed from the issue.
+
+milestoned
+: The issue was added to a milestone.
+
+demilestoned
+: The issue was removed from a milestone.
+
+renamed
+: The issue title was changed.
+
+locked
+: The issue was locked by the actor.
+
+unlocked
+: The issue was unlocked by the actor.
+
+head_ref_deleted
+: The pull request's branch was deleted.
+
+head_ref_restored
+: The pull request's branch was restored.
 
 ## List events for an issue
 

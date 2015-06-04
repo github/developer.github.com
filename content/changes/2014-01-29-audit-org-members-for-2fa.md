@@ -11,7 +11,7 @@ We've added a [new filter][filter] for listing members of an organization withou
 
 <pre class="terminal">
 $ curl -H "Authorization: token [yours]" \
-       https://api.github.com/orgs/octokit/members\?filter\=2fa_disabled
+       https://api.github.com/orgs/[orgname]/members\?filter\=2fa_disabled
 </pre>
 
 The new filter is available for owners of organizations with private

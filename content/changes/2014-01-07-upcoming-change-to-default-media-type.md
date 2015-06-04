@@ -58,5 +58,5 @@ If you have any questions, please [get in touch][contact]. We'll be happy to hel
 [differences]: /v3/versions/#differences-from-beta-version
 [libraries]: /libraries/
 [media]: /v3/media
-[request-a-media-type]: /v3/media/#beta-v3-and-the-future
+[request-a-media-type]: /v3/media/#request-specific-version
 [versions]: /v3/versions

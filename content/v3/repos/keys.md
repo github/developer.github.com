@@ -13,8 +13,8 @@ title: Deploy Keys | GitHub API
 
 ### Response
 
-<%= headers 200 %>
-<%= json(:public_key) { |h| [h] } %>
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:deploy_key) { |h| [h] } %>
 
 ## Get a deploy key {#get}
 
@@ -23,7 +23,7 @@ title: Deploy Keys | GitHub API
 ### Response
 
 <%= headers 200 %>
-<%= json :public_key %>
+<%= json :deploy_key %>
 
 ## Add a new deploy key {#create}
 
@@ -35,21 +35,13 @@ title: Deploy Keys | GitHub API
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/repo/keys/1" %>
-<%= json :public_key %>
+<%= headers 201, :Location => get_resource(:deploy_key)['url'] %>
+<%= json :deploy_key %>
 
 ## Edit a deploy key {#edit}
 
-    PATCH /repos/:owner/:repo/keys/:id
-
-### Input
-
-<%= json :title => "octocat@octomac", :key => "ssh-rsa AAA..." %>
-
-### Response
-
-<%= headers 200 %>
-<%= json :public_key %>
+Deploy keys are immutable. If you need to update a key, [remove the
+key](#delete) and [create a new one](#create) instead.
 
 ## Remove a deploy key {#delete}
 

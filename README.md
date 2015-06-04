@@ -22,7 +22,7 @@ $ bundle exec nanoc -h
 
 Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about nanoc.
 
-[nanoc]: http://nanoc.stoneship.org/
+[nanoc]: http://nanoc.ws/
 
 ## Styleguide
 
@@ -55,7 +55,7 @@ API docs should look like:
     <%= headers 200, :pagination => default_pagination_rels, 'X-Custom-Header' => "value" %>
     <%= json :resource_name %>
 
-**Note**: We're using [Kramdown Markdown extensions](http://kramdown.rubyforge.org/syntax.html), such as definition lists.
+**Note**: We're using [Kramdown Markdown extensions](http://kramdown.gettalong.org/syntax.html), such as definition lists.
 
 ### JSON Responses
 
@@ -77,8 +77,8 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 
 ### Terminal blocks
 
-You can specify terminal blocks with `pre.terminal` elements.  (It'd be
-nice if Markdown could do this more cleanly.)
+You can specify terminal blocks with `pre.terminal` elements.  (It'd be nice if
+Markdown could do this more cleanly.)
 
 ```html
 <pre class="terminal">
@@ -138,10 +138,3 @@ One thing: remember to add trailing slashes to all nanoc links!
 ```sh
 $ bundle exec rake publish
 ```
-
-## TODO
-
-* Integrate through a simple hurl.it app for live API calls.
-* <del>Maybe add a nice TOC at the top of each page.</del>
-* Write a task for verifying JSON Resource examples against the actual
-  API.

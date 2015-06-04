@@ -26,8 +26,8 @@ providing multiple options to make the flow simple and easy.
 ### Personal Access Tokens
 
 Personal access tokens provide the simplest option for using 2FA with Basic
-Authentication. You can create these tokens via the [application settings page
-on GitHub.com](https://github.com/settings/applications), and you can revoke
+Authentication. You can create these tokens via the [tokens settings page
+on GitHub.com](https://github.com/settings/tokens), and you can revoke
 them at any time. For more information about authenticating to the API with
 personal access tokens, be sure to check out our [help article on the
 topic][personal-access-tokens].

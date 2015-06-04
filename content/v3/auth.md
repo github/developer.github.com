@@ -39,14 +39,11 @@ $ curl -u &lt;username&gt; https://api.github.com/user
 
 ### Via OAuth Tokens
 
-Alternatively, you can authenticate using [personal access
-tokens][personal-access-tokens] or OAuth tokens. To do so, provide the token as
-the username and provide a blank password or a password of `x-oauth-basic`. If
-you're accessing the API via cURL, replace `<token>` with your OAuth token in
-the following command:
+Alternatively, you can use [personal access
+tokens][personal-access-tokens] or OAuth tokens instead of your password. 
 
 <pre class='terminal'>
-$ curl -u &lt;token&gt;:x-oauth-basic https://api.github.com/user
+$ curl -u &lt;username&gt;:&lt;token&gt; https://api.github.com/user
 </pre>
 
 This approach is useful if your tools only support Basic Authentication but you
@@ -56,7 +53,7 @@ want to take advantage of OAuth access token security features.
 
 For users with two-factor authentication enabled, Basic Authentication requires
 an extra step. When you attempt to authenticate with Basic Authentication, the
-server will respond with a `401` and an `X-GitHub-OTP: required;:2fa-type`
+server will respond with a `401` and an `X-GitHub-OTP: required; :2fa-type`
 header. This indicates that a two-factor authentication code is needed (in
 addition to the username and password). The `:2fa-type` in this header indicates
 whether the account receives its two-factor authentication codes via SMS or via
@@ -68,8 +65,7 @@ Because these authentication codes expire quickly, we recommend using the
 Authorizations API to [create an access token][create-access] and using that
 token to [authenticate via OAuth][oauth-auth] for most API access.
 
-Alternately, you can create access tokens from the Personal Access Token
-section of your [application settings page](https://github.com/settings/applications).
+Alternately, you can create access tokens from the Personal Access Token [settings page](https://github.com/settings/tokens).
 
 [create-access]: /v3/oauth_authorizations/#create-a-new-authorization
 [curl]: http://curl.haxx.se/

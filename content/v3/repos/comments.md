@@ -18,16 +18,16 @@ Comments are ordered by ascending ID.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit_comment) { |h| [h] } %>
 
 ## List comments for a single commit
 
-    GET /repos/:owner/:repo/commits/:sha/comments
+    GET /repos/:owner/:repo/commits/:ref/comments
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit_comment) { |h| [h] } %>
 
 ## Create a commit comment
@@ -36,9 +36,8 @@ Comments are ordered by ascending ID.
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
-`sha`|`string` | **Required**. The SHA of the commit to comment on.
 `body`|`string` | **Required**. The contents of the comment.
 `path`|`string` | Relative path of the file to comment on.
 `position`|`number` | Line index in the diff to comment on.
@@ -56,7 +55,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/repo/comments/1" %>
+<%= headers 201, :Location => get_resource(:commit_comment)['url'] %>
 <%= json :commit_comment %>
 
 ## Get a single commit comment
@@ -74,7 +73,7 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The contents of the comment
 

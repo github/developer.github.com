@@ -2,4 +2,4 @@
 title: GitHub API Changelog
 ---
 
-The API changelog can now be found on the [homepage](/). Please update your links.
+The API changelog can now be found [here](/changes). Please update your links.

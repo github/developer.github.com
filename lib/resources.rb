@@ -1854,11 +1854,11 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     }
 
     BLOB ||= {
-      :content => "Content of the blob",
-      :encoding => "utf-8",
+      :content => "Q29udGVudCBvZiB0aGUgYmxvYg==\n",
+      :encoding => "base64",
       :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
-      :size => 100
+      :size => 19
     }
 
     BLOB_AFTER_CREATE ||= {

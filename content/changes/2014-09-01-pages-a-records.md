@@ -1,7 +1,7 @@
 ---
 kind: change
 title: GitHub Pages' A Records Added to Meta API
-created_at: 2014-09-01
+created_at: 2015-06-04
 author_name: leereilly
 ---
 

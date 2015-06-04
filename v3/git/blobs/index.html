@@ -59,11 +59,6 @@
   <li><a href="#custom-media-types">Custom media types</a></li>
 </ul>
 
-<p>Since blobs can be any arbitrary binary data, the input and responses
-for the blob API takes an encoding parameter that can be either <code>utf-8</code>
-or <code>base64</code>.  If your data cannot be losslessly sent as a UTF-8 string,
-you can base64 encode it.</p>
-
 <p>Blobs leverage <a href="#custom-media-types">these custom media types</a>. You can
 read more about the use of media types in the API <a href="/v3/media/">here</a>.</p>
 
@@ -71,6 +66,8 @@ read more about the use of media types in the API <a href="/v3/media/">here</a>.
 
 <pre><code>GET /repos/:owner/:repo/git/blobs/:sha
 </code></pre>
+
+<p>The <code>content</code> in the response will always be Base64 encoded.</p>
 
 <p><em>Note</em>: This API supports blobs up to 100 megabytes in size.</p>
 
@@ -81,11 +78,11 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Content of the blob"</span><span class="p">,</span>
-  <span class="s2">"encoding"</span><span class="p">:</span> <span class="s2">"utf-8"</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Q29udGVudCBvZiB0aGUgYmxvYg==\n"</span><span class="p">,</span>
+  <span class="s2">"encoding"</span><span class="p">:</span> <span class="s2">"base64"</span><span class="p">,</span>
   <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
   <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">100</span>
+  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">19</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-blob">Create a Blob</h2>
@@ -93,7 +90,32 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /repos/:owner/:repo/git/blobs
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3 id="parameters">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>content</code></td>
+      <td><code>string</code></td>
+      <td>
+<strong>Required</strong>. The new blob’s content.</td>
+    </tr>
+    <tr>
+      <td><code>encoding</code></td>
+      <td><code>string</code></td>
+      <td>The encoding used for <code>content</code>. Currently, <code>"utf-8"</code> and <code>"base64"</code> are supported. Default: <code>"utf-8"</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="example-input">Example Input</h3>
 
 <pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
   <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Content of the blob"</span><span class="p">,</span>

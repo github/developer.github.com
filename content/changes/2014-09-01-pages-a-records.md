@@ -1,6 +1,6 @@
 ---
 kind: change
-title: New features for the Deployments API preview
+title: GitHub Pages' A Records Added to Meta API
 created_at: 2014-09-01
 author_name: leereilly
 ---

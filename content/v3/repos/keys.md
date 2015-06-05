@@ -40,16 +40,8 @@ title: Deploy Keys | GitHub API
 
 ## Edit a deploy key {#edit}
 
-    PATCH /repos/:owner/:repo/keys/:id
-
-### Input
-
-<%= json :title => "octocat@octomac", :key => "ssh-rsa AAA..." %>
-
-### Response
-
-<%= headers 200 %>
-<%= json :public_key %>
+Deploy keys are immutable. If you need to update a key, [remove the
+key](#delete) and [create a new one](#create) instead.
 
 ## Remove a deploy key {#delete}
 

@@ -9,8 +9,13 @@ task :compile do
 end
 
 desc "Test the output"
-task :test => [:clean, :compile] do
+task :test => [:clean, :remove_output_dir, :compile] do
   HTML::Proofer.new("./output").run
+end
+
+desc "Remove the output dir"
+task :remove_output_dir do
+  FileUtils.rm_r('output') if File.exist?('output')
 end
 
 # Prompt user for a commit message; default: P U B L I S H :emoji:
@@ -28,10 +33,8 @@ def commit_message
 end
 
 desc "Publish to http://developer.github.com"
-task :publish => [:clean] do
+task :publish => [:clean, :remove_output_dir] do
   mesg = commit_message
-
-  FileUtils.rm_r('output') if File.exist?('output')
 
   sh "nanoc compile"
 

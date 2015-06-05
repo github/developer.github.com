@@ -205,7 +205,9 @@ organization, you get:
 ## Remove team repository {#remove-team-repo}
 
 In order to remove a repository from a team, the authenticated user must be an
-owner of the org that the team is associated with.
+owner of the org that the team is associated with. Also, since the Owners team
+always has access to all repositories in the organization, repositories cannot
+be removed from the Owners team.
 NOTE: This does not delete the repository, it just removes it from the team.
 
     DELETE /teams/:id/repos/:owner/:repo

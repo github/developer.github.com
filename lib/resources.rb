@@ -40,8 +40,12 @@ module GitHub
         :ymendel      => 'b1b1d33e0655e841d4fd8467359c58d0',
         :mastahyeti   => '8caa0afdae1a934c30a1998472c63134',
         :atmos        => 'a86224d72ce21cd9f5bee6784d4b06c7',
-        :kdaigle      => 'bc622cf1dc277323515fd4d7ed66ed24',
-        :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068'
+        :kdaigle      => 'dd18bb36fa5f06e45843ff8de33b793e',
+        :gjtorikian   => 'befd819b3fced8c6bd3dba7e633dd068',
+        :izuzak       => 'ff743b4cba28cc47ad65cb90212c1e51',
+        :spicycode    => '7ce90d712fab09421b7f2cf955b9a4c8',
+        :dbussink     => 'b012094b37ab6946c44eaa41d7828478',
+        :benbalter    => '19d03ecc1ff5da1a5e63a3ddaa2d84c2',
       }
 
       DefaultTimeFormat = "%B %-d, %Y".freeze
@@ -385,6 +389,7 @@ module GitHub
       "open_issues"   => 4,
       "closed_issues" => 8,
       "created_at"    => "2011-04-10T20:09:31Z",
+      "updated_at"  => "2014-03-03T18:58:10Z",
       "due_on"        => nil
     }
 
@@ -1191,41 +1196,38 @@ module GitHub
       }
     }
 
-    GIST_HISTORY = {
-      "history" => [
-        {
-          "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
-          "user"    => USER,
-          "change_status" => {
-            "deletions" => 0,
-            "additions" => 180,
-            "total"     => 180
-          },
-          "committed_at" => "2010-04-14T02:15:15Z"
-        }
-      ]
-    }
+    GIST_HISTORY = [
+      {
+        "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+        "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
+        "user"    => USER,
+        "change_status" => {
+          "deletions" => 0,
+          "additions" => 180,
+          "total"     => 180
+        },
+        "committed_at" => "2010-04-14T02:15:15Z"
+      }
+    ]
 
 
-    GIST_FORKS = {
-      "forks" => [
-        {
-          "user" => USER,
-          "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-          "id" => 1,
-          "created_at" => "2011-04-14T16:00:49Z",
-          "updated_at" => "2011-04-14T16:00:49Z"
-        }
-      ]
-    }
+    GIST_FORKS = [
+      {
+        "user" => USER,
+        "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+        "id" => 1,
+        "created_at" => "2011-04-14T16:00:49Z",
+        "updated_at" => "2011-04-14T16:00:49Z"
+      }
+    ]
 
     GIST_FILE = {
-      "size"     => 932,
-      "filename" => "ring.erl",
-      "raw_url"  => "https://gist.github.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
-      "type"     => "text/plain",
-      "language" => "Erlang"
+      "ring.erl" => {
+        "size"     => 932,
+        "raw_url"  => "https://gist.githubusercontent.com/raw/365370/8c4d2d43d178df44f4c03a7f2ac0ff512853564e/ring.erl",
+        "type"     => "text/plain",
+        "language" => "Erlang"
+      }
     }
 
     GIST = {
@@ -1236,7 +1238,7 @@ module GitHub
       "description"  => "description of gist",
       "public"       => true,
       "user"         => USER,
-      "files"        => { "ring.erl" => GIST_FILE },
+      "files"        => GIST_FILE,
       "comments"     => 0,
       "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
       "html_url"     => "https://gist.github.com/1",
@@ -1246,8 +1248,10 @@ module GitHub
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
 
-    FULL_GIST = GIST.merge(GIST_FORKS).merge(GIST_HISTORY)
-    FULL_GIST["files"] = GIST_FILE.merge({'content' => 'contents of gist'})
+    FULL_GIST = GIST.dup.update \
+      :forks   => GIST_FORKS,
+      :history => GIST_HISTORY,
+      :files   => GIST_FILE.merge({'content' => 'contents of gist'})
 
     GIST_COMMENT = {
       "id"         => 1,
@@ -1565,7 +1569,7 @@ module GitHub
       "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
       "url" => "https://api.github.com/repos/octocat/example/deployments/1",
       "creator" => USER,
-      "payload" => JSON.dump({:environment => 'production'}),
+      "payload" => {:environment => 'production'},
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
       "description" => "Deploy request from hubot",
@@ -1577,7 +1581,7 @@ module GitHub
       "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
       "state" => "success",
       "creator" => USER,
-      "payload" => JSON.dump({:environment => 'production'}),
+      "payload" => {:environment => 'production'},
       "target_url" => "https://gist.github.com/628b2736d379f",
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
@@ -1749,7 +1753,7 @@ module GitHub
     FEEDS = {
       :timeline_url => "https://github.com/timeline",
       :user_url => "https://github.com/{user}",
-      :current_user_public => "https://github.com/defunkt",
+      :current_user_public_url => "https://github.com/defunkt",
       :current_user_url => "https://github.com/defunkt.private?token=abc123",
       :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
       :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",

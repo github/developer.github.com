@@ -23,8 +23,9 @@ Lists the _verified_ public keys for a user.  This is accessible by anyone.
 
     GET /user/keys
 
-Lists the current user's keys.  Management of public keys via the API requires
-that you are authenticated through basic auth, or OAuth with the 'user' scope.
+Lists the current user's keys. Requires that you are authenticated via
+Basic Auth or via OAuth with at least `read:public_key`
+[scope](/v3/oauth/#scopes).
 
 ### Response
 
@@ -32,6 +33,10 @@ that you are authenticated through basic auth, or OAuth with the 'user' scope.
 <%= json(:public_key) { |h| [h] } %>
 
 ## Get a single public key
+
+View extended details for a single public key. Requires that you are
+authenticated via Basic Auth or via OAuth with at least `read:public_key`
+[scope](/v3/oauth/#scopes).
 
     GET /user/keys/:id
 
@@ -41,6 +46,9 @@ that you are authenticated through basic auth, or OAuth with the 'user' scope.
 <%= json :public_key %>
 
 ## Create a public key
+
+Creates a public key. Requires that you are authenticated via Basic Auth,
+or OAuth with at least `write:public_key` [scope](/v3/oauth/#scopes).
 
     POST /user/keys
 
@@ -55,18 +63,14 @@ that you are authenticated through basic auth, or OAuth with the 'user' scope.
 
 ## Update a public key
 
-    PATCH /user/keys/:id
-
-### Input
-
-<%= json :title => "octocat@octomac", :key => "ssh-rsa AAA..." %>
-
-### Response
-
-<%= headers 200 %>
-<%= json :public_key %>
+Public keys are immutable. If you need to update a public key, [remove the
+key](#delete-a-public-key) and [create a new one](#create-a-public-key)
+instead.
 
 ## Delete a public key
+
+Removes a public key. Requires that you are authenticated via Basic Auth
+or via OAuth with at least `admin:public_key` [scope](/v3/oauth/#scopes).
 
     DELETE /user/keys/:id
 

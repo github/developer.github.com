@@ -36,6 +36,8 @@ Key | Type | Description
 
 Represents a created repository, branch, or tag.
 
+Note: webhooks will not receive this event for created repositories.
+
 ### Hook name
 
 `create`
@@ -260,6 +262,23 @@ Key | Type | Description
 ----|------|-------------
 `member`|`object` | The [user](/v3/users/) that was added.
 `action`|`string` | The action that was performed. Currently, can only be "added".
+
+
+## PageBuildEvent
+
+Represents an attempted build of a GitHub Pages site, whether successful or not.
+
+Triggered on push to a GitHub Pages enabled branch (`gh-pages` for project pages, `master` for user and organization pages).
+
+### Hook Name
+
+`page_build`
+
+### Payload
+
+Key | Type | Description
+----|------|------------
+`build` | `object` | The [page build](http://developer.github.com/v3/repos/pages/#list-pages-builds) itself.
 
 
 ## PublicEvent

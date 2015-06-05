@@ -38,4 +38,4 @@ Name | Type | Description
 ### Response
 
 <%= headers 201 %>
-<%= json :organization %>
+<%= json :org %>

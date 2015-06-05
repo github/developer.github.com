@@ -5,7 +5,7 @@ created_at: 2015-06-08
 author_name: leereilly
 ---
 
-The [Meta API](https://developer.github.com/v3/meta/) now includes the A record IP addresses for [GitHub Pages](https://pages.github.com/).
+The [Meta API](/v3/meta/) now includes the A record IP addresses for [GitHub Pages](https://pages.github.com/).
 
 <pre class="terminal">
 $ curl https://api.github.com/meta
@@ -38,3 +38,5 @@ $ curl https://api.github.com/meta
 </code></pre>
 
 These IP addresses have changed a handful of times in the past, so this is a good way to identify them and keep them up to date.
+
+If you have any questions, please [get in touch](https://github.com/contact?form%5Bsubject%5D=GitHub+Pages+A+Records+Added+to+API). We’ll be happy to help.

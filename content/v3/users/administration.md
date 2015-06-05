@@ -38,6 +38,30 @@ Name | Type | Description
 <%= headers 201 %>
 <%= json :user %>
 
+## Rename an existing user
+
+    PATCH /admin/users/:user_id
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`login`|`string` | The user's new username
+
+#### Example
+
+<%= json \
+  :login => "thenewmonalisa"
+%>
+
+### Response
+
+<%= headers 202 %>
+<%= json \
+  :message => "Job queued to rename user. It may take a few minutes to complete.",
+  :url => "https://api.github.com/user/1"
+%>
+
 ## Promote an ordinary user to a site administrator
 
     PUT /users/:username/site_admin

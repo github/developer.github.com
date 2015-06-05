@@ -7,6 +7,7 @@ require 'securerandom'
 module GitHub
   module Resources
     module Helpers
+
       STATUSES ||= {
         200 => '200 OK',
         201 => '201 Created',
@@ -46,7 +47,6 @@ module GitHub
       end
 
       def headers(status, head = {})
-        css_class = (status == 202 || status == 204 || status == 404) ? 'headers no-response' : 'headers'
         lines = ["Status: #{STATUSES[status]}"]
         head.each do |key, value|
           case key
@@ -60,7 +60,7 @@ module GitHub
         lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
         lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
-        %(<pre class="#{css_class}"><code>#{lines * "\n"}</code></pre>\n)
+        %(<pre class="headers"><code>#{lines * "\n"}</code></pre>\n)
       end
 
       def link_header(rels)
@@ -87,6 +87,14 @@ module GitHub
       end
 
       def json(key)
+        hash = get_resource(key)
+        hash = yield hash if block_given?
+
+        %(<pre class="body-response"><code class="language-javascript">) +
+          JSON.pretty_generate(hash) + "</code></pre>"
+      end
+
+      def get_resource(key)
         hash = case key
           when Hash
             h = {}
@@ -96,17 +104,12 @@ module GitHub
             key
           else Resources.const_get(key.to_s.upcase)
         end
-
-        hash = yield hash if block_given?
-
-        %(<pre><code class="language-javascript">) +
-          JSON.pretty_generate(hash) + "</code></pre>"
       end
 
       def text_html(response, status, head = {})
         hs = headers(status, head.merge('Content-Type' => 'text/html'))
         res = CGI.escapeHTML(response)
-        hs + %(<pre><code>) + res + "</code></pre>"
+        hs + %(<pre class="body-response"><code>) + res + "</code></pre>"
       end
 
       def webhook_headers(event_name)
@@ -118,7 +121,27 @@ module GitHub
       end
 
       CONTENT ||= {
-        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\""
+        'LATEST_ENTERPRISE_VERSION' => '2.2',
+        "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
+        "ORG_HOOK_CONFIG_HASH" =>
+        '''
+Name | Type | Description
+-----|------|--------------
+`url`          | `string` | **Required** The URL to which the payloads will be delivered.
+`content_type` | `string` | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
+`secret`       | `string` | If provided, payloads will be delivered with an `X-Hub-Signature` header. The value of this header is computed as the [HMAC hex digest of the body, using the `secret` as the key][hub-signature].
+`insecure_ssl` | `string` | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `"0"` (verification is performed) and `"1"` (verification is not performed). The default is `"0"`. **We strongly recommend not setting this to "1" as you are subject to man-in-the-middle and other attacks.**
+''',
+      "PRS_AS_ISSUES" =>
+      '''
+{{#tip}}
+
+**Note**: In the past, pull requests and issues were more closely aligned than they are now. As far as the API is concerned, every pull request is an issue, but not every issue is a pull request.
+
+This endpoint may also return pull requests in the response. If an issue *is* a pull request, the object will include a `pull_request` key.
+
+{{/tip}}
+'''
       }
 
       def fetch_content(key)
@@ -131,7 +154,7 @@ module GitHub
       "login"        => "octocat",
       "id"           => 1,
       "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
-      "gravatar_id"  => "somehexcode",
+      "gravatar_id"  => "",
       "url"          => "https://api.github.com/users/octocat",
       "html_url"     => "https://github.com/octocat",
       "followers_url" => "https://api.github.com/users/octocat/followers",
@@ -191,8 +214,16 @@ module GitHub
     }
 
     PUBLIC_KEY ||= SIMPLE_PUBLIC_KEY.merge \
-      "url"   => "https://api.github.com/user/keys/1",
-      "title" => "octocat@octomac"
+      "url"        => "https://api.github.com/user/keys/1",
+      "title"      => "octocat@octomac",
+      "verified"   => true,
+      "created_at" => "2014-12-10T15:53:42Z"
+
+    DEPLOY_KEY ||= SIMPLE_PUBLIC_KEY.merge \
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/keys/1",
+      "title"      => "octocat@octomac",
+      "verified"   => true,
+      "created_at" => "2014-12-10T15:53:42Z"
 
     SIMPLE_REPO ||= {
       "id"               => 1296269,
@@ -228,6 +259,7 @@ module GitHub
       "open_issues_count" => 0,
       "has_issues"        => true,
       "has_wiki"          => true,
+      "has_pages"         => false,
       "has_downloads"     => true,
       "pushed_at"         => "2011-01-26T19:06:43Z",
       "created_at"        => "2011-01-26T19:01:12Z",
@@ -241,6 +273,16 @@ module GitHub
       "parent"            => REPO,
       "source"            => REPO
     })
+
+    STARRED_REPO ||= {
+      "starred_at" => "2011-01-16T19:06:43Z",
+      "repo" => REPO
+    }
+
+    STARGAZER_WITH_TIMESTAMPS ||= {
+      "starred_at" => "2011-01-16T19:06:43Z",
+      "user" => USER
+    }
 
     TAG ||= {
       "name"        => "v0.1",
@@ -283,7 +325,7 @@ module GitHub
        "date"=>"2012-03-06T15:06:50-08:00",
        "email"=>"octocat@nowhere.com"}},
    "author"=>
-    {"gravatar_id"=>"7ad39074b0584bc555d0417ae3e7d974",
+    {"gravatar_id"=>"",
      "avatar_url"=>
       "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
      "url"=>"https://api.github.com/users/octocat",
@@ -299,7 +341,7 @@ module GitHub
    "url"=>
     "https://api.github.com/repos/octocat/Hello-World/commits/7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
    "committer"=>
-    {"gravatar_id"=>"7ad39074b0584bc555d0417ae3e7d974",
+    {"gravatar_id"=>"",
      "avatar_url"=>
       "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
      "url"=>"https://api.github.com/users/octocat",
@@ -337,7 +379,7 @@ module GitHub
     "login" => "octocat",
     "id" => 583231,
     "avatar_url" => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-    "gravatar_id" => "7ad39074b0584bc555d0417ae3e7d974",
+    "gravatar_id" => "",
     "url" => "https://api.github.com/users/octocat",
     "html_url" => "https://github.com/octocat",
     "followers_url" => "https://api.github.com/users/octocat/followers",
@@ -355,7 +397,7 @@ module GitHub
     "login" => "octocat",
     "id" => 583231,
     "avatar_url" => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-    "gravatar_id" => "7ad39074b0584bc555d0417ae3e7d974",
+    "gravatar_id" => "",
     "url" => "https://api.github.com/users/octocat",
     "html_url" => "https://github.com/octocat",
     "followers_url" => "https://api.github.com/users/octocat/followers",
@@ -383,31 +425,36 @@ module GitHub
 
     MILESTONE ||= {
       "url" => "https://api.github.com/repos/octocat/Hello-World/milestones/1",
+      "html_url"      => "https://github.com/octocat/Hello-World/milestones/v1.0",
+      "labels_url"    => "https://api.github.com/repos/octocat/Hello-World/milestones/1/labels",
+      "id"            => 1002604,
       "number"        => 1,
       "state"         => "open",
       "title"         => "v1.0",
-      "description"   => "",
+      "description"   => "Tracking milestone for version 1.0",
       "creator"       => USER,
       "open_issues"   => 4,
       "closed_issues" => 8,
       "created_at"    => "2011-04-10T20:09:31Z",
-      "updated_at"  => "2014-03-03T18:58:10Z",
-      "due_on"        => nil
+      "updated_at"    => "2014-03-03T18:58:10Z",
+      "closed_at"     => "2013-02-12T13:22:01Z",
+      "due_on"        => "2012-10-09T23:39:01Z"
     }
 
 
     PULL ||= {
-      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1",
-      "html_url"   => "https://github.com/octocat/Hello-World/pull/1",
-      "diff_url"   => "https://github.com/octocat/Hello-World/pulls/1.diff",
-      "patch_url"  => "https://github.com/octocat/Hello-World/pulls/1.patch",
-      "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1",
-      "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits",
-      "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments",
+      "id"         => 1,
+      "url"        => "https://api.github.com/repos/octocat/Hello-World/pulls/1347",
+      "html_url"   => "https://github.com/octocat/Hello-World/pull/1347",
+      "diff_url"   => "https://github.com/octocat/Hello-World/pull/1347.diff",
+      "patch_url"  => "https://github.com/octocat/Hello-World/pull/1347.patch",
+      "issue_url"  => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+      "commits_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1347/commits",
+      "review_comments_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/1347/comments",
       "review_comment_url" => "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}",
-      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1/comments",
+      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments",
       "statuses_url" => "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e",
-      "number"     => 1,
+      "number"     => 1347,
       "state"      => "open",
       "title"      => "new-feature",
       "body"       => "Please pull these awesome changes",
@@ -431,19 +478,19 @@ module GitHub
       },
       "_links" => {
         "self" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347"},
         "html" => {'href' =>
-          "https://github.com/octocat/Hello-World/pull/1"},
+          "https://github.com/octocat/Hello-World/pull/1347"},
         "issue" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/issues/1"},
+          "https://api.github.com/repos/octocat/Hello-World/issues/1347"},
         "comments" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/issues/1/comments"},
+          "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments"},
         "review_comments" => {'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1/comments"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347/comments"},
         "review_comment" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/pulls/comments/{number}"},
         "commits" => { 'href' =>
-          "https://api.github.com/repos/octocat/Hello-World/pulls/1/commits"},
+          "https://api.github.com/repos/octocat/Hello-World/pulls/1347/commits"},
         "statuses" => {'href' =>
           "https://api.github.com/repos/octocat/Hello-World/statuses/6dcb09b5b57875f334f61aebed695e2e4193db5e"}
       },
@@ -546,6 +593,7 @@ module GitHub
       "diff_url" => "https://github.com/octocat/Hello-World/compare/master...topic.diff",
       "patch_url" => "https://github.com/octocat/Hello-World/compare/master...topic.patch",
       "base_commit" => COMMIT,
+      "merge_base_commit" => COMMIT,
       "status" => "behind",
       "ahead_by" => 1,
       "behind_by" => 2,
@@ -667,7 +715,8 @@ module GitHub
       "login"      => "github",
       "id"         => 1,
       "url"        => "https://api.github.com/orgs/github",
-      "avatar_url" => "https://github.com/images/error/octocat_happy.gif"
+      "avatar_url" => "https://github.com/images/error/octocat_happy.gif",
+      "description" => "A great organization"
     }
 
     FULL_ORG ||= ORG.merge({
@@ -700,13 +749,17 @@ module GitHub
     })
 
     TEAM ||= {
+      "id" => 1,
       "url" => "https://api.github.com/teams/1",
-      "name" => "Owners",
-      "id" => 1
+      "name" => "Justice League",
+      "slug" => "justice-league",
+      "description" => "A great team.",
+      "permission" => "admin",
+      "members_url" => "https://api.github.com/teams/1/members{/member}",
+      "repositories_url" => "https://api.github.com/teams/1/repos"
     }
 
     FULL_TEAM ||= TEAM.merge({
-      "permission" => "admin",
       "members_count" => 3,
       "repos_count" => 10,
       "organization" =>  ORG
@@ -717,12 +770,94 @@ module GitHub
     }
 
     ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "active"
+      "state" => "active"
     )
 
     PENDING_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
-      "status" => "pending"
+      "state" => "pending"
     )
+
+    USER_FOR_ORG_MEMBERSHIP ||= {
+      "login"        => "defunkt",
+      "id"           => 3,
+      "avatar_url"   => "https://github.com/images/error/octocat_happy.gif",
+      "gravatar_id"  => "",
+      "url"          => "https://api.github.com/users/defunkt",
+      "html_url"     => "https://github.com/defunkt",
+      "followers_url" => "https://api.github.com/users/defunkt/followers",
+      "following_url" => "https://api.github.com/users/defunkt/following{/other_user}",
+      "gists_url"    => "https://api.github.com/users/defunkt/gists{/gist_id}",
+      "starred_url"  => "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
+      "subscriptions_url" => "https://api.github.com/users/defunkt/subscriptions",
+      "organizations_url" => "https://api.github.com/users/defunkt/orgs",
+      "repos_url"    => "https://api.github.com/users/defunkt/repos",
+      "events_url"   => "https://api.github.com/users/defunkt/events{/privacy}",
+      "received_events_url" => "https://api.github.com/users/defunkt/received_events",
+      "type"         => "User",
+      "site_admin"   => false
+    }
+
+    ORG_FOR_ACTIVE_ORG_MEMBERSHIP ||= {
+      "login"              => "octocat",
+      "url"                => "https://api.github.com/orgs/octocat",
+      "id"                 => 1,
+      "repos_url"          => "https://api.github.com/users/octocat/repos",
+      "events_url"         => "https://api.github.com/users/octocat/events{/privacy}",
+      "members_url"        => "https://api.github.com/users/octocat/members{/member}",
+      "public_members_url" => "https://api.github/com/users/octocat/public_members{/member}",
+      "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+    }
+
+    ORG_FOR_PENDING_ORG_MEMBERSHIP ||= {
+      "login"              => "invitocat",
+      "url"                => "https://api.github.com/orgs/invitocat",
+      "id"                 => 2,
+      "repos_url"          => "https://api.github.com/users/invitocat/repos",
+      "events_url"         => "https://api.github.com/users/invitocat/events{/privacy}",
+      "members_url"        => "https://api.github.com/users/invitocat/members{/member}",
+      "public_members_url" => "https://api.github/com/users/invitocat/public_members{/member}",
+      "avatar_url"         => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+    }
+
+    ACTIVE_ADMIN_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/octocat/memberships/defunkt",
+      "state"            => "active",
+      "role"             => "admin",
+      "organization_url" => "https://api.github.com/orgs/octocat",
+      "organization"     => ORG_FOR_ACTIVE_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
+    }
+
+    ACTIVE_LIMITED_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/octocat/memberships/defunkt",
+      "state"            => "active",
+      "role"             => "limited_member",
+      "organization_url" => "https://api.github.com/orgs/octocat",
+      "organization"     => ORG_FOR_ACTIVE_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
+    }
+
+    PENDING_ADMIN_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/invitocat/memberships/defunkt",
+      "state"            => "pending",
+      "role"             => "admin",
+      "organization_url" => "https://api.github.com/orgs/invitocat",
+      "organization"     => ORG_FOR_PENDING_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
+    }
+
+    PENDING_LIMITED_ORG_MEMBERSHIP ||= {
+      "url"              => "https://api.github.com/orgs/invitocat/memberships/defunkt",
+      "state"            => "pending",
+      "role"             => "limited_member",
+      "organization_url" => "https://api.github.com/orgs/invitocat",
+      "organization"     => ORG_FOR_PENDING_ORG_MEMBERSHIP,
+      "user"             => USER_FOR_ORG_MEMBERSHIP
+    }
+
+    ORG_MEMBERSHIPS         ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP, PENDING_ADMIN_ORG_MEMBERSHIP]
+    ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP]
+    PENDING_ORG_MEMBERSHIPS ||= [PENDING_ADMIN_ORG_MEMBERSHIP]
 
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
@@ -731,6 +866,7 @@ module GitHub
     }
 
     ISSUE ||= {
+      "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1347",
       "number"     => 1347,
@@ -779,7 +915,7 @@ module GitHub
     FULL_ISSUE_EVENT ||= ISSUE_EVENT.merge('issue' => ISSUE)
 
     ISSUE_SEARCH_ITEM ||= {
-      "gravatar_id" =>  "4c3d600867886124a73f14a907b1a955",
+      "gravatar_id" =>  "",
       "position" =>  10,
       "number" =>  10,
       "votes" =>  2,
@@ -819,7 +955,7 @@ module GitHub
             "login" => "Nick3C",
             "id" => 90254,
             "avatar_url" => "https://secure.gravatar.com/avatar/934442aadfe3b2f4630510de416c5718?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-            "gravatar_id" => "934442aadfe3b2f4630510de416c5718",
+            "gravatar_id" => "",
             "url" => "https://api.github.com/users/Nick3C",
             "html_url" => "https://github.com/Nick3C",
             "followers_url" => "https://api.github.com/users/Nick3C/followers",
@@ -942,7 +1078,7 @@ module GitHub
             "login" => "dtrupenn",
             "id" => 872147,
             "avatar_url" => "https://secure.gravatar.com/avatar/e7956084e75f239de85d3a31bc172ace?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-            "gravatar_id" => "e7956084e75f239de85d3a31bc172ace",
+            "gravatar_id" => "",
             "url" => "https://api.github.com/users/dtrupenn",
             "received_events_url" => "https://api.github.com/users/dtrupenn/received_events",
             "type" => "User"
@@ -1023,7 +1159,7 @@ module GitHub
               "login" => "jquery",
               "id" => 70142,
               "avatar_url" => "https://0.gravatar.com/avatar/6906f317a4733f4379b06c32229ef02f?d=https%3A%2F%2Fidenticons.github.com%2Ff426f04f2f9813718fb806b30e0093de.png",
-              "gravatar_id" => "6906f317a4733f4379b06c32229ef02f",
+              "gravatar_id" => "",
               "url" => "https://api.github.com/users/jquery",
               "html_url" => "https://github.com/jquery",
               "followers_url" => "https://api.github.com/users/jquery/followers",
@@ -1119,7 +1255,7 @@ module GitHub
     }
 
     USER_SEARCH_ITEM ||= {
-      "gravatar_id" => "70889091349f7598bce9afa588034310",
+      "gravatar_id" => "",
       "name" => "Hirotaka Kawata",
       "created_at" => "2009-10-05T01:32:06Z",
       "location" => "Tsukuba, Ibaraki, Japan",
@@ -1149,7 +1285,7 @@ module GitHub
           "login" => "mojombo",
           "id" => 1,
           "avatar_url" => "https://secure.gravatar.com/avatar/25c7c18223fb42a4c6ae1c8db6f50f9b?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-          "gravatar_id" => "25c7c18223fb42a4c6ae1c8db6f50f9b",
+          "gravatar_id" => "",
           "url" => "https://api.github.com/users/mojombo",
           "html_url" => "https://github.com/mojombo",
           "followers_url" => "https://api.github.com/users/mojombo/followers",
@@ -1215,13 +1351,13 @@ module GitHub
         "id"                => 2,
         "login"             => "octocat",
         "type"              => "User",
-        "gravatar_id"       => "70889091349f7598bce9afa588034310",
+        "gravatar_id"       => "",
       }
     }
 
     GIST_HISTORY ||= [
       {
-        "url"     => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
+        "url"     => "https://api.github.com/gists/aa5a315d61ae9438b18d/57a7f021a713b1c5a6a199b54cc514735d2d462f",
         "version" => "57a7f021a713b1c5a6a199b54cc514735d2d462f",
         "user"    => USER,
         "change_status" => {
@@ -1237,8 +1373,8 @@ module GitHub
     GIST_FORKS ||= [
       {
         "user" => USER,
-        "url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-        "id" => 1,
+        "url" => "https://api.github.com/gists/dee9c42e4998ce2ea439",
+        "id" => "dee9c42e4998ce2ea439",
         "created_at" => "2011-04-14T16:00:49Z",
         "updated_at" => "2011-04-14T16:00:49Z"
       }
@@ -1266,20 +1402,20 @@ module GitHub
     }
 
     GIST ||= {
-      "url"          => "https://api.github.com/gists/#{SecureRandom.hex(10)}",
-      "forks_url"    => "https://api.github.com/gists/#{SecureRandom.hex(10)}/forks",
-      "commits_url"  => "https://api.github.com/gists/#{SecureRandom.hex(10)}/commits",
-      "id"           => "1",
+      "url"          => "https://api.github.com/gists/aa5a315d61ae9438b18d",
+      "forks_url"    => "https://api.github.com/gists/aa5a315d61ae9438b18d/forks",
+      "commits_url"  => "https://api.github.com/gists/aa5a315d61ae9438b18d/commits",
+      "id"           => "aa5a315d61ae9438b18d",
       "description"  => "description of gist",
       "public"       => true,
       "owner"        => USER,
       "user"         => nil,
       "files"        => GIST_FILE,
       "comments"     => 0,
-      "comments_url" => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/",
-      "html_url"     => "https://gist.github.com/1",
-      "git_pull_url" => "git://gist.github.com/1.git",
-      "git_push_url" => "git@gist.github.com:1.git",
+      "comments_url" => "https://api.github.com/gists/aa5a315d61ae9438b18d/comments/",
+      "html_url"     => "https://gist.github.com/aa5a315d61ae9438b18d",
+      "git_pull_url" => "https://gist.github.com/aa5a315d61ae9438b18d.git",
+      "git_push_url" => "https://gist.github.com/aa5a315d61ae9438b18d.git",
       "created_at"   => "2010-04-14T02:15:15Z",
       "updated_at"   => "2011-06-20T11:34:15Z"
     }
@@ -1289,10 +1425,12 @@ module GitHub
       "history" => GIST_HISTORY,
       "files"   => GIST_FILE_WITH_CONTENT
 
+    FULL_GIST_VERSION ||= FULL_GIST.dup.update \
+      "url" => "https://api.github.com/gists/aa5a315d61ae9438b18d/57a7f021a713b1c5a6a199b54cc514735d2d462f"
 
     GIST_COMMENT ||= {
       "id"         => 1,
-      "url"        => "https://api.github.com/gists/#{SecureRandom.hex(10)}/comments/1",
+      "url"        => "https://api.github.com/gists/a6db0bec360bb87e9418/comments/1",
       "body"       => "Just commenting for the sake of commenting",
       "user"       => USER,
       "created_at" => "2011-04-18T23:23:56Z",
@@ -1323,7 +1461,8 @@ module GitHub
           "sha"  => "45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/blobs/45b983be36b73c0788dc9cbcb76cbb80fc7bb057",
         }
-      ]
+      ],
+      "truncated" => false
     }
     TREE_EXTRA ||= {
       "sha"  => "fc6274d15fa3ae2ab983129fb037999f264ba9a7",
@@ -1335,7 +1474,8 @@ module GitHub
           "size" => 132,
           "sha"  => "7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b",
           "url"  => "https://api.github.com/repos/octocat/Hello-World/git/7c258a9869f33c1e1e1f74fbb32f07c86cb5a75b"
-      } ]
+      } ],
+      "truncated" => false
     }
     TREE_NEW ||= {
       "sha"  => "cd8274d15fa3ae2ab983129fb037999f264ba9a7",
@@ -1354,12 +1494,12 @@ module GitHub
       "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
       "author" => {
-        "date" => "2010-04-10T14:10:01-07:00",
+        "date" => "2014-11-07T22:01:45Z",
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com"
       },
       "committer" => {
-        "date" => "2010-04-10T14:10:01-07:00",
+        "date" => "2014-11-07T22:01:45Z",
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com"
       },
@@ -1380,12 +1520,12 @@ module GitHub
       "sha" => "7638417db6d59f3c431d3e1f261cc637155684cd",
       "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
       "author" => {
-        "date" => "2008-07-09T16:13:30+12:00",
+        "date" => "2014-11-07T22:01:45Z",
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com"
       },
       "committer" => {
-        "date" => "2008-07-09T16:13:30+12:00",
+        "date" => "2014-11-07T22:01:45Z",
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com"
       },
@@ -1410,7 +1550,7 @@ module GitHub
       "tagger" => {
         "name" => "Scott Chacon",
         "email" => "schacon@gmail.com",
-        "date" => "2011-06-17T14:53:35-07:00"
+        "date" => "2014-11-07T22:01:45Z"
       },
       "object" => {
         "type" => "commit",
@@ -1460,22 +1600,39 @@ module GitHub
     ]
 
     HOOK ||= {
+      "id" => 1,
       "url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1",
+      "test_url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1/test",
+      "ping_url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1/pings",
+      "name" => "web",
+      "events" => ["push", "pull_request"],
+      "active" => true,
+      "config" =>
+        {'url' => 'http://example.com/webhook', 'content_type' => 'json'},
       "updated_at" => "2011-09-06T20:39:23Z",
       "created_at" => "2011-09-06T17:26:27Z",
+    }
+
+    ORG_HOOK ||= {
+      "id" => 1,
+      "url" => "https://api.github.com/orgs/octocat/hooks/1",
+      "ping_url" => "https://api.github.com/orgs/octocat/hooks/1/pings",
       "name" => "web",
       "events" => ["push", "pull_request"],
       "active" => true,
       "config" =>
         {'url' => 'http://example.com', 'content_type' => 'json'},
-      "id" => 1
+      "updated_at" => "2011-09-06T20:39:23Z",
+      "created_at" => "2011-09-06T17:26:27Z",
     }
 
     OAUTH_ACCESS ||= {
       "id" => 1,
       "url" => "https://api.github.com/authorizations/1",
       "scopes" => ["public_repo"],
-      "token" => "abc123",
+      "token" => "abcdefgh12345678",
+      "token_last_eight" => "12345678",
+      "hashed_token" => "25f94a2a5c7fbaf499c665bc73d67c1c87e496da8985131633ee0a95819db2e8",
       "app" => {
         "url" => "http://my-github-app.com",
         "name" => "my github app",
@@ -1484,7 +1641,8 @@ module GitHub
       "note" => "optional note",
       "note_url" => "http://optional/note/url",
       "updated_at" => "2011-09-06T20:39:23Z",
-      "created_at" => "2011-09-06T17:26:27Z"
+      "created_at" => "2011-09-06T17:26:27Z",
+      "fingerprint" => "jklmnop12345678",
     }
 
     OAUTH_ACCESS_WITH_USER ||= OAUTH_ACCESS.merge(:user => USER)
@@ -1501,14 +1659,14 @@ module GitHub
       :actor => {
         :id => 1,
         :login => "octocat",
-        :gravatar_id => "somehexcode",
+        :gravatar_id => "",
         :avatar_url => "https://github.com/images/error/octocat_happy.gif",
         :url => "https://api.github.com/users/octocat"
       },
       :org => {
         :id => 1,
         :login => "github",
-        :gravatar_id => "somehexcode",
+        :gravatar_id => "",
         :url => "https://api.github.com/orgs/github",
         :avatar_url =>  "https://github.com/images/error/octocat_happy.gif"
       },
@@ -1524,13 +1682,14 @@ module GitHub
       "path" =>  "README.md",
       "content" =>  "encoded content ...",
       "sha" =>  "3d21ec53a331a6f037a91c368710b99387d012c1",
-      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
-      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
-      "html_url" => "https://github.com/pengwynn/octokit/blob/master/README.md",
+      "url" => "https://api.github.com/repos/octokit/octokit.rb/contents/README.md",
+      "git_url" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+      "html_url" => "https://github.com/octokit/octokit.rb/blob/master/README.md",
+      "download_url"      => "https://raw.githubusercontent.com/octokit/octokit.rb/master/README.md",
       "_links" =>  {
-        "git" =>  "https://api.github.com/repos/pengwynn/octokit/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
-        "self" =>  "https://api.github.com/repos/pengwynn/octokit/contents/README.md",
-        "html" =>  "https://github.com/pengwynn/octokit/blob/master/README.md"
+        "git" =>  "https://api.github.com/repos/octokit/octokit.rb/git/blobs/3d21ec53a331a6f037a91c368710b99387d012c1",
+        "self" =>  "https://api.github.com/repos/octokit/octokit.rb/contents/README.md",
+        "html" =>  "https://github.com/octokit/octokit.rb/blob/master/README.md"
       },
     }
 
@@ -1541,13 +1700,14 @@ module GitHub
       "name" => "some-symlink",
       "path" => "bin/some-symlink",
       "sha" => "452a98979c88e093d682cab404a3ec82babebb48",
-      "url" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
-      "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
-      "html_url" => "https://github.com/pengwynn/octokit/blob/master/bin/some-symlink",
+      "url" => "https://api.github.com/repos/octokit/octokit.rb/contents/bin/some-symlink",
+      "git_url" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+      "html_url" => "https://github.com/octokit/octokit.rb/blob/master/bin/some-symlink",
+      "download_url"      => "https://raw.githubusercontent.com/octokit/octokit.rb/master/bin/some-symlink",
       "_links" => {
-        "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
-        "self" => "https://api.github.com/repos/pengwynn/octokit/contents/bin/some-symlink",
-        "html" => "https://github.com/pengwynn/octokit/blob/master/bin/some-symlink"
+        "git" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/452a98979c88e093d682cab404a3ec82babebb48",
+        "self" => "https://api.github.com/repos/octokit/octokit.rb/contents/bin/some-symlink",
+        "html" => "https://github.com/octokit/octokit.rb/blob/master/bin/some-symlink"
       },
     }
 
@@ -1561,6 +1721,7 @@ module GitHub
       "url" => "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
       "git_url" => "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
       "html_url" => "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+      "download_url"      => nil,
       "_links" => {
         "git" => "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
         "self" => "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
@@ -1575,13 +1736,14 @@ module GitHub
         "name" => "octokit.rb",
         "path" => "lib/octokit.rb",
         "sha" => "fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
-        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
-        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
-        "html_url" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+        "url" => "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit.rb",
+        "git_url" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+        "html_url" => "https://github.com/octokit/octokit.rb/blob/master/lib/octokit.rb",
+        "download_url"      => "https://raw.githubusercontent.com/octokit/octokit.rb/master/lib/octokit.rb",
         "_links" => {
-          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit.rb",
-          "git" => "https://api.github.com/repos/pengwynn/octokit/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
-          "html" => "https://github.com/pengwynn/octokit/blob/master/lib/octokit.rb",
+          "self" => "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit.rb",
+          "git" => "https://api.github.com/repos/octokit/octokit.rb/git/blobs/fff6fe3a23bf1c8ea0692b4a883af99bee26fd3b",
+          "html" => "https://github.com/octokit/octokit.rb/blob/master/lib/octokit.rb",
         },
       },
       {
@@ -1590,13 +1752,14 @@ module GitHub
         "name" => "octokit",
         "path" => "lib/octokit",
         "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-        "url" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
-        "git_url" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-        "html_url" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit",
+        "url" => "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit",
+        "git_url" => "https://api.github.com/repos/octokit/octokit.rb/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+        "html_url" => "https://github.com/octokit/octokit.rb/tree/master/lib/octokit",
+        "download_url"      => nil,
         "_links" => {
-          "self" => "https://api.github.com/repos/pengwynn/octokit/contents/lib/octokit",
-          "git" => "https://api.github.com/repos/pengwynn/octokit/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-          "html" => "https://github.com/pengwynn/octokit/tree/master/lib/octokit"
+          "self" => "https://api.github.com/repos/octokit/octokit.rb/contents/lib/octokit",
+          "git" => "https://api.github.com/repos/octokit/octokit.rb/git/trees/a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
+          "html" => "https://github.com/octokit/octokit.rb/tree/master/lib/octokit"
         },
       },
     ]
@@ -1618,21 +1781,21 @@ module GitHub
     }
 
     DEPLOYMENT_STATUS ||= {
-      "url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses/42",
+      "url" => "https://api.github.com/repos/octocat/example/deployments/42/statuses/1",
       "id" => 1,
       "state" => "success",
       "creator" => USER,
-      "description" => "Deploy request from hubot",
-      "target_url" => "https://gist.github.com/628b2736d379f",
+      "description" => "Deployment finished successfully.",
+      "target_url" => "https://example.com/deployment/42/output",
       "created_at" => "2012-07-20T01:19:13Z",
       "updated_at" => "2012-07-20T01:19:13Z",
-      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/1",
+      "deployment_url" => "https://api.github.com/repos/octocat/example/deployments/42",
       "repository_url" => "https://api.github.com/repos/octocat/example",
       "deployment" => {
-        "id" => 1,
+        "id" => 42,
         "ref" => "master",
         "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
-        "url" => "https://api.github.com/repos/octocat/example/deployments/1",
+        "url" => "https://api.github.com/repos/octocat/example/deployments/42",
         "task" => "deploy",
         "creator" => USER,
         "environment" => "production",
@@ -1640,7 +1803,7 @@ module GitHub
         "created_at" => "2012-07-20T01:19:13Z",
         "updated_at" => "2012-07-20T01:19:13Z",
         "description" => "Deploy request from hubot",
-        "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/1/statuses"
+        "statuses_url" => "https://api.github.com/repos/octocat/example/deployments/42/statuses"
       }
     }
 
@@ -1651,8 +1814,19 @@ module GitHub
       "target_url" => "https://ci.example.com/1000/output",
       "description" => "Build has completed successfully",
       "id" => 1,
-      "url" => "https://api.github.com/repos/octocat/example/statuses/1",
+      "url" => "https://api.github.com/repos/octocat/Hello-World/statuses/1",
       "context" => "continuous-integration/jenkins"
+    }
+
+    OTHER_SIMPLE_STATUS ||= {
+      "created_at" => "2012-08-20T01:19:13Z",
+      "updated_at" => "2012-08-20T01:19:13Z",
+      "state" => "success",
+      "target_url" => "https://ci.example.com/2000/output",
+      "description" => "Testing has completed successfully",
+      "id" => 2,
+      "url" => "https://api.github.com/repos/octocat/Hello-World/statuses/2",
+      "context" => "security/brakeman"
     }
 
     STATUS ||= SIMPLE_STATUS.merge(
@@ -1661,19 +1835,20 @@ module GitHub
 
     COMBINED_STATUS ||= {
       "state" => "success",
-      "name"  => "octocat/Hello-World",
       "sha"   => COMMIT["sha"],
       "total_count" => 2,
       "statuses" => [
-        SIMPLE_STATUS.merge("context" => "continuous-integration/jenkins"),
-        SIMPLE_STATUS.merge("context" => "security/brakeman")
+        SIMPLE_STATUS,
+        OTHER_SIMPLE_STATUS
       ],
+      "repository" => SIMPLE_REPO,
       "commit_url" => "https://api.github.com/repos/octocat/Hello-World/#{COMMIT["sha"]}",
-      "repository_url" => "https://api.github.com/repos/octocat/Hello-World"
+      "url" => "https://api.github.com/repos/octocat/Hello-World/#{COMMIT["sha"]}/status"
     }
 
     META ||= {
       :verifiable_password_authentication => true,
+      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :hooks => ['127.0.0.1/32'],
       :git => ['127.0.0.1/32'],
       :pages => [
@@ -1683,16 +1858,16 @@ module GitHub
     }
 
     BLOB ||= {
-      :content => "Content of the blob",
-      :encoding => "utf-8",
+      :content => "Q29udGVudCBvZiB0aGUgYmxvYg==\n",
+      :encoding => "base64",
       :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
-      :size => 100
+      :size => 19
     }
 
     BLOB_AFTER_CREATE ||= {
-      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
-      :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
+       'url'      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+       'sha' => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
     }
 
     CONTENT_CRUD ||= {
@@ -1704,6 +1879,7 @@ module GitHub
         "url" => "https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt",
         "html_url" => "https://github.com/octocat/Hello-World/blob/master/notes/hello.txt",
         "git_url" => "https://api.github.com/repos/octocat/Hello-World/git/blobs/95b966ae1c166bd92f8ae7d1c313e738c731dfc3",
+        "download_url"      => "https://raw.githubusercontent.com/octocat/HelloWorld/master/notes/hello.txt",
         "type" => "file",
         "_links" => {
           "self" => "https://api.github.com/repos/octocat/Hello-World/contents/notes/hello.txt",
@@ -1716,12 +1892,12 @@ module GitHub
         "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd",
         "html_url" => "https://github.com/octocat/Hello-World/git/commit/7638417db6d59f3c431d3e1f261cc637155684cd",
         "author" => {
-          "date" => "2010-04-10T14:10:01-07:00",
+          "date" => "2014-11-07T22:01:45Z",
           "name" => "Scott Chacon",
           "email" => "schacon@gmail.com"
         },
         "committer" => {
-          "date" => "2010-04-10T14:10:01-07:00",
+          "date" => "2014-11-07T22:01:45Z",
           "name" => "Scott Chacon",
           "email" => "schacon@gmail.com"
         },
@@ -1745,14 +1921,14 @@ module GitHub
       :repository => SIMPLE_REPO,
       :subject => {
         :title => "Greetings",
-        :url => "https://api.github.com/repos/pengwynn/octokit/issues/123",
-        :latest_comment_url => "https://api.github.com/repos/pengwynn/octokit/issues/comments/123",
+        :url => "https://api.github.com/repos/octokit/octokit.rb/issues/123",
+        :latest_comment_url => "https://api.github.com/repos/octokit/octokit.rb/issues/comments/123",
         :type => "Issue"
       },
       :reason => 'subscribed',
       :unread => true,
-      :updated_at => '2012-09-25T07:54:41-07:00',
-      :last_read_at => '2012-09-25T07:54:41-07:00',
+      :updated_at => '2014-11-07T22:01:45Z',
+      :last_read_at => '2014-11-07T22:01:45Z',
       :url => "https://api.github.com/notifications/threads/1"
     }
 
@@ -1833,7 +2009,10 @@ module GitHub
       :current_user_public_url => "https://github.com/defunkt",
       :current_user_url => "https://github.com/defunkt.private?token=abc123",
       :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
-      :current_user_organization_url => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      :current_user_organization_url => "",
+      :current_user_organization_urls => [
+        "https://github.com/organizations/github/defunkt.private.atom?token=abc123"
+      ],
       :_links => {
         :timeline => {
           :href => "https://github.com/timeline",
@@ -1856,9 +2035,15 @@ module GitHub
           :type => "application/atom+xml"
         },
         :current_user_organization => {
-          :href => "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
-          :type => "application/atom+xml"
-        }
+          :href => "",
+          :type => ""
+        },
+        :current_user_organizations => [
+          {
+            :href => "https://github.com/organizations/github/defunkt.private.atom?token=abc123",
+            :type => "application/atom+xml"
+          }
+        ]
       }
     }
 
@@ -2025,7 +2210,7 @@ module GitHub
           "client_id" => "12313412",
           "client_secret" => "kj123131132",
           "organization_name" => "Homestar Runners",
-          "organization_team" => "homestarrunners/owners"
+          "organization_team" => "homestarrunners/characters"
         },
         "smtp" => {
           "enabled" => true,
@@ -2129,6 +2314,148 @@ module GitHub
         "pretty-print" => "ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"
       }
     ]
+
+    LDAP_USER_UPDATE ||= {
+      'ldap_dn' => 'uid=asdf,ou=users,dc=github,dc=com'
+    }.merge(USER)
+
+    LDAP_TEAM_UPDATE ||= {
+      'ldap_dn' => 'cn=Enterprise Ops,ou=teams,dc=github,dc=com'
+    }.merge(TEAM)
+
+    LDAP_SYNC_CONFIRM ||= {
+      'status' => 'queued'
+    }
+
+    LICENSES ||= [
+      {"key"=>"agpl-3.0", "name"=>"GNU Affero GPL v3.0", "url"=>"https://api.github.com/licenses/agpl-3.0"},
+      {"key"=>"apache-2.0", "name"=>"Apache License 2.0", "url"=>"https://api.github.com/licenses/apache-2.0"},
+      {"key"=>"artistic-2.0", "name"=>"Artistic License 2.0", "url"=>"https://api.github.com/licenses/artistic-2.0"},
+      {"key"=>"bsd-2-clause", "name"=>"Simplified BSD", "url"=>"https://api.github.com/licenses/bsd-2-clause"},
+      {"key"=>"bsd-3-clause", "name"=>"New BSD", "url"=>"https://api.github.com/licenses/bsd-3-clause"},
+      {"key"=>"cc0", "name"=>"CC0 1.0 Universal", "url"=>"https://api.github.com/licenses/cc0"},
+      {"key"=>"epl-1.0", "name"=>"Eclipse Public License v1.0", "url"=>"https://api.github.com/licenses/epl-1.0"},
+      {"key"=>"gpl-2.0", "name"=>"GNU GPL v2.0", "url"=>"https://api.github.com/licenses/gpl-2.0"},
+      {"key"=>"gpl-3.0", "name"=>"GNU GPL v3.0", "url"=>"https://api.github.com/licenses/gpl-3.0"},
+      {"key"=>"isc", "name"=>"ISC license", "url"=>"https://api.github.com/licenses/isc"},
+      {"key"=>"lgpl-2.1", "name"=>"GNU LGPL v2.1", "url"=>"https://api.github.com/licenses/lgpl-2.1"},
+      {"key"=>"lgpl-3.0", "name"=>"GNU LGPL v3.0", "url"=>"https://api.github.com/licenses/lgpl-3.0"},
+      {"key"=>"mit", "name"=>"MIT License", "url"=>"https://api.github.com/licenses/mit"},
+      {"key"=>"mpl-2.0", "name"=>"Mozilla Public License 2.0", "url"=>"https://api.github.com/licenses/mpl-2.0"},
+      {"key"=>"unlicense", "name"=>"Public Domain (Unlicense)", "url"=>"https://api.github.com/licenses/unlicense"}
+    ]
+
+    MIT ||= {
+      "key"=>"mit",
+      "name"=>"MIT License",
+      "url"=>"https://api.github.com/licenses/mit",
+      "html_url"=>"http://choosealicense.com/licenses/mit/",
+      "featured"=>true,
+      "description"=>"A permissive license that is short and to the point. It lets people do anything with your code with proper attribution and without warranty.",
+      "category"=>"MIT",
+      "implementation"=>
+      "Create a text file (typically named LICENSE or LICENSE.txt) in the root of your source code and copy the text of the license into the file. Replace [year] with the current year and [fullname] with the name (or names) of the copyright holders.",
+      "required"=>["include-copyright"],
+      "permitted"=>["commercial-use", "modifications", "distribution", "sublicense", "private-use"],
+      "forbidden"=>["no-liability"],
+      "body"=>
+      "\n\nThe MIT License (MIT)\n\nCopyright (c) [year] [fullname]\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    }
+
+    LICENSEE ||= {
+      "id"=>23022377,
+      "name"=>"licensee",
+      "full_name"=>"benbalter/licensee",
+      "owner"=>{
+        "login"=>"benbalter",
+        "id"=>282759,
+        "avatar_url"=>"https://avatars.githubusercontent.com/u/282759?v=3",
+        "gravatar_id"=>"",
+        "url"=>"https://api.github.com/users/benbalter",
+        "html_url"=>"https://github.com/benbalter",
+        "followers_url"=>"https://api.github.com/users/benbalter/followers",
+        "following_url"=>"https://api.github.com/users/benbalter/following{/other_user}",
+        "gists_url"=>"https://api.github.com/users/benbalter/gists{/gist_id}",
+        "starred_url"=>"https://api.github.com/users/benbalter/starred{/owner}{/repo}",
+        "subscriptions_url"=>"https://api.github.com/users/benbalter/subscriptions",
+        "organizations_url"=>"https://api.github.com/users/benbalter/orgs",
+        "repos_url"=>"https://api.github.com/users/benbalter/repos",
+        "events_url"=>"https://api.github.com/users/benbalter/events{/privacy}",
+        "received_events_url"=>"https://api.github.com/users/benbalter/received_events",
+        "type"=>"User",
+        "site_admin"=>true
+      },
+      "private"=>false,
+      "html_url"=>"https://github.com/benbalter/licensee",
+      "description"=>"A Ruby Gem to detect under what license a project is distributed.",
+      "fork"=>false, "url"=>"https://api.github.com/repos/benbalter/licensee",
+      "forks_url"=>"https://api.github.com/repos/benbalter/licensee/forks",
+      "keys_url"=>"https://api.github.com/repos/benbalter/licensee/keys{/key_id}",
+      "collaborators_url"=>"https://api.github.com/repos/benbalter/licensee/collaborators{/collaborator}",
+      "teams_url"=>"https://api.github.com/repos/benbalter/licensee/teams",
+      "hooks_url"=>"https://api.github.com/repos/benbalter/licensee/hooks",
+      "issue_events_url"=>"https://api.github.com/repos/benbalter/licensee/issues/events{/number}",
+      "events_url"=>"https://api.github.com/repos/benbalter/licensee/events",
+      "assignees_url"=>"https://api.github.com/repos/benbalter/licensee/assignees{/user}",
+      "branches_url"=>"https://api.github.com/repos/benbalter/licensee/branches{/branch}",
+      "tags_url"=>"https://api.github.com/repos/benbalter/licensee/tags",
+      "blobs_url"=>"https://api.github.com/repos/benbalter/licensee/git/blobs{/sha}",
+      "git_tags_url"=>"https://api.github.com/repos/benbalter/licensee/git/tags{/sha}",
+      "git_refs_url"=>"https://api.github.com/repos/benbalter/licensee/git/refs{/sha}",
+      "trees_url"=>"https://api.github.com/repos/benbalter/licensee/git/trees{/sha}",
+      "statuses_url"=>"https://api.github.com/repos/benbalter/licensee/statuses/{sha}",
+      "languages_url"=>"https://api.github.com/repos/benbalter/licensee/languages",
+      "stargazers_url"=>"https://api.github.com/repos/benbalter/licensee/stargazers",
+      "contributors_url"=>"https://api.github.com/repos/benbalter/licensee/contributors",
+      "subscribers_url"=>"https://api.github.com/repos/benbalter/licensee/subscribers",
+      "subscription_url"=>"https://api.github.com/repos/benbalter/licensee/subscription",
+      "commits_url"=>"https://api.github.com/repos/benbalter/licensee/commits{/sha}",
+      "git_commits_url"=>"https://api.github.com/repos/benbalter/licensee/git/commits{/sha}",
+      "comments_url"=>"https://api.github.com/repos/benbalter/licensee/comments{/number}",
+      "issue_comment_url"=>"https://api.github.com/repos/benbalter/licensee/issues/comments{/number}",
+      "contents_url"=>"https://api.github.com/repos/benbalter/licensee/contents/{+path}",
+      "compare_url"=>"https://api.github.com/repos/benbalter/licensee/compare/{base}...{head}",
+      "merges_url"=>"https://api.github.com/repos/benbalter/licensee/merges",
+      "archive_url"=>"https://api.github.com/repos/benbalter/licensee/{archive_format}{/ref}",
+      "downloads_url"=>"https://api.github.com/repos/benbalter/licensee/downloads",
+      "issues_url"=>"https://api.github.com/repos/benbalter/licensee/issues{/number}",
+      "pulls_url"=>"https://api.github.com/repos/benbalter/licensee/pulls{/number}",
+      "milestones_url"=>"https://api.github.com/repos/benbalter/licensee/milestones{/number}",
+      "notifications_url"=>"https://api.github.com/repos/benbalter/licensee/notifications{?since,all,participating}",
+      "labels_url"=>"https://api.github.com/repos/benbalter/licensee/labels{/name}",
+      "releases_url"=>"https://api.github.com/repos/benbalter/licensee/releases{/id}",
+      "created_at"=>"2014-08-16T16:39:56Z",
+      "updated_at"=>"2015-02-26T18:58:36Z",
+      "pushed_at"=>"2015-02-26T19:09:18Z",
+      "git_url"=>"git://github.com/benbalter/licensee.git",
+      "ssh_url"=>"git@github.com:benbalter/licensee.git",
+      "clone_url"=>"https://github.com/benbalter/licensee.git",
+      "svn_url"=>"https://github.com/benbalter/licensee",
+      "homepage"=>"",
+      "size"=>687,
+      "stargazers_count"=>20,
+      "watchers_count"=>20,
+      "language"=>"Ruby",
+      "has_issues"=>true,
+      "has_downloads"=>true,
+      "has_wiki"=>false,
+      "has_pages"=>false,
+      "forks_count"=>6,
+      "mirror_url"=>nil,
+      "open_issues_count"=>2,
+      "forks"=>6,
+      "open_issues"=>2,
+      "watchers"=>20,
+      "default_branch"=>"master",
+      "master_branch"=>"master",
+      "license"=> {
+        "key"=>"mit",
+        "name"=>"MIT License",
+        "url"=>"https://api.github.com/licenses/mit"
+      },
+      "network_count"=>6,
+      "subscribers_count"=>6
+    }
   end
 end
 

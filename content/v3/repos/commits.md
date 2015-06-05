@@ -17,7 +17,7 @@ The Repo Commits API supports listing, viewing, and comparing commits in a repos
 
 Name | Type | Description
 -----|------|--------------
-`sha`|`string` | SHA or branch to start listing commits from.
+`sha`|`string` | SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`).
 `path`|`string` | Only commits containing this file path will be returned.
 `author`|`string` | GitHub login or email address by which to filter by commit author.
 `since`|`string` | Only commits after this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
@@ -48,11 +48,13 @@ patch formats.
 
     GET /repos/:owner/:repo/compare/:base...:head
 
-Note: Both `:base` and `:head` can be either branch names in `:repo` or branch names in other repositories in the same network as `:repo`. For the latter case, use the format `user:branch`:
+Both `:base` and `:head` must be branch names in `:repo`. To compare branches across other repositories in the same network as `:repo`, use the format `<USERNAME>:branch`. For example:
 
-    GET /repos/:owner/:repo/compare/user1:branchname...user2:branchname
+    GET /repos/:owner/:repo/compare/hubot:branchname...octocat:branchname
 
 ### Response
+
+The response from the API is equivalent to running the `git log base..head` command; however, commits are returned in reverse chronological order.
 
 <%= json :commit_comparison %>
 

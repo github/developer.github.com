@@ -7,19 +7,6 @@ title: Deployments | GitHub API
 * TOC
 {:toc}
 
-<div class="alert">
-  <p>
-    The Deployments API is currently available for developers to preview.
-    During the preview period, the API may change without advance notice.
-    Please see the <a href="/changes/2014-01-09-preview-the-new-deployments-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.cannonball-preview+json</pre>
-  </p>
-</div>
-
 Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
 GitHub then dispatches deployment events that external services can listen for
 and act on. This enables developers and organizations to build loosely-coupled
@@ -146,7 +133,7 @@ Users with `repo` or `repo_deployment` scopes can create a deployment for a give
 Name | Type | Description
 -----|------|--------------
 `ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
-`task`|`string`| **Required**. The named task to execute. e.g. `deploy` or `deploy:migrations`. Default: `deploy`
+`task`|`string`| Optional parameter to specify a task to execute, e.g. `deploy` or `deploy:migrations`. Default: `deploy`
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: `true`
 `required_contexts`|`Array`| Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts.
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`
@@ -164,9 +151,7 @@ chat networks.
   :description   => "Deploying my sweet branch"
 %>
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/deployments/1' %>
+<%= headers 201, :Location => get_resource(:deployment)['url'] %>
 <%= json :deployment %>
 
 #### Advanced Example
@@ -181,9 +166,7 @@ A more advanced example specifying required commit statuses and bypassing auto-m
   :required_contexts => ["ci/janky", "security/brakeman"]
 %>
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/deployments/2' %>
+<%= headers 201, :Location => get_resource(:deployment)['url'] %>
 <%= json :deployment %>
 
 ## Update a Deployment
@@ -235,7 +218,5 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/octocat/example/deployments/42/statuses/1' %>
+<%= headers 201, :Location => get_resource(:deployment_status)['url'] %>
 <%= json :deployment_status %>

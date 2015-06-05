@@ -173,8 +173,8 @@ Name | Description
 `user` | Grants read/write access to profile info only.  Note that this scope includes `user:email` and `user:follow`.
 `user:email`| Grants read access to a user's email addresses.
 `user:follow`| Grants access to follow or unfollow other users.
-`public_repo`| Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.
-`repo`| Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
+`public_repo`| Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public repositories and organizations. Also required for starring public repositories.
+`repo`| Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public and private repositories and organizations.
 `repo_deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, *without* granting access to the code.
 `repo:status`| Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses *without* granting access to the code.
 `delete_repo`| Grants access to delete adminable repositories.
@@ -183,6 +183,7 @@ Name | Description
 `read:repo_hook`| Grants read and ping access to hooks in public or private repositories.
 `write:repo_hook`| Grants read, write, and ping access to hooks in public or private repositories.
 `admin:repo_hook`| Grants read, write, ping, and delete access to hooks in public or private repositories.
+`admin:org_hook`| Grants read, write, ping, and delete access to organization hooks. **Note:** OAuth tokens will only be able to perform these actions on organization hooks which were created by the OAuth application. Personal access tokens will only be able to perform these actions on organization hooks created by a user.
 `read:org`| Read-only access to organization, teams, and membership.
 `write:org`| Publicize and unpublicize organization membership.
 `admin:org`| Fully manage organization, teams, and memberships.
@@ -235,7 +236,7 @@ registered with your application.
 
 ### Access denied
 
-If the user rejects access to your application, GItHub will redirect to
+If the user rejects access to your application, GitHub will redirect to
 the registered callback URL with the following parameters summarizing
 the error:
 
@@ -301,7 +302,27 @@ receive this error.
 To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
 and get a new code.
 
+## Directing users to review their access for an application
+
+Users can review and revoke their application authorizations from the [settings
+screen within GitHub][authorized-apps]. A user's organizations [control whether
+an application can access organization data][org-app-policies]. Integrators can
+deep link to the authorization information for their particular app to let their
+end users review these details.
+
+To build this link, you'll need your OAuth application's `client_id` you
+received from GitHub when you [registered the application][owned-apps].
+
+    https://github.com/settings/connections/applications/:client_id
+
+For tips on discovering the resources that your application can access for a
+user, be sure to check out our [guide][resource-discovery-guide].
+
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments
 [public keys]: /v3/users/keys/
+[authorized-apps]: https://github.com/settings/applications#authorized
+[owned-apps]: https://github.com/settings/developers
+[org-app-policies]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/
+[resource-discovery-guide]: /guides/discovering-resources-for-a-user/

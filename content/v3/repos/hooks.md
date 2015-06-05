@@ -1,5 +1,5 @@
 ---
-title: Webhooks | GitHub API
+title: Repository Webhooks | GitHub API
 ---
 
 # Webhooks
@@ -10,6 +10,8 @@ title: Webhooks | GitHub API
 The Repository Webhooks API allows repository admins to manage the post-receive
 hooks for a repository.  Webhooks can be managed using the JSON HTTP API,
 or the [PubSubHubbub API](#pubsubhubbub).
+
+If you would like to set up a single webhook to receive events from all of your organization's respositories, check out our [API documentation for Organization Webhooks][org-hooks].
 
 ## List hooks
 
@@ -33,14 +35,16 @@ or the [PubSubHubbub API](#pubsubhubbub).
 
     POST /repos/:owner/:repo/hooks
 
-**Note**: Repositories can have more than one webhook configured, but all other services can have at most one configuration. Creating hooks for a service that already has one configured will [update the existing hook](#edit-a-hook).
+**Note**: Repository service hooks (like email or Campfire) can have at most one configured at a time. Creating hooks for a service that already has one configured will [update the existing hook](#edit-a-hook).
+
+Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can share the same `config` as long as those webhooks do not have any `events` that overlap.
 
 ### Parameters
 
 Name | Type | Description
 -----|------|--------------
-`name`|`string` | **Required**. The name of the service that is being called. (See [/hooks](https://api.github.com/hooks) for the list of valid hook names.)
-`config`|`hash` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
+`name`|`string` | **Required**. Use `web` for a webhook or use the name of a valid service. (See <a href='https://api.github.com/hooks' data-proofer-ignore>/hooks</a> for the list of valid service names.)
+`config`|`object` | **Required**. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
 `events`|`array` | Determines what events the hook is triggered for.  Default: `["push"]`
 `active`|`boolean` | Determines whether the hook is actually triggered on pushes.
 
@@ -66,8 +70,7 @@ Here's how you can create a hook that posts payloads in JSON format:
 
 ### Response
 
-<%= headers 201,
-      :Location => 'https://api.github.com/repos/user/repo/hooks/1' %>
+<%= headers 201, :Location => get_resource(:hook)['url'] %>
 <%= json :hook %>
 
 ## Edit a hook
@@ -78,7 +81,7 @@ Here's how you can create a hook that posts payloads in JSON format:
 
 Name | Type | Description
 -----|------|--------------
-`config`|`hash` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
+`config`|`object` | Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the [github-services](https://github.com/github/github-services) repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON `true`/`false` values will be converted automatically.
 `events`|`array` | Determines what events the hook is triggered for.  This replaces the entire array of events.  Default: `["push"]`
 `add_events`|`array` | Determines a list of events to be added to the list of events that the Hook triggers for.
 `remove_events`|`array` | Determines a list of events to be removed from the list of events that the Hook triggers for.
@@ -136,7 +139,7 @@ In order for GitHub to send webhook payloads, your server needs to be accessible
 
 ### Webhook Headers
 
-GitHub will send along a few HTTP headers to differentiate between event types and payload identifiers.
+GitHub will send along several HTTP headers to differentiate between event types and payload identifiers.
 
 Name | Description
 -----|-----------|
@@ -205,10 +208,11 @@ Name | Type | Description
 
 
 [guid]: http://en.wikipedia.org/wiki/Globally_unique_identifier
-[pubsub]: http://code.google.com/p/pubsubhubbub/
+[pubsub]: https://github.com/pubsubhubbub/PubSubHubbub
 [post-receive]: http://help.github.com/post-receive-hooks/
 [ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
 [hub-signature]: https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77
-[pshb-secret]: http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html#authednotify
+[pshb-secret]: https://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html#authednotify
 [events-url]: /webhooks/#events
 [ping-event-url]: /webhooks/#ping-event
+[org-hooks]: /v3/orgs/hooks/

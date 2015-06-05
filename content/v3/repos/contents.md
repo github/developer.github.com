@@ -38,10 +38,15 @@ This method returns the contents of a file or directory in a repository.
 Files and symlinks support [a custom media type](#custom-media-types) for retrieving the raw content or rendered HTML (when supported).
 Directories and submodules do _not_ support custom media types.
 
-*Notes*:
+{{#tip}}
+
+**Note**:
 
 - To get a repository's contents recursively, you can [recursively get the tree](/v3/git/trees/).
+- This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees API](/v3/git/trees/#get-a-tree).
 - This API supports files up to 1 megabyte in size.
+
+{{/tip}}
 
 ### Parameters
 
@@ -57,6 +62,8 @@ Name | Type | Description
 
 ### Response if content is a directory
 
+The response will be an array of objects, one object for each item in the directory.
+
 <%= headers 200 %>
 <%= json :directory_content %>
 
@@ -69,7 +76,7 @@ In the next major version of the API, the type will be returned as "submodule".
 
 If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the API responds with the content of the file (in the [format shown above](#response-if-content-is-a-file)).
 
-Otherwise, the API responds with a hash describing the symlink itself:
+Otherwise, the API responds with an object describing the symlink itself:
 
 <%= headers 200 %>
 <%= json :symlink_content %>
@@ -101,9 +108,9 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `committer` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is an object containing
 information about the committer. Or, you can provide an `author` parameter, which
-is a hash containing information about the author.
+is an object containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated
@@ -149,9 +156,9 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `committer` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is an object containing
 information about the committer. Or, you can provide an `author` parameter, which
-is a hash containing information about the author.
+is an object containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated
@@ -198,9 +205,9 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `committer` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is an object containing
 information about the committer. Or, you can provide an `author` parameter, which
-is a hash containing information about the author.
+is an object containing information about the author.
 
 The `author` section is optional and is filled in with the `committer`
 information if omitted. If the `committer` information is omitted, the authenticated
@@ -259,7 +266,7 @@ Name | Type | Description
 To follow redirects with curl, use the `-L` switch:
 
 <pre class="terminal">
-curl -L https://api.github.com/repos/pengwynn/octokit/tarball > octokit.tar.gz
+curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed

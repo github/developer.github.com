@@ -22,7 +22,7 @@ types](#custom-media-types). You can read more about the use of media types in t
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull_comment) { |h| [h] } %>
 
 ## List comments in a repository
@@ -42,7 +42,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull_comment) { |h| [h] } %>
 
 ## Get a single comment
@@ -97,9 +97,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1" %>
+<%= headers 201, :Location => get_resource(:pull_comment)['url'] %>
 <%= json :pull_comment %>
 
 ## Edit a comment

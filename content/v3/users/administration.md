@@ -17,7 +17,7 @@ http(s)://<em>hostname</em>/api/v3
 
 ## Promote an ordinary user to a site administrator
 
-    PUT /user/:username/site_admin
+    PUT /users/:username/site_admin
 
 <%= fetch_content(:put_content_length) %>
 
@@ -27,7 +27,7 @@ http(s)://<em>hostname</em>/api/v3
 
 ## Demote a site administrator to an ordinary user
 
-    DELETE /user/:username/site_admin
+    DELETE /users/:username/site_admin
 
 You can demote any user account except your own.
 
@@ -37,7 +37,13 @@ You can demote any user account except your own.
 
 ## Suspend a user
 
-    PUT /user/:username/suspended
+{{#warning}}
+
+If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP servers](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap), this API is disabled and will return a `403` response. Users managed by an external account cannot be suspended via the API.
+
+{{/warning}}
+
+    PUT /users/:username/suspended
 
 You can suspend any user account except your own.
 
@@ -49,7 +55,13 @@ You can suspend any user account except your own.
 
 ## Unsuspend a user
 
-    DELETE /user/:username/suspended
+{{#warning}}
+
+If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP servers](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap), this API is disabled and will return a `403` response. Users managed by an external account cannot be unsuspended via the API.
+
+{{/warning}}
+
+    DELETE /users/:username/suspended
 
 ### Response
 

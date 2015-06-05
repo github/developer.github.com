@@ -12,6 +12,8 @@ read more about the use of media types in the API [here](/v3/media/).
 
 ## List issues
 
+<%= fetch_content(:prs_as_issues) %>
+
 List all issues across all the authenticated user's visible repositories
 including owned repositories, member repositories, and organization
 repositories:
@@ -44,6 +46,8 @@ Name | Type | Description
 
 ## List issues for a repository
 
+<%= fetch_content(:prs_as_issues) %>
+
     GET /repos/:owner/:repo/issues
 
 ### Parameters
@@ -67,18 +71,14 @@ Name | Type | Description
 
 ## Get a single issue
 
+<%= fetch_content(:prs_as_issues) %>
+
     GET /repos/:owner/:repo/issues/:number
 
 ### Response
 
 <%= headers 200 %>
 <%= json :full_issue %>
-
-<div class="alert">
-  <p>
-    <strong>Note</strong>: Every pull request is an issue, but not every issue is a pull request. If the issue is not a pull request, the response omits the <code>pull_request</code> attribute.
-  </p>
-</div>
 
 ## Create an issue
 
@@ -108,9 +108,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/user/repo/issues/1' %>
+<%= headers 201, :Location => get_resource(:full_issue)['url'] %>
 <%= json :full_issue %>
 
 ## Edit an issue
@@ -127,7 +125,7 @@ Name | Type | Description
 `body`|`string` | The contents of the issue.
 `assignee`|`string` | Login for the user that this issue should be assigned to.
 `state`|`string` | State of the issue. Either `open` or `closed`.
-`milestone`|`number` | Milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._
+`milestone`|`number` | Milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._
 `labels`|`array` of `strings` | Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise._
 
 

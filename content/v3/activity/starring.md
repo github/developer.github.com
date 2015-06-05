@@ -30,6 +30,15 @@ for more details.
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
+### Alternative response with star creation timestamps
+
+You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
+
+    Accept: application/vnd.github.v3.star+json
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:stargazer_with_timestamps) { |hash| [hash] } %>
+
 ## List repositories being starred
 
 List repositories being starred by a user.
@@ -47,11 +56,19 @@ Name | Type | Description
 `sort`|`string` | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). Default: `created`
 `direction`|`string` | One of `asc` (ascending) or `desc` (descending). Default: `desc`
 
-
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
+
+### Alternative response with star creation timestamps
+
+You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
+
+    Accept: application/vnd.github.v3.star+json
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:starred_repo) { |hash| [hash] } %>
 
 ## Check if you are starring a repository
 

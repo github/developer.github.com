@@ -188,7 +188,7 @@ redirects the user back to the application:
 
 However, you don't need to set up the entire web flow to begin working with OAuth tokens.
 An easier way to get a token is to [create a **personal access token**][personal token] via your
-[Application settings page][application settings]:
+[Personal access tokens settings page][tokens settings]:
 
 ![Personal Token selection](/images/personal_token.png)
 
@@ -196,7 +196,7 @@ Also, the [**Authorizations API**][authorizations api] makes it simple to use Ba
 to create an OAuth token. Try pasting and running the following command:
 
 <pre class="terminal">
-$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo"], "note": "getting-started"}' \
+$ curl -i -u &lt;your_username&gt; -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 
 HTTP/1.1 201 Created
@@ -205,7 +205,8 @@ Content-Length: 384
 
 {
   "scopes": [
-    "repo"
+    "repo",
+    "user"
   ],
   "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",
   "updated_at": "2012-11-14T14:04:24Z",
@@ -230,7 +231,9 @@ Next, let's look at the `scopes` we're sending over in this call. When creating
 a new token, we include an optional array of [_scopes_][scopes], or access
 levels, that indicate what information this token can access. In this case,
 we're setting up the token with _repo_ access, which grants access to read and
-write to private repositories. See [the scopes docs][scopes] for a full list of
+write to public and private repositories, and _user_ scope, which grants read
+and write access to public and private user profile data. See
+[the scopes docs][scopes] for a full list of
 scopes. You should **only** request scopes that your application actually needs,
 in order to not frighten users with potentially invasive actions. The `201`
 status code tells us that the call was successful, and the JSON returned
@@ -243,7 +246,7 @@ in the [X-GitHub-OTP request header][2fa header]:
 
 <pre class="terminal">
 $ curl -i -u &lt;your_username&gt; -H "X-GitHub-OTP: &lt;your_2fa_OTP_code&gt;" \
-    -d '{"scopes": ["repo"], "note": "getting-started"}' \
+    -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 </pre>
 
@@ -522,7 +525,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [scopes]: /v3/oauth/#scopes
 [repos-api]: /v3/repos/
 [pages]: http://pages.github.com
-[nanoc]: http://nanoc.stoneship.org/
+[nanoc]: http://nanoc.ws/
 [gitignore templates]: https://github.com/github/gitignore
 [issues-api]: /v3/issues/
 [link-header]: http://www.w3.org/wiki/LinkHeader
@@ -538,7 +541,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [2fa header]: /v3/auth/#working-with-two-factor-authentication
 [oauth section]: /guides/getting-started/#oauth
 [personal token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
-[application settings]: https://github.com/settings/applications
+[tokens settings]: https://github.com/settings/tokens
 [pagination]: /v3/#pagination
 [get repo]: /v3/repos/#get
 [create repo]: /v3/repos/#create

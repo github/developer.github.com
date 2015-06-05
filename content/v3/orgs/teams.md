@@ -17,7 +17,7 @@ OAuth users require the "read:org" [scope](/v3/oauth/#scopes).
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:team) { |h| [h] } %>
 
 ## Get team
@@ -41,6 +41,7 @@ In order to create a team, the authenticated user must be an owner of
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
+`description`|`string` | The description of the team.
 `repo_names`|`array` of `strings` | The repositories to add the team to.
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
 
@@ -48,6 +49,7 @@ Name | Type | Description
 
 <%= json \
   :name => 'new team',
+  :description => 'team description',
   :permission => 'push',
   :repo_names => ['github/dotfiles'] %>
 
@@ -68,12 +70,14 @@ the org that the team is associated with.
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
+`description`|`string` | The description of the team.
 `permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
 
 #### Example
 
 <%= json \
   :name => 'new team name',
+  :name => 'new team description',
   :permission => 'push' %>
 
 ### Response
@@ -101,10 +105,24 @@ member of the team.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
 ## Get team member
+
+### Deprecation notice
+
+<div class="alert">
+  <p>
+    The "Get team member" API (described below) is
+    <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for
+    removal in the next major version of the API.
+
+    We recommend using the
+    <a href="/v3/orgs/teams/#get-team-membership">Get team membership API</a>
+    instead. It allows you to get both active and pending memberships.
+  </p>
+</div>
 
 In order to get if a user is a member of a team, the authenticated user
 must be a member of the team.
@@ -120,6 +138,20 @@ must be a member of the team.
 <%= headers 404 %>
 
 ## Add team member
+
+### Deprecation notice
+
+<div class="alert">
+  <p>
+    The "Add team member" API (described below) is
+    <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for
+    removal in the next major version of the API.
+
+    We recommend using the
+    <a href="/v3/orgs/teams/#add-team-membership">Add team membership API</a>
+    instead. It allows you to invite new organization members to your teams.
+  </p>
+</div>
 
 In order to add a user to a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the organization that the team
@@ -161,6 +193,20 @@ one other team on the same organization, you will get this:
 
 ## Remove team member
 
+### Deprecation notice
+
+<div class="alert">
+  <p>
+    The "Remove team member" API (described below) is
+    <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for
+    removal in the next major version of the API.
+
+    We recommend using the
+    <a href="/v3/orgs/teams/#remove-team-membership">Remove team membership API</a>
+    instead. It allows you to remove both active and pending memberships.
+  </p>
+</div>
+
 In order to remove a user from a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the org that the team
 is associated with.
@@ -173,19 +219,6 @@ NOTE: This does not delete the user, it just removes them from the team.
 <%= headers 204 %>
 
 ## Get team membership
-
-<div class="alert">
-  <p>
-    The Team Memberships API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
-  </p>
-</div>
 
 In order to get a user's membership with a team, the authenticated user must be
 a member of the team or an owner of the team's organization.
@@ -207,19 +240,6 @@ a member of the team or an owner of the team's organization.
 <%= headers 404 %>
 
 ## Add team membership
-
-<div class="alert">
-  <p>
-    The Team Memberships API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
-  </p>
-</div>
 
 In order to add a membership between a user and a team, the authenticated user
 must have 'admin' permissions to the team or be an owner of the organization
@@ -246,7 +266,7 @@ member of the team.
 ### Response if user's membership with team is now pending
 
 <%= headers 200 %>
-<%= json(:active_team_membership) %>
+<%= json(:pending_team_membership) %>
 
 If you attempt to add an organization to a team, you will get this:
 
@@ -261,19 +281,6 @@ If you attempt to add an organization to a team, you will get this:
 %>
 
 ## Remove team membership
-
-<div class="alert">
-  <p>
-    The Team Memberships API is currently available for developers to preview.
-    During the preview period, the API may change without notice.
-    Please see the <a href="/changes/2014-08-05-team-memberships-api/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.the-wasp-preview+json</pre>
-  </p>
-</div>
 
 In order to remove a membership between a user and a team, the authenticated
 user must have 'admin' permissions to the team or be an owner of the
@@ -293,7 +300,7 @@ team.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
 ## Check if a team manages a repository {#get-team-repo}
@@ -359,7 +366,7 @@ authenticated user belongs. This method requires `user` or `repo`
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:full_team) { |h| [h] } %>
 
 [OAuth]: /v3/oauth/

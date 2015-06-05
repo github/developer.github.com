@@ -350,7 +350,7 @@ arguments to `drawTreemap` above, to get all the information to show up properly
 [D3.js]: http://d3js.org/
 [basics-of-authentication]: ../basics-of-authentication/
 [sinatra auth github]: https://github.com/atmos/sinatra_auth_github
-[Octokit]: https://github.com/pengwynn/octokit
+[Octokit]: https://github.com/octokit/octokit.rb
 [D3 mortals]: http://www.recursion.org/d3-for-mere-mortals/
 [D3 treemap]: http://bl.ocks.org/mbostock/4063582
 [language API]: https://developer.github.com/v3/repos/#list-languages

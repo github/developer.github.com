@@ -47,7 +47,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull) { |h| [h] } %>
 
 ## Get a single pull request
@@ -68,6 +68,12 @@ The `merge_commit_sha` attribute holds the SHA of the _test_ merge commit;
 however, this attribute is [deprecated](/v3/versions/#v3-deprecations) and is scheduled for
 removal in the next version of the API. The Boolean `mergeable` attribute will
 remain to indicate whether the pull request can be automatically merged.
+
+The value of the `mergeable` attribute can be `true`, `false`, or `null`. If 
+the value is `null`, this means that the mergeability hasn't been computed yet,
+and a background job was started to compute it. Give the job a few moments to
+complete, and then submit the request again. When the job is complete, the
+response will include a non-`null` value for the `mergeable` attribute.
 
 ### Alternative Response Formats
 
@@ -115,7 +121,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/user/repo/pulls/1" %>
+<%= headers 201, :Location => get_resource(:pull)['url'] %>
 <%= json :pull %>
 
 ## Update a pull request
@@ -149,7 +155,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:commit) { |h| [h] } %>
 
 Note: The response includes a maximum of 250 commits. If you are working with a pull request larger than that, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the pull request.
@@ -160,7 +166,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:file) { |h| [h] } %>
 
 ## Get if a pull request has been merged
@@ -184,6 +190,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 Name | Type | Description
 -----|------|-------------
 `commit_message`|`string`| The message that will be used for the merge commit
+`sha`|`string`| SHA that pull request head must match to allow merge
 
 
 ### Response if merge was successful
@@ -199,10 +206,21 @@ Name | Type | Description
 
 <%= headers 405 %>
 <%= json \
-  :sha     => nil,
-  :merged  => false,
-  :message => 'Failure reason'
+  :message => "Pull Request is not mergeable",
+  :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
 %>
+
+### Response if sha was provided and pull request head did not match
+
+<%= headers 409 %>
+<%= json \
+  :message => "Head branch was modified. Review and try the merge again.",
+  :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
+%>
+
+### Labels, assignees, and milestones
+
+Every pull request is an issue, but not every issue is a pull request. For this reason, "shared" actions for both features, like manipulating assignees, labels and milestones, are provided within [the Issues API](/v3/issues).
 
 ## Custom media types
 
@@ -213,3 +231,9 @@ use of media types in the API [here](/v3/media/).
     application/vnd.github.VERSION.text+json
     application/vnd.github.VERSION.html+json
     application/vnd.github.VERSION.full+json
+    application/vnd.github.VERSION.diff
+    application/vnd.github.VERSION.patch
+
+<a id="diff-error">
+
+If a diff is corrupt, <span class='not-enterprise'>please contact [GitHub Support](https://www.github.com/contact)</span><span class='enterprise-only'>contact your site administrator</span> to receive help. Be sure to include the repository name and pull request ID.

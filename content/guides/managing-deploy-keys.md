@@ -69,7 +69,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 #### Cons
 
 * Deploy keys only grant access to a single repository. More complex projects may have many repositories to pull to the same server.
-* The key has full read/write access to the repository.
+* Deploy keys always provide full read/write access to a repository.
 * Deploy keys are usually not protected by a passphrase, making the key easily accessible if the server is compromised.
 
 #### Setup
@@ -88,11 +88,11 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 
 ## Machine users
 
-If your server needs to access multiple repositories, you can choose to attach an SSH key to an automated user account. Since this account won't be used by a human, it's called a machine user. You can then [add the machine account as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.
+If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
 
 <div class="alert">
 <p>
-<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you make machine users for your server deploy scripts. Machine users are completely kosher.
+<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create machine users for your server deploy scripts. Machine users are completely kosher.
 </p>
 </div>
 
@@ -101,11 +101,10 @@ If your server needs to access multiple repositories, you can choose to attach a
 * Anyone with access to the repository and server has the ability to deploy the project.
 * No (human) users need to change their local SSH settings.
 * Multiple keys are not needed; one per server is adequate.
-* Organizations can give read-only access to their machine users.
 
 #### Cons
 
-* By default, the key has full read/write access to the repository if the repository belongs to a user account. You can add the machine user to a read-only team if it's accessing repositories in an organization.
+* Only organizations have access to create teams; therefore only organizations can use them to restrict machine users to read-only access.  Personal repositories always grant collaborators read/write access.
 * Machine user keys, like deploy keys, are usually not protected by a passphrase.
 
 #### Setup

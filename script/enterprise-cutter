@@ -1,55 +1,51 @@
 #!/usr/bin/env ruby
 
+# When releasing a new Enterprise version, the set of GitHub APIs available to that
+# verison do not match the set of documentation generally available on developer.github.com.
+# That's because the content on developer.github.com represents everything available to DotCom
+# users; since Enterprise is a "managed" product, it's cut off of DotCom at a certain
+# time, and the APIs remain frozen (until an organization upgrades their instance).
+#
+# This script takes two arguments: a date and a version number. Given a date, it
+# fetches the state of the site at that moment in time. It then copies all of that
+# content into a new folder called *enterprise/<version>*. Thus, we're able to preserve
+# the state of the API documentation for a given version at a given time.
+
 require 'fileutils'
 require 'tmpdir'
-require 'nokogiri'
 
-%x(git checkout gh-pages)
-%x(git pull origin gh-pages)
+if ARGV.length != 2
+  error = '''Error: Run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
+e.g. bundle exec script/enterprise-cutter 2014-07-08 11.10.340
+'''
+  abort error
+end
 
-%x(git checkout -b add-backfilled-versions)
+DATE = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
+VERSION = ARGV[1].dup # like, 11.10.340
 
-# run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
-# where [DATE] and [VERSION} are command-line arguments, defined below
-date = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
-version = ARGV[1].dup # like, 11.10.340
+BRANCH_NAME = "add-#{VERSION}-docs"
+
+Dir.glob('tasks/*.rake').each { |r| load r }
+
+setup
 
 temp_dir = Dir.mktmpdir
 begin
-  %x(git checkout `git rev-list -n 1 --before="#{date}" gh-pages`)
-  %x(cp -r * #{temp_dir})
-  %x(git checkout add-backfilled-versions)
-  version.sub!(/enterprise-/, '')
-  FileUtils.mkdir_p("enterprise/#{version}")
-  %x(cp -r #{temp_dir}/* enterprise/#{version})
+  %x(git checkout `git rev-list -n 1 --before="#{DATE}" gh-pages`)
+  `cp -r * #{temp_dir}`
+  `git checkout #{BRANCH_NAME}`
+  FileUtils.mkdir_p("enterprise/#{VERSION}")
+  `cp -r #{temp_dir}/* enterprise/#{VERSION}`
 
-  # we need to point links not to the root, but to the enterprise version root
-  # for assets and links
-  Dir.glob("enterprise/#{version}/**/*.html") do |html_file|
-    doc = Nokogiri::HTML(File.read(html_file))
-    doc.css('a').each do |a|
-      a['href'] = "/enterprise/#{version}#{a['href']}" if a['href'] =~ /^\//
-    end
-    doc.css('link').each do |link|
-      link['href'] = "/enterprise/#{version}#{link['href']}" if link['href'] =~ /^\//
-    end
-    doc.css('script').each do |script|
-      script['src'] = "/enterprise/#{version}#{script['src']}" if script['src'] =~ /^\//
-    end
-    doc.css('img').each do |img|
-      img['src'] = "/enterprise/#{version}#{img['src']}" if img['src'] =~ /^\//
-    end
-    File.open(html_file, 'w') { |file| file.write(doc.to_html) }
-  end
+  rewrite_content("enterprise/#{VERSION}")
 
-  Dir.glob("enterprise/#{version}/**/*.css") do |css_file|
-    contents = File.read(css_file)
-    contents.gsub!(/url\(\/shared/, "url(/enterprise/#{version}/shared")
-    File.open(css_file, 'w') { |file| file.write(contents) }
-  end
-
-  %x(git add enterprise)
-  %x(git commit -m "Added enterprise-#{version} files")
+  `rm -rf enterprise/#{VERSION}/enterprise`
+  `rm -rf enterprise/#{VERSION}/output`
+  `git add enterprise`
+  `git commit -m "Added enterprise-#{VERSION} files"`
 ensure
   FileUtils.remove_entry_secure temp_dir
 end
+
+puts "\n\nOkay! Feel free to `git push #{BRANCH_NAME}` if you like."

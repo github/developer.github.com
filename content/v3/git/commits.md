@@ -31,9 +31,9 @@ Name | Type | Description
 
 ### Optional Parameters
 
-You can provide an additional `committer` parameter, which is a hash containing
+You can provide an additional `committer` parameter, which is an object containing
 information about the committer. Or, you can provide an `author` parameter, which
-is a hash containing information about the author.
+is an object containing information about the author.
 
 The `committer` section is optional and will be filled with the `author`
 data if omitted. If the `author` section is omitted, it will be filled
@@ -58,6 +58,5 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd" %>
+<%= headers 201, :Location => get_resource(:new_commit)['url'] %>
 <%= json :new_commit %>

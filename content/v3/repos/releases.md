@@ -9,18 +9,22 @@ title: Releases | GitHub API
 
 ## List releases for a repository
 
-Information about published releases are available to everyone. 
+{{#tip}}
+
+This returns a list of releases, which does not include regular
+Git tags that have not been associated with a release.
+To get a list of Git tags, use the [Repository Tags API][repo tags api].
+
+{{/tip}}
+
+Information about published releases are available to everyone.
 Only users with push access will receive listings for draft releases.
 
     GET /repos/:owner/:repo/releases
 
-**Note:** This returns a list of releases, which does not include regular
-Git tags that have not been associated with a release.
-(To get a list of Git tags, use the [Repository Tags API][repo tags api].)
-
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:release) { |h| [h] } %>
 
 ## Get a single release
@@ -29,11 +33,39 @@ Git tags that have not been associated with a release.
 
 ### Response
 
+{{#tip}}
+
+<a id="releases-hypermedia-url"/>
+
+**Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://developer.github.com/v3/#hypermedia).
+
+{{/tip}}
+
 <%= headers 200 %>
 <%= json :release %>
 
-**Note:** This returns an `"upload_url"` hypermedia relation that provides the 
-[endpoint that creates release assets](#upload-a-release-asset).
+## Get the latest release
+
+View the latest published release for the repository.
+
+    GET /repos/:owner/:repo/releases/latest
+
+### Response
+
+<%= headers 200 %>
+<%= json :release %>
+
+## Get a release by tag name
+
+Get a release with the specified tag. Users must have push access to the repository to view draft releases.
+
+    GET /repos/:owner/:repo/releases/tags/:tag
+
+### Response
+
+<%= headers 200 %>
+<%= json :release %>
+
 
 ## Create a release
 
@@ -65,8 +97,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-  :Location => 'https://api.github.com/repos/octocat/Hello-World/releases/1' %>
+<%= headers 201, :Location => get_resource(:created_release)['url'] %>
 <%= json(:created_release) %>
 
 ## Edit a release
@@ -118,23 +149,21 @@ Users with push access to the repository can delete a release.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:release_asset) { |h| [h] } %>
 
 ## Upload a release asset
 
-This is a unique endpoint. The request's domain changes from `"api.github.com"`
-to **`"uploads.github.com"`**. You need to use an HTTP client which supports
-[SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this
-endpoint.
-
-The asset data is expected in its raw binary form, rather than JSON. 
-Everything else about the endpoint is the same. 
-Pass your authentication exactly the same as the rest of the API. 
-
-    POST https://uploads.github.com/repos/:owner/:repo/releases/:id/assets?name=foo.zip
-
+This endpoint makes use of [a Hypermedia relation](/v3/#hypermedia) to determine which URL to access.
 This endpoint is provided by a URI template in [the release's API response](#get-a-single-release).
+<span class="not-enterprise">You need to use an HTTP client which supports
+<a href="http://en.wikipedia.org/wiki/Server_Name_Indication">SNI</a> to make calls to this endpoint.</span>
+
+The asset data is expected in its raw binary form, rather than JSON.
+Everything else about the endpoint is the same as the rest of the API. For example, you'll still need to pass your authentication to be able to upload an asset.
+
+    POST https://<upload_url>/repos/:owner/:repo/releases/:id/assets?name=foo.zip
+
 
 ### Input
 
@@ -145,7 +174,7 @@ Name | Type | Description
 -----|------|--------------
 `Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: `"application/zip"`. For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
 `name`|`string` | **Required**. The file name of the asset. This should be set in the URI query parameter.
-
+`label`|`string` | An alternate short description of the asset.  Used in place of the filename.
 
 Send the raw binary content of the asset as the request body.
 

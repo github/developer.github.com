@@ -31,7 +31,7 @@ For [Repositories](/v3/repos/#get), the v3 media type omits the `master_branch` 
 
 ### User Emails JSON
 
-For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of hashes (instead of an array of strings).
+For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of objects (instead of an array of strings).
 
 ## v3 deprecations
 
@@ -58,6 +58,9 @@ The recommendations below will help you prepare your application for the next ma
 
 1. Method: /repos/:owner/:repo/hooks/:id/test
 : Recommendation: Use **/repos/:owner/:repo/hooks/:id/tests** (plural) instead.
+
+1. Method: /teams/:id/members/:username
+: Recommendation: Use [Get Team Membership](/v3/orgs/teams/#get-team-membership), [Add Team Membership](/v3/orgs/teams/#add-team-membership), and [Remove Team Membership](/v3/orgs/teams/#remove-team-membership) instead.
 
 1. Query parameters when POSTing to /repos/:owner/:repo/forks
 : Recommendation: Use JSON to POST to this method instead.
@@ -94,10 +97,26 @@ The recommendations below will help you prepare your application for the next ma
 1. User attribute: plan["collaborators"]
 : Recommendation: Do not use this attribute. It is obsolete.
 
+1. User attribute: gravatar_id
+: Recommendation: Use **avatar_url** instead.
+
+1. Feed attribute: current_user_organization_url
+: Recommendation: Use **current_user_organization_urls** instead.
+
+1. Feed attribute: current_user_organization
+: Recommendation: Use **current_user_organizations** instead.
+
 1. Pagination parameters `top` and `sha` for method: /repos/:owner/:repo/commits
 : Recommendation: When fetching [the list of commits for a repository](/v3/repos/commits/#list-commits-on-a-repository)
   use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,
   `top`, and `sha`.
+
+1. Authorization attribute: token
+: Recommendation: This attribute will return an empty string in the majority of
+  the Authorizations API responses. Please see
+  [the deprecation blog post](/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/)
+  and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
+  for full details.
 
 # beta (Deprecated) {#beta}
 
@@ -116,7 +135,7 @@ The [beta API](/v3) is deprecated. Its current functionality is stable and uncha
   </p>
   <p>
     We will eventually retire the beta version, but we have no official
-    retirement date to annouce at the moment. When the time comes, rest assured
+    retirement date to announce at the moment. When the time comes, rest assured
     that we'll announce the retirement with plenty of notice.
   </p>
 </div>

@@ -229,7 +229,7 @@ Key | Type | Description
 
 ## IssueCommentEvent
 
-Triggered when an [issue comment](/v3/issues/comments/) is created.
+Triggered when an [issue comment](/v3/issues/comments/) is created on an issue or pull request.
 
 ### Event name
 

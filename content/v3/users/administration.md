@@ -36,7 +36,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 201 %>
-<%= json :full_user %>
+<%= json :user %>
 
 ## Promote an ordinary user to a site administrator
 

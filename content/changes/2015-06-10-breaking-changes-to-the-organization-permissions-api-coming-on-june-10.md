@@ -24,7 +24,7 @@ The migration period we started in [January][org-permissions-finalization] offer
 
 ### More flexible options for the "List your repositories" API
 
-In addition to the changes we've been previewing, we're offering an improved way to filter the repositories returned by the [List your repositories][list-your-repos] API. We've added two new parameters that supercede the old `type` parameter. `type` will continue to function as normal, but if you'd like to learn how to take advantage of these new parameters, check out [the API documentation](list-your-repos).
+In addition to the changes we've been previewing, we're offering an improved way to filter the repositories returned by the [List your repositories][list-your-repos] API. We've added two new parameters that supercede the old `type` parameter. `type` will continue to function as normal, but if you'd like to learn how to take advantage of these new parameters, check out [the API documentation][list-your-repos].
 
 ### Migration period
 

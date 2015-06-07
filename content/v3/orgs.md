@@ -19,7 +19,7 @@ With the new Organization Permissions API (described below), this method will on
 
 <div class="alert">
   <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will <a href="/changes/2015-06-10-breaking-changes-to-the-organization-permissions-api-coming-on-june-10.md/">soon</a> apply to all API consumers. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
+    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will <a href="/changes/2015-06-10-breaking-changes-to-the-organization-permissions-api-coming-on-june-10/">soon</a> apply to all API consumers. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
   </p>
 
   <p>
@@ -45,7 +45,7 @@ With the new Organization Permissions API (described below), this method will on
 
 <div class="alert">
   <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will <a href="/changes/2015-06-10-breaking-changes-to-the-organization-permissions-api-coming-on-june-10.md/">soon</a> apply to all API consumers. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
+    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will <a href="/changes/2015-06-10-breaking-changes-to-the-organization-permissions-api-coming-on-june-10/">soon</a> apply to all API consumers. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
   </p>
 
   <p>

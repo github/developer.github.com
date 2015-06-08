@@ -24,7 +24,7 @@ list the authenticated user's organization-owned repositories.
 
 <div class="alert">
   <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will <a href="/changes/2015-06-10-breaking-changes-to-the-organization-permissions-api-coming-on-june-10/">soon</a> apply to all API consumers. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
+    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">beginning June 24, 2015</a>. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
   </p>
 
   <p>
@@ -39,11 +39,9 @@ list the authenticated user's organization-owned repositories.
 
 Name | Type | Description
 -----|------|--------------
-`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`<br /><br />Will cause an error if used in the same request as **visibility** or **affiliation**.
+`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
 `sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
 `direction`|`string` | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`; otherwise `desc`
-`visibility` | `string` | Can be one of `all`, `public`, or `private`. Default: `all`<br /><br />**This parameter requires a custom media type to be specified. Please see more in the alert above.**
-`affiliation` | `string` | Comma-separated list of values. Can include:<br />* `owner`: Repositories that are owned by the authenticated user.<br />* `collaborator`: Repositories that the user has been added to as a collaborator.<br />* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.<br /><br />Default: `owner,collaborator,organization_member`<br /><br />**This parameter requires a custom media type to be specified. Please see more in the alert above.**
 
 
 ## List user repositories

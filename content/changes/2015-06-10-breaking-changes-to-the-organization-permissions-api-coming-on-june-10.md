@@ -5,7 +5,7 @@ created_at: 2015-06-10
 author_name: jakeboxer
 ---
 
-Back in [January][org-permissions-finalization], we encouraged developers to update their applications to prepare for [upcoming API changes][org-permissions-preview] related to managing organization members and repositories. Today, we're announcing that these changes will become part of the official API on **June 24**.
+Back in [January][org-permissions-finalization], we encouraged developers to update their applications to prepare for [upcoming API changes][org-permissions-preview] related to managing organization members and repositories. On **June 24**, these changes will become official parts of the GitHub API v3.
 
 If your application relies on any of the affected functionality (described below), be sure to **update your code before June 24** to account for these changes.
 

@@ -5,7 +5,7 @@ created_at: 2015-06-10
 author_name: jakeboxer
 ---
 
-Back in January, we [encouraged developers to update their applications][org-permissions-finalization] to prepare for [upcoming API changes][org-permissions-preview] related to managing organization members and repositories. On **June 24**, these changes will become official parts of the GitHub API v3.
+Back in January, we [encouraged developers to update their applications][org-permissions-finalization] to prepare for [upcoming API changes][org-permissions-preview] related to managing organization members and repositories. On **June 24**, these changes will become official parts of GitHub API v3.
 
 If your application relies on any of the affected functionality (described below), be sure to **update your code before June 24** to account for these changes.
 
@@ -20,7 +20,7 @@ If your application uses any of the following APIs, then you are affected by thi
 
 If your application uses these APIs, we urge you to update your application as soon as possible. (Read [December's announcement][org-permissions-preview] for more details on the changes.)
 
-The migration period we started in [January][org-permissions-finalization] offered a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.
+The migration period we started in [January][org-permissions-finalization] offered a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.
 
 ### More flexible options for the "List your repositories" API
 

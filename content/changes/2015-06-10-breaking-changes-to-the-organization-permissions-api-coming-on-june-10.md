@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Breaking changes to the Organization Permissions API coming on June 10
+title: Organization permissions changes coming on June 24
 created_at: 2015-06-10
 author_name: jakeboxer
 ---

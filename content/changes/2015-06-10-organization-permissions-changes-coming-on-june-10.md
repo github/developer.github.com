@@ -18,7 +18,7 @@ If your application uses any of the following APIs, then you are affected by thi
 - The [List your organizations][list-your-organizations] API
 - The [List user organizations][list-user-organizations] API
 
-If your application uses these APIs, we urge you to update your application as soon as possible. (Read [December's announcement][org-permissions-preview] for more details on the changes.)
+If your application uses these APIs, we urge you to update your application as soon as possible. (Read [December's announcement][org-permissions-preview] for full details on the changes.)
 
 The migration period we started in [January][org-permissions-finalization] offered a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.
 

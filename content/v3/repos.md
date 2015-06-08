@@ -39,11 +39,9 @@ list the authenticated user's organization-owned repositories.
 
 Name | Type | Description
 -----|------|--------------
-`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`<br /><br />Will cause an error if used in the same request as **visibility** or **affiliation**.
+`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
 `sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
 `direction`|`string` | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`; otherwise `desc`
-`visibility` | `string` | Can be one of `all`, `public`, or `private`. Default: `all`<br /><br />**This parameter requires a custom media type to be specified. Please see more in the alert above.**
-`affiliation` | `string` | Comma-separated list of values. Can include:<br />* `owner`: Repositories that are owned by the authenticated user.<br />* `collaborator`: Repositories that the user has been added to as a collaborator.<br />* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.<br /><br />Default: `owner,collaborator,organization_member`<br /><br />**This parameter requires a custom media type to be specified. Please see more in the alert above.**
 
 
 ## List user repositories

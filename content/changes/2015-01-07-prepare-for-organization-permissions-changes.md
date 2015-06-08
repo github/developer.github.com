@@ -35,4 +35,4 @@ We want to make these updates as smooth as possible for everyone, and we hope th
 [list-user-organizations]: /v3/orgs/#list-user-organizations
 [list-your-organizations]: /v3/orgs/#list-your-organizations
 [contact]: https://github.com/contact?form[subject]=Organization+Permissions+API
-[2015-06-10-update]: /changes/2015-06-10-breaking-changes-to-the-organization-permissions-api-coming-on-june-10/
+[2015-06-10-update]: /changes/2015-06-10-organization-permissions-changes-coming-on-june-24/

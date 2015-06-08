@@ -9,7 +9,7 @@ author_name: jakeboxer
 
 Last month, we [released a preview][org-permissions-preview] of several API changes related to managing organization members and repositories. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to **update your code before June 24** to account for these changes.
 
-### Breaking changes coming on June 24
+## Breaking changes coming on June 24
 
 If your application uses any of the following APIs, then you are affected by this change:
 
@@ -22,7 +22,7 @@ If your application uses these APIs, we urge you to update your application as s
 
 Starting today, we're offering a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.
 
-### Migration period
+## Migration period
 
 During the migration period, you can opt-in to these changes using the following custom media type in the `Accept` header:
 

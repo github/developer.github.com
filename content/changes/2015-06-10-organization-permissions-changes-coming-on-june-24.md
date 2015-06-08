@@ -20,11 +20,11 @@ If your application uses any of the following APIs, then you are affected by thi
 
 If your application uses these APIs, we urge you to update your application as soon as possible. (Read [December's announcement][org-permissions-preview] for full details on the changes.)
 
-The migration period we started in [January][org-permissions-finalization] offered a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.
+In January, we [announced a migration period][org-permissions-finalization] allowing API consumers to opt in to these changes. If you haven't already opted in to these changes, you still do so as described below. On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.
 
 ## Migration period
 
-During the final days of the migration period, you can opt-in to these changes using the following custom media type in the `Accept` header:
+During these final days of the migration period, you can opt in to these changes using the following custom media type in the `Accept` header:
 
     application/vnd.github.moondragon+json
 

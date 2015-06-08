@@ -9,7 +9,7 @@ Back in January, we [encouraged developers to update their applications][org-per
 
 If your application relies on any of the affected functionality (described below), be sure to **update your code before June 24** to account for these changes.
 
-### Breaking changes coming on June 24
+## Breaking changes coming on June 24
 
 If your application uses any of the following APIs, then you are affected by this change:
 
@@ -22,11 +22,11 @@ If your application uses these APIs, we urge you to update your application as s
 
 The migration period we started in [January][org-permissions-finalization] offered a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.
 
-### More flexible options for the "List your repositories" API
+## More flexible options for the "List your repositories" API
 
 In addition to the changes we've been previewing, we're offering an improved way to filter the repositories returned by the [List your repositories][list-your-repos] API. We've added two new parameters that supercede the old `type` parameter. `type` will continue to function as normal, but if you'd like to learn how to take advantage of these new parameters, check out [the API documentation][list-your-repos].
 
-### Migration period
+## Migration period
 
 During the final days of the migration period, you can opt-in to these changes using the following custom media type in the `Accept` header:
 

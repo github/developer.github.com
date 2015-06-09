@@ -35,6 +35,18 @@ With the new Organization Permissions API (described below), this method will on
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org) { |h| [h] } %>
 
+## List all organizations
+
+This provides a dump of every organization, in the order that they signed up for
+GitHub.
+
+    GET /organizations
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:org) {|h| [h] } %>
+
 ## List user organizations
 
 List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.

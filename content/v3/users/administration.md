@@ -122,7 +122,7 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:all_keys) { |public_key, deploy_key| \
-  [public_key, deploy_key.merge("id" => "2", "url" => "https://api.github.com/user/keys/2")] \
+  [public_key, deploy_key.merge("id" => "2", "url" => "https://api.github.com/repos/octocat/Hello-World/keys/2")] \
 } %>
 
 

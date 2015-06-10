@@ -88,6 +88,13 @@ repositories.
 {{#enterprise-only}}
 If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
 you will be able to list all repositories including private repositories.
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`visibility`|`string`| To include private repositories as well set to `all`. Default: `public`
+
 {{/enterprise-only}}
 
     GET /repositories

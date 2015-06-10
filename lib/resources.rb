@@ -219,11 +219,19 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "verified"   => true,
       "created_at" => "2014-12-10T15:53:42Z"
 
+    PUBLIC_KEY_DETAIL ||= PUBLIC_KEY.merge \
+      "user_id"        => 232,
+      "repository_id"  => nil
+
     DEPLOY_KEY ||= SIMPLE_PUBLIC_KEY.merge \
       "url"        => "https://api.github.com/repos/octocat/Hello-World/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
       "created_at" => "2014-12-10T15:53:42Z"
+
+    DEPLOY_KEY_DETAIL ||= PUBLIC_KEY.merge \
+      "user_id"        => nil,
+      "repository_id"  => 2333
 
     SIMPLE_REPO ||= {
       "id"               => 1296269,

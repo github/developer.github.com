@@ -146,4 +146,11 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
  ]
 %>
 
+## Delete a public key
+
+  DELETE /admin/keys/1
+
+### Response
+
+<%= headers 204 %>
 

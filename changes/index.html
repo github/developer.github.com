@@ -41,6 +41,56 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">
+  <h2 class="title">
+  <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">Breaking changes to organization permissions coming on June 24</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 10, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer">
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+    <p>Back in January, we <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">encouraged developers to update their applications</a> to prepare for <a href="/changes/2014-12-08-organization-permissions-api-preview/">upcoming API changes</a> related to managing organization members and repositories. In order to support the upcoming <a href="https://github.com/blog/2020-improved-organization-permissions/">improvements to organization permissions</a>, these changes will become official parts of GitHub API v3 on <strong>June 24</strong>.</p>
+
+<p>If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before June 24</strong> to account for these changes.</p>
+
+<h2 id="breaking-changes-coming-on-june-24">Breaking changes coming on June 24</h2>
+
+<p>If your application uses any of the following APIs, then you are affected by this change:</p>
+
+<ul>
+  <li>APIs for managing your organization’s admins through the Owners team</li>
+  <li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API</li>
+  <li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API</li>
+  <li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API</li>
+</ul>
+
+<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-organization-permissions-api-preview/">December’s announcement</a> for full details on the changes.)</p>
+
+<p>In January, we <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">announced a migration period</a> allowing API consumers to opt in to these changes. If you haven’t already opted in to these changes, you still do so as described below. On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.</p>
+
+<h2 id="migration-period">Migration period</h2>
+
+<p>During these final days of the migration period, you can opt in to these changes using the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.moondragon+json
+</code></pre>
+
+<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2015-05-26-repository-redirects-are-coming/">
   <h2 class="title">
   <a href="/changes/2015-05-26-repository-redirects-are-coming/">Repository redirects are coming to API v3 in July</a>
@@ -563,9 +613,11 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-    <p>Last month, we <a href="/changes/2014-12-08-organization-permissions-api-preview/">released a preview</a> of several API changes related to managing organization members and repositories. Today, we’re finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before February 24</strong> to account for these changes.</p>
+    <p><strong>UPDATE (2015-06-10):</strong> As <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">announced on June 10</a>, these changes will become an official part of GitHub API v3 on June 24. (This post originally announced that these changes would come to GitHub API v3 on February 24.)</p>
 
-<h3 id="breaking-changes-coming-on-february-24">Breaking changes coming on February 24</h3>
+<p>Last month, we <a href="/changes/2014-12-08-organization-permissions-api-preview/">released a preview</a> of several API changes related to managing organization members and repositories. Today, we’re finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before June 24</strong> to account for these changes.</p>
+
+<h2 id="breaking-changes-coming-on-june-24">Breaking changes coming on June 24</h2>
 
 <p>If your application uses any of the following APIs, then you are affected by this change:</p>
 
@@ -578,9 +630,9 @@ OAuth integrations with more confidence.</p>
 
 <p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-organization-permissions-api-preview/">last month’s announcement</a> for more details on the changes.)</p>
 
-<p>Starting today, we’re offering a migration period allowing applications to opt in to these changes (as described below). On February 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
+<p>Starting today, we’re offering a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
 
-<h3 id="migration-period">Migration period</h3>
+<h2 id="migration-period">Migration period</h2>
 
 <p>During the migration period, you can opt-in to these changes using the following custom media type in the <code>Accept</code> header:</p>
 
@@ -2674,35 +2726,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 </div>
 
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
-
-</div>
-
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -2751,6 +2774,35 @@ begin receiving those too.</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
 
+
+</div>
+
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
 
 </div>
 
@@ -3866,6 +3918,35 @@ curl -u defunkt https://api.github.com/feeds
 
 </div>
 
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+  <h2 class="title">
+  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
+      <a href="https://github.com/ymendel">ymendel</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
+<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
+<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
+
+<p>Happy editing!</p>
+
+
+</div>
+
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
@@ -3900,35 +3981,6 @@ but we can’t wait to see what others can do with this information.</p>
 </ul>
 
 <p>Enjoy!</p>
-
-</div>
-
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel">
-      <a href="https://github.com/ymendel">ymendel</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
-
 
 </div>
 
@@ -5117,6 +5169,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">Breaking changes to organization permissions coming on June 24<br /><span class="date">June 10, 2015</span></a></li>
+
   <li><a href="/changes/2015-05-26-repository-redirects-are-coming/">Repository redirects are coming to API v3 in July<br /><span class="date">May 26, 2015</span></a></li>
 
   <li><a href="/changes/2015-04-21-organization-hooks-api-finalized/">Organization Webhooks API finalized<br /><span class="date">April 21, 2015</span></a></li>
@@ -5130,8 +5184,6 @@ old API functionality.</s>
   <li><a href="/changes/2015-02-24-more-time-to-prepare-for-the-breaking-changes-to-organization-permissions/">More time to prepare for the breaking changes to organization permissions<br /><span class="date">February 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-02-20-migration-period-removing-authorizations-token/">Breaking changes to Authorizations API responses on April 20<br /><span class="date">February 19, 2015</span></a></li>
-
-  <li><a href="/changes/2015-02-18-new-releases-api-methods/">New Releases API methods<br /><span class="date">February 18, 2015</span></a></li>
 
 </ul>
 

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Releases API is Official</title>
+  <title>Breaking changes to organization permissions coming on June 24</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,50 +40,53 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-11-04-releases-api-is-official/">
+      <div class="change" id="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">
 <h2 class="title">
-  <a href="/changes/2013-11-04-releases-api-is-official/">Releases API is Official</a>
+  <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">Breaking changes to organization permissions coming on June 24</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    November 4, 2013
+    June 10, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie"/>
-      <a href="https://github.com/technoweenie">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer"/>
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
   </li>
 </ul>
 </div>
 
 
-<p>Hot on the heels of the <a href="http://developer.github.com/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">Search API</a>, the <a href="/v3/repos/releases/">Releases API</a>
-is now officially part of GitHub API v3.  We now consider it stable for
-production use.  </p>
+<p>Back in January, we <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">encouraged developers to update their applications</a> to prepare for <a href="/changes/2014-12-08-organization-permissions-api-preview/">upcoming API changes</a> related to managing organization members and repositories. In order to support the upcoming <a href="https://github.com/blog/2020-improved-organization-permissions/">improvements to organization permissions</a>, these changes will become official parts of GitHub API v3 on <strong>June 24</strong>.</p>
 
-<h3 id="preview-media-type-no-longer-needed">Preview Media Type No Longer Needed</h3>
+<p>If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before June 24</strong> to account for these changes.</p>
 
-<p>If you used the Releases API during the preview period, you needed to provide a custom media type in the <code>Accept</code> header:</p>
+<h2 id="breaking-changes-coming-on-june-24">Breaking changes coming on June 24</h2>
 
-<pre><code>application/vnd.github.manifold-preview+json
+<p>If your application uses any of the following APIs, then you are affected by this change:</p>
+
+<ul>
+  <li>APIs for managing your organization’s admins through the Owners team</li>
+  <li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API</li>
+  <li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API</li>
+  <li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API</li>
+</ul>
+
+<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-organization-permissions-api-preview/">December’s announcement</a> for full details on the changes.)</p>
+
+<p>In January, we <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">announced a migration period</a> allowing API consumers to opt in to these changes. If you haven’t already opted in to these changes, you still do so as described below. On June 24, these changes will become official parts of GitHub API v3. At that time, these changes will apply to all API consumers.</p>
+
+<h2 id="migration-period">Migration period</h2>
+
+<p>During these final days of the migration period, you can opt in to these changes using the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.moondragon+json
 </code></pre>
 
-<p>Now that the preview period has ended, you no longer need to pass this custom media type.</p>
-
-<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<h3 id="onward">Onward!</h3>
-
-<p>Thanks again to everyone that tried out the Releases API during the preview period.
-We got some great feedback, and we are already discussing additions to the API.</p>
-
-<p>We can’t wait to see what you ship!</p>
+<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
 
 
 </div>

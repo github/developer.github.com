@@ -65,7 +65,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 
 * Anyone with access to the repository and server has the ability to deploy the project.
 * Users don't have to change their local SSH settings.
-* Deploy keys can be given read only or read/write access to a repository.
+* Deploy keys can read and write by default, but can be made read only.
 
 #### Cons
 

@@ -32,6 +32,7 @@ We want to make these updates as smooth as possible for everyone, and we hope th
 
 [org-permissions-finalization]: /changes/2015-01-07-prepare-for-organization-permissions-changes/
 [org-permissions-preview]: /changes/2014-12-08-organization-permissions-api-preview/
+[direct-org-membership-blog-post]: https://github.com/blog/2020-improved-organization-permissions/
 [list-your-repos]: /v3/repos/#list-your-repositories
 [list-user-organizations]: /v3/orgs/#list-user-organizations
 [list-your-organizations]: /v3/orgs/#list-your-organizations

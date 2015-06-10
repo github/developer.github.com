@@ -31,7 +31,7 @@ title: Deploy Keys | GitHub API
 
 ### Input
 
-<%= json :title => "octocat@octomac", :key => "ssh-rsa AAA..." %>
+<%= json :title => "octocat@octomac", :key => "ssh-rsa AAA...", :read_only => true %>
 
 ### Response
 

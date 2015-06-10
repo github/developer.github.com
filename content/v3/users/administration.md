@@ -121,30 +121,10 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
-<%= json \
-  [
-    {
-      "id" => 1,
-      "key" => "ssh-rsa AAA...",
-      "url" => "https =>//api.github.com/user/keys/1",
-      "title" => "octocat@octomac",
-      "verified" => true,
-      "created_at" => "2014-12-10T15 =>53 =>42Z",
-      "user_id" => 232,
-      "repository_id" => nil
-    },
-    {
-      "id" => "2",
-      "key" => "ssh-rsa AAA...",
-      "url" => "https =>//api.github.com/user/keys/2",
-      "title" => "octocat2@octomac",
-      "verified" => true,
-      "created_at" => "2014-12-10T15 =>53 =>42Z",
-      "user_id" => nil,
-      "repository_id" => 2333
-    }
- ]
-%>
+<%= json(:all_keys) { |public_key, deploy_key| \
+  [public_key, deploy_key.merge("id" => "2", "url" => "https://api.github.com/user/keys/2")] \
+} %>
+
 
 ## Delete a public key
 

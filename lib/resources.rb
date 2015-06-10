@@ -233,6 +233,8 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "user_id"        => nil,
       "repository_id"  => 2333
 
+    ALL_KEYS ||= [PUBLIC_KEY_DETAIL, DEPLOY_KEY_DETAIL]
+
     SIMPLE_REPO ||= {
       "id"               => 1296269,
       "owner"            => USER,

@@ -1847,10 +1847,14 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     }
 
     META ||= {
+      :verifiable_password_authentication => true,
+      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :hooks => ['127.0.0.1/32'],
       :git => ['127.0.0.1/32'],
-      :verifiable_password_authentication => true,
-      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
+      :pages => [
+        "192.30.252.153/32",
+        "192.30.252.154/32"
+      ]
     }
 
     BLOB ||= {

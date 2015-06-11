@@ -29,7 +29,17 @@ title: Deploy Keys | GitHub API
 
     POST /repos/:owner/:repo/keys
 
-### Input
+### Parameters
+
+Name | Type | Description
+-----|------|-------------
+`title`|`string`|A name for the key.
+`key`|`string`|The contents of the key.
+`read_only`|`boolean`|If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.
+
+#### Example
+
+Here's how you can create a read only deploy key:
 
 <%= json :title => "octocat@octomac", :key => "ssh-rsa AAA...", :read_only => true %>
 

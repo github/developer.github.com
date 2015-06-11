@@ -66,14 +66,18 @@ X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"verifiable_password_authentication"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"github_services_sha"</span><span class="p">:</span> <span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
   <span class="s2">"hooks"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"127.0.0.1/32"</span>
   <span class="p">],</span>
   <span class="s2">"git"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s2">"127.0.0.1/32"</span>
   <span class="p">],</span>
-  <span class="s2">"verifiable_password_authentication"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"github_services_sha"</span><span class="p">:</span> <span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span>
+  <span class="s2">"pages"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"192.30.252.153/32"</span><span class="p">,</span>
+    <span class="s2">"192.30.252.154/32"</span>
+  <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="body">Body</h3>
@@ -87,6 +91,16 @@ X-RateLimit-Remaining: 4999</code></pre>
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td><code>verifiable_password_authentication</code></td>
+      <td><code>boolean</code></td>
+      <td>Whether authentication with username and password is supported. (GitHub Enterprise instances using CAS or OAuth for authentication will return <code>false</code>. Features like <a href="/v3/auth/#via-username-and-password">Basic Authentication with a username and password</a>, <a href="https://help.github.com/articles/sudo-mode">sudo mode</a>, and <a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a> are not supported on these servers.)</td>
+    </tr>
+    <tr>
+      <td><code>github_services_sha</code></td>
+      <td><code>string</code></td>
+      <td>The currently-deployed SHA of <a href="https://github.com/github/github-services"><code>github-services</code></a>.</td>
+    </tr>
     <tr>
       <td><code>hooks</code></td>
       <td>
@@ -102,14 +116,11 @@ X-RateLimit-Remaining: 4999</code></pre>
       <td>An Array of IP addresses in CIDR format specifying the Git servers for GitHub.com.</td>
     </tr>
     <tr>
-      <td><code>verifiable_password_authentication</code></td>
-      <td><code>boolean</code></td>
-      <td>Whether authentication with username and password is supported. (GitHub Enterprise instances using CAS or OAuth for authentication will return <code>false</code>. Features like <a href="/v3/auth/#via-username-and-password">Basic Authentication with a username and password</a>, <a href="https://help.github.com/articles/sudo-mode">sudo mode</a>, and <a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a> are not supported on these servers.)</td>
-    </tr>
-    <tr>
-      <td><code>github_services_sha</code></td>
-      <td><code>string</code></td>
-      <td>The currently-deployed SHA of <a href="https://github.com/github/github-services"><code>github-services</code></a>.</td>
+      <td><code>pages</code></td>
+      <td>
+<code>array</code> of <code>strings</code>
+</td>
+      <td>An Array of IP addresses in CIDR format specifying the A records for <a href="https://pages.github.com/">GitHub Pages</a>.</td>
     </tr>
   </tbody>
 </table>

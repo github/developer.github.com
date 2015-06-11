@@ -2,13 +2,49 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2015-06-10T00:00:00Z</updated>
+  <updated>2015-06-11T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2015-06-11:/changes/2015-06-11-pages-a-records/</id>
+    <title type="html">GitHub Pages' A Records Added to Meta API</title>
+    <published>2015-06-11T00:00:00Z</published>
+    <updated>2015-06-11T00:00:00Z</updated>
+    <author>
+      <name>leereilly</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-06-11-pages-a-records/" />
+    <content type="html">&lt;p&gt;The &lt;a href="/v3/meta/"&gt;Meta API&lt;/a&gt; now includes the A record IP addresses for &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/meta
+&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript highlight"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="s2"&gt;"verifiable_password_authentication"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s2"&gt;"github_services_sha"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"23c6105183b626cf74c045f6d53af7a178bfdb4c"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s2"&gt;"hooks"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;"192.30.252.0/22"&lt;/span&gt;
+  &lt;span class="p"&gt;],&lt;/span&gt;
+  &lt;span class="s2"&gt;"git"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;"192.30.252.0/22"&lt;/span&gt;
+  &lt;span class="p"&gt;],&lt;/span&gt;
+  &lt;span class="s2"&gt;"pages"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s2"&gt;"192.30.252.153/32"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s2"&gt;"192.30.252.154/32"&lt;/span&gt;
+  &lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These IP addresses are used to &lt;a href="https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider/"&gt;configure A records with your DNS provider for GitHub Pages&lt;/a&gt;. These addresses have changed a few times in the past. This API always provides the current addresses so that you can automate the process of keeping your DNS records up to date.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Pages+A+Records+Added+to+API"&gt;get in touch&lt;/a&gt;. We’ll be happy to help.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2015-06-10:/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/</id>
     <title type="html">Breaking changes to organization permissions coming on June 24</title>
@@ -1237,43 +1273,6 @@ $ curl -H "Authorization: token [yours]" \
 &lt;p&gt;We’ve also added a &lt;code&gt;task&lt;/code&gt; attribute to the deployment resource. The &lt;code&gt;task&lt;/code&gt; attribute allows you to specify tasks other than just pushing code. Popular deployment tools like &lt;a href="http://capistranorb.com/"&gt;capistrano&lt;/a&gt; and &lt;a href="http://www.fabfile.org/"&gt;fabric&lt;/a&gt; support named tasks to do things like running schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-08-05:/changes/2014-08-05-team-memberships-api/</id>
-    <title type="html">We're changing the way you add new members to your organization</title>
-    <published>2014-08-05T00:00:00Z</published>
-    <updated>2014-08-05T00:00:00Z</updated>
-    <author>
-      <name>jakeboxer</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-08-05-team-memberships-api/" />
-    <content type="html">&lt;p&gt;Today, we’re announcing a change to the way organization owners add new members to their organization.&lt;/p&gt;
-
-&lt;p&gt;Previously, if you were an organization owner, you could use the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; endpoint to add any GitHub user to any team on your organization without any sort of approval from them. Now, we’re increasing user security by sending &lt;a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization"&gt;invitations&lt;/a&gt; to users when they’re added to teams on organizations that they aren’t yet a part of.&lt;/p&gt;
-
-&lt;p&gt;With this change, if you use the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; endpoint to add a user to a team and that user isn’t already on another team in your organization, the request will fail.&lt;/p&gt;
-
-&lt;h3 id="the-new-team-memberships-api"&gt;The new Team Memberships API&lt;/h3&gt;
-
-&lt;p&gt;You should change all your &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; requests to use the new &lt;a href="/v3/orgs/teams/#add-team-membership"&gt;add team membership&lt;/a&gt; endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team’s organization, that user will be sent an invitation via email.&lt;/p&gt;
-
-&lt;p&gt;Unlike the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; endpoint, a successful request to the &lt;a href="/v3/orgs/teams/#add-team-membership"&gt;add team membership&lt;/a&gt; endpoint does &lt;em&gt;not&lt;/em&gt; guarantee that the user is now a member of the team. If you’re trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out &lt;a href="/v3/activity/events/types/#teamaddevent"&gt;TeamAddEvent&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id="preview-period"&gt;Preview period&lt;/h3&gt;
-
-&lt;p&gt;We’re making the new Team Memberships API (and the breaking changes to the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; API) available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
-
-&lt;p&gt;While these new APIs are in their preview period, you’ll need to provide the following custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.the-wasp-preview+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We expect the preview period to last 30-60 days. At the end of the preview period, the Team Memberships API will become an official component of GitHub API v3, as will the &lt;a href="/v3/orgs/teams/#add-team-member"&gt;add team member&lt;/a&gt; API’s breaking changes.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;
 
 </content>
   </entry>

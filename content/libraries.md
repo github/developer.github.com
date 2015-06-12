@@ -183,3 +183,9 @@ covers the entire API.
 
 [dispatchgithub]: https://github.com/andreazevedo/dispatch-github
 [hubcat]: https://github.com/softprops/hubcat
+
+## Shell
+
+* [ok.sh][ok.sh]
+
+[ok.sh]: https://github.com/whiteinge/ok.sh

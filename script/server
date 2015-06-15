@@ -9,4 +9,9 @@ echo "*********************************************************************"
 echo ""
 echo ""
 
-bundle exec guard
+if [ "--enterprise" == "$1" ]; then
+  echo '~~~~ Enterprise Mode Activated ~~~~'
+  ENTERPRISE=true bundle exec guard
+else
+  bundle exec guard
+fi

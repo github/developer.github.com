@@ -39,7 +39,7 @@ Name | Type | Description
 
 #### Example
 
-Here's how you can create a read only deploy key:
+Here's how you can create a read-only deploy key:
 
 <%= json :title => "octocat@octomac", :key => "ssh-rsa AAA...", :read_only => true %>
 

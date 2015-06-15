@@ -15,6 +15,13 @@ OAuth users require the "read:org" [scope](/v3/oauth/#scopes).
 
     GET /orgs/:org/teams
 
+{{#enterprise-only}}
+
+If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
+you will be able to list all teams for the organization.
+
+{{/enterprise-only}}
+
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
@@ -100,6 +107,13 @@ the org that the team is associated with.
 
 In order to list members in a team, the authenticated user must be a
 member of the team.
+
+{{#enterprise-only}}
+
+If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
+you will be able to list all members for the team.
+
+{{/enterprise-only}}
 
     GET /teams/:id/members
 
@@ -297,6 +311,13 @@ team.
 ## List team repos
 
     GET /teams/:id/repos
+
+{{#enterprise-only}}
+
+If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
+you will be able to list all repositories for the team.
+
+{{/enterprise-only}}
 
 ### Response
 

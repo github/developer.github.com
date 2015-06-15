@@ -1,5 +1,5 @@
-class EnterprisePurgeFilter < Nanoc::Filter
-  identifier :enterprise_purge_filter
+class EnterpriseOnlyFilter < Nanoc::Filter
+  identifier :enterprise_only_filter
   type :text
 
   ENTERPRISE_START_STRING = '{{#enterprise-only}}'

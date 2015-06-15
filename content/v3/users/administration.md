@@ -62,6 +62,25 @@ Name | Type | Description
   :url => "https://api.github.com/user/1"
 %>
 
+## Create an impersonation OAuth token
+
+  POST /admin/users/:user_id/authorizations
+
+### Parameters
+
+Name | Type | Description
+---- | ---- | -------------
+`scopes`|`array` | A list of [scopes](/v3/oauth/#scopes)
+
+### Response
+
+<%= headers 201 %>
+<%= json(:oauth_access)
+
+## Delete an impersonation OAuth token
+
+  DELETE /admin/users/:user_id/authorizations
+
 ## Promote an ordinary user to a site administrator
 
     PUT /users/:username/site_admin

@@ -75,7 +75,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 201 %>
-<%= json(:oauth_access)
+<%= json(:oauth_access) %>
 
 ## Delete an impersonation OAuth token
 

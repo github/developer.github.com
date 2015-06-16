@@ -9,29 +9,11 @@ title: Repositories | GitHub API
 
 ## List your repositories
 
-List repositories for the authenticated user.
+List repositories that are accessible to the authenticated user.
 
-Note that this currently does not include repositories owned by organizations
-which the user can access. You can
-[list your organizations](/v3/orgs/#list-your-organizations) and
-[list organization repositories](/v3/repos/#list-organization-repositories)
-separately.
-
-With the new Organization Permissions API (described below), this *will* include
-repositories owned by organizations which the user can access. If you provide
-the custom media type (described below), you won't need to use other APIs to
-list the authenticated user's organization-owned repositories.
-
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">beginning June 24, 2015</a>. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
-  </p>
-</div>
+This includes repositories owned by the authenticated user, repositories that
+the authenticated user has been added as a collaborator to, and repositories
+that the authenticated user has access to through an organization membership.
 
     GET /user/repos
 

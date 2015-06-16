@@ -1,7 +1,7 @@
 ---
 kind: change
 title: List all organizations
-created_at: 2015-06-09
+created_at: 2015-06-16
 author_name: keavy
 ---
 

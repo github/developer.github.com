@@ -217,13 +217,15 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "url"        => "https://api.github.com/user/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
-      "created_at" => "2014-12-10T15:53:42Z"
+      "created_at" => "2014-12-10T15:53:42Z",
+      "read_only"  => true
 
     DEPLOY_KEY ||= SIMPLE_PUBLIC_KEY.merge \
       "url"        => "https://api.github.com/repos/octocat/Hello-World/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
-      "created_at" => "2014-12-10T15:53:42Z"
+      "created_at" => "2014-12-10T15:53:42Z",
+      "read_only"  => true
 
     SIMPLE_REPO ||= {
       "id"               => 1296269,

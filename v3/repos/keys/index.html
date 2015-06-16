@@ -81,7 +81,8 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/keys/1"</span><span class="p">,</span>
     <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
     <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span>
+    <span class="s2">"read_only"</span><span class="p">:</span> <span class="kc">true</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -102,7 +103,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/keys/1"</span><span class="p">,</span>
   <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
   <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span>
+  <span class="s2">"read_only"</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create">Add a new deploy key</h2>
@@ -110,11 +112,43 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /repos/:owner/:repo/keys
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3 id="parameters">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>title</code></td>
+      <td><code>string</code></td>
+      <td>A name for the key.</td>
+    </tr>
+    <tr>
+      <td><code>key</code></td>
+      <td><code>string</code></td>
+      <td>The contents of the key.</td>
+    </tr>
+    <tr>
+      <td><code>read_only</code></td>
+      <td><code>boolean</code></td>
+      <td>If <code>true</code>, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="example">Example</h4>
+
+<p>Here’s how you can create a read-only deploy key:</p>
 
 <pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
   <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span>
+  <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
+  <span class="s2">"read_only"</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -130,7 +164,8 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/keys/1"</span><span class="p">,</span>
   <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
   <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span>
+  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span>
+  <span class="s2">"read_only"</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="edit">Edit a deploy key</h2>

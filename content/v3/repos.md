@@ -81,11 +81,14 @@ Name | Type | Description
 
 This provides a dump of every public repository, in the order that they were created.
 
+    GET /repositories
+
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of
 repositories.
 
 {{#enterprise-only}}
+
 If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
 you will be able to list all repositories including private repositories.
 

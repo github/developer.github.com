@@ -37,8 +37,7 @@ With the new Organization Permissions API (described below), this method will on
 
 ## List all organizations
 
-This provides a dump of every organization, in the order that they signed up for
-GitHub.
+This endpoint lists every organization in the order that they were created on GitHub.
 
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of

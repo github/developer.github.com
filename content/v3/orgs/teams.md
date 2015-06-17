@@ -15,6 +15,13 @@ OAuth users require the "read:org" [scope](/v3/oauth/#scopes).
 
     GET /orgs/:org/teams
 
+{{#enterprise-only}}
+
+<%= fetch_content(:if_site_admin) %>
+you will be able to list all teams for the organization.
+
+{{/enterprise-only}}
+
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
@@ -100,6 +107,13 @@ the org that the team is associated with.
 
 In order to list members in a team, the authenticated user must be a
 member of the team.
+
+{{#enterprise-only}}
+
+<%= fetch_content(:if_site_admin) %>
+you will be able to list all members for the team.
+
+{{/enterprise-only}}
 
     GET /teams/:id/members
 
@@ -245,16 +259,22 @@ In order to add a membership between a user and a team, the authenticated user
 must have 'admin' permissions to the team or be an owner of the organization
 that the team is associated with.
 
-If the user is already a part of the team's organization (meaning they're on at
+<p class="not-enterprise">If the user is already a part of the team's organization (meaning they're on at
 least one other team in the organization), this endpoint will add the user to
-the team.
+the team.</p>
 
-If the user is completely unaffiliated with the team's organization (meaning
+<p class="not-enterprise">If the user is completely unaffiliated with the team's organization (meaning
 they're on none of the organization's teams), this endpoint will send an
 invitation to the user via email. This newly-created membership will be in the
 "pending" state until the user accepts the invitation, at which point the
 membership will transition to the "active" state and the user will be added as a
-member of the team.
+member of the team.</p>
+
+{{#enterprise-only}}
+
+This endpoint will add the user to the team.
+
+{{/enterprise-only}}
 
     PUT /teams/:id/memberships/:username
 
@@ -297,6 +317,13 @@ team.
 ## List team repos
 
     GET /teams/:id/repos
+
+{{#enterprise-only}}
+
+<%= fetch_content(:if_site_admin) %>
+you will be able to list all repositories for the team.
+
+{{/enterprise-only}}
 
 ### Response
 

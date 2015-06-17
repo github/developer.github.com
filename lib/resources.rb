@@ -121,6 +121,7 @@ module GitHub
       end
 
       CONTENT ||= {
+        'IF_SITE_ADMIN' => "If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,",
         'LATEST_ENTERPRISE_VERSION' => '2.2',
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "ORG_HOOK_CONFIG_HASH" =>
@@ -219,11 +220,21 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "verified"   => true,
       "created_at" => "2014-12-10T15:53:42Z"
 
+    PUBLIC_KEY_DETAIL ||= PUBLIC_KEY.merge \
+      "user_id"        => 232,
+      "repository_id"  => nil
+
     DEPLOY_KEY ||= SIMPLE_PUBLIC_KEY.merge \
       "url"        => "https://api.github.com/repos/octocat/Hello-World/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
       "created_at" => "2014-12-10T15:53:42Z"
+
+    DEPLOY_KEY_DETAIL ||= PUBLIC_KEY.merge \
+      "user_id"        => nil,
+      "repository_id"  => 2333
+
+    ALL_KEYS ||= [PUBLIC_KEY_DETAIL, DEPLOY_KEY_DETAIL]
 
     SIMPLE_REPO ||= {
       "id"               => 1296269,

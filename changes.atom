@@ -2,13 +2,48 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2015-06-11T00:00:00Z</updated>
+  <updated>2015-06-17T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2015-06-17:/changes/2015-06-17-organizations-endpoint/</id>
+    <title type="html">List all organizations</title>
+    <published>2015-06-17T00:00:00Z</published>
+    <updated>2015-06-17T00:00:00Z</updated>
+    <author>
+      <name>keavy</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-06-17-organizations-endpoint/" />
+    <content type="html">&lt;p&gt;We’ve added a &lt;a href="/v3/orgs#list-all-organizations"&gt;new API method&lt;/a&gt; to list all organizations:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/organizations
+
+[
+  {
+    "login": "github",
+    "id": 9919,
+    "url": "https://api.github.com/orgs/github",
+    "repos_url": "https://api.github.com/orgs/github/repos",
+    "events_url": "https://api.github.com/orgs/github/events",
+    "members_url": "https://api.github.com/orgs/github/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/github/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=3",
+    "description": "GitHub, the company."
+  },
+  ...
+]
+&lt;/pre&gt;
+
+&lt;p&gt;As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Organizations"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2015-06-11:/changes/2015-06-11-pages-a-records/</id>
     <title type="html">GitHub Pages' A Records Added to Meta API</title>
@@ -1244,35 +1279,6 @@ and is the only reliable way to find a GitHub user’s avatar.&lt;/p&gt;
 &lt;p&gt;We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become official components of GitHub API v3.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-08-15:/changes/2014-08-15-deployments-api-changes/</id>
-    <title type="html">New features for the Deployments API preview</title>
-    <published>2014-08-15T00:00:00Z</published>
-    <updated>2014-08-15T00:00:00Z</updated>
-    <author>
-      <name>atmos</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-08-15-deployments-api-changes/" />
-    <content type="html">&lt;p&gt;We’ve added two new features to the &lt;a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/"&gt;Deployments API preview&lt;/a&gt;: the ability to query deployments and a new &lt;code&gt;task&lt;/code&gt; attribute for different types of deployment tasks.&lt;/p&gt;
-
-&lt;h2 id="api-changes"&gt;API changes&lt;/h2&gt;
-
-&lt;p&gt;You can now search for deployments via query parameters to the &lt;a href="https://developer.github.com/v3/repos/deployments/#list-deployments"&gt;listing endpoint&lt;/a&gt;. You can filter on &lt;code&gt;sha&lt;/code&gt;, &lt;code&gt;ref&lt;/code&gt;, &lt;code&gt;task&lt;/code&gt;, and &lt;code&gt;environment&lt;/code&gt;. This makes it easier to answer questions like “when was the last time someone deployed to staging?”&lt;/p&gt;
-
-&lt;pre class="terminal"&gt;
-$ curl -H "Authorization: token [yours]" \
-       https://api.github.com/repos/octocat/my-repo/deployments?environment=staging
-&lt;/pre&gt;
-
-&lt;h2 id="new-attribute"&gt;New attribute&lt;/h2&gt;
-
-&lt;p&gt;We’ve also added a &lt;code&gt;task&lt;/code&gt; attribute to the deployment resource. The &lt;code&gt;task&lt;/code&gt; attribute allows you to specify tasks other than just pushing code. Popular deployment tools like &lt;a href="http://capistranorb.com/"&gt;capistrano&lt;/a&gt; and &lt;a href="http://www.fabfile.org/"&gt;fabric&lt;/a&gt; support named tasks to do things like running schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
 
 </content>
   </entry>

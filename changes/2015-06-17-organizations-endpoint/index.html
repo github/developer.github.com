@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Create an OAuth authorization for an app</title>
+  <title>List all organizations</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -40,53 +40,48 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-12-06-create-authorization-for-app/">
+      <div class="change" id="/changes/2015-06-17-organizations-endpoint/">
 <h2 class="title">
-  <a href="/changes/2012-12-06-create-authorization-for-app/">Create an OAuth authorization for an app</a>
+  <a href="/changes/2015-06-17-organizations-endpoint/">List all organizations</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 6, 2012
+    June 17, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn"/>
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/keavy.png" alt="Avatar for keavy"/>
+      <a href="https://github.com/keavy">keavy</a>
   </li>
 </ul>
 </div>
 
 
-<p>The <a href="/v3/oauth_authorizations/#oauth-authorizations-api">Authorizations API</a> is an easy way to create an OAuth
-authorization using Basic Auth. Just POST your desired scopes and optional
-note and you get a token back:</p>
+<p>We’ve added a <a href="/v3/orgs#list-all-organizations">new API method</a> to list all organizations:</p>
 
 <pre class="terminal">
-    curl -u pengwynn -d '{"scopes": ["user", "gist"]}' \
-         https://api.github.com/authorizations
+$ curl https://api.github.com/organizations
+
+[
+  {
+    "login": "github",
+    "id": 9919,
+    "url": "https://api.github.com/orgs/github",
+    "repos_url": "https://api.github.com/orgs/github/repos",
+    "events_url": "https://api.github.com/orgs/github/events",
+    "members_url": "https://api.github.com/orgs/github/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/github/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=3",
+    "description": "GitHub, the company."
+  },
+  ...
+]
 </pre>
 
-<p>This call creates a token for the authenticated user tied to a special “API”
-OAuth application.</p>
-
-<p>We now support creating tokens for <em>your own OAuth application</em> by passing your
-twenty character <code>client_id</code> and forty character <code>client_secret</code> as found in
-the settings page for your OAuth application.</p>
-
-<pre class="terminal">
-    curl -u pengwynn -d '{ \
-                          "scopes": ["user", "gist"], \
-                          "client_id": "abcdeabcdeabcdeabcdeabcde" \
-                          "client_secret": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde" \
-                         }' \ '
-            https://api.github.com/authorizations
-</pre>
-
-<p>No more implementing the <a href="/v3/oauth/#web-application-flow">web flow</a> just to get a token tied to your
-app’s rate limit.</p>
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Organizations">drop us a line</a>.</p>
 
 
 </div>

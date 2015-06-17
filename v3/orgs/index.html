@@ -55,6 +55,7 @@
 
 <ul id="markdown-toc">
   <li><a href="#list-your-organizations">List your organizations</a></li>
+  <li><a href="#list-all-organizations">List all organizations</a></li>
   <li><a href="#list-user-organizations">List user organizations</a></li>
   <li><a href="#get-an-organization">Get an organization</a></li>
   <li><a href="#edit-an-organization">Edit an organization</a></li>
@@ -103,6 +104,53 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
+<h2 id="list-all-organizations">List all organizations</h2>
+
+<p>Lists all organizations, in the order that they were created on GitHub.</p>
+
+<p>Note: Pagination is powered exclusively by the <code>since</code> parameter.
+Use the <a href="/v3/#link-header">Link header</a> to get the URL for the next page of
+organizations.</p>
+
+<pre><code>GET /organizations
+</code></pre>
+
+<h3 id="parameters">Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>since</code></td>
+      <td><code>string</code></td>
+      <td>The integer ID of the last Organization that you’ve seen.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="response-1">Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/organizations?since=135&gt;; rel="next"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great organization"</span>
+  <span class="p">}</span>
+<span class="p">]</span></code></pre>
+
 <h2 id="list-user-organizations">List user organizations</h2>
 
 <p>List <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a> for the specified user.</p>
@@ -126,7 +174,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /users/:username/orgs
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3 id="response-2">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -149,7 +197,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /orgs/:org
 </code></pre>
 
-<h3 id="response-2">Response</h3>
+<h3 id="response-3">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -236,7 +284,7 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"GitHub, the company."</span>
 <span class="p">}</span></code></pre>
 
-<h3 id="response-3">Response</h3>
+<h3 id="response-4">Response</h3>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000

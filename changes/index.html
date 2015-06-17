@@ -41,6 +41,51 @@
   <div id="wrapper">
     <div class="content">
       
+<div class="change" id="/changes/2015-06-17-organizations-endpoint/">
+  <h2 class="title">
+  <a href="/changes/2015-06-17-organizations-endpoint/">List all organizations</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 17, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/keavy.png" alt="Avatar for keavy">
+      <a href="https://github.com/keavy">keavy</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve added a <a href="/v3/orgs#list-all-organizations">new API method</a> to list all organizations:</p>
+
+<pre class="terminal">
+$ curl https://api.github.com/organizations
+
+[
+  {
+    "login": "github",
+    "id": 9919,
+    "url": "https://api.github.com/orgs/github",
+    "repos_url": "https://api.github.com/orgs/github/repos",
+    "events_url": "https://api.github.com/orgs/github/events",
+    "members_url": "https://api.github.com/orgs/github/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/github/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=3",
+    "description": "GitHub, the company."
+  },
+  ...
+]
+</pre>
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Organizations">drop us a line</a>.</p>
+
+
+</div>
+
 <div class="change" id="/changes/2015-06-11-pages-a-records/">
   <h2 class="title">
   <a href="/changes/2015-06-11-pages-a-records/">GitHub Pages' A Records Added to Meta API</a>
@@ -2772,35 +2817,6 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 
 </div>
 
-<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
-Instead of adding every event to your webhook, you can now opt-in to all events (including
-all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
-
-<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
-send you payloads for all supported events. As we add new events, you’ll automatically
-begin receiving those too.</p>
-
-</div>
-
 <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -2849,6 +2865,35 @@ begin receiving those too.</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
 
+
+</div>
+
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 24, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>We’ve made a small change to make it easier for webhook integrators to receive “everything”.
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
+
+<p>If you add this event to an existing webhook, we’ll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you’ll automatically
+begin receiving those too.</p>
 
 </div>
 
@@ -2930,6 +2975,39 @@ on previous Pages builds.</p>
 
 </div>
 
+<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
+  <h2 class="title">
+  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 10, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
+      <a href="https://github.com/kdaigle">kdaigle</a>
+  </li>
+</ul>
+</div>
+
+    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
+<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.</p>
+
+<p>The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.</p>
+
+<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
+By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
+you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
+
+</div>
+
 <div class="change" id="/changes/2014-02-10-repo-hook-scopes/">
   <h2 class="title">
   <a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks</a>
@@ -2965,39 +3043,6 @@ repository contents:</p>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes">get in touch</a>.</p>
 
-
-</div>
-
-<div class="change" id="/changes/2014-2-10-ping-event-for-webhooks/">
-  <h2 class="title">
-  <a href="/changes/2014-2-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 10, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle">
-      <a href="https://github.com/kdaigle">kdaigle</a>
-  </li>
-</ul>
-</div>
-
-    <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
-<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
-create a new webhook, we will send this event as an initial test of the webhook.</p>
-
-<p>The ping is only informational, doesn’t need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It’s just a quick
-“hello world” to let you know you set everything up correctly.</p>
-
-<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
-By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
-you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
 
 </div>
 
@@ -5215,6 +5260,8 @@ old API functionality.</s>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2015-06-17-organizations-endpoint/">List all organizations<br /><span class="date">June 17, 2015</span></a></li>
+
   <li><a href="/changes/2015-06-11-pages-a-records/">GitHub Pages' A Records Added to Meta API<br /><span class="date">June 11, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">Breaking changes to organization permissions coming on June 24<br /><span class="date">June 10, 2015</span></a></li>
@@ -5228,8 +5275,6 @@ old API functionality.</s>
   <li><a href="/changes/2015-04-17-preview-repository-redirects/">Preview repository redirects<br /><span class="date">April 17, 2015</span></a></li>
 
   <li><a href="/changes/2015-03-09-licenses-api/">Licenses API<br /><span class="date">March 9, 2015</span></a></li>
-
-  <li><a href="/changes/2015-02-24-more-time-to-prepare-for-the-breaking-changes-to-organization-permissions/">More time to prepare for the breaking changes to organization permissions<br /><span class="date">February 24, 2015</span></a></li>
 
 </ul>
 

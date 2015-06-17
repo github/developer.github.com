@@ -17,7 +17,7 @@ OAuth users require the "read:org" [scope](/v3/oauth/#scopes).
 
 {{#enterprise-only}}
 
-If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
+<%= fetch_content(:if_site_admin) %>
 you will be able to list all teams for the organization.
 
 {{/enterprise-only}}
@@ -110,7 +110,7 @@ member of the team.
 
 {{#enterprise-only}}
 
-If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
+<%= fetch_content(:if_site_admin) %>
 you will be able to list all members for the team.
 
 {{/enterprise-only}}
@@ -320,7 +320,7 @@ team.
 
 {{#enterprise-only}}
 
-If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
+<%= fetch_content(:if_site_admin) %>
 you will be able to list all repositories for the team.
 
 {{/enterprise-only}}

@@ -35,6 +35,27 @@ With the new Organization Permissions API (described below), this method will on
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:org) { |h| [h] } %>
 
+## List all organizations
+
+Lists all organizations, in the order that they were created on GitHub.
+
+Note: Pagination is powered exclusively by the `since` parameter.
+Use the [Link header](/v3/#link-header) to get the URL for the next page of
+organizations.
+
+    GET /organizations
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string`| The integer ID of the last Organization that you've seen.
+
+### Response
+
+<%= headers 200, :pagination => { :next => 'https://api.github.com/organizations?since=135' } %>
+<%= json(:org) {|h| [h] } %>
+
 ## List user organizations
 
 List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.

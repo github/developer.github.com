@@ -288,7 +288,7 @@ For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTM
 
     application/vnd.github.VERSION.object
 
-Use the `.object` media type to retrieve the contents in a consistent object format regardless of the content type. For example, instead of an array of objects
+Use the `object` media type parameter to retrieve the contents in a consistent object format regardless of the content type. For example, instead of an array of objects
 for a directory, the response will be an object with an `entries` attribute containing the array of objects.
 
 You can read more about the use of media types in the API [here](/v3/media/).

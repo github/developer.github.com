@@ -5,7 +5,7 @@ created_at: 2015-06-17
 author_name: keavy
 ---
 
-We just added a [new API method](/v3/orgs#list-all-organizations) to list all organizations:
+We've added a [new API method](/v3/orgs#list-all-organizations) to list all organizations:
 
 <pre class="terminal">
 $ curl https://api.github.com/organizations

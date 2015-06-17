@@ -11,9 +11,9 @@ title: Repositories | GitHub API
 
 List repositories that are accessible to the authenticated user.
 
-This includes repositories owned by the authenticated user, repositories that
-the authenticated user has been added as a collaborator to, and repositories
-that the authenticated user has access to through an organization membership.
+This includes repositories owned by the authenticated user, repositories where
+the authenticated user is a collaborator, and repositories that the
+authenticated user has access to through an organization membership.
 
     GET /user/repos
 

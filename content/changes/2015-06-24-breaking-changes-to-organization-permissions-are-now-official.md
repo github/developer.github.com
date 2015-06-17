@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Breaking changes to organization are now official
+title: Breaking changes to organization permissions are now official
 created_at: 2015-06-24
 author_name: jakeboxer
 ---

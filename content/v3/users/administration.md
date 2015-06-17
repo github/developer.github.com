@@ -23,8 +23,8 @@ http(s)://<em>hostname</em>/api/v3
 
 Name | Type | Description
 -----|------|--------------
-`login`|`string` | The user's username
-`email`|`string` | The user's email address
+`login`|`string` | **Required.** The user's username
+`email`|`string` | **Required.** The user's email address
 
 #### Example
 
@@ -46,7 +46,7 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`login`|`string` | The user's new username
+`login`|`string` | **Required.** The user's new username
 
 #### Example
 
@@ -152,4 +152,3 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
 ### Response
 
 <%= headers 204 %>
-

@@ -5,7 +5,7 @@ created_at: 2015-06-24
 author_name: jakeboxer
 ---
 
-As [promised earlier this month][notice], the [API changes][api-changes] related to managing organization members and repositories are now official parts of the GitHub API!
+As [promised earlier this month][notice], the [API changes][api-changes] related to managing organization members and repositories are now official parts of the GitHub API.
 
 During the migration period, you needed to [provide a custom media type in the `Accept` header][migration-period] to opt-in to the changes. Now that the migration period has ended, you no longer need to specify this custom [media type][media-types].
 

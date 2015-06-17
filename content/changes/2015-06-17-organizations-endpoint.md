@@ -8,7 +8,7 @@ author_name: keavy
 We just added a [new API method](/v3/orgs#list-all-organizations) to list all organizations:
 
 <pre class="terminal">
-$ curl -H "Authorization: token [yours]" https://api.github.com/organizations
+$ curl https://api.github.com/organizations
 
 [
   {

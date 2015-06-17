@@ -5,7 +5,7 @@ created_at: 2015-06-24
 author_name: jakeboxer
 ---
 
-As promised in [our blog post earlier this month][notice], the [API changes][api-changes] related to managing organization members and repositories are now official parts of the GitHub API! The preview media type is no longer required to access them.
+As [promised earlier this month][notice], the [API changes][api-changes] related to managing organization members and repositories are now official parts of the GitHub API! The preview media type is no longer required to access them.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

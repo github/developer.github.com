@@ -13,13 +13,13 @@ $ curl -H "Authorization: token [yours]" https://api.github.com/organizations
 [
   {
     "login": "github",
-    "id": 226,
-    "url": "http://api.github.com/orgs/github",
-    "repos_url": "http://api.github.com/orgs/github/repos",
-    "events_url": "http://api.github.com/orgs/github/events",
-    "members_url": "http://api.github.com/orgs/github/members{/member}",
-    "public_members_url": "http://api.github.com/orgs/github/public_members{/member}",
-    "avatar_url": "http://avatars.githubusercontent.com/u/226?",
+    "id": 9919,
+    "url": "https://api.github.com/orgs/github",
+    "repos_url": "https://api.github.com/orgs/github/repos",
+    "events_url": "https://api.github.com/orgs/github/events",
+    "members_url": "https://api.github.com/orgs/github/members{/member}",
+    "public_members_url": "https://api.github.com/orgs/github/public_members{/member}",
+    "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=3",
     "description": "GitHub, the company."
   },
   ...

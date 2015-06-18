@@ -31,7 +31,7 @@ To support this new team maintainer concept, we've added a `role` parameter to t
 
 ### Filtering organization members by role
 
-The organization [Members list][org-members-list] and [Public members list][org-public-members-list] APIs now accept a `role` parameter, so that you can request to see only the owners (or non-owners) of your organization.
+The organization [Members list][org-members-list] API now accepts a `role` parameter, so that you can request to see only the owners (or non-owners) of your organization.
 
 ### Repository collaborators
 

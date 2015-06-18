@@ -21,18 +21,18 @@ be returned.
 Name    | Type    | Description
 --------|---------|--------------
 `filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization admins.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
-`role`  |`string` | Filter members returned by their role. If specified, must be set to `admin`, which will only return users with admin permissions on the org. **This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `admin`: Organization admins.<br/>* `member`: Non-admin organization members. **This option requires a custom media type to be specified. Please see more in the alert below.**<br/>* `all`: All members of the organization, regardless of role.<br/><br/>Default: `all`
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
 
 <div class="alert">
   <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">beginning June 24, 2015</a>. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
   </p>
 
   <p>
-    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
   </p>
 </div>
 

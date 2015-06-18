@@ -69,8 +69,9 @@ Check if a user is, publicly or privately, a member of the organization.
 
 ## Add a member
 
-To add someone as a member to an org, you must add them to a
-[team](/v3/orgs/teams/#add-team-member).
+To add someone as a member to an organization, you must
+[invite them to the organization](/v3/orgs/members/#add-or-update-organization-membership)
+or [invite them to a team](/v3/orgs/teams/#add-team-membership).
 
 ## Remove a member
 

@@ -324,7 +324,24 @@ organization.
 
     PUT /teams/:id/repos/:org/:repo
 
-<%= fetch_content(:put_content_length) %>
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`permission`|`string` | The permission to grant the team on this repository. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer this repository.<br/> * `push` - team members can pull and push, but not administer this repository.<br/> * `admin` - team members can pull, push and administer this repository.<br/><br/>If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.<br/><br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+
+<%= fetch_content(:optional_put_content_length) %>
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
 
 ### Response
 

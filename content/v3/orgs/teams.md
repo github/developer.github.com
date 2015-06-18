@@ -315,6 +315,28 @@ team.
 
 <%= headers 404 %>
 
+### Alternative response with extra repository information
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
+
+You can also get information about the specified repository, including what
+permissions the team grants on it, by passing the following custom
+[media type](/v3/media/) via the `Accept` header:
+
+    Accept: application/vnd.github.ironman-preview.repository+json
+
+<%= headers 200 %>
+<%= json :repo %>
+
 ## Add team repository {#add-team-repo}
 
 In order to add a repository to a team, the authenticated user must be an

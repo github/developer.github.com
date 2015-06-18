@@ -175,6 +175,14 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "contributions" => 32
     })
 
+    COLLABORATOR ||= USER.merge({
+      "permissions" => {
+        "pull"  => true,
+        "push"  => true,
+        "admin" => false
+      }
+    })
+
     FULL_USER ||= USER.merge({
       "name"         => "monalisa octocat",
       "company"      => "GitHub",

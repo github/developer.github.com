@@ -757,6 +757,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "name" => "Justice League",
       "slug" => "justice-league",
       "description" => "A great team.",
+      "privacy" => "closed",
       "permission" => "admin",
       "members_url" => "https://api.github.com/teams/1/members{/member}",
       "repositories_url" => "https://api.github.com/teams/1/repos"

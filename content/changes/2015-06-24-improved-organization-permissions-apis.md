@@ -21,7 +21,7 @@ We've also added a `permissions` attribute to the responses for the [List team r
 
 We now allow you to modify the privacy level of your teams. A "secret" team can only be seen by organization owners and people who are members of that team (which is how all teams used to work), while a "closed" team can be seen by every member of the organization (which makes it easier to use @mentions throughout your organization).
 
-To support this, we've added a `privacy` parameter to the [Create team][create-team] and [Edit team][edit-team] APIs.
+To support this, we've added a `privacy` parameter to the [Create team][create-team] and [Edit team][edit-team] APIs, and a `privacy` attribute to the responses of all APIs that return team hashes.
 
 ### Team maintainers
 

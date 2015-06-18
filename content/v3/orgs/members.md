@@ -20,8 +20,8 @@ be returned.
 
 Name    | Type    | Description
 --------|---------|--------------
-`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization admins.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
-`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `admin`: Organization admins.<br/>* `member`: Non-admin organization members. **This option requires a custom media type to be specified. Please see more in the alert below.**<br/>* `all`: All members of the organization, regardless of role.<br/><br/>Default: `all`
+`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization owners.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
+`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `admin`: Organization owners.<br/>* `member`: Non-owner organization members. **This option requires a custom media type to be specified. Please see more in the alert below.**<br/>* `all`: All members of the organization, regardless of role.<br/><br/>Default: `all`
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
 
@@ -141,7 +141,7 @@ The user can publicize their own membership.
   </p>
 </div>
 
-In order to get a user's membership with an organization, the authenticated user must be an organization admin.
+In order to get a user's membership with an organization, the authenticated user must be an organization owner.
 
     GET /orgs/:org/memberships/:username
 
@@ -173,7 +173,7 @@ In order to get a user's membership with an organization, the authenticated user
   </p>
 </div>
 
-In order to create or update a user's membership with an organization, the authenticated user must be an organization admin.
+In order to create or update a user's membership with an organization, the authenticated user must be an organization owner.
 
     PUT /orgs/:org/memberships/:username
 
@@ -181,7 +181,7 @@ In order to create or update a user's membership with an organization, the authe
 
 Name  | Type   | Description
 ------|--------|--------------
-`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an administrator of the organization.<br/> * `member` - The user will become a non-admin member of the organization. Use this only to demote an existing admin to a non-admin.
+`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an owner of the organization.<br/> * `member` - The user will become a non-owner member of the organization. Use this only to demote an existing owner to a non-owner.
 
 ### Response if user was previously unaffiliated with organization
 
@@ -206,7 +206,7 @@ Name  | Type   | Description
   </p>
 </div>
 
-In order to remove a user's membership with an organization, the authenticated user must be an organization admin.
+In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
 
     DELETE /orgs/:org/memberships/:username
 

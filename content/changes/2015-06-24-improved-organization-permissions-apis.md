@@ -31,13 +31,13 @@ To support this new team maintainer concept, we've added a `role` parameter to t
 
 ### Filtering organization members by role
 
-The [List organization members][list-org-members] and [List public organization members][list-public-org-members] APIs now accept a `role` parameter, so that you can request to see only the owners (or non-owners) of your organization.
+The organization [Members list][org-members-list] and [Public members list][org-public-members-list] APIs now accept a `role` parameter, so that you can request to see only the owners (or non-owners) of your organization.
 
 ### Repository collaborators
 
 We now allow you to add collaborators to organization-owned repositories, just like we always have for user-owned repositories. This means the [Add user as a collaborator][add-collab] API now works for organization-owned repositories. We've even added a `permission` parameter to it (currently valid for organization-owned repositories only), so that you can specify what level of access the collaborator should have on the repository.
 
-We've also added a `permissions` attribute to the responses for the [List collaborators][list-collaborators] API, so that you can tell what permissions each collaborator has on your organization's repositories.
+We've also added a `permissions` attribute to the responses for the [List collaborators][list-collabs] API, so that you can tell what permissions each collaborator has on your organization's repositories.
 
 ## Preview period
 
@@ -50,3 +50,18 @@ While these additions are in their preview period, you'll need to provide the fo
 During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
+
+[dotcom-blog-post]: /this-should-404-until-we-ship-the-dotcom-blog-post
+[create-team]: /v3/orgs/teams/#create-team
+[edit-team]: /v3/orgs/teams/#edit-team
+[list-team-members]: /v3/orgs/teams/#list-team-members
+[get-team-membership]: /v3/orgs/teams/#get-team-membership
+[add-team-membership]: /v3/orgs/teams/#add-team-membership
+[list-team-repos]: /v3/orgs/teams/#list-team-repos
+[get-team-repo]: /v3/orgs/teams/#get-team-repo
+[add-team-repo]: /v3/orgs/teams/#add-team-repo
+[org-members-list]: /v3/orgs/members/#members-list
+[org-public-members-list]: /v3/orgs/members/#public-members-list
+[list-collabs]: /v3/repos/collaborators/#list
+[add-collab]: /v3/repos/collaborators/#add-collaborator
+[contact]: https://github.com/contact?form[subject]=Organization+Permissions+API

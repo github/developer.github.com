@@ -11,7 +11,7 @@ We're introducing some API enhancements to supplement the [improved organization
 
 ### Team permissions
 
-In our improved permissions system, teams no longer have a `permission` attribute. Instead, each repository is added to a team with its own permission. This means a team could theoretically grant pull access to one repository, push access to a second, and admin access to a third.
+In our improved permissions system, a team no longer has a single permission that applies to all of its repositories. Instead, each repository is added to a team with its own permission. This means a team could theoretically grant pull access to one repository, push access to a second, and admin access to a third.
 
 To support this, we've added a `permission` parameter to the [Add team repository][add-team-repo] API. You can use this parameter to specify a permission when adding a new repository to a team, or to update a team's permission on a repository it already granted access to.
 

@@ -43,15 +43,26 @@ Name | Type | Description
 `name`|`string` | **Required**. The name of the team.
 `description`|`string` | The description of the team.
 `repo_names`|`array` of `strings` | The repositories to add the team to.
-`permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
+`privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`permission`|`string` | **Deprecated**. In the preview period described in the alert below, a team's `permission` attribute no longer dictates what permission it has on its repositories; it only dictates what permission the repositories in this request will be added with, and what permission a new repository will be added to the team with if none is specified by the user. Avoid confusion by specifying a `permission` when using the [Add team repository](/v3/orgs/teams/#add-team-repo) API instead.<br/><br/>The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
 
 #### Example
 
 <%= json \
   :name => 'new team',
   :description => 'team description',
-  :permission => 'push',
-  :repo_names => ['github/dotfiles'] %>
+  :privacy => 'closed' %>
 
 ### Response
 
@@ -71,14 +82,26 @@ Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
 `description`|`string` | The description of the team.
-`permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
+`privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`permission`|`string` | **Deprecated**. In the preview period described in the alert below, a team's `permission` attribute no longer dictates what permission it has on its repositories; it only dictates what permission a new repository will be added to the team with if none is specified by the user. Avoid confusion by specifying a `permission` when using the [Add team repository](/v3/orgs/teams/#add-team-repo) API instead.<br/><br/>The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
 
 #### Example
 
 <%= json \
   :name => 'new team name',
-  :name => 'new team description',
-  :permission => 'push' %>
+  :description => 'new team description',
+  :privacy => 'closed' %>
 
 ### Response
 

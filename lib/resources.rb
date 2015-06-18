@@ -770,7 +770,8 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     })
 
     TEAM_MEMBERSHIP ||= {
-      "url" => "https://api.github.com/teams/1/memberships/octocat"
+      "url" => "https://api.github.com/teams/1/memberships/octocat",
+      "role" => "member"
     }
 
     ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(

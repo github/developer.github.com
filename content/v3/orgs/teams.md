@@ -126,6 +126,21 @@ member of the team.
 
     GET /teams/:id/members
 
+Name | Type | Description
+-----|------|--------------
+`role`|`string`| Filters members returned by their role in the team. Can be one of:<br/> * `member` - normal members of the team.<br/> * `maintainer` - team maintainers.<br/> * `all` - all members of the team.<br/>Default: `all`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
+
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
@@ -280,6 +295,23 @@ membership will transition to the "active" state and the user will be added as a
 member of the team.
 
     PUT /teams/:id/memberships/:username
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`role`|`string`| The role that this user should have in the team. Can be one of:<br/> * `member` - a normal member of the team.<br/> * `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.<br/>Default: `member`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
 
 ### Response if user's membership with team is now active
 

@@ -11,9 +11,9 @@ We're introducing some API enhancements to supplement the [improved organization
 
 ### Team permissions
 
-In our improved permissions system, a team no longer has a single permission that applies to all of its repositories. Instead, each repository is added to a team with its own permission. This means a team could theoretically grant pull access to one repository, push access to a second, and admin access to a third.
+In our improved permissions system, a team no longer has a single permission that applies to all of its repositories. Instead, each repository is added to a team with its own permission. For example, an organization could use a single team to grant pull access to one repository, push access to a second, and admin access to a third.
 
-To support this, we've added a `permission` parameter to the [Add team repository][add-team-repo] API. You can use this parameter to specify a permission when adding a new repository to a team, or to update a team's permission on a repository it already granted access to.
+To support this, we've added a `permission` parameter to the [Add team repository][add-team-repo] API. You can use this parameter to specify a permission when adding a new repository to a team, or to update a team's permission on a repository that is already associated with the team.
 
 We've also added a `permissions` attribute to the responses for the [List team repos][list-team-repos] and [Check if a team manages a repository][get-team-repo] APIs, so that you can tell what permissions a team grants on a given repository.
 
@@ -21,11 +21,11 @@ We've also added a `permissions` attribute to the responses for the [List team r
 
 We now allow you to modify the privacy level of your teams. A "secret" team can only be seen by organization owners and people who are members of that team (which is how all teams used to work), while a "closed" team can be seen by every member of the organization (which makes it easier to use @mentions throughout your organization).
 
-To support this, we've added a `privacy` parameter to the [Create team][create-team] and [Edit team][edit-team] APIs, and a `privacy` attribute to the responses of all APIs that return team hashes.
+To support this, we've added a `privacy` parameter to the [Create team][create-team] and [Edit team][edit-team] APIs, and a `privacy` attribute to the responses of all APIs that return team objects.
 
 ### Team maintainers
 
-We've added the ability for you to to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member a team to be a "maintainer" of that team. This gives them the ability to add and remove team members, and to change that team's title and description.
+We've added the ability for you to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member of a team to be a "maintainer" of that team. This gives them the ability to add and remove team members, and to change that team's title and description.
 
 To support this new team maintainer concept, we've added a `role` parameter to the [Add team membership][add-team-membership] API, so that you can specify whether a given team member should be a maintainer or not. We've also added a `role` parameter to the [List team members][list-team-members] API, so that you can request to see only the maintainers (or regular members) of a team. Finally, we've added a `role` attribute to the responses for the [Get team membership][get-team-membership] and [Add team membership][add-team-membership] APIs, so that you can figure out whether a user is a maintainer or a regular member of a team.
 

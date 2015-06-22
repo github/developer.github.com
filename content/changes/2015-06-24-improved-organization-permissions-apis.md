@@ -27,7 +27,13 @@ To support this, we've added a `privacy` parameter to the [Create team][create-t
 
 We've added the ability for you to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member of a team to be a "maintainer" of that team. This gives them the ability to add and remove team members, and to change that team's title and description.
 
-To support this new team maintainer concept, we've added a `role` parameter to the [Add team membership][add-team-membership] API, so that you can specify whether a given team member should be a maintainer or not. We've also added a `role` parameter to the [List team members][list-team-members] API, so that you can request to see only the maintainers (or regular members) of a team. Finally, we've added a `role` attribute to the responses for the [Get team membership][get-team-membership] and [Add team membership][add-team-membership] APIs, so that you can figure out whether a user is a maintainer or a regular member of a team.
+The team membership APIs now support this new team maintainer concept:
+
+- The [Add team membership][add-team-membership] API accepts a `role` parameter, so that you can specify whether a given team member should be a `maintainer` or a regular `member`.
+- The [List team members][list-team-members] API accepts an optional `role` parameter, allowing you to fetch only `maintainer`s or only regular team `member`s.
+- In the [Get team membership][get-team-membership] and [Add team membership][add-team-membership] APIs, the response includes a `role` attribute, indicating whether a user is a `maintainer` or a regular `member` of the team.
+
+For more information on our improved team permissions, check out our [documentation][understanding-team-permissions].
 
 ### Filtering organization members by role
 
@@ -52,6 +58,7 @@ During the preview period, we may change aspects of these endpoints. If we do, w
 If you have any questions or feedback, please [get in touch with us][contact]!
 
 [dotcom-blog-post]: /this-should-404-until-we-ship-the-dotcom-blog-post
+[understanding-team-permissions]: https://help.github.com/articles/improved-organization-permissions/#understanding-team-permissions
 [create-team]: /v3/orgs/teams/#create-team
 [edit-team]: /v3/orgs/teams/#edit-team
 [list-team-members]: /v3/orgs/teams/#list-team-members

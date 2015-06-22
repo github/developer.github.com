@@ -55,13 +55,15 @@ The collaborator APIs now support organization-owned repositories:
 
 ## Preview period
 
-Starting **today**, these new APIs are available for developers to preview. At the end of the preview period, these additions will become official components of the GitHub API.
+Starting **today**, these new API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.
 
-While these additions are in their preview period, you'll need to provide the following custom media type in the `Accept` header:
+Since we're rolling out the [improved organization permissions][dotcom-blog-post] improvements slowly, these new API enhancements will only apply to certain organizations. Most of these enhancements will degrade gracefully (returning an empty array or something similar) if used on an organization that doesn't support improved organization permissions yet, but check the documentation for your specific API to see if errors are possible.
+
+While these enhancements are in their preview period, you'll need to provide the following custom media type in the `Accept` header:
 
     application/vnd.github.ironman-preview+json
 
-During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
+During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.
 
 If you have any questions or feedback, please [get in touch with us][contact]!
 

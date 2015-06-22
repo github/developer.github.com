@@ -55,6 +55,10 @@ Name | Type | Description
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
     <pre>application/vnd.github.ironman-preview+json</pre>
   </p>
+
+  <p>
+    <strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="/this-should-404-until-we-ship-the-dotcom-blog-post">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+  </p>
 </div>
 
 #### Example
@@ -93,6 +97,10 @@ Name | Type | Description
   <p>
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
     <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+
+  <p>
+    <strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="/this-should-404-until-we-ship-the-dotcom-blog-post">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
   </p>
 </div>
 
@@ -308,6 +316,10 @@ Name | Type | Description
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
     <pre>application/vnd.github.ironman-preview+json</pre>
   </p>
+
+  <p>
+    <strong>Warning:</strong> If you specify the <code>role</code> attribute on an organization that hasn't had <a href="/this-should-404-until-we-ship-the-dotcom-blog-post">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+  </p>
 </div>
 
 ### Response if user's membership with team is now active
@@ -414,6 +426,10 @@ Name | Type | Description
   <p>
     To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
     <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+
+  <p>
+    <strong>Warning:</strong> If you specify the <code>permission</code> attribute on an organization that hasn't had <a href="/this-should-404-until-we-ship-the-dotcom-blog-post">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
   </p>
 </div>
 

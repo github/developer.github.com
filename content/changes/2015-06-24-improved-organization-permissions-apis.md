@@ -25,7 +25,7 @@ To support this, we've added a `privacy` parameter to the [Create team][create-t
 
 ### Team maintainers
 
-We've added the ability for you to to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member a team to be a "maintainer" of that team. This gives them the ability to add and remove team members, and to change that team's title and description.
+We've added the ability for you to to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member of a team to be a "maintainer" of that team. This gives them the ability to add and remove team members, and to change that team's title and description.
 
 To support this new team maintainer concept, we've added a `role` parameter to the [Add team membership][add-team-membership] API, so that you can specify whether a given team member should be a maintainer or not. We've also added a `role` parameter to the [List team members][list-team-members] API, so that you can request to see only the maintainers (or regular members) of a team. Finally, we've added a `role` attribute to the responses for the [Get team membership][get-team-membership] and [Add team membership][add-team-membership] APIs, so that you can figure out whether a user is a maintainer or a regular member of a team.
 

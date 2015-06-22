@@ -13,7 +13,7 @@ We're introducing some API enhancements to supplement the [improved organization
 
 In our improved permissions system, a team no longer has a single permission that applies to all of its repositories. Instead, each repository is added to a team with its own permission. For example, an organization could use a single team to grant pull access to one repository, push access to a second, and admin access to a third.
 
-The team membership APIs now support this revised notion of permissions:
+The team APIs now support this revised notion of permissions:
 
 - The [Add team repository][add-team-repo] API accepts a `permission` parameter, so that you can specify whether a team should grant `pull`, `push`, or `admin` on a given repository.
 - In the [List team repos][list-team-repos] and [Check if a team manages a repository][get-team-repo] API, the response includes a `permissions` attribute, indicating whether the team grants `pull`, `push`, or `admin` on each repository.
@@ -23,7 +23,7 @@ The team membership APIs now support this revised notion of permissions:
 
 We now allow you to modify the privacy level of your teams. A "secret" team can only be seen by organization owners and people who are members of that team (which is how all teams used to work), while a "closed" team can be seen by every member of the organization (which makes it easier to use @mentions throughout your organization).
 
-The team membership APIs now support this new team privacy concept:
+The team APIs now support this new team privacy concept:
 
 - The [Create team][create-team] and [Edit team][edit-team] APIs accept a `privacy` parameter, so that you can specify whether a team should be `secret` or `closed`.
 - All APIs that return team objects include a `privacy` attribute, indicating whether the team is `secret` or `closed`.

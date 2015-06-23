@@ -46,7 +46,7 @@ The organization [Members list][org-members-list] API now accepts a `role` param
 
 ### Repository collaborators
 
-We now allow you to add collaborators to organization-owned repositories, just like we always have for user-owned repositories.
+We now allow you to add collaborators directly to organization-owned repositories, just like we always have for user-owned repositories.
 
 The collaborator APIs now support organization-owned repositories:
 

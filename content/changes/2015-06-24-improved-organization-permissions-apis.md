@@ -30,7 +30,7 @@ The team APIs now support this new team privacy concept:
 
 ### Team maintainers
 
-We've added the ability for you to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member of a team to be a "maintainer" of that team. This gives them the ability to add and remove team members, and to change that team's title and description.
+We've added the ability for you to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member of a team to be a "maintainer" of that team. A maintainer can add and remove team members and change the team's title and description.
 
 The team membership APIs now support this new team maintainer concept:
 

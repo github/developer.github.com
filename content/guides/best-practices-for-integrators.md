@@ -65,10 +65,9 @@ You can always [check your rate limit status](/v3/rate_limit/) at any time. Chec
 
 ## Dealing with abuse rate limits
 
-If you've been [abuse rate limited](/v3/#abuse-rate-limits), you will need to make some changes to
-your application to remove the potentially abusive behavior. We've created this list of guidelines
-to help you identify what behavior in your application is potentially abusive. We reserve the right to change
-these guidelines as needed to ensure availability.
+[Abuse rate limits](/v3/#abuse-rate-limits) are another way we ensure the API's availability.
+To avoid being abuse rate limited, you should ensure your application follows the guidelines below.
+We reserve the right to change these guidelines as needed to ensure availability.
 
 * Make authenticated requests, or use your application's client ID and secret. Unauthenticated
   requests are subject to more aggressive abuse rate limiting.

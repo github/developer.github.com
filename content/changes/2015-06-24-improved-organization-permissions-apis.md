@@ -35,7 +35,7 @@ We've added the ability for you to delegate team maintenance to non-owners, redu
 The team membership APIs now support this new team maintainer concept:
 
 - The [Add team membership][add-team-membership] API accepts a `role` parameter, so that you can specify whether a given team member should be a `maintainer` or a regular `member`.
-- The [List team members][list-team-members] API accepts an optional `role` parameter, allowing you to fetch only `maintainer`s or only regular team `member`s.
+- The [List team members][list-team-members] API accepts an optional `role` parameter, allowing you to fetch only `maintainer`s or only regular `member`s.
 - In the [Get team membership][get-team-membership] and [Add team membership][add-team-membership] APIs, the response includes a `role` attribute, indicating whether a user is a `maintainer` or a regular `member` of the team.
 
 For more information on our improved team permissions, check out our [documentation][understanding-team-permissions].

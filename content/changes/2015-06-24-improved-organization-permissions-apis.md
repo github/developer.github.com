@@ -51,7 +51,7 @@ We now allow you to add collaborators directly to organization-owned repositorie
 The collaborator APIs now support organization-owned repositories:
 
 - The [Add user as a collaborator][add-collab] API works for organization-owned repositories. We've also added a `permission` parameter to it (currently valid for organization-owned repositories only), so that you can specify what level of access the collaborator should have on the repository.
-- In the [List collaborators][list-collabs] API, the response includes a `permissions` attribute, so that you can tell what permissions each collaborator has on your organization's repositories.
+- In the [List collaborators][list-collabs] API, the response includes a `permissions` attribute describing the permissions that each collaborator has on your organization's repositories.
 
 ## Preview period
 

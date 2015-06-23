@@ -7,7 +7,7 @@ author_name: jakeboxer
 
 We're introducing several enhancements to allow API developers to take advantage of the [improved organization permissions][dotcom-blog-post] that we are rolling out.
 
-## API improvements
+## API enhancements
 
 ### Team permissions
 

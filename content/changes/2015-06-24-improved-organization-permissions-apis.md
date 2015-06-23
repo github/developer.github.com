@@ -15,7 +15,7 @@ In our improved permissions system, a team no longer has a single permission tha
 
 The team APIs now support this more granular notion of permissions:
 
-- The [Add team repository][add-team-repo] API accepts a `permission` parameter, so that you can specify whether a team should grant `pull`, `push`, or `admin` on a given repository.
+- The [Add team repository][add-team-repo] API accepts a `permission` parameter, so that you can specify whether a team should grant `pull`, `push`, or `admin` access on a given repository.
 - In the [List team repos][list-team-repos] and [Check if a team manages a repository][get-team-repo] API, the response includes a `permissions` attribute, indicating whether the team grants `pull`, `push`, or `admin` on each repository.
 - The `permission` parameter in the [Create team][create-team] and [Edit team][edit-team] APIs is deprecated. Since teams can grant a different permission on each repository, this parameter no longer dictates what permission a team grants on all of its repositories. Instead, it dictates the default permission that the [Add team repository][add-team-repo] API will add repositories to that team with if no `permission` parameter is specified.
 

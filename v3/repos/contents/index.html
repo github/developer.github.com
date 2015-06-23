@@ -128,7 +128,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 </code></pre>
 
 <p>Files and symlinks support <a href="#custom-media-types">a custom media type</a> for retrieving the raw content or rendered HTML (when supported).
-Directories and submodules do <em>not</em> support custom media types.</p>
+All content types support <a href="#custom-media-types">a custom media type</a> to ensure the content is returned in a consistent object format.</p>
 
 <div class="alert tip">
 
@@ -785,6 +785,14 @@ application/vnd.github.VERSION.html
 <p>Use the <code>.raw</code> media type to retrieve the contents of the file.</p>
 
 <p>For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the <code>.html</code> media type. Markup languages are rendered to HTML using our open-source <a href="https://github.com/github/markup">Markup library</a>.</p>
+
+<p><a href="#get-contents">All objects</a> support the following custom media type:</p>
+
+<pre><code>application/vnd.github.VERSION.object
+</code></pre>
+
+<p>Use the <code>object</code> media type parameter to retrieve the contents in a consistent object format regardless of the content type. For example, instead of an array of objects
+for a directory, the response will be an object with an <code>entries</code> attribute containing the array of objects.</p>
 
 <p>You can read more about the use of media types in the API <a href="/v3/media/">here</a>.</p>
 

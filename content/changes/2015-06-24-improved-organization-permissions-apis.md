@@ -21,7 +21,7 @@ The team APIs now support this more granular notion of permissions:
 
 ### Team privacy
 
-We now allow you to modify the privacy level of your teams. A "secret" team can only be seen by organization owners and people who are members of that team (which is how all teams used to work), while a "closed" team can be seen by every member of the organization (which makes it easier to use @mentions throughout your organization).
+We now allow you to modify the privacy level of your teams. A "secret" team can only be seen by organization owners and people who are members of that team (which is how all teams have worked historically), while a "closed" team can be seen by every member of the organization (which makes it easier to use @mentions throughout your organization).
 
 The team APIs now support this new team privacy concept:
 

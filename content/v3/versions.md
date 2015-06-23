@@ -118,8 +118,8 @@ The recommendations below will help you prepare your application for the next ma
   and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
   for full details.
 
-1. Parameter: `permission` when POSTing to /orgs/:org/teams or PATCHing to /teams/:id
-: Recommendation: This parameter no longer dictates what permission a team has on its repositories; it only dictates what permission a new repository will be added to the team with if none is specified by the user. To change the permission level for every repository on a team, use the [List team repos](/v3/orgs/teams/#list-team-repos) API to list all of the team's repositories, then use the [Add team repository](/v3/orgs/teams/#add-team-repo) with a `permission` parameter to update each repository's permission separately.
+1. Team attribute: permission
+: Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the [Add team repository][add-team-repo] API will use for requests where no `permission` attribute is specified. To change the permission level for every repository on a team, use the [List team repositories](/v3/orgs/teams/#list-team-repos) API to list all of the team's repositories, and then use the [Add team repository](/v3/orgs/teams/#add-team-repo) with a `permission` attribute to update each repository's permission separately.
 
 # beta (Deprecated) {#beta}
 

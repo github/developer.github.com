@@ -119,7 +119,7 @@ The recommendations below will help you prepare your application for the next ma
   for full details.
 
 1. Team attribute: permission
-: Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the [Add team repository][add-team-repo] API will use for requests where no `permission` attribute is specified. To change the permission level for every repository on a team, use the [List team repositories](/v3/orgs/teams/#list-team-repos) API to list all of the team's repositories, and then use the [Add team repository](/v3/orgs/teams/#add-team-repo) with a `permission` attribute to update each repository's permission separately.
+: Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the [Add team repository](/v3/orgs/teams/#add-team-repo) API will use for requests where no `permission` attribute is specified. To change the permission level for every repository on a team, use the [List team repositories](/v3/orgs/teams/#list-team-repos) API to list all of the team's repositories, and then use the [Add team repository](/v3/orgs/teams/#add-team-repo) with a `permission` attribute to update each repository's permission separately.
 
 # beta (Deprecated) {#beta}
 

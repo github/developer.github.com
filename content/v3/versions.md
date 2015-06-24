@@ -118,6 +118,9 @@ The recommendations below will help you prepare your application for the next ma
   and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
   for full details.
 
+1. Team attribute: permission
+: Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the [Add team repository](/v3/orgs/teams/#add-team-repo) API will use for requests where no `permission` attribute is specified. To change the permission level for every repository on a team, use the [List team repositories](/v3/orgs/teams/#list-team-repos) API to list all of the team's repositories, and then use the [Add team repository](/v3/orgs/teams/#add-team-repo) with a `permission` attribute to update each repository's permission separately.
+
 # beta (Deprecated) {#beta}
 
 The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.

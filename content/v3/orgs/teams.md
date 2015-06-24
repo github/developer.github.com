@@ -31,7 +31,7 @@ OAuth users require the "read:org" [scope](/v3/oauth/#scopes).
 
 ## Create team
 
-In order to create a team, the authenticated user must be an owner of
+In order to create a team, the authenticated user must be a member of
 `:org`.
 
     POST /orgs/:org/teams
@@ -43,15 +43,30 @@ Name | Type | Description
 `name`|`string` | **Required**. The name of the team.
 `description`|`string` | The description of the team.
 `repo_names`|`array` of `strings` | The repositories to add the team to.
-`permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
+`privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`permission`|`string` | **Deprecated**. In the preview period described in the alert below, a team's `permission` attribute no longer dictates what permission it has on its repositories; it only dictates what permission the repositories in this request will be added with, and what permission a new repository will be added to the team with if none is specified by the user. Avoid confusion by specifying a `permission` when using the [Add team repository](/v3/orgs/teams/#add-team-repo) API instead.<br/><br/>The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+
+  <p>
+    <strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+  </p>
+</div>
 
 #### Example
 
 <%= json \
   :name => 'new team',
   :description => 'team description',
-  :permission => 'push',
-  :repo_names => ['github/dotfiles'] %>
+  :privacy => 'closed' %>
 
 ### Response
 
@@ -60,8 +75,8 @@ Name | Type | Description
 
 ## Edit team
 
-In order to edit a team, the authenticated user must be an owner of
-the org that the team is associated with.
+In order to edit a team, the authenticated user must either be an owner of
+the org that the team is associated with, or a maintainer of the team.
 
     PATCH /teams/:id
 
@@ -71,14 +86,30 @@ Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
 `description`|`string` | The description of the team.
-`permission`|`string` | The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
+`privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`permission`|`string` | **Deprecated**. In the preview period described in the alert below, a team's `permission` attribute no longer dictates what permission it has on its repositories; it only dictates what permission a new repository will be added to the team with if none is specified by the user. Avoid confusion by specifying a `permission` when using the [Add team repository](/v3/orgs/teams/#add-team-repo) API instead.<br/><br/>The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories. Default: `pull`
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+
+  <p>
+    <strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+  </p>
+</div>
 
 #### Example
 
 <%= json \
   :name => 'new team name',
-  :name => 'new team description',
-  :permission => 'push' %>
+  :description => 'new team description',
+  :privacy => 'closed' %>
 
 ### Response
 
@@ -88,7 +119,7 @@ Name | Type | Description
 ## Delete team
 
 In order to delete a team, the authenticated user must be an owner of
-the org that the team is associated with.
+the org that the team is associated with, or a maintainer of the team.
 
     DELETE /teams/:id
 
@@ -98,10 +129,25 @@ the org that the team is associated with.
 
 ## List team members
 
-In order to list members in a team, the authenticated user must be a
-member of the team.
+In order to list members in a team, the team must be visible to the
+authenticated user.
 
     GET /teams/:id/members
+
+Name | Type | Description
+-----|------|--------------
+`role`|`string`| Filters members returned by their role in the team. Can be one of:<br/> * `member` - normal members of the team.<br/> * `maintainer` - team maintainers.<br/> * `all` - all members of the team.<br/>Default: `all`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
 
 ### Response
 
@@ -124,8 +170,8 @@ member of the team.
   </p>
 </div>
 
-In order to get if a user is a member of a team, the authenticated user
-must be a member of the team.
+In order to list members in a team, the team must be visible to the
+authenticated user.
 
     GET /teams/:id/members/:username
 
@@ -220,8 +266,8 @@ NOTE: This does not delete the user, it just removes them from the team.
 
 ## Get team membership
 
-In order to get a user's membership with a team, the authenticated user must be
-a member of the team or an owner of the team's organization.
+In order to get a user's membership with a team, the team must be visible to the
+authenticated user.
 
     GET /teams/:id/memberships/:username
 
@@ -241,22 +287,40 @@ a member of the team or an owner of the team's organization.
 
 ## Add team membership
 
-In order to add a membership between a user and a team, the authenticated user
-must have 'admin' permissions to the team or be an owner of the organization
-that the team is associated with.
+If the user is already a member of the team's organization, this endpoint will
+add the user to the team. In order to add a membership between an organization
+member and a team, the authenticated user must be an organization owner or a
+maintainer of the team.
 
-If the user is already a part of the team's organization (meaning they're on at
-least one other team in the organization), this endpoint will add the user to
-the team.
-
-If the user is completely unaffiliated with the team's organization (meaning
-they're on none of the organization's teams), this endpoint will send an
-invitation to the user via email. This newly-created membership will be in the
-"pending" state until the user accepts the invitation, at which point the
+If the user is unaffiliated with the team's organization, this endpoint will
+send an invitation to the user via email. This newly-created membership will be
+in the "pending" state until the user accepts the invitation, at which point the
 membership will transition to the "active" state and the user will be added as a
-member of the team.
+member of the team. In order to add a membership between an unaffiliated user
+and a team, the authenticated user must be an organization owner.
 
     PUT /teams/:id/memberships/:username
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`role`|`string`| The role that this user should have in the team. Can be one of:<br/> * `member` - a normal member of the team.<br/> * `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.<br/>Default: `member`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+
+  <p>
+    <strong>Warning:</strong> If you specify the <code>role</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+  </p>
+</div>
 
 ### Response if user's membership with team is now active
 
@@ -315,16 +379,59 @@ team.
 
 <%= headers 404 %>
 
+### Alternative response with extra repository information
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
+
+You can also get information about the specified repository, including what
+permissions the team grants on it, by passing the following custom
+[media type](/v3/media/) via the `Accept` header:
+
+    Accept: application/vnd.github.ironman-preview.repository+json
+
+<%= headers 200 %>
+<%= json :repo %>
+
 ## Add team repository {#add-team-repo}
 
-In order to add a repository to a team, the authenticated user must be an
-owner of the org that the team is associated with.  Also, the repository must
-be owned by the organization, or a direct fork of a repository owned by the
+In order to add a repository to a team, the authenticated user must have admin
+access to the repository, and must be able to see the team. Also, the repository
+must be owned by the organization, or a direct fork of a repository owned by the
 organization.
 
     PUT /teams/:id/repos/:org/:repo
 
-<%= fetch_content(:put_content_length) %>
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`permission`|`string` | The permission to grant the team on this repository. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer this repository.<br/> * `push` - team members can pull and push, but not administer this repository.<br/> * `admin` - team members can pull, push and administer this repository.<br/><br/>If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.<br/><br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+
+<%= fetch_content(:optional_put_content_length) %>
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+
+  <p>
+    <strong>Warning:</strong> If you specify the <code>permission</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+  </p>
+</div>
 
 ### Response
 
@@ -344,10 +451,8 @@ organization, you get:
 
 ## Remove team repository {#remove-team-repo}
 
-In order to remove a repository from a team, the authenticated user must be an
-owner of the org that the team is associated with. Also, since the Owners team
-always has access to all repositories in the organization, repositories cannot
-be removed from the Owners team.
+In order to remove a repository from a team, the authenticated user must have
+admin access to the repository or be a maintainer of the team.
 NOTE: This does not delete the repository, it just removes it from the team.
 
     DELETE /teams/:id/repos/:owner/:repo

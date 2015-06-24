@@ -28,7 +28,7 @@ We now allow you to modify the privacy level of your teams. A "secret" team can 
 The team APIs now support this new team privacy concept:
 
 - The [Create team][create-team] and [Edit team][edit-team] APIs accept a `privacy` parameter, so that you can specify whether a team should be `secret` or `closed`.
-- All APIs that return team objects include a `privacy` attribute, indicating whether the team is `secret` or `closed`.
+- All team resources in the API now include a `privacy` attribute, indicating whether the team is `secret` or `closed`.
 
 ### Team maintainers
 

@@ -48,7 +48,7 @@ Name | Type | Description
 
 <div class="alert">
   <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
   </p>
 
   <p>
@@ -57,7 +57,7 @@ Name | Type | Description
   </p>
 
   <p>
-    <strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="/this-should-404-until-we-ship-the-dotcom-blog-post">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+    <strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
   </p>
 </div>
 
@@ -91,7 +91,7 @@ Name | Type | Description
 
 <div class="alert">
   <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
   </p>
 
   <p>
@@ -100,7 +100,7 @@ Name | Type | Description
   </p>
 
   <p>
-    <strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="/this-should-404-until-we-ship-the-dotcom-blog-post">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+    <strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
   </p>
 </div>
 
@@ -140,7 +140,7 @@ Name | Type | Description
 
 <div class="alert">
   <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
   </p>
 
   <p>
@@ -309,7 +309,7 @@ Name | Type | Description
 
 <div class="alert">
   <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
   </p>
 
   <p>
@@ -318,7 +318,7 @@ Name | Type | Description
   </p>
 
   <p>
-    <strong>Warning:</strong> If you specify the <code>role</code> attribute on an organization that hasn't had <a href="/this-should-404-until-we-ship-the-dotcom-blog-post">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+    <strong>Warning:</strong> If you specify the <code>role</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
   </p>
 </div>
 
@@ -383,7 +383,7 @@ team.
 
 <div class="alert">
   <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
   </p>
 
   <p>
@@ -420,7 +420,7 @@ Name | Type | Description
 
 <div class="alert">
   <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-improved-organization-permissions-apis/">blog post</a> for full details.
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
   </p>
 
   <p>
@@ -429,7 +429,7 @@ Name | Type | Description
   </p>
 
   <p>
-    <strong>Warning:</strong> If you specify the <code>permission</code> attribute on an organization that hasn't had <a href="/this-should-404-until-we-ship-the-dotcom-blog-post">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
+    <strong>Warning:</strong> If you specify the <code>permission</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
   </p>
 </div>
 

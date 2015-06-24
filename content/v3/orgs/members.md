@@ -131,17 +131,6 @@ The user can publicize their own membership.
 
 ## Get organization membership
 
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access this API method during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
-  </p>
-</div>
-
 In order to get a user's membership with an organization, the authenticated user must be an organization owner.
 
     GET /orgs/:org/memberships/:username
@@ -162,17 +151,6 @@ In order to get a user's membership with an organization, the authenticated user
 <%= json(:pending_limited_org_membership) %>
 
 ## Add or update organization membership
-
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access this API method during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
-  </p>
-</div>
 
 In order to create or update a user's membership with an organization, the authenticated user must be an organization owner.
 
@@ -195,17 +173,6 @@ Name  | Type   | Description
 <%= json(:active_admin_org_membership) %>
 
 ## Remove organization membership
-
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access this API method during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
-  </p>
-</div>
 
 In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
 

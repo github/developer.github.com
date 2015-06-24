@@ -24,6 +24,15 @@ h1 {
 body:not(.enterprise) .enterprise-only {
   display: none;
 }
+body.dev-mode .enterprise-only {
+  border: 3px solid red;
+}
+body.dev-mode .not-enterprise {
+  border: 3px dashed blue;
+}
+body.dev-mode.enterprise .not-enterprise {
+  display: none;
+}
 
 .content h1 {
   font-weight: 300;
@@ -858,6 +867,7 @@ a .mega-octicon {
 .dev-program.feature {
   height: 420px;
   margin-top: -2px;
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -877,11 +887,11 @@ a .mega-octicon {
 }
 
 .dev-program.feature .earth {
-  margin-top: -187px;
+  margin-top: -150px;
   position: absolute;
-  right: 5%;
+  right: -55px;
   top: 50%;
-  z-index: 0;
+  z-index: -1;
 }
 
 .dev-program.feature .earth-short-loop {

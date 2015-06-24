@@ -95,16 +95,29 @@ be returned.</p>
     <tr>
       <td><code>filter</code></td>
       <td><code>string</code></td>
-      <td>Filter members returned in the list. Can be one of:<br>* <code>2fa_disabled</code>: Members without <a href="https://github.com/blog/1614-two-factor-authentication">two-factor authentication</a> enabled. Available for organization admins.<br>* <code>all</code>: All members the authenticated user can see.<br><br>Default: <code>all</code>
+      <td>Filter members returned in the list. Can be one of:<br>* <code>2fa_disabled</code>: Members without <a href="https://github.com/blog/1614-two-factor-authentication">two-factor authentication</a> enabled. Available for organization owners.<br>* <code>all</code>: All members the authenticated user can see.<br><br>Default: <code>all</code>
 </td>
     </tr>
     <tr>
       <td><code>role</code></td>
       <td><code>string</code></td>
-      <td>Filter members returned by their role. If specified, must be set to <code>admin</code>, which will only return users with admin permissions on the org.</td>
+      <td>Filter members returned by their role. Can be one of:<br>* <code>all</code>: All members of the organization, regardless of role.<br>* <code>admin</code>: Organization owners.<br>* <code>member</code>: Non-owner organization members. <strong>This option requires a custom media type to be specified. Please see more in the alert below.</strong><br><br>Default: <code>all</code>
+</td>
     </tr>
   </tbody>
 </table>
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    </p>
+<pre>application/vnd.github.ironman-preview+json</pre>
+  
+</div>
 
 <h3 id="response">Response</h3>
 
@@ -177,8 +190,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="add-a-member">Add a member</h2>
 
-<p>To add someone as a member to an org, you must add them to a
-<a href="/v3/orgs/teams/#add-team-member">team</a>.</p>
+<p>To add someone as a member to an organization, you must
+<a href="/v3/orgs/members/#add-or-update-organization-membership">invite them to the organization</a>
+or <a href="/v3/orgs/teams/#add-team-membership">invite them to a team</a>.</p>
 
 <h2 id="remove-a-member">Remove a member</h2>
 
@@ -278,7 +292,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-organization-membership">Get organization membership</h2>
 
-<p>In order to get a user’s membership with an organization, the authenticated user must be an organization admin.</p>
+<p>In order to get a user’s membership with an organization, the authenticated user must be an organization owner.</p>
 
 <pre><code>GET /orgs/:org/memberships/:username
 </code></pre>
@@ -411,7 +425,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="add-or-update-organization-membership">Add or update organization membership</h2>
 
-<p>In order to create or update a user’s membership with an organization, the authenticated user must be an organization admin.</p>
+<p>In order to create or update a user’s membership with an organization, the authenticated user must be an organization owner.</p>
 
 <pre><code>PUT /orgs/:org/memberships/:username
 </code></pre>
@@ -431,7 +445,7 @@ X-RateLimit-Remaining: 4999</code></pre>
       <td><code>role</code></td>
       <td><code>string</code></td>
       <td>
-<strong>Required</strong>. The role to give the user in the organization. Can be one of:<br> * <code>admin</code> - The user will become an administrator of the organization.<br> * <code>member</code> - The user will become a non-admin member of the organization. Use this only to demote an existing admin to a non-admin.</td>
+<strong>Required</strong>. The role to give the user in the organization. Can be one of:<br> * <code>admin</code> - The user will become an owner of the organization.<br> * <code>member</code> - The user will become a non-owner member of the organization. Use this only to demote an existing owner to a non-owner.</td>
     </tr>
   </tbody>
 </table>
@@ -522,7 +536,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="remove-organization-membership">Remove organization membership</h2>
 
-<p>In order to remove a user’s membership with an organization, the authenticated user must be an organization admin.</p>
+<p>In order to remove a user’s membership with an organization, the authenticated user must be an organization owner.</p>
 
 <pre><code>DELETE /orgs/:org/memberships/:username
 </code></pre>

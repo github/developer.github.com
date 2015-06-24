@@ -10,6 +10,91 @@
     <uri>https://github.com/technoweenie</uri>
   </author>
   <entry>
+    <id>tag:developer.github.com,2015-06-24:/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/</id>
+    <title type="html">API enhancements for working with organization permissions</title>
+    <published>2015-06-24T00:00:00Z</published>
+    <updated>2015-06-24T00:00:00Z</updated>
+    <author>
+      <name>jakeboxer</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/" />
+    <content type="html">&lt;p&gt;We’re introducing several enhancements to allow API developers to take advantage of the &lt;a href="https://github.com/blog/2020-improved-organization-permissions"&gt;improved organization permissions&lt;/a&gt; that we are rolling out. Learn about these enhancements and how you can try them out below.&lt;/p&gt;
+
+&lt;p&gt;Since we’re rolling out the &lt;a href="https://github.com/blog/2020-improved-organization-permissions"&gt;improved organization permissions&lt;/a&gt; improvements slowly, these enhancements will only apply to certain organizations at first. Most of these enhancements will degrade gracefully (returning an empty array or something similar) if used on an organization that doesn’t support improved organization permissions yet. Check the documentation for your specific API to see if errors are possible.&lt;/p&gt;
+
+&lt;h2 id="api-enhancements"&gt;API enhancements&lt;/h2&gt;
+
+&lt;h3 id="team-permissions"&gt;Team permissions&lt;/h3&gt;
+
+&lt;p&gt;In our improved permissions system, a team no longer has a single permission that applies to all of its repositories. Instead, each repository is added to a team with its own permission. For example, an organization could use a single team to grant pull access to one repository, push access to a second, and admin access to a third.&lt;/p&gt;
+
+&lt;p&gt;The team APIs now support this more granular notion of permissions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;a href="/v3/orgs/teams/#add-team-repo"&gt;Add team repository&lt;/a&gt; API accepts a &lt;code&gt;permission&lt;/code&gt; parameter, so that you can specify whether a team should grant &lt;code&gt;pull&lt;/code&gt;, &lt;code&gt;push&lt;/code&gt;, or &lt;code&gt;admin&lt;/code&gt; access on a given repository.&lt;/li&gt;
+  &lt;li&gt;In the &lt;a href="/v3/orgs/teams/#list-team-repos"&gt;List team repositories&lt;/a&gt; and &lt;a href="/v3/orgs/teams/#get-team-repo"&gt;Check if a team manages a repository&lt;/a&gt; API, the response includes a &lt;code&gt;permissions&lt;/code&gt; attribute, indicating whether the team grants &lt;code&gt;pull&lt;/code&gt;, &lt;code&gt;push&lt;/code&gt;, or &lt;code&gt;admin&lt;/code&gt; access on each repository.&lt;/li&gt;
+  &lt;li&gt;The &lt;code&gt;permission&lt;/code&gt; parameter in the &lt;a href="/v3/orgs/teams/#create-team"&gt;Create team&lt;/a&gt; and &lt;a href="/v3/orgs/teams/#edit-team"&gt;Edit team&lt;/a&gt; APIs is deprecated. Since teams can grant a different permission on each repository, this parameter no longer dictates what permission a team grants on all of its repositories. Instead, it dictates the default permission that the &lt;a href="/v3/orgs/teams/#add-team-repo"&gt;Add team repository&lt;/a&gt; API will use for requests where no &lt;code&gt;permission&lt;/code&gt; parameter is specified.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="team-privacy"&gt;Team privacy&lt;/h3&gt;
+
+&lt;p&gt;We now allow you to modify the privacy level of your teams. A “secret” team can only be seen by organization owners and people who are members of that team (which is how all teams have worked historically), while a “closed” team is visible to every member of the organization (which makes it easier to use &lt;a href="https://github.com/blog/1121-introducing-team-mentions"&gt;@mentions&lt;/a&gt; throughout your organization).&lt;/p&gt;
+
+&lt;p&gt;The team APIs now support this new team privacy concept:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;a href="/v3/orgs/teams/#create-team"&gt;Create team&lt;/a&gt; and &lt;a href="/v3/orgs/teams/#edit-team"&gt;Edit team&lt;/a&gt; APIs accept a &lt;code&gt;privacy&lt;/code&gt; parameter, so that you can specify whether a team should be &lt;code&gt;secret&lt;/code&gt; or &lt;code&gt;closed&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;All team resources in the API now include a &lt;code&gt;privacy&lt;/code&gt; attribute, indicating whether the team is &lt;code&gt;secret&lt;/code&gt; or &lt;code&gt;closed&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="team-maintainers"&gt;Team maintainers&lt;/h3&gt;
+
+&lt;p&gt;We’ve added the ability for you to delegate team maintenance to non-owners, reducing the workload for your organization’s owners. You can now promote a non-owner member of a team to be a “maintainer” of that team. A maintainer can add and remove team members and change the team’s title and description.&lt;/p&gt;
+
+&lt;p&gt;The team membership APIs now support this new team maintainer concept:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;a href="/v3/orgs/teams/#add-team-membership"&gt;Add team membership&lt;/a&gt; API accepts a &lt;code&gt;role&lt;/code&gt; parameter, so that you can specify whether a given team member should be a &lt;code&gt;maintainer&lt;/code&gt; or a regular &lt;code&gt;member&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;The &lt;a href="/v3/orgs/teams/#list-team-members"&gt;List team members&lt;/a&gt; API accepts an optional &lt;code&gt;role&lt;/code&gt; parameter, allowing you to fetch only &lt;code&gt;maintainer&lt;/code&gt;s or only regular &lt;code&gt;member&lt;/code&gt;s.&lt;/li&gt;
+  &lt;li&gt;In the &lt;a href="/v3/orgs/teams/#get-team-membership"&gt;Get team membership&lt;/a&gt; and &lt;a href="/v3/orgs/teams/#add-team-membership"&gt;Add team membership&lt;/a&gt; APIs, the response includes a &lt;code&gt;role&lt;/code&gt; attribute, indicating whether a user is a &lt;code&gt;maintainer&lt;/code&gt; or a regular &lt;code&gt;member&lt;/code&gt; of the team.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For more information on our improved team permissions, check out our &lt;a href="https://help.github.com/articles/improved-organization-permissions/#understanding-team-permissions"&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="filtering-organization-members-by-role"&gt;Filtering organization members by role&lt;/h3&gt;
+
+&lt;p&gt;The organization &lt;a href="/v3/orgs/members/#members-list"&gt;Members list&lt;/a&gt; API now accepts a &lt;code&gt;role&lt;/code&gt; parameter, so that you can request to see only the owners (or non-owners) of your organization.&lt;/p&gt;
+
+&lt;h3 id="repository-collaborators"&gt;Repository collaborators&lt;/h3&gt;
+
+&lt;p&gt;We now allow you to add collaborators directly to organization-owned repositories, just like we always have for user-owned repositories.&lt;/p&gt;
+
+&lt;p&gt;The collaborator APIs now support organization-owned repositories:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;a href="/v3/repos/collaborators/#add-collaborator"&gt;Add user as a collaborator&lt;/a&gt; API works for organization-owned repositories. We’ve also added a &lt;code&gt;permission&lt;/code&gt; parameter to it (currently valid for organization-owned repositories only), so that you can specify what level of access the collaborator should have on the repository.&lt;/li&gt;
+  &lt;li&gt;In the &lt;a href="/v3/repos/collaborators/#list"&gt;List collaborators&lt;/a&gt; API, the response includes a &lt;code&gt;permissions&lt;/code&gt; attribute describing the permissions that each collaborator has on your organization’s repositories.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="preview-period"&gt;Preview period&lt;/h2&gt;
+
+&lt;p&gt;Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.&lt;/p&gt;
+
+&lt;p&gt;While these enhancements are in their preview period, you’ll need to provide the following &lt;a href="/v3/media/"&gt;custom media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.ironman-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;h2 id="send-us-your-feedback"&gt;Send us your feedback&lt;/h2&gt;
+
+&lt;p&gt;We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2015-06-24:/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/</id>
     <title type="html">Breaking changes to organization permissions are now official</title>
     <published>2015-06-24T00:00:00Z</published>
@@ -1233,33 +1318,6 @@ organizations.&lt;/p&gt;
 
 &lt;p&gt;Check out the updated &lt;a href="/v3/activity/feeds/"&gt;Feeds API documentation&lt;/a&gt; for the new fields. If you
 have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Changing+organization+feeds+in+the+Feeds+API"&gt;get drop us a line&lt;/a&gt;.&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-09-05:/changes/2014-09-05-removing-gravatar-id/</id>
-    <title type="html">Removing Gravatar ID from user payloads</title>
-    <published>2014-09-05T00:00:00Z</published>
-    <updated>2014-09-05T00:00:00Z</updated>
-    <author>
-      <name>mastahyeti</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-09-05-removing-gravatar-id/" />
-    <content type="html">&lt;p&gt;We have deprecated the &lt;code&gt;gravatar_id&lt;/code&gt; attribute in the &lt;a href="https://developer.github.com/v3/users/"&gt;user
-representation&lt;/a&gt;. Starting September 19,
-the API will always provide an empty string as the value for this attribute.&lt;/p&gt;
-
-&lt;p&gt;Users have been able to upload avatars directly to GitHub for &lt;a href="https://github.com/blog/1803-switch-your-picture-with-ease"&gt;a while
-now&lt;/a&gt;. If users
-haven’t uploaded an avatar, we still try to fetch one from Gravatar, but that
-happens behind the scenes on GitHub’s servers. As a result, the &lt;code&gt;gravatar_id&lt;/code&gt;
-attribute no longer identifies a GitHub user’s canonical avatar. Instead, API
-consumers should use the &lt;code&gt;avatar_url&lt;/code&gt; to fetch a user’s avatar. The &lt;code&gt;avatar_url&lt;/code&gt;
-attribute has always been present in the &lt;a href="/v3/users/"&gt;v3 user representation&lt;/a&gt;
-and is the only reliable way to find a GitHub user’s avatar.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Removing+Gravatar+ID"&gt;get drop us a line&lt;/a&gt;.&lt;/p&gt;
 
 </content>
   </entry>

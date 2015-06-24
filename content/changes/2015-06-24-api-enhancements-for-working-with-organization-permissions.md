@@ -69,7 +69,7 @@ During the preview period, we may change aspects of these enhancements. If we do
 
 We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please [get in touch with us][contact]!
 
-[dotcom-blog-post]: /this-should-404-until-we-ship-the-dotcom-blog-post
+[dotcom-blog-post]: https://github.com/blog/2020-improved-organization-permissions
 [understanding-team-permissions]: https://help.github.com/articles/improved-organization-permissions/#understanding-team-permissions
 [create-team]: /v3/orgs/teams/#create-team
 [edit-team]: /v3/orgs/teams/#edit-team

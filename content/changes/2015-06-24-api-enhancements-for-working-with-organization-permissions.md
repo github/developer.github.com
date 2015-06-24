@@ -7,6 +7,8 @@ author_name: jakeboxer
 
 We're introducing several enhancements to allow API developers to take advantage of the [improved organization permissions][dotcom-blog-post] that we are rolling out. Learn about these enhancements and how you can try them out below.
 
+Since we're rolling out the [improved organization permissions][dotcom-blog-post] improvements slowly, these enhancements will only apply to certain organizations at first. Most of these enhancements will degrade gracefully (returning an empty array or something similar) if used on an organization that doesn't support improved organization permissions yet. Check the documentation for your specific API to see if errors are possible.
+
 ## API enhancements
 
 ### Team permissions
@@ -56,8 +58,6 @@ The collaborator APIs now support organization-owned repositories:
 ## Preview period
 
 Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.
-
-Since we're rolling out the [improved organization permissions][dotcom-blog-post] improvements slowly, these API enhancements will only apply to certain organizations at first. Most of these enhancements will degrade gracefully (returning an empty array or something similar) if used on an organization that doesn't support improved organization permissions yet. Check the documentation for your specific API to see if errors are possible.
 
 While these enhancements are in their preview period, you'll need to provide the following custom media type in the `Accept` header:
 

@@ -59,7 +59,7 @@ The collaborator APIs now support organization-owned repositories:
 
 Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.
 
-While these enhancements are in their preview period, you'll need to provide the following custom media type in the `Accept` header:
+While these enhancements are in their preview period, you'll need to provide the following [custom media type][custom-media-types] in the `Accept` header:
 
     application/vnd.github.ironman-preview+json
 
@@ -85,3 +85,4 @@ We would love to hear your thoughts on these enhancements. If you have any quest
 [add-collab]: /v3/repos/collaborators/#add-collaborator
 [contact]: https://github.com/contact?form[subject]=Organization+Permissions+API
 [team-mentions]: https://github.com/blog/1121-introducing-team-mentions
+[custom-media-types]: /v3/media/

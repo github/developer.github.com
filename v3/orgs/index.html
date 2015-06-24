@@ -68,21 +68,7 @@
 
 <h3 id="oauth-scope-requirements">OAuth scope requirements</h3>
 
-<p>Currently, <a href="/v3/oauth/#scopes">OAuth</a> requests always receive the user’s <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a>, regardless of the OAuth scopes associated with the request. If the OAuth authorization has <code>user</code> or <code>read:org</code> scope, the response also includes private organization memberships.</p>
-
-<p>With the new Organization Permissions API (described below), this method will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with <code>read:org</code> scope, you can publicize your organization membership with <code>user</code> scope, etc.). Therefore, this API will require at least <code>user</code> or <code>read:org</code> scope. OAuth requests with insufficient scope will receive a <code>403 Forbidden</code> response.</p>
-
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">beginning June 24, 2015</a>. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    </p>
-<pre>application/vnd.github.moondragon+json</pre>
-  
-</div>
+<p>This only lists organizations that your authorization allows you to operate on in some way (e.g., you can list teams with <code>read:org</code> scope, you can publicize your organization membership with <code>user</code> scope, etc.). Therefore, this API requires at least <code>user</code> or <code>read:org</code> scope. OAuth requests with insufficient scope receive a <code>403 Forbidden</code> response.</p>
 
 <pre><code>GET /user/orgs
 </code></pre>
@@ -156,21 +142,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>List <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a> for the specified user.</p>
 
-<p>Currently, if you make an authenticated call, you can also list your private memberships in organizations (but only for the currently authenticated user).</p>
-
-<p>With the new Organization Permissions API (described below), this method will only list <em>public</em> memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the <a href="#list-your-organizations">List your organizations</a> API instead.</p>
-
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">beginning June 24, 2015</a>. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    </p>
-<pre>application/vnd.github.moondragon+json</pre>
-  
-</div>
+<p>This method only lists <em>public</em> memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the <a href="#list-your-organizations">List your organizations</a> API instead.</p>
 
 <pre><code>GET /users/:username/orgs
 </code></pre>

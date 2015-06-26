@@ -75,6 +75,7 @@ We reserve the right to change these guidelines as needed to ensure availability
   or client ID concurrently.
 * If you're making a large number of `POST`, `PATCH`, `PUT`, or `DELETE` requests for a single user
   or client ID, wait at least 1 second between each request.
+* Make subsequent requests after the time period specified in the `Retry-After` header.
 
 ## Dealing with API errors
 

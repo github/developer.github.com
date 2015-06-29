@@ -67,7 +67,6 @@ You can always [check your rate limit status](/v3/rate_limit/) at any time. Chec
 
 [Abuse rate limits](/v3/#abuse-rate-limits) are another way we ensure the API's availability.
 To avoid hitting this limit, you should ensure your application follows the guidelines below.
-We reserve the right to change these guidelines as needed to ensure availability.
 
 * Make authenticated requests, or use your application's client ID and secret. Unauthenticated
   requests are subject to more aggressive abuse rate limiting.
@@ -76,6 +75,8 @@ We reserve the right to change these guidelines as needed to ensure availability
 * If you're making a large number of `POST`, `PATCH`, `PUT`, or `DELETE` requests for a single user
   or client ID, wait at least 1 second between each request.
 * Make subsequent requests after the time period specified in the `Retry-After` header.
+
+We reserve the right to change these guidelines as needed to ensure availability.
 
 ## Dealing with API errors
 

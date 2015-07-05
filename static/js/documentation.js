@@ -5,23 +5,23 @@ $(function() {
       firstOccurance = true,
       styleTOC = function() {
         var pathRegEx = /\/\/[^\/]+(\/.+)/g,
-            docUrl = pathRegEx.exec(window.location.toString())
+            docUrl = pathRegEx.exec(window.location.toString());
         if (docUrl){
           $('#js-sidebar .js-topic a').each(function(){
             if ($(this).parent('li').hasClass('disable'))
-              $(this).parent('li').removeClass('disable')
+              $(this).parent('li').removeClass('disable');
 
-            var url = $(this).attr('href').toString()
-            var cleanDocUrl = docUrl[1]
+            var url = $(this).attr('href').toString();
+            var cleanDocUrl = docUrl[1];
             if(url.indexOf(cleanDocUrl) >= 0 && url.length == cleanDocUrl.length){
-              $(this).parent('li').addClass('disable')
-              var parentTopic = $(this).parentsUntil('div.sidebar-module > ul').last()
-              parentTopic.addClass('js-current')
+              $(this).parent('li').addClass('disable');
+              var parentTopic = $(this).parentsUntil('div.sidebar-module > ul').last();
+              parentTopic.addClass('js-current');
               parentTopic.find('.js-expand-btn').toggleClass('collapsed expanded')
             }
           });
         }
-      }
+      };
 
   // bind every href with a hash; take a look at v3/search/ for example
   $('#js-sidebar .js-accordion-list .js-topic a[href*=#]').bind("click", function(e) {
@@ -39,18 +39,18 @@ $(function() {
     $(this).hasClass('js-current') != true){
       $(this).find('.js-guides').children().hide()
     } else {
-      activeItem = $(this).index()
+      activeItem = $(this).index();
       firstOccurance = false
     }
-  })
+  });
 
   // Toggle style list. Expanded items stay
   // expanded when new items are clicked.
   $('#js-sidebar .js-toggle-list .js-expand-btn').click(function(){
     var clickedTopic = $(this).parents('.js-topic'),
-        topicGuides  = clickedTopic.find('.js-guides li')
-    $(this).toggleClass('collapsed expanded')
-    topicGuides.slideToggle(100)
+        topicGuides  = clickedTopic.find('.js-guides li');
+    $(this).toggleClass('collapsed expanded');
+    topicGuides.slideToggle(100);
     return false
   })
 
@@ -58,31 +58,31 @@ $(function() {
   // collapse when new items are clicked.
   $('#js-sidebar .js-accordion-list .js-topic h3 a').click(function(){
     var clickedTopic = $(this).parents('.js-topic'),
-        topicGuides = clickedTopic.find('.js-guides li')
+        topicGuides = clickedTopic.find('.js-guides li');
 
     if(activeItem != clickedTopic.index()){
       if(helpList.eq(activeItem)){
         helpList.eq(activeItem).find('.js-guides li').slideToggle(100)
       }
-      activeItem = clickedTopic.index()
+      activeItem = clickedTopic.index();
       topicGuides.slideToggle(100)
     } else {
-      activeItem = undefined
+      activeItem = undefined;
       topicGuides.slideToggle(100)
     }
 
     return false
-  })
+  });
 
   $('.help-search .search-box').focus(function(){
     $(this).css('background-position','0px -25px')
-  })
+  });
 
   $('.help-search .search-box').focusout(function(){
     if($(this).val() == ''){
       $(this).css('background-position','0px 0px')
     }
-  })
+  });
 
   // Dynamic year for footer copyright
   var currentYear = (new Date).getFullYear();
@@ -133,11 +133,7 @@ $(function() {
 
   function localStorageHasExpired() {
     // Expires in one day (86400000 ms)
-    if (new Date().getTime() - parseInt(localStorage['updated'],10) > 86400000) {
-      return true;
-    }
-
-    return false;
+    return (new Date().getTime() - parseInt(localStorage['updated'],10) > 86400000);
   }
 
   // Expand and activate search if the page loaded with a value set for the search field

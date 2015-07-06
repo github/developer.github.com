@@ -215,6 +215,10 @@ a img {
      Header Styles
 ------------------------------------------------------------------------------*/
 
+#menu-icon {
+  display: none;
+}
+
 #header-wrapper {
   margin-bottom: 0;
   clear: both;
@@ -1423,14 +1427,32 @@ pre span.comment {color: #AAAAAA;}
 }
 
 @media (max-width: 600px) {
+  #menu-icon {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 28px;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+  }
+
   #header-wrapper {
     background: white;
     box-shadow: 5px 5px 10px #888888;
     height: 100vh;
     left: -17rem;
     position: fixed;
+    top: 0;
     width: 16rem;
-    z-index: 10;
+    z-index: 20;
+
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
   }
 
   #header {
@@ -1473,18 +1495,38 @@ pre span.comment {color: #AAAAAA;}
     padding: 10px 0 10px 0;
   }
 
-  .wrapper.feature {
-    background-size: cover;
-    background-image: url('/images/rocketship.png');
+  .feature .rocketship {
+    float: right;
+    height: 40%;
+    padding-right: 30px;
+    top: 270px;
+    width: 60%;
+    z-index: -1;
   }
 
-  .wrapper.feature * {
+  .wrapper.feature {
+    padding: 30px;
     text-align: center;
+  }
+
+  .wrapper.feature h1 {
+    padding-top: 20px;
+  }
+
+  .feature.wrapper *,
+  .feature h1,
+  .library-list .feature h1 {
+    text-align: center;
+  }
+
+  .wrapper.clearfix {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .wrapper.feature .button {
     display: block;
-    margin: auto;
+    margin: 0 auto;
     width: 50%;
   }
 
@@ -1492,7 +1534,7 @@ pre span.comment {color: #AAAAAA;}
     padding-left: 10px;
   }
 
-  .highlight-module {
+  .highlights li.highlight-module {
     display: block;
     padding: 10px 14px 20px;
   }
@@ -1502,8 +1544,12 @@ pre span.comment {color: #AAAAAA;}
     padding-right: 5px;
   }
 
+  .lower_footer .footer-cell {
+    text-align: center;
+  }
+
   .lower_footer span.footer-cell {
-    width: 5%;
+    width: 3%;
   }
 }
 

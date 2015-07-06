@@ -2,15 +2,30 @@ $(document).ready(function() {
   var menuOpen = false;
   var gestureHandling = new Hammer(document.body, {preventDefault: true});
 
-  gestureHandling.on('swiperight', function(event) {
-    document.getElementById('header-wrapper').style.transform = 'translateX(17rem)';
-    menuOpen = true;
+  gestureHandling.on('swiperight',  function() {
+    if (!menuOpen) openMenu();
   });
 
-  gestureHandling.on('swipeleft', function(event) {
-    if (menuOpen) document.getElementById('header-wrapper').style.transform = 'translateX(-17rem)';
-    menuOpen = false;
+  gestureHandling.on('swipeleft', function() {
+    if (menuOpen) closeMenu();
   });
+
+  $('#menu-icon').click(function() {
+    if (menuOpen) closeMenu();
+    else openMenu();
+  });
+
+  function openMenu() {
+    document.getElementById('header-wrapper').style.transform = 'translateX(17rem)';
+    document.getElementById('menu-icon').style.transform = 'translateX(17rem)';
+    menuOpen = true;
+  }
+
+  function closeMenu() {
+    document.getElementById('header-wrapper').style.transform = 'translateX(-17rem)';
+    document.getElementById('menu-icon').style.transform = 'initial';
+    menuOpen = false;
+  }
 });
 
 // Init sidebar

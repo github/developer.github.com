@@ -124,6 +124,7 @@ module GitHub
         'IF_SITE_ADMIN' => "If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,",
         'LATEST_ENTERPRISE_VERSION' => '2.2',
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
+        "OPTIONAL_PUT_CONTENT_LENGTH" => "Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "ORG_HOOK_CONFIG_HASH" =>
         '''
 Name | Type | Description
@@ -175,6 +176,14 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "contributions" => 32
     })
 
+    COLLABORATOR ||= USER.merge({
+      "permissions" => {
+        "pull"  => true,
+        "push"  => true,
+        "admin" => false
+      }
+    })
+
     FULL_USER ||= USER.merge({
       "name"         => "monalisa octocat",
       "company"      => "GitHub",
@@ -218,7 +227,8 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "url"        => "https://api.github.com/user/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
-      "created_at" => "2014-12-10T15:53:42Z"
+      "created_at" => "2014-12-10T15:53:42Z",
+      "read_only"  => true
 
     PUBLIC_KEY_DETAIL ||= PUBLIC_KEY.merge \
       "user_id"        => 232,
@@ -228,7 +238,8 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "url"        => "https://api.github.com/repos/octocat/Hello-World/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
-      "created_at" => "2014-12-10T15:53:42Z"
+      "created_at" => "2014-12-10T15:53:42Z",
+      "read_only"  => true
 
     DEPLOY_KEY_DETAIL ||= PUBLIC_KEY.merge \
       "user_id"        => nil,
@@ -765,6 +776,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "name" => "Justice League",
       "slug" => "justice-league",
       "description" => "A great team.",
+      "privacy" => "closed",
       "permission" => "admin",
       "members_url" => "https://api.github.com/teams/1/members{/member}",
       "repositories_url" => "https://api.github.com/teams/1/repos"
@@ -777,7 +789,8 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     })
 
     TEAM_MEMBERSHIP ||= {
-      "url" => "https://api.github.com/teams/1/memberships/octocat"
+      "url" => "https://api.github.com/teams/1/memberships/octocat",
+      "role" => "member"
     }
 
     ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
@@ -1858,10 +1871,14 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     }
 
     META ||= {
+      :verifiable_password_authentication => true,
+      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :hooks => ['127.0.0.1/32'],
       :git => ['127.0.0.1/32'],
-      :verifiable_password_authentication => true,
-      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
+      :pages => [
+        "192.30.252.153/32",
+        "192.30.252.154/32"
+      ]
     }
 
     BLOB ||= {

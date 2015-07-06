@@ -64,9 +64,9 @@ There are a couple ways to help troubleshoot access for your end users.
 
 In addition to checking access to a user's organizations, you'll want to ensure
 you're discovering their accessible resources in the most efficient way. Recent
-changes to the [Respositories API][listing-repos] might reduce the API calls
+changes to the [Repositories API][listing-repos] might reduce the API calls
 your application needs to make to find a user's repositories across all of
-their organization mememberships.
+their organization memberships.
 
 ### Ensuring uninterrupted SSH access
 

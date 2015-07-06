@@ -20,19 +20,19 @@ be returned.
 
 Name    | Type    | Description
 --------|---------|--------------
-`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization admins.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
-`role`  |`string` | Filter members returned by their role. If specified, must be set to `admin`, which will only return users with admin permissions on the org. **This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization owners.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
+`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `all`: All members of the organization, regardless of role.<br/>* `admin`: Organization owners.<br/>* `member`: Non-owner organization members. **This option requires a custom media type to be specified. Please see more in the alert below.**<br/><br/>Default: `all`
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
 
 <div class="alert">
   <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will <a href="/changes/2015-02-24-more-time-to-prepare-for-the-breaking-changes-to-organization-permissions/">soon</a> apply to all API consumers. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
   </p>
 
   <p>
-    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
   </p>
 </div>
 
@@ -69,8 +69,9 @@ Check if a user is, publicly or privately, a member of the organization.
 
 ## Add a member
 
-To add someone as a member to an org, you must add them to a
-[team](/v3/orgs/teams/#add-team-member).
+To add someone as a member to an organization, you must
+[invite them to the organization](/v3/orgs/members/#add-or-update-organization-membership)
+or [invite them to a team](/v3/orgs/teams/#add-team-membership).
 
 ## Remove a member
 
@@ -130,18 +131,7 @@ The user can publicize their own membership.
 
 ## Get organization membership
 
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access this API method during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
-  </p>
-</div>
-
-In order to get a user's membership with an organization, the authenticated user must be an organization admin.
+In order to get a user's membership with an organization, the authenticated user must be an organization owner.
 
     GET /orgs/:org/memberships/:username
 
@@ -162,18 +152,7 @@ In order to get a user's membership with an organization, the authenticated user
 
 ## Add or update organization membership
 
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access this API method during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
-  </p>
-</div>
-
-In order to create or update a user's membership with an organization, the authenticated user must be an organization admin.
+In order to create or update a user's membership with an organization, the authenticated user must be an organization owner.
 
     PUT /orgs/:org/memberships/:username
 
@@ -181,7 +160,7 @@ In order to create or update a user's membership with an organization, the authe
 
 Name  | Type   | Description
 ------|--------|--------------
-`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an administrator of the organization.<br/> * `member` - The user will become a non-admin member of the organization. Use this only to demote an existing admin to a non-admin.
+`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an owner of the organization.<br/> * `member` - The user will become a non-owner member of the organization. Use this only to demote an existing owner to a non-owner.
 
 ### Response if user was previously unaffiliated with organization
 
@@ -195,18 +174,7 @@ Name  | Type   | Description
 
 ## Remove organization membership
 
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access this API method during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
-  </p>
-</div>
-
-In order to remove a user's membership with an organization, the authenticated user must be an organization admin.
+In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
 
     DELETE /orgs/:org/memberships/:username
 

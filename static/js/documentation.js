@@ -1,3 +1,18 @@
+$(document).ready(function() {
+  var menuOpen = false;
+  var gestureHandling = new Hammer(document.body, {preventDefault: true});
+
+  gestureHandling.on('swiperight', function(event) {
+    document.getElementById('header-wrapper').style.transform = 'translateX(17rem)';
+    menuOpen = true;
+  });
+
+  gestureHandling.on('swipeleft', function(event) {
+    if (menuOpen) document.getElementById('header-wrapper').style.transform = 'translateX(-17rem)';
+    menuOpen = false;
+  });
+});
+
 // Init sidebar
 $(function() {
   var activeItem,
@@ -52,7 +67,7 @@ $(function() {
     $(this).toggleClass('collapsed expanded');
     topicGuides.slideToggle(100);
     return false
-  })
+  });
 
   // Accordion style list. Expanded items
   // collapse when new items are clicked.

@@ -40,15 +40,15 @@ Name    | Type    | Description
 <%= headers 201 %>
 <%= json(:migrations) %>
 
-## Get the list of migrations
+## Get a list of migrations
 
-Lists all the repositories that are pending migration.
+Lists the most recent migrations.
 
     GET /orgs/:org/migrations
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:migrations) { |h| [h] } %>
 
 ## Get the status of a migration

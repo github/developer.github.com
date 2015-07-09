@@ -9,7 +9,7 @@ By default, all requests receive the v3 version. We encourage you to [request a 
 
 # v3
 
-The [v3 API](/v3) is stable. We recommend using this version for your production applications. Please [file a support issue][support] if you have problems.
+The [v3 API](/v3) is stable, and we strive to ensure that all [changes](/changes) are backwards compatible. Please [file a support issue][support] if you have problems.
 
 Some v3 functionality is [deprecated](#v3-deprecations) and will be removed in the next major version of the API.
 
@@ -123,7 +123,7 @@ The recommendations below will help you prepare your application for the next ma
 
 # beta (Deprecated) {#beta}
 
-The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.
+The [beta API](/v3) is deprecated. Its current functionality is stable, and we strive to ensure that any [changes](/changes) are backwards compatible. Please [file a support issue][support] if you have problems.
 
 <div class="alert">
   <p>

@@ -9,7 +9,7 @@ By default, all requests receive the v3 version. We encourage you to [request a 
 
 # v3
 
-The [v3 API](/v3) is stable and unchangeable. Please [file a support issue][support] if you have problems.
+The [v3 API](/v3) is stable. We recommend using this version for your production applications. Please [file a support issue][support] if you have problems.
 
 Some v3 functionality is [deprecated](#v3-deprecations) and will be removed in the next major version of the API.
 

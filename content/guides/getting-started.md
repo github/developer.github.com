@@ -528,7 +528,7 @@ Keep learning with the next API guide [Basics of Authentication][auth guide]!
 [nanoc]: http://nanoc.ws/
 [gitignore templates]: https://github.com/github/gitignore
 [issues-api]: /v3/issues/
-[link-header]: http://www.w3.org/wiki/LinkHeader
+[link-header]: http://www.w3.org/wiki/LinkHeader/
 [conditional-requests]: /v3/#conditional-requests
 [rate-limiting]: /v3/#rate-limiting
 [users api]: /v3/users/#get-a-single-user

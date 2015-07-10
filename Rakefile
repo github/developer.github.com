@@ -11,7 +11,8 @@ end
 desc "Test the output"
 task :test => [:clean, :remove_output_dir, :compile] do
   require 'html/proofer'
-  HTML::Proofer.new("./output").run
+  ignored_links = [%r{www.w3.org}]
+  HTML::Proofer.new("./output", :href_ignore => ignored_links).run
 end
 
 desc "Remove the output dir"

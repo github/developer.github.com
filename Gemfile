@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby '2.1.6'
+ruby '2.1.4'
 
 gem 'builder'
 gem 'coderay'

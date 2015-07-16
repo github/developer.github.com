@@ -183,6 +183,12 @@ Name | Type | Description
 
 List contributors to the specified repository, sorted by the number of commits per contributor in descending order.
 
+{{#tip}}
+
+This endpoint may return data that is a few hours old.
+
+{{/tip}}
+
     GET /repos/:owner/:repo/contributors
 
 ### Parameters

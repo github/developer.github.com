@@ -122,7 +122,7 @@ So, before making any requests with the token, you should check the scopes that
 were granted for the token by the user.
 
 The scopes that were granted are returned as a part of the response from
-exchanging a token.
+exchanging a token. (This code goes after getting the `access_token`)
 
     #!ruby
     # check if we were granted user:email scope

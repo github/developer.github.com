@@ -374,7 +374,11 @@ Key | Type | Description
 
 Triggered when a repository branch is pushed to.
 
-Note: the example payload below is from a webhook delivery. The Event API `PushEvent` payload will differ.
+{{#tip}}
+
+The Events API `PushEvent` payload is described in the table below. The example payload below that is from a webhook delivery and will differ from the Events API `PushEvent` payload.
+
+{{/tip}}
 
 ### Event name
 

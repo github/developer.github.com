@@ -73,7 +73,8 @@ To avoid hitting this limit, you should ensure your application follows the guid
 * Make requests for a single user or client ID serially. Do not make requests for a single user
   or client ID concurrently.
 * If you're making a large number of `POST`, `PATCH`, `PUT`, or `DELETE` requests for a single user
-  or client ID, wait at least 1 second between each request.
+  or client ID, wait at least 1 second between each request. Requests that create user viewable
+  content may be further limited. Please limit large bursts of content creation.
 * When you have been limited, wait the number of seconds specified in the `Retry-After` header.
 
 We reserve the right to change these guidelines as needed to ensure availability.

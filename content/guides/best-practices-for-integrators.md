@@ -76,7 +76,7 @@ To avoid hitting this limit, you should ensure your application follows the guid
   or client ID, wait at least one second between each request.
 * Requests that create content which triggers notifications, such as issues, comments and pull requests, 
   may be further limited. Please create this content at a reasonable pace to avoid further limiting.
-* When you have been limited, wait the number of seconds specified in the `Retry-After` header.
+* When you have been limited, wait the number of seconds specified in the `Retry-After` response header.
 
 We reserve the right to change these guidelines as needed to ensure availability.
 

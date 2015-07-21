@@ -19,6 +19,22 @@ collaborators list.
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:user) { |h| [h] } %>
+
+### Alternative response with extra repository information
+
+<div class="alert">
+  <p>
+    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
+  </p>
+
+  <p>
+    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
+    <pre>application/vnd.github.ironman-preview+json</pre>
+  </p>
+</div>
+
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:collaborator) { |h| [h] } %>
 
 ## Check if a user is a collaborator {#get}

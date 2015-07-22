@@ -63,6 +63,23 @@ If you hit a rate limit, it's expected that you back off from making requests an
 
 You can always [check your rate limit status](/v3/rate_limit/) at any time. Checking your rate limit incurs no cost against your rate limit.
 
+## Dealing with abuse rate limits
+
+[Abuse rate limits](/v3/#abuse-rate-limits) are another way we ensure the API's availability.
+To avoid hitting this limit, you should ensure your application follows the guidelines below.
+
+* Make authenticated requests, or use your application's client ID and secret. Unauthenticated
+  requests are subject to more aggressive abuse rate limiting.
+* Make requests for a single user or client ID serially. Do not make requests for a single user
+  or client ID concurrently.
+* If you're making a large number of `POST`, `PATCH`, `PUT`, or `DELETE` requests for a single user
+  or client ID, wait at least one second between each request.
+* Requests that create content which triggers notifications, such as issues, comments and pull requests, 
+  may be further limited. Please create this content at a reasonable pace to avoid further limiting.
+* When you have been limited, wait the number of seconds specified in the `Retry-After` response header.
+
+We reserve the right to change these guidelines as needed to ensure availability.
+
 ## Dealing with API errors
 
 Although your code would never introduce a bug, you may find that you've encountered successive errors when trying to access the API.

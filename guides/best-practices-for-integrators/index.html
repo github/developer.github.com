@@ -64,6 +64,7 @@
   <li><a href="#follow-any-redirects-that-the-api-sends-you">Follow any redirects that the API sends you</a></li>
   <li><a href="#dont-manually-parse-urls">Don’t manually parse URLs</a></li>
   <li><a href="#dealing-with-rate-limits">Dealing with rate limits</a></li>
+  <li><a href="#dealing-with-abuse-rate-limits">Dealing with abuse rate limits</a></li>
   <li><a href="#dealing-with-api-errors">Dealing with API errors</a></li>
 </ul>
 
@@ -122,6 +123,25 @@
 <p>If you hit a rate limit, it’s expected that you back off from making requests and try again later when you’re permitted to do so. Failure to do so may result in the banning of your app.</p>
 
 <p>You can always <a href="/v3/rate_limit/">check your rate limit status</a> at any time. Checking your rate limit incurs no cost against your rate limit.</p>
+
+<h2 id="dealing-with-abuse-rate-limits">Dealing with abuse rate limits</h2>
+
+<p><a href="/v3/#abuse-rate-limits">Abuse rate limits</a> are another way we ensure the API’s availability.
+To avoid hitting this limit, you should ensure your application follows the guidelines below.</p>
+
+<ul>
+  <li>Make authenticated requests, or use your application’s client ID and secret. Unauthenticated
+requests are subject to more aggressive abuse rate limiting.</li>
+  <li>Make requests for a single user or client ID serially. Do not make requests for a single user
+or client ID concurrently.</li>
+  <li>If you’re making a large number of <code>POST</code>, <code>PATCH</code>, <code>PUT</code>, or <code>DELETE</code> requests for a single user
+or client ID, wait at least one second between each request.</li>
+  <li>Requests that create content which triggers notifications, such as issues, comments and pull requests, 
+may be further limited. Please create this content at a reasonable pace to avoid further limiting.</li>
+  <li>When you have been limited, wait the number of seconds specified in the <code>Retry-After</code> response header.</li>
+</ul>
+
+<p>We reserve the right to change these guidelines as needed to ensure availability.</p>
 
 <h2 id="dealing-with-api-errors">Dealing with API errors</h2>
 

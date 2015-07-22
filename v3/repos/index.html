@@ -94,10 +94,21 @@ authenticated user has access to through an organization membership.</p>
   </thead>
   <tbody>
     <tr>
+      <td><code>visibility</code></td>
+      <td><code>string</code></td>
+      <td>Can be one of <code>all</code>, <code>public</code>, or <code>private</code>. Default: <code>all</code>
+</td>
+    </tr>
+    <tr>
+      <td><code>affiliation</code></td>
+      <td><code>string</code></td>
+      <td>Comma-separated list of values. Can include:<br>* <code>owner</code>: Repositories that are owned by the authenticated user.<br>* <code>collaborator</code>: Repositories that the user has been added to as a collaborator.<br>* <code>organization_member</code>: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.<br><br>Default: <code>owner,collaborator,organization_member</code>
+</td>
+    </tr>
+    <tr>
       <td><code>type</code></td>
       <td><code>string</code></td>
-      <td>Can be one of <code>all</code>, <code>owner</code>, <code>public</code>, <code>private</code>, <code>member</code>. Default: <code>all</code>
-</td>
+      <td>Can be one of <code>all</code>, <code>owner</code>, <code>public</code>, <code>private</code>, <code>member</code>. Default: <code>all</code><br><br>Will cause a <code>422</code> error if used in the same request as <strong>visibility</strong> or <strong>affiliation</strong>.</td>
     </tr>
     <tr>
       <td><code>sort</code></td>

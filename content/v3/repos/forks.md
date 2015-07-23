@@ -29,14 +29,12 @@ Create a fork for the authenticated user.
 
     POST /repos/:owner/:repo/forks
 
-One can either use the `organization` parameter or POST a JSON document with
-the field `organization`
 
 ### Parameters
 
 Name | Type | Description
 -----|------|-------------
-`organization`|`string` | The organization login. The repository will be forked into this organization.
+`organization`|`string` | The organization login, if forking under an organization account. If not provided, the fork is created under the authenticating user's account.
 
 
 ### Response

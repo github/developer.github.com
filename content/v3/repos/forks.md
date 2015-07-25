@@ -29,7 +29,7 @@ Create a fork for the authenticated user.
 
     POST /repos/:owner/:repo/forks
 
-One can either use the `organization` parameter or POST a JSON document with
+If you are creating a fork for an organization, use the optional `organization` parameter or POST a JSON document with
 the field `organization`
 
 ### Parameters

@@ -92,7 +92,7 @@ Deletes a previous migration archive. Migration archives are automatically delet
 
 <%= headers 204 %>
 
-## Unlock a migration
+## Unlock a repository
 
 Unlocks a locked repository. You should unlock every repository when you're ready to delete your source data.
 

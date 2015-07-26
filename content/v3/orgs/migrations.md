@@ -91,3 +91,13 @@ Deletes a previous migration archive. Migration archives are automatically delet
 ### Response
 
 <%= headers 204 %>
+
+## Unlock a migration
+
+Unlocks a locked repository. You should unlock every repository when you're ready to delete your source data.
+
+    DELETE /orgs/:org/migrations/:id/repos/:repo_name/lock
+
+### Response
+
+<%= headers 204 %>

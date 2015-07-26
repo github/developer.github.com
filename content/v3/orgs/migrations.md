@@ -94,7 +94,7 @@ Deletes a previous migration archive. Migration archives are automatically delet
 
 ## Unlock a repository
 
-Unlocks a locked repository. You should unlock every repository when you're ready to delete your source data.
+Unlocks a repository that was locked for migration. You should unlock each migrated repository and [delete them](/v3/repos/#delete-a-repository) when the migration is complete and you no longer need the source data.
 
     DELETE /orgs/:org/migrations/:id/repos/:repo_name/lock
 

@@ -9,7 +9,7 @@ title: LDAP
 
 You can use the LDAP API to update account relationships between a GitHub Enterprise user and its linked LDAP entry or queue a new synchronization.
 
-With the LDAP mapping endpoints, you're able to update the Distinguished Name (DN) that a user maps to. Note that the LDAP sync endpoints are only effective if your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap).
+With the LDAP mapping endpoints, you're able to update the Distinguished Name (DN) that a user maps to. Note that with the exception of [Update LDAP mapping for a user](#update-ldap-mapping-for-a-user), the LDAP endpoints are only effective if your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap). [Update LDAP mapping for a user](#update-ldap-mapping-for-a-user) can be used if LDAP is enabled, even if Sync is disabled.
 
 ## Update LDAP mapping for a user
 

@@ -16,7 +16,7 @@ task :test  do
   latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']
   # swap versionless Enterprise articles with versioned paths
   href_swap = {
-    %r{\A/enterprise/admin/} => "/enterprise/#{clatest_ent_version}/admin/",
+    %r{\A/enterprise/admin/} => "/enterprise/#{latest_ent_version}/admin/",
     %r{\A/enterprise/user/} => "/enterprise/#{latest_ent_version}/user/"
   }
   HTML::Proofer.new("./output", :href_ignore => ignored_links).run

@@ -19,7 +19,7 @@ task :test  do
     %r{help\.github\.com/enterprise/admin/} => "/enterprise/#{latest_ent_version}/admin/",
     %r{help\.github\.com/enterprise/user/} => "/enterprise/#{latest_ent_version}/user/"
   }
-  HTML::Proofer.new("./output", :href_ignore => ignored_links).run
+  HTML::Proofer.new("./output", :href_ignore => ignored_links, :href_swap => href_swap).run
 end
 
 desc "Remove the output dir"

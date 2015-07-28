@@ -10,12 +10,10 @@ task :compile do
 end
 
 desc "Test the output"
-task :test => [:clean, :remove_output_dir, :compile] do
+task :test  do
   require 'html/proofer'
   ignored_links = [%r{www.w3.org}]
   latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']
-  puts latest_ent_version
-  raise StandardError
   # swap versionless Enterprise articles with versioned paths
   href_swap = {
     %r{\A/enterprise/admin/} => "/enterprise/#{clatest_ent_version}/admin/",

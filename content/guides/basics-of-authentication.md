@@ -125,9 +125,15 @@ The scopes that were granted are returned as a part of the response from
 exchanging a token.
 
     #!ruby
-    # check if we were granted user:email scope
-    scopes = JSON.parse(result)['scope'].split(',')
-    has_user_email_scope = scopes.include? 'user:email'
+    get '/callback' do
+      # ...
+      # Get the access_token using the code sample above
+      # ...
+      
+      # check if we were granted user:email scope
+      scopes = JSON.parse(result)['scope'].split(',')
+      has_user_email_scope = scopes.include? 'user:email'
+    end
 
 In our application, we're using `scopes.include?` to check if we were granted
 the `user:email` scope needed for fetching the authenticated user's private

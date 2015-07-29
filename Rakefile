@@ -1,3 +1,4 @@
+require_relative 'lib/resources'
 require 'nanoc3/tasks'
 require 'tmpdir'
 
@@ -9,10 +10,16 @@ task :compile do
 end
 
 desc "Test the output"
-task :test => [:clean, :remove_output_dir, :compile] do
+task :test  do
   require 'html/proofer'
   ignored_links = [%r{www.w3.org}]
-  HTML::Proofer.new("./output", :href_ignore => ignored_links).run
+  latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']
+  # swap versionless Enterprise articles with versioned paths
+  href_swap = {
+    %r{help\.github\.com/enterprise/admin/} => "help.github.com/enterprise/#{latest_ent_version}/admin/",
+    %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{latest_ent_version}/user/"
+  }
+  HTML::Proofer.new("./output", :href_ignore => ignored_links, :href_swap => href_swap).run
 end
 
 desc "Remove the output dir"

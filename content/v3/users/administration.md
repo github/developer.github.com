@@ -81,6 +81,10 @@ Name | Type | Description
 
   DELETE /admin/users/:user_id/authorizations
 
+### Response
+
+<%= headers 204 %>
+
 ## Promote an ordinary user to a site administrator
 
     PUT /users/:username/site_admin

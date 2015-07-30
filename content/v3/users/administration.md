@@ -23,8 +23,8 @@ http(s)://<em>hostname</em>/api/v3
 
 Name | Type | Description
 -----|------|--------------
-`login`|`string` | **Required.** The user's username
-`email`|`string` | **Required.** The user's email address
+`login`|`string` | **Required.** The user's username.
+`email`|`string` | **Required.** The user's email address.
 
 #### Example
 
@@ -46,7 +46,7 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`login`|`string` | **Required.** The user's new username
+`login`|`string` | **Required.** The user's new username.
 
 #### Example
 
@@ -70,7 +70,7 @@ Name | Type | Description
 
 Name | Type | Description
 ---- | ---- | -------------
-`scopes`|`array` | A list of [scopes](/v3/oauth/#scopes)
+`scopes`|`array` | A list of [scopes](/v3/oauth/#scopes).
 
 ### Response
 

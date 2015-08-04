@@ -61,3 +61,16 @@ It's important to note that the API simply attempts to identity the project's li
 
 <%= headers 200 %>
 <%= json(:licensee)  %>
+
+## Get the contents of a repository's license
+
+This method returns the contents of the repository's license file, if one is detected.
+
+    GET /repos/:owner/:repo/license
+
+Similar to [the repository contents API](/v3/repos/contents/#get-contents), this method also supports [custom media types](/v3/repos/contents/#custom-media-types) for retrieving the raw license content or rendered license HTML.
+
+### Response
+
+<%= headers 200 %>
+<%= json(:license_contents)  %>

@@ -9,7 +9,7 @@ The [License API Preview](/v3/licenses/) now allows you to retrieve the contents
 
     curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman
 
-You can now also get the content's of the repository's license file, whether or not the license was successfully identified via the license contents endpoint:
+You can now also get the contents of the repository's license file, whether or not the license was successfully identified via the license contents endpoint:
 
     curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman/license
 

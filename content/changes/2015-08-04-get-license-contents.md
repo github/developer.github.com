@@ -7,12 +7,14 @@ author_name: benbalter
 
 The [License API Preview](/v3/licenses/) now allows you to retrieve the contents of a repository's open source license. As before, when the appropriate preview media type is passed, the repository endpoint will return information about the detected license, if any:
 
-    GET /repos/:owner/:repo
+    curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman
 
 You can now also get the content's of the repository's license file, whether or not the license was successfully identified via the license contents endpoint:
 
-    GET /repos/:owner/:repo/license
+    curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman/license
 
 Similar to [the repository contents API](/v3/repos/contents/#get-contents), the license contents method also supports [custom media types](/v3/repos/contents/#custom-media-types) for retrieving the raw license content or rendered license HTML.
+
+    curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com/repos/benbalter/gman/license
 
 For more information, see [the license API documentation](/v3/licenses/#get-the-contents-of-a-repositorys-license).

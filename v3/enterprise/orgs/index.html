@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Activity | GitHub API</title>
+  <title>Organization Administration | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -52,36 +52,53 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="activity">Activity</h1>
+      <h1 id="organization-administration">Organization Administration</h1>
 
-<p>Serving up the ‘social’ in Social Coding, the Activity APIs provide access to
-notifications, subscriptions, and timelines.</p>
+<ul id="markdown-toc">
+  <li><a href="#create-an-organization">Create an organization</a></li>
+</ul>
 
-<h2 id="events"><a href="/v3/activity/events/">Events</a></h2>
+<p>The Organization Administration API allows you to create organizations on a GitHub Enterprise appliance. <em>It is only available to <a href="/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>403</code> response if they try to access it.</p>
 
-<p>The <a href="/v3/activity/events/">Events API</a> is a read-only interface to all the <a href="/v3/activity/events/types/">event
-types</a> that power the various activity streams on GitHub.</p>
+<p>Prefix all the endpoints for this API with the following URL:</p>
 
-<h2 id="feeds"><a href="/v3/activity/feeds/">Feeds</a></h2>
+<pre class="terminal">
+http(s)://<em>hostname</em>/api/v3
+</pre>
 
-<p>List of <a href="/v3/activity/feeds/">Atom feeds</a> available for the authenticated user.</p>
+<h2 id="create-an-organization">Create an organization</h2>
 
-<h2 id="notifications"><a href="/v3/activity/notifications/">Notifications</a></h2>
+<pre><code>POST /admin/organizations
+</code></pre>
 
-<p>Notifications of new comments are delivered to users.  <a href="/v3/activity/notifications/">The Notifications
-API</a> lets you view these notifications and mark them as read.</p>
+<h3 id="parameters">Parameters</h3>
 
-<h2 id="starring"><a href="/v3/activity/starring/">Starring</a></h2>
+<p>Name | Type | Description
+—–|——|————–
+<code>login</code>|<code>string</code> | <strong>Required.</strong> The organization’s username.
+<code>admin</code>|<code>string</code>| <strong>Required.</strong> The login of the user who will manage this organization.
+<code>profile_name</code>|<code>string</code> | The organization’s display name.
+#### Example</p>
 
-<p><a href="/v3/activity/starring/">Repository Starring</a> is a feature that lets users bookmark repositories.  Stars
-are shown next to repositories to show an approximate level of interest.  Stars
-have no effect on notifications or the activity feed.</p>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+  <span class="s2">"profile_name"</span><span class="p">:</span> <span class="s2">"GitHub, Inc."</span><span class="p">,</span>
+  <span class="s2">"admin"</span><span class="p">:</span> <span class="s2">"monalisaoctocat"</span>
+<span class="p">}</span></code></pre>
 
-<h2 id="watching"><a href="/v3/activity/watching/">Watching</a></h2>
+<h3 id="response">Response</h3>
 
-<p><a href="/v3/activity/watching/">Watching a Repository</a> registers the user to receive notifications on new
-discussions, as well as events in the user’s activity feed.</p>
+<pre class="headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
 
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+  <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great organization"</span>
+<span class="p">}</span></code></pre>
 
     </div>
 

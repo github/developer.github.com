@@ -6,7 +6,7 @@
 # users; since Enterprise is a "managed" product, it's cut off of DotCom at a certain
 # time, and the APIs remain frozen (until an organization upgrades their instance).
 #
-# This script takes two arguments: a date and a version number. Given a date, it
+# This script takes two arguments: a SHA and a version number. Given a sha, it
 # fetches the state of the site at that moment in time. It then copies all of that
 # content into a new folder called *enterprise/<version>*. Thus, we're able to preserve
 # the state of the API documentation for a given version at a given time.
@@ -15,13 +15,13 @@ require 'fileutils'
 require 'tmpdir'
 
 if ARGV.length != 2
-  error = '''Error: Run the script like this: bundle exec script/enterprise-cutter [DATE] [VERSION]
-e.g. bundle exec script/enterprise-cutter 2014-07-08 11.10.340
+  error = '''Error: Run the script like this: bundle exec script/enterprise-cutter [SHA] [VERSION]
+e.g. bundle exec script/enterprise-cutter deadb33f 11.10.340
 '''
   abort error
 end
 
-DATE = ARGV[0].dup # yyyy-mm-dd, like, 2014-07-08
+SHA = ARGV[0].dup # SHA, like, deadb33f
 VERSION = ARGV[1].dup # like, 11.10.340
 
 BRANCH_NAME = "add-#{VERSION}-docs"
@@ -32,7 +32,7 @@ setup
 
 temp_dir = Dir.mktmpdir
 begin
-  %x(git checkout `git rev-list -n 1 --before="#{DATE}" gh-pages`)
+  %x(git checkout #{SHA})
   `cp -r * #{temp_dir}`
   `git checkout #{BRANCH_NAME}`
   FileUtils.mkdir_p("enterprise/#{VERSION}")

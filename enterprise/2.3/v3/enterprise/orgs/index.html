@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us">
   <meta http-equiv="imagetoolbar" content="false">
   <meta name="MSSmartTagsPreventParsing" content="true">
-  <title>Admin Stats | GitHub API</title>
+  <title>Organization Administration | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.3/changes.atom">
   <link href="/enterprise/2.3/css/reset.css" rel="stylesheet" type="text/css">
   <link href="/enterprise/2.3/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -54,13 +54,13 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="admin-stats">Admin Stats</h1>
+      <h1 id="organization-administration">Organization Administration</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#get-statistics">Get statistics</a></li>
+  <li><a href="#create-an-organization">Create an organization</a></li>
 </ul>
 
-<p>The Admin Stats API provides a variety of metrics about your installation. <em>It is only available to <a href="/enterprise/2.3/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>404</code> response if they try to access it.</p>
+<p>The Organization Administration API allows you to create organizations on a GitHub Enterprise appliance. <em>It is only available to <a href="/enterprise/2.3/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>403</code> response if they try to access it.</p>
 
 <p>Prefix all the endpoints for this API with the following URL:</p>
 
@@ -68,133 +68,38 @@
 http(s)://<em>hostname</em>/api/v3
 </pre>
 
-<h2 id="get-statistics">Get statistics</h2>
+<h2 id="create-an-organization">Create an organization</h2>
 
-<h3 id="request">Request</h3>
-
-<pre><code>GET /enterprise/stats/:type
+<pre><code>POST /admin/organizations
 </code></pre>
 
-<p>There are a variety of types to choose from:</p>
+<h3 id="parameters">Parameters</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>issues</code></td>
-      <td>The number of open and closed issues.</td>
-    </tr>
-    <tr>
-      <td><code>hooks</code></td>
-      <td>The number of active and inactive hooks.</td>
-    </tr>
-    <tr>
-      <td><code>milestones</code></td>
-      <td>The number of open and closed milestones.</td>
-    </tr>
-    <tr>
-      <td><code>orgs</code></td>
-      <td>The number of organizations, teams, team members, and disabled organizations.</td>
-    </tr>
-    <tr>
-      <td><code>comments</code></td>
-      <td>The number of comments on issues, pull requests, commits, and gists.</td>
-    </tr>
-    <tr>
-      <td><code>pages</code></td>
-      <td>The number of GitHub Pages sites.</td>
-    </tr>
-    <tr>
-      <td><code>users</code></td>
-      <td>The number of suspended and admin users.</td>
-    </tr>
-    <tr>
-      <td><code>gists</code></td>
-      <td>The number of private and public gists.</td>
-    </tr>
-    <tr>
-      <td><code>pulls</code></td>
-      <td>The number of merged, mergeable, and unmergeable pull requests.</td>
-    </tr>
-    <tr>
-      <td><code>repos</code></td>
-      <td>The number of organization-owned repositories, root repositories, forks, pushed commits, and wikis.</td>
-    </tr>
-    <tr>
-      <td><code>all</code></td>
-      <td>All of the statistics listed above.</td>
-    </tr>
-  </tbody>
-</table>
+<p>Name | Type | Description
+—–|——|————–
+<code>login</code>|<code>string</code> | <strong>Required.</strong> The organization’s username.
+<code>admin</code>|<code>string</code>| <strong>Required.</strong> The login of the user who will manage this organization.
+<code>profile_name</code>|<code>string</code> | The organization’s display name.
+#### Example</p>
 
-<p>These statistics are cached and will be updated approximately every 10 minutes.</p>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+  <span class="s2">"profile_name"</span><span class="p">:</span> <span class="s2">"GitHub, Inc."</span><span class="p">,</span>
+  <span class="s2">"admin"</span><span class="p">:</span> <span class="s2">"monalisaoctocat"</span>
+<span class="p">}</span></code></pre>
 
 <h3 id="response">Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="headers"><code>Status: 201 Created
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
 <pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"repos"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_repos"</span><span class="p">:</span> <span class="mi">212</span><span class="p">,</span>
-    <span class="s2">"root_repos"</span><span class="p">:</span> <span class="mi">194</span><span class="p">,</span>
-    <span class="s2">"fork_repos"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-    <span class="s2">"org_repos"</span><span class="p">:</span> <span class="mi">51</span><span class="p">,</span>
-    <span class="s2">"total_pushes"</span><span class="p">:</span> <span class="mi">3082</span><span class="p">,</span>
-    <span class="s2">"total_wikis"</span><span class="p">:</span> <span class="mi">15</span>
-  <span class="p">},</span>
-  <span class="s2">"hooks"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_hooks"</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
-    <span class="s2">"active_hooks"</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="s2">"inactive_hooks"</span><span class="p">:</span> <span class="mi">4</span>
-  <span class="p">},</span>
-  <span class="s2">"pages"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_pages"</span><span class="p">:</span> <span class="mi">36</span>
-  <span class="p">},</span>
-  <span class="s2">"orgs"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_orgs"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-    <span class="s2">"disabled_orgs"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"total_teams"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-    <span class="s2">"total_team_members"</span><span class="p">:</span> <span class="mi">314</span>
-  <span class="p">},</span>
-  <span class="s2">"users"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_users"</span><span class="p">:</span> <span class="mi">254</span><span class="p">,</span>
-    <span class="s2">"admin_users"</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
-    <span class="s2">"suspended_users"</span><span class="p">:</span> <span class="mi">21</span>
-  <span class="p">},</span>
-  <span class="s2">"pulls"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_pulls"</span><span class="p">:</span> <span class="mi">86</span><span class="p">,</span>
-    <span class="s2">"merged_pulls"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-    <span class="s2">"mergeable_pulls"</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
-    <span class="s2">"unmergeable_pulls"</span><span class="p">:</span> <span class="mi">3</span>
-  <span class="p">},</span>
-  <span class="s2">"issues"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_issues"</span><span class="p">:</span> <span class="mi">179</span><span class="p">,</span>
-    <span class="s2">"open_issues"</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span>
-    <span class="s2">"closed_issues"</span><span class="p">:</span> <span class="mi">96</span>
-  <span class="p">},</span>
-  <span class="s2">"milestones"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_milestones"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-    <span class="s2">"open_milestones"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="s2">"closed_milestones"</span><span class="p">:</span> <span class="mi">1</span>
-  <span class="p">},</span>
-  <span class="s2">"gists"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_gists"</span><span class="p">:</span> <span class="mi">178</span><span class="p">,</span>
-    <span class="s2">"private_gists"</span><span class="p">:</span> <span class="mi">151</span><span class="p">,</span>
-    <span class="s2">"public_gists"</span><span class="p">:</span> <span class="mi">25</span>
-  <span class="p">},</span>
-  <span class="s2">"comments"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_commit_comments"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="s2">"total_gist_comments"</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-    <span class="s2">"total_issue_comments"</span><span class="p">:</span> <span class="mi">366</span><span class="p">,</span>
-    <span class="s2">"total_pull_request_comments"</span><span class="p">:</span> <span class="mi">30</span>
-  <span class="p">}</span>
+  <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+  <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great organization"</span>
 <span class="p">}</span></code></pre>
 
     </div>

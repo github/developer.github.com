@@ -47,7 +47,7 @@ Name | Type | Description
 
 ## Get a single comment
 
-    GET /repos/:owner/:repo/pulls/comments/:number
+    GET /repos/:owner/:repo/pulls/comments/:id
 
 ### Response
 
@@ -102,7 +102,7 @@ Name | Type | Description
 
 ## Edit a comment
 
-    PATCH /repos/:owner/:repo/pulls/comments/:number
+    PATCH /repos/:owner/:repo/pulls/comments/:id
 
 ### Input
 
@@ -124,7 +124,7 @@ Name | Type | Description
 
 ## Delete a comment
 
-    DELETE /repos/:owner/:repo/pulls/comments/:number
+    DELETE /repos/:owner/:repo/pulls/comments/:id
 
 ### Response
 

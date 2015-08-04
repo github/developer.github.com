@@ -2,13 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2015-07-22T00:00:00Z</updated>
+  <updated>2015-08-04T00:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/" />
   <link rel="self" href="http://developer.github.com/changes.atom" />
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2015-08-04:/changes/2015-08-04-get-license-contents/</id>
+    <title type="html">Get the contents of a repository’s license</title>
+    <published>2015-08-04T00:00:00Z</published>
+    <updated>2015-08-04T00:00:00Z</updated>
+    <author>
+      <name>benbalter</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-08-04-get-license-contents/" />
+    <content type="html">&lt;p&gt;The &lt;a href="/v3/licenses/"&gt;License API Preview&lt;/a&gt; now allows you to retrieve the contents of a repository’s open source license. As before, when the appropriate preview media type is passed, the repository endpoint will return information about the detected license, if any:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can now also get the content’s of the repository’s license file, whether or not the license was successfully identified via the license contents endpoint:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman/license
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Similar to &lt;a href="/v3/repos/contents/#get-contents"&gt;the repository contents API&lt;/a&gt;, the license contents method also supports &lt;a href="/v3/repos/contents/#custom-media-types"&gt;custom media types&lt;/a&gt; for retrieving the raw license content or rendered license HTML.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com/repos/benbalter/gman/license
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more information, see &lt;a href="/v3/licenses/#get-the-contents-of-a-repositorys-license"&gt;the license API documentation&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2015-07-22:/changes/2015-07-22-more-flexible-options-for-listing-repositories/</id>
     <title type="html">More flexible options for listing repositories</title>
@@ -48,36 +76,6 @@
 
 &lt;p&gt;To learn more about these redirects and how they benefit your applications, be sure to check out the &lt;a href="/changes/2015-04-17-preview-repository-redirects/"&gt;preview period announcement&lt;/a&gt;. As always, if you have any questions, we’re &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects"&gt;here to help&lt;/a&gt;.&lt;/p&gt;
 
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-06-24:/changes/2015-06-24-licenses-api-update/</id>
-    <title type="html">Licenses API update</title>
-    <published>2015-06-24T00:00:00Z</published>
-    <updated>2015-06-24T00:00:00Z</updated>
-    <author>
-      <name>mislav</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-06-24-licenses-api-update/" />
-    <content type="html">&lt;p&gt;We are expanding the &lt;a href="/v3/licenses"&gt;Licenses API&lt;/a&gt; to make it more useful for auditing license usage across all repositories owned by a user or organization.&lt;/p&gt;
-
-&lt;p&gt;Before, license information was only returned for an individual repository:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /repos/github/hubot
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now, license information will also be included in reponses from endpoints that list multiple repositories, such as &lt;a href="/v3/repos/#list-organization-repositories"&gt;List organization repositories&lt;/a&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;GET /orgs/github/repos
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;As before, to access the API during the preview period, you must provide a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.drax-preview+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For more information, see the &lt;a href="/v3/licenses/"&gt;Licenses API documentation&lt;/a&gt;, and if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API"&gt;let us know&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -181,6 +179,36 @@
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;
 
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2015-06-24:/changes/2015-06-24-licenses-api-update/</id>
+    <title type="html">Licenses API update</title>
+    <published>2015-06-24T00:00:00Z</published>
+    <updated>2015-06-24T00:00:00Z</updated>
+    <author>
+      <name>mislav</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2015-06-24-licenses-api-update/" />
+    <content type="html">&lt;p&gt;We are expanding the &lt;a href="/v3/licenses"&gt;Licenses API&lt;/a&gt; to make it more useful for auditing license usage across all repositories owned by a user or organization.&lt;/p&gt;
+
+&lt;p&gt;Before, license information was only returned for an individual repository:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/github/hubot
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, license information will also be included in reponses from endpoints that list multiple repositories, such as &lt;a href="/v3/repos/#list-organization-repositories"&gt;List organization repositories&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /orgs/github/repos
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As before, to access the API during the preview period, you must provide a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.drax-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more information, see the &lt;a href="/v3/licenses/"&gt;Licenses API documentation&lt;/a&gt;, and if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API"&gt;let us know&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -1266,34 +1294,6 @@ option and made &lt;code&gt;TLS 1.X&lt;/code&gt; the default cryptographic proto
 You should no longer set or rely on the &lt;code&gt;ssl_version&lt;/code&gt; configuration option.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Removed+SSLv3+support+from+webhooks+and+services"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-10-06:/changes/2014-10-06-new-attributes-for-issue-events-api/</id>
-    <title type="html">New Attributes for Issue Events API</title>
-    <published>2014-10-06T00:00:00Z</published>
-    <updated>2014-10-06T00:00:00Z</updated>
-    <author>
-      <name>jdpace</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-10-06-new-attributes-for-issue-events-api/" />
-    <content type="html">&lt;p&gt;We’ve made it easier to track changes to issues. The Issue Events API now provides more context for several event types:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-&lt;code&gt;assigned&lt;/code&gt; and &lt;code&gt;unassigned&lt;/code&gt; events now include an &lt;code&gt;assignee&lt;/code&gt; object so you can see just who was assigned or unassigned.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;labeled&lt;/code&gt; and &lt;code&gt;unlabeled&lt;/code&gt; events include a &lt;code&gt;label&lt;/code&gt; object.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;milestoned&lt;/code&gt; and &lt;code&gt;demilesoned&lt;/code&gt; events include a &lt;code&gt;milestone&lt;/code&gt; object.&lt;/li&gt;
-  &lt;li&gt;
-&lt;code&gt;renamed&lt;/code&gt; events include a &lt;code&gt;rename&lt;/code&gt; object with the title before and after the rename.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Check out the &lt;a href="/v3/issues/events/"&gt;Issue Events API documentation&lt;/a&gt; for a full list of supported events. If you have
-any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Attrs+for+Issue+Events+API"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;
 
 </content>
   </entry>

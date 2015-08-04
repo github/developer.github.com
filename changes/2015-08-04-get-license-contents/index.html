@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Preview the New Combined Status API</title>
+  <title>Get the contents of a repository’s license</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -41,68 +41,42 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-03-27-combined-status-api/">
+      <div class="change" id="/changes/2015-08-04-get-license-contents/">
 <h2 class="title">
-  <a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API</a>
+  <a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    March 27, 2014
+    August 4, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga"/>
-      <a href="https://github.com/bhuga">bhuga</a>
+    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter"/>
+      <a href="https://github.com/benbalter">benbalter</a>
   </li>
 </ul>
 </div>
 
 
-<p>What does it mean for a branch to be “green?” The <a href="/v3/repos/statuses/">Status API</a> helps
-thousands of teams answer that question. Developers use it to record the status
-of continuous integration builds, contributor license agreements, code coverage
-analysis, automated security testing, dependency management, and more.</p>
+<p>The <a href="/v3/licenses/">License API Preview</a> now allows you to retrieve the contents of a repository’s open source license. As before, when the appropriate preview media type is passed, the repository endpoint will return information about the detected license, if any:</p>
 
-<p>For many teams, a branch is considered “green” only when <em>all</em> of their various
-status checks are successful. With the new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status
-API</a>, developers can easily fetch this single, consolidated
-status for any branch, commit, or tag.</p>
+<pre><code>curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman
+</code></pre>
 
-<h3 id="status-context">Status context</h3>
+<p>You can now also get the content’s of the repository’s license file, whether or not the license was successfully identified via the license contents endpoint:</p>
 
-<p>To help multiple service providers use the Status API simultaneously, statuses
-now support a <code>context</code> field. This field allows a provider to distinguish its
-statuses from another provider’s statuses. For example, your <a href="http://jenkins-ci.org/">Jenkins</a> builds
-might use a context of <code>ci/jenkins</code>, while your <a href="http://brakemanscanner.org/">Brakeman</a> checks might adopt a
-context of <code>security/brakeman</code>.</p>
+<pre><code>curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman/license
+</code></pre>
 
-<p>The new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status endpoint</a> returns a single,
-combined state, as well as the latest status from each context. Systems that
-consume status updates can now get all the information they need in one place.</p>
+<p>Similar to <a href="/v3/repos/contents/#get-contents">the repository contents API</a>, the license contents method also supports <a href="/v3/repos/contents/#custom-media-types">custom media types</a> for retrieving the raw license content or rendered license HTML.</p>
 
-<h3 id="opt-in">Opt-in</h3>
+<pre><code>curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com/repos/benbalter/gman/license
+</code></pre>
 
-<p>The existing <a href="/v3/repos/statuses/#list-statuses-for-a-specific-ref">Status API</a> continues to work as it always has. The
-<code>context</code> field is entirely optional, and the <a href="https://github.com/blog/1227-commit-status-api">color of the merge button on pull
-requests</a> does not currently
-take context into account.</p>
-
-<h3 id="preview-period">Preview period</h3>
-
-<p>We’re making this new API available today for developers to
-<a href="/v3/repos/statuses/">preview</a>. During this period, we may change aspects of the Combined
-Status API from time to time. We will announce any changes here (on the
-developer blog), but we will not provide any advance notice.</p>
-
-<p>We expect the preview period to last 30-60 days. At the end of preview period,
-the Combined Status API will become an official component of GitHub API v3. At
-that point, this new API will be stable and suitable for production use.</p>
-
-<p>We hope you’ll <a href="/v3/repos/statuses/">try it out</a> and <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">send us your feedback</a>!</p>
-
+<p>For more information, see <a href="/v3/licenses/#get-the-contents-of-a-repositorys-license">the license API documentation</a>.</p>
 
 </div>
 

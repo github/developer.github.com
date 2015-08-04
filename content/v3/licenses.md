@@ -66,9 +66,9 @@ It's important to note that the API simply attempts to identity the project's li
 
 This method returns the contents of the repository's license file, if one is detected.
 
-GET /repos/:owner/:repo/license
+    GET /repos/:owner/:repo/license
 
-Similar to [the repository contents API](/v3/repos/contents/#get-contents), this method also supports [custom media types](#custom-media-types) for retrieving the raw license content or rendered license HTML.
+Similar to [the repository contents API](/v3/repos/contents/#get-contents), this method also supports [custom media types](/v3/repos/contents/#custom-media-types) for retrieving the raw license content or rendered license HTML.
 
 ### Response
 

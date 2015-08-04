@@ -132,6 +132,13 @@ the org that the team is associated with, or a maintainer of the team.
 In order to list members in a team, the team must be visible to the
 authenticated user.
 
+{{#enterprise-only}}
+
+<%= fetch_content(:if_site_admin) %>
+you will be able to list all members for the team.
+
+{{/enterprise-only}}
+
     GET /teams/:id/members
 
 Name | Type | Description
@@ -361,6 +368,13 @@ team.
 ## List team repos
 
     GET /teams/:id/repos
+
+{{#enterprise-only}}
+
+<%= fetch_content(:if_site_admin) %>
+you will be able to list all repositories for the team.
+
+{{/enterprise-only}}
 
 ### Response
 

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us">
   <meta http-equiv="imagetoolbar" content="false">
   <meta name="MSSmartTagsPreventParsing" content="true">
-  <title>Per-repository Review and Issue Comment listing</title>
+  <title>More flexible options for listing repositories</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.3/changes.atom">
   <link href="/enterprise/2.3/css/reset.css" rel="stylesheet" type="text/css">
   <link href="/enterprise/2.3/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -43,46 +43,37 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-12-04-List-comments-for-repo/">
+      <div class="change" id="/changes/2015-07-22-more-flexible-options-for-listing-repositories/">
 <h2 class="title">
-  <a href="/enterprise/2.3/changes/2012-12-04-List-comments-for-repo/">Per-repository Review and Issue Comment listing</a>
+  <a href="/enterprise/2.3/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    December 4, 2012
+    July 22, 2015
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn">
-      <a href="https://github.com/pengwynn">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer">
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
   </li>
 </ul>
 </div>
 
 
-<p>You’ve always been able to grab all the commit comments for an entire
-repository via the API, but to get Issue comments and Pull Request Review
-Comments, you could only fetch the comments for a single Issue or Pull Request.</p>
-
-<p>Today, we’re introducing two new methods to grab all Issue Comments and Review
-Comments for a repository.</p>
-
-<pre><code># Grab all Issue Comments
-curl https://api.github.com/repos/mathiasbynens/dotfiles/issues/comments
-
-# Grab all Review Comments
-curl https://api.github.com/repos/mathiasbynens/dotfiles/pulls/comments
-</code></pre>
-
-<p>Check out the docs for sorting and filtering options:</p>
+<p>The <a href="/enterprise/2.3/v3/repos/#list-your-repositories">List your repositories</a> API now offers additional parameters to help you fetch the exact set of repositories you’re looking for:</p>
 
 <ul>
-  <li><a href="/enterprise/2.3/v3/issues/comments/#list-comments-in-a-repository">Issue comments</a></li>
-  <li><a href="/enterprise/2.3/v3/pulls/comments/#list-comments-in-a-repository">Review comments</a></li>
+  <li>The <code>visibility</code> parameter lets you request only your public repositories, only your private repositories, or both.</li>
+  <li>With the <code>affiliation</code> parameter, you can ask for repositories you own, repositories where you are a collaborator, repositories you have access to as an organization member, or any combination that suits your needs.</li>
 </ul>
+
+<p>Use these new parameters separately, together, or in combination with other parameters to craft flexible queries that fetch the specific repositories you’re seeking.</p>
+
+<p>For full details, check out the <a href="/enterprise/2.3/v3/repos/#list-your-repositories">documentation</a>. If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=List+your+repositories+API">get in touch</a>!</p>
+
 
 </div>
 

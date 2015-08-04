@@ -176,9 +176,15 @@ were granted for the token by the user.</p>
 <p>The scopes that were granted are returned as a part of the response from
 exchanging a token.</p>
 
-<pre><code class="language-ruby highlight"><span class="c1"># check if we were granted user:email scope</span>
-<span class="n">scopes</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s1">'scope'</span><span class="o">]</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
-<span class="n">has_user_email_scope</span> <span class="o">=</span> <span class="n">scopes</span><span class="p">.</span><span class="nf">include?</span> <span class="s1">'user:email'</span></code></pre>
+<pre><code class="language-ruby highlight"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+  <span class="c1"># Get the access_token using the code sample above</span>
+  <span class="c1"># ...</span>
+  
+  <span class="c1"># check if we were granted user:email scope</span>
+  <span class="n">scopes</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">[</span><span class="s1">'scope'</span><span class="o">]</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
+  <span class="n">has_user_email_scope</span> <span class="o">=</span> <span class="n">scopes</span><span class="p">.</span><span class="nf">include?</span> <span class="s1">'user:email'</span>
+<span class="k">end</span></code></pre>
 
 <p>In our application, we’re using <code>scopes.include?</code> to check if we were granted
 the <code>user:email</code> scope needed for fetching the authenticated user’s private

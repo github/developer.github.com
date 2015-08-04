@@ -75,7 +75,11 @@ time.</p>
 <p>All developers need to <a href="https://github.com/settings/applications/new">register their
 application</a> before getting
 started. A registered OAuth application is assigned a unique Client ID
-and Client Secret. The Client Secret should not be shared.</p>
+and Client Secret. The Client Secret should not be shared.
+This is preferred over Basic Authentication because tokens can be limited
+to specific types of data, and can be revoked by users at any time.
+<strong>You may create a <a href="https://github.com/settings/tokens/new">personal access token</a>
+for your own use or implement the web flow below to allow other users to authorize your application.</strong></p>
 
 <h2 id="web-application-flow">Web Application Flow</h2>
 
@@ -166,6 +170,11 @@ has been created by a third party and the process should be aborted.</p>
       <td><code>redirect_uri</code></td>
       <td><code>string</code></td>
       <td>The URL in your app where users will be sent after authorization. See details below about <a href="#redirect-urls">redirect urls</a>.</td>
+    </tr>
+    <tr>
+      <td><code>state</code></td>
+      <td><code>string</code></td>
+      <td>The unguessable random string you optionally provided in <a href="#redirect-users-to-request-github-access">Step 1</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -663,7 +672,7 @@ user, be sure to check out our <a href="/enterprise/2.3/guides/discovering-resou
       </li>
       <li class="js-topic">
         <h3>
-<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.3/v3/enterprise/">Enterprise 2.2</a>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.3/v3/enterprise/">Enterprise 2.3</a>
 </h3>
         <ul class="js-guides">
           <li><a href="/enterprise/2.3/v3/enterprise/admin_stats/">Admin Stats</a></li>

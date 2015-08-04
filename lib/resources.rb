@@ -122,6 +122,7 @@ module GitHub
 
       CONTENT ||= {
         'LATEST_ENTERPRISE_VERSION' => '2.3',
+        'IF_SITE_ADMIN' => "If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,",
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "OPTIONAL_PUT_CONTENT_LENGTH" => "Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "ORG_HOOK_CONFIG_HASH" =>
@@ -229,12 +230,22 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "created_at" => "2014-12-10T15:53:42Z",
       "read_only"  => true
 
+    PUBLIC_KEY_DETAIL ||= PUBLIC_KEY.merge \
+      "user_id"        => 232,
+      "repository_id"  => nil
+
     DEPLOY_KEY ||= SIMPLE_PUBLIC_KEY.merge \
       "url"        => "https://api.github.com/repos/octocat/Hello-World/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
       "created_at" => "2014-12-10T15:53:42Z",
       "read_only"  => true
+
+    DEPLOY_KEY_DETAIL ||= PUBLIC_KEY.merge \
+      "user_id"        => nil,
+      "repository_id"  => 2333
+
+    ALL_KEYS ||= [PUBLIC_KEY_DETAIL, DEPLOY_KEY_DETAIL]
 
     SIMPLE_REPO ||= {
       "id"               => 1296269,
@@ -871,6 +882,17 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     ORG_MEMBERSHIPS         ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP, PENDING_ADMIN_ORG_MEMBERSHIP]
     ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP]
     PENDING_ORG_MEMBERSHIPS ||= [PENDING_ADMIN_ORG_MEMBERSHIP]
+
+    MIGRATIONS ||= {
+      "id" => 79,
+      "guid" => "0b989ba4-242f-11e5-81e1-c7b6966d2516",
+      "state" => "pending",
+      "lock_repositories" => true,
+      "url" => "https://api.github.com/orgs/octo-org/migrations/79",
+      "created_at" => "2015-07-06T15:33:38-07:00",
+      "updated_at" => "2015-07-06T15:33:38-07:00",
+      "repositories" => [REPO]
+    }
 
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",

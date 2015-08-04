@@ -5,11 +5,11 @@ created_at: 2015-08-04
 author_name: benbalter
 ---
 
-The [License API](/v3/licenses/) now allows you to retrieve the contents of a repository's open source license. When the appropriate preview media type is passed, the repository endpoint will return information about the detected license, if any:
+The [License API](/v3/licenses/) now allows you to retrieve the contents of a repository's open source license. As before, when the appropriate preview media type is passed, the repository endpoint will return information about the detected license, if any:
 
     GET /repos/:owner/:repo
 
-You can also get the content's of the repository's license file, whether or not the license was successfully identified via the license contents endpoint:
+You can now also get the content's of the repository's license file, whether or not the license was successfully identified via the license contents endpoint:
 
     GET /repos/:owner/:repo/license
 

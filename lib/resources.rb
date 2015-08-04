@@ -2510,10 +2510,10 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
           "html" => "https://github.com/benbalter/gman/blob/master/LICENSE"
         },
         "license"      => {
-          "key"  => "mit",
-          "name" => "MIT License",
-          "url"  => "https://api.github.com/licenses/mit",
-          "featured": true
+          "key"      => "mit",
+          "name"     => "MIT License",
+          "url"      => "https://api.github.com/licenses/mit",
+          "featured" => true
         }
       }
   end

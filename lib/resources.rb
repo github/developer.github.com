@@ -121,8 +121,8 @@ module GitHub
       end
 
       CONTENT ||= {
+        'LATEST_ENTERPRISE_VERSION' => '2.3',
         'IF_SITE_ADMIN' => "If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,",
-        'LATEST_ENTERPRISE_VERSION' => '2.2',
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "OPTIONAL_PUT_CONTENT_LENGTH" => "Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "ORG_HOOK_CONFIG_HASH" =>

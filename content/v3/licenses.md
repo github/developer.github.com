@@ -21,7 +21,11 @@ title: Licenses | GitHub API
 
 {{/tip}}
 
-The Licenses API returns metadata about popular open source licenses and information about a particular project's license file. The license key and name conforms to the [SPDX specification](https://spdx.org/).
+The Licenses API returns metadata about popular open source licenses and information about a particular project's license file.
+
+The Licenses API uses [the open source Ruby Gem Licensee](https://github.com/benbalter/licensee) to attempt to identity the project's license by matching the contents of the project's `LICENSE` file, if any, to a short list of known licenses. As a result, the API does not take into account the licenses of project dependencies or other means of documenting a project's license such as references to the license name in the documentation.
+
+If matched, the license key and name returned conforms to the [SPDX specification](https://spdx.org/).
 
 {{#warning}}
 
@@ -52,8 +56,6 @@ GitHub created the License API to help users get information about open source l
 ## Get a repository's license
 
 When passed the preview media type, requests to get a repository will also return the repository's license, if it can be detected from the repository's license file.
-
-It's important to note that the API simply attempts to identity the project's license by matching the contents of the project's `LICENSE` file, if any, to a short list of known licenses and does not take into account the licenses of project dependencies or other means of documenting a project's license such as references to the license name in the documentation.
 
     GET /repos/:owner/:repo
 

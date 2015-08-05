@@ -17,4 +17,4 @@ Similar to [the repository contents API](/v3/repos/contents/#get-contents), the 
 
     curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com/repos/benbalter/gman/license
 
-For more information, see [the license API documentation](/v3/licenses/#get-the-contents-of-a-repositorys-license).
+For more information, see [the license API documentation](/v3/licenses/#get-the-contents-of-a-repositorys-license), and as always, if you have any questions or feedback, please [get in touch with us](https://github.com/contact?form%5Bsubject%5D=License+API).

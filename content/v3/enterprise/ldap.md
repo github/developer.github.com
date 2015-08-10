@@ -13,7 +13,7 @@ With the LDAP mapping endpoints, you're able to update the Distinguished Name (D
 
 ## Update LDAP mapping for a user
 
-    PATCH /admin/ldap/user/:username/mapping
+    PATCH /admin/ldap/users/:username/mapping
 
 ### Body parameters
 
@@ -37,7 +37,7 @@ Note that this API call does not automatically initiate an LDAP sync. Rather, if
 
 {{/tip}}
 
-    POST /admin/ldap/user/:user_id/sync
+    POST /admin/ldap/users/:username/sync
 
 ### Response
 

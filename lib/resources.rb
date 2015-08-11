@@ -268,9 +268,9 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     REPO ||= SIMPLE_REPO.merge({
       "clone_url"         => "https://github.com/octocat/Hello-World.git",
       "git_url"           => "git://github.com/octocat/Hello-World.git",
+      "mirror_url"        => "git://git.example.com/octocat/Hello-World",
       "ssh_url"           => "git@github.com:octocat/Hello-World.git",
       "svn_url"           => "https://svn.github.com/octocat/Hello-World",
-      "mirror_url"        => "git://git.example.com/octocat/Hello-World",
       "homepage"          => "https://github.com",
       "language"          => nil,
       "forks_count"       => 9,

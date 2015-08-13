@@ -64,7 +64,7 @@ Name | Type | Description
 
 ## Create an impersonation OAuth token
 
-  POST /admin/users/:user_id/authorizations
+    POST /admin/users/:user_id/authorizations
 
 ### Parameters
 
@@ -79,7 +79,7 @@ Name | Type | Description
 
 ## Delete an impersonation OAuth token
 
-  DELETE /admin/users/:user_id/authorizations
+    DELETE /admin/users/:user_id/authorizations
 
 ### Response
 

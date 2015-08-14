@@ -81,8 +81,8 @@ module GitHub
 
       def default_pagination_rels
         {
-          :next => "https://api.github.com/resource?page=2",
-          :last => "https://api.github.com/resource?page=5"
+          next: "https://api.github.com/resource?page=2",
+          last: "https://api.github.com/resource?page=5"
         }
       end
 
@@ -1680,33 +1680,33 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "fingerprint" => "jklmnop12345678",
     }
 
-    OAUTH_ACCESS_WITH_USER ||= OAUTH_ACCESS.merge(:user => USER)
+    OAUTH_ACCESS_WITH_USER ||= OAUTH_ACCESS.merge(user: USER)
 
     EVENT ||= {
-      :type   => "Event",
-      :public => true,
-      :payload => {},
-      :repo => {
-        :id => 3,
-        :name => "octocat/Hello-World",
-        :url => "https://api.github.com/repos/octocat/Hello-World"
+      type: "Event",
+      public: true,
+      payload: {},
+      repo: {
+        id: 3,
+        name: "octocat/Hello-World",
+        url: "https://api.github.com/repos/octocat/Hello-World"
       },
-      :actor => {
-        :id => 1,
-        :login => "octocat",
-        :gravatar_id => "",
-        :avatar_url => "https://github.com/images/error/octocat_happy.gif",
-        :url => "https://api.github.com/users/octocat"
+      actor: {
+        id: 1,
+        login: "octocat",
+        gravatar_id: "",
+        avatar_url: "https://github.com/images/error/octocat_happy.gif",
+        url: "https://api.github.com/users/octocat"
       },
-      :org => {
-        :id => 1,
-        :login => "github",
-        :gravatar_id => "",
-        :url => "https://api.github.com/orgs/github",
-        :avatar_url =>  "https://github.com/images/error/octocat_happy.gif"
+      org: {
+        id: 1,
+        login: "github",
+        gravatar_id: "",
+        url: "https://api.github.com/orgs/github",
+        avatar_url:  "https://github.com/images/error/octocat_happy.gif"
       },
-      :created_at => "2011-09-06T17:26:27Z",
-      :id => "12345"
+      created_at: "2011-09-06T17:26:27Z",
+      id: "12345"
     }
 
     README_CONTENT ||= {
@@ -1805,7 +1805,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "sha" => "a84d88e7554fc1fa21bcbc4efae3c782a70d2b9d",
       "ref" => "master",
       "task" => "deploy",
-      "payload" => {:task => 'deploy:migrate'},
+      "payload" => {task: 'deploy:migrate'},
       "environment" => "production",
       "description" => "Deploy request from hubot",
       "creator" => USER,
@@ -1834,7 +1834,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
         "task" => "deploy",
         "creator" => USER,
         "environment" => "production",
-        "payload" => {:task => 'deploy:migrate'},
+        "payload" => {task: 'deploy:migrate'},
         "created_at" => "2012-07-20T01:19:13Z",
         "updated_at" => "2012-07-20T01:19:13Z",
         "description" => "Deploy request from hubot",
@@ -1882,22 +1882,22 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     }
 
     META ||= {
-      :verifiable_password_authentication => true,
-      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
-      :hooks => ['127.0.0.1/32'],
-      :git => ['127.0.0.1/32'],
-      :pages => [
+      verifiable_password_authentication: true,
+      github_services_sha: "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+      hooks: ['127.0.0.1/32'],
+      git: ['127.0.0.1/32'],
+      pages: [
         "192.30.252.153/32",
         "192.30.252.154/32"
       ]
     }
 
     BLOB ||= {
-      :content => "Q29udGVudCBvZiB0aGUgYmxvYg==\n",
-      :encoding => "base64",
-      :url      => "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
-      :sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
-      :size => 19
+      content: "Q29udGVudCBvZiB0aGUgYmxvYg==\n",
+      encoding: "base64",
+      url: "https://api.github.com/repos/octocat/example/git/blobs/3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+      sha: "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
+      size: 19
     }
 
     BLOB_AFTER_CREATE ||= {
@@ -1952,38 +1952,38 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     }
 
     THREAD ||= {
-      :id => "1",
-      :repository => SIMPLE_REPO,
-      :subject => {
-        :title => "Greetings",
-        :url => "https://api.github.com/repos/octokit/octokit.rb/issues/123",
-        :latest_comment_url => "https://api.github.com/repos/octokit/octokit.rb/issues/comments/123",
-        :type => "Issue"
+      id: "1",
+      repository: SIMPLE_REPO,
+      subject: {
+        title: "Greetings",
+        url: "https://api.github.com/repos/octokit/octokit.rb/issues/123",
+        latest_comment_url: "https://api.github.com/repos/octokit/octokit.rb/issues/comments/123",
+        type: "Issue"
       },
-      :reason => 'subscribed',
-      :unread => true,
-      :updated_at => '2014-11-07T22:01:45Z',
-      :last_read_at => '2014-11-07T22:01:45Z',
-      :url => "https://api.github.com/notifications/threads/1"
+      reason: 'subscribed',
+      unread: true,
+      updated_at: '2014-11-07T22:01:45Z',
+      last_read_at: '2014-11-07T22:01:45Z',
+      url: "https://api.github.com/notifications/threads/1"
     }
 
     SUBSCRIPTION ||= {
-      :subscribed => true,
-      :ignored => false,
-      :reason => nil,
-      :created_at => "2012-10-06T21:34:12Z",
-      :url => "https://api.github.com/notifications/threads/1/subscription",
-      :thread_url => "https://api.github.com/notifications/threads/1"
+      subscribed: true,
+      ignored: false,
+      reason: nil,
+      created_at: "2012-10-06T21:34:12Z",
+      url: "https://api.github.com/notifications/threads/1/subscription",
+      thread_url: "https://api.github.com/notifications/threads/1"
     }
 
     REPO_SUBSCRIPTION ||= SUBSCRIPTION.merge \
-      :url => "https://api.github.com/repos/octocat/example/subscription",
-      :repository_url => "https://api.github.com/repos/octocat/example"
+      url: "https://api.github.com/repos/octocat/example/subscription",
+      repository_url: "https://api.github.com/repos/octocat/example"
     REPO_SUBSCRIPTION.delete :thread_url
 
     TEMPLATE ||= {
-      :name => "C",
-      :source => "# Object files\n*.o\n\n# Libraries\n*.lib\n*.a\n\n# Shared objects (inc. Windows DLLs)\n*.dll\n*.so\n*.so.*\n*.dylib\n\n# Executables\n*.exe\n*.out\n*.app\n"
+      name: "C",
+      source: "# Object files\n*.o\n\n# Libraries\n*.lib\n*.a\n\n# Shared objects (inc. Windows DLLs)\n*.dll\n*.so\n*.so.*\n*.dylib\n\n# Executables\n*.exe\n*.out\n*.app\n"
     }
 
     TEMPLATES ||= [
@@ -1997,28 +1997,28 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     ]
 
     USER_EMAIL ||= {
-      :email    => "octocat@github.com",
-      :verified => true,
-      :primary  => true
+      email: "octocat@github.com",
+      verified: true,
+      primary: true
     }
 
     REPO_STATS_CONTRIBUTORS ||= [{
-      :author => USER,
-      :total => 135,
-      :weeks => [
+      author: USER,
+      total: 135,
+      weeks: [
         {
-          :w => "1367712000",
-          :a => 6898,
-          :d => 77,
-          :c  => 10
+          w: "1367712000",
+          a: 6898,
+          d: 77,
+          c: 10
         }
       ]
     }]
 
     REPO_STATS_COMMIT_ACTIVITY ||= [{
-      :days => [0, 3, 26, 20, 39, 1, 0],
-      :total => 89,
-      :week => 1336280400
+      days: [0, 3, 26, 20, 39, 1, 0],
+      total: 89,
+      week: 1336280400
     }]
 
     REPO_STATS_CODE_FREQUENCY ||= [[
@@ -2028,8 +2028,8 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     ]]
 
     REPO_STATS_PARTICIPATION ||= {
-      :all => [11,21,15,2,8,1,8,23,17,21,11,10,33,91,38,34,22,23,32,3,43,87,71,18,13,5,13,16,66,27,12,45,110,117,13,8,18,9,19,26,39,12,20,31,46,91,45,10,24,9,29,7],
-      :owner => [3,2,3,0,2,0,5,14,7,9,1,5,0,48,19,2,0,1,10,2,23,40,35,8,8,2,10,6,30,0,2,9,53,104,3,3,10,4,7,11,21,4,4,22,26,63,11,2,14,1,10,3]
+      all: [11,21,15,2,8,1,8,23,17,21,11,10,33,91,38,34,22,23,32,3,43,87,71,18,13,5,13,16,66,27,12,45,110,117,13,8,18,9,19,26,39,12,20,31,46,91,45,10,24,9,29,7],
+      owner: [3,2,3,0,2,0,5,14,7,9,1,5,0,48,19,2,0,1,10,2,23,40,35,8,8,2,10,6,30,0,2,9,53,104,3,3,10,4,7,11,21,4,4,22,26,63,11,2,14,1,10,3]
     }
 
     REPO_STATS_PUNCH_CARD ||= [
@@ -2039,44 +2039,44 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     ]
 
     FEEDS ||= {
-      :timeline_url => "https://github.com/timeline",
-      :user_url => "https://github.com/{user}",
-      :current_user_public_url => "https://github.com/defunkt",
-      :current_user_url => "https://github.com/defunkt.private?token=abc123",
-      :current_user_actor_url => "https://github.com/defunkt.private.actor?token=abc123",
-      :current_user_organization_url => "",
-      :current_user_organization_urls => [
+      timeline_url: "https://github.com/timeline",
+      user_url: "https://github.com/{user}",
+      current_user_public_url: "https://github.com/defunkt",
+      current_user_url: "https://github.com/defunkt.private?token=abc123",
+      current_user_actor_url: "https://github.com/defunkt.private.actor?token=abc123",
+      current_user_organization_url: "",
+      current_user_organization_urls: [
         "https://github.com/organizations/github/defunkt.private.atom?token=abc123"
       ],
-      :_links => {
-        :timeline => {
-          :href => "https://github.com/timeline",
-          :type => "application/atom+xml"
+      _links: {
+        timeline: {
+          href: "https://github.com/timeline",
+          type: "application/atom+xml"
         },
-        :user => {
-          :href => "https://github.com/{user}",
-          :type => "application/atom+xml"
+        user: {
+          href: "https://github.com/{user}",
+          type: "application/atom+xml"
         },
-        :current_user_public => {
-          :href => "https://github.com/defunkt",
-          :type => "application/atom+xml"
+        current_user_public: {
+          href: "https://github.com/defunkt",
+          type: "application/atom+xml"
         },
-        :current_user => {
-          :href => "https://github.com/defunkt.private?token=abc123",
-          :type => "application/atom+xml"
+        current_user: {
+          href: "https://github.com/defunkt.private?token=abc123",
+          type: "application/atom+xml"
         },
-        :current_user_actor => {
-          :href => "https://github.com/defunkt.private.actor?token=abc123",
-          :type => "application/atom+xml"
+        current_user_actor: {
+          href: "https://github.com/defunkt.private.actor?token=abc123",
+          type: "application/atom+xml"
         },
-        :current_user_organization => {
-          :href => "",
-          :type => ""
+        current_user_organization: {
+          href: "",
+          type: ""
         },
-        :current_user_organizations => [
+        current_user_organizations: [
           {
-            :href => "https://github.com/organizations/github/defunkt.private.atom?token=abc123",
-            :type => "application/atom+xml"
+            href: "https://github.com/organizations/github/defunkt.private.atom?token=abc123",
+            type: "application/atom+xml"
           }
         ]
       }

@@ -76,7 +76,11 @@
 
 </div>
 
-<p>The Licenses API returns metadata about popular open source licenses and information about a particular project’s license file. The license key and name conforms to the <a href="https://spdx.org/">SPDX specification</a>.</p>
+<p>The Licenses API returns metadata about popular open source licenses and information about a particular project’s license file.</p>
+
+<p>The Licenses API uses <a href="https://github.com/benbalter/licensee">the open source Ruby Gem Licensee</a> to attempt to identity the project’s license. Licensee matches the contents of a project’s <code>LICENSE</code> file (if it exists) against a short list of known licenses. As a result, the API does not take into account the licenses of project dependencies or other means of documenting a project’s license such as references to the license name in the documentation.</p>
+
+<p>If a license is matched, the license key and name returned conforms to the <a href="https://spdx.org/">SPDX specification</a>.</p>
 
 <div class="alert warning">
 
@@ -214,8 +218,6 @@ X-RateLimit-Remaining: 4999</code></pre>
 <h2 id="get-a-repositorys-license">Get a repository’s license</h2>
 
 <p>When passed the preview media type, requests to get a repository will also return the repository’s license, if it can be detected from the repository’s license file.</p>
-
-<p>It’s important to note that the API simply attempts to identity the project’s license by the contents of the a <code>LICENSE</code> file, if any, and does not take into account the licenses of project dependencies or other means of documenting a project’s license such as references in the documentation.</p>
 
 <pre><code>GET /repos/:owner/:repo
 </code></pre>

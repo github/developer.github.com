@@ -57,7 +57,7 @@ View the latest published release for the repository.
 
 ## Get a release by tag name
 
-Get a release with the specified tag. Users must have push access to the repository to view draft releases.
+Get a published release with the specified tag.
 
     GET /repos/:owner/:repo/releases/tags/:tag
 

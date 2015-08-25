@@ -61,13 +61,13 @@
   <li><a href="#sync-ldap-mapping-for-a-team">Sync LDAP mapping for a team</a></li>
 </ul>
 
-<p>You can use the LDAP API to update account relationships between a GitHub Enterprise user and its linked LDAP entry or queue a new synchronization.</p>
+<p>You can use the LDAP API to update account relationships between a GitHub Enterprise user or team and its linked LDAP entry or queue a new synchronization.</p>
 
-<p>With the LDAP mapping endpoints, you’re able to update the Distinguished Name (DN) that a user maps to. Note that the LDAP endpoints are only effective if your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/admin/guides/user-management/using-ldap">LDAP Sync enabled</a>.</p>
+<p>With the LDAP mapping endpoints, you’re able to update the Distinguished Name (DN) that a user or team maps to. Note that the LDAP endpoints are generally only effective if your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/admin/guides/user-management/using-ldap">LDAP Sync enabled</a>. As of GitHub Enterprise 2.3.1, the <a href="#update-ldap-mapping-for-a-user">Update LDAP mapping for a user</a> can be used when LDAP is enabled, even if LDAP Sync is disabled.</p>
 
 <h2 id="update-ldap-mapping-for-a-user">Update LDAP mapping for a user</h2>
 
-<pre><code>PATCH /admin/ldap/user/:username/mapping
+<pre><code>PATCH /admin/ldap/users/:username/mapping
 </code></pre>
 
 <h3 id="body-parameters">Body parameters</h3>
@@ -76,7 +76,7 @@
 
 <h4 id="example">Example</h4>
 
-<pre><code class="language-javascript highlight"><span class="s2">"uid=asdf,ou=users,dc=github,dc=com"</span></code></pre>
+<pre><code class="language-javascript highlight"><span class="s1">'{"ldap_dn": "uid=asdf,ou=users,dc=github,dc=com"}'</span></code></pre>
 
 <h3 id="response">Response</h3>
 
@@ -113,7 +113,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 </div>
 
-<pre><code>POST /admin/ldap/user/:user_id/sync
+<pre><code>POST /admin/ldap/users/:username/sync
 </code></pre>
 
 <h3 id="response-1">Response</h3>
@@ -137,7 +137,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h4 id="example-1">Example</h4>
 
-<pre><code class="language-javascript highlight"><span class="s2">"cn=Enterprise Ops,ou=teams,dc=github,dc=com"</span></code></pre>
+<pre><code class="language-javascript highlight"><span class="s1">'{"ldap_dn": "cn=Enterprise Ops,ou=teams,dc=github,dc=com"}'</span></code></pre>
 
 <h3 id="response-2">Response</h3>
 

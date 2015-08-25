@@ -18,6 +18,14 @@ You can read more about the use of media types in the API
 
     GET /repos/:owner/:repo/issues/:number/comments
 
+Issue Comments are ordered by ascending ID.
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | Only comments updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>

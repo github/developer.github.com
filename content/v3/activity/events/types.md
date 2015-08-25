@@ -9,7 +9,7 @@ determined by its event type.
 
 Event names are used by [repository webhooks](/v3/repos/hooks/) to specify
 which events the webhook should receive. The included payloads below are from webhook deliveries but
-match events returned by the [Events API](/v3/activity/events/) (except where noted).
+match events returned by the [Events API](/v3/activity/events/) (except where noted). The Events API uses the CamelCased name (e.g. `CommitCommentEvent`) in the `type` field of an event object and does not include the `repository` or `sender` fields in the event payload object.
 
 
 **Note:** Some of these events may not be rendered in timelines, they're only

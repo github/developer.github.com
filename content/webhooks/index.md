@@ -40,27 +40,27 @@ The available events are:
 Name | Description
 -----|-----------|
 `*` | Any time any event is triggered ([Wildcard Event][wildcard-section]).
-`commit_comment` | Any time a Commit is commented on.
-`create` | Any time a Branch or Tag is created.
-`delete` | Any time a Branch or Tag is deleted.
-`deployment` | Any time a Repository has a new deployment created from the API.
-`deployment_status` | Any time a deployment for a Repository has a status update from the API.
-`fork` | Any time a Repository is forked.
-`gollum` | Any time a Wiki page is updated.
-`issue_comment` | Any time an Issue or Pull Request is [commented](/v3/issues/comments/) on.
-`issues` | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.
-`member` | Any time a User is added as a collaborator to a non-Organization Repository.
-`membership` | Any time a User is added or removed from a team. **Organization hooks only**.
-`page_build` | Any time a Pages site is built or results in a failed build.
-`public` | Any time a Repository changes from private to public.
-`pull_request_review_comment` | Any time a [comment is created on a portion of the unified diff](/v3/pulls/comments) of a pull request (the Files Changed tab).
-`pull_request` | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
-`push` | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
-`repository` | Any time a Repository is created. **Organization hooks only**.
-`release` | Any time a Release is published in a Repository.
-`status` | Any time a Repository has a status update from the API
-`team_add` | Any time a team is added or modified on a Repository.
-`watch` | Any time a User watches a Repository.
+[`commit_comment`][event-types-commit_comment] | Any time a Commit is commented on.
+[`create`][event-types-create] | Any time a Branch or Tag is created.
+[`delete`][event-types-delete] | Any time a Branch or Tag is deleted.
+[`deployment`][event-types-deployment] | Any time a Repository has a new deployment created from the API.
+[`deployment_status`][event-types-deployment_status] | Any time a deployment for a Repository has a status update from the API.
+[`fork`][event-types-fork] | Any time a Repository is forked.
+[`gollum`][event-types-gollum] | Any time a Wiki page is updated.
+[`issue_comment`][event-types-issue_comment] | Any time an Issue or Pull Request is [commented](/v3/issues/comments/) on.
+[`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.
+[`member`][event-types-member] | Any time a User is added as a collaborator to a non-Organization Repository.
+[`membership`][event-types-membership] | Any time a User is added or removed from a team. **Organization hooks only**.
+[`page_build`][event-types-page_build] | Any time a Pages site is built or results in a failed build.
+[`public`][event-types-public] | Any time a Repository changes from private to public.
+[`pull_request_review_comment`][event-types-pull_request_review_comment] | Any time a [comment is created on a portion of the unified diff](/v3/pulls/comments) of a pull request (the Files Changed tab).
+[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
+[`push`][event-types-push] | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
+[`repository`][event-types-repository] | Any time a Repository is created. **Organization hooks only**.
+[`release`][event-types-release] | Any time a Release is published in a Repository.
+[`status`][event-types-status] | Any time a Repository has a status update from the API
+[`team_add`][event-types-team_add] | Any time a team is added or modified on a Repository.
+[`watch`][event-types-watch] | Any time a User watches a Repository.
 
 ### Wildcard Event
 
@@ -191,7 +191,27 @@ services to the [github-services repository][github-services].
 [repo-hooks-ping]: /v3/repos/hooks/#ping-a-hook
 [events-api]: /v3/activity/events/
 [event-types]: /v3/activity/events/types/
+[event-types-commit_comment]: /v3/activity/events/types/#commitcommentevent
+[event-types-create]: /v3/activity/events/types/#createevent
+[event-types-delete]: /v3/activity/events/types/#deleteevent
+[event-types-deployment]: /v3/activity/events/types/#deploymentevent
+[event-types-deployment_status]: /v3/activity/events/types/#deploymentstatusevent
+[event-types-fork]: /v3/activity/events/types/#forkevent
+[event-types-gollum]: /v3/activity/events/types/#gollumevent
+[event-types-issue_comment]: /v3/activity/events/types/#issuecommentevent
+[event-types-issues]: /v3/activity/events/types/#issuesevent
+[event-types-member]: /v3/activity/events/types/#memberevent
+[event-types-membership]: /v3/activity/events/types/#membershipevent
+[event-types-page_build]: /v3/activity/events/types/#pagebuildevent
+[event-types-public]: /v3/activity/events/types/#publicevent
+[event-types-pull_request]: /v3/activity/events/types/#pullrequestevent
+[event-types-pull_request_review_comment]: /v3/activity/events/types/#pullrequestreviewcommentevent
 [event-types-push]: /v3/activity/events/types/#pushevent
+[event-types-release]: /v3/activity/events/types/#releaseevent
+[event-types-repository]: /v3/activity/events/types/#repositoryevent
+[event-types-status]: /v3/activity/events/types/#statusevent
+[event-types-team_add]: /v3/activity/events/types/#teamaddevent
+[event-types-watch]: /v3/activity/events/types/#watchevent
 [github-services]: https://github.com/github/github-services
 [github-services-docs]: https://github.com/github/github-services/tree/master/docs
 [oauth-applications]: /v3/oauth/

@@ -168,13 +168,13 @@ Everything else about the endpoint is the same as the rest of the API. For examp
 ### Input
 
 The raw file is uploaded to GitHub.  Set the content type appropriately, and the
-asset's name in a URI query parameter.
+asset's name or label in URI query parameters.
 
 Name | Type | Description
 -----|------|--------------
 `Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: `"application/zip"`. For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
-`name`|`string` | **Required**. The file name of the asset. This should be set in the URI query parameter.
-`label`|`string` | An alternate short description of the asset.  Used in place of the filename.
+`name`|`string` | **Required**. The file name of the asset. This should be set in a URI query parameter.
+`label`|`string` | An alternate short description of the asset. Used in place of the filename. This should be set in a URI query parameter.
 
 Send the raw binary content of the asset as the request body.
 
@@ -216,7 +216,7 @@ Users with push access to the repository can edit a release asset.
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The file name of the asset.
-`label`|`string` | An alternate short description of the asset.  Used in place of the filename.
+`label`|`string` | An alternate short description of the asset. Used in place of the filename.
 
 #### Example
 

@@ -168,7 +168,7 @@ Everything else about the endpoint is the same as the rest of the API. For examp
 ### Input
 
 The raw file is uploaded to GitHub.  Set the content type appropriately, and the
-asset's name or label in URI query parameters.
+asset's name and label in URI query parameters.
 
 Name | Type | Description
 -----|------|--------------

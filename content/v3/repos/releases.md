@@ -46,7 +46,7 @@ Only users with push access will receive listings for draft releases.
 
 ## Get the latest release
 
-View the latest published release for the repository.
+View the latest published full release for the repository. Draft releases and prereleases are not returned by this endpoint.
 
     GET /repos/:owner/:repo/releases/latest
 

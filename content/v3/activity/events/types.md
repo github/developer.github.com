@@ -397,7 +397,7 @@ Key | Type | Description
 
 ## PushEvent
 
-Triggered when a repository branch is pushed to.
+Triggered when a repository branch is pushed to. In addition to branch pushes, webhook [`push` events](https://developer.github.com/webhooks/#events) are also triggered when repository tags are pushed.
 
 {{#tip}}
 

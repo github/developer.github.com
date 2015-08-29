@@ -478,8 +478,8 @@ NOTE: This does not delete the repository, it just removes it from the team.
 ## List user teams
 
 List all of the teams across all of the organizations to which the
-authenticated user belongs. This method requires `user` or `repo`
-[scope][] when authenticating via [OAuth][].
+authenticated user belongs. This method requires `user`, `repo`, or
+`read:org` [scope][] when authenticating via [OAuth][].
 
     GET /user/teams
 

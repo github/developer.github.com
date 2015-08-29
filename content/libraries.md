@@ -189,3 +189,9 @@ covers the entire API.
 * [ok.sh][ok.sh]
 
 [ok.sh]: https://github.com/whiteinge/ok.sh
+
+## Android
+
+* [GithubAndroidSDK][githubandroidsdk]
+
+[githubandroidsdk]: https://github.com/gitskarios/GithubAndroidSdk

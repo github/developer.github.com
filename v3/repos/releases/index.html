@@ -342,7 +342,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h2 id="get-a-release-by-tag-name">Get a release by tag name</h2>
 
-<p>Get a release with the specified tag. Users must have push access to the repository to view draft releases.</p>
+<p>Get a published release with the specified tag.</p>
 
 <pre><code>GET /repos/:owner/:repo/releases/tags/:tag
 </code></pre>
@@ -756,7 +756,7 @@ Everything else about the endpoint is the same as the rest of the API. For examp
 <h3 id="input-2">Input</h3>
 
 <p>The raw file is uploaded to GitHub.  Set the content type appropriately, and the
-asset’s name in a URI query parameter.</p>
+asset’s name and label in URI query parameters.</p>
 
 <table>
   <thead>
@@ -777,12 +777,12 @@ asset’s name in a URI query parameter.</p>
       <td><code>name</code></td>
       <td><code>string</code></td>
       <td>
-<strong>Required</strong>. The file name of the asset. This should be set in the URI query parameter.</td>
+<strong>Required</strong>. The file name of the asset. This should be set in a URI query parameter.</td>
     </tr>
     <tr>
       <td><code>label</code></td>
       <td><code>string</code></td>
-      <td>An alternate short description of the asset.  Used in place of the filename.</td>
+      <td>An alternate short description of the asset. Used in place of the filename. This should be set in a URI query parameter.</td>
     </tr>
   </tbody>
 </table>
@@ -916,7 +916,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     <tr>
       <td><code>label</code></td>
       <td><code>string</code></td>
-      <td>An alternate short description of the asset.  Used in place of the filename.</td>
+      <td>An alternate short description of the asset. Used in place of the filename.</td>
     </tr>
   </tbody>
 </table>

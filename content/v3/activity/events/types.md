@@ -256,7 +256,7 @@ Key | Type | Description
 
 <%= webhook_payload "issue_comment" %>
 
-## IssuesEvent
+## IssueEvent
 
 Triggered when an [issue](/v3/issues) is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.
 

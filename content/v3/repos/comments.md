@@ -40,8 +40,8 @@ Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The contents of the comment.
 `path`|`string` | Relative path of the file to comment on.
-`position`|`number` | Line index in the diff to comment on.
-`line`|`number` | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on.
+`position`|`integer` | Line index in the diff to comment on.
+`line`|`integer` | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on.
 
 
 #### Example

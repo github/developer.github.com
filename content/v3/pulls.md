@@ -109,7 +109,7 @@ Issue number instead of `title` and `body`.
 
 Name | Type | Description
 -----|------|--------------
-`issue`|`number` | **Required**. The issue number in this repository to turn into a Pull Request.
+`issue`|`integer` | **Required**. The issue number in this repository to turn into a Pull Request.
 
 #### Example
 

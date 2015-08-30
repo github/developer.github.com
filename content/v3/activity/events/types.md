@@ -411,7 +411,7 @@ Key | Type | Description
 ----|------|-------------
 `ref`|`string` | The full Git ref that was pushed. Example: `"refs/heads/master"`.
 `head`|`string` | The SHA of the most recent commit on `ref` after the push.
-`before`|`string` | The SHA of the most recent commit of `ref` before the push.
+`before`|`string` | The SHA of the most recent commit on `ref` before the push.
 `size`|`integer` | The number of commits in the push.
 `distinct_size`|`integer` | The number of distinct commits in the push.
 `commits`|`array` | An array of commit objects describing the pushed commits. (The array includes a maximum of 20 commits. If necessary, you can use the [Commits API](/v3/repos/commits/) to fetch additional commits. This limit is applied to timeline events only and isn't applied to webhook deliveries.)

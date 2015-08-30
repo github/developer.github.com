@@ -515,6 +515,9 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "state"      => "open",
       "title"      => "new-feature",
       "body"       => "Please pull these awesome changes",
+      "assignee"   => USER,
+      "milestone"  => MILESTONE,
+      "locked"     => false,
       "created_at" => "2011-01-26T19:01:12Z",
       "updated_at" => "2011-01-26T19:01:12Z",
       "closed_at"  => "2011-01-26T19:01:12Z",
@@ -938,6 +941,9 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     ISSUE ||= {
       "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+      "labels_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/labels{/name}",
+      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments",
+      "events_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/events",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1347",
       "number"     => 1347,
       "state"      => "open",
@@ -947,6 +953,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "labels"     => [LABEL],
       "assignee"   => USER,
       "milestone"  => MILESTONE,
+      "locked"     => false,
       "comments"   => 0,
       "pull_request" => {
         "url"       => "https://api.github.com/repos/octocat/Hello-World/pulls/1347",

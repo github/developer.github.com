@@ -67,6 +67,12 @@
 
 <h3 id="response">Response</h3>
 
+<div class="alert tip">
+
+<p>If <code>truncated</code> is <code>true</code>, the number of items in the <code>tree</code> array exceeded our maximum limit. If you need to fetch more items, you can clone the repository and iterate over the Git data locally.</p>
+
+</div>
+
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
@@ -102,18 +108,18 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="s2">"truncated"</span><span class="p">:</span> <span class="kc">false</span>
 <span class="p">}</span></code></pre>
 
-<div class="alert tip">
-
-<p>If <code>truncated</code> is <code>true</code>, the number of items in the <code>tree</code> array exceeded our maximum limit. If you need to fetch more items, you can clone the repository and iterate over the Git data locally.</p>
-
-</div>
-
 <h2 id="get-a-tree-recursively">Get a Tree Recursively</h2>
 
 <pre><code>GET /repos/:owner/:repo/git/trees/:sha?recursive=1
 </code></pre>
 
 <h3 id="response-1">Response</h3>
+
+<div class="alert tip">
+
+<p>If <code>truncated</code> is <code>true</code>, the number of items in the <code>tree</code> array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.</p>
+
+</div>
 
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -134,12 +140,6 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">],</span>
   <span class="s2">"truncated"</span><span class="p">:</span> <span class="kc">false</span>
 <span class="p">}</span></code></pre>
-
-<div class="alert tip">
-
-<p>If <code>truncated</code> is <code>true</code>, the number of items in the <code>tree</code> array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.</p>
-
-</div>
 
 <h2 id="create-a-tree">Create a Tree</h2>
 

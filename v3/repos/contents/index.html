@@ -195,6 +195,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <p>The response will be an array of objects, one object for each item in the directory.</p>
 
+<p>When listing the contents of a directory, submodules have their “type”
+specified as “file”. Logically, the value <em>should</em> be “submodule”. This behavior
+exists in API v3 <a href="https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490">for backwards compatibility purposes</a>.
+In the next major version of the API, the type will be returned as “submodule”.</p>
+
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
@@ -234,11 +239,6 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
-<p>Note: When listing the contents of a directory, submodules have their “type”
-specified as “file”. Logically, the value <em>should</em> be “submodule”. This behavior
-exists in API v3 <a href="https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490">for backwards compatibility purposes</a>.
-In the next major version of the API, the type will be returned as “submodule”.</p>
-
 <h3 id="response-if-content-is-a-symlink">Response if content is a symlink</h3>
 
 <p>If the requested <code>:path</code> points to a symlink, and the symlink’s target is a normal file in the repository, then the API responds with the content of the file (in the <a href="#response-if-content-is-a-file">format shown above</a>).</p>
@@ -269,6 +269,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="response-if-content-is-a-submodule">Response if content is a submodule</h3>
 
+<p>The <code>submodule_git_url</code> identifies the location of the submodule repository, and the <code>sha</code> identifies a specific commit within the submodule repository.
+Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.</p>
+
+<p>If the submodule repository is not hosted on github.com, the Git URLs (<code>git_url</code> and <code>_links["git"]</code>) and the github.com URLs (<code>html_url</code> and <code>_links["html"]</code>) will have null values.</p>
+
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
@@ -290,11 +295,6 @@ X-RateLimit-Remaining: 4999</code></pre>
     <span class="s2">"html"</span><span class="p">:</span> <span class="s2">"https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
-
-<p>The <code>submodule_git_url</code> identifies the location of the submodule repository, and the <code>sha</code> identifies a specific commit within the submodule repository.
-Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.</p>
-
-<p>If the submodule repository is not hosted on github.com, the Git URLs (<code>git_url</code> and <code>_links["git"]</code>) and the github.com URLs (<code>html_url</code> and <code>_links["html"]</code>) will have null values.</p>
 
 <h2 id="create-a-file">Create a file</h2>
 

@@ -192,6 +192,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h3 id="response-1">Response</h3>
 
+<p>Diffs with binary data will have no ‘patch’ property. Pass the
+appropriate <a href="/v3/media/#commits-commit-comparison-and-pull-requests">media type</a> to fetch diff and
+patch formats.</p>
+
 <pre class="headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
@@ -283,10 +287,6 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
 
-<p>Note: Diffs with binary data will have no ‘patch’ property. Pass the
-appropriate <a href="/v3/media/#commits-commit-comparison-and-pull-requests">media type</a> to fetch diff and
-patch formats.</p>
-
 <h2 id="compare-two-commits">Compare two commits</h2>
 
 <pre><code>GET /repos/:owner/:repo/compare/:base...:head
@@ -300,6 +300,8 @@ patch formats.</p>
 <h3 id="response-2">Response</h3>
 
 <p>The response from the API is equivalent to running the <code>git log base..head</code> command; however, commits are returned in reverse chronological order.</p>
+
+<p>Pass the appropriate <a href="/v3/media/#commits-commit-comparison-and-pull-requests">media type</a> to fetch diff and patch formats.</p>
 
 <pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
   <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/compare/master...topic"</span><span class="p">,</span>
@@ -535,8 +537,6 @@ patch formats.</p>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
-
-<p>Pass the appropriate <a href="/v3/media/#commits-commit-comparison-and-pull-requests">media type</a> to fetch diff and patch formats.</p>
 
 <h3 id="working-with-large-comparisons">Working with large comparisons</h3>
 

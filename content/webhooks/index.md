@@ -17,8 +17,10 @@ deploy to your production server. You're only limited by your imagination.
 
 Each webhook can be installed [on an organization][org-hooks] or [a specific
 repository][repo-hooks]. Once installed, they will be triggered each time one
-or more subscribed events occurs on that organization or repository.
+or more subscribed events occurs on that organization or repository. 
 
+For each event, you can create up to 20 webhooks on each installation target
+(specific organization or specific repository).
 
 ## Events
 

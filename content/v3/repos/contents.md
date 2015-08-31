@@ -64,13 +64,13 @@ Name | Type | Description
 
 The response will be an array of objects, one object for each item in the directory.
 
-<%= headers 200 %>
-<%= json :directory_content %>
-
-Note: When listing the contents of a directory, submodules have their "type"
+When listing the contents of a directory, submodules have their "type"
 specified as "file". Logically, the value *should* be "submodule". This behavior
 exists in API v3 [for backwards compatibility purposes](https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490).
 In the next major version of the API, the type will be returned as "submodule".
+
+<%= headers 200 %>
+<%= json :directory_content %>
 
 ### Response if content is a symlink
 
@@ -83,13 +83,13 @@ Otherwise, the API responds with an object describing the symlink itself:
 
 ### Response if content is a submodule
 
-<%= headers 200 %>
-<%= json :submodule_content %>
-
 The `submodule_git_url` identifies the location of the submodule repository, and the `sha` identifies a specific commit within the submodule repository.
 Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.
 
 If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the github.com URLs (`html_url` and `_links["html"]`) will have null values.
+
+<%= headers 200 %>
+<%= json :submodule_content %>
 
 ## Create a file
 

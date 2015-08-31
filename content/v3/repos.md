@@ -201,7 +201,7 @@ List contributors to the specified repository, sorted by the number of commits p
 
 Contributors data is cached for performance reasons. This endpoint may return information that is a few hours old.
 
-Up to 500 email addresses are used when linking contributions with GitHub accounts based on email addresses used in commits. Other commits will be grouped by email address, but will be listed up as anonymous contributions (i.e. will not contain information about the GitHub account they are associated with).
+Git contributors are identified by author email address. This API attempts to group contribution counts by GitHub user, across all of their associated email addresses. For performance reasons, only the first 500 author email addresses in the repository will be linked to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
 
 {{/tip}}
 

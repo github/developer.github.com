@@ -195,15 +195,17 @@ This may leave an empty asset with a state of `"new"`.  It can be safely deleted
 
 ### Response
 
-<%= headers 200 %>
-<%= json :release_asset %>
+{{#tip}}
 
 If you want to download the asset's binary content, pass a media type of
-`"application/octet-stream"`.  The API will either redirect the client to the
+`"application/octet-stream"`. The API will either redirect the client to the
 location, or stream it directly if possible.  API clients should handle both a
 `200` or `302` response.
 
-<%= headers 302 %>
+{{/tip}}
+
+<%= headers 200 %>
+<%= json :release_asset %>
 
 ## Edit a release asset
 

@@ -28,18 +28,17 @@ which is usually master; pushing to the default branch resets the statistics cac
 
 ### Response
 
-<%= headers 200 %>
-<%= json(:repo_stats_contributors) %>
-
 * `total` - The Total number of commits authored by the contributor.
 
-**Weekly Hash**
+Weekly Hash (`weeks` array):
 
 * `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).
 * `a` - Number of additions
 * `d` - Number of deletions
 * `c` - Number of commits
 
+<%= headers 200 %>
+<%= json(:repo_stats_contributors) %>
 
 ## Get the last year of commit activity data {#commit-activity}
 

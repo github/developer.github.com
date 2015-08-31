@@ -76,7 +76,7 @@ Read more about these tokens on the [GitHub Help page](https://help.github.com/a
 Name | Type | Description
 -----|------|--------------
 `scopes`|`array` | A list of scopes that this authorization is in.
-`note`|`string` | **Required**. A note to remind you what the OAuth token is for.
+`note`|`string` | **Required**. A note to remind you what the OAuth token is for. Tokens not associated with a specific OAuth application (i.e. personal access tokens) must have a unique note.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
 `client_id`|`string` | The 20 character OAuth app client key for which to create the token.
 `client_secret`|`string` | The 40 character OAuth app client secret for which to create the token.
@@ -168,7 +168,7 @@ Name | Type | Description
 `scopes`|`array` | Replaces the authorization scopes with these.
 `add_scopes`|`array` | A list of scopes to add to this authorization.
 `remove_scopes`|`array` | A list of scopes to remove from this authorization.
-`note`|`string` | A note to remind you what the OAuth token is for.
+`note`|`string` | A note to remind you what the OAuth token is for. Tokens not associated with a specific OAuth application (i.e. personal access tokens) must have a unique note.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
 `fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client ID and user.
 

@@ -20,6 +20,12 @@ and Client Secret. The Client Secret should not be shared.
 **You may create a [personal access token](https://github.com/settings/tokens/new)
 for your own use or implement the web flow below to allow other users to authorize your application.**
 
+GitHub's OAuth implementation doesn't support the [implicit grant](https://tools.ietf.org/html/rfc6749#section-4.2)
+currently which would allow developers to implement the authorization flow 
+without a server-side component. Developers should implement the Web 
+application flow described below and use a server-side component for exchanging
+an authorization code for a token.
+
 ## Web Application Flow
 
 This is a description of the OAuth2 flow from 3rd party web sites.

@@ -23,12 +23,6 @@ many flavors</h1>
 
 [githubandroidsdk]: https://github.com/gitskarios/GithubAndroidSdk
 
-## Dart
-
-* [github.dart][github.dart]
-
-[github.dart]: https://github.com/DirectMyFile/github.dart
-
 ## .NET
 
 * [IronGithub][irongithub]
@@ -44,6 +38,12 @@ many flavors</h1>
 * [Tentacles][tentacles]
 
 [tentacles]: https://github.com/Raynes/tentacles
+
+## Dart
+
+* [github.dart][github.dart]
+
+[github.dart]: https://github.com/DirectMyFile/github.dart
 
 ## Emacs Lisp
 

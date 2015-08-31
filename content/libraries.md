@@ -17,11 +17,11 @@ many flavors</h1>
 
 # Third-party libraries
 
-## Dart
+## Android
 
-* [github.dart][github.dart]
+* [GithubAndroidSDK][githubandroidsdk]
 
-[github.dart]: https://github.com/DirectMyFile/github.dart
+[githubandroidsdk]: https://github.com/gitskarios/GithubAndroidSdk
 
 ## .NET
 
@@ -38,6 +38,12 @@ many flavors</h1>
 * [Tentacles][tentacles]
 
 [tentacles]: https://github.com/Raynes/tentacles
+
+## Dart
+
+* [github.dart][github.dart]
+
+[github.dart]: https://github.com/DirectMyFile/github.dart
 
 ## Emacs Lisp
 

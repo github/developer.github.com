@@ -174,6 +174,7 @@ the logged in user:
       auth_result['private_emails'] =
         JSON.parse(RestClient.get('https://api.github.com/user/emails',
                                   {:params => {:access_token => access_token}}))
+    end
 
     erb :basic, :locals => auth_result
 

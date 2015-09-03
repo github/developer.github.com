@@ -1,6 +1,6 @@
 ---
 kind: change
-title: Protected Branches in API responses
+title: Ensure your app is ready for Protected Branches
 created_at: 2015-09-03
 author_name: aroben
 ---

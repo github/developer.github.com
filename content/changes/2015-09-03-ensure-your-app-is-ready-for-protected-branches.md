@@ -14,6 +14,16 @@ fail unless the that commit (or another commit with the same [Git tree][tree])
 has a [Status][statuses] in the `success` state for each required status
 check.
 
+Required status checks can be used for more than just ensuring your branch
+passes Continuous Integration tests before merging. For example, you could
+write a Status integration that only posts a `success` Status when the pull
+request’s author has signed your project’s Contributor License Agreement. Or
+you could write one that only posts a `success` Status when three or more
+members of your `@initech/senior-engineers` have left a comment saying they’ve
+reviewed the changes. Combined with required status checks, integrations like
+these can help contributors to follow your project’s conventions. See our
+[Status API guide][guide] to learn how to create integrations like these.
+
 These restrictions apply to branch manipulations performed via the GitHub API
 as well. So when you protect a branch, you will no longer be able to [delete
 the branch][delete] via the API or perform [update it][update] to point at a
@@ -44,3 +54,4 @@ If you have any questions, please [let us know][contact].
 [update]: /v3/git/refs/#update-a-reference
 [merge]: /v3/pulls/#merge-a-pull-request-merge-button
 [contact]: https://github.com/contact?form[subject]=Protected+Branches+in+API+responses
+[guide]: /guides/building-a-ci-server/

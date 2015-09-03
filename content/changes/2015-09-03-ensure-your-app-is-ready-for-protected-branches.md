@@ -15,7 +15,7 @@ each required status check.
 
 These restrictions apply to branch manipulations performed via the GitHub API
 as well. So when you protect a branch, you will no longer be able to [delete
-the branch][delete] via the API or perform [update it][update] to point at a
+the branch][delete] via the API or [update it][update] to point at a
 non-ancestor commit, even with `"force": true`. And if your branch has required
 status checks, you won’t be able to [update it][update] or [merge pull
 requests][merge] into that branch until `success` Statuses have been posted to

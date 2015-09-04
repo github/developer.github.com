@@ -9,7 +9,7 @@ We’ve begun to [roll out Protected Branches][blog] across GitHub. When you
 protect a branch in one of your repositories, you will be prevented from
 force pushing to that branch or deleting it. You can also configure required
 status checks for your protected branch. When configured, changing a branch to
-point at a new commit will fail unless the that commit (or another commit with
+point at a new commit will fail unless that commit (or another commit with
 the same [Git tree][tree]) has a [Status][statuses] in the `success` state for
 each required status check.
 

@@ -186,9 +186,11 @@ covers the entire API.
 
 * [Dispatch GitHub][dispatchgithub]
 * [Hubcat][hubcat]
+* [Buhtig][buhtig]
 
 [dispatchgithub]: https://github.com/andreazevedo/dispatch-github
 [hubcat]: https://github.com/softprops/hubcat
+[buhtig]: https://github.com/mdread/buhtig
 
 ## Shell
 

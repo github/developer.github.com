@@ -10,7 +10,10 @@ task :compile do
 end
 
 desc "Test the output"
-task :test => [:clean, :remove_output_dir, :compile] do
+task :test => [:clean, :remove_output_dir, :compile, :run_proofer]
+
+desc "Run the HTML-Proofer"
+task :run_proofer do
   require 'html/proofer'
   ignored_links = [%r{www.w3.org}]
   latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']

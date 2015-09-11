@@ -129,7 +129,7 @@ curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>/setup/a
 
 ## Start a configuration process
 
-This endpoint allows you to start a configuration process at any time:
+This endpoint allows you to start a configuration process at any time for your updated settings to take effect:
 
     POST /setup/api/configure
 

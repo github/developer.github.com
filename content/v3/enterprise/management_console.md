@@ -239,7 +239,7 @@ curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>
 ### Example
 
 <pre class="terminal">
-curl -L 'http(s)://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys'
+curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys'
 </pre>
 
 ## Add a new authorized SSH key

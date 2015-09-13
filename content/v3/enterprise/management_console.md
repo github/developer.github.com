@@ -89,7 +89,7 @@ Name | Type | Description
 
 <pre class="terminal">
 HTTP/1.1 202 Accepted
-Location: http://hostname/setup/api/configcheck
+Location: http://<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck
 </pre>
 
 ### Example
@@ -137,7 +137,7 @@ This endpoint allows you to start a configuration process at any time:
 
 <pre class="terminal">
 HTTP/1.1 202 Accepted
-Location: http://hostname/setup/api/configcheck
+Location: http://<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck
 </pre>
 
 ### Example

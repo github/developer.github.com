@@ -24,7 +24,7 @@ You need to pass your [Management Console password](https://help.github.com/ente
 Use the `api_key` parameter to send this token with each request. For example:
 
 <pre class="terminal">
-$ curl -L 'http://<em>hostname</em>:<em>admin_port</em>:<em>admin_port</em>/setup/api?api_key=<em>your-amazing-password</em>'
+$ curl -L 'http://<em>hostname</em>:<em>admin_port</em>/setup/api?api_key=<em>your-amazing-password</em>'
 </pre>
 
 You can also use standard HTTP authentication to send this token. For example:

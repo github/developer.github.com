@@ -62,7 +62,7 @@ Name | Description
 [`release`][event-types-release] | Any time a Release is published in a Repository.
 [`status`][event-types-status] | Any time a Repository has a status update from the API
 [`team_add`][event-types-team_add] | Any time a team is added or modified on a Repository.
-[`watch`][event-types-watch] | Any time a User watches a Repository.
+[`watch`][event-types-watch] | Any time a User stars a Repository.
 
 ### Wildcard Event
 

@@ -45,6 +45,7 @@ put the version before the property:
 You can check the current version through every response's headers.  Look
 for the `X-GitHub-Media-Type` header:
 
+{:.terminal}
     $ curl https://api.github.com/users/technoweenie -I
     HTTP/1.1 200 OK
     X-GitHub-Media-Type: github.v3

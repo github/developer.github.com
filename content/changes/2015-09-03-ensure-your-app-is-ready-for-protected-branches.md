@@ -23,16 +23,15 @@ the target commit for all required status checks.
 
 These restrictions are all represented by 422 errors:
 
-<pre class="terminal">
-$ curl -i -H 'Authorization: token TOKEN' \
-    -X DELETE https://api.github.com/repos/octocat/hubot/git/refs/heads/master
-HTTP/1.1 422 Unprocessable Entity
+{:.terminal}
+    $ curl -i -H 'Authorization: token TOKEN' \
+        -X DELETE https://api.github.com/repos/octocat/hubot/git/refs/heads/master
+    HTTP/1.1 422 Unprocessable Entity
 
-{
-  "message": "Cannot delete a protected branch",
-  "documentation_url": "https://help.github.com/articles/about-protected-branches"
-}
-</pre>
+    {
+      "message": "Cannot delete a protected branch",
+      "documentation_url": "https://help.github.com/articles/about-protected-branches"
+    }
 
 Protected branches and required status checks are a great way to ensure your
 project’s conventions are followed. For example, you could write a Status

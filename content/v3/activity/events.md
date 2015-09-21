@@ -16,6 +16,7 @@ rate limit will be untouched.  There is also an "X-Poll-Interval" header that
 specifies how often (in seconds) you are allowed to poll.  In times of high
 server load, the time may increase.  Please obey the header.
 
+{:.terminal}
     $ curl -I https://api.github.com/users/tater/events
     HTTP/1.1 200 OK
     X-Poll-Interval: 60

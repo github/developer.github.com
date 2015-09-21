@@ -105,6 +105,7 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
+{:.terminal}
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       'https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc'
 
@@ -190,6 +191,7 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
+{:.terminal}
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
 
@@ -291,6 +293,7 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
+{:.terminal}
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
 
@@ -361,6 +364,7 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
+{:.terminal}
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000
 
@@ -409,6 +413,7 @@ Name | Description
 Using curl, and the [example issue search](#issue-search-example) above, our API
 request would look like this:
 
+{:.terminal}
     curl -H 'Accept: application/vnd.github.v3.text-match+json' \
       'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
 

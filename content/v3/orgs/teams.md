@@ -192,7 +192,7 @@ authenticated user.
 
 ## Add team member
 
-### Deprecation notice
+### Deprecation notice (Not for GitHub Enterprise)
 
 <div class="alert">
   <p>

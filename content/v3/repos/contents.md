@@ -265,13 +265,12 @@ Name | Type | Description
 
 To follow redirects with curl, use the `-L` switch:
 
-<pre class="terminal">
-curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
+{:.terminal}
+    curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
 
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
-</pre>
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
 
 ## Custom media types
 

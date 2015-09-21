@@ -90,8 +90,7 @@ We encourage you to <a href="/v3/media/#request-specific-version">explicitly req
 domain (or through <code>yourdomain.com/api/v3/</code> for enterprise).  All data is
 sent and received as JSON.</p>
 
-<pre class="terminal">
-$ curl -i https://api.github.com/users/octocat/orgs
+<pre class="terminal"><code>$ curl -i https://api.github.com/users/octocat/orgs
 
 HTTP/1.1 200 OK
 Server: nginx
@@ -109,7 +108,7 @@ Cache-Control: max-age=0, private, must-revalidate
 X-Content-Type-Options: nosniff
 
 []
-</pre>
+</code></pre>
 
 <p>Blank fields are included as <code>null</code> instead of being omitted.</p>
 
@@ -156,9 +155,8 @@ response illustrates all attributes that are returned by that method.</p>
 specified as a segment in the path can be passed as an HTTP query string
 parameter:</p>
 
-<pre class="terminal">
-$ curl -i "https://api.github.com/repos/vmg/redcarpet/issues?state=closed"
-</pre>
+<pre class="terminal"><code>$ curl -i "https://api.github.com/repos/vmg/redcarpet/issues?state=closed"
+</code></pre>
 
 <p>In this example, the ‘vmg’ and ‘redcarpet’ values are provided for the <code>:owner</code>
 and <code>:repo</code> parameters in the path while <code>:state</code> is passed in the query
@@ -167,17 +165,15 @@ string.</p>
 <p>For POST, PATCH, PUT, and DELETE requests, parameters not included in the URL should be encoded as JSON
 with a Content-Type of ‘application/json’:</p>
 
-<pre class="terminal">
-$ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/authorizations
-</pre>
+<pre class="terminal"><code>$ curl -i -u username -d '{"scopes":["public_repo"]}' https://api.github.com/authorizations
+</code></pre>
 
 <h2 id="root-endpoint">Root Endpoint</h2>
 
 <p>You can issue a <code>GET</code> request to the root endpoint to get all the endpoint categories that the API supports:</p>
 
-<pre class="terminal">
-$ curl https://api.github.com
-</pre>
+<pre class="terminal"><code>$ curl https://api.github.com
+</code></pre>
 
 <p>Note that for GitHub Enterprise, <a href="https://developer.github.com/v3/enterprise/#endpoint-urls">as with all other endpoints</a>, you’ll need to pass in your GitHub Enterprise endpoint as the hostname, <em>as well as your username and password</em>:</p>
 
@@ -345,21 +341,18 @@ of private repositories to unauthorized users.</p>
 
 <h3 id="basic-authentication">Basic Authentication</h3>
 
-<pre class="terminal">
-$ curl -u "username" https://api.github.com
-</pre>
+<pre class="terminal"><code>$ curl -u "username" https://api.github.com
+</code></pre>
 
 <h3 id="oauth2-token-sent-in-a-header">OAuth2 Token (sent in a header)</h3>
 
-<pre class="terminal">
-$ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com
-</pre>
+<pre class="terminal"><code>$ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com
+</code></pre>
 
 <h3 id="oauth2-token-sent-as-a-parameter">OAuth2 Token (sent as a parameter)</h3>
 
-<pre class="terminal">
-$ curl https://api.github.com/?access_token=OAUTH-TOKEN
-</pre>
+<pre class="terminal"><code>$ curl https://api.github.com/?access_token=OAUTH-TOKEN
+</code></pre>
 
 <p>Read <a href="/v3/oauth/">more about OAuth2</a>.  Note that OAuth2 tokens can be <a href="/v3/oauth_authorizations/#create-a-new-authorization">acquired
 programmatically</a>, for applications that
@@ -367,9 +360,8 @@ are not websites.</p>
 
 <h3 id="oauth2-keysecret">OAuth2 Key/Secret</h3>
 
-<pre class="terminal">
-$ curl 'https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy'
-</pre>
+<pre class="terminal"><code>$ curl 'https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy'
+</code></pre>
 
 <p>This should only be used in server to server scenarios.  Don’t leak your
 OAuth application’s client secret to your users.  Read <a href="#increasing-the-unauthenticated-rate-limit-for-oauth-applications">more about
@@ -379,8 +371,7 @@ unauthenticated rate limiting</a>.</p>
 
 <p>Authenticating with invalid credentials will return <code>401 Unauthorized</code>:</p>
 
-<pre class="terminal">
-$ curl -i https://api.github.com -u foo:bar
+<pre class="terminal"><code>$ curl -i https://api.github.com -u foo:bar
 
 HTTP/1.1 401 Unauthorized
 
@@ -388,14 +379,13 @@ HTTP/1.1 401 Unauthorized
   "message": "Bad credentials",
   "documentation_url": "https://developer.github.com/v3"
 }
-</pre>
+</code></pre>
 
 <p>After detecting several requests with invalid credentials within a short period,
 the API will temporarily reject all authentication attempts for that user
 (including ones with valid credentials) with <code>403 Forbidden</code>:</p>
 
-<pre class="terminal">
-$ curl -i https://api.github.com -u valid_username:valid_password
+<pre class="terminal"><code>$ curl -i https://api.github.com -u valid_username:valid_password
 
 HTTP/1.1 403 Forbidden
 
@@ -403,7 +393,7 @@ HTTP/1.1 403 Forbidden
   "message": "Maximum number of login attempts exceeded. Please try again later.",
   "documentation_url": "https://developer.github.com/v3"
 }
-</pre>
+</code></pre>
 
 <h2 id="hypermedia">Hypermedia</h2>
 
@@ -435,9 +425,8 @@ resources, you can also set a custom page size up to 100 with the <code>?per_pag
 Note that for technical reasons not all endpoints respect the <code>?per_page</code> parameter,
 see <a href="https://developer.github.com/v3/activity/events/">events</a> for example.</p>
 
-<pre class="terminal">
-$ curl 'https://api.github.com/user/repos?page=2&amp;per_page=100'
-</pre>
+<pre class="terminal"><code>$ curl 'https://api.github.com/user/repos?page=2&amp;per_page=100'
+</code></pre>
 
 <p>Note that page numbering is 1-based and that omitting the <code>?page</code>
 parameter will return the first page.</p>
@@ -501,8 +490,7 @@ rules</a>.</p>
 <p>You can check the returned HTTP headers of any API request to see your current
 rate limit status:</p>
 
-<pre class="terminal">
-$ curl -i https://api.github.com/users/whatever
+<pre class="terminal"><code>$ curl -i https://api.github.com/users/whatever
 
 HTTP/1.1 200 OK
 Date: Mon, 01 Jul 2013 17:27:06 GMT
@@ -510,7 +498,7 @@ Status: 200 OK
 X-RateLimit-Limit: 60
 X-RateLimit-Remaining: 56
 X-RateLimit-Reset: 1372700873
-</pre>
+</code></pre>
 
 <p>The headers tell you everything you need to know about your current rate limit status:</p>
 
@@ -544,8 +532,7 @@ X-RateLimit-Reset: 1372700873
 
 <p>Once you go over the rate limit you will receive an error response:</p>
 
-<pre class="terminal">
-HTTP/1.1 403 Forbidden
+<pre class="terminal"><code>HTTP/1.1 403 Forbidden
 Date: Tue, 20 Aug 2013 14:50:41 GMT
 Status: 403 Forbidden
 X-RateLimit-Limit: 60
@@ -556,7 +543,7 @@ X-RateLimit-Reset: 1377013266
     "message": "API rate limit exceeded for xxx.xxx.xxx.xxx. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)",
     "documentation_url": "https://developer.github.com/v3/#rate-limiting"
 }
-</pre>
+</code></pre>
 
 <p>You can also <a href="/v3/rate_limit">check your rate limit status</a> without incurring an
 API hit.
@@ -566,8 +553,7 @@ API hit.
 
 <p>If your OAuth application needs to make unauthenticated calls with a higher rate limit, you can pass your app’s client ID and secret as part of the query string.</p>
 
-<pre class="terminal">
-$ curl -i 'https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy'
+<pre class="terminal"><code>$ curl -i 'https://api.github.com/users/whatever?client_id=xxxx&amp;client_secret=yyyy'
 
 HTTP/1.1 200 OK
 Date: Mon, 01 Jul 2013 17:27:06 GMT
@@ -575,7 +561,7 @@ Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4966
 X-RateLimit-Reset: 1372700873
-</pre>
+</code></pre>
 
 <p>This method should only be used for server-to-server calls. You should never
 share your client secret with anyone or include it in client-side browser code.</p>
@@ -606,8 +592,7 @@ this rate limit. To ensure you’re acting as a good API citizen, check out our
 <p>If your application triggers this rate limit, you’ll receive an informative
 response:</p>
 
-<pre class="terminal">
-HTTP/1.1 403 Forbidden
+<pre class="terminal"><code>HTTP/1.1 403 Forbidden
 Content-Type: application/json; charset=utf-8
 Connection: close
 
@@ -615,7 +600,7 @@ Connection: close
   "message": "You have triggered an abuse detection mechanism and have been temporarily blocked from content creation. Please retry your request again later.",
   "documentation_url": "https://developer.github.com/v3#abuse-rate-limits"
 }
-</pre>
+</code></pre>
 
 <h2 id="user-agent-required">User Agent Required</h2>
 
@@ -625,14 +610,12 @@ application, for the <code>User-Agent</code> header value. This allows us to con
 
 <p>Here’s an example:</p>
 
-<pre class="terminal">
-User-Agent: Awesome-Octocat-App
-</pre>
+<pre class="terminal"><code>User-Agent: Awesome-Octocat-App
+</code></pre>
 
 <p>If you provide an invalid <code>User-Agent</code> header, you will receive a <code>403 Forbidden</code> response:</p>
 
-<pre class="terminal">
-$ curl -iH 'User-Agent: ' https://api.github.com/meta
+<pre class="terminal"><code>$ curl -iH 'User-Agent: ' https://api.github.com/meta
 HTTP/1.0 403 Forbidden
 Connection: close
 Content-Type: text/html
@@ -640,7 +623,7 @@ Content-Type: text/html
 Request forbidden by administrative rules.
 Please make sure your request has a User-Agent header.
 Check https://developer.github.com for other possible causes.
-</pre>
+</code></pre>
 
 <h2 id="conditional-requests">Conditional requests</h2>
 
@@ -651,8 +634,7 @@ has not changed, the server will return a <code>304 Not Modified</code>. Also no
 a conditional request and receiving a 304 response does not count against your
 <a href="#rate-limiting">Rate Limit</a>, so we encourage you to use it whenever possible.</p>
 
-<pre class="terminal">
-$ curl -i https://api.github.com/user
+<pre class="terminal"><code>$ curl -i https://api.github.com/user
 HTTP/1.1 200 OK
 Cache-Control: private, max-age=60
 ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"
@@ -683,7 +665,7 @@ Vary: Accept, Authorization, Cookie
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4996
 X-RateLimit-Reset: 1372700873
-</pre>
+</code></pre>
 
 <h2 id="cross-origin-resource-sharing">Cross Origin Resource Sharing</h2>
 
@@ -696,18 +678,16 @@ HTML 5 Security Guide.</p>
 <p>Here’s a sample request sent from a browser hitting
 <code>http://example.com</code>:</p>
 
-<pre class="terminal">
-$ curl -i https://api.github.com -H "Origin: http://example.com"
+<pre class="terminal"><code>$ curl -i https://api.github.com -H "Origin: http://example.com"
 HTTP/1.1 302 Found
 Access-Control-Allow-Origin: *
 Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
 Access-Control-Allow-Credentials: true
-</pre>
+</code></pre>
 
 <p>This is what the CORS preflight request looks like:</p>
 
-<pre class="terminal">
-$ curl -i https://api.github.com -H "Origin: http://example.com" -X OPTIONS
+<pre class="terminal"><code>$ curl -i https://api.github.com -H "Origin: http://example.com" -X OPTIONS
 HTTP/1.1 204 No Content
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-GitHub-OTP, X-Requested-With
@@ -715,7 +695,7 @@ Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE
 Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
 Access-Control-Max-Age: 86400
 Access-Control-Allow-Credentials: true
-</pre>
+</code></pre>
 
 <h2 id="json-p-callbacks">JSON-P Callbacks</h2>
 
@@ -725,8 +705,7 @@ to embed GitHub content in web pages by getting around cross domain
 issues.  The response includes the same data output as the regular API,
 plus the relevant HTTP Header information.</p>
 
-<pre class="terminal">
-$ curl https://api.github.com?callback=foo
+<pre class="terminal"><code>$ curl https://api.github.com?callback=foo
 
 /**/foo({
   "meta": {
@@ -742,7 +721,7 @@ $ curl https://api.github.com?callback=foo
     // the data
   }
 })
-</pre>
+</code></pre>
 
 <p>You can write a JavaScript handler to process the callback. Here’s a minimal example you can try out:</p>
 
@@ -818,7 +797,7 @@ how these timestamps can be specified.</p>
 <p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
 to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
 
-<pre><code>$ curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md
+<pre class="terminal"><code>$ curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md
 </code></pre>
 
 <p>This means that we generate a timestamp for the moment your API call is made in

@@ -67,8 +67,7 @@
 <p>This API is a little different due to the binary assets.  We use the <code>Accept</code> header for content negotiation when requesting
 a release asset.  Pass a standard API media type to get the API representation:</p>
 
-<pre class="terminal">
-$ curl -i -H "Authorization: token TOKEN" \
+<pre class="terminal"><code>$ curl -i -H "Authorization: token TOKEN" \
      -H "Accept: application/vnd.github.manifold-preview" \
      "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
 
@@ -78,27 +77,25 @@ HTTP/1.1 200 OK
   "id": 123,
   ...
 }
-</pre>
+</code></pre>
 
 <p>Pass “application/octet-stream” to download the binary content.</p>
 
-<pre class="terminal">
-$ curl -i -H "Authorization: token TOKEN" \
+<pre class="terminal"><code>$ curl -i -H "Authorization: token TOKEN" \
      -H "Accept: application/octet-stream" \
      "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
 
 HTTP/1.1 302 Found
-</pre>
+</code></pre>
 
 <p>Uploads are handled by a single request to a companion “uploads.github.com” service.</p>
 
-<pre class="terminal">
-$ curl -H "Authorization: token TOKEN" \
+<pre class="terminal"><code>$ curl -H "Authorization: token TOKEN" \
      -H "Accept: application/vnd.github.manifold-preview" \
      -H "Content-Type: application/zip" \
      --data-binary @build/mac/package.zip \
      "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
-</pre>
+</code></pre>
 
 <h2 id="preview-mode">Preview mode</h2>
 
@@ -131,9 +128,9 @@ a member of the Avengers, with the ability to teleport through time and space.  
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
-
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 

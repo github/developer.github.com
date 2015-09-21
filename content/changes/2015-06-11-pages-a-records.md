@@ -7,9 +7,8 @@ author_name: leereilly
 
 The [Meta API](/v3/meta/) now includes the A record IP addresses for [GitHub Pages](https://pages.github.com/).
 
-<pre class="terminal">
-$ curl https://api.github.com/meta
-</pre>
+{:.terminal}
+    $ curl https://api.github.com/meta
 
 <pre><code class="language-javascript">
 {

@@ -122,6 +122,7 @@ cleaner approach is to include it in the Authorization header
 
 For example, in curl you can set the Authorization header like this:
 
+{:.terminal}
     curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
 
 ## Non-Web Application Flow
@@ -163,6 +164,7 @@ authorize form.
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.
 
+{:.terminal}
     $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
     HTTP/1.1 200 OK
     X-OAuth-Scopes: repo, user

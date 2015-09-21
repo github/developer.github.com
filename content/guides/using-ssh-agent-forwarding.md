@@ -130,9 +130,8 @@ $ echo "$SSH_AUTH_SOCK"
 
 You can check that your key is visible to `ssh-agent` by running the following command:
 
-<pre class="terminal">
-ssh-add -L
-</pre>
+{:.terminal}
+    ssh-add -L
 
 If the command says that no identity is available, you'll need to add your key:
 

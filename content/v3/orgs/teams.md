@@ -193,6 +193,7 @@ authenticated user.
 ## Add team member
 
 {{#not-enterprise}}
+
 ### Deprecation notice
 
 <div class="alert">
@@ -206,7 +207,8 @@ authenticated user.
     instead. It allows you to invite new organization members to your teams.
   </p>
 </div>
-{{/#not-enterprise}}
+
+{{#not-enterprise}}
 
 In order to add a user to a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the organization that the team

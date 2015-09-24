@@ -13,140 +13,132 @@ This change brings the payloads for these events more inline with the responses 
 
 #### Old Format
 
-<pre><code class="language-javascript">
-{
-  "id": 42,
-  "sha": "deadbeef",
-  "ref": "master",
-  "task": "deploy",
-  "name": "my-org/our-app",
-  "environment": "production",
-  "payload": {…},
-  "description": "Deploying master",
-  "repository": {…},
-  "sender": {…}
-}
-
-</code></pre>
+    #!javascript
+    {
+      "id": 42,
+      "sha": "deadbeef",
+      "ref": "master",
+      "task": "deploy",
+      "name": "my-org/our-app",
+      "environment": "production",
+      "payload": {…},
+      "description": "Deploying master",
+      "repository": {…},
+      "sender": {…}
+    }
 
 #### Current Format - 2014/10/22
 
-<pre><code class="language-javascript">
-{
-  "id": 42,
-  "sha": "deadbeef",
-  "ref": "master",
-  "task": "deploy",
-  "name": "my-org/our-app",
-  "environment": "production",
-  "payload": {…},
-  "description": "Deploying master",
-  "repository": {…},
-  "deployment": {
-    "url": "https://api.github.com/repos/my-org/our-app/deployments/42",
-    "id": 42,
-    "sha": "deadbeef",
-    "ref": "master",
-    "task": "deploy",
-    "environment": "production",
-    "payload": {…},
-    "description": "Deploying master",
-    "creator": {…},
-    "created_at": "2014-09-23T16:37:49Z",
-    "updated_at": "2014-09-23T16:37:49Z",
-    "statuses_url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses"
-  },
-  "sender": {…}
-}
-
-</code></pre>
+    #!javascript
+    {
+      "id": 42,
+      "sha": "deadbeef",
+      "ref": "master",
+      "task": "deploy",
+      "name": "my-org/our-app",
+      "environment": "production",
+      "payload": {…},
+      "description": "Deploying master",
+      "repository": {…},
+      "deployment": {
+        "url": "https://api.github.com/repos/my-org/our-app/deployments/42",
+        "id": 42,
+        "sha": "deadbeef",
+        "ref": "master",
+        "task": "deploy",
+        "environment": "production",
+        "payload": {…},
+        "description": "Deploying master",
+        "creator": {…},
+        "created_at": "2014-09-23T16:37:49Z",
+        "updated_at": "2014-09-23T16:37:49Z",
+        "statuses_url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses"
+      },
+      "sender": {…}
+    }
 
 #### New Format - 2014/11/05
 
-<pre><code class="language-javascript">
-{
-  "deployment": {
-    "url": "https://api.github.com/repos/my-org/our-app/deployments/42",
-    "id": 42,
-    "sha": "deadbeef",
-    "ref": "master",
-    "task": "deploy",
-    "environment": "production",
-    "payload": {…},
-    "description": "Deploying master",
-    "creator": {…},
-    "created_at": "2014-09-23T16:37:49Z",
-    "updated_at": "2014-09-23T16:37:49Z",
-    "statuses_url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses"
-  },
-  "repository": {…},
-  "sender": {…}
-}
-</code></pre>
+    #!javascript
+    {
+      "deployment": {
+        "url": "https://api.github.com/repos/my-org/our-app/deployments/42",
+        "id": 42,
+        "sha": "deadbeef",
+        "ref": "master",
+        "task": "deploy",
+        "environment": "production",
+        "payload": {…},
+        "description": "Deploying master",
+        "creator": {…},
+        "created_at": "2014-09-23T16:37:49Z",
+        "updated_at": "2014-09-23T16:37:49Z",
+        "statuses_url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses"
+      },
+      "repository": {…},
+      "sender": {…}
+    }
 
 ## DeploymentStatusEvent Changes
 
 #### Old Format
 
-<pre><code class="language-javascript">
-{
-  "id": 2600,
-  "state": "success",
-  "deployment": {…},
-  "target_url": "https://gist.github.com/deadbeef",
-  "description": "Deployment was successful",
-  "repository": {…},
-  "sender": {…}
-}
-</code></pre>
+    #!javascript
+    {
+      "id": 2600,
+      "state": "success",
+      "deployment": {…},
+      "target_url": "https://gist.github.com/deadbeef",
+      "description": "Deployment was successful",
+      "repository": {…},
+      "sender": {…}
+    }
 
 #### Current Format - 2014/10/22
 
-<pre><code class="language-javascript">
-{
-  "id": 2600,
-  "state": "success",
-  "target_url": "https://gist.github.com/deadbeef",
-  "description": "Deployment was successful",
-  "repository": {…},
-  "deployment_status": {
-    "url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600",
-    "id": 2600,
-    "state": "success",
-    "creator": {…},
-    "target_url": "https://gist.github.com/deadbeef",
-    "description": "Deployment was successful",
-    "created_at": "2014-09-23T16:45:49Z",
-    "updated_at": "2014-09-23T16:45:49Z",
-    "deployment_url": "https://api.github.com/repos/my-org/our-app/deployments/42",
-    "repository_url": "https://api.github.com/repos/my-org/our-app"
-  },
-  "deployment": {…},
-  "sender": {…}
-}
-</code></pre>
+    #!javascript
+    {
+      "id": 2600,
+      "state": "success",
+      "target_url": "https://gist.github.com/deadbeef",
+      "description": "Deployment was successful",
+      "repository": {…},
+      "deployment_status": {
+        "url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600",
+        "id": 2600,
+        "state": "success",
+        "creator": {…},
+        "target_url": "https://gist.github.com/deadbeef",
+        "description": "Deployment was successful",
+        "created_at": "2014-09-23T16:45:49Z",
+        "updated_at": "2014-09-23T16:45:49Z",
+        "deployment_url": "https://api.github.com/repos/my-org/our-app/deployments/42",
+        "repository_url": "https://api.github.com/repos/my-org/our-app"
+      },
+      "deployment": {…},
+      "sender": {…}
+    }
 
 #### New Format - 2014/11/05
 
-<pre><code class="language-javascript">
-{
-  "deployment_status": {
-    "url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600",
-    "id": 2600,
-    "state": "success",
-    "creator": {…},
-    "target_url": "https://gist.github.com/deadbeef",
-    "description": "Deployment was successful",
-    "created_at": "2014-09-23T16:45:49Z",
-    "updated_at": "2014-09-23T16:45:49Z",
-    "deployment_url": "https://api.github.com/repos/my-org/our-app/deployments/42",
-    "repository_url": "https://api.github.com/repos/my-org/our-app"
-  },
-  "deployment": {…},
-  "repository": {…},
-  "sender": {…}
-}
-</code></pre>
+    #!javascript
+    {
+      "deployment_status": {
+        "url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600",
+        "id": 2600,
+        "state": "success",
+        "creator": {…},
+        "target_url": "https://gist.github.com/deadbeef",
+        "description": "Deployment was successful",
+        "created_at": "2014-09-23T16:45:49Z",
+        "updated_at": "2014-09-23T16:45:49Z",
+        "deployment_url": "https://api.github.com/repos/my-org/our-app/deployments/42",
+        "repository_url": "https://api.github.com/repos/my-org/our-app"
+      },
+      "deployment": {…},
+      "repository": {…},
+      "sender": {…}
+    }
 
 If you have any questions or feedback, please [get in touch][get-in-touch].
 

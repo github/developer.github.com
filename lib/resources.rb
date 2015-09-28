@@ -706,7 +706,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
       "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
       "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
-      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
+      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}",
       "tarball_url"      => "https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0",
       "zipball_url"      => "https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0",
       "id"               => 1,

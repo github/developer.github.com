@@ -8,8 +8,6 @@ layout: integrations-directory
 * TOC
 {:toc}
 
-As one of our integrators, we're excited to tell the world about your GitHub integration at [https://github.com/integrations](https://github.com/integrations). To ensure the GitHub community has the best experience finding and using your integrations, we've outlined a short list of requirements to follow. We're happy to chat about these if you have any questions, feel free to reach out to [partnerships@github.com](mailto:partnerships@github.com) for additional detail.
-
 ## Listing Requirements
 
 ### Provide the right contacts
@@ -18,7 +16,7 @@ We want to be sure GitHub can contact your team, if needed. Specifically, we're 
 
 ### Provide standard links
 
-We'd like to have a minimum set of links (below) to include in every integration listing, so that our users have all the information they need.
+We'd like to have a minimum set of links (in the Marketing Guidelines on the right) to include in every integration listing, so that our users have all the information they need.
 
 - Documentation - Please provide a URL with more information on how to use your integration.
 - Terms of service - Please provide the Terms of Service URL for users using your integration.
@@ -50,7 +48,7 @@ please delete that information in your system within 60 days.
 
 ## Choose your type of listing
 
-We offer two types of listings: Oauth installation listings and "learn more" listings.
+We offer two types of listings: OAuth installation listings and "learn more" listings.
 
 ### OAuth installation listing
 
@@ -70,5 +68,5 @@ account creation*.
 
 ## Send us your information
 
-In addition to this check, please follow the Marketing Guidelines below.  The best format for delivery is Markdown (.md) or plain text (.txt). Please attach images at the proper resolution, we aren't able to extract photos from PDFs or Word docs.
+In addition to this check, please follow the Marketing Guidelines on the right.  The best format for delivery is Markdown (.md) or plain text (.txt). Please attach images at the proper resolution, we aren't able to extract photos from PDFs or Word docs.
 Once you're ready just send the materials over emailto [partnerships@github.com](mailto:partnerhips@github.com). Thanks! Looking forward to reviewing your listing!

@@ -57,7 +57,7 @@ collaborators list.
 
 Name | Type | Description
 -----|------|--------------
-`permission`|`string` | The permission to grant the team. **Only valid on organization-owned repositories.** Can be one of:<br/> * `pull` - can pull, but not push to or administer this repository.<br/> * `push` - can pull and push, but not administer this repository.<br/> * `admin` -  can pull, push and administer this repository.<br/>Default: `pull`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`permission`|`string` | The permission to grant the team. **Only valid on organization-owned repositories.** Can be one of:<br/> * `pull` - can pull, but not push to or administer this repository.<br/> * `push` - can pull and push, but not administer this repository.<br/> * `admin` -  can pull, push and administer this repository.<br/>Default: `push`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
 
 <%= fetch_content(:optional_put_content_length) %>
 

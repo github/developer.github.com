@@ -72,7 +72,7 @@ GitHub's OAuth authorization flow.
 
 We are happy to help you identify if your integration can already support this. If you'd like a direct installation from the Integrations Directory, your provided installation URL should always forward the user immediately to an OAuth authorization screen. You should never add interstitial pages within that flow.
 
-### Learn more listing
+### "Learn more" listing
 
 The "learn more" listing is used when a user cannot use GitHub OAuth to sign up for an account within
 your integration. You will provide a URL that will link a "learn more" button within your

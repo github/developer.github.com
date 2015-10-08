@@ -82,4 +82,4 @@ account creation*.
 ## Send us your information
 
 In addition to this check, please follow the Marketing Guidelines on the right.  The best format for delivery is Markdown (.md) or plain text (.txt). Please attach images at the proper resolution, we aren't able to extract photos from PDFs or Word docs.
-Once you're ready just send the materials over emailto [partnerships@github.com](mailto:partnerhips@github.com). Thanks! Looking forward to reviewing your listing!
+Once you're ready just send the materials over emailto [partnerships@github.com](mailto:partnerships@github.com). Thanks! Looking forward to reviewing your listing!

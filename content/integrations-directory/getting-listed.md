@@ -39,7 +39,7 @@ marketing site. As your product changes, keep your Integration Directory listing
 
 ### Provide categories for your listing
 
-Help GitHub users find your Integration Directory listing faster with the appropriate categories. Please send us your suggested categories for the listing (multiple is fine). We reserve the right to remove categories from a listing, but we won't add any categories without your approval. At launch, we're only using the following categories: "Build" "Collaborate" and "Deploy".
+Help GitHub users find your Integration Directory listing faster with the appropriate categories. Please send us your suggested categories for the listing (multiples are fine). We reserve the right to remove categories from a listing, but we won't add any categories without your approval. At launch, we're only using the following categories: "Build" "Collaborate" and "Deploy".
 
 ## Technical Requirements
 

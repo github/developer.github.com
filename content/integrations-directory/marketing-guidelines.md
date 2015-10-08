@@ -57,11 +57,11 @@ List some features to give people a better sense of what your integration offers
 > Using a custom deployment? Customize the build to deploy to your servers!
 
 ## General tips
-- Do not use `H1` level headings
-- Use `H3` for section headings, `H4` for subsections
-- Avoid italics. Use bold for emphasis instead
-- Use sentence case for titles
-- Do not write in all caps to provide emphasis
+- Do not use `H1` level headings.
+- Use `H3` for section headings, `H4` for subsections.
+- Avoid italics. Use bold for emphasis instead.
+- Use sentence case for titles.
+- Do not write in all caps to provide emphasis.
 - Write in [GitHub Flavored markdown](https://help.github.com/articles/github-flavored-markdown/).
 
 ## Integration logo guidelines

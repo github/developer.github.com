@@ -42,7 +42,7 @@ Images are optional. Well curated images will help people get a sense for how yo
 List some features to give people a better sense of what your integration offers. An ideal number is between three and six—pick the great ones.
 
 ### Feature guidelines
-- Each feature should have a heading
+- Each feature should have a heading.
 - Does the feature have a name? What is it?
 - What does the feature do?
 - How does it help people build better software?

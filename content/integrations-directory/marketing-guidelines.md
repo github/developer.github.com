@@ -65,9 +65,9 @@ List some features to give people a better sense of what your integration offers
 - Write in [GitHub Flavored markdown](https://help.github.com/articles/github-flavored-markdown/).
 
 ## Integration logo guidelines
-- Provide your integration logo as a 128x128 pixel PNG
-- Negative space must be transparent
-- Do not stretch or squish your logo to fill the space
+- Provide your integration logo as a 128x128 pixel PNG.
+- Negative space must be transparent.
+- Do not stretch or squish your logo to fill the space.
 - You'll need to attach this logo to your GitHub Application, before the listing is published.
 
 ## Samples

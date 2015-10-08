@@ -22,7 +22,7 @@ All three are for GitHub-use only. If there's an urgent that needs your attentio
 
 ### Provide standard links
 
-We'd like to have a minimum set of links (in the Marketing Guidelines on the right) to include in every integration listing, so that our users have all the information they need.
+We'd like to have a minimum set of links (in the Marketing Guidelines on the right) to include in every integration listing, so that our users have all the information they need. These are:
 
 - Documentation - Please provide a URL with more information on how to use your integration.
 - Terms of service - Please provide the Terms of Service URL for users using your integration.

@@ -1,6 +1,5 @@
 ---
 title: Getting listed in the Integrations Directory | GitHub API
-layout: integrations-directory
 ---
 
 # Getting your integration listed
@@ -63,7 +62,9 @@ We offer two types of listings: OAuth installation listings and "learn more" lis
 ### OAuth installation listing
 
 {{#tip}}
+
 This is our preferred type of listing wherever possible.
+
 {{/tip}}
 
 The OAuth installation listings are used so customers can immediately install your integration directly

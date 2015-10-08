@@ -1,6 +1,5 @@
 ---
 title: Integrations Directory marketing guidelines | GitHub API
-layout: integrations-directory
 ---
 
 # Marketing guidelines
@@ -25,6 +24,7 @@ Write a single paragraph that describes your integration clearly and speaks dire
 Keep this section short and sweet.
 
 **Example**
+
 > Sample CI helps you deploy your code with confidence by continuously running your test suite. Avoid bugs and avert deployment disasters by catching bugs before they reach your users. Sample CI can update the build status on your pull requests as they progress and can deploy successful builds to production automatically.  
 
 ## Images
@@ -50,6 +50,7 @@ List some features to give people a better sense of what your integration offers
 - Does your feature require any setup?
 
 **Example**
+
 > **Deploy anywhere, with confidence**
 
 > Deploying to production after a successful build is as easy as setting up a bit of configuration, and we’ll deploy your code to Heroku, Engine Yard Cloud, Nodejitsu, cloudControl, OpenShift, CloudFoundry, AppFog, and Amazon OpsWorks.

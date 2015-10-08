@@ -62,12 +62,15 @@ We offer two types of listings: OAuth installation listings and "learn more" lis
 
 ### OAuth installation listing
 
+{{#tip}}
+This is our preferred type of listing wherever possible.
+{{/tip}}
+
 The OAuth installation listings are used so customers can immediately install your integration directly
 within GitHub's UI. To use this type of listing, provide a URL that will immediately redirect to
 GitHub's OAuth authorization flow.
 
-This is our *preferred type of listing* wherever possible. We are happy to help you identify if your
-integration can already support this. If you'd like a direct installation from the Integrations Directory, your provided installation URL should always forward the user immediately to an OAuth authorization screen. You should never add interstitial pages within that flow.
+We are happy to help you identify if your integration can already support this. If you'd like a direct installation from the Integrations Directory, your provided installation URL should always forward the user immediately to an OAuth authorization screen. You should never add interstitial pages within that flow.
 
 ### Learn more listing
 

@@ -11,7 +11,7 @@ This document will help you write compelling and well-structured marketing mater
 
 ## One line blurb
 
-This is a short sentence (70 characters max), that'll show up right below your logo. It can be used for a tagline or quick summary of the integration itself.
+This is a short sentence (70 characters max), that'll show up right below your logo. It can be used for a tagline or quick summary of the integration.
 
 ## Description
 

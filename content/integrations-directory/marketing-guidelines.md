@@ -15,7 +15,7 @@ This is a short sentence (70 characters max), that'll show up right below your l
 
 ## Description
 
-Write a single paragraph that describes your integration clearly and speaks directly to the audience (think “you” and “your” over “we” and “our”). Make sure to answer the following questions in your description:
+Write a single paragraph that describes your integration clearly and speaks directly to the audience (think “you” and “your” over “we” and “our”). Answer the following questions in your description:
 
 - What does it do?
 - How does it integrate with GitHub?

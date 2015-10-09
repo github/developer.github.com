@@ -46,7 +46,7 @@ List some features to give people a better sense of what your integration offers
 - Does the feature have a name? What is it?
 - What does the feature do?
 - How does it help people build better software?
-- Does it interact with any external services? (i.e. can deploy to Heroku, Engine Yard Cloud, etc.)
+- Does it interact with any external services (e.g., can deploy to Heroku, Engine Yard Cloud, etc.)?
 - Does your feature require any setup?
 
 **Example**

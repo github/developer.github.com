@@ -86,4 +86,4 @@ In addition to this checklist, please follow the [Marketing Guidelines](/integra
 
 Please attach images at the proper resolution. We aren't able to extract photos from PDFs or Word docs.
 
-Once you're ready just send the materials over emailto [partnerships@github.com](mailto:partnerships@github.com). Thanks! Looking forward to reviewing your listing!
+Once you're ready just send the materials over email to [partnerships@github.com](mailto:partnerships@github.com). Thanks! Looking forward to reviewing your listing!

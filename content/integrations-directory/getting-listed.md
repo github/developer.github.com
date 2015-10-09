@@ -53,7 +53,7 @@ Anytime you display GitHub data in your integration, use TLS. If you also use [w
 ### Delete GitHub data once you lose access to the information
 
 Once you realize you've lost access to a user, organization, repository, or its related objects,
-please delete that information in your system within 60 days.
+delete that information in your system within 60 days.
 
 ## Choose your type of listing
 

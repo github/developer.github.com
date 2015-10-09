@@ -13,7 +13,7 @@ This document will help you write compelling and well-structured marketing mater
 
 This is a short sentence (70 characters max), that'll show up right below your logo. It can be used for a tagline or quick summary of the integration itself.
 
-## Integration description
+## Description
 
 Write a single paragraph that describes your integration clearly and speaks directly to the audience (think “you” and “your” over “we” and “our”). Make sure to answer the following questions in your description:
 
@@ -65,7 +65,7 @@ List some features to give people a better sense of what your integration offers
 - Do not write in all caps to provide emphasis.
 - Write in [GitHub Flavored markdown](https://help.github.com/articles/github-flavored-markdown/).
 
-## Integration logo guidelines
+## Logo guidelines
 - Provide your integration logo as a 128x128 pixel PNG.
 - Negative space must be transparent.
 - Do not stretch or squish your logo to fill the space.

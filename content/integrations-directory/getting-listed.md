@@ -28,7 +28,7 @@ We'd like to have a minimum set of links (in the Marketing Guidelines on the rig
 - Privacy Policy - If different than Terms of Service, please include the URL here.
 - Support - Please provide a URL or email address for users to contact you directly.
 - Status - You should provide us a URL that will be updated when your application is down or experiencing problems. This could be a status site, a blog, a Twitter account, or more. This URL should be publicly accessible.
-- Pricing - If you integration costs money or has differed priced tiers of service, please include this URL.
+- Pricing - If your integration costs money or has differed priced tiers of service, please include this URL.
 - Installation - Provide the URL for direct installation for users. Note the oAuth requirement below.
 
 ### Provide updates to your listing

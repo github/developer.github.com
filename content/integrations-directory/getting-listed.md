@@ -82,5 +82,8 @@ account creation*.
 
 ## Send us your information
 
-In addition to this checklist, please follow the [Marketing Guidelines](/integrations-directory/marketing-guidelines/) as well.  The best format for delivery is Markdown (.md) or plain text (.txt). Please attach images at the proper resolution. We aren't able to extract photos from PDFs or Word docs.
+In addition to this checklist, please follow the [Marketing Guidelines](/integrations-directory/marketing-guidelines/) as well.  The best format for delivery is Markdown (.md) or plain text (.txt).
+
+Please attach images at the proper resolution. We aren't able to extract photos from PDFs or Word docs.
+
 Once you're ready just send the materials over emailto [partnerships@github.com](mailto:partnerships@github.com). Thanks! Looking forward to reviewing your listing!

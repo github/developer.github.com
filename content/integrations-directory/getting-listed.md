@@ -34,7 +34,7 @@ We'd like to have a minimum set of links to include in every integration listing
 ### Provide updates to your listing
 
 We want GitHub users to have consistent messaging within the Integrations Directory and your
-marketing site. As your product changes, keep your Integration Directory listing up to date. We ask that you refresh the information at least once a year.
+marketing site. As your product changes, keep your Integration Directory listing up to date. We ask that you refresh the information at least once a year. Please send updates to [partnerships@github.com](mailto:partnerships@github.com).
 
 ### Provide categories for your listing
 

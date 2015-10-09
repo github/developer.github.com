@@ -17,7 +17,7 @@ We want to be sure GitHub can contact your team, if needed. Specifically, we're 
 * A security contact
 * An escalation contact
 
-All three are for GitHub-use only. If there's an urgent that needs your attention, we'll contact your escalation contact and expect a response within one business day. A delayed response from your escalation contact may result in temporary or permanent de-listing of your integration from the directory.
+All three are for GitHub-use only. If there's an urgent issue that needs your attention, we'll contact your escalation contact and expect a response within one business day. A delayed response from your escalation contact may result in temporary or permanent de-listing of your integration from the directory.
 
 ### Provide standard links
 

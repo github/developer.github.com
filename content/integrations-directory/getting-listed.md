@@ -7,7 +7,7 @@ title: Getting listed in the Integrations Directory | GitHub API
 * TOC
 {:toc}
 
-## Listing Requirements
+## Listing requirements
 
 ### Provide the right contacts
 
@@ -44,7 +44,7 @@ Help GitHub users find your Integration Directory listing faster with the approp
 * Collaborate
 * Deploy
 
-## Technical Requirements
+## Technical requirements
 
 ### Use TLS
 

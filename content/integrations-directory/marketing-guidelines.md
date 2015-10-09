@@ -72,4 +72,4 @@ List some features to give people a better sense of what your integration offers
 - You'll need to attach this logo to your GitHub Application, before the listing is published.
 
 ## Samples
-Feel free to look at some of existing listings in the Integrations Directory, such as [Gitter](https://github.com/integrations/gitter) or [ZenHub](https://github.com/integrations/zenhub).
+Feel free to look at existing listings in the Integrations Directory, such as [Gitter](https://github.com/integrations/gitter) or [ZenHub](https://github.com/integrations/zenhub).

@@ -11,11 +11,11 @@ This document will help you write compelling and well-structured marketing mater
 
 ## One line blurb
 
-This is a short sentence (70 characters max), that'll show up right below your logo. It can be used for a tagline or quick summary of the integration itself.
+This is a short sentence (70 characters max), that'll show up right below your logo. It can be used for a tagline or quick summary of the integration.
 
-## Integration description
+## Description
 
-Write a single paragraph that describes your integration clearly and speaks directly to the audience (think “you” and “your” over “we” and “our”). Make sure to answer the following questions in your description:
+Write a single paragraph that describes your integration clearly and speaks directly to the audience (think “you” and “your” over “we” and “our”). Answer the following questions in your description:
 
 - What does it do?
 - How does it integrate with GitHub?
@@ -46,7 +46,7 @@ List some features to give people a better sense of what your integration offers
 - Does the feature have a name? What is it?
 - What does the feature do?
 - How does it help people build better software?
-- Does it interact with any external services? (i.e. can deploy to Heroku, Engine Yard Cloud, etc.)
+- Does it interact with any external services (e.g., can deploy to Heroku, Engine Yard Cloud, etc.)?
 - Does your feature require any setup?
 
 **Example**
@@ -65,11 +65,11 @@ List some features to give people a better sense of what your integration offers
 - Do not write in all caps to provide emphasis.
 - Write in [GitHub Flavored markdown](https://help.github.com/articles/github-flavored-markdown/).
 
-## Integration logo guidelines
+## Logo
 - Provide your integration logo as a 128x128 pixel PNG.
 - Negative space must be transparent.
 - Do not stretch or squish your logo to fill the space.
 - You'll need to attach this logo to your GitHub Application, before the listing is published.
 
 ## Samples
-Feel free to look at some of the listings on the current Directory listing, such as [Gitter](https://github.com/integrations/gitter) or [ZenHub](https://github.com/integrations/zenhub).
+Feel free to look at existing listings in the Integrations Directory, such as [Gitter](https://github.com/integrations/gitter) or [ZenHub](https://github.com/integrations/zenhub).

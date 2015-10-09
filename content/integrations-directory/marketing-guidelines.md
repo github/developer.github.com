@@ -65,7 +65,7 @@ List some features to give people a better sense of what your integration offers
 - Do not write in all caps to provide emphasis.
 - Write in [GitHub Flavored markdown](https://help.github.com/articles/github-flavored-markdown/).
 
-## Logo guidelines
+## Logo
 - Provide your integration logo as a 128x128 pixel PNG.
 - Negative space must be transparent.
 - Do not stretch or squish your logo to fill the space.

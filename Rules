@@ -26,6 +26,15 @@ compile '/feed/' do
   filter :kramdown, :toc_levels => [2]
 end
 
+compile '/integrations-directory/*' do
+  filter :erb
+  filter :kramdown, :toc_levels => [2]
+  filter :tip_filter
+  filter :colorize_syntax,
+    :colorizers => {:javascript => :rouge}
+  layout item[:layout] || 'integrations-directory'
+end
+
 compile '/v3/*' do
   filter :search
   filter :erb

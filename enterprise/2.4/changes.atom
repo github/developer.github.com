@@ -1,0 +1,1201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://developer.github.com/</id>
+  <title>GitHub API Changes</title>
+  <updated>2014-01-29T05:00:00Z</updated>
+  <link rel="alternate" href="http://developer.github.com/" />
+  <link rel="self" href="http://developer.github.com/changes.atom" />
+  <author>
+    <name>technoweenie</name>
+    <uri>https://github.com/technoweenie</uri>
+  </author>
+  <entry>
+    <id>tag:developer.github.com,2014-01-29:/changes/2014-01-29-audit-org-members-for-2fa/</id>
+    <title type="html">Audit organization members for two-factor authentication</title>
+    <published>2014-01-29T05:00:00Z</published>
+    <updated>2014-01-29T05:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-01-29-audit-org-members-for-2fa/" />
+    <content type="html">&lt;p&gt;We’ve added a &lt;a href="/v3/orgs/members/#audit-two-factor-auth"&gt;new filter&lt;/a&gt; for listing members of an organization without
+&lt;a href="https://github.com/blog/1614-two-factor-authentication"&gt;two-factor authentication&lt;/a&gt; enabled:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl -H "Authorization: token [yours]" \
+       https://api.github.com/orgs/octokit/members\?filter\=2fa_disabled
+&lt;/pre&gt;
+
+&lt;p&gt;The new filter is available for owners of organizations with private
+repositories. Happy auditing and &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+2FA+filter"&gt;send us your feedback or questions&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2014-01-09:/changes/2014-01-09-preview-the-new-deployments-api/</id>
+    <title type="html">Preview the New Deployments API</title>
+    <published>2014-01-09T05:00:00Z</published>
+    <updated>2014-01-09T05:00:00Z</updated>
+    <author>
+      <name>atmos</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/" />
+    <content type="html">&lt;p&gt;Today we’re excited to announce a &lt;a href="/v3/repos/deployments/"&gt;Deployments API&lt;/a&gt;. We ship a lot of
+software at GitHub: web, mobile, and native. For the last few years, we’ve been
+driving our deployments from our &lt;a href="https://speakerdeck.com/jnewland/chatops"&gt;ChatOps tooling&lt;/a&gt; and we’ve learned a
+lot. The Deployments API is a generalization of the approach that we’ve been
+taking, and we’re really excited to see what our users and integrations start
+building around it.&lt;/p&gt;
+
+&lt;p&gt;Deployments are a new model in the GitHub ecosystem. We don’t have any UI
+components currently, and deployments are intended to be used exclusively by
+tooling.  If you’re familiar with the Status API, you know that it allows
+various tools to report on the status of a commit (e.g., the progress of an
+attempt to perform a build at a particular commit). The Status API doesn’t
+perform the build; it just reports the results. Much like the Status API, we
+won’t be doing actual deployments for you. Instead, the API provides a way for
+you to track the status of your deployments. We’re hoping to provide
+consistency across the various type of release processes, regardless of the
+underlying steps involved with getting your code built or shipped to your
+servers.&lt;/p&gt;
+
+&lt;h2 id="highlights"&gt;Highlights&lt;/h2&gt;
+
+&lt;h3 id="automatic-merging"&gt;Automatic Merging&lt;/h3&gt;
+
+&lt;p&gt;The system can auto-merge the default branch for the repository if the
+requested deployment ref is behind the default branch. On active projects it’s
+easy to fall behind, so let automation watch your back.&lt;/p&gt;
+
+&lt;h3 id="commit-status-integration"&gt;Commit Status Integration&lt;/h3&gt;
+
+&lt;p&gt;By default, the system rejects deployment requests for repositories that have
+commit statuses but don’t have a green build for the deployment ref. This can
+be bypassed, but is useful in cases where continuous integration is being used.&lt;/p&gt;
+
+&lt;h3 id="force-deployments"&gt;Force Deployments&lt;/h3&gt;
+
+&lt;p&gt;Sometimes the world crashes down on you, and you need to just get the code out
+the door.  Forced deployments bypass any commit status checks or ahead/behind
+checks in the repository.&lt;/p&gt;
+
+&lt;h3 id="deployment-statuses"&gt;Deployment Statuses&lt;/h3&gt;
+
+&lt;p&gt;Different deployment systems can update the status of a deployment to be
+&lt;code&gt;pending&lt;/code&gt;, &lt;code&gt;success&lt;/code&gt;, &lt;code&gt;failure&lt;/code&gt;, or &lt;code&gt;error&lt;/code&gt;. There’s also a field for linking
+to deployment output.&lt;/p&gt;
+
+&lt;h3 id="events"&gt;Events&lt;/h3&gt;
+
+&lt;p&gt;Both Deployments and Deployment Statuses trigger events on GitHub. 3rd party
+integrations can listen for these events via &lt;a href="/v3/repos/hooks/"&gt;webhooks&lt;/a&gt; and choose
+whether or not to actually deploy the repository that the event was created for.&lt;/p&gt;
+
+&lt;h2 id="preview-period"&gt;Preview Period&lt;/h2&gt;
+
+&lt;p&gt;We’re making this new API available today for developers to
+&lt;a href="/v3/repos/deployments/#preview-mode"&gt;preview&lt;/a&gt;.  We think developers and existing integrations are
+going to love it, but we want to &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;get your feedback&lt;/a&gt; before we declare
+the Deployments API “final” and “unchangeable.” We expect the preview period to
+last for roughly 60-90 days.&lt;/p&gt;
+
+&lt;p&gt;As we discover opportunities to improve the API during the preview period, we
+may ship changes that break clients using the preview version of the API. We
+want to iterate quickly. To do so, we will announce any changes here (on the
+developer blog), but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;At the end of preview period, the Deployments API will become an official
+component of GitHub API v3. At that point, the new Deployments API will be
+stable and suitable for production use.&lt;/p&gt;
+
+&lt;p&gt;We hope you’ll take it for a spin and &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API"&gt;send us your feedback&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://shipitsquirrel.github.io/images/ship%20it%20squirrel.png" alt=""&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2014-01-07:/changes/2014-01-07-upcoming-change-to-default-media-type/</id>
+    <title type="html">Upcoming Change to Default Media Type</title>
+    <published>2014-01-07T05:00:00Z</published>
+    <updated>2014-01-07T05:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-01-07-upcoming-change-to-default-media-type/" />
+    <content type="html">&lt;p&gt;On April 15, 2014&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you’ll find tips below to help you smoothly navigate this change.&lt;/p&gt;
+
+&lt;h2 id="whats-changing"&gt;What’s changing?&lt;/h2&gt;
+
+&lt;h3 id="a-new-default-version"&gt;A new default version&lt;/h3&gt;
+
+&lt;p&gt;There are &lt;a href="/v3/versions"&gt;two versions&lt;/a&gt; of the GitHub API: &lt;strong&gt;beta&lt;/strong&gt; and &lt;strong&gt;v3&lt;/strong&gt;. Today, requests receive the beta version by default. On April 15&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, requests will begin receiving the v3 version by default.&lt;/p&gt;
+
+&lt;p&gt;For the most part, beta and v3 are remarkably similar. There are &lt;a href="/v3/versions/#differences-from-beta-version"&gt;just a few differences&lt;/a&gt; to keep in mind.&lt;/p&gt;
+
+&lt;h3 id="a-new-default-media-type"&gt;A new default media type&lt;/h3&gt;
+
+&lt;p&gt;The version is one part of the &lt;a href="/v3/media"&gt;media type&lt;/a&gt;. By default, the API provides the beta media type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.beta+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On April 15&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, requests will begin responding with the v3 media type by default:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="who-is-affected"&gt;Who is affected?&lt;/h2&gt;
+
+&lt;p&gt;Since 2012, we have encouraged developers to explicitly &lt;a href="/v3/media/#beta-v3-and-the-future"&gt;request a specific media type via the &lt;code&gt;Accept&lt;/code&gt; header&lt;/a&gt;. If you are requesting either beta or v3 via the &lt;code&gt;Accept&lt;/code&gt; header, then you are &lt;em&gt;not&lt;/em&gt; affected by this change. The API will continue to respond with the requested media type.&lt;/p&gt;
+
+&lt;p&gt;If you are not requesting beta or v3 via the &lt;code&gt;Accept&lt;/code&gt; header, then the API is currently responding with the beta media type. On April 15&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, the API will begin responding with the v3 media type. If your application relies on &lt;a href="/v3/versions/#differences-from-beta-version"&gt;functionality that differs between beta and v3&lt;/a&gt;, then you are affected by this change. You will need to take steps to prepare for the change.&lt;/p&gt;
+
+&lt;h2 id="what-should-you-do"&gt;What should you do?&lt;/h2&gt;
+
+&lt;p&gt;If you are affected by this change, we recommend that you:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular &lt;a href="/libraries/"&gt;client libraries&lt;/a&gt;, there’s a good chance that they’ve already done the work for you. In that case, you can just update to the latest version of that library.)&lt;/li&gt;
+  &lt;li&gt;Request the v3 media type via the &lt;code&gt;Accept&lt;/code&gt; header.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you cannot update your application to depend on the v3 functionality by April 15&lt;a href="#cutover-test"&gt;*&lt;/a&gt;, you can just request the beta media type via the &lt;code&gt;Accept&lt;/code&gt; header. Doing so will insulate you from this change.&lt;/p&gt;
+
+&lt;h2 id="cutover-test"&gt;Cutover test on March 12, 2014&lt;/h2&gt;
+
+&lt;p&gt;To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.&lt;/p&gt;
+
+&lt;p&gt;Follow &lt;a href="https://twitter.com/GitHubAPI"&gt;@GitHubAPI&lt;/a&gt; to receive updates before and after the test.&lt;/p&gt;
+
+&lt;h2 id="stay-informed"&gt;Stay informed&lt;/h2&gt;
+
+&lt;p&gt;Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we’ll to announce them in advance. Be sure to stay tuned to the &lt;a href="/changes"&gt;blog&lt;/a&gt; or follow &lt;a href="https://twitter.com/GitHubAPI"&gt;@GitHubAPI&lt;/a&gt; for updates.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type"&gt;get in touch&lt;/a&gt;. We’ll be happy to help.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-12-13:/changes/2013-12-13-paginating-org-members/</id>
+    <title type="html">Paginated results for organization members</title>
+    <published>2013-12-13T05:00:00Z</published>
+    <updated>2013-12-13T05:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-12-13-paginating-org-members/" />
+    <content type="html">&lt;p&gt;The &lt;a href="http://developer.github.com/v3/orgs/members/#members-list"&gt;organization members&lt;/a&gt; and &lt;a href="http://developer.github.com/v3/orgs/members/#public-members-list"&gt;organization public members&lt;/a&gt; methods will soon return paginated results by default. Beginning
+today, these methods will paginate if you include &lt;code&gt;page&lt;/code&gt; or &lt;code&gt;per_page&lt;/code&gt; query
+parameters. Starting January 15th, 2014, these methods will &lt;em&gt;always&lt;/em&gt; return paginated
+results.&lt;/p&gt;
+
+&lt;p&gt;As always, be sure and follow those &lt;a href="http://developer.github.com/v3/#pagination"&gt;Link headers&lt;/a&gt; to get
+subsequent results. If you have any questions or run into trouble, feel free to
+&lt;a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Paginating+org+members"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Happy paginating.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-11-04:/changes/2013-11-04-releases-api-is-official/</id>
+    <title type="html">Releases API is Official</title>
+    <published>2013-11-04T05:00:00Z</published>
+    <updated>2013-11-04T05:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-11-04-releases-api-is-official/" />
+    <content type="html">&lt;p&gt;Hot on the heels of the &lt;a href="http://developer.github.com/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/"&gt;Search API&lt;/a&gt;, the &lt;a href="/v3/repos/releases/"&gt;Releases API&lt;/a&gt;
+is now officially part of GitHub API v3.  We now consider it stable for
+production use.  &lt;/p&gt;
+
+&lt;h3 id="preview-media-type-no-longer-needed"&gt;Preview Media Type No Longer Needed&lt;/h3&gt;
+
+&lt;p&gt;If you used the Releases API during the preview period, you needed to provide a custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.manifold-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that the preview period has ended, you no longer need to pass this custom media type.&lt;/p&gt;
+
+&lt;p&gt;Instead, we &lt;a href="/v3/media"&gt;recommend&lt;/a&gt; that you specify &lt;code&gt;v3&lt;/code&gt; as the version in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="onward"&gt;Onward!&lt;/h3&gt;
+
+&lt;p&gt;Thanks again to everyone that tried out the Releases API during the preview period.
+We got some great feedback, and we are already discussing additions to the API.&lt;/p&gt;
+
+&lt;p&gt;We can’t wait to see what you ship!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-10-29:/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/</id>
+    <title type="html">Search API Becomes an Official Part of API v3</title>
+    <published>2013-10-29T04:00:00Z</published>
+    <updated>2013-10-29T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/" />
+    <content type="html">&lt;p&gt;We’re excited to announce that the &lt;a href="/v3/search"&gt;new Search API&lt;/a&gt; has graduated from &lt;a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period"&gt;preview mode&lt;/a&gt;.
+As of today, the Search API is an official part of &lt;a href="/v3"&gt;GitHub API v3&lt;/a&gt;.
+As such, the Search API is now stable and suitable for production use.&lt;/p&gt;
+
+&lt;h3 id="preview-media-type-no-longer-needed"&gt;Preview Media Type No Longer Needed&lt;/h3&gt;
+
+&lt;p&gt;If you used the Search API during the preview period, you needed to provide a custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now that the preview period has ended, you no longer need to pass this custom media type.&lt;/p&gt;
+
+&lt;p&gt;Instead, we &lt;a href="/v3/media"&gt;recommend&lt;/a&gt; that you specify &lt;code&gt;v3&lt;/code&gt; as the version in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="onward"&gt;Onward!&lt;/h3&gt;
+
+&lt;p&gt;Thanks again to everyone that tried out the Search API during the preview period.&lt;/p&gt;
+
+&lt;p&gt;We can’t wait to see what you build!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-10-18:/changes/2013-10-18-new-code-search-requirements/</id>
+    <title type="html">New Validation Rule for Beta Code Search API</title>
+    <published>2013-10-18T04:00:00Z</published>
+    <updated>2013-10-18T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-10-18-new-code-search-requirements/" />
+    <content type="html">&lt;p&gt;As we &lt;a href="/changes/2013-09-28-an-update-on-the-new-search-api/"&gt;prepare to end the preview period&lt;/a&gt; for the new search API,
+we’re making sure that it’s ready to handle the traffic from all the apps you’ll build on top of it.&lt;/p&gt;
+
+&lt;h2 id="new-validation-rule"&gt;New Validation Rule&lt;/h2&gt;
+
+&lt;p&gt;In order to support the expected volume of requests, we’re applying a new validation rule to the &lt;a href="/v3/search/#search-code"&gt;Code Search API&lt;/a&gt;.
+Starting today, you will need to scope your code queries to a specific set of users, organizations, or repositories.&lt;/p&gt;
+
+&lt;p&gt;As usual, you specify the query via the &lt;code&gt;q&lt;/code&gt; parameter.
+The value must include &lt;a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories"&gt;at least one user, organization, or repository&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For example, with this query, we’re searching for code from &lt;a href="https://github.com/twitter"&gt;@twitter&lt;/a&gt; or &lt;a href="https://github.com/facebook"&gt;@facebook&lt;/a&gt; that uses an MIT License:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;MIT License user:twitter user:facebook
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And here, we’re looking for uses of the underscore library in &lt;a href="https://github.com/mozilla/BrowserQuest"&gt;@mozilla’s BrowserQuest&lt;/a&gt; repository:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;underscore language:js repo:mozilla/BrowserQuest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To perform these queries via the API, we would use the following URLs (respectively):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://api.github.com/search/code?q=MIT+License+user%3Atwitter+user%3Afacebook
+
+https://api.github.com/search/code?q=underscore+language%3Ajs+repo%3Amozilla%2FBrowserQuest
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All the various &lt;a href="https://help.github.com/articles/searching-code"&gt;code search qualifiers&lt;/a&gt; are still available to you.
+A &lt;a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories"&gt;user, organization, or repository qualifier&lt;/a&gt; is now required.
+The other search qualifiers are still optional.&lt;/p&gt;
+
+&lt;h2 id="other-search-types-not-affected"&gt;Other Search Types Not Affected&lt;/h2&gt;
+
+&lt;p&gt;This new validation only applies to the &lt;a href="/v3/search/#search-code"&gt;Code Search API&lt;/a&gt;.
+It does not apply to the Search API for &lt;a href="/v3/search/#search-issues"&gt;issues&lt;/a&gt;, &lt;a href="/v3/search/#search-users"&gt;users&lt;/a&gt;, or &lt;a href="/v3/search/#search-repositories"&gt;repositories&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This validation does not affect searches performed on &lt;a href="https://github.com/search"&gt;github.com/search&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
+As we continue to tune the Search API, we hope to relax this validation in the future.
+There’s no ETA, but we’d like to relax it as soon as it’s feasible.&lt;/p&gt;
+
+&lt;p&gt;As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Validation+Rule+for+Code+Search+API"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-10-08:/changes/2013-10-08-list-all-user-teams/</id>
+    <title type="html">List all teams for the authenticated user</title>
+    <published>2013-10-08T04:00:00Z</published>
+    <updated>2013-10-08T04:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-10-08-list-all-user-teams/" />
+    <content type="html">&lt;p&gt;We just added a &lt;a href="/v3/orgs/teams/#list-user-teams"&gt;new API method&lt;/a&gt; to list all
+the teams for the authenticated user across all organizations:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
+
+[
+  {
+    "name": "Testing",
+    "id": 396018,
+    "slug": "testing",
+    "permission": "pull",
+    "url": "https://api.github.com/teams/396018",
+    "members_url": "https://api.github.com/teams/396018/members{/member}",
+    "repositories_url": "https://api.github.com/teams/396018/repos",
+    "members_count": 1,
+    "repos_count": 0,
+    "organization": {
+      "login": "dotfiles",
+      "id": 1593590,
+      "url": "https://api.github.com/orgs/dotfiles",
+      "repos_url": "https://api.github.com/orgs/dotfiles/repos",
+      "events_url": "https://api.github.com/orgs/dotfiles/events",
+      "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",
+      "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",
+      "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"
+    }
+  },
+  ...
+]
+&lt;/pre&gt;
+
+&lt;p&gt;As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Teams+for+User"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-10-04:/changes/2013-10-04-oauth-changes-coming/</id>
+    <title type="html">OAuth changes coming</title>
+    <published>2013-10-04T04:00:00Z</published>
+    <updated>2013-10-04T04:00:00Z</updated>
+    <author>
+      <name>tclem</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-10-04-oauth-changes-coming/" />
+    <content type="html">&lt;p&gt;Starting today, we are returning granted scopes as part of the
+&lt;a href="/v3/oauth/#github-redirects-back-to-your-site"&gt;access_token response&lt;/a&gt;.
+For example, if you are making a POST with the &lt;code&gt;application/json&lt;/code&gt;
+mime-type you’ll see an additional field for the granted scopes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-javascript"&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="s2"&gt;"access_token"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;"e72e16c7e42f292c6912e7710c838347ae178b4a"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s2"&gt;"scope"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;"repo,gist"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="s2"&gt;"token_type"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="s2"&gt;"bearer"&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Right now, these scopes will be identical to what you requested, but we
+are moving towards a feature set that will allow GitHub users to edit
+their scopes, effectively granting your application less access than you
+originally requested. You should be aware of this possibility and adjust
+your application behavior accordingly.&lt;/p&gt;
+
+&lt;p&gt;Some things to watch out for and keep in mind:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Most third party applications using GitHub OAuth to identify users have
+the best success in adoption by starting out with a request for the
+minimum access that the application can possibly get away with.
+Something like no scopes or just &lt;code&gt;user:email&lt;/code&gt; is very sane.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It is important to handle the error cases where a user chooses to
+grant you less access than you originally requested. Now that we are
+surfacing the granted scopes on the access_token response, applications
+can warn or otherwise communicate with their users that they will see
+reduced functionality or be unable to perform some actions.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Applications can always send users back through the flow again to get
+additional permission, but don’t forget that users can always say no.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-09-28:/changes/2013-09-28-an-update-on-the-new-search-api/</id>
+    <title type="html">An Update on the New Search API</title>
+    <published>2013-09-28T04:00:00Z</published>
+    <updated>2013-09-28T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-09-28-an-update-on-the-new-search-api/" />
+    <content type="html">&lt;p&gt;We owe a big “Thank You!” to everyone that has taken the time to try out the &lt;a href="/changes/2013-07-19-preview-the-new-search-api"&gt;new Search API&lt;/a&gt;.
+We &lt;code&gt;:heart:&lt;/code&gt; every one of you.
+Just as we hoped,
+the &lt;a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period"&gt;preview period&lt;/a&gt; has allowed us to see how you want to use the new API,
+and it has given us a chance to improve the API before finalizing it.&lt;/p&gt;
+
+&lt;p&gt;In order to incorporate everything that we’ve learned,
+we’re going to keep the Search API in &lt;a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period"&gt;preview mode&lt;/a&gt; for a little while longer.
+We have a few bugs to squash and a couple performance kinks to iron out.
+We’re hard at work on those improvements now,
+and we expect to have more news in the coming weeks.&lt;/p&gt;
+
+&lt;p&gt;In the mean time, &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API"&gt;keep the suggestions coming&lt;/a&gt;!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-09-25:/changes/2013-09-25-releases-api/</id>
+    <title type="html">Releases API</title>
+    <published>2013-09-25T04:00:00Z</published>
+    <updated>2013-09-25T04:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-09-25-releases-api/" />
+    <content type="html">&lt;p&gt;This summer we made it easier to &lt;a href="https://github.com/blog/1547-release-your-software"&gt;release your software&lt;/a&gt;.  Today, you can fully automate those releases via the
+&lt;a href="http://developer.github.com/v3/repos/releases/"&gt;Releases API Preview&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This API is a little different due to the binary assets.  We use the &lt;code&gt;Accept&lt;/code&gt; header for content negotiation when requesting
+a release asset.  Pass a standard API media type to get the API representation:&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl -i -H "Authorization: token TOKEN" \
+     -H "Accept: application/vnd.github.manifold-preview" \
+     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
+
+HTTP/1.1 200 OK
+
+{
+  "id": 123,
+  ...
+}
+&lt;/pre&gt;
+
+&lt;p&gt;Pass “application/octet-stream” to download the binary content.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl -i -H "Authorization: token TOKEN" \
+     -H "Accept: application/octet-stream" \
+     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
+
+HTTP/1.1 302 Found
+&lt;/pre&gt;
+
+&lt;p&gt;Uploads are handled by a single request to a companion “uploads.github.com” service.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl -H "Authorization: token TOKEN" \
+     -H "Accept: application/vnd.github.manifold-preview" \
+     -H "Content-Type: application/zip" \
+     --data-binary @build/mac/package.zip \
+     "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
+&lt;/pre&gt;
+
+&lt;h2 id="preview-mode"&gt;Preview mode&lt;/h2&gt;
+
+&lt;p&gt;The new API is available as a &lt;a href="http://developer.github.com/v3/repos/releases/#preview-mode"&gt;preview&lt;/a&gt;.  This gives developers a chance to &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API"&gt;provide feedback&lt;/a&gt; on the direction of
+the API before we freeze changes.  We expect to lift the preview status in 30 days.&lt;/p&gt;
+
+&lt;p&gt;As with &lt;a href="http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/"&gt;the Search API&lt;/a&gt;, we’ll take this opportunity to iterate quickly.  Breaking changes will be announced
+on this developer blog without any advance warning.  Once the preview period is over, we’ll consider the Releases API unchangeable.
+At that point, it will be stable and suitable for production use.&lt;/p&gt;
+
+&lt;p&gt;The preview media type is “application/vnd.github.manifold-preview”.  &lt;a href="http://en.wikipedia.org/wiki/Eden_Fesi"&gt;Manifold&lt;/a&gt; is
+a member of the Avengers, with the ability to teleport through time and space.  He’s the one in the middle holding the spear.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://f.cloud.github.com/assets/21/1210628/ae8556fa-25fc-11e3-986d-0ab522271d43.png" alt="Manifold teleporting the Avengers to a terraformed Mars surface"&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-09-03:/changes/2013-09-03-two-factor-authentication/</id>
+    <title type="html">Two-Factor Authentication and the API</title>
+    <published>2013-09-03T04:00:00Z</published>
+    <updated>2013-09-03T04:00:00Z</updated>
+    <author>
+      <name>mastahyeti</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-09-03-two-factor-authentication/" />
+    <content type="html">&lt;p&gt;As &lt;a href="https://github.com/blog/1614-two-factor-authentication"&gt;announced earlier today&lt;/a&gt;, GitHub.com now supports two-factor
+authentication (2FA) for increased security. For users with this feature
+enabled, GitHub.com will prompt for a 2FA code in addition to a username and
+password during authentication. We’ve also rolled out some improvements to the
+API to ensure that 2FA requirements in the API are consistent with GitHub.com.&lt;/p&gt;
+
+&lt;h2 id="authenticating-with-the-api"&gt;Authenticating with the API&lt;/h2&gt;
+
+&lt;p&gt;For users without 2FA enabled, and for applications using the &lt;a href="/v3/oauth/#web-application-flow"&gt;OAuth web
+flow&lt;/a&gt; for authentication, everything is
+business as usual. You’ll continue to authenticate with the API just as you
+always have. (That was easy.)&lt;/p&gt;
+
+&lt;p&gt;If you enable 2FA &lt;em&gt;and&lt;/em&gt; use Basic Authentication to access the API, we’re
+providing multiple options to make the flow simple and easy.&lt;/p&gt;
+
+&lt;h2 id="basic-authentication-and-2fa"&gt;Basic Authentication and 2FA&lt;/h2&gt;
+
+&lt;h3 id="personal-access-tokens"&gt;Personal Access Tokens&lt;/h3&gt;
+
+&lt;p&gt;Personal access tokens provide the simplest option for using 2FA with Basic
+Authentication. You can create these tokens via the &lt;a href="https://github.com/settings/applications"&gt;application settings page
+on GitHub.com&lt;/a&gt;, and you can revoke
+them at any time. For more information about authenticating to the API with
+personal access tokens, be sure to check out our &lt;a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use"&gt;help article on the
+topic&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id="tightly-integrated-2fa"&gt;Tightly-integrated 2FA&lt;/h3&gt;
+
+&lt;p&gt;For developers wishing to integrate GitHub 2FA directly into their application,
+the API’s Basic Authentication now supports the &lt;a href="/v3/auth/#working-with-two-factor-authentication"&gt;ability to send the user’s 2FA
+code&lt;/a&gt;, in addition to the username and password.&lt;/p&gt;
+
+&lt;h2 id="were-here-to-help"&gt;We’re here to help&lt;/h2&gt;
+
+&lt;p&gt;We think GitHub users are going to love the additional security provided by
+two-factor authentication. As always, if you have any questions or feedback,
+&lt;a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API"&gt;let us know&lt;/a&gt;. We’re here to help!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-08-20:/changes/2013-08-20-search-api-improvements/</id>
+    <title type="html">Improvements to the Search API</title>
+    <published>2013-08-20T04:00:00Z</published>
+    <updated>2013-08-20T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-08-20-search-api-improvements/" />
+    <content type="html">&lt;p&gt;Today we’re shipping two improvements to the &lt;a href="/changes/2013-07-19-preview-the-new-search-api/"&gt;new Search API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id="more-text-match-metadata"&gt;More Text Match Metadata&lt;/h2&gt;
+
+&lt;p&gt;When searching for code, the API previously provided &lt;a href="/v3/search/#text-match-metadata"&gt;text match metadata&lt;/a&gt; (i.e., “highlights”) for file content.
+Now, you can also &lt;a href="/v3/search/#highlighting-code-search-results"&gt;get this metadata&lt;/a&gt; for matches that occur within the file path.&lt;/p&gt;
+
+&lt;p&gt;For example, when &lt;a href="https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&amp;amp;type=Code"&gt;searching for files that have “client” in their path&lt;/a&gt;, the results include this match for &lt;code&gt;lib/octokit/client/commits.rb&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre class="json"&gt;
+{
+  "name": "commits.rb",
+  "path": "lib/octokit/client/commits.rb",
+  "text_matches": [
+    {
+      "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
+      "object_type": "FileContent",
+      "property": "path",
+      "fragment": "lib/octokit/client/commits.rb",
+      "matches": [
+        {
+          "text": "client",
+          "indices": [ 12, 18 ]
+        }
+      ]
+    }
+  ]
+  // ...
+}
+&lt;/pre&gt;
+
+&lt;h2 id="better-text-match-metadata"&gt;Better Text Match Metadata&lt;/h2&gt;
+
+&lt;p&gt;Before today, the API applied HTML entity encoding to all &lt;code&gt;fragment&lt;/code&gt; data.
+For example, imagine your search returns an issue like &lt;a href="https://github.com/rails/rails/issues/11889"&gt;rails/rails#11889&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://f.cloud.github.com/assets/2988/994632/a84f2888-09af-11e3-9417-4bd92f1f1ed6.png" alt="Example Issue Title"&gt;&lt;/p&gt;
+
+&lt;p&gt;The response would include a &lt;code&gt;text_matches&lt;/code&gt; array with the following object:&lt;/p&gt;
+
+&lt;pre class="json"&gt;
+{
+  "fragment": "undefined method `except' for #&amp;amp;lt;Array:XXX&amp;amp;gt;",
+  // ...
+}
+&lt;/pre&gt;
+
+&lt;p&gt;Inside the &lt;code&gt;fragment&lt;/code&gt; value, we see HTML-encoded entities (e.g., &lt;code&gt;&amp;amp;lt;&lt;/code&gt;).
+Since we’re returning JSON (not HTML), API clients might not expect any HTML-encoded text.
+As of today, the API returns these fragments &lt;em&gt;without&lt;/em&gt; this extraneous encoding.&lt;/p&gt;
+
+&lt;pre class="json"&gt;
+{
+  "fragment": "undefined method `except' for #&amp;lt;Array:XXX&amp;gt;",
+  // ...
+}
+&lt;/pre&gt;
+
+&lt;h2 id="preview-period"&gt;Preview Period&lt;/h2&gt;
+
+&lt;p&gt;We’re about halfway through the &lt;a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period"&gt;preview period&lt;/a&gt; for the new Search API.
+We appreciate everyone that has provided feedback so far. Please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API"&gt;keep it coming&lt;/a&gt;!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-07-19:/changes/2013-07-19-preview-the-new-search-api/</id>
+    <title type="html">Preview the New Search API</title>
+    <published>2013-07-19T04:00:00Z</published>
+    <updated>2013-07-19T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/" />
+    <content type="html">&lt;p&gt;Today we’re excited to announce a &lt;a href="/v3/search/"&gt;brand new Search API&lt;/a&gt;. Whether you’re
+searching for &lt;a href="/v3/search/#search-code"&gt;code&lt;/a&gt;, &lt;a href="/v3/search/#search-repositories"&gt;repositories&lt;/a&gt;,
+&lt;a href="/v3/search/#search-issues"&gt;issues&lt;/a&gt;, or &lt;a href="/v3/search/#search-users"&gt;users&lt;/a&gt;, all the query abilities of
+github.com are now available via the API as well.&lt;/p&gt;
+
+&lt;p&gt;Maybe you want to find &lt;a href="/v3/search/#repository-search-example"&gt;popular Tetris implementations written in Assembly&lt;/a&gt;.
+We’ve got you covered.
+Or perhaps you’re looking for &lt;a href="/v3/search/#code-search-example"&gt;new gems that are using Octokit.rb&lt;/a&gt;.
+No problem.
+The possibilities are endless.&lt;/p&gt;
+
+&lt;h2 id="highlights"&gt;Highlights&lt;/h2&gt;
+
+&lt;p&gt;On github.com, we enjoy the context provided by code snippets and highlights in
+search results.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/search?q=faraday+builder+repo%3Aoctokit%2Foctokit.rb&amp;amp;type=Code"&gt;&lt;img src="https://f.cloud.github.com/assets/865/819651/959a4826-efb5-11e2-8af8-46c4a3857cdf.png" alt="code-snippet-highlighting"&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We want API consumers to have access to that information as well. So, API
+requests can opt to receive those
+&lt;a href="/v3/search#text-match-metadata"&gt;text fragments in the response&lt;/a&gt;. Each fragment is accompanied by
+numeric offsets identifying the exact location of each matching search term.&lt;/p&gt;
+
+&lt;h2 id="preview-period"&gt;Preview period&lt;/h2&gt;
+
+&lt;p&gt;We’re making this new API available today for developers to
+&lt;a href="/v3/search/#preview-mode"&gt;preview&lt;/a&gt;. We think developers are going to love it, but we want
+to get your feedback before we declare the Search API “final” and
+“unchangeable.” We expect the preview period to last for roughly 60 days.&lt;/p&gt;
+
+&lt;p&gt;As we discover opportunities to improve this new API during the preview period,
+we may ship changes that break clients using the preview version of the API. We
+want to iterate quickly. To do so, we will announce any changes here (on the
+developer blog), but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;At the end of preview period, the Search API will become an official component
+of GitHub API v3. At that point, the new Search API will be stable and suitable
+for production use.&lt;/p&gt;
+
+&lt;h2 id="what-about-the-old-search-api"&gt;What about the old search API?&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href="/v3/search/legacy/"&gt;legacy search API&lt;/a&gt; is still available. Many existing clients
+depend on it, and it is not changing in any way. While the new API offers much
+more functionality, the legacy search endpoints remain an official part of
+GitHub API v3.&lt;/p&gt;
+
+&lt;h2 id="take-it-for-a-spin"&gt;Take it for a spin&lt;/h2&gt;
+
+&lt;p&gt;We hope you’ll kick the tires and &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API"&gt;send us your feedback&lt;/a&gt;. Happy
+&lt;del&gt;searching&lt;/del&gt; finding!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-07-02:/changes/2013-07-02-rate-limit-reset/</id>
+    <title type="html">When Does My Rate Limit Reset?</title>
+    <published>2013-07-02T04:00:00Z</published>
+    <updated>2013-07-02T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-07-02-rate-limit-reset/" />
+    <content type="html">&lt;p&gt;Have you ever wondered when your &lt;a href="/v3/#rate-limiting"&gt;rate limit&lt;/a&gt; will reset back to its maximum value?
+That information is now available in the new &lt;code&gt;X-RateLimit-Reset&lt;/code&gt; response header.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl -I https://api.github.com/orgs/octokit
+
+HTTP/1.1 200 OK
+Status: 200 OK
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 42
+X-RateLimit-Reset: 1372700873
+...
+&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;X-RateLimit-Reset&lt;/code&gt; header provides a &lt;a href="http://en.wikipedia.org/wiki/Unix_time"&gt;Unix UTC timestamp&lt;/a&gt;, letting you know the exact time that your fresh new rate limit kicks in.&lt;/p&gt;
+
+&lt;p&gt;The reset timestamp is also available as part of the &lt;code&gt;/rate_limit&lt;/code&gt; resource.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+$ curl https://api.github.com/rate_limit
+
+{
+  "rate": {
+    "limit": 60,
+    "remaining": 42,
+    "reset": 1372700873
+  }
+}
+&lt;/pre&gt;
+
+&lt;p&gt;For more information on rate limits, be sure to check out the &lt;a href="/v3/#rate-limiting"&gt;docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=X-RateLimit-Reset"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-07-01:/changes/2013-07-01-feeds-api/</id>
+    <title type="html">Feeds API</title>
+    <published>2013-07-01T04:00:00Z</published>
+    <updated>2013-07-01T04:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-07-01-feeds-api/" />
+    <content type="html">&lt;p&gt;Today we’re releasing a new &lt;a href="/v3/activity/feeds/"&gt;Feeds API&lt;/a&gt;, an easy way to list all the Atom
+resources available to the authenticated user.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+
+curl -u defunkt https://api.github.com/feeds
+
+{
+  "timeline_url": "https://github.com/timeline",
+  "user_url": "https://github.com/{user}",
+  "current_user_public_url": "https://github.com/defunkt",
+  "current_user_url": "https://github.com/defunkt.private?token=abc123",
+  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",
+  "current_user_organization_url": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+  "_links": {
+    "timeline": {
+      "href": "https://github.com/timeline",
+      "type": "application/atom+xml"
+    },
+    "user": {
+      "href": "https://github.com/{user}",
+      "type": "application/atom+xml"
+    },
+    "current_user_public": {
+      "href": "https://github.com/defunkt",
+      "type": "application/atom+xml"
+    },
+    "current_user": {
+      "href": "https://github.com/defunkt.private?token=abc123",
+      "type": "application/atom+xml"
+    },
+    "current_user_actor": {
+      "href": "https://github.com/defunkt.private.actor?token=abc123",
+      "type": "application/atom+xml"
+    },
+    "current_user_organization": {
+      "href": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
+      "type": "application/atom+xml"
+    }
+  }
+}
+
+&lt;/pre&gt;
+
+&lt;p&gt;If you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API"&gt;please drop us a line&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-create-update-delete-individual-files/</id>
+    <title type="html">Create, update, and delete individual files</title>
+    <published>2013-05-06T04:00:00Z</published>
+    <updated>2013-05-06T04:00:00Z</updated>
+    <author>
+      <name>ymendel</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-05-06-create-update-delete-individual-files/" />
+    <content type="html">&lt;p&gt;We’re following in the footsteps of GitHub.com’s ability to &lt;a href="https://github.com/blog/143-inline-file-editing"&gt;edit&lt;/a&gt; and
+&lt;a href="https://github.com/blog/1327-creating-files-on-github"&gt;create&lt;/a&gt; files in your web browser. Starting today, the
+&lt;a href="/v3/repos/contents/"&gt;Repository Contents API&lt;/a&gt; will let you easily &lt;a href="/v3/repos/contents/#create-a-file"&gt;create&lt;/a&gt;, &lt;a href="/v3/repos/contents/#update-a-file"&gt;update&lt;/a&gt;, and even
+&lt;a href="/v3/repos/contents/#delete-a-file"&gt;delete&lt;/a&gt; individual files.&lt;/p&gt;
+
+&lt;p&gt;Happy editing!&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-05-06:/changes/2013-05-06-repository-stats/</id>
+    <title type="html">Repository Statistics</title>
+    <published>2013-05-06T04:00:00Z</published>
+    <updated>2013-05-06T04:00:00Z</updated>
+    <author>
+      <name>Caged</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-05-06-repository-stats/" />
+    <content type="html">&lt;p&gt;Today we’re happy to open our &lt;a href="/v3/repos/statistics"&gt;Repository Statistics API&lt;/a&gt; to everyone.  We’re using
+repository statistics to power &lt;a href="https://github.com/github/linguist/graphs"&gt;our graphs&lt;/a&gt;,
+but we can’t wait to see what others can do with this information.&lt;/p&gt;
+
+&lt;p&gt;Starting today, these resources are available to you:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href="/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts"&gt;Contributors&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href="/v3/repos/statistics/#get-the-last-year-of-commit-activity-data"&gt;Commit Activity&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href="/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week"&gt;Code Frequency&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href="/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repo-owner-and-everyone-else"&gt;Participation&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;a href="/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day"&gt;Punch Card&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Enjoy!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/</id>
+    <title type="html">Improved Support for Submodules in the Repository Contents API</title>
+    <published>2013-04-30T04:00:00Z</published>
+    <updated>2013-04-30T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/" />
+    <content type="html">&lt;p&gt;When you view a repository with a submodule on github.com, you get useful links and information for the submodule.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/images/posts/submodule-links.png"&gt;&lt;img src="/images/posts/submodule-links.png" alt="Repository Contents with Submodule"&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Today we’re making that data available in the &lt;a href="/v3/repos/contents/#get-contents"&gt;Repository Contents API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
+
+{
+  "name": "qunit",
+  "path": "test/qunit",
+  "type": "submodule",
+  "submodule_git_url": "git://github.com/jquery/qunit.git",
+  "sha": "6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "size": 0,
+  "url": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+  "git_url": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "html_url": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+  "_links": {
+    "self": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
+    "git": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
+    "html": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"
+  }
+}
+&lt;/pre&gt;
+
+&lt;p&gt;If you have any questions or feedback, please drop us a line at
+&lt;a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-04-30:/changes/2013-04-30-statuses-for-branches-and-tags/</id>
+    <title type="html">Commit Statuses Now Available for Branches and Tags</title>
+    <published>2013-04-30T04:00:00Z</published>
+    <updated>2013-04-30T04:00:00Z</updated>
+    <author>
+      <name>foca</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-04-30-statuses-for-branches-and-tags/" />
+    <content type="html">&lt;p&gt;Last week we announced &lt;a href="https://github.com/blog/1484-check-the-status-of-your-branches"&gt;support for build statuses in the branches page&lt;/a&gt;.
+Now we are extending this to the API. The &lt;a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"&gt;API endpoint for commit statuses&lt;/a&gt;
+has been extended to allow branch and tag names, as well as commit SHAs.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+&lt;/pre&gt;
+
+&lt;p&gt;Enjoy.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-04-25:/changes/2013-04-25-deprecating-merge-commit-sha/</id>
+    <title type="html">Deprecating a Confusing Attribute in the Pull Request API</title>
+    <published>2013-04-25T04:00:00Z</published>
+    <updated>2013-04-25T04:00:00Z</updated>
+    <author>
+      <name>jasonrudolph</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-04-25-deprecating-merge-commit-sha/" />
+    <content type="html">&lt;p&gt;When you get the details for a Pull Request from the API, the
+&lt;a href="/v3/pulls/#get-a-single-pull-request"&gt;response&lt;/a&gt; provides everything there is to
+know about that Pull Request. In addition to the useful information provided in
+the API response, the JSON also includes the &lt;code&gt;merge_commit_sha&lt;/code&gt; attribute. This
+attribute is a frequent source of misunderstanding, and we aim to remove the
+confusion.&lt;/p&gt;
+
+&lt;p&gt;To help current API consumers, we’ve &lt;a href="/v3/pulls/#mergability"&gt;documented the
+attribute&lt;/a&gt; for improved understanding.&lt;/p&gt;
+
+&lt;p&gt;To protect future API consumers from this confusion, we have
+&lt;a href="/v3/versions/#v3-deprecations"&gt;deprecated&lt;/a&gt; the &lt;code&gt;merge_commit_sha&lt;/code&gt; attribute, and we will
+remove it in the next major version of the API.&lt;/p&gt;
+
+&lt;p&gt;As always, if you have any questions or feedback, please drop us a line at
+&lt;a href="mailto:support@github.com?subject=Deprecating%20merge_commit_sha"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-04-24:/changes/2013-04-24-user-agent-required/</id>
+    <title type="html">User Agent now mandatory</title>
+    <published>2013-04-24T04:00:00Z</published>
+    <updated>2013-04-24T04:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-04-24-user-agent-required/" />
+    <content type="html">&lt;p&gt;After an almost six week grace period, we’re now enforcing the &lt;a href="/v3/#user-agent-required"&gt;User Agent
+header&lt;/a&gt; for all API requests. Most HTTP libraries (including cURL)
+set this header by default. If you’re experiencing an increase in &lt;code&gt;403&lt;/code&gt;
+responses, be sure and check your code.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please drop us a line at
+&lt;a href="mailto:support@github.com?subject=User%20Agent%20Requirement"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-03-01:/changes/2013-3-1-new-hookshot-coming/</id>
+    <title type="html">New Hookshot Changes</title>
+    <published>2013-03-01T05:00:00Z</published>
+    <updated>2013-03-01T05:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-3-1-new-hookshot-coming/" />
+    <content type="html">&lt;p&gt;We are experimenting with changes to the “Hookshot” backend that powers service
+hooks.  There were some significant networking changes with the new cluster,
+so there are some new IP whitelist rules for hooks:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;204.232.175.64/27&lt;/li&gt;
+  &lt;li&gt;192.30.252.0/22&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are in CIDR notation.  They represent a significant range of GitHub
+addresses, meaning this should be the last IP change for a while.  Once this
+cluster is activated and we shut the other cluster down, we will be removing
+the other entries.&lt;/p&gt;
+
+&lt;p&gt;We are currently testing the new backend with all repositories in the GitHub
+organization only, and expect to start testing it with user data next week.&lt;/p&gt;
+
+&lt;p&gt;This also means we should be able to start accepting &lt;a href="https://github.com/github/github-services/pulls"&gt;GitHub Services pull
+requests&lt;/a&gt; very soon :)&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-02-14:/changes/2013-2-13-sortable-stars/</id>
+    <title type="html">Sortable Stars in Repository Starring API</title>
+    <published>2013-02-14T05:00:00Z</published>
+    <updated>2013-02-14T05:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-2-13-sortable-stars/" />
+    <content type="html">&lt;p&gt;As we &lt;a href="https://github.com/blog/1410-sortable-stars"&gt;announced on the GitHub blog&lt;/a&gt;, Stars now support sorting. The
+Repository Starring API now supports &lt;a href="/v3/activity/starring/#list-repositories-being-starred"&gt;two new parameters&lt;/a&gt; when listing
+Stars: &lt;code&gt;sort&lt;/code&gt; and &lt;code&gt;direction&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre class="terminal"&gt;
+curl https://api.github.com/users/defunkt/starred?sort=created&amp;amp;direction=asc
+&lt;/pre&gt;
+
+&lt;p&gt;Enjoy.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-02-13:/changes/2013-2-13-hookshot-load-balancer/</id>
+    <title type="html">Hookshot Load balancer</title>
+    <published>2013-02-13T12:00:00Z</published>
+    <updated>2013-02-13T12:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-2-13-hookshot-load-balancer/" />
+    <content type="html">&lt;p&gt;We had an issue with the Hookshot load balancer this morning, causing the
+majority of hooks to flow to a single node only.  This lead to massive queue
+times.  While fixing this, we’re putting the old Services backend in use.&lt;/p&gt;
+
+&lt;p&gt;This means the old IPs are back in use.  Use this &lt;a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist"&gt;Help guide&lt;/a&gt;
+if you already removed them from your firewall.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-02-13:/changes/2013-2-13-hookshot-issues/</id>
+    <title type="html">Some Hookshot Issues</title>
+    <published>2013-02-13T11:00:00Z</published>
+    <updated>2013-02-13T11:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-2-13-hookshot-issues/" />
+    <content type="html">&lt;p&gt;We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
+been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
+the private IP addresses of our nodes in the 10.&lt;em&gt;.&lt;/em&gt;.* range.&lt;/p&gt;
+
+&lt;p&gt;If your web hook servers are on EC2 and are missing hooks from GitHub due to
+an IP restriction, we recommend the following:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Remove the IP white list.&lt;/li&gt;
+  &lt;li&gt;Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We’re currently working on solving this problem.  Hit up &lt;a href="mailto:support@github.com"&gt;support@github.com&lt;/a&gt;
+if you have any questions.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-02-05:/changes/2013-2-5-changes-to-services/</id>
+    <title type="html">Upcoming Changes to GitHub Services</title>
+    <published>2013-02-05T05:00:00Z</published>
+    <updated>2013-02-05T05:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-2-5-changes-to-services/" />
+    <content type="html">&lt;p&gt;We are finishing up a new GitHub Services backend, dubbed “Hookshot”, to
+increase the speed and reliability of our delivered payloads.  We are doing
+what we can to make this a seamless transition for everyone.  However, there
+are a few notable changes.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;There is a new &lt;a href="http://developer.github.com/v3/meta/"&gt;Meta API endpoint&lt;/a&gt;
+listing the current public IPs that hooks originate from.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We’re removing the AMQP service from GitHub. It hasn’t worked in quite some
+time, and the code it uses doesn’t work in our background workers.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We’re also instituting a new guideline to improve the reliability and
+maintainability of services in the future. As of today, all new services must
+accept an unmodified payload over HTTP. Any service that does not will be
+rejected. To see an example of an acceptable service, check out &lt;a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb"&gt;Code Climate&lt;/a&gt;.
+Notice their service simply accepts HTTP POST from GitHub unmodified. For an
+example of a service that won’t be accepted after today, check out &lt;a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb"&gt;Campfire&lt;/a&gt;. It
+uses other Ruby gems and contains custom logic to transform the GitHub payload
+to Campfire messages.  Existing hooks will keep working (don’t worry 37signals, we
+:heart: Campfire).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We’re making these changes because we want to focus on the reliability of the
+core Services backend for everyone.  Maintaining custom logic and libraries for
+over 100 services is taking too much of this focus away.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-01-31:/changes/2013-01-31-user-agent-will-soon-be-mandatory/</id>
+    <title type="html">User Agent mandatory from March 4th 2013</title>
+    <published>2013-01-31T05:00:00Z</published>
+    <updated>2013-01-31T05:00:00Z</updated>
+    <author>
+      <name>agh</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-01-31-user-agent-will-soon-be-mandatory/" />
+    <content type="html">&lt;p&gt;Following on from our &lt;a href="http://developer.github.com/changes/2012-10-14-rate-limit-changes/"&gt;previous post&lt;/a&gt;
+about requiring requests to include a valid &lt;a href="http://en.wikipedia.org/wiki/User_agent"&gt;User Agent header&lt;/a&gt;
+we will soon be changing our API servers to return HTTP 403 
+to any clients not providing a valid User Agent header.&lt;/p&gt;
+
+&lt;p&gt;We will be making this change on Monday, March 4th 2013.&lt;/p&gt;
+
+&lt;p&gt;Setting this helps us identify requests from you, and get in touch with people who are using
+the API in a way which causes disruption to GitHub. Most HTTP libraries and tools like cURL
+already provide a valid header for you, and allow you to customize it, so this will not require
+many of our users to make any changes whatsoever.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please drop us a line at
+&lt;a href="mailto:support@github.com?subject=User%20Agent%20Requirement"&gt;support@github.com&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2013-01-08:/changes/2013-01-08-new-user-scopes/</id>
+    <title type="html">New User scopes</title>
+    <published>2013-01-08T05:00:00Z</published>
+    <updated>2013-01-08T05:00:00Z</updated>
+    <author>
+      <name>technoweenie</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2013-01-08-new-user-scopes/" />
+    <content type="html">&lt;p&gt;We’ve added a &lt;a href="http://developer.github.com/v3/oauth/#scopes"&gt;few new user scopes&lt;/a&gt; for 3rd party applications that want very
+specific user functionality.  The &lt;code&gt;user:email&lt;/code&gt; scope gives apps read-only access
+to a user’s private email addresses.  The &lt;code&gt;user:follow&lt;/code&gt; scope lets a user
+follow and unfollow other users.&lt;/p&gt;
+
+&lt;p&gt;This should help keep applications from requiring the &lt;code&gt;user&lt;/code&gt; scope, which
+can be potentially dangerous.&lt;/p&gt;
+
+&lt;p&gt;We also added a read-only endpoint to get a user’s public SSH keys.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET https://api.github.com/users/technoweenie/keys
+&lt;/code&gt;&lt;/pre&gt;
+
+</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2012-12-10:/changes/2012-12-10-Diff-and-patch-media-types/</id>
+    <title type="html">Diff and patch media types</title>
+    <published>2012-12-10T05:00:00Z</published>
+    <updated>2012-12-10T05:00:00Z</updated>
+    <author>
+      <name>pengwynn</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2012-12-10-Diff-and-patch-media-types/" />
+    <content type="html">&lt;p&gt;Starting today, you can get &lt;code&gt;.diff&lt;/code&gt; and &lt;code&gt;.patch&lt;/code&gt; content directly from the API for the following resources:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="/v3/repos/commits/#get-a-single-commit"&gt;Commits&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/v3/repos/commits/#compare-two-commits"&gt;Commit comparisons&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="/v3/pulls/#get-a-single-pull-request"&gt;Pull request&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Simply use the same resource URL and send either &lt;code&gt;application/vnd.github.diff&lt;/code&gt; or &lt;code&gt;application/vnd.github.patch&lt;/code&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -H "Accept: application/vnd.github.diff" https://api.github.com/repos/pengwynn/dotfiles/commits/aee60a4cd56fb4c6a50e60f17096fc40c0d4d72c
+
+diff --git a/tmux/tmux.conf.symlink b/tmux/tmux.conf.symlink
+index 1f599cb..abaf625 100755
+--- a/tmux/tmux.conf.symlink
++++ b/tmux/tmux.conf.symlink
+@@ -111,6 +111,7 @@ set-option -g base-index 1
+ ## enable mouse
+ set-option -g mouse-select-pane on
+ set-option -g mouse-select-window on
++set-option -g mouse-resize-pane on
+ set-window-option -g mode-keys vi
+ set-window-option -g mode-mouse on
+ # set-window-option -g monitor-activity off
+&lt;/code&gt;&lt;/pre&gt;
+
+</content>
+  </entry>
+</feed>

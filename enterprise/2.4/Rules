@@ -1,0 +1,101 @@
+#!/usr/bin/env ruby
+
+# A few helpful tips about the Rules file:
+#
+# * The order of rules is important: for each item, only the first matching
+#   rule is applied.
+#
+# * Item identifiers start and end with a slash (e.g. “/about/” for the file
+#   “content/about.html”). To select all children, grandchildren, … of an
+#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
+#   because “*” matches zero or more characters.
+
+# Reset search-index by deleting it every time
+preprocess do
+  File.delete("output/search-index.json") if File.exists?("output/search-index.json")
+end
+
+compile '/static/*' do
+end
+
+compile '/CNAME/' do
+end
+
+compile '/feed/' do
+  filter :erb
+  filter :kramdown, :toc_levels => [2]
+end
+
+compile '/integrations-directory/*' do
+  filter :erb
+  filter :kramdown, :toc_levels => [2]
+  filter :tip_filter
+  filter :colorize_syntax,
+    :colorizers => {:javascript => :rouge}
+  layout item[:layout] || 'integrations-directory'
+end
+
+compile '/v3/*' do
+  filter :search
+  filter :erb
+  filter :kramdown, :toc_levels => [2]
+  filter :enterprise_only_filter
+  filter :not_enterprise_filter
+  filter :tip_filter
+  filter :colorize_syntax,
+    :colorizers => {:javascript => :rouge}
+  layout item[:layout] || 'api'
+end
+
+%w(v3 */).each do |version|
+  compile "/changes/#{version}" do
+    filter :erb
+    filter :kramdown, :toc_levels => [2]
+    filter :colorize_syntax,
+      :colorizers => {:javascript => :rouge}
+    layout 'changes' if version[0] == '*'
+    layout item[:layout] || 'blog'
+  end
+end
+
+compile '/guides/*' do
+  filter :kramdown, :toc_levels => [2]
+  filter :tip_filter
+  filter :erb
+  filter :colorize_syntax, :default_colorizer => :rouge
+  layout item[:layout] || 'guides'
+end
+
+compile '/webhooks/*' do
+  filter :kramdown, :toc_levels => [2]
+  filter :tip_filter
+  filter :erb
+  filter :colorize_syntax, :default_colorizer => :rouge
+  layout item[:layout] || 'webhooks'
+end
+
+compile '*' do
+  filter :erb
+  filter :kramdown, :toc_levels => [2]
+  filter :colorize_syntax,
+    :colorizers => {:javascript => :rouge}
+  layout item[:layout] || 'default'
+end
+
+route '/static/*' do
+  item.identifier[7..-2]
+end
+
+route '/CNAME/' do
+  '/CNAME'
+end
+
+route '/feed' do
+  '/changes.atom'
+end
+
+route '*' do
+  item.identifier + 'index.html'
+end
+
+layout '*', :erb

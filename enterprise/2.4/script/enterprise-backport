@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+# Occasionally, a change made to the latest version of the Enterprise API documentation
+# will need to be backported to the previous verison. This script takes the latest content
+# for /enterprise and moves it into the appropriate version folder.
+
+require 'tmpdir'
+
+if ARGV.length != 1
+  error = '''Error: Run the script like this: bundle exec script/enterprise-backport [VERSION]
+e.g. bundle exec script/enterprise-backport 2.0
+'''
+  abort error
+end
+
+VERSION = ARGV[0].dup # like, 11.10.340
+
+BRANCH_NAME = "backport-docs-for-#{VERSION}"
+
+Dir.glob('tasks/*.rake').each { |r| load r }
+
+setup
+
+temp_dir = Dir.mktmpdir
+begin
+  `cp -r v3/enterprise enterprise/#{VERSION}/v3/`
+
+  rewrite_content("enterprise/#{VERSION}/v3/enterprise")
+
+  `git add enterprise`
+  `git commit -m "Added enterprise-#{VERSION} backported files"`
+ensure
+  FileUtils.remove_entry_secure temp_dir
+end
+
+puts "\n\nOkay! Feel free to `git push #{BRANCH_NAME}` if you like."

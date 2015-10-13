@@ -64,6 +64,7 @@
   <li><a href="#suspend-a-user">Suspend a user</a></li>
   <li><a href="#unsuspend-a-user">Unsuspend a user</a></li>
   <li><a href="#list-all-public-keys">List all public keys</a></li>
+  <li><a href="#delete-a-user">Delete a user</a></li>
   <li><a href="#delete-a-public-key">Delete a public key</a></li>
 </ul>
 
@@ -344,11 +345,30 @@ X-RateLimit-Remaining: 4999</code></pre>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
+<h2 id="delete-a-user">Delete a user</h2>
+
+<div class="alert warning">
+
+<p>Deleting a user will delete all their repositories, gists, applications, and personal settings. <a href="/v3/users/administration/#suspend-a-user">Suspending a user</a> is often a better option.</p>
+
+</div>
+
+<pre><code>DELETE /admin/users/:username
+</code></pre>
+
+<p>You can delete any user account except your own.</p>
+
+<h3 id="response-9">Response</h3>
+
+<pre class="headers"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999</code></pre>
+
 <h2 id="delete-a-public-key">Delete a public key</h2>
 
 <p>DELETE /admin/keys/1</p>
 
-<h3 id="response-9">Response</h3>
+<h3 id="response-10">Response</h3>
 
 <pre class="headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

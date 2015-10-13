@@ -17,8 +17,7 @@ You might expect to see a `403 Forbidden` in these cases. However, since we don'
 want to provide _any_ information about private repositories, the API returns a
 `404` error instead.
 
-To fix this, you can either ensure that [you're authenticating correctly](/guides/getting-started/),
-or [make sure that your scopes are valid](/v3/oauth/#scopes).
+To troubleshoot, ensure [you're authenticating correctly](/guides/getting-started/), [your OAuth access token has the required scopes](/v3/oauth/#scopes), and [third-party application restrictions][oap-guide] are not blocking access.
 
 ## Why am I not seeing all my results?
 
@@ -42,3 +41,5 @@ you might be able to fix the issue by either caching our results, or [using cond
 In certain exceptional cases, we may temporarily bump your rate limit higher. You
 should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest
 dreams with the current rate limit (but don't worry, we'll help you out).
+
+[oap-guide]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/

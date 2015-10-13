@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Best practices for integrators | GitHub API</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.4/changes.atom">
+  <link href="/enterprise/2.4/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.4/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.4/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/2.4/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/2.4/js/documentation.js" type="text/javascript"></script>
+  
+</head>
+
+
+<body class="api enterprise">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.4/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/enterprise/2.4/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.4/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/enterprise/2.4/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+
+
+  <div class="sub-nav">
+    <h2><a href="/enterprise/2.4/v3/">API</a></h2>
+
+    <ul>
+      <li><a href="/enterprise/2.4/v3/">Reference</a></li>
+      <li><a href="/enterprise/2.4/webhooks/">Webhooks</a></li>
+      <li><a href="/enterprise/2.4/guides/" class="active">Guides</a></li>
+      <li><a href="/enterprise/2.4/libraries/">Libraries</a></li>
+    </ul>
+  </div>
+
+  <div id="wrapper">
+    <div class="content">
+      <h1 id="best-practices-for-integrators">Best practices for integrators</h1>
+
+<p>Interested in integrating with the GitHub platform? <a href="https://github.com/integrations">You’re in good company</a>. This guide will help you build an app that provides the best experience for your users <em>and</em> ensure that it’s reliably interacting with the API.</p>
+
+<ul id="markdown-toc">
+  <li><a href="#secure-payloads-delivered-from-github">Secure payloads delivered from GitHub</a></li>
+  <li><a href="#favor-asynchronous-work-over-synchronous">Favor asynchronous work over synchronous</a></li>
+  <li><a href="#use-appropriate-http-status-codes-when-responding-to-github">Use appropriate HTTP status codes when responding to GitHub</a></li>
+  <li><a href="#provide-as-much-information-as-possible-to-the-user">Provide as much information as possible to the user</a></li>
+  <li><a href="#follow-any-redirects-that-the-api-sends-you">Follow any redirects that the API sends you</a></li>
+  <li><a href="#dont-manually-parse-urls">Don’t manually parse URLs</a></li>
+  <li><a href="#dealing-with-rate-limits">Dealing with rate limits</a></li>
+  <li><a href="#dealing-with-abuse-rate-limits">Dealing with abuse rate limits</a></li>
+  <li><a href="#dealing-with-api-errors">Dealing with API errors</a></li>
+</ul>
+
+<h2 id="secure-payloads-delivered-from-github">Secure payloads delivered from GitHub</h2>
+
+<p>It’s very important that you secure <a href="/enterprise/2.4/v3/activity/events/types/">the payloads sent from GitHub</a>. Although no personal information (like passwords) is ever transmitted in a payload, leaking <em>any</em> information is not good. Some information that might be sensitive include committer email address or the names of private repositories.</p>
+
+<p>There are three steps you can take to secure receipt of payloads delivered by GitHub:</p>
+
+<ol>
+  <li>Ensure that your receiving server is on an HTTPS connection. By default, GitHub will verify SSL certificates when delivering payloads.</li>
+  <li>You can whitelist <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">the IP address we use when delivering hooks</a>  to your server. To ensure that you’re always checking the right IP address, you can <a href="/enterprise/2.4/v3/meta/#meta">use the <code>/meta</code> endpoint</a> to find the address we use.</li>
+  <li>Provide <a href="/enterprise/2.4/webhooks/securing/">a secret token</a> to ensure payloads are definitely coming from GitHub. By enforcing a secret token, you’re ensuring that any data received by your server is absolutely coming from GitHub. Ideally, you should provide a different secret token <em>per user</em> of your service. That way, if one token is compromised, no other user would be affected.</li>
+</ol>
+
+<h2 id="favor-asynchronous-work-over-synchronous">Favor asynchronous work over synchronous</h2>
+
+<p>GitHub expects that integrations respond within thirty seconds of receiving the webhook payload. If your service takes longer than that to complete, then GitHub terminates the connection and the payload is lost.</p>
+
+<p>Since it’s impossible to predict how fast your service will complete, you should do all of “the real work” in a background job. <a href="https://github.com/resque/resque/">Resque</a> (for Ruby), <a href="http://python-rq.org/">RQ</a> (for Python), or <a href="http://www.rabbitmq.com/">RabbitMQ</a> (for Java) are examples of libraries that can handle queuing and processing of background jobs.</p>
+
+<p>Note that even with a background job running, GitHub still expects your server to respond within thirty seconds. Your server simply needs to acknowledge that it received the payload by sending some sort of response. It’s critical that your service to performs any validations on a payload as soon as possible, so that you can accurately report whether your server will continue with the request or not.</p>
+
+<h2 id="use-appropriate-http-status-codes-when-responding-to-github">Use appropriate HTTP status codes when responding to GitHub</h2>
+
+<p>Every webhook has its own “Recent Deliveries” section, which lists whether a deployment was successful or not.</p>
+
+<p><img src="/enterprise/2.4/images/webhooks_recent_deliveries.png" alt="Recent Deliveries view"></p>
+
+<p>You should make use of proper HTTP status codes in order to inform users. You can use codes like <code>201</code> or <code>202</code> to acknowledge receipt of payload that won’t be processed (for example, a payload delivered by a branch that’s not the default). Reserve the <code>500</code> error code for catastrophic failures.</p>
+
+<h2 id="provide-as-much-information-as-possible-to-the-user">Provide as much information as possible to the user</h2>
+
+<p>Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.</p>
+
+<p><img src="/enterprise/2.4/images/payload_response_tab.png" alt="Viewing a payload response"></p>
+
+<h2 id="follow-any-redirects-that-the-api-sends-you">Follow any redirects that the API sends you</h2>
+
+<p>GitHub is explicit in telling you when a resource has moved by providing a redirect status code. You should follow these redirections. Every redirect response sets the <code>Location</code> header with the new URI to go to. If you receive a redirect, it’s best to update your code to follow the new URI, in case you’re requesting a deprecated path that we might remove.</p>
+
+<p>We’ve provided <a href="/enterprise/2.4/v3/#http-redirects">a list of HTTP status codes</a> to watch out for when designing your app to follow redirects.</p>
+
+<h2 id="dont-manually-parse-urls">Don’t manually parse URLs</h2>
+
+<p>Often, API responses contain data in the form of URLs. For example, when requesting a repository, we’ll send a key called <code>clone_url</code> with a URL you can use to clone the repository.</p>
+
+<p>For the stability of your app, you shouldn’t try to parse this data or try to guess and construct the format of future URLs. Your app is liable to break if we decide to change the URL.</p>
+
+<p>For example, when working with paginated results, it’s often tempting to construct URLs that append <code>?page=&lt;number&gt;</code> to the end. Avoid that temptation. <a href="/enterprise/2.4/guides/traversing-with-pagination">Our guide on pagination</a> offers some safe tips on dependably following paginated results.</p>
+
+<h2 id="dealing-with-rate-limits">Dealing with rate limits</h2>
+
+<p>The GitHub API <a href="/enterprise/2.4/v3/#rate-limiting">rate limit</a> ensures that the API is fast and available for everyone.</p>
+
+<p>If you hit a rate limit, it’s expected that you back off from making requests and try again later when you’re permitted to do so. Failure to do so may result in the banning of your app.</p>
+
+<p>You can always <a href="/enterprise/2.4/v3/rate_limit/">check your rate limit status</a> at any time. Checking your rate limit incurs no cost against your rate limit.</p>
+
+<h2 id="dealing-with-abuse-rate-limits">Dealing with abuse rate limits</h2>
+
+<p><a href="/enterprise/2.4/v3/#abuse-rate-limits">Abuse rate limits</a> are another way we ensure the API’s availability.
+To avoid hitting this limit, you should ensure your application follows the guidelines below.</p>
+
+<ul>
+  <li>Make authenticated requests, or use your application’s client ID and secret. Unauthenticated
+requests are subject to more aggressive abuse rate limiting.</li>
+  <li>Make requests for a single user or client ID serially. Do not make requests for a single user
+or client ID concurrently.</li>
+  <li>If you’re making a large number of <code>POST</code>, <code>PATCH</code>, <code>PUT</code>, or <code>DELETE</code> requests for a single user
+or client ID, wait at least one second between each request.</li>
+  <li>Requests that create content which triggers notifications, such as issues, comments and pull requests, 
+may be further limited. Please create this content at a reasonable pace to avoid further limiting.</li>
+  <li>When you have been limited, wait the number of seconds specified in the <code>Retry-After</code> response header.</li>
+</ul>
+
+<p>We reserve the right to change these guidelines as needed to ensure availability.</p>
+
+<h2 id="dealing-with-api-errors">Dealing with API errors</h2>
+
+<p>Although your code would never introduce a bug, you may find that you’ve encountered successive errors when trying to access the API.</p>
+
+<p>Rather than ignore repeated <code>4xx</code> and <code>5xx</code> status codes, you should ensure that you’re correctly interacting with the API. For example, if an endpoint requests a string and you’re passing it a numeric value, you’re going to receive a <code>5xx</code> validation error, and your call won’t succeed. Similarly, attempting to access an unauthorized or nonexistent endpoint will result in a <code>4xx</code> error.</p>
+
+<p>Intentionally ignoring repeated validation errors may result in the suspension of your app for abuse.</p>
+
+    </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="sidebar-module">
+        <ul>
+          <li><h3><a href="/enterprise/2.4/guides/">Overview</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/getting-started/">Getting started</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/basics-of-authentication/">Basics of authentication</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/discovering-resources-for-a-user/">Discovering resources for a user</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/managing-deploy-keys/">Managing deploy keys</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/using-ssh-agent-forwarding/">Using SSH agent forwarding</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/rendering-data-as-graphs/">Rendering data as graphs</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/working-with-comments/">Working with comments</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/traversing-with-pagination/">Traversing with pagination</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/building-a-ci-server/">Building a CI server</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/delivering-deployments/">Delivering deployments</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/automating-deployments-to-integrators/">Automating deployments to integrators</a></h3></li>
+          <li><h3><a href="/enterprise/2.4/guides/best-practices-for-integrators/">Best practices for integrators</a></h3></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-module notice">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+      <div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+    </div>
+<!-- sidebar-shell -->
+  </div>
+<!-- #wrapper -->
+
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+    </div>
+
+  </div>
+<!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/enterprise/2.4/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

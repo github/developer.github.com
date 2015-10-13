@@ -1,3 +1,0 @@
-require 'celluloid'
-
-Celluloid.start

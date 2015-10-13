@@ -148,6 +148,21 @@ If your GitHub Enterprise appliance has [LDAP Sync with Active Directory LDAP se
   [public_key, deploy_key.merge("id" => "2", "url" => "https://api.github.com/repos/octocat/Hello-World/keys/2")] \
 } %>
 
+## Delete a user
+
+{{#warning}}
+
+Deleting a user will delete all their repositories, gists, applications, and personal settings. [Suspending a user](/v3/users/administration/#suspend-a-user) is often a better option.
+
+{{/warning}}
+
+    DELETE /admin/users/:username
+
+You can delete any user account except your own.
+
+### Response
+
+<%= headers 204 %>
 
 ## Delete a public key
 

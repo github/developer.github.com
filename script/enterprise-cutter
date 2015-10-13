@@ -33,7 +33,9 @@ setup
 temp_dir = Dir.mktmpdir
 begin
   %x(git checkout #{SHA})
-  `cp -r * #{temp_dir}`
+  puts `bundle install`
+  puts `bundle exec nanoc compile`
+  `cp -r output/ #{temp_dir}`
   `git checkout #{BRANCH_NAME}`
   FileUtils.mkdir_p("enterprise/#{VERSION}")
   `cp -r #{temp_dir}/* enterprise/#{VERSION}`

@@ -35,7 +35,14 @@ access to Statuses **without** also granting access to repository code, while th
 
 Users with push access can create commit statuses for a given ref:
 
-    POST /repos/:owner/:repo/statuses/:sha
+    POST /repos/:owner/:repo/commits/:sha/statuses
+    
+<div class="alert">
+  <p>
+    This resource is also available via a legacy route:
+    <code>GET /repos/:owner/:repo/statuses/:sha</code>.
+  </p>
+</div>
 
 Note: there is a limit of 1000 statuses per `sha` and `context` within a Repository.
 Attempts to create more than 1000 statuses will result in a validation error.

@@ -125,7 +125,7 @@ Compiling site...
 Site compiled in 5.81s.
 ```
 
-You can setup whatever you want to view the files. If using the adsf
+You can set up whatever you want to view the files. If using the adsf
 gem (as listed in the Gemfile), you can start Webrick:
 
 ```sh

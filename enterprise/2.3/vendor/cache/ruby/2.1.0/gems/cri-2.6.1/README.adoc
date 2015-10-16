@@ -1,0 +1,198 @@
+= Cri =
+
+link:http://rubygems.org/gems/cri[image:http://img.shields.io/gem/v/cri.svg[]]
+link:https://travis-ci.org/ddfreyne/cri[image:http://img.shields.io/travis/ddfreyne/cri.svg[]]
+link:https://coveralls.io/r/ddfreyne/cri[image:http://img.shields.io/coveralls/ddfreyne/cri.svg[]]
+link:https://codeclimate.com/github/ddfreyne/cri[image:http://img.shields.io/codeclimate/github/ddfreyne/cri.svg[]]
+link:http://inch-pages.github.io/github/ddfreyne/cri/[image:http://inch-pages.github.io/github/ddfreyne/cri.svg[]]
+
+Cri is a library for building easy-to-use commandline tools with support for
+nested commands.
+
+== Usage ==
+
+The central concept in Cri is the _command_, which has option definitions as
+well as code for actually executing itself. In Cri, the commandline tool
+itself is a command as well.
+
+Here’s a sample command definition:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+command = Cri::Command.define do
+  name        'dostuff'
+  usage       'dostuff [options]'
+  aliases     :ds, :stuff
+  summary     'does stuff'
+  description 'This command does a lot of stuff. I really mean a lot.'
+
+  flag   :h,  :help,  'show help for this command' do |value, cmd|
+    puts cmd.help
+    exit 0
+  end
+  flag   nil, :more,  'do even more stuff'
+  option :s,  :stuff, 'specify stuff to do', argument: :required
+
+  run do |opts, args, cmd|
+    stuff = opts.fetch(:stuff, 'generic stuff')
+    puts "Doing #{stuff}!"
+
+    if opts[:more]
+      puts 'Doing it even more!'
+    end
+  end
+end
+--------------------------------------------------------------------------------
+
+To run this command, invoke the `#run` method with the raw arguments. For
+example, for a root command (the commandline tool itself), the command could
+be called like this:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+command.run(ARGV)
+--------------------------------------------------------------------------------
+
+Each command has automatically generated help. This help can be printed using
+`Cri::Command#help`; something like this will be shown:
+
+--------------------------------------------------------------------------------
+usage: dostuff [options]
+
+does stuff
+
+    This command does a lot of stuff. I really mean a lot.
+
+options:
+
+    -h --help      show help for this command
+       --more      do even more stuff
+    -s --stuff     specify stuff to do
+--------------------------------------------------------------------------------
+
+=== General command metadata ===
+
+Let’s disect the command definition and start with the first five lines:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+name        'dostuff'
+usage       'dostuff [options]'
+aliases     :ds, :stuff
+summary     'does stuff'
+description 'This command does a lot of stuff. I really mean a lot.'
+--------------------------------------------------------------------------------
+
+These lines of the command definition specify the name of the command (or the
+commandline tool, if the command is the root command), the usage, a list of
+aliases that can be used to call this command, a one-line summary and a (long)
+description. The usage should not include a “usage:” prefix nor the name of
+the supercommand, because the latter will be automatically prepended.
+
+Aliases don’t make sense for root commands, but for subcommands they do.
+
+=== Command-line options ===
+
+The next few lines contain the command’s option definitions:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+flag   :h,  :help,  'show help for this command' do |value, cmd|
+  puts cmd.help
+  exit 0
+end
+flag   nil, :more,  'do even more stuff'
+option :s,  :stuff, 'specify stuff to do', argument: :required
+--------------------------------------------------------------------------------
+
+Options can be defined using the following methods:
+
+* `Cri::CommandDSL#option` or `Cri::CommandDSL#opt`
+* `Cri::CommandDSL#flag` (implies no arguments passed to option)
+* `Cri::CommandDSL#required` (implies required argument)
+* `Cri::CommandDSL#optional` (implies optional argument)
+
+All these methods take the short option form as their first argument, and a
+long option form as their second argument. Either the short or the long form
+can be nil, but not both (because that would not make any sense). In the
+example above, the `--more` option has no short form.
+
+Each of the above methods also take a block, which will be executed when the
+option is found. The argument to the block are the option value (`true` in
+case the option does not have an argument) and the command.
+
+==== Multivalued options ====
+
+Each of these four methods take a `:multiple` option. When set to true, multiple
+option valus are accepted, and the option values will be stored in an array.
+
+For example, to parse the command line options string `-o foo.txt -o bar.txt`
+into an array, so that `options[:output]` contains `[ 'foo.txt', 'bar.txt' ]`,
+you can use an option definition like this:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+option :o, :output, 'specify output paths', argument: :required, multiple: true
+--------------------------------------------------------------------------------
+
+This can also be used for flags (options without arguments). In this case, the
+length of the options array is relevant.
+
+For example, you can allow setting the verbosity level using `-v -v -v`. The
+value of `options[:verbose].size` would then be the verbosity level (three in
+this example). The option definition would then look like this:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+flag :v, :verbose, 'be verbose (use up to three times)', multiple: true
+--------------------------------------------------------------------------------
+
+=== The run block ===
+
+The last part of the command defines the execution itself:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+run do |opts, args, cmd|
+  stuff = opts.fetch(:stuff, 'generic stuff')
+  puts "Doing #{stuff}!"
+
+  if opts[:more]
+    puts 'Doing it even more!'
+  end
+end
+--------------------------------------------------------------------------------
+
+The +Cri::CommandDSL#run+ method takes a block with the actual code to
+execute. This block takes three arguments: the options, any arguments passed
+to the command, and the command itself.
+
+Instead of defining a run block, it is possible to declare a class, the
+_command runner_ class (`Cri::CommandRunner`) that will perform the actual
+execution of the command. This makes it easier to break up large run blocks
+into manageable pieces.
+
+=== Subcommands ===
+
+Commands can have subcommands. For example, the `git` commandline tool would be
+represented by a command that has subcommands named `commit`, `add`, and so on.
+Commands with subcommands do not use a run block; execution will always be
+dispatched to a subcommand (or none, if no subcommand is found).
+
+To add a command as a subcommand to another command, use the
+`Cri::Command#add_command` method, like this:
+
+[source,ruby]
+--------------------------------------------------------------------------------
+root_cmd.add_command(cmd_add)
+root_cmd.add_command(cmd_commit)
+root.cmd.add_command(cmd_init)
+--------------------------------------------------------------------------------
+
+== Contributors ==
+
+* Toon Willems
+* Ken Coar
+
+Thanks for Lee “injekt” Jarvis for link:https://github.com/injekt/slop[Slop],
+which has inspired the design of Cri 2.0.

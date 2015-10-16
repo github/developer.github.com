@@ -121,7 +121,7 @@ module GitHub
       end
 
       CONTENT ||= {
-        'LATEST_ENTERPRISE_VERSION' => '2.3',
+        'LATEST_ENTERPRISE_VERSION' => '2.4',
         'IF_SITE_ADMIN' => "If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,",
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "OPTIONAL_PUT_CONTENT_LENGTH" => "Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
@@ -706,7 +706,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
       "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
       "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
-      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
+      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}",
       "tarball_url"      => "https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0",
       "zipball_url"      => "https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0",
       "id"               => 1,

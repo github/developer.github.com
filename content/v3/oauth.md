@@ -20,6 +20,8 @@ and Client Secret. The Client Secret should not be shared.
 **You may create a [personal access token](https://github.com/settings/tokens/new)
 for your own use or implement the web flow below to allow other users to authorize your application.**
 
+GitHub's OAuth implementation supports the standard [authorization code grant type](https://tools.ietf.org/html/rfc6749#section-4.1). Developers should implement the web application flow described below to obtain an authorization code and then exchange it for a token. (The [implicit grant type](https://tools.ietf.org/html/rfc6749#section-4.2) is not supported.)
+
 ## Web Application Flow
 
 This is a description of the OAuth2 flow from 3rd party web sites.
@@ -120,6 +122,7 @@ cleaner approach is to include it in the Authorization header
 
 For example, in curl you can set the Authorization header like this:
 
+{:.terminal}
     curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
 
 ## Non-Web Application Flow
@@ -161,6 +164,7 @@ authorize form.
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.
 
+{:.terminal}
     $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
     HTTP/1.1 200 OK
     X-OAuth-Scopes: repo, user

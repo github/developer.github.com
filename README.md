@@ -77,18 +77,27 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 
 ### Terminal blocks
 
-You can specify terminal blocks with `pre.terminal` elements.  (It'd be nice if
-Markdown could do this more cleanly.)
+You can specify terminal blocks by prefacing a [block element][block boundaries] with `{:.terminal}`.
+
+```markdown
+{:.terminal}
+    $ curl foobar
+```
+
+Alternatively, you can use plain html and use `pre.terminal` elements.
+(If, for example, you need to emphasis text with `<em>`)
 
 ```html
 <pre class="terminal">
-$ curl foobar
+$ curl <em>foobar<em>
 ....
 </pre>
 ```
 
 This is not a `curl` tutorial though. Not every API call needs
 to show how to access it with `curl`.
+
+[block boundaries]: http://kramdown.gettalong.org/syntax.html#block-boundaries
 
 ## Development
 

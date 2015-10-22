@@ -126,11 +126,11 @@ The keys in the `files` object are the `string` filename. The value is another `
     "delete_this_file.txt" => nil,
   } %>
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the object. Deletes can be performed by including the filename with a <code>null</code> object.
-	</p>
-</div>
+{{#tip}}
+
+<strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the object. Deletes can be performed by including the filename with a <code>null</code> object.
+	
+{{/tip}}
 
 
 ### Response

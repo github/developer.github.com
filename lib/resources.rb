@@ -39,7 +39,7 @@ module GitHub
       end
 
       def avatar_for(login)
-        %(<img height="16" width="16" src="%s" alt="Avatar for #{login}"/>) % avatar_url_for(login)
+        %(<img height="16" width="16" src="%s" alt="Avatar for #{login}" data-proofer-ignore/>) % avatar_url_for(login)
       end
 
       def avatar_url_for(login)

@@ -7,7 +7,7 @@ title: Discovering resources for a user | GitHub API
 * TOC
 {:toc}
 
-When making authenticated requests to the GitHub API, applications often need to fetch the current user's repositories and organizations. In this guide, will explain how to reliably discover those resources.
+When making authenticated requests to the GitHub API, applications often need to fetch the current user's repositories and organizations. In this guide, we'll explain how to reliably discover those resources.
 
 To interact with the GitHub API, we'll be using [Octokit.rb][octokit.rb]. You can find the complete source code for this project in the [platform-samples][platform samples] repository.
 

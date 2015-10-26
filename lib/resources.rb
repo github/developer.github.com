@@ -35,6 +35,7 @@ module GitHub
       end
 
       def strftime(time, format = DefaultTimeFormat)
+        return "" if time.nil?
         attribute_to_time(time).strftime(format)
       end
 

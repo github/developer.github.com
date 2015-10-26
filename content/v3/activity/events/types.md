@@ -519,7 +519,7 @@ Key | Type | Description
 ## WatchEvent
 
 The WatchEvent is related to [starring a repository](/v3/activity/starring/#star-a-repository), not [watching](/v3/activity/watching/).
-See [this API blog post](/changes/2012-9-5-watcher-api/) for an explanation.
+See [this API blog post](/changes/2012-09-05-watcher-api/) for an explanation.
 
 The event’s actor is the [user](/v3/users/) who starred a repository, and the
 event’s repository is the [repository](/v3/repos/) that was starred.

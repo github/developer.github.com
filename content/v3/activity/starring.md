@@ -18,7 +18,7 @@ In August 2012, we [changed the way watching
 works](https://github.com/blog/1204-notifications-stars) on GitHub.  Many API
 client applications may be using the original "watcher" endpoints for accessing
 this data. You can now start using the "star" endpoints instead (described
-below). Check out the [Watcher API Change post](/changes/2012-9-5-watcher-api/)
+below). Check out the [Watcher API Change post](/changes/2012-09-05-watcher-api/)
 for more details.
 
 ## List Stargazers

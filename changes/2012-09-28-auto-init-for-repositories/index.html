@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title></title>
+  <title>Initialize a repository when creating</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -41,34 +41,62 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-9-28-auto-init-for-repositories/">
+      <div class="change" id="/changes/2012-09-28-auto-init-for-repositories/">
 <h2 class="title">
-  <a href="/changes/2012-9-28-auto-init-for-repositories/"></a>
+  <a href="/changes/2012-09-28-auto-init-for-repositories/">Initialize a repository when creating</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    
+    September 28, 2012
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/.png" alt="Avatar for " data-proofer-ignore/>
-      <a href="https://github.com/" data-proofer-ignore></a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore/>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
 
-<p>&lt;!DOCTYPE html&gt;
-&lt;meta charset=utf-8&gt;</p>
-<title>Redirecting...</title>
-<p>&lt;link rel=canonical href=”/changes/2012-09-28-auto-init-for-repositories/”&gt;
-&lt;meta http-equiv=refresh content=”0; url=/changes/2012-09-28-auto-init-for-repositories/”&gt;</p>
-<h1>Redirecting...</h1>
-<p><a href="/changes/2012-09-28-auto-init-for-repositories/">Click here if you are not redirected.</a>
-<script>location='/changes/2012-09-28-auto-init-for-repositories/'</script></p>
+<p>Today we’ve made it easier to add commits to a repository via the GitHub API.
+Until now, you could <a href="/v3/repos/#create">create a repository</a>, but you would
+need to initialize it locally via your Git client before adding any commits via
+the API.</p>
+
+<p>Now you can optionally init a repository when it’s created by sending <code>true</code>
+for the <code>auto_init</code> parameter:</p>
+
+<pre class="terminal"><code>curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true}' \
+     https://api.github.com/user/repos
+</code></pre>
+
+<p>The resulting repository will have a README stub and an initial commit.</p>
+
+<p><img src="/images/posts/create-repo-init.png" alt="create repo screenshot"></p>
+
+<h3 id="gitignore-templates">.gitignore templates</h3>
+
+<p>Along with this change, you can set up your <code>.gitignore</code> template by passing
+the basename of any template in the <a href="https://github.com/github/gitignore">GitHub gitignore templates
+project</a>.</p>
+
+<pre class="terminal"><code>curl -i -u pengwynn \
+     -d '{"name": "create-repo-test", "auto_init": true, \
+          "gitignore_template": "Haskell"}' \
+     https://api.github.com/user/repos
+</code></pre>
+
+<p>As the <a href="/v3/repos/#create">docs point out</a>, the <code>gitignore_template</code> parameter
+is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
+
+<p>If you have any questions or feedback, drop us a line at
+<a href="https://github.com/c">https://github.com/contact</a>, <a href="mailto:support@github.com">support@github.com</a>, or
+<a href="https://twitter.com/githubapi">@GitHubAPI</a>.</p>
+
 
 </div>
 

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title></title>
+  <title>Some Hookshot Issues</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -41,34 +41,40 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-9-28-auto-init-for-repositories/">
+      <div class="change" id="/changes/2013-02-13-hookshot-issues/">
 <h2 class="title">
-  <a href="/changes/2012-9-28-auto-init-for-repositories/"></a>
+  <a href="/changes/2013-02-13-hookshot-issues/">Some Hookshot Issues</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    
+    February 13, 2013
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/.png" alt="Avatar for " data-proofer-ignore/>
-      <a href="https://github.com/" data-proofer-ignore></a>
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore/>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
   </li>
 </ul>
 </div>
 
 
-<p>&lt;!DOCTYPE html&gt;
-&lt;meta charset=utf-8&gt;</p>
-<title>Redirecting...</title>
-<p>&lt;link rel=canonical href=”/changes/2012-09-28-auto-init-for-repositories/”&gt;
-&lt;meta http-equiv=refresh content=”0; url=/changes/2012-09-28-auto-init-for-repositories/”&gt;</p>
-<h1>Redirecting...</h1>
-<p><a href="/changes/2012-09-28-auto-init-for-repositories/">Click here if you are not redirected.</a>
-<script>location='/changes/2012-09-28-auto-init-for-repositories/'</script></p>
+<p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
+been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
+the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
+
+<p>If your web hook servers are on EC2 and are missing hooks from GitHub due to
+an IP restriction, we recommend the following:</p>
+
+<ol>
+  <li>Remove the IP white list.</li>
+  <li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
+</ol>
+
+<p>We’re currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
+if you have any questions.</p>
 
 </div>
 

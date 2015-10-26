@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title></title>
+  <title>Ping Event for Webhooks</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   <link href="/css/reset.css" rel="stylesheet" type="text/css" />
   <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
@@ -41,34 +41,37 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-9-28-auto-init-for-repositories/">
+      <div class="change" id="/changes/2014-02-10-ping-event-for-webhooks/">
 <h2 class="title">
-  <a href="/changes/2012-9-28-auto-init-for-repositories/"></a>
+  <a href="/changes/2014-02-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    
+    February 10, 2014
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/.png" alt="Avatar for " data-proofer-ignore/>
-      <a href="https://github.com/" data-proofer-ignore></a>
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle" data-proofer-ignore/>
+      <a href="https://github.com/kdaigle" data-proofer-ignore>kdaigle</a>
   </li>
 </ul>
 </div>
 
 
-<p>&lt;!DOCTYPE html&gt;
-&lt;meta charset=utf-8&gt;</p>
-<title>Redirecting...</title>
-<p>&lt;link rel=canonical href=”/changes/2012-09-28-auto-init-for-repositories/”&gt;
-&lt;meta http-equiv=refresh content=”0; url=/changes/2012-09-28-auto-init-for-repositories/”&gt;</p>
-<h1>Redirecting...</h1>
-<p><a href="/changes/2012-09-28-auto-init-for-repositories/">Click here if you are not redirected.</a>
-<script>location='/changes/2012-09-28-auto-init-for-repositories/'</script></p>
+<p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
+<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.</p>
+
+<p>The ping is only informational, doesn’t need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It’s just a quick
+“hello world” to let you know you set everything up correctly.</p>
+
+<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
+By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
+you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
 
 </div>
 

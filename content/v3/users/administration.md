@@ -40,7 +40,7 @@ Name | Type | Description
 
 ## Rename an existing user
 
-    PATCH /admin/users/:user_id
+    PATCH /admin/users/:username
 
 ### Parameters
 
@@ -64,7 +64,7 @@ Name | Type | Description
 
 ## Create an impersonation OAuth token
 
-    POST /admin/users/:user_id/authorizations
+    POST /admin/users/:username/authorizations
 
 ### Parameters
 
@@ -79,7 +79,7 @@ Name | Type | Description
 
 ## Delete an impersonation OAuth token
 
-    DELETE /admin/users/:user_id/authorizations
+    DELETE /admin/users/:username/authorizations
 
 ### Response
 

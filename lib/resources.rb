@@ -1,5 +1,4 @@
 require 'pp'
-require 'yajl/json_gem'
 require 'stringio'
 require 'cgi'
 require 'securerandom'

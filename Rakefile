@@ -53,6 +53,7 @@ task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
 
   # save precious files
   if ENV['IS_HEROKU']
+    `git fetch origin gh-pages`
     `git checkout origin/gh-pages`
   else
     `git checkout gh-pages`

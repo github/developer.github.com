@@ -56,11 +56,11 @@ task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir] do |t, 
 
   Dir.mktmpdir do |tmp|
     system "mv output/* #{tmp}"
-    system 'git checkout not-gh-pages'
+    system 'git checkout gh-pages'
     system "rsync -av #{tmp}/ ."
     system 'git add .'
     system "git commit -am #{message.shellescape}"
-    system 'git push origin not-gh-pages --force'
+    system 'git push origin gh-pages --force'
     system 'git checkout master'
   end
 end

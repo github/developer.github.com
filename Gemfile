@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+ruby '2.2.3'
+
 gem 'builder'
 gem 'kramdown', '~> 0.13.2'
 gem 'nanoc', '~> 4.0'

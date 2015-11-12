@@ -51,7 +51,7 @@ def commit_message(no_commit_msg = false)
 end
 
 desc "Publish to http://developer.github.com"
-task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
+task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir] do |t, args|
   mesg = commit_message(args[:no_commit_msg])
   sh "nanoc compile"
 

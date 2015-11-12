@@ -14,12 +14,12 @@ class SearchFilter < Nanoc::Filter
 
   def run(content, params={})
     # uses nokogiri to determine parent section name
-    containing_li_text = $sidebar_doc.xpath("//a[@href='#{@item.identifier}']/../../../h3/a[2]/text()")
+    containing_li_text = $sidebar_doc.xpath("//a[@href='#{@item.path}']/../../../h3/a[2]/text()")
 
     # we're looking at an overview page
-    containing_li_text = $sidebar_doc.xpath("//a[@href='#{@item.identifier}']/text()") if containing_li_text.empty?
+    containing_li_text = $sidebar_doc.xpath("//a[@href='#{@item.path}']/text()") if containing_li_text.empty?
 
-    page = { :url => @item.identifier, :title => @item[:title].split("|")[0].strip, :section => "API/#{containing_li_text}" }
+    page = { :url => @item.path, :title => @item[:title].split("|")[0].strip, :section => "API/#{containing_li_text}" }
 
     $search_file_contents[:pages] << page
     $search_file_contents[:pages] = merge_sort($search_file_contents[:pages])

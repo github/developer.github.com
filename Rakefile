@@ -1,5 +1,4 @@
 require_relative 'lib/resources'
-require 'nanoc3/tasks'
 require 'tmpdir'
 
 task :default => [:test]
@@ -10,7 +9,7 @@ task :compile do
 end
 
 desc "Test the output"
-task :test => [:clean, :remove_output_dir, :compile, :run_proofer]
+task :test => [:remove_tmp_dir, :remove_output_dir, :compile, :run_proofer]
 
 desc "Run the HTML-Proofer"
 task :run_proofer do
@@ -23,6 +22,11 @@ task :run_proofer do
     %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{latest_ent_version}/user/"
   }
   HTML::Proofer.new("./output", :href_ignore => ignored_links, :href_swap => href_swap).run
+end
+
+desc "Remove the tmp dir"
+task :remove_tmp_dir do
+  FileUtils.rm_r('tmp') if File.exist?('tmp')
 end
 
 desc "Remove the output dir"

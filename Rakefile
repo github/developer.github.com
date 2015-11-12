@@ -51,7 +51,7 @@ def commit_message(no_commit_msg = false)
 end
 
 desc "Publish to http://developer.github.com"
-task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir] do |t, args|
+task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :compile] do |t, args|
   message = commit_message(args[:no_commit_msg])
 
   Dir.mktmpdir do |tmp|

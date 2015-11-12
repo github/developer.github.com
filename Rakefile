@@ -56,6 +56,7 @@ task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :compil
 
   Dir.mktmpdir do |tmp|
     system "mv output/* #{tmp}"
+    system "cp .gitignore #{tmp}"
     system 'git checkout gh-pages'
     system "rsync -av #{tmp}/ ."
     system 'git add .'

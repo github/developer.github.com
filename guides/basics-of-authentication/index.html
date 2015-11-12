@@ -52,7 +52,8 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="basics-of-authentication">Basics of Authentication</h1>
+      
+<h1 id="basics-of-authentication">Basics of Authentication</h1>
 
 <ul id="markdown-toc">
   <li><a href="#registering-your-app">Registering your app</a></li>
@@ -87,7 +88,7 @@ is set to <code>http://localhost:4567</code>. Let’s fill in the callback URL a
 
 <p>Now, let’s start filling out our simple server. Create a file called <em>server.rb</em> and paste this into it:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'rest-client'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
@@ -105,7 +106,7 @@ GitHub–or any other public place, for that matter. We recommend storing them a
 
 <p>Next, in <em>views/index.erb</em>, paste this content:</p>
 
-<pre><code class="language-html+erb highlight">&lt;html&gt;
+<pre><code class="language-html+erb">&lt;html&gt;
   &lt;head&gt;
   &lt;/head&gt;
   &lt;body&gt;
@@ -143,7 +144,7 @@ the app. Let’s fix that now!</p>
 
 <p>In <em>server.rb</em>, add a route to specify what the callback should do:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
+<pre><code class="language-ruby"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
   <span class="c1"># get temporary GitHub code...</span>
   <span class="n">session_code</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'rack.request.query_hash'</span><span class="o">][</span><span class="s1">'code'</span><span class="o">]</span>
 
@@ -174,7 +175,7 @@ were granted for the token by the user.</p>
 <p>The scopes that were granted are returned as a part of the response from
 exchanging a token.</p>
 
-<pre><code class="language-ruby highlight"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
+<pre><code class="language-ruby"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
   <span class="c1"># ...</span>
   <span class="c1"># Get the access_token using the code sample above</span>
   <span class="c1"># ...</span>
@@ -213,7 +214,7 @@ changes in available application functionality.</p>
 <p>At last, with this access token, you’ll be able to make authenticated requests as
 the logged in user:</p>
 
-<pre><code class="language-ruby highlight"><span class="c1"># fetch user information</span>
+<pre><code class="language-ruby"><span class="c1"># fetch user information</span>
 <span class="n">auth_result</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user'</span><span class="p">,</span>
                                         <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">}}))</span>
 
@@ -228,7 +229,7 @@ the logged in user:</p>
 
 <p>We can do whatever we want with our results. In this case, we’ll just dump them straight into <em>basic.erb</em>:</p>
 
-<pre><code class="language-html+erb highlight">&lt;p&gt;Hello, &lt;%= login %&gt;!&lt;/p&gt;
+<pre><code class="language-html+erb">&lt;p&gt;Hello, &lt;%= login %&gt;!&lt;/p&gt;
 &lt;p&gt;
   &lt;% if !email.nil? &amp;&amp; !email.empty? %&gt; It looks like your public email address is &lt;%= email %&gt;.
   &lt;% else %&gt; It looks like you don't have a public email. That's cool.
@@ -267,7 +268,7 @@ the <code>user:email</code> scope.</p>
 
 <p>Create a file called <em>advanced_server.rb</em>, and paste these lines into it:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'rest_client'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
@@ -353,7 +354,7 @@ OAuth flow and updates the session with the granted token and scopes.</p>
 
 <p>Next, create a file in <em>views</em> called <em>advanced.erb</em>, and paste this markup into it:</p>
 
-<pre><code class="language-html+erb highlight">&lt;html&gt;
+<pre><code class="language-html+erb">&lt;html&gt;
   &lt;head&gt;
   &lt;/head&gt;
   &lt;body&gt;

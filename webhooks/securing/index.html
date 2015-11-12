@@ -52,7 +52,8 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="securing-your-webhooks">Securing your webhooks</h1>
+      
+<h1 id="securing-your-webhooks">Securing your webhooks</h1>
 
 <ul id="markdown-toc">
   <li><a href="#setting-your-secret-token">Setting your secret token</a></li>
@@ -89,7 +90,7 @@ export SECRET_TOKEN=<em>your_token</em>
 
 <p>This hash signature is passed along with each request in the headers as <code>X-Hub-Signature</code>. Suppose you have a basic server listening to webhooks that looks like this:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/payload'</span> <span class="k">do</span>
@@ -99,7 +100,7 @@ export SECRET_TOKEN=<em>your_token</em>
 
 <p>The goal is to compute a hash using your <code>SECRET_TOKEN</code>, and ensure that the hash from GitHub matches. GitHub uses an HMAC hexdigest to compute the hash, so you could change your server to look a little like this:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">post</span> <span class="s1">'/payload'</span> <span class="k">do</span>
+<pre><code class="language-ruby"><span class="n">post</span> <span class="s1">'/payload'</span> <span class="k">do</span>
   <span class="n">request</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">rewind</span>
   <span class="n">payload_body</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">body</span><span class="p">.</span><span class="nf">read</span>
   <span class="n">verify_signature</span><span class="p">(</span><span class="n">payload_body</span><span class="p">)</span>

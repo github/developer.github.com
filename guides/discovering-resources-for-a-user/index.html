@@ -52,7 +52,8 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="discovering-resources-for-a-user">Discovering resources for a user</h1>
+      
+<h1 id="discovering-resources-for-a-user">Discovering resources for a user</h1>
 
 <ul id="markdown-toc">
   <li><a href="#getting-started">Getting started</a></li>
@@ -76,19 +77,19 @@
 
 <p>As always, first we’ll require <a href="https://github.com/octokit/octokit.rb">GitHub’s Octokit.rb</a> Ruby library. Then we’ll configure Octokit.rb to automatically handle <a href="/v3/#pagination">pagination</a> for us.</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'octokit'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
 <span class="no">Octokit</span><span class="p">.</span><span class="nf">auto_paginate</span> <span class="o">=</span> <span class="kp">true</span></code></pre>
 
 <p>Next, we’ll pass in our application’s <a href="/guides/basics-of-authentication/#making-authenticated-requests">OAuth token for a given user</a>:</p>
 
-<pre><code class="language-ruby highlight"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+<pre><code class="language-ruby"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below.</span>
 <span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">"OAUTH_ACCESS_TOKEN"</span><span class="o">]</span></code></pre>
 
 <p>Then, we’re ready to fetch the <a href="/v3/repos/#list-your-repositories">repositories that our application can access for the user</a>:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">client</span><span class="p">.</span><span class="nf">repositories</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">repository</span><span class="o">|</span>
+<pre><code class="language-ruby"><span class="n">client</span><span class="p">.</span><span class="nf">repositories</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">repository</span><span class="o">|</span>
   <span class="n">full_name</span> <span class="o">=</span> <span class="n">repository</span><span class="o">[</span><span class="ss">:full_name</span><span class="o">]</span>
   <span class="n">has_push_access</span> <span class="o">=</span> <span class="n">repository</span><span class="o">[</span><span class="ss">:permissions</span><span class="o">][</span><span class="ss">:push</span><span class="o">]</span>
 
@@ -107,19 +108,19 @@
 
 <p>Just as we did when discovering repositories above, we’ll start by requiring <a href="https://github.com/octokit/octokit.rb">GitHub’s Octokit.rb</a> Ruby library and configuring it to take care of <a href="/v3/#pagination">pagination</a> for us:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'octokit'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
 <span class="no">Octokit</span><span class="p">.</span><span class="nf">auto_paginate</span> <span class="o">=</span> <span class="kp">true</span></code></pre>
 
 <p>Next, we’ll pass in our application’s <a href="/guides/basics-of-authentication/#making-authenticated-requests">OAuth token for a given user</a> to initialize our API client:</p>
 
-<pre><code class="language-ruby highlight"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+<pre><code class="language-ruby"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below.</span>
 <span class="n">client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span> <span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ENV</span><span class="o">[</span><span class="s2">"OAUTH_ACCESS_TOKEN"</span><span class="o">]</span></code></pre>
 
 <p>Then, we can <a href="/v3/orgs/#list-your-organizations">list the organizations that our application can access for the user</a>:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">client</span><span class="p">.</span><span class="nf">organizations</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">organization</span><span class="o">|</span>
+<pre><code class="language-ruby"><span class="n">client</span><span class="p">.</span><span class="nf">organizations</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">organization</span><span class="o">|</span>
   <span class="nb">puts</span> <span class="s2">"User belongs to the </span><span class="si">#{</span><span class="n">organization</span><span class="o">[</span><span class="ss">:login</span><span class="o">]</span><span class="si">}</span><span class="s2"> organization."</span>
 <span class="k">end</span></code></pre>
 

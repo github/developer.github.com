@@ -61,6 +61,7 @@
 </div>
 
 
+
 <p>On November 4th, 2014, we will begin sending a new format for <a href="https://developer.github.com/v3/activity/events/types/#deploymentevent">deployment</a> and <a href="https://developer.github.com/v3/activity/events/types/#deploymentstatusevent">deployment status</a> payloads for webhooks. In the meantime we’ll be running in a compatability mode that will give integrators the time needed to start taking advantage of the new format. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.</p>
 
 <p>This change brings the payloads for these events more inline with the responses you’d receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under <code>deployment</code> and <code>deployment_status</code> keys. Since we’re still in the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">preview period</a> for the deployments API we felt it was best to correct this inconsistency now.</p>
@@ -69,7 +70,7 @@
 
 <h4 id="old-format">Old Format</h4>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
+<pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"id"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
   <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"deadbeef"</span><span class="p">,</span>
   <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
@@ -84,7 +85,7 @@
 
 <h4 id="current-format---20141022">Current Format - 2014/10/22</h4>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
+<pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"id"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
   <span class="s2">"sha"</span><span class="p">:</span> <span class="s2">"deadbeef"</span><span class="p">,</span>
   <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
@@ -113,7 +114,7 @@
 
 <h4 id="new-format---20141105">New Format - 2014/11/05</h4>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
+<pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"deployment"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
@@ -136,7 +137,7 @@
 
 <h4 id="old-format-1">Old Format</h4>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
+<pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2600</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
   <span class="s2">"deployment"</span><span class="p">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
@@ -148,7 +149,7 @@
 
 <h4 id="current-format---20141022-1">Current Format - 2014/10/22</h4>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
+<pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2600</span><span class="p">,</span>
   <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
   <span class="s2">"target_url"</span><span class="p">:</span> <span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span>
@@ -172,7 +173,7 @@
 
 <h4 id="new-format---20141105-1">New Format - 2014/11/05</h4>
 
-<pre><code class="language-javascript highlight"><span class="p">{</span>
+<pre><code class="language-javascript"><span class="p">{</span>
   <span class="s2">"deployment_status"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2600</span><span class="p">,</span>
@@ -211,11 +212,11 @@
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+
   <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
-
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 

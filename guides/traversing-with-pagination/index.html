@@ -52,7 +52,8 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="traversing-with-pagination">Traversing with Pagination</h1>
+      
+<h1 id="traversing-with-pagination">Traversing with Pagination</h1>
 
 <ul id="markdown-toc">
   <li><a href="#basics-of-pagination">Basics of Pagination</a></li>
@@ -160,7 +161,7 @@ just described above.</p>
 <p>As always, first we’ll require <a href="https://github.com/octokit/octokit.rb">GitHub’s Octokit.rb</a> Ruby library, and
 pass in our <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">personal access token</a>:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'octokit'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
 <span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
@@ -170,7 +171,7 @@ pass in our <a href="https://help.github.com/articles/creating-an-access-token-f
 using <code>curl</code>, we can also immediately retrieve the number of results, so let’s
 do that:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">results</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">search_code</span><span class="p">(</span><span class="s1">'addClass user:mozilla'</span><span class="p">)</span>
+<pre><code class="language-ruby"><span class="n">results</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">search_code</span><span class="p">(</span><span class="s1">'addClass user:mozilla'</span><span class="p">)</span>
 <span class="n">total_count</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">total_count</span></code></pre>
 
 <p>Now, let’s grab the number of the last page, similar to <code>page=34&gt;; rel="last"</code>
@@ -185,7 +186,7 @@ on. These relations also contain information about the resulting URL, by calling
 <p>Knowing this, let’s grab the page number of the last result, and present all
 this information to the user:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">last_response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span>
+<pre><code class="language-ruby"><span class="n">last_response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span>
 <span class="n">number_of_pages</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:last</span><span class="o">]</span><span class="p">.</span><span class="nf">href</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/page=(\d+)$/</span><span class="p">)</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
 
 <span class="nb">puts</span> <span class="s2">"There are </span><span class="si">#{</span><span class="n">total_count</span><span class="si">}</span><span class="s2"> results, on </span><span class="si">#{</span><span class="n">number_of_pages</span><span class="si">}</span><span class="s2"> pages!"</span></code></pre>
@@ -198,7 +199,7 @@ we’ll retrieve the data set for the next page by following the <code>rels[:nex
 The loop will finish when there is no <code>rels[:next]</code> information to consume (in other
 words, we are at <code>rels[:last]</code>). It might look something like this:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
+<pre><code class="language-ruby"><span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
 <span class="k">until</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">nil?</span>
   <span class="n">last_response</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">get</span>
   <span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">data</span><span class="p">.</span><span class="nf">items</span><span class="p">.</span><span class="nf">first</span><span class="p">.</span><span class="nf">path</span>
@@ -208,7 +209,7 @@ words, we are at <code>rels[:last]</code>). It might look something like this:</
 pass a <code>per_page</code> options hash to the initial client construction. After that,
 your code should remain intact:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'octokit'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
 <span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
@@ -243,7 +244,7 @@ results, but rather, to produce a set of navigation, like this:</p>
 <p>From the code above, we already know we can get the <code>number_of_pages</code> in the
 paginated results from the first call:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'octokit'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'octokit'</span>
 
 <span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
@@ -260,7 +261,7 @@ paginated results from the first call:</p>
 
 <p>From there, we can construct a beautiful ASCII representation of the number boxes:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">numbers</span> <span class="o">=</span> <span class="s2">""</span>
+<pre><code class="language-ruby"><span class="n">numbers</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="p">.</span><span class="nf">.</span><span class="n">number_of_pages</span><span class="p">.</span><span class="nf">to_i</span>
   <span class="n">numbers</span> <span class="o">&lt;&lt;</span> <span class="s2">"[</span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2">] "</span>
 <span class="k">end</span>
@@ -269,7 +270,7 @@ paginated results from the first call:</p>
 <p>Let’s simulate a user clicking on one of these boxes, by constructing a random
 number:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">random_page</span> <span class="o">=</span> <span class="no">Random</span><span class="p">.</span><span class="nf">new</span>
+<pre><code class="language-ruby"><span class="n">random_page</span> <span class="o">=</span> <span class="no">Random</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">random_page</span> <span class="o">=</span> <span class="n">random_page</span><span class="p">.</span><span class="nf">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="nf">.</span><span class="n">number_of_pages</span><span class="p">.</span><span class="nf">to_i</span><span class="p">)</span>
 
 <span class="nb">puts</span> <span class="s2">"A User appeared, and clicked number </span><span class="si">#{</span><span class="n">random_page</span><span class="si">}</span><span class="s2">!"</span></code></pre>
@@ -277,12 +278,12 @@ number:</p>
 <p>Now that we have a page number, we can use Octokit to explicitly retrieve that
 individual page, by passing the <code>:page</code> option:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">clicked_results</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">search_code</span><span class="p">(</span><span class="s1">'addClass user:mozilla'</span><span class="p">,</span> <span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">random_page</span><span class="p">)</span></code></pre>
+<pre><code class="language-ruby"><span class="n">clicked_results</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">search_code</span><span class="p">(</span><span class="s1">'addClass user:mozilla'</span><span class="p">,</span> <span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">random_page</span><span class="p">)</span></code></pre>
 
 <p>If we wanted to get fancy, we could also grab the previous and next pages, in
 order to generate links for back (<code>&lt;&lt;</code>) and foward (<code>&gt;&gt;</code>) elements:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">prev_page_href</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:prev</span><span class="o">]</span> <span class="p">?</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:prev</span><span class="o">]</span><span class="p">.</span><span class="nf">href</span> <span class="p">:</span> <span class="s2">"(none)"</span>
+<pre><code class="language-ruby"><span class="n">prev_page_href</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:prev</span><span class="o">]</span> <span class="p">?</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:prev</span><span class="o">]</span><span class="p">.</span><span class="nf">href</span> <span class="p">:</span> <span class="s2">"(none)"</span>
 <span class="n">next_page_href</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span> <span class="p">?</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="o">[</span><span class="ss">:next</span><span class="o">]</span><span class="p">.</span><span class="nf">href</span> <span class="p">:</span> <span class="s2">"(none)"</span>
 
 <span class="nb">puts</span> <span class="s2">"The prev page link is </span><span class="si">#{</span><span class="n">prev_page_href</span><span class="si">}</span><span class="s2">"</span>

@@ -52,7 +52,8 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="building-a-ci-server">Building a CI server</h1>
+      
+<h1 id="building-a-ci-server">Building a CI server</h1>
 
 <ul id="markdown-toc">
   <li><a href="#writing-your-server">Writing your server</a></li>
@@ -88,7 +89,7 @@ connections.</p>
 <p>We’ll write a quick Sinatra app to prove that our local connections are working.
 Let’s start with this:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
@@ -122,7 +123,7 @@ Great! Click on <strong>Let me select individual events</strong>, and select the
 <p>These are the events GitHub will send to our server whenever the relevant action
 occurs. Let’s update our server to <em>just</em> handle the Pull Request scenario right now:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
+<pre><code class="language-ruby"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
   <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
 
   <span class="k">case</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="o">]</span>
@@ -160,7 +161,7 @@ new pull request every time you make a change!</p>
 to manage our interactions. We’ll configure that client with
 <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">a personal access token</a>:</p>
 
-<pre><code class="language-ruby highlight"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
+<pre><code class="language-ruby"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
 <span class="no">ACCESS_TOKEN</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
 
@@ -171,7 +172,7 @@ to manage our interactions. We’ll configure that client with
 <p>After that, we’ll just need to update the pull request on GitHub to make clear
 that we’re processing on the CI:</p>
 
-<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
+<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
   <span class="nb">puts</span> <span class="s2">"Processing pull request..."</span>
   <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
 <span class="k">end</span></code></pre>
@@ -189,7 +190,7 @@ your test suite. Maybe you’re going to pass off your code to Jenkins, or call
 on another web service via its API, like <a href="https://api.travis-ci.org/docs/">Travis</a>. After that, you’d
 be sure to update the status once more. In our example, we’ll just set it to <code>"success"</code>:</p>
 
-<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
+<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
   <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
   <span class="nb">sleep</span> <span class="mi">2</span> <span class="c1"># do busy work...</span>
   <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>

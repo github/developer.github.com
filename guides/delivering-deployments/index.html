@@ -52,7 +52,8 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="delivering-deployments">Delivering deployments</h1>
+      
+<h1 id="delivering-deployments">Delivering deployments</h1>
 
 <ul id="markdown-toc">
   <li><a href="#writing-your-server">Writing your server</a></li>
@@ -90,7 +91,7 @@ connections.</p>
 <p>We’ll write a quick Sinatra app to prove that our local connections are working.
 Let’s start with this:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
@@ -126,7 +127,7 @@ Great! Click on <strong>Let me select individual events.</strong>, and select th
 occurs. We’ll configure our server to <em>just</em> handle when Pull Requests are merged
 right now:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
+<pre><code class="language-ruby"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
   <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
 
   <span class="k">case</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="o">]</span>
@@ -152,7 +153,7 @@ merged, we want our project to be deployed.</p>
 <p>We’ll start by modifying our event listener to process pull requests when they’re
 merged, and start paying attention to deployments:</p>
 
-<pre><code class="language-ruby highlight"><span class="k">when</span> <span class="s2">"pull_request"</span>
+<pre><code class="language-ruby"><span class="k">when</span> <span class="s2">"pull_request"</span>
   <span class="k">if</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"action"</span><span class="o">]</span> <span class="o">==</span> <span class="s2">"closed"</span> <span class="o">&amp;&amp;</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">][</span><span class="s2">"merged"</span><span class="o">]</span>
     <span class="n">start_deployment</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">]</span><span class="p">)</span>
   <span class="k">end</span>
@@ -165,7 +166,7 @@ merged, and start paying attention to deployments:</p>
 <p>Based on the information from the pull request, we’ll start by filling out the
 <code>start_deployment</code> method:</p>
 
-<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">start_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
+<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">start_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
   <span class="n">user</span> <span class="o">=</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'user'</span><span class="o">][</span><span class="s1">'login'</span><span class="o">]</span>
   <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="ss">:environment</span> <span class="o">=&gt;</span> <span class="s1">'production'</span><span class="p">,</span> <span class="ss">:deploy_user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">)</span>
   <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="p">{</span><span class="ss">:payload</span> <span class="o">=&gt;</span> <span class="n">payload</span><span class="p">,</span> <span class="ss">:description</span> <span class="o">=&gt;</span> <span class="s2">"Deploying my sweet branch"</span><span class="p">})</span>
@@ -185,7 +186,7 @@ such as when the deployment was created, and what state it’s in.</p>
 <p>Let’s simulate a deployment that does some work, and notice the effect it has on
 the output. First, let’s complete our <code>process_deployment</code> method:</p>
 
-<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_deployment</span>
+<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">process_deployment</span>
   <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'payload'</span><span class="o">]</span><span class="p">)</span>
   <span class="c1"># you can send this information to your chat room, monitor, pager, e.t.c.</span>
   <span class="nb">puts</span> <span class="s2">"Processing '</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'description'</span><span class="o">]</span><span class="si">}</span><span class="s2">' for </span><span class="si">#{</span><span class="n">payload</span><span class="o">[</span><span class="s1">'deploy_user'</span><span class="o">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">#{</span><span class="n">payload</span><span class="o">[</span><span class="s1">'environment'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span>
@@ -197,7 +198,7 @@ the output. First, let’s complete our <code>process_deployment</code> method:<
 
 <p>Finally, we’ll simulate storing the status information as console output:</p>
 
-<pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">update_deployment_status</span>
+<pre><code class="language-ruby"><span class="k">def</span> <span class="nf">update_deployment_status</span>
   <span class="nb">puts</span> <span class="s2">"Deployment status for </span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2"> is </span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'state'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">end</span></code></pre>
 

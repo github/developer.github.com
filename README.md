@@ -6,7 +6,7 @@ All submissions are welcome. To submit a change, fork this repo, commit your cha
 
 ## Setup
 
-Ruby 1.9 is required to build the site.
+Ruby 2.2 is required to build the site.
 
 Get the nanoc gem, plus kramdown for Markdown parsing:
 

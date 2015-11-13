@@ -133,15 +133,6 @@ $ bundle exec nanoc view
 $ open http://localhost:3000
 ```
 
-Compilation times got you down?  Use `autocompile`!
-
-```sh
-$ bundle exec nanoc autocompile
-```
-
-This starts a web server too, so there's no need to run `nanoc view`.
-One thing: remember to add trailing slashes to all nanoc links!
-
 ## Deploy
 
 ```sh

@@ -1,6 +1,6 @@
 # developer.github.com
 
-This is a GitHub API resource built with [nanoc][nanoc].
+This is a GitHub API resource built with [Nanoc][nanoc].
 
 All submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](http://help.github.com/send-pull-requests/).
 
@@ -8,19 +8,19 @@ All submissions are welcome. To submit a change, fork this repo, commit your cha
 
 Ruby 2.2 is required to build the site.
 
-Get the nanoc gem, plus kramdown for Markdown parsing:
+Get the Nanoc gem, plus kramdown for Markdown parsing:
 
 ```sh
 $ bundle install
 ```
 
-You can see the available commands with nanoc:
+You can see the available commands with Nanoc:
 
 ```sh
 $ bundle exec nanoc -h
 ```
 
-Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about nanoc.
+Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about Nanoc.
 
 [nanoc]: http://nanoc.ws/
 

@@ -5,7 +5,7 @@ class SearchFilter < Nanoc::Filter
   identifier :search
   type :text
 
-  $search_file_path = File.join(Dir.pwd, "static", "search-index.json")
+  $search_file_path = File.join(Dir.pwd, "assets", "search-index.json")
   $search_file_contents = { :pages => [] }
 
   sidebar = File.open(File.join(Dir.pwd, "layouts", "sidebar.html"))

@@ -82,7 +82,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 4. In your repository's right sidebar, click **Settings**.
    ![Settings tab](https://github-images.s3.amazonaws.com/help/repository/repo-actions-settings.png)
 3. In the sidebar, click **Deploy Keys**.
-   ![Deploy Keys section](/images/deploy-keys.png)
+   ![Deploy Keys section](/assets/images/deploy-keys.png)
 3. Click **Add deploy key**. Paste your public key in and submit.
    ![Add Deploy Key button](https://github-images.s3.amazonaws.com/help/repository/repo-deploy-key.png)
 

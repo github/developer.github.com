@@ -9,3 +9,10 @@ echo "==> Installing gem dependencies…"
 bundle check --path vendor/cache 2>&1 || {
   bundle install --path vendor/cache
 }
+
+echo "==> Installing npm dependencies…"
+if [ "$RACK_ENV" = "production" ]; then
+  npm install --production
+else
+  npm install
+fi

@@ -21,6 +21,19 @@ export RBENV_VERSION="2.2.3"
 export RUBYLIB=
 export RUBYOPT=
 
+if [ -d /usr/local/share/nodenv ]; then
+  export NODENV_ROOT=/usr/local/share/nodenv
+  export PATH=/usr/local/share/nodenv/bin:/usr/local/share/nodenv/shims:$PATH
+  export NODENV_VERSION="v0.10.21"
+  export NPM_VERSION="2.8.3"
+fi
+
+echo "==> Fetching config..."
+echo "NodeJS version:    ${NODENV_VERSION}"
+echo "NPM version:       ${NPM_VERSION}"
+echo "PATH:              ${PATH}"
+echo ""
+
 # bootstrap gem environment changes
 cd "$RACK_ROOT"
 echo 'Bootstrapping gems...'

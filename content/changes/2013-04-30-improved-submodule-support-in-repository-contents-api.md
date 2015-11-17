@@ -7,7 +7,7 @@ author_name: jasonrudolph
 
 When you view a repository with a submodule on github.com, you get useful links and information for the submodule.
 
-[![Repository Contents with Submodule](/images/posts/submodule-links.png)][screenshot]
+[![Repository Contents with Submodule](/assets/images/posts/submodule-links.png)][screenshot]
 
 Today we're making that data available in the [Repository Contents API][docs].
 
@@ -35,4 +35,4 @@ If you have any questions or feedback, please drop us a line at
 [support@github.com](mailto:support@github.com?subject=Submodules in Repository Contents API).
 
 [docs]: /v3/repos/contents/#get-contents
-[screenshot]: /images/posts/submodule-links.png
+[screenshot]: /assets/images/posts/submodule-links.png

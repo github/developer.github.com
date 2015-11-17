@@ -3,13 +3,23 @@ require 'tmpdir'
 
 task :default => [:test]
 
-desc "Compile the site"
-task :compile do
-  `nanoc compile`
+desc 'Builds the site'
+task :build do
+  if ENV['RACK_ENV'] == 'test'
+    begin
+      sh 'node_modules/gulp/bin/gulp.js build > build.txt'
+    rescue StandardError => e
+      puts 'uh oh'
+      $stderr.puts `cat build.txt`
+      raise e
+    end
+  else
+    sh 'node_modules/gulp/bin/gulp.js build'
+  end
 end
 
 desc "Test the output"
-task :test => [:remove_tmp_dir, :remove_output_dir, :compile, :run_proofer]
+task :test => [:remove_tmp_dir, :remove_output_dir, :build, :run_proofer]
 
 desc "Run the HTML-Proofer"
 task :run_proofer do
@@ -51,7 +61,7 @@ def commit_message(no_commit_msg = false)
 end
 
 desc "Publish to http://developer.github.com"
-task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :compile] do |t, args|
+task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :build] do |t, args|
   message = commit_message(args[:no_commit_msg])
 
   Dir.mktmpdir do |tmp|

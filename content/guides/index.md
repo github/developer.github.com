@@ -15,4 +15,4 @@ stored and documented in our public
 
 Feel free to fork, clone, and improve these guides.
 
-![The Professorcat](/images/electrocat.png)
+![The Professorcat](/assets/images/electrocat.png)

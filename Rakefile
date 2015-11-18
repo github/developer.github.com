@@ -60,6 +60,12 @@ def commit_message(no_commit_msg = false)
   mesg.gsub(/'/, '') # Allow this to be handed off via -m '#{message}'
 end
 
+namespace :assets do
+  task :precompile => [:compile] do
+    sh 'mv output _site/'
+  end
+end
+
 desc "Publish to http://developer.github.com"
 task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :build] do |t, args|
   message = commit_message(args[:no_commit_msg])

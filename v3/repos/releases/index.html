@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -54,18 +56,18 @@
 <h1 id="releases">Releases</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-releases-for-a-repository">List releases for a repository</a></li>
-  <li><a href="#get-a-single-release">Get a single release</a></li>
-  <li><a href="#get-the-latest-release">Get the latest release</a></li>
-  <li><a href="#get-a-release-by-tag-name">Get a release by tag name</a></li>
-  <li><a href="#create-a-release">Create a release</a></li>
-  <li><a href="#edit-a-release">Edit a release</a></li>
-  <li><a href="#delete-a-release">Delete a release</a></li>
-  <li><a href="#list-assets-for-a-release">List assets for a release</a></li>
-  <li><a href="#upload-a-release-asset">Upload a release asset</a></li>
-  <li><a href="#get-a-single-release-asset">Get a single release asset</a></li>
-  <li><a href="#edit-a-release-asset">Edit a release asset</a></li>
-  <li><a href="#delete-a-release-asset">Delete a release asset</a></li>
+  <li><a href="#list-releases-for-a-repository" id="markdown-toc-list-releases-for-a-repository">List releases for a repository</a></li>
+  <li><a href="#get-a-single-release" id="markdown-toc-get-a-single-release">Get a single release</a></li>
+  <li><a href="#get-the-latest-release" id="markdown-toc-get-the-latest-release">Get the latest release</a></li>
+  <li><a href="#get-a-release-by-tag-name" id="markdown-toc-get-a-release-by-tag-name">Get a release by tag name</a></li>
+  <li><a href="#create-a-release" id="markdown-toc-create-a-release">Create a release</a></li>
+  <li><a href="#edit-a-release" id="markdown-toc-edit-a-release">Edit a release</a></li>
+  <li><a href="#delete-a-release" id="markdown-toc-delete-a-release">Delete a release</a></li>
+  <li><a href="#list-assets-for-a-release" id="markdown-toc-list-assets-for-a-release">List assets for a release</a></li>
+  <li><a href="#upload-a-release-asset" id="markdown-toc-upload-a-release-asset">Upload a release asset</a></li>
+  <li><a href="#get-a-single-release-asset" id="markdown-toc-get-a-single-release-asset">Get a single release asset</a></li>
+  <li><a href="#edit-a-release-asset" id="markdown-toc-edit-a-release-asset">Edit a release asset</a></li>
+  <li><a href="#delete-a-release-asset" id="markdown-toc-delete-a-release-asset">Delete a release asset</a></li>
 </ul>
 
 <h2 id="list-releases-for-a-repository">List releases for a repository</h2>
@@ -92,7 +94,7 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
     <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
@@ -128,7 +130,7 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
       <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"assets"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"assets"</span><span class="err">:</span> <span class="p">[</span>
       <span class="p">{</span>
         <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
         <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
@@ -184,42 +186,42 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"assets_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
-  <span class="s2">"upload_url"</span><span class="p">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
-  <span class="s2">"tarball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"zipball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"tag_name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"target_commitish"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
-  <span class="s2">"draft"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"prerelease"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"published_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"assets_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+  <span class="s2">"upload_url"</span><span class="err">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
+  <span class="s2">"tarball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"zipball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"tag_name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="err">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"published_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"assets"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"assets"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
       <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
@@ -268,42 +270,42 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"assets_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
-  <span class="s2">"upload_url"</span><span class="p">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
-  <span class="s2">"tarball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"zipball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"tag_name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"target_commitish"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
-  <span class="s2">"draft"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"prerelease"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"published_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"assets_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+  <span class="s2">"upload_url"</span><span class="err">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
+  <span class="s2">"tarball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"zipball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"tag_name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="err">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"published_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"assets"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"assets"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
       <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
@@ -352,42 +354,42 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"assets_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
-  <span class="s2">"upload_url"</span><span class="p">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
-  <span class="s2">"tarball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"zipball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"tag_name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"target_commitish"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
-  <span class="s2">"draft"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"prerelease"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"published_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"assets_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+  <span class="s2">"upload_url"</span><span class="err">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
+  <span class="s2">"tarball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"zipball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"tag_name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="err">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"published_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"assets"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"assets"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
       <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
@@ -481,13 +483,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h4 id="example">Example</h4>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"tag_name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"target_commitish"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
-  <span class="s2">"draft"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"prerelease"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"tag_name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="err">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="err">:</span> <span class="kc">false</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-4">Response</h3>
@@ -497,42 +499,42 @@ Location: https://api.github.com/repos/octocat/Hello-World/releases/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"assets_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
-  <span class="s2">"upload_url"</span><span class="p">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
-  <span class="s2">"tarball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"zipball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"tag_name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"target_commitish"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
-  <span class="s2">"draft"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"prerelease"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"published_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"assets_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+  <span class="s2">"upload_url"</span><span class="err">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
+  <span class="s2">"tarball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"zipball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"tag_name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="err">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"published_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"assets"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"assets"</span><span class="err">:</span> <span class="p">[</span>
 
   <span class="p">]</span>
 <span class="p">}</span></code></pre>
@@ -592,13 +594,13 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h4 id="example-1">Example</h4>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"tag_name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"target_commitish"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
-  <span class="s2">"draft"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"prerelease"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"tag_name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="err">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="err">:</span> <span class="kc">false</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-5">Response</h3>
@@ -607,42 +609,42 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"assets_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
-  <span class="s2">"upload_url"</span><span class="p">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
-  <span class="s2">"tarball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"zipball_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"tag_name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"target_commitish"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
-  <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
-  <span class="s2">"draft"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"prerelease"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"published_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"assets_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/1/assets"</span><span class="p">,</span>
+  <span class="s2">"upload_url"</span><span class="err">:</span> <span class="s2">"https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}"</span><span class="p">,</span>
+  <span class="s2">"tarball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"zipball_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"tag_name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"target_commitish"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"v1.0.0"</span><span class="p">,</span>
+  <span class="s2">"body"</span><span class="err">:</span> <span class="s2">"Description of the release"</span><span class="p">,</span>
+  <span class="s2">"draft"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"prerelease"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"published_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"assets"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"assets"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
       <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
@@ -704,7 +706,7 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
     <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
@@ -794,36 +796,36 @@ asset’s name and label in URI query parameters.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
-  <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
-  <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"short description"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
-  <span class="s2">"content_type"</span><span class="p">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="s2">"download_count"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"uploader"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
+  <span class="s2">"browser_download_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="err">:</span> <span class="s2">"short description"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
+  <span class="s2">"content_type"</span><span class="err">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="err">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="s2">"download_count"</span><span class="err">:</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"uploader"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -855,36 +857,36 @@ location, or stream it directly if possible.  API clients should handle both a
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
-  <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
-  <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"short description"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
-  <span class="s2">"content_type"</span><span class="p">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="s2">"download_count"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"uploader"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
+  <span class="s2">"browser_download_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="err">:</span> <span class="s2">"short description"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
+  <span class="s2">"content_type"</span><span class="err">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="err">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="s2">"download_count"</span><span class="err">:</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"uploader"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -922,9 +924,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h4 id="example-2">Example</h4>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"foo-1.0.0-osx.zip"</span><span class="p">,</span>
-  <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Mac binary"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"foo-1.0.0-osx.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="err">:</span> <span class="s2">"Mac binary"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-9">Response</h3>
@@ -933,36 +935,36 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
-  <span class="s2">"browser_download_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
-  <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"short description"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
-  <span class="s2">"content_type"</span><span class="p">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="s2">"download_count"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
-  <span class="s2">"uploader"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/releases/assets/1"</span><span class="p">,</span>
+  <span class="s2">"browser_download_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/releases/download/v1.0.0/example.zip"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"example.zip"</span><span class="p">,</span>
+  <span class="s2">"label"</span><span class="err">:</span> <span class="s2">"short description"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"uploaded"</span><span class="p">,</span>
+  <span class="s2">"content_type"</span><span class="err">:</span> <span class="s2">"application/zip"</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="err">:</span> <span class="mi">1024</span><span class="p">,</span>
+  <span class="s2">"download_count"</span><span class="err">:</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2013-02-27T19:35:32Z"</span><span class="p">,</span>
+  <span class="s2">"uploader"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 

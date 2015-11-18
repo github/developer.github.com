@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -54,8 +56,8 @@
 <h1 id="configuring-your-server">Configuring Your Server</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#using-ngrok">Using ngrok</a></li>
-  <li><a href="#writing-the-server">Writing the server</a></li>
+  <li><a href="#using-ngrok" id="markdown-toc-using-ngrok">Using ngrok</a></li>
+  <li><a href="#writing-the-server" id="markdown-toc-writing-the-server">Writing the server</a></li>
 </ul>
 
 <p>Now that our webhook is ready to deliver messages, we’ll set up a basic Sinatra server
@@ -78,7 +80,7 @@ for all major operating systems.</p>
 <p>When you’re done with that, you can expose your localhost by running <code>./ngrok http 4567</code>
 on the command line. You should see a line that looks something like this:</p>
 
-<pre><code class="language-bash">Forwarding    http://7e9ea9dc.ngrok.io -&gt; 127.0.0.1:4567</code></pre>
+<pre><code class="language-bash highlight">Forwarding    http://7e9ea9dc.ngrok.io -&gt; 127.0.0.1:4567</code></pre>
 
 <p>Copy that funky <code>*.ngrok.io</code> URL! We’re now going to go <em>back</em> to the Payload
 URL and pasting this server into that field. It should look something like <code>http://7e9ea9dc.ngrok.io/payload</code>.</p>
@@ -96,7 +98,7 @@ can happily test out our code locally.</p>
 <p>Let’s set up a little Sinatra app to do something with the information. Our initial
 setup might look something like this:</p>
 
-<pre><code class="language-ruby"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/payload'</span> <span class="k">do</span>
@@ -112,7 +114,7 @@ setup might look something like this:</p>
 and create a new Issue on the repository you’re testing with. Once you create
 it, switch back to your terminal. You should see something like this in your output:</p>
 
-<pre><code class="language-bash">~/Developer/platform-samples/hooks/ruby/configuring-your-server <span class="nv">$ </span>ruby server.rb
+<pre><code class="language-bash highlight">~/Developer/platform-samples/hooks/ruby/configuring-your-server <span class="nv">$ </span>ruby server.rb
 <span class="o">==</span> Sinatra/1.4.4 has taken the stage on 4567 <span class="k">for </span>development with backup from Thin
 <span class="gp">&gt;&gt; </span>Thin web server <span class="o">(</span>v1.5.1 codename Straight Razor<span class="o">)</span>
 <span class="gp">&gt;&gt; </span>Maximum connections <span class="nb">set </span>to 1024

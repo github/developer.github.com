@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -54,23 +56,23 @@
 <h1 id="teams">Teams</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-teams">List teams</a></li>
-  <li><a href="#get-team">Get team</a></li>
-  <li><a href="#create-team">Create team</a></li>
-  <li><a href="#edit-team">Edit team</a></li>
-  <li><a href="#delete-team">Delete team</a></li>
-  <li><a href="#list-team-members">List team members</a></li>
-  <li><a href="#get-team-member">Get team member</a></li>
-  <li><a href="#add-team-member">Add team member</a></li>
-  <li><a href="#remove-team-member">Remove team member</a></li>
-  <li><a href="#get-team-membership">Get team membership</a></li>
-  <li><a href="#add-team-membership">Add team membership</a></li>
-  <li><a href="#remove-team-membership">Remove team membership</a></li>
-  <li><a href="#list-team-repos">List team repos</a></li>
-  <li><a href="#get-team-repo">Check if a team manages a repository</a></li>
-  <li><a href="#add-team-repo">Add team repository</a></li>
-  <li><a href="#remove-team-repo">Remove team repository</a></li>
-  <li><a href="#list-user-teams">List user teams</a></li>
+  <li><a href="#list-teams" id="markdown-toc-list-teams">List teams</a></li>
+  <li><a href="#get-team" id="markdown-toc-get-team">Get team</a></li>
+  <li><a href="#create-team" id="markdown-toc-create-team">Create team</a></li>
+  <li><a href="#edit-team" id="markdown-toc-edit-team">Edit team</a></li>
+  <li><a href="#delete-team" id="markdown-toc-delete-team">Delete team</a></li>
+  <li><a href="#list-team-members" id="markdown-toc-list-team-members">List team members</a></li>
+  <li><a href="#get-team-member" id="markdown-toc-get-team-member">Get team member</a></li>
+  <li><a href="#add-team-member" id="markdown-toc-add-team-member">Add team member</a></li>
+  <li><a href="#remove-team-member" id="markdown-toc-remove-team-member">Remove team member</a></li>
+  <li><a href="#get-team-membership" id="markdown-toc-get-team-membership">Get team membership</a></li>
+  <li><a href="#add-team-membership" id="markdown-toc-add-team-membership">Add team membership</a></li>
+  <li><a href="#remove-team-membership" id="markdown-toc-remove-team-membership">Remove team membership</a></li>
+  <li><a href="#list-team-repos" id="markdown-toc-list-team-repos">List team repos</a></li>
+  <li><a href="#get-team-repo" id="markdown-toc-get-team-repo">Check if a team manages a repository</a></li>
+  <li><a href="#add-team-repo" id="markdown-toc-add-team-repo">Add team repository</a></li>
+  <li><a href="#remove-team-repo" id="markdown-toc-remove-team-repo">Remove team repository</a></li>
+  <li><a href="#list-user-teams" id="markdown-toc-list-user-teams">List user teams</a></li>
 </ul>
 
 <p>All actions against teams require at a minimum an authenticated user who
@@ -90,7 +92,7 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
@@ -115,24 +117,24 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Justice League"</span><span class="p">,</span>
-  <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"justice-league"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
-  <span class="s2">"privacy"</span><span class="p">:</span> <span class="s2">"closed"</span><span class="p">,</span>
-  <span class="s2">"permission"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
-  <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
-  <span class="s2">"repositories_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span><span class="p">,</span>
-  <span class="s2">"members_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">"repos_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-  <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great organization"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Justice League"</span><span class="p">,</span>
+  <span class="s2">"slug"</span><span class="err">:</span> <span class="s2">"justice-league"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
+  <span class="s2">"privacy"</span><span class="err">:</span> <span class="s2">"closed"</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="err">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
+  <span class="s2">"repositories_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="err">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="err">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"A great organization"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -207,10 +209,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h4 id="example">Example</h4>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"new team"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"team description"</span><span class="p">,</span>
-  <span class="s2">"privacy"</span><span class="p">:</span> <span class="s2">"closed"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"new team"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"team description"</span><span class="p">,</span>
+  <span class="s2">"privacy"</span><span class="err">:</span> <span class="s2">"closed"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -219,24 +221,24 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Justice League"</span><span class="p">,</span>
-  <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"justice-league"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
-  <span class="s2">"privacy"</span><span class="p">:</span> <span class="s2">"closed"</span><span class="p">,</span>
-  <span class="s2">"permission"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
-  <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
-  <span class="s2">"repositories_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span><span class="p">,</span>
-  <span class="s2">"members_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">"repos_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-  <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great organization"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Justice League"</span><span class="p">,</span>
+  <span class="s2">"slug"</span><span class="err">:</span> <span class="s2">"justice-league"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
+  <span class="s2">"privacy"</span><span class="err">:</span> <span class="s2">"closed"</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="err">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
+  <span class="s2">"repositories_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="err">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="err">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"A great organization"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -304,10 +306,10 @@ the org that the team is associated with, or a maintainer of the team.</p>
 
 <h4 id="example-1">Example</h4>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"new team name"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"new team description"</span><span class="p">,</span>
-  <span class="s2">"privacy"</span><span class="p">:</span> <span class="s2">"closed"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"new team name"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"new team description"</span><span class="p">,</span>
+  <span class="s2">"privacy"</span><span class="err">:</span> <span class="s2">"closed"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -316,24 +318,24 @@ the org that the team is associated with, or a maintainer of the team.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Justice League"</span><span class="p">,</span>
-  <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"justice-league"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
-  <span class="s2">"privacy"</span><span class="p">:</span> <span class="s2">"closed"</span><span class="p">,</span>
-  <span class="s2">"permission"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
-  <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
-  <span class="s2">"repositories_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span><span class="p">,</span>
-  <span class="s2">"members_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">"repos_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-  <span class="s2">"organization"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great organization"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Justice League"</span><span class="p">,</span>
+  <span class="s2">"slug"</span><span class="err">:</span> <span class="s2">"justice-league"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
+  <span class="s2">"privacy"</span><span class="err">:</span> <span class="s2">"closed"</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="err">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
+  <span class="s2">"repositories_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span><span class="p">,</span>
+  <span class="s2">"members_count"</span><span class="err">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"repos_count"</span><span class="err">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s2">"organization"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"github"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"A great organization"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -404,7 +406,7 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -502,9 +504,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Cannot add an organization as a member."</span><span class="p">,</span>
-  <span class="s2">"errors"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"Cannot add an organization as a member."</span><span class="p">,</span>
+  <span class="s2">"errors"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"org"</span><span class="p">,</span>
       <span class="s2">"field"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
@@ -520,9 +522,9 @@ one other team on the same organization, you will get this:</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"User isn't a member of this organization. Please invite them first."</span><span class="p">,</span>
-  <span class="s2">"errors"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"User isn't a member of this organization. Please invite them first."</span><span class="p">,</span>
+  <span class="s2">"errors"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"unaffiliated"</span><span class="p">,</span>
       <span class="s2">"field"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
@@ -575,10 +577,10 @@ authenticated user.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
-  <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"member"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
+  <span class="s2">"role"</span><span class="err">:</span> <span class="s2">"member"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"active"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-if-user-has-a-pending-membership-with-team">Response if user has a pending membership with team</h3>
@@ -587,10 +589,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
-  <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"member"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"pending"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
+  <span class="s2">"role"</span><span class="err">:</span> <span class="s2">"member"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"pending"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-if-user-has-no-membership-with-team">Response if user has no membership with team</h3>
@@ -658,10 +660,10 @@ and a team, the authenticated user must be an organization owner.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
-  <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"member"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"active"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
+  <span class="s2">"role"</span><span class="err">:</span> <span class="s2">"member"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"active"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-if-users-membership-with-team-is-now-pending">Response if user’s membership with team is now pending</h3>
@@ -670,10 +672,10 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
-  <span class="s2">"role"</span><span class="p">:</span> <span class="s2">"member"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"pending"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/memberships/octocat"</span><span class="p">,</span>
+  <span class="s2">"role"</span><span class="err">:</span> <span class="s2">"member"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"pending"</span>
 <span class="p">}</span></code></pre>
 
 <p>If you attempt to add an organization to a team, you will get this:</p>
@@ -682,9 +684,9 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Cannot add an organization as a member."</span><span class="p">,</span>
-  <span class="s2">"errors"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"Cannot add an organization as a member."</span><span class="p">,</span>
+  <span class="s2">"errors"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"org"</span><span class="p">,</span>
       <span class="s2">"field"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
@@ -730,7 +732,7 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1296269</span><span class="p">,</span>
     <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
@@ -752,72 +754,72 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
       <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
-    <span class="s2">"full_name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
-    <span class="s2">"private"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"fork"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
-    <span class="s2">"archive_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"</span><span class="p">,</span>
-    <span class="s2">"assignees_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/assignees{/user}"</span><span class="p">,</span>
-    <span class="s2">"blobs_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}"</span><span class="p">,</span>
-    <span class="s2">"branches_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/branches{/branch}"</span><span class="p">,</span>
-    <span class="s2">"clone_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
-    <span class="s2">"collaborators_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}"</span><span class="p">,</span>
-    <span class="s2">"comments_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/comments{/number}"</span><span class="p">,</span>
-    <span class="s2">"commits_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/commits{/sha}"</span><span class="p">,</span>
-    <span class="s2">"compare_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}"</span><span class="p">,</span>
-    <span class="s2">"contents_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/contents/{+path}"</span><span class="p">,</span>
-    <span class="s2">"contributors_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/contributors"</span><span class="p">,</span>
-    <span class="s2">"downloads_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/downloads"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/events"</span><span class="p">,</span>
-    <span class="s2">"forks_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/forks"</span><span class="p">,</span>
-    <span class="s2">"git_commits_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/commits{/sha}"</span><span class="p">,</span>
-    <span class="s2">"git_refs_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/refs{/sha}"</span><span class="p">,</span>
-    <span class="s2">"git_tags_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/tags{/sha}"</span><span class="p">,</span>
-    <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"git:github.com/octocat/Hello-World.git"</span><span class="p">,</span>
-    <span class="s2">"hooks_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/hooks"</span><span class="p">,</span>
-    <span class="s2">"issue_comment_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues/comments{/number}"</span><span class="p">,</span>
-    <span class="s2">"issue_events_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues/events{/number}"</span><span class="p">,</span>
-    <span class="s2">"issues_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues{/number}"</span><span class="p">,</span>
-    <span class="s2">"keys_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/keys{/key_id}"</span><span class="p">,</span>
-    <span class="s2">"labels_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/labels{/name}"</span><span class="p">,</span>
-    <span class="s2">"languages_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/languages"</span><span class="p">,</span>
-    <span class="s2">"merges_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/merges"</span><span class="p">,</span>
-    <span class="s2">"milestones_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/milestones{/number}"</span><span class="p">,</span>
-    <span class="s2">"mirror_url"</span><span class="p">:</span> <span class="s2">"git:git.example.com/octocat/Hello-World"</span><span class="p">,</span>
-    <span class="s2">"notifications_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/notifications{?since, all, participating}"</span><span class="p">,</span>
-    <span class="s2">"pulls_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/pulls{/number}"</span><span class="p">,</span>
-    <span class="s2">"releases_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/releases{/id}"</span><span class="p">,</span>
-    <span class="s2">"ssh_url"</span><span class="p">:</span> <span class="s2">"git@github.com:octocat/Hello-World.git"</span><span class="p">,</span>
-    <span class="s2">"stargazers_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/stargazers"</span><span class="p">,</span>
-    <span class="s2">"statuses_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/statuses/{sha}"</span><span class="p">,</span>
-    <span class="s2">"subscribers_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/subscribers"</span><span class="p">,</span>
-    <span class="s2">"subscription_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/subscription"</span><span class="p">,</span>
-    <span class="s2">"svn_url"</span><span class="p">:</span> <span class="s2">"https://svn.github.com/octocat/Hello-World"</span><span class="p">,</span>
-    <span class="s2">"tags_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/tags"</span><span class="p">,</span>
-    <span class="s2">"teams_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/teams"</span><span class="p">,</span>
-    <span class="s2">"trees_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}"</span><span class="p">,</span>
-    <span class="s2">"homepage"</span><span class="p">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
-    <span class="s2">"language"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="s2">"forks_count"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
-    <span class="s2">"stargazers_count"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-    <span class="s2">"watchers_count"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-    <span class="s2">"size"</span><span class="p">:</span> <span class="mi">108</span><span class="p">,</span>
-    <span class="s2">"default_branch"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-    <span class="s2">"open_issues_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"has_issues"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"has_wiki"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"has_pages"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"has_downloads"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"pushed_at"</span><span class="p">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-01-26T19:14:43Z"</span><span class="p">,</span>
-    <span class="s2">"permissions"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"admin"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"push"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"pull"</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+    <span class="s2">"full_name"</span><span class="err">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+    <span class="s2">"private"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"fork"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"archive_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"</span><span class="p">,</span>
+    <span class="s2">"assignees_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/assignees{/user}"</span><span class="p">,</span>
+    <span class="s2">"blobs_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}"</span><span class="p">,</span>
+    <span class="s2">"branches_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/branches{/branch}"</span><span class="p">,</span>
+    <span class="s2">"clone_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"collaborators_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}"</span><span class="p">,</span>
+    <span class="s2">"comments_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/comments{/number}"</span><span class="p">,</span>
+    <span class="s2">"commits_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/commits{/sha}"</span><span class="p">,</span>
+    <span class="s2">"compare_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}"</span><span class="p">,</span>
+    <span class="s2">"contents_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/contents/{+path}"</span><span class="p">,</span>
+    <span class="s2">"contributors_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/contributors"</span><span class="p">,</span>
+    <span class="s2">"downloads_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/downloads"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/events"</span><span class="p">,</span>
+    <span class="s2">"forks_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/forks"</span><span class="p">,</span>
+    <span class="s2">"git_commits_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/commits{/sha}"</span><span class="p">,</span>
+    <span class="s2">"git_refs_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/refs{/sha}"</span><span class="p">,</span>
+    <span class="s2">"git_tags_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/tags{/sha}"</span><span class="p">,</span>
+    <span class="s2">"git_url"</span><span class="err">:</span> <span class="s2">"git:github.com/octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"hooks_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/hooks"</span><span class="p">,</span>
+    <span class="s2">"issue_comment_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues/comments{/number}"</span><span class="p">,</span>
+    <span class="s2">"issue_events_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues/events{/number}"</span><span class="p">,</span>
+    <span class="s2">"issues_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues{/number}"</span><span class="p">,</span>
+    <span class="s2">"keys_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/keys{/key_id}"</span><span class="p">,</span>
+    <span class="s2">"labels_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/labels{/name}"</span><span class="p">,</span>
+    <span class="s2">"languages_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/languages"</span><span class="p">,</span>
+    <span class="s2">"merges_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/merges"</span><span class="p">,</span>
+    <span class="s2">"milestones_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/milestones{/number}"</span><span class="p">,</span>
+    <span class="s2">"mirror_url"</span><span class="err">:</span> <span class="s2">"git:git.example.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"notifications_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/notifications{?since, all, participating}"</span><span class="p">,</span>
+    <span class="s2">"pulls_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/pulls{/number}"</span><span class="p">,</span>
+    <span class="s2">"releases_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/releases{/id}"</span><span class="p">,</span>
+    <span class="s2">"ssh_url"</span><span class="err">:</span> <span class="s2">"git@github.com:octocat/Hello-World.git"</span><span class="p">,</span>
+    <span class="s2">"stargazers_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/stargazers"</span><span class="p">,</span>
+    <span class="s2">"statuses_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/statuses/{sha}"</span><span class="p">,</span>
+    <span class="s2">"subscribers_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/subscribers"</span><span class="p">,</span>
+    <span class="s2">"subscription_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/subscription"</span><span class="p">,</span>
+    <span class="s2">"svn_url"</span><span class="err">:</span> <span class="s2">"https://svn.github.com/octocat/Hello-World"</span><span class="p">,</span>
+    <span class="s2">"tags_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/tags"</span><span class="p">,</span>
+    <span class="s2">"teams_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/teams"</span><span class="p">,</span>
+    <span class="s2">"trees_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}"</span><span class="p">,</span>
+    <span class="s2">"homepage"</span><span class="err">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="err">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"forks_count"</span><span class="err">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">"stargazers_count"</span><span class="err">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"watchers_count"</span><span class="err">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"size"</span><span class="err">:</span> <span class="mi">108</span><span class="p">,</span>
+    <span class="s2">"default_branch"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+    <span class="s2">"open_issues_count"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"has_issues"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"has_wiki"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"has_pages"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"has_downloads"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"pushed_at"</span><span class="err">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2011-01-26T19:14:43Z"</span><span class="p">,</span>
+    <span class="s2">"permissions"</span><span class="err">:</span> <span class="p">{</span>
+      <span class="s2">"admin"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"push"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"pull"</span><span class="err">:</span> <span class="kc">true</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
@@ -864,93 +866,93 @@ permissions the team grants on it, by passing the following custom
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1296269</span><span class="p">,</span>
-  <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1296269</span><span class="p">,</span>
+  <span class="s2">"owner"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
-  <span class="s2">"full_name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
-  <span class="s2">"private"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"fork"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
-  <span class="s2">"archive_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"</span><span class="p">,</span>
-  <span class="s2">"assignees_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/assignees{/user}"</span><span class="p">,</span>
-  <span class="s2">"blobs_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}"</span><span class="p">,</span>
-  <span class="s2">"branches_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/branches{/branch}"</span><span class="p">,</span>
-  <span class="s2">"clone_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
-  <span class="s2">"collaborators_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}"</span><span class="p">,</span>
-  <span class="s2">"comments_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/comments{/number}"</span><span class="p">,</span>
-  <span class="s2">"commits_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/commits{/sha}"</span><span class="p">,</span>
-  <span class="s2">"compare_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}"</span><span class="p">,</span>
-  <span class="s2">"contents_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/contents/{+path}"</span><span class="p">,</span>
-  <span class="s2">"contributors_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/contributors"</span><span class="p">,</span>
-  <span class="s2">"downloads_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/downloads"</span><span class="p">,</span>
-  <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/events"</span><span class="p">,</span>
-  <span class="s2">"forks_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/forks"</span><span class="p">,</span>
-  <span class="s2">"git_commits_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/commits{/sha}"</span><span class="p">,</span>
-  <span class="s2">"git_refs_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/refs{/sha}"</span><span class="p">,</span>
-  <span class="s2">"git_tags_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/tags{/sha}"</span><span class="p">,</span>
-  <span class="s2">"git_url"</span><span class="p">:</span> <span class="s2">"git:github.com/octocat/Hello-World.git"</span><span class="p">,</span>
-  <span class="s2">"hooks_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/hooks"</span><span class="p">,</span>
-  <span class="s2">"issue_comment_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues/comments{/number}"</span><span class="p">,</span>
-  <span class="s2">"issue_events_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues/events{/number}"</span><span class="p">,</span>
-  <span class="s2">"issues_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues{/number}"</span><span class="p">,</span>
-  <span class="s2">"keys_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/keys{/key_id}"</span><span class="p">,</span>
-  <span class="s2">"labels_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/labels{/name}"</span><span class="p">,</span>
-  <span class="s2">"languages_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/languages"</span><span class="p">,</span>
-  <span class="s2">"merges_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/merges"</span><span class="p">,</span>
-  <span class="s2">"milestones_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/milestones{/number}"</span><span class="p">,</span>
-  <span class="s2">"mirror_url"</span><span class="p">:</span> <span class="s2">"git:git.example.com/octocat/Hello-World"</span><span class="p">,</span>
-  <span class="s2">"notifications_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/notifications{?since, all, participating}"</span><span class="p">,</span>
-  <span class="s2">"pulls_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/pulls{/number}"</span><span class="p">,</span>
-  <span class="s2">"releases_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/releases{/id}"</span><span class="p">,</span>
-  <span class="s2">"ssh_url"</span><span class="p">:</span> <span class="s2">"git@github.com:octocat/Hello-World.git"</span><span class="p">,</span>
-  <span class="s2">"stargazers_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/stargazers"</span><span class="p">,</span>
-  <span class="s2">"statuses_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/statuses/{sha}"</span><span class="p">,</span>
-  <span class="s2">"subscribers_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/subscribers"</span><span class="p">,</span>
-  <span class="s2">"subscription_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/subscription"</span><span class="p">,</span>
-  <span class="s2">"svn_url"</span><span class="p">:</span> <span class="s2">"https://svn.github.com/octocat/Hello-World"</span><span class="p">,</span>
-  <span class="s2">"tags_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/tags"</span><span class="p">,</span>
-  <span class="s2">"teams_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/teams"</span><span class="p">,</span>
-  <span class="s2">"trees_url"</span><span class="p">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}"</span><span class="p">,</span>
-  <span class="s2">"homepage"</span><span class="p">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
-  <span class="s2">"language"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-  <span class="s2">"forks_count"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
-  <span class="s2">"stargazers_count"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-  <span class="s2">"watchers_count"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="p">:</span> <span class="mi">108</span><span class="p">,</span>
-  <span class="s2">"default_branch"</span><span class="p">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"open_issues_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"has_issues"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"has_wiki"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"has_pages"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"has_downloads"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"pushed_at"</span><span class="p">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2011-01-26T19:14:43Z"</span><span class="p">,</span>
-  <span class="s2">"permissions"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"admin"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"push"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"pull"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Hello-World"</span><span class="p">,</span>
+  <span class="s2">"full_name"</span><span class="err">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"This your first repo!"</span><span class="p">,</span>
+  <span class="s2">"private"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"fork"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"archive_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"</span><span class="p">,</span>
+  <span class="s2">"assignees_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/assignees{/user}"</span><span class="p">,</span>
+  <span class="s2">"blobs_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}"</span><span class="p">,</span>
+  <span class="s2">"branches_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/branches{/branch}"</span><span class="p">,</span>
+  <span class="s2">"clone_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World.git"</span><span class="p">,</span>
+  <span class="s2">"collaborators_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}"</span><span class="p">,</span>
+  <span class="s2">"comments_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/comments{/number}"</span><span class="p">,</span>
+  <span class="s2">"commits_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/commits{/sha}"</span><span class="p">,</span>
+  <span class="s2">"compare_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}"</span><span class="p">,</span>
+  <span class="s2">"contents_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/contents/{+path}"</span><span class="p">,</span>
+  <span class="s2">"contributors_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/contributors"</span><span class="p">,</span>
+  <span class="s2">"downloads_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/downloads"</span><span class="p">,</span>
+  <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/events"</span><span class="p">,</span>
+  <span class="s2">"forks_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/forks"</span><span class="p">,</span>
+  <span class="s2">"git_commits_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/commits{/sha}"</span><span class="p">,</span>
+  <span class="s2">"git_refs_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/refs{/sha}"</span><span class="p">,</span>
+  <span class="s2">"git_tags_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/tags{/sha}"</span><span class="p">,</span>
+  <span class="s2">"git_url"</span><span class="err">:</span> <span class="s2">"git:github.com/octocat/Hello-World.git"</span><span class="p">,</span>
+  <span class="s2">"hooks_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/hooks"</span><span class="p">,</span>
+  <span class="s2">"issue_comment_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues/comments{/number}"</span><span class="p">,</span>
+  <span class="s2">"issue_events_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues/events{/number}"</span><span class="p">,</span>
+  <span class="s2">"issues_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/issues{/number}"</span><span class="p">,</span>
+  <span class="s2">"keys_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/keys{/key_id}"</span><span class="p">,</span>
+  <span class="s2">"labels_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/labels{/name}"</span><span class="p">,</span>
+  <span class="s2">"languages_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/languages"</span><span class="p">,</span>
+  <span class="s2">"merges_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/merges"</span><span class="p">,</span>
+  <span class="s2">"milestones_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/milestones{/number}"</span><span class="p">,</span>
+  <span class="s2">"mirror_url"</span><span class="err">:</span> <span class="s2">"git:git.example.com/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"notifications_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/notifications{?since, all, participating}"</span><span class="p">,</span>
+  <span class="s2">"pulls_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/pulls{/number}"</span><span class="p">,</span>
+  <span class="s2">"releases_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/releases{/id}"</span><span class="p">,</span>
+  <span class="s2">"ssh_url"</span><span class="err">:</span> <span class="s2">"git@github.com:octocat/Hello-World.git"</span><span class="p">,</span>
+  <span class="s2">"stargazers_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/stargazers"</span><span class="p">,</span>
+  <span class="s2">"statuses_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/statuses/{sha}"</span><span class="p">,</span>
+  <span class="s2">"subscribers_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/subscribers"</span><span class="p">,</span>
+  <span class="s2">"subscription_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/subscription"</span><span class="p">,</span>
+  <span class="s2">"svn_url"</span><span class="err">:</span> <span class="s2">"https://svn.github.com/octocat/Hello-World"</span><span class="p">,</span>
+  <span class="s2">"tags_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/tags"</span><span class="p">,</span>
+  <span class="s2">"teams_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/teams"</span><span class="p">,</span>
+  <span class="s2">"trees_url"</span><span class="err">:</span> <span class="s2">"http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}"</span><span class="p">,</span>
+  <span class="s2">"homepage"</span><span class="err">:</span> <span class="s2">"https://github.com"</span><span class="p">,</span>
+  <span class="s2">"language"</span><span class="err">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"forks_count"</span><span class="err">:</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="s2">"stargazers_count"</span><span class="err">:</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="s2">"watchers_count"</span><span class="err">:</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="s2">"size"</span><span class="err">:</span> <span class="mi">108</span><span class="p">,</span>
+  <span class="s2">"default_branch"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
+  <span class="s2">"open_issues_count"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"has_issues"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_wiki"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"has_pages"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="s2">"has_downloads"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="s2">"pushed_at"</span><span class="err">:</span> <span class="s2">"2011-01-26T19:06:43Z"</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2011-01-26T19:01:12Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2011-01-26T19:14:43Z"</span><span class="p">,</span>
+  <span class="s2">"permissions"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"admin"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"push"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"pull"</span><span class="err">:</span> <span class="kc">true</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 
@@ -1015,9 +1017,9 @@ organization, you get:</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Validation Failed"</span><span class="p">,</span>
-  <span class="s2">"errors"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"Validation Failed"</span><span class="p">,</span>
+  <span class="s2">"errors"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"not_owned"</span><span class="p">,</span>
       <span class="s2">"field"</span><span class="p">:</span> <span class="s2">"repository"</span><span class="p">,</span>
@@ -1058,7 +1060,7 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>

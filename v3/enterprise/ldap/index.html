@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -54,10 +56,10 @@
 <h1 id="ldap">LDAP</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#update-ldap-mapping-for-a-user">Update LDAP mapping for a user</a></li>
-  <li><a href="#sync-ldap-mapping-for-a-user">Sync LDAP mapping for a user</a></li>
-  <li><a href="#update-ldap-mapping-for-a-team">Update LDAP mapping for a team</a></li>
-  <li><a href="#sync-ldap-mapping-for-a-team">Sync LDAP mapping for a team</a></li>
+  <li><a href="#update-ldap-mapping-for-a-user" id="markdown-toc-update-ldap-mapping-for-a-user">Update LDAP mapping for a user</a></li>
+  <li><a href="#sync-ldap-mapping-for-a-user" id="markdown-toc-sync-ldap-mapping-for-a-user">Sync LDAP mapping for a user</a></li>
+  <li><a href="#update-ldap-mapping-for-a-team" id="markdown-toc-update-ldap-mapping-for-a-team">Update LDAP mapping for a team</a></li>
+  <li><a href="#sync-ldap-mapping-for-a-team" id="markdown-toc-sync-ldap-mapping-for-a-team">Sync LDAP mapping for a team</a></li>
 </ul>
 
 <p>You can use the LDAP API to update account relationships between a GitHub Enterprise user or team and its linked LDAP entry or queue a new synchronization.</p>
@@ -75,7 +77,7 @@
 
 <h4 id="example">Example</h4>
 
-<pre><code class="language-javascript"><span class="s1">'{"ldap_dn": "uid=asdf,ou=users,dc=github,dc=com"}'</span></code></pre>
+<pre><code class="language-javascript highlight"><span class="s1">'{"ldap_dn": "uid=asdf,ou=users,dc=github,dc=com"}'</span></code></pre>
 
 <h3 id="response">Response</h3>
 
@@ -83,25 +85,25 @@
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"ldap_dn"</span><span class="p">:</span> <span class="s2">"uid=asdf,ou=users,dc=github,dc=com"</span><span class="p">,</span>
-  <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-  <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-  <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-  <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-  <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-  <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-  <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-  <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-  <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-  <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-  <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-  <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ldap_dn"</span><span class="err">:</span> <span class="s2">"uid=asdf,ou=users,dc=github,dc=com"</span><span class="p">,</span>
+  <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+  <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+  <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+  <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+  <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+  <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+  <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+  <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+  <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+  <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+  <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+  <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+  <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="sync-ldap-mapping-for-a-user">Sync LDAP mapping for a user</h2>
@@ -121,8 +123,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"queued"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"status"</span><span class="err">:</span> <span class="s2">"queued"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="update-ldap-mapping-for-a-team">Update LDAP mapping for a team</h2>
@@ -136,7 +138,7 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h4 id="example-1">Example</h4>
 
-<pre><code class="language-javascript"><span class="s1">'{"ldap_dn": "cn=Enterprise Ops,ou=teams,dc=github,dc=com"}'</span></code></pre>
+<pre><code class="language-javascript highlight"><span class="s1">'{"ldap_dn": "cn=Enterprise Ops,ou=teams,dc=github,dc=com"}'</span></code></pre>
 
 <h3 id="response-2">Response</h3>
 
@@ -144,17 +146,17 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"ldap_dn"</span><span class="p">:</span> <span class="s2">"cn=Enterprise Ops,ou=teams,dc=github,dc=com"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Justice League"</span><span class="p">,</span>
-  <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"justice-league"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
-  <span class="s2">"privacy"</span><span class="p">:</span> <span class="s2">"closed"</span><span class="p">,</span>
-  <span class="s2">"permission"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
-  <span class="s2">"members_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
-  <span class="s2">"repositories_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"ldap_dn"</span><span class="err">:</span> <span class="s2">"cn=Enterprise Ops,ou=teams,dc=github,dc=com"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Justice League"</span><span class="p">,</span>
+  <span class="s2">"slug"</span><span class="err">:</span> <span class="s2">"justice-league"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"A great team."</span><span class="p">,</span>
+  <span class="s2">"privacy"</span><span class="err">:</span> <span class="s2">"closed"</span><span class="p">,</span>
+  <span class="s2">"permission"</span><span class="err">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+  <span class="s2">"members_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/members{/member}"</span><span class="p">,</span>
+  <span class="s2">"repositories_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/teams/1/repos"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="sync-ldap-mapping-for-a-team">Sync LDAP mapping for a team</h2>
@@ -174,8 +176,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"queued"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"status"</span><span class="err">:</span> <span class="s2">"queued"</span>
 <span class="p">}</span></code></pre>
 
     </div>

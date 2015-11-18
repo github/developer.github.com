@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -54,13 +56,13 @@
 <h1 id="oauth">OAuth</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#web-application-flow">Web Application Flow</a></li>
-  <li><a href="#non-web-application-flow">Non-Web Application Flow</a></li>
-  <li><a href="#redirect-urls">Redirect URLs</a></li>
-  <li><a href="#scopes">Scopes</a></li>
-  <li><a href="#common-errors-for-the-authorization-request">Common errors for the authorization request</a></li>
-  <li><a href="#common-errors-for-the-access-token-request">Common errors for the access token request</a></li>
-  <li><a href="#directing-users-to-review-their-access-for-an-application">Directing users to review their access for an application</a></li>
+  <li><a href="#web-application-flow" id="markdown-toc-web-application-flow">Web Application Flow</a></li>
+  <li><a href="#non-web-application-flow" id="markdown-toc-non-web-application-flow">Non-Web Application Flow</a></li>
+  <li><a href="#redirect-urls" id="markdown-toc-redirect-urls">Redirect URLs</a></li>
+  <li><a href="#scopes" id="markdown-toc-scopes">Scopes</a></li>
+  <li><a href="#common-errors-for-the-authorization-request" id="markdown-toc-common-errors-for-the-authorization-request">Common errors for the authorization request</a></li>
+  <li><a href="#common-errors-for-the-access-token-request" id="markdown-toc-common-errors-for-the-access-token-request">Common errors for the access token request</a></li>
+  <li><a href="#directing-users-to-review-their-access-for-an-application" id="markdown-toc-directing-users-to-review-their-access-for-an-application">Directing users to review their access for an application</a></li>
 </ul>
 
 <p>OAuth2 is a protocol that lets external apps request authorization to
@@ -463,10 +465,10 @@ examples only show JSON responses.</p>
 <p>If the client_id and or client_secret you pass are incorrect you will
 receive this error response.</p>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"error"</span><span class="p">:</span> <span class="s2">"incorrect_client_credentials"</span><span class="p">,</span>
-  <span class="s2">"error_description"</span><span class="p">:</span> <span class="s2">"The client_id and/or client_secret passed are incorrect."</span><span class="p">,</span>
-  <span class="s2">"error_uri"</span><span class="p">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#incorrect-client-credentials"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"error"</span><span class="err">:</span> <span class="s2">"incorrect_client_credentials"</span><span class="p">,</span>
+  <span class="s2">"error_description"</span><span class="err">:</span> <span class="s2">"The client_id and/or client_secret passed are incorrect."</span><span class="p">,</span>
+  <span class="s2">"error_uri"</span><span class="err">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#incorrect-client-credentials"</span>
 <span class="p">}</span></code></pre>
 
 <p>To solve this error, go back and make sure you have the correct
@@ -479,10 +481,10 @@ to GitHub.</p>
 <p>If you provide a redirect_uri that doesn’t match what you’ve registered
 with your application, you will receive this error message:</p>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"error"</span><span class="p">:</span> <span class="s2">"redirect_uri_mismatch"</span><span class="p">,</span>
-  <span class="s2">"error_description"</span><span class="p">:</span> <span class="s2">"The redirect_uri MUST match the registered callback URL for this application."</span><span class="p">,</span>
-  <span class="s2">"error_uri"</span><span class="p">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#redirect-uri-mismatch(2)"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"error"</span><span class="err">:</span> <span class="s2">"redirect_uri_mismatch"</span><span class="p">,</span>
+  <span class="s2">"error_description"</span><span class="err">:</span> <span class="s2">"The redirect_uri MUST match the registered callback URL for this application."</span><span class="p">,</span>
+  <span class="s2">"error_uri"</span><span class="err">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#redirect-uri-mismatch(2)"</span>
 <span class="p">}</span></code></pre>
 
 <p>To correct this error, either provide a redirect_uri that matches what
@@ -491,21 +493,21 @@ registered with your application.</p>
 
 <h3 id="bad-verification-code">Bad verification code</h3>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"add_scopes"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"add_scopes"</span><span class="err">:</span> <span class="p">[</span>
     <span class="s2">"repo"</span>
   <span class="p">],</span>
-  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"admin script"</span>
+  <span class="s2">"note"</span><span class="err">:</span> <span class="s2">"admin script"</span>
 <span class="p">}</span></code></pre>
 
 <p>If the verification code you pass is incorrect, expired, or doesn’t
 match what you received in the first request for authorization you will
 receive this error.</p>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"error"</span><span class="p">:</span> <span class="s2">"bad_verification_code"</span><span class="p">,</span>
-  <span class="s2">"error_description"</span><span class="p">:</span> <span class="s2">"The code passed is incorrect or expired."</span><span class="p">,</span>
-  <span class="s2">"error_uri"</span><span class="p">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#bad-verification-code"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"error"</span><span class="err">:</span> <span class="s2">"bad_verification_code"</span><span class="p">,</span>
+  <span class="s2">"error_description"</span><span class="err">:</span> <span class="s2">"The code passed is incorrect or expired."</span><span class="p">,</span>
+  <span class="s2">"error_uri"</span><span class="err">:</span> <span class="s2">"https://developer.github.com/v3/oauth/#bad-verification-code"</span>
 <span class="p">}</span></code></pre>
 
 <p>To solve this error, start the <a href="#redirect-users-to-request-github-access">OAuth process over from the beginning</a>

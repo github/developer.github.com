@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -57,16 +59,16 @@
 various activity streams on the site.</p>
 
 <ul id="markdown-toc">
-  <li><a href="#list-public-events">List public events</a></li>
-  <li><a href="#list-repository-events">List repository events</a></li>
-  <li><a href="#list-issue-events-for-a-repository">List issue events for a repository</a></li>
-  <li><a href="#list-public-events-for-a-network-of-repositories">List public events for a network of repositories</a></li>
-  <li><a href="#list-public-events-for-an-organization">List public events for an organization</a></li>
-  <li><a href="#list-events-that-a-user-has-received">List events that a user has received</a></li>
-  <li><a href="#list-public-events-that-a-user-has-received">List public events that a user has received</a></li>
-  <li><a href="#list-events-performed-by-a-user">List events performed by a user</a></li>
-  <li><a href="#list-public-events-performed-by-a-user">List public events performed by a user</a></li>
-  <li><a href="#list-events-for-an-organization">List events for an organization</a></li>
+  <li><a href="#list-public-events" id="markdown-toc-list-public-events">List public events</a></li>
+  <li><a href="#list-repository-events" id="markdown-toc-list-repository-events">List repository events</a></li>
+  <li><a href="#list-issue-events-for-a-repository" id="markdown-toc-list-issue-events-for-a-repository">List issue events for a repository</a></li>
+  <li><a href="#list-public-events-for-a-network-of-repositories" id="markdown-toc-list-public-events-for-a-network-of-repositories">List public events for a network of repositories</a></li>
+  <li><a href="#list-public-events-for-an-organization" id="markdown-toc-list-public-events-for-an-organization">List public events for an organization</a></li>
+  <li><a href="#list-events-that-a-user-has-received" id="markdown-toc-list-events-that-a-user-has-received">List events that a user has received</a></li>
+  <li><a href="#list-public-events-that-a-user-has-received" id="markdown-toc-list-public-events-that-a-user-has-received">List public events that a user has received</a></li>
+  <li><a href="#list-events-performed-by-a-user" id="markdown-toc-list-events-performed-by-a-user">List events performed by a user</a></li>
+  <li><a href="#list-public-events-performed-by-a-user" id="markdown-toc-list-public-events-performed-by-a-user">List public events performed by a user</a></li>
+  <li><a href="#list-events-for-an-organization" id="markdown-toc-list-events-for-an-organization">List events for an organization</a></li>
 </ul>
 
 <p>Events are optimized for polling with the “ETag” header.  If no new events have
@@ -103,7 +105,7 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Event"</span><span class="p">,</span>
     <span class="s2">"public"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -114,22 +116,22 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"octocat/Hello-World"</span><span class="p">,</span>
       <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span>
     <span class="p">},</span>
-    <span class="s2">"actor"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
+    <span class="s2">"actor"</span><span class="err">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span>
     <span class="p">},</span>
-    <span class="s2">"org"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"github"</span><span class="p">,</span>
-      <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
-      <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
+    <span class="s2">"org"</span><span class="err">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"github"</span><span class="p">,</span>
+      <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span>
+      <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span>
     <span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"12345"</span>
+    <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="s2">"12345"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 

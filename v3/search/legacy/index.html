@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -54,10 +56,10 @@
 <h1 id="legacy-search">Legacy Search</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#search-issues">Search issues</a></li>
-  <li><a href="#search-repositories">Search repositories</a></li>
-  <li><a href="#search-users">Search users</a></li>
-  <li><a href="#email-search">Email search</a></li>
+  <li><a href="#search-issues" id="markdown-toc-search-issues">Search issues</a></li>
+  <li><a href="#search-repositories" id="markdown-toc-search-repositories">Search repositories</a></li>
+  <li><a href="#search-users" id="markdown-toc-search-users">Search users</a></li>
+  <li><a href="#email-search" id="markdown-toc-email-search">Email search</a></li>
 </ul>
 
 <p>This is a listing of the Legacy Search API features from API v2 that have been ported to API
@@ -108,8 +110,8 @@ v3. There should be no changes, other than the new URL and JSON output format.</
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"issues"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"issues"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
       <span class="s2">"position"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
@@ -184,8 +186,8 @@ pages can be fetched using the <code>start_page</code> parameter.</p>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"repositories"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"repositories"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"repo"</span><span class="p">,</span>
       <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2011-09-05T11:07:54Z"</span><span class="p">,</span>
@@ -259,8 +261,8 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"users"</span><span class="p">:</span> <span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"users"</span><span class="err">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
       <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Hirotaka Kawata"</span><span class="p">,</span>
@@ -315,23 +317,23 @@ address must be left unencoded. Searches only against public email addresses
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"public_repo_count"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">"public_gist_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"followers_count"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="s2">"following_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2009-10-05T01:32:06Z"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2009-10-05T01:32:06Z"</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"monalisa octocat"</span><span class="p">,</span>
-    <span class="s2">"company"</span><span class="p">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
-    <span class="s2">"blog"</span><span class="p">:</span> <span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-    <span class="s2">"location"</span><span class="p">:</span> <span class="s2">"San Francisco"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"user"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"public_repo_count"</span><span class="err">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"public_gist_count"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"followers_count"</span><span class="err">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">"following_count"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"created"</span><span class="err">:</span> <span class="s2">"2009-10-05T01:32:06Z"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2009-10-05T01:32:06Z"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"monalisa octocat"</span><span class="p">,</span>
+    <span class="s2">"company"</span><span class="err">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
+    <span class="s2">"blog"</span><span class="err">:</span> <span class="s2">"https://github.com/blog"</span><span class="p">,</span>
+    <span class="s2">"location"</span><span class="err">:</span> <span class="s2">"San Francisco"</span><span class="p">,</span>
+    <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 

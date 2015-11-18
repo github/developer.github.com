@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -54,7 +56,7 @@
 <h1 id="admin-stats">Admin Stats</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#get-statistics">Get statistics</a></li>
+  <li><a href="#get-statistics" id="markdown-toc-get-statistics">Get statistics</a></li>
 </ul>
 
 <p>The Admin Stats API provides a variety of metrics about your installation. <em>It is only available to <a href="/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>404</code> response if they try to access it.</p>
@@ -137,60 +139,60 @@ http(s)://<em>hostname</em>/api/v3
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"repos"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_repos"</span><span class="p">:</span> <span class="mi">212</span><span class="p">,</span>
-    <span class="s2">"root_repos"</span><span class="p">:</span> <span class="mi">194</span><span class="p">,</span>
-    <span class="s2">"fork_repos"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-    <span class="s2">"org_repos"</span><span class="p">:</span> <span class="mi">51</span><span class="p">,</span>
-    <span class="s2">"total_pushes"</span><span class="p">:</span> <span class="mi">3082</span><span class="p">,</span>
-    <span class="s2">"total_wikis"</span><span class="p">:</span> <span class="mi">15</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"repos"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_repos"</span><span class="err">:</span> <span class="mi">212</span><span class="p">,</span>
+    <span class="s2">"root_repos"</span><span class="err">:</span> <span class="mi">194</span><span class="p">,</span>
+    <span class="s2">"fork_repos"</span><span class="err">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="s2">"org_repos"</span><span class="err">:</span> <span class="mi">51</span><span class="p">,</span>
+    <span class="s2">"total_pushes"</span><span class="err">:</span> <span class="mi">3082</span><span class="p">,</span>
+    <span class="s2">"total_wikis"</span><span class="err">:</span> <span class="mi">15</span>
   <span class="p">},</span>
-  <span class="s2">"hooks"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_hooks"</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
-    <span class="s2">"active_hooks"</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="s2">"inactive_hooks"</span><span class="p">:</span> <span class="mi">4</span>
+  <span class="s2">"hooks"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_hooks"</span><span class="err">:</span> <span class="mi">27</span><span class="p">,</span>
+    <span class="s2">"active_hooks"</span><span class="err">:</span> <span class="mi">23</span><span class="p">,</span>
+    <span class="s2">"inactive_hooks"</span><span class="err">:</span> <span class="mi">4</span>
   <span class="p">},</span>
-  <span class="s2">"pages"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_pages"</span><span class="p">:</span> <span class="mi">36</span>
+  <span class="s2">"pages"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_pages"</span><span class="err">:</span> <span class="mi">36</span>
   <span class="p">},</span>
-  <span class="s2">"orgs"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_orgs"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-    <span class="s2">"disabled_orgs"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">"total_teams"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-    <span class="s2">"total_team_members"</span><span class="p">:</span> <span class="mi">314</span>
+  <span class="s2">"orgs"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_orgs"</span><span class="err">:</span> <span class="mi">33</span><span class="p">,</span>
+    <span class="s2">"disabled_orgs"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"total_teams"</span><span class="err">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="s2">"total_team_members"</span><span class="err">:</span> <span class="mi">314</span>
   <span class="p">},</span>
-  <span class="s2">"users"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_users"</span><span class="p">:</span> <span class="mi">254</span><span class="p">,</span>
-    <span class="s2">"admin_users"</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
-    <span class="s2">"suspended_users"</span><span class="p">:</span> <span class="mi">21</span>
+  <span class="s2">"users"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_users"</span><span class="err">:</span> <span class="mi">254</span><span class="p">,</span>
+    <span class="s2">"admin_users"</span><span class="err">:</span> <span class="mi">45</span><span class="p">,</span>
+    <span class="s2">"suspended_users"</span><span class="err">:</span> <span class="mi">21</span>
   <span class="p">},</span>
-  <span class="s2">"pulls"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_pulls"</span><span class="p">:</span> <span class="mi">86</span><span class="p">,</span>
-    <span class="s2">"merged_pulls"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-    <span class="s2">"mergeable_pulls"</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
-    <span class="s2">"unmergeable_pulls"</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="s2">"pulls"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_pulls"</span><span class="err">:</span> <span class="mi">86</span><span class="p">,</span>
+    <span class="s2">"merged_pulls"</span><span class="err">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="s2">"mergeable_pulls"</span><span class="err">:</span> <span class="mi">21</span><span class="p">,</span>
+    <span class="s2">"unmergeable_pulls"</span><span class="err">:</span> <span class="mi">3</span>
   <span class="p">},</span>
-  <span class="s2">"issues"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_issues"</span><span class="p">:</span> <span class="mi">179</span><span class="p">,</span>
-    <span class="s2">"open_issues"</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span>
-    <span class="s2">"closed_issues"</span><span class="p">:</span> <span class="mi">96</span>
+  <span class="s2">"issues"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_issues"</span><span class="err">:</span> <span class="mi">179</span><span class="p">,</span>
+    <span class="s2">"open_issues"</span><span class="err">:</span> <span class="mi">83</span><span class="p">,</span>
+    <span class="s2">"closed_issues"</span><span class="err">:</span> <span class="mi">96</span>
   <span class="p">},</span>
-  <span class="s2">"milestones"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_milestones"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-    <span class="s2">"open_milestones"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="s2">"closed_milestones"</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"milestones"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_milestones"</span><span class="err">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">"open_milestones"</span><span class="err">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">"closed_milestones"</span><span class="err">:</span> <span class="mi">1</span>
   <span class="p">},</span>
-  <span class="s2">"gists"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_gists"</span><span class="p">:</span> <span class="mi">178</span><span class="p">,</span>
-    <span class="s2">"private_gists"</span><span class="p">:</span> <span class="mi">151</span><span class="p">,</span>
-    <span class="s2">"public_gists"</span><span class="p">:</span> <span class="mi">25</span>
+  <span class="s2">"gists"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_gists"</span><span class="err">:</span> <span class="mi">178</span><span class="p">,</span>
+    <span class="s2">"private_gists"</span><span class="err">:</span> <span class="mi">151</span><span class="p">,</span>
+    <span class="s2">"public_gists"</span><span class="err">:</span> <span class="mi">25</span>
   <span class="p">},</span>
-  <span class="s2">"comments"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"total_commit_comments"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="s2">"total_gist_comments"</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-    <span class="s2">"total_issue_comments"</span><span class="p">:</span> <span class="mi">366</span><span class="p">,</span>
-    <span class="s2">"total_pull_request_comments"</span><span class="p">:</span> <span class="mi">30</span>
+  <span class="s2">"comments"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"total_commit_comments"</span><span class="err">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">"total_gist_comments"</span><span class="err">:</span> <span class="mi">28</span><span class="p">,</span>
+    <span class="s2">"total_issue_comments"</span><span class="err">:</span> <span class="mi">366</span><span class="p">,</span>
+    <span class="s2">"total_pull_request_comments"</span><span class="err">:</span> <span class="mi">30</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre>
 

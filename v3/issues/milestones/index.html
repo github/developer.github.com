@@ -15,7 +15,9 @@
 
 
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -54,11 +56,11 @@
 <h1 id="milestones">Milestones</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-milestones-for-a-repository">List milestones for a repository</a></li>
-  <li><a href="#get-a-single-milestone">Get a single milestone</a></li>
-  <li><a href="#create-a-milestone">Create a milestone</a></li>
-  <li><a href="#update-a-milestone">Update a milestone</a></li>
-  <li><a href="#delete-a-milestone">Delete a milestone</a></li>
+  <li><a href="#list-milestones-for-a-repository" id="markdown-toc-list-milestones-for-a-repository">List milestones for a repository</a></li>
+  <li><a href="#get-a-single-milestone" id="markdown-toc-get-a-single-milestone">Get a single milestone</a></li>
+  <li><a href="#create-a-milestone" id="markdown-toc-create-a-milestone">Create a milestone</a></li>
+  <li><a href="#update-a-milestone" id="markdown-toc-update-a-milestone">Update a milestone</a></li>
+  <li><a href="#delete-a-milestone" id="markdown-toc-delete-a-milestone">Delete a milestone</a></li>
 </ul>
 
 <h2 id="list-milestones-for-a-repository">List milestones for a repository</h2>
@@ -106,7 +108,7 @@ Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">[</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
     <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/milestones/v1.0"</span><span class="p">,</span>
@@ -135,12 +137,12 @@ X-RateLimit-Remaining: 4999</code></pre>
       <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
       <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
     <span class="p">},</span>
-    <span class="s2">"open_issues"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="s2">"closed_issues"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2014-03-03T18:58:10Z"</span><span class="p">,</span>
-    <span class="s2">"closed_at"</span><span class="p">:</span> <span class="s2">"2013-02-12T13:22:01Z"</span><span class="p">,</span>
-    <span class="s2">"due_on"</span><span class="p">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
+    <span class="s2">"open_issues"</span><span class="err">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">"closed_issues"</span><span class="err">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+    <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2014-03-03T18:58:10Z"</span><span class="p">,</span>
+    <span class="s2">"closed_at"</span><span class="err">:</span> <span class="s2">"2013-02-12T13:22:01Z"</span><span class="p">,</span>
+    <span class="s2">"due_on"</span><span class="err">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
   <span class="p">}</span>
 <span class="p">]</span></code></pre>
 
@@ -155,40 +157,40 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/milestones/v1.0"</span><span class="p">,</span>
-  <span class="s2">"labels_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1/labels"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1002604</span><span class="p">,</span>
-  <span class="s2">"number"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"open"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
-  <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/milestones/v1.0"</span><span class="p">,</span>
+  <span class="s2">"labels_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1/labels"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1002604</span><span class="p">,</span>
+  <span class="s2">"number"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"open"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="err">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
+  <span class="s2">"creator"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"open_issues"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="s2">"closed_issues"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2014-03-03T18:58:10Z"</span><span class="p">,</span>
-  <span class="s2">"closed_at"</span><span class="p">:</span> <span class="s2">"2013-02-12T13:22:01Z"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="p">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
+  <span class="s2">"open_issues"</span><span class="err">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">"closed_issues"</span><span class="err">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2014-03-03T18:58:10Z"</span><span class="p">,</span>
+  <span class="s2">"closed_at"</span><span class="err">:</span> <span class="s2">"2013-02-12T13:22:01Z"</span><span class="p">,</span>
+  <span class="s2">"due_on"</span><span class="err">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="create-a-milestone">Create a milestone</h2>
@@ -234,11 +236,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h4 id="example">Example</h4>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"open"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="p">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"title"</span><span class="err">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"open"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
+  <span class="s2">"due_on"</span><span class="err">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-2">Response</h3>
@@ -248,40 +250,40 @@ Location: https://api.github.com/repos/octocat/Hello-World/milestones/1
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/milestones/v1.0"</span><span class="p">,</span>
-  <span class="s2">"labels_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1/labels"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1002604</span><span class="p">,</span>
-  <span class="s2">"number"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"open"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
-  <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/milestones/v1.0"</span><span class="p">,</span>
+  <span class="s2">"labels_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1/labels"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1002604</span><span class="p">,</span>
+  <span class="s2">"number"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"open"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="err">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
+  <span class="s2">"creator"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"open_issues"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="s2">"closed_issues"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2014-03-03T18:58:10Z"</span><span class="p">,</span>
-  <span class="s2">"closed_at"</span><span class="p">:</span> <span class="s2">"2013-02-12T13:22:01Z"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="p">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
+  <span class="s2">"open_issues"</span><span class="err">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">"closed_issues"</span><span class="err">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2014-03-03T18:58:10Z"</span><span class="p">,</span>
+  <span class="s2">"closed_at"</span><span class="err">:</span> <span class="s2">"2013-02-12T13:22:01Z"</span><span class="p">,</span>
+  <span class="s2">"due_on"</span><span class="err">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="update-a-milestone">Update a milestone</h2>
@@ -326,11 +328,11 @@ X-RateLimit-Remaining: 4999</code></pre>
 
 <h4 id="example-1">Example</h4>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"open"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="p">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"title"</span><span class="err">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"open"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
+  <span class="s2">"due_on"</span><span class="err">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
 <span class="p">}</span></code></pre>
 
 <h3 id="response-3">Response</h3>
@@ -339,40 +341,40 @@ X-RateLimit-Remaining: 4999</code></pre>
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999</code></pre>
 
-<pre class="body-response"><code class="language-javascript"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat/Hello-World/milestones/v1.0"</span><span class="p">,</span>
-  <span class="s2">"labels_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1/labels"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1002604</span><span class="p">,</span>
-  <span class="s2">"number"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"open"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
-  <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
+<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1"</span><span class="p">,</span>
+  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat/Hello-World/milestones/v1.0"</span><span class="p">,</span>
+  <span class="s2">"labels_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/milestones/1/labels"</span><span class="p">,</span>
+  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1002604</span><span class="p">,</span>
+  <span class="s2">"number"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"open"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="err">:</span> <span class="s2">"v1.0"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Tracking milestone for version 1.0"</span><span class="p">,</span>
+  <span class="s2">"creator"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
+    <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
+    <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
+    <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
+    <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
+    <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
+    <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
+    <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
+    <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
+    <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
+    <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
+    <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
+    <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span>
   <span class="p">},</span>
-  <span class="s2">"open_issues"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-  <span class="s2">"closed_issues"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2014-03-03T18:58:10Z"</span><span class="p">,</span>
-  <span class="s2">"closed_at"</span><span class="p">:</span> <span class="s2">"2013-02-12T13:22:01Z"</span><span class="p">,</span>
-  <span class="s2">"due_on"</span><span class="p">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
+  <span class="s2">"open_issues"</span><span class="err">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">"closed_issues"</span><span class="err">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2011-04-10T20:09:31Z"</span><span class="p">,</span>
+  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2014-03-03T18:58:10Z"</span><span class="p">,</span>
+  <span class="s2">"closed_at"</span><span class="err">:</span> <span class="s2">"2013-02-12T13:22:01Z"</span><span class="p">,</span>
+  <span class="s2">"due_on"</span><span class="err">:</span> <span class="s2">"2012-10-09T23:39:01Z"</span>
 <span class="p">}</span></code></pre>
 
 <h2 id="delete-a-milestone">Delete a milestone</h2>

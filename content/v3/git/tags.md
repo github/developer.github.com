@@ -35,7 +35,7 @@ would be unnecessary.
 
 Name | Type | Description
 -----|------|--------------
-`tag`|`string`| The tag
+`tag_name`|`string`| The tag
 `message`|`string`| The tag message
 `object`|`string`| The SHA of the git object this is tagging
 `type`|`string`| The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.

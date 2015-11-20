@@ -61,7 +61,7 @@ def commit_message(no_commit_msg = false)
 end
 
 namespace :assets do
-  task :precompile => [:compile] do
+  task :precompile => [:build] do
     sh 'mv output _site/'
   end
 end

@@ -8,6 +8,7 @@
 # Reset search-index by deleting it every time
 preprocess do
   File.delete("output/search-index.json") if File.exists?("output/search-index.json")
+  create_individual_blog_pages
   generate_redirects(config[:redirects])
 end
 

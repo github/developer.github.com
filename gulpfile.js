@@ -24,6 +24,7 @@ gulp.task("css", function() {
   return gulp.src([
     "assets/stylesheets/reset.css",
     "assets/stylesheets/documentation.css",
+    "assets/stylesheets/pagination.css",
     "assets/stylesheets/pygments.css",
     "assets/vendor/octicons/octicons/octicons.css"
     ])

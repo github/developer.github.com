@@ -5,7 +5,7 @@ created_at: 2014-03-03
 author_name: atmos
 ---
 
-As we [iterate on the preview][january-deployment-api-post] for the new Deployment API, we're making sure that it's friendly to work with for the apps built on top of it.
+As we [iterate on the preview][january-deployment-api-post] for the new Deployments API, we're making sure that it's friendly to work with for the apps built on top of it.
 
 ## Deserialize Deployment Payloads
 

@@ -11,8 +11,9 @@ In this section, we're going to focus on the basics of authentication. Specifica
 we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements
 the [web flow][webflow] of an application in several different ways.
 
-Note: you can download the complete source code for this project
-[from the platform-samples repo][platform samples].
+<div class="alert">
+	<p>You can download the complete source code for this project <a href="https://github.com/github/platform-samples/tree/master/api/">from the platform-samples repo</a>.</p>
+</div>
 
 ## Registering your app
 
@@ -124,9 +125,15 @@ The scopes that were granted are returned as a part of the response from
 exchanging a token.
 
     #!ruby
-    # check if we were granted user:email scope
-    scopes = JSON.parse(result)['scope'].split(',')
-    has_user_email_scope = scopes.include? 'user:email'
+    get '/callback' do
+      # ...
+      # Get the access_token using the code sample above
+      # ...
+      
+      # check if we were granted user:email scope
+      scopes = JSON.parse(result)['scope'].split(',')
+      has_user_email_scope = scopes.include? 'user:email'
+    end
 
 In our application, we're using `scopes.include?` to check if we were granted
 the `user:email` scope needed for fetching the authenticated user's private
@@ -167,6 +174,7 @@ the logged in user:
       auth_result['private_emails'] =
         JSON.parse(RestClient.get('https://api.github.com/user/emails',
                                   {:params => {:access_token => access_token}}))
+    end
 
     erb :basic, :locals => auth_result
 
@@ -182,7 +190,7 @@ We can do whatever we want with our results. In this case, we'll just dump them 
     <p>
       <% if defined? private_emails %>
       With your permission, we were also able to dig up your private email addresses:
-      <%= private_emails.join(', ') %>
+      <%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %>
       <% else %>
       Also, you're a bit secretive about your private email addresses.
       <% end %>
@@ -227,7 +235,7 @@ Create a file called _advanced_server.rb_, and paste these lines into it:
     CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
     CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 
-    use Rack::Session::Cookie, :secret => rand.to_s()
+    use Rack::Session::Pool, :cookie_only => false
 
     def authenticated?
       session[:access_token]
@@ -314,7 +322,7 @@ Next, create a file in _views_ called _advanced.erb_, and paste this markup into
         <p>
           <% if defined? private_emails %>
           With your permission, we were also able to dig up your private email addresses:
-          <%= private_emails.join(', ') %>
+          <%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %>
           <% else %>
           Also, you're a bit secretive about your private email addresses.
           <% end %>
@@ -341,7 +349,7 @@ available as a separate project.
 [webflow]: /v3/oauth/#web-application-flow
 [Sinatra]: http://www.sinatrarb.com/
 [about env vars]: http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables
-[Sinatra guide]: http://sinatra-book.gittr.com/#hello_world_application
+[Sinatra guide]: https://github.com/sinatra/sinatra-book/blob/master/book/Introduction.markdown#hello-world-application
 [REST Client]: https://github.com/archiloque/rest-client
 [libraries]: /libraries/
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test
@@ -350,4 +358,4 @@ available as a separate project.
 [check token valid]: /v3/oauth_authorizations/#check-an-authorization
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication
 [new oauth app]: https://github.com/settings/applications/new
-[app settings]: https://github.com/settings/applications
+[app settings]: https://github.com/settings/developers

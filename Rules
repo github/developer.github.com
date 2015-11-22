@@ -13,6 +13,7 @@
 # Reset search-index by deleting it every time
 preprocess do
   File.delete("output/search-index.json") if File.exists?("output/search-index.json")
+  generate_redirects(config[:redirects])
 end
 
 compile '/static/*' do
@@ -26,12 +27,24 @@ compile '/feed/' do
   filter :kramdown, :toc_levels => [2]
 end
 
+compile '/integrations-directory/*' do
+  filter :erb
+  filter :kramdown, :toc_levels => [2]
+  filter :tip_filter
+  filter :colorize_syntax,
+    :colorizers => {:javascript => :rouge}
+  layout item[:layout] || 'integrations-directory'
+end
+
 compile '/v3/*' do
   filter :search
   filter :erb
   filter :kramdown, :toc_levels => [2]
+  filter :enterprise_only_filter
+  filter :not_enterprise_filter
+  filter :tip_filter
   filter :colorize_syntax,
-    :colorizers => {:javascript => :pygmentsrb}
+    :colorizers => {:javascript => :rouge}
   layout item[:layout] || 'api'
 end
 
@@ -40,7 +53,7 @@ end
     filter :erb
     filter :kramdown, :toc_levels => [2]
     filter :colorize_syntax,
-      :colorizers => {:javascript => :pygmentsrb}
+      :colorizers => {:javascript => :rouge}
     layout 'changes' if version[0] == '*'
     layout item[:layout] || 'blog'
   end
@@ -48,15 +61,17 @@ end
 
 compile '/guides/*' do
   filter :kramdown, :toc_levels => [2]
+  filter :tip_filter
   filter :erb
-  filter :colorize_syntax, :default_colorizer => :pygmentsrb
+  filter :colorize_syntax, :default_colorizer => :rouge
   layout item[:layout] || 'guides'
 end
 
 compile '/webhooks/*' do
   filter :kramdown, :toc_levels => [2]
+  filter :tip_filter
   filter :erb
-  filter :colorize_syntax, :default_colorizer => :pygmentsrb
+  filter :colorize_syntax, :default_colorizer => :rouge
   layout item[:layout] || 'webhooks'
 end
 
@@ -64,7 +79,7 @@ compile '*' do
   filter :erb
   filter :kramdown, :toc_levels => [2]
   filter :colorize_syntax,
-    :colorizers => {:javascript => :pygmentsrb}
+    :colorizers => {:javascript => :rouge}
   layout item[:layout] || 'default'
 end
 

@@ -28,18 +28,17 @@ which is usually master; pushing to the default branch resets the statistics cac
 
 ### Response
 
-<%= headers 200 %>
-<%= json(:repo_stats_contributors) %>
-
 * `total` - The Total number of commits authored by the contributor.
 
-**Weekly Hash**
+Weekly Hash (`weeks` array):
 
 * `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).
 * `a` - Number of additions
 * `d` - Number of deletions
 * `c` - Number of commits
 
+<%= headers 200 %>
+<%= json(:repo_stats_contributors) %>
 
 ## Get the last year of commit activity data {#commit-activity}
 
@@ -73,7 +72,7 @@ to a repository.
 
 Returns the total commit counts for the `owner` and total commit counts in `all`.
 `all` is everyone combined, including the `owner` in the last 52 weeks.  If you'd like to get the commit
-counts for non-owners, you can subtract `all` from `owner`.
+counts for non-owners, you can subtract `owner` from `all`.
 
 The array order is oldest week (index 0) to most recent week.
 

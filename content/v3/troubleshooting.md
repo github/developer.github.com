@@ -17,8 +17,7 @@ You might expect to see a `403 Forbidden` in these cases. However, since we don'
 want to provide _any_ information about private repositories, the API returns a
 `404` error instead.
 
-To fix this, you can either ensure that [you're authenticating correctly](/guides/getting-started/),
-or [make sure that your scopes are valid](/v3/oauth/#scopes).
+To troubleshoot, ensure [you're authenticating correctly](/guides/getting-started/), [your OAuth access token has the required scopes](/v3/oauth/#scopes), and [third-party application restrictions][oap-guide] are not blocking access.
 
 ## Why am I not seeing all my results?
 
@@ -43,8 +42,4 @@ In certain exceptional cases, we may temporarily bump your rate limit higher. Yo
 should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest
 dreams with the current rate limit (but don't worry, we'll help you out).
 
-## Why can't my server with SSL receive Webhooks?
-
-When we send events to your server, we attempt to negotiate either SSL version 2 or 3.
-If your server requires a specific SSL version and does not support SSL negotiation,
-you can specify a specific version within the [webhook's config block](http://developer.github.com/v3/repos/hooks/#edit-a-hook). Include a parameter called `ssl_version`, with a value of either `2` or `3`.
+[oap-guide]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/

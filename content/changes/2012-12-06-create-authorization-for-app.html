@@ -9,12 +9,11 @@ The [Authorizations API][oauth-api] is an easy way to create an OAuth
 authorization using Basic Auth. Just POST your desired scopes and optional
 note and you get a token back:
 
-<pre class='terminal'>
+{:.terminal}
     curl -u pengwynn -d '{"scopes": ["user", "gist"]}' \
          https://api.github.com/authorizations
-</pre>
 
-This call creates a token for the authenticating user tied to a special "API"
+This call creates a token for the authenticated user tied to a special "API"
 OAuth application.
 
 We now support creating tokens for _your own OAuth application_ by passing your
@@ -22,14 +21,13 @@ twenty character `client_id` and forty character `client_secret` as found in
 the settings page for your OAuth application.
 
 
-<pre class='terminal'>
+{:.terminal}
     curl -u pengwynn -d '{ \
                           "scopes": ["user", "gist"], \
                           "client_id": "abcdeabcdeabcdeabcdeabcde" \
                           "client_secret": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde" \
                          }' \ '
             https://api.github.com/authorizations
-</pre>
 
 No more implementing the [web flow][web-flow] just to get a token tied to your
 app's rate limit.

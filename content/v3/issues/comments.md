@@ -18,6 +18,14 @@ You can read more about the use of media types in the API
 
     GET /repos/:owner/:repo/issues/:number/comments
 
+Issue Comments are ordered by ascending ID.
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | Only comments updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
@@ -31,7 +39,7 @@ By default, Issue Comments are ordered by ascending ID.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `sort`|`string` | Either `created` or `updated`. Default: `created`
 `direction`|`string` | Either `asc` or `desc`. Ignored without the `sort` parameter.
@@ -41,7 +49,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json(:pull_comment) { |h| [h] } %>
+<%= json(:issue_comment) { |h| [h] } %>
 
 ## Get a single comment
 
@@ -49,7 +57,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json :issue_comment %>
 
 ## Create a comment
@@ -63,13 +71,11 @@ Name | Type | Description
 `body`|`string` | **Required**. The contents of the comment.
 
 
-<%= json :body => "a new comment" %>
+<%= json :body => "Me too" %>
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/user/repo/issues/comments/1" %>
+<%= headers 201, :Location => get_resource(:issue_comment)['url'] %>
 <%= json :issue_comment %>
 
 ## Edit a comment
@@ -78,12 +84,12 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The contents of the comment.
 
 
-<%= json :body => "String" %>
+<%= json :body => "Me too" %>
 
 ### Response
 

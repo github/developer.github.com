@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Preview repository redirects</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.2/changes.atom">
+  <link href="/enterprise/2.2/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.2/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.2/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/2.2/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/2.2/js/documentation.js" type="text/javascript"></script>
+</head>
+
+
+<body class="blog enterprise">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.2/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/enterprise/2.2/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.2/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/enterprise/2.2/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+
+
+  <div id="wrapper">
+    <div class="content">
+      <div class="change" id="/changes/2015-04-17-preview-repository-redirects/">
+<h2 class="title">
+  <a href="/enterprise/2.2/changes/2015-04-17-preview-repository-redirects/">Preview repository redirects</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 17, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph">
+      <a href="https://github.com/jasonrudolph">jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+
+<p>From time to time, repository names change. If you make a GitHub API request using a repository’s old name in the URL, the API has historically responded with <code>404 Not Found</code>. To help API clients gracefully handle renamed repositories, the API will soon begin <a href="/enterprise/2.2/v3/#http-redirects">redirecting</a> to the repository’s new location.</p>
+
+<p>You can preview these redirects now. In the coming weeks, we’ll announce the timeline for enabling these redirects for everyone.</p>
+
+<h2 id="how-can-i-try-out-the-redirects">How can I try out the redirects?</h2>
+
+<p>Starting today, developers can preview the redirect functionality for relocated repositories. To access this redirect functionality during the preview period, you’ll need to provide the following custom <a href="/enterprise/2.2/v3/media/">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.quicksilver-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of the redirect behavior based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<h2 id="when-will-the-redirects-occur">When will the redirects occur?</h2>
+
+<p>To understand when these redirects would take place, you’ll want to understand how to identify a repository’s location. Repositories are located using the combination of the owner’s name and the repository’s name. For example, the <a href="https://github.com/twbs">@twbs</a> organization owns the popular <a href="https://github.com/twbs/bootstrap">bootstrap repository</a>. We identify this repository as <a href="https://github.com/twbs/bootstrap">twbs/bootstrap</a>.</p>
+
+<p>The repository’s location changes in the following scenarios:</p>
+
+<ul>
+  <li>When the owner changes the repository name.</li>
+  <li>When the owner renames their user account or organization account.</li>
+  <li>When the owner transfers the repository to a new owner.</li>
+</ul>
+
+<p>Continuing our <a href="https://github.com/twbs/bootstrap">twbs/bootstrap</a> example, this repository used to be owned by the <a href="https://github.com/twitter">@twitter</a> organization, and it was therefore located at <a href="https://github.com/twitter/bootstrap">twitter/bootstrap</a>. With repository redirects, you’ll be able to make an API request using the repository’s old location and receive <a href="/enterprise/2.2/v3/#http-redirects">either a <code>301</code> or <code>307</code> HTTP redirect</a>, depending on the type of request being made. You can then follow the redirect to the new location.</p>
+
+<h2 id="send-us-your-feedback">Send us your feedback</h2>
+
+<p>We hope you’ll take these redirects for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects">let us know what you think</a>. Happy redirecting!</p>
+
+
+</div>
+
+    </div>
+
+    <div class="sidebar-shell">
+        <h2>Recent Posts</h2>
+<ul class="headlines sidebar-module">
+
+  <li><a href="/enterprise/2.2/changes/2015-04-21-organization-hooks-api-finalized/">Organization Webhooks API finalized<br><span class="date">April 21, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.2/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/">Authorizations API response changes are now in effect<br><span class="date">April 20, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.2/changes/2015-04-17-preview-repository-redirects/">Preview repository redirects<br><span class="date">April 17, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.2/changes/2015-03-09-licenses-api/">Licenses API<br><span class="date">March 9, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.2/changes/2015-02-24-more-time-to-prepare-for-the-breaking-changes-to-organization-permissions/">More time to prepare for the breaking changes to organization permissions<br><span class="date">February 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.2/changes/2015-02-20-migration-period-removing-authorizations-token/">Breaking changes to Authorizations API responses on April 20<br><span class="date">February 19, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.2/changes/2015-02-18-new-releases-api-methods/">New Releases API methods<br><span class="date">February 18, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.2/changes/2015-02-03-removing-authorizations-token-update/">Removing token attribute from Authorizations API responses (Update)<br><span class="date">February 3, 2015</span></a></li>
+
+</ul>
+
+
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/enterprise/2.2/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
+  </div>
+
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+    </div>
+
+  </div>
+<!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/enterprise/2.2/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

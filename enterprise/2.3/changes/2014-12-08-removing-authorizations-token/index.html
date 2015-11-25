@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Removing token attribute from Authorizations API responses</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.3/changes.atom">
+  <link href="/enterprise/2.3/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.3/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.3/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/2.3/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/2.3/js/documentation.js" type="text/javascript"></script>
+  
+</head>
+
+
+<body class="blog enterprise">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.3/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/enterprise/2.3/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.3/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/enterprise/2.3/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+
+
+  <div id="wrapper">
+    <div class="content">
+      <div class="change" id="/changes/2014-12-08-removing-authorizations-token/">
+<h2 class="title">
+  <a href="/enterprise/2.3/changes/2014-12-08-removing-authorizations-token/">Removing token attribute from Authorizations API responses</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 8, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3">
+      <a href="https://github.com/ptoomey3">ptoomey3</a>
+  </li>
+</ul>
+</div>
+
+
+<p>Since OAuth access tokens function like passwords, they should be treated with
+care. Today we are making it easier to more securely work with authorizations
+via the Authorizations API. We are deprecating the use use of the <code>token</code>
+attribute in the majority of the <a href="/enterprise/2.3/v3/oauth_authorizations/">Authorizations API</a>
+responses. For the <a href="/enterprise/2.3/v3/oauth_authorizations/#deprecation-notice">affected APIs</a>, the
+<code>token</code> attribute will soon return an empty string. To get ready for that
+change, we are giving developers a chance to
+<a href="#preview-period">preview the updated API</a> starting today.</p>
+
+<h2 id="whats-changing">What’s changing?</h2>
+
+<p>The current <a href="/enterprise/2.3/v3/oauth_authorizations/">OAuth Authorizations API</a> requires GitHub to store the full value for
+each OAuth token on our servers. In order to increase the security for our
+users, we are changing our architecture to store the SHA-256 digest of OAuth
+tokens instead. GitHub securely hashes user passwords using bcrypt and we want
+to provide comparable security for OAuth tokens as well.</p>
+
+<p>Rest assured that this change is an entirely proactive measure from GitHub and is not associated with any security incident.</p>
+
+<h2 id="who-is-affected">Who is affected?</h2>
+
+<p>This change affects any code that relies on accessing the <code>token</code> attribute from
+<a href="/enterprise/2.3/v3/oauth_authorizations/#deprecation-notice">these OAuth Authorizations API responses</a>.
+For example, our own <a href="https://mac.github.com/">GitHub for Mac</a> and
+<a href="https://windows.github.com/">GitHub for Windows</a> applications relied on reading the <code>token</code>
+from the <a href="/enterprise/2.3/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> API, in order to support multiple installations of our desktop application for a single user.</p>
+
+<h2 id="what-should-you-do">What should you do?</h2>
+
+<p>In order to reduce the impact of removing the <code>token</code> attribute, the OAuth
+Authorizations API has added a new request attribute (<code>fingerprint</code>), added
+three new response attributes (<code>token_last_eight</code>, <code>hashed_token</code>, and
+<code>fingerprint</code>), and added <a href="/enterprise/2.3/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new API</a>.
+While these new APIs and attributes do not replace the full functionality that
+previously existed, they can be used in place of <code>token</code> for most common use cases.</p>
+
+<ul>
+  <li>
+    <p><code>token_last_eight</code> returns the last eight characters of the associated OAuth
+token. As an example, <code>token_last_eight</code> could be used to display a list of
+partial token values to help a user manage their OAuth tokens.</p>
+  </li>
+  <li>
+    <p><code>hashed_token</code> is the base64 of the SHA-256 digest of the token.
+<code>hashed_token</code> could be used to programmatically validate that a given token
+matches an authorization returned by the API.</p>
+  </li>
+  <li>
+    <p><code>fingerprint</code> is a new optional request parameter that allows an OAuth
+application to create multiple authorizations for a single user. <code>fingerprint</code>
+should be a string that distinguishes the new authorization from others
+for the same client ID and user.</p>
+
+    <p>For example, to differentiate installations of a desktop application across
+multiple devices you might set <code>fingerprint</code> to
+<code>SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")</code>. Since
+<code>fingerprint</code> is not meant to be a user-facing value, you should still set
+the <code>note</code> attribute to help a user differentiate between authorizations on their
+<a href="https://github.com/settings/applications">OAuth applications listing on GitHub</a>.</p>
+  </li>
+  <li>
+    <p><a href="/enterprise/2.3/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a>
+is a new API that is analagous to the
+<a href="/enterprise/2.3/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a>
+API, but adds support for the new <code>fingerprint</code> request parameter.</p>
+  </li>
+</ul>
+
+<h2 id="preview-period">Preview period</h2>
+
+<p>We are making the new Authorizations API available today for developers to
+preview. During this period, we may change aspects of these endpoints. If we do,
+we will announce the changes on the developer blog, but we will not provide any
+advance notice.</p>
+
+<p>While these new APIs are in their preview period, you’ll need to provide the
+following custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.mirage-preview+json
+</code></pre>
+
+<p>We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.</p>
+
+<h2 id="migration-period">Migration period</h2>
+
+<p>At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.</p>
+
+<h2 id="why-sha-256-over-bcrypt">Why SHA-256 over bcrypt?</h2>
+
+<p>Some users may be curious why we are not using bcrypt to hash our OAuth tokens
+like we do for user passwords. Bcrypt is purposefully computationally expensive
+in order to mitigate brute force attacks against low entropy passwords. However,
+OAuth tokens are highly random and are not susceptible to brute force attacks.
+Given that OAuth token validation occurs for each request to the API we chose
+SHA-256 for performance reasons.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>.</p>
+
+
+</div>
+
+    </div>
+
+    <div class="sidebar-shell">
+        <h2>Recent Posts</h2>
+<ul class="headlines sidebar-module">
+
+  <li><a href="/enterprise/2.3/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories<br><span class="date">July 22, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.3/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br><span class="date">July 21, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.3/changes/2015-06-24-licenses-api-update/">Licenses API update<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.3/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.3/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.3/changes/2015-06-17-organizations-endpoint/">List all organizations<br><span class="date">June 17, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.3/changes/2015-06-11-pages-a-records/">GitHub Pages' A Records Added to Meta API<br><span class="date">June 11, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.3/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">Breaking changes to organization permissions coming on June 24<br><span class="date">June 10, 2015</span></a></li>
+
+</ul>
+
+
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/enterprise/2.3/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
+  </div>
+
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+    </div>
+
+  </div>
+<!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/enterprise/2.3/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+have_library: checking for main() in -lc... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector     -lruby-static -framework CoreFoundation  -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector     -lruby-static -framework CoreFoundation -lc  -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+

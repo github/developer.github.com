@@ -1,0 +1,350 @@
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector     -lruby-static -framework CoreFoundation  -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector     -lruby-static -framework CoreFoundation -L/usr/local/Cellar/openssl/1.0.2a-1/lib -lssl -lcrypto -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: int main(int argc, char **argv)
+4: {
+5:   return 0;
+6: }
+/* end */
+
+package configuration for openssl
+cflags: -I/usr/local/Cellar/openssl/1.0.2a-1/include
+ldflags: -L/usr/local/Cellar/openssl/1.0.2a-1/lib
+libs: -lssl -lcrypto
+
+have_var: checking for rb_trap_immediate in ruby.h,rubysig.h... -------------------- no
+
+"/usr/bin/cc -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include   -c conftest.c"
+In file included from conftest.c:4:
+/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward/rubysig.h:14:2: warning: rubysig.h is obsolete [-W#warnings]
+#warning rubysig.h is obsolete
+ ^
+conftest.c:16:55: error: use of undeclared identifier 'rb_trap_immediate'
+int t(void) { const volatile void *volatile p; p = &(&rb_trap_immediate)[0]; return 0; }
+                                                      ^
+1 warning and 1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <ruby.h>
+ 4: #include <rubysig.h>
+ 5: 
+ 6: /*top*/
+ 7: extern int t(void);
+ 8: int main(int argc, char **argv)
+ 9: {
+10:   if (argc > 1000000) {
+11:     printf("%p", &t);
+12:   }
+13: 
+14:   return 0;
+15: }
+16: int t(void) { const volatile void *volatile p; p = &(&rb_trap_immediate)[0]; return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_thread_blocking_region()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+conftest.c:13:57: warning: 'rb_thread_blocking_region' is deprecated [-Wdeprecated-declarations]
+int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_thread_blocking_region; return 0; }
+                                                        ^
+/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/intern.h:870:18: note: 'rb_thread_blocking_region' has been explicitly marked deprecated here
+DEPRECATED(VALUE rb_thread_blocking_region(rb_blocking_function_t *func, void *data1,
+                 ^
+/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0/ruby/config.h:114:52: note: expanded from macro 'DEPRECATED'
+#define DEPRECATED(x) __attribute__ ((deprecated)) x
+                                                   ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_thread_blocking_region; return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for inotify_init() in sys/inotify.h... -------------------- no
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+conftest.c:3:10: fatal error: 'sys/inotify.h' file not found
+#include <sys/inotify.h>
+         ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <sys/inotify.h>
+ 4: 
+ 5: /*top*/
+ 6: extern int t(void);
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+15: int t(void) { void ((*volatile p)()); p = (void ((*)()))inotify_init; return 0; }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+conftest.c:3:10: fatal error: 'sys/inotify.h' file not found
+#include <sys/inotify.h>
+         ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <sys/inotify.h>
+ 4: 
+ 5: /*top*/
+ 6: extern int t(void);
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+15: int t(void) { inotify_init(); return 0; }
+/* end */
+
+--------------------
+
+have_macro: checking for __NR_inotify_init in sys/syscall.h... -------------------- no
+
+"/usr/bin/cc -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include   -c conftest.c"
+conftest.c:6:3: error: 
+# error
+  ^
+conftest.c:7:1: error: expected identifier or '('
+|:/ === __NR_inotify_init undefined === /:|
+^
+2 errors generated.
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <sys/syscall.h>
+4: /*top*/
+5: #ifndef __NR_inotify_init
+6: # error
+7: |:/ === __NR_inotify_init undefined === /:|
+8: #endif
+/* end */
+
+--------------------
+
+have_func: checking for writev() in sys/uio.h... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: #include <sys/uio.h>
+ 4: 
+ 5: /*top*/
+ 6: extern int t(void);
+ 7: int main(int argc, char **argv)
+ 8: {
+ 9:   if (argc > 1000000) {
+10:     printf("%p", &t);
+11:   }
+12: 
+13:   return 0;
+14: }
+15: int t(void) { void ((*volatile p)()); p = (void ((*)()))writev; return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_wait_for_single_fd()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+conftest.c:13:57: error: use of undeclared identifier 'rb_wait_for_single_fd'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_wait_for_single_fd; return 0; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_wait_for_single_fd; return 0; }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+conftest.c:13:15: warning: implicit declaration of function 'rb_wait_for_single_fd' is invalid in C99 [-Wimplicit-function-declaration]
+int t(void) { rb_wait_for_single_fd(); return 0; }
+              ^
+1 warning generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { rb_wait_for_single_fd(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_enable_interrupt()... -------------------- no
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+conftest.c:13:57: error: use of undeclared identifier 'rb_enable_interrupt'
+int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_enable_interrupt; return 0; }
+                                                        ^
+1 error generated.
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_enable_interrupt; return 0; }
+/* end */
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+conftest.c:13:15: warning: implicit declaration of function 'rb_enable_interrupt' is invalid in C99 [-Wimplicit-function-declaration]
+int t(void) { rb_enable_interrupt(); return 0; }
+              ^
+1 warning generated.
+Undefined symbols for architecture x86_64:
+  "_rb_enable_interrupt", referenced from:
+      _t in conftest-4ee3ba.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { rb_enable_interrupt(); return 0; }
+/* end */
+
+--------------------
+
+have_func: checking for rb_time_new()... -------------------- yes
+
+"/usr/bin/cc -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation  -lssl -lcrypto -lpthread -ldl -lobjc "
+checked program was:
+/* begin */
+ 1: #include "ruby.h"
+ 2: 
+ 3: /*top*/
+ 4: extern int t(void);
+ 5: int main(int argc, char **argv)
+ 6: {
+ 7:   if (argc > 1000000) {
+ 8:     printf("%p", &t);
+ 9:   }
+10: 
+11:   return 0;
+12: }
+13: int t(void) { void ((*volatile p)()); p = (void ((*)()))rb_time_new; return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for sys/event.h... -------------------- yes
+
+"/usr/bin/cc -E -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <sys/event.h>
+/* end */
+
+--------------------
+
+have_header: checking for sys/queue.h... -------------------- yes
+
+"/usr/bin/cc -E -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include  conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3: #include <sys/queue.h>
+/* end */
+
+--------------------
+
+"c++ -o conftest -I/opt/rubies/2.1.6/include/ruby-2.1.0/x86_64-darwin14.0 -I/opt/rubies/2.1.6/include/ruby-2.1.0/ruby/backward -I/opt/rubies/2.1.6/include/ruby-2.1.0 -I. -I/opt/rubies/2.1.6/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT   -I/usr/local/include -march=core2 -O3 -O3 -Wno-error=shorten-64-to-32  -pipe -I/usr/local/Cellar/openssl/1.0.2a-1/include conftest.c  -L. -L/opt/rubies/2.1.6/lib -L. -L/opt/rubies/2.1.6/lib -L/usr/local/lib -fstack-protector -L/usr/local/Cellar/openssl/1.0.2a-1/lib     -lssl -lcrypto -lruby-static -framework CoreFoundation -lstdc++ -lpthread -ldl -lobjc "
+clang: warning: treating 'c' input as 'c++' when in C++ mode, this behavior is deprecated
+checked program was:
+/* begin */
+1: #include "ruby.h"
+2: 
+3:   #include <utility>
+4:   using namespace std;
+5:   int main(){ pair<int,int> tuple = make_pair(1,2); }
+/* end */
+

@@ -1,0 +1,35 @@
+<!-- @count_gap refers to the minimum number of sibling pages to show -->
+<% @count_gap = 2; @i = 1; @total_pages = total_pages; %>
+<div class="pagination">
+  <% if @current_page > 1 %>
+  <a href="/changes/<%= @current_page - 1 %>" class="previous_page">Previous</a>
+  <% else %>
+  <span class="disabled">Previous</span>
+  <% end %>
+
+  <!-- using a while loop here as it's the only way to skip several iterations -->
+  <% while @i <= @total_pages do %>
+    <% @gap = false %>
+    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
+    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    <% if @i < (@total_pages - 1) && (@i - @current_page).abs > @count_gap %>
+      <% @gap = true %>
+      <!-- we skip multiple iterations to insert the gap (`...`), and continue with the regular links -->
+      <% @i = (@i < @current_page ? @current_page - @count_gap : @total_pages - 1) - 1 %>
+    <% end %>
+
+    <% if @gap %>
+      <span class='disabled'>…</span>
+    <% else %>
+      <a href="/changes/<%= @i %>" class="<%= @current_page == @i ? 'current' : '' %>"><%= @i %></a>
+    <% end %>
+
+    <% @i += 1 %>
+  <% end %>
+
+  <% if @current_page < @total_pages %>
+    <a href="/changes/<%= @current_page + 1 %>" class="next_page">Next</a>
+  <% else %>
+    <span class="disabled">Next</span>
+  <% end %>
+</div>

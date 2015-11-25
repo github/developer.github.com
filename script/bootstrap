@@ -1,0 +1,25 @@
+#!/bin/sh
+
+set -e
+export CC=gcc
+
+command -v bundle >/dev/null 2>&1 || { echo >&2 "Bundler required but not found: gem install bundler"; exit 1; }
+
+echo "==> Installing gem dependencies…"
+
+if [ "$RACK_ENV" = "production" ]; then
+  export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
+  bundle install --without development staging test benchmark --path vendor/cache --jobs 4 --local --deployment
+else
+  bundle check --path vendor/cache 2>&1 || {
+    bundle install --path vendor/cache
+  }
+fi
+
+echo "==> Installing npm dependencies…"
+
+if [ "$RACK_ENV" = "production" ]; then
+  npm install --production
+else
+  npm install
+fi

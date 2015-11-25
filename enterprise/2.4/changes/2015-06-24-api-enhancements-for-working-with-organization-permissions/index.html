@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>API enhancements for working with organization permissions</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.4/changes.atom">
+  <link href="/enterprise/2.4/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.4/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.4/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/2.4/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/2.4/js/documentation.js" type="text/javascript"></script>
+  
+</head>
+
+
+<body class="blog enterprise">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.4/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/enterprise/2.4/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.4/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/enterprise/2.4/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+
+
+  <div id="wrapper">
+    <div class="content">
+      <div class="change" id="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">
+<h2 class="title">
+  <a href="/enterprise/2.4/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 24, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer">
+      <a href="https://github.com/jakeboxer">jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+
+<p>We’re introducing several enhancements to allow API developers to take advantage of the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> that we are rolling out. Learn about these enhancements and how you can try them out below.</p>
+
+<p>Since we’re rolling out the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> improvements slowly, these enhancements will only apply to certain organizations at first. Most of these enhancements will degrade gracefully (returning an empty array or something similar) if used on an organization that doesn’t support improved organization permissions yet. Check the documentation for your specific API to see if errors are possible.</p>
+
+<h2 id="api-enhancements">API enhancements</h2>
+
+<h3 id="team-permissions">Team permissions</h3>
+
+<p>In our improved permissions system, a team no longer has a single permission that applies to all of its repositories. Instead, each repository is added to a team with its own permission. For example, an organization could use a single team to grant pull access to one repository, push access to a second, and admin access to a third.</p>
+
+<p>The team APIs now support this more granular notion of permissions:</p>
+
+<ul>
+  <li>The <a href="/enterprise/2.4/v3/orgs/teams/#add-team-repo">Add team repository</a> API accepts a <code>permission</code> parameter, so that you can specify whether a team should grant <code>pull</code>, <code>push</code>, or <code>admin</code> access on a given repository.</li>
+  <li>In the <a href="/enterprise/2.4/v3/orgs/teams/#list-team-repos">List team repositories</a> and <a href="/enterprise/2.4/v3/orgs/teams/#get-team-repo">Check if a team manages a repository</a> API, the response includes a <code>permissions</code> attribute, indicating whether the team grants <code>pull</code>, <code>push</code>, or <code>admin</code> access on each repository.</li>
+  <li>The <code>permission</code> parameter in the <a href="/enterprise/2.4/v3/orgs/teams/#create-team">Create team</a> and <a href="/enterprise/2.4/v3/orgs/teams/#edit-team">Edit team</a> APIs is deprecated. Since teams can grant a different permission on each repository, this parameter no longer dictates what permission a team grants on all of its repositories. Instead, it dictates the default permission that the <a href="/enterprise/2.4/v3/orgs/teams/#add-team-repo">Add team repository</a> API will use for requests where no <code>permission</code> parameter is specified.</li>
+</ul>
+
+<h3 id="team-privacy">Team privacy</h3>
+
+<p>We now allow you to modify the privacy level of your teams. A “secret” team can only be seen by organization owners and people who are members of that team (which is how all teams have worked historically), while a “closed” team is visible to every member of the organization (which makes it easier to use <a href="https://github.com/blog/1121-introducing-team-mentions">@mentions</a> throughout your organization).</p>
+
+<p>The team APIs now support this new team privacy concept:</p>
+
+<ul>
+  <li>The <a href="/enterprise/2.4/v3/orgs/teams/#create-team">Create team</a> and <a href="/enterprise/2.4/v3/orgs/teams/#edit-team">Edit team</a> APIs accept a <code>privacy</code> parameter, so that you can specify whether a team should be <code>secret</code> or <code>closed</code>.</li>
+  <li>All team resources in the API now include a <code>privacy</code> attribute, indicating whether the team is <code>secret</code> or <code>closed</code>.</li>
+</ul>
+
+<h3 id="team-maintainers">Team maintainers</h3>
+
+<p>We’ve added the ability for you to delegate team maintenance to non-owners, reducing the workload for your organization’s owners. You can now promote a non-owner member of a team to be a “maintainer” of that team. A maintainer can add and remove team members and change the team’s title and description.</p>
+
+<p>The team membership APIs now support this new team maintainer concept:</p>
+
+<ul>
+  <li>The <a href="/enterprise/2.4/v3/orgs/teams/#add-team-membership">Add team membership</a> API accepts a <code>role</code> parameter, so that you can specify whether a given team member should be a <code>maintainer</code> or a regular <code>member</code>.</li>
+  <li>The <a href="/enterprise/2.4/v3/orgs/teams/#list-team-members">List team members</a> API accepts an optional <code>role</code> parameter, allowing you to fetch only <code>maintainer</code>s or only regular <code>member</code>s.</li>
+  <li>In the <a href="/enterprise/2.4/v3/orgs/teams/#get-team-membership">Get team membership</a> and <a href="/enterprise/2.4/v3/orgs/teams/#add-team-membership">Add team membership</a> APIs, the response includes a <code>role</code> attribute, indicating whether a user is a <code>maintainer</code> or a regular <code>member</code> of the team.</li>
+</ul>
+
+<p>For more information on our improved team permissions, check out our <a href="https://help.github.com/articles/improved-organization-permissions/#understanding-team-permissions">documentation</a>.</p>
+
+<h3 id="filtering-organization-members-by-role">Filtering organization members by role</h3>
+
+<p>The organization <a href="/enterprise/2.4/v3/orgs/members/#members-list">Members list</a> API now accepts a <code>role</code> parameter, so that you can request to see only the owners (or non-owners) of your organization.</p>
+
+<h3 id="repository-collaborators">Repository collaborators</h3>
+
+<p>We now allow you to add collaborators directly to organization-owned repositories, just like we always have for user-owned repositories.</p>
+
+<p>The collaborator APIs now support organization-owned repositories:</p>
+
+<ul>
+  <li>The <a href="/enterprise/2.4/v3/repos/collaborators/#add-collaborator">Add user as a collaborator</a> API works for organization-owned repositories. We’ve also added a <code>permission</code> parameter to it (currently valid for organization-owned repositories only), so that you can specify what level of access the collaborator should have on the repository.</li>
+  <li>In the <a href="/enterprise/2.4/v3/repos/collaborators/#list">List collaborators</a> API, the response includes a <code>permissions</code> attribute describing the permissions that each collaborator has on your organization’s repositories.</li>
+</ul>
+
+<h2 id="preview-period">Preview period</h2>
+
+<p>Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.</p>
+
+<p>While these enhancements are in their preview period, you’ll need to provide the following <a href="/enterprise/2.4/v3/media/">custom media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.ironman-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<h2 id="send-us-your-feedback">Send us your feedback</h2>
+
+<p>We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
+
+
+</div>
+
+    </div>
+
+    <div class="sidebar-shell">
+        <h2>Recent Posts</h2>
+<ul class="headlines sidebar-module">
+
+  <li><a href="/enterprise/2.4/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br><span class="date">September 3, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br><span class="date">August 4, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories<br><span class="date">July 22, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br><span class="date">July 21, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-06-24-licenses-api-update/">Licenses API update<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-06-17-organizations-endpoint/">List all organizations<br><span class="date">June 17, 2015</span></a></li>
+
+</ul>
+
+
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/enterprise/2.4/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
+  </div>
+
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+    </div>
+
+  </div>
+<!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/enterprise/2.4/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

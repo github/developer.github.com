@@ -1,0 +1,40 @@
+---
+kind: change
+title: OAuth changes coming
+created_at: 2013-10-04
+author_name: tclem
+---
+
+Starting today, we are returning granted scopes as part of the
+[access_token response](/v3/oauth/#github-redirects-back-to-your-site).
+For example, if you are making a POST with the `application/json`
+mime-type you'll see an additional field for the granted scopes.
+
+    #!javascript
+    {
+      "access_token":"e72e16c7e42f292c6912e7710c838347ae178b4a",
+      "scope":"repo,gist",
+      "token_type":"bearer"
+    }
+
+Right now, these scopes will be identical to what you requested, but we
+are moving towards a feature set that will allow GitHub users to edit
+their scopes, effectively granting your application less access than you
+originally requested. You should be aware of this possibility and adjust
+your application behavior accordingly.
+
+Some things to watch out for and keep in mind:
+
+- Most third party applications using GitHub OAuth to identify users have
+the best success in adoption by starting out with a request for the
+minimum access that the application can possibly get away with.
+Something like no scopes or just `user:email` is very sane.
+
+- It is important to handle the error cases where a user chooses to
+grant you less access than you originally requested. Now that we are
+surfacing the granted scopes on the access_token response, applications
+can warn or otherwise communicate with their users that they will see
+reduced functionality or be unable to perform some actions.
+
+- Applications can always send users back through the flow again to get
+additional permission, but don't forget that users can always say no.

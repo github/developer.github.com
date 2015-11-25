@@ -1,0 +1,18 @@
+---
+kind: change
+title: Ping Event for Webhooks
+created_at: 2014-2-10
+author_name: kdaigle
+---
+
+With the release of our [new webhook UI](https://github.com/blog/1778-webhooks-level-up), we included a new
+[ping event](/webhooks/#ping-event) that webhooks will receive. When you
+create a new webhook, we will send this event as an initial test of the webhook.
+
+The ping is only informational, doesn't need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It's just a quick
+"hello world" to let you know you set everything up correctly.
+
+We also added a [ping endpoint](/v3/repos/hooks/#ping-a-hook) to the hooks API.
+By using ping instead of [test](/v3/repos/hooks/#test-a-push-hook), you can ensure
+you won't be limited by the `push` event requirement that the test endpoint has.

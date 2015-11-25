@@ -1,0 +1,22 @@
+---
+kind: change
+title: New User scopes
+created_at: 2013-01-08
+author_name: technoweenie
+---
+
+We've added a [few new user scopes][scopes] for 3rd party applications that want very
+specific user functionality.  The `user:email` scope gives apps read-only access
+to a user's private email addresses.  The `user:follow` scope lets a user
+follow and unfollow other users.
+
+This should help keep applications from requiring the `user` scope, which
+can be potentially dangerous.
+
+We also added a read-only endpoint to get a user's public SSH keys.
+
+    GET https://api.github.com/users/technoweenie/keys
+
+[scopes]: http://developer.github.com/v3/oauth/#scopes
+[keys]: http://developer.github.com/v3/users/keys/#list-public-keys-for-a-user
+

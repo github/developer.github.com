@@ -1,0 +1,19 @@
+<h2 class="title">
+  <a href="<%= @item.path %>"><%= @item[:title] %></a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    <%= post_date @item %>
+    <% if version = @item[:api_version] %>
+      / Version: <a href="/changes/<%= version %>"><%= version %></a>
+    <% end %>
+  </li>
+  <li class="who_when">
+    <%= avatar_for(@item[:author_name]) %>
+      <a href="https://github.com/<%= @item[:author_name] %>" data-proofer-ignore><%= @item[:author_name] %></a>
+  </li>
+</ul>
+</div>

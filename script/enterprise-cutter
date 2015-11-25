@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+# When releasing a new Enterprise version, the set of GitHub APIs available to that
+# verison do not match the set of documentation generally available on developer.github.com.
+# That's because the content on developer.github.com represents everything available to DotCom
+# users; since Enterprise is a "managed" product, it's cut off of DotCom at a certain
+# time, and the APIs remain frozen (until an organization upgrades their instance).
+#
+# This script takes two arguments: a SHA and a version number. Given a sha, it
+# fetches the state of the site at that moment in time. It then copies all of that
+# content into a new folder called *enterprise/<version>*. Thus, we're able to preserve
+# the state of the API documentation for a given version at a given time.
+
+require 'fileutils'
+require 'tmpdir'
+
+if ARGV.length != 2
+  error = '''Error: Run the script like this: bundle exec script/enterprise-cutter [SHA] [VERSION]
+e.g. bundle exec script/enterprise-cutter deadb33f 11.10.340
+'''
+  abort error
+end
+
+SHA = ARGV[0].dup # SHA, like, deadb33f
+VERSION = ARGV[1].dup # like, 11.10.340
+
+BRANCH_NAME = "add-#{VERSION}-docs"
+
+Dir.glob('tasks/*.rake').each { |r| load r }
+
+setup
+
+temp_dir = Dir.mktmpdir
+begin
+  %x(git checkout #{SHA})
+  puts `bundle install`
+  puts `bundle exec nanoc compile`
+  `cp -r output/ #{temp_dir}`
+  `git checkout #{BRANCH_NAME}`
+  FileUtils.mkdir_p("enterprise/#{VERSION}")
+  `cp -r #{temp_dir}/* enterprise/#{VERSION}`
+
+  rewrite_content("enterprise/#{VERSION}")
+
+  `rm -rf enterprise/#{VERSION}/enterprise`
+  `rm -rf enterprise/#{VERSION}/output`
+  `git add enterprise`
+  `git commit -m "Added enterprise-#{VERSION} files"`
+ensure
+  FileUtils.remove_entry_secure temp_dir
+end
+
+puts "\n\nOkay! Feel free to `git push #{BRANCH_NAME}` if you like."

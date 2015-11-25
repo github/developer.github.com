@@ -7,17 +7,18 @@
   <meta name="MSSmartTagsPreventParsing" content="true" />
   <title>Building a CI server | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
-  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
-  <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
-  <link href="/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
-  <script src="/js/jquery.js" type="text/javascript"></script>
-  <script src="/js/documentation.js" type="text/javascript"></script>
+  <link href="/assets/stylesheets/application.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/assets/javascripts/application.js" type="text/javascript"></script>
   
 </head>
 
 
+
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -52,12 +53,13 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="building-a-ci-server">Building a CI server</h1>
+      
+<h1 id="building-a-ci-server">Building a CI server</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#writing-your-server">Writing your server</a></li>
-  <li><a href="#working-with-statuses">Working with statuses</a></li>
-  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#writing-your-server" id="markdown-toc-writing-your-server">Writing your server</a></li>
+  <li><a href="#working-with-statuses" id="markdown-toc-working-with-statuses">Working with statuses</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ul>
 
 <p>The <a href="/v3/repos/statuses/">Status API</a> is responsible for tying together commits with
@@ -92,13 +94,13 @@ Let’s start with this:</p>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
-  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:payload</span><span class="p">])</span>
   <span class="s2">"Well, it worked!"</span>
 <span class="k">end</span></code></pre>
 
 <p>(If you’re unfamiliar with how Sinatra works, we recommend <a href="http://www.sinatrarb.com/">reading the Sinatra guide</a>.)</p>
 
-<p>Start this server up. By default, Sinatra starts on port <code>9393</code>, so you’ll want
+<p>Start this server up. By default, Sinatra starts on port <code>4567</code>, so you’ll want
 to configure ngrok to start listening for that, too.</p>
 
 <p>In order for this server to work, we’ll need to set a repository up with a webhook.
@@ -106,9 +108,10 @@ The webhook should be configured to fire whenever a Pull Request is created, or 
 Go ahead and create a repository you’re comfortable playing around in. Might we
 suggest <a href="https://github.com/octocat/Spoon-Knife">@octocat’s Spoon/Knife repository</a>?
 After that, you’ll create a new webhook in your repository, feeding it the URL
-that ngrok gave you:</p>
+that ngrok gave you, and choosing <code>application/x-www-form-urlencoded</code> as the
+content type:</p>
 
-<p><img src="/images/webhook_sample_url.png" alt="A new ngrok URL"></p>
+<p><img src="/assets/images/webhook_sample_url.png" alt="A new ngrok URL"></p>
 
 <p>Click <strong>Update webhook</strong>. You should see a body response of <code>Well, it worked!</code>.
 Great! Click on <strong>Let me select individual events</strong>, and select the following:</p>
@@ -122,19 +125,19 @@ Great! Click on <strong>Let me select individual events</strong>, and select the
 occurs. Let’s update our server to <em>just</em> handle the Pull Request scenario right now:</p>
 
 <pre><code class="language-ruby highlight"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
-  <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+  <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:payload</span><span class="p">])</span>
 
-  <span class="k">case</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="o">]</span>
+  <span class="k">case</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="p">]</span>
   <span class="k">when</span> <span class="s2">"pull_request"</span>
-    <span class="k">if</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"action"</span><span class="o">]</span> <span class="o">==</span> <span class="s2">"opened"</span>
-      <span class="n">process_pull_request</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">]</span><span class="p">)</span>
+    <span class="k">if</span> <span class="vi">@payload</span><span class="p">[</span><span class="s2">"action"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"opened"</span>
+      <span class="n">process_pull_request</span><span class="p">(</span><span class="vi">@payload</span><span class="p">[</span><span class="s2">"pull_request"</span><span class="p">])</span>
     <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 
 <span class="n">helpers</span> <span class="k">do</span>
   <span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="s2">"It's </span><span class="si">#{</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'title'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span>
+    <span class="nb">puts</span> <span class="s2">"It's </span><span class="si">#{</span><span class="n">pull_request</span><span class="p">[</span><span class="s1">'title'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
 
@@ -161,7 +164,7 @@ to manage our interactions. We’ll configure that client with
 
 <pre><code class="language-ruby highlight"><span class="c1"># !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!</span>
 <span class="c1"># Instead, set and test environment variables, like below</span>
-<span class="no">ACCESS_TOKEN</span> <span class="o">=</span> <span class="no">ENV</span><span class="o">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="o">]</span>
+<span class="no">ACCESS_TOKEN</span> <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s1">'MY_PERSONAL_TOKEN'</span><span class="p">]</span>
 
 <span class="n">before</span> <span class="k">do</span>
   <span class="vi">@client</span> <span class="o">||=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="no">ACCESS_TOKEN</span><span class="p">)</span>
@@ -172,7 +175,7 @@ that we’re processing on the CI:</p>
 
 <pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
   <span class="nb">puts</span> <span class="s2">"Processing pull request..."</span>
-  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="p">[</span><span class="s1">'base'</span><span class="p">][</span><span class="s1">'repo'</span><span class="p">][</span><span class="s1">'full_name'</span><span class="p">],</span> <span class="n">pull_request</span><span class="p">[</span><span class="s1">'head'</span><span class="p">][</span><span class="s1">'sha'</span><span class="p">],</span> <span class="s1">'pending'</span><span class="p">)</span>
 <span class="k">end</span></code></pre>
 
 <p>We’re doing three very basic things here:</p>
@@ -189,9 +192,9 @@ on another web service via its API, like <a href="https://api.travis-ci.org/docs
 be sure to update the status once more. In our example, we’ll just set it to <code>"success"</code>:</p>
 
 <pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_pull_request</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
-  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="p">[</span><span class="s1">'base'</span><span class="p">][</span><span class="s1">'repo'</span><span class="p">][</span><span class="s1">'full_name'</span><span class="p">],</span> <span class="n">pull_request</span><span class="p">[</span><span class="s1">'head'</span><span class="p">][</span><span class="s1">'sha'</span><span class="p">],</span> <span class="s1">'pending'</span><span class="p">)</span>
   <span class="nb">sleep</span> <span class="mi">2</span> <span class="c1"># do busy work...</span>
-  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'base'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_status</span><span class="p">(</span><span class="n">pull_request</span><span class="p">[</span><span class="s1">'base'</span><span class="p">][</span><span class="s1">'repo'</span><span class="p">][</span><span class="s1">'full_name'</span><span class="p">],</span> <span class="n">pull_request</span><span class="p">[</span><span class="s1">'head'</span><span class="p">][</span><span class="s1">'sha'</span><span class="p">],</span> <span class="s1">'success'</span><span class="p">)</span>
   <span class="nb">puts</span> <span class="s2">"Pull request processed!"</span>
 <span class="k">end</span></code></pre>
 
@@ -267,19 +270,6 @@ You can always rely on <a href="https://github.com/integrations">third-party ser
     </div>
 
   </div><!-- /#footer -->
-  <script type="text/javascript">
-    var _gauges = _gauges || [];
-    (function() {
-      var t   = document.createElement('script');
-      t.type  = 'text/javascript';
-      t.async = true;
-      t.id    = 'gauges-tracker';
-      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
-      t.src = '//secure.gaug.es/track.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(t, s);
-    })();
-  </script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -289,7 +279,6 @@ You can always rely on <a href="https://github.com/integrations">third-party ser
     ga('create', 'UA-3769691-37', 'github.com');
     ga('send', 'pageview');
   </script>
-  <script src="/js/retina.js" type="text/javascript"></script>
 
 </body>
 </html>

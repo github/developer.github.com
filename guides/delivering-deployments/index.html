@@ -7,17 +7,18 @@
   <meta name="MSSmartTagsPreventParsing" content="true" />
   <title>Delivering deployments | GitHub API</title>
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
-  <link href="/css/reset.css" rel="stylesheet" type="text/css" />
-  <link href="/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
-  <link href="/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
-  <script src="/js/jquery.js" type="text/javascript"></script>
-  <script src="/js/documentation.js" type="text/javascript"></script>
+  <link href="/assets/stylesheets/application.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/assets/javascripts/application.js" type="text/javascript"></script>
   
 </head>
 
 
+
 <body class="api ">
-  <div id="header-wrapper">
+  
+
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
@@ -52,12 +53,13 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="delivering-deployments">Delivering deployments</h1>
+      
+<h1 id="delivering-deployments">Delivering deployments</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#writing-your-server">Writing your server</a></li>
-  <li><a href="#working-with-deployments">Working with deployments</a></li>
-  <li><a href="#conclusion">Conclusion</a></li>
+  <li><a href="#writing-your-server" id="markdown-toc-writing-your-server">Writing your server</a></li>
+  <li><a href="#working-with-deployments" id="markdown-toc-working-with-deployments">Working with deployments</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ul>
 
 <p>The <a href="/v3/repos/deployments/">Deployments API</a> provides your projects hosted on GitHub with
@@ -94,13 +96,13 @@ Let’s start with this:</p>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
 <span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
-  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:payload</span><span class="p">])</span>
   <span class="s2">"Well, it worked!"</span>
 <span class="k">end</span></code></pre>
 
 <p>(If you’re unfamiliar with how Sinatra works, we recommend <a href="http://www.sinatrarb.com/">reading the Sinatra guide</a>.)</p>
 
-<p>Start this server up. By default, Sinatra starts on port <code>9393</code>, so you’ll want
+<p>Start this server up. By default, Sinatra starts on port <code>4567</code>, so you’ll want
 to configure ngrok to start listening for that, too.</p>
 
 <p>In order for this server to work, we’ll need to set a repository up with a webhook.
@@ -108,9 +110,10 @@ The webhook should be configured to fire whenever a Pull Request is created, or 
 Go ahead and create a repository you’re comfortable playing around in. Might we
 suggest <a href="https://github.com/octocat/Spoon-Knife">@octocat’s Spoon/Knife repository</a>?
 After that, you’ll create a new webhook in your repository, feeding it the URL
-that ngrok gave you:</p>
+that ngrok gave you, and choosing <code>application/x-www-form-urlencoded</code> as the
+content type:</p>
 
-<p><img src="/images/webhook_sample_url.png" alt="A new ngrok URL"></p>
+<p><img src="/assets/images/webhook_sample_url.png" alt="A new ngrok URL"></p>
 
 <p>Click <strong>Update webhook</strong>. You should see a body response of <code>Well, it worked!</code>.
 Great! Click on <strong>Let me select individual events.</strong>, and select the following:</p>
@@ -126,11 +129,11 @@ occurs. We’ll configure our server to <em>just</em> handle when Pull Requests 
 right now:</p>
 
 <pre><code class="language-ruby highlight"><span class="n">post</span> <span class="s1">'/event_handler'</span> <span class="k">do</span>
-  <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:payload</span><span class="o">]</span><span class="p">)</span>
+  <span class="vi">@payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:payload</span><span class="p">])</span>
 
-  <span class="k">case</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="o">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="o">]</span>
+  <span class="k">case</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s1">'HTTP_X_GITHUB_EVENT'</span><span class="p">]</span>
   <span class="k">when</span> <span class="s2">"pull_request"</span>
-    <span class="k">if</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"action"</span><span class="o">]</span> <span class="o">==</span> <span class="s2">"closed"</span> <span class="o">&amp;&amp;</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">][</span><span class="s2">"merged"</span><span class="o">]</span>
+    <span class="k">if</span> <span class="vi">@payload</span><span class="p">[</span><span class="s2">"action"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"closed"</span> <span class="o">&amp;&amp;</span> <span class="vi">@payload</span><span class="p">[</span><span class="s2">"pull_request"</span><span class="p">][</span><span class="s2">"merged"</span><span class="p">]</span>
       <span class="nb">puts</span> <span class="s2">"A pull request was merged! A deployment should start now..."</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -152,8 +155,8 @@ merged, we want our project to be deployed.</p>
 merged, and start paying attention to deployments:</p>
 
 <pre><code class="language-ruby highlight"><span class="k">when</span> <span class="s2">"pull_request"</span>
-  <span class="k">if</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"action"</span><span class="o">]</span> <span class="o">==</span> <span class="s2">"closed"</span> <span class="o">&amp;&amp;</span> <span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">][</span><span class="s2">"merged"</span><span class="o">]</span>
-    <span class="n">start_deployment</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s2">"pull_request"</span><span class="o">]</span><span class="p">)</span>
+  <span class="k">if</span> <span class="vi">@payload</span><span class="p">[</span><span class="s2">"action"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"closed"</span> <span class="o">&amp;&amp;</span> <span class="vi">@payload</span><span class="p">[</span><span class="s2">"pull_request"</span><span class="p">][</span><span class="s2">"merged"</span><span class="p">]</span>
+    <span class="n">start_deployment</span><span class="p">(</span><span class="vi">@payload</span><span class="p">[</span><span class="s2">"pull_request"</span><span class="p">])</span>
   <span class="k">end</span>
 <span class="k">when</span> <span class="s2">"deployment"</span>
   <span class="n">process_deployment</span><span class="p">(</span><span class="vi">@payload</span><span class="p">)</span>
@@ -165,9 +168,9 @@ merged, and start paying attention to deployments:</p>
 <code>start_deployment</code> method:</p>
 
 <pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">start_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="p">)</span>
-  <span class="n">user</span> <span class="o">=</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'user'</span><span class="o">][</span><span class="s1">'login'</span><span class="o">]</span>
+  <span class="n">user</span> <span class="o">=</span> <span class="n">pull_request</span><span class="p">[</span><span class="s1">'user'</span><span class="p">][</span><span class="s1">'login'</span><span class="p">]</span>
   <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">generate</span><span class="p">(</span><span class="ss">:environment</span> <span class="o">=&gt;</span> <span class="s1">'production'</span><span class="p">,</span> <span class="ss">:deploy_user</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="p">)</span>
-  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'repo'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="p">,</span> <span class="n">pull_request</span><span class="o">[</span><span class="s1">'head'</span><span class="o">][</span><span class="s1">'sha'</span><span class="o">]</span><span class="p">,</span> <span class="p">{</span><span class="ss">:payload</span> <span class="o">=&gt;</span> <span class="n">payload</span><span class="p">,</span> <span class="ss">:description</span> <span class="o">=&gt;</span> <span class="s2">"Deploying my sweet branch"</span><span class="p">})</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment</span><span class="p">(</span><span class="n">pull_request</span><span class="p">[</span><span class="s1">'head'</span><span class="p">][</span><span class="s1">'repo'</span><span class="p">][</span><span class="s1">'full_name'</span><span class="p">],</span> <span class="n">pull_request</span><span class="p">[</span><span class="s1">'head'</span><span class="p">][</span><span class="s1">'sha'</span><span class="p">],</span> <span class="p">{</span><span class="ss">:payload</span> <span class="o">=&gt;</span> <span class="n">payload</span><span class="p">,</span> <span class="ss">:description</span> <span class="o">=&gt;</span> <span class="s2">"Deploying my sweet branch"</span><span class="p">})</span>
 <span class="k">end</span></code></pre>
 
 <p>Deployments can have some metadata attached to them, in the form of a <code>payload</code>
@@ -185,19 +188,19 @@ such as when the deployment was created, and what state it’s in.</p>
 the output. First, let’s complete our <code>process_deployment</code> method:</p>
 
 <pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">process_deployment</span>
-  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'payload'</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">payload</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'payload'</span><span class="p">])</span>
   <span class="c1"># you can send this information to your chat room, monitor, pager, e.t.c.</span>
-  <span class="nb">puts</span> <span class="s2">"Processing '</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'description'</span><span class="o">]</span><span class="si">}</span><span class="s2">' for </span><span class="si">#{</span><span class="n">payload</span><span class="o">[</span><span class="s1">'deploy_user'</span><span class="o">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">#{</span><span class="n">payload</span><span class="o">[</span><span class="s1">'environment'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Processing '</span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'description'</span><span class="p">]</span><span class="si">}</span><span class="s2">' for </span><span class="si">#{</span><span class="n">payload</span><span class="p">[</span><span class="s1">'deploy_user'</span><span class="p">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">#{</span><span class="n">payload</span><span class="p">[</span><span class="s1">'environment'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
   <span class="nb">sleep</span> <span class="mi">2</span> <span class="c1"># simulate work</span>
-  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'repository'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'repository'</span><span class="p">][</span><span class="s1">'full_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'pending'</span><span class="p">)</span>
   <span class="nb">sleep</span> <span class="mi">2</span> <span class="c1"># simulate work</span>
-  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'repository'</span><span class="o">][</span><span class="s1">'full_name'</span><span class="o">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
+  <span class="vi">@client</span><span class="p">.</span><span class="nf">create_deployment_status</span><span class="p">(</span><span class="s2">"repos/</span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'repository'</span><span class="p">][</span><span class="s1">'full_name'</span><span class="p">]</span><span class="si">}</span><span class="s2">/deployments/</span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="s1">'success'</span><span class="p">)</span>
 <span class="k">end</span></code></pre>
 
 <p>Finally, we’ll simulate storing the status information as console output:</p>
 
 <pre><code class="language-ruby highlight"><span class="k">def</span> <span class="nf">update_deployment_status</span>
-  <span class="nb">puts</span> <span class="s2">"Deployment status for </span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'id'</span><span class="o">]</span><span class="si">}</span><span class="s2"> is </span><span class="si">#{</span><span class="vi">@payload</span><span class="o">[</span><span class="s1">'state'</span><span class="o">]</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Deployment status for </span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="si">}</span><span class="s2"> is </span><span class="si">#{</span><span class="vi">@payload</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">end</span></code></pre>
 
 <p>Let’s break down what’s going on. A new deployment is created by <code>start_deployment</code>,
@@ -281,19 +284,6 @@ You can always rely on <a href="https://github.com/integrations">third-party ser
     </div>
 
   </div><!-- /#footer -->
-  <script type="text/javascript">
-    var _gauges = _gauges || [];
-    (function() {
-      var t   = document.createElement('script');
-      t.type  = 'text/javascript';
-      t.async = true;
-      t.id    = 'gauges-tracker';
-      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
-      t.src = '//secure.gaug.es/track.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(t, s);
-    })();
-  </script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -303,7 +293,6 @@ You can always rely on <a href="https://github.com/integrations">third-party ser
     ga('create', 'UA-3769691-37', 'github.com');
     ga('send', 'pageview');
   </script>
-  <script src="/js/retina.js" type="text/javascript"></script>
 
 </body>
 </html>

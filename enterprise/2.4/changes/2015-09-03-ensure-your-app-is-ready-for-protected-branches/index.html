@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta http-equiv="imagetoolbar" content="false">
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <title>Ensure your app is ready for Protected Branches</title>
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.4/changes.atom">
+  <link href="/enterprise/2.4/css/reset.css" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.4/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="/enterprise/2.4/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="/enterprise/2.4/js/jquery.js" type="text/javascript"></script>
+  <script src="/enterprise/2.4/js/documentation.js" type="text/javascript"></script>
+  
+</head>
+
+
+<body class="blog enterprise">
+  <div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.4/">GitHub:Developer</a>
+      <ul class="nav">
+        <li><a href="/enterprise/2.4/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.4/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/enterprise/2.4/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+
+
+  <div id="wrapper">
+    <div class="content">
+      <div class="change" id="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">
+<h2 class="title">
+  <a href="/enterprise/2.4/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 3, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/aroben.png" alt="Avatar for aroben">
+      <a href="https://github.com/aroben">aroben</a>
+  </li>
+</ul>
+</div>
+
+
+<p>We’ve begun to <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">roll out Protected Branches</a> across GitHub. When you
+protect a branch in one of your repositories, you will be prevented from
+force pushing to that branch or deleting it. You can also configure required
+status checks for your protected branch. When configured, changing a branch to
+point at a new commit will fail unless that commit (or another commit with
+the same <a href="http://git-scm.com/book/en/v2/Git-Internals-Git-Objects#Tree-Objects">Git tree</a>) has a <a href="/enterprise/2.4/v3/repos/statuses/">Status</a> in the <code>success</code> state for
+each required status check.</p>
+
+<p>These restrictions apply to branch manipulations performed via the GitHub API
+as well. So when you protect a branch, you will no longer be able to <a href="/enterprise/2.4/v3/git/refs/#delete-a-reference">delete
+the branch</a> via the API or <a href="/enterprise/2.4/v3/git/refs/#update-a-reference">update it</a> to point at a
+non-ancestor commit, even with <code>"force": true</code>. And if your branch has required
+status checks, you won’t be able to <a href="/enterprise/2.4/v3/git/refs/#update-a-reference">update it</a> or <a href="/enterprise/2.4/v3/pulls/#merge-a-pull-request-merge-button">merge pull
+requests</a> into that branch until <code>success</code> Statuses have been posted to
+the target commit for all required status checks.</p>
+
+<p>These restrictions are all represented by 422 errors:</p>
+
+<pre class="terminal"><code>$ curl -i -H 'Authorization: token TOKEN' \
+    -X DELETE https://api.github.com/repos/octocat/hubot/git/refs/heads/master
+HTTP/1.1 422 Unprocessable Entity
+
+{
+  "message": "Cannot delete a protected branch",
+  "documentation_url": "https://help.github.com/articles/about-protected-branches"
+}
+</code></pre>
+
+<p>Protected branches and required status checks are a great way to ensure your
+project’s conventions are followed. For example, you could write a Status
+integration that only posts a <code>success</code> Status when the pull request’s author
+has signed your project’s Contributor License Agreement. Or you could write one
+that only posts a <code>success</code> Status when three or more members of your
+<code>@initech/senior-engineers</code> team have left a comment saying they’ve reviewed
+the changes. If you configure these integrations as required status checks, you
+can be sure that these conditions have been satisfied before a pull request is
+merged. See our <a href="/enterprise/2.4/guides/building-a-ci-server/">Status API guide</a> to learn how to create integrations
+like these.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+in+API+responses">let us know</a>.</p>
+
+
+</div>
+
+    </div>
+
+    <div class="sidebar-shell">
+        <h2>Recent Posts</h2>
+<ul class="headlines sidebar-module">
+
+  <li><a href="/enterprise/2.4/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br><span class="date">September 3, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br><span class="date">August 4, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories<br><span class="date">July 22, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br><span class="date">July 21, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-06-24-licenses-api-update/">Licenses API update<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br><span class="date">June 24, 2015</span></a></li>
+
+  <li><a href="/enterprise/2.4/changes/2015-06-17-organizations-endpoint/">List all organizations<br><span class="date">June 17, 2015</span></a></li>
+
+</ul>
+
+
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/enterprise/2.4/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
+  </div>
+
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+    <div class="wrapper">
+      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+    </div>
+
+  </div>
+<!-- /#footer -->
+  <script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+      var t   = document.createElement('script');
+      t.type  = 'text/javascript';
+      t.async = true;
+      t.id    = 'gauges-tracker';
+      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
+      t.src = '//secure.gaug.es/track.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(t, s);
+    })();
+  </script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+  <script src="/enterprise/2.4/js/retina.js" type="text/javascript"></script>
+
+</body>
+</html>

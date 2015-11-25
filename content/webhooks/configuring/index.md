@@ -1,5 +1,5 @@
 ---
-title: Configuring Your Server | GitHub API
+title: Configuring your server | GitHub API
 layout: webhooks
 ---
 
@@ -25,14 +25,14 @@ First, we'll install a program to expose our local host to the Internet. We'll u
 ngrok to do this. [ngrok is a free download](https://ngrok.com/download) available
 for all major operating systems.
 
-When you're done with that, you can expose your localhost by running `./ngrok 4567`
+When you're done with that, you can expose your localhost by running `./ngrok http 4567`
 on the command line. You should see a line that looks something like this:
 
     #!bash
-    Forwarding    http://7e9ea9dc.ngrok.com -> 127.0.0.1:4567
+    Forwarding    http://7e9ea9dc.ngrok.io -> 127.0.0.1:4567
 
-Copy that funky `*.ngrok.com` URL! We're now going to go *back* to the Payload
-URL and pasting this server into that field. It should look something like `http://7e9ea9dc.ngrok.com/payload`.
+Copy that funky `*.ngrok.io` URL! We're now going to go *back* to the Payload
+URL and pasting this server into that field. It should look something like `http://7e9ea9dc.ngrok.io/payload`.
 
 By doing this, we've set ourselves up to expose our localhost at path `/payload`
 to the Internet.
@@ -52,7 +52,7 @@ setup might look something like this:
     require 'json'
 
     post '/payload' do
-      push = JSON.parse(params[:payload])
+      push = JSON.parse(request.body.read)
       puts "I got some JSON: #{push.inspect}"
     end
 

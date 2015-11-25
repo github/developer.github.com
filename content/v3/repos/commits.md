@@ -13,18 +13,13 @@ The Repo Commits API supports listing, viewing, and comparing commits in a repos
 
     GET /repos/:owner/:repo/commits
 
-_A special note on pagination:_ Due to the way Git works, commits are paginated
-based on SHA instead of page number. Please follow the link headers as outlined
-in the [pagination overview](http://developer.github.com/v3/#pagination)
-instead of constructing page links yourself.
-
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
-`sha`|`string` | SHA or branch to start listing commits from.
+`sha`|`string` | SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`).
 `path`|`string` | Only commits containing this file path will be returned.
-`author`|`string` | GitHub login, name, or email by which to filter by commit author
+`author`|`string` | GitHub login or email address by which to filter by commit author.
 `since`|`string` | Only commits after this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 `until`|`string` | Only commits before this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
@@ -32,9 +27,7 @@ Name | Type | Description
 ### Response
 
 <%=
-  headers 200, :pagination => {
-    :next => 'https://api.github.com/repositories/417862/commits?top=master&last_sha=4f9890864feb48296917c2fcf3682d8dc3adf16a'
-  }
+  headers 200, :pagination => { :next => 'https://api.github.com/resource?page=2' }
 %>
 <%= json(:commit) { |h| [h] } %>
 
@@ -44,26 +37,28 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
-<%= json(:full_commit) %>
-
-Note: Diffs with binary data will have no 'patch' property. Pass the
+Diffs with binary data will have no 'patch' property. Pass the
 appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and
 patch formats.
+
+<%= headers 200 %>
+<%= json(:full_commit) %>
 
 ## Compare two commits
 
     GET /repos/:owner/:repo/compare/:base...:head
 
-Note: Both `:base` and `:head` can be either branch names in `:repo` or branch names in other repositories in the same network as `:repo`. For the latter case, use the format `user:branch`:
+Both `:base` and `:head` must be branch names in `:repo`. To compare branches across other repositories in the same network as `:repo`, use the format `<USERNAME>:branch`. For example:
 
-    GET /repos/:owner/:repo/compare/user1:branchname...user2:branchname
+    GET /repos/:owner/:repo/compare/hubot:branchname...octocat:branchname
 
 ### Response
 
-<%= json :commit_comparison %>
+The response from the API is equivalent to running the `git log base..head` command; however, commits are returned in reverse chronological order.
 
 Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
+
+<%= json :commit_comparison %>
 
 ### Working with large comparisons
 

@@ -12,6 +12,8 @@ read more about the use of media types in the API [here](/v3/media/).
 
 ## List issues
 
+<%= fetch_content(:prs_as_issues) %>
+
 List all issues across all the authenticated user's visible repositories
 including owned repositories, member repositories, and organization
 repositories:
@@ -44,15 +46,17 @@ Name | Type | Description
 
 ## List issues for a repository
 
+<%= fetch_content(:prs_as_issues) %>
+
     GET /repos/:owner/:repo/issues
 
 ### Parameters
 
 Name | Type | Description
 -----|------|--------------
-`milestone`|`integer` or `string`| If an `integer` is passed, it should refer to a milestone number. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. Default: `*`
+`milestone`|`integer` or `string`| If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
 `state`|`string`| Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. Default: `open`
-`assignee`|`string`| Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. Default: `*`
+`assignee`|`string`| Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
 `creator`|`string`| The user that created the issue.
 `mentioned`|`string`| A user that's mentioned in the issue.
 `labels`|`string`| A list of comma separated label names.  Example: `bug,ui,@high`
@@ -67,18 +71,14 @@ Name | Type | Description
 
 ## Get a single issue
 
+<%= fetch_content(:prs_as_issues) %>
+
     GET /repos/:owner/:repo/issues/:number
 
 ### Response
 
 <%= headers 200 %>
 <%= json :full_issue %>
-
-<div class="alert">
-  <p>
-    <strong>Note</strong>: Every pull request is an issue, but not every issue is a pull request. When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, if the issue is not a pull request, the response omits the <code>pull_request</code> attribute.
-  </p>
-</div>
 
 ## Create an issue
 
@@ -93,7 +93,7 @@ Name | Type | Description
 `title`|`string` | **Required**. The title of the issue.
 `body`|`string` | The contents of the issue.
 `assignee`|`string` | Login for the user that this issue should be assigned to. _NOTE: Only users with push access can set the assignee for new issues. The assignee is silently dropped otherwise._
-`milestone`|`number` | Milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
+`milestone`|`integer` | The `number` of the milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
 `labels`|`array` of `strings` | Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
 
 #### Example
@@ -108,9 +108,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-'https://api.github.com/repos/user/repo/issues/1' %>
+<%= headers 201, :Location => get_resource(:full_issue)['url'] %>
 <%= json :full_issue %>
 
 ## Edit an issue
@@ -123,12 +121,12 @@ Issue owners and users with push access can edit an issue.
 
 Name | Type | Description
 -----|------|--------------
-`title`|`string` | **Required**. The title of the issue.
+`title`|`string` | The title of the issue.
 `body`|`string` | The contents of the issue.
 `assignee`|`string` | Login for the user that this issue should be assigned to.
 `state`|`string` | State of the issue. Either `open` or `closed`.
-`milestone`|`number` | Milestone to associate this issue with. _NOTE: Only users with push access can set the milestone for new issues. The milestone is silently dropped otherwise._
-`labels`|`array` of `strings` | Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
+`milestone`|`integer` | The `number` of the milestone to associate this issue with or `null` to remove current. _NOTE: Only users with push access can set the milestone for issues. The milestone is silently dropped otherwise._
+`labels`|`array` of `strings` | Labels to associate with this issue. Pass one or more Labels to _replace_ the set of Labels on this Issue. Send an empty array (`[]`) to clear all Labels from the Issue. _NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise._
 
 
 #### Example

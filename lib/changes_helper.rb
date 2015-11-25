@@ -1,5 +1,7 @@
 module ChangesHelper
-  MimeFormat = "application/vnd.github.%s+json".freeze
+  PER_PAGE = 10
+
+  MimeFormat ||= "application/vnd.github.%s+json".freeze
   # Public: Filters the change items out.  If a version is given, show only the
   # items related to that version.
   #
@@ -17,6 +19,15 @@ module ChangesHelper
     end.sort! do |x, y|
       attribute_to_time(y[:created_at]) <=> attribute_to_time(x[:created_at])
     end
+  end
+
+  def paginated_api_changes(first, last, version = nil)
+    changes = api_changes(version)
+    changes[first..last]
+  end
+
+  def total_pages(version = nil)
+    (api_changes(version).length / PER_PAGE).floor + 1
   end
 
   # Public

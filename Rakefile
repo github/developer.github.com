@@ -1,16 +1,42 @@
-require 'nanoc3/tasks'
-require 'html/proofer'
+require_relative 'lib/resources'
+require 'tmpdir'
 
 task :default => [:test]
 
-desc "Compile the site"
-task :compile do
-  `nanoc compile`
+desc 'Builds the site'
+task :build do
+  if ENV['RACK_ENV'] == 'test'
+    begin
+      sh 'node_modules/gulp/bin/gulp.js build > build.txt'
+    rescue StandardError => e
+      puts 'uh oh'
+      $stderr.puts `cat build.txt`
+      raise e
+    end
+  else
+    sh 'node_modules/gulp/bin/gulp.js build'
+  end
 end
 
 desc "Test the output"
-task :test => [:clean, :remove_output_dir, :compile] do
-  HTML::Proofer.new("./output").run
+task :test => [:remove_tmp_dir, :remove_output_dir, :build, :run_proofer]
+
+desc "Run the HTML-Proofer"
+task :run_proofer do
+  require 'html/proofer'
+  ignored_links = [%r{www.w3.org}]
+  latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']
+  # swap versionless Enterprise articles with versioned paths
+  href_swap = {
+    %r{help\.github\.com/enterprise/admin/} => "help.github.com/enterprise/#{latest_ent_version}/admin/",
+    %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{latest_ent_version}/user/"
+  }
+  HTML::Proofer.new("./output", :href_ignore => ignored_links, :href_swap => href_swap).run
+end
+
+desc "Remove the tmp dir"
+task :remove_tmp_dir do
+  FileUtils.rm_r('tmp') if File.exist?('tmp')
 end
 
 desc "Remove the output dir"
@@ -19,43 +45,39 @@ task :remove_output_dir do
 end
 
 # Prompt user for a commit message; default: P U B L I S H :emoji:
-def commit_message
+def commit_message(no_commit_msg = false)
   publish_emojis = [':boom:', ':rocket:', ':metal:', ':bulb:', ':zap:',
     ':sailboat:', ':gift:', ':ship:', ':shipit:', ':sparkles:', ':rainbow:']
   default_message = "P U B L I S H #{publish_emojis.sample}"
 
-  print "Enter a commit message (default: '#{default_message}'): "
-  STDOUT.flush
-  mesg = STDIN.gets.chomp.strip
+  unless no_commit_msg
+    print "Enter a commit message (default: '#{default_message}'): "
+    STDOUT.flush
+    mesg = STDIN.gets.chomp.strip
+  end
 
-  mesg = default_message if mesg == ''
+  mesg = default_message if mesg.nil? || mesg == ''
   mesg.gsub(/'/, '') # Allow this to be handed off via -m '#{message}'
 end
 
+namespace :assets do
+  task :precompile => [:build] do
+    sh 'mv output _site/'
+  end
+end
+
 desc "Publish to http://developer.github.com"
-task :publish => [:clean, :remove_output_dir] do
-  mesg = commit_message
+task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :build] do |t, args|
+  message = commit_message(args[:no_commit_msg])
 
-  sh "nanoc compile"
-
-  ENV['GIT_DIR'] = File.expand_path(`git rev-parse --git-dir`.chomp)
-  old_sha = `git rev-parse refs/remotes/origin/gh-pages`.chomp
-  Dir.chdir('output') do
-    ENV['GIT_INDEX_FILE'] = gif = '/tmp/dev.gh.i'
-    ENV['GIT_WORK_TREE'] = Dir.pwd
-    File.unlink(gif) if File.file?(gif)
-    `git add -A`
-    tsha = `git write-tree`.strip
-    puts "Created tree   #{tsha}"
-    if old_sha.size == 40
-      csha = `git commit-tree #{tsha} -p #{old_sha} -m '#{mesg}'`.strip
-    else
-      csha = `git commit-tree #{tsha} -m '#{mesg}'`.strip
-    end
-    puts "Created commit #{csha}"
-    puts `git show #{csha} --stat`
-    puts "Updating gh-pages from #{old_sha}"
-    `git update-ref refs/heads/gh-pages #{csha}`
-    `git push origin gh-pages`
+  Dir.mktmpdir do |tmp|
+    system "mv output/* #{tmp}"
+    system "cp .gitignore #{tmp}"
+    system 'git checkout gh-pages'
+    system "rsync -av #{tmp}/ ."
+    system 'git add .'
+    system "git commit -am #{message.shellescape}"
+    system 'git push origin gh-pages --force'
+    system 'git checkout master'
   end
 end

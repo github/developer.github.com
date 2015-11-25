@@ -9,10 +9,9 @@ We've added a [new filter][filter] for listing members of an organization withou
 [two-factor authentication][2fa-blog] enabled:
 
 
-<pre class="terminal">
-$ curl -H "Authorization: token [yours]" \
-       https://api.github.com/orgs/[orgname]/members\?filter\=2fa_disabled
-</pre>
+{:.terminal}
+    $ curl -H "Authorization: token [yours]" \
+           "https://api.github.com/orgs/[orgname]/members?filter=2fa_disabled"
 
 The new filter is available for owners of organizations with private
 repositories. Happy auditing and [send us your feedback or questions][contact].

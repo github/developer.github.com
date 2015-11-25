@@ -7,15 +7,14 @@ title: Notifications | GitHub API
 * TOC
 {:toc}
 
-GitHub Notifications are powered by [watched repositories](/v3/activity/watching/).
-Users receive notifications for discussions in repositories they watch
+Users receive notifications for conversations in repositories they watch
 including:
 
 * Issues and their comments
 * Pull Requests and their comments
 * Comments on any commits
 
-Notifications are also sent for discussions in unwatched repositories when the
+Notifications are also sent for conversations in unwatched repositories when the
 user is involved including:
 
 * **@mentions**
@@ -37,6 +36,7 @@ leaving your current rate limit untouched.  There is an "X-Poll-Interval"
 header that specifies how often (in seconds) you are allowed to poll.  In times
 of high server load, the time may increase.  Please obey the header.
 
+{:.terminal}
     # Add authentication to your requests
     $ curl -I https://api.github.com/notifications
     HTTP/1.1 200 OK
@@ -59,20 +59,20 @@ Here's a list of potential `reason`s for receiving a notification:
 Reason Name | Description
 ------------|------------
 `subscribed` | The notification arrived because you're watching the repository
-`manual` | The notification arrived because you've specifically decided to watch the item (via an Issue or Pull Request) 
-`author` | The notification arrived because you've created the item 
-`comment` | The notification arrived because you've commented on the item 
-`mention` | The notification arrived because you were specifically **@mentioned** in the content 
-`team_mention` | The notification arrived because you were on a team that was mentioned (like @org/team) 
-`state_change` | The notification arrived because you changed the item state (like closing an Issue or merging a Pull Request) 
-`assign` | The notification arrived because you were assigned to the Issue 
+`manual` | The notification arrived because you've specifically decided to subscribe to the thread (via an Issue or Pull Request)
+`author` | The notification arrived because you've created the thread
+`comment` | The notification arrived because you've commented on the thread
+`mention` | The notification arrived because you were specifically **@mentioned** in the content
+`team_mention` | The notification arrived because you were on a team that was mentioned (like @org/team)
+`state_change` | The notification arrived because you changed the thread state (like closing an Issue or merging a Pull Request)
+`assign` | The notification arrived because you were assigned to the Issue
 
 Note that the `reason` is modified on a per-thread basis, and can change, if the
-`reason` on a later notification is different. 
+`reason` on a later notification is different.
 
-For example, if you are the author of an issue, subsequent notifications on that 
-issue will have a `reason` of `author`. If you're then  **@mentioned** on the same 
-issue, the notifications you fetch thereafter will have a `reason` of `mention`. 
+For example, if you are the author of an issue, subsequent notifications on that
+issue will have a `reason` of `author`. If you're then  **@mentioned** on the same
+issue, the notifications you fetch thereafter will have a `reason` of `mention`.
 The `reason` remains as `mention`, regardless of whether you're ever mentioned again.
 
 ## List your notifications
@@ -87,8 +87,8 @@ Name | Type | Description
 -----|------|--------------
 `all`|`boolean` | If `true`, show notifications marked as read. Default: `false`
 `participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. Default: `false`
-`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
-
+`since`|`string` | Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
+`before`|`string` | Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Response
 
@@ -107,8 +107,8 @@ Name | Type | Description
 -----|------|--------------
 `all`|`boolean` | If `true`, show notifications marked as read. Default: `false`
 `participating`|`boolean` | If `true`, only shows notifications in which the user is directly participating or mentioned. Default: `false`
-`since`|`string` | Filters out any notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
-
+`since`|`string` | Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
+`before`|`string` | Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Response
 
@@ -142,7 +142,7 @@ from the [default view on GitHub.com](https://github.com/notifications).
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `last_read_at`|`string` | Describes the last point that notifications were checked.  Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Default: `Time.now`
 
@@ -173,6 +173,12 @@ Name | Type | Description
 This checks to see if the current user is subscribed to a thread.  You can also
 [get a Repository subscription](/v3/activity/watching/#get-a-repository-subscription).
 
+{{#tip}}
+
+Note that subscriptions are only generated if a user is participating in a conversation--for example, they've replied to the thread, were **@mention**ed, or manually subscribe to a thread.
+
+{{/tip}}
+
     GET /notifications/threads/:id/subscription
 
 ### Response
@@ -182,10 +188,7 @@ This checks to see if the current user is subscribed to a thread.  You can also
 
 ## Set a Thread Subscription
 
-This lets you subscribe to a thread, or ignore it.  Subscribing to a thread
-is unnecessary if the user is already subscribed to the repository.  Ignoring
-a thread will mute all future notifications (until you comment or get
-@mentioned).
+This lets you subscribe or unsubscribe from a conversation. Unsubscribing from a conversation mutes all future notifications (until you comment or get **@mention**ed once more).
 
     PUT /notifications/threads/:id/subscription
 
@@ -209,4 +212,3 @@ Name | Type | Description
 ### Response
 
 <%= headers 204 %>
-

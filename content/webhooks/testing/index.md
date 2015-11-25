@@ -18,7 +18,7 @@ view provides some tooling for testing your deployed payloads.
 Every webhook has its own "Recent Deliveries" section, which lists, at a glance
 whether a deployment was successful (green check) or failed (red x).
 
-![Recent Deliveries view](/images/webhooks_recent_deliveries.png)
+![Recent Deliveries view](/assets/images/webhooks_recent_deliveries.png)
 
 You can also identify when each delivery was attempted.
 
@@ -33,7 +33,7 @@ both the HTTP Request and Response.
 The webhook delivery view provides information on which Headers were sent by GitHub.
 It also includes details about the JSON payload.
 
-![Viewing a payload request](/images/payload_request_tab.png)
+![Viewing a payload request](/assets/images/payload_request_tab.png)
 
 ### Response
 
@@ -41,4 +41,4 @@ The response tab lists how your server replied once it received the payload from
 GitHub. This includes the status code, the headers, and any additional data
 within the response body.
 
-![Viewing a payload response](/images/payload_response_tab.png)
+![Viewing a payload response](/assets/images/payload_response_tab.png)

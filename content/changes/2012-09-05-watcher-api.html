@@ -1,0 +1,124 @@
+---
+kind: change
+title: Upcoming Changes to Watcher and Star APIs
+created_at: 2012-09-05
+author_name: technoweenie
+---
+
+We recently [changed the Watcher behavior][change-watching] on GitHub.  What
+used to be known as "Watching" is now "Starring".  Starring is basically a way
+to bookmark interesting repositories.  Watching is a way to indicate that you
+want to receive email or web notifications on a Repository.
+
+[change-watching]: https://github.com/blog/1204-notifications-stars
+
+This works well on GitHub.com, but poses a problem for the GitHub API.  How do
+we change this in a way that developers can gracefully upgrade their
+applications?  We're currently looking at rolling out the changes in three
+phases over an extended period of time.
+
+## Current Status
+
+The current [Repository Starring][starring-api] methods look like this:
+
+* `/repos/:owner/:repo/watchers` - A list of users starring the repository.
+* `/users/:user/watched` - A list of repositories that a user has starred.
+* `/user/watched` - A list of repositories the current user has starred.
+
+[starring-api]: /v3/activity/starring/
+
+## Phase 1: Add Watchers as Subscriptions
+
+This phase exposes Watchers as "Subscriptions".  This is to
+keep from clashing with the legacy endpoints.  This phase will happen
+automatically <s>and will not break your application until Phase 3 starts</s>.
+(**UPDATE**: API v3 will continue to support this functionality indefinitely.)
+
+* `/repos/:owner/:repo/subscribers` - A list of users watching the repository.
+* `/users/:user/subscriptions` - A list of repositories that a user is watching.
+* `/user/subscriptions` - A list of repositories the current user is watching.
+
+We'll also add a copy of the legacy Watchers API in the new endpoint:
+
+* `/repos/:owner/:repo/stargazers` - A list of users starring the repository.
+* `/users/:user/starred` - A list of repositories that a user has starred.
+* `/user/starred` - A list of repositories the current user has starred.
+
+This is in place _now_ with the current media type for the API:
+
+    application/vnd.github.beta+json
+
+If you care about your application not breaking, make sure all outgoing API
+requests pass that value for the "Accept" header.  You should do this now.  This
+can be verified by checking the `X-GitHub-Media-Type` header on all API
+responses.
+
+{:.terminal}
+    # Accesses a user's starred repositories.
+    curl https://api.github.com/user/watched \
+      -H "Accept: application/vnd.github.beta+json"
+
+-<s>This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
+the "beta" media type, and makes the "v3" media type the implicit default
+for API requests.</s>
+
+## UPDATE - November 6, 2013
+
+<div class="alert">
+  <p>
+    API v3 will continue to officially support the functionality described in
+    Phase 1 above. This functionality will remain intact for the lifetime of
+    API v3.
+  </p>
+  <p>
+    API v3 will <em>not</em> include Phases 2 and 3 (below). Those phases will
+    likely be part of the next major version of the API. (We have not announced
+    a timeline for the next major version of the API.)
+  </p>
+</div>
+
+## <s>Phase 2: Switch <code>/watchers</code> API Endpoint</s>
+
+<s>The "watch" endpoints will now be a copy of the "subscription" endpoints.  You
+will have to use <code>/user/starred</code> to get a user's starred repositories, not
+<code>/user/watched</code>.</s>
+
+<s>This requires a new media type value:</s>
+
+<s><pre>application/vnd.github.v3+json</pre></s>
+
+<s>This is a breaking change from Phase 1.  We will release this change in an
+experimental mode first, letting developers gracefully upgrade their
+applications by specifying the new media value for the Accept header.</s>
+
+<s>
+<pre>
+# Accesses a user's watched repositories.
+curl https://api.github.com/user/watched \
+  -H "Accept: application/vnd.github.v3+json"
+</pre>
+</s>
+
+## <s>Phase 3: Remove <code>/subscribers</code> API Endpoint.</s>
+
+<s>This phase involves disabling the subscription endpoints completely.  At this
+point, you should be using the starring endpoints for starred repositories, and
+the watch endpoints for watched repositories.  No date has been set yet, but we
+expect this to be <em>3-6 months</em> after Phase 2 is in place.  This should give
+developers enough time for a smooth upgrade path.  If they use popular API
+wrappers, the work will likely mostly be done for them.</s>
+
+<s>Keep on passing the "v3" media type in your application, until the API has
+another breaking change to make.  If you can't make the deadline for Phase 3,
+just set the "beta" media type until we shut that down completely.  It's likely
+that we will keep the old "beta" media type active for another month, like
+the <a href="https://github.com/blog/1090-github-api-moving-on">last time</a> we terminated
+old API functionality.</s>
+
+We look forward to assisting you through this transition.  Hit us up at
+[https://github.com/contact][c], [support@github.com][email], or
+[@GitHubAPI][twitter].
+
+[twitter]: https://twitter.com/githubapi
+[email]: mailto:support@github.com
+[c]: https://github.com/c

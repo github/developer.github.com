@@ -178,13 +178,13 @@ indicating the name of the app, as well as the level of access the app
 has once it's authorized by the user. After a user authorizes access, GitHub
 redirects the user back to the application:
 
-![GitHub's OAuth Prompt](/images/oauth_prompt.png)
+![GitHub's OAuth Prompt](/assets/images/oauth_prompt.png)
 
 However, you don't need to set up the entire web flow to begin working with OAuth tokens.
 An easier way to get a token is to [create a **personal access token**][personal token] via your
 [Personal access tokens settings page][tokens settings]:
 
-![Personal Token selection](/images/personal_token.png)
+![Personal Token selection](/assets/images/personal_token.png)
 
 Also, the [**Authorizations API**][authorizations api] makes it simple to use Basic Authentication
 to create an OAuth token. Try pasting and running the following command:

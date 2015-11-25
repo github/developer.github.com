@@ -1,22 +1,21 @@
-source "http://rubygems.org"
-
-ruby '2.1.6'
+source 'http://rubygems.org'
+ruby '2.2.3'
 
 gem 'builder'
-gem 'coderay'
-gem 'kramdown', '~> 0.13.2'
-gem 'mime-types', '~> 1.16'
-gem 'nanoc', '~> 3.7'
+gem 'kramdown', '~> 1.8'
+gem 'nanoc', '~> 4.0'
 gem 'nokogiri', '~> 1.6.0'
 gem 'rouge', '~> 1.4'
-gem 'rake', '~> 0.9.2'
-gem 'thin'
-gem 'yajl-ruby', '~> 0.8.2'
 
 group :development do
+  gem 'rake', '10.3.2'
   gem 'adsf'
   gem 'fssm'
   gem 'guard-nanoc'
+end
+
+group :staging do
+  gem 'jekyll-auth', '~> 2.0'
 end
 
 group :test do

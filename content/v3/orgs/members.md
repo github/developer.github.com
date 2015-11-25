@@ -159,7 +159,7 @@ In order to create or update a user's membership with an organization, the authe
 
 Name  | Type   | Description
 ------|--------|--------------
-`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an owner of the organization.<br/> * `member` - The user will become a non-owner member of the organization. Use this only to demote an existing owner to a non-owner.
+`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an owner of the organization.<br/> * `member` - The user will become a non-owner member of the organization.
 
 ### Response if user was previously unaffiliated with organization
 

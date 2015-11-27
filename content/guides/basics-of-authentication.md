@@ -79,7 +79,7 @@ requesting `user:email` scope for reading private email addresses.
 
 Navigate your browser to `http://localhost:4567`. After clicking on the link, you
 should be taken to GitHub, and presented with a dialog that looks something like this:
-![GitHub's OAuth Prompt](/images/oauth_prompt.png)
+![GitHub's OAuth Prompt](/assets/images/oauth_prompt.png)
 
 If you trust yourself, click **Authorize App**. Wuh-oh! Sinatra spits out a
 `404` error. What gives?!
@@ -125,9 +125,15 @@ The scopes that were granted are returned as a part of the response from
 exchanging a token.
 
     #!ruby
-    # check if we were granted user:email scope
-    scopes = JSON.parse(result)['scope'].split(',')
-    has_user_email_scope = scopes.include? 'user:email'
+    get '/callback' do
+      # ...
+      # Get the access_token using the code sample above
+      # ...
+      
+      # check if we were granted user:email scope
+      scopes = JSON.parse(result)['scope'].split(',')
+      has_user_email_scope = scopes.include? 'user:email'
+    end
 
 In our application, we're using `scopes.include?` to check if we were granted
 the `user:email` scope needed for fetching the authenticated user's private
@@ -168,6 +174,7 @@ the logged in user:
       auth_result['private_emails'] =
         JSON.parse(RestClient.get('https://api.github.com/user/emails',
                                   {:params => {:access_token => access_token}}))
+    end
 
     erb :basic, :locals => auth_result
 

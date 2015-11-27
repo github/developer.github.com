@@ -12,16 +12,16 @@ many flavors</h1>
     <li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
     <li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
   </ul>
-  <img src="/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
+  <img src="/assets/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
 </div>
 
 # Third-party libraries
 
-## Dart
+## Android
 
-* [github.dart][github.dart]
+* [GithubAndroidSDK][githubandroidsdk]
 
-[github.dart]: https://github.com/DirectMyFile/github.dart
+[githubandroidsdk]: https://github.com/gitskarios/GithubAndroidSdk
 
 ## .NET
 
@@ -38,6 +38,12 @@ many flavors</h1>
 * [Tentacles][tentacles]
 
 [tentacles]: https://github.com/Raynes/tentacles
+
+## Dart
+
+* [github.dart][github.dart]
+
+[github.dart]: https://github.com/DirectMyFile/github.dart
 
 ## Emacs Lisp
 
@@ -180,6 +186,14 @@ covers the entire API.
 
 * [Dispatch GitHub][dispatchgithub]
 * [Hubcat][hubcat]
+* [Buhtig][buhtig]
 
 [dispatchgithub]: https://github.com/andreazevedo/dispatch-github
 [hubcat]: https://github.com/softprops/hubcat
+[buhtig]: https://github.com/mdread/buhtig
+
+## Shell
+
+* [ok.sh][ok.sh]
+
+[ok.sh]: https://github.com/whiteinge/ok.sh

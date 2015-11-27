@@ -36,7 +36,7 @@ This method returns the contents of a file or directory in a repository.
     GET /repos/:owner/:repo/contents/:path
 
 Files and symlinks support [a custom media type](#custom-media-types) for retrieving the raw content or rendered HTML (when supported).
-Directories and submodules do _not_ support custom media types.
+All content types support [a custom media type](#custom-media-types) to ensure the content is returned in a consistent object format.
 
 {{#tip}}
 
@@ -64,13 +64,13 @@ Name | Type | Description
 
 The response will be an array of objects, one object for each item in the directory.
 
-<%= headers 200 %>
-<%= json :directory_content %>
-
-Note: When listing the contents of a directory, submodules have their "type"
+When listing the contents of a directory, submodules have their "type"
 specified as "file". Logically, the value *should* be "submodule". This behavior
 exists in API v3 [for backwards compatibility purposes](https://github.com/github/developer.github.com/commit/1b329b04cece9f3087faa7b1e0382317a9b93490).
 In the next major version of the API, the type will be returned as "submodule".
+
+<%= headers 200 %>
+<%= json :directory_content %>
 
 ### Response if content is a symlink
 
@@ -83,13 +83,13 @@ Otherwise, the API responds with an object describing the symlink itself:
 
 ### Response if content is a submodule
 
-<%= headers 200 %>
-<%= json :submodule_content %>
-
 The `submodule_git_url` identifies the location of the submodule repository, and the `sha` identifies a specific commit within the submodule repository.
 Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.
 
 If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the github.com URLs (`html_url` and `_links["html"]`) will have null values.
+
+<%= headers 200 %>
+<%= json :submodule_content %>
 
 ## Create a file
 
@@ -265,13 +265,12 @@ Name | Type | Description
 
 To follow redirects with curl, use the `-L` switch:
 
-<pre class="terminal">
-curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
+{:.terminal}
+    curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
 
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
-</pre>
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
 
 ## Custom media types
 
@@ -283,5 +282,12 @@ curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
 Use the `.raw` media type to retrieve the contents of the file.
 
 For markup files such as Markdown or AsciiDoc, you can retrieve the rendered HTML using the `.html` media type. Markup languages are rendered to HTML using our open-source [Markup library](https://github.com/github/markup).
+
+[All objects](#get-contents) support the following custom media type:
+
+    application/vnd.github.VERSION.object
+
+Use the `object` media type parameter to retrieve the contents in a consistent object format regardless of the content type. For example, instead of an array of objects
+for a directory, the response will be an object with an `entries` attribute containing the array of objects.
 
 You can read more about the use of media types in the API [here](/v3/media/).

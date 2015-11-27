@@ -44,7 +44,6 @@ Name | Type | Description
 `sort`|`string`|  What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month). Default: `created`
 `direction`|`string`| The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
 
-
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
@@ -56,10 +55,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
-<%= json :full_pull %>
-
-### Mergability
+{{#tip}}
 
 Each time the pull request receives new commits, GitHub creates a merge commit
 to _test_ whether the pull request can be automatically merged into the base
@@ -69,15 +65,18 @@ however, this attribute is [deprecated](/v3/versions/#v3-deprecations) and is sc
 removal in the next version of the API. The Boolean `mergeable` attribute will
 remain to indicate whether the pull request can be automatically merged.
 
-The value of the `mergeable` attribute can be `true`, `false`, or `null`. If 
+The value of the `mergeable` attribute can be `true`, `false`, or `null`. If
 the value is `null`, this means that the mergeability hasn't been computed yet,
 and a background job was started to compute it. Give the job a few moments to
 complete, and then submit the request again. When the job is complete, the
 response will include a non-`null` value for the `mergeable` attribute.
 
-### Alternative Response Formats
+{{/tip}}
 
 Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
+
+<%= headers 200 %>
+<%= json :full_pull %>
 
 ## Create a pull request
 
@@ -109,7 +108,7 @@ Issue number instead of `title` and `body`.
 
 Name | Type | Description
 -----|------|--------------
-`issue`|`number` | **Required**. The issue number in this repository to turn into a Pull Request.
+`issue`|`integer` | **Required**. The issue number in this repository to turn into a Pull Request.
 
 #### Example
 

@@ -14,27 +14,26 @@ Now, you can also [get this metadata][code-text-matches] for matches that occur 
 
 For example, when [searching for files that have "client" in their path][example-path-search], the results include this match for `lib/octokit/client/commits.rb`:
 
-<pre class="json">
-{
-  "name": "commits.rb",
-  "path": "lib/octokit/client/commits.rb",
-  "text_matches": [
+{:.json}
     {
-      "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
-      "object_type": "FileContent",
-      "property": "path",
-      "fragment": "lib/octokit/client/commits.rb",
-      "matches": [
+      "name": "commits.rb",
+      "path": "lib/octokit/client/commits.rb",
+      "text_matches": [
         {
-          "text": "client",
-          "indices": [ 12, 18 ]
+          "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
+          "object_type": "FileContent",
+          "property": "path",
+          "fragment": "lib/octokit/client/commits.rb",
+          "matches": [
+            {
+              "text": "client",
+              "indices": [ 12, 18 ]
+            }
+          ]
         }
       ]
+      // ...
     }
-  ]
-  // ...
-}
-</pre>
 
 ## Better Text Match Metadata
 
@@ -45,23 +44,21 @@ For example, imagine your search returns an issue like [rails/rails#11889][examp
 
 The response would include a `text_matches` array with the following object:
 
-<pre class="json">
-{
-  "fragment": "undefined method `except' for #&amp;lt;Array:XXX&amp;gt;",
-  // ...
-}
-</pre>
+{:.json}
+    {
+      "fragment": "undefined method 'except' for #&lt;Array:XXX&gt;",
+      // ...
+    }
 
 Inside the `fragment` value, we see HTML-encoded entities (e.g., `&lt;`).
 Since we're returning JSON (not HTML), API clients might not expect any HTML-encoded text.
 As of today, the API returns these fragments _without_ this extraneous encoding.
 
-<pre class="json">
-{
-  "fragment": "undefined method `except' for #&lt;Array:XXX&gt;",
-  // ...
-}
-</pre>
+{:.json}
+    {
+      "fragment": "undefined method 'except' for #<Array:XXX>",
+      // ...
+    }
 
 ## Preview Period
 

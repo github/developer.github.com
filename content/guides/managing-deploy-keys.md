@@ -65,11 +65,11 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 
 * Anyone with access to the repository and server has the ability to deploy the project.
 * Users don't have to change their local SSH settings.
+* Deploy keys can read and write by default, but can be made read-only.
 
 #### Cons
 
 * Deploy keys only grant access to a single repository. More complex projects may have many repositories to pull to the same server.
-* Deploy keys always provide full read/write access to a repository.
 * Deploy keys are usually not protected by a passphrase, making the key easily accessible if the server is compromised.
 
 #### Setup
@@ -82,7 +82,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 4. In your repository's right sidebar, click **Settings**.
    ![Settings tab](https://github-images.s3.amazonaws.com/help/repository/repo-actions-settings.png)
 3. In the sidebar, click **Deploy Keys**.
-   ![Deploy Keys section](/images/deploy-keys.png)
+   ![Deploy Keys section](/assets/images/deploy-keys.png)
 3. Click **Add deploy key**. Paste your public key in and submit.
    ![Add Deploy Key button](https://github-images.s3.amazonaws.com/help/repository/repo-deploy-key.png)
 
@@ -92,7 +92,7 @@ If your server needs to access multiple repositories, you can choose to create a
 
 <div class="alert">
 <p>
-<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create machine users for your server deploy scripts. Machine users are completely kosher.
+<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.
 </p>
 </div>
 

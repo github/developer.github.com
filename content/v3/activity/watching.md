@@ -21,7 +21,7 @@ legacy "watcher" endpoints continue to provide starring data.
 
 To provide access to watching data, the v3 Watcher API uses the "subscription"
 endpoints described below. Check out the [Watcher API Change
-post](/changes/2012-9-5-watcher-api/) for more details.
+post](/changes/2012-09-05-watcher-api/) for more details.
 
 ## List watchers
 

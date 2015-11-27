@@ -19,11 +19,11 @@ information](/v3/#authentication) with your request).
 
 ### Response
 
-<%= headers 200 %>
-<%= json :full_user %>
-
 Note: The returned email is the user's publicly visible email address
 (or `null` if the user has not [specified a public email address in their profile](https://github.com/settings/profile)).
+
+<%= headers 200 %>
+<%= json :full_user %>
 
 ## Get the authenticated user
 
@@ -69,8 +69,7 @@ Name | Type | Description
 
 ## Get all users
 
-This provides a dump of every user, in the order that they signed up for
-GitHub.
+Lists all users, in the order that they signed up on GitHub.
 
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of

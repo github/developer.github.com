@@ -1,26 +1,26 @@
 # developer.github.com
 
-This is a GitHub API resource built with [nanoc][nanoc].
+This is a GitHub API resource built with [Nanoc][nanoc].
 
 All submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](http://help.github.com/send-pull-requests/).
 
 ## Setup
 
-Ruby 1.9 is required to build the site.
+Ruby 2.2 is required to build the site.
 
-Get the nanoc gem, plus kramdown for Markdown parsing:
+Get the Nanoc gem, plus kramdown for Markdown parsing:
 
 ```sh
 $ bundle install
 ```
 
-You can see the available commands with nanoc:
+You can see the available commands with Nanoc:
 
 ```sh
 $ bundle exec nanoc -h
 ```
 
-Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about nanoc.
+Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about Nanoc.
 
 [nanoc]: http://nanoc.ws/
 
@@ -77,18 +77,27 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 
 ### Terminal blocks
 
-You can specify terminal blocks with `pre.terminal` elements.  (It'd be nice if
-Markdown could do this more cleanly.)
+You can specify terminal blocks by prefacing a [block element][block boundaries] with `{:.terminal}`.
+
+```markdown
+{:.terminal}
+    $ curl foobar
+```
+
+Alternatively, you can use plain html and use `pre.terminal` elements.
+(If, for example, you need to emphasis text with `<em>`)
 
 ```html
 <pre class="terminal">
-$ curl foobar
+$ curl <em>foobar<em>
 ....
 </pre>
 ```
 
 This is not a `curl` tutorial though. Not every API call needs
 to show how to access it with `curl`.
+
+[block boundaries]: http://kramdown.gettalong.org/syntax.html#block-boundaries
 
 ## Development
 
@@ -116,22 +125,13 @@ Compiling site...
 Site compiled in 5.81s.
 ```
 
-You can setup whatever you want to view the files. If using the adsf
+You can set up whatever you want to view the files. If using the adsf
 gem (as listed in the Gemfile), you can start Webrick:
 
 ```sh
 $ bundle exec nanoc view
 $ open http://localhost:3000
 ```
-
-Compilation times got you down?  Use `autocompile`!
-
-```sh
-$ bundle exec nanoc autocompile
-```
-
-This starts a web server too, so there's no need to run `nanoc view`.
-One thing: remember to add trailing slashes to all nanoc links!
 
 ## Deploy
 

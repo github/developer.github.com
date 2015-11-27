@@ -1,5 +1,4 @@
 require 'pp'
-require 'yajl/json_gem'
 require 'stringio'
 require 'cgi'
 require 'securerandom'
@@ -35,11 +34,12 @@ module GitHub
       end
 
       def strftime(time, format = DefaultTimeFormat)
+        return "" if time.nil?
         attribute_to_time(time).strftime(format)
       end
 
       def avatar_for(login)
-        %(<img height="16" width="16" src="%s" alt="Avatar for #{login}"/>) % avatar_url_for(login)
+        %(<img height="16" width="16" src="%s" alt="Avatar for #{login}" data-proofer-ignore/>) % avatar_url_for(login)
       end
 
       def avatar_url_for(login)
@@ -121,8 +121,10 @@ module GitHub
       end
 
       CONTENT ||= {
-        'LATEST_ENTERPRISE_VERSION' => '2.2',
+        'LATEST_ENTERPRISE_VERSION' => '2.4',
+        'IF_SITE_ADMIN' => "If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,",
         "PUT_CONTENT_LENGTH" => "Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
+        "OPTIONAL_PUT_CONTENT_LENGTH" => "Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see \"[HTTP verbs](/v3/#http-verbs).\"",
         "ORG_HOOK_CONFIG_HASH" =>
         '''
 Name | Type | Description
@@ -174,6 +176,14 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "contributions" => 32
     })
 
+    COLLABORATOR ||= USER.merge({
+      "permissions" => {
+        "pull"  => true,
+        "push"  => true,
+        "admin" => false
+      }
+    })
+
     FULL_USER ||= USER.merge({
       "name"         => "monalisa octocat",
       "company"      => "GitHub",
@@ -217,13 +227,25 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "url"        => "https://api.github.com/user/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
-      "created_at" => "2014-12-10T15:53:42Z"
+      "created_at" => "2014-12-10T15:53:42Z",
+      "read_only"  => true
+
+    PUBLIC_KEY_DETAIL ||= PUBLIC_KEY.merge \
+      "user_id"        => 232,
+      "repository_id"  => nil
 
     DEPLOY_KEY ||= SIMPLE_PUBLIC_KEY.merge \
       "url"        => "https://api.github.com/repos/octocat/Hello-World/keys/1",
       "title"      => "octocat@octomac",
       "verified"   => true,
-      "created_at" => "2014-12-10T15:53:42Z"
+      "created_at" => "2014-12-10T15:53:42Z",
+      "read_only"  => true
+
+    DEPLOY_KEY_DETAIL ||= PUBLIC_KEY.merge \
+      "user_id"        => nil,
+      "repository_id"  => 2333
+
+    ALL_KEYS ||= [PUBLIC_KEY_DETAIL, DEPLOY_KEY_DETAIL]
 
     SIMPLE_REPO ||= {
       "id"               => 1296269,
@@ -244,11 +266,46 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     }
 
     REPO ||= SIMPLE_REPO.merge({
+      "archive_url"       => "http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}",
+      "assignees_url"     => "http://api.github.com/repos/octocat/Hello-World/assignees{/user}",
+      "blobs_url"         => "http://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}",
+      "branches_url"      => "http://api.github.com/repos/octocat/Hello-World/branches{/branch}",
       "clone_url"         => "https://github.com/octocat/Hello-World.git",
-      "git_url"           => "git://github.com/octocat/Hello-World.git",
+      "collaborators_url" => "http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}",
+      "comments_url"      => "http://api.github.com/repos/octocat/Hello-World/comments{/number}",
+      "commits_url"       => "http://api.github.com/repos/octocat/Hello-World/commits{/sha}",
+      "compare_url"       => "http://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}",
+      "contents_url"      => "http://api.github.com/repos/octocat/Hello-World/contents/{+path}",
+      "contributors_url"  => "http://api.github.com/repos/octocat/Hello-World/contributors",
+      "downloads_url"     => "http://api.github.com/repos/octocat/Hello-World/downloads",
+      "events_url"        => "http://api.github.com/repos/octocat/Hello-World/events",
+      "forks_url"         => "http://api.github.com/repos/octocat/Hello-World/forks",
+      "git_commits_url"   => "http://api.github.com/repos/octocat/Hello-World/git/commits{/sha}",
+      "git_refs_url"      => "http://api.github.com/repos/octocat/Hello-World/git/refs{/sha}",
+      "git_tags_url"      => "http://api.github.com/repos/octocat/Hello-World/git/tags{/sha}",
+      "git_url"           => "git:github.com/octocat/Hello-World.git",
+      "hooks_url"         => "http://api.github.com/repos/octocat/Hello-World/hooks",
+      "issue_comment_url" => "http://api.github.com/repos/octocat/Hello-World/issues/comments{/number}",
+      "issue_events_url"  => "http://api.github.com/repos/octocat/Hello-World/issues/events{/number}",
+      "issues_url"        => "http://api.github.com/repos/octocat/Hello-World/issues{/number}",
+      "keys_url"          => "http://api.github.com/repos/octocat/Hello-World/keys{/key_id}",
+      "labels_url"        => "http://api.github.com/repos/octocat/Hello-World/labels{/name}",
+      "languages_url"     => "http://api.github.com/repos/octocat/Hello-World/languages",
+      "merges_url"        => "http://api.github.com/repos/octocat/Hello-World/merges",
+      "milestones_url"    => "http://api.github.com/repos/octocat/Hello-World/milestones{/number}",
+      "mirror_url"        => "git:git.example.com/octocat/Hello-World",
+      "notifications_url" => "http://api.github.com/repos/octocat/Hello-World/notifications{?since, all, participating}",
+      "pulls_url"         => "http://api.github.com/repos/octocat/Hello-World/pulls{/number}",
+      "releases_url"      => "http://api.github.com/repos/octocat/Hello-World/releases{/id}",
       "ssh_url"           => "git@github.com:octocat/Hello-World.git",
+      "stargazers_url"    => "http://api.github.com/repos/octocat/Hello-World/stargazers",
+      "statuses_url"      => "http://api.github.com/repos/octocat/Hello-World/statuses/{sha}",
+      "subscribers_url"   => "http://api.github.com/repos/octocat/Hello-World/subscribers",
+      "subscription_url"  => "http://api.github.com/repos/octocat/Hello-World/subscription",
       "svn_url"           => "https://svn.github.com/octocat/Hello-World",
-      "mirror_url"        => "git://git.example.com/octocat/Hello-World",
+      "tags_url"          => "http://api.github.com/repos/octocat/Hello-World/tags",
+      "teams_url"         => "http://api.github.com/repos/octocat/Hello-World/teams",
+      "trees_url"         => "http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}",
       "homepage"          => "https://github.com",
       "language"          => nil,
       "forks_count"       => 9,
@@ -300,11 +357,25 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
         "commit" => {
           "sha" => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
           "url" => "https://api.github.com/repos/octocat/Hello-World/commits/c5b97d5ae6c19d5c5df71a34c7fbeeda2479ccbc"
+        },
+        "protection" => {
+          "enabled" => false,
+          "required_status_checks" => {
+            "enforcement_level" => "off",
+            "contexts" => []
+          }
         }
       }
     ]
 
     BRANCH ||= {"name"=>"master",
+      "protection" => {
+        "enabled" => false,
+        "required_status_checks" => {
+          "enforcement_level" => "off",
+          "contexts" => []
+        }
+      },
  "commit"=>
   {"sha"=>"7fd1a60b01f91b314f59955a4e4d4e80d8edf11d",
    "commit"=>
@@ -458,6 +529,9 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "state"      => "open",
       "title"      => "new-feature",
       "body"       => "Please pull these awesome changes",
+      "assignee"   => USER,
+      "milestone"  => MILESTONE,
+      "locked"     => false,
       "created_at" => "2011-01-26T19:01:12Z",
       "updated_at" => "2011-01-26T19:01:12Z",
       "closed_at"  => "2011-01-26T19:01:12Z",
@@ -646,7 +720,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "url"              => "https://api.github.com/repos/octocat/Hello-World/releases/1",
       "html_url"         => "https://github.com/octocat/Hello-World/releases/v1.0.0",
       "assets_url"       => "https://api.github.com/repos/octocat/Hello-World/releases/1/assets",
-      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name}",
+      "upload_url"       => "https://uploads.github.com/repos/octocat/Hello-World/releases/1/assets{?name,label}",
       "tarball_url"      => "https://api.github.com/repos/octocat/Hello-World/tarball/v1.0.0",
       "zipball_url"      => "https://api.github.com/repos/octocat/Hello-World/zipball/v1.0.0",
       "id"               => 1,
@@ -754,6 +828,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "name" => "Justice League",
       "slug" => "justice-league",
       "description" => "A great team.",
+      "privacy" => "closed",
       "permission" => "admin",
       "members_url" => "https://api.github.com/teams/1/members{/member}",
       "repositories_url" => "https://api.github.com/teams/1/repos"
@@ -766,7 +841,8 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     })
 
     TEAM_MEMBERSHIP ||= {
-      "url" => "https://api.github.com/teams/1/memberships/octocat"
+      "url" => "https://api.github.com/teams/1/memberships/octocat",
+      "role" => "member"
     }
 
     ACTIVE_TEAM_MEMBERSHIP ||= TEAM_MEMBERSHIP.merge(
@@ -859,6 +935,18 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     ACTIVE_ORG_MEMBERSHIPS  ||= [ACTIVE_ADMIN_ORG_MEMBERSHIP]
     PENDING_ORG_MEMBERSHIPS ||= [PENDING_ADMIN_ORG_MEMBERSHIP]
 
+    MIGRATIONS ||= {
+      "id" => 79,
+      "guid" => "0b989ba4-242f-11e5-81e1-c7b6966d2516",
+      "state" => "pending",
+      "lock_repositories" => true,
+      "exclude_attachments" => false,
+      "url" => "https://api.github.com/orgs/octo-org/migrations/79",
+      "created_at" => "2015-07-06T15:33:38-07:00",
+      "updated_at" => "2015-07-06T15:33:38-07:00",
+      "repositories" => [REPO]
+    }
+
     LABEL ||= {
       "url"   => "https://api.github.com/repos/octocat/Hello-World/labels/bug",
       "name"  => "bug",
@@ -868,6 +956,9 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     ISSUE ||= {
       "id"         => 1,
       "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+      "labels_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/labels{/name}",
+      "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments",
+      "events_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/events",
       "html_url"   => "https://github.com/octocat/Hello-World/issues/1347",
       "number"     => 1347,
       "state"      => "open",
@@ -877,6 +968,7 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "labels"     => [LABEL],
       "assignee"   => USER,
       "milestone"  => MILESTONE,
+      "locked"     => false,
       "comments"   => 0,
       "pull_request" => {
         "url"       => "https://api.github.com/repos/octocat/Hello-World/pulls/1347",
@@ -1847,10 +1939,14 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
     }
 
     META ||= {
+      :verifiable_password_authentication => true,
+      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15",
       :hooks => ['127.0.0.1/32'],
       :git => ['127.0.0.1/32'],
-      :verifiable_password_authentication => true,
-      :github_services_sha => "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"
+      :pages => [
+        "192.30.252.153/32",
+        "192.30.252.154/32"
+      ]
     }
 
     BLOB ||= {
@@ -2452,6 +2548,31 @@ This endpoint may also return pull requests in the response. If an issue *is* a 
       "network_count"=>6,
       "subscribers_count"=>6
     }
+
+    LICENSE_CONTENTS ||= {
+        "name"         => "LICENSE",
+        "path"         => "LICENSE",
+        "sha"          => "401c59dcc4570b954dd6d345e76199e1f4e76266",
+        "size"         => 1077,
+        "url"          => "https://api.github.com/repos/benbalter/gman/contents/LICENSE?ref=master",
+        "html_url"     => "https://github.com/benbalter/gman/blob/master/LICENSE",
+        "git_url"      => "https://api.github.com/repos/benbalter/gman/git/blobs/401c59dcc4570b954dd6d345e76199e1f4e76266",
+        "download_url" => "https://raw.githubusercontent.com/benbalter/gman/master/LICENSE?lab=true",
+        "type"         => "file",
+        "content"      => "VGhlIE1JVCBMaWNlbnNlIChNSVQpCgpDb3B5cmlnaHQgKGMpIDIwMTMgQmVu\nIEJhbHRlcgoKUGVybWlzc2lvbiBpcyBoZXJlYnkgZ3JhbnRlZCwgZnJlZSBv\nZiBjaGFyZ2UsIHRvIGFueSBwZXJzb24gb2J0YWluaW5nIGEgY29weSBvZgp0\naGlzIHNvZnR3YXJlIGFuZCBhc3NvY2lhdGVkIGRvY3VtZW50YXRpb24gZmls\nZXMgKHRoZSAiU29mdHdhcmUiKSwgdG8gZGVhbCBpbgp0aGUgU29mdHdhcmUg\nd2l0aG91dCByZXN0cmljdGlvbiwgaW5jbHVkaW5nIHdpdGhvdXQgbGltaXRh\ndGlvbiB0aGUgcmlnaHRzIHRvCnVzZSwgY29weSwgbW9kaWZ5LCBtZXJnZSwg\ncHVibGlzaCwgZGlzdHJpYnV0ZSwgc3VibGljZW5zZSwgYW5kL29yIHNlbGwg\nY29waWVzIG9mCnRoZSBTb2Z0d2FyZSwgYW5kIHRvIHBlcm1pdCBwZXJzb25z\nIHRvIHdob20gdGhlIFNvZnR3YXJlIGlzIGZ1cm5pc2hlZCB0byBkbyBzbywK\nc3ViamVjdCB0byB0aGUgZm9sbG93aW5nIGNvbmRpdGlvbnM6CgpUaGUgYWJv\ndmUgY29weXJpZ2h0IG5vdGljZSBhbmQgdGhpcyBwZXJtaXNzaW9uIG5vdGlj\nZSBzaGFsbCBiZSBpbmNsdWRlZCBpbiBhbGwKY29waWVzIG9yIHN1YnN0YW50\naWFsIHBvcnRpb25zIG9mIHRoZSBTb2Z0d2FyZS4KClRIRSBTT0ZUV0FSRSBJ\nUyBQUk9WSURFRCAiQVMgSVMiLCBXSVRIT1VUIFdBUlJBTlRZIE9GIEFOWSBL\nSU5ELCBFWFBSRVNTIE9SCklNUExJRUQsIElOQ0xVRElORyBCVVQgTk9UIExJ\nTUlURUQgVE8gVEhFIFdBUlJBTlRJRVMgT0YgTUVSQ0hBTlRBQklMSVRZLCBG\nSVRORVNTCkZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRSBBTkQgTk9OSU5GUklO\nR0VNRU5ULiBJTiBOTyBFVkVOVCBTSEFMTCBUSEUgQVVUSE9SUyBPUgpDT1BZ\nUklHSFQgSE9MREVSUyBCRSBMSUFCTEUgRk9SIEFOWSBDTEFJTSwgREFNQUdF\nUyBPUiBPVEhFUiBMSUFCSUxJVFksIFdIRVRIRVIKSU4gQU4gQUNUSU9OIE9G\nIENPTlRSQUNULCBUT1JUIE9SIE9USEVSV0lTRSwgQVJJU0lORyBGUk9NLCBP\nVVQgT0YgT1IgSU4KQ09OTkVDVElPTiBXSVRIIFRIRSBTT0ZUV0FSRSBPUiBU\nSEUgVVNFIE9SIE9USEVSIERFQUxJTkdTIElOIFRIRSBTT0ZUV0FSRS4K\n",
+        "encoding"     => "base64",
+        "_links"       => {
+          "self" => "https://api.github.com/repos/benbalter/gman/contents/LICENSE?ref=master",
+          "git"  => "https://api.github.com/repos/benbalter/gman/git/blobs/401c59dcc4570b954dd6d345e76199e1f4e76266",
+          "html" => "https://github.com/benbalter/gman/blob/master/LICENSE"
+        },
+        "license"      => {
+          "key"      => "mit",
+          "name"     => "MIT License",
+          "url"      => "https://api.github.com/licenses/mit",
+          "featured" => true
+        }
+      }
   end
 end
 

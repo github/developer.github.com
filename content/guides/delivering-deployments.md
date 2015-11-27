@@ -47,7 +47,7 @@ Let's start with this:
 
 (If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra].)
 
-Start this server up. By default, Sinatra starts on port `9393`, so you'll want
+Start this server up. By default, Sinatra starts on port `4567`, so you'll want
 to configure ngrok to start listening for that, too.
 
 In order for this server to work, we'll need to set a repository up with a webhook.
@@ -55,9 +55,10 @@ The webhook should be configured to fire whenever a Pull Request is created, or 
 Go ahead and create a repository you're comfortable playing around in. Might we
 suggest [@octocat's Spoon/Knife repository](https://github.com/octocat/Spoon-Knife)?
 After that, you'll create a new webhook in your repository, feeding it the URL
-that ngrok gave you:
+that ngrok gave you, and choosing `application/x-www-form-urlencoded` as the
+content type:
 
-![A new ngrok URL](/images/webhook_sample_url.png)
+![A new ngrok URL](/assets/images/webhook_sample_url.png)
 
 Click **Update webhook**. You should see a body response of `Well, it worked!`.
 Great! Click on **Let me select individual events.**, and select the following:

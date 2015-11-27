@@ -7,7 +7,7 @@ title: Discovering resources for a user | GitHub API
 * TOC
 {:toc}
 
-When making authenticated requests to the GitHub API, applications often need to fetch the current user's repositories and organizations. In this guide, will explain how to reliably discover those resources.
+When making authenticated requests to the GitHub API, applications often need to fetch the current user's repositories and organizations. In this guide, we'll explain how to reliably discover those resources.
 
 To interact with the GitHub API, we'll be using [Octokit.rb][octokit.rb]. You can find the complete source code for this project in the [platform-samples][platform samples] repository.
 
@@ -28,12 +28,7 @@ As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library. T
 
     Octokit.auto_paginate = true
 
-Next, we want to opt in to the [upcoming improvements to the repository listing API][list-repositories-for-current-user]. To do so, we'll set the media type that gives us access to that functionality.
-
-    #!ruby
-    Octokit.default_media_type = "application/vnd.github.moondragon+json"
-
-Now, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
+Next, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user]:
 
     #!ruby
     # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
@@ -67,12 +62,7 @@ Just as we did when discovering repositories above, we'll start by requiring [Gi
 
     Octokit.auto_paginate = true
 
-Next, we'll opt in to the [upcoming enhancements to the organization listing API][list-orgs-for-current-user]. To do so, we'll set the media type that gives us access to that functionality.
-
-    #!ruby
-    Octokit.default_media_type = "application/vnd.github.moondragon+json"
-
-Now, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user] to initialize our API client:
+Next, we'll pass in our application's [OAuth token for a given user][make-authenticated-request-for-user] to initialize our API client:
 
     #!ruby
     # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!

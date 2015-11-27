@@ -46,7 +46,7 @@ Only users with push access will receive listings for draft releases.
 
 ## Get the latest release
 
-View the latest published release for the repository.
+View the latest published full release for the repository. Draft releases and prereleases are not returned by this endpoint.
 
     GET /repos/:owner/:repo/releases/latest
 
@@ -57,7 +57,7 @@ View the latest published release for the repository.
 
 ## Get a release by tag name
 
-Get a release with the specified tag. Users must have push access to the repository to view draft releases.
+Get a published release with the specified tag.
 
     GET /repos/:owner/:repo/releases/tags/:tag
 
@@ -168,13 +168,13 @@ Everything else about the endpoint is the same as the rest of the API. For examp
 ### Input
 
 The raw file is uploaded to GitHub.  Set the content type appropriately, and the
-asset's name in a URI query parameter.
+asset's name and label in URI query parameters.
 
 Name | Type | Description
 -----|------|--------------
 `Content-Type`|`string` | **Required**. The content type of the asset. This should be set in the Header. Example: `"application/zip"`. For a list of acceptable types, refer this list of [common media types](http://en.wikipedia.org/wiki/Internet_media_type#List_of_common_media_types).
-`name`|`string` | **Required**. The file name of the asset. This should be set in the URI query parameter.
-`label`|`string` | An alternate short description of the asset.  Used in place of the filename.
+`name`|`string` | **Required**. The file name of the asset. This should be set in a URI query parameter.
+`label`|`string` | An alternate short description of the asset. Used in place of the filename. This should be set in a URI query parameter.
 
 Send the raw binary content of the asset as the request body.
 
@@ -195,15 +195,17 @@ This may leave an empty asset with a state of `"new"`.  It can be safely deleted
 
 ### Response
 
-<%= headers 200 %>
-<%= json :release_asset %>
+{{#tip}}
 
 If you want to download the asset's binary content, pass a media type of
-`"application/octet-stream"`.  The API will either redirect the client to the
+`"application/octet-stream"`. The API will either redirect the client to the
 location, or stream it directly if possible.  API clients should handle both a
 `200` or `302` response.
 
-<%= headers 302 %>
+{{/tip}}
+
+<%= headers 200 %>
+<%= json :release_asset %>
 
 ## Edit a release asset
 
@@ -216,7 +218,7 @@ Users with push access to the repository can edit a release asset.
 Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The file name of the asset.
-`label`|`string` | An alternate short description of the asset.  Used in place of the filename.
+`label`|`string` | An alternate short description of the asset. Used in place of the filename.
 
 #### Example
 

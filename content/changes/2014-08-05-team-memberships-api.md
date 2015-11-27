@@ -36,5 +36,5 @@ If you have any questions or feedback, please [get in touch with us][contact]!
 [get-team-member]: /v3/orgs/teams/#get-team-member
 [get-team-membership]: /v3/orgs/teams/#get-team-membership
 [remove-team-member]: /v3/orgs/teams/#remove-team-member
-[remove-team-member]: /v3/orgs/teams/#remove-team-membership
+[remove-team-membership]: /v3/orgs/teams/#remove-team-membership
 [team-add-event]: /v3/activity/events/types/#teamaddevent

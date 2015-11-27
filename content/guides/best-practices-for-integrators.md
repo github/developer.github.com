@@ -31,7 +31,7 @@ Note that even with a background job running, GitHub still expects your server t
 
 Every webhook has its own "Recent Deliveries" section, which lists whether a deployment was successful or not.
 
-![Recent Deliveries view](/images/webhooks_recent_deliveries.png)
+![Recent Deliveries view](/assets/images/webhooks_recent_deliveries.png)
 
 You should make use of proper HTTP status codes in order to inform users. You can use codes like `201` or `202` to acknowledge receipt of payload that won't be processed (for example, a payload delivered by a branch that's not the default). Reserve the `500` error code for catastrophic failures.
 
@@ -39,7 +39,7 @@ You should make use of proper HTTP status codes in order to inform users. You ca
 
 Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.
 
-![Viewing a payload response](/images/payload_response_tab.png)
+![Viewing a payload response](/assets/images/payload_response_tab.png)
 
 ## Follow any redirects that the API sends you
 
@@ -62,6 +62,23 @@ The GitHub API [rate limit](/v3/#rate-limiting) ensures that the API is fast and
 If you hit a rate limit, it's expected that you back off from making requests and try again later when you're permitted to do so. Failure to do so may result in the banning of your app.
 
 You can always [check your rate limit status](/v3/rate_limit/) at any time. Checking your rate limit incurs no cost against your rate limit.
+
+## Dealing with abuse rate limits
+
+[Abuse rate limits](/v3/#abuse-rate-limits) are another way we ensure the API's availability.
+To avoid hitting this limit, you should ensure your application follows the guidelines below.
+
+* Make authenticated requests, or use your application's client ID and secret. Unauthenticated
+  requests are subject to more aggressive abuse rate limiting.
+* Make requests for a single user or client ID serially. Do not make requests for a single user
+  or client ID concurrently.
+* If you're making a large number of `POST`, `PATCH`, `PUT`, or `DELETE` requests for a single user
+  or client ID, wait at least one second between each request.
+* Requests that create content which triggers notifications, such as issues, comments and pull requests, 
+  may be further limited. Please create this content at a reasonable pace to avoid further limiting.
+* When you have been limited, wait the number of seconds specified in the `Retry-After` response header.
+
+We reserve the right to change these guidelines as needed to ensure availability.
 
 ## Dealing with API errors
 

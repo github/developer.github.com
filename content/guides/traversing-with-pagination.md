@@ -32,6 +32,7 @@ Information about pagination is provided in [the Link header](http://tools.ietf.
 of an API call. For example, let's make a curl request to the search API, to find
 out how many times Mozilla projects use the phrase `addClass`:
 
+{:.terminal}
     curl -I "https://api.github.com/search/code?q=addClass+user:mozilla"
 
 The `-I` parameter indicates that we only care about the headers, not the actual
@@ -59,6 +60,7 @@ through the pages to consume the results. You do this by passing in a `page`
 parameter. By default, `page` always starts at `1`. Let's jump ahead to page 14
 and see what happens:
 
+{:.terminal}
     curl -I "https://api.github.com/search/code?q=addClass+user:mozilla&page=14"
 
 Here's the link header once more:
@@ -79,6 +81,7 @@ between the first, previous, next, or last list of results in an API call.
 By passing the `per_page` parameter, you can specify how many items you want
 each page to return, up to 100 items. Let's try asking for 50 items about `addClass`:
 
+{:.terminal}
     curl -I "https://api.github.com/search/code?q=addClass+user:mozilla&per_page=50"
 
 Notice what it does to the header response:
@@ -180,7 +183,7 @@ your code should remain intact:
 Normally, with pagination, your goal isn't to concatenate all of the possible
 results, but rather, to produce a set of navigation, like this:
 
-![Sample of pagination links](/images/pagination_sample.png)
+![Sample of pagination links](/assets/images/pagination_sample.png)
 
 Let's sketch out a micro-version of what that might entail.
 

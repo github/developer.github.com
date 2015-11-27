@@ -11,10 +11,9 @@ We've added two new features to the [Deployments API preview][deployments-previe
 
 You can now search for deployments via query parameters to the [listing endpoint][listing-endpoint]. You can filter on `sha`, `ref`, `task`, and `environment`. This makes it easier to answer questions like "when was the last time someone deployed to staging?"
 
-<pre class="terminal">
-$ curl -H "Authorization: token [yours]" \
-       https://api.github.com/repos/octocat/my-repo/deployments?environment=staging
-</pre>
+{:.terminal}
+    $ curl -H "Authorization: token [yours]" \
+           https://api.github.com/repos/octocat/my-repo/deployments?environment=staging
 
 ## New attribute
 

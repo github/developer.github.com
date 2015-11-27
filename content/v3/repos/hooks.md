@@ -188,6 +188,7 @@ The GitHub PubSubHubbub endpoint is: https://api.github.com/hub.
 PubSubHubbub endpoint, but not change the `hub.topic` URI format.) A
 successful request with curl looks like:
 
+{:.terminal}
     curl -u "user" -i \
       https://api.github.com/hub \
       -F "hub.mode=subscribe" \

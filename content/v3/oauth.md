@@ -17,6 +17,10 @@ All developers need to [register their
 application](https://github.com/settings/applications/new) before getting
 started. A registered OAuth application is assigned a unique Client ID
 and Client Secret. The Client Secret should not be shared.
+**You may create a [personal access token](https://github.com/settings/tokens/new)
+for your own use or implement the web flow below to allow other users to authorize your application.**
+
+GitHub's OAuth implementation supports the standard [authorization code grant type](https://tools.ietf.org/html/rfc6749#section-4.1). Developers should implement the web application flow described below to obtain an authorization code and then exchange it for a token. (The [implicit grant type](https://tools.ietf.org/html/rfc6749#section-4.2) is not supported.)
 
 ## Web Application Flow
 
@@ -54,6 +58,7 @@ Name | Type | Description
 `client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `code`|`string` | **Required**. The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
 `redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
+`state`|`string` | The unguessable random string you optionally provided in [Step 1](#redirect-users-to-request-github-access).
 
 ### Response
 
@@ -117,6 +122,7 @@ cleaner approach is to include it in the Authorization header
 
 For example, in curl you can set the Authorization header like this:
 
+{:.terminal}
     curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
 
 ## Non-Web Application Flow
@@ -158,6 +164,7 @@ authorize form.
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.
 
+{:.terminal}
     $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
     HTTP/1.1 200 OK
     X-OAuth-Scopes: repo, user

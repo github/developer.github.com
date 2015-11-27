@@ -20,7 +20,7 @@ Support](https://github.com/contact?form[subject]=Commits API) if this response 
 ![git db](http://git-scm.com/figures/18333fig0904-tn.png)
 
 For more information on the Git object database, please read the
-[Git Internals](http://git-scm.com/book/en/Git-Internals) chapter of
+[Git Internals](http://git-scm.com/book/en/v1/Git-Internals) chapter of
 the Pro Git book.
 
 As an example, if you wanted to commit a change to a file in your

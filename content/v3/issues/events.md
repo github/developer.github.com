@@ -43,7 +43,7 @@ milestone
 : The Milestone object including a 'title' attribute. Only provided for 'milestoned' and
   'demilestoned' events.
 
-rename:
+rename
 : An object containing rename details including 'from' and 'to' attributes. Only
   provided for 'renamed' events.
 

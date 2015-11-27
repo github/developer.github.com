@@ -37,12 +37,12 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
-<%= json(:full_commit) %>
-
-Note: Diffs with binary data will have no 'patch' property. Pass the
+Diffs with binary data will have no 'patch' property. Pass the
 appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and
 patch formats.
+
+<%= headers 200 %>
+<%= json(:full_commit) %>
 
 ## Compare two commits
 
@@ -56,9 +56,9 @@ Both `:base` and `:head` must be branch names in `:repo`. To compare branches ac
 
 The response from the API is equivalent to running the `git log base..head` command; however, commits are returned in reverse chronological order.
 
-<%= json :commit_comparison %>
-
 Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
+
+<%= json :commit_comparison %>
 
 ### Working with large comparisons
 

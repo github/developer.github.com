@@ -9,7 +9,7 @@ By default, all requests receive the v3 version. We encourage you to [request a 
 
 # v3
 
-The [v3 API](/v3) is stable and unchangeable. Please [file a support issue][support] if you have problems.
+The [v3 API](/v3) is stable, and we strive to ensure that all [changes](/changes) are backwards compatible. Please [file a support issue][support] if you have problems.
 
 Some v3 functionality is [deprecated](#v3-deprecations) and will be removed in the next major version of the API.
 
@@ -118,27 +118,22 @@ The recommendations below will help you prepare your application for the next ma
   and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
   for full details.
 
+1. Team attribute: permission
+: Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the [Add team repository](/v3/orgs/teams/#add-team-repo) API will use for requests where no `permission` attribute is specified. To change the permission level for every repository on a team, use the [List team repositories](/v3/orgs/teams/#list-team-repos) API to list all of the team's repositories, and then use the [Add team repository](/v3/orgs/teams/#add-team-repo) with a `permission` attribute to update each repository's permission separately.
+
 # beta (Deprecated) {#beta}
 
-The [beta API](/v3) is deprecated. Its current functionality is stable and unchangeable. Please [file a support issue][support] if you have problems.
+The [beta API](/v3) is deprecated. Its current functionality is stable, and we strive to ensure that any [changes](/changes) are backwards compatible. Please [file a support issue][support] if you have problems.
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: We recommend using the <a href="#v3">v3 API</a>
-    instead of the deprecated beta version of the API.
-  </p>
-  <p>
-    The beta media type differs from the v3 media type in
-    <a href="#differences-from-beta-version">just a few places</a>. In most
-    cases, migrating an application from the beta media type to the v3 media
-    type is smooth and painless.
-  </p>
-  <p>
-    We will eventually retire the beta version, but we have no official
-    retirement date to announce at the moment. When the time comes, rest assured
-    that we'll announce the retirement with plenty of notice.
-  </p>
-</div>
+{{#tip}}
+
+<strong>Note</strong>: We recommend using the <a href="#v3">v3 API</a> instead of the deprecated beta version of the API.
+
+The beta media type differs from the v3 media type in <a href="#differences-from-beta-version">just a few places</a>. In most cases, migrating an application from the beta media type to the v3 media type is smooth and painless.
+
+We will eventually retire the beta version, but we have no official retirement date to announce at the moment. When the time comes, rest assured that we'll announce the retirement with plenty of notice.
+
+{{/tip}}
 
 ## Breaking beta changes
 

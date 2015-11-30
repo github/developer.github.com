@@ -12,7 +12,7 @@ To protect a branch, make a `PATCH` request to the URL of the branch:
 ``` command-line
 curl "https://api.github.com/repos/github/hubot/branches/master" \
   -XPATCH \
-  -H 'Authorization: token TOKEN'
+  -H 'Authorization: token TOKEN' \
   -H "Accept: application/vnd.github.loki-preview" \
   -d '{
     "protection": {

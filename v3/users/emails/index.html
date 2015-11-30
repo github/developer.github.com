@@ -54,47 +54,56 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="emails">Emails</h1>
+
+<h1>
+<a id="emails" class="anchor" href="#emails" aria-hidden="true"><span class="octicon octicon-link"></span></a>Emails</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-email-addresses-for-a-user" id="markdown-toc-list-email-addresses-for-a-user">List email addresses for a user</a></li>
-  <li><a href="#add-email-addresses" id="markdown-toc-add-email-addresses">Add email address(es)</a></li>
-  <li><a href="#delete-email-addresses" id="markdown-toc-delete-email-addresses">Delete email address(es)</a></li>
+<li><a href="#list-email-addresses-for-a-user" id="markdown-toc-list-email-addresses-for-a-user">List email addresses for a user</a></li>
+<li><a href="#add-email-addresses" id="markdown-toc-add-email-addresses">Add email address(es)</a></li>
+<li><a href="#delete-email-addresses" id="markdown-toc-delete-email-addresses">Delete email address(es)</a></li>
 </ul>
 
 <p>Management of email addresses via the API requires that you are
 authenticated through basic auth or OAuth with the user scope.</p>
 
-<h2 id="list-email-addresses-for-a-user">List email addresses for a user</h2>
+<h2>
+<a id="list-email-addresses-for-a-user" class="anchor" href="#list-email-addresses-for-a-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>List email addresses for a user</h2>
 
 <pre><code>GET /user/emails
 </code></pre>
 
 <p>This endpoint is accessible with the user:email scope.</p>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
       &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-    <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"primary"</span><span class="p">:</span> <span class="kc">true</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
 
-<h2 id="add-email-addresses">Add email address(es)</h2>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@github.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"primary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="add-email-addresses" class="anchor" href="#add-email-addresses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add email address(es)</h2>
 
 <div class="enterprise-only">
 
 <div class="alert warning">
 
-<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize emails enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won’t be able to add an email address via the API with these options enabled.</p>
+<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize emails enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won't be able to add an email address via the API with these options enabled.</p>
 
 </div>
 
@@ -103,41 +112,50 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>POST /user/emails
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3>
+<a id="input" class="anchor" href="#input" aria-hidden="true"><span class="octicon octicon-link"></span></a>Input</h3>
 
 <p>You can post a single email address or an array of addresses:</p>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-  <span class="s2">"support@github.com"</span>
-<span class="p">]</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"octocat@github.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"support@github.com"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
 
-<h3 id="response-1">Response</h3>
 
-<pre class="headers"><code>Status: 201 Created
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 201 Created
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-    <span class="s2">"primary"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">false</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"support@github.com"</span><span class="p">,</span>
-    <span class="s2">"primary"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">false</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
 
-<h2 id="delete-email-addresses">Delete email address(es)</h2>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@github.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"primary"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"support@github.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"primary"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="delete-email-addresses" class="anchor" href="#delete-email-addresses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete email address(es)</h2>
 
 <div class="enterprise-only">
 
 <div class="alert warning">
 
-<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize emails enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won’t be able to remove an email address via the API with these options enabled.</p>
+<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize emails enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won't be able to remove an email address via the API with these options enabled.</p>
 
 </div>
 
@@ -146,20 +164,26 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>DELETE /user/emails
 </code></pre>
 
-<h3 id="input-1">Input</h3>
+<h3>
+<a id="input-1" class="anchor" href="#input-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Input</h3>
 
 <p>You can include a single email address or an array of addresses:</p>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-  <span class="s2">"support@github.com"</span>
-<span class="p">]</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"octocat@github.com"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"support@github.com"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
 
-<h3 id="response-2">Response</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
+
 
 
     </div>
@@ -323,7 +347,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

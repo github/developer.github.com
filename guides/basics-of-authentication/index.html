@@ -54,42 +54,48 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="basics-of-authentication">Basics of Authentication</h1>
+
+<h1>
+<a id="basics-of-authentication" class="anchor" href="#basics-of-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basics of Authentication</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#registering-your-app" id="markdown-toc-registering-your-app">Registering your app</a></li>
-  <li><a href="#accepting-user-authorization" id="markdown-toc-accepting-user-authorization">Accepting user authorization</a></li>
-  <li><a href="#implementing-persistent-authentication" id="markdown-toc-implementing-persistent-authentication">Implementing “persistent” authentication</a></li>
+<li><a href="#registering-your-app" id="markdown-toc-registering-your-app">Registering your app</a></li>
+<li><a href="#accepting-user-authorization" id="markdown-toc-accepting-user-authorization">Accepting user authorization</a></li>
+<li><a href="#implementing-persistent-authentication" id="markdown-toc-implementing-persistent-authentication">Implementing "persistent" authentication</a></li>
 </ul>
 
-<p>In this section, we’re going to focus on the basics of authentication. Specifically,
-we’re going to create a Ruby server (using <a href="http://www.sinatrarb.com/">Sinatra</a>) that implements
+<p>In this section, we're going to focus on the basics of authentication. Specifically,
+we're going to create a Ruby server (using <a href="http://www.sinatrarb.com/">Sinatra</a>) that implements
 the <a href="/v3/oauth/#web-application-flow">web flow</a> of an application in several different ways.</p>
 
-<div class="alert">
-	<p>You can download the complete source code for this project <a href="https://github.com/github/platform-samples/tree/master/api/">from the platform-samples repo</a>.</p>
+<div class="alert tip">
+
+<p>You can download the complete source code for this project <a href="https://github.com/github/platform-samples/tree/master/api/">from the platform-samples repo</a>.</p>
+
 </div>
 
-<h2 id="registering-your-app">Registering your app</h2>
+<h2>
+<a id="registering-your-app" class="anchor" href="#registering-your-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>Registering your app</h2>
 
-<p>First, you’ll need to <a href="https://github.com/settings/applications/new">register your application</a>. Every
+<p>First, you'll need to <a href="https://github.com/settings/applications/new">register your application</a>. Every
 registered OAuth application is assigned a unique Client ID and Client Secret.
 The Client Secret should not be shared! That includes checking the string
 into your repository.</p>
 
 <p>You can fill out every piece of information however you like, except the
 <strong>Authorization callback URL</strong>. This is easily the most important piece to setting
-up your application. It’s the callback URL that GitHub returns the user to after
+up your application. It's the callback URL that GitHub returns the user to after
 successful authentication.</p>
 
-<p>Since we’re running a regular Sinatra server, the location of the local instance
-is set to <code>http://localhost:4567</code>. Let’s fill in the callback URL as <code>http://localhost:4567/callback</code>.</p>
+<p>Since we're running a regular Sinatra server, the location of the local instance
+is set to <code>http://localhost:4567</code>. Let's fill in the callback URL as <code>http://localhost:4567/callback</code>.</p>
 
-<h2 id="accepting-user-authorization">Accepting user authorization</h2>
+<h2>
+<a id="accepting-user-authorization" class="anchor" href="#accepting-user-authorization" aria-hidden="true"><span class="octicon octicon-link"></span></a>Accepting user authorization</h2>
 
-<p>Now, let’s start filling out our simple server. Create a file called <em>server.rb</em> and paste this into it:</p>
+<p>Now, let's start filling out our simple server. Create a file called <em>server.rb</em> and paste this into it:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre class="highlight highlight-ruby"><code><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'rest-client'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
@@ -98,36 +104,40 @@ is set to <code>http://localhost:4567</code>. Let’s fill in the callback URL a
 
 <span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
   <span class="n">erb</span> <span class="ss">:index</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:client_id</span> <span class="o">=&gt;</span> <span class="no">CLIENT_ID</span><span class="p">}</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</code></pre>
 
-<p>Your client ID and client secret keys come from <a href="https://github.com/settings/developers">your application’s configuration
+
+<p>Your client ID and client secret keys come from <a href="https://github.com/settings/developers">your application's configuration
 page</a>. You should <strong>never, <em>ever</em></strong> store these values in
-GitHub–or any other public place, for that matter. We recommend storing them as
-<a href="http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables">environment variables</a>–which is exactly what we’ve done here.</p>
+GitHub--or any other public place, for that matter. We recommend storing them as
+<a href="http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables">environment variables</a>--which is exactly what we've done here.</p>
 
 <p>Next, in <em>views/index.erb</em>, paste this content:</p>
 
-<pre><code class="language-html+erb highlight">&lt;html&gt;
-  &lt;head&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;
+<pre class="highlight highlight-erb"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
       Well, hello there!
-    &lt;/p&gt;
-    &lt;p&gt;
+    <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
       We're going to now talk to the GitHub API. Ready?
-      &lt;a href="https://github.com/login/oauth/authorize?scope=user:email&amp;client_id=&lt;%= client_id %&gt;"&gt;Click here&lt;/a&gt; to begin!&lt;/a&gt;
-    &lt;/p&gt;
-    &lt;p&gt;
-      If that link doesn't work, remember to provide your own &lt;a href="/v3/oauth/#web-application-flow"&gt;Client ID&lt;/a&gt;!
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/login/oauth/authorize?scope=user:email&amp;client_id=</span><span class="cp">&lt;%=</span> <span class="n">client_id</span> <span class="cp">%&gt;</span><span class="s">"</span><span class="nt">&gt;</span>Click here<span class="nt">&lt;/a&gt;</span> to begin!<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+      If that link doesn't work, remember to provide your own <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/v3/oauth/#web-application-flow"</span><span class="nt">&gt;</span>Client ID<span class="nt">&lt;/a&gt;</span>!
+    <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
 
-<p>(If you’re unfamiliar with how Sinatra works, we recommend <a href="https://github.com/sinatra/sinatra-book/blob/master/book/Introduction.markdown#hello-world-application">reading the Sinatra guide</a>.)</p>
+
+<p>(If you're unfamiliar with how Sinatra works, we recommend <a href="https://github.com/sinatra/sinatra-book/blob/master/book/Introduction.markdown#hello-world-application">reading the Sinatra guide</a>.)</p>
 
 <p>Also, notice that the URL uses the <code>scope</code> query parameter to define the
-<a href="/v3/oauth/#scopes">scopes</a> requested by the application. For our application, we’re
+<a href="/v3/oauth/#scopes">scopes</a> requested by the application. For our application, we're
 requesting <code>user:email</code> scope for reading private email addresses.</p>
 
 <p>Navigate your browser to <code>http://localhost:4567</code>. After clicking on the link, you
@@ -137,15 +147,16 @@ should be taken to GitHub, and presented with a dialog that looks something like
 <p>If you trust yourself, click <strong>Authorize App</strong>. Wuh-oh! Sinatra spits out a
 <code>404</code> error. What gives?!</p>
 
-<p>Well, remember when we specified a Callback URL to be <code>callback</code>? We didn’t provide
-a route for it, so GitHub doesn’t know where to drop the user after they authorize
-the app. Let’s fix that now!</p>
+<p>Well, remember when we specified a Callback URL to be <code>callback</code>? We didn't provide
+a route for it, so GitHub doesn't know where to drop the user after they authorize
+the app. Let's fix that now!</p>
 
-<h3 id="providing-a-callback">Providing a callback</h3>
+<h3>
+<a id="providing-a-callback" class="anchor" href="#providing-a-callback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Providing a callback</h3>
 
 <p>In <em>server.rb</em>, add a route to specify what the callback should do:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
+<pre class="highlight highlight-ruby"><code><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
   <span class="c1"># get temporary GitHub code...</span>
   <span class="n">session_code</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s1">'rack.request.query_hash'</span><span class="p">][</span><span class="s1">'code'</span><span class="p">]</span>
 
@@ -158,15 +169,18 @@ the app. Let’s fix that now!</p>
 
   <span class="c1"># extract the token and granted scopes</span>
   <span class="n">access_token</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="s1">'access_token'</span><span class="p">]</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</code></pre>
+
 
 <p>After a successful app authentication, GitHub provides a temporary <code>code</code> value.
-You’ll need to <code>POST</code> this code back to GitHub in exchange for an <code>access_token</code>.
-To simplify our GET and POST HTTP requests, we’re using the <a href="https://github.com/archiloque/rest-client">rest-client</a>.
-Note that you’ll probably never access the API through REST. For a more serious
+You'll need to <code>POST</code> this code back to GitHub in exchange for an <code>access_token</code>.
+To simplify our GET and POST HTTP requests, we're using the <a href="https://github.com/archiloque/rest-client">rest-client</a>.
+Note that you'll probably never access the API through REST. For a more serious
 application, you should probably use <a href="/libraries/">a library written in the language of your choice</a>.</p>
 
-<h3 id="checking-granted-scopes">Checking granted scopes</h3>
+<h3>
+<a id="checking-granted-scopes" class="anchor" href="#checking-granted-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checking granted scopes</h3>
 
 <p>In the future, users will be able to <a href="/changes/2013-10-04-oauth-changes-coming/">edit the scopes you requested</a>,
 and your application might be granted less access than you originally asked for.
@@ -176,28 +190,30 @@ were granted for the token by the user.</p>
 <p>The scopes that were granted are returned as a part of the response from
 exchanging a token.</p>
 
-<pre><code class="language-ruby highlight"><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
+<pre class="highlight highlight-ruby"><code><span class="n">get</span> <span class="s1">'/callback'</span> <span class="k">do</span>
   <span class="c1"># ...</span>
   <span class="c1"># Get the access_token using the code sample above</span>
   <span class="c1"># ...</span>
-  
+
   <span class="c1"># check if we were granted user:email scope</span>
   <span class="n">scopes</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="s1">'scope'</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span>
   <span class="n">has_user_email_scope</span> <span class="o">=</span> <span class="n">scopes</span><span class="p">.</span><span class="nf">include?</span> <span class="s1">'user:email'</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</code></pre>
 
-<p>In our application, we’re using <code>scopes.include?</code> to check if we were granted
-the <code>user:email</code> scope needed for fetching the authenticated user’s private
+
+<p>In our application, we're using <code>scopes.include?</code> to check if we were granted
+the <code>user:email</code> scope needed for fetching the authenticated user's private
 email addresses. Had the application asked for other scopes, we would have
 checked for those as well.</p>
 
-<p>Also, since there’s a hierarchical relationship between scopes, you should
+<p>Also, since there's a hierarchical relationship between scopes, you should
 check that you were granted the lowest level of required scopes. For example,
 if the application had asked for <code>user</code> scope, it might have been granted only
-<code>user:email</code> scope. In that case, the application wouldn’t have been granted
+<code>user:email</code> scope. In that case, the application wouldn't have been granted
 what it asked for, but the granted scopes would have still been sufficient.</p>
 
-<p>Checking for scopes only before making requests is not enough since it’s posible
+<p>Checking for scopes only before making requests is not enough since it's posible
 that users will change the scopes in between your check and the actual request.
 In case that happens, API calls you expected to succeed might fail with a <code>404</code>
 or <code>401</code> status, or return a different subset of information.</p>
@@ -210,12 +226,13 @@ request. In addition to that, the Authorization API provides an endpoint to
 Use this information to detect changes in token scopes, and inform your users of
 changes in available application functionality.</p>
 
-<h3 id="making-authenticated-requests">Making authenticated requests</h3>
+<h3>
+<a id="making-authenticated-requests" class="anchor" href="#making-authenticated-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Making authenticated requests</h3>
 
-<p>At last, with this access token, you’ll be able to make authenticated requests as
+<p>At last, with this access token, you'll be able to make authenticated requests as
 the logged in user:</p>
 
-<pre><code class="language-ruby highlight"><span class="c1"># fetch user information</span>
+<pre class="highlight highlight-ruby"><code><span class="c1"># fetch user information</span>
 <span class="n">auth_result</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="no">RestClient</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'https://api.github.com/user'</span><span class="p">,</span>
                                         <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">}}))</span>
 
@@ -226,50 +243,55 @@ the logged in user:</p>
                               <span class="p">{</span><span class="ss">:params</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:access_token</span> <span class="o">=&gt;</span> <span class="n">access_token</span><span class="p">}}))</span>
 <span class="k">end</span>
 
-<span class="n">erb</span> <span class="ss">:basic</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="n">auth_result</span></code></pre>
+<span class="n">erb</span> <span class="ss">:basic</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="n">auth_result</span>
+</code></pre>
 
-<p>We can do whatever we want with our results. In this case, we’ll just dump them straight into <em>basic.erb</em>:</p>
 
-<pre><code class="language-html+erb highlight">&lt;p&gt;Hello, &lt;%= login %&gt;!&lt;/p&gt;
-&lt;p&gt;
-  &lt;% if !email.nil? &amp;&amp; !email.empty? %&gt; It looks like your public email address is &lt;%= email %&gt;.
-  &lt;% else %&gt; It looks like you don't have a public email. That's cool.
-  &lt;% end %&gt;
-&lt;/p&gt;
-&lt;p&gt;
-  &lt;% if defined? private_emails %&gt;
+<p>We can do whatever we want with our results. In this case, we'll just dump them straight into <em>basic.erb</em>:</p>
+
+<pre class="highlight highlight-erb"><code><span class="nt">&lt;p&gt;</span>Hello, <span class="cp">&lt;%=</span> <span class="n">login</span> <span class="cp">%&gt;</span>!<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">if</span> <span class="o">!</span><span class="n">email</span><span class="p">.</span><span class="nf">nil?</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">email</span><span class="p">.</span><span class="nf">empty?</span> <span class="cp">%&gt;</span> It looks like your public email address is <span class="cp">&lt;%=</span> <span class="n">email</span> <span class="cp">%&gt;</span>.
+  <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span> It looks like you don't have a public email. That's cool.
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">defined?</span> <span class="n">private_emails</span> <span class="cp">%&gt;</span>
   With your permission, we were also able to dig up your private email addresses:
-  &lt;%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %&gt;
-  &lt;% else %&gt;
+  <span class="cp">&lt;%=</span> <span class="n">private_emails</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span> <span class="o">|</span><span class="n">private_email_address</span><span class="o">|</span> <span class="n">private_email_address</span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span> <span class="p">}.</span><span class="nf">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span> <span class="cp">%&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
   Also, you're a bit secretive about your private email addresses.
-  &lt;% end %&gt;
-&lt;/p&gt;</code></pre>
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+</code></pre>
 
-<h2 id="implementing-persistent-authentication">Implementing “persistent” authentication</h2>
 
-<p>It’d be a pretty bad model if we required users to log into the app every single
+<h2>
+<a id="implementing-persistent-authentication" class="anchor" href="#implementing-persistent-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementing "persistent" authentication</h2>
+
+<p>It'd be a pretty bad model if we required users to log into the app every single
 time they needed to access the web page. For example, try navigating directly to
-<code>http://localhost:4567/basic</code>. You’ll get an error.</p>
+<code>http://localhost:4567/basic</code>. You'll get an error.</p>
 
 <p>What if we could circumvent the entire
-“click here” process, and just <em>remember</em> that, as long as the user’s logged into
+"click here" process, and just <em>remember</em> that, as long as the user's logged into
 GitHub, they should be able to access this application? Hold on to your hat,
-because <em>that’s exactly what we’re going to do</em>.</p>
+because <em>that's exactly what we're going to do</em>.</p>
 
 <p>Our little server above is rather simple. In order to wedge in some intelligent
-authentication, we’re going to switch over to using sessions for storing tokens.
+authentication, we're going to switch over to using sessions for storing tokens.
 This will make authentication transparent to the user.</p>
 
-<p>Also, since we’re persisting scopes within the session, we’ll need to
+<p>Also, since we're persisting scopes within the session, we'll need to
 handle cases when the user updates the scopes after we checked them, or revokes
-the token. To do that, we’ll use a <code>rescue</code> block and check that the first API
-call succeeded, which verifies that the token is still valid. After that, we’ll
-check the <code>X-OAuth-Scopes</code> response header to verify that the user hasn’t revoked
+the token. To do that, we'll use a <code>rescue</code> block and check that the first API
+call succeeded, which verifies that the token is still valid. After that, we'll
+check the <code>X-OAuth-Scopes</code> response header to verify that the user hasn't revoked
 the <code>user:email</code> scope.</p>
 
 <p>Create a file called <em>advanced_server.rb</em>, and paste these lines into it:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra'</span>
+<pre class="highlight highlight-ruby"><code><span class="nb">require</span> <span class="s1">'sinatra'</span>
 <span class="nb">require</span> <span class="s1">'rest_client'</span>
 <span class="nb">require</span> <span class="s1">'json'</span>
 
@@ -343,11 +365,13 @@ the <code>user:email</code> scope.</p>
   <span class="n">session</span><span class="p">[</span><span class="ss">:access_token</span><span class="p">]</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">result</span><span class="p">)[</span><span class="s1">'access_token'</span><span class="p">]</span>
 
   <span class="n">redirect</span> <span class="s1">'/'</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</code></pre>
 
-<p>Much of the code should look familiar. For example, we’re still using <code>RestClient.get</code>
-to call out to the GitHub API, and we’re still passing our results to be rendered
-in an ERB template (this time, it’s called <code>advanced.erb</code>).</p>
+
+<p>Much of the code should look familiar. For example, we're still using <code>RestClient.get</code>
+to call out to the GitHub API, and we're still passing our results to be rendered
+in an ERB template (this time, it's called <code>advanced.erb</code>).</p>
 
 <p>Also, we now have the <code>authenticated?</code> method which checks if the user is already
 authenticated. If not, the <code>authenticate!</code> method is called, which performs the
@@ -355,41 +379,43 @@ OAuth flow and updates the session with the granted token and scopes.</p>
 
 <p>Next, create a file in <em>views</em> called <em>advanced.erb</em>, and paste this markup into it:</p>
 
-<pre><code class="language-html+erb highlight">&lt;html&gt;
-  &lt;head&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;p&gt;Well, well, well, &lt;%= login %&gt;!&lt;/p&gt;
-    &lt;p&gt;
-      &lt;% if !email.empty? %&gt; It looks like your public email address is &lt;%= email %&gt;.
-      &lt;% else %&gt; It looks like you don't have a public email. That's cool.
-      &lt;% end %&gt;
-    &lt;/p&gt;
-    &lt;p&gt;
-      &lt;% if defined? private_emails %&gt;
+<pre class="highlight highlight-erb"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Well, well, well, <span class="cp">&lt;%=</span> <span class="n">login</span> <span class="cp">%&gt;</span>!<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">if</span> <span class="o">!</span><span class="n">email</span><span class="p">.</span><span class="nf">empty?</span> <span class="cp">%&gt;</span> It looks like your public email address is <span class="cp">&lt;%=</span> <span class="n">email</span> <span class="cp">%&gt;</span>.
+      <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span> It looks like you don't have a public email. That's cool.
+      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">if</span> <span class="n">defined?</span> <span class="n">private_emails</span> <span class="cp">%&gt;</span>
       With your permission, we were also able to dig up your private email addresses:
-      &lt;%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %&gt;
-      &lt;% else %&gt;
+      <span class="cp">&lt;%=</span> <span class="n">private_emails</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span> <span class="o">|</span><span class="n">private_email_address</span><span class="o">|</span> <span class="n">private_email_address</span><span class="p">[</span><span class="s2">"email"</span><span class="p">]</span> <span class="p">}.</span><span class="nf">join</span><span class="p">(</span><span class="s1">', '</span><span class="p">)</span> <span class="cp">%&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">else</span> <span class="cp">%&gt;</span>
       Also, you're a bit secretive about your private email addresses.
-      &lt;% end %&gt;
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+
 
 <p>From the command line, call <code>ruby advanced_server.rb</code>, which starts up your
-server on port <code>4567</code> – the same port we used when we had a simple Sinatra app.
+server on port <code>4567</code> -- the same port we used when we had a simple Sinatra app.
 When you navigate to <code>http://localhost:4567</code>, the app calls <code>authenticate!</code>
 which redirects you to <code>/callback</code>. <code>/callback</code> then sends us back to <code>/</code>,
-and since we’ve been authenticated, renders <em>advanced.erb</em>.</p>
+and since we've been authenticated, renders <em>advanced.erb</em>.</p>
 
 <p>We could completely simplify this roundtrip routing by simply changing our callback
 URL in GitHub to <code>/</code>. But, since both <em>server.rb</em> and <em>advanced.rb</em> are relying on
-the same callback URL, we’ve got to do a little bit of wonkiness to make it work.</p>
+the same callback URL, we've got to do a little bit of wonkiness to make it work.</p>
 
 <p>Also, if we had never authorized this application to access our GitHub data,
-we would’ve seen the same confirmation dialog from earlier pop-up and warn us.</p>
+we would've seen the same confirmation dialog from earlier pop-up and warn us.</p>
 
-<p>If you’d like, you can play around with <a href="https://github.com/atmos/sinatra-auth-github-test">yet another Sinatra-GitHub auth example</a>
+<p>If you'd like, you can play around with <a href="https://github.com/atmos/sinatra-auth-github-test">yet another Sinatra-GitHub auth example</a>
 available as a separate project.</p>
 
 
@@ -444,7 +470,7 @@ available as a separate project.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

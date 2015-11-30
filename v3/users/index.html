@@ -54,13 +54,15 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="users">Users</h1>
+
+<h1>
+<a id="users" class="anchor" href="#users" aria-hidden="true"><span class="octicon octicon-link"></span></a>Users</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#get-a-single-user" id="markdown-toc-get-a-single-user">Get a single user</a></li>
-  <li><a href="#get-the-authenticated-user" id="markdown-toc-get-the-authenticated-user">Get the authenticated user</a></li>
-  <li><a href="#update-the-authenticated-user" id="markdown-toc-update-the-authenticated-user">Update the authenticated user</a></li>
-  <li><a href="#get-all-users" id="markdown-toc-get-all-users">Get all users</a></li>
+<li><a href="#get-a-single-user" id="markdown-toc-get-a-single-user">Get a single user</a></li>
+<li><a href="#get-the-authenticated-user" id="markdown-toc-get-the-authenticated-user">Get the authenticated user</a></li>
+<li><a href="#update-the-authenticated-user" id="markdown-toc-update-the-authenticated-user">Update the authenticated user</a></li>
+<li><a href="#get-all-users" id="markdown-toc-get-all-users">Get all users</a></li>
 </ul>
 
 <p>Many of the resources on the users API provide a shortcut for getting
@@ -69,225 +71,248 @@ does not include a <code>:username</code> parameter then the response will be fo
 logged in user (and you must pass <a href="/v3/#authentication">authentication
 information</a> with your request).</p>
 
-<h2 id="get-a-single-user">Get a single user</h2>
+<h2>
+<a id="get-a-single-user" class="anchor" href="#get-a-single-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get a single user</h2>
 
 <pre><code>GET /users/:username
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<p>Note: The returned email is the user’s publicly visible email address
+<p>Note: The returned email is the user's publicly visible email address
 (or <code>null</code> if the user has not <a href="https://github.com/settings/profile">specified a public email address in their profile</a>).</p>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-  <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-  <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-  <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-  <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-  <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-  <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-  <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-  <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-  <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-  <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-  <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
-  <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"monalisa octocat"</span><span class="p">,</span>
-  <span class="s2">"company"</span><span class="err">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
-  <span class="s2">"blog"</span><span class="err">:</span> <span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-  <span class="s2">"location"</span><span class="err">:</span> <span class="s2">"San Francisco"</span><span class="p">,</span>
-  <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-  <span class="s2">"hireable"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"bio"</span><span class="err">:</span> <span class="s2">"There once was..."</span><span class="p">,</span>
-  <span class="s2">"public_repos"</span><span class="err">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">"public_gists"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"followers"</span><span class="err">:</span> <span class="mi">20</span><span class="p">,</span>
-  <span class="s2">"following"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2008-01-14T04:33:35Z"</span>
-<span class="p">}</span></code></pre>
 
-<h2 id="get-the-authenticated-user">Get the authenticated user</h2>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/blog"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@github.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hireable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There once was..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"public_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"public_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-the-authenticated-user" class="anchor" href="#get-the-authenticated-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get the authenticated user</h2>
 
 <pre><code>GET /user
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-  <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-  <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-  <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-  <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-  <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-  <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-  <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-  <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-  <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-  <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-  <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
-  <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"monalisa octocat"</span><span class="p">,</span>
-  <span class="s2">"company"</span><span class="err">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
-  <span class="s2">"blog"</span><span class="err">:</span> <span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-  <span class="s2">"location"</span><span class="err">:</span> <span class="s2">"San Francisco"</span><span class="p">,</span>
-  <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-  <span class="s2">"hireable"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"bio"</span><span class="err">:</span> <span class="s2">"There once was..."</span><span class="p">,</span>
-  <span class="s2">"public_repos"</span><span class="err">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">"public_gists"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"followers"</span><span class="err">:</span> <span class="mi">20</span><span class="p">,</span>
-  <span class="s2">"following"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span>
-  <span class="s2">"total_private_repos"</span><span class="err">:</span> <span class="mi">100</span><span class="p">,</span>
-  <span class="s2">"owned_private_repos"</span><span class="err">:</span> <span class="mi">100</span><span class="p">,</span>
-  <span class="s2">"private_gists"</span><span class="err">:</span> <span class="mi">81</span><span class="p">,</span>
-  <span class="s2">"disk_usage"</span><span class="err">:</span> <span class="mi">10000</span><span class="p">,</span>
-  <span class="s2">"collaborators"</span><span class="err">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">"plan"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Medium"</span><span class="p">,</span>
-    <span class="s2">"space"</span><span class="err">:</span> <span class="mi">400</span><span class="p">,</span>
-    <span class="s2">"private_repos"</span><span class="err">:</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="s2">"collaborators"</span><span class="err">:</span> <span class="mi">0</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
 
-<h2 id="update-the-authenticated-user">Update the authenticated user</h2>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/blog"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@github.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hireable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There once was..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"public_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"public_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"total_private_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"owned_private_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"private_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"disk_usage"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"collaborators"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"space"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"private_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"collaborators"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="update-the-authenticated-user" class="anchor" href="#update-the-authenticated-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update the authenticated user</h2>
 
 <pre><code>PATCH /user
 </code></pre>
 
-<h3 id="parameters">Parameters</h3>
+<h3>
+<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>name</code></td>
-      <td><code>string</code></td>
-      <td>The new name of the user</td>
-    </tr>
-    <tr>
-      <td><code>email</code></td>
-      <td><code>string</code></td>
-      <td>Publicly visible email address.</td>
-    </tr>
-    <tr>
-      <td><code>blog</code></td>
-      <td><code>string</code></td>
-      <td>The new blog URL of the user.</td>
-    </tr>
-    <tr>
-      <td><code>company</code></td>
-      <td><code>string</code></td>
-      <td>The new company of the user.</td>
-    </tr>
-    <tr>
-      <td><code>location</code></td>
-      <td><code>string</code></td>
-      <td>The new location of the user.</td>
-    </tr>
-    <tr>
-      <td><code>hireable</code></td>
-      <td><code>boolean</code></td>
-      <td>The new hiring availability of the user.</td>
-    </tr>
-    <tr>
-      <td><code>bio</code></td>
-      <td><code>string</code></td>
-      <td>The new short biography of the user.</td>
-    </tr>
-  </tbody>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>The new name of the user</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td><code>string</code></td>
+<td>Publicly visible email address.</td>
+</tr>
+<tr>
+<td><code>blog</code></td>
+<td><code>string</code></td>
+<td>The new blog URL of the user.</td>
+</tr>
+<tr>
+<td><code>company</code></td>
+<td><code>string</code></td>
+<td>The new company of the user.</td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td><code>string</code></td>
+<td>The new location of the user.</td>
+</tr>
+<tr>
+<td><code>hireable</code></td>
+<td><code>boolean</code></td>
+<td>The new hiring availability of the user.</td>
+</tr>
+<tr>
+<td><code>bio</code></td>
+<td><code>string</code></td>
+<td>The new short biography of the user.</td>
+</tr>
+</tbody>
 </table>
 
-<h4 id="example">Example</h4>
+<h4>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"monalisa octocat"</span><span class="p">,</span>
-  <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-  <span class="s2">"blog"</span><span class="err">:</span> <span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-  <span class="s2">"company"</span><span class="err">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
-  <span class="s2">"location"</span><span class="err">:</span> <span class="s2">"San Francisco"</span><span class="p">,</span>
-  <span class="s2">"hireable"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"bio"</span><span class="err">:</span> <span class="s2">"There once..."</span>
-<span class="p">}</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@github.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/blog"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hireable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There once..."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<h3 id="response-2">Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"login"</span><span class="err">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"avatar_url"</span><span class="err">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-  <span class="s2">"gravatar_id"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-  <span class="s2">"followers_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-  <span class="s2">"following_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-  <span class="s2">"gists_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-  <span class="s2">"starred_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-  <span class="s2">"subscriptions_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-  <span class="s2">"organizations_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-  <span class="s2">"repos_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-  <span class="s2">"events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-  <span class="s2">"received_events_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-  <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"User"</span><span class="p">,</span>
-  <span class="s2">"site_admin"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"monalisa octocat"</span><span class="p">,</span>
-  <span class="s2">"company"</span><span class="err">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
-  <span class="s2">"blog"</span><span class="err">:</span> <span class="s2">"https://github.com/blog"</span><span class="p">,</span>
-  <span class="s2">"location"</span><span class="err">:</span> <span class="s2">"San Francisco"</span><span class="p">,</span>
-  <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"octocat@github.com"</span><span class="p">,</span>
-  <span class="s2">"hireable"</span><span class="err">:</span> <span class="kc">false</span><span class="p">,</span>
-  <span class="s2">"bio"</span><span class="err">:</span> <span class="s2">"There once was..."</span><span class="p">,</span>
-  <span class="s2">"public_repos"</span><span class="err">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">"public_gists"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"followers"</span><span class="err">:</span> <span class="mi">20</span><span class="p">,</span>
-  <span class="s2">"following"</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span>
-  <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span>
-  <span class="s2">"total_private_repos"</span><span class="err">:</span> <span class="mi">100</span><span class="p">,</span>
-  <span class="s2">"owned_private_repos"</span><span class="err">:</span> <span class="mi">100</span><span class="p">,</span>
-  <span class="s2">"private_gists"</span><span class="err">:</span> <span class="mi">81</span><span class="p">,</span>
-  <span class="s2">"disk_usage"</span><span class="err">:</span> <span class="mi">10000</span><span class="p">,</span>
-  <span class="s2">"collaborators"</span><span class="err">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">"plan"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Medium"</span><span class="p">,</span>
-    <span class="s2">"space"</span><span class="err">:</span> <span class="mi">400</span><span class="p">,</span>
-    <span class="s2">"private_repos"</span><span class="err">:</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="s2">"collaborators"</span><span class="err">:</span> <span class="mi">0</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
 
-<h2 id="get-all-users">Get all users</h2>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"blog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/blog"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@github.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hireable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There once was..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"public_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"public_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-14T04:33:35Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"total_private_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"owned_private_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"private_gists"</span><span class="p">:</span><span class="w"> </span><span class="mi">81</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"disk_usage"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"collaborators"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"space"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"private_repos"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"collaborators"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-all-users" class="anchor" href="#get-all-users" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get all users</h2>
 
 <p>Lists all users, in the order that they signed up on GitHub.</p>
 
@@ -298,53 +323,60 @@ users.</p>
 <pre><code>GET /users
 </code></pre>
 
-<h3 id="parameters-1">Parameters</h3>
+<h3>
+<a id="parameters-1" class="anchor" href="#parameters-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>since</code></td>
-      <td><code>string</code></td>
-      <td>The integer ID of the last User that you’ve seen.</td>
-    </tr>
-  </tbody>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>since</code></td>
+<td><code>string</code></td>
+<td>The integer ID of the last User that you've seen.</td>
+</tr>
+</tbody>
 </table>
 
-<h3 id="response-3">Response</h3>
+<h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/users?since=135&gt;; rel="next"
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
 
     </div>
 
@@ -507,7 +539,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

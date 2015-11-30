@@ -43,8 +43,10 @@
   <div id="wrapper">
     <div class="content">
       
+
 <div class="change" id="/changes/2014-02-10-ping-event-for-webhooks/">
   <h2 class="title">
+<a id="--ping-event-for-webhooks" class="anchor" href="#--ping-event-for-webhooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-02-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
 </h2>
 
@@ -56,29 +58,30 @@
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle" data-proofer-ignore="">
-      <a href="https://github.com/kdaigle" data-proofer-ignore="">kdaigle</a>
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle" data-proofer-ignore>
+      <a href="https://github.com/kdaigle" data-proofer-ignore>kdaigle</a>
   </li>
 </ul>
 </div>
 
-    
 <p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
 <a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
 create a new webhook, we will send this event as an initial test of the webhook.</p>
 
-<p>The ping is only informational, doesn’t need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It’s just a quick
-“hello world” to let you know you set everything up correctly.</p>
+<p>The ping is only informational, doesn't need to be responded to in a specific way,
+and nothing bad will happen if you respond with an error. It's just a quick
+"hello world" to let you know you set everything up correctly.</p>
 
 <p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
 By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
-you won’t be limited by the <code>push</code> event requirement that the test endpoint has.</p>
+you won't be limited by the <code>push</code> event requirement that the test endpoint has.</p>
 
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-02-10-repo-hook-scopes/">
   <h2 class="title">
+<a id="--new-scopes-for-managing-repository-hooks" class="anchor" href="#--new-scopes-for-managing-repository-hooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-02-10-repo-hook-scopes/">New scopes for managing repository hooks</a>
 </h2>
 
@@ -90,34 +93,34 @@ you won’t be limited by the <code>push</code> event requirement that the test 
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
 <p>Many third party services need to set up <a href="http://developer.github.com/v3/repos/hooks/">hooks</a> in order to act upon events
-in your repositories. Today, we’ve introduced three new <a href="http://developer.github.com/v3/oauth/#scopes">scopes</a> that provide
+in your repositories. Today, we've introduced three new <a href="http://developer.github.com/v3/oauth/#scopes">scopes</a> that provide
 more granular access to your repository hooks without allowing access to your
 repository contents:</p>
 
 <ul>
-  <li>
+<li>
 <code>read:repo_hook</code> grants read and ping access to hooks in public or private repositories.</li>
-  <li>
+<li>
 <code>write:repo_hook</code> grants read, write, and ping access to hooks in public or private repositories.</li>
-  <li>
+<li>
 <code>admin:repo_hook</code> grants read, write, ping, and delete access to hooks in public or private repositories.</li>
 </ul>
 
 <p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+repo+hook+scopes">get in touch</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-01-29-audit-org-members-for-2fa/">
   <h2 class="title">
+<a id="--audit-organization-members-for-two-factor-authentication" class="anchor" href="#--audit-organization-members-for-two-factor-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-01-29-audit-org-members-for-2fa/">Audit organization members for two-factor authentication</a>
 </h2>
 
@@ -129,28 +132,29 @@ repository contents:</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
-<p>We’ve added a <a href="/v3/orgs/members/#audit-two-factor-auth">new filter</a> for listing members of an organization without
+<p>We've added a <a href="/v3/orgs/members/#audit-two-factor-auth">new filter</a> for listing members of an organization without
 <a href="https://github.com/blog/1614-two-factor-authentication">two-factor authentication</a> enabled:</p>
 
-<pre class="terminal"><code>$ curl -H "Authorization: token [yours]" \
+<pre class="command-line">
+<span class="command">curl -H "Authorization: token [yours]" \</span>
        "https://api.github.com/orgs/[orgname]/members?filter=2fa_disabled"
-</code></pre>
+</pre>
 
 <p>The new filter is available for owners of organizations with private
 repositories. Happy auditing and <a href="https://github.com/contact?form%5Bsubject%5D=API+2FA+filter">send us your feedback or questions</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-01-09-preview-the-new-deployments-api/">
   <h2 class="title">
+<a id="--preview-the-new-deployments-api" class="anchor" href="#--preview-the-new-deployments-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-01-09-preview-the-new-deployments-api/">Preview the New Deployments API</a>
 </h2>
 
@@ -162,70 +166,83 @@ repositories. Happy auditing and <a href="https://github.com/contact?form%5Bsubj
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore="">
-      <a href="https://github.com/atmos" data-proofer-ignore="">atmos</a>
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
+      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
   </li>
 </ul>
 </div>
 
-    
-<p>Today we’re excited to announce a <a href="/v3/repos/deployments/">Deployments API</a>. We ship a lot of
-software at GitHub: web, mobile, and native. For the last few years, we’ve been
-driving our deployments from our <a href="https://speakerdeck.com/jnewland/chatops">ChatOps tooling</a> and we’ve learned a
-lot. The Deployments API is a generalization of the approach that we’ve been
-taking, and we’re really excited to see what our users and integrations start
+<p>Today we're excited to announce a <a href="/v3/repos/deployments/">Deployments API</a>. We ship a lot of
+software at GitHub: web, mobile, and native. For the last few years, we've been
+driving our deployments from our <a href="https://speakerdeck.com/jnewland/chatops">ChatOps tooling</a> and we've learned a
+lot. The Deployments API is a generalization of the approach that we've been
+taking, and we're really excited to see what our users and integrations start
 building around it.</p>
 
-<p>Deployments are a new model in the GitHub ecosystem. We don’t have any UI
+<p>Deployments are a new model in the GitHub ecosystem. We don't have any UI
 components currently, and deployments are intended to be used exclusively by
-tooling.  If you’re familiar with the Status API, you know that it allows
+tooling.  If you're familiar with the Status API, you know that it allows
 various tools to report on the status of a commit (e.g., the progress of an
-attempt to perform a build at a particular commit). The Status API doesn’t
+attempt to perform a build at a particular commit). The Status API doesn't
 perform the build; it just reports the results. Much like the Status API, we
-won’t be doing actual deployments for you. Instead, the API provides a way for
-you to track the status of your deployments. We’re hoping to provide
+won't be doing actual deployments for you. Instead, the API provides a way for
+you to track the status of your deployments. We're hoping to provide
 consistency across the various type of release processes, regardless of the
 underlying steps involved with getting your code built or shipped to your
 servers.</p>
 
-<h2 id="highlights">Highlights</h2>
+<h2>
+<a id="highlights" class="anchor" href="#highlights" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="highlights" class="anchor" href="#highlights" aria-hidden="true"><span class="octicon octicon-link"></span></a>Highlights</h2>
 
-<h3 id="automatic-merging">Automatic Merging</h3>
+<h3>
+<a id="automatic-merging" class="anchor" href="#automatic-merging" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="automatic-merging" class="anchor" href="#automatic-merging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automatic Merging</h3>
 
 <p>The system can auto-merge the default branch for the repository if the
-requested deployment ref is behind the default branch. On active projects it’s
+requested deployment ref is behind the default branch. On active projects it's
 easy to fall behind, so let automation watch your back.</p>
 
-<h3 id="commit-status-integration">Commit Status Integration</h3>
+<h3>
+<a id="commit-status-integration" class="anchor" href="#commit-status-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="commit-status-integration" class="anchor" href="#commit-status-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commit Status Integration</h3>
 
 <p>By default, the system rejects deployment requests for repositories that have
-commit statuses but don’t have a green build for the deployment ref. This can
+commit statuses but don't have a green build for the deployment ref. This can
 be bypassed, but is useful in cases where continuous integration is being used.</p>
 
-<h3 id="force-deployments">Force Deployments</h3>
+<h3>
+<a id="force-deployments" class="anchor" href="#force-deployments" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="force-deployments" class="anchor" href="#force-deployments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Force Deployments</h3>
 
 <p>Sometimes the world crashes down on you, and you need to just get the code out
 the door.  Forced deployments bypass any commit status checks or ahead/behind
 checks in the repository.</p>
 
-<h3 id="deployment-statuses">Deployment Statuses</h3>
+<h3>
+<a id="deployment-statuses" class="anchor" href="#deployment-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="deployment-statuses" class="anchor" href="#deployment-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deployment Statuses</h3>
 
 <p>Different deployment systems can update the status of a deployment to be
-<code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>. There’s also a field for linking
+<code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>. There's also a field for linking
 to deployment output.</p>
 
-<h3 id="events">Events</h3>
+<h3>
+<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events</h3>
 
 <p>Both Deployments and Deployment Statuses trigger events on GitHub. 3rd party
 integrations can listen for these events via <a href="/v3/repos/hooks/">webhooks</a> and choose
 whether or not to actually deploy the repository that the event was created for.</p>
 
-<h2 id="preview-period">Preview Period</h2>
+<h2>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview Period</h2>
 
-<p>We’re making this new API available today for developers to
-<a href="/v3/repos/deployments/#preview-mode" data-proofer-ignore="">preview</a>.  We think developers and existing integrations are
+<p>We're making this new API available today for developers to
+<a href="/v3/repos/deployments/#preview-mode" data-proofer-ignore>preview</a>.  We think developers and existing integrations are
 going to love it, but we want to <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get your feedback</a> before we declare
-the Deployments API “final” and “unchangeable.” We expect the preview period to
+the Deployments API "final" and "unchangeable." We expect the preview period to
 last for roughly 60-90 days.</p>
 
 <p>As we discover opportunities to improve the API during the preview period, we
@@ -246,6 +263,7 @@ stable and suitable for production use.</p>
 
 <div class="change" id="/changes/2014-01-07-upcoming-change-to-default-media-type/">
   <h2 class="title">
+<a id="--upcoming-change-to-default-media-type" class="anchor" href="#--upcoming-change-to-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">Upcoming Change to Default Media Type</a>
 </h2>
 
@@ -257,24 +275,29 @@ stable and suitable for production use.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
-    
-<p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you’ll find tips below to help you smoothly navigate this change.</p>
+<p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you'll find tips below to help you smoothly navigate this change.</p>
 
-<h2 id="whats-changing">What’s changing?</h2>
+<h2>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's changing?</h2>
 
-<h3 id="a-new-default-version">A new default version</h3>
+<h3>
+<a id="a-new-default-version" class="anchor" href="#a-new-default-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="a-new-default-version" class="anchor" href="#a-new-default-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new default version</h3>
 
 <p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. Today, requests receive the beta version by default. On April 15<a href="#cutover-test">*</a>, requests will begin receiving the v3 version by default.</p>
 
 <p>For the most part, beta and v3 are remarkably similar. There are <a href="/v3/versions/#differences-from-beta-version">just a few differences</a> to keep in mind.</p>
 
-<h3 id="a-new-default-media-type">A new default media type</h3>
+<h3>
+<a id="a-new-default-media-type" class="anchor" href="#a-new-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="a-new-default-media-type" class="anchor" href="#a-new-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new default media type</h3>
 
 <p>The version is one part of the <a href="/v3/media">media type</a>. By default, the API provides the beta media type:</p>
 
@@ -286,40 +309,51 @@ stable and suitable for production use.</p>
 <pre><code>application/vnd.github.v3+json
 </code></pre>
 
-<h2 id="who-is-affected">Who is affected?</h2>
+<h2>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who is affected?</h2>
 
 <p>Since 2012, we have encouraged developers to explicitly <a href="/v3/media/#request-specific-version">request a specific media type via the <code>Accept</code> header</a>. If you are requesting either beta or v3 via the <code>Accept</code> header, then you are <em>not</em> affected by this change. The API will continue to respond with the requested media type.</p>
 
 <p>If you are not requesting beta or v3 via the <code>Accept</code> header, then the API is currently responding with the beta media type. On April 15<a href="#cutover-test">*</a>, the API will begin responding with the v3 media type. If your application relies on <a href="/v3/versions/#differences-from-beta-version">functionality that differs between beta and v3</a>, then you are affected by this change. You will need to take steps to prepare for the change.</p>
 
-<h2 id="what-should-you-do">What should you do?</h2>
+<h2>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h2>
 
 <p>If you are affected by this change, we recommend that you:</p>
 
 <ol>
-  <li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there’s a good chance that they’ve already done the work for you. In that case, you can just update to the latest version of that library.)</li>
-  <li>Request the v3 media type via the <code>Accept</code> header.</li>
+<li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there's a good chance that they've already done the work for you. In that case, you can just update to the latest version of that library.)</li>
+<li>Request the v3 media type via the <code>Accept</code> header.</li>
 </ol>
 
 <p>If you cannot update your application to depend on the v3 functionality by April 15<a href="#cutover-test">*</a>, you can just request the beta media type via the <code>Accept</code> header. Doing so will insulate you from this change.</p>
 
-<h2 id="cutover-test">Cutover test on March 12, 2014</h2>
+<p><a id="cutover-test"></a></p>
+
+<h2>
+<a id="cutover-test-on-march-12-2014" class="anchor" href="#cutover-test-on-march-12-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="cutover-test-on-march-12-2014" class="anchor" href="#cutover-test-on-march-12-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cutover test on March 12, 2014</h2>
 
 <p>To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.</p>
 
 <p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
 
-<h2 id="stay-informed">Stay informed</h2>
+<h2>
+<a id="stay-informed" class="anchor" href="#stay-informed" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="stay-informed" class="anchor" href="#stay-informed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stay informed</h2>
 
-<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we’ll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
+<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we'll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
 
-<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We’ll be happy to help.</p>
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We'll be happy to help.</p>
 
 
 </div>
 
 <div class="change" id="/changes/2013-12-13-paginating-org-members/">
   <h2 class="title">
+<a id="--paginated-results-for-organization-members" class="anchor" href="#--paginated-results-for-organization-members" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-12-13-paginating-org-members/">Paginated results for organization members</a>
 </h2>
 
@@ -331,14 +365,14 @@ stable and suitable for production use.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
-<p>The <a href="http://developer.github.com/v3/orgs/members/#members-list">organization members</a> and <a href="http://developer.github.com/v3/orgs/members/#public-members-list">organization public members</a> methods will soon return paginated results by default. Beginning
+<p>The <a href="http://developer.github.com/v3/orgs/members/#members-list">organization members</a> and [organization public members]<a href="http://developer.github.com/v3/orgs/members/#public-members-list">public
+members</a> methods will soon return paginated results by default. Beginning
 today, these methods will paginate if you include <code>page</code> or <code>per_page</code> query
 parameters. Starting January 15th, 2014, these methods will <em>always</em> return paginated
 results.</p>
@@ -349,11 +383,12 @@ subsequent results. If you have any questions or run into trouble, feel free to
 
 <p>Happy paginating.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-11-04-releases-api-is-official/">
   <h2 class="title">
+<a id="--releases-api-is-official" class="anchor" href="#--releases-api-is-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-11-04-releases-api-is-official/">Releases API is Official</a>
 </h2>
 
@@ -365,18 +400,19 @@ subsequent results. If you have any questions or run into trouble, feel free to
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore="">
-      <a href="https://github.com/technoweenie" data-proofer-ignore="">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
   </li>
 </ul>
 </div>
 
-    
 <p>Hot on the heels of the <a href="http://developer.github.com/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">Search API</a>, the <a href="/v3/repos/releases/">Releases API</a>
 is now officially part of GitHub API v3.  We now consider it stable for
-production use.</p>
+production use.  </p>
 
-<h3 id="preview-media-type-no-longer-needed">Preview Media Type No Longer Needed</h3>
+<h3>
+<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview Media Type No Longer Needed</h3>
 
 <p>If you used the Releases API during the preview period, you needed to provide a custom media type in the <code>Accept</code> header:</p>
 
@@ -390,18 +426,21 @@ production use.</p>
 <pre><code>application/vnd.github.v3+json
 </code></pre>
 
-<h3 id="onward">Onward!</h3>
+<h3>
+<a id="onward" class="anchor" href="#onward" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="onward" class="anchor" href="#onward" aria-hidden="true"><span class="octicon octicon-link"></span></a>Onward!</h3>
 
 <p>Thanks again to everyone that tried out the Releases API during the preview period.
 We got some great feedback, and we are already discussing additions to the API.</p>
 
-<p>We can’t wait to see what you ship!</p>
+<p>We can't wait to see what you ship!</p>
 
 
 </div>
 
 <div class="change" id="/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">
   <h2 class="title">
+<a id="--search-api-becomes-an-official-part-of-api-v3" class="anchor" href="#--search-api-becomes-an-official-part-of-api-v3" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">Search API Becomes an Official Part of API v3</a>
 </h2>
 
@@ -413,18 +452,21 @@ We got some great feedback, and we are already discussing additions to the API.<
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
     
-<p>We’re excited to announce that the <a href="/v3/search">new Search API</a> has graduated from <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a>.
+
+<p>We're excited to announce that the <a href="/v3/search">new Search API</a> has graduated from <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a>.
 As of today, the Search API is an official part of <a href="/v3">GitHub API v3</a>.
 As such, the Search API is now stable and suitable for production use.</p>
 
-<h3 id="preview-media-type-no-longer-needed">Preview Media Type No Longer Needed</h3>
+<h3>
+<a id="preview-media-type-no-longer-needed-1" class="anchor" href="#preview-media-type-no-longer-needed-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview Media Type No Longer Needed</h3>
 
 <p>If you used the Search API during the preview period, you needed to provide a custom media type in the <code>Accept</code> header:</p>
 
@@ -438,17 +480,20 @@ As such, the Search API is now stable and suitable for production use.</p>
 <pre><code>application/vnd.github.v3+json
 </code></pre>
 
-<h3 id="onward">Onward!</h3>
+<h3>
+<a id="onward-1" class="anchor" href="#onward-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="onward" class="anchor" href="#onward" aria-hidden="true"><span class="octicon octicon-link"></span></a>Onward!</h3>
 
 <p>Thanks again to everyone that tried out the Search API during the preview period.</p>
 
-<p>We can’t wait to see what you build!</p>
+<p>We can't wait to see what you build!</p>
 
 
 </div>
 
 <div class="change" id="/changes/2013-10-18-new-code-search-requirements/">
   <h2 class="title">
+<a id="--new-validation-rule-for-beta-code-search-api" class="anchor" href="#--new-validation-rule-for-beta-code-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-10-18-new-code-search-requirements/">New Validation Rule for Beta Code Search API</a>
 </h2>
 
@@ -460,30 +505,33 @@ As such, the Search API is now stable and suitable for production use.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
     
+
 <p>As we <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">prepare to end the preview period</a> for the new search API,
-we’re making sure that it’s ready to handle the traffic from all the apps you’ll build on top of it.</p>
+we're making sure that it's ready to handle the traffic from all the apps you'll build on top of it.</p>
 
-<h2 id="new-validation-rule">New Validation Rule</h2>
+<h2>
+<a id="new-validation-rule" class="anchor" href="#new-validation-rule" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-validation-rule" class="anchor" href="#new-validation-rule" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Validation Rule</h2>
 
-<p>In order to support the expected volume of requests, we’re applying a new validation rule to the <a href="/v3/search/#search-code">Code Search API</a>.
+<p>In order to support the expected volume of requests, we're applying a new validation rule to the <a href="/v3/search/#search-code">Code Search API</a>.
 Starting today, you will need to scope your code queries to a specific set of users, organizations, or repositories.</p>
 
 <p>As usual, you specify the query via the <code>q</code> parameter.
 The value must include <a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">at least one user, organization, or repository</a>.</p>
 
-<p>For example, with this query, we’re searching for code from <a href="https://github.com/twitter">@twitter</a> or <a href="https://github.com/facebook">@facebook</a> that uses an MIT License:</p>
+<p>For example, with this query, we're searching for code from <a href="https://github.com/twitter">@twitter</a> or <a href="https://github.com/facebook">@facebook</a> that uses an MIT License:</p>
 
 <pre><code>MIT License user:twitter user:facebook
 </code></pre>
 
-<p>And here, we’re looking for uses of the underscore library in <a href="https://github.com/mozilla/BrowserQuest">@mozilla’s BrowserQuest</a> repository:</p>
+<p>And here, we're looking for uses of the underscore library in <a href="https://github.com/mozilla/BrowserQuest">@mozilla's BrowserQuest</a> repository:</p>
 
 <pre><code>underscore language:js repo:mozilla/BrowserQuest
 </code></pre>
@@ -499,7 +547,9 @@ https://api.github.com/search/code?q=underscore+language%3Ajs+repo%3Amozilla%2FB
 A <a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">user, organization, or repository qualifier</a> is now required.
 The other search qualifiers are still optional.</p>
 
-<h2 id="other-search-types-not-affected">Other Search Types Not Affected</h2>
+<h2>
+<a id="other-search-types-not-affected" class="anchor" href="#other-search-types-not-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="other-search-types-not-affected" class="anchor" href="#other-search-types-not-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Search Types Not Affected</h2>
 
 <p>This new validation only applies to the <a href="/v3/search/#search-code">Code Search API</a>.
 It does not apply to the Search API for <a href="/v3/search/#search-issues">issues</a>, <a href="/v3/search/#search-users">users</a>, or <a href="/v3/search/#search-repositories">repositories</a>.</p>
@@ -508,7 +558,7 @@ It does not apply to the Search API for <a href="/v3/search/#search-issues">issu
 
 <p>By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
 As we continue to tune the Search API, we hope to relax this validation in the future.
-There’s no ETA, but we’d like to relax it as soon as it’s feasible.</p>
+There's no ETA, but we'd like to relax it as soon as it's feasible.</p>
 
 <p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Validation+Rule+for+Code+Search+API">get in touch</a>.</p>
 
@@ -517,6 +567,7 @@ There’s no ETA, but we’d like to relax it as soon as it’s feasible.</p>
 
 <div class="change" id="/changes/2013-10-08-list-all-user-teams/">
   <h2 class="title">
+<a id="--list-all-teams-for-the-authenticated-user" class="anchor" href="#--list-all-teams-for-the-authenticated-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-10-08-list-all-user-teams/">List all teams for the authenticated user</a>
 </h2>
 
@@ -528,47 +579,49 @@ There’s no ETA, but we’d like to relax it as soon as it’s feasible.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
     
+
 <p>We just added a <a href="/v3/orgs/teams/#list-user-teams">new API method</a> to list all
 the teams for the authenticated user across all organizations:</p>
 
-<pre class="terminal"><code>$ curl -H "Authorization: token [yours]" https://api.github.com/user/teams
+<pre class="command-line">
+<span class="command">curl -H "Authorization: token [yours]" https://api.github.com/user/teams</span>
 
-[
-  {
-    "name": "Testing",
-    "id": 396018,
-    "slug": "testing",
-    "permission": "pull",
-    "url": "https://api.github.com/teams/396018",
-    "members_url": "https://api.github.com/teams/396018/members{/member}",
-    "repositories_url": "https://api.github.com/teams/396018/repos",
-    "members_count": 1,
-    "repos_count": 0,
-    "organization": {
-      "login": "dotfiles",
-      "id": 1593590,
-      "url": "https://api.github.com/orgs/dotfiles",
-      "repos_url": "https://api.github.com/orgs/dotfiles/repos",
-      "events_url": "https://api.github.com/orgs/dotfiles/events",
-      "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",
-      "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",
-      "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"
-    }
-  },
-  ...
-]
-</code></pre>
+<span class="output">[</span>
+<span class="output">  {</span>
+<span class="output">    "name": "Testing",</span>
+<span class="output">    "id": 396018,</span>
+<span class="output">    "slug": "testing",</span>
+<span class="output">   "permission": "pull",</span>
+<span class="output">   "url": "https://api.github.com/teams/396018",</span>
+<span class="output">   "members_url": "https://api.github.com/teams/396018/members{/member}",</span>
+<span class="output">   "repositories_url": "https://api.github.com/teams/396018/repos",</span>
+<span class="output">   "members_count": 1,</span>
+<span class="output">   "repos_count": 0,</span>
+<span class="output">   "organization": {</span>
+<span class="output">     "login": "dotfiles",</span>
+<span class="output">     "id": 1593590,</span>
+<span class="output">     "url": "https://api.github.com/orgs/dotfiles",</span>
+<span class="output">     "repos_url": "https://api.github.com/orgs/dotfiles/repos",</span>
+<span class="output">     "events_url": "https://api.github.com/orgs/dotfiles/events",</span>
+<span class="output">     "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",</span>
+<span class="output">     "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",</span>
+<span class="output">     "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"</span>
+<span class="output">   }</span>
+<span class="output"> },</span>
+<span class="output"> ...</span>
+<span class="output">]</span>
+</pre>
 
 <p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Teams+for+User">drop us a line</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="paginate-container">
@@ -679,7 +732,9 @@ the teams for the authenticated user across all organizations:</p>
   
 </div>
 
+<p></p>
 </div>
+
 
     </div>
 
@@ -842,7 +897,7 @@ the teams for the authenticated user across all organizations:</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

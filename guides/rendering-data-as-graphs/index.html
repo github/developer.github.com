@@ -54,32 +54,35 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="rendering-data-as-graphs">Rendering Data as Graphs</h1>
+
+<h1>
+<a id="rendering-data-as-graphs" class="anchor" href="#rendering-data-as-graphs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rendering Data as Graphs</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#setting-up-an-oauth-application" id="markdown-toc-setting-up-an-oauth-application">Setting up an OAuth application</a></li>
-  <li><a href="#fetching-repository-information" id="markdown-toc-fetching-repository-information">Fetching repository information</a></li>
-  <li><a href="#visualizing-language-counts" id="markdown-toc-visualizing-language-counts">Visualizing language counts</a></li>
-  <li><a href="#combining-different-api-calls" id="markdown-toc-combining-different-api-calls">Combining different API calls</a></li>
+<li><a href="#setting-up-an-oauth-application" id="markdown-toc-setting-up-an-oauth-application">Setting up an OAuth application</a></li>
+<li><a href="#fetching-repository-information" id="markdown-toc-fetching-repository-information">Fetching repository information</a></li>
+<li><a href="#visualizing-language-counts" id="markdown-toc-visualizing-language-counts">Visualizing language counts</a></li>
+<li><a href="#combining-different-api-calls" id="markdown-toc-combining-different-api-calls">Combining different API calls</a></li>
 </ul>
 
-<p>In this guide, we’re going to use the API to fetch information about repositories
-that we own, and the programming languages that make them up. Then, we’ll
+<p>In this guide, we're going to use the API to fetch information about repositories
+that we own, and the programming languages that make them up. Then, we'll
 visualize that information in a couple of different ways using the <a href="http://d3js.org/">D3.js</a> library. To
-interact with the GitHub API, we’ll be using the excellent Ruby library, <a href="https://github.com/octokit/octokit.rb">Octokit</a>.</p>
+interact with the GitHub API, we'll be using the excellent Ruby library, <a href="https://github.com/octokit/octokit.rb">Octokit</a>.</p>
 
-<p>If you haven’t already, you should read the <a href="../basics-of-authentication/">“Basics of Authentication”</a>
+<p>If you haven't already, you should read the <a href="../basics-of-authentication/">"Basics of Authentication"</a>
 guide before starting this example. You can find the complete source code for this project in the <a href="https://github.com/github/platform-samples/tree/master/api/ruby/rendering-data-as-graphs">platform-samples</a> repository.</p>
 
-<p>Let’s jump right in!</p>
+<p>Let's jump right in!</p>
 
-<h2 id="setting-up-an-oauth-application">Setting up an OAuth application</h2>
+<h2>
+<a id="setting-up-an-oauth-application" class="anchor" href="#setting-up-an-oauth-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up an OAuth application</h2>
 
 <p>First, <a href="https://github.com/settings/applications/new">register a new application</a> on GitHub. Set the main and callback
-URLs to <code>http://localhost:4567/</code>. As <a href="../basics-of-authentication/">before</a>, we’re going to handle authentication for the API by
+URLs to <code>http://localhost:4567/</code>. As <a href="../basics-of-authentication/">before</a>, we're going to handle authentication for the API by
 implementing a Rack middleware using <a href="https://github.com/atmos/sinatra_auth_github">sinatra-auth-github</a>:</p>
 
-<pre><code class="language-ruby highlight"><span class="nb">require</span> <span class="s1">'sinatra/auth/github'</span>
+<pre class="highlight highlight-ruby"><code><span class="nb">require</span> <span class="s1">'sinatra/auth/github'</span>
 
 <span class="k">module</span> <span class="nn">Example</span>
   <span class="k">class</span> <span class="nc">MyGraphApp</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
@@ -112,45 +115,54 @@ implementing a Rack middleware using <a href="https://github.com/atmos/sinatra_a
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</code></pre>
+
 
 <p>Set up a similar <em>config.ru</em> file as in the previous example:</p>
 
-<pre><code class="language-ruby highlight"><span class="no">ENV</span><span class="p">[</span><span class="s1">'RACK_ENV'</span><span class="p">]</span> <span class="o">||=</span> <span class="s1">'development'</span>
+<pre class="highlight highlight-ruby"><code><span class="no">ENV</span><span class="p">[</span><span class="s1">'RACK_ENV'</span><span class="p">]</span> <span class="o">||=</span> <span class="s1">'development'</span>
 <span class="nb">require</span> <span class="s2">"rubygems"</span>
 <span class="nb">require</span> <span class="s2">"bundler/setup"</span>
 
 <span class="nb">require</span> <span class="no">File</span><span class="p">.</span><span class="nf">expand_path</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">dirname</span><span class="p">(</span><span class="kp">__FILE__</span><span class="p">),</span> <span class="s1">'server'</span><span class="p">))</span>
 
-<span class="n">run</span> <span class="no">Example</span><span class="o">::</span><span class="no">MyGraphApp</span></code></pre>
+<span class="n">run</span> <span class="no">Example</span><span class="o">::</span><span class="no">MyGraphApp</span>
+</code></pre>
 
-<h2 id="fetching-repository-information">Fetching repository information</h2>
 
-<p>This time, in order to talk to the GitHub API, we’re going to use the <a href="https://github.com/octokit/octokit.rb">Octokit
+<h2>
+<a id="fetching-repository-information" class="anchor" href="#fetching-repository-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fetching repository information</h2>
+
+<p>This time, in order to talk to the GitHub API, we're going to use the <a href="https://github.com/octokit/octokit.rb">Octokit
 Ruby library</a>. This is much easier than directly making a bunch of
 REST calls. Plus, Octokit was developed by a GitHubber, and is actively maintained,
-so you know it’ll work.</p>
+so you know it'll work.</p>
 
 <p>Authentication with the API via Octokit is easy. Just pass your login
 and token to the <code>Octokit::Client</code> constructor:</p>
 
-<pre><code class="language-ruby highlight"><span class="k">if</span> <span class="o">!</span><span class="n">authenticated?</span>
+<pre class="highlight highlight-ruby"><code><span class="k">if</span> <span class="o">!</span><span class="n">authenticated?</span>
   <span class="n">authenticate!</span>
 <span class="k">else</span>
   <span class="n">octokit_client</span> <span class="o">=</span> <span class="no">Octokit</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:login</span> <span class="o">=&gt;</span> <span class="n">github_user</span><span class="p">.</span><span class="nf">login</span><span class="p">,</span> <span class="ss">:oauth_token</span> <span class="o">=&gt;</span> <span class="n">github_user</span><span class="p">.</span><span class="nf">token</span><span class="p">)</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</code></pre>
 
-<p>Let’s do something interesting with the data about our repositories. We’re going
+
+<p>Let's do something interesting with the data about our repositories. We're going
 to see the different programming languages they use, and count which ones are used
-most often. To do that, we’ll first need a list of our repositories from the API.
+most often. To do that, we'll first need a list of our repositories from the API.
 With Octokit, that looks like this:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">repos</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">repositories</span></code></pre>
+<pre class="highlight highlight-ruby"><code><span class="n">repos</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">repositories</span>
+</code></pre>
 
-<p>Next, we’ll iterate over each repository, and count the language that GitHub
+
+<p>Next, we'll iterate over each repository, and count the language that GitHub
 associates with it:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">language_obj</span> <span class="o">=</span> <span class="p">{}</span>
+<pre class="highlight highlight-ruby"><code><span class="n">language_obj</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">repos</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">repo</span><span class="o">|</span>
   <span class="c1"># sometimes language can be nil</span>
   <span class="k">if</span> <span class="n">repo</span><span class="p">.</span><span class="nf">language</span>
@@ -162,43 +174,49 @@ associates with it:</p>
   <span class="k">end</span>
 <span class="k">end</span>
 
-<span class="n">languages</span><span class="p">.</span><span class="nf">to_s</span></code></pre>
+<span class="n">languages</span><span class="p">.</span><span class="nf">to_s</span>
+</code></pre>
+
 
 <p>When you restart your server, your web page should display something
 that looks like this:</p>
 
-<pre><code>{"JavaScript"=&gt;13, "PHP"=&gt;1, "Perl"=&gt;1, "CoffeeScript"=&gt;2, "Python"=&gt;1, "Java"=&gt;3, "Ruby"=&gt;3, "Go"=&gt;1, "C++"=&gt;1}
+<pre class="highlight highlight-ruby"><code><span class="p">{</span><span class="s2">"JavaScript"</span><span class="o">=&gt;</span><span class="mi">13</span><span class="p">,</span> <span class="s2">"PHP"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"Perl"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"CoffeeScript"</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="s2">"Python"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"Java"</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"Ruby"</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"Go"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"C++"</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">}</span>
 </code></pre>
 
+
 <p>So far, so good, but not very human-friendly. A visualization
-would be great in helping us understand how these language counts are distributed. Let’s feed
+would be great in helping us understand how these language counts are distributed. Let's feed
 our counts into D3 to get a neat bar graph representing the popularity of the languages we use.</p>
 
-<h2 id="visualizing-language-counts">Visualizing language counts</h2>
+<h2>
+<a id="visualizing-language-counts" class="anchor" href="#visualizing-language-counts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visualizing language counts</h2>
 
 <p>D3.js, or just D3, is a comprehensive library for creating many kinds of charts, graphs, and interactive visualizations.
 Using D3 in detail is beyond the scope of this guide, but for a good introductory article,
-check out <a href="http://www.recursion.org/d3-for-mere-mortals/">“D3 for Mortals”</a>.</p>
+check out <a href="http://www.recursion.org/d3-for-mere-mortals/">"D3 for Mortals"</a>.</p>
 
-<p>D3 is a JavaScript library, and likes working with data as arrays. So, let’s convert our Ruby hash into
+<p>D3 is a JavaScript library, and likes working with data as arrays. So, let's convert our Ruby hash into
 a JSON array for use by JavaScript in the browser.</p>
 
-<pre><code class="language-ruby highlight"><span class="n">languages</span> <span class="o">=</span> <span class="p">[]</span>
+<pre class="highlight highlight-ruby"><code><span class="n">languages</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">language_obj</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">lang</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span>
   <span class="n">languages</span><span class="p">.</span><span class="nf">push</span> <span class="ss">:language</span> <span class="o">=&gt;</span> <span class="n">lang</span><span class="p">,</span> <span class="ss">:count</span> <span class="o">=&gt;</span> <span class="n">count</span>
 <span class="k">end</span>
 
-<span class="n">erb</span> <span class="ss">:lang_freq</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:languages</span> <span class="o">=&gt;</span> <span class="n">languages</span><span class="p">.</span><span class="nf">to_json</span><span class="p">}</span></code></pre>
+<span class="n">erb</span> <span class="ss">:lang_freq</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:languages</span> <span class="o">=&gt;</span> <span class="n">languages</span><span class="p">.</span><span class="nf">to_json</span><span class="p">}</span>
+</code></pre>
 
-<p>We’re simply iterating over each key-value pair in our object and pushing them into
-a new array. The reason we didn’t do this earlier is because we didn’t want to iterate
+
+<p>We're simply iterating over each key-value pair in our object and pushing them into
+a new array. The reason we didn't do this earlier is because we didn't want to iterate
 over our <code>language_obj</code> object while we were creating it.</p>
 
 <p>Now, <em>lang_freq.erb</em> is going to need some JavaScript to support rendering a bar graph.
 For now, you can just use the code provided here, and refer to the resources linked above
 if you want to learn more about how D3 works:</p>
 
-<pre><code class="language-html highlight"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<pre class="highlight highlight-html"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;html&gt;</span>
   <span class="nt">&lt;head&gt;</span>
@@ -273,74 +291,86 @@ if you want to learn more about how D3 works:</p>
       <span class="nx">attr</span><span class="p">(</span><span class="s2">"transform"</span><span class="p">,</span> <span class="s2">"translate(0, 18)"</span><span class="p">).</span>
       <span class="nx">attr</span><span class="p">(</span><span class="s2">"class"</span><span class="p">,</span> <span class="s2">"yAxis"</span><span class="p">);</span>
   <span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/html&gt;</span></code></pre>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
 
-<p>Phew! Again, don’t worry about what most of this code is doing. The relevant part
-here is a line way at the top–<code>var data = &lt;%= languages %&gt;;</code>–which indicates
-that we’re passing our previously created <code>languages</code> array into ERB for manipulation.</p>
 
-<p>As the “D3 for Mortals” guide suggests, this isn’t necessarily the best use of
+<p>Phew! Again, don't worry about what most of this code is doing. The relevant part
+here is a line way at the top--<code>var data = &lt;%= languages %&gt;;</code>--which indicates
+that we're passing our previously created <code>languages</code> array into ERB for manipulation.</p>
+
+<p>As the "D3 for Mortals" guide suggests, this isn't necessarily the best use of
 D3. But it does serve to illustrate how you can use the library, along with Octokit,
 to make some really amazing things.</p>
 
-<h2 id="combining-different-api-calls">Combining different API calls</h2>
+<h2>
+<a id="combining-different-api-calls" class="anchor" href="#combining-different-api-calls" aria-hidden="true"><span class="octicon octicon-link"></span></a>Combining different API calls</h2>
 
-<p>Now it’s time for a confession: the <code>language</code> attribute within repositories
-only identifies the “primary” language defined. That means that if you have
+<p>Now it's time for a confession: the <code>language</code> attribute within repositories
+only identifies the "primary" language defined. That means that if you have
 a repository that combines several languages, the one with the most bytes of code
 is considered to be the primary language.</p>
 
-<p>Let’s combine a few API calls to get a <em>true</em> representation of which language
+<p>Let's combine a few API calls to get a <em>true</em> representation of which language
 has the greatest number of bytes written across all our code. A <a href="http://bl.ocks.org/mbostock/4063582">treemap</a>
 should be a great way to visualize the sizes of our coding languages used, rather
-than simply the count. We’ll need to construct an array of objects that looks
+than simply the count. We'll need to construct an array of objects that looks
 something like this:</p>
 
-<pre><code class="language-javascript highlight"><span class="p">[</span> <span class="p">{</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"language1"</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>
-  <span class="p">{</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"language2"</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">:</span> <span class="mi">23</span><span class="p">}</span>
-  <span class="p">...</span>
-<span class="p">]</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"language1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"language2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">}</span><span class="w">
+  </span><span class="err">...</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
 
-<p>Since we already have a list of repositories above, let’s inspect each one, and
+
+<p>Since we already have a list of repositories above, let's inspect each one, and
 call <a href="https://developer.github.com/v3/repos/#list-languages">the language listing API method</a>:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">repos</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">repo</span><span class="o">|</span>
+<pre class="highlight highlight-ruby"><code><span class="n">repos</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">repo</span><span class="o">|</span>
   <span class="n">repo_name</span> <span class="o">=</span> <span class="n">repo</span><span class="p">.</span><span class="nf">name</span>
   <span class="n">repo_langs</span> <span class="o">=</span> <span class="n">octokit_client</span><span class="p">.</span><span class="nf">languages</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="n">github_user</span><span class="p">.</span><span class="nf">login</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="n">repo_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</code></pre>
 
-<p>From there, we’ll cumulatively add each language found to a “master list”:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">repo_langs</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">lang</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span>
+<p>From there, we'll cumulatively add each language found to a "master list":</p>
+
+<pre class="highlight highlight-ruby"><code><span class="n">repo_langs</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">lang</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span>
   <span class="k">if</span> <span class="o">!</span><span class="n">language_obj</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span>
     <span class="n">language_obj</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span>
   <span class="k">else</span>
     <span class="n">language_obj</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span> <span class="o">+=</span> <span class="n">count</span>
   <span class="k">end</span>
-<span class="k">end</span></code></pre>
+<span class="k">end</span>
+</code></pre>
 
-<p>After that, we’ll format the contents into a structure that D3 understands:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">language_obj</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">lang</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span>
+<p>After that, we'll format the contents into a structure that D3 understands:</p>
+
+<pre class="highlight highlight-ruby"><code><span class="n">language_obj</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">lang</span><span class="p">,</span> <span class="n">count</span><span class="o">|</span>
   <span class="n">language_byte_count</span><span class="p">.</span><span class="nf">push</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">#{</span><span class="n">lang</span><span class="si">}</span><span class="s2"> (</span><span class="si">#{</span><span class="n">count</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span> <span class="ss">:count</span> <span class="o">=&gt;</span> <span class="n">count</span>
 <span class="k">end</span>
 
 <span class="c1"># some mandatory formatting for D3</span>
-<span class="n">language_bytes</span> <span class="o">=</span> <span class="p">[</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"language_bytes"</span><span class="p">,</span> <span class="ss">:elements</span> <span class="o">=&gt;</span> <span class="n">language_byte_count</span><span class="p">]</span></code></pre>
+<span class="n">language_bytes</span> <span class="o">=</span> <span class="p">[</span> <span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">"language_bytes"</span><span class="p">,</span> <span class="ss">:elements</span> <span class="o">=&gt;</span> <span class="n">language_byte_count</span><span class="p">]</span>
+</code></pre>
+
 
 <p>(For more information on D3 tree map magic, check out <a href="https://developer.github.com/v3/repos/#list-languages">this simple tutorial</a>.)</p>
 
 <p>To wrap up, we pass this JSON information over to the same ERB template:</p>
 
-<pre><code class="language-ruby highlight"><span class="n">erb</span> <span class="ss">:lang_freq</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:languages</span> <span class="o">=&gt;</span> <span class="n">languages</span><span class="p">.</span><span class="nf">to_json</span><span class="p">,</span> <span class="ss">:language_byte_count</span> <span class="o">=&gt;</span> <span class="n">language_bytes</span><span class="p">.</span><span class="nf">to_json</span><span class="p">}</span></code></pre>
+<pre class="highlight highlight-ruby"><code><span class="n">erb</span> <span class="ss">:lang_freq</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:languages</span> <span class="o">=&gt;</span> <span class="n">languages</span><span class="p">.</span><span class="nf">to_json</span><span class="p">,</span> <span class="ss">:language_byte_count</span> <span class="o">=&gt;</span> <span class="n">language_bytes</span><span class="p">.</span><span class="nf">to_json</span><span class="p">}</span>
+</code></pre>
 
-<p>Like before, here’s a bunch of JavaScript that you can drop
+
+<p>Like before, here's a bunch of JavaScript that you can drop
 directly into your template:</p>
 
-<pre><code class="language-html highlight"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"byte_freq"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<pre class="highlight highlight-html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"byte_freq"</span><span class="nt">&gt;&lt;/div&gt;</span>
 <span class="nt">&lt;script&gt;</span>
   <span class="kd">var</span> <span class="nx">language_bytes</span> <span class="o">=</span> <span class="o">&lt;%=</span> <span class="nx">language_byte_count</span> <span class="o">%&gt;</span>
-
   <span class="kd">var</span> <span class="nx">childrenFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">elements</span><span class="p">};</span>
   <span class="kd">var</span> <span class="nx">sizeFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">count</span><span class="p">;};</span>
   <span class="kd">var</span> <span class="nx">colorFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">20</span><span class="p">)};</span>
@@ -382,7 +412,9 @@ directly into your template:</p>
           <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"width"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">dx</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">;})</span>
           <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">"height"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span><span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">dy</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">"px"</span><span class="p">;});</span>
   <span class="p">}</span>
-<span class="nt">&lt;/script&gt;</span></code></pre>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+
 
 <p>Et voila! Beautiful rectangles containing your repo languages, with relative
 proportions that are easy to see at a glance. You might need to
@@ -441,7 +473,7 @@ arguments to <code>drawTreemap</code> above, to get all the information to show 
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

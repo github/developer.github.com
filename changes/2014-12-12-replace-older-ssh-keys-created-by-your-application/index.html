@@ -62,33 +62,41 @@
 </div>
 
 
+
+
 <p>Back in February, we <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable">improved the security audit trail for SSH keys</a>. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on <a href="/guides/managing-deploy-keys/#deploy-keys">deploy keys</a> or <a href="/v3/users/keys/">user keys</a> for repository access, we recommend replacing any keys created before February 24, 2014.</p>
 
 <p>To ensure that your application is not affected by organizations blocking access to these keys, <strong>you should replace the affected keys by January 15, 2015</strong>.</p>
 
-<h2 id="how-should-you-replace-these-keys">How should you replace these keys?</h2>
+<h2>
+<a id="how-should-you-replace-these-keys" class="anchor" href="#how-should-you-replace-these-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>How should you replace these keys?</h2>
 
 <p>We recommend the following steps for identifying and replacing the affected keys.</p>
 
-<h3 id="identify-the-affected-keys">1. Identify the affected keys</h3>
+<h3>
+<a id="1-identify-the-affected-keys" class="anchor" href="#1-identify-the-affected-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Identify the affected keys</h3>
 
-<p>You only need to replace keys that your application created prior to February 24, 2014. If you don’t know when your app created a given key, you can get the creation timestamp from the API. The <code>created_at</code> property is available for <a href="/v3/repos/keys/">deploy keys</a> and for <a href="/v3/users/keys/#list-your-public-keys">user keys</a>.</p>
+<p>You only need to replace keys that your application created prior to February 24, 2014. If you don't know when your app created a given key, you can get the creation timestamp from the API. The <code>created_at</code> property is available for <a href="/v3/repos/keys/">deploy keys</a> and for <a href="/v3/users/keys/#list-your-public-keys">user keys</a>.</p>
 
-<h3 id="inform-the-affected-users">2. Inform the affected users</h3>
+<h3>
+<a id="2-inform-the-affected-users" class="anchor" href="#2-inform-the-affected-users" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Inform the affected users</h3>
 
 <p>Once you know which keys you need to replace, we recommend that you inform the affected users.</p>
 
-<p>For security, GitHub automatically sends an email to a user whenever a new SSH key is added to their account. Similarly, when a new deploy key is added to a repository, GitHub sends an email to the repository’s administrators. When you replace your application’s old keys with new ones, GitHub will email the affected users. To avoid surprising those users, you should alert them that you’ll be replacing your keys. You may want to include a link to this post in your message.</p>
+<p>For security, GitHub automatically sends an email to a user whenever a new SSH key is added to their account. Similarly, when a new deploy key is added to a repository, GitHub sends an email to the repository's administrators. When you replace your application's old keys with new ones, GitHub will email the affected users. To avoid surprising those users, you should alert them that you'll be replacing your keys. You may want to include a link to this post in your message.</p>
 
-<h3 id="add-a-new-key">3. Add a new key</h3>
+<h3>
+<a id="3-add-a-new-key" class="anchor" href="#3-add-a-new-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Add a new key</h3>
 
-<p>Use the API to add the new <a href="/v3/repos/keys/#create">deploy key</a> or <a href="/v3/users/keys/#create-a-public-key">user key</a>.</p>
+<p>Use the API to add the new <a href="/v3/repos/keys/#add-a-new-deploy-key">deploy key</a> or <a href="/v3/users/keys/#create-a-public-key">user key</a>.</p>
 
-<h3 id="delete-the-old-key">4. Delete the old key</h3>
+<h3>
+<a id="4-delete-the-old-key" class="anchor" href="#4-delete-the-old-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Delete the old key</h3>
 
-<p>Once your application is using the new key, use the API to delete the old one. There’s an <a href="/v3/repos/keys/#delete">API for deleting deploy keys</a> and an <a href="/v3/users/keys/#delete-a-public-key">API for deleting user keys</a>.</p>
+<p>Once your application is using the new key, use the API to delete the old one. There's an <a href="/v3/repos/keys/#remove-a-deploy-key">API for deleting deploy keys</a> and an <a href="/v3/users/keys/#delete-a-public-key">API for deleting user keys</a>.</p>
 
-<h2 id="were-here-to-help">We’re here to help</h2>
+<h2>
+<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>We're here to help</h2>
 
 <p>As always, if you have any questions or concerns, please <a href="https://github.com/contact?form%5Bsubject%5D=Replace+SSH+keys+created+by+application">get in touch</a>.</p>
 
@@ -111,11 +119,11 @@
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -147,7 +155,7 @@
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

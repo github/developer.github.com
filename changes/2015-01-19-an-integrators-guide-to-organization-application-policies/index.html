@@ -63,45 +63,48 @@
 
 
 
+
 <p>As we <a href="https://github.com/blog/1941-organization-approved-applications">announced over on the GitHub blog</a>, organization admins can now
 control how third-party applications access their organization data. Allowing
 admins to approve or deny applications will ultimately result in deeper trust
 and increase overall adoption of integrations within organizations on GitHub.</p>
 
-<p>As an integrator, here’s what you need to know about organization application
+<p>As an integrator, here's what you need to know about organization application
 policies and how this feature could impact your application.</p>
 
-<h3 id="guiding-principles">Guiding principles</h3>
+<h3>
+<a id="guiding-principles" class="anchor" href="#guiding-principles" aria-hidden="true"><span class="octicon octicon-link"></span></a>Guiding principles</h3>
 
-<p>We’ve tried to strike the right balance between organization privacy and the
+<p>We've tried to strike the right balance between organization privacy and the
 user experience for integrators and end users. Organizations should be able to
 prevent applications they do not trust from accessing their organization data
 without creating a multitude of new edge cases for integrators.</p>
 
-<p>With that goal in mind, the feature works like this: <strong>if an organization’s
+<p>With that goal in mind, the feature works like this: <strong>if an organization's
 application policy prevents an application from accessing its resources, the
 API behaves as if the authenticating user is not a member of the
 organization</strong>. Specifically, this means an application authenticating on
 behalf of a user using OAuth will have:</p>
 
 <ul>
-  <li>
+<li>
 <strong>Read-only access to public resources.</strong> Organization-owned public
-  repositories, issues, and other resources will be visible via the API and
-  show up in resource listings, but mutating methods (<code>POST</code>, <code>PATCH</code>, <code>PUT</code>,
-  and <code>DELETE</code>) will return status <code>403</code>.</li>
-  <li>
+repositories, issues, and other resources will be visible via the API and
+show up in resource listings, but mutating methods (<code>POST</code>, <code>PATCH</code>, <code>PUT</code>,
+and <code>DELETE</code>) will return status <code>403</code>.</li>
+<li>
 <strong>No access to private resources.</strong> Organization-owned private repositories,
-  issues, and other resources will not be visible via the API and will not
-  show up in resource <a href="/v3/issues/#list-issues">listings</a> that co-mingle public and private
-  resources. Hooks for these private repositories are muted and will not be
-  delivered as long as the application is restricted by the organization.</li>
+issues, and other resources will not be visible via the API and will not
+show up in resource <a href="/v3/issues/#list-issues">listings</a> that co-mingle public and private
+resources. Hooks for these private repositories are muted and will not be
+delivered as long as the application is restricted by the organization.</li>
 </ul>
 
 <p>Since applications should already handle the scenario where a user loses access
 to organization resources, this reduces the work integrators need to do.</p>
 
-<h3 id="checking-organization-access">Checking organization access</h3>
+<h3>
+<a id="checking-organization-access" class="anchor" href="#checking-organization-access" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checking organization access</h3>
 
 <p>As organization admins adopt application whitelists and restrict third-party
 application access to organization resources, your application may lose access
@@ -112,30 +115,28 @@ longer work or show up in your application.</p>
 <p>There are a couple ways to help troubleshoot access for your end users.</p>
 
 <ul>
-  <li>
-    <p><strong>Via the GitHub UI.</strong> The simplest way to help end users understand how
-  organization access policies affect their access to your application is to
-  provide a link to <a href="https://help.github.com/articles/requesting-organization-approval-for-your-authorized-applications/">their authorization details</a>
-  under their GitHub account settings as <a href="/v3/oauth/#directing-users-to-review-their-access-for-an-application">described in the OAuth
-  documentation</a>.</p>
-  </li>
-  <li>
-    <p><strong>Via the API.</strong> For an even better user experience, <a href="/guides/discovering-resources-for-a-user/">use the
-  API</a> to list which user organizations your application
-  can access, and provide users with the link mentioned above to request
-  access from their organization admins.</p>
-  </li>
+<li><p><strong>Via the GitHub UI.</strong> The simplest way to help end users understand how
+organization access policies affect their access to your application is to
+provide a link to <a href="https://help.github.com/articles/requesting-organization-approval-for-your-authorized-applications/">their authorization details</a>
+under their GitHub account settings as <a href="/v3/oauth/#directing-users-to-review-their-access-for-an-application">described in the OAuth
+documentation</a>.</p></li>
+<li><p><strong>Via the API.</strong> For an even better user experience, <a href="/guides/discovering-resources-for-a-user/">use the
+API</a> to list which user organizations your application
+can access, and provide users with the link mentioned above to request
+access from their organization admins.</p></li>
 </ul>
 
-<h3 id="listing-accessible-organization-resources">Listing accessible organization resources</h3>
+<h3>
+<a id="listing-accessible-organization-resources" class="anchor" href="#listing-accessible-organization-resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Listing accessible organization resources</h3>
 
-<p>In addition to checking access to a user’s organizations, you’ll want to ensure
-you’re discovering their accessible resources in the most efficient way. Recent
+<p>In addition to checking access to a user's organizations, you'll want to ensure
+you're discovering their accessible resources in the most efficient way. Recent
 changes to the <a href="/v3/repos/#list-your-repositories">Repositories API</a> might reduce the API calls
-your application needs to make to find a user’s repositories across all of
+your application needs to make to find a user's repositories across all of
 their organization memberships.</p>
 
-<h3 id="ensuring-uninterrupted-ssh-access">Ensuring uninterrupted SSH access</h3>
+<h3>
+<a id="ensuring-uninterrupted-ssh-access" class="anchor" href="#ensuring-uninterrupted-ssh-access" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ensuring uninterrupted SSH access</h3>
 
 <p>Since applications should already handle the scenario where a user loses access
 to organization resources (e.g., when a user leaves an organization), this
@@ -146,9 +147,10 @@ applications. If your application uses keys <strong>created before February 24,
 2014</strong>, you <a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">should replace those older keys</a> to ensure things keep
 running smoothly for your application.</p>
 
-<h3 id="were-here-to-help">We’re here to help</h3>
+<h3>
+<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>We're here to help</h3>
 
-<p>This is a big feature, and we’re sure it will impact many of our integrators as
+<p>This is a big feature, and we're sure it will impact many of our integrators as
 organizations adopt third-party application restrictions. We also think it
 provides a huge net benefit for integrators as organizations choose to use
 OAuth integrations with more confidence.</p>
@@ -174,11 +176,11 @@ OAuth integrations with more confidence.</p>
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -210,7 +212,7 @@ OAuth integrations with more confidence.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

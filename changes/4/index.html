@@ -43,8 +43,10 @@
   <div id="wrapper">
     <div class="content">
       
+
 <div class="change" id="/changes/2014-10-21-deployment-webhook-payload-changes/">
   <h2 class="title">
+<a id="--deployment-webhook-payload-changes" class="anchor" href="#--deployment-webhook-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-10-21-deployment-webhook-payload-changes/">Deployment webhook payload changes</a>
 </h2>
 
@@ -56,141 +58,168 @@
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore="">
-      <a href="https://github.com/atmos" data-proofer-ignore="">atmos</a>
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
+      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
   </li>
 </ul>
 </div>
 
-    
-<p>On November 4th, 2014, we will begin sending a new format for <a href="https://developer.github.com/v3/activity/events/types/#deploymentevent">deployment</a> and <a href="https://developer.github.com/v3/activity/events/types/#deploymentstatusevent">deployment status</a> payloads for webhooks. In the meantime we’ll be running in a compatability mode that will give integrators the time needed to start taking advantage of the new format. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.</p>
+<p>On November 4th, 2014, we will begin sending a new format for <a href="https://developer.github.com/v3/activity/events/types/#deploymentevent">deployment</a> and <a href="https://developer.github.com/v3/activity/events/types/#deploymentstatusevent">deployment status</a> payloads for webhooks. In the meantime we'll be running in a compatability mode that will give integrators the time needed to start taking advantage of the new format. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.</p>
 
-<p>This change brings the payloads for these events more inline with the responses you’d receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under <code>deployment</code> and <code>deployment_status</code> keys. Since we’re still in the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">preview period</a> for the deployments API we felt it was best to correct this inconsistency now.</p>
+<p>This change brings the payloads for these events more inline with the responses you'd receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under <code>deployment</code> and <code>deployment_status</code> keys. Since we're still in the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">preview period</a> for the deployments API we felt it was best to correct this inconsistency now.</p>
 
-<h2 id="deploymentevent-changes">DeploymentEvent Changes</h2>
+<h2>
+<a id="deploymentevent-changes" class="anchor" href="#deploymentevent-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="deploymentevent-changes" class="anchor" href="#deploymentevent-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>DeploymentEvent Changes</h2>
 
-<h4 id="old-format">Old Format</h4>
+<h4>
+<a id="old-format" class="anchor" href="#old-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="old-format" class="anchor" href="#old-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>Old Format</h4>
 
-<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">42</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="err">:</span> <span class="s2">"deadbeef"</span><span class="p">,</span>
-  <span class="s2">"ref"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"task"</span><span class="err">:</span> <span class="s2">"deploy"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"my-org/our-app"</span><span class="p">,</span>
-  <span class="s2">"environment"</span><span class="err">:</span> <span class="s2">"production"</span><span class="p">,</span>
-  <span class="s2">"payload"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Deploying master"</span><span class="p">,</span>
-  <span class="s2">"repository"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"sender"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">}</span>
-<span class="p">}</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deadbeef"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-org/our-app"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<h4 id="current-format---20141022">Current Format - 2014/10/22</h4>
 
-<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">42</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="err">:</span> <span class="s2">"deadbeef"</span><span class="p">,</span>
-  <span class="s2">"ref"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
-  <span class="s2">"task"</span><span class="err">:</span> <span class="s2">"deploy"</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"my-org/our-app"</span><span class="p">,</span>
-  <span class="s2">"environment"</span><span class="err">:</span> <span class="s2">"production"</span><span class="p">,</span>
-  <span class="s2">"payload"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Deploying master"</span><span class="p">,</span>
-  <span class="s2">"repository"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"deployment"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">42</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="err">:</span> <span class="s2">"deadbeef"</span><span class="p">,</span>
-    <span class="s2">"ref"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
-    <span class="s2">"task"</span><span class="err">:</span> <span class="s2">"deploy"</span><span class="p">,</span>
-    <span class="s2">"environment"</span><span class="err">:</span> <span class="s2">"production"</span><span class="p">,</span>
-    <span class="s2">"payload"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Deploying master"</span><span class="p">,</span>
-    <span class="s2">"creator"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span>
-    <span class="s2">"statuses_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses"</span>
-  <span class="p">},</span>
-  <span class="s2">"sender"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">}</span>
-<span class="p">}</span></code></pre>
+<h4>
+<a id="current-format---20141022" class="anchor" href="#current-format---20141022" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="current-format---20141022" class="anchor" href="#current-format---20141022" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Format - 2014/10/22</h4>
 
-<h4 id="new-format---20141105">New Format - 2014/11/05</h4>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deadbeef"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-org/our-app"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deadbeef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
-  <span class="s2">"deployment"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">42</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="err">:</span> <span class="s2">"deadbeef"</span><span class="p">,</span>
-    <span class="s2">"ref"</span><span class="err">:</span> <span class="s2">"master"</span><span class="p">,</span>
-    <span class="s2">"task"</span><span class="err">:</span> <span class="s2">"deploy"</span><span class="p">,</span>
-    <span class="s2">"environment"</span><span class="err">:</span> <span class="s2">"production"</span><span class="p">,</span>
-    <span class="s2">"payload"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Deploying master"</span><span class="p">,</span>
-    <span class="s2">"creator"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-    <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span>
-    <span class="s2">"statuses_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses"</span>
-  <span class="p">},</span>
-  <span class="s2">"repository"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"sender"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">}</span>
-<span class="p">}</span></code></pre>
 
-<h2 id="deploymentstatusevent-changes">DeploymentStatusEvent Changes</h2>
+<h4>
+<a id="new-format---20141105" class="anchor" href="#new-format---20141105" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-format---20141105" class="anchor" href="#new-format---20141105" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Format - 2014/11/05</h4>
 
-<h4 id="old-format-1">Old Format</h4>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deadbeef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">2600</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"success"</span><span class="p">,</span>
-  <span class="s2">"deployment"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"target_url"</span><span class="err">:</span> <span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Deployment was successful"</span><span class="p">,</span>
-  <span class="s2">"repository"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"sender"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">}</span>
-<span class="p">}</span></code></pre>
 
-<h4 id="current-format---20141022-1">Current Format - 2014/10/22</h4>
+<h2>
+<a id="deploymentstatusevent-changes" class="anchor" href="#deploymentstatusevent-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="deploymentstatusevent-changes" class="anchor" href="#deploymentstatusevent-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>DeploymentStatusEvent Changes</h2>
 
-<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">2600</span><span class="p">,</span>
-  <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"success"</span><span class="p">,</span>
-  <span class="s2">"target_url"</span><span class="err">:</span> <span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Deployment was successful"</span><span class="p">,</span>
-  <span class="s2">"repository"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"deployment_status"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">2600</span><span class="p">,</span>
-    <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"success"</span><span class="p">,</span>
-    <span class="s2">"creator"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-    <span class="s2">"target_url"</span><span class="err">:</span> <span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Deployment was successful"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span>
-    <span class="s2">"deployment_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span>
-    <span class="s2">"repository_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app"</span>
-  <span class="p">},</span>
-  <span class="s2">"deployment"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"sender"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">}</span>
-<span class="p">}</span></code></pre>
+<h4>
+<a id="old-format-1" class="anchor" href="#old-format-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="old-format-1" class="anchor" href="#old-format-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Old Format</h4>
 
-<h4 id="new-format---20141105-1">New Format - 2014/11/05</h4>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment was successful"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
-  <span class="s2">"deployment_status"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">2600</span><span class="p">,</span>
-    <span class="s2">"state"</span><span class="err">:</span> <span class="s2">"success"</span><span class="p">,</span>
-    <span class="s2">"creator"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-    <span class="s2">"target_url"</span><span class="err">:</span> <span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Deployment was successful"</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span>
-    <span class="s2">"updated_at"</span><span class="err">:</span> <span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span>
-    <span class="s2">"deployment_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span>
-    <span class="s2">"repository_url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/my-org/our-app"</span>
-  <span class="p">},</span>
-  <span class="s2">"deployment"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"repository"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">},</span>
-  <span class="s2">"sender"</span><span class="err">:</span> <span class="p">{</span><span class="err">…</span><span class="p">}</span>
-<span class="p">}</span></code></pre>
+
+<h4>
+<a id="current-format---20141022-1" class="anchor" href="#current-format---20141022-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="current-format---20141022-1" class="anchor" href="#current-format---20141022-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Format - 2014/10/22</h4>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment was successful"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"deployment_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment was successful"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deployment_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h4>
+<a id="new-format---20141105-1" class="anchor" href="#new-format---20141105-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-format---20141105-1" class="anchor" href="#new-format---20141105-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Format - 2014/11/05</h4>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"deployment_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment was successful"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deployment_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
 
@@ -199,6 +228,7 @@
 
 <div class="change" id="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">
   <h2 class="title">
+<a id="--removed-sslv3-support-from-webhooks-and-services" class="anchor" href="#--removed-sslv3-support-from-webhooks-and-services" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">Removed SSLv3 support from webhooks and services</a>
 </h2>
 
@@ -210,24 +240,24 @@
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle" data-proofer-ignore="">
-      <a href="https://github.com/kdaigle" data-proofer-ignore="">kdaigle</a>
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle" data-proofer-ignore>
+      <a href="https://github.com/kdaigle" data-proofer-ignore>kdaigle</a>
   </li>
 </ul>
 </div>
 
-    
 <p>This morning, we <a href="https://github.com/github/github-services/pull/949">removed support</a> for the <code>ssl_version</code> webhook configuration
-option and made <code>TLS 1.X</code> the default cryptographic protocol to address the <a href="https://www.openssl.org/~bodo/ssl-poodle.pdf">POODLE exploit</a>.
+option and made <code>TLS 1.X</code> the default cryptographic protocol to address the <a href="https://www.openssl.org/%7Ebodo/ssl-poodle.pdf">POODLE exploit</a>.
 You should no longer set or rely on the <code>ssl_version</code> configuration option.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removed+SSLv3+support+from+webhooks+and+services">drop us a line</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-10-06-new-attributes-for-issue-events-api/">
   <h2 class="title">
+<a id="--new-attributes-for-issue-events-api" class="anchor" href="#--new-attributes-for-issue-events-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-10-06-new-attributes-for-issue-events-api/">New Attributes for Issue Events API</a>
 </h2>
 
@@ -239,34 +269,34 @@ You should no longer set or rely on the <code>ssl_version</code> configuration o
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace" data-proofer-ignore="">
-      <a href="https://github.com/jdpace" data-proofer-ignore="">jdpace</a>
+    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace" data-proofer-ignore>
+      <a href="https://github.com/jdpace" data-proofer-ignore>jdpace</a>
   </li>
 </ul>
 </div>
 
-    
-<p>We’ve made it easier to track changes to issues. The Issue Events API now provides more context for several event types:</p>
+<p>We've made it easier to track changes to issues. The Issue Events API now provides more context for several event types:</p>
 
 <ul>
-  <li>
+<li>
 <code>assigned</code> and <code>unassigned</code> events now include an <code>assignee</code> object so you can see just who was assigned or unassigned.</li>
-  <li>
+<li>
 <code>labeled</code> and <code>unlabeled</code> events include a <code>label</code> object.</li>
-  <li>
+<li>
 <code>milestoned</code> and <code>demilesoned</code> events include a <code>milestone</code> object.</li>
-  <li>
+<li>
 <code>renamed</code> events include a <code>rename</code> object with the title before and after the rename.</li>
 </ul>
 
 <p>Check out the <a href="/v3/issues/events/">Issue Events API documentation</a> for a full list of supported events. If you have
 any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Attrs+for+Issue+Events+API">drop us a line</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/">
   <h2 class="title">
+<a id="--one-more-week-before-the-add-team-member-api-breaking-change" class="anchor" href="#--one-more-week-before-the-add-team-member-api-breaking-change" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/">One more week before the "Add team member" API breaking change</a>
 </h2>
 
@@ -278,28 +308,30 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore="">
-      <a href="https://github.com/jakeboxer" data-proofer-ignore="">jakeboxer</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
   </li>
 </ul>
 </div>
 
-    
-<p><strong>UPDATE (2014-09-30):</strong> In response to feedback from developers, we’re delaying the breaking change to the <a href="/v3/orgs/teams/#add-team-member">“Add team member” API</a> until Monday, <strong>October 6, 2014</strong>. The change will go into effect for all requests on that date.</p>
+<p><strong>UPDATE (2014-09-30):</strong> In response to feedback from developers, we're delaying the breaking change to the <a href="/v3/orgs/teams/#add-team-member">"Add team member" API</a> until Monday, <strong>October 6, 2014</strong>. The change will go into effect for all requests on that date.</p>
 
-<p>Starting October 6, if you use <a href="/v3/orgs/teams/#add-team-member">the “Add team member” API</a> to add a user to a team and that user isn’t already on another team in your organization, the request will fail. To avoid this, be sure to use the <a href="/v3/orgs/teams/#add-team-membership">“Add team membership” API</a>.</p>
+<p>Starting October 6, if you use <a href="/v3/orgs/teams/#add-team-member">the "Add team member" API</a> to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the <a href="/v3/orgs/teams/#add-team-membership">"Add team membership" API</a>.</p>
 
-<h3 id="the-organization-and-team-membership-apis-are-now-official">The Organization and Team Membership APIs are now official</h3>
+<h3>
+<a id="the-organization-and-team-membership-apis-are-now-official" class="anchor" href="#the-organization-and-team-membership-apis-are-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="the-organization-and-team-membership-apis-are-now-official" class="anchor" href="#the-organization-and-team-membership-apis-are-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Organization and Team Membership APIs are now official</h3>
 
 <p>As promised in <a href="/changes/2014-09-16-finalizing-the-organization-and-team-membership-apis/">our blog post earlier this month</a>, the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Organization Membership</a> and <a href="/changes/2014-08-05-team-memberships-api/">Team Membership</a> APIs are now an official part of the GitHub API! The preview media type is no longer required to access them.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+and+Team+Membership+APIs">get in touch with us</a>!</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-09-16-finalizing-the-organization-and-team-membership-apis/">
   <h2 class="title">
+<a id="--finalizing-the-organization-and-team-membership-apis" class="anchor" href="#--finalizing-the-organization-and-team-membership-apis" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-09-16-finalizing-the-organization-and-team-membership-apis/">Finalizing the Organization and Team Membership APIs</a>
 </h2>
 
@@ -311,34 +343,40 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore="">
-      <a href="https://github.com/jakeboxer" data-proofer-ignore="">jakeboxer</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
   </li>
 </ul>
 </div>
 
-    
 <p>For the past few weeks, the new <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Organization Membership</a> and <a href="/changes/2014-08-05-team-memberships-api/">Team Membership</a> APIs have been available for early access via a preview media type.  As of today, these APIs are stable and suitable for production use.</p>
 
-<h3 id="preview-period-ends-on-september-23">Preview period ends on September 23</h3>
+<h3>
+<a id="preview-period-ends-on-september-23" class="anchor" href="#preview-period-ends-on-september-23" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period-ends-on-september-23" class="anchor" href="#preview-period-ends-on-september-23" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period ends on September 23</h3>
 
 <p>On September 23, 2014, these APIs will become official parts of the GitHub API v3. At that time, the preview media type will no longer be required to access these APIs.</p>
 
-<h3 id="reminder-breaking-change-to-legacy-endpoint">Reminder: Breaking change to legacy endpoint</h3>
+<h3>
+<a id="reminder-breaking-change-to-legacy-endpoint" class="anchor" href="#reminder-breaking-change-to-legacy-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="reminder-breaking-change-to-legacy-endpoint" class="anchor" href="#reminder-breaking-change-to-legacy-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reminder: Breaking change to legacy endpoint</h3>
 
-<p>The <a href="/v3/orgs/teams/#add-team-member">breaking change to the “Add team member” endpoint</a> will also go into effect for all requests on <strong>September 23, 2014</strong>. At that time, if you use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add a user to a team and that user isn’t already on another team in your organization, the request will fail. To avoid this, be sure to use the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint.</p>
+<p>The <a href="/v3/orgs/teams/#add-team-member">breaking change to the "Add team member" endpoint</a> will also go into effect for all requests on <strong>September 23, 2014</strong>. At that time, if you use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint.</p>
 
-<h3 id="addition-to-the-organization-membership-api">Addition to the Organization Membership API</h3>
+<h3>
+<a id="addition-to-the-organization-membership-api" class="anchor" href="#addition-to-the-organization-membership-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="addition-to-the-organization-membership-api" class="anchor" href="#addition-to-the-organization-membership-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Addition to the Organization Membership API</h3>
 
-<p>Thanks to your feedback, we’ve updated the Organization Membership API to provide direct access to basic information about the organization whenever you fetch a <a href="/v3/orgs/members/#list-your-organization-memberships">list of memberships</a> or a <a href="/v3/orgs/members/#get-your-organization-membership">single membership</a>.</p>
+<p>Thanks to your feedback, we've updated the Organization Membership API to provide direct access to basic information about the organization whenever you fetch a <a href="/v3/orgs/members/#list-your-organization-memberships">list of memberships</a> or a <a href="/v3/orgs/members/#get-your-organization-membership">single membership</a>.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+and+Team+Membership+APIs">get in touch with us</a>!</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-09-12-changing-organization-feeds/">
   <h2 class="title">
+<a id="--changing-organization-feeds-in-the-feeds-api" class="anchor" href="#--changing-organization-feeds-in-the-feeds-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-09-12-changing-organization-feeds/">Changing organization feeds in the Feeds API</a>
 </h2>
 
@@ -350,24 +388,27 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore="">
-      <a href="https://github.com/mastahyeti" data-proofer-ignore="">mastahyeti</a>
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore>
+      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
   </li>
 </ul>
 </div>
 
-    
 <p>We have deprecated the <code>current_user_organization_url</code> attribute and the
 <code>current_user_organization.href</code> attribute in the <a href="/v3/activity/feeds/">Feeds API</a>. If you make
-use of these attributes, you’ll want to update your code to use the new
+use of these attributes, you'll want to update your code to use the new
 <code>current_user_organization_urls</code> attribute instead.</p>
 
-<h3 id="changes-to-the-deprecated-attributes">Changes to the deprecated attributes</h3>
+<h3>
+<a id="changes-to-the-deprecated-attributes" class="anchor" href="#changes-to-the-deprecated-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="changes-to-the-deprecated-attributes" class="anchor" href="#changes-to-the-deprecated-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes to the deprecated attributes</h3>
 
 <p>Previously, the deprecated attributes returned URI template. For example:</p>
 
-<pre><code class="language-javascript highlight highlight"><span class="s2">"current_user_organization_url"</span><span class="err">:</span>
-  <span class="s2">"https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="s2">"current_user_organization_url"</span><span class="err">:</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"</span><span class="w">
+</span></code></pre>
+
 
 <p>The template included a deprecated authentication token. Our new tokens are
 valid only for a concrete feed URL (not for a URI template). Because the
@@ -376,16 +417,20 @@ could not provide a token that could be used for organization feeds.</p>
 
 <p>Starting today, the API returns empty values for the deprecated attributes.</p>
 
-<h3 id="new-attribute-for-organization-feeds">New attribute for organization feeds</h3>
+<h3>
+<a id="new-attribute-for-organization-feeds" class="anchor" href="#new-attribute-for-organization-feeds" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-attribute-for-organization-feeds" class="anchor" href="#new-attribute-for-organization-feeds" aria-hidden="true"><span class="octicon octicon-link"></span></a>New attribute for organization feeds</h3>
 
 <p>In order to preserve the functionality of this API, we have added a new
-attribute that lists specific Atom feed urls for each of the user’s
+attribute that lists specific Atom feed urls for each of the user's
 organizations.</p>
 
-<pre><code class="language-javascript highlight highlight"><span class="s2">"current_user_organization_urls"</span><span class="err">:</span> <span class="p">[</span>
-  <span class="s2">"https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"</span>
-  <span class="s2">"https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"</span>
-<span class="p">]</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="s2">"current_user_organization_urls"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
 
 <p>Check out the updated <a href="/v3/activity/feeds/">Feeds API documentation</a> for the new fields. If you
 have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Changing+organization+feeds+in+the+Feeds+API">get drop us a line</a>.</p>
@@ -395,6 +440,7 @@ have any questions or feedback, please <a href="https://github.com/contact?form%
 
 <div class="change" id="/changes/2014-09-05-removing-gravatar-id/">
   <h2 class="title">
+<a id="--removing-gravatar-id-from-user-payloads" class="anchor" href="#--removing-gravatar-id-from-user-payloads" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-09-05-removing-gravatar-id/">Removing Gravatar ID from user payloads</a>
 </h2>
 
@@ -406,25 +452,26 @@ have any questions or feedback, please <a href="https://github.com/contact?form%
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore="">
-      <a href="https://github.com/mastahyeti" data-proofer-ignore="">mastahyeti</a>
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore>
+      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
   </li>
 </ul>
 </div>
 
     
+
 <p>We have deprecated the <code>gravatar_id</code> attribute in the <a href="https://developer.github.com/v3/users/">user
 representation</a>. Starting September 19,
 the API will always provide an empty string as the value for this attribute.</p>
 
 <p>Users have been able to upload avatars directly to GitHub for <a href="https://github.com/blog/1803-switch-your-picture-with-ease">a while
 now</a>. If users
-haven’t uploaded an avatar, we still try to fetch one from Gravatar, but that
-happens behind the scenes on GitHub’s servers. As a result, the <code>gravatar_id</code>
-attribute no longer identifies a GitHub user’s canonical avatar. Instead, API
-consumers should use the <code>avatar_url</code> to fetch a user’s avatar. The <code>avatar_url</code>
+haven't uploaded an avatar, we still try to fetch one from Gravatar, but that
+happens behind the scenes on GitHub's servers. As a result, the <code>gravatar_id</code>
+attribute no longer identifies a GitHub user's canonical avatar. Instead, API
+consumers should use the <code>avatar_url</code> to fetch a user's avatar. The <code>avatar_url</code>
 attribute has always been present in the <a href="/v3/users/">v3 user representation</a>
-and is the only reliable way to find a GitHub user’s avatar.</p>
+and is the only reliable way to find a GitHub user's avatar.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+Gravatar+ID">get drop us a line</a>.</p>
 
@@ -433,6 +480,7 @@ and is the only reliable way to find a GitHub user’s avatar.</p>
 
 <div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
   <h2 class="title">
+<a id="--accepting-organization-invitations-from-the-api" class="anchor" href="#--accepting-organization-invitations-from-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API</a>
 </h2>
 
@@ -444,30 +492,37 @@ and is the only reliable way to find a GitHub user’s avatar.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore="">
-      <a href="https://github.com/jakeboxer" data-proofer-ignore="">jakeboxer</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
   </li>
 </ul>
 </div>
 
     
-<p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invite</a> new GitHub users to your organization via the API. We’re expanding the API to also allow users to view their organization membership statuses and accept any invitations they’ve received.</p>
 
-<h3 id="the-new-organization-memberships-api">The new Organization Memberships API</h3>
+<p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invite</a> new GitHub users to your organization via the API. We're expanding the API to also allow users to view their organization membership statuses and accept any invitations they've received.</p>
 
-<p>When someone <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invites</a> you to an organization, your membership with that organization begins in the “pending” state. The new <a href="/v3/orgs/members/#list-your-organization-memberships">list organization memberships</a> endpoint allows you to find your pending memberships. You can then change them to “active” (accepting the invitation in the process) by using the <a href="/v3/orgs/members/#edit-your-organization-membership">edit organization membership</a> endpoint.</p>
+<h3>
+<a id="the-new-organization-memberships-api" class="anchor" href="#the-new-organization-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="the-new-organization-memberships-api" class="anchor" href="#the-new-organization-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>The new Organization Memberships API</h3>
 
-<h3 id="new-team-membership-api-response-attribute">New Team Membership API response attribute</h3>
+<p>When someone <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invites</a> you to an organization, your membership with that organization begins in the "pending" state. The new <a href="/v3/orgs/members/#list-your-organization-memberships">list organization memberships</a> endpoint allows you to find your pending memberships. You can then change them to "active" (accepting the invitation in the process) by using the <a href="/v3/orgs/members/#edit-your-organization-membership">edit organization membership</a> endpoint.</p>
 
-<p>Previously, responses from the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> and <a href="/v3/orgs/teams/#get-team-membership">get team membership</a> endpoints included a “status” attribute, which could either be “active” or “pending”. We’ve renamed this attribute from “status” to “state” for better consistency with our other API calls.</p>
+<h3>
+<a id="new-team-membership-api-response-attribute" class="anchor" href="#new-team-membership-api-response-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-team-membership-api-response-attribute" class="anchor" href="#new-team-membership-api-response-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Team Membership API response attribute</h3>
 
-<p>To give you time to update your apps, we’ll keep the legacy “status” attribute around alongside the new “state” attribute until <strong>September 4th, 2014</strong>.</p>
+<p>Previously, responses from the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> and <a href="/v3/orgs/teams/#get-team-membership">get team membership</a> endpoints included a "status" attribute, which could either be "active" or "pending". We've renamed this attribute from "status" to "state" for better consistency with our other API calls.</p>
 
-<h3 id="preview-period">Preview period</h3>
+<p>To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until <strong>September 4th, 2014</strong>.</p>
+
+<h3>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h3>
 
 <p>The new Organization Memberships API is available for developers to preview alongside the <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a>. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
 
-<p>While these new APIs are in their preview period, you’ll need to provide the following custom media type in the <code>Accept</code> header:</p>
+<p>While these new APIs are in their preview period, you'll need to provide the following custom media type in the <code>Accept</code> header:</p>
 
 <pre><code>application/vnd.github.the-wasp-preview+json
 </code></pre>
@@ -481,6 +536,7 @@ and is the only reliable way to find a GitHub user’s avatar.</p>
 
 <div class="change" id="/changes/2014-08-15-deployments-api-changes/">
   <h2 class="title">
+<a id="--new-features-for-the-deployments-api-preview" class="anchor" href="#--new-features-for-the-deployments-api-preview" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-08-15-deployments-api-changes/">New features for the Deployments API preview</a>
 </h2>
 
@@ -492,26 +548,32 @@ and is the only reliable way to find a GitHub user’s avatar.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore="">
-      <a href="https://github.com/atmos" data-proofer-ignore="">atmos</a>
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
+      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
   </li>
 </ul>
 </div>
 
     
-<p>We’ve added two new features to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>: the ability to query deployments and a new <code>task</code> attribute for different types of deployment tasks.</p>
 
-<h2 id="api-changes">API changes</h2>
+<p>We've added two new features to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>: the ability to query deployments and a new <code>task</code> attribute for different types of deployment tasks.</p>
 
-<p>You can now search for deployments via query parameters to the <a href="https://developer.github.com/v3/repos/deployments/#list-deployments">listing endpoint</a>. You can filter on <code>sha</code>, <code>ref</code>, <code>task</code>, and <code>environment</code>. This makes it easier to answer questions like “when was the last time someone deployed to staging?”</p>
+<h2>
+<a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>API changes</h2>
 
-<pre class="terminal"><code>$ curl -H "Authorization: token [yours]" \
+<p>You can now search for deployments via query parameters to the <a href="https://developer.github.com/v3/repos/deployments/#list-deployments">listing endpoint</a>. You can filter on <code>sha</code>, <code>ref</code>, <code>task</code>, and <code>environment</code>. This makes it easier to answer questions like "when was the last time someone deployed to staging?"</p>
+
+<pre class="command-line">
+<span class="command">curl -H "Authorization: token [yours]" \</span>
        https://api.github.com/repos/octocat/my-repo/deployments?environment=staging
-</code></pre>
+</pre>
 
-<h2 id="new-attribute">New attribute</h2>
+<h2>
+<a id="new-attribute" class="anchor" href="#new-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-attribute" class="anchor" href="#new-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New attribute</h2>
 
-<p>We’ve also added a <code>task</code> attribute to the deployment resource. The <code>task</code> attribute allows you to specify tasks other than just pushing code. Popular deployment tools like <a href="http://capistranorb.com/">capistrano</a> and <a href="http://www.fabfile.org/">fabric</a> support named tasks to do things like running schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.</p>
+<p>We've also added a <code>task</code> attribute to the deployment resource. The <code>task</code> attribute allows you to specify tasks other than just pushing code. Popular deployment tools like <a href="http://capistranorb.com/">capistrano</a> and <a href="http://www.fabfile.org/">fabric</a> support named tasks to do things like running schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
 
@@ -520,6 +582,7 @@ and is the only reliable way to find a GitHub user’s avatar.</p>
 
 <div class="change" id="/changes/2014-08-05-team-memberships-api/">
   <h2 class="title">
+<a id="--were-changing-the-way-you-add-new-members-to-your-organization" class="anchor" href="#--were-changing-the-way-you-add-new-members-to-your-organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-08-05-team-memberships-api/">We're changing the way you add new members to your organization</a>
 </h2>
 
@@ -531,39 +594,42 @@ and is the only reliable way to find a GitHub user’s avatar.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore="">
-      <a href="https://github.com/jakeboxer" data-proofer-ignore="">jakeboxer</a>
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
   </li>
 </ul>
 </div>
 
-    
-<p>Today, we’re announcing a change to the way organization owners add new members to their organization.</p>
+<p>Today, we're announcing a change to the way organization owners add new members to their organization.</p>
 
-<p>Previously, if you were an organization owner, you could use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add any GitHub user to any team on your organization without any sort of approval from them. Now, we’re increasing user security by sending <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invitations</a> to users when they’re added to teams on organizations that they aren’t yet a part of.</p>
+<p>Previously, if you were an organization owner, you could use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add any GitHub user to any team on your organization without any sort of approval from them. Now, we're increasing user security by sending <a href="https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization">invitations</a> to users when they're added to teams on organizations that they aren't yet a part of.</p>
 
-<p>With this change, if you use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add a user to a team and that user isn’t already on another team in your organization, the request will fail.</p>
+<p>With this change, if you use the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint to add a user to a team and that user isn't already on another team in your organization, the request will fail.</p>
 
-<h3 id="the-new-team-memberships-api">The new Team Memberships API</h3>
+<h3>
+<a id="the-new-team-memberships-api" class="anchor" href="#the-new-team-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="the-new-team-memberships-api" class="anchor" href="#the-new-team-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>The new Team Memberships API</h3>
 
-<p>You should change all your <a href="/v3/orgs/teams/#add-team-member">add team member</a> requests to use the new <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team’s organization, that user will be sent an invitation via email.</p>
+<p>You should change all your <a href="/v3/orgs/teams/#add-team-member">add team member</a> requests to use the new <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint. This new endpoint works exactly the same as the old one, with one important change: if the membership being added is for a user who is unaffiliated with the team's organization, that user will be sent an invitation via email.</p>
 
-<p>Unlike the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint, a successful request to the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint does <em>not</em> guarantee that the user is now a member of the team. If you’re trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out <a href="/v3/activity/events/types/#teamaddevent">TeamAddEvent</a>.</p>
+<p>Unlike the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint, a successful request to the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint does <em>not</em> guarantee that the user is now a member of the team. If you're trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out <a href="/v3/activity/events/types/#teamaddevent">TeamAddEvent</a>.</p>
 
-<h3 id="preview-period">Preview period</h3>
+<h3>
+<a id="preview-period-1" class="anchor" href="#preview-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h3>
 
-<p>We’re making the new Team Memberships API (and the breaking changes to the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API) available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+<p>We're making the new Team Memberships API (and the breaking changes to the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API) available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
 
-<p>While these new APIs are in their preview period, you’ll need to provide the following custom media type in the <code>Accept</code> header:</p>
+<p>While these new APIs are in their preview period, you'll need to provide the following custom media type in the <code>Accept</code> header:</p>
 
 <pre><code>application/vnd.github.the-wasp-preview+json
 </code></pre>
 
-<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team Memberships API will become an official component of GitHub API v3, as will the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API’s breaking changes.</p>
+<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team Memberships API will become an official component of GitHub API v3, as will the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API's breaking changes.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API">get in touch with us</a>!</p>
 
-
+<p></p>
 </div>
 
 <div class="paginate-container">
@@ -689,7 +755,9 @@ and is the only reliable way to find a GitHub user’s avatar.</p>
   
 </div>
 
+<p></p>
 </div>
+
 
     </div>
 
@@ -852,7 +920,7 @@ and is the only reliable way to find a GitHub user’s avatar.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

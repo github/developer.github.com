@@ -54,63 +54,79 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="gitignore">Gitignore</h1>
+
+<h1>
+<a id="gitignore" class="anchor" href="#gitignore" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gitignore</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#listing-available-templates" id="markdown-toc-listing-available-templates">Listing available templates</a></li>
-  <li><a href="#get-a-single-template" id="markdown-toc-get-a-single-template">Get a single template</a></li>
+<li><a href="#listing-available-templates" id="markdown-toc-listing-available-templates">Listing available templates</a></li>
+<li><a href="#get-a-single-template" id="markdown-toc-get-a-single-template">Get a single template</a></li>
 </ul>
 
 <p>When you create a new GitHub repository via the API, you can specify a
 <a href="https://help.github.com/articles/ignoring-files">.gitignore template</a> to apply to the repository upon creation. The
 .gitignore Templates API lists and fetches templates from the <a href="https://github.com/github/gitignore">GitHub .gitignore repository</a>.</p>
 
-<h2 id="listing-available-templates">Listing available templates</h2>
+<h2>
+<a id="listing-available-templates" class="anchor" href="#listing-available-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Listing available templates</h2>
 
 <p>List all templates available to pass as an option when <a href="/v3/repos/#create">creating a repository</a>.</p>
 
 <pre><code>GET /gitignore/templates
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="s2">"Actionscript"</span><span class="p">,</span>
-  <span class="s2">"Android"</span><span class="p">,</span>
-  <span class="s2">"AppceleratorTitanium"</span><span class="p">,</span>
-  <span class="s2">"Autotools"</span><span class="p">,</span>
-  <span class="s2">"Bancha"</span><span class="p">,</span>
-  <span class="s2">"C"</span><span class="p">,</span>
-  <span class="s2">"C++"</span>
-<span class="p">]</span></code></pre>
 
-<h2 id="get-a-single-template">Get a single template</h2>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"Actionscript"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Android"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"AppceleratorTitanium"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Autotools"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Bancha"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"C"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"C++"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-a-single-template" class="anchor" href="#get-a-single-template" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get a single template</h2>
 
 <p>The API also allows fetching the source of a single template.</p>
 
 <pre><code>GET /gitignore/templates/C
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"C"</span><span class="p">,</span>
-  <span class="s2">"source"</span><span class="err">:</span> <span class="s2">"# Object files\n*.o\n\n# Libraries\n*.lib\n*.a\n\n# Shared objects (inc. Windows DLLs)\n*.dll\n*.so\n*.so.*\n*.dylib\n\n# Executables\n*.exe\n*.out\n*.app\n"</span>
-<span class="p">}</span></code></pre>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"C"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"# Object files\n*.o\n\n# Libraries\n*.lib\n*.a\n\n# Shared objects (inc. Windows DLLs)\n*.dll\n*.so\n*.so.*\n*.dylib\n\n# Executables\n*.exe\n*.out\n*.app\n"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 
 <p>Use the raw <a href="/v3/media/">media type</a> to get the raw contents.</p>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
+
 
 <pre>
 # Object files
@@ -294,7 +310,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

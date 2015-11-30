@@ -54,45 +54,54 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="tags">Tags</h1>
+
+<h1>
+<a id="tags" class="anchor" href="#tags" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tags</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#get-a-tag" id="markdown-toc-get-a-tag">Get a Tag</a></li>
-  <li><a href="#create-a-tag-object" id="markdown-toc-create-a-tag-object">Create a Tag Object</a></li>
+<li><a href="#get-a-tag" id="markdown-toc-get-a-tag">Get a Tag</a></li>
+<li><a href="#create-a-tag-object" id="markdown-toc-create-a-tag-object">Create a Tag Object</a></li>
 </ul>
 
 <p>This tags API only deals with tag objects - so only annotated tags, not
 lightweight tags.</p>
 
-<h2 id="get-a-tag">Get a Tag</h2>
+<h2>
+<a id="get-a-tag" class="anchor" href="#get-a-tag" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get a Tag</h2>
 
 <pre><code>GET /repos/:owner/:repo/git/tags/:sha
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"tag"</span><span class="err">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="err">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
-  <span class="s2">"tagger"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
-    <span class="s2">"date"</span><span class="err">:</span> <span class="s2">"2014-11-07T22:01:45Z"</span>
-  <span class="p">},</span>
-  <span class="s2">"object"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="err">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
 
-<h2 id="create-a-tag-object">Create a Tag Object</h2>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v0.0.1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial version\n"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tagger"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Chacon"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schacon@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-07T22:01:45Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="create-a-tag-object" class="anchor" href="#create-a-tag-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a Tag Object</h2>
 
 <p>Note that creating a tag object does not create the reference that
 makes a tag in Git.  If you want to create an annotated tag in Git,
@@ -105,111 +114,121 @@ would be unnecessary.</p>
 <pre><code>POST /repos/:owner/:repo/git/tags
 </code></pre>
 
-<h3 id="parameters">Parameters</h3>
+<h3>
+<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>tag</code></td>
-      <td><code>string</code></td>
-      <td>The tag</td>
-    </tr>
-    <tr>
-      <td><code>message</code></td>
-      <td><code>string</code></td>
-      <td>The tag message</td>
-    </tr>
-    <tr>
-      <td><code>object</code></td>
-      <td><code>string</code></td>
-      <td>The SHA of the git object this is tagging</td>
-    </tr>
-    <tr>
-      <td><code>type</code></td>
-      <td><code>string</code></td>
-      <td>The type of the object we’re tagging. Normally this is a <code>commit</code> but it can also be a <code>tree</code> or a <code>blob</code>.</td>
-    </tr>
-    <tr>
-      <td><code>tagger</code></td>
-      <td><code>object</code></td>
-      <td>An object with information about the individual creating the tag.</td>
-    </tr>
-  </tbody>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tag</code></td>
+<td><code>string</code></td>
+<td>The tag</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td><code>string</code></td>
+<td>The tag message</td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td><code>string</code></td>
+<td>The SHA of the git object this is tagging</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string</code></td>
+<td>The type of the object we're tagging. Normally this is a <code>commit</code> but it can also be a <code>tree</code> or a <code>blob</code>.</td>
+</tr>
+<tr>
+<td><code>tagger</code></td>
+<td><code>object</code></td>
+<td>An object with information about the individual creating the tag.</td>
+</tr>
+</tbody>
 </table>
 
 <p>The <code>tagger</code> object contains the following keys:</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>name</code></td>
-      <td><code>string</code></td>
-      <td>The name of the author of the tag</td>
-    </tr>
-    <tr>
-      <td><code>email</code></td>
-      <td><code>string</code></td>
-      <td>The email of the author of the tag</td>
-    </tr>
-    <tr>
-      <td><code>date</code></td>
-      <td><code>string</code></td>
-      <td>When this object was tagged. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
-    </tr>
-  </tbody>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>The name of the author of the tag</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td><code>string</code></td>
+<td>The email of the author of the tag</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td><code>string</code></td>
+<td>When this object was tagged. This is a timestamp in ISO 8601 format: <code>YYYY-MM-DDTHH:MM:SSZ</code>.</td>
+</tr>
+</tbody>
 </table>
 
-<h3 id="example-input">Example Input</h3>
+<h3>
+<a id="example-input" class="anchor" href="#example-input" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Input</h3>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"tag"</span><span class="err">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
-  <span class="s2">"object"</span><span class="err">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
-  <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-  <span class="s2">"tagger"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
-    <span class="s2">"date"</span><span class="err">:</span> <span class="s2">"2011-06-17T14:53:35-07:00"</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v0.0.1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial version\n"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tagger"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Chacon"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schacon@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-06-17T14:53:35-07:00"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<h3 id="response-1">Response</h3>
 
-<pre class="headers"><code>Status: 201 Created
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"tag"</span><span class="err">:</span> <span class="s2">"v0.0.1"</span><span class="p">,</span>
-  <span class="s2">"sha"</span><span class="err">:</span> <span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span>
-  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"initial version\n"</span><span class="p">,</span>
-  <span class="s2">"tagger"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Scott Chacon"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"schacon@gmail.com"</span><span class="p">,</span>
-    <span class="s2">"date"</span><span class="err">:</span> <span class="s2">"2014-11-07T22:01:45Z"</span>
-  <span class="p">},</span>
-  <span class="s2">"object"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"commit"</span><span class="p">,</span>
-    <span class="s2">"sha"</span><span class="err">:</span> <span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v0.0.1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial version\n"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tagger"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Chacon"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schacon@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-07T22:01:45Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
 
     </div>
 
@@ -372,7 +391,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

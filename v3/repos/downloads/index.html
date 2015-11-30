@@ -54,15 +54,18 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="downloads">Downloads</h1>
+
+<h1>
+<a id="downloads" class="anchor" href="#downloads" aria-hidden="true"><span class="octicon octicon-link"></span></a>Downloads</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-downloads-for-a-repository" id="markdown-toc-list-downloads-for-a-repository">List downloads for a repository</a></li>
-  <li><a href="#get-a-single-download" id="markdown-toc-get-a-single-download">Get a single download</a></li>
-  <li><a href="#delete-a-download" id="markdown-toc-delete-a-download">Delete a download</a></li>
+<li><a href="#list-downloads-for-a-repository" id="markdown-toc-list-downloads-for-a-repository">List downloads for a repository</a></li>
+<li><a href="#get-a-single-download" id="markdown-toc-get-a-single-download">Get a single download</a></li>
+<li><a href="#delete-a-download" id="markdown-toc-delete-a-download">Delete a download</a></li>
 </ul>
 
-<h3 id="downloads-api-is-deprecated">Downloads API is Deprecated</h3>
+<h3>
+<a id="downloads-api-is-deprecated" class="anchor" href="#downloads-api-is-deprecated" aria-hidden="true"><span class="octicon octicon-link"></span></a>Downloads API is Deprecated</h3>
 
 <div class="alert warning">
 
@@ -76,64 +79,80 @@
 source tarballs you should use <a href="/v3/repos/contents/#get-archive-link">this</a>
 instead.</p>
 
-<h2 id="list-downloads-for-a-repository">List downloads for a repository</h2>
+<h2>
+<a id="list-downloads-for-a-repository" class="anchor" href="#list-downloads-for-a-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>List downloads for a repository</h2>
 
 <pre><code>GET /repos/:owner/:repo/downloads
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
       &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/downloads/1"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"new_file.jpg"</span><span class="p">,</span>
-    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Description of your download"</span><span class="p">,</span>
-    <span class="s2">"size"</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-    <span class="s2">"download_count"</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
-    <span class="s2">"content_type"</span><span class="p">:</span> <span class="s2">".jpg"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
 
-<h2 id="get-a-single-download">Get a single download</h2>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/downloads/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_file.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Description of your download"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"download_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">".jpg"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-a-single-download" class="anchor" href="#get-a-single-download" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get a single download</h2>
 
 <pre><code>GET /repos/:owner/:repo/downloads/:id
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/repos/octocat/Hello-World/downloads/1"</span><span class="p">,</span>
-  <span class="s2">"html_url"</span><span class="err">:</span> <span class="s2">"https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg"</span><span class="p">,</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"new_file.jpg"</span><span class="p">,</span>
-  <span class="s2">"description"</span><span class="err">:</span> <span class="s2">"Description of your download"</span><span class="p">,</span>
-  <span class="s2">"size"</span><span class="err">:</span> <span class="mi">1024</span><span class="p">,</span>
-  <span class="s2">"download_count"</span><span class="err">:</span> <span class="mi">40</span><span class="p">,</span>
-  <span class="s2">"content_type"</span><span class="err">:</span> <span class="s2">".jpg"</span>
-<span class="p">}</span></code></pre>
 
-<h2 id="delete-a-download">Delete a download</h2>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/downloads/1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/repos/octocat/Hello-World/downloads/new_file.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_file.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Description of your download"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"download_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">".jpg"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="delete-a-download" class="anchor" href="#delete-a-download" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete a download</h2>
 
 <pre><code>DELETE /repos/:owner/:repo/downloads/:id
 </code></pre>
 
-<h3 id="response-2">Response</h3>
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
+
 
 
     </div>
@@ -297,7 +316,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

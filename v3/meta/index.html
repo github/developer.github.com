@@ -54,79 +54,88 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="meta">Meta</h1>
+
+<h1>
+<a id="meta" class="anchor" href="#meta" aria-hidden="true"><span class="octicon octicon-link"></span></a>Meta</h1>
 
 <p>This endpoint provides information about GitHub.com, the service.
-Or, if you access this endpoint on your organization’s <a href="https://enterprise.github.com/">GitHub Enterprise</a> installation, this endpoint provides information about that installation.</p>
+Or, if you access this endpoint on your organization's <a href="https://enterprise.github.com/">GitHub Enterprise</a> installation, this endpoint provides information about that installation.</p>
 
 <pre><code>GET /meta
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"verifiable_password_authentication"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"github_services_sha"</span><span class="err">:</span> <span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span>
-  <span class="s2">"hooks"</span><span class="err">:</span> <span class="p">[</span>
-    <span class="s2">"127.0.0.1/32"</span>
-  <span class="p">],</span>
-  <span class="s2">"git"</span><span class="err">:</span> <span class="p">[</span>
-    <span class="s2">"127.0.0.1/32"</span>
-  <span class="p">],</span>
-  <span class="s2">"pages"</span><span class="err">:</span> <span class="p">[</span>
-    <span class="s2">"192.30.252.153/32"</span><span class="p">,</span>
-    <span class="s2">"192.30.252.154/32"</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
 
-<h3 id="body">Body</h3>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"verifiable_password_authentication"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"github_services_sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"127.0.0.1/32"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"git"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"127.0.0.1/32"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"192.30.252.153/32"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"192.30.252.154/32"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="body" class="anchor" href="#body" aria-hidden="true"><span class="octicon octicon-link"></span></a>Body</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>verifiable_password_authentication</code></td>
-      <td><code>boolean</code></td>
-      <td>Whether authentication with username and password is supported. (GitHub Enterprise instances using CAS or OAuth for authentication will return <code>false</code>. Features like <a href="/v3/auth/#via-username-and-password">Basic Authentication with a username and password</a>, <a href="https://help.github.com/articles/sudo-mode">sudo mode</a>, and <a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a> are not supported on these servers.)</td>
-    </tr>
-    <tr>
-      <td><code>github_services_sha</code></td>
-      <td><code>string</code></td>
-      <td>The currently-deployed SHA of <a href="https://github.com/github/github-services"><code>github-services</code></a>.</td>
-    </tr>
-    <tr>
-      <td><code>hooks</code></td>
-      <td>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>verifiable_password_authentication</code></td>
+<td><code>boolean</code></td>
+<td>Whether authentication with username and password is supported. (GitHub Enterprise instances using CAS or OAuth for authentication will return <code>false</code>. Features like <a href="/v3/auth/#via-username-and-password">Basic Authentication with a username and password</a>, <a href="https://help.github.com/articles/sudo-mode">sudo mode</a>, and <a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a> are not supported on these servers.)</td>
+</tr>
+<tr>
+<td><code>github_services_sha</code></td>
+<td><code>string</code></td>
+<td>The currently-deployed SHA of <a href="https://github.com/github/github-services"><code>github-services</code></a>.</td>
+</tr>
+<tr>
+<td><code>hooks</code></td>
+<td>
 <code>array</code> of <code>strings</code>
 </td>
-      <td>An Array of IP addresses in CIDR format specifying the addresses that incoming service hooks will originate from on GitHub.com.  Subscribe to the <a href="https://developer.github.com/changes/">API Changes blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> on Twitter to get updated when this list changes.</td>
-    </tr>
-    <tr>
-      <td><code>git</code></td>
-      <td>
+<td>An Array of IP addresses in CIDR format specifying the addresses that incoming service hooks will originate from on GitHub.com.  Subscribe to the <a href="https://developer.github.com/changes/">API Changes blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> on Twitter to get updated when this list changes.</td>
+</tr>
+<tr>
+<td><code>git</code></td>
+<td>
 <code>array</code> of <code>strings</code>
 </td>
-      <td>An Array of IP addresses in CIDR format specifying the Git servers for GitHub.com.</td>
-    </tr>
-    <tr>
-      <td><code>pages</code></td>
-      <td>
+<td>An Array of IP addresses in CIDR format specifying the Git servers for GitHub.com.</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td>
 <code>array</code> of <code>strings</code>
 </td>
-      <td>An Array of IP addresses in CIDR format specifying the A records for <a href="https://pages.github.com/">GitHub Pages</a>.</td>
-    </tr>
-  </tbody>
+<td>An Array of IP addresses in CIDR format specifying the A records for <a href="https://pages.github.com/">GitHub Pages</a>.</td>
+</tr>
+</tbody>
 </table>
+
 
     </div>
 
@@ -289,7 +298,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

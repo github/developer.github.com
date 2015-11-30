@@ -63,29 +63,33 @@
 
 
 
-<p>We made a slight change to the way you fork a repository.  By default, you
-can fork my repository through an HTTP POST to the repository’s fork resource.</p>
 
-<pre class="terminal"><code>$ curl -X POST https://api.github.com/repos/technoweenie/faraday/forks
-</code></pre>
+<p>We made a slight change to the way you fork a repository.  By default, you
+can fork my repository through an HTTP POST to the repository's fork resource.</p>
+
+<pre class="command-line">
+<span class="command">curl -X POST https://api.github.com/repos/technoweenie/faraday/forks</span>
+</pre>
 
 <p>This repository forks to your personal account.  However, there are cases when
 you want to fork to one of your organizations instead.  The previous method
 required a <code>?org</code> query parameter:</p>
 
-<pre class="terminal"><code>$ curl -X POST /repos/technoweenie/faraday/forks?org=mycompany
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -X POST /repos/technoweenie/faraday/forks?org=mycompany</span>
+</pre>
 
 <p>Query parameters on POST requests are unusual in APIs, and definitely
 inconsistent with the rest of the GitHub API.  You should be able to post a
-JSON body like every other POST endpoint.  Now, you can!  Only, now we’re
+JSON body like every other POST endpoint.  Now, you can!  Only, now we're
 calling the field <code>organization</code>.</p>
 
-<pre class="terminal"><code>$ curl /repos/technoweenie/faraday/forks?org=mycompany \
-  -d '{"organization": "mycompany"}'
-</code></pre>
+<pre class="command-line">
+<span class="command">curl /repos/technoweenie/faraday/forks?org=mycompany \</span>
+<span class="command"> -d '{"organization": "mycompany"}'</span>
+</pre>
 
-<p>Don’t worry, we are committed to maintaining the legacy behavior until the next
+<p>Don't worry, we are committed to maintaining the legacy behavior until the next
 major change of the GitHub API.</p>
 
 
@@ -107,11 +111,11 @@ major change of the GitHub API.</p>
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -143,7 +147,7 @@ major change of the GitHub API.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

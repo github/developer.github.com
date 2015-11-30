@@ -63,17 +63,21 @@
 
 
 
+
 <p>We have deprecated the <code>current_user_organization_url</code> attribute and the
 <code>current_user_organization.href</code> attribute in the <a href="/v3/activity/feeds/">Feeds API</a>. If you make
-use of these attributes, you’ll want to update your code to use the new
+use of these attributes, you'll want to update your code to use the new
 <code>current_user_organization_urls</code> attribute instead.</p>
 
-<h3 id="changes-to-the-deprecated-attributes">Changes to the deprecated attributes</h3>
+<h3>
+<a id="changes-to-the-deprecated-attributes" class="anchor" href="#changes-to-the-deprecated-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes to the deprecated attributes</h3>
 
 <p>Previously, the deprecated attributes returned URI template. For example:</p>
 
-<pre><code class="language-javascript highlight"><span class="s2">"current_user_organization_url"</span><span class="err">:</span>
-  <span class="s2">"https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="s2">"current_user_organization_url"</span><span class="err">:</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"</span><span class="w">
+</span></code></pre>
+
 
 <p>The template included a deprecated authentication token. Our new tokens are
 valid only for a concrete feed URL (not for a URI template). Because the
@@ -82,16 +86,19 @@ could not provide a token that could be used for organization feeds.</p>
 
 <p>Starting today, the API returns empty values for the deprecated attributes.</p>
 
-<h3 id="new-attribute-for-organization-feeds">New attribute for organization feeds</h3>
+<h3>
+<a id="new-attribute-for-organization-feeds" class="anchor" href="#new-attribute-for-organization-feeds" aria-hidden="true"><span class="octicon octicon-link"></span></a>New attribute for organization feeds</h3>
 
 <p>In order to preserve the functionality of this API, we have added a new
-attribute that lists specific Atom feed urls for each of the user’s
+attribute that lists specific Atom feed urls for each of the user's
 organizations.</p>
 
-<pre><code class="language-javascript highlight"><span class="s2">"current_user_organization_urls"</span><span class="err">:</span> <span class="p">[</span>
-  <span class="s2">"https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"</span>
-  <span class="s2">"https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"</span>
-<span class="p">]</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="s2">"current_user_organization_urls"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
 
 <p>Check out the updated <a href="/v3/activity/feeds/">Feeds API documentation</a> for the new fields. If you
 have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Changing+organization+feeds+in+the+Feeds+API">get drop us a line</a>.</p>
@@ -115,11 +122,11 @@ have any questions or feedback, please <a href="https://github.com/contact?form%
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -151,7 +158,7 @@ have any questions or feedback, please <a href="https://github.com/contact?form%
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

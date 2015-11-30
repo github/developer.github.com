@@ -63,59 +63,67 @@
 
 
 
+
 <p>Now that the dust has settled around <a href="https://github.com/blog/1204-notifications-stars">Notifications and Stars</a>,
-we’ve unleashed all that :sparkles: in a <a href="http://developer.github.com/v3/activity/notifications/">brand new API</a>.  You can now
+we've unleashed all that <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2728.png" height="20" width="20" align="absmiddle"> in a <a href="http://developer.github.com/v3/activity/notifications/">brand new API</a>.  You can now
 view and mark notifications as read.</p>
 
-<h2 id="endpoint">Endpoint</h2>
+<h2>
+<a id="endpoint" class="anchor" href="#endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Endpoint</h2>
 
 <p>The core notifications functionality is under the <code>/notifications</code> endpoint.
 You can look for unread notifications:</p>
 
-<pre class="terminal"><code>$ curl https://api.github.com/notifications
-</code></pre>
+<pre class="command-line">
+<span class="command">curl https://api.github.com/notifications</span>
+</pre>
 
 <p>You can filter these notifications to a single Repository:</p>
 
-<pre class="terminal"><code>$ curl https://api.github.com/repos/technoweenie/faraday/notifications
-</code></pre>
+<pre class="command-line">
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/notifications</span>
+</pre>
 
 <p>You can mark them as read:</p>
 
-<pre class="terminal"><code># all notifications
-$ curl https://api.github.com/notifications \
-    -X PUT -d '{"read": true}'
+<pre class="command-line">
+<span class="comment"># all notifications</span>
+<span class="command">curl https://api.github.com/notifications \</span>
+<span class="command">   -X PUT -d '{"read": true}'</span>
 
-# notifications for a single repository
-$ curl https://api.github.com/repos/technoweenie/faraday/notifications \
-    -X PUT -d '{"read": true}'
-</code></pre>
+<span class="comment"># notifications for a single repository</span>
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/notifications \</span>
+<span class="command">   -X PUT -d '{"read": true}'</span>
+</pre>
 
 <p>You can also modify subscriptions for a Repository or a single thread.</p>
 
-<pre class="terminal"><code># subscription details for the thread (either an Issue or Commit)
-$ curl https://api.github.com/notifications/threads/1/subscription
+<pre class="command-line">
+<span class="comment"># subscription details for the thread (either an Issue or Commit)</span>
+<span class="command">curl https://api.github.com/notifications/threads/1/subscription</span>
 
-# subscription details for a whole Repository.
-$ curl https://api.github.com/repos/technoweenie/faraday/subscription
-</code></pre>
+<span class="comment"># subscription details for a whole Repository.</span>
+<span class="command">curl https://api.github.com/repos/technoweenie/faraday/subscription</span>
+</pre>
 
-<h2 id="polling">Polling</h2>
+<h2>
+<a id="polling" class="anchor" href="#polling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Polling</h2>
 
 <p>The Notifications API is optimized for polling by the last modified time:</p>
 
-<pre class="terminal"><code># Add authentication to your requests
-$ curl -I https://api.github.com/notifications
-HTTP/1.1 200 OK
-Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
-X-Poll-Interval: 60
+<pre class="command-line">
+<span class="comment"># Add authentication to your requests</span>
+<span class="command">curl -I https://api.github.com/notifications</span>
+<span class="output">HTTP/1.1 200 OK</span>
+<span class="output">Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT</span>
+<span class="output">X-Poll-Interval: 60</span>
 
-# Pass the Last-Modified header exactly
-$ curl -I https://api.github.com/notifications
-    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
-HTTP/1.1 304 Not Modified
-X-Poll-Interval: 60
-</code></pre>
+<span class="comment"># Pass the Last-Modified header exactly</span>
+<span class="command">curl -I https://api.github.com/notifications</span>
+<span class="command">   -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"</span>
+<span class="output">HTTP/1.1 304 Not Modified</span>
+<span class="output">X-Poll-Interval: 60</span>
+</pre>
 
 <p>You can read about the API details in depth in the <a href="http://developer.github.com/v3/activity/notifications/">Notifications documentation</a>.</p>
 
@@ -138,11 +146,11 @@ X-Poll-Interval: 60
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -174,7 +182,7 @@ X-Poll-Interval: 60
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

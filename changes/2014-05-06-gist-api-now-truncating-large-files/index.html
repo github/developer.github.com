@@ -63,17 +63,20 @@
 
 
 
+
 <p>In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in <a href="/v3/gists/#detailed-gist-representation">Gist API responses</a>.</p>
 
-<h3 id="truncating-file-contents-larger-than-one-megabyte">Truncating file contents larger than one megabyte</h3>
+<h3>
+<a id="truncating-file-contents-larger-than-one-megabyte" class="anchor" href="#truncating-file-contents-larger-than-one-megabyte" aria-hidden="true"><span class="octicon octicon-link"></span></a>Truncating file contents larger than one megabyte</h3>
 
 <p>The <a href="/v3/gists/#detailed-gist-representation">Gist API response</a> includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.</p>
 
-<p>To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won’t notice any impact from this change.)</p>
+<p>To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won't notice any impact from this change.)</p>
 
-<h3 id="new-truncated-attribute">New “truncated” attribute</h3>
+<h3>
+<a id="new-truncated-attribute" class="anchor" href="#new-truncated-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New "truncated" attribute</h3>
 
-<p>The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you’ll notice a new <code>truncated</code> attribute included as part of the file metadata. This Boolean attribute indicates whether the <code>content</code> value is truncated for this request.</p>
+<p>The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new <code>truncated</code> attribute included as part of the file metadata. This Boolean attribute indicates whether the <code>content</code> value is truncated for this request.</p>
 
 <pre><code>{
   files: {
@@ -89,9 +92,10 @@
 }
 </code></pre>
 
-<h3 id="getting-the-full-content-for-truncated-files">Getting the full content for truncated files</h3>
+<h3>
+<a id="getting-the-full-content-for-truncated-files" class="anchor" href="#getting-the-full-content-for-truncated-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting the full content for truncated files</h3>
 
-<p>We recognize that sometimes you’ll still want the full content for a file, even if it’s too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the <code>raw_url</code> attribute, and you’ll receive the complete content for that file. For larger files, you’ll need to clone the gist locally via the <code>git_pull_url</code> to access the full file contents.</p>
+<p>We recognize that sometimes you'll still want the full content for a file, even if it's too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the <code>raw_url</code> attribute, and you'll receive the complete content for that file. For larger files, you'll need to clone the gist locally via the <code>git_pull_url</code> to access the full file contents.</p>
 
 <p>If you have any questions, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=Gist+API+now+truncates+large+files">get in touch</a>.</p>
 
@@ -114,11 +118,11 @@
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -150,7 +154,7 @@
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

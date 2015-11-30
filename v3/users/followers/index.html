@@ -54,60 +54,69 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="followers">Followers</h1>
+
+<h1>
+<a id="followers" class="anchor" href="#followers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Followers</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-followers-of-a-user" id="markdown-toc-list-followers-of-a-user">List followers of a user</a></li>
-  <li><a href="#list-users-followed-by-another-user" id="markdown-toc-list-users-followed-by-another-user">List users followed by another user</a></li>
-  <li><a href="#check-if-you-are-following-a-user" id="markdown-toc-check-if-you-are-following-a-user">Check if you are following a user</a></li>
-  <li><a href="#check-if-one-user-follows-another" id="markdown-toc-check-if-one-user-follows-another">Check if one user follows another</a></li>
-  <li><a href="#follow-a-user" id="markdown-toc-follow-a-user">Follow a user</a></li>
-  <li><a href="#unfollow-a-user" id="markdown-toc-unfollow-a-user">Unfollow a user</a></li>
+<li><a href="#list-followers-of-a-user" id="markdown-toc-list-followers-of-a-user">List followers of a user</a></li>
+<li><a href="#list-users-followed-by-another-user" id="markdown-toc-list-users-followed-by-another-user">List users followed by another user</a></li>
+<li><a href="#check-if-you-are-following-a-user" id="markdown-toc-check-if-you-are-following-a-user">Check if you are following a user</a></li>
+<li><a href="#check-if-one-user-follows-another" id="markdown-toc-check-if-one-user-follows-another">Check if one user follows another</a></li>
+<li><a href="#follow-a-user" id="markdown-toc-follow-a-user">Follow a user</a></li>
+<li><a href="#unfollow-a-user" id="markdown-toc-unfollow-a-user">Unfollow a user</a></li>
 </ul>
 
-<h2 id="list-followers-of-a-user">List followers of a user</h2>
+<h2>
+<a id="list-followers-of-a-user" class="anchor" href="#list-followers-of-a-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>List followers of a user</h2>
 
-<p>List a user’s followers:</p>
+<p>List a user's followers:</p>
 
 <pre><code>GET /users/:username/followers
 </code></pre>
 
-<p>List the authenticated user’s followers:</p>
+<p>List the authenticated user's followers:</p>
 
 <pre><code>GET /user/followers
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
       &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
 
-<h2 id="list-users-followed-by-another-user">List users followed by another user</h2>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="list-users-followed-by-another-user" class="anchor" href="#list-users-followed-by-another-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>List users followed by another user</h2>
 
 <p>List who a user is following:</p>
 
@@ -119,87 +128,111 @@ X-RateLimit-Remaining: 4999</code></pre>
 <pre><code>GET /user/following
 </code></pre>
 
-<h3 id="response-1">Response</h3>
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
       &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"login"</span><span class="p">:</span> <span class="s2">"octocat"</span><span class="p">,</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"avatar_url"</span><span class="p">:</span> <span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span>
-    <span class="s2">"gravatar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span>
-    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://github.com/octocat"</span><span class="p">,</span>
-    <span class="s2">"followers_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span>
-    <span class="s2">"following_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span>
-    <span class="s2">"gists_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span>
-    <span class="s2">"starred_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span>
-    <span class="s2">"subscriptions_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span>
-    <span class="s2">"organizations_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span>
-    <span class="s2">"repos_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span>
-    <span class="s2">"events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span>
-    <span class="s2">"received_events_url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span>
-    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"User"</span><span class="p">,</span>
-    <span class="s2">"site_admin"</span><span class="p">:</span> <span class="kc">false</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
 
-<h2 id="check-if-you-are-following-a-user">Check if you are following a user</h2>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="check-if-you-are-following-a-user" class="anchor" href="#check-if-you-are-following-a-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check if you are following a user</h2>
 
 <pre><code>GET /user/following/:username
 </code></pre>
 
-<h3 id="response-if-you-are-following-this-user">Response if you are following this user</h3>
+<h3>
+<a id="response-if-you-are-following-this-user" class="anchor" href="#response-if-you-are-following-this-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response if you are following this user</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<h3 id="response-if-you-are-not-following-this-user">Response if you are not following this user</h3>
 
-<pre class="headers"><code>Status: 404 Not Found
+<h3>
+<a id="response-if-you-are-not-following-this-user" class="anchor" href="#response-if-you-are-not-following-this-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response if you are not following this user</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 404 Not Found
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<h2 id="check-if-one-user-follows-another">Check if one user follows another</h2>
+
+<h2>
+<a id="check-if-one-user-follows-another" class="anchor" href="#check-if-one-user-follows-another" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check if one user follows another</h2>
 
 <pre><code>GET /users/:username/following/:target_user
 </code></pre>
 
-<h3 id="response-if-user-follows-target-user">Response if user follows target user</h3>
+<h3>
+<a id="response-if-user-follows-target-user" class="anchor" href="#response-if-user-follows-target-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response if user follows target user</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<h3 id="response-if-user-does-not-follow-target-user">Response if user does not follow target user</h3>
 
-<pre class="headers"><code>Status: 404 Not Found
+<h3>
+<a id="response-if-user-does-not-follow-target-user" class="anchor" href="#response-if-user-does-not-follow-target-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response if user does not follow target user</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 404 Not Found
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<h2 id="follow-a-user">Follow a user</h2>
+
+<h2>
+<a id="follow-a-user" class="anchor" href="#follow-a-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Follow a user</h2>
 
 <pre><code>PUT /user/following/:username
 </code></pre>
 
-<p>Note that you’ll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see “<a href="/v3/#http-verbs">HTTP verbs</a>.”</p>
+<p>Note that you'll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see "<a href="/v3/#http-verbs">HTTP verbs</a>."</p>
 
 <p>Following a user requires the user to be logged in and authenticated with basic
 auth or OAuth with the <code>user:follow</code> scope.</p>
 
-<h3 id="response-2">Response</h3>
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<h2 id="unfollow-a-user">Unfollow a user</h2>
+
+<h2>
+<a id="unfollow-a-user" class="anchor" href="#unfollow-a-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Unfollow a user</h2>
 
 <pre><code>DELETE /user/following/:username
 </code></pre>
@@ -207,11 +240,14 @@ X-RateLimit-Remaining: 4999</code></pre>
 <p>Unfollowing a user requires the user to be logged in and authenticated with basic
 auth or OAuth with the <code>user:follow</code> scope.</p>
 
-<h3 id="response-3">Response</h3>
+<h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
+
 
 
     </div>
@@ -375,7 +411,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

@@ -54,11 +54,13 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="other-authentication-methods">Other Authentication Methods</h1>
+
+<h1>
+<a id="other-authentication-methods" class="anchor" href="#other-authentication-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Authentication Methods</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#basic-authentication" id="markdown-toc-basic-authentication">Basic Authentication</a></li>
-  <li><a href="#working-with-two-factor-authentication" id="markdown-toc-working-with-two-factor-authentication">Working with two-factor authentication</a></li>
+<li><a href="#basic-authentication" id="markdown-toc-basic-authentication">Basic Authentication</a></li>
+<li><a href="#working-with-two-factor-authentication" id="markdown-toc-working-with-two-factor-authentication">Working with two-factor authentication</a></li>
 </ul>
 
 <p>While the API provides multiple methods for authentication, we strongly
@@ -68,7 +70,8 @@ where full OAuth would be overkill). Third party applications that rely on
 GitHub for authentication should not ask for or collect GitHub credentials.
 Instead, they should use the <a href="/v3/oauth">OAuth web flow</a>.</p>
 
-<h2 id="basic-authentication">Basic Authentication</h2>
+<h2>
+<a id="basic-authentication" class="anchor" href="#basic-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Authentication</h2>
 
 <p>The API supports Basic Authentication as defined in
 <a href="http://www.ietf.org/rfc/rfc2617.txt">RFC2617</a> with a few slight differences.
@@ -78,30 +81,35 @@ the existence of user data. Instead, the GitHub API responds with <code>404 Not 
 This may cause problems for HTTP libraries that assume a <code>401 Unauthorized</code>
 response. The solution is to manually craft the <code>Authorization</code> header.</p>
 
-<h3 id="via-username-and-password">Via Username and Password</h3>
+<h3>
+<a id="via-username-and-password" class="anchor" href="#via-username-and-password" aria-hidden="true"><span class="octicon octicon-link"></span></a>Via Username and Password</h3>
 
 <p>To use Basic Authentication with the GitHub API, simply send the username and
 password associated with the account.</p>
 
-<p>For example, if you’re accessing the API via <a href="http://curl.haxx.se/">cURL</a>, the following command
+<p>For example, if you're accessing the API via <a href="http://curl.haxx.se/">cURL</a>, the following command
 would authenticate you if you replace <code>&lt;username&gt;</code> with your GitHub username.
 (cURL will prompt you to enter the password.)</p>
 
-<pre class="terminal"><code>$ curl -u &lt;username&gt; https://api.github.com/user
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -u <username> https://api.github.com/user</username></span>
+</pre>
 
-<h3 id="via-oauth-tokens">Via OAuth Tokens</h3>
+<h3>
+<a id="via-oauth-tokens" class="anchor" href="#via-oauth-tokens" aria-hidden="true"><span class="octicon octicon-link"></span></a>Via OAuth Tokens</h3>
 
 <p>Alternatively, you can use <a href="https://github.com/blog/1509-personal-api-tokens">personal access
 tokens</a> or OAuth tokens instead of your password.</p>
 
-<pre class="terminal"><code>$ curl -u &lt;username&gt;:&lt;token&gt; https://api.github.com/user
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -u <username>:<token> https://api.github.com/user</token></username></span>
+</pre>
 
 <p>This approach is useful if your tools only support Basic Authentication but you
 want to take advantage of OAuth access token security features.</p>
 
-<h2 id="working-with-two-factor-authentication">Working with two-factor authentication</h2>
+<h2>
+<a id="working-with-two-factor-authentication" class="anchor" href="#working-with-two-factor-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working with two-factor authentication</h2>
 
 <p>For users with two-factor authentication enabled, Basic Authentication requires
 an extra step. When you attempt to authenticate with Basic Authentication, the
@@ -111,7 +119,7 @@ addition to the username and password). The <code>:2fa-type</code> in this heade
 whether the account receives its two-factor authentication codes via SMS or via
 an application.</p>
 
-<p>In addition to the Basic Authentication credentials, you must send the user’s
+<p>In addition to the Basic Authentication credentials, you must send the user's
 authentication code (i.e., one-time password) in the <code>X-GitHub-OTP</code> header.
 Because these authentication codes expire quickly, we recommend using the
 Authorizations API to <a href="/v3/oauth_authorizations/#create-a-new-authorization">create an access token</a> and using that
@@ -281,7 +289,7 @@ token to <a href="/v3/#authentication">authenticate via OAuth</a> for most API a
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

@@ -63,34 +63,38 @@
 
 
 
-<p>Today we’ve made it easier to add commits to a repository via the GitHub API.
+
+<p>Today we've made it easier to add commits to a repository via the GitHub API.
 Until now, you could <a href="/v3/repos/#create">create a repository</a>, but you would
 need to initialize it locally via your Git client before adding any commits via
 the API.</p>
 
-<p>Now you can optionally init a repository when it’s created by sending <code>true</code>
+<p>Now you can optionally init a repository when it's created by sending <code>true</code>
 for the <code>auto_init</code> parameter:</p>
 
-<pre class="terminal"><code>curl -i -u pengwynn \
-     -d '{"name": "create-repo-test", "auto_init": true}' \
-     https://api.github.com/user/repos
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -i -u pengwynn \</span>
+<span class="command">     -d '{"name": "create-repo-test", "auto_init": true}' \</span>
+<span class="command">     https://api.github.com/user/repos</span>
+</pre>
 
 <p>The resulting repository will have a README stub and an initial commit.</p>
 
 <p><img src="/assets/images/posts/create-repo-init.png" alt="create repo screenshot"></p>
 
-<h3 id="gitignore-templates">.gitignore templates</h3>
+<h3>
+<a id="gitignore-templates" class="anchor" href="#gitignore-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>.gitignore templates</h3>
 
 <p>Along with this change, you can set up your <code>.gitignore</code> template by passing
 the basename of any template in the <a href="https://github.com/github/gitignore">GitHub gitignore templates
 project</a>.</p>
 
-<pre class="terminal"><code>curl -i -u pengwynn \
-     -d '{"name": "create-repo-test", "auto_init": true, \
-          "gitignore_template": "Haskell"}' \
-     https://api.github.com/user/repos
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -i -u pengwynn \</span>
+<span class="command">     -d '{"name": "create-repo-test", "auto_init": true, \</span>
+<span class="command">          "gitignore_template": "Haskell"}' \</span>
+<span class="command">     https://api.github.com/user/repos</span>
+</pre>
 
 <p>As the <a href="/v3/repos/#create">docs point out</a>, the <code>gitignore_template</code> parameter
 is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
@@ -118,11 +122,11 @@ is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -154,7 +158,7 @@ is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

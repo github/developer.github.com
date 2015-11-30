@@ -43,8 +43,10 @@
   <div id="wrapper">
     <div class="content">
       
+
 <div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
   <h2 class="title">
+<a id="--oauth-changes-coming" class="anchor" href="#--oauth-changes-coming" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-10-04-oauth-changes-coming/">OAuth changes coming</a>
 </h2>
 
@@ -56,23 +58,24 @@
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/tclem.png" alt="Avatar for tclem" data-proofer-ignore="">
-      <a href="https://github.com/tclem" data-proofer-ignore="">tclem</a>
+    <img height="16" width="16" src="https://github.com/tclem.png" alt="Avatar for tclem" data-proofer-ignore>
+      <a href="https://github.com/tclem" data-proofer-ignore>tclem</a>
   </li>
 </ul>
 </div>
 
-    
 <p>Starting today, we are returning granted scopes as part of the
-<a href="/v3/oauth/#github-redirects-back-to-your-site">access_token response</a>.
+<a href="/v3/oauth/#2-github-redirects-back-to-your-site">access_token response</a>.
 For example, if you are making a POST with the <code>application/json</code>
-mime-type you’ll see an additional field for the granted scopes.</p>
+mime-type you'll see an additional field for the granted scopes.</p>
 
-<pre><code class="language-javascript highlight highlight"><span class="p">{</span>
-  <span class="s2">"access_token"</span><span class="err">:</span><span class="s2">"e72e16c7e42f292c6912e7710c838347ae178b4a"</span><span class="p">,</span>
-  <span class="s2">"scope"</span><span class="err">:</span><span class="s2">"repo,gist"</span><span class="p">,</span>
-  <span class="s2">"token_type"</span><span class="err">:</span><span class="s2">"bearer"</span>
-<span class="p">}</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="s2">"e72e16c7e42f292c6912e7710c838347ae178b4a"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scope"</span><span class="p">:</span><span class="s2">"repo,gist"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 
 <p>Right now, these scopes will be identical to what you requested, but we
 are moving towards a feature set that will allow GitHub users to edit
@@ -83,29 +86,25 @@ your application behavior accordingly.</p>
 <p>Some things to watch out for and keep in mind:</p>
 
 <ul>
-  <li>
-    <p>Most third party applications using GitHub OAuth to identify users have
+<li><p>Most third party applications using GitHub OAuth to identify users have
 the best success in adoption by starting out with a request for the
 minimum access that the application can possibly get away with.
-Something like no scopes or just <code>user:email</code> is very sane.</p>
-  </li>
-  <li>
-    <p>It is important to handle the error cases where a user chooses to
+Something like no scopes or just <code>user:email</code> is very sane.</p></li>
+<li><p>It is important to handle the error cases where a user chooses to
 grant you less access than you originally requested. Now that we are
 surfacing the granted scopes on the access_token response, applications
 can warn or otherwise communicate with their users that they will see
-reduced functionality or be unable to perform some actions.</p>
-  </li>
-  <li>
-    <p>Applications can always send users back through the flow again to get
-additional permission, but don’t forget that users can always say no.</p>
-  </li>
+reduced functionality or be unable to perform some actions.</p></li>
+<li><p>Applications can always send users back through the flow again to get
+additional permission, but don't forget that users can always say no.</p></li>
 </ul>
+
 
 </div>
 
 <div class="change" id="/changes/2013-09-28-an-update-on-the-new-search-api/">
   <h2 class="title">
+<a id="--an-update-on-the-new-search-api" class="anchor" href="#--an-update-on-the-new-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">An Update on the New Search API</a>
 </h2>
 
@@ -117,23 +116,24 @@ additional permission, but don’t forget that users can always say no.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
     
-<p>We owe a big “Thank You!” to everyone that has taken the time to try out the <a href="/changes/2013-07-19-preview-the-new-search-api">new Search API</a>.
+
+<p>We owe a big "Thank You!" to everyone that has taken the time to try out the <a href="/changes/2013-07-19-preview-the-new-search-api">new Search API</a>.
 We <code>:heart:</code> every one of you.
 Just as we hoped,
 the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> has allowed us to see how you want to use the new API,
 and it has given us a chance to improve the API before finalizing it.</p>
 
-<p>In order to incorporate everything that we’ve learned,
-we’re going to keep the Search API in <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a> for a little while longer.
+<p>In order to incorporate everything that we've learned,
+we're going to keep the Search API in <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a> for a little while longer.
 We have a few bugs to squash and a couple performance kinks to iron out.
-We’re hard at work on those improvements now,
+We're hard at work on those improvements now,
 and we expect to have more news in the coming weeks.</p>
 
 <p>In the mean time, <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">keep the suggestions coming</a>!</p>
@@ -143,6 +143,7 @@ and we expect to have more news in the coming weeks.</p>
 
 <div class="change" id="/changes/2013-09-25-releases-api/">
   <h2 class="title">
+<a id="--releases-api" class="anchor" href="#--releases-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-09-25-releases-api/">Releases API</a>
 </h2>
 
@@ -154,60 +155,66 @@ and we expect to have more news in the coming weeks.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore="">
-      <a href="https://github.com/technoweenie" data-proofer-ignore="">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
   </li>
 </ul>
 </div>
 
     
+
 <p>This summer we made it easier to <a href="https://github.com/blog/1547-release-your-software">release your software</a>.  Today, you can fully automate those releases via the
 <a href="http://developer.github.com/v3/repos/releases/">Releases API Preview</a>.</p>
 
 <p>This API is a little different due to the binary assets.  We use the <code>Accept</code> header for content negotiation when requesting
 a release asset.  Pass a standard API media type to get the API representation:</p>
 
-<pre class="terminal"><code>$ curl -i -H "Authorization: token TOKEN" \
-     -H "Accept: application/vnd.github.manifold-preview" \
-     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
+<pre class="command-line">
+<span class="command">curl -i -H "Authorization: token TOKEN" \</span>
+<span class="command">    -H "Accept: application/vnd.github.manifold-preview" \</span>
+<span class="command">    "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"</span>
 
-HTTP/1.1 200 OK
+<span class="output">HTTP/1.1 200 OK</span>
 
-{
-  "id": 123,
-  ...
-}
-</code></pre>
+<span class="output">{</span>
+<span class="output">  "id": 123,</span>
+<span class="output">  ...</span>
+<span class="output">}</span>
+</pre>
 
-<p>Pass “application/octet-stream” to download the binary content.</p>
+<p>Pass "application/octet-stream" to download the binary content.</p>
 
-<pre class="terminal"><code>$ curl -i -H "Authorization: token TOKEN" \
-     -H "Accept: application/octet-stream" \
-     "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"
+<pre class="command-line">
+<span class="command">curl -i -H "Authorization: token TOKEN" \</span>
+<span class="command">    -H "Accept: application/octet-stream" \</span>
+<span class="command">    "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"</span>
 
-HTTP/1.1 302 Found
-</code></pre>
+<span class="output">HTTP/1.1 302 Found</span>
+</pre>
 
-<p>Uploads are handled by a single request to a companion “uploads.github.com” service.</p>
+<p>Uploads are handled by a single request to a companion "uploads.github.com" service.</p>
 
-<pre class="terminal"><code>$ curl -H "Authorization: token TOKEN" \
+<pre class="command-line">
+<span class="command">curl -H "Authorization: token TOKEN" \</span>
      -H "Accept: application/vnd.github.manifold-preview" \
      -H "Content-Type: application/zip" \
      --data-binary @build/mac/package.zip \
      "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
-</code></pre>
+</pre>
 
-<h2 id="preview-mode">Preview mode</h2>
+<h2>
+<a id="preview-mode" class="anchor" href="#preview-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-mode" class="anchor" href="#preview-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview mode</h2>
 
 <p>The new API is available as a <a href="http://developer.github.com/v3/repos/releases/#preview-mode">preview</a>.  This gives developers a chance to <a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API">provide feedback</a> on the direction of
 the API before we freeze changes.  We expect to lift the preview status in 30 days.</p>
 
-<p>As with <a href="http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/">the Search API</a>, we’ll take this opportunity to iterate quickly.  Breaking changes will be announced
-on this developer blog without any advance warning.  Once the preview period is over, we’ll consider the Releases API unchangeable.
+<p>As with <a href="http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/">the Search API</a>, we'll take this opportunity to iterate quickly.  Breaking changes will be announced
+on this developer blog without any advance warning.  Once the preview period is over, we'll consider the Releases API unchangeable.
 At that point, it will be stable and suitable for production use.</p>
 
-<p>The preview media type is “application/vnd.github.manifold-preview”.  <a href="http://en.wikipedia.org/wiki/Eden_Fesi">Manifold</a> is
-a member of the Avengers, with the ability to teleport through time and space.  He’s the one in the middle holding the spear.</p>
+<p>The preview media type is "application/vnd.github.manifold-preview".  <a href="http://en.wikipedia.org/wiki/Eden_Fesi">Manifold</a> is
+a member of the Avengers, with the ability to teleport through time and space.  He's the one in the middle holding the spear.</p>
 
 <p><img src="https://f.cloud.github.com/assets/21/1210628/ae8556fa-25fc-11e3-986d-0ab522271d43.png" alt="Manifold teleporting the Avengers to a terraformed Mars surface"></p>
 
@@ -216,6 +223,7 @@ a member of the Avengers, with the ability to teleport through time and space.  
 
 <div class="change" id="/changes/2013-09-03-two-factor-authentication/">
   <h2 class="title">
+<a id="--two-factor-authentication-and-the-api" class="anchor" href="#--two-factor-authentication-and-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-09-03-two-factor-authentication/">Two-Factor Authentication and the API</a>
 </h2>
 
@@ -227,32 +235,37 @@ a member of the Avengers, with the ability to teleport through time and space.  
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore="">
-      <a href="https://github.com/mastahyeti" data-proofer-ignore="">mastahyeti</a>
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore>
+      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
   </li>
 </ul>
 </div>
 
-    
 <p>As <a href="https://github.com/blog/1614-two-factor-authentication">announced earlier today</a>, GitHub.com now supports two-factor
 authentication (2FA) for increased security. For users with this feature
 enabled, GitHub.com will prompt for a 2FA code in addition to a username and
-password during authentication. We’ve also rolled out some improvements to the
+password during authentication. We've also rolled out some improvements to the
 API to ensure that 2FA requirements in the API are consistent with GitHub.com.</p>
 
-<h2 id="authenticating-with-the-api">Authenticating with the API</h2>
+<h2>
+<a id="authenticating-with-the-api" class="anchor" href="#authenticating-with-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="authenticating-with-the-api" class="anchor" href="#authenticating-with-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authenticating with the API</h2>
 
 <p>For users without 2FA enabled, and for applications using the <a href="/v3/oauth/#web-application-flow">OAuth web
 flow</a> for authentication, everything is
-business as usual. You’ll continue to authenticate with the API just as you
+business as usual. You'll continue to authenticate with the API just as you
 always have. (That was easy.)</p>
 
-<p>If you enable 2FA <em>and</em> use Basic Authentication to access the API, we’re
+<p>If you enable 2FA <em>and</em> use Basic Authentication to access the API, we're
 providing multiple options to make the flow simple and easy.</p>
 
-<h2 id="basic-authentication-and-2fa">Basic Authentication and 2FA</h2>
+<h2>
+<a id="basic-authentication-and-2fa" class="anchor" href="#basic-authentication-and-2fa" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="basic-authentication-and-2fa" class="anchor" href="#basic-authentication-and-2fa" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Authentication and 2FA</h2>
 
-<h3 id="personal-access-tokens">Personal Access Tokens</h3>
+<h3>
+<a id="personal-access-tokens" class="anchor" href="#personal-access-tokens" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="personal-access-tokens" class="anchor" href="#personal-access-tokens" aria-hidden="true"><span class="octicon octicon-link"></span></a>Personal Access Tokens</h3>
 
 <p>Personal access tokens provide the simplest option for using 2FA with Basic
 Authentication. You can create these tokens via the <a href="https://github.com/settings/tokens">tokens settings page
@@ -261,23 +274,28 @@ them at any time. For more information about authenticating to the API with
 personal access tokens, be sure to check out our <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">help article on the
 topic</a>.</p>
 
-<h3 id="tightly-integrated-2fa">Tightly-integrated 2FA</h3>
+<h3>
+<a id="tightly-integrated-2fa" class="anchor" href="#tightly-integrated-2fa" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="tightly-integrated-2fa" class="anchor" href="#tightly-integrated-2fa" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tightly-integrated 2FA</h3>
 
 <p>For developers wishing to integrate GitHub 2FA directly into their application,
-the API’s Basic Authentication now supports the <a href="/v3/auth/#working-with-two-factor-authentication">ability to send the user’s 2FA
+the API's Basic Authentication now supports the <a href="/v3/auth/#working-with-two-factor-authentication">ability to send the user's 2FA
 code</a>, in addition to the username and password.</p>
 
-<h2 id="were-here-to-help">We’re here to help</h2>
+<h2>
+<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>We're here to help</h2>
 
 <p>We think GitHub users are going to love the additional security provided by
 two-factor authentication. As always, if you have any questions or feedback,
-<a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API">let us know</a>. We’re here to help!</p>
+<a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API">let us know</a>. We're here to help!</p>
 
 
 </div>
 
 <div class="change" id="/changes/2013-08-20-search-api-improvements/">
   <h2 class="title">
+<a id="--improvements-to-the-search-api" class="anchor" href="#--improvements-to-the-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-08-20-search-api-improvements/">Improvements to the Search API</a>
 </h2>
 
@@ -289,44 +307,47 @@ two-factor authentication. As always, if you have any questions or feedback,
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
-    
-<p>Today we’re shipping two improvements to the <a href="/changes/2013-07-19-preview-the-new-search-api/">new Search API</a>.</p>
+<p>Today we're shipping two improvements to the <a href="/changes/2013-07-19-preview-the-new-search-api/">new Search API</a>.</p>
 
-<h2 id="more-text-match-metadata">More Text Match Metadata</h2>
+<h2>
+<a id="more-text-match-metadata" class="anchor" href="#more-text-match-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="more-text-match-metadata" class="anchor" href="#more-text-match-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Text Match Metadata</h2>
 
-<p>When searching for code, the API previously provided <a href="/v3/search/#text-match-metadata">text match metadata</a> (i.e., “highlights”) for file content.
+<p>When searching for code, the API previously provided <a href="/v3/search/#text-match-metadata">text match metadata</a> (i.e., "highlights") for file content.
 Now, you can also <a href="/v3/search/#highlighting-code-search-results">get this metadata</a> for matches that occur within the file path.</p>
 
-<p>For example, when <a href="https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&amp;type=Code">searching for files that have “client” in their path</a>, the results include this match for <code>lib/octokit/client/commits.rb</code>:</p>
+<p>For example, when <a href="https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&amp;type=Code">searching for files that have "client" in their path</a>, the results include this match for <code>lib/octokit/client/commits.rb</code>:</p>
 
-<pre class="json"><code>{
-  "name": "commits.rb",
-  "path": "lib/octokit/client/commits.rb",
-  "text_matches": [
+<p>{:.json}
     {
-      "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
-      "object_type": "FileContent",
-      "property": "path",
-      "fragment": "lib/octokit/client/commits.rb",
-      "matches": [
+      "name": "commits.rb",
+      "path": "lib/octokit/client/commits.rb",
+      "text_matches": [
         {
-          "text": "client",
-          "indices": [ 12, 18 ]
+          "object_url": "<a href="https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88">https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88</a>",
+          "object_type": "FileContent",
+          "property": "path",
+          "fragment": "lib/octokit/client/commits.rb",
+          "matches": [
+            {
+              "text": "client",
+              "indices": [ 12, 18 ]
+            }
+          ]
         }
       ]
-    }
-  ]
-  // ...
-}
-</code></pre>
+      // ...
+    }</p>
 
-<h2 id="better-text-match-metadata">Better Text Match Metadata</h2>
+<h2>
+<a id="better-text-match-metadata" class="anchor" href="#better-text-match-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="better-text-match-metadata" class="anchor" href="#better-text-match-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>Better Text Match Metadata</h2>
 
 <p>Before today, the API applied HTML entity encoding to all <code>fragment</code> data.
 For example, imagine your search returns an issue like <a href="https://github.com/rails/rails/issues/11889">rails/rails#11889</a>:</p>
@@ -335,25 +356,27 @@ For example, imagine your search returns an issue like <a href="https://github.c
 
 <p>The response would include a <code>text_matches</code> array with the following object:</p>
 
-<pre class="json"><code>{
-  "fragment": "undefined method 'except' for #&amp;lt;Array:XXX&amp;gt;",
-  // ...
-}
-</code></pre>
+<p>{:.json}
+    {
+      "fragment": "undefined method 'except' for #&lt;Array:XXX&gt;",
+      // ...
+    }</p>
 
 <p>Inside the <code>fragment</code> value, we see HTML-encoded entities (e.g., <code>&amp;lt;</code>).
-Since we’re returning JSON (not HTML), API clients might not expect any HTML-encoded text.
+Since we're returning JSON (not HTML), API clients might not expect any HTML-encoded text.
 As of today, the API returns these fragments <em>without</em> this extraneous encoding.</p>
 
-<pre class="json"><code>{
-  "fragment": "undefined method 'except' for #&lt;Array:XXX&gt;",
-  // ...
-}
-</code></pre>
+<p>{:.json}
+    {
+      "fragment": "undefined method 'except' for #<a href="Array:XXX">Array:XXX</a>",
+      // ...
+    }</p>
 
-<h2 id="preview-period">Preview Period</h2>
+<h2>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview Period</h2>
 
-<p>We’re about halfway through the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> for the new Search API.
+<p>We're about halfway through the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> for the new Search API.
 We appreciate everyone that has provided feedback so far. Please <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">keep it coming</a>!</p>
 
 
@@ -361,6 +384,7 @@ We appreciate everyone that has provided feedback so far. Please <a href="https:
 
 <div class="change" id="/changes/2013-07-19-preview-the-new-search-api/">
   <h2 class="title">
+<a id="--preview-the-new-search-api" class="anchor" href="#--preview-the-new-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-07-19-preview-the-new-search-api/">Preview the New Search API</a>
 </h2>
 
@@ -372,25 +396,26 @@ We appreciate everyone that has provided feedback so far. Please <a href="https:
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
-    
-<p>Today we’re excited to announce a <a href="/v3/search/">brand new Search API</a>. Whether you’re
+<p>Today we're excited to announce a <a href="/v3/search/">brand new Search API</a>. Whether you're
 searching for <a href="/v3/search/#search-code">code</a>, <a href="/v3/search/#search-repositories">repositories</a>,
 <a href="/v3/search/#search-issues">issues</a>, or <a href="/v3/search/#search-users">users</a>, all the query abilities of
 github.com are now available via the API as well.</p>
 
 <p>Maybe you want to find <a href="/v3/search/#repository-search-example">popular Tetris implementations written in Assembly</a>.
-We’ve got you covered.
-Or perhaps you’re looking for <a href="/v3/search/#code-search-example">new gems that are using Octokit.rb</a>.
+We've got you covered.
+Or perhaps you're looking for <a href="/v3/search/#code-search-example">new gems that are using Octokit.rb</a>.
 No problem.
 The possibilities are endless.</p>
 
-<h2 id="highlights">Highlights</h2>
+<h2>
+<a id="highlights" class="anchor" href="#highlights" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="highlights" class="anchor" href="#highlights" aria-hidden="true"><span class="octicon octicon-link"></span></a>Highlights</h2>
 
 <p>On github.com, we enjoy the context provided by code snippets and highlights in
 search results.</p>
@@ -402,12 +427,14 @@ requests can opt to receive those
 <a href="/v3/search#text-match-metadata">text fragments in the response</a>. Each fragment is accompanied by
 numeric offsets identifying the exact location of each matching search term.</p>
 
-<h2 id="preview-period">Preview period</h2>
+<h2>
+<a id="preview-period-1" class="anchor" href="#preview-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
 
-<p>We’re making this new API available today for developers to
-<a href="/v3/search/#preview-mode" data-proofer-ignore="">preview</a>. We think developers are going to love it, but we want
-to get your feedback before we declare the Search API “final” and
-“unchangeable.” We expect the preview period to last for roughly 60 days.</p>
+<p>We're making this new API available today for developers to
+<a href="/v3/search/#preview-mode" data-proofer-ignore>preview</a>. We think developers are going to love it, but we want
+to get your feedback before we declare the Search API "final" and
+"unchangeable." We expect the preview period to last for roughly 60 days.</p>
 
 <p>As we discover opportunities to improve this new API during the preview period,
 we may ship changes that break clients using the preview version of the API. We
@@ -418,16 +445,20 @@ developer blog), but we will not provide any advance notice.</p>
 of GitHub API v3. At that point, the new Search API will be stable and suitable
 for production use.</p>
 
-<h2 id="what-about-the-old-search-api">What about the old search API?</h2>
+<h2>
+<a id="what-about-the-old-search-api" class="anchor" href="#what-about-the-old-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-about-the-old-search-api" class="anchor" href="#what-about-the-old-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>What about the old search API?</h2>
 
 <p>The <a href="/v3/search/legacy/">legacy search API</a> is still available. Many existing clients
 depend on it, and it is not changing in any way. While the new API offers much
 more functionality, the legacy search endpoints remain an official part of
 GitHub API v3.</p>
 
-<h2 id="take-it-for-a-spin">Take it for a spin</h2>
+<h2>
+<a id="take-it-for-a-spin" class="anchor" href="#take-it-for-a-spin" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="take-it-for-a-spin" class="anchor" href="#take-it-for-a-spin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Take it for a spin</h2>
 
-<p>We hope you’ll kick the tires and <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">send us your feedback</a>. Happy
+<p>We hope you'll kick the tires and <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">send us your feedback</a>. Happy
 <del>searching</del> finding!</p>
 
 
@@ -435,6 +466,7 @@ GitHub API v3.</p>
 
 <div class="change" id="/changes/2013-07-02-rate-limit-reset/">
   <h2 class="title">
+<a id="--when-does-my-rate-limit-reset" class="anchor" href="#--when-does-my-rate-limit-reset" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-07-02-rate-limit-reset/">When Does My Rate Limit Reset?</a>
 </h2>
 
@@ -446,50 +478,52 @@ GitHub API v3.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
-    
 <p>Have you ever wondered when your <a href="/v3/#rate-limiting">rate limit</a> will reset back to its maximum value?
 That information is now available in the new <code>X-RateLimit-Reset</code> response header.</p>
 
-<pre class="terminal"><code>$ curl -I https://api.github.com/orgs/octokit
+<pre class="command-line">
+<span class="command">curl -I https://api.github.com/orgs/octokit</span>
 
-HTTP/1.1 200 OK
-Status: 200 OK
-X-RateLimit-Limit: 60
-X-RateLimit-Remaining: 42
-X-RateLimit-Reset: 1372700873
-...
-</code></pre>
+<span class="output">HTTP/1.1 200 OK</span>
+<span class="output">Status: 200 OK</span>
+<span class="output">X-RateLimit-Limit: 60</span>
+<span class="output">X-RateLimit-Remaining: 42</span>
+<span class="output">X-RateLimit-Reset: 1372700873</span>
+<span class="output">...</span>
+</pre>
 
 <p>The <code>X-RateLimit-Reset</code> header provides a <a href="http://en.wikipedia.org/wiki/Unix_time">Unix UTC timestamp</a>, letting you know the exact time that your fresh new rate limit kicks in.</p>
 
 <p>The reset timestamp is also available as part of the <code>/rate_limit</code> resource.</p>
 
-<pre class="terminal"><code>$ curl https://api.github.com/rate_limit
+<pre class="command-line">
+<span class="command">curl https://api.github.com/rate_limit</span>
 
-{
-  "rate": {
-    "limit": 60,
-    "remaining": 42,
-    "reset": 1372700873
-  }
-}
-</code></pre>
+<span class="output">{</span>
+<span class="output">  "rate": {</span>
+<span class="output">    "limit": 60,</span>
+<span class="output">    "remaining": 42,</span>
+<span class="output">    "reset": 1372700873</span>
+<span class="output">  }</span>
+<span class="output">}</span>
+</pre>
 
 <p>For more information on rate limits, be sure to check out the <a href="/v3/#rate-limiting">docs</a>.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=X-RateLimit-Reset">drop us a line</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-07-01-feeds-api/">
   <h2 class="title">
+<a id="--feeds-api" class="anchor" href="#--feeds-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>
 </h2>
 
@@ -501,61 +535,62 @@ X-RateLimit-Reset: 1372700873
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
-<p>Today we’re releasing a new <a href="/v3/activity/feeds/">Feeds API</a>, an easy way to list all the Atom
+<p>Today we're releasing a new <a href="/v3/activity/feeds/">Feeds API</a>, an easy way to list all the Atom
 resources available to the authenticated user.</p>
 
-<pre class="terminal"><code>curl -u defunkt https://api.github.com/feeds
+<pre class="command-line">
+<span class="command">curl -u defunkt https://api.github.com/feeds</span>
 
-{
-  "timeline_url": "https://github.com/timeline",
-  "user_url": "https://github.com/{user}",
-  "current_user_public_url": "https://github.com/defunkt",
-  "current_user_url": "https://github.com/defunkt.private?token=abc123",
-  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",
-  "current_user_organization_url": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
-  "_links": {
-    "timeline": {
-      "href": "https://github.com/timeline",
-      "type": "application/atom+xml"
-    },
-    "user": {
-      "href": "https://github.com/{user}",
-      "type": "application/atom+xml"
-    },
-    "current_user_public": {
-      "href": "https://github.com/defunkt",
-      "type": "application/atom+xml"
-    },
-    "current_user": {
-      "href": "https://github.com/defunkt.private?token=abc123",
-      "type": "application/atom+xml"
-    },
-    "current_user_actor": {
-      "href": "https://github.com/defunkt.private.actor?token=abc123",
-      "type": "application/atom+xml"
-    },
-    "current_user_organization": {
-      "href": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",
-      "type": "application/atom+xml"
-    }
-  }
-}
-</code></pre>
+<span class="output">{</span>
+<span class="output">  "timeline_url": "https://github.com/timeline",</span>
+<span class="output">  "user_url": "https://github.com/{user}",</span>
+<span class="output">  "current_user_public_url": "https://github.com/defunkt",</span>
+<span class="output">  "current_user_url": "https://github.com/defunkt.private?token=abc123",</span>
+<span class="output">  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",</span>
+<span class="output">  "current_user_organization_url": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",</span>
+<span class="output">  "_links": {</span>
+<span class="output">   "timeline": {</span>
+<span class="output">     "href": "https://github.com/timeline",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "user": {</span>
+<span class="output">     "href": "https://github.com/{user}",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "current_user_public": {</span>
+<span class="output">     "href": "https://github.com/defunkt",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "current_user": {</span>
+<span class="output">     "href": "https://github.com/defunkt.private?token=abc123",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "current_user_actor": {</span>
+<span class="output">     "href": "https://github.com/defunkt.private.actor?token=abc123",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "current_user_organization": {</span>
+<span class="output">     "href": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   }</span>
+<span class="output">  }</span>
+<span class="output">}</span>
+</pre>
 
 <p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
   <h2 class="title">
+<a id="--create-update-and-delete-individual-files" class="anchor" href="#--create-update-and-delete-individual-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
 </h2>
 
@@ -567,25 +602,25 @@ resources available to the authenticated user.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel" data-proofer-ignore="">
-      <a href="https://github.com/ymendel" data-proofer-ignore="">ymendel</a>
+    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel" data-proofer-ignore>
+      <a href="https://github.com/ymendel" data-proofer-ignore>ymendel</a>
   </li>
 </ul>
 </div>
 
-    
-<p>We’re following in the footsteps of GitHub.com’s ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
+<p>We're following in the footsteps of GitHub.com's ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
 <a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
 <a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
 <a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
 
 <p>Happy editing!</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-05-06-repository-stats/">
   <h2 class="title">
+<a id="--repository-statistics" class="anchor" href="#--repository-statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
 </h2>
 
@@ -597,29 +632,29 @@ resources available to the authenticated user.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/Caged.png" alt="Avatar for Caged" data-proofer-ignore="">
-      <a href="https://github.com/Caged" data-proofer-ignore="">Caged</a>
+    <img height="16" width="16" src="https://github.com/Caged.png" alt="Avatar for Caged" data-proofer-ignore>
+      <a href="https://github.com/Caged" data-proofer-ignore>Caged</a>
   </li>
 </ul>
 </div>
 
-    
-<p>Today we’re happy to open our <a href="/v3/repos/statistics">Repository Statistics API</a> to everyone.  We’re using
+<p>Today we're happy to open our <a href="/v3/repos/statistics">Repository Statistics API</a> to everyone.  We're using
 repository statistics to power <a href="https://github.com/github/linguist/graphs">our graphs</a>,
-but we can’t wait to see what others can do with this information.</p>
+but we can't wait to see what others can do with this information.</p>
 
 <p>Starting today, these resources are available to you:</p>
 
 <ul>
-  <li><strong><a href="/v3/repos/statistics/#contributors">Contributors</a></strong></li>
-  <li><strong><a href="/v3/repos/statistics/#commit-activity">Commit Activity</a></strong></li>
-  <li><strong><a href="/v3/repos/statistics/#code-frequency">Code Frequency</a></strong></li>
-  <li><strong><a href="/v3/repos/statistics/#participation">Participation</a></strong></li>
-  <li><strong><a href="/v3/repos/statistics/#punch-card">Punch Card</a></strong></li>
+<li><strong><a href="/v3/repos/statistics/#contributors">Contributors</a></strong></li>
+<li><strong><a href="/v3/repos/statistics/#commit-activity">Commit Activity</a></strong></li>
+<li><strong><a href="/v3/repos/statistics/#code-frequency">Code Frequency</a></strong></li>
+<li><strong><a href="/v3/repos/statistics/#participation">Participation</a></strong></li>
+<li><strong><a href="/v3/repos/statistics/#punch-card">Punch Card</a></strong></li>
 </ul>
 
 <p>Enjoy!</p>
 
+<p></p>
 </div>
 
 <div class="paginate-container">
@@ -719,7 +754,9 @@ but we can’t wait to see what others can do with this information.</p>
   
 </div>
 
+<p></p>
 </div>
+
 
     </div>
 
@@ -882,7 +919,7 @@ but we can’t wait to see what others can do with this information.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

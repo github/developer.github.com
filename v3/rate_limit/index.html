@@ -54,48 +54,58 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="rate-limit">Rate Limit</h1>
+
+<h1>
+<a id="rate-limit" class="anchor" href="#rate-limit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rate Limit</h1>
 
 <p>The overview documentation describes the <a href="/v3/#rate-limiting">rate limit rules</a>.
 You can check your current rate limit status at any time using the Rate Limit
 API described below.</p>
 
-<h2 id="get-your-current-rate-limit-status">Get your current rate limit status</h2>
+<h2>
+<a id="get-your-current-rate-limit-status" class="anchor" href="#get-your-current-rate-limit-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get your current rate limit status</h2>
 
 <p>Note: Accessing this endpoint does not count against your rate limit.</p>
 
 <pre><code>GET /rate_limit
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999
-X-RateLimit-Reset: 1372700873</code></pre>
+X-RateLimit-Reset: 1372700873
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"resources"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"core"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"limit"</span><span class="err">:</span> <span class="mi">5000</span><span class="p">,</span>
-      <span class="s2">"remaining"</span><span class="err">:</span> <span class="mi">4999</span><span class="p">,</span>
-      <span class="s2">"reset"</span><span class="err">:</span> <span class="mi">1372700873</span>
-    <span class="p">},</span>
-    <span class="s2">"search"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"limit"</span><span class="err">:</span> <span class="mi">30</span><span class="p">,</span>
-      <span class="s2">"remaining"</span><span class="err">:</span> <span class="mi">18</span><span class="p">,</span>
-      <span class="s2">"reset"</span><span class="err">:</span> <span class="mi">1372697452</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="s2">"rate"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"limit"</span><span class="err">:</span> <span class="mi">5000</span><span class="p">,</span>
-    <span class="s2">"remaining"</span><span class="err">:</span> <span class="mi">4999</span><span class="p">,</span>
-    <span class="s2">"reset"</span><span class="err">:</span> <span class="mi">1372700873</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"resources"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"core"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"reset"</span><span class="p">:</span><span class="w"> </span><span class="mi">1372700873</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"reset"</span><span class="p">:</span><span class="w"> </span><span class="mi">1372697452</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"limit"</span><span class="p">:</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"remaining"</span><span class="p">:</span><span class="w"> </span><span class="mi">4999</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reset"</span><span class="p">:</span><span class="w"> </span><span class="mi">1372700873</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
 <p><br></p>
 
-<h4 id="understanding-your-rate-limit-status">Understanding Your Rate Limit Status</h4>
+<h4>
+<a id="understanding-your-rate-limit-status" class="anchor" href="#understanding-your-rate-limit-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Understanding Your Rate Limit Status</h4>
 
 <p>The Search API has a <a href="/v3/search/#rate-limit">custom rate limit</a>, separate from
 the rate limit governing the rest of the API. For that reason, the response
@@ -104,15 +114,17 @@ object, the <code>"search"</code> object provides your rate limit status for the
 <a href="/v3/search">Search API</a>. The <code>"core"</code> object provides your rate limit status for
 all the <em>rest</em> of the API.</p>
 
-<h4 id="deprecation-notice">Deprecation Notice</h4>
+<h4>
+<a id="deprecation-notice" class="anchor" href="#deprecation-notice" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deprecation Notice</h4>
 
 <p>The <code>"rate"</code> object (shown at the bottom of the response above) is
 <a href="/v3/versions/#v3-deprecations">deprecated</a> and is scheduled for removal in the next
 version of the API.</p>
 
-<p>If you’re writing new API client code (or updating your existing code), you
+<p>If you're writing new API client code (or updating your existing code), you
 should use the <code>"core"</code> object instead of the <code>"rate"</code> object. The <code>"core"</code> object
 contains the same information that is present in the <code>"rate"</code> object.</p>
+
 
     </div>
 
@@ -275,7 +287,7 @@ contains the same information that is present in the <code>"rate"</code> object.
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

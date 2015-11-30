@@ -63,33 +63,36 @@
 
 
 
+
 <p>Have you ever wondered when your <a href="/v3/#rate-limiting">rate limit</a> will reset back to its maximum value?
 That information is now available in the new <code>X-RateLimit-Reset</code> response header.</p>
 
-<pre class="terminal"><code>$ curl -I https://api.github.com/orgs/octokit
+<pre class="command-line">
+<span class="command">curl -I https://api.github.com/orgs/octokit</span>
 
-HTTP/1.1 200 OK
-Status: 200 OK
-X-RateLimit-Limit: 60
-X-RateLimit-Remaining: 42
-X-RateLimit-Reset: 1372700873
-...
-</code></pre>
+<span class="output">HTTP/1.1 200 OK</span>
+<span class="output">Status: 200 OK</span>
+<span class="output">X-RateLimit-Limit: 60</span>
+<span class="output">X-RateLimit-Remaining: 42</span>
+<span class="output">X-RateLimit-Reset: 1372700873</span>
+<span class="output">...</span>
+</pre>
 
 <p>The <code>X-RateLimit-Reset</code> header provides a <a href="http://en.wikipedia.org/wiki/Unix_time">Unix UTC timestamp</a>, letting you know the exact time that your fresh new rate limit kicks in.</p>
 
 <p>The reset timestamp is also available as part of the <code>/rate_limit</code> resource.</p>
 
-<pre class="terminal"><code>$ curl https://api.github.com/rate_limit
+<pre class="command-line">
+<span class="command">curl https://api.github.com/rate_limit</span>
 
-{
-  "rate": {
-    "limit": 60,
-    "remaining": 42,
-    "reset": 1372700873
-  }
-}
-</code></pre>
+<span class="output">{</span>
+<span class="output">  "rate": {</span>
+<span class="output">    "limit": 60,</span>
+<span class="output">    "remaining": 42,</span>
+<span class="output">    "reset": 1372700873</span>
+<span class="output">  }</span>
+<span class="output">}</span>
+</pre>
 
 <p>For more information on rate limits, be sure to check out the <a href="/v3/#rate-limiting">docs</a>.</p>
 
@@ -114,11 +117,11 @@ X-RateLimit-Reset: 1372700873
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -150,7 +153,7 @@ X-RateLimit-Reset: 1372700873
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

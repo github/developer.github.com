@@ -54,101 +54,112 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="search-indexing">Search Indexing</h1>
+
+<h1>
+<a id="search-indexing" class="anchor" href="#search-indexing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Search Indexing</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#queue-an-indexing-job" id="markdown-toc-queue-an-indexing-job">Queue an indexing job</a></li>
+<li><a href="#queue-an-indexing-job" id="markdown-toc-queue-an-indexing-job">Queue an indexing job</a></li>
 </ul>
 
 <p>The Search Indexing API allows you to queue up a variety of search indexing tasks. <em>It is only available to <a href="/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>404</code> response if they try to access it.</p>
 
 <p>Prefix all the endpoints for this API with the following URL:</p>
 
-<pre class="terminal">
+<pre class="command-line">
 http(s)://<em>hostname</em>/api/v3
 </pre>
 
-<h2 id="queue-an-indexing-job">Queue an indexing job</h2>
+<h2>
+<a id="queue-an-indexing-job" class="anchor" href="#queue-an-indexing-job" aria-hidden="true"><span class="octicon octicon-link"></span></a>Queue an indexing job</h2>
 
 <pre><code>POST /staff/indexing_jobs
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3>
+<a id="input" class="anchor" href="#input" aria-hidden="true"><span class="octicon octicon-link"></span></a>Input</h3>
 
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>target</code></td>
-      <td><code>string</code></td>
-      <td>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target</code></td>
+<td><code>string</code></td>
+<td>
 <strong>Required</strong>. A string representing the item to index.</td>
-    </tr>
-  </tbody>
+</tr>
+</tbody>
 </table>
 
 <p>You can index the following targets (replace <code>:owner</code> with the name of a user or organization account and <code>:repository</code> with the name of a repository):</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Target</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>:owner</code></td>
-      <td>A user or organization account.</td>
-    </tr>
-    <tr>
-      <td><code>:owner/:repository</code></td>
-      <td>A repository.</td>
-    </tr>
-    <tr>
-      <td><code>:owner/*</code></td>
-      <td>All of a user or organization’s repositories.</td>
-    </tr>
-    <tr>
-      <td><code>:owner/:repository/issues</code></td>
-      <td>All the issues in a repository.</td>
-    </tr>
-    <tr>
-      <td><code>:owner/*/issues</code></td>
-      <td>All the issues in all of a user or organization’s repositories.</td>
-    </tr>
-    <tr>
-      <td><code>:owner/:repository/code</code></td>
-      <td>All the source code in a repository.</td>
-    </tr>
-    <tr>
-      <td><code>:owner/*/code</code></td>
-      <td>All the source code in all of a user or organization’s repositories.</td>
-    </tr>
-  </tbody>
+<thead>
+<tr>
+<th>Target</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:owner</code></td>
+<td>A user or organization account.</td>
+</tr>
+<tr>
+<td><code>:owner/:repository</code></td>
+<td>A repository.</td>
+</tr>
+<tr>
+<td><code>:owner/*</code></td>
+<td>All of a user or organization's repositories.</td>
+</tr>
+<tr>
+<td><code>:owner/:repository/issues</code></td>
+<td>All the issues in a repository.</td>
+</tr>
+<tr>
+<td><code>:owner/*/issues</code></td>
+<td>All the issues in all of a user or organization's repositories.</td>
+</tr>
+<tr>
+<td><code>:owner/:repository/code</code></td>
+<td>All the source code in a repository.</td>
+</tr>
+<tr>
+<td><code>:owner/*/code</code></td>
+<td>All the source code in all of a user or organization's repositories.</td>
+</tr>
+</tbody>
 </table>
 
-<h3 id="example">Example</h3>
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
-<pre class="terminal">
-$ curl -u jwatson -X POST -H "Content-Type: application/json" -d '{"target": "kansaichris/japaning"}' "http://<em>hostname</em>/api/v3/staff/indexing_jobs"
+<pre class="command-line">
+<span class="command">curl -u jwatson -X POST -H "Content-Type: application/json" -d '{"target": "kansaichris/japaning"}' "http://<em>hostname</em>/api/v3/staff/indexing_jobs"</span>
 </pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 202 Accepted
+<pre class="highlight highlight-headers"><code>Status: 202 Accepted
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"Repository 'kansaichris/japaning' has been added to the indexing queue"</span>
-<span class="p">}</span></code></pre>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repository 'kansaichris/japaning' has been added to the indexing queue"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
 
     </div>
 
@@ -311,7 +322,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

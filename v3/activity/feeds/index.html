@@ -54,30 +54,33 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="feeds">Feeds</h1>
+
+<h1>
+<a id="feeds" class="anchor" href="#feeds" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feeds</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-feeds" id="markdown-toc-list-feeds">List Feeds</a></li>
+<li><a href="#list-feeds" id="markdown-toc-list-feeds">List Feeds</a></li>
 </ul>
 
-<h2 id="list-feeds">List Feeds</h2>
+<h2>
+<a id="list-feeds" class="anchor" href="#list-feeds" aria-hidden="true"><span class="octicon octicon-link"></span></a>List Feeds</h2>
 
 <p>GitHub provides several timeline resources in <a href="http://en.wikipedia.org/wiki/Atom_(standard)">Atom</a> format. The Feeds API
 lists all the feeds available to the authenticated user:</p>
 
 <ul>
-  <li>
+<li>
 <strong>Timeline</strong>: The GitHub global public timeline</li>
-  <li>
+<li>
 <strong>User</strong>: The public timeline for any user, using <a href="https://developer.github.com/v3/#hypermedia">URI template</a>
 </li>
-  <li>
+<li>
 <strong>Current user public</strong>: The public timeline for the authenticated user</li>
-  <li>
+<li>
 <strong>Current user</strong>: The private timeline for the authenticated user</li>
-  <li>
+<li>
 <strong>Current user actor</strong>: The private timeline for activity created by the authenticated user</li>
-  <li>
+<li>
 <strong>Current user organizations</strong>: The private timeline for the organizations the authenticated user is a member of.</li>
 </ul>
 
@@ -88,55 +91,60 @@ tokens.</p>
 <pre><code>GET /feeds
 </code></pre>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"timeline_url"</span><span class="err">:</span> <span class="s2">"https://github.com/timeline"</span><span class="p">,</span>
-  <span class="s2">"user_url"</span><span class="err">:</span> <span class="s2">"https://github.com/{user}"</span><span class="p">,</span>
-  <span class="s2">"current_user_public_url"</span><span class="err">:</span> <span class="s2">"https://github.com/defunkt"</span><span class="p">,</span>
-  <span class="s2">"current_user_url"</span><span class="err">:</span> <span class="s2">"https://github.com/defunkt.private?token=abc123"</span><span class="p">,</span>
-  <span class="s2">"current_user_actor_url"</span><span class="err">:</span> <span class="s2">"https://github.com/defunkt.private.actor?token=abc123"</span><span class="p">,</span>
-  <span class="s2">"current_user_organization_url"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
-  <span class="s2">"current_user_organization_urls"</span><span class="err">:</span> <span class="p">[</span>
-    <span class="s2">"https://github.com/organizations/github/defunkt.private.atom?token=abc123"</span>
-  <span class="p">],</span>
-  <span class="s2">"_links"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"timeline"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"href"</span><span class="err">:</span> <span class="s2">"https://github.com/timeline"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"application/atom+xml"</span>
-    <span class="p">},</span>
-    <span class="s2">"user"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"href"</span><span class="err">:</span> <span class="s2">"https://github.com/{user}"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"application/atom+xml"</span>
-    <span class="p">},</span>
-    <span class="s2">"current_user_public"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"href"</span><span class="err">:</span> <span class="s2">"https://github.com/defunkt"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"application/atom+xml"</span>
-    <span class="p">},</span>
-    <span class="s2">"current_user"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"href"</span><span class="err">:</span> <span class="s2">"https://github.com/defunkt.private?token=abc123"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"application/atom+xml"</span>
-    <span class="p">},</span>
-    <span class="s2">"current_user_actor"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"href"</span><span class="err">:</span> <span class="s2">"https://github.com/defunkt.private.actor?token=abc123"</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="err">:</span> <span class="s2">"application/atom+xml"</span>
-    <span class="p">},</span>
-    <span class="s2">"current_user_organization"</span><span class="err">:</span> <span class="p">{</span>
-      <span class="s2">"href"</span><span class="err">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"type"</span><span class="err">:</span> <span class="s2">""</span>
-    <span class="p">},</span>
-    <span class="s2">"current_user_organizations"</span><span class="err">:</span> <span class="p">[</span>
-      <span class="p">{</span>
-        <span class="s2">"href"</span><span class="p">:</span> <span class="s2">"https://github.com/organizations/github/defunkt.private.atom?token=abc123"</span><span class="p">,</span>
-        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"application/atom+xml"</span>
-      <span class="p">}</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">}</span></code></pre>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"timeline_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/timeline"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/{user}"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"current_user_public_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/defunkt"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"current_user_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/defunkt.private?token=abc123"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"current_user_actor_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/defunkt.private.actor?token=abc123"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"current_user_organization_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"current_user_organization_urls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"https://github.com/organizations/github/defunkt.private.atom?token=abc123"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"timeline"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/timeline"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/atom+xml"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/{user}"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/atom+xml"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"current_user_public"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/defunkt"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/atom+xml"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"current_user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/defunkt.private?token=abc123"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/atom+xml"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"current_user_actor"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/defunkt.private.actor?token=abc123"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/atom+xml"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"current_user_organization"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"current_user_organizations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"href"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/organizations/github/defunkt.private.atom?token=abc123"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/atom+xml"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 
 
     </div>
@@ -300,7 +308,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

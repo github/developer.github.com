@@ -43,40 +43,10 @@
   <div id="wrapper">
     <div class="content">
       
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca" data-proofer-ignore="">
-      <a href="https://github.com/foca" data-proofer-ignore="">foca</a>
-  </li>
-</ul>
-</div>
-
-    
-<p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="terminal"><code>curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</code></pre>
-
-<p>Enjoy.</p>
-
-
-</div>
 
 <div class="change" id="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">
   <h2 class="title">
+<a id="--improved-support-for-submodules-in-the-repository-contents-api" class="anchor" href="#--improved-support-for-submodules-in-the-repository-contents-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-04-30-improved-submodule-support-in-repository-contents-api/">Improved Support for Submodules in the Repository Contents API</a>
 </h2>
 
@@ -88,47 +58,81 @@ has been extended to allow branch and tag names, as well as commit SHAs.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
-    
 <p>When you view a repository with a submodule on github.com, you get useful links and information for the submodule.</p>
 
 <p><a href="/assets/images/posts/submodule-links.png"><img src="/assets/images/posts/submodule-links.png" alt="Repository Contents with Submodule"></a></p>
 
-<p>Today we’re making that data available in the <a href="/v3/repos/contents/#get-contents">Repository Contents API</a>.</p>
+<p>Today we're making that data available in the <a href="/v3/repos/contents/#get-contents">Repository Contents API</a>.</p>
 
-<pre class="terminal"><code>curl https://api.github.com/repos/jquery/jquery/contents/test/qunit
+<pre class="command-line">
+<span class="command">curl https://api.github.com/repos/jquery/jquery/contents/test/qunit</span>
 
-{
-  "name": "qunit",
-  "path": "test/qunit",
-  "type": "submodule",
-  "submodule_git_url": "git://github.com/jquery/qunit.git",
-  "sha": "6ca3721222109997540bd6d9ccd396902e0ad2f9",
-  "size": 0,
-  "url": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
-  "git_url": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
-  "html_url": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",
-  "_links": {
-    "self": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",
-    "git": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",
-    "html": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"
-  }
-}
-</code></pre>
+<span class="output">{</span>
+<span class="output">  "name": "qunit",</span>
+<span class="output">  "path": "test/qunit",</span>
+<span class="output">  "type": "submodule",</span>
+<span class="output"> "submodule_git_url": "git://github.com/jquery/qunit.git",</span>
+<span class="output"> "sha": "6ca3721222109997540bd6d9ccd396902e0ad2f9",</span>
+<span class="output"> "size": 0,</span>
+<span class="output"> "url": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",</span>
+<span class="output"> "git_url": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",</span>
+<span class="output"> "html_url": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9",</span>
+<span class="output"> "_links": {</span>
+<span class="output">   "self": "https://api.github.com/repos/jquery/jquery/contents/test/qunit?ref=master",</span>
+<span class="output">    "git": "https://api.github.com/repos/jquery/qunit/git/trees/6ca3721222109997540bd6d9ccd396902e0ad2f9",</span>
+<span class="output">    "html": "https://github.com/jquery/qunit/tree/6ca3721222109997540bd6d9ccd396902e0ad2f9"</span>
+<span class="output">  }</span>
+<span class="output">}</span>
+</pre>
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Submodules%20in%20Repository%20Contents%20API">support@github.com</a>.</p>
 
+<p></p>
+</div>
 
+<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
+  <h2 class="title">
+<a id="--commit-statuses-now-available-for-branches-and-tags" class="anchor" href="#--commit-statuses-now-available-for-branches-and-tags" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 30, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca" data-proofer-ignore>
+      <a href="https://github.com/foca" data-proofer-ignore>foca</a>
+  </li>
+</ul>
+</div>
+
+<p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
+Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
+has been extended to allow branch and tag names, as well as commit SHAs.</p>
+
+<pre class="command-line">
+curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
+</pre>
+
+<p>Enjoy.</p>
+
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
   <h2 class="title">
+<a id="--deprecating-a-confusing-attribute-in-the-pull-request-api" class="anchor" href="#--deprecating-a-confusing-attribute-in-the-pull-request-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Deprecating a Confusing Attribute in the Pull Request API</a>
 </h2>
 
@@ -140,13 +144,12 @@ has been extended to allow branch and tag names, as well as commit SHAs.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore="">
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore="">jasonrudolph</a>
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
   </li>
 </ul>
 </div>
 
-    
 <p>When you get the details for a Pull Request from the API, the
 <a href="/v3/pulls/#get-a-single-pull-request">response</a> provides everything there is to
 know about that Pull Request. In addition to the useful information provided in
@@ -154,7 +157,7 @@ the API response, the JSON also includes the <code>merge_commit_sha</code> attri
 attribute is a frequent source of misunderstanding, and we aim to remove the
 confusion.</p>
 
-<p>To help current API consumers, we’ve <a href="/v3/pulls/#get-a-single-pull-request">documented the
+<p>To help current API consumers, we've <a href="/v3/pulls/#get-a-single-pull-request">documented the
 attribute</a> for improved understanding.</p>
 
 <p>To protect future API consumers from this confusion, we have
@@ -164,10 +167,12 @@ remove it in the next major version of the API.</p>
 <p>As always, if you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Deprecating%20merge_commit_sha">support@github.com</a>.</p>
 
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-04-24-user-agent-required/">
   <h2 class="title">
+<a id="--user-agent-now-mandatory" class="anchor" href="#--user-agent-now-mandatory" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-04-24-user-agent-required/">User Agent now mandatory</a>
 </h2>
 
@@ -179,25 +184,26 @@ remove it in the next major version of the API.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
-<p>After an almost six week grace period, we’re now enforcing the <a href="/v3/#user-agent-required">User Agent
+<p>After an almost six week grace period, we're now enforcing the <a href="/v3/#user-agent-required">User Agent
 header</a> for all API requests. Most HTTP libraries (including cURL)
-set this header by default. If you’re experiencing an increase in <code>403</code>
+set this header by default. If you're experiencing an increase in <code>403</code>
 responses, be sure and check your code.</p>
 
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=User%20Agent%20Requirement">support@github.com</a>.</p>
 
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-03-01-new-hookshot-coming/">
   <h2 class="title">
+<a id="--new-hookshot-changes" class="anchor" href="#--new-hookshot-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-03-01-new-hookshot-coming/">New Hookshot Changes</a>
 </h2>
 
@@ -209,20 +215,19 @@ responses, be sure and check your code.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore="">
-      <a href="https://github.com/technoweenie" data-proofer-ignore="">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
   </li>
 </ul>
 </div>
 
-    
-<p>We are experimenting with changes to the “Hookshot” backend that powers service
+<p>We are experimenting with changes to the "Hookshot" backend that powers service
 hooks.  There were some significant networking changes with the new cluster,
 so there are some new IP whitelist rules for hooks:</p>
 
 <ul>
-  <li>204.232.175.64/27</li>
-  <li>192.30.252.0/22</li>
+<li>204.232.175.64/27</li>
+<li>192.30.252.0/22</li>
 </ul>
 
 <p>These are in CIDR notation.  They represent a significant range of GitHub
@@ -236,10 +241,12 @@ organization only, and expect to start testing it with user data next week.</p>
 <p>This also means we should be able to start accepting <a href="https://github.com/github/github-services/pulls">GitHub Services pull
 requests</a> very soon :)</p>
 
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-02-14-sortable-stars/">
   <h2 class="title">
+<a id="--sortable-stars-in-repository-starring-api" class="anchor" href="#--sortable-stars-in-repository-starring-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-02-14-sortable-stars/">Sortable Stars in Repository Starring API</a>
 </h2>
 
@@ -251,27 +258,28 @@ requests</a> very soon :)</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
 <p>As we <a href="https://github.com/blog/1410-sortable-stars">announced on the GitHub blog</a>, Stars now support sorting. The
 Repository Starring API now supports <a href="/v3/activity/starring/#list-repositories-being-starred">two new parameters</a> when listing
 Stars: <code>sort</code> and <code>direction</code>.</p>
 
-<pre class="terminal"><code>curl https://api.github.com/users/defunkt/starred?sort=created&amp;direction=asc
-</code></pre>
+<pre class="command-line">
+<span class="command">curl https://api.github.com/users/defunkt/starred?sort=created&amp;direction=asc</span>
+</pre>
 
 <p>Enjoy.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-02-13-hookshot-load-balancer/">
   <h2 class="title">
+<a id="--hookshot-load-balancer" class="anchor" href="#--hookshot-load-balancer" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-02-13-hookshot-load-balancer/">Hookshot Load balancer</a>
 </h2>
 
@@ -283,24 +291,25 @@ Stars: <code>sort</code> and <code>direction</code>.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore="">
-      <a href="https://github.com/technoweenie" data-proofer-ignore="">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
   </li>
 </ul>
 </div>
 
-    
 <p>We had an issue with the Hookshot load balancer this morning, causing the
 majority of hooks to flow to a single node only.  This lead to massive queue
-times.  While fixing this, we’re putting the old Services backend in use.</p>
+times.  While fixing this, we're putting the old Services backend in use.</p>
 
 <p>This means the old IPs are back in use.  Use this <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">Help guide</a>
 if you already removed them from your firewall.</p>
 
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-02-13-hookshot-issues/">
   <h2 class="title">
+<a id="--some-hookshot-issues" class="anchor" href="#--some-hookshot-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-02-13-hookshot-issues/">Some Hookshot Issues</a>
 </h2>
 
@@ -312,13 +321,12 @@ if you already removed them from your firewall.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore="">
-      <a href="https://github.com/technoweenie" data-proofer-ignore="">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
   </li>
 </ul>
 </div>
 
-    
 <p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
 been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
 the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
@@ -327,17 +335,19 @@ the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
 an IP restriction, we recommend the following:</p>
 
 <ol>
-  <li>Remove the IP white list.</li>
-  <li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
+<li>Remove the IP white list.</li>
+<li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
 </ol>
 
-<p>We’re currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
+<p>We're currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
 if you have any questions.</p>
 
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-02-05-changes-to-services/">
   <h2 class="title">
+<a id="--upcoming-changes-to-github-services" class="anchor" href="#--upcoming-changes-to-github-services" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-02-05-changes-to-services/">Upcoming Changes to GitHub Services</a>
 </h2>
 
@@ -349,49 +359,43 @@ if you have any questions.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore="">
-      <a href="https://github.com/technoweenie" data-proofer-ignore="">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
   </li>
 </ul>
 </div>
 
-    
-<p>We are finishing up a new GitHub Services backend, dubbed “Hookshot”, to
+<p>We are finishing up a new GitHub Services backend, dubbed "Hookshot", to
 increase the speed and reliability of our delivered payloads.  We are doing
 what we can to make this a seamless transition for everyone.  However, there
 are a few notable changes.</p>
 
 <ul>
-  <li>
-    <p>There is a new <a href="http://developer.github.com/v3/meta/">Meta API endpoint</a>
-listing the current public IPs that hooks originate from.</p>
-  </li>
-  <li>
-    <p>We’re removing the AMQP service from GitHub. It hasn’t worked in quite some
-time, and the code it uses doesn’t work in our background workers.</p>
-  </li>
-  <li>
-    <p>We’re also instituting a new guideline to improve the reliability and
+<li><p>There is a new <a href="http://developer.github.com/v3/meta/">Meta API endpoint</a>
+listing the current public IPs that hooks originate from.</p></li>
+<li><p>We're removing the AMQP service from GitHub. It hasn't worked in quite some
+time, and the code it uses doesn't work in our background workers.</p></li>
+<li><p>We're also instituting a new guideline to improve the reliability and
 maintainability of services in the future. As of today, all new services must
 accept an unmodified payload over HTTP. Any service that does not will be
 rejected. To see an example of an acceptable service, check out <a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb">Code Climate</a>.
 Notice their service simply accepts HTTP POST from GitHub unmodified. For an
-example of a service that won’t be accepted after today, check out <a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb">Campfire</a>. It
+example of a service that won't be accepted after today, check out <a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb">Campfire</a>. It
 uses other Ruby gems and contains custom logic to transform the GitHub payload
-to Campfire messages.  Existing hooks will keep working (don’t worry 37signals, we
-:heart: Campfire).</p>
-  </li>
+to Campfire messages.  Existing hooks will keep working (don't worry 37signals, we
+<img class="emoji" title=":heart:" alt=":heart:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2764.png" height="20" width="20" align="absmiddle"> Campfire).</p></li>
 </ul>
 
-<p>We’re making these changes because we want to focus on the reliability of the
+<p>We're making these changes because we want to focus on the reliability of the
 core Services backend for everyone.  Maintaining custom logic and libraries for
 over 100 services is taking too much of this focus away.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">
   <h2 class="title">
+<a id="--user-agent-mandatory-from-march-4th-2013" class="anchor" href="#--user-agent-mandatory-from-march-4th-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">User Agent mandatory from March 4th 2013</a>
 </h2>
 
@@ -403,13 +407,12 @@ over 100 services is taking too much of this focus away.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/agh.png" alt="Avatar for agh" data-proofer-ignore="">
-      <a href="https://github.com/agh" data-proofer-ignore="">agh</a>
+    <img height="16" width="16" src="https://github.com/agh.png" alt="Avatar for agh" data-proofer-ignore>
+      <a href="https://github.com/agh" data-proofer-ignore>agh</a>
   </li>
 </ul>
 </div>
 
-    
 <p>Following on from our <a href="http://developer.github.com/changes/2012-10-14-rate-limit-changes/">previous post</a>
 about requiring requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent header</a>
 we will soon be changing our API servers to return HTTP 403 
@@ -425,6 +428,7 @@ many of our users to make any changes whatsoever.</p>
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=User%20Agent%20Requirement">support@github.com</a>.</p>
 
+<p></p>
 </div>
 
 <div class="paginate-container">
@@ -513,7 +517,9 @@ many of our users to make any changes whatsoever.</p>
   
 </div>
 
+<p></p>
 </div>
+
 
     </div>
 
@@ -676,7 +682,7 @@ many of our users to make any changes whatsoever.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

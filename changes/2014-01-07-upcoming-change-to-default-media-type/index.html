@@ -63,17 +63,21 @@
 
 
 
-<p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you’ll find tips below to help you smoothly navigate this change.</p>
 
-<h2 id="whats-changing">What’s changing?</h2>
+<p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you'll find tips below to help you smoothly navigate this change.</p>
 
-<h3 id="a-new-default-version">A new default version</h3>
+<h2>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's changing?</h2>
+
+<h3>
+<a id="a-new-default-version" class="anchor" href="#a-new-default-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new default version</h3>
 
 <p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. Today, requests receive the beta version by default. On April 15<a href="#cutover-test">*</a>, requests will begin receiving the v3 version by default.</p>
 
 <p>For the most part, beta and v3 are remarkably similar. There are <a href="/v3/versions/#differences-from-beta-version">just a few differences</a> to keep in mind.</p>
 
-<h3 id="a-new-default-media-type">A new default media type</h3>
+<h3>
+<a id="a-new-default-media-type" class="anchor" href="#a-new-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new default media type</h3>
 
 <p>The version is one part of the <a href="/v3/media">media type</a>. By default, the API provides the beta media type:</p>
 
@@ -85,34 +89,40 @@
 <pre><code>application/vnd.github.v3+json
 </code></pre>
 
-<h2 id="who-is-affected">Who is affected?</h2>
+<h2>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who is affected?</h2>
 
 <p>Since 2012, we have encouraged developers to explicitly <a href="/v3/media/#request-specific-version">request a specific media type via the <code>Accept</code> header</a>. If you are requesting either beta or v3 via the <code>Accept</code> header, then you are <em>not</em> affected by this change. The API will continue to respond with the requested media type.</p>
 
 <p>If you are not requesting beta or v3 via the <code>Accept</code> header, then the API is currently responding with the beta media type. On April 15<a href="#cutover-test">*</a>, the API will begin responding with the v3 media type. If your application relies on <a href="/v3/versions/#differences-from-beta-version">functionality that differs between beta and v3</a>, then you are affected by this change. You will need to take steps to prepare for the change.</p>
 
-<h2 id="what-should-you-do">What should you do?</h2>
+<h2>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h2>
 
 <p>If you are affected by this change, we recommend that you:</p>
 
 <ol>
-  <li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there’s a good chance that they’ve already done the work for you. In that case, you can just update to the latest version of that library.)</li>
-  <li>Request the v3 media type via the <code>Accept</code> header.</li>
+<li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there's a good chance that they've already done the work for you. In that case, you can just update to the latest version of that library.)</li>
+<li>Request the v3 media type via the <code>Accept</code> header.</li>
 </ol>
 
 <p>If you cannot update your application to depend on the v3 functionality by April 15<a href="#cutover-test">*</a>, you can just request the beta media type via the <code>Accept</code> header. Doing so will insulate you from this change.</p>
 
-<h2 id="cutover-test">Cutover test on March 12, 2014</h2>
+<p><a id="cutover-test"></a></p>
+
+<h2>
+<a id="cutover-test-on-march-12-2014" class="anchor" href="#cutover-test-on-march-12-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cutover test on March 12, 2014</h2>
 
 <p>To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.</p>
 
 <p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
 
-<h2 id="stay-informed">Stay informed</h2>
+<h2>
+<a id="stay-informed" class="anchor" href="#stay-informed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stay informed</h2>
 
-<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we’ll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
+<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we'll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
 
-<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We’ll be happy to help.</p>
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We'll be happy to help.</p>
 
 
 </div>
@@ -133,11 +143,11 @@
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -169,7 +179,7 @@
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

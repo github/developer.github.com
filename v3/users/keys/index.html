@@ -54,69 +54,84 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="public-keys">Public Keys</h1>
+
+<h1>
+<a id="public-keys" class="anchor" href="#public-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public Keys</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#list-public-keys-for-a-user" id="markdown-toc-list-public-keys-for-a-user">List public keys for a user</a></li>
-  <li><a href="#list-your-public-keys" id="markdown-toc-list-your-public-keys">List your public keys</a></li>
-  <li><a href="#get-a-single-public-key" id="markdown-toc-get-a-single-public-key">Get a single public key</a></li>
-  <li><a href="#create-a-public-key" id="markdown-toc-create-a-public-key">Create a public key</a></li>
-  <li><a href="#update-a-public-key" id="markdown-toc-update-a-public-key">Update a public key</a></li>
-  <li><a href="#delete-a-public-key" id="markdown-toc-delete-a-public-key">Delete a public key</a></li>
+<li><a href="#list-public-keys-for-a-user" id="markdown-toc-list-public-keys-for-a-user">List public keys for a user</a></li>
+<li><a href="#list-your-public-keys" id="markdown-toc-list-your-public-keys">List your public keys</a></li>
+<li><a href="#get-a-single-public-key" id="markdown-toc-get-a-single-public-key">Get a single public key</a></li>
+<li><a href="#create-a-public-key" id="markdown-toc-create-a-public-key">Create a public key</a></li>
+<li><a href="#update-a-public-key" id="markdown-toc-update-a-public-key">Update a public key</a></li>
+<li><a href="#delete-a-public-key" id="markdown-toc-delete-a-public-key">Delete a public key</a></li>
 </ul>
 
-<h2 id="list-public-keys-for-a-user">List public keys for a user</h2>
+<h2>
+<a id="list-public-keys-for-a-user" class="anchor" href="#list-public-keys-for-a-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>List public keys for a user</h2>
 
 <pre><code>GET /users/:username/keys
 </code></pre>
 
 <p>Lists the <em>verified</em> public keys for a user.  This is accessible by anyone.</p>
 
-<h3 id="response">Response</h3>
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
       &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
 
-<h2 id="list-your-public-keys">List your public keys</h2>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAA..."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="list-your-public-keys" class="anchor" href="#list-your-public-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>List your public keys</h2>
 
 <pre><code>GET /user/keys
 </code></pre>
 
-<p>Lists the current user’s keys. Requires that you are authenticated via
+<p>Lists the current user's keys. Requires that you are authenticated via
 Basic Auth or via OAuth with at least <code>read:public_key</code>
 <a href="/v3/oauth/#scopes">scope</a>.</p>
 
-<h3 id="response-1">Response</h3>
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
       &lt;https://api.github.com/resource?page=5&gt;; rel="last"
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-    <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span>
-    <span class="s2">"read_only"</span><span class="p">:</span> <span class="kc">true</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
 
-<h2 id="get-a-single-public-key">Get a single public key</h2>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@octomac"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-a-single-public-key" class="anchor" href="#get-a-single-public-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get a single public key</h2>
 
 <p>View extended details for a single public key. Requires that you are
 authenticated via Basic Auth or via OAuth with at least <code>read:public_key</code>
@@ -125,23 +140,29 @@ authenticated via Basic Auth or via OAuth with at least <code>read:public_key</c
 <pre><code>GET /user/keys/:id
 </code></pre>
 
-<h3 id="response-2">Response</h3>
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 200 OK
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="err">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="err">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"verified"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span>
-  <span class="s2">"read_only"</span><span class="err">:</span> <span class="kc">true</span>
-<span class="p">}</span></code></pre>
 
-<h2 id="create-a-public-key">Create a public key</h2>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@octomac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="create-a-public-key" class="anchor" href="#create-a-public-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a public key</h2>
 
 <p>Creates a public key. Requires that you are authenticated via Basic Auth,
 or OAuth with at least <code>write:public_key</code> <a href="/v3/oauth/#scopes">scope</a>.</p>
@@ -150,7 +171,7 @@ or OAuth with at least <code>write:public_key</code> <a href="/v3/oauth/#scopes"
 
 <div class="alert warning">
 
-<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize SSH keys enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won’t be able to add an SSH key address via the API with these options enabled.</p>
+<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize SSH keys enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won't be able to add an SSH key address via the API with these options enabled.</p>
 
 </div>
 
@@ -159,37 +180,47 @@ or OAuth with at least <code>write:public_key</code> <a href="/v3/oauth/#scopes"
 <pre><code>POST /user/keys
 </code></pre>
 
-<h3 id="input">Input</h3>
+<h3>
+<a id="input" class="anchor" href="#input" aria-hidden="true"><span class="octicon octicon-link"></span></a>Input</h3>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"title"</span><span class="err">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="err">:</span> <span class="s2">"ssh-rsa AAA..."</span>
-<span class="p">}</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@octomac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAA..."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<h3 id="response-3">Response</h3>
 
-<pre class="headers"><code>Status: 201 Created
+<h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 201 Created
 Location: https://api.github.com/user/keys/1
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">"key"</span><span class="err">:</span> <span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span>
-  <span class="s2">"url"</span><span class="err">:</span> <span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span>
-  <span class="s2">"title"</span><span class="err">:</span> <span class="s2">"octocat@octomac"</span><span class="p">,</span>
-  <span class="s2">"verified"</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="s2">"created_at"</span><span class="err">:</span> <span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span>
-  <span class="s2">"read_only"</span><span class="err">:</span> <span class="kc">true</span>
-<span class="p">}</span></code></pre>
 
-<h2 id="update-a-public-key">Update a public key</h2>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@octomac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="update-a-public-key" class="anchor" href="#update-a-public-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update a public key</h2>
 
 <p>Public keys are immutable. If you need to update a public key, <a href="#delete-a-public-key">remove the
 key</a> and <a href="#create-a-public-key">create a new one</a>
 instead.</p>
 
-<h2 id="delete-a-public-key">Delete a public key</h2>
+<h2>
+<a id="delete-a-public-key" class="anchor" href="#delete-a-public-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete a public key</h2>
 
 <p>Removes a public key. Requires that you are authenticated via Basic Auth
 or via OAuth with at least <code>admin:public_key</code> <a href="/v3/oauth/#scopes">scope</a>.</p>
@@ -198,7 +229,7 @@ or via OAuth with at least <code>admin:public_key</code> <a href="/v3/oauth/#sco
 
 <div class="alert warning">
 
-<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize SSH keys enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won’t be able to remove an SSH key address via the API with these options enabled.</p>
+<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize SSH keys enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won't be able to remove an SSH key address via the API with these options enabled.</p>
 
 </div>
 
@@ -207,11 +238,14 @@ or via OAuth with at least <code>admin:public_key</code> <a href="/v3/oauth/#sco
 <pre><code>DELETE /user/keys/:id
 </code></pre>
 
-<h3 id="response-4">Response</h3>
+<h3>
+<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
-<pre class="headers"><code>Status: 204 No Content
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
+X-RateLimit-Remaining: 4999
+</code></pre>
+
 
 
     </div>
@@ -375,7 +409,7 @@ X-RateLimit-Remaining: 4999</code></pre>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

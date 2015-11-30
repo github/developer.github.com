@@ -53,39 +53,49 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1 id="versions">Versions</h1>
+      
+
+<h1>
+<a id="versions" class="anchor" href="#versions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Versions</h1>
 
 <p>There are two stable versions of the GitHub API: the <a href="#v3">v3</a> version and the deprecated <a href="#beta">beta</a> version. There are just a few <a href="#differences-from-beta-version">differences between these two versions</a>.</p>
 
 <p>By default, all requests receive the v3 version. We encourage you to <a href="/v3/media/#request-specific-version">request a specific version via the <code>Accept</code> header</a>.</p>
 
-<h1 id="v3">v3</h1>
+<h1>
+<a id="v3" class="anchor" href="#v3" aria-hidden="true"><span class="octicon octicon-link"></span></a>v3</h1>
 
 <p>The <a href="/v3">v3 API</a> is stable, and we strive to ensure that all <a href="/changes">changes</a> are backwards compatible. Please <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">file a support issue</a> if you have problems.</p>
 
 <p>Some v3 functionality is <a href="#v3-deprecations">deprecated</a> and will be removed in the next major version of the API.</p>
 
-<h2 id="differences-from-beta-version">Differences from beta version</h2>
+<h2>
+<a id="differences-from-beta-version" class="anchor" href="#differences-from-beta-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Differences from beta version</h2>
 
 <p>The v3 media type differs from the beta media type in just a few places:</p>
 
-<h3 id="gist-json">Gist JSON</h3>
+<h3>
+<a id="gist-json" class="anchor" href="#gist-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gist JSON</h3>
 
 <p>For <a href="/v3/gists/#get-a-single-gist">Gists</a>, the v3 media type renames the <code>user</code> attribute to <code>owner</code>.</p>
 
-<h3 id="issue-json">Issue JSON</h3>
+<h3>
+<a id="issue-json" class="anchor" href="#issue-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Issue JSON</h3>
 
 <p>When an <a href="/v3/issues/#get-a-single-issue">issue</a> is not a pull request, the v3 media type omits the <code>pull_request</code> attribute.</p>
 
-<h3 id="repository-json">Repository JSON</h3>
+<h3>
+<a id="repository-json" class="anchor" href="#repository-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repository JSON</h3>
 
-<p>For <a href="/v3/repos/#get">Repositories</a>, the v3 media type omits the <code>master_branch</code> attribute. API clients should use the <code>default_branch</code> attribute to obtain the repository’s default branch.</p>
+<p>For <a href="/v3/repos/#get">Repositories</a>, the v3 media type omits the <code>master_branch</code> attribute. API clients should use the <code>default_branch</code> attribute to obtain the repository's default branch.</p>
 
-<h3 id="user-emails-json">User Emails JSON</h3>
+<h3>
+<a id="user-emails-json" class="anchor" href="#user-emails-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Emails JSON</h3>
 
 <p>For <a href="/v3/users/emails/#list-email-addresses-for-a-user">User Emails</a>, the v3 media type returns an array of objects (instead of an array of strings).</p>
 
-<h2 id="v3-deprecations">v3 deprecations</h2>
+<h2>
+<a id="v3-deprecations" class="anchor" href="#v3-deprecations" aria-hidden="true"><span class="octicon octicon-link"></span></a>v3 deprecations</h2>
 
 <p>The following functionality is deprecated. For backwards compatibility purposes,
 v3 will continue to provide this functionality. However, this deprecated
@@ -94,161 +104,68 @@ functionality <em>will be removed</em> in the next major version of the API.</p>
 <p>The recommendations below will help you prepare your application for the next major version of the API.</p>
 
 <ol>
-  <li>
-    <dl>
-      <dt>Method: /gists/:id/fork</dt>
-      <dd>Recommendation: Use <strong>/gists/:id/forks</strong> (plural) instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Method: /legacy/issues/search/:owner/:repository/:state/:keyword</dt>
-      <dd>Recommendation: Use <a href="/v3/search/#search-issues">v3 Issue Search API</a> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Method: /legacy/repos/search/:keyword</dt>
-      <dd>Recommendation: Use <a href="/v3/search/#search-repositories">v3 Repository Search API</a> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Method: /legacy/user/search/:keyword</dt>
-      <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Method: /legacy/user/email/:email</dt>
-      <dd>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Method: /repos/:owner/:repo/hooks/:id/test</dt>
-      <dd>Recommendation: Use <strong>/repos/:owner/:repo/hooks/:id/tests</strong> (plural) instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Method: /teams/:id/members/:username</dt>
-      <dd>Recommendation: Use <a href="/v3/orgs/teams/#get-team-membership">Get Team Membership</a>, <a href="/v3/orgs/teams/#add-team-membership">Add Team Membership</a>, and <a href="/v3/orgs/teams/#remove-team-membership">Remove Team Membership</a> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Query parameters when POSTing to /repos/:owner/:repo/forks</dt>
-      <dd>Recommendation: Use JSON to POST to this method instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Query parameter value: Passing “watchers” as the value for the “sort” parameter in a GET request to /repos/:owner/:repo/forks</dt>
-      <dd>Recommendation: Use <strong>stargazers</strong> as the value instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Pull Request attribute: merge_commit_sha</dt>
-      <dd>Recommendation: <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Do not use this attribute</a>.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Rate Limit attribute: rate</dt>
-      <dd>Recommendation: Use <strong>resources[“core”]</strong> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Repository attribute: forks</dt>
-      <dd>Recommendation: Use <strong>forks_count</strong> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Repository attribute: master_branch</dt>
-      <dd>Recommendation: Use <strong>default_branch</strong> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Repository attribute: open_issues</dt>
-      <dd>Recommendation: Use <strong>open_issues_count</strong> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Repository attribute: public</dt>
-      <dd>Recommendation: When <a href="/v3/repos/#create">creating a repository</a>, use the
+<li><p>Method: /gists/:id/fork
+: Recommendation: Use <strong>/gists/:id/forks</strong> (plural) instead.</p></li>
+<li><p>Method: /legacy/issues/search/:owner/:repository/:state/:keyword
+: Recommendation: Use <a href="/v3/search/#search-issues">v3 Issue Search API</a> instead.</p></li>
+<li><p>Method: /legacy/repos/search/:keyword
+: Recommendation: Use <a href="/v3/search/#search-repositories">v3 Repository Search API</a> instead.</p></li>
+<li><p>Method: /legacy/user/search/:keyword
+: Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</p></li>
+<li><p>Method: /legacy/user/email/:email
+: Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</p></li>
+<li><p>Method: /repos/:owner/:repo/hooks/:id/test
+: Recommendation: Use <strong>/repos/:owner/:repo/hooks/:id/tests</strong> (plural) instead.</p></li>
+<li><p>Method: /teams/:id/members/:username
+: Recommendation: Use <a href="/v3/orgs/teams/#get-team-membership">Get Team Membership</a>, <a href="/v3/orgs/teams/#add-team-membership">Add Team Membership</a>, and <a href="/v3/orgs/teams/#remove-team-membership">Remove Team Membership</a> instead.</p></li>
+<li><p>Query parameters when POSTing to /repos/:owner/:repo/forks
+: Recommendation: Use JSON to POST to this method instead.</p></li>
+<li><p>Query parameter value: Passing "watchers" as the value for the "sort" parameter in a GET request to /repos/:owner/:repo/forks
+: Recommendation: Use <strong>stargazers</strong> as the value instead.</p></li>
+<li><p>Pull Request attribute: merge_commit_sha
+: Recommendation: <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Do not use this attribute</a>.</p></li>
+<li><p>Rate Limit attribute: rate
+: Recommendation: Use <strong>resources["core"]</strong> instead.</p></li>
+<li><p>Repository attribute: forks
+: Recommendation: Use <strong>forks_count</strong> instead.</p></li>
+<li><p>Repository attribute: master_branch
+: Recommendation: Use <strong>default_branch</strong> instead.</p></li>
+<li><p>Repository attribute: open_issues
+: Recommendation: Use <strong>open_issues_count</strong> instead.</p></li>
+<li><p>Repository attribute: public
+: Recommendation: When <a href="/v3/repos/#create">creating a repository</a>, use the
 <strong>private</strong> attribute to indicate whether the repository should be public or
-private. Do not use the <strong>public</strong> attribute.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Repository attribute: watchers</dt>
-      <dd>Recommendation: Use <strong>watchers_count</strong> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>User attribute: bio</dt>
-      <dd>Recommendation: Do not use this attribute. It is obsolete.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>User attribute: plan[“collaborators”]</dt>
-      <dd>Recommendation: Do not use this attribute. It is obsolete.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>User attribute: gravatar_id</dt>
-      <dd>Recommendation: Use <strong>avatar_url</strong> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Feed attribute: current_user_organization_url</dt>
-      <dd>Recommendation: Use <strong>current_user_organization_urls</strong> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Feed attribute: current_user_organization</dt>
-      <dd>Recommendation: Use <strong>current_user_organizations</strong> instead.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Pagination parameters <code>top</code> and <code>sha</code> for method: /repos/:owner/:repo/commits</dt>
-      <dd>Recommendation: When fetching <a href="/v3/repos/commits/#list-commits-on-a-repository">the list of commits for a repository</a>
+private. Do not use the <strong>public</strong> attribute.</p></li>
+<li><p>Repository attribute: watchers
+: Recommendation: Use <strong>watchers_count</strong> instead.</p></li>
+<li><p>User attribute: bio
+: Recommendation: Do not use this attribute. It is obsolete.</p></li>
+<li><p>User attribute: plan["collaborators"]
+: Recommendation: Do not use this attribute. It is obsolete.</p></li>
+<li><p>User attribute: gravatar_id
+: Recommendation: Use <strong>avatar_url</strong> instead.</p></li>
+<li><p>Feed attribute: current_user_organization_url
+: Recommendation: Use <strong>current_user_organization_urls</strong> instead.</p></li>
+<li><p>Feed attribute: current_user_organization
+: Recommendation: Use <strong>current_user_organizations</strong> instead.</p></li>
+<li><p>Pagination parameters <code>top</code> and <code>sha</code> for method: /repos/:owner/:repo/commits
+: Recommendation: When fetching <a href="/v3/repos/commits/#list-commits-on-a-repository">the list of commits for a repository</a>
 use the <a href="/v3/#pagination">standard <code>per_page</code> and <code>page</code> parameters</a> for pagination, instead of <code>per_page</code>,
-<code>top</code>, and <code>sha</code>.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Authorization attribute: token</dt>
-      <dd>Recommendation: This attribute will return an empty string in the majority of
+<code>top</code>, and <code>sha</code>.</p></li>
+<li><p>Authorization attribute: token
+: Recommendation: This attribute will return an empty string in the majority of
 the Authorizations API responses. Please see
 <a href="/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/">the deprecation blog post</a>
 and the <a href="/v3/oauth_authorizations/#deprecation-notice">Authorizations API deprecation notice</a>
-for full details.</dd>
-    </dl>
-  </li>
-  <li>
-    <dl>
-      <dt>Team attribute: permission</dt>
-      <dd>Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the <a href="/v3/orgs/teams/#add-team-repo">Add team repository</a> API will use for requests where no <code>permission</code> attribute is specified. To change the permission level for every repository on a team, use the <a href="/v3/orgs/teams/#list-team-repos">List team repositories</a> API to list all of the team’s repositories, and then use the <a href="/v3/orgs/teams/#add-team-repo">Add team repository</a> with a <code>permission</code> attribute to update each repository’s permission separately.</dd>
-    </dl>
-  </li>
+for full details.</p></li>
+<li><p>Team attribute: permission
+: Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the <a href="/v3/orgs/teams/#add-team-repository">Add team repository</a> API will use for requests where no <code>permission</code> attribute is specified. To change the permission level for every repository on a team, use the <a href="/v3/orgs/teams/#list-team-repos">List team repositories</a> API to list all of the team's repositories, and then use the <a href="/v3/orgs/teams/#add-team-repository">Add team repository</a> with a <code>permission</code> attribute to update each repository's permission separately.</p></li>
 </ol>
 
-<h1 id="beta">beta (Deprecated)</h1>
+<p><a id="beta"></a></p>
+
+<h1>
+<a id="beta-deprecated" class="anchor" href="#beta-deprecated" aria-hidden="true"><span class="octicon octicon-link"></span></a>beta (Deprecated)</h1>
 
 <p>The <a href="/v3">beta API</a> is deprecated. Its current functionality is stable, and we strive to ensure that any <a href="/changes">changes</a> are backwards compatible. Please <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">file a support issue</a> if you have problems.</p>
 
@@ -258,41 +175,46 @@ for full details.</dd>
 
 <p>The beta media type differs from the v3 media type in <a href="#differences-from-beta-version">just a few places</a>. In most cases, migrating an application from the beta media type to the v3 media type is smooth and painless.</p>
 
-<p>We will eventually retire the beta version, but we have no official retirement date to announce at the moment. When the time comes, rest assured that we’ll announce the retirement with plenty of notice.</p>
+<p>We will eventually retire the beta version, but we have no official retirement date to announce at the moment. When the time comes, rest assured that we'll announce the retirement with plenty of notice.</p>
 
 </div>
 
-<h2 id="breaking-beta-changes">Breaking beta changes</h2>
+<h2>
+<a id="breaking-beta-changes" class="anchor" href="#breaking-beta-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Breaking beta changes</h2>
 
-<h3 id="june-15th-2011">June 15th, 2011:</h3>
+<h3>
+<a id="june-15th-2011" class="anchor" href="#june-15th-2011" aria-hidden="true"><span class="octicon octicon-link"></span></a>June 15th, 2011:</h3>
 
 <ul>
-  <li>
+<li>
 <code>gravatar_url</code> is being deprecated in favor of <code>avatar_url</code> for all
 responses that include users or orgs. A default size is no longer
 included in the URL.</li>
-  <li>Creating new gists (both anonymously and with an authenticated user)
+<li>Creating new gists (both anonymously and with an authenticated user)
 should use <code>POST /gists</code> from now on. <code>POST /users/:username/gists</code> is no
 longer supported.</li>
 </ul>
 
-<h3 id="june-1st-2011">June 1st, 2011:</h3>
+<h3>
+<a id="june-1st-2011" class="anchor" href="#june-1st-2011" aria-hidden="true"><span class="octicon octicon-link"></span></a>June 1st, 2011:</h3>
 
 <ul>
-  <li>Removed support for PUT verb on update requests. Use POST or PATCH
+<li>Removed support for PUT verb on update requests. Use POST or PATCH
 instead.</li>
-  <li>Removed <code>.json</code> extension from all URLs.</li>
-  <li>No longer using the X-Next or X-Last headers. Pagination info is
+<li>Removed <code>.json</code> extension from all URLs.</li>
+<li>No longer using the X-Next or X-Last headers. Pagination info is
 returned in the Link header instead.</li>
-  <li>JSON-P response has completely changed to a more consistent format.</li>
-  <li>Starring gists now uses PUT verb (instead of POST) and returns 204.</li>
+<li>JSON-P response has completely changed to a more consistent format.</li>
+<li>Starring gists now uses PUT verb (instead of POST) and returns 204.</li>
 </ul>
 
-<h1 id="v2">v2</h1>
+<h1>
+<a id="v2" class="anchor" href="#v2" aria-hidden="true"><span class="octicon octicon-link"></span></a>v2</h1>
 
 <p>We removed support for API v2 on June 12, 2012.</p>
 
-<h1 id="v1">v1</h1>
+<h1>
+<a id="v1" class="anchor" href="#v1" aria-hidden="true"><span class="octicon octicon-link"></span></a>v1</h1>
 
 <p>We removed support for API v1 on June 12, 2012.</p>
 
@@ -458,7 +380,7 @@ returned in the Link header instead.</li>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

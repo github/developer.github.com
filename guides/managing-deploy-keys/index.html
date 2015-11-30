@@ -54,151 +54,169 @@
   <div id="wrapper">
     <div class="content">
       
-<h1 id="managing-deploy-keys">Managing Deploy Keys</h1>
+
+<h1>
+<a id="managing-deploy-keys" class="anchor" href="#managing-deploy-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>Managing Deploy Keys</h1>
 
 <ul id="markdown-toc">
-  <li><a href="#ssh-agent-forwarding" id="markdown-toc-ssh-agent-forwarding">SSH agent forwarding</a></li>
-  <li><a href="#https-cloning-with-oauth-tokens" id="markdown-toc-https-cloning-with-oauth-tokens">HTTPS cloning with OAuth tokens</a></li>
-  <li><a href="#deploy-keys" id="markdown-toc-deploy-keys">Deploy keys</a></li>
-  <li><a href="#machine-users" id="markdown-toc-machine-users">Machine users</a></li>
+<li><a href="#ssh-agent-forwarding" id="markdown-toc-ssh-agent-forwarding">SSH agent forwarding</a></li>
+<li><a href="#https-cloning-with-oauth-tokens" id="markdown-toc-https-cloning-with-oauth-tokens">HTTPS cloning with OAuth tokens</a></li>
+<li><a href="#deploy-keys" id="markdown-toc-deploy-keys">Deploy keys</a></li>
+<li><a href="#machine-users" id="markdown-toc-machine-users">Machine users</a></li>
 </ul>
 
 <p>There are four ways to manage SSH keys on your servers when automating deployment scripts:</p>
 
 <ul>
-  <li>SSH agent forwarding</li>
-  <li>HTTPS with OAuth tokens</li>
-  <li>Deploy keys</li>
-  <li>Machine users</li>
+<li>SSH agent forwarding</li>
+<li>HTTPS with OAuth tokens</li>
+<li>Deploy keys</li>
+<li>Machine users</li>
 </ul>
 
 <p>This guide will help you decide what strategy is best for you.</p>
 
-<h2 id="ssh-agent-forwarding">SSH agent forwarding</h2>
+<h2>
+<a id="ssh-agent-forwarding" class="anchor" href="#ssh-agent-forwarding" aria-hidden="true"><span class="octicon octicon-link"></span></a>SSH agent forwarding</h2>
 
 <p>In many cases, especially in the beginning of a project, SSH agent forwarding is the quickest and simplest method to use.  Agent forwarding uses the same SSH keys that your local development computer uses.</p>
 
-<h4 id="pros">Pros</h4>
+<h4>
+<a id="pros" class="anchor" href="#pros" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros</h4>
 
 <ul>
-  <li>You do not have to generate or keep track of any new keys.</li>
-  <li>There is no key management; users have the same permissions on the server that they do locally.</li>
-  <li>No keys are stored on the server, so in case the server is compromised, you don’t need to hunt down and remove the compromised keys.</li>
+<li>You do not have to generate or keep track of any new keys.</li>
+<li>There is no key management; users have the same permissions on the server that they do locally.</li>
+<li>No keys are stored on the server, so in case the server is compromised, you don't need to hunt down and remove the compromised keys.</li>
 </ul>
 
-<h4 id="cons">Cons</h4>
+<h4>
+<a id="cons" class="anchor" href="#cons" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cons</h4>
 
 <ul>
-  <li>Users <strong>must</strong> SSH in to deploy; automated deploy processes can’t be used.</li>
-  <li>SSH agent forwarding can be troublesome to run for Windows users.</li>
+<li>Users <strong>must</strong> SSH in to deploy; automated deploy processes can't be used.</li>
+<li>SSH agent forwarding can be troublesome to run for Windows users.</li>
 </ul>
 
-<h4 id="setup">Setup</h4>
+<h4>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h4>
 
 <ol>
-  <li>Turn on agent forwarding locally. See <a href="/guides/using-ssh-agent-forwarding/">our guide on SSH agent forwarding</a> for more information.</li>
-  <li>Set your deploy scripts to use agent forwarding. For example, on a bash script, enabling agent forwarding would look something like this: <code>ssh -A serverA 'bash -s' &lt; deploy.sh</code>
+<li>Turn on agent forwarding locally. See <a href="/guides/using-ssh-agent-forwarding/">our guide on SSH agent forwarding</a> for more information.</li>
+<li>Set your deploy scripts to use agent forwarding. For example, on a bash script, enabling agent forwarding would look something like this: <code>ssh -A serverA 'bash -s' &lt; deploy.sh</code>
 </li>
 </ol>
 
-<h2 id="https-cloning-with-oauth-tokens">HTTPS cloning with OAuth tokens</h2>
+<h2>
+<a id="https-cloning-with-oauth-tokens" class="anchor" href="#https-cloning-with-oauth-tokens" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTTPS cloning with OAuth tokens</h2>
 
-<p>If you don’t want to use SSH keys, you can use <a href="https://help.github.com/articles/git-automation-with-oauth-tokens">HTTPS with OAuth tokens</a>.</p>
+<p>If you don't want to use SSH keys, you can use <a href="https://help.github.com/articles/git-automation-with-oauth-tokens">HTTPS with OAuth tokens</a>.</p>
 
-<h4 id="pros-1">Pros</h4>
+<h4>
+<a id="pros-1" class="anchor" href="#pros-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros</h4>
 
 <ul>
-  <li>Anyone with access to the server can deploy the repository.</li>
-  <li>Users don’t have to change their local SSH settings.</li>
-  <li>Multiple tokens (one for each user) are not needed; one token per server is enough.</li>
-  <li>A token can be revoked at any time, turning it essentially into a one-use password.</li>
-  <li>Generating new tokens can be easily scripted using <a href="https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">the OAuth API</a>
+<li>Anyone with access to the server can deploy the repository.</li>
+<li>Users don't have to change their local SSH settings.</li>
+<li>Multiple tokens (one for each user) are not needed; one token per server is enough.</li>
+<li>A token can be revoked at any time, turning it essentially into a one-use password.</li>
+<li>Generating new tokens can be easily scripted using <a href="https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">the OAuth API</a>
 </li>
 </ul>
 
-<h4 id="cons-1">Cons</h4>
+<h4>
+<a id="cons-1" class="anchor" href="#cons-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cons</h4>
 
 <ul>
-  <li>You must make sure that you configure your token with the correct access scopes.</li>
-  <li>Tokens are essentially passwords, and must be protected the same way.</li>
+<li>You must make sure that you configure your token with the correct access scopes.</li>
+<li>Tokens are essentially passwords, and must be protected the same way.</li>
 </ul>
 
-<h4 id="setup-1">Setup</h4>
+<h4>
+<a id="setup-1" class="anchor" href="#setup-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h4>
 
 <p>See <a href="https://help.github.com/articles/git-automation-with-oauth-tokens">our guide on Git automation with tokens</a>.</p>
 
-<h2 id="deploy-keys">Deploy keys</h2>
+<h2>
+<a id="deploy-keys" class="anchor" href="#deploy-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deploy keys</h2>
 
 <p>A deploy key is an SSH key that is stored on your server and grants access to a single GitHub repository.  This key is attached directly to the repository instead of to a personal user account.</p>
 
-<h4 id="pros-2">Pros</h4>
+<h4>
+<a id="pros-2" class="anchor" href="#pros-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros</h4>
 
 <ul>
-  <li>Anyone with access to the repository and server has the ability to deploy the project.</li>
-  <li>Users don’t have to change their local SSH settings.</li>
-  <li>Deploy keys can read and write by default, but can be made read-only.</li>
+<li>Anyone with access to the repository and server has the ability to deploy the project.</li>
+<li>Users don't have to change their local SSH settings.</li>
+<li>Deploy keys can read and write by default, but can be made read-only.</li>
 </ul>
 
-<h4 id="cons-2">Cons</h4>
+<h4>
+<a id="cons-2" class="anchor" href="#cons-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cons</h4>
 
 <ul>
-  <li>Deploy keys only grant access to a single repository. More complex projects may have many repositories to pull to the same server.</li>
-  <li>Deploy keys are usually not protected by a passphrase, making the key easily accessible if the server is compromised.</li>
+<li>Deploy keys only grant access to a single repository. More complex projects may have many repositories to pull to the same server.</li>
+<li>Deploy keys are usually not protected by a passphrase, making the key easily accessible if the server is compromised.</li>
 </ul>
 
-<h4 id="setup-2">Setup</h4>
+<h4>
+<a id="setup-2" class="anchor" href="#setup-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h4>
 
 <ol>
-  <li>
+<li>
 <a href="https://help.github.com/articles/generating-ssh-keys">Run the <code>ssh-keygen</code> procedure</a> on your server.</li>
-  <li>In the top right corner of any GitHub page, click your profile photo.
+<li>In the top right corner of any GitHub page, click your profile photo.
 <img src="https://github-images.s3.amazonaws.com/help/profile/top_right_avatar.png" alt="Sample of an avatar">
 </li>
-  <li>On your profile page, click the <strong>Repositories</strong> tab, then click the name of your repository.
+<li>On your profile page, click the <strong>Repositories</strong> tab, then click the name of your repository.
 <img src="https://github-images.s3.amazonaws.com/help/profile/profile_repositories_tab.png" alt="Repository tab">
 </li>
-  <li>In your repository’s right sidebar, click <strong>Settings</strong>.
+<li>In your repository's right sidebar, click <strong>Settings</strong>.
 <img src="https://github-images.s3.amazonaws.com/help/repository/repo-actions-settings.png" alt="Settings tab">
 </li>
-  <li>In the sidebar, click <strong>Deploy Keys</strong>.
+<li>In the sidebar, click <strong>Deploy Keys</strong>.
 <img src="/assets/images/deploy-keys.png" alt="Deploy Keys section">
 </li>
-  <li>Click <strong>Add deploy key</strong>. Paste your public key in and submit.
+<li>Click <strong>Add deploy key</strong>. Paste your public key in and submit.
 <img src="https://github-images.s3.amazonaws.com/help/repository/repo-deploy-key.png" alt="Add Deploy Key button">
 </li>
 </ol>
 
-<h2 id="machine-users">Machine users</h2>
+<h2>
+<a id="machine-users" class="anchor" href="#machine-users" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine users</h2>
 
-<p>If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won’t be used by a human, it’s called a machine user.  You can then <a href="https://help.github.com/articles/how-do-i-add-a-collaborator">add the machine user as collaborator</a> or <a href="https://help.github.com/articles/adding-organization-members-to-a-team">add the machine user to a team</a> with access to the repositories it needs to manipulate.  <strong>NOTE</strong>: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.</p>
+<p>If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won't be used by a human, it's called a machine user.  You can then <a href="https://help.github.com/articles/how-do-i-add-a-collaborator">add the machine user as collaborator</a> or <a href="https://help.github.com/articles/adding-organization-members-to-a-team">add the machine user to a team</a> with access to the repositories it needs to manipulate.  <strong>NOTE</strong>: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.</p>
 
-<div class="alert">
-<p>
-<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.
-</p>
+<div class="alert tip">
+
+<p><strong>Tip:</strong> Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.</p>
+
 </div>
 
-<h4 id="pros-3">Pros</h4>
+<h4>
+<a id="pros-3" class="anchor" href="#pros-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pros</h4>
 
 <ul>
-  <li>Anyone with access to the repository and server has the ability to deploy the project.</li>
-  <li>No (human) users need to change their local SSH settings.</li>
-  <li>Multiple keys are not needed; one per server is adequate.</li>
+<li>Anyone with access to the repository and server has the ability to deploy the project.</li>
+<li>No (human) users need to change their local SSH settings.</li>
+<li>Multiple keys are not needed; one per server is adequate.</li>
 </ul>
 
-<h4 id="cons-3">Cons</h4>
+<h4>
+<a id="cons-3" class="anchor" href="#cons-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cons</h4>
 
 <ul>
-  <li>Only organizations have access to create teams; therefore only organizations can use them to restrict machine users to read-only access.  Personal repositories always grant collaborators read/write access.</li>
-  <li>Machine user keys, like deploy keys, are usually not protected by a passphrase.</li>
+<li>Only organizations have access to create teams; therefore only organizations can use them to restrict machine users to read-only access.  Personal repositories always grant collaborators read/write access.</li>
+<li>Machine user keys, like deploy keys, are usually not protected by a passphrase.</li>
 </ul>
 
-<h4 id="setup-3">Setup</h4>
+<h4>
+<a id="setup-3" class="anchor" href="#setup-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h4>
 
 <ol>
-  <li>
+<li>
 <a href="https://help.github.com/articles/generating-ssh-keys">Run the <code>ssh-keygen</code> procedure</a> on your server and attach the public key to the machine user account.</li>
-  <li>Give that account access to the repositories it will need to access. You can do this by <a href="https://help.github.com/articles/how-do-i-add-a-collaborator">adding the account as collaborator</a> or <a href="https://help.github.com/articles/adding-organization-members-to-a-team">adding it to a team</a> in an organization.</li>
+<li>Give that account access to the repositories it will need to access. You can do this by <a href="https://help.github.com/articles/how-do-i-add-a-collaborator">adding the account as collaborator</a> or <a href="https://help.github.com/articles/adding-organization-members-to-a-team">adding it to a team</a> in an organization.</li>
 </ol>
 
 
@@ -253,7 +271,7 @@
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

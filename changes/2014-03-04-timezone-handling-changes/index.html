@@ -63,6 +63,7 @@
 
 
 
+
 <p>We have improved support for handling timezones in our API. For example, if you
 create commits through the API, we now allow for specifying timezone information
 more accurately.</p>
@@ -70,32 +71,37 @@ more accurately.</p>
 <p>We apply the following rules, in order of priority, to determine timezone
 information for API calls:</p>
 
-<h4 id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information">Explicitly provide an ISO 8601 timestamp with timezone information</h4>
+<h4>
+<a id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information" class="anchor" href="#explicitly-provide-an-iso-8601-timestamp-with-timezone-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explicitly provide an ISO 8601 timestamp with timezone information</h4>
 
 <p>For API calls that allow for a timestamp to be specified, we use that exact
 timestamp. An example of this is the <a href="/v3/git/commits">Commits API</a> which allows
 for specifying the <code>date</code> property.</p>
 
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"message"</span><span class="err">:</span> <span class="s2">"my commit message"</span><span class="p">,</span>
-  <span class="s2">"author"</span><span class="err">:</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Dirkjan Bussink"</span><span class="p">,</span>
-    <span class="s2">"email"</span><span class="err">:</span> <span class="s2">"d.bussink@gmail.com"</span><span class="p">,</span>
-    <span class="s2">"date"</span><span class="err">:</span> <span class="s2">"2014-02-27T15:05:06+01:00"</span>
-  <span class="p">},</span>
-  <span class="s2">"parents"</span><span class="err">:</span> <span class="p">[</span>
-    <span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span>
-  <span class="p">],</span>
-  <span class="s2">"tree"</span><span class="err">:</span> <span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span>
-<span class="p">}</span></code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my commit message"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dirkjan Bussink"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d.bussink@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-02-27T15:05:06+01:00"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"parents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"tree"</span><span class="p">:</span><span class="w"> </span><span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<h4 id="using-the-time-zone-header">Using the <code>Time-Zone</code> header</h4>
+
+<h4>
+<a id="using-the-time-zone-header" class="anchor" href="#using-the-time-zone-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the <code>Time-Zone</code> header</h4>
 
 <p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
 to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
 
-<pre class="terminal"><code>$ curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md</span>
+</pre>
 
 <p>This means that we generate a timestamp for the moment your API call is made in
 the timezone this header defines. For example, the <a href="/v3/repos/contents/">Contents API</a>
@@ -103,18 +109,20 @@ generates a git commit for each addition or change and uses the current time
 as the timestamp. This header will determine the timezone used for generating
 that current timestamp.</p>
 
-<h4 id="using-the-last-known-timezone-for-the-user">Using the last known timezone for the user</h4>
+<h4>
+<a id="using-the-last-known-timezone-for-the-user" class="anchor" href="#using-the-last-known-timezone-for-the-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the last known timezone for the user</h4>
 
 <p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
 API, we use the last known timezone for the authenticated user. The last know
 timezone is updated whenever you browse the GitHub.com website.</p>
 
-<h4 id="utc">UTC</h4>
+<h4>
+<a id="utc" class="anchor" href="#utc" aria-hidden="true"><span class="octicon octicon-link"></span></a>UTC</h4>
 
-<p>If the steps above don’t result in any information, we use UTC as the timezone
+<p>If the steps above don't result in any information, we use UTC as the timezone
 to create the git commit.</p>
 
-<p>If you have any questions or feedback, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=API+timezones">contact</a> us!</p>
+<p>If you have any questions or feedback, don't hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=API+timezones">contact</a> us!</p>
 
 
 </div>
@@ -135,11 +143,11 @@ to create the git commit.</p>
 
   <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
   <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 
@@ -171,7 +179,7 @@ to create the git commit.</p>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

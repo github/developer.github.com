@@ -43,8 +43,10 @@
   <div id="wrapper">
     <div class="content">
       
+
 <div class="change" id="/changes/2012-10-24-set-default-branch/">
   <h2 class="title">
+<a id="--set-the-default-branch-for-a-repository" class="anchor" href="#--set-the-default-branch-for-a-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-10-24-set-default-branch/">Set the default branch for a repository</a>
 </h2>
 
@@ -56,31 +58,32 @@
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
-<p>You can set the default branch for a repository to something other than ‘master’ from the GitHub repository admin screen:</p>
+<p>You can set the default branch for a repository to something other than 'master' from the GitHub repository admin screen:</p>
 
 <p><img src="/assets/images/posts/default-branch.png" alt="repo admin"></p>
 
-<p>Now, you can update this setting via the API. We’ve added a <code>default_branch</code> parameter to the <a href="/v3/repos/#edit">Edit Repository method</a>:</p>
+<p>Now, you can update this setting via the API. We've added a <code>default_branch</code> parameter to the <a href="/v3/repos/#edit">Edit Repository method</a>:</p>
 
-<pre class="terminal"><code>curl -u pengwynn \
-     -d '{"name": "octokit", "default_branch":"development"}' \
-     https://api.github.com/repos/octokit/octokit.rb
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -u pengwynn \</span>
+<span class="command">     -d '{"name": "octokit", "default_branch":"development"}' \</span>
+<span class="command">     https://api.github.com/repos/octokit/octokit.rb</span>
+</pre>
 
-<p>If you provide a branch name that hasn’t been pushed to GitHub, we’ll gracefully fall back to <code>'master'</code> or the first branch.</p>
+<p>If you provide a branch name that hasn't been pushed to GitHub, we'll gracefully fall back to <code>'master'</code> or the first branch.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2012-10-17-org-members-redirection/">
   <h2 class="title">
+<a id="--organization-members-resource-changes" class="anchor" href="#--organization-members-resource-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-10-17-org-members-redirection/">Organization Members Resource Changes</a>
 </h2>
 
@@ -92,13 +95,12 @@
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra" data-proofer-ignore="">
-      <a href="https://github.com/pezra" data-proofer-ignore="">pezra</a>
+    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra" data-proofer-ignore>
+      <a href="https://github.com/pezra" data-proofer-ignore>pezra</a>
   </li>
 </ul>
 </div>
 
-    
 <p>Requesting the <a href="/v3/orgs/members/index.html#members-list">member list</a> of an
 organization of which you are not a member now redirects to the <a href="/v3/orgs/members/index.html#public-members-list">public members
 list</a>. Similarly, requests to
@@ -119,10 +121,12 @@ should be using the public membership resources.</p>
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=Org%20members%20API">support@github.com</a>.</p>
 
+<p></p>
 </div>
 
 <div class="change" id="/changes/2012-10-14-rate-limit-changes/">
   <h2 class="title">
+<a id="--rate-limit-changes-for-unauthenticated-requests" class="anchor" href="#--rate-limit-changes-for-unauthenticated-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-10-14-rate-limit-changes/">Rate limit changes for unauthenticated requests</a>
 </h2>
 
@@ -134,22 +138,21 @@ should be using the public membership resources.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
-<p>To ensure a high quality of service for all API consumers, we’ve reduced the
+<p>To ensure a high quality of service for all API consumers, we've reduced the
 default rate limit for unauthenticated requests. To enjoy the default rate
-limit of 5,000 requests per hour, you’ll need to
+limit of 5,000 requests per hour, you'll need to
 <a href="http://developer.github.com/v3/#authentication">authenticate</a> via Basic Auth
 or OAuth. Unauthenticated requests will be limited to 60 per hour unless you
 <a href="http://developer.github.com/v3/#increasing-the-unauthenticated-rate-limit-for-oauth-applications">include your OAuth client and
 secret</a>.</p>
 
-<p>We’ll soon require all requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent
+<p>We'll soon require all requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent
 header</a>. Setting a
 unique value for this header helps us identify requests and get in touch with
 developers who are abusing the API. Most HTTP libraries, wrapper libraries, and
@@ -159,10 +162,12 @@ something unique to your application.</p>
 <p>If you have any questions or feedback, please drop us a line at
 <a href="mailto:support@github.com?subject=API%20Rate%20limit">support@github.com</a>.</p>
 
+<p></p>
 </div>
 
 <div class="change" id="/changes/2012-09-28-auto-init-for-repositories/">
   <h2 class="title">
+<a id="--initialize-a-repository-when-creating" class="anchor" href="#--initialize-a-repository-when-creating" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-09-28-auto-init-for-repositories/">Initialize a repository when creating</a>
 </h2>
 
@@ -174,41 +179,44 @@ something unique to your application.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore="">
-      <a href="https://github.com/pengwynn" data-proofer-ignore="">pengwynn</a>
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
   </li>
 </ul>
 </div>
 
-    
-<p>Today we’ve made it easier to add commits to a repository via the GitHub API.
+<p>Today we've made it easier to add commits to a repository via the GitHub API.
 Until now, you could <a href="/v3/repos/#create">create a repository</a>, but you would
 need to initialize it locally via your Git client before adding any commits via
 the API.</p>
 
-<p>Now you can optionally init a repository when it’s created by sending <code>true</code>
+<p>Now you can optionally init a repository when it's created by sending <code>true</code>
 for the <code>auto_init</code> parameter:</p>
 
-<pre class="terminal"><code>curl -i -u pengwynn \
-     -d '{"name": "create-repo-test", "auto_init": true}' \
-     https://api.github.com/user/repos
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -i -u pengwynn \</span>
+<span class="command">     -d '{"name": "create-repo-test", "auto_init": true}' \</span>
+<span class="command">     https://api.github.com/user/repos</span>
+</pre>
 
 <p>The resulting repository will have a README stub and an initial commit.</p>
 
 <p><img src="/assets/images/posts/create-repo-init.png" alt="create repo screenshot"></p>
 
-<h3 id="gitignore-templates">.gitignore templates</h3>
+<h3>
+<a id="gitignore-templates" class="anchor" href="#gitignore-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="gitignore-templates" class="anchor" href="#gitignore-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>.gitignore templates</h3>
 
 <p>Along with this change, you can set up your <code>.gitignore</code> template by passing
 the basename of any template in the <a href="https://github.com/github/gitignore">GitHub gitignore templates
 project</a>.</p>
 
-<pre class="terminal"><code>curl -i -u pengwynn \
-     -d '{"name": "create-repo-test", "auto_init": true, \
-          "gitignore_template": "Haskell"}' \
-     https://api.github.com/user/repos
-</code></pre>
+<pre class="command-line">
+<span class="command">curl -i -u pengwynn \</span>
+<span class="command">     -d '{"name": "create-repo-test", "auto_init": true, \</span>
+<span class="command">          "gitignore_template": "Haskell"}' \</span>
+<span class="command">     https://api.github.com/user/repos</span>
+</pre>
 
 <p>As the <a href="/v3/repos/#create">docs point out</a>, the <code>gitignore_template</code> parameter
 is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
@@ -217,11 +225,12 @@ is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
 <a href="https://github.com/c">https://github.com/contact</a>, <a href="mailto:support@github.com">support@github.com</a>, or
 <a href="https://twitter.com/githubapi">@GitHubAPI</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="change" id="/changes/2012-09-05-watcher-api/">
   <h2 class="title">
+<a id="--upcoming-changes-to-watcher-and-star-apis" class="anchor" href="#--upcoming-changes-to-watcher-and-star-apis" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-09-05-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
 </h2>
 
@@ -233,60 +242,63 @@ is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore="">
-      <a href="https://github.com/technoweenie" data-proofer-ignore="">technoweenie</a>
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
   </li>
 </ul>
 </div>
 
-    
 <p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as “Watching” is now “Starring”.  Starring is basically a way
+used to be known as "Watching" is now "Starring".  Starring is basically a way
 to bookmark interesting repositories.  Watching is a way to indicate that you
 want to receive email or web notifications on a Repository.</p>
 
 <p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
 we change this in a way that developers can gracefully upgrade their
-applications?  We’re currently looking at rolling out the changes in three
+applications?  We're currently looking at rolling out the changes in three
 phases over an extended period of time.</p>
 
-<h2 id="current-status">Current Status</h2>
+<h2>
+<a id="current-status" class="anchor" href="#current-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="current-status" class="anchor" href="#current-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Status</h2>
 
 <p>The current <a href="/v3/activity/starring/">Repository Starring</a> methods look like this:</p>
 
 <ul>
-  <li>
+<li>
 <code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
-  <li>
+<li>
 <code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
-  <li>
+<li>
 <code>/user/watched</code> - A list of repositories the current user has starred.</li>
 </ul>
 
-<h2 id="phase-1-add-watchers-as-subscriptions">Phase 1: Add Watchers as Subscriptions</h2>
+<h2>
+<a id="phase-1-add-watchers-as-subscriptions" class="anchor" href="#phase-1-add-watchers-as-subscriptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="phase-1-add-watchers-as-subscriptions" class="anchor" href="#phase-1-add-watchers-as-subscriptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Phase 1: Add Watchers as Subscriptions</h2>
 
-<p>This phase exposes Watchers as “Subscriptions”.  This is to
+<p>This phase exposes Watchers as "Subscriptions".  This is to
 keep from clashing with the legacy endpoints.  This phase will happen
 automatically <s>and will not break your application until Phase 3 starts</s>.
 (<strong>UPDATE</strong>: API v3 will continue to support this functionality indefinitely.)</p>
 
 <ul>
-  <li>
+<li>
 <code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
-  <li>
+<li>
 <code>/users/:user/subscriptions</code> - A list of repositories that a user is watching.</li>
-  <li>
+<li>
 <code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
 </ul>
 
-<p>We’ll also add a copy of the legacy Watchers API in the new endpoint:</p>
+<p>We'll also add a copy of the legacy Watchers API in the new endpoint:</p>
 
 <ul>
-  <li>
+<li>
 <code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
-  <li>
+<li>
 <code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
-  <li>
+<li>
 <code>/user/starred</code> - A list of repositories the current user has starred.</li>
 </ul>
 
@@ -296,20 +308,23 @@ automatically <s>and will not break your application until Phase 3 starts</s>.
 </code></pre>
 
 <p>If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the “Accept” header.  You should do this now.  This
+requests pass that value for the "Accept" header.  You should do this now.  This
 can be verified by checking the <code>X-GitHub-Media-Type</code> header on all API
 responses.</p>
 
-<pre class="terminal"><code># Accesses a user's starred repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.beta+json"
-</code></pre>
+<pre class="command-line">
+<span class="comment"># Accesses a user's starred repositories.</span>
+<span class="command">curl https://api.github.com/user/watched \</span>
+<span class="command"> -H "Accept: application/vnd.github.beta+json"</span>
+</pre>
 
 <p>-<s>This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
 the "beta" media type, and makes the "v3" media type the implicit default
 for API requests.</s></p>
 
-<h2 id="update---november-6-2013">UPDATE - November 6, 2013</h2>
+<h2>
+<a id="update---november-6-2013" class="anchor" href="#update---november-6-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="update---november-6-2013" class="anchor" href="#update---november-6-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>UPDATE - November 6, 2013</h2>
 
 <div class="alert">
   <p>
@@ -324,49 +339,57 @@ for API requests.</s></p>
   </p>
 </div>
 
-<h2 id="sphase-2-switch-codewatcherscode-api-endpoints"><s>Phase 2: Switch <code>/watchers</code> API Endpoint</s></h2>
+<h2>
+<a id="phase-2-switch-watchers-api-endpoint" class="anchor" href="#phase-2-switch-watchers-api-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="phase-2-switch-watchers-api-endpoint" class="anchor" href="#phase-2-switch-watchers-api-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a><s>Phase 2: Switch <code>/watchers</code> API Endpoint</s>
+</h2>
 
-<s>The "watch" endpoints will now be a copy of the "subscription" endpoints.  You
+<p><s>The "watch" endpoints will now be a copy of the "subscription" endpoints.  You
 will have to use <code>/user/starred</code> to get a user's starred repositories, not
-<code>/user/watched</code>.</s>
+<code>/user/watched</code>.</s></p>
 
-<s>This requires a new media type value:</s>
+<p><s>This requires a new media type value:</s></p>
 
-<s><pre>application/vnd.github.v3+json</pre></s>
+<p><s><pre>application/vnd.github.v3+json</pre></s></p>
 
-<s>This is a breaking change from Phase 1.  We will release this change in an
+<p><s>This is a breaking change from Phase 1.  We will release this change in an
 experimental mode first, letting developers gracefully upgrade their
-applications by specifying the new media value for the Accept header.</s>
+applications by specifying the new media value for the Accept header.</s></p>
 
-<s>
+<p><s></s></p>
+
 <pre>
 # Accesses a user's watched repositories.
 curl https://api.github.com/user/watched \
   -H "Accept: application/vnd.github.v3+json"
 </pre>
-</s>
 
-<h2 id="sphase-3-remove-codesubscriberscode-api-endpoints"><s>Phase 3: Remove <code>/subscribers</code> API Endpoint.</s></h2>
+<p></p>
 
-<s>This phase involves disabling the subscription endpoints completely.  At this
+<h2>
+<a id="phase-3-remove-subscribers-api-endpoint" class="anchor" href="#phase-3-remove-subscribers-api-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="phase-3-remove-subscribers-api-endpoint" class="anchor" href="#phase-3-remove-subscribers-api-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a><s>Phase 3: Remove <code>/subscribers</code> API Endpoint.</s>
+</h2>
+
+<p><s>This phase involves disabling the subscription endpoints completely.  At this
 point, you should be using the starring endpoints for starred repositories, and
 the watch endpoints for watched repositories.  No date has been set yet, but we
 expect this to be <em>3-6 months</em> after Phase 2 is in place.  This should give
 developers enough time for a smooth upgrade path.  If they use popular API
-wrappers, the work will likely mostly be done for them.</s>
+wrappers, the work will likely mostly be done for them.</s></p>
 
-<s>Keep on passing the "v3" media type in your application, until the API has
+<p><s>Keep on passing the "v3" media type in your application, until the API has
 another breaking change to make.  If you can't make the deadline for Phase 3,
 just set the "beta" media type until we shut that down completely.  It's likely
 that we will keep the old "beta" media type active for another month, like
 the <a href="https://github.com/blog/1090-github-api-moving-on">last time</a> we terminated
-old API functionality.</s>
+old API functionality.</s></p>
 
 <p>We look forward to assisting you through this transition.  Hit us up at
 <a href="https://github.com/c">https://github.com/contact</a>, <a href="mailto:support@github.com">support@github.com</a>, or
 <a href="https://twitter.com/githubapi">@GitHubAPI</a>.</p>
 
-
+<p></p>
 </div>
 
 <div class="paginate-container">
@@ -433,7 +456,9 @@ old API functionality.</s>
   
 </div>
 
+<p></p>
 </div>
+
 
     </div>
 
@@ -596,7 +621,7 @@ old API functionality.</s>
     </div>
 
     <div class="wrapper">
-      <p>Design &copy; <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
+      <p>Design &copy; 2015 Copyright 2015 GitHub, Inc. </p>
     </div>
 
   </div><!-- /#footer -->

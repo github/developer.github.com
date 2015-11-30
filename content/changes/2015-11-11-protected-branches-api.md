@@ -9,22 +9,23 @@ We're starting a preview period for the [protected branches](https://github.com/
 
 To protect a branch, make a `PATCH` request to the URL of the branch:
 
-{:.terminal}
-    curl "https://api.github.com/repos/github/hubot/branches/master" \
-      -XPATCH \
-      -H 'Authorization: token TOKEN'
-      -H "Accept: application/vnd.github.loki-preview" \
-      -d '{
-        "protection": {
-          "enabled": true,
-          "required_status_checks": {
-            "enforcement_level": "everyone",
-            "contexts": [
-              "required-status"
-            ]
-          }
-        }
-      }'
+``` command-line
+curl "https://api.github.com/repos/github/hubot/branches/master" \
+  -XPATCH \
+  -H 'Authorization: token TOKEN'
+  -H "Accept: application/vnd.github.loki-preview" \
+  -d '{
+    "protection": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "everyone",
+        "contexts": [
+          "required-status"
+        ]
+      }
+    }
+  }'
+```
 
 #### How can I try it?
 

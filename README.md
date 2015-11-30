@@ -31,7 +31,6 @@ API docs should look like:
 
     # API title
 
-    * TOC
     {:toc}
 
     ## API endpoint title
@@ -77,27 +76,22 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 
 ### Terminal blocks
 
-You can specify terminal blocks by prefacing a [block element][block boundaries] with `{:.terminal}`.
+You can specify terminal blocks by using the `command-line` syntax highlighting.
 
-```markdown
-{:.terminal}
+    ``` command-line
     $ curl foobar
-```
+    ```
 
-Alternatively, you can use plain html and use `pre.terminal` elements.
-(If, for example, you need to emphasis text with `<em>`)
+You can use certain characters, like `$` and `#`, to emphasize different parts
+of commands.
 
-```html
-<pre class="terminal">
-$ curl <em>foobar<em>
-....
-</pre>
-```
+    ``` command-line
+    # call foobar
+    $ curl <em>foobar<em>
+    ....
+    ```
 
-This is not a `curl` tutorial though. Not every API call needs
-to show how to access it with `curl`.
-
-[block boundaries]: http://kramdown.gettalong.org/syntax.html#block-boundaries
+For more information, see [the reference documentation](https://github.com/gjtorikian/extended-markdown-filter#command-line-highlighting).
 
 ## Development
 

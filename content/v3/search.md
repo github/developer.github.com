@@ -4,7 +4,6 @@ title: Search | GitHub API
 
 # Search
 
-* TOC
 {:toc}
 
 ### About the Search API
@@ -105,9 +104,10 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      'https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc'
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  'https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc'
+```
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -191,9 +191,10 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
+```
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -293,9 +294,10 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
+```
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -364,9 +366,10 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000
+```
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -413,9 +416,10 @@ Name | Description
 Using curl, and the [example issue search](#issue-search-example) above, our API
 request would look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
+```
 
 The response will include a `text_matches` array for each search result. In the
 JSON below, we have two objects in the `text_matches` array.

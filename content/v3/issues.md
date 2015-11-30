@@ -4,7 +4,6 @@ title: Issues | GitHub API
 
 # Issues
 
-* TOC
 {:toc}
 
 Issues use [these custom media types](#custom-media-types). You can

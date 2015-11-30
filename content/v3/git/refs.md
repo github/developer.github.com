@@ -4,7 +4,6 @@ title: Git Refs | GitHub API
 
 # References
 
-* TOC
 {:toc}
 
 ## Get a Reference

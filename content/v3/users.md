@@ -4,7 +4,6 @@ title: Users | GitHub API
 
 # Users
 
-* TOC
 {:toc}
 
 Many of the resources on the users API provide a shortcut for getting

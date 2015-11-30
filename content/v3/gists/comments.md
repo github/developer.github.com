@@ -4,7 +4,6 @@ title: Gist Comments | GitHub API
 
 # Comments
 
-* TOC
 {:toc}
 
 Gist Comments use [these custom media types](#custom-media-types).

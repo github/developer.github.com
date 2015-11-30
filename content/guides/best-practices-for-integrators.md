@@ -6,7 +6,6 @@ title: Best practices for integrators | GitHub API
 
 Interested in integrating with the GitHub platform? [You're in good company](https://github.com/integrations). This guide will help you build an app that provides the best experience for your users *and* ensure that it's reliably interacting with the API.
 
-* TOC
 {:toc}
 
 ## Secure payloads delivered from GitHub
@@ -74,7 +73,7 @@ To avoid hitting this limit, you should ensure your application follows the guid
   or client ID concurrently.
 * If you're making a large number of `POST`, `PATCH`, `PUT`, or `DELETE` requests for a single user
   or client ID, wait at least one second between each request.
-* Requests that create content which triggers notifications, such as issues, comments and pull requests, 
+* Requests that create content which triggers notifications, such as issues, comments and pull requests,
   may be further limited. Please create this content at a reasonable pace to avoid further limiting.
 * When you have been limited, wait the number of seconds specified in the `Retry-After` response header.
 

@@ -4,7 +4,6 @@ title: Repositories | GitHub API
 
 # Repositories
 
-* TOC
 {:toc}
 
 ## List your repositories
@@ -291,7 +290,7 @@ Name | Type | Description
 {{#tip}}
 
   <a name="preview-period"></a>
-  
+
   The Protected Branch API is currently available for developers to preview.
   During the preview period, the API may change without advance notice.
   Please see the [blog post](/changes/2015-11-11-protected-branches-api) for full details.

@@ -4,7 +4,6 @@ title: Downloads | GitHub API
 
 # Downloads
 
-* TOC
 {:toc}
 
 ### Downloads API is Deprecated

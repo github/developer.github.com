@@ -4,7 +4,6 @@ title: Comments | GitHub API
 
 # Comments
 
-* TOC
 {:toc}
 
 ## List commit comments for a repository

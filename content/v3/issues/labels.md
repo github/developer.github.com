@@ -4,7 +4,6 @@ title: Issue Labels | GitHub API
 
 # Labels
 
-* TOC
 {:toc}
 
 ## List all labels for this repository

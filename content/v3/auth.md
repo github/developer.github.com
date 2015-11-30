@@ -4,7 +4,6 @@ title: Other Authentication Methods | GitHub API
 
 # Other Authentication Methods
 
-* TOC
 {:toc}
 
 While the API provides multiple methods for authentication, we strongly
@@ -33,16 +32,18 @@ For example, if you're accessing the API via [cURL][curl], the following command
 would authenticate you if you replace `<username>` with your GitHub username.
 (cURL will prompt you to enter the password.)
 
-{:.terminal}
-    $ curl -u <username> https://api.github.com/user
+``` command-line
+$ curl -u <username> https://api.github.com/user
+```
 
 ### Via OAuth Tokens
 
 Alternatively, you can use [personal access
-tokens][personal-access-tokens] or OAuth tokens instead of your password. 
+tokens][personal-access-tokens] or OAuth tokens instead of your password.
 
-{:.terminal}
-    $ curl -u <username>:<token> https://api.github.com/user
+``` command-line
+$ curl -u <username>:<token> https://api.github.com/user
+```
 
 This approach is useful if your tools only support Basic Authentication but you
 want to take advantage of OAuth access token security features.

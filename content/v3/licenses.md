@@ -4,7 +4,6 @@ title: Licenses | GitHub API
 
 # Licenses
 
-* TOC
 {:toc}
 
 {{#tip}}

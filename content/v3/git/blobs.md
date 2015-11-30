@@ -4,7 +4,6 @@ title: Git Blobs | GitHub API
 
 # Blobs
 
-* TOC
 {:toc}
 
 Blobs leverage [these custom media types](#custom-media-types). You can

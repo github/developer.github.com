@@ -5,7 +5,6 @@ layout: webhooks
 
 # Testing Webhooks
 
-* TOC
 {:toc}
 
 Now that you've [configured your local server](/webhooks/configuring/), you might

@@ -4,7 +4,6 @@ title: Automating deployments to integrators | GitHub API
 
 # Automating deployments to integrators
 
-* TOC
 {:toc}
 
 The "[Delivering deployments](/guides/delivering-deployments/)" guide describes how to build a server that uses the [Deployments API][deploy API] to easily get your code from GitHub into production. But what if you don't want to host a separate service for deploying code? What if you just want to merge code and have it deploy without thinking about maintaining another app?
@@ -13,7 +12,7 @@ You can use the GitHub Auto-Deployment service to receive changes made to your r
 
 Here's a diagram demonstrating what the process might look like:
 
-<pre>
+```
 +--------------------+        +--------+                    +-----------+
 | GitHub Auto-Deploy |        | GitHub |                    |  Heroku   |
 |      Service       |        +--------+                    +-----------+
@@ -33,7 +32,7 @@ Here's a diagram demonstrating what the process might look like:
      |                         |   Deployment Status (success)    |
      |                         |<---------------------------------|
      |                         |                                  |
-</pre>
+```
 
 {{#tip}}
 

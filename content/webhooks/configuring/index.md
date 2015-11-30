@@ -5,7 +5,6 @@ layout: webhooks
 
 # Configuring Your Server
 
-* TOC
 {:toc}
 
 Now that our webhook is ready to deliver messages, we'll set up a basic Sinatra server
@@ -28,8 +27,9 @@ for all major operating systems.
 When you're done with that, you can expose your localhost by running `./ngrok http 4567`
 on the command line. You should see a line that looks something like this:
 
-    #!bash
-    Forwarding    http://7e9ea9dc.ngrok.io -> 127.0.0.1:4567
+``` command-line
+$ Forwarding    http://7e9ea9dc.ngrok.io -> 127.0.0.1:4567
+```
 
 Copy that funky `*.ngrok.io` URL! We're now going to go *back* to the Payload
 URL and pasting this server into that field. It should look something like `http://7e9ea9dc.ngrok.io/payload`.
@@ -47,14 +47,15 @@ can happily test out our code locally.
 Let's set up a little Sinatra app to do something with the information. Our initial
 setup might look something like this:
 
-    #!ruby
-    require 'sinatra'
-    require 'json'
+``` ruby
+require 'sinatra'
+require 'json'
 
-    post '/payload' do
-      push = JSON.parse(request.body.read)
-      puts "I got some JSON: #{push.inspect}"
-    end
+post '/payload' do
+  push = JSON.parse(request.body.read)
+  puts "I got some JSON: #{push.inspect}"
+end
+```
 
 (If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra].)
 
@@ -64,13 +65,14 @@ Since we set up our webhook to listen to events dealing with `Issues`, go ahead
 and create a new Issue on the repository you're testing with. Once you create
 it, switch back to your terminal. You should see something like this in your output:
 
-    #!bash
-    ~/Developer/platform-samples/hooks/ruby/configuring-your-server $ ruby server.rb
-    == Sinatra/1.4.4 has taken the stage on 4567 for development with backup from Thin
-    >> Thin web server (v1.5.1 codename Straight Razor)
-    >> Maximum connections set to 1024
-    >> Listening on localhost:4567, CTRL+C to stop
-    I got some JSON: {"action"=>"opened", "issue"=>{"url"=>"...
+``` command-line
+$ ~/Developer/platform-samples/hooks/ruby/configuring-your-server $ ruby server.rb
+> == Sinatra/1.4.4 has taken the stage on 4567 for development with backup from Thin
+> >> Thin web server (v1.5.1 codename Straight Razor)
+> >> Maximum connections set to 1024
+> >> Listening on localhost:4567, CTRL+C to stop
+> I got some JSON: {"action"=>"opened", "issue"=>{"url"=>"...
+```
 
 Success! You've successfully configured your server to listen to webhooks. Your
 server can now process this information any way you see fit. For example, if you

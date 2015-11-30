@@ -4,7 +4,6 @@ title: Commits | GitHub API
 
 # Commits
 
-* TOC
 {:toc}
 
 The Repo Commits API supports listing, viewing, and comparing commits in a repository.

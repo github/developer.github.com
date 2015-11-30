@@ -4,7 +4,6 @@ title: Building a CI server | GitHub API
 
 # Building a CI server
 
-* TOC
 {:toc}
 
 The [Status API][status API] is responsible for tying together commits with
@@ -33,15 +32,15 @@ Note: you can download the complete source code for this project
 We'll write a quick Sinatra app to prove that our local connections are working.
 Let's start with this:
 
-    #!ruby
-    require 'sinatra'
-    require 'json'
+``` ruby
+require 'sinatra'
+require 'json'
 
-    post '/event_handler' do
-      payload = JSON.parse(params[:payload])
-      "Well, it worked!"
-    end
-
+post '/event_handler' do
+  payload = JSON.parse(params[:payload])
+  "Well, it worked!"
+end
+```
 
 (If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra].)
 
@@ -67,23 +66,24 @@ Great! Click on **Let me select individual events**, and select the following:
 These are the events GitHub will send to our server whenever the relevant action
 occurs. Let's update our server to *just* handle the Pull Request scenario right now:
 
-    #!ruby
-    post '/event_handler' do
-      @payload = JSON.parse(params[:payload])
+``` ruby
+post '/event_handler' do
+  @payload = JSON.parse(params[:payload])
 
-      case request.env['HTTP_X_GITHUB_EVENT']
-      when "pull_request"
-        if @payload["action"] == "opened"
-          process_pull_request(@payload["pull_request"])
-        end
-      end
+  case request.env['HTTP_X_GITHUB_EVENT']
+  when "pull_request"
+    if @payload["action"] == "opened"
+      process_pull_request(@payload["pull_request"])
     end
+  end
+end
 
-    helpers do
-      def process_pull_request(pull_request)
-        puts "It's #{pull_request['title']}"
-      end
-    end
+helpers do
+  def process_pull_request(pull_request)
+    puts "It's #{pull_request['title']}"
+  end
+end
+```
 
 What's going on? Every event that GitHub sends out attached a `X-GitHub-Event`
 HTTP header. We'll only care about the PR events for now. From there, we'll
@@ -106,23 +106,25 @@ Since we're interacting with the GitHub API, we'll use [Octokit.rb][octokit.rb]
 to manage our interactions. We'll configure that client with
 [a personal access token][access token]:
 
-    #!ruby
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    ACCESS_TOKEN = ENV['MY_PERSONAL_TOKEN']
+``` ruby
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+ACCESS_TOKEN = ENV['MY_PERSONAL_TOKEN']
 
-    before do
-      @client ||= Octokit::Client.new(:access_token => ACCESS_TOKEN)
-    end
+before do
+  @client ||= Octokit::Client.new(:access_token => ACCESS_TOKEN)
+end
+```
 
 After that, we'll just need to update the pull request on GitHub to make clear
 that we're processing on the CI:
 
-    #!ruby
-    def process_pull_request(pull_request)
-      puts "Processing pull request..."
-      @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'pending')
-    end
+``` ruby
+def process_pull_request(pull_request)
+  puts "Processing pull request..."
+  @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'pending')
+end
+```
 
 We're doing three very basic things here:
 
@@ -135,13 +137,14 @@ your test suite. Maybe you're going to pass off your code to Jenkins, or call
 on another web service via its API, like [Travis][travis api]. After that, you'd
 be sure to update the status once more. In our example, we'll just set it to `"success"`:
 
-    #!ruby
-    def process_pull_request(pull_request)
-      @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'pending')
-      sleep 2 # do busy work...
-      @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'success')
-      puts "Pull request processed!"
-    end
+``` ruby
+def process_pull_request(pull_request)
+  @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'pending')
+  sleep 2 # do busy work...
+  @client.create_status(pull_request['base']['repo']['full_name'], pull_request['head']['sha'], 'success')
+  puts "Pull request processed!"
+end
+```
 
 ## Conclusion
 

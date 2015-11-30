@@ -40,6 +40,8 @@ gulp.task("javascript", function () {
     .pipe(gulp.dest("output/assets/"));
   return gulp.src([
     "assets/javascripts/documentation.js",
+    "assets/javascripts/search.js",
+    "assets/javascripts/images.js",
     "assets/vendor/retinajs/src/retinajs"
     ])
     .pipe(gulpif(transformCS, coffee()))

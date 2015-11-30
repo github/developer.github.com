@@ -4,7 +4,6 @@ title: Migrations | GitHub API
 
 # Migrations
 
-* TOC
 {:toc}
 
 {{#enterprise-only}}

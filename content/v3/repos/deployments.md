@@ -4,7 +4,6 @@ title: Deployments | GitHub API
 
 # Deployments
 
-* TOC
 {:toc}
 
 Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
@@ -31,7 +30,7 @@ made.
 
 Below is a simple sequence diagram for how these interactions would work.
 
-<pre>
+```
 +---------+             +--------+            +-----------+        +-------------+
 | Tooling |             | GitHub |            | 3rd Party |        | Your Server |
 +---------+             +--------+            +-----------+        +-------------+
@@ -56,7 +55,7 @@ Below is a simple sequence diagram for how these interactions would work.
      |                      |   Deployment Status   |                     |
      |                      |<----------------------|                     |
      |                      |                       |                     |
-</pre>
+```
 
 Keep in mind that GitHub is never actually accessing your servers. It's up to
 your 3rd party integration to interact with deployment events.  This allows for

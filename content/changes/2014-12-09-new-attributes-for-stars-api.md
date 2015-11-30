@@ -7,8 +7,9 @@ author_name: arfon
 
 You can now see when a user starred a repository. To receive the new response format containing the `starred_at` field, request the new media type:
 
-{:.terminal}
-    curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/users/andrew/starred
+``` command-line
+curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/users/andrew/starred
+```
 
 Note the starred repository is now available in the repo field.
 

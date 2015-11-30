@@ -4,7 +4,6 @@ title: Merging | GitHub API
 
 # Merging
 
-* TOC
 {:toc}
 
 The Repo Merging API supports merging branches in a repository. This accomplishes
@@ -21,7 +20,7 @@ The authenticated user will be the author of any merges done through this endpoi
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `base`|`string` | **Required**. The name of the base branch that the head will be merged into.
 `head`|`string` | **Required**. The head to merge. This can be a branch name or a commit SHA1.

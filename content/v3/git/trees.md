@@ -4,7 +4,6 @@ title: Git Trees | GitHub API
 
 # Trees
 
-* TOC
 {:toc}
 
 ## Get a Tree

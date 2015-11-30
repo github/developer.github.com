@@ -4,7 +4,6 @@ title: Organization Members | GitHub API
 
 # Members
 
-* TOC
 {:toc}
 
 ## Members list
@@ -15,7 +14,9 @@ be returned.
 
     GET /orgs/:org/members
 
-### Parameters {#audit-two-factor-auth}
+<a id="audit-two-factor-auth">
+
+### Parameters
 
 Name    | Type    | Description
 --------|---------|--------------
@@ -24,16 +25,17 @@ Name    | Type    | Description
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
 
-<div class="alert">
-  <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
-  </p>
+{{#tip}}
 
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.ironman-preview+json</pre>
-  </p>
-</div>
+We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see [the blog post](/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ironman-preview+json
+```
+
+{{/tip}}
 
 ### Response
 

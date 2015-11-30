@@ -4,7 +4,6 @@ title: Gists | GitHub API
 
 # Gists
 
-* TOC
 {:toc}
 
 ## Authentication
@@ -55,7 +54,9 @@ Name | Type | Description
 
     GET /gists/:id
 
-### Response {#detailed-gist-representation}
+<a id="detailed-gist-representation">
+
+### Response
 
 <%= headers 200 %>
 <%= json :full_gist %>
@@ -91,11 +92,11 @@ The keys in the `files` object are the `string` filename, and the value is anoth
   }
 %>
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally.
-	</p>
-</div>
+{{#tip}}
+
+**Note:** Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally.
+
+{{/tip}}
 
 ### Response
 
@@ -129,7 +130,7 @@ The keys in the `files` object are the `string` filename. The value is another `
 {{#tip}}
 
 <strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the object. Deletes can be performed by including the filename with a <code>null</code> object.
-	
+
 {{/tip}}
 
 
@@ -182,11 +183,11 @@ The keys in the `files` object are the `string` filename. The value is another `
 
     POST /gists/:id/forks
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: This was previously <code>/gists/:id/fork</code>
-	</p>
-</div>
+{{#tip}}
+
+**Note**: This was previously `/gists/:id/fork`.
+
+{{/tip}}
 
 ### Response
 

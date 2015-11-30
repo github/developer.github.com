@@ -4,7 +4,6 @@ title: Enterprise | GitHub API
 
 # Enterprise <%= fetch_content(:latest_enterprise_version) %>
 
-* TOC
 {:toc}
 
 [GitHub Enterprise](https://enterprise.github.com/) supports the same powerful API available on GitHub.com as well as its own set of API endpoints. You can find a list of these endpoints on the sidebar, with the exception of the [User Administration][] API, which is within its own section.
@@ -13,15 +12,15 @@ title: Enterprise | GitHub API
 
 All API endpoints—except [Management Console][] API endpoints—are prefixed with the following URL:
 
-<pre class="terminal">
+``` command-line
 http(s)://<em>hostname</em>/api/v3/
-</pre>
+```
 
 [Management Console][] API endpoints are only prefixed with a hostname:
 
-<pre class="terminal">
+``` command-line
 http(s)://<em>hostname</em>/
-</pre>
+```
 
 ## Authentication
 

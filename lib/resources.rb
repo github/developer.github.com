@@ -60,7 +60,7 @@ module GitHub
         lines << "X-RateLimit-Limit: 5000" unless head.has_key?('X-RateLimit-Limit')
         lines << "X-RateLimit-Remaining: 4999" unless head.has_key?('X-RateLimit-Remaining')
 
-        %(<pre class="headers"><code>#{lines * "\n"}</code></pre>\n)
+        %(``` headers\n#{lines.join("\n")}\n```\n)
       end
 
       def link_header(rels)
@@ -90,8 +90,7 @@ module GitHub
         hash = get_resource(key)
         hash = yield hash if block_given?
 
-        %(<pre class="body-response"><code class="language-javascript">) +
-          JSON.pretty_generate(hash) + "</code></pre>"
+        "``` json\n" + JSON.pretty_generate(hash) + "\n```\n"
       end
 
       def get_resource(key)

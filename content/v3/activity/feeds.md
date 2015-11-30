@@ -4,7 +4,6 @@ title: Feeds | GitHub API
 
 # Feeds
 
-* TOC
 {:toc}
 
 ## List Feeds

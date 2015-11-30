@@ -4,7 +4,6 @@ title: Getting Started | GitHub API
 
 # Getting Started
 
-* TOC
 {:toc}
 
 Let's walk through core API concepts as we tackle some everyday use cases.
@@ -22,56 +21,59 @@ There's no easier way to kick the tires than through [cURL][curl].
 Let's start by testing our setup. Open up a command prompt and enter the
 following command (without the `$`):
 
-{:.terminal}
-    $ curl https://api.github.com/zen
+``` command-line
+$ curl https://api.github.com/zen
 
-    Keep it logically awesome.
+> Keep it logically awesome.
+```
 
 The response will be a random selection from our design philosophies.
 
 Next, let's `GET` [Chris Wanstrath's][defunkt github] [GitHub profile][users api]:
 
-{:.terminal}
-    # GET /users/defunkt
-    $ curl https://api.github.com/users/defunkt
+``` command-line
+# GET /users/defunkt
+$ curl https://api.github.com/users/defunkt
 
-    {
-      "login": "defunkt",
-      "id": 2,
-      "url": "https://api.github.com/users/defunkt",
-      "html_url": "https://github.com/defunkt",
-      ...
-    }
+> {
+>   "login": "defunkt",
+>   "id": 2,
+>   "url": "https://api.github.com/users/defunkt",
+>   "html_url": "https://github.com/defunkt",
+>   ...
+> }
+```
 
 Mmmmm, tastes like [JSON][json]. Let's add the `-i` flag to include headers:
 
-{:.terminal}
-    $ curl -i https://api.github.com/users/defunkt
+``` command-line
+$ curl -i https://api.github.com/users/defunkt
 
-    HTTP/1.1 200 OK
-    Server: GitHub.com
-    Date: Sun, 11 Nov 2012 18:43:28 GMT
-    Content-Type: application/json; charset=utf-8
-    Connection: keep-alive
-    Status: 200 OK
-    ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
-    X-RateLimit-Limit: 60
-    X-RateLimit-Remaining: 57
-    X-RateLimit-Reset: 1352660008
-    X-GitHub-Media-Type: github.v3
-    Vary: Accept
-    Cache-Control: public, max-age=60, s-maxage=60
-    X-Content-Type-Options: nosniff
-    Content-Length: 692
-    Last-Modified: Tue, 30 Oct 2012 18:58:42 GMT
+> HTTP/1.1 200 OK
+> Server: GitHub.com
+> Date: Sun, 11 Nov 2012 18:43:28 GMT
+> Content-Type: application/json; charset=utf-8
+> Connection: keep-alive
+> Status: 200 OK
+> ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
+> X-RateLimit-Limit: 60
+> X-RateLimit-Remaining: 57
+> X-RateLimit-Reset: 1352660008
+> X-GitHub-Media-Type: github.v3
+> Vary: Accept
+> Cache-Control: public, max-age=60, s-maxage=60
+> X-Content-Type-Options: nosniff
+> Content-Length: 692
+> Last-Modified: Tue, 30 Oct 2012 18:58:42 GMT
 
-    {
-      "login": "defunkt",
-      "id": 2,
-      "url": "https://api.github.com/users/defunkt",
-      "html_url": "https://github.com/defunkt",
-      ...
-    }
+> {
+>   "login": "defunkt",
+>   "id": 2,
+>   "url": "https://api.github.com/users/defunkt",
+>   "html_url": "https://github.com/defunkt",
+>   ...
+> }
+```
 
 There are a few interesting bits in the response headers. As expected, the
 `Content-Type` is `application/json`.
@@ -98,10 +100,11 @@ _authenticate_. In fact, doing anything interesting with the GitHub API requires
 The easiest way to authenticate with the GitHub API is by simply using your GitHub
 username and password via Basic Authentication.
 
-{:.terminal}
-    $ curl -i -u <your_username> https://api.github.com/users/defunkt
+``` command-line
+$ curl -i -u <your_username> https://api.github.com/users/defunkt
 
-    Enter host password for user '<your_username>':
+> Enter host password for user '<your_username>':
+```
 
 The `-u` flag sets the username, and cURL will prompt you for the password. You
 can use `-u "username:password"` to avoid the prompt, but this leaves your
@@ -117,18 +120,19 @@ reading and writing private information via the API.
 If you have [two-factor authentication][2fa] enabled, the API will return a
 `401 Unauthorized` error code for the above request (and every other API request):
 
-{:.terminal}
-    $ curl -i -u <your_username> https://api.github.com/users/defunkt
+``` command-line
+$ curl -i -u <your_username> https://api.github.com/users/defunkt
 
-    Enter host password for user '<your_username>':
+> Enter host password for user '<your_username>':
 
-    HTTP/1.1 401 Unauthorized
-    X-GitHub-OTP: required; :2fa-type
+> HTTP/1.1 401 Unauthorized
+> X-GitHub-OTP: required; :2fa-type
 
-    {
-      "message": "Must specify two-factor authentication OTP code.",
-      "documentation_url": "https://developer.github.com/v3/auth#working-with-two-factor-authentication"
-    }
+> {
+>   "message": "Must specify two-factor authentication OTP code.",
+>   "documentation_url": "https://developer.github.com/v3/auth#working-with-two-factor-authentication"
+> }
+```
 
 The easiest way to get around that error is to create an OAuth token and use
 OAuth authentication instead of Basic Authentication. See the
@@ -140,19 +144,20 @@ When properly authenticated, you can take advantage of the permissions
 associated with your GitHub account. For example, try getting
 [your own user profile][auth user api]:
 
-{:.terminal}
-    $ curl -i -u <your_username> https://api.github.com/user
+``` command-line
+$ curl -i -u <your_username> https://api.github.com/user
 
-    {
-      ...
-      "plan": {
-        "space": 2516582,
-        "collaborators": 10,
-        "private_repos": 20,
-        "name": "medium"
-      }
-      ...
-    }
+> {
+>   ...
+>   "plan": {
+>     "space": 2516582,
+>    "collaborators": 10,
+>    "private_repos": 20,
+>    "name": "medium"
+>  }
+>   ...
+> }
+```
 
 This time, in addition to the same set of public information we
 retrieved for [@defunkt][defunkt github] earlier, you should also see the non-public
@@ -189,31 +194,32 @@ An easier way to get a token is to [create a **personal access token**][personal
 Also, the [**Authorizations API**][authorizations api] makes it simple to use Basic Authentication
 to create an OAuth token. Try pasting and running the following command:
 
-{:.terminal}
-    $ curl -i -u <your_username> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
-        https://api.github.com/authorizations
+``` command-line
+$ curl -i -u <your_username> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
+$    https://api.github.com/authorizations
 
-    HTTP/1.1 201 Created
-    Location: https://api.github.com/authorizations/2
-    Content-Length: 384
+> HTTP/1.1 201 Created
+> Location: https://api.github.com/authorizations/2
+> Content-Length: 384
 
-    {
-      "scopes": [
-        "repo",
-        "user"
-      ],
-      "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",
-      "updated_at": "2012-11-14T14:04:24Z",
-      "url": "https://api.github.com/authorizations/2",
-      "app": {
-        "url": "https://developer.github.com/v3/oauth/#oauth-authorizations-api",
-        "name": "GitHub API"
-      },
-      "created_at": "2012-11-14T14:04:24Z",
-      "note_url": null,
-      "id": 2,
-      "note": "getting-started"
-    }
+> {
+>   "scopes": [
+>     "repo",
+>    "user"
+>  ],
+>  "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",
+>  "updated_at": "2012-11-14T14:04:24Z",
+>  "url": "https://api.github.com/authorizations/2",
+>  "app": {
+>    "url": "https://developer.github.com/v3/oauth/#oauth-authorizations-api",
+>    "name": "GitHub API"
+>  },
+>  "created_at": "2012-11-14T14:04:24Z",
+>  "note_url": null,
+>  "id": 2,
+>   "note": "getting-started"
+> }
+```
 
 There's a lot going on in this one little call, so let's break it down. First,
 the `-d` flag indicates we're doing a `POST`, using the
@@ -237,10 +243,11 @@ return the [previously described `401 Unauthorized` error code][2fa section]
 for the above request. You can get around that error by providing a 2FA OTP code
 in the [X-GitHub-OTP request header][2fa header]:
 
-{:.terminal}
-    $ curl -i -u <your_username> -H "X-GitHub-OTP: <your_2fa_OTP_code>" \
-        -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
-        https://api.github.com/authorizations
+``` command-line
+$ curl -i -u <your_username> -H "X-GitHub-OTP: <your_2fa_OTP_code>" \
+    -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
+    https://api.github.com/authorizations
+```
 
 If you enabled 2FA with a mobile application, go ahead and get an OTP code from
 your one-time password application on your phone. If you enabled 2FA with text
@@ -250,9 +257,10 @@ this endpoint.
 Now, we can use the forty character `token` instead of a username and password
 in the rest of our examples. Let's grab our own user info again, using OAuth this time:
 
-{:.terminal}
-    $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-        https://api.github.com/user
+``` command-line
+$ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
+    https://api.github.com/user
+```
 
 **Treat OAuth tokens like passwords!** Don't share them with other users or store
 them in insecure places. The tokens in these examples are fake and the names have
@@ -267,24 +275,28 @@ Almost any meaningful use of the GitHub API will involve some level of Repositor
 information. We can [`GET` repository details][get repo] in the same way we fetched user
 details earlier:
 
-{:.terminal}
-    $ curl -i https://api.github.com/repos/twbs/bootstrap
+``` command-line
+$ curl -i https://api.github.com/repos/twbs/bootstrap
+```
 
 In the same way, we can [view repositories for the authenticated user][user repos api]:
 
-{:.terminal}
-    $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-        https://api.github.com/user/repos
+``` command-line
+$ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
+    https://api.github.com/user/repos
+```
 
 Or, we can [list repositories for another user][other user repos api]:
 
-{:.terminal}
-    $ curl -i https://api.github.com/users/technoweenie/repos
+``` command-line
+$ curl -i https://api.github.com/users/technoweenie/repos
+```
 
 Or, we can [list repositories for an organization][org repos api]:
 
-{:.terminal}
-    $ curl -i https://api.github.com/orgs/mozilla/repos
+``` command-line
+$ curl -i https://api.github.com/orgs/mozilla/repos
+```
 
 The information returned from these calls will depend on how we authenticate:
 
@@ -298,8 +310,9 @@ can filter the repositories returned based on what type of access the user has
 for the repository. In this way, we can fetch only directly-owned repositories,
 organization repositories, or repositories the user collaborates on via a team.
 
-{:.terminal}
-    $ curl -i "https://api.github.com/users/technoweenie/repos?type=owner"
+``` command-line
+$ curl -i "https://api.github.com/users/technoweenie/repos?type=owner"
+```
 
 In this example, we grab only those repositories that technoweenie owns, not the
 ones on which he collaborates. Note the quoted URL above. Depending on your
@@ -312,15 +325,16 @@ Fetching information for existing repositories is a common use case, but the
 GitHub API supports creating new repositories as well. To [create a repository][create repo],
 we need to `POST` some JSON containing the details and configuration options.
 
-{:.terminal}
-    $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-        -d '{ \
-            "name": "blog", \
-            "auto_init": true, \
-            "private": true, \
-            "gitignore_template": "nanoc" \
-          }' \
-        https://api.github.com/user/repos
+``` command-line
+$ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
+    -d '{ \
+        "name": "blog", \
+        "auto_init": true, \
+        "private": true, \
+        "gitignore_template": "nanoc" \
+      }' \
+    https://api.github.com/user/repos
+```
 
 In this minimal example, we create a new repository for our blog (to be served
 on [GitHub Pages][pages], perhaps). Though the blog will be public, we've made
@@ -334,14 +348,15 @@ an owner, just change the API method from `/user/repos` to `/orgs/<org_name>/rep
 
 Next, let's fetch our newly created repository:
 
-{:.terminal}
-    $ curl -i https://api.github.com/repos/pengwynn/blog
+``` command-line
+$ curl -i https://api.github.com/repos/pengwynn/blog
 
-    HTTP/1.1 404 Not Found
+> HTTP/1.1 404 Not Found
 
-    {
-        "message": "Not Found"
-    }
+> {
+>    "message": "Not Found"
+> }
+```
 
 Oh noes! Where did it go? Since we created the repository as _private_, we need
 to authenticate in order to see it. If you're a grizzled HTTP user, you might
@@ -359,21 +374,24 @@ your team.
 Just like github.com, the API provides a few methods to view issues for the
 authenticated user. To [see all your issues][get issues api], call `GET /issues`:
 
-{:.terminal}
-    $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-        https://api.github.com/issues
+``` command-line
+$ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
+    https://api.github.com/issues
+```
 
 To get only the [issues under one of your GitHub organizations][get issues api], call `GET
 /orgs/<org>/issues`:
 
-{:.terminal}
-    $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-        https://api.github.com/orgs/rails/issues
+``` command-line
+$ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
+    https://api.github.com/orgs/rails/issues
+```
 
 We can also get [all the issues under a single repository][repo issues api]:
 
-{:.terminal}
-    $ curl -i https://api.github.com/repos/rails/rails/issues
+``` command-line
+$ curl -i https://api.github.com/repos/rails/rails/issues
+```
 
 ### Pagination
 
@@ -381,13 +399,14 @@ A project the size of Rails has thousands of issues. We'll need to [paginate][pa
 making multiple API calls to get the data. Let's repeat that last call, this
 time taking note of the response headers:
 
-{:.terminal}
-    $ curl -i https://api.github.com/repos/rails/rails/issues
+``` command-line
+$ curl -i https://api.github.com/repos/rails/rails/issues
 
-    HTTP/1.1 200 OK
+> HTTP/1.1 200 OK
 
-    Link: <https://api.github.com/repos/rails/rails/issues?page=2>; rel="next",
-    <https://api.github.com/repos/rails/rails/issues?page=14>; rel="last"
+> Link: <https://api.github.com/repos/rails/rails/issues?page=2>; rel="next",
+> <https://api.github.com/repos/rails/rails/issues?page=14>; rel="last"
+```
 
 The [`Link` header][link-header] provides a way for a response to link to
 external resources, in this case additional pages of data. Since our call found
@@ -404,54 +423,55 @@ OAuth token in the header. Also, we'll pass the title, body, and labels in the J
 body to the `/issues` path underneath the repository in which we want to create
 the issue:
 
-{:.terminal}
-    $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-        -d '{ \
-             "title": "New logo", \
-             "body": "We should have one", \
-             "labels": ["design"] \
-           }' \
-        https://api.github.com/repos/pengwynn/api-sandbox/issues
+``` command-line
+$ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
+$    -d '{ \
+$         "title": "New logo", \
+$         "body": "We should have one", \
+$         "labels": ["design"] \
+$       }' \
+$    https://api.github.com/repos/pengwynn/api-sandbox/issues
 
-    HTTP/1.1 201 Created
-    Location: https://api.github.com/repos/pengwynn/api-sandbox/issues/17
-    X-RateLimit-Limit: 5000
+> HTTP/1.1 201 Created
+> Location: https://api.github.com/repos/pengwynn/api-sandbox/issues/17
+> X-RateLimit-Limit: 5000
 
-    {
-      "pull_request": {
-        "patch_url": null,
-        "html_url": null,
-        "diff_url": null
-      },
-      "created_at": "2012-11-14T15:25:33Z",
-      "comments": 0,
-      "milestone": null,
-      "title": "New logo",
-      "body": "We should have one",
-      "user": {
-        "login": "pengwynn",
-        "gravatar_id": "7e19cd5486b5d6dc1ef90e671ba52ae0",
-        "avatar_url": "https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
-        "id": 865,
-        "url": "https://api.github.com/users/pengwynn"
-      },
-      "closed_at": null,
-      "updated_at": "2012-11-14T15:25:33Z",
-      "number": 17,
-      "closed_by": null,
-      "html_url": "https://github.com/pengwynn/api-sandbox/issues/17",
-      "labels": [
-        {
-          "color": "ededed",
-          "name": "design",
-          "url": "https://api.github.com/repos/pengwynn/api-sandbox/labels/design"
-        }
-      ],
-      "id": 8356941,
-      "assignee": null,
-      "state": "open",
-      "url": "https://api.github.com/repos/pengwynn/api-sandbox/issues/17"
-    }
+> {
+>   "pull_request": {
+>     "patch_url": null,
+>     "html_url": null,
+>     "diff_url": null
+>   },
+>   "created_at": "2012-11-14T15:25:33Z",
+>   "comments": 0,
+>   "milestone": null,
+>   "title": "New logo",
+>   "body": "We should have one",
+>   "user": {
+>     "login": "pengwynn",
+>     "gravatar_id": "7e19cd5486b5d6dc1ef90e671ba52ae0",
+>     "avatar_url": "https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
+>     "id": 865,
+>     "url": "https://api.github.com/users/pengwynn"
+>   },
+>   "closed_at": null,
+>   "updated_at": "2012-11-14T15:25:33Z",
+>   "number": 17,
+>   "closed_by": null,
+>   "html_url": "https://github.com/pengwynn/api-sandbox/issues/17",
+>   "labels": [
+>     {
+>       "color": "ededed",
+>       "name": "design",
+>       "url": "https://api.github.com/repos/pengwynn/api-sandbox/labels/design"
+>     }
+>   ],
+>   "id": 8356941,
+>   "assignee": null,
+>   "state": "open",
+>   "url": "https://api.github.com/repos/pengwynn/api-sandbox/issues/17"
+> }
+```
 
 The response gives us a couple of pointers to the newly created issue, both in
 the `Location` response header and the `url` field of the JSON response.
@@ -463,22 +483,24 @@ caching information that hasn't changed. The API supports [conditional
 requests][conditional-requests] and helps you do the right thing. Consider the
 first call we made to get defunkt's profile:
 
-{:.terminal}
-    $ curl -i https://api.github.com/users/defunkt
+``` command-line
+$ curl -i https://api.github.com/users/defunkt
 
-    HTTP/1.1 200 OK
-    ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
+> HTTP/1.1 200 OK
+> ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
+```
 
 In addition to the JSON body, take note of the HTTP status code of `200` and
 the `ETag` header.
 The [ETag][etag] is a fingerprint of the response. If we pass that on subsequent calls,
 we can tell the API to give us the resource again, only if it has changed:
 
-{:.terminal}
-    $ curl -i -H 'If-None-Match: "bfd85cbf23ac0b0c8a29bee02e7117c6"' \
-        https://api.github.com/users/defunkt
+``` command-line
+$ curl -i -H 'If-None-Match: "bfd85cbf23ac0b0c8a29bee02e7117c6"' \
+$    https://api.github.com/users/defunkt
 
-    HTTP/1.1 304 Not Modified
+> HTTP/1.1 304 Not Modified
+```
 
 The `304` status indicates that the resource hasn't changed since the last time
 we asked for it and the response will contain no body. As a bonus, `304`

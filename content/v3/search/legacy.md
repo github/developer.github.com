@@ -4,7 +4,6 @@ title: Legacy Search | GitHub API
 
 # Legacy Search
 
-* TOC
 {:toc}
 
 This is a listing of the Legacy Search API features from API v2 that have been ported to API

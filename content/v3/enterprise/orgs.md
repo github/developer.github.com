@@ -4,16 +4,15 @@ title: Organization Administration | GitHub API
 
 # Organization Administration
 
-* TOC
 {:toc}
 
 The Organization Administration API allows you to create organizations on a GitHub Enterprise appliance. *It is only available to [authenticated](/v3/#authentication) site administrators.* Normal users will receive a `403` response if they try to access it.
 
 Prefix all the endpoints for this API with the following URL:
 
-<pre class="terminal">
+``` command-line
 http(s)://<em>hostname</em>/api/v3
-</pre>
+```
 
 ## Create an organization
 

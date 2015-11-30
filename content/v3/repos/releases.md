@@ -4,7 +4,6 @@ title: Releases | GitHub API
 
 # Releases
 
-* TOC
 {:toc}
 
 ## List releases for a repository

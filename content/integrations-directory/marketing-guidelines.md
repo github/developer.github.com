@@ -4,7 +4,6 @@ title: Integrations Directory marketing guidelines | GitHub API
 
 # Marketing guidelines
 
-* TOC
 {:toc}
 
 This document will help you write compelling and well-structured marketing materials to help GitHub users understand the value of your integration. The sections below outline the document structure for integration pages.
@@ -25,7 +24,7 @@ Keep this section short and sweet.
 
 **Example**
 
-> Sample CI helps you deploy your code with confidence by continuously running your test suite. Avoid bugs and avert deployment disasters by catching bugs before they reach your users. Sample CI can update the build status on your pull requests as they progress and can deploy successful builds to production automatically.  
+> Sample CI helps you deploy your code with confidence by continuously running your test suite. Avoid bugs and avert deployment disasters by catching bugs before they reach your users. Sample CI can update the build status on your pull requests as they progress and can deploy successful builds to production automatically.
 
 ## Images
 

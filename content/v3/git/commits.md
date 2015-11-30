@@ -4,7 +4,6 @@ title: Git Commits | GitHub API
 
 # Commits
 
-* TOC
 {:toc}
 
 ## Get a Commit

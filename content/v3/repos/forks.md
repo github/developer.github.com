@@ -4,7 +4,6 @@ title: Forks | GitHub API
 
 # Forks
 
-* TOC
 {:toc}
 
 ## List forks

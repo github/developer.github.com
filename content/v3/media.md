@@ -3,7 +3,6 @@ title: Media Types | GitHub API
 ---
 # Media Types
 
-* TOC
 {:toc}
 
 Custom media types are used in the API to let consumers choose the format
@@ -45,20 +44,21 @@ put the version before the property:
 You can check the current version through every response's headers.  Look
 for the `X-GitHub-Media-Type` header:
 
-{:.terminal}
-    $ curl https://api.github.com/users/technoweenie -I
-    HTTP/1.1 200 OK
-    X-GitHub-Media-Type: github.v3
+``` command-line
+$ curl https://api.github.com/users/technoweenie -I
+> HTTP/1.1 200 OK
+> X-GitHub-Media-Type: github.v3
 
-    $ curl https://api.github.com/users/technoweenie -I \
-      -H "Accept: application/vnd.github.full+json"
-    HTTP/1.1 200 OK
-    X-GitHub-Media-Type: github.v3; param=full; format=json
+$ curl https://api.github.com/users/technoweenie -I \
+$  -H "Accept: application/vnd.github.full+json"
+> HTTP/1.1 200 OK
+> X-GitHub-Media-Type: github.v3; param=full; format=json
 
-    $ curl https://api.github.com/users/technoweenie -I \
-      -H "Accept: application/vnd.github.v3.full+json"
-    HTTP/1.1 200 OK
-    X-GitHub-Media-Type: github.v3; param=full; format=json
+$ curl https://api.github.com/users/technoweenie -I \
+$  -H "Accept: application/vnd.github.v3.full+json"
+> HTTP/1.1 200 OK
+> X-GitHub-Media-Type: github.v3; param=full; format=json
+```
 
 ## Comment Body Properties
 

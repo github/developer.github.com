@@ -4,7 +4,6 @@ title: Organizations | GitHub API
 
 # Organizations
 
-* TOC
 {:toc}
 
 ## List your organizations

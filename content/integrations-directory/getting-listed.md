@@ -4,7 +4,6 @@ title: Getting listed in the Integrations Directory | GitHub API
 
 # Getting your integration listed
 
-* TOC
 {:toc}
 
 ## Listing requirements

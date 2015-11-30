@@ -4,7 +4,6 @@ title: Contents | GitHub API
 
 # Contents
 
-* TOC
 {:toc}
 
 These API methods let you retrieve the contents of files within a repository as
@@ -265,12 +264,13 @@ Name | Type | Description
 
 To follow redirects with curl, use the `-L` switch:
 
-{:.terminal}
-    curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
+``` command-line
+$curl -L https://api.github.com/repos/octokit/octokit.rb/tarball > octokit.tar.gz
 
-      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                     Dload  Upload   Total   Spent    Left  Speed
-    100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
+>   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+>                                      Dload  Upload   Total   Spent    Left  Speed
+> 100  206k  100  206k    0     0   146k      0  0:00:01  0:00:01 --:--:--  790k
+```
 
 ## Custom media types
 

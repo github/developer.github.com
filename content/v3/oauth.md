@@ -4,7 +4,6 @@ title: OAuth | GitHub API
 
 # OAuth
 
-* TOC
 {:toc}
 
 OAuth2 is a protocol that lets external apps request authorization to
@@ -56,9 +55,9 @@ Name | Type | Description
 -----|------|---------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
-`code`|`string` | **Required**. The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
+`code`|`string` | **Required**. The code you received as a response to [Step 1](#1-redirect-users-to-request-github-access).
 `redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
-`state`|`string` | The unguessable random string you optionally provided in [Step 1](#redirect-users-to-request-github-access).
+`state`|`string` | The unguessable random string you optionally provided in [Step 1](#1-redirect-users-to-request-github-access).
 
 ### Response
 
@@ -122,8 +121,9 @@ cleaner approach is to include it in the Authorization header
 
 For example, in curl you can set the Authorization header like this:
 
-{:.terminal}
-    curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+``` command-line
+curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+```
 
 ## Non-Web Application Flow
 
@@ -164,11 +164,12 @@ authorize form.
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.
 
-{:.terminal}
-    $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
-    HTTP/1.1 200 OK
-    X-OAuth-Scopes: repo, user
-    X-Accepted-OAuth-Scopes: user
+``` command-line
+$ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
+HTTP/1.1 200 OK
+X-OAuth-Scopes: repo, user
+X-Accepted-OAuth-Scopes: user
+```
 
 `X-OAuth-Scopes` lists the scopes your token has authorized.
 `X-Accepted-OAuth-Scopes` lists the scopes that the action checks for.
@@ -306,7 +307,7 @@ receive this error.
          :error_uri         => "https://developer.github.com/v3/oauth/#bad-verification-code"
 %>
 
-To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
+To solve this error, start the [OAuth process over from the beginning](#1-redirect-users-to-request-github-access)
 and get a new code.
 
 ## Directing users to review their access for an application

@@ -4,7 +4,6 @@ title: Review Comments | GitHub API
 
 # Review Comments
 
-* TOC
 {:toc}
 
 Pull Request Review Comments are comments on a portion of the unified

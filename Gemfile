@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 ruby '2.2.3'
 
 gem 'nanoc', '~> 4.0'
+gem 'nanoc-conref-fs', '~> 0.5'
 gem 'nokogiri', '~> 1.6.0'
 
 # rendering

@@ -1,6 +1,8 @@
 # All files in the 'lib' directory will be loaded
 # before nanoc starts compiling.
 
+require 'nanoc-conref-fs'
+
 require 'nanoc-html-pipeline'
 require 'extended-markdown-filter'
 require 'page-toc-filter'

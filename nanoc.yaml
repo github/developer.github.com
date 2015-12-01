@@ -12,6 +12,20 @@ pipeline_config:
   emf_use_blocks: true
   asset_root: https://a248.e.akamai.net/assets.github.com/images/icons
 
+versions:
+  - &latest_version_number 2.4
+  - 2.3
+  - 2.2
+  - 2.1
+  - 2.0
+
+page_variables:
+  -
+    scope:
+      path: ''
+    values:
+      version: 'dotcom'
+
 # For the atom feed.
 base_url: http://developer.github.com
 
@@ -76,10 +90,8 @@ prune:
 # “layout/” directories in the site directory.
 data_sources:
   -
-    type: filesystem
+    type: conref-fs
+    items_root: /
+    layouts_root: /
     encoding: utf-8
-  -
-    type: filesystem
-    items_root: /static
-    content_dir: static
-    layouts_dir: nil
+    identifier_type: full

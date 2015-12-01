@@ -2,6 +2,7 @@ require 'pp'
 require 'stringio'
 require 'cgi'
 require 'securerandom'
+require 'json'
 
 Dir[File.join(File.dirname(__FILE__), 'lib', 'responses', '*.rb')].each { |file| load file }
 

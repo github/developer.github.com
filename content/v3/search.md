@@ -1,5 +1,5 @@
 ---
-title: Search | GitHub API
+title: Search
 ---
 
 # Search

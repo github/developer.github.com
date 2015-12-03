@@ -1,5 +1,5 @@
 ---
-title: Organization Administration | GitHub API
+title: Organization Administration
 ---
 
 # Organization Administration

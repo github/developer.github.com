@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting | GitHub API
+title: Troubleshooting
 ---
 
 # Troubleshooting

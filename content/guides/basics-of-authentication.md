@@ -1,5 +1,5 @@
 ---
-title: Basics of Authentication | GitHub API
+title: Basics of Authentication
 ---
 
 # Basics of Authentication

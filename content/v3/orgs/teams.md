@@ -1,5 +1,5 @@
 ---
-title: Organization Teams | GitHub API
+title: Organization Teams
 ---
 
 # Teams

@@ -1,5 +1,5 @@
 ---
-title: Notifications | GitHub API
+title: Notifications
 ---
 
 # Notifications

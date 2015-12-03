@@ -1,5 +1,5 @@
 ---
-title: Git Refs | GitHub API
+title: Git Refs
 ---
 
 # References

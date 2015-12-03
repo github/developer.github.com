@@ -1,5 +1,5 @@
 ---
-title: Statuses | GitHub API
+title: Statuses
 ---
 
 # Statuses

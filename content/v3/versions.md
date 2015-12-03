@@ -1,5 +1,5 @@
 ---
-title: Versions | GitHub API
+title: Versions
 ---
 # Versions
 

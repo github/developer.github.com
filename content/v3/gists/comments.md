@@ -1,5 +1,5 @@
 ---
-title: Gist Comments | GitHub API
+title: Gist Comments
 ---
 
 # Comments

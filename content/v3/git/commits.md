@@ -1,5 +1,5 @@
 ---
-title: Git Commits | GitHub API
+title: Git Commits
 ---
 
 # Commits

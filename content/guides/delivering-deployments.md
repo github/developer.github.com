@@ -1,5 +1,5 @@
 ---
-title: Delivering deployments | GitHub API
+title: Delivering deployments
 ---
 
 # Delivering deployments

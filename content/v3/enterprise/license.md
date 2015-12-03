@@ -1,5 +1,5 @@
 ---
-title: License | GitHub API
+title: License
 ---
 
 # License

@@ -1,5 +1,5 @@
 ---
-title: Development Guides | GitHub API
+title: Development Guides
 layout: guides
 ---
 

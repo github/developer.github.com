@@ -1,5 +1,5 @@
 ---
-title: Organizations | GitHub API
+title: Organizations
 ---
 
 # Organizations

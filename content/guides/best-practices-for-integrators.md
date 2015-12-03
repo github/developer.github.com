@@ -1,5 +1,5 @@
 ---
-title: Best practices for integrators | GitHub API
+title: Best practices for integrators
 ---
 
 # Best practices for integrators

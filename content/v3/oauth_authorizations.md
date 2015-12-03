@@ -1,5 +1,5 @@
 ---
-title: Authorizations | GitHub API
+title: Authorizations
 ---
 
 # OAuth Authorizations API

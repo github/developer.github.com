@@ -1,5 +1,5 @@
 ---
-title: Git Tags | GitHub API
+title: Git Tags
 ---
 
 # Tags

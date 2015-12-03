@@ -1,5 +1,5 @@
 ---
-title: Getting Started | GitHub API
+title: Getting Started
 ---
 
 # Getting Started

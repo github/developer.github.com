@@ -1,5 +1,5 @@
 ---
-title: Migrations | GitHub API
+title: Migrations
 ---
 
 # Migrations

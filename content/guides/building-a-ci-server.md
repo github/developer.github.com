@@ -1,5 +1,5 @@
 ---
-title: Building a CI server | GitHub API
+title: Building a CI server
 ---
 
 # Building a CI server

@@ -1,5 +1,5 @@
 ---
-title: Deployments | GitHub API
+title: Deployments
 ---
 
 # Deployments

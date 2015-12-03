@@ -1,5 +1,5 @@
 ---
-title: Management Console | GitHub API
+title: Management Console
 ---
 
 # Management Console

@@ -1,5 +1,5 @@
 ---
-title: Other Authentication Methods | GitHub API
+title: Other Authentication Methods
 ---
 
 # Other Authentication Methods

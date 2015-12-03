@@ -1,5 +1,5 @@
 ---
-title: Configuring your server | GitHub API
+title: Configuring your server
 layout: webhooks
 ---
 

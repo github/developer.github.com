@@ -1,5 +1,5 @@
 ---
-title: Using SSH Agent Forwarding | GitHub API
+title: Using SSH Agent Forwarding
 ---
 
 # Using SSH agent forwarding

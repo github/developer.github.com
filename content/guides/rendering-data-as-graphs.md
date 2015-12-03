@@ -1,5 +1,5 @@
 ---
-title: Rendering Data as Graphs | GitHub API
+title: Rendering Data as Graphs
 ---
 
 # Rendering Data as Graphs

@@ -1,5 +1,5 @@
 ---
-title: Merging | GitHub API
+title: Merging
 ---
 
 # Merging

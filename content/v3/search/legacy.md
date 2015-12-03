@@ -1,5 +1,5 @@
 ---
-title: Legacy Search | GitHub API
+title: Legacy Search
 ---
 
 # Legacy Search

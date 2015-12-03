@@ -1,5 +1,5 @@
 ---
-title: Creating webhooks | GitHub API
+title: Creating webhooks
 layout: webhooks
 ---
 

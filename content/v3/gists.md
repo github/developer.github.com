@@ -1,5 +1,5 @@
 ---
-title: Gists | GitHub API
+title: Gists
 ---
 
 # Gists

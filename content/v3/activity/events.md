@@ -1,5 +1,5 @@
 ---
-title: Events | GitHub API
+title: Events
 ---
 
 # Events

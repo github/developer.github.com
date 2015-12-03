@@ -1,5 +1,5 @@
 ---
-title: Users | GitHub API
+title: Users
 ---
 
 # Users

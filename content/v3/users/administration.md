@@ -1,5 +1,5 @@
 ---
-title: User Administration | GitHub API
+title: User Administration
 ---
 
 # Administration (Enterprise)

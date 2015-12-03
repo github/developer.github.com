@@ -1,5 +1,5 @@
 ---
-title: Markdown | GitHub API
+title: Markdown
 ---
 
 # Markdown

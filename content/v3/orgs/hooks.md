@@ -1,5 +1,5 @@
 ---
-title: Organization Webhooks | GitHub API
+title: Organization Webhooks
 ---
 
 # Webhooks

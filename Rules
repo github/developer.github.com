@@ -14,9 +14,8 @@ end
 
 passthrough '/CNAME'
 
-compile '/feed.*' do
+compile '/changes.atom' do
   filter :erb
-  filter :html_pipeline, @config[:pipeline_config]
 end
 
 compile '/integrations-directory/*' do
@@ -59,7 +58,7 @@ compile '/**/*' do
   layout(item[:layout] ? "/#{item[:layout]}.*" : '/default.*')
 end
 
-route '/feed.*' do
+route '/changes.atom' do
   '/changes.atom'
 end
 

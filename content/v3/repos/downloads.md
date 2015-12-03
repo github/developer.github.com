@@ -1,5 +1,5 @@
 ---
-title: Downloads | GitHub API
+title: Downloads
 ---
 
 # Downloads

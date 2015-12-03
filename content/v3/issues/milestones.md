@@ -1,5 +1,5 @@
 ---
-title: Issue Milestones | GitHub API
+title: Issue Milestones
 ---
 
 # Milestones

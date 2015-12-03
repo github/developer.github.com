@@ -1,5 +1,5 @@
 ---
-title: Feeds | GitHub API
+title: Feeds
 ---
 
 # Feeds

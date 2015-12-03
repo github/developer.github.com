@@ -1,5 +1,5 @@
 ---
-title: Statistics | GitHub API
+title: Statistics
 ---
 
 # Statistics

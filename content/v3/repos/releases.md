@@ -1,5 +1,5 @@
 ---
-title: Releases | GitHub API
+title: Releases
 ---
 
 # Releases

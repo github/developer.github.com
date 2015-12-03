@@ -1,5 +1,5 @@
 ---
-title: Traversing with Pagination | GitHub API
+title: Traversing with Pagination
 ---
 
 # Traversing with Pagination

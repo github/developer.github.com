@@ -1,5 +1,5 @@
 ---
-title: Watching | GitHub API
+title: Watching
 ---
 
 # Watching

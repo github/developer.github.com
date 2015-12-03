@@ -1,5 +1,5 @@
 ---
-title: Admin Stats | GitHub API
+title: Admin Stats
 ---
 
 # Admin Stats

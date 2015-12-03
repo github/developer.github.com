@@ -1,5 +1,5 @@
 ---
-title: Review Comments | GitHub API
+title: Review Comments
 ---
 
 # Review Comments

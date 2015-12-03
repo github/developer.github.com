@@ -1,5 +1,5 @@
 ---
-title: Organization Members | GitHub API
+title: Organization Members
 ---
 
 # Members

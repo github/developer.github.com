@@ -1,5 +1,5 @@
 ---
-title: Repositories | GitHub API
+title: Repositories
 ---
 
 # Repositories

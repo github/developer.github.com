@@ -1,5 +1,5 @@
 ---
-title: Automating deployments to integrators | GitHub API
+title: Automating deployments to integrators
 ---
 
 # Automating deployments to integrators

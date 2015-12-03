@@ -1,5 +1,5 @@
 ---
-title: Contents | GitHub API
+title: Contents
 ---
 
 # Contents

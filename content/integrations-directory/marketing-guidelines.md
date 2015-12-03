@@ -1,5 +1,5 @@
 ---
-title: Integrations Directory marketing guidelines | GitHub API
+title: Integrations Directory marketing guidelines
 ---
 
 # Marketing guidelines

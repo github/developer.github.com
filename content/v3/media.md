@@ -1,5 +1,5 @@
 ---
-title: Media Types | GitHub API
+title: Media Types
 ---
 # Media Types
 

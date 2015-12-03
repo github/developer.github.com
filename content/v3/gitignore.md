@@ -1,5 +1,5 @@
 ---
-title: Gitignore | GitHub API
+title: Gitignore
 ---
 
 # Gitignore

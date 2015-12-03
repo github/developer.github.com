@@ -1,5 +1,5 @@
 ---
-title: Managing deploy keys | GitHub API
+title: Managing deploy keys
 ---
 
 # Managing Deploy Keys

@@ -1,5 +1,5 @@
 ---
-title: Collaborators | GitHub API
+title: Collaborators
 ---
 
 # Collaborators

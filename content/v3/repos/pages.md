@@ -1,5 +1,5 @@
 ---
-title: Pages | GitHub API
+title: Pages
 ---
 
 # Pages

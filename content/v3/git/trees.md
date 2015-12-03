@@ -1,5 +1,5 @@
 ---
-title: Git Trees | GitHub API
+title: Git Trees
 ---
 
 # Trees

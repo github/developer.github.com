@@ -1,5 +1,5 @@
 ---
-title: Git Blobs | GitHub API
+title: Git Blobs
 ---
 
 # Blobs

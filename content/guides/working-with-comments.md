@@ -1,5 +1,5 @@
 ---
-title: Working with Comments | GitHub API
+title: Working with Comments
 ---
 
 # Working with Comments

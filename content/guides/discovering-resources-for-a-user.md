@@ -1,5 +1,5 @@
 ---
-title: Discovering resources for a user | GitHub API
+title: Discovering resources for a user
 ---
 
 # Discovering resources for a user

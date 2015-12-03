@@ -1,5 +1,5 @@
 ---
-title: Forks | GitHub API
+title: Forks
 ---
 
 # Forks

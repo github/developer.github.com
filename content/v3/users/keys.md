@@ -1,5 +1,5 @@
 ---
-title: User Public Keys | GitHub API
+title: User Public Keys
 ---
 
 # Public Keys

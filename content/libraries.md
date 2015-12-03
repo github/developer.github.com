@@ -1,5 +1,5 @@
 ---
-title: Libraries | GitHub API
+title: Libraries
 layout: libraries
 ---
 

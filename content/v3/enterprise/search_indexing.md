@@ -1,5 +1,5 @@
 ---
-title: Search Indexing | GitHub API
+title: Search Indexing
 ---
 
 # Search Indexing

@@ -1,5 +1,5 @@
 ---
-title: Enterprise | GitHub API
+title: Enterprise
 ---
 
 # Enterprise <%= fetch_content(:latest_enterprise_version) %>

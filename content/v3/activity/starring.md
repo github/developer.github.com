@@ -1,5 +1,5 @@
 ---
-title: Starring | GitHub API
+title: Starring
 ---
 
 # Starring

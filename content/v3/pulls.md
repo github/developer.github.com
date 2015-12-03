@@ -1,5 +1,5 @@
 ---
-title: Pull Requests | GitHub API
+title: Pull Requests
 ---
 
 # Pull Requests

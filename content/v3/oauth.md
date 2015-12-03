@@ -1,5 +1,5 @@
 ---
-title: OAuth | GitHub API
+title: OAuth
 ---
 
 # OAuth

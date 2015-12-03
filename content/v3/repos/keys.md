@@ -1,5 +1,5 @@
 ---
-title: Deploy Keys | GitHub API
+title: Deploy Keys
 ---
 
 # Deploy Keys

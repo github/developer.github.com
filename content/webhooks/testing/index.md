@@ -1,5 +1,5 @@
 ---
-title: Testing webhooks | GitHub API
+title: Testing webhooks
 layout: webhooks
 ---
 

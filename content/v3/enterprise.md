@@ -2,7 +2,7 @@
 title: Enterprise
 ---
 
-# Enterprise <%= fetch_content(:latest_enterprise_version) %>
+# Enterprise <%= config[:versions][0] %>
 
 {:toc}
 
@@ -37,7 +37,7 @@ Every Enterprise API endpoint is only accessible to GitHub Enterprise site admin
 
 ## Past Releases
 
-The latest release for GitHub Enterprise is <%= fetch_content(:latest_enterprise_version) %>. The GitHub APIs available to this release are located at <https://developer.github.com/enterprise/<%= fetch_content(:latest_enterprise_version) %>/>.
+The latest release for GitHub Enterprise is <%= config[:versions][0] %>. The GitHub APIs available to this release are located at <https://developer.github.com/enterprise/<%= config[:versions][0] %>/>.
 
 Documentation for the API that's bundled with your GitHub Enterprise appliance is available for past releases:
 

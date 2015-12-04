@@ -1,6 +1,8 @@
 require_relative 'lib/resources'
 require 'tmpdir'
 
+Dir.glob('tasks/**/*.rake').each { |r| load r }
+
 task :default => [:test]
 
 desc 'Builds the site'
@@ -28,8 +30,8 @@ task :run_proofer do
   latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']
   # swap versionless Enterprise articles with versioned paths
   href_swap = {
-    %r{help\.github\.com/enterprise/admin/} => "help.github.com/enterprise/#{latest_ent_version}/admin/",
-    %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{latest_ent_version}/user/"
+    %r{help\.github\.com/enterprise/admin/} => "help.github.com/enterprise/#{config[:versions][0]}/admin/",
+    %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{config[:versions][0]}/user/"
   }
   HTML::Proofer.new("./output", :href_ignore => ignored_links, :href_swap => href_swap).run
 end

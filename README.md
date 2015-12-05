@@ -95,11 +95,26 @@ For more information, see [the reference documentation](https://github.com/gjtor
 
 ## Development
 
-Nanoc compiles the site into static files living in `./output`.  It's
-smart enough not to try to compile unchanged files:
+You can fetch the latest dependencies by opening the command line and running `script/bootstrap`:
 
-```sh
-$ bundle exec nanoc compile
+``` sh
+$ script/bootstrap
+==> Installing gem dependencies…
+==> Installing npm dependencies…
+```
+
+You'll need Ruby 2.2.3 and at least Node v4.x.
+
+You can run `bundle exec rake build` to generate the site, but it's often more useful
+to simply build the server *and* start the site at the same time.
+
+Nanoc compiles the site into static files living in `./output`.  It's
+smart enough not to try to compile unchanged files.
+
+You can start the site with `script/server`:
+
+``` sh
+$ script/server
 Loading site data...
 Compiling site...
    identical  [0.00s]  output/css/960.css
@@ -107,25 +122,20 @@ Compiling site...
    identical  [0.00s]  output/css/reset.css
    identical  [0.00s]  output/css/styles.css
    identical  [0.00s]  output/css/uv_active4d.css
-      update  [0.28s]  output/index.html
-      update  [1.31s]  output/v3/gists/comments/index.html
-      update  [1.92s]  output/v3/gists/index.html
-      update  [0.25s]  output/v3/issues/comments/index.html
-      update  [0.99s]  output/v3/issues/labels/index.html
-      update  [0.49s]  output/v3/issues/milestones/index.html
-      update  [0.50s]  output/v3/issues/index.html
-      update  [0.05s]  output/v3/index.html
+   update  [0.28s]  output/index.html
+   update  [1.31s]  output/v3/gists/comments/index.html
+   update  [1.92s]  output/v3/gists/index.html
+   update  [0.25s]  output/v3/issues/comments/index.html
+   update  [0.99s]  output/v3/issues/labels/index.html
+   update  [0.49s]  output/v3/issues/milestones/index.html
+   update  [0.50s]  output/v3/issues/index.html
+   update  [0.05s]  output/v3/index.html
+   …
 
 Site compiled in 5.81s.
 ```
 
-You can set up whatever you want to view the files. If using the adsf
-gem (as listed in the Gemfile), you can start Webrick:
-
-```sh
-$ bundle exec nanoc view
-$ open http://localhost:3000
-```
+The site is hosted at `http://localhost:4000`.
 
 ## Deploy
 

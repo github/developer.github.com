@@ -11,3 +11,10 @@ require 'html/pipeline/rouge_filter'
 include Nanoc::Helpers::Rendering
 include Nanoc::Helpers::Blogging
 include ChangesHelper
+
+Nanoc::Helpers::Rendering.module_eval do
+  if respond_to? :render
+    alias_method :renderp, :render
+    remove_method :render
+  end
+end

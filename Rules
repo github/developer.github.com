@@ -5,9 +5,7 @@
 # * The order of rules is important: for each item, only the first matching
 #   rule is applied.
 
-# Reset search-index by deleting it every time
 preprocess do
-  File.delete("output/search-index.json") if File.exists?("output/search-index.json")
   create_individual_blog_pages
   generate_redirects(config[:redirects])
 end
@@ -25,7 +23,6 @@ compile '/integrations-directory/*' do
 end
 
 compile '/v3{.*,/**/*}' do
-  filter :search
   filter :erb
   filter :html_pipeline, @config[:pipeline_config]
   filter :enterprise_only_filter
@@ -52,6 +49,10 @@ compile '/webhooks/**/*' do
   layout(item[:layout] ? "/#{item[:layout]}.*" : '/webhooks.*')
 end
 
+compile '/search/search-index.json' do
+  filter :erb
+end
+
 compile '/**/*' do
   filter :erb
   filter :html_pipeline, @config[:pipeline_config]
@@ -60,6 +61,10 @@ end
 
 route '/changes.atom' do
   '/changes.atom'
+end
+
+route '/search/search-index.json' do
+  item.identifier.to_s
 end
 
 route '/**/index.*' do

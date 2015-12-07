@@ -1,6 +1,7 @@
 $(function() {
   var searchIndex,
-      searchHits;
+      searchHits,
+      searchWorker = new Worker("/assets/javascripts/search_worker.js");
 
   $('.help-search .search-box').focus(function(){
     $(this).css('background-position','0px -25px')
@@ -17,15 +18,22 @@ $(function() {
   if (localStorage['searchIndex']) {
     searchIndex = JSON.parse(localStorage['searchIndex']);
 
-    if (localStorageHasExpired())
+    if (localStorageHasExpired()) {
       loadSearchIndex();
+    }
+    else {
+      searchIndex.type = "index";
+      searchWorker.postMessage(searchIndex);
+    }
   } else {
     loadSearchIndex();
   }
 
   function loadSearchIndex() {
-    $.getJSON('/assets/search-index.json', function(data) {
-      searchIndex = data["pages"];
+    $.getJSON('/search/search-index.json', function(data) {
+      data.type = { index: true };
+      searchWorker.postMessage(data);
+      searchIndex = data;
       localStorage['searchIndex'] = JSON.stringify(searchIndex);
       localStorage['updated'] = new Date().getTime();
     });
@@ -118,22 +126,17 @@ $(function() {
   function searchForString(searchString) {
     searchHits = [];
     searchString = searchString.toLowerCase();
-
-    // Search for string in all pages
-    for (var i = 0; i < searchIndex.length; i++) {
-      var page = searchIndex[i];
-
-      // Add the page to the array of hits if there's a match
-      if (page.title.toLowerCase().indexOf(searchString) !== -1) {
-        searchHits.push(page);
-      }
-    }
-
-    renderResultsForSearch(searchString);
+    searchWorker.postMessage({ query: searchString, type: "search" })
   }
 
+  searchWorker.addEventListener("message", function (e) {
+    if (e.data.type.search) {
+      renderResultsForSearch(e.data.query, e.data.results);
+    }
+  });
+
   // Update the UI representation of the search hits
-  function renderResultsForSearch(searchString){
+  function renderResultsForSearch(searchString, searchHits){
     $("#search-results").empty();
 
     // Check if there are any results. If not, show placeholder and exit
@@ -146,7 +149,7 @@ $(function() {
     for (var i = 0; i < Math.min(searchHits.length, 8); i++) {
       var page = searchHits[i];
 
-      $('<li class="result"><a href="' + page.url + '"><em>' + page.title + '</em><small>' + page.section + '</small></a></li>').appendTo("#search-results");
+      $('<li class="result"><a href="' + page.url + '"><em>' + page.title + '</em></a></li>').appendTo("#search-results");
     }
 
     // Select the first alternative

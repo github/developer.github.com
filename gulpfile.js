@@ -36,8 +36,6 @@ gulp.task("css", function() {
 gulp.task("javascript", function () {
   gulp.src("assets/javascripts/dev_mode.js")
     .pipe(gulp.dest("output/assets/javascripts/"));
-  gulp.src("assets/search-index.json")
-    .pipe(gulp.dest("output/assets/"));
   return gulp.src([
     "assets/javascripts/documentation.js",
     "assets/javascripts/search.js",
@@ -47,6 +45,14 @@ gulp.task("javascript", function () {
     .pipe(gulpif(transformCS, coffee()))
     .pipe(concat("application.js"))
     .pipe(gulpif(IS_PRODUCTION, uglify()))
+    .pipe(gulp.dest("output/assets/javascripts"));
+});
+
+gulp.task("javascript_workers", function () {
+  return gulp.src([
+    "assets/javascripts/search_worker.js",
+    "assets/vendor/lunr.js/lunr.min.js"
+    ])
     .pipe(gulp.dest("output/assets/javascripts"));
 });
 
@@ -93,6 +99,6 @@ gulp.task("watch:assets", function() {
 });
 
 gulp.task("serve", [ "server", "watch:nanoc", "watch:assets" ]);
-gulp.task("assets", [ "css", "javascript", "octicons", "images" ]);
+gulp.task("assets", [ "css", "javascript", "javascript_workers", "octicons", "images" ]);
 gulp.task("build", [ "nanoc:compile", "assets" ]);
 gulp.task("default", [ "build", "serve" ]);

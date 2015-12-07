@@ -28,7 +28,7 @@ module Paginate
       last  = (next_i * PER_PAGE) - 1
 
       @items.create(
-        "<%= render '/pagination_page.html',
+        "<%= renderp '/pagination_page.html',
           :current_page => #{next_i},
           :per_page => PER_PAGE,
           :first => #{first}, :last => #{last} %>",

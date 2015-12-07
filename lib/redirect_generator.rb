@@ -3,7 +3,7 @@ module RedirectGenerator
     redirects.each do |pairs|
       pairs.each_pair do |old_url, new_url|
         @items.create(
-          "<%= render '/redirect.*',
+          "<%= renderp '/redirect.*',
             { :new_url => '#{new_url}' }
           %>",
           {},

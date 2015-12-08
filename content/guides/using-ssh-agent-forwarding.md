@@ -20,7 +20,7 @@ You can test that your local key works by entering `ssh -T git@github.com` in th
 
 ``` command-line
 $ ssh -T git@github.com
-# Attempt to SSH in to github</span>
+# Attempt to SSH in to github
 > Hi <em>username</em>! You've successfully authenticated, but GitHub does not provide
 > shell access.
 ```

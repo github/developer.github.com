@@ -33,7 +33,7 @@ would authenticate you if you replace `<username>` with your GitHub username.
 (cURL will prompt you to enter the password.)
 
 ``` command-line
-$ curl -u &gt;username> https://api.github.com/user
+$ curl -u <em>username</em> https://api.github.com/user
 ```
 
 ### Via OAuth Tokens
@@ -42,7 +42,7 @@ Alternatively, you can use [personal access
 tokens][personal-access-tokens] or OAuth tokens instead of your password.
 
 ``` command-line
-$ curl -u &gt;username>:&gt;token> https://api.github.com/user
+$ curl -u <em>username</em>:<em>token</em> https://api.github.com/user
 ```
 
 This approach is useful if your tools only support Basic Authentication but you

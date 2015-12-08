@@ -19,7 +19,7 @@ There's no easier way to kick the tires than through [cURL][curl].
 ### Hello World
 
 Let's start by testing our setup. Open up a command prompt and enter the
-following command (without the `$`):
+following command:
 
 ``` command-line
 $ curl https://api.github.com/zen
@@ -101,9 +101,9 @@ The easiest way to authenticate with the GitHub API is by simply using your GitH
 username and password via Basic Authentication.
 
 ``` command-line
-$ curl -i -u <your_username> https://api.github.com/users/defunkt
+$ curl -i -u <em>your_username</em> https://api.github.com/users/defunkt
 
-> Enter host password for user '<your_username>':
+> Enter host password for user <em>your_username</em>:
 ```
 
 The `-u` flag sets the username, and cURL will prompt you for the password. You
@@ -121,9 +121,9 @@ If you have [two-factor authentication][2fa] enabled, the API will return a
 `401 Unauthorized` error code for the above request (and every other API request):
 
 ``` command-line
-$ curl -i -u <your_username> https://api.github.com/users/defunkt
+$ curl -i -u <em>your_username</em> https://api.github.com/users/defunkt
 
-> Enter host password for user '<your_username>':
+> Enter host password for user <em>your_username</em>:
 
 > HTTP/1.1 401 Unauthorized
 > X-GitHub-OTP: required; :2fa-type
@@ -145,7 +145,7 @@ associated with your GitHub account. For example, try getting
 [your own user profile][auth user api]:
 
 ``` command-line
-$ curl -i -u <your_username> https://api.github.com/user
+$ curl -i -u <em>your_username</em> https://api.github.com/user
 
 > {
 >   ...
@@ -195,7 +195,7 @@ Also, the [**Authorizations API**][authorizations api] makes it simple to use Ba
 to create an OAuth token. Try pasting and running the following command:
 
 ``` command-line
-$ curl -i -u <your_username> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
+$ curl -i -u <em>your_username</em> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
 $    https://api.github.com/authorizations
 
 > HTTP/1.1 201 Created
@@ -244,7 +244,7 @@ for the above request. You can get around that error by providing a 2FA OTP code
 in the [X-GitHub-OTP request header][2fa header]:
 
 ``` command-line
-$ curl -i -u <your_username> -H "X-GitHub-OTP: <your_2fa_OTP_code>" \
+$ curl -i -u <em>your_username</em> -H "X-GitHub-OTP: <em>your_2fa_OTP_code</em>" \
     -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 ```
@@ -404,8 +404,9 @@ $ curl -i https://api.github.com/repos/rails/rails/issues
 
 > HTTP/1.1 200 OK
 
-> Link: <https://api.github.com/repos/rails/rails/issues?page=2>; rel="next",
-> <https://api.github.com/repos/rails/rails/issues?page=14>; rel="last"
+> ...
+> Link: &lt;https://api.github.com/repositories/8514/issues?page=2&gt;; rel="next", &lt;https://api.github.com/repositories/8514/issues?page=30&gt;; rel="last"
+> ...
 ```
 
 The [`Link` header][link-header] provides a way for a response to link to

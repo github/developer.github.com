@@ -119,7 +119,7 @@ module GitHub
       end
 
       def webhook_payload(event_name)
-        "<pre><code class='language-javascript'>" + File.read("lib/webhooks/#{event_name}.payload.json") + "</code></pre>"
+        "``` json\n" + File.read("lib/webhooks/#{event_name}.payload.json") + "```"
       end
 
       CONTENT ||= {

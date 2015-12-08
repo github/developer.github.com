@@ -80,7 +80,7 @@ HTTP methods first.</p>
 <a id="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hello World</h3>
 
 <p>Let's start by testing our setup. Open up a command prompt and enter the
-following command (without the <code>$</code>):</p>
+following command:</p>
 
 <pre class="command-line">
 <span class="command">curl https://api.github.com/zen</span>
@@ -167,9 +167,9 @@ client has already spent.</li>
 username and password via Basic Authentication.</p>
 
 <pre class="command-line">
-<span class="command">curl -i -u <your_username> https://api.github.com/users/defunkt</your_username></span>
+<span class="command">curl -i -u <em>your_username</em> https://api.github.com/users/defunkt</span>
 
-<span class="output">Enter host password for user '<your_username>':</your_username></span>
+<span class="output">Enter host password for user <em>your_username</em>:</span>
 </pre>
 
 <p>The <code>-u</code> flag sets the username, and cURL will prompt you for the password. You
@@ -188,9 +188,9 @@ reading and writing private information via the API.</p>
 <code>401 Unauthorized</code> error code for the above request (and every other API request):</p>
 
 <pre class="command-line">
-<span class="command">curl -i -u <your_username> https://api.github.com/users/defunkt</your_username></span>
+<span class="command">curl -i -u <em>your_username</em> https://api.github.com/users/defunkt</span>
 
-<span class="output">Enter host password for user '<your_username>':</your_username></span>
+<span class="output">Enter host password for user <em>your_username</em>:</span>
 
 <span class="output">HTTP/1.1 401 Unauthorized</span>
 <span class="output">X-GitHub-OTP: required; :2fa-type</span>
@@ -213,7 +213,7 @@ associated with your GitHub account. For example, try getting
 <a href="/v3/users/#get-the-authenticated-user">your own user profile</a>:</p>
 
 <pre class="command-line">
-<span class="command">curl -i -u <your_username> https://api.github.com/user</your_username></span>
+<span class="command">curl -i -u <em>your_username</em> https://api.github.com/user</span>
 
 <span class="output">{</span>
 <span class="output">  ...</span>
@@ -268,7 +268,7 @@ An easier way to get a token is to <a href="https://help.github.com/articles/cre
 to create an OAuth token. Try pasting and running the following command:</p>
 
 <pre class="command-line">
-<span class="command">curl -i -u <your_username> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \</your_username></span>
+<span class="command">curl -i -u <em>your_username</em> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \</span>
 <span class="command">   https://api.github.com/authorizations</span>
 
 <span class="output">HTTP/1.1 201 Created</span>
@@ -317,7 +317,7 @@ for the above request. You can get around that error by providing a 2FA OTP code
 in the <a href="/v3/auth/#working-with-two-factor-authentication">X-GitHub-OTP request header</a>:</p>
 
 <pre class="command-line">
-<span class="command">curl -i -u <your_username> -H "X-GitHub-OTP: <your_2fa_otp_code>" \</your_2fa_otp_code></your_username></span>
+<span class="command">curl -i -u <em>your_username</em> -H "X-GitHub-OTP: <em>your_2fa_OTP_code</em>" \</span>
     -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
     https://api.github.com/authorizations
 </pre>
@@ -483,8 +483,9 @@ time taking note of the response headers:</p>
 
 <span class="output">HTTP/1.1 200 OK</span>
 
-<span class="output">Link: <https:>; rel="next",</https:></span>
-<span class="output"><https:>; rel="last"</https:></span>
+<span class="output">...</span>
+<span class="output">Link: &lt;https://api.github.com/repositories/8514/issues?page=2&gt;; rel="next", &lt;https://api.github.com/repositories/8514/issues?page=30&gt;; rel="last"</span>
+<span class="output">...</span>
 </pre>
 
 <p>The <a href="http://www.w3.org/wiki/LinkHeader/"><code>Link</code> header</a> provides a way for a response to link to

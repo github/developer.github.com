@@ -192,7 +192,7 @@ authenticated user.
 
 ## Add team member
 
-{{#not-enterprise}}
+{% if page.version == 'dotcom' %}
 
 ### Deprecation notice
 
@@ -208,7 +208,7 @@ instead. It allows you to invite new organization members to your teams.
 
 {{/tip}}
 
-{{/not-enterprise}}
+{% endif %}
 
 In order to add a user to a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the organization that the team

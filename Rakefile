@@ -59,6 +59,7 @@ def commit_message(no_commit_msg = false)
   end
 
   mesg = default_message if mesg.nil? || mesg == ''
+  mesg << "\nGenerated from #{ENV['BUILD_SHA']}" if ENV['BUILD_SHA']
   mesg.gsub(/'/, '') # Allow this to be handed off via -m '#{message}'
 end
 

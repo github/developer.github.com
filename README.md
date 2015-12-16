@@ -4,21 +4,42 @@ This is a GitHub API resource built with [Nanoc][nanoc].
 
 All submissions are welcome. To submit a change, fork this repo, commit your changes, and send us a [pull request](http://help.github.com/send-pull-requests/).
 
-## Setup
+## Development
 
-Ruby 2.2 is required to build the site.
+You can fetch the latest dependencies by opening the command line and running `script/bootstrap`:
 
-Get the Nanoc gem, plus kramdown for Markdown parsing:
-
-```sh
-$ bundle install
+``` sh
+$ script/bootstrap
+==> Installing gem dependencies…
+==> Installing npm dependencies…
 ```
 
-You can see the available commands with Nanoc:
+You'll need Ruby and Node installed on your system. The required versions for each of these languages can be found in the *.ruby-version* and *package.json* files, respectively.
 
-```sh
-$ bundle exec nanoc -h
+You can run `bundle exec rake build` to generate the site, but it's often more useful
+to simply build the server *and* start the site at the same time.
+
+Nanoc compiles the site into static files living in `output`.  It's
+smart enough not to try to compile unchanged files.
+
+You can start the site with `script/server`:
+
+``` sh
+$ script/server
+Loading site data...
+Compiling site...
+   create     [0.28s]  output/index.html
+   create     [1.31s]  output/v3/gists/comments/index.html
+   identical  [1.92s]  output/v3/gists/index.html
+   identical  [0.25s]  output/v3/issues/comments/index.html
+   update     [0.99s]  output/v3/issues/labels/index.html
+   update     [0.05s]  output/v3/index.html
+   …
+
+Site compiled in 5.81s.
 ```
+
+The site is hosted at `http://localhost:4000`.
 
 Nanoc has [some nice documentation](http://nanoc.ws/docs/tutorial/) to get you started.  Though if you're mainly concerned with editing or adding content, you won't need to know much about Nanoc.
 
@@ -93,52 +114,36 @@ of commands.
 
 For more information, see [the reference documentation](https://github.com/gjtorikian/extended-markdown-filter#command-line-highlighting).
 
-## Development
-
-You can fetch the latest dependencies by opening the command line and running `script/bootstrap`:
-
-``` sh
-$ script/bootstrap
-==> Installing gem dependencies…
-==> Installing npm dependencies…
-```
-
-You'll need Ruby 2.2.3 and at least Node v4.x.
-
-You can run `bundle exec rake build` to generate the site, but it's often more useful
-to simply build the server *and* start the site at the same time.
-
-Nanoc compiles the site into static files living in `./output`.  It's
-smart enough not to try to compile unchanged files.
-
-You can start the site with `script/server`:
-
-``` sh
-$ script/server
-Loading site data...
-Compiling site...
-   identical  [0.00s]  output/css/960.css
-   identical  [0.00s]  output/css/pygments.css
-   identical  [0.00s]  output/css/reset.css
-   identical  [0.00s]  output/css/styles.css
-   identical  [0.00s]  output/css/uv_active4d.css
-   update  [0.28s]  output/index.html
-   update  [1.31s]  output/v3/gists/comments/index.html
-   update  [1.92s]  output/v3/gists/index.html
-   update  [0.25s]  output/v3/issues/comments/index.html
-   update  [0.99s]  output/v3/issues/labels/index.html
-   update  [0.49s]  output/v3/issues/milestones/index.html
-   update  [0.50s]  output/v3/issues/index.html
-   update  [0.05s]  output/v3/index.html
-   …
-
-Site compiled in 5.81s.
-```
-
-The site is hosted at `http://localhost:4000`.
-
 ## Deploy
 
 ```sh
 $ bundle exec rake publish
 ```
+
+## Licenses
+
+The code to generate the site (everything excluding the assets, content,
+and layouts directories) as well as the code samples on the site are
+licensed under
+[CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+CC0 waives all copyright restrictions but does not grant you any trademark
+permissions.
+
+Site content (everything in the assets, content, and layouts directories,
+excluding files under open source licenses individually marked) is licensed
+under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/). CC-BY-4.0
+gives you permission to use content for almost any purpose but does not grant
+you any trademark permissions, so long as you note the license and give credit,
+such as follows:
+
+> Content based on
+> <a href="https://github.com/github/developer.github.com">developer.github.com</a>
+> used under the
+> <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+> license.</a>
+
+This means you can use the code and content in this repository except for
+GitHub trademarks in your own projects.
+
+When you contribute to this repository you are doing so under the above
+licenses.

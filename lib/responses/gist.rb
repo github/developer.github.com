@@ -59,6 +59,7 @@ module GitHub
         "owner"        => USER,
         "user"         => nil,
         "files"        => GIST_FILE,
+        "truncated"    => false,
         "comments"     => 0,
         "comments_url" => "https://api.github.com/gists/aa5a315d61ae9438b18d/comments/",
         "html_url"     => "https://gist.github.com/aa5a315d61ae9438b18d",

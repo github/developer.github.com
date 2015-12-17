@@ -18,7 +18,7 @@ If you don't want to provide a port number, you'll need to configure your tool t
 
 ## Authentication
 
-You need to pass your [Management Console password](https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/) as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-for-the-first-time).
+You need to pass your [Management Console password](https://help.github.com/enterprise/admin/articles/accessing-the-management-console/) as an authentication token to every Management Console API endpoint except [`/setup/api/start`](#upload-a-license-for-the-first-time).
 
 Use the `api_key` parameter to send this token with each request. For example:
 
@@ -69,7 +69,7 @@ For a list of the available settings, see [the `/setup/api/settings` endpoint](#
 ### Example
 
 ``` command-line
-$ curl -L -X POST 'http://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
+$ curl -L -X -k POST 'https://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
 ```
 
 ## Upgrade a license
@@ -259,7 +259,7 @@ Name | Type | Description
 ### Example
 
 ``` command-line
-$ curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+$ curl -L -X -k POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 ```
 
 ## Remove an authorized SSH key

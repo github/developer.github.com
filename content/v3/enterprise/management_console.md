@@ -69,7 +69,7 @@ For a list of the available settings, see [the `/setup/api/settings` endpoint](#
 ### Example
 
 ``` command-line
-$ curl -L -X -k POST 'https://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
+$ curl -L -X POST -k 'https://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
 ```
 
 ## Upgrade a license
@@ -259,7 +259,7 @@ Name | Type | Description
 ### Example
 
 ``` command-line
-$ curl -L -X -k POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+$ curl -L -X POST -k 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 ```
 
 ## Remove an authorized SSH key

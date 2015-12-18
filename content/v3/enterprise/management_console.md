@@ -47,6 +47,8 @@ When using this endpoint, your Enterprise instance must have a password set. Thi
 1. If you're working directly with the API before accessing the web interface, you must pass in the password parameter to set your password.
 2. If you set up your instance via the web interface before accessing the API, your calls to this endpoint do not need the password parameter.
 
+You may also need to use the `-k` flag, as GitHub Enterprise uses a self-signed certificate before you [enable your own SSL certificate](https://help.github.com/enterprise/admin/guides/installation/dns-hostname-subdomain-isolation-and-ssl/#ssl).
+
 {{/warning}}
 
 ### Parameters
@@ -69,7 +71,7 @@ For a list of the available settings, see [the `/setup/api/settings` endpoint](#
 ### Example
 
 ``` command-line
-$ curl -L -X POST -k 'https://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
+$ curl -L -X POST 'https://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
 ```
 
 ## Upgrade a license
@@ -259,7 +261,7 @@ Name | Type | Description
 ### Example
 
 ``` command-line
-$ curl -L -X POST -k 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+$ curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
 ```
 
 ## Remove an authorized SSH key

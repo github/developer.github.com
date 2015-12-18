@@ -61,11 +61,7 @@ module ChangesHelper
   # Public
   def api_released_at(version)
     @api_releases ||= {}
-    if @api_releases.key?(version)
-      @api_releases[version]
-    end
-
-    @api_releases[version] = begin
+    @api_releases[version] ||= begin
       pair = api_versions.detect do |name, _|
         name == version
       end

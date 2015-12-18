@@ -69,7 +69,7 @@ module ChangesHelper
       pair = api_versions.detect do |(name, date)|
         name == version
       end
-      pair ? pair[1] : nil
+      pair[1] if pair
     end
   end
 

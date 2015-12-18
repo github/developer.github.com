@@ -130,12 +130,12 @@ the org that the team is associated with, or a maintainer of the team.
 In order to list members in a team, the team must be visible to the
 authenticated user.
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
 
 <%= fetch_content(:if_site_admin) %>
 you will be able to list all members for the team.
 
-{{/enterprise-only}}
+{% endif %}
 
     GET /teams/:id/members
 
@@ -373,12 +373,12 @@ team.
 
     GET /teams/:id/repos
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
 
 <%= fetch_content(:if_site_admin) %>
 you will be able to list all repositories for the team.
 
-{{/enterprise-only}}
+{% endif %}
 
 ### Response
 

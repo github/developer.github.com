@@ -6,7 +6,7 @@ title: Migrations
 
 {:toc}
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' %}
 
 {{#warning}}
 
@@ -14,7 +14,7 @@ This API is not currently available on GitHub Enterprise.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
 {{#tip}}
 

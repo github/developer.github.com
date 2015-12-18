@@ -49,7 +49,7 @@ authenticated via Basic Auth or via OAuth with at least `read:public_key`
 Creates a public key. Requires that you are authenticated via Basic Auth,
 or OAuth with at least `write:public_key` [scope](/v3/oauth/#scopes).
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' && page.version >= 2.1 %}
 
 {{#warning}}
 
@@ -57,7 +57,7 @@ If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
     POST /user/keys
 
@@ -81,7 +81,7 @@ instead.
 Removes a public key. Requires that you are authenticated via Basic Auth
 or via OAuth with at least `admin:public_key` [scope](/v3/oauth/#scopes).
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' && page.version >= 2.1 %}
 
 {{#warning}}
 
@@ -89,7 +89,7 @@ If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
     DELETE /user/keys/:id
 

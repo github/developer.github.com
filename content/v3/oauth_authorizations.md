@@ -22,7 +22,9 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
     <li><a href="#list-your-authorizations">List your authorizations</a></li>
     <li><a href="#get-a-single-authorization">Get a single authorization</a></li>
     <li><a href="#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> - <code>token</code> is still returned for "create" </li>
+    {% if page.version == 'dotcom' or page.version > 2.2 %}
     <li><a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a> - <code>token</code> is still returned for "create" </li>
+    {% endif %}
     <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   </ul>
 
@@ -107,7 +109,7 @@ Name | Type | Description
 `scopes`|`array` | A list of scopes that this authorization is in.
 `note`|`string` | A note to remind you what the OAuth token is for.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
-`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).
+{% if page.version == 'dotcom' or page.version > 2.2 %}`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).{% endif %}
 
 
 <%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
@@ -121,6 +123,8 @@ Name | Type | Description
 
 <%= headers 200, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("token" => "", "fingerprint" => "") } %>
+
+{% if page.version == 'dotcom' or page.version > 2.2 %}
 
 ## Get-or-create an authorization for a specific app and fingerprint
 
@@ -155,6 +159,8 @@ Name | Type | Description
 
 <%= headers 200, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("token" => "") } %>
+
+{% endif %}
 
 ## Update an existing authorization
 

@@ -17,19 +17,21 @@ compile '/changes.atom' do
 end
 
 compile '/integrations-directory/*' do
+  filter :'conref-fs-filter'
   filter :erb
   filter :html_pipeline, @config[:pipeline_config]
   layout item[:layout] || '/integrations-directory.*'
 end
 
 compile '/v3{.*,/**/*}' do
+  filter :'conref-fs-filter'
   filter :erb
   filter :html_pipeline, @config[:pipeline_config]
-  filter :enterprise_only_filter
   layout(item[:layout] ? "/#{item[:layout]}.*" : '/api.*')
 end
 
 compile "/changes/20*" do
+  filter :'conref-fs-filter'
   filter :erb
   filter :html_pipeline, @config[:pipeline_config]
   layout '/changes.*'
@@ -37,12 +39,14 @@ compile "/changes/20*" do
 end
 
 compile '/guides/**/*' do
+  filter :'conref-fs-filter'
   filter :html_pipeline, @config[:pipeline_config]
   filter :erb
   layout(item[:layout] ? "/#{item[:layout]}.*" : '/guides.*')
 end
 
 compile '/webhooks/**/*' do
+  filter :'conref-fs-filter'
   filter :erb
   filter :html_pipeline, @config[:pipeline_config]
   layout(item[:layout] ? "/#{item[:layout]}.*" : '/webhooks.*')
@@ -53,6 +57,7 @@ compile '/search/search-index.json' do
 end
 
 compile '/**/*' do
+  filter :'conref-fs-filter'
   filter :erb
   filter :html_pipeline, @config[:pipeline_config]
   layout(item[:layout] ? "/#{item[:layout]}.*" : '/default.*')

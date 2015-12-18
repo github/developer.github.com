@@ -22,7 +22,7 @@ This endpoint is accessible with the user:email scope.
 
 ## Add email address(es)
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' && page.version >= 2.1 %}
 
 {{#warning}}
 
@@ -30,7 +30,7 @@ If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
     POST /user/emails
 
@@ -58,7 +58,7 @@ You can post a single email address or an array of addresses:
 
 ## Delete email address(es)
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' && page.version >= 2.1 %}
 
 {{#warning}}
 
@@ -66,7 +66,7 @@ If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
     DELETE /user/emails
 

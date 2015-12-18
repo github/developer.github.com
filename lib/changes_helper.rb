@@ -66,7 +66,7 @@ module ChangesHelper
     end
 
     @api_releases[version] = begin
-      pair = api_versions.detect do |(name, date)|
+      pair = api_versions.detect do |name, _|
         name == version
       end
       pair[1] if pair

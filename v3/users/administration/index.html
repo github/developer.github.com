@@ -56,17 +56,10 @@
 <a id="administration-enterprise" class="anchor" href="#administration-enterprise" aria-hidden="true"><span class="octicon octicon-link"></span></a>Administration (Enterprise)</h1>
 
 <ul id="markdown-toc">
-<li><a href="#create-a-new-user" id="markdown-toc-create-a-new-user">Create a new user</a></li>
-<li><a href="#rename-an-existing-user" id="markdown-toc-rename-an-existing-user">Rename an existing user</a></li>
-<li><a href="#create-an-impersonation-oauth-token" id="markdown-toc-create-an-impersonation-oauth-token">Create an impersonation OAuth token</a></li>
-<li><a href="#delete-an-impersonation-oauth-token" id="markdown-toc-delete-an-impersonation-oauth-token">Delete an impersonation OAuth token</a></li>
 <li><a href="#promote-an-ordinary-user-to-a-site-administrator" id="markdown-toc-promote-an-ordinary-user-to-a-site-administrator">Promote an ordinary user to a site administrator</a></li>
 <li><a href="#demote-a-site-administrator-to-an-ordinary-user" id="markdown-toc-demote-a-site-administrator-to-an-ordinary-user">Demote a site administrator to an ordinary user</a></li>
 <li><a href="#suspend-a-user" id="markdown-toc-suspend-a-user">Suspend a user</a></li>
 <li><a href="#unsuspend-a-user" id="markdown-toc-unsuspend-a-user">Unsuspend a user</a></li>
-<li><a href="#list-all-public-keys" id="markdown-toc-list-all-public-keys">List all public keys</a></li>
-<li><a href="#delete-a-user" id="markdown-toc-delete-a-user">Delete a user</a></li>
-<li><a href="#delete-a-public-key" id="markdown-toc-delete-a-public-key">Delete a public key</a></li>
 </ul>
 
 <p>The User Administration API allows you to promote, demote, suspend, and unsuspend users on a GitHub Enterprise appliance. <em>It is only available to <a href="/v3/#authentication">authenticated</a> site administrators.</em> Normal users will receive a <code>403</code> response if they try to access it.</p>
@@ -78,205 +71,6 @@ http(s)://<em>hostname</em>/api/v3
 </pre>
 
 <h2>
-<a id="create-a-new-user" class="anchor" href="#create-a-new-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a new user</h2>
-
-<pre><code>POST /admin/users
-</code></pre>
-
-<h3>
-<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
-
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>login</code></td>
-<td><code>string</code></td>
-<td>
-<strong>Required.</strong> The user's username.</td>
-</tr>
-<tr>
-<td><code>email</code></td>
-<td><code>string</code></td>
-<td>
-<strong>Required.</strong> The user's email address.</td>
-</tr>
-</tbody>
-</table>
-
-<h4>
-<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@github.com"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-
-<h3>
-<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-
-<pre class="highlight highlight-headers"><code>Status: 201 Created
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-
-<h2>
-<a id="rename-an-existing-user" class="anchor" href="#rename-an-existing-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rename an existing user</h2>
-
-<pre><code>PATCH /admin/users/:username
-</code></pre>
-
-<h3>
-<a id="parameters-1" class="anchor" href="#parameters-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
-
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>login</code></td>
-<td><code>string</code></td>
-<td>
-<strong>Required.</strong> The user's new username.</td>
-</tr>
-</tbody>
-</table>
-
-<h4>
-<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"thenewmonalisa"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-
-<h3>
-<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-
-<pre class="highlight highlight-headers"><code>Status: 202 Accepted
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Job queued to rename user. It may take a few minutes to complete."</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/user/1"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-
-<h2>
-<a id="create-an-impersonation-oauth-token" class="anchor" href="#create-an-impersonation-oauth-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create an impersonation OAuth token</h2>
-
-<pre><code>POST /admin/users/:username/authorizations
-</code></pre>
-
-<h3>
-<a id="parameters-2" class="anchor" href="#parameters-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
-
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>scopes</code></td>
-<td><code>array</code></td>
-<td>A list of <a href="/v3/oauth/#scopes">scopes</a>.</td>
-</tr>
-</tbody>
-</table>
-
-<h3>
-<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-
-<pre class="highlight highlight-headers"><code>Status: 201 Created
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/authorizations/1"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"public_repo"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcdefgh12345678"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"token_last_eight"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"hashed_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25f94a2a5c7fbaf499c665bc73d67c1c87e496da8985131633ee0a95819db2e8"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-github-app.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my github app"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcde12345fghij67890"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"note"</span><span class="p">:</span><span class="w"> </span><span class="s2">"optional note"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"note_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://optional/note/url"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fingerprint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jklmnop12345678"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-
-<h2>
-<a id="delete-an-impersonation-oauth-token" class="anchor" href="#delete-an-impersonation-oauth-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete an impersonation OAuth token</h2>
-
-<pre><code>DELETE /admin/users/:username/authorizations
-</code></pre>
-
-<h3>
-<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-
-<pre class="highlight highlight-headers"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-
-
-<h2>
 <a id="promote-an-ordinary-user-to-a-site-administrator" class="anchor" href="#promote-an-ordinary-user-to-a-site-administrator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Promote an ordinary user to a site administrator</h2>
 
 <pre><code>PUT /users/:username/site_admin
@@ -285,7 +79,7 @@ X-RateLimit-Remaining: 4999
 <p>Note that you'll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see "<a href="/v3/#http-verbs">HTTP verbs</a>."</p>
 
 <h3>
-<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -302,7 +96,7 @@ X-RateLimit-Remaining: 4999
 <p>You can demote any user account except your own.</p>
 
 <h3>
-<a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -327,7 +121,7 @@ X-RateLimit-Remaining: 4999
 <p>Note that you'll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see "<a href="/v3/#http-verbs">HTTP verbs</a>."</p>
 
 <h3>
-<a id="response-6" class="anchor" href="#response-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -348,87 +142,7 @@ X-RateLimit-Remaining: 4999
 </code></pre>
 
 <h3>
-<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-
-<pre class="highlight highlight-headers"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-
-
-<h2>
-<a id="list-all-public-keys" class="anchor" href="#list-all-public-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>List all public keys</h2>
-
-<p>GET /admin/keys</p>
-
-<h3>
-<a id="response-8" class="anchor" href="#response-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-
-<pre class="highlight highlight-headers"><code>Status: 200 OK
-Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
-      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-
-
-<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/user/keys/1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@octomac"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">232</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"repository_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAA..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/keys/2"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat@octomac"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-10T15:53:42Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"read_only"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"repository_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2333</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-
-<h2>
-<a id="delete-a-user" class="anchor" href="#delete-a-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete a user</h2>
-
-<div class="alert warning">
-
-<p>Deleting a user will delete all their repositories, gists, applications, and personal settings. <a href="/v3/users/administration/#suspend-a-user">Suspending a user</a> is often a better option.</p>
-
-</div>
-
-<pre><code>DELETE /admin/users/:username
-</code></pre>
-
-<p>You can delete any user account except your own.</p>
-
-<h3>
-<a id="response-9" class="anchor" href="#response-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-
-<pre class="highlight highlight-headers"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-
-
-<h2>
-<a id="delete-a-public-key" class="anchor" href="#delete-a-public-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete a public key</h2>
-
-<p>DELETE /admin/keys/1</p>
-
-<h3>
-<a id="response-10" class="anchor" href="#response-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -503,9 +217,9 @@ X-RateLimit-Remaining: 4999
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
-          {% if page.version == 'dotcom' %}
+          
           <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          {% endif %}
+          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
@@ -562,7 +276,9 @@ X-RateLimit-Remaining: 4999
           <li><a href="/v3/enterprise/license/">License</a></li>
           <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          
           <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>
+          
         </ul>
       </li>
     </ul>

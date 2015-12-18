@@ -389,13 +389,6 @@ X-RateLimit-Remaining: 4999
 <p>In order to list members in a team, the team must be visible to the
 authenticated user.</p>
 
-<p>{{#enterprise-only}}</p>
-
-<p>If you are an <a href="/v3/#authentication">authenticated</a> site administrator for your Enterprise instance,
-you will be able to list all members for the team.</p>
-
-<p>{{/enterprise-only}}</p>
-
 <pre><code>GET /teams/:id/members
 </code></pre>
 
@@ -508,8 +501,6 @@ X-RateLimit-Remaining: 4999
 <h2>
 <a id="add-team-member" class="anchor" href="#add-team-member" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add team member</h2>
 
-<p>{% if page.version == 'dotcom' %}</p>
-
 <h3>
 <a id="deprecation-notice-1" class="anchor" href="#deprecation-notice-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deprecation notice</h3>
 
@@ -524,8 +515,6 @@ removal in the next major version of the API.</p>
 instead. It allows you to invite new organization members to your teams.</p>
 
 </div>
-
-<p>{% endif %}</p>
 
 <p>In order to add a user to a team, the authenticated user must have
 'admin' permissions to the team or be an owner of the organization that the team
@@ -809,13 +798,6 @@ X-RateLimit-Remaining: 4999
 
 <pre><code>GET /teams/:id/repos
 </code></pre>
-
-<p>{{#enterprise-only}}</p>
-
-<p>If you are an <a href="/v3/#authentication">authenticated</a> site administrator for your Enterprise instance,
-you will be able to list all repositories for the team.</p>
-
-<p>{{/enterprise-only}}</p>
 
 <h3>
 <a id="response-9" class="anchor" href="#response-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
@@ -1277,9 +1259,9 @@ X-RateLimit-Remaining: 4999
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
-          {% if page.version == 'dotcom' %}
+          
           <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          {% endif %}
+          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
@@ -1336,7 +1318,9 @@ X-RateLimit-Remaining: 4999
           <li><a href="/v3/enterprise/license/">License</a></li>
           <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          
           <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>
+          
         </ul>
       </li>
     </ul>

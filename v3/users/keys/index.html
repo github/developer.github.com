@@ -164,16 +164,6 @@ X-RateLimit-Remaining: 4999
 <p>Creates a public key. Requires that you are authenticated via Basic Auth,
 or OAuth with at least <code>write:public_key</code> <a href="/v3/oauth/#scopes">scope</a>.</p>
 
-<p>{{#enterprise-only}}</p>
-
-<div class="alert warning">
-
-<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize SSH keys enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won't be able to add an SSH key address via the API with these options enabled.</p>
-
-</div>
-
-<p>{{/enterprise-only}}</p>
-
 <pre><code>POST /user/keys
 </code></pre>
 
@@ -221,16 +211,6 @@ instead.</p>
 
 <p>Removes a public key. Requires that you are authenticated via Basic Auth
 or via OAuth with at least <code>admin:public_key</code> <a href="/v3/oauth/#scopes">scope</a>.</p>
-
-<p>{{#enterprise-only}}</p>
-
-<div class="alert warning">
-
-<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize SSH keys enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won't be able to remove an SSH key address via the API with these options enabled.</p>
-
-</div>
-
-<p>{{/enterprise-only}}</p>
 
 <pre><code>DELETE /user/keys/:id
 </code></pre>
@@ -311,9 +291,9 @@ X-RateLimit-Remaining: 4999
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
-          {% if page.version == 'dotcom' %}
+          
           <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          {% endif %}
+          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
@@ -370,7 +350,9 @@ X-RateLimit-Remaining: 4999
           <li><a href="/v3/enterprise/license/">License</a></li>
           <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          
           <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>
+          
         </ul>
       </li>
     </ul>

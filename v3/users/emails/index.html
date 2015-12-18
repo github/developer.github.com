@@ -96,16 +96,6 @@ X-RateLimit-Remaining: 4999
 <h2>
 <a id="add-email-addresses" class="anchor" href="#add-email-addresses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add email address(es)</h2>
 
-<p>{{#enterprise-only}}</p>
-
-<div class="alert warning">
-
-<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize emails enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won't be able to add an email address via the API with these options enabled.</p>
-
-</div>
-
-<p>{{/enterprise-only}}</p>
-
 <pre><code>POST /user/emails
 </code></pre>
 
@@ -147,16 +137,6 @@ X-RateLimit-Remaining: 4999
 
 <h2>
 <a id="delete-email-addresses" class="anchor" href="#delete-email-addresses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete email address(es)</h2>
-
-<p>{{#enterprise-only}}</p>
-
-<div class="alert warning">
-
-<p>If your GitHub Enterprise appliance has <a href="https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap">LDAP Sync enabled</a> and the option to synchronize emails enabled, this API is disabled and will return a <code>403</code> response. Users managed in LDAP won't be able to remove an email address via the API with these options enabled.</p>
-
-</div>
-
-<p>{{/enterprise-only}}</p>
 
 <pre><code>DELETE /user/emails
 </code></pre>
@@ -249,9 +229,9 @@ X-RateLimit-Remaining: 4999
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
-          {% if page.version == 'dotcom' %}
+          
           <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          {% endif %}
+          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
@@ -308,7 +288,9 @@ X-RateLimit-Remaining: 4999
           <li><a href="/v3/enterprise/license/">License</a></li>
           <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          
           <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>
+          
         </ul>
       </li>
     </ul>

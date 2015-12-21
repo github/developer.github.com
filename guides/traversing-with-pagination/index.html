@@ -198,7 +198,7 @@ on. These relations also contain information about the resulting URL, by calling
 this information to the user:</p>
 
 <pre class="highlight highlight-ruby"><code><span class="n">last_response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span>
-<span class="n">number_of_pages</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="p">[</span><span class="ss">:last</span><span class="p">].</span><span class="nf">href</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/page=(\d+)$/</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">number_of_pages</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="p">[</span><span class="ss">:last</span><span class="p">].</span><span class="nf">href</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/page=(\d+).*$/</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="nb">puts</span> <span class="s2">"There are </span><span class="si">#{</span><span class="n">total_count</span><span class="si">}</span><span class="s2"> results, on </span><span class="si">#{</span><span class="n">number_of_pages</span><span class="si">}</span><span class="s2"> pages!"</span>
 </code></pre>
@@ -234,7 +234,7 @@ your code should remain intact:</p>
 <span class="n">total_count</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">total_count</span>
 
 <span class="n">last_response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span>
-<span class="n">number_of_pages</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="p">[</span><span class="ss">:last</span><span class="p">].</span><span class="nf">href</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/page=(\d+)$/</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">number_of_pages</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="p">[</span><span class="ss">:last</span><span class="p">].</span><span class="nf">href</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/page=(\d+).*$/</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="p">[</span><span class="ss">:last</span><span class="p">].</span><span class="nf">href</span>
 <span class="nb">puts</span> <span class="s2">"There are </span><span class="si">#{</span><span class="n">total_count</span><span class="si">}</span><span class="s2"> results, on </span><span class="si">#{</span><span class="n">number_of_pages</span><span class="si">}</span><span class="s2"> pages!"</span>
@@ -272,7 +272,7 @@ paginated results from the first call:</p>
 <span class="n">total_count</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">total_count</span>
 
 <span class="n">last_response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">last_response</span>
-<span class="n">number_of_pages</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="p">[</span><span class="ss">:last</span><span class="p">].</span><span class="nf">href</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/page=(\d+)$/</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">number_of_pages</span> <span class="o">=</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="p">[</span><span class="ss">:last</span><span class="p">].</span><span class="nf">href</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span><span class="sr">/page=(\d+).*$/</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="nb">puts</span> <span class="n">last_response</span><span class="p">.</span><span class="nf">rels</span><span class="p">[</span><span class="ss">:last</span><span class="p">].</span><span class="nf">href</span>
 <span class="nb">puts</span> <span class="s2">"There are </span><span class="si">#{</span><span class="n">total_count</span><span class="si">}</span><span class="s2"> results, on </span><span class="si">#{</span><span class="n">number_of_pages</span><span class="si">}</span><span class="s2"> pages!"</span>

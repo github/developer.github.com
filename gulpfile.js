@@ -37,6 +37,7 @@ gulp.task("javascript", function () {
   gulp.src("assets/javascripts/dev_mode.js")
     .pipe(gulp.dest("output/assets/javascripts/"));
   return gulp.src([
+    "assets/javascripts/initial.js",
     "assets/javascripts/documentation.js",
     "assets/javascripts/search.js",
     "assets/javascripts/images.js",
@@ -44,6 +45,7 @@ gulp.task("javascript", function () {
     ])
     .pipe(gulpif(transformCS, coffee()))
     .pipe(concat("application.js"))
+    .pipe(replace(/\{\{ site\.version \}\}/g, CONFIG.latest_enterprise_version))
     .pipe(gulpif(IS_PRODUCTION, uglify()))
     .pipe(gulp.dest("output/assets/javascripts"));
 });
@@ -78,7 +80,8 @@ gulp.task("server", function() {
   connect = require("gulp-connect");
   connect.server({
     port: 4000,
-    root: ["output"]
+    root: ["output"],
+    fallback: "output/404.html"
   });
 });
 

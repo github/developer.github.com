@@ -1,3 +1,5 @@
+require 'json'
+
 def config
   @config ||= symbolize_hash(YAML.load_file(File.join(File.dirname(__FILE__), '..', 'nanoc.yaml')))
 end

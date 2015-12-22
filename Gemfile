@@ -26,5 +26,9 @@ group :staging do
 end
 
 group :test do
-  gem 'html-proofer', '~> 2.5'
+  gem 'capybara', '2.4.4'
+  gem 'html-proofer', '~> 2.6'
+  gem 'rspec', '3.1'
+  gem 'selenium-webdriver', '2.45.0'
+  gem 'jsonlint', '0.1.0'
 end

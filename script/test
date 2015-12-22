@@ -13,7 +13,9 @@ export RACK_ROOT=$(cd "$(dirname $0)"/.. && pwd)
 
 export RAILS_ENV="test" RACK_ENV="test"
 
-script/bootstrap
+if [ -z "$TRAVIS" ]; then
+  script/bootstrap
+fi
 
 echo "===> Running tests..."
 

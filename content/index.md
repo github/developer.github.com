@@ -1,6 +1,7 @@
 ---
 title: GitHub Developer
 layout: overview
+hide_from_search: true
 ---
 
 <div class="wrapper feature">

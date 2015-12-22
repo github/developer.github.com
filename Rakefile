@@ -21,7 +21,17 @@ task :build do
 end
 
 desc "Test the output"
-task :test => [:remove_tmp_dir, :remove_output_dir, :build, :run_proofer]
+task :test => [:remove_tmp_dir, :remove_output_dir, :build] do
+  Rake::Task['spec'].invoke
+  Rake::Task['run_proofer'].invoke
+end
+
+desc "Run Rspec"
+task :spec do
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:rspec)
+  Rake::Task['rspec'].invoke
+end
 
 desc "Run the HTML-Proofer"
 task :run_proofer do

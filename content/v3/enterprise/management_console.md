@@ -47,7 +47,7 @@ When using this endpoint, your Enterprise instance must have a password set. Thi
 1. If you're working directly with the API before accessing the web interface, you must pass in the password parameter to set your password.
 2. If you set up your instance via the web interface before accessing the API, your calls to this endpoint do not need the password parameter.
 
-You may also need to add the `-k` flag when using `curl`, sicne GitHub Enterprise uses a self-signed certificate before you [add your own SSL certificate](https://help.github.com/enterprise/admin/guides/installation/dns-hostname-subdomain-isolation-and-ssl/#ssl).
+You may also need to add the `-k` flag when using `curl`, since GitHub Enterprise uses a self-signed certificate before you [add your own SSL certificate](https://help.github.com/enterprise/admin/guides/installation/dns-hostname-subdomain-isolation-and-ssl/#ssl).
 
 {{/warning}}
 

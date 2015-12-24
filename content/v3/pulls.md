@@ -112,7 +112,7 @@ Name | Type | Description
 #### Example
 
 <%= json \
-  :issue => "5",
+  :issue => 5,
   :head  => "octocat:new-feature",
   :base  => "master"
 %>

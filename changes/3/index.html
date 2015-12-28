@@ -61,10 +61,9 @@
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;As we &lt;a href="https://github.com/blog/1941-organization-approved-applications"&gt;announced over on the GitHub blog&lt;/a&gt;, organization admins can now
-</code></pre>
-
-<p>control how third-party applications access their organization data. Allowing
+<p></p>
+<p>As we <a href="https://github.com/blog/1941-organization-approved-applications">announced over on the GitHub blog</a>, organization admins can now
+control how third-party applications access their organization data. Allowing
 admins to approve or deny applications will ultimately result in deeper trust
 and increase overall adoption of integrations within organizations on GitHub.</p>
 
@@ -184,8 +183,8 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;Is your application taking advantage of the recommended workflow for discovering a user's repositories and organizations? With the &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;recent improvements to the API&lt;/a&gt;, the process is simpler than ever. In our newest guide, we show you how to &lt;a href="/guides/discovering-resources-for-a-user/"&gt;reliably identify the resources that your app can access for a given user&lt;/a&gt;.&lt;/p&gt;
-</code></pre>
+<p></p>
+<p>Is your application taking advantage of the recommended workflow for discovering a user's repositories and organizations? With the <a href="/changes/2014-12-08-organization-permissions-api-preview/">recent improvements to the API</a>, the process is simpler than ever. In our newest guide, we show you how to <a href="/guides/discovering-resources-for-a-user/">reliably identify the resources that your app can access for a given user</a>.</p>
 
 <p>If you have any questions or feedback, we'd love to <a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Discovering+resources+for+a+user">hear from you</a>.</p>
 
@@ -212,8 +211,8 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;&lt;strong&gt;UPDATE (2015-06-10):&lt;/strong&gt; As &lt;a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/"&gt;announced on June 10&lt;/a&gt;, these changes will become an official part of GitHub API v3 on June 24. (This post originally announced that these changes would come to GitHub API v3 on February 24.)&lt;/p&gt;
-</code></pre>
+<p></p>
+<p><strong>UPDATE (2015-06-10):</strong> As <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">announced on June 10</a>, these changes will become an official part of GitHub API v3 on June 24. (This post originally announced that these changes would come to GitHub API v3 on February 24.)</p>
 
 <p>Last month, we <a href="/changes/2014-12-08-organization-permissions-api-preview/">released a preview</a> of several API changes related to managing organization members and repositories. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before June 24</strong> to account for these changes.</p>
 
@@ -266,8 +265,8 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;Back in February, we &lt;a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable"&gt;improved the security audit trail for SSH keys&lt;/a&gt;. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on &lt;a href="/guides/managing-deploy-keys/#deploy-keys"&gt;deploy keys&lt;/a&gt; or &lt;a href="/v3/users/keys/"&gt;user keys&lt;/a&gt; for repository access, we recommend replacing any keys created before February 24, 2014.&lt;/p&gt;
-</code></pre>
+<p></p>
+<p>Back in February, we <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable">improved the security audit trail for SSH keys</a>. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on <a href="/guides/managing-deploy-keys/#deploy-keys">deploy keys</a> or <a href="/v3/users/keys/">user keys</a> for repository access, we recommend replacing any keys created before February 24, 2014.</p>
 
 <p>To ensure that your application is not affected by organizations blocking access to these keys, <strong>you should replace the affected keys by January 15, 2015</strong>.</p>
 
@@ -330,8 +329,8 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;You can now see when a user starred a repository. To receive the new response format containing the &lt;code&gt;starred_at&lt;/code&gt; field, request the new media type:&lt;/p&gt;
-</code></pre>
+<p></p>
+<p>You can now see when a user starred a repository. To receive the new response format containing the <code>starred_at</code> field, request the new media type:</p>
 
 <pre class="command-line">
 curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/users/andrew/starred
@@ -346,6 +345,132 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>If you have any questions or feedback about these changes, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Attributes+for+Starring+API">drop us a line</a>.</p>
 
 <p></p>
+</div>
+
+<div class="change" id="/changes/2014-12-08-removing-authorizations-token/">
+  <h2 class="title">
+<a id="--removing-token-attribute-from-authorizations-api-responses" class="anchor" href="#--removing-token-attribute-from-authorizations-api-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-12-08-removing-authorizations-token/">Removing token attribute from Authorizations API responses</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 8, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3" data-proofer-ignore>
+      <a href="https://github.com/ptoomey3" data-proofer-ignore>ptoomey3</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Since OAuth access tokens function like passwords, they should be treated with
+care. Today we are making it easier to more securely work with authorizations
+via the Authorizations API. We are deprecating the use use of the <code>token</code>
+attribute in the majority of the <a href="/v3/oauth_authorizations/">Authorizations API</a>
+responses. For the <a href="/v3/oauth_authorizations/#deprecation-notice">affected APIs</a>, the
+<code>token</code> attribute will soon return an empty string. To get ready for that
+change, we are giving developers a chance to
+<a href="#preview-period">preview the updated API</a> starting today.</p>
+
+<h2>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's changing?</h2>
+
+<p>The current <a href="/v3/oauth_authorizations/">OAuth Authorizations API</a> requires GitHub to store the full value for
+each OAuth token on our servers. In order to increase the security for our
+users, we are changing our architecture to store the SHA-256 digest of OAuth
+tokens instead. GitHub securely hashes user passwords using bcrypt and we want
+to provide comparable security for OAuth tokens as well.</p>
+
+<p>Rest assured that this change is an entirely proactive measure from GitHub and is not associated with any security incident.</p>
+
+<h2>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who is affected?</h2>
+
+<p>This change affects any code that relies on accessing the <code>token</code> attribute from
+<a href="/v3/oauth_authorizations/#deprecation-notice">these OAuth Authorizations API responses</a>.
+For example, our own <a href="https://mac.github.com/">GitHub for Mac</a> and
+<a href="https://windows.github.com/">GitHub for Windows</a> applications relied on reading the <code>token</code>
+from the <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> API, in order to support multiple installations of our desktop application for a single user.</p>
+
+<h2>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h2>
+
+<p>In order to reduce the impact of removing the <code>token</code> attribute, the OAuth
+Authorizations API has added a new request attribute (<code>fingerprint</code>), added
+three new response attributes (<code>token_last_eight</code>, <code>hashed_token</code>, and
+<code>fingerprint</code>), and added <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new API</a>.
+While these new APIs and attributes do not replace the full functionality that
+previously existed, they can be used in place of <code>token</code> for most common use cases.</p>
+
+<ul>
+<li><p><code>token_last_eight</code> returns the last eight characters of the associated OAuth
+token. As an example, <code>token_last_eight</code> could be used to display a list of
+partial token values to help a user manage their OAuth tokens.</p></li>
+<li><p><code>hashed_token</code> is the base64 of the SHA-256 digest of the token.
+<code>hashed_token</code> could be used to programmatically validate that a given token
+matches an authorization returned by the API.</p></li>
+<li>
+<p><code>fingerprint</code> is a new optional request parameter that allows an OAuth
+application to create multiple authorizations for a single user. <code>fingerprint</code>
+should be a string that distinguishes the new authorization from others
+for the same client ID and user.</p>
+
+<p>For example, to differentiate installations of a desktop application across
+multiple devices you might set <code>fingerprint</code> to
+<code>SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")</code>. Since
+<code>fingerprint</code> is not meant to be a user-facing value, you should still set
+the <code>note</code> attribute to help a user differentiate between authorizations on their
+<a href="https://github.com/settings/applications">OAuth applications listing on GitHub</a>.</p>
+</li>
+<li><p><a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a>
+is a new API that is analagous to the
+<a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a>
+API, but adds support for the new <code>fingerprint</code> request parameter.</p></li>
+</ul>
+
+<h2>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
+
+<p>We are making the new Authorizations API available today for developers to
+preview. During this period, we may change aspects of these endpoints. If we do,
+we will announce the changes on the developer blog, but we will not provide any
+advance notice.</p>
+
+<p>While these new APIs are in their preview period, you’ll need to provide the
+following custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.mirage-preview+json
+</code></pre>
+
+<p>We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.</p>
+
+<h2>
+<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
+
+<p>At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.</p>
+
+<h2>
+<a id="why-sha-256-over-bcrypt" class="anchor" href="#why-sha-256-over-bcrypt" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="why-sha-256-over-bcrypt" class="anchor" href="#why-sha-256-over-bcrypt" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why SHA-256 over bcrypt?</h2>
+
+<p>Some users may be curious why we are not using bcrypt to hash our OAuth tokens
+like we do for user passwords. Bcrypt is purposefully computationally expensive
+in order to mitigate brute force attacks against low entropy passwords. However,
+OAuth tokens are highly random and are not susceptible to brute force attacks.
+Given that OAuth token validation occurs for each request to the API we chose
+SHA-256 for performance reasons.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>.</p>
 </div>
 
 <div class="change" id="/changes/2014-12-08-organization-permissions-api-preview/">
@@ -368,8 +493,8 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;&lt;strong&gt;UPDATE (2014-12-12):&lt;/strong&gt; The &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API is now included in this preview as well.&lt;/p&gt;
-</code></pre>
+<p></p>
+<p><strong>UPDATE (2014-12-12):</strong> The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API is now included in this preview as well.</p>
 
 <p>We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:</p>
 
@@ -389,7 +514,7 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>We won't delete your Owners team, but you'll be able to delete or rename it yourself if you want. Organizations created after the change won't have an Owners team.</p>
 
 <h3>
-<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do-1" class="anchor" href="#what-should-you-do-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
 
 <p>In preparation for this change to the Owners team, we're releasing a few new APIs. You'll be able to use these APIs to manage organization admins without relying on the Owners team.</p>
@@ -427,7 +552,7 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>Soon, this API will include all repositories that the authenticated user has access to (whether they're owned by a user or by an organization).</p>
 
 <h3>
-<a id="what-should-you-do-1" class="anchor" href="#what-should-you-do-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do-2" class="anchor" href="#what-should-you-do-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="what-should-you-do-1" class="anchor" href="#what-should-you-do-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
 
 <p>Many apps use the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API in conjunction with the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> and <a href="/v3/repos/#list-organization-repositories">List organization repositories</a> APIs to build up a list of all the repositories the authenticated user has access to. If your app is doing this, you'll be able to get rid of all the organization-related API calls and just use the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API.</p>
@@ -443,7 +568,7 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>Soon, this API will only return public organization memberships.</p>
 
 <h3>
-<a id="what-should-you-do-2" class="anchor" href="#what-should-you-do-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do-3" class="anchor" href="#what-should-you-do-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="what-should-you-do-2" class="anchor" href="#what-should-you-do-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
 
 <p>If your app uses the <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API to fetch all of the organization memberships (public and private) for the authenticated user, you'll need to update your app to use the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API instead. The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API returns all organizations (public and private) that your app is authorized to access.</p>
@@ -459,7 +584,7 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>Soon, this API will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with <code>read:org</code> scope, you can publicize your organization membership with <code>user</code> scope, etc.). Therefore, this API will require at least <code>user</code> or <code>read:org</code> scope. (<code>write:org</code> and <code>admin:org</code> scope implicitly include <code>read:org</code> scope.) OAuth requests with insufficient scope will receive a <code>403 Forbidden</code> response.</p>
 
 <h3>
-<a id="what-should-you-do-3" class="anchor" href="#what-should-you-do-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do-4" class="anchor" href="#what-should-you-do-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="what-should-you-do-3" class="anchor" href="#what-should-you-do-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
 
 <p>If you <a href="/v3/auth/#via-username-and-password">authenticate via username and password</a>, you are not affected by this change.</p>
@@ -467,7 +592,7 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>If your app only needs to fetch the user's public organization memberships, you should use the <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API instead. Since that API only returns public information, it does not require any scopes.</p>
 
 <h2>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period-1" class="anchor" href="#preview-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
 
 <p>Starting <strong>today</strong>, these new APIs are available for developers to preview. We expect the preview period to last for four weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.</p>
@@ -480,7 +605,7 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
 
 <h2>
-<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period-2" class="anchor" href="#migration-period-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
 
 <p>At the end of the preview period, we will announce the start of a migration period. At that time, developers should update their applications to use the new APIs for managing organization admins. During this period, you will still be able to use the Owners team to manage your organization's admins, so that you have time to update your applications to use the new APIs without breakage. We expect the migration period to last for four weeks.</p>
@@ -488,133 +613,6 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>At the end of the migration period, the Owners team will no longer be special, and you'll no longer be able to rely on it for managing organization admins.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Admin+Pre-release+Preview">get in touch with us</a>!</p>
-</div>
-
-<div class="change" id="/changes/2014-12-08-removing-authorizations-token/">
-  <h2 class="title">
-<a id="--removing-token-attribute-from-authorizations-api-responses" class="anchor" href="#--removing-token-attribute-from-authorizations-api-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-12-08-removing-authorizations-token/">Removing token attribute from Authorizations API responses</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    December 8, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3" data-proofer-ignore>
-      <a href="https://github.com/ptoomey3" data-proofer-ignore>ptoomey3</a>
-  </li>
-</ul>
-</div>
-
-<pre><code>&lt;p&gt;Since OAuth access tokens function like passwords, they should be treated with
-</code></pre>
-
-<p>care. Today we are making it easier to more securely work with authorizations
-via the Authorizations API. We are deprecating the use use of the <code>token</code>
-attribute in the majority of the <a href="/v3/oauth_authorizations/">Authorizations API</a>
-responses. For the <a href="/v3/oauth_authorizations/#deprecation-notice">affected APIs</a>, the
-<code>token</code> attribute will soon return an empty string. To get ready for that
-change, we are giving developers a chance to
-<a href="#preview-period">preview the updated API</a> starting today.</p>
-
-<h2>
-<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's changing?</h2>
-
-<p>The current <a href="/v3/oauth_authorizations/">OAuth Authorizations API</a> requires GitHub to store the full value for
-each OAuth token on our servers. In order to increase the security for our
-users, we are changing our architecture to store the SHA-256 digest of OAuth
-tokens instead. GitHub securely hashes user passwords using bcrypt and we want
-to provide comparable security for OAuth tokens as well.</p>
-
-<p>Rest assured that this change is an entirely proactive measure from GitHub and is not associated with any security incident.</p>
-
-<h2>
-<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who is affected?</h2>
-
-<p>This change affects any code that relies on accessing the <code>token</code> attribute from
-<a href="/v3/oauth_authorizations/#deprecation-notice">these OAuth Authorizations API responses</a>.
-For example, our own <a href="https://mac.github.com/">GitHub for Mac</a> and
-<a href="https://windows.github.com/">GitHub for Windows</a> applications relied on reading the <code>token</code>
-from the <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> API, in order to support multiple installations of our desktop application for a single user.</p>
-
-<h2>
-<a id="what-should-you-do-4" class="anchor" href="#what-should-you-do-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h2>
-
-<p>In order to reduce the impact of removing the <code>token</code> attribute, the OAuth
-Authorizations API has added a new request attribute (<code>fingerprint</code>), added
-three new response attributes (<code>token_last_eight</code>, <code>hashed_token</code>, and
-<code>fingerprint</code>), and added <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new API</a>.
-While these new APIs and attributes do not replace the full functionality that
-previously existed, they can be used in place of <code>token</code> for most common use cases.</p>
-
-<ul>
-<li><p><code>token_last_eight</code> returns the last eight characters of the associated OAuth
-token. As an example, <code>token_last_eight</code> could be used to display a list of
-partial token values to help a user manage their OAuth tokens.</p></li>
-<li><p><code>hashed_token</code> is the base64 of the SHA-256 digest of the token.
-<code>hashed_token</code> could be used to programmatically validate that a given token
-matches an authorization returned by the API.</p></li>
-<li>
-<p><code>fingerprint</code> is a new optional request parameter that allows an OAuth
-application to create multiple authorizations for a single user. <code>fingerprint</code>
-should be a string that distinguishes the new authorization from others
-for the same client ID and user.</p>
-
-<p>For example, to differentiate installations of a desktop application across
-multiple devices you might set <code>fingerprint</code> to
-<code>SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")</code>. Since
-<code>fingerprint</code> is not meant to be a user-facing value, you should still set
-the <code>note</code> attribute to help a user differentiate between authorizations on their
-<a href="https://github.com/settings/applications">OAuth applications listing on GitHub</a>.</p>
-</li>
-<li><p><a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a>
-is a new API that is analagous to the
-<a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a>
-API, but adds support for the new <code>fingerprint</code> request parameter.</p></li>
-</ul>
-
-<h2>
-<a id="preview-period-1" class="anchor" href="#preview-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
-
-<p>We are making the new Authorizations API available today for developers to
-preview. During this period, we may change aspects of these endpoints. If we do,
-we will announce the changes on the developer blog, but we will not provide any
-advance notice.</p>
-
-<p>While these new APIs are in their preview period, you’ll need to provide the
-following custom media type in the Accept header:</p>
-
-<pre><code>application/vnd.github.mirage-preview+json
-</code></pre>
-
-<p>We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.</p>
-
-<h2>
-<a id="migration-period-2" class="anchor" href="#migration-period-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
-
-<p>At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.</p>
-
-<h2>
-<a id="why-sha-256-over-bcrypt" class="anchor" href="#why-sha-256-over-bcrypt" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="why-sha-256-over-bcrypt" class="anchor" href="#why-sha-256-over-bcrypt" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why SHA-256 over bcrypt?</h2>
-
-<p>Some users may be curious why we are not using bcrypt to hash our OAuth tokens
-like we do for user passwords. Bcrypt is purposefully computationally expensive
-in order to mitigate brute force attacks against low entropy passwords. However,
-OAuth tokens are highly random and are not susceptible to brute force attacks.
-Given that OAuth token validation occurs for each request to the API we chose
-SHA-256 for performance reasons.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>.</p>
 </div>
 
 <div class="change" id="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">
@@ -637,10 +635,9 @@ SHA-256 for performance reasons.</p>
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;Today we're very excited &lt;a href="https://github.com/blog/1933-introducing-organization-webhooks"&gt;to announce Organization Webhooks&lt;/a&gt;.
-</code></pre>
-
-<p>Organization Webhooks allow you to subscribe to events that happen across an
+<p></p>
+<p>Today we're very excited <a href="https://github.com/blog/1933-introducing-organization-webhooks">to announce Organization Webhooks</a>.
+Organization Webhooks allow you to subscribe to events that happen across an
 entire organization.</p>
 
 <p>In addition to being able to subscribe to the existing repository oriented
@@ -691,10 +688,9 @@ Webhooks API will be stable and suitable for production use.</p>
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;We're happy to announce that the &lt;a href="/v3/repos/deployments"&gt;Deployments API&lt;/a&gt; is officially part
-</code></pre>
-
-<p>of GitHub API v3. We now consider it stable for production use.</p>
+<p></p>
+<p>We're happy to announce that the <a href="/v3/repos/deployments">Deployments API</a> is officially part
+of GitHub API v3. We now consider it stable for production use.</p>
 
 <p>Thanks to everyone who provided feedback during the preview period. We got
 some great feedback, and hope this feature helps you build the tools you
@@ -749,10 +745,9 @@ media type.</p>
 </ul>
 </div>
 
-<pre><code>&lt;p&gt;To ensure a high level of service for all API consumers, we will soon limit the number of &lt;a href="/v3/repos/statuses/"&gt;statuses&lt;/a&gt;
-</code></pre>
-
-<p>to 1000 per commit SHA, repository, and context.</p>
+<p></p>
+<p>To ensure a high level of service for all API consumers, we will soon limit the number of <a href="/v3/repos/statuses/">statuses</a>
+to 1000 per commit SHA, repository, and context.</p>
 
 <p>Beginning Monday, November 3rd, we will trim existing data sets that exceed this limit, deleting the oldest 
 records first.  Attempts to create statuses beyond that limit will result in a <a href="https://developer.github.com/v3/#client-errors">validation error</a>.</p>

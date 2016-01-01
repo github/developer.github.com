@@ -187,7 +187,7 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 Name | Type | Description
 -----|------|-------------
-`commit_message`|`string`| The message that will be used for the merge commit
+`commit_message`|`string`| The message that will be used for the merge commit. Note that the text "Merge pull request #PR from user/branch" will be prepended to the message.
 `sha`|`string`| SHA that pull request head must match to allow merge
 
 

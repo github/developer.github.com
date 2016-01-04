@@ -78,23 +78,25 @@
 
 <p>If you don't want to provide a port number, you'll need to configure your tool to automatically follow redirects.</p>
 
+<p>You may also need to add the <a href="http://curl.haxx.se/docs/manpage.html#-k"><code>-k</code> flag</a> when using <code>curl</code>, since GitHub Enterprise uses a self-signed certificate before you <a href="https://help.github.com/enterprise/admin/guides/installation/dns-hostname-subdomain-isolation-and-ssl/#ssl">add your own SSL certificate</a>.</p>
+
 </div>
 
 <h2>
 <a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication</h2>
 
-<p>You need to pass your <a href="https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-for-the-first-time"><code>/setup/api/start</code></a>.</p>
+<p>You need to pass your <a href="https://help.github.com/enterprise/admin/articles/accessing-the-management-console/">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-for-the-first-time"><code>/setup/api/start</code></a>.</p>
 
 <p>Use the <code>api_key</code> parameter to send this token with each request. For example:</p>
 
 <pre class="command-line">
-<span class="command">curl -L 'http://<em>hostname</em>:<em>admin_port</em>/setup/api?api_key=<em>your-amazing-password</em>'</span>
+<span class="command">curl -L 'https://<em>hostname</em>:<em>admin_port</em>/setup/api?api_key=<em>your-amazing-password</em>'</span>
 </pre>
 
 <p>You can also use standard HTTP authentication to send this token. For example:</p>
 
 <pre class="command-line">
-<span class="command">curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api'</span>
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api'</span>
 </pre>
 
 <h2>
@@ -163,7 +165,7 @@
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L -X POST 'http://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em></span>
+<span class="command">curl -L -X POST 'https://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em></span>
 </pre>
 
 <h2>
@@ -206,7 +208,7 @@
 <a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/upgrade'</span>
+<span class="command">curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/upgrade'</span>
 </pre>
 
 <h2>
@@ -290,7 +292,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck'</span>
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck'</span>
 </pre>
 
 <h2>
@@ -313,7 +315,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-3" class="anchor" href="#example-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/configure'</span>
+<span class="command">curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/configure'</span>
 </pre>
 
 <h2>
@@ -456,7 +458,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-4" class="anchor" href="#example-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings'</span>
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings'</span>
 </pre>
 
 <h2>
@@ -497,7 +499,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-5" class="anchor" href="#example-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"</span>
+<span class="command">curl -L -X PUT 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"</span>
 </pre>
 
 <h2>
@@ -542,7 +544,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-6" class="anchor" href="#example-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/maintenance'</span>
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/maintenance'</span>
 </pre>
 
 <h2>
@@ -612,7 +614,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-7" class="anchor" href="#example-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'</span>
+<span class="command">curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'</span>
 </pre>
 
 <h2>
@@ -647,7 +649,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-8" class="anchor" href="#example-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys'</span>
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys'</span>
 </pre>
 
 <h2>
@@ -707,7 +709,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-9" class="anchor" href="#example-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em></span>
+<span class="command">curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em></span>
 </pre>
 
 <h2>
@@ -763,7 +765,7 @@ X-RateLimit-Remaining: 4999
 <a id="example-10" class="anchor" href="#example-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="command-line">
-<span class="command">curl -L -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em></span>
+<span class="command">curl -L -X DELETE 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em></span>
 </pre>
     </div>
 

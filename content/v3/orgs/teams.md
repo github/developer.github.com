@@ -41,7 +41,7 @@ Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
 `description`|`string` | The description of the team.
-`repo_names`|`array` of `strings` | The repositories to add the team to.
+`repo_names`|`array` of `strings` | The full name (e.g., "organization-name/repository-name") of repositories to add the team to.
 `privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
 `permission`|`string` | **Deprecated**. In the preview period described in the alert below, a team's `permission` attribute no longer dictates what permission it has on its repositories; it only dictates what permission the repositories in this request will be added with, and what permission a new repository will be added to the team with if none is specified by the user. Avoid confusion by specifying a `permission` when using the [Add team repository](/v3/orgs/teams/#add-team-repository) API instead.<br/><br/>The permission to grant the team. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer these repositories.<br/> * `push` - team members can pull and push, but not administer these repositories.<br/> * `admin` - team members can pull, push and administer these repositories.<br/>Default: `pull`
 

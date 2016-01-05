@@ -41,7 +41,46 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-01-08-new-user-scopes/">
+      <div class="change" id="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">
+  <h2 class="title">
+<a id="--user-agent-mandatory-from-march-4th-2013" class="anchor" href="#--user-agent-mandatory-from-march-4th-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">User Agent mandatory from March 4th 2013</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 31, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/agh.png" alt="Avatar for agh" data-proofer-ignore>
+      <a href="https://github.com/agh" data-proofer-ignore>agh</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Following on from our <a href="http://developer.github.com/changes/2012-10-14-rate-limit-changes/">previous post</a>
+about requiring requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent header</a>
+we will soon be changing our API servers to return HTTP 403 
+to any clients not providing a valid User Agent header.</p>
+
+<p>We will be making this change on Monday, March 4th 2013.</p>
+
+<p>Setting this helps us identify requests from you, and get in touch with people who are using
+the API in a way which causes disruption to GitHub. Most HTTP libraries and tools like cURL
+already provide a valid header for you, and allow you to customize it, so this will not require
+many of our users to make any changes whatsoever.</p>
+
+<p>If you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=User%20Agent%20Requirement">support@github.com</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-01-08-new-user-scopes/">
   <h2 class="title">
 <a id="--new-user-scopes" class="anchor" href="#--new-user-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-01-08-new-user-scopes/">New User scopes</a>
@@ -460,95 +499,6 @@ major change of the GitHub API.</p>
 <p>Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
 
 <p>We have also added a <code>comments_url</code> member to the Gist documents. The <code>comments_url</code> link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using <code>url</code> and <code>*_url</code> properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2012-10-26-notifications-api/">
-  <h2 class="title">
-<a id="--notifications-api" class="anchor" href="#--notifications-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2012-10-26-notifications-api/">Notifications API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    October 26, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
-      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Now that the dust has settled around <a href="https://github.com/blog/1204-notifications-stars">Notifications and Stars</a>,
-we've unleashed all that <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2728.png" height="20" width="20" align="absmiddle"> in a <a href="http://developer.github.com/v3/activity/notifications/">brand new API</a>.  You can now
-view and mark notifications as read.</p>
-
-<h2>
-<a id="endpoint" class="anchor" href="#endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="endpoint" class="anchor" href="#endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Endpoint</h2>
-
-<p>The core notifications functionality is under the <code>/notifications</code> endpoint.
-You can look for unread notifications:</p>
-
-<pre class="command-line">
-<span class="command">curl https://api.github.com/notifications</span>
-</pre>
-
-<p>You can filter these notifications to a single Repository:</p>
-
-<pre class="command-line">
-<span class="command">curl https://api.github.com/repos/technoweenie/faraday/notifications</span>
-</pre>
-
-<p>You can mark them as read:</p>
-
-<pre class="command-line">
-<span class="comment"># all notifications</span>
-<span class="command">curl https://api.github.com/notifications \</span>
-<span class="command">   -X PUT -d '{"read": true}'</span>
-
-<span class="comment"># notifications for a single repository</span>
-<span class="command">curl https://api.github.com/repos/technoweenie/faraday/notifications \</span>
-<span class="command">   -X PUT -d '{"read": true}'</span>
-</pre>
-
-<p>You can also modify subscriptions for a Repository or a single thread.</p>
-
-<pre class="command-line">
-<span class="comment"># subscription details for the thread (either an Issue or Commit)</span>
-<span class="command">curl https://api.github.com/notifications/threads/1/subscription</span>
-
-<span class="comment"># subscription details for a whole Repository.</span>
-<span class="command">curl https://api.github.com/repos/technoweenie/faraday/subscription</span>
-</pre>
-
-<h2>
-<a id="polling" class="anchor" href="#polling" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="polling" class="anchor" href="#polling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Polling</h2>
-
-<p>The Notifications API is optimized for polling by the last modified time:</p>
-
-<pre class="command-line">
-<span class="comment"># Add authentication to your requests</span>
-<span class="command">curl -I https://api.github.com/notifications</span>
-<span class="output">HTTP/1.1 200 OK</span>
-<span class="output">Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT</span>
-<span class="output">X-Poll-Interval: 60</span>
-
-<span class="comment"># Pass the Last-Modified header exactly</span>
-<span class="command">curl -I https://api.github.com/notifications</span>
-<span class="command">   -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"</span>
-<span class="output">HTTP/1.1 304 Not Modified</span>
-<span class="output">X-Poll-Interval: 60</span>
-</pre>
-
-<p>You can read about the API details in depth in the <a href="http://developer.github.com/v3/activity/notifications/">Notifications documentation</a>.</p>
 
 <p></p>
 </div>

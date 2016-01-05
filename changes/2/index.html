@@ -41,7 +41,57 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">
+      <div class="change" id="/changes/2015-06-11-pages-a-records/">
+  <h2 class="title">
+<a id="--github-pages-a-records-added-to-meta-api" class="anchor" href="#--github-pages-a-records-added-to-meta-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-06-11-pages-a-records/">GitHub Pages' A Records Added to Meta API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 11, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/leereilly.png" alt="Avatar for leereilly" data-proofer-ignore>
+      <a href="https://github.com/leereilly" data-proofer-ignore>leereilly</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>The <a href="/v3/meta/">Meta API</a> now includes the A record IP addresses for <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/meta</span>
+</pre>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"verifiable_password_authentication"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"github_services_sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23c6105183b626cf74c045f6d53af7a178bfdb4c"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hooks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"192.30.252.0/22"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"git"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"192.30.252.0/22"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"192.30.252.153/32"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"192.30.252.154/32"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>These IP addresses are used to <a href="https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider/">configure A records with your DNS provider for GitHub Pages</a>. These addresses have changed a few times in the past. This API always provides the current addresses so that you can automate the process of keeping your DNS records up to date.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Pages+A+Records+Added+to+API">get in touch</a>. We’ll be happy to help.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">
   <h2 class="title">
 <a id="--breaking-changes-to-organization-permissions-coming-on-june-24" class="anchor" href="#--breaking-changes-to-organization-permissions-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">Breaking changes to organization permissions coming on June 24</a>
@@ -457,40 +507,6 @@ media type.</p>
 </code></pre>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API+methods">get in touch</a>.</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2015-02-03-removing-authorizations-token-update/">
-  <h2 class="title">
-<a id="--removing-token-attribute-from-authorizations-api-responses-update" class="anchor" href="#--removing-token-attribute-from-authorizations-api-responses-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-02-03-removing-authorizations-token-update/">Removing token attribute from Authorizations API responses (Update)</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 3, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3" data-proofer-ignore>
-      <a href="https://github.com/ptoomey3" data-proofer-ignore>ptoomey3</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>In December, we <a href="/changes/2014-12-08-removing-authorizations-token/">released a preview</a> of several API changes related to managing OAuth application authorizations. As part of those changes we introduced several new response attributes (<code>token_last_eight</code>, <code>hashed_token</code>, and <code>fingerprint</code>) to the Authorizations API. We have decided to modify <code>hashed_token</code> to return the SHA-256 hex digest of the associated token instead of Base64. Given that Base64 has several common variants (original, URL safe, etc) we decided that returning the value as hex is less ambiguous and will be more useful for developers.</p>
-
-<h3>
-<a id="extended-preview-period" class="anchor" href="#extended-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="extended-preview-period" class="anchor" href="#extended-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extended preview period</h3>
-
-<p>Because of the change to <code>hashed_token</code>, we are extending the preview period by two weeks. If no additional changes are made during this extended preview period we will announce the end of the preview and beginning of the eight week migration period on February 17. The migration period will allow applications to opt in to these changes before they become an official part of the GitHub API v3.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>!</p>
 
 <p></p>
 </div>

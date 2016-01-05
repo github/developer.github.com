@@ -41,7 +41,65 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
+      <div class="change" id="/changes/2013-10-08-list-all-user-teams/">
+  <h2 class="title">
+<a id="--list-all-teams-for-the-authenticated-user" class="anchor" href="#--list-all-teams-for-the-authenticated-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-10-08-list-all-user-teams/">List all teams for the authenticated user</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 8, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We just added a <a href="/v3/orgs/teams/#list-user-teams">new API method</a> to list all
+the teams for the authenticated user across all organizations:</p>
+
+<pre class="command-line">
+<span class="command">curl -H "Authorization: token [yours]" https://api.github.com/user/teams</span>
+
+<span class="output">[</span>
+<span class="output">  {</span>
+<span class="output">    "name": "Testing",</span>
+<span class="output">    "id": 396018,</span>
+<span class="output">    "slug": "testing",</span>
+<span class="output">   "permission": "pull",</span>
+<span class="output">   "url": "https://api.github.com/teams/396018",</span>
+<span class="output">   "members_url": "https://api.github.com/teams/396018/members{/member}",</span>
+<span class="output">   "repositories_url": "https://api.github.com/teams/396018/repos",</span>
+<span class="output">   "members_count": 1,</span>
+<span class="output">   "repos_count": 0,</span>
+<span class="output">   "organization": {</span>
+<span class="output">     "login": "dotfiles",</span>
+<span class="output">     "id": 1593590,</span>
+<span class="output">     "url": "https://api.github.com/orgs/dotfiles",</span>
+<span class="output">     "repos_url": "https://api.github.com/orgs/dotfiles/repos",</span>
+<span class="output">     "events_url": "https://api.github.com/orgs/dotfiles/events",</span>
+<span class="output">     "members_url": "https://api.github.com/orgs/dotfiles/members{/member}",</span>
+<span class="output">     "public_members_url": "https://api.github.com/orgs/dotfiles/public_members{/member}",</span>
+<span class="output">     "avatar_url": "https://0.gravatar.com/avatar/67d30facf213f62853c119fc2a05e246?d=https%3A%2F%2Fidenticons.github.com%2Fc90a68e6ab739e81c642f0e93f88c722.png"</span>
+<span class="output">   }</span>
+<span class="output"> },</span>
+<span class="output"> ...</span>
+<span class="output">]</span>
+</pre>
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Teams+for+User">drop us a line</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
   <h2 class="title">
 <a id="--oauth-changes-coming" class="anchor" href="#--oauth-changes-coming" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-10-04-oauth-changes-coming/">OAuth changes coming</a>
@@ -571,37 +629,6 @@ resources available to the authenticated user.</p>
 </pre>
 
 <p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
-  <h2 class="title">
-<a id="--create-update-and-delete-individual-files" class="anchor" href="#--create-update-and-delete-individual-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ymendel.png" alt="Avatar for ymendel" data-proofer-ignore>
-      <a href="https://github.com/ymendel" data-proofer-ignore>ymendel</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We're following in the footsteps of GitHub.com's ability to <a href="https://github.com/blog/143-inline-file-editing">edit</a> and
-<a href="https://github.com/blog/1327-creating-files-on-github">create</a> files in your web browser. Starting today, the
-<a href="/v3/repos/contents/">Repository Contents API</a> will let you easily <a href="/v3/repos/contents/#create-a-file">create</a>, <a href="/v3/repos/contents/#update-a-file">update</a>, and even
-<a href="/v3/repos/contents/#delete-a-file">delete</a> individual files.</p>
-
-<p>Happy editing!</p>
 
 <p></p>
 </div>

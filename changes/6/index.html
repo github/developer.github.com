@@ -41,7 +41,69 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-04-25-user-content-security/">
+      <div class="change" id="/changes/2014-05-06-gist-api-now-truncating-large-files/">
+  <h2 class="title">
+<a id="--changes-to-gist-api-response-for-large-files" class="anchor" href="#--changes-to-gist-api-response-for-large-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-05-06-gist-api-now-truncating-large-files/">Changes to Gist API response for large files</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 6, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/leongersing.png" alt="Avatar for leongersing" data-proofer-ignore>
+      <a href="https://github.com/leongersing" data-proofer-ignore>leongersing</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>In order to provide a faster, more robust API for Gist, we are making two changes to better handle large files in <a href="/v3/gists/#detailed-gist-representation">Gist API responses</a>.</p>
+
+<h3>
+<a id="truncating-file-contents-larger-than-one-megabyte" class="anchor" href="#truncating-file-contents-larger-than-one-megabyte" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="truncating-file-contents-larger-than-one-megabyte" class="anchor" href="#truncating-file-contents-larger-than-one-megabyte" aria-hidden="true"><span class="octicon octicon-link"></span></a>Truncating file contents larger than one megabyte</h3>
+
+<p>The <a href="/v3/gists/#detailed-gist-representation">Gist API response</a> includes data for every file in the Gist. That works well for Gists with reasonably-sized files. When a Gist contains large files, however, it can lead to timeouts when preparing or sending the API response.</p>
+
+<p>To eliminate those timeouts, the API now limits the amount of content returned for each file. If a file is larger than one megabyte in size, the API response will include the first megabyte of content for that file. (Few Gists have files this large. As a result, most API clients won't notice any impact from this change.)</p>
+
+<h3>
+<a id="new-truncated-attribute" class="anchor" href="#new-truncated-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-truncated-attribute" class="anchor" href="#new-truncated-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New "truncated" attribute</h3>
+
+<p>The JSON snippet below illustrates the attributes provided for each file in the Gist API response. In it, you'll notice a new <code>truncated</code> attribute included as part of the file metadata. This Boolean attribute indicates whether the <code>content</code> value is truncated for this request.</p>
+
+<pre><code>{
+  files: {
+    "my_large_file.md": {
+      "size": 2097152,
+      "content": "Large content. Truncated at end of first megabyte. [...]",
+      "truncated": true,
+      "raw_url": "https://raw.githubusercontent.com/[...]/my_large_file.md",
+      "type": "text/plain",
+      "language": "Markdown"
+    }
+  }
+}
+</code></pre>
+
+<h3>
+<a id="getting-the-full-content-for-truncated-files" class="anchor" href="#getting-the-full-content-for-truncated-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="getting-the-full-content-for-truncated-files" class="anchor" href="#getting-the-full-content-for-truncated-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting the full content for truncated files</h3>
+
+<p>We recognize that sometimes you'll still want the full content for a file, even if it's too large to get returned in the standard Gist API response. For files under 10 megabytes, simply make a request to the URL specified in the <code>raw_url</code> attribute, and you'll receive the complete content for that file. For larger files, you'll need to clone the gist locally via the <code>git_pull_url</code> to access the full file contents.</p>
+
+<p>If you have any questions, don’t hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=Gist+API+now+truncates+large+files">get in touch</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-04-25-user-content-security/">
   <h2 class="title">
 <a id="--new-user-content-domains" class="anchor" href="#--new-user-content-domains" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-04-25-user-content-security/">New user content domains</a>
@@ -585,36 +647,6 @@ run into trouble, feel free to <a href="https://github.com/contact?form%5Bsubjec
 <pre><code>GET /users/:user/keys
 GET /user/keys
 </code></pre>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2014-03-12-page-build-event-for-webhooks/">
-  <h2 class="title">
-<a id="--page-build-event-for-webhooks" class="anchor" href="#--page-build-event-for-webhooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-03-12-page-build-event-for-webhooks/">Page Build Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    March 12, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter" data-proofer-ignore>
-      <a href="https://github.com/benbalter" data-proofer-ignore>benbalter</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We've made it even easier to track the status of your <a href="http://pages.github.com/">GitHub Pages</a> builds. By subscribing to the new <a href="/v3/activity/events/types/#pagebuildevent"><code>page_build</code></a> event, your application will receive an event payload containing the results of each build. (As always, these builds occur automatically following each push to a GitHub Pages-enabled branch.)</p>
-
-<p>If you have a <a href="/webhooks/">webhook</a> with the <a href="https://github.com/blog/1778-webhooks-level-up">"send me everything" option</a> selected (or if you use the "<a href="/changes/2014-02-24-wildcard-event-for-webhooks/">wildcard event</a>" via the API), you will receive the <code>page_build</code> event after the next build of your GitHub Pages site. Alternatively, if you prefer to subscribe to specific event types, you can add to the new <code>page_build</code> event to your webhooks via your repository's webhook settings page or via the <a href="/v3/repos/hooks/">webhooks API</a>.</p>
-
-<p>For more information, be sure to check out our guide on <a href="/webhooks/">working with webhooks</a>. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+Page+Build+Event">drop us a line</a>.</p>
 
 <p></p>
 </div>

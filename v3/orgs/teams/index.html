@@ -199,24 +199,11 @@ X-RateLimit-Remaining: 4999
 <td><code>permission</code></td>
 <td><code>string</code></td>
 <td>
-<strong>Deprecated</strong>. In the preview period described in the alert below, a team's <code>permission</code> attribute no longer dictates what permission it has on its repositories; it only dictates what permission the repositories in this request will be added with, and what permission a new repository will be added to the team with if none is specified by the user. Avoid confusion by specifying a <code>permission</code> when using the <a href="/v3/orgs/teams/#add-team-repository">Add team repository</a> API instead.<br><br>The permission to grant the team. Can be one of:<br> * <code>pull</code> - team members can pull, but not push to or administer these repositories.<br> * <code>push</code> - team members can pull and push, but not administer these repositories.<br> * <code>admin</code> - team members can pull, push and administer these repositories.<br>Default: <code>pull</code>
+<strong>Deprecated</strong>. The permission that new repositories will be added to the team with when none is specified. Can be one of:<br> * <code>pull</code> - team members can pull, but not push to or administer newly-added repositories.<br> * <code>push</code> - team members can pull and push, but not administer newly-added repositories.<br> * <code>admin</code> - team members can pull, push and administer newly-added repositories.<br>Default: <code>pull</code>
 </td>
 </tr>
 </tbody>
 </table>
-
-<div class="alert tip">
-
-<p>We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.</p>
-
-<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.ironman-preview+json
-</code></pre>
-
-<p><strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.</p>
-
-</div>
 
 <h4>
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
@@ -296,31 +283,18 @@ the org that the team is associated with, or a maintainer of the team.</p>
 <tr>
 <td><code>privacy</code></td>
 <td><code>string</code></td>
-<td>The level of privacy this team should have. Can be one of:<br> * <code>secret</code> - only visible to organization owners and members of this team.<br> * <code>closed</code> - visible to all members of this organization.<br>Default: <code>secret</code><br><strong>This parameter requires a custom media type to be specified. Please see more in the alert below.</strong>
+<td>The level of privacy this team should have. Can be one of:<br> * <code>secret</code> - only visible to organization owners and members of this team.<br> * <code>closed</code> - visible to all members of this organization.<br>Default: <code>secret</code><br>
 </td>
 </tr>
 <tr>
 <td><code>permission</code></td>
 <td><code>string</code></td>
 <td>
-<strong>Deprecated</strong>. In the preview period described in the alert below, a team's <code>permission</code> attribute no longer dictates what permission it has on its repositories; it only dictates what permission a new repository will be added to the team with if none is specified by the user. Avoid confusion by specifying a <code>permission</code> when using the <a href="/v3/orgs/teams/#add-team-repository">Add team repository</a> API instead.<br><br>The permission to grant the team. Can be one of:<br> * <code>pull</code> - team members can pull, but not push to or administer these repositories.<br> * <code>push</code> - team members can pull and push, but not administer these repositories.<br> * <code>admin</code> - team members can pull, push and administer these repositories. Default: <code>pull</code>
+<strong>Deprecated</strong>. The permission that new repositories will be added to the team with when none is specified. Can be one of:<br> * <code>pull</code> - team members can pull, but not push to or administer newly-added repositories.<br> * <code>push</code> - team members can pull and push, but not administer newly-added repositories.<br> * <code>admin</code> - team members can pull, push and administer newly-added repositories.<br>Default: <code>pull</code>
 </td>
 </tr>
 </tbody>
 </table>
-
-<div class="alert tip">
-
-<p>We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.</p>
-
-<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.ironman-preview+json
-</code></pre>
-
-<p><strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.</p>
-
-</div>
 
 <h4>
 <a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
@@ -404,22 +378,11 @@ authenticated user.</p>
 <tr>
 <td><code>role</code></td>
 <td><code>string</code></td>
-<td>Filters members returned by their role in the team. Can be one of:<br> * <code>member</code> - normal members of the team.<br> * <code>maintainer</code> - team maintainers.<br> * <code>all</code> - all members of the team.<br>Default: <code>all</code><br><strong>This parameter requires a custom media type to be specified. Please see more in the alert below.</strong>
+<td>Filters members returned by their role in the team. Can be one of:<br> * <code>member</code> - normal members of the team.<br> * <code>maintainer</code> - team maintainers.<br> * <code>all</code> - all members of the team.<br>Default: <code>all</code>
 </td>
 </tr>
 </tbody>
 </table>
-
-<div class="alert tip">
-
-<p>We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.</p>
-
-<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.ironman-preview+json
-</code></pre>
-
-</div>
 
 <h3>
 <a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
@@ -698,24 +661,11 @@ and a team, the authenticated user must be an organization owner.</p>
 <tr>
 <td><code>role</code></td>
 <td><code>string</code></td>
-<td>The role that this user should have in the team. Can be one of:<br> * <code>member</code> - a normal member of the team.<br> * <code>maintainer</code> - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.<br>Default: <code>member</code><br><strong>This parameter requires a custom media type to be specified. Please see more in the alert below.</strong>
+<td>The role that this user should have in the team. Can be one of:<br> * <code>member</code> - a normal member of the team.<br> * <code>maintainer</code> - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.<br>Default: <code>member</code>
 </td>
 </tr>
 </tbody>
 </table>
-
-<div class="alert tip">
-
-<p>We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.</p>
-
-<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.ironman-preview+json
-</code></pre>
-
-<p><strong>Warning:</strong> If you specify the <code>role</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.</p>
-
-</div>
 
 <h3>
 <a id="response-if-users-membership-with-team-is-now-active" class="anchor" href="#response-if-users-membership-with-team-is-now-active" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response if user's membership with team is now active</h3>
@@ -931,22 +881,11 @@ X-RateLimit-Remaining: 4999
 <h3>
 <a id="alternative-response-with-extra-repository-information" class="anchor" href="#alternative-response-with-extra-repository-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Alternative response with extra repository information</h3>
 
-<div class="alert tip">
-
-<p>We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.</p>
-
-<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.ironman-preview+json
-</code></pre>
-
-</div>
-
 <p>You can also get information about the specified repository, including what
 permissions the team grants on it, by passing the following custom
 <a href="/v3/media/">media type</a> via the <code>Accept</code> header:</p>
 
-<pre><code>Accept: application/vnd.github.ironman-preview.repository+json
+<pre><code>Accept: application/vnd.github.v3.repository+json
 </code></pre>
 
 <pre class="highlight highlight-headers"><code>Status: 200 OK
@@ -1073,26 +1012,12 @@ organization.</p>
 <tr>
 <td><code>permission</code></td>
 <td><code>string</code></td>
-<td>The permission to grant the team on this repository. Can be one of:<br> * <code>pull</code> - team members can pull, but not push to or administer this repository.<br> * <code>push</code> - team members can pull and push, but not administer this repository.<br> * <code>admin</code> - team members can pull, push and administer this repository.<br><br>If no permission is specified, the team's <code>permission</code> attribute will be used to determine what permission to grant the team on this repository.<br><br><strong>This parameter requires a custom media type to be specified. Please see more in the alert below.</strong>
-</td>
+<td>The permission to grant the team on this repository. Can be one of:<br> * <code>pull</code> - team members can pull, but not push to or administer this repository.<br> * <code>push</code> - team members can pull and push, but not administer this repository.<br> * <code>admin</code> - team members can pull, push and administer this repository.<br><br>If no permission is specified, the team's <code>permission</code> attribute will be used to determine what permission to grant the team on this repository.</td>
 </tr>
 </tbody>
 </table>
 
 <p>Note that, if you choose not to pass any parameters, you'll need to set <code>Content-Length</code> to zero when calling out to this endpoint. For more information, see "<a href="/v3/#http-verbs">HTTP verbs</a>."</p>
-
-<div class="alert tip">
-
-<p>We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.</p>
-
-<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.ironman-preview+json
-</code></pre>
-
-<p><strong>Warning:</strong> If you specify the <code>permission</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.</p>
-
-</div>
 
 <h3>
 <a id="response-10" class="anchor" href="#response-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>

@@ -78,7 +78,7 @@ We would love to hear your thoughts on these enhancements. If you have any quest
 [add-team-membership]: /v3/orgs/teams/#add-team-membership
 [list-team-repos]: /v3/orgs/teams/#list-team-repos
 [get-team-repo]: /v3/orgs/teams/#check-if-a-team-manages-a-repository
-[add-team-repo]: /v3/orgs/teams/#add-team-repository
+[add-team-repo]: /v3/orgs/teams/#add-or-update-team-repository
 [org-members-list]: /v3/orgs/members/#members-list
 [org-public-members-list]: /v3/orgs/members/#public-members-list
 [list-collabs]: /v3/repos/collaborators/#list-collaborators

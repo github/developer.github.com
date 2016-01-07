@@ -350,14 +350,14 @@ permissions the team grants on it, by passing the following custom
 <%= headers 200 %>
 <%= json :repo %>
 
-## Add team repository
+## Add or update team repository
 
-In order to add a repository to a team, the authenticated user must have admin
-access to the repository, and must be able to see the team. Also, the repository
-must be owned by the organization, or a direct fork of a repository owned by the
-organization.
+In order to add a repository to a team or update the team's permission on a
+repository, the authenticated user must have admin access to the repository, and
+must be able to see the team. Also, the repository must be owned by the
+organization, or a direct fork of a repository owned by the organization.
 
-    PUT /teams/:id/repos/:org/:repo
+    PUT /teams/:id/repos/:owner/:repo
 
 ### Parameters
 

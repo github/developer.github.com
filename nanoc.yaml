@@ -26,6 +26,11 @@ data_variables:
       path: ""
     values:
       version: "dotcom"
+  -
+    scope:
+      path: "enterprise-(?!backports)"
+    values:
+      version: *latest_enterprise_version
 
 page_variables:
   -
@@ -45,6 +50,12 @@ page_variables:
     # exclude integrations-directory from search
     values:
       hide_from_search: true
+  -
+    scope:
+      path: "enterprise"
+    values:
+      version: *latest_enterprise_version
+      is_enterprise_help: "true"
 
 # For the atom feed.
 base_url: http://developer.github.com

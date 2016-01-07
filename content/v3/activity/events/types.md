@@ -496,7 +496,7 @@ Key | Type | Description
 
 ## TeamAddEvent
 
-Triggered when a [repository is added to a team](/v3/orgs/teams/#add-team-repository).
+Triggered when a [repository is added to a team](/v3/orgs/teams/#add-or-update-team-repository).
 
 Events of this type are not visible in timelines. These events are only used to trigger hooks.
 

@@ -28,6 +28,7 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
     <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   </ul>
 
+  {% if page.version == 'dotcom' or page.version > 2.2 %}
   <p>
     To reduce the impact of removing the <code>token</code> value,
     the OAuth Authorizations API now includes a new request attribute
@@ -36,7 +37,15 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
     <code>fingerprint</code>), and
     <a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new endpoint</a>.
   </p>
-
+  {% else %}
+  <p>
+    To reduce the impact of removing the <code>token</code> value,
+    the OAuth Authorizations API now includes a new request attribute
+    (<code>fingerprint</code>) and three new response attributes
+    (<code>token_last_eight</code>, <code>hashed_token</code>, and
+    <code>fingerprint</code>).
+  </p>
+  {% endif %}
   <p>
     This functionality became the default for all requests on April 20, 2015. Please see <a href="/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/">the blog post</a> for full details.
   </p>

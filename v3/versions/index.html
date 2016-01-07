@@ -101,62 +101,134 @@ functionality <em>will be removed</em> in the next major version of the API.</p>
 <p>The recommendations below will help you prepare your application for the next major version of the API.</p>
 
 <ol>
-<li><p>Method: /gists/:id/fork
-: Recommendation: Use <strong>/gists/:id/forks</strong> (plural) instead.</p></li>
-<li><p>Method: /legacy/issues/search/:owner/:repository/:state/:keyword
-: Recommendation: Use <a href="/v3/search/#search-issues">v3 Issue Search API</a> instead.</p></li>
-<li><p>Method: /legacy/repos/search/:keyword
-: Recommendation: Use <a href="/v3/search/#search-repositories">v3 Repository Search API</a> instead.</p></li>
-<li><p>Method: /legacy/user/search/:keyword
-: Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</p></li>
-<li><p>Method: /legacy/user/email/:email
-: Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</p></li>
-<li><p>Method: /repos/:owner/:repo/hooks/:id/test
-: Recommendation: Use <strong>/repos/:owner/:repo/hooks/:id/tests</strong> (plural) instead.</p></li>
-<li><p>Method: /teams/:id/members/:username
-: Recommendation: Use <a href="/v3/orgs/teams/#get-team-membership">Get Team Membership</a>, <a href="/v3/orgs/teams/#add-team-membership">Add Team Membership</a>, and <a href="/v3/orgs/teams/#remove-team-membership">Remove Team Membership</a> instead.</p></li>
-<li><p>Query parameters when POSTing to /repos/:owner/:repo/forks
-: Recommendation: Use JSON to POST to this method instead.</p></li>
-<li><p>Query parameter value: Passing "watchers" as the value for the "sort" parameter in a GET request to /repos/:owner/:repo/forks
-: Recommendation: Use <strong>stargazers</strong> as the value instead.</p></li>
-<li><p>Pull Request attribute: merge_commit_sha
-: Recommendation: <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Do not use this attribute</a>.</p></li>
-<li><p>Rate Limit attribute: rate
-: Recommendation: Use <strong>resources["core"]</strong> instead.</p></li>
-<li><p>Repository attribute: forks
-: Recommendation: Use <strong>forks_count</strong> instead.</p></li>
-<li><p>Repository attribute: master_branch
-: Recommendation: Use <strong>default_branch</strong> instead.</p></li>
-<li><p>Repository attribute: open_issues
-: Recommendation: Use <strong>open_issues_count</strong> instead.</p></li>
-<li><p>Repository attribute: public
-: Recommendation: When <a href="/v3/repos/#create">creating a repository</a>, use the
+<li>
+<p>Method: /gists/:id/fork</p>
+
+<p>Recommendation: Use <strong>/gists/:id/forks</strong> (plural) instead.</p>
+</li>
+<li>
+<p>Method: /legacy/issues/search/:owner/:repository/:state/:keyword</p>
+
+<p>Recommendation: Use <a href="/v3/search/#search-issues">v3 Issue Search API</a> instead.</p>
+</li>
+<li>
+<p>Method: /legacy/repos/search/:keyword</p>
+
+<p>Recommendation: Use <a href="/v3/search/#search-repositories">v3 Repository Search API</a> instead.</p>
+</li>
+<li>
+<p>Method: /legacy/user/search/:keyword</p>
+
+<p>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</p>
+</li>
+<li>
+<p>Method: /legacy/user/email/:email</p>
+
+<p>Recommendation: Use <a href="/v3/search/#search-users">v3 User Search API</a> instead.</p>
+</li>
+<li>
+<p>Method: /repos/:owner/:repo/hooks/:id/test</p>
+
+<p>Recommendation: Use <strong>/repos/:owner/:repo/hooks/:id/tests</strong> (plural) instead.</p>
+</li>
+<li>
+<p>Method: /teams/:id/members/:username</p>
+
+<p>Recommendation: Use <a href="/v3/orgs/teams/#get-team-membership">Get Team Membership</a>, <a href="/v3/orgs/teams/#add-team-membership">Add Team Membership</a>, and <a href="/v3/orgs/teams/#remove-team-membership">Remove Team Membership</a> instead.</p>
+</li>
+<li>
+<p>Query parameters when POSTing to /repos/:owner/:repo/forks</p>
+
+<p>Recommendation: Use JSON to POST to this method instead.</p>
+</li>
+<li>
+<p>Query parameter value: Passing "watchers" as the value for the "sort" parameter in a GET request to /repos/:owner/:repo/forks</p>
+
+<p>Recommendation: Use <strong>stargazers</strong> as the value instead.</p>
+</li>
+<li>
+<p>Pull Request attribute: merge_commit_sha</p>
+
+<p>Recommendation: <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Do not use this attribute</a>.</p>
+</li>
+<li>
+<p>Rate Limit attribute: rate</p>
+
+<p>Recommendation: Use <strong>resources["core"]</strong> instead.</p>
+</li>
+<li>
+<p>Repository attribute: forks</p>
+
+<p>Recommendation: Use <strong>forks_count</strong> instead.</p>
+</li>
+<li>
+<p>Repository attribute: master_branch</p>
+
+<p>Recommendation: Use <strong>default_branch</strong> instead.</p>
+</li>
+<li>
+<p>Repository attribute: open_issues</p>
+
+<p>Recommendation: Use <strong>open_issues_count</strong> instead.</p>
+</li>
+<li>
+<p>Repository attribute: public</p>
+
+<p>Recommendation: When <a href="/v3/repos/#create">creating a repository</a>, use the
 <strong>private</strong> attribute to indicate whether the repository should be public or
-private. Do not use the <strong>public</strong> attribute.</p></li>
-<li><p>Repository attribute: watchers
-: Recommendation: Use <strong>watchers_count</strong> instead.</p></li>
-<li><p>User attribute: bio
-: Recommendation: Do not use this attribute. It is obsolete.</p></li>
-<li><p>User attribute: plan["collaborators"]
-: Recommendation: Do not use this attribute. It is obsolete.</p></li>
-<li><p>User attribute: gravatar_id
-: Recommendation: Use <strong>avatar_url</strong> instead.</p></li>
-<li><p>Feed attribute: current_user_organization_url
-: Recommendation: Use <strong>current_user_organization_urls</strong> instead.</p></li>
-<li><p>Feed attribute: current_user_organization
-: Recommendation: Use <strong>current_user_organizations</strong> instead.</p></li>
-<li><p>Pagination parameters <code>top</code> and <code>sha</code> for method: /repos/:owner/:repo/commits
-: Recommendation: When fetching <a href="/v3/repos/commits/#list-commits-on-a-repository">the list of commits for a repository</a>
+private. Do not use the <strong>public</strong> attribute.</p>
+</li>
+<li>
+<p>Repository attribute: watchers</p>
+
+<p>Recommendation: Use <strong>watchers_count</strong> instead.</p>
+</li>
+<li>
+<p>User attribute: bio</p>
+
+<p>Recommendation: Do not use this attribute. It is obsolete.</p>
+</li>
+<li>
+<p>User attribute: plan["collaborators"]</p>
+
+<p>Recommendation: Do not use this attribute. It is obsolete.</p>
+</li>
+<li>
+<p>User attribute: gravatar_id</p>
+
+<p>Recommendation: Use <strong>avatar_url</strong> instead.</p>
+</li>
+<li>
+<p>Feed attribute: current_user_organization_url</p>
+
+<p>Recommendation: Use <strong>current_user_organization_urls</strong> instead.</p>
+</li>
+<li>
+<p>Feed attribute: current_user_organization</p>
+
+<p>Recommendation: Use <strong>current_user_organizations</strong> instead.</p>
+</li>
+<li>
+<p>Pagination parameters <code>top</code> and <code>sha</code> for method: /repos/:owner/:repo/commits</p>
+
+<p>Recommendation: When fetching <a href="/v3/repos/commits/#list-commits-on-a-repository">the list of commits for a repository</a>
 use the <a href="/v3/#pagination">standard <code>per_page</code> and <code>page</code> parameters</a> for pagination, instead of <code>per_page</code>,
-<code>top</code>, and <code>sha</code>.</p></li>
-<li><p>Authorization attribute: token
-: Recommendation: This attribute will return an empty string in the majority of
+<code>top</code>, and <code>sha</code>.</p>
+</li>
+<li>
+<p>Authorization attribute: token</p>
+
+<p>Recommendation: This attribute will return an empty string in the majority of
 the Authorizations API responses. Please see
 <a href="/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/">the deprecation blog post</a>
 and the <a href="/v3/oauth_authorizations/#deprecation-notice">Authorizations API deprecation notice</a>
-for full details.</p></li>
-<li><p>Team attribute: permission
-: Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the <a href="/v3/orgs/teams/#add-team-repository">Add team repository</a> API will use for requests where no <code>permission</code> attribute is specified. To change the permission level for every repository on a team, use the <a href="/v3/orgs/teams/#list-team-repos">List team repositories</a> API to list all of the team's repositories, and then use the <a href="/v3/orgs/teams/#add-team-repository">Add team repository</a> with a <code>permission</code> attribute to update each repository's permission separately.</p></li>
+for full details.</p>
+</li>
+<li>
+<p>Team attribute: permission</p>
+
+<p>Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the <a href="/v3/orgs/teams/#add-team-repository">Add team repository</a> API will use for requests where no <code>permission</code> attribute is specified. To change the permission level for every repository on a team, use the <a href="/v3/orgs/teams/#list-team-repos">List team repositories</a> API to list all of the team's repositories, and then use the <a href="/v3/orgs/teams/#add-team-repository">Add team repository</a> with a <code>permission</code> attribute to update each repository's permission separately.</p>
+</li>
 </ol>
 
 <p><a id="beta"></a></p>

@@ -15,7 +15,7 @@ title: Issue Milestones
 Name | Type | Description
 -----|------|--------------
 `state`|`string` | The state of the milestone. Either `open`, `closed`, or `all`. Default: `open`
-`sort`|`string` | What to sort results by. Either `due_date` or `completeness`. Default: `due_date`
+`sort`|`string` | What to sort results by. Either `due_on` or `completeness`. Default: `due_on`
 `direction`|`string` | The direction of the sort. Either `asc` or `desc`. Default: `asc`
 
 

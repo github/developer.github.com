@@ -9,7 +9,8 @@ echo "==> Installing gem dependencies…"
 
 if [ "$RACK_ENV" = "production" ]; then
   export NOKOGIRI_USE_SYSTEM_LIBRARIES=1
-  bundle install --without development staging test benchmark --path vendor/cache --jobs 4 --local --deployment
+  export BUNDLE_JOBS=4
+  bundle install --without development staging test benchmark --path vendor/cache --local --deployment
 else
   bundle check --path vendor/cache 2>&1 || {
     bundle install --path vendor/cache

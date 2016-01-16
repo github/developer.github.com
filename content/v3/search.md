@@ -134,7 +134,7 @@ Due to the complexity of searching code, there are a few restrictions on how sea
 
 <ul>
 <li>Only the <em>default branch</em> is considered. In most cases, this will be the <code>master</code> branch.</li>
-<li>Only files smaller than 384 KB are searchable.</li>
+<li>Only files smaller than {% if page.version != 'dotcom' and page.version >= 2.2 %} 10 MB {% else %} 384 KB {% endif %} are searchable.</li>
 {% if page.version == 'dotcom' %}
 <li>You must always include at least one search term when searching source code. For example, searching for <a href="https://github.com/search?utf8=✓&q=language%3Ago&type=Code"><code>language:go</code></a> is not valid, while <a href="https://github.com/search?utf8=✓&q=amazing+language%3Ago&type=Code"><code>amazing language:go</code></a> is.</li>
 {% endif %}

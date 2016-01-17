@@ -58,7 +58,7 @@ See [our guide on Git automation with tokens][git-automation].
 
 ## Deploy keys
 
-A deploy key is an SSH key that is stored on your server and grants access to a single GitHub repository.  This key is attached directly to the repository instead of to a personal user account.
+A deploy key is an SSH key that is stored on your server and grants access to a single {{ site.data.variables.product.product_name }} repository.  This key is attached directly to the repository instead of to a personal user account.
 
 #### Pros
 
@@ -74,7 +74,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 #### Setup
 
 1. [Run the `ssh-keygen` procedure][generating-ssh-keys] on your server.
-2. In the top right corner of any GitHub page, click your profile photo.
+2. In the top right corner of any {{ site.data.variables.product.product_name }} page, click your profile photo.
    ![Sample of an avatar](https://github-images.s3.amazonaws.com/help/profile/top_right_avatar.png)
 3. On your profile page, click the **Repositories** tab, then click the name of your repository.
    ![Repository tab](https://github-images.s3.amazonaws.com/help/profile/profile_repositories_tab.png)
@@ -87,7 +87,7 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 
 ## Machine users
 
-If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
+If your server needs to access multiple repositories, you can choose to create a new {{ site.data.variables.product.product_name }} account and attach an SSH key that will be used exclusively for automation.  Since this {{ site.data.variables.product.product_name }} account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
 
 {{#tip}}
 

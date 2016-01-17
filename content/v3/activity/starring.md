@@ -14,7 +14,7 @@ Watching](/v3/activity/watching).
 ### Starring vs. Watching
 
 In August 2012, we [changed the way watching
-works](https://github.com/blog/1204-notifications-stars) on GitHub.  Many API
+works](https://github.com/blog/1204-notifications-stars) on {{ site.data.variables.product.product_name }}.  Many API
 client applications may be using the original "watcher" endpoints for accessing
 this data. You can now start using the "star" endpoints instead (described
 below). Check out the [Watcher API Change post](/changes/2012-09-05-watcher-api/)

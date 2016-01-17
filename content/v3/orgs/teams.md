@@ -497,6 +497,8 @@ Name | Type | Description
 
 <%= fetch_content(:optional_put_content_length) %>
 
+{% endif %}
+
 
 {% if page.version != 'dotcom' and page.version == 2.4 %}
 

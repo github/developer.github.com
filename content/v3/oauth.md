@@ -7,7 +7,7 @@ title: OAuth
 {:toc}
 
 OAuth2 is a protocol that lets external apps request authorization to
-private details in a user's GitHub account without getting their
+private details in a user's {{ site.data.variables.product.product_name }} account without getting their
 password. This is preferred over [Basic Authentication](/v3/auth#basic-authentication) because tokens can
 be limited to specific types of data, and can be revoked by users at any
 time.

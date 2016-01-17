@@ -8,10 +8,10 @@ title: Feeds
 
 ## List Feeds
 
-GitHub provides several timeline resources in [Atom][] format. The Feeds API
+{{ site.data.variables.product.product_name }} provides several timeline resources in [Atom][] format. The Feeds API
 lists all the feeds available to the authenticated user:
 
-* **Timeline**: The GitHub global public timeline
+* **Timeline**: The {{ site.data.variables.product.product_name }} global public timeline
 * **User**: The public timeline for any user, using [URI template][]
 * **Current user public**: The public timeline for the authenticated user
 * **Current user**: The private timeline for the authenticated user

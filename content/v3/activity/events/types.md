@@ -342,7 +342,7 @@ Key | Type | Description
 
 ## PublicEvent
 
-Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without a doubt: the best GitHub event.
+Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without a doubt: the best {{ site.data.variables.product.product_name }} event.
 
 ### Events API payload
 

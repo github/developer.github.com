@@ -7,8 +7,6 @@
   <meta name="MSSmartTagsPreventParsing" content="true" />
   <title>Organization Teams | GitHub Developer Guide</title>
   
-  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
-  
   <link href="/assets/stylesheets/application.css" rel="stylesheet" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="/assets/javascripts/application.js" type="text/javascript"></script>
@@ -24,6 +22,8 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
+        
+        <li>Enterprise 2.4</li>
         
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/program/" class="nav-developers">Developers</a></li>
@@ -156,8 +156,7 @@ X-RateLimit-Remaining: 4999
 <h2>
 <a id="create-team" class="anchor" href="#create-team" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create team</h2>
 
-<p>In order to create a team, the authenticated user must be a member of
-<code>:org</code>.</p>
+<p>In order to create a team, the authenticated user must be a member of <code>:org</code>.</p>
 
 <pre><code>POST /orgs/:org/teams
 </code></pre>
@@ -298,6 +297,19 @@ the org that the team is associated with, or a maintainer of the team.</p>
 </tr>
 </tbody>
 </table>
+
+<div class="alert tip">
+
+<p>We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.</p>
+
+<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.ironman-preview+json
+</code></pre>
+
+<p><strong>Warning:</strong> If you specify the <code>privacy</code> attribute on an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.</p>
+
+</div>
 
 <h4>
 <a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
@@ -440,8 +452,7 @@ instead. It allows you to get both active and pending memberships.</p>
 
 </div>
 
-<p>In order to list members in a team, the team must be visible to the
-authenticated user.</p>
+<p>In order to list members in a team, the team must be visible to the authenticated user.</p>
 
 <pre><code>GET /teams/:id/members/:username
 </code></pre>
@@ -789,7 +800,7 @@ X-RateLimit-Remaining: 4999
     </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat/Hello-World"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This your first repo!"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fork"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fork"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"archive_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"</span><span class="p">,</span><span class="w">
@@ -922,7 +933,7 @@ X-RateLimit-Remaining: 4999
   </span><span class="nt">"full_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat/Hello-World"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This your first repo!"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fork"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fork"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat/Hello-World"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"archive_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}"</span><span class="p">,</span><span class="w">
@@ -992,12 +1003,9 @@ X-RateLimit-Remaining: 4999
 <h2>
 <a id="add-or-update-team-repository" class="anchor" href="#add-or-update-team-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add or update team repository</h2>
 
-<p>In order to add a repository to a team or update the team's permission on a
-repository, the authenticated user must have admin access to the repository, and
-must be able to see the team. Also, the repository must be owned by the
-organization, or a direct fork of a repository owned by the organization.</p>
+<p>In order to add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. Also, the repository must be owned by the organization, or a direct fork of a repository owned by the organization.</p>
 
-<pre><code>PUT /teams/:id/repos/:owner/:repo
+<pre><code>PUT /teams/:id/repos/:org/:repo
 </code></pre>
 
 <h3>
@@ -1188,8 +1196,6 @@ X-RateLimit-Remaining: 4999
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           
-          <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
@@ -1246,8 +1252,6 @@ X-RateLimit-Remaining: 4999
           <li><a href="/v3/enterprise/license/">License</a></li>
           <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
-          
-          <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>
           
         </ul>
       </li>

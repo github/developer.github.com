@@ -7,8 +7,6 @@
   <meta name="MSSmartTagsPreventParsing" content="true" />
   <title>GitHub API v3 | GitHub Developer Guide</title>
   
-  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
-  
   <link href="/assets/stylesheets/application.css" rel="stylesheet" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="/assets/javascripts/application.js" type="text/javascript"></script>
@@ -24,6 +22,8 @@
     <div>
       <a class="logo" href="/">GitHub:Developer</a>
       <ul class="nav">
+        
+        <li>Enterprise 2.4</li>
         
         <li><a href="/v3/" class="nav-api">API</a></li>
         <li><a href="/program/" class="nav-developers">Developers</a></li>
@@ -92,8 +92,7 @@ We encourage you to <a href="/v3/media/#request-specific-version">explicitly req
 <h2>
 <a id="schema" class="anchor" href="#schema" aria-hidden="true"><span class="octicon octicon-link"></span></a>Schema</h2>
 
-<p>All API access is over HTTPS, and accessed from the <code>api.github.com</code>
-domain (or through <code>yourdomain.com/api/v3/</code> for enterprise).  All data is
+<p>All API access is over HTTPS, and accessed from the <code>api.github.com</code>.  All data is
 sent and received as JSON.</p>
 
 <pre class="command-line">
@@ -185,12 +184,6 @@ with a Content-Type of 'application/json':</p>
 
 <pre class="command-line">
 <span class="command">curl https://api.github.com</span>
-</pre>
-
-<p>Note that for GitHub Enterprise, <a href="https://developer.github.com/v3/enterprise/#endpoint-urls">as with all other endpoints</a>, you'll need to pass in your GitHub Enterprise endpoint as the hostname, <em>as well as your username and password</em>:</p>
-
-<pre class="command-line">
-<span class="command">curl https://<em>hostname</em>/api/v3/ -u <em>username</em>:<em>password</em></span>
 </pre>
 
 <h2>
@@ -617,7 +610,7 @@ higher rate limit for your OAuth application.</p>
 <p>To protect the quality of service from GitHub, additional rate limits may apply to some actions.
 For example, rapidly creating content, polling aggressively instead of using webhooks,
 making API calls with a high concurrency, or repeatedly requesting data that is computationally expensive
-may result in abuse rate limiting. These rate limits do not apply to GitHub Enterprise installations.</p>
+may result in abuse rate limiting.</p>
 
 <p>It is not intended for this rate limit to interfere with any legitimate use of
 the API. Your normal <a href="/v3/#rate-limiting">rate limits</a> should be the only
@@ -864,7 +857,7 @@ that current timestamp.</p>
 
 <p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
 API, we use the last known timezone for the authenticated user. The last known
-timezone is updated whenever you browse the GitHub.com website.</p>
+timezone is updated whenever you browse the GitHub website.</p>
 
 <h4>
 <a id="utc" class="anchor" href="#utc" aria-hidden="true"><span class="octicon octicon-link"></span></a>UTC</h4>
@@ -940,8 +933,6 @@ to create the git commit.</p>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
           
-          <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
@@ -998,8 +989,6 @@ to create the git commit.</p>
           <li><a href="/v3/enterprise/license/">License</a></li>
           <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
-          
-          <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>
           
         </ul>
       </li>

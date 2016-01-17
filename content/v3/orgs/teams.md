@@ -485,7 +485,7 @@ organization.
 
 {% endif %}
 
-    PUT /teams/:id/repos/:oorg/:repo
+    PUT /teams/:id/repos/:org/:repo
 
 {% if page.version == 'dotcom' or page.version >= 2.4 %}
 

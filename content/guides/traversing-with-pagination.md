@@ -1,38 +1,39 @@
 ---
-title: Traversing with Pagination | GitHub API
+title: Traversing with Pagination
 ---
 
 # Traversing with Pagination
 
-* TOC
 {:toc}
 
-The GitHub API provides a vast wealth of information for developers to consume.
+The {{ site.data.variables.product.product_name }} API provides a vast wealth of information for developers to consume.
 Most of the time, you might even find that you're asking for _too much_ information,
 and in order to keep our servers happy, the API will automatically [paginate the requested items][pagination].
 
-In this guide, we'll make some calls to the GitHub Search API, and iterate over
-the results using pagination. You can find the complete source code for this project 
-in the [platform-samples][platform samples] repository. 
+In this guide, we'll make some calls to the {{ site.data.variables.product.product_name }} Search API, and iterate over
+the results using pagination. You can find the complete source code for this project
+in the [platform-samples][platform samples] repository.
 
 ## Basics of Pagination
 
 To start with, it's important to know a few facts about receiving paginated items:
 
 1. Different API calls respond with different defaults. For example, a call to
-[list GitHub's public repositories](http://developer.github.com/v3/repos/#list-all-public-repositories)
+[list GitHub's public repositories](https://developer.github.com/v3/repos/#list-all-public-repositories)
 provides paginated items in sets of 30, whereas a call to the GitHub Search API
 provides items in sets of 100
 2. You can specify how many items to receive (up to a maximum of 100); but,
-3. For technical reasons, not every endpoint behaves the same. For example, 
-[events](http://developer.github.com/v3/activity/events/) won't let you set a maximum for items to receive.
+3. For technical reasons, not every endpoint behaves the same. For example,
+[events](https://developer.github.com/v3/activity/events/) won't let you set a maximum for items to receive.
 Be sure to read the documentation on how to handle paginated results for specific endpoints.
 
 Information about pagination is provided in [the Link header](http://tools.ietf.org/html/rfc5988)
 of an API call. For example, let's make a curl request to the search API, to find
 out how many times Mozilla projects use the phrase `addClass`:
 
-    curl -I "https://api.github.com/search/code?q=addClass+user:mozilla"
+``` command-line
+$ curl -I "https://{{ site.data.variables.product.api_url_pre }}/search/code?q=addClass+user:mozilla"
+```
 
 The `-I` parameter indicates that we only care about the headers, not the actual
 content. In examining the result, you'll notice some information in the Link header
@@ -50,7 +51,7 @@ Nice!
 Keep in mind that you should **always** rely on these link relations provided
 to you. Don't try to guess or construct your own URL. Some API calls, like [listing
 commits on a repository][listing commits], use pagination results that are based
-on SHA values, not numbers. 
+on SHA values, not numbers.
 
 ### Navigating through the pages
 
@@ -59,7 +60,9 @@ through the pages to consume the results. You do this by passing in a `page`
 parameter. By default, `page` always starts at `1`. Let's jump ahead to page 14
 and see what happens:
 
-    curl -I "https://api.github.com/search/code?q=addClass+user:mozilla&page=14"
+``` command-line
+$ curl -I "https://api.github.com/search/code?q=addClass+user:mozilla&page=14"
+```
 
 Here's the link header once more:
 
@@ -79,7 +82,9 @@ between the first, previous, next, or last list of results in an API call.
 By passing the `per_page` parameter, you can specify how many items you want
 each page to return, up to 100 items. Let's try asking for 50 items about `addClass`:
 
-    curl -I "https://api.github.com/search/code?q=addClass+user:mozilla&per_page=50"
+``` command-line
+$ curl -I "https://api.github.com/search/code?q=addClass+user:mozilla&per_page=50"
+```
 
 Notice what it does to the header response:
 
@@ -99,20 +104,22 @@ just described above.
 As always, first we'll require [GitHub's Octokit.rb][octokit.rb] Ruby library, and
 pass in our [personal access token][personal token]:
 
-    #!ruby
-    require 'octokit'
+``` ruby
+require 'octokit'
 
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+```
 
-Next, we'll execute the search, using Octokit's `search_code` method. Unlike 
+Next, we'll execute the search, using Octokit's `search_code` method. Unlike
 using `curl`, we can also immediately retrieve the number of results, so let's
 do that:
 
-    #!ruby
-    results = client.search_code('addClass user:mozilla')
-    total_count = results.total_count
+``` ruby
+results = client.search_code('addClass user:mozilla')
+total_count = results.total_count
+```
 
 Now, let's grab the number of the last page, similar to `page=34>; rel="last"`
 information in the link header. Octokit.rb support pagination information through
@@ -126,123 +133,127 @@ on. These relations also contain information about the resulting URL, by calling
 Knowing this, let's grab the page number of the last result, and present all
 this information to the user:
 
-    #!ruby
-    last_response = client.last_response
-    number_of_pages = last_response.rels[:last].href.match(/page=(\d+)$/)[1]
+``` ruby
+last_response = client.last_response
+number_of_pages = last_response.rels[:last].href.match(/page=(\d+).*$/)[1]
 
-    puts "There are #{total_count} results, on #{number_of_pages} pages!"
+puts "There are #{total_count} results, on #{number_of_pages} pages!"
+```
 
 Finally, let's iterate through the results. You could do this with a loop `for i in 1..number_of_pages.to_i`,
-but instead, let's follow the `rels[:next]` headers to retrieve information from 
+but instead, let's follow the `rels[:next]` headers to retrieve information from
 each page. For the sake of simplicity, let's just grab the file path of the first
 result from each page. To do this, we'll need a loop; and at the end of every loop,
 we'll retrieve the data set for the next page by following the `rels[:next]` information.
 The loop will finish when there is no `rels[:next]` information to consume (in other
 words, we are at `rels[:last]`). It might look something like this:
 
-    #!ruby
-    loop do
-      puts last_response.data.items.first.path
-      last_response = last_response.rels[:next].get
-      sleep 4 # back off from the API rate limiting; don't do this in Real Life
-      break if last_response.rels[:next].nil?
-    end
+``` ruby
+puts last_response.data.items.first.path
+until last_response.rels[:next].nil?
+  last_response = last_response.rels[:next].get
+  puts last_response.data.items.first.path
+end
+```
 
 Changing the number of items per page is extremely simple with Octokit.rb. Simply
 pass a `per_page` options hash to the initial client construction. After that,
 your code should remain intact:
 
-    #!ruby
-    require 'octokit'
+``` ruby
+require 'octokit'
 
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
 
-    results = client.search_code('addClass user:mozilla', :per_page => 100)
-    total_count = results.total_count
+results = client.search_code('addClass user:mozilla', :per_page => 100)
+total_count = results.total_count
 
-    last_response = client.last_response
-    number_of_pages = last_response.rels[:last].href.match(/page=(\d+)$/)[1]
+last_response = client.last_response
+number_of_pages = last_response.rels[:last].href.match(/page=(\d+).*$/)[1]
 
-    puts last_response.rels[:last].href
-    puts "There are #{total_count} results, on #{number_of_pages} pages!"
+puts last_response.rels[:last].href
+puts "There are #{total_count} results, on #{number_of_pages} pages!"
 
-    puts "And here's the first path for every set"
+puts "And here's the first path for every set"
 
-    loop do
-      puts last_response.data.items.first.path
-      last_response = last_response.rels[:next].get
-      sleep 4 # back off from the API rate limiting; don't do this in Real Life
-      break if last_response.rels[:next].nil?
-    end
+puts last_response.data.items.first.path
+until last_response.rels[:next].nil?
+  last_response = last_response.rels[:next].get
+  puts last_response.data.items.first.path
+end
+```
 
 ## Constructing Pagination Links
 
-Normally, with pagination, your goal isn't to concatenate all of the possible 
+Normally, with pagination, your goal isn't to concatenate all of the possible
 results, but rather, to produce a set of navigation, like this:
 
-![Sample of pagination links](/images/pagination_sample.png)
+![Sample of pagination links](/assets/images/pagination_sample.png)
 
 Let's sketch out a micro-version of what that might entail.
 
-From the code above, we already know we can get the `number_of_pages` in the 
+From the code above, we already know we can get the `number_of_pages` in the
 paginated results from the first call:
 
-    #!ruby
-    require 'octokit'
+``` ruby
+require 'octokit'
 
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+client = Octokit::Client.new :access_token => ENV['MY_PERSONAL_TOKEN']
 
-    results = client.search_code('addClass user:mozilla')
-    total_count = results.total_count
+results = client.search_code('addClass user:mozilla')
+total_count = results.total_count
 
-    last_response = client.last_response
-    number_of_pages = last_response.rels[:last].href.match(/page=(\d+)$/)[1]
+last_response = client.last_response
+number_of_pages = last_response.rels[:last].href.match(/page=(\d+).*$/)[1]
 
-    puts last_response.rels[:last].href
-    puts "There are #{total_count} results, on #{number_of_pages} pages!"
-
+puts last_response.rels[:last].href
+puts "There are #{total_count} results, on #{number_of_pages} pages!"
+```
 
 From there, we can construct a beautiful ASCII representation of the number boxes:
-
-    #!ruby
-    numbers = ""
-    for i in 1..number_of_pages.to_i
-      numbers << "[#{i}] "
-    end
-    puts numbers
+``` ruby
+numbers = ""
+for i in 1..number_of_pages.to_i
+  numbers << "[#{i}] "
+end
+puts numbers
+```
 
 Let's simulate a user clicking on one of these boxes, by constructing a random
 number:
 
-    #!ruby
-    random_page = Random.new
-    random_page = random_page.rand(1..number_of_pages.to_i)
+``` ruby
+random_page = Random.new
+random_page = random_page.rand(1..number_of_pages.to_i)
 
-    puts "A User appeared, and clicked number #{random_page}!"
+puts "A User appeared, and clicked number #{random_page}!"
+```
 
 Now that we have a page number, we can use Octokit to explicitly retrieve that
 individual page, by passing the `:page` option:
 
-    #!ruby
-    clicked_results = client.search_code('addClass user:mozilla', :page => random_page)
+``` ruby
+clicked_results = client.search_code('addClass user:mozilla', :page => random_page)
+```
 
-If we wanted to get fancy, we could also grab the previous and next pages, in 
+If we wanted to get fancy, we could also grab the previous and next pages, in
 order to generate links for back (`<<`) and foward (`>>`) elements:
 
-    #!ruby
-    prev_page_href = client.last_response.rels[:prev] ? client.last_response.rels[:prev].href : "(none)"
-    next_page_href = client.last_response.rels[:next] ? client.last_response.rels[:next].href : "(none)"
-    
-    puts "The prev page link is #{prev_page_href}"
-    puts "The next page link is #{next_page_href}"
+``` ruby
+prev_page_href = client.last_response.rels[:prev] ? client.last_response.rels[:prev].href : "(none)"
+next_page_href = client.last_response.rels[:next] ? client.last_response.rels[:next].href : "(none)"
+
+puts "The prev page link is #{prev_page_href}"
+puts "The next page link is #{next_page_href}"
+```
 
 [pagination]: /v3/#pagination
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/traversing-with-pagination
 [octokit.rb]: https://github.com/octokit/octokit.rb
 [personal token]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
 [hypermedia-relations]: https://github.com/octokit/octokit.rb#pagination
-[listing commits]: http://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
+[listing commits]: https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository

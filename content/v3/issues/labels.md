@@ -1,10 +1,9 @@
 ---
-title: Issue Labels | GitHub API
+title: Issue Labels
 ---
 
 # Labels
 
-* TOC
 {:toc}
 
 ## List all labels for this repository
@@ -13,7 +12,7 @@ title: Issue Labels | GitHub API
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:label) { |h| [h] } %>
 
 ## Get a single label
@@ -31,19 +30,17 @@ title: Issue Labels | GitHub API
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the label.
 `color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
 
 
-<%= json :name => "API", :color => "FFFFFF" %>
+<%= json :name => "bug", :color => "f29513" %>
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/user/repo/labels/foo" %>
+<%= headers 201, :Location => get_resource(:label)['url'] %>
 <%= json :label %>
 
 ## Update a label
@@ -52,13 +49,13 @@ Name | Type | Description
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the label.
 `color`|`string` |**Required**.  A 6 character hex code, without the leading `#`, identifying the color.
 
 
-<%= json :name => "API", :color => "FFFFFF" %>
+<%= json :name => "bug", :color => "f29513" %>
 
 ### Response
 
@@ -79,7 +76,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:label) { |h| [h] } %>
 
 ## Add labels to an issue
@@ -132,5 +129,5 @@ Sending an empty array (`[]`) will remove all Labels from the Issue.
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:label) { |h| [h] } %>

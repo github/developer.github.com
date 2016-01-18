@@ -1,15 +1,15 @@
 ---
-title: Versions | GitHub API
+title: Versions
 ---
 # Versions
 
-There are two stable versions of the GitHub API: [beta](#beta) and [v3](#v3). There are just a few [differences between these two versions](#differences-from-beta-version).
+There are two stable versions of the GitHub API: the [v3](#v3) version and the deprecated [beta](#beta) version. There are just a few [differences between these two versions](#differences-from-beta-version).
 
-By default, all requests receive the beta version. Soon, v3 will become the default version. (Check out the [blog post](/changes/2014-01-07-upcoming-change-to-default-media-type/) for details.) We encourage you to [request a specific version via the `Accept` header](/v3/media/#beta-v3-and-the-future).
+By default, all requests receive the v3 version. We encourage you to [request a specific version via the `Accept` header](/v3/media/#request-specific-version).
 
 # v3
 
-The [v3 API](/v3) is stable and unchangeable. Please [file a support issue][support] if you have problems.
+The [v3 API](/v3) is stable, and we strive to ensure that all [changes](/changes) are backwards compatible. Please [file a support issue][support] if you have problems.
 
 Some v3 functionality is [deprecated](#v3-deprecations) and will be removed in the next major version of the API.
 
@@ -31,7 +31,7 @@ For [Repositories](/v3/repos/#get), the v3 media type omits the `master_branch` 
 
 ### User Emails JSON
 
-For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of hashes (instead of an array of strings).
+For [User Emails](/v3/users/emails/#list-email-addresses-for-a-user), the v3 media type returns an array of objects (instead of an array of strings).
 
 ## v3 deprecations
 
@@ -42,61 +42,124 @@ functionality _will be removed_ in the next major version of the API.
 The recommendations below will help you prepare your application for the next major version of the API.
 
 1. Method: /gists/:id/fork
-: Recommendation: Use **/gists/:id/forks** (plural) instead.
+
+  Recommendation: Use **/gists/:id/forks** (plural) instead.
 
 1. Method: /legacy/issues/search/:owner/:repository/:state/:keyword
-: Recommendation: Use [v3 Issue Search API](/v3/search/#search-issues) instead.
+
+  Recommendation: Use [v3 Issue Search API](/v3/search/#search-issues) instead.
 
 1. Method: /legacy/repos/search/:keyword
-: Recommendation: Use [v3 Repository Search API](/v3/search/#search-repositories) instead.
+
+  Recommendation: Use [v3 Repository Search API](/v3/search/#search-repositories) instead.
 
 1. Method: /legacy/user/search/:keyword
-: Recommendation: Use [v3 User Search API](/v3/search/#search-users) instead.
+
+  Recommendation: Use [v3 User Search API](/v3/search/#search-users) instead.
 
 1. Method: /legacy/user/email/:email
-: Recommendation: Use [v3 User Search API](/v3/search/#search-users) instead.
+
+  Recommendation: Use [v3 User Search API](/v3/search/#search-users) instead.
 
 1. Method: /repos/:owner/:repo/hooks/:id/test
-: Recommendation: Use **/repos/:owner/:repo/hooks/:id/tests** (plural) instead.
+
+  Recommendation: Use **/repos/:owner/:repo/hooks/:id/tests** (plural) instead.
+
+1. Method: /teams/:id/members/:username
+
+  Recommendation: Use [Get Team Membership](/v3/orgs/teams/#get-team-membership), [Add Team Membership](/v3/orgs/teams/#add-team-membership), and [Remove Team Membership](/v3/orgs/teams/#remove-team-membership) instead.
 
 1. Query parameters when POSTing to /repos/:owner/:repo/forks
-: Recommendation: Use JSON to POST to this method instead.
+
+  Recommendation: Use JSON to POST to this method instead.
 
 1. Query parameter value: Passing "watchers" as the value for the "sort" parameter in a GET request to /repos/:owner/:repo/forks
-: Recommendation: Use **stargazers** as the value instead.
+
+  Recommendation: Use **stargazers** as the value instead.
 
 1. Pull Request attribute: merge_commit_sha
-: Recommendation: [Do not use this attribute](/changes/2013-04-25-deprecating-merge-commit-sha/).
+
+  Recommendation: [Do not use this attribute](/changes/2013-04-25-deprecating-merge-commit-sha/).
 
 1. Rate Limit attribute: rate
-: Recommendation: Use **resources["core"]** instead.
+
+  Recommendation: Use **resources["core"]** instead.
 
 1. Repository attribute: forks
-: Recommendation: Use **fork_count** instead.
+
+  Recommendation: Use **forks_count** instead.
 
 1. Repository attribute: master_branch
-: Recommendation: Use **default_branch** instead.
+
+  Recommendation: Use **default_branch** instead.
 
 1. Repository attribute: open_issues
-: Recommendation: Use **open_issues_count** instead.
+
+  Recommendation: Use **open_issues_count** instead.
 
 1. Repository attribute: public
-: Recommendation: When [creating a repository](/v3/repos/#create), use the
+
+  Recommendation: When [creating a repository](/v3/repos/#create), use the
   **private** attribute to indicate whether the repository should be public or
   private. Do not use the **public** attribute.
 
 1. Repository attribute: watchers
-: Recommendation: Use **watchers_count** instead.
+
+  Recommendation: Use **watchers_count** instead.
 
 1. User attribute: bio
-: Recommendation: Do not use this attribute. It is obsolete.
 
+  Recommendation: Do not use this attribute. It is obsolete.
 
-# beta
+1. User attribute: plan["collaborators"]
 
-The [beta API](/v3) is now stable and unchangeable. Please [file a support issue][support] if you have problems.
+  Recommendation: Do not use this attribute. It is obsolete.
 
-Starting April 15, 2014, the [beta version will no longer be the _default_ version](/changes/2014-01-07-upcoming-change-to-default-media-type/). However, we expect to continue supporting the beta version for a while. We will eventually retire the beta version, but we have no official retirement date to annouce at the moment. When the time comes, rest assured that we'll announce the retirement with plenty of notice.
+1. User attribute: gravatar_id
+
+  Recommendation: Use **avatar_url** instead.
+
+1. Feed attribute: current_user_organization_url
+
+  Recommendation: Use **current_user_organization_urls** instead.
+
+1. Feed attribute: current_user_organization
+
+  Recommendation: Use **current_user_organizations** instead.
+
+1. Pagination parameters `top` and `sha` for method: /repos/:owner/:repo/commits
+
+  Recommendation: When fetching [the list of commits for a repository](/v3/repos/commits/#list-commits-on-a-repository)
+  use the [standard `per_page` and `page` parameters](/v3/#pagination) for pagination, instead of `per_page`,
+  `top`, and `sha`.
+
+1. Authorization attribute: token
+
+  Recommendation: This attribute will return an empty string in the majority of
+  the Authorizations API responses. Please see
+  [the deprecation blog post](/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/)
+  and the [Authorizations API deprecation notice](/v3/oauth_authorizations/#deprecation-notice)
+  for full details.
+
+1. Team attribute: permission
+
+  Recommendation: This attribute no longer dictates the permission a team has on its repositories; it only dictates the default permission that the [Add or update team repository](/v3/orgs/teams/#add-or-update-team-repository) API will use for requests where no `permission` attribute is specified. To change the permission level for every repository on a team, use the [List team repositories](/v3/orgs/teams/#list-team-repos) API to list all of the team's repositories, and then use the [Add or update team repository](/v3/orgs/teams/#add-or-update-team-repository) with a `permission` attribute to update each repository's permission separately.
+
+<a id="beta">
+
+# beta (Deprecated)
+
+The [beta API](/v3) is deprecated. Its current functionality is stable, and we strive to ensure that any [changes](/changes) are backwards compatible. Please [file a support issue][support] if you have problems.
+
+{{#tip}}
+
+<strong>Note</strong>: We recommend using the <a href="#v3">v3 API</a> instead of the deprecated beta version of the API.
+
+The beta media type differs from the v3 media type in <a href="#differences-from-beta-version">just a few places</a>. In most cases, migrating an application from the beta media type to the v3 media type is smooth and painless.
+
+We will eventually retire the beta version, but we have no official retirement date to announce at the moment. When the time comes, rest assured that we'll announce the retirement with plenty of notice.
+
+{{/tip}}
 
 ## Breaking beta changes
 
@@ -106,7 +169,7 @@ Starting April 15, 2014, the [beta version will no longer be the _default_ versi
   responses that include users or orgs. A default size is no longer
   included in the URL.
 * Creating new gists (both anonymously and with an authenticated user)
-  should use `POST /gists` from now on. `POST /users/:user/gists` is no
+  should use `POST /gists` from now on. `POST /users/:username/gists` is no
   longer supported.
 
 ### June 1st, 2011:

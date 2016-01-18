@@ -1,13 +1,12 @@
 ---
-title: Events | GitHub API
+title: Events
 ---
 
 # Events
 
-This is a read-only API to the GitHub events. These events power the
+This is a read-only API to the {{ site.data.variables.product.product_name }} events. These events power the
 various activity streams on the site.
 
-* TOC
 {:toc}
 
 Events are optimized for polling with the "ETag" header.  If no new events have
@@ -16,17 +15,18 @@ rate limit will be untouched.  There is also an "X-Poll-Interval" header that
 specifies how often (in seconds) you are allowed to poll.  In times of high
 server load, the time may increase.  Please obey the header.
 
-{:.terminal}
-    $ curl -I https://api.github.com/users/tater/events
-    HTTP/1.1 200 OK
-    X-Poll-Interval: 60
-    ETag: "a18c3bded88eb5dbb5c849a489412bf3"
+``` command-line
+$ curl -I https://{{ site.data.variables.product.api_url_pre }}/users/tater/events
+> HTTP/1.1 200 OK
+> X-Poll-Interval: 60
+> ETag: "a18c3bded88eb5dbb5c849a489412bf3"
 
-    # The quotes around the ETag value are important
-    $ curl -I https://api.github.com/users/tater/events \
-        -H 'If-None-Match: "a18c3bded88eb5dbb5c849a489412bf3"'
-    HTTP/1.1 304 Not Modified
-    X-Poll-Interval: 60
+# The quotes around the ETag value are important
+$ curl -I https://{{ site.data.variables.product.api_url_pre }}/users/tater/events \
+$    -H 'If-None-Match: "a18c3bded88eb5dbb5c849a489412bf3"'
+> HTTP/1.1 304 Not Modified
+> X-Poll-Interval: 60
+```
 
 Events support [pagination](/v3/#pagination),
 however the `per_page` option is unsupported. The fixed page size is 30 items.

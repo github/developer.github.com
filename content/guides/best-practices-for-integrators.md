@@ -1,12 +1,11 @@
 ---
-title: Best practices for integrators | GitHub API
+title: Best practices for integrators
 ---
 
 # Best practices for integrators
 
 Interested in integrating with the GitHub platform? [You're in good company](https://github.com/integrations). This guide will help you build an app that provides the best experience for your users *and* ensure that it's reliably interacting with the API.
 
-* TOC
 {:toc}
 
 ## Secure payloads delivered from GitHub
@@ -31,7 +30,7 @@ Note that even with a background job running, GitHub still expects your server t
 
 Every webhook has its own "Recent Deliveries" section, which lists whether a deployment was successful or not.
 
-![Recent Deliveries view](/images/webhooks_recent_deliveries.png)
+![Recent Deliveries view](/assets/images/webhooks_recent_deliveries.png)
 
 You should make use of proper HTTP status codes in order to inform users. You can use codes like `201` or `202` to acknowledge receipt of payload that won't be processed (for example, a payload delivered by a branch that's not the default). Reserve the `500` error code for catastrophic failures.
 
@@ -39,7 +38,7 @@ You should make use of proper HTTP status codes in order to inform users. You ca
 
 Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.
 
-![Viewing a payload response](/images/payload_response_tab.png)
+![Viewing a payload response](/assets/images/payload_response_tab.png)
 
 ## Follow any redirects that the API sends you
 
@@ -74,7 +73,7 @@ To avoid hitting this limit, you should ensure your application follows the guid
   or client ID concurrently.
 * If you're making a large number of `POST`, `PATCH`, `PUT`, or `DELETE` requests for a single user
   or client ID, wait at least one second between each request.
-* Requests that create content which triggers notifications, such as issues, comments and pull requests, 
+* Requests that create content which triggers notifications, such as issues, comments and pull requests,
   may be further limited. Please create this content at a reasonable pace to avoid further limiting.
 * When you have been limited, wait the number of seconds specified in the `Retry-After` response header.
 

@@ -1,10 +1,9 @@
 ---
-title: Organization Members | GitHub API
+title: Organization Members
 ---
 
 # Members
 
-* TOC
 {:toc}
 
 ## Members list
@@ -15,25 +14,32 @@ be returned.
 
     GET /orgs/:org/members
 
-### Parameters {#audit-two-factor-auth}
+<a id="audit-two-factor-auth">
+
+### Parameters
 
 Name    | Type    | Description
 --------|---------|--------------
-`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization owners.<br/>* `all`: All organization members.<br/><br/>Default: `all`
-`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `all`: All members of the organization, regardless of role.<br/>* `admin`: Organization owners.<br/>* `member`: Non-owner organization members. **This option requires a custom media type to be specified. Please see more in the alert below.**<br/><br/>Default: `all`
+`filter`|`string` | Filter members returned in the list. Can be one of:<br/>* `2fa_disabled`: Members without [two-factor authentication][2fa-blog] enabled. Available for organization owners.<br/>* `all`: All members the authenticated user can see.<br/><br/>Default: `all`
+`role`  |`string` | Filter members returned by their role. Can be one of:<br/>* `all`: All members of the organization, regardless of role.<br/>* `admin`: Organization owners.<br/>* `member`: Non-owner organization members. {% if page.version != 'dotcom' and page.version == 2.4 %}This option requires a custom media type to be specified. Please see more in the alert below.**{% endif %}<br/><br/>Default: `all`
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
 
-<div class="alert">
-  <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
-  </p>
+{% if page.version != 'dotcom' and page.version == 2.4 %}
 
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.ironman-preview+json</pre>
-  </p>
-</div>
+{{#tip}}
+
+We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see [the blog post](/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ironman-preview+json
+```
+
+{{/tip}}
+
+{% endif %}
 
 ### Response
 
@@ -68,9 +74,17 @@ Check if a user is, publicly or privately, a member of the organization.
 
 ## Add a member
 
+{% if page.version == 'dotcom' or page.version >= 2.4 %}
+
 To add someone as a member to an organization, you must
 [invite them to the organization](/v3/orgs/members/#add-or-update-organization-membership)
 or [invite them to a team](/v3/orgs/teams/#add-team-membership).
+
+{% else %}
+
+To add someone as a member to an organization, you must add them to a [team](/v3/orgs/teams/#add-team-member).
+
+{% endif %}
 
 ## Remove a member
 
@@ -130,7 +144,15 @@ The user can publicize their own membership.
 
 ## Get organization membership
 
+{% if page.version == 'dotcom' or page.version >= 2.4 %}
+
 In order to get a user's membership with an organization, the authenticated user must be an organization owner.
+
+{% else %}
+
+In order to get a user's membership with an organization, the authenticated user must be an organization admin.
+
+{% endif %}
 
     GET /orgs/:org/memberships/:username
 
@@ -151,15 +173,33 @@ In order to get a user's membership with an organization, the authenticated user
 
 ## Add or update organization membership
 
+{% if page.version == 'dotcom' or page.version >= 2.4 %}
+
 In order to create or update a user's membership with an organization, the authenticated user must be an organization owner.
+
+{% else %}
+
+In order to create or update a user's membership with an organization, the authenticated user must be an organization admin.
+
+{% endif %}
 
     PUT /orgs/:org/memberships/:username
 
 ### Parameters
 
+{% if page.version == 'dotcom' or page.version >= 2.4 %}
+
 Name  | Type   | Description
 ------|--------|--------------
 `role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an owner of the organization.<br/> * `member` - The user will become a non-owner member of the organization.
+
+{% else %}
+
+Name  | Type   | Description
+------|--------|--------------
+`role`|`string`| **Required**. The role to give the user in the organization. Can be one of:<br/> * `admin` - The user will become an administrator of the organization.<br/> * `member` - The user will become a non-admin member of the organization. Use this only to demote an existing admin to a non-admin.
+
+{% endif %}
 
 ### Response if user was previously unaffiliated with organization
 
@@ -173,7 +213,15 @@ Name  | Type   | Description
 
 ## Remove organization membership
 
+{% if page.version == 'dotcom' or page.version >= 2.4 %}
+
 In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
+
+{% else %}
+
+In order to remove a user's membership with an organization, the authenticated user must be an organization admin.
+
+{% endif %}
 
     DELETE /orgs/:org/memberships/:username
 

@@ -1,13 +1,12 @@
 ---
-title: Migrations | GitHub API
+title: Migrations
 ---
 
 # Migrations
 
-* TOC
 {:toc}
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' %}
 
 {{#warning}}
 
@@ -15,7 +14,7 @@ This API is not currently available on GitHub Enterprise.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
 {{#tip}}
 

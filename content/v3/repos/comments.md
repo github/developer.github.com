@@ -1,10 +1,9 @@
 ---
-title: Comments | GitHub API
+title: Comments
 ---
 
 # Comments
 
-* TOC
 {:toc}
 
 ## List commit comments for a repository

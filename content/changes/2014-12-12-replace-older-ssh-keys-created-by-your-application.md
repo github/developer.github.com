@@ -24,11 +24,11 @@ For security, GitHub automatically sends an email to a user whenever a new SSH k
 
 ### 3. Add a new key
 
-Use the API to add the new [deploy key](/v3/repos/keys/#create) or [user key](/v3/users/keys/#create-a-public-key).
+Use the API to add the new [deploy key](/v3/repos/keys/#add-a-new-deploy-key) or [user key](/v3/users/keys/#create-a-public-key).
 
 ### 4. Delete the old key
 
-Once your application is using the new key, use the API to delete the old one. There's an [API for deleting deploy keys](/v3/repos/keys/#delete) and an [API for deleting user keys](/v3/users/keys/#delete-a-public-key).
+Once your application is using the new key, use the API to delete the old one. There's an [API for deleting deploy keys](/v3/repos/keys/#remove-a-deploy-key) and an [API for deleting user keys](/v3/users/keys/#delete-a-public-key).
 
 ## We're here to help
 

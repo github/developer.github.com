@@ -1,5 +1,5 @@
 ---
-title: Event Types & Payloads | GitHub API
+title: Event Types & Payloads
 ---
 
 # Event Types & Payloads
@@ -15,7 +15,6 @@ match events returned by the [Events API](/v3/activity/events/) (except where no
 **Note:** Some of these events may not be rendered in timelines, they're only
 created for various internal and webhook purposes.
 
-* TOC
 {:toc}
 
 ## CommitCommentEvent
@@ -279,7 +278,7 @@ Key | Type | Description
 
 ## MemberEvent
 
-Triggered when a user is [added as a collaborator](/v3/repos/collaborators/#add-collaborator) to a repository.
+Triggered when a user is [added as a collaborator](/v3/repos/collaborators/#add-user-as-a-collaborator) to a repository.
 
 ### Events API payload
 
@@ -343,7 +342,7 @@ Key | Type | Description
 
 ## PublicEvent
 
-Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without a doubt: the best GitHub event.
+Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without a doubt: the best {{ site.data.variables.product.product_name }} event.
 
 ### Events API payload
 
@@ -497,7 +496,7 @@ Key | Type | Description
 
 ## TeamAddEvent
 
-Triggered when a [repository is added to a team](/v3/orgs/teams/#add-team-repo).
+Triggered when a [repository is added to a team](/v3/orgs/teams/#add-or-update-team-repository).
 
 Events of this type are not visible in timelines. These events are only used to trigger hooks.
 

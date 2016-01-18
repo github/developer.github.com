@@ -1,13 +1,14 @@
 ---
-title: Collaborators | GitHub API
+title: Collaborators
 ---
 
 # Collaborators
 
-* TOC
 {:toc}
 
-## List collaborators {#list}
+<a id="list" />
+
+## List collaborators
 
     GET /repos/:owner/:repo/collaborators
 
@@ -21,23 +22,28 @@ collaborators list.
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
+{% if page.version != 'dotcom' and page.version == 2.4 %}
+
 ### Alternative response with extra repository information
 
-<div class="alert">
-  <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
-  </p>
+{{#tip}}
 
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.ironman-preview+json</pre>
-  </p>
-</div>
+We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the [blog post](/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ironman-preview+json
+```
+
+{{/tip}}
+
+{% endif %}
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:collaborator) { |h| [h] } %>
 
-## Check if a user is a collaborator {#get}
+## Check if a user is a collaborator
 
     GET /repos/:owner/:repo/collaborators/:username
 
@@ -49,38 +55,50 @@ collaborators list.
 
 <%= headers 404 %>
 
-## Add user as a collaborator {#add-collaborator}
+## Add user as a collaborator
 
     PUT /repos/:owner/:repo/collaborators/:username
 
 ### Parameters
 
+{% if page.version == 'dotcom' or page.version >= 2.4 %}
+
 Name | Type | Description
 -----|------|--------------
-`permission`|`string` | The permission to grant the team. **Only valid on organization-owned repositories.** Can be one of:<br/> * `pull` - can pull, but not push to or administer this repository.<br/> * `push` - can pull and push, but not administer this repository.<br/> * `admin` -  can pull, push and administer this repository.<br/>Default: `push`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`permission`|`string` | The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:<br/> * `pull` - can pull, but not push to or administer this repository.<br/> * `push` - can pull and push, but not administer this repository.<br/> * `admin` -  can pull, push and administer this repository.<br/>Default: `pull`
 
 <%= fetch_content(:optional_put_content_length) %>
 
-<div class="alert">
-  <p>
-    We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">blog post</a> for full details.
-  </p>
 
-  <p>
-    To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.ironman-preview+json</pre>
-  </p>
+{% if page.version != 'dotcom' and page.version == 2.4 %}
 
-  <p>
-    <strong>Warning:</strong> If you use this API to add a collaborator to a repository that's owned by an organization that hasn't had <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> enabled yet, you will get a <code>422</code> error response.
-  </p>
-</div>
+{{#tip}}
+
+We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the [blog post](/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ironman-preview+json
+```
+
+**Warning:** If you use this API to add a collaborator to a repository that's owned by an organization that hasn't had [improved organization permissions](https://github.com/blog/2020-improved-organization-permissions) enabled yet, you will get a `422` error response.
+
+{{/tip}}
+
+{% endif %}
+
+{% else %}
+
+<%= fetch_content(:put_content_length) %>
+
+{% endif %}
 
 ### Response
 
 <%= headers 204 %>
 
-## Remove user as a collaborator {#remove-collaborator}
+## Remove user as a collaborator
 
     DELETE /repos/:owner/:repo/collaborators/:username
 

@@ -56,7 +56,7 @@ Name | Type | Description
 
 {{#tip}}
 
-Each time the pull request receives new commits, GitHub creates a merge commit
+Each time the pull request receives new commits, {{ site.data.variables.product.product_name }} creates a merge commit
 to _test_ whether the pull request can be automatically merged into the base
 branch. (This _test_ commit is not added to the base branch or the head branch.)
 The `merge_commit_sha` attribute holds the SHA of the _test_ merge commit;

@@ -6,7 +6,7 @@ title: Delivering deployments
 
 {:toc}
 
-The [Deployments API][deploy API] provides your projects hosted on GitHub with
+The [Deployments API][deploy API] provides your projects hosted on {{ site.data.variables.product.product_name }} with
 the capability to launch them on a server that you own. Combined with
 [the Status API][status API], you'll be able to coordinate your deployments
 the moment your code lands on `master`.
@@ -66,7 +66,7 @@ Great! Click on **Let me select individual events.**, and select the following:
 * Deployment status
 * Pull Request
 
-These are the events GitHub will send to our server whenever the relevant action
+These are the events {{ site.data.variables.product.product_name }} will send to our server whenever the relevant action
 occurs. We'll configure our server to *just* handle when Pull Requests are merged
 right now:
 
@@ -83,7 +83,7 @@ post '/event_handler' do
 end
 ```
 
-What's going on? Every event that GitHub sends out attached a `X-GitHub-Event`
+What's going on? Every event that {{ site.data.variables.product.product_name }} sends out attached a `X-GitHub-Event`
 HTTP header. We'll only care about the PR events for now. When a pull request is
 merged (its state is `closed`, and `merged` is `true`), we'll kick off a deployment.
 

@@ -8,7 +8,7 @@ title: Merging
 
 The Repo Merging API supports merging branches in a repository. This accomplishes
 essentially the same thing as merging one branch into another in a local repository
-and then pushing to GitHub. The benefit is that the merge is done on the server side
+and then pushing to {{ site.data.variables.product.product_name }}. The benefit is that the merge is done on the server side
 and a local repository is not needed. This makes it more appropriate for automation
 and other tools where maintaining local repositories would be cumbersome and inefficient.
 

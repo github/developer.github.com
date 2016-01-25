@@ -39,7 +39,7 @@ Key | Type | Description
 
 Represents a created repository, branch, or tag.
 
-Note: webhooks will not receive this event for created repositories.
+Note: webhooks will not receive this event for created repositories. Additionally, webhooks will not receive this event for tags if more than three tags are pushed at once.
 
 ### Events API payload
 
@@ -61,6 +61,8 @@ Key | Type | Description
 ## DeleteEvent
 
 Represents a [deleted branch or tag](/v3/git/refs/#delete-a-reference).
+
+Note: webhooks will not receive this event for tags if more than three tags are deleted at once.
 
 ### Events API payload
 

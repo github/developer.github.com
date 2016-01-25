@@ -216,6 +216,10 @@ payloads include the user who performed the event (<code>sender</code>) as well 
 organization (<code>organization</code>) and/or repository (<code>repository</code>) which the event
 occurred on.</p>
 
+<p>{{#tip}}
+<strong>Note:</strong> Payloads are capped at 5 MB. If your event generates a larger payload, a webhook will not be fired. This may happen, for example, on a <code>create</code> event if many branches or tags are pushed at once. We suggest monitoring your payload size to ensure delivery.
+{{/tip}}</p>
+
 <h3>
 <a id="delivery-headers" class="anchor" href="#delivery-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delivery headers</h3>
 

@@ -236,20 +236,6 @@ the username is the OAuth application `client_id` and the password is its
 <%= headers 200 %>
 <%= json(:oauth_access_with_user) %>
 
-## Revoke all authorizations for an application
-
-OAuth application owners can revoke every token for an OAuth application. You
-must use [Basic Authentication](/v3/auth#basic-authentication) when calling
-this method. The username is the OAuth application `client_id` and the password
-is its `client_secret`. Tokens are revoked via a background job, and it might
-take a few minutes for the process to complete.
-
-    DELETE /applications/:client_id/tokens
-
-### Response
-
-<%= headers 204 %>
-
 ## Revoke an authorization for an application
 
 OAuth application owners can also revoke a single token for an OAuth

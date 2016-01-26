@@ -84,7 +84,9 @@ organization (`organization`) and/or repository (`repository`) which the event
 occurred on.
 
 {{#tip}}
+
 **Note:** Payloads are capped at 5 MB. If your event generates a larger payload, a webhook will not be fired. This may happen, for example, on a `create` event if many branches or tags are pushed at once. We suggest monitoring your payload size to ensure delivery.
+
 {{/tip}}
 
 ### Delivery headers

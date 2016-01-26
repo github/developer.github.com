@@ -43,7 +43,10 @@ task :run_proofer do
     %r{help\.github\.com/enterprise/admin/} => "help.github.com/enterprise/#{config[:versions][0]}/admin/",
     %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{config[:versions][0]}/user/"
   }
-  HTML::Proofer.new("./output", :href_ignore => ignored_links, :href_swap => href_swap).run
+  HTML::Proofer.new("./output", \
+        :href_ignore => ignored_links, \
+        :href_swap => href_swap, \
+        :parallel => { :in_processes => 5 }).run
 end
 
 desc "Remove the tmp dir"

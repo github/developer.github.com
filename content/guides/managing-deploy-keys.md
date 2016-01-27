@@ -91,7 +91,15 @@ If your server needs to access multiple repositories, you can choose to create a
 
 {{#tip}}
 
-**Tip:** Our [terms of service](https://help.github.com/articles/github-terms-of-service) do mention that *'Accounts registered by "bots" or other automated methods are not permitted.'* and that *'One person or legal entity may not maintain more than one free account.'*  But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.
+**Tip:** Our [terms of service](https://help.github.com/articles/github-terms-of-service) state:
+
+> *Accounts registered by "bots" or other automated methods are not permitted.*
+
+and that 
+
+> *One person or legal entity may not maintain more than one free account.*
+
+But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.
 
 {{/tip}}
 

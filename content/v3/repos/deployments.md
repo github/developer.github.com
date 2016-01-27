@@ -205,7 +205,7 @@ Name | Type | Description
 -----|------|--------------
 `state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
 `target_url`|`string` | The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: `""`
-`description`|`string` | A short description of the status. Default: `""`
+`description`|`string` | A short description of the status. Maximum length of 140 characters. Default: `""`
 
 #### Example
 

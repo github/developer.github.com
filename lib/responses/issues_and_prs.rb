@@ -102,6 +102,7 @@ module GitHub
       ISSUE ||= {
         "id"         => 1,
         "url"        => "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+        "repository_url" => "https://api.github.com/repos/octocat/Hello-World",
         "labels_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/labels{/name}",
         "comments_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/comments",
         "events_url" => "https://api.github.com/repos/octocat/Hello-World/issues/1347/events",

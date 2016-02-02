@@ -31,6 +31,7 @@ module GitHub
         "items" => [
           {
             "url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132",
+            "repository_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit",
             "labels_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/labels{/name}",
             "comments_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/comments",
             "events_url" => "https://api.github.com/repos/batterseapower/pinyin-toolkit/issues/132/events",

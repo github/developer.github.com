@@ -18,6 +18,15 @@ http(s)://<em>hostname</em>/api/v3
 
 ## Create a new user
 
+{{#warning}}
+
+If an external authentication mechanism is used, the login name should match the
+login name in the external system. If you are using LDAP authentication, you should also 
+[update the LDAP mapping](/v3/enterprise/ldap/#update-ldap-mapping-for-a-user) 
+for the user.
+
+{{/warning}}
+
     POST /admin/users
 
 ### Parameters
@@ -26,6 +35,12 @@ Name | Type | Description
 -----|------|--------------
 `login`|`string` | **Required.** The user's username.
 `email`|`string` | **Required.** The user's email address.
+
+The login name will be normalized to only contain alphanumeric characters or
+single hyphens. For example, if you send `"octo_cat"` as the login, a user named
+`"octo-cat"` will be created.
+
+If the login name or email address is already associated with an account, the server will return a `422` response.
 
 #### Example
 

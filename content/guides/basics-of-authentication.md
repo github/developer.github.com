@@ -151,7 +151,7 @@ if the application had asked for `user` scope, it might have been granted only
 `user:email` scope. In that case, the application wouldn't have been granted
 what it asked for, but the granted scopes would have still been sufficient.
 
-Checking for scopes only before making requests is not enough since it's posible
+Checking for scopes only before making requests is not enough since it's possible
 that users will change the scopes in between your check and the actual request.
 In case that happens, API calls you expected to succeed might fail with a `404`
 or `401` status, or return a different subset of information.

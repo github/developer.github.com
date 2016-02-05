@@ -17,7 +17,7 @@ module ChangesHelper
     else
       changes
     end.sort! do |x, y|
-      attribute_to_time(y[:created_at]) <=> attribute_to_time(x[:created_at])
+      [attribute_to_time(y[:created_at]), x[:title]] <=> [attribute_to_time(x[:created_at]), y[:title]]
     end
   end
 

@@ -78,9 +78,7 @@ header:
       <access_token>e72e16c7e42f292c6912e7710c838347ae178b4a</access_token>
     </OAuth>
     
-If your `client_id` or `client_secret` are incorrect, you will get a HTTP 404 error. 
-
-    {"error": "Not Found"}
+If your `client_id` or `client_secret` are incorrect, you will get a [Github HTTP 404 error](https://github.com/github/developer.github.com/blob/master/content/v3/troubleshooting.md#why-am-i-getting-a-404-error-on-a-repository-that-exists). 
 
 
 #### Requested scopes vs. granted scopes

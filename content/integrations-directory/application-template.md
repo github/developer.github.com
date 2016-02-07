@@ -1,4 +1,8 @@
-# Integrations Directory - Application
+---
+title: Integrations Directory application template
+---
+
+# Application template
 
 Follow instructions in
 [Integrations Directory Overview](/integrations-directory/).
@@ -30,8 +34,8 @@ Follow instructions in
 
 ## Technical requirements met
 
-* [ ] Using TLS everywhere
-* [ ] Delete GitHub data when access removed
+* [ ] Uses TLS everywhere
+* [ ] Deletes GitHub data when access removed
 
 ## Integration type
 

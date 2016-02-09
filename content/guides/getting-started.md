@@ -339,8 +339,7 @@ $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
 In this minimal example, we create a new repository for our blog (to be served
 on [GitHub Pages][pages], perhaps). Though the blog will be public, we've made
 the repository private. In this single step, we'll also initialize it with
-a README and a [nanoc][nanoc]-flavored [.gitignore template][gitignore
-templates].
+a README and a [nanoc][nanoc]-flavored [.gitignore template][gitignore templates].
 
 The resulting repository will be found at `https://github.com/<your_username>/blog`.
 To create a repository under an organization for which you're

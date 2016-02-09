@@ -335,6 +335,47 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 <p></p>
 </div>
 
+<div class="change" id="/changes/2015-06-24-licenses-api-update/">
+  <h2 class="title">
+<a id="--licenses-api-update" class="anchor" href="#--licenses-api-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-06-24-licenses-api-update/">Licenses API update</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 24, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/mislav.png" alt="Avatar for mislav" data-proofer-ignore>
+      <a href="https://github.com/mislav" data-proofer-ignore>mislav</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We are expanding the <a href="/v3/licenses">Licenses API</a> to make it more useful for auditing license usage across all repositories owned by a user or organization.</p>
+
+<p>Before, license information was only returned for an individual repository:</p>
+
+<pre><code>GET /repos/github/hubot
+</code></pre>
+
+<p>Now, license information will also be included in reponses from endpoints that list multiple repositories, such as <a href="/v3/repos/#list-organization-repositories">List organization repositories</a>:</p>
+
+<pre><code>GET /orgs/github/repos
+</code></pre>
+
+<p>As before, to access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.drax-preview+json
+</code></pre>
+
+<p>For more information, see the <a href="/v3/licenses/">Licenses API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API">let us know</a>.</p>
+</div>
+
 <div class="change" id="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">
   <h2 class="title">
 <a id="--api-enhancements-for-working-with-organization-permissions" class="anchor" href="#--api-enhancements-for-working-with-organization-permissions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
@@ -355,8 +396,7 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 </ul>
 </div>
 
-<p></p>
-<p>We're introducing several enhancements to allow API developers to take advantage of the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> that we are rolling out. Learn about these enhancements and how you can try them out below.</p>
+  <p>We're introducing several enhancements to allow API developers to take advantage of the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> that we are rolling out. Learn about these enhancements and how you can try them out below.</p>
 
 <p>Since we're rolling out the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> improvements slowly, these enhancements will only apply to certain organizations at first. Most of these enhancements will degrade gracefully (returning an empty array or something similar) if used on an organization that doesn't support improved organization permissions yet. Check the documentation for your specific API to see if errors are possible.</p>
 
@@ -444,47 +484,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 <a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Send us your feedback</h2>
 
 <p>We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
-</div>
-
-<div class="change" id="/changes/2015-06-24-licenses-api-update/">
-  <h2 class="title">
-<a id="--licenses-api-update" class="anchor" href="#--licenses-api-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-06-24-licenses-api-update/">Licenses API update</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    June 24, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mislav.png" alt="Avatar for mislav" data-proofer-ignore>
-      <a href="https://github.com/mislav" data-proofer-ignore>mislav</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We are expanding the <a href="/v3/licenses">Licenses API</a> to make it more useful for auditing license usage across all repositories owned by a user or organization.</p>
-
-<p>Before, license information was only returned for an individual repository:</p>
-
-<pre><code>GET /repos/github/hubot
-</code></pre>
-
-<p>Now, license information will also be included in reponses from endpoints that list multiple repositories, such as <a href="/v3/repos/#list-organization-repositories">List organization repositories</a>:</p>
-
-<pre><code>GET /orgs/github/repos
-</code></pre>
-
-<p>As before, to access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.drax-preview+json
-</code></pre>
-
-<p>For more information, see the <a href="/v3/licenses/">Licenses API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API">let us know</a>.</p>
 </div>
 
 <div class="change" id="/changes/2015-06-17-organizations-endpoint/">
@@ -641,7 +640,7 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 
   <li><a href="/changes/2015-06-24-breaking-changes-to-organization-permissions-are-now-official/">Breaking changes to organization permissions are now official<br /><span class="date">June 24, 2015</span></a></li>
 
-  <li><a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions<br /><span class="date">June 24, 2015</span></a></li>
+  <li><a href="/changes/2015-06-24-licenses-api-update/">Licenses API update<br /><span class="date">June 24, 2015</span></a></li>
 
 </ul>
 

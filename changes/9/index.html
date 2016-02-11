@@ -44,7 +44,78 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-10-08-list-all-user-teams/">
+      <div class="change" id="/changes/2013-10-18-new-code-search-requirements/">
+  <h2 class="title">
+<a id="--new-validation-rule-for-beta-code-search-api" class="anchor" href="#--new-validation-rule-for-beta-code-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-10-18-new-code-search-requirements/">New Validation Rule for Beta Code Search API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 18, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>As we <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">prepare to end the preview period</a> for the new search API,
+we're making sure that it's ready to handle the traffic from all the apps you'll build on top of it.</p>
+
+<h2>
+<a id="new-validation-rule" class="anchor" href="#new-validation-rule" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-validation-rule" class="anchor" href="#new-validation-rule" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Validation Rule</h2>
+
+<p>In order to support the expected volume of requests, we're applying a new validation rule to the <a href="/v3/search/#search-code">Code Search API</a>.
+Starting today, you will need to scope your code queries to a specific set of users, organizations, or repositories.</p>
+
+<p>As usual, you specify the query via the <code>q</code> parameter.
+The value must include <a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">at least one user, organization, or repository</a>.</p>
+
+<p>For example, with this query, we're searching for code from <a href="https://github.com/twitter">@twitter</a> or <a href="https://github.com/facebook">@facebook</a> that uses an MIT License:</p>
+
+<pre><code>MIT License user:twitter user:facebook
+</code></pre>
+
+<p>And here, we're looking for uses of the underscore library in <a href="https://github.com/mozilla/BrowserQuest">@mozilla's BrowserQuest</a> repository:</p>
+
+<pre><code>underscore language:js repo:mozilla/BrowserQuest
+</code></pre>
+
+<p>To perform these queries via the API, we would use the following URLs (respectively):</p>
+
+<pre><code>https://api.github.com/search/code?q=MIT+License+user%3Atwitter+user%3Afacebook
+
+https://api.github.com/search/code?q=underscore+language%3Ajs+repo%3Amozilla%2FBrowserQuest
+</code></pre>
+
+<p>All the various <a href="https://help.github.com/articles/searching-code">code search qualifiers</a> are still available to you.
+A <a href="https://help.github.com/articles/searching-code#users-organizations-and-repositories">user, organization, or repository qualifier</a> is now required.
+The other search qualifiers are still optional.</p>
+
+<h2>
+<a id="other-search-types-not-affected" class="anchor" href="#other-search-types-not-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="other-search-types-not-affected" class="anchor" href="#other-search-types-not-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Search Types Not Affected</h2>
+
+<p>This new validation only applies to the <a href="/v3/search/#search-code">Code Search API</a>.
+It does not apply to the Search API for <a href="/v3/search/#search-issues">issues</a>, <a href="/v3/search/#search-users">users</a>, or <a href="/v3/search/#search-repositories">repositories</a>.</p>
+
+<p>This validation does not affect searches performed on <a href="https://github.com/search">github.com/search</a>.</p>
+
+<p>By ensuring that code queries are more targeted in nature, the API will be ready to meet the expected demand from all your apps.
+As we continue to tune the Search API, we hope to relax this validation in the future.
+There's no ETA, but we'd like to relax it as soon as it's feasible.</p>
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Validation+Rule+for+Code+Search+API">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2013-10-08-list-all-user-teams/">
   <h2 class="title">
 <a id="--list-all-teams-for-the-authenticated-user" class="anchor" href="#--list-all-teams-for-the-authenticated-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-10-08-list-all-user-teams/">List all teams for the authenticated user</a>
@@ -632,46 +703,6 @@ resources available to the authenticated user.</p>
 </pre>
 
 <p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2013-05-06-repository-stats/">
-  <h2 class="title">
-<a id="--repository-statistics" class="anchor" href="#--repository-statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-05-06-repository-stats/">Repository Statistics</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 6, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/Caged.png" alt="Avatar for Caged" data-proofer-ignore>
-      <a href="https://github.com/Caged" data-proofer-ignore>Caged</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Today we're happy to open our <a href="/v3/repos/statistics">Repository Statistics API</a> to everyone.  We're using
-repository statistics to power <a href="https://github.com/github/linguist/graphs">our graphs</a>,
-but we can't wait to see what others can do with this information.</p>
-
-<p>Starting today, these resources are available to you:</p>
-
-<ul>
-<li><strong><a href="/v3/repos/statistics/#contributors">Contributors</a></strong></li>
-<li><strong><a href="/v3/repos/statistics/#commit-activity">Commit Activity</a></strong></li>
-<li><strong><a href="/v3/repos/statistics/#code-frequency">Code Frequency</a></strong></li>
-<li><strong><a href="/v3/repos/statistics/#participation">Participation</a></strong></li>
-<li><strong><a href="/v3/repos/statistics/#punch-card">Punch Card</a></strong></li>
-</ul>
-
-<p>Enjoy!</p>
 
 <p></p>
 </div>

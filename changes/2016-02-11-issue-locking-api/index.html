@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>More time to prepare for the breaking changes to organization permissions | GitHub Developer Guide</title>
+  <title>Issue Locking and Unlocking API Preview Period | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,29 +44,58 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-02-24-more-time-to-prepare-for-the-breaking-changes-to-organization-permissions/">
+      <div class="change" id="/changes/2016-02-11-issue-locking-api/">
 <h2 class="title">
-  <a href="/changes/2015-02-24-more-time-to-prepare-for-the-breaking-changes-to-organization-permissions/">More time to prepare for the breaking changes to organization permissions</a>
+  <a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    February 24, 2015
+    February 11, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore/>
-      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
+    <img height="16" width="16" src="https://github.com/davidcelis.png" alt="Avatar for davidcelis" data-proofer-ignore/>
+      <a href="https://github.com/davidcelis" data-proofer-ignore>davidcelis</a>
   </li>
 </ul>
 </div>
 
 
-<p>After listening to your feedback on the upcoming <a href="/changes/2014-12-08-organization-permissions-api-preview/">breaking changes to organization permissions</a>, we're giving developers more time to update their applications. We'll announce an updated timeline for these changes in the coming weeks.</p>
+<p>We're introducing new API methods to allow repository collaborators to <a href="https://help.github.com/articles/locking-conversations/">lock and unlock conversations</a>. Developers with <a href="https://help.github.com/articles/what-are-the-different-access-permissions/">collaborator permissions</a> on a repository can start experimenting with these new endpoints today during the preview period.</p>
 
-<p>In the meantime, if your application relies on any of the affected functionality described in our <a href="/changes/2014-12-08-organization-permissions-api-preview/">previous blog post</a>, please <strong>update your code</strong> to account for these changes. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
+<p>To lock a conversation, make a <code>PUT</code> request to the conversation's issue:</p>
+
+<pre class="command-line">
+<span class="command">curl "https://api.github.com/repos/github/hubot/issues/1/lock" \</span>
+  -X PUT \
+  -H "Authorization: token $TOKEN" \
+  -H "Content-Length: 0" \
+  -H "Accept: application/vnd.github.the-key-preview"
+</pre>
+
+<p>To unlock a conversation, make a similarly constructed <code>DELETE</code> request:</p>
+
+<pre class="command-line">
+<span class="command">curl "https://api.github.com/repos/github/hubot/issues/1/lock" \</span>
+  -X DELETE \
+  -H "Authorization: token $TOKEN" \
+  -H "Accept: application/vnd.github.the-key-preview"
+</pre>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>Starting today, developers can preview these new API methods. To use them during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.the-key-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>Take a look at <a href="/v3/issues/#lock-an-issue">the documentation</a> and, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Issue+Locking+and+Unlocking+API+Preview">get in touch</a>.</p>
 </div>
 
     </div>

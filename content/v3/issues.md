@@ -144,6 +144,56 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :full_issue %>
 
+## Lock an issue
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The API to lock an issue is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2016-02-11-issue-locking-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.the-key-preview+json
+
+{{/tip}}
+
+Users with push access can lock an issue's conversation.
+
+    PUT /repos/:owner/:repo/issues/:number/lock
+
+<%= fetch_content(:put_content_length) %>
+
+### Response
+
+<%= headers 204 %>
+
+## Unlock an issue
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The API to unlock an issue is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2016-02-11-issue-locking-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.the-key-preview+json
+
+{{/tip}}
+
+Users with push access can unlock an issue's conversation.
+
+    DELETE /repos/:owner/:repo/issues/:number/lock
+
+### Response
+
+<%= headers 204 %>
+
 ## Custom media types
 
 These are the supported media types for issues. You can read more about the

@@ -95,11 +95,7 @@ If your server needs to access multiple repositories, you can choose to create a
 
 > *Accounts registered by "bots" or other automated methods are not permitted.*
 
-and that 
-
-> *One person or legal entity may not maintain more than one free account.*
-
-But don't fear, we won't send rabid lawyers out to hunt you down if you create a single machine user for your organization's deploy scripts. Creating a single machine user for your project or organization is totally cool.
+This means that you cannot automate the creation of accounts. But if you want to create a single machine user for automating tasks such as deploy scripts in your project or organization, that is totally cool. 
 
 {{/tip}}
 

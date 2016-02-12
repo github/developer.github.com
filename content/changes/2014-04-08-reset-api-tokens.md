@@ -21,11 +21,11 @@ web.
 Integrators can also use the existing revocation methods to ~~revoke all
 tokens~~ or [revoke a single token][] for their applications.
 
-<div class="alert">
-  <p>
-    <strong>UPDATE (2016-01-25):</strong> API v3 no longer provides a method to revoke <em>all</em> of an application's tokens as previously referenced above. If you need to revoke all tokens for your application, you can do so via the <a href="https://github.com/settings/developers">settings page for your application</a>.
-  </p>
-</div>
+{{#tip}}
+
+**UPDATE (2016-01-25):** API v3 no longer provides a method to revoke <em>all</em> of an application's tokens as previously referenced above. If you need to revoke all tokens for your application, you can do so via the <a href="https://github.com/settings/developers">settings page for your application</a>.
+
+{{/tip}}
 
 If you have any questions or feedback, please [get in touch][contact].
 

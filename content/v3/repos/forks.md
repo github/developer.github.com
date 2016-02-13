@@ -19,7 +19,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200, :pagination => default_pagination_rels %>
+<%= headers 200 %>
 <%= json(:repo) { |h| h['fork'] = true; [h] } %>
 
 ## Create a fork

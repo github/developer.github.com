@@ -72,10 +72,10 @@ We encourage you to <a href="/enterprise/2.5/v3/media/#request-specific-version"
 </code></pre>
 <h2>
 <a id="schema" class="anchor" href="#schema" aria-hidden="true"><span class="octicon octicon-link"></span></a>Schema</h2>
-<p>All API access is over HTTPS, and accessed from the <code>http(s)://[hostname]/api/v3/</code>.  All data is
+<p>All API access is over HTTPS, and accessed from the <code>http(s)://[hostname]/api/v3</code>.  All data is
 sent and received as JSON.</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//users/octocat/orgs</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/users/octocat/orgs</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Server: nginx</span>
 <span class="output">Date: Fri, 12 Oct 2012 23:33:14 GMT</span>
@@ -126,7 +126,7 @@ response illustrates all attributes that are returned by that method.</p>
 specified as a segment in the path can be passed as an HTTP query string
 parameter:</p>
 <pre class="command-line">
-<span class="command">curl -i "https://http(s)://<em>[hostname]</em>/api/v3//repos/vmg/redcarpet/issues?state=closed"</span>
+<span class="command">curl -i "http(s)://<em>[hostname]</em>/api/v3/repos/vmg/redcarpet/issues?state=closed"</span>
 </pre>
 <p>In this example, the 'vmg' and 'redcarpet' values are provided for the <code>:owner</code>
 and <code>:repo</code> parameters in the path while <code>:state</code> is passed in the query
@@ -134,13 +134,13 @@ string.</p>
 <p>For POST, PATCH, PUT, and DELETE requests, parameters not included in the URL should be encoded as JSON
 with a Content-Type of 'application/json':</p>
 <pre class="command-line">
-<span class="command">curl -i -u username -d '{"scopes":["public_repo"]}' https://http(s)://<em>[hostname]</em>/api/v3//authorizations</span>
+<span class="command">curl -i -u username -d '{"scopes":["public_repo"]}' http(s)://<em>[hostname]</em>/api/v3/authorizations</span>
 </pre>
 <h2>
 <a id="root-endpoint" class="anchor" href="#root-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>Root Endpoint</h2>
 <p>You can issue a <code>GET</code> request to the root endpoint to get all the endpoint categories that the API supports:</p>
 <pre class="command-line">
-<span class="command">curl https://http(s)://<em>[hostname]</em>/api/v3/</span>
+<span class="command">curl http(s)://<em>[hostname]</em>/api/v3</span>
 </pre>
 <div class="alert tip">
 <p><strong>Tip:</strong> For GitHub Enterprise, <a href="https://developer.github.com/v3/enterprise/#endpoint-urls">as with all other endpoints</a>, you'll need to pass in your GitHub Enterprise endpoint as the hostname, <em>as well as your username and password</em>:</p>
@@ -286,17 +286,17 @@ of private repositories to unauthorized users.</p>
 <h3>
 <a id="basic-authentication" class="anchor" href="#basic-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Authentication</h3>
 <pre class="command-line">
-<span class="command">curl -u "username" https://http(s)://<em>[hostname]</em>/api/v3/</span>
+<span class="command">curl -u "username" http(s)://<em>[hostname]</em>/api/v3</span>
 </pre>
 <h3>
 <a id="oauth2-token-sent-in-a-header" class="anchor" href="#oauth2-token-sent-in-a-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth2 Token (sent in a header)</h3>
 <pre class="command-line">
-<span class="command">curl -H "Authorization: token OAUTH-TOKEN" https://http(s)://<em>[hostname]</em>/api/v3/</span>
+<span class="command">curl -H "Authorization: token OAUTH-TOKEN" http(s)://<em>[hostname]</em>/api/v3</span>
 </pre>
 <h3>
 <a id="oauth2-token-sent-as-a-parameter" class="anchor" href="#oauth2-token-sent-as-a-parameter" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth2 Token (sent as a parameter)</h3>
 <pre class="command-line">
-<span class="command">curl https://http(s)://<em>[hostname]</em>/api/v3//?access_token=OAUTH-TOKEN</span>
+<span class="command">curl http(s)://<em>[hostname]</em>/api/v3/?access_token=OAUTH-TOKEN</span>
 </pre>
 <p>Read <a href="/enterprise/2.5/v3/oauth/">more about OAuth2</a>.  Note that OAuth2 tokens can be <a href="/enterprise/2.5/v3/oauth_authorizations/#create-a-new-authorization">acquired
 programmatically</a>, for applications that
@@ -304,7 +304,7 @@ are not websites.</p>
 <h3>
 <a id="oauth2-keysecret" class="anchor" href="#oauth2-keysecret" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth2 Key/Secret</h3>
 <pre class="command-line">
-<span class="command">curl 'https://http(s)://<em>[hostname]</em>/api/v3//users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
+<span class="command">curl 'http(s)://<em>[hostname]</em>/api/v3/users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
 </pre>
 <p>This should only be used in server to server scenarios.  Don't leak your
 OAuth application's client secret to your users.  Read <a href="#increasing-the-unauthenticated-rate-limit-for-oauth-applications">more about
@@ -313,7 +313,7 @@ unauthenticated rate limiting</a>.</p>
 <a id="failed-login-limit" class="anchor" href="#failed-login-limit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Failed login limit</h3>
 <p>Authenticating with invalid credentials will return <code>401 Unauthorized</code>:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3/ -u foo:bar</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3 -u foo:bar</span>
 <span class="output">HTTP/1.1 401 Unauthorized</span>
 <span class="output">{</span>
 <span class="output">  "message": "Bad credentials",</span>
@@ -324,7 +324,7 @@ unauthenticated rate limiting</a>.</p>
 the API will temporarily reject all authentication attempts for that user
 (including ones with valid credentials) with <code>403 Forbidden</code>:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3/ -u valid_username:valid_password</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3 -u valid_username:valid_password</span>
 <span class="output">HTTP/1.1 403 Forbidden</span>
 <span class="output">{</span>
 <span class="output">  "message": "Maximum number of login attempts exceeded. Please try again later.",</span>
@@ -356,7 +356,7 @@ resources, you can also set a custom page size up to 100 with the <code>?per_pag
 Note that for technical reasons not all endpoints respect the <code>?per_page</code> parameter,
 see <a href="https://developer.github.com/v3/activity/events/">events</a> for example.</p>
 <pre class="command-line">
-<span class="command">curl 'https://http(s)://<em>[hostname]</em>/api/v3//user/repos?page=2&amp;per_page=100'</span>
+<span class="command">curl 'http(s)://<em>[hostname]</em>/api/v3/user/repos?page=2&amp;per_page=100'</span>
 </pre>
 <p>Note that page numbering is 1-based and that omitting the <code>?page</code>
 parameter will return the first page.</p>
@@ -409,7 +409,7 @@ rules</a>.</p>
 <p>You can check the returned HTTP headers of any API request to see your current
 rate limit status:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//users/whatever</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/users/whatever</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Date: Mon, 01 Jul 2013 17:27:06 GMT</span>
 <span class="output">Status: 200 OK</span>
@@ -462,7 +462,7 @@ API hit.
 <a id="increasing-the-unauthenticated-rate-limit-for-oauth-applications" class="anchor" href="#increasing-the-unauthenticated-rate-limit-for-oauth-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Increasing the unauthenticated rate limit for OAuth applications</h3>
 <p>If your OAuth application needs to make unauthenticated calls with a higher rate limit, you can pass your app's client ID and secret as part of the query string.</p>
 <pre class="command-line">
-<span class="command">curl -i 'https://http(s)://<em>[hostname]</em>/api/v3//users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
+<span class="command">curl -i 'http(s)://<em>[hostname]</em>/api/v3/users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Date: Mon, 01 Jul 2013 17:27:06 GMT</span>
 <span class="output">Status: 200 OK</span>
@@ -491,7 +491,7 @@ User-Agent: Awesome-Octocat-App
 </pre>
 <p>If you provide an invalid <code>User-Agent</code> header, you will receive a <code>403 Forbidden</code> response:</p>
 <pre class="command-line">
-<span class="command">curl -iH 'User-Agent: ' https://http(s)://<em>[hostname]</em>/api/v3//meta</span>
+<span class="command">curl -iH 'User-Agent: ' http(s)://<em>[hostname]</em>/api/v3/meta</span>
 <span class="output">HTTP/1.0 403 Forbidden</span>
 <span class="output">Connection: close</span>
 <span class="output">Content-Type: text/html</span>
@@ -508,7 +508,7 @@ has not changed, the server will return a <code>304 Not Modified</code>. Also no
 a conditional request and receiving a 304 response does not count against your
 <a href="#rate-limiting">Rate Limit</a>, so we encourage you to use it whenever possible.</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//user</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/user</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Cache-Control: private, max-age=60</span>
 <span class="output">ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"</span>
@@ -518,7 +518,7 @@ a conditional request and receiving a 304 response does not count against your
 <span class="output">X-RateLimit-Limit: 5000</span>
 <span class="output">X-RateLimit-Remaining: 4996</span>
 <span class="output">X-RateLimit-Reset: 1372700873</span>
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//user -H 'If-None-Match: "644b5b0155e6404a9cc4bd9d8b1ae730"'</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/user -H 'If-None-Match: "644b5b0155e6404a9cc4bd9d8b1ae730"'</span>
 <span class="output">HTTP/1.1 304 Not Modified</span>
 <span class="output">Cache-Control: private, max-age=60</span>
 <span class="output">ETag: "644b5b0155e6404a9cc4bd9d8b1ae730"</span>
@@ -528,7 +528,7 @@ a conditional request and receiving a 304 response does not count against your
 <span class="output">X-RateLimit-Limit: 5000</span>
 <span class="output">X-RateLimit-Remaining: 4996</span>
 <span class="output">X-RateLimit-Reset: 1372700873</span>
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//user -H "If-Modified-Since: Thu, 05 Jul 2012 15:31:30 GMT"</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/user -H "If-Modified-Since: Thu, 05 Jul 2012 15:31:30 GMT"</span>
 <span class="output">HTTP/1.1 304 Not Modified</span>
 <span class="output">Cache-Control: private, max-age=60</span>
 <span class="output">Last-Modified: Thu, 05 Jul 2012 15:31:30 GMT</span>
@@ -548,7 +548,7 @@ HTML 5 Security Guide.</p>
 <p>Here's a sample request sent from a browser hitting
 <code>http://example.com</code>:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3/ -H "Origin: http://example.com"</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3 -H "Origin: http://example.com"</span>
 HTTP/1.1 302 Found
 Access-Control-Allow-Origin: *
 Access-Control-Expose-Headers: ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
@@ -556,7 +556,7 @@ Access-Control-Allow-Credentials: true
 </pre>
 <p>This is what the CORS preflight request looks like:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3/ -H "Origin: http://example.com" -X OPTIONS</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3 -H "Origin: http://example.com" -X OPTIONS</span>
 HTTP/1.1 204 No Content
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-GitHub-OTP, X-Requested-With
@@ -651,7 +651,7 @@ how these timestamps can be specified.</p>
 <p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
 to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
 <pre class="command-line">
-<span class="command">curl -H "Time-Zone: Europe/Amsterdam" -X POST https://http(s)://<em>[hostname]</em>/api/v3//repos/github/linguist/contents/new_file.md</span>
+<span class="command">curl -H "Time-Zone: Europe/Amsterdam" -X POST http(s)://<em>[hostname]</em>/api/v3/repos/github/linguist/contents/new_file.md</span>
 </pre>
 <p>This means that we generate a timestamp for the moment your API call is made in
 the timezone this header defines. For example, the <a href="/enterprise/2.5/v3/repos/contents/">Contents API</a>

@@ -84,12 +84,12 @@ header that specifies how often (in seconds) you are allowed to poll.  In times
 of high server load, the time may increase.  Please obey the header.</p>
 <pre class="command-line">
 <span class="comment"># Add authentication to your requests</span>
-<span class="command">curl -I https://http(s)://<em>[hostname]</em>/api/v3//notifications</span>
+<span class="command">curl -I http(s)://<em>[hostname]</em>/api/v3/notifications</span>
 HTTP/1.1 200 OK
 Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
 X-Poll-Interval: 60
 <span class="comment"># Pass the Last-Modified header exactly</span>
-<span class="command">curl -I https://http(s)://<em>[hostname]</em>/api/v3//notifications</span>
+<span class="command">curl -I http(s)://<em>[hostname]</em>/api/v3/notifications</span>
 <span class="command">   -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"</span>
 <span class="output">HTTP/1.1 304 Not Modified</span>
 <span class="output">X-Poll-Interval: 60</span>

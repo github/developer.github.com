@@ -11,7 +11,7 @@ The Search Indexing API allows you to queue up a variety of search indexing task
 Prefix all the endpoints for this API with the following URL:
 
 ``` command-line
-{{ site.data.variables.product.api_url_pre }}
+http(s)://<em>hostname</em>/api/v3
 ```
 
 ## Queue an indexing job

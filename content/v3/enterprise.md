@@ -13,7 +13,7 @@ title: Enterprise
 All API endpoints—except [Management Console][] API endpoints—are prefixed with the following URL:
 
 ``` command-line
-{{ site.data.variables.product.api_url_pre }}/
+http(s)://<em>hostname</em>/api/v3/
 ```
 
 [Management Console][] API endpoints are only prefixed with a hostname:

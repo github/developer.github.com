@@ -11,7 +11,7 @@ The Organization Administration API allows you to create organizations on a GitH
 Prefix all the endpoints for this API with the following URL:
 
 ``` command-line
-{{ site.data.variables.product.api_url_pre }}
+http(s)://<em>hostname</em>/api/v3
 ```
 
 ## Create an organization

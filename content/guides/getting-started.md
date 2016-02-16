@@ -22,7 +22,7 @@ Let's start by testing our setup. Open up a command prompt and enter the
 following command:
 
 ``` command-line
-$ curl https://{{ site.data.variables.product.api_url_pre }}/zen
+$ curl {{ site.data.variables.product.api_url_pre }}/zen
 
 > Keep it logically awesome.
 ```
@@ -33,12 +33,12 @@ Next, let's `GET` [Chris Wanstrath's][defunkt github] [GitHub profile][users api
 
 ``` command-line
 # GET /users/defunkt
-$ curl https://{{ site.data.variables.product.api_url_pre }}/users/defunkt
+$ curl {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > {
 >   "login": "defunkt",
 >   "id": 2,
->   "url": "https://{{ site.data.variables.product.api_url_pre }}/users/defunkt",
+>   "url": "{{ site.data.variables.product.api_url_pre }}/users/defunkt",
 >   "html_url": "https://github.com/defunkt",
 >   ...
 > }
@@ -47,7 +47,7 @@ $ curl https://{{ site.data.variables.product.api_url_pre }}/users/defunkt
 Mmmmm, tastes like [JSON][json]. Let's add the `-i` flag to include headers:
 
 ``` command-line
-$ curl -i https://{{ site.data.variables.product.api_url_pre }}/users/defunkt
+$ curl -i {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > HTTP/1.1 200 OK
 > Server: GitHub.com
@@ -69,7 +69,7 @@ $ curl -i https://{{ site.data.variables.product.api_url_pre }}/users/defunkt
 > {
 >   "login": "defunkt",
 >   "id": 2,
->   "url": "https://{{ site.data.variables.product.api_url_pre }}/users/defunkt",
+>   "url": "{{ site.data.variables.product.api_url_pre }}/users/defunkt",
 >   "html_url": "https://github.com/defunkt",
 >   ...
 > }
@@ -101,7 +101,7 @@ The easiest way to authenticate with the {{ site.data.variables.product.product_
 username and password via Basic Authentication.
 
 ``` command-line
-$ curl -i -u <em>your_username</em> https://{{ site.data.variables.product.api_url_pre }}/users/defunkt
+$ curl -i -u <em>your_username</em> {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > Enter host password for user <em>your_username</em>:
 ```
@@ -121,7 +121,7 @@ If you have [two-factor authentication][2fa] enabled, the API will return a
 `401 Unauthorized` error code for the above request (and every other API request):
 
 ``` command-line
-$ curl -i -u <em>your_username</em> https://{{ site.data.variables.product.api_url_pre }}/users/defunkt
+$ curl -i -u <em>your_username</em> {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > Enter host password for user <em>your_username</em>:
 
@@ -145,7 +145,7 @@ associated with your {{ site.data.variables.product.product_name }} account. For
 [your own user profile][auth user api]:
 
 ``` command-line
-$ curl -i -u <em>your_username</em> https://{{ site.data.variables.product.api_url_pre }}/user
+$ curl -i -u <em>your_username</em> {{ site.data.variables.product.api_url_pre }}/user
 
 > {
 >   ...
@@ -196,10 +196,10 @@ to create an OAuth token. Try pasting and running the following command:
 
 ``` command-line
 $ curl -i -u <em>your_username</em> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
-$    https://{{ site.data.variables.product.api_url_pre }}/authorizations
+$    {{ site.data.variables.product.api_url_pre }}/authorizations
 
 > HTTP/1.1 201 Created
-> Location: https://{{ site.data.variables.product.api_url_pre }}/authorizations/2
+> Location: {{ site.data.variables.product.api_url_pre }}/authorizations/2
 > Content-Length: 384
 
 > {
@@ -209,7 +209,7 @@ $    https://{{ site.data.variables.product.api_url_pre }}/authorizations
 >  ],
 >  "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",
 >  "updated_at": "2012-11-14T14:04:24Z",
->  "url": "https://{{ site.data.variables.product.api_url_pre }}/authorizations/2",
+>  "url": "{{ site.data.variables.product.api_url_pre }}/authorizations/2",
 >  "app": {
 >    "url": "https://developer.github.com/v3/oauth/#oauth-authorizations-api",
 >    "name": "GitHub API"
@@ -246,7 +246,7 @@ in the [X-GitHub-OTP request header][2fa header]:
 ``` command-line
 $ curl -i -u <em>your_username</em> -H "X-GitHub-OTP: <em>your_2fa_OTP_code</em>" \
     -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
-    https://{{ site.data.variables.product.api_url_pre }}/authorizations
+    {{ site.data.variables.product.api_url_pre }}/authorizations
 ```
 
 If you enabled 2FA with a mobile application, go ahead and get an OTP code from
@@ -259,7 +259,7 @@ in the rest of our examples. Let's grab our own user info again, using OAuth thi
 
 ``` command-line
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    https://{{ site.data.variables.product.api_url_pre }}/user
+    {{ site.data.variables.product.api_url_pre }}/user
 ```
 
 **Treat OAuth tokens like passwords!** Don't share them with other users or store
@@ -276,26 +276,26 @@ information. We can [`GET` repository details][get repo] in the same way we fetc
 details earlier:
 
 ``` command-line
-$ curl -i https://{{ site.data.variables.product.api_url_pre }}/repos/twbs/bootstrap
+$ curl -i {{ site.data.variables.product.api_url_pre }}/repos/twbs/bootstrap
 ```
 
 In the same way, we can [view repositories for the authenticated user][user repos api]:
 
 ``` command-line
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    https://{{ site.data.variables.product.api_url_pre }}/user/repos
+    {{ site.data.variables.product.api_url_pre }}/user/repos
 ```
 
 Or, we can [list repositories for another user][other user repos api]:
 
 ``` command-line
-$ curl -i https://{{ site.data.variables.product.api_url_pre }}/users/technoweenie/repos
+$ curl -i {{ site.data.variables.product.api_url_pre }}/users/technoweenie/repos
 ```
 
 Or, we can [list repositories for an organization][org repos api]:
 
 ``` command-line
-$ curl -i https://{{ site.data.variables.product.api_url_pre }}/orgs/mozilla/repos
+$ curl -i {{ site.data.variables.product.api_url_pre }}/orgs/mozilla/repos
 ```
 
 The information returned from these calls will depend on how we authenticate:
@@ -311,7 +311,7 @@ for the repository. In this way, we can fetch only directly-owned repositories,
 organization repositories, or repositories the user collaborates on via a team.
 
 ``` command-line
-$ curl -i "https://{{ site.data.variables.product.api_url_pre }}/users/technoweenie/repos?type=owner"
+$ curl -i "{{ site.data.variables.product.api_url_pre }}/users/technoweenie/repos?type=owner"
 ```
 
 In this example, we grab only those repositories that technoweenie owns, not the
@@ -333,7 +333,7 @@ $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
         "private": true, \
         "gitignore_template": "nanoc" \
       }' \
-    https://{{ site.data.variables.product.api_url_pre }}/user/repos
+    {{ site.data.variables.product.api_url_pre }}/user/repos
 ```
 
 In this minimal example, we create a new repository for our blog (to be served
@@ -348,7 +348,7 @@ an owner, just change the API method from `/user/repos` to `/orgs/<org_name>/rep
 Next, let's fetch our newly created repository:
 
 ``` command-line
-$ curl -i https://{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/blog
+$ curl -i {{ site.data.variables.product.api_url_pre }}/repos/pengwynn/blog
 
 > HTTP/1.1 404 Not Found
 
@@ -375,7 +375,7 @@ authenticated user. To [see all your issues][get issues api], call `GET /issues`
 
 ``` command-line
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    https://{{ site.data.variables.product.api_url_pre }}/issues
+    {{ site.data.variables.product.api_url_pre }}/issues
 ```
 
 To get only the [issues under one of your {{ site.data.variables.product.product_name }} organizations][get issues api], call `GET
@@ -383,13 +383,13 @@ To get only the [issues under one of your {{ site.data.variables.product.product
 
 ``` command-line
 $ curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \
-    https://{{ site.data.variables.product.api_url_pre }}/orgs/rails/issues
+    {{ site.data.variables.product.api_url_pre }}/orgs/rails/issues
 ```
 
 We can also get [all the issues under a single repository][repo issues api]:
 
 ``` command-line
-$ curl -i https://{{ site.data.variables.product.api_url_pre }}/repos/rails/rails/issues
+$ curl -i {{ site.data.variables.product.api_url_pre }}/repos/rails/rails/issues
 ```
 
 ### Pagination
@@ -399,12 +399,12 @@ making multiple API calls to get the data. Let's repeat that last call, this
 time taking note of the response headers:
 
 ``` command-line
-$ curl -i https://{{ site.data.variables.product.api_url_pre }}/repos/rails/rails/issues
+$ curl -i {{ site.data.variables.product.api_url_pre }}/repos/rails/rails/issues
 
 > HTTP/1.1 200 OK
 
 > ...
-> Link: &lt;https://{{ site.data.variables.product.api_url_pre }}/repositories/8514/issues?page=2&gt;; rel="next", &lt;https://{{ site.data.variables.product.api_url_pre }}/repositories/8514/issues?page=30&gt;; rel="last"
+> Link: &lt;{{ site.data.variables.product.api_url_pre }}/repositories/8514/issues?page=2&gt;; rel="next", &lt;{{ site.data.variables.product.api_url_pre }}/repositories/8514/issues?page=30&gt;; rel="last"
 > ...
 ```
 
@@ -430,10 +430,10 @@ $         "title": "New logo", \
 $         "body": "We should have one", \
 $         "labels": ["design"] \
 $       }' \
-$    https://{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues
+$    {{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues
 
 > HTTP/1.1 201 Created
-> Location: https://{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues/17
+> Location: {{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues/17
 > X-RateLimit-Limit: 5000
 
 > {
@@ -452,7 +452,7 @@ $    https://{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sa
 >     "gravatar_id": "7e19cd5486b5d6dc1ef90e671ba52ae0",
 >     "avatar_url": "https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",
 >     "id": 865,
->     "url": "https://{{ site.data.variables.product.api_url_pre }}/users/pengwynn"
+>     "url": "{{ site.data.variables.product.api_url_pre }}/users/pengwynn"
 >   },
 >   "closed_at": null,
 >   "updated_at": "2012-11-14T15:25:33Z",
@@ -463,13 +463,13 @@ $    https://{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sa
 >     {
 >       "color": "ededed",
 >       "name": "design",
->       "url": "https://{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/labels/design"
+>       "url": "{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/labels/design"
 >     }
 >   ],
 >   "id": 8356941,
 >   "assignee": null,
 >   "state": "open",
->   "url": "https://{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues/17"
+>   "url": "{{ site.data.variables.product.api_url_pre }}/repos/pengwynn/api-sandbox/issues/17"
 > }
 ```
 
@@ -484,7 +484,7 @@ requests][conditional-requests] and helps you do the right thing. Consider the
 first call we made to get defunkt's profile:
 
 ``` command-line
-$ curl -i https://{{ site.data.variables.product.api_url_pre }}/users/defunkt
+$ curl -i {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > HTTP/1.1 200 OK
 > ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"
@@ -497,7 +497,7 @@ we can tell the API to give us the resource again, only if it has changed:
 
 ``` command-line
 $ curl -i -H 'If-None-Match: "bfd85cbf23ac0b0c8a29bee02e7117c6"' \
-$    https://{{ site.data.variables.product.api_url_pre }}/users/defunkt
+$    {{ site.data.variables.product.api_url_pre }}/users/defunkt
 
 > HTTP/1.1 304 Not Modified
 ```

@@ -11,7 +11,7 @@ The User Administration API allows you to promote, demote, suspend, and unsuspen
 Prefix all the endpoints for this API with the following URL:
 
 ``` command-line
-http(s)://<em>hostname</em>/api/v3
+{{ site.data.variables.product.api_url_pre }}
 ```
 
 {% if page.version != 'dotcom' and page.version >= 2.3 %}
@@ -21,8 +21,8 @@ http(s)://<em>hostname</em>/api/v3
 {{#warning}}
 
 If an external authentication mechanism is used, the login name should match the
-login name in the external system. If you are using LDAP authentication, you should also 
-[update the LDAP mapping](/v3/enterprise/ldap/#update-ldap-mapping-for-a-user) 
+login name in the external system. If you are using LDAP authentication, you should also
+[update the LDAP mapping](/v3/enterprise/ldap/#update-ldap-mapping-for-a-user)
 for the user.
 
 {{/warning}}

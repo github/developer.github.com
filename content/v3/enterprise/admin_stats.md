@@ -11,7 +11,7 @@ The Admin Stats API provides a variety of metrics about your installation. *It i
 Prefix all the endpoints for this API with the following URL:
 
 ``` command-line
-http(s)://<em>hostname</em>/api/v3
+{{ site.data.variables.product.api_url_pre }}
 ```
 
 ## Get statistics

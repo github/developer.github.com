@@ -45,16 +45,16 @@ You can check the current version through every response's headers.  Look
 for the `X-GitHub-Media-Type` header:
 
 ``` command-line
-$ curl https://{{ site.data.variables.product.api_url_pre }}/users/technoweenie -I
+$ curl {{ site.data.variables.product.api_url_pre }}/users/technoweenie -I
 > HTTP/1.1 200 OK
 > X-GitHub-Media-Type: github.v3
 
-$ curl https://{{ site.data.variables.product.api_url_pre }}/users/technoweenie -I \
+$ curl {{ site.data.variables.product.api_url_pre }}/users/technoweenie -I \
 $  -H "Accept: application/vnd.github.full+json"
 > HTTP/1.1 200 OK
 > X-GitHub-Media-Type: github.v3; param=full; format=json
 
-$ curl https://{{ site.data.variables.product.api_url_pre }}/users/technoweenie -I \
+$ curl {{ site.data.variables.product.api_url_pre }}/users/technoweenie -I \
 $  -H "Accept: application/vnd.github.v3.full+json"
 > HTTP/1.1 200 OK
 > X-GitHub-Media-Type: github.v3; param=full; format=json

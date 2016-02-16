@@ -37,13 +37,13 @@ of high server load, the time may increase.  Please obey the header.
 
 ``` command-line
 # Add authentication to your requests
-$ curl -I https://{{ site.data.variables.product.api_url_pre }}/notifications
+$ curl -I {{ site.data.variables.product.api_url_pre }}/notifications
 HTTP/1.1 200 OK
 Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
 X-Poll-Interval: 60
 
 # Pass the Last-Modified header exactly
-$ curl -I https://{{ site.data.variables.product.api_url_pre }}/notifications
+$ curl -I {{ site.data.variables.product.api_url_pre }}/notifications
 $    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
 > HTTP/1.1 304 Not Modified
 > X-Poll-Interval: 60

@@ -11,7 +11,7 @@ The License API provides information on your Enterprise license. *It is only ava
 Prefix all the endpoints for this API with the following URL:
 
 ``` command-line
-http(s)://<em>hostname</em>/api/v3
+{{ site.data.variables.product.api_url_pre }}
 ```
 
 ## Get license information

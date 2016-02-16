@@ -32,7 +32,7 @@ of an API call. For example, let's make a curl request to the search API, to fin
 out how many times Mozilla projects use the phrase `addClass`:
 
 ``` command-line
-$ curl -I "https://{{ site.data.variables.product.api_url_pre }}/search/code?q=addClass+user:mozilla"
+$ curl -I "{{ site.data.variables.product.api_url_pre }}/search/code?q=addClass+user:mozilla"
 ```
 
 The `-I` parameter indicates that we only care about the headers, not the actual

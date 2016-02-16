@@ -33,7 +33,7 @@ would authenticate you if you replace `<username>` with your {{ site.data.variab
 (cURL will prompt you to enter the password.)
 
 ``` command-line
-$ curl -u <em>username</em> https://{{ site.data.variables.product.api_url_pre }}/user
+$ curl -u <em>username</em> {{ site.data.variables.product.api_url_pre }}/user
 ```
 
 ### Via OAuth Tokens
@@ -42,7 +42,7 @@ Alternatively, you can use [personal access
 tokens][personal-access-tokens] or OAuth tokens instead of your password.
 
 ``` command-line
-$ curl -u <em>username</em>:<em>token</em> https://{{ site.data.variables.product.api_url_pre }}/user
+$ curl -u <em>username</em>:<em>token</em> {{ site.data.variables.product.api_url_pre }}/user
 ```
 
 This approach is useful if your tools only support Basic Authentication but you

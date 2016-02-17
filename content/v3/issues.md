@@ -144,6 +144,8 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json :full_issue %>
 
+{% if page.version == 'dotcom' %}
+
 ## Lock an issue
 
 {{#tip}}
@@ -193,6 +195,8 @@ Users with push access can unlock an issue's conversation.
 ### Response
 
 <%= headers 204 %>
+
+{% endif %}
 
 ## Custom media types
 

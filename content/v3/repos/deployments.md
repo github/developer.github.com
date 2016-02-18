@@ -6,7 +6,7 @@ title: Deployments
 
 {:toc}
 
-Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
+Deployments are a request for a specific ref(branch,SHA,tag) to be deployed.
 GitHub then dispatches deployment events that external services can listen for
 and act on. This enables developers and organizations to build loosely-coupled
 tooling around deployments, without having to worry about implementation
@@ -78,8 +78,8 @@ Simple filtering of deployments is available via query parameters:
 
 Name | Type | Description
 -----|------|--------------
-`sha`|`string` | The short or long sha that was recorded at creation time. Default: `none`
-`ref`|`string` | The name of the ref. This can be a branch, tag, or sha. Default: `none`
+`sha`|`string` | The SHA that was recorded at creation time. Default: `none`
+`ref`|`string` | The name of the ref. This can be a branch, tag, or SHA. Default: `none`
 `task`|`string` | The name of the task for the deployment. e.g. `deploy` or `deploy:migrations`. Default: `none`
 `environment`|`string` | The name of the environment that was deployed to. e.g. `staging` or `production`. Default: `none`
 
@@ -92,7 +92,7 @@ Name | Type | Description
 
 Deployments offer a few configurable parameters with sane defaults.
 
-The `ref` parameter can be any named branch, tag, or sha. At GitHub we often
+The `ref` parameter can be any named branch, tag, or SHA. At GitHub we often
 deploy branches and verify them before we merge a pull request.
 
 The `environment` parameter allows deployments to be issued to different
@@ -131,7 +131,7 @@ Users with `repo` or `repo_deployment` scopes can create a deployment for a give
 
 Name | Type | Description
 -----|------|--------------
-`ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or sha.
+`ref`|`string`| **Required**. The ref to deploy. This can be a branch, tag, or SHA.
 `task`|`string`| Optional parameter to specify a task to execute, e.g. `deploy` or `deploy:migrations`. Default: `deploy`
 `auto_merge`|`boolean`| Optional parameter to merge the default branch into the requested ref if it is behind the default branch. Default: `true`
 `required_contexts`|`Array`| Optional array of status contexts verified against commit status checks. If this parameter is omitted from the parameters then all unique contexts will be verified before a deployment is created. To bypass checking entirely pass an empty array. Defaults to all unique contexts.

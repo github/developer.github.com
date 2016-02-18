@@ -1,804 +1,707 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="Content-Language" content="en-us">
-  <meta http-equiv="imagetoolbar" content="false">
-  <meta name="MSSmartTagsPreventParsing" content="true">
-  <title>Management Console | GitHub API</title>
-  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/enterprise/2.4/changes.atom">
-  <link href="/enterprise/2.4/css/reset.css" rel="stylesheet" type="text/css">
-  <link href="/enterprise/2.4/css/documentation.css" media="screen" rel="stylesheet" type="text/css">
-  <link href="/enterprise/2.4/css/pygments.css" media="screen" rel="stylesheet" type="text/css">
-  <script src="/enterprise/2.4/js/jquery.js" type="text/javascript"></script>
-  <script src="/enterprise/2.4/js/documentation.js" type="text/javascript"></script>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title>Management Console | GitHub Developer Guide</title>
+<link href="/enterprise/2.4/assets/stylesheets/application.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script src="/enterprise/2.4/assets/javascripts/application.js" type="text/javascript"></script>
 </head>
-
-
-<body class="api enterprise">
-  <div id="header-wrapper">
+<body class="api ">
+<div id="header-wrapper">
   <div id="header">
     <div>
       <a class="logo" href="/enterprise/2.4/">GitHub:Developer</a>
       <ul class="nav">
+<li>Enterprise 2.4</li>
         <li><a href="/enterprise/2.4/v3/" class="nav-api">API</a></li>
         <li><a href="/enterprise/2.4/program/" class="nav-developers">Developers</a></li>
-        <li><a href="/enterprise/2.4/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
         <li><a href="https://github.com/contact">Support</a></li>
         <li id="search-container">
           <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
           <div class="cancel-search"></div>
-          <ul id="search-results">
-
-          </ul>
-        </li>
+          <ul id="search-results"></ul>
+</li>
       </ul>
-    </div>
+</div>
   </div>
 <!-- #header -->
 </div>
 <!-- #header-wrapper -->
-
-
   <div class="sub-nav">
     <h2><a href="/enterprise/2.4/v3/">API</a></h2>
-
     <ul>
-      <li><a href="/enterprise/2.4/v3/" class="active">Reference</a></li>
+<li><a href="/enterprise/2.4/v3/" class="active">Reference</a></li>
       <li><a href="/enterprise/2.4/webhooks/">Webhooks</a></li>
       <li><a href="/enterprise/2.4/guides/">Guides</a></li>
       <li><a href="/enterprise/2.4/libraries/">Libraries</a></li>
     </ul>
-  </div>
-
+</div>
   <div id="wrapper">
     <div class="content">
-      <h1 id="management-console">Management Console</h1>
-
+      <h1>
+<a id="management-console" class="anchor" href="#management-console" aria-hidden="true"><span class="octicon octicon-link"></span></a>Management Console</h1>
 <ul id="markdown-toc">
-  <li><a href="#authentication">Authentication</a></li>
-  <li><a href="#upload-a-license-for-the-first-time">Upload a license for the first time</a></li>
-  <li><a href="#upgrade-a-license">Upgrade a license</a></li>
-  <li><a href="#check-configuration-status">Check configuration status</a></li>
-  <li><a href="#start-a-configuration-process">Start a configuration process</a></li>
-  <li><a href="#retrieve-settings">Retrieve settings</a></li>
-  <li><a href="#modify-settings">Modify settings</a></li>
-  <li><a href="#check-maintenance-status">Check maintenance status</a></li>
-  <li><a href="#enable-or-disable-maintenance-mode">Enable or disable maintenance mode</a></li>
-  <li><a href="#retrieve-authorized-ssh-keys">Retrieve authorized SSH keys</a></li>
-  <li><a href="#add-a-new-authorized-ssh-key">Add a new authorized SSH key</a></li>
-  <li><a href="#remove-an-authorized-ssh-key">Remove an authorized SSH key</a></li>
+<li><a href="#authentication" id="markdown-toc-authentication">Authentication</a></li>
+<li><a href="#upload-a-license-for-the-first-time" id="markdown-toc-upload-a-license-for-the-first-time">Upload a license for the first time</a></li>
+<li><a href="#upgrade-a-license" id="markdown-toc-upgrade-a-license">Upgrade a license</a></li>
+<li><a href="#check-configuration-status" id="markdown-toc-check-configuration-status">Check configuration status</a></li>
+<li><a href="#start-a-configuration-process" id="markdown-toc-start-a-configuration-process">Start a configuration process</a></li>
+<li><a href="#retrieve-settings" id="markdown-toc-retrieve-settings">Retrieve settings</a></li>
+<li><a href="#modify-settings" id="markdown-toc-modify-settings">Modify settings</a></li>
+<li><a href="#check-maintenance-status" id="markdown-toc-check-maintenance-status">Check maintenance status</a></li>
+<li><a href="#enable-or-disable-maintenance-mode" id="markdown-toc-enable-or-disable-maintenance-mode">Enable or disable maintenance mode</a></li>
+<li><a href="#retrieve-authorized-ssh-keys" id="markdown-toc-retrieve-authorized-ssh-keys">Retrieve authorized SSH keys</a></li>
+<li><a href="#add-a-new-authorized-ssh-key" id="markdown-toc-add-a-new-authorized-ssh-key">Add a new authorized SSH key</a></li>
+<li><a href="#remove-an-authorized-ssh-key" id="markdown-toc-remove-an-authorized-ssh-key">Remove an authorized SSH key</a></li>
 </ul>
-
 <p>The Management Console API helps you manage your GitHub Enterprise installation.</p>
-
 <div class="alert tip">
-
 <p>You must explicitly set the port number when making API calls to the Management Console. If SSL is enabled on your Enterprise instance, the port number is <code>8443</code>; otherwise, the port number is <code>8080</code>.</p>
-
-<p>If you don’t want to provide a port number, you’ll need to configure your tool to automatically follow redirects.</p>
-
+<p>If you don't want to provide a port number, you'll need to configure your tool to automatically follow redirects.</p>
+<p>You may also need to add the <a href="http://curl.haxx.se/docs/manpage.html#-k"><code>-k</code> flag</a> when using <code>curl</code>, since GitHub Enterprise uses a self-signed certificate before you <a href="https://help.github.com/enterprise/admin/guides/installation/dns-hostname-subdomain-isolation-and-ssl/#ssl">add your own SSL certificate</a>.</p>
 </div>
-
-<h2 id="authentication">Authentication</h2>
-
-<p>You need to pass your <a href="https://help.github.com/enterprise/2.0/admin/articles/accessing-the-management-console/">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-for-the-first-time"><code>/setup/api/start</code></a>.</p>
-
+<h2>
+<a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authentication</h2>
+<p>You need to pass your <a href="https://help.github.com/enterprise/admin/articles/accessing-the-management-console/">Management Console password</a> as an authentication token to every Management Console API endpoint except <a href="#upload-a-license-for-the-first-time"><code>/setup/api/start</code></a>.</p>
 <p>Use the <code>api_key</code> parameter to send this token with each request. For example:</p>
-
-<pre class="terminal">
-$ curl -L 'http://<em>hostname</em>:<em>admin_port</em>/setup/api?api_key=<em>your-amazing-password</em>'
+<pre class="command-line">
+<span class="command">curl -L 'https://<em>hostname</em>:<em>admin_port</em>/setup/api?api_key=<em>your-amazing-password</em>'</span>
 </pre>
-
 <p>You can also use standard HTTP authentication to send this token. For example:</p>
-
-<pre class="terminal">
-$ curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api'
+<pre class="command-line">
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api'</span>
 </pre>
-
-<h2 id="upload-a-license-for-the-first-time">Upload a license for the first time</h2>
-
+<h2>
+<a id="upload-a-license-for-the-first-time" class="anchor" href="#upload-a-license-for-the-first-time" aria-hidden="true"><span class="octicon octicon-link"></span></a>Upload a license for the first time</h2>
 <p>When you boot a virtual machine for the first time, you can use the following endpoint to upload a license:</p>
-
 <pre><code>POST /setup/api/start
 </code></pre>
-
 <p>Note that you need to POST to <a href="#start-a-configuration-process"><code>/setup/api/configure</code></a> to start the actual configuration process.</p>
-
 <div class="alert warning">
-
 <p>When using this endpoint, your Enterprise instance must have a password set. This can be accomplished two ways:</p>
-
 <ol>
-  <li>If you’re working directly with the API before accessing the web interface, you must pass in the password parameter to set your password.</li>
-  <li>If you set up your instance via the web interface before accessing the API, your calls to this endpoint do not need the password parameter.</li>
+<li>If you're working directly with the API before accessing the web interface, you must pass in the password parameter to set your password.</li>
+<li>If you set up your instance via the web interface before accessing the API, your calls to this endpoint do not need the password parameter.</li>
 </ol>
-
 </div>
-
-<h3 id="parameters">Parameters</h3>
-
+<h3>
+<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>license</code></td>
-      <td><code>string</code></td>
-      <td>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>license</code></td>
+<td><code>string</code></td>
+<td>
 <strong>Required</strong>. The content of your <em>.ghl</em> license file.</td>
-    </tr>
-    <tr>
-      <td><code>password</code></td>
-      <td><code>string</code></td>
-      <td>You <strong>must</strong> provide a password <em>only if</em> you are uploading your license for the first time. If you previously set a password through the web interface, you don’t need this parameter.</td>
-    </tr>
-    <tr>
-      <td><code>settings</code></td>
-      <td><code>string</code></td>
-      <td>Optional path to a JSON file containing your installation settings.</td>
-    </tr>
-  </tbody>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td><code>string</code></td>
+<td>You <strong>must</strong> provide a password <em>only if</em> you are uploading your license for the first time. If you previously set a password through the web interface, you don't need this parameter.</td>
+</tr>
+<tr>
+<td><code>settings</code></td>
+<td><code>string</code></td>
+<td>Optional path to a JSON file containing your installation settings.</td>
+</tr>
+</tbody>
 </table>
-
 <p>For a list of the available settings, see <a href="#retrieve-settings">the <code>/setup/api/settings</code> endpoint</a>.</p>
-
-<h3 id="response">Response</h3>
-
-<pre class="terminal">
-HTTP/1.1 202 Created
-Location: http://<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="command-line">
+<span class="output">HTTP/1.1 202 Created</span>
+<span class="output">Location: http://<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck</span>
 </pre>
-
-<h3 id="example">Example</h3>
-
-<pre class="terminal">
-curl -L -X POST 'http://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em>
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L -X POST 'https://<em>hostname</em>:<em>admin_port</em>/setup/api/start' -F license=@<em>/path/to/github-enterprise.ghl</em> -F "password=<em>your-amazing-password</em>" -F settings=&lt;<em>/path/to/settings.json</em></span>
 </pre>
-
-<h2 id="upgrade-a-license">Upgrade a license</h2>
-
+<h2>
+<a id="upgrade-a-license" class="anchor" href="#upgrade-a-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>Upgrade a license</h2>
 <p>This API upgrades your license and also triggers the configuration process:</p>
-
 <pre><code>POST /setup/api/upgrade
 </code></pre>
-
-<h3 id="parameters-1">Parameters</h3>
-
+<h3>
+<a id="parameters-1" class="anchor" href="#parameters-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>license</code></td>
-      <td><code>string</code></td>
-      <td>The content of your new <em>.ghl</em> license file.</td>
-    </tr>
-  </tbody>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code>license</code></td>
+<td><code>string</code></td>
+<td>The content of your new <em>.ghl</em> license file.</td>
+</tr></tbody>
 </table>
-
-<h3 id="response-1">Response</h3>
-
-<pre class="terminal">
-HTTP/1.1 202 Accepted
-Location: http://<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="command-line">
+<span class="output">HTTP/1.1 202 Accepted</span>
+<span class="output">Location: http://<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck</span>
 </pre>
-
-<h3 id="example-1">Example</h3>
-
-<pre class="terminal">
-curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/upgrade'
+<h3>
+<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/upgrade'</span>
 </pre>
-
-<h2 id="check-configuration-status">Check configuration status</h2>
-
+<h2>
+<a id="check-configuration-status" class="anchor" href="#check-configuration-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check configuration status</h2>
 <p>This endpoint allows you to check the status of the most recent configuration process:</p>
-
 <pre><code>GET /setup/api/configcheck
 </code></pre>
-
 <p>Note that you may need to wait several seconds after you start a process before you can
 check its status.</p>
-
-<h3 id="response-2">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"running"</span><span class="p">,</span>
-  <span class="s2">"progress"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"DONE"</span><span class="p">,</span>
-      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Appliance core components"</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"DONE"</span><span class="p">,</span>
-      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"GitHub utilities"</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"DONE"</span><span class="p">,</span>
-      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"GitHub applications"</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CONFIGURING"</span><span class="p">,</span>
-      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"GitHub services"</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"PENDING"</span><span class="p">,</span>
-      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Reloading appliance services"</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
-
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"running"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"progress"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DONE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Appliance core components"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DONE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub utilities"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DONE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub applications"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CONFIGURING"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub services"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reloading appliance services"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 <p>The different statuses are:</p>
-
 <table>
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>PENDING</code></td>
-      <td>The job has not started yet</td>
-    </tr>
-    <tr>
-      <td><code>CONFIGURING</code></td>
-      <td>The job is running</td>
-    </tr>
-    <tr>
-      <td><code>DONE</code></td>
-      <td>The job has finished correctly</td>
-    </tr>
-    <tr>
-      <td><code>FAILED</code></td>
-      <td>The job has finished unexpectedly</td>
-    </tr>
-  </tbody>
+<thead><tr>
+<th>Status</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>PENDING</code></td>
+<td>The job has not started yet</td>
+</tr>
+<tr>
+<td><code>CONFIGURING</code></td>
+<td>The job is running</td>
+</tr>
+<tr>
+<td><code>DONE</code></td>
+<td>The job has finished correctly</td>
+</tr>
+<tr>
+<td><code>FAILED</code></td>
+<td>The job has finished unexpectedly</td>
+</tr>
+</tbody>
 </table>
-
-<h3 id="example-2">Example</h3>
-
-<pre class="terminal">
-curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck'
+<h3>
+<a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck'</span>
 </pre>
-
-<h2 id="start-a-configuration-process">Start a configuration process</h2>
-
+<h2>
+<a id="start-a-configuration-process" class="anchor" href="#start-a-configuration-process" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start a configuration process</h2>
 <p>This endpoint allows you to start a configuration process at any time for your updated settings to take effect:</p>
-
 <pre><code>POST /setup/api/configure
 </code></pre>
-
-<h3 id="response-3">Response</h3>
-
-<pre class="terminal">
-HTTP/1.1 202 Accepted
-Location: http://<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck
+<h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="command-line">
+<span class="output">HTTP/1.1 202 Accepted</span>
+<span class="output">Location: http://<em>hostname</em>:<em>admin_port</em>/setup/api/configcheck</span>
 </pre>
-
-<h3 id="example-3">Example</h3>
-
-<pre class="terminal">
-curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/configure'
+<h3>
+<a id="example-3" class="anchor" href="#example-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/configure'</span>
 </pre>
-
-<h2 id="retrieve-settings">Retrieve settings</h2>
-
+<h2>
+<a id="retrieve-settings" class="anchor" href="#retrieve-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Retrieve settings</h2>
 <pre><code>GET /setup/api/settings
 </code></pre>
-
-<h3 id="response-4">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
+<h3>
+<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"enterprise"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"private_mode"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="s2">"github_hostname"</span><span class="p">:</span> <span class="s2">"ghe.local"</span><span class="p">,</span>
-    <span class="s2">"auth_mode"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
-    <span class="s2">"storage_mode"</span><span class="p">:</span> <span class="s2">"rootfs"</span><span class="p">,</span>
-    <span class="s2">"admin_password"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="s2">"configuration_id"</span><span class="p">:</span> <span class="mi">1401777404</span><span class="p">,</span>
-    <span class="s2">"configuration_run_count"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"11.10.332"</span><span class="p">,</span>
-    <span class="s2">"avatar"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"uri"</span><span class="p">:</span> <span class="s2">""</span>
-    <span class="p">},</span>
-    <span class="s2">"customer"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"GitHub"</span><span class="p">,</span>
-      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"stannis@themannis.biz"</span><span class="p">,</span>
-      <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"af6cac80-e4e1-012e-d822-1231380e52e9"</span><span class="p">,</span>
-      <span class="s2">"secret_key_data"</span><span class="p">:</span> <span class="s2">"-----BEGIN PGP PRIVATE KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nlQcYBE5TCgsBEACk4yHpUcapplebaumBMXYMiLF+nCQ0lxpx...\n-----END PGP PRIVATE KEY BLOCK-----\n"</span><span class="p">,</span>
-      <span class="s2">"public_key_data"</span><span class="p">:</span> <span class="s2">"-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nmI0ETqzZYgEEALSe6snowdenXyqvLfSQ34HWD6C7....\n-----END PGP PUBLIC KEY BLOCK-----\n"</span>
-    <span class="p">},</span>
-    <span class="s2">"license"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"seats"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">"evaluation"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"expire_at"</span><span class="p">:</span> <span class="s2">"2015-04-27T00:00:00-07:00"</span><span class="p">,</span>
-      <span class="s2">"perpetual"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"unlimited_seating"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="s2">"support_key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3N...."</span><span class="p">,</span>
-      <span class="s2">"ssh_allowed"</span><span class="p">:</span> <span class="kc">true</span>
-    <span class="p">},</span>
-    <span class="s2">"github_ssl"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"cert"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-      <span class="s2">"key"</span><span class="p">:</span> <span class="kc">null</span>
-    <span class="p">},</span>
-    <span class="s2">"ldap"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"host"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"port"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"base"</span><span class="p">:</span> <span class="p">[</span>
-
-      <span class="p">],</span>
-      <span class="s2">"uid"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"bind_dn"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"password"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"Plain"</span><span class="p">,</span>
-      <span class="s2">"user_groups"</span><span class="p">:</span> <span class="p">[</span>
-
-      <span class="p">],</span>
-      <span class="s2">"admin_group"</span><span class="p">:</span> <span class="s2">""</span>
-    <span class="p">},</span>
-    <span class="s2">"cas"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">""</span>
-    <span class="p">},</span>
-    <span class="s2">"github_oauth"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"client_id"</span><span class="p">:</span> <span class="s2">"12313412"</span><span class="p">,</span>
-      <span class="s2">"client_secret"</span><span class="p">:</span> <span class="s2">"kj123131132"</span><span class="p">,</span>
-      <span class="s2">"organization_name"</span><span class="p">:</span> <span class="s2">"Homestar Runners"</span><span class="p">,</span>
-      <span class="s2">"organization_team"</span><span class="p">:</span> <span class="s2">"homestarrunners/characters"</span>
-    <span class="p">},</span>
-    <span class="s2">"smtp"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"smtp.example.com"</span><span class="p">,</span>
-      <span class="s2">"authentication"</span><span class="p">:</span> <span class="s2">"plain"</span><span class="p">,</span>
-      <span class="s2">"port"</span><span class="p">:</span> <span class="s2">"1234"</span><span class="p">,</span>
-      <span class="s2">"domain"</span><span class="p">:</span> <span class="s2">"blah"</span><span class="p">,</span>
-      <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span>
-      <span class="s2">"user_name"</span><span class="p">:</span> <span class="s2">"mr_foo"</span><span class="p">,</span>
-      <span class="s2">"enable_starttls_auto"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-      <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"bar"</span><span class="p">,</span>
-      <span class="s2">"support_address"</span><span class="p">:</span> <span class="s2">"enterprise@github.com"</span><span class="p">,</span>
-      <span class="s2">"noreply_address"</span><span class="p">:</span> <span class="s2">"noreply@github.com"</span>
-    <span class="p">},</span>
-    <span class="s2">"dns"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"primary_nameserver"</span><span class="p">:</span> <span class="s2">"8.8.8.8"</span><span class="p">,</span>
-      <span class="s2">"secondary_nameserver"</span><span class="p">:</span> <span class="s2">"8.8.4.4"</span>
-    <span class="p">},</span>
-    <span class="s2">"ntp"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"primary_server"</span><span class="p">:</span> <span class="s2">"0.ubuntu.pool.ntp.org"</span><span class="p">,</span>
-      <span class="s2">"secondary_server"</span><span class="p">:</span> <span class="s2">"1.ubuntu.pool.ntp.org"</span>
-    <span class="p">},</span>
-    <span class="s2">"timezone"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"identifier"</span><span class="p">:</span> <span class="s2">"UTC"</span>
-    <span class="p">},</span>
-    <span class="s2">"device"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/dev/xyz"</span>
-    <span class="p">},</span>
-    <span class="s2">"snmp"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"community"</span><span class="p">:</span> <span class="s2">""</span>
-    <span class="p">},</span>
-    <span class="s2">"rsyslog"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"server"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"protocol_name"</span><span class="p">:</span> <span class="s2">"TCP"</span>
-    <span class="p">},</span>
-    <span class="s2">"assets"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"storage"</span><span class="p">:</span> <span class="s2">"file"</span><span class="p">,</span>
-      <span class="s2">"bucket"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-      <span class="s2">"host_name"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-      <span class="s2">"key_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-      <span class="s2">"access_key"</span><span class="p">:</span> <span class="kc">null</span>
-    <span class="p">},</span>
-    <span class="s2">"pages"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">true</span>
-    <span class="p">},</span>
-    <span class="s2">"collectd"</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">"enabled"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-      <span class="s2">"server"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"port"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"encryption"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
-      <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"foo"</span><span class="p">,</span>
-      <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"bar"</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-  <span class="s2">"run_list"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">"role[configure]"</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="example-4">Example</h3>
-
-<pre class="terminal">
-curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings'
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"enterprise"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"private_mode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"github_hostname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ghe.local"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"auth_mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"storage_mode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rootfs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"admin_password"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"configuration_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1401777404</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"configuration_run_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"package_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11.10.332"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GitHub"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stannis@themannis.biz"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"af6cac80-e4e1-012e-d822-1231380e52e9"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secret_key_data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN PGP PRIVATE KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nlQcYBE5TCgsBEACk4yHpUcapplebaumBMXYMiLF+nCQ0lxpx...\n-----END PGP PRIVATE KEY BLOCK-----\n"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"public_key_data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: GnuPG v1.4.10 (GNU/Linux)\n\nmI0ETqzZYgEEALSe6snowdenXyqvLfSQ34HWD6C7....\n-----END PGP PUBLIC KEY BLOCK-----\n"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"license"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"seats"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"evaluation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expire_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-27T00:00:00-07:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"perpetual"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"unlimited_seating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"support_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3N...."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ssh_allowed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"github_ssl"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cert"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"ldap"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"bind_dn"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Plain"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_groups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"admin_group"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"cas"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"github_oauth"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12313412"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"client_secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kj123131132"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"organization_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Homestar Runners"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"organization_team"</span><span class="p">:</span><span class="w"> </span><span class="s2">"homestarrunners/characters"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"smtp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.example.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"authentication"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plain"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blah"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mr_foo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"enable_starttls_auto"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"support_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enterprise@github.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"noreply_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noreply@github.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"dns"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"primary_nameserver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.8.8.8"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secondary_nameserver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.8.4.4"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"ntp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"primary_server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.ubuntu.pool.ntp.org"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secondary_server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.ubuntu.pool.ntp.org"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UTC"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"device"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/dev/xyz"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"snmp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"community"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"rsyslog"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"protocol_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TCP"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"assets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"storage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"file"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"bucket"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"host_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"key_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"access_key"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"collectd"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"encryption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"run_list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"role[configure]"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="example-4" class="anchor" href="#example-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings'</span>
 </pre>
-
-<h2 id="modify-settings">Modify settings</h2>
-
+<h2>
+<a id="modify-settings" class="anchor" href="#modify-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modify settings</h2>
 <pre><code>PUT /setup/api/settings
 </code></pre>
-
-<h3 id="parameters-2">Parameters</h3>
-
+<h3>
+<a id="parameters-2" class="anchor" href="#parameters-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>settings</code></td>
-      <td><code>string</code></td>
-      <td>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code>settings</code></td>
+<td><code>string</code></td>
+<td>
 <strong>Required</strong>. A JSON string with the new settings.</td>
-    </tr>
-  </tbody>
+</tr></tbody>
 </table>
-
-<h3 id="response-5">Response</h3>
-
-<pre class="terminal">
-HTTP/1.1 204 No Content
+<h3>
+<a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="command-line">
+<span class="output">HTTP/1.1 204 No Content</span>
 </pre>
-
-<h3 id="example-5">Example</h3>
-
-<pre class="terminal">
-curl -L -X PUT 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"
+<h3>
+<a id="example-5" class="anchor" href="#example-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L -X PUT 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings' --data-urlencode "settings=`cat /path/to/settings.json`"</span>
 </pre>
-
-<h2 id="check-maintenance-status">Check maintenance status</h2>
-
-<p>Check your installation’s maintenance status:</p>
-
+<h2>
+<a id="check-maintenance-status" class="anchor" href="#check-maintenance-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check maintenance status</h2>
+<p>Check your installation's maintenance status:</p>
 <pre><code>GET /setup/api/maintenance
 </code></pre>
-
-<h3 id="response-6">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
+<h3>
+<a id="response-6" class="anchor" href="#response-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"scheduled"</span><span class="p">,</span>
-  <span class="s2">"scheduled_time"</span><span class="p">:</span> <span class="s2">"Tuesday, January 22 at 15 =&gt; 34 -0800"</span><span class="p">,</span>
-  <span class="s2">"connection_services"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"git operations"</span><span class="p">,</span>
-      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">0</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mysql queries"</span><span class="p">,</span>
-      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">233</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"resque jobs"</span><span class="p">,</span>
-      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">54</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="example-6">Example</h3>
-
-<pre class="terminal">
-curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/maintenance'
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scheduled_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tuesday, January 22 at 15 =&gt; 34 -0800"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"connection_services"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git operations"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql queries"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">233</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resque jobs"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="example-6" class="anchor" href="#example-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/maintenance'</span>
 </pre>
-
-<h2 id="enable-or-disable-maintenance-mode">Enable or disable maintenance mode</h2>
-
+<h2>
+<a id="enable-or-disable-maintenance-mode" class="anchor" href="#enable-or-disable-maintenance-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enable or disable maintenance mode</h2>
 <pre><code>POST /setup/api/maintenance
 </code></pre>
-
-<h3 id="parameters-3">Parameters</h3>
-
+<h3>
+<a id="parameters-3" class="anchor" href="#parameters-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>maintenance</code></td>
-      <td><code>string</code></td>
-      <td>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code>maintenance</code></td>
+<td><code>string</code></td>
+<td>
 <strong>Required</strong>. A JSON string with the attributes <code>enabled</code> and <code>when</code>.</td>
-    </tr>
-  </tbody>
+</tr></tbody>
 </table>
-
-<p>The possible values for <code>enabled</code> are <code>true</code> and <code>false</code>. When it’s <code>false</code>,
+<p>The possible values for <code>enabled</code> are <code>true</code> and <code>false</code>. When it's <code>false</code>,
 the attribute <code>when</code> is ignored and the maintenance mode is turned off. <code>when</code> defines the time period when the maintenance was enabled.</p>
-
 <p>The possible values for <code>when</code> are <code>now</code> or any date parseable by
 <a href="https://github.com/mojombo/chronic">mojombo/chronic</a>.</p>
-
-<h3 id="response-7">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
+<h3>
+<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">{</span>
-  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"scheduled"</span><span class="p">,</span>
-  <span class="s2">"scheduled_time"</span><span class="p">:</span> <span class="s2">"Tuesday, January 22 at 15 =&gt; 34 -0800"</span><span class="p">,</span>
-  <span class="s2">"connection_services"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"git operations"</span><span class="p">,</span>
-      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">0</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mysql queries"</span><span class="p">,</span>
-      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">233</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"resque jobs"</span><span class="p">,</span>
-      <span class="s2">"number"</span><span class="p">:</span> <span class="mi">54</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span></code></pre>
-
-<h3 id="example-7">Example</h3>
-
-<pre class="terminal">
-curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"scheduled"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scheduled_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tuesday, January 22 at 15 =&gt; 34 -0800"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"connection_services"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"git operations"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql queries"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">233</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"resque jobs"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"number"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="example-7" class="anchor" href="#example-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/maintenance' -d 'maintenance=<em>{"enabled":true, "when":"now"}</em>'</span>
 </pre>
-
-<h2 id="retrieve-authorized-ssh-keys">Retrieve authorized SSH keys</h2>
-
+<h2>
+<a id="retrieve-authorized-ssh-keys" class="anchor" href="#retrieve-authorized-ssh-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>Retrieve authorized SSH keys</h2>
 <pre><code>GET /setup/api/settings/authorized-keys
 </code></pre>
-
-<h3 id="response-8">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
+<h3>
+<a id="response-8" class="anchor" href="#response-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
-    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
-    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h3 id="example-8">Example</h3>
-
-<pre class="terminal">
-curl -L 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys'
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pretty-print"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pretty-print"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="example-8" class="anchor" href="#example-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys'</span>
 </pre>
-
-<h2 id="add-a-new-authorized-ssh-key">Add a new authorized SSH key</h2>
-
+<h2>
+<a id="add-a-new-authorized-ssh-key" class="anchor" href="#add-a-new-authorized-ssh-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add a new authorized SSH key</h2>
 <pre><code>POST /setup/api/settings/authorized-keys
 </code></pre>
-
-<h3 id="parameters-4">Parameters</h3>
-
+<h3>
+<a id="parameters-4" class="anchor" href="#parameters-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>authorized_key</code></td>
-      <td><code>string</code></td>
-      <td>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code>authorized_key</code></td>
+<td><code>string</code></td>
+<td>
 <strong>Required</strong>. The path to the public SSH key.</td>
-    </tr>
-  </tbody>
+</tr></tbody>
 </table>
-
-<h3 id="response-9">Response</h3>
-
-<pre class="headers"><code>Status: 201 Created
+<h3>
+<a id="response-9" class="anchor" href="#response-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 201 Created
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
-    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
-    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
-    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h3 id="example-9">Example</h3>
-
-<pre class="terminal">
-curl -L -X POST 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pretty-print"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pretty-print"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pretty-print"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="example-9" class="anchor" href="#example-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L -X POST 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em></span>
 </pre>
-
-<h2 id="remove-an-authorized-ssh-key">Remove an authorized SSH key</h2>
-
+<h2>
+<a id="remove-an-authorized-ssh-key" class="anchor" href="#remove-an-authorized-ssh-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remove an authorized SSH key</h2>
 <pre><code>DELETE /setup/api/settings/authorized-keys
 </code></pre>
-
-<h3 id="parameters-5">Parameters</h3>
-
+<h3>
+<a id="parameters-5" class="anchor" href="#parameters-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>authorized_key</code></td>
-      <td><code>string</code></td>
-      <td>
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr>
+<td><code>authorized_key</code></td>
+<td><code>string</code></td>
+<td>
 <strong>Required</strong>. The path to the public SSH key.</td>
-    </tr>
-  </tbody>
+</tr></tbody>
 </table>
-
-<h3 id="response-10">Response</h3>
-
-<pre class="headers"><code>Status: 200 OK
+<h3>
+<a id="response-10" class="anchor" href="#response-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999</code></pre>
-
-<pre class="body-response"><code class="language-javascript highlight"><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
-    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span>
-    <span class="s2">"pretty-print"</span><span class="p">:</span> <span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span>
-  <span class="p">}</span>
-<span class="p">]</span></code></pre>
-
-<h3 id="example-10">Example</h3>
-
-<pre class="terminal">
-curl -L -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em>
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pretty-print"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa AAAAB3NzaC1yc2EAAAAB..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pretty-print"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ssh-rsa 01:14:0f:f2:0f:e2:fe:e8:f4:72:62:af:75:f7:1a:88:3e:04:92:64"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="example-10" class="anchor" href="#example-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<pre class="command-line">
+<span class="command">curl -L -X DELETE 'https://api_key:<em>your-amazing-password</em>@<em>hostname</em>:<em>admin_port</em>/setup/api/settings/authorized-keys' -F authorized_key=@<em>/path/to/key.pub</em></span>
 </pre>
-
     </div>
-
     <div id="js-sidebar" class="sidebar-shell">
   <div class="js-toggle-list sidebar-module expandable">
     <ul>
-      <li class="js-topic">
+<li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/">Overview</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/media/">Media Types</a></li>
+<li><a href="/enterprise/2.4/v3/media/">Media Types</a></li>
           <li><a href="/enterprise/2.4/v3/oauth/">OAuth</a></li>
           <li><a href="/enterprise/2.4/v3/oauth_authorizations/">OAuth Authorizations API</a></li>
           <li><a href="/enterprise/2.4/v3/auth/">Other Authentication Methods</a></li>
           <li><a href="/enterprise/2.4/v3/troubleshooting/">Troubleshooting</a></li>
           <li><a href="/enterprise/2.4/v3/versions/">Versions</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/activity/">Activity</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/activity/events/">Events</a></li>
+<li><a href="/enterprise/2.4/v3/activity/events/">Events</a></li>
           <li><a href="/enterprise/2.4/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
           <li><a href="/enterprise/2.4/v3/activity/feeds/">Feeds</a></li>
           <li><a href="/enterprise/2.4/v3/activity/notifications/">Notifications</a></li>
           <li><a href="/enterprise/2.4/v3/activity/starring/">Starring</a></li>
           <li><a href="/enterprise/2.4/v3/activity/watching/">Watching</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/gists/">Gists</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/gists/comments/">Comments</a></li>
+<li><a href="/enterprise/2.4/v3/gists/comments/">Comments</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/git/">Git Data</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/git/blobs/">Blobs</a></li>
+<li><a href="/enterprise/2.4/v3/git/blobs/">Blobs</a></li>
           <li><a href="/enterprise/2.4/v3/git/commits/">Commits</a></li>
           <li><a href="/enterprise/2.4/v3/git/refs/">References</a></li>
           <li><a href="/enterprise/2.4/v3/git/tags/">Tags</a></li>
           <li><a href="/enterprise/2.4/v3/git/trees/">Trees</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/issues/">Issues</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/issues/assignees/">Assignees</a></li>
+<li><a href="/enterprise/2.4/v3/issues/assignees/">Assignees</a></li>
           <li><a href="/enterprise/2.4/v3/issues/comments/">Comments</a></li>
           <li><a href="/enterprise/2.4/v3/issues/events/">Events</a></li>
           <li><a href="/enterprise/2.4/v3/issues/labels/">Labels</a></li>
           <li><a href="/enterprise/2.4/v3/issues/milestones/">Milestones</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/misc/">Miscellaneous</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/emojis/">Emojis</a></li>
+<li><a href="/enterprise/2.4/v3/emojis/">Emojis</a></li>
           <li><a href="/enterprise/2.4/v3/gitignore/">Gitignore</a></li>
           <li><a href="/enterprise/2.4/v3/licenses/">Licenses</a></li>
           <li><a href="/enterprise/2.4/v3/markdown/">Markdown</a></li>
           <li><a href="/enterprise/2.4/v3/meta/">Meta</a></li>
           <li><a href="/enterprise/2.4/v3/rate_limit/">Rate Limit</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/orgs/">Organizations</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/orgs/members/">Members</a></li>
+<li><a href="/enterprise/2.4/v3/orgs/members/">Members</a></li>
           <li><a href="/enterprise/2.4/v3/orgs/teams/">Teams</a></li>
           <li><a href="/enterprise/2.4/v3/orgs/hooks/">Webhooks</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/pulls/">Pull Requests</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/pulls/comments/">Review Comments</a></li>
+<li><a href="/enterprise/2.4/v3/pulls/comments/">Review Comments</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/repos/">Repositories</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/repos/collaborators/">Collaborators</a></li>
+<li><a href="/enterprise/2.4/v3/repos/collaborators/">Collaborators</a></li>
           <li><a href="/enterprise/2.4/v3/repos/comments/">Comments</a></li>
           <li><a href="/enterprise/2.4/v3/repos/commits/">Commits</a></li>
           <li><a href="/enterprise/2.4/v3/repos/contents/">Contents</a></li>
@@ -813,106 +716,82 @@ curl -L -X DELETE 'http://api_key:<em>your-amazing-password</em>@<em>hostname</e
           <li><a href="/enterprise/2.4/v3/repos/statuses/">Statuses</a></li>
           <li><a href="/enterprise/2.4/v3/repos/hooks/">Webhooks</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/search/">Search</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/search/#search-repositories">Repositories</a></li>
+<li><a href="/enterprise/2.4/v3/search/#search-repositories">Repositories</a></li>
           <li><a href="/enterprise/2.4/v3/search/#search-code">Code</a></li>
           <li><a href="/enterprise/2.4/v3/search/#search-issues">Issues</a></li>
           <li><a href="/enterprise/2.4/v3/search/#search-users">Users</a></li>
           <li><a href="/enterprise/2.4/v3/search/legacy/">Legacy Search</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/users/">Users</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/users/emails/">Emails</a></li>
+<li><a href="/enterprise/2.4/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.4/v3/users/followers/">Followers</a></li>
           <li><a href="/enterprise/2.4/v3/users/keys/">Public Keys</a></li>
           <li><a href="/enterprise/2.4/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
-      </li>
+</li>
       <li class="js-topic">
         <h3>
 <a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.4/v3/enterprise/">Enterprise 2.4</a>
 </h3>
         <ul class="js-guides">
-          <li><a href="/enterprise/2.4/v3/enterprise/admin_stats/">Admin Stats</a></li>
+<li><a href="/enterprise/2.4/v3/enterprise/admin_stats/">Admin Stats</a></li>
           <li><a href="/enterprise/2.4/v3/enterprise/ldap/">LDAP</a></li>
           <li><a href="/enterprise/2.4/v3/enterprise/license/">License</a></li>
           <li><a href="/enterprise/2.4/v3/enterprise/management_console/">Management Console</a></li>
           <li><a href="/enterprise/2.4/v3/enterprise/search_indexing/">Search Indexing</a></li>
           <li><a href="/enterprise/2.4/v3/enterprise/orgs/">Organization Administration</a></li>
         </ul>
-      </li>
+</li>
     </ul>
-  </div> <!-- /sidebar-module -->
+</div> <!-- /sidebar-module -->
   <div class="sidebar-module notice">
     <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
   </div>
 	<div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
 </div>
 <!-- /sidebar-shell -->
-
   </div>
 <!-- #wrapper -->
-
     <div id="footer">
     <div class="lower_footer">
       <ul class="footer-cell">
+<li><a href="https://github.com/github/developer.github.com#licenses">© 2016 GitHub, Inc.</a></li>
         <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
         <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
         <li><a href="https://help.github.com/security/">Security</a></li>
         <li><a href="https://github.com/contact">Contact</a></li>
       </ul>
-
-      <span class="footer-cell">
+<span class="footer-cell">
         <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
       </span>
-
       <ul class="footer-cell">
-        <li><a href="https://status.github.com/">Status</a></li>
+<li><a href="https://status.github.com/">Status</a></li>
         <li><a href="http://training.github.com/">Training</a></li>
         <li><a href="http://shop.github.com/">Shop</a></li>
         <li><a href="https://github.com/blog">Blog</a></li>
         <li><a href="https://github.com/about">About</a></li>
       </ul>
-    </div>
-
-    <div class="wrapper">
-      <p>Design © <span class="js-year"></span> Copyright <span class="js-year"></span> GitHub, Inc. </p>
-    </div>
-
+</div>
   </div>
 <!-- /#footer -->
-  <script type="text/javascript">
-    var _gauges = _gauges || [];
-    (function() {
-      var t   = document.createElement('script');
-      t.type  = 'text/javascript';
-      t.async = true;
-      t.id    = 'gauges-tracker';
-      t.setAttribute('data-site-id', '4f2038e0cb25bc1b55000003');
-      t.src = '//secure.gaug.es/track.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(t, s);
-    })();
-  </script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
     ga('create', 'UA-3769691-37', 'github.com');
     ga('send', 'pageview');
   </script>
-  <script src="/enterprise/2.4/js/retina.js" type="text/javascript"></script>
-
 </body>
 </html>

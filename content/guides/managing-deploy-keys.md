@@ -89,15 +89,19 @@ A deploy key is an SSH key that is stored on your server and grants access to a 
 
 If your server needs to access multiple repositories, you can choose to create a new {{ site.data.variables.product.product_name }} account and attach an SSH key that will be used exclusively for automation.  Since this {{ site.data.variables.product.product_name }} account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
 
+{% if page.version == 'dotcom' %}
+
 {{#tip}}
 
-**Tip:** Our [terms of service](https://help.github.com/articles/github-terms-of-service) state:
+**Tip:** Our [terms of service][tos] state:
 
 > *Accounts registered by "bots" or other automated methods are not permitted.*
 
-This means that you cannot automate the creation of accounts. But if you want to create a single machine user for automating tasks such as deploy scripts in your project or organization, that is totally cool. 
+This means that you cannot automate the creation of accounts. But if you want to create a single machine user for automating tasks such as deploy scripts in your project or organization, that is totally cool.
 
 {{/tip}}
+
+{% endif %}
 
 #### Pros
 
@@ -117,7 +121,7 @@ This means that you cannot automate the creation of accounts. But if you want to
 
 [ssh-agent-forwarding]: /guides/using-ssh-agent-forwarding/
 [generating-ssh-keys]: https://help.github.com/articles/generating-ssh-keys
-[tos]: https://help.github.com/articles/github-terms-of-service
+[tos]: https://help.github.com/articles/github-terms-of-service/
 [git-automation]: https://help.github.com/articles/git-automation-with-oauth-tokens
 [collaborator]: https://help.github.com/articles/how-do-i-add-a-collaborator
 [team]: https://help.github.com/articles/adding-organization-members-to-a-team

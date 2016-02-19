@@ -44,7 +44,57 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-10-18-new-code-search-requirements/">
+      <div class="change" id="/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">
+  <h2 class="title">
+<a id="--search-api-becomes-an-official-part-of-api-v3" class="anchor" href="#--search-api-becomes-an-official-part-of-api-v3" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-10-29-search-api-becomes-an-official-part-of-github-api-v3/">Search API Becomes an Official Part of API v3</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 29, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We're excited to announce that the <a href="/v3/search">new Search API</a> has graduated from <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview mode</a>.
+As of today, the Search API is an official part of <a href="/v3">GitHub API v3</a>.
+As such, the Search API is now stable and suitable for production use.</p>
+
+<h3>
+<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview Media Type No Longer Needed</h3>
+
+<p>If you used the Search API during the preview period, you needed to provide a custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.preview+json
+</code></pre>
+
+<p>Now that the preview period has ended, you no longer need to pass this custom media type.</p>
+
+<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.v3+json
+</code></pre>
+
+<h3>
+<a id="onward" class="anchor" href="#onward" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="onward" class="anchor" href="#onward" aria-hidden="true"><span class="octicon octicon-link"></span></a>Onward!</h3>
+
+<p>Thanks again to everyone that tried out the Search API during the preview period.</p>
+
+<p>We can't wait to see what you build!</p>
+</div>
+
+<div class="change" id="/changes/2013-10-18-new-code-search-requirements/">
   <h2 class="title">
 <a id="--new-validation-rule-for-beta-code-search-api" class="anchor" href="#--new-validation-rule-for-beta-code-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-10-18-new-code-search-requirements/">New Validation Rule for Beta Code Search API</a>
@@ -64,8 +114,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>As we <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">prepare to end the preview period</a> for the new search API,
+  <p>As we <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">prepare to end the preview period</a> for the new search API,
 we're making sure that it's ready to handle the traffic from all the apps you'll build on top of it.</p>
 
 <h2>
@@ -135,8 +184,7 @@ There's no ETA, but we'd like to relax it as soon as it's feasible.</p>
 </ul>
 </div>
 
-<p></p>
-<p>We just added a <a href="/v3/orgs/teams/#list-user-teams">new API method</a> to list all
+  <p>We just added a <a href="/v3/orgs/teams/#list-user-teams">new API method</a> to list all
 the teams for the authenticated user across all organizations:</p>
 
 <pre class="command-line">
@@ -639,74 +687,6 @@ That information is now available in the new <code>X-RateLimit-Reset</code> resp
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-07-01-feeds-api/">
-  <h2 class="title">
-<a id="--feeds-api" class="anchor" href="#--feeds-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    July 1, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Today we're releasing a new <a href="/v3/activity/feeds/">Feeds API</a>, an easy way to list all the Atom
-resources available to the authenticated user.</p>
-
-<pre class="command-line">
-<span class="command">curl -u defunkt https://api.github.com/feeds</span>
-
-<span class="output">{</span>
-<span class="output">  "timeline_url": "https://github.com/timeline",</span>
-<span class="output">  "user_url": "https://github.com/{user}",</span>
-<span class="output">  "current_user_public_url": "https://github.com/defunkt",</span>
-<span class="output">  "current_user_url": "https://github.com/defunkt.private?token=abc123",</span>
-<span class="output">  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",</span>
-<span class="output">  "current_user_organization_url": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",</span>
-<span class="output">  "_links": {</span>
-<span class="output">   "timeline": {</span>
-<span class="output">     "href": "https://github.com/timeline",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "user": {</span>
-<span class="output">     "href": "https://github.com/{user}",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "current_user_public": {</span>
-<span class="output">     "href": "https://github.com/defunkt",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "current_user": {</span>
-<span class="output">     "href": "https://github.com/defunkt.private?token=abc123",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "current_user_actor": {</span>
-<span class="output">     "href": "https://github.com/defunkt.private.actor?token=abc123",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   },</span>
-<span class="output">   "current_user_organization": {</span>
-<span class="output">     "href": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",</span>
-<span class="output">     "type": "application/atom+xml"</span>
-<span class="output">   }</span>
-<span class="output">  }</span>
-<span class="output">}</span>
-</pre>
-
-<p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   <!-- @count_gap refers to the minimum number of sibling pages to show -->
 
@@ -859,6 +839,15 @@ resources available to the authenticated user.</p>
           <li><a href="/v3/issues/milestones/">Milestones</a></li>
         </ul>
       </li>
+      
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/migration/">Migration</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/migration/migrations/">Migrations</a></li>
+          <li><a href="/v3/migration/source_imports/">Source Imports</a></li>
+        </ul>
+      </li>
+      
       <li class="js-topic">
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
@@ -874,9 +863,6 @@ resources available to the authenticated user.</p>
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
-          
-          <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>

@@ -44,7 +44,60 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-08-15-deployments-api-changes/">
+      <div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
+  <h2 class="title">
+<a id="--accepting-organization-invitations-from-the-api" class="anchor" href="#--accepting-organization-invitations-from-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    August 28, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-organization-members-to-a-team">invite</a> new GitHub users to your organization via the API. We're expanding the API to also allow users to view their organization membership statuses and accept any invitations they've received.</p>
+
+<h3>
+<a id="the-new-organization-memberships-api" class="anchor" href="#the-new-organization-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="the-new-organization-memberships-api" class="anchor" href="#the-new-organization-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>The new Organization Memberships API</h3>
+
+<p>When someone <a href="https://help.github.com/articles/adding-organization-members-to-a-team">invites</a> you to an organization, your membership with that organization begins in the "pending" state. The new <a href="/v3/orgs/members/#list-your-organization-memberships">list organization memberships</a> endpoint allows you to find your pending memberships. You can then change them to "active" (accepting the invitation in the process) by using the <a href="/v3/orgs/members/#edit-your-organization-membership">edit organization membership</a> endpoint.</p>
+
+<h3>
+<a id="new-team-membership-api-response-attribute" class="anchor" href="#new-team-membership-api-response-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-team-membership-api-response-attribute" class="anchor" href="#new-team-membership-api-response-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Team Membership API response attribute</h3>
+
+<p>Previously, responses from the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> and <a href="/v3/orgs/teams/#get-team-membership">get team membership</a> endpoints included a "status" attribute, which could either be "active" or "pending". We've renamed this attribute from "status" to "state" for better consistency with our other API calls.</p>
+
+<p>To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until <strong>September 4th, 2014</strong>.</p>
+
+<h3>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h3>
+
+<p>The new Organization Memberships API is available for developers to preview alongside the <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a>. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>While these new APIs are in their preview period, you'll need to provide the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.the-wasp-preview+json
+</code></pre>
+
+<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become official components of GitHub API v3.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API">get in touch with us</a>!</p>
+</div>
+
+<div class="change" id="/changes/2014-08-15-deployments-api-changes/">
   <h2 class="title">
 <a id="--new-features-for-the-deployments-api-preview" class="anchor" href="#--new-features-for-the-deployments-api-preview" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-08-15-deployments-api-changes/">New features for the Deployments API preview</a>
@@ -64,8 +117,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We've added two new features to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>: the ability to query deployments and a new <code>task</code> attribute for different types of deployment tasks.</p>
+  <p>We've added two new features to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>: the ability to query deployments and a new <code>task</code> attribute for different types of deployment tasks.</p>
 
 <h2>
 <a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
@@ -123,7 +175,7 @@
 <p>Unlike the <a href="/v3/orgs/teams/#add-team-member">add team member</a> endpoint, a successful request to the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> endpoint does <em>not</em> guarantee that the user is now a member of the team. If you're trying to migrate to the new endpoint and need to know when a user has been successfully added (not just invited) to a team, please check out <a href="/v3/activity/events/types/#teamaddevent">TeamAddEvent</a>.</p>
 
 <h3>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period-1" class="anchor" href="#preview-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h3>
 
 <p>We're making the new Team Memberships API (and the breaking changes to the <a href="/v3/orgs/teams/#add-team-member">add team member</a> API) available today for developers to preview. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
@@ -386,125 +438,6 @@ count represents the number of contexts submitted for the given commit.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-05-19-deployments-api-updates/">
-  <h2 class="title">
-<a id="--new-attributes-for-the-deployments-api" class="anchor" href="#--new-attributes-for-the-deployments-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-05-19-deployments-api-updates/">New attributes for the Deployments API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 19, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
-      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We're continuing to iterate on the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>, and we're starting to see it satisfy more and more use cases. Today we're introducing new attributes for Deployments and Deployment Statuses as well as a few payload changes.</p>
-
-<p><strong>This is a breaking change for Deployment Status payloads</strong>. If you're trying out this new API during its preview period, you'll need to update your code to continue working with it.</p>
-
-<h2>
-<a id="api-changes-1" class="anchor" href="#api-changes-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Changes</h2>
-
-<p>For Deployments we're introducing the concept of an <code>environment</code>. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, user acceptance testing, etc. We hope this enhancement will enable more use cases for our users that deploy to multiple environments.</p>
-
-<p>Deployments are also persisting the requested deployment <code>ref</code>. Previously we resolved a ref to the current SHA for that ref. Now we'll be keeping the ref around for historical purposes. This is especially helpful if you're deploying branches to verify them before you merge them into your default branch (e.g., "master").</p>
-
-<h2>
-<a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON Payload Changes</h2>
-
-<p>We're also adding a few attributes to the outbound Deployment payloads. We're now including the <code>ref</code> attribute so you know the branch or tag name that resolved to a specific SHA. The <code>environment</code> is also present.</p>
-
-<h2>
-<a id="webhook-changes" class="anchor" href="#webhook-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="webhook-changes" class="anchor" href="#webhook-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Webhook Changes</h2>
-
-<p>The Deployment Status payloads now embed the associated Deployment object. With this enhancement, Deployment Status events received via webhooks will have enough information to notify other systems, without having to call back to the GitHub API for the <code>environment</code>, <code>ref</code>, or payload that was deployed.</p>
-
-<h3>
-<a id="example-deployment-json" class="anchor" href="#example-deployment-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="example-deployment-json" class="anchor" href="#example-deployment-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Deployment JSON</h3>
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/392"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">392</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"837db83be4137ca555d9a5598d0a1ea2987ecfee"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"staging"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"fe"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"fe1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"fe2"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"fe3"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ship it!"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-org"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">521</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://avatars.githubusercontent.com/u/2988?"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:56:47Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:56:47Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/392/statuses"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h3>
-<a id="example-deployment-status-json" class="anchor" href="#example-deployment-status-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="example-deployment-status-json" class="anchor" href="#example-deployment-status-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Deployment Status JSON</h3>
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396/statuses/1"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">392</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"837db83be4137ca555d9a5598d0a1ea2987ecfee"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"fe"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"fe1"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fe2"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fe3"</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying to production"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alysson-goldner"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">540</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:59:36Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:59:36Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396/statuses"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment succeeded"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://deploy.myorg.com/apps/my-repo/logs/420"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:59:39Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-05-09T19:59:39Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"deployment_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/my-repo/deployments/396"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   <!-- @count_gap refers to the minimum number of sibling pages to show -->
 
@@ -683,6 +616,15 @@ count represents the number of contexts submitted for the given commit.</p>
           <li><a href="/v3/issues/milestones/">Milestones</a></li>
         </ul>
       </li>
+      
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/migration/">Migration</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/migration/migrations/">Migrations</a></li>
+          <li><a href="/v3/migration/source_imports/">Source Imports</a></li>
+        </ul>
+      </li>
+      
       <li class="js-topic">
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
@@ -698,9 +640,6 @@ count represents the number of contexts submitted for the given commit.</p>
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
-          
-          <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>

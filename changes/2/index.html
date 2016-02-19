@@ -44,7 +44,118 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-06-17-organizations-endpoint/">
+      <div class="change" id="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">
+  <h2 class="title">
+<a id="--api-enhancements-for-working-with-organization-permissions" class="anchor" href="#--api-enhancements-for-working-with-organization-permissions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 24, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We're introducing several enhancements to allow API developers to take advantage of the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> that we are rolling out. Learn about these enhancements and how you can try them out below.</p>
+
+<p>Since we're rolling out the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> improvements slowly, these enhancements will only apply to certain organizations at first. Most of these enhancements will degrade gracefully (returning an empty array or something similar) if used on an organization that doesn't support improved organization permissions yet. Check the documentation for your specific API to see if errors are possible.</p>
+
+<h2>
+<a id="api-enhancements" class="anchor" href="#api-enhancements" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="api-enhancements" class="anchor" href="#api-enhancements" aria-hidden="true"><span class="octicon octicon-link"></span></a>API enhancements</h2>
+
+<h3>
+<a id="team-permissions" class="anchor" href="#team-permissions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="team-permissions" class="anchor" href="#team-permissions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team permissions</h3>
+
+<p>In our improved permissions system, a team no longer has a single permission that applies to all of its repositories. Instead, each repository is added to a team with its own permission. For example, an organization could use a single team to grant pull access to one repository, push access to a second, and admin access to a third.</p>
+
+<p>The team APIs now support this more granular notion of permissions:</p>
+
+<ul>
+<li>The <a href="/v3/orgs/teams/#add-or-update-team-repository">Add team repository</a> API accepts a <code>permission</code> parameter, so that you can specify whether a team should grant <code>pull</code>, <code>push</code>, or <code>admin</code> access on a given repository.</li>
+<li>In the <a href="/v3/orgs/teams/#list-team-repos">List team repositories</a> and <a href="/v3/orgs/teams/#check-if-a-team-manages-a-repository">Check if a team manages a repository</a> API, the response includes a <code>permissions</code> attribute, indicating whether the team grants <code>pull</code>, <code>push</code>, or <code>admin</code> access on each repository.</li>
+<li>The <code>permission</code> parameter in the <a href="/v3/orgs/teams/#create-team">Create team</a> and <a href="/v3/orgs/teams/#edit-team">Edit team</a> APIs is deprecated. Since teams can grant a different permission on each repository, this parameter no longer dictates what permission a team grants on all of its repositories. Instead, it dictates the default permission that the <a href="/v3/orgs/teams/#add-or-update-team-repository">Add team repository</a> API will use for requests where no <code>permission</code> parameter is specified.</li>
+</ul>
+
+<h3>
+<a id="team-privacy" class="anchor" href="#team-privacy" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="team-privacy" class="anchor" href="#team-privacy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team privacy</h3>
+
+<p>We now allow you to modify the privacy level of your teams. A "secret" team can only be seen by organization owners and people who are members of that team (which is how all teams have worked historically), while a "closed" team is visible to every member of the organization (which makes it easier to use <a href="https://github.com/blog/1121-introducing-team-mentions">@mentions</a> throughout your organization).</p>
+
+<p>The team APIs now support this new team privacy concept:</p>
+
+<ul>
+<li>The <a href="/v3/orgs/teams/#create-team">Create team</a> and <a href="/v3/orgs/teams/#edit-team">Edit team</a> APIs accept a <code>privacy</code> parameter, so that you can specify whether a team should be <code>secret</code> or <code>closed</code>.</li>
+<li>All team resources in the API now include a <code>privacy</code> attribute, indicating whether the team is <code>secret</code> or <code>closed</code>.</li>
+</ul>
+
+<h3>
+<a id="team-maintainers" class="anchor" href="#team-maintainers" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="team-maintainers" class="anchor" href="#team-maintainers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team maintainers</h3>
+
+<p>We've added the ability for you to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member of a team to be a "maintainer" of that team. A maintainer can add and remove team members and change the team's title and description.</p>
+
+<p>The team membership APIs now support this new team maintainer concept:</p>
+
+<ul>
+<li>The <a href="/v3/orgs/teams/#add-team-membership">Add team membership</a> API accepts a <code>role</code> parameter, so that you can specify whether a given team member should be a <code>maintainer</code> or a regular <code>member</code>.</li>
+<li>The <a href="/v3/orgs/teams/#list-team-members">List team members</a> API accepts an optional <code>role</code> parameter, allowing you to fetch only <code>maintainer</code>s or only regular <code>member</code>s.</li>
+<li>In the <a href="/v3/orgs/teams/#get-team-membership">Get team membership</a> and <a href="/v3/orgs/teams/#add-team-membership">Add team membership</a> APIs, the response includes a <code>role</code> attribute, indicating whether a user is a <code>maintainer</code> or a regular <code>member</code> of the team.</li>
+</ul>
+
+<p>For more information on our improved team permissions, check out our <a href="https://help.github.com/articles/improved-organization-permissions/#understanding-team-permissions">documentation</a>.</p>
+
+<h3>
+<a id="filtering-organization-members-by-role" class="anchor" href="#filtering-organization-members-by-role" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="filtering-organization-members-by-role" class="anchor" href="#filtering-organization-members-by-role" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filtering organization members by role</h3>
+
+<p>The organization <a href="/v3/orgs/members/#members-list">Members list</a> API now accepts a <code>role</code> parameter, so that you can request to see only the owners (or non-owners) of your organization.</p>
+
+<h3>
+<a id="repository-collaborators" class="anchor" href="#repository-collaborators" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="repository-collaborators" class="anchor" href="#repository-collaborators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repository collaborators</h3>
+
+<p>We now allow you to add collaborators directly to organization-owned repositories, just like we always have for user-owned repositories.</p>
+
+<p>The collaborator APIs now support organization-owned repositories:</p>
+
+<ul>
+<li>The <a href="/v3/repos/collaborators/#add-user-as-a-collaborator">Add user as a collaborator</a> API works for organization-owned repositories. We've also added a <code>permission</code> parameter to it (currently valid for organization-owned repositories only), so that you can specify what level of access the collaborator should have on the repository.</li>
+<li>In the <a href="/v3/repos/collaborators/#list-collaborators">List collaborators</a> API, the response includes a <code>permissions</code> attribute describing the permissions that each collaborator has on your organization's repositories.</li>
+</ul>
+
+<h2>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
+
+<p>Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.</p>
+
+<p>While these enhancements are in their preview period, you'll need to provide the following <a href="/v3/media/">custom media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.ironman-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<h2>
+<a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Send us your feedback</h2>
+
+<p>We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
+</div>
+
+<div class="change" id="/changes/2015-06-17-organizations-endpoint/">
   <h2 class="title">
 <a id="--list-all-organizations" class="anchor" href="#--list-all-organizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2015-06-17-organizations-endpoint/">List all organizations</a>
@@ -388,7 +499,7 @@ media type.</p>
 <p>Continuing our <a href="https://github.com/twbs/bootstrap">twbs/bootstrap</a> example, this repository used to be owned by the <a href="https://github.com/twitter">@twitter</a> organization, and it was therefore located at <a href="https://github.com/twitter/bootstrap">twitter/bootstrap</a>. With repository redirects, you'll be able to make an API request using the repository's old location and receive <a href="/v3/#http-redirects">either a <code>301</code> or <code>307</code> HTTP redirect</a>, depending on the type of request being made. You can then follow the redirect to the new location.</p>
 
 <h2>
-<a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="send-us-your-feedback-1" class="anchor" href="#send-us-your-feedback-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Send us your feedback</h2>
 
 <p>We hope you'll take these redirects for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects">let us know what you think</a>. Happy redirecting!</p>
@@ -466,61 +577,6 @@ media type.</p>
 <p>After listening to your feedback on the upcoming <a href="/changes/2014-12-08-organization-permissions-api-preview/">breaking changes to organization permissions</a>, we're giving developers more time to update their applications. We'll announce an updated timeline for these changes in the coming weeks.</p>
 
 <p>In the meantime, if your application relies on any of the affected functionality described in our <a href="/changes/2014-12-08-organization-permissions-api-preview/">previous blog post</a>, please <strong>update your code</strong> to account for these changes. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2015-02-20-migration-period-removing-authorizations-token/">
-  <h2 class="title">
-<a id="--breaking-changes-to-authorizations-api-responses-on-april-20" class="anchor" href="#--breaking-changes-to-authorizations-api-responses-on-april-20" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-02-20-migration-period-removing-authorizations-token/">Breaking changes to Authorizations API responses on April 20</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 19, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3" data-proofer-ignore>
-      <a href="https://github.com/ptoomey3" data-proofer-ignore>ptoomey3</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>A couple weeks ago we <a href="/changes/2015-02-03-removing-authorizations-token-update/">extended the preview period</a> of several API changes related to managing OAuth application authorizations. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before April 20</strong> to account for these changes.</p>
-
-<h3>
-<a id="breaking-changes-coming-on-april-20" class="anchor" href="#breaking-changes-coming-on-april-20" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="breaking-changes-coming-on-april-20" class="anchor" href="#breaking-changes-coming-on-april-20" aria-hidden="true"><span class="octicon octicon-link"></span></a>Breaking changes coming on April 20</h3>
-
-<p>If your application uses any of the following APIs, then you may be affected by this change:</p>
-
-<ul>
-<li>The <a href="/v3/oauth_authorizations/#list-your-authorizations">List your authorizations</a> API</li>
-<li>The <a href="/v3/oauth_authorizations/#get-a-single-authorization">Get a single authorization</a> API</li>
-<li>The <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> API (<code>token</code> is still returned for "create")</li>
-<li>The <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a> API (<code>token</code> is still returned for "create")</li>
-<li>The <a href="/v3/oauth_authorizations/#update-an-existing-authorization">Update an existing authorization</a> API</li>
-</ul>
-
-<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-removing-authorizations-token/">the December announcement</a> for more details on the changes.)</p>
-
-<p>Starting today, we're offering a migration period allowing applications to opt in to these changes (as described below). On April 20, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
-
-<h3>
-<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h3>
-
-<p>During the migration period, you can opt-in to these changes using the following custom media type in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.mirage-preview+json
-</code></pre>
-
-<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">get in touch with us</a>!</p>
 
 <p></p>
 </div>
@@ -677,6 +733,15 @@ media type.</p>
           <li><a href="/v3/issues/milestones/">Milestones</a></li>
         </ul>
       </li>
+      
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/migration/">Migration</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/migration/migrations/">Migrations</a></li>
+          <li><a href="/v3/migration/source_imports/">Source Imports</a></li>
+        </ul>
+      </li>
+      
       <li class="js-topic">
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
@@ -692,9 +757,6 @@ media type.</p>
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
-          
-          <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>

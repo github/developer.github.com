@@ -44,7 +44,59 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-10-31-gist-comment-uris/">
+      <div class="change" id="/changes/2012-11-27-forking-to-organizations/">
+  <h2 class="title">
+<a id="--forking-to-organizations" class="anchor" href="#--forking-to-organizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-11-27-forking-to-organizations/">Forking to Organizations</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    November 27, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We made a slight change to the way you fork a repository.  By default, you
+can fork my repository through an HTTP POST to the repository's fork resource.</p>
+
+<pre class="command-line">
+<span class="command">curl -X POST https://api.github.com/repos/technoweenie/faraday/forks</span>
+</pre>
+
+<p>This repository forks to your personal account.  However, there are cases when
+you want to fork to one of your organizations instead.  The previous method
+required a <code>?org</code> query parameter:</p>
+
+<pre class="command-line">
+<span class="command">curl -X POST /repos/technoweenie/faraday/forks?org=mycompany</span>
+</pre>
+
+<p>Query parameters on POST requests are unusual in APIs, and definitely
+inconsistent with the rest of the GitHub API.  You should be able to post a
+JSON body like every other POST endpoint.  Now, you can!  Only, now we're
+calling the field <code>organization</code>.</p>
+
+<pre class="command-line">
+<span class="command">curl /repos/technoweenie/faraday/forks?org=mycompany \</span>
+<span class="command"> -d '{"organization": "mycompany"}'</span>
+</pre>
+
+<p>Don't worry, we are committed to maintaining the legacy behavior until the next
+major change of the GitHub API.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2012-10-31-gist-comment-uris/">
   <h2 class="title">
 <a id="--gist-comment-uris" class="anchor" href="#--gist-comment-uris" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-10-31-gist-comment-uris/">Gist comment URIs</a>
@@ -633,6 +685,15 @@ old API functionality.</s></p>
           <li><a href="/v3/issues/milestones/">Milestones</a></li>
         </ul>
       </li>
+      
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/migration/">Migration</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/migration/migrations/">Migrations</a></li>
+          <li><a href="/v3/migration/source_imports/">Source Imports</a></li>
+        </ul>
+      </li>
+      
       <li class="js-topic">
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
         <ul class="js-guides">
@@ -648,9 +709,6 @@ old API functionality.</s></p>
         <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
         <ul class="js-guides">
           <li><a href="/v3/orgs/members/">Members</a></li>
-          
-          <li><a href="/v3/orgs/migrations/">Migrations</a></li>
-          
           <li><a href="/v3/orgs/teams/">Teams</a></li>
           <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
         </ul>

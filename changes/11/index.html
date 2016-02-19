@@ -44,10 +44,10 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-02-13-hookshot-issues/">
+      <div class="change" id="/changes/2013-02-13-hookshot-load-balancer/">
   <h2 class="title">
-<a id="--some-hookshot-issues" class="anchor" href="#--some-hookshot-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-02-13-hookshot-issues/">Some Hookshot Issues</a>
+<a id="--hookshot-load-balancer" class="anchor" href="#--hookshot-load-balancer" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-02-13-hookshot-load-balancer/">Hookshot Load balancer</a>
 </h2>
 
 <div class="meta">
@@ -65,20 +65,12 @@
 </div>
 
 <p></p>
-<p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
-been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
-the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
+<p>We had an issue with the Hookshot load balancer this morning, causing the
+majority of hooks to flow to a single node only.  This lead to massive queue
+times.  While fixing this, we're putting the old Services backend in use.</p>
 
-<p>If your web hook servers are on EC2 and are missing hooks from GitHub due to
-an IP restriction, we recommend the following:</p>
-
-<ol>
-<li>Remove the IP white list.</li>
-<li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
-</ol>
-
-<p>We're currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
-if you have any questions.</p>
+<p>This means the old IPs are back in use.  Use this <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">Help guide</a>
+if you already removed them from your firewall.</p>
 
 <p></p>
 </div>
@@ -155,7 +147,7 @@ over 100 services is taking too much of this focus away.</p>
 <p></p>
 <p>Following on from our <a href="http://developer.github.com/changes/2012-10-14-rate-limit-changes/">previous post</a>
 about requiring requests to include a valid <a href="http://en.wikipedia.org/wiki/User_agent">User Agent header</a>
-we will soon be changing our API servers to return HTTP 403 
+we will soon be changing our API servers to return HTTP 403
 to any clients not providing a valid User Agent header.</p>
 
 <p>We will be making this change on Monday, March 4th 2013.</p>

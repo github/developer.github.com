@@ -422,10 +422,10 @@ Stars: <code>sort</code> and <code>direction</code>.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-02-13-hookshot-load-balancer/">
+<div class="change" id="/changes/2013-02-13-hookshot-issues/">
   <h2 class="title">
-<a id="--hookshot-load-balancer" class="anchor" href="#--hookshot-load-balancer" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-02-13-hookshot-load-balancer/">Hookshot Load balancer</a>
+<a id="--some-hookshot-issues" class="anchor" href="#--some-hookshot-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-02-13-hookshot-issues/">Some Hookshot Issues</a>
 </h2>
 
 <div class="meta">
@@ -443,12 +443,20 @@ Stars: <code>sort</code> and <code>direction</code>.</p>
 </div>
 
 <p></p>
-<p>We had an issue with the Hookshot load balancer this morning, causing the
-majority of hooks to flow to a single node only.  This lead to massive queue
-times.  While fixing this, we're putting the old Services backend in use.</p>
+<p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
+been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
+the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
 
-<p>This means the old IPs are back in use.  Use this <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">Help guide</a>
-if you already removed them from your firewall.</p>
+<p>If your web hook servers are on EC2 and are missing hooks from GitHub due to
+an IP restriction, we recommend the following:</p>
+
+<ol>
+<li>Remove the IP white list.</li>
+<li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
+</ol>
+
+<p>We're currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
+if you have any questions.</p>
 
 <p></p>
 </div>

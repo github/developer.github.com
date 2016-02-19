@@ -30,3 +30,4 @@ Name | Type | Description
 `hooks`|`array` of `strings` | An Array of IP addresses in CIDR format specifying the addresses that incoming service hooks will originate from on GitHub.com.  Subscribe to the [API Changes blog](https://developer.github.com/changes/) or follow [@GitHubAPI](https://twitter.com/GitHubAPI) on Twitter to get updated when this list changes.
 `git`|`array` of `strings` | An Array of IP addresses in CIDR format specifying the Git servers for GitHub.com.
 `pages`|`array` of `strings` | An Array of IP addresses in CIDR format specifying the A records for [GitHub Pages](https://pages.github.com/).
+`importer`|`array` of `strings` | An Array of IP addresses specifying the addresses that source imports will originate from on GitHub.com.

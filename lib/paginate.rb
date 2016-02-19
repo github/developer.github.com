@@ -32,7 +32,7 @@ module Paginate
           :current_page => #{next_i},
           :per_page => PER_PAGE,
           :first => #{first}, :last => #{last} %>",
-        { :title => 'GitHub API Changes' },
+        { :title => 'GitHub API Changes', :layout => 'blog' },
         "/changes/#{next_i}"
       )
     end

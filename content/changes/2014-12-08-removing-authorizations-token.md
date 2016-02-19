@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Removing token attribute from Authorizations API responses
-created_at: 2014-12-08
 author_name: ptoomey3
 ---
 

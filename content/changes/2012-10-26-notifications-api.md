@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Notifications API
-created_at: 2012-10-26
 author_name: technoweenie
 ---
 

@@ -1,7 +1,6 @@
 ---
 kind: change
 title: New attributes for the Deployments API
-created_at: 2014-05-19
 author_name: atmos
 ---
 

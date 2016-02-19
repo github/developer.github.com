@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Licenses API update
-created_at: 2015-06-24
 author_name: mislav
 ---
 

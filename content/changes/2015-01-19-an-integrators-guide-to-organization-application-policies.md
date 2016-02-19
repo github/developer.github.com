@@ -1,7 +1,6 @@
 ---
 kind: change
 title: "An integrator's guide to organization application policies"
-created_at: 2015-01-19
 author_name: pengwynn
 ---
 

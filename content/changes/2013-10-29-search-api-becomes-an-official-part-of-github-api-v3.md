@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Search API Becomes an Official Part of API v3
-created_at: 2013-10-29
 author_name: jasonrudolph
 ---
 

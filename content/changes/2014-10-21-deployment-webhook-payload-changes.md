@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Deployment webhook payload changes
-created_at: 2014-10-21
 author_name: atmos
 ---
 

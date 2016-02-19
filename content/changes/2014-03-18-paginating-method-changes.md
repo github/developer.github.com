@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Pagination changes for some resource lists
-created_at: 2014-03-18
 author_name: pengwynn
 ---
 

@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Prepare for upcoming organization permissions changes
-created_at: 2015-01-07
 author_name: jakeboxer
 ---
 

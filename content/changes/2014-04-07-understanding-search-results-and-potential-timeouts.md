@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Understanding search results and potential timeouts
-created_at: 2014-04-07
 author_name: izuzak
 ---
 

@@ -1,7 +1,6 @@
 ---
 kind: change
 title: GitHub Importer Preview API
-created_at: 2016-02-19
 author_name: spraints
 ---
 

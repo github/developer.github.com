@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Preview repository redirects
-created_at: 2015-04-17
 author_name: jasonrudolph
 ---
 

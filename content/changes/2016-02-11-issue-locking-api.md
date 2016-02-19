@@ -1,7 +1,6 @@
 ---
 kind: change
 title: Issue Locking and Unlocking API Preview Period
-created_at: 2016-02-11
 author_name: davidcelis
 ---
 

@@ -1,6 +1,6 @@
 ---
 kind: change
-title: GitHub Importer Preview API
+title: Preview the Source Import API
 author_name: spraints
 ---
 
@@ -9,6 +9,8 @@ We've added an API for source imports, which will let you start an import from a
 To access [the Source Import API][docs] during the preview period, you must provide a custom [media type][media-type] in the `Accept` header:
 
     application/vnd.github.barred-rock-preview
+
+During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.
 
 If you have any questions or feedback, please [let us know][contact]!
 

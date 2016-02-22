@@ -216,7 +216,7 @@ Name | Type | Description
   :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
 %>
 
-### Labels, assignees, and milestones
+## Labels, assignees, and milestones
 
 Every pull request is an issue, but not every issue is a pull request. For this reason, "shared" actions for both features, like manipulating assignees, labels and milestones, are provided within [the Issues API](/v3/issues).
 

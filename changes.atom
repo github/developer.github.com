@@ -991,114 +991,6 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 &lt;p&gt;If you have any questions or feedback about these changes, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Attributes+for+Starring+API"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
-    <id>tag:developer.github.com,2014-12-08:/changes/2014-12-08-removing-authorizations-token/</id>
-    <title type="html">Removing token attribute from Authorizations API responses</title>
-    <published>2014-12-08T08:00:00Z</published>
-    <updated>2014-12-08T08:00:00Z</updated>
-    <author>
-      <name>ptoomey3</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-12-08-removing-authorizations-token/"/>
-    <content type="html">&lt;p&gt;Since OAuth access tokens function like passwords, they should be treated with
-care. Today we are making it easier to more securely work with authorizations
-via the Authorizations API. We are deprecating the use use of the &lt;code&gt;token&lt;/code&gt;
-attribute in the majority of the &lt;a href="/v3/oauth_authorizations/"&gt;Authorizations API&lt;/a&gt;
-responses. For the &lt;a href="/v3/oauth_authorizations/#deprecation-notice"&gt;affected APIs&lt;/a&gt;, the
-&lt;code&gt;token&lt;/code&gt; attribute will soon return an empty string. To get ready for that
-change, we are giving developers a chance to
-&lt;a href="#preview-period"&gt;preview the updated API&lt;/a&gt; starting today.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;What's changing?&lt;/h2&gt;
-
-&lt;p&gt;The current &lt;a href="/v3/oauth_authorizations/"&gt;OAuth Authorizations API&lt;/a&gt; requires GitHub to store the full value for
-each OAuth token on our servers. In order to increase the security for our
-users, we are changing our architecture to store the SHA-256 digest of OAuth
-tokens instead. GitHub securely hashes user passwords using bcrypt and we want
-to provide comparable security for OAuth tokens as well.&lt;/p&gt;
-
-&lt;p&gt;Rest assured that this change is an entirely proactive measure from GitHub and is not associated with any security incident.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Who is affected?&lt;/h2&gt;
-
-&lt;p&gt;This change affects any code that relies on accessing the &lt;code&gt;token&lt;/code&gt; attribute from
-&lt;a href="/v3/oauth_authorizations/#deprecation-notice"&gt;these OAuth Authorizations API responses&lt;/a&gt;.
-For example, our own &lt;a href="https://mac.github.com/"&gt;GitHub for Mac&lt;/a&gt; and
-&lt;a href="https://windows.github.com/"&gt;GitHub for Windows&lt;/a&gt; applications relied on reading the &lt;code&gt;token&lt;/code&gt;
-from the &lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app"&gt;Get-or-create an authorization for a specific app&lt;/a&gt; API, in order to support multiple installations of our desktop application for a single user.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;What should you do?&lt;/h2&gt;
-
-&lt;p&gt;In order to reduce the impact of removing the &lt;code&gt;token&lt;/code&gt; attribute, the OAuth
-Authorizations API has added a new request attribute (&lt;code&gt;fingerprint&lt;/code&gt;), added
-three new response attributes (&lt;code&gt;token_last_eight&lt;/code&gt;, &lt;code&gt;hashed_token&lt;/code&gt;, and
-&lt;code&gt;fingerprint&lt;/code&gt;), and added &lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint"&gt;one new API&lt;/a&gt;.
-While these new APIs and attributes do not replace the full functionality that
-previously existed, they can be used in place of &lt;code&gt;token&lt;/code&gt; for most common use cases.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;token_last_eight&lt;/code&gt; returns the last eight characters of the associated OAuth
-token. As an example, &lt;code&gt;token_last_eight&lt;/code&gt; could be used to display a list of
-partial token values to help a user manage their OAuth tokens.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;hashed_token&lt;/code&gt; is the base64 of the SHA-256 digest of the token.
-&lt;code&gt;hashed_token&lt;/code&gt; could be used to programmatically validate that a given token
-matches an authorization returned by the API.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;fingerprint&lt;/code&gt; is a new optional request parameter that allows an OAuth
-application to create multiple authorizations for a single user. &lt;code&gt;fingerprint&lt;/code&gt;
-should be a string that distinguishes the new authorization from others
-for the same client ID and user.&lt;/p&gt;
-
-&lt;p&gt;For example, to differentiate installations of a desktop application across
-multiple devices you might set &lt;code&gt;fingerprint&lt;/code&gt; to
-&lt;code&gt;SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")&lt;/code&gt;. Since
-&lt;code&gt;fingerprint&lt;/code&gt; is not meant to be a user-facing value, you should still set
-the &lt;code&gt;note&lt;/code&gt; attribute to help a user differentiate between authorizations on their
-&lt;a href="https://github.com/settings/applications"&gt;OAuth applications listing on GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint"&gt;Get-or-create an authorization for a specific app and fingerprint&lt;/a&gt;
-is a new API that is analagous to the
-&lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app"&gt;Get-or-create an authorization for a specific app&lt;/a&gt;
-API, but adds support for the new &lt;code&gt;fingerprint&lt;/code&gt; request parameter.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;
-&lt;a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Preview period&lt;/h2&gt;
-
-&lt;p&gt;We are making the new Authorizations API available today for developers to
-preview. During this period, we may change aspects of these endpoints. If we do,
-we will announce the changes on the developer blog, but we will not provide any
-advance notice.&lt;/p&gt;
-
-&lt;p&gt;While these new APIs are in their preview period, you’ll need to provide the
-following custom media type in the Accept header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.mirage-preview+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Migration period&lt;/h2&gt;
-
-&lt;p&gt;At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="why-sha-256-over-bcrypt" class="anchor" href="#why-sha-256-over-bcrypt" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Why SHA-256 over bcrypt?&lt;/h2&gt;
-
-&lt;p&gt;Some users may be curious why we are not using bcrypt to hash our OAuth tokens
-like we do for user passwords. Bcrypt is purposefully computationally expensive
-in order to mitigate brute force attacks against low entropy passwords. However,
-OAuth tokens are highly random and are not susceptible to brute force attacks.
-Given that OAuth token validation occurs for each request to the API we chose
-SHA-256 for performance reasons.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
     <id>tag:developer.github.com,2014-12-08:/changes/2014-12-08-organization-permissions-api-preview/</id>
     <title type="html">Preview the upcoming organization permission changes</title>
     <published>2014-12-08T08:00:00Z</published>
@@ -1213,6 +1105,114 @@ SHA-256 for performance reasons.&lt;/p&gt;
 &lt;p&gt;At the end of the migration period, the Owners team will no longer be special, and you'll no longer be able to rely on it for managing organization admins.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Admin+Pre-release+Preview"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2014-12-08:/changes/2014-12-08-removing-authorizations-token/</id>
+    <title type="html">Removing token attribute from Authorizations API responses</title>
+    <published>2014-12-08T08:00:00Z</published>
+    <updated>2014-12-08T08:00:00Z</updated>
+    <author>
+      <name>ptoomey3</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2014-12-08-removing-authorizations-token/"/>
+    <content type="html">&lt;p&gt;Since OAuth access tokens function like passwords, they should be treated with
+care. Today we are making it easier to more securely work with authorizations
+via the Authorizations API. We are deprecating the use use of the &lt;code&gt;token&lt;/code&gt;
+attribute in the majority of the &lt;a href="/v3/oauth_authorizations/"&gt;Authorizations API&lt;/a&gt;
+responses. For the &lt;a href="/v3/oauth_authorizations/#deprecation-notice"&gt;affected APIs&lt;/a&gt;, the
+&lt;code&gt;token&lt;/code&gt; attribute will soon return an empty string. To get ready for that
+change, we are giving developers a chance to
+&lt;a href="#preview-period"&gt;preview the updated API&lt;/a&gt; starting today.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;What's changing?&lt;/h2&gt;
+
+&lt;p&gt;The current &lt;a href="/v3/oauth_authorizations/"&gt;OAuth Authorizations API&lt;/a&gt; requires GitHub to store the full value for
+each OAuth token on our servers. In order to increase the security for our
+users, we are changing our architecture to store the SHA-256 digest of OAuth
+tokens instead. GitHub securely hashes user passwords using bcrypt and we want
+to provide comparable security for OAuth tokens as well.&lt;/p&gt;
+
+&lt;p&gt;Rest assured that this change is an entirely proactive measure from GitHub and is not associated with any security incident.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Who is affected?&lt;/h2&gt;
+
+&lt;p&gt;This change affects any code that relies on accessing the &lt;code&gt;token&lt;/code&gt; attribute from
+&lt;a href="/v3/oauth_authorizations/#deprecation-notice"&gt;these OAuth Authorizations API responses&lt;/a&gt;.
+For example, our own &lt;a href="https://mac.github.com/"&gt;GitHub for Mac&lt;/a&gt; and
+&lt;a href="https://windows.github.com/"&gt;GitHub for Windows&lt;/a&gt; applications relied on reading the &lt;code&gt;token&lt;/code&gt;
+from the &lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app"&gt;Get-or-create an authorization for a specific app&lt;/a&gt; API, in order to support multiple installations of our desktop application for a single user.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;What should you do?&lt;/h2&gt;
+
+&lt;p&gt;In order to reduce the impact of removing the &lt;code&gt;token&lt;/code&gt; attribute, the OAuth
+Authorizations API has added a new request attribute (&lt;code&gt;fingerprint&lt;/code&gt;), added
+three new response attributes (&lt;code&gt;token_last_eight&lt;/code&gt;, &lt;code&gt;hashed_token&lt;/code&gt;, and
+&lt;code&gt;fingerprint&lt;/code&gt;), and added &lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint"&gt;one new API&lt;/a&gt;.
+While these new APIs and attributes do not replace the full functionality that
+previously existed, they can be used in place of &lt;code&gt;token&lt;/code&gt; for most common use cases.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;token_last_eight&lt;/code&gt; returns the last eight characters of the associated OAuth
+token. As an example, &lt;code&gt;token_last_eight&lt;/code&gt; could be used to display a list of
+partial token values to help a user manage their OAuth tokens.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;hashed_token&lt;/code&gt; is the base64 of the SHA-256 digest of the token.
+&lt;code&gt;hashed_token&lt;/code&gt; could be used to programmatically validate that a given token
+matches an authorization returned by the API.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fingerprint&lt;/code&gt; is a new optional request parameter that allows an OAuth
+application to create multiple authorizations for a single user. &lt;code&gt;fingerprint&lt;/code&gt;
+should be a string that distinguishes the new authorization from others
+for the same client ID and user.&lt;/p&gt;
+
+&lt;p&gt;For example, to differentiate installations of a desktop application across
+multiple devices you might set &lt;code&gt;fingerprint&lt;/code&gt; to
+&lt;code&gt;SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")&lt;/code&gt;. Since
+&lt;code&gt;fingerprint&lt;/code&gt; is not meant to be a user-facing value, you should still set
+the &lt;code&gt;note&lt;/code&gt; attribute to help a user differentiate between authorizations on their
+&lt;a href="https://github.com/settings/applications"&gt;OAuth applications listing on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint"&gt;Get-or-create an authorization for a specific app and fingerprint&lt;/a&gt;
+is a new API that is analagous to the
+&lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app"&gt;Get-or-create an authorization for a specific app&lt;/a&gt;
+API, but adds support for the new &lt;code&gt;fingerprint&lt;/code&gt; request parameter.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;
+&lt;a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Preview period&lt;/h2&gt;
+
+&lt;p&gt;We are making the new Authorizations API available today for developers to
+preview. During this period, we may change aspects of these endpoints. If we do,
+we will announce the changes on the developer blog, but we will not provide any
+advance notice.&lt;/p&gt;
+
+&lt;p&gt;While these new APIs are in their preview period, you’ll need to provide the
+following custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.mirage-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Migration period&lt;/h2&gt;
+
+&lt;p&gt;At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="why-sha-256-over-bcrypt" class="anchor" href="#why-sha-256-over-bcrypt" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Why SHA-256 over bcrypt?&lt;/h2&gt;
+
+&lt;p&gt;Some users may be curious why we are not using bcrypt to hash our OAuth tokens
+like we do for user passwords. Bcrypt is purposefully computationally expensive
+in order to mitigate brute force attacks against low entropy passwords. However,
+OAuth tokens are highly random and are not susceptible to brute force attacks.
+Given that OAuth token validation occurs for each request to the API we chose
+SHA-256 for performance reasons.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
 

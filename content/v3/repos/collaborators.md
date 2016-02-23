@@ -65,7 +65,7 @@ application/vnd.github.ironman-preview+json
 
 Name | Type | Description
 -----|------|--------------
-`permission`|`string` | The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:<br/> * `pull` - can pull, but not push to or administer this repository.<br/> * `push` - can pull and push, but not administer this repository.<br/> * `admin` -  can pull, push and administer this repository.<br/>Default: `pull`
+`permission`|`string` | The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:<br/> * `pull` - can pull, but not push to or administer this repository.<br/> * `push` - can pull and push, but not administer this repository.<br/> * `admin` -  can pull, push and administer this repository.<br/>Default: `push`
 
 <%= fetch_content(:optional_put_content_length) %>
 

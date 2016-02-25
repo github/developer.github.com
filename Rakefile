@@ -97,3 +97,13 @@ task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :build]
     system 'git checkout master'
   end
 end
+
+desc "Generate JSON from the sample responses"
+task :generate_json_from_responses
+Dir[File.join(File.dirname(__FILE__), 'lib', 'responses', '*.rb')].each { |file| load file }
+FileUtils.mkdir_p(File.join(File.dirname(__FILE__), 'json-dump'))
+GitHub::Resources::Responses.constants.each { |constant|
+  File.open('json-dump/' + constant.to_s + '.json', 'w') { |file|
+    file.write(JSON.pretty_generate(GitHub::Resources::Helpers.get_resource(constant)))
+  }
+}

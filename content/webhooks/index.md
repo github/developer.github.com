@@ -96,9 +96,9 @@ several special headers:
 
 Header | Description
 -------|-------------|
-`X-Github-Event`| Name of the [event][events-section] that triggered this delivery.
+`X-GitHub-Event`| Name of the [event][events-section] that triggered this delivery.
 `X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`][repo-hooks-create] as the key (if configured).
-`X-Github-Delivery`| Unique ID for this delivery.
+`X-GitHub-Delivery`| Unique ID for this delivery.
 
 Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
 
@@ -112,7 +112,7 @@ Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
 > User-Agent: GitHub-Hookshot/044aadd
 > Content-Type: application/json
 > Content-Length: 6615
-> X-Github-Event: issues
+> X-GitHub-Event: issues
 
 > {
 >   "action": "opened",

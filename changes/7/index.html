@@ -44,7 +44,38 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-03-27-combined-status-api/">
+      <div class="change" id="/changes/2014-04-04-create-public-repo-without-repo-scope/">
+  <h2 class="title">
+<a id="--grant-access-to-create-public-repositories-without-granting-access-to-private-repositories" class="anchor" href="#--grant-access-to-create-public-repositories-without-granting-access-to-private-repositories" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-04-04-create-public-repo-without-repo-scope/">Grant access to create public repositories without granting access to private repositories</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 4, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>The <a href="/v3/repos/#create">Create Repository method</a> now allows creating public repositories via
+OAuth with <code>public_repo</code> <a href="/v3/oauth/#scopes">scope</a>.  This means you can safely grant third
+party applications the ability to create public repositories on your behalf
+without granting access to your private repositories.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+create+repositories+with+public_repo+scope">get in touch</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-03-27-combined-status-api/">
   <h2 class="title">
 <a id="--preview-the-new-combined-status-api" class="anchor" href="#--preview-the-new-combined-status-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API</a>
@@ -619,67 +650,6 @@ begin receiving those too.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
-  <h2 class="title">
-<a id="--finer-grained-oauth-scopes-for-ssh-keys" class="anchor" href="#--finer-grained-oauth-scopes-for-ssh-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>As <a href="https://github.com/blog/1786-enhanced-oauth-security-for-ssh-keys">we announced</a>, we've made some important changes to the way that API consumers manage SSH keys.</p>
-
-<h2>
-<a id="finer-grained-oauth-scopes" class="anchor" href="#finer-grained-oauth-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="finer-grained-oauth-scopes" class="anchor" href="#finer-grained-oauth-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finer-grained OAuth scopes</h2>
-
-<p>To help third party applications request only permissions that they need, the API now supports three new <a href="/v3/oauth/#scopes">scopes</a> for working with a user's public SSH keys.</p>
-
-<ul>
-<li>
-<code>read:public_key</code> provides read access to the user's SSH keys</li>
-<li>
-<code>write:public_key</code> allows an app to read existing keys and create new ones</li>
-<li>
-<code>admin:public_key</code> enables an app to read, write, and delete keys</li>
-</ul>
-
-<h2>
-<a id="changes-to-user-scope" class="anchor" href="#changes-to-user-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="changes-to-user-scope" class="anchor" href="#changes-to-user-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes to <code>user</code> scope</h2>
-
-<p>Historically, <code>user</code> scope has provided full access to manage a user's SSH keys. Now that we have dedicated scopes for managing a user's SSH keys, we have removed those permissions from the <code>user</code> scope. Now <code>user</code> scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.</p>
-
-<h2>
-<a id="keys-are-now-immutable" class="anchor" href="#keys-are-now-immutable" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="keys-are-now-immutable" class="anchor" href="#keys-are-now-immutable" aria-hidden="true"><span class="octicon octicon-link"></span></a>Keys are now immutable</h2>
-
-<p>To simplify the security audit trail for SSH keys, we're making keys immutable. API consumers can continue to create keys and delete keys as needed, but keys can no longer be changed. To change an existing key, API consumers should delete the existing key and create a new one with the desired attributes. This change applies both to a <a href="/v3/users/keys/">user's SSH keys</a> and a <a href="/v3/repos/keys/">repository's deploy keys</a>.</p>
-
-<h2>
-<a id="deleting-keys-when-revoking-a-token" class="anchor" href="#deleting-keys-when-revoking-a-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="deleting-keys-when-revoking-a-token" class="anchor" href="#deleting-keys-when-revoking-a-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deleting keys when revoking a token</h2>
-
-<p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
-
-<p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   <!-- @count_gap refers to the minimum number of sibling pages to show -->
 
@@ -811,6 +781,8 @@ begin receiving those too.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
+
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
@@ -824,8 +796,6 @@ begin receiving those too.</p>
   <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
 
   <li><a href="/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories<br /><span class="date">July 22, 2015</span></a></li>
-
-  <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
 </ul>
 

@@ -61,6 +61,7 @@
 <ul id="markdown-toc">
 <li><a href="#list-commits-on-a-repository" id="markdown-toc-list-commits-on-a-repository">List commits on a repository</a></li>
 <li><a href="#get-a-single-commit" id="markdown-toc-get-a-single-commit">Get a single commit</a></li>
+<li><a href="#get-the-sha-1-of-a-commit-reference" id="markdown-toc-get-the-sha-1-of-a-commit-reference">Get the SHA-1 of a commit reference</a></li>
 <li><a href="#compare-two-commits" id="markdown-toc-compare-two-commits">Compare two commits</a></li>
 </ul>
 
@@ -305,6 +306,46 @@ X-RateLimit-Remaining: 4999
 
 
 <h2>
+<a id="get-the-sha-1-of-a-commit-reference" class="anchor" href="#get-the-sha-1-of-a-commit-reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get the SHA-1 of a commit reference</h2>
+
+<div class="alert tip">
+
+<p><a name="preview-period"></a></p>
+
+<p>The API to get the SHA-1 of a commit reference is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the <a href="/changes/2016-02-24-commit-reference-sha-api">blog post</a> for full details.</p>
+
+<p>To access the API you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>  application/vnd.github.chitauri-preview+sha
+</code></pre>
+
+</div>
+
+<p>Users with read access can get the SHA-1 of a commit reference:</p>
+
+<pre><code>GET /repos/:owner/:repo/commits/:ref
+</code></pre>
+
+<p>To check if a remote reference's SHA-1 is the same as your local reference's SHA-1, make a <code>GET</code> request and provide the current SHA-1 for the local reference as the ETag.</p>
+
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<p>The SHA-1 of the commit reference.</p>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre>
+814412cfbd631109df337e16c807207e78c0d24e
+</pre>
+
+<h2>
 <a id="compare-two-commits" class="anchor" href="#compare-two-commits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compare two commits</h2>
 
 <pre><code>GET /repos/:owner/:repo/compare/:base...:head
@@ -316,7 +357,7 @@ X-RateLimit-Remaining: 4999
 </code></pre>
 
 <h3>
-<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <p>The response from the API is equivalent to running the <code>git log base..head</code> command; however, commits are returned in reverse chronological order.</p>
 

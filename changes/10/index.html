@@ -44,7 +44,65 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-07-01-feeds-api/">
+      <div class="change" id="/changes/2013-07-02-rate-limit-reset/">
+  <h2 class="title">
+<a id="--when-does-my-rate-limit-reset" class="anchor" href="#--when-does-my-rate-limit-reset" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-07-02-rate-limit-reset/">When Does My Rate Limit Reset?</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    July 2, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Have you ever wondered when your <a href="/v3/#rate-limiting">rate limit</a> will reset back to its maximum value?
+That information is now available in the new <code>X-RateLimit-Reset</code> response header.</p>
+
+<pre class="command-line">
+<span class="command">curl -I https://api.github.com/orgs/octokit</span>
+
+<span class="output">HTTP/1.1 200 OK</span>
+<span class="output">Status: 200 OK</span>
+<span class="output">X-RateLimit-Limit: 60</span>
+<span class="output">X-RateLimit-Remaining: 42</span>
+<span class="output">X-RateLimit-Reset: 1372700873</span>
+<span class="output">...</span>
+</pre>
+
+<p>The <code>X-RateLimit-Reset</code> header provides a <a href="http://en.wikipedia.org/wiki/Unix_time">Unix UTC timestamp</a>, letting you know the exact time that your fresh new rate limit kicks in.</p>
+
+<p>The reset timestamp is also available as part of the <code>/rate_limit</code> resource.</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/rate_limit</span>
+
+<span class="output">{</span>
+<span class="output">  "rate": {</span>
+<span class="output">    "limit": 60,</span>
+<span class="output">    "remaining": 42,</span>
+<span class="output">    "reset": 1372700873</span>
+<span class="output">  }</span>
+<span class="output">}</span>
+</pre>
+
+<p>For more information on rate limits, be sure to check out the <a href="/v3/#rate-limiting">docs</a>.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=X-RateLimit-Reset">drop us a line</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-07-01-feeds-api/">
   <h2 class="title">
 <a id="--feeds-api" class="anchor" href="#--feeds-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>
@@ -422,45 +480,6 @@ Stars: <code>sort</code> and <code>direction</code>.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-02-13-hookshot-issues/">
-  <h2 class="title">
-<a id="--some-hookshot-issues" class="anchor" href="#--some-hookshot-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-02-13-hookshot-issues/">Some Hookshot Issues</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 13, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
-      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
-been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
-the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
-
-<p>If your web hook servers are on EC2 and are missing hooks from GitHub due to
-an IP restriction, we recommend the following:</p>
-
-<ol>
-<li>Remove the IP white list.</li>
-<li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
-</ol>
-
-<p>We're currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
-if you have any questions.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   <!-- @count_gap refers to the minimum number of sibling pages to show -->
 
@@ -555,6 +574,8 @@ if you have any questions.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
+
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
@@ -568,8 +589,6 @@ if you have any questions.</p>
   <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
 
   <li><a href="/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories<br /><span class="date">July 22, 2015</span></a></li>
-
-  <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
 </ul>
 

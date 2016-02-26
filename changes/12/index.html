@@ -44,7 +44,82 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-11-27-forking-to-organizations/">
+      <div class="change" id="/changes/2012-11-29-gitignore-templates/">
+  <h2 class="title">
+<a id="--gitignore-templates-api" class="anchor" href="#--gitignore-templates-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-11-29-gitignore-templates/">Gitignore Templates API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    November 29, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We recently <a href="/changes/2012-09-28-auto-init-for-repositories/">made it easy</a> to initialize a repository when you create
+it <a href="/v3/repos/#create">via the API</a>. One of the options you can pass when creating a
+repository is <code>gitignore_template</code>. This value is the name of one of the
+templates from the the public <a href="https://github.com/github/gitignore">GitHub .gitignore repository</a>.</p>
+
+<p>The <a href="/v3/gitignore/">Gitignore Templates API</a> makes it easy to list those templates:</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/gitignore/templates</span>
+
+<span class="output">HTTP/1.1 200 OK</span>
+
+<span class="output">[</span>
+<span class="output">  "Actionscript",</span>
+<span class="output">  "Android",</span>
+<span class="output">  "AppceleratorTitanium",</span>
+<span class="output">  "Autotools",</span>
+<span class="output">  "Bancha",</span>
+<span class="output">  "C",</span>
+<span class="output">  "C++",</span>
+<span class="output">  ...</span>
+</pre>
+
+<p>If you'd like to view the source, you can also fetch a single template.</p>
+
+<pre class="command-line">
+<span class="command">curl -H 'Accept: application/vnd.github.raw' \</span>
+<span class="command">     https://api.github.com/gitignore/templates/Objective-C</span>
+
+<span class="output">HTTP/1.1 200 OK</span>
+
+<span class="comment"># Xcode</span>
+<span class="output">.DS_Store</span>
+<span class="output">build/</span>
+<span class="output">*.pbxuser</span>
+<span class="output">!default.pbxuser</span>
+<span class="output">*.mode1v3</span>
+<span class="output">!default.mode1v3</span>
+<span class="output">*.mode2v3</span>
+<span class="output">!default.mode2v3</span>
+<span class="output">*.perspectivev3</span>
+<span class="output">!default.perspectivev3</span>
+<span class="output">*.xcworkspace</span>
+<span class="output">!default.xcworkspace</span>
+<span class="output">xcuserdata</span>
+<span class="output">profile</span>
+<span class="output">*.moved-aside</span>
+<span class="output">DerivedData</span>
+<span class="output">.idea/</span>
+</pre>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2012-11-27-forking-to-organizations/">
   <h2 class="title">
 <a id="--forking-to-organizations" class="anchor" href="#--forking-to-organizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-11-27-forking-to-organizations/">Forking to Organizations</a>
@@ -638,6 +713,8 @@ old API functionality.</s></p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
+
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
@@ -651,8 +728,6 @@ old API functionality.</s></p>
   <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
 
   <li><a href="/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories<br /><span class="date">July 22, 2015</span></a></li>
-
-  <li><a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories<br /><span class="date">July 21, 2015</span></a></li>
 
 </ul>
 

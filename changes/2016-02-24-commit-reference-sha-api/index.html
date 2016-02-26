@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Gist comment URIs | GitHub Developer Guide</title>
+  <title>Commit Reference SHA-1 Preview Period | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,31 +44,58 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-10-31-gist-comment-uris/">
+      <div class="change" id="/changes/2016-02-24-commit-reference-sha-api/">
 <h2 class="title">
-  <a href="/changes/2012-10-31-gist-comment-uris/">Gist comment URIs</a>
+  <a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    October 31, 2012
+    February 24, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra" data-proofer-ignore/>
-      <a href="https://github.com/pezra" data-proofer-ignore>pezra</a>
+    <img height="16" width="16" src="https://github.com/mikemcquaid.png" alt="Avatar for mikemcquaid" data-proofer-ignore/>
+      <a href="https://github.com/mikemcquaid" data-proofer-ignore>mikemcquaid</a>
   </li>
 </ul>
 </div>
 
 
-<p>The URIs of all gist comments are changing immediately. The new URI pattern for gist comments is <code>/gists/{gist-id}/comments/{id}</code>. (See <a href="/v3/gists/comments/">gist comments section of the docs</a> for more details.) This change is necessary because the auto-incremented ids of gist comments are easy to guess. This predictability allows anyone to view comments on private Gists with relative ease. Obviously, comments on private gists should be just as private as the gist itself.</p>
+<p>We're introducing a new API media type to allow users to get the SHA-1 of a commit reference. This can be useful in working out if you have the latest version of a remote branch based on your local branch's SHA-1. Developers with read access to a repository can start experimenting with this new media type today during the preview period.</p>
 
-<p>Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
+<p>To get the commit reference's SHA-1, make a <code>GET</code> request to the repository's reference:</p>
 
-<p>We have also added a <code>comments_url</code> member to the Gist documents. The <code>comments_url</code> link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using <code>url</code> and <code>*_url</code> properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.</p>
+<pre class="command-line">
+<span class="command">curl "https://api.github.com/repos/Homebrew/homebrew/commits/master" \</span>
+  -H "Accept: application/vnd.github.chitauri-preview+sha"
+</pre>
+
+<p>To check if a remote branch's SHA-1 is the same as your local branch's SHA-1, make a <code>GET</code> request to the repository's branch and provide the current SHA-1 for the local branch as the ETag:</p>
+
+<pre class="command-line">
+<span class="command">curl "https://api.github.com/repos/Homebrew/homebrew/commits/master" \</span>
+  -H "Accept: application/vnd.github.chitauri-preview+sha" \
+  -H "If-None-Match: \"814412cfbd631109df337e16c807207e78c0d24e\""
+</pre>
+
+<p>If the remote and your local branch point to the same SHA-1 then this call will return a <code>304 Unmodified</code> status code (and not use your rate limit).</p>
+
+<p>You can see an example of this API in a pull request to Homebrew/homebrew's updater: <a href="https://github.com/Homebrew/homebrew/pull/49219">https://github.com/Homebrew/homebrew/pull/49219</a>.</p>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>To use this new API media type during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.chitauri-preview+sha
+</code></pre>
+
+<p>During the preview period, we may change aspects of this API media type based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>Take a look at <a href="/v3/repos/commits/#get-the-sha-1-of-a-commit-reference">the documentation</a> and, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Commit+Reference+SHA-1+Preview">get in touch</a>.</p>
 </div>
 
     </div>

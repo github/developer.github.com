@@ -43,6 +43,37 @@ patch formats.
 <%= headers 200 %>
 <%= json(:full_commit) %>
 
+## Get the SHA-1 of a commit reference
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The API to get the SHA-1 of a commit reference is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2016-02-24-commit-reference-sha-api) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.chitauri-preview+sha
+
+{{/tip}}
+
+Users with read access can get the SHA-1 of a commit reference:
+
+    GET /repos/:owner/:repo/commits/:ref
+
+To check if a remote reference's SHA-1 is the same as your local reference's SHA-1, make a `GET` request and provide the current SHA-1 for the local reference as the ETag.
+
+### Response
+
+The SHA-1 of the commit reference.
+
+<%= headers 200 %>
+<pre>
+814412cfbd631109df337e16c807207e78c0d24e
+</pre>
+
 ## Compare two commits
 
     GET /repos/:owner/:repo/compare/:base...:head

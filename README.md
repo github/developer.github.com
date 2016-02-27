@@ -98,7 +98,7 @@ Some actions return arrays.  You can modify the JSON by passing a block:
 There is also a rake task for generating json files from the sample responses in the documentation:
 
 ``` sh
-$ rake generate_json_from_sample_responses
+$ rake generate_json_from_responses
 ```
 
 The generated files will end up in `json-dump/`.

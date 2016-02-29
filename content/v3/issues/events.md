@@ -38,8 +38,10 @@ determine who should be notified of comments.
   <dt>assignee</dt>
   <dd>The User object which was assigned to (or unassigned from) this Issue. Only provided for 'assigned' and 'unassigned' events.</dd>
 
+  {% if page.version == 'dotcom' or page.version > 2.5 %}
   <dt>assigner</dt>
   <dd>The User object that performed the assignment (or unassignment) for this Issue. Only provided for 'assigned' and 'unassigned' events.</dd>
+  {% endif %}
 
   <dt>milestone</dt>
   <dd>The Milestone object including a 'title' attribute. Only provided for 'milestoned' and

@@ -62,9 +62,11 @@ Name | Type | Description
 Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The text of the comment
-`commit_id`|`string` | **Required**. The SHA of the commit to comment on.
+`commit_id`|`string` | **Required**. The SHA of the latest commit of the pull request to comment on.
 `path`|`string` | **Required**. The relative path of the file to comment on.
 `position`|`integer` | **Required**. The line index in the diff to comment on.
+
+Note: When passing the `commit_id`, use the SHA of the latest commit in the pull request or your comment may appear as "outdated" if the specified `position` has been modified in a subsequent commit.
 
 
 #### Example

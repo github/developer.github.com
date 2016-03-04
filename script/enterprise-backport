@@ -45,7 +45,7 @@ data_variables:
 
   versioned_config = symbolize_hash(config.deep_merge(config_enterprise_admin))
 
-  ent_scope_idx = versioned_config[:page_variables].find_index { |v| v[:scope][:path] == 'enterprise' }
+  ent_scope_idx = versioned_config[:page_variables].find_index { |v| v[:scope][:path] == 'enterprise/.' }
 
   versioned_config[:page_variables][ent_scope_idx][:values][:version] = CURR_VERSION
 

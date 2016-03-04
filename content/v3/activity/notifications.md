@@ -92,7 +92,11 @@ Name | Type | Description
 
 ### Response
 
+{% if page.version == 'dotcom' or page.version > 2.5 %}
+<%= headers 200, :pagination => default_pagination_rels %>
+{% else %}
 <%= headers 200 %>
+{% endif %}
 <%= json(:thread) { |h| [h] } %>
 
 ## List your notifications in a repository
@@ -112,7 +116,11 @@ Name | Type | Description
 
 ### Response
 
+{% if page.version == 'dotcom' or page.version > 2.5 %}
+<%= headers 200, :pagination => default_pagination_rels %>
+{% else %}
 <%= headers 200 %>
+{% endif %}
 <%= json(:thread) { |h| [h] } %>
 
 ## Mark as read

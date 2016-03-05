@@ -35,18 +35,19 @@ end
 
 desc "Run the HTML-Proofer"
 task :run_proofer do
-  require 'html/proofer'
+  require 'html-proofer'
   ignored_links = [%r{www.w3.org}]
-  latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']
   # swap versionless Enterprise articles with versioned paths
-  href_swap = {
-    %r{help\.github\.com/enterprise/admin/} => "help.github.com/enterprise/#{config[:versions][0]}/admin/",
-    %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{config[:versions][0]}/user/"
+  url_swap = {
+    %r{help.github.com/enterprise/admin/} => "help.github.com/enterprise/#{config[:versions][0]}/admin/",
+    %r{help.github.com/enterprise/user/} => "help.github.com/enterprise/#{config[:versions][0]}/user/"
   }
-  HTML::Proofer.new("./output", \
-        :href_ignore => ignored_links, \
-        :href_swap => href_swap, \
-        :parallel => { :in_processes => 5 }).run
+  proofer_opts = {
+                    :url_ignore => ignored_links,
+                    :url_swap => url_swap,
+                    :parallel => { :in_processes => 5 }
+                 }
+  HTMLProofer.check_directory("./output", proofer_opts).run
 end
 
 desc "Remove the tmp dir"

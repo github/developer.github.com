@@ -13,6 +13,8 @@ title: Git Refs
 The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For example, the call to get the data for a branch named `skunkworkz/featureA` would be:
 
     GET /repos/:owner/:repo/git/refs/heads/skunkworkz/featureA
+    
+If the `ref` doesn't exist in the repository, but existing refs start with `ref` they will be returned as an array.
 
 ### Response
 

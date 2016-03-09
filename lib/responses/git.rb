@@ -422,6 +422,32 @@ module GitHub
           }
         }
       ]
+
+      REFS_MATCHING ||= [
+        {
+          "ref" => "refs/heads/feature-a",
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/feature-a",
+          "object" => {
+            "type" => "commit",
+            "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd",
+            "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"
+          }
+        },
+        {
+          "ref" => "refs/heads/feature-b",
+          "url" => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/feature-b",
+          "object" => {
+            "type" => "commit",
+            "sha" => "612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac",
+            "url" => "https://api.github.com/repos/octocat/Hello-World/git/commits/612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"
+          }
+        }
+      ]
+
+      REFS_NOT_FOUND ||= {
+        "message" => "Not Found",
+        "documentation_url" => "https://developer.github.com/v3"
+      }
     end
   end
 end

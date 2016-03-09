@@ -618,10 +618,10 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
+<div class="change" id="/changes/2014-02-24-wildcard-event-for-webhooks/">
   <h2 class="title">
-<a id="--finer-grained-oauth-scopes-for-ssh-keys" class="anchor" href="#--finer-grained-oauth-scopes-for-ssh-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
+<a id="--wildcard-event-for-webhooks" class="anchor" href="#--wildcard-event-for-webhooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-02-24-wildcard-event-for-webhooks/">Wildcard Event for Webhooks</a>
 </h2>
 
 <div class="meta">
@@ -632,49 +632,20 @@ you have any questions or feedback, <a href="https://github.com/contact?form%5Bs
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle" data-proofer-ignore>
+      <a href="https://github.com/kdaigle" data-proofer-ignore>kdaigle</a>
   </li>
 </ul>
 </div>
 
 <p></p>
-<p>As <a href="https://github.com/blog/1786-enhanced-oauth-security-for-ssh-keys">we announced</a>, we've made some important changes to the way that API consumers manage SSH keys.</p>
+<p>We've made a small change to make it easier for webhook integrators to receive "everything".
+Instead of adding every event to your webhook, you can now opt-in to all events (including
+all new events in the future) by using the <a href="/webhooks/#wildcard-event">wildcard event</a> (<code>*</code>).</p>
 
-<h2>
-<a id="finer-grained-oauth-scopes" class="anchor" href="#finer-grained-oauth-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="finer-grained-oauth-scopes" class="anchor" href="#finer-grained-oauth-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Finer-grained OAuth scopes</h2>
-
-<p>To help third party applications request only permissions that they need, the API now supports three new <a href="/v3/oauth/#scopes">scopes</a> for working with a user's public SSH keys.</p>
-
-<ul>
-<li>
-<code>read:public_key</code> provides read access to the user's SSH keys</li>
-<li>
-<code>write:public_key</code> allows an app to read existing keys and create new ones</li>
-<li>
-<code>admin:public_key</code> enables an app to read, write, and delete keys</li>
-</ul>
-
-<h2>
-<a id="changes-to-user-scope" class="anchor" href="#changes-to-user-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="changes-to-user-scope" class="anchor" href="#changes-to-user-scope" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes to <code>user</code> scope</h2>
-
-<p>Historically, <code>user</code> scope has provided full access to manage a user's SSH keys. Now that we have dedicated scopes for managing a user's SSH keys, we have removed those permissions from the <code>user</code> scope. Now <code>user</code> scope will no longer provide access to SSH keys. Applications that need this access should request one of the new scopes described above.</p>
-
-<h2>
-<a id="keys-are-now-immutable" class="anchor" href="#keys-are-now-immutable" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="keys-are-now-immutable" class="anchor" href="#keys-are-now-immutable" aria-hidden="true"><span class="octicon octicon-link"></span></a>Keys are now immutable</h2>
-
-<p>To simplify the security audit trail for SSH keys, we're making keys immutable. API consumers can continue to create keys and delete keys as needed, but keys can no longer be changed. To change an existing key, API consumers should delete the existing key and create a new one with the desired attributes. This change applies both to a <a href="/v3/users/keys/">user's SSH keys</a> and a <a href="/v3/repos/keys/">repository's deploy keys</a>.</p>
-
-<h2>
-<a id="deleting-keys-when-revoking-a-token" class="anchor" href="#deleting-keys-when-revoking-a-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="deleting-keys-when-revoking-a-token" class="anchor" href="#deleting-keys-when-revoking-a-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deleting keys when revoking a token</h2>
-
-<p>Also any keys created via an OAuth token from this point forward will be deleted when that token is revoked.</p>
-
-<p>As always, if you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+improvements+for+SSH+keys">please get in touch</a>.</p>
+<p>If you add this event to an existing webhook, we'll remove the existing specific events and
+send you payloads for all supported events. As we add new events, you'll automatically
+begin receiving those too.</p>
 
 <p></p>
 </div>

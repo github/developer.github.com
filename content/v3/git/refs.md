@@ -17,7 +17,7 @@ The `ref` in the URL must be formatted as `heads/branch`, not just `branch`. For
 <%= headers 200 %>
 <%= json :ref %>
 
-If the ref doesn't exist in the repository, but existing refs start with ref
+If the `ref` doesn't exist in the repository, but existing refs start with `ref`
 they will be returned as an array. For example, a call to get the data for a
 branch named `feature`, which doesn't exist, would return head refs
 including `featureA` and `featureB` which do.
@@ -27,7 +27,7 @@ including `featureA` and `featureB` which do.
 <%= headers 200 %>
 <%= json :refs_matching %>
 
-If the ref doesn't match an existing ref or any prefixes a 404 will be returned.
+If the `ref` doesn't match an existing ref or any prefixes a 404 will be returned.
 
     GET /repos/:owner/:repo/git/refs/heads/feature-branch-that-no-longer-exists
 

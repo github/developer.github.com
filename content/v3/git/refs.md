@@ -29,7 +29,7 @@ including `featureA` and `featureB` which do.
 
 If the ref doesn't match an existing ref or any prefixes a 404 will be returned.
 
-    GET /repos/:owner/:repo/git/refs/heads/ref-that-like-for-sure-totally-doesnt-exist
+    GET /repos/:owner/:repo/git/refs/heads/feature-branch-that-no-longer-exists
 
 <%= headers 404 %>
 <%= json :refs_not_found %>

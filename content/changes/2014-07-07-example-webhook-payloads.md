@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New example webhook payloads
 author_name: kdaigle
 ---

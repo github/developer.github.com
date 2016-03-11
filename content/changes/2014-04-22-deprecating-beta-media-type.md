@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Deprecating the beta media type
 author_name: jasonrudolph
 ---

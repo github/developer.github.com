@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Paginated results for organization members
 author_name: pengwynn
 ---

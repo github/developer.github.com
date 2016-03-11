@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Accepting organization invitations from the API
 author_name: jakeboxer
 ---

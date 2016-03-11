@@ -1,5 +1,4 @@
 ---
-kind: change
 title: "Changes to Gist API response for large files"
 author_name: leongersing
 ---

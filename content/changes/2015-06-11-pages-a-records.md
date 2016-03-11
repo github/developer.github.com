@@ -1,5 +1,4 @@
 ---
-kind: change
 title: GitHub Pages' A Records Added to Meta API
 author_name: leereilly
 ---

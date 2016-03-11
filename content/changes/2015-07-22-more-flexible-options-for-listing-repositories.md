@@ -1,5 +1,4 @@
 ---
-kind: change
 title: More flexible options for listing repositories
 author_name: jakeboxer
 ---

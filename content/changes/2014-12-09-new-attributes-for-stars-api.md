@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New Attributes for Starring API
 author_name: arfon
 ---

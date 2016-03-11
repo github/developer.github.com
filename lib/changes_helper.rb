@@ -8,7 +8,15 @@ module ChangesHelper
     end
   end
 
+  def add_kind_attribute
+    @items.each do |item|
+      next unless item[:filename].to_s.starts_with?('content/changes/2')
+      item[:kind] = 'change'
+    end
+  end
+
   MimeFormat ||= "application/vnd.github.%s+json".freeze
+
   # Public: Filters the change items out.  If a version is given, show only the
   # items related to that version.
   #

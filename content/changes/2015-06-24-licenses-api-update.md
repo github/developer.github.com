@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Licenses API update
 author_name: mislav
 ---

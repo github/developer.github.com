@@ -1,5 +1,4 @@
 ---
-kind: change
 title: OAuth scopes for organization and team resources
 author_name: pengwynn
 ---

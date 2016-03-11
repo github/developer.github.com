@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Licenses API
 author_name: benbalter
 ---

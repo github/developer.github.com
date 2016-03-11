@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Ensure your app is ready for Protected Branches
 author_name: aroben
 ---

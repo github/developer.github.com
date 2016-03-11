@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New user content domains
 author_name: azizshamim
 ---

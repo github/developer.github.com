@@ -1,5 +1,4 @@
 ---
-kind: change
 title: An Update on the New Search API
 author_name: jasonrudolph
 ---

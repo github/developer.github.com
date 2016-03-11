@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Releases API is Official
 author_name: technoweenie
 ---

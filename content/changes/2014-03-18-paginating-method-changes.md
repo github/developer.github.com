@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Pagination changes for some resource lists
 author_name: pengwynn
 ---

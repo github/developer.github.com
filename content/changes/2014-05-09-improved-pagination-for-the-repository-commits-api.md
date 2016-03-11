@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Improved pagination for the Repository Commits API
 author_name: izuzak
 ---

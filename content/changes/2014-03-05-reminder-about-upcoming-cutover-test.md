@@ -1,5 +1,4 @@
 ---
-kind: change
 title: "Reminder: March 12 Cutover Test for Default Media Type"
 author_name: jasonrudolph
 ---

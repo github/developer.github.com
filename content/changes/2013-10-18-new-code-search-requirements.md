@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New Validation Rule for Beta Code Search API
 author_name: jasonrudolph
 ---

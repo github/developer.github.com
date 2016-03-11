@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Commit Statuses Now Available for Branches and Tags
 author_name: foca
 ---

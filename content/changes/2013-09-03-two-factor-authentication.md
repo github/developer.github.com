@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Two-Factor Authentication and the API
 author_name: mastahyeti
 ---

@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New features for the Deployments API preview
 author_name: atmos
 ---

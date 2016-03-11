@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Preview repository redirects
 author_name: jasonrudolph
 ---

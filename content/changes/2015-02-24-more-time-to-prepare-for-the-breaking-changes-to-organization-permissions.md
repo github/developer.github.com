@@ -1,5 +1,4 @@
 ---
-kind: change
 title: More time to prepare for the breaking changes to organization permissions
 author_name: jakeboxer
 ---

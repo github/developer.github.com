@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Query enhancements for listing issues and pull requests
 author_name: pengwynn
 ---

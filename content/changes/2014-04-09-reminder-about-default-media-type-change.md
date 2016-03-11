@@ -1,5 +1,4 @@
 ---
-kind: change
 title: "Reminder: Default media type will change on April 15"
 author_name: jasonrudolph
 ---

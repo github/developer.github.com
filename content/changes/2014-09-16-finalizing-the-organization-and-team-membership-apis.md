@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Finalizing the Organization and Team Membership APIs
 author_name: jakeboxer
 ---

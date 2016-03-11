@@ -1,5 +1,4 @@
 ---
-kind: change
 title: "An integrator's guide to organization application policies"
 author_name: pengwynn
 ---

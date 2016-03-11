@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Preview the Source Import API
 author_name: spraints
 ---

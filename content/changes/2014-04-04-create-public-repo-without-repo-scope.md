@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Grant access to create public repositories without granting access to private repositories
 author_name: pengwynn
 ---

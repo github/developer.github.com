@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Deployment webhook payload changes
 author_name: atmos
 ---

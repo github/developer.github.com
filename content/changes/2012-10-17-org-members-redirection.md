@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Organization Members Resource Changes
 author_name: pezra
 ---

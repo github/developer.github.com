@@ -1,5 +1,4 @@
 ---
-kind: change
 title: We're changing the way you add new members to your organization
 author_name: jakeboxer
 ---

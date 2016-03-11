@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Pagination in the Combined Status API
 author_name: bhuga
 ---

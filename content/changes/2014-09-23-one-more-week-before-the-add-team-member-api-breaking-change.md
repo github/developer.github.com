@@ -1,5 +1,4 @@
 ---
-kind: change
 title: One more week before the "Add team member" API breaking change
 author_name: jakeboxer
 ---

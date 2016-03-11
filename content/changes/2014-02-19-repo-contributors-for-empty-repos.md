@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Repository Contributors and Empty Repositories
 author_name: izuzak
 ---

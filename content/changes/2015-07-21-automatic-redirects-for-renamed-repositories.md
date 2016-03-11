@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Automatic redirects for renamed repositories
 author_name: jasonrudolph
 ---

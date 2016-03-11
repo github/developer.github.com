@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Preview the New Organization Webhooks API
 author_name: jdpace
 ---

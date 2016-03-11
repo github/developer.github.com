@@ -1,5 +1,4 @@
 ---
-kind: change
 title: The Deployments API is official
 author_name: atmos
 ---

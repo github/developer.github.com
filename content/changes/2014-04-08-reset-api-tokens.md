@@ -1,5 +1,4 @@
 ---
-kind: change
 title: "Recommendation: Reset OAuth authorizations"
 author_name: pengwynn
 ---

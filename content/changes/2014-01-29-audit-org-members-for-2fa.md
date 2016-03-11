@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Audit organization members for two-factor authentication
 author_name: pengwynn
 ---

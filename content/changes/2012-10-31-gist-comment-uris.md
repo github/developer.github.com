@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Gist comment URIs
 author_name: pezra
 ---

@@ -1,5 +1,4 @@
 ---
-kind: change
 title: The Combined Status API is official
 author_name: bhuga
 ---

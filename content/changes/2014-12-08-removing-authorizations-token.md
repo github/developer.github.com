@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Removing token attribute from Authorizations API responses
 author_name: ptoomey3
 ---

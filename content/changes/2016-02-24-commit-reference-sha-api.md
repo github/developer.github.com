@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Commit Reference SHA-1 Preview Period
 author_name: mikemcquaid
 ---

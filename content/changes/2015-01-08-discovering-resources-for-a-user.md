@@ -1,5 +1,4 @@
 ---
-kind: change
 title: "New guide: Discovering resources for a user"
 author_name: jasonrudolph
 ---

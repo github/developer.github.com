@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Gist raw file URI change
 author_name: spicycode
 ---

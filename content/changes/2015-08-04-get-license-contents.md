@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Get the contents of a repository’s license
 author_name: benbalter
 ---

@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Authorizations API response changes are now in effect
 author_name: ptoomey3
 ---

@@ -1,5 +1,4 @@
 ---
-kind: change
 title: The GitHub Enterprise API documentation has a new home!
 author_name: gjtorikian
 ---

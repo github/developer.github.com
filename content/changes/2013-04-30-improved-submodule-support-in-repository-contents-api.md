@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Improved Support for Submodules in the Repository Contents API
 author_name: jasonrudolph
 ---

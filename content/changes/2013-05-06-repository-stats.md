@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Repository Statistics
 author_name: Caged
 ---

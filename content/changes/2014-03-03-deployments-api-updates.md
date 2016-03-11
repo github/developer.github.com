@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New Payload Format for Deployments
 author_name: atmos
 ---

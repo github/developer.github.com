@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New Attributes for Issue Events API
 author_name: jdpace
 ---

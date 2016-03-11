@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Upcoming Change to Default Media Type
 author_name: jasonrudolph
 ---

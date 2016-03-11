@@ -1,5 +1,4 @@
 ---
-kind: change
 title: List all organizations
 author_name: keavy
 ---

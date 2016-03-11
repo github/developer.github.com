@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Notifications API
 author_name: technoweenie
 ---

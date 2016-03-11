@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New attributes for PullRequestReviewComment events
 author_name: jdpace
 ---

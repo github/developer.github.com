@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Breaking changes to organization permissions coming on June 24
 author_name: jakeboxer
 ---

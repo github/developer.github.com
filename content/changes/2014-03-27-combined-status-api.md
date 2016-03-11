@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Preview the New Combined Status API
 author_name: bhuga
 ---

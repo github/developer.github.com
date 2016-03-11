@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New assigned/labeled actions for issue and pull request events
 author_name: jdpace
 ---

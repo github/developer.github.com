@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Understanding search results and potential timeouts
 author_name: izuzak
 ---

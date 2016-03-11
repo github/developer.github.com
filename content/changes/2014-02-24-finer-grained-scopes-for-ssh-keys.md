@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Finer-grained OAuth scopes for SSH keys
 author_name: pengwynn
 ---

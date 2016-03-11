@@ -1,5 +1,4 @@
 ---
-kind: change
 title: When Does My Rate Limit Reset?
 author_name: jasonrudolph
 ---

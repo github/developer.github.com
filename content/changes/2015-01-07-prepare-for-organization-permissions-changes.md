@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Prepare for upcoming organization permissions changes
 author_name: jakeboxer
 ---

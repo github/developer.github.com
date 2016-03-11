@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Organization Webhooks API finalized
 author_name: pengwynn
 ---

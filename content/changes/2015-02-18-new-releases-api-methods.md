@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New Releases API methods
 author_name: pengwynn
 ---

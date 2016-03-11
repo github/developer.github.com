@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Improvements to the Search API
 author_name: jasonrudolph
 ---

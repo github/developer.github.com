@@ -1,5 +1,4 @@
 ---
-kind: change
 title: New attributes for the Deployments API
 author_name: atmos
 ---

@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Create, update, and delete individual files
 author_name: ymendel
 ---

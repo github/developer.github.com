@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Removed SSLv3 support from webhooks and services
 author_name: kdaigle
 ---

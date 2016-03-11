@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Status API Limits
 author_name: rsanheim
 ---

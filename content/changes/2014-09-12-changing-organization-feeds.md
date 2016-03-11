@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Changing organization feeds in the Feeds API
 author_name: mastahyeti
 ---

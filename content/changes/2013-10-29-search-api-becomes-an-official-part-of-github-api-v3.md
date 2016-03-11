@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Search API Becomes an Official Part of API v3
 author_name: jasonrudolph
 ---

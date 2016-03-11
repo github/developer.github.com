@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Replace older SSH keys created by your application
 author_name: jasonrudolph
 ---

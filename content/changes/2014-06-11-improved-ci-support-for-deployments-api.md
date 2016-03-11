@@ -1,5 +1,4 @@
 ---
-kind: change
 title: Improved CI support for the Deployments API
 author_name: atmos
 ---

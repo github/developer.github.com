@@ -46,7 +46,7 @@ Name | Type | Description
 #### Example
 
 <%= json \
-  :body      => 'Nice change',
+  :body      => 'Great stuff',
   :path      => 'file1.txt',
   :position  => 4,
   :line      => nil
@@ -86,7 +86,7 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json :commit_comment %>
+<%= json(:commit_comment) { |h| h.merge('body' => 'Nice change') } %>
 
 ## Delete a commit comment
 

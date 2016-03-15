@@ -44,7 +44,70 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-09-05-removing-gravatar-id/">
+      <div class="change" id="/changes/2014-09-12-changing-organization-feeds/">
+  <h2 class="title">
+<a id="--changing-organization-feeds-in-the-feeds-api" class="anchor" href="#--changing-organization-feeds-in-the-feeds-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-09-12-changing-organization-feeds/">Changing organization feeds in the Feeds API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 12, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore>
+      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We have deprecated the <code>current_user_organization_url</code> attribute and the
+<code>current_user_organization.href</code> attribute in the <a href="/v3/activity/feeds/">Feeds API</a>. If you make
+use of these attributes, you'll want to update your code to use the new
+<code>current_user_organization_urls</code> attribute instead.</p>
+
+<h3>
+<a id="changes-to-the-deprecated-attributes" class="anchor" href="#changes-to-the-deprecated-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="changes-to-the-deprecated-attributes" class="anchor" href="#changes-to-the-deprecated-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changes to the deprecated attributes</h3>
+
+<p>Previously, the deprecated attributes returned URI template. For example:</p>
+
+<pre class="highlight highlight-json"><code><span class="s2">"current_user_organization_url"</span><span class="err">:</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"</span><span class="w">
+</span></code></pre>
+
+
+<p>The template included a deprecated authentication token. Our new tokens are
+valid only for a concrete feed URL (not for a URI template). Because the
+deprecated attributes were templates and did not specify a concrete URL, the API
+could not provide a token that could be used for organization feeds.</p>
+
+<p>Starting today, the API returns empty values for the deprecated attributes.</p>
+
+<h3>
+<a id="new-attribute-for-organization-feeds" class="anchor" href="#new-attribute-for-organization-feeds" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-attribute-for-organization-feeds" class="anchor" href="#new-attribute-for-organization-feeds" aria-hidden="true"><span class="octicon octicon-link"></span></a>New attribute for organization feeds</h3>
+
+<p>In order to preserve the functionality of this API, we have added a new
+attribute that lists specific Atom feed urls for each of the user's
+organizations.</p>
+
+<pre class="highlight highlight-json"><code><span class="s2">"current_user_organization_urls"</span><span class="err">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"</span><span class="w">
+  </span><span class="s2">"https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<p>Check out the updated <a href="/v3/activity/feeds/">Feeds API documentation</a> for the new fields. If you
+have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Changing+organization+feeds+in+the+Feeds+API">get drop us a line</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-09-05-removing-gravatar-id/">
   <h2 class="title">
 <a id="--removing-gravatar-id-from-user-payloads" class="anchor" href="#--removing-gravatar-id-from-user-payloads" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-09-05-removing-gravatar-id/">Removing Gravatar ID from user payloads</a>
@@ -64,8 +127,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We have deprecated the <code>gravatar_id</code> attribute in the <a href="https://developer.github.com/v3/users/">user
+  <p>We have deprecated the <code>gravatar_id</code> attribute in the <a href="https://developer.github.com/v3/users/">user
 representation</a>. Starting September 19,
 the API will always provide an empty string as the value for this attribute.</p>
 
@@ -79,8 +141,6 @@ attribute has always been present in the <a href="/v3/users/">v3 user representa
 and is the only reliable way to find a GitHub user's avatar.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+Gravatar+ID">get drop us a line</a>.</p>
-
-<p></p>
 </div>
 
 <div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
@@ -103,8 +163,7 @@ and is the only reliable way to find a GitHub user's avatar.</p>
 </ul>
 </div>
 
-<p></p>
-<p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-organization-members-to-a-team">invite</a> new GitHub users to your organization via the API. We're expanding the API to also allow users to view their organization membership statuses and accept any invitations they've received.</p>
+  <p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-organization-members-to-a-team">invite</a> new GitHub users to your organization via the API. We're expanding the API to also allow users to view their organization membership statuses and accept any invitations they've received.</p>
 
 <h3>
 <a id="the-new-organization-memberships-api" class="anchor" href="#the-new-organization-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
@@ -415,56 +474,21 @@ count represents the number of contexts submitted for the given commit.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-06-11-improved-ci-support-for-deployments-api/">
-  <h2 class="title">
-<a id="--improved-ci-support-for-the-deployments-api" class="anchor" href="#--improved-ci-support-for-the-deployments-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    June 11, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
-      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Today we're making a few minor changes to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>. With the introduction of <a href="https://developer.github.com/changes/2014-03-27-combined-status-api/">combined statuses</a> in a <a href="https://developer.github.com/changes/2014-04-10-deployment-api-preview-extension/">recent update</a>, we noticed a few inconsistencies with the API that we'd like to remedy.</p>
-
-<p>We're introducing a new parameter called <code>required_contexts</code>. This parameter accepts an array of named <a href="https://developer.github.com/v3/repos/statuses/">commit status</a> contexts that are ensured to be in a "success" state before the deployment is created. This allows you to verify that more than one system verified your code before you deploy it.</p>
-
-<p>We've removed support for the <code>force</code> parameter. The force parameter existed to bypass both the auto-merge and commit status checks. The same behavior can now be accomplished by setting <code>auto_merge</code> and <code>required_contexts</code> appropriately.</p>
-
-<p>We're also setting a context for all <a href="https://developer.github.com/v3/repos/statuses/">commit statuses</a>. If a commit status is created without a context, we'll now set it to the string "default".</p>
-
-<p>If you have any questions or concerns, <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">drop us a line</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
-  <!-- @count_gap refers to the minimum number of sibling pages to show -->
+  
 
 <div class="pagination">
   
   <a href="/changes/4" class="previous_page">Previous</a>
   
 
-  <!-- using a while loop here as it's the only way to skip several iterations -->
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
       
-      <!-- we skip multiple iterations to insert the gap (`...`), and continue with the regular links -->
+      
       
     
 
@@ -475,8 +499,8 @@ count represents the number of contexts submitted for the given commit.</p>
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -486,8 +510,8 @@ count represents the number of contexts submitted for the given commit.</p>
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -497,8 +521,8 @@ count represents the number of contexts submitted for the given commit.</p>
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -508,8 +532,8 @@ count represents the number of contexts submitted for the given commit.</p>
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -519,8 +543,8 @@ count represents the number of contexts submitted for the given commit.</p>
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -530,11 +554,11 @@ count represents the number of contexts submitted for the given commit.</p>
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
       
-      <!-- we skip multiple iterations to insert the gap (`...`), and continue with the regular links -->
+      
       
     
 
@@ -545,8 +569,8 @@ count represents the number of contexts submitted for the given commit.</p>
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -556,8 +580,8 @@ count represents the number of contexts submitted for the given commit.</p>
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -580,6 +604,8 @@ count represents the number of contexts submitted for the given commit.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
+
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
@@ -593,8 +619,6 @@ count represents the number of contexts submitted for the given commit.</p>
   <li><a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br /><span class="date">September 3, 2015</span></a></li>
 
   <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
-
-  <li><a href="/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories<br /><span class="date">July 22, 2015</span></a></li>
 
 </ul>
 

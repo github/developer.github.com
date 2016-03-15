@@ -44,7 +44,41 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">
+      <div class="change" id="/changes/2014-06-11-improved-ci-support-for-deployments-api/">
+  <h2 class="title">
+<a id="--improved-ci-support-for-the-deployments-api" class="anchor" href="#--improved-ci-support-for-the-deployments-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 11, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
+      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Today we're making a few minor changes to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>. With the introduction of <a href="https://developer.github.com/changes/2014-03-27-combined-status-api/">combined statuses</a> in a <a href="https://developer.github.com/changes/2014-04-10-deployment-api-preview-extension/">recent update</a>, we noticed a few inconsistencies with the API that we'd like to remedy.</p>
+
+<p>We're introducing a new parameter called <code>required_contexts</code>. This parameter accepts an array of named <a href="https://developer.github.com/v3/repos/statuses/">commit status</a> contexts that are ensured to be in a "success" state before the deployment is created. This allows you to verify that more than one system verified your code before you deploy it.</p>
+
+<p>We've removed support for the <code>force</code> parameter. The force parameter existed to bypass both the auto-merge and commit status checks. The same behavior can now be accomplished by setting <code>auto_merge</code> and <code>required_contexts</code> appropriately.</p>
+
+<p>We're also setting a context for all <a href="https://developer.github.com/v3/repos/statuses/">commit statuses</a>. If a commit status is created without a context, we'll now set it to the string "default".</p>
+
+<p>If you have any questions or concerns, <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">drop us a line</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">
   <h2 class="title">
 <a id="--new-attributes-for-pullrequestreviewcomment-events" class="anchor" href="#--new-attributes-for-pullrequestreviewcomment-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-06-09-new-attributes-for-pull-request-review-comment-events/">New attributes for PullRequestReviewComment events</a>
@@ -490,65 +524,21 @@ tokens</del> or <a href="/v3/oauth_authorizations/#revoke-an-authorization-for-a
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">
-  <h2 class="title">
-<a id="--understanding-search-results-and-potential-timeouts" class="anchor" href="#--understanding-search-results-and-potential-timeouts" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-04-07-understanding-search-results-and-potential-timeouts/">Understanding search results and potential timeouts</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 7, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak" data-proofer-ignore>
-      <a href="https://github.com/izuzak" data-proofer-ignore>izuzak</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Some queries are computationally expensive for our search infrastructure to
-execute. To keep the <a href="/v3/search">Search API</a> fast for everyone, we limit how
-long any individual query can run. In rare situations when a query exceeds the
-time limit, the API returns all matches that were found prior to the timeout.</p>
-
-<p>Starting today, the Search API also now <a href="/v3/search/#timeouts-and-incomplete-results">informs you when such a timeout
-happens</a>. Reaching a timeout does
-not necessarily mean that search results are incomplete. It just means that the
-query was discontinued before it searched through all possible data. More
-results might have been found, but also might not.</p>
-
-<p>In some cases, if you know that your search results are potentially incomplete,
-you might think about the data differently. By exposing timeouts when they
-happen, the API helps you better understand how to interpret the results.</p>
-
-<p>We hope this is useful as you integrate with the Search API. In the meantime,
-we're working on improving search so that these timeouts occur as rarely as
-possible. If you have any questions, <a href="https://github.com/contact?form%5Bsubject%5D=Search+API">let us know</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
-  <!-- @count_gap refers to the minimum number of sibling pages to show -->
+  
 
 <div class="pagination">
   
   <a href="/changes/5" class="previous_page">Previous</a>
   
 
-  <!-- using a while loop here as it's the only way to skip several iterations -->
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
       
-      <!-- we skip multiple iterations to insert the gap (`...`), and continue with the regular links -->
+      
       
     
 
@@ -559,8 +549,8 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -570,8 +560,8 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -581,8 +571,8 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -592,8 +582,8 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -603,8 +593,8 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -614,11 +604,11 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
       
-      <!-- we skip multiple iterations to insert the gap (`...`), and continue with the regular links -->
+      
       
     
 
@@ -629,8 +619,8 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -640,8 +630,8 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
     
   
     
-    <!-- first half ensures we're not caught in an infinite loop at @total_pages - 1 -->
-    <!-- second half, with the .abs, checks for gap siblings ahead *and* behind the current page -->
+    
+    
     
 
     
@@ -664,6 +654,8 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
+
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
@@ -677,8 +669,6 @@ possible. If you have any questions, <a href="https://github.com/contact?form%5B
   <li><a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br /><span class="date">September 3, 2015</span></a></li>
 
   <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
-
-  <li><a href="/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories<br /><span class="date">July 22, 2015</span></a></li>
 
 </ul>
 

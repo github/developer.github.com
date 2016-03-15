@@ -102,7 +102,7 @@ Name | Type | Description
   :body      => "I'm having a problem with this.",
   :assignee  => "octocat",
   :milestone => 1,
-  :labels    => %w(Label1 Label2)
+  :labels    => %w(bug)
 %>
 
 ### Response
@@ -136,7 +136,7 @@ Name | Type | Description
   :assignee  => "octocat",
   :milestone => 1,
   :state     => "open",
-  :labels    => %w(Label1 Label2)
+  :labels    => %w(bug)
 %>
 
 ### Response

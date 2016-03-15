@@ -130,7 +130,7 @@
 <h2>
 <a id="check-the-action-before-processing-the-event" class="anchor" href="#check-the-action-before-processing-the-event" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check the action before processing the event</h2>
 
-<p>Webhook events can have multiple actions. As GitHub's feature set grows, the list of actions may change. Ensure that your application explicitly checks the action before doing any processing. For example, the <a href="https://developer.github.com/v3/activity/events/types/#issuesevent"><code>IssuesEvent</code></a> has several possible actions, such as <code>opened</code> when the issue is created, <code>closed</code> when the issue is closed, and <code>assigned</code> when the issue is assigned to someone.</p>
+<p>Webhook events can have multiple actions. As GitHub's feature set grows, we will occasionally add new actions to existing event types. Ensure that your application explicitly checks the action before doing any processing. For example, the <a href="https://developer.github.com/v3/activity/events/types/#issuesevent"><code>IssuesEvent</code></a> has several possible actions, such as <code>opened</code> when the issue is created, <code>closed</code> when the issue is closed, and <code>assigned</code> when the issue is assigned to someone.</p>
 
 <p>Two code examples are given below, Fig 1.1 and Fig 1.2. In Fig 1.1, the <code>process_closed</code> method will be called for any event action which is not <code>opened</code> or <code>assigned</code>. This means that the <code>process_closed</code> method will be called for events with the <code>closed</code> action, but also other events with different actions delivered to the webhook.</p>
 

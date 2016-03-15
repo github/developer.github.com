@@ -42,7 +42,7 @@ module ChangesHelper
   end
 
   def total_pages(version = nil)
-    (api_changes(version).length / PER_PAGE).floor + 1
+    (api_changes(version).length / PER_PAGE).floor
   end
 
   # Public

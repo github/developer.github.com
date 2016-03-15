@@ -55,7 +55,7 @@ For the stability of your app, you shouldn't try to parse this data or try to gu
 For example, when working with paginated results, it's often tempting to construct URLs that append `?page=<number>` to the end. Avoid that temptation. [Our guide on pagination](/guides/traversing-with-pagination) offers some safe tips on dependably following paginated results.
 
 ## Check the action before processing the event
-Webhook events can have multiple actions. As GitHub's feature set grows, the list of actions may change. Ensure that your application explicitly checks the action before doing any processing. For example, the [`IssuesEvent`](https://developer.github.com/v3/activity/events/types/#issuesevent) has several possible actions, such as `opened` when the issue is created, `closed` when the issue is closed, and `assigned` when the issue is assigned to someone.
+Webhook events can have multiple actions. As GitHub's feature set grows, we will occasionally add new actions to existing event types. Ensure that your application explicitly checks the action before doing any processing. For example, the [`IssuesEvent`](https://developer.github.com/v3/activity/events/types/#issuesevent) has several possible actions, such as `opened` when the issue is created, `closed` when the issue is closed, and `assigned` when the issue is assigned to someone.
 
 Two code examples are given below, Fig 1.1 and Fig 1.2. In Fig 1.1, the `process_closed` method will be called for any event action which is not `opened` or `assigned`. This means that the `process_closed` method will be called for events with the `closed` action, but also other events with different actions delivered to the webhook.
 

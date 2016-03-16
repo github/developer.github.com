@@ -44,7 +44,149 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-12-08-removing-authorizations-token/">
+      <div class="change" id="/changes/2014-12-08-organization-permissions-api-preview/">
+  <h2 class="title">
+<a id="--preview-the-upcoming-organization-permission-changes" class="anchor" href="#--preview-the-upcoming-organization-permission-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-12-08-organization-permissions-api-preview/">Preview the upcoming organization permission changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 8, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p><strong>UPDATE (2014-12-12):</strong> The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API is now included in this preview as well.</p>
+
+<p>We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:</p>
+
+<ul>
+<li>The Owners team will no longer be special.</li>
+<li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API will include organization-owned repositories.</li>
+<li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API will only include public organization memberships.</li>
+<li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API will require <code>user</code> scope or <code>read:org</code> scope.</li>
+</ul>
+
+<h2>
+<a id="whats-happening-to-the-owners-team" class="anchor" href="#whats-happening-to-the-owners-team" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="whats-happening-to-the-owners-team" class="anchor" href="#whats-happening-to-the-owners-team" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's happening to the Owners team?</h2>
+
+<p>Currently, members of your Owners team are administrators of your organization. Soon, your Owners team will become a totally normal team. Adding and removing Owners team members won't change their administrator status anymore. Instead, you'll be able to directly grant admin permissions to your organization's members without adding them to any special teams.</p>
+
+<p>We won't delete your Owners team, but you'll be able to delete or rename it yourself if you want. Organizations created after the change won't have an Owners team.</p>
+
+<h3>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
+
+<p>In preparation for this change to the Owners team, we're releasing a few new APIs. You'll be able to use these APIs to manage organization admins without relying on the Owners team.</p>
+
+<h4>
+<a id="adding-an-organization-admin" class="anchor" href="#adding-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="adding-an-organization-admin" class="anchor" href="#adding-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding an organization admin</h4>
+
+<p>To add a new organization admin, use the new <a href="/v3/orgs/members/#add-or-update-organization-membership">Add or update organization membership</a> endpoint, specifying a role of <code>"admin"</code> in the request body. This replaces adding or inviting people to the Owners team.</p>
+
+<h4>
+<a id="removing-an-organization-admin" class="anchor" href="#removing-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="removing-an-organization-admin" class="anchor" href="#removing-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Removing an organization admin</h4>
+
+<p>To remove someone from the organization role but keep them as a member of their teams, use the new <a href="/v3/orgs/members/#add-or-update-organization-membership">Add or update organization membership</a> endpoint, specifying a role of <code>"member"</code> in the request body. This replaces removing people from the Owners team.</p>
+
+<h4>
+<a id="listing-organization-admins" class="anchor" href="#listing-organization-admins" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="listing-organization-admins" class="anchor" href="#listing-organization-admins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Listing organization admins</h4>
+
+<p>To get a list of all your organization's admins, use the <a href="/v3/orgs/members/#members-list">Organization members list</a> endpoint, specifying a role of <code>"admin"</code> in the query string. This replaces listing the members of the Owners team.</p>
+
+<h4>
+<a id="checking-if-someone-is-an-organization-admin" class="anchor" href="#checking-if-someone-is-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="checking-if-someone-is-an-organization-admin" class="anchor" href="#checking-if-someone-is-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checking if someone is an organization admin</h4>
+
+<p>To check if a given user is an organization admin, use the new <a href="/v3/orgs/members/#get-organization-membership">Get organization membership</a> endpoint. If the returned <code>"role"</code> attribute is set to <code>"admin"</code> and the returned <code>"state"</code> attribute is set to <code>"active"</code>, the user is an organization admin. This replaces checking if a user is on the Owners team.</p>
+
+<h2>
+<a id="whats-happening-to-the-list-your-repositories-api" class="anchor" href="#whats-happening-to-the-list-your-repositories-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="whats-happening-to-the-list-your-repositories-api" class="anchor" href="#whats-happening-to-the-list-your-repositories-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's happening to the "List your repositories" API?</h2>
+
+<p>Currently, the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API only returns repositories that are owned by users, not by organizations. If you want a list of <em>all</em> the repositories that the authenticated user has access to, you need to use multiple API methods.</p>
+
+<p>Soon, this API will include all repositories that the authenticated user has access to (whether they're owned by a user or by an organization).</p>
+
+<h3>
+<a id="what-should-you-do-1" class="anchor" href="#what-should-you-do-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do-1" class="anchor" href="#what-should-you-do-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
+
+<p>Many apps use the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API in conjunction with the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> and <a href="/v3/repos/#list-organization-repositories">List organization repositories</a> APIs to build up a list of all the repositories the authenticated user has access to. If your app is doing this, you'll be able to get rid of all the organization-related API calls and just use the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API.</p>
+
+<p>If your app uses the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API for another purpose, you'll need to update your app to handle the new organization-owned repositories we'll be returning.</p>
+
+<h2>
+<a id="whats-happening-to-the-list-user-organizations-api" class="anchor" href="#whats-happening-to-the-list-user-organizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="whats-happening-to-the-list-user-organizations-api" class="anchor" href="#whats-happening-to-the-list-user-organizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's happening to the "List user organizations" API?</h2>
+
+<p>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API is intended provide <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a> for any user. When you use this API to fetch <em>your own</em> organizations, this API currently returns your public and private organization memberships.</p>
+
+<p>Soon, this API will only return public organization memberships.</p>
+
+<h3>
+<a id="what-should-you-do-2" class="anchor" href="#what-should-you-do-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do-2" class="anchor" href="#what-should-you-do-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
+
+<p>If your app uses the <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API to fetch all of the organization memberships (public and private) for the authenticated user, you'll need to update your app to use the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API instead. The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API returns all organizations (public and private) that your app is authorized to access.</p>
+
+<h2>
+<a id="whats-happening-to-the-list-your-organizations-api" class="anchor" href="#whats-happening-to-the-list-your-organizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="whats-happening-to-the-list-your-organizations-api" class="anchor" href="#whats-happening-to-the-list-your-organizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's happening to the "List your organizations" API?</h2>
+
+<p>OAuth requests will soon require minimum <a href="/v3/oauth/#scopes">scopes</a> in order to access the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API.</p>
+
+<p>Currently, the API response always includes your <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a>, regardless of the OAuth scopes associated with your request. If you have <code>user</code>, <code>read:org</code>, <code>write:org</code>, or <code>admin:org</code> scope, the response also includes your private organization memberships.</p>
+
+<p>Soon, this API will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with <code>read:org</code> scope, you can publicize your organization membership with <code>user</code> scope, etc.). Therefore, this API will require at least <code>user</code> or <code>read:org</code> scope. (<code>write:org</code> and <code>admin:org</code> scope implicitly include <code>read:org</code> scope.) OAuth requests with insufficient scope will receive a <code>403 Forbidden</code> response.</p>
+
+<h3>
+<a id="what-should-you-do-3" class="anchor" href="#what-should-you-do-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do-3" class="anchor" href="#what-should-you-do-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
+
+<p>If you <a href="/v3/auth/#via-username-and-password">authenticate via username and password</a>, you are not affected by this change.</p>
+
+<p>If your app only needs to fetch the user's public organization memberships, you should use the <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API instead. Since that API only returns public information, it does not require any scopes.</p>
+
+<h2>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
+
+<p>Starting <strong>today</strong>, these new APIs are available for developers to preview. We expect the preview period to last for four weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.</p>
+
+<p>While these additions are in their preview period, you'll need to provide the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.moondragon-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<h2>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
+
+<p>At the end of the preview period, we will announce the start of a migration period. At that time, developers should update their applications to use the new APIs for managing organization admins. During this period, you will still be able to use the Owners team to manage your organization's admins, so that you have time to update your applications to use the new APIs without breakage. We expect the migration period to last for four weeks.</p>
+
+<p>At the end of the migration period, the Owners team will no longer be special, and you'll no longer be able to rely on it for managing organization admins.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Admin+Pre-release+Preview">get in touch with us</a>!</p>
+</div>
+
+<div class="change" id="/changes/2014-12-08-removing-authorizations-token/">
   <h2 class="title">
 <a id="--removing-token-attribute-from-authorizations-api-responses" class="anchor" href="#--removing-token-attribute-from-authorizations-api-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-12-08-removing-authorizations-token/">Removing token attribute from Authorizations API responses</a>
@@ -97,7 +239,7 @@ For example, our own <a href="https://mac.github.com/">GitHub for Mac</a> and
 from the <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> API, in order to support multiple installations of our desktop application for a single user.</p>
 
 <h2>
-<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do-4" class="anchor" href="#what-should-you-do-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h2>
 
 <p>In order to reduce the impact of removing the <code>token</code> attribute, the OAuth
@@ -134,7 +276,7 @@ API, but adds support for the new <code>fingerprint</code> request parameter.</p
 </ul>
 
 <h2>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period-1" class="anchor" href="#preview-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
 
 <p>We are making the new Authorizations API available today for developers to
@@ -151,7 +293,7 @@ following custom media type in the Accept header:</p>
 <p>We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.</p>
 
 <h2>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
 
 <p>At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.</p>
@@ -168,148 +310,6 @@ Given that OAuth token validation occurs for each request to the API we chose
 SHA-256 for performance reasons.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>.</p>
-</div>
-
-<div class="change" id="/changes/2014-12-08-organization-permissions-api-preview/">
-  <h2 class="title">
-<a id="--preview-the-upcoming-organization-permission-changes" class="anchor" href="#--preview-the-upcoming-organization-permission-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-12-08-organization-permissions-api-preview/">Preview the upcoming organization permission changes</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    December 8, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
-      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p><strong>UPDATE (2014-12-12):</strong> The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API is now included in this preview as well.</p>
-
-<p>We have some upcoming changes that will affect the way organization members and repositories are managed. The most important changes are:</p>
-
-<ul>
-<li>The Owners team will no longer be special.</li>
-<li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API will include organization-owned repositories.</li>
-<li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API will only include public organization memberships.</li>
-<li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API will require <code>user</code> scope or <code>read:org</code> scope.</li>
-</ul>
-
-<h2>
-<a id="whats-happening-to-the-owners-team" class="anchor" href="#whats-happening-to-the-owners-team" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="whats-happening-to-the-owners-team" class="anchor" href="#whats-happening-to-the-owners-team" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's happening to the Owners team?</h2>
-
-<p>Currently, members of your Owners team are administrators of your organization. Soon, your Owners team will become a totally normal team. Adding and removing Owners team members won't change their administrator status anymore. Instead, you'll be able to directly grant admin permissions to your organization's members without adding them to any special teams.</p>
-
-<p>We won't delete your Owners team, but you'll be able to delete or rename it yourself if you want. Organizations created after the change won't have an Owners team.</p>
-
-<h3>
-<a id="what-should-you-do-1" class="anchor" href="#what-should-you-do-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
-
-<p>In preparation for this change to the Owners team, we're releasing a few new APIs. You'll be able to use these APIs to manage organization admins without relying on the Owners team.</p>
-
-<h4>
-<a id="adding-an-organization-admin" class="anchor" href="#adding-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="adding-an-organization-admin" class="anchor" href="#adding-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding an organization admin</h4>
-
-<p>To add a new organization admin, use the new <a href="/v3/orgs/members/#add-or-update-organization-membership">Add or update organization membership</a> endpoint, specifying a role of <code>"admin"</code> in the request body. This replaces adding or inviting people to the Owners team.</p>
-
-<h4>
-<a id="removing-an-organization-admin" class="anchor" href="#removing-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="removing-an-organization-admin" class="anchor" href="#removing-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Removing an organization admin</h4>
-
-<p>To remove someone from the organization role but keep them as a member of their teams, use the new <a href="/v3/orgs/members/#add-or-update-organization-membership">Add or update organization membership</a> endpoint, specifying a role of <code>"member"</code> in the request body. This replaces removing people from the Owners team.</p>
-
-<h4>
-<a id="listing-organization-admins" class="anchor" href="#listing-organization-admins" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="listing-organization-admins" class="anchor" href="#listing-organization-admins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Listing organization admins</h4>
-
-<p>To get a list of all your organization's admins, use the <a href="/v3/orgs/members/#members-list">Organization members list</a> endpoint, specifying a role of <code>"admin"</code> in the query string. This replaces listing the members of the Owners team.</p>
-
-<h4>
-<a id="checking-if-someone-is-an-organization-admin" class="anchor" href="#checking-if-someone-is-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="checking-if-someone-is-an-organization-admin" class="anchor" href="#checking-if-someone-is-an-organization-admin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checking if someone is an organization admin</h4>
-
-<p>To check if a given user is an organization admin, use the new <a href="/v3/orgs/members/#get-organization-membership">Get organization membership</a> endpoint. If the returned <code>"role"</code> attribute is set to <code>"admin"</code> and the returned <code>"state"</code> attribute is set to <code>"active"</code>, the user is an organization admin. This replaces checking if a user is on the Owners team.</p>
-
-<h2>
-<a id="whats-happening-to-the-list-your-repositories-api" class="anchor" href="#whats-happening-to-the-list-your-repositories-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="whats-happening-to-the-list-your-repositories-api" class="anchor" href="#whats-happening-to-the-list-your-repositories-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's happening to the "List your repositories" API?</h2>
-
-<p>Currently, the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API only returns repositories that are owned by users, not by organizations. If you want a list of <em>all</em> the repositories that the authenticated user has access to, you need to use multiple API methods.</p>
-
-<p>Soon, this API will include all repositories that the authenticated user has access to (whether they're owned by a user or by an organization).</p>
-
-<h3>
-<a id="what-should-you-do-2" class="anchor" href="#what-should-you-do-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="what-should-you-do-1" class="anchor" href="#what-should-you-do-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
-
-<p>Many apps use the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API in conjunction with the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> and <a href="/v3/repos/#list-organization-repositories">List organization repositories</a> APIs to build up a list of all the repositories the authenticated user has access to. If your app is doing this, you'll be able to get rid of all the organization-related API calls and just use the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API.</p>
-
-<p>If your app uses the <a href="/v3/repos/#list-your-repositories">List your repositories</a> API for another purpose, you'll need to update your app to handle the new organization-owned repositories we'll be returning.</p>
-
-<h2>
-<a id="whats-happening-to-the-list-user-organizations-api" class="anchor" href="#whats-happening-to-the-list-user-organizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="whats-happening-to-the-list-user-organizations-api" class="anchor" href="#whats-happening-to-the-list-user-organizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's happening to the "List user organizations" API?</h2>
-
-<p>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API is intended provide <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a> for any user. When you use this API to fetch <em>your own</em> organizations, this API currently returns your public and private organization memberships.</p>
-
-<p>Soon, this API will only return public organization memberships.</p>
-
-<h3>
-<a id="what-should-you-do-3" class="anchor" href="#what-should-you-do-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="what-should-you-do-2" class="anchor" href="#what-should-you-do-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
-
-<p>If your app uses the <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API to fetch all of the organization memberships (public and private) for the authenticated user, you'll need to update your app to use the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API instead. The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API returns all organizations (public and private) that your app is authorized to access.</p>
-
-<h2>
-<a id="whats-happening-to-the-list-your-organizations-api" class="anchor" href="#whats-happening-to-the-list-your-organizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="whats-happening-to-the-list-your-organizations-api" class="anchor" href="#whats-happening-to-the-list-your-organizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's happening to the "List your organizations" API?</h2>
-
-<p>OAuth requests will soon require minimum <a href="/v3/oauth/#scopes">scopes</a> in order to access the <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API.</p>
-
-<p>Currently, the API response always includes your <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a>, regardless of the OAuth scopes associated with your request. If you have <code>user</code>, <code>read:org</code>, <code>write:org</code>, or <code>admin:org</code> scope, the response also includes your private organization memberships.</p>
-
-<p>Soon, this API will only return organizations that your authorization allows you to operate on in some way (e.g., you can list teams with <code>read:org</code> scope, you can publicize your organization membership with <code>user</code> scope, etc.). Therefore, this API will require at least <code>user</code> or <code>read:org</code> scope. (<code>write:org</code> and <code>admin:org</code> scope implicitly include <code>read:org</code> scope.) OAuth requests with insufficient scope will receive a <code>403 Forbidden</code> response.</p>
-
-<h3>
-<a id="what-should-you-do-4" class="anchor" href="#what-should-you-do-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="what-should-you-do-3" class="anchor" href="#what-should-you-do-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h3>
-
-<p>If you <a href="/v3/auth/#via-username-and-password">authenticate via username and password</a>, you are not affected by this change.</p>
-
-<p>If your app only needs to fetch the user's public organization memberships, you should use the <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API instead. Since that API only returns public information, it does not require any scopes.</p>
-
-<h2>
-<a id="preview-period-1" class="anchor" href="#preview-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
-
-<p>Starting <strong>today</strong>, these new APIs are available for developers to preview. We expect the preview period to last for four weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these additions will become official components of the GitHub API.</p>
-
-<p>While these additions are in their preview period, you'll need to provide the following custom media type in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.moondragon-preview+json
-</code></pre>
-
-<p>During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
-
-<h2>
-<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
-
-<p>At the end of the preview period, we will announce the start of a migration period. At that time, developers should update their applications to use the new APIs for managing organization admins. During this period, you will still be able to use the Owners team to manage your organization's admins, so that you have time to update your applications to use the new APIs without breakage. We expect the migration period to last for four weeks.</p>
-
-<p>At the end of the migration period, the Owners team will no longer be special, and you'll no longer be able to rely on it for managing organization admins.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Admin+Pre-release+Preview">get in touch with us</a>!</p>
 </div>
 
 <div class="change" id="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">

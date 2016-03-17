@@ -2,13 +2,45 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-03-15T07:00:00Z</updated>
+  <updated>2016-03-17T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-03-17:/changes/2016-03-17-the-451-status-code-is-now-supported/</id>
+    <title type="html">The 451 status code is now supported</title>
+    <published>2016-03-17T07:00:00Z</published>
+    <updated>2016-03-17T07:00:00Z</updated>
+    <author>
+      <name>gjtorikian</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-03-17-the-451-status-code-is-now-supported/"/>
+    <content type="html">&lt;p&gt;In December 2015, &lt;a href="https://datatracker.ietf.org/doc/rfc7725/"&gt;the IETF ratified status code &lt;code&gt;451&lt;/code&gt;&lt;/a&gt;. A &lt;code&gt;451&lt;/code&gt; response indicates that a resource is unavailable due to an external legal request.&lt;/p&gt;
+
+&lt;p&gt;The GitHub API will now respond with a &lt;code&gt;451&lt;/code&gt; status code for resources it has been asked to take down due to a DMCA notice. For example:&lt;/p&gt;
+
+&lt;pre class="command-line"&gt;
+&lt;span class="command"&gt;curl https://api.github.com/repos/github/a-repository-that-s-been-taken-down&lt;/span&gt;
+&lt;span class="output"&gt;HTTP/1.1 451&lt;/span&gt;
+&lt;span class="output"&gt;Server: GitHub.com&lt;/span&gt;
+
+&lt;span class="output"&gt;{&lt;/span&gt;
+&lt;span class="output"&gt; "message": "Repository access blocked",&lt;/span&gt;
+&lt;span class="output"&gt; "block": {&lt;/span&gt;
+&lt;span class="output"&gt;   "reason": "dmca",&lt;/span&gt;
+&lt;span class="output"&gt;   "created_at": "2016-03-17T15:39:46-07:00"&lt;/span&gt;
+&lt;span class="output"&gt; }&lt;/span&gt;
+&lt;span class="output"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;This &lt;code&gt;451&lt;/code&gt; code will be returned for repositories and gists. Previously, the API responded with a &lt;code&gt;403 - Forbidden&lt;/code&gt;. Aside from the semantic difference, we feel that it's important for users to know precisely why their data cannot be served.&lt;/p&gt;
+
+&lt;p&gt;If you're receiving a &lt;code&gt;451&lt;/code&gt; due to a DMCA takedown, please read our article on &lt;a href="https://help.github.com/articles/guide-to-submitting-a-dmca-counter-notice/"&gt;submitting a DMCA counter notice&lt;/a&gt; and know your rights. For more information, see &lt;a href="https://help.github.com/articles/dmca-takedown-policy/"&gt;GitHub's DMCA Takedown Policy&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-03-15:/changes/2016-03-15-new-webhook-actions/</id>
     <title type="html">New webhook event actions are coming</title>
@@ -1068,29 +1100,6 @@ OAuth integrations with more confidence.&lt;/p&gt;
 &lt;a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;We're here to help&lt;/h2&gt;
 
 &lt;p&gt;As always, if you have any questions or concerns, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Replace+SSH+keys+created+by+application"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-12-09:/changes/2014-12-09-new-attributes-for-stars-api/</id>
-    <title type="html">New Attributes for Starring API</title>
-    <published>2014-12-09T08:00:00Z</published>
-    <updated>2014-12-09T08:00:00Z</updated>
-    <author>
-      <name>arfon</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-12-09-new-attributes-for-stars-api/"/>
-    <content type="html">&lt;p&gt;You can now see when a user starred a repository. To receive the new response format containing the &lt;code&gt;starred_at&lt;/code&gt; field, request the new media type:&lt;/p&gt;
-
-&lt;pre class="command-line"&gt;
-curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/users/andrew/starred
-&lt;/pre&gt;
-
-&lt;p&gt;Note the starred repository is now available in the repo field.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="feedback" class="anchor" href="#feedback" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Feedback&lt;/h3&gt;
-
-&lt;p&gt;If you have any questions or feedback about these changes, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Attributes+for+Starring+API"&gt;drop us a line&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
 

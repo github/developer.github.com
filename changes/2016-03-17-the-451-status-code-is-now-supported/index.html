@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title> | GitHub Developer Guide</title>
+  <title>The 451 status code is now supported | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,38 +44,47 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-9-28-auto-init-for-repositories/">
+      <div class="change" id="/changes/2016-03-17-the-451-status-code-is-now-supported/">
 <h2 class="title">
-  <a href="/changes/2012-9-28-auto-init-for-repositories/"></a>
+  <a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    
+    March 17, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/.png" alt="Avatar for " data-proofer-ignore/>
-      <a href="https://github.com/" data-proofer-ignore></a>
+    <img height="16" width="16" src="https://github.com/gjtorikian.png" alt="Avatar for gjtorikian" data-proofer-ignore/>
+      <a href="https://github.com/gjtorikian" data-proofer-ignore>gjtorikian</a>
   </li>
 </ul>
 </div>
 
 
-<p>&lt;!DOCTYPE html&gt;
-<meta charset="utf-8">
-</p><title>Redirecting...</title>
-<link rel="canonical" href="/changes/2012-09-28-auto-init-for-repositories/">
-<meta http-equiv="refresh" content="0; url=/changes/2012-09-28-auto-init-for-repositories/">
+<p>In December 2015, <a href="https://datatracker.ietf.org/doc/rfc7725/">the IETF ratified status code <code>451</code></a>. A <code>451</code> response indicates that a resource is unavailable due to an external legal request.</p>
 
-<h1>
-<a id="redirecting" class="anchor" href="#redirecting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Redirecting...</h1>
+<p>The GitHub API will now respond with a <code>451</code> status code for resources it has been asked to take down due to a DMCA notice. For example:</p>
 
-<p><a href="/changes/2012-09-28-auto-init-for-repositories/">Click here if you are not redirected.</a></p>
+<pre class="command-line">
+<span class="command">curl https://api.github.com/repos/github/a-repository-that-s-been-taken-down</span>
+<span class="output">HTTP/1.1 451</span>
+<span class="output">Server: GitHub.com</span>
 
-<script>location='/changes/2012-09-28-auto-init-for-repositories/'</script>
+<span class="output">{</span>
+<span class="output"> "message": "Repository access blocked",</span>
+<span class="output"> "block": {</span>
+<span class="output">   "reason": "dmca",</span>
+<span class="output">   "created_at": "2016-03-17T15:39:46-07:00"</span>
+<span class="output"> }</span>
+<span class="output">}</span>
+</pre>
+
+<p>This <code>451</code> code will be returned for repositories and gists. Previously, the API responded with a <code>403 - Forbidden</code>. Aside from the semantic difference, we feel that it's important for users to know precisely why their data cannot be served.</p>
+
+<p>If you're receiving a <code>451</code> due to a DMCA takedown, please read our article on <a href="https://help.github.com/articles/guide-to-submitting-a-dmca-counter-notice/">submitting a DMCA counter notice</a> and know your rights. For more information, see <a href="https://help.github.com/articles/dmca-takedown-policy/">GitHub's DMCA Takedown Policy</a>.</p>
 </div>
 
     </div>

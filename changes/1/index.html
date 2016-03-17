@@ -44,7 +44,53 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-03-15-new-webhook-actions/">
+      <div class="change" id="/changes/2016-03-17-the-451-status-code-is-now-supported/">
+  <h2 class="title">
+<a id="--the-451-status-code-is-now-supported" class="anchor" href="#--the-451-status-code-is-now-supported" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 17, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/gjtorikian.png" alt="Avatar for gjtorikian" data-proofer-ignore>
+      <a href="https://github.com/gjtorikian" data-proofer-ignore>gjtorikian</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>In December 2015, <a href="https://datatracker.ietf.org/doc/rfc7725/">the IETF ratified status code <code>451</code></a>. A <code>451</code> response indicates that a resource is unavailable due to an external legal request.</p>
+
+<p>The GitHub API will now respond with a <code>451</code> status code for resources it has been asked to take down due to a DMCA notice. For example:</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/repos/github/a-repository-that-s-been-taken-down</span>
+<span class="output">HTTP/1.1 451</span>
+<span class="output">Server: GitHub.com</span>
+
+<span class="output">{</span>
+<span class="output"> "message": "Repository access blocked",</span>
+<span class="output"> "block": {</span>
+<span class="output">   "reason": "dmca",</span>
+<span class="output">   "created_at": "2016-03-17T15:39:46-07:00"</span>
+<span class="output"> }</span>
+<span class="output">}</span>
+</pre>
+
+<p>This <code>451</code> code will be returned for repositories and gists. Previously, the API responded with a <code>403 - Forbidden</code>. Aside from the semantic difference, we feel that it's important for users to know precisely why their data cannot be served.</p>
+
+<p>If you're receiving a <code>451</code> due to a DMCA takedown, please read our article on <a href="https://help.github.com/articles/guide-to-submitting-a-dmca-counter-notice/">submitting a DMCA counter notice</a> and know your rights. For more information, see <a href="https://help.github.com/articles/dmca-takedown-policy/">GitHub's DMCA Takedown Policy</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-03-15-new-webhook-actions/">
   <h2 class="title">
 <a id="--new-webhook-event-actions-are-coming" class="anchor" href="#--new-webhook-event-actions-are-coming" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming</a>
@@ -487,36 +533,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 <p></p>
 </div>
 
-<div class="change" id="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">
-  <h2 class="title">
-<a id="--automatic-redirects-for-renamed-repositories" class="anchor" href="#--automatic-redirects-for-renamed-repositories" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-07-21-automatic-redirects-for-renamed-repositories/">Automatic redirects for renamed repositories</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    July 21, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>To help API clients gracefully handle renamed repositories, the API now <a href="/changes/2015-04-17-preview-repository-redirects/">automatically redirects to the repository’s new location</a>.</p>
-
-<p>Our thanks goes out to everyone that tried out this enhancement <a href="/changes/2015-04-17-preview-repository-redirects/">during the preview period</a>. During the preview period, you needed to <a href="/changes/2015-04-17-preview-repository-redirects/#how-can-i-try-out-the-redirects">provide a custom media type in the <code>Accept</code> header</a> to opt-in to the redirects. Now that the preview period has ended, you no longer need to specify this custom <a href="/v3/media/">media type</a>.</p>
-
-<p>To learn more about these redirects and how they benefit your applications, be sure to check out the <a href="/changes/2015-04-17-preview-repository-redirects/">preview period announcement</a>. As always, if you have any questions, we're <a href="https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects">here to help</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -580,7 +596,7 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
     
 
     
-      <a href="/changes/11" class="">11</a>
+      <a href="/changes/12" class="">12</a>
     
 
     
@@ -591,7 +607,7 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
     
 
     
-      <a href="/changes/12" class="">12</a>
+      <a href="/changes/13" class="">13</a>
     
 
     
@@ -610,6 +626,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
+
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
@@ -623,8 +641,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period<br /><span class="date">November 11, 2015</span></a></li>
 
   <li><a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br /><span class="date">September 3, 2015</span></a></li>
-
-  <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
 
 </ul>
 

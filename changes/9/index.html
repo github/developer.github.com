@@ -44,7 +44,96 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-12-13-paginating-org-members/">
+      <div class="change" id="/changes/2014-01-07-upcoming-change-to-default-media-type/">
+  <h2 class="title">
+<a id="--upcoming-change-to-default-media-type" class="anchor" href="#--upcoming-change-to-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">Upcoming Change to Default Media Type</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 7, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you'll find tips below to help you smoothly navigate this change.</p>
+
+<h2>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's changing?</h2>
+
+<h3>
+<a id="a-new-default-version" class="anchor" href="#a-new-default-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="a-new-default-version" class="anchor" href="#a-new-default-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new default version</h3>
+
+<p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. Today, requests receive the beta version by default. On April 15<a href="#cutover-test">*</a>, requests will begin receiving the v3 version by default.</p>
+
+<p>For the most part, beta and v3 are remarkably similar. There are <a href="/v3/versions/#differences-from-beta-version">just a few differences</a> to keep in mind.</p>
+
+<h3>
+<a id="a-new-default-media-type" class="anchor" href="#a-new-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="a-new-default-media-type" class="anchor" href="#a-new-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new default media type</h3>
+
+<p>The version is one part of the <a href="/v3/media">media type</a>. By default, the API provides the beta media type:</p>
+
+<pre><code>application/vnd.github.beta+json
+</code></pre>
+
+<p>On April 15<a href="#cutover-test">*</a>, requests will begin responding with the v3 media type by default:</p>
+
+<pre><code>application/vnd.github.v3+json
+</code></pre>
+
+<h2>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who is affected?</h2>
+
+<p>Since 2012, we have encouraged developers to explicitly <a href="/v3/media/#request-specific-version">request a specific media type via the <code>Accept</code> header</a>. If you are requesting either beta or v3 via the <code>Accept</code> header, then you are <em>not</em> affected by this change. The API will continue to respond with the requested media type.</p>
+
+<p>If you are not requesting beta or v3 via the <code>Accept</code> header, then the API is currently responding with the beta media type. On April 15<a href="#cutover-test">*</a>, the API will begin responding with the v3 media type. If your application relies on <a href="/v3/versions/#differences-from-beta-version">functionality that differs between beta and v3</a>, then you are affected by this change. You will need to take steps to prepare for the change.</p>
+
+<h2>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h2>
+
+<p>If you are affected by this change, we recommend that you:</p>
+
+<ol>
+<li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there's a good chance that they've already done the work for you. In that case, you can just update to the latest version of that library.)</li>
+<li>Request the v3 media type via the <code>Accept</code> header.</li>
+</ol>
+
+<p>If you cannot update your application to depend on the v3 functionality by April 15<a href="#cutover-test">*</a>, you can just request the beta media type via the <code>Accept</code> header. Doing so will insulate you from this change.</p>
+
+<p><a id="cutover-test"></a></p>
+
+<h2>
+<a id="cutover-test-on-march-12-2014" class="anchor" href="#cutover-test-on-march-12-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="cutover-test-on-march-12-2014" class="anchor" href="#cutover-test-on-march-12-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cutover test on March 12, 2014</h2>
+
+<p>To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.</p>
+
+<p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
+
+<h2>
+<a id="stay-informed" class="anchor" href="#stay-informed" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="stay-informed" class="anchor" href="#stay-informed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stay informed</h2>
+
+<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we'll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We'll be happy to help.</p>
+</div>
+
+<div class="change" id="/changes/2013-12-13-paginating-org-members/">
   <h2 class="title">
 <a id="--paginated-results-for-organization-members" class="anchor" href="#--paginated-results-for-organization-members" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-12-13-paginating-org-members/">Paginated results for organization members</a>
@@ -544,94 +633,6 @@ code</a>, in addition to the username and password.</p>
 <p>We think GitHub users are going to love the additional security provided by
 two-factor authentication. As always, if you have any questions or feedback,
 <a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API">let us know</a>. We're here to help!</p>
-</div>
-
-<div class="change" id="/changes/2013-08-20-search-api-improvements/">
-  <h2 class="title">
-<a id="--improvements-to-the-search-api" class="anchor" href="#--improvements-to-the-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-08-20-search-api-improvements/">Improvements to the Search API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    August 20, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Today we're shipping two improvements to the <a href="/changes/2013-07-19-preview-the-new-search-api/">new Search API</a>.</p>
-
-<h2>
-<a id="more-text-match-metadata" class="anchor" href="#more-text-match-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="more-text-match-metadata" class="anchor" href="#more-text-match-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>More Text Match Metadata</h2>
-
-<p>When searching for code, the API previously provided <a href="/v3/search/#text-match-metadata">text match metadata</a> (i.e., "highlights") for file content.
-Now, you can also <a href="/v3/search/#highlighting-code-search-results">get this metadata</a> for matches that occur within the file path.</p>
-
-<p>For example, when <a href="https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&amp;type=Code">searching for files that have "client" in their path</a>, the results include this match for <code>lib/octokit/client/commits.rb</code>:</p>
-
-<p>{:.json}
-    {
-      "name": "commits.rb",
-      "path": "lib/octokit/client/commits.rb",
-      "text_matches": [
-        {
-          "object_url": "<a href="https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88">https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88</a>",
-          "object_type": "FileContent",
-          "property": "path",
-          "fragment": "lib/octokit/client/commits.rb",
-          "matches": [
-            {
-              "text": "client",
-              "indices": [ 12, 18 ]
-            }
-          ]
-        }
-      ]
-      // ...
-    }</p>
-
-<h2>
-<a id="better-text-match-metadata" class="anchor" href="#better-text-match-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="better-text-match-metadata" class="anchor" href="#better-text-match-metadata" aria-hidden="true"><span class="octicon octicon-link"></span></a>Better Text Match Metadata</h2>
-
-<p>Before today, the API applied HTML entity encoding to all <code>fragment</code> data.
-For example, imagine your search returns an issue like <a href="https://github.com/rails/rails/issues/11889" data-proofer-ignore>rails/rails#11889</a>:</p>
-
-<p><img src="https://f.cloud.github.com/assets/2988/994632/a84f2888-09af-11e3-9417-4bd92f1f1ed6.png" alt="Example Issue Title"></p>
-
-<p>The response would include a <code>text_matches</code> array with the following object:</p>
-
-<p>{:.json}
-    {
-      "fragment": "undefined method 'except' for #&lt;Array:XXX&gt;",
-      // ...
-    }</p>
-
-<p>Inside the <code>fragment</code> value, we see HTML-encoded entities (e.g., <code>&amp;lt;</code>).
-Since we're returning JSON (not HTML), API clients might not expect any HTML-encoded text.
-As of today, the API returns these fragments <em>without</em> this extraneous encoding.</p>
-
-<p>{:.json}
-    {
-      "fragment": "undefined method 'except' for #<a href="Array:XXX">Array:XXX</a>",
-      // ...
-    }</p>
-
-<h2>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview Period</h2>
-
-<p>We're about halfway through the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> for the new Search API.
-We appreciate everyone that has provided feedback so far. Please <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">keep it coming</a>!</p>
 
 <p></p>
 </div>
@@ -726,6 +727,17 @@ We appreciate everyone that has provided feedback so far. Please <a href="https:
 
     
   
+    
+    
+    
+    
+
+    
+      <a href="/changes/13" class="">13</a>
+    
+
+    
+  
 
   
     <a href="/changes/10" class="next_page">Next</a>
@@ -740,6 +752,8 @@ We appreciate everyone that has provided feedback so far. Please <a href="https:
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
+
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
@@ -753,8 +767,6 @@ We appreciate everyone that has provided feedback so far. Please <a href="https:
   <li><a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period<br /><span class="date">November 11, 2015</span></a></li>
 
   <li><a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br /><span class="date">September 3, 2015</span></a></li>
-
-  <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
 
 </ul>
 

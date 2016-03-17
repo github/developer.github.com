@@ -44,7 +44,51 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-02-14-sortable-stars/">
+      <div class="change" id="/changes/2013-03-01-new-hookshot-coming/">
+  <h2 class="title">
+<a id="--new-hookshot-changes" class="anchor" href="#--new-hookshot-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-03-01-new-hookshot-coming/">New Hookshot Changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 1, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We are experimenting with changes to the "Hookshot" backend that powers service
+hooks.  There were some significant networking changes with the new cluster,
+so there are some new IP whitelist rules for hooks:</p>
+
+<ul>
+<li>204.232.175.64/27</li>
+<li>192.30.252.0/22</li>
+</ul>
+
+<p>These are in CIDR notation.  They represent a significant range of GitHub
+addresses, meaning this should be the last IP change for a while.  Once this
+cluster is activated and we shut the other cluster down, we will be removing
+the other entries.</p>
+
+<p>We are currently testing the new backend with all repositories in the GitHub
+organization only, and expect to start testing it with user data next week.</p>
+
+<p>This also means we should be able to start accepting <a href="https://github.com/github/github-services/pulls">GitHub Services pull
+requests</a> very soon :)</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-02-14-sortable-stars/">
   <h2 class="title">
 <a id="--sortable-stars-in-repository-starring-api" class="anchor" href="#--sortable-stars-in-repository-starring-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-02-14-sortable-stars/">Sortable Stars in Repository Starring API</a>
@@ -404,58 +448,6 @@ are sources (not forks).</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2012-12-06-create-authorization-for-app/">
-  <h2 class="title">
-<a id="--create-an-oauth-authorization-for-an-app" class="anchor" href="#--create-an-oauth-authorization-for-an-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2012-12-06-create-authorization-for-app/">Create an OAuth authorization for an app</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    December 6, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The <a href="/v3/oauth_authorizations/#oauth-authorizations-api">Authorizations API</a> is an easy way to create an OAuth
-authorization using Basic Auth. Just POST your desired scopes and optional
-note and you get a token back:</p>
-
-<pre class="command-line">
-<span class="command">curl -u pengwynn -d '{"scopes": ["user", "gist"]}' \</span>
-<span class="command">     https://api.github.com/authorizations</span>
-</pre>
-
-<p>This call creates a token for the authenticated user tied to a special "API"
-OAuth application.</p>
-
-<p>We now support creating tokens for <em>your own OAuth application</em> by passing your
-twenty character <code>client_id</code> and forty character <code>client_secret</code> as found in
-the settings page for your OAuth application.</p>
-
-<pre class="command-line">
-<span class="command">curl -u pengwynn -d '{ \</span>
-<span class="command">                     "scopes": ["user", "gist"], \</span>
-<span class="command">                     "client_id": "abcdeabcdeabcdeabcdeabcde" \</span>
-<span class="command">                     "client_secret": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde" \</span>
-<span class="command">                    }' \ '</span>
-<span class="command">       https://api.github.com/authorizations</span>
-</pre>
-
-<p>No more implementing the <a href="/v3/oauth/#web-application-flow">web flow</a> just to get a token tied to your
-app's rate limit.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -524,6 +516,17 @@ app's rate limit.</p>
 
     
   
+    
+    
+    
+    
+
+    
+      <a href="/changes/13" class="">13</a>
+    
+
+    
+  
 
   
     <a href="/changes/12" class="next_page">Next</a>
@@ -538,6 +541,8 @@ app's rate limit.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
+
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
@@ -551,8 +556,6 @@ app's rate limit.</p>
   <li><a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period<br /><span class="date">November 11, 2015</span></a></li>
 
   <li><a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br /><span class="date">September 3, 2015</span></a></li>
-
-  <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
 
 </ul>
 

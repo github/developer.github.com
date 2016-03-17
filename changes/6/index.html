@@ -44,7 +44,43 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-06-11-improved-ci-support-for-deployments-api/">
+      <div class="change" id="/changes/2014-06-19-combined-status-api-pagination/">
+  <h2 class="title">
+<a id="--pagination-in-the-combined-status-api" class="anchor" href="#--pagination-in-the-combined-status-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-06-19-combined-status-api-pagination/">Pagination in the Combined Status API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 19, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga" data-proofer-ignore>
+      <a href="https://github.com/bhuga" data-proofer-ignore>bhuga</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We're getting close to bringing the <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status API</a> out of preview
+mode, and have just a couple of small changes to make before it's <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2728.png" height="20" width="20" align="absmiddle">.</p>
+
+<p>First, we're now <a href="/v3/#pagination">paginating</a> combined status API calls. The combined status
+<code>state</code> field will always take all statuses into account, but we'll now only
+return 100 embedded statuses at a time.</p>
+
+<p>Second, we're adding a <code>total_count</code> field, mirroring the Search API. This
+count represents the number of contexts submitted for the given commit.</p>
+
+<p>As always, we're interested in <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">hearing your feedback</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-06-11-improved-ci-support-for-deployments-api/">
   <h2 class="title">
 <a id="--improved-ci-support-for-the-deployments-api" class="anchor" href="#--improved-ci-support-for-the-deployments-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-06-11-improved-ci-support-for-deployments-api/">Improved CI support for the Deployments API</a>
@@ -476,54 +512,6 @@
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-04-08-reset-api-tokens/">
-  <h2 class="title">
-<a id="--recommendation-reset-oauth-authorizations" class="anchor" href="#--recommendation-reset-oauth-authorizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-04-08-reset-api-tokens/">Recommendation: Reset OAuth authorizations</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 8, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>As <a href="https://github.com/blog/1818-security-heartbleed-vulnerability">announced earlier today</a>, we are actively responding
-to the recently-disclosed <a href="https://github.com/blog/1818-security-heartbleed-vulnerability">Heartbleed security
-vulnerability</a> in OpenSSL. While at this time GitHub has
-no indication that the attack has been used beyond testing the vulnerability, we
-recommend that integrators <a href="/v3/oauth_authorizations/#reset-an-authorization">reset the API authorizations</a> for their OAuth
-applications.</p>
-
-<p>We've added a <a href="/v3/oauth_authorizations/#reset-an-authorization">new API method</a> for this exact purpose. Calling this method
-will invalidate the old token and return a new token for applications to store
-and use in its place. This new method provides a safe way to reset user
-authorizations without requiring users to re-authorize the application on the
-web.</p>
-
-<p>Integrators can also use the existing revocation methods to <del>revoke all
-tokens</del> or <a href="/v3/oauth_authorizations/#revoke-an-authorization-for-an-application">revoke a single token</a> for their applications.</p>
-
-<div class="alert tip">
-
-<p><strong>UPDATE (2016-01-25):</strong> API v3 no longer provides a method to revoke <em>all</em> of an application's tokens as previously referenced above. If you need to revoke all tokens for your application, you can do so via the <a href="https://github.com/settings/developers">settings page for your application</a>.</p>
-
-</div>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+resetting+tokens">get in touch</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -624,7 +612,7 @@ tokens</del> or <a href="/v3/oauth_authorizations/#revoke-an-authorization-for-a
     
 
     
-      <a href="/changes/11" class="">11</a>
+      <a href="/changes/12" class="">12</a>
     
 
     
@@ -635,7 +623,7 @@ tokens</del> or <a href="/v3/oauth_authorizations/#revoke-an-authorization-for-a
     
 
     
-      <a href="/changes/12" class="">12</a>
+      <a href="/changes/13" class="">13</a>
     
 
     
@@ -654,6 +642,8 @@ tokens</del> or <a href="/v3/oauth_authorizations/#revoke-an-authorization-for-a
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
+
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
@@ -667,8 +657,6 @@ tokens</del> or <a href="/v3/oauth_authorizations/#revoke-an-authorization-for-a
   <li><a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period<br /><span class="date">November 11, 2015</span></a></li>
 
   <li><a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br /><span class="date">September 3, 2015</span></a></li>
-
-  <li><a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license<br /><span class="date">August 4, 2015</span></a></li>
 
 </ul>
 

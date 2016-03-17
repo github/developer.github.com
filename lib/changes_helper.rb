@@ -1,5 +1,5 @@
 module ChangesHelper
-  PER_PAGE = 10
+  PER_PAGE = 10.0
 
   def add_created_at_attribute
     @items.each do |item|
@@ -42,7 +42,7 @@ module ChangesHelper
   end
 
   def total_pages(version = nil)
-    (api_changes(version).length / PER_PAGE).floor
+    (api_changes(version).length / PER_PAGE).ceil
   end
 
   # Public

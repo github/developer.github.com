@@ -51,8 +51,27 @@ Name | Type | Description
 `name`|`string` | **Required**. The name of the team.
 `description`|`string` | The description of the team.
 `repo_names`|`array` of `strings` | The full name (e.g., "organization-name/repository-name") of repositories to add the team to.
-`privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>**This parameter requires a custom media type to be specified. Please see more in the alert below.**
+`privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>{% if page.version != 'dotcom' and page.version == 2.4 %}**This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
 `permission`|`string` | **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer newly-added repositories.<br/> * `push` - team members can pull and push, but not administer newly-added repositories.<br/> * `admin` - team members can pull, push and administer newly-added repositories.<br/>Default: `pull`
+
+{% if page.version != 'dotcom' and page.version == 2.4 %}
+
+{{#tip}}
+
+We're currently offering a preview period allowing applications to opt in to the Organization Permissions API. Please see the [blog post](/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ironman-preview+json
+```
+
+**Warning:** If you specify the `privacy` attribute on an organization that hasn't had [improved organization permissions](https://github.com/blog/2020-improved-organization-permissions) enabled yet, you will get a `422` error response.
+
+{{/tip}}
+
+{% endif %}
+
 #### Example
 
 <%= json \
@@ -107,9 +126,10 @@ Name | Type | Description
 -----|------|--------------
 `name`|`string` | **Required**. The name of the team.
 `description`|`string` | The description of the team.
-`privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>{% if page.version == 2.4 %}**This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+`privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>{% if page.version != 'dotcom' and page.version == 2.4 %}**This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
 `permission`|`string` | **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer newly-added repositories.<br/> * `push` - team members can pull and push, but not administer newly-added repositories.<br/> * `admin` - team members can pull, push and administer newly-added repositories.<br/>Default: `pull`
 
+{% if page.version != 'dotcom' and page.version == 2.4 %}
 
 {{#tip}}
 
@@ -124,6 +144,8 @@ application/vnd.github.ironman-preview+json
 **Warning:** If you specify the `privacy` attribute on an organization that hasn't had [improved organization permissions](https://github.com/blog/2020-improved-organization-permissions) enabled yet, you will get a `422` error response.
 
 {{/tip}}
+
+{% endif %}
 
 #### Example
 

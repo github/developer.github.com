@@ -18,6 +18,9 @@
 %>
 <%=
   #output the generated tree
-  # TODO JSON.generate() always/on production builds?
-  JSON.pretty_generate(@output.sort{|a, b| a[:title] <=> b[:title]})
+  if ENV['RACK_ENV'] == "production"
+    JSON.generate(@output.sort{|a, b| a[:title] <=> b[:title]})
+  else
+    JSON.pretty_generate(@output.sort{|a, b| a[:title] <=> b[:title]})
+  end
 %>

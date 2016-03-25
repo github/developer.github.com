@@ -3617,14 +3617,29 @@ created for various internal and webhook purposes.</p>
 <td>An array of commit objects describing the pushed commits. (The array includes a maximum of 20 commits. If necessary, you can use the <a href="/v3/repos/commits/">Commits API</a> to fetch additional commits. This limit is applied to timeline events only and isn't applied to webhook deliveries.)</td>
 </tr>
 <tr>
-<td><code>commits[][sha]</code></td>
+<td><code>commits[][id]</code></td>
 <td><code>string</code></td>
 <td>The SHA of the commit.</td>
+</tr>
+<tr>
+<td><code>commits[][distinct]</code></td>
+<td><code>boolean</code></td>
+<td>Whether this commit is distinct from any that have been pushed before.</td>
 </tr>
 <tr>
 <td><code>commits[][message]</code></td>
 <td><code>string</code></td>
 <td>The commit message.</td>
+</tr>
+<tr>
+<td><code>commits[][timestamp]</code></td>
+<td><code>string</code></td>
+<td>The date and time of the commit, in ISO8601 format with time zone offset (e.g. <code>2007-04-05T12:30-02:00</code>)</td>
+</tr>
+<tr>
+<td><code>commits[][url]</code></td>
+<td><code>url</code></td>
+<td>Points to the commit API resource.</td>
 </tr>
 <tr>
 <td><code>commits[][author]</code></td>
@@ -3642,14 +3657,39 @@ created for various internal and webhook purposes.</p>
 <td>The git author's email address.</td>
 </tr>
 <tr>
-<td><code>commits[][url]</code></td>
-<td><code>url</code></td>
-<td>Points to the commit API resource.</td>
+<td><code>commits[][author][username]</code></td>
+<td><code>string</code></td>
+<td>The git author's GitHub username.</td>
 </tr>
 <tr>
-<td><code>commits[][distinct]</code></td>
-<td><code>boolean</code></td>
-<td>Whether this commit is distinct from any that have been pushed before.</td>
+<td><code>commits[][committer][name]</code></td>
+<td><code>string</code></td>
+<td>The git committer's name.</td>
+</tr>
+<tr>
+<td><code>commits[][committer][email]</code></td>
+<td><code>string</code></td>
+<td>The git committer's email address.</td>
+</tr>
+<tr>
+<td><code>commits[][committer][username]</code></td>
+<td><code>string</code></td>
+<td>The git committer's GitHub username.</td>
+</tr>
+<tr>
+<td><code>commits[][added]</code></td>
+<td><code>array</code></td>
+<td>A list of files added by this commit</td>
+</tr>
+<tr>
+<td><code>commits[][removed]</code></td>
+<td><code>array</code></td>
+<td>A list of files removed by this commit</td>
+</tr>
+<tr>
+<td><code>commits[][modified]</code></td>
+<td><code>array</code></td>
+<td>A list of files modified by this commit</td>
 </tr>
 </tbody>
 </table>

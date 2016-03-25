@@ -416,21 +416,13 @@ Key | Type | Description
 `size`|`integer` | The number of commits in the push.
 `distinct_size`|`integer` | The number of distinct commits in the push.
 `commits`|`array` | An array of commit objects describing the pushed commits. (The array includes a maximum of 20 commits. If necessary, you can use the [Commits API](/v3/repos/commits/) to fetch additional commits. This limit is applied to timeline events only and isn't applied to webhook deliveries.)
-`commits[][id]`|`string` | The SHA of the commit.
-`commits[][distinct]`|`boolean` | Whether this commit is distinct from any that have been pushed before.
+`commits[][sha]`|`string` | The SHA of the commit.
 `commits[][message]`|`string` | The commit message.
-`commits[][timestamp]`|`string` | The date and time of the commit, in ISO8601 format with time zone offset (e.g. `2007-04-05T12:30-02:00`)
-`commits[][url]`|`url` | Points to the commit API resource.
 `commits[][author]`|`object` | The git author of the commit.
 `commits[][author][name]`|`string` | The git author's name.
 `commits[][author][email]`|`string` | The git author's email address.
-`commits[][author][username]`|`string` | The git author's GitHub username.
-`commits[][committer][name]`|`string` | The git committer's name.
-`commits[][committer][email]`|`string` | The git committer's email address.
-`commits[][committer][username]`|`string` | The git committer's GitHub username.
-`commits[][added]`|`array` | A list of files added by this commit
-`commits[][removed]`|`array` | A list of files removed by this commit
-`commits[][modified]`|`array` | A list of files modified by this commit
+`commits[][url]`|`url` | Points to the commit API resource.
+`commits[][distinct]`|`boolean` | Whether this commit is distinct from any that have been pushed before.
 
 ### Webhook event name
 

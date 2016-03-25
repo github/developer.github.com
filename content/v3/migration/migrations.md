@@ -6,6 +6,8 @@ title: Migrations
 
 {:toc}
 
+The Migrations API *is only available to [authenticated](https://developer.github.com/v3/#authentication) organization owners*. Non-organization owners will receive a `404` response if they try to access it.
+
 {% if page.version != 'dotcom' %}
 
 {{#warning}}

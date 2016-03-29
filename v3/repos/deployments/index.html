@@ -335,6 +335,9 @@ chat networks.</p>
 </span></code></pre>
 
 
+<h3>
+<a id="successful-response" class="anchor" href="#successful-response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Successful response</h3>
+
 <pre class="highlight highlight-headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/octocat/example/deployments/1
 X-RateLimit-Limit: 5000
@@ -398,6 +401,9 @@ X-RateLimit-Remaining: 4999
 </span></code></pre>
 
 
+<h3>
+<a id="successful-response-1" class="anchor" href="#successful-response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Successful response</h3>
+
 <pre class="highlight highlight-headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/octocat/example/deployments/1
 X-RateLimit-Limit: 5000
@@ -439,6 +445,40 @@ X-RateLimit-Remaining: 4999
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/example"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="merge-conflict-response" class="anchor" href="#merge-conflict-response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge conflict response</h3>
+
+<p>This error happens when the <code>auto_merge</code> option is enabled and when the default branch (in this case <code>master</code>), can't be merged into the branch that's being deployed (in this case <code>topic-branch</code>), due to merge conflicts.</p>
+
+<pre class="highlight highlight-headers"><code>Status: 409 Conflict
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Conflict merging master into topic-branch"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="failed-commit-status-checks" class="anchor" href="#failed-commit-status-checks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Failed commit status checks</h3>
+
+<p>This error happens when the <code>required_contexts</code> parameter indicates that one or more contexts need to have a <code>success</code> status for the commit to be deployed, but one or more of the required contexts do not have a state of <code>success</code>.</p>
+
+<pre class="highlight highlight-headers"><code>Status: 409 Conflict
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Conflict: Commit status checks failed for topic-branch."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 

@@ -150,6 +150,8 @@ chat networks.
   :description   => "Deploying my sweet branch"
 %>
 
+### Successful response
+
 <%= headers 201, :Location => get_resource(:deployment)['url'] %>
 <%= json :deployment %>
 
@@ -165,8 +167,24 @@ A more advanced example specifying required commit statuses and bypassing auto-m
   :required_contexts => ["ci/janky", "security/brakeman"]
 %>
 
+### Successful response
+
 <%= headers 201, :Location => get_resource(:deployment)['url'] %>
 <%= json :deployment %>
+
+### Merge conflict response
+
+This error happens when the `auto_merge` option is enabled and when the default branch (in this case `master`), can't be merged into the branch that's being deployed (in this case `topic-branch`), due to merge conflicts.
+
+<%= headers 409 %>
+<%= json({ :message => "Conflict merging master into topic-branch" }) %>
+
+### Failed commit status checks
+
+This error happens when the `required_contexts` parameter indicates that one or more contexts need to have a `success` status for the commit to be deployed, but one or more of the required contexts do not have a state of `success`.
+
+<%= headers 409 %>
+<%= json({ :message => "Conflict: Commit status checks failed for topic-branch." }) %>
 
 ## Update a Deployment
 

@@ -6,6 +6,8 @@ title: Migrations
 
 {:toc}
 
+The Migrations API *is only available to [authenticated](https://developer.github.com/v3/#authentication) organization [owners](https://help.github.com/articles/permission-levels-for-an-organization/)*.
+
 {% if page.version != 'dotcom' %}
 
 {{#warning}}

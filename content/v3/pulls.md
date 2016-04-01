@@ -187,9 +187,26 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 Name | Type | Description
 -----|------|-------------
+{% if page.version == 'dotcom' or page.version >= 2.6 %}`commit_title`|`string`| Title for the automatic commit message.{% endif %}
 `commit_message`|`string`| Extra detail to append to automatic commit message.
 `sha`|`string`| SHA that pull request head must match to allow merge
+{% if page.version == 'dotcom' or page.version >= 2.6 %}`squash`|`boolean`| Commit a single commit to the head branch.{% endif %}
 
+{% if page.version == 'dotcom' or page.version >= 2.6 %}
+
+{{#tip}}
+ 
+The `commit_title` and `squash` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-01-squash-api-preview) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.polaris-preview+json
+```
+
+{{/tip}}
+ 
+{% endif %}
 
 ### Response if merge was successful
 

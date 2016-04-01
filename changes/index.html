@@ -44,7 +44,53 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-03-17-the-451-status-code-is-now-supported/">
+      <div class="change" id="/changes/2016-04-01-squash-api-preview/">
+  <h2 class="title">
+<a id="--preview-squash-support-for-the-pull-request-merge-api" class="anchor" href="#--preview-squash-support-for-the-pull-request-merge-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 1, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/scottjg.png" alt="Avatar for scottjg" data-proofer-ignore>
+      <a href="https://github.com/scottjg" data-proofer-ignore>scottjg</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>With the <a href="https://github.com/blog/2141-squash-your-commits">recent addition</a> of squashing Pull Requests via the merge button, we're adding support to squash Pull Requests in the API as well. You can squash a pull request in the <a href="/v3/pulls/#merge-a-pull-request-merge-button">Pull Request Merge API</a> during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.polaris-preview
+</code></pre>
+
+<p>For example:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
+  -XPUT \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.polaris-preview" \
+  -d '{
+    "squash": true,
+    "commit_title": "Never tell me the odds"
+  }'
+</pre>
+
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Squash+API+Preview">let us know</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-03-17-the-451-status-code-is-now-supported/">
   <h2 class="title">
 <a id="--the-451-status-code-is-now-supported" class="anchor" href="#--the-451-status-code-is-now-supported" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported</a>
@@ -498,41 +544,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 <p></p>
 </div>
 
-<div class="change" id="/changes/2015-07-22-more-flexible-options-for-listing-repositories/">
-  <h2 class="title">
-<a id="--more-flexible-options-for-listing-repositories" class="anchor" href="#--more-flexible-options-for-listing-repositories" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-07-22-more-flexible-options-for-listing-repositories/">More flexible options for listing repositories</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    July 22, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
-      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API now offers additional parameters to help you fetch the exact set of repositories you're looking for:</p>
-
-<ul>
-<li>The <code>visibility</code> parameter lets you request only your public repositories, only your private repositories, or both.</li>
-<li>With the <code>affiliation</code> parameter, you can ask for repositories you own, repositories where you are a collaborator, repositories you have access to as an organization member, or any combination that suits your needs.</li>
-</ul>
-
-<p>Use these new parameters separately, together, or in combination with other parameters to craft flexible queries that fetch the specific repositories you're seeking.</p>
-
-<p>For full details, check out the <a href="/v3/repos/#list-your-repositories">documentation</a>. If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=List+your+repositories+API">get in touch</a>!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -626,6 +637,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
+
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
@@ -639,8 +652,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official<br /><span class="date">January 5, 2016</span></a></li>
 
   <li><a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period<br /><span class="date">November 11, 2015</span></a></li>
-
-  <li><a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br /><span class="date">September 3, 2015</span></a></li>
 
 </ul>
 

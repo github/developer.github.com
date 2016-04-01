@@ -2,13 +2,45 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-03-17T07:00:00Z</updated>
+  <updated>2016-04-01T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-04-01:/changes/2016-04-01-squash-api-preview/</id>
+    <title type="html">Preview Squash Support for the Pull Request Merge API</title>
+    <published>2016-04-01T07:00:00Z</published>
+    <updated>2016-04-01T07:00:00Z</updated>
+    <author>
+      <name>scottjg</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-04-01-squash-api-preview/"/>
+    <content type="html">&lt;p&gt;With the &lt;a href="https://github.com/blog/2141-squash-your-commits"&gt;recent addition&lt;/a&gt; of squashing Pull Requests via the merge button, we're adding support to squash Pull Requests in the API as well. You can squash a pull request in the &lt;a href="/v3/pulls/#merge-a-pull-request-merge-button"&gt;Pull Request Merge API&lt;/a&gt; during the preview period by providing a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.polaris-preview
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre class="command-line"&gt;
+curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
+  -XPUT \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.polaris-preview" \
+  -d '{
+    "squash": true,
+    "commit_title": "Never tell me the odds"
+  }'
+&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these API methods based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Squash+API+Preview"&gt;let us know&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-03-17:/changes/2016-03-17-the-451-status-code-is-now-supported/</id>
     <title type="html">The 451 status code is now supported</title>
@@ -1054,52 +1086,6 @@ OAuth integrations with more confidence.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2014-12-12:/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/</id>
-    <title type="html">Replace older SSH keys created by your application</title>
-    <published>2014-12-12T08:00:00Z</published>
-    <updated>2014-12-12T08:00:00Z</updated>
-    <author>
-      <name>jasonrudolph</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/"/>
-    <content type="html">&lt;p&gt;Back in February, we &lt;a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable"&gt;improved the security audit trail for SSH keys&lt;/a&gt;. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on &lt;a href="/guides/managing-deploy-keys/#deploy-keys"&gt;deploy keys&lt;/a&gt; or &lt;a href="/v3/users/keys/"&gt;user keys&lt;/a&gt; for repository access, we recommend replacing any keys created before February 24, 2014.&lt;/p&gt;
-
-&lt;p&gt;To ensure that your application is not affected by organizations blocking access to these keys, &lt;strong&gt;you should replace the affected keys by January 15, 2015&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="how-should-you-replace-these-keys" class="anchor" href="#how-should-you-replace-these-keys" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;How should you replace these keys?&lt;/h2&gt;
-
-&lt;p&gt;We recommend the following steps for identifying and replacing the affected keys.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="1-identify-the-affected-keys" class="anchor" href="#1-identify-the-affected-keys" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;1. Identify the affected keys&lt;/h3&gt;
-
-&lt;p&gt;You only need to replace keys that your application created prior to February 24, 2014. If you don't know when your app created a given key, you can get the creation timestamp from the API. The &lt;code&gt;created_at&lt;/code&gt; property is available for &lt;a href="/v3/repos/keys/"&gt;deploy keys&lt;/a&gt; and for &lt;a href="/v3/users/keys/#list-your-public-keys"&gt;user keys&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="2-inform-the-affected-users" class="anchor" href="#2-inform-the-affected-users" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;2. Inform the affected users&lt;/h3&gt;
-
-&lt;p&gt;Once you know which keys you need to replace, we recommend that you inform the affected users.&lt;/p&gt;
-
-&lt;p&gt;For security, GitHub automatically sends an email to a user whenever a new SSH key is added to their account. Similarly, when a new deploy key is added to a repository, GitHub sends an email to the repository's administrators. When you replace your application's old keys with new ones, GitHub will email the affected users. To avoid surprising those users, you should alert them that you'll be replacing your keys. You may want to include a link to this post in your message.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="3-add-a-new-key" class="anchor" href="#3-add-a-new-key" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;3. Add a new key&lt;/h3&gt;
-
-&lt;p&gt;Use the API to add the new &lt;a href="/v3/repos/keys/#add-a-new-deploy-key"&gt;deploy key&lt;/a&gt; or &lt;a href="/v3/users/keys/#create-a-public-key"&gt;user key&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="4-delete-the-old-key" class="anchor" href="#4-delete-the-old-key" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;4. Delete the old key&lt;/h3&gt;
-
-&lt;p&gt;Once your application is using the new key, use the API to delete the old one. There's an &lt;a href="/v3/repos/keys/#remove-a-deploy-key"&gt;API for deleting deploy keys&lt;/a&gt; and an &lt;a href="/v3/users/keys/#delete-a-public-key"&gt;API for deleting user keys&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;We're here to help&lt;/h2&gt;
-
-&lt;p&gt;As always, if you have any questions or concerns, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Replace+SSH+keys+created+by+application"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
 

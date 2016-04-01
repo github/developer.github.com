@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title> | GitHub Developer Guide</title>
+  <title>Preview Squash Support for the Pull Request Merge API | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,38 +44,47 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-9-28-auto-init-for-repositories/">
+      <div class="change" id="/changes/2016-04-01-squash-api-preview/">
 <h2 class="title">
-  <a href="/changes/2012-9-28-auto-init-for-repositories/"></a>
+  <a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    
+    April 1, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/.png" alt="Avatar for " data-proofer-ignore/>
-      <a href="https://github.com/" data-proofer-ignore></a>
+    <img height="16" width="16" src="https://github.com/scottjg.png" alt="Avatar for scottjg" data-proofer-ignore/>
+      <a href="https://github.com/scottjg" data-proofer-ignore>scottjg</a>
   </li>
 </ul>
 </div>
 
 
-<p>&lt;!DOCTYPE html&gt;
-<meta charset="utf-8">
-</p><title>Redirecting...</title>
-<link rel="canonical" href="/changes/2012-09-28-auto-init-for-repositories/">
-<meta http-equiv="refresh" content="0; url=/changes/2012-09-28-auto-init-for-repositories/">
+<p>With the <a href="https://github.com/blog/2141-squash-your-commits">recent addition</a> of squashing Pull Requests via the merge button, we're adding support to squash Pull Requests in the API as well. You can squash a pull request in the <a href="/v3/pulls/#merge-a-pull-request-merge-button">Pull Request Merge API</a> during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
 
-<h1>
-<a id="redirecting" class="anchor" href="#redirecting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Redirecting...</h1>
+<pre><code>application/vnd.github.polaris-preview
+</code></pre>
 
-<p><a href="/changes/2012-09-28-auto-init-for-repositories/">Click here if you are not redirected.</a></p>
+<p>For example:</p>
 
-<script>location='/changes/2012-09-28-auto-init-for-repositories/'</script>
+<pre class="command-line">
+curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
+  -XPUT \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.polaris-preview" \
+  -d '{
+    "squash": true,
+    "commit_title": "Never tell me the odds"
+  }'
+</pre>
+
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Squash+API+Preview">let us know</a>.</p>
 </div>
 
     </div>

@@ -44,7 +44,49 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-02-25-organization-oauth-scopes/">
+      <div class="change" id="/changes/2014-02-28-issue-and-pull-query-enhancements/">
+  <h2 class="title">
+<a id="--query-enhancements-for-listing-issues-and-pull-requests" class="anchor" href="#--query-enhancements-for-listing-issues-and-pull-requests" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-02-28-issue-and-pull-query-enhancements/">Query enhancements for listing issues and pull requests</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 28, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've made it even easier to list all <a href="/v3/issues/#list-issues">issues</a> and <a href="/v3/pulls/#list-pull-requests">pull requests</a> via the API.
+The <code>state</code> parameter now supports a value of <code>all</code> that will return issues and
+pull requests regardless of state.</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/repos/atom/vim-mode/issues\?state\=all</span>
+</pre>
+
+<p>We've also introduced new sorting options for [listing pull requests]<a href="/v3/pulls/#list-pull-requests">pull
+requests</a>. You can now sort pull requests by <code>created</code>, <code>updated</code>,
+<code>popularity</code>, and <code>long-running</code>.</p>
+
+<pre class="command-line">
+<span class="command">curl https://api.github.com/repos/rails/rails/pulls\?sort\=long-running\&amp;direction\=desc</span>
+</pre>
+
+<p>Happy querying. If you have any questions or feedback <a href="https://github.com/contact?form%5Bsubject%5D=API+query+enhancements">get in touch</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-02-25-organization-oauth-scopes/">
   <h2 class="title">
 <a id="--oauth-scopes-for-organization-and-team-resources" class="anchor" href="#--oauth-scopes-for-organization-and-team-resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-02-25-organization-oauth-scopes/">OAuth scopes for organization and team resources</a>
@@ -372,116 +414,6 @@ repositories. Happy auditing and <a href="https://github.com/contact?form%5Bsubj
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-01-09-preview-the-new-deployments-api/">
-  <h2 class="title">
-<a id="--preview-the-new-deployments-api" class="anchor" href="#--preview-the-new-deployments-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-01-09-preview-the-new-deployments-api/">Preview the New Deployments API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    January 9, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
-      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Today we're excited to announce a <a href="/v3/repos/deployments/">Deployments API</a>. We ship a lot of
-software at GitHub: web, mobile, and native. For the last few years, we've been
-driving our deployments from our <a href="https://speakerdeck.com/jnewland/chatops">ChatOps tooling</a> and we've learned a
-lot. The Deployments API is a generalization of the approach that we've been
-taking, and we're really excited to see what our users and integrations start
-building around it.</p>
-
-<p>Deployments are a new model in the GitHub ecosystem. We don't have any UI
-components currently, and deployments are intended to be used exclusively by
-tooling.  If you're familiar with the Status API, you know that it allows
-various tools to report on the status of a commit (e.g., the progress of an
-attempt to perform a build at a particular commit). The Status API doesn't
-perform the build; it just reports the results. Much like the Status API, we
-won't be doing actual deployments for you. Instead, the API provides a way for
-you to track the status of your deployments. We're hoping to provide
-consistency across the various type of release processes, regardless of the
-underlying steps involved with getting your code built or shipped to your
-servers.</p>
-
-<h2>
-<a id="highlights" class="anchor" href="#highlights" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="highlights" class="anchor" href="#highlights" aria-hidden="true"><span class="octicon octicon-link"></span></a>Highlights</h2>
-
-<h3>
-<a id="automatic-merging" class="anchor" href="#automatic-merging" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="automatic-merging" class="anchor" href="#automatic-merging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automatic Merging</h3>
-
-<p>The system can auto-merge the default branch for the repository if the
-requested deployment ref is behind the default branch. On active projects it's
-easy to fall behind, so let automation watch your back.</p>
-
-<h3>
-<a id="commit-status-integration" class="anchor" href="#commit-status-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="commit-status-integration" class="anchor" href="#commit-status-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commit Status Integration</h3>
-
-<p>By default, the system rejects deployment requests for repositories that have
-commit statuses but don't have a green build for the deployment ref. This can
-be bypassed, but is useful in cases where continuous integration is being used.</p>
-
-<h3>
-<a id="force-deployments" class="anchor" href="#force-deployments" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="force-deployments" class="anchor" href="#force-deployments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Force Deployments</h3>
-
-<p>Sometimes the world crashes down on you, and you need to just get the code out
-the door.  Forced deployments bypass any commit status checks or ahead/behind
-checks in the repository.</p>
-
-<h3>
-<a id="deployment-statuses" class="anchor" href="#deployment-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="deployment-statuses" class="anchor" href="#deployment-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Deployment Statuses</h3>
-
-<p>Different deployment systems can update the status of a deployment to be
-<code>pending</code>, <code>success</code>, <code>failure</code>, or <code>error</code>. There's also a field for linking
-to deployment output.</p>
-
-<h3>
-<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="events" class="anchor" href="#events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events</h3>
-
-<p>Both Deployments and Deployment Statuses trigger events on GitHub. 3rd party
-integrations can listen for these events via <a href="/v3/repos/hooks/">webhooks</a> and choose
-whether or not to actually deploy the repository that the event was created for.</p>
-
-<h2>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview Period</h2>
-
-<p>We're making this new API available today for developers to
-<a href="/v3/repos/deployments/#preview-mode" data-proofer-ignore>preview</a>.  We think developers and existing integrations are
-going to love it, but we want to <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get your feedback</a> before we declare
-the Deployments API "final" and "unchangeable." We expect the preview period to
-last for roughly 60-90 days.</p>
-
-<p>As we discover opportunities to improve the API during the preview period, we
-may ship changes that break clients using the preview version of the API. We
-want to iterate quickly. To do so, we will announce any changes here (on the
-developer blog), but we will not provide any advance notice.</p>
-
-<p>At the end of preview period, the Deployments API will become an official
-component of GitHub API v3. At that point, the new Deployments API will be
-stable and suitable for production use.</p>
-
-<p>We hope you’ll take it for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">send us your feedback</a>.</p>
-
-<p><img src="https://camo.githubusercontent.com/da8106f759bf0d163fb002e715fb1d1f1d2b6f4e/687474703a2f2f736869706974737175697272656c2e6769746875622e696f2f696d616765732f736869702532306974253230737175697272656c2e706e67" alt="Shipit Squirrel"></p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -612,6 +544,8 @@ stable and suitable for production use.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
+
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
@@ -625,8 +559,6 @@ stable and suitable for production use.</p>
   <li><a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official<br /><span class="date">January 5, 2016</span></a></li>
 
   <li><a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period<br /><span class="date">November 11, 2015</span></a></li>
-
-  <li><a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches<br /><span class="date">September 3, 2015</span></a></li>
 
 </ul>
 

@@ -22,7 +22,7 @@ collaborators list.
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
 
-{% if page.version != 'dotcom' and page.version == 2.4 %}
+{% if page.version != 'dotcom' and (page.version == 2.4 or page.version == 2.5) %}
 
 ### Alternative response with extra repository information
 
@@ -70,7 +70,7 @@ Name | Type | Description
 <%= fetch_content(:optional_put_content_length) %>
 
 
-{% if page.version != 'dotcom' and page.version == 2.4 %}
+{% if page.version != 'dotcom' and (page.version == 2.4 or page.version == 2.5) %}
 
 {{#tip}}
 

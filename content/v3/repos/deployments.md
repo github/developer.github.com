@@ -138,6 +138,23 @@ Name | Type | Description
 `payload`|`string` | Optional JSON payload with extra information about the deployment. Default: `""`
 `environment`|`string` | Optional name for the target deployment environment (e.g., production, staging, qa). Default: `"production"`
 `description`|`string` | Optional short description. Default: `""`
+{% if page.version == 'dotcom' || page.version >= 2.6 %} `transient_environment` | `boolean` | Optionally specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false` **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+{% if page.version == 'dotcom' || page.version >= 2.6 %} `production_environment` | `boolean` | Optionally specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `"production"` and `false` otherwise. **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+
+{% if page.version == 'dotcom' || page.version >= 2.6 %}
+{{#tip}}
+
+The new `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post][blog-post] for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ant-man-preview+json
+```
+
+{{/tip}}
+
+{% endif %}
 
 #### Simple Example
 
@@ -221,9 +238,28 @@ Users with push access can create deployment statuses for a given deployment:
 
 Name | Type | Description
 -----|------|--------------
-`state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, or `failure`.
+`state`|`string` | **Required**. The state of the status. Can be one of `pending`, `success`, `error`, {% if page.version == 'dotcom' || page.version >= 2.6 %} `inactive`, {% endif %}or `failure` **The `inactive` state requires a custom media type to be specified. Please see more in the alert below.**.
 `target_url`|`string` | The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: `""`
+{% if page.version == 'dotcom' || page.version >= 2.6 %}`log_url`|`string` | This is functionally equivalent to `target_url`. We will continue accept `target_url` to support legacy uses, but we recommend modifying this to the new name to avoid confusion. Default: `""` **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
 `description`|`string` | A short description of the status. Maximum length of 140 characters. Default: `""`
+{% if page.version == 'dotcom' || page.version >= 2.6 %}`environment_url`|`string`| Optionally set the URL for accessing your environment. Default: `""` **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+{% if page.version == 'dotcom' || page.version >= 2.6 %}`auto_inactive`|`boolean`| Optional parameter to add a new `inactive` status to all non-transient, non-production environment deployments with the same repository and environment name as the created status's deployment. Default: `true` **This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
+
+{% if page.version == 'dotcom' || page.version >= 2.6 %}
+
+{{#tip}}
+
+The new `inactive` state,  rename of the `target_url` parameter to `log_url` and new `environment_url` and `auto_inactive` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post][blog-post] for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.ant-man-preview+json
+```
+
+{{/tip}}
+
+{% endif %}
 
 #### Example
 
@@ -237,3 +273,5 @@ Name | Type | Description
 
 <%= headers 201, :Location => get_resource(:deployment_status)['url'] %>
 <%= json :deployment_status %>
+
+[blog-post]: /changes/2016-04-06-deployment-and-deployment-status-enhancements

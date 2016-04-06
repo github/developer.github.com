@@ -44,7 +44,84 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-09-03-two-factor-authentication/">
+      <div class="change" id="/changes/2013-09-25-releases-api/">
+  <h2 class="title">
+<a id="--releases-api" class="anchor" href="#--releases-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-09-25-releases-api/">Releases API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 25, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>This summer we made it easier to <a href="https://github.com/blog/1547-release-your-software">release your software</a>.  Today, you can fully automate those releases via the
+<a href="http://developer.github.com/v3/repos/releases/">Releases API Preview</a>.</p>
+
+<p>This API is a little different due to the binary assets.  We use the <code>Accept</code> header for content negotiation when requesting
+a release asset.  Pass a standard API media type to get the API representation:</p>
+
+<pre class="command-line">
+<span class="command">curl -i -H "Authorization: token TOKEN" \</span>
+<span class="command">    -H "Accept: application/vnd.github.manifold-preview" \</span>
+<span class="command">    "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"</span>
+
+<span class="output">HTTP/1.1 200 OK</span>
+
+<span class="output">{</span>
+<span class="output">  "id": 123,</span>
+<span class="output">  ...</span>
+<span class="output">}</span>
+</pre>
+
+<p>Pass "application/octet-stream" to download the binary content.</p>
+
+<pre class="command-line">
+<span class="command">curl -i -H "Authorization: token TOKEN" \</span>
+<span class="command">    -H "Accept: application/octet-stream" \</span>
+<span class="command">    "https://uploads.github.com/repos/hubot/singularity/releases/assets/123"</span>
+
+<span class="output">HTTP/1.1 302 Found</span>
+</pre>
+
+<p>Uploads are handled by a single request to a companion "uploads.github.com" service.</p>
+
+<pre class="command-line">
+<span class="command">curl -H "Authorization: token TOKEN" \</span>
+     -H "Accept: application/vnd.github.manifold-preview" \
+     -H "Content-Type: application/zip" \
+     --data-binary @build/mac/package.zip \
+     "https://uploads.github.com/repos/hubot/singularity/releases/123/assets?name=1.0.0-mac.zip"
+</pre>
+
+<h2>
+<a id="preview-mode" class="anchor" href="#preview-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-mode" class="anchor" href="#preview-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview mode</h2>
+
+<p>The new API is available as a <a href="http://developer.github.com/v3/repos/releases/#preview-mode">preview</a>.  This gives developers a chance to <a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API">provide feedback</a> on the direction of
+the API before we freeze changes.  We expect to lift the preview status in 30 days.</p>
+
+<p>As with <a href="http://developer.github.com/changes/2013-07-19-preview-the-new-search-api/">the Search API</a>, we'll take this opportunity to iterate quickly.  Breaking changes will be announced
+on this developer blog without any advance warning.  Once the preview period is over, we'll consider the Releases API unchangeable.
+At that point, it will be stable and suitable for production use.</p>
+
+<p>The preview media type is "application/vnd.github.manifold-preview".  <a href="http://en.wikipedia.org/wiki/Eden_Fesi">Manifold</a> is
+a member of the Avengers, with the ability to teleport through time and space.  He's the one in the middle holding the spear.</p>
+
+<p><img src="https://f.cloud.github.com/assets/21/1210628/ae8556fa-25fc-11e3-986d-0ab522271d43.png" alt="Manifold teleporting the Avengers to a terraformed Mars surface"></p>
+</div>
+
+<div class="change" id="/changes/2013-09-03-two-factor-authentication/">
   <h2 class="title">
 <a id="--two-factor-authentication-and-the-api" class="anchor" href="#--two-factor-authentication-and-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-09-03-two-factor-authentication/">Two-Factor Authentication and the API</a>
@@ -569,47 +646,6 @@ curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
-  <h2 class="title">
-<a id="--deprecating-a-confusing-attribute-in-the-pull-request-api" class="anchor" href="#--deprecating-a-confusing-attribute-in-the-pull-request-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Deprecating a Confusing Attribute in the Pull Request API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 25, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>When you get the details for a Pull Request from the API, the
-<a href="/v3/pulls/#get-a-single-pull-request">response</a> provides everything there is to
-know about that Pull Request. In addition to the useful information provided in
-the API response, the JSON also includes the <code>merge_commit_sha</code> attribute. This
-attribute is a frequent source of misunderstanding, and we aim to remove the
-confusion.</p>
-
-<p>To help current API consumers, we've <a href="/v3/pulls/#get-a-single-pull-request">documented the
-attribute</a> for improved understanding.</p>
-
-<p>To protect future API consumers from this confusion, we have
-<a href="/v3/versions/#v3-deprecations">deprecated</a> the <code>merge_commit_sha</code> attribute, and we will
-remove it in the next major version of the API.</p>
-
-<p>As always, if you have any questions or feedback, please drop us a line at
-<a href="mailto:support@github.com?subject=Deprecating%20merge_commit_sha">support@github.com</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -714,6 +750,8 @@ remove it in the next major version of the API.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
@@ -727,8 +765,6 @@ remove it in the next major version of the API.</p>
   <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
 
   <li><a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official<br /><span class="date">January 5, 2016</span></a></li>
-
-  <li><a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period<br /><span class="date">November 11, 2015</span></a></li>
 
 </ul>
 

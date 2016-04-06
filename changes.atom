@@ -2,13 +2,67 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-04-01T07:00:00Z</updated>
+  <updated>2016-04-06T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-04-06:/changes/2016-04-06-deployment-and-deployment-status-enhancements/</id>
+    <title type="html">Deployment and DeploymentStatus API enhancements preview period</title>
+    <published>2016-04-06T07:00:00Z</published>
+    <updated>2016-04-06T07:00:00Z</updated>
+    <author>
+      <name>tarebyte</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements/"/>
+    <content type="html">&lt;p&gt;We've expanded our Deployments APIs to accommodate more powerful deployment practices and to lay the foundation for a more seamless integration of deployments within GitHub.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="link-to-a-live-deployment" class="anchor" href="#link-to-a-live-deployment" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Link to a live deployment&lt;/h2&gt;
+
+&lt;p&gt;To enable easy access to a live version of a deployment, we've added an &lt;code&gt;environment_url&lt;/code&gt; field to the Deployments API. This environment will be exposed as a link in the Pull Request timeline to enable users to directly access a running version of their code without leaving the context of their work.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note: To add some clarity, we've renamed the &lt;code&gt;target_url&lt;/code&gt; field to &lt;code&gt;log_url&lt;/code&gt;. We will continue accept &lt;code&gt;target_url&lt;/code&gt; to support legacy uses, but we recommend modifying this to the new name to avoid confusion. Future API versions might not support &lt;code&gt;target_url&lt;/code&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="inactive-deployment-status" class="anchor" href="#inactive-deployment-status" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Inactive deployment status&lt;/h2&gt;
+
+&lt;p&gt;We recognize that deployments in many common practices don't last forever. So, we've added a new &lt;code&gt;inactive&lt;/code&gt; state to Deployment Statuses. You can use this state to communicate that a deployment is no longer active (e.g. something different has been deployed to the environment or the environment has been destroyed).&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="more-information-about-environments" class="anchor" href="#more-information-about-environments" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;More information about environments&lt;/h2&gt;
+
+&lt;p&gt;We've expanded our Deployments API to provide additional information about the environments associated with deployments.&lt;/p&gt;
+
+&lt;p&gt;We've added a new &lt;code&gt;transient_environment&lt;/code&gt; field to allow you to communicate that an environment is specific to a deployment and will no longer exist at some point in the future (e.g. a temporary testing environment like a &lt;a href="https://devcenter.heroku.com/articles/github-integration-review-apps"&gt;Heroku Review App&lt;/a&gt;). By pairing this with other additions, we can determine that an &lt;code&gt;inactive&lt;/code&gt; deployment associated with a &lt;code&gt;transient_environment&lt;/code&gt; has an &lt;code&gt;environment_url&lt;/code&gt; that is no longer accessible.&lt;/p&gt;
+
+&lt;p&gt;Similarly, we've added a new &lt;code&gt;production_environment&lt;/code&gt; field to allow you to communicate that an environment is one with which end users directly interact. We automatically set &lt;code&gt;production_environment&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; if the value for &lt;code&gt;environment&lt;/code&gt; is &lt;code&gt;"production"&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="automatic-creation-of-inactive-statuses" class="anchor" href="#automatic-creation-of-inactive-statuses" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Automatic creation of inactive statuses&lt;/h2&gt;
+
+&lt;p&gt;Each time we receive a new successful deployment status, we automatically add a new &lt;code&gt;inactive&lt;/code&gt; status to all previous deployments made within the relevant repository to the same environment (based on the value of &lt;code&gt;environment&lt;/code&gt;) given the environment is both non-transient and non-production. You can opt out of this behavior by passing &lt;code&gt;false&lt;/code&gt; with the new &lt;code&gt;auto_inactive&lt;/code&gt; parameter.&lt;/p&gt;
+
+&lt;p&gt;For example, if &lt;code&gt;feature-branch&lt;/code&gt; within &lt;code&gt;https://github.com/user/repository&lt;/code&gt; is deployed to an environment named &lt;code&gt;staging&lt;/code&gt; (which is a non-transient, non-production environment) and &lt;code&gt;bugfix-branch&lt;/code&gt; within &lt;code&gt;https://github.com/user/repository&lt;/code&gt; is later deployed to an environment named &lt;code&gt;staging&lt;/code&gt;, we would automatically create a new &lt;code&gt;inactive&lt;/code&gt; status for the deployment associated with &lt;code&gt;feature-branch&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4&gt;
+&lt;a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;How can I try it?&lt;/h4&gt;
+
+&lt;p&gt;Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.&lt;/p&gt;
+
+&lt;p&gt;To access the API during the preview period, you must provide a custom &lt;a href="/v3/media/"&gt;media type&lt;/a&gt; in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.ant-man-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;Take a look at &lt;a href="https://developer.github.com/v3/repos/deployments/"&gt;the documentation&lt;/a&gt; for full details. We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployment+and+DeploymentStatus+API+enhancements+preview+period"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-04-01:/changes/2016-04-01-squash-api-preview/</id>
     <title type="html">Preview Squash Support for the Pull Request Merge API</title>
@@ -1046,46 +1100,6 @@ OAuth integrations with more confidence.&lt;/p&gt;
     <content type="html">&lt;p&gt;Is your application taking advantage of the recommended workflow for discovering a user's repositories and organizations? With the &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;recent improvements to the API&lt;/a&gt;, the process is simpler than ever. In our newest guide, we show you how to &lt;a href="/guides/discovering-resources-for-a-user/"&gt;reliably identify the resources that your app can access for a given user&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, we'd love to &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Discovering+resources+for+a+user"&gt;hear from you&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-01-07:/changes/2015-01-07-prepare-for-organization-permissions-changes/</id>
-    <title type="html">Prepare for upcoming organization permissions changes</title>
-    <published>2015-01-07T08:00:00Z</published>
-    <updated>2015-01-07T08:00:00Z</updated>
-    <author>
-      <name>jakeboxer</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-01-07-prepare-for-organization-permissions-changes/"/>
-    <content type="html">&lt;p&gt;&lt;strong&gt;UPDATE (2015-06-10):&lt;/strong&gt; As &lt;a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/"&gt;announced on June 10&lt;/a&gt;, these changes will become an official part of GitHub API v3 on June 24. (This post originally announced that these changes would come to GitHub API v3 on February 24.)&lt;/p&gt;
-
-&lt;p&gt;Last month, we &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;released a preview&lt;/a&gt; of several API changes related to managing organization members and repositories. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to &lt;strong&gt;update your code before June 24&lt;/strong&gt; to account for these changes.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="breaking-changes-coming-on-june-24" class="anchor" href="#breaking-changes-coming-on-june-24" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Breaking changes coming on June 24&lt;/h2&gt;
-
-&lt;p&gt;If your application uses any of the following APIs, then you are affected by this change:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;APIs for managing your organization's admins through the Owners team&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/repos/#list-your-repositories"&gt;List your repositories&lt;/a&gt; API&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/orgs/#list-your-organizations"&gt;List your organizations&lt;/a&gt; API&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/orgs/#list-user-organizations"&gt;List user organizations&lt;/a&gt; API&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If your application uses these APIs, we urge you to update your application as soon as possible. (Read &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;last month's announcement&lt;/a&gt; for more details on the changes.)&lt;/p&gt;
-
-&lt;p&gt;Starting today, we're offering a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Migration period&lt;/h2&gt;
-
-&lt;p&gt;During the migration period, you can opt-in to these changes using the following custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.moondragon+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
   </entry>
 </feed>
 

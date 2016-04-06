@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Deployment and DeploymentStatus API enhancements preview period | GitHub Developer Guide</title>
+  
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  
+  <link href="/assets/stylesheets/application.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/assets/javascripts/application.js" type="text/javascript"></script>
+  
+</head>
+
+
+<body class="blog">
+  
+
+<div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/">GitHub:Developer</a>
+      <ul class="nav">
+        
+        <li><a href="/v3/" class="nav-api">API</a></li>
+        <li><a href="/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+
+  <div id="wrapper">
+    <div class="content">
+      <div class="change" id="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">
+<h2 class="title">
+  <a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 6, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/tarebyte.png" alt="Avatar for tarebyte" data-proofer-ignore/>
+      <a href="https://github.com/tarebyte" data-proofer-ignore>tarebyte</a>
+  </li>
+</ul>
+</div>
+
+
+<p>We've expanded our Deployments APIs to accommodate more powerful deployment practices and to lay the foundation for a more seamless integration of deployments within GitHub.</p>
+
+<h2>
+<a id="link-to-a-live-deployment" class="anchor" href="#link-to-a-live-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Link to a live deployment</h2>
+
+<p>To enable easy access to a live version of a deployment, we've added an <code>environment_url</code> field to the Deployments API. This environment will be exposed as a link in the Pull Request timeline to enable users to directly access a running version of their code without leaving the context of their work.</p>
+
+<p><em>Note: To add some clarity, we've renamed the <code>target_url</code> field to <code>log_url</code>. We will continue accept <code>target_url</code> to support legacy uses, but we recommend modifying this to the new name to avoid confusion. Future API versions might not support <code>target_url</code></em>.</p>
+
+<h2>
+<a id="inactive-deployment-status" class="anchor" href="#inactive-deployment-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Inactive deployment status</h2>
+
+<p>We recognize that deployments in many common practices don't last forever. So, we've added a new <code>inactive</code> state to Deployment Statuses. You can use this state to communicate that a deployment is no longer active (e.g. something different has been deployed to the environment or the environment has been destroyed).</p>
+
+<h2>
+<a id="more-information-about-environments" class="anchor" href="#more-information-about-environments" aria-hidden="true"><span class="octicon octicon-link"></span></a>More information about environments</h2>
+
+<p>We've expanded our Deployments API to provide additional information about the environments associated with deployments.</p>
+
+<p>We've added a new <code>transient_environment</code> field to allow you to communicate that an environment is specific to a deployment and will no longer exist at some point in the future (e.g. a temporary testing environment like a <a href="https://devcenter.heroku.com/articles/github-integration-review-apps">Heroku Review App</a>). By pairing this with other additions, we can determine that an <code>inactive</code> deployment associated with a <code>transient_environment</code> has an <code>environment_url</code> that is no longer accessible.</p>
+
+<p>Similarly, we've added a new <code>production_environment</code> field to allow you to communicate that an environment is one with which end users directly interact. We automatically set <code>production_environment</code> to <code>true</code> if the value for <code>environment</code> is <code>"production"</code>.</p>
+
+<h2>
+<a id="automatic-creation-of-inactive-statuses" class="anchor" href="#automatic-creation-of-inactive-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automatic creation of inactive statuses</h2>
+
+<p>Each time we receive a new successful deployment status, we automatically add a new <code>inactive</code> status to all previous deployments made within the relevant repository to the same environment (based on the value of <code>environment</code>) given the environment is both non-transient and non-production. You can opt out of this behavior by passing <code>false</code> with the new <code>auto_inactive</code> parameter.</p>
+
+<p>For example, if <code>feature-branch</code> within <code>https://github.com/user/repository</code> is deployed to an environment named <code>staging</code> (which is a non-transient, non-production environment) and <code>bugfix-branch</code> within <code>https://github.com/user/repository</code> is later deployed to an environment named <code>staging</code>, we would automatically create a new <code>inactive</code> status for the deployment associated with <code>feature-branch</code>.</p>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.</p>
+
+<p>To access the API during the preview period, you must provide a custom <a href="/v3/media/">media type</a> in the Accept header:</p>
+
+<pre><code>application/vnd.github.ant-man-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>Take a look at <a href="https://developer.github.com/v3/repos/deployments/">the documentation</a> for full details. We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployment+and+DeploymentStatus+API+enhancements+preview+period">get in touch with us</a>!</p>
+</div>
+
+    </div>
+
+    <div class="sidebar-shell">
+        <h2>Recent Posts</h2>
+<ul class="headlines sidebar-module">
+
+  <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
+
+  <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
+
+  <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
+
+  <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
+
+  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
+
+  <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
+
+  <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
+
+  <li><a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official<br /><span class="date">January 5, 2016</span></a></li>
+
+</ul>
+
+
+        <div class="sidebar-module notice"><a class="rss-subscribe" href="/changes.atom">Subscribe to the RSS feed</a></div>
+    </div>
+  </div>
+
+    <div id="footer" >
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+  </div><!-- /#footer -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+
+</body>
+</html>

@@ -44,7 +44,78 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-04-01-squash-api-preview/">
+      <div class="change" id="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">
+  <h2 class="title">
+<a id="--deployment-and-deploymentstatus-api-enhancements-preview-period" class="anchor" href="#--deployment-and-deploymentstatus-api-enhancements-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 6, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/tarebyte.png" alt="Avatar for tarebyte" data-proofer-ignore>
+      <a href="https://github.com/tarebyte" data-proofer-ignore>tarebyte</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've expanded our Deployments APIs to accommodate more powerful deployment practices and to lay the foundation for a more seamless integration of deployments within GitHub.</p>
+
+<h2>
+<a id="link-to-a-live-deployment" class="anchor" href="#link-to-a-live-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="link-to-a-live-deployment" class="anchor" href="#link-to-a-live-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Link to a live deployment</h2>
+
+<p>To enable easy access to a live version of a deployment, we've added an <code>environment_url</code> field to the Deployments API. This environment will be exposed as a link in the Pull Request timeline to enable users to directly access a running version of their code without leaving the context of their work.</p>
+
+<p><em>Note: To add some clarity, we've renamed the <code>target_url</code> field to <code>log_url</code>. We will continue accept <code>target_url</code> to support legacy uses, but we recommend modifying this to the new name to avoid confusion. Future API versions might not support <code>target_url</code></em>.</p>
+
+<h2>
+<a id="inactive-deployment-status" class="anchor" href="#inactive-deployment-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="inactive-deployment-status" class="anchor" href="#inactive-deployment-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Inactive deployment status</h2>
+
+<p>We recognize that deployments in many common practices don't last forever. So, we've added a new <code>inactive</code> state to Deployment Statuses. You can use this state to communicate that a deployment is no longer active (e.g. something different has been deployed to the environment or the environment has been destroyed).</p>
+
+<h2>
+<a id="more-information-about-environments" class="anchor" href="#more-information-about-environments" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="more-information-about-environments" class="anchor" href="#more-information-about-environments" aria-hidden="true"><span class="octicon octicon-link"></span></a>More information about environments</h2>
+
+<p>We've expanded our Deployments API to provide additional information about the environments associated with deployments.</p>
+
+<p>We've added a new <code>transient_environment</code> field to allow you to communicate that an environment is specific to a deployment and will no longer exist at some point in the future (e.g. a temporary testing environment like a <a href="https://devcenter.heroku.com/articles/github-integration-review-apps">Heroku Review App</a>). By pairing this with other additions, we can determine that an <code>inactive</code> deployment associated with a <code>transient_environment</code> has an <code>environment_url</code> that is no longer accessible.</p>
+
+<p>Similarly, we've added a new <code>production_environment</code> field to allow you to communicate that an environment is one with which end users directly interact. We automatically set <code>production_environment</code> to <code>true</code> if the value for <code>environment</code> is <code>"production"</code>.</p>
+
+<h2>
+<a id="automatic-creation-of-inactive-statuses" class="anchor" href="#automatic-creation-of-inactive-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="automatic-creation-of-inactive-statuses" class="anchor" href="#automatic-creation-of-inactive-statuses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automatic creation of inactive statuses</h2>
+
+<p>Each time we receive a new successful deployment status, we automatically add a new <code>inactive</code> status to all previous deployments made within the relevant repository to the same environment (based on the value of <code>environment</code>) given the environment is both non-transient and non-production. You can opt out of this behavior by passing <code>false</code> with the new <code>auto_inactive</code> parameter.</p>
+
+<p>For example, if <code>feature-branch</code> within <code>https://github.com/user/repository</code> is deployed to an environment named <code>staging</code> (which is a non-transient, non-production environment) and <code>bugfix-branch</code> within <code>https://github.com/user/repository</code> is later deployed to an environment named <code>staging</code>, we would automatically create a new <code>inactive</code> status for the deployment associated with <code>feature-branch</code>.</p>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.</p>
+
+<p>To access the API during the preview period, you must provide a custom <a href="/v3/media/">media type</a> in the Accept header:</p>
+
+<pre><code>application/vnd.github.ant-man-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
+
+<p>Take a look at <a href="https://developer.github.com/v3/repos/deployments/">the documentation</a> for full details. We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployment+and+DeploymentStatus+API+enhancements+preview+period">get in touch with us</a>!</p>
+</div>
+
+<div class="change" id="/changes/2016-04-01-squash-api-preview/">
   <h2 class="title">
 <a id="--preview-squash-support-for-the-pull-request-merge-api" class="anchor" href="#--preview-squash-support-for-the-pull-request-merge-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API</a>
@@ -252,7 +323,7 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
 <p>You can see an example of this API in a pull request to Homebrew/homebrew's updater: <a href="https://github.com/Homebrew/homebrew/pull/49219">https://github.com/Homebrew/homebrew/pull/49219</a>.</p>
 
 <h4>
-<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it-1" class="anchor" href="#how-can-i-try-it-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
 
 <p>To use this new API media type during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
@@ -339,7 +410,7 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
 </pre>
 
 <h4>
-<a id="how-can-i-try-it-1" class="anchor" href="#how-can-i-try-it-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it-2" class="anchor" href="#how-can-i-try-it-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
 
 <p>Starting today, developers can preview these new API methods. To use them during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
@@ -422,7 +493,7 @@ curl "https://api.github.com/repos/github/hubot/branches/master" \
 </pre>
 
 <h4>
-<a id="how-can-i-try-it-2" class="anchor" href="#how-can-i-try-it-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it-3" class="anchor" href="#how-can-i-try-it-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
 
 <p>To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:</p>
@@ -496,50 +567,6 @@ merged. See our <a href="/guides/building-a-ci-server/">Status API guide</a> to 
 like these.</p>
 
 <p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+in+API+responses">let us know</a>.</p>
-
-<p></p>
-</div>
-
-<div class="change" id="/changes/2015-08-04-get-license-contents/">
-  <h2 class="title">
-<a id="--get-the-contents-of-a-repositorys-license" class="anchor" href="#--get-the-contents-of-a-repositorys-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    August 4, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter" data-proofer-ignore>
-      <a href="https://github.com/benbalter" data-proofer-ignore>benbalter</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The <a href="/v3/licenses/">License API Preview</a> now allows you to retrieve the contents of a repository's open source license. As before, when the appropriate preview media type is passed, the repository endpoint will return information about the detected license, if any:</p>
-
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman
-</pre>
-
-<p>You can now also get the contents of the repository's license file, whether or not the license was successfully identified via the license contents endpoint:</p>
-
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman/license
-</pre>
-
-<p>Similar to <a href="/v3/repos/contents/#get-contents">the repository contents API</a>, the license contents method also supports <a href="/v3/repos/contents/#custom-media-types">custom media types</a> for retrieving the raw license content or rendered license HTML.</p>
-
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com/repos/benbalter/gman/license
-</pre>
-
-<p>For more information, see <a href="/v3/licenses/#get-the-contents-of-a-repositorys-license">the license API documentation</a>, and as always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=License+API">get in touch with us</a>.</p>
 
 <p></p>
 </div>
@@ -637,6 +664,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
@@ -650,8 +679,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
 
   <li><a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official<br /><span class="date">January 5, 2016</span></a></li>
-
-  <li><a href="/changes/2015-11-11-protected-branches-api/">Protected Branches API Preview Period<br /><span class="date">November 11, 2015</span></a></li>
 
 </ul>
 

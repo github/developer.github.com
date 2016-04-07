@@ -44,7 +44,73 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-08-04-get-license-contents/">
+      <div class="change" id="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">
+  <h2 class="title">
+<a id="--ensure-your-app-is-ready-for-protected-branches" class="anchor" href="#--ensure-your-app-is-ready-for-protected-branches" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-09-03-ensure-your-app-is-ready-for-protected-branches/">Ensure your app is ready for Protected Branches</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 3, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/aroben.png" alt="Avatar for aroben" data-proofer-ignore>
+      <a href="https://github.com/aroben" data-proofer-ignore>aroben</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We’ve begun to <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">roll out Protected Branches</a> across GitHub. When you
+protect a branch in one of your repositories, you will be prevented from
+force pushing to that branch or deleting it. You can also configure required
+status checks for your protected branch. When configured, changing a branch to
+point at a new commit will fail unless that commit (or another commit with
+the same <a href="http://git-scm.com/book/en/v2/Git-Internals-Git-Objects#Tree-Objects">Git tree</a>) has a <a href="/v3/repos/statuses/">Status</a> in the <code>success</code> state for
+each required status check.</p>
+
+<p>These restrictions apply to branch manipulations performed via the GitHub API
+as well. So when you protect a branch, you will no longer be able to <a href="/v3/git/refs/#delete-a-reference">delete
+the branch</a> via the API or <a href="/v3/git/refs/#update-a-reference">update it</a> to point at a
+non-ancestor commit, even with <code>"force": true</code>. And if your branch has required
+status checks, you won’t be able to <a href="/v3/git/refs/#update-a-reference">update it</a> or <a href="/v3/pulls/#merge-a-pull-request-merge-button">merge pull
+requests</a> into that branch until <code>success</code> Statuses have been posted to
+the target commit for all required status checks.</p>
+
+<p>These restrictions are all represented by 422 errors:</p>
+
+<pre class="command-line">
+<span class="command">curl -i -H 'Authorization: token TOKEN' \</span>
+<span class="command">   -X DELETE https://api.github.com/repos/octocat/hubot/git/refs/heads/master</span>
+
+<span class="output">HTTP/1.1 422 Unprocessable Entity</span>
+<span class="output">{</span>
+<span class="output"> "message": "Cannot delete a protected branch",</span>
+<span class="output"> "documentation_url": "https://help.github.com/articles/about-protected-branches"</span>
+<span class="output">}</span>
+</pre>
+
+<p>Protected branches and required status checks are a great way to ensure your
+project’s conventions are followed. For example, you could write a Status
+integration that only posts a <code>success</code> Status when the pull request’s author
+has signed your project’s Contributor License Agreement. Or you could write one
+that only posts a <code>success</code> Status when three or more members of your
+<code>@initech/senior-engineers</code> team have left a comment saying they’ve reviewed
+the changes. If you configure these integrations as required status checks, you
+can be sure that these conditions have been satisfied before a pull request is
+merged. See our <a href="/guides/building-a-ci-server/">Status API guide</a> to learn how to create integrations
+like these.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Protected+Branches+in+API+responses">let us know</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2015-08-04-get-license-contents/">
   <h2 class="title">
 <a id="--get-the-contents-of-a-repositorys-license" class="anchor" href="#--get-the-contents-of-a-repositorys-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license</a>
@@ -483,41 +549,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 </code></pre>
 
 <p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
-</div>
-
-<div class="change" id="/changes/2015-05-26-repository-redirects-are-coming/">
-  <h2 class="title">
-<a id="--repository-redirects-are-coming-to-api-v3-in-july" class="anchor" href="#--repository-redirects-are-coming-to-api-v3-in-july" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-05-26-repository-redirects-are-coming/">Repository redirects are coming to API v3 in July</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 26, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Last month, we announced the <a href="/changes/2015-04-17-preview-repository-redirects/">upcoming repository redirect behavior for the API</a>, and we made it available for developers to preview. Starting <strong>July 21, 2015</strong>, the API will automatically provide these redirects for all API consumers.</p>
-
-<p>To learn more about repository redirects and how they will benefit your applications, be sure to check out the <a href="/changes/2015-04-17-preview-repository-redirects/">original announcement</a>.</p>
-
-<p>To start enjoying repository redirects right away, just provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.quicksilver-preview+json
-</code></pre>
-
-<p>Thanks to everyone that tried out this enhancement during the preview period.</p>
-
-<p>As always, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects">get in touch</a>. We love hearing from you.</p>
 
 <p></p>
 </div>
@@ -628,6 +659,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
+  <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
@@ -639,8 +672,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
-
-  <li><a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official<br /><span class="date">January 5, 2016</span></a></li>
 
 </ul>
 

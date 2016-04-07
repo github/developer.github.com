@@ -64,6 +64,35 @@
 &lt;p&gt;Take a look at &lt;a href="https://developer.github.com/v3/repos/deployments/"&gt;the documentation&lt;/a&gt; for full details. We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deployment+and+DeploymentStatus+API+enhancements+preview+period"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
   </entry>
   <entry>
+    <id>tag:developer.github.com,2016-04-04:/changes/2016-04-04-git-signing-api-preview/</id>
+    <title type="html">Preview support for Git signing</title>
+    <published>2016-04-04T07:00:00Z</published>
+    <updated>2016-04-04T07:00:00Z</updated>
+    <author>
+      <name>mastahyeti</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-04-04-git-signing-api-preview/"/>
+    <content type="html">&lt;p&gt;GitHub &lt;a href="https://github.com/blog/2144-gpg-signature-verification"&gt;recently started verifying GPG signed commits and tags&lt;/a&gt;. We are adding API support for signature verification and user GPG key management as well. You can enable these changes during the preview period by providing a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.cryptographer-preview
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre class="command-line"&gt;
+curl "https://api.github.com/user/gpg_keys" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.cryptographer-preview" \
+&lt;/pre&gt;
+
+&lt;p&gt;You can learn more about the new signature verification response objects in the updated &lt;a href="/v3/repos/commits"&gt;repository commit&lt;/a&gt;, &lt;a href="/v3/git/commits"&gt;Git commit&lt;/a&gt;, and &lt;a href="/v3/git/tags"&gt;Git tag&lt;/a&gt; documentation. There is also new &lt;a href="/v3/users/gpg_keys"&gt;GPG key management&lt;/a&gt; documentation.&lt;/p&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Squash+API+Preview"&gt;let us know&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
     <id>tag:developer.github.com,2016-04-01:/changes/2016-04-01-squash-api-preview/</id>
     <title type="html">Preview Squash Support for the Pull Request Merge API</title>
     <published>2016-04-01T07:00:00Z</published>
@@ -1086,20 +1115,6 @@ provides a huge net benefit for integrators as organizations choose to use
 OAuth integrations with more confidence.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Access+Policies+help+for+integrators"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-01-08:/changes/2015-01-08-discovering-resources-for-a-user/</id>
-    <title type="html">New guide: Discovering resources for a user</title>
-    <published>2015-01-08T08:00:00Z</published>
-    <updated>2015-01-08T08:00:00Z</updated>
-    <author>
-      <name>jasonrudolph</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-01-08-discovering-resources-for-a-user/"/>
-    <content type="html">&lt;p&gt;Is your application taking advantage of the recommended workflow for discovering a user's repositories and organizations? With the &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;recent improvements to the API&lt;/a&gt;, the process is simpler than ever. In our newest guide, we show you how to &lt;a href="/guides/discovering-resources-for-a-user/"&gt;reliably identify the resources that your app can access for a given user&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, we'd love to &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Discovering+resources+for+a+user"&gt;hear from you&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
 

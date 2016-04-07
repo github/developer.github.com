@@ -44,7 +44,37 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-04-10-deployment-api-preview-extension/">
+      <div class="change" id="/changes/2014-04-22-deprecating-beta-media-type/">
+  <h2 class="title">
+<a id="--deprecating-the-beta-media-type" class="anchor" href="#--deprecating-the-beta-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-04-22-deprecating-beta-media-type/">Deprecating the beta media type</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 22, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Now that the GitHub API is <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">serving the v3 media type by default</a>, we are deprecating the legacy <a href="/v3/versions/#beta">beta media type</a>.</p>
+
+<p>We will eventually remove support for the beta media type, but we have no official retirement date to annouce at the moment. When the time comes, rest assured that we'll announce the retirement with plenty of notice. In the meantime, existing API clients that rely on the beta media type should start making plans to migrate to v3. The beta media type differs from v3 in <a href="/v3/versions/#differences-from-beta-version">just a few places</a>. In most cases, migrating an application from the beta media type to the v3 media type is smooth and painless.</p>
+
+<p>As always, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=API:+Deprecating+the+beta+media+type">get in touch</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-04-10-deployment-api-preview-extension/">
   <h2 class="title">
 <a id="--extending-the-preview-period-for-the-deployments-api" class="anchor" href="#--extending-the-preview-period-for-the-deployments-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-04-10-deployment-api-preview-extension/">Extending the preview period for the Deployments API</a>
@@ -499,6 +529,8 @@ run into trouble, feel free to <a href="https://github.com/contact?form%5Bsubjec
 <pre><code>GET /users/:user/keys
 GET /user/keys
 </code></pre>
+
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-03-12-page-build-event-for-webhooks/">
@@ -521,11 +553,14 @@ GET /user/keys
 </ul>
 </div>
 
-  <p>We've made it even easier to track the status of your <a href="http://pages.github.com/">GitHub Pages</a> builds. By subscribing to the new <a href="/v3/activity/events/types/#pagebuildevent"><code>page_build</code></a> event, your application will receive an event payload containing the results of each build. (As always, these builds occur automatically following each push to a GitHub Pages-enabled branch.)</p>
+<p></p>
+<p>We've made it even easier to track the status of your <a href="http://pages.github.com/">GitHub Pages</a> builds. By subscribing to the new <a href="/v3/activity/events/types/#pagebuildevent"><code>page_build</code></a> event, your application will receive an event payload containing the results of each build. (As always, these builds occur automatically following each push to a GitHub Pages-enabled branch.)</p>
 
 <p>If you have a <a href="/webhooks/">webhook</a> with the <a href="https://github.com/blog/1778-webhooks-level-up">"send me everything" option</a> selected (or if you use the "<a href="/changes/2014-02-24-wildcard-event-for-webhooks/">wildcard event</a>" via the API), you will receive the <code>page_build</code> event after the next build of your GitHub Pages site. Alternatively, if you prefer to subscribe to specific event types, you can add to the new <code>page_build</code> event to your webhooks via your repository's webhook settings page or via the <a href="/v3/repos/hooks/">webhooks API</a>.</p>
 
 <p>For more information, be sure to check out our guide on <a href="/webhooks/">working with webhooks</a>. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+Page+Build+Event">drop us a line</a>.</p>
+
+<p></p>
 </div>
 
 <div class="change" id="/changes/2014-03-05-reminder-about-upcoming-cutover-test/">
@@ -548,98 +583,14 @@ GET /user/keys
 </ul>
 </div>
 
-  <p>In January, we announced an <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">upcoming change to the default media type</a>. To help developers assess the impact of that change before it becomes permanent, we're performing a <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#cutover-test">24-hour cutover test next week</a>.</p>
+<p></p>
+<p>In January, we announced an <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">upcoming change to the default media type</a>. To help developers assess the impact of that change before it becomes permanent, we're performing a <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#cutover-test">24-hour cutover test next week</a>.</p>
 
 <p>From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/#whats-changing">respond with the v3 media type by default</a>. (See the <a href="http://www.timeanddate.com/worldclock/fixedtime.html?iso=20140312T00&amp;p1=1440">start time for the cutover test in your time zone</a>.)</p>
 
 <p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
 
 <p>Please see the <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">original announcement</a> for full details. If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>.</p>
-</div>
-
-<div class="change" id="/changes/2014-03-04-timezone-handling-changes/">
-  <h2 class="title">
-<a id="--improved-timezone-handling-in-the-api" class="anchor" href="#--improved-timezone-handling-in-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-03-04-timezone-handling-changes/">Improved timezone handling in the API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    March 4, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/dbussink.png" alt="Avatar for dbussink" data-proofer-ignore>
-      <a href="https://github.com/dbussink" data-proofer-ignore>dbussink</a>
-  </li>
-</ul>
-</div>
-
-  <p>We have improved support for handling timezones in our API. For example, if you
-create commits through the API, we now allow for specifying timezone information
-more accurately.</p>
-
-<p>We apply the following rules, in order of priority, to determine timezone
-information for API calls:</p>
-
-<h4>
-<a id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information" class="anchor" href="#explicitly-provide-an-iso-8601-timestamp-with-timezone-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information" class="anchor" href="#explicitly-provide-an-iso-8601-timestamp-with-timezone-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explicitly provide an ISO 8601 timestamp with timezone information</h4>
-
-<p>For API calls that allow for a timestamp to be specified, we use that exact
-timestamp. An example of this is the <a href="/v3/git/commits">Commits API</a> which allows
-for specifying the <code>date</code> property.</p>
-
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my commit message"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dirkjan Bussink"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d.bussink@gmail.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-02-27T15:05:06+01:00"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"parents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"tree"</span><span class="p">:</span><span class="w"> </span><span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-
-<h4>
-<a id="using-the-time-zone-header" class="anchor" href="#using-the-time-zone-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="using-the-time-zone-header" class="anchor" href="#using-the-time-zone-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the <code>Time-Zone</code> header</h4>
-
-<p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
-to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
-
-<pre class="command-line">
-<span class="command">curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md</span>
-</pre>
-
-<p>This means that we generate a timestamp for the moment your API call is made in
-the timezone this header defines. For example, the <a href="/v3/repos/contents/">Contents API</a>
-generates a git commit for each addition or change and uses the current time
-as the timestamp. This header will determine the timezone used for generating
-that current timestamp.</p>
-
-<h4>
-<a id="using-the-last-known-timezone-for-the-user" class="anchor" href="#using-the-last-known-timezone-for-the-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="using-the-last-known-timezone-for-the-user" class="anchor" href="#using-the-last-known-timezone-for-the-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the last known timezone for the user</h4>
-
-<p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
-API, we use the last known timezone for the authenticated user. The last know
-timezone is updated whenever you browse the GitHub.com website.</p>
-
-<h4>
-<a id="utc" class="anchor" href="#utc" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="utc" class="anchor" href="#utc" aria-hidden="true"><span class="octicon octicon-link"></span></a>UTC</h4>
-
-<p>If the steps above don't result in any information, we use UTC as the timezone
-to create the git commit.</p>
-
-<p>If you have any questions or feedback, don't hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=API+timezones">contact</a> us!</p>
 
 <p></p>
 </div>
@@ -776,6 +727,8 @@ to create the git commit.</p>
 
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
+  <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
@@ -787,8 +740,6 @@ to create the git commit.</p>
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
-
-  <li><a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official<br /><span class="date">January 5, 2016</span></a></li>
 
 </ul>
 

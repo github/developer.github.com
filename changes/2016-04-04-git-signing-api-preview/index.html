@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Licenses API | GitHub Developer Guide</title>
+  <title>Preview support for Git signing | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,49 +44,44 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-03-09-licenses-api/">
+      <div class="change" id="/changes/2016-04-04-git-signing-api-preview/">
 <h2 class="title">
-  <a href="/changes/2015-03-09-licenses-api/">Licenses API</a>
+  <a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    March 9, 2015
+    April 4, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter" data-proofer-ignore/>
-      <a href="https://github.com/benbalter" data-proofer-ignore>benbalter</a>
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore/>
+      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
   </li>
 </ul>
 </div>
 
 
-<p>We're introducing a new <a href="/v3/licenses">license API</a> preview to support <a href="https://github.com/blog/1964-license-usage-on-github-com">open source license usage on GitHub.com</a>.</p>
+<p>GitHub <a href="https://github.com/blog/2144-gpg-signature-verification">recently started verifying GPG signed commits and tags</a>. We are adding API support for signature verification and user GPG key management as well. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
 
-<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.drax-preview+json
+<pre><code>application/vnd.github.cryptographer-preview
 </code></pre>
 
-<p>This will then expose two new API endpoints. You can get a list of all known licenses:</p>
+<p>For example:</p>
 
-<pre><code>GET /licenses
-</code></pre>
+<pre class="command-line">
+curl "https://api.github.com/user/gpg_keys" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.cryptographer-preview" \
+</pre>
 
-<p>Or get information about a particular license:</p>
+<p>You can learn more about the new signature verification response objects in the updated <a href="/v3/repos/commits">repository commit</a>, <a href="/v3/git/commits">Git commit</a>, and <a href="/v3/git/tags">Git tag</a> documentation. There is also new <a href="/v3/users/gpg_keys">GPG key management</a> documentation.</p>
 
-<pre><code>GET /licenses/mit
-</code></pre>
+<p>During the preview period, we may change aspects of these APIs based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.</p>
 
-<p>When the preview media type is passed, the repository api will also return information about a repository's license file when you get an individual repository:</p>
-
-<pre><code>GET /repos/github/hubot
-</code></pre>
-
-<p>For more information, see the <a href="/v3/licenses/">licenses API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API">let us know</a>.</p>
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Squash+API+Preview">let us know</a>.</p>
 </div>
 
     </div>

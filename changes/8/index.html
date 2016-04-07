@@ -44,7 +44,95 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-03-03-deployments-api-updates/">
+      <div class="change" id="/changes/2014-03-04-timezone-handling-changes/">
+  <h2 class="title">
+<a id="--improved-timezone-handling-in-the-api" class="anchor" href="#--improved-timezone-handling-in-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-03-04-timezone-handling-changes/">Improved timezone handling in the API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 4, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/dbussink.png" alt="Avatar for dbussink" data-proofer-ignore>
+      <a href="https://github.com/dbussink" data-proofer-ignore>dbussink</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We have improved support for handling timezones in our API. For example, if you
+create commits through the API, we now allow for specifying timezone information
+more accurately.</p>
+
+<p>We apply the following rules, in order of priority, to determine timezone
+information for API calls:</p>
+
+<h4>
+<a id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information" class="anchor" href="#explicitly-provide-an-iso-8601-timestamp-with-timezone-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="explicitly-provide-an-iso-8601-timestamp-with-timezone-information" class="anchor" href="#explicitly-provide-an-iso-8601-timestamp-with-timezone-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explicitly provide an ISO 8601 timestamp with timezone information</h4>
+
+<p>For API calls that allow for a timestamp to be specified, we use that exact
+timestamp. An example of this is the <a href="/v3/git/commits">Commits API</a> which allows
+for specifying the <code>date</code> property.</p>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my commit message"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dirkjan Bussink"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d.bussink@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-02-27T15:05:06+01:00"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"parents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"7d1b31e74ee336d15cbd21741bc88a537ed063a0"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"tree"</span><span class="p">:</span><span class="w"> </span><span class="s2">"827efc6d56897b048c772eb4087f854f46256132"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h4>
+<a id="using-the-time-zone-header" class="anchor" href="#using-the-time-zone-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="using-the-time-zone-header" class="anchor" href="#using-the-time-zone-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the <code>Time-Zone</code> header</h4>
+
+<p>It is possible to supply a <code>Time-Zone</code> header which defines a timezone according
+to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">list of names from the Olson database</a>.</p>
+
+<pre class="command-line">
+<span class="command">curl -H "Time-Zone: Europe/Amsterdam" -X POST https://api.github.com/repos/github/linguist/contents/new_file.md</span>
+</pre>
+
+<p>This means that we generate a timestamp for the moment your API call is made in
+the timezone this header defines. For example, the <a href="/v3/repos/contents/">Contents API</a>
+generates a git commit for each addition or change and uses the current time
+as the timestamp. This header will determine the timezone used for generating
+that current timestamp.</p>
+
+<h4>
+<a id="using-the-last-known-timezone-for-the-user" class="anchor" href="#using-the-last-known-timezone-for-the-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="using-the-last-known-timezone-for-the-user" class="anchor" href="#using-the-last-known-timezone-for-the-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using the last known timezone for the user</h4>
+
+<p>If no <code>Time-Zone</code> header is specified and you make an authenticated call to the
+API, we use the last known timezone for the authenticated user. The last know
+timezone is updated whenever you browse the GitHub.com website.</p>
+
+<h4>
+<a id="utc" class="anchor" href="#utc" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="utc" class="anchor" href="#utc" aria-hidden="true"><span class="octicon octicon-link"></span></a>UTC</h4>
+
+<p>If the steps above don't result in any information, we use UTC as the timezone
+to create the git commit.</p>
+
+<p>If you have any questions or feedback, don't hesitate to <a href="https://github.com/contact?form%5Bsubject%5D=API+timezones">contact</a> us!</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-03-03-deployments-api-updates/">
   <h2 class="title">
 <a id="--new-payload-format-for-deployments" class="anchor" href="#--new-payload-format-for-deployments" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-03-03-deployments-api-updates/">New Payload Format for Deployments</a>
@@ -381,42 +469,6 @@ repository contents:</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-02-10-ping-event-for-webhooks/">
-  <h2 class="title">
-<a id="--ping-event-for-webhooks" class="anchor" href="#--ping-event-for-webhooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-02-10-ping-event-for-webhooks/">Ping Event for Webhooks</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 10, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/kdaigle.png" alt="Avatar for kdaigle" data-proofer-ignore>
-      <a href="https://github.com/kdaigle" data-proofer-ignore>kdaigle</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>With the release of our <a href="https://github.com/blog/1778-webhooks-level-up">new webhook UI</a>, we included a new
-<a href="/webhooks/#ping-event">ping event</a> that webhooks will receive. When you
-create a new webhook, we will send this event as an initial test of the webhook.</p>
-
-<p>The ping is only informational, doesn't need to be responded to in a specific way,
-and nothing bad will happen if you respond with an error. It's just a quick
-"hello world" to let you know you set everything up correctly.</p>
-
-<p>We also added a <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a> to the hooks API.
-By using ping instead of <a href="/v3/repos/hooks/#test-a-push-hook">test</a>, you can ensure
-you won't be limited by the <code>push</code> event requirement that the test endpoint has.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -549,6 +601,8 @@ you won't be limited by the <code>push</code> event requirement that the test en
 
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
+  <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
@@ -560,8 +614,6 @@ you won't be limited by the <code>push</code> event requirement that the test en
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
-
-  <li><a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official<br /><span class="date">January 5, 2016</span></a></li>
 
 </ul>
 

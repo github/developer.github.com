@@ -61,6 +61,7 @@
 <ul id="markdown-toc">
 <li><a href="#get-a-commit" id="markdown-toc-get-a-commit">Get a Commit</a></li>
 <li><a href="#create-a-commit" id="markdown-toc-create-a-commit">Create a Commit</a></li>
+<li><a href="#commit-signature-verification" id="markdown-toc-commit-signature-verification">Commit signature verification</a></li>
 </ul>
 
 <h2>
@@ -241,6 +242,68 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+
+<h2>
+<a id="commit-signature-verification" class="anchor" href="#commit-signature-verification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Commit signature verification</h2>
+
+<div class="alert tip">
+
+<p>Commit response objects including signature verification data are currently available for developers to preview.
+During the preview period, the object formats may change without advance notice.
+Please see the <a href="/changes/2016-04-04-git-signing-api-preview">blog post</a> for full details.</p>
+
+<p>To receive signature verification data in commit objects you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.cryptographer-preview+sha
+</code></pre>
+
+</div>
+
+<pre><code>GET /repos/:owner/:repo/git/commits/:sha
+</code></pre>
+
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/7638417db6d59f3c431d3e1f261cc637155684cd"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-07T22:01:45Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Chacon"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schacon@gmail.com"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"committer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-07T22:01:45Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Chacon"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schacon@gmail.com"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"added readme, because im a good github citizen\n"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tree"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/trees/691272480426f78a0138979dd3ce63b77f706feb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"691272480426f78a0138979dd3ce63b77f706feb"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"parents"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1acc419d4d6a9ce985db7be48c6349a0475975b5"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"verification"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"valid"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tree 691272480426f78a0138979dd3ce63b77f706feb\n..."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -362,7 +425,10 @@ X-RateLimit-Remaining: 4999
         <ul class="js-guides">
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
-          <li><a href="/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/v3/users/keys/">Git SSH Keys</a></li>
+          
+          <li><a href="/v3/users/gpg_keys/">GPG Keys</a></li>
+          
           <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
       </li>

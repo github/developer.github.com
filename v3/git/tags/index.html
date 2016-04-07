@@ -61,6 +61,7 @@
 <ul id="markdown-toc">
 <li><a href="#get-a-tag" id="markdown-toc-get-a-tag">Get a Tag</a></li>
 <li><a href="#create-a-tag-object" id="markdown-toc-create-a-tag-object">Create a Tag Object</a></li>
+<li><a href="#tag-signature-verification" id="markdown-toc-tag-signature-verification">Tag signature verification</a></li>
 </ul>
 
 <p>This tags API only deals with tag objects - so only annotated tags, not
@@ -228,6 +229,59 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+
+<h2>
+<a id="tag-signature-verification" class="anchor" href="#tag-signature-verification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tag signature verification</h2>
+
+<div class="alert tip">
+
+<p>Tag response objects including signature verification data are currently available for developers to preview.
+During the preview period, the object formats may change without advance notice.
+Please see the <a href="/changes/2016-04-04-git-signing-api-preview">blog post</a> for full details.</p>
+
+<p>To receive signature verification data in tag objects you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.cryptographer-preview+sha
+</code></pre>
+
+</div>
+
+<pre><code>GET /repos/:owner/:repo/git/tags/:sha
+</code></pre>
+
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v0.0.1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"initial version\n"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tagger"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Scott Chacon"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schacon@gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-07T22:01:45Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"verification"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"valid"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object c3d0be41ecbe669545ee3e94d31ed9a4bc91ee3c\n..."</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">
@@ -349,7 +403,10 @@ X-RateLimit-Remaining: 4999
         <ul class="js-guides">
           <li><a href="/v3/users/emails/">Emails</a></li>
           <li><a href="/v3/users/followers/">Followers</a></li>
-          <li><a href="/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/v3/users/keys/">Git SSH Keys</a></li>
+          
+          <li><a href="/v3/users/gpg_keys/">GPG Keys</a></li>
+          
           <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
       </li>

@@ -198,6 +198,9 @@ Name | Description
 `read:public_key`| List and view details for public keys.
 `write:public_key`| Create, list, and view details for public keys.
 `admin:public_key`| Fully manage public keys.
+{% if page.version == 'dotcom' %}`read:gpg_key`| List and view details for GPG keys.{% endif %}
+{% if page.version == 'dotcom' %}`write:gpg_key`| Create, list, and view details for GPG keys.{% endif %}
+{% if page.version == 'dotcom' %}`admin:gpg_key`| Fully manage GPG keys.{% endif %}
 
 NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:

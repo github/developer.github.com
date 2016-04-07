@@ -95,3 +95,28 @@ Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-
 The response will include a comparison of up to 250 commits. If you are working with a larger commit range, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the range.
 
 For comparisons with extremely large diffs, you may receive an error response indicating that the diff took too long to generate. You can typically resolve this error by using a smaller commit range.
+
+{% if page.version == 'dotcom' %}
+
+## Commit signature verification
+
+{{#tip}}
+
+Commit response objects including signature verification data are currently available for developers to preview.
+During the preview period, the object formats may change without advance notice.
+Please see the [blog post](/changes/2016-04-04-git-signing-api-preview) for full details.
+
+To receive signature verification data in commit objects you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+    application/vnd.github.cryptographer-preview+sha
+
+{{/tip}}
+
+    GET /repos/:owner/:repo/commits/:sha
+
+### Response
+
+<%= headers 200 %>
+<%= json(:signed_commit) %>
+
+{% endif %}

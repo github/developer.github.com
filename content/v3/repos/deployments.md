@@ -6,7 +6,7 @@ title: Deployments
 
 {:toc}
 
-Deployments are a request for a specific ref(branch,SHA,tag) to be deployed.
+Deployments are a request for a specific ref (branch, SHA, tag) to be deployed.
 GitHub then dispatches deployment events that external services can listen for
 and act on. This enables developers and organizations to build loosely-coupled
 tooling around deployments, without having to worry about implementation

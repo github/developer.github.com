@@ -52,8 +52,7 @@
 <li><a href="#provide-as-much-information-as-possible-to-the-user" id="markdown-toc-provide-as-much-information-as-possible-to-the-user">Provide as much information as possible to the user</a></li>
 <li><a href="#follow-any-redirects-that-the-api-sends-you" id="markdown-toc-follow-any-redirects-that-the-api-sends-you">Follow any redirects that the API sends you</a></li>
 <li><a href="#dont-manually-parse-urls" id="markdown-toc-dont-manually-parse-urls">Don't manually parse URLs</a></li>
-<li><a href="#dealing-with-rate-limits" id="markdown-toc-dealing-with-rate-limits">Dealing with rate limits</a></li>
-<li><a href="#dealing-with-abuse-rate-limits" id="markdown-toc-dealing-with-abuse-rate-limits">Dealing with abuse rate limits</a></li>
+<li><a href="#check-the-event-type-and-action-before-processing-the-event" id="markdown-toc-check-the-event-type-and-action-before-processing-the-event">Check the event type and action before processing the event</a></li>
 <li><a href="#dealing-with-api-errors" id="markdown-toc-dealing-with-api-errors">Dealing with API errors</a></li>
 </ul>
 <h2>
@@ -89,26 +88,58 @@
 <p>For the stability of your app, you shouldn't try to parse this data or try to guess and construct the format of future URLs. Your app is liable to break if we decide to change the URL.</p>
 <p>For example, when working with paginated results, it's often tempting to construct URLs that append <code>?page=&lt;number&gt;</code> to the end. Avoid that temptation. <a href="/enterprise/2.5/guides/traversing-with-pagination">Our guide on pagination</a> offers some safe tips on dependably following paginated results.</p>
 <h2>
-<a id="dealing-with-rate-limits" class="anchor" href="#dealing-with-rate-limits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dealing with rate limits</h2>
-<p>The GitHub API <a href="/enterprise/2.5/v3/#rate-limiting">rate limit</a> ensures that the API is fast and available for everyone.</p>
-<p>If you hit a rate limit, it's expected that you back off from making requests and try again later when you're permitted to do so. Failure to do so may result in the banning of your app.</p>
-<p>You can always <a href="/enterprise/2.5/v3/rate_limit/">check your rate limit status</a> at any time. Checking your rate limit incurs no cost against your rate limit.</p>
-<h2>
-<a id="dealing-with-abuse-rate-limits" class="anchor" href="#dealing-with-abuse-rate-limits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dealing with abuse rate limits</h2>
-<p><a href="/enterprise/2.5/v3/#abuse-rate-limits">Abuse rate limits</a> are another way we ensure the API's availability.
-To avoid hitting this limit, you should ensure your application follows the guidelines below.</p>
-<ul>
-<li>Make authenticated requests, or use your application's client ID and secret. Unauthenticated
-requests are subject to more aggressive abuse rate limiting.</li>
-<li>Make requests for a single user or client ID serially. Do not make requests for a single user
-or client ID concurrently.</li>
-<li>If you're making a large number of <code>POST</code>, <code>PATCH</code>, <code>PUT</code>, or <code>DELETE</code> requests for a single user
-or client ID, wait at least one second between each request.</li>
-<li>Requests that create content which triggers notifications, such as issues, comments and pull requests,
-may be further limited. Please create this content at a reasonable pace to avoid further limiting.</li>
-<li>When you have been limited, wait the number of seconds specified in the <code>Retry-After</code> response header.</li>
-</ul>
-<p>We reserve the right to change these guidelines as needed to ensure availability.</p>
+<a id="check-the-event-type-and-action-before-processing-the-event" class="anchor" href="#check-the-event-type-and-action-before-processing-the-event" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check the event type and action before processing the event</h2>
+<p>There are multiple <a href="/enterprise/2.5/v3/activity/events/types/">webhook event types</a>, and each event can have multiple actions. As GitHub's feature set grows, we will occasionally add new event types or add new actions to existing event types. Ensure that your application explicitly checks the type and action of an event before doing any webhook processing. The <code>X-GitHub-Event</code> request header can be used to know which event has been received so that processing can be handled appropriately. Similarly, the payload has a top-level <code>action</code> key that can be used to know which action was taken on the relevant object.</p>
+<p>For example, if you have configured a GitHub webhook to "Send me <strong>everything</strong>", your application will begin receiving new event types and actions as they are added. It is therefore <strong>not recommended to use any sort of catch-all else clause</strong>. Take the following code example:  </p>
+<pre class="highlight highlight-ruby"><code><span class="c1"># Not recommended: a catch-all else clause</span>
+<span class="k">def</span> <span class="nf">receive</span>
+  <span class="n">event_type</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">headers</span><span class="p">[</span><span class="s2">"X-GitHub-Event"</span><span class="p">]</span>
+  <span class="n">payload</span>    <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">body</span>
+  <span class="k">case</span> <span class="n">event_type</span>
+  <span class="k">when</span> <span class="s2">"repository"</span>
+    <span class="n">process_repository</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"issues"</span>
+    <span class="n">process_issues</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">else</span>
+    <span class="n">process_pull_requests</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>In this code example, the <code>process_repository</code> and <code>process_issues</code> methods will be correctly called if a <code>repository</code> or <code>issues</code> event was received. However, any other event type would result in <code>process_pull_requests</code> being called. As new event types are added, this would result in incorrect behavior and new event types would be processed in the same way that a <code>pull_request</code> event would be processed.</p>
+<p>Instead, we suggest explicitly checking event types and acting accordingly. In the following code example, we explicitly check for a <code>pull_request</code> event and the <code>else</code> clause simply logs that we've received a new event type:</p>
+<pre class="highlight highlight-ruby"><code><span class="c1"># Recommended: explicitly check each event type</span>
+<span class="k">def</span> <span class="nf">receive</span>
+  <span class="n">event_type</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">headers</span><span class="p">[</span><span class="s2">"X-GitHub-Event"</span><span class="p">]</span>
+  <span class="n">payload</span>    <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+  <span class="k">case</span> <span class="n">event_type</span>
+  <span class="k">when</span> <span class="s2">"repository"</span>
+    <span class="n">process_repository</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"issues"</span>
+    <span class="n">process_issue</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"pull_request"</span>
+    <span class="n">process_pull_requests</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">else</span>
+    <span class="nb">puts</span> <span class="s2">"Oooh, something new from GitHub: </span><span class="si">#{</span><span class="n">event_type</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>Because each event can also have multiple actions, it's recommended that actions are checked similarly. For example, the <a href="https://developer.github.com/v3/activity/events/types/#issuesevent"><code>IssuesEvent</code></a> has several possible actions. These include <code>opened</code> when the issue is created, <code>closed</code> when the issue is closed, and <code>assigned</code> when the issue is assigned to someone.</p>
+<p>As with adding event types, we may add new actions to existing events. It is therefore again <strong>not recommended to use any sort of catch-all else clause</strong> when checking an event's action. Instead, we suggest explicitly checking event actions as we did with the event type. An example of this looks very similar to what we suggested for event types above:</p>
+<pre class="highlight highlight-ruby"><code><span class="c1"># Recommended: explicitly check each action</span>
+<span class="k">def</span> <span class="nf">process_issue</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">case</span> <span class="n">payload</span><span class="p">[</span><span class="s2">"action"</span><span class="p">]</span>
+  <span class="k">when</span> <span class="s2">"opened"</span>
+    <span class="n">process_issue_opened</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"assigned"</span>
+    <span class="n">process_issue_assigned</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"closed"</span>
+    <span class="n">process_issue_closed</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">else</span>
+    <span class="nb">puts</span> <span class="s2">"Oooh, something new from GitHub: </span><span class="si">#{</span><span class="n">payload</span><span class="p">[</span><span class="s2">"action"</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>In this example the <code>closed</code> action is checked first before calling the <code>process_closed</code> method. Any unidentified actions are logged for future reference.</p>
 <h2>
 <a id="dealing-with-api-errors" class="anchor" href="#dealing-with-api-errors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dealing with API errors</h2>
 <p>Although your code would never introduce a bug, you may find that you've encountered successive errors when trying to access the API.</p>

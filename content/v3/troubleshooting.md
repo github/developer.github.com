@@ -29,6 +29,8 @@ It's important to *not* try and guess the format of the pagination URL. Not ever
 API call uses the same structure. Instead, extract the pagination information from
 [the Link Header](/v3/#pagination), which is sent with every request.
 
+{% if page.version == 'dotcom' %}
+
 ## Can I get my rate limits bumped?
 
 The {{ site.data.variables.product.product_name }} API has a pretty lenient quota for rate limits, for your enjoyment and
@@ -40,5 +42,7 @@ you might be able to fix the issue by either caching our results, or [using cond
 In certain exceptional cases, we may temporarily bump your rate limit higher. You
 should be prepared to answer technical questions about your goal and your planned usage of the API. We may still choose not to bump your limit if we feel that you can achieve your wildest
 dreams with the current rate limit (but don't worry, we'll help you out).
+
+{% endif %}
 
 [oap-guide]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/

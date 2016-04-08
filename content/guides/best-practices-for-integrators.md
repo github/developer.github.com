@@ -122,6 +122,8 @@ end
 
 In this example the `closed` action is checked first before calling the `process_closed` method. Any unidentified actions are logged for future reference.
 
+{% if page.version == 'dotcom' %}
+
 ## Dealing with rate limits
 
 The GitHub API [rate limit](/v3/#rate-limiting) ensures that the API is fast and available for everyone.
@@ -146,6 +148,8 @@ To avoid hitting this limit, you should ensure your application follows the guid
 * When you have been limited, wait the number of seconds specified in the `Retry-After` response header.
 
 We reserve the right to change these guidelines as needed to ensure availability.
+
+{% endif %}
 
 ## Dealing with API errors
 

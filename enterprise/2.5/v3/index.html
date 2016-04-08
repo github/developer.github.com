@@ -57,7 +57,6 @@
 <li><a href="#authentication" id="markdown-toc-authentication">Authentication</a></li>
 <li><a href="#hypermedia" id="markdown-toc-hypermedia">Hypermedia</a></li>
 <li><a href="#pagination" id="markdown-toc-pagination">Pagination</a></li>
-<li><a href="#rate-limiting" id="markdown-toc-rate-limiting">Rate Limiting</a></li>
 <li><a href="#user-agent-required" id="markdown-toc-user-agent-required">User Agent Required</a></li>
 <li><a href="#conditional-requests" id="markdown-toc-conditional-requests">Conditional requests</a></li>
 <li><a href="#cross-origin-resource-sharing" id="markdown-toc-cross-origin-resource-sharing">Cross Origin Resource Sharing</a></li>
@@ -307,8 +306,7 @@ are not websites.</p>
 <span class="command">curl 'http(s)://<em>[hostname]</em>/api/v3/users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
 </pre>
 <p>This should only be used in server to server scenarios.  Don't leak your
-OAuth application's client secret to your users.  Read <a href="#increasing-the-unauthenticated-rate-limit-for-oauth-applications">more about
-unauthenticated rate limiting</a>.</p>
+OAuth application's client secret to your users.</p>
 <h3>
 <a id="failed-login-limit" class="anchor" href="#failed-login-limit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Failed login limit</h3>
 <p>Authenticating with invalid credentials will return <code>401 Unauthorized</code>:</p>
@@ -399,87 +397,6 @@ SHA1 and not on page number.</p>
 </tr>
 </tbody>
 </table>
-<h2>
-<a id="rate-limiting" class="anchor" href="#rate-limiting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rate Limiting</h2>
-<p>For requests using Basic Authentication or OAuth, you can make up to 5,000
-requests per hour. For unauthenticated requests, the rate limit allows you to
-make up to 60 requests per hour. Unauthenticated requests are associated with your IP address,
-and not the user making requests. Note that <a href="/enterprise/2.5/v3/search/#rate-limit">the Search API has custom rate limit
-rules</a>.</p>
-<p>You can check the returned HTTP headers of any API request to see your current
-rate limit status:</p>
-<pre class="command-line">
-<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/users/whatever</span>
-<span class="output">HTTP/1.1 200 OK</span>
-<span class="output">Date: Mon, 01 Jul 2013 17:27:06 GMT</span>
-<span class="output">Status: 200 OK</span>
-<span class="output">X-RateLimit-Limit: 60</span>
-<span class="output">X-RateLimit-Remaining: 56</span>
-<span class="output">X-RateLimit-Reset: 1372700873</span>
-</pre>
-<p>The headers tell you everything you need to know about your current rate limit status:</p>
-<table>
-<thead><tr>
-<th>Header Name</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>X-RateLimit-Limit</code></td>
-<td>The maximum number of requests that the consumer is permitted to make per hour.</td>
-</tr>
-<tr>
-<td><code>X-RateLimit-Remaining</code></td>
-<td>The number of requests remaining in the current rate limit window.</td>
-</tr>
-<tr>
-<td><code>X-RateLimit-Reset</code></td>
-<td>The time at which the current rate limit window resets in <a href="http://en.wikipedia.org/wiki/Unix_time">UTC epoch seconds</a>.</td>
-</tr>
-</tbody>
-</table>
-<p>If you need the time in a different format, any modern programming language can get the job done. For example, if you open up the console on your web browser, you can easily get the reset time as a JavaScript Date object.</p>
-<pre class="highlight highlight-javascript"><code><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">1372700873</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="c1">// =&gt; Mon Jul 01 2013 13:47:53 GMT-0400 (EDT)</span>
-</code></pre>
-<p>Once you go over the rate limit you will receive an error response:</p>
-<pre class="command-line">
-<span class="output">HTTP/1.1 403 Forbidden</span>
-<span class="output">Date: Tue, 20 Aug 2013 14:50:41 GMT</span>
-<span class="output">Status: 403 Forbidden</span>
-<span class="output">X-RateLimit-Limit: 60</span>
-<span class="output">X-RateLimit-Remaining: 0</span>
-<span class="output">X-RateLimit-Reset: 1377013266</span>
-<span class="output">{</span>
-<span class="output">   "message": "API rate limit exceeded for xxx.xxx.xxx.xxx. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)",</span>
-<span class="output">   "documentation_url": "https://developer.github.com/v3/#rate-limiting"</span>
-<span class="output">}</span>
-</pre>
-<p>You can also <a href="/enterprise/2.5/v3/rate_limit">check your rate limit status</a> without incurring an
-API hit.
-<br></p>
-<h3>
-<a id="increasing-the-unauthenticated-rate-limit-for-oauth-applications" class="anchor" href="#increasing-the-unauthenticated-rate-limit-for-oauth-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Increasing the unauthenticated rate limit for OAuth applications</h3>
-<p>If your OAuth application needs to make unauthenticated calls with a higher rate limit, you can pass your app's client ID and secret as part of the query string.</p>
-<pre class="command-line">
-<span class="command">curl -i 'http(s)://<em>[hostname]</em>/api/v3/users/whatever?client_id=xxxx&amp;client_secret=yyyy'</span>
-<span class="output">HTTP/1.1 200 OK</span>
-<span class="output">Date: Mon, 01 Jul 2013 17:27:06 GMT</span>
-<span class="output">Status: 200 OK</span>
-<span class="output">X-RateLimit-Limit: 5000</span>
-<span class="output">X-RateLimit-Remaining: 4966</span>
-<span class="output">X-RateLimit-Reset: 1372700873</span>
-</pre>
-<p>This method should only be used for server-to-server calls. You should never
-share your client secret with anyone or include it in client-side browser code.</p>
-<h3>
-<a id="staying-within-the-rate-limit" class="anchor" href="#staying-within-the-rate-limit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Staying within the rate limit</h3>
-<p>If you are using Basic Authentication or OAuth, and you are exceeding
-your rate limit, you can likely fix the issue by caching API responses
-and using <a href="#conditional-requests">conditional requests</a>.</p>
-<p>If you're using conditional requests and still exceeding your rate
-limit, please <a href="https://github.com/contact?form%5Bsubject%5D=APIv3">contact us</a> to request a
-higher rate limit for your OAuth application.</p>
 <h2>
 <a id="user-agent-required" class="anchor" href="#user-agent-required" aria-hidden="true"><span class="octicon octicon-link"></span></a>User Agent Required</h2>
 <p>All API requests MUST include a valid <code>User-Agent</code> header. Requests with no <code>User-Agent</code>
@@ -800,13 +717,13 @@ to create the git commit.</p>
         <ul class="js-guides">
 <li><a href="/enterprise/2.5/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.5/v3/users/followers/">Followers</a></li>
-          <li><a href="/enterprise/2.5/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.5/v3/users/keys/">Git SSH Keys</a></li>
           <li><a href="/enterprise/2.5/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
 </li>
       <li class="js-topic">
         <h3>
-<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.5/v3/enterprise/">Enterprise 2.5</a>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.5/v3/enterprise/">Enterprise</a>
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.5/v3/enterprise/admin_stats/">Admin Stats</a></li>

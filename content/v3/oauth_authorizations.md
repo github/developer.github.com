@@ -1,10 +1,9 @@
 ---
-title: Authorizations | GitHub API
+title: Authorizations
 ---
 
 # OAuth Authorizations API
 
-* TOC
 {:toc}
 
 You can use this API to manage your OAuth applications. You can only access this API via [Basic Authentication](/v3/auth#basic-authentication) using your username and password, not tokens.
@@ -23,10 +22,13 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
     <li><a href="#list-your-authorizations">List your authorizations</a></li>
     <li><a href="#get-a-single-authorization">Get a single authorization</a></li>
     <li><a href="#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> - <code>token</code> is still returned for "create" </li>
+    {% if page.version == 'dotcom' or page.version > 2.2 %}
     <li><a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a> - <code>token</code> is still returned for "create" </li>
+    {% endif %}
     <li><a href="#update-an-existing-authorization">Update an existing authorization</a></li>
   </ul>
 
+  {% if page.version == 'dotcom' or page.version > 2.2 %}
   <p>
     To reduce the impact of removing the <code>token</code> value,
     the OAuth Authorizations API now includes a new request attribute
@@ -35,7 +37,15 @@ Make sure you understand how to [work with two-factor authentication](/v3/auth/#
     <code>fingerprint</code>), and
     <a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new endpoint</a>.
   </p>
-
+  {% else %}
+  <p>
+    To reduce the impact of removing the <code>token</code> value,
+    the OAuth Authorizations API now includes a new request attribute
+    (<code>fingerprint</code>) and three new response attributes
+    (<code>token_last_eight</code>, <code>hashed_token</code>, and
+    <code>fingerprint</code>).
+  </p>
+  {% endif %}
   <p>
     This functionality became the default for all requests on April 20, 2015. Please see <a href="/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/">the blog post</a> for full details.
   </p>
@@ -108,7 +118,7 @@ Name | Type | Description
 `scopes`|`array` | A list of scopes that this authorization is in.
 `note`|`string` | A note to remind you what the OAuth token is for.
 `note_url`|`string` | A URL to remind you what app the OAuth token is for.
-`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).
+{% if page.version == 'dotcom' or page.version > 2.2 %}`fingerprint`|`string` | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint).{% endif %}
 
 
 <%= json :client_secret => "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcd", :scopes => ["public_repo"], :note => 'admin script' %>
@@ -122,6 +132,8 @@ Name | Type | Description
 
 <%= headers 200, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("token" => "", "fingerprint" => "") } %>
+
+{% if page.version == 'dotcom' or page.version > 2.2 %}
 
 ## Get-or-create an authorization for a specific app and fingerprint
 
@@ -156,6 +168,8 @@ Name | Type | Description
 
 <%= headers 200, :Location => get_resource(:oauth_access)['url'] %>
 <%= json(:oauth_access) { |h| h.merge("token" => "") } %>
+
+{% endif %}
 
 ## Update an existing authorization
 
@@ -221,20 +235,6 @@ the username is the OAuth application `client_id` and the password is its
 
 <%= headers 200 %>
 <%= json(:oauth_access_with_user) %>
-
-## Revoke all authorizations for an application
-
-OAuth application owners can revoke every token for an OAuth application. You
-must use [Basic Authentication](/v3/auth#basic-authentication) when calling
-this method. The username is the OAuth application `client_id` and the password
-is its `client_secret`. Tokens are revoked via a background job, and it might
-take a few minutes for the process to complete.
-
-    DELETE /applications/:client_id/tokens
-
-### Response
-
-<%= headers 204 %>
 
 ## Revoke an authorization for an application
 

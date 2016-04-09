@@ -1,10 +1,9 @@
 ---
-title: Commits | GitHub API
+title: Commits
 ---
 
 # Commits
 
-* TOC
 {:toc}
 
 The Repo Commits API supports listing, viewing, and comparing commits in a repository.
@@ -44,6 +43,37 @@ patch formats.
 <%= headers 200 %>
 <%= json(:full_commit) %>
 
+## Get the SHA-1 of a commit reference
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The API to get the SHA-1 of a commit reference is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2016-02-24-commit-reference-sha-api) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.chitauri-preview+sha
+
+{{/tip}}
+
+Users with read access can get the SHA-1 of a commit reference:
+
+    GET /repos/:owner/:repo/commits/:ref
+
+To check if a remote reference's SHA-1 is the same as your local reference's SHA-1, make a `GET` request and provide the current SHA-1 for the local reference as the ETag.
+
+### Response
+
+The SHA-1 of the commit reference.
+
+<%= headers 200 %>
+<pre>
+814412cfbd631109df337e16c807207e78c0d24e
+</pre>
+
 ## Compare two commits
 
     GET /repos/:owner/:repo/compare/:base...:head
@@ -65,3 +95,28 @@ Pass the appropriate [media type](/v3/media/#commits-commit-comparison-and-pull-
 The response will include a comparison of up to 250 commits. If you are working with a larger commit range, you can use the [Commit List API](/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the range.
 
 For comparisons with extremely large diffs, you may receive an error response indicating that the diff took too long to generate. You can typically resolve this error by using a smaller commit range.
+
+{% if page.version == 'dotcom' %}
+
+## Commit signature verification
+
+{{#tip}}
+
+Commit response objects including signature verification data are currently available for developers to preview.
+During the preview period, the object formats may change without advance notice.
+Please see the [blog post](/changes/2016-04-04-git-signing-api-preview) for full details.
+
+To receive signature verification data in commit objects you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+    application/vnd.github.cryptographer-preview+sha
+
+{{/tip}}
+
+    GET /repos/:owner/:repo/commits/:sha
+
+### Response
+
+<%= headers 200 %>
+<%= json(:signed_commit) %>
+
+{% endif %}

@@ -1,10 +1,9 @@
 ---
-title: Getting listed in the Integrations Directory | GitHub API
+title: Getting listed in the Integrations Directory
 ---
 
 # Getting your integration listed
 
-* TOC
 {:toc}
 
 ## Listing requirements

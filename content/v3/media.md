@@ -1,9 +1,8 @@
 ---
-title: Media Types | GitHub API
+title: Media Types
 ---
 # Media Types
 
-* TOC
 {:toc}
 
 Custom media types are used in the API to let consumers choose the format
@@ -12,7 +11,7 @@ the following types to the `Accept` header when you make a request. Media types
 are specific to resources, allowing them to change independently and support
 formats that other resources don't.
 
-All GitHub media types look like this:
+All {{ site.data.variables.product.product_name }} media types look like this:
 
     application/vnd.github[.version].param[+json]
 
@@ -45,20 +44,21 @@ put the version before the property:
 You can check the current version through every response's headers.  Look
 for the `X-GitHub-Media-Type` header:
 
-{:.terminal}
-    $ curl https://api.github.com/users/technoweenie -I
-    HTTP/1.1 200 OK
-    X-GitHub-Media-Type: github.v3
+``` command-line
+$ curl {{ site.data.variables.product.api_url_pre }}/users/technoweenie -I
+> HTTP/1.1 200 OK
+> X-GitHub-Media-Type: github.v3
 
-    $ curl https://api.github.com/users/technoweenie -I \
-      -H "Accept: application/vnd.github.full+json"
-    HTTP/1.1 200 OK
-    X-GitHub-Media-Type: github.v3; param=full; format=json
+$ curl {{ site.data.variables.product.api_url_pre }}/users/technoweenie -I \
+$  -H "Accept: application/vnd.github.full+json"
+> HTTP/1.1 200 OK
+> X-GitHub-Media-Type: github.v3; param=full; format=json
 
-    $ curl https://api.github.com/users/technoweenie -I \
-      -H "Accept: application/vnd.github.v3.full+json"
-    HTTP/1.1 200 OK
-    X-GitHub-Media-Type: github.v3; param=full; format=json
+$ curl {{ site.data.variables.product.api_url_pre }}/users/technoweenie -I \
+$  -H "Accept: application/vnd.github.v3.full+json"
+> HTTP/1.1 200 OK
+> X-GitHub-Media-Type: github.v3; param=full; format=json
+```
 
 ## Comment Body Properties
 

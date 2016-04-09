@@ -1,10 +1,9 @@
 ---
-title: Licenses | GitHub API
+title: Licenses
 ---
 
 # Licenses
 
-* TOC
 {:toc}
 
 {{#tip}}

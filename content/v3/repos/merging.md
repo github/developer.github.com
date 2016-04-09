@@ -1,15 +1,14 @@
 ---
-title: Merging | GitHub API
+title: Merging
 ---
 
 # Merging
 
-* TOC
 {:toc}
 
 The Repo Merging API supports merging branches in a repository. This accomplishes
 essentially the same thing as merging one branch into another in a local repository
-and then pushing to GitHub. The benefit is that the merge is done on the server side
+and then pushing to {{ site.data.variables.product.product_name }}. The benefit is that the merge is done on the server side
 and a local repository is not needed. This makes it more appropriate for automation
 and other tools where maintaining local repositories would be cumbersome and inefficient.
 
@@ -21,7 +20,7 @@ The authenticated user will be the author of any merges done through this endpoi
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `base`|`string` | **Required**. The name of the base branch that the head will be merged into.
 `head`|`string` | **Required**. The head to merge. This can be a branch name or a commit SHA1.

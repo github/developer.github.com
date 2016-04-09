@@ -1,11 +1,10 @@
 ---
-title: Webhooks | GitHub API
+title: Webhooks
 layout: webhooks
 ---
 
 # Webhooks
 
-* TOC
 {:toc}
 
 
@@ -17,7 +16,7 @@ deploy to your production server. You're only limited by your imagination.
 
 Each webhook can be installed [on an organization][org-hooks] or [a specific
 repository][repo-hooks]. Once installed, they will be triggered each time one
-or more subscribed events occurs on that organization or repository. 
+or more subscribed events occurs on that organization or repository.
 
 You can create up to 20 webhooks for each event on each installation target
 (specific organization or specific repository).
@@ -84,6 +83,12 @@ payloads include the user who performed the event (`sender`) as well as the
 organization (`organization`) and/or repository (`repository`) which the event
 occurred on.
 
+{{#tip}}
+
+**Note:** Payloads are capped at 5 MB. If your event generates a larger payload, a webhook will not be fired. This may happen, for example, on a `create` event if many branches or tags are pushed at once. We suggest monitoring your payload size to ensure delivery.
+
+{{/tip}}
+
 ### Delivery headers
 
 HTTP requests made to your webhook's configured URL endpoint will contain
@@ -91,48 +96,48 @@ several special headers:
 
 Header | Description
 -------|-------------|
-`X-Github-Event`| Name of the [event][events-section] that triggered this delivery.
+`X-GitHub-Event`| Name of the [event][events-section] that triggered this delivery.
 `X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`][repo-hooks-create] as the key (if configured).
-`X-Github-Delivery`| Unique ID for this delivery.
+`X-GitHub-Delivery`| Unique ID for this delivery.
 
 Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
 
 ### Example delivery
 
-{:.terminal}
-    POST /payload HTTP/1.1
+``` command-line
+> POST /payload HTTP/1.1
 
-    Host: localhost:4567
-    X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
-    User-Agent: GitHub-Hookshot/044aadd
-    Content-Type: application/json
-    Content-Length: 6615
-    X-Github-Event: issues
+> Host: localhost:4567
+> X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+> User-Agent: GitHub-Hookshot/044aadd
+> Content-Type: application/json
+> Content-Length: 6615
+> X-GitHub-Event: issues
 
-    {
-      "action": "opened",
-      "issue": {
-        "url": "https://api.github.com/repos/octocat/Hello-World/issues/1347",
-        "number": 1347,
-        ...
-      },
-      "repository" : {
-        "id": 1296269,
-        "full_name": "octocat/Hello-World",
-        "owner": {
-          "login": "octocat",
-          "id": 1,
-          ...
-        },
-        ...
-      },
-      "sender": {
-        "login": "octocat",
-        "id": 1,
-        ...
-      }
-    }
-
+> {
+>   "action": "opened",
+>   "issue": {
+>     "url": "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+>     "number": 1347,
+>     ...
+>   },
+>   "repository" : {
+>     "id": 1296269,
+>     "full_name": "octocat/Hello-World",
+>     "owner": {
+>       "login": "octocat",
+>       "id": 1,
+>       ...
+>     },
+>     ...
+>   },
+>   "sender": {
+>     "login": "octocat",
+>     "id": 1,
+>     ...
+>   }
+> }
+```
 
 ## Ping Event
 

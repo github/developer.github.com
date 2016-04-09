@@ -1,10 +1,9 @@
 ---
-title: Review Comments | GitHub API
+title: Review Comments
 ---
 
 # Review Comments
 
-* TOC
 {:toc}
 
 Pull Request Review Comments are comments on a portion of the unified
@@ -67,6 +66,13 @@ Name | Type | Description
 `path`|`string` | **Required**. The relative path of the file to comment on.
 `position`|`integer` | **Required**. The line index in the diff to comment on.
 
+{{#tip}}
+
+When passing the `commit_id`, use the SHA of the latest commit in the pull request or your comment may appear as "outdated" if the specified `position` has been modified in a subsequent commit.
+
+To comment on a specific line in a file, you will need to first determine the position in the diff. GitHub offers a `application/vnd.github.v3.diff` media type which you can use in a preceding request to view the pull request's diff. The diff needs to be [interpreted](https://en.wikipedia.org/wiki/Diff_utility#Unified_format) to translate from the *line in the file* to a *position in the diff*. The `position` value is the number of lines down from the first "@@" hunk header in the file you would like to comment on. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the file's diff continues to increase through lines of whitespace and additional hunks until a new file is reached.
+
+{{/tip}}
 
 #### Example
 

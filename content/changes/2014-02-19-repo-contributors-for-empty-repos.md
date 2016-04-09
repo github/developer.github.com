@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Repository Contributors and Empty Repositories
-created_at: 2014-02-20
 author_name: izuzak
 ---
 

@@ -1,10 +1,9 @@
 ---
-title: Downloads | GitHub API
+title: Downloads
 ---
 
 # Downloads
 
-* TOC
 {:toc}
 
 ### Downloads API is Deprecated

@@ -54,6 +54,7 @@
 <li><a href="#list-pull-requests-files" id="markdown-toc-list-pull-requests-files">List pull requests files</a></li>
 <li><a href="#get-if-a-pull-request-has-been-merged" id="markdown-toc-get-if-a-pull-request-has-been-merged">Get if a pull request has been merged</a></li>
 <li><a href="#merge-a-pull-request-merge-button" id="markdown-toc-merge-a-pull-request-merge-button">Merge a pull request (Merge Button)</a></li>
+<li><a href="#labels-assignees-and-milestones" id="markdown-toc-labels-assignees-and-milestones">Labels, assignees, and milestones</a></li>
 <li><a href="#custom-media-types" id="markdown-toc-custom-media-types">Custom media types</a></li>
 </ul>
 <p>The Pull Request API allows you to list, view, edit, create, and even merge
@@ -1767,7 +1768,13 @@ X-RateLimit-Remaining: 4999
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/tree/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"comment_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="nt">"comment_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"verification"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"valid"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"signature"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-----BEGIN PGP MESSAGE-----\n...\n-----END PGP MESSAGE-----"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tree 6dcb09b5b57875f334f61aebed695e2e4193db5e\n..."</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
@@ -1872,19 +1879,10 @@ X-RateLimit-Remaining: 4999
 <th>Type</th>
 <th>Description</th>
 </tr></thead>
-<tbody>
-<tr>
-<td><code>commit_message</code></td>
-<td><code>string</code></td>
-<td>Extra detail to append to automatic commit message.</td>
-</tr>
-<tr>
-<td><code>sha</code></td>
-<td><code>string</code></td>
-<td>SHA that pull request head must match to allow merge</td>
-</tr>
-</tbody>
+<tbody></tbody>
 </table>
+<p><code>commit_message</code>|<code>string</code>| Extra detail to append to automatic commit message.
+<code>sha</code>|<code>string</code>| SHA that pull request head must match to allow merge</p>
 <h3>
 <a id="response-if-merge-was-successful" class="anchor" href="#response-if-merge-was-successful" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response if merge was successful</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
@@ -1919,8 +1917,8 @@ X-RateLimit-Remaining: 4999
   </span><span class="nt">"documentation_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<h3>
-<a id="labels-assignees-and-milestones" class="anchor" href="#labels-assignees-and-milestones" aria-hidden="true"><span class="octicon octicon-link"></span></a>Labels, assignees, and milestones</h3>
+<h2>
+<a id="labels-assignees-and-milestones" class="anchor" href="#labels-assignees-and-milestones" aria-hidden="true"><span class="octicon octicon-link"></span></a>Labels, assignees, and milestones</h2>
 <p>Every pull request is an issue, but not every issue is a pull request. For this reason, "shared" actions for both features, like manipulating assignees, labels and milestones, are provided within <a href="/enterprise/2.0/v3/issues">the Issues API</a>.</p>
 <h2>
 <a id="custom-media-types" class="anchor" href="#custom-media-types" aria-hidden="true"><span class="octicon octicon-link"></span></a>Custom media types</h2>
@@ -2068,13 +2066,13 @@ application/vnd.github.VERSION.patch
         <ul class="js-guides">
 <li><a href="/enterprise/2.0/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.0/v3/users/followers/">Followers</a></li>
-          <li><a href="/enterprise/2.0/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.0/v3/users/keys/">Git SSH Keys</a></li>
           <li><a href="/enterprise/2.0/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
 </li>
       <li class="js-topic">
         <h3>
-<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise 2.0</a>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise</a>
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.0/v3/enterprise/admin_stats/">Admin Stats</a></li>

@@ -51,7 +51,7 @@
 <li><a href="#list-deployment-statuses" id="markdown-toc-list-deployment-statuses">List Deployment Statuses</a></li>
 <li><a href="#create-a-deployment-status" id="markdown-toc-create-a-deployment-status">Create a Deployment Status</a></li>
 </ul>
-<p>Deployments are a request for a specific ref(branch,sha,tag) to be deployed.
+<p>Deployments are a request for a specific ref (branch, SHA, tag) to be deployed.
 GitHub then dispatches deployment events that external services can listen for
 and act on. This enables developers and organizations to build loosely-coupled
 tooling around deployments, without having to worry about implementation
@@ -121,13 +121,13 @@ as well.</p>
 <tr>
 <td><code>sha</code></td>
 <td><code>string</code></td>
-<td>The short or long sha that was recorded at creation time. Default: <code>none</code>
+<td>The SHA that was recorded at creation time. Default: <code>none</code>
 </td>
 </tr>
 <tr>
 <td><code>ref</code></td>
 <td><code>string</code></td>
-<td>The name of the ref. This can be a branch, tag, or sha. Default: <code>none</code>
+<td>The name of the ref. This can be a branch, tag, or SHA. Default: <code>none</code>
 </td>
 </tr>
 <tr>
@@ -193,7 +193,7 @@ X-RateLimit-Remaining: 4999
 <h2>
 <a id="create-a-deployment" class="anchor" href="#create-a-deployment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create a Deployment</h2>
 <p>Deployments offer a few configurable parameters with sane defaults.</p>
-<p>The <code>ref</code> parameter can be any named branch, tag, or sha. At GitHub we often
+<p>The <code>ref</code> parameter can be any named branch, tag, or SHA. At GitHub we often
 deploy branches and verify them before we merge a pull request.</p>
 <p>The <code>environment</code> parameter allows deployments to be issued to different
 runtime environments. Teams often have multiple environments for verifying
@@ -234,7 +234,7 @@ compile an application with debugging enabled.</p>
 <td><code>ref</code></td>
 <td><code>string</code></td>
 <td>
-<strong>Required</strong>. The ref to deploy. This can be a branch, tag, or sha.</td>
+<strong>Required</strong>. The ref to deploy. This can be a branch, tag, or SHA.</td>
 </tr>
 <tr>
 <td><code>task</code></td>
@@ -283,6 +283,8 @@ chat networks.</p>
   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying my sweet branch"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<h3>
+<a id="successful-response" class="anchor" href="#successful-response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Successful response</h3>
 <pre class="highlight highlight-headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/octocat/example/deployments/1
 X-RateLimit-Limit: 5000
@@ -338,6 +340,8 @@ X-RateLimit-Remaining: 4999
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<h3>
+<a id="successful-response-1" class="anchor" href="#successful-response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Successful response</h3>
 <pre class="highlight highlight-headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/octocat/example/deployments/1
 X-RateLimit-Limit: 5000
@@ -377,6 +381,28 @@ X-RateLimit-Remaining: 4999
   </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-07-20T01:19:13Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/example/deployments/1/statuses"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/example"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="merge-conflict-response" class="anchor" href="#merge-conflict-response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge conflict response</h3>
+<p>This error happens when the <code>auto_merge</code> option is enabled and when the default branch (in this case <code>master</code>), can't be merged into the branch that's being deployed (in this case <code>topic-branch</code>), due to merge conflicts.</p>
+<pre class="highlight highlight-headers"><code>Status: 409 Conflict
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Conflict merging master into topic-branch"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3>
+<a id="failed-commit-status-checks" class="anchor" href="#failed-commit-status-checks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Failed commit status checks</h3>
+<p>This error happens when the <code>required_contexts</code> parameter indicates that one or more contexts need to have a <code>success</code> status for the commit to be deployed, but one or more of the required contexts do not have a state of <code>success</code>.</p>
+<pre class="highlight highlight-headers"><code>Status: 409 Conflict
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Conflict: Commit status checks failed for topic-branch."</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h2>
@@ -464,7 +490,7 @@ X-RateLimit-Remaining: 4999
 <td><code>state</code></td>
 <td><code>string</code></td>
 <td>
-<strong>Required</strong>. The state of the status. Can be one of <code>pending</code>, <code>success</code>, <code>error</code>, or <code>failure</code>.</td>
+<strong>Required</strong>. The state of the status. Can be one of <code>pending</code>, <code>success</code>, <code>error</code>, or <code>failure</code> <strong>The <code>inactive</code> state requires a custom media type to be specified. Please see more in the alert below.</strong>.</td>
 </tr>
 <tr>
 <td><code>target_url</code></td>
@@ -472,14 +498,9 @@ X-RateLimit-Remaining: 4999
 <td>The target URL to associate with this status.  This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. Default: <code>""</code>
 </td>
 </tr>
-<tr>
-<td><code>description</code></td>
-<td><code>string</code></td>
-<td>A short description of the status. Default: <code>""</code>
-</td>
-</tr>
 </tbody>
 </table>
+<p><code>description</code>|<code>string</code> | A short description of the status. Maximum length of 140 characters. Default: <code>""</code></p>
 <h4>
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
@@ -659,13 +680,13 @@ X-RateLimit-Remaining: 4999
         <ul class="js-guides">
 <li><a href="/enterprise/2.0/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.0/v3/users/followers/">Followers</a></li>
-          <li><a href="/enterprise/2.0/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.0/v3/users/keys/">Git SSH Keys</a></li>
           <li><a href="/enterprise/2.0/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
 </li>
       <li class="js-topic">
         <h3>
-<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise 2.0</a>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise</a>
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.0/v3/enterprise/admin_stats/">Admin Stats</a></li>

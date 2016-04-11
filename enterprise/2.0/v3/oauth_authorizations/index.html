@@ -53,7 +53,6 @@
 <li><a href="#delete-an-authorization" id="markdown-toc-delete-an-authorization">Delete an authorization</a></li>
 <li><a href="#check-an-authorization" id="markdown-toc-check-an-authorization">Check an authorization</a></li>
 <li><a href="#reset-an-authorization" id="markdown-toc-reset-an-authorization">Reset an authorization</a></li>
-<li><a href="#revoke-all-authorizations-for-an-application" id="markdown-toc-revoke-all-authorizations-for-an-application">Revoke all authorizations for an application</a></li>
 <li><a href="#revoke-an-authorization-for-an-application" id="markdown-toc-revoke-an-authorization-for-an-application">Revoke an authorization for an application</a></li>
 <li><a href="#more-information" id="markdown-toc-more-information">More Information</a></li>
 </ul>
@@ -546,21 +545,6 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h2>
-<a id="revoke-all-authorizations-for-an-application" class="anchor" href="#revoke-all-authorizations-for-an-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Revoke all authorizations for an application</h2>
-<p>OAuth application owners can revoke every token for an OAuth application. You
-must use <a href="/enterprise/2.0/v3/auth#basic-authentication">Basic Authentication</a> when calling
-this method. The username is the OAuth application <code>client_id</code> and the password
-is its <code>client_secret</code>. Tokens are revoked via a background job, and it might
-take a few minutes for the process to complete.</p>
-<pre><code>DELETE /applications/:client_id/tokens
-</code></pre>
-<h3>
-<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-<pre class="highlight highlight-headers"><code>Status: 204 No Content
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-<h2>
 <a id="revoke-an-authorization-for-an-application" class="anchor" href="#revoke-an-authorization-for-an-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Revoke an authorization for an application</h2>
 <p>OAuth application owners can also revoke a single token for an OAuth
 application. You must use <a href="/enterprise/2.0/v3/auth#basic-authentication">Basic Authentication</a>
@@ -569,7 +553,7 @@ for this method, where the username is the OAuth application <code>client_id</co
 <pre><code>DELETE /applications/:client_id/tokens/:access_token
 </code></pre>
 <h3>
-<a id="response-8" class="anchor" href="#response-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999
@@ -726,13 +710,13 @@ links that might be of help:</p>
         <ul class="js-guides">
 <li><a href="/enterprise/2.0/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.0/v3/users/followers/">Followers</a></li>
-          <li><a href="/enterprise/2.0/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.0/v3/users/keys/">Git SSH Keys</a></li>
           <li><a href="/enterprise/2.0/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
 </li>
       <li class="js-topic">
         <h3>
-<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise 2.0</a>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.0/v3/enterprise/">Enterprise</a>
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.0/v3/enterprise/admin_stats/">Admin Stats</a></li>

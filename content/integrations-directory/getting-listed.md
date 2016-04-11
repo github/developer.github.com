@@ -22,12 +22,12 @@ All three are for GitHub-use only. If there's an urgent issue that needs your at
 
 We'd like to have a minimum set of links to include in every integration listing, so that our users have all the information they need. These are:
 
+- Pricing - If your integration costs money or has differed priced tiers of service, please include this URL.
 - Documentation - Please provide a URL with more information on how to use your integration.
 - Terms of service - Please provide the Terms of Service URL for users using your integration.
 - Privacy Policy - If different than Terms of Service, please include the URL here.
 - Support - Please provide a URL or email address for users to contact you directly.
 - Status - You should provide us a URL that will be updated when your application is down or experiencing problems. This could be a status site, a blog, a Twitter account, or more. This URL should be publicly accessible.
-- Pricing - If your integration costs money or has differed priced tiers of service, please include this URL.
 - Installation - Provide the URL for direct installation for users. Note the OAuth requirement below.
 
 ### Provide updates to your listing
@@ -39,9 +39,11 @@ marketing site. As your product changes, keep your Integration Directory listing
 
 Help GitHub users find your integration faster with the appropriate categories. Please send us your suggested categories for the listing. We reserve the right to remove categories from a listing, but we won't add any categories without your approval. Currently, the following categories are available:
 
-* Build
+* Code
 * Collaborate
-* Deploy
+* Ship
+
+If your integration supports both GitHub.com and GitHub Enterprise, please let us know.
 
 ## Technical requirements
 

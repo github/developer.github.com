@@ -186,9 +186,9 @@ event</a>, which has a more detailed webhook payload.</p>
 payloads include the user who performed the event (<code>sender</code>) as well as the
 organization (<code>organization</code>) and/or repository (<code>repository</code>) which the event
 occurred on.</p>
-<p>{{#tip}}
-<strong>Note:</strong> Payloads are capped at 5 MB. If your event generates a larger payload, a webhook will not be fired. This may happen, for example, on a <code>create</code> event if many branches or tags are pushed at once. We suggest monitoring your payload size to ensure delivery.
-{{/tip}}</p>
+<div class="alert tip">
+<p><strong>Note:</strong> Payloads are capped at 5 MB. If your event generates a larger payload, a webhook will not be fired. This may happen, for example, on a <code>create</code> event if many branches or tags are pushed at once. We suggest monitoring your payload size to ensure delivery.</p>
+</div>
 <h3>
 <a id="delivery-headers" class="anchor" href="#delivery-headers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delivery headers</h3>
 <p>HTTP requests made to your webhook's configured URL endpoint will contain
@@ -200,7 +200,7 @@ several special headers:</p>
 </tr></thead>
 <tbody>
 <tr>
-<td><code>X-Github-Event</code></td>
+<td><code>X-GitHub-Event</code></td>
 <td>Name of the <a href="#events">event</a> that triggered this delivery.</td>
 </tr>
 <tr>
@@ -208,7 +208,7 @@ several special headers:</p>
 <td>HMAC hex digest of the payload, using <a href="/enterprise/2.2/v3/repos/hooks/#create-a-hook">the hook's <code>secret</code></a> as the key (if configured).</td>
 </tr>
 <tr>
-<td><code>X-Github-Delivery</code></td>
+<td><code>X-GitHub-Delivery</code></td>
 <td>Unique ID for this delivery.</td>
 </tr>
 </tbody>
@@ -223,7 +223,7 @@ several special headers:</p>
 <span class="output">User-Agent: GitHub-Hookshot/044aadd</span>
 <span class="output">Content-Type: application/json</span>
 <span class="output">Content-Length: 6615</span>
-<span class="output">X-Github-Event: issues</span>
+<span class="output">X-GitHub-Event: issues</span>
 <span class="output">{</span>
 <span class="output">  "action": "opened",</span>
 <span class="output">  "issue": {</span>

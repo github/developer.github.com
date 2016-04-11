@@ -303,6 +303,10 @@ X-RateLimit-Remaining: 4999
 </tr>
 </tbody>
 </table>
+<div class="alert tip">
+<p>When passing the <code>commit_id</code>, use the SHA of the latest commit in the pull request or your comment may appear as "outdated" if the specified <code>position</code> has been modified in a subsequent commit.</p>
+<p>To comment on a specific line in a file, you will need to first determine the position in the diff. GitHub offers a <code>application/vnd.github.v3.diff</code> media type which you can use in a preceding request to view the pull request's diff. The diff needs to be <a href="https://en.wikipedia.org/wiki/Diff_utility#Unified_format">interpreted</a> to translate from the <em>line in the file</em> to a <em>position in the diff</em>. The <code>position</code> value is the number of lines down from the first "@@" hunk header in the file you would like to comment on. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the file's diff continues to increase through lines of whitespace and additional hunks until a new file is reached.</p>
+</div>
 <h4>
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
@@ -626,13 +630,13 @@ application/vnd.github.VERSION.full+json
         <ul class="js-guides">
 <li><a href="/enterprise/2.2/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.2/v3/users/followers/">Followers</a></li>
-          <li><a href="/enterprise/2.2/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.2/v3/users/keys/">Git SSH Keys</a></li>
           <li><a href="/enterprise/2.2/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
 </li>
       <li class="js-topic">
         <h3>
-<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.2/v3/enterprise/">Enterprise 2.2</a>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.2/v3/enterprise/">Enterprise</a>
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.2/v3/enterprise/admin_stats/">Admin Stats</a></li>

@@ -58,8 +58,6 @@
 <p>The <code>ref</code> in the URL must be formatted as <code>heads/branch</code>, not just <code>branch</code>. For example, the call to get the data for a branch named <code>skunkworkz/featureA</code> would be:</p>
 <pre><code>GET /repos/:owner/:repo/git/refs/heads/skunkworkz/featureA
 </code></pre>
-<h3>
-<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999
@@ -72,6 +70,49 @@ X-RateLimit-Remaining: 4999
     </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="w">
   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>If the <code>ref</code> doesn't exist in the repository, but existing refs start with <code>ref</code>
+they will be returned as an array. For example, a call to get the data for a
+branch named <code>feature</code>, which doesn't exist, would return head refs
+including <code>featureA</code> and <code>featureB</code> which do.</p>
+<pre><code>GET /repos/:owner/:repo/git/refs/heads/feature
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refs/heads/feature-a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/feature-a"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/aa218f56b14c9653891f9e74264a383fa43fefbd"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refs/heads/feature-b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/refs/heads/feature-b"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"object"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"commit"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/git/commits/612077ae6dffb4d2fbd8ce0cccaa58893b07b5ac"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>If the <code>ref</code> doesn't match an existing ref or any prefixes a 404 will be returned.</p>
+<pre><code>GET /repos/:owner/:repo/git/refs/heads/feature-branch-that-no-longer-exists
+</code></pre>
+<pre class="highlight highlight-headers"><code>Status: 404 Not Found
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not Found"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"documentation_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://developer.github.com/v3"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h2>
@@ -158,7 +199,7 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3>
-<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 201 Created
 Location: https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA
 X-RateLimit-Limit: 5000
@@ -209,7 +250,7 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3>
-<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999
@@ -235,7 +276,7 @@ X-RateLimit-Remaining: 4999
 <pre><code>DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
 </code></pre>
 <h3>
-<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999
@@ -373,13 +414,13 @@ X-RateLimit-Remaining: 4999
         <ul class="js-guides">
 <li><a href="/enterprise/2.2/v3/users/emails/">Emails</a></li>
           <li><a href="/enterprise/2.2/v3/users/followers/">Followers</a></li>
-          <li><a href="/enterprise/2.2/v3/users/keys/">Public Keys</a></li>
+          <li><a href="/enterprise/2.2/v3/users/keys/">Git SSH Keys</a></li>
           <li><a href="/enterprise/2.2/v3/users/administration/">Administration (Enterprise)</a></li>
         </ul>
 </li>
       <li class="js-topic">
         <h3>
-<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.2/v3/enterprise/">Enterprise 2.2</a>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.2/v3/enterprise/">Enterprise</a>
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.2/v3/enterprise/admin_stats/">Admin Stats</a></li>

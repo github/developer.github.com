@@ -63,25 +63,25 @@ HTTP methods first.</p>
 <p>Let's start by testing our setup. Open up a command prompt and enter the
 following command:</p>
 <pre class="command-line">
-<span class="command">curl https://http(s)://<em>[hostname]</em>/api/v3//zen</span>
+<span class="command">curl http(s)://<em>[hostname]</em>/api/v3/zen</span>
 <span class="output">Keep it logically awesome.</span>
 </pre>
 <p>The response will be a random selection from our design philosophies.</p>
 <p>Next, let's <code>GET</code> <a href="https://github.com/defunkt">Chris Wanstrath's</a> <a href="/enterprise/2.1/v3/users/#get-a-single-user">GitHub profile</a>:</p>
 <pre class="command-line">
 <span class="comment"># GET /users/defunkt</span>
-<span class="command">curl https://http(s)://<em>[hostname]</em>/api/v3//users/defunkt</span>
+<span class="command">curl http(s)://<em>[hostname]</em>/api/v3/users/defunkt</span>
 <span class="output">{</span>
 <span class="output">  "login": "defunkt",</span>
 <span class="output">  "id": 2,</span>
-<span class="output">  "url": "https://http(s)://<em>[hostname]</em>/api/v3//users/defunkt",</span>
+<span class="output">  "url": "http(s)://<em>[hostname]</em>/api/v3/users/defunkt",</span>
 <span class="output">  "html_url": "https://github.com/defunkt",</span>
 <span class="output">  ...</span>
 <span class="output">}</span>
 </pre>
 <p>Mmmmm, tastes like <a href="http://en.wikipedia.org/wiki/JSON">JSON</a>. Let's add the <code>-i</code> flag to include headers:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//users/defunkt</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/users/defunkt</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">Server: GitHub.com</span>
 <span class="output">Date: Sun, 11 Nov 2012 18:43:28 GMT</span>
@@ -101,7 +101,7 @@ following command:</p>
 <span class="output">{</span>
 <span class="output">  "login": "defunkt",</span>
 <span class="output">  "id": 2,</span>
-<span class="output">  "url": "https://http(s)://<em>[hostname]</em>/api/v3//users/defunkt",</span>
+<span class="output">  "url": "http(s)://<em>[hostname]</em>/api/v3/users/defunkt",</span>
 <span class="output">  "html_url": "https://github.com/defunkt",</span>
 <span class="output">  ...</span>
 <span class="output">}</span>
@@ -130,7 +130,7 @@ client has already spent.</li>
 <p>The easiest way to authenticate with the GitHub Enterprise API is by simply using your GitHub Enterprise
 username and password via Basic Authentication.</p>
 <pre class="command-line">
-<span class="command">curl -i -u <em>your_username</em> https://http(s)://<em>[hostname]</em>/api/v3//users/defunkt</span>
+<span class="command">curl -i -u <em>your_username</em> http(s)://<em>[hostname]</em>/api/v3/users/defunkt</span>
 <span class="output">Enter host password for user <em>your_username</em>:</span>
 </pre>
 <p>The <code>-u</code> flag sets the username, and cURL will prompt you for the password. You
@@ -145,7 +145,7 @@ reading and writing private information via the API.</p>
 <p>If you have <a href="https://help.github.com/articles/about-two-factor-authentication">two-factor authentication</a> enabled, the API will return a
 <code>401 Unauthorized</code> error code for the above request (and every other API request):</p>
 <pre class="command-line">
-<span class="command">curl -i -u <em>your_username</em> https://http(s)://<em>[hostname]</em>/api/v3//users/defunkt</span>
+<span class="command">curl -i -u <em>your_username</em> http(s)://<em>[hostname]</em>/api/v3/users/defunkt</span>
 <span class="output">Enter host password for user <em>your_username</em>:</span>
 <span class="output">HTTP/1.1 401 Unauthorized</span>
 <span class="output">X-GitHub-OTP: required; :2fa-type</span>
@@ -163,7 +163,7 @@ OAuth authentication instead of Basic Authentication. See the
 associated with your GitHub Enterprise account. For example, try getting
 <a href="/enterprise/2.1/v3/users/#get-the-authenticated-user">your own user profile</a>:</p>
 <pre class="command-line">
-<span class="command">curl -i -u <em>your_username</em> https://http(s)://<em>[hostname]</em>/api/v3//user</span>
+<span class="command">curl -i -u <em>your_username</em> http(s)://<em>[hostname]</em>/api/v3/user</span>
 <span class="output">{</span>
 <span class="output">  ...</span>
 <span class="output">  "plan": {</span>
@@ -207,9 +207,9 @@ An easier way to get a token is to <a href="https://help.github.com/articles/cre
 to create an OAuth token. Try pasting and running the following command:</p>
 <pre class="command-line">
 <span class="command">curl -i -u <em>your_username</em> -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \</span>
-<span class="command">   https://http(s)://<em>[hostname]</em>/api/v3//authorizations</span>
+<span class="command">   http(s)://<em>[hostname]</em>/api/v3/authorizations</span>
 <span class="output">HTTP/1.1 201 Created</span>
-<span class="output">Location: https://http(s)://<em>[hostname]</em>/api/v3//authorizations/2</span>
+<span class="output">Location: http(s)://<em>[hostname]</em>/api/v3/authorizations/2</span>
 <span class="output">Content-Length: 384</span>
 <span class="output">{</span>
 <span class="output">  "scopes": [</span>
@@ -218,7 +218,7 @@ to create an OAuth token. Try pasting and running the following command:</p>
 <span class="output"> ],</span>
 <span class="output"> "token": "5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4",</span>
 <span class="output"> "updated_at": "2012-11-14T14:04:24Z",</span>
-<span class="output"> "url": "https://http(s)://<em>[hostname]</em>/api/v3//authorizations/2",</span>
+<span class="output"> "url": "http(s)://<em>[hostname]</em>/api/v3/authorizations/2",</span>
 <span class="output"> "app": {</span>
 <span class="output">   "url": "https://developer.github.com/v3/oauth/#oauth-authorizations-api",</span>
 <span class="output">   "name": "GitHub API"</span>
@@ -251,7 +251,7 @@ in the <a href="/enterprise/2.1/v3/auth/#working-with-two-factor-authentication"
 <pre class="command-line">
 <span class="command">curl -i -u <em>your_username</em> -H "X-GitHub-OTP: <em>your_2fa_OTP_code</em>" \</span>
     -d '{"scopes": ["repo", "user"], "note": "getting-started"}' \
-    https://http(s)://<em>[hostname]</em>/api/v3//authorizations
+    http(s)://<em>[hostname]</em>/api/v3/authorizations
 </pre>
 <p>If you enabled 2FA with a mobile application, go ahead and get an OTP code from
 your one-time password application on your phone. If you enabled 2FA with text
@@ -261,7 +261,7 @@ this endpoint.</p>
 in the rest of our examples. Let's grab our own user info again, using OAuth this time:</p>
 <pre class="command-line">
 <span class="command">curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \</span>
-    https://http(s)://<em>[hostname]</em>/api/v3//user
+    http(s)://<em>[hostname]</em>/api/v3/user
 </pre>
 <p><strong>Treat OAuth tokens like passwords!</strong> Don't share them with other users or store
 them in insecure places. The tokens in these examples are fake and the names have
@@ -274,20 +274,20 @@ the <a href="/enterprise/2.1/v3/repos/">Repositories API</a>.</p>
 information. We can <a href="/enterprise/2.1/v3/repos/#get"><code>GET</code> repository details</a> in the same way we fetched user
 details earlier:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//repos/twbs/bootstrap</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/repos/twbs/bootstrap</span>
 </pre>
 <p>In the same way, we can <a href="/enterprise/2.1/v3/repos/#list-your-repositories">view repositories for the authenticated user</a>:</p>
 <pre class="command-line">
 <span class="command">curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \</span>
-    https://http(s)://<em>[hostname]</em>/api/v3//user/repos
+    http(s)://<em>[hostname]</em>/api/v3/user/repos
 </pre>
 <p>Or, we can <a href="/enterprise/2.1/v3/repos/#list-user-repositories">list repositories for another user</a>:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//users/technoweenie/repos</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/users/technoweenie/repos</span>
 </pre>
 <p>Or, we can <a href="/enterprise/2.1/v3/repos/#list-organization-repositories">list repositories for an organization</a>:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//orgs/mozilla/repos</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/orgs/mozilla/repos</span>
 </pre>
 <p>The information returned from these calls will depend on how we authenticate:</p>
 <ul>
@@ -301,7 +301,7 @@ can filter the repositories returned based on what type of access the user has
 for the repository. In this way, we can fetch only directly-owned repositories,
 organization repositories, or repositories the user collaborates on via a team.</p>
 <pre class="command-line">
-<span class="command">curl -i "https://http(s)://<em>[hostname]</em>/api/v3//users/technoweenie/repos?type=owner"</span>
+<span class="command">curl -i "http(s)://<em>[hostname]</em>/api/v3/users/technoweenie/repos?type=owner"</span>
 </pre>
 <p>In this example, we grab only those repositories that technoweenie owns, not the
 ones on which he collaborates. Note the quoted URL above. Depending on your
@@ -320,19 +320,18 @@ we need to <code>POST</code> some JSON containing the details and configuration 
         "private": true, \
         "gitignore_template": "nanoc" \
       }' \
-    https://http(s)://<em>[hostname]</em>/api/v3//user/repos
+    http(s)://<em>[hostname]</em>/api/v3/user/repos
 </pre>
 <p>In this minimal example, we create a new repository for our blog (to be served
 on <a href="http://pages.github.com">GitHub Pages</a>, perhaps). Though the blog will be public, we've made
 the repository private. In this single step, we'll also initialize it with
-a README and a <a href="http://nanoc.ws/">nanoc</a>-flavored [.gitignore template]<a href="https://github.com/github/gitignore">gitignore
-templates</a>.</p>
+a README and a <a href="http://nanoc.ws/">nanoc</a>-flavored <a href="https://github.com/github/gitignore">.gitignore template</a>.</p>
 <p>The resulting repository will be found at <code>https://github.com/&lt;your_username&gt;/blog</code>.
 To create a repository under an organization for which you're
 an owner, just change the API method from <code>/user/repos</code> to <code>/orgs/&lt;org_name&gt;/repos</code>.</p>
 <p>Next, let's fetch our newly created repository:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//repos/pengwynn/blog</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/repos/pengwynn/blog</span>
 <span class="output">HTTP/1.1 404 Not Found</span>
 <span class="output">{</span>
 <span class="output">   "message": "Not Found"</span>
@@ -353,17 +352,17 @@ your team.</p>
 authenticated user. To <a href="/enterprise/2.1/v3/issues/#list-issues">see all your issues</a>, call <code>GET /issues</code>:</p>
 <pre class="command-line">
 <span class="command">curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \</span>
-    https://http(s)://<em>[hostname]</em>/api/v3//issues
+    http(s)://<em>[hostname]</em>/api/v3/issues
 </pre>
 <p>To get only the <a href="/enterprise/2.1/v3/issues/#list-issues">issues under one of your GitHub Enterprise organizations</a>, call <code>GET
 /orgs/&lt;org&gt;/issues</code>:</p>
 <pre class="command-line">
 <span class="command">curl -i -H 'Authorization: token 5199831f4dd3b79e7c5b7e0ebe75d67aa66e79d4' \</span>
-    https://http(s)://<em>[hostname]</em>/api/v3//orgs/rails/issues
+    http(s)://<em>[hostname]</em>/api/v3/orgs/rails/issues
 </pre>
 <p>We can also get <a href="/enterprise/2.1/v3/issues/#list-issues-for-a-repository">all the issues under a single repository</a>:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//repos/rails/rails/issues</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/repos/rails/rails/issues</span>
 </pre>
 <h3>
 <a id="pagination" class="anchor" href="#pagination" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pagination</h3>
@@ -371,10 +370,10 @@ authenticated user. To <a href="/enterprise/2.1/v3/issues/#list-issues">see all 
 making multiple API calls to get the data. Let's repeat that last call, this
 time taking note of the response headers:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//repos/rails/rails/issues</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/repos/rails/rails/issues</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">...</span>
-<span class="output">Link: &lt;https://http(s)://<em>[hostname]</em>/api/v3//repositories/8514/issues?page=2&gt;; rel="next", &lt;https://http(s)://<em>[hostname]</em>/api/v3//repositories/8514/issues?page=30&gt;; rel="last"</span>
+<span class="output">Link: &lt;http(s)://<em>[hostname]</em>/api/v3/repositories/8514/issues?page=2&gt;; rel="next", &lt;http(s)://<em>[hostname]</em>/api/v3/repositories/8514/issues?page=30&gt;; rel="last"</span>
 <span class="output">...</span>
 </pre>
 <p>The <a href="http://www.w3.org/wiki/LinkHeader/"><code>Link</code> header</a> provides a way for a response to link to
@@ -396,9 +395,9 @@ the issue:</p>
 <span class="command">        "body": "We should have one", \</span>
 <span class="command">        "labels": ["design"] \</span>
 <span class="command">      }' \</span>
-<span class="command">   https://http(s)://<em>[hostname]</em>/api/v3//repos/pengwynn/api-sandbox/issues</span>
+<span class="command">   http(s)://<em>[hostname]</em>/api/v3/repos/pengwynn/api-sandbox/issues</span>
 <span class="output">HTTP/1.1 201 Created</span>
-<span class="output">Location: https://http(s)://<em>[hostname]</em>/api/v3//repos/pengwynn/api-sandbox/issues/17</span>
+<span class="output">Location: http(s)://<em>[hostname]</em>/api/v3/repos/pengwynn/api-sandbox/issues/17</span>
 <span class="output">X-RateLimit-Limit: 5000</span>
 <span class="output">{</span>
 <span class="output">  "pull_request": {</span>
@@ -416,7 +415,7 @@ the issue:</p>
 <span class="output">    "gravatar_id": "7e19cd5486b5d6dc1ef90e671ba52ae0",</span>
 <span class="output">    "avatar_url": "https://secure.gravatar.com/avatar/7e19cd5486b5d6dc1ef90e671ba52ae0?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png",</span>
 <span class="output">    "id": 865,</span>
-<span class="output">    "url": "https://http(s)://<em>[hostname]</em>/api/v3//users/pengwynn"</span>
+<span class="output">    "url": "http(s)://<em>[hostname]</em>/api/v3/users/pengwynn"</span>
 <span class="output">  },</span>
 <span class="output">  "closed_at": null,</span>
 <span class="output">  "updated_at": "2012-11-14T15:25:33Z",</span>
@@ -427,13 +426,13 @@ the issue:</p>
 <span class="output">    {</span>
 <span class="output">      "color": "ededed",</span>
 <span class="output">      "name": "design",</span>
-<span class="output">      "url": "https://http(s)://<em>[hostname]</em>/api/v3//repos/pengwynn/api-sandbox/labels/design"</span>
+<span class="output">      "url": "http(s)://<em>[hostname]</em>/api/v3/repos/pengwynn/api-sandbox/labels/design"</span>
 <span class="output">    }</span>
 <span class="output">  ],</span>
 <span class="output">  "id": 8356941,</span>
 <span class="output">  "assignee": null,</span>
 <span class="output">  "state": "open",</span>
-<span class="output">  "url": "https://http(s)://<em>[hostname]</em>/api/v3//repos/pengwynn/api-sandbox/issues/17"</span>
+<span class="output">  "url": "http(s)://<em>[hostname]</em>/api/v3/repos/pengwynn/api-sandbox/issues/17"</span>
 <span class="output">}</span>
 </pre>
 <p>The response gives us a couple of pointers to the newly created issue, both in
@@ -445,7 +444,7 @@ caching information that hasn't changed. The API supports <a href="/enterprise/2
 requests</a> and helps you do the right thing. Consider the
 first call we made to get defunkt's profile:</p>
 <pre class="command-line">
-<span class="command">curl -i https://http(s)://<em>[hostname]</em>/api/v3//users/defunkt</span>
+<span class="command">curl -i http(s)://<em>[hostname]</em>/api/v3/users/defunkt</span>
 <span class="output">HTTP/1.1 200 OK</span>
 <span class="output">ETag: "bfd85cbf23ac0b0c8a29bee02e7117c6"</span>
 </pre>
@@ -455,7 +454,7 @@ The <a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a> is a fingerprint o
 we can tell the API to give us the resource again, only if it has changed:</p>
 <pre class="command-line">
 <span class="command">curl -i -H 'If-None-Match: "bfd85cbf23ac0b0c8a29bee02e7117c6"' \</span>
-<span class="command">   https://http(s)://<em>[hostname]</em>/api/v3//users/defunkt</span>
+<span class="command">   http(s)://<em>[hostname]</em>/api/v3/users/defunkt</span>
 <span class="output">HTTP/1.1 304 Not Modified</span>
 </pre>
 <p>The <code>304</code> status indicates that the resource hasn't changed since the last time

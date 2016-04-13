@@ -16,7 +16,7 @@ module GitHub
     end
 
     def clean_for_json(str)
-      strip_html(squish(str))
+      squish(strip_html(str))
     end
   end
 end

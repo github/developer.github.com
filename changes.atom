@@ -23,7 +23,7 @@
 
 &lt;p&gt;Repository events will now fire when a repository is deleted, made public, or made private. In addition, while repository creation events will still only fire for organizations, the new repository event actions can be delivered for user-owned repositories.&lt;/p&gt;
 
-&lt;p&gt;Events for issues and comments have also been updated and will now fire when issues or comments are edited or deleted. When an issue or a comment has been edited, the event's payload will include a "changes" object. For example, if you've updated the title and body of an issue, the webhook payload informs you of what the issue used to look like:&lt;/p&gt;
+&lt;p&gt;Events for issues, pull requests, and comments have also been updated and will now fire when these objects are edited or deleted. When an issue, pull request, or a comment has been edited, the event's payload will include a "changes" object. For example, if you've updated the title and body of an issue, the webhook payload informs you of what the issue used to look like:&lt;/p&gt;
 
 &lt;pre class="highlight highlight-json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
   &lt;/span&gt;&lt;span class="nt"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"edited"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
@@ -65,7 +65,7 @@
 
 &lt;ul&gt;
 &lt;li&gt;
-&lt;code&gt;edited&lt;/code&gt;: sent when the title and/or body of an issue or pull request is edited.&lt;/li&gt;
+&lt;code&gt;edited&lt;/code&gt;: sent when the title and/or body of an issue is edited.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3&gt;
@@ -77,6 +77,15 @@
 &lt;code&gt;edited&lt;/code&gt;: sent when a comment on an issue or pull request is edited&lt;/li&gt;
 &lt;li&gt;
 &lt;code&gt;deleted&lt;/code&gt;: sent when a comment on an issue or pull request is deleted&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;
+&lt;a id="pullrequestevent" class="anchor" href="#pullrequestevent" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;&lt;a href="https://developer.github.com/v3/activity/events/types/#pullrequestevent"&gt;PullRequestEvent&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;edited&lt;/code&gt;: sent when the title and/or body of an issue is edited.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3&gt;

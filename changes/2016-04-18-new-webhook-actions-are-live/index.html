@@ -68,7 +68,7 @@
 
 <p>Repository events will now fire when a repository is deleted, made public, or made private. In addition, while repository creation events will still only fire for organizations, the new repository event actions can be delivered for user-owned repositories.</p>
 
-<p>Events for issues and comments have also been updated and will now fire when issues or comments are edited or deleted. When an issue or a comment has been edited, the event's payload will include a "changes" object. For example, if you've updated the title and body of an issue, the webhook payload informs you of what the issue used to look like:</p>
+<p>Events for issues, pull requests, and comments have also been updated and will now fire when these objects are edited or deleted. When an issue, pull request, or a comment has been edited, the event's payload will include a "changes" object. For example, if you've updated the title and body of an issue, the webhook payload informs you of what the issue used to look like:</p>
 
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edited"</span><span class="p">,</span><span class="w">
@@ -110,7 +110,7 @@
 
 <ul>
 <li>
-<code>edited</code>: sent when the title and/or body of an issue or pull request is edited.</li>
+<code>edited</code>: sent when the title and/or body of an issue is edited.</li>
 </ul>
 
 <h3>
@@ -122,6 +122,15 @@
 <code>edited</code>: sent when a comment on an issue or pull request is edited</li>
 <li>
 <code>deleted</code>: sent when a comment on an issue or pull request is deleted</li>
+</ul>
+
+<h3>
+<a id="pullrequestevent" class="anchor" href="#pullrequestevent" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="https://developer.github.com/v3/activity/events/types/#pullrequestevent">PullRequestEvent</a>
+</h3>
+
+<ul>
+<li>
+<code>edited</code>: sent when the title and/or body of an issue is edited.</li>
 </ul>
 
 <h3>

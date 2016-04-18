@@ -83,7 +83,7 @@ Key | Type | Description
 
 Represents a [deployment](/v3/repos/deployments/#list-deployments).
 
-Events of this type are not visible in timelines, they are only used to trigger hooks.
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Events API payload
 
@@ -108,7 +108,7 @@ Key | Type | Description
 
 Represents a [deployment status](/v3/repos/deployments/#list-deployment-statuses).
 
-Events of this type are not visible in timelines, they are only used to trigger hooks.
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Events API payload
 
@@ -239,13 +239,15 @@ Key | Type | Description
 
 ## IssueCommentEvent
 
-Triggered when an [issue comment](/v3/issues/comments/) is created on an issue or pull request.
+Triggered when an [issue comment](/v3/issues/comments/) is created, edited, or deleted.
 
 ### Events API payload
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed on the comment. Currently, can only be "created".
+`action`|`string` | The action that was performed on the comment. Can be one of "created", "edited", or "deleted".
+`changes`|`object` | The changes to the comment if the action was "edited".
+`changes[from][body]` |`string` | The previous version of the body if the action was "edited".
 `issue`|`object` | The [issue](/v3/issues/) the comment belongs to.
 `comment`|`object` | The [comment](/v3/issues/comments/) itself.
 
@@ -259,14 +261,17 @@ Key | Type | Description
 
 ## IssuesEvent
 
-Triggered when an [issue](/v3/issues) is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.
+Triggered when an [issue](/v3/issues) is assigned, unassigned, labeled, unlabeled, opened, edited, closed, or reopened.
 
 ### Events API payload
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "closed", or "reopened".
+`action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "edited", "closed", or "reopened".
 `issue`|`object` | The [issue](/v3/issues) itself.
+`changes`|`object`| The changes to the issue if the action was "edited".
+`changes[from][title]`|`string` | The previous version of the title if the action was "edited".
+`changes[from][body]`|`string` | The previous version of the body if the action was "edited".
 `assignee`|`object` | The optional user who was assigned or unassigned from the issue.
 `label`|`object` | The optional label that was added or removed from the issue.
 
@@ -301,7 +306,7 @@ Key | Type | Description
 
 Triggered when a user is added or removed from a team.
 
-Events of this type are not visible in timelines, they are only used to trigger organization webhooks.
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Events API payload
 
@@ -326,7 +331,7 @@ Represents an attempted build of a GitHub Pages site, whether successful or not.
 
 Triggered on push to a GitHub Pages enabled branch (`gh-pages` for project pages, `master` for user and organization pages).
 
-Events of this type are not visible in timelines, they are only used to trigger hooks.
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Events API payload
 
@@ -378,13 +383,15 @@ Key | Type | Description
 
 ## PullRequestReviewCommentEvent
 
-Triggered when a [comment is created on a portion of the unified diff](/v3/pulls/comments) of a pull request.
+Triggered when a [comment on a Pull Request's unified diff](/v3/pulls/comments) is created, edited, or deleted (in the Files Changed tab).
 
 ### Events API payload
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed on the comment. Currently, can only be "created".
+`action`|`string` | The action that was performed on the comment. Can be one of `created`, `edited`, or `deleted`.
+`changes`|`object`| The changes to the comment if the action was "edited".
+`changes[from][body]`|`string` | The previous version of the body if the action was "edited".
 `pull_request`|`object` | The [pull request](/v3/pulls/) the comment belongs to.
 `comment`|`object` | The [comment](/v3/pulls/comments) itself.
 
@@ -453,16 +460,16 @@ Key | Type | Description
 
 ## RepositoryEvent
 
-Triggered when a repository is created.
+Triggered when a repository is created, deleted, made public, or made private.
 
-Events of this type are not visible in timelines, they are only used to trigger organization webhooks.
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Events API payload
 
 Key | Type | Description
 ----|------|-------------
-`action` |`string` | The action that was performed. Currently, can only be "created".
-`repository`|`object` | The [repository](/v3/repos/) that was created.
+`action` |`string` | The action that was performed. This can be one of `created`, `deleted`, `publicized`, or `privatized`.
+`repository`|`object` | The [repository](/v3/repos/) itself.
 
 ### Webhook event name
 
@@ -476,7 +483,7 @@ Key | Type | Description
 
 Triggered when the status of a Git commit changes.
 
-Events of this type are not visible in timelines, they are only used to trigger hooks.
+Events of this type are not visible in timelines. These events are only used to trigger hooks.
 
 ### Events API payload
 

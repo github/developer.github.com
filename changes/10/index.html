@@ -44,7 +44,64 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-09-28-an-update-on-the-new-search-api/">
+      <div class="change" id="/changes/2013-10-04-oauth-changes-coming/">
+  <h2 class="title">
+<a id="--oauth-changes-coming" class="anchor" href="#--oauth-changes-coming" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-10-04-oauth-changes-coming/">OAuth changes coming</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 4, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/tclem.png" alt="Avatar for tclem" data-proofer-ignore>
+      <a href="https://github.com/tclem" data-proofer-ignore>tclem</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Starting today, we are returning granted scopes as part of the
+<a href="/v3/oauth/#2-github-redirects-back-to-your-site">access_token response</a>.
+For example, if you are making a POST with the <code>application/json</code>
+mime-type you'll see an additional field for the granted scopes.</p>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="s2">"e72e16c7e42f292c6912e7710c838347ae178b4a"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scope"</span><span class="p">:</span><span class="s2">"repo,gist"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token_type"</span><span class="p">:</span><span class="s2">"bearer"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<p>Right now, these scopes will be identical to what you requested, but we
+are moving towards a feature set that will allow GitHub users to edit
+their scopes, effectively granting your application less access than you
+originally requested. You should be aware of this possibility and adjust
+your application behavior accordingly.</p>
+
+<p>Some things to watch out for and keep in mind:</p>
+
+<ul>
+<li><p>Most third party applications using GitHub OAuth to identify users have
+the best success in adoption by starting out with a request for the
+minimum access that the application can possibly get away with.
+Something like no scopes or just <code>user:email</code> is very sane.</p></li>
+<li><p>It is important to handle the error cases where a user chooses to
+grant you less access than you originally requested. Now that we are
+surfacing the granted scopes on the access_token response, applications
+can warn or otherwise communicate with their users that they will see
+reduced functionality or be unable to perform some actions.</p></li>
+<li><p>Applications can always send users back through the flow again to get
+additional permission, but don't forget that users can always say no.</p></li>
+</ul>
+</div>
+
+<div class="change" id="/changes/2013-09-28-an-update-on-the-new-search-api/">
   <h2 class="title">
 <a id="--an-update-on-the-new-search-api" class="anchor" href="#--an-update-on-the-new-search-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-09-28-an-update-on-the-new-search-api/">An Update on the New Search API</a>
@@ -64,8 +121,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We owe a big "Thank You!" to everyone that has taken the time to try out the <a href="/changes/2013-07-19-preview-the-new-search-api">new Search API</a>.
+  <p>We owe a big "Thank You!" to everyone that has taken the time to try out the <a href="/changes/2013-07-19-preview-the-new-search-api">new Search API</a>.
 We <code>:heart:</code> every one of you.
 Just as we hoped,
 the <a href="/changes/2013-07-19-preview-the-new-search-api/#preview-period">preview period</a> has allowed us to see how you want to use the new API,
@@ -78,8 +134,6 @@ We're hard at work on those improvements now,
 and we expect to have more news in the coming weeks.</p>
 
 <p>In the mean time, <a href="https://github.com/contact?form%5Bsubject%5D=New+Search+API">keep the suggestions coming</a>!</p>
-
-<p></p>
 </div>
 
 <div class="change" id="/changes/2013-09-25-releases-api/">
@@ -102,8 +156,7 @@ and we expect to have more news in the coming weeks.</p>
 </ul>
 </div>
 
-<p></p>
-<p>This summer we made it easier to <a href="https://github.com/blog/1547-release-your-software">release your software</a>.  Today, you can fully automate those releases via the
+  <p>This summer we made it easier to <a href="https://github.com/blog/1547-release-your-software">release your software</a>.  Today, you can fully automate those releases via the
 <a href="http://developer.github.com/v3/repos/releases/">Releases API Preview</a>.</p>
 
 <p>This API is a little different due to the binary assets.  We use the <code>Accept</code> header for content negotiation when requesting
@@ -596,40 +649,6 @@ but we can't wait to see what others can do with this information.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-04-30-statuses-for-branches-and-tags/">
-  <h2 class="title">
-<a id="--commit-statuses-now-available-for-branches-and-tags" class="anchor" href="#--commit-statuses-now-available-for-branches-and-tags" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-04-30-statuses-for-branches-and-tags/">Commit Statuses Now Available for Branches and Tags</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 30, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/foca.png" alt="Avatar for foca" data-proofer-ignore>
-      <a href="https://github.com/foca" data-proofer-ignore>foca</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>Last week we announced <a href="https://github.com/blog/1484-check-the-status-of-your-branches">support for build statuses in the branches page</a>.
-Now we are extending this to the API. The <a href="http://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref">API endpoint for commit statuses</a>
-has been extended to allow branch and tag names, as well as commit SHAs.</p>
-
-<pre class="command-line">
-curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
-</pre>
-
-<p>Enjoy.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -734,6 +753,8 @@ curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
@@ -747,8 +768,6 @@ curl https://api.github.com/repos/rails/rails/statuses/3-2-stable
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
 
 </ul>
 

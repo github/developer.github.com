@@ -2,13 +2,29 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-04-06T07:00:00Z</updated>
+  <updated>2016-04-12T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-04-12:/changes/2016-04-12-commit-reference-sha-api-is-now-official/</id>
+    <title type="html">Commit Reference SHA-1 API is now official</title>
+    <published>2016-04-12T07:00:00Z</published>
+    <updated>2016-04-12T07:00:00Z</updated>
+    <author>
+      <name>mikemcquaid</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-04-12-commit-reference-sha-api-is-now-official/"/>
+    <content type="html">&lt;p&gt;We're making the &lt;a href="/changes/2016-02-24-commit-reference-sha-api/"&gt;Commit Reference SHA-1 API&lt;/a&gt; part of the official GitHub API.&lt;/p&gt;
+
+&lt;p&gt;During the preview period you needed to provide the &lt;code&gt;application/vnd.github.chitauri-preview+sha&lt;/code&gt; preview media type in the &lt;code&gt;Accept&lt;/code&gt; header to opt-in to the changes. Now that the preview period has ended the custom &lt;a href="/v3/media/"&gt;media type&lt;/a&gt; has changed to &lt;code&gt;application/vnd.github.v3.sha&lt;/code&gt; (but the preview type will continue to work).&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Commit+Reference+SHA-1+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-04-06:/changes/2016-04-06-deployment-and-deployment-status-enhancements/</id>
     <title type="html">Deployment and DeploymentStatus API enhancements preview period</title>
@@ -1012,109 +1028,6 @@ media type.&lt;/p&gt;
 &lt;p&gt;Because of the change to &lt;code&gt;hashed_token&lt;/code&gt;, we are extending the preview period by two weeks. If no additional changes are made during this extended preview period we will announce the end of the preview and beginning of the eight week migration period on February 17. The migration period will allow applications to opt in to these changes before they become an official part of the GitHub API v3.&lt;/p&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token"&gt;drop us a line&lt;/a&gt;!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-01-19:/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/</id>
-    <title type="html">An integrator's guide to organization application policies</title>
-    <published>2015-01-19T08:00:00Z</published>
-    <updated>2015-01-19T08:00:00Z</updated>
-    <author>
-      <name>pengwynn</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/"/>
-    <content type="html">&lt;p&gt;As we &lt;a href="https://github.com/blog/1941-organization-approved-applications"&gt;announced over on the GitHub blog&lt;/a&gt;, organization admins can now
-control how third-party applications access their organization data. Allowing
-admins to approve or deny applications will ultimately result in deeper trust
-and increase overall adoption of integrations within organizations on GitHub.&lt;/p&gt;
-
-&lt;p&gt;As an integrator, here's what you need to know about organization application
-policies and how this feature could impact your application.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="guiding-principles" class="anchor" href="#guiding-principles" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Guiding principles&lt;/h3&gt;
-
-&lt;p&gt;We've tried to strike the right balance between organization privacy and the
-user experience for integrators and end users. Organizations should be able to
-prevent applications they do not trust from accessing their organization data
-without creating a multitude of new edge cases for integrators.&lt;/p&gt;
-
-&lt;p&gt;With that goal in mind, the feature works like this: &lt;strong&gt;if an organization's
-application policy prevents an application from accessing its resources, the
-API behaves as if the authenticating user is not a member of the
-organization&lt;/strong&gt;. Specifically, this means an application authenticating on
-behalf of a user using OAuth will have:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;
-&lt;strong&gt;Read-only access to public resources.&lt;/strong&gt; Organization-owned public
-repositories, issues, and other resources will be visible via the API and
-show up in resource listings, but mutating methods (&lt;code&gt;POST&lt;/code&gt;, &lt;code&gt;PATCH&lt;/code&gt;, &lt;code&gt;PUT&lt;/code&gt;,
-and &lt;code&gt;DELETE&lt;/code&gt;) will return status &lt;code&gt;403&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;
-&lt;strong&gt;No access to private resources.&lt;/strong&gt; Organization-owned private repositories,
-issues, and other resources will not be visible via the API and will not
-show up in resource &lt;a href="/v3/issues/#list-issues"&gt;listings&lt;/a&gt; that co-mingle public and private
-resources. Hooks for these private repositories are muted and will not be
-delivered as long as the application is restricted by the organization.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Since applications should already handle the scenario where a user loses access
-to organization resources, this reduces the work integrators need to do.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="checking-organization-access" class="anchor" href="#checking-organization-access" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Checking organization access&lt;/h3&gt;
-
-&lt;p&gt;As organization admins adopt application whitelists and restrict third-party
-application access to organization resources, your application may lose access
-to those resources. If an organization member is not aware of the new access
-policy, they may wonder why their private repositories or other resources no
-longer work or show up in your application.&lt;/p&gt;
-
-&lt;p&gt;There are a couple ways to help troubleshoot access for your end users.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Via the GitHub UI.&lt;/strong&gt; The simplest way to help end users understand how
-organization access policies affect their access to your application is to
-provide a link to &lt;a href="https://help.github.com/articles/requesting-organization-approval-for-your-authorized-applications/"&gt;their authorization details&lt;/a&gt;
-under their GitHub account settings as &lt;a href="/v3/oauth/#directing-users-to-review-their-access-for-an-application"&gt;described in the OAuth
-documentation&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Via the API.&lt;/strong&gt; For an even better user experience, &lt;a href="/guides/discovering-resources-for-a-user/"&gt;use the
-API&lt;/a&gt; to list which user organizations your application
-can access, and provide users with the link mentioned above to request
-access from their organization admins.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3&gt;
-&lt;a id="listing-accessible-organization-resources" class="anchor" href="#listing-accessible-organization-resources" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Listing accessible organization resources&lt;/h3&gt;
-
-&lt;p&gt;In addition to checking access to a user's organizations, you'll want to ensure
-you're discovering their accessible resources in the most efficient way. Recent
-changes to the &lt;a href="/v3/repos/#list-your-repositories"&gt;Repositories API&lt;/a&gt; might reduce the API calls
-your application needs to make to find a user's repositories across all of
-their organization memberships.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="ensuring-uninterrupted-ssh-access" class="anchor" href="#ensuring-uninterrupted-ssh-access" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Ensuring uninterrupted SSH access&lt;/h3&gt;
-
-&lt;p&gt;Since applications should already handle the scenario where a user loses access
-to organization resources (e.g., when a user leaves an organization), this
-reduces the work integrators need to do. Keys created by OAuth applications (or
-those created before GitHub started tracking that information) will not have
-access to repositories owned by organizations that restrict third-party
-applications. If your application uses keys &lt;strong&gt;created before February 24,
-2014&lt;/strong&gt;, you &lt;a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/"&gt;should replace those older keys&lt;/a&gt; to ensure things keep
-running smoothly for your application.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;We're here to help&lt;/h3&gt;
-
-&lt;p&gt;This is a big feature, and we're sure it will impact many of our integrators as
-organizations adopt third-party application restrictions. We also think it
-provides a huge net benefit for integrators as organizations choose to use
-OAuth integrations with more confidence.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Access+Policies+help+for+integrators"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
 

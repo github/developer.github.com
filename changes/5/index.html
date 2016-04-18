@@ -44,7 +44,188 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">
+      <div class="change" id="/changes/2014-10-21-deployment-webhook-payload-changes/">
+  <h2 class="title">
+<a id="--deployment-webhook-payload-changes" class="anchor" href="#--deployment-webhook-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-10-21-deployment-webhook-payload-changes/">Deployment webhook payload changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 21, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
+      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>On November 4th, 2014, we will begin sending a new format for <a href="https://developer.github.com/v3/activity/events/types/#deploymentevent">deployment</a> and <a href="https://developer.github.com/v3/activity/events/types/#deploymentstatusevent">deployment status</a> payloads for webhooks. In the meantime we'll be running in a compatability mode that will give integrators the time needed to start taking advantage of the new format. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.</p>
+
+<p>This change brings the payloads for these events more inline with the responses you'd receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under <code>deployment</code> and <code>deployment_status</code> keys. Since we're still in the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">preview period</a> for the deployments API we felt it was best to correct this inconsistency now.</p>
+
+<h2>
+<a id="deploymentevent-changes" class="anchor" href="#deploymentevent-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="deploymentevent-changes" class="anchor" href="#deploymentevent-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>DeploymentEvent Changes</h2>
+
+<h4>
+<a id="old-format" class="anchor" href="#old-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="old-format" class="anchor" href="#old-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>Old Format</h4>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deadbeef"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-org/our-app"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h4>
+<a id="current-format---20141022" class="anchor" href="#current-format---20141022" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="current-format---20141022" class="anchor" href="#current-format---20141022" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Format - 2014/10/22</h4>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deadbeef"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my-org/our-app"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying master"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deadbeef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h4>
+<a id="new-format---20141105" class="anchor" href="#new-format---20141105" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-format---20141105" class="anchor" href="#new-format---20141105" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Format - 2014/11/05</h4>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"sha"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deadbeef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"task"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deploy"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"environment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"production"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deploying master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:37:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"statuses_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="deploymentstatusevent-changes" class="anchor" href="#deploymentstatusevent-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="deploymentstatusevent-changes" class="anchor" href="#deploymentstatusevent-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>DeploymentStatusEvent Changes</h2>
+
+<h4>
+<a id="old-format-1" class="anchor" href="#old-format-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="old-format-1" class="anchor" href="#old-format-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Old Format</h4>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment was successful"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h4>
+<a id="current-format---20141022-1" class="anchor" href="#current-format---20141022-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="current-format---20141022-1" class="anchor" href="#current-format---20141022-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Format - 2014/10/22</h4>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment was successful"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"deployment_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment was successful"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deployment_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h4>
+<a id="new-format---20141105-1" class="anchor" href="#new-format---20141105-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-format---20141105-1" class="anchor" href="#new-format---20141105-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Format - 2014/11/05</h4>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"deployment_status"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2600</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"creator"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+    </span><span class="nt">"target_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gist.github.com/deadbeef"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment was successful"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-23T16:45:49Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deployment_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app/deployments/42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/my-org/our-app"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"deployment"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">},</span><span class="w">
+  </span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">…</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">
   <h2 class="title">
 <a id="--removed-sslv3-support-from-webhooks-and-services" class="anchor" href="#--removed-sslv3-support-from-webhooks-and-services" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-10-16-removed-ssl-version-3-support-from-webhooks-and-services/">Removed SSLv3 support from webhooks and services</a>
@@ -442,36 +623,6 @@ and is the only reliable way to find a GitHub user's avatar.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">
-  <h2 class="title">
-<a id="--new-assignedlabeled-actions-for-issue-and-pull-request-events" class="anchor" href="#--new-assignedlabeled-actions-for-issue-and-pull-request-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-07-28-assignee-and-label-actions-for-issue-events/">New assigned/labeled actions for issue and pull request events</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    July 28, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace" data-proofer-ignore>
-      <a href="https://github.com/jdpace" data-proofer-ignore>jdpace</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>As part of the <a href="https://github.com/blog/1866-the-new-github-issues">new GitHub Issues</a>, we've added new actions to the issues and pull requests webhook events: "labeled", "unlabeled", "assigned", and "unassigned". The payload will also include the respective assignee or label for these new actions.</p>
-
-<p>If you already have a <a href="/webhooks/">webhook</a> subscribed to the <code>issues</code> or <code>pull_request</code> events, you'll start seeing these new actions immediately. The new events can also be fetched from the <a href="/v3/issues/events/">issue events API</a>.</p>
-
-<p>For more information, be sure to check out our documentation for the <a href="/v3/activity/events/types/#issuesevent">IssuesEvent</a> or <a href="/v3/activity/events/types/#pullrequestevent">PullRequestEvent</a>. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Assigned+and+Labeled+Actions+for+Issues+and+Pull+Request+Events">drop us a line</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -602,6 +753,8 @@ and is the only reliable way to find a GitHub user's avatar.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
@@ -615,8 +768,6 @@ and is the only reliable way to find a GitHub user's avatar.</p>
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
 
 </ul>
 

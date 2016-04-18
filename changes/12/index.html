@@ -44,7 +44,42 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-12-10-Diff-and-patch-media-types/">
+      <div class="change" id="/changes/2013-01-08-new-user-scopes/">
+  <h2 class="title">
+<a id="--new-user-scopes" class="anchor" href="#--new-user-scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-01-08-new-user-scopes/">New User scopes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 8, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've added a <a href="http://developer.github.com/v3/oauth/#scopes">few new user scopes</a> for 3rd party applications that want very
+specific user functionality.  The <code>user:email</code> scope gives apps read-only access
+to a user's private email addresses.  The <code>user:follow</code> scope lets a user
+follow and unfollow other users.</p>
+
+<p>This should help keep applications from requiring the <code>user</code> scope, which
+can be potentially dangerous.</p>
+
+<p>We also added a read-only endpoint to get a user's public SSH keys.</p>
+
+<pre><code>GET https://api.github.com/users/technoweenie/keys
+</code></pre>
+</div>
+
+<div class="change" id="/changes/2012-12-10-Diff-and-patch-media-types/">
   <h2 class="title">
 <a id="--diff-and-patch-media-types" class="anchor" href="#--diff-and-patch-media-types" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-12-10-Diff-and-patch-media-types/">Diff and patch media types</a>
@@ -64,8 +99,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>Starting today, you can get <code>.diff</code> and <code>.patch</code> content directly from the API for the following resources:</p>
+  <p>Starting today, you can get <code>.diff</code> and <code>.patch</code> content directly from the API for the following resources:</p>
 
 <ul>
 <li><a href="/v3/repos/commits/#get-a-single-commit">Commits</a></li>
@@ -518,42 +552,6 @@ You can look for unread notifications:</p>
 </pre>
 
 <p>You can read about the API details in depth in the <a href="http://developer.github.com/v3/activity/notifications/">Notifications documentation</a>.</p>
-</div>
-
-<div class="change" id="/changes/2012-10-24-set-default-branch/">
-  <h2 class="title">
-<a id="--set-the-default-branch-for-a-repository" class="anchor" href="#--set-the-default-branch-for-a-repository" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2012-10-24-set-default-branch/">Set the default branch for a repository</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    October 24, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
-      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>You can set the default branch for a repository to something other than 'master' from the GitHub repository admin screen:</p>
-
-<p><img src="/assets/images/posts/default-branch.png" alt="repo admin"></p>
-
-<p>Now, you can update this setting via the API. We've added a <code>default_branch</code> parameter to the <a href="/v3/repos/#edit">Edit Repository method</a>:</p>
-
-<pre class="command-line">
-<span class="command">curl -u pengwynn \</span>
-<span class="command">     -d '{"name": "octokit", "default_branch":"development"}' \</span>
-<span class="command">     https://api.github.com/repos/octokit/octokit.rb</span>
-</pre>
-
-<p>If you provide a branch name that hasn't been pushed to GitHub, we'll gracefully fall back to <code>'master'</code> or the first branch.</p>
 
 <p></p>
 </div>
@@ -640,6 +638,8 @@ You can look for unread notifications:</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
@@ -653,8 +653,6 @@ You can look for unread notifications:</p>
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period<br /><span class="date">February 11, 2016</span></a></li>
 
 </ul>
 

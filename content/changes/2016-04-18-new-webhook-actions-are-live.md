@@ -7,7 +7,7 @@ As [promised last month][notice], we've expanded several webhook events with new
 
 Repository events will now fire when a repository is deleted, made public, or made private. In addition, while repository creation events will still only fire for organizations, the new repository event actions can be delivered for user-owned repositories.
 
-Events for issues and comments have also been updated and will now fire when issues or comments are edited or deleted. When an issue or a comment has been edited, the event's payload will include a "changes" object. For example, if you've updated the title and body of an issue, the webhook payload informs you of what the issue used to look like:
+Events for issues, pull requests, and comments have also been updated and will now fire when these objects are edited or deleted. When an issue, pull request, or a comment has been edited, the event's payload will include a "changes" object. For example, if you've updated the title and body of an issue, the webhook payload informs you of what the issue used to look like:
 
 ```json
 {
@@ -37,12 +37,16 @@ New actions were added to four events, all of which are detailed below.
 
 ### [IssuesEvent][issues-event]
 
-* `edited`: sent when the title and/or body of an issue or pull request is edited.
+* `edited`: sent when the title and/or body of an issue is edited.
 
 ### [IssueCommentEvent][issue-comment-event]
 
 * `edited`: sent when a comment on an issue or pull request is edited
 * `deleted`: sent when a comment on an issue or pull request is deleted
+
+### [PullRequestEvent][pull-request-event]
+
+* `edited`: sent when the title and/or body of an issue is edited.
 
 ### [PullRequestReviewCommentEvent][pull-request-review-comment-event]
 
@@ -56,5 +60,6 @@ Take a look at [the documentation][docs] for full details. If you have any quest
 [issue-comment-event]: https://developer.github.com/v3/activity/events/types/#issuecommentevent
 [issues-event]: https://developer.github.com/v3/activity/events/types/#issuesevent
 [notice]: https://developer.github.com/changes/2016-03-15-new-webhook-actions/
+[pull-request-event]: https://developer.github.com/v3/activity/events/types/#pullrequestevent
 [pull-request-review-comment-event]: https://developer.github.com/v3/activity/events/types/#pullrequestreviewcommentevent
 [repository-event]: https://developer.github.com/v3/activity/events/types/#repositoryevent

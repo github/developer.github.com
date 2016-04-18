@@ -44,7 +44,41 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">
+      <div class="change" id="/changes/2015-02-03-removing-authorizations-token-update/">
+  <h2 class="title">
+<a id="--removing-token-attribute-from-authorizations-api-responses-update" class="anchor" href="#--removing-token-attribute-from-authorizations-api-responses-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-02-03-removing-authorizations-token-update/">Removing token attribute from Authorizations API responses (Update)</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 3, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3" data-proofer-ignore>
+      <a href="https://github.com/ptoomey3" data-proofer-ignore>ptoomey3</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>In December, we <a href="/changes/2014-12-08-removing-authorizations-token/">released a preview</a> of several API changes related to managing OAuth application authorizations. As part of those changes we introduced several new response attributes (<code>token_last_eight</code>, <code>hashed_token</code>, and <code>fingerprint</code>) to the Authorizations API. We have decided to modify <code>hashed_token</code> to return the SHA-256 hex digest of the associated token instead of Base64. Given that Base64 has several common variants (original, URL safe, etc) we decided that returning the value as hex is less ambiguous and will be more useful for developers.</p>
+
+<h3>
+<a id="extended-preview-period" class="anchor" href="#extended-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="extended-preview-period" class="anchor" href="#extended-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Extended preview period</h3>
+
+<p>Because of the change to <code>hashed_token</code>, we are extending the preview period by two weeks. If no additional changes are made during this extended preview period we will announce the end of the preview and beginning of the eight week migration period on February 17. The migration period will allow applications to opt in to these changes before they become an official part of the GitHub API v3.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>!</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">
   <h2 class="title">
 <a id="--an-integrators-guide-to-organization-application-policies" class="anchor" href="#--an-integrators-guide-to-organization-application-policies" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">An integrator's guide to organization application policies</a>
@@ -728,38 +762,6 @@ media type.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-10-24-status-api-limits/">
-  <h2 class="title">
-<a id="--status-api-limits" class="anchor" href="#--status-api-limits" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-10-24-status-api-limits/">Status API Limits</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    October 24, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/rsanheim.png" alt="Avatar for rsanheim" data-proofer-ignore>
-      <a href="https://github.com/rsanheim" data-proofer-ignore>rsanheim</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>To ensure a high level of service for all API consumers, we will soon limit the number of <a href="/v3/repos/statuses/">statuses</a>
-to 1000 per commit SHA, repository, and context.</p>
-
-<p>Beginning Monday, November 3rd, we will trim existing data sets that exceed this limit, deleting the oldest
-records first.  Attempts to create statuses beyond that limit will result in a <a href="https://developer.github.com/v3/#client-errors">validation error</a>.</p>
-
-<p>If you have any feedback or questions, please don't hesistate to <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">contact</a> us.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -890,6 +892,8 @@ records first.  Attempts to create statuses beyond that limit will result in a <
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
@@ -903,8 +907,6 @@ records first.  Attempts to create statuses beyond that limit will result in a <
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
   <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API<br /><span class="date">February 19, 2016</span></a></li>
 
 </ul>
 

@@ -2,13 +2,96 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-04-12T07:00:00Z</updated>
+  <updated>2016-04-18T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-04-18:/changes/2016-04-18-new-webhook-actions-are-live/</id>
+    <title type="html">New webhook event actions are now live</title>
+    <published>2016-04-18T07:00:00Z</published>
+    <updated>2016-04-18T07:00:00Z</updated>
+    <author>
+      <name>davidcelis</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-04-18-new-webhook-actions-are-live/"/>
+    <content type="html">&lt;p&gt;As &lt;a href="https://developer.github.com/changes/2016-03-15-new-webhook-actions/"&gt;promised last month&lt;/a&gt;, we've expanded several webhook events with new functionality. Webhook events involving repositories, issues, and comments have all been updated to include new actions.&lt;/p&gt;
+
+&lt;p&gt;Repository events will now fire when a repository is deleted, made public, or made private. In addition, while repository creation events will still only fire for organizations, the new repository event actions can be delivered for user-owned repositories.&lt;/p&gt;
+
+&lt;p&gt;Events for issues and comments have also been updated and will now fire when issues or comments are edited or deleted. When an issue or a comment has been edited, the event's payload will include a "changes" object. For example, if you've updated the title and body of an issue, the webhook payload informs you of what the issue used to look like:&lt;/p&gt;
+
+&lt;pre class="highlight highlight-json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"edited"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"changes"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"title"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"from"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"This is the old title."&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"body"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;"from"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"This is the old body."&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"issue"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"title"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"This is the new title."&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"body"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"This is the new body."&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;The new values will be present in the &lt;code&gt;issue&lt;/code&gt; object itself, as detailed above. Unchanged values will not be present within the &lt;code&gt;changes&lt;/code&gt; object. Comment edits follow a similar pattern, though because they have no titles, the only change included in the payload would be the comment's body.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="list-of-comprehensive-changes" class="anchor" href="#list-of-comprehensive-changes" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;List of comprehensive changes&lt;/h2&gt;
+
+&lt;p&gt;New actions were added to four events, all of which are detailed below.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="repositoryevent" class="anchor" href="#repositoryevent" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;&lt;a href="https://developer.github.com/v3/activity/events/types/#repositoryevent"&gt;RepositoryEvent&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;deleted&lt;/code&gt;: sent when a user-owned or organization-owned repository is deleted.&lt;/li&gt;
+&lt;li&gt;
+&lt;code&gt;publicized&lt;/code&gt;: sent when a user-owned or organization-owned repository is switched from private to public.&lt;/li&gt;
+&lt;li&gt;
+&lt;code&gt;privatized&lt;/code&gt;: sent when a user-owned or organization-owned repository is switched from public to private.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;
+&lt;a id="issuesevent" class="anchor" href="#issuesevent" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;&lt;a href="https://developer.github.com/v3/activity/events/types/#issuesevent"&gt;IssuesEvent&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;edited&lt;/code&gt;: sent when the title and/or body of an issue or pull request is edited.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;
+&lt;a id="issuecommentevent" class="anchor" href="#issuecommentevent" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;&lt;a href="https://developer.github.com/v3/activity/events/types/#issuecommentevent"&gt;IssueCommentEvent&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;edited&lt;/code&gt;: sent when a comment on an issue or pull request is edited&lt;/li&gt;
+&lt;li&gt;
+&lt;code&gt;deleted&lt;/code&gt;: sent when a comment on an issue or pull request is deleted&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;
+&lt;a id="pullrequestreviewcommentevent" class="anchor" href="#pullrequestreviewcommentevent" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;&lt;a href="https://developer.github.com/v3/activity/events/types/#pullrequestreviewcommentevent"&gt;PullRequestReviewCommentEvent&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;edited&lt;/code&gt;: sent when a comment on a pull request's unified diff (in the Files Changed tab) is edited&lt;/li&gt;
+&lt;li&gt;
+&lt;code&gt;deleted&lt;/code&gt;: sent when a comment on a pull request's unified diff (in the Files Changed tab) is deleted&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Take a look at &lt;a href="https://developer.github.com/webhooks/"&gt;the documentation&lt;/a&gt; for full details. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Webhook+Actions"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-04-12:/changes/2016-04-12-commit-reference-sha-api-is-now-official/</id>
     <title type="html">Commit Reference SHA-1 API is now official</title>
@@ -1009,25 +1092,6 @@ media type.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API+methods"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-02-03:/changes/2015-02-03-removing-authorizations-token-update/</id>
-    <title type="html">Removing token attribute from Authorizations API responses (Update)</title>
-    <published>2015-02-03T08:00:00Z</published>
-    <updated>2015-02-03T08:00:00Z</updated>
-    <author>
-      <name>ptoomey3</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-02-03-removing-authorizations-token-update/"/>
-    <content type="html">&lt;p&gt;In December, we &lt;a href="/changes/2014-12-08-removing-authorizations-token/"&gt;released a preview&lt;/a&gt; of several API changes related to managing OAuth application authorizations. As part of those changes we introduced several new response attributes (&lt;code&gt;token_last_eight&lt;/code&gt;, &lt;code&gt;hashed_token&lt;/code&gt;, and &lt;code&gt;fingerprint&lt;/code&gt;) to the Authorizations API. We have decided to modify &lt;code&gt;hashed_token&lt;/code&gt; to return the SHA-256 hex digest of the associated token instead of Base64. Given that Base64 has several common variants (original, URL safe, etc) we decided that returning the value as hex is less ambiguous and will be more useful for developers.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="extended-preview-period" class="anchor" href="#extended-preview-period" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Extended preview period&lt;/h3&gt;
-
-&lt;p&gt;Because of the change to &lt;code&gt;hashed_token&lt;/code&gt;, we are extending the preview period by two weeks. If no additional changes are made during this extended preview period we will announce the end of the preview and beginning of the eight week migration period on February 17. The migration period will allow applications to opt in to these changes before they become an official part of the GitHub API v3.&lt;/p&gt;
-
-&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token"&gt;drop us a line&lt;/a&gt;!&lt;/p&gt;</content>
   </entry>
 </feed>
 

@@ -125,6 +125,10 @@ The Commit, Commit Comparison, and Pull Request resources support
 
     application/vnd.github.VERSION.patch
 
+### sha
+
+    application/vnd.github.VERSION.sha
+
 ## Repository contents
 
 ### Raw

@@ -363,13 +363,13 @@ Triggered when a private repository is [open sourced](/v3/repos/#edit).  Without
 
 ## PullRequestEvent
 
-Triggered when a [pull request](/v3/pulls) is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized.
+Triggered when a [pull request](/v3/pulls) is assigned, unassigned, labeled, unlabeled, opened, edited, closed, reopened, or synchronized.
 
 ### Events API payload
 
 Key | Type | Description
 ----|------|-------------
-`action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "closed", or "reopened", or "synchronize". If the action is "closed" and the `merged` key is `false`, the pull request was closed with unmerged commits. If the action is "closed" and the `merged` key is `true`, the pull request was merged.
+`action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "edited", "closed", or "reopened", or "synchronize". If the action is "closed" and the `merged` key is `false`, the pull request was closed with unmerged commits. If the action is "closed" and the `merged` key is `true`, the pull request was merged.
 `number`|`integer` | The pull request number.
 `pull_request`|`object` | The [pull request](/v3/pulls) itself.
 

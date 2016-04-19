@@ -55,7 +55,7 @@ Name | Description
 [`page_build`][event-types-page_build] | Any time a Pages site is built or results in a failed build.
 [`public`][event-types-public] | Any time a Repository changes from private to public.
 [`pull_request_review_comment`][event-types-pull_request_review_comment] | Any time a [comment on a pull request's unified diff](/v3/pulls/comments)  is created, edited, or deleted (in the Files Changed tab).
-[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
+[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, edited, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
 [`push`][event-types-push] | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
 [`repository`][event-types-repository] | Any time a Repository is created, deleted, made public, or made private.
 [`release`][event-types-release] | Any time a Release is published in a Repository.

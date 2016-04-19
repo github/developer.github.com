@@ -46,7 +46,7 @@ New actions were added to four events, all of which are detailed below.
 
 ### [PullRequestEvent][pull-request-event]
 
-* `edited`: sent when the title and/or body of an issue is edited.
+* `edited`: sent when the title and/or body of a pull request is edited.
 
 ### [PullRequestReviewCommentEvent][pull-request-review-comment-event]
 

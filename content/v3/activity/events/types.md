@@ -247,7 +247,7 @@ Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed on the comment. Can be one of "created", "edited", or "deleted".
 `changes`|`object` | The changes to the comment if the action was "edited".
-`changes[from][body]` |`string` | The previous version of the body if the action was "edited".
+`changes[body][from]` |`string` | The previous version of the body if the action was "edited".
 `issue`|`object` | The [issue](/v3/issues/) the comment belongs to.
 `comment`|`object` | The [comment](/v3/issues/comments/) itself.
 
@@ -270,8 +270,8 @@ Key | Type | Description
 `action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "edited", "closed", or "reopened".
 `issue`|`object` | The [issue](/v3/issues) itself.
 `changes`|`object`| The changes to the issue if the action was "edited".
-`changes[from][title]`|`string` | The previous version of the title if the action was "edited".
-`changes[from][body]`|`string` | The previous version of the body if the action was "edited".
+`changes[title][from]`|`string` | The previous version of the title if the action was "edited".
+`changes[body][from]`|`string` | The previous version of the body if the action was "edited".
 `assignee`|`object` | The optional user who was assigned or unassigned from the issue.
 `label`|`object` | The optional label that was added or removed from the issue.
 
@@ -371,6 +371,9 @@ Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "edited", "closed", or "reopened", or "synchronize". If the action is "closed" and the `merged` key is `false`, the pull request was closed with unmerged commits. If the action is "closed" and the `merged` key is `true`, the pull request was merged.
 `number`|`integer` | The pull request number.
+`changes`|`object`| The changes to the comment if the action was "edited".
+`changes[title][from]`|`string` | The previous version of the title if the action was "edited".
+`changes[body][from]`|`string` | The previous version of the body if the action was "edited".
 `pull_request`|`object` | The [pull request](/v3/pulls) itself.
 
 ### Webhook event name
@@ -391,7 +394,7 @@ Key | Type | Description
 ----|------|-------------
 `action`|`string` | The action that was performed on the comment. Can be one of `created`, `edited`, or `deleted`.
 `changes`|`object`| The changes to the comment if the action was "edited".
-`changes[from][body]`|`string` | The previous version of the body if the action was "edited".
+`changes[body][from]`|`string` | The previous version of the body if the action was "edited".
 `pull_request`|`object` | The [pull request](/v3/pulls/) the comment belongs to.
 `comment`|`object` | The [comment](/v3/pulls/comments) itself.
 

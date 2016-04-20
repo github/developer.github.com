@@ -1,10 +1,9 @@
 ---
-title: Issues | GitHub API
+title: Issues
 ---
 
 # Issues
 
-* TOC
 {:toc}
 
 Issues use [these custom media types](#custom-media-types). You can
@@ -103,7 +102,7 @@ Name | Type | Description
   :body      => "I'm having a problem with this.",
   :assignee  => "octocat",
   :milestone => 1,
-  :labels    => %w(Label1 Label2)
+  :labels    => %w(bug)
 %>
 
 ### Response
@@ -137,13 +136,67 @@ Name | Type | Description
   :assignee  => "octocat",
   :milestone => 1,
   :state     => "open",
-  :labels    => %w(Label1 Label2)
+  :labels    => %w(bug)
 %>
 
 ### Response
 
 <%= headers 200 %>
 <%= json :full_issue %>
+
+{% if page.version == 'dotcom' %}
+
+## Lock an issue
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The API to lock an issue is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2016-02-11-issue-locking-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.the-key-preview+json
+
+{{/tip}}
+
+Users with push access can lock an issue's conversation.
+
+    PUT /repos/:owner/:repo/issues/:number/lock
+
+<%= fetch_content(:put_content_length) %>
+
+### Response
+
+<%= headers 204 %>
+
+## Unlock an issue
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The API to unlock an issue is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2016-02-11-issue-locking-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.the-key-preview+json
+
+{{/tip}}
+
+Users with push access can unlock an issue's conversation.
+
+    DELETE /repos/:owner/:repo/issues/:number/lock
+
+### Response
+
+<%= headers 204 %>
+
+{% endif %}
 
 ## Custom media types
 

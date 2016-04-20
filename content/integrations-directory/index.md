@@ -1,6 +1,6 @@
 ---
-title: Integrations Directory | GitHub API
-layout: integrations-directory
+title: Integrations Directory
+layout: /integrations-directory.*
 ---
 
 # Overview

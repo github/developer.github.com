@@ -1,10 +1,9 @@
 ---
-title: Pull Requests | GitHub API
+title: Pull Requests
 ---
 
 # Pull Requests
 
-* TOC
 {:toc}
 
 The Pull Request API allows you to list, view, edit, create, and even merge
@@ -57,7 +56,7 @@ Name | Type | Description
 
 {{#tip}}
 
-Each time the pull request receives new commits, GitHub creates a merge commit
+Each time the pull request receives new commits, {{ site.data.variables.product.product_name }} creates a merge commit
 to _test_ whether the pull request can be automatically merged into the base
 branch. (This _test_ commit is not added to the base branch or the head branch.)
 The `merge_commit_sha` attribute holds the SHA of the _test_ merge commit;
@@ -113,7 +112,7 @@ Name | Type | Description
 #### Example
 
 <%= json \
-  :issue => "5",
+  :issue => 5,
   :head  => "octocat:new-feature",
   :base  => "master"
 %>
@@ -188,9 +187,26 @@ Note: The response includes a maximum of 250 commits. If you are working with a 
 
 Name | Type | Description
 -----|------|-------------
-`commit_message`|`string`| The message that will be used for the merge commit
+{% if page.version == 'dotcom' or page.version >= 2.6 %}`commit_title`|`string`| Title for the automatic commit message.{% endif %}
+`commit_message`|`string`| Extra detail to append to automatic commit message.
 `sha`|`string`| SHA that pull request head must match to allow merge
+{% if page.version == 'dotcom' or page.version >= 2.6 %}`squash`|`boolean`| Commit a single commit to the head branch.{% endif %}
 
+{% if page.version == 'dotcom' or page.version >= 2.6 %}
+
+{{#tip}}
+ 
+The `commit_title` and `squash` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-01-squash-api-preview) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.polaris-preview+json
+```
+
+{{/tip}}
+ 
+{% endif %}
 
 ### Response if merge was successful
 
@@ -217,7 +233,7 @@ Name | Type | Description
   :documentation_url => "https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"
 %>
 
-### Labels, assignees, and milestones
+## Labels, assignees, and milestones
 
 Every pull request is an issue, but not every issue is a pull request. For this reason, "shared" actions for both features, like manipulating assignees, labels and milestones, are provided within [the Issues API](/v3/issues).
 
@@ -235,4 +251,4 @@ use of media types in the API [here](/v3/media/).
 
 <a id="diff-error">
 
-If a diff is corrupt, <span class='not-enterprise'>please contact [GitHub Support](https://www.github.com/contact)</span><span class='enterprise-only'>contact your site administrator</span> to receive help. Be sure to include the repository name and pull request ID.
+If a diff is corrupt, contact {{ site.data.variables.contact.contact_support }} to receive help. Be sure to include the repository name and pull request ID.

@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Gist raw file URI change
-created_at: 2014-02-21
 author_name: spicycode
 ---
 

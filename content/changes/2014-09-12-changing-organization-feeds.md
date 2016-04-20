@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Changing organization feeds in the Feeds API
-created_at: 2014-09-12
 author_name: mastahyeti
 ---
 
@@ -14,9 +12,10 @@ use of these attributes, you'll want to update your code to use the new
 
 Previously, the deprecated attributes returned URI template. For example:
 
-    #!javascript
-    "current_user_organization_url":
-      "https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"
+``` json
+"current_user_organization_url":
+  "https://github.com/organizations/{org}/mastahyeti.private.atom?token=abc123"
+```
 
 The template included a deprecated authentication token. Our new tokens are
 valid only for a concrete feed URL (not for a URI template). Because the
@@ -31,11 +30,12 @@ In order to preserve the functionality of this API, we have added a new
 attribute that lists specific Atom feed urls for each of the user's
 organizations.
 
-    #!javascript
-    "current_user_organization_urls": [
-      "https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"
-      "https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"
-    ]
+``` json
+"current_user_organization_urls": [
+  "https://github.com/organizations/github/mastahyeti.private.atom?token=abc123"
+  "https://github.com/organizations/requests/mastahyeti.private.atom?token=token=def456"
+]
+```
 
 Check out the updated [Feeds API documentation][docs] for the new fields. If you
 have any questions or feedback, please [get drop us a line][contact].

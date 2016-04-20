@@ -1,11 +1,10 @@
 ---
-title: Webhooks | GitHub API
+title: Webhooks
 layout: webhooks
 ---
 
 # Webhooks
 
-* TOC
 {:toc}
 
 
@@ -17,7 +16,7 @@ deploy to your production server. You're only limited by your imagination.
 
 Each webhook can be installed [on an organization][org-hooks] or [a specific
 repository][repo-hooks]. Once installed, they will be triggered each time one
-or more subscribed events occurs on that organization or repository. 
+or more subscribed events occurs on that organization or repository.
 
 You can create up to 20 webhooks for each event on each installation target
 (specific organization or specific repository).
@@ -49,16 +48,16 @@ Name | Description
 [`deployment_status`][event-types-deployment_status] | Any time a deployment for a Repository has a status update from the API.
 [`fork`][event-types-fork] | Any time a Repository is forked.
 [`gollum`][event-types-gollum] | Any time a Wiki page is updated.
-[`issue_comment`][event-types-issue_comment] | Any time an Issue or Pull Request is [commented](/v3/issues/comments/) on.
-[`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.
+[`issue_comment`][event-types-issue_comment] | Any time a [comment on an issue](/v3/issues/comments/) is created or edited
+[`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, edited, closed, or reopened.
 [`member`][event-types-member] | Any time a User is added as a collaborator to a non-Organization Repository.
 [`membership`][event-types-membership] | Any time a User is added or removed from a team. **Organization hooks only**.
 [`page_build`][event-types-page_build] | Any time a Pages site is built or results in a failed build.
 [`public`][event-types-public] | Any time a Repository changes from private to public.
-[`pull_request_review_comment`][event-types-pull_request_review_comment] | Any time a [comment is created on a portion of the unified diff](/v3/pulls/comments) of a pull request (the Files Changed tab).
-[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
+[`pull_request_review_comment`][event-types-pull_request_review_comment] | Any time a [comment on a pull request's unified diff](/v3/pulls/comments)  is created, edited, or deleted (in the Files Changed tab).
+[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, edited, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
 [`push`][event-types-push] | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
-[`repository`][event-types-repository] | Any time a Repository is created. **Organization hooks only**.
+[`repository`][event-types-repository] | Any time a Repository is created, deleted, made public, or made private.
 [`release`][event-types-release] | Any time a Release is published in a Repository.
 [`status`][event-types-status] | Any time a Repository has a status update from the API
 [`team_add`][event-types-team_add] | Any time a team is added or modified on a Repository.
@@ -84,6 +83,12 @@ payloads include the user who performed the event (`sender`) as well as the
 organization (`organization`) and/or repository (`repository`) which the event
 occurred on.
 
+{{#tip}}
+
+**Note:** Payloads are capped at 5 MB. If your event generates a larger payload, a webhook will not be fired. This may happen, for example, on a `create` event if many branches or tags are pushed at once. We suggest monitoring your payload size to ensure delivery.
+
+{{/tip}}
+
 ### Delivery headers
 
 HTTP requests made to your webhook's configured URL endpoint will contain
@@ -91,48 +96,48 @@ several special headers:
 
 Header | Description
 -------|-------------|
-`X-Github-Event`| Name of the [event][events-section] that triggered this delivery.
+`X-GitHub-Event`| Name of the [event][events-section] that triggered this delivery.
 `X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`][repo-hooks-create] as the key (if configured).
-`X-Github-Delivery`| Unique ID for this delivery.
+`X-GitHub-Delivery`| Unique ID for this delivery.
 
 Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
 
 ### Example delivery
 
-{:.terminal}
-    POST /payload HTTP/1.1
+``` command-line
+> POST /payload HTTP/1.1
 
-    Host: localhost:4567
-    X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
-    User-Agent: GitHub-Hookshot/044aadd
-    Content-Type: application/json
-    Content-Length: 6615
-    X-Github-Event: issues
+> Host: localhost:4567
+> X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+> User-Agent: GitHub-Hookshot/044aadd
+> Content-Type: application/json
+> Content-Length: 6615
+> X-GitHub-Event: issues
 
-    {
-      "action": "opened",
-      "issue": {
-        "url": "https://api.github.com/repos/octocat/Hello-World/issues/1347",
-        "number": 1347,
-        ...
-      },
-      "repository" : {
-        "id": 1296269,
-        "full_name": "octocat/Hello-World",
-        "owner": {
-          "login": "octocat",
-          "id": 1,
-          ...
-        },
-        ...
-      },
-      "sender": {
-        "login": "octocat",
-        "id": 1,
-        ...
-      }
-    }
-
+> {
+>   "action": "opened",
+>   "issue": {
+>     "url": "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+>     "number": 1347,
+>     ...
+>   },
+>   "repository" : {
+>     "id": 1296269,
+>     "full_name": "octocat/Hello-World",
+>     "owner": {
+>       "login": "octocat",
+>       "id": 1,
+>       ...
+>     },
+>     ...
+>   },
+>   "sender": {
+>     "login": "octocat",
+>     "id": 1,
+>     ...
+>   }
+> }
+```
 
 ## Ping Event
 

@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Accepting organization invitations from the API
-created_at: 2014-08-28
 author_name: jakeboxer
 ---
 
@@ -31,7 +29,7 @@ If you have any questions or feedback, please [get in touch with us][contact]!
 
 [contact]: https://github.com/contact?form[subject]=Team+Memberships+API
 [team-memberships-api]: /changes/2014-08-05-team-memberships-api/
-[org-invitations]: https://help.github.com/articles/adding-or-inviting-members-to-a-team-in-an-organization
+[org-invitations]: https://help.github.com/articles/adding-organization-members-to-a-team
 [list-org-memberships]: /v3/orgs/members/#list-your-organization-memberships
 [edit-org-membership]: /v3/orgs/members/#edit-your-organization-membership
 [add-team-membership]: /v3/orgs/teams/#add-team-membership

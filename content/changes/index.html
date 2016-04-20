@@ -3,5 +3,8 @@ title: GitHub API Changes
 layout: blog
 ---
 
-<%= render '_changes', :changes => api_changes %>
+<%= renderp '/_changes.*', :changes => paginated_api_changes(0, 9) %>
 
+<div class="paginate-container">
+  <%= renderp '/includes/pagination_bar.html', :current_page => 1, :total_pages => total_pages %>
+</div>

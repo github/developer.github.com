@@ -1,28 +1,58 @@
 require_relative 'lib/resources'
-require 'nanoc3/tasks'
 require 'tmpdir'
+
+Dir.glob('tasks/**/*.rake').each { |r| load r }
 
 task :default => [:test]
 
-desc "Compile the site"
-task :compile do
-  `nanoc compile`
+desc 'Builds the site'
+task :build do
+  if ENV['RACK_ENV'] == 'test'
+    begin
+      sh 'node_modules/gulp/bin/gulp.js build > build.txt'
+    rescue StandardError => e
+      puts 'uh oh'
+      $stderr.puts `cat build.txt`
+      raise e
+    end
+  else
+    sh 'node_modules/gulp/bin/gulp.js build'
+  end
 end
 
 desc "Test the output"
-task :test => [:clean, :remove_output_dir, :compile, :run_proofer]
+task :test => [:remove_tmp_dir, :remove_output_dir, :build] do
+  Rake::Task['spec'].invoke
+  Rake::Task['run_proofer'].invoke
+end
+
+desc "Run Rspec"
+task :spec do
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:rspec)
+  Rake::Task['rspec'].invoke
+end
 
 desc "Run the HTML-Proofer"
 task :run_proofer do
-  require 'html/proofer'
-  ignored_links = [%r{www.w3.org}]
-  latest_ent_version = GitHub::Resources::Helpers::CONTENT['LATEST_ENTERPRISE_VERSION']
+  require 'html-proofer'
+  ignored_links = [%r{www.w3.org}, /api\.github\.com/]
   # swap versionless Enterprise articles with versioned paths
-  href_swap = {
-    %r{help\.github\.com/enterprise/admin/} => "help.github.com/enterprise/#{latest_ent_version}/admin/",
-    %r{help\.github\.com/enterprise/user/} => "help.github.com/enterprise/#{latest_ent_version}/user/"
+  url_swap = {
+    %r{help.github.com/enterprise/admin/} => "help.github.com/enterprise/#{config[:versions][0]}/admin/",
+    %r{help.github.com/enterprise/user/} => "help.github.com/enterprise/#{config[:versions][0]}/user/"
   }
-  HTML::Proofer.new("./output", :href_ignore => ignored_links, :href_swap => href_swap).run
+  proofer_opts = {
+                    :url_ignore => ignored_links,
+                    :url_swap => url_swap,
+                    :parallel => { :in_processes => 5 }
+                 }
+  HTMLProofer.check_directory("./output", proofer_opts).run
+end
+
+desc "Remove the tmp dir"
+task :remove_tmp_dir do
+  FileUtils.rm_r('tmp') if File.exist?('tmp')
 end
 
 desc "Remove the output dir"
@@ -43,52 +73,39 @@ def commit_message(no_commit_msg = false)
   end
 
   mesg = default_message if mesg.nil? || mesg == ''
+  mesg << "\nGenerated from #{ENV['BUILD_SHA']}" if ENV['BUILD_SHA']
   mesg.gsub(/'/, '') # Allow this to be handed off via -m '#{message}'
 end
 
+namespace :assets do
+  task :precompile => [:build] do
+    sh 'mv output _site/'
+  end
+end
+
 desc "Publish to http://developer.github.com"
-task :publish, [:no_commit_msg] => [:clean, :remove_output_dir] do |t, args|
-  mesg = commit_message(args[:no_commit_msg])
-  sh "nanoc compile"
+task :publish, [:no_commit_msg] => [:remove_tmp_dir, :remove_output_dir, :build] do |t, args|
+  message = commit_message(args[:no_commit_msg])
 
-  # save precious files
-  if ENV['IS_HEROKU']
-    `git checkout origin/gh-pages`
-  else
-    `git checkout gh-pages`
+  Dir.mktmpdir do |tmp|
+    system "mv output/* #{tmp}"
+    system "cp .gitignore #{tmp}"
+    system 'git checkout gh-pages'
+    system "rsync -av #{tmp}/ ."
+    system 'git add .'
+    system "git commit -am #{message.shellescape}"
+    system 'git push origin gh-pages --force'
+    system 'git checkout master'
   end
-  tmpdir = Dir.mktmpdir
-  FileUtils.cp_r("enterprise", tmpdir)
-  FileUtils.cp("robots.txt", tmpdir)
-  `git checkout master`
+end
 
-  ENV['GIT_DIR'] = File.expand_path(`git rev-parse --git-dir`.chomp)
-  ENV['RUBYOPT'] = nil
-  old_sha = `git rev-parse refs/remotes/origin/gh-pages`.chomp
-  Dir.chdir('output') do
-    ENV['GIT_INDEX_FILE'] = gif = '/tmp/dev.gh.i'
-    ENV['GIT_WORK_TREE'] = Dir.pwd
-    File.unlink(gif) if File.file?(gif)
-    # restore precious files
-    FileUtils.cp_r("#{tmpdir}/enterprise", ".")
-    FileUtils.cp("#{tmpdir}/robots.txt", ".")
-    FileUtils.rm_rf(tmpdir) if File.exists?(tmpdir)
-    `git add -A`
-    tsha = `git write-tree`.strip
-    puts "Created tree   #{tsha}"
-    # Heroku runs git@1.7, we don't have the luxury of -m
-    if ENV['IS_HEROKU']
-      `echo #{mesg} > changelog`
-      csha = `git commit-tree #{tsha} -p #{old_sha} < changelog`.strip
-    elsif old_sha.size == 40
-      csha = `git commit-tree #{tsha} -p #{old_sha} -m '#{mesg}'`.strip
-    else
-      csha = `git commit-tree #{tsha} -m '#{mesg}'`.strip
-    end
-    puts "Created commit #{csha}"
-    puts `git show #{csha} --stat`
-    puts "Updating gh-pages from #{old_sha}"
-    `git update-ref refs/heads/gh-pages #{csha}`
-    `git push origin gh-pages`
-  end
+desc "Generate JSON from the sample responses"
+task :generate_json_from_responses do
+  Dir[File.join(File.dirname(__FILE__), 'lib', 'responses', '*.rb')].each { |file| load file }
+  FileUtils.mkdir_p(File.join(File.dirname(__FILE__), 'json-dump'))
+  GitHub::Resources::Responses.constants.each { |constant|
+    File.open('json-dump/' + constant.to_s + '.json', 'w') { |file|
+      file.write(JSON.pretty_generate(GitHub::Resources::Helpers.get_resource(constant)))
+    }
+  }
 end

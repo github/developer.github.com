@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Preview the New Combined Status API
-created_at: 2014-03-27
 author_name: bhuga
 ---
 

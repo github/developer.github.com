@@ -1,10 +1,9 @@
 ---
-title: Search | GitHub API
+title: Search
 ---
 
 # Search
 
-* TOC
 {:toc}
 
 ### About the Search API
@@ -15,7 +14,7 @@ the way you think of performing a search on Google. It's designed to help you
 find the one result you're looking for (or maybe the few results you're looking
 for). Just like searching on Google, you sometimes want to see a few pages of
 search results so that you can find the item that best meets your needs. To
-satisfy that need, the GitHub Search API provides **up to 1,000 results for each
+satisfy that need, the {{ site.data.variables.product.product_name }} Search API provides **up to 1,000 results for each
 search**.
 
 ### Ranking search results
@@ -105,9 +104,10 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      'https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc'
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  'https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc'
+```
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -134,8 +134,10 @@ Due to the complexity of searching code, there are a few restrictions on how sea
 
 <ul>
 <li>Only the <em>default branch</em> is considered. In most cases, this will be the <code>master</code> branch.</li>
-<li>Only files smaller than 384 KB are searchable.</li>
-<li class='not-enterprise'> You must always include at least one search term when searching source code. For example, searching for <a href="https://github.com/search?utf8=✓&q=language%3Ago&type=Code"><code>language:go</code></a> is not valid, while <a href="https://github.com/search?utf8=✓&q=amazing+language%3Ago&type=Code"><code>amazing language:go</code></a> is.</li>
+<li>Only files smaller than {% if page.version != 'dotcom' and page.version >= 2.2 %} 10 MB {% else %} 384 KB {% endif %} are searchable.</li>
+{% if page.version == 'dotcom' %}
+<li>You must always include at least one search term when searching source code. For example, searching for <a href="https://github.com/search?utf8=✓&q=language%3Ago&type=Code"><code>language:go</code></a> is not valid, while <a href="https://github.com/search?utf8=✓&q=amazing+language%3Ago&type=Code"><code>amazing language:go</code></a> is.</li>
+{% endif %}
 </ul>
 
 ### Parameters
@@ -143,7 +145,7 @@ Due to the complexity of searching code, there are a few restrictions on how sea
 Name | Type | Description
 -----|------|--------------
 `q`|`string`| The search terms.
-`sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure. Default: results are sorted by best match.
+`sort`|`string`| The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the {{ site.data.variables.product.product_name }} search infrastructure. Default: results are sorted by best match.
 `order`|`string`| The sort order if `sort` parameter is provided. One of `asc` or `desc`. Default: `desc`
 
 The `q` search term can also contain any combination of the supported code search qualifiers as described by the in-browser [code search documentation](https://help.github.com/articles/searching-code/) and [search syntax documentation](https://help.github.com/articles/search-syntax/):
@@ -191,9 +193,10 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  https://api.github.com/search/code?q=addClass+in:file+language:js+repo:jquery/jquery
+```
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -293,9 +296,10 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
+```
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -364,9 +368,10 @@ use case. To get this metadata in your search results, specify the `text-match`
 media type in your Accept header. For example, via curl, the above query would
 look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  https://api.github.com/search/users?q=tom+repos:%3E42+followers:%3E1000
+```
 
 This produces the same JSON payload as above, with an extra key called
 `text_matches`, an array of objects. These objects provide information such as
@@ -413,9 +418,10 @@ Name | Description
 Using curl, and the [example issue search](#issue-search-example) above, our API
 request would look like this:
 
-{:.terminal}
-    curl -H 'Accept: application/vnd.github.v3.text-match+json' \
-      'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
+``` command-line
+curl -H 'Accept: application/vnd.github.v3.text-match+json' \
+  'https://api.github.com/search/issues?q=windows+label:bug+language:python+state:open&sort=created&order=asc'
+```
 
 The response will include a `text_matches` array for each search result. In the
 JSON below, we have two objects in the `text_matches` array.

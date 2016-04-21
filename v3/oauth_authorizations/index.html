@@ -55,26 +55,22 @@
 
   <div id="wrapper">
     <div class="content">
-      <h1>
-<a id="oauth-authorizations-api" class="anchor" href="#oauth-authorizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth Authorizations API</h1>
+      <div class="alert tip">
 
-<ul id="markdown-toc">
-<li><a href="#list-your-authorizations" id="markdown-toc-list-your-authorizations">List your authorizations</a></li>
-<li><a href="#get-a-single-authorization" id="markdown-toc-get-a-single-authorization">Get a single authorization</a></li>
-<li><a href="#create-a-new-authorization" id="markdown-toc-create-a-new-authorization">Create a new authorization</a></li>
-<li><a href="#get-or-create-an-authorization-for-a-specific-app" id="markdown-toc-get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a></li>
-<li><a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint" id="markdown-toc-get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a></li>
-<li><a href="#update-an-existing-authorization" id="markdown-toc-update-an-existing-authorization">Update an existing authorization</a></li>
-<li><a href="#delete-an-authorization" id="markdown-toc-delete-an-authorization">Delete an authorization</a></li>
-<li><a href="#check-an-authorization" id="markdown-toc-check-an-authorization">Check an authorization</a></li>
-<li><a href="#reset-an-authorization" id="markdown-toc-reset-an-authorization">Reset an authorization</a></li>
-<li><a href="#revoke-an-authorization-for-an-application" id="markdown-toc-revoke-an-authorization-for-an-application">Revoke an authorization for an application</a></li>
-<li><a href="#more-information" id="markdown-toc-more-information">More Information</a></li>
-</ul>
+<p><a name="preview-period"></a></p>
 
-<p>You can use this API to manage your OAuth applications. You can only access this API via <a href="/v3/auth#basic-authentication">Basic Authentication</a> using your username and password, not tokens.</p>
+<p>APIs for managing OAuth grants are currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the <a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview">blog post</a> for full details.</p>
 
-<p>Make sure you understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with two-factor authentication</a> if you or your users have two-factor authentication enabled.</p>
+<p>To access the API you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>  application/vnd.github.damage-preview
+</code></pre>
+
+</div>
+
+<p><br></p>
 
 <div class="alert">
   <h3 id="deprecation-notice">
@@ -112,6 +108,117 @@
   </p>
 </div>
 
+<h1>
+<a id="oauth-authorizations-api" class="anchor" href="#oauth-authorizations-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>OAuth Authorizations API</h1>
+
+<ul id="markdown-toc">
+<li><a href="#list-your-grants" id="markdown-toc-list-your-grants">List your grants</a></li>
+<li><a href="#get-a-single-grant" id="markdown-toc-get-a-single-grant">Get a single grant</a></li>
+<li><a href="#delete-a-grant" id="markdown-toc-delete-a-grant">Delete a grant</a></li>
+<li><a href="#list-your-authorizations" id="markdown-toc-list-your-authorizations">List your authorizations</a></li>
+<li><a href="#get-a-single-authorization" id="markdown-toc-get-a-single-authorization">Get a single authorization</a></li>
+<li><a href="#create-a-new-authorization" id="markdown-toc-create-a-new-authorization">Create a new authorization</a></li>
+<li><a href="#get-or-create-an-authorization-for-a-specific-app" id="markdown-toc-get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a></li>
+<li><a href="#get-or-create-an-authorization-for-a-specific-app-and-fingerprint" id="markdown-toc-get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a></li>
+<li><a href="#update-an-existing-authorization" id="markdown-toc-update-an-existing-authorization">Update an existing authorization</a></li>
+<li><a href="#delete-an-authorization" id="markdown-toc-delete-an-authorization">Delete an authorization</a></li>
+<li><a href="#check-an-authorization" id="markdown-toc-check-an-authorization">Check an authorization</a></li>
+<li><a href="#reset-an-authorization" id="markdown-toc-reset-an-authorization">Reset an authorization</a></li>
+<li><a href="#revoke-an-authorization-for-an-application" id="markdown-toc-revoke-an-authorization-for-an-application">Revoke an authorization for an application</a></li>
+<li><a href="#more-information" id="markdown-toc-more-information">More Information</a></li>
+</ul>
+
+<p>You can use this API to manage the access OAuth applications have to your account. You can only access this API via <a href="/v3/auth#basic-authentication">Basic Authentication</a> using your username and password, not tokens.</p>
+
+<p>Make sure you understand how to <a href="/v3/auth/#working-with-two-factor-authentication">work with two-factor authentication</a> if you or your users have two-factor authentication enabled.</p>
+
+<h2>
+<a id="list-your-grants" class="anchor" href="#list-your-grants" aria-hidden="true"><span class="octicon octicon-link"></span></a>List your grants</h2>
+
+<p>You can use this API to list the set of OAuth applications that have been granted access to your account. Unlike the <a href="/v3/oauth_authorizations/#list-your-authorizations">list your authorizations</a> API, this API does not manage individual tokens. This API will return one entry for each OAuth application that has been granted access to your account, regardless of the number of tokens an application has generated for your user. The list of OAuth applications returned matches what is shown on <a href="https://github.com/settings/applications#authorized">the application authorizations settings screen within GitHub</a>. The <code>scopes</code> returned are the union of scopes authorized for the application. For example, if an application has one token with <code>repo</code> scope and another token with <code>user</code> scope, the grant will return <code>["repo", "user"]</code>.</p>
+
+<pre><code>GET /applications/grants
+</code></pre>
+
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/applications/grants/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-github-app.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my github app"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcde12345fghij67890"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"public_repo"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-a-single-grant" class="anchor" href="#get-a-single-grant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get a single grant</h2>
+
+<pre><code>GET /applications/grants/:id
+</code></pre>
+
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/applications/grants/1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"app"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-github-app.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my github app"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abcde12345fghij67890"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-09-06T17:26:27Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-09-06T20:39:23Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"public_repo"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="delete-a-grant" class="anchor" href="#delete-a-grant" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete a grant</h2>
+
+<p>Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for your user. Once deleted, the application has no access to your account and is no longer listed on <a href="https://github.com/settings/applications#authorized">the application authorizations settings screen within GitHub</a>.</p>
+
+<pre><code>DELETE /applications/grants/:id
+</code></pre>
+
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
 <h2>
 <a id="list-your-authorizations" class="anchor" href="#list-your-authorizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>List your authorizations</h2>
 
@@ -119,7 +226,7 @@
 </code></pre>
 
 <h3>
-<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
@@ -161,7 +268,7 @@ X-RateLimit-Remaining: 4999
 </code></pre>
 
 <h3>
-<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -262,7 +369,7 @@ Read more about these tokens on the <a href="https://help.github.com/articles/cr
 
 
 <h3>
-<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 201 Created
 Location: https://api.github.com/authorizations/1
@@ -612,7 +719,7 @@ X-RateLimit-Remaining: 4999
 
 
 <h3>
-<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-6" class="anchor" href="#response-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -650,7 +757,7 @@ X-RateLimit-Remaining: 4999
 </code></pre>
 
 <h3>
-<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000
@@ -672,7 +779,7 @@ will return <code>404 NOT FOUND</code>.</p>
 </code></pre>
 
 <h3>
-<a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-8" class="anchor" href="#response-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -736,7 +843,7 @@ the username is the OAuth application <code>client_id</code> and the password is
 </code></pre>
 
 <h3>
-<a id="response-6" class="anchor" href="#response-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-9" class="anchor" href="#response-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -798,7 +905,7 @@ for this method, where the username is the OAuth application <code>client_id</co
 </code></pre>
 
 <h3>
-<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-10" class="anchor" href="#response-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

@@ -44,7 +44,41 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-02-03-removing-authorizations-token-update/">
+      <div class="change" id="/changes/2015-02-18-new-releases-api-methods/">
+  <h2 class="title">
+<a id="--new-releases-api-methods" class="anchor" href="#--new-releases-api-methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-02-18-new-releases-api-methods/">New Releases API methods</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 18, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've added two new methods to the <a href="/v3/repos/releases/">Releases API</a>. You can now get the <a href="/v3/repos/releases/#get-the-latest-release">latest published release</a> for a repository.</p>
+
+<pre><code>GET /repos/:owner/:repo/releases/latest
+</code></pre>
+
+<p>You can also get a <a href="/v3/repos/releases/#get-a-release-by-tag-name">release by tag name</a>.</p>
+
+<pre><code>GET /repos/:owner/:repo/releases/tags/:tag
+</code></pre>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Releases+API+methods">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2015-02-03-removing-authorizations-token-update/">
   <h2 class="title">
 <a id="--removing-token-attribute-from-authorizations-api-responses-update" class="anchor" href="#--removing-token-attribute-from-authorizations-api-responses-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2015-02-03-removing-authorizations-token-update/">Removing token attribute from Authorizations API responses (Update)</a>
@@ -64,8 +98,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>In December, we <a href="/changes/2014-12-08-removing-authorizations-token/">released a preview</a> of several API changes related to managing OAuth application authorizations. As part of those changes we introduced several new response attributes (<code>token_last_eight</code>, <code>hashed_token</code>, and <code>fingerprint</code>) to the Authorizations API. We have decided to modify <code>hashed_token</code> to return the SHA-256 hex digest of the associated token instead of Base64. Given that Base64 has several common variants (original, URL safe, etc) we decided that returning the value as hex is less ambiguous and will be more useful for developers.</p>
+  <p>In December, we <a href="/changes/2014-12-08-removing-authorizations-token/">released a preview</a> of several API changes related to managing OAuth application authorizations. As part of those changes we introduced several new response attributes (<code>token_last_eight</code>, <code>hashed_token</code>, and <code>fingerprint</code>) to the Authorizations API. We have decided to modify <code>hashed_token</code> to return the SHA-256 hex digest of the associated token instead of Base64. Given that Base64 has several common variants (original, URL safe, etc) we decided that returning the value as hex is less ambiguous and will be more useful for developers.</p>
 
 <h3>
 <a id="extended-preview-period" class="anchor" href="#extended-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
@@ -74,8 +107,6 @@
 <p>Because of the change to <code>hashed_token</code>, we are extending the preview period by two weeks. If no additional changes are made during this extended preview period we will announce the end of the preview and beginning of the eight week migration period on February 17. The migration period will allow applications to opt in to these changes before they become an official part of the GitHub API v3.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>!</p>
-
-<p></p>
 </div>
 
 <div class="change" id="/changes/2015-01-19-an-integrators-guide-to-organization-application-policies/">
@@ -98,8 +129,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>As we <a href="https://github.com/blog/1941-organization-approved-applications">announced over on the GitHub blog</a>, organization admins can now
+  <p>As we <a href="https://github.com/blog/1941-organization-approved-applications">announced over on the GitHub blog</a>, organization admins can now
 control how third-party applications access their organization data. Allowing
 admins to approve or deny applications will ultimately result in deeper trust
 and increase overall adoption of integrations within organizations on GitHub.</p>
@@ -196,8 +226,6 @@ provides a huge net benefit for integrators as organizations choose to use
 OAuth integrations with more confidence.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Access+Policies+help+for+integrators">get in touch</a>.</p>
-
-<p></p>
 </div>
 
 <div class="change" id="/changes/2015-01-08-discovering-resources-for-a-user/">
@@ -220,12 +248,9 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-<p></p>
-<p>Is your application taking advantage of the recommended workflow for discovering a user's repositories and organizations? With the <a href="/changes/2014-12-08-organization-permissions-api-preview/">recent improvements to the API</a>, the process is simpler than ever. In our newest guide, we show you how to <a href="/guides/discovering-resources-for-a-user/">reliably identify the resources that your app can access for a given user</a>.</p>
+  <p>Is your application taking advantage of the recommended workflow for discovering a user's repositories and organizations? With the <a href="/changes/2014-12-08-organization-permissions-api-preview/">recent improvements to the API</a>, the process is simpler than ever. In our newest guide, we show you how to <a href="/guides/discovering-resources-for-a-user/">reliably identify the resources that your app can access for a given user</a>.</p>
 
 <p>If you have any questions or feedback, we'd love to <a href="https://github.com/contact?form%5Bsubject%5D=API+v3:+Discovering+resources+for+a+user">hear from you</a>.</p>
-
-<p></p>
 </div>
 
 <div class="change" id="/changes/2015-01-07-prepare-for-organization-permissions-changes/">
@@ -248,8 +273,7 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-<p></p>
-<p><strong>UPDATE (2015-06-10):</strong> As <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">announced on June 10</a>, these changes will become an official part of GitHub API v3 on June 24. (This post originally announced that these changes would come to GitHub API v3 on February 24.)</p>
+  <p><strong>UPDATE (2015-06-10):</strong> As <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">announced on June 10</a>, these changes will become an official part of GitHub API v3 on June 24. (This post originally announced that these changes would come to GitHub API v3 on February 24.)</p>
 
 <p>Last month, we <a href="/changes/2014-12-08-organization-permissions-api-preview/">released a preview</a> of several API changes related to managing organization members and repositories. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before June 24</strong> to account for these changes.</p>
 
@@ -302,8 +326,7 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-<p></p>
-<p>Back in February, we <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable">improved the security audit trail for SSH keys</a>. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on <a href="/guides/managing-deploy-keys/#deploy-keys">deploy keys</a> or <a href="/v3/users/keys/">user keys</a> for repository access, we recommend replacing any keys created before February 24, 2014.</p>
+  <p>Back in February, we <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable">improved the security audit trail for SSH keys</a>. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on <a href="/guides/managing-deploy-keys/#deploy-keys">deploy keys</a> or <a href="/v3/users/keys/">user keys</a> for repository access, we recommend replacing any keys created before February 24, 2014.</p>
 
 <p>To ensure that your application is not affected by organizations blocking access to these keys, <strong>you should replace the affected keys by January 15, 2015</strong>.</p>
 
@@ -366,8 +389,7 @@ OAuth integrations with more confidence.</p>
 </ul>
 </div>
 
-<p></p>
-<p>You can now see when a user starred a repository. To receive the new response format containing the <code>starred_at</code> field, request the new media type:</p>
+  <p>You can now see when a user starred a repository. To receive the new response format containing the <code>starred_at</code> field, request the new media type:</p>
 
 <pre class="command-line">
 curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/users/andrew/starred
@@ -705,63 +727,6 @@ Webhooks API will be stable and suitable for production use.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-11-25-the-deployments-api-is-official/">
-  <h2 class="title">
-<a id="--the-deployments-api-is-official" class="anchor" href="#--the-deployments-api-is-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-11-25-the-deployments-api-is-official/">The Deployments API is official</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    November 25, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
-      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We're happy to announce that the <a href="/v3/repos/deployments">Deployments API</a> is officially part
-of GitHub API v3. We now consider it stable for production use.</p>
-
-<p>Thanks to everyone who provided feedback during the preview period. We got
-some great feedback, and hope this feature helps you build the tools you
-need to make GitHub the best place to ship exactly the way you want.</p>
-
-<h3>
-<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview media type no longer needed</h3>
-
-<p>If you used the Deployments API during the preview period, you needed to
-provide a custom media type in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.cannonball-preview+json
-</code></pre>
-
-<p>Now that the preview period has ended, you no longer need to pass this custom
-media type.</p>
-
-<p>Instead, we <a href="/v3/media">recommend</a> that you specify <code>v3</code> as the version in the
-<code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<h3>
-<a id="feedback-1" class="anchor" href="#feedback-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="feedback" class="anchor" href="#feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Feedback</h3>
-
-<p>We'll never be done listening to you! As always, please don't hesitate to
-<a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">share your feedback</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -892,6 +857,8 @@ media type.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
@@ -905,8 +872,6 @@ media type.</p>
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
 </ul>
 

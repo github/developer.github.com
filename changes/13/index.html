@@ -44,7 +44,37 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-10-26-notifications-api/">
+      <div class="change" id="/changes/2012-10-31-gist-comment-uris/">
+  <h2 class="title">
+<a id="--gist-comment-uris" class="anchor" href="#--gist-comment-uris" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-10-31-gist-comment-uris/">Gist comment URIs</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    October 31, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra" data-proofer-ignore>
+      <a href="https://github.com/pezra" data-proofer-ignore>pezra</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>The URIs of all gist comments are changing immediately. The new URI pattern for gist comments is <code>/gists/{gist-id}/comments/{id}</code>. (See <a href="/v3/gists/comments/">gist comments section of the docs</a> for more details.) This change is necessary because the auto-incremented ids of gist comments are easy to guess. This predictability allows anyone to view comments on private Gists with relative ease. Obviously, comments on private gists should be just as private as the gist itself.</p>
+
+<p>Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
+
+<p>We have also added a <code>comments_url</code> member to the Gist documents. The <code>comments_url</code> link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using <code>url</code> and <code>*_url</code> properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2012-10-26-notifications-api/">
   <h2 class="title">
 <a id="--notifications-api" class="anchor" href="#--notifications-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-10-26-notifications-api/">Notifications API</a>
@@ -555,6 +585,8 @@ old API functionality.</s></p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
@@ -568,8 +600,6 @@ old API functionality.</s></p>
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
 </ul>
 

@@ -44,7 +44,63 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">
+      <div class="change" id="/changes/2016-02-11-issue-locking-api/">
+  <h2 class="title">
+<a id="--issue-locking-and-unlocking-api-preview-period" class="anchor" href="#--issue-locking-and-unlocking-api-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 11, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/davidcelis.png" alt="Avatar for davidcelis" data-proofer-ignore>
+      <a href="https://github.com/davidcelis" data-proofer-ignore>davidcelis</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We're introducing new API methods to allow repository collaborators to <a href="https://help.github.com/articles/locking-conversations/">lock and unlock conversations</a>. Developers with <a href="https://help.github.com/articles/what-are-the-different-access-permissions/">collaborator permissions</a> on a repository can start experimenting with these new endpoints today during the preview period.</p>
+
+<p>To lock a conversation, make a <code>PUT</code> request to the conversation's issue:</p>
+
+<pre class="command-line">
+<span class="command">curl "https://api.github.com/repos/github/hubot/issues/1/lock" \</span>
+  -X PUT \
+  -H "Authorization: token $TOKEN" \
+  -H "Content-Length: 0" \
+  -H "Accept: application/vnd.github.the-key-preview"
+</pre>
+
+<p>To unlock a conversation, make a similarly constructed <code>DELETE</code> request:</p>
+
+<pre class="command-line">
+<span class="command">curl "https://api.github.com/repos/github/hubot/issues/1/lock" \</span>
+  -X DELETE \
+  -H "Authorization: token $TOKEN" \
+  -H "Accept: application/vnd.github.the-key-preview"
+</pre>
+
+<h4>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
+
+<p>Starting today, developers can preview these new API methods. To use them during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.the-key-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>Take a look at <a href="/v3/issues/#lock-an-issue">the documentation</a> and, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Issue+Locking+and+Unlocking+API+Preview">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">
   <h2 class="title">
 <a id="--api-enhancements-for-working-with-organization-permissions-are-now-official" class="anchor" href="#--api-enhancements-for-working-with-organization-permissions-are-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-01-05-api-enhancements-for-working-with-organization-permissions-are-now-official/">API enhancements for working with organization permissions are now official</a>
@@ -64,14 +120,11 @@
 </ul>
 </div>
 
-<p></p>
-<p>To allow API developers to take advantage of the <a href="https://github.com/blog/2064-new-organization-permissions-now-available">improved organization permissions</a> that launched in September 2015, we're making the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements</a> for working with organization permissions a part of the official GitHub API.</p>
+  <p>To allow API developers to take advantage of the <a href="https://github.com/blog/2064-new-organization-permissions-now-available">improved organization permissions</a> that launched in September 2015, we're making the <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements</a> for working with organization permissions a part of the official GitHub API.</p>
 
 <p>During the preview period, you needed to <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/#preview-period">provide a custom media type in the <code>Accept</code> header</a> to opt-in to the changes. Now that the preview period has ended, you no longer need to specify this custom <a href="/v3/media/">media type</a>.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
-
-<p></p>
 </div>
 
 <div class="change" id="/changes/2015-11-11-protected-branches-api/">
@@ -94,8 +147,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We're starting a preview period for the <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">protected branches</a> API. Protecting a branch prevents force-pushes to it as well as deleting it. You can also specify required status checks that are required to merge code into the branch.</p>
+  <p>We're starting a preview period for the <a href="https://github.com/blog/2051-protected-branches-and-required-status-checks">protected branches</a> API. Protecting a branch prevents force-pushes to it as well as deleting it. You can also specify required status checks that are required to merge code into the branch.</p>
 
 <p>To protect a branch, make a <code>PATCH</code> request to the URL of the branch:</p>
 
@@ -118,7 +170,7 @@ curl "https://api.github.com/repos/github/hubot/branches/master" \
 </pre>
 
 <h4>
-<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-can-i-try-it-1" class="anchor" href="#how-can-i-try-it-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
 
 <p>To access this functionality during the preview period, you’ll need to provide the following custom media type in the Accept header:</p>
@@ -485,50 +537,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 </code></pre>
 
 <p>For more information, see the <a href="/v3/licenses/">Licenses API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API">let us know</a>.</p>
-</div>
-
-<div class="change" id="/changes/2015-06-17-organizations-endpoint/">
-  <h2 class="title">
-<a id="--list-all-organizations" class="anchor" href="#--list-all-organizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-06-17-organizations-endpoint/">List all organizations</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    June 17, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/keavy.png" alt="Avatar for keavy" data-proofer-ignore>
-      <a href="https://github.com/keavy" data-proofer-ignore>keavy</a>
-  </li>
-</ul>
-</div>
-
-  <p>We've added a <a href="/v3/orgs#list-all-organizations">new API method</a> to list all organizations:</p>
-
-<pre class="command-line">
-<span class="command">curl https://api.github.com/organizations</span>
-
-<span class="output">[</span>
-<span class="output">  {</span>
-<span class="output">    "login": "github",</span>
-<span class="output">    "id": 9919,</span>
-<span class="output">    "url": "https://api.github.com/orgs/github",</span>
-<span class="output">   "repos_url": "https://api.github.com/orgs/github/repos",</span>
-<span class="output">   "events_url": "https://api.github.com/orgs/github/events",</span>
-<span class="output">   "members_url": "https://api.github.com/orgs/github/members{/member}",</span>
-<span class="output">   "public_members_url": "https://api.github.com/orgs/github/public_members{/member}",</span>
-<span class="output">   "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=3",</span>
-<span class="output">    "description": "GitHub, the company."</span>
-<span class="output">  },</span>
-<span class="output">  ...</span>
-<span class="output">]</span>
-</pre>
-
-<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+-+Listing+Organizations">drop us a line</a>.</p>
 
 <p></p>
 </div>
@@ -637,6 +645,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
@@ -650,8 +660,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
 </ul>
 

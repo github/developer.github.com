@@ -44,7 +44,50 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-08-05-team-memberships-api/">
+      <div class="change" id="/changes/2014-08-15-deployments-api-changes/">
+  <h2 class="title">
+<a id="--new-features-for-the-deployments-api-preview" class="anchor" href="#--new-features-for-the-deployments-api-preview" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-08-15-deployments-api-changes/">New features for the Deployments API preview</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    August 15, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/atmos.png" alt="Avatar for atmos" data-proofer-ignore>
+      <a href="https://github.com/atmos" data-proofer-ignore>atmos</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've added two new features to the <a href="https://developer.github.com/changes/2014-01-09-preview-the-new-deployments-api/">Deployments API preview</a>: the ability to query deployments and a new <code>task</code> attribute for different types of deployment tasks.</p>
+
+<h2>
+<a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>API changes</h2>
+
+<p>You can now search for deployments via query parameters to the <a href="https://developer.github.com/v3/repos/deployments/#list-deployments">listing endpoint</a>. You can filter on <code>sha</code>, <code>ref</code>, <code>task</code>, and <code>environment</code>. This makes it easier to answer questions like "when was the last time someone deployed to staging?"</p>
+
+<pre class="command-line">
+<span class="command">curl -H "Authorization: token [yours]" \</span>
+       https://api.github.com/repos/octocat/my-repo/deployments?environment=staging
+</pre>
+
+<h2>
+<a id="new-attribute" class="anchor" href="#new-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="new-attribute" class="anchor" href="#new-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New attribute</h2>
+
+<p>We've also added a <code>task</code> attribute to the deployment resource. The <code>task</code> attribute allows you to specify tasks other than just pushing code. Popular deployment tools like <a href="http://capistranorb.com/">capistrano</a> and <a href="http://www.fabfile.org/">fabric</a> support named tasks to do things like running schema migrations. We hope this attribute will give integrators the flexibility they need to provide custom functionality.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-08-05-team-memberships-api/">
   <h2 class="title">
 <a id="--were-changing-the-way-you-add-new-members-to-your-organization" class="anchor" href="#--were-changing-the-way-you-add-new-members-to-your-organization" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-08-05-team-memberships-api/">We're changing the way you add new members to your organization</a>
@@ -369,7 +412,7 @@ count represents the number of contexts submitted for the given commit.</p>
 <p><strong>This is a breaking change for Deployment Status payloads</strong>. If you're trying out this new API during its preview period, you'll need to update your code to continue working with it.</p>
 
 <h2>
-<a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="api-changes-1" class="anchor" href="#api-changes-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="api-changes" class="anchor" href="#api-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>API Changes</h2>
 
 <p>For Deployments we're introducing the concept of an <code>environment</code>. An environment is basically a unique identifier for a deployment target. Lots of people tend toward the concept of environments for staging, QA, user acceptance testing, etc. We hope this enhancement will enable more use cases for our users that deploy to multiple environments.</p>
@@ -418,7 +461,6 @@ count represents the number of contexts submitted for the given commit.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-
 <h3>
 <a id="example-deployment-status-json" class="anchor" href="#example-deployment-status-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="example-deployment-status-json" class="anchor" href="#example-deployment-status-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Deployment Status JSON</h3>
@@ -458,46 +500,7 @@ count represents the number of contexts submitted for the given commit.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">get in touch</a>.</p>
-</div>
-
-<div class="change" id="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">
-  <h2 class="title">
-<a id="--improved-pagination-for-the-repository-commits-api" class="anchor" href="#--improved-pagination-for-the-repository-commits-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-05-09-improved-pagination-for-the-repository-commits-api/">Improved pagination for the Repository Commits API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    May 9, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/izuzak.png" alt="Avatar for izuzak" data-proofer-ignore>
-      <a href="https://github.com/izuzak" data-proofer-ignore>izuzak</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The <a href="/v3/repos/commits/">Repository Commits API</a> now supports an additional approach for paginating <a href="/v3/repos/commits/#list-commits-on-a-repository">commit lists</a>. As of today, this endpoint supports the "standard" <a href="/v3/#pagination"><code>page</code> and <code>per_page</code> parameters</a> for controlling pagination. This API now uses these parameters by default when constructing <a href="/v3/#pagination">page links</a>.</p>
-
-<h2>
-<a id="improved-results-and-increased-consistency" class="anchor" href="#improved-results-and-increased-consistency" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="improved-results-and-increased-consistency" class="anchor" href="#improved-results-and-increased-consistency" aria-hidden="true"><span class="octicon octicon-link"></span></a>Improved results and increased consistency</h2>
-
-<p>This new approach improves the reliability of this endpoint, which on rare occasions skipped some commits during pagination. This enhancement also increases the overall consistency of the API, as all endpoints now paginate resource lists the same way.</p>
-
-<h2>
-<a id="old-parameters-still-supported" class="anchor" href="#old-parameters-still-supported" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="old-parameters-still-supported" class="anchor" href="#old-parameters-still-supported" aria-hidden="true"><span class="octicon octicon-link"></span></a>Old parameters still supported</h2>
-
-<p>The old way of paginating, using <code>top</code>, <code>last_sha</code>, and <code>per_page</code> parameters, is still supported in API v3, but it will be removed in the <a href="https://developer.github.com/v3/versions/#v3-deprecations">next major version of the API</a>. API clients that are manually constructing URLs for pages should be modified to use the new parameters. Even better, API clients shouldn't construct URLs for pages manually, but should use <a href="/guides/traversing-with-pagination/">page links provided by the <code>Link</code> header</a> in API responses.</p>
-
-<p>Since both the new and the old pagination parameters are still supported in API v3, API clients shouldn't notice any changes today. Still, if you notice any problems with this endpoint, please <a href="https://github.com/contact?form%5Bsubject%5D=API:+Commits+pagination+improvements">let us know</a>.</p>
 
 <p></p>
 </div>
@@ -632,6 +635,8 @@ count represents the number of contexts submitted for the given commit.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
@@ -645,8 +650,6 @@ count represents the number of contexts submitted for the given commit.</p>
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
 </ul>
 

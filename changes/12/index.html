@@ -44,7 +44,56 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">
+      <div class="change" id="/changes/2013-02-05-changes-to-services/">
+  <h2 class="title">
+<a id="--upcoming-changes-to-github-services" class="anchor" href="#--upcoming-changes-to-github-services" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-02-05-changes-to-services/">Upcoming Changes to GitHub Services</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 5, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
+      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We are finishing up a new GitHub Services backend, dubbed "Hookshot", to
+increase the speed and reliability of our delivered payloads.  We are doing
+what we can to make this a seamless transition for everyone.  However, there
+are a few notable changes.</p>
+
+<ul>
+<li><p>There is a new <a href="http://developer.github.com/v3/meta/">Meta API endpoint</a>
+listing the current public IPs that hooks originate from.</p></li>
+<li><p>We're removing the AMQP service from GitHub. It hasn't worked in quite some
+time, and the code it uses doesn't work in our background workers.</p></li>
+<li><p>We're also instituting a new guideline to improve the reliability and
+maintainability of services in the future. As of today, all new services must
+accept an unmodified payload over HTTP. Any service that does not will be
+rejected. To see an example of an acceptable service, check out <a href="https://github.com/github/github-services/blob/master/lib/services/codeclimate.rb">Code Climate</a>.
+Notice their service simply accepts HTTP POST from GitHub unmodified. For an
+example of a service that won't be accepted after today, check out <a href="https://github.com/github/github-services/blob/master/lib/services/campfire.rb">Campfire</a>. It
+uses other Ruby gems and contains custom logic to transform the GitHub payload
+to Campfire messages.  Existing hooks will keep working (don't worry 37signals, we
+<img class="emoji" title=":heart:" alt=":heart:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2764.png" height="20" width="20" align="absmiddle"> Campfire).</p></li>
+</ul>
+
+<p>We're making these changes because we want to focus on the reliability of the
+core Services backend for everyone.  Maintaining custom logic and libraries for
+over 100 services is taking too much of this focus away.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">
   <h2 class="title">
 <a id="--user-agent-mandatory-from-march-4th-2013" class="anchor" href="#--user-agent-mandatory-from-march-4th-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-01-31-user-agent-will-soon-be-mandatory/">User Agent mandatory from March 4th 2013</a>
@@ -476,36 +525,6 @@ major change of the GitHub API.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2012-10-31-gist-comment-uris/">
-  <h2 class="title">
-<a id="--gist-comment-uris" class="anchor" href="#--gist-comment-uris" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2012-10-31-gist-comment-uris/">Gist comment URIs</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    October 31, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/pezra.png" alt="Avatar for pezra" data-proofer-ignore>
-      <a href="https://github.com/pezra" data-proofer-ignore>pezra</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The URIs of all gist comments are changing immediately. The new URI pattern for gist comments is <code>/gists/{gist-id}/comments/{id}</code>. (See <a href="/v3/gists/comments/">gist comments section of the docs</a> for more details.) This change is necessary because the auto-incremented ids of gist comments are easy to guess. This predictability allows anyone to view comments on private Gists with relative ease. Obviously, comments on private gists should be just as private as the gist itself.</p>
-
-<p>Adding the gist id to the URI of comments makes it impossible, in practical terms, to guess that URI because the id of private gists are very large random numbers. This is, unfortunately, a breaking change but one that cannot be avoided because of the security implications of the current URIs. We apologize for the inconvenience.</p>
-
-<p>We have also added a <code>comments_url</code> member to the Gist documents. The <code>comments_url</code> link provides access to the comments of a Gist in a way that will insulate clients from changes in the URI patterns used by the GitHub API. We are increasing our use of links in order to make changes such as this one less damaging to clients. We strongly encourage using <code>url</code> and <code>*_url</code> properties, where possible, rather than constructing URIs using the patterns published on this site. Doing so will result in clients that break less often.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -588,6 +607,8 @@ major change of the GitHub API.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
@@ -601,8 +622,6 @@ major change of the GitHub API.</p>
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
-
-  <li><a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period<br /><span class="date">February 24, 2016</span></a></li>
 
 </ul>
 

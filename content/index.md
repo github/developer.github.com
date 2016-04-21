@@ -7,7 +7,7 @@ hide_from_search: true
 <div class="wrapper feature">
   <h1>
     Leverage the power of<br />
-    GitHub in your app.
+    the GitHub community.
   </h1>
   <p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
   <a href="/v3/" class="button">Browse the documentation</a>

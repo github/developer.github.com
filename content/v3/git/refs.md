@@ -1,10 +1,9 @@
 ---
-title: Git Refs | GitHub API
+title: Git Refs
 ---
 
 # References
 
-* TOC
 {:toc}
 
 ## Get a Reference
@@ -36,7 +35,7 @@ references, you can call:
 
 For a full refs listing, you'll get something that looks like:
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json :refs %>
 
 
@@ -48,8 +47,8 @@ For a full refs listing, you'll get something that looks like:
 
 Name | Type | Description
 -----|------|--------------
-`ref`|`type`| The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.
-`sha`|`type`| The SHA1 value to set this reference to
+`ref`|`type`| **Required**. The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.
+`sha`|`type`| **Required**. The SHA1 value to set this reference to
 
 
 ### Input
@@ -59,8 +58,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201, \
-      :Location => "https://api.github.com/repos/octocat/Hello-World/git/refs/heads/featureA" %>
+<%= headers 201, :Location => get_resource(:ref)['url'] %>
 <%= json :ref %>
 
 ## Update a Reference
@@ -71,7 +69,7 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`sha`|`type`| The SHA1 value to set this reference to
+`sha`|`type`| **Required**. The SHA1 value to set this reference to
 `force`|`boolean`| Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work. Default: `false`
 
 

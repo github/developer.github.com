@@ -1,13 +1,14 @@
 ---
-title: Collaborators | GitHub API
+title: Collaborators
 ---
 
 # Collaborators
 
-* TOC
 {:toc}
 
-## List collaborators {#list}
+<a id="list" />
+
+## List collaborators
 
     GET /repos/:owner/:repo/collaborators
 
@@ -18,12 +19,12 @@ collaborators list.
 
 ### Response
 
-<%= headers 200 %>
-<%= json(:user) { |h| [h] } %>
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:collaborator) { |h| [h] } %>
 
-## Check if a user is a collaborator {#get}
+## Check if a user is a collaborator
 
-    GET /repos/:owner/:repo/collaborators/:user
+    GET /repos/:owner/:repo/collaborators/:username
 
 ### Response if user is a collaborator
 
@@ -33,17 +34,25 @@ collaborators list.
 
 <%= headers 404 %>
 
-## Add user as a collaborator {#add-collaborator}
+## Add user as a collaborator
 
-    PUT /repos/:owner/:repo/collaborators/:user
+    PUT /repos/:owner/:repo/collaborators/:username
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`permission`|`string` | The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:<br/> * `pull` - can pull, but not push to or administer this repository.<br/> * `push` - can pull and push, but not administer this repository.<br/> * `admin` -  can pull, push and administer this repository.<br/>Default: `pull`
+
+<%= fetch_content(:optional_put_content_length) %>
 
 ### Response
 
 <%= headers 204 %>
 
-## Remove user as a collaborator {#remove-collaborator}
+## Remove user as a collaborator
 
-    DELETE /repos/:owner/:repo/collaborators/:user
+    DELETE /repos/:owner/:repo/collaborators/:username
 
 ### Response
 

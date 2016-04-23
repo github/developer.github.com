@@ -1,18 +1,20 @@
 ---
-title: Basics of Authentication | GitHub API
+title: Basics of Authentication
 ---
 
 # Basics of Authentication
 
-* TOC
 {:toc}
 
 In this section, we're going to focus on the basics of authentication. Specifically,
 we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements
 the [web flow][webflow] of an application in several different ways.
 
-Note: you can download the complete source code for this project
-[from the platform-samples repo][platform samples].
+{{#tip}}
+
+You can download the complete source code for this project [from the platform-samples repo](https://github.com/github/platform-samples/tree/master/api/).
+
+{{/tip}}
 
 ## Registering your app
 
@@ -33,17 +35,18 @@ is set to `http://localhost:4567`. Let's fill in the callback URL as `http://loc
 
 Now, let's start filling out our simple server. Create a file called _server.rb_ and paste this into it:
 
-    #!ruby
-    require 'sinatra'
-    require 'rest-client'
-    require 'json'
+``` ruby
+require 'sinatra'
+require 'rest-client'
+require 'json'
 
-    CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
-    CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
+CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
+CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 
-    get '/' do
-      erb :index, :locals => {:client_id => CLIENT_ID}
-    end
+get '/' do
+  erb :index, :locals => {:client_id => CLIENT_ID}
+end
+```
 
 Your client ID and client secret keys come from [your application's configuration
 page][app settings]. You should **never, _ever_** store these values in
@@ -52,23 +55,24 @@ GitHub--or any other public place, for that matter. We recommend storing them as
 
 Next, in _views/index.erb_, paste this content:
 
-    #!html+erb
-    <html>
-      <head>
-      </head>
-      <body>
-        <p>
-          Well, hello there!
-        </p>
-        <p>
-          We're going to now talk to the GitHub API. Ready?
-          <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=<%= client_id %>">Click here</a> to begin!</a>
-        </p>
-        <p>
-          If that link doesn't work, remember to provide your own <a href="/v3/oauth/#web-application-flow">Client ID</a>!
-        </p>
-      </body>
-    </html>
+``` erb
+<html>
+  <head>
+  </head>
+  <body>
+    <p>
+      Well, hello there!
+    </p>
+    <p>
+      We're going to now talk to the GitHub API. Ready?
+      <a href="https://github.com/login/oauth/authorize?scope=user:email&client_id=<%= client_id %>">Click here</a> to begin!</a>
+    </p>
+    <p>
+      If that link doesn't work, remember to provide your own <a href="/v3/oauth/#web-application-flow">Client ID</a>!
+    </p>
+  </body>
+</html>
+```
 
 (If you're unfamiliar with how Sinatra works, we recommend [reading the Sinatra guide][Sinatra guide].)
 
@@ -78,7 +82,7 @@ requesting `user:email` scope for reading private email addresses.
 
 Navigate your browser to `http://localhost:4567`. After clicking on the link, you
 should be taken to GitHub, and presented with a dialog that looks something like this:
-![GitHub's OAuth Prompt](/images/oauth_prompt.png)
+![GitHub's OAuth Prompt](/assets/images/oauth_prompt.png)
 
 If you trust yourself, click **Authorize App**. Wuh-oh! Sinatra spits out a
 `404` error. What gives?!
@@ -91,21 +95,22 @@ the app. Let's fix that now!
 
 In _server.rb_, add a route to specify what the callback should do:
 
-    #!ruby
-    get '/callback' do
-      # get temporary GitHub code...
-      session_code = request.env['rack.request.query_hash']['code']
+``` ruby
+get '/callback' do
+  # get temporary GitHub code...
+  session_code = request.env['rack.request.query_hash']['code']
 
-      # ... and POST it back to GitHub
-      result = RestClient.post('https://github.com/login/oauth/access_token',
-                              {:client_id => CLIENT_ID,
-                               :client_secret => CLIENT_SECRET,
-                               :code => session_code},
-                               :accept => :json)
+  # ... and POST it back to GitHub
+  result = RestClient.post('https://github.com/login/oauth/access_token',
+                          {:client_id => CLIENT_ID,
+                           :client_secret => CLIENT_SECRET,
+                           :code => session_code},
+                           :accept => :json)
 
-      # extract the token and granted scopes
-      access_token = JSON.parse(result)['access_token']
-    end
+  # extract the token and granted scopes
+  access_token = JSON.parse(result)['access_token']
+end
+```
 
 After a successful app authentication, GitHub provides a temporary `code` value.
 You'll need to `POST` this code back to GitHub in exchange for an `access_token`.
@@ -123,10 +128,17 @@ were granted for the token by the user.
 The scopes that were granted are returned as a part of the response from
 exchanging a token.
 
-    #!ruby
-    # check if we were granted user:email scope
-    scopes = JSON.parse(result)['scope'].split(',')
-    has_user_email_scope = scopes.include? 'user:email'
+``` ruby
+get '/callback' do
+  # ...
+  # Get the access_token using the code sample above
+  # ...
+
+  # check if we were granted user:email scope
+  scopes = JSON.parse(result)['scope'].split(',')
+  has_user_email_scope = scopes.include? 'user:email'
+end
+```
 
 In our application, we're using `scopes.include?` to check if we were granted
 the `user:email` scope needed for fetching the authenticated user's private
@@ -157,36 +169,39 @@ changes in available application functionality.
 At last, with this access token, you'll be able to make authenticated requests as
 the logged in user:
 
-    #!ruby
-    # fetch user information
-    auth_result = JSON.parse(RestClient.get('https://api.github.com/user',
-                                            {:params => {:access_token => access_token}}))
+``` ruby
+# fetch user information
+auth_result = JSON.parse(RestClient.get('https://api.github.com/user',
+                                        {:params => {:access_token => access_token}}))
 
-    # if the user authorized it, fetch private emails
-    if has_user_email_scope
-      auth_result['private_emails'] =
-        JSON.parse(RestClient.get('https://api.github.com/user/emails',
-                                  {:params => {:access_token => access_token}}))
+# if the user authorized it, fetch private emails
+if has_user_email_scope
+  auth_result['private_emails'] =
+    JSON.parse(RestClient.get('https://api.github.com/user/emails',
+                              {:params => {:access_token => access_token}}))
+end
 
-    erb :basic, :locals => auth_result
+erb :basic, :locals => auth_result
+```
 
 We can do whatever we want with our results. In this case, we'll just dump them straight into _basic.erb_:
 
-    #!html+erb
-    <p>Hello, <%= login %>!</p>
-    <p>
-      <% if !email.nil? && !email.empty? %> It looks like your public email address is <%= email %>.
-      <% else %> It looks like you don't have a public email. That's cool.
-      <% end %>
-    </p>
-    <p>
-      <% if defined? private_emails %>
-      With your permission, we were also able to dig up your private email addresses:
-      <%= private_emails.join(', ') %>
-      <% else %>
-      Also, you're a bit secretive about your private email addresses.
-      <% end %>
-    </p>
+``` erb
+<p>Hello, <%= login %>!</p>
+<p>
+  <% if !email.nil? && !email.empty? %> It looks like your public email address is <%= email %>.
+  <% else %> It looks like you don't have a public email. That's cool.
+  <% end %>
+</p>
+<p>
+  <% if defined? private_emails %>
+  With your permission, we were also able to dig up your private email addresses:
+  <%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %>
+  <% else %>
+  Also, you're a bit secretive about your private email addresses.
+  <% end %>
+</p>
+```
 
 ## Implementing "persistent" authentication
 
@@ -212,83 +227,83 @@ the `user:email` scope.
 
 Create a file called _advanced_server.rb_, and paste these lines into it:
 
-    #!ruby
-    require 'sinatra'
-    require 'rest_client'
-    require 'json'
+``` ruby
+require 'sinatra'
+require 'rest_client'
+require 'json'
 
-    # !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
-    # Instead, set and test environment variables, like below
-    # if ENV['GITHUB_CLIENT_ID'] && ENV['GITHUB_CLIENT_SECRET']
-    #  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
-    #  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
-    # end
+# !!! DO NOT EVER USE HARD-CODED VALUES IN A REAL APP !!!
+# Instead, set and test environment variables, like below
+# if ENV['GITHUB_CLIENT_ID'] && ENV['GITHUB_CLIENT_SECRET']
+#  CLIENT_ID        = ENV['GITHUB_CLIENT_ID']
+#  CLIENT_SECRET    = ENV['GITHUB_CLIENT_SECRET']
+# end
 
-    CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
-    CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
+CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
+CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
 
-    use Rack::Session::Cookie, :secret => rand.to_s()
+use Rack::Session::Pool, :cookie_only => false
 
-    def authenticated?
-      session[:access_token]
+def authenticated?
+  session[:access_token]
+end
+
+def authenticate!
+  erb :index, :locals => {:client_id => CLIENT_ID}
+end
+
+get '/' do
+  if !authenticated?
+    authenticate!
+  else
+    access_token = session[:access_token]
+    scopes = []
+
+    begin
+      auth_result = RestClient.get('https://api.github.com/user',
+                                   {:params => {:access_token => access_token},
+                                    :accept => :json})
+    rescue => e
+      # request didn't succeed because the token was revoked so we
+      # invalidate the token stored in the session and render the
+      # index page so that the user can start the OAuth flow again
+
+      session[:access_token] = nil
+      return authenticate!
     end
 
-    def authenticate!
-      erb :index, :locals => {:client_id => CLIENT_ID}
+    # the request succeeded, so we check the list of current scopes
+    if auth_result.headers.include? :x_oauth_scopes
+      scopes = auth_result.headers[:x_oauth_scopes].split(', ')
     end
 
-    get '/' do
-      if !authenticated?
-        authenticate!
-      else
-        access_token = session[:access_token]
-        scopes = []
+    auth_result = JSON.parse(auth_result)
 
-        begin
-          auth_result = RestClient.get('https://api.github.com/user',
-                                       {:params => {:access_token => access_token},
-                                        :accept => :json})
-        rescue => e
-          # request didn't succeed because the token was revoked so we
-          # invalidate the token stored in the session and render the
-          # index page so that the user can start the OAuth flow again
-
-          session[:access_token] = nil
-          return authenticate!
-        end
-
-        # the request succeeded, so we check the list of current scopes
-        if auth_result.headers.include? :x_oauth_scopes
-          scopes = auth_result.headers[:x_oauth_scopes].split(', ')
-        end
-
-        auth_result = JSON.parse(auth_result)
-
-        if scopes.include? 'user:email'
-          auth_result['private_emails'] =
-            JSON.parse(RestClient.get('https://api.github.com/user/emails',
-                           {:params => {:access_token => access_token},
-                            :accept => :json}))
-        end
-
-        erb :advanced, :locals => auth_result
-      end
+    if scopes.include? 'user:email'
+      auth_result['private_emails'] =
+        JSON.parse(RestClient.get('https://api.github.com/user/emails',
+                       {:params => {:access_token => access_token},
+                        :accept => :json}))
     end
 
-    get '/callback' do
-      session_code = request.env['rack.request.query_hash']['code']
+    erb :advanced, :locals => auth_result
+  end
+end
 
-      result = RestClient.post('https://github.com/login/oauth/access_token',
-                              {:client_id => CLIENT_ID,
-                               :client_secret => CLIENT_SECRET,
-                               :code => session_code},
-                               :accept => :json)
+get '/callback' do
+  session_code = request.env['rack.request.query_hash']['code']
 
-      session[:access_token] = JSON.parse(result)['access_token']
+  result = RestClient.post('https://github.com/login/oauth/access_token',
+                          {:client_id => CLIENT_ID,
+                           :client_secret => CLIENT_SECRET,
+                           :code => session_code},
+                           :accept => :json)
 
-      redirect '/'
-    end
+  session[:access_token] = JSON.parse(result)['access_token']
 
+  redirect '/'
+end
+```
 
 Much of the code should look familiar. For example, we're still using `RestClient.get`
 to call out to the GitHub API, and we're still passing our results to be rendered
@@ -300,27 +315,28 @@ OAuth flow and updates the session with the granted token and scopes.
 
 Next, create a file in _views_ called _advanced.erb_, and paste this markup into it:
 
-    #!html+erb
-    <html>
-      <head>
-      </head>
-      <body>
-        <p>Well, well, well, <%= login %>!</p>
-        <p>
-          <% if !email.empty? %> It looks like your public email address is <%= email %>.
-          <% else %> It looks like you don't have a public email. That's cool.
-          <% end %>
-        </p>
-        <p>
-          <% if defined? private_emails %>
-          With your permission, we were also able to dig up your private email addresses:
-          <%= private_emails.join(', ') %>
-          <% else %>
-          Also, you're a bit secretive about your private email addresses.
-          <% end %>
-        </p>
-      </body>
-    </html>
+``` erb
+<html>
+  <head>
+  </head>
+  <body>
+    <p>Well, well, well, <%= login %>!</p>
+    <p>
+      <% if !email.empty? %> It looks like your public email address is <%= email %>.
+      <% else %> It looks like you don't have a public email. That's cool.
+      <% end %>
+    </p>
+    <p>
+      <% if defined? private_emails %>
+      With your permission, we were also able to dig up your private email addresses:
+      <%= private_emails.map{ |private_email_address| private_email_address["email"] }.join(', ') %>
+      <% else %>
+      Also, you're a bit secretive about your private email addresses.
+      <% end %>
+    </p>
+  </body>
+</html>
+```
 
 From the command line, call `ruby advanced_server.rb`, which starts up your
 server on port `4567` -- the same port we used when we had a simple Sinatra app.
@@ -341,7 +357,7 @@ available as a separate project.
 [webflow]: /v3/oauth/#web-application-flow
 [Sinatra]: http://www.sinatrarb.com/
 [about env vars]: http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables
-[Sinatra guide]: http://sinatra-book.gittr.com/#hello_world_application
+[Sinatra guide]: https://github.com/sinatra/sinatra-book/blob/master/book/Introduction.markdown#hello-world-application
 [REST Client]: https://github.com/archiloque/rest-client
 [libraries]: /libraries/
 [sinatra auth github test]: https://github.com/atmos/sinatra-auth-github-test
@@ -350,4 +366,4 @@ available as a separate project.
 [check token valid]: /v3/oauth_authorizations/#check-an-authorization
 [platform samples]: https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication
 [new oauth app]: https://github.com/settings/applications/new
-[app settings]: https://github.com/settings/applications
+[app settings]: https://github.com/settings/developers

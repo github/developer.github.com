@@ -1,7 +1,7 @@
-<%= render 'head' %>
+<%= renderp '/head.*' %>
 
-<body class="api">
-  <%= render 'header' %>
+<body class="api <%= ENV['DEV_MODE'] ? 'dev-mode' : '' %>">
+  <%= renderp '/header.*' %>
 
   <div class="sub-nav">
     <h2><a href="/v3/">API</a></h2>
@@ -22,9 +22,11 @@
     <div id="js-sidebar" class="sidebar-shell">
       <div class="sidebar-module">
         <ul>
-          <li><h3><a href="/webhooks/creating">Creating Webhooks</a></h3></li>
-          <li><h3><a href="/webhooks/configuring/">Configuring Your Server</a></h3></li>
-          <li><h3><a href="/webhooks/testing/">Testing Webhooks</a></h3></li>
+          <li><h3><a href="/webhooks">Overview</a></h3></li>
+          <li><h3><a href="/webhooks/creating">Creating webhooks</a></h3></li>
+          <li><h3><a href="/webhooks/configuring/">Configuring your server</a></h3></li>
+          <li><h3><a href="/webhooks/testing/">Testing webhooks</a></h3></li>
+          <li><h3><a href="/webhooks/securing">Securing your webhooks</a></h3></li>
         </ul>
       </div>
 
@@ -36,6 +38,6 @@
   </div><!-- #wrapper -->
   </div><!-- #wrapper -->
 
-  <%= render 'footer' %>
+  <%= renderp '/footer.*' %>
 </body>
 </html>

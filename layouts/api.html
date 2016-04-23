@@ -1,7 +1,7 @@
-<%= render 'head' %>
+<%= renderp '/head.*' %>
 
-<body class="api">
-  <%= render 'header' %>
+<body class="api <%= ENV['DEV_MODE'] ? 'dev-mode' : '' %>">
+  <%= renderp '/header.*' %>
 
   <div class="sub-nav">
     <h2><a href="/v3/">API</a></h2>
@@ -19,9 +19,9 @@
       <%= yield %>
     </div>
 
-    <%= render 'sidebar' %>
+    <%= renderp '/sidebar.*' %>
   </div><!-- #wrapper -->
 
-  <%= render 'footer' %>
+  <%= renderp '/footer.*' %>
 </body>
 </html>

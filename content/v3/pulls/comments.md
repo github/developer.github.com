@@ -1,10 +1,9 @@
 ---
-title: Review Comments | GitHub API
+title: Review Comments
 ---
 
 # Review Comments
 
-* TOC
 {:toc}
 
 Pull Request Review Comments are comments on a portion of the unified
@@ -22,7 +21,7 @@ types](#custom-media-types). You can read more about the use of media types in t
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull_comment) { |h| [h] } %>
 
 ## List comments in a repository
@@ -42,12 +41,12 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pull_comment) { |h| [h] } %>
 
 ## Get a single comment
 
-    GET /repos/:owner/:repo/pulls/comments/:number
+    GET /repos/:owner/:repo/pulls/comments/:id
 
 ### Response
 
@@ -65,7 +64,7 @@ Name | Type | Description
 `body`|`string` | **Required**. The text of the comment
 `commit_id`|`string` | **Required**. The SHA of the commit to comment on.
 `path`|`string` | **Required**. The relative path of the file to comment on.
-`position`|`number` | **Required**. The line index in the diff to comment on.
+`position`|`integer` | **Required**. The line index in the diff to comment on.
 
 
 #### Example
@@ -85,7 +84,7 @@ an existing Pull Request Comment like this:
 Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The text of the comment
-`in_reply_to`|`number` | **Required**. The comment id to reply to.
+`in_reply_to`|`integer` | **Required**. The comment id to reply to.
 
 
 #### Example
@@ -97,14 +96,12 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/octocat/Hello-World/pulls/comments/1" %>
+<%= headers 201, :Location => get_resource(:pull_comment)['url'] %>
 <%= json :pull_comment %>
 
 ## Edit a comment
 
-    PATCH /repos/:owner/:repo/pulls/comments/:number
+    PATCH /repos/:owner/:repo/pulls/comments/:id
 
 ### Input
 
@@ -126,7 +123,7 @@ Name | Type | Description
 
 ## Delete a comment
 
-    DELETE /repos/:owner/:repo/pulls/comments/:number
+    DELETE /repos/:owner/:repo/pulls/comments/:id
 
 ### Response
 

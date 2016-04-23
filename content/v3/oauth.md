@@ -1,10 +1,9 @@
 ---
-title: OAuth | GitHub API
+title: OAuth
 ---
 
 # OAuth
 
-* TOC
 {:toc}
 
 OAuth2 is a protocol that lets external apps request authorization to
@@ -17,6 +16,10 @@ All developers need to [register their
 application](https://github.com/settings/applications/new) before getting
 started. A registered OAuth application is assigned a unique Client ID
 and Client Secret. The Client Secret should not be shared.
+**You may create a [personal access token](https://github.com/settings/tokens/new)
+for your own use or implement the web flow below to allow other users to authorize your application.**
+
+GitHub's OAuth implementation supports the standard [authorization code grant type](https://tools.ietf.org/html/rfc6749#section-4.1). Developers should implement the web application flow described below to obtain an authorization code and then exchange it for a token. (The [implicit grant type](https://tools.ietf.org/html/rfc6749#section-4.2) is not supported.)
 
 ## Web Application Flow
 
@@ -52,8 +55,9 @@ Name | Type | Description
 -----|------|---------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
-`code`|`string` | **Required**. The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
+`code`|`string` | **Required**. The code you received as a response to [Step 1](#1-redirect-users-to-request-github-access).
 `redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
+`state`|`string` | The unguessable random string you optionally provided in [Step 1](#1-redirect-users-to-request-github-access).
 
 ### Response
 
@@ -117,7 +121,9 @@ cleaner approach is to include it in the Authorization header
 
 For example, in curl you can set the Authorization header like this:
 
-    curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+``` command-line
+curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+```
 
 ## Non-Web Application Flow
 
@@ -158,10 +164,12 @@ authorize form.
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.
 
-    $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
-    HTTP/1.1 200 OK
-    X-OAuth-Scopes: repo, user
-    X-Accepted-OAuth-Scopes: user
+``` command-line
+$ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
+HTTP/1.1 200 OK
+X-OAuth-Scopes: repo, user
+X-Accepted-OAuth-Scopes: user
+```
 
 `X-OAuth-Scopes` lists the scopes your token has authorized.
 `X-Accepted-OAuth-Scopes` lists the scopes that the action checks for.
@@ -173,8 +181,8 @@ Name | Description
 `user` | Grants read/write access to profile info only.  Note that this scope includes `user:email` and `user:follow`.
 `user:email`| Grants read access to a user's email addresses.
 `user:follow`| Grants access to follow or unfollow other users.
-`public_repo`| Grants read/write access to code, commit statuses, and deployment statuses for public repositories and organizations.
-`repo`| Grants read/write access to code, commit statuses, and deployment statuses for public and private repositories and organizations.
+`public_repo`| Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public repositories and organizations. Also required for starring public repositories.
+`repo`| Grants read/write access to code, commit statuses, collaborators, and deployment statuses for public and private repositories and organizations.
 `repo_deployment`| Grants access to [deployment statuses][deployments] for public and private repositories. This scope is only necessary to grant other users or services access to deployment statuses, *without* granting access to the code.
 `repo:status`| Grants read/write access to public and private repository commit statuses. This scope is only necessary to grant other users or services access to private repository commit statuses *without* granting access to the code.
 `delete_repo`| Grants access to delete adminable repositories.
@@ -183,6 +191,7 @@ Name | Description
 `read:repo_hook`| Grants read and ping access to hooks in public or private repositories.
 `write:repo_hook`| Grants read, write, and ping access to hooks in public or private repositories.
 `admin:repo_hook`| Grants read, write, ping, and delete access to hooks in public or private repositories.
+`admin:org_hook`| Grants read, write, ping, and delete access to organization hooks. **Note:** OAuth tokens will only be able to perform these actions on organization hooks which were created by the OAuth application. Personal access tokens will only be able to perform these actions on organization hooks created by a user.
 `read:org`| Read-only access to organization, teams, and membership.
 `write:org`| Publicize and unpublicize organization membership.
 `admin:org`| Fully manage organization, teams, and memberships.
@@ -207,12 +216,12 @@ these are some errors you might see:
 
 If the OAuth application you set up has been suspended (due to reported
 abuse, spam, or a mis-use of the API), GitHub will redirect to the
-registered callback URL with the following parameters summerizing the
+registered callback URL with the following parameters summarizing the
 error:
 
     http://your-application.com/callback?error=application_suspended
       &error_description=Your+application+has+been+suspended.+Contact+support@github.com.
-      &error_uri=http://developer.github.com/v3/oauth/%23application-suspended
+      &error_uri=https://developer.github.com/v3/oauth/%23application-suspended
       &state=xyz
 
 Please contact [support](https://github.com/contact) to solve issues
@@ -222,11 +231,11 @@ with suspended applications.
 
 If you provide a redirect_uri that doesn't match what you've registered
 with your application, GitHub will redirect to the registered callback
-URL with the following parameters summerizing the error:
+URL with the following parameters summarizing the error:
 
     http://your-application.com/callback?error=redirect_uri_mismatch
       &error_description=The+redirect_uri+MUST+match+the+registered+callback+URL+for+this+application.
-      &error_uri=http://developer.github.com/v3/oauth/%23redirect-uri-mismatch
+      &error_uri=https://developer.github.com/v3/oauth/%23redirect-uri-mismatch
       &state=xyz
 
 To correct this error, either provide a redirect_uri that matches what
@@ -235,13 +244,13 @@ registered with your application.
 
 ### Access denied
 
-If the user rejects access to your application, GItHub will redirect to
-the registered callback URL with the following parameters summerizing
+If the user rejects access to your application, GitHub will redirect to
+the registered callback URL with the following parameters summarizing
 the error:
 
     http://your-application.com/callback?error=access_denied
       &error_description=The+user+has+denied+your+application+access.
-      &error_uri=http://developer.github.com/v3/oauth/%23access-denied
+      &error_uri=https://developer.github.com/v3/oauth/%23access-denied
       &state=xyz
 
 There's nothing you can do here as users are free to choose not to use
@@ -263,7 +272,7 @@ receive this error response.
 
 <%= json :error             => :incorrect_client_credentials,
          :error_description => "The client_id and/or client_secret passed are incorrect.",
-         :error_uri         => "http://developer.github.com/v3/oauth/#incorrect-client-credentials"
+         :error_uri         => "https://developer.github.com/v3/oauth/#incorrect-client-credentials"
 %>
 
 To solve this error, go back and make sure you have the correct
@@ -278,7 +287,7 @@ with your application, you will receive this error message:
 
 <%= json :error             => :redirect_uri_mismatch,
          :error_description => "The redirect_uri MUST match the registered callback URL for this application.",
-         :error_uri         => "http://developer.github.com/v3/oauth/#redirect-uri-mismatch(2)"
+         :error_uri         => "https://developer.github.com/v3/oauth/#redirect-uri-mismatch(2)"
 %>
 
 To correct this error, either provide a redirect_uri that matches what
@@ -295,13 +304,33 @@ receive this error.
 
 <%= json :error             => :bad_verification_code,
          :error_description => "The code passed is incorrect or expired.",
-         :error_uri         => "http://developer.github.com/v3/oauth/#bad-verification-code"
+         :error_uri         => "https://developer.github.com/v3/oauth/#bad-verification-code"
 %>
 
-To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
+To solve this error, start the [OAuth process over from the beginning](#1-redirect-users-to-request-github-access)
 and get a new code.
+
+## Directing users to review their access for an application
+
+Users can review and revoke their application authorizations from the [settings
+screen within GitHub][authorized-apps]. A user's organizations [control whether
+an application can access organization data][org-app-policies]. Integrators can
+deep link to the authorization information for their particular app to let their
+end users review these details.
+
+To build this link, you'll need your OAuth application's `client_id` you
+received from GitHub when you [registered the application][owned-apps].
+
+    https://github.com/settings/connections/applications/:client_id
+
+For tips on discovering the resources that your application can access for a
+user, be sure to check out our [guide][resource-discovery-guide].
 
 [oauth changes blog]: /changes/2013-10-04-oauth-changes-coming/
 [basics auth guide]: /guides/basics-of-authentication/
 [deployments]: /v3/repos/deployments
 [public keys]: /v3/users/keys/
+[authorized-apps]: https://github.com/settings/applications#authorized
+[owned-apps]: https://github.com/settings/developers
+[org-app-policies]: /changes/2015-01-19-an-integrators-guide-to-organization-application-policies/
+[resource-discovery-guide]: /guides/discovering-resources-for-a-user/

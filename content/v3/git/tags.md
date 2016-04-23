@@ -1,10 +1,9 @@
 ---
-title: Git Tags | GitHub API
+title: Git Tags
 ---
 
 # Tags
 
-* TOC
 {:toc}
 
 This tags API only deals with tag objects - so only annotated tags, not
@@ -39,9 +38,9 @@ Name | Type | Description
 `message`|`string`| The tag message
 `object`|`string`| The SHA of the git object this is tagging
 `type`|`string`| The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`.
-`tagger`|`hash`| A hash with information about the individual creating the tag.
+`tagger`|`object`| An object with information about the individual creating the tag.
 
-The `tagger` hash contains the following keys:
+The `tagger` object contains the following keys:
 
 Name | Type | Description
 -----|------|--------------
@@ -62,6 +61,5 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 201,
-      :Location => "https://api.github.com/repos/octocat/Hello-World/git/tags/940bd336248efae0f9ee5bc7b2d5c985887b16ac" %>
+<%= headers 201, :Location => get_resource(:gittag)['url'] %>
 <%= json :gittag %>

@@ -27,7 +27,7 @@ The new values will be present in the `issue` object itself, as detailed above. 
 
 ## List of comprehensive changes
 
-New actions were added to four events, all of which are detailed below.
+New actions were added to five events, all of which are detailed below.
 
 ### [RepositoryEvent][repository-event]
 

@@ -306,6 +306,8 @@ Name | Type | Description
 <%= headers 200 %>
 <%= json(:branch) %>
 
+{% if page.version == 'dotcom' or page.version >= 2.5 %}
+
 ## Enabling and disabling branch protection
 
 {{#tip}}
@@ -361,6 +363,8 @@ Name  | Description
     }
   }
 %>
+
+{% endif %}
 
 ## Delete a Repository
 

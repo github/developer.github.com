@@ -284,17 +284,11 @@ X-RateLimit-Remaining: 4999
 </span></code></pre>
 <h2>
 <a id="get-the-sha-1-of-a-commit-reference" class="anchor" href="#get-the-sha-1-of-a-commit-reference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get the SHA-1 of a commit reference</h2>
-<div class="alert tip">
-<p><a name="preview-period"></a></p>
-<p>The API to get the SHA-1 of a commit reference is currently available for developers to preview.
-  During the preview period, the API may change without advance notice.
-  Please see the <a href="/changes/2016-02-24-commit-reference-sha-api">blog post</a> for full details.</p>
-<p>To access the API you must provide a custom <a href="/enterprise/2.0/v3/media">media type</a> in the <code>Accept</code> header:</p>
-<pre><code>  application/vnd.github.chitauri-preview+sha
-</code></pre>
-</div>
 <p>Users with read access can get the SHA-1 of a commit reference:</p>
 <pre><code>GET /repos/:owner/:repo/commits/:ref
+</code></pre>
+<p>To access the API you must provide a custom <a href="/enterprise/2.0/v3/media">media type</a> in the <code>Accept</code> header:</p>
+<pre><code>application/vnd.github.VERSION.sha
 </code></pre>
 <p>To check if a remote reference's SHA-1 is the same as your local reference's SHA-1, make a <code>GET</code> request and provide the current SHA-1 for the local reference as the ETag.</p>
 <h3>

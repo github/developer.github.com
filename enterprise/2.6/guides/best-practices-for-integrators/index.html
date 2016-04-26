@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title>Best practices for integrators | GitHub Developer Guide</title>
+<link href="/enterprise/2.6/assets/stylesheets/application.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script src="/enterprise/2.6/assets/javascripts/application.js" type="text/javascript"></script>
+</head>
+<body class="api ">
+<div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.6/">GitHub:Developer</a>
+      <ul class="nav">
+<li>Enterprise 2.6</li>
+        <li><a href="/enterprise/2.6/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.6/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results"></ul>
+</li>
+      </ul>
+</div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+  <div class="sub-nav">
+    <h2><a href="/enterprise/2.6/v3/">API</a></h2>
+    <ul>
+<li><a href="/enterprise/2.6/v3/">Reference</a></li>
+      <li><a href="/enterprise/2.6/webhooks/">Webhooks</a></li>
+      <li><a href="/enterprise/2.6/guides/" class="active">Guides</a></li>
+      <li><a href="/enterprise/2.6/libraries/">Libraries</a></li>
+    </ul>
+</div>
+  <div id="wrapper">
+    <div class="content">
+      <h1>
+<a id="best-practices-for-integrators" class="anchor" href="#best-practices-for-integrators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Best practices for integrators</h1>
+<p>Interested in integrating with the GitHub platform? <a href="https://github.com/integrations">You're in good company</a>. This guide will help you build an app that provides the best experience for your users <em>and</em> ensure that it's reliably interacting with the API.</p>
+<ul id="markdown-toc">
+<li><a href="#secure-payloads-delivered-from-github" id="markdown-toc-secure-payloads-delivered-from-github">Secure payloads delivered from GitHub</a></li>
+<li><a href="#favor-asynchronous-work-over-synchronous" id="markdown-toc-favor-asynchronous-work-over-synchronous">Favor asynchronous work over synchronous</a></li>
+<li><a href="#use-appropriate-http-status-codes-when-responding-to-github" id="markdown-toc-use-appropriate-http-status-codes-when-responding-to-github">Use appropriate HTTP status codes when responding to GitHub</a></li>
+<li><a href="#provide-as-much-information-as-possible-to-the-user" id="markdown-toc-provide-as-much-information-as-possible-to-the-user">Provide as much information as possible to the user</a></li>
+<li><a href="#follow-any-redirects-that-the-api-sends-you" id="markdown-toc-follow-any-redirects-that-the-api-sends-you">Follow any redirects that the API sends you</a></li>
+<li><a href="#dont-manually-parse-urls" id="markdown-toc-dont-manually-parse-urls">Don't manually parse URLs</a></li>
+<li><a href="#check-the-event-type-and-action-before-processing-the-event" id="markdown-toc-check-the-event-type-and-action-before-processing-the-event">Check the event type and action before processing the event</a></li>
+<li><a href="#dealing-with-api-errors" id="markdown-toc-dealing-with-api-errors">Dealing with API errors</a></li>
+</ul>
+<h2>
+<a id="secure-payloads-delivered-from-github" class="anchor" href="#secure-payloads-delivered-from-github" aria-hidden="true"><span class="octicon octicon-link"></span></a>Secure payloads delivered from GitHub</h2>
+<p>It's very important that you secure <a href="/enterprise/2.6/v3/activity/events/types/">the payloads sent from GitHub</a>. Although no personal information (like passwords) is ever transmitted in a payload, leaking <em>any</em> information is not good. Some information that might be sensitive include committer email address or the names of private repositories.</p>
+<p>There are three steps you can take to secure receipt of payloads delivered by GitHub:</p>
+<ol>
+<li>Ensure that your receiving server is on an HTTPS connection. By default, GitHub will verify SSL certificates when delivering payloads.</li>
+<li>You can whitelist <a href="https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist">the IP address we use when delivering hooks</a>  to your server. To ensure that you're always checking the right IP address, you can <a href="/enterprise/2.6/v3/meta/#meta">use the <code>/meta</code> endpoint</a> to find the address we use.</li>
+<li>Provide <a href="/enterprise/2.6/webhooks/securing/">a secret token</a> to ensure payloads are definitely coming from GitHub. By enforcing a secret token, you're ensuring that any data received by your server is absolutely coming from GitHub. Ideally, you should provide a different secret token <em>per user</em> of your service. That way, if one token is compromised, no other user would be affected.</li>
+</ol>
+<h2>
+<a id="favor-asynchronous-work-over-synchronous" class="anchor" href="#favor-asynchronous-work-over-synchronous" aria-hidden="true"><span class="octicon octicon-link"></span></a>Favor asynchronous work over synchronous</h2>
+<p>GitHub expects that integrations respond within thirty seconds of receiving the webhook payload. If your service takes longer than that to complete, then GitHub terminates the connection and the payload is lost.</p>
+<p>Since it's impossible to predict how fast your service will complete, you should do all of "the real work" in a background job. <a href="https://github.com/resque/resque/">Resque</a> (for Ruby), <a href="http://python-rq.org/">RQ</a> (for Python), or <a href="http://www.rabbitmq.com/">RabbitMQ</a> (for Java) are examples of libraries that can handle queuing and processing of background jobs.</p>
+<p>Note that even with a background job running, GitHub still expects your server to respond within thirty seconds. Your server simply needs to acknowledge that it received the payload by sending some sort of response. It's critical that your service to performs any validations on a payload as soon as possible, so that you can accurately report whether your server will continue with the request or not.</p>
+<h2>
+<a id="use-appropriate-http-status-codes-when-responding-to-github" class="anchor" href="#use-appropriate-http-status-codes-when-responding-to-github" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use appropriate HTTP status codes when responding to GitHub</h2>
+<p>Every webhook has its own "Recent Deliveries" section, which lists whether a deployment was successful or not.</p>
+<p><img src="https://github-images.s3.amazonaws.com/enterprise/developer-site/2.6/assets/images/webhooks_recent_deliveries.png" alt="Recent Deliveries view"></p>
+<p>You should make use of proper HTTP status codes in order to inform users. You can use codes like <code>201</code> or <code>202</code> to acknowledge receipt of payload that won't be processed (for example, a payload delivered by a branch that's not the default). Reserve the <code>500</code> error code for catastrophic failures.</p>
+<h2>
+<a id="provide-as-much-information-as-possible-to-the-user" class="anchor" href="#provide-as-much-information-as-possible-to-the-user" aria-hidden="true"><span class="octicon octicon-link"></span></a>Provide as much information as possible to the user</h2>
+<p>Users can dig into the server responses you send back to GitHub. Ensure that your messages are clear and informative.</p>
+<p><img src="https://github-images.s3.amazonaws.com/enterprise/developer-site/2.6/assets/images/payload_response_tab.png" alt="Viewing a payload response"></p>
+<h2>
+<a id="follow-any-redirects-that-the-api-sends-you" class="anchor" href="#follow-any-redirects-that-the-api-sends-you" aria-hidden="true"><span class="octicon octicon-link"></span></a>Follow any redirects that the API sends you</h2>
+<p>GitHub is explicit in telling you when a resource has moved by providing a redirect status code. You should follow these redirections. Every redirect response sets the <code>Location</code> header with the new URI to go to. If you receive a redirect, it's best to update your code to follow the new URI, in case you're requesting a deprecated path that we might remove.</p>
+<p>We've provided <a href="/enterprise/2.6/v3/#http-redirects">a list of HTTP status codes</a> to watch out for when designing your app to follow redirects.</p>
+<h2>
+<a id="dont-manually-parse-urls" class="anchor" href="#dont-manually-parse-urls" aria-hidden="true"><span class="octicon octicon-link"></span></a>Don't manually parse URLs</h2>
+<p>Often, API responses contain data in the form of URLs. For example, when requesting a repository, we'll send a key called <code>clone_url</code> with a URL you can use to clone the repository.</p>
+<p>For the stability of your app, you shouldn't try to parse this data or try to guess and construct the format of future URLs. Your app is liable to break if we decide to change the URL.</p>
+<p>For example, when working with paginated results, it's often tempting to construct URLs that append <code>?page=&lt;number&gt;</code> to the end. Avoid that temptation. <a href="/enterprise/2.6/guides/traversing-with-pagination">Our guide on pagination</a> offers some safe tips on dependably following paginated results.</p>
+<h2>
+<a id="check-the-event-type-and-action-before-processing-the-event" class="anchor" href="#check-the-event-type-and-action-before-processing-the-event" aria-hidden="true"><span class="octicon octicon-link"></span></a>Check the event type and action before processing the event</h2>
+<p>There are multiple <a href="/enterprise/2.6/v3/activity/events/types/">webhook event types</a>, and each event can have multiple actions. As GitHub's feature set grows, we will occasionally add new event types or add new actions to existing event types. Ensure that your application explicitly checks the type and action of an event before doing any webhook processing. The <code>X-GitHub-Event</code> request header can be used to know which event has been received so that processing can be handled appropriately. Similarly, the payload has a top-level <code>action</code> key that can be used to know which action was taken on the relevant object.</p>
+<p>For example, if you have configured a GitHub webhook to "Send me <strong>everything</strong>", your application will begin receiving new event types and actions as they are added. It is therefore <strong>not recommended to use any sort of catch-all else clause</strong>. Take the following code example:  </p>
+<pre class="highlight highlight-ruby"><code><span class="c1"># Not recommended: a catch-all else clause</span>
+<span class="k">def</span> <span class="nf">receive</span>
+  <span class="n">event_type</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">headers</span><span class="p">[</span><span class="s2">"X-GitHub-Event"</span><span class="p">]</span>
+  <span class="n">payload</span>    <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">body</span>
+  <span class="k">case</span> <span class="n">event_type</span>
+  <span class="k">when</span> <span class="s2">"repository"</span>
+    <span class="n">process_repository</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"issues"</span>
+    <span class="n">process_issues</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">else</span>
+    <span class="n">process_pull_requests</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>In this code example, the <code>process_repository</code> and <code>process_issues</code> methods will be correctly called if a <code>repository</code> or <code>issues</code> event was received. However, any other event type would result in <code>process_pull_requests</code> being called. As new event types are added, this would result in incorrect behavior and new event types would be processed in the same way that a <code>pull_request</code> event would be processed.</p>
+<p>Instead, we suggest explicitly checking event types and acting accordingly. In the following code example, we explicitly check for a <code>pull_request</code> event and the <code>else</code> clause simply logs that we've received a new event type:</p>
+<pre class="highlight highlight-ruby"><code><span class="c1"># Recommended: explicitly check each event type</span>
+<span class="k">def</span> <span class="nf">receive</span>
+  <span class="n">event_type</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">headers</span><span class="p">[</span><span class="s2">"X-GitHub-Event"</span><span class="p">]</span>
+  <span class="n">payload</span>    <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="nf">body</span><span class="p">)</span>
+  <span class="k">case</span> <span class="n">event_type</span>
+  <span class="k">when</span> <span class="s2">"repository"</span>
+    <span class="n">process_repository</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"issues"</span>
+    <span class="n">process_issue</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"pull_request"</span>
+    <span class="n">process_pull_requests</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">else</span>
+    <span class="nb">puts</span> <span class="s2">"Oooh, something new from GitHub: </span><span class="si">#{</span><span class="n">event_type</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>Because each event can also have multiple actions, it's recommended that actions are checked similarly. For example, the <a href="https://developer.github.com/v3/activity/events/types/#issuesevent"><code>IssuesEvent</code></a> has several possible actions. These include <code>opened</code> when the issue is created, <code>closed</code> when the issue is closed, and <code>assigned</code> when the issue is assigned to someone.</p>
+<p>As with adding event types, we may add new actions to existing events. It is therefore again <strong>not recommended to use any sort of catch-all else clause</strong> when checking an event's action. Instead, we suggest explicitly checking event actions as we did with the event type. An example of this looks very similar to what we suggested for event types above:</p>
+<pre class="highlight highlight-ruby"><code><span class="c1"># Recommended: explicitly check each action</span>
+<span class="k">def</span> <span class="nf">process_issue</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">case</span> <span class="n">payload</span><span class="p">[</span><span class="s2">"action"</span><span class="p">]</span>
+  <span class="k">when</span> <span class="s2">"opened"</span>
+    <span class="n">process_issue_opened</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"assigned"</span>
+    <span class="n">process_issue_assigned</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">when</span> <span class="s2">"closed"</span>
+    <span class="n">process_issue_closed</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="k">else</span>
+    <span class="nb">puts</span> <span class="s2">"Oooh, something new from GitHub: </span><span class="si">#{</span><span class="n">payload</span><span class="p">[</span><span class="s2">"action"</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+<p>In this example the <code>closed</code> action is checked first before calling the <code>process_closed</code> method. Any unidentified actions are logged for future reference.</p>
+<h2>
+<a id="dealing-with-api-errors" class="anchor" href="#dealing-with-api-errors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dealing with API errors</h2>
+<p>Although your code would never introduce a bug, you may find that you've encountered successive errors when trying to access the API.</p>
+<p>Rather than ignore repeated <code>4xx</code> and <code>5xx</code> status codes, you should ensure that you're correctly interacting with the API. For example, if an endpoint requests a string and you're passing it a numeric value, you're going to receive a <code>5xx</code> validation error, and your call won't succeed. Similarly, attempting to access an unauthorized or nonexistent endpoint will result in a <code>4xx</code> error.</p>
+<p>Intentionally ignoring repeated validation errors may result in the suspension of your app for abuse.</p>
+    </div>
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="sidebar-module">
+        <ul>
+<li><h3><a href="/enterprise/2.6/guides/">Overview</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/getting-started/">Getting started</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/basics-of-authentication/">Basics of authentication</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/discovering-resources-for-a-user/">Discovering resources for a user</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/managing-deploy-keys/">Managing deploy keys</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/using-ssh-agent-forwarding/">Using SSH agent forwarding</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/rendering-data-as-graphs/">Rendering data as graphs</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/working-with-comments/">Working with comments</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/traversing-with-pagination/">Traversing with pagination</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/building-a-ci-server/">Building a CI server</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/delivering-deployments/">Delivering deployments</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/automating-deployments-to-integrators/">Automating deployments to integrators</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/best-practices-for-integrators/">Best practices for integrators</a></h3></li>
+        </ul>
+</div>
+      <div class="sidebar-module notice">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+      <div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+    </div>
+<!-- sidebar-shell -->
+  </div>
+<!-- #wrapper -->
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+<li><a href="https://github.com/github/developer.github.com#licenses">© 2016 GitHub, Inc.</a></li>
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+<span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+      <ul class="footer-cell">
+<li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+</div>
+  </div>
+<!-- /#footer -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

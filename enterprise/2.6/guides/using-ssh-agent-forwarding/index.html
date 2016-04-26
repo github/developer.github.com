@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="imagetoolbar" content="false">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<title>Using SSH Agent Forwarding | GitHub Developer Guide</title>
+<link href="/enterprise/2.6/assets/stylesheets/application.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script src="/enterprise/2.6/assets/javascripts/application.js" type="text/javascript"></script>
+</head>
+<body class="api ">
+<div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/enterprise/2.6/">GitHub:Developer</a>
+      <ul class="nav">
+<li>Enterprise 2.6</li>
+        <li><a href="/enterprise/2.6/v3/" class="nav-api">API</a></li>
+        <li><a href="/enterprise/2.6/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results"></ul>
+</li>
+      </ul>
+</div>
+  </div>
+<!-- #header -->
+</div>
+<!-- #header-wrapper -->
+  <div class="sub-nav">
+    <h2><a href="/enterprise/2.6/v3/">API</a></h2>
+    <ul>
+<li><a href="/enterprise/2.6/v3/">Reference</a></li>
+      <li><a href="/enterprise/2.6/webhooks/">Webhooks</a></li>
+      <li><a href="/enterprise/2.6/guides/" class="active">Guides</a></li>
+      <li><a href="/enterprise/2.6/libraries/">Libraries</a></li>
+    </ul>
+</div>
+  <div id="wrapper">
+    <div class="content">
+      <h1>
+<a id="using-ssh-agent-forwarding" class="anchor" href="#using-ssh-agent-forwarding" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using SSH agent forwarding</h1>
+<ul id="markdown-toc">
+<li><a href="#setting-up-ssh-agent-forwarding" id="markdown-toc-setting-up-ssh-agent-forwarding">Setting up SSH agent forwarding</a></li>
+<li><a href="#testing-ssh-agent-forwarding" id="markdown-toc-testing-ssh-agent-forwarding">Testing SSH agent forwarding</a></li>
+<li><a href="#troubleshooting-ssh-agent-forwarding" id="markdown-toc-troubleshooting-ssh-agent-forwarding">Troubleshooting SSH agent forwarding</a></li>
+</ul>
+<p>SSH agent forwarding can be used to make deploying to a server simple.  It allows you to use your local SSH keys instead of leaving keys (without passphrases!) sitting on your server.</p>
+<p>If you've already set up an SSH key to interact with GitHub Enterprise, you're probably familiar with <code>ssh-agent</code>. It's a program that runs in the background and keeps your key loaded into memory, so that you don't need to enter your passphrase every time you need to use the key. The nifty thing is, you can choose to let servers access your local <code>ssh-agent</code> as if they were already running on the server. This is sort of like asking a friend to enter their password so that you can use their computer.</p>
+<p>Check out <a href="http://www.unixwiz.net/techtips/ssh-agent-forwarding.html">Steve Friedl's Tech Tips guide</a> for a more detailed explanation of SSH agent forwarding.</p>
+<h2>
+<a id="setting-up-ssh-agent-forwarding" class="anchor" href="#setting-up-ssh-agent-forwarding" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting up SSH agent forwarding</h2>
+<p>Ensure that your own SSH key is set up and working. You can use <a href="https://help.github.com/articles/generating-ssh-keys">our guide on generating SSH keys</a> if you've not done this yet.</p>
+<p>You can test that your local key works by entering <code>ssh -T git@github.com</code> in the terminal:</p>
+<pre class="command-line">
+<span class="command">ssh -T git@github.com</span>
+<span class="comment"># Attempt to SSH in to github</span>
+<span class="output">Hi <em>username</em>! You've successfully authenticated, but GitHub does not provide</span>
+<span class="output">shell access.</span>
+</pre>
+<p>We're off to a great start. Let's set up SSH to allow agent forwarding to your server.</p>
+<ol>
+<li><p>Using your favorite text editor, open up the file at <code>~/.ssh/config</code>. If this file doesn't exist, you can create it by entering <code>touch ~/.ssh/config</code> in the terminal.</p></li>
+<li>
+<p>Enter the following text into the file, replacing <code>example.com</code> with your server's domain name or IP:</p>
+<pre><code>Host example.com
+  ForwardAgent yes
+</code></pre>
+</li>
+</ol>
+<div class="alert warning">
+<p><strong>Warning:</strong> You may be tempted to use a wildcard like <code>Host *</code> to just apply this setting to all SSH connections. That's not really a good idea, as you'd be sharing your local SSH keys with <em>every</em> server you SSH into. They won't have direct access to the keys, but they will be able to use them <em>as you</em> while the connection is established. <strong>You should only add servers you trust and that you intend to use with agent forwarding.</strong></p>
+</div>
+<h2>
+<a id="testing-ssh-agent-forwarding" class="anchor" href="#testing-ssh-agent-forwarding" aria-hidden="true"><span class="octicon octicon-link"></span></a>Testing SSH agent forwarding</h2>
+<p>To test that agent forwarding is working with your server, you can SSH into your server and run <code>ssh -T git@github.com</code> once more.  If all is well, you'll get back the same prompt as you did locally.</p>
+<p>If you're unsure if your local key is being used, you can also inspect the <code>SSH_AUTH_SOCK</code> variable on your server:</p>
+<pre class="command-line">
+<span class="command">echo "$SSH_AUTH_SOCK"</span>
+<span class="comment"># Print out the SSH_AUTH_SOCK variable</span>
+<span class="output">/tmp/ssh-4hNGMk8AZX/agent.79453</span>
+</pre>
+<p>If the variable is not set, it means that agent forwarding is not working:</p>
+<pre class="command-line">
+<span class="command">echo "$SSH_AUTH_SOCK"</span>
+<span class="comment"># Print out the SSH_AUTH_SOCK variable</span>
+<span class="output"><em>[No output]</em></span>
+<span class="command">ssh -T git@github.com</span>
+<span class="comment"># Try to SSH to github</span>
+<span class="output">Permission denied (publickey).</span>
+</pre>
+<h2>
+<a id="troubleshooting-ssh-agent-forwarding" class="anchor" href="#troubleshooting-ssh-agent-forwarding" aria-hidden="true"><span class="octicon octicon-link"></span></a>Troubleshooting SSH agent forwarding</h2>
+<p>Here are some things to look out for when troubleshooting SSH agent forwarding.</p>
+<h3>
+<a id="you-must-be-using-an-ssh-url-to-check-out-code" class="anchor" href="#you-must-be-using-an-ssh-url-to-check-out-code" aria-hidden="true"><span class="octicon octicon-link"></span></a>You must be using an SSH URL to check out code</h3>
+<p>SSH forwarding only works with SSH URLs, not HTTP(s) URLs. Check the <em>.git/config</em> file on your server and ensure the URL is an SSH-style URL like below:</p>
+<pre class="command-line">
+[remote "origin"]
+  url = git@github.com:<em>yourAccount</em>/<em>yourProject</em>.git
+  fetch = +refs/heads/*:refs/remotes/origin/*
+</pre>
+<h3>
+<a id="your-ssh-keys-must-work-locally" class="anchor" href="#your-ssh-keys-must-work-locally" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your SSH keys must work locally</h3>
+<p>Before you can make your keys work through agent forwarding, they must work locally first. <a href="https://help.github.com/articles/generating-ssh-keys">Our guide on generating SSH keys</a> can help you set up your SSH keys locally.</p>
+<h3>
+<a id="your-system-must-allow-ssh-agent-forwarding" class="anchor" href="#your-system-must-allow-ssh-agent-forwarding" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your system must allow SSH agent forwarding</h3>
+<p>Sometimes, system configurations disallow SSH agent forwarding. You can check if a system configuration file is being used by entering the following command in the terminal:</p>
+<pre class="command-line">
+<span class="command">ssh -v <em>example.com</em></span>
+<span class="comment"># Connect to example.com with verbose debug output</span>
+<span class="output">OpenSSH_5.6p1, OpenSSL 0.9.8r 8 Feb 2011</span>
+<span class="output">debug1: Reading configuration data /Users/<em>you</em>/.ssh/config</span>
+<span class="output">debug1: Applying options for example.com</span>
+<span class="output">debug1: Reading configuration data /etc/ssh_config</span>
+<span class="output">debug1: Applying options for *</span>
+<span class="command">exit</span>
+<span class="comment"># Returns to your local command prompt</span>
+</pre>
+<p>In the example above, the file <em>~/.ssh/config</em> is loaded first, then <em>/etc/ssh_config</em> is read.  We can inspect that file to see if it's overriding our options by running the following commands:</p>
+<pre class="command-line">
+<span class="command">cat /etc/ssh_config</span>
+<span class="comment"># Print out the /etc/ssh_config file</span>
+<span class="output">Host *</span>
+<span class="output">  SendEnv LANG LC_*</span>
+<span class="output">  ForwardAgent no</span>
+</pre>
+<p>In this example, our <em>/etc/ssh_config</em> file specifically says <code>ForwardAgent no</code>, which is a way to block agent forwarding. Deleting this line from the file should get agent forwarding working once more.</p>
+<h3>
+<a id="your-server-must-allow-ssh-agent-forwarding-on-inbound-connections" class="anchor" href="#your-server-must-allow-ssh-agent-forwarding-on-inbound-connections" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your server must allow SSH agent forwarding on inbound connections</h3>
+<p>Agent forwarding may also be blocked on your server. You can check that agent forwarding is permitted by SSHing into the server and running <code>sshd_config</code>. The output from this command should indicate that <code>AllowAgentForwarding</code> is set.</p>
+<h3>
+<a id="your-local-ssh-agent-must-be-running" class="anchor" href="#your-local-ssh-agent-must-be-running" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your local <code>ssh-agent</code> must be running</h3>
+<p>On most computers, the operating system automatically launches <code>ssh-agent</code> for you.  On Windows, however, you need to do this manually. We have <a href="https://help.github.com/articles/working-with-ssh-key-passphrases#auto-launching-ssh-agent-on-msysgit">a guide on how to start <code>ssh-agent</code> whenever you open Git Bash</a>.</p>
+<p>To verify that <code>ssh-agent</code> is running on your computer, type the following command in the terminal:</p>
+<pre class="command-line">
+<span class="command">echo "$SSH_AUTH_SOCK"</span>
+<span class="comment"># Print out the SSH_AUTH_SOCK variable</span>
+<span class="output">/tmp/launch-kNSlgU/Listeners</span>
+</pre>
+<h3>
+<a id="your-key-must-be-available-to-ssh-agent" class="anchor" href="#your-key-must-be-available-to-ssh-agent" aria-hidden="true"><span class="octicon octicon-link"></span></a>Your key must be available to <code>ssh-agent</code>
+</h3>
+<p>You can check that your key is visible to <code>ssh-agent</code> by running the following command:</p>
+<pre class="command-line">
+ssh-add -L
+</pre>
+<p>If the command says that no identity is available, you'll need to add your key:</p>
+<pre class="command-line">
+<span class="command">ssh-add <em>yourkey</em></span>
+</pre>
+<div class="alert tip">
+<p>On Mac OS X, <code>ssh-agent</code> will "forget" this key, once it gets restarted during reboots. But you can import your SSH keys into Keychain using this command:</p>
+<pre class="command-line">
+<span class="command">/usr/bin/ssh-add -K <em>yourkey</em></span>
+</pre>
+</div>
+    </div>
+    <div id="js-sidebar" class="sidebar-shell">
+      <div class="sidebar-module">
+        <ul>
+<li><h3><a href="/enterprise/2.6/guides/">Overview</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/getting-started/">Getting started</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/basics-of-authentication/">Basics of authentication</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/discovering-resources-for-a-user/">Discovering resources for a user</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/managing-deploy-keys/">Managing deploy keys</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/using-ssh-agent-forwarding/">Using SSH agent forwarding</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/rendering-data-as-graphs/">Rendering data as graphs</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/working-with-comments/">Working with comments</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/traversing-with-pagination/">Traversing with pagination</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/building-a-ci-server/">Building a CI server</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/delivering-deployments/">Delivering deployments</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/automating-deployments-to-integrators/">Automating deployments to integrators</a></h3></li>
+          <li><h3><a href="/enterprise/2.6/guides/best-practices-for-integrators/">Best practices for integrators</a></h3></li>
+        </ul>
+</div>
+      <div class="sidebar-module notice">
+        <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+      </div>
+      <div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+    </div>
+<!-- sidebar-shell -->
+  </div>
+<!-- #wrapper -->
+    <div id="footer">
+    <div class="lower_footer">
+      <ul class="footer-cell">
+<li><a href="https://github.com/github/developer.github.com#licenses">© 2016 GitHub, Inc.</a></li>
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+<span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+      <ul class="footer-cell">
+<li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+</div>
+  </div>
+<!-- /#footer -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

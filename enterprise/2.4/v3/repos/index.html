@@ -58,7 +58,6 @@
 <li><a href="#list-tags" id="markdown-toc-list-tags">List Tags</a></li>
 <li><a href="#list-branches" id="markdown-toc-list-branches">List Branches</a></li>
 <li><a href="#get-branch" id="markdown-toc-get-branch">Get Branch</a></li>
-<li><a href="#enabling-and-disabling-branch-protection" id="markdown-toc-enabling-and-disabling-branch-protection">Enabling and disabling branch protection</a></li>
 <li><a href="#delete-a-repository" id="markdown-toc-delete-a-repository">Delete a Repository</a></li>
 </ul>
 <h2>
@@ -1468,100 +1467,6 @@ X-RateLimit-Remaining: 4999
   </span><span class="nt">"_links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"html"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat/Hello-World/tree/master"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/branches/master"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<h2>
-<a id="enabling-and-disabling-branch-protection" class="anchor" href="#enabling-and-disabling-branch-protection" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enabling and disabling branch protection</h2>
-<div class="alert tip">
-<p><a name="preview-period"></a></p>
-<p>The Protected Branch API is currently available for developers to preview.
-  During the preview period, the API may change without advance notice.
-  Please see the <a href="/changes/2015-11-11-protected-branches-api">blog post</a> for full details.</p>
-<p>To access the API during the preview period, you must provide a custom <a href="/enterprise/2.4/v3/media">media type</a> in the <code>Accept</code> header:</p>
-<pre><code>  application/vnd.github.loki-preview+json
-</code></pre>
-</div>
-<p>Protecting a branch requires admin access.</p>
-<pre><code>PATCH /repos/:owner/:repo/branches/:branch
-</code></pre>
-<h3>
-<a id="input-2" class="anchor" href="#input-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Input</h3>
-<p>You need to pass a <code>protection</code> object.</p>
-<table>
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>enabled</code></td>
-<td><code>boolean</code></td>
-<td>
-<strong>Required</strong>. Should this branch be protected or not</td>
-</tr>
-<tr>
-<td><code>required_status_checks</code></td>
-<td><code>object</code></td>
-<td>Configure required status checks here</td>
-</tr>
-</tbody>
-</table>
-<p>The <code>required_status_checks</code> object must have the following keys:</p>
-<table>
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>enforcement_level</code></td>
-<td><code>string</code></td>
-<td>
-<strong>Required</strong>. Who required status checks apply to. Options are <code>off</code>, <code>non_admins</code> or <code>everyone</code>.</td>
-</tr>
-<tr>
-<td><code>contexts</code></td>
-<td><code>array</code></td>
-<td>
-<strong>Required</strong>. The list of status checks to require in order to merge into this branch</td>
-</tr>
-</tbody>
-</table>
-<p>The <code>enforcement_level</code> key can have the following values:</p>
-<table>
-<thead><tr>
-<th>Name</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr>
-<td><code>off</code></td>
-<td>Turn off required status checks for this branch.</td>
-</tr>
-<tr>
-<td><code>non_admins</code></td>
-<td>Required status checks will be enforced for non-admins.</td>
-</tr>
-<tr>
-<td><code>everyone</code></td>
-<td>Required status checks will be enforced for everyone (including admins).</td>
-</tr>
-</tbody>
-</table>
-<h4>
-<a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
-<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"protection"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"required_status_checks"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"enforcement_level"</span><span class="p">:</span><span class="w"> </span><span class="s2">"everyone"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"contexts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"continuous-integration/travis-ci"</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>

@@ -13,7 +13,7 @@ read more about the use of media types in the API [here](/v3/media/).
 
 <%= fetch_content(:prs_as_issues) %>
 
-List all *assigned* issues across all the authenticated user's visible repositories
+List all issues **assigned** to the authenticated user across all visible repositories
 including owned repositories, member repositories, and organization
 repositories:
 

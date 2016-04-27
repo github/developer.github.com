@@ -13,17 +13,23 @@ read more about the use of media types in the API [here](/v3/media/).
 
 <%= fetch_content(:prs_as_issues) %>
 
-List all issues across all the authenticated user's visible repositories
+List all issues **assigned** to the authenticated user across all visible repositories
 including owned repositories, member repositories, and organization
 repositories:
 
     GET /issues
 
-List all issues across owned and member repositories for the authenticated user:
+{{#tip}}
+
+You can use the `filter` query parameter to fetch issues that are not necessarily assigned to you. See the table below for more information.
+
+{{/tip}}
+
+List all issues across owned and member repositories assigned to the authenticated user:
 
     GET /user/issues
 
-List all issues for a given organization for the authenticated user:
+List all issues for a given organization assigned to the authenticated user:
 
     GET /orgs/:org/issues
 

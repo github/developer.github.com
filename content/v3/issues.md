@@ -17,13 +17,19 @@ List all issues across all the authenticated user's visible repositories
 including owned repositories, member repositories, and organization
 repositories:
 
+    GET /issues?filter=all
+
+List all issues across all the authenticated user's visible repositories
+including owned repositories, member repositories, and organization
+repositories *assigned* to the authenticated user:
+
     GET /issues
 
-List all issues across owned and member repositories for the authenticated user:
+List all issues across owned and member repositories assigned to the authenticated user:
 
     GET /user/issues
 
-List all issues for a given organization for the authenticated user:
+List all issues for a given organization assigned to the authenticated user:
 
     GET /orgs/:org/issues
 

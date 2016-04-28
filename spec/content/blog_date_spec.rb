@@ -1,12 +1,8 @@
 require 'spec_helper'
 
 describe 'Blog Date' do
-  before do
-    @posts = `git diff --name-only --diff-filter=ACMRTUXB master... | grep .md`.split("\n")
-  end
-
   it 'is not in the past' do
-    @posts.each do |post|
+    posts.each do |post|
       matches = post.match(%r{(\d{4}-\d{2}-\d{2})-})
       next unless matches
 

@@ -148,6 +148,7 @@ module GitHub
         "actor"      => USER,
         "event"      => "closed",
         "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "commit_url" => "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
         "created_at" => "2011-04-14T16:00:49Z"
       }
 

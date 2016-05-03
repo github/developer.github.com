@@ -48,7 +48,7 @@ Name | Description
 [`deployment_status`][event-types-deployment_status] | Any time a deployment for a Repository has a status update from the API.
 [`fork`][event-types-fork] | Any time a Repository is forked.
 [`gollum`][event-types-gollum] | Any time a Wiki page is updated.
-[`issue_comment`][event-types-issue_comment] | Any time a [comment on an issue](/v3/issues/comments/) is created or edited
+[`issue_comment`][event-types-issue_comment] | Any time a [comment on an issue](/v3/issues/comments/) is created, edited, or deleted.
 [`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, edited, closed, or reopened.
 [`member`][event-types-member] | Any time a User is added as a collaborator to a non-Organization Repository.
 [`membership`][event-types-membership] | Any time a User is added or removed from a team. **Organization hooks only**.

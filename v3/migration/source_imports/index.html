@@ -61,8 +61,11 @@
 <ul id="markdown-toc">
 <li><a href="#start-an-import" id="markdown-toc-start-an-import">Start an import</a></li>
 <li><a href="#get-import-progress" id="markdown-toc-get-import-progress">Get import progress</a></li>
+<li><a href="#update-existing-import" id="markdown-toc-update-existing-import">Update existing import</a></li>
 <li><a href="#get-commit-authors" id="markdown-toc-get-commit-authors">Get commit authors</a></li>
 <li><a href="#map-a-commit-author" id="markdown-toc-map-a-commit-author">Map a commit author</a></li>
+<li><a href="#set-git-lfs-preference" id="markdown-toc-set-git-lfs-preference">Set Git LFS preference</a></li>
+<li><a href="#get-large-files" id="markdown-toc-get-large-files">Get large files</a></li>
 <li><a href="#cancel-an-import" id="markdown-toc-cancel-an-import">Cancel an import</a></li>
 </ul>
 
@@ -77,7 +80,7 @@
 
 <p>The Source Import API lets you start an import from a Git, Subversion, Mercurial, or Team Foundation Server source repository. This is the same functionality as <a href="https://import.github.com/">the GitHub Importer</a>.</p>
 
-<p>A typical source import would <a href="#start-an-import">start the import</a> and then (optionally) <a href="#map-a-commit-author">update the authors</a>. A more detailed example can be seen in this diagram:</p>
+<p>A typical source import would <a href="#start-an-import">start the import</a> and then (optionally) <a href="#map-a-commit-author">update the authors</a> and/or <a href="#set-git-lfs-preference">set the preference</a> for using Git LFS if large files exist in the import. A more detailed example can be seen in this diagram:</p>
 
 <pre><code>+---------+                     +--------+                              +---------------------+
 | Tooling |                     | GitHub |                              | Original Repository |
@@ -128,6 +131,21 @@
      |                              |      |                                       |
      |                              |&lt;-----+                                       |
      |                              |                                              |
+     |  Get large files             |                                              |
+     |-----------------------------&gt;|                                              |
+     |                              |                                              |
+     |  opt_in to Git LFS           |                                              |
+     |-----------------------------&gt;|                                              |
+     |                              |  Rewrite commits for large files             |
+     |                              |------+                                       |
+     |                              |      |                                       |
+     |                              |&lt;-----+                                       |
+     |                              |                                              |
+     |                              |  Update repository on GitHub                 |
+     |                              |------+                                       |
+     |                              |      |                                       |
+     |                              |&lt;-----+                                       |
+     |                              |                                              |
      |  Get import progress         |                                              |
      |-----------------------------&gt;|                                              |
      |        "status": "complete"  |                                              |
@@ -157,16 +175,15 @@
 </thead>
 <tbody>
 <tr>
-<td><code>vcs</code></td>
-<td><code>string</code></td>
-<td>
-<strong>Required</strong> The originating VCS type. Can be one of "subversion", "git", "mercurial", or "tfvc".</td>
-</tr>
-<tr>
 <td><code>vcs_url</code></td>
 <td><code>url</code></td>
 <td>
 <strong>Required</strong> The URL of the originating repository.</td>
+</tr>
+<tr>
+<td><code>vcs</code></td>
+<td><code>string</code></td>
+<td>The originating VCS type. Can be one of <code>subversion</code>, <code>git</code>, <code>mercurial</code>, or <code>tfvc</code>. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.</td>
 </tr>
 <tr>
 <td><code>vcs_username</code></td>
@@ -210,9 +227,13 @@ X-RateLimit-Remaining: 4999
 
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"vcs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subversion"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"use_lfs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"undecided"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"vcs_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://svn.mycompany.com/svn/myproject"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"importing"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Importing..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"has_large_files"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"authors_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
   </span><span class="nt">"commit_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1042</span><span class="p">,</span><span class="w">
@@ -243,9 +264,13 @@ X-RateLimit-Remaining: 4999
 
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"vcs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subversion"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"use_lfs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opt_in"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"vcs_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://svn.mycompany.com/svn/myproject"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"status_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Done"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"has_large_files"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">132331036</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nt">"authors_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
   </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://import.github.com/octocat/socm/import"</span><span class="p">,</span><span class="w">
@@ -265,6 +290,8 @@ X-RateLimit-Remaining: 4999
 
 <ul>
 <li>
+<code>detecting</code> - the "detection" step of the import is in progress because the request did not include a <code>vcs</code> parameter. The import is identifying the type of source control present at the URL.</li>
+<li>
 <code>importing</code> - the "raw" step of the import is in progress. This is where commit data is fetched from the original repository. The import progress response will include <code>commit_count</code> (the total number of raw commits that will be imported) and <code>percent</code> (0 - 100, the current progress through the import).</li>
 <li>
 <code>mapping</code> - the "rewrite" step of the import is in progress. This is where SVN branches are converted to Git branches, and where author updates are applied. The import progress response does not include progress information.</li>
@@ -278,25 +305,192 @@ X-RateLimit-Remaining: 4999
 
 <ul>
 <li>
-<code>auth_failed</code> - the import requires authentication in order to connect to the original repository. Make another "Start Import" request, and include <code>vcs_username</code> and <code>vcs_password</code>.</li>
+<code>auth_failed</code> - the import requires authentication in order to connect to the original repository. Make an "Update Existing Import" request, and include <code>vcs_username</code> and <code>vcs_password</code>.</li>
 <li>
 <code>error</code> - the import encountered an error. The import progress response will include the <code>failed_step</code> and an error message. <a href="https://github.com/contact?form%5Bsubject%5D=Source+Import+API+error">Contact support</a> for more information.</li>
+<li>
+<code>detection_needs_auth</code> - the importer requires authentication for the originating repository to continue detection. Make an "Update Existing Import" request, and include <code>vcs_username</code> and <code>vcs_password</code>.</li>
+<li>
+<code>detection_found_nothing</code> - the importer didn't recognize any source control at the URL.</li>
+<li>
+<code>detection_found_multiple</code> - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a <code>project_choices</code> field with the possible project choices as values. Make an "Update Existing Import" request, and include <code>vcs</code> and (if applicable) <code>tfvc_project</code>.</li>
 </ul>
 
-<p>If you query import status for an import started via the web UI, you may also see these states:</p>
+<h3>
+<a id="git-lfs-related-fields" class="anchor" href="#git-lfs-related-fields" aria-hidden="true"><span class="octicon octicon-link"></span></a>Git LFS related fields</h3>
+
+<p>This section includes details about Git LFS related fields that may be present in the Import Progress response.</p>
 
 <ul>
 <li>
-<code>detecting</code> - you've entered a URL via the web UI, and the importer is figuring out what type of source control is present at the URL.</li>
+<code>use_lfs</code> - describes whether the import has been opted in or out of using Git LFS. The value can be <code>opt_in</code>, <code>opt_out</code>, or <code>undecided</code> if no action has been taken.</li>
 <li>
-<code>detection_needs_auth</code> - you've entered a URL via the web UI, and the importer needs you to enter authentication credentials in the web UI in order to continue detection.</li>
+<code>has_large_files</code> - the boolean value describing whether files larger than 100MB were found during the <code>importing</code> step.</li>
 <li>
-<code>detection_found_nothing</code> - the importer didn't recognize any source control at the URL entered via the web UI.</li>
+<code>large_files_size</code> - the total size in gigabytes of files larger than 100MB found in the originating repository.</li>
 <li>
-<code>detection_found_multiple</code> - the importer found several projects or repositories at the provided URL.</li>
-<li>
-<code>waiting_to_push</code> - the raw and rewrite steps are complete, but a destination GitHub repository hasn't been created yet.</li>
+<code>large_files_count</code> - the total number of of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.</li>
 </ul>
+
+<h2>
+<a id="update-existing-import" class="anchor" href="#update-existing-import" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update existing import</h2>
+
+<p>An import can be updated with credentials or a <code>project_choice</code> by passing in the appropriate parameters in this API request. If no parameters are provided, the import will be restarted.</p>
+
+<pre><code>PATCH /repos/:owner/:repo/import
+</code></pre>
+
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Location: https://api.github.com/repos/spraints/socm/import
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"vcs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subversion"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"use_lfs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"undecided"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vcs_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://svn.mycompany.com/svn/myproject"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"importing"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Importing..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"has_large_files"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authors_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"commit_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1042</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://import.github.com/octocat/socm/import"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authors_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import/authors"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="parameters-for-updating-authentication" class="anchor" href="#parameters-for-updating-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters for updating authentication</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vcs_username</code></td>
+<td><code>string</code></td>
+<td>The username to provide to the originating repository.</td>
+</tr>
+<tr>
+<td><code>vcs_password</code></td>
+<td><code>string</code></td>
+<td>The password to provide to the originating repository.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"vcs_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vcs_password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secret"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"vcs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subversion"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"use_lfs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"undecided"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vcs_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://svn.mycompany.com/svn/myproject"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"detecting"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://import.github.com/octocat/socm/import"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authors_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import/authors"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="parameters-for-updating-project-choice" class="anchor" href="#parameters-for-updating-project-choice" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters for updating project choice</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vcs</code></td>
+<td><code>string</code></td>
+<td>The chosen project's VCS type.</td>
+</tr>
+<tr>
+<td><code>tfvc_project</code></td>
+<td><code>string</code></td>
+<td>For a tfvc import, the name of the project that is being imported.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="example-2" class="anchor" href="#example-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"vcs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tfvc"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tfvc_project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"vcs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tfvc"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"use_lfs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"undecided"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vcs_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://tfs.mycompany.com/tfs/myproject"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tfvc_project"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"importing"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Importing..."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"has_large_files"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authors_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"commit_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1042</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://import.github.com/octocat/socm/import"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authors_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import/authors"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 
 <h2>
 <a id="get-commit-authors" class="anchor" href="#get-commit-authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get commit authors</h2>
@@ -329,7 +523,7 @@ X-RateLimit-Remaining: 4999
 </table>
 
 <h3>
-<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -403,7 +597,7 @@ X-RateLimit-Remaining: 4999
 </table>
 
 <h3>
-<a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+<a id="example-3" class="anchor" href="#example-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
 
 <pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hubot@github.com"</span><span class="p">,</span><span class="w">
@@ -413,7 +607,7 @@ X-RateLimit-Remaining: 4999
 
 
 <h3>
-<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-6" class="anchor" href="#response-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
@@ -434,6 +628,111 @@ X-RateLimit-Remaining: 4999
 
 
 <h2>
+<a id="set-git-lfs-preference" class="anchor" href="#set-git-lfs-preference" aria-hidden="true"><span class="octicon octicon-link"></span></a>Set Git LFS preference</h2>
+
+<p>You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by <a href="https://git-lfs.github.com">Git LFS</a>. You can learn more about our LFS feature and working with large files <a href="https://help.github.com/articles/versioning-large-files/">on our help site</a>.</p>
+
+<pre><code>PATCH /:owner/:name/import/lfs
+</code></pre>
+
+<h3>
+<a id="parameters-3" class="anchor" href="#parameters-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>use_lfs</code></td>
+<td><code>string</code></td>
+<td>
+<strong>Required</strong> Can be one of <code>opt_in</code> (large files will be stored using Git LFS) or <code>opt_out</code> (large files will be removed during the import).</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="example-4" class="anchor" href="#example-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"use_lfs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opt_in"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"vcs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subversion"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"use_lfs"</span><span class="p">:</span><span class="w"> </span><span class="s2">"opt_in"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"vcs_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://svn.mycompany.com/svn/myproject"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Done"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"has_large_files"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_size"</span><span class="p">:</span><span class="w"> </span><span class="mi">132331036</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"large_files_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authors_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://import.github.com/octocat/socm/import"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authors_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm/import/authors"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"repository_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/socm"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="get-large-files" class="anchor" href="#get-large-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get large files</h2>
+
+<p>List files larger than 100MB found during the import</p>
+
+<pre><code>GET /:owner/:name/import/large_files
+</code></pre>
+
+<h3>
+<a id="response-8" class="anchor" href="#response-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"ref_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refs/heads/master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo/bar/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"oid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d3d9446802a44259755d38e6d163e820"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10485760</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"ref_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refs/heads/master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo/bar/2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"oid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6512bd43d9caa6e02c990b0a82652dca"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">11534336</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"ref_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refs/heads/master"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo/bar/3"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"oid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c20ad4d76fe97759aa27a0c99bff6710"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">12582912</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
 <a id="cancel-an-import" class="anchor" href="#cancel-an-import" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cancel an import</h2>
 
 <p>Stop an import for a repository.</p>
@@ -442,7 +741,7 @@ X-RateLimit-Remaining: 4999
 </code></pre>
 
 <h3>
-<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-9" class="anchor" href="#response-9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 
 <pre class="highlight highlight-headers"><code>Status: 204 No Content
 X-RateLimit-Limit: 5000

@@ -44,7 +44,79 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-03-18-paginating-method-changes/">
+      <div class="change" id="/changes/2014-03-27-combined-status-api/">
+  <h2 class="title">
+<a id="--preview-the-new-combined-status-api" class="anchor" href="#--preview-the-new-combined-status-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-03-27-combined-status-api/">Preview the New Combined Status API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 27, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/bhuga.png" alt="Avatar for bhuga" data-proofer-ignore>
+      <a href="https://github.com/bhuga" data-proofer-ignore>bhuga</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>What does it mean for a branch to be "green?" The <a href="/v3/repos/statuses/">Status API</a> helps
+thousands of teams answer that question. Developers use it to record the status
+of continuous integration builds, contributor license agreements, code coverage
+analysis, automated security testing, dependency management, and more.</p>
+
+<p>For many teams, a branch is considered "green" only when <em>all</em> of their various
+status checks are successful. With the new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status
+API</a>, developers can easily fetch this single, consolidated
+status for any branch, commit, or tag.</p>
+
+<h3>
+<a id="status-context" class="anchor" href="#status-context" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="status-context" class="anchor" href="#status-context" aria-hidden="true"><span class="octicon octicon-link"></span></a>Status context</h3>
+
+<p>To help multiple service providers use the Status API simultaneously, statuses
+now support a <code>context</code> field. This field allows a provider to distinguish its
+statuses from another provider's statuses. For example, your <a href="http://jenkins-ci.org/">Jenkins</a> builds
+might use a context of <code>ci/jenkins</code>, while your <a href="http://brakemanscanner.org/">Brakeman</a> checks might adopt a
+context of <code>security/brakeman</code>.</p>
+
+<p>The new <a href="/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref">Combined Status endpoint</a> returns a single,
+combined state, as well as the latest status from each context. Systems that
+consume status updates can now get all the information they need in one place.</p>
+
+<h3>
+<a id="opt-in" class="anchor" href="#opt-in" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="opt-in" class="anchor" href="#opt-in" aria-hidden="true"><span class="octicon octicon-link"></span></a>Opt-in</h3>
+
+<p>The existing <a href="/v3/repos/statuses/#list-statuses-for-a-specific-ref">Status API</a> continues to work as it always has. The
+<code>context</code> field is entirely optional, and the <a href="https://github.com/blog/1227-commit-status-api">color of the merge button on pull
+requests</a> does not currently
+take context into account.</p>
+
+<h3>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h3>
+
+<p>We're making this new API available today for developers to
+<a href="/v3/repos/statuses/">preview</a>. During this period, we may change aspects of the Combined
+Status API from time to time. We will announce any changes here (on the
+developer blog), but we will not provide any advance notice.</p>
+
+<p>We expect the preview period to last 30-60 days. At the end of preview period,
+the Combined Status API will become an official component of GitHub API v3. At
+that point, this new API will be stable and suitable for production use.</p>
+
+<p>We hope you'll <a href="/v3/repos/statuses/">try it out</a> and <a href="https://github.com/contact?form%5Bsubject%5D=Combined+Status+API">send us your feedback</a>!</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-03-18-paginating-method-changes/">
   <h2 class="title">
 <a id="--pagination-changes-for-some-resource-lists" class="anchor" href="#--pagination-changes-for-some-resource-lists" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-03-18-paginating-method-changes/">Pagination changes for some resource lists</a>
@@ -606,31 +678,6 @@ begin receiving those too.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-02-21-gist-raw-file-url-change/">
-  <h2 class="title">
-<a id="--gist-raw-file-uri-change" class="anchor" href="#--gist-raw-file-uri-change" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-02-21-gist-raw-file-url-change/">Gist raw file URI change</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 21, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/spicycode.png" alt="Avatar for spicycode" data-proofer-ignore>
-      <a href="https://github.com/spicycode" data-proofer-ignore>spicycode</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The raw host for all Gist files is changing immediately.  This change was made to further isolate user content from trusted GitHub applications.
-The new host is <code><a href="https://gist.githubusercontent.com">https://gist.githubusercontent.com</a></code>.  Existing URIs will redirect to the new host.</p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -761,6 +808,8 @@ The new host is <code><a href="https://gist.githubusercontent.com">https://gist.
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
@@ -774,8 +823,6 @@ The new host is <code><a href="https://gist.githubusercontent.com">https://gist.
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
-
-  <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
 </ul>
 

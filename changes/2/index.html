@@ -44,7 +44,40 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-02-11-issue-locking-api/">
+      <div class="change" id="/changes/2016-02-19-source-import-preview-api/">
+  <h2 class="title">
+<a id="--preview-the-source-import-api" class="anchor" href="#--preview-the-source-import-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-02-19-source-import-preview-api/">Preview the Source Import API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 19, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/spraints.png" alt="Avatar for spraints" data-proofer-ignore>
+      <a href="https://github.com/spraints" data-proofer-ignore>spraints</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We've added an API for source imports, which will let you start an import from a Git, Subversion, Mercurial, or Team Foundation Server source repository. This is the same functionality as <a href="https://import.github.com/">the GitHub Importer</a>.</p>
+
+<p>To access <a href="/v3/migration/source_imports/">the Source Import API</a> during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.barred-rock-preview
+</code></pre>
+
+<p>During the preview period, we may change aspects of these API methods based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Source+Import+API">let us know</a>!</p>
+</div>
+
+<div class="change" id="/changes/2016-02-11-issue-locking-api/">
   <h2 class="title">
 <a id="--issue-locking-and-unlocking-api-preview-period" class="anchor" href="#--issue-locking-and-unlocking-api-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-02-11-issue-locking-api/">Issue Locking and Unlocking API Preview Period</a>
@@ -64,8 +97,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We're introducing new API methods to allow repository collaborators to <a href="https://help.github.com/articles/locking-conversations/">lock and unlock conversations</a>. Developers with <a href="https://help.github.com/articles/what-are-the-different-access-permissions/">collaborator permissions</a> on a repository can start experimenting with these new endpoints today during the preview period.</p>
+  <p>We're introducing new API methods to allow repository collaborators to <a href="https://help.github.com/articles/locking-conversations/">lock and unlock conversations</a>. Developers with <a href="https://help.github.com/articles/what-are-the-different-access-permissions/">collaborator permissions</a> on a repository can start experimenting with these new endpoints today during the preview period.</p>
 
 <p>To lock a conversation, make a <code>PUT</code> request to the conversation's issue:</p>
 
@@ -498,49 +530,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 <p></p>
 </div>
 
-<div class="change" id="/changes/2015-06-24-licenses-api-update/">
-  <h2 class="title">
-<a id="--licenses-api-update" class="anchor" href="#--licenses-api-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-06-24-licenses-api-update/">Licenses API update</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    June 24, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mislav.png" alt="Avatar for mislav" data-proofer-ignore>
-      <a href="https://github.com/mislav" data-proofer-ignore>mislav</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We are expanding the <a href="/v3/licenses">Licenses API</a> to make it more useful for auditing license usage across all repositories owned by a user or organization.</p>
-
-<p>Before, license information was only returned for an individual repository:</p>
-
-<pre><code>GET /repos/github/hubot
-</code></pre>
-
-<p>Now, license information will also be included in reponses from endpoints that list multiple repositories, such as <a href="/v3/repos/#list-organization-repositories">List organization repositories</a>:</p>
-
-<pre><code>GET /orgs/github/repos
-</code></pre>
-
-<p>As before, to access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.drax-preview+json
-</code></pre>
-
-<p>For more information, see the <a href="/v3/licenses/">Licenses API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API">let us know</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -645,6 +634,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
@@ -658,8 +649,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
-
-  <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
 </ul>
 

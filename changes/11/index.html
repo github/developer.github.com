@@ -44,7 +44,75 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
+      <div class="change" id="/changes/2013-07-01-feeds-api/">
+  <h2 class="title">
+<a id="--feeds-api" class="anchor" href="#--feeds-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-07-01-feeds-api/">Feeds API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    July 1, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Today we're releasing a new <a href="/v3/activity/feeds/">Feeds API</a>, an easy way to list all the Atom
+resources available to the authenticated user.</p>
+
+<pre class="command-line">
+<span class="command">curl -u defunkt https://api.github.com/feeds</span>
+
+<span class="output">{</span>
+<span class="output">  "timeline_url": "https://github.com/timeline",</span>
+<span class="output">  "user_url": "https://github.com/{user}",</span>
+<span class="output">  "current_user_public_url": "https://github.com/defunkt",</span>
+<span class="output">  "current_user_url": "https://github.com/defunkt.private?token=abc123",</span>
+<span class="output">  "current_user_actor_url": "https://github.com/defunkt.private.actor?token=abc123",</span>
+<span class="output">  "current_user_organization_url": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",</span>
+<span class="output">  "_links": {</span>
+<span class="output">   "timeline": {</span>
+<span class="output">     "href": "https://github.com/timeline",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "user": {</span>
+<span class="output">     "href": "https://github.com/{user}",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "current_user_public": {</span>
+<span class="output">     "href": "https://github.com/defunkt",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "current_user": {</span>
+<span class="output">     "href": "https://github.com/defunkt.private?token=abc123",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "current_user_actor": {</span>
+<span class="output">     "href": "https://github.com/defunkt.private.actor?token=abc123",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   },</span>
+<span class="output">   "current_user_organization": {</span>
+<span class="output">     "href": "https://github.com/organizations/{org}/defunkt.private.atom?token=abc123",</span>
+<span class="output">     "type": "application/atom+xml"</span>
+<span class="output">   }</span>
+<span class="output">  }</span>
+<span class="output">}</span>
+</pre>
+
+<p>If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feeds%20API">please drop us a line</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-05-06-create-update-delete-individual-files/">
   <h2 class="title">
 <a id="--create-update-and-delete-individual-files" class="anchor" href="#--create-update-and-delete-individual-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-05-06-create-update-delete-individual-files/">Create, update, and delete individual files</a>
@@ -385,45 +453,6 @@ if you already removed them from your firewall.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2013-02-13-hookshot-issues/">
-  <h2 class="title">
-<a id="--some-hookshot-issues" class="anchor" href="#--some-hookshot-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2013-02-13-hookshot-issues/">Some Hookshot Issues</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 13, 2013
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
-      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We turned Hookshot (our new GitHub Services backend) on yesterday.  Things have
-been pretty smooth, with one issue:  Hooks going to other EC2 nodes come from
-the private IP addresses of our nodes in the 10.<em>.</em>.* range.</p>
-
-<p>If your web hook servers are on EC2 and are missing hooks from GitHub due to
-an IP restriction, we recommend the following:</p>
-
-<ol>
-<li>Remove the IP white list.</li>
-<li>Fall back to HTTPS and Basic Auth to restrict pushes to authorized senders only.</li>
-</ol>
-
-<p>We're currently working on solving this problem.  Hit up <a href="mailto:support@github.com">support@github.com</a>
-if you have any questions.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -517,6 +546,8 @@ if you have any questions.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
@@ -530,8 +561,6 @@ if you have any questions.</p>
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
-
-  <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
 </ul>
 

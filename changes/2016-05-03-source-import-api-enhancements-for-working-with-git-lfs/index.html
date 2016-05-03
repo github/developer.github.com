@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Get the contents of a repository’s license | GitHub Developer Guide</title>
+  <title>Source Import API enhancements for working with Git LFS | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,45 +44,52 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-08-04-get-license-contents/">
+      <div class="change" id="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">
 <h2 class="title">
-  <a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license</a>
+  <a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    August 4, 2015
+    May 3, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter" data-proofer-ignore/>
-      <a href="https://github.com/benbalter" data-proofer-ignore>benbalter</a>
+    <img height="16" width="16" src="https://github.com/lizzhale.png" alt="Avatar for lizzhale" data-proofer-ignore/>
+      <a href="https://github.com/lizzhale" data-proofer-ignore>lizzhale</a>
   </li>
 </ul>
 </div>
 
 
-<p>The <a href="/v3/licenses/">License API Preview</a> now allows you to retrieve the contents of a repository's open source license. As before, when the appropriate preview media type is passed, the repository endpoint will return information about the detected license, if any:</p>
+<p>Today we're introducing enhancements to the <a href="/v3/migration/source_imports/">Source Import API</a> to support importing repositories with files larger than 100MB.</p>
 
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman
-</pre>
+<p><strong>Changes to parameters for starting an import</strong></p>
 
-<p>You can now also get the contents of the repository's license file, whether or not the license was successfully identified via the license contents endpoint:</p>
+<p><a href="/v3/migration/source_imports/#start-an-import">Starting an import</a> no longer requires a <code>vcs</code> parameter. Please be aware that without this parameter, the import job will take additional time to detect the vcs type before beginning the import. This detection step will be reflected in the response.</p>
 
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman/license
-</pre>
+<p><strong>New methods</strong></p>
 
-<p>Similar to <a href="/v3/repos/contents/#get-contents">the repository contents API</a>, the license contents method also supports <a href="/v3/repos/contents/#custom-media-types">custom media types</a> for retrieving the raw license content or rendered license HTML.</p>
+<p>We've added 3 new methods that will enable API consumers to:</p>
 
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com/repos/benbalter/gman/license
-</pre>
+<ul>
+<li><p><a href="/v3/migration/source_imports/#update-existing-import">update</a> the authentication or project choice for an import. If no parameters are provided during the request, the import will be restarted. Please note that this is a <strong>breaking change</strong>. Updating authentication for the originating URL is no longer supported through the <a href="/v3/migration/source_imports/#start-an-import">start an import</a> method. Please update your applications to use the new method.</p></li>
+<li><p><a href="/v3/migration/source_imports/#set-git-lfs-preference">set their preference</a> for using Git LFS to import files larger than 100MB.</p></li>
+<li><p><a href="/v3/migration/source_imports/#get-large-files">list all the files larger than 100MB</a> that were found during the import.</p></li>
+</ul>
 
-<p>For more information, see <a href="/v3/licenses/#get-the-contents-of-a-repositorys-license">the license API documentation</a>, and as always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=License+API">get in touch with us</a>.</p>
+<p><strong>New attributes for Git LFS</strong></p>
+
+<p>Several new response attributes (<code>use_lfs</code>, <code>has_large_files</code>, <code>large_files_size</code>, <code>large_files</code>) were added to provide details regarding the large files found during the import. You can read more about the attributes <a href="/v3/migration/source_imports/#git-lfs-related-fields">here</a>.</p>
+
+<p>As before, to access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.barred-rock-preview
+</code></pre>
+
+<p>For more information, see the <a href="/v3/migration/source_imports/">Source Import API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Source+Import+API">let us know</a>.</p>
 </div>
 
     </div>

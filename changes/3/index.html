@@ -44,7 +44,48 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2015-06-17-organizations-endpoint/">
+      <div class="change" id="/changes/2015-06-24-licenses-api-update/">
+  <h2 class="title">
+<a id="--licenses-api-update" class="anchor" href="#--licenses-api-update" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-06-24-licenses-api-update/">Licenses API update</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 24, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/mislav.png" alt="Avatar for mislav" data-proofer-ignore>
+      <a href="https://github.com/mislav" data-proofer-ignore>mislav</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We are expanding the <a href="/v3/licenses">Licenses API</a> to make it more useful for auditing license usage across all repositories owned by a user or organization.</p>
+
+<p>Before, license information was only returned for an individual repository:</p>
+
+<pre><code>GET /repos/github/hubot
+</code></pre>
+
+<p>Now, license information will also be included in reponses from endpoints that list multiple repositories, such as <a href="/v3/repos/#list-organization-repositories">List organization repositories</a>:</p>
+
+<pre><code>GET /orgs/github/repos
+</code></pre>
+
+<p>As before, to access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.drax-preview+json
+</code></pre>
+
+<p>For more information, see the <a href="/v3/licenses/">Licenses API documentation</a>, and if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Licenses+API">let us know</a>.</p>
+</div>
+
+<div class="change" id="/changes/2015-06-17-organizations-endpoint/">
   <h2 class="title">
 <a id="--list-all-organizations" class="anchor" href="#--list-all-organizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2015-06-17-organizations-endpoint/">List all organizations</a>
@@ -64,8 +105,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We've added a <a href="/v3/orgs#list-all-organizations">new API method</a> to list all organizations:</p>
+  <p>We've added a <a href="/v3/orgs#list-all-organizations">new API method</a> to list all organizations:</p>
 
 <pre class="command-line">
 <span class="command">curl https://api.github.com/organizations</span>
@@ -470,61 +510,6 @@ media type.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2015-02-20-migration-period-removing-authorizations-token/">
-  <h2 class="title">
-<a id="--breaking-changes-to-authorizations-api-responses-on-april-20" class="anchor" href="#--breaking-changes-to-authorizations-api-responses-on-april-20" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-02-20-migration-period-removing-authorizations-token/">Breaking changes to Authorizations API responses on April 20</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 20, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3" data-proofer-ignore>
-      <a href="https://github.com/ptoomey3" data-proofer-ignore>ptoomey3</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>A couple weeks ago we <a href="/changes/2015-02-03-removing-authorizations-token-update/">extended the preview period</a> of several API changes related to managing OAuth application authorizations. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before April 20</strong> to account for these changes.</p>
-
-<h3>
-<a id="breaking-changes-coming-on-april-20" class="anchor" href="#breaking-changes-coming-on-april-20" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="breaking-changes-coming-on-april-20" class="anchor" href="#breaking-changes-coming-on-april-20" aria-hidden="true"><span class="octicon octicon-link"></span></a>Breaking changes coming on April 20</h3>
-
-<p>If your application uses any of the following APIs, then you may be affected by this change:</p>
-
-<ul>
-<li>The <a href="/v3/oauth_authorizations/#list-your-authorizations">List your authorizations</a> API</li>
-<li>The <a href="/v3/oauth_authorizations/#get-a-single-authorization">Get a single authorization</a> API</li>
-<li>The <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> API (<code>token</code> is still returned for "create")</li>
-<li>The <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a> API (<code>token</code> is still returned for "create")</li>
-<li>The <a href="/v3/oauth_authorizations/#update-an-existing-authorization">Update an existing authorization</a> API</li>
-</ul>
-
-<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-removing-authorizations-token/">the December announcement</a> for more details on the changes.)</p>
-
-<p>Starting today, we're offering a migration period allowing applications to opt in to these changes (as described below). On April 20, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
-
-<h3>
-<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h3>
-
-<p>During the migration period, you can opt-in to these changes using the following custom media type in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.mirage-preview+json
-</code></pre>
-
-<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">get in touch with us</a>!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -640,6 +625,8 @@ media type.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
+
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
@@ -653,8 +640,6 @@ media type.</p>
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
   <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
-
-  <li><a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming<br /><span class="date">March 15, 2016</span></a></li>
 
 </ul>
 

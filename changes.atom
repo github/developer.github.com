@@ -2,13 +2,50 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-04-21T07:00:00Z</updated>
+  <updated>2016-05-03T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-05-03:/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/</id>
+    <title type="html">Source Import API enhancements for working with Git LFS</title>
+    <published>2016-05-03T07:00:00Z</published>
+    <updated>2016-05-03T07:00:00Z</updated>
+    <author>
+      <name>lizzhale</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/"/>
+    <content type="html">&lt;p&gt;Today we're introducing enhancements to the &lt;a href="/v3/migration/source_imports/"&gt;Source Import API&lt;/a&gt; to support importing repositories with files larger than 100MB.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Changes to parameters for starting an import&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="/v3/migration/source_imports/#start-an-import"&gt;Starting an import&lt;/a&gt; no longer requires a &lt;code&gt;vcs&lt;/code&gt; parameter. Please be aware that without this parameter, the import job will take additional time to detect the vcs type before beginning the import. This detection step will be reflected in the response.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;New methods&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We've added 3 new methods that will enable API consumers to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="/v3/migration/source_imports/#update-existing-import"&gt;update&lt;/a&gt; the authentication or project choice for an import. If no parameters are provided during the request, the import will be restarted. Please note that this is a &lt;strong&gt;breaking change&lt;/strong&gt;. Updating authentication for the originating URL is no longer supported through the &lt;a href="/v3/migration/source_imports/#start-an-import"&gt;start an import&lt;/a&gt; method. Please update your applications to use the new method.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="/v3/migration/source_imports/#set-git-lfs-preference"&gt;set their preference&lt;/a&gt; for using Git LFS to import files larger than 100MB.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="/v3/migration/source_imports/#get-large-files"&gt;list all the files larger than 100MB&lt;/a&gt; that were found during the import.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;New attributes for Git LFS&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Several new response attributes (&lt;code&gt;use_lfs&lt;/code&gt;, &lt;code&gt;has_large_files&lt;/code&gt;, &lt;code&gt;large_files_size&lt;/code&gt;, &lt;code&gt;large_files&lt;/code&gt;) were added to provide details regarding the large files found during the import. You can read more about the attributes &lt;a href="/v3/migration/source_imports/#git-lfs-related-fields"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As before, to access the API during the preview period, you must provide a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.barred-rock-preview
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more information, see the &lt;a href="/v3/migration/source_imports/"&gt;Source Import API documentation&lt;/a&gt;, and if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Source+Import+API"&gt;let us know&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-04-21:/changes/2016-04-21-oauth-authorizations-grants-api-preview/</id>
     <title type="html">Preview support for OAuth authorizations grants API</title>
@@ -1070,45 +1107,6 @@ media type.&lt;/p&gt;
     <content type="html">&lt;p&gt;After listening to your feedback on the upcoming &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;breaking changes to organization permissions&lt;/a&gt;, we're giving developers more time to update their applications. We'll announce an updated timeline for these changes in the coming weeks.&lt;/p&gt;
 
 &lt;p&gt;In the meantime, if your application relies on any of the affected functionality described in our &lt;a href="/changes/2014-12-08-organization-permissions-api-preview/"&gt;previous blog post&lt;/a&gt;, please &lt;strong&gt;update your code&lt;/strong&gt; to account for these changes. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-02-20:/changes/2015-02-20-migration-period-removing-authorizations-token/</id>
-    <title type="html">Breaking changes to Authorizations API responses on April 20</title>
-    <published>2015-02-20T08:00:00Z</published>
-    <updated>2015-02-20T08:00:00Z</updated>
-    <author>
-      <name>ptoomey3</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-02-20-migration-period-removing-authorizations-token/"/>
-    <content type="html">&lt;p&gt;A couple weeks ago we &lt;a href="/changes/2015-02-03-removing-authorizations-token-update/"&gt;extended the preview period&lt;/a&gt; of several API changes related to managing OAuth application authorizations. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to &lt;strong&gt;update your code before April 20&lt;/strong&gt; to account for these changes.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="breaking-changes-coming-on-april-20" class="anchor" href="#breaking-changes-coming-on-april-20" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Breaking changes coming on April 20&lt;/h3&gt;
-
-&lt;p&gt;If your application uses any of the following APIs, then you may be affected by this change:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The &lt;a href="/v3/oauth_authorizations/#list-your-authorizations"&gt;List your authorizations&lt;/a&gt; API&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/oauth_authorizations/#get-a-single-authorization"&gt;Get a single authorization&lt;/a&gt; API&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app"&gt;Get-or-create an authorization for a specific app&lt;/a&gt; API (&lt;code&gt;token&lt;/code&gt; is still returned for "create")&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint"&gt;Get-or-create an authorization for a specific app and fingerprint&lt;/a&gt; API (&lt;code&gt;token&lt;/code&gt; is still returned for "create")&lt;/li&gt;
-&lt;li&gt;The &lt;a href="/v3/oauth_authorizations/#update-an-existing-authorization"&gt;Update an existing authorization&lt;/a&gt; API&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If your application uses these APIs, we urge you to update your application as soon as possible. (Read &lt;a href="/changes/2014-12-08-removing-authorizations-token/"&gt;the December announcement&lt;/a&gt; for more details on the changes.)&lt;/p&gt;
-
-&lt;p&gt;Starting today, we're offering a migration period allowing applications to opt in to these changes (as described below). On April 20, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Migration period&lt;/h3&gt;
-
-&lt;p&gt;During the migration period, you can opt-in to these changes using the following custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.mirage-preview+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token"&gt;get in touch with us&lt;/a&gt;!&lt;/p&gt;</content>
   </entry>
 </feed>
 

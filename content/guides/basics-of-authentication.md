@@ -2,13 +2,13 @@
 title: Basics of Authentication
 ---
 
-# Basics of Authentication
+# Basics of Authentication!
 
 {:toc}
 
 In this section, we're going to focus on the basics of authentication. Specifically,
 we're going to create a Ruby server (using [Sinatra][Sinatra]) that implements
-the [web flow][webflow] of an application in several different ways.
+the [web flow][webflow] of an application in several different ways!
 
 {{#tip}}
 
@@ -23,7 +23,6 @@ registered OAuth application is assigned a unique Client ID and Client Secret.
 The Client Secret should not be shared! That includes checking the string
 into your repository.
 
-You can fill out every piece of information however you like, except the
 **Authorization callback URL**. This is easily the most important piece to setting
 up your application. It's the callback URL that {{ site.data.variables.product.product_name }} returns the user to after
 successful authentication.

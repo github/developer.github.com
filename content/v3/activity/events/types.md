@@ -115,7 +115,7 @@ Events of this type are not visible in timelines. These events are only used to 
 Key | Type | Description
 ----|------|-------------
 `deployment_status` |`object` | The [deployment status](/v3/repos/deployments/#list-deployment-statuses).
-`deployment_status["state"]` |`string` | The new state. Can be `pending`, `success`, `failure`, or `error`.
+`deployment_status["state"]` |`string` | The new state. Can be `pending`, `success`, `inactive`, `failure`, or `error`.
 `deployment_status["target_url"]` |`string` | The optional link added to the status.
 `deployment_status["description"]`|`string` | The optional human-readable description added to the status.
 `deployment` |`object` | The [deployment](/v3/repos/deployments/#list-deployments) that this status is associated with.

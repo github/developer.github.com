@@ -44,7 +44,133 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">
+      <div class="change" id="/changes/2014-12-08-removing-authorizations-token/">
+  <h2 class="title">
+<a id="--removing-token-attribute-from-authorizations-api-responses" class="anchor" href="#--removing-token-attribute-from-authorizations-api-responses" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-12-08-removing-authorizations-token/">Removing token attribute from Authorizations API responses</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 8, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/ptoomey3.png" alt="Avatar for ptoomey3" data-proofer-ignore>
+      <a href="https://github.com/ptoomey3" data-proofer-ignore>ptoomey3</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Since OAuth access tokens function like passwords, they should be treated with
+care. Today we are making it easier to more securely work with authorizations
+via the Authorizations API. We are deprecating the use use of the <code>token</code>
+attribute in the majority of the <a href="/v3/oauth_authorizations/">Authorizations API</a>
+responses. For the <a href="/v3/oauth_authorizations/#deprecation-notice">affected APIs</a>, the
+<code>token</code> attribute will soon return an empty string. To get ready for that
+change, we are giving developers a chance to
+<a href="#preview-period">preview the updated API</a> starting today.</p>
+
+<h2>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's changing?</h2>
+
+<p>The current <a href="/v3/oauth_authorizations/">OAuth Authorizations API</a> requires GitHub to store the full value for
+each OAuth token on our servers. In order to increase the security for our
+users, we are changing our architecture to store the SHA-256 digest of OAuth
+tokens instead. GitHub securely hashes user passwords using bcrypt and we want
+to provide comparable security for OAuth tokens as well.</p>
+
+<p>Rest assured that this change is an entirely proactive measure from GitHub and is not associated with any security incident.</p>
+
+<h2>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who is affected?</h2>
+
+<p>This change affects any code that relies on accessing the <code>token</code> attribute from
+<a href="/v3/oauth_authorizations/#deprecation-notice">these OAuth Authorizations API responses</a>.
+For example, our own <a href="https://mac.github.com/">GitHub for Mac</a> and
+<a href="https://windows.github.com/">GitHub for Windows</a> applications relied on reading the <code>token</code>
+from the <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a> API, in order to support multiple installations of our desktop application for a single user.</p>
+
+<h2>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h2>
+
+<p>In order to reduce the impact of removing the <code>token</code> attribute, the OAuth
+Authorizations API has added a new request attribute (<code>fingerprint</code>), added
+three new response attributes (<code>token_last_eight</code>, <code>hashed_token</code>, and
+<code>fingerprint</code>), and added <a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">one new API</a>.
+While these new APIs and attributes do not replace the full functionality that
+previously existed, they can be used in place of <code>token</code> for most common use cases.</p>
+
+<ul>
+<li><p><code>token_last_eight</code> returns the last eight characters of the associated OAuth
+token. As an example, <code>token_last_eight</code> could be used to display a list of
+partial token values to help a user manage their OAuth tokens.</p></li>
+<li><p><code>hashed_token</code> is the base64 of the SHA-256 digest of the token.
+<code>hashed_token</code> could be used to programmatically validate that a given token
+matches an authorization returned by the API.</p></li>
+<li>
+<p><code>fingerprint</code> is a new optional request parameter that allows an OAuth
+application to create multiple authorizations for a single user. <code>fingerprint</code>
+should be a string that distinguishes the new authorization from others
+for the same client ID and user.</p>
+
+<p>For example, to differentiate installations of a desktop application across
+multiple devices you might set <code>fingerprint</code> to
+<code>SHA256_HEXDIGEST("GitHub for Mac - MAC_ADDRESS_OF_MACHINE")</code>. Since
+<code>fingerprint</code> is not meant to be a user-facing value, you should still set
+the <code>note</code> attribute to help a user differentiate between authorizations on their
+<a href="https://github.com/settings/applications">OAuth applications listing on GitHub</a>.</p>
+</li>
+<li><p><a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint">Get-or-create an authorization for a specific app and fingerprint</a>
+is a new API that is analagous to the
+<a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app">Get-or-create an authorization for a specific app</a>
+API, but adds support for the new <code>fingerprint</code> request parameter.</p></li>
+</ul>
+
+<h2>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
+
+<p>We are making the new Authorizations API available today for developers to
+preview. During this period, we may change aspects of these endpoints. If we do,
+we will announce the changes on the developer blog, but we will not provide any
+advance notice.</p>
+
+<p>While these new APIs are in their preview period, you’ll need to provide the
+following custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.mirage-preview+json
+</code></pre>
+
+<p>We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.</p>
+
+<h2>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
+
+<p>At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.</p>
+
+<h2>
+<a id="why-sha-256-over-bcrypt" class="anchor" href="#why-sha-256-over-bcrypt" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="why-sha-256-over-bcrypt" class="anchor" href="#why-sha-256-over-bcrypt" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why SHA-256 over bcrypt?</h2>
+
+<p>Some users may be curious why we are not using bcrypt to hash our OAuth tokens
+like we do for user passwords. Bcrypt is purposefully computationally expensive
+in order to mitigate brute force attacks against low entropy passwords. However,
+OAuth tokens are highly random and are not susceptible to brute force attacks.
+Given that OAuth token validation occurs for each request to the API we chose
+SHA-256 for performance reasons.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+authorizations+token">drop us a line</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">
   <h2 class="title">
 <a id="--preview-the-new-organization-webhooks-api" class="anchor" href="#--preview-the-new-organization-webhooks-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-12-03-preview-the-new-organization-webhooks-api/">Preview the New Organization Webhooks API</a>
@@ -582,45 +708,6 @@ have any questions or feedback, please <a href="https://github.com/contact?form%
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-09-05-removing-gravatar-id/">
-  <h2 class="title">
-<a id="--removing-gravatar-id-from-user-payloads" class="anchor" href="#--removing-gravatar-id-from-user-payloads" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-09-05-removing-gravatar-id/">Removing Gravatar ID from user payloads</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    September 5, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore>
-      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We have deprecated the <code>gravatar_id</code> attribute in the <a href="https://developer.github.com/v3/users/">user
-representation</a>. Starting September 19,
-the API will always provide an empty string as the value for this attribute.</p>
-
-<p>Users have been able to upload avatars directly to GitHub for <a href="https://github.com/blog/1803-switch-your-picture-with-ease">a while
-now</a>. If users
-haven't uploaded an avatar, we still try to fetch one from Gravatar, but that
-happens behind the scenes on GitHub's servers. As a result, the <code>gravatar_id</code>
-attribute no longer identifies a GitHub user's canonical avatar. Instead, API
-consumers should use the <code>avatar_url</code> to fetch a user's avatar. The <code>avatar_url</code>
-attribute has always been present in the <a href="/v3/users/">v3 user representation</a>
-and is the only reliable way to find a GitHub user's avatar.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Removing+Gravatar+ID">get drop us a line</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -751,6 +838,8 @@ and is the only reliable way to find a GitHub user's avatar.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
+
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
@@ -764,8 +853,6 @@ and is the only reliable way to find a GitHub user's avatar.</p>
   <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
-
-  <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
 </ul>
 

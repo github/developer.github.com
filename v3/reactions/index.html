@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Language" content="en-us" />
+  <meta http-equiv="imagetoolbar" content="false" />
+  <meta name="MSSmartTagsPreventParsing" content="true" />
+  <title>Reactions | GitHub Developer Guide</title>
+  
+  <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
+  
+  <link href="/assets/stylesheets/application.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/assets/javascripts/application.js" type="text/javascript"></script>
+  
+</head>
+
+
+<body class="api ">
+  
+
+<div id="header-wrapper">
+  <div id="header">
+    <div>
+      <a class="logo" href="/">GitHub:Developer</a>
+      <ul class="nav">
+        
+        <li><a href="/v3/" class="nav-api">API</a></li>
+        <li><a href="/program/" class="nav-developers">Developers</a></li>
+        <li><a href="/changes/" class="nav-blog">Blog</a></li>
+        <li><a href="https://github.com/contact">Support</a></li>
+        <li id="search-container">
+          <input type="text" id="searchfield" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" /><label class="search-placeholder">Search</label>
+          <div class="cancel-search"></div>
+          <ul id="search-results">
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div><!-- #header -->
+</div><!-- #header-wrapper -->
+
+
+  <div class="sub-nav">
+    <h2><a href="/v3/">API</a></h2>
+
+    <ul>
+      <li><a href="/v3/" class="active">Reference</a></li>
+      <li><a href="/webhooks/">Webhooks</a></li>
+      <li><a href="/guides/">Guides</a></li>
+      <li><a href="/libraries/">Libraries</a></li>
+    </ul>
+  </div>
+
+  <div id="wrapper">
+    <div class="content">
+      <h1>
+<a id="reactions" class="anchor" href="#reactions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reactions</h1>
+
+<div class="alert tip">
+
+<p><a name="preview-period"></a></p>
+
+<p>APIs for managing reactions are currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the <a href="/changes/2016-05-12-reactions-api-preview">blog post</a> for full details.</p>
+
+<p>To access the API you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>  application/vnd.github.squirrel-girl-preview
+</code></pre>
+
+</div>
+
+<ul id="markdown-toc">
+<li><a href="#reaction-types" id="markdown-toc-reaction-types">Reaction types</a></li>
+<li><a href="#list-reactions-for-a-commit-comment" id="markdown-toc-list-reactions-for-a-commit-comment">List reactions for a commit comment</a></li>
+<li><a href="#create-reaction-for-a-commit-comment" id="markdown-toc-create-reaction-for-a-commit-comment">Create reaction for a commit comment</a></li>
+<li><a href="#list-reactions-for-an-issue" id="markdown-toc-list-reactions-for-an-issue">List reactions for an issue</a></li>
+<li><a href="#create-reaction-for-an-issue" id="markdown-toc-create-reaction-for-an-issue">Create reaction for an issue</a></li>
+<li><a href="#list-reactions-for-an-issue-comment" id="markdown-toc-list-reactions-for-an-issue-comment">List reactions for an issue comment</a></li>
+<li><a href="#create-reaction-for-an-issue-comment" id="markdown-toc-create-reaction-for-an-issue-comment">Create reaction for an issue comment</a></li>
+<li><a href="#list-reactions-for-a-pull-request-review-comment" id="markdown-toc-list-reactions-for-a-pull-request-review-comment">List reactions for a pull request review comment</a></li>
+<li><a href="#create-reaction-for-a-pull-request-review-comment" id="markdown-toc-create-reaction-for-a-pull-request-review-comment">Create reaction for a pull request review comment</a></li>
+<li><a href="#delete-a-reaction" id="markdown-toc-delete-a-reaction">Delete a reaction</a></li>
+</ul>
+
+<h2>
+<a id="reaction-types" class="anchor" href="#reaction-types" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reaction types</h2>
+
+<p>When creating a reaction, the allowed values for the <code>content</code> parameter are as follows (with the corresponding emoji for reference):</p>
+
+<table>
+<thead>
+<tr>
+<th>content</th>
+<th>emoji</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+1</code></td>
+<td><img class="emoji" title=":+1:" alt=":+1:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/1f44d.png" height="20" width="20" align="absmiddle"></td>
+</tr>
+<tr>
+<td><code>-1</code></td>
+<td><img class="emoji" title=":-1:" alt=":-1:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/1f44e.png" height="20" width="20" align="absmiddle"></td>
+</tr>
+<tr>
+<td><code>laugh</code></td>
+<td><img class="emoji" title=":smile:" alt=":smile:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/1f604.png" height="20" width="20" align="absmiddle"></td>
+</tr>
+<tr>
+<td><code>confused</code></td>
+<td><img class="emoji" title=":confused:" alt=":confused:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/1f615.png" height="20" width="20" align="absmiddle"></td>
+</tr>
+<tr>
+<td><code>heart</code></td>
+<td><img class="emoji" title=":heart:" alt=":heart:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/2764.png" height="20" width="20" align="absmiddle"></td>
+</tr>
+<tr>
+<td><code>hooray</code></td>
+<td><img class="emoji" title=":tada:" alt=":tada:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/unicode/1f389.png" height="20" width="20" align="absmiddle"></td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="list-reactions-for-a-commit-comment" class="anchor" href="#list-reactions-for-a-commit-comment" aria-hidden="true"><span class="octicon octicon-link"></span></a>List reactions for a commit comment</h2>
+
+<pre><code>GET /repos/:owner/:repo/comments/:id/reactions
+</code></pre>
+
+<h3>
+<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>Indicates which type of reaction to return.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="create-reaction-for-a-commit-comment" class="anchor" href="#create-reaction-for-a-commit-comment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create reaction for a commit comment</h2>
+
+<pre><code>POST /repos/:owner/:repo/comments/:id/reactions
+</code></pre>
+
+<h3>
+<a id="parameters-1" class="anchor" href="#parameters-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>
+<strong>Required</strong>. The reaction type</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<div class="alert tip">
+
+<p>If you have already created a reaction of type <code>content</code>, the previously created reaction will be returned with <code>Status: 200 OK</code>.</p>
+
+</div>
+
+<pre class="highlight highlight-headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="list-reactions-for-an-issue" class="anchor" href="#list-reactions-for-an-issue" aria-hidden="true"><span class="octicon octicon-link"></span></a>List reactions for an issue</h2>
+
+<pre><code>GET /repos/:owner/:repo/issues/:number/reactions
+</code></pre>
+
+<h3>
+<a id="parameters-2" class="anchor" href="#parameters-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>Indicates which type of reaction to return.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="create-reaction-for-an-issue" class="anchor" href="#create-reaction-for-an-issue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create reaction for an issue</h2>
+
+<pre><code>POST /repos/:owner/:repo/issues/:number/reactions
+</code></pre>
+
+<h3>
+<a id="parameters-3" class="anchor" href="#parameters-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>
+<strong>Required</strong>. The reaction type</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<div class="alert tip">
+
+<p>If you have already created a reaction of type <code>content</code>, the previously created reaction will be returned with <code>Status: 200 OK</code>.</p>
+
+</div>
+
+<pre class="highlight highlight-headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="list-reactions-for-an-issue-comment" class="anchor" href="#list-reactions-for-an-issue-comment" aria-hidden="true"><span class="octicon octicon-link"></span></a>List reactions for an issue comment</h2>
+
+<pre><code>GET /repos/:owner/:repo/issues/comments/:id/reactions
+</code></pre>
+
+<h3>
+<a id="parameters-4" class="anchor" href="#parameters-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>Indicates which type of reaction to return.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="create-reaction-for-an-issue-comment" class="anchor" href="#create-reaction-for-an-issue-comment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create reaction for an issue comment</h2>
+
+<pre><code>POST /repos/:owner/:repo/issues/comments/:id/reactions
+</code></pre>
+
+<h3>
+<a id="parameters-5" class="anchor" href="#parameters-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>
+<strong>Required</strong>. The reaction type</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="response-5" class="anchor" href="#response-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<div class="alert tip">
+
+<p>If you have already created a reaction of type <code>content</code>, the previously created reaction will be returned with <code>Status: 200 OK</code>.</p>
+
+</div>
+
+<pre class="highlight highlight-headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="list-reactions-for-a-pull-request-review-comment" class="anchor" href="#list-reactions-for-a-pull-request-review-comment" aria-hidden="true"><span class="octicon octicon-link"></span></a>List reactions for a pull request review comment</h2>
+
+<pre><code>GET /repos/:owner/:repo/pulls/comments/:id/reactions
+</code></pre>
+
+<h3>
+<a id="parameters-6" class="anchor" href="#parameters-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>Indicates which type of reaction to return.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="response-6" class="anchor" href="#response-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 200 OK
+Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
+      &lt;https://api.github.com/resource?page=5&gt;; rel="last"
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="create-reaction-for-a-pull-request-review-comment" class="anchor" href="#create-reaction-for-a-pull-request-review-comment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Create reaction for a pull request review comment</h2>
+
+<pre><code>POST /repos/:owner/:repo/pulls/comments/:id/reactions
+</code></pre>
+
+<h3>
+<a id="parameters-7" class="anchor" href="#parameters-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td><code>string</code></td>
+<td>
+<strong>Required</strong>. The reaction type</td>
+</tr>
+</tbody>
+</table>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h3>
+<a id="response-7" class="anchor" href="#response-7" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<div class="alert tip">
+
+<p>If you have already created a reaction of type <code>content</code>, the previously created reaction will be returned with <code>Status: 200 OK</code>.</p>
+
+</div>
+
+<pre class="highlight highlight-headers"><code>Status: 201 Created
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+
+<h2>
+<a id="delete-a-reaction" class="anchor" href="#delete-a-reaction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete a reaction</h2>
+
+<pre><code>DELETE /reactions/:id
+</code></pre>
+
+<h3>
+<a id="response-8" class="anchor" href="#response-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+
+<pre class="highlight highlight-headers"><code>Status: 204 No Content
+X-RateLimit-Limit: 5000
+X-RateLimit-Remaining: 4999
+</code></pre>
+
+    </div>
+
+    <div id="js-sidebar" class="sidebar-shell">
+  <div class="js-toggle-list sidebar-module expandable">
+    <ul>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/">Overview</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/media/">Media Types</a></li>
+          <li><a href="/v3/oauth/">OAuth</a></li>
+          <li><a href="/v3/oauth_authorizations/">OAuth Authorizations API</a></li>
+          <li><a href="/v3/auth/">Other Authentication Methods</a></li>
+          <li><a href="/v3/troubleshooting/">Troubleshooting</a></li>
+          <li><a href="/v3/versions/">Versions</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/activity/">Activity</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/activity/events/">Events</a></li>
+          <li><a href="/v3/activity/events/types/">Event Types &amp; Payloads</a></li>
+          <li><a href="/v3/activity/feeds/">Feeds</a></li>
+          <li><a href="/v3/activity/notifications/">Notifications</a></li>
+          <li><a href="/v3/activity/starring/">Starring</a></li>
+          <li><a href="/v3/activity/watching/">Watching</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/gists/">Gists</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/gists/comments/">Comments</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/git/">Git Data</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/git/blobs/">Blobs</a></li>
+          <li><a href="/v3/git/commits/">Commits</a></li>
+          <li><a href="/v3/git/refs/">References</a></li>
+          <li><a href="/v3/git/tags/">Tags</a></li>
+          <li><a href="/v3/git/trees/">Trees</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/issues/">Issues</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/issues/assignees/">Assignees</a></li>
+          <li><a href="/v3/issues/comments/">Comments</a></li>
+          <li><a href="/v3/issues/events/">Events</a></li>
+          <li><a href="/v3/issues/labels/">Labels</a></li>
+          <li><a href="/v3/issues/milestones/">Milestones</a></li>
+        </ul>
+      </li>
+      
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/migration/">Migration</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/migration/migrations/">Migrations</a></li>
+          <li><a href="/v3/migration/source_imports/">Source Imports</a></li>
+        </ul>
+      </li>
+      
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/misc/">Miscellaneous</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/emojis/">Emojis</a></li>
+          <li><a href="/v3/gitignore/">Gitignore</a></li>
+          <li><a href="/v3/licenses/">Licenses</a></li>
+          <li><a href="/v3/markdown/">Markdown</a></li>
+          <li><a href="/v3/meta/">Meta</a></li>
+          <li><a href="/v3/rate_limit/">Rate Limit</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/orgs/">Organizations</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/orgs/members/">Members</a></li>
+          <li><a href="/v3/orgs/teams/">Teams</a></li>
+          <li><a href="/v3/orgs/hooks/">Webhooks</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/pulls/">Pull Requests</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/reactions/">Reactions</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/reactions/#list-reactions-for-a-commit-comment">Commit Comment</a></li>
+          <li><a href="/v3/reactions/#list-reactions-for-an-issue">Issue</a></li>
+          <li><a href="/v3/reactions/#list-reactions-for-an-issue-comment">Issue Comment</a></li>
+          <li><a href="/v3/reactions/#list-reactions-for-a-pull-request-review-comment">Pull Request Review Comment</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/repos/">Repositories</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/repos/collaborators/">Collaborators</a></li>
+          <li><a href="/v3/repos/comments/">Comments</a></li>
+          <li><a href="/v3/repos/commits/">Commits</a></li>
+          <li><a href="/v3/repos/contents/">Contents</a></li>
+          <li><a href="/v3/repos/keys/">Deploy Keys</a></li>
+          <li><a href="/v3/repos/deployments/">Deployments</a></li>
+          <li><a href="/v3/repos/downloads/">Downloads</a></li>
+          <li><a href="/v3/repos/forks/">Forks</a></li>
+          <li><a href="/v3/repos/merging/">Merging</a></li>
+          <li><a href="/v3/repos/pages/">Pages</a></li>
+          <li><a href="/v3/repos/releases/">Releases</a></li>
+          <li><a href="/v3/repos/statistics/">Statistics</a></li>
+          <li><a href="/v3/repos/statuses/">Statuses</a></li>
+          <li><a href="/v3/repos/hooks/">Webhooks</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/search/">Search</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/search/#search-repositories">Repositories</a></li>
+          <li><a href="/v3/search/#search-code">Code</a></li>
+          <li><a href="/v3/search/#search-issues">Issues</a></li>
+          <li><a href="/v3/search/#search-users">Users</a></li>
+          <li><a href="/v3/search/legacy/">Legacy Search</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/users/">Users</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/users/emails/">Emails</a></li>
+          <li><a href="/v3/users/followers/">Followers</a></li>
+          <li><a href="/v3/users/keys/">Git SSH Keys</a></li>
+          
+          <li><a href="/v3/users/gpg_keys/">GPG Keys</a></li>
+          
+          <li><a href="/v3/users/administration/">Administration (Enterprise)</a></li>
+        </ul>
+      </li>
+      <li class="js-topic">
+        <h3><a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/v3/enterprise/">Enterprise</a></h3>
+        <ul class="js-guides">
+          <li><a href="/v3/enterprise/admin_stats/">Admin Stats</a></li>
+          <li><a href="/v3/enterprise/ldap/">LDAP</a></li>
+          <li><a href="/v3/enterprise/license/">License</a></li>
+          <li><a href="/v3/enterprise/management_console/">Management Console</a></li>
+          <li><a href="/v3/enterprise/search_indexing/">Search Indexing</a></li>
+          
+          <li><a href="/v3/enterprise/orgs/">Organization Administration</a></li>
+          
+        </ul>
+      </li>
+    </ul>
+  </div> <!-- /sidebar-module -->
+  <div class="sidebar-module notice">
+    <p>This website is a <a href="https://github.com/github/developer.github.com" target="_blank">public GitHub repository</a>. Please help us by forking the project and adding to it.</p>
+  </div>
+	<div class="sidebar-module api-status"><a href="https://status.github.com" class="unknown">API Status</a></div>
+</div><!-- /sidebar-shell -->
+
+  </div><!-- #wrapper -->
+
+    <div id="footer" >
+    <div class="lower_footer">
+      <ul class="footer-cell">
+        <li><a href="https://github.com/github/developer.github.com#licenses">&copy; 2016 GitHub, Inc.</a></li>
+        <li><a href="https://help.github.com/terms-of-service/">Terms</a></li>
+        <li><a href="https://help.github.com/privacy-policy/">Privacy</a></li>
+        <li><a href="https://help.github.com/security/">Security</a></li>
+        <li><a href="https://github.com/contact">Contact</a></li>
+      </ul>
+
+      <span class="footer-cell">
+        <a href="https://github.com" class="mega-octicon octicon-mark-github"></a>
+      </span>
+
+      <ul class="footer-cell">
+        <li><a href="https://status.github.com/">Status</a></li>
+        <li><a href="http://training.github.com/">Training</a></li>
+        <li><a href="http://shop.github.com/">Shop</a></li>
+        <li><a href="https://github.com/blog">Blog</a></li>
+        <li><a href="https://github.com/about">About</a></li>
+      </ul>
+    </div>
+
+  </div><!-- /#footer -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-3769691-37', 'github.com');
+    ga('send', 'pageview');
+  </script>
+
+</body>
+</html>

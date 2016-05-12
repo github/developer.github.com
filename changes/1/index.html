@@ -44,7 +44,51 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">
+      <div class="change" id="/changes/2016-05-12-reactions-api-preview/">
+  <h2 class="title">
+<a id="--preview-support-for-reactions-api" class="anchor" href="#--preview-support-for-reactions-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 12, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kneemer.png" alt="Avatar for kneemer" data-proofer-ignore>
+      <a href="https://github.com/kneemer" data-proofer-ignore>kneemer</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>GitHub recently added <a href="https://github.com/blog/2119-add-reactions-to-pull-requests-issues-and-comments">Reactions to Pull Requests, Issues, and Comments</a> to help people express their feelings more simply and effectively in conversations. We are adding endpoints for Reactions so that you can now react and unreact via the API. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.squirrel-girl-preview
+</code></pre>
+
+<p>For example:</p>
+
+<p>To view reactions on an issue:</p>
+
+<pre class="command-line">
+<span class="command">curl "https://api.github.com/repos/github/hubot/issues/1/reactions" \</span>
+  -H "Accept: application/vnd.github.squirrel-girl-preview"
+</pre>
+
+<p>You can learn more about the new reaction response objects in the updated <a href="/v3/repos/comments#preview-period-commits-comments">Commit comment</a>, <a href="/v3/issues#preview-period-org-issues">Issue</a>, <a href="/v3/issues/comments#preview-period-issue-comments">Issue comment</a>, and <a href="/v3/pulls/comments#preview-period-pull-comments">Review Comment</a> documentation. There is also new <a href="/v3/reactions">Reaction</a> documentation.</p>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Reactions+API+Preview">let us know</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">
   <h2 class="title">
 <a id="--source-import-api-enhancements-for-working-with-git-lfs" class="anchor" href="#--source-import-api-enhancements-for-working-with-git-lfs" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS</a>
@@ -525,7 +569,6 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
 <span class="k">end</span>
 </code></pre>
 
-
 <h3>
 <a id="how-to-work-with-new-event-actions" class="anchor" href="#how-to-work-with-new-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="how-to-work-with-new-event-actions" class="anchor" href="#how-to-work-with-new-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to work with new event actions</h3>
@@ -545,65 +588,9 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
 <span class="k">end</span>
 </code></pre>
 
-
 <p>We may also add new webhook event types from time to time. If your webhook is configured to "Send me <strong>everything</strong>", your code should also explicitly check for the event type in a similar way as we have done with checking for the action type above. Take a look at our <a href="https://developer.github.com/guides/best-practices-for-integrators/">integrators best practices guide</a> for more tips.</p>
 
 <p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Webhook+Actions">get in touch</a>.</p>
-</div>
-
-<div class="change" id="/changes/2016-02-24-commit-reference-sha-api/">
-  <h2 class="title">
-<a id="--commit-reference-sha-1-preview-period" class="anchor" href="#--commit-reference-sha-1-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    February 24, 2016
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mikemcquaid.png" alt="Avatar for mikemcquaid" data-proofer-ignore>
-      <a href="https://github.com/mikemcquaid" data-proofer-ignore>mikemcquaid</a>
-  </li>
-</ul>
-</div>
-
-  <p>We're introducing a new API media type to allow users to get the SHA-1 of a commit reference. This can be useful in working out if you have the latest version of a remote branch based on your local branch's SHA-1. Developers with read access to a repository can start experimenting with this new media type today during the preview period.</p>
-
-<p>To get the commit reference's SHA-1, make a <code>GET</code> request to the repository's reference:</p>
-
-<pre class="command-line">
-<span class="command">curl "https://api.github.com/repos/Homebrew/homebrew/commits/master" \</span>
-  -H "Accept: application/vnd.github.chitauri-preview+sha"
-</pre>
-
-<p>To check if a remote branch's SHA-1 is the same as your local branch's SHA-1, make a <code>GET</code> request to the repository's branch and provide the current SHA-1 for the local branch as the ETag:</p>
-
-<pre class="command-line">
-<span class="command">curl "https://api.github.com/repos/Homebrew/homebrew/commits/master" \</span>
-  -H "Accept: application/vnd.github.chitauri-preview+sha" \
-  -H "If-None-Match: \"814412cfbd631109df337e16c807207e78c0d24e\""
-</pre>
-
-<p>If the remote and your local branch point to the same SHA-1 then this call will return a <code>304 Unmodified</code> status code (and not use your rate limit).</p>
-
-<p>You can see an example of this API in a pull request to Homebrew/homebrew's updater: <a href="https://github.com/Homebrew/homebrew/pull/49219">https://github.com/Homebrew/homebrew/pull/49219</a>.</p>
-
-<h4>
-<a id="how-can-i-try-it-1" class="anchor" href="#how-can-i-try-it-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="how-can-i-try-it" class="anchor" href="#how-can-i-try-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How can I try it?</h4>
-
-<p>To use this new API media type during the preview period, you’ll need to provide the following custom <a href="/v3/media/">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.chitauri-preview+sha
-</code></pre>
-
-<p>During the preview period, we may change aspects of this API media type based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
-
-<p>Take a look at <a href="/v3/repos/commits/#get-the-sha-1-of-a-commit-reference">the documentation</a> and, if you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Commit+Reference+SHA-1+Preview">get in touch</a>.</p>
 
 <p></p>
 </div>
@@ -701,6 +688,8 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
+
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
@@ -714,8 +703,6 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
   <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
-
-  <li><a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported<br /><span class="date">March 17, 2016</span></a></li>
 
 </ul>
 

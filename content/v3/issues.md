@@ -49,6 +49,26 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:issue) { |h| [h] } %>
 
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-org-issues"></a>
+
+  An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :issue_reaction_summary %>
+{% endif %}
+
 ## List issues for a repository
 
 <%= fetch_content(:prs_as_issues) %>
@@ -74,6 +94,27 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:issue) { |h| [h] } %>
 
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-repo-issues"></a>
+
+  An additional `reactions` object in the issue payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :issue_reaction_summary %>
+{% endif %}
+
 ## Get a single issue
 
 <%= fetch_content(:prs_as_issues) %>
@@ -84,6 +125,27 @@ Name | Type | Description
 
 <%= headers 200 %>
 <%= json :full_issue %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-issue"></a>
+
+  An additional `reactions` object in the issue payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :issue_reaction_summary %>
+{% endif %}
 
 ## Create an issue
 

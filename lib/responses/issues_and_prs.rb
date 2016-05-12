@@ -1,5 +1,6 @@
 require_relative 'user'
 require_relative 'repos'
+require_relative 'reactions'
 
 module GitHub
   module Resources
@@ -153,6 +154,14 @@ module GitHub
       }
 
       FULL_ISSUE_EVENT ||= ISSUE_EVENT.merge('issue' => ISSUE)
+
+      ISSUE_REACTION_SUMMARY ||= REACTION_SUMMARY.merge({
+        "url" => ISSUE["url"] + "/reactions"
+      })
+
+      ISSUE_COMMENT_REACTION_SUMMARY ||= REACTION_SUMMARY.merge({
+        "url" => ISSUE_COMMENT["url"] + "/reactions"
+      })
     end
   end
 end

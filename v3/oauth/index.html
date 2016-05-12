@@ -120,7 +120,7 @@ for your own use or implement the web flow below to allow other users to authori
 <tr>
 <td><code>scope</code></td>
 <td><code>string</code></td>
-<td>A comma separated list of <a href="#scopes">scopes</a>. If not provided, <code>scope</code> defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.</td>
+<td>A space delimited list of <a href="#scopes">scopes</a>. If not provided, <code>scope</code> defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.</td>
 </tr>
 <tr>
 <td><code>state</code></td>
@@ -425,11 +425,11 @@ X-Accepted-OAuth-Scopes: user
 </table>
 
 <p>NOTE: Your application can request the scopes in the initial redirection. You
-can specify multiple scopes by separating them with a comma:</p>
+can specify multiple scopes by separating them with a space:</p>
 
 <pre><code>https://github.com/login/oauth/authorize?
   client_id=...&amp;
-  scope=user,public_repo
+  scope=user%20public_repo
 </code></pre>
 
 <h2>

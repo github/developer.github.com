@@ -36,7 +36,7 @@ end
 desc "Run the HTML-Proofer"
 task :run_proofer do
   require 'html-proofer'
-  ignored_links = [%r{www.w3.org}, /api\.github\.com/]
+  ignored_links = [%r{www.w3.org}, /api\.github\.com/, /import\.github\.com/]
   # swap versionless Enterprise articles with versioned paths
   url_swap = {
     %r{help.github.com/enterprise/admin/} => "help.github.com/enterprise/#{config[:versions][0]}/admin/",

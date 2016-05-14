@@ -231,7 +231,7 @@ The `q` search term can also contain any combination of the supported issue sear
    With this qualifier you can restrict the search to issues (`issue`) or pull request (`pr`) only.
  * [`in`](https://help.github.com/articles/searching-issues#scope-the-search-fields)
    Qualifies which fields are searched. With this qualifier you can restrict the
-   search to just the title (`title`), body (`body`), comments (`comment`), or any combination of these.
+   search to just the title (`title`), body (`body`), comments (`comments`), or any combination of these.
  * [`author`](https://help.github.com/articles/searching-issues#search-by-the-author-of-an-issue-or-pull-request)
    Finds issues or pull requests created by a certain user.
  * [`assignee`](https://help.github.com/articles/searching-issues#search-by-the-assignee-of-an-issue-or-pull-request)

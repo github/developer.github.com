@@ -21,7 +21,7 @@ many flavors</h1>
 
 * [GithubAndroidSDK][githubandroidsdk]
 
-[githubandroidsdk]: https://github.com/gitskarios/GithubAndroidSdk
+[githubandroidsdk]: https://github.com/gitskarios/GithubAndroidSdk -> ilove this one!
 
 ## .NET
 

@@ -1,14 +1,13 @@
 ---
-title: OAuth | GitHub API
+title: OAuth
 ---
 
 # OAuth
 
-* TOC
 {:toc}
 
 OAuth2 is a protocol that lets external apps request authorization to
-private details in a user's GitHub account without getting their
+private details in a user's {{ site.data.variables.product.product_name }} account without getting their
 password. This is preferred over [Basic Authentication](/v3/auth#basic-authentication) because tokens can
 be limited to specific types of data, and can be revoked by users at any
 time.
@@ -38,6 +37,7 @@ Name | Type | Description
 `redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
 `scope`|`string` | A comma separated list of [scopes](#scopes). If not provided, `scope` defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.
 `state`|`string` | An unguessable random string. It is used to protect against cross-site request forgery attacks.
+`allow_signup`|`string` | Whether or not unauthenticated users will be offered an option to sign up for GitHub during the OAuth flow. The default is `true`. Use `false` in the case that a policy prohibits signups.
 
 ### 2. GitHub redirects back to your site
 
@@ -56,9 +56,9 @@ Name | Type | Description
 -----|------|---------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `client_secret`|`string` | **Required**. The client secret you received from GitHub when you [registered](https://github.com/settings/applications/new).
-`code`|`string` | **Required**. The code you received as a response to [Step 1](#redirect-users-to-request-github-access).
+`code`|`string` | **Required**. The code you received as a response to [Step 1](#1-redirect-users-to-request-github-access).
 `redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
-`state`|`string` | The unguessable random string you optionally provided in [Step 1](#redirect-users-to-request-github-access).
+`state`|`string` | The unguessable random string you optionally provided in [Step 1](#1-redirect-users-to-request-github-access).
 
 ### Response
 
@@ -122,8 +122,9 @@ cleaner approach is to include it in the Authorization header
 
 For example, in curl you can set the Authorization header like this:
 
-{:.terminal}
-    curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+``` command-line
+curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/user
+```
 
 ## Non-Web Application Flow
 
@@ -164,11 +165,12 @@ authorize form.
 Check headers to see what OAuth scopes you have, and what the API action
 accepts.
 
-{:.terminal}
-    $ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
-    HTTP/1.1 200 OK
-    X-OAuth-Scopes: repo, user
-    X-Accepted-OAuth-Scopes: user
+``` command-line
+$ curl -H "Authorization: token OAUTH-TOKEN" https://api.github.com/users/technoweenie -I
+HTTP/1.1 200 OK
+X-OAuth-Scopes: repo, user
+X-Accepted-OAuth-Scopes: user
+```
 
 `X-OAuth-Scopes` lists the scopes your token has authorized.
 `X-Accepted-OAuth-Scopes` lists the scopes that the action checks for.
@@ -197,6 +199,9 @@ Name | Description
 `read:public_key`| List and view details for public keys.
 `write:public_key`| Create, list, and view details for public keys.
 `admin:public_key`| Fully manage public keys.
+{% if page.version == 'dotcom' %}`read:gpg_key`| List and view details for GPG keys.{% endif %}
+{% if page.version == 'dotcom' %}`write:gpg_key`| Create, list, and view details for GPG keys.{% endif %}
+{% if page.version == 'dotcom' %}`admin:gpg_key`| Fully manage GPG keys.{% endif %}
 
 NOTE: Your application can request the scopes in the initial redirection. You
 can specify multiple scopes by separating them with a comma:
@@ -306,7 +311,7 @@ receive this error.
          :error_uri         => "https://developer.github.com/v3/oauth/#bad-verification-code"
 %>
 
-To solve this error, start the [OAuth process over from the beginning](#redirect-users-to-request-github-access)
+To solve this error, start the [OAuth process over from the beginning](#1-redirect-users-to-request-github-access)
 and get a new code.
 
 ## Directing users to review their access for an application

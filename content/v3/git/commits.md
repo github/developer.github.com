@@ -1,10 +1,9 @@
 ---
-title: Git Commits | GitHub API
+title: Git Commits
 ---
 
 # Commits
 
-* TOC
 {:toc}
 
 ## Get a Commit
@@ -60,3 +59,28 @@ Name | Type | Description
 
 <%= headers 201, :Location => get_resource(:new_commit)['url'] %>
 <%= json :new_commit %>
+
+{% if page.version == 'dotcom' %}
+
+## Commit signature verification
+
+{{#tip}}
+
+Commit response objects including signature verification data are currently available for developers to preview.
+During the preview period, the object formats may change without advance notice.
+Please see the [blog post](/changes/2016-04-04-git-signing-api-preview) for full details.
+
+To receive signature verification data in commit objects you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+    application/vnd.github.cryptographer-preview+sha
+
+{{/tip}}
+
+    GET /repos/:owner/:repo/git/commits/:sha
+
+### Response
+
+<%= headers 200 %>
+<%= json(:signed_git_commit) %>
+
+{% endif %}

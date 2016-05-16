@@ -1,10 +1,9 @@
 ---
-title: Issue Assignees | GitHub API
+title: Issue Assignees
 ---
 
 # Assignees
 
-* TOC
 {:toc}
 
 ## List assignees

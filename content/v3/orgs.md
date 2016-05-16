@@ -1,10 +1,9 @@
 ---
-title: Organizations | GitHub API
+title: Organizations
 ---
 
 # Organizations
 
-* TOC
 {:toc}
 
 ## List your organizations
@@ -24,7 +23,7 @@ This only lists organizations that your authorization allows you to operate on i
 
 ## List all organizations
 
-Lists all organizations, in the order that they were created on GitHub.
+Lists all organizations, in the order that they were created on {{ site.data.variables.product.product_name }}.
 
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of

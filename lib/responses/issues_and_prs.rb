@@ -1,5 +1,6 @@
 require_relative 'user'
 require_relative 'repos'
+require_relative 'reactions'
 
 module GitHub
   module Resources
@@ -148,10 +149,19 @@ module GitHub
         "actor"      => USER,
         "event"      => "closed",
         "commit_id"  => "6dcb09b5b57875f334f61aebed695e2e4193db5e",
+        "commit_url" => "https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e",
         "created_at" => "2011-04-14T16:00:49Z"
       }
 
       FULL_ISSUE_EVENT ||= ISSUE_EVENT.merge('issue' => ISSUE)
+
+      ISSUE_REACTION_SUMMARY ||= REACTION_SUMMARY.merge({
+        "url" => ISSUE["url"] + "/reactions"
+      })
+
+      ISSUE_COMMENT_REACTION_SUMMARY ||= REACTION_SUMMARY.merge({
+        "url" => ISSUE_COMMENT["url"] + "/reactions"
+      })
     end
   end
 end

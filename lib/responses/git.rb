@@ -1,4 +1,5 @@
 require_relative 'user'
+require_relative 'reactions'
 
 module GitHub
   module Resources
@@ -470,6 +471,16 @@ module GitHub
         "message" => "Not Found",
         "documentation_url" => "https://developer.github.com/v3"
       }
+
+
+      PULL_COMMENT_REACTION_SUMMARY ||= REACTION_SUMMARY.merge({
+        "url" => PULL_COMMENT["url"] + "/reactions"
+      })
+
+      COMMIT_COMMENT_REACTION_SUMMARY ||= REACTION_SUMMARY.merge({
+        "url" => COMMIT_COMMENT["url"] + "/reactions"
+      })
+
     end
   end
 end

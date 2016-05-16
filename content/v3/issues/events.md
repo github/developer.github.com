@@ -25,6 +25,9 @@ determine who should be notified of comments.
   <dt>commit_id</dt>
   <dd>The String SHA of a commit that referenced this Issue</dd>
 
+  <dt>commit_url</dt>
+  <dd>The GitHub API link to a commit that referenced this Issue</dd>
+
   <dt>event</dt>
   <dd>Identifies the actual type of Event that occurred.</dd>
 

@@ -48,16 +48,16 @@ Name | Description
 [`deployment_status`][event-types-deployment_status] | Any time a deployment for a Repository has a status update from the API.
 [`fork`][event-types-fork] | Any time a Repository is forked.
 [`gollum`][event-types-gollum] | Any time a Wiki page is updated.
-[`issue_comment`][event-types-issue_comment] | Any time a [comment on an issue](/v3/issues/comments/) is created or edited
-[`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, edited, closed, or reopened.
+[`issue_comment`][event-types-issue_comment] | {% if page.version == 'dotcom' or page.version > 2.6 %}Any time a [comment on an issue](/v3/issues/comments/) is created, edited, or deleted.{% else %}Any time an [issue is commented on](/v3/issues/comments).{% endif %}
+[`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, {% if page.version == 'dotcom' or page.version > 2.6 %}edited, {% endif %}closed, or reopened.
 [`member`][event-types-member] | Any time a User is added as a collaborator to a non-Organization Repository.
 [`membership`][event-types-membership] | Any time a User is added or removed from a team. **Organization hooks only**.
 [`page_build`][event-types-page_build] | Any time a Pages site is built or results in a failed build.
 [`public`][event-types-public] | Any time a Repository changes from private to public.
-[`pull_request_review_comment`][event-types-pull_request_review_comment] | Any time a [comment on a pull request's unified diff](/v3/pulls/comments)  is created, edited, or deleted (in the Files Changed tab).
-[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, edited, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
+[`pull_request_review_comment`][event-types-pull_request_review_comment] | {% if page.version == 'dotcom' or page.version > 2.6 %}Any time a [comment on a Pull Request's unified diff](/v3/pulls/comments)  is created, edited, or deleted{% else %}Any time a [Pull Request's unified diff is commented on](/v3/pulls/comments){% endif %} (in the Files Changed tab).
+[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, {% if page.version == 'dotcom' or page.version > 2.6 %}edited, {% endif %}closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
 [`push`][event-types-push] | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
-[`repository`][event-types-repository] | Any time a Repository is created, deleted, made public, or made private.
+[`repository`][event-types-repository] | Any time a Repository is created{% if page.version == 'dotcom' or page.version > 2.6 %}, deleted, made public, or made private{% else %}. **Organization hooks only**{% endif %}.
 [`release`][event-types-release] | Any time a Release is published in a Repository.
 [`status`][event-types-status] | Any time a Repository has a status update from the API
 [`team_add`][event-types-team_add] | Any time a team is added or modified on a Repository.

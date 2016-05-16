@@ -26,7 +26,7 @@ This API is not currently available on GitHub Enterprise.
 
 The Source Import API lets you start an import from a Git, Subversion, Mercurial, or Team Foundation Server source repository. This is the same functionality as [the GitHub Importer](https://import.github.com/).
 
-A typical source import would [start the import](#start-an-import) and then (optionally) [update the authors](#map-a-commit-author). A more detailed example can be seen in this diagram:
+A typical source import would [start the import](#start-an-import) and then (optionally) [update the authors](#map-a-commit-author) and/or [set the preference](#set-git-lfs-preference) for using Git LFS if large files exist in the import. A more detailed example can be seen in this diagram:
 
 ```
 +---------+                     +--------+                              +---------------------+
@@ -78,6 +78,21 @@ A typical source import would [start the import](#start-an-import) and then (opt
      |                              |      |                                       |
      |                              |<-----+                                       |
      |                              |                                              |
+     |  Get large files             |                                              |
+     |----------------------------->|                                              |
+     |                              |                                              |
+     |  opt_in to Git LFS           |                                              |
+     |----------------------------->|                                              |
+     |                              |  Rewrite commits for large files             |
+     |                              |------+                                       |
+     |                              |      |                                       |
+     |                              |<-----+                                       |
+     |                              |                                              |
+     |                              |  Update repository on GitHub                 |
+     |                              |------+                                       |
+     |                              |      |                                       |
+     |                              |<-----+                                       |
+     |                              |                                              |
      |  Get import progress         |                                              |
      |----------------------------->|                                              |
      |        "status": "complete"  |                                              |
@@ -96,8 +111,8 @@ Start a source import to a GitHub repository using GitHub Importer.
 
 Name | Type | Description
 -----|------|--------------
-`vcs`|`string`|**Required** The originating VCS type. Can be one of "subversion", "git", "mercurial", or "tfvc".
 `vcs_url`|`url`|**Required** The URL of the originating repository.
+`vcs`|`string`|The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.
 `vcs_username`|`string`|If authentication is required, the username to provide to `vcs_url`.
 `vcs_password`|`string`|If authentication is required, the password to provide to `vcs_url`.
 `tfvc_project`|`string`|For a tfvc import, the name of the project that is being imported.
@@ -121,7 +136,7 @@ Name | Type | Description
 View the progress of an import.
 
     GET /repos/:owner/:repo/import
-    
+
 ### Response
 
 <%= headers 200 %>
@@ -133,6 +148,7 @@ This section includes details about the possible values of the `status` field of
 
 An import that does not have errors will progress through these steps:
 
+* `detecting` - the "detection" step of the import is in progress because the request did not include a `vcs` parameter. The import is identifying the type of source control present at the URL.
 * `importing` - the "raw" step of the import is in progress. This is where commit data is fetched from the original repository. The import progress response will include `commit_count` (the total number of raw commits that will be imported) and `percent` (0 - 100, the current progress through the import).
 * `mapping` - the "rewrite" step of the import is in progress. This is where SVN branches are converted to Git branches, and where author updates are applied. The import progress response does not include progress information.
 * `pushing` - the "push" step of the import is in progress. This is where the importer updates the repository on GitHub. The import progress response will include `push_percent`, which is the percent value reported by `git push` when it is "Writing objects".
@@ -140,16 +156,69 @@ An import that does not have errors will progress through these steps:
 
 If there are problems, you will see one of these in the `status` field:
 
-* `auth_failed` - the import requires authentication in order to connect to the original repository. Make another "Start Import" request, and include `vcs_username` and `vcs_password`.
+* `auth_failed` - the import requires authentication in order to connect to the original repository. Make an "Update Existing Import" request, and include `vcs_username` and `vcs_password`.
 * `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. [Contact support](https://github.com/contact?form%5Bsubject%5D=Source+Import+API+error) for more information.
+* `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. Make an "Update Existing Import" request, and include `vcs_username` and `vcs_password`.
+* `detection_found_nothing` - the importer didn't recognize any source control at the URL.
+* `detection_found_multiple` - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a `project_choices` field with the possible project choices as values. Make an "Update Existing Import" request, and include `vcs` and (if applicable) `tfvc_project`.
 
-If you query import status for an import started via the web UI, you may also see these states:
+### Git LFS related fields
 
-* `detecting` - you've entered a URL via the web UI, and the importer is figuring out what type of source control is present at the URL.
-* `detection_needs_auth` - you've entered a URL via the web UI, and the importer needs you to enter authentication credentials in the web UI in order to continue detection.
-* `detection_found_nothing` - the importer didn't recognize any source control at the URL entered via the web UI.
-* `detection_found_multiple` - the importer found several projects or repositories at the provided URL.
-* `waiting_to_push` - the raw and rewrite steps are complete, but a destination GitHub repository hasn't been created yet.
+This section includes details about Git LFS related fields that may be present in the Import Progress response.
+
+* `use_lfs` - describes whether the import has been opted in or out of using Git LFS. The value can be `opt_in`, `opt_out`, or `undecided` if no action has been taken.
+* `has_large_files` - the boolean value describing whether files larger than 100MB were found during the `importing` step.
+* `large_files_size` - the total size in gigabytes of files larger than 100MB found in the originating repository.
+* `large_files_count` - the total number of of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.
+
+## Update existing import
+
+An import can be updated with credentials or a `project_choice` by passing in the appropriate parameters in this API request. If no parameters are provided, the import will be restarted.
+
+    PATCH /repos/:owner/:repo/import
+
+### Response
+
+<%= headers 200, :Location => "https://api.github.com/repos/spraints/socm/import" %>
+<%= json :source_import %>
+
+### Parameters for updating authentication
+
+Name | Type | Description
+-----|------|--------------
+`vcs_username`|`string`|The username to provide to the originating repository.
+`vcs_password`|`string`|The password to provide to the originating repository.
+
+### Example
+
+<%= json \
+  :vcs_username => "octocat",
+  :vcs_password => "secret"
+%>
+
+### Response
+
+<%= headers 200 %>
+<%= json :source_import_update_auth %>
+
+### Parameters for updating project choice
+
+Name | Type | Description
+-----|------|--------------
+`vcs`|`string`|The chosen project's VCS type.
+`tfvc_project`|`string`|For a tfvc import, the name of the project that is being imported.
+
+### Example
+
+<%= json\
+  :vcs          => "tfvc",
+  :tfvc_project => "project"
+%>
+
+### Response
+
+<%= headers 200 %>
+<%= json :source_import_update_project_choice %>
 
 ## Get commit authors
 
@@ -158,7 +227,7 @@ Each type of source control system represents authors in a different way. For ex
 This API method and the "Map a commit author" method allow you to provide correct Git author information.
 
     GET /repos/:owner/:repo/import/authors
-    
+
 ### Parameters
 
 Name | Type | Description
@@ -175,7 +244,7 @@ Name | Type | Description
 Update an author's identity for the import. Your application can continue updating authors any time before you push new commits to the repository.
 
     PATCH /repos/:owner/:repo/import/authors/:author_id
-    
+
 ### Parameters
 
 Name | Type | Description
@@ -194,6 +263,40 @@ Name | Type | Description
 
 <%= headers 200 %>
 <%= json :source_import_author %>
+
+## Set Git LFS preference
+
+You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://help.github.com/articles/versioning-large-files/).
+
+    PATCH /:owner/:name/import/lfs
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`use_lfs`|`string`|**Required** Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
+
+### Example
+
+<%= json \
+  :use_lfs => "opt_in"
+%>
+
+### Response
+
+<%= headers 200 %>
+<%= json :source_import_complete %>
+
+## Get large files
+
+List files larger than 100MB found during the import
+
+    GET /:owner/:name/import/large_files
+
+### Response
+
+<%= headers 200 %>
+<%= json :source_import_large_files %>
 
 ## Cancel an import
 

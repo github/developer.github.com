@@ -35,7 +35,7 @@ Name | Type | Description
 -----|------|--------------
 `client_id`|`string` | **Required**. The client ID you received from GitHub when you [registered](https://github.com/settings/applications/new).
 `redirect_uri`|`string` | The URL in your app where users will be sent after authorization. See details below about [redirect urls](#redirect-urls).
-`scope`|`string` | A comma separated list of [scopes](#scopes). If not provided, `scope` defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.
+`scope`|`string` | A space delimited list of [scopes](#scopes). If not provided, `scope` defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.
 `state`|`string` | An unguessable random string. It is used to protect against cross-site request forgery attacks.
 `allow_signup`|`string` | Whether or not unauthenticated users will be offered an option to sign up for GitHub during the OAuth flow. The default is `true`. Use `false` in the case that a policy prohibits signups.
 
@@ -204,11 +204,11 @@ Name | Description
 {% if page.version == 'dotcom' %}`admin:gpg_key`| Fully manage GPG keys.{% endif %}
 
 NOTE: Your application can request the scopes in the initial redirection. You
-can specify multiple scopes by separating them with a comma:
+can specify multiple scopes by separating them with a space:
 
     https://github.com/login/oauth/authorize?
       client_id=...&
-      scope=user,public_repo
+      scope=user%20public_repo
 
 ## Common errors for the authorization request
 

@@ -10,7 +10,6 @@ hide_from_search: true
     the GitHub community.
   </h1>
   <p class="intro">Get started with one of our guides, or jump straight into the API documentation.</p>
-  <a href="/v3/" class="button">Browse the documentation</a>
   <img src="/assets/images/rocketship.png" class="rocketship" alt="Rocketship" />
 </div>
 

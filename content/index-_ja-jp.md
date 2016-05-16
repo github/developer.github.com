@@ -10,7 +10,6 @@ Hide_from_search：真
 GitHubのコミュニティ。
 </h1>
 <p class="intro"> 私たちのいずれかのガイドを始め、またはAPIドキュメントにストレートジャンプを取得します。 </p>
-<a href="/v3/" class="button"> ドキュメントを閲覧 </a>
 <img src="/assets/images/rocketship.png" class="rocketship" alt="Rocketship" />
 </div>
 
@@ -43,4 +42,4 @@ GitHubのコミュニティ。
 ule">
 <a href="/guides/"><span class="mega-octicon octicon-file-text"></span></a>
 <h2> 始めます <a href="/guides/"> </a> </h2>
-<p> GitHubのAPIへの新しいですか？これ�
+<p> GitHubのAPIへの新しいですか？これらのガイドを使用すると、スナップインで稼働�

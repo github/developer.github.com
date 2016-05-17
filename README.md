@@ -1,6 +1,5 @@
-# developer.github.com
+# developer.github.com ![](https://api.travis-ci.org/github/developer.github.com.svg)
 
-###### This is the source code for: [developer.github.com](https://developer.github.com)
 
 This is a GitHub API resource built with [Nanoc][nanoc].
 

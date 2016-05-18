@@ -175,7 +175,7 @@ server we've built above. At GitHub, we:
 * In the meantime, Heaven also notifies everyone about the build, via [Hubot][hubot] sitting in our chat rooms
 
 That's it! You don't need to build your own deployment setup to use this example.
-You can always rely on [third-party services][integrations].
+You can always rely on [GitHub integrations][integrations].
 
 [deploy API]: /v3/repos/deployments/
 [status API]: /guides/building-a-ci-server

@@ -161,7 +161,6 @@ Name | Description
 
 
 [guid]: http://en.wikipedia.org/wiki/Globally_unique_identifier
-[hub-signature]: https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77
 [ping-event-url]: /webhooks/#ping-event
 [webhook-events]: /webhooks/#events
 [event-types]: /v3/activity/events/types/

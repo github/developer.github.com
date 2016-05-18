@@ -158,7 +158,7 @@ At GitHub, we:
 
 All of this communication is funneled back to our chat rooms. You don't need to
 build your own CI setup to use this example.
-You can always rely on [third-party services][integrations].
+You can always rely on [GitHub integrations][integrations].
 
 [deploy API]: /v3/repos/deployments/
 [status API]: /v3/repos/statuses/

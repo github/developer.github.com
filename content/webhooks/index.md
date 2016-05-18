@@ -154,42 +154,10 @@ zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
 hook | The [webhook configuration][repo-hooks-show] |
 
-
-## Service Hooks
-
-In addition to webhooks, we also offer the ability to install pre-rolled
-integrations for a variety of existing services. These services [are contributed
-and maintained by the Open Source community][github-services].
-
-Service hooks are installed and configured in a similar fashion as webhooks.
-When [creating a hook][webhooks-guide-create], just set the `:name` parameter to
-a service name instead of "web" (for webhook). The main differences to keep in
-mind between webhooks and service hooks are:
-
-- Service hooks cannot be installed on organizations, only repositories.
-- You can only install a one service per integrator for a repository, whereas
-  multiple webhooks can be installed on each organization/repository.
-- Each service hook only supports a specific set of events, depending on the
-  services implementation.
-- Each service has its own unique set of configuration options.
-
-To see a full list of available services, their supported events, and
-configuration options, check out <a href='https://api.github.com/hooks'
-data-proofer-ignore>https://api.github.com/hooks</a>. Documentation for all
-service hooks can be found in the [docs directory][github-services-docs] of the
-github-services repository.
-
-**Note:** If you are building a new integration, you should build it as webhook.
-We suggest creating an [OAuth application][oauth-applications] to automatically
-install and manage your users' webhooks. We will no longer be accepting new
-services to the [github-services repository][github-services].
-
-
 [service-hooks-section]: #service-hooks
 [events-section]: #events
 [wildcard-section]: #wildcard-event
 [payloads-section]: #payloads
-[webhooks-guide-create]: /webhooks/creating/
 [org-hooks]: /v3/orgs/hooks/
 [repo-hooks]: /v3/repos/hooks/
 [repo-hooks-show]: /v3/repos/hooks/#get-single-hook
@@ -218,6 +186,3 @@ services to the [github-services repository][github-services].
 [event-types-status]: /v3/activity/events/types/#statusevent
 [event-types-team_add]: /v3/activity/events/types/#teamaddevent
 [event-types-watch]: /v3/activity/events/types/#watchevent
-[github-services]: https://github.com/github/github-services
-[github-services-docs]: https://github.com/github/github-services/tree/master/docs
-[oauth-applications]: /v3/oauth/

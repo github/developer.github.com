@@ -31,7 +31,7 @@ $ export SECRET_TOKEN=<em>your_token</em>
 
 ## Validating payloads from GitHub
 
-When your secret token is set, GitHub uses it to create a hash signature with each payload. You can find details on the implementation [in our Ruby implementation][ruby-secret].
+When your secret token is set, GitHub uses it to create a hash signature with each payload.
 
 This hash signature is passed along with each request in the headers as `X-Hub-Signature`. Suppose you have a basic server listening to webhooks that looks like this:
 
@@ -68,5 +68,4 @@ Obviously, your language and server implementations may differ than this code. T
 
 * Using a plain `==` operator is **not advised**. A method like [`secure_compare`][secure_compare] performs a "constant time" string comparison, which renders it safe from certain timing attacks against regular equality operators.
 
-[ruby-secret]: https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50
 [secure_compare]: http://rubydoc.info/github/rack/rack/master/Rack/Utils.secure_compare

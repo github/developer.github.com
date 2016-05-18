@@ -62,7 +62,6 @@
 <li><a href="#events" id="markdown-toc-events">Events</a></li>
 <li><a href="#payloads" id="markdown-toc-payloads">Payloads</a></li>
 <li><a href="#ping-event" id="markdown-toc-ping-event">Ping Event</a></li>
-<li><a href="#service-hooks" id="markdown-toc-service-hooks">Service Hooks</a></li>
 </ul>
 
 <p>Webhooks allow you to build or set up integrations which subscribe to certain
@@ -325,37 +324,6 @@ calling the <a href="/v3/repos/hooks/#ping-a-hook">ping endpoint</a>.</p>
 </tr>
 </tbody>
 </table>
-
-<h2>
-<a id="service-hooks" class="anchor" href="#service-hooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Service Hooks</h2>
-
-<p>In addition to webhooks, we also offer the ability to install pre-rolled
-integrations for a variety of existing services. These services <a href="https://github.com/github/github-services">are contributed
-and maintained by the Open Source community</a>.</p>
-
-<p>Service hooks are installed and configured in a similar fashion as webhooks.
-When <a href="/webhooks/creating/">creating a hook</a>, just set the <code>:name</code> parameter to
-a service name instead of "web" (for webhook). The main differences to keep in
-mind between webhooks and service hooks are:</p>
-
-<ul>
-<li>Service hooks cannot be installed on organizations, only repositories.</li>
-<li>You can only install a one service per integrator for a repository, whereas
-multiple webhooks can be installed on each organization/repository.</li>
-<li>Each service hook only supports a specific set of events, depending on the
-services implementation.</li>
-<li>Each service has its own unique set of configuration options.</li>
-</ul>
-
-<p>To see a full list of available services, their supported events, and
-configuration options, check out <a href="https://api.github.com/hooks" data-proofer-ignore></a><a href="https://api.github.com/hooks">https://api.github.com/hooks</a>. Documentation for all
-service hooks can be found in the <a href="https://github.com/github/github-services/tree/master/docs">docs directory</a> of the
-github-services repository.</p>
-
-<p><strong>Note:</strong> If you are building a new integration, you should build it as webhook.
-We suggest creating an <a href="/v3/oauth/">OAuth application</a> to automatically
-install and manage your users' webhooks. We will no longer be accepting new
-services to the <a href="https://github.com/github/github-services">github-services repository</a>.</p>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

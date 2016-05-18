@@ -1,4 +1,4 @@
-# developer.github.com ![](https://api.travis-ci.org/github/developer.github.com.svg)
+# developer.github.com [![Build Status](https://travis-ci.org/github/developer.github.com.svg?branch=master)](https://travis-ci.org/github/developer.github.com)
 
 
 This is a GitHub API resource built with [Nanoc][nanoc].

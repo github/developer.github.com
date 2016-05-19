@@ -24,7 +24,7 @@ This API is not currently available on GitHub Enterprise.
 
 {{/tip}}
 
-The Source Import API lets you start an import from a Git, Subversion, Mercurial, or Team Foundation Server source repository. This is the same functionality as [the GitHub Importer](https://import.github.com/).
+The Source Import API lets you start an import from a Git, Subversion, Mercurial, or Team Foundation Server source repository. This is the same functionality as [the GitHub Importer](https://help.github.com/articles/importing-from-other-version-control-systems-to-github/).
 
 A typical source import would [start the import](#start-an-import) and then (optionally) [update the authors](#map-a-commit-author) and/or [set the preference](#set-git-lfs-preference) for using Git LFS if large files exist in the import. A more detailed example can be seen in this diagram:
 
@@ -156,11 +156,17 @@ An import that does not have errors will progress through these steps:
 
 If there are problems, you will see one of these in the `status` field:
 
-* `auth_failed` - the import requires authentication in order to connect to the original repository. Make an "Update Existing Import" request, and include `vcs_username` and `vcs_password`.
+* `auth_failed` - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update Existing Import](#update-existing-import) section.
 * `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. [Contact support](https://github.com/contact?form%5Bsubject%5D=Source+Import+API+error) for more information.
-* `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. Make an "Update Existing Import" request, and include `vcs_username` and `vcs_password`.
-* `detection_found_nothing` - the importer didn't recognize any source control at the URL.
-* `detection_found_multiple` - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a `project_choices` field with the possible project choices as values. Make an "Update Existing Import" request, and include `vcs` and (if applicable) `tfvc_project`.
+* `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. To update authentication for the import, please see the [Update Existing Import](#update-existing-import) section.
+* `detection_found_nothing` - the importer didn't recognize any source control at the URL. To resolve, [Cancel the import](#cancel-an-import) and [retry](#start-an-import) with the correct URL.
+* `detection_found_multiple` - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a `project_choices` field with the possible project choices as values. To update project choice, please see the [Update Existing Import](#update-existing-import) section.
+
+### The `project_choices` field
+
+When multiple projects are found at the provided URL, the response hash will include a `project_choices` field, the value of which is an array of hashes each representing a project choice. The exact key/value pairs of the project hashes will differ depending on the version control type.
+
+<%= json :source_import_project_choices %>
 
 ### Git LFS related fields
 
@@ -173,14 +179,9 @@ This section includes details about Git LFS related fields that may be present i
 
 ## Update existing import
 
-An import can be updated with credentials or a `project_choice` by passing in the appropriate parameters in this API request. If no parameters are provided, the import will be restarted.
+An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API request. If no parameters are provided, the import will be restarted.
 
     PATCH /repos/:owner/:repo/import
-
-### Response
-
-<%= headers 200, :Location => "https://api.github.com/repos/spraints/socm/import" %>
-<%= json :source_import %>
 
 ### Parameters for updating authentication
 
@@ -203,22 +204,33 @@ Name | Type | Description
 
 ### Parameters for updating project choice
 
-Name | Type | Description
------|------|--------------
-`vcs`|`string`|The chosen project's VCS type.
-`tfvc_project`|`string`|For a tfvc import, the name of the project that is being imported.
+Some servers (e.g. TFS servers) can have several projects at a single URL. In those cases the import progress will have the status `detection_found_multiple` and the Import Progress response will include a `project_choices` array. You can select the project to import by providing one of the objects in the `project_choices` array in the update request.
+
+The following example demonstrates the workflow for updating an import with "project1" as the project choice. Given a `project_choices` array like such:
+
+<%= json :source_import_project_choices %>
 
 ### Example
 
 <%= json\
-  :vcs          => "tfvc",
-  :tfvc_project => "project"
+  "vcs": "tfvc",
+  "tfvc_project": "project1",
+  "human_name": "project1 (tfs)"
 %>
 
 ### Response
 
 <%= headers 200 %>
 <%= json :source_import_update_project_choice %>
+
+### Parameters for restarting import
+
+To restart an import, no parameters are provided in the update request.
+
+### Response
+
+<%= headers 200, :Location => "https://api.github.com/repos/spraints/socm/import" %>
+<%= json :source_import %>
 
 ## Get commit authors
 

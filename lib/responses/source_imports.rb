@@ -51,7 +51,7 @@ module GitHub
         "vcs" => "tfvc",
         "use_lfs": "undecided",
         "vcs_url" => "http://tfs.mycompany.com/tfs/myproject",
-        "tfvc_project": "project",
+        "tfvc_project": "project1",
         "status" => "importing",
         "status_text" => "Importing...",
         "has_large_files" => false,
@@ -65,6 +65,29 @@ module GitHub
         "authors_url" => "https://api.github.com/repos/octocat/socm/import/authors",
         "repository_url" => "https://api.github.com/repos/octocat/socm"
       }
+
+      SOURCE_IMPORT_PROJECT_CHOICES ||= [
+        {
+          "vcs": "tfvc",
+          "tfvc_project": "project0",
+          "human_name": "project0 (tfs)"
+        },
+        {
+          "vcs": "tfvc",
+          "tfvc_project": "project1",
+          "human_name": "project1 (tfs)"
+        },
+        {
+          "vcs": "tfvc",
+          "tfvc_project": "project2",
+          "human_name": "project2 (tfs)"
+        },
+        {
+          "vcs": "tfvc",
+          "tfvc_project": "project3",
+          "human_name": "project3 (tfs)"
+        }
+      ]
 
       SOURCE_IMPORT_AUTHOR ||= {
         "id" => 2268557,

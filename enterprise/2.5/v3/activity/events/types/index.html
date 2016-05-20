@@ -540,7 +540,7 @@ created for various internal and webhook purposes.</p>
 <h2>
 <a id="deploymentevent" class="anchor" href="#deploymentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>DeploymentEvent</h2>
 <p>Represents a <a href="/enterprise/2.5/v3/repos/deployments/#list-deployments">deployment</a>.</p>
-<p>Events of this type are not visible in timelines, they are only used to trigger hooks.</p>
+<p>Events of this type are not visible in timelines. These events are only used to trigger hooks.</p>
 <h3>
 <a id="events-api-payload-3" class="anchor" href="#events-api-payload-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -738,7 +738,7 @@ created for various internal and webhook purposes.</p>
 <h2>
 <a id="deploymentstatusevent" class="anchor" href="#deploymentstatusevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>DeploymentStatusEvent</h2>
 <p>Represents a <a href="/enterprise/2.5/v3/repos/deployments/#list-deployment-statuses">deployment status</a>.</p>
-<p>Events of this type are not visible in timelines, they are only used to trigger hooks.</p>
+<p>Events of this type are not visible in timelines. These events are only used to trigger hooks.</p>
 <h3>
 <a id="events-api-payload-4" class="anchor" href="#events-api-payload-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -1450,7 +1450,7 @@ created for various internal and webhook purposes.</p>
 </span></code></pre>
 <h2>
 <a id="issuecommentevent" class="anchor" href="#issuecommentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>IssueCommentEvent</h2>
-<p>Triggered when an <a href="/enterprise/2.5/v3/issues/comments/">issue comment</a> is created on an issue or pull request.</p>
+<p>Triggered when an <a href="/enterprise/2.5/v3/issues/comments/">issue is commented on</a>.</p>
 <h3>
 <a id="events-api-payload-11" class="anchor" href="#events-api-payload-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -2020,7 +2020,7 @@ created for various internal and webhook purposes.</p>
 <h2>
 <a id="membershipevent" class="anchor" href="#membershipevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>MembershipEvent</h2>
 <p>Triggered when a user is added or removed from a team.</p>
-<p>Events of this type are not visible in timelines, they are only used to trigger organization webhooks.</p>
+<p>Events of this type are not visible in timelines. These events are only used to trigger hooks.</p>
 <h3>
 <a id="events-api-payload-14" class="anchor" href="#events-api-payload-14" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -2123,7 +2123,7 @@ created for various internal and webhook purposes.</p>
 <a id="pagebuildevent" class="anchor" href="#pagebuildevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>PageBuildEvent</h2>
 <p>Represents an attempted build of a GitHub Pages site, whether successful or not.</p>
 <p>Triggered on push to a GitHub Pages enabled branch (<code>gh-pages</code> for project pages, <code>master</code> for user and organization pages).</p>
-<p>Events of this type are not visible in timelines, they are only used to trigger hooks.</p>
+<p>Events of this type are not visible in timelines. These events are only used to trigger hooks.</p>
 <h3>
 <a id="events-api-payload-15" class="anchor" href="#events-api-payload-15" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -2851,7 +2851,7 @@ created for various internal and webhook purposes.</p>
 </span></code></pre>
 <h2>
 <a id="pullrequestreviewcommentevent" class="anchor" href="#pullrequestreviewcommentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>PullRequestReviewCommentEvent</h2>
-<p>Triggered when a <a href="/enterprise/2.5/v3/pulls/comments">comment is created on a portion of the unified diff</a> of a pull request.</p>
+<p>Triggered when a <a href="/enterprise/2.5/v3/pulls/comments">Pull Request's unified diff is commented on</a> (in the Files Changed tab).</p>
 <h3>
 <a id="events-api-payload-18" class="anchor" href="#events-api-payload-18" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -3429,6 +3429,7 @@ created for various internal and webhook purposes.</p>
   </span><span class="nt">"commits"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0d1a26e67d8f5eaf1f6ba5c57fc3c7d91ac0fd1c"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tree_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f9d2a07e9488b91af2641b26b9407fe22a451433"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"distinct"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Update README.md"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-05T19:40:15-04:00"</span><span class="p">,</span><span class="w">
@@ -3454,6 +3455,7 @@ created for various internal and webhook purposes.</p>
   </span><span class="p">],</span><span class="w">
   </span><span class="nt">"head_commit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0d1a26e67d8f5eaf1f6ba5c57fc3c7d91ac0fd1c"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"tree_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f9d2a07e9488b91af2641b26b9407fe22a451433"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"distinct"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Update README.md"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-05T19:40:15-04:00"</span><span class="p">,</span><span class="w">
@@ -3755,7 +3757,7 @@ created for various internal and webhook purposes.</p>
 <h2>
 <a id="repositoryevent" class="anchor" href="#repositoryevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>RepositoryEvent</h2>
 <p>Triggered when a repository is created.</p>
-<p>Events of this type are not visible in timelines, they are only used to trigger organization webhooks.</p>
+<p>Events of this type are not visible in timelines. These events are only used to trigger organization hooks.</p>
 <h3>
 <a id="events-api-payload-21" class="anchor" href="#events-api-payload-21" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -3773,7 +3775,7 @@ created for various internal and webhook purposes.</p>
 <tr>
 <td><code>repository</code></td>
 <td><code>object</code></td>
-<td>The <a href="/enterprise/2.5/v3/repos/">repository</a> that was created.</td>
+<td>The <a href="/enterprise/2.5/v3/repos/">repository</a> itself.</td>
 </tr>
 </tbody>
 </table>
@@ -3905,7 +3907,7 @@ created for various internal and webhook purposes.</p>
 <h2>
 <a id="statusevent" class="anchor" href="#statusevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>StatusEvent</h2>
 <p>Triggered when the status of a Git commit changes.</p>
-<p>Events of this type are not visible in timelines, they are only used to trigger hooks.</p>
+<p>Events of this type are not visible in timelines. These events are only used to trigger hooks.</p>
 <h3>
 <a id="events-api-payload-22" class="anchor" href="#events-api-payload-22" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -4539,6 +4541,17 @@ event’s repository is the <a href="/enterprise/2.5/v3/repos/">repository</a> t
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.5/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.5/v3/reactions/">Reactions</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.5/v3/reactions/#list-reactions-for-a-commit-comment">Commit Comment</a></li>
+          <li><a href="/enterprise/2.5/v3/reactions/#list-reactions-for-an-issue">Issue</a></li>
+          <li><a href="/enterprise/2.5/v3/reactions/#list-reactions-for-an-issue-comment">Issue Comment</a></li>
+          <li><a href="/enterprise/2.5/v3/reactions/#list-reactions-for-a-pull-request-review-comment">Pull Request Review Comment</a></li>
         </ul>
 </li>
       <li class="js-topic">

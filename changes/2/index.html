@@ -44,7 +44,81 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-02-24-commit-reference-sha-api/">
+      <div class="change" id="/changes/2016-03-15-new-webhook-actions/">
+  <h2 class="title">
+<a id="--new-webhook-event-actions-are-coming" class="anchor" href="#--new-webhook-event-actions-are-coming" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-03-15-new-webhook-actions/">New webhook event actions are coming</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    March 15, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/davidcelis.png" alt="Avatar for davidcelis" data-proofer-ignore>
+      <a href="https://github.com/davidcelis" data-proofer-ignore>davidcelis</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>We will soon begin introducing new <code>action</code> values for several existing webhook events. If you currently subscribe to webhooks but do not check the payload's <code>action</code> value, you may end up incorrectly processing events after this change is released. To ensure that your webhook processing is not affected by these new <code>action</code> values, <strong>you should audit your webhook processing logic by April 15th, 2016</strong>.</p>
+
+<p>We are providing an advance notice to warn of these changes. In the future, we may continue adding new actions without providing further warning.</p>
+
+<h3>
+<a id="a-brief-overview-of-github-webhook-actions" class="anchor" href="#a-brief-overview-of-github-webhook-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="a-brief-overview-of-github-webhook-actions" class="anchor" href="#a-brief-overview-of-github-webhook-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>A brief overview of GitHub webhook actions</h3>
+
+<p>Webhook events can have multiple actions. For example, the <a href="https://developer.github.com/v3/activity/events/types/#issuesevent"><code>IssuesEvent</code></a> has several possible actions. These include <code>opened</code> when the issue is created, <code>closed</code> when the issue is closed, and <code>assigned</code> when the issue is assigned to someone. Historically, we haven't added new actions to webhook events that have only one action. However, as GitHub's feature set grows, we may occasionally add new actions to existing event types. We encourage you to take some time and ensure that your application explicitly checks the action before doing any processing.</p>
+
+<h3>
+<a id="what-to-avoid-when-working-with-event-actions" class="anchor" href="#what-to-avoid-when-working-with-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="what-to-avoid-when-working-with-event-actions" class="anchor" href="#what-to-avoid-when-working-with-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>What to avoid when working with event actions</h3>
+
+<p>Here's an example of functionality that <strong>will not work</strong> when attempting to process an <code>IssuesEvent</code>. In this example, the <code>process_closed</code> method will be called for any event action which is not <code>opened</code> or <code>assigned</code>. This means that the <code>process_closed</code> method will be called for events with the <code>closed</code> action, but also other events with actions other than <code>opened</code> or <code>assigned</code> that are delivered to the webhook.</p>
+
+<pre class="highlight highlight-ruby"><code><span class="c1"># The following is not future-proof!</span>
+<span class="k">case</span> <span class="n">action</span>
+<span class="k">when</span> <span class="s2">"opened"</span>
+  <span class="n">process_opened</span>
+<span class="k">when</span> <span class="s2">"assigned"</span>
+  <span class="n">process_assigned</span>
+<span class="k">else</span>
+  <span class="n">process_closed</span>
+<span class="k">end</span>
+</code></pre>
+
+
+<h3>
+<a id="how-to-work-with-new-event-actions" class="anchor" href="#how-to-work-with-new-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-to-work-with-new-event-actions" class="anchor" href="#how-to-work-with-new-event-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to work with new event actions</h3>
+
+<p>We suggest that you explicitly check event actions and act accordingly. In this example, the <code>closed</code> action is checked first before calling the <code>process_closed</code> method. Additionally, for unknown actions, we log that something new was encountered:</p>
+
+<pre class="highlight highlight-ruby"><code><span class="c1"># The following is recommended</span>
+<span class="k">case</span> <span class="n">action</span>
+<span class="k">when</span> <span class="s2">"opened"</span>
+  <span class="n">process_opened</span>
+<span class="k">when</span> <span class="s2">"assigned"</span>
+  <span class="n">process_assigned</span>
+<span class="k">when</span> <span class="s2">"closed"</span>
+  <span class="n">process_closed</span>
+<span class="k">else</span>
+  <span class="nb">puts</span> <span class="s2">"Ooohh, something new from GitHub!"</span>
+<span class="k">end</span>
+</code></pre>
+
+
+<p>We may also add new webhook event types from time to time. If your webhook is configured to "Send me <strong>everything</strong>", your code should also explicitly check for the event type in a similar way as we have done with checking for the action type above. Take a look at our <a href="https://developer.github.com/guides/best-practices-for-integrators/">integrators best practices guide</a> for more tips.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Webhook+Actions">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2016-02-24-commit-reference-sha-api/">
   <h2 class="title">
 <a id="--commit-reference-sha-1-preview-period" class="anchor" href="#--commit-reference-sha-1-preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-02-24-commit-reference-sha-api/">Commit Reference SHA-1 Preview Period</a>
@@ -64,8 +138,7 @@
 </ul>
 </div>
 
-<p></p>
-<p>We're introducing a new API media type to allow users to get the SHA-1 of a commit reference. This can be useful in working out if you have the latest version of a remote branch based on your local branch's SHA-1. Developers with read access to a repository can start experimenting with this new media type today during the preview period.</p>
+  <p>We're introducing a new API media type to allow users to get the SHA-1 of a commit reference. This can be useful in working out if you have the latest version of a remote branch based on your local branch's SHA-1. Developers with read access to a repository can start experimenting with this new media type today during the preview period.</p>
 
 <p>To get the commit reference's SHA-1, make a <code>GET</code> request to the repository's reference:</p>
 
@@ -444,119 +517,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
 <p></p>
 </div>
 
-<div class="change" id="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">
-  <h2 class="title">
-<a id="--api-enhancements-for-working-with-organization-permissions" class="anchor" href="#--api-enhancements-for-working-with-organization-permissions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-06-24-api-enhancements-for-working-with-organization-permissions/">API enhancements for working with organization permissions</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    June 24, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
-      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We're introducing several enhancements to allow API developers to take advantage of the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> that we are rolling out. Learn about these enhancements and how you can try them out below.</p>
-
-<p>Since we're rolling out the <a href="https://github.com/blog/2020-improved-organization-permissions">improved organization permissions</a> improvements slowly, these enhancements will only apply to certain organizations at first. Most of these enhancements will degrade gracefully (returning an empty array or something similar) if used on an organization that doesn't support improved organization permissions yet. Check the documentation for your specific API to see if errors are possible.</p>
-
-<h2>
-<a id="api-enhancements" class="anchor" href="#api-enhancements" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="api-enhancements" class="anchor" href="#api-enhancements" aria-hidden="true"><span class="octicon octicon-link"></span></a>API enhancements</h2>
-
-<h3>
-<a id="team-permissions" class="anchor" href="#team-permissions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="team-permissions" class="anchor" href="#team-permissions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team permissions</h3>
-
-<p>In our improved permissions system, a team no longer has a single permission that applies to all of its repositories. Instead, each repository is added to a team with its own permission. For example, an organization could use a single team to grant pull access to one repository, push access to a second, and admin access to a third.</p>
-
-<p>The team APIs now support this more granular notion of permissions:</p>
-
-<ul>
-<li>The <a href="/v3/orgs/teams/#add-or-update-team-repository">Add team repository</a> API accepts a <code>permission</code> parameter, so that you can specify whether a team should grant <code>pull</code>, <code>push</code>, or <code>admin</code> access on a given repository.</li>
-<li>In the <a href="/v3/orgs/teams/#list-team-repos">List team repositories</a> and <a href="/v3/orgs/teams/#check-if-a-team-manages-a-repository">Check if a team manages a repository</a> API, the response includes a <code>permissions</code> attribute, indicating whether the team grants <code>pull</code>, <code>push</code>, or <code>admin</code> access on each repository.</li>
-<li>The <code>permission</code> parameter in the <a href="/v3/orgs/teams/#create-team">Create team</a> and <a href="/v3/orgs/teams/#edit-team">Edit team</a> APIs is deprecated. Since teams can grant a different permission on each repository, this parameter no longer dictates what permission a team grants on all of its repositories. Instead, it dictates the default permission that the <a href="/v3/orgs/teams/#add-or-update-team-repository">Add team repository</a> API will use for requests where no <code>permission</code> parameter is specified.</li>
-</ul>
-
-<h3>
-<a id="team-privacy" class="anchor" href="#team-privacy" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="team-privacy" class="anchor" href="#team-privacy" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team privacy</h3>
-
-<p>We now allow you to modify the privacy level of your teams. A "secret" team can only be seen by organization owners and people who are members of that team (which is how all teams have worked historically), while a "closed" team is visible to every member of the organization (which makes it easier to use <a href="https://github.com/blog/1121-introducing-team-mentions">@mentions</a> throughout your organization).</p>
-
-<p>The team APIs now support this new team privacy concept:</p>
-
-<ul>
-<li>The <a href="/v3/orgs/teams/#create-team">Create team</a> and <a href="/v3/orgs/teams/#edit-team">Edit team</a> APIs accept a <code>privacy</code> parameter, so that you can specify whether a team should be <code>secret</code> or <code>closed</code>.</li>
-<li>All team resources in the API now include a <code>privacy</code> attribute, indicating whether the team is <code>secret</code> or <code>closed</code>.</li>
-</ul>
-
-<h3>
-<a id="team-maintainers" class="anchor" href="#team-maintainers" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="team-maintainers" class="anchor" href="#team-maintainers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team maintainers</h3>
-
-<p>We've added the ability for you to delegate team maintenance to non-owners, reducing the workload for your organization's owners. You can now promote a non-owner member of a team to be a "maintainer" of that team. A maintainer can add and remove team members and change the team's title and description.</p>
-
-<p>The team membership APIs now support this new team maintainer concept:</p>
-
-<ul>
-<li>The <a href="/v3/orgs/teams/#add-team-membership">Add team membership</a> API accepts a <code>role</code> parameter, so that you can specify whether a given team member should be a <code>maintainer</code> or a regular <code>member</code>.</li>
-<li>The <a href="/v3/orgs/teams/#list-team-members">List team members</a> API accepts an optional <code>role</code> parameter, allowing you to fetch only <code>maintainer</code>s or only regular <code>member</code>s.</li>
-<li>In the <a href="/v3/orgs/teams/#get-team-membership">Get team membership</a> and <a href="/v3/orgs/teams/#add-team-membership">Add team membership</a> APIs, the response includes a <code>role</code> attribute, indicating whether a user is a <code>maintainer</code> or a regular <code>member</code> of the team.</li>
-</ul>
-
-<p>For more information on our improved team permissions, check out our <a href="https://help.github.com/articles/improved-organization-permissions/#understanding-team-permissions">documentation</a>.</p>
-
-<h3>
-<a id="filtering-organization-members-by-role" class="anchor" href="#filtering-organization-members-by-role" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="filtering-organization-members-by-role" class="anchor" href="#filtering-organization-members-by-role" aria-hidden="true"><span class="octicon octicon-link"></span></a>Filtering organization members by role</h3>
-
-<p>The organization <a href="/v3/orgs/members/#members-list">Members list</a> API now accepts a <code>role</code> parameter, so that you can request to see only the owners (or non-owners) of your organization.</p>
-
-<h3>
-<a id="repository-collaborators" class="anchor" href="#repository-collaborators" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="repository-collaborators" class="anchor" href="#repository-collaborators" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repository collaborators</h3>
-
-<p>We now allow you to add collaborators directly to organization-owned repositories, just like we always have for user-owned repositories.</p>
-
-<p>The collaborator APIs now support organization-owned repositories:</p>
-
-<ul>
-<li>The <a href="/v3/repos/collaborators/#add-user-as-a-collaborator">Add user as a collaborator</a> API works for organization-owned repositories. We've also added a <code>permission</code> parameter to it (currently valid for organization-owned repositories only), so that you can specify what level of access the collaborator should have on the repository.</li>
-<li>In the <a href="/v3/repos/collaborators/#list-collaborators">List collaborators</a> API, the response includes a <code>permissions</code> attribute describing the permissions that each collaborator has on your organization's repositories.</li>
-</ul>
-
-<h2>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h2>
-
-<p>Starting today, these API enhancements are available for developers to preview. At the end of the preview period, these enhancements will become official components of the GitHub API.</p>
-
-<p>While these enhancements are in their preview period, you'll need to provide the following <a href="/v3/media/">custom media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.ironman-preview+json
-</code></pre>
-
-<p>During the preview period, we may change aspects of these enhancements. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
-
-<h2>
-<a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"><span class="octicon octicon-link"></span></a>Send us your feedback</h2>
-
-<p>We would love to hear your thoughts on these enhancements. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -661,6 +621,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
+
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-03-source-import-api-enhancements-for-working-with-git-lfs/">Source Import API enhancements for working with Git LFS<br /><span class="date">May 3, 2016</span></a></li>
@@ -674,8 +636,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API<br /><span class="date">April 1, 2016</span></a></li>
 
 </ul>
 

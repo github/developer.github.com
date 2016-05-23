@@ -6,7 +6,7 @@ title: Issue Events
 
 {:toc}
 
-Records various events that occur around an Issue or Pull Request. This is
+Records various events that occur around an issue or pull request. This is
 useful both for display on issue/pull request information pages and also to
 determine who should be notified of comments.
 
@@ -20,7 +20,7 @@ determine who should be notified of comments.
   <dd>The API URL for fetching the event.</dd>
 
   <dt>actor</dt>
-  <dd>Always the User object that generated the event.</dd>
+  <dd>The User object that generated the event.</dd>
 
   <dt>commit_id</dt>
   <dd>The String SHA of a commit that referenced this Issue</dd>
@@ -35,8 +35,8 @@ determine who should be notified of comments.
   <dd>The timestamp indicating when the event occurred.</dd>
 
   <dt>label</dt>
-  <dd>The Label object including 'name' and 'color' attributes. Only provided for 'labeled'
-  and 'unlabeled' events.</dd>
+  <dd>The Label object including `name` and `color` attributes. Only provided for `labeled`
+  and `unlabeled` events.</dd>
 
   <dt>assignee</dt>
   <dd>The User object which was assigned to (or unassigned from) this Issue. Only provided for 'assigned' and 'unassigned' events.</dd>
@@ -47,12 +47,12 @@ determine who should be notified of comments.
   {% endif %}
 
   <dt>milestone</dt>
-  <dd>The Milestone object including a 'title' attribute. Only provided for 'milestoned' and
-  'demilestoned' events.</dd>
+  <dd>The Milestone object including a `title` attribute. Only provided for `milestoned` and
+  `demilestoned` events.</dd>
 
   <dt>rename</dt>
-  <dd>An object containing rename details including 'from' and 'to' attributes. Only
-  provided for 'renamed' events.</dd>
+  <dd>An object containing rename details including `from` and `to` attributes. Only
+  provided for `renamed` events.</dd>
 </dl>
 
 ### Events

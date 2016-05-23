@@ -47,6 +47,9 @@
           <li><a href="/v3/issues/events/">Events</a></li>
           <li><a href="/v3/issues/labels/">Labels</a></li>
           <li><a href="/v3/issues/milestones/">Milestones</a></li>
+          <% if !@item[:version].nil? && (@item[:version] == 'dotcom' || @item[:version] > 2.6) %>
+          <li><a href="/v3/issues/timeline/">Timeline</a></li>
+          <% end %>
         </ul>
       </li>
       <% if @item[:version] == 'dotcom' %>

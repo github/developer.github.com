@@ -54,7 +54,7 @@ Name | Type | Description
 `privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>{% if page.version != 'dotcom' and page.version == 2.4 %}**This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
 `permission`|`string` | **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer newly-added repositories.<br/> * `push` - team members can pull and push, but not administer newly-added repositories.<br/> * `admin` - team members can pull, push and administer newly-added repositories.<br/>Default: `pull`
 
-{% if page.version != 'dotcom' and (page.version == 2.4 or page.version == 2.5) %}
+{% if page.version != 'dotcom' and page.version > 2.3 and page.version < 2.6 %}
 
 {{#tip}}
 
@@ -129,7 +129,7 @@ Name | Type | Description
 `privacy`|`string`| The level of privacy this team should have. Can be one of:<br/> * `secret` - only visible to organization owners and members of this team.<br/> * `closed` - visible to all members of this organization.<br/>Default: `secret`<br/>{% if page.version != 'dotcom' and page.version == 2.4 %}**This parameter requires a custom media type to be specified. Please see more in the alert below.**{% endif %}
 `permission`|`string` | **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:<br/> * `pull` - team members can pull, but not push to or administer newly-added repositories.<br/> * `push` - team members can pull and push, but not administer newly-added repositories.<br/> * `admin` - team members can pull, push and administer newly-added repositories.<br/>Default: `pull`
 
-{% if page.version != 'dotcom' and (page.version == 2.4 or page.version == 2.5) %}
+{% if page.version != 'dotcom' and page.version > 2.3 and page.version < 2.6 %}
 
 {{#tip}}
 
@@ -522,7 +522,7 @@ Name | Type | Description
 {% endif %}
 
 
-{% if page.version != 'dotcom' and (page.version == 2.4 or page.version == 2.5) %}
+{% if page.version != 'dotcom' and page.version > 2.3 and page.version < 2.6 %}
 
 {{#tip}}
 

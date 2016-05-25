@@ -25,7 +25,7 @@ Name    | Type    | Description
 
 [2fa-blog]: https://github.com/blog/1614-two-factor-authentication
 
-{% if page.version != 'dotcom' and (page.version == 2.4 or page.version == 2.5) %}
+{% if page.version != 'dotcom' and page.version > 2.3 and page.version < 2.6 %}
 
 {{#tip}}
 

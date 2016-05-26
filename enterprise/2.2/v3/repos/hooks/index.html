@@ -146,7 +146,7 @@ X-RateLimit-Remaining: 4999
 <td><code>config</code></td>
 <td><code>object</code></td>
 <td>
-<strong>Required</strong>. Key/value pairs to provide settings for this hook.  These settings vary between the services and are defined in the <a href="https://github.com/github/github-services">github-services</a> repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON <code>true</code>/<code>false</code> values will be converted automatically.</td>
+<strong>Required</strong>. Key/value pairs to provide settings for this hook.  These settings vary between hooks and some are defined in the <a href="https://github.com/github/github-services">github-services</a> repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON <code>true</code>/<code>false</code> values will be converted automatically.</td>
 </tr>
 <tr>
 <td><code>events</code></td>
@@ -163,14 +163,14 @@ X-RateLimit-Remaining: 4999
 </table>
 <h4>
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
-<p>To create <a href="/enterprise/2.2/webhooks">a webhook</a>, <a href="https://github.com/github/github-services/blob/master/lib/services/web.rb#L4-11">the following fields are required</a> by the <code>config</code>:</p>
+<p>To create <a href="/enterprise/2.2/webhooks">a webhook</a>, the following fields are required by the <code>config</code>:</p>
 <ul>
 <li>
 <code>url</code>: A required string defining the URL to which the payloads will be delivered.</li>
 <li>
 <code>content_type</code>: An optional string defining the media type used to serialize the payloads. Supported values include <code>json</code> and <code>form</code>. The default is <code>form</code>.</li>
 <li>
-<code>secret</code>: An optional string that's passed with the HTTP requests as an <code>X-Hub-Signature</code> header. The value of this header is computed as the <a href="https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77">HMAC hex digest of the body, using the <code>secret</code> as the key</a>.</li>
+<code>secret</code>: An optional string that's passed with the HTTP requests as an <code>X-Hub-Signature</code> header. The value of this header is computed as the HMAC hex digest of the body, using the <code>secret</code> as the key.</li>
 <li>
 <code>insecure_ssl</code>: An optional string that determines whether the SSL certificate of the host for <code>url</code> will be verified when delivering payloads. Supported values include <code>"0"</code> (verification is performed) and <code>"1"</code> (verification is not performed). The default is <code>"0"</code>.</li>
 </ul>
@@ -230,7 +230,7 @@ X-RateLimit-Remaining: 4999
 <tr>
 <td><code>config</code></td>
 <td><code>object</code></td>
-<td>Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between the services and are defined in the <a href="https://github.com/github/github-services">github-services</a> repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON <code>true</code>/<code>false</code> values will be converted automatically.</td>
+<td>Key/value pairs to provide settings for this hook.  Modifying this will replace the entire config object.  These settings vary between hooks and some are defined in the <a href="https://github.com/github/github-services">github-services</a> repository. Booleans are stored internally as "1" for true, and "0" for false.  Any JSON <code>true</code>/<code>false</code> values will be converted automatically.</td>
 </tr>
 <tr>
 <td><code>events</code></td>
@@ -424,7 +424,7 @@ exists, it will be modified according to the request.</p>
 <tr>
 <td><code>hub.secret</code></td>
 <td><code>string</code></td>
-<td>A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the <code>X-Hub-Signature</code> header.  You can see <a href="https://github.com/github/github-services/blob/14f4da01ce29bc6a02427a9fbf37b08b141e81d9/lib/services/web.rb#L47-L50">our Ruby implementation</a>, or <a href="https://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html#authednotify">the PubSubHubbub documentation</a> for more details.</td>
+<td>A shared secret key that generates a SHA1 HMAC of the outgoing body content.  You can verify a push came from GitHub by comparing the raw request body with the contents of the <code>X-Hub-Signature</code> header.  You can see <a href="https://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.4.html#authednotify">the PubSubHubbub documentation</a> for more details.</td>
 </tr>
 </tbody>
 </table>
@@ -519,6 +519,17 @@ exists, it will be modified according to the request.</p>
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.2/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.2/v3/reactions/">Reactions</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.2/v3/reactions/#list-reactions-for-a-commit-comment">Commit Comment</a></li>
+          <li><a href="/enterprise/2.2/v3/reactions/#list-reactions-for-an-issue">Issue</a></li>
+          <li><a href="/enterprise/2.2/v3/reactions/#list-reactions-for-an-issue-comment">Issue Comment</a></li>
+          <li><a href="/enterprise/2.2/v3/reactions/#list-reactions-for-a-pull-request-review-comment">Pull Request Review Comment</a></li>
         </ul>
 </li>
       <li class="js-topic">

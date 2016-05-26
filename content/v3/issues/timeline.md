@@ -10,6 +10,8 @@ Records various events that occur around an issue or pull request. This is
 useful both for display on issue and pull request information pages, as well as to
 determine who should be notified of comments.
 
+This API is currently under preview so you can expect some changes as we get developer feedback. Moreover, in order to access it you must provide a custom media type through an HTTP header. Please refer to [this blog post](https://developer.github.com/changes/2016-05-23-timeline-preview-api/).
+
 ### Attributes
 
 <dl>

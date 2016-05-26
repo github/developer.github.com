@@ -49,7 +49,7 @@
 <li><a href="#list-events-for-a-repository" id="markdown-toc-list-events-for-a-repository">List events for a repository</a></li>
 <li><a href="#get-a-single-event" id="markdown-toc-get-a-single-event">Get a single event</a></li>
 </ul>
-<p>Records various events that occur around an Issue or Pull Request. This is
+<p>Records various events that occur around an issue or pull request. This is
 useful both for display on issue/pull request information pages and also to
 determine who should be notified of comments.</p>
 <h3>
@@ -60,24 +60,26 @@ determine who should be notified of comments.</p>
   <dt>url</dt>
   <dd>The API URL for fetching the event.</dd>
   <dt>actor</dt>
-  <dd>Always the User object that generated the event.</dd>
+  <dd>The User object that generated the event.</dd>
   <dt>commit_id</dt>
   <dd>The String SHA of a commit that referenced this Issue</dd>
+  <dt>commit_url</dt>
+  <dd>The GitHub API link to a commit that referenced this Issue</dd>
   <dt>event</dt>
   <dd>Identifies the actual type of Event that occurred.</dd>
   <dt>created_at</dt>
   <dd>The timestamp indicating when the event occurred.</dd>
   <dt>label</dt>
-  <dd>The Label object including 'name' and 'color' attributes. Only provided for 'labeled'
-  and 'unlabeled' events.</dd>
+  <dd>The Label object including `name` and `color` attributes. Only provided for `labeled`
+  and `unlabeled` events.</dd>
   <dt>assignee</dt>
   <dd>The User object which was assigned to (or unassigned from) this Issue. Only provided for 'assigned' and 'unassigned' events.</dd>
   <dt>milestone</dt>
-  <dd>The Milestone object including a 'title' attribute. Only provided for 'milestoned' and
-  'demilestoned' events.</dd>
+  <dd>The Milestone object including a `title` attribute. Only provided for `milestoned` and
+  `demilestoned` events.</dd>
   <dt>rename</dt>
-  <dd>An object containing rename details including 'from' and 'to' attributes. Only
-  provided for 'renamed' events.</dd>
+  <dd>An object containing rename details including `from` and `to` attributes. Only
+  provided for `renamed` events.</dd>
 </dl>
 <h3>
 <a id="events-1" class="anchor" href="#events-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events</h3>
@@ -158,6 +160,7 @@ X-RateLimit-Remaining: 4999
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"commit_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"commit_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -199,6 +202,7 @@ X-RateLimit-Remaining: 4999
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"commit_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"commit_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"issue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -341,6 +345,7 @@ X-RateLimit-Remaining: 4999
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"commit_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"commit_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/repos/octocat/Hello-World/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2011-04-14T16:00:49Z"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"issue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -539,6 +544,17 @@ X-RateLimit-Remaining: 4999
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.3/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.3/v3/reactions/">Reactions</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.3/v3/reactions/#list-reactions-for-a-commit-comment">Commit Comment</a></li>
+          <li><a href="/enterprise/2.3/v3/reactions/#list-reactions-for-an-issue">Issue</a></li>
+          <li><a href="/enterprise/2.3/v3/reactions/#list-reactions-for-an-issue-comment">Issue Comment</a></li>
+          <li><a href="/enterprise/2.3/v3/reactions/#list-reactions-for-a-pull-request-review-comment">Pull Request Review Comment</a></li>
         </ul>
 </li>
       <li class="js-topic">

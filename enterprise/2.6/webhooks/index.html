@@ -48,7 +48,6 @@
 <li><a href="#events" id="markdown-toc-events">Events</a></li>
 <li><a href="#payloads" id="markdown-toc-payloads">Payloads</a></li>
 <li><a href="#ping-event" id="markdown-toc-ping-event">Ping Event</a></li>
-<li><a href="#service-hooks" id="markdown-toc-service-hooks">Service Hooks</a></li>
 </ul>
 <p>Webhooks allow you to build or set up integrations which subscribe to certain
 events on GitHub.com. When one of those events is triggered, we'll send a HTTP
@@ -113,11 +112,11 @@ is opened, closed, labeled, etc.</p>
 </tr>
 <tr>
 <td><a href="/enterprise/2.6/v3/activity/events/types/#issuecommentevent"><code>issue_comment</code></a></td>
-<td>Any time a <a href="/enterprise/2.6/v3/issues/comments/">comment on an issue</a> is created or edited</td>
+<td>Any time an <a href="/enterprise/2.6/v3/issues/comments">issue is commented on</a>.</td>
 </tr>
 <tr>
 <td><a href="/enterprise/2.6/v3/activity/events/types/#issuesevent"><code>issues</code></a></td>
-<td>Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, edited, closed, or reopened.</td>
+<td>Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.</td>
 </tr>
 <tr>
 <td><a href="/enterprise/2.6/v3/activity/events/types/#memberevent"><code>member</code></a></td>
@@ -137,11 +136,11 @@ is opened, closed, labeled, etc.</p>
 </tr>
 <tr>
 <td><a href="/enterprise/2.6/v3/activity/events/types/#pullrequestreviewcommentevent"><code>pull_request_review_comment</code></a></td>
-<td>Any time a <a href="/enterprise/2.6/v3/pulls/comments">comment on a pull request's unified diff</a>  is created, edited, or deleted (in the Files Changed tab).</td>
+<td>Any time a <a href="/enterprise/2.6/v3/pulls/comments">Pull Request's unified diff is commented on</a> (in the Files Changed tab).</td>
 </tr>
 <tr>
 <td><a href="/enterprise/2.6/v3/activity/events/types/#pullrequestevent"><code>pull_request</code></a></td>
-<td>Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, edited, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).</td>
+<td>Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).</td>
 </tr>
 <tr>
 <td><a href="/enterprise/2.6/v3/activity/events/types/#pushevent"><code>push</code></a></td>
@@ -150,7 +149,7 @@ is opened, closed, labeled, etc.</p>
 </tr>
 <tr>
 <td><a href="/enterprise/2.6/v3/activity/events/types/#repositoryevent"><code>repository</code></a></td>
-<td>Any time a Repository is created, deleted, made public, or made private.</td>
+<td>Any time a Repository is created. <strong>Organization hooks only</strong>.</td>
 </tr>
 <tr>
 <td><a href="/enterprise/2.6/v3/activity/events/types/#releaseevent"><code>release</code></a></td>
@@ -277,32 +276,7 @@ calling the <a href="/enterprise/2.6/v3/repos/hooks/#ping-a-hook">ping endpoint<
 </tr>
 </tbody>
 </table>
-<h2>
-<a id="service-hooks" class="anchor" href="#service-hooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Service Hooks</h2>
-<p>In addition to webhooks, we also offer the ability to install pre-rolled
-integrations for a variety of existing services. These services <a href="https://github.com/github/github-services">are contributed
-and maintained by the Open Source community</a>.</p>
-<p>Service hooks are installed and configured in a similar fashion as webhooks.
-When <a href="/enterprise/2.6/webhooks/creating/">creating a hook</a>, just set the <code>:name</code> parameter to
-a service name instead of "web" (for webhook). The main differences to keep in
-mind between webhooks and service hooks are:</p>
-<ul>
-<li>Service hooks cannot be installed on organizations, only repositories.</li>
-<li>You can only install a one service per integrator for a repository, whereas
-multiple webhooks can be installed on each organization/repository.</li>
-<li>Each service hook only supports a specific set of events, depending on the
-services implementation.</li>
-<li>Each service has its own unique set of configuration options.</li>
-</ul>
-<p>To see a full list of available services, their supported events, and
-configuration options, check out <a href="https://api.github.com/hooks" data-proofer-ignore></a><a href="https://api.github.com/hooks">https://api.github.com/hooks</a>. Documentation for all
-service hooks can be found in the <a href="https://github.com/github/github-services/tree/master/docs">docs directory</a> of the
-github-services repository.</p>
-<p><strong>Note:</strong> If you are building a new integration, you should build it as webhook.
-We suggest creating an <a href="/enterprise/2.6/v3/oauth/">OAuth application</a> to automatically
-install and manage your users' webhooks. We will no longer be accepting new
-services to the <a href="https://github.com/github/github-services">github-services repository</a>.</p>
-    </div>
+</div>
     <div id="js-sidebar" class="sidebar-shell">
       <div class="sidebar-module">
         <ul>

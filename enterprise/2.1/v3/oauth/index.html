@@ -95,7 +95,7 @@ for your own use or implement the web flow below to allow other users to authori
 <tr>
 <td><code>scope</code></td>
 <td><code>string</code></td>
-<td>A comma separated list of <a href="#scopes">scopes</a>. If not provided, <code>scope</code> defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.</td>
+<td>A space delimited list of <a href="#scopes">scopes</a>. If not provided, <code>scope</code> defaults to an empty list of scopes for users that don't have a valid token for the app. For users who do already have a valid token for the app, the user won't be shown the OAuth authorization page with the list of scopes. Instead, this step of the flow will automatically complete with the same scopes that were used last time the user completed the flow.</td>
 </tr>
 <tr>
 <td><code>state</code></td>
@@ -344,10 +344,10 @@ X-Accepted-OAuth-Scopes: user
 </tbody>
 </table>
 <p>NOTE: Your application can request the scopes in the initial redirection. You
-can specify multiple scopes by separating them with a comma:</p>
+can specify multiple scopes by separating them with a space:</p>
 <pre><code>https://github.com/login/oauth/authorize?
   client_id=...&amp;
-  scope=user,public_repo
+  scope=user%20public_repo
 </code></pre>
 <h2>
 <a id="common-errors-for-the-authorization-request" class="anchor" href="#common-errors-for-the-authorization-request" aria-hidden="true"><span class="octicon octicon-link"></span></a>Common errors for the authorization request</h2>
@@ -551,6 +551,17 @@ user, be sure to check out our <a href="/enterprise/2.1/guides/discovering-resou
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.1/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.1/v3/reactions/">Reactions</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.1/v3/reactions/#list-reactions-for-a-commit-comment">Commit Comment</a></li>
+          <li><a href="/enterprise/2.1/v3/reactions/#list-reactions-for-an-issue">Issue</a></li>
+          <li><a href="/enterprise/2.1/v3/reactions/#list-reactions-for-an-issue-comment">Issue Comment</a></li>
+          <li><a href="/enterprise/2.1/v3/reactions/#list-reactions-for-a-pull-request-review-comment">Pull Request Review Comment</a></li>
         </ul>
 </li>
       <li class="js-topic">

@@ -1450,7 +1450,7 @@ created for various internal and webhook purposes.</p>
 </span></code></pre>
 <h2>
 <a id="issuecommentevent" class="anchor" href="#issuecommentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>IssueCommentEvent</h2>
-<p>Triggered when an <a href="/enterprise/2.1/v3/issues/comments/">issue comment</a> is created, edited, or deleted.</p>
+<p>Triggered when an <a href="/enterprise/2.1/v3/issues/comments/">issue is commented on</a>.</p>
 <h3>
 <a id="events-api-payload-11" class="anchor" href="#events-api-payload-11" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -1463,17 +1463,7 @@ created for various internal and webhook purposes.</p>
 <tr>
 <td><code>action</code></td>
 <td><code>string</code></td>
-<td>The action that was performed on the comment. Can be one of "created", "edited", or "deleted".</td>
-</tr>
-<tr>
-<td><code>changes</code></td>
-<td><code>object</code></td>
-<td>The changes to the comment if the action was "edited".</td>
-</tr>
-<tr>
-<td><code>changes[body][from]</code></td>
-<td><code>string</code></td>
-<td>The previous version of the body if the action was "edited".</td>
+<td>The action that was performed on the comment. Currently, can only be "created".</td>
 </tr>
 <tr>
 <td><code>issue</code></td>
@@ -1677,7 +1667,7 @@ created for various internal and webhook purposes.</p>
 </span></code></pre>
 <h2>
 <a id="issuesevent" class="anchor" href="#issuesevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>IssuesEvent</h2>
-<p>Triggered when an <a href="/enterprise/2.1/v3/issues">issue</a> is assigned, unassigned, labeled, unlabeled, opened, edited, closed, or reopened.</p>
+<p>Triggered when an <a href="/enterprise/2.1/v3/issues">issue</a> is assigned, unassigned, labeled, unlabeled, opened, closed, or reopened.</p>
 <h3>
 <a id="events-api-payload-12" class="anchor" href="#events-api-payload-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -1690,27 +1680,12 @@ created for various internal and webhook purposes.</p>
 <tr>
 <td><code>action</code></td>
 <td><code>string</code></td>
-<td>The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "edited", "closed", or "reopened".</td>
+<td>The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "closed", or "reopened".</td>
 </tr>
 <tr>
 <td><code>issue</code></td>
 <td><code>object</code></td>
 <td>The <a href="/enterprise/2.1/v3/issues">issue</a> itself.</td>
-</tr>
-<tr>
-<td><code>changes</code></td>
-<td><code>object</code></td>
-<td>The changes to the issue if the action was "edited".</td>
-</tr>
-<tr>
-<td><code>changes[title][from]</code></td>
-<td><code>string</code></td>
-<td>The previous version of the title if the action was "edited".</td>
-</tr>
-<tr>
-<td><code>changes[body][from]</code></td>
-<td><code>string</code></td>
-<td>The previous version of the body if the action was "edited".</td>
 </tr>
 <tr>
 <td><code>assignee</code></td>
@@ -2429,7 +2404,7 @@ created for various internal and webhook purposes.</p>
 </span></code></pre>
 <h2>
 <a id="pullrequestevent" class="anchor" href="#pullrequestevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>PullRequestEvent</h2>
-<p>Triggered when a <a href="/enterprise/2.1/v3/pulls">pull request</a> is assigned, unassigned, labeled, unlabeled, opened, edited, closed, reopened, or synchronized.</p>
+<p>Triggered when a <a href="/enterprise/2.1/v3/pulls">pull request</a> is assigned, unassigned, labeled, unlabeled, opened, closed, reopened, or synchronized.</p>
 <h3>
 <a id="events-api-payload-17" class="anchor" href="#events-api-payload-17" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -2442,27 +2417,12 @@ created for various internal and webhook purposes.</p>
 <tr>
 <td><code>action</code></td>
 <td><code>string</code></td>
-<td>The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "edited", "closed", or "reopened", or "synchronize". If the action is "closed" and the <code>merged</code> key is <code>false</code>, the pull request was closed with unmerged commits. If the action is "closed" and the <code>merged</code> key is <code>true</code>, the pull request was merged.</td>
+<td>The action that was performed. Can be one of "assigned", "unassigned", "labeled", "unlabeled", "opened", "closed", or "reopened", or "synchronize". If the action is "closed" and the <code>merged</code> key is <code>false</code>, the pull request was closed with unmerged commits. If the action is "closed" and the <code>merged</code> key is <code>true</code>, the pull request was merged.</td>
 </tr>
 <tr>
 <td><code>number</code></td>
 <td><code>integer</code></td>
 <td>The pull request number.</td>
-</tr>
-<tr>
-<td><code>changes</code></td>
-<td><code>object</code></td>
-<td>The changes to the comment if the action was "edited".</td>
-</tr>
-<tr>
-<td><code>changes[title][from]</code></td>
-<td><code>string</code></td>
-<td>The previous version of the title if the action was "edited".</td>
-</tr>
-<tr>
-<td><code>changes[body][from]</code></td>
-<td><code>string</code></td>
-<td>The previous version of the body if the action was "edited".</td>
 </tr>
 <tr>
 <td><code>pull_request</code></td>
@@ -2891,7 +2851,7 @@ created for various internal and webhook purposes.</p>
 </span></code></pre>
 <h2>
 <a id="pullrequestreviewcommentevent" class="anchor" href="#pullrequestreviewcommentevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>PullRequestReviewCommentEvent</h2>
-<p>Triggered when a <a href="/enterprise/2.1/v3/pulls/comments">comment on a Pull Request's unified diff</a> is created, edited, or deleted (in the Files Changed tab).</p>
+<p>Triggered when a <a href="/enterprise/2.1/v3/pulls/comments">Pull Request's unified diff is commented on</a> (in the Files Changed tab).</p>
 <h3>
 <a id="events-api-payload-18" class="anchor" href="#events-api-payload-18" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -2904,17 +2864,7 @@ created for various internal and webhook purposes.</p>
 <tr>
 <td><code>action</code></td>
 <td><code>string</code></td>
-<td>The action that was performed on the comment. Can be one of <code>created</code>, <code>edited</code>, or <code>deleted</code>.</td>
-</tr>
-<tr>
-<td><code>changes</code></td>
-<td><code>object</code></td>
-<td>The changes to the comment if the action was "edited".</td>
-</tr>
-<tr>
-<td><code>changes[body][from]</code></td>
-<td><code>string</code></td>
-<td>The previous version of the body if the action was "edited".</td>
+<td>The action that was performed on the comment. Currently, can only be "created".</td>
 </tr>
 <tr>
 <td><code>pull_request</code></td>
@@ -3806,8 +3756,8 @@ created for various internal and webhook purposes.</p>
 </span></code></pre>
 <h2>
 <a id="repositoryevent" class="anchor" href="#repositoryevent" aria-hidden="true"><span class="octicon octicon-link"></span></a>RepositoryEvent</h2>
-<p>Triggered when a repository is created, deleted, made public, or made private.</p>
-<p>Events of this type are not visible in timelines. These events are only used to trigger hooks.</p>
+<p>Triggered when a repository is created.</p>
+<p>Events of this type are not visible in timelines. These events are only used to trigger organization hooks.</p>
 <h3>
 <a id="events-api-payload-21" class="anchor" href="#events-api-payload-21" aria-hidden="true"><span class="octicon octicon-link"></span></a>Events API payload</h3>
 <table>
@@ -3820,7 +3770,7 @@ created for various internal and webhook purposes.</p>
 <tr>
 <td><code>action</code></td>
 <td><code>string</code></td>
-<td>The action that was performed. This can be one of <code>created</code>, <code>deleted</code>, <code>publicized</code>, or <code>privatized</code>.</td>
+<td>The action that was performed. Currently, can only be "created".</td>
 </tr>
 <tr>
 <td><code>repository</code></td>
@@ -4591,6 +4541,17 @@ event’s repository is the <a href="/enterprise/2.1/v3/repos/">repository</a> t
 </h3>
         <ul class="js-guides">
 <li><a href="/enterprise/2.1/v3/pulls/comments/">Review Comments</a></li>
+        </ul>
+</li>
+      <li class="js-topic">
+        <h3>
+<a href="#" class="js-expand-btn collapsed arrow-btn" data-proofer-ignore></a><a href="/enterprise/2.1/v3/reactions/">Reactions</a>
+</h3>
+        <ul class="js-guides">
+<li><a href="/enterprise/2.1/v3/reactions/#list-reactions-for-a-commit-comment">Commit Comment</a></li>
+          <li><a href="/enterprise/2.1/v3/reactions/#list-reactions-for-an-issue">Issue</a></li>
+          <li><a href="/enterprise/2.1/v3/reactions/#list-reactions-for-an-issue-comment">Issue Comment</a></li>
+          <li><a href="/enterprise/2.1/v3/reactions/#list-reactions-for-a-pull-request-review-comment">Pull Request Review Comment</a></li>
         </ul>
 </li>
       <li class="js-topic">

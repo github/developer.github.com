@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Two-Factor Authentication and the API | GitHub Developer Guide</title>
+  <title>API changes for Multiple Issue Assignees | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,69 +44,42 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-09-03-two-factor-authentication/">
+      <div class="change" id="/changes/2016-5-27-multiple-assignees/">
 <h2 class="title">
-  <a href="/changes/2013-09-03-two-factor-authentication/">Two-Factor Authentication and the API</a>
+  <a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    September 3, 2013
+    May 27, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore/>
-      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
+    <img height="16" width="16" src="https://github.com/nakajima.png" alt="Avatar for nakajima" data-proofer-ignore/>
+      <a href="https://github.com/nakajima" data-proofer-ignore>nakajima</a>
   </li>
 </ul>
 </div>
 
 
-<p>As <a href="https://github.com/blog/1614-two-factor-authentication">announced earlier today</a>, GitHub.com now supports two-factor
-authentication (2FA) for increased security. For users with this feature
-enabled, GitHub.com will prompt for a 2FA code in addition to a username and
-password during authentication. We've also rolled out some improvements to the
-API to ensure that 2FA requirements in the API are consistent with GitHub.com.</p>
+<p>GitHub recently added the ability to assign up to ten people to issues. We're updating Issue payloads and adding a couple new endpoints to help you build apps. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
 
-<h2>
-<a id="authenticating-with-the-api" class="anchor" href="#authenticating-with-the-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authenticating with the API</h2>
+<pre><code>application/vnd.github.cerberus-preview
+</code></pre>
 
-<p>For users without 2FA enabled, and for applications using the <a href="/v3/oauth/#web-application-flow">OAuth web
-flow</a> for authentication, everything is
-business as usual. You'll continue to authenticate with the API just as you
-always have. (That was easy.)</p>
+<p>For example:</p>
 
-<p>If you enable 2FA <em>and</em> use Basic Authentication to access the API, we're
-providing multiple options to make the flow simple and easy.</p>
+<pre class="command-line">
+curl "https://api.github.com/repos/github/hubot/issues" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.cerberus-preview" \
+</pre>
 
-<h2>
-<a id="basic-authentication-and-2fa" class="anchor" href="#basic-authentication-and-2fa" aria-hidden="true"><span class="octicon octicon-link"></span></a>Basic Authentication and 2FA</h2>
+<p>The issues returned in this list will include the new <code>assignees</code> key.</p>
 
-<h3>
-<a id="personal-access-tokens" class="anchor" href="#personal-access-tokens" aria-hidden="true"><span class="octicon octicon-link"></span></a>Personal Access Tokens</h3>
-
-<p>Personal access tokens provide the simplest option for using 2FA with Basic
-Authentication. You can create these tokens via the <a href="https://github.com/settings/tokens">tokens settings page
-on GitHub.com</a>, and you can revoke
-them at any time. For more information about authenticating to the API with
-personal access tokens, be sure to check out our <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use">help article on the
-topic</a>.</p>
-
-<h3>
-<a id="tightly-integrated-2fa" class="anchor" href="#tightly-integrated-2fa" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tightly-integrated 2FA</h3>
-
-<p>For developers wishing to integrate GitHub 2FA directly into their application,
-the API's Basic Authentication now supports the <a href="/v3/auth/#working-with-two-factor-authentication">ability to send the user's 2FA
-code</a>, in addition to the username and password.</p>
-
-<h2>
-<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>We're here to help</h2>
-
-<p>We think GitHub users are going to love the additional security provided by
-two-factor authentication. As always, if you have any questions or feedback,
-<a href="https://github.com/contact?form%5Bsubject%5D=2FA+and+the+API">let us know</a>. We're here to help!</p>
+<p>You can learn more about the new responses and endpoints in the updated <a href="/v3/issues">Issues</a> and <a href="/v3/issues/assignees">Issue Assignees</a> documentation</p>
 </div>
 
     </div>

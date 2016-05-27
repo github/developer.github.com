@@ -774,8 +774,33 @@ X-RateLimit-Remaining: 4999
 <td>Labels to associate with this issue. <em>NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise.</em>
 </td>
 </tr>
+<tr>
+<td><code>assignees</code></td>
+<td>
+<code>array</code> of <code>strings</code>
+</td>
+<td>Logins for Users to assign to this issue. <em>NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise.</em>
+</td>
+</tr>
 </tbody>
 </table>
+
+<div class="alert tip">
+
+<p><a name="preview-period"></a></p>
+
+<p>The <code>assignees</code> parameter is currently available for developers to preview.
+During the preview period, the API may change without advance notice.
+Please see the <a href="/changes/2016-5-27-multiple-assignees">blog post</a> for full details.</p>
+
+<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.cerberus-preview+json
+</code></pre>
+
+<p>The <code>assignees</code> key will only be accepted in issue payloads if this header is passed.</p>
+
+</div>
 
 <h4>
 <a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
@@ -928,6 +953,25 @@ X-RateLimit-Remaining: 4999
 </span></code></pre>
 
 
+<h4>
+<a id="multiple-assignees" class="anchor" href="#multiple-assignees" aria-hidden="true"><span class="octicon octicon-link"></span></a>Multiple Assignees</h4>
+
+<div class="alert tip">
+
+<p><a name="preview-period"></a></p>
+
+<p>An additional <code>assignees</code> object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice.
+  Please see the <a href="/changes/2016-5-27-multiple-assignees">blog post</a> for full details.</p>
+
+<p>To access the API you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>  application/vnd.github.cerberus-preview
+</code></pre>
+
+<p>The <code>assignees</code> key will be an Array of Users who are assigned to the issue.</p>
+
+</div>
+
 <h2>
 <a id="edit-an-issue" class="anchor" href="#edit-an-issue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Edit an issue</h2>
 
@@ -982,8 +1026,33 @@ X-RateLimit-Remaining: 4999
 <td>Labels to associate with this issue. Pass one or more Labels to <em>replace</em> the set of Labels on this Issue. Send an empty array (<code>[]</code>) to clear all Labels from the Issue. <em>NOTE: Only users with push access can set labels for issues. Labels are silently dropped otherwise.</em>
 </td>
 </tr>
+<tr>
+<td><code>assignees</code></td>
+<td>
+<code>array</code> of <code>strings</code>
+</td>
+<td>Logins for Users to assign to this issue. Pass one or more user logins to <em>replace</em> the set of assignees on this Issue. .Send an empty array (<code>[]</code>) to clear all assignees from the Issue. <em>NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise.</em>
+</td>
+</tr>
 </tbody>
 </table>
+
+<div class="alert tip">
+
+<p><a name="preview-period"></a></p>
+
+<p>The <code>assignees</code> parameter is currently available for developers to preview.
+During the preview period, the API may change without advance notice.
+Please see the <a href="/changes/2016-5-27-multiple-assignees">blog post</a> for full details.</p>
+
+<p>To access the API during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.cerberus-preview+json
+</code></pre>
+
+<p>The <code>assignees</code> key will only be present in issue payloads if this header is passed.</p>
+
+</div>
 
 <h4>
 <a id="example-1" class="anchor" href="#example-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h4>
@@ -1135,6 +1204,25 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+
+<h4>
+<a id="multiple-assignees-1" class="anchor" href="#multiple-assignees-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Multiple Assignees</h4>
+
+<div class="alert tip">
+
+<p><a name="preview-period"></a></p>
+
+<p>An additional <code>assignees</code> object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice.
+  Please see the <a href="/changes/2016-5-27-multiple-assignees">blog post</a> for full details.</p>
+
+<p>To access the API you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>  application/vnd.github.cerberus-preview
+</code></pre>
+
+<p>The <code>assignees</code> key will be an Array of Users who are assigned to the issue.</p>
+
+</div>
 
 <h2>
 <a id="lock-an-issue" class="anchor" href="#lock-an-issue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lock an issue</h2>

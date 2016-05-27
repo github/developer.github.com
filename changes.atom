@@ -2,13 +2,40 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-05-23T07:00:00Z</updated>
+  <updated>2016-05-27T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-05-27:/changes/2016-5-27-multiple-assignees/</id>
+    <title type="html">API changes for Multiple Issue Assignees</title>
+    <published>2016-05-27T07:00:00Z</published>
+    <updated>2016-05-27T07:00:00Z</updated>
+    <author>
+      <name>nakajima</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-5-27-multiple-assignees/"/>
+    <content type="html">&lt;p&gt;GitHub recently added the ability to assign up to ten people to issues. We're updating Issue payloads and adding a couple new endpoints to help you build apps. You can enable these changes during the preview period by providing a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.cerberus-preview
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre class="command-line"&gt;
+curl "https://api.github.com/repos/github/hubot/issues" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.cerberus-preview" \
+&lt;/pre&gt;
+
+&lt;p&gt;The issues returned in this list will include the new &lt;code&gt;assignees&lt;/code&gt; key.&lt;/p&gt;
+
+&lt;p&gt;You can learn more about the new responses and endpoints in the updated &lt;a href="/v3/issues"&gt;Issues&lt;/a&gt; and &lt;a href="/v3/issues/assignees"&gt;Issue Assignees&lt;/a&gt; documentation&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-05-23:/changes/2016-05-23-timeline-preview-api/</id>
     <title type="html">Preview the Timeline API</title>
@@ -1067,50 +1094,6 @@ media type.&lt;/p&gt;
 
 &lt;p&gt;As always, if you have any feedback, please don't hesitate to
 &lt;a href="https://github.com/contact?form%5Bsubject%5D=Removing+token+from+Authorizations+API"&gt;get in touch with us&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-04-17:/changes/2015-04-17-preview-repository-redirects/</id>
-    <title type="html">Preview repository redirects</title>
-    <published>2015-04-17T07:00:00Z</published>
-    <updated>2015-04-17T07:00:00Z</updated>
-    <author>
-      <name>jasonrudolph</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-04-17-preview-repository-redirects/"/>
-    <content type="html">&lt;p&gt;From time to time, repository names change. If you make a GitHub API request using a repository's old name in the URL, the API has historically responded with &lt;code&gt;404 Not Found&lt;/code&gt;. To help API clients gracefully handle renamed repositories, the API will soon begin &lt;a href="/v3/#http-redirects"&gt;redirecting&lt;/a&gt; to the repository's new location.&lt;/p&gt;
-
-&lt;p&gt;You can preview these redirects now. In the coming weeks, we'll announce the timeline for enabling these redirects for everyone.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="how-can-i-try-out-the-redirects" class="anchor" href="#how-can-i-try-out-the-redirects" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;How can I try out the redirects?&lt;/h2&gt;
-
-&lt;p&gt;Starting today, developers can preview the redirect functionality for relocated repositories. To access this redirect functionality during the preview period, you’ll need to provide the following custom &lt;a href="/v3/media/"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.quicksilver-preview+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;During the preview period, we may change aspects of the redirect behavior based on developer feedback. If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="when-will-the-redirects-occur" class="anchor" href="#when-will-the-redirects-occur" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;When will the redirects occur?&lt;/h2&gt;
-
-&lt;p&gt;To understand when these redirects would take place, you'll want to understand how to identify a repository's location. Repositories are located using the combination of the owner's name and the repository's name. For example, the &lt;a href="https://github.com/twbs"&gt;@twbs&lt;/a&gt; organization owns the popular &lt;a href="https://github.com/twbs/bootstrap"&gt;bootstrap repository&lt;/a&gt;. We identify this repository as &lt;a href="https://github.com/twbs/bootstrap"&gt;twbs/bootstrap&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The repository's location changes in the following scenarios:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;When the owner changes the repository name.&lt;/li&gt;
-&lt;li&gt;When the owner renames their user account or organization account.&lt;/li&gt;
-&lt;li&gt;When the owner transfers the repository to a new owner.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Continuing our &lt;a href="https://github.com/twbs/bootstrap"&gt;twbs/bootstrap&lt;/a&gt; example, this repository used to be owned by the &lt;a href="https://github.com/twitter"&gt;@twitter&lt;/a&gt; organization, and it was therefore located at &lt;a href="https://github.com/twitter/bootstrap"&gt;twitter/bootstrap&lt;/a&gt;. With repository redirects, you'll be able to make an API request using the repository's old location and receive &lt;a href="/v3/#http-redirects"&gt;either a &lt;code&gt;301&lt;/code&gt; or &lt;code&gt;307&lt;/code&gt; HTTP redirect&lt;/a&gt;, depending on the type of request being made. You can then follow the redirect to the new location.&lt;/p&gt;
-
-&lt;h2&gt;
-&lt;a id="send-us-your-feedback" class="anchor" href="#send-us-your-feedback" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Send us your feedback&lt;/h2&gt;
-
-&lt;p&gt;We hope you'll take these redirects for a spin and &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+Repository+Redirects"&gt;let us know what you think&lt;/a&gt;. Happy redirecting!&lt;/p&gt;</content>
   </entry>
 </feed>
 

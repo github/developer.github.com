@@ -44,7 +44,59 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-12-04-List-comments-for-repo/">
+      <div class="change" id="/changes/2012-12-06-create-authorization-for-app/">
+  <h2 class="title">
+<a id="--create-an-oauth-authorization-for-an-app" class="anchor" href="#--create-an-oauth-authorization-for-an-app" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-12-06-create-authorization-for-app/">Create an OAuth authorization for an app</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 6, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>The <a href="/v3/oauth_authorizations/#oauth-authorizations-api">Authorizations API</a> is an easy way to create an OAuth
+authorization using Basic Auth. Just POST your desired scopes and optional
+note and you get a token back:</p>
+
+<pre class="command-line">
+<span class="command">curl -u pengwynn -d '{"scopes": ["user", "gist"]}' \</span>
+<span class="command">     https://api.github.com/authorizations</span>
+</pre>
+
+<p>This call creates a token for the authenticated user tied to a special "API"
+OAuth application.</p>
+
+<p>We now support creating tokens for <em>your own OAuth application</em> by passing your
+twenty character <code>client_id</code> and forty character <code>client_secret</code> as found in
+the settings page for your OAuth application.</p>
+
+<pre class="command-line">
+<span class="command">curl -u pengwynn -d '{ \</span>
+<span class="command">                     "scopes": ["user", "gist"], \</span>
+<span class="command">                     "client_id": "abcdeabcdeabcdeabcdeabcde" \</span>
+<span class="command">                     "client_secret": "abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcde" \</span>
+<span class="command">                    }' \ '</span>
+<span class="command">       https://api.github.com/authorizations</span>
+</pre>
+
+<p>No more implementing the <a href="/v3/oauth/#web-application-flow">web flow</a> just to get a token tied to your
+app's rate limit.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2012-12-04-List-comments-for-repo/">
   <h2 class="title">
 <a id="--per-repository-review-and-issue-commentlisting" class="anchor" href="#--per-repository-review-and-issue-commentlisting" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-12-04-List-comments-for-repo/">Per-repository Review and Issue Comment listing</a>
@@ -522,171 +574,6 @@ is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2012-09-05-watcher-api/">
-  <h2 class="title">
-<a id="--upcoming-changes-to-watcher-and-star-apis" class="anchor" href="#--upcoming-changes-to-watcher-and-star-apis" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2012-09-05-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    September 5, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/technoweenie.png" alt="Avatar for technoweenie" data-proofer-ignore>
-      <a href="https://github.com/technoweenie" data-proofer-ignore>technoweenie</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We recently <a href="https://github.com/blog/1204-notifications-stars">changed the Watcher behavior</a> on GitHub.  What
-used to be known as "Watching" is now "Starring".  Starring is basically a way
-to bookmark interesting repositories.  Watching is a way to indicate that you
-want to receive email or web notifications on a Repository.</p>
-
-<p>This works well on GitHub.com, but poses a problem for the GitHub API.  How do
-we change this in a way that developers can gracefully upgrade their
-applications?  We're currently looking at rolling out the changes in three
-phases over an extended period of time.</p>
-
-<h2>
-<a id="current-status" class="anchor" href="#current-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="current-status" class="anchor" href="#current-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Status</h2>
-
-<p>The current <a href="/v3/activity/starring/">Repository Starring</a> methods look like this:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/watchers</code> - A list of users starring the repository.</li>
-<li>
-<code>/users/:user/watched</code> - A list of repositories that a user has starred.</li>
-<li>
-<code>/user/watched</code> - A list of repositories the current user has starred.</li>
-</ul>
-
-<h2>
-<a id="phase-1-add-watchers-as-subscriptions" class="anchor" href="#phase-1-add-watchers-as-subscriptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="phase-1-add-watchers-as-subscriptions" class="anchor" href="#phase-1-add-watchers-as-subscriptions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Phase 1: Add Watchers as Subscriptions</h2>
-
-<p>This phase exposes Watchers as "Subscriptions".  This is to
-keep from clashing with the legacy endpoints.  This phase will happen
-automatically <s>and will not break your application until Phase 3 starts</s>.
-(<strong>UPDATE</strong>: API v3 will continue to support this functionality indefinitely.)</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/subscribers</code> - A list of users watching the repository.</li>
-<li>
-<code>/users/:user/subscriptions</code> - A list of repositories that a user is watching.</li>
-<li>
-<code>/user/subscriptions</code> - A list of repositories the current user is watching.</li>
-</ul>
-
-<p>We'll also add a copy of the legacy Watchers API in the new endpoint:</p>
-
-<ul>
-<li>
-<code>/repos/:owner/:repo/stargazers</code> - A list of users starring the repository.</li>
-<li>
-<code>/users/:user/starred</code> - A list of repositories that a user has starred.</li>
-<li>
-<code>/user/starred</code> - A list of repositories the current user has starred.</li>
-</ul>
-
-<p>This is in place <em>now</em> with the current media type for the API:</p>
-
-<pre><code>application/vnd.github.beta+json
-</code></pre>
-
-<p>If you care about your application not breaking, make sure all outgoing API
-requests pass that value for the "Accept" header.  You should do this now.  This
-can be verified by checking the <code>X-GitHub-Media-Type</code> header on all API
-responses.</p>
-
-<pre class="command-line">
-<span class="comment"># Accesses a user's starred repositories.</span>
-<span class="command">curl https://api.github.com/user/watched \</span>
-<span class="command"> -H "Accept: application/vnd.github.beta+json"</span>
-</pre>
-
-<p>-<s>This Phase will be broken once Phase 3 starts.  Phase 3 removes all support for
-the "beta" media type, and makes the "v3" media type the implicit default
-for API requests.</s></p>
-
-<h2>
-<a id="update---november-6-2013" class="anchor" href="#update---november-6-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="update---november-6-2013" class="anchor" href="#update---november-6-2013" aria-hidden="true"><span class="octicon octicon-link"></span></a>UPDATE - November 6, 2013</h2>
-
-<div class="alert">
-  <p>
-    API v3 will continue to officially support the functionality described in
-    Phase 1 above. This functionality will remain intact for the lifetime of
-    API v3.
-  </p>
-  <p>
-    API v3 will <em>not</em> include Phases 2 and 3 (below). Those phases will
-    likely be part of the next major version of the API. (We have not announced
-    a timeline for the next major version of the API.)
-  </p>
-</div>
-
-<h2>
-<a id="phase-2-switch-watchers-api-endpoint" class="anchor" href="#phase-2-switch-watchers-api-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="phase-2-switch-watchers-api-endpoint" class="anchor" href="#phase-2-switch-watchers-api-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a><s>Phase 2: Switch <code>/watchers</code> API Endpoint</s>
-</h2>
-
-<p><s>The "watch" endpoints will now be a copy of the "subscription" endpoints.  You
-will have to use <code>/user/starred</code> to get a user's starred repositories, not
-<code>/user/watched</code>.</s></p>
-
-<p><s>This requires a new media type value:</s></p>
-
-<p><s><pre>application/vnd.github.v3+json</pre></s></p>
-
-<p><s>This is a breaking change from Phase 1.  We will release this change in an
-experimental mode first, letting developers gracefully upgrade their
-applications by specifying the new media value for the Accept header.</s></p>
-
-<p><s></s></p>
-
-<pre>
-# Accesses a user's watched repositories.
-curl https://api.github.com/user/watched \
-  -H "Accept: application/vnd.github.v3+json"
-</pre>
-
-<p></p>
-
-<h2>
-<a id="phase-3-remove-subscribers-api-endpoint" class="anchor" href="#phase-3-remove-subscribers-api-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="phase-3-remove-subscribers-api-endpoint" class="anchor" href="#phase-3-remove-subscribers-api-endpoint" aria-hidden="true"><span class="octicon octicon-link"></span></a><s>Phase 3: Remove <code>/subscribers</code> API Endpoint.</s>
-</h2>
-
-<p><s>This phase involves disabling the subscription endpoints completely.  At this
-point, you should be using the starring endpoints for starred repositories, and
-the watch endpoints for watched repositories.  No date has been set yet, but we
-expect this to be <em>3-6 months</em> after Phase 2 is in place.  This should give
-developers enough time for a smooth upgrade path.  If they use popular API
-wrappers, the work will likely mostly be done for them.</s></p>
-
-<p><s>Keep on passing the "v3" media type in your application, until the API has
-another breaking change to make.  If you can't make the deadline for Phase 3,
-just set the "beta" media type until we shut that down completely.  It's likely
-that we will keep the old "beta" media type active for another month, like
-the <a href="https://github.com/blog/1090-github-api-moving-on">last time</a> we terminated
-old API functionality.</s></p>
-
-<p>We look forward to assisting you through this transition.  Hit us up at
-<a href="https://github.com/c">https://github.com/contact</a>, <a href="mailto:support@github.com">support@github.com</a>, or
-<a href="https://twitter.com/githubapi">@GitHubAPI</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -744,9 +631,20 @@ old API functionality.</s></p>
 
     
   
+    
+    
+    
+    
+
+    
+      <a href="/changes/14" class="">14</a>
+    
+
+    
+  
 
   
-    <span class="disabled">Next</span>
+    <a href="/changes/14" class="next_page">Next</a>
   
 </div>
 
@@ -757,6 +655,8 @@ old API functionality.</s></p>
     <div class="sidebar-shell">
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
+
+  <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
 
@@ -771,8 +671,6 @@ old API functionality.</s></p>
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
 
 </ul>
 

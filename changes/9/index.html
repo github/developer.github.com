@@ -44,7 +44,48 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
+      <div class="change" id="/changes/2014-02-25-organization-oauth-scopes/">
+  <h2 class="title">
+<a id="--oauth-scopes-for-organization-and-team-resources" class="anchor" href="#--oauth-scopes-for-organization-and-team-resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-02-25-organization-oauth-scopes/">OAuth scopes for organization and team resources</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    February 25, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>As a follow up to <a href="http://developer.github.com/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">the new scopes</a> we announced yesterday, we've
+introduced even more OAuth scopes for working with organization and team
+resources:</p>
+
+<ul>
+<li>
+<code>read:org</code> provides read-only access to organizations, teams, and membership.</li>
+<li>
+<code>write:org</code> allows an application to publicize and unpublicize an organization membership.</li>
+<li>
+<code>admin:org</code> enables an application to fully manage organizations, teams, and memberships.</li>
+</ul>
+
+<p>Check out <a href="/v3/oauth/#scopes">the full list of OAuth scopes</a> supported by the API to
+ensure your application asks for only the permissions it needs. As always, if
+you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=API+org+scopes">get in touch</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">
   <h2 class="title">
 <a id="--finer-grained-oauth-scopes-for-ssh-keys" class="anchor" href="#--finer-grained-oauth-scopes-for-ssh-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/">Finer-grained OAuth scopes for SSH keys</a>
@@ -437,95 +478,6 @@ stable and suitable for production use.</p>
 <p>We hope you’ll take it for a spin and <a href="https://github.com/contact?form%5Bsubject%5D=Deployments+API">send us your feedback</a>.</p>
 
 <p><img src="https://camo.githubusercontent.com/da8106f759bf0d163fb002e715fb1d1f1d2b6f4e/687474703a2f2f736869706974737175697272656c2e6769746875622e696f2f696d616765732f736869702532306974253230737175697272656c2e706e67" alt="Shipit Squirrel"></p>
-</div>
-
-<div class="change" id="/changes/2014-01-07-upcoming-change-to-default-media-type/">
-  <h2 class="title">
-<a id="--upcoming-change-to-default-media-type" class="anchor" href="#--upcoming-change-to-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-01-07-upcoming-change-to-default-media-type/">Upcoming Change to Default Media Type</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    January 7, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
-      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>On April 15, 2014<a href="#cutover-test">*</a>, the GitHub API will start serving the v3 media type by default. The information below will help you determine whether your applications will be affected by this change. For affected applications, you'll find tips below to help you smoothly navigate this change.</p>
-
-<h2>
-<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="whats-changing" class="anchor" href="#whats-changing" aria-hidden="true"><span class="octicon octicon-link"></span></a>What's changing?</h2>
-
-<h3>
-<a id="a-new-default-version" class="anchor" href="#a-new-default-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="a-new-default-version" class="anchor" href="#a-new-default-version" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new default version</h3>
-
-<p>There are <a href="/v3/versions">two versions</a> of the GitHub API: <strong>beta</strong> and <strong>v3</strong>. Today, requests receive the beta version by default. On April 15<a href="#cutover-test">*</a>, requests will begin receiving the v3 version by default.</p>
-
-<p>For the most part, beta and v3 are remarkably similar. There are <a href="/v3/versions/#differences-from-beta-version">just a few differences</a> to keep in mind.</p>
-
-<h3>
-<a id="a-new-default-media-type" class="anchor" href="#a-new-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="a-new-default-media-type" class="anchor" href="#a-new-default-media-type" aria-hidden="true"><span class="octicon octicon-link"></span></a>A new default media type</h3>
-
-<p>The version is one part of the <a href="/v3/media">media type</a>. By default, the API provides the beta media type:</p>
-
-<pre><code>application/vnd.github.beta+json
-</code></pre>
-
-<p>On April 15<a href="#cutover-test">*</a>, requests will begin responding with the v3 media type by default:</p>
-
-<pre><code>application/vnd.github.v3+json
-</code></pre>
-
-<h2>
-<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="who-is-affected" class="anchor" href="#who-is-affected" aria-hidden="true"><span class="octicon octicon-link"></span></a>Who is affected?</h2>
-
-<p>Since 2012, we have encouraged developers to explicitly <a href="/v3/media/#request-specific-version">request a specific media type via the <code>Accept</code> header</a>. If you are requesting either beta or v3 via the <code>Accept</code> header, then you are <em>not</em> affected by this change. The API will continue to respond with the requested media type.</p>
-
-<p>If you are not requesting beta or v3 via the <code>Accept</code> header, then the API is currently responding with the beta media type. On April 15<a href="#cutover-test">*</a>, the API will begin responding with the v3 media type. If your application relies on <a href="/v3/versions/#differences-from-beta-version">functionality that differs between beta and v3</a>, then you are affected by this change. You will need to take steps to prepare for the change.</p>
-
-<h2>
-<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="what-should-you-do" class="anchor" href="#what-should-you-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What should you do?</h2>
-
-<p>If you are affected by this change, we recommend that you:</p>
-
-<ol>
-<li>Update your applications to depend on the v3 functionality instead of the beta functionality. (If you use one of the popular <a href="/libraries/">client libraries</a>, there's a good chance that they've already done the work for you. In that case, you can just update to the latest version of that library.)</li>
-<li>Request the v3 media type via the <code>Accept</code> header.</li>
-</ol>
-
-<p>If you cannot update your application to depend on the v3 functionality by April 15<a href="#cutover-test">*</a>, you can just request the beta media type via the <code>Accept</code> header. Doing so will insulate you from this change.</p>
-
-<p><a id="cutover-test"></a></p>
-
-<h2>
-<a id="cutover-test-on-march-12-2014" class="anchor" href="#cutover-test-on-march-12-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="cutover-test-on-march-12-2014" class="anchor" href="#cutover-test-on-march-12-2014" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cutover test on March 12, 2014</h2>
-
-<p>To help you understand the impact of this change before it becomes permanent, we will temporarily implement this change for a single day on March 12. From approximately 12:01am UTC to 11:59pm UTC on March 12, the API will respond with the v3 media type by default.</p>
-
-<p>Follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> to receive updates before and after the test.</p>
-
-<h2>
-<a id="stay-informed" class="anchor" href="#stay-informed" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="stay-informed" class="anchor" href="#stay-informed" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stay informed</h2>
-
-<p>Depending on the results of the cutover test, we may schedule additional tests before the final cutover on April 15. If so, we'll to announce them in advance. Be sure to stay tuned to the <a href="/changes">blog</a> or follow <a href="https://twitter.com/GitHubAPI">@GitHubAPI</a> for updates.</p>
-
-<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Upcoming+change+to+default+API+media+type">get in touch</a>. We'll be happy to help.</p>
 
 <p></p>
 </div>
@@ -613,9 +565,13 @@ stable and suitable for production use.</p>
     
     
     
+      
+      
+      
+    
 
     
-      <a href="/changes/12" class="">12</a>
+      <span class="disabled">…</span>
     
 
     
@@ -627,6 +583,17 @@ stable and suitable for production use.</p>
 
     
       <a href="/changes/13" class="">13</a>
+    
+
+    
+  
+    
+    
+    
+    
+
+    
+      <a href="/changes/14" class="">14</a>
     
 
     
@@ -645,6 +612,8 @@ stable and suitable for production use.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
+
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
@@ -658,8 +627,6 @@ stable and suitable for production use.</p>
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
 
 </ul>
 

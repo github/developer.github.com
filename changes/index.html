@@ -44,7 +44,48 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-05-23-timeline-preview-api/">
+      <div class="change" id="/changes/2016-5-27-multiple-assignees/">
+  <h2 class="title">
+<a id="--api-changes-for-multiple-issue-assignees" class="anchor" href="#--api-changes-for-multiple-issue-assignees" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    May 27, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/nakajima.png" alt="Avatar for nakajima" data-proofer-ignore>
+      <a href="https://github.com/nakajima" data-proofer-ignore>nakajima</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>GitHub recently added the ability to assign up to ten people to issues. We're updating Issue payloads and adding a couple new endpoints to help you build apps. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.cerberus-preview
+</code></pre>
+
+<p>For example:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/repos/github/hubot/issues" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.cerberus-preview" \
+</pre>
+
+<p>The issues returned in this list will include the new <code>assignees</code> key.</p>
+
+<p>You can learn more about the new responses and endpoints in the updated <a href="/v3/issues">Issues</a> and <a href="/v3/issues/assignees">Issue Assignees</a> documentation</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-05-23-timeline-preview-api/">
   <h2 class="title">
 <a id="--preview-the-timeline-api" class="anchor" href="#--preview-the-timeline-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API</a>
@@ -508,52 +549,6 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
 <p></p>
 </div>
 
-<div class="change" id="/changes/2016-03-17-the-451-status-code-is-now-supported/">
-  <h2 class="title">
-<a id="--the-451-status-code-is-now-supported" class="anchor" href="#--the-451-status-code-is-now-supported" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2016-03-17-the-451-status-code-is-now-supported/">The 451 status code is now supported</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    March 17, 2016
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/gjtorikian.png" alt="Avatar for gjtorikian" data-proofer-ignore>
-      <a href="https://github.com/gjtorikian" data-proofer-ignore>gjtorikian</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>In December 2015, <a href="https://datatracker.ietf.org/doc/rfc7725/">the IETF ratified status code <code>451</code></a>. A <code>451</code> response indicates that a resource is unavailable due to an external legal request.</p>
-
-<p>The GitHub API will now respond with a <code>451</code> status code for resources it has been asked to take down due to a DMCA notice. For example:</p>
-
-<pre class="command-line">
-<span class="command">curl https://api.github.com/repos/github/a-repository-that-s-been-taken-down</span>
-<span class="output">HTTP/1.1 451</span>
-<span class="output">Server: GitHub.com</span>
-
-<span class="output">{</span>
-<span class="output"> "message": "Repository access blocked",</span>
-<span class="output"> "block": {</span>
-<span class="output">   "reason": "dmca",</span>
-<span class="output">   "created_at": "2016-03-17T15:39:46-07:00"</span>
-<span class="output"> }</span>
-<span class="output">}</span>
-</pre>
-
-<p>This <code>451</code> code will be returned for repositories and gists. Previously, the API responded with a <code>403 - Forbidden</code>. Aside from the semantic difference, we feel that it's important for users to know precisely why their data cannot be served.</p>
-
-<p>If you're receiving a <code>451</code> due to a DMCA takedown, please read our article on <a href="https://help.github.com/articles/guide-to-submitting-a-dmca-counter-notice/">submitting a DMCA counter notice</a> and know your rights. For more information, see <a href="https://help.github.com/articles/dmca-takedown-policy/">GitHub's DMCA Takedown Policy</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -617,7 +612,7 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
     
 
     
-      <a href="/changes/12" class="">12</a>
+      <a href="/changes/13" class="">13</a>
     
 
     
@@ -628,7 +623,7 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
     
 
     
-      <a href="/changes/13" class="">13</a>
+      <a href="/changes/14" class="">14</a>
     
 
     
@@ -647,6 +642,8 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
+
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-12-reactions-api-preview/">Preview support for Reactions API<br /><span class="date">May 12, 2016</span></a></li>
@@ -660,8 +657,6 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing<br /><span class="date">April 4, 2016</span></a></li>
 
 </ul>
 

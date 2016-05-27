@@ -46,7 +46,6 @@
 <a id="organizations" class="anchor" href="#organizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Organizations</h1>
 <ul id="markdown-toc">
 <li><a href="#list-your-organizations" id="markdown-toc-list-your-organizations">List your organizations</a></li>
-<li><a href="#list-all-organizations" id="markdown-toc-list-all-organizations">List all organizations</a></li>
 <li><a href="#list-user-organizations" id="markdown-toc-list-user-organizations">List user organizations</a></li>
 <li><a href="#get-an-organization" id="markdown-toc-get-an-organization">Get an organization</a></li>
 <li><a href="#edit-an-organization" id="markdown-toc-edit-an-organization">Edit an organization</a></li>
@@ -84,58 +83,13 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <h2>
-<a id="list-all-organizations" class="anchor" href="#list-all-organizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>List all organizations</h2>
-<p>Lists all organizations, in the order that they were created on GitHub Enterprise.</p>
-<p>Note: Pagination is powered exclusively by the <code>since</code> parameter.
-Use the <a href="/enterprise/2.1/v3/#link-header">Link header</a> to get the URL for the next page of
-organizations.</p>
-<pre><code>GET /organizations
-</code></pre>
-<h3>
-<a id="parameters" class="anchor" href="#parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parameters</h3>
-<table>
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tbody><tr>
-<td><code>since</code></td>
-<td><code>string</code></td>
-<td>The integer ID of the last Organization that you've seen.</td>
-</tr></tbody>
-</table>
-<h3>
-<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
-<pre class="highlight highlight-headers"><code>Status: 200 OK
-Link: &lt;https://api.github.com/organizations?since=135&gt;; rel="next"
-X-RateLimit-Limit: 5000
-X-RateLimit-Remaining: 4999
-</code></pre>
-<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/orgs/github"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/orgs/github/repos"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/orgs/github/events"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"hooks_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/orgs/github/hooks"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"issues_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/orgs/github/issues"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/orgs/github/members{/member}"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"public_members_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/orgs/github/public_members{/member}"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A great organization"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<h2>
 <a id="list-user-organizations" class="anchor" href="#list-user-organizations" aria-hidden="true"><span class="octicon octicon-link"></span></a>List user organizations</h2>
 <p>List <a href="https://help.github.com/articles/publicizing-or-concealing-organization-membership">public organization memberships</a> for the specified user.</p>
 <p>This method only lists <em>public</em> memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the <a href="#list-your-organizations">List your organizations</a> API instead.</p>
 <pre><code>GET /users/:username/orgs
 </code></pre>
 <h3>
-<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-1" class="anchor" href="#response-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 Link: &lt;https://api.github.com/resource?page=2&gt;; rel="next",
       &lt;https://api.github.com/resource?page=5&gt;; rel="last"
@@ -163,7 +117,7 @@ X-RateLimit-Remaining: 4999
 <pre><code>GET /orgs/:org
 </code></pre>
 <h3>
-<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-2" class="anchor" href="#response-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999
@@ -252,7 +206,7 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h3>
-<a id="response-4" class="anchor" href="#response-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
+<a id="response-3" class="anchor" href="#response-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Response</h3>
 <pre class="highlight highlight-headers"><code>Status: 200 OK
 X-RateLimit-Limit: 5000
 X-RateLimit-Remaining: 4999

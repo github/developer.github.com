@@ -733,6 +733,111 @@ X-RateLimit-Remaining: 4999
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+
+<h3>
+<a id="the-verification-object" class="anchor" href="#the-verification-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>The <code>verification</code> object</h3>
+
+<p>The response will include a <code>verification</code> field whose value is an object describing the result of verifying the commit's signature. The following fields are included in the <code>verification</code> object:</p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>verified</code></td>
+<td><code>boolean</code></td>
+<td>Does GitHub consider the signature in this commit to be verified?</td>
+</tr>
+<tr>
+<td><code>reason</code></td>
+<td><code>string</code></td>
+<td>The reason for <code>verified</code> value. Possible values and their meanings are enumerated in the table bellow.</td>
+</tr>
+<tr>
+<td><code>signature</code></td>
+<td><code>string</code></td>
+<td>The signature that was extracted from the commit.</td>
+</tr>
+<tr>
+<td><code>payload</code></td>
+<td><code>string</code></td>
+<td>The value that was signed.</td>
+</tr>
+</tbody>
+</table>
+
+<h4>
+<a id="the-reason-field" class="anchor" href="#the-reason-field" aria-hidden="true"><span class="octicon octicon-link"></span></a>The <code>reason</code> field</h4>
+
+<p>The following are possible <code>reason</code>s that may be included in the <code>verification</code> object:</p>
+
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>expired_key</code></td>
+<td>The key that made the signature is expired.</td>
+</tr>
+<tr>
+<td><code>not_signing_key</code></td>
+<td>The "signing" flag is not among the usage flags in the GPG key that made the signature.</td>
+</tr>
+<tr>
+<td><code>gpgverify_error</code></td>
+<td>There was an error communicating with the signature-verification service.</td>
+</tr>
+<tr>
+<td><code>gpgverify_unavailable</code></td>
+<td>The signature-verification service is currently unavailable.</td>
+</tr>
+<tr>
+<td><code>unsigned</code></td>
+<td>The object does not include a signature.</td>
+</tr>
+<tr>
+<td><code>unkown_signature_type</code></td>
+<td>A non-PGP signature was found in the commit.</td>
+</tr>
+<tr>
+<td><code>no_user</code></td>
+<td>No user was associated with the <code>committer</code> email address in the commit.</td>
+</tr>
+<tr>
+<td><code>unverified_email</code></td>
+<td>The <code>committer</code> email address in the commit was associated with a user, but the email address is not verified on her/his account.</td>
+</tr>
+<tr>
+<td><code>bad_email</code></td>
+<td>The <code>committer</code> email address in the commit is not included in the identities of the PGP key that made the signature.</td>
+</tr>
+<tr>
+<td><code>unknown_key</code></td>
+<td>The key that made the signature has not been registered with any user's account.</td>
+</tr>
+<tr>
+<td><code>malformed_signature</code></td>
+<td>There was an error parsing the signature.</td>
+</tr>
+<tr>
+<td><code>invalid</code></td>
+<td>The signature could not be cryptographically verified using the key whose key-id was found in the signature.</td>
+</tr>
+<tr>
+<td><code>valid</code></td>
+<td>None of the above errors applied, so the signature is considered to be verified.</td>
+</tr>
+</tbody>
+</table>
     </div>
 
     <div id="js-sidebar" class="sidebar-shell">

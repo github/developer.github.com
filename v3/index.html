@@ -665,9 +665,15 @@ User-Agent: Awesome-Octocat-App
 <p>Most responses return an <code>ETag</code> header. Many responses also return a <code>Last-Modified</code> header. You can use the values
 of these headers to make subsequent requests to those resources using the
 <code>If-None-Match</code> and <code>If-Modified-Since</code> headers, respectively. If the resource
-has not changed, the server will return a <code>304 Not Modified</code>. Also note: making
-a conditional request and receiving a 304 response does not count against your
-<a href="#rate-limiting">Rate Limit</a>, so we encourage you to use it whenever possible.</p>
+has not changed, the server will return a <code>304 Not Modified</code>.</p>
+
+<div class="alert tip">
+
+<p><strong>Note</strong>: Making a conditional request and receiving a 304 response does not
+count against your <a href="#rate-limiting">Rate Limit</a>, so we encourage you to use it
+whenever possible.</p>
+
+</div>
 
 <pre class="command-line">
 <span class="command">curl -i https://api.github.com/user</span>

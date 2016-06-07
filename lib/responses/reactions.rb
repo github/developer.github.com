@@ -1,9 +1,11 @@
+require_relative 'user'
+
 module GitHub
   module Resources
     module Responses
       REACTION ||= {
         "id": 1,
-        "user_id": 1,
+        "user" => USER,
         "content": "heart"
       }
 

@@ -44,7 +44,71 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2012-09-05-watcher-api/">
+      <div class="change" id="/changes/2012-09-28-auto-init-for-repositories/">
+  <h2 class="title">
+<a id="--initialize-a-repository-when-creating" class="anchor" href="#--initialize-a-repository-when-creating" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2012-09-28-auto-init-for-repositories/">Initialize a repository when creating</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    September 28, 2012
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/pengwynn.png" alt="Avatar for pengwynn" data-proofer-ignore>
+      <a href="https://github.com/pengwynn" data-proofer-ignore>pengwynn</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Today we've made it easier to add commits to a repository via the GitHub API.
+Until now, you could <a href="/v3/repos/#create">create a repository</a>, but you would
+need to initialize it locally via your Git client before adding any commits via
+the API.</p>
+
+<p>Now you can optionally init a repository when it's created by sending <code>true</code>
+for the <code>auto_init</code> parameter:</p>
+
+<pre class="command-line">
+<span class="command">curl -i -u pengwynn \</span>
+<span class="command">     -d '{"name": "create-repo-test", "auto_init": true}' \</span>
+<span class="command">     https://api.github.com/user/repos</span>
+</pre>
+
+<p>The resulting repository will have a README stub and an initial commit.</p>
+
+<p><img src="/assets/images/posts/create-repo-init.png" alt="create repo screenshot"></p>
+
+<h3>
+<a id="gitignore-templates" class="anchor" href="#gitignore-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="gitignore-templates" class="anchor" href="#gitignore-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>.gitignore templates</h3>
+
+<p>Along with this change, you can set up your <code>.gitignore</code> template by passing
+the basename of any template in the <a href="https://github.com/github/gitignore">GitHub gitignore templates
+project</a>.</p>
+
+<pre class="command-line">
+<span class="command">curl -i -u pengwynn \</span>
+<span class="command">     -d '{"name": "create-repo-test", "auto_init": true, \</span>
+<span class="command">          "gitignore_template": "Haskell"}' \</span>
+<span class="command">     https://api.github.com/user/repos</span>
+</pre>
+
+<p>As the <a href="/v3/repos/#create">docs point out</a>, the <code>gitignore_template</code> parameter
+is ignored if <code>auto_init</code> is not present and <code>true</code>.</p>
+
+<p>If you have any questions or feedback, drop us a line at
+<a href="https://github.com/c">https://github.com/contact</a>, <a href="mailto:support@github.com">support@github.com</a>, or
+<a href="https://twitter.com/githubapi">@GitHubAPI</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2012-09-05-watcher-api/">
   <h2 class="title">
 <a id="--upcoming-changes-to-watcher-and-star-apis" class="anchor" href="#--upcoming-changes-to-watcher-and-star-apis" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2012-09-05-watcher-api/">Upcoming Changes to Watcher and Star APIs</a>
@@ -280,6 +344,8 @@ old API functionality.</s></p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
+
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
@@ -293,8 +359,6 @@ old API functionality.</s></p>
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
 </ul>
 

@@ -44,7 +44,73 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-5-27-multiple-assignees/">
+      <div class="change" id="/changes/2016-06-07-reactions-api-update/">
+  <h2 class="title">
+<a id="--reactions-api-preview-now-includes-user-information" class="anchor" href="#--reactions-api-preview-now-includes-user-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    June 7, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/kneemer.png" alt="Avatar for kneemer" data-proofer-ignore>
+      <a href="https://github.com/kneemer" data-proofer-ignore>kneemer</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>To avoid making extra API calls, we've updated the <a href="/changes/2016-05-12-reactions-api-preview">Reactions API preview</a> to include additional user information when listing Reactions.</p>
+
+<p><strong>This is a breaking change for Reaction payloads</strong>. If you're trying out this new API during its preview period, you'll need to update your code to continue working with it.</p>
+
+<h2>
+<a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON Payload Changes</h2>
+
+<p>We're replacing the <code>user_id</code> attribute with <code>user</code> and changing the schema type from a number to a JSON object.</p>
+
+<h2>
+<a id="example-reaction-json" class="anchor" href="#example-reaction-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="example-reaction-json" class="anchor" href="#example-reaction-json" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Reaction JSON</h2>
+
+<pre class="highlight highlight-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"avatar_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/images/error/octocat_happy.gif"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gravatar_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"html_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/octocat"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"followers_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/followers"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"following_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/following{/other_user}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"gists_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/gists{/gist_id}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"starred_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/starred{/owner}{/repo}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"subscriptions_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/subscriptions"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"organizations_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/orgs"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"repos_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/repos"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/events{/privacy}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"received_events_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.github.com/users/octocat/received_events"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"User"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"site_admin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+
+<p>As always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Reactions+API+Preview">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2016-5-27-multiple-assignees/">
   <h2 class="title">
 <a id="--api-changes-for-multiple-issue-assignees" class="anchor" href="#--api-changes-for-multiple-issue-assignees" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees</a>
@@ -503,52 +569,6 @@ curl "https://api.github.com/user/gpg_keys" \
 <p></p>
 </div>
 
-<div class="change" id="/changes/2016-04-01-squash-api-preview/">
-  <h2 class="title">
-<a id="--preview-squash-support-for-the-pull-request-merge-api" class="anchor" href="#--preview-squash-support-for-the-pull-request-merge-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    April 1, 2016
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/scottjg.png" alt="Avatar for scottjg" data-proofer-ignore>
-      <a href="https://github.com/scottjg" data-proofer-ignore>scottjg</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>With the <a href="https://github.com/blog/2141-squash-your-commits">recent addition</a> of squashing Pull Requests via the merge button, we're adding support to squash Pull Requests in the API as well. You can squash a pull request in the <a href="/v3/pulls/#merge-a-pull-request-merge-button">Pull Request Merge API</a> during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.polaris-preview
-</code></pre>
-
-<p>For example:</p>
-
-<pre class="command-line">
-curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
-  -XPUT \
-  -H 'Authorization: token TOKEN' \
-  -H "Accept: application/vnd.github.polaris-preview" \
-  -d '{
-    "squash": true,
-    "commit_title": "Never tell me the odds"
-  }'
-</pre>
-
-<p>During the preview period, we may change aspects of these API methods based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Squash+API+Preview">let us know</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -642,6 +662,8 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
+
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
@@ -655,8 +677,6 @@ curl "https://api.github.com/repos/github/hubot/pulls/123/merge" \
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
 </ul>
 

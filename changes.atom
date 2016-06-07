@@ -2,13 +2,65 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>http://developer.github.com/</id>
   <title>GitHub API Changes</title>
-  <updated>2016-05-27T07:00:00Z</updated>
+  <updated>2016-06-07T07:00:00Z</updated>
   <link rel="alternate" href="http://developer.github.com/"/>
   <link rel="self" href="http://developer.github.com/changes.atom"/>
   <author>
     <name>technoweenie</name>
     <uri>https://github.com/technoweenie</uri>
   </author>
+  <entry>
+    <id>tag:developer.github.com,2016-06-07:/changes/2016-06-07-reactions-api-update/</id>
+    <title type="html">Reactions API Preview now includes user information</title>
+    <published>2016-06-07T07:00:00Z</published>
+    <updated>2016-06-07T07:00:00Z</updated>
+    <author>
+      <name>kneemer</name>
+      <uri>https://github.com/technoweenie</uri>
+    </author>
+    <link rel="alternate" href="http://developer.github.com/changes/2016-06-07-reactions-api-update/"/>
+    <content type="html">&lt;p&gt;To avoid making extra API calls, we've updated the &lt;a href="/changes/2016-05-12-reactions-api-preview"&gt;Reactions API preview&lt;/a&gt; to include additional user information when listing Reactions.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;This is a breaking change for Reaction payloads&lt;/strong&gt;. If you're trying out this new API during its preview period, you'll need to update your code to continue working with it.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="json-payload-changes" class="anchor" href="#json-payload-changes" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;JSON Payload Changes&lt;/h2&gt;
+
+&lt;p&gt;We're replacing the &lt;code&gt;user_id&lt;/code&gt; attribute with &lt;code&gt;user&lt;/code&gt; and changing the schema type from a number to a JSON object.&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="example-reaction-json" class="anchor" href="#example-reaction-json" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Example Reaction JSON&lt;/h2&gt;
+
+&lt;pre class="highlight highlight-json"&gt;&lt;code&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"id"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="nt"&gt;"user"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"login"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"octocat"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"id"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"avatar_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://github.com/images/error/octocat_happy.gif"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"gravatar_id"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"html_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://github.com/octocat"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"followers_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/followers"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"following_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/following{/other_user}"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"gists_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/gists{/gist_id}"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"starred_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/starred{/owner}{/repo}"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"subscriptions_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/subscriptions"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"organizations_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/orgs"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"repos_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/repos"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"events_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/events{/privacy}"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"received_events_url"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://api.github.com/users/octocat/received_events"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"type"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"User"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+        &lt;/span&gt;&lt;span class="nt"&gt;"site_admin"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+      &lt;/span&gt;&lt;span class="nt"&gt;"content"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"heart"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;As always, if you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Reactions+API+Preview"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <id>tag:developer.github.com,2016-05-27:/changes/2016-5-27-multiple-assignees/</id>
     <title type="html">API changes for Multiple Issue Assignees</title>
@@ -1054,46 +1106,6 @@ media type, though providing an explicit &lt;a href="/v3/media"&gt;media type&lt
 &lt;a id="feedback" class="anchor" href="#feedback" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Feedback&lt;/h3&gt;
 
 &lt;p&gt;If you have any questions or feedback on this API, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Organization+Webhooks"&gt;get in touch&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <id>tag:developer.github.com,2015-04-20:/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/</id>
-    <title type="html">Authorizations API response changes are now in effect</title>
-    <published>2015-04-20T07:00:00Z</published>
-    <updated>2015-04-20T07:00:00Z</updated>
-    <author>
-      <name>ptoomey3</name>
-      <uri>https://github.com/technoweenie</uri>
-    </author>
-    <link rel="alternate" href="http://developer.github.com/changes/2015-04-20-authorizations-api-response-changes-are-now-in-effect/"/>
-    <content type="html">&lt;p&gt;Two months ago, we
-&lt;a href="/changes/2015-02-20-migration-period-removing-authorizations-token"&gt;announced the migration period&lt;/a&gt;
-for several &lt;a href="/changes/2014-12-08-removing-authorizations-token/"&gt;API changes related to managing OAuth authorizations&lt;/a&gt;.
-As promised, the migration period concluded today, and these changes are
-now in effect for all requests.&lt;/p&gt;
-
-&lt;h3&gt;
-&lt;a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Preview media type no longer needed&lt;/h3&gt;
-
-&lt;p&gt;If you used the updated Authorizations API during the migration period, you needed
-to provide a custom media type in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.mirage-preview+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now that the migration period has ended, you no longer need to pass this custom
-media type.&lt;/p&gt;
-
-&lt;p&gt;Instead, we &lt;a href="/v3/media"&gt;recommend&lt;/a&gt; that you specify &lt;code&gt;v3&lt;/code&gt; as the version in the
-&lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3&gt;
-&lt;a id="feedback" class="anchor" href="#feedback" aria-hidden="true"&gt;&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Feedback&lt;/h3&gt;
-
-&lt;p&gt;As always, if you have any feedback, please don't hesitate to
-&lt;a href="https://github.com/contact?form%5Bsubject%5D=Removing+token+from+Authorizations+API"&gt;get in touch with us&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
 

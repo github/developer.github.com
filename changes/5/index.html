@@ -44,7 +44,71 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-12-09-new-attributes-for-stars-api/">
+      <div class="change" id="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">
+  <h2 class="title">
+<a id="--replace-older-ssh-keys-created-by-your-application" class="anchor" href="#--replace-older-ssh-keys-created-by-your-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">Replace older SSH keys created by your application</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    December 12, 2014
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>Back in February, we <a href="/changes/2014-02-24-finer-grained-scopes-for-ssh-keys/#keys-are-now-immutable">improved the security audit trail for SSH keys</a>. Soon, organizations will be able to block access for SSH keys that were created prior to those improvements. If your application relies on <a href="/guides/managing-deploy-keys/#deploy-keys">deploy keys</a> or <a href="/v3/users/keys/">user keys</a> for repository access, we recommend replacing any keys created before February 24, 2014.</p>
+
+<p>To ensure that your application is not affected by organizations blocking access to these keys, <strong>you should replace the affected keys by January 15, 2015</strong>.</p>
+
+<h2>
+<a id="how-should-you-replace-these-keys" class="anchor" href="#how-should-you-replace-these-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="how-should-you-replace-these-keys" class="anchor" href="#how-should-you-replace-these-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>How should you replace these keys?</h2>
+
+<p>We recommend the following steps for identifying and replacing the affected keys.</p>
+
+<h3>
+<a id="1-identify-the-affected-keys" class="anchor" href="#1-identify-the-affected-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="1-identify-the-affected-keys" class="anchor" href="#1-identify-the-affected-keys" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Identify the affected keys</h3>
+
+<p>You only need to replace keys that your application created prior to February 24, 2014. If you don't know when your app created a given key, you can get the creation timestamp from the API. The <code>created_at</code> property is available for <a href="/v3/repos/keys/">deploy keys</a> and for <a href="/v3/users/keys/#list-your-public-keys">user keys</a>.</p>
+
+<h3>
+<a id="2-inform-the-affected-users" class="anchor" href="#2-inform-the-affected-users" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="2-inform-the-affected-users" class="anchor" href="#2-inform-the-affected-users" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Inform the affected users</h3>
+
+<p>Once you know which keys you need to replace, we recommend that you inform the affected users.</p>
+
+<p>For security, GitHub automatically sends an email to a user whenever a new SSH key is added to their account. Similarly, when a new deploy key is added to a repository, GitHub sends an email to the repository's administrators. When you replace your application's old keys with new ones, GitHub will email the affected users. To avoid surprising those users, you should alert them that you'll be replacing your keys. You may want to include a link to this post in your message.</p>
+
+<h3>
+<a id="3-add-a-new-key" class="anchor" href="#3-add-a-new-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="3-add-a-new-key" class="anchor" href="#3-add-a-new-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Add a new key</h3>
+
+<p>Use the API to add the new <a href="/v3/repos/keys/#add-a-new-deploy-key">deploy key</a> or <a href="/v3/users/keys/#create-a-public-key">user key</a>.</p>
+
+<h3>
+<a id="4-delete-the-old-key" class="anchor" href="#4-delete-the-old-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="4-delete-the-old-key" class="anchor" href="#4-delete-the-old-key" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Delete the old key</h3>
+
+<p>Once your application is using the new key, use the API to delete the old one. There's an <a href="/v3/repos/keys/#remove-a-deploy-key">API for deleting deploy keys</a> and an <a href="/v3/users/keys/#delete-a-public-key">API for deleting user keys</a>.</p>
+
+<h2>
+<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="were-here-to-help" class="anchor" href="#were-here-to-help" aria-hidden="true"><span class="octicon octicon-link"></span></a>We're here to help</h2>
+
+<p>As always, if you have any questions or concerns, please <a href="https://github.com/contact?form%5Bsubject%5D=Replace+SSH+keys+created+by+application">get in touch</a>.</p>
+</div>
+
+<div class="change" id="/changes/2014-12-09-new-attributes-for-stars-api/">
   <h2 class="title">
 <a id="--new-attributes-for-starring-api" class="anchor" href="#--new-attributes-for-starring-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-12-09-new-attributes-for-stars-api/">New Attributes for Starring API</a>
@@ -743,42 +807,6 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/">
-  <h2 class="title">
-<a id="--one-more-week-before-the-add-team-member-api-breaking-change" class="anchor" href="#--one-more-week-before-the-add-team-member-api-breaking-change" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-09-23-one-more-week-before-the-add-team-member-api-breaking-change/">One more week before the "Add team member" API breaking change</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    September 23, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
-      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p><strong>UPDATE (2014-09-30):</strong> In response to feedback from developers, we're delaying the breaking change to the <a href="/v3/orgs/teams/#add-team-member">"Add team member" API</a> until Monday, <strong>October 6, 2014</strong>. The change will go into effect for all requests on that date.</p>
-
-<p>Starting October 6, if you use <a href="/v3/orgs/teams/#add-team-member">the "Add team member" API</a> to add a user to a team and that user isn't already on another team in your organization, the request will fail. To avoid this, be sure to use the <a href="/v3/orgs/teams/#add-team-membership">"Add team membership" API</a>.</p>
-
-<h3>
-<a id="the-organization-and-team-membership-apis-are-now-official" class="anchor" href="#the-organization-and-team-membership-apis-are-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a id="the-organization-and-team-membership-apis-are-now-official" class="anchor" href="#the-organization-and-team-membership-apis-are-now-official" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Organization and Team Membership APIs are now official</h3>
-
-<p>As promised in <a href="/changes/2014-09-16-finalizing-the-organization-and-team-membership-apis/">our blog post earlier this month</a>, the <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Organization Membership</a> and <a href="/changes/2014-08-05-team-memberships-api/">Team Membership</a> APIs are now an official part of the GitHub API! The preview media type is no longer required to access them.</p>
-
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+and+Team+Membership+APIs">get in touch with us</a>!</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -909,6 +937,8 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
+
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
 
   <li><a href="/changes/2016-05-23-timeline-preview-api/">Preview the Timeline API<br /><span class="date">May 23, 2016</span></a></li>
@@ -922,8 +952,6 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-06-deployment-and-deployment-status-enhancements/">Deployment and DeploymentStatus API enhancements preview period<br /><span class="date">April 6, 2016</span></a></li>
 
 </ul>
 

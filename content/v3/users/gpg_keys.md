@@ -16,7 +16,7 @@ title: User GPG Keys
 
   To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
 
-      application/vnd.github.cryptographer-preview+sha
+      application/vnd.github.cryptographer-preview
 
 {{/tip}}
 

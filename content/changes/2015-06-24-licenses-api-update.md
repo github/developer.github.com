@@ -9,7 +9,7 @@ Before, license information was only returned for an individual repository:
 
     GET /repos/github/hubot
 
-Now, license information will also be included in reponses from endpoints that list multiple repositories, such as [List organization repositories](/v3/repos/#list-organization-repositories):
+Now, license information will also be included in responses from endpoints that list multiple repositories, such as [List organization repositories](/v3/repos/#list-organization-repositories):
 
     GET /orgs/github/repos
 

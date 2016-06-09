@@ -125,7 +125,7 @@ Deployments can have some metadata attached to them, in the form of a `payload`
 and a `description`. Although these values are optional, it's helpful to use
 for logging and representing information.
 
-When a new deployment is created, a completely separate event is trigged. That's
+When a new deployment is created, a completely separate event is triggered. That's
 why we have a new `switch` case in the event handler for `deployment`. You can
 use this information to be notified when a deployment has been triggered.
 

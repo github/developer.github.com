@@ -241,7 +241,7 @@ clicked_results = client.search_code('addClass user:mozilla', :page => random_pa
 ```
 
 If we wanted to get fancy, we could also grab the previous and next pages, in
-order to generate links for back (`<<`) and foward (`>>`) elements:
+order to generate links for back (`<<`) and forward (`>>`) elements:
 
 ``` ruby
 prev_page_href = client.last_response.rels[:prev] ? client.last_response.rels[:prev].href : "(none)"

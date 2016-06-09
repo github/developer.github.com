@@ -175,7 +175,7 @@ This section includes details about Git LFS related fields that may be present i
 * `use_lfs` - describes whether the import has been opted in or out of using Git LFS. The value can be `opt_in`, `opt_out`, or `undecided` if no action has been taken.
 * `has_large_files` - the boolean value describing whether files larger than 100MB were found during the `importing` step.
 * `large_files_size` - the total size in gigabytes of files larger than 100MB found in the originating repository.
-* `large_files_count` - the total number of of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.
+* `large_files_count` - the total number of files larger than 100MB found in the originating repository. To see a list of these files, make a "Get Large Files" request.
 
 ## Update existing import
 

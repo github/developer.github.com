@@ -90,7 +90,7 @@ The response will include a `verification` field whose value is an object descri
 Name | Type | Description
 -----|------|--------------
 `verified`|`boolean` | Does GitHub consider the signature in this commit to be verified?
-`reason`|`string` | The reason for `verified` value. Possible values and their meanings are enumerated in the table bellow.
+`reason`|`string` | The reason for `verified` value. Possible values and their meanings are enumerated in the table below.
 `signature`|`string` | The signature that was extracted from the commit.
 `payload`|`string` | The value that was signed.
 

@@ -5,7 +5,7 @@ author_name: ptoomey3
 
 Since OAuth access tokens function like passwords, they should be treated with
 care. Today we are making it easier to more securely work with authorizations
-via the Authorizations API. We are deprecating the use use of the `token`
+via the Authorizations API. We are deprecating the use of the `token`
 attribute in the majority of the [Authorizations API](/v3/oauth_authorizations/)
 responses. For the [affected APIs][authorizations-token-deprecation-notice], the
 `token` attribute will soon return an empty string. To get ready for that
@@ -60,7 +60,7 @@ for the same client ID and user.
   [OAuth applications listing on GitHub][app-listing].
 
 * [Get-or-create an authorization for a specific app and fingerprint][get-or-create-for-app-fingerprint]
-is a new API that is analagous to the
+is a new API that is analogous to the
 [Get-or-create an authorization for a specific app][get-or-create-for-app]
 API, but adds support for the new `fingerprint` request parameter.
 

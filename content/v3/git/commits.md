@@ -105,7 +105,7 @@ Value | Description
 `gpgverify_error` | There was an error communicating with the signature-verification service.
 `gpgverify_unavailable` | The signature-verification service is currently unavailable.
 `unsigned` | The object does not include a signature.
-`unkown_signature_type` | A non-PGP signature was found in the commit.
+`unknown_signature_type` | A non-PGP signature was found in the commit.
 `no_user` | No user was associated with the `committer` email address in the commit.
 `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account.
 `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature.

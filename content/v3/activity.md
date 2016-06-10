@@ -1,7 +1,7 @@
 ---
 title: Activity
 ---
-# Activity
+# Activity!
 
 Serving up the 'social' in Social Coding, the Activity APIs provide access to
 notifications, subscriptions, and timelines.

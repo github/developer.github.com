@@ -135,6 +135,7 @@ module GitHub
 
       ISSUE_WITH_ASSIGNEES ||= ISSUE.merge({
         "assignees" => [
+          USER,
           USER.merge("login" => "hubot"),
           USER.merge("login" => "other_user")
         ]

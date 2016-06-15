@@ -98,7 +98,7 @@ Please see the [blog post](/changes/2016-04-04-git-signing-api-preview) for full
 
 To receive signature verification data in commit objects you must provide a custom [media type](/v3/media) in the `Accept` header:
 
-    application/vnd.github.cryptographer-preview+sha
+    application/vnd.github.cryptographer-preview
 
 {{/tip}}
 

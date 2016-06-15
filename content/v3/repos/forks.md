@@ -1,10 +1,9 @@
 ---
-title: Forks | GitHub API
+title: Forks
 ---
 
 # Forks
 
-* TOC
 {:toc}
 
 ## List forks
@@ -20,7 +19,7 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| h['fork'] = true; [h] } %>
 
 ## Create a fork
@@ -29,14 +28,11 @@ Create a fork for the authenticated user.
 
     POST /repos/:owner/:repo/forks
 
-One can either use the `organization` parameter or POST a JSON document with
-the field `organization`
-
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|-------------
-`organization`|`string` | The organization login. The repository will be forked into this organization.
+`organization`|`string` | Optional parameter to specify the organization name if forking into an organization.
 
 
 ### Response

@@ -1,29 +1,28 @@
 ---
-title: Users | GitHub API
+title: Users
 ---
 
 # Users
 
-* TOC
 {:toc}
 
 Many of the resources on the users API provide a shortcut for getting
 information about the currently authenticated user. If a request URL
-does not include a `:user` parameter then the response will be for the
+does not include a `:username` parameter then the response will be for the
 logged in user (and you must pass [authentication
 information](/v3/#authentication) with your request).
 
 ## Get a single user
 
-    GET /users/:user
+    GET /users/:username
 
 ### Response
 
-<%= headers 200 %>
-<%= json :full_user %>
-
 Note: The returned email is the user's publicly visible email address
 (or `null` if the user has not [specified a public email address in their profile](https://github.com/settings/profile)).
+
+<%= headers 200 %>
+<%= json :full_user %>
 
 ## Get the authenticated user
 
@@ -69,8 +68,7 @@ Name | Type | Description
 
 ## Get all users
 
-This provides a dump of every user, in the order that they signed up for
-GitHub.
+Lists all users, in the order that they signed up on {{ site.data.variables.product.product_name }}.
 
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of

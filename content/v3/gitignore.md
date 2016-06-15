@@ -1,15 +1,14 @@
 ---
-title: Gitignore | GitHub API
+title: Gitignore
 ---
 
 # Gitignore
 
-* TOC
 {:toc}
 
-When you create a new GitHub repository via the API, you can specify a
+When you create a new {{ site.data.variables.product.product_name }} repository via the API, you can specify a
 [.gitignore template][what-is] to apply to the repository upon creation. The
-.gitignore Templates API lists and fetches templates from the [GitHub .gitignore repository][templates-repo].
+.gitignore Templates API lists and fetches templates from the [{{ site.data.variables.product.product_name }} .gitignore repository][templates-repo].
 
 ## Listing available templates
 

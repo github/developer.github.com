@@ -4,84 +4,88 @@
 #
 # * The order of rules is important: for each item, only the first matching
 #   rule is applied.
-#
-# * Item identifiers start and end with a slash (e.g. “/about/” for the file
-#   “content/about.html”). To select all children, grandchildren, … of an
-#   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
-#   because “*” matches zero or more characters.
 
-# Reset search-index by deleting it every time
 preprocess do
-  File.delete("output/search-index.json") if File.exists?("output/search-index.json")
-end
-
-compile '/static/*' do
-end
-
-compile '/CNAME/' do
-end
-
-compile '/feed/' do
-  filter :erb
-  filter :kramdown, :toc_levels => [2]
-end
-
-compile '/v3/*' do
-  filter :search
-  filter :erb
-  filter :kramdown, :toc_levels => [2]
-  filter :colorize_syntax,
-    :colorizers => {:javascript => :pygmentsrb}
-  layout item[:layout] || 'api'
-end
-
-%w(v3 */).each do |version|
-  compile "/changes/#{version}" do
-    filter :erb
-    filter :kramdown, :toc_levels => [2]
-    filter :colorize_syntax,
-      :colorizers => {:javascript => :pygmentsrb}
-    layout 'changes' if version[0] == '*'
-    layout item[:layout] || 'blog'
+  add_created_at_attribute
+  add_kind_attribute
+  create_individual_blog_pages
+  generate_redirects(config[:redirects])
+  @items.each do |item|
+    ConrefFS.apply_attributes(@config, item, :default)
   end
 end
 
-compile '/guides/*' do
-  filter :kramdown, :toc_levels => [2]
+passthrough '/CNAME'
+
+compile '/changes.atom' do
   filter :erb
-  filter :colorize_syntax, :default_colorizer => :pygmentsrb
-  layout item[:layout] || 'guides'
 end
 
-compile '/webhooks/*' do
-  filter :kramdown, :toc_levels => [2]
+compile '/integrations-directory/*' do
+  filter :'conref-fs-filter'
   filter :erb
-  filter :colorize_syntax, :default_colorizer => :pygmentsrb
-  layout item[:layout] || 'webhooks'
+  filter :html_pipeline, @config[:pipeline_config]
+  layout item[:layout] || '/integrations-directory.*'
 end
 
-compile '*' do
+compile '/v3{.*,/**/*}' do
+  filter :'conref-fs-filter'
   filter :erb
-  filter :kramdown, :toc_levels => [2]
-  filter :colorize_syntax,
-    :colorizers => {:javascript => :pygmentsrb}
-  layout item[:layout] || 'default'
+  filter :html_pipeline, @config[:pipeline_config]
+  layout(item[:layout] ? "/#{item[:layout]}.*" : '/api.*')
 end
 
-route '/static/*' do
-  item.identifier[7..-2]
+compile "/changes/20*" do
+  filter :'conref-fs-filter'
+  filter :erb
+  filter :html_pipeline, @config[:pipeline_config]
+  layout '/changes.*'
+  layout(item[:layout] ? "/#{item[:layout]}.*" : '/blog.*')
 end
 
-route '/CNAME/' do
-  '/CNAME'
+compile '/guides/**/*' do
+  filter :'conref-fs-filter'
+  filter :html_pipeline, @config[:pipeline_config]
+  filter :erb
+  layout(item[:layout] ? "/#{item[:layout]}.*" : '/guides.*')
 end
 
-route '/feed' do
+compile '/webhooks/**/*' do
+  filter :'conref-fs-filter'
+  filter :erb
+  filter :html_pipeline, @config[:pipeline_config]
+  layout(item[:layout] ? "/#{item[:layout]}.*" : '/webhooks.*')
+end
+
+compile '/search/search-index.json' do
+  filter :erb
+end
+
+compile '/**/*' do
+  filter :'conref-fs-filter'
+  filter :erb
+  filter :html_pipeline, @config[:pipeline_config]
+  layout(item[:layout] ? "/#{item[:layout]}.*" : '/default.*')
+end
+
+route '/changes.atom' do
   '/changes.atom'
 end
 
-route '*' do
-  item.identifier + 'index.html'
+route '/search/search-index.json' do
+  item.identifier.to_s
 end
 
-layout '*', :erb
+route '/**/index.*' do
+  item.identifier.without_ext + '.html'
+end
+
+route '/404.html' do
+  '/404.html'
+end
+
+route '/**/*' do
+  item.identifier.without_ext + '/index.html'
+end
+
+layout '/**/*', :erb

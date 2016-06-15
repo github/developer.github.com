@@ -1,10 +1,9 @@
 ---
-title: Gists | GitHub API
+title: Gists
 ---
 
 # Gists
 
-* TOC
 {:toc}
 
 ## Authentication
@@ -15,20 +14,56 @@ You can read public gists and create them for anonymous users without a token; h
 
 The API will return a 401 "Bad credentials" response if the gists scope was given to the application but the credentials are invalid. -->
 
-## List gists
+## Truncation
 
-List a user's gists:
+The Gist API provides up to one megabyte of content for each file in the gist. Each file returned for a gist through the API has a key called `truncated`. If `truncated` is `true`, the file is too large and only a portion of the contents were returned in `content`.
 
-    GET /users/:user/gists
+If you need the full contents of the file, you can make a `GET` request to the URL specified by `raw_url`. Be aware that for files larger than ten megabytes, you'll need to clone the gist via the URL provided by `git_pull_url`.
+
+In addition to a specific file's contents being truncated, the entire files list may be truncated if the total number exceeds 300 files. If the top level `truncated` key is `true`, only the first 300 files have been returned in the files list. If you need to fetch all of the gist's files, you'll need to clone the gist via the URL provided by `git_pull_url`.
+
+## List a user's gists
+
+List public gists for the specified user:
+
+    GET /users/:username/gists
 
 List the authenticated user's gists or if called anonymously, this will
 return all public gists:
 
     GET /gists
 
-List all public gists:
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:gist) { |h| [h] } %>
+
+## List all public gists
+
+List all public gists sorted by most recently updated to least recently updated.
+
+Note: With pagination, you can fetch up to 200 [pages](/v3/#pagination).
 
     GET /gists/public
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:gist) { |h| [h] } %>
+
+## List starred gists
 
 List the authenticated user's starred gists:
 
@@ -49,16 +84,21 @@ Name | Type | Description
 
     GET /gists/:id
 
-### Response
+<a id="detailed-gist-representation">
 
-<div class="alert">
-  <p>
-    <strong>Note</strong>: When using the <a href="/v3/media/#beta-v3-and-the-future">v3 media type</a>, the <code>user</code> attribute is renamed to <code>owner</code>.
-  </p>
-</div>
+### Response
 
 <%= headers 200 %>
 <%= json :full_gist %>
+
+## Get a specific revision of a gist
+
+    GET /gists/:id/:sha
+
+### Response
+
+<%= headers 200 %>
+<%= json :full_gist_version %>
 
 ## Create a gist
 
@@ -68,11 +108,11 @@ Name | Type | Description
 
 Name | Type | Description
 -----|------|--------------
-`files`|`hash` | **Required**. Files that make up this gist.
+`files`|`object` | **Required**. Files that make up this gist.
 `description`|`string` | A description of the gist.
 `public`|`boolean` | Indicates whether the gist is public. Default: `false`
 
-The keys in the `files` hash are the `string` filename, and the value is another `hash` with a key of `content`, and a value of the file contents. For example:
+The keys in the `files` object are the `string` filename, and the value is another `object` with a key of `content`, and a value of the file contents. For example:
 
 <%= json \
   :description => "the description for this gist",
@@ -82,12 +122,15 @@ The keys in the `files` hash are the `string` filename, and the value is another
   }
 %>
 
-_Note:_ Don't name your files "gistfile" with a numerical suffix.  This is the
-format of the automatic naming scheme that Gist uses internally.
+{{#tip}}
+
+**Note:** Don't name your files "gistfile" with a numerical suffix.  This is the format of the automatic naming scheme that Gist uses internally.
+
+{{/tip}}
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/gists/1" %>
+<%= headers 201, :Location => get_resource(:full_gist)['url'] %>
 <%= json :full_gist %>
 
 ## Edit a gist
@@ -99,11 +142,11 @@ format of the automatic naming scheme that Gist uses internally.
 Name | Type | Description
 -----|------|--------------
 `description`|`string` | A description of the gist.
-`files`|`hash` | Files that make up this gist.
+`files`|`object` | Files that make up this gist.
 `content`|`string` | Updated file contents.
 `filename`|`string` | New name for this file.
 
-The keys in the `files` hash are the `string` filename. The value is another `hash` with a key of `content` (indicating the new contents), or `filename` (indicating the new filename). For example:
+The keys in the `files` object are the `string` filename. The value is another `object` with a key of `content` (indicating the new contents), or `filename` (indicating the new filename). For example:
 
 <%= json \
   :description => "the description for this gist",
@@ -114,9 +157,11 @@ The keys in the `files` hash are the `string` filename. The value is another `ha
     "delete_this_file.txt" => nil,
   } %>
 
-NOTE: All files from the previous version of the gist are carried over by
-default if not included in the hash. Deletes can be performed by
-including the filename with a `null` hash.
+{{#tip}}
+
+<strong>Note</strong>: All files from the previous version of the gist are carried over by default if not included in the object. Deletes can be performed by including the filename with a <code>null</code> object.
+
+{{/tip}}
 
 
 ### Response
@@ -124,9 +169,21 @@ including the filename with a `null` hash.
 <%= headers 200 %>
 <%= json :full_gist %>
 
+
+## List gist commits
+
+    GET /gists/:id/commits
+
+### Response
+
+<%= headers 200, :pagination => { :next => 'https://api.github.com/resource?page=2' } %>
+<%= json(:gist_history) %>
+
 ## Star a gist
 
     PUT /gists/:id/star
+
+<%= fetch_content(:put_content_length) %>
 
 ### Response
 
@@ -156,12 +213,25 @@ including the filename with a `null` hash.
 
     POST /gists/:id/forks
 
-**Note**: This was previously `/gists/:id/fork`
+{{#tip}}
+
+**Note**: This was previously `/gists/:id/fork`.
+
+{{/tip}}
 
 ### Response
 
-<%= headers 201, :Location => "https://api.github.com/gists/2" %>
+<%= headers 201, :Location => get_resource(:gist)['url'] %>
 <%= json(:gist) %>
+
+## List gist forks
+
+    GET /gists/:id/forks
+
+### Response
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:gist_forks) %>
 
 ## Delete a gist
 
@@ -172,3 +242,11 @@ including the filename with a `null` hash.
 <%= headers 204 %>
 
 [1]: /v3/oauth/#scopes
+
+## Custom media types
+
+The following media types are supported when fetching gist contents. You can read more about the
+use of media types in the API [here](/v3/media/).
+
+    application/vnd.github.VERSION.raw
+    application/vnd.github.VERSION.base64

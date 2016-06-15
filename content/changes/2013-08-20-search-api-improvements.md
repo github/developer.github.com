@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Improvements to the Search API
-created_at: 2013-08-20
 author_name: jasonrudolph
 ---
 
@@ -14,54 +12,51 @@ Now, you can also [get this metadata][code-text-matches] for matches that occur 
 
 For example, when [searching for files that have "client" in their path][example-path-search], the results include this match for `lib/octokit/client/commits.rb`:
 
-<pre class="json">
-{
-  "name": "commits.rb",
-  "path": "lib/octokit/client/commits.rb",
-  "text_matches": [
+{:.json}
     {
-      "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
-      "object_type": "FileContent",
-      "property": "path",
-      "fragment": "lib/octokit/client/commits.rb",
-      "matches": [
+      "name": "commits.rb",
+      "path": "lib/octokit/client/commits.rb",
+      "text_matches": [
         {
-          "text": "client",
-          "indices": [ 12, 18 ]
+          "object_url": "https://api.github.com/repositories/417862/contents/lib/octokit/client/commits.rb?ref=8d487ab06ccef463aa9f5412a56f1a2f1fa4dc88",
+          "object_type": "FileContent",
+          "property": "path",
+          "fragment": "lib/octokit/client/commits.rb",
+          "matches": [
+            {
+              "text": "client",
+              "indices": [ 12, 18 ]
+            }
+          ]
         }
       ]
+      // ...
     }
-  ]
-  // ...
-}
-</pre>
 
 ## Better Text Match Metadata
 
 Before today, the API applied HTML entity encoding to all `fragment` data.
-For example, imagine your search returns an issue like [rails/rails#11889][example-issue]:
+For example, imagine your search returns an issue like <a href="https://github.com/rails/rails/issues/11889" data-proofer-ignore>rails/rails#11889</a>:
 
 ![Example Issue Title](https://f.cloud.github.com/assets/2988/994632/a84f2888-09af-11e3-9417-4bd92f1f1ed6.png)
 
 The response would include a `text_matches` array with the following object:
 
-<pre class="json">
-{
-  "fragment": "undefined method `except' for #&amp;lt;Array:XXX&amp;gt;",
-  // ...
-}
-</pre>
+{:.json}
+    {
+      "fragment": "undefined method 'except' for #&lt;Array:XXX&gt;",
+      // ...
+    }
 
 Inside the `fragment` value, we see HTML-encoded entities (e.g., `&lt;`).
 Since we're returning JSON (not HTML), API clients might not expect any HTML-encoded text.
 As of today, the API returns these fragments _without_ this extraneous encoding.
 
-<pre class="json">
-{
-  "fragment": "undefined method `except' for #&lt;Array:XXX&gt;",
-  // ...
-}
-</pre>
+{:.json}
+    {
+      "fragment": "undefined method 'except' for #<Array:XXX>",
+      // ...
+    }
 
 ## Preview Period
 
@@ -70,7 +65,6 @@ We appreciate everyone that has provided feedback so far. Please [keep it coming
 
 [contact]: https://github.com/contact?form[subject]=New+Search+API
 [code-text-matches]: /v3/search/#highlighting-code-search-results
-[example-issue]: https://github.com/rails/rails/issues/11889
 [example-path-search]: https://github.com/search?q=%40octokit%2Foctokit.rb+in%3Apath+client&type=Code
 [original-search-api-announcement]: /changes/2013-07-19-preview-the-new-search-api/
 [preview-period]: /changes/2013-07-19-preview-the-new-search-api/#preview-period

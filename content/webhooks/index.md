@@ -1,97 +1,150 @@
 ---
-title: Webhooks | GitHub API
+title: Webhooks
 layout: webhooks
 ---
 
 # Webhooks
 
-* TOC
 {:toc}
 
-Every GitHub repository has the option to communicate with a web server whenever
-the repository is pushed to. These "webhooks" can be used to update an external
-issue tracker, trigger CI builds, update a backup mirror, or even deploy to your
-production server.
 
-Each hook can be configured for a specific [service](#services) and one or
-more [events](#events), regardless of the API used to do so. Repository admins
-can configure hooks programmatically [via the API](/v3/repos/hooks/).
+Webhooks allow you to build or set up integrations which subscribe to certain
+events on GitHub.com. When one of those events is triggered, we'll send a HTTP
+POST payload to the webhook's configured URL.  Webhooks can be used to update
+an external issue tracker, trigger CI builds, update a backup mirror, or even
+deploy to your production server. You're only limited by your imagination.
 
-## Services
+Each webhook can be installed [on an organization][org-hooks] or [a specific
+repository][repo-hooks]. Once installed, they will be triggered each time one
+or more subscribed events occurs on that organization or repository.
 
-A service is basically the name used to refer to a hook that has configuration
-settings, a list of available events, and default events.
-
-> For instance, the
-[email](https://github.com/github/github-services/blob/master/lib/services/email.rb)
-service is a built-in GitHub service that will send event [payloads](#payloads)
-to, at most, two email addresses.  It will trigger for the `push`
-event by default and supports the `public` event type as well.
-
-A number of services have been integrated through the open source
-[github-services](https://github.com/github/github-services) project.  When
-[creating a hook](/webhooks/creating/), the `:name` parameter must refer to one of
-these services.  A generic
-[Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
-service is available that can configured to trigger for any of the available
-[events](#events).
-
-Documentation for all available service hooks can be found in the
-[docs directory](https://github.com/github/github-services/tree/master/docs)
-of the github-services repository.  A JSON representation of their names,
-default events, supported events, and configuration options can be seen
-at [api.github.com/hooks](https://api.github.com/hooks).
-
+You can create up to 20 webhooks for each event on each installation target
+(specific organization or specific repository).
 
 ## Events
 
-Active hooks can be configured to trigger for one or more service supported
-events. In other words, the service must support listening for the event you
-want to trigger.
+When configuring a webhook, you can choose which events you would like to
+receive payloads for. You can [even opt-in to all current and future
+events][wildcard-section].  Only subscribing to the specific events you plan on
+handling is useful for limiting the number of HTTP requests to your server.  You
+can change the list of subscribed events through the API or UI anytime.  By
+default, webhooks are only subscribed to the `push` event.
 
-For example, the
-[Web](https://github.com/github/github-services/blob/master/lib/services/web.rb)
-service listens for all events, while the
-[IRC](https://github.com/github/github-services/blob/master/lib/services/irc.rb)
-service can only listen for `push`, `issues`, and `pull_request` events.
+Each event corresponds to a certain set of actions that can happen to your
+organization and/or repository. For example, if you subscribe to the `issues`
+event you'll receive [detailed payloads][payloads-section] every time an issue
+is opened, closed, labeled, etc.
+
 
 The available events are:
 
 Name | Description
 -----|-----------|
-`push` | Any git push to a Repository. **This is the default event.**
-`issues` | Any time an Issue is opened or closed.
-`issue_comment` | Any time an Issue is commented on.
-`commit_comment` | Any time a Commit is commented on.
-`create` | Any time a Repository, Branch, or Tag is created.
-`delete` | Any time a Branch or Tag is deleted.
-`pull_request` | Any time a Pull Request is opened, closed, or synchronized (updated due to a new push in the branch that the pull request is tracking).
-`pull_request_review_comment` | Any time a Commit is commented on while inside a Pull Request review (the Files Changed tab).
-`gollum` | Any time a Wiki page is updated.
-`watch` | Any time a User watches the Repository.
-`release` | Any time a Release is published in the Repository.
-`fork` | Any time a Repository is forked.
-`member` | Any time a User is added as a collaborator to a non-Organization Repository.
-`public` | Any time a Repository changes from private to public.
-`team_add` | Any time a team is added or modified on a Repository.
-`status` | Any time a Repository has a status update from the API
-`deployment` | Any time a Repository has a new deployment created from the API.
-`deployment_status` | Any time a deployment for the Repository has a status update from the API.
+`*` | Any time any event is triggered ([Wildcard Event][wildcard-section]).
+[`commit_comment`][event-types-commit_comment] | Any time a Commit is commented on.
+[`create`][event-types-create] | Any time a Branch or Tag is created.
+[`delete`][event-types-delete] | Any time a Branch or Tag is deleted.
+[`deployment`][event-types-deployment] | Any time a Repository has a new deployment created from the API.
+[`deployment_status`][event-types-deployment_status] | Any time a deployment for a Repository has a status update from the API.
+[`fork`][event-types-fork] | Any time a Repository is forked.
+[`gollum`][event-types-gollum] | Any time a Wiki page is updated.
+[`issue_comment`][event-types-issue_comment] | {% if page.version == 'dotcom' or page.version > 2.6 %}Any time a [comment on an issue](/v3/issues/comments/) is created, edited, or deleted.{% else %}Any time an [issue is commented on](/v3/issues/comments).{% endif %}
+[`issues`][event-types-issues] | Any time an Issue is assigned, unassigned, labeled, unlabeled, opened, {% if page.version == 'dotcom' or page.version > 2.6 %}edited, {% endif %}closed, or reopened.
+[`member`][event-types-member] | Any time a User is added as a collaborator to a non-Organization Repository.
+[`membership`][event-types-membership] | Any time a User is added or removed from a team. **Organization hooks only**.
+[`page_build`][event-types-page_build] | Any time a Pages site is built or results in a failed build.
+[`public`][event-types-public] | Any time a Repository changes from private to public.
+[`pull_request_review_comment`][event-types-pull_request_review_comment] | {% if page.version == 'dotcom' or page.version > 2.6 %}Any time a [comment on a Pull Request's unified diff](/v3/pulls/comments)  is created, edited, or deleted{% else %}Any time a [Pull Request's unified diff is commented on](/v3/pulls/comments){% endif %} (in the Files Changed tab).
+[`pull_request`][event-types-pull_request] | Any time a Pull Request is assigned, unassigned, labeled, unlabeled, opened, {% if page.version == 'dotcom' or page.version > 2.6 %}edited, {% endif %}closed, reopened, or synchronized (updated due to a new push in the branch that the pull request is tracking).
+[`push`][event-types-push] | Any Git push to a Repository, including editing tags or branches. Commits via API actions that update references are also counted. **This is the default event.**
+[`repository`][event-types-repository] | Any time a Repository is created{% if page.version == 'dotcom' or page.version > 2.6 %}, deleted, made public, or made private{% else %}. **Organization hooks only**{% endif %}.
+[`release`][event-types-release] | Any time a Release is published in a Repository.
+[`status`][event-types-status] | Any time a Repository has a status update from the API
+[`team_add`][event-types-team_add] | Any time a team is added or modified on a Repository.
+[`watch`][event-types-watch] | Any time a User stars a Repository.
+
+### Wildcard Event
+
+We also support a wildcard (`*`) that will match all supported events. When you
+add the wildcard event, we'll replace any existing events you have configured
+with the wildcard event and send you payloads for all supported events. You'll
+also automatically get any new events we might add in the future.
 
 
-### Payloads
+## Payloads
 
-The payloads for all hooks mirror [the payloads for the Event
-types](/v3/activity/events/types/), with the exception of [the original `push`
-event](http://help.github.com/post-receive-hooks/),
-which has a more detailed payload.
+Each event type has a specific payload format with the relevant event
+information. All event payloads mirror [the payloads for the Event
+types][event-types], with the exception of [the original `push`
+event][event-types-push], which has a more detailed webhook payload.
+
+In addition to the fields [documented for each event][event-types], webhook
+payloads include the user who performed the event (`sender`) as well as the
+organization (`organization`) and/or repository (`repository`) which the event
+occurred on.
+
+{{#tip}}
+
+**Note:** Payloads are capped at 5 MB. If your event generates a larger payload, a webhook will not be fired. This may happen, for example, on a `create` event if many branches or tags are pushed at once. We suggest monitoring your payload size to ensure delivery.
+
+{{/tip}}
+
+### Delivery headers
+
+HTTP requests made to your webhook's configured URL endpoint will contain
+several special headers:
+
+Header | Description
+-------|-------------|
+`X-GitHub-Event`| Name of the [event][events-section] that triggered this delivery.
+`X-Hub-Signature`| HMAC hex digest of the payload, using [the hook's `secret`][repo-hooks-create] as the key (if configured).
+`X-GitHub-Delivery`| Unique ID for this delivery.
+
+Also, the `User-Agent` for the requests will have the prefix `GitHub-Hookshot/`.
+
+### Example delivery
+
+``` command-line
+> POST /payload HTTP/1.1
+
+> Host: localhost:4567
+> X-Github-Delivery: 72d3162e-cc78-11e3-81ab-4c9367dc0958
+> User-Agent: GitHub-Hookshot/044aadd
+> Content-Type: application/json
+> Content-Length: 6615
+> X-GitHub-Event: issues
+
+> {
+>   "action": "opened",
+>   "issue": {
+>     "url": "https://api.github.com/repos/octocat/Hello-World/issues/1347",
+>     "number": 1347,
+>     ...
+>   },
+>   "repository" : {
+>     "id": 1296269,
+>     "full_name": "octocat/Hello-World",
+>     "owner": {
+>       "login": "octocat",
+>       "id": 1,
+>       ...
+>     },
+>     ...
+>   },
+>   "sender": {
+>     "login": "octocat",
+>     "id": 1,
+>     ...
+>   }
+> }
+```
 
 ## Ping Event
 
 When you create a new webhook, we'll send you a simple `ping` event to let you
 know you've set up the webhook correctly. This event isn't stored so it isn't
-retrievable via the [Events API](/v3/activity/events/). You can trigger a `ping`
-again by calling the [ping endpoint](/v3/repos/hooks/#ping-a-hook).
+retrievable via the [Events API][events-api]. You can trigger a `ping` again by
+calling the [ping endpoint][repo-hooks-ping].
 
 ### Ping Event Payload
 
@@ -99,3 +152,37 @@ Key | Value |
 ----| ----- |
 zen | Random string of GitHub zen |
 hook_id | The ID of the webhook that triggered the ping |
+hook | The [webhook configuration][repo-hooks-show] |
+
+[service-hooks-section]: #service-hooks
+[events-section]: #events
+[wildcard-section]: #wildcard-event
+[payloads-section]: #payloads
+[org-hooks]: /v3/orgs/hooks/
+[repo-hooks]: /v3/repos/hooks/
+[repo-hooks-show]: /v3/repos/hooks/#get-single-hook
+[repo-hooks-create]: /v3/repos/hooks/#create-a-hook
+[repo-hooks-ping]: /v3/repos/hooks/#ping-a-hook
+[events-api]: /v3/activity/events/
+[event-types]: /v3/activity/events/types/
+[event-types-commit_comment]: /v3/activity/events/types/#commitcommentevent
+[event-types-create]: /v3/activity/events/types/#createevent
+[event-types-delete]: /v3/activity/events/types/#deleteevent
+[event-types-deployment]: /v3/activity/events/types/#deploymentevent
+[event-types-deployment_status]: /v3/activity/events/types/#deploymentstatusevent
+[event-types-fork]: /v3/activity/events/types/#forkevent
+[event-types-gollum]: /v3/activity/events/types/#gollumevent
+[event-types-issue_comment]: /v3/activity/events/types/#issuecommentevent
+[event-types-issues]: /v3/activity/events/types/#issuesevent
+[event-types-member]: /v3/activity/events/types/#memberevent
+[event-types-membership]: /v3/activity/events/types/#membershipevent
+[event-types-page_build]: /v3/activity/events/types/#pagebuildevent
+[event-types-public]: /v3/activity/events/types/#publicevent
+[event-types-pull_request]: /v3/activity/events/types/#pullrequestevent
+[event-types-pull_request_review_comment]: /v3/activity/events/types/#pullrequestreviewcommentevent
+[event-types-push]: /v3/activity/events/types/#pushevent
+[event-types-release]: /v3/activity/events/types/#releaseevent
+[event-types-repository]: /v3/activity/events/types/#repositoryevent
+[event-types-status]: /v3/activity/events/types/#statusevent
+[event-types-team_add]: /v3/activity/events/types/#teamaddevent
+[event-types-watch]: /v3/activity/events/types/#watchevent

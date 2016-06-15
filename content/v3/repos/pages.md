@@ -1,10 +1,9 @@
 ---
-title: Pages | GitHub API
+title: Pages
 ---
 
 # Pages
 
-* TOC
 {:toc}
 
 The Pages API retrieves information about your GitHub Pages configuration, and
@@ -31,7 +30,7 @@ In JSON responses, `status` can be one of:
 
     GET /repos/:owner/:repo/pages/builds
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:pages_build) { |h| [h] } %>
 
 ## List latest Pages build

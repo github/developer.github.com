@@ -1,10 +1,9 @@
 ---
-title: Issue Comments | GitHub API
+title: Issue Comments
 ---
 
 # Comments
 
-* TOC
 {:toc}
 
 The Issue Comments API supports listing, viewing, editing, and creating
@@ -18,10 +17,39 @@ You can read more about the use of media types in the API
 
     GET /repos/:owner/:repo/issues/:number/comments
 
+Issue Comments are ordered by ascending ID.
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`since`|`string` | Only comments updated at or after this time are returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
+
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:issue_comment) { |h| [h] } %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-issue-comments"></a>
+
+  An additional `reactions` object in the issue comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :issue_comment_reaction_summary %>
+{% endif %}
 
 ## List comments in a repository
 
@@ -31,7 +59,7 @@ By default, Issue Comments are ordered by ascending ID.
 
 ### Parameters
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `sort`|`string` | Either `created` or `updated`. Default: `created`
 `direction`|`string` | Either `asc` or `desc`. Ignored without the `sort` parameter.
@@ -41,7 +69,28 @@ Name | Type | Description
 ### Response
 
 <%= headers 200 %>
-<%= json(:pull_comment) { |h| [h] } %>
+<%= json(:issue_comment) { |h| [h] } %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-issues-comments"></a>
+
+  An additional `reactions` object in the issue comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :issue_comment_reaction_summary %>
+{% endif %}
 
 ## Get a single comment
 
@@ -49,8 +98,29 @@ Name | Type | Description
 
 ### Response
 
-<%= headers 200 %>
+<%= headers 200, :pagination => default_pagination_rels %>
 <%= json :issue_comment %>
+
+{% if page.version == 'dotcom' %}
+#### Reactions summary
+
+{{#tip}}
+
+  <a name="preview-period-issue-comment"></a>
+
+  An additional `reactions` object in the issue comment payload is currently available for developers to preview.
+  During the preview period, the APIs may change without advance notice.
+  Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.
+
+  To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.squirrel-girl-preview
+
+  The `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.
+
+{{/tip}}
+<%= json :issue_comment_reaction_summary %>
+{% endif %}
 
 ## Create a comment
 
@@ -63,13 +133,11 @@ Name | Type | Description
 `body`|`string` | **Required**. The contents of the comment.
 
 
-<%= json :body => "a new comment" %>
+<%= json :body => "Me too" %>
 
 ### Response
 
-<%= headers 201,
-      :Location =>
-"https://api.github.com/repos/user/repo/issues/comments/1" %>
+<%= headers 201, :Location => get_resource(:issue_comment)['url'] %>
 <%= json :issue_comment %>
 
 ## Edit a comment
@@ -78,12 +146,12 @@ Name | Type | Description
 
 ### Input
 
-Name | Type | Description 
+Name | Type | Description
 -----|------|--------------
 `body`|`string` | **Required**. The contents of the comment.
 
 
-<%= json :body => "String" %>
+<%= json :body => "Me too" %>
 
 ### Response
 

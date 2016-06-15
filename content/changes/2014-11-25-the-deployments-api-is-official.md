@@ -1,7 +1,5 @@
 ---
-kind: change
 title: The Deployments API is official
-created_at: 2014-11-25
 author_name: atmos
 ---
 

@@ -1,7 +1,5 @@
 ---
-kind: change
 title: More time to prepare for the breaking changes to organization permissions
-created_at: 2015-02-24
 author_name: jakeboxer
 ---
 

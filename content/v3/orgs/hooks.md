@@ -1,11 +1,28 @@
 ---
-title: Organization Webhooks | GitHub API
+title: Organization Webhooks
 ---
 
 # Webhooks
 
-* TOC
 {:toc}
+
+{% if page.version != 'dotcom' and page.version <= 2.2 %}
+
+{{#tip}}
+
+The Organization Webhooks API is currently available for developers to preview.
+During the preview period, the API may change without advance notice.
+Please see the [blog post](/changes/2014-12-03-preview-the-new-organization-webhooks-api/) for full details.
+
+To access the API during the preview period, you must provide a custom [media type](/enterprise/{{ page.version }}/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.sersi-preview+json
+```
+
+{{/tip}}
+
+{% endif %}
 
 Organization webhooks allow you to receive HTTP `POST` payloads whenever certain events happen within the organization. Subscribing to these events makes it possible to build integrations that react to actions on GitHub.com. For more information on actions you can subscribe to, check out our [Events documentation][webhook-events].
 
@@ -128,13 +145,13 @@ This will trigger a [ping event][ping-event-url] to be sent to the hook.
 
 ## Receiving Webhooks
 
-In order for GitHub to send webhook payloads, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.
+In order for {{ site.data.variables.product.product_name }} to send webhook payloads, your server needs to be accessible from the Internet. We also highly suggest using SSL so that we can send encrypted payloads over HTTPS.
 
 For more best practices, [see our guide][best-integration-practices].
 
 ### Webhook Headers
 
-GitHub will send along several HTTP headers to differentiate between event types and payload identifiers.
+{{ site.data.variables.product.product_name }} will send along several HTTP headers to differentiate between event types and payload identifiers.
 
 Name | Description
 -----|-----------|
@@ -144,7 +161,6 @@ Name | Description
 
 
 [guid]: http://en.wikipedia.org/wiki/Globally_unique_identifier
-[hub-signature]: https://github.com/github/github-services/blob/f3bb3dd780feb6318c42b2db064ed6d481b70a1f/lib/service/http_helper.rb#L77
 [ping-event-url]: /webhooks/#ping-event
 [webhook-events]: /webhooks/#events
 [event-types]: /v3/activity/events/types/

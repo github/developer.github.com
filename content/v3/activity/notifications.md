@@ -1,10 +1,9 @@
 ---
-title: Notifications | GitHub API
+title: Notifications
 ---
 
 # Notifications
 
-* TOC
 {:toc}
 
 Users receive notifications for conversations in repositories they watch
@@ -36,18 +35,19 @@ leaving your current rate limit untouched.  There is an "X-Poll-Interval"
 header that specifies how often (in seconds) you are allowed to poll.  In times
 of high server load, the time may increase.  Please obey the header.
 
-{:.terminal}
-    # Add authentication to your requests
-    $ curl -I https://api.github.com/notifications
-    HTTP/1.1 200 OK
-    Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
-    X-Poll-Interval: 60
+``` command-line
+# Add authentication to your requests
+$ curl -I {{ site.data.variables.product.api_url_pre }}/notifications
+HTTP/1.1 200 OK
+Last-Modified: Thu, 25 Oct 2012 15:16:27 GMT
+X-Poll-Interval: 60
 
-    # Pass the Last-Modified header exactly
-    $ curl -I https://api.github.com/notifications
-        -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
-    HTTP/1.1 304 Not Modified
-    X-Poll-Interval: 60
+# Pass the Last-Modified header exactly
+$ curl -I {{ site.data.variables.product.api_url_pre }}/notifications
+$    -H "If-Modified-Since: Thu, 25 Oct 2012 15:16:27 GMT"
+> HTTP/1.1 304 Not Modified
+> X-Poll-Interval: 60
+```
 
 ## Notification Reasons
 
@@ -92,7 +92,11 @@ Name | Type | Description
 
 ### Response
 
+{% if page.version == 'dotcom' or page.version > 2.5 %}
+<%= headers 200, :pagination => default_pagination_rels %>
+{% else %}
 <%= headers 200 %>
+{% endif %}
 <%= json(:thread) { |h| [h] } %>
 
 ## List your notifications in a repository
@@ -112,13 +116,17 @@ Name | Type | Description
 
 ### Response
 
+{% if page.version == 'dotcom' or page.version > 2.5 %}
+<%= headers 200, :pagination => default_pagination_rels %>
+{% else %}
 <%= headers 200 %>
+{% endif %}
 <%= json(:thread) { |h| [h] } %>
 
 ## Mark as read
 
 Marking a notification as "read" removes it from the [default view
-on GitHub.com](https://github.com/notifications).
+on {{ site.data.variables.product.product_name }}](https://github.com/notifications).
 
     PUT /notifications
 
@@ -136,7 +144,7 @@ Name | Type | Description
 ## Mark notifications as read in a repository
 
 Marking all notifications in a repository as "read" removes them
-from the [default view on GitHub.com](https://github.com/notifications).
+from the [default view on {{ site.data.variables.product.product_name }}](https://github.com/notifications).
 
     PUT /repos/:owner/:repo/notifications
 

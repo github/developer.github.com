@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Automatic redirects for renamed repositories
-created_at: 2015-07-21
 author_name: jasonrudolph
 ---
 

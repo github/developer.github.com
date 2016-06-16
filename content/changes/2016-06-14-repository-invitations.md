@@ -25,4 +25,4 @@ If you have any questions or feedback, please [let us know][contact].
 [collaborators]: /v3/repos/collaborators
 [repo-invitations]: /v3/repos/invitations
 [repo-invitations-announcement]: https://github.com/blog/2170-repository-invitations
-[contact]: https://github.com/contact?form%5Bsubject%5D=Reactions+Repository+Invitations+API+Preview
+[contact]: https://github.com/contact?form%5Bsubject%5D=Repository+Invitations+API+Preview

@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Language" content="en-us" />
   <meta http-equiv="imagetoolbar" content="false" />
   <meta name="MSSmartTagsPreventParsing" content="true" />
-  <title>Accepting organization invitations from the API | GitHub Developer Guide</title>
+  <title>API changes for Repository Invitations | GitHub Developer Guide</title>
   
   <link rel="alternate" type="application/atom+xml" title="API Changes" href="/changes.atom" />
   
@@ -44,53 +44,45 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">
+      <div class="change" id="/changes/2016-06-14-repository-invitations/">
 <h2 class="title">
-  <a href="/changes/2014-08-28-accepting-organization-invitations-from-the-api/">Accepting organization invitations from the API</a>
+  <a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations</a>
 </h2>
 
 <div class="meta">
   <ul>
   <li class="published">
     <span class="octicon octicon-calendar"></span>
-    August 28, 2014
+    June 14, 2016
     
   </li>
   <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore/>
-      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
+    <img height="16" width="16" src="https://github.com/CoralineAda.png" alt="Avatar for CoralineAda" data-proofer-ignore/>
+      <a href="https://github.com/CoralineAda" data-proofer-ignore>CoralineAda</a>
   </li>
 </ul>
 </div>
 
 
-<p>The upcoming <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a> gives you the power to <a href="https://help.github.com/articles/adding-organization-members-to-a-team">invite</a> new GitHub users to your organization via the API. We're expanding the API to also allow users to view their organization membership statuses and accept any invitations they've received.</p>
+<p>We announced <a href="https://github.com/blog/2170-repository-invitations">repository invitation functionality</a> on May 23. Using the site, you can invite collaborators to work on your repository. Invitees will receive an email with the invitation and have the option to accept or decline.</p>
 
-<h3>
-<a id="the-new-organization-memberships-api" class="anchor" href="#the-new-organization-memberships-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>The new Organization Memberships API</h3>
+<p>We have now have endpoints for managing repository invitations for both repository administrators and invitation recipients through the GitHub API. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
 
-<p>When someone <a href="https://help.github.com/articles/adding-organization-members-to-a-team">invites</a> you to an organization, your membership with that organization begins in the "pending" state. The new <a href="/v3/orgs/members/#list-your-organization-memberships">list organization memberships</a> endpoint allows you to find your pending memberships. You can then change them to "active" (accepting the invitation in the process) by using the <a href="/v3/orgs/members/#edit-your-organization-membership">edit organization membership</a> endpoint.</p>
-
-<h3>
-<a id="new-team-membership-api-response-attribute" class="anchor" href="#new-team-membership-api-response-attribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>New Team Membership API response attribute</h3>
-
-<p>Previously, responses from the <a href="/v3/orgs/teams/#add-team-membership">add team membership</a> and <a href="/v3/orgs/teams/#get-team-membership">get team membership</a> endpoints included a "status" attribute, which could either be "active" or "pending". We've renamed this attribute from "status" to "state" for better consistency with our other API calls.</p>
-
-<p>To give you time to update your apps, we'll keep the legacy "status" attribute around alongside the new "state" attribute until <strong>September 4th, 2014</strong>.</p>
-
-<h3>
-<a id="preview-period" class="anchor" href="#preview-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preview period</h3>
-
-<p>The new Organization Memberships API is available for developers to preview alongside the <a href="/changes/2014-08-05-team-memberships-api/">Team Memberships API</a>. During this period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
-
-<p>While these new APIs are in their preview period, you'll need to provide the following custom media type in the <code>Accept</code> header:</p>
-
-<pre><code>application/vnd.github.the-wasp-preview+json
+<pre><code>application/vnd.github.swamp-thing-preview
 </code></pre>
 
-<p>We expect the preview period to last 30-60 days. At the end of the preview period, the Team and Organization Memberships APIs will become official components of GitHub API v3.</p>
+<p>For example:</p>
 
-<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Team+Memberships+API">get in touch with us</a>!</p>
+<pre><code>&lt;pre class="command-line"&gt;
+curl "https://api.github.com/api/v3/repositories/1313/invitations" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.swamp-thing-preview" \
+```
+</code></pre>
+
+<p>You can learn more about the new endpoints in the updated <a href="/v3/repos/collaborators">Collaborators</a> and new <a href="/v3/repos/invitations">Repository Invitations</a> documentation.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Reactions+Repository+Invitations+API+Preview">let us know</a>.</p>
 </div>
 
     </div>

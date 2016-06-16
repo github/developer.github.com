@@ -44,7 +44,61 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">
+      <div class="change" id="/changes/2015-01-07-prepare-for-organization-permissions-changes/">
+  <h2 class="title">
+<a id="--prepare-for-upcoming-organization-permissions-changes" class="anchor" href="#--prepare-for-upcoming-organization-permissions-changes" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">Prepare for upcoming organization permissions changes</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    January 7, 2015
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jakeboxer.png" alt="Avatar for jakeboxer" data-proofer-ignore>
+      <a href="https://github.com/jakeboxer" data-proofer-ignore>jakeboxer</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p><strong>UPDATE (2015-06-10):</strong> As <a href="/changes/2015-06-10-breaking-changes-to-organization-permissions-coming-on-june-24/">announced on June 10</a>, these changes will become an official part of GitHub API v3 on June 24. (This post originally announced that these changes would come to GitHub API v3 on February 24.)</p>
+
+<p>Last month, we <a href="/changes/2014-12-08-organization-permissions-api-preview/">released a preview</a> of several API changes related to managing organization members and repositories. Today, we're finalizing these changes. This new functionality is now stable and suitable for production use. If your application relies on any of the affected functionality (described below), be sure to <strong>update your code before June 24</strong> to account for these changes.</p>
+
+<h2>
+<a id="breaking-changes-coming-on-june-24" class="anchor" href="#breaking-changes-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="breaking-changes-coming-on-june-24" class="anchor" href="#breaking-changes-coming-on-june-24" aria-hidden="true"><span class="octicon octicon-link"></span></a>Breaking changes coming on June 24</h2>
+
+<p>If your application uses any of the following APIs, then you are affected by this change:</p>
+
+<ul>
+<li>APIs for managing your organization's admins through the Owners team</li>
+<li>The <a href="/v3/repos/#list-your-repositories">List your repositories</a> API</li>
+<li>The <a href="/v3/orgs/#list-your-organizations">List your organizations</a> API</li>
+<li>The <a href="/v3/orgs/#list-user-organizations">List user organizations</a> API</li>
+</ul>
+
+<p>If your application uses these APIs, we urge you to update your application as soon as possible. (Read <a href="/changes/2014-12-08-organization-permissions-api-preview/">last month's announcement</a> for more details on the changes.)</p>
+
+<p>Starting today, we're offering a migration period allowing applications to opt in to these changes (as described below). On June 24, these changes will become official parts of the GitHub API v3. At that time, these changes will apply to all API consumers.</p>
+
+<h2>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
+
+<p>During the migration period, you can opt-in to these changes using the following custom media type in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.moondragon+json
+</code></pre>
+
+<p>We want to make these updates as smooth as possible for everyone, and we hope that the migration period gives you flexibility to adopt these changes on your own schedule. If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Organization+Permissions+API">get in touch with us</a>!</p>
+</div>
+
+<div class="change" id="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">
   <h2 class="title">
 <a id="--replace-older-ssh-keys-created-by-your-application" class="anchor" href="#--replace-older-ssh-keys-created-by-your-application" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2014-12-12-replace-older-ssh-keys-created-by-your-application/">Replace older SSH keys created by your application</a>
@@ -278,7 +332,7 @@ curl -H "Accept: application/vnd.github.v3.star+json" https://api.github.com/use
 <p>During the preview period, we may change aspects of these endpoints. If we do, we will announce the changes on the developer blog, but we will not provide any advance notice.</p>
 
 <h2>
-<a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
 
 <p>At the end of the preview period, we will announce the start of a migration period. At that time, developers should update their applications to use the new APIs for managing organization admins. During this period, you will still be able to use the Owners team to manage your organization's admins, so that you have time to update your applications to use the new APIs without breakage. We expect the migration period to last for four weeks.</p>
@@ -395,7 +449,7 @@ following custom media type in the Accept header:</p>
 <p>We expect the preview period to last 4-6 weeks. (Stay tuned to the developer blog for updates.) At the end of the preview period, these changes will become an official and stable part of GitHub API.</p>
 
 <h2>
-<a id="migration-period-1" class="anchor" href="#migration-period-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<a id="migration-period-2" class="anchor" href="#migration-period-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>
 <a id="migration-period" class="anchor" href="#migration-period" aria-hidden="true"><span class="octicon octicon-link"></span></a>Migration period</h2>
 
 <p>At the end of the preview period, we will announce the start of a migration period. Developers will have 8 weeks to update existing code to use the new APIs.</p>
@@ -767,46 +821,6 @@ You should no longer set or rely on the <code>ssl_version</code> configuration o
 <p></p>
 </div>
 
-<div class="change" id="/changes/2014-10-06-new-attributes-for-issue-events-api/">
-  <h2 class="title">
-<a id="--new-attributes-for-issue-events-api" class="anchor" href="#--new-attributes-for-issue-events-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2014-10-06-new-attributes-for-issue-events-api/">New Attributes for Issue Events API</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    October 6, 2014
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/jdpace.png" alt="Avatar for jdpace" data-proofer-ignore>
-      <a href="https://github.com/jdpace" data-proofer-ignore>jdpace</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>We've made it easier to track changes to issues. The Issue Events API now provides more context for several event types:</p>
-
-<ul>
-<li>
-<code>assigned</code> and <code>unassigned</code> events now include an <code>assignee</code> object so you can see just who was assigned or unassigned.</li>
-<li>
-<code>labeled</code> and <code>unlabeled</code> events include a <code>label</code> object.</li>
-<li>
-<code>milestoned</code> and <code>demilesoned</code> events include a <code>milestone</code> object.</li>
-<li>
-<code>renamed</code> events include a <code>rename</code> object with the title before and after the rename.</li>
-</ul>
-
-<p>Check out the <a href="/v3/issues/events/">Issue Events API documentation</a> for a full list of supported events. If you have
-any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Attrs+for+Issue+Events+API">drop us a line</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -937,6 +951,8 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
@@ -950,8 +966,6 @@ any questions or feedback, please <a href="https://github.com/contact?form%5Bsub
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
 
 </ul>
 

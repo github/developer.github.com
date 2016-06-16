@@ -44,7 +44,48 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2013-04-24-user-agent-required/">
+      <div class="change" id="/changes/2013-04-25-deprecating-merge-commit-sha/">
+  <h2 class="title">
+<a id="--deprecating-a-confusing-attribute-in-the-pull-request-api" class="anchor" href="#--deprecating-a-confusing-attribute-in-the-pull-request-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2013-04-25-deprecating-merge-commit-sha/">Deprecating a Confusing Attribute in the Pull Request API</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 25, 2013
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/jasonrudolph.png" alt="Avatar for jasonrudolph" data-proofer-ignore>
+      <a href="https://github.com/jasonrudolph" data-proofer-ignore>jasonrudolph</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>When you get the details for a Pull Request from the API, the
+<a href="/v3/pulls/#get-a-single-pull-request">response</a> provides everything there is to
+know about that Pull Request. In addition to the useful information provided in
+the API response, the JSON also includes the <code>merge_commit_sha</code> attribute. This
+attribute is a frequent source of misunderstanding, and we aim to remove the
+confusion.</p>
+
+<p>To help current API consumers, we've <a href="/v3/pulls/#get-a-single-pull-request">documented the
+attribute</a> for improved understanding.</p>
+
+<p>To protect future API consumers from this confusion, we have
+<a href="/v3/versions/#v3-deprecations">deprecated</a> the <code>merge_commit_sha</code> attribute, and we will
+remove it in the next major version of the API.</p>
+
+<p>As always, if you have any questions or feedback, please drop us a line at
+<a href="mailto:support@github.com?subject=Deprecating%20merge_commit_sha">support@github.com</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2013-04-24-user-agent-required/">
   <h2 class="title">
 <a id="--user-agent-now-mandatory" class="anchor" href="#--user-agent-now-mandatory" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2013-04-24-user-agent-required/">User Agent now mandatory</a>
@@ -397,45 +438,6 @@ can be potentially dangerous.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2012-12-09-organization-repositories-results-now-paginate/">
-  <h2 class="title">
-<a id="--pagination-for-organization-repository-lists-now-paginates-properly" class="anchor" href="#--pagination-for-organization-repository-lists-now-paginates-properly" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2012-12-09-organization-repositories-results-now-paginate/">Pagination for Organization Repository lists now paginates properly</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    December 9, 2012
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/rick.png" alt="Avatar for rick" data-proofer-ignore>
-      <a href="https://github.com/rick" data-proofer-ignore>rick</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p><img src="https://github-images.s3.amazonaws.com/skitch/seger-turn-the-page-20121209-154956.png" alt="seger-is-so-dreamy"></p>
-
-<p>Improvements continue to the Organizations Repository listing endpoint.
-Today we're improving pagination so that it works as documented.  Now
-you can expect <code>Link</code> headers to navigate through the results space,
-regardless of what you send in the <code>type</code> parameter.</p>
-
-<p>The docs for Organization Repositories queries are still here:</p>
-
-<ul>
-<li><a href="/v3/repos/#list-organization-repositories">Organization Repositories</a></li>
-</ul>
-
-<p><strong>EDIT:</strong> <code>Link</code> headers are our preferred navigation technique.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -529,6 +531,8 @@ regardless of what you send in the <code>type</code> parameter.</p>
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
@@ -542,8 +546,6 @@ regardless of what you send in the <code>type</code> parameter.</p>
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
 
 </ul>
 

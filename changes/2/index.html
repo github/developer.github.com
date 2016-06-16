@@ -44,7 +44,50 @@
 
   <div id="wrapper">
     <div class="content">
-      <div class="change" id="/changes/2016-04-01-squash-api-preview/">
+      <div class="change" id="/changes/2016-04-04-git-signing-api-preview/">
+  <h2 class="title">
+<a id="--preview-support-for-git-signing" class="anchor" href="#--preview-support-for-git-signing" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+  <a href="/changes/2016-04-04-git-signing-api-preview/">Preview support for Git signing</a>
+</h2>
+
+<div class="meta">
+  <ul>
+  <li class="published">
+    <span class="octicon octicon-calendar"></span>
+    April 4, 2016
+    
+  </li>
+  <li class="who_when">
+    <img height="16" width="16" src="https://github.com/mastahyeti.png" alt="Avatar for mastahyeti" data-proofer-ignore>
+      <a href="https://github.com/mastahyeti" data-proofer-ignore>mastahyeti</a>
+  </li>
+</ul>
+</div>
+
+<p></p>
+<p>GitHub <a href="https://github.com/blog/2144-gpg-signature-verification">recently started verifying GPG signed commits and tags</a>. We are adding API support for signature verification and user GPG key management as well. You can enable these changes during the preview period by providing a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.cryptographer-preview
+</code></pre>
+
+<p>For example:</p>
+
+<pre class="command-line">
+curl "https://api.github.com/user/gpg_keys" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.cryptographer-preview" \
+</pre>
+
+<p>You can learn more about the new signature verification response objects in the updated <a href="/v3/repos/commits">repository commit</a>, <a href="/v3/git/commits">Git commit</a>, and <a href="/v3/git/tags">Git tag</a> documentation. There is also new <a href="/v3/users/gpg_keys">GPG key management</a> documentation.</p>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback. We will announce the changes here on the developer blog, but we will not provide advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Squash+API+Preview">let us know</a>.</p>
+
+<p></p>
+</div>
+
+<div class="change" id="/changes/2016-04-01-squash-api-preview/">
   <h2 class="title">
 <a id="--preview-squash-support-for-the-pull-request-merge-api" class="anchor" href="#--preview-squash-support-for-the-pull-request-merge-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>
   <a href="/changes/2016-04-01-squash-api-preview/">Preview Squash Support for the Pull Request Merge API</a>
@@ -500,50 +543,6 @@ like these.</p>
 <p></p>
 </div>
 
-<div class="change" id="/changes/2015-08-04-get-license-contents/">
-  <h2 class="title">
-<a id="--get-the-contents-of-a-repositorys-license" class="anchor" href="#--get-the-contents-of-a-repositorys-license" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-  <a href="/changes/2015-08-04-get-license-contents/">Get the contents of a repository’s license</a>
-</h2>
-
-<div class="meta">
-  <ul>
-  <li class="published">
-    <span class="octicon octicon-calendar"></span>
-    August 4, 2015
-    
-  </li>
-  <li class="who_when">
-    <img height="16" width="16" src="https://github.com/benbalter.png" alt="Avatar for benbalter" data-proofer-ignore>
-      <a href="https://github.com/benbalter" data-proofer-ignore>benbalter</a>
-  </li>
-</ul>
-</div>
-
-<p></p>
-<p>The <a href="/v3/licenses/">License API Preview</a> now allows you to retrieve the contents of a repository's open source license. As before, when the appropriate preview media type is passed, the repository endpoint will return information about the detected license, if any:</p>
-
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman
-</pre>
-
-<p>You can now also get the contents of the repository's license file, whether or not the license was successfully identified via the license contents endpoint:</p>
-
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview+json" https://api.github.com/repos/benbalter/gman/license
-</pre>
-
-<p>Similar to <a href="/v3/repos/contents/#get-contents">the repository contents API</a>, the license contents method also supports <a href="/v3/repos/contents/#custom-media-types">custom media types</a> for retrieving the raw license content or rendered license HTML.</p>
-
-<pre class="command-line">
-curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com/repos/benbalter/gman/license
-</pre>
-
-<p>For more information, see <a href="/v3/licenses/#get-the-contents-of-a-repositorys-license">the license API documentation</a>, and as always, if you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=License+API">get in touch with us</a>.</p>
-
-<p></p>
-</div>
-
 <div class="paginate-container">
   
 
@@ -648,6 +647,8 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
         <h2>Recent Posts</h2>
 <ul class="headlines sidebar-module">
 
+  <li><a href="/changes/2016-06-14-repository-invitations/">API changes for Repository Invitations<br /><span class="date">June 14, 2016</span></a></li>
+
   <li><a href="/changes/2016-06-07-reactions-api-update/">Reactions API Preview now includes user information<br /><span class="date">June 7, 2016</span></a></li>
 
   <li><a href="/changes/2016-5-27-multiple-assignees/">API changes for Multiple Issue Assignees<br /><span class="date">May 27, 2016</span></a></li>
@@ -661,8 +662,6 @@ curl -H "Accept: application/vnd.github.drax-preview.raw" https://api.github.com
   <li><a href="/changes/2016-04-21-oauth-authorizations-grants-api-preview/">Preview support for OAuth authorizations grants API<br /><span class="date">April 21, 2016</span></a></li>
 
   <li><a href="/changes/2016-04-18-new-webhook-actions-are-live/">New webhook event actions are now live<br /><span class="date">April 18, 2016</span></a></li>
-
-  <li><a href="/changes/2016-04-12-commit-reference-sha-api-is-now-official/">Commit Reference SHA-1 API is now official<br /><span class="date">April 12, 2016</span></a></li>
 
 </ul>
 

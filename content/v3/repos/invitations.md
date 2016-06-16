@@ -18,11 +18,11 @@ application/vnd.github.swamp-thing-preview+json
 
 {:toc}
 
-<a id="invite" />
+<a id="invite" />		
 
-## Invite a user to a repository
+## Invite a user to a repository		
 
-Use the API endpoint for adding a collaborator [here](/v3/repos/collaborators).
+Use the API endpoint for adding a collaborator [here](/v3/repos/collaborators).		
 
 <a id="list" />
 
@@ -81,7 +81,7 @@ When authenticating as a user, this endpoint will list all currently open reposi
 
 ## Accept a repository invitation
 
-    PATCH /repositories/:repo_id/invitations/:invitation_id
+    PATCH /user/repository_invitations/:invitation_id
 
 ### Response
 
@@ -91,7 +91,7 @@ When authenticating as a user, this endpoint will list all currently open reposi
 
 ## Decline a repository invitation
 
-  DELETE /repositories/:repo_id/invitations/:invitation_id
+  DELETE /user/repository_invitations/:invitation_id
 
 ### Response
 

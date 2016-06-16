@@ -14,9 +14,9 @@ the moment your code lands on `master`.
 This guide will use that API to demonstrate a setup that you can use.
 In our scenario, we will:
 
-* Merge a Pull Request
-* When the CI is finished, we'll set the Pull Request's status accordingly.
-* When the Pull Request is merged, we'll run our deployment to our server.
+* Merge a pull request
+* When the CI is finished, we'll set the pull request's status accordingly.
+* When the pull request is merged, we'll run our deployment to our server.
 
 Our CI system and host server will be figments of our imagination. They could be
 Heroku, Amazon, or something else entirely. The crux of this guide will be setting up
@@ -50,7 +50,7 @@ Start this server up. By default, Sinatra starts on port `4567`, so you'll want
 to configure ngrok to start listening for that, too.
 
 In order for this server to work, we'll need to set a repository up with a webhook.
-The webhook should be configured to fire whenever a Pull Request is created, or merged.
+The webhook should be configured to fire whenever a pull request is created, or merged.
 Go ahead and create a repository you're comfortable playing around in. Might we
 suggest [@octocat's Spoon/Knife repository](https://github.com/octocat/Spoon-Knife)?
 After that, you'll create a new webhook in your repository, feeding it the URL
@@ -64,10 +64,10 @@ Great! Click on **Let me select individual events.**, and select the following:
 
 * Deployment
 * Deployment status
-* Pull Request
+* pull request
 
 These are the events {{ site.data.variables.product.product_name }} will send to our server whenever the relevant action
-occurs. We'll configure our server to *just* handle when Pull Requests are merged
+occurs. We'll configure our server to *just* handle when pull requests are merged
 right now:
 
 ``` ruby

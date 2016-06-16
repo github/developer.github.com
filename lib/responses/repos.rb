@@ -134,6 +134,18 @@ module GitHub
         [0,1,43],
         [0,2,21]
       ]
+
+      REPOSITORY_INVITATION ||= {
+        "id" => 1,
+        "repository" => REPO,
+        "invitee" => USER,
+        "inviter" => USER,
+        "permissions" => "write",
+        "created_at" => "2016-06-13T14:52:50-05:00",
+        "url" => "https://api.github.com/api/v3/repositories/1296269/invitations/",
+        "html_url" => "#{SIMPLE_REPO['html_url']}/invitations"
+      }
+
     end
   end
 end

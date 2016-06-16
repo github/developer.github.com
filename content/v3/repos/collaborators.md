@@ -69,6 +69,17 @@ Name | Type | Description
 
 <%= fetch_content(:optional_put_content_length) %>
 
+{{#tip}}
+
+We're currently offering a preview period allowing applications to opt in to the Repository Invitations API.
+
+To send an invitation to a collaborator rather than directly adding them, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+```
+application/vnd.github.swamp-thing-preview+json
+```
+
+{{/tip}}
 
 {% if page.version != 'dotcom' and page.version > 2.3 and page.version < 2.6 %}
 
@@ -97,6 +108,11 @@ application/vnd.github.ironman-preview+json
 ### Response
 
 <%= headers 204 %>
+
+### Response with preview media type
+
+<%= headers 200 %>
+<%= json(:repository_invitation) { |h| [h] } %>
 
 ## Remove user as a collaborator
 

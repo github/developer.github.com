@@ -11,11 +11,11 @@ We have now have endpoints for managing repository invitations for both reposito
 
 For example:
 
-    ``` command-line
-    curl "https://api.github.com/api/v3/repositories/1313/invitations" \
-      -H 'Authorization: token TOKEN' \
-      -H "Accept: application/vnd.github.swamp-thing-preview" \
-    ```
+``` command-line
+curl "https://api.github.com/api/v3/repositories/1313/invitations" \
+  -H 'Authorization: token TOKEN' \
+  -H "Accept: application/vnd.github.swamp-thing-preview" \
+```
 
 You can learn more about the new endpoints in the updated [Collaborators][collaborators] and new [Repository Invitations][repo-invitations] documentation.
 

@@ -64,7 +64,7 @@ Great! Click on **Let me select individual events.**, and select the following:
 
 * Deployment
 * Deployment status
-* pull request
+* Pull Request
 
 These are the events {{ site.data.variables.product.product_name }} will send to our server whenever the relevant action
 occurs. We'll configure our server to *just* handle when pull requests are merged

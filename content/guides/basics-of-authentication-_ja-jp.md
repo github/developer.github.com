@@ -28,7 +28,7 @@
 認証が成功しました。
 
 我々は、通常のシナトラサーバ、ローカルインスタンスの場所を実行しているので、
-HTTP `：// localhostに設定されて：4567`。 // localhostを：4567 / callback`のは `としてhttpコールバックURLを記入してみましょう。
+HTTP `：// localhostに設定されて：4567`。 // localhostを：4567/ / callback`のは `としてhttpコールバックURLを記入してみましょう。
 
 ##ユーザー認証を受け入れます
 
@@ -104,7 +104,7 @@ _server.rb_では、コールバックが何をすべきかを指定するため
 {：CLIENT_ID => CLIENT_ID、
 ：client_secret => CLIENT_SECRET、
 ：コード=> session_code}、
-：）JSON：=>を受け入れます
+：）} JSON：=>を受け入れます
 
 ＃トークンと付与されたスコープを抽出
 ['access_token'] access_tokenは= JSON.parse（結果）
@@ -206,7 +206,7 @@ ERB：基本的な、：地元の人=> auth_result
 
 我々はアプリにすべての単一のログを記録するようにユーザーに必要であればそれはかなり悪いモデルになるだろう
 それらがウェブページにアクセスするのに必要な時間。たとえば、に直接ナビゲートしてみてください
-`のhttp：// localhostを：4567 / basic`。あなたはエラーになります。
+`のhttp：// localhostを：4567/ / basic`。あなたはエラーになります。
 
 我々は全体を回避することができればどのような
 プロセスを「ここをクリック」し、ちょうど限り、ユーザのがログインしたように、ということ_remember_
@@ -234,9 +234,9 @@ _advanced_server.rb_というファイルを作成し、その中に次の行を
 ＃!!! EVER REALアプリでハードコードされた値は、使用しないでください！
 ＃その代わりに、以下のように、変数を設定し、テスト環境
 ['GITHUB_CLIENT_ID'] ENV ['GITHUB_CLIENT_SECRET'] && ENV場合＃
-['GITHUB_CLIENT_ID'] ＃CLIENT_ID = ENV
-['GITHUB_CLIENT_SECRET'] ＃CLIENT_SECRET = ENV
-＃ 終わり
+['GITHUB_CLIENT_ID'] CLIENT_ID = ENV
+['GITHUB_CLIENT_SECRET'] CLIENT_SECRET = ENV
+終わり
 
 ['GH_BASIC_CLIENT_ID'] CLIENT_ID = ENV
 ['GH_BASIC_SECRET_ID'] CLIENT_SECRET = ENV
@@ -282,7 +282,7 @@ Scopes.include場合はどうなりますか？ 「利用者：メール '
 ['private_emails'] auth_result =
 JSON.parse（RestClient.get（ 'https://api.github.com/user/emails」、
 {:params => {:access_token => access_token},
-：受け入れる=>：JSON}））
+：）} JSON：=>を受け入れます
 終わり
 
 ERB：高度、：地元の人=> auth_result
@@ -296,7 +296,7 @@ ERB：高度、：地元の人=> auth_result
 {：CLIENT_ID => CLIENT_ID、
 ：client_secret => CLIENT_SECRET、
 ：コード=> session_code}、
-：）JSON：=>を受け入れます
+：）} JSON：=>を受け入れます
 
 [:access_token] セッション= ['access_token'] JSON.parse（結果）
 
@@ -361,12 +361,12 @@ OAuthが流れ、付与されたトークンとスコープとのセッション
 [libraries] ライブラリ
 [sinatra auth github test] ：https://github.com/atmos/sinatra-auth-github-test
 [oauth scopes] ：/ V3 /のOAuth /＃スコープ
-[edit scopes post] ：/変更/ 2013年10月4日 - OAuthの-変更-来ます/
+[edit scopes post] ：/変更/2013-10-04-年10月4日 - OAuthの-変更-来ます/
 [check token valid] ：/ V3 / oauth_authorizations /＃チェック-承認
 [platform samples] ：https://github.com/github/platform-samples/tree/master/api/ruby/basics-of-authentication
 [new oauth app] ：https://github.com/settings/applications/new
 [app settings] ：https://github.com/settings/developers
-�� [sinatra auth github test]
+natra auth github test]
 別のプロジェクトとして利用可能。
 
 [webflow] ：/ V3 / OAuthの/＃Webアプリケーションフロー

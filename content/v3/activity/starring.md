@@ -1,10 +1,9 @@
 ---
-title: Starring | GitHub API
+title: Starring
 ---
 
 # Starring
 
-* TOC
 {:toc}
 
 Repository Starring is a feature that lets users bookmark repositories.  Stars
@@ -15,10 +14,10 @@ Watching](/v3/activity/watching).
 ### Starring vs. Watching
 
 In August 2012, we [changed the way watching
-works](https://github.com/blog/1204-notifications-stars) on GitHub.  Many API
+works](https://github.com/blog/1204-notifications-stars) on {{ site.data.variables.product.product_name }}.  Many API
 client applications may be using the original "watcher" endpoints for accessing
 this data. You can now start using the "star" endpoints instead (described
-below). Check out the [Watcher API Change post](/changes/2012-9-5-watcher-api/)
+below). Check out the [Watcher API Change post](/changes/2012-09-05-watcher-api/)
 for more details.
 
 ## List Stargazers
@@ -29,6 +28,15 @@ for more details.
 
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:user) { |h| [h] } %>
+
+### Alternative response with star creation timestamps
+
+You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
+
+    Accept: application/vnd.github.v3.star+json
+
+<%= headers 200, :pagination => default_pagination_rels %>
+<%= json(:stargazer_with_timestamps) { |hash| [hash] } %>
 
 ## List repositories being starred
 
@@ -52,13 +60,12 @@ Name | Type | Description
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:repo) { |h| [h] } %>
 
-## List repositories being starred with star creation timestamps
+### Alternative response with star creation timestamps
 
-You can also find out _when_ stars were created by passing the following custom content-type via the `Accept` header.
+You can also find out _when_ stars were created by passing the following custom [media type](/v3/media/) via the `Accept` header:
 
     Accept: application/vnd.github.v3.star+json
 
-### Response
 <%= headers 200, :pagination => default_pagination_rels %>
 <%= json(:starred_repo) { |hash| [hash] } %>
 

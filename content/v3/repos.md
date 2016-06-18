@@ -1,37 +1,18 @@
 ---
-title: Repositories | GitHub API
+title: Repositories
 ---
 
 # Repositories
 
-* TOC
 {:toc}
 
 ## List your repositories
 
-List repositories for the authenticated user.
+List repositories that are accessible to the authenticated user.
 
-Note that this currently does not include repositories owned by organizations
-which the user can access. You can
-[list your organizations](/v3/orgs/#list-your-organizations) and
-[list organization repositories](/v3/repos/#list-organization-repositories)
-separately.
-
-With the new Organization Permissions API (described below), this *will* include
-repositories owned by organizations which the user can access. If you provide
-the custom media type (described below), you won't need to use other APIs to
-list the authenticated user's organization-owned repositories.
-
-<div class="alert">
-  <p>
-    We're currently offering a migration period allowing applications to opt in to the Organization Permissions API. This functionality will apply to all API consumers beginning February 24, 2015. Please see the <a href="/changes/2015-01-07-prepare-for-organization-permissions-changes/">blog post</a> for full details.
-  </p>
-
-  <p>
-    To access the API during the migration period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:
-    <pre>application/vnd.github.moondragon+json</pre>
-  </p>
-</div>
+This includes repositories owned by the authenticated user, repositories where
+the authenticated user is a collaborator, and repositories that the
+authenticated user has access to through an organization membership.
 
     GET /user/repos
 
@@ -39,10 +20,11 @@ list the authenticated user's organization-owned repositories.
 
 Name | Type | Description
 -----|------|--------------
-`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`
+`visibility` | `string` | Can be one of `all`, `public`, or `private`. Default: `all`
+`affiliation` | `string` | Comma-separated list of values. Can include:<br />* `owner`: Repositories that are owned by the authenticated user.<br />* `collaborator`: Repositories that the user has been added to as a collaborator.<br />* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.<br /><br />Default: `owner,collaborator,organization_member`
+`type`|`string` | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`<br /><br />Will cause a `422` error if used in the same request as **visibility** or **affiliation**.
 `sort`|`string` | Can be one of `created`, `updated`, `pushed`, `full_name`. Default: `full_name`
 `direction`|`string` | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`; otherwise `desc`
-
 
 ## List user repositories
 
@@ -84,6 +66,19 @@ This provides a dump of every public repository, in the order that they were cre
 Note: Pagination is powered exclusively by the `since` parameter.
 Use the [Link header](/v3/#link-header) to get the URL for the next page of
 repositories.
+
+{% if page.version != 'dotcom' and page.version >= 2.3 %}
+
+If you are an [authenticated](/v3/#authentication) site administrator for your Enterprise instance,
+you will be able to list all repositories including private repositories.
+
+### Parameters
+
+Name | Type | Description
+-----|------|--------------
+`visibility`|`string`| To include private repositories as well set to `all`. Default: `public`
+
+{% endif %}
 
     GET /repositories
 
@@ -128,7 +123,7 @@ Name | Type | Description
 `has_issues`|`boolean` | Either `true` to enable issues for this repository, `false` to disable them. Default: `true`
 `has_wiki`|`boolean` | Either `true` to enable the wiki for this repository, `false` to disable it. Default: `true`
 `has_downloads`|`boolean` | Either `true` to enable downloads for this repository, `false` to disable them. Default: `true`
-`team_id`|`number` | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
+`team_id`|`integer` | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization.
 `auto_init`|`boolean` | Pass `true` to create an initial commit with empty README. Default: `false`
 `gitignore_template`|`string` | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell".
 `license_template`|`string` | Desired [LICENSE template](https://github.com/github/choosealicense.com) to apply. Use the [name of the template](https://github.com/github/choosealicense.com/tree/gh-pages/_licenses) without the extension. For example, "mit" or "mozilla".
@@ -201,6 +196,14 @@ Name | Type | Description
 
 List contributors to the specified repository, sorted by the number of commits per contributor in descending order.
 
+{{#tip}}
+
+Contributors data is cached for performance reasons. This endpoint may return information that is a few hours old.
+
+Git contributors are identified by author email address. This API attempts to group contribution counts by GitHub user, across all of their associated email addresses. For performance reasons, only the first 500 author email addresses in the repository will be linked to GitHub users. The rest will appear as anonymous contributors without associated GitHub user information.
+
+{{/tip}}
+
     GET /repos/:owner/:repo/contributors
 
 ### Parameters
@@ -251,6 +254,28 @@ List languages for the specified repository. The value on the right of a languag
 
     GET /repos/:owner/:repo/branches
 
+### Parameters
+
+Name | Type | Description
+-----|------|-------------
+`protected`|`string` | Set to `1` or `true` to only return protected branches.
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The `protected` parameter is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2015-11-11-protected-branches-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.loki-preview+json
+
+  The `protection` key will only be present in branch payloads if this header is passed.
+
+{{/tip}}
+
 ### Response
 
 <%= headers 200, :pagination => default_pagination_rels %>
@@ -262,8 +287,84 @@ List languages for the specified repository. The value on the right of a languag
 
 ### Response
 
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The Protected Branch API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2015-11-11-protected-branches-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.loki-preview+json
+
+  The `protection` key will only be present in branch payloads if this header is passed.
+
+{{/tip}}
+
 <%= headers 200 %>
 <%= json(:branch) %>
+
+{% if page.version == 'dotcom' or page.version >= 2.5 %}
+
+## Enabling and disabling branch protection
+
+{{#tip}}
+
+  <a name="preview-period"></a>
+
+  The Protected Branch API is currently available for developers to preview.
+  During the preview period, the API may change without advance notice.
+  Please see the [blog post](/changes/2015-11-11-protected-branches-api) for full details.
+
+  To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:
+
+      application/vnd.github.loki-preview+json
+
+{{/tip}}
+
+Protecting a branch requires admin access.
+
+    PATCH /repos/:owner/:repo/branches/:branch
+
+### Input
+
+You need to pass a `protection` object.
+
+Name | Type | Description
+-----|------|-------------
+`enabled`|`boolean` | **Required**. Should this branch be protected or not
+`required_status_checks`|`object`| Configure required status checks here
+
+The `required_status_checks` object must have the following keys:
+
+Name | Type | Description
+-----|------|-------------
+`enforcement_level`|`string` | **Required**. Who required status checks apply to. Options are `off`, `non_admins` or `everyone`.
+`contexts`|`array` | **Required**. The list of status checks to require in order to merge into this branch
+
+The `enforcement_level` key can have the following values:
+
+Name  | Description
+------|------------
+`off` | Turn off required status checks for this branch.
+`non_admins` | Required status checks will be enforced for non-admins.
+`everyone` | Required status checks will be enforced for everyone (including admins).
+
+#### Example
+
+<%= json \
+  "protection" => {
+    "enabled" => true,
+    "required_status_checks" => {
+      "enforcement_level" => "everyone",
+      "contexts" => ["continuous-integration/travis-ci"]
+    }
+  }
+%>
+
+{% endif %}
 
 ## Delete a Repository
 

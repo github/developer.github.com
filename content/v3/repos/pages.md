@@ -1,10 +1,9 @@
 ---
-title: Pages | GitHub API
+title: Pages
 ---
 
 # Pages
 
-* TOC
 {:toc}
 
 The Pages API retrieves information about your GitHub Pages configuration, and

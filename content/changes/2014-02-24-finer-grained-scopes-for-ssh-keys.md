@@ -1,7 +1,5 @@
 ---
-kind: change
 title: Finer-grained OAuth scopes for SSH keys
-created_at: 2014-02-24
 author_name: pengwynn
 ---
 As [we announced][blog], we've made some important changes to the way that API consumers manage SSH keys.

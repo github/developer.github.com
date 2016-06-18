@@ -1,11 +1,9 @@
 ---
-kind: change
 title: Deployment webhook payload changes
-created_at: 2014-10-21
 author_name: atmos
 ---
 
-On November 4th, 2014, we will begin sending a new format for [deployment][1] and [deployment status][2] payloads for webhooks. In the meantime we'll be running in a compatability mode that will give integrators the time needed to start taking advantage of the new format. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
+On November 4th, 2014, we will begin sending a new format for [deployment][1] and [deployment status][2] payloads for webhooks. In the meantime we'll be running in a compatibility mode that will give integrators the time needed to start taking advantage of the new format. Integrators who are working with webhooks and deployments are advised to upgrade to the new payload format to avoid service interruption.
 
 This change brings the payloads for these events more inline with the responses you'd receive from the API. Instead of having deployment and deployment status attributes as top-level keys, we will now nest them under `deployment` and `deployment_status` keys. Since we're still in the [preview period][3] for the deployments API we felt it was best to correct this inconsistency now.
 
@@ -13,7 +11,7 @@ This change brings the payloads for these events more inline with the responses 
 
 #### Old Format
 
-<pre><code class="language-javascript">
+``` json
 {
   "id": 42,
   "sha": "deadbeef",
@@ -26,12 +24,11 @@ This change brings the payloads for these events more inline with the responses 
   "repository": {…},
   "sender": {…}
 }
-
-</code></pre>
+```
 
 #### Current Format - 2014/10/22
 
-<pre><code class="language-javascript">
+``` json
 {
   "id": 42,
   "sha": "deadbeef",
@@ -58,12 +55,11 @@ This change brings the payloads for these events more inline with the responses 
   },
   "sender": {…}
 }
-
-</code></pre>
+```
 
 #### New Format - 2014/11/05
 
-<pre><code class="language-javascript">
+``` json
 {
   "deployment": {
     "url": "https://api.github.com/repos/my-org/our-app/deployments/42",
@@ -82,13 +78,13 @@ This change brings the payloads for these events more inline with the responses 
   "repository": {…},
   "sender": {…}
 }
-</code></pre>
+```
 
 ## DeploymentStatusEvent Changes
 
 #### Old Format
 
-<pre><code class="language-javascript">
+``` json
 {
   "id": 2600,
   "state": "success",
@@ -98,11 +94,11 @@ This change brings the payloads for these events more inline with the responses 
   "repository": {…},
   "sender": {…}
 }
-</code></pre>
+```
 
 #### Current Format - 2014/10/22
 
-<pre><code class="language-javascript">
+``` json
 {
   "id": 2600,
   "state": "success",
@@ -124,11 +120,11 @@ This change brings the payloads for these events more inline with the responses 
   "deployment": {…},
   "sender": {…}
 }
-</code></pre>
+```
 
 #### New Format - 2014/11/05
 
-<pre><code class="language-javascript">
+``` json
 {
   "deployment_status": {
     "url": "https://api.github.com/repos/my-org/our-app/deployments/42/statuses2600",
@@ -146,7 +142,7 @@ This change brings the payloads for these events more inline with the responses 
   "repository": {…},
   "sender": {…}
 }
-</code></pre>
+```
 
 If you have any questions or feedback, please [get in touch][get-in-touch].
 

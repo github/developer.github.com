@@ -1,10 +1,9 @@
 ---
-title: User Public Keys | GitHub API
+title: User Public Keys
 ---
 
 # Public Keys
 
-* TOC
 {:toc}
 
 ## List public keys for a user
@@ -50,15 +49,15 @@ authenticated via Basic Auth or via OAuth with at least `read:public_key`
 Creates a public key. Requires that you are authenticated via Basic Auth,
 or OAuth with at least `write:public_key` [scope](/v3/oauth/#scopes).
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' && page.version >= 2.1 %}
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap) and the option to synchronize SSH keys enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to add an SSH key address via the API with these options enabled.
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize SSH keys enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to add an SSH key address via the API with these options enabled.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
     POST /user/keys
 
@@ -82,15 +81,15 @@ instead.
 Removes a public key. Requires that you are authenticated via Basic Auth
 or via OAuth with at least `admin:public_key` [scope](/v3/oauth/#scopes).
 
-{{#enterprise-only}}
+{% if page.version != 'dotcom' && page.version >= 2.1 %}
 
 {{#warning}}
 
-If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/2.1/admin/guides/user-management/using-ldap) and the option to synchronize SSH keys enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to remove an SSH key address via the API with these options enabled.
+If your GitHub Enterprise appliance has [LDAP Sync enabled](https://help.github.com/enterprise/admin/guides/user-management/using-ldap) and the option to synchronize SSH keys enabled, this API is disabled and will return a `403` response. Users managed in LDAP won't be able to remove an SSH key address via the API with these options enabled.
 
 {{/warning}}
 
-{{/enterprise-only}}
+{% endif %}
 
     DELETE /user/keys/:id
 

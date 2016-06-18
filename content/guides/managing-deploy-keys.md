@@ -1,10 +1,9 @@
 ---
-title: Managing deploy keys | GitHub API
+title: Managing deploy keys
 ---
 
 # Managing Deploy Keys
 
-* TOC
 {:toc}
 
 There are four ways to manage SSH keys on your servers when automating deployment scripts:
@@ -59,42 +58,50 @@ See [our guide on Git automation with tokens][git-automation].
 
 ## Deploy keys
 
-A deploy key is an SSH key that is stored on your server and grants access to a single GitHub repository.  This key is attached directly to the repository instead of to a personal user account.
+A deploy key is an SSH key that is stored on your server and grants access to a single {{ site.data.variables.product.product_name }} repository.  This key is attached directly to the repository instead of to a personal user account.
 
 #### Pros
 
 * Anyone with access to the repository and server has the ability to deploy the project.
 * Users don't have to change their local SSH settings.
+* Deploy keys can read and write by default, but can be made read-only.
 
 #### Cons
 
 * Deploy keys only grant access to a single repository. More complex projects may have many repositories to pull to the same server.
-* Deploy keys always provide full read/write access to a repository.
 * Deploy keys are usually not protected by a passphrase, making the key easily accessible if the server is compromised.
 
 #### Setup
 
 1. [Run the `ssh-keygen` procedure][generating-ssh-keys] on your server.
-2. In the top right corner of any GitHub page, click your profile photo.
+2. In the top right corner of any {{ site.data.variables.product.product_name }} page, click your profile photo.
    ![Sample of an avatar](https://github-images.s3.amazonaws.com/help/profile/top_right_avatar.png)
 3. On your profile page, click the **Repositories** tab, then click the name of your repository.
    ![Repository tab](https://github-images.s3.amazonaws.com/help/profile/profile_repositories_tab.png)
 4. In your repository's right sidebar, click **Settings**.
    ![Settings tab](https://github-images.s3.amazonaws.com/help/repository/repo-actions-settings.png)
 3. In the sidebar, click **Deploy Keys**.
-   ![Deploy Keys section](/images/deploy-keys.png)
+   ![Deploy Keys section](/assets/images/deploy-keys.png)
 3. Click **Add deploy key**. Paste your public key in and submit.
    ![Add Deploy Key button](https://github-images.s3.amazonaws.com/help/repository/repo-deploy-key.png)
 
 ## Machine users
 
-If your server needs to access multiple repositories, you can choose to create a new GitHub account and attach an SSH key that will be used exclusively for automation.  Since this GitHub account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
+If your server needs to access multiple repositories, you can choose to create a new {{ site.data.variables.product.product_name }} account and attach an SSH key that will be used exclusively for automation.  Since this {{ site.data.variables.product.product_name }} account won't be used by a human, it's called a machine user.  You can then [add the machine user as collaborator][collaborator] or [add the machine user to a team][team] with access to the repositories it needs to manipulate.  **NOTE**: Adding a machine user as a collaborator always grants read/write access.  Adding a machine user to a team grants the permissions of the team.
 
-<div class="alert">
-<p>
-<strong>Tip</strong>: Our <a href="https://help.github.com/articles/github-terms-of-service">terms of service</a> do mention that <em>'Accounts registered by "bots" or other automated methods are not permitted.'</em> and that <em>'One person or legal entity may not maintain more than one free account.'</em>  But don't fear, we won't send rabid lawyers out to hunt you down if you create machine users for your server deploy scripts. Machine users are completely kosher.
-</p>
-</div>
+{% if page.version == 'dotcom' %}
+
+{{#tip}}
+
+**Tip:** Our [terms of service][tos] state:
+
+> *Accounts registered by "bots" or other automated methods are not permitted.*
+
+This means that you cannot automate the creation of accounts. But if you want to create a single machine user for automating tasks such as deploy scripts in your project or organization, that is totally cool.
+
+{{/tip}}
+
+{% endif %}
 
 #### Pros
 
@@ -114,7 +121,7 @@ If your server needs to access multiple repositories, you can choose to create a
 
 [ssh-agent-forwarding]: /guides/using-ssh-agent-forwarding/
 [generating-ssh-keys]: https://help.github.com/articles/generating-ssh-keys
-[tos]: https://help.github.com/articles/github-terms-of-service
+[tos]: https://help.github.com/articles/github-terms-of-service/
 [git-automation]: https://help.github.com/articles/git-automation-with-oauth-tokens
 [collaborator]: https://help.github.com/articles/how-do-i-add-a-collaborator
 [team]: https://help.github.com/articles/adding-organization-members-to-a-team

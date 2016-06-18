@@ -1,12 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-echo ""
-echo ""
-echo "*********************************************************************"
-echo "****** Starting guard. In another window, run adsf -r output. *******"
-echo "************* Yes, really: http://git.io/GFd6UQ *********************"
-echo "*********************************************************************"
-echo ""
-echo ""
+ulimit -n 2048
 
-bundle exec guard
+script/bootstrap
+DEV_MODE=true npm run gulp

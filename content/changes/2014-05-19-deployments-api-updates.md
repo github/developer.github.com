@@ -1,7 +1,5 @@
 ---
-kind: change
 title: New attributes for the Deployments API
-created_at: 2014-05-19
 author_name: atmos
 ---
 
@@ -25,7 +23,7 @@ The Deployment Status payloads now embed the associated Deployment object. With 
 
 ### Example Deployment JSON
 
-<pre><code class="language-javascript">
+``` json
 {
   "url": "https://api.github.com/repos/my-org/my-repo/deployments/392",
   "id": 392,
@@ -50,11 +48,11 @@ The Deployment Status payloads now embed the associated Deployment object. With 
   "updated_at": "2014-05-09T19:56:47Z",
   "statuses_url": "https://api.github.com/repos/my-org/my-repo/deployments/392/statuses"
 }
-</code></pre>
+```
 
 ### Example Deployment Status JSON
 
-<pre><code class="language-javascript">
+``` json
 {
   "url": "https://api.github.com/repos/my-org/my-repo/deployments/396/statuses/1",
   "id": 1,
@@ -88,7 +86,7 @@ The Deployment Status payloads now embed the associated Deployment object. With 
   "updated_at": "2014-05-09T19:59:39Z",
   "deployment_url": "https://api.github.com/repos/my-org/my-repo/deployments/396"
 }
-</code></pre>
+```
 
 If you have any questions or feedback, please [get in touch][contact].
 

@@ -1,10 +1,9 @@
 ---
-title: Git Trees | GitHub API
+title: Git Trees
 ---
 
 # Trees
 
-* TOC
 {:toc}
 
 ## Get a Tree
@@ -13,14 +12,14 @@ title: Git Trees | GitHub API
 
 ### Response
 
-<%= headers 200 %>
-<%= json :tree %>
-
 {{#tip}}
 
 If `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, you can clone the repository and iterate over the Git data locally.
 
 {{/tip}}
+
+<%= headers 200 %>
+<%= json :tree %>
 
 ## Get a Tree Recursively
 
@@ -28,15 +27,14 @@ If `truncated` is `true`, the number of items in the `tree` array exceeded our m
 
 ### Response
 
-<%= headers 200 %>
-<%= json :tree_extra %>
-
-
 {{#tip}}
 
 If `truncated` is `true`, the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
 
 {{/tip}}
+
+<%= headers 200 %>
+<%= json :tree_extra %>
 
 ## Create a Tree
 
@@ -62,7 +60,7 @@ Name | Type | Description
 `mode`|`string`| The file mode; one of `100644` for file (blob), `100755` for executable (blob), `040000` for subdirectory (tree), `160000` for submodule (commit), or `120000` for a blob that specifies the path of a symlink
 `type`| `string`| Either `blob`, `tree`, or `commit`
 `sha`|`string`| The SHA1 checksum ID of the object in the tree
-`content`|`string` | The content you want this file to have. GitHub will write this blob out and use that SHA for this entry.  Use either this, or `tree.sha`.
+`content`|`string` | The content you want this file to have. {{ site.data.variables.product.product_name }} will write this blob out and use that SHA for this entry.  Use either this, or `tree.sha`.
 
 
 ### Input

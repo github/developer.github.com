@@ -1,7 +1,5 @@
 ---
-kind: change
 title: OAuth scopes for organization and team resources
-created_at: 2014-02-25
 author_name: pengwynn
 ---
 As a follow up to [the new scopes][yesterday] we announced yesterday, we've

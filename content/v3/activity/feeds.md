@@ -1,18 +1,17 @@
 ---
-title: Feeds | GitHub API
+title: Feeds
 ---
 
 # Feeds
 
-* TOC
 {:toc}
 
 ## List Feeds
 
-GitHub provides several timeline resources in [Atom][] format. The Feeds API
-lists all the feeds available to the authenticating user:
+{{ site.data.variables.product.product_name }} provides several timeline resources in [Atom][] format. The Feeds API
+lists all the feeds available to the authenticated user:
 
-* **Timeline**: The GitHub global public timeline
+* **Timeline**: The {{ site.data.variables.product.product_name }} global public timeline
 * **User**: The public timeline for any user, using [URI template][]
 * **Current user public**: The public timeline for the authenticated user
 * **Current user**: The private timeline for the authenticated user
@@ -20,7 +19,7 @@ lists all the feeds available to the authenticating user:
 * **Current user organizations**: The private timeline for the organizations the authenticated user is a member of.
 
 **Note**: Private feeds are only returned when [authenticating via Basic
-Auth][authenticating] since current feed URIs use the older, non revokable auth
+Auth][authenticating] since current feed URIs use the older, non revocable auth
 tokens.
 
     GET /feeds

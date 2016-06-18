@@ -1,5 +1,5 @@
 ---
-title: Libraries | GitHub API
+title: Libraries
 layout: libraries
 ---
 
@@ -12,16 +12,16 @@ many flavors</h1>
     <li><span>Obj-C</span><a href="https://github.com/octokit/octokit.objc">octokit.objc</a></li>
     <li><span>.NET</span><a href="https://github.com/octokit/octokit.net">octokit.net</a></li>
   </ul>
-  <img src="/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
+  <img src="/assets/images/gundamcat.png" class="gundamcat" alt="The Gundamcat" />
 </div>
 
 # Third-party libraries
 
-## Dart
+## Android
 
-* [github.dart][github.dart]
+* [GithubAndroidSDK][githubandroidsdk]
 
-[github.dart]: https://github.com/DirectMyFile/github.dart
+[githubandroidsdk]: https://github.com/gitskarios/GithubAndroidSdk
 
 ## .NET
 
@@ -38,6 +38,12 @@ many flavors</h1>
 * [Tentacles][tentacles]
 
 [tentacles]: https://github.com/Raynes/tentacles
+
+## Dart
+
+* [github.dart][github.dart]
+
+[github.dart]: https://github.com/DirectMyFile/github.dart
 
 ## Emacs Lisp
 
@@ -106,7 +112,7 @@ covers the entire API.
 
 * [ocaml-github][ocaml-github]
 
-[ocaml-github]: https://github.com/avsm/ocaml-github
+[ocaml-github]: https://github.com/mirage/ocaml-github
 
 ## Perl
 
@@ -128,6 +134,7 @@ covers the entire API.
 * [Github Nette Extension][kdyby-github]
 * [GitHub API Easy Access][milo-github-api]
 * [GitHub bridge for Laravel][github-laravel]
+* [PHP5.6|PHP7 Client & WebHook wrapper][flexyproject-githubapi]
 
 [github-php-client]: https://github.com/tan-tan-kanarek/github-php-client
 [php-github-api]: https://github.com/KnpLabs/php-github-api
@@ -137,6 +144,7 @@ covers the entire API.
 [kdyby-github]: https://github.com/kdyby/github
 [milo-github-api]: https://github.com/milo/github-api
 [github-laravel]: https://github.com/GrahamCampbell/Laravel-GitHub
+[flexyproject-githubapi]: https://github.com/FlexyProject/GitHubAPI
 
 ## Python
 
@@ -178,6 +186,14 @@ covers the entire API.
 
 * [Dispatch GitHub][dispatchgithub]
 * [Hubcat][hubcat]
+* [Buhtig][buhtig]
 
 [dispatchgithub]: https://github.com/andreazevedo/dispatch-github
 [hubcat]: https://github.com/softprops/hubcat
+[buhtig]: https://github.com/mdread/buhtig
+
+## Shell
+
+* [ok.sh][ok.sh]
+
+[ok.sh]: https://github.com/whiteinge/ok.sh

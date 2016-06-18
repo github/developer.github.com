@@ -2,7 +2,7 @@
 title: Getting listed in the Integrations Directory
 ---
 
-# Getting your integration listed
+# Getting your integration listed!
 
 {:toc}
 
